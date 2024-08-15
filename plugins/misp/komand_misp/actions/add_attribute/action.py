@@ -20,7 +20,7 @@ class AddAttribute(insightconnect_plugin_runtime.Action):
         type_value = params.get(Input.TYPE_VALUE)
         category = params.get(Input.CATEGORY)
         value = params.get(Input.VALUE)
-        comment = params.get(Input.COMMENT)
+        comment = params.get(Input.COMMENT, "")
 
         client = self.connection.client
         in_event = client.get_event(event)

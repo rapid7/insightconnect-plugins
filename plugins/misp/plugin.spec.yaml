@@ -8,7 +8,7 @@ version: 6.0.0
 connection_version: 5
 sdk:
   type: slim
-  version: 6
+  version: 6.1.0
   user: nobody
 vendor: rapid7
 support: community
