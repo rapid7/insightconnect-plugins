@@ -2352,8 +2352,9 @@ Example output:
 
 # Version History
 
-* 11.0.0 - Removed `Monitor Activities and Events` task input options | Update SDK
-* 10.0.0 - Added `Monitor Activities and Events` task | Removed `User Type` from connection | A Service User API Key must now be provided to provide enhanced security
+* 11.1.0 - Added connection test for task `Monitor Logs` | Update SDK
+* 11.0.0 - Removed `Monitor Logs` task input options | Update SDK
+* 10.0.0 - Added `Monitor Logs` task | Removed `User Type` from connection | A Service User API Key must now be provided to provide enhanced security
 * 9.1.2 - Retry functionality added to requests to SenintelOne that result in a 429 (too many requests) or 503 (service unavailable) error.
 * 9.1.1 - `Threats Fetch File`: Updated action to prevent possible movement through file system
 * 9.1.0 - `Move Agent to Another Site`: Action added
