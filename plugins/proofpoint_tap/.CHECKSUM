@@ -1,11 +1,11 @@
 {
-	"spec": "a65c8ecd8c967527f4bd29dc6425fa4c",
-	"manifest": "7e45678a67b4746af3bbadb2ca1a6792",
-	"setup": "a3a30970e5940892651190f3bf806148",
+	"spec": "4f4cf87a14acd42a4774ec339c868929",
+	"manifest": "28e4d2cb40027a13b74ccd2156ed9798",
+	"setup": "c7621059ff603f9c8aa42bbbe2ce39e8",
 	"schemas": [
 		{
 			"identifier": "fetch_forensics/schema.py",
-			"hash": "849a5f341763abd494eabc8c5d0f5b3d"
+			"hash": "3e6464033f9ac63796d17fc8888396d3"
 		},
 		{
 			"identifier": "get_all_threats/schema.py",
@@ -33,7 +33,7 @@
 		},
 		{
 			"identifier": "parse_tap_alert/schema.py",
-			"hash": "0fac96bc8bc665ecca2c0ab3b98f7896"
+			"hash": "bcdf571cf4713538e71040aebb4200df"
 		},
 		{
 			"identifier": "url_decode/schema.py",
