@@ -29,7 +29,7 @@ class MockClient:
             return {"result": "success"}
 
         return {"result": "failed"}
-    
+
 
 class MockRestClient:
     def __init__(self):
