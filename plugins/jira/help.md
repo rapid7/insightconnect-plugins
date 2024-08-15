@@ -723,7 +723,7 @@ Example output:
 
 # Version History
 
-* 6.4.1 - Cloud enable the plugin | Bump SDK version to 6.0.1
+* 6.4.1 - Cloud enable the plugin | Bump SDK version to 6.1.0
 * 6.4.0 - Fix Issue Where Create Issue failed when multiple versions of the input Issue Type exists in Jira | Fix failed connection test response for PAT based connection | Include Fields input added to New Issue and Monitor Issues triggers, to specify whether to return Issue fields in the output | Removed empty Fields output from returned Issues when not requested or available
 * 6.3.0 - Add PAT authentication scheme for Jira on-prem
 * 6.2.1 - Fix issue in Find Issues action where normalize_user has an attribute error for labels | Changed Dockerfile to don't use slim version
