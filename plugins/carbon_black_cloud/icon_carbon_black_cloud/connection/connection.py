@@ -213,9 +213,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=return_msg_error)
 
         if failed:
-            raise ConnectionTestException(
-                cause="Test failed", assistance="Checked failed for full error handling stack trace", data=failed
-            )
+            raise ConnectionTestException(data=failed)
 
         # Return true
         return {"success": True}, return_msg
