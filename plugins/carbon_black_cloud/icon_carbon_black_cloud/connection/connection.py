@@ -165,41 +165,47 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         fd = {
             alerts_endpoint: {
-                "time_range": {"start": minus_five_mins, "end": now},
-                "criteria": {},
-                "start": "1",
-                "rows": str(1),  # max number of results that can be returned
-                "sort": [{"field": ALERT_TIME_FIELD, "order": "ASC"}],
+                "name": "alerts",
+                "params": {
+                    "time_range": {"start": minus_five_mins, "end": now},
+                    "criteria": {},
+                    "start": "1",
+                    "rows": str(1),
+                    "sort": [{"field": ALERT_TIME_FIELD, "order": "ASC"}],
+                },
             },
             observations_endpoint: {
-                "rows": 1,
-                "start": 0,
-                "fields": ["*"],
-                "criteria": {"observation_type": OBSERVATION_TYPES},
-                "sort": [{"field": OBSERVATION_TIME_FIELD, "order": "asc"}],
-                "time_range": {"start": minus_five_mins, "end": now},
+                "name": "observations",
+                "params": {
+                    "rows": 1,
+                    "start": 0,
+                    "fields": ["*"],
+                    "criteria": {"observation_type": OBSERVATION_TYPES},
+                    "sort": [{"field": OBSERVATION_TIME_FIELD, "order": "asc"}],
+                    "time_range": {"start": minus_five_mins, "end": now},
+                },
             },
         }
 
         return_msg = "Task connection test to Carbon Black Cloud successful"
         return_msg_error = "Task connection test to Carbon Black Cloud failed"
-        self.logger.info("Testing get alerts")
 
         failed = ""
         failed_endpoint = []
 
         for key, value in fd.items():
+            self.logger.info(f"Testing {value.get('name')} endpoint")
+
             try:
-                # Get a 200 from the search jobs endpoint
-                self.request_api(key, value)
+                self.request_api(key, value.get("params"))
 
             except HTTPErrorException as error:
                 # If we get a similar error for the second URL
                 if error.cause in failed:
-                    failed_endpoint.append(key)
+                    failed_endpoint.append(value)
                 else:
                     return_msg_error += f"\n{error.cause}\n{error.assistance}"
-                    failed_endpoint.append(key)
+                    failed_endpoint.append(value)
                     failed += return_msg_error
 
             except RateLimitException as error:
@@ -216,7 +222,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 failed += "\nThe endpoint for alerts and observations failed."
             else:
                 for item in failed_endpoint:
-                    failed += f"\nThe endpoint for {item.rstrip('_')} failed"
+                    failed += f"\nThe endpoint for {item.get('name')} failed"
             raise ConnectionTestException(data=failed)
 
         # Return true
