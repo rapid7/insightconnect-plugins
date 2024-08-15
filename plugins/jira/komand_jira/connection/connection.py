@@ -56,12 +56,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def test_pat(self):
         headers = {"Authorization": f"Bearer {self.pat}", "Content-Type": "application/json"}
-        response = requests.get(self.url, headers=headers)
+        response = requests.get(self.url, headers=headers, timeout=60)
         return response
 
     def test_basic_auth(self):
         auth = HTTPBasicAuth(username=self.username, password=self.password)
-        response = requests.get(self.url, auth=auth)
+        response = requests.get(self.url, auth=auth, timeout=60)
         return response
 
     def test(self):
