@@ -159,8 +159,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
         alerts_endpoint = self.base_url + f"/api/alerts/v7/orgs/{self.org_key}/alerts/_search"
         observations_endpoint = self.base_url + f"/api/investigate/v2/orgs/{self.org_key}/observations/search_jobs"
 
-        now = datetime.now(timezone.utc).strftime(TIME_FORMAT)
-        minus_five_mins = (datetime.now(timezone.utc) - timedelta(minutes=5)).strftime(TIME_FORMAT)
+        current_time = datetime.now(timezone.utc)
+        now = current_time.strftime(TIME_FORMAT)
+        minus_five_mins = (current_time - timedelta(minutes=5)).strftime(TIME_FORMAT)
 
         fd = {
             alerts_endpoint: {
@@ -180,9 +181,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
             },
         }
 
+        return_msg = "Task connection test to Carbon Black Cloud successful"
         return_msg_error = "Task connection test to Carbon Black Cloud failed"
         self.logger.info("Testing get alerts")
-        return_msg = "Task connection test to Carbon Black Cloud successful"
 
         failed = ""
 
@@ -192,8 +193,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 self.request_api(key, value)
 
             except HTTPErrorException as error:
-                # If we've already hit the same error on the first one
-                # then skip, otherwise we're just repeating ourselves
+                # If we've already hit the same error (usually invalid creds)
+                # on the first one then skip, otherwise we're just repeating ourselves
                 if error.cause in failed:
                     pass
                 else:
@@ -212,7 +213,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=return_msg_error)
 
         if failed:
-            raise ConnectionTestException(cause="", assistance="", data=failed)
+            raise ConnectionTestException(
+                cause="Test failed", assistance="Checked failed for full error handling stack trace", data=failed
+            )
 
         # Return true
         return {"success": True}, return_msg
