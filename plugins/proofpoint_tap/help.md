@@ -1171,10 +1171,11 @@ Example output:
 
 ## Troubleshooting
   
-*There is no troubleshooting for this plugin.*
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 4.1.10 - SDK Bump to 6.1.0 | Task Connection test added
 * 4.1.9 - Update connection fields to be required.
 * 4.1.8 - Include SDK 5.4.9 | Task - Use cutoff of 7 days for first query, use cutoff of 1 hours for subsequent queries
 * 4.1.7 - Include SDK 5.4.5 | Task - enforce query cutoff based on Proofpoint API max lookback | Task - toggle pagination when backfilling | Task - only store previous page of hashes.
