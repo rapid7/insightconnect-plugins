@@ -29,6 +29,15 @@ class MockClient:
             return {"result": "success"}
 
         return {"result": "failed"}
+    
+
+class MockRestClient:
+    def __init__(self):
+        self.client = "some fake thing"
+
+    def add_user(self, params: dict = {}):
+        self.params = params
+        return True
 
 
 class TestCreateUser(TestCase):
@@ -51,6 +60,7 @@ class TestCreateUser(TestCase):
 
         self.test_conn.is_cloud = True
         self.test_conn.client = MockClient(self.test_conn.is_cloud)
+        self.test_conn.rest_client = MockRestClient()
         self.test_action.connection = self.test_conn
 
         result = self.test_action.run(action_params)
@@ -67,6 +77,7 @@ class TestCreateUser(TestCase):
 
         self.test_conn.is_cloud = False
         self.test_conn.client = MockClient(self.test_conn.is_cloud)
+        self.test_conn.rest_client = MockRestClient()
         self.test_action.connection = self.test_conn
 
         result = self.test_action.run(action_params)

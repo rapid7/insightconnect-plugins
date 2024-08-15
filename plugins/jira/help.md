@@ -221,6 +221,7 @@ This action is used to create a user account
 |email|string|None|True|Email|None|user@example.com|None|None|
 |notify|boolean|False|True|Notify if true|[True, False]|True|None|None|
 |password|string|None|False|Password|None|mypassword|None|None|
+|products|array|None|False|Products the new user has access to|None|["jira-core", "jira-servicedesk", "jira-product-discovery", "jira-software"]|None|None|
 |username|string|None|False|Username|None|user1|None|None|
   
 Example input:
@@ -230,6 +231,12 @@ Example input:
   "email": "user@example.com",
   "notify": false,
   "password": "mypassword",
+  "products": [
+    "jira-core",
+    "jira-servicedesk",
+    "jira-product-discovery",
+    "jira-software"
+  ],
   "username": "user1"
 }
 ```
@@ -723,7 +730,7 @@ Example output:
 
 # Version History
 
-* 6.4.1 - Cloud enable the plugin | Bump SDK version to 6.1.0
+* 6.5.0 - Cloud enable the plugin | Bump SDK version to 6.1.0
 * 6.4.0 - Fix Issue Where Create Issue failed when multiple versions of the input Issue Type exists in Jira | Fix failed connection test response for PAT based connection | Include Fields input added to New Issue and Monitor Issues triggers, to specify whether to return Issue fields in the output | Removed empty Fields output from returned Issues when not requested or available
 * 6.3.0 - Add PAT authentication scheme for Jira on-prem
 * 6.2.1 - Fix issue in Find Issues action where normalize_user has an attribute error for labels | Changed Dockerfile to don't use slim version

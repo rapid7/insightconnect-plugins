@@ -12,6 +12,29 @@ class JiraApi:
         self.session = jira_client._session
         self.base_url = jira_client._options["server"]
 
+    def add_user(self, params):
+
+        url = f"{self.base_url}/rest/api/latest/user/"
+
+        headers = {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+        }
+
+        payload = json.dumps(params)
+
+        response = self.session.post(
+            url,
+            data=payload,
+            headers=headers
+        )
+
+        if 200 <= response.status_code <= 299:
+            return True
+        else:
+            self.logger.error(response.status_code)
+            return False
+
     def delete_user(self, account_id):
         url = f"{self.base_url}/rest/api/latest/user/?accountId={account_id}"
         r = self.session.delete(url)
