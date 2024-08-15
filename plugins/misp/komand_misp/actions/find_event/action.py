@@ -1,7 +1,7 @@
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from .schema import FindEventInput, FindEventOutput
+from .schema import FindEventInput, FindEventOutput, Input, Output, Component
 
 # Custom imports below
 
@@ -10,7 +10,7 @@ class FindEvent(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="find_event",
-            description="Receive events based on criteria",
+            description=Component.DESCRIPTION,
             input=FindEventInput(),
             output=FindEventOutput(),
         )
@@ -18,7 +18,7 @@ class FindEvent(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         client = self.connection.client
         try:
-            event = client.get_event(params.get("event_id"))
+            event = client.get_event(params.get(Input.EVENT_ID))
 
         except Exception as error:
             self.logger.error(f"Event %s not found or failure occurred {error}")
@@ -44,4 +44,4 @@ class FindEvent(insightconnect_plugin_runtime.Action):
             self.logger.error(f"Event %s not found or failure occurred {error}")
             raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=error)
 
-        return {"event": event.get("Event"), "message": message, "errors": errors}
+        return {Output.EVENT: event.get("Event"), Output.MESSAGE: message, Output.ERRORS: errors}

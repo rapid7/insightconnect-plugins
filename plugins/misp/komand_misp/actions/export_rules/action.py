@@ -1,7 +1,7 @@
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from .schema import ExportRulesInput, ExportRulesOutput
+from .schema import ExportRulesInput, ExportRulesOutput, Input, Output, Component
 
 # Custom imports below
 import requests
@@ -12,7 +12,7 @@ class ExportRules(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="export_rules",
-            description="Export Snort or Suricata rules",
+            description=Component.DESCRIPTION,
             input=ExportRulesInput(),
             output=ExportRulesOutput(),
         )
@@ -20,20 +20,20 @@ class ExportRules(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         key = self.connection.key
         ssl = self.connection.ssl
-        _format = params.get("format")
-        event_id = params.get("event_id")
-        frame = params.get("frame")
-        tags = params.get("tags")
-        _from = params.get("from")
-        _to = params.get("to")
-        last = params.get("last")
+        _format = params.get(Input.FORMAT)
+        event_id = params.get(Input.EVENT_ID)
+        frame = params.get(Input.FRAME)
+        tags = params.get(Input.TAGS)
+        _from = params.get(Input.FROM)
+        _to = params.get(Input.TO)
+        last = params.get(Input.LAST)
 
         path = f"/events/nids/{_format}/download"
         if event_id:
             path = f"{path}/{event_id}"
         else:
             path = f"{path}/null"
-        path = f"{path}/{frame}"
+        path = f"{path}/{str(frame)}"
         if tags:
             # If more than 1 tag, separate with &&
             if len(tags) > 1:
@@ -74,4 +74,4 @@ class ExportRules(insightconnect_plugin_runtime.Action):
         # Encode data as b64
         rules = base64.b64encode(response.text.encode("ascii"))
 
-        return {"rules": rules.decode("utf-8")}
+        return {Output.RULES: rules.decode("utf-8")}

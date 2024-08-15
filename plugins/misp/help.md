@@ -1,6 +1,6 @@
 # Description
 
-MISP is an open source threat sharing platform
+[MISP](http://www.misp-project.org/) is an open source threat sharing platform. Gather, store and then find correlations of indicators of compromise. Quality of data is determined by the open source community. This plugin utilizes the [MISP API](https://circl.lu/doc/misp/automation/index.html) and leverages the [pymisp](https://github.com/CIRCL/PyMISP) library
 
 # Key Features
 
@@ -10,7 +10,7 @@ MISP is an open source threat sharing platform
 # Requirements
 
 * MISP server
-* Automation key for MISP server (found under Automation -> API key section in MISP server
+* Automation key for MISP server (found under Automation -> API key section in MISP server)
 
 # Supported Product Versions
 
@@ -911,7 +911,7 @@ Example output:
 
 ## Troubleshooting
   
-*There is no troubleshooting for this plugin.*
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
