@@ -71,7 +71,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             response = self.test_basic_auth()
         # https://developer.atlassian.com/cloud/jira/platform/rest/v2/?utm_source=%2Fcloud%2Fjira%2Fplatform%2Frest%2F&utm_medium=302#error-responses
         if response.status_code == 200:
-            return True
+            return {"success": True}
         elif response.status_code == 401:
             raise ConnectionTestException(preset=ConnectionTestException.Preset.USERNAME_PASSWORD)
         elif response.status_code == 404:
