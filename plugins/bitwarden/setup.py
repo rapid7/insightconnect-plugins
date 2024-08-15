@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="bitwarden-rapid7-plugin",
-      version="2.0.0",
+      version="2.0.1",
       description="Bitwarden is an integrated open source password management solution for individuals, teams, and business organizations",
       author="rapid7",
       author_email="",
