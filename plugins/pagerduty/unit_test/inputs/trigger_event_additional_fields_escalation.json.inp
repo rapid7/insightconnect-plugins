@@ -9,6 +9,10 @@
         "id": "PR0EVG8",
         "type": "priority"
     },
+    "conference_bridge": {
+        "conference_number": "",
+        "conference_url": ""
+    },
     "urgency": "high",
     "incident_key": "baf7cf21b1da41b4b0221008339ff361",
     "body": {
