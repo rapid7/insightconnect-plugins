@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name="pagerduty-rapid7-plugin",
-      version="3.0.0",
-      description="Leverage PagerDuty for incident management and response",
+      version="3.0.1",
+      description="[PagerDuty](https://www.pagerduty.com/) provides enterprise-grade incident management that helps you orchestrate the ideal response to create better customer, employee, and business value. Use this plugin to manage users and incidents within workflows. The PagerDuty plugin makes requests to the V2 API",
       author="rapid7",
       author_email="",
       url="",

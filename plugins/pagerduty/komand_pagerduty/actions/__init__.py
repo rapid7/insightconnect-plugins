@@ -4,6 +4,8 @@ from .get_on_call.action import GetOnCall
 
 from .get_user_by_id.action import GetUserById
 
+from .get_user_by_email.action import GetUserByEmail
+
 from .create_user.action import CreateUser
 
 from .delete_user_by_id.action import DeleteUserById
@@ -14,4 +16,3 @@ from .send_acknowledge_event.action import SendAcknowledgeEvent
 
 from .send_resolve_event.action import SendResolveEvent
 
-from .get_user_by_email.action import GetUserByEmail
