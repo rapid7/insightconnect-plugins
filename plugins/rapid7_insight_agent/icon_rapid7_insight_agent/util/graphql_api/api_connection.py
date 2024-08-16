@@ -285,10 +285,10 @@ class ApiConnection:
             current_time = datetime.now()
             next_cursor = (
                 results_object.get("data", {})
-                    .get("organization", {})
-                    .get("assets", {})
-                    .get("pageInfo", {})
-                    .get("endCursor")
+                .get("organization", {})
+                .get("assets", {})
+                .get("pageInfo", {})
+                .get("endCursor")
             )
             if (current_time - start_time) > timedelta(minutes=3):
                 self.logger.info("List of agents is too long, action will time out.")
@@ -348,10 +348,10 @@ class ApiConnection:
         # See if we have more pages of data, if so get next page and append until we reach the end
         has_next_page = (
             results_object.get("data", {})
-                .get("organization", {})
-                .get("assets", {})
-                .get("pageInfo", {})
-                .get("hasNextPage")
+            .get("organization", {})
+            .get("assets", {})
+            .get("pageInfo", {})
+            .get("hasNextPage")
         )
         while agent is None and has_next_page:
             current_time = datetime.now()
