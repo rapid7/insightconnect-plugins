@@ -30,14 +30,13 @@ class CreateUser(insightconnect_plugin_runtime.Action):
 
         else:
             params = {
-                "displayName":params[Input.USERNAME],
-                "emailAddress":params[Input.EMAIL],
-                "password":params.get(Input.PASSWORD, None),
-                "notification":params.get(Input.NOTIFY, False),
-                "name":username,
-                "products": params.get(Input.PRODUCTS, [])
+                "displayName": params[Input.USERNAME],
+                "emailAddress": params[Input.EMAIL],
+                "password": params.get(Input.PASSWORD, None),
+                "notification": params.get(Input.NOTIFY, False),
+                "name": username,
+                "products": params.get(Input.PRODUCTS, []),
             }
             success = self.connection.rest_client.add_user(params)
-
 
         return {Output.SUCCESS: success}
