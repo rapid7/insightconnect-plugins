@@ -22,4 +22,4 @@ class GetAgentDetails(insightconnect_plugin_runtime.Action):
         # Need to rename agent due to bug in yaml typing
         agent["agent_info"] = agent.pop("agent")
 
-        return clean({Input.AGENT: agent, Input.NEXT_CURSOR: next_cursor})
+        return clean({Output.AGENT: agent, Output.NEXT_CURSOR: next_cursor})
