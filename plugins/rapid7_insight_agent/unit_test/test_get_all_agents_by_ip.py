@@ -13,7 +13,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from jsonschema import validate
 from parameterized import parameterized
 
-from util import Util
+from unit_test.util import Util
 
 
 class TestGetAllAgentsByIp(TestCase):

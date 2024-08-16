@@ -4,15 +4,17 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Find and display detailed information about a device"
+    DESCRIPTION = "Find and display detailed information about a device. If additional pages of agents are available, the action should be run again with the returned next cursor"
 
 
 class Input:
     AGENT = "agent"
+    NEXT_CURSOR = "next_cursor"
 
 
 class Output:
     AGENT = "agent"
+    NEXT_CURSOR = "next_cursor"
 
 
 class GetAgentDetailsInput(insightconnect_plugin_runtime.Input):
@@ -26,6 +28,12 @@ class GetAgentDetailsInput(insightconnect_plugin_runtime.Input):
       "title": "Agent",
       "description": "IP address, MAC address, or hostname of the device to get information from",
       "order": 1
+    },
+    "next_cursor": {
+      "type": "string",
+      "title": "Next Cursor",
+      "description": "The next page cursor to continue an existing query and search additional pages of agents",
+      "order": 2
     }
   },
   "required": [
@@ -50,6 +58,12 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
       "title": "Agent",
       "description": "Agent information",
       "order": 1
+    },
+    "next_cursor": {
+      "type": "string",
+      "title": "Next Cursor",
+      "description": "The next page cursor, if available, to continue the query and search additional pages of agents",
+      "order": 2
     }
   },
   "required": [

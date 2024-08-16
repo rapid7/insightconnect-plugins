@@ -4,15 +4,17 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Find all agents that share the same public or private IP address and display details about them"
+    DESCRIPTION = "Find all agents that share the same public or private IP address and display details about them. If additional pages of agents are available, the action should be run again with the returned next cursor"
 
 
 class Input:
     IP_ADDRESS = "ip_address"
+    NEXT_CURSOR = "next_cursor"
 
 
 class Output:
     AGENTS = "agents"
+    NEXT_CURSOR = "next_cursor"
 
 
 class GetAllAgentsByIpInput(insightconnect_plugin_runtime.Input):
@@ -26,6 +28,12 @@ class GetAllAgentsByIpInput(insightconnect_plugin_runtime.Input):
       "title": "IP Address",
       "description": "The public or private IP address for all the agents to be searched for",
       "order": 1
+    },
+    "next_cursor": {
+      "type": "string",
+      "title": "Next Cursor",
+      "description": "The next page cursor to continue an existing query and search additional pages of agents",
+      "order": 2
     }
   },
   "required": [
@@ -53,6 +61,12 @@ class GetAllAgentsByIpOutput(insightconnect_plugin_runtime.Output):
         "$ref": "#/definitions/agent"
       },
       "order": 1
+    },
+    "next_cursor": {
+      "type": "string",
+      "title": "Next Cursor",
+      "description": "The next page cursor, if available, to continue the query and search additional pages of agents",
+      "order": 2
     }
   },
   "required": [

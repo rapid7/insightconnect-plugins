@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insight_agent
 title: Rapid7 Insight Agent
 description: Using the Insight Agent plugin from InsightConnect, you can quarantine, unquarantine and monitor potentially malicious IPs, addresses, hostnames, and devices across your organization
-version: 2.1.2
+version: 3.0.0
 connection_version: 2
 supported_versions: ["Rapid7 Insight Agent 2024-08-02"]
 vendor: rapid7
@@ -13,7 +13,7 @@ status: []
 cloud_ready: true
 sdk:
   type: slim
-  version: 6.0.1
+  version: 6.1.0
   user: nobody
 key_features:
   - "The agent is used by [Rapid7 InsightIDR](https://www.rapid7.com/products/insightidr/) and [InsightVM](https://www.rapid7.com/products/insightvm/) customers to monitor endpoints."
@@ -25,6 +25,7 @@ links:
 references:
   - "[Manage Platform API Keys](https://docs.rapid7.com/insight/managing-platform-api-keys/)"
 version_history:
+  - "3.0.0 - Update `Get Agent Details` and `Get All Agents by IP` to return the next page token if the "
   - "2.1.2 - Improve logging | Update SDK"
   - "2.1.1 - `Get All Agents by IP Address`: Fixed issue where action failed when agent did not have a primary address, and extended output to include agent location details | `Get Agent Details`: Extended output to include agent's public IP address and location"
   - "2.1.0 - Updated SDK to the latest version | New action added `Get All Agents by IP Address`"
@@ -285,7 +286,7 @@ actions:
         required: false
   get_agent_details:
     title: Get Agent Details
-    description: Find and display detailed information about a device
+    description: Find and display detailed information about a device. If additional pages of agents are available, the action should be run again with the returned next cursor
     input:
       agent:
         title: Agent
@@ -293,6 +294,12 @@ actions:
         type: string
         required: true
         example: Example-Hostname
+      next_cursor:
+        title: Next Cursor
+        description: The next page cursor to continue an existing query and search additional pages of agents
+        type: string
+        required: false
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
     output:
       agent:
         title: Agent
@@ -300,9 +307,15 @@ actions:
         type: agent
         example: '{"id":"ExampleID","platform":"windows","publicIpAddress":"192.168.0.1","host":{"vendor":"Microsoft","version":"10","description":"ExampleDescription","hostNames":[{"name":"ExampleHostname"}],"primaryAddress":{"ip":"12.43.13.43","mac":""},"uniqueIdentity":[],"attributes":[]},"agent_info":{"agentSemanticVersion":"ExampleVersion","agentStatus":"STALE","quarantineState":{"currentState":"QUARANTINED"}}}'
         required: true
+      next_cursor:
+        title: Next Cursor
+        description: The next page cursor, if available, to continue the query and search additional pages of agents
+        type: string
+        required: false
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
   get_all_agents_by_ip:
     title: Get All Agents by IP Address
-    description: Find all agents that share the same public or private IP address and display details about them
+    description: Find all agents that share the same public or private IP address and display details about them. If additional pages of agents are available, the action should be run again with the returned next cursor
     input:
       ip_address:
         title: IP Address
@@ -310,6 +323,12 @@ actions:
         type: string
         required: true
         example: 192.168.0.1
+      next_cursor:
+        title: Next Cursor
+        description: The next page cursor to continue an existing query and search additional pages of agents
+        type: string
+        required: false
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
     output:
       agents:
         title: Agents
@@ -317,6 +336,12 @@ actions:
         type: "[]agent"
         example: '[[{"id":"ExampleID1","platform":"linux","publicIpAddress":"192.168.0.2","host":{"vendor":"Ubuntu","version":"20.04","description":"ExampleDescription1","hostNames":[{"name":"ExampleHostname1"}],"primaryAddress":{"ip":"10.20.30.40","mac":"00:11:22:33:44:55"},"uniqueIdentity":["1234567890"],"attributes":["attribute1","attribute2"]},"agent_info":{"agentSemanticVersion":"ExampleVersion1","agentStatus":"ACTIVE","quarantineState":{"currentState":"QUARANTINED"}}},{"id":"ExampleID2","platform":"mac","publicIpAddress":"192.168.0.3","host":{"vendor":"Apple","version":"11","description":"ExampleDescription2","hostNames":[{"name":"ExampleHostname2"}],"primaryAddress":{"ip":"50.60.70.80","mac":"AA:BB:CC:DD:EE:FF"},"uniqueIdentity":["0987654321"],"attributes":["attribute3","attribute4"]},"agent_info":{"agentSemanticVersion":"ExampleVersion2","agentStatus":"INACTIVE","quarantineState":{"currentState":"QUARANTINED"}}},{"id":"ExampleID3","platform":"windows","publicIpAddress":"192.168.0.4","host":{"vendor":"Microsoft","version":"11","description":"ExampleDescription3","hostNames":[{"name":"ExampleHostname3"}],"primaryAddress":{"ip":"90.80.70.60","mac":"11:22:33:44:55:66"},"uniqueIdentity":["2468135790"],"attributes":["attribute5","attribute6"]},"agent_info":{"agentSemanticVersion":"ExampleVersion3","agentStatus":"STALE","quarantineState":{"currentState":"QUARANTINED"}}}]]'
         required: true
+      next_cursor:
+        title: Next Cursor
+        description: The next page cursor, if available, to continue the query and search additional pages of agents
+        type: string
+        required: false
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
   quarantine:
     title: Quarantine
     description: Quarantine or unquarantine on a device
