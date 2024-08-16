@@ -56,12 +56,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def test_pat(self):
         headers = {"Authorization": f"Bearer {self.pat}", "Content-Type": "application/json"}
-        response = requests.get(self.url, headers=headers)
+        response = requests.get(self.url, headers=headers, timeout=60)
         return response
 
     def test_basic_auth(self):
         auth = HTTPBasicAuth(username=self.username, password=self.password)
-        response = requests.get(self.url, auth=auth)
+        response = requests.get(self.url, auth=auth, timeout=60)
         return response
 
     def test(self):
@@ -71,7 +71,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             response = self.test_basic_auth()
         # https://developer.atlassian.com/cloud/jira/platform/rest/v2/?utm_source=%2Fcloud%2Fjira%2Fplatform%2Frest%2F&utm_medium=302#error-responses
         if response.status_code == 200:
-            return True
+            return {"success": True}
         elif response.status_code == 401:
             raise ConnectionTestException(preset=ConnectionTestException.Preset.USERNAME_PASSWORD)
         elif response.status_code == 404:
