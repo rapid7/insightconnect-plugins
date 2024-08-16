@@ -80,8 +80,7 @@ Example output:
 
 #### Get Agent Details
 
-This action is used to find and display detailed information about a device. If additional pages of agents are 
-available, the action should be run again with the returned next cursor
+This action is used to find and display detailed information about a device. If additional pages of agents are available, the action should be run again with the returned next cursor
 
 ##### Input
 
@@ -144,8 +143,7 @@ Example output:
 
 #### Get All Agents by IP Address
 
-This action is used to find all agents that share the same public or private IP address and display details about them.
- If additional pages of agents are available, the action should be run again with the returned next cursor
+This action is used to find all agents that share the same public or private IP address and display details about them. If additional pages of agents are available, the action should be run again with the returned next cursor
 
 ##### Input
 
@@ -461,7 +459,7 @@ Example output:
 
 # Version History
 
-* 3.0.0 - Update `Get Agent Details` and `Get All Agents by IP` to return the next page token if the 
+* 3.0.0 - Update `Get Agent Details` and `Get All Agents by IP` to return the next page token if more pages are available to search
 * 2.1.2 - Improve logging | Update SDK
 * 2.1.1 - `Get All Agents by IP Address`: Fixed issue where action failed when agent did not have a primary address, and extended output to include agent location details | `Get Agent Details`: Extended output to include agent's public IP address and location
 * 2.1.0 - Updated SDK to the latest version | New action added `Get All Agents by IP Address`
