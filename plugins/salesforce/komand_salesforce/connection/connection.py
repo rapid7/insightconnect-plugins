@@ -37,8 +37,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def test_task(self):
         now = datetime.now(timezone.utc)
-        start_time = now - timedelta(minutes=5)
-        start_time = start_time.isoformat()
+        start_time = (now - timedelta(minutes=5)).isoformat()
         end_time = now.isoformat()
 
         endpoint_mapping = {
@@ -63,28 +62,17 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 _ = method_execute(method_params)
                 return_message += f"{endpoint} has passed \n"
             except ApiException as error:
-                self.logger.info(error)
-                error_message += f"The connection test to Salesforce was unsuccessful \n The error was in the following test: {endpoint}. \nThis can be fixed by: {error.cause} \n"
-                self.logger.error(ConnectionTestException(cause=error.cause))
-                self.logger.error(ConnectionTestException(assistance=error.assistance))
+                self.logger.info(f"API Exception has been hit. cause = {error.cause}, assistance = {error.assistance}")
+                error_message += f"An error occurred in the following test: {endpoint}. \nThis can be fixed by: {error.assistance} \n"
             except con_err as error:
                 self.logger.error(error)
                 error_message += f"The URL provided in the connection for the {endpoint} test is unreachable. Please ensure you are providing a valid URL when trying to connect."
-                self.logger.error(
-                    ConnectionTestException(
-                        cause=f"The URL provided in the connection for the {endpoint} test is unreachable. Please ensure you are providing a valid URL when trying to connect."
-                    )
-                )
-                self.logger.error(
-                    ConnectionTestException(
-                        assistance=f"Please verify the URL specified for the {endpoint} test is valid and reachable before attempting to connect again."
-                    )
-                )
-
         if not error_message:
             self.logger.info(return_message)
             return {"success": True}, return_message
         else:
             raise ConnectionTestException(
+                cause=f"The connection test to Salesforce failed due to: \n {error_message} ",
+                assistance="The connection test to Salesforce failed. Please ensure all fields are set and have the correct values before attempting again.",
                 data=error_message,
             )
