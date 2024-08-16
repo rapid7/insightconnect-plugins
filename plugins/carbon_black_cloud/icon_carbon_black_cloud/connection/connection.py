@@ -9,8 +9,14 @@ import time
 from icon_carbon_black_cloud.util import agent_typer
 from icon_carbon_black_cloud.util.constants import DEFAULT_TIMEOUT, ERROR_HANDLING
 from icon_carbon_black_cloud.util.exceptions import RateLimitException, HTTPErrorException
-
+from icon_carbon_black_cloud.util.constants import (
+    OBSERVATION_TYPES,
+    OBSERVATION_TIME_FIELD,
+    ALERT_TIME_FIELD,
+    TIME_FORMAT,
+)
 from typing import Dict, Any
+from datetime import timedelta, datetime, timezone
 import re
 
 
@@ -146,3 +152,84 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 data=str(error),
             )
         return {"success": True}
+
+    def test_task(self):
+        self.logger.info("Running a connection test to Carbon Black Cloud")
+
+        alerts_endpoint = self.base_url + f"/api/alerts/v7/orgs/{self.org_key}/alerts/_search"
+        observations_endpoint = self.base_url + f"/api/investigate/v2/orgs/{self.org_key}/observations/search_jobs"
+
+        current_time = datetime.now(timezone.utc)
+        now = current_time.strftime(TIME_FORMAT)
+        minus_five_mins = (current_time - timedelta(minutes=5)).strftime(TIME_FORMAT)
+
+        fd = {
+            alerts_endpoint: {
+                "name": "alerts",
+                "params": {
+                    "time_range": {"start": minus_five_mins, "end": now},
+                    "criteria": {},
+                    "start": "1",
+                    "rows": str(1),
+                    "sort": [{"field": ALERT_TIME_FIELD, "order": "ASC"}],
+                },
+            },
+            observations_endpoint: {
+                "name": "observations",
+                "params": {
+                    "rows": 1,
+                    "start": 0,
+                    "fields": ["*"],
+                    "criteria": {"observation_type": OBSERVATION_TYPES},
+                    "sort": [{"field": OBSERVATION_TIME_FIELD, "order": "asc"}],
+                    "time_range": {"start": minus_five_mins, "end": now},
+                },
+            },
+        }
+
+        return_msg = "Task connection test to Carbon Black Cloud successful"
+        return_msg_error = "Task connection test to Carbon Black Cloud failed"
+
+        failed = ""
+        failed_endpoint = []
+
+        for key, value in fd.items():
+            self.logger.info(f"Testing {value.get('name')} endpoint")
+
+            try:
+                self.request_api(key, value.get("params"))
+
+            except HTTPErrorException as error:
+                self.logger.info(f"HTTPErrorException Hit\n{error}")
+                # If we get a similar error for the second URL
+                if error.cause in failed:
+                    failed_endpoint.append(value.get("name"))
+                else:
+                    return_msg_error += f"\n{error.cause}\n{error.assistance}"
+                    failed_endpoint.append(value.get("name"))
+                    failed += return_msg_error
+
+            except RateLimitException as error:
+                self.logger.info(f"RateLimitException Hit\n{error}")
+                return_msg_error += "\nToo many requests, please wait and try again."
+                raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=return_msg_error)
+
+            except PluginException as error:
+                self.logger.info(f"PluginException Hit\n{error}")
+                return_msg_error += "\nCarbon Black currently unavailable. Please try again."
+                raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=return_msg_error)
+
+        if failed:
+            self.logger.info("Connection test failed")
+            if len(failed_endpoint) > 1:
+                self.logger.info("Both endpoints failed")
+                failed += "\nThe endpoint for alerts and observations failed."
+            else:
+                for item in failed_endpoint:
+                    self.logger.info(f"{item} endpoint failed")
+                    failed += f"\nThe endpoint for {item} failed"
+            raise ConnectionTestException(cause=failed, assistance=return_msg_error, data=failed)
+
+        # Return true
+        self.logger.info("Connection test successful")
+        return {"success": True}, return_msg

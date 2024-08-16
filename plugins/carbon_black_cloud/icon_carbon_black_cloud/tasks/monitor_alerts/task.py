@@ -8,11 +8,12 @@ from typing import Dict, Tuple, Any
 
 from icon_carbon_black_cloud.util.helper_util import hash_sha1
 from icon_carbon_black_cloud.util.exceptions import RateLimitException, HTTPErrorException
-from icon_carbon_black_cloud.util.constants import OBSERVATION_TYPES
-
-ALERT_TIME_FIELD = "backend_timestamp"
-OBSERVATION_TIME_FIELD = "device_timestamp"
-TIME_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
+from icon_carbon_black_cloud.util.constants import (
+    OBSERVATION_TYPES,
+    OBSERVATION_TIME_FIELD,
+    ALERT_TIME_FIELD,
+    TIME_FORMAT,
+)
 
 # State held values
 RATE_LIMITED = "rate_limited_until"
