@@ -4,7 +4,7 @@ products: [insightconnect]
 name: salesforce
 title: Salesforce
 description: The Salesforce plugin allows you to search, update, and manage salesforce records
-version: 2.1.8
+version: 2.1.9
 connection_version: 2
 vendor: rapid7
 support: community
@@ -13,7 +13,7 @@ status: []
 supported_versions: ["Salesforce API v58 2023-06-30"]
 sdk:
   type: full
-  version: 5.4.9
+  version: 6.1.0
   user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/salesforce
@@ -37,6 +37,7 @@ references:
   - "[Connecting your app to the API](https://developer.salesforce.com/docs/atlas.en-us.216.0.api_rest.meta/api_rest/quickstart.htm)"
   - "[SOQL](https://developer.salesforce.com/docs/atlas.en-us.216.0.soql_sosl.meta/soql_sosl/sforce_api_calls_soql.htm)"
 version_history:
+  - "2.1.9 - SDK Bump to 6.1.0 | Task Connection test added"
   - "2.1.8 - Task Monitor Users: Allow lookback to be 7 days and initial run to be 24 hours & raise PluginException for API errors."
   - "2.1.7 - Task Monitor Users: Update connection to accept instance URL and force new token request per execution."
   - "2.1.6 - Task Monitor Users: Implement SDK 5.4.4 for custom_config parameter."
