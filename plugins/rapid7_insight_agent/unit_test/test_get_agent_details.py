@@ -14,7 +14,7 @@ from unittest import TestCase
 from icon_rapid7_insight_agent.actions.get_agent_details import GetAgentDetails
 from icon_rapid7_insight_agent.actions.get_agent_details.schema import Input
 
-from unit_test.util import Util
+from util import Util
 
 
 @patch("requests.sessions.Session.post", side_effect=Util.mocked_request)

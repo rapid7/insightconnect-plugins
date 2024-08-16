@@ -13,7 +13,7 @@ from icon_rapid7_insight_agent.actions.quarantine_multiple.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
 from jsonschema import validate
 
-from unit_test.util import Util
+from util import Util
 
 
 @patch("requests.sessions.Session.post", side_effect=Util.mocked_request)
