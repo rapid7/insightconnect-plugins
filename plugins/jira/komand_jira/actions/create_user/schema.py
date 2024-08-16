@@ -11,6 +11,7 @@ class Input:
     EMAIL = "email"
     NOTIFY = "notify"
     PASSWORD = "password"
+    PRODUCTS = "products"
     USERNAME = "username"
 
 
@@ -46,6 +47,11 @@ class CreateUserInput(insightconnect_plugin_runtime.Input):
       "title": "Password",
       "description": "Password",
       "order": 3
+    },
+    "products": {
+      "title": "Products",
+      "description": "Products the new user has access to",
+      "order": 5
     },
     "username": {
       "type": "string",
