@@ -200,6 +200,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 self.request_api(key, value.get("params"))
 
             except HTTPErrorException as error:
+                self.logger.info(f"HTTPErrorException Hit\n{error}")
                 # If we get a similar error for the second URL
                 if error.cause in failed:
                     failed_endpoint.append(value.get("name"))
@@ -209,20 +210,26 @@ class Connection(insightconnect_plugin_runtime.Connection):
                     failed += return_msg_error
 
             except RateLimitException as error:
+                self.logger.info(f"RateLimitException Hit\n{error}")
                 return_msg_error += "\nToo many requests, please wait and try again."
                 raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=return_msg_error)
 
             except PluginException as error:
+                self.logger.info(f"PluginException Hit\n{error}")
                 return_msg_error += "\nCarbon Black currently unavailable. Please try again."
                 raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=return_msg_error)
 
         if failed:
+            self.logger.info("Connection test failed")
             if len(failed_endpoint) > 1:
+                self.logger.info("Both endpoints failed")
                 failed += "\nThe endpoint for alerts and observations failed."
             else:
                 for item in failed_endpoint:
-                    failed += f"\nThe endpoint for {item.get('name')} failed"
+                    self.logger.info(f"{item} endpoint failed")
+                    failed += f"\nThe endpoint for {item} failed"
             raise ConnectionTestException(cause=failed, assistance=return_msg_error, data=failed)
 
         # Return true
+        self.logger.info("Connection test successful")
         return {"success": True}, return_msg
