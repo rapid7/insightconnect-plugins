@@ -96,8 +96,8 @@ class SendTriggerEventInput(insightconnect_plugin_runtime.Input):
   },
   "required": [
     "email",
-    "title",
-    "service"
+    "service",
+    "title"
   ],
   "definitions": {
     "service_input": {
