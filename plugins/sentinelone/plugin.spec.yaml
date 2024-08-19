@@ -3,12 +3,12 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 11.0.0
+version: 11.1.0
 connection_version: 10
 cloud_ready: true
 sdk:
   type: slim
-  version: 6.0.1
+  version: 6.1.0
   user: nobody
 supported_versions: ["2.1.0"]
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
