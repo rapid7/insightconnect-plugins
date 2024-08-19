@@ -1,5 +1,5 @@
-from insightconnect_plugin_runtime.helper import clean
-from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
+from insightconnect_plugin_runtime.helper import clean, clean_dict
+from insightconnect_plugin_runtime.exceptions import PluginException
 from logging import Logger
 from typing import Union
 import requests
@@ -73,6 +73,11 @@ class PagerDutyAPI:
 
         for key, value in dict_of_optional_fields.items():
             if value:
+                if isinstance(value, dict):
+                    optional_dict = clean_dict(value)  # check if there are non-empty nested values
+                    if not optional_dict:
+                        # don't add empty optional dict to payload
+                        continue
                 payload["incident"][key] = value
 
         return self.send_request(method="POST", path="/incidents/", payload=payload, from_email=email)

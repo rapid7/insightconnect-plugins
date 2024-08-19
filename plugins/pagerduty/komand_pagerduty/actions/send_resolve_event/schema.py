@@ -10,7 +10,6 @@ class Component:
 class Input:
     EMAIL = "email"
     INCIDENT_ID = "incident_id"
-    RESOLVE_MESSAGE = "resolve_message"
 
 
 class Output:

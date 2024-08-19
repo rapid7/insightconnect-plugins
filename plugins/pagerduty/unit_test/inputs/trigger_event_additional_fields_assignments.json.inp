@@ -21,5 +21,9 @@
                 "type": "user_reference"
             }
         }
-    ]
+    ],
+    "conference_bridge": {
+        "conference_number": "123456",
+        "conference_url": "https://dev-rapid7-conference.com"
+    }
 }
