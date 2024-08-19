@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import GetScansInput, GetScansOutput, Input, Output
+from .schema import GetScansInput, GetScansOutput, Input, Output, Component
 
 # Custom imports below
 from komand_rapid7_insightappsec.util.endpoints import Scans
@@ -11,7 +11,7 @@ class GetScans(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_scans",
-            description="Get a page of scans, based on supplied pagination parameters",
+            description=Component.DESCRIPTION,
             input=GetScansInput(),
             output=GetScansOutput(),
         )
@@ -20,10 +20,13 @@ class GetScans(insightconnect_plugin_runtime.Action):
         request = ResourceHelper(self.connection.session, self.logger)
 
         url = Scans.scans(self.connection.url)
+
+        # This filters out empty inputs, e.g. if index is 0 then omit it
         request_params = dict()
         for item in params:
             if params[item]:
                 request_params[item] = params[item]
+
         response = request.resource_request(url, "get", params=request_params)
 
         try:

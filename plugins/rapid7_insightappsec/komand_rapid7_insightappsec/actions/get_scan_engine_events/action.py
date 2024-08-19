@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import GetScanEngineEventsInput, GetScanEngineEventsOutput, Input, Output
+from .schema import GetScanEngineEventsInput, GetScanEngineEventsOutput, Input, Output, Component
 
 # Custom imports below
 from komand_rapid7_insightappsec.util.endpoints import Scans
@@ -11,7 +11,7 @@ class GetScanEngineEvents(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_scan_engine_events",
-            description="Get the engine events from a scan",
+            description=Component.DESCRIPTION,
             input=GetScanEngineEventsInput(),
             output=GetScanEngineEventsOutput(),
         )

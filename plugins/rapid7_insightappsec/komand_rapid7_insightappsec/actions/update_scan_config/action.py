@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import UpdateScanConfigInput, UpdateScanConfigOutput, Input, Output
+from .schema import UpdateScanConfigInput, UpdateScanConfigOutput, Input, Output, Component
 
 # Custom imports below
 from komand_rapid7_insightappsec.util.endpoints import ScanConfig
@@ -10,7 +10,7 @@ class UpdateScanConfig(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="update_scan_config",
-            description="Update an existing scan configuration",
+            description=Component.DESCRIPTION,
             input=UpdateScanConfigInput(),
             output=UpdateScanConfigOutput(),
         )

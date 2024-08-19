@@ -48,8 +48,8 @@ class ResourceHelper(object):
                 response = request_method(url=endpoint, params=params, verify=False)
             else:
                 response = request_method(url=endpoint, params=params, json=payload, verify=False)
-        except requests.RequestException as e:
-            self.logger.error(e)
+        except requests.RequestException as error:
+            self.logger.error(f"Error is: {error}")
             raise
 
         if response.status_code in range(200, 299):

@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import GetScanExecutionDetailsInput, GetScanExecutionDetailsOutput, Input, Output
+from .schema import GetScanExecutionDetailsInput, GetScanExecutionDetailsOutput, Input, Output, Component
 
 # Custom imports below
 from komand_rapid7_insightappsec.util.endpoints import Scans
@@ -11,7 +11,7 @@ class GetScanExecutionDetails(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_scan_execution_details",
-            description="Get real-time details of the execution of a Scan",
+            description=Component.DESCRIPTION,
             input=GetScanExecutionDetailsInput(),
             output=GetScanExecutionDetailsOutput(),
         )

@@ -3,9 +3,10 @@ extension: plugin
 products: [insightconnect]
 name: rapid7_insightappsec
 title: Rapid7 InsightAppSec
-description: This plugin allows for the creation, configuration, and starting of scans. The plugin can also retrieve scan results and logging related to the execution of the scan
-version: 1.2.0
-supported_versions: ["Rapid7 InsightAppSec"]
+description: "[InsightAppSec’s](https://www.rapid7.com/products/insightappsec/) DAST capabilities and InsightConnect’s automation prowess can help you simplify your SDLC Process with this scan management plugin. The need for automation becomes paramount in the fast moving landscape of modern web scanning and automating you web app scanning with this plugin can save you loads of time to allow you to focus on remediating issues to get your app into product faster!"
+version: 1.2.1
+connection_version: 1
+supported_versions: ["Rapid7 InsightAppSec 19.08.2024"]
 vendor: rapid7
 status: []
 support: rapid7
@@ -21,6 +22,35 @@ hub_tags:
   use_cases: [devops, remediation_management, reporting_and_analytics, vulnerability_management]
   keywords: [insightappsec, scan, vulnerability_scanner, vulnerability_validation, rapid7]
   features: []
+requirements:
+  - "Requires an API Key from Insight platform"
+key_features:
+  - "Create and configure scans"
+  - "Run scans and return results"
+  - "Get Vulnerabilities"
+  - "Get Vulnerability"
+  - "Get Vulnerability Discoveries"
+  - "Get Vulnerability Discovery"
+  - "Create Schedule"
+links:
+  - "[Rapid7 InsightAppSec](https://docs.rapid7.com/insightappsec/)"
+references: 
+  - "[Rapid7 InsightAppSec API](https://docs.rapid7.com/insightappsec/api-get-started)"
+version_history:
+  - "1.2.1 - Fix broken URLs for Scans and Vulnerabilities API calls | Update SDK"
+  - "1.2.0 - Add New Vulnerabilities trigger"
+  - "1.1.0 - Add new actions: `Get Vulnerabilities`, `Get Vulnerability`, `Create Schedule`, `Get Vulnerability Discovery`, `Get Vulnerability Discoveries`"
+  - "1.0.4 - Fix typo in title for Submit Scan action | Update keywords"
+  - "1.0.3 - Send plugin name and version in the User-Agent string to vendor" 
+  - "1.0.2 - Update to v4 Python plugin runtime | Add example inputs"
+  - "1.0.1 - New spec and help.md format for the Extension Library"
+  - "1.0.0 - Initial plugin"
+sdk:
+  type: slim
+  version: 6.1.0
+  user: nobody
+troubleshooting:
+  - "More information about the frequency and recurrence rule parameters used in the Create Schedule action can be found [here](https://help.rapid7.com/insightappsec/en-us/api/v1/docs.html#tag/Schedules)."
 types:
   link:
     href:
@@ -432,8 +462,7 @@ types:
       example: {}
     status:
       title: Status
-      description: "The status of the vulnerability. Expected values: 'UNREVIEWED' 'FALSE_POSITIVE' 'VERIFIED' 
-      'IGNORED' 'REMEDIATED' 'DUPLICATE'"
+      description: "The status of the vulnerability. Expected values: 'UNREVIEWED' 'FALSE_POSITIVE' 'VERIFIED' 'IGNORED' 'REMEDIATED' 'DUPLICATE'"
       type: string
       required: false
       example: UNREVIEWED
@@ -825,9 +854,7 @@ actions:
         example: {}
   get_vulnerabilities:
     title: Get Vulnerabilities
-    description: "Get a page of Vulnerabilities, based on supplied pagination parameters. The default sort for 
-    Vulnerabilities is 'severity' (descending); for a full list of sortable properties, refer to the Search Catalog 
-    detailed in the Search API"
+    description: "Get a page of Vulnerabilities, based on supplied pagination parameters. The default sort for Vulnerabilities is 'severity' (descending); for a full list of sortable properties, refer to the Search Catalog detailed in the Search API"
     input:
       index:
         title: Index

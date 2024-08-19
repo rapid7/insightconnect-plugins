@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import GetScanInput, GetScanOutput, Input, Output
+from .schema import GetScanInput, GetScanOutput, Input, Output, Component
 
 # Custom imports below
 from komand_rapid7_insightappsec.util.endpoints import Scans
@@ -10,7 +10,7 @@ import json
 class GetScan(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="get_scan", description="Get a scan", input=GetScanInput(), output=GetScanOutput()
+            name="get_scan", description=Component.DESCRIPTION, input=GetScanInput(), output=GetScanOutput()
         )
 
     def run(self, params={}):
@@ -18,7 +18,7 @@ class GetScan(insightconnect_plugin_runtime.Action):
         request = ResourceHelper(self.connection.session, self.logger)
 
         url = Scans.scans(self.connection.url)
-        url = f"{url}{scan_id}"
+        url = f"{url}/{scan_id}"
 
         response = request.resource_request(url, "get")
         try:

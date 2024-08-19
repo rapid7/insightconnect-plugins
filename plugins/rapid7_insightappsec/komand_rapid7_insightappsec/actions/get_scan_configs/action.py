@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import GetScanConfigsInput, GetScanConfigsOutput, Input, Output
+from .schema import GetScanConfigsInput, GetScanConfigsOutput, Input, Output, Component
 
 # Custom imports below
 from komand_rapid7_insightappsec.util.endpoints import ScanConfig
@@ -11,7 +11,7 @@ class GetScanConfigs(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_scan_configs",
-            description="Get a page of scan configurations, based on supplied pagination parameters",
+            description=Component.DESCRIPTION,
             input=GetScanConfigsInput(),
             output=GetScanConfigsOutput(),
         )

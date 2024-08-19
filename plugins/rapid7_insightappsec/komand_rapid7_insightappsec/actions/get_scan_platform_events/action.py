@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import GetScanPlatformEventsInput, GetScanPlatformEventsOutput, Input, Output
+from .schema import GetScanPlatformEventsInput, GetScanPlatformEventsOutput, Input, Output, Component
 
 # Custom imports below
 from komand_rapid7_insightappsec.util.endpoints import Scans
@@ -11,7 +11,7 @@ class GetScanPlatformEvents(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_scan_platform_events",
-            description="Get the platform events from a Scan",
+            description=Component.DESCRIPTION,
             input=GetScanPlatformEventsInput(),
             output=GetScanPlatformEventsOutput(),
         )

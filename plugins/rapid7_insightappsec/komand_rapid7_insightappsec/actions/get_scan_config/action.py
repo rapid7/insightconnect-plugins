@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import GetScanConfigInput, GetScanConfigOutput, Input, Output
+from .schema import GetScanConfigInput, GetScanConfigOutput, Input, Output, Component
 
 # Custom imports below
 from komand_rapid7_insightappsec.util.endpoints import ScanConfig
@@ -11,7 +11,7 @@ class GetScanConfig(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_scan_config",
-            description="Get a scan configuration",
+            description=Component.DESCRIPTION,
             input=GetScanConfigInput(),
             output=GetScanConfigOutput(),
         )
