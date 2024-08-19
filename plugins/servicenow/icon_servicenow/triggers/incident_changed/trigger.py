@@ -21,15 +21,16 @@ class IncidentChanged(insightconnect_plugin_runtime.Trigger):
         interval = params.get(Input.INTERVAL, 5)
         monitored_fields = params.get(Input.MONITORED_FIELDS, "")
         system_ids = params.get(Input.SYSTEM_IDS, [])
+        query = params.get(Input.QUERY, "")
         # END INPUT BINDING - DO NOT REMOVE
 
         # Initial pull of all the incidents with conversion generators to dict.
         # We need to store all of them in memory for the comparison.
-        previous_incidents = dict(self.get_all_incidents(monitored_fields, system_ids=system_ids))
+        previous_incidents = dict(self.get_all_incidents(monitored_fields, system_ids=system_ids, query=query))
 
         while True:
             # Pull all the incidents
-            current_incidents = self.get_all_incidents(monitored_fields, system_ids=system_ids)
+            current_incidents = self.get_all_incidents(monitored_fields, system_ids=system_ids, query=query)
 
             # Compare previous and new incident results. Using dict to speed up compute time.
             # After comparison the previous_incidents variable is being updated to current_incidents
