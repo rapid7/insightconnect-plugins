@@ -1471,7 +1471,7 @@ This trigger is used to reports changes of the given fields in the given Inciden
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |interval|integer|5|False|How often to detect changes to the given Incident (in minutes)|None|5|None|None|
 |monitored_fields|string|None|True|Comma-separated list of fields to be monitored (e.g. resolved,resolved_by)|None|resolved,resolved_by|None|None|
-|query|string|None|None|Non-encoded query string (e.g. number=INC0000055^ORshort_description=New bug)|None|number=INC0000055^ORshort_description=New bug|None|None|
+|query|string|None|False|Non-encoded query string (e.g. number=INC0000055^ORshort_description=New bug)|None|number=INC0000055^ORshort_description=New bug|None|None|
 |system_ids|[]string|None|False|List of system IDs of the incident records to monitor|None|["9de5069c5afe602b2ea0a04b66beb2c0"]|None|None|
   
 Example input:
