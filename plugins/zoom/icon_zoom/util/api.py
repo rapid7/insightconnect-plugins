@@ -195,10 +195,7 @@ class ZoomAPI:
         custom_config = {
             HTTPStatusCodes.CONFLICT: PluginException(
                 cause="User already exists.", assistance="Please check your input and try again."
-            ),
-            HTTPStatusCodes.BAD_REQUEST: PluginException(
-                cause="Invalid Input", assistance="Please check your input and try again."
-            ),
+            )
         }
         # try:
         self.logger.info(f"Calling {method} {url}")
