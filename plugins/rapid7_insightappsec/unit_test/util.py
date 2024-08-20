@@ -70,7 +70,7 @@ class Util:
         if url.endswith("ias/v1/vulnerabilities/existing-ID"):
             return MockResponse(200, "get_vulnerability.json.resp")
 
-        if url.endswith("ias/v1/vulnerabilities/"):
+        if url.endswith("ias/v1/vulnerabilities"):
             if params.get("page-token") == "NDM0NTk0NTIyOjo6X1M6OjpiYW5hbmFz":
                 return MockResponse(200, "get_vulnerabilities_all_params.json.resp")
             if params == {}:
