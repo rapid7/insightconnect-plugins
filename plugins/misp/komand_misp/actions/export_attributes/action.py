@@ -1,7 +1,7 @@
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from .schema import ExportAttributesInput, ExportAttributesOutput
+from .schema import ExportAttributesInput, ExportAttributesOutput, Input, Output, Component
 
 import json
 import requests
@@ -12,7 +12,7 @@ class ExportAttributes(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="export_attributes",
-            description="Export all attributes in CSV format",
+            description=Component.DESCRIPTION,
             input=ExportAttributesInput(),
             output=ExportAttributesOutput(),
         )
@@ -20,15 +20,15 @@ class ExportAttributes(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         key = self.connection.key
         ssl = self.connection.ssl
-        event_id = params.get("event_id")
-        ignore = params.get("include")
+        event_id = params.get(Input.EVENT_ID)
+        ignore = params.get(Input.INCLUDE)
         tags = params.get("tags")
-        category = params.get("category")
-        type_ = params.get("type")
-        include_context = params.get("include_context")
-        from_ = params.get("from")
-        to_ = params.get("to")
-        last = params.get("last")
+        category = params.get(Input.CATEGORY)
+        type_ = params.get(Input.TYPE)
+        include_context = params.get(Input.INCLUDE_CONTEXT)
+        from_ = params.get(Input.FROM)
+        to_ = params.get(Input.TO)
+        last = params.get(Input.LAST)
 
         path = "/events/csv/download"
         url = self.connection.url + path
@@ -65,4 +65,4 @@ class ExportAttributes(insightconnect_plugin_runtime.Action):
         # Encode data as b64
         attributes = base64.b64encode(response.text.encode("ascii"))
 
-        return {"attributes": attributes.decode("utf-8")}
+        return {Output.ATTRIBUTES: attributes.decode("utf-8")}

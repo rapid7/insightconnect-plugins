@@ -31,7 +31,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "url": {
       "type": "string",
       "title": "URL",
-      "description": "URL of the MISP server e.g. https://misp-2-4.example.com",
+      "description": "URL of the MISP server e.g. https://example.com",
       "order": 1
     }
   },

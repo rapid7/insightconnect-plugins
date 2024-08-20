@@ -1,6 +1,6 @@
 import insightconnect_plugin_runtime
 import time
-from .schema import SearchForTagInput, SearchForTagOutput
+from .schema import SearchForTagInput, SearchForTagOutput, Input, Output, Component
 
 # Custom imports below
 
@@ -9,16 +9,16 @@ class SearchForTag(insightconnect_plugin_runtime.Trigger):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="search_for_tag",
-            description="This trigger will search MISP for any events with a specified tag",
+            description=Component.DESCRIPTION,
             input=SearchForTagInput(),
             output=SearchForTagOutput(),
         )
 
-    def run(self, params={}):
+    def run(self, params={}):  # noqa: MC0001
         while True:
-            interval = params.get("interval")
-            tag = params.get("tag")
-            remove = params.get("remove")
+            interval = params.get(Input.INTERVAL)
+            tag = params.get(Input.TAG)
+            remove = params.get(Input.REMOVE)
 
             client = self.connection.client
             event_id = []
@@ -42,5 +42,5 @@ class SearchForTag(insightconnect_plugin_runtime.Trigger):
                     except KeyError:
                         self.logger.error("While removing the tags something went wrong, %s", in_event)
             if event_id:
-                self.send({"events": event_id})
+                self.send({Output.EVENTS: event_id})
             time.sleep(interval)
