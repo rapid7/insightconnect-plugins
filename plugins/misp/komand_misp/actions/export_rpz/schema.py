@@ -9,9 +9,9 @@ class Component:
 
 class Input:
     EVENT_ID = "event_id"
-    FROM = "from"
+    FROM_DATE = "from_date"
     TAGS = "tags"
-    TO = "to"
+    TO_DATE = "to_date"
 
 
 class Output:
@@ -30,7 +30,7 @@ class ExportRpzInput(insightconnect_plugin_runtime.Input):
       "description": "Specify single event to export",
       "order": 1
     },
-    "from": {
+    "from_date": {
       "type": "string",
       "title": "From Date",
       "description": "From date E.g. 2015-02-15",
@@ -45,7 +45,7 @@ class ExportRpzInput(insightconnect_plugin_runtime.Input):
       },
       "order": 2
     },
-    "to": {
+    "to_date": {
       "type": "string",
       "title": "To Date",
       "description": "To date E.g. 2015-02-17",

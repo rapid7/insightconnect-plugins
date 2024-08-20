@@ -8,6 +8,8 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 from komand_misp.actions.export_events.action import ExportEvents
+from komand_misp.actions.export_events.schema import ExportEventsInput, ExportEventsOutput
+from jsonschema import validate
 
 
 class TestExportEvents(unittest.TestCase):
@@ -22,7 +24,7 @@ class TestExportEvents(unittest.TestCase):
         self.params = {
             "event_id": "event_id",
             "encode_attachments": True,
-            "tags": "tag1,tag2",
+            "tags": ["tag1", "tag2"],
             "from": "2020-01-01",
             "to": "2020-12-31",
             "last": "5d",
@@ -35,9 +37,11 @@ class TestExportEvents(unittest.TestCase):
         mock_response.text = "<events></events>"
         mock_post.return_value = mock_response
 
+        validate(self.params, ExportEventsInput.schema)
         result = self.action.run(self.params)
         expected_events = base64.b64encode("<events></events>".encode("ascii")).decode("utf-8")
         self.assertEqual(result, {"events": expected_events})
+        validate(result, ExportEventsOutput.schema)
 
     @patch("komand_misp.actions.export_events.action.requests.post")
     def test_export_events_failure(self, mock_post):
@@ -46,6 +50,7 @@ class TestExportEvents(unittest.TestCase):
         mock_response.json.return_value = {"message": "Bad request"}
         mock_post.return_value = mock_response
 
+        validate(self.params, ExportEventsInput.schema)
         with self.assertRaises(PluginException) as context:
             self.action.run(self.params)
         self.assertTrue(PluginException.causes[PluginException.Preset.BAD_REQUEST] in context.exception.cause)

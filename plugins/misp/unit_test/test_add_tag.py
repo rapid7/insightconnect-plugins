@@ -7,6 +7,8 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 from komand_misp.actions.add_tag.action import AddTag
+from komand_misp.actions.add_tag.schema import AddTagInput, AddTagOutput
+from jsonschema import validate
 
 
 class TestAddTag(unittest.TestCase):
@@ -27,8 +29,10 @@ class TestAddTag(unittest.TestCase):
 
         self.mock_client.get_event.return_value = {"Event": {"uuid": "test_uuid"}}
         self.mock_client.tag.return_value = {"name": "tag successfully added"}
+        validate(self.params, AddTagInput.schema)
         result = self.action.run(self.params)
         self.assertEqual(result, {"status": True})
+        validate(result, AddTagOutput.schema)
 
     @patch("komand_misp.connection.connection.Connection")
     def test_add_tag_failure(self, mock_connection_class):
@@ -38,8 +42,10 @@ class TestAddTag(unittest.TestCase):
 
         self.mock_client.get_event.return_value = {"Event": {"uuid": "test_uuid"}}
         self.mock_client.tag.return_value = {"name": "failed to add tag"}
+        validate(self.params, AddTagInput.schema)
         result = self.action.run(self.params)
         self.assertEqual(result, {"status": False})
+        validate(result, AddTagOutput.schema)
 
     @patch("komand_misp.connection.connection.Connection")
     def test_add_tag_exception(self, mock_connection_class):
@@ -49,6 +55,7 @@ class TestAddTag(unittest.TestCase):
 
         self.mock_client.get_event.return_value = {"Event": {"uuid": "test_uuid"}}
         self.mock_client.tag.side_effect = Exception("Test exception")
+        validate(self.params, AddTagInput.schema)
         with self.assertRaises(PluginException):
             self.action.run(self.params)
         self.action.logger.error.assert_called()
