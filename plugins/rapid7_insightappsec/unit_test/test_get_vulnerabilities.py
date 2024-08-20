@@ -3,7 +3,7 @@ import os
 
 from unittest import TestCase
 from komand_rapid7_insightappsec.actions.get_vulnerabilities import GetVulnerabilities
-from unit_test.util import Util
+from util import Util
 from unittest.mock import patch
 from parameterized import parameterized
 
