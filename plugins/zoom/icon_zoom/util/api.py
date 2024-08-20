@@ -198,7 +198,7 @@ class ZoomAPI:
             ),
             HTTPStatusCodes.BAD_REQUEST: PluginException(
                 cause="Invalid Input", assistance="Please check your input and try again."
-            )
+            ),
         }
         # try:
         self.logger.info(f"Calling {method} {url}")
