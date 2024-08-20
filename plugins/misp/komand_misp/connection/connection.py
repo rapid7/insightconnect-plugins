@@ -20,7 +20,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.key = params.get(Input.AUTOMATION_CODE).get("secretKey")
         self.ssl = params.get(Input.SSL, True)
         try:
-            self.client = pymisp.PyMISP(self.url, self.key, self.ssl, "json", debug=False)
+            self.client = pymisp.PyMISP(self.url, self.key, self.ssl, debug=False)
             self.logger.info("Connect: Connected!")
         except:
             self.logger.error("Connect: Not Connected")
