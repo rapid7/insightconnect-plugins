@@ -4,6 +4,7 @@ from .schema import GetScanEngineEventsInput, GetScanEngineEventsOutput, Input, 
 # Custom imports below
 from komand_rapid7_insightappsec.util.endpoints import Scans
 from komand_rapid7_insightappsec.util.resource_helper import ResourceHelper
+from insightconnect_plugin_runtime.exceptions import PluginException
 import json
 
 

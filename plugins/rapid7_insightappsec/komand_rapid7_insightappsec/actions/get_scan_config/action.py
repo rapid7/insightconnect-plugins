@@ -4,6 +4,7 @@ from .schema import GetScanConfigInput, GetScanConfigOutput, Input, Output, Comp
 # Custom imports below
 from komand_rapid7_insightappsec.util.endpoints import ScanConfig
 from komand_rapid7_insightappsec.util.resource_helper import ResourceHelper
+from insightconnect_plugin_runtime.exceptions import PluginException
 import json
 
 
@@ -26,11 +27,12 @@ class GetScanConfig(insightconnect_plugin_runtime.Action):
         response = request.resource_request(url, "get")
         try:
             result = json.loads(response["resource"])
-        except json.decoder.JSONDecodeError:
+        except json.decoder.JSONDecodeError as error:
             self.logger.error(f"InsightAppSec response: {response}")
-            raise Exception(
-                "The response from InsightAppSec was not in JSON format. Contact support for help."
-                " See log for more details"
+            raise PluginException(
+                cause="The response from InsightAppSec was not in JSON format. Contact support for help.",
+                assistance=" See log for more details",
+                data=error,
             )
         try:
             return {
@@ -39,12 +41,13 @@ class GetScanConfig(insightconnect_plugin_runtime.Action):
                 Output.CONFIG_DESCRIPTION: result.get("description", ""),
                 Output.APP_ID: result["app"]["id"],
                 Output.ATTACK_TEMPLATE_ID: result["attack_template"]["id"],
-                Output.ERRORS: result.get("errors", list()),
+                Output.ERRORS: result.get("errors", []),
                 Output.LINKS: result["links"],
             }
-        except KeyError:
+        except KeyError as error:
             self.logger.error(result)
-            raise Exception(
-                "The response from InsightAppSec was not in the correct format. Contact support for help."
-                " See log for more details"
+            raise PluginException(
+                cause="The response from InsightAppSec was not in the correct format. Contact support for help.",
+                assistance=" See log for more details",
+                data=error,
             )
