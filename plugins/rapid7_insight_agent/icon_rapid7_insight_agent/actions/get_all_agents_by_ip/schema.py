@@ -69,9 +69,6 @@ class GetAllAgentsByIpOutput(insightconnect_plugin_runtime.Output):
       "order": 2
     }
   },
-  "required": [
-    "agents"
-  ],
   "definitions": {
     "agent": {
       "type": "object",

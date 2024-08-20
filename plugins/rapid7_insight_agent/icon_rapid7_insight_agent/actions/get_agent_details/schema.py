@@ -66,9 +66,6 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
       "order": 2
     }
   },
-  "required": [
-    "agent"
-  ],
   "definitions": {
     "agent": {
       "type": "object",
