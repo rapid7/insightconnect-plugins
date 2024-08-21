@@ -45,9 +45,11 @@ class Util:
 
         if kwargs.get("json", {}).get("query") == "{ organizations(first: 1) { edges { node { id name } } } }":
             return MockResponse("org_key.json.resp")
+        elif kwargs.get("json", {}).get("variables", {}).get("orgId") == "9de5069c5afe602b2ea0a04b66beb2c0":
+            return MockResponse("get_agent_details.resp")
         elif (
             kwargs.get("json", {}).get("query")
-            == "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }"
+            == "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress location { city region countryName countryCode continent } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }"
         ):
             return MockResponse("get_all_agents_by_ip.resp")
         elif kwargs.get("json", {}).get("variables", {}).get("agentID") == "goodID":
@@ -81,8 +83,4 @@ class Util:
             return MockResponse("quarantine_multiple.resp")
         elif kwargs.get("json", {}).get("variables", {}).get("agentID") == "agent_id_bad":
             return MockResponse("quarantine_multiple_failure.resp")
-        elif kwargs.get("json", {}).get("variables", {}).get("orgId") == "9de5069c5afe602b2ea0a04b66beb2c0":
-            return MockResponse("get_agent_details.resp")
-        elif kwargs.get("json", {}).get("variables", {}).get("orgId") == "9de5069c5afe602b2ea0a04b66beb2c0":
-            return MockResponse()
         raise Exception("Not implemented")
