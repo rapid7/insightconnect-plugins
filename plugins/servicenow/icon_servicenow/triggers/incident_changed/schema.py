@@ -10,6 +10,7 @@ class Component:
 class Input:
     INTERVAL = "interval"
     MONITORED_FIELDS = "monitored_fields"
+    QUERY = "query"
     SYSTEM_IDS = "system_ids"
 
 
@@ -29,13 +30,19 @@ class IncidentChangedInput(insightconnect_plugin_runtime.Input):
       "title": "Interval",
       "description": "How often to detect changes to the given Incident (in minutes)",
       "default": 5,
-      "order": 3
+      "order": 4
     },
     "monitored_fields": {
       "type": "string",
       "title": "Monitored Fields",
       "description": "Comma-separated list of fields to be monitored (e.g. resolved,resolved_by)",
       "order": 2
+    },
+    "query": {
+      "type": "string",
+      "title": "Query",
+      "description": "Non-encoded query string (e.g. number=INC0000055^ORshort_description=New bug)",
+      "order": 3
     },
     "system_ids": {
       "type": "array",
