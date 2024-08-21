@@ -1,6 +1,6 @@
 {
-	"spec": "64663a8f9fe19d0f29fd908d7b6bd034",
-	"manifest": "8d92c16a70e8b47b382bc077da15fd77",
+	"spec": "e90642333e6e48fdb16b3714e3d945b1",
+	"manifest": "0d42acfd273e2f89d12d8ed6f16d7a14",
 	"setup": "f68f1e492d96f14765c3b21a31d1bfea",
 	"schemas": [
 		{
@@ -8,8 +8,8 @@
 			"hash": "9e0383954822db2543b956b597db4176"
 		},
 		{
-			"identifier": "add_sightings/schema.py",
-			"hash": "ecd8484bba0bd97f9fee95b05f5b9b0e"
+			"identifier": "add_sighting/schema.py",
+			"hash": "3b0f3a56cdcb2afd5e12ee8089485dcc"
 		},
 		{
 			"identifier": "add_tag/schema.py",
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "create_an_event/schema.py",
-			"hash": "ee32c9ab23690be1cafc0a352aecca73"
+			"hash": "a4003f754c17d3aba58d6c33b35bae6b"
 		},
 		{
 			"identifier": "export_attributes/schema.py",
