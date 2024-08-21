@@ -12,7 +12,7 @@ requirements:
   - "API credentials for OAuth 2.0:
       \n\t* Requires account ID as well as client ID and secret from a Server-to-Server OAuth app in the Zoom Marketplace.
       \n\t* Server-to-Server OAuth app has the `report:read:admin` scope enabled."
-version: 4.1.14
+version: 4.1.15
 connection_version: 4
 vendor: rapid7
 support: rapid7
@@ -22,7 +22,7 @@ cloud_ready: true
 tags: [zoom, chat]
 sdk:
   type: full
-  version: 6.0.1
+  version: 6.1.0
   user: nobody
 hub_tags:
   use_cases: [alerting_and_notifications, application_management, threat_detection_and_response, user_management]
@@ -35,6 +35,7 @@ resources:
 enable_cache: false
 
 version_history:
+  - "4.1.15 - Error Handling Updated | SDK Bump to 6.1.0"
   - "4.1.14 - SDK Bumped to 6.0.1 | Task connection test added"
   - "4.1.13 - Fix defect where Event objects failed to create on a missing attribute | Update insight-plugin-runtime to version 5.5.5"
   - "4.1.12 - Fix defect where 401 errors may not be raised or logged correctly | Update insight-plugin-runtime to version 5.5.0"
