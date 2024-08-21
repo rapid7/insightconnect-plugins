@@ -9,6 +9,8 @@ from icon_rapid7_insight_agent.util.graphql_api.region_map import region_map
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 from insightconnect_plugin_runtime.helper import clean
 
+TIMEOUT_MINUTES = 3
+
 
 class ApiConnection:
     """
@@ -268,7 +270,7 @@ class ApiConnection:
         has_next_page = True
         if not next_cursor:
             payload = {
-                "query": "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }",
+                "query": "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress location { city region countryName countryCode continent } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }",
                 "variables": {"orgId": self.org_key},
             }
 
@@ -292,7 +294,7 @@ class ApiConnection:
             )
         while has_next_page:
             current_time = datetime.now()
-            if (current_time - start_time) > timedelta(minutes=3):
+            if (current_time - start_time) > timedelta(minutes=TIMEOUT_MINUTES):
                 self.logger.info("List of agents is too long, action will time out.")
                 self.logger.info("More pages are available, please use the next cursor value to requery.")
                 self.logger.info("Returning results...")
@@ -366,7 +368,7 @@ class ApiConnection:
             )
         while agent is None and has_next_page:
             current_time = datetime.now()
-            if (current_time - start_time) > timedelta(minutes=3):
+            if (current_time - start_time) > timedelta(minutes=TIMEOUT_MINUTES):
                 self.logger.info("List of agents is too long, action will time out.")
                 self.logger.info("More pages are available, please use the next cursor value to requery.")
                 self.logger.info("Returning results...")
@@ -392,7 +394,7 @@ class ApiConnection:
         """
         agents = []
         payload = {
-            "query": "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }",
+            "query": "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress location { city region countryName countryCode continent } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }",
             "variables": {"orgId": self.org_key},
         }
 
@@ -437,7 +439,7 @@ class ApiConnection:
         """
         self.logger.info(f"Getting next page of agents using cursor {next_cursor}")
         payload = {
-            "query": "query( $orgId:String! $nextCursor:String! ) { organization(id: $orgId) { assets( first: 10000, after: $nextCursor ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }",
+            "query": "query( $orgId:String! $nextCursor:String! ) { organization(id: $orgId) { assets( first: 10000, after: $nextCursor ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress location { city region countryName countryCode continent } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }",
             "variables": {"orgId": self.org_key, "nextCursor": next_cursor},
         }
         results_object = self._post_payload(payload)
