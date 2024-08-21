@@ -30,7 +30,9 @@ class TestGetAgentDetails(TestCase):
         with self.assertRaises(PluginException) as exception:
             action = Util.default_connector(GetAgentDetails())
             action.run({Input.AGENT: "badID"})
-        self.assertEqual(exception.exception.cause, "Could not find agent matching badID of type Host Name.")
+        self.assertEqual(
+            exception.exception.cause, "Could not find agent matching badID of type Host Name. No more pages of data."
+        )
         self.assertEqual(
             exception.exception.assistance,
             "Check the agent input value and try again.",
