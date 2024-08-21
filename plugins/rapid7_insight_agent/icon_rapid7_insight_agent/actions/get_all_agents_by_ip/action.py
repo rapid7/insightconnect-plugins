@@ -4,6 +4,7 @@ from .schema import GetAllAgentsByIpInput, GetAllAgentsByIpOutput, Input, Output
 # Custom imports below
 from ipaddress import ip_address as IPAddress
 from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.helper import clean
 
 
 class GetAllAgentsByIp(insightconnect_plugin_runtime.Action):
@@ -18,6 +19,7 @@ class GetAllAgentsByIp(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         ip_address = params.get(Input.IP_ADDRESS, "")
+        next_cursor = params.get(Input.NEXT_CURSOR)
         # END INPUT BINDING - DO NOT REMOVE
 
         try:
@@ -28,5 +30,5 @@ class GetAllAgentsByIp(insightconnect_plugin_runtime.Action):
                 assistance="Please ensure that the input is a valid IPv4 or IPv6 address.",
             )
 
-        agents = self.connection.api.get_agents_by_ip(ip_address)
-        return {Output.AGENTS: agents}
+        agents, next_cursor = self.connection.api.get_agents_by_ip(ip_address, next_cursor)
+        return clean({Output.AGENTS: agents, Output.NEXT_CURSOR: next_cursor})
