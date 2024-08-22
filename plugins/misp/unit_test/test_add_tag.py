@@ -43,9 +43,9 @@ class TestAddTag(unittest.TestCase):
         self.mock_client.get_event.return_value = {"Event": {"uuid": "test_uuid"}}
         self.mock_client.tag.return_value = {"name": "failed to add tag"}
         validate(self.params, AddTagInput.schema)
-        result = self.action.run(self.params)
-        self.assertEqual(result, {"status": False})
-        validate(result, AddTagOutput.schema)
+        with self.assertRaises(PluginException):
+            self.action.run(self.params)
+        self.action.logger.error.assert_called()
 
     @patch("komand_misp.connection.connection.Connection")
     def test_add_tag_exception(self, mock_connection_class):
