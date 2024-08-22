@@ -307,6 +307,7 @@ Example output:
 
 # Version History
 
+* 4.1.15 - Error Handling Updated | SDK Bump to 6.1.0
 * 4.1.14 - SDK Bumped to 6.0.1 | Task connection test added
 * 4.1.13 - Fix defect where Event objects failed to create on a missing attribute | Update insight-plugin-runtime to version 5.5.5
 * 4.1.12 - Fix defect where 401 errors may not be raised or logged correctly | Update insight-plugin-runtime to version 5.5.0
