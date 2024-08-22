@@ -20,6 +20,10 @@ class Publish(insightconnect_plugin_runtime.Action):
 
         client = self.connection.client
         in_event = client.get_event(event)
+
+        if in_event.get("errors"):
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=in_event.get("errors"))
+
         published = client.publish(in_event, True)
         try:
             published["id"]

@@ -38,7 +38,7 @@ def main():
         
             self.add_action(actions.CreateAnEvent())
         
-            self.add_action(actions.AddSightings())
+            self.add_action(actions.AddSighting())
         
             self.add_action(actions.AddTag())
         

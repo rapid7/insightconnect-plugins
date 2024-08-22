@@ -15,13 +15,17 @@ class AddTag(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         client = self.connection.client
         in_event = client.get_event(params.get(Input.EVENT))
+
+        if in_event.get("errors"):
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=in_event.get("errors"))
+
         try:
-            item = client.tag(in_event["Event"]["uuid"], tag=params.get(Input.EVENT))
-            if "successfully" in item["name"]:
+            item = client.tag(in_event["Event"]["uuid"], tag=params.get(Input.TAG))
+            if "successfully" in item.get("name", ""):
                 return {Output.STATUS: True}
             else:
                 self.logger.info(item)
-                return {Output.STATUS: False}
+                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=item.get("errors"))
         except Exception as error:
             self.logger.error(error)
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
