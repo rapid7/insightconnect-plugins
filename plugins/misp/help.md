@@ -99,23 +99,29 @@ Example output:
 }
 ```
 
-#### Add Sightings
+#### Add Sighting
 
-This action is used to add sightings to organization
+This action is used to add a sighting to attribute
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|sightings|[]string|None|True|Event sighting|None|["sighting"]|None|None|
+|Time|string|None|False|The time of the sighting to be added to the attribute (if none is provided it will default to now)|None|15:00:00|None|None|
+|attribute|integer|None|True|The ID of the attribute to add the sighting to|None|10|None|None|
+|date|string|None|False|The date of the sighting to be added to the attribute (if none is provided it will default to now)|None|2024-08-20|None|None|
+|source|string|None|False|The source of the sighting to be added to the attribute|None|honeypot|None|None|
+|type|string|None|True|The type of sighting to be added to the attribute|["Sighting", "False-positive", "Expiration"]|Sighting|None|None|
   
 Example input:
 
 ```
 {
-  "sightings": [
-    "sighting"
-  ]
+  "Time": "15:00:00",
+  "attribute": 10,
+  "date": "2024-08-20",
+  "source": "honeypot",
+  "type": "Sighting"
 }
 ```
 
@@ -123,13 +129,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|status|boolean|False|Whether any of the sightings provided were added|True|
+|sighting|object|False|Whether any of the sightings provided were added|True|
   
 Example output:
 
 ```
 {
-  "status": true
+  "sighting": true
 }
 ```
 
@@ -180,7 +186,6 @@ This action is used to create a MISP event
 |info|string|None|True|Extra event information|None|Example information|None|None|
 |org_id|string|None|False|Organization ID|None|12345|None|None|
 |orgc_id|string|None|False|Organization C ID|None|12345|None|None|
-|published|boolean|True|True|Published event?|None|True|None|None|
 |sharing_group_id|string|None|False|Sharing group ID|None|1|None|None|
 |threat_level_id|string|1|True|Importance of the threat|["4", "3", "2", "1"]|1|None|None|
   
@@ -193,7 +198,6 @@ Example input:
   "info": "Example information",
   "org_id": 12345,
   "orgc_id": 12345,
-  "published": true,
   "sharing_group_id": 1,
   "threat_level_id": 1
 }

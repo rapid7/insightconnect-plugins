@@ -13,7 +13,6 @@ class Input:
     INFO = "info"
     ORG_ID = "org_id"
     ORGC_ID = "orgc_id"
-    PUBLISHED = "published"
     SHARING_GROUP_ID = "sharing_group_id"
     THREAT_LEVEL_ID = "threat_level_id"
 
@@ -82,26 +81,19 @@ class CreateAnEventInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Organization ID",
       "description": "Organization ID",
-      "order": 7
+      "order": 6
     },
     "orgc_id": {
       "type": "string",
       "title": "Organization C ID",
       "description": "Organization C ID",
-      "order": 6
-    },
-    "published": {
-      "type": "boolean",
-      "title": "Published",
-      "description": "Published event?",
-      "default": true,
       "order": 5
     },
     "sharing_group_id": {
       "type": "string",
       "title": "Sharing Group ID",
       "description": "Sharing group ID",
-      "order": 8
+      "order": 7
     },
     "threat_level_id": {
       "type": "string",
@@ -119,7 +111,6 @@ class CreateAnEventInput(insightconnect_plugin_runtime.Input):
   },
   "required": [
     "info",
-    "published",
     "threat_level_id"
   ],
   "definitions": {}

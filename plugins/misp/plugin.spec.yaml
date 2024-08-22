@@ -501,13 +501,6 @@ actions:
         example: "Example information"
         type: string
         required: true
-      published:
-        title: Published
-        description: Published event?
-        example: true
-        default: true
-        type: boolean
-        required: true
       orgc_id:
         title: Organization C ID
         description: Organization C ID
@@ -647,21 +640,49 @@ actions:
         type: boolean
         required: false
         example: true
-  add_sightings:
-    title: Add Sightings
-    description: Add sightings to organization
+  add_sighting:
+    title: Add Sighting
+    description: Add a sighting to attribute
     input:
-      sightings:
-        title: Sightings
-        description: Event sighting
-        example: ["sighting"]
-        type: '[]string'
+      attribute:
+        title: Attribute
+        description: The ID of the attribute to add the sighting to
+        type: integer
+        required: True
+        example: 10
+      type:
+        title: Type
+        description: The type of sighting to be added to the attribute  
+        type: string
         required: true
+        example: Sighting
+        enum:
+        - "Sighting"
+        - "False-positive"
+        - "Expiration"
+      source:
+        title: Source
+        description: The source of the sighting to be added to the attribute
+        type: string
+        required: false
+        example: "honeypot"
+      date:
+        title: Date
+        description: The date of the sighting to be added to the attribute (if none is provided it will default to now)
+        type: string
+        required: false
+        example: "2024-08-20"
+      Time:
+        title: Time
+        description: The time of the sighting to be added to the attribute (if none is provided it will default to now)
+        type: string
+        required: false
+        example: "15:00:00"
     output:
-      status:
-        title: Status
+      sighting:
+        title: Sighting
         description: Whether any of the sightings provided were added
-        type: boolean
+        type: object
         required: false
         example: true
   add_tag:
