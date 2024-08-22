@@ -3,9 +3,10 @@ extension: plugin
 products: [insightconnect]
 name: rapid7_insightappsec
 title: Rapid7 InsightAppSec
-description: This plugin allows for the creation, configuration, and starting of scans. The plugin can also retrieve scan results and logging related to the execution of the scan
-version: 1.2.0
-supported_versions: ["Rapid7 InsightAppSec"]
+description: DAST capabilities and InsightConnects automation prowess can help you simplify your SDLC Process with this scan management plugin. The need for automation becomes paramount in the fast moving landscape of modern web scanning and automating you web app scanning with this plugin can save you loads of time to allow you to focus on remediating issues to get your app into product faster!
+version: 1.2.1
+connection_version: 1
+supported_versions: ["Rapid7 InsightAppSec 19.08.2024"]
 vendor: rapid7
 status: []
 support: rapid7
@@ -21,6 +22,34 @@ hub_tags:
   use_cases: [devops, remediation_management, reporting_and_analytics, vulnerability_management]
   keywords: [insightappsec, scan, vulnerability_scanner, vulnerability_validation, rapid7]
   features: []
+requirements:
+  - "Requires an API Key from Insight platform"
+key_features:
+  - "Create and configure scans"
+  - "Run scans and return results"
+  - "Get Vulnerabilities"
+  - "Get Vulnerability"
+  - "Get Vulnerability Discoveries"
+  - "Get Vulnerability Discovery"
+  - "Create Schedule"
+links:
+  - "[Rapid7 InsightAppSec](https://docs.rapid7.com/insightappsec/)"
+references: 
+  - "[Rapid7 InsightAppSec API](https://docs.rapid7.com/insightappsec/api-get-started)"
+version_history:
+  - "1.2.1 - Fix broken URLs for Scans and Vulnerabilities API calls | Update SDK"
+  - "1.2.0 - Add New Vulnerabilities trigger"
+  - "1.1.0 - Add new actions: `Get Vulnerabilities`, `Get Vulnerability`, `Create Schedule`, `Get Vulnerability Discovery`, `Get Vulnerability Discoveries`"
+  - "1.0.4 - Fix typo in title for Submit Scan action | Update keywords"
+  - "1.0.3 - Send plugin name and version in the User-Agent string to vendor" 
+  - "1.0.2 - Update to v4 Python plugin runtime | Add example inputs"
+  - "1.0.1 - New spec and help.md format for the Extension Library"
+  - "1.0.0 - Initial plugin"
+sdk:
+  type: slim
+  version: 6.1.0
+  user: nobody
+troubleshooting: "More information about the frequency and recurrence rule parameters used in the Create Schedule action can be found [here](https://help.rapid7.com/insightappsec/en-us/api/v1/docs.html#tag/Schedules)."
 types:
   link:
     href:
@@ -432,8 +461,7 @@ types:
       example: {}
     status:
       title: Status
-      description: "The status of the vulnerability. Expected values: 'UNREVIEWED' 'FALSE_POSITIVE' 'VERIFIED' 
-      'IGNORED' 'REMEDIATED' 'DUPLICATE'"
+      description: "The status of the vulnerability. Expected values: 'UNREVIEWED' 'FALSE_POSITIVE' 'VERIFIED' 'IGNORED' 'REMEDIATED' 'DUPLICATE'"
       type: string
       required: false
       example: UNREVIEWED
@@ -521,6 +549,7 @@ actions:
         description: Status code of the request
         type: integer
         required: false
+        example: 201
   get_scan_config:
     title: Get Scan Config
     description: Get a scan configuration
@@ -537,36 +566,43 @@ actions:
         description: The UUID of the scan configuration
         type: string
         required: false
+        example: "a709c972-cb1f-4790-bfce-6ab74653900c"
       config_name:
         title: Name
         description: The name of the scan configuration
         type: string
         required: false
+        example: "update_test"
       config_description:
         title: Description
         description: The description of the scan configuration
         type: string
         required: false
+        example: "testing update"
       app_id:
         title: App ID
         description: App UUID
         type: string
         required: false
+        example: "78c85b01-2a23-404d-ac5a-18324d8e3bda"
       attack_template_id:
         title: Attack Template ID
         description: Attack template UUID
         type: string
         required: false
+        example: "11111111-0000-0000-0000-000000000000"
       errors:
         title: Errors
         description: A list of errors that detail any current validation failures
         type: '[]string'
         required: false
+        example: [ "Seed URL list must not be empty", "Crawling Scope Constraint list must not be empty" ]
       links:
         title: Links
         description: A list of links
         type: '[]link'
         required: false
+        example: [ { "rel": "self", "href": "https://us.api.insight.rapid7.com:443/ias/v1/scan-configs/a709c972-cb1f-4790-bfce-6ab74653900c" } ]
   update_scan_config:
     title: Update Scan Config
     description: Update an existing scan configuration
@@ -607,6 +643,7 @@ actions:
         description: Status code of the request
         type: integer
         required: false
+        example: 204
   delete_scan_config:
     title: Delete Scan Config
     description: Delete an existing scan configuration
@@ -623,6 +660,7 @@ actions:
         description: Status code of the request
         type: integer
         required: false
+        example: 204
   get_scan_configs:
     title: Get Scan Configs
     description: Get a page of scan configurations, based on supplied pagination parameters
@@ -652,6 +690,7 @@ actions:
         description: A list of scan configurations
         type: '[]scan_config'
         required: false
+        example: [ { "id": "6a33ae79-5ebd-44a9-9a0a-f269876e90c9", "config_name": "Test_create_action", "config_description": "test create", "app_id": "78c85b01-2a23-404d-ac5a-18324d8e3bda", "attack_template_id": "11111111-0000-0000-0000-000000000000", "errors": [ "Seed URL list must not be empty", "Crawling Scope Constraint list must not be empty" ], "links": [ { "rel": "self", "href": "https://us.api.insight.rapid7.com:443/ias/v1/scan-configs/6a33ae79-5ebd-44a9-9a0a-f269876e90c9" } ] }, { "id": "0173ce58-369b-4d89-87d6-ef9cb59f8e38", "config_name": "Test_create_action", "config_description": "test create", "app_id": "78c85b01-2a23-404d-ac5a-18324d8e3bda", "attack_template_id": "11111111-0000-0000-0000-000000000000", "errors": [ "Seed URL list must not be empty", "Crawling Scope Constraint list must not be empty" ], "links": [ { "rel": "self", "href": "https://us.api.insight.rapid7.com:443/ias/v1/scan-configs/0173ce58-369b-4d89-87d6-ef9cb59f8e38" } ] }, { "id": "a709c972-cb1f-4790-bfce-6ab74653900c", "config_name": "update_test", "config_description": "testing update", "app_id": "78c85b01-2a23-404d-ac5a-18324d8e3bda", "attack_template_id": "11111111-0000-0000-0000-000000000000", "errors": [], "links": [ { "rel": "self", "href": "https://us.api.insight.rapid7.com:443/ias/v1/scan-configs/a709c972-cb1f-4790-bfce-6ab74653900c" } ] } ]
   submit_scan:
     title: Submit Scan
     description: Submit a new scan
@@ -668,6 +707,7 @@ actions:
         description: Status code of the request
         type: integer
         required: false
+        example: 204
   get_scan:
     title: Get Scan
     description: Get a scan
@@ -684,6 +724,7 @@ actions:
         description: Information on the scan
         type: scan
         required: false
+        example: { "id": "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a", "app_id": "78c85b01-2a23-404d-ac5a-18324d8e3bda", "scan_config_id": "a709c972-cb1f-4790-bfce-6ab74653900c", "submitter": { "type": "USER", "id": "5b278d63-8fac-4910-978e-8e281039b790" }, "submit_time": "2019-01-08T22:04:46.402", "completion_time": "2019-01-08T22:53:38.385", "status": "COMPLETE", "failure_reason": "", "links": [ { "rel": "self", "href": "https://us.api.insight.rapid7.com:443/ias/v1/scans/b0b343aa-7fc2-4a9a-bc18-5ac64df7791a" } ] }
   get_scans:
     title: Get Scans
     description: Get a page of scans, based on supplied pagination parameters
@@ -713,6 +754,7 @@ actions:
         description: A list of scans
         type: '[]scan'
         required: false
+        example: [ { "id": "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a", "app_id": "78c85b01-2a23-404d-ac5a-18324d8e3bda", "scan_config_id": "a709c972-cb1f-4790-bfce-6ab74653900c", "submitter": { "type": "USER", "id": "5b278d63-8fac-4910-978e-8e281039b790" }, "submit_time": "2019-01-08T22:04:46.402", "completion_time": "2019-01-08T22:53:38.385", "status": "COMPLETE", "failure_reason": "", "links": [ { "rel": "self", "href": "https://us.api.insight.rapid7.com:443/ias/v1/scans/b0b343aa-7fc2-4a9a-bc18-5ac64df7791a" } ] } ]
   delete_scan:
     title: Delete Scan
     description: Delete a scan
@@ -729,6 +771,7 @@ actions:
         description: Status code of the request
         type: integer
         required: false
+        example: 204
   submit_scan_action:
     title: Submit Scan Action
     description: Submit a new scan action
@@ -758,6 +801,7 @@ actions:
         description: Status code of the request
         type: integer
         required: false
+        example: 200
   get_scan_engine_events:
     title: Get Scan Engine Events
     description: Get the engine events from a scan
@@ -774,6 +818,7 @@ actions:
         description: An array of event logs and their dates
         type: '[]event_log'
         required: false
+        example: [ { "time": "2019-01-09T20:18:39.536", "event": "Scan is awaiting scheduling" } ]
   get_scan_execution_details:
     title: Get Scan Execution Details
     description: Get real-time details of the execution of a scan
@@ -790,6 +835,7 @@ actions:
         description: Detailed information about the scan
         type: scan_details
         required: false
+        example: { "logged_in": false, "links_in_queue": 0, "links_crawled": 0, "attacks_in_queue": 0, "attacked": 0, "vulnerable": 0, "requests": 0, "failed_requests": 0, "network_speed": 0, "drip_delay": 0 }
   get_scan_platform_events:
     title: Get Scan Platform Events
     description: Get the platform events from a scan
@@ -804,8 +850,9 @@ actions:
       events:
         title: Events
         description: An array of event logs and their dates
-        type: '[]event_log'
         required: false
+        type: '[]event_log'
+        example: [ { "time": "2019-01-09T20:18:47.751", "event": "Sending scan state action START" }, { "time": "2019-01-09T20:18:50.464", "event": "Sending scan state action CANCEL" } ]
   get_vulnerability:
     title: Get Vulnerability
     description: Get a vulnerability
@@ -822,12 +869,10 @@ actions:
         description: Vulnerability item
         type: vulnerabilityItem
         required: false
-        example: {}
+        example: { "app": { "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08" }, "severity": "SAFE", "vectorString": "example", "newlyDiscovered": true, "insightUiUrl": "sample.com", "lastDiscovered": "2021-08-03T14:07:37", "firstDiscovered": "2021-08-03T14:07:37", "vulnerabilityScore": 1.5, "variances": [ { "attackExchanges": [ { "request": "example", "response": "example", "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08" } ], "originalValue": "example", "attackValue": "example", "attack": { "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08" }, "module": { "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08" }, "proofDescription": "example", "originalExchange": { "request": "example", "response": "example", "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08" }, "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08", "proof": "example", "message": "example" } ], "links": [ { "profile": "example", "rel": "example", "name": "example", "href": "example.com" } ], "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08", "rootCause": { "method": "GET", "parameter": "example", "url": "example.com" }, "status": "UNREVIEWED" }
   get_vulnerabilities:
     title: Get Vulnerabilities
-    description: "Get a page of Vulnerabilities, based on supplied pagination parameters. The default sort for 
-    Vulnerabilities is 'severity' (descending); for a full list of sortable properties, refer to the Search Catalog 
-    detailed in the Search API"
+    description: "Get a page of Vulnerabilities, based on supplied pagination parameters. The default sort for Vulnerabilities is 'severity' (descending); for a full list of sortable properties, refer to the Search Catalog detailed in the Search API"
     input:
       index:
         title: Index
@@ -852,26 +897,26 @@ actions:
         description: "The page token, used as an alternative to index"
         type: string
         required: false
-        example: NDM0NTk0NTIyOjo6X1M6OjpiYW5hbmFz
+        example: "NDM0NTk0NTIyOjo6X1M6OjpiYW5hbmFz"
     output:
       metadata:
         title: Metadata
         description: Page metadata
         type: pageMetadata
         required: false
-        example: {}
+        example: { "size": 1, "totalData": 1, "pageToken": "NDM0NTk0NTIyOjo6X1M6OjpiYW5hbmFz", "index": 1, "sort": "scan.submit_time,DESC,scan.status", "totalPages": 1 }
       data:
         title: Data
         description: List of vulnerability data
         type: "[]vulnerabilityItem"
         required: false
-        example: []
+        example: [ { "app": { "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08" }, "severity": "SAFE", "vectorString": "example", "newlyDiscovered": true, "insightUiUrl": "sample.com", "lastDiscovered": "2021-08-03T14:07:37", "firstDiscovered": "2021-08-03T14:07:37", "vulnerabilityScore": 1.5, "variances": [ { "attackExchanges": [ { "request": "example", "response": "example", "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08" } ], "originalValue": "example", "attackValue": "example", "attack": { "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08" }, "module": { "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08" }, "proofDescription": "example", "originalExchange": { "request": "example", "response": "example", "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08" }, "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08", "proof": "example", "message": "example" } ], "links": [ { "profile": "example", "rel": "example", "name": "example", "href": "example.com" } ], "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08", "rootCause": { "method": "GET", "parameter": "example", "url": "example.com" }, "status": "UNREVIEWED" } ]
       links:
         title: Links
         description: List of links
         type: "[]linkDetails"
         required: false
-        example: []
+        example: [ { "profile": "example", "rel": "example", "name": "example", "href": "example.com" } ]
   create_schedule:
     title: Create Schedule
     description: Create a new schedule
@@ -900,13 +945,13 @@ actions:
         description: The first start date and time of the schedule
         type: date
         required: true
-        example: 2023-03-17T13:00:19Z
+        example: "2023-03-17T13:00:19Z"
       lastStart:
         title: Last Start
         description: The last start date and time of the schedule
         type: date
         required: false
-        example: 2023-04-17T13:00:19Z
+        example: "2023-04-17T13:00:19Z"
       frequency:
         title: Frequency
         description: The frequency describes how (and if) the schedule should repeat. If frequency and recurrence rule are given then the recurrence rule will be used
@@ -988,16 +1033,19 @@ actions:
         description: Page metadata
         type: pageMetadata
         required: false
+        example: { "index":0, "size":1, "sort":"vulnerabilitydiscovery.discovered,DESC", "totalData":2, "totalPages":2, "pageToken":"MTYyNTcyNTY0ODo6Ol" }
       data:
         title: Data
         description: Vulnerability discovery items
         type: '[]discoveryItem'
         required: false
+        example: [ { "id":"58972aa5-aa97-455e-90b7-cf569dbd75d0", "vulnerability":{ "id":"58972aa5-aa97-455e-90b7-cf569dbd75d5" }, "scan":{ "id":"68972aa5-aa97-455e-90b7-cf569dbd75d5" }, "discovered":"2023-01-01T11:11:11.111111", "links":[ { "rel":"self", "href":"https://example.com" } ] } ]
       links:
         title: Links
         description: List of links
         type: '[]linkDetails'
         required: false
+        example: [ { "rel":"self", "href":"https://example.com" } ]
 triggers:
   new_vulnerabilities:
     title: New Vulnerabilities
@@ -1016,4 +1064,4 @@ triggers:
         description: List of newly discovered vulnerabilities
         type: "[]vulnerabilityItem"
         required: false
-        example: []
+        example: [ { "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "app": { "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0" }, "rootCause": { "url": "http://example.com", "parameter": "Unnamed", "method": "GET" }, "severity": "INFORMATIONAL", "status": "UNREVIEWED", "firstDiscovered": "2023-03-20T14:29:10.686575", "lastDiscovered": "2023-03-20T14:29:10.686575", "newlyDiscovered": true, "variances": [ { "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "originalExchange": { "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "request": "GET /example/path/file.php", "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nDate: Mon, 20 Mar 2023 11:47:37 GMT\r\n" }, "module": { "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0" }, "attack": { "id": "R_02" }, "attackValue": "test", "proof": "test", "attackExchanges": [ { "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "request": "GET /example/path/file.php", "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nDate: Mon, 20 Mar 2023 13:49:33 GMT\r\n" } ] } ], "vectorString": "AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N", "insightUiUrl": "https://example.com", "links": [ { "rel": "self", "href": "https://example.com" } ] } ]

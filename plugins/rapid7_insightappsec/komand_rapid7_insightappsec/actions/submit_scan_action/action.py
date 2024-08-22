@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import SubmitScanActionInput, SubmitScanActionOutput, Input, Output
+from .schema import SubmitScanActionInput, SubmitScanActionOutput, Input, Output, Component
 
 # Custom imports below
 from komand_rapid7_insightappsec.util.endpoints import Scans
@@ -10,7 +10,7 @@ class SubmitScanAction(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="submit_scan_action",
-            description="Submit a new scan action",
+            description=Component.DESCRIPTION,
             input=SubmitScanActionInput(),
             output=SubmitScanActionOutput(),
         )

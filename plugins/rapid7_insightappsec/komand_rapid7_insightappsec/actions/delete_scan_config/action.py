@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import DeleteScanConfigInput, DeleteScanConfigOutput, Input, Output
+from .schema import DeleteScanConfigInput, DeleteScanConfigOutput, Input, Output, Component
 
 # Custom imports below
 from komand_rapid7_insightappsec.util.endpoints import ScanConfig
@@ -10,7 +10,7 @@ class DeleteScanConfig(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="delete_scan_config",
-            description="Delete an existing scan configuration",
+            description=Component.DESCRIPTION,
             input=DeleteScanConfigInput(),
             output=DeleteScanConfigOutput(),
         )
