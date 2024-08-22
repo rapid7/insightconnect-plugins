@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 
 from .schema import ConnectionSchema, Input
 
@@ -27,6 +27,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
             raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
 
     def test(self):
-        output = self.client.test_connection()
-        self.logger.info(output)
-        return {"status": True}
+        try:
+            _ = self.client.version
+            return {"status": True}
+        except Exception:
+            raise ConnectionTestException(
+                cause="The connection to the Misp server has failed",
+                assistance="Verify your plugin connection inputs are correct and not malformed and try again.",
+            )

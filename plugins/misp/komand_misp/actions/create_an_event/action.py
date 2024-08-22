@@ -32,13 +32,16 @@ class CreateAnEvent(insightconnect_plugin_runtime.Action):
                     "analysis": params.get(Input.ANALYSIS) or None,
                     "info": params.get(Input.INFO),
                     "date": None,
-                    "published": params.get(Input.PUBLISHED),
                     "orgc_id": params.get(Input.ORGC_ID) or None,
                     "org_id": params.get(Input.ORG_ID) or None,
                     "sharing_group_id": params.get(Input.SHARING_GROUP_ID) or None,
                 }
             )
             output = json.loads(json.dumps(event))
+
+            if output.get("errors"):
+                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=output.get("errors"))
+
         except Exception as error:
             self.logger.error(error)
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
