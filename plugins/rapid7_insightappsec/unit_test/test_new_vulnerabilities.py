@@ -7,7 +7,7 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from komand_rapid7_insightappsec.triggers.new_vulnerabilities import NewVulnerabilities
 from komand_rapid7_insightappsec.triggers.new_vulnerabilities.schema import Input
-from unit_test.util import Util
+from util import Util
 from unittest.mock import patch
 from typing import Callable, Optional
 from datetime import datetime
