@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import DeleteScanInput, DeleteScanOutput, Input, Output
+from .schema import DeleteScanInput, DeleteScanOutput, Input, Output, Component
 
 # Custom imports below
 from komand_rapid7_insightappsec.util.endpoints import Scans
@@ -10,7 +10,7 @@ class DeleteScan(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="delete_scan",
-            description="Delete a scan",
+            description=Component.DESCRIPTION,
             input=DeleteScanInput(),
             output=DeleteScanOutput(),
         )
@@ -20,7 +20,7 @@ class DeleteScan(insightconnect_plugin_runtime.Action):
         request = ResourceHelper(self.connection.session, self.logger)
 
         url = Scans.scans(self.connection.url)
-        url = f"{url}{scan_id}"
+        url = f"{url}/{scan_id}"
 
         response = request.resource_request(url, "delete")
         return {Output.STATUS: response["status"]}
