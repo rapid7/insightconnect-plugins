@@ -2,7 +2,7 @@
 
 from .create_an_event.action import CreateAnEvent
 
-from .add_sightings.action import AddSightings
+from .add_sighting.action import AddSighting
 
 from .add_tag.action import AddTag
 
