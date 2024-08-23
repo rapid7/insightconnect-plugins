@@ -467,13 +467,7 @@ class SentineloneAPI:
     ):
         # We prefer to use the same api version from the token creation,
         # But some actions require 2.0 and not 2.1 (and vice versa), in that case just pass in the right version
-        api_version = self.api_version
-        if override_api_version:
-            api_version = override_api_version
-        if json:
-            json = insightconnect_plugin_runtime.helper.clean(json)
-        if params:
-            params = insightconnect_plugin_runtime.helper.clean(params)
+        api_version, json, params = self.clean_call_inputs(override_api_version, json, params)
 
         try:
             response = requests.request(
@@ -500,6 +494,16 @@ class SentineloneAPI:
             )
         except requests.exceptions.RequestException as error:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+
+    def clean_call_inputs(self, override_api_version: str = None, json: str = None, params: str = None):
+        api_version = self.api_version
+        if override_api_version:
+            api_version = override_api_version
+        if json:
+            json = insightconnect_plugin_runtime.helper.clean(json)
+        if params:
+            params = insightconnect_plugin_runtime.helper.clean(params)
+        return api_version, json, params
 
     @staticmethod
     def split_url(url: str) -> str:
