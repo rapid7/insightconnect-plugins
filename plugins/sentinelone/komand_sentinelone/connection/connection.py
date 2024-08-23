@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
+from komand_sentinelone.util.helper import format_subdomain
 from komand_sentinelone.util.api import SentineloneAPI
 
 ACTIVITIES_LOGS = "activities_logs"
@@ -16,8 +17,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def connect(self, params={}):
         self.logger.info("Connect: Connecting...")
+        instance = format_subdomain(params.get(Input.INSTANCE, ""))
         self.client = SentineloneAPI(
-            f"https://{params.get(Input.INSTANCE)}.sentinelone.net",
+            f"https://{instance}.sentinelone.net",
             params.get(Input.APIKEY, {}).get("secretKey"),
             self.logger,
         )

@@ -7,7 +7,7 @@ import zipfile
 import requests
 from json.decoder import JSONDecodeError
 from re import match
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Tuple
 from urllib.parse import urlsplit, unquote
 from logging import Logger
 from ..util.helper import rate_limiting
@@ -467,13 +467,7 @@ class SentineloneAPI:
     ):
         # We prefer to use the same api version from the token creation,
         # But some actions require 2.0 and not 2.1 (and vice versa), in that case just pass in the right version
-        api_version = self.api_version
-        if override_api_version:
-            api_version = override_api_version
-        if json:
-            json = insightconnect_plugin_runtime.helper.clean(json)
-        if params:
-            params = insightconnect_plugin_runtime.helper.clean(params)
+        api_version, json, params = self.clean_call_inputs(override_api_version, json, params)
 
         try:
             response = requests.request(
@@ -492,6 +486,26 @@ class SentineloneAPI:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)
         except requests.exceptions.HTTPError as error:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+        except (requests.exceptions.ConnectionError, requests.exceptions.SSLError) as error:
+            raise PluginException(
+                data=error,
+                cause=PluginException.causes.get(PluginException.Preset.CONNECTION_ERROR),
+                assistance="Please ensure your connection details are correct and your SentinelOne instance accessible.",
+            )
+        except requests.exceptions.RequestException as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+
+    def clean_call_inputs(
+        self, override_api_version: str = None, json: str = None, params: str = None
+    ) -> Tuple[str, str, str]:
+        api_version = self.api_version
+        if override_api_version:
+            api_version = override_api_version
+        if json:
+            json = insightconnect_plugin_runtime.helper.clean(json)
+        if params:
+            params = insightconnect_plugin_runtime.helper.clean(params)
+        return api_version, json, params
 
     @staticmethod
     def split_url(url: str) -> str:
