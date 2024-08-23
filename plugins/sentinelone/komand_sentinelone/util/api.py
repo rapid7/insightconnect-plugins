@@ -7,7 +7,7 @@ import zipfile
 import requests
 from json.decoder import JSONDecodeError
 from re import match
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Tuple
 from urllib.parse import urlsplit, unquote
 from logging import Logger
 from ..util.helper import rate_limiting
@@ -495,7 +495,9 @@ class SentineloneAPI:
         except requests.exceptions.RequestException as error:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
-    def clean_call_inputs(self, override_api_version: str = None, json: str = None, params: str = None):
+    def clean_call_inputs(
+        self, override_api_version: str = None, json: str = None, params: str = None
+    ) -> Tuple[str, str, str]:
         api_version = self.api_version
         if override_api_version:
             api_version = override_api_version
