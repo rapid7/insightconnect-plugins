@@ -10,7 +10,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
-    def connect(self, params):
+    def connect(self, params={}) -> None:
         """
         Entry point for connection to the API
 
@@ -19,11 +19,10 @@ class Connection(insightconnect_plugin_runtime.Connection):
         """
         self.logger.info("Connect: Connecting...")
 
-        api_key = params.get(Input.API_KEY).get("secretKey")
+        api_key = params.get(Input.API_KEY, {}).get("secretKey")
         region_string = params.get(Input.REGION)
 
         self.api = ApiConnection(api_key, region_string, self.logger)
-
         self.logger.info("Setup Complete")
 
     def test(self):
@@ -33,11 +32,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
         :return: dict
         """
         try:
-            success = self.api.connection_test()
+            self.api.connection_test()
+            return {"success": True}
         except Exception as error:
             raise ConnectionTestException(
                 cause="Connection Test Failed.",
                 assistance="Please check that your Region and API key are correct.",
                 data=error,
             ) from error
-        return {"success": success}

@@ -8,12 +8,12 @@ from parameterized import parameterized
 sys.path.append(os.path.abspath("../"))
 from typing import Any, Dict, List
 
-from icon_rapid7_insight_agent.actions.quarantine_multiple.action import QuarantineMultiple
-from icon_rapid7_insight_agent.actions.quarantine_multiple.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
 from jsonschema import validate
-
 from util import Util
+
+from icon_rapid7_insight_agent.actions.quarantine_multiple.action import QuarantineMultiple
+from icon_rapid7_insight_agent.actions.quarantine_multiple.schema import Input
 
 
 @patch("requests.sessions.Session.post", side_effect=Util.mocked_request)
