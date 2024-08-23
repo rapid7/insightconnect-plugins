@@ -47,7 +47,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             self.is_cloud = True
 
         # add a check that if not are running on orchestrator, we are only trying to connect to Jira cloud instance
-        if self.is_cloud is False and os.environ.get("PLUGIN_RUNTIME_ENVIRONMENT", "") == "cloud":
+        if not self.is_cloud and os.environ.get("PLUGIN_RUNTIME_ENVIRONMENT", "") == "cloud":
             raise ConnectionTestException(
                 cause="Connection to Jira on-prem instance detected. please use a Jira Cloud instance.",
                 assistance="When running on ICON cloud we only support connections to Jira Cloud instances.",
