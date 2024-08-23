@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 11.1.0
+version: 11.1.1
 connection_version: 10
 cloud_ready: true
 sdk:
@@ -1697,7 +1697,7 @@ connection:
     tooltip: Enter a Service User API Key with adequate permissions
   instance:
     title: Instance
-    description: SentinelOne Console instance e.g. https://<example-instance>.sentinelone.net
+    description: The subdomain associated with your SentinelOne instance
     type: string
     required: true
     example: example-instance
