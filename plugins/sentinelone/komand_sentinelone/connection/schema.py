@@ -25,7 +25,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "instance": {
       "type": "string",
       "title": "Instance",
-      "description": "SentinelOne Console instance e.g. https://<example-instance>.sentinelone.net",
+      "description": "The subdomain associated with your SentinelOne instance",
       "placeholder": "Instance",
       "tooltip": "Enter the subdomain associated with your SentinelOne instance",
       "order": 2
