@@ -16,7 +16,7 @@ resources:
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 sdk:
   type: slim
-  version: 6.0.1
+  version: 6.1.0
   user: nobody
 key_features:
   - "Encode data in Base64 to transfer binary data, image files, etc. in a text format"
