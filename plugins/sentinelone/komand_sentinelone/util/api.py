@@ -490,7 +490,7 @@ class SentineloneAPI:
             raise PluginException(
                 data=error,
                 cause=PluginException.causes.get(PluginException.Preset.CONNECTION_ERROR),
-                assistance="Please ensure your connection details are correct and your Sentinelone instance accessible.",
+                assistance="Please ensure your connection details are correct and your SentinelOne instance accessible.",
             )
         except requests.exceptions.RequestException as error:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
