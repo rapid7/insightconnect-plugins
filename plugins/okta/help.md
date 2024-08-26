@@ -1598,6 +1598,7 @@ Actions may fail depending on the state of the resource you attempt to operate o
 
 # Version History
 
+* 4.2.10 - Monitor Logs Task: Add exception handling if invalid subdomain provided
 * 4.2.9 - SDK Bump to 6.1.0 | Task Connection test added
 * 4.2.8 - Connection: Set appropriate error code when domain is invalid
 * 4.2.7 - Updated to include latest SDK v5.4.9 | Task `Monitor Logs` updated to increase max lookback cutoff to 7 days
