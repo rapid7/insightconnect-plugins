@@ -7,13 +7,13 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
-from icon_rapid7_insight_agent.actions.get_all_agents_by_ip import GetAllAgentsByIp
-from icon_rapid7_insight_agent.actions.get_all_agents_by_ip.schema import Input, Output
 from insightconnect_plugin_runtime.exceptions import PluginException
 from jsonschema import validate
 from parameterized import parameterized
-
 from util import Util
+
+from icon_rapid7_insight_agent.actions.get_all_agents_by_ip import GetAllAgentsByIp
+from icon_rapid7_insight_agent.actions.get_all_agents_by_ip.schema import Input, Output
 
 
 class TestGetAllAgentsByIp(TestCase):
@@ -34,7 +34,7 @@ class TestGetAllAgentsByIp(TestCase):
     def test_get_all_agents_by_ip_exception(self, mock_request: MagicMock) -> None:
         with self.assertRaises(PluginException) as context:
             self.action.run({Input.IP_ADDRESS: "BadIP"})
-        self.assertEqual(context.exception.cause, f"Invalid input IP address: 'BadIP'")
+        self.assertEqual(context.exception.cause, "Invalid input IP address: 'BadIP'")
         self.assertEqual(
             context.exception.assistance,
             "Please ensure that the input is a valid IPv4 or IPv6 address.",

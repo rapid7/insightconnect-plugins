@@ -8,11 +8,11 @@ from parameterized import parameterized
 sys.path.append(os.path.abspath("../"))
 from typing import Any, Dict
 
+from jsonschema import validate
+from util import Util
+
 from icon_rapid7_insight_agent.actions.quarantine.action import Quarantine
 from icon_rapid7_insight_agent.actions.quarantine.schema import Input
-from jsonschema import validate
-
-from util import Util
 
 
 @patch("requests.sessions.Session.post", side_effect=Util.mocked_request)
