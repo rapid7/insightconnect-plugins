@@ -78,7 +78,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 return [], state, False, error.status_code, error
             except ConnectionError as error:
                 self.logger.info(
-                    "The connection has failed, likely due to an invalid URL.\nPlease ensure the subdomain conforms to these potential formats: \n./*.okta.com ./*.oktapreview.com ./*.okta-emea.com\n"
+                    "The connection has failed, perhaps due to an invalid subdomain.\nPlease ensure the subdomain conforms to these potential formats: \n./*.okta.com ./*.oktapreview.com ./*.okta-emea.com\n"
                 )
                 return [], state, False, 401, PluginException(preset=PluginException.Preset.NOT_FOUND, data=error)
         except Exception as error:
