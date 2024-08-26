@@ -39,16 +39,17 @@ def prepare_incident_payload(parameters: dict) -> dict:
             payload[key] = prepare_incident_payload(value)
         elif key not in SKIP_FIELDS:
             payload[key] = value
-    
+
     payload = prepare_responded(payload)
     return clean(payload)
+
 
 def prepare_responded(parameters: dict) -> dict:
     is_status = False
     for key, value in parameters.items():
-        if key == 'status':
-            if value != '':
+        if key == "status":
+            if value != "":
                 is_status = True
     if is_status:
-        del parameters['responded']
+        del parameters["responded"]
     return parameters
