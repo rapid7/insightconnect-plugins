@@ -13,7 +13,7 @@ Using the Insight Agent plugin from InsightConnect, you can quarantine, unquaran
 
 # Supported Product Versions
 
-* Rapid7 Insight Agent 2024-08-02
+* Rapid7 Insight Agent 2024-08-23
 
 # Documentation
 
@@ -454,12 +454,12 @@ Example output:
 
 
 ## Troubleshooting
-  
-- If the actions `Get Agent Details` and `Get All Agents by IP` return a `next cursor` value, it is an indication that more pages of data are available to be reviewed. In this instance, it is recommended to run the action multiple times and pass the `next cursor` value, recording all agents found.
+
+If the actions `Get Agent Details` and `Get All Agents by IP` return a `next cursor` value, it is an indication that more pages of data are available to be reviewed. In this instance, it is recommended to run the action multiple times and pass the `next cursor` value, recording all agents found.
 
 # Version History
 
-* 3.0.0 - Update `Get Agent Details` and `Get All Agents by IP` to return the next page token if more pages are available to search | Update `Get Agent Details` to return agent location details
+* 3.0.0 - Update `Get Agent Details` and `Get All Agents by IP` to return the next page token if more pages are available to search | Update `Get Agent Details` to return agent location details | Initial updates for fedramp compliance | Updated SDK to the latest version
 * 2.1.2 - Improve logging | Update SDK
 * 2.1.1 - `Get All Agents by IP Address`: Fixed issue where action failed when agent did not have a primary address, and extended output to include agent location details | `Get Agent Details`: Extended output to include agent's public IP address and location
 * 2.1.0 - Updated SDK to the latest version | New action added `Get All Agents by IP Address`
