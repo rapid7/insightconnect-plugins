@@ -21,6 +21,10 @@ hub_tags:
   use_cases: [reporting_and_analytics]
   keywords: [ticketing, topdesk, cloud_enabled]
   features: []
+sdk:
+  type: slim
+  version: 6.1.0
+  user: nobody
 requirements:
   - "TopDesk username"
   - "[Application password](https://developers.topdesk.com/tutorial.html) needed to communicate with the API"
@@ -1624,8 +1628,9 @@ actions:
         title: Status
         description: Status of the incident
         type: string
-        required: true
+        required: false
         enum:
+          - ""
           - First Line Incident
           - Second Line Incident
           - Partial Incident
