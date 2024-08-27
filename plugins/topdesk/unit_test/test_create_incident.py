@@ -41,10 +41,10 @@ class TestCreateIncident(TestCase):
                 Assistance.VERIFY_INPUT,
             ],
             [
-                "missing_required_field",
-                Util.read_file_to_dict("inputs/create_incident_missing_required_field.json.inp"),
-                Cause.INVALID_REQUEST,
-                Assistance.VERIFY_INPUT,
+                "missing_required_caller_fields",
+                Util.read_file_to_dict("inputs/create_incident_missing_caller_fields.json.inp"),
+                "No caller or caller lookup provided",
+                "One of these inputs must be supplied to create an incident.\nThe caller parameter is automatically filled in when the caller lookup parameter is provided.",
             ],
             [
                 "invalid_field",
