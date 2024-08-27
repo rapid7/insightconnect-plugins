@@ -81,6 +81,14 @@ def rate_limiting(max_tries: int, back_off_function: Callable = backoff_function
     return _decorate
 
 
+def format_subdomain(instance: str) -> str:
+    """
+    If an input subdomain contains a scheme or the Sentinelone secondlevel domain, strip these values
+    """
+    instance = instance.replace(".sentinelone.net", "")
+    return instance.replace("https://", "").replace("http://", "")
+
+
 class Helper:
     @staticmethod
     def join_or_empty(joined_array: list) -> str:

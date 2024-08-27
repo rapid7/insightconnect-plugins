@@ -7,6 +7,7 @@ from unittest import TestCase
 from unittest.mock import patch
 from komand_sentinelone.tasks.monitor_logs import MonitorLogs
 from komand_sentinelone.tasks.monitor_logs.schema import MonitorLogsOutput
+from komand_sentinelone.connection.schema import Input as ConnectionInput
 from util import Util
 from parameterized import parameterized
 from jsonschema import validate
@@ -127,7 +128,7 @@ class TestMonitorLogs(TestCase):
             ],
         ]
     )
-    def test_monitor_logss(
+    def test_monitor_logs(
         self,
         mock_request,
         test_name,
@@ -140,6 +141,46 @@ class TestMonitorLogs(TestCase):
         expected_error,
     ):
         output, state, has_more_pages, status_code, error = self.task.run(
+            params={}, state=state, custom_config=custom_config
+        )
+        self.assertEqual(expected_output, output)
+        self.assertEqual(expected_state, state)
+        self.assertEqual(expected_has_more_pages, has_more_pages)
+        self.assertEqual(expected_status_code, status_code)
+        self.assertEqual(expected_error, error)
+        validate(output, MonitorLogsOutput.schema)
+
+    @parameterized.expand(
+        [
+            [
+                "scheme_and_top_level_domain",
+                {},
+                {},
+                Util.read_file_to_dict("expected/monitor_logs.json.exp"),
+                STUB_STATE_EXPECTED,
+                True,
+                200,
+                None,
+            ],
+        ]
+    )
+    def test_monitor_logs_invalid_subdomain(
+        self,
+        mock_request,
+        test_name,
+        state,
+        custom_config,
+        expected_output,
+        expected_state,
+        expected_has_more_pages,
+        expected_status_code,
+        expected_error,
+    ):
+        task = Util.default_connector(
+            MonitorLogs(),
+            {ConnectionInput.INSTANCE: "https://rapid7.sentinelone.net", ConnectionInput.APIKEY: {"secretKey": "test"}},
+        )
+        output, state, has_more_pages, status_code, error = task.run(
             params={}, state=state, custom_config=custom_config
         )
         self.assertEqual(expected_output, output)
