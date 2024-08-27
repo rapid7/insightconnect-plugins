@@ -2011,7 +2011,7 @@ Example output:
 
 # Version History
 
-* 1.0.1 - `Create Incident`: Changed required for `status` to False. Updated action to remove `responded` when `status` is set.
+* 1.1.0 - `Create Incident`: Changed required for `status` to False. Updated action to remove `responded` when `status` is set.
 * 1.0.0 - Initial plugin | Add List Incidents, Create Incident, Get Incident by ID, Get Incident by Number, Update Incident by ID, Update Incident by Number, List Operators, List Operator Groups, List Suppliers, List Locations and Branches actions
 
 # Links
