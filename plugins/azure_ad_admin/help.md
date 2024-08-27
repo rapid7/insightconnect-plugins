@@ -576,6 +576,46 @@ Example output:
 }
 ```
 
+#### List Group Members
+
+This action is used to get a list of the group's direct members. A group can have users, organizational contacts, 
+devices, service principals and other groups as members
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|group_id|string|None|True|ID of group to search for|None|bb4d41d4-eb13-4a33-99b5-7d7290df22e9|None|None|
+  
+Example input:
+
+```
+{
+  "group_id": "bb4d41d4-eb13-4a33-99b5-7d7290df22e9"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|count|integer|False|Count of members in group|5|
+|members|[]member|False|Members|[{"id": "11111111-2222-3333-4444-555555555555", "mail": "user1@example.com"}]|
+  
+Example output:
+
+```
+{
+  "count": 5,
+  "members": [
+    {
+      "id": "11111111-2222-3333-4444-555555555555",
+      "mail": "user1@example.com"
+    }
+  ]
+}
+```
+
 #### Remove User from Group
 
 This action is used to remove a user from a group
@@ -1048,6 +1088,13 @@ Example output:
 |Registration Date Time|string|None|False|Date and time of when the device was registered. The timestamp type represents date and time information using ISO 8601 format and is always in UTC time|2014-01-01 00:00:00+00:00|
 |System Labels|[]string|None|False|List of labels applied to the device by the system|["test"]|
 |Trust Type|string|None|False|Type of trust for the joined device|Workplace|
+  
+**member**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|string|None|False|ID of member|11111111-2222-3333-4444-555555555555|
+|mail|string|None|False|User email address|user@example.com|
 
 
 ## Troubleshooting
@@ -1056,6 +1103,7 @@ Trigger `risk_detection` needs Application permission to set as `IdentityRiskEve
 
 # Version History
 
+* 4.2.0 - New action | List Group Members
 * 4.1.2 - Updated SDK to the latest version | Added additional details in requirements section | `Risk Detection`: Fixed issue where detections were triggered randomly
 * 4.1.1 - Update requirements in help.md
 * 4.1.0 - New actions Enable Device, Disable Device, Get Device, Search Device, Delete Device
