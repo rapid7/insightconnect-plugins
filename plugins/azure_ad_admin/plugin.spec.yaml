@@ -953,8 +953,8 @@ types:
       type: string
       required: false
       example: 11111111-2222-3333-4444-555555555555
-    name:
-      title: mail
+    email:
+      title: Email
       description: User email address
       type: string
       required: false

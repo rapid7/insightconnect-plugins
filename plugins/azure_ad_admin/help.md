@@ -1093,8 +1093,8 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
+|Email|string|None|False|User email address|user@example.com|
 |ID|string|None|False|ID of member|11111111-2222-3333-4444-555555555555|
-|mail|string|None|False|User email address|user@example.com|
 
 
 ## Troubleshooting

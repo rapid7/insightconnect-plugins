@@ -73,9 +73,9 @@ class ListGroupMembersOutput(insightconnect_plugin_runtime.Output):
           "description": "ID of member",
           "order": 1
         },
-        "name": {
+        "email": {
           "type": "string",
-          "title": "mail",
+          "title": "Email",
           "description": "User email address",
           "order": 2
         }
