@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="topdesk-rapid7-plugin",
-      version="1.0.0",
+      version="1.1.0",
       description="TopDesk is a cloud ticketing system that focuses on ease of use and extensibility",
       author="rapid7",
       author_email="",
