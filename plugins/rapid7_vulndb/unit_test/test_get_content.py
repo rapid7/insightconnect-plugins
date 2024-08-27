@@ -1,21 +1,20 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
+from unittest.mock import MagicMock, patch
+
 from insightconnect_plugin_runtime.exceptions import PluginException
-from unittest.mock import patch
-from komand_rapid7_vulndb.actions.get_content import GetContent
-from komand_rapid7_vulndb.actions.get_content.schema import Input, GetContentInput, GetContentOutput
 from jsonschema import validate
-from mock import (
-    mock_request,
-)
+from komand_rapid7_vulndb.actions.get_content import GetContent
+from komand_rapid7_vulndb.actions.get_content.schema import GetContentInput, GetContentOutput, Input
+
+from mock import mock_request
 
 
 class TestGetContent(TestCase):
-    @classmethod
-    def setUpClass(self) -> None:
+    def setUp(self) -> None:
         self.params = {
             "identifier": "3395856ce81f2b7382dee72602f798b642f14140-cve",
             "identifier_404": "4416967df92g3c8493eff83513g819c753g23241-cve",
@@ -28,7 +27,7 @@ class TestGetContent(TestCase):
         self.action = GetContent()
 
     @patch("requests.get", side_effect=mock_request)
-    def test_get_content(self, mock_req):
+    def test_get_content(self, mock_requests: MagicMock) -> None:
 
         input_data = {Input.IDENTIFIER: self.params.get("identifier")}
         validate(input_data, GetContentInput.schema)
@@ -47,12 +46,14 @@ class TestGetContent(TestCase):
         }
         self.assertEqual(actual, expected)
         validate(actual, GetContentOutput.schema)
+        mock_requests.assert_called()
 
     @patch("requests.get", side_effect=mock_request)
-    def test_get_content_error(self, mock_req):
+    def test_get_content_error(self, mock_requests: MagicMock) -> None:
         for error, identifier, expected in self.params_list:
             with self.assertRaises(PluginException) as exception:
                 input_data = {Input.IDENTIFIER: identifier}
                 validate(input_data, GetContentInput.schema)
                 self.action.run(input_data)
             self.assertEqual(exception.exception.cause, expected)
+        mock_requests.assert_called()
