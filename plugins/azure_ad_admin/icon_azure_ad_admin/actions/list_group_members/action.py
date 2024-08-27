@@ -50,6 +50,13 @@ class ListGroupMembers(insightconnect_plugin_runtime.Action):
             member_count = result.get(
                 "@odata.count", len(members)
             )  # Fallback to len(members) if @odata.count is missing
+
+            # Replace NULL values with empty strings in member attributes
+            for member in members:
+                for key, value in member.items():
+                    if value is None:
+                        member[key] = ""
+
         except ValueError:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON)
 
