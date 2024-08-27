@@ -113,7 +113,7 @@ characters to `\uffd` or `?`. While ignore will drop the character from the outp
 
 # Version History
 
-* 1.1.7 - Updated SDK to the latest version
+* 1.1.7 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 1.1.6 - Update to v4 Python plugin runtime
 * 1.1.5 - Improve PluginException message in Decode action
 * 1.1.4 - Add example inputs
