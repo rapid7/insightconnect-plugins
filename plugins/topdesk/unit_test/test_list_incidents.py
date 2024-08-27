@@ -7,7 +7,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
-from unit_test.util import Util
+from util import Util
 from parameterized import parameterized
 from icon_topdesk.actions.listIncidents import ListIncidents
 from icon_topdesk.util.constants import Cause, Assistance

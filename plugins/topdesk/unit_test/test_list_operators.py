@@ -5,7 +5,7 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from icon_topdesk.actions.listOperators import ListOperators
-from unit_test.util import Util
+from util import Util
 from unittest.mock import patch
 from parameterized import parameterized
 
