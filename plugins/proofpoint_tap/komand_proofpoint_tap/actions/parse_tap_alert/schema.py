@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Parses a TAP alert"
+    DESCRIPTION = "Parse a TAP alert"
 
 
 class Input:
