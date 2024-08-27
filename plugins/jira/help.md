@@ -725,8 +725,8 @@ Example output:
 
 
 ## Troubleshooting
-  
-*This plugin does not contain a troubleshooting.*
+
+The Jira plugin supports cloud and on-premise versions of Jira Software, Jira Server, and Jira ServiceDesk products from Atlassian. Please note only Jira cloud is supported on ICON cloud
 
 # Version History
 
