@@ -137,9 +137,9 @@ class SalesforceAPI:
         next_records_url = response.get("nextRecordsUrl")
         return {
             "records": response.get("records", []),
-            "next_page_id": next_records_url[next_records_url.index("query") + len("query") :]
-            if next_records_url
-            else None,
+            "next_page_id": (
+                next_records_url[next_records_url.index("query") + len("query") :] if next_records_url else None
+            ),
         }
 
     def get_updated_users(self, parameters: dict) -> dict:

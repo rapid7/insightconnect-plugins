@@ -532,10 +532,11 @@ Example output:
 
 ## Troubleshooting
   
-*There is no troubleshooting for this plugin.*
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 2.1.9 - SDK Bump to 6.1.0 | Task Connection test added
 * 2.1.8 - Task Monitor Users: Allow lookback to be 7 days and initial run to be 24 hours & raise PluginException for API errors.
 * 2.1.7 - Task Monitor Users: Update connection to accept instance URL and force new token request per execution.
 * 2.1.6 - Task Monitor Users: Implement SDK 5.4.4 for custom_config parameter.
