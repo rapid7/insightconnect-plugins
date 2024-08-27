@@ -30,5 +30,4 @@ class CreateIncident(insightconnect_plugin_runtime.Action):
         if parameters.get("status", ""):
             parameters["status"] = INCIDENT_STATUS.get(params.get(Input.STATUS))
 
-        self.logger.info(f"Creating an incident with the following parameters: \n{parameters}\n")
         return {Output.INCIDENT: self.connection.api_client.create_incident(parameters)}
