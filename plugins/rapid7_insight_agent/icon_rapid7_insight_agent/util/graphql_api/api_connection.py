@@ -338,6 +338,7 @@ class ApiConnection:
         """
         start_time = datetime.now()
         agents = []
+        agent = None
         has_next_page = True
         if not next_cursor:
             payload = {
