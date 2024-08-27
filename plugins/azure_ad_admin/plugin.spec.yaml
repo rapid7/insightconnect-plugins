@@ -946,19 +946,6 @@ types:
       type: string
       required: false
       example: Workplace
-  member:
-    id:
-      title: ID
-      description: ID of member
-      type: string
-      required: false
-      example: 11111111-2222-3333-4444-555555555555
-    email:
-      title: Email
-      description: User email address
-      type: string
-      required: false
-      example: user@example.com
 
 connection:
   tenant_id:
@@ -1398,9 +1385,9 @@ actions:
       members:
         title: Members
         description: Members
-        type: "[]member"
+        type: "[]user_information"
         required: false
-        example: [{"id": "11111111-2222-3333-4444-555555555555", "mail": "user1@example.com"}]
+        example: '[{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#users/$entity","businessPhones":[],"displayName":"Joey McAdams","givenName":"Joey","jobTitle":"Sr. Software Engineer","mail":"","mobilePhone":"","officeLocation":"","preferredLanguage":"","surname":"McAdams","userPrincipalName":"user@example.com","id":"08290005-23ba-46b4-a377-b381d651a2fb","accountEnabled":true}]'
       count:
         title: Count
         description: Count of members in group

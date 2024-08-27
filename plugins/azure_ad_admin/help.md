@@ -600,7 +600,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |count|integer|False|Count of members in group|5|
-|members|[]member|False|Members|[{"id": "11111111-2222-3333-4444-555555555555", "mail": "user1@example.com"}]|
+|members|[]user_information|False|Members|[{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#users/$entity","businessPhones":[],"displayName":"Joey McAdams","givenName":"Joey","jobTitle":"Sr. Software Engineer","mail":"","mobilePhone":"","officeLocation":"","preferredLanguage":"","surname":"McAdams","userPrincipalName":"user@example.com","id":"08290005-23ba-46b4-a377-b381d651a2fb","accountEnabled":true}]|
   
 Example output:
 
@@ -609,8 +609,19 @@ Example output:
   "count": 5,
   "members": [
     {
-      "id": "11111111-2222-3333-4444-555555555555",
-      "mail": "user1@example.com"
+      "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+      "accountEnabled": true,
+      "businessPhones": [],
+      "displayName": "Joey McAdams",
+      "givenName": "Joey",
+      "id": "08290005-23ba-46b4-a377-b381d651a2fb",
+      "jobTitle": "Sr. Software Engineer",
+      "mail": "",
+      "mobilePhone": "",
+      "officeLocation": "",
+      "preferredLanguage": "",
+      "surname": "McAdams",
+      "userPrincipalName": "user@example.com"
     }
   ]
 }
@@ -1088,13 +1099,6 @@ Example output:
 |Registration Date Time|string|None|False|Date and time of when the device was registered. The timestamp type represents date and time information using ISO 8601 format and is always in UTC time|2014-01-01 00:00:00+00:00|
 |System Labels|[]string|None|False|List of labels applied to the device by the system|["test"]|
 |Trust Type|string|None|False|Type of trust for the joined device|Workplace|
-  
-**member**
-
-|Name|Type|Default|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- |
-|Email|string|None|False|User email address|user@example.com|
-|ID|string|None|False|ID of member|11111111-2222-3333-4444-555555555555|
 
 
 ## Troubleshooting

@@ -2,6 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import ListGroupMembersInput, ListGroupMembersOutput, Input, Output, Component
 
 # Custom imports below
+import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
@@ -21,10 +22,14 @@ class ListGroupMembers(insightconnect_plugin_runtime.Action):
         url = f"https://graph.microsoft.com/v1.0/groups/{group_id}/members?$count=true"
 
         # Add ConsistencyLevel header for counting
-        headers = self.connection.get_headers()
+        headers = self.connection.get_headers(self.connection.get_auth_token())
         headers["ConsistencyLevel"] = "eventual"
 
-        response = self.connection.session.get(url, headers=headers)
+        response = requests.request(
+            method="GET",
+            url=url,
+            headers=headers,
+        )
 
         if response.status_code == 404:
             raise PluginException(
