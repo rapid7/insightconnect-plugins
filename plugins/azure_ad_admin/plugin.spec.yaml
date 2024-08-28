@@ -4,7 +4,7 @@ products: [insightconnect]
 name: azure_ad_admin
 title: Azure AD Admin
 description: Perform administrative operations in Azure AD
-version: 4.1.2
+version: 4.2.0
 connection_version: 4
 vendor: rapid7
 cloud_ready: true
@@ -13,7 +13,7 @@ supported_versions: ["2022-05-30"]
 status: []
 sdk:
   type: slim
-  version: 5.5.5
+  version: 6.1.0
   user: nobody
 key_features:
   - Add and remove users
@@ -35,6 +35,7 @@ requirements:
   Browse and select your application and click `Add`."
 troubleshooting: "Trigger `risk_detection` needs Application permission to set as `IdentityRiskEvent.Read.All`"
 version_history:
+  - "4.2.0 - New action | List Group Members"
   - "4.1.2 - Updated SDK to the latest version | Added additional details in requirements section | `Risk Detection`: Fixed issue where detections were triggered randomly"
   - "4.1.1 - Update requirements in help.md"
   - "4.1.0 - New actions Enable Device, Disable Device, Get Device, Search Device, Delete Device"
@@ -1370,6 +1371,29 @@ actions:
         type: "[]device"
         required: false
         example: '[{"id":"9de5069c-5afe-602b-2ea0-a04b66beb2c0","accountEnabled":true,"approximateLastSignInDateTime":"2020-06-20T21:15:48Z","createdDateTime":"2020-06-10T23:11:21Z","deviceId":"9de5069c-5afe-602b-2ea0-a04b66beb2c0","deviceOwnership":"Company","deviceVersion":2,"displayName":"DESKTOP-D10L83K","enrollmentType":"AzureDomainJoined","exchangeActiveSyncIds":["eas:415F14BD1A98FEA919DF00327EA5DC81:9de5069c-5afe-602b-2ea0-a04b66beb2c0:20200610T231818"],"isCompliant":false,"isManaged":true,"isRooted":false,"managementType":"MDM","manufacturer":"innotek GmbH","mdmAppId":"0000000a-0000-0000-c000-000000000000","model":"VirtualBox","operatingSystem":"Windows","operatingSystemVersion":"10.0.19041.329","physicalIds":["[USER-GID]:9de5069c-5afe-602b-2ea0-a04b66beb2c0:6755416654410028","[GID]:g:6755416654410028","[USER-HWID]:9de5069c-5afe-602b-2ea0-a04b66beb2c0:6755416654410025","[HWID]:h:6755416654410025"],"profileType":"RegisteredDevice","registrationDateTime":"2020-06-10T23:11:20Z","systemLabels":[],"trustType":"AzureAd","alternativeSecurityIds":[{"type":2,"key":"WAA1ADAAOQA6ADwAUwBIAEEAM"}]}]'
+  list_group_members:
+    title: List Group Members
+    description: Get a list of the group's direct members. A group can have users, organizational contacts, devices, service principals and other groups as members
+    input:
+      group_id:
+        title: Group ID
+        description: ID of group to search for
+        type: string
+        required: true
+        example: bb4d41d4-eb13-4a33-99b5-7d7290df22e9
+    output:
+      members:
+        title: Members
+        description: Members
+        type: "[]user_information"
+        required: false
+        example: '[{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#users/$entity","businessPhones":[],"displayName":"Joey McAdams","givenName":"Joey","jobTitle":"Sr. Software Engineer","mail":"","mobilePhone":"","officeLocation":"","preferredLanguage":"","surname":"McAdams","userPrincipalName":"user@example.com","id":"08290005-23ba-46b4-a377-b381d651a2fb","accountEnabled":true}]'
+      count:
+        title: Count
+        description: Count of members in group
+        type: integer
+        required: false
+        example: 5
 triggers:
   risk_detection:
     title: Risk Detection

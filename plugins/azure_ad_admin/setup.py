@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="azure_ad_admin-rapid7-plugin",
-      version="4.1.2",
+      version="4.2.0",
       description="Perform administrative operations in Azure AD",
       author="rapid7",
       author_email="",
