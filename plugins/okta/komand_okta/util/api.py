@@ -200,10 +200,11 @@ class OktaAPI:
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
         except requests.exceptions.ConnectionError as error:
-            raise PluginException(
+            raise ApiException(
                 cause="The connection has failed, perhaps due to an invalid subdomain.",
                 assistance="Please ensure the subdomain conforms to these potential formats: \n./*.okta.com ./*.oktapreview.com ./*.okta-emea.com",
                 data=error,
+                status_code=401,
             )
         except requests.exceptions.HTTPError as error:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
