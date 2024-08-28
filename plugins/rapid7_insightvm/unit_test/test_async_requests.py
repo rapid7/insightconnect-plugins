@@ -1,12 +1,13 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest import TestCase
-from komand_rapid7_insightvm.util import async_requests
 import asyncio
 import json
+from unittest import TestCase
+
+from komand_rapid7_insightvm.util import async_requests
 
 
 class MockResponse:
