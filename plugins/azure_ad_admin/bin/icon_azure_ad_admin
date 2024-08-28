@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Azure AD Admin"
 Vendor = "rapid7"
-Version = "4.1.2"
+Version = "4.2.0"
 Description = "Perform administrative operations in Azure AD"
 
 
@@ -69,6 +69,8 @@ def main():
             self.add_action(actions.GetDevice())
         
             self.add_action(actions.SearchDevice())
+        
+            self.add_action(actions.ListGroupMembers())
         
 
     """Run plugin"""
