@@ -1,7 +1,7 @@
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from .schema import FindEventInput, FindEventOutput
+from .schema import FindEventInput, FindEventOutput, Input, Output, Component
 
 # Custom imports below
 
@@ -10,7 +10,7 @@ class FindEvent(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="find_event",
-            description="Receive events based on criteria",
+            description=Component.DESCRIPTION,
             input=FindEventInput(),
             output=FindEventOutput(),
         )
@@ -18,27 +18,30 @@ class FindEvent(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         client = self.connection.client
         try:
-            event = client.get_event(params.get("event_id"))
+            event = client.get_event(params.get(Input.EVENT_ID))
 
+        except Exception as error:
+            self.logger.error(f"Event %s not found or failure occurred {error}")
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=error)
+
+        try:
             if isinstance(event, dict):
-                # Example of when event is not found
-                # {
-                #    "message": "Invalid event.",
-                #    "url": "/events/23423432",
-                #    "errors": [ "Invalid event." ],
-                #    "name": "Invalid event."
-                # }
-                if "Event" not in event:
-                    if "message" in event:
-                        message = event.pop("message")
-                        errors = event.pop("errors")
-                else:
+                if "Event" in event:
                     message = "Event found."
                     errors = ["No errors."]
+                else:
+                    errors = event.get("errors")
+                    for field in errors:
+                        if isinstance(field, dict) and "Invalid event" in field.get("message"):
+                            message = field.pop("message")
+                            self.logger.info(f"Invalid event message: {message}")
+                            errors = [event.pop("errors")]
+                    raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=errors)
+
             else:
                 raise PluginException(preset=PluginException.Preset.BAD_REQUEST)
-        except:
-            self.logger.error("Event %s not found or failure occurred", params.get("event_id"))
-            raise PluginException(preset=PluginException.Preset.NOT_FOUND)
+        except Exception as error:
+            self.logger.error(f"Event %s not found or failure occurred {error}")
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=error)
 
-        return {"event": event.get("Event"), "message": message, "errors": errors}
+        return {Output.EVENT: event.get("Event"), Output.MESSAGE: message, Output.ERRORS: errors}

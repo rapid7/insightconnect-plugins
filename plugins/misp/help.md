@@ -1,35 +1,33 @@
 # Description
 
-[MISP](http://www.misp-project.org/) is an open source threat sharing platform.
-Gather, store and then find correlations of indicators of compromise. Quality of data is determined by the open source community.
-This plugin utilizes the [MISP API](https://circl.lu/doc/misp/automation/index.html) and leverages the [pymisp](https://github.com/CIRCL/PyMISP) library.
+[MISP](http://www.misp-project.org/) is an open source threat sharing platform. Gather, store and then find correlations of indicators of compromise. Quality of data is determined by the open source community. This plugin utilizes the [MISP API](https://circl.lu/doc/misp/automation/index.html) and leverages the [pymisp](https://github.com/CIRCL/PyMISP) library
 
 # Key Features
 
 * Library of known threats
-* Global sharing platform of know threats
+* Global sharing platform of known threats
 
 # Requirements
 
 * MISP server
-* Username and Password
+* Automation key for MISP server (found under Automation -> API key section in MISP server)
 
 # Supported Product Versions
-  
-* 2.4.187
+
+* 2.4.194
 
 # Documentation
 
 ## Setup
-  
+
 The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|automation_code|credential_secret_key|None|True|API/Automation code of MISP server|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|ssl|boolean|True|True|If true will use SSL for communication to MISP|None|True|
-|url|string|None|True|URL of the MISP server e.g. https://misp-2-4.example.com|None|https://example.com|
-  
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|automation_code|credential_secret_key|None|True|API/Automation code of MISP server|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
+|ssl|boolean|True|True|If true will use SSL for communication to MISP|None|True|None|None|
+|url|string|None|True|URL of the MISP server e.g. https://example.com|None|https://example.com|None|None|
+
 Example input:
 
 ```
@@ -45,55 +43,19 @@ Example input:
 ### Actions
 
 
-#### Add Attachment
-  
-This action is used to add attachment to event
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|attachment|bytes|None|True|Attachment for event|None|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|
-|event|string|None|True|Event ID to append to|None|1099|
-|filename|string|None|False|Filename of attachment|None|setup.exe|
-  
-Example input:
-
-```
-{
-  "attachment": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==",
-  "event": 1099,
-  "filename": "setup.exe"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- |
-|status|boolean|False|Status of add attachment|True|
-  
-Example output:
-
-```
-{
-  "status": true
-}
-```
-
 #### Add Attribute
-  
+
 This action is used to add an attribute to an event
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|category|string|None|True|The attribute category e.g. external analysis, network activity|None|Example category|
-|comment|string|None|False|Optional comment to add to attribute|None|Example comment|
-|event|string|None|True|ID of event to append to|None|1099|
-|type_value|string|None|True|The Type of attribute e.g. URL, SHA256|None|URL|
-|value|string|None|True|The Value of the attribute e.g. for a URL https://malware.com|None|https://example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|category|string|None|True|The attribute category e.g. external analysis, network activity|None|Example category|None|None|
+|comment|string|None|False|Optional comment to add to attribute|None|Example comment|None|None|
+|event|string|None|True|ID of event to append to|None|1099|None|None|
+|type_value|string|None|True|The Type of attribute e.g. URL, SHA256|None|URL|None|None|
+|value|string|None|True|The Value of the attribute e.g. for a URL|None|https://example.com|None|None|
   
 Example input:
 
@@ -111,7 +73,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|attribute|attribute|False|A summary of the added attribute|{'id': '173007', 'event_id': '777', 'category': 'Network activity', 'type': 'url', 'value1': 'https://malware.com', 'value2': '', 'to_ids': False, 'uuid': '5b05a903-f35c-42aa-8ed2-64d60a041dcd', 'timestamp': '1527097603', 'distribution': '0', 'sharing_group_id': '0', 'comment': 'this is a test', 'deleted': False, 'disable_correlation': False, 'value': 'https://malware.com'}|
+|attribute|attribute|False|A summary of the added attribute|{'id': '173007', 'event_id': '777', 'category': 'Network activity', 'type': 'url', 'value1': 'https://example.com', 'value2': '', 'to_ids': False, 'uuid': '5b05a903-f35c-42aa-8ed2-64d60a041dcd', 'timestamp': '1527097603', 'distribution': '0', 'sharing_group_id': '0', 'comment': 'this is a test', 'deleted': False, 'disable_correlation': False, 'value': 'https://malware.com'}|
   
 Example output:
 
@@ -131,35 +93,35 @@ Example output:
     "type": "url",
     "uuid": "5b05a903-f35c-42aa-8ed2-64d60a041dcd",
     "value": "https://malware.com",
-    "value1": "https://malware.com",
+    "value1": "https://example.com",
     "value2": ""
   }
 }
 ```
 
-#### Add Context
-  
-This action is used to add context
+#### Add Sighting
+
+This action is used to add a sighting to attribute
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|comment|comment_input|None|True|Comment|None|Example comment|
-|link|link_input|None|True|Link|None|Example link|
-|other|other_input|None|True|Other|None|Example|
-|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|False|
-|text|text_input|None|True|Text|None|Example text|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|Time|string|None|False|The time of the sighting to be added to the attribute (if none is provided it will default to now)|None|15:00:00|None|None|
+|attribute|integer|None|True|The ID of the attribute to add the sighting to|None|10|None|None|
+|date|string|None|False|The date of the sighting to be added to the attribute (if none is provided it will default to now)|None|2024-08-20|None|None|
+|source|string|None|False|The source of the sighting to be added to the attribute|None|honeypot|None|None|
+|type|string|None|True|The type of sighting to be added to the attribute|["Sighting", "False-positive", "Expiration"]|Sighting|None|None|
   
 Example input:
 
 ```
 {
-  "comment": "Example comment",
-  "link": "Example link",
-  "other": "Example",
-  "proposal": false,
-  "text": "Example text"
+  "Time": "15:00:00",
+  "attribute": 10,
+  "date": "2024-08-20",
+  "source": "honeypot",
+  "type": "Sighting"
 }
 ```
 
@@ -167,180 +129,26 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|status|boolean|False|Context add status|True|
+|sighting|object|False|Whether any of the sightings provided were added|True|
   
 Example output:
 
 ```
 {
-  "status": true
-}
-```
-
-#### Add Email Recipient
-  
-This action is used to add email recipient to event
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|comment|string|None|True|Attribute comment|None|Example comment|
-|distribution|string|None|True|Distribution type|["This Community", "This Organization", "Connected Communities", "All Communities"]|All Communities|
-|event|string|None|True|Event ID to append to|None|1099|
-|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|False|
-|recipient|string|None|True|Recipient email address|None|user@example.com|
-  
-Example input:
-
-```
-{
-  "comment": "Example comment",
-  "distribution": "All Communities",
-  "event": 1099,
-  "proposal": false,
-  "recipient": "user@example.com"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- |
-|status|boolean|True|Email recipient add status|True|
-  
-Example output:
-
-```
-{
-  "status": true
-}
-```
-
-#### Add Email Sender
-  
-This action is used to add email sender to event
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|comment|string|None|True|Attribute comment|None|Example comment|
-|distribution|string|None|True|Distribution type|["This Community", "This Organization", "Connected Communities", "All Communities"]|All Communities|
-|event|string|None|True|Event ID to append to|None|1099|
-|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|False|
-|sender|string|None|True|Sender email address|None|user@example.com|
-  
-Example input:
-
-```
-{
-  "comment": "Example comment",
-  "distribution": "All Communities",
-  "event": 1099,
-  "proposal": false,
-  "sender": "user@example.com"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- |
-|status|boolean|True|Email sender add status|True|
-  
-Example output:
-
-```
-{
-  "status": true
-}
-```
-
-#### Add Email Subject
-  
-This action is used to add email subject to event
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|comment|string|None|True|Attribute comment|None|Example comment|
-|distribution|string|None|True|Distribution type|["This Community", "This Organization", "Connected Communities", "All Communities"]|All Communities|
-|event|string|None|True|Event ID to append to|None|1099|
-|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|False|
-|subject|string|None|True|Email subject|None|Example subject|
-  
-Example input:
-
-```
-{
-  "comment": "Example comment",
-  "distribution": "All Communities",
-  "event": 1099,
-  "proposal": false,
-  "subject": "Example subject"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- |
-|status|boolean|True|Email subject add status|True|
-  
-Example output:
-
-```
-{
-  "status": true
-}
-```
-
-#### Add Sightings
-  
-This action is used to add sightings to organization
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|sightings|[]string|None|True|Event sightings E.g. sighting, false-positive, expiration|None|["sighting"]|
-  
-Example input:
-
-```
-{
-  "sightings": [
-    "sighting"
-  ]
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- |
-|status|boolean|False|Sightings add status|True|
-  
-Example output:
-
-```
-{
-  "status": true
+  "sighting": true
 }
 ```
 
 #### Add Tag
-  
+
 This action is used to add tag
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|event|string|None|True|Event ID to append to|None|1099|
-|tag|string|None|True|Event tag to add|None|Example tag|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|event|string|None|True|Event ID to append to|None|1099|None|None|
+|tag|string|None|True|Event tag to add|None|Example tag|None|None|
   
 Example input:
 
@@ -365,64 +173,21 @@ Example output:
 }
 ```
 
-#### Add URLs
-  
-This action is used to add URLs to event
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|comment|string|None|False|Attribute comment|None|Example comment|
-|distribution|string|None|False|Distribution type|["This Community", "This Organization", "Connected Communities", "All Communities"]|All Communities|
-|event|string|None|False|Event ID to append to|None|1099|
-|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|False|
-|urls|[]string|None|False|URLs to add|None|["https://example.com"]|
-  
-Example input:
-
-```
-{
-  "comment": "Example comment",
-  "distribution": "All Communities",
-  "event": 1099,
-  "proposal": false,
-  "urls": [
-    "https://example.com"
-  ]
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- |
-|status|boolean|False|URL add status|True|
-  
-Example output:
-
-```
-{
-  "status": true
-}
-```
-
 #### Create Event
-  
+
 This action is used to create a MISP event
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|analysis|string|0|False|The analysis level of the event|["2", "1", "0"]|0|
-|distribution|string|This Organization|False|Distribution type|["This Community", "This Organization", "Connected Communities", "All Communities"]|This Organization|
-|info|string|None|True|Extra event information|None|Example information|
-|org_id|string|None|False|Organization ID|None|12345|
-|orgc_id|string|None|False|Organization C ID|None|12345|
-|published|boolean|True|True|Published event?|None|True|
-|sharing_group_id|string|None|False|Sharing group ID|None|1|
-|threat_level_id|string|1|True|Importance of the threat|["4", "3", "2", "1"]|1|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|analysis|string|0|False|The analysis level of the event|["2", "1", "0"]|0|None|None|
+|distribution|string|This Organization|False|Distribution type|["This Community", "This Organization", "Connected Communities", "All Communities"]|This Organization|None|None|
+|info|string|None|True|Extra event information|None|Example information|None|None|
+|org_id|string|None|False|Organization ID|None|12345|None|None|
+|orgc_id|string|None|False|Organization C ID|None|12345|None|None|
+|sharing_group_id|string|None|False|Sharing group ID|None|1|None|None|
+|threat_level_id|string|1|True|Importance of the threat|["4", "3", "2", "1"]|1|None|None|
   
 Example input:
 
@@ -433,7 +198,6 @@ Example input:
   "info": "Example information",
   "org_id": 12345,
   "orgc_id": 12345,
-  "published": true,
   "sharing_group_id": 1,
   "threat_level_id": 1
 }
@@ -491,55 +255,23 @@ Example output:
 }
 ```
 
-#### Download Attachment
-  
-This action is used to download attachment
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|attribute_id|string|None|True|Attribute ID of attachment or malware sample|None|1|
-  
-Example input:
-
-```
-{
-  "attribute_id": 1
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- |
-|attachment|bytes|False|Attachment|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|
-  
-Example output:
-
-```
-{
-  "attachment": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
-}
-```
-
 #### Export Attributes
-  
+
 This action is used to export all attributes in CSV format
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|category|string|None|False|Attribute category|None|Example attribute category|
-|event_id|[]string|None|False|Array of events to download|None|["1"]|
-|from|string|None|False|From date E.g. 2015-02-15|None|2015-02-15|
-|include|boolean|True|True|Include attributes not marked as to_ids|None|True|
-|include_context|boolean|True|True|Include event data with each attribute|None|True|
-|last|string|None|False|Events within x amount of time E.g. 5d|None|5d|
-|tags|[]string|None|False|Array of tags to include in results|None|["tag"]|
-|to|string|None|False|To date E.g. 2015-02-17|None|2015-02-17|
-|type|string|None|False|Attribute type e.g. URL, SHA256|None|URL|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|category|string|None|False|Attribute category|None|Example attribute category|None|None|
+|event_id|[]string|None|False|Array of events to download|None|["1"]|None|None|
+|from|string|None|False|From date E.g. 2015-02-15T00:00:00|None|2015-02-15T00:00:00|None|None|
+|include|boolean|True|True|Include attributes not marked as to_ids|None|True|None|None|
+|include_context|boolean|True|True|Include event data with each attribute|None|True|None|None|
+|last|string|None|False|Events within x amount of time E.g. 5d|None|5d|None|None|
+|tags|[]string|None|False|Array of tags to include in results|None|["tag"]|None|None|
+|to|string|None|False|To date E.g. 2015-02-17T00:00:00|None|2015-02-17T00:00:00|None|None|
+|type|string|None|False|Attribute type e.g. URL, SHA256|None|URL|None|None|
   
 Example input:
 
@@ -576,19 +308,19 @@ Example output:
 ```
 
 #### Export Events
-  
+
 This action is used to export all events in XML format
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|encode_attachments|boolean|True|True|Encode attachments in export|None|True|
-|event_id|string|None|False|Specify single event to export|None|1099|
-|from|string|None|False|From date E.g. 2015-02-15|None|2015-02-15|
-|last|string|None|False|Events within x amount of time E.g. 5d|None|5d|
-|tags|[]string|None|False|Array of tags to include in results|None|["tag"]|
-|to|string|None|False|To date E.g. 2015-02-17|None|2015-02-17|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|encode_attachments|boolean|True|True|Encode attachments in export|None|True|None|None|
+|event_id|string|None|False|Specify single event to export|None|1099|None|None|
+|from|string|None|False|From date E.g. 2015-02-15T00:00:00|None|2015-02-15T00:00:00|None|None|
+|last|string|None|False|Events within x amount of time E.g. 5d|None|5d|None|None|
+|tags|[]string|None|False|Array of tags to include in results|None|["tag"]|None|None|
+|to|string|None|False|To date E.g. 2015-02-17T00:00:00|None|2015-02-17T00:00:00|None|None|
   
 Example input:
 
@@ -619,71 +351,29 @@ Example output:
 }
 ```
 
-#### Export Hashes
-  
-This action is used to export hashes from HIDS database
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|format|string|None|True|Export format as either MD5 or SHA1|["md5", "sha1"]|md5|
-|from|string|None|False|From date E.g. 2015-02-15|None|2015-02-15|
-|last|string|None|False|Events within x amount of time E.g. 5d|None|5d|
-|tags|[]string|None|False|Array of tags to include in results|None|["example tag"]|
-|to|string|None|False|To date E.g. 2015-02-17|None|2015-02-17|
-  
-Example input:
-
-```
-{
-  "format": "md5",
-  "from": "2015-02-15",
-  "last": "5d",
-  "tags": [
-    "example tag"
-  ],
-  "to": "2015-02-17"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- |
-|hashes|bytes|False|Hashes|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|
-  
-Example output:
-
-```
-{
-  "hashes": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
-}
-```
-
 #### Export RPZ
-  
+
 This action is used to export RPZ zone files
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|event_id|string|None|False|Specify single event to export|None|1099|
-|from|string|None|False|From date E.g. 2015-02-15|None|2015-02-15|
-|tags|[]string|None|False|Array of tags to include in results|None|["example tag"]|
-|to|string|None|False|To date E.g. 2015-02-17|None|2015-02-17|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|event_id|string|None|False|Specify single event to export|None|1099|None|None|
+|from_date|string|None|False|From date E.g. 2015-02-15T00:00:00|None|2015-02-15T00:00:00|None|None|
+|tags|[]string|None|False|Array of tags to include in results|None|["example tag"]|None|None|
+|to_date|string|None|False|To date E.g. 2015-02-17T00:00:00|None|2015-02-17T00:00:00|None|None|
   
 Example input:
 
 ```
 {
   "event_id": 1099,
-  "from": "2015-02-15",
+  "from_date": "2015-02-15",
   "tags": [
     "example tag"
   ],
-  "to": "2015-02-17"
+  "to_date": "2015-02-17"
 }
 ```
 
@@ -702,20 +392,20 @@ Example output:
 ```
 
 #### Rules Export
-  
+
 This action is used to export Snort or Suricata rules
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|event_id|string|None|False|Narrow results to a single event|None|1099|
-|format|string|None|True|Export format as either Suricata or Snort|["suricata", "snort"]|suricata|
-|frame|boolean|True|True|Commented out explanation framing the data|None|True|
-|from|string|None|False|From date E.g. 2015-02-15|None|2015-02-15|
-|last|string|None|False|Events within x amount of time E.g. 5d|None|5d|
-|tags|[]string|None|False|Array of tags to include in results|None|["example tag"]|
-|to|string|None|False|To date E.g. 2015-02-17|None|2015-02-17|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|event_id|string|None|False|Narrow results to a single event|None|1099|None|None|
+|format|string|None|True|Export format as either Suricata or Snort|["suricata", "snort"]|suricata|None|None|
+|frame|boolean|True|True|Commented out explanation framing the data|None|True|None|None|
+|from|string|None|False|From date E.g. 2015-02-15T00:00:00|None|2015-02-15T00:00:00|None|None|
+|last|string|None|False|Events within x amount of time E.g. 5d|None|5d|None|None|
+|tags|[]string|None|False|Array of tags to include in results|None|["example tag"]|None|None|
+|to|string|None|False|To date E.g. 2015-02-17T00:00:00|None|2015-02-17T00:00:00|None|None|
   
 Example input:
 
@@ -748,19 +438,19 @@ Example output:
 ```
 
 #### Export STIX
-  
+
 This action is used to export events in STIX format
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|encode_attachments|boolean|True|True|Encode attachments in export|None|True|
-|event_id|string|None|False|Specify single event to export|None|1099|
-|from|string|None|False|From date E.g. 2015-02-15|None|2015-02-15|
-|last|string|None|False|Events within x amount of time E.g. 5d|None|5d|
-|tags|[]string|None|False|Array of tags to include in results|None|["example tag"]|
-|to|string|None|False|To date E.g. 2015-02-17|None|2015-02-17|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|encode_attachments|boolean|True|True|Encode attachments in export|None|True|None|None|
+|event_id|string|None|False|Specify single event to export|None|1099|None|None|
+|from|string|None|False|From date E.g. 2015-02-15T00:00:00|None|2015-02-15T00:00:00|None|None|
+|last|string|None|False|Events within x amount of time E.g. 5d|None|5d|None|None|
+|tags|[]string|None|False|Array of tags to include in results|None|["example tag"]|None|None|
+|to|string|None|False|To date E.g. 2015-02-17T00:00:00|None|2015-02-17T00:00:00|None|None|
   
 Example input:
 
@@ -792,14 +482,14 @@ Example output:
 ```
 
 #### Find Event
-  
+
 This action is used to receive events based on criteria
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|event_id|string|None|True|Event ID e.g. 123|None|1099|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|event_id|string|None|True|Event ID e.g. 123|None|1099|None|None|
   
 Example input:
 
@@ -905,14 +595,14 @@ Example output:
 ```
 
 #### Publish
-  
+
 This action is used to publish an event
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|event|string|None|False|Search by event ID|None|1099|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|event|string|None|False|Search by event ID|None|1099|None|None|
   
 Example input:
 
@@ -942,15 +632,15 @@ Example output:
 ```
 
 #### Remove Tag
-  
+
 This action is used to remove tag
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|event|string|None|True|Event ID to append to|None|1099|
-|tag|string|None|True|Event tag for search|None|Example tag|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|event|string|None|True|Event ID to append to|None|1099|None|None|
+|tag|string|None|True|Event tag for search|None|Example tag|None|None|
   
 Example input:
 
@@ -976,24 +666,24 @@ Example output:
 ```
 
 #### Search Events
-  
+
 This action is used to search for events
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|analysis|string|Do not search on|False|Search by analysis level|["Do not search on", "Initial", "Ongoing", "Completed"]|Do not search on|
-|category|string|None|False|Search by attribute category|None|Person|
-|date_from|string|None|False|Search after this date e.g. 2018-03-22|None|2018-03-22|
-|date_until|string|None|False|Search before this date e.g. 2018-03-22|None|2018-03-22|
-|event|string|None|False|Search by event ID|None|1099|
-|organization|string|None|False|Search by organization|None|Organization name|
-|published|string|Do not search on|False|Search by if published|["Do not search on", "True", "False"]|Do not search on|
-|tag|string|None|False|Search by tag|None|tag|
-|threat_level|string|Do not search on|False|Search by threat level|["Do not search on", "Undefined", "Low", "Medium", "High"]|Do not search on|
-|type_attribute|string|None|False|Search by any valid MISP attribute type|None|text|
-|values|[]string|None|False|Search by given values of attributes value field|None|["example_one", "example_two"]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|analysis|string|Do not search on|False|Search by analysis level|["Do not search on", "Initial", "Ongoing", "Completed"]|Do not search on|None|None|
+|category|string|None|False|Search by attribute category|None|Person|None|None|
+|date_from|string|None|False|Search after this date e.g. 2018-03-22T00:00:00|None|2018-03-22T00:00:00|None|None|
+|date_until|string|None|False|Search before this date e.g. 2018-03-22T00:00:00|None|2018-03-22T00:00:00|None|None|
+|event|string|None|False|Search by event ID|None|1099|None|None|
+|organization|string|None|False|Search by organization|None|Organization name|None|None|
+|published|string|Do not search on|False|Search by if published|["Do not search on", "True", "False"]|Do not search on|None|None|
+|tag|string|None|False|Search by tag|None|tag|None|None|
+|threat_level|string|Do not search on|False|Search by threat level|["Do not search on", "Undefined", "Low", "Medium", "High"]|Do not search on|None|None|
+|type_attribute|string|None|False|Search by any valid MISP attribute type|None|text|None|None|
+|values|[]string|None|False|Search by given values of attributes value field|None|["example_one", "example_two"]|None|None|
   
 Example input:
 
@@ -1036,16 +726,16 @@ Example output:
 
 
 #### Search for Tag
-  
+
 This trigger is used to this trigger will search MISP for any events with a specified tag
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|interval|integer|60|True|How frequently (in seconds) to trigger a search|None|60|
-|remove|boolean|False|True|If true the tag will be removed|None|False|
-|tag|string|None|True|The tag to search for|None|Example tag|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|interval|integer|60|True|How frequently (in seconds) to trigger a search|None|60|None|None|
+|remove|boolean|False|True|If true the tag will be removed|None|False|None|None|
+|tag|string|None|True|The tag to search for|None|Example tag|None|None|
   
 Example input:
 
@@ -1225,12 +915,13 @@ Example output:
 
 ## Troubleshooting
   
-*There is no troubleshooting for this plugin.*
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
-* 5.0.3 - SSL configuration for all actions  
-* 5.0.2 - Update to latest SDK | Bumping `pymisp` version 
+* 6.0.0 - Removed deprecated actions and updated API calls for several actions
+* 5.0.3 - SSL configuration for all actions
+* 5.0.2 - Update to latest SDK | Bumping `pymisp` version
 * 5.0.1 - Set default value for fields `analysis`, `published`, `threat_level` in Search Events action | Update insight connect SDK to 4
 * 5.0.0 - New fields added to Search Events action for `values`, `category` and `type_attribute`
 * 4.0.0 - New spec and help.md format for the Extension Library | Fix spelling of variable titled Commented Explanation

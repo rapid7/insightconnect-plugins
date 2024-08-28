@@ -3,17 +3,45 @@ extension: plugin
 products: [insightconnect]
 name: misp
 title: MISP
-description: MISP is an open source threat sharing platform
-version: 5.0.3
+description: "[MISP](http://www.misp-project.org/) is an open source threat sharing platform. Gather, store and then find correlations of indicators of compromise. Quality of data is determined by the open source community. This plugin utilizes the [MISP API](https://circl.lu/doc/misp/automation/index.html) and leverages the [pymisp](https://github.com/CIRCL/PyMISP) library"
+version: 6.0.0
 connection_version: 5
 sdk:
   type: slim
-  version: 5
+  version: 6.1.0
   user: nobody
 vendor: rapid7
 support: community
-supported_versions: ["2.4.187"]
+supported_versions: ["2.4.194"]
 status: []
+requirements:
+  - MISP server
+  - "Automation key for MISP server (found under Automation -> API key section in MISP server)"
+key_features:
+  - Library of known threats
+  - Global sharing platform of known threats
+links:
+  - "[MISP](http://www.misp-project.org/)"
+references:
+  - "[MISP](http://www.misp-project.org/)"
+  - "[MISP API](https://circl.lu/doc/misp/automation/index.html)"
+  - "[pymisp](https://github.com/MISP/PyMISP)"
+version_history:
+  - "6.0.0 - Removed deprecated actions and updated API calls for several actions"
+  - "5.0.3 - SSL configuration for all actions"
+  - "5.0.2 - Update to latest SDK | Bumping `pymisp` version"
+  - "5.0.1 - Set default value for fields `analysis`, `published`, `threat_level` in Search Events action | Update insight connect SDK to 4"
+  - "5.0.0 - New fields added to Search Events action for `values`, `category` and `type_attribute`"
+  - "4.0.0 - New spec and help.md format for the Extension Library | Fix spelling of variable titled Commented Explanation"
+  - "3.0.0 - Fixed issue where Add URLs, Add Context, Add Email Sender, Add Email Subject and Add Email Recipient actions sent requests as a proposal | Fixed an issue where the distribution list was set incorrectly within Add URLs, Add Context, Create an Event, Add Email Sender, Add Email Subject, Add Email Recipient actions"
+  - "2.0.0 - Updated to new credential types | Update `hostname` variable in Connection to `url`"
+  - "1.0.0 - Add trigger. Add actions: Add Attachment, Remove Tag, Search Events, Publish. Support web server mode"
+  - "0.4.1 - Bug fix for CI tool incorrectly uploading plugins"
+  - "0.4.0 - Added add attachment feature | Update to v2 architecture"
+  - "0.3.0 - Add Find Event action"
+  - "0.2.1 - SSL bug fix in SDK"
+  - "0.2.0 - 8 new actions to add data to MISP: Add Email Recipient, Add Email Sender, Add Email Subject, Add Sightings, Add Tag, Add Context, Add URL, and Create An Event"
+  - "0.1.0 - Initial plugin"
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/misp
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -378,7 +406,7 @@ types:
 connection:
   url:
     title: URL
-    description: URL of the MISP server e.g. https://misp-2-4.example.com
+    description: URL of the MISP server e.g. https://example.com
     example: "https://example.com"
     type: string
     required: true
@@ -472,13 +500,6 @@ actions:
         description: Extra event information
         example: "Example information"
         type: string
-        required: true
-      published:
-        title: Published
-        description: Published event?
-        example: true
-        default: true
-        type: boolean
         required: true
       orgc_id:
         title: Organization C ID
@@ -619,280 +640,49 @@ actions:
         type: boolean
         required: false
         example: true
-  add_attachment:
-    title: Add Attachment
-    description: Add attachment to event
+  add_sighting:
+    title: Add Sighting
+    description: Add a sighting to attribute
     input:
-      event:
-        title: Event ID
-        description: Event ID to append to
-        example: "1099"
+      attribute:
+        title: Attribute
+        description: The ID of the attribute to add the sighting to
+        type: integer
+        required: True
+        example: 10
+      type:
+        title: Type
+        description: The type of sighting to be added to the attribute  
         type: string
         required: true
-      attachment:
-        title: Attachment
-        description: Attachment for event
-        example: "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
-        type: bytes
-        required: true
-      filename:
-        title: Filename
-        description: Filename of attachment
-        example: "setup.exe"
-        type: string
-        required: false
-    output:
-      status:
-        title: Status
-        description: Status of add attachment
-        type: boolean
-        required: false
-        example: true
-  add_urls:
-    title: Add URLs
-    description: Add URLs to event
-    input:
-      event:
-        title: Event ID
-        description: Event ID to append to
-        example: "1099"
-        type: string
-        required: false
-      urls:
-        title: URLs
-        description: URLs to add
-        example: ["https://example.com"]
-        type: '[]string'
-        required: false
-      comment:
-        title: Comment
-        description: Attribute comment
-        example: "Example comment"
-        type: string
-        required: false
-      distribution:
-        title: Distribution
-        description: Distribution type
-        example: "All Communities"
-        type: string
+        example: Sighting
         enum:
-        - This Community
-        - This Organization
-        - Connected Communities
-        - All Communities
+        - "Sighting"
+        - "False-positive"
+        - "Expiration"
+      source:
+        title: Source
+        description: The source of the sighting to be added to the attribute
+        type: string
         required: false
-      proposal:
-        title: Proposal
-        description: 'Mark request as a proposal (Default: false)'
-        example: false
-        type: boolean
-        default: false
-        required: true
-    output:
-      status:
-        title: Status
-        description: URL add status
-        type: boolean
+        example: "honeypot"
+      date:
+        title: Date
+        description: The date of the sighting to be added to the attribute (if none is provided it will default to now)
+        type: string
         required: false
-        example: true
-  add_email_recipient:
-    title: Add Email Recipient
-    description: Add email recipient to event
-    input:
-      recipient:
-        title: Recipient
-        description: Recipient email address
-        example: "user@example.com"
+        example: "2024-08-20"
+      Time:
+        title: Time
+        description: The time of the sighting to be added to the attribute (if none is provided it will default to now)
         type: string
-        required: true
-      event:
-        title: Event ID
-        description: Event ID to append to
-        example: "1099"
-        type: string
-        required: true
-      comment:
-        title: Comment
-        description: Attribute comment
-        example: "Example comment"
-        type: string
-        required: true
-      distribution:
-        title: Distribution
-        description: Distribution type
-        example: "All Communities"
-        type: string
-        enum:
-        - This Community
-        - This Organization
-        - Connected Communities
-        - All Communities
-        required: true
-      proposal:
-        title: Proposal
-        description: 'Mark request as a proposal (Default: false)'
-        example: false
-        type: boolean
-        default: false
-        required: true
-    output:
-      status:
-        title: Status
-        description: Email recipient add status
-        type: boolean
-        required: true
-        example: true
-  add_email_sender:
-    title: Add Email Sender
-    description: Add email sender to event
-    input:
-      sender:
-        title: Sender
-        description: Sender email address
-        example: "user@example.com"
-        type: string
-        required: true
-      event:
-        title: Event ID
-        description: Event ID to append to
-        example: "1099"
-        type: string
-        required: true
-      comment:
-        title: Comment
-        description: Attribute comment
-        example: "Example comment"
-        type: string
-        required: true
-      distribution:
-        title: Distribution
-        description: Distribution type
-        example: "All Communities"
-        type: string
-        enum:
-        - This Community
-        - This Organization
-        - Connected Communities
-        - All Communities
-        required: true
-      proposal:
-        title: Proposal
-        description: 'Mark request as a proposal (Default: false)'
-        example: false
-        type: boolean
-        default: false
-        required: true
-    output:
-      status:
-        title: Status
-        description: Email sender add status
-        type: boolean
-        required: true
-        example: true
-  add_email_subject:
-    title: Add Email Subject
-    description: Add email subject to event
-    input:
-      subject:
-        title: Subject
-        description: Email subject
-        example: "Example subject"
-        type: string
-        required: true
-      event:
-        title: Event ID
-        description: Event ID to append to
-        example: "1099"
-        type: string
-        required: true
-      comment:
-        title: Comment
-        description: Attribute comment
-        example: "Example comment"
-        type: string
-        required: true
-      distribution:
-        title: Distribution
-        description: Distribution type
-        example: "All Communities"
-        type: string
-        enum:
-        - This Community
-        - This Organization
-        - Connected Communities
-        - All Communities
-        required: true
-      proposal:
-        title: Proposal
-        description: 'Mark request as a proposal (Default: false)'
-        example: false
-        type: boolean
-        default: false
-        required: true
-    output:
-      status:
-        title: Status
-        description: Email subject add status
-        type: boolean
-        required: true
-        example: true
-  add_context:
-    title: Add Context
-    description: Add context
-    input:
-      comment:
-        title: Comment
-        description: Comment
-        example: "Example comment"
-        type: comment_input
-        required: true
-      link:
-        title: Link
-        description: Link
-        example: "Example link"
-        type: link_input
-        required: true
-      other:
-        title: Other
-        description: Other
-        example: "Example"
-        type: other_input
-        required: true
-      text:
-        title: Text
-        description: Text
-        example: "Example text"
-        type: text_input
-        required: true
-      proposal:
-        title: Proposal
-        description: 'Mark request as a proposal (Default: false)'
-        type: boolean
-        example: false
-        default: false
-        required: true
-    output:
-      status:
-        title: Status
-        description: Context add status
-        type: boolean
         required: false
-        example: true
-  add_sightings:
-    title: Add Sightings
-    description: Add sightings to organization
-    input:
-      sightings:
-        title: Sightings
-        description: Event sightings E.g. sighting, false-positive, expiration
-        example: ["sighting"]
-        type: '[]string'
-        required: true
+        example: "15:00:00"
     output:
-      status:
-        title: Status
-        description: Sightings add status
-        type: boolean
+      sighting:
+        title: Sighting
+        description: Whether any of the sightings provided were added
+        type: object
         required: false
         example: true
   add_tag:
@@ -1090,50 +880,6 @@ actions:
         type: bytes
         required: false
         example: "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
-  export_hashes:
-    title: Export Hashes
-    description: Export hashes from HIDS database
-    input:
-      format:
-        title: Export Format
-        description: Export format as either MD5 or SHA1
-        example: "md5"
-        type: string
-        required: true
-        enum:
-        - md5
-        - sha1
-      tags:
-        title: Tags
-        description: Array of tags to include in results
-        example: ["example tag"]
-        type: '[]string'
-        required: false
-      from:
-        title: From Date
-        description: From date E.g. 2015-02-15
-        example: "2015-02-15"
-        type: string
-        required: false
-      to:
-        title: To Date
-        description: To date E.g. 2015-02-17
-        example: "2015-02-17"
-        type: string
-        required: false
-      last:
-        title: Last Events
-        description: Events within x amount of time E.g. 5d
-        example: "5d"
-        type: string
-        required: false
-    output:
-      hashes:
-        title: Hashes
-        description: Hashes
-        type: bytes
-        required: false
-        example: "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
   export_stix:
     title: Export STIX
     description: Export events in STIX format
@@ -1198,13 +944,13 @@ actions:
         example: ["example tag"]
         type: '[]string'
         required: false
-      from:
+      from_date:
         title: From Date
         description: From date E.g. 2015-02-15
         example: "2015-02-15"
         type: string
         required: false
-      to:
+      to_date:
         title: To Date
         description: To date E.g. 2015-02-17
         example: "2015-02-17"
@@ -1214,23 +960,6 @@ actions:
       rpz:
         title: RPZ Output
         description: RPZ output
-        type: bytes
-        required: false
-        example: "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
-  download_attachment:
-    title: Download Attachment
-    description: Download attachment
-    input:
-      attribute_id:
-        title: Attribute ID
-        description: Attribute ID of attachment or malware sample
-        example: "1"
-        type: string
-        required: true
-    output:
-      attachment:
-        title: Attachment
-        description: Attachment
         type: bytes
         required: false
         example: "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
@@ -1310,7 +1039,7 @@ actions:
         required: true
       value:
         title: Value
-        description: The Value of the attribute e.g. for a URL https://malware.com
+        description: The Value of the attribute e.g. for a URL
         example: "https://example.com"
         type: string
         required: true
@@ -1326,7 +1055,7 @@ actions:
         description: A summary of the added attribute
         type: attribute
         required: false
-        example: {"id":"173007","event_id":"777","category":"Network activity","type":"url","value1":"https://malware.com","value2":"","to_ids":false,"uuid":"5b05a903-f35c-42aa-8ed2-64d60a041dcd","timestamp":"1527097603","distribution":"0","sharing_group_id":"0","comment":"this is a test","deleted":false,"disable_correlation":false,"value":"https://malware.com"}
+        example: {"id":"173007","event_id":"777","category":"Network activity","type":"url","value1":"https://example.com","value2":"","to_ids":false,"uuid":"5b05a903-f35c-42aa-8ed2-64d60a041dcd","timestamp":"1527097603","distribution":"0","sharing_group_id":"0","comment":"this is a test","deleted":false,"disable_correlation":false,"value":"https://malware.com"}
   search_events:
     title: Search Events
     description: Search for events
