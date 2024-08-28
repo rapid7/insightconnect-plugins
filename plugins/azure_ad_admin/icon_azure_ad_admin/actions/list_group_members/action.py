@@ -4,6 +4,9 @@ from .schema import ListGroupMembersInput, ListGroupMembersOutput, Input, Output
 # Custom imports below
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.helper import clean
+from ...util.api_utils import raise_for_status
+from ...util.constants import Endpoint
 
 
 class ListGroupMembers(insightconnect_plugin_runtime.Action):
@@ -19,7 +22,6 @@ class ListGroupMembers(insightconnect_plugin_runtime.Action):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         group_id = params.get(Input.GROUP_ID)
         # END INPUT BINDING - DO NOT REMOVE
-        url = f"https://graph.microsoft.com/v1.0/groups/{group_id}/members?$count=true"
 
         # Add ConsistencyLevel header for counting
         headers = self.connection.get_headers(self.connection.get_auth_token())
@@ -27,22 +29,11 @@ class ListGroupMembers(insightconnect_plugin_runtime.Action):
 
         response = requests.request(
             method="GET",
-            url=url,
+            url=Endpoint.MEMBERS.format(self.connection.tenant, group_id=group_id),
             headers=headers,
         )
 
-        if response.status_code == 404:
-            raise PluginException(
-                cause="Group not found.",
-                assistance=f"Group ID {group_id} was not found.",
-                data=response.text,
-            )
-        if not response.status_code == 200:
-            raise PluginException(
-                cause="Unexpected response from Azure AD.",
-                assistance=f"Received an unexpected response with status code {response.status_code}.",
-                data=response.text,
-            )
+        raise_for_status(response)
 
         try:
             result = response.json()
@@ -51,13 +42,7 @@ class ListGroupMembers(insightconnect_plugin_runtime.Action):
                 "@odata.count", len(members)
             )  # Fallback to len(members) if @odata.count is missing
 
-            # Replace NULL values with empty strings in member attributes
-            for member in members:
-                for key, value in member.items():
-                    if value is None:
-                        member[key] = ""
-
         except ValueError:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON)
 
-        return {Output.MEMBERS: members, Output.COUNT: member_count}
+        return {Output.MEMBERS: clean(members), Output.COUNT: member_count}
