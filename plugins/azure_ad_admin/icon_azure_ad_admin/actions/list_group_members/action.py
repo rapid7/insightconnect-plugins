@@ -8,6 +8,7 @@ from insightconnect_plugin_runtime.helper import clean
 from icon_azure_ad_admin.util.api_utils import raise_for_status
 from icon_azure_ad_admin.util.constants import Endpoint
 
+
 class ListGroupMembers(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
