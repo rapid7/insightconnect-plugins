@@ -5,9 +5,8 @@ from .schema import ListGroupMembersInput, ListGroupMembersOutput, Input, Output
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import clean
-from ...util.api_utils import raise_for_status
-from ...util.constants import Endpoint
-
+from icon_azure_ad_admin.util.api_utils import raise_for_status
+from icon_azure_ad_admin.util.constants import Endpoint
 
 class ListGroupMembers(insightconnect_plugin_runtime.Action):
     def __init__(self):
