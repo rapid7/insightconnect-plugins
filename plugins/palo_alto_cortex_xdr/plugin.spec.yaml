@@ -8,7 +8,7 @@ version: 4.0.0
 connection_version: 2
 sdk:
   type: slim
-  version: 6.0.1
+  version: 6.1.0
   user: nobody
 supported_versions: ["2024-07-15 Palo Alto Cortex XDR API"]
 vendor: rapid7
@@ -37,7 +37,7 @@ key_features:
   - "Add files to the block or allow lists"
 troubleshooting: "Isolate Endpoint fails with 500 error - This will happen if an isolation action (Isolate or Unisolate) is in progress on the selected endpoint. Wait a few minutes and try again."
 version_history:
-  - "4.0.0 - `Get Alerts`: Fixed issue where trigger was failing due to empty output fields"
+  - "4.0.0 - `Get Alerts`: Fixed issue where trigger was failing due to empty output fields | SDK Bump to 6.1.0"
   - "3.0.0 - Updated `hosts` output of `Get Incident` trigger and `Monitor Incident Events` task to separate host values | Update `insightconnect-plugin-runtime` to version 5"
   - "2.3.0 - Add types `xql_query_result` to `Get XQL Query Results` action's response | Add new trigger `Get Query Results`"
   - "2.2.1 - Fix issue in Get Incidents trigger where fields with null values were causing trigger to fail"
