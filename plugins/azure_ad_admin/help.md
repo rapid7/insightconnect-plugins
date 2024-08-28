@@ -576,6 +576,57 @@ Example output:
 }
 ```
 
+#### List Group Members
+
+This action is used to get a list of the group's direct members. A group can have users, organizational contacts, 
+devices, service principals and other groups as members
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|group_id|string|None|True|ID of group to search for|None|bb4d41d4-eb13-4a33-99b5-7d7290df22e9|None|None|
+  
+Example input:
+
+```
+{
+  "group_id": "bb4d41d4-eb13-4a33-99b5-7d7290df22e9"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|count|integer|False|Count of members in group|5|
+|members|[]user_information|False|Members|[{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#users/$entity","businessPhones":[],"displayName":"Joey McAdams","givenName":"Joey","jobTitle":"Sr. Software Engineer","mail":"","mobilePhone":"","officeLocation":"","preferredLanguage":"","surname":"McAdams","userPrincipalName":"user@example.com","id":"08290005-23ba-46b4-a377-b381d651a2fb","accountEnabled":true}]|
+  
+Example output:
+
+```
+{
+  "count": 5,
+  "members": [
+    {
+      "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+      "accountEnabled": true,
+      "businessPhones": [],
+      "displayName": "Joey McAdams",
+      "givenName": "Joey",
+      "id": "08290005-23ba-46b4-a377-b381d651a2fb",
+      "jobTitle": "Sr. Software Engineer",
+      "mail": "",
+      "mobilePhone": "",
+      "officeLocation": "",
+      "preferredLanguage": "",
+      "surname": "McAdams",
+      "userPrincipalName": "user@example.com"
+    }
+  ]
+}
+```
+
 #### Remove User from Group
 
 This action is used to remove a user from a group
@@ -1056,6 +1107,7 @@ Trigger `risk_detection` needs Application permission to set as `IdentityRiskEve
 
 # Version History
 
+* 4.2.0 - New action | List Group Members
 * 4.1.2 - Updated SDK to the latest version | Added additional details in requirements section | `Risk Detection`: Fixed issue where detections were triggered randomly
 * 4.1.1 - Update requirements in help.md
 * 4.1.0 - New actions Enable Device, Disable Device, Get Device, Search Device, Delete Device
