@@ -1,13 +1,15 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from unittest.mock import patch
-from util import Util
-from komand_rapid7_insightvm.actions.tag_assets import TagAssets
+
 from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_rapid7_insightvm.actions.tag_assets import TagAssets
+
+from util import Util
 
 
 @patch("requests.sessions.Session.put", side_effect=Util.mocked_requests)

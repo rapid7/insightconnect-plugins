@@ -10,6 +10,7 @@ from komand_rapid7_insightvm.util import async_requests
 from collections import namedtuple
 from komand_rapid7_insightvm.util import endpoints
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
+from typing import Dict, Any
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -20,7 +21,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.ssl_verify = None
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
-    def connect(self, params):
+    def connect(self, params={}) -> None:
         username = params.get(Input.CREDENTIALS, {}).get("username")
         password = params.get(Input.CREDENTIALS, {}).get("password")
         self.console_url = params.get(Input.URL)
@@ -33,7 +34,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         # Suppress insecure request messages
         urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-    def test(self):
+    def test(self) -> Dict[str, Any]:
         """
         Tests connectivity to the InsightVM Console via administrative info endpoint
         :return: Namedtuple indicating connectivity (true = success, false = fail) and error message (if one exists)

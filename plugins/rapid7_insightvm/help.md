@@ -4012,6 +4012,7 @@ Example output:
 
 # Version History
 
+* 8.0.5 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 8.0.4 - Updated SDK to the latest version | Update dependencies
 * 8.0.3 - Updated `Dockerfile` permissions from `nobody` to `root`
 * 8.0.2 - Updated SDK to the latest version | `Scan Completion`: Updated the query
