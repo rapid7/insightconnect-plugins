@@ -11,10 +11,12 @@ class GetCases(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {
-            Output.CASES: self.connection.api.get_cases(
-                from_date=params.get(Input.FROM_DATE),
-                to_date=params.get(Input.TO_DATE),
-                filter_key=params.get(Input.FILTER_KEY, "lastModifiedTime"),
-            )
-        }
+        response = self.connection.api.get_cases(
+            from_date=params.get(Input.FROM_DATE),
+            to_date=params.get(Input.TO_DATE),
+            filter_key=params.get(Input.FILTER_KEY, "lastModifiedTime"),
+        )
+        # This is a workout to SI-25434
+        if isinstance(response.get("caseId"), int):
+            response["caseId"] = str(response["caseId"])
+        return {Output.CASES: response}
