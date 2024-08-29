@@ -13,7 +13,7 @@ Using the Insight Agent plugin from InsightConnect, you can quarantine, unquaran
 
 # Supported Product Versions
 
-* Rapid7 Insight Agent 2024-08-02
+* Rapid7 Insight Agent 2024-08-23
 
 # Documentation
 
@@ -80,19 +80,21 @@ Example output:
 
 #### Get Agent Details
 
-This action is used to find and display detailed information about a device
+This action is used to find and display detailed information about a device. If additional pages of agents are available, the action should be run again with the returned next cursor
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |agent|string|None|True|IP address, MAC address, or hostname of the device to get information from|None|Example-Hostname|None|None|
+|next_cursor|string|None|False|The next page cursor to continue an existing query and search additional pages of agents|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
   
 Example input:
 
 ```
 {
-  "agent": "Example-Hostname"
+  "agent": "Example-Hostname",
+  "next_cursor": "9de5069c5afe602b2ea0a04b66beb2c0"
 }
 ```
 
@@ -100,7 +102,8 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|agent|agent|True|Agent information|{"id":"ExampleID","platform":"windows","publicIpAddress":"192.168.0.1","host":{"vendor":"Microsoft","version":"10","description":"ExampleDescription","hostNames":[{"name":"ExampleHostname"}],"primaryAddress":{"ip":"12.43.13.43","mac":""},"uniqueIdentity":[],"attributes":[]},"agent_info":{"agentSemanticVersion":"ExampleVersion","agentStatus":"STALE","quarantineState":{"currentState":"QUARANTINED"}}}|
+|agent|agent|False|Agent information|{"id":"ExampleID","platform":"windows","publicIpAddress":"192.168.0.1","host":{"vendor":"Microsoft","version":"10","description":"ExampleDescription","hostNames":[{"name":"ExampleHostname"}],"primaryAddress":{"ip":"12.43.13.43","mac":""},"uniqueIdentity":[],"attributes":[]},"agent_info":{"agentSemanticVersion":"ExampleVersion","agentStatus":"STALE","quarantineState":{"currentState":"QUARANTINED"}}}|
+|next_cursor|string|False|The next page cursor, if available, to continue the query and search additional pages of agents|9de5069c5afe602b2ea0a04b66beb2c0|
   
 Example output:
 
@@ -133,25 +136,28 @@ Example output:
     "id": "ExampleID",
     "platform": "windows",
     "publicIpAddress": "192.168.0.1"
-  }
+  },
+  "next_cursor": "9de5069c5afe602b2ea0a04b66beb2c0"
 }
 ```
 
 #### Get All Agents by IP Address
 
-This action is used to find all agents that share the same public or private IP address and display details about them
+This action is used to find all agents that share the same public or private IP address and display details about them. If additional pages of agents are available, the action should be run again with the returned next cursor
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |ip_address|string|None|True|The public or private IP address for all the agents to be searched for|None|192.168.0.1|None|None|
+|next_cursor|string|None|False|The next page cursor to continue an existing query and search additional pages of agents|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
   
 Example input:
 
 ```
 {
-  "ip_address": "192.168.0.1"
+  "ip_address": "192.168.0.1",
+  "next_cursor": "9de5069c5afe602b2ea0a04b66beb2c0"
 }
 ```
 
@@ -159,7 +165,8 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|agents|[]agent|True|The list of all found agents|[[{"id":"ExampleID1","platform":"linux","publicIpAddress":"192.168.0.2","host":{"vendor":"Ubuntu","version":"20.04","description":"ExampleDescription1","hostNames":[{"name":"ExampleHostname1"}],"primaryAddress":{"ip":"10.20.30.40","mac":"00:11:22:33:44:55"},"uniqueIdentity":["1234567890"],"attributes":["attribute1","attribute2"]},"agent_info":{"agentSemanticVersion":"ExampleVersion1","agentStatus":"ACTIVE","quarantineState":{"currentState":"QUARANTINED"}}},{"id":"ExampleID2","platform":"mac","publicIpAddress":"192.168.0.3","host":{"vendor":"Apple","version":"11","description":"ExampleDescription2","hostNames":[{"name":"ExampleHostname2"}],"primaryAddress":{"ip":"50.60.70.80","mac":"AA:BB:CC:DD:EE:FF"},"uniqueIdentity":["0987654321"],"attributes":["attribute3","attribute4"]},"agent_info":{"agentSemanticVersion":"ExampleVersion2","agentStatus":"INACTIVE","quarantineState":{"currentState":"QUARANTINED"}}},{"id":"ExampleID3","platform":"windows","publicIpAddress":"192.168.0.4","host":{"vendor":"Microsoft","version":"11","description":"ExampleDescription3","hostNames":[{"name":"ExampleHostname3"}],"primaryAddress":{"ip":"90.80.70.60","mac":"11:22:33:44:55:66"},"uniqueIdentity":["2468135790"],"attributes":["attribute5","attribute6"]},"agent_info":{"agentSemanticVersion":"ExampleVersion3","agentStatus":"STALE","quarantineState":{"currentState":"QUARANTINED"}}}]]|
+|agents|[]agent|False|The list of all found agents|[[{"id":"ExampleID1","platform":"linux","publicIpAddress":"192.168.0.2","host":{"vendor":"Ubuntu","version":"20.04","description":"ExampleDescription1","hostNames":[{"name":"ExampleHostname1"}],"primaryAddress":{"ip":"10.20.30.40","mac":"00:11:22:33:44:55"},"uniqueIdentity":["1234567890"],"attributes":["attribute1","attribute2"]},"agent_info":{"agentSemanticVersion":"ExampleVersion1","agentStatus":"ACTIVE","quarantineState":{"currentState":"QUARANTINED"}}},{"id":"ExampleID2","platform":"mac","publicIpAddress":"192.168.0.3","host":{"vendor":"Apple","version":"11","description":"ExampleDescription2","hostNames":[{"name":"ExampleHostname2"}],"primaryAddress":{"ip":"50.60.70.80","mac":"AA:BB:CC:DD:EE:FF"},"uniqueIdentity":["0987654321"],"attributes":["attribute3","attribute4"]},"agent_info":{"agentSemanticVersion":"ExampleVersion2","agentStatus":"INACTIVE","quarantineState":{"currentState":"QUARANTINED"}}},{"id":"ExampleID3","platform":"windows","publicIpAddress":"192.168.0.4","host":{"vendor":"Microsoft","version":"11","description":"ExampleDescription3","hostNames":[{"name":"ExampleHostname3"}],"primaryAddress":{"ip":"90.80.70.60","mac":"11:22:33:44:55:66"},"uniqueIdentity":["2468135790"],"attributes":["attribute5","attribute6"]},"agent_info":{"agentSemanticVersion":"ExampleVersion3","agentStatus":"STALE","quarantineState":{"currentState":"QUARANTINED"}}}]]|
+|next_cursor|string|False|The next page cursor, if available, to continue the query and search additional pages of agents|9de5069c5afe602b2ea0a04b66beb2c0|
   
 Example output:
 
@@ -267,7 +274,8 @@ Example output:
         "publicIpAddress": "192.168.0.4"
       }
     ]
-  ]
+  ],
+  "next_cursor": "9de5069c5afe602b2ea0a04b66beb2c0"
 }
 ```
 
@@ -446,11 +454,12 @@ Example output:
 
 
 ## Troubleshooting
-  
-*There is no troubleshooting for this plugin.*
+
+If the actions `Get Agent Details` and `Get All Agents by IP` return a `next cursor` value, it is an indication that more pages of data are available to be reviewed. In this instance, it is recommended to run the action multiple times and pass the `next cursor` value, recording all agents found.
 
 # Version History
 
+* 3.0.0 - Update `Get Agent Details` and `Get All Agents by IP` to return the next page token if more pages are available to search | Update `Get Agent Details` to return agent location details | Initial updates for fedramp compliance | Updated SDK to the latest version
 * 2.1.2 - Improve logging | Update SDK
 * 2.1.1 - `Get All Agents by IP Address`: Fixed issue where action failed when agent did not have a primary address, and extended output to include agent location details | `Get Agent Details`: Extended output to include agent's public IP address and location
 * 2.1.0 - Updated SDK to the latest version | New action added `Get All Agents by IP Address`

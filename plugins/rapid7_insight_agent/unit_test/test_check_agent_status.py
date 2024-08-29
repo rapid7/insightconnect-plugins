@@ -7,10 +7,10 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from jsonschema import validate
 
 sys.path.append(os.path.abspath("../"))
+from util import Util
+
 from icon_rapid7_insight_agent.actions.check_agent_status.action import CheckAgentStatus
 from icon_rapid7_insight_agent.actions.check_agent_status.schema import Input
-
-from util import Util
 
 
 @patch("requests.sessions.Session.post", side_effect=Util.mocked_request)

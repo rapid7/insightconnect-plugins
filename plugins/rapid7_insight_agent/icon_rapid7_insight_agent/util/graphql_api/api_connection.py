@@ -2,11 +2,14 @@ import logging
 from typing import Optional, List, Tuple, Dict, Any
 
 import requests
+from datetime import datetime, timedelta
 
 from icon_rapid7_insight_agent.util.graphql_api import agent_typer
 from icon_rapid7_insight_agent.util.graphql_api.region_map import region_map
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 from insightconnect_plugin_runtime.helper import clean
+
+TIMEOUT_MINUTES = 3
 
 
 class ApiConnection:
@@ -24,7 +27,7 @@ class ApiConnection:
         self.logger = logger
         self._setup(region_string)
 
-    def get_agent(self, agent_input: str) -> dict:
+    def get_agent(self, agent_input: str, next_cursor: str) -> dict:
         """
         Find an agent based on a MAC address, IP address, or hostname
 
@@ -33,8 +36,7 @@ class ApiConnection:
         """
 
         agent_type = agent_typer.get_agent_type(agent_input)
-        agent = self._get_agent(agent_input, agent_type)
-        return agent
+        return self._get_agent(agent_input, agent_type, next_cursor)
 
     def quarantine(self, advertisement_period: int, agent_id: str) -> bool:
         """
@@ -262,34 +264,52 @@ class ApiConnection:
 
         return endpoint
 
-    def get_agents_by_ip(self, ip_address: str) -> List[Dict[str, Any]]:
+    def get_agents_by_ip(self, ip_address: str, next_cursor: str = None) -> List[Dict[str, Any]]:
+        start_time = datetime.now()
         agents = []
-        payload = {
-            "query": "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }",
-            "variables": {"orgId": self.org_key},
-        }
+        has_next_page = True
+        if not next_cursor:
+            payload = {
+                "query": "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress location { city region countryName countryCode continent } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }",
+                "variables": {"orgId": self.org_key},
+            }
 
-        self.logger.info(f"Getting all agents by IP: {ip_address}...")
-        results_object = self._post_payload(payload)
-
-        has_next_page = (
-            results_object.get("data", {})
-            .get("organization", {})
-            .get("assets", {})
-            .get("pageInfo", {})
-            .get("hasNextPage")
-        )
-        agents.extend(self._get_agents_from_result_object(results_object))
-        self.logger.info("Initial agents received.")
-
-        # See if we have more pages of data, if so get next page and append until we reach the end
-        self.logger.info(f"Extra pages of agents: {has_next_page}")
+            self.logger.info(f"Getting first page of agents by IP: {ip_address}...")
+            results_object = self._post_payload(payload)
+            agents.extend(self._get_agents_from_result_object(results_object))
+            self.logger.info("Initial agents received.")
+            has_next_page = (
+                results_object.get("data", {})
+                .get("organization", {})
+                .get("assets", {})
+                .get("pageInfo", {})
+                .get("hasNextPage")
+            )
+            next_cursor = (
+                results_object.get("data", {})
+                .get("organization", {})
+                .get("assets", {})
+                .get("pageInfo", {})
+                .get("endCursor")
+            )
         while has_next_page:
-            has_next_page, results_object, next_agents = self._get_next_page_of_agents(results_object)
+            current_time = datetime.now()
+            if (current_time - start_time) > timedelta(minutes=TIMEOUT_MINUTES):
+                self.logger.info("List of agents is too long, action will time out.")
+                self.logger.info("More pages are available, please use the next cursor value to requery.")
+                self.logger.info("Returning results...")
+                return self._filter_agents(agents, ip_address), next_cursor
+            # See if we have more pages of data, if so get next page and append until we reach the end
+            self.logger.info(f"Extra pages of agents: {has_next_page}")
+            has_next_page, next_cursor, next_agents = self._get_next_page_of_agents(next_cursor)
             agents.extend(next_agents)
 
         # Filter and return agents
+        self.logger.info("No more pages are available and query has completed.")
         self.logger.info("Returning results...")
+        return self._filter_agents(agents, ip_address), None
+
+    def _filter_agents(self, agents: List, ip_address: str) -> List:
         filtered_agents = list(
             filter(
                 lambda agent_: any(
@@ -307,7 +327,7 @@ class ApiConnection:
             agent["agent_info"] = agent.pop("agent")
         return filtered_agents
 
-    def _get_agent(self, agent_input: str, agent_type: str) -> dict:
+    def _get_agent(self, agent_input: str, agent_type: str, next_cursor: str = None) -> dict:
         """
         Gets an agent by MAC address, IP address, or hostname.
 
@@ -315,6 +335,63 @@ class ApiConnection:
         :param agent_type: Is the agent input a MAC, IP_ADDRESS, or HOSTNAME
 
         :return: dict
+        """
+        start_time = datetime.now()
+        agents = []
+        agent = None
+        has_next_page = True
+        if not next_cursor:
+            payload = {
+                "query": "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress location { city region countryName countryCode continent } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }",
+                "variables": {"orgId": self.org_key},
+            }
+            self.logger.info("Getting first page of agents...")
+            results_object = self._post_payload(payload)
+
+            agents.extend(self._get_agents_from_result_object(results_object))
+            self.logger.info("Initial agents received.")
+
+            agent = self._find_agent_in_agents(agents, agent_input, agent_type)
+            # See if we have more pages of data, if so get next page and append until we reach the end
+            has_next_page = (
+                results_object.get("data", {})
+                .get("organization", {})
+                .get("assets", {})
+                .get("pageInfo", {})
+                .get("hasNextPage")
+            )
+            next_cursor = (
+                results_object.get("data", {})
+                .get("organization", {})
+                .get("assets", {})
+                .get("pageInfo", {})
+                .get("endCursor")
+            )
+        while agent is None and has_next_page:
+            current_time = datetime.now()
+            if (current_time - start_time) > timedelta(minutes=TIMEOUT_MINUTES):
+                self.logger.info("List of agents is too long, action will time out.")
+                self.logger.info("More pages are available, please use the next cursor value to requery.")
+                self.logger.info("Returning results...")
+                return agent, next_cursor
+
+            self.logger.info(f"Extra pages of agents: {has_next_page}")
+            self.logger.info("Getting next page of agents.")
+            has_next_page, next_cursor, next_agents = self._get_next_page_of_agents(next_cursor)
+            agent = self._find_agent_in_agents(next_agents, agent_input, agent_type)
+        if agent:
+            return agent, None
+        else:
+            raise PluginException(
+                cause=f"Could not find agent matching {agent_input} of type {agent_type}. No more pages of data.",
+                assistance="Check the agent input value and try again.",
+            )
+
+    def _get_agents(self, agents_input: List[str]) -> [Tuple[str, dict]]:
+        """
+        Get multiple agents by MAC address, IP address, or hostname.
+        :param agents_input: MAC address, IP address or hostnames
+        :return: List of found hostname and agent details, list of agent hostnames now found
         """
         agents = []
         payload = {
@@ -325,50 +402,14 @@ class ApiConnection:
         self.logger.info("Getting all agents...")
         results_object = self._post_payload(payload)
 
-        has_next_page = (
+        has_next_page = results_object.get("data").get("organization").get("assets").get("pageInfo").get("hasNextPage")
+        next_cursor = (
             results_object.get("data", {})
             .get("organization", {})
             .get("assets", {})
             .get("pageInfo", {})
-            .get("hasNextPage")
+            .get("endCursor")
         )
-        agents.extend(self._get_agents_from_result_object(results_object))
-        self.logger.info("Initial agents received.")
-
-        agent = self._find_agent_in_agents(agents, agent_input, agent_type)
-        if agent:
-            return agent
-
-        # See if we have more pages of data, if so get next page and append until we reach the end
-        self.logger.info(f"Extra pages of agents: {has_next_page}")
-        while has_next_page:
-            self.logger.info("Getting next page of agents.")
-            has_next_page, results_object, next_agents = self._get_next_page_of_agents(results_object)
-            agent = self._find_agent_in_agents(next_agents, agent_input, agent_type)
-            if agent:
-                return agent
-
-        raise PluginException(
-            cause=f"Could not find agent matching {agent_input} of type {agent_type}.",
-            assistance="Check the agent input value and try again.",
-        )
-
-    def _get_agents(self, agents_input: List[str]) -> [Tuple[str, dict]]:
-        """
-        Get multiple agents by MAC address, IP address, or hostname.
-        :param agents_input: MAC address, IP address or hostnames
-        :return: List of found hostname and agent details, list of agent hostnames now found
-        """
-        agents = []
-        payload = {
-            "query": "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }",
-            "variables": {"orgId": self.org_key},
-        }
-
-        self.logger.info("Getting all agents...")
-        results_object = self._post_payload(payload)
-
-        has_next_page = results_object.get("data").get("organization").get("assets").get("pageInfo").get("hasNextPage")
         agents.extend(self._get_agents_from_result_object(results_object))
         found_agents = []
         self.logger.info("Initial agents received.")
@@ -381,7 +422,7 @@ class ApiConnection:
         self.logger.info(f"Extra pages of agents: {has_next_page}")
         if agents_input:
             while has_next_page:
-                has_next_page, results_object, next_agents = self._get_next_page_of_agents(results_object)
+                has_next_page, next_cursor, next_agents = self._get_next_page_of_agents(next_cursor)
                 for agent_input in agents_input:
                     agent = self._find_agent_in_agents(next_agents, agent_input, "Host Name")
                     if agent:
@@ -389,27 +430,39 @@ class ApiConnection:
                         agents_input.remove(agent_input)
         return found_agents
 
-    def _get_next_page_of_agents(self, results_object: dict) -> (bool, dict, list):
+    def _get_next_page_of_agents(self, next_cursor: str) -> (bool, dict, list):
         """
         In the case of multiple pages of returned agents, this will go through each page and append
         those agents to the agents list
 
-        :param results_object: dict
-        :return: tuple (boolean, dict (results), list (agents))
+        :param next_cursor: str
+        :return: tuple (boolean, str, list (agents))
         """
-        next_cursor = results_object.get("data").get("organization").get("assets").get("pageInfo").get("endCursor")
         self.logger.info(f"Getting next page of agents using cursor {next_cursor}")
         payload = {
-            "query": "query( $orgId:String! $nextCursor:String! ) { organization(id: $orgId) { assets( first: 10000, after: $nextCursor ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }",
+            "query": "query( $orgId:String! $nextCursor:String! ) { organization(id: $orgId) { assets( first: 10000, after: $nextCursor ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress location { city region countryName countryCode continent } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }",
             "variables": {"orgId": self.org_key, "nextCursor": next_cursor},
         }
         results_object = self._post_payload(payload)
 
-        has_next_page = results_object.get("data").get("organization").get("assets").get("pageInfo").get("hasNextPage")
+        has_next_page = (
+            results_object.get("data", {})
+            .get("organization", {})
+            .get("assets", {})
+            .get("pageInfo", {})
+            .get("hasNextPage")
+        )
+        next_cursor = (
+            results_object.get("data", {})
+            .get("organization", {})
+            .get("assets", {})
+            .get("pageInfo", {})
+            .get("endCursor")
+        )
 
         next_agents = self._get_agents_from_result_object(results_object)
 
-        return has_next_page, results_object, next_agents
+        return has_next_page, next_cursor, next_agents
 
     def _find_agent_in_agents(self, agents: [dict], agent_input: str, agent_type: str) -> Optional[dict]:  # noqa: C901
         """
