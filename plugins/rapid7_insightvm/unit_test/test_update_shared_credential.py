@@ -1,16 +1,17 @@
-import sys
 import os
+import sys
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 from parameterized import parameterized
 
-
 sys.path.append(os.path.abspath("../"))
+
+from unittest import TestCase
+from unittest.mock import patch
 
 from komand_rapid7_insightvm.actions import UpdateSharedCredential
 from komand_rapid7_insightvm.actions.update_shared_credential.schema import Input
-from unittest import TestCase
-from unittest.mock import patch
+
 from util import Util
 
 

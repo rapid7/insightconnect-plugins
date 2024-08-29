@@ -1,15 +1,17 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from unittest.mock import patch
-from util import Util
+
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_rapid7_insightvm.actions.get_asset_vulnerabilities import GetAssetVulnerabilities
 from komand_rapid7_insightvm.actions.get_asset_vulnerabilities.schema import Input
 from parameterized import parameterized
-from insightconnect_plugin_runtime.exceptions import PluginException
+
+from util import Util
 
 
 @patch("aiohttp.client.ClientSession.request", side_effect=Util.mocked_async_requests)
