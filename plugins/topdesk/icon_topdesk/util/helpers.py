@@ -29,9 +29,8 @@ def prepare_incident_payload(parameters: dict) -> dict:
 
     payload = {}
     for key, value in parameters.items():
-        if key == "status":
-            if value != "":
-                is_status = True
+        if key == "status" and value != "":
+            is_status = True
 
         if key in INCIDENT_FIELDS_WITH_ITEM_ID:
             payload[key] = {"id": value}
