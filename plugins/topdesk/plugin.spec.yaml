@@ -2571,3 +2571,4 @@ actions:
         type: '[]location'
         required: false
         example: [ { "id":"44d88612-fea8-a8f3-6de8-2e1278abb021", "name":"1st Floor", "branch":{ "id":"44d88612-fea8-a8f3-6de8-2e1278abb021", "name":"Example Branch" } } ]
+        

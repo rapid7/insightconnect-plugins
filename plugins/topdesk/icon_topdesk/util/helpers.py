@@ -25,8 +25,14 @@ def clean(item_to_clean: Union[dict, list]) -> Union[dict, list]:
 
 
 def prepare_incident_payload(parameters: dict) -> dict:
+    is_status = False
+
     payload = {}
     for key, value in parameters.items():
+        if key == "status":
+            if value != "":
+                is_status = True
+
         if key in INCIDENT_FIELDS_WITH_ITEM_ID:
             payload[key] = {"id": value}
         elif key in INCIDENT_FIELDS_WITH_ITEM_NAME:
@@ -40,16 +46,7 @@ def prepare_incident_payload(parameters: dict) -> dict:
         elif key not in SKIP_FIELDS:
             payload[key] = value
 
-    payload = prepare_responded(payload)
-    return clean(payload)
-
-
-def prepare_responded(parameters: dict) -> dict:
-    is_status = False
-    for key, value in parameters.items():
-        if key == "status":
-            if value != "":
-                is_status = True
     if is_status:
-        del parameters["responded"]
-    return parameters
+        del payload["responded"]
+
+    return clean(payload)
