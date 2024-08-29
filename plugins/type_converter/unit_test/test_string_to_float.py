@@ -1,13 +1,14 @@
-import sys
 import os
+import sys
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../icon_type_converter/"))
 
-from unittest import TestCase
-from icon_type_converter.actions.string_to_float import StringToFloat
 import logging
+from unittest import TestCase
+
+from icon_type_converter.actions.string_to_float import StringToFloat
 
 
 class TestStringToFloat(TestCase):

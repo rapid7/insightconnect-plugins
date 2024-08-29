@@ -4,190 +4,230 @@ products: ["insightconnect"]
 name: type_converter
 title: Type Converter
 description: Type Converter is a utility plugin for converting data types within a Rapid7 InsightConnect workflow
-version: 1.8.2
+version: 1.8.3
+connection_version: 1
 vendor: rapid7
 support: rapid7
 status: []
 cloud_ready: true
+fedramp_ready: true
+supported_versions: ["2024-08-29"]
 resources:
   vendor_url: https://www.rapid7.com/
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/type_converter
 tags:
-- utilities
-- type
-- cast
+  - utilities
+  - type
+  - cast
 hub_tags:
   use_cases: [data_utility]
   keywords: [utilities, type, cast, cloud_enabled]
   features: []
+sdk:
+  type: slim
+  version: 6.1.0
+  user: nobody
+key_features:
+  - Convert arrays, booleans, integers, numbers, objects, and strings from one type to another to easily retype any variable
+version_history:
+  - "1.8.3 - Initial updates for fedramp compliance | Updated SDK to the latest version"
+  - "1.8.2 - Updated error handling for string_to_int & string_to_float"
+  - "1.8.1 - Help.md input examples updated"
+  - "1.8.0 - New action Array Match"
+  - "1.7.0 - New action Array Diff"
+  - "1.6.1 - Add Cloud Enabled tag"
+  - "1.6.0 - New action Combine Arrays"
+  - "1.5.2 - Rewrite plugin in Python 3 | Configure as Cloud Plugin"
+  - "1.5.1 - New spec and help.md format for the Extension Library"
+  - "1.5.0 - New action Array to String"
+  - "1.4.1 - Update plugin tag from `util` to `utilities` for Marketplace searchability"
+  - "1.4.0 - New action String to Float"
+  - "1.3.0 - New action String to List"
+  - "1.2.2 - Regenerate with latest Go SDK to solve bug with triggers"
+  - "1.2.0 - Support web server mode"
+  - "1.1.0 - Add action Number->Integer, Integer->Number"
+  - "1.0.0 - Bug fix for int->bool and bool->int"
+  - "0.1.2 - Bug fix for string_to_object action"
+  - "0.1.1 - Bug fix string to int with spaces"
+  - "0.1.0 - Initial plugin"
 actions:
   boolean_to_integer:
     title: Boolean to Integer
     description: Converts a boolean to an integer. True -> 1, False -> 0
     input:
       input:
-        type: boolean
-        required: true
         title: Input
         description: Input variable
+        type: boolean
+        required: true
         example: false
     output:
       output:
-        type: integer
-        required: true
         title: Output
         description: Type converted input
+        type: integer
+        required: true
+        example: 0
   boolean_to_string:
     title: Boolean to String
     description: Converts a boolean to a string
     input:
       input:
-        type: boolean
-        required: true
         title: Input
         description: Input variable
+        type: boolean
+        required: true
         example: false
     output:
       output:
-        type: string
-        required: true
         title: Output
         description: Type converted input
+        type: string
+        required: true
+        example: "false"
   integer_to_boolean:
     title: Integer to Boolean
     description: Converts an integer to a boolean. Non-Zero -> True, 0 -> False
     input:
       input:
-        type: integer
-        required: true
         title: Input
         description: Input variable
+        type: integer
+        required: true
         example: 123
     output:
       output:
-        type: boolean
-        required: true
         title: Output
         description: Type converted input
+        type: boolean
+        required: true
+        example: true
   integer_to_string:
     title: Integer to String
     description: Converts an integer to a string
     input:
       input:
-        type: integer
-        required: true
         title: Input
         description: Input variable
+        type: integer
+        required: true
         example: 123
     output:
       output:
-        type: string
-        required: true
         title: Output
         description: Type converted input
+        type: string
+        required: true
+        example: "123"
   string_to_boolean:
     title: String to Boolean
     description: Converts a string to a boolean. Case-insensitive true -> True, else
       -> False
     input:
       input:
-        type: string
-        required: true
         title: Input
         description: Input variable
-        example: 'true'
+        type: string
+        required: true
+        example: "true"
     output:
       output:
-        type: boolean
-        required: true
         title: Output
         description: Type converted input
+        type: boolean
+        required: true
+        example: true
   string_to_integer:
     title: String to Integer
     description: Converts a string to an integer
     input:
       input:
-        type: string
-        required: true
         title: Input
         description: Input variable
-        example: '123'
+        type: string
+        required: true
+        example: "123"
       strip:
-        type: boolean
-        required: false
         title: Strip
         description: Strip whitespace
+        type: boolean
+        required: false
         example: true
     output:
       output:
-        type: integer
-        required: true
         title: Output
         description: Type converted input
+        type: integer
+        required: true
+        example: 123
   string_to_object:
     title: String to Object
     description: Converts a string to an object
     input:
       input:
-        type: string
-        required: true
         title: Input
         description: Input variable
+        type: string
+        required: true
         example: "{'object':['rapid','7'],'rapid7':'value'}"
     output:
       output:
-        type: object
-        required: true
         title: Output
         description: Type converted input
+        type: object
+        required: true
+        example: '{"object":["rapid", "7"],"rapid7":"value"}'
   object_to_string:
     title: Object to String
     description: Encodes an object to a string
     input:
       input:
-        type: object
-        required: true
         title: Input
         description: Input variable
+        type: object
+        required: true
         example: "{'object':['rapid','7'],'rapid7':'value'}"
     output:
       output:
-        type: string
-        required: true
         title: Output
         description: Type converted input
+        type: string
+        required: true
+        example: '{"object":["rapid", "7"],"rapid7":"value"}'
   number_to_integer:
     title: Number to Integer
     description: Converts a number to an integer
     input:
       input:
-        type: number
-        required: true
         title: Input
         description: Input variable
+        type: number
+        required: true
         example: 123
     output:
       output:
-        type: integer
-        required: true
         title: Output
         description: Type converted input
+        type: integer
+        required: true
+        example: 123
   integer_to_number:
     title: Integer to Number
     description: Converts an integer to a number
     input:
       input:
-        type: integer
-        required: true
         title: Input
         description: Type converted input
+        type: integer
+        required: true
         example: 123
     output:
       output:
-        type: number
-        required: true
         title: Output
         description: Type converted input
+        type: number
+        required: true
+        example: 123
   string_to_list:
     title: String to List
     description: Converts a string to a list of strings
@@ -204,13 +244,14 @@ actions:
           Default is a newline, if not provided by user
         type: string
         required: false
-        example: ""
+        example: " "
     output:
       output:
-        type: '[]string'
-        required: true
         title: Output
         description: Type converted output
+        type: '[]string'
+        required: true
+        example: '["Rapid7", "InsightConnect"]'
   string_to_float:
     title: String to Float
     description: Converts a string to a float
@@ -223,10 +264,11 @@ actions:
         example: '123.456'
     output:
       output:
-        type: float
-        required: true
         title: Output
         description: Type converted output
+        type: float
+        required: true
+        example: 123.456
   array_to_string:
     title: Array to String
     description: Converts an array to a string
@@ -243,13 +285,14 @@ actions:
           Default is a space, if not provided by user
         type: string
         required: false
-        example: ""
+        example: " "
     output:
       output:
-        type: string
-        required: true
         title: Output
         description: Joined string
+        type: string
+        required: true
+        example: hello world
   combine_arrays:
     title: Combine Arrays
     description: Combine and deduplicate one or more arrays into a larger array
@@ -290,6 +333,7 @@ actions:
         description: Combined array
         type: "[]string"
         required: true
+        example: '["rapid7", "insight_connect"]'
   array_diff:
     title: Array Diff
     description: Difference between two arrays
@@ -312,6 +356,7 @@ actions:
         description: Difference array
         type: "[]string"
         required: true
+        example: '["example"]'
   array_match:
     title: Array Match
     description: Identify matched items present across two arrays
@@ -341,8 +386,10 @@ actions:
         description: Array containing items found in both the first and second arrays
         type: "[]string"
         required: true
+        example: '["rapid7","insight_connect"]'
       count:
         title: Count
         description: Count of matches
         type: integer
         required: true
+        example: 2
