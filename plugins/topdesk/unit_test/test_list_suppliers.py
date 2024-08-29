@@ -6,7 +6,7 @@ from parameterized import parameterized
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from unit_test.util import Util
+from util import Util
 from icon_topdesk.actions.listSuppliers import ListSuppliers
 from icon_topdesk.util.constants import Cause, Assistance
 
