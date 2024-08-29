@@ -1,11 +1,13 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from unittest.mock import patch, mock_open
+from unittest.mock import mock_open, patch
+
 from komand_rapid7_insightvm.triggers import NewScans
+
 from util import Util
 
 

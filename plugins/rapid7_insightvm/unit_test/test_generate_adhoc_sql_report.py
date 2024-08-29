@@ -1,13 +1,14 @@
-import sys
 import os
+import sys
 from unittest import TestCase
-from unittest.mock import patch
-from unittest.mock import Mock
-from util import Util
+from unittest.mock import Mock, patch
+
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_rapid7_insightvm.actions.generate_adhoc_sql_report import GenerateAdhocSqlReport
 from komand_rapid7_insightvm.actions.generate_adhoc_sql_report.schema import Input
 from parameterized import parameterized
-from insightconnect_plugin_runtime.exceptions import PluginException
+
+from util import Util
 
 sys.path.append(os.path.abspath("../"))
 

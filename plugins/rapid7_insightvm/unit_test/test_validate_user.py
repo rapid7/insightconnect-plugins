@@ -1,15 +1,15 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest import TestCase
-import logging
-import requests
 import json
-from komand_rapid7_insightvm.util import resource_helpers
-from insightconnect_plugin_runtime.exceptions import PluginException
+import logging
+from unittest import TestCase
 
+import requests
+from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_rapid7_insightvm.util import resource_helpers
 
 # Mock user dictionary
 user = {
