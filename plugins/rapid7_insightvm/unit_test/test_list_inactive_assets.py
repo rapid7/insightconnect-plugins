@@ -1,14 +1,16 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from unittest.mock import patch
-from util import Util
+
 from komand_rapid7_insightvm.actions.list_inactive_assets import ListInactiveAssets
 from komand_rapid7_insightvm.actions.list_inactive_assets.schema import Input
 from parameterized import parameterized
+
+from util import Util
 
 
 @patch("requests.sessions.Session.post", side_effect=Util.mocked_requests)
