@@ -17,6 +17,7 @@ class GetCases(insightconnect_plugin_runtime.Action):
             filter_key=params.get(Input.FILTER_KEY, "lastModifiedTime"),
         )
         # This is a possible solution to SI-25434
-        if isinstance(response.get("caseId"), int):
-            response["caseId"] = str(response["caseId"])
+        for case in response:
+            if isinstance(case.get("caseId"), int):
+                case["caseId"] = str(case["caseId"])
         return {Output.CASES: response}
