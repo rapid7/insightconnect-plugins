@@ -50,6 +50,10 @@ version_history:
   - "0.1.2 - Bug fix for string_to_object action"
   - "0.1.1 - Bug fix string to int with spaces"
   - "0.1.0 - Initial plugin"
+links:
+  - "[Type Converter](https://extensions.rapid7.com/extension/type-converter)"
+references:
+  - "[Type Converter](https://extensions.rapid7.com/extension/type-converter)"
 actions:
   boolean_to_integer:
     title: Boolean to Integer
