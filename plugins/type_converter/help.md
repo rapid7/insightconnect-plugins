@@ -653,9 +653,9 @@ Example output:
 * 0.1.0 - Initial plugin
 
 # Links
-  
-*This plugin does not contain any links.*
+
+* [Type Converter](https://extensions.rapid7.com/extension/type-converter)
 
 ## References
-  
-*This plugin does not contain any references.*
+
+* [Type Converter](https://extensions.rapid7.com/extension/type-converter)
