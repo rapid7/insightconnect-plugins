@@ -57,7 +57,7 @@ class MonitorIncidentEvents(insightconnect_plugin_runtime.Task):
         cleaned_events_after_cutoff.sort(key=lambda x: x.get(time_sorting_field, -1))
         return cleaned_events_after_cutoff
 
-    def run(self, params={}, state={}):
+    def run(self, params={}, state={}, custom_config={}):
         # Get all input variables
         status_filter_value = params.get(Input.STATUS)
         descriptions_filter_value = params.get(Input.DESCRIPTIONS)
