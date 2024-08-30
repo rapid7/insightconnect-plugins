@@ -73,6 +73,8 @@ class MonitorIncidentEvents(insightconnect_plugin_runtime.Task):
             f"time sorting field: {time_sorting_field}, request filters: {json.dumps(request_filters, indent=4)}"
         )
 
+        self.logger.info(f"")
+
         # Figure out the upper and lower time parameters
         now = Util.now_ms()
         last_event_time = state.get(State.LAST_EVENT_TIME)
