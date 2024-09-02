@@ -15,7 +15,8 @@ class GetContent(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         identifier = params.get(Input.IDENTIFIER)
-        content_result = extract.Content.get(identifier)
+        # END INPUT BINDING - DO NOT REMOVE
 
-        return {Output.CONTENT_RESULT: content_result}
+        return {Output.CONTENT_RESULT: extract.Content.get(identifier)}

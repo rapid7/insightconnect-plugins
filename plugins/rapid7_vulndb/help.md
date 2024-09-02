@@ -47,7 +47,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|content_result|content|True|Content record for the vulnerability or module|{'published_at': '2015-11-05T00:00:00.000Z', 'references': 'mozilla-thunderbird-upgrade-38_4', 'severity': '7', 'solutions': 'mozilla-thunderbird-upgrade-38_4', 'title': 'MFSA2015-123 Thunderbird: Buffer overflow during i...', 'alternate_ids': 'BID/77411,CVE/2015-7189,DEBIAN/DSA-3393,DEBIAN/DSA...', 'content_type': 'vulnerability', 'description': '\n    <p>Race condition in the JPEGEncoder function...'}|
+|content_result|content|True|Content record for the vulnerability or module|{"published_at":"2015-11-05T00:00:00.000Z","references":"mozilla-thunderbird-upgrade-38_4","severity":"7","solutions":"mozilla-thunderbird-upgrade-38_4","title":"MFSA2015-123 Thunderbird: Buffer overflow during i...","alternate_ids":"BID/77411,CVE/2015-7189,DEBIAN/DSA-3393,DEBIAN/DSA...","content_type":"vulnerability","description":"\n    <p>Race condition in the JPEGEncoder function..."}|
   
 Example output:
 
@@ -91,7 +91,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |results_found|bool|True|Will return false if no results are found|None|
-|search_results|[]search_result|False|Vulnerability and exploits found|{'identifier': 'ubuntu-cve-2015-9542', 'title': 'Ubuntu: (Multiple Advisories) (CVE-2015-9542): libpam-radius-auth vulnerability', 'published_at': '2020-02-24T00:00:00.000Z', 'solutions': 'ubuntu-upgrade-chromium', 'link': 'https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/content/ubuntu-cve-2015-9542'}|
+|search_results|[]search_result|False|Vulnerability and exploits found|{"identifier":"ubuntu-cve-2015-9542","title":"Ubuntu: (Multiple Advisories) (CVE-2015-9542): libpam-radius-auth vulnerability","published_at":"2020-02-24T00:00:00.000Z","solutions":"ubuntu-upgrade-chromium","link":"https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/content/ubuntu-cve-2015-9542"}|
   
 Example output:
 
@@ -150,6 +150,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.4 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 2.1.3 - Fix critical Snyk vulnerability | Update SDK
 * 2.1.2 - Bumping SDK version to 5.6.1
 * 2.1.1 - Add 404 and 504 error handlers | Add retry
