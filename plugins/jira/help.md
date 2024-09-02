@@ -1,6 +1,6 @@
 # Description
 
-[Jira](https://www.atlassian.com/software/jira) is an issue tracking product developed by Atlassian that allows teams to plan, track, and release great software. This plugin uses the [Jira REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v2/) to programmatically manage and create issues and users. The Jira plugin supports cloud and on-premise versions of Jira Software, Jira Server, and Jira ServiceDesk products from Atlassian
+[Jira](https://www.atlassian.com/software/jira) is an issue tracking product developed by Atlassian that allows teams to plan, track, and release great software. This plugin uses the [Jira REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v2/) to programmatically manage and create issues and users. The Jira plugin supports cloud and on-premise versions of Jira Software, Jira Server, and Jira ServiceDesk products from Atlassian. Please note that only JIRA cloud is supported with InsightConnect cloud connections
 
 # Key Features
 
@@ -11,7 +11,7 @@
 # Requirements
 
 * URL for Jira Software, Jira Server, or Jira ServiceDesk
-* Jira user email address and API key when using Jira Cloud
+* Jira user email address and API key when using Jira Cloud (Only JIRA cloud is supported with InsightConnect cloud connections.)
 * Jira username and password credentials when using on-prem Jira server
 
 # Supported Product Versions
@@ -725,12 +725,12 @@ Example output:
 
 
 ## Troubleshooting
-  
-*This plugin does not contain a troubleshooting.*
+
+Please note only Jira cloud is supported with InsightConnect cloud. For JIRA OnPrem, please use an orchestrator for connecting.
 
 # Version History
 
-* 6.5.0 - Cloud enable the plugin | Bump SDK version to 6.1.0
+* 6.5.0 - Cloud enable the plugin | Bump SDK version to 6.1.0 | Added an error message if trying to connect to Jira on-prem for ICON cloud
 * 6.4.0 - Fix Issue Where Create Issue failed when multiple versions of the input Issue Type exists in Jira | Fix failed connection test response for PAT based connection | Include Fields input added to New Issue and Monitor Issues triggers, to specify whether to return Issue fields in the output | Removed empty Fields output from returned Issues when not requested or available
 * 6.3.0 - Add PAT authentication scheme for Jira on-prem
 * 6.2.1 - Fix issue in Find Issues action where normalize_user has an attribute error for labels | Changed Dockerfile to don't use slim version

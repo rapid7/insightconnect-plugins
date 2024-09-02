@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name="jira-rapid7-plugin",
       version="6.5.0",
-      description="[Jira](https://www.atlassian.com/software/jira) is an issue tracking product developed by Atlassian that allows teams to plan, track, and release great software. This plugin uses the [Jira REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v2/) to programmatically manage and create issues and users. The Jira plugin supports cloud and on-premise versions of Jira Software, Jira Server, and Jira ServiceDesk products from Atlassian",
+      description="[Jira](https://www.atlassian.com/software/jira) is an issue tracking product developed by Atlassian that allows teams to plan, track, and release great software. This plugin uses the [Jira REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v2/) to programmatically manage and create issues and users. The Jira plugin supports cloud and on-premise versions of Jira Software, Jira Server, and Jira ServiceDesk products from Atlassian. Please note that only JIRA cloud is supported with InsightConnect cloud connections",
       author="rapid7",
       author_email="",
       url="",
