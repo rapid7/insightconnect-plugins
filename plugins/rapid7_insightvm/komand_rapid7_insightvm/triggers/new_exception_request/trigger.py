@@ -3,8 +3,9 @@ import time
 from .schema import NewExceptionRequestInput, NewExceptionRequestOutput, Input, Output, Component
 
 # Custom imports below
-from komand_rapid7_insightvm.util import endpoints
+from komand_rapid7_insightvm.util.endpoints import VulnerabilityException
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
+from typing import List, Dict, Any
 
 
 class NewExceptionRequest(insightconnect_plugin_runtime.Trigger):
@@ -17,44 +18,68 @@ class NewExceptionRequest(insightconnect_plugin_runtime.Trigger):
         )
 
     def run(self, params={}):
-        """Run the trigger"""
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        status_filters = params.get(Input.STATUS_FILTER, ["Under Review"])
+        frequency = params.get(Input.FREQUENCY, 5)
+        # END INPUT BINDING - DO NOT REMOVE
 
-        # get most recent vulnerability exception request - since they're sequential, find highest id
+        # Initialize the trigger
+        self.logger.info("Initialising the trigger data")
         resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
-        endpoint = endpoints.VulnerabilityException.vulnerability_exceptions(self.connection.console_url)
-        std_params = {"sort": "id,desc"}
-        response = resource_helper.paged_resource_request(endpoint=endpoint, method="get", params=std_params)
-        last_id = 0
-        for r in response:
-            if r["id"] > last_id:
-                last_id = r["id"]
-        params["interval"] = params["frequency"]
-        status_filter = []
-        for i in params.get("status_filter", []):
-            status_filter.append(i.lower())
+
+        # Get current vulnerability exceptions
+        previous_ids = self._get_ids(status_filters, resource_helper)
+
         while True:
-            # process all new exceptions.  The inner loop is to handle grabbing
-            # multiple exceptions since last cycle.  It is broken when we run out
-            # of new vulnerability exceptions to process returning us to the outer loop
-            # where we sleep for the configured amount of time.
-            # We detect that we're out of work to do when we try and grab the
-            # next higher exception id and we get an exception back instead of a
-            # response containing a vulnerability exception.
-            while True:
-                endpoint = endpoints.VulnerabilityException.vulnerability_exception(
-                    self.connection.console_url, last_id + 1
-                )
-                # check if there is a new vulnerability exception
-                try:
-                    response = resource_helper.resource_request(endpoint=endpoint, method="get")
-                except Exception:
-                    break
-                last_id += 1
-                # do we send it on it's way?
-                if response.get("state").lower() not in status_filter:
-                    continue
-                # send it on it's way
-                self.send({Output.EXCEPTION: response})
+            self.logger.info("Checking for new exceptions")
+            current_ids = self._get_ids(status_filters, resource_helper)
+            new_ids = list(filter(lambda element: element not in previous_ids, current_ids))
+
+            if new_ids:
+                self.logger.info(f"Found new {len(new_ids)} exceptions. Returning results...")
+                for id_ in new_ids:
+                    try:
+                        self.send(
+                            {
+                                Output.EXCEPTION: resource_helper.resource_request(
+                                    endpoint=VulnerabilityException.vulnerability_exception(
+                                        self.connection.console_url, id_
+                                    )
+                                )
+                            }
+                        )
+                    except Exception as error:
+                        self.logger.error(
+                            f"Unexpected exception during trigger execution occurs. The error is: '{error}'"
+                        )
+                previous_ids = current_ids
+            else:
+                self.logger.info(f"No new exceptions found. Sleeping for {frequency} minutes...")
 
             # Sleep for configured frequency in minutes
-            time.sleep(params.get(Input.FREQUENCY, 5) * 60)
+            time.sleep(frequency * 60)
+
+    def _get_ids(self, status_filters: List[str], resource_helper: ResourceRequests) -> List[int]:
+        """
+        Get IDs. This method allows to get a list of vulnerability exception IDs from the API where the
+        vulnerability exception matches status filters.
+
+        :param status_filters: List of string that contain statuses the vulnerability exception needs to have.
+        :type status_filters: List[str]
+
+        :param resource_helper: The resource helper object to send requests.
+        :type resource_helper: ResourceRequests
+
+        :return: List of IDs that matches the criteria.
+        :rtype: List[int]
+        """
+
+        response = resource_helper.paged_resource_request(
+            endpoint=VulnerabilityException.vulnerability_exceptions(self.connection.console_url),
+            params={"sort": "id,desc"},
+        )
+        return [
+            element.get("id")
+            for element in response
+            if element.get("state", "").lower() in map(str.lower, status_filters)
+        ]
