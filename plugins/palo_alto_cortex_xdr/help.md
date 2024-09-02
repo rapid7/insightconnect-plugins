@@ -569,76 +569,26 @@ Example output:
 ### Tasks
 
 
-#### Monitor Incident Events
+#### Monitor Incidents
 
-This task is used to monitor incident events
+This task is used to monitor incidents
 
 ##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|descriptions|[]string|None|False|Descriptions|None|["Behavioral threat detected (rule: heuristic.b.205)"]|None|None|
-|incident_id_list|[]string|None|False|Incident ID list|None|["5"]|None|None|
-|status|string|None|False|Status|["any", "new", "under_investigation", "resolved_threat_handled", "resolved_known_issue", "resolved_false_positive", "resolved_other", "resolved_auto"]|new|None|None|
-|time_sorting_field|string|None|False|Field to use to sort Incident events|["modification_time", "creation_time"]|modification_time|None|None|
   
-Example input:
-
-```
-{
-  "descriptions": [
-    "Behavioral threat detected (rule: heuristic.b.205)"
-  ],
-  "incident_id_list": [
-    "5"
-  ],
-  "status": "new",
-  "time_sorting_field": "modification_time"
-}
-```
+*This task does not contain any inputs.*
 
 ##### Output
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|events|[]incident|False|Incident events|[ { "Alert Count": 0, "Assigned User Mail": "", "Assigned User Pretty Name": {}, "Creation Time": {}, "Description": {}, "Detection Time": {}, "High Severity Alert Count": {}, "Host Count": {}, "Hosts": [ {} ], "Incident ID": {}, "Incident Name": {}, "Incident Sources": {}, "Low Severity Alert Count": {}, "Manual Description": {}, "Manual Score": {}, "Manual Severity": {}, "Med Severity Alert Count": {}, "Modification Time": {}, "Notes": {}, "Resolve Comment": {}, "Rule Based Score": {}, "Severity": {}, "Starred": "true", "Status": {}, "User Count": {}, "Users": {}, "XDR URL": {} } ]|
+|incidents|[]object|False|Incidents|[ { } ]|
   
 Example output:
 
 ```
 {
-  "events": [
-    {
-      "Alert Count": 0,
-      "Assigned User Mail": "",
-      "Assigned User Pretty Name": {},
-      "Creation Time": {},
-      "Description": {},
-      "Detection Time": {},
-      "High Severity Alert Count": {},
-      "Host Count": {},
-      "Hosts": [
-        {}
-      ],
-      "Incident ID": {},
-      "Incident Name": {},
-      "Incident Sources": {},
-      "Low Severity Alert Count": {},
-      "Manual Description": {},
-      "Manual Score": {},
-      "Manual Severity": {},
-      "Med Severity Alert Count": {},
-      "Modification Time": {},
-      "Notes": {},
-      "Resolve Comment": {},
-      "Rule Based Score": {},
-      "Severity": {},
-      "Starred": "true",
-      "Status": {},
-      "User Count": {},
-      "Users": {},
-      "XDR URL": {}
-    }
+  "incidents": [
+    {}
   ]
 }
 ```
