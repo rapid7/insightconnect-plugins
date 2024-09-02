@@ -1,8 +1,10 @@
-import insightconnect_plugin_runtime
-from .schema import DateFromEpochInput, DateFromEpochOutput, Input, Output
-from insightconnect_plugin_runtime.exceptions import PluginException
-import maya
 import re
+
+import insightconnect_plugin_runtime
+import maya
+from insightconnect_plugin_runtime.exceptions import PluginException
+
+from .schema import DateFromEpochInput, DateFromEpochOutput, Input, Output
 
 
 class DateFromEpoch(insightconnect_plugin_runtime.Action):
@@ -15,14 +17,20 @@ class DateFromEpoch(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         epoch = params.get(Input.EPOCH)
+        # END INPUT BINDING - DO NOT REMOVE
+
         if re.search("([0-9]){21,}", epoch):
             raise PluginException(
                 cause="The given epoch is out of range.",
                 assistance="This action supports seconds, milliseconds, microseconds, and nanoseconds. Please check "
                 "that the given epoch is correct.",
             )
-        return {Output.DATE: maya.MayaDT(float(epoch) / self.seconds_division_number(epoch)).rfc3339()}
+        try:
+            return {Output.DATE: maya.MayaDT(float(epoch) / self.seconds_division_number(epoch)).rfc3339()}
+        except Exception as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     @staticmethod
     def seconds_division_number(epoch: str) -> int:

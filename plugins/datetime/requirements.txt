@@ -1,5 +1,7 @@
 # List third-party dependencies here, separated by newlines. 
 # All dependencies must be version-pinned, eg. requests==1.2.0
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
-pendulum==2.0.5  # Necessary due to conflict on building wheel
+pendulum==3.0.0  # Necessary due to conflict on building wheel
 maya==0.6.1
+parameterized==0.8.1
+freezegun==1.5.1

@@ -2,6 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import GetFutureTimeInput, GetFutureTimeOutput, Input, Output, Component
 
 # Custom imports below
+from insightconnect_plugin_runtime.exceptions import PluginException
 from datetime import datetime, timedelta
 import maya
 
@@ -16,12 +17,21 @@ class GetFutureTime(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        if not params.get(Input.BASE_TIMESTAMP):
-            new_timestamp = maya.MayaDT.from_rfc3339(datetime.now())
-        else:
-            new_timestamp = maya.MayaDT.from_rfc3339(params.get(Input.BASE_TIMESTAMP))
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        base_timestamp = params.get(Input.BASE_TIMESTAMP)
         time_unit = params.get(Input.TIME_UNIT)
         time_amount = params.get(Input.TIME_AMOUNT)
+        # END INPUT BINDING - DO NOT REMOVE
+
+        if not base_timestamp:
+            new_timestamp = maya.MayaDT.from_rfc3339(datetime.now())
+        else:
+            try:
+                new_timestamp = maya.MayaDT.from_rfc3339(params.get(Input.BASE_TIMESTAMP))
+            except Exception as error:
+                self.logger.error(f"Unknown error occurred. The error is: `{error}`")
+                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+
         if time_unit == "Months":
             new_timestamp = new_timestamp + timedelta(days=30 * time_amount)
         elif time_unit == "Weeks":
