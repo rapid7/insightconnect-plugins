@@ -4,6 +4,7 @@ from .schema import ConnectionSchema, Input
 # Custom imports below
 from jira import JIRA
 import requests
+import os
 from requests.auth import HTTPBasicAuth
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 from komand_jira.util.api import JiraApi
@@ -44,6 +45,14 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         if ".atlassian.net" in self.url or ".jira.com" in self.url:
             self.is_cloud = True
+
+        # add a check that if not are running on orchestrator, we are only trying to connect to Jira cloud instance
+        if not self.is_cloud and os.environ.get("PLUGIN_RUNTIME_ENVIRONMENT", "") == "cloud":
+            raise ConnectionTestException(
+                cause="Connection to Jira on-prem instance detected. please use a Jira Cloud instance.",
+                assistance="When running on ICON cloud we only support connections to Jira Cloud instances.",
+            )
+
         if self.pat:
             client = JIRA(options={"server": self.url}, token_auth=self.pat)
         elif self.test():
