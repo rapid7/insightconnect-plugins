@@ -4,6 +4,7 @@ from .schema import ConnectionSchema, Input
 # Custom imports below
 from jira import JIRA
 import requests
+import os
 from requests.auth import HTTPBasicAuth
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 from komand_jira.util.api import JiraApi
@@ -44,6 +45,14 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         if ".atlassian.net" in self.url or ".jira.com" in self.url:
             self.is_cloud = True
+
+        # add a check that if not are running on orchestrator, we are only trying to connect to Jira cloud instance
+        if not self.is_cloud and os.environ.get("PLUGIN_RUNTIME_ENVIRONMENT", "") == "cloud":
+            raise ConnectionTestException(
+                cause="Connection to Jira on-prem instance detected. please use a Jira Cloud instance.",
+                assistance="When running on ICON cloud we only support connections to Jira Cloud instances.",
+            )
+
         if self.pat:
             client = JIRA(options={"server": self.url}, token_auth=self.pat)
         elif self.test():
@@ -56,12 +65,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def test_pat(self):
         headers = {"Authorization": f"Bearer {self.pat}", "Content-Type": "application/json"}
-        response = requests.get(self.url, headers=headers)
+        response = requests.get(self.url, headers=headers, timeout=60)
         return response
 
     def test_basic_auth(self):
         auth = HTTPBasicAuth(username=self.username, password=self.password)
-        response = requests.get(self.url, auth=auth)
+        response = requests.get(self.url, auth=auth, timeout=60)
         return response
 
     def test(self):
@@ -71,7 +80,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             response = self.test_basic_auth()
         # https://developer.atlassian.com/cloud/jira/platform/rest/v2/?utm_source=%2Fcloud%2Fjira%2Fplatform%2Frest%2F&utm_medium=302#error-responses
         if response.status_code == 200:
-            return True
+            return {"success": True}
         elif response.status_code == 401:
             raise ConnectionTestException(preset=ConnectionTestException.Preset.USERNAME_PASSWORD)
         elif response.status_code == 404:
