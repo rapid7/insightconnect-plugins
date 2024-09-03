@@ -4,6 +4,7 @@ from .schema import ToLocaltimeInput, ToLocaltimeOutput, Input, Output, Componen
 # Custom imports below
 import maya
 from maya.core import parse
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class ToLocaltime(insightconnect_plugin_runtime.Action):
@@ -16,10 +17,17 @@ class ToLocaltime(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        new_date = parse(params.get(Input.BASE_TIME), timezone="UTC")
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        base_time = params.get(Input.BASE_TIME)
+        timezone = params.get(Input.TIMEZONE)
+        # END INPUT BINDING - DO NOT REMOVE
 
-        return {
-            Output.CONVERTED_DATE: maya.MayaDT.from_datetime(
-                new_date.datetime(to_timezone=params.get(Input.TIMEZONE), naive=True)
+        try:
+            converted_date = maya.MayaDT.from_datetime(
+                parse(base_time, timezone="UTC").datetime(to_timezone=timezone, naive=True)
             ).rfc3339()
-        }
+        except Exception as error:
+            self.logger.error(f"Unknown error occurred. The error is: `{error}`")
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+
+        return {Output.CONVERTED_DATE: converted_date}
