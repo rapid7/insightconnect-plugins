@@ -219,14 +219,4 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
 
         self.logger.info(f"The following filter time will be used: {filter_time}")
 
-        custom_config_date = {}
-        filter_time = datetime(
-            custom_config_date.get("year", 2020),
-            custom_config_date.get("month", 1),
-            custom_config_date.get("day", 1),
-            custom_config_date.get("hour", 0),
-            custom_config_date.get("minute", 0),
-            custom_config_date.get("second", 0),
-        )
-
         return filter_time
