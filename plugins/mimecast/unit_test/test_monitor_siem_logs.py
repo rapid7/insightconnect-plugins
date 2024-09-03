@@ -38,9 +38,11 @@ class TestMonitorSiemLogs(TestCase):
                 self.assertEqual(response, test.get("resp"))
                 self.assertEqual(status_code, 200)
                 if test.get("has_more_pages") == False:
-                    self.assertEqual(new_state, {"next_token": token, "normal_running_cutoff": True})
+                    self.assertEqual(
+                        new_state, {"next_token": token, "normal_running_cutoff": True, "last_log_line": 0}
+                    )
                 else:
-                    self.assertEqual(new_state, {"next_token": token})
+                    self.assertEqual(new_state, {"next_token": token, "last_log_line": 0})
                 if test.get("next_token") == "happy_token":
                     mock_logger.assert_called()
                     self.assertIn(
@@ -51,7 +53,7 @@ class TestMonitorSiemLogs(TestCase):
 
     def test_monitor_siem_logs_raises_401(self, _mock_data):
         # TODO: update 401 logic to successfully check is_last_token that was introduced in 5.3.3
-        state_params = {"next_token": "force_401"}
+        state_params = {"next_token": "force_401", "last_log_line": 0}
 
         response, new_state, has_more_pages, status_code, error = self.task.run(params={}, state=state_params)
 
@@ -62,7 +64,10 @@ class TestMonitorSiemLogs(TestCase):
 
     @patch("logging.Logger.error")
     def test_monitor_siem_logs_stops_path_traversal(self, mock_logger, _mock_data):
-        test_state = {"next_token": "path_traversal"}  # this forces our mock util to append `../` into filenames
+        test_state = {
+            "next_token": "path_traversal",
+            "last_log_line": 0,
+        }  # this forces our mock util to append `../` into filenames
         response, new_state, has_more_pages, status_code, error = self.task.run(params={}, state=test_state)
         self.assertEqual(status_code, 200)
         self.assertEqual(has_more_pages, True)
@@ -75,7 +80,10 @@ class TestMonitorSiemLogs(TestCase):
 
     @patch("logging.Logger.error")
     def test_monitor_siem_logs_raises_json_error(self, mock_logger, _mock_data):
-        test_state = {"next_token": "request.json error"}  # this forces our mocked response to raise JSON encode error
+        test_state = {
+            "next_token": "request.json error",
+            "last_log_line": 0,
+        }  # this forces our mocked response to raise JSON encode error
         response, new_state, has_more_pages, status_code, error = self.task.run(params={}, state=test_state)
         self.assertEqual(status_code, 200)
         self.assertEqual(has_more_pages, False)
@@ -87,7 +95,10 @@ class TestMonitorSiemLogs(TestCase):
     @patch("logging.Logger.debug")
     @patch("komand_mimecast.util.api.MimecastAPI.get_siem_logs", side_effect=Exception("negative seek"))
     def test_monitor_siem_logs_raises_negative_seek(self, mock_siem_logs, mock_logger, _mock_data):
-        test_state = {"next_token": "negative_seek error"}  # this forces our mocked response to raise negative seek
+        test_state = {
+            "next_token": "negative_seek error",
+            "last_log_line": 0,
+        }  # this forces our mocked response to raise negative seek
         response, new_state, has_more_pages, status_code, error = self.task.run(params={}, state=test_state)
         self.assertEqual(status_code, 500)
         self.assertEqual(has_more_pages, False)
@@ -147,12 +158,51 @@ class TestMonitorSiemLogs(TestCase):
                 self.assertEqual(response, test.get("resp"))
                 self.assertEqual(status_code, 200)
                 if test.get("has_more_pages") == False:
-                    self.assertEqual(new_state, {"next_token": token, "normal_running_cutoff": True})
+                    self.assertEqual(
+                        new_state, {"next_token": token, "normal_running_cutoff": True, "last_log_line": 0}
+                    )
                 else:
-                    self.assertEqual(new_state, {"next_token": token})
+                    self.assertEqual(new_state, {"next_token": token, "last_log_line": 0})
                 validate(response, MonitorSiemLogsOutput.schema)
 
                 self.assertIn(f"{test.get('expected_filter_time')}", mock_logger.mock_calls[-6][1][0])
+
+    @patch("logging.Logger.warning")
+    @patch("komand_mimecast.tasks.monitor_siem_logs.task.MAX_EVENTS_PER_RUN", new=1)
+    def test_monitor_siem_logs_success_split_files_across_runes(self, mock_logger, _mock_data):
+        content = [FILE_ZIP_CONTENT_1, FILE_ZIP_CONTENT_2, FILE_ZIP_CONTENT_3]
+        token = SIEM_LOGS_HEADERS_RESPONSE.get("mc-siem-token")
+        tests = [
+            {
+                "next_token": "test_multi_log_lines",
+                "resp": content,
+                "has_more_pages": True,
+                "token": token,
+                "state": {},
+                "run": 1,
+            },
+            {
+                "next_token": "test_multi_log_lines",
+                "resp": content,
+                "has_more_pages": True,
+                "token": token,
+                "state": {"last_log_line": 1, "last_runs_filter_time": "2024-09-02T14:17:32.716322"},
+                "run": 2,
+            },
+        ]
+        for test in tests:
+            with self.subTest(f"Success test with token: {test.get('next_token')}"):
+                response, new_state, has_more_pages, status_code, _ = self.task.run(params={}, state=test.get("state"))
+
+                self.assertEqual(has_more_pages, test.get("has_more_pages"))
+                self.assertEqual(status_code, 200)
+
+                if test.get("run") == 1:
+                    self.assertEqual(response, [FILE_ZIP_CONTENT_1])
+                elif test.get("run") == 2:
+                    self.assertEqual(response, [FILE_ZIP_CONTENT_2])
+
+                validate(response, MonitorSiemLogsOutput.schema)
 
 
 class TestEventLogs(TestCase):

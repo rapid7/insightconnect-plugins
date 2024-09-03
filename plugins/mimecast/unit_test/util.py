@@ -193,6 +193,8 @@ class Util:
                 # try/except in `get_siem_logs`
                 headers["Content-Disposition"] = ""
                 resp = MockResponseZip(200, "this is bad json returned", headers, "throw json error")
+            # elif "test_multi_log_lines" in data:
+            #     has
             return resp
         return "Not implemented"
 

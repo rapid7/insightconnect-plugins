@@ -15,12 +15,17 @@ from ...util.exceptions import ApiClientException
 
 FIRST_RUN_CUTOFF = 24
 NORMAL_RUNNING_CUTOFF = 24 * 7
+MAX_EVENTS_PER_RUN = 7500
 
 
 class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
     NEXT_TOKEN = "next_token"  # nosec
     HEADER_NEXT_TOKEN = "mc-siem-token"  # nosec
     STATUS_CODE = "status_code"  # nosec
+
+    NORMAL_RUNNING_CUTOFF = "normal_running_cutoff"  # nosec
+    LAST_LOG_LINE = "last_log_line"  # nosec
+    LAST_RUNS_FILTER_TIME = "last_runs_filter_time"  # nosec
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -37,8 +42,16 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         try:
             has_more_pages = False
             header_next_token = state.get(self.NEXT_TOKEN, "")
-            normal_running_cutoff = state.get("normal_running_cutoff", False)
-            filter_time = self._get_filter_time(custom_config, normal_running_cutoff=normal_running_cutoff)
+            normal_running_cutoff = state.get(self.NORMAL_RUNNING_CUTOFF, False)
+
+            last_log_line = state.get(self.LAST_LOG_LINE, 0)
+            last_runs_filter_time = state.get(self.LAST_RUNS_FILTER_TIME)
+
+            if last_runs_filter_time:
+                # we need to pin the filter time so the same filtering occurs between runs on the same file
+                filter_time = datetime.fromisoformat(last_runs_filter_time)
+            else:
+                filter_time = self._get_filter_time(custom_config, normal_running_cutoff=normal_running_cutoff)
 
             if not header_next_token:
                 self.logger.info("First run...")
@@ -59,11 +72,12 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                         f"Error: {error}, returning state={state}, has_more_pages={has_more_pages}"
                     )
                     return [], state, has_more_pages, error.status_code, error
-                output = self._filter_and_sort_recent_events(output, filter_time)
+
+                output, last_log_line = self._filter_and_sort_recent_events(output, filter_time, last_log_line)
                 if output:
                     break
 
-            if header_next_token:
+            if header_next_token and last_log_line == 0:
                 self.logger.info(f"The token will be set to '{header_next_token}' in the state.")
                 state[self.NEXT_TOKEN] = header_next_token
                 # Mimecast API only returns isLastToken in the headers if no more pages, so if it is not present then
@@ -75,6 +89,14 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                 if headers.get(IS_LAST_TOKEN_FIELD) and state.get("normal_running_cutoff") is None:
                     self.logger.info("Caught up, saving 'normal_running_cutoff' as 'True' to the state")
                     state["normal_running_cutoff"] = True
+
+            state[self.LAST_LOG_LINE] = last_log_line
+
+            if last_log_line > 0:
+                state[self.LAST_RUNS_FILTER_TIME] = filter_time.isoformat()
+                has_more_pages = True
+            else:
+                state.pop(self.LAST_RUNS_FILTER_TIME, None)
 
             return output, state, has_more_pages, status_code, None
         except Exception as gen_error:
@@ -88,7 +110,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             return [], state, has_more_pages, 500, exp
 
     def _filter_and_sort_recent_events(
-        self, task_output: List[Dict[str, Any]], filter_time: datetime
+        self, task_output: List[Dict[str, Any]], filter_time: datetime, last_log_line: int
     ) -> List[Dict[str, Any]]:
         """
         Filters and sorts a list of events to retrieve only the recent events.
@@ -114,6 +136,24 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             ),
             key=itemgetter(EventLogs.FILTER_DATETIME),
         )
+
+        if len(task_output) >= MAX_EVENTS_PER_RUN:
+            start_point = last_log_line
+            end_point = start_point + MAX_EVENTS_PER_RUN
+
+            if end_point > len(task_output) - 1:
+                end_point = len(task_output) - 1
+                last_log_line = 0
+            else:
+                last_log_line = end_point
+
+            self.logger.info(
+                f"Number of returned logs after filtering performed was greater than {MAX_EVENTS_PER_RUN}, limiting to {MAX_EVENTS_PER_RUN}.\n"
+                f"fetching logs from {start_point} to {end_point}"
+            )
+
+            task_output = task_output[start_point:end_point]
+
         latest_time = filter_time
         for event in task_output:
             event_date_time = event.get(EventLogs.FILTER_DATETIME)
@@ -126,7 +166,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             self.logger.info("None of the raw logs returned from Mimecast where with in filter timerange")
         if task_output:
             self.logger.info(f"Latest event time returned from Mimecast logs: {latest_time}")
-        return task_output
+        return task_output, last_log_line
 
     def _get_filter_time(self, custom_config: Dict[str, int], normal_running_cutoff: bool = False) -> int:
         """
@@ -178,5 +218,15 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             filter_time = get_time_hours_ago(hours_ago=FIRST_RUN_CUTOFF)
 
         self.logger.info(f"The following filter time will be used: {filter_time}")
+
+        custom_config_date = {}
+        filter_time = datetime(
+            custom_config_date.get("year", 2020),
+            custom_config_date.get("month", 1),
+            custom_config_date.get("day", 1),
+            custom_config_date.get("hour", 0),
+            custom_config_date.get("minute", 0),
+            custom_config_date.get("second", 0),
+        )
 
         return filter_time
