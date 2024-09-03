@@ -1,7 +1,9 @@
-import insightconnect_plugin_runtime
-from .schema import GetDatetimeInput, GetDatetimeOutput, Input, Output
 import time
+
+import insightconnect_plugin_runtime
 import maya
+
+from .schema import GetDatetimeInput, GetDatetimeOutput, Input, Output
 
 
 class GetDatetime(insightconnect_plugin_runtime.Action):
@@ -14,14 +16,14 @@ class GetDatetime(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        format_string = params.get(Input.FORMAT_STRING)
-        use_rfc3339_format = params.get(Input.USE_RFC3339_FORMAT)
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        format_string = params.get(Input.FORMAT_STRING, "%d %b %Y %H:%M:%S")
+        use_rfc3339_format = params.get(Input.USE_RFC3339_FORMAT, False)
+        # END INPUT BINDING - DO NOT REMOVE
 
         if not use_rfc3339_format:
             current_time = time.strftime(format_string)
         else:
             current_time = maya.now().rfc3339()
 
-        epoch_timestamp = maya.now().epoch
-
-        return {Output.DATETIME: current_time, Output.EPOCH_TIMESTAMP: epoch_timestamp}
+        return {Output.DATETIME: current_time, Output.EPOCH_TIMESTAMP: maya.now().epoch}
