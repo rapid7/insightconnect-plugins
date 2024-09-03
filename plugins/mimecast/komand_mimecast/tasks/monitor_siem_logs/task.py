@@ -55,6 +55,8 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
 
             if not header_next_token:
                 self.logger.info("First run...")
+            elif last_log_line > 0:
+                self.logger.info("Subsequent run, continuing to process the previous file...")
             else:
                 self.logger.info("Subsequent run using header_next_token...")
 
