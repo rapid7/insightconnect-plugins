@@ -54,11 +54,11 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
             now = now_time - timedelta(minutes=15)  # last 15 minutes
             end_time = now.strftime(TIME_FORMAT)
 
-            self.logger.info("Starting to download incidents...")
+            self.logger.info("Starting to download alerts...")
 
             next_page_link = state.get(NEXT_PAGE_LINK)
 
-            logs_response = self.connection.xdr_api.get_incidents()
+            logs_response = self.connection.xdr_api.get_alerts_two()
 
             return logs_response, state, has_more_pages, 200, None
 

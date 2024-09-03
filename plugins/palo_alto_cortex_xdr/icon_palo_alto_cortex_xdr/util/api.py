@@ -172,6 +172,17 @@ class CortexXdrAPI:
         self.logger.info("Taking isolation action on a single endpoint.")
         return self._isolate_endpoint(endpoints, isolation_state)
 
+    def get_alerts_two(
+        self, from_time: int = None, to_time: int = None, time_sort_field: str = "creation_time", filters: List = None
+    ):
+        endpoint = "/public_api/v1/alerts/get_alerts"
+        response_alerts_field = "alerts"
+        print(f"Get Alerts Two {from_time = }\n{to_time = }\n{time_sort_field = }\n{filters = }")
+
+        return self._get_items_from_endpoint(
+            endpoint, from_time, to_time, response_alerts_field, time_sort_field, filters
+        )
+
     def get_alerts(
         self, from_time: int, to_time: int, time_sort_field: str = "creation_time", filters: List = None
     ) -> List[Dict]:
@@ -255,6 +266,7 @@ class CortexXdrAPI:
             resp_json = self._post_to_api(endpoint, post_body)
             if resp_json is not None:
                 total_count = resp_json.get("reply", {}).get("total_count", -1)
+                print(f"{total_count = }")
                 all_items.extend(resp_json.get("reply", {}).get(response_item_field, []))
 
                 # If the number of items we have received so far is greater than or equal to the total number of
