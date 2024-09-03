@@ -44,8 +44,11 @@ class MonitorIncidentsOutput(insightconnect_plugin_runtime.Output):
   "title": "Incidents",
   "description": "Incidents",
   "items": {
-    "$ref": {}
+    "type": "object"
   },
+  "required": [
+    "logs"
+  ],
   "definitions": {}
 }
     """)

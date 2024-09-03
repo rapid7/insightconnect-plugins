@@ -182,10 +182,11 @@ class CortexXdrAPI:
         )
 
     def get_incidents(
-        self, from_time: int, to_time: int, time_sort_field: str = "creation_time", filters: List = None
+        self, from_time: int = None, to_time: int = None, time_sort_field: str = None, filters: List = None
     ) -> List[Dict]:
         endpoint = "/public_api/v1/incidents/get_incidents/"
         response_incidents_field = "incidents"
+        print(f"Get Incidents {from_time = }\n{to_time = }\n{time_sort_field = }\n{filters = }")
         return self._get_items_from_endpoint(
             endpoint, from_time, to_time, response_incidents_field, time_sort_field, filters
         )
@@ -245,14 +246,7 @@ class CortexXdrAPI:
             filters.append({"field": time_sort_field, "operator": "lte", "value": to_time})
 
         # Request items in ascending order so that we get the oldest items first.
-        post_body = {
-            "request_data": {
-                "search_from": search_from,
-                "search_to": search_to,
-                "sort": {"field": time_sort_field, "keyword": "asc"},
-                "filters": filters,
-            }
-        }
+        post_body = {"request_data": {}}
 
         done = False
         all_items = []

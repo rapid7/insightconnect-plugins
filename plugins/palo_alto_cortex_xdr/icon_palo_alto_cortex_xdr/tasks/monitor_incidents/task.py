@@ -29,11 +29,11 @@ ALERTS_OFFSET = "alerts_offset"
 FROM_TIME_FILTER = "from_time_filter"
 TO_TIME_FILTER = "to_time_filter"
 
+NEXT_PAGE_LINK = "next_page_link"
 # Custom imports below
 
 
 class MonitorIncidents(insightconnect_plugin_runtime.Task):
-
     def __init__(self):
         super(self.__class__, self).__init__(
             name="monitor_incidents",
@@ -45,6 +45,10 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
 
     def run(self, params={}, state={}, custom_config: dict = {}):  # pylint: disable=unused-argument
         existing_state = state.copy()
+        has_more_pages = False
+        parameters = {}
+        print(f"{existing_state = }")
+
         try:
             now_time = self._get_current_time()
             now = now_time - timedelta(minutes=15)  # last 15 minutes
@@ -52,17 +56,25 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
 
             self.logger.info("Starting to download incidents...")
 
-            output, has_more_pages, state = self.get_incidents(
-                start_time=start_time, end_time=end_time, limit=alert_limit, state=state
-            )
+            next_page_link = state.get(NEXT_PAGE_LINK)
 
-        except PluginException as error:
-            self.logger.error(
-                f"A PluginException has occurred. Status code {status_code} returned. Error: {error.cause}. "
-                f"Existing state: {existing_state}"
-            )
+            logs_response = self.connection.xdr_api.get_incidents()
 
-            return [], existing_state, False, status_code, PluginException(cause=error.cause, data=error)
+            return logs_response, state, has_more_pages, 200, None
+
+            # output, has_more_pages, state = self.get_incidents(
+            #     start_time=start_time, end_time=end_time, limit=alert_limit, state=state
+            # )
+        except Exception as error:
+            print(f"{error = }")
+            raise PluginException(cause="ruhroh", data=error)
+        # except PluginException as error:
+        #     self.logger.error(
+        #         f"A PluginException has occurred. Status code {status_code} returned. Error: {error.cause}. "
+        #         f"Existing state: {existing_state}"
+        #     )
+
+        # return [], existing_state, False, status_code, PluginException(cause=error.cause, data=error)
 
     @staticmethod
     def _get_current_time():
