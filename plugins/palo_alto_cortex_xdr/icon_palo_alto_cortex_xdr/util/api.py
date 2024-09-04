@@ -181,7 +181,7 @@ class CortexXdrAPI:
         # print(f"Get Alerts Two {from_time = }\n{to_time = }\n{time_sort_field = }\n{filters = }")
 
         return self._get_items_from_endpoint(
-            endpoint, from_time, to_time, response_alerts_field, time_sort_field, filters
+            endpoint, from_time, to_time, response_alerts_field, time_sort_field, filters, True
         )
 
     def get_alerts(
@@ -246,6 +246,7 @@ class CortexXdrAPI:
         response_item_field: str,
         time_sort_field: str = "creation_time",
         filters: List = None,
+        task: bool = None,
     ) -> List[Dict]:
         batch_size = 100
         search_from = 0
@@ -273,6 +274,8 @@ class CortexXdrAPI:
         page = 1
         while not done:
             resp_json = self._post_to_api(endpoint, post_body)
+            if task:
+                self.logger.info(f"Total count: {resp_json.get('reply', {}).get('total_count', -1)}")
             # self.logger.info(f"RESPONSE: {resp_json}")
             if resp_json is not None:
                 total_count = resp_json.get("reply", {}).get("total_count", -1)
@@ -300,7 +303,8 @@ class CortexXdrAPI:
 
             # Back-off between making requests to the API.
             time.sleep(1)
-
+        if task:
+            return {"all_items": all_items, "total_count": total_count}
         return all_items
 
     def _isolate_multiple_endpoints(self, endpoints, isolation_state):

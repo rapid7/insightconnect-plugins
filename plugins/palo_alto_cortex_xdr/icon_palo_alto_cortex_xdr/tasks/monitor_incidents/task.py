@@ -66,10 +66,11 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
 
             # on first run from_time = 24 hours ago, to_time = now()
             # On 2nd run, from_time = last saved state, to_time = now()
-            logs_response = self.get_alerts(
+            logs_response, state, total_count = self.get_alerts(
                 start_time=start_time, end_time=end_time, limit=alert_limit, state=existing_state
             )
-            self.logger.info()
+            # TODO - If greater than MAX_LIMIT, paginate (return 7500 at a time, use event_timestamp in last)
+            # self.logger.info()
 
             return logs_response, state, False, 200, None
 
@@ -94,11 +95,14 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
         start_time = state.get(FROM_TIME_FILTER, start_time)
         end_time = state.get(TO_TIME_FILTER, end_time)
 
-        logs_response = self.connection.xdr_api.get_alerts_two(from_time=start_time, to_time=end_time)
+        response = self.connection.xdr_api.get_alerts_two(from_time=start_time, to_time=end_time)
 
-        self.logger.info(f"Retrieved {len(logs_response)} alerts")
+        alerts = response.get("all_items", [])
+        total_count = response.get("total_count", 0)
 
-        return logs_response, state
+        self.logger.info(f"Retrieved {total_count} alerts")
+
+        return alerts, state, total_count
 
     @staticmethod
     def _get_current_time():
