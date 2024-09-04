@@ -5,7 +5,7 @@ from .schema import NewExceptionRequestInput, NewExceptionRequestOutput, Input, 
 # Custom imports below
 from komand_rapid7_insightvm.util.endpoints import VulnerabilityException
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
-from typing import List, Dict, Any
+from typing import List
 
 
 class NewExceptionRequest(insightconnect_plugin_runtime.Trigger):
