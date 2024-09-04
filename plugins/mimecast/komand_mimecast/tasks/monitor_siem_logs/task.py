@@ -16,7 +16,7 @@ from ...util.exceptions import ApiClientException
 
 FIRST_RUN_CUTOFF = 24
 NORMAL_RUNNING_CUTOFF = 24 * 7
-MAX_EVENTS_PER_RUN = 7500
+MAX_EVENTS_PER_RUN_DEFAULT = 7500
 
 
 class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
@@ -50,6 +50,8 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             last_runs_filter_time = state.get(self.LAST_RUNS_FILTER_TIME)
             previous_file_hash = state.get(self.PREVIOUS_FILE_HASH, "")
 
+            max_events_per_run = custom_config.get("max_events_per_run", MAX_EVENTS_PER_RUN_DEFAULT)
+
             if last_runs_filter_time:
                 # we need to pin the filter time so the same filtering occurs between runs on the same file
                 filter_time = datetime.fromisoformat(last_runs_filter_time)
@@ -82,7 +84,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                     return [], state, has_more_pages, error.status_code, error
 
                 # check if the hashed file list from the previous run is the same as this run
-                if len(output) > MAX_EVENTS_PER_RUN:
+                if len(output) > max_events_per_run:
                     current_file_hash = self._check_hash_of_file_names(file_name_list)
 
                     # if the hash lists don't match then we want to reset the last log to 0 and start again
@@ -91,7 +93,9 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
 
                     previous_file_hash = current_file_hash
 
-                output, last_log_line = self._filter_and_sort_recent_events(output, filter_time, last_log_line)
+                output, last_log_line = self._filter_and_sort_recent_events(
+                    output, filter_time, last_log_line, max_events_per_run
+                )
                 if output:
                     break
 
@@ -130,7 +134,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             return [], state, has_more_pages, 500, exp
 
     def _filter_and_sort_recent_events(
-        self, task_output: List[Dict[str, Any]], filter_time: datetime, last_log_line: int
+        self, task_output: List[Dict[str, Any]], filter_time: datetime, last_log_line: int, max_events_per_run: int
     ) -> Tuple[List[Dict[str, Any]], int]:
         """
         Filters and sorts a list of events to retrieve only the recent events.
@@ -142,7 +146,10 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         :type: datetime
 
         :param last_log_line: how may lines of the log file has already been processed
-        :type: datetime
+        :type: int
+
+        :param max_events_per_run: The max number of events to parse in a run
+        :type: int
 
         :return: A tuple containing, a new list of dictionaries representing the filtered and sorted recent events and a number of processed log lines.
         :rtype: Tuple[List[Dict[str, Any]], int]
@@ -160,9 +167,9 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             key=itemgetter(EventLogs.FILTER_DATETIME),
         )
 
-        if len(task_output) > MAX_EVENTS_PER_RUN:
+        if len(task_output) > max_events_per_run:
             start_point = last_log_line
-            end_point = start_point + MAX_EVENTS_PER_RUN
+            end_point = start_point + max_events_per_run
 
             if end_point > len(task_output) - 1:
                 end_point = len(task_output) - 1
@@ -171,7 +178,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                 last_log_line = end_point
 
             self.logger.info(
-                f"Number of returned logs after filtering performed was greater than {MAX_EVENTS_PER_RUN}, limiting to {MAX_EVENTS_PER_RUN}.\n"
+                f"Number of returned logs after filtering performed was greater than {max_events_per_run}, limiting to {max_events_per_run}.\n"
                 f"fetching logs from {start_point} to {end_point}, using the filter time of {filter_time}"
             )
 

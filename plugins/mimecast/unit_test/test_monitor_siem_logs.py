@@ -170,7 +170,7 @@ class TestMonitorSiemLogs(TestCase):
                 self.assertIn(f"{test.get('expected_filter_time')}", mock_logger.mock_calls[-6][1][0])
 
     @patch("logging.Logger.warning")
-    @patch("komand_mimecast.tasks.monitor_siem_logs.task.MAX_EVENTS_PER_RUN", new=1)
+    @patch("komand_mimecast.tasks.monitor_siem_logs.task.MAX_EVENTS_PER_RUN_DEFAULT", new=1)
     def test_monitor_siem_logs_success_split_files_across_runs(self, mock_logger, _mock_data):
         content = [FILE_ZIP_CONTENT_1, FILE_ZIP_CONTENT_2, FILE_ZIP_CONTENT_3]
         token = SIEM_LOGS_HEADERS_RESPONSE.get("mc-siem-token")
