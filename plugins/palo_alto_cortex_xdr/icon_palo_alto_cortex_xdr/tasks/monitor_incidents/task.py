@@ -70,7 +70,10 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
                 start_time=start_time, end_time=end_time, limit=alert_limit, state=existing_state
             )
             # TODO - If greater than MAX_LIMIT, paginate (return 7500 at a time, use event_timestamp in last)
-            # self.logger.info()
+            if total_count >= MAX_LIMIT:
+                # Get the timestamp of the last
+                event_timestamp = logs_response[-1].get("event_timestamp")
+                return
 
             return logs_response, state, False, 200, None
 
