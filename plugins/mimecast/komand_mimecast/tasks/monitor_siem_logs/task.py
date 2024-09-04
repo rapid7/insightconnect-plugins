@@ -84,14 +84,13 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                     return [], state, has_more_pages, error.status_code, error
 
                 # check if the hashed file list from the previous run is the same as this run
-                if len(output) > max_events_per_run:
+                if previous_file_hash:
                     current_file_hash = self._check_hash_of_file_names(file_name_list)
 
                     # if the hash lists don't match then we want to reset the last log to 0 and start again
                     if last_log_line > 0 and current_file_hash != previous_file_hash:
+                        self.logger.info("The hashes between the current run and previous runs do not match, resetting the last log line to 0.")
                         last_log_line = 0
-
-                    previous_file_hash = current_file_hash
 
                 output, last_log_line = self._filter_and_sort_recent_events(
                     output, filter_time, last_log_line, max_events_per_run
