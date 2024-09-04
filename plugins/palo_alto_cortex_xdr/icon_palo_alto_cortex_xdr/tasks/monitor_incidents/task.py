@@ -18,8 +18,7 @@ MAX_LOOKBACK_DAYS = 7
 DEFAULT_LOOKBACK_HOURS = 24
 ALERT_LIMIT = 100
 
-# todo - Could change to 7500
-MAX_LIMIT = 10000
+MAX_LIMIT = 7500
 
 # State held values
 LAST_ALERT_TIME = "last_incident_time"
@@ -72,7 +71,7 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
             )
             self.logger.info()
 
-            return logs_response, state, has_more_pages, 200, None
+            return logs_response, state, False, 200, None
 
             # output, has_more_pages, state = self.get_incidents(
             #     start_time=start_time, end_time=end_time, limit=alert_limit, state=state
@@ -98,12 +97,8 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
         logs_response = self.connection.xdr_api.get_alerts_two(from_time=start_time, to_time=end_time)
 
         self.logger.info(f"Retrieved {len(logs_response)} alerts")
-        if is_paginating:
-            has_more_pages = True
-        else:
-            has_more_pages = False
 
-        return logs_response, has_more_pages, state
+        return logs_response, state
 
     @staticmethod
     def _get_current_time():
