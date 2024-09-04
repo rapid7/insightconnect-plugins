@@ -52,7 +52,7 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
         parameters = {}
         print(f"{existing_state = }")
 
-        custom_config = {"test": "testing"}
+        # custom_config = {"alert_limit": 50}
 
         try:
 
@@ -60,21 +60,17 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
             now = now_time - timedelta(minutes=15)
             # last 15 minutes
             end_time = now.strftime(TIME_FORMAT)
+            print(f"{end_time = }")
             start_time, alert_limit = self._parse_custom_config(custom_config, now, state)
 
             self.logger.info("Starting to download alerts...")
 
-            # #First run
-            # if not existing_state:
-            #     return
-            # else:
-            #     self.get_alerts()
-
             # on first run from_time = 24 hours ago, to_time = now()
             # On 2nd run, from_time = last saved state, to_time = now()
             logs_response = self.get_alerts(
-                start_time=start_time, end_time=end_time, limit=MAX_LIMIT, state=existing_state
+                start_time=start_time, end_time=end_time, limit=alert_limit, state=existing_state
             )
+            self.logger.info()
 
             return logs_response, state, has_more_pages, 200, None
 
@@ -94,10 +90,20 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
 
     def get_alerts(self, start_time: str, end_time: str, limit: int, state: dict) -> Tuple[list, bool, Dict[str, str]]:
         # override start_time with from_time filter in state if it exists (paginating)
+        # TODO - offset
+
         start_time = state.get(FROM_TIME_FILTER, start_time)
         end_time = state.get(TO_TIME_FILTER, end_time)
+
         logs_response = self.connection.xdr_api.get_alerts_two(from_time=start_time, to_time=end_time)
-        return logs_response
+
+        self.logger.info(f"Retrieved {len(logs_response)} alerts")
+        if is_paginating:
+            has_more_pages = True
+        else:
+            has_more_pages = False
+
+        return logs_response, has_more_pages, state
 
     @staticmethod
     def _get_current_time():
@@ -145,7 +151,7 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
                 state = self._drop_pagination_state(state)
 
         start_time = state.get(LAST_ALERT_TIME)
-
+        print(f"{start_time = }")
         if not state.get(FROM_TIME_FILTER):
             self.logger.info(f"{log_msg}Applying the following start time='{start_time}'. Limit={alert_limit}.")
         else:

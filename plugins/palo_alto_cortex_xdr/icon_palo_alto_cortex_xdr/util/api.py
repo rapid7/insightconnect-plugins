@@ -363,7 +363,6 @@ class CortexXdrAPI:
         # Calculate sha256:
         api_key_hash = hashlib.sha256(auth_key).hexdigest()
         # Generate HTTP call headers
-        self.logger.info(f"{str(api_key_id) = }\n{str(api_key_hash) = }\n{str(timestamp) = }\n{nonce = }")
         return {
             "x-xdr-timestamp": str(timestamp),
             "x-xdr-nonce": nonce,
