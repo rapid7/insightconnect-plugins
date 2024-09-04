@@ -3,7 +3,7 @@ from time import time
 from datetime import datetime, date
 
 import insightconnect_plugin_runtime
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Tuple
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import get_time_hours_ago
@@ -15,7 +15,7 @@ from ...util.exceptions import ApiClientException
 
 FIRST_RUN_CUTOFF = 24
 NORMAL_RUNNING_CUTOFF = 24 * 7
-MAX_EVENTS_PER_RUN = 7500
+MAX_EVENTS_PER_RUN = 10
 
 
 class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
@@ -26,6 +26,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
     NORMAL_RUNNING_CUTOFF = "normal_running_cutoff"  # nosec
     LAST_LOG_LINE = "last_log_line"  # nosec
     LAST_RUNS_FILTER_TIME = "last_runs_filter_time"  # nosec
+    PREVIOUS_FILE_HASH = "previous_file_hash"  # nosec
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -46,6 +47,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
 
             last_log_line = state.get(self.LAST_LOG_LINE, 0)
             last_runs_filter_time = state.get(self.LAST_RUNS_FILTER_TIME)
+            previous_file_hash = state.get(self.PREVIOUS_FILE_HASH, "")
 
             if last_runs_filter_time:
                 # we need to pin the filter time so the same filtering occurs between runs on the same file
@@ -63,7 +65,9 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             limit_time = time() + 30
             while time() < limit_time:
                 try:
-                    output, headers, status_code = self.connection.client.get_siem_logs(header_next_token)
+                    output, headers, status_code, file_name_list = self.connection.client.get_siem_logs(
+                        header_next_token
+                    )
                     header_next_token = headers.get(self.HEADER_NEXT_TOKEN, header_next_token)
                     if not output:
                         self.logger.info("No new logs returned from Mimecast")
@@ -75,6 +79,16 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                         f"Error: {error}, returning state={state}, has_more_pages={has_more_pages}"
                     )
                     return [], state, has_more_pages, error.status_code, error
+
+                # check if the hashed file list from the previous run is the same as this run
+                if len(output) > MAX_EVENTS_PER_RUN:
+                    current_file_hash = self._check_hash_of_file_names(file_name_list)
+
+                    # if the hash lists don't match then we want to reset the last log to 0 and start again
+                    if last_log_line > 0 and current_file_hash != previous_file_hash:
+                        last_log_line = 0
+
+                    previous_file_hash = current_file_hash
 
                 output, last_log_line = self._filter_and_sort_recent_events(output, filter_time, last_log_line)
                 if output:
@@ -97,9 +111,11 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
 
             if last_log_line > 0:
                 state[self.LAST_RUNS_FILTER_TIME] = filter_time.isoformat()
+                state[self.PREVIOUS_FILE_HASH] = current_file_hash
                 has_more_pages = True
             else:
                 state.pop(self.LAST_RUNS_FILTER_TIME, None)
+                state.pop(self.PREVIOUS_FILE_HASH, None)
 
             return output, state, has_more_pages, status_code, None
         except Exception as gen_error:
@@ -114,7 +130,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
 
     def _filter_and_sort_recent_events(
         self, task_output: List[Dict[str, Any]], filter_time: datetime, last_log_line: int
-    ) -> tuple[List[Dict[str, Any]], int]:
+    ) -> Tuple[List[Dict[str, Any]], int]:
         """
         Filters and sorts a list of events to retrieve only the recent events.
 
@@ -128,7 +144,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         :type: datetime
 
         :return: A tuple containing, a new list of dictionaries representing the filtered and sorted recent events and a number of processed log lines.
-        :rtype: tuple[List[Dict[str, Any]], int]
+        :rtype: Tuple[List[Dict[str, Any]], int]
         """
 
         self.logger.info(f"Number of raw logs returned from Mimecast: {len(task_output)}")
@@ -173,6 +189,10 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         if task_output:
             self.logger.info(f"Latest event time returned from Mimecast logs: {latest_time}")
         return task_output, last_log_line
+
+    def _check_hash_of_file_names(self, file_name_list: List[str]) -> str:
+        file_name_list = sorted(file_name_list)
+        return hash(tuple(file_name_list))
 
     def _get_filter_time(self, custom_config: Dict[str, int], normal_running_cutoff: bool = False) -> int:
         """

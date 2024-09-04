@@ -104,8 +104,8 @@ class MimecastAPI:
         self._check_rate_limiting(response)
 
         if "attachment" in response.headers.get("Content-Disposition", "") or self._is_last_token(response):
-            combined_json_list = self._handle_zip_file(response)
-            return combined_json_list, response.headers, response.status_code
+            combined_json_list, file_name_list = self._handle_zip_file(response)
+            return combined_json_list, response.headers, response.status_code, file_name_list
 
         # Due to how Mimecast returns a zip file in the response content, this error handling needs to happen after
         # the attempt to parse the content. Otherwise we hit json errors on the zipped content.
@@ -203,7 +203,8 @@ class MimecastAPI:
         try:
             with ZipFile(BytesIO(request.content)) as my_zip:
                 combined_json_list = []
-                for file_name in my_zip.namelist():
+                file_name_list = my_zip.namelist()
+                for file_name in file_name_list:
                     try:
                         # To avoid potential path traversal vulnerabilities, only valid files should be allowed.
                         # Due to the nature of the IO buffer, the filename cannot be checked until it is read in.
@@ -227,7 +228,7 @@ class MimecastAPI:
                             exc_info=True,
                         )
                         continue
-            return combined_json_list
+            return combined_json_list, file_name_list
         except BadZipFile as error:
             # empty response from Mimecast can hit this, which we know is not an error, don't log it
             if error.args[0] != "File is not a zip file":
