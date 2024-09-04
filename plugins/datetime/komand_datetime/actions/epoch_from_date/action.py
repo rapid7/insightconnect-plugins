@@ -1,8 +1,10 @@
 import insightconnect_plugin_runtime
-from .schema import EpochFromDateInput, EpochFromDateOutput, Input, Output
+import maya
 
 # Custom imports below
-import maya
+from insightconnect_plugin_runtime.exceptions import PluginException
+
+from .schema import EpochFromDateInput, EpochFromDateOutput, Input, Output
 
 
 class EpochFromDate(insightconnect_plugin_runtime.Action):
@@ -15,13 +17,18 @@ class EpochFromDate(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        inp_date = params.get(Input.DATETIME)
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        date = params.get(Input.DATETIME)
+        # END INPUT BINDING - DO NOT REMOVE
+
         try:
-            mayadt = maya.MayaDT.from_rfc3339(inp_date)
+            return {Output.EPOCH: int(maya.MayaDT.from_rfc3339(date).epoch)}
         except TypeError:
             self.logger.error("Non-RFC3339 date provided, input datetime must be RFC3339")
-            raise
-        except Exception as e:
-            self.logger.error("Error occurred: {}".format(e))
-        else:
-            return {Output.EPOCH: int(mayadt.epoch)}
+            raise PluginException(
+                cause="Non-RFC3339 date provided",
+                assistance="Please make sure that provided datetime is in RFC3339 format and try again.",
+            )
+        except Exception as error:
+            self.logger.error(f"Unknown error occurred. The error is: `{error}`")
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)

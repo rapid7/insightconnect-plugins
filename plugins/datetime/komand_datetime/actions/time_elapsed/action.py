@@ -1,6 +1,8 @@
 import insightconnect_plugin_runtime
-from .schema import TimeElapsedInput, TimeElapsedOutput, Input, Output
 import maya
+
+from .schema import Input, Output, TimeElapsedInput, TimeElapsedOutput
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class TimeElapsed(insightconnect_plugin_runtime.Action):
@@ -13,20 +15,31 @@ class TimeElapsed(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        time1 = maya.MayaDT.from_rfc3339(params.get(Input.FIRST_TIME))
-        time2 = maya.MayaDT.from_rfc3339(params.get(Input.SECOND_TIME))
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        time1 = params.get(Input.FIRST_TIME)
+        time2 = params.get(Input.SECOND_TIME)
         unit = params.get(Input.RESULT_UNIT)
-        diff = int(maya.MayaInterval(start=time1, end=time2).timedelta.total_seconds())
+        # END INPUT BINDING - DO NOT REMOVE
+
+        try:
+            difference = int(
+                maya.MayaInterval(
+                    start=maya.MayaDT.from_rfc3339(time1), end=maya.MayaDT.from_rfc3339(time2)
+                ).timedelta.total_seconds()
+            )
+        except Exception as error:
+            self.logger.error(f"Unknown error occurred. The error is: `{error}`")
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+
         if unit == "Minutes":
-            diff = int(round(diff / 60))
+            difference = int(round(difference / 60))
         elif unit == "Hours":
-            diff = int(round(diff / 3600))
+            difference = int(round(difference / 3600))
         elif unit == "Days":
-            diff = int(round(diff / 86400))
+            difference = int(round(difference / 86400))
         elif unit == "Months":
-            diff = int(round(diff / 2628000))
+            difference = int(round(difference / 2628000))
         elif unit == "Years":
-            diff = int(round(diff / 31540000))
-        else:
-            diff = diff
-        return {Output.DIFFERENCE: diff, Output.TIME_UNIT: unit}
+            difference = int(round(difference / 31540000))
+
+        return {Output.DIFFERENCE: difference, Output.TIME_UNIT: unit}
