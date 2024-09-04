@@ -12,9 +12,8 @@ from komand_mimecast.connection.schema import Input
 from komand_mimecast.util.constants import DATA_FIELD, DEFAULT_REGION
 
 
-DATE_TIME_NOW = datetime.now().strftime("%Y-%m-%dT%H:%M:%S%z")
-FILE_ZIP_CONTENT_1 = {"acc": "ABC123", "datetime": DATE_TIME_NOW}
-FILE_ZIP_CONTENT_2 = {"acc": "ABC1234", "datetime": DATE_TIME_NOW}
+FILE_ZIP_CONTENT_1 = {"acc": "ABC123", "datetime": "2022-01-01T12:00:00"}
+FILE_ZIP_CONTENT_2 = {"acc": "ABC1234", "datetime": "2022-01-01T12:00:00"}
 FILE_ZIP_CONTENT_3 = {"acc": "ABC12345"}
 SIEM_LOGS_HEADERS_RESPONSE = {"mc-siem-token": "token123"}
 

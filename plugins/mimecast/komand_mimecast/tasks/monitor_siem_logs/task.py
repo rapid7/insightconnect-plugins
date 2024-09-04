@@ -1,6 +1,7 @@
 from operator import itemgetter
 from time import time
 from datetime import datetime, date
+import hashlib
 
 import insightconnect_plugin_runtime
 from typing import Dict, List, Any, Tuple
@@ -159,7 +160,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             key=itemgetter(EventLogs.FILTER_DATETIME),
         )
 
-        if len(task_output) >= MAX_EVENTS_PER_RUN:
+        if len(task_output) > MAX_EVENTS_PER_RUN:
             start_point = last_log_line
             end_point = start_point + MAX_EVENTS_PER_RUN
 
@@ -171,7 +172,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
 
             self.logger.info(
                 f"Number of returned logs after filtering performed was greater than {MAX_EVENTS_PER_RUN}, limiting to {MAX_EVENTS_PER_RUN}.\n"
-                f"fetching logs from {start_point} to {end_point}"
+                f"fetching logs from {start_point} to {end_point}, using the filter time of {filter_time}"
             )
 
             task_output = task_output[start_point:end_point]
@@ -192,7 +193,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
 
     def _check_hash_of_file_names(self, file_name_list: List[str]) -> str:
         file_name_list = sorted(file_name_list)
-        return hash(tuple(file_name_list))
+        return hashlib.md5(str(file_name_list).encode("utf-8")).hexdigest()  # nosec B303
 
     def _get_filter_time(self, custom_config: Dict[str, int], normal_running_cutoff: bool = False) -> int:
         """

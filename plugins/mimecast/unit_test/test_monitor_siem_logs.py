@@ -5,6 +5,7 @@ import logging
 from jsonschema import validate
 from unittest import TestCase, skip
 from unittest.mock import patch
+from freezegun import freeze_time
 
 sys.path.append(os.path.abspath("../"))
 
@@ -15,6 +16,7 @@ from komand_mimecast.tasks.monitor_siem_logs.schema import MonitorSiemLogsOutput
 from util import Util, FILE_ZIP_CONTENT_1, FILE_ZIP_CONTENT_2, FILE_ZIP_CONTENT_3, SIEM_LOGS_HEADERS_RESPONSE
 
 
+@freeze_time("2022-01-01T12:00:00")
 @patch("requests.request", side_effect=Util.mocked_request)
 class TestMonitorSiemLogs(TestCase):
     def setUp(self) -> None:
@@ -108,7 +110,7 @@ class TestMonitorSiemLogs(TestCase):
         self.assertIn("negative seek", mock_logger.call_args[0][0])
 
     @patch("logging.Logger.info")
-    @patch("insightconnect_plugin_runtime.helper.get_time_now", return_value=datetime.datetime(2024, 5, 13, 0, 0, 0))
+    @patch("insightconnect_plugin_runtime.helper.get_time_now", return_value=datetime.datetime(2022, 1, 1, 0, 0, 0))
     def test_monitor_siem_logs_get_filter_time(self, mock_time, mock_logger, _mock_data):
         content = [FILE_ZIP_CONTENT_1, FILE_ZIP_CONTENT_2, FILE_ZIP_CONTENT_3]
         token = SIEM_LOGS_HEADERS_RESPONSE.get("mc-siem-token")
@@ -119,32 +121,32 @@ class TestMonitorSiemLogs(TestCase):
                 "has_more_pages": True,
                 "token": token,
                 "custom_config": {},
-                "expected_filter_time": "2024-05-12 00:00:00",
+                "expected_filter_time": "2021-12-31 00:00:00",
             },
             {
                 "resp": content,
                 "has_more_pages": True,
                 "token": token,
                 "custom_config": {
-                    "lookback": {"year": 2023, "month": 1, "day": 23, "hour": 22, "minute": 0, "second": 0}
+                    "lookback": {"year": 2021, "month": 1, "day": 23, "hour": 22, "minute": 0, "second": 0}
                 },
-                "expected_filter_time": "2023-01-23 22:00:00",
+                "expected_filter_time": "2021-01-23 22:00:00",
             },
             {
                 "resp": content,
                 "has_more_pages": True,
                 "token": token,
                 "custom_config": {
-                    "cutoff": {"date": {"year": 2023, "month": 1, "day": 23, "hour": 22, "minute": 0, "second": 0}}
+                    "cutoff": {"date": {"year": 2021, "month": 1, "day": 23, "hour": 22, "minute": 0, "second": 0}}
                 },
-                "expected_filter_time": "2023-01-23 22:00:00",
+                "expected_filter_time": "2021-01-23 22:00:00",
             },
             {
                 "resp": content,
                 "has_more_pages": True,
                 "token": token,
                 "custom_config": {"cutoff": {"hours": 72}},
-                "expected_filter_time": "2024-05-10 00:00:00",
+                "expected_filter_time": "2021-12-29 00:00:00",
             },
         ]
 
@@ -169,7 +171,7 @@ class TestMonitorSiemLogs(TestCase):
 
     @patch("logging.Logger.warning")
     @patch("komand_mimecast.tasks.monitor_siem_logs.task.MAX_EVENTS_PER_RUN", new=1)
-    def test_monitor_siem_logs_success_split_files_across_runes(self, mock_logger, _mock_data):
+    def test_monitor_siem_logs_success_split_files_across_runs(self, mock_logger, _mock_data):
         content = [FILE_ZIP_CONTENT_1, FILE_ZIP_CONTENT_2, FILE_ZIP_CONTENT_3]
         token = SIEM_LOGS_HEADERS_RESPONSE.get("mc-siem-token")
         tests = [
@@ -186,7 +188,11 @@ class TestMonitorSiemLogs(TestCase):
                 "resp": content,
                 "has_more_pages": True,
                 "token": token,
-                "state": {"last_log_line": 1, "last_runs_filter_time": "2024-09-02T14:17:32.716322"},
+                "state": {
+                    "last_log_line": 1,
+                    "last_runs_filter_time": "2022-01-01T12:00:00",
+                    "previous_file_hash": "9aabf6ac8a53ef0b93664b6507d2ce38",
+                },
                 "run": 2,
             },
         ]
