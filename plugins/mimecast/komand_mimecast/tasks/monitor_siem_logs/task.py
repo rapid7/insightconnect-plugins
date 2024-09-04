@@ -67,6 +67,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                     header_next_token = headers.get(self.HEADER_NEXT_TOKEN, header_next_token)
                     if not output:
                         self.logger.info("No new logs returned from Mimecast")
+                        last_log_line = 0
                         break
                 except ApiClientException as error:
                     self.logger.error(
@@ -113,7 +114,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
 
     def _filter_and_sort_recent_events(
         self, task_output: List[Dict[str, Any]], filter_time: datetime, last_log_line: int
-    ) -> List[Dict[str, Any]]:
+    ) -> tuple[List[Dict[str, Any]], int]:
         """
         Filters and sorts a list of events to retrieve only the recent events.
 
@@ -123,8 +124,11 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         :param filter_time: how far back in time we filter events from
         :type: datetime
 
-        :return: A new list of dictionaries representing the filtered and sorted recent events.
-        :rtype: List[Dict[str, Any]]
+        :param last_log_line: how may lines of the log file has already been processed
+        :type: datetime
+
+        :return: A tuple containing, a new list of dictionaries representing the filtered and sorted recent events and a number of processed log lines.
+        :rtype: tuple[List[Dict[str, Any]], int]
         """
 
         self.logger.info(f"Number of raw logs returned from Mimecast: {len(task_output)}")
