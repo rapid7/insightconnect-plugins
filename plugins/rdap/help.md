@@ -33,9 +33,9 @@ This action is used to perform an ASN (autonomous system number) lookup
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|asn|integer|None|True|Autonomous system number for which information will be searched|None|12345|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|asn|integer|None|True|Autonomous system number for which information will be searched|None|12345|None|None|
   
 Example input:
 
@@ -124,9 +124,9 @@ This action is used to perform a domain lookup
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|domain|string|None|True|Domain for which information will be searched|None|example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|domain|string|None|True|Domain for which information will be searched|None|example.com|None|None|
   
 Example input:
 
@@ -253,10 +253,10 @@ This action is used to perform an IP address lookup
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|getAsn|boolean|None|True|Whether to return ASN information|None|True|
-|ipAddress|string|None|True|IP address for which information will be searched|None|1.1.1.1|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|getAsn|boolean|None|True|Whether to return ASN information|None|True|None|None|
+|ipAddress|string|None|True|IP address for which information will be searched|None|1.1.1.1|None|None|
   
 Example input:
 
@@ -444,10 +444,11 @@ Example output:
 
 ## Troubleshooting
   
-*There is no troubleshooting for this plugin.*
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 2.0.2 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 2.0.1 - Updated SDK to the latest version
 * 2.0.0 - `Domain Lookup`, `IP Address Lookup`, `ASN Lookup`: Updated action outputs and refactored
 * 1.0.0 - Initial plugin - Actions: `Domain Lookup`, `IP Address Lookup`, `ASN Lookup`
