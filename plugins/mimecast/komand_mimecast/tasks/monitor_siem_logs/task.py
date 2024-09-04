@@ -1,9 +1,10 @@
 from operator import itemgetter
 from time import time
 from datetime import datetime, date
+import hashlib
 
 import insightconnect_plugin_runtime
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Tuple
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import get_time_hours_ago
@@ -15,12 +16,18 @@ from ...util.exceptions import ApiClientException
 
 FIRST_RUN_CUTOFF = 24
 NORMAL_RUNNING_CUTOFF = 24 * 7
+MAX_EVENTS_PER_RUN_DEFAULT = 7500
 
 
 class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
     NEXT_TOKEN = "next_token"  # nosec
     HEADER_NEXT_TOKEN = "mc-siem-token"  # nosec
     STATUS_CODE = "status_code"  # nosec
+
+    NORMAL_RUNNING_CUTOFF = "normal_running_cutoff"  # nosec
+    LAST_LOG_LINE = "last_log_line"  # nosec
+    LAST_RUNS_FILTER_TIME = "last_runs_filter_time"  # nosec
+    PREVIOUS_FILE_HASH = "previous_file_hash"  # nosec
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -37,21 +44,37 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         try:
             has_more_pages = False
             header_next_token = state.get(self.NEXT_TOKEN, "")
-            normal_running_cutoff = state.get("normal_running_cutoff", False)
-            filter_time = self._get_filter_time(custom_config, normal_running_cutoff=normal_running_cutoff)
+            normal_running_cutoff = state.get(self.NORMAL_RUNNING_CUTOFF, False)
+
+            last_log_line = state.get(self.LAST_LOG_LINE, 0)
+            last_runs_filter_time = state.get(self.LAST_RUNS_FILTER_TIME)
+            previous_file_hash = state.get(self.PREVIOUS_FILE_HASH, "")
+
+            max_events_per_run = custom_config.get("max_events_per_run", MAX_EVENTS_PER_RUN_DEFAULT)
+
+            if last_runs_filter_time:
+                # we need to pin the filter time so the same filtering occurs between runs on the same file
+                filter_time = datetime.fromisoformat(last_runs_filter_time)
+            else:
+                filter_time = self._get_filter_time(custom_config, normal_running_cutoff=normal_running_cutoff)
 
             if not header_next_token:
                 self.logger.info("First run...")
+            elif last_log_line > 0:
+                self.logger.info("Subsequent run, continuing to process the previous file...")
             else:
                 self.logger.info("Subsequent run using header_next_token...")
 
             limit_time = time() + 30
             while time() < limit_time:
                 try:
-                    output, headers, status_code = self.connection.client.get_siem_logs(header_next_token)
+                    output, headers, status_code, file_name_list = self.connection.client.get_siem_logs(
+                        header_next_token
+                    )
                     header_next_token = headers.get(self.HEADER_NEXT_TOKEN, header_next_token)
                     if not output:
                         self.logger.info("No new logs returned from Mimecast")
+                        last_log_line = 0
                         break
                 except ApiClientException as error:
                     self.logger.error(
@@ -59,11 +82,27 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                         f"Error: {error}, returning state={state}, has_more_pages={has_more_pages}"
                     )
                     return [], state, has_more_pages, error.status_code, error
-                output = self._filter_and_sort_recent_events(output, filter_time)
+
+                # check if the hashed file list from the previous run is the same as this run
+                if len(output) > max_events_per_run:
+                    current_file_hash = self._check_hash_of_file_names(file_name_list)
+
+                    # if the hash lists don't match then we want to reset the last log to 0 and start again
+                    if last_log_line > 0 and current_file_hash != previous_file_hash:
+                        self.logger.info(
+                            "The hashes between the current run and previous runs do not match, resetting the last log line to 0."
+                        )
+                        last_log_line = 0
+                else:
+                    last_log_line = 0
+
+                output, last_log_line = self._filter_and_sort_recent_events(
+                    output, filter_time, last_log_line, max_events_per_run
+                )
                 if output:
                     break
 
-            if header_next_token:
+            if header_next_token and last_log_line == 0:
                 self.logger.info(f"The token will be set to '{header_next_token}' in the state.")
                 state[self.NEXT_TOKEN] = header_next_token
                 # Mimecast API only returns isLastToken in the headers if no more pages, so if it is not present then
@@ -75,6 +114,16 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                 if headers.get(IS_LAST_TOKEN_FIELD) and state.get("normal_running_cutoff") is None:
                     self.logger.info("Caught up, saving 'normal_running_cutoff' as 'True' to the state")
                     state["normal_running_cutoff"] = True
+
+            state[self.LAST_LOG_LINE] = last_log_line
+
+            if last_log_line > 0:
+                state[self.LAST_RUNS_FILTER_TIME] = filter_time.isoformat()
+                state[self.PREVIOUS_FILE_HASH] = current_file_hash
+                has_more_pages = True
+            else:
+                state.pop(self.LAST_RUNS_FILTER_TIME, None)
+                state.pop(self.PREVIOUS_FILE_HASH, None)
 
             return output, state, has_more_pages, status_code, None
         except Exception as gen_error:
@@ -88,8 +137,8 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             return [], state, has_more_pages, 500, exp
 
     def _filter_and_sort_recent_events(
-        self, task_output: List[Dict[str, Any]], filter_time: datetime
-    ) -> List[Dict[str, Any]]:
+        self, task_output: List[Dict[str, Any]], filter_time: datetime, last_log_line: int, max_events_per_run: int
+    ) -> Tuple[List[Dict[str, Any]], int]:
         """
         Filters and sorts a list of events to retrieve only the recent events.
 
@@ -99,8 +148,14 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         :param filter_time: how far back in time we filter events from
         :type: datetime
 
-        :return: A new list of dictionaries representing the filtered and sorted recent events.
-        :rtype: List[Dict[str, Any]]
+        :param last_log_line: how may lines of the log file has already been processed
+        :type: int
+
+        :param max_events_per_run: The max number of events to parse in a run
+        :type: int
+
+        :return: A tuple containing, a new list of dictionaries representing the filtered and sorted recent events and a number of processed log lines.
+        :rtype: Tuple[List[Dict[str, Any]], int]
         """
 
         self.logger.info(f"Number of raw logs returned from Mimecast: {len(task_output)}")
@@ -114,6 +169,24 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             ),
             key=itemgetter(EventLogs.FILTER_DATETIME),
         )
+
+        if len(task_output) > max_events_per_run:
+            start_point = last_log_line
+            end_point = start_point + max_events_per_run
+
+            if end_point > len(task_output) - 1:
+                end_point = len(task_output) - 1
+                last_log_line = 0
+            else:
+                last_log_line = end_point
+
+            self.logger.info(
+                f"Number of returned logs after filtering performed was greater than {max_events_per_run}, limiting to {max_events_per_run}.\n"
+                f"fetching logs from {start_point} to {end_point}, using the filter time of {filter_time}"
+            )
+
+            task_output = task_output[start_point:end_point]
+
         latest_time = filter_time
         for event in task_output:
             event_date_time = event.get(EventLogs.FILTER_DATETIME)
@@ -126,7 +199,11 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             self.logger.info("None of the raw logs returned from Mimecast where with in filter timerange")
         if task_output:
             self.logger.info(f"Latest event time returned from Mimecast logs: {latest_time}")
-        return task_output
+        return task_output, last_log_line
+
+    def _check_hash_of_file_names(self, file_name_list: List[str]) -> str:
+        file_name_list = sorted(file_name_list)
+        return hashlib.md5(str(file_name_list).encode("utf-8")).hexdigest()  # nosec B303
 
     def _get_filter_time(self, custom_config: Dict[str, int], normal_running_cutoff: bool = False) -> int:
         """
