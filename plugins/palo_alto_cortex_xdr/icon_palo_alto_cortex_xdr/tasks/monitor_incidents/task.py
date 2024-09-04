@@ -8,7 +8,7 @@ from .schema import (
     Component,
     State,
 )
-
+import time
 from datetime import datetime, timedelta, timezone
 from insightconnect_plugin_runtime.exceptions import PluginException
 from typing import Any, Dict, Tuple
@@ -70,11 +70,16 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
                 start_time=start_time, end_time=end_time, limit=alert_limit, state=existing_state
             )
             # TODO - If greater than MAX_LIMIT, paginate (return 7500 at a time, use event_timestamp in last)
-            if total_count >= MAX_LIMIT:
+            if total_count <= MAX_LIMIT:
                 # Get the timestamp of the last
-                event_timestamp = logs_response[-1].get("event_timestamp")
-                return
+                for event in logs_response[-10:-1]:
+                    event_timestamp = str(event.get("event_timestamp"))[-7:]
+                    print(f"{event_timestamp = }")
 
+                state["event_timestamp"] = event_timestamp
+
+            print(f"{state = }")
+            time.sleep(5)
             return logs_response, state, False, 200, None
 
             # output, has_more_pages, state = self.get_incidents(
