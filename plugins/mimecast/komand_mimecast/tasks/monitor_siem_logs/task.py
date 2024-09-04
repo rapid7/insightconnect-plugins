@@ -15,7 +15,7 @@ from ...util.exceptions import ApiClientException
 
 FIRST_RUN_CUTOFF = 24
 NORMAL_RUNNING_CUTOFF = 24 * 7
-MAX_EVENTS_PER_RUN = 10
+MAX_EVENTS_PER_RUN = 7500
 
 
 class MonitorSiemLogs(insightconnect_plugin_runtime.Task):

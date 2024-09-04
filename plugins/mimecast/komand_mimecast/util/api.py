@@ -245,7 +245,7 @@ class MimecastAPI:
                 f"returning []. Error: {exception_error}",
                 exc_info=True,
             )
-        return []
+        return [], []
 
     def _prepare_header(self, uri: str) -> dict:
         # Generate request header values
