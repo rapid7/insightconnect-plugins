@@ -165,8 +165,7 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
 
             # todo - make method to convert
             alert_time = alert.get(TIMESTAMP_KEY) / 1000
-            dt = datetime.fromtimestamp(alert_time, tz=timezone.utc)
-            alert_time = dt.strftime(TIME_FORMAT)
+            alert_time = datetime.fromtimestamp(alert_time, tz=timezone.utc).strftime(TIME_FORMAT)
 
             if alert_time == start_time:
                 alert_hash = hash_sha1(alert)
