@@ -175,6 +175,7 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
                 print(f"{type(start_time)= }")
             elif alert_time > start_time:
                 deduped_alerts += alerts[index:]
+                print(f"{deduped_alerts= }")
                 break
 
         num_alerts = len(deduped_alerts)
