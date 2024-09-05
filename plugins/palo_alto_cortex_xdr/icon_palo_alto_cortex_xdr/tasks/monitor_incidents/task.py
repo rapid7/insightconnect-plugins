@@ -10,8 +10,11 @@ from .schema import (
 )
 import time
 from datetime import datetime, timedelta, timezone
-from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException, ResponseExceptionData
+from insightconnect_plugin_runtime.helper import response_handler, extract_json
 from typing import Any, Dict, Tuple
+import requests
+
 
 TIME_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
 MAX_LOOKBACK_DAYS = 7
@@ -63,13 +66,13 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
             start_time, alert_limit = self._parse_custom_config(custom_config, now, state)
 
             self.logger.info("Starting to download alerts...")
-
             # on first run from_time = 24 hours ago, to_time = now()
             # On 2nd run, from_time = last saved state, to_time = now()
             logs_response, state, total_count = self.get_alerts(
                 start_time=start_time, end_time=end_time, limit=alert_limit, state=existing_state
             )
             # TODO - If greater than MAX_LIMIT, paginate (return 7500 at a time, use event_timestamp in last)
+            # TODO - THIS WILL BE REMOVED BUT IS BEING KEPT TO SEE LOG OUTPUT
             if total_count <= MAX_LIMIT:
                 # Get the timestamp of the last
                 for event in logs_response[-10:-1]:
@@ -98,11 +101,26 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
 
     def get_alerts(self, start_time: str, end_time: str, limit: int, state: dict) -> Tuple[list, bool, Dict[str, str]]:
         # override start_time with from_time filter in state if it exists (paginating)
-        # TODO - offset
+
+        # TODO THIS WILL GO HERE BUT FOR TESTING PURPOSES IT WILL BE COMMENTED OUT
+        # if limit <= MAX_LIMIT:
+        #     self.logger.info("The pagination limit has been reached. \nMoving to last incident time")
+        #     # Get the timestamp of the last
+        #     for event in logs_response[-10:-1]:
+        #         event_timestamp = str(event.get("event_timestamp"))[-7:]
+        #         print(f"{event_timestamp = }")
+        #
+        #     state["event_timestamp"] = event_timestamp
 
         start_time = state.get(FROM_TIME_FILTER, start_time)
         end_time = state.get(TO_TIME_FILTER, end_time)
 
+        # TODO THIS IS CROWDSTRIKES VERSION OF GETTING ALERTS
+        search_alerts_resp_json = self.connection.search_for_alerts(
+            start_time=start_time, end_time=end_time, limit=limit, offset=offset
+        )
+
+        # TODO - THIS CAN POSSIBLY BE REPLACED BY search_alerts_resp_json
         response = self.connection.xdr_api.get_alerts_two(from_time=start_time, to_time=end_time)
 
         alerts = response.get("all_items", [])
@@ -111,6 +129,42 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
         self.logger.info(f"Retrieved {total_count} alerts")
 
         return alerts, state, total_count
+
+    # -TODO NEED TO STORE START AND END TIME AND PASS THROUGH
+    def search_for_alerts(self, start_time: str, end_time: str, limit: int) -> dict:
+        """
+        Function to get a list of alert ids from Palo Alto for a specified time range.
+
+        Max number of alerts returned is 7.5k If the query returns more than this,
+        CS will return a 400 response, so we can't pass a total offset+limit value greater than 10k.
+
+        :param start_time: string value used to query for alerts after this time
+        :param end_time: string value used to query for events before this time
+        :param limit: the maximum number of alerts to return in this response
+        :return: extracted json response containing meta, errors, and resources (list of alert ids if they exist)
+        """
+        alerts_endpoint = "/public_api/v1/alerts/get_alerts"
+        filter_timestamp = "event_timestamp"
+
+        # Manually build the string instead of using parameters so requests doesn't encode '>'
+        # -TODO AS WE DON'T HAVE FILTERS WORKING, WE MAY NEED TO SORT IT FIRST
+        filter_from_time_string = f">='{start_time}'"
+        filter_to_time_string = f"<='{end_time}'"
+        filter_parameters = (
+            f"filter={filter_timestamp}:{filter_from_time_string}%2B{filter_timestamp}:{filter_to_time_string}"
+        )
+
+        url_to_get = f"{alerts_endpoint}?{filter_parameters}"
+
+        params = {"limit": limit, "sort": f"{filter_timestamp}|asc"}
+
+        self.logger.info(f"Getting alert from: {url_to_get}")
+
+        response = requests.request("GET", url=url_to_get, params=params, headers=self.get_headers(), timeout=TIMEOUT)
+
+        response_handler(response=response, data_location=ResponseExceptionData.RESPONSE_JSON)
+
+        return extract_json(response)
 
     @staticmethod
     def _get_current_time():
