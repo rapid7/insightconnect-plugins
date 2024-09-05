@@ -11,7 +11,7 @@ from .schema import (
 import time
 from datetime import datetime, timedelta, timezone
 from insightconnect_plugin_runtime.exceptions import PluginException, ResponseExceptionData
-from insightconnect_plugin_runtime.helper import response_handler, extract_json
+from insightconnect_plugin_runtime.helper import response_handler, extract_json, hash_sha1
 from typing import Any, Dict, Tuple
 import requests
 
@@ -33,6 +33,7 @@ LAST_OBSERVATION_HASHES = "last_observation_hashes"
 ALERTS_OFFSET = "alerts_offset"
 FROM_TIME_FILTER = "from_time_filter"
 TO_TIME_FILTER = "to_time_filter"
+TIMESTAMP_KEY = "event_timestamp"
 
 NEXT_PAGE_LINK = "next_page_link"
 # Custom imports below
@@ -83,16 +84,16 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
             print(f"{state = }")
             return logs_response, state, False, 200, None
 
-        except Exception as error:
-            print(f"{error = }")
-            return [], existing_state, False, 500, PluginException(cause=error.cause, data=error)
-
         except PluginException as error:
             self.logger.error(
                 f"A PluginException has occurred. Status code 500 returned. Error: {error.cause}. "
                 f"Existing state: {existing_state}"
             )
             return [], existing_state, False, 500, PluginException(cause=error.cause, data=error)
+
+        except Exception as error:
+            print(f"{error = }")
+            return [], existing_state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     def get_alerts(self, start_time: str, end_time: str, limit: int, state: dict) -> Tuple[list, bool, Dict[str, str]]:
 
@@ -121,6 +122,9 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
 
         self.logger.info(f"Retrieved {total_count} alerts")
 
+        # dedupe and get the highest timestamp
+        new_alerts, last_alert_hashes, last_alert_time = self._dedupe_and_get_highest_time(alerts, start_time, state)
+
         is_paginating = limit < total_count
 
         self.logger.info(f"Found total alerts={total_count}, limit={limit}, is_paginating={is_paginating}")
@@ -144,7 +148,52 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
         state[LAST_ALERT_TIME] = last_alert_time if last_alert_time else end_time
         state[LAST_ALERT_HASH] = last_alert_hashes if last_alert_hashes else state.get(LAST_ALERT_HASH, [])
 
-        return alerts, has_more_pages, state
+        return new_alerts, has_more_pages, state
+
+    def _dedupe_and_get_highest_time(self, alerts: list, start_time: str, state: dict) -> Tuple[list, list, str]:
+        """
+        Function to dedupe alerts using existing hashes in the state, and return the highest
+        timestamp.
+
+        :param alerts: list of alerts
+        :param state: state of the plugin
+        :return: list of deduped alerts, list of new hashes, and the highest timestamp
+        """
+
+        old_hashes, deduped_alerts, new_hashes, highest_timestamp = state.get(LAST_ALERT_HASH, []), [], [], ""
+        for index, alert in enumerate(alerts):
+
+            # todo - make method to convert
+            alert_time = alert.get(TIMESTAMP_KEY) / 1000
+            dt = datetime.fromtimestamp(alert_time, tz=timezone.utc)
+            alert_time = dt.strftime(TIME_FORMAT)
+
+            if alert_time == start_time:
+                alert_hash = hash_sha1(alert)
+                if alert_hash not in old_hashes:
+                    deduped_alerts.append(alert)
+                print(f"{type(alert_time)= }")
+                print(f"{type(start_time)= }")
+            elif alert_time > start_time:
+                deduped_alerts += alerts[index:]
+                break
+
+        num_alerts = len(deduped_alerts)
+        self.logger.info(f"Received {len(alerts)} alerts, and after dedupe there is {num_alerts} results.")
+
+        if deduped_alerts:
+            # alert results are already sorted by CS API, so get the latest timestamp
+            highest_timestamp = deduped_alerts[-1].get(TIMESTAMP_KEY)
+
+            for alert in deduped_alerts:
+                if alert.get(TIMESTAMP_KEY) == highest_timestamp:
+                    new_hashes.append(hash_sha1(alert))
+                    self.logger.info(f"Hashed latest event with timestamp {highest_timestamp}.")
+
+            self.logger.debug(f"Highest timestamp is {highest_timestamp}")
+            self.logger.debug(f"Last hash is {new_hashes}")
+
+        return deduped_alerts, new_hashes, highest_timestamp
 
     @staticmethod
     def _get_current_time():
