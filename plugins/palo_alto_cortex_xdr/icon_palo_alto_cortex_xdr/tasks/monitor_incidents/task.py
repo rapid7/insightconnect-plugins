@@ -66,105 +66,85 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
             start_time, alert_limit = self._parse_custom_config(custom_config, now, state)
 
             self.logger.info("Starting to download alerts...")
-            # on first run from_time = 24 hours ago, to_time = now()
-            # On 2nd run, from_time = last saved state, to_time = now()
-            logs_response, state, total_count = self.get_alerts(
+
+            logs_response, has_more_pages, state = self.get_alerts(
                 start_time=start_time, end_time=end_time, limit=alert_limit, state=existing_state
             )
             # TODO - If greater than MAX_LIMIT, paginate (return 7500 at a time, use event_timestamp in last)
             # TODO - THIS WILL BE REMOVED BUT IS BEING KEPT TO SEE LOG OUTPUT
-            if total_count <= MAX_LIMIT:
-                # Get the timestamp of the last
-                for event in logs_response[-10:-1]:
-                    event_timestamp = str(event.get("event_timestamp"))[-7:]
-                    print(f"{event_timestamp = }")
+            # if total_count <= MAX_LIMIT:
+            #     # Get the timestamp of the last
+            #     for event in logs_response[-10:-1]:
+            #         event_timestamp = str(event.get("event_timestamp"))[-7:]
+            #         print(f"{event_timestamp = }")
 
-                state["event_timestamp"] = event_timestamp
-
+            #     state["event_timestamp"] = event_timestamp
+            self.logger.info(f"Total alerts returned = {len(logs_response)}")
             print(f"{state = }")
-            time.sleep(5)
             return logs_response, state, False, 200, None
 
-            # output, has_more_pages, state = self.get_incidents(
-            #     start_time=start_time, end_time=end_time, limit=alert_limit, state=state
-            # )
         except Exception as error:
             print(f"{error = }")
-            raise PluginException(cause="ruhroh", data=error)
-        # except PluginException as error:
-        #     self.logger.error(
-        #         f"A PluginException has occurred. Status code {status_code} returned. Error: {error.cause}. "
-        #         f"Existing state: {existing_state}"
-        #     )
+            return [], existing_state, False, 500, PluginException(cause=error.cause, data=error)
 
-        # return [], existing_state, False, status_code, PluginException(cause=error.cause, data=error)
+        except PluginException as error:
+            self.logger.error(
+                f"A PluginException has occurred. Status code 500 returned. Error: {error.cause}. "
+                f"Existing state: {existing_state}"
+            )
+            return [], existing_state, False, 500, PluginException(cause=error.cause, data=error)
 
     def get_alerts(self, start_time: str, end_time: str, limit: int, state: dict) -> Tuple[list, bool, Dict[str, str]]:
-        # override start_time with from_time filter in state if it exists (paginating)
 
         # TODO THIS WILL GO HERE BUT FOR TESTING PURPOSES IT WILL BE COMMENTED OUT
-        # if limit <= MAX_LIMIT:
-        #     self.logger.info("The pagination limit has been reached. \nMoving to last incident time")
-        #     # Get the timestamp of the last
-        #     for event in logs_response[-10:-1]:
-        #         event_timestamp = str(event.get("event_timestamp"))[-7:]
-        #         print(f"{event_timestamp = }")
-        #
-        #     state["event_timestamp"] = event_timestamp
+        if limit > MAX_LIMIT:
+            self.logger.info(
+                f"Warning: The pagination limit has been reached." f"Moving to last incident time: [{start_time}]"
+            )
+            state = self._drop_pagination_state(state)
 
         start_time = state.get(FROM_TIME_FILTER, start_time)
         end_time = state.get(TO_TIME_FILTER, end_time)
 
-        # TODO THIS IS CROWDSTRIKES VERSION OF GETTING ALERTS
-        search_alerts_resp_json = self.connection.search_for_alerts(
-            start_time=start_time, end_time=end_time, limit=limit, offset=offset
-        )
+        # # TODO THIS IS CROWDSTRIKES VERSION OF GETTING ALERTS
+        # search_alerts_resp_json = self.connection.search_for_alerts(
+        #     start_time=start_time, end_time=end_time, limit=limit
+        # )
 
-        # TODO - THIS CAN POSSIBLY BE REPLACED BY search_alerts_resp_json
         response = self.connection.xdr_api.get_alerts_two(from_time=start_time, to_time=end_time)
 
         alerts = response.get("all_items", [])
         total_count = response.get("total_count", 0)
 
+        new_alerts = []
+        last_alert_time, last_alert_hashes = "", []
+
         self.logger.info(f"Retrieved {total_count} alerts")
 
-        return alerts, state, total_count
+        is_paginating = limit < total_count
 
-    # -TODO NEED TO STORE START AND END TIME AND PASS THROUGH
-    def search_for_alerts(self, start_time: str, end_time: str, limit: int) -> dict:
-        """
-        Function to get a list of alert ids from Palo Alto for a specified time range.
+        self.logger.info(f"Found total alerts={total_count}, limit={limit}, is_paginating={is_paginating}")
 
-        Max number of alerts returned is 7.5k If the query returns more than this,
-        CS will return a 400 response, so we can't pass a total offset+limit value greater than 10k.
+        if is_paginating:
+            has_more_pages = True
 
-        :param start_time: string value used to query for alerts after this time
-        :param end_time: string value used to query for events before this time
-        :param limit: the maximum number of alerts to return in this response
-        :return: extracted json response containing meta, errors, and resources (list of alert ids if they exist)
-        """
-        alerts_endpoint = "/public_api/v1/alerts/get_alerts"
-        filter_timestamp = "event_timestamp"
+            state[FROM_TIME_FILTER] = start_time
+            state[TO_TIME_FILTER] = end_time
 
-        # Manually build the string instead of using parameters so requests doesn't encode '>'
-        # -TODO AS WE DON'T HAVE FILTERS WORKING, WE MAY NEED TO SORT IT FIRST
-        filter_from_time_string = f">='{start_time}'"
-        filter_to_time_string = f"<='{end_time}'"
-        filter_parameters = (
-            f"filter={filter_timestamp}:{filter_from_time_string}%2B{filter_timestamp}:{filter_to_time_string}"
-        )
+            self.logger.info(
+                f"Paginating alerts: Saving state with existing filters: "
+                f"from_time={start_time}"
+                f"to_time={end_time}"
+            )
+        else:
+            has_more_pages = False
 
-        url_to_get = f"{alerts_endpoint}?{filter_parameters}"
+            state = self._drop_pagination_state(state)
 
-        params = {"limit": limit, "sort": f"{filter_timestamp}|asc"}
+        state[LAST_ALERT_TIME] = last_alert_time if last_alert_time else end_time
+        state[LAST_ALERT_HASH] = last_alert_hashes if last_alert_hashes else state.get(LAST_ALERT_HASH, [])
 
-        self.logger.info(f"Getting alert from: {url_to_get}")
-
-        response = requests.request("GET", url=url_to_get, params=params, headers=self.get_headers(), timeout=TIMEOUT)
-
-        response_handler(response=response, data_location=ResponseExceptionData.RESPONSE_JSON)
-
-        return extract_json(response)
+        return alerts, has_more_pages, state
 
     @staticmethod
     def _get_current_time():
@@ -222,3 +202,25 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
             )
 
         return start_time, alert_limit
+
+    def _drop_pagination_state(self, state: dict) -> dict:
+        """
+        Helper function to pop values from the state if we need to break out of pagination.
+        :return: state
+        """
+        log_msg = "Dropped the following keys from state: "
+        if state.get(TO_TIME_FILTER):
+            log_msg += f"{TO_TIME_FILTER}; "
+            state.pop(TO_TIME_FILTER)
+
+        if state.get(FROM_TIME_FILTER):
+            log_msg += f"{FROM_TIME_FILTER}; "
+            state.pop(FROM_TIME_FILTER)
+
+        if state.get(ALERTS_OFFSET):
+            log_msg += f"{ALERTS_OFFSET}."
+            state.pop(ALERTS_OFFSET)
+
+        self.logger.debug(log_msg)
+
+        return state
