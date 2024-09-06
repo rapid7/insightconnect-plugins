@@ -74,11 +74,22 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
 
             response, state, has_more_pages = self.get_alerts_palo_alto(state=state, custom_config=custom_config)
 
-            self.logger.info(f"{response}, {state}, {has_more_pages = }")
+            # TODO - Are we supposed to show the total (MAX LIMIT) or the total (total_count)
+            self.logger.info(f"Total alerts returned: {len(response)}")
 
-            self.logger.info(f"Total alerts returned = {len(response)}")
-            print(f"{state = }")
-            return response, state, False, 200, None
+            # Local Debugging
+            self.logger.info(f"{type(response) = }")
+            self.logger.info(f"{len(response) = }")
+            self.logger.info(f"{state}, {has_more_pages = }")
+
+            # TODO - Change first None to response
+            # It's set to none so we can see all the logging without the results getting in the way
+
+            # Note - when running locally, we should only get the first 100
+            # When has more pages is True, the task will be rerun automatically again (on staging / the cloud exec)
+
+            # If has more pages == True, then we need to change the search index from 0-100 to 101-200 (Done below now I think)
+            return None, state, False, 200, None
 
         except PluginException as error:
             self.logger.error(
@@ -98,8 +109,13 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
         endpoint = "/public_api/v1/alerts/get_alerts"
         response_alerts_field = "alerts"
         time_sort_field = "creation_time"
-        search_from = 0
-        search_to = search_from + ALERT_LIMIT
+
+        self.logger.info(f"{LAST_SEARCH_TO = }")
+        self.logger.info(f"{ALERT_LIMIT = }")
+
+        search_from = state.get(LAST_SEARCH_FROM, 0)
+        search_to = state.get(LAST_SEARCH_TO, 0) + 100
+        # search_to = search_from + ALERT_LIMIT
         headers = self.connection.xdr_api.get_headers()
 
         post_body = {
@@ -111,6 +127,14 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
         }
 
         url = urllib.parse.urljoin("https://api-rapid7.xdr.us.paloaltonetworks.com", endpoint)
+
+        # Local debugging
+        self.logger.info(f"{search_from = }")
+        self.logger.info(f"{search_to = }")
+        self.logger.info(f"{headers = }")
+        self.logger.info(f"{post_body = }")
+        self.logger.info(f"{url = }")
+
         try:
             request = requests.Request(method="post", url=url, headers=headers, json=post_body)
             response = make_request(
@@ -147,7 +171,7 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
                 has_more_pages = False
                 state = self._drop_pagination_state(state)
 
-            return response, state, has_more_pages
+            return results, state, has_more_pages
 
         except PluginException as error:
             self.logger.error(
