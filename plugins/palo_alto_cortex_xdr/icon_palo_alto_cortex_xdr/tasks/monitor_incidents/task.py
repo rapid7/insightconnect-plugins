@@ -27,8 +27,6 @@ MAX_LIMIT = 7500
 # State held values
 LAST_ALERT_TIME = "last_incident_time"
 LAST_ALERT_HASH = "last_incident_hash"
-LAST_OBSERVATION_TIME = "last_observation_time"
-LAST_OBSERVATION_HASHES = "last_observation_hashes"
 # State held values = CONOR
 LAST_SEARCH_FROM = "last_search_from"
 LAST_SEARCH_TO = "last_search_to"
@@ -59,7 +57,8 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
         parameters = {}
         print(f"{existing_state = }")
 
-        # custom_config = {"alert_limit": 50}
+        custom_config = {}
+        state = {LAST_SEARCH_FROM: 101, LAST_SEARCH_TO: 200}
 
         try:
 
@@ -89,7 +88,7 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
             # When has more pages is True, the task will be rerun automatically again (on staging / the cloud exec)
 
             # If has more pages == True, then we need to change the search index from 0-100 to 101-200 (Done below now I think)
-            return None, state, False, 200, None
+            return None, state, has_more_pages, 200, None
 
         except PluginException as error:
             self.logger.error(
@@ -114,7 +113,9 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
         self.logger.info(f"{ALERT_LIMIT = }")
 
         search_from = state.get(LAST_SEARCH_FROM, 0)
-        search_to = state.get(LAST_SEARCH_TO, 0) + 100
+        search_to = state.get(LAST_SEARCH_TO, 100) + 100
+        # TODO - Figure out the hundreds i wanna cry
+
         # search_to = search_from + ALERT_LIMIT
         headers = self.connection.xdr_api.get_headers()
 
