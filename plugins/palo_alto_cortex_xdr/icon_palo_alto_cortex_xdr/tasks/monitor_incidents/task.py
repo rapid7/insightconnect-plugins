@@ -58,7 +58,7 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
         print(f"{existing_state = }")
 
         custom_config = {}
-        state = {LAST_SEARCH_FROM: 101, LAST_SEARCH_TO: 200}
+        state = {LAST_SEARCH_FROM: None, LAST_SEARCH_TO: None}
 
         try:
 
@@ -109,19 +109,24 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
         response_alerts_field = "alerts"
         time_sort_field = "creation_time"
 
-        self.logger.info(f"{LAST_SEARCH_TO = }")
         self.logger.info(f"{ALERT_LIMIT = }")
 
-        # Does it go 0 -> 100 -> 101 -> 201 -> 301
+        # IT GOES 0 -> 100 | 101 -> 200 | 201 -> 300
+        # IF NULL, SET FROM = 0
+
         if not state.get(LAST_SEARCH_FROM):
             search_from = 0
         else:
+            # STARTS 1 RECORD AFTER THE LAST ONE PULLED
             search_from = state.get(LAST_SEARCH_TO) + 1
+            self.logger.info(f"{search_from = }")
 
+        # IF NULL SET TO = 100
         if not state.get(LAST_SEARCH_TO):
             search_to = 100
         else:
-            search_to = state.get(LAST_SEARCH_TO) + 100
+            # SEARCH_TO GETS THE NEWEST SEARCH FROM VALUE AND WILL STOP AFTER PULLING 99 ADDITIONAL RECORDS (100 TOTAL)
+            search_to = search_from + 99
 
         state[LAST_SEARCH_FROM] = search_from
         state[LAST_SEARCH_TO] = search_to
