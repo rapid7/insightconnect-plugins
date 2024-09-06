@@ -173,17 +173,17 @@ class CortexXdrAPI:
         return self._isolate_endpoint(endpoints, isolation_state)
 
     # Sort from and to time
-    def get_alerts_two(self, from_time: int = None, to_time: int = None, time_sort_field: str = "creation_time"):
-        endpoint = "/public_api/v1/alerts/get_alerts"
-        response_alerts_field = "alerts"
-        return self._get_items_from_endpoint(
-            endpoint=endpoint,
-            from_time=from_time,
-            to_time=to_time,
-            response_item_field=response_alerts_field,
-            time_sort_field=time_sort_field,
-            task=True,
-        )
+    # def get_alerts_two(self, from_time: int = None, to_time: int = None, time_sort_field: str = "creation_time"):
+    #     endpoint = "/public_api/v1/alerts/get_alerts"
+    #     response_alerts_field = "alerts"
+    #     return self._get_items_from_endpoint(
+    #         endpoint=endpoint,
+    #         from_time=from_time,
+    #         to_time=to_time,
+    #         response_item_field=response_alerts_field,
+    #         time_sort_field=time_sort_field,
+    #         task=True,
+    #     )
 
     def get_alerts(
         self, from_time: int, to_time: int, time_sort_field: str = "creation_time", filters: List = None
@@ -247,7 +247,6 @@ class CortexXdrAPI:
         response_item_field: str,
         time_sort_field: str = "creation_time",
         filters: List = None,
-        task: bool = None,
     ) -> List[Dict]:
         batch_size = 100
         search_from = 0
@@ -261,23 +260,14 @@ class CortexXdrAPI:
 
         # Request items in ascending order so that we get the oldest items first.
         self.logger.info(f"FILTERS: {filters = }")
-        if not task:
-            post_body = {
-                "request_data": {
-                    "search_from": search_from,
-                    "search_to": search_to,
-                    "sort": {"field": time_sort_field, "keyword": "asc"},
-                    "filters": filters,
-                }
+        post_body = {
+            "request_data": {
+                "search_from": search_from,
+                "search_to": search_to,
+                "sort": {"field": time_sort_field, "keyword": "asc"},
+                "filters": filters,
             }
-        else:
-            post_body = {
-                "request_data": {
-                    "search_from": search_from,
-                    "search_to": search_to,
-                    "sort": {"field": time_sort_field, "keyword": "asc"},
-                }
-            }
+        }
 
         done = False
         all_items = []
@@ -311,8 +301,7 @@ class CortexXdrAPI:
 
             # Back-off between making requests to the API.
             time.sleep(1)
-        if task:
-            return {"all_items": all_items, "total_count": total_count}
+
         return all_items
 
     def _isolate_multiple_endpoints(self, endpoints, isolation_state):

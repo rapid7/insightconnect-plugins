@@ -14,6 +14,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException, ResponseEx
 from insightconnect_plugin_runtime.helper import response_handler, extract_json, hash_sha1
 from typing import Any, Dict, Tuple
 import requests
+import urllib
 
 
 TIME_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
@@ -28,6 +29,9 @@ LAST_ALERT_TIME = "last_incident_time"
 LAST_ALERT_HASH = "last_incident_hash"
 LAST_OBSERVATION_TIME = "last_observation_time"
 LAST_OBSERVATION_HASHES = "last_observation_hashes"
+# State held values = CONOR
+LAST_SEARCH_FROM = "last_search_from"
+LAST_SEARCH_TO = "last_search_to"
 
 # Used to paginate
 ALERTS_OFFSET = "alerts_offset"
@@ -141,7 +145,7 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
     ###########################
     # Make request
     ###########################
-    def get_alerts_palo_alto(self, time_sort_field: str = "creation_time"):
+    def get_alerts_palo_alto(self, state):
         endpoint = "/public_api/v1/alerts/get_alerts"
         response_alerts_field = "alerts"
         time_sort_field = "creation_time"
@@ -156,6 +160,62 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
                 "sort": {"field": time_sort_field, "keyword": "asc"},
             }
         }
+        # TODO - Save search from and search to in state to paginate
+        state[LAST_SEARCH_FROM] = search_from
+        state[LAST_SEARCH_TO] = search_to
+
+        # SOmething like
+        # if total_count > batch_size:
+        #     has_more_pages = True
+
+        url = urllib.parse.urljoin(self.fully_qualified_domain_name, endpoint)
+        try:
+            response = requests.post(url=url, json=post_body, headers=self.headers, timeout=self.DEFAULT_TIMEOUT)
+            response_text = response.text
+
+            if response.status_code == 400:
+                raise PluginException(
+                    cause=f"API Error. API returned {response.status_code}",
+                    assistance="Bad request, invalid JSON.",
+                    data=response_text,
+                )
+            if response.status_code == 401:
+                raise PluginException(
+                    cause=f"API Error. API returned {response.status_code}",
+                    assistance="Authorization failed. Check your API Key ID & API Key.",
+                    data=response_text,
+                )
+            if response.status_code == 402:
+                raise PluginException(
+                    cause=f"API Error. API returned {response.status_code}",
+                    assistance="Unauthorized access. User does not have the required license type to run this API.",
+                    data=response_text,
+                )
+            if response.status_code == 403:
+                raise PluginException(
+                    cause=f"API Error. API returned {response.status_code}",
+                    assistance="Forbidden. The provided API Key does not have the required RBAC permissions to run this API.",
+                    data=response_text,
+                )
+            if response.status_code == 404:
+                raise PluginException(
+                    cause=f"API Error. API returned {response.status_code}",
+                    assistance=f"The object at {url} does not exist. Check the FQDN connection setting and try again.",
+                    data=response_text,
+                )
+            # Success; no content
+            if response.status_code == 204:
+                return None
+            if 200 <= response.status_code < 300:
+                return response.json()
+
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+        except json.decoder.JSONDecodeError as error:
+            self.logger.info(f"Invalid json: {error}")
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON)
+        except requests.exceptions.HTTPError as error:
+            self.logger.info(f"Request to {url} failed: {error}")
+            raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
     ###########################
     # Deduping
