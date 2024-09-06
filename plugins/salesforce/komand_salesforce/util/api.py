@@ -81,6 +81,7 @@ def refresh_token(max_tries: int) -> Callable:
 
 class SalesforceAPI:
     RETRY_LIMIT = 2
+    QUERY_BATCH_SIZE = 2000
 
     def __init__(
         self,
@@ -264,13 +265,19 @@ class SalesforceAPI:
             self._client_id, self._client_secret, self._username, self._password, self._security_token, self._oauth_url
         )
         instance_url = self._get_version(instance_url)
+        headers = {"Authorization": f"Bearer {access_token}"}
+
+        if "query" in url:
+            # enforce batch size so that task output doesn't exceed IDR limit
+            headers["Sforce-Query-Options"] = f"batchSize={self.QUERY_BATCH_SIZE}"
+
         try:
             response = requests.request(
                 url=f"{instance_url}{url}",
                 method=method,
                 params=params,
                 json=json,
-                headers={"Authorization": f"Bearer {access_token}"},
+                headers=headers,
             )
             if response.status_code == 400:
                 raise ApiException(
