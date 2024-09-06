@@ -10,8 +10,8 @@ from .schema import (
 )
 import time
 from datetime import datetime, timedelta, timezone
-from insightconnect_plugin_runtime.exceptions import PluginException, ResponseExceptionData
-from insightconnect_plugin_runtime.helper import response_handler, extract_json, hash_sha1
+from insightconnect_plugin_runtime.exceptions import PluginException, APIException
+from insightconnect_plugin_runtime.helper import response_handler, extract_json, hash_sha1, make_request
 from typing import Any, Dict, Tuple
 import requests
 import urllib
@@ -71,6 +71,7 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
             start_time, alert_limit = self._parse_custom_config(custom_config, now, state)
 
             self.logger.info("Starting to download alerts...")
+            self.get_alerts_palo_alto(state=state)
 
             logs_response, has_more_pages, state = self.get_alerts(
                 start_time=start_time, end_time=end_time, limit=alert_limit, state=existing_state
@@ -145,13 +146,12 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
     ###########################
     # Make request
     ###########################
-    def get_alerts_palo_alto(self, state):
+    def get_alerts_palo_alto(self, state, custom_config):
         endpoint = "/public_api/v1/alerts/get_alerts"
         response_alerts_field = "alerts"
         time_sort_field = "creation_time"
-        batch_size = 100
         search_from = 0
-        search_to = search_from + batch_size
+        search_to = search_from + ALERT_LIMIT
 
         post_body = {
             "request_data": {
@@ -160,62 +160,57 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
                 "sort": {"field": time_sort_field, "keyword": "asc"},
             }
         }
-        # TODO - Save search from and search to in state to paginate
-        state[LAST_SEARCH_FROM] = search_from
-        state[LAST_SEARCH_TO] = search_to
-
-        # SOmething like
-        # if total_count > batch_size:
-        #     has_more_pages = True
 
         url = urllib.parse.urljoin(self.fully_qualified_domain_name, endpoint)
         try:
-            response = requests.post(url=url, json=post_body, headers=self.headers, timeout=self.DEFAULT_TIMEOUT)
+            request = requests.Request(method="post", url=url, headers=self.headers, json=post_body)
+            response = make_request(
+                request, exception_custom_configs=custom_config, timeout=120, allowed_status_codes=[]
+            )
+
+            response = response.json()
             response_text = response.text
 
-            if response.status_code == 400:
-                raise PluginException(
-                    cause=f"API Error. API returned {response.status_code}",
-                    assistance="Bad request, invalid JSON.",
-                    data=response_text,
-                )
-            if response.status_code == 401:
-                raise PluginException(
-                    cause=f"API Error. API returned {response.status_code}",
-                    assistance="Authorization failed. Check your API Key ID & API Key.",
-                    data=response_text,
-                )
-            if response.status_code == 402:
-                raise PluginException(
-                    cause=f"API Error. API returned {response.status_code}",
-                    assistance="Unauthorized access. User does not have the required license type to run this API.",
-                    data=response_text,
-                )
-            if response.status_code == 403:
-                raise PluginException(
-                    cause=f"API Error. API returned {response.status_code}",
-                    assistance="Forbidden. The provided API Key does not have the required RBAC permissions to run this API.",
-                    data=response_text,
-                )
-            if response.status_code == 404:
-                raise PluginException(
-                    cause=f"API Error. API returned {response.status_code}",
-                    assistance=f"The object at {url} does not exist. Check the FQDN connection setting and try again.",
-                    data=response_text,
-                )
-            # Success; no content
-            if response.status_code == 204:
-                return None
-            if 200 <= response.status_code < 300:
-                return response.json()
+            total_count = response.get("reply", {}).get("total_count", -1)
+            result_count = response.get("reply", {}).get("result_count", -1)
+            results = response.get("reply", {}).get(response_alerts_field, [])
 
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
-        except json.decoder.JSONDecodeError as error:
-            self.logger.info(f"Invalid json: {error}")
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON)
-        except requests.exceptions.HTTPError as error:
-            self.logger.info(f"Request to {url} failed: {error}")
-            raise PluginException(preset=PluginException.Preset.UNKNOWN)
+            is_paginating = ALERT_LIMIT < total_count
+
+            if is_paginating:
+                has_more_pages = True
+                state[LAST_SEARCH_FROM] = search_from
+                state[LAST_SEARCH_TO] = search_to
+                # state = {search_from: 0, search_to: 100}
+                # next run it should then be
+                # state = {search_from: 101, search_to: 200} or state = {search_from: 101, search_to: (total - search_from) (109 or whatever it equals)}
+                # and so on
+
+                self.logger.info(
+                    f"Found total alerts={total_count}, limit={ALERT_LIMIT}, is_paginating={is_paginating}"
+                )
+                self.logger.info(
+                    f"Paginating alerts: Saving state with existing filters: "
+                    f"from_time={search_from}"
+                    f"to_time={search_to}"
+                )
+
+            else:
+                has_more_pages = False
+                state = self._drop_pagination_state(state)
+
+            return response, state, has_more_pages, 200, None
+
+        except PluginException as error:
+            self.logger.error(
+                f"A PluginException has occurred. Status code 500 returned. Error: {error.cause}. "
+                f"Existing state: {state}"
+            )
+            return [], state, False, 500, PluginException(cause=error.cause, data=error)
+
+        except Exception as error:
+            print(f"{error = }")
+            return [], state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     ###########################
     # Deduping
