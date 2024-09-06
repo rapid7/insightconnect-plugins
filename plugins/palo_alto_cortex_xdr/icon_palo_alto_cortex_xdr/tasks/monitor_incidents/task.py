@@ -71,6 +71,9 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
             logs_response, has_more_pages, state = self.get_alerts(
                 start_time=start_time, end_time=end_time, limit=alert_limit, state=existing_state
             )
+
+            self.logger.info(f"{has_more_pages = }")
+
             # TODO - If greater than MAX_LIMIT, paginate (return 7500 at a time, use event_timestamp in last)
             # TODO - THIS WILL BE REMOVED BUT IS BEING KEPT TO SEE LOG OUTPUT
             # if total_count <= MAX_LIMIT:
@@ -112,7 +115,13 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
         #     start_time=start_time, end_time=end_time, limit=limit
         # )
 
-        response = self.connection.xdr_api.get_alerts_two(from_time=start_time, to_time=end_time)
+        # start_time = datetime.strptime(start_time, "%Y-%m-%dT%H:%M:%S.%fZ")
+        # timestamp_start = int(start_time.timestamp())
+        #
+        # end_time = datetime.strptime(end_time, "%Y-%m-%dT%H:%M:%S.%fZ")
+        # timestamp_end = int(end_time.timestamp())
+
+        response = self.connection.xdr_api.get_alerts_two()
 
         alerts = response.get("all_items", [])
         total_count = response.get("total_count", 0)

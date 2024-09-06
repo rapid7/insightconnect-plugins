@@ -173,15 +173,16 @@ class CortexXdrAPI:
         return self._isolate_endpoint(endpoints, isolation_state)
 
     # Sort from and to time
-    def get_alerts_two(
-        self, from_time: int = None, to_time: int = None, time_sort_field: str = "creation_time", filters: List = None
-    ):
+    def get_alerts_two(self, from_time: int = None, to_time: int = None, time_sort_field: str = "creation_time"):
         endpoint = "/public_api/v1/alerts/get_alerts"
         response_alerts_field = "alerts"
-        # print(f"Get Alerts Two {from_time = }\n{to_time = }\n{time_sort_field = }\n{filters = }")
-
         return self._get_items_from_endpoint(
-            endpoint, from_time, to_time, response_alerts_field, time_sort_field, filters, True
+            endpoint=endpoint,
+            from_time=from_time,
+            to_time=to_time,
+            response_item_field=response_alerts_field,
+            time_sort_field=time_sort_field,
+            task=True,
         )
 
     def get_alerts(
@@ -260,13 +261,23 @@ class CortexXdrAPI:
 
         # Request items in ascending order so that we get the oldest items first.
         self.logger.info(f"FILTERS: {filters = }")
-        post_body = {
-            "request_data": {
-                "search_from": search_from,
-                "search_to": search_to,
-                "sort": {"field": time_sort_field, "keyword": "asc"},
+        if not task:
+            post_body = {
+                "request_data": {
+                    "search_from": search_from,
+                    "search_to": search_to,
+                    "sort": {"field": time_sort_field, "keyword": "asc"},
+                    "filters": filters,
+                }
             }
-        }
+        else:
+            post_body = {
+                "request_data": {
+                    "search_from": search_from,
+                    "search_to": search_to,
+                    "sort": {"field": time_sort_field, "keyword": "asc"},
+                }
+            }
 
         done = False
         all_items = []
@@ -274,9 +285,6 @@ class CortexXdrAPI:
         page = 1
         while not done:
             resp_json = self._post_to_api(endpoint, post_body)
-            if task:
-                self.logger.info(f"Total count: {resp_json.get('reply', {}).get('total_count', -1)}")
-            # self.logger.info(f"RESPONSE: {resp_json}")
             if resp_json is not None:
                 total_count = resp_json.get("reply", {}).get("total_count", -1)
                 print(f"TOTAL LOGS: {total_count = }")
