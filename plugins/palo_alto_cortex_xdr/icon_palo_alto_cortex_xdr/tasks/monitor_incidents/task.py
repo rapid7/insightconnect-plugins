@@ -144,6 +144,7 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
         url = urllib.parse.urljoin("https://api-rapid7.xdr.us.paloaltonetworks.com", endpoint)
 
         # Local debugging
+        self.logger.info(f"State in UpDate: {state = }")
         self.logger.info(f"{search_from = }")
         self.logger.info(f"{search_to = }")
         self.logger.info(f"{headers = }")
