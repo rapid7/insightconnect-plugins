@@ -74,15 +74,6 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
 
             self.logger.info(f"{has_more_pages = }")
 
-            # TODO - If greater than MAX_LIMIT, paginate (return 7500 at a time, use event_timestamp in last)
-            # TODO - THIS WILL BE REMOVED BUT IS BEING KEPT TO SEE LOG OUTPUT
-            # if total_count <= MAX_LIMIT:
-            #     # Get the timestamp of the last
-            #     for event in logs_response[-10:-1]:
-            #         event_timestamp = str(event.get("event_timestamp"))[-7:]
-            #         print(f"{event_timestamp = }")
-
-            #     state["event_timestamp"] = event_timestamp
             self.logger.info(f"Total alerts returned = {len(logs_response)}")
             print(f"{state = }")
             return logs_response, state, False, 200, None
@@ -100,7 +91,6 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
 
     def get_alerts(self, start_time: str, end_time: str, limit: int, state: dict) -> Tuple[list, bool, Dict[str, str]]:
 
-        # TODO THIS WILL GO HERE BUT FOR TESTING PURPOSES IT WILL BE COMMENTED OUT
         if limit > MAX_LIMIT:
             self.logger.info(
                 f"Warning: The pagination limit has been reached." f"Moving to last incident time: [{start_time}]"
@@ -109,17 +99,6 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
 
         start_time = state.get(FROM_TIME_FILTER, start_time)
         end_time = state.get(TO_TIME_FILTER, end_time)
-
-        # # TODO THIS IS CROWDSTRIKES VERSION OF GETTING ALERTS
-        # search_alerts_resp_json = self.connection.search_for_alerts(
-        #     start_time=start_time, end_time=end_time, limit=limit
-        # )
-
-        # start_time = datetime.strptime(start_time, "%Y-%m-%dT%H:%M:%S.%fZ")
-        # timestamp_start = int(start_time.timestamp())
-        #
-        # end_time = datetime.strptime(end_time, "%Y-%m-%dT%H:%M:%S.%fZ")
-        # timestamp_end = int(end_time.timestamp())
 
         response = self.connection.xdr_api.get_alerts_two()
 
@@ -159,6 +138,28 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
 
         return new_alerts, has_more_pages, state
 
+    ###########################
+    # Make request
+    ###########################
+    def get_alerts_palo_alto(self, time_sort_field: str = "creation_time"):
+        endpoint = "/public_api/v1/alerts/get_alerts"
+        response_alerts_field = "alerts"
+        time_sort_field = "creation_time"
+        batch_size = 100
+        search_from = 0
+        search_to = search_from + batch_size
+
+        post_body = {
+            "request_data": {
+                "search_from": search_from,
+                "search_to": search_to,
+                "sort": {"field": time_sort_field, "keyword": "asc"},
+            }
+        }
+
+    ###########################
+    # Deduping
+    ###########################
     def _dedupe_and_get_highest_time(self, alerts: list, start_time: str, state: dict) -> Tuple[list, list, str]:
         """
         Function to dedupe alerts using existing hashes in the state, and return the highest
@@ -208,6 +209,9 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
     def _get_current_time():
         return datetime.now(timezone.utc)
 
+    ###########################
+    # Custom Config
+    ###########################
     def _parse_custom_config(
         self, custom_config: Dict[str, Any], now: datetime, saved_state: Dict[str, str]
     ) -> Tuple[str, int]:
@@ -261,6 +265,9 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
 
         return start_time, alert_limit
 
+    ###########################
+    # Handle Pagination
+    ###########################
     def _drop_pagination_state(self, state: dict) -> dict:
         """
         Helper function to pop values from the state if we need to break out of pagination.
