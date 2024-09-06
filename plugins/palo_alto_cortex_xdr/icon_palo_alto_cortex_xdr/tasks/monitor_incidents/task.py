@@ -112,8 +112,22 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
         self.logger.info(f"{LAST_SEARCH_TO = }")
         self.logger.info(f"{ALERT_LIMIT = }")
 
-        search_from = state.get(LAST_SEARCH_FROM, 0)
-        search_to = state.get(LAST_SEARCH_TO, 100) + 100
+        # Does it go 0 -> 100 -> 101 -> 201 -> 301
+        if not state.get(LAST_SEARCH_FROM):
+            search_from = 0
+        else:
+            search_from = state.get(LAST_SEARCH_TO) + 1
+
+        if not state.get(LAST_SEARCH_TO):
+            search_to = 100
+        else:
+            search_to = state.get(LAST_SEARCH_TO) + 100
+
+        state[LAST_SEARCH_FROM] = search_from
+        state[LAST_SEARCH_TO] = search_to
+
+        # search_from = state.get(LAST_SEARCH_FROM, 0)
+        # search_to = state.get(LAST_SEARCH_TO, 100) + 100
         # TODO - Figure out the hundreds i wanna cry
 
         # search_to = search_from + ALERT_LIMIT
