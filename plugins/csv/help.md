@@ -12,124 +12,35 @@ as well as filter data within a CSV file.
 * Filter strings
 
 # Requirements
-
-_This plugin does not contain any requirements._
+  
+*This plugin does not contain any requirements.*
 
 # Supported Product Versions
 
-_There are no supported product versions listed._
+* 2024-09-06
 
 # Documentation
 
 ## Setup
-
-_This plugin does not contain a connection._
+  
+*This plugin does not contain a connection.*
 
 ## Technical Details
 
 ### Actions
 
-#### JSON to CSV String
-
-This action is used to convert a JSON array to CSV string.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|json|[]object|None|True|JSON array to convert to CSV string|None|[{"column1": "value1","column2": "value2","column3": "value3"},{"column1": "value4","column2": "value5","column3": "value6"}]|
-
-Example input:
-
-```
-{
-  "json": [
-    {
-      "column1": "value1",
-      "column2": "value2",
-      "column3": "value3"
-    },
-    {
-      "column1": "value4",
-      "column2": "value5",
-      "column3": "value6"
-    }
-  ]
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|csv_string|string|True|Resulting CSV string from the conversion|
-
-Example output:
-
-```
-{
-  "csv_string": "column1,column2,column3\r\nvalue1,value2,value3\r\nvalue4,value5,value6\r\n"
-}
-```
-
-#### JSON to CSV Bytes
-
-This action is used to convert a JSON array to CSV bytes.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|json|[]object|None|True|JSON array to convert to CSV bytes|None|[{"column1": "value1","column2": "value2","column3": "value3"},{"column1": "value4","column2": "value5","column3": "value6"}]|
-
-Example input:
-
-```
-{
-  "json": [
-    {
-      "column1": "value1",
-      "column2": "value2",
-      "column3": "value3"
-    },
-    {
-      "column1": "value4",
-      "column2": "value5",
-      "column3": "value6"
-    }
-  ]
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|csv_bytes|bytes|True|Resulting CSV file from the conversion|
-
-Example output:
-
-```
-{
-  "csv_bytes": "Y29sdW1uMSxjb2x1bW4yLGNvbHVtbjMNCnZhbHVlMSx2YWx1ZTIsdmFsdWUzDQp2YWx1ZTQsdmFs\ndWU1LHZhbHVlNg0K\n"
-}
-```
 
 #### Filter Bytes
 
-This action is used to extract fields from a user supplied CSV file expressed a base64 encoded data (bytes) and return a new CSV file
-with the extracted fields only.
+This action is used to keep fields from base64 CSV file
 
 ##### Input
 
-Field numbers (e.g. `f1`) and a range of fields (e.g. `f5-7`) are used to defined the extraction.
-For example, to extract fields 1, 2, 4, 5, 6 the following fields value can be used: `f1, f2, f4-6`.
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|csv|bytes|None|True|Base64 encoded CSV file|None|ZmllbGQxLCBmaWVsZDIKdmFsdWUxLCB2YWx1ZTIK|
-|fields|string|None|True|Fields to filter|None|f1, f2|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|csv|bytes|None|True|Base64 encoded CSV file|None|ZmllbGQxLCBmaWVsZDIKdmFsdWUxLCB2YWx1ZTIK|None|None|
+|fields|string|None|True|Fields to filter|None|f1, f2|None|None|
+  
 Example input:
 
 ```
@@ -141,10 +52,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|filtered|bytes|True|Filtered CSV file|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|filtered|bytes|True|Filtered CSV file|ZmllbGQxLGZpZWxkMgp2YWx1ZTEsdmFsdWUy|
+  
 Example output:
 
 ```
@@ -155,18 +66,15 @@ Example output:
 
 #### Filter String
 
-This action is used to extract fields from a user supplied CSV string and return a new CSV string with the extracted fields only.
+This action is used to keep fields from CSV string
 
 ##### Input
 
-Field numbers (e.g. `f1`) and a range of fields (e.g. `f5-7`) are used to defined the extraction. For example, to extract fields
-1, 2, 4, 5, 6 the following fields value can be used: `f1, f2, f4-6`.
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|csv|string|None|True|CSV string|None|column1, column2, column3\nvalue1, value2, value3|
-|fields|string|None|True|Fields to filter|None|f1, f2-f3|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|csv|string|None|True|CSV string|None|column1, column2, column3\nvalue1, value2, value3|None|None|
+|fields|string|None|True|Fields to filter|None|f1, f2-f3|None|None|
+  
 Example input:
 
 ```
@@ -178,10 +86,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|string|string|True|Filtered CSV string|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|string|string|True|Filtered CSV string|column1,column2,column3\nvalue1|
+  
 Example output:
 
 ```
@@ -190,32 +98,118 @@ Example output:
 }
 ```
 
-#### To JSON
+#### JSON to CSV Bytes
 
-This action is used to convert CSV to JSON.
+This action is used to convert a JSON array to CSV bytes
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|csv|bytes|None|True|Base64 encoded CSV file|None|ZmllbGQxLCBmaWVsZDIKdmFsdWUxLCB2YWx1ZTIK|
-|validation|boolean|False|True|Validate CSV data, error if not valid|None|True|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|json|[]object|None|True|JSON array to convert to CSV bytes|None|[{"column1": "value1","column2": "value2","column3": "value3"},{"column1": "value4","column2": "value5","column3": "value6"}]|None|None|
+  
 Example input:
 
 ```
 {
-  "csv": "ZmllbGQxLCBmaWVsZDIKdmFsdWUxLCB2YWx1ZTIK",
-  "validation": true
+  "json": [
+    {
+      "column1": "value1",
+      "column2": "value2",
+      "column3": "value3"
+    },
+    {
+      "column1": "value4",
+      "column2": "value5",
+      "column3": "value6"
+    }
+  ]
 }
 ```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|json|[]object|True|List of objects|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|csv_bytes|bytes|True|Resulting CSV file from the conversion|Y29sdW1uMSxjb2x1bW4yLGNvbHVtbjMNCnZhbHVlMSx2YWx1ZTIsdmFsdWUzDQp2YWx1ZTQsdmFs\ndWU1LHZhbHVlNg0K\n|
+  
+Example output:
 
+```
+{
+  "csv_bytes": "Y29sdW1uMSxjb2x1bW4yLGNvbHVtbjMNCnZhbHVlMSx2YWx1ZTIsdmFsdWUzDQp2YWx1ZTQsdmFs\\ndWU1LHZhbHVlNg0K\\n"
+}
+```
+
+#### JSON to CSV String
+
+This action is used to convert a JSON array to CSV string
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|json|[]object|None|True|JSON array to convert to CSV string|None|[{"column1": "value1","column2": "value2","column3": "value3"},{"column1": "value4","column2": "value5","column3": "value6"}]|None|None|
+  
+Example input:
+
+```
+{
+  "json": [
+    {
+      "column1": "value1",
+      "column2": "value2",
+      "column3": "value3"
+    },
+    {
+      "column1": "value4",
+      "column2": "value5",
+      "column3": "value6"
+    }
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|csv_string|string|True|Resulting CSV string from the conversion|Y29sdW1uMSxjb2x1bW4yLGNvbHVtbjMNCnZhbHVlMSx2YWx1ZTIsdmFsdWUzDQp2YWx1ZTQsdmFs|
+  
+Example output:
+
+```
+{
+  "csv_string": "Y29sdW1uMSxjb2x1bW4yLGNvbHVtbjMNCnZhbHVlMSx2YWx1ZTIsdmFsdWUzDQp2YWx1ZTQsdmFs"
+}
+```
+
+#### To JSON
+
+This action is used to convert CSV to JSON
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|csv|bytes|None|True|Base64 encoded CSV file|None|ZmllbGQxLCBmaWVsZDIKdmFsdWUxLCB2YWx1ZTIK|None|None|
+|validation|boolean|False|True|Validate CSV data, error if not valid|None|True|None|None|
+  
+Example input:
+
+```
+{
+  "csv": "ZmllbGQxLCBmaWVsZDIKdmFsdWUxLCB2YWx1ZTIK",
+  "validation": false
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|json|[]object|True|List of objects|[{"field1":"value1","field2":"value2"}]|
+  
 Example output:
 
 ```
@@ -228,22 +222,26 @@ Example output:
   ]
 }
 ```
-
 ### Triggers
+  
+*This plugin does not contain any triggers.*
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-_This plugin does not contain any triggers._
-
-### Custom Output Types
-
-_This plugin does not contain any custom output types._
+### Custom Types
+  
+*This plugin does not contain any custom output types.*
 
 ## Troubleshooting
 
 Ensure that the supplied file or string is valid CSV. Any CSV files containing double-quotes will need to have them triple escaped to work properly.
+
 CSV files must not have non-CSV data such as comments.
 
 # Version History
 
+* 2.0.2 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 2.0.1 - Fix bug with extra space character in JSON keys in `To JSON` action | Fix bugs with parsing cells with quotes and comma in `To JSON`, `Filter Bytes` and `Filter String` actions | Add unit tests for `To JSON`, `Filter Bytes` and `Filter String` actions
 * 2.0.0 - Add JSON to CSV String action | Rename JSON to CSV action to JSON to CSV Bytes
 * 1.1.6 - Update to v4 Python plugin runtime
@@ -260,7 +258,8 @@ CSV files must not have non-CSV data such as comments.
 
 # Links
 
+* [CSV](https://en.wikipedia.org/wiki/Comma-separated_values)
+
 ## References
 
 * [CSV](https://en.wikipedia.org/wiki/Comma-separated_values)
-

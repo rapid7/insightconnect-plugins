@@ -16,8 +16,10 @@ class FilterString(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         csv_string = params.get(Input.CSV, "")
         fields_to_filter = params.get(Input.FIELDS)
+        # END INPUT BINDING - DO NOT REMOVE
 
         csv_good = utils.csv_syntax_good(csv_string)
         fields_good = utils.fields_syntax_good(fields_to_filter)
