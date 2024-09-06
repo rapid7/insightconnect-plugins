@@ -32,6 +32,9 @@ class CortexXdrAPI:
         else:
             self.headers = self._standard_authentication(self.api_key_id, self.api_key)
 
+    def get_headers(self):
+        return self.headers
+
     def test_connection(self):
         endpoint = "/api_keys/validate/"
         try:

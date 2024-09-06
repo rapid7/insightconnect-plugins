@@ -71,17 +71,17 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
             start_time, alert_limit = self._parse_custom_config(custom_config, now, state)
 
             self.logger.info("Starting to download alerts...")
-            self.get_alerts_palo_alto(state=state)
+            response, state, has_more_pages = self.get_alerts_palo_alto(state=state, custom_config=custom_config)
 
-            logs_response, has_more_pages, state = self.get_alerts(
-                start_time=start_time, end_time=end_time, limit=alert_limit, state=existing_state
-            )
+            # logs_response, has_more_pages, state = self.get_alerts(
+            #     start_time=start_time, end_time=end_time, limit=alert_limit, state=existing_state
+            # )
 
             self.logger.info(f"{has_more_pages = }")
 
-            self.logger.info(f"Total alerts returned = {len(logs_response)}")
+            self.logger.info(f"Total alerts returned = {len(response)}")
             print(f"{state = }")
-            return logs_response, state, False, 200, None
+            return response, state, False, 200, None
 
         except PluginException as error:
             self.logger.error(
@@ -152,6 +152,7 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
         time_sort_field = "creation_time"
         search_from = 0
         search_to = search_from + ALERT_LIMIT
+        headers = self.connection.xdr_api.get_headers()
 
         post_body = {
             "request_data": {
@@ -163,7 +164,7 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
 
         url = urllib.parse.urljoin(self.fully_qualified_domain_name, endpoint)
         try:
-            request = requests.Request(method="post", url=url, headers=self.headers, json=post_body)
+            request = requests.Request(method="post", url=url, headers=headers, json=post_body)
             response = make_request(
                 request, exception_custom_configs=custom_config, timeout=120, allowed_status_codes=[]
             )
@@ -199,7 +200,7 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
                 has_more_pages = False
                 state = self._drop_pagination_state(state)
 
-            return response, state, has_more_pages, 200, None
+            return response, state, has_more_pages
 
         except PluginException as error:
             self.logger.error(
