@@ -17,7 +17,11 @@ class FilterBytes(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        decoded = base64.b64decode(params[Input.CSV]).decode()
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        csv_string = params.get(Input.CSV, "")
+        # END INPUT BINDING - DO NOT REMOVE
+
+        decoded = base64.b64decode(csv_string).decode()
         csv_good = utils.csv_syntax_good(decoded)
         fields_good = utils.fields_syntax_good(params[Input.FIELDS])
 
