@@ -11,9 +11,13 @@ class Run(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        results = {}
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         command = params.get(Input.COMMAND)
-        client = self.connection.client(params.get(Input.HOST))
+        host = params.get(Input.HOST)
+        # END INPUT BINDING - DO NOT REMOVE
+
+        results = {}
+        client = self.connection.client(host)
         _, stdout, stderr = client.exec_command(command)
         results["stdout"] = "\n".join(stdout.readlines())
         results["stderr"] = "\n".join(stderr.readlines())

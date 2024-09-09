@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "SSH"
 Vendor = "rapid7"
-Version = "4.0.1"
+Version = "4.0.2"
 Description = "The SSH protocol is a method for secure remote login from one computer to another"
 
 
