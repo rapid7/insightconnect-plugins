@@ -1,9 +1,6 @@
 # Description
 
-[Salesforce](https://www.salesforce.com) is a CRM solution that brings together all customer information in a single, integrated platform that enables building a customer-centered business from marketing right through to sales, customer service and business analysis.
-The Salesforce plugin allows you to search, update, and manage salesforce records.
-
-This plugin utilizes the [Salesforce API](https://developer.salesforce.com/docs/atlas.en-us.216.0.api_rest.meta/api_rest/intro_what_is_rest_api.htm).
+[Salesforce](https://www.salesforce.com) is a CRM solution that brings together all customer information in a single, integrated platform that enables building a customer-centered business from marketing right through to sales, customer service and business analysis. The Salesforce plugin allows you to search, update, and manage salesforce records. This plugin utilizes the [Salesforce API](https://developer.salesforce.com/docs/atlas.en-us.216.0.api_rest.meta/api_rest/intro_what_is_rest_api.htm)
 
 # Key Features
 
@@ -532,10 +529,11 @@ Example output:
 
 ## Troubleshooting
   
-*This plugin does not contain a troubleshooting.*
+*There is no troubleshooting for this plugin.*
 
 # Version History
 
+* 2.1.10 - Set Monitor Users task output length | Fix to remove whitespace from connection inputs
 * 2.1.9 - SDK Bump to 6.1.0 | Task Connection test added
 * 2.1.8 - Task Monitor Users: Allow lookback to be 7 days and initial run to be 24 hours & raise PluginException for API errors.
 * 2.1.7 - Task Monitor Users: Update connection to accept instance URL and force new token request per execution.
