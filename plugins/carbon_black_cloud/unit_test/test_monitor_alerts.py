@@ -43,7 +43,10 @@ import sys
 sys.path.append(os.path.abspath("../"))
 
 
-@patch("icon_carbon_black_cloud.tasks.monitor_alerts.task.PAGE_SIZE", new=2)  # force page size to be 2
+@patch("icon_carbon_black_cloud.tasks.monitor_alerts.task.ALERT_PAGE_SIZE_DEFAULT", new=2)  # force page size to be 2
+@patch(
+    "icon_carbon_black_cloud.tasks.monitor_alerts.task.OBSERVATION_PAGE_SIZE_DEFAULT", new=2
+)  # force page size to be 2
 @patch(
     "icon_carbon_black_cloud.tasks.monitor_alerts.task.MonitorAlerts._get_current_time",
     return_value=datetime(year=2024, month=4, day=25, hour=16, minute=00, tzinfo=timezone.utc),
@@ -371,7 +374,8 @@ class TestMonitorAlerts(TestCase):
                 {
                     LAST_OBSERVATION_TIME: "2024-04-25T15:35:00.000000Z",
                     LAST_ALERT_TIME: "2024-04-25T15:25:00.000000Z",
-                    "page_size": 2,
+                    "alert_page_size": 2,
+                    "observation_page_size": 2,
                 },
             ],
             [
@@ -395,13 +399,15 @@ class TestMonitorAlerts(TestCase):
                         "minute": 45,
                         "second": 55,
                     },
-                    "page_size": 7000,
+                    "alert_page_size": 7000,
+                    "observation_page_size": 7000,
                     "debug": True,
                 },
                 {
                     LAST_OBSERVATION_TIME: "2024-04-25T12:00:35.000000Z",
                     LAST_ALERT_TIME: "2024-04-20T10:45:55.000000Z",
-                    "page_size": 7000,
+                    "alert_page_size": 7000,
+                    "observation_page_size": 7000,
                     "debug": True,
                 },
             ],
@@ -435,10 +441,10 @@ class TestMonitorAlerts(TestCase):
         self.assertEqual(exp_values[LAST_OBSERVATION_TIME], requested_observation_time)
         self.assertEqual(exp_values[LAST_ALERT_TIME], requested_alert_time)
 
-        self.assertEqual(exp_values["page_size"], requested_observation_rows)
-        self.assertEqual(str(exp_values["page_size"]), requested_alert_rows)  # converted to string in the payload
+        self.assertEqual(exp_values["observation_page_size"], requested_observation_rows)
+        self.assertEqual(str(exp_values["alert_page_size"]), requested_alert_rows)  # converted to string in the payload
         self.assertEqual(
-            str(exp_values["page_size"]), trigger_observation_search_rows
+            str(exp_values["observation_page_size"]), trigger_observation_search_rows
         )  # formatted to string in the url
 
         if cps_config.get("debug", None):
