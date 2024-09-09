@@ -12,65 +12,34 @@ This plugin utilizes the Python 3 String library [set of methods](https://docs.p
 * Replace parts of a string
 
 # Requirements
+  
+*This plugin does not contain any requirements.*
 
-_This plugin does not contain any requirements._
+# Supported Product Versions
+
+* 2024-09-06
 
 # Documentation
 
 ## Setup
-
-_This plugin does not contain a connection._
+  
+*This plugin does not contain a connection.*
 
 ## Technical Details
 
 ### Actions
 
-#### Replace
-
-This action is used to replace parts of a string.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|in_string|string|None|True|The string to replace parts of|None|this is a string|
-|replacement_value|string|None|False|The string that will replace the parts that are found. If left blank the characters to find will be deleted|None|replacement|
-|string_part_to_find|string|None|True|The string part to look for. All instances of this string will be replaced|None|string|
-
-Example input:
-
-```
-{
-  "in_string": "the cow jumped over the moon",
-  "replacement_value": "cat",
-  "string_part_to_find": "cow"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|result_string|string|True|The string after replacement|
-
-Example output:
-
-```
-{
-  "result_string": "the cat jumped over the moon"
-}
-```
 
 #### Length
 
-This action is used to return the length of a string.
+This action is used to return the length of a string
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|string|string|None|True|String to return length of|None|return the number of characters in this string|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|string|string|None|True|String to return length of|None|return the number of characters in this string|None|None|
+  
 Example input:
 
 ```
@@ -81,15 +50,119 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|length|integer|True|Length of string|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|length|integer|True|Length of string|46|
+  
 Example output:
 
 ```
 {
   "length": 46
+}
+```
+
+#### Lower
+
+This action is used to converts uppercase letters to lowercase
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|string|string|None|True|String to convert e.g. USER=bob|None|LOWERCASE THIS STRING|None|None|
+  
+Example input:
+
+```
+{
+  "string": "LOWERCASE THIS STRING"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|lower|string|False|Lowercase string|lowercase this string|
+  
+Example output:
+
+```
+{
+  "lower": "lowercase this string"
+}
+```
+
+#### Replace
+
+This action is used to replace parts of a string
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|in_string|string|None|True|The string to replace parts of|None|this is a string|None|None|
+|replacement_value|string|None|False|The string that will replace the parts that are found. If left blank the characters to find will be deleted|None|replacement|None|None|
+|string_part_to_find|string|None|True|The string part to look for. All instances of this string will be replaced|None|string|None|None|
+  
+Example input:
+
+```
+{
+  "in_string": "this is a string",
+  "replacement_value": "replacement",
+  "string_part_to_find": "string"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|result_string|string|True|The string after replacement|this is a replacement|
+  
+Example output:
+
+```
+{
+  "result_string": "this is a replacement"
+}
+```
+
+#### Set Encoding
+
+This action is used to encode a string
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|encoding|string|None|True|Encoding to use|["UTF-8", "ASCII"]|ASCII|None|None|
+|error_handling|string|None|True|Error handler to use for encoding and decoding|["strict", "replace", "ignore"]|ignore|None|None|
+|string|string|None|True|String to encode|None|hello|None|None|
+  
+Example input:
+
+```
+{
+  "encoding": "ASCII",
+  "error_handling": "ignore",
+  "string": "hello"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|encoded|string|True|Encoded string|hello|
+  
+Example output:
+
+```
+{
+  "encoded": "hello"
 }
 ```
 
@@ -99,11 +172,11 @@ This action is used to convert a string to a list of strings.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|delimiter|string|None|False|The character used to split the string into slices for the list. The default is a newline, if not provided by the user|None|,|
-|string|string|None|True|String to break into an array|None|This,is,a,sentence|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|delimiter|string|None|False|The character used to split the string into slices for the list. The default is a newline, if not provided by the user|None|,|None|None|
+|string|string|None|True|String to break into an array|None|This,is,a,sentence|None|None|
+  
 Example input:
 
 ```
@@ -115,10 +188,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|list|[]string|False|List of string components|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|list|[]string|False|List of string components|["This", "is", "a", "sentence"]|
+  
 Example output:
 
 ```
@@ -146,16 +219,17 @@ It allows users the ability to use the green selector and choose a specific vari
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|block_delimiter|string|None|False|The character delimiter for the initial string split, applied before the string delimiter input. This parameter is optional but allows for more complex handling|None|[|
-|string|string|None|True|String to convert e.g. USER=Bob|None|User=Bob|
-|string_delimiter|string|None|False|The character used to split the string into slices for the list. The default is a space, if not provided by the user|None|=|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|block_delimiter|string|None|False|The character delimiter for the initial string split, applied before the string delimiter input. This parameter is optional but allows for more complex handling|None|[|None|None|
+|string|string|None|True|String to convert e.g. USER=Bob|None|User=Bob|None|None|
+|string_delimiter|string|None|False|The character used to split the string into slices for the list. The default is a space, if not provided by the user|None|=|None|None|
+  
 Example input:
 
 ```
 {
+  "block_delimiter": "[",
   "string": "User=Bob",
   "string_delimiter": "="
 }
@@ -163,12 +237,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|object|object|False|Object from string split|
-
-Given an input string of `User=Bob`, setting `string_delimiter` to `=` would return the information presented in the example below.
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|object|object|False|Object from string split|{"User":"Bob"}|
+  
 Example output:
 
 ```
@@ -200,116 +272,16 @@ Example output:
 }
 ```
 
-#### Upper
-
-This action is used to convert lowercase letters to uppercase.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|string|string|None|True|String to uppercase|None|uppercase this string|
-
-Example input:
-
-```
-{
-  "string": "uppercase this string"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|upper|string|False|Uppercase string|
-
-Example output:
-
-```
-{
-  "upper": "UPPERCASE THIS STRING"
-}
-```
-
-#### Lower
-
-This action is used to convert uppercase letters to lowercase.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|string|string|None|True|String to convert e.g. USER=bob|None|LOWERCASE THIS STRING|
-
-Example input:
-
-```
-{
-  "string": "LOWERCASE THIS STRING"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|lower|string|False|Lowercase string|
-
-Example output:
-
-```
-{
-  "lower": "lowercase this string"
-}
-```
-
-#### Set Encoding
-
-This action is used to encode a string.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|encoding|string|None|True|Encoding to use|['UTF-8', 'ASCII']|ASCII|
-|error_handling|string|None|True|Error handler to use for encoding and decoding|['strict', 'replace', 'ignore']|ignore|
-|string|string|None|True|String to encode|None|hello|
-
-Example input:
-
-```
-{
-  "encoding": "ASCII",
-  "error_handling": "ignore",
-  "string": "hello"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|encoded|string|True|Encoded string|
-
-Example output:
-
-```
-{
-  "encoded": "hello"
-}
-```
-
 #### Trim
 
-This action is used to trim a string of leading and trailing whitespace.
+This action is used to trim a string of leading and trailing whitespace
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|string|string|None|True|String to trim|None|Extra spaces at the end of this string     |
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|string|string|None|True|String to trim|None|Extra spaces at the end of this string     |None|None|
+  
 Example input:
 
 ```
@@ -320,10 +292,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|trimmed|string|True|Trimmed string|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|trimmed|string|True|Trimmed string|Extra spaces at the end of this string|
+  
 Example output:
 
 ```
@@ -332,21 +304,55 @@ Example output:
 }
 ```
 
+#### Upper
+
+This action is used to converts lowercase letters to uppercase
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|string|string|None|True|String to uppercase|None|uppercase this string|None|None|
+  
+Example input:
+
+```
+{
+  "string": "uppercase this string"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|upper|string|False|Uppercase string|UPPERCASE THIS STRING|
+  
+Example output:
+
+```
+{
+  "upper": "UPPERCASE THIS STRING"
+}
+```
 ### Triggers
+  
+*This plugin does not contain any triggers.*
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-_This plugin does not contain any triggers._
-
-### Custom Output Types
-
-_This plugin does not contain any custom output types._
+### Custom Types
+  
+*This plugin does not contain any custom output types.*
 
 ## Troubleshooting
 
-There may be complex string manipulation needs that are likely outside the scope of this plugin.
-If this is the case, consider using the Python 3 Script plugin instead.
+There may be complex string manipulation needs that are likely outside the scope of this plugin. If this is the case, consider using the Python 3 Script plugin instead.
 
 # Version History
 
+* 1.4.1 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 1.4.0 - New action Replace
 * 1.3.1 - Update to v4 Python plugin runtime
 * 1.3.0 - New action Length | Add example inputs
@@ -357,6 +363,8 @@ If this is the case, consider using the Python 3 Script plugin instead.
 * 1.0.0 - Initial plugin
 
 # Links
+
+* [Python 3 String Methods](https://docs.python.org/3/library/stdtypes.html#string-methods)
 
 ## References
 
