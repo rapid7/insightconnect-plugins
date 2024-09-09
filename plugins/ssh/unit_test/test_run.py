@@ -1,12 +1,14 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
+from unittest.mock import patch
+
 from komand_ssh.actions.run import Run
 from komand_ssh.actions.run.schema import Output
-from unittest.mock import patch
+
 from util import Util
 
 
