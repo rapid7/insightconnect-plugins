@@ -15,15 +15,14 @@ class SetEncoding(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        string = params.get(Input.STRING)
-        encoding_val = params.get(Input.ENCODING).lower()
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        input_string = params.get(Input.STRING)
+        encoding_val = params.get(Input.ENCODING, "").lower()
         error_handler = params.get(Input.ERROR_HANDLING)
+        # END INPUT BINDING - DO NOT REMOVE
 
         try:
-            output = string.encode(encoding_val, error_handler)
-        except UnicodeError:
-            raise PluginException(cause="Encoding failed.", assistance="Could not encode given string.")
-
-        output = output.decode(encoding_val, error_handler)
-
-        return {Output.ENCODED: output}
+            output = input_string.encode(encoding_val, error_handler)
+            return {Output.ENCODED: output.decode(encoding_val, error_handler)}
+        except Exception as error:
+            raise PluginException(cause="Encoding failed.", assistance="Could not encode given string.", data=error)

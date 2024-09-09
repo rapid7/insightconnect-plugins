@@ -1,4 +1,5 @@
 from unittest import TestCase
+
 from komand_string.actions.trim import Trim
 
 

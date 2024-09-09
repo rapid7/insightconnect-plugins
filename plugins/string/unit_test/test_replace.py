@@ -1,6 +1,12 @@
-from unittest import TestCase
-from komand_string.actions.replace import Replace
+import os
+import sys
+
+sys.path.append(os.path.abspath("../"))
+
 import logging
+from unittest import TestCase
+
+from komand_string.actions.replace import Replace
 
 
 class TestReplace(TestCase):
