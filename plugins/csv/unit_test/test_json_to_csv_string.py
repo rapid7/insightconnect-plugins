@@ -4,6 +4,7 @@ import sys
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
+
 from komand_csv.actions.json_to_csv_string import JsonToCsvString
 from komand_csv.actions.json_to_csv_string.schema import Input, Output
 
