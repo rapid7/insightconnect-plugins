@@ -15,6 +15,8 @@ from komand_sentinelone.util.exceptions import ApiException
 
 # Custom imports below
 from datetime import datetime, timezone, timedelta
+from dateutil import parser
+
 from typing import List, Dict, Tuple, Optional
 
 # State values
@@ -256,12 +258,21 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             new_timestamp_string = logs[-1].get("createdAt")
         if new_timestamp_string is None:
             new_timestamp_string = logs[-1].get("threatInfo", {}).get("createdAt")
-        new_timestamp = datetime.strptime(new_timestamp_string, DATE_TIME_FORMAT).astimezone(timezone.utc)
+        # Parse date-time string into datetime object
+        self.logger.info(f"Found latest log timestamp: {new_timestamp_string}")
+        new_timestamp = parser.parse(new_timestamp_string).astimezone(timezone.utc)
         if not latest_timestamp_string:
             return new_timestamp_string
-        latest_timestamp = datetime.strptime(latest_timestamp_string, DATE_TIME_FORMAT).astimezone(timezone.utc)
+        latest_timestamp = parser.parse(latest_timestamp_string).astimezone(timezone.utc)
         if new_timestamp > latest_timestamp:
+            self.logger.info(
+                f"Latest timestamp ({new_timestamp}) is more recent than timestamp in state: ({latest_timestamp})"
+            )
             latest_timestamp_string = new_timestamp_string
+        else:
+            self.logger.info(
+                f"Latest timestamp ({new_timestamp}) is not more recent than timestamp in state: ({latest_timestamp})"
+            )
         return latest_timestamp_string
 
     def determine_next_pagination_cycle(self, state: dict, current_run_timestamp: str) -> bool:
@@ -317,7 +328,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             lookback_date = None
             # Set the lookback date to the last timestamp if it exists
             if timestamp:
-                lookback_date = datetime.strptime(timestamp, DATE_TIME_FORMAT).astimezone(timezone.utc)
+                lookback_date = parser.parse(timestamp).astimezone(timezone.utc)
                 self.logger.info(f"Last log timestamp found for {log_type}: {lookback_date}")
 
             # limit the lookback to the cutoff. If there is no last timestamp, lookback to the cutoff
