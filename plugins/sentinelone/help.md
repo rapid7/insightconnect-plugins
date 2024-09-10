@@ -2352,6 +2352,7 @@ Example output:
 
 # Version History
 
+* 11.1.2 - Resolve issue where unexpected timestamps returned from SentinelOne were not parsed in task `Monitor Logs` | Update plugin to be FedRAMP compliant
 * 11.1.1 - Updated Plugin connection to improve `instance` input usability
 * 11.1.0 - Added connection test for task `Monitor Logs` | Update SDK
 * 11.0.0 - Removed `Monitor Logs` task input options | Update SDK
