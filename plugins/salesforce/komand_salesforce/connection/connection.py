@@ -19,9 +19,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def connect(self, params={}):
         self.logger.info("Connect: Connecting...")
 
-        client_id = params.get(Input.CLIENTID)
+        client_id = params.get(Input.CLIENTID, "").strip()
         client_secret = params.get(Input.CLIENTSECRET, {}).get("secretKey")
-        oauth_url = params.get(Input.LOGINURL)
+        oauth_url = params.get(Input.LOGINURL, "").strip()
         username = params.get(Input.SALESFORCEACCOUNTUSERNAMEANDPASSWORD, {}).get("username")
         password = params.get(Input.SALESFORCEACCOUNTUSERNAMEANDPASSWORD, {}).get("password")
         security_token = params.get(Input.SECURITYTOKEN).get("secretKey")
