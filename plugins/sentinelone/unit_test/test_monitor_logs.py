@@ -31,6 +31,23 @@ STUB_STATE_NO_CURSOR = {
     "threats_last_log_timestamp": "1999-12-31T00:00:00.000000Z",
 }
 
+STUB_STATE_UNEXPECTED_TIMESTAMP = {
+    "activities_last_log_timestamp": "1999-12-31T00:00:00.000000Z",
+    "events_last_log_timestamp": "1999-12-24T00:00:00.000000Z",
+    "last_run_timestamp": "1999-12-31T00:00:00.000000Z",
+    "threats_last_log_timestamp": "1999-12-31T00:00:00.000000Z",
+}
+
+STUB_STATE_UNEXPECTED_TIMESTAMP_EXPECTED = {
+    "activities_last_log_timestamp": "1999-12-31T00:00:00.000000Z",
+    "activities_page_cursor": "YWdlbnRfaWQ6NTgwMjkzODE=",
+    "events_last_log_timestamp": "1999-12-31T00:00:00.00Z",
+    "events_page_cursor": "YWdlbnRfaWQ6NTgwMjkzODE=",
+    "last_run_timestamp": "1999-12-31T00:00:00.000000Z",
+    "threats_last_log_timestamp": "1999-12-31T00:00:00.000000Z",
+    "threats_page_cursor": "YWdlbnRfaWQ6NTgwMjkzODE=",
+}
+
 STUB_STATE_EXPECTED = {
     "activities_last_log_timestamp": "1999-12-31T00:00:00.000000Z",
     "activities_page_cursor": "YWdlbnRfaWQ6NTgwMjkzODE=",
@@ -129,6 +146,42 @@ class TestMonitorLogs(TestCase):
         ]
     )
     def test_monitor_logs(
+        self,
+        mock_request,
+        test_name,
+        state,
+        custom_config,
+        expected_output,
+        expected_state,
+        expected_has_more_pages,
+        expected_status_code,
+        expected_error,
+    ):
+        output, state, has_more_pages, status_code, error = self.task.run(
+            params={}, state=state, custom_config=custom_config
+        )
+        self.assertEqual(expected_output, output)
+        self.assertEqual(expected_state, state)
+        self.assertEqual(expected_has_more_pages, has_more_pages)
+        self.assertEqual(expected_status_code, status_code)
+        self.assertEqual(expected_error, error)
+        validate(output, MonitorLogsOutput.schema)
+
+    @parameterized.expand(
+        [
+            [
+                "two_decimal_places",
+                STUB_STATE_UNEXPECTED_TIMESTAMP,
+                {},
+                Util.read_file_to_dict("expected/monitor_logs_unexpected_timestamp.json.exp"),
+                STUB_STATE_UNEXPECTED_TIMESTAMP_EXPECTED,
+                True,
+                200,
+                None,
+            ],
+        ]
+    )
+    def test_monitor_logs_unexpected_timestamp(
         self,
         mock_request,
         test_name,
