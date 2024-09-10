@@ -133,7 +133,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         # search_from = state.get(LAST_SEARCH_FROM, 0)
         # search_to = state.get(LAST_SEARCH_TO, 100) + 100
-        # TODO - Figure out the hundreds i wanna cry
 
         # search_to = search_from + ALERT_LIMIT
         headers = self.connection.xdr_api.get_headers()
