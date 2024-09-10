@@ -20,6 +20,7 @@ import urllib
 TIME_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
 MAX_LOOKBACK_DAYS = 7
 DEFAULT_LOOKBACK_HOURS = 24
+# TODO - Changing alert limit had no effect
 ALERT_LIMIT = 100
 
 MAX_LIMIT = 7500
@@ -58,7 +59,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         print(f"{existing_state = }")
 
         custom_config = {}
-        state = {LAST_SEARCH_FROM: None, LAST_SEARCH_TO: None}
 
         try:
 
@@ -71,7 +71,9 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
             self.logger.info("Starting to download alerts...")
 
-            response, state, has_more_pages = self.get_alerts_palo_alto(state=state, custom_config=custom_config)
+            response, state, has_more_pages, status_code, error_message = self.get_alerts_palo_alto(
+                state=state, custom_config=custom_config
+            )
 
             # TODO - Are we supposed to show the total (MAX LIMIT) or the total (total_count)
             self.logger.info(f"Total alerts returned: {len(response)}")
@@ -88,7 +90,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             # When has more pages is True, the task will be rerun automatically again (on staging / the cloud exec)
 
             # If has more pages == True, then we need to change the search index from 0-100 to 101-200 (Done below now I think)
-            return response, state, has_more_pages, 200, None
+            return response, state, has_more_pages, status_code, error_message
 
         except PluginException as error:
             self.logger.error(
@@ -191,7 +193,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 has_more_pages = False
                 state = self._drop_pagination_state(state)
 
-            return results, state, has_more_pages
+            return results, state, has_more_pages, 200, None
 
         except PluginException as error:
             self.logger.error(

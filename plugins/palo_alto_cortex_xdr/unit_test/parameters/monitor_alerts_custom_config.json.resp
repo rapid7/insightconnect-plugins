@@ -1,0 +1,62 @@
+{
+    "parameters": [
+        [
+            "date",
+            "2000-01-03T00:00:00.000000Z",
+            {},
+            {
+                "last_alert_time": {
+                    "date": {
+                        "year": 2000,
+                        "month": 1,
+                        "day": 1,
+                        "hour": 23,
+                        "minute": 45,
+                        "second": 0,
+                        "microsecond": 0
+                    }
+                }
+            },
+            false,
+            [],
+            {
+                "last_alert_hash": [],
+                "last_alert_time": "2000-01-02T23:45:00.000000Z"
+            },
+            200,
+            null
+        ],
+        [
+            "hours",
+            "2000-01-03T00:00:00.000000Z",
+            {},
+            {
+                "last_alert_time": {
+                    "hours": 24
+                }
+            },
+            false,
+            [],
+            {
+                "last_alert_hash": [],
+                "last_alert_time": "2000-01-02T23:45:00.000000Z"
+            },
+            200,
+            null
+        ],
+        [
+            "no_last_alert",
+            "2000-01-03T00:00:00.000000Z",
+            {},
+            {},
+            false,
+            [],
+            {
+                "last_alert_hash": [],
+                "last_alert_time": "2000-01-02T23:45:00.000000Z"
+            },
+            200,
+            null
+        ]
+    ]
+}

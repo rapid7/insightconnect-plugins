@@ -5,9 +5,12 @@ sys.path.append(os.path.abspath("../"))
 
 import json
 import logging
+import requests
 
 from icon_palo_alto_cortex_xdr.connection.connection import Connection
 from icon_palo_alto_cortex_xdr.connection.schema import Input
+
+from typing import Dict, Any
 
 
 class MockTrigger:
@@ -32,6 +35,17 @@ class Util:
             return my_file.read()
 
     @staticmethod
+    def load_parameters(filename: str) -> Dict[str, Any]:
+        return json.loads(
+            Util.read_file_to_string(
+                os.path.join(
+                    os.path.dirname(os.path.realpath(__file__)),
+                    f"parameters/{filename}.json.resp",
+                )
+            )
+        )
+
+    @staticmethod
     def default_connector(action, connect_params: object = None):
         default_connection = Connection()
         default_connection.logger = logging.getLogger("connection logger")
@@ -51,11 +65,14 @@ class Util:
 
     @staticmethod
     def mocked_requests(*args, **kwargs):
+        print("conor conor")
+
         class MockResponse:
-            def __init__(self, filename, status_code):
+            def __init__(self, filename, status_code, url: str = None):
                 self.filename = filename
                 self.status_code = status_code
                 self.text = ""
+                self.url = url
 
             def json(self):
                 return json.loads(
@@ -66,6 +83,11 @@ class Util:
                     )
                 )
 
+            def raise_for_status(self):
+                if self.status_code < 200 or self.status_code > 399:
+                    raise requests.HTTPError()
+
+        print(kwargs)
         if kwargs.get("url") == "https://example.com/public_api/v1/incidents/get_incidents/":
             return MockResponse("get_incidents", 200)
         raise Exception("Not implemented")
