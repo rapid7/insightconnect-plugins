@@ -13,20 +13,20 @@ from parameterized import parameterized
 from jsonschema import validate
 from freezegun import freeze_time
 from unit_test.util import Util
+from unit_test.mock import mock_request_200
 
 
-@patch("requests.post", side_effect=Util.mocked_requests)
-@patch("requests.request", side_effect=Util.mocked_requests)
+# @patch("requests.post", side_effect=Util.mocked_requests)
+@patch("requests.post", side_effect=mock_request_200)
 class TestMonitorAlerts(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.task.connection = Util.default_connector(MonitorAlerts())[0]
-        cls.task.task = Util.default_connector(MonitorAlerts())[1]
+        _, cls.task = Util.default_connector(MonitorAlerts())
 
+    # @patch("insightconnect_plugin_runtime.Task.send", side_effect=MockTask.send)
     @parameterized.expand(Util.load_parameters("monitor_alerts").get("parameters"))
     def test_monitor_alerts(
         self,
-        mock_request: Mock,
         mock_post: Mock,
         test_name,
         start_time,
@@ -37,9 +37,11 @@ class TestMonitorAlerts(TestCase):
         expected_status_code,
         expected_error,
     ) -> None:
+
         with freeze_time(start_time):
             actual, actual_state, has_more_pages, status_code, error = self.task.run(state=input_state)
             breakpoint()
+
             self.assertEqual(actual, expected_output)
             self.assertEqual(actual_state, expected_state)
             self.assertEqual(has_more_pages, expected_has_more_pages)

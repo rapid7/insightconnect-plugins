@@ -21,6 +21,14 @@ class MockTrigger:
         MockTrigger.actual = params
 
 
+class MockTask:
+    actual = None
+
+    @staticmethod
+    def send(params):
+        MockTask.actual = params
+
+
 class Util:
     @staticmethod
     def read_file_to_dict(filename):
@@ -65,8 +73,6 @@ class Util:
 
     @staticmethod
     def mocked_requests(*args, **kwargs):
-        print("conor conor")
-
         class MockResponse:
             def __init__(self, filename, status_code, url: str = None):
                 self.filename = filename
@@ -90,4 +96,6 @@ class Util:
         print(kwargs)
         if kwargs.get("url") == "https://example.com/public_api/v1/incidents/get_incidents/":
             return MockResponse("get_incidents", 200)
+        if kwargs.get("url") == "connection url":
+            return MockResponse("connection", 200)
         raise Exception("Not implemented")

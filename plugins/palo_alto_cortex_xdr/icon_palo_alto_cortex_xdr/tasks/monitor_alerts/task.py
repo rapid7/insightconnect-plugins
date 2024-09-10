@@ -163,7 +163,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 request, exception_custom_configs=custom_config, timeout=120, allowed_status_codes=[]
             )
 
-            response = response.json()
+            response = extract_json(response)
 
             total_count = response.get("reply", {}).get("total_count", -1)
             result_count = response.get("reply", {}).get("result_count", -1)
@@ -332,52 +332,3 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         self.logger.debug(log_msg)
 
         return state
-
-    # def get_alerts(self, start_time: str, end_time: str, limit: int, state: dict) -> Tuple[list, bool, Dict[str, str]]:
-
-    #     if limit > MAX_LIMIT:
-    #         self.logger.info(
-    #             f"Warning: The pagination limit has been reached." f"Moving to last incident time: [{start_time}]"
-    #         )
-    #         state = self._drop_pagination_state(state)
-
-    #     start_time = state.get(FROM_TIME_FILTER, start_time)
-    #     end_time = state.get(TO_TIME_FILTER, end_time)
-
-    #     response = self.connection.xdr_api.get_alerts_two()
-
-    #     alerts = response.get("all_items", [])
-    #     total_count = response.get("total_count", 0)
-
-    #     new_alerts = []
-    #     last_alert_time, last_alert_hashes = "", []
-
-    #     self.logger.info(f"Retrieved {total_count} alerts")
-
-    #     # dedupe and get the highest timestamp
-    #     new_alerts, last_alert_hashes, last_alert_time = self._dedupe_and_get_highest_time(alerts, start_time, state)
-
-    #     is_paginating = limit < total_count
-
-    #     self.logger.info(f"Found total alerts={total_count}, limit={limit}, is_paginating={is_paginating}")
-
-    #     if is_paginating:
-    #         has_more_pages = True
-
-    #         state[FROM_TIME_FILTER] = start_time
-    #         state[TO_TIME_FILTER] = end_time
-
-    #         self.logger.info(
-    #             f"Paginating alerts: Saving state with existing filters: "
-    #             f"from_time={start_time}"
-    #             f"to_time={end_time}"
-    #         )
-    #     else:
-    #         has_more_pages = False
-
-    #         state = self._drop_pagination_state(state)
-
-    #     state[LAST_ALERT_TIME] = last_alert_time if last_alert_time else end_time
-    #     state[LAST_ALERT_HASH] = last_alert_hashes if last_alert_hashes else state.get(LAST_ALERT_HASH, [])
-
-    #     return new_alerts, has_more_pages, state
