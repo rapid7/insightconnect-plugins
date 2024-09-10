@@ -4,19 +4,21 @@ products: [insightconnect]
 name: whois
 title: WHOIS
 description: "[WHOIS](https://en.wikipedia.org/wiki/WHOIS) is a query and response protocol that is widely used for querying databases that store the registered users or assignee's of an Internet resource, such as a domain name, an IP address block, or an autonomous system"
-version: 3.1.3
+version: 3.1.4
+connection_version: 3
 vendor: rapid7
 support: community
-supported_versions: ["2024-04-26"]
+supported_versions: ["2024-09-09"]
 status: []
 sdk:
   type: slim
-  version: 6.0.0
+  version: 6.1.0
   user: nobody
   packages:
     - whois
     - git
 cloud_ready: true
+fedramp_ready: true
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/whois
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -30,7 +32,9 @@ hub_tags:
 key_features: ["Perform a WHOIS lookup for a provided IP address or domain to gain information on who is responsible for a domain or IP"]
 references: ["[WHOIS](https://en.wikipedia.org/wiki/WHOIS)"]
 links: ["[WHOIS](https://en.wikipedia.org/wiki/WHOIS)"]
+troubleshooting: "Multiple records can be returned by the server, this plugin currently only returns the first unique records found."
 version_history:
+  - "3.1.4 - Initial updates for fedramp compliance | Updated SDK to the latest version"
   - "3.1.3 - Updated SDK to the latest version (v6.0.0) | Bump setuptools version to v70.0.0"
   - "3.1.2 - Updated SDK to the latest version | Added validation for input parameters"
   - "3.1.1 - Add empty `__init__.py` file to `unit_test` folder | Refresh with new tooling"
