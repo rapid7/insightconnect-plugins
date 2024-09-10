@@ -6,7 +6,10 @@ from komand_mimecast.util.constants import BASE_HOSTNAME_MAP, DEFAULT_REGION
 class Utils:
     @staticmethod
     def prepare_base_url(region: str = DEFAULT_REGION) -> str:
-        return f"https://{BASE_HOSTNAME_MAP.get(region)}.mimecast.com"
+        if region == "USBCOM":
+            return f"https://{BASE_HOSTNAME_MAP.get(region)}.com"
+        else:
+            return f"https://{BASE_HOSTNAME_MAP.get(region)}.mimecast.com"
 
     @staticmethod
     def normalize(key: str, value: str) -> dict:
