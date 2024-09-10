@@ -27,7 +27,8 @@ LAST_OBSERVATION_JOB_TIME = "last_observation_job_time"
 # CB can return 10K per API and suggest that if more than this is returned to then query from last event time.
 # To prevent overloading IDR/PIF drop this limit to 2.5k on each endpoint.
 # This value can also be customised via CPS with the page_size property.
-PAGE_SIZE = 2500
+ALERT_PAGE_SIZE_DEFAULT = 2500
+OBSERVATION_PAGE_SIZE_DEFAULT = 2500
 
 DEFAULT_LOOKBACK = 5  # first look back time in minutes
 MAX_LOOKBACK = 7  # allows saved state to be within 7 days to auto recover from an error
@@ -66,23 +67,25 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             end_time = now.strftime(TIME_FORMAT)
 
             # Check if we have made use of custom config to change the start times from DEFAULT_LOOKBACK
-            alerts_start, observations_start, page_size, debug = self._parse_custom_config(custom_config, now, state)
+            alerts_start, observations_start, alert_page_size, observation_page_size, debug = self._parse_custom_config(
+                custom_config, now, state
+            )
 
             # Retrieve job ID from last run or trigger a new one
             observation_job_id = state.get(LAST_OBSERVATION_JOB)
             if not observation_job_id:
                 self.logger.info("No observation job ID found in state, triggering a new job...")
                 observation_job_id, state = self.trigger_observation_search_job(
-                    observations_start, end_time, page_size, debug, state
+                    observations_start, end_time, observation_page_size, debug, state
                 )
 
-            alerts, alert_has_more_pages, state = self.get_alerts(alerts_start, end_time, page_size, debug, state)
+            alerts, alert_has_more_pages, state = self.get_alerts(alerts_start, end_time, alert_page_size, debug, state)
             alerts_and_observations.extend(alerts)
             alerts_success = True
 
             if observation_job_id:
                 observations, observations_has_more_pages, state = self.get_observations(
-                    observation_job_id, page_size, debug, state
+                    observation_job_id, observation_page_size, debug, state
                 )
                 alerts_and_observations.extend(observations)
             if observations_has_more_pages or alert_has_more_pages:
@@ -261,7 +264,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
     def _parse_custom_config(
         self, custom_config: Dict[str, Any], now: datetime, saved_state: Dict[str, str]
-    ) -> Tuple[str, str, int, bool]:
+    ) -> Tuple[str, str, int, int, bool]:
         """
         Takes custom config from CPS and allows the specification of a new start time for either alerts or observations,
         and allows the page_size to be customised.
@@ -270,13 +273,15 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         :param now: current time to determine the start time for each CB type.
         :param saved_state: dictionary of state values held.
         :return: two string formatted times to apply to our alert and observation queries,
-                 max page size integer, and a boolean indicating if we want to debug request times.
+                 alert_page_size integer, observation_page_size integer, and a boolean indicating if we want to debug request times.
         """
         # take a copy of state so this logic will need to happen again if an exception occurs
         state = saved_state.copy()
 
         # set the page_size from CPS if it exists, otherwise default to PAGE_SIZE
-        page_size = custom_config.get("page_size", PAGE_SIZE)
+        alert_page_size = custom_config.get("alert_page_size", ALERT_PAGE_SIZE_DEFAULT)
+        observation_page_size = custom_config.get("observation_page_size", OBSERVATION_PAGE_SIZE_DEFAULT)
+
         # this flag will be used to allow logging of request times for debugging
         debug = custom_config.get("debug", False)
 
@@ -306,9 +311,9 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         self.logger.info(
             f"{log_msg}Applying the following start times: alerts='{alerts_start}' "
-            f"and observations='{observation_start}'. Max pages: page_size='{page_size}'."
+            f"and observations='{observation_start}'. Max pages: alert_page_size='{alert_page_size}, observation_page_size='{observation_page_size}'."
         )
-        return alerts_start, observation_start, page_size, debug
+        return alerts_start, observation_start, alert_page_size, observation_page_size, debug
 
     def _check_if_job_time_exceeded(self, job_start_time: str, job_id: str) -> bool:
         """
