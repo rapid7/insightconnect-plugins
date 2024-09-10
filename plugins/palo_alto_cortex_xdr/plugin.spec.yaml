@@ -1042,7 +1042,7 @@ tasks:
     title: Monitor Alerts
     description: Monitor alerts
     output:
-      incidents:
+      alerts:
         title: Alerts
         description: Alerts
         type: "[]object"

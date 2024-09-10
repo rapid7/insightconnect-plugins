@@ -56,8 +56,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         existing_state = state.copy()
         has_more_pages = False
         parameters = {}
-        print(f"{existing_state = }")
-
         custom_config = {}
 
         try:
@@ -66,7 +64,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             now = now_time - timedelta(minutes=15)
             # last 15 minutes
             end_time = now.strftime(TIME_FORMAT)
-            print(f"{end_time = }")
             start_time, alert_limit = self._parse_custom_config(custom_config, now, state)
 
             self.logger.info("Starting to download alerts...")
@@ -232,7 +229,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                     deduped_alerts.append(alert)
             elif alert_time > start_time:
                 deduped_alerts += alerts[index:]
-                print(f"{deduped_alerts= }")
                 break
 
         num_alerts = len(deduped_alerts)
@@ -301,7 +297,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 state = self._drop_pagination_state(state)
 
         start_time = state.get(LAST_ALERT_TIME)
-        print(f"{start_time = }")
         if not state.get(FROM_TIME_FILTER):
             self.logger.info(f"{log_msg}Applying the following start time='{start_time}'. Limit={alert_limit}.")
         else:
