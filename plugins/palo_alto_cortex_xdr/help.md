@@ -27,7 +27,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |api_key|credential_secret_key|None|True|The Cortex XDR API Key that is generated when creating a new key|None|1234123412341234asdfasdfasdfasdfasdf1234123412341234123412341234asdfasdfasdfasdfasdf123412341234123412341234asdfasdfasdfasdfasdf|None|None|
-|api_key_id|int|None|True|The API Key ID shown in the Cortex XDR API Keys table in settings. e.g. 1, 2, 3|None|1|None|None|
+|api_key_id|integer|None|True|The API Key ID shown in the Cortex XDR API Keys table in settings. e.g. 1, 2, 3|None|1|None|None|
 |security_level|string|Standard|True|The Security Level of the key provided. This can be found in the API Key settings table in the Cortex XDR settings|["Advanced", "Standard"]|Standard|None|None|
 |url|string|None|True|Cortex XDR API URL|None|https://api-example.xdr.us.paloaltonetworks.com/|None|None|
 
@@ -569,9 +569,9 @@ Example output:
 ### Tasks
 
 
-#### Monitor Incidents
+#### Monitor Alerts
 
-This task is used to monitor incidents
+This task is used to monitor alerts
 
 ##### Input
   
@@ -581,7 +581,7 @@ This task is used to monitor incidents
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|incidents|[]object|False|Incidents|[ { } ]|
+|incidents|[]object|False|Alerts|[ { } ]|
   
 Example output:
 

@@ -1,8 +1,8 @@
 import insightconnect_plugin_runtime
 from .schema import (
-    MonitorIncidentsInput,
-    MonitorIncidentsOutput,
-    MonitorIncidentsState,
+    MonitorAlertsInput,
+    MonitorAlertsOutput,
+    MonitorAlertsState,
     Input,
     Output,
     Component,
@@ -41,14 +41,14 @@ NEXT_PAGE_LINK = "next_page_link"
 # Custom imports below
 
 
-class MonitorIncidents(insightconnect_plugin_runtime.Task):
+class MonitorAlerts(insightconnect_plugin_runtime.Task):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="monitor_incidents",
+            name="monitor_alerts",
             description=Component.DESCRIPTION,
-            input=MonitorIncidentsInput(),
-            output=MonitorIncidentsOutput(),
-            state=MonitorIncidentsState(),
+            input=MonitorAlertsInput(),
+            output=MonitorAlertsOutput(),
+            state=MonitorAlertsState(),
         )
 
     def run(self, params={}, state={}, custom_config: dict = {}):  # pylint: disable=unused-argument
@@ -88,7 +88,7 @@ class MonitorIncidents(insightconnect_plugin_runtime.Task):
             # When has more pages is True, the task will be rerun automatically again (on staging / the cloud exec)
 
             # If has more pages == True, then we need to change the search index from 0-100 to 101-200 (Done below now I think)
-            return None, state, has_more_pages, 200, None
+            return response, state, has_more_pages, 200, None
 
         except PluginException as error:
             self.logger.error(

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Monitor incidents"
+    DESCRIPTION = "Monitor alerts"
 
 
 class Input:
@@ -19,7 +19,7 @@ class Output:
     INCIDENTS = "incidents"
 
 
-class MonitorIncidentsInput(insightconnect_plugin_runtime.Input):
+class MonitorAlertsInput(insightconnect_plugin_runtime.Input):
     schema = json.loads(r"""
    {}
     """)
@@ -28,7 +28,7 @@ class MonitorIncidentsInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class MonitorIncidentsState(insightconnect_plugin_runtime.State):
+class MonitorAlertsState(insightconnect_plugin_runtime.State):
     schema = json.loads(r"""
    {}
     """)
@@ -37,12 +37,12 @@ class MonitorIncidentsState(insightconnect_plugin_runtime.State):
         super(self.__class__, self).__init__(self.schema)
 
 
-class MonitorIncidentsOutput(insightconnect_plugin_runtime.Output):
+class MonitorAlertsOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads(r"""
    {
   "type": "array",
-  "title": "Incidents",
-  "description": "Incidents",
+  "title": "Alerts",
+  "description": "Alerts",
   "items": {
     "type": "object"
   },

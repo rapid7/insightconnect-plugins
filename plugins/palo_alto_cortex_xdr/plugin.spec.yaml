@@ -1038,13 +1038,13 @@ triggers:
         required: true
         example: '{ "Number of Results": 0, "Query Cost": {}, "Remaining Quota": 0.0, "Results": { "Data": [ {} ], "Event Subtype": {} }, "Status": "" }'
 tasks:
-  monitor_incidents:
-    title: Monitor Incidents
-    description: Monitor incidents
+  monitor_alerts:
+    title: Monitor Alerts
+    description: Monitor alerts
     output:
       incidents:
-        title: Incidents
-        description: Incidents
+        title: Alerts
+        description: Alerts
         type: "[]object"
         required: false
         example: '[ { } ]'
