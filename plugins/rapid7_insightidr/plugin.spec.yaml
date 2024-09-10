@@ -4,11 +4,12 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 10.3.1
+version: 10.3.2
 connection_version: 5
-supported_versions: ["Latest release successfully tested on 2024-05-15."]
+supported_versions: ["Latest release successfully tested on 2024-09-10."]
 vendor: rapid7
 cloud_ready: true
+fedramp_ready: true
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_insightidr
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -23,61 +24,62 @@ hub_tags:
   features: []
 sdk:
   type: full
-  version: 6.0.1
+  version: 6.1.0
   user: nobody
 version_history:
-- "10.3.1 - `Advanced Query On Log / Log Set` - Fixed issue where results >500 returned none | Update SDK"
-- "10.3.0 - New Action Added: Update Alert"
-- "10.2.0 - New Trigger Added: `Get New Investigations`"
-- "10.1.1 - Updated query schemas to allow message to be an object or string | Updated SDK"
-- "10.1.0 - New Trigger Added: `Get New Alerts`"
-- "10.0.0 - Actions: `List Investigations` Sort options updated | `Get Investigation`, `List Investigations`, `Create Investigation`, `Update Investigation` `Set Priority of Investigation`, `Set Disposition of Investigation`, `Set Status of Investigation Action`, `Assign User to Investigation`, `Seach Investigations`, `Get a Log`, `Get All Logs`, `Search Alerts` output now includes additional fields"
-- "9.0.0 - Actions: `Advanced Query On Log` - Now allows for either log id or log name to be used"
-- "8.2.0 - Actions: `Advanced Query On Log Set` and `Advanced Query On Log` - optimized data fetching mechanisms"
-- 8.1.1 - Extended error logging for all the actions
-- "8.1.0 - New actions added: `Search Accounts` and `Get Account Information`"
-- 8.0.0 - Update schema for `Investigation` and `Statistics` | Update dependency for aiohttp | New actions added `Get Alert Information`, `Search Alerts`, `Retrieve Evidence for a Single Alert` and `Retrieve Actors for a Single Alert` | Fixed issue where index was not getting correctly passed through to `List Investigations` action from the user
-- "7.0.0 - Action: `Advanced Query On Log Set` - Fixed error where statistical queries would always return 0.0 | Action: `Advanced Query On Log Set` - Increase the maximum results returned from 50 to 500 |  Action: `Advanced Query On Log` - Add new output type for statistical queries | Updated schemas to ensure all are correct and added new schema validation to unit tests"
-- "6.0.1 - Action: `Advanced Query On Log` - Increase the maximum results returned from 50 to 500"
-- "6.0.0 - Action: `Advanced Query On Log Set` - Add new output type for statistical queries."
-- "5.1.2 - Action: `Advanced Query on Log Set` - Fix JSONDecoderError | Action: `Query` - Update spec and help.md to show it queries log IDs, not query IDs"
-- "5.1.1 - Action: `List Investigations` - Now receiving size input | Actions: `Advanced Query On Log` & `Advanced Query On Log Set` - Acronym LQL has been updated to LEQL"
-- "5.1.0 - New actions added: `get_user_information` and `get_asset_information`"
-- 5.0.1 - Update the endpoint `get_a_saved_query` reaches out to
-- 5.0.0 - Update `List Investigations` inputs
-- "4.4.1 - `List Alerts for Investigation`: fix issue with retrieving `detection_rule_rrn`"
-- "4.4.0 - `List Alerts for Investigation`: changed schema output for `detection_rule_rrn`"
-- "4.3.0 - `Query`: Add new parameter `most_recent_first`"
-- "4.2.1 - `Create Investigation`, `Update Investigation`: Fix issue where action fails when email address field is not empty"
-- "4.2.0 - New action added: Replace Indicators"
-- "4.1.1 - Advanced Query on Log Set Action: Updated EndPoint Agent enum to Endpoint Agent in log_set"
-- 4.1.0 - Add new actions `List Comments`, `Create Comment`, `Delete Comment`, `List Attachments`, `Upload Attachment`, `Download Attachment`, `Delete Attachment`, `Get Attachment Information`
-- 4.0.1 - Fix issue with `Get Query Results` and `Get All Saved Queries` actions
-- 4.0.0 - Add new actions Create Investigation, Search Investigations, Update Investigation, Set Investigation Priority, Set Investigation Disposition, and List Alerts for Investigation | Update actions List Investigations, Set Status of Investigation, Assign User to Investigation | Enabled cloud
-- 3.2.0 - Add new actions Get A Saved Query and Get All Saved Queries
-- 3.1.5 - Patch issue parsing labels in Advanced Query on Log and Advanced Query on Log Set actions
-- 3.1.4 - Add `docs_url` to plugin spec with a link to [InsightIDR plugin setup guide](https://docs.rapid7.com/insightconnect/rapid7-insightidr)
-- 3.1.3 - Fix issue where Get a Log and Get All Logs would either fail in workflow or in connection test
-- 3.1.2 - Send plugin name and version in the User-Agent string to vendor
-- 3.1.1 - Convert given date from timezone to UTC in List Investigations action
-- 3.1.0 - Add new action Create Threat
-- 3.0.0 - Added Relative Time options to Advanced Query actions | Fix issue where a query with no results would crash the plugin
-- 2.1.0 - New action Close Investigations in Bulk
-- 2.0.1 - Fix issue where long-running queries could crash the plugin
-- 2.0.0 - Refactor and split Advanced Query into two new actions Advanced Query on Log and Advanced Query on Log Set
-- 1.5.0 - New actions Get a Log and Get All Logs
-- 1.4.0 - New action Advanced Query
-- 1.3.1 - Fix ID input description in Get Query Results action
-- 1.3.0 - New action Get Query Results
-- 1.2.1 - Change default value in the `size` input parameter to 1000 in List Investigations action
-- 1.2.0 - New Action Assign User to Investigation
-- 1.1.1 - New spec and help.md format for the Extension Library
-- 1.1.0 - New Action Add Indicators to a Threat
-- 1.0.0 - Initial plugin
+  - "10.3.2 - Initial updates for fedramp compliance | Updated SDK to the latest version"
+  - "10.3.1 - `Advanced Query On Log / Log Set` - Fixed issue where results >500 returned none | Update SDK"
+  - "10.3.0 - New Action Added: Update Alert"
+  - "10.2.0 - New Trigger Added: `Get New Investigations`"
+  - "10.1.1 - Updated query schemas to allow message to be an object or string | Updated SDK"
+  - "10.1.0 - New Trigger Added: `Get New Alerts`"
+  - "10.0.0 - Actions: `List Investigations` Sort options updated | `Get Investigation`, `List Investigations`, `Create Investigation`, `Update Investigation` `Set Priority of Investigation`, `Set Disposition of Investigation`, `Set Status of Investigation Action`, `Assign User to Investigation`, `Seach Investigations`, `Get a Log`, `Get All Logs`, `Search Alerts` output now includes additional fields"
+  - "9.0.0 - Actions: `Advanced Query On Log` - Now allows for either log id or log name to be used"
+  - "8.2.0 - Actions: `Advanced Query On Log Set` and `Advanced Query On Log` - optimized data fetching mechanisms"
+  - 8.1.1 - Extended error logging for all the actions
+  - "8.1.0 - New actions added: `Search Accounts` and `Get Account Information`"
+  - 8.0.0 - Update schema for `Investigation` and `Statistics` | Update dependency for aiohttp | New actions added `Get Alert Information`, `Search Alerts`, `Retrieve Evidence for a Single Alert` and `Retrieve Actors for a Single Alert` | Fixed issue where index was not getting correctly passed through to `List Investigations` action from the user
+  - "7.0.0 - Action: `Advanced Query On Log Set` - Fixed error where statistical queries would always return 0.0 | Action: `Advanced Query On Log Set` - Increase the maximum results returned from 50 to 500 |  Action: `Advanced Query On Log` - Add new output type for statistical queries | Updated schemas to ensure all are correct and added new schema validation to unit tests"
+  - "6.0.1 - Action: `Advanced Query On Log` - Increase the maximum results returned from 50 to 500"
+  - "6.0.0 - Action: `Advanced Query On Log Set` - Add new output type for statistical queries."
+  - "5.1.2 - Action: `Advanced Query on Log Set` - Fix JSONDecoderError | Action: `Query` - Update spec and help.md to show it queries log IDs, not query IDs"
+  - "5.1.1 - Action: `List Investigations` - Now receiving size input | Actions: `Advanced Query On Log` & `Advanced Query On Log Set` - Acronym LQL has been updated to LEQL"
+  - "5.1.0 - New actions added: `get_user_information` and `get_asset_information`"
+  - 5.0.1 - Update the endpoint `get_a_saved_query` reaches out to
+  - 5.0.0 - Update `List Investigations` inputs
+  - "4.4.1 - `List Alerts for Investigation`: fix issue with retrieving `detection_rule_rrn`"
+  - "4.4.0 - `List Alerts for Investigation`: changed schema output for `detection_rule_rrn`"
+  - "4.3.0 - `Query`: Add new parameter `most_recent_first`"
+  - "4.2.1 - `Create Investigation`, `Update Investigation`: Fix issue where action fails when email address field is not empty"
+  - "4.2.0 - New action added: Replace Indicators"
+  - "4.1.1 - Advanced Query on Log Set Action: Updated EndPoint Agent enum to Endpoint Agent in log_set"
+  - 4.1.0 - Add new actions `List Comments`, `Create Comment`, `Delete Comment`, `List Attachments`, `Upload Attachment`, `Download Attachment`, `Delete Attachment`, `Get Attachment Information`
+  - 4.0.1 - Fix issue with `Get Query Results` and `Get All Saved Queries` actions
+  - 4.0.0 - Add new actions Create Investigation, Search Investigations, Update Investigation, Set Investigation Priority, Set Investigation Disposition, and List Alerts for Investigation | Update actions List Investigations, Set Status of Investigation, Assign User to Investigation | Enabled cloud
+  - 3.2.0 - Add new actions Get A Saved Query and Get All Saved Queries
+  - 3.1.5 - Patch issue parsing labels in Advanced Query on Log and Advanced Query on Log Set actions
+  - 3.1.4 - Add `docs_url` to plugin spec with a link to [InsightIDR plugin setup guide](https://docs.rapid7.com/insightconnect/rapid7-insightidr)
+  - 3.1.3 - Fix issue where Get a Log and Get All Logs would either fail in workflow or in connection test
+  - 3.1.2 - Send plugin name and version in the User-Agent string to vendor
+  - 3.1.1 - Convert given date from timezone to UTC in List Investigations action
+  - 3.1.0 - Add new action Create Threat
+  - 3.0.0 - Added Relative Time options to Advanced Query actions | Fix issue where a query with no results would crash the plugin
+  - 2.1.0 - New action Close Investigations in Bulk
+  - 2.0.1 - Fix issue where long-running queries could crash the plugin
+  - 2.0.0 - Refactor and split Advanced Query into two new actions Advanced Query on Log and Advanced Query on Log Set
+  - 1.5.0 - New actions Get a Log and Get All Logs
+  - 1.4.0 - New action Advanced Query
+  - 1.3.1 - Fix ID input description in Get Query Results action
+  - 1.3.0 - New action Get Query Results
+  - 1.2.1 - Change default value in the `size` input parameter to 1000 in List Investigations action
+  - 1.2.0 - New Action Assign User to Investigation
+  - 1.1.1 - New spec and help.md format for the Extension Library
+  - 1.1.0 - New Action Add Indicators to a Threat
+  - 1.0.0 - Initial plugin
 links:
-- '[Rapid7 InsightIDR](https://www.rapid7.com/products/insightidr/)'
+  - "[Rapid7 InsightIDR](https://www.rapid7.com/products/insightidr/)"
 references:
-- '[Rapid7 InsightIDR](https://www.rapid7.com/products/insightidr/)'
+  - "[Rapid7 InsightIDR](https://www.rapid7.com/products/insightidr/)"
 types:
   investigation_metadata:
     index:
@@ -1861,7 +1863,7 @@ actions:
         description: Events from logs
         type: "[]events"
         required: true
-        example: [{"labels": [],"timestamp": 1601598638768,"sequence_number": 123456789123456789,"log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313","message": {"timestamp": "2020-10-02T00:29:14.649Z","destination_asset": "iagent-win7","source_asset_address": "192.168.100.50","destination_asset_address": "example-host","destination_local_account": "user","logon_type": "NETWORK","result": "SUCCESS","new_authentication": "false","service": "ntlmssp ","source_json": {"sourceName": "Microsoft-Windows-Security-Auditing","insertionStrings": ["S-1-0-0","-","-","0x0","X-X-X-XXXXXXXXXXX","user@example.com","example-host","0x204f163c","3","NtLmSsp ","NTLM","","{00000000-0000-0000-0000-000000000000}","-","NTLM V2","128","0x0","-","192.168.50.1","59090"],"eventCode": 4624,"computerName": "example-host","sid": "","isDomainController": false,"eventData": null,"timeWritten": "2020-10-02T00:29:13.670722000Z"}},"links": [{"rel": "Context","href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}],"sequence_number_str": "123456789123456789"}]
+        example: '[{"labels": [],"timestamp": 1601598638768,"sequence_number": 123456789123456789,"log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313","message": {"timestamp": "2020-10-02T00:29:14.649Z","destination_asset": "iagent-win7","source_asset_address": "192.168.100.50","destination_asset_address": "example-host","destination_local_account": "user","logon_type": "NETWORK","result": "SUCCESS","new_authentication": "false","service": "ntlmssp ","source_json": {"sourceName": "Microsoft-Windows-Security-Auditing","insertionStrings": ["S-1-0-0","-","-","0x0","X-X-X-XXXXXXXXXXX","user@example.com","example-host","0x204f163c","3","NtLmSsp ","NTLM","","{00000000-0000-0000-0000-000000000000}","-","NTLM V2","128","0x0","-","192.168.50.1","59090"],"eventCode": 4624,"computerName": "example-host","sid": "","isDomainController": false,"eventData": null,"timeWritten": "2020-10-02T00:29:13.670722000Z"}},"links": [{"rel": "Context","href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}],"sequence_number_str": "123456789123456789"}]'
   get_a_log:
     title: Get a Log
     description: Get a specific log from an account
@@ -1878,7 +1880,7 @@ actions:
         description: Requested log
         type: logsets_info
         required: true
-        example: {"id": "0b9a242d-d2fb-4e42-8656-eb5ff64d652f","name": "Windows Defender","tokens": ["bc38a911-65f1-4755-cca3-a330a6336b3a"],"structures": ["1238a911-65f1-4755-cca3-a330a6336b3a"],"user_data": {"platform_managed": "true"},"source_type": "token","token_seed": null,"retention_period": "default","links": [{"rel": "Related","href": "https://example.com"}],"rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a","logsets_info": [{"id": "bc38a911-65f1-4755-cca3-a330a6336b3a","name": "Unparsed Data","rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a","links": [{"rel": "Self","href": "https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85"}]}]}
+        example: '{"id": "0b9a242d-d2fb-4e42-8656-eb5ff64d652f","name": "Windows Defender","tokens": ["bc38a911-65f1-4755-cca3-a330a6336b3a"],"structures": ["1238a911-65f1-4755-cca3-a330a6336b3a"],"user_data": {"platform_managed": "true"},"source_type": "token","token_seed": null,"retention_period": "default","links": [{"rel": "Related","href": "https://example.com"}],"rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a","logsets_info": [{"id": "bc38a911-65f1-4755-cca3-a330a6336b3a","name": "Unparsed Data","rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a","links": [{"rel": "Self","href": "https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85"}]}]}'
   get_all_logs:
     title: Get All Logs
     description: Request used to list all logs for an account
@@ -1888,7 +1890,7 @@ actions:
         description: All logs
         type: logsets_info
         required: true
-        example: [{"log": {"id": "0b9a242d-d2fb-4e42-8656-eb5ff64d652f","name": "Windows Defender","tokens": ["bc38a911-65f1-4755-cca3-a330a6336b3a"],"structures": ["1238a911-65f1-4755-cca3-a330a6336b3a"],"user_data": {"platform_managed": "true"},"source_type": "token","token_seed": null,"retention_period": "default","links": [{"rel": "Related","href": "https://example.com"}],"rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a","logsets_info": [{"id": "bc38a911-65f1-4755-cca3-a330a6336b3a","name": "Unparsed Data","rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a","links": [{"rel": "Self","href": "https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85"}]}]}}]
+        example: '[{"log": {"id": "0b9a242d-d2fb-4e42-8656-eb5ff64d652f","name": "Windows Defender","tokens": ["bc38a911-65f1-4755-cca3-a330a6336b3a"],"structures": ["1238a911-65f1-4755-cca3-a330a6336b3a"],"user_data": {"platform_managed": "true"},"source_type": "token","token_seed": null,"retention_period": "default","links": [{"rel": "Related","href": "https://example.com"}],"rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a","logsets_info": [{"id": "bc38a911-65f1-4755-cca3-a330a6336b3a","name": "Unparsed Data","rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a","links": [{"rel": "Self","href": "https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85"}]}]}}]'
   advanced_query_on_log:
     title: Advanced Query on Log
     description: Realtime query an InsightIDR log. This will query individual logs for results. Note only 500 results will be returned from a single call, if all results are required for this query please use smaller timeranges. If both a log name and log ID are provided, the log ID will used over the log name
@@ -1962,13 +1964,13 @@ actions:
         description: Query Results
         type: "[]events"
         required: false
-        example: [{"labels": [],"timestamp": 1601598638768,"sequence_number": 123456789123456789,"log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313","message": {"timestamp": "2020-10-02T00:29:14.649Z","destination_asset": "iagent-win7","source_asset_address": "192.168.100.50","destination_asset_address": "example-host","destination_local_account": "user","logon_type": "NETWORK","result": "SUCCESS","new_authentication": "false","service": "ntlmssp ","source_json": {"sourceName": "Microsoft-Windows-Security-Auditing","insertionStrings": ["S-1-0-0","-","-","0x0","X-X-X-XXXXXXXXXXX","user@example.com","example-host","0x204f163c","3","NtLmSsp ","NTLM","","{00000000-0000-0000-0000-000000000000}","-","NTLM V2","128","0x0","-","192.168.50.1","59090"],"eventCode": 4624,"computerName": "example-host","sid": "","isDomainController": false,"eventData": null,"timeWritten": "2020-10-02T00:29:13.670722000Z"}},"links": [{"rel": "Context","href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}],"sequence_number_str": "123456789123456789"}]
+        example: '[{"labels": [],"timestamp": 1601598638768,"sequence_number": 123456789123456789,"log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313","message": {"timestamp": "2020-10-02T00:29:14.649Z","destination_asset": "iagent-win7","source_asset_address": "192.168.100.50","destination_asset_address": "example-host","destination_local_account": "user","logon_type": "NETWORK","result": "SUCCESS","new_authentication": "false","service": "ntlmssp ","source_json": {"sourceName": "Microsoft-Windows-Security-Auditing","insertionStrings": ["S-1-0-0","-","-","0x0","X-X-X-XXXXXXXXXXX","user@example.com","example-host","0x204f163c","3","NtLmSsp ","NTLM","","{00000000-0000-0000-0000-000000000000}","-","NTLM V2","128","0x0","-","192.168.50.1","59090"],"eventCode": 4624,"computerName": "example-host","sid": "","isDomainController": false,"eventData": null,"timeWritten": "2020-10-02T00:29:13.670722000Z"}},"links": [{"rel": "Context","href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}],"sequence_number_str": "123456789123456789"}]'
       results_statistical:
         title: Query Results (Statistical)
         description: Query Results
         type: statistics
         required: false
-        example: {"leql": {"during": {"from": 1699579214000,"to": 1699622414000},"statement": "groupby(r7_context.asset.name)"},"logs": ["123456-abcd-1234-abcd-123456abc"],"search_stats": {"bytes_all": 9961260,"bytes_checked": 9961260,"duration_ms": 19,"events_all": 1640,"events_checked": 1640,"events_matched": 1639,"index_factor": 0.0},"statistics": {"all_exact_result": true,"cardinality": 0,"from": 1699579214000,"granularity": 4320000,"groups": [{"linux": {"count": 1163.0}},{"windowsx64": {"count": 476.0}}],"groups_timeseries": [{"linux": {"groups_timeseries": [],"series": [{"count": 45.0},{"count": 21.0},{"count": 16.0},{"count": 270.0},{"count": 27.0},{"count": 43.0},{"count": 27.},{"count": 39.0},{"count": 29.0},{"count": 646.0}],"totals": {"count": 1163.0}}},{"windowsx64": {"groups_timeseries": [],"series": [{"count": 54.0},{"count": 40.0},{"count": 60.0},{"count": 37.0},{"count": 42.0},{"count": 62.0},{"count": 41.0},{"count": 47.0},{"count": 49.0},{"count": 44.0}],"totals": {"count": 476.0}}}],"others": {"series": []},"stats": {},"status": 200,"timeseries": {},"to": 1699622414000,"type": "count"}}
+        example: '{"leql":{"during":{"from":1699579214000,"to":1699622414000},"statement":"groupby(r7_context.asset.name)"},"logs":["123456-abcd-1234-abcd-123456abc"],"search_stats":{"bytes_all":9961260,"bytes_checked":9961260,"duration_ms":19,"events_all":1640,"events_checked":1640,"events_matched":1639,"index_factor":0.0},"statistics":{"all_exact_result":true,"cardinality":0,"from":1699579214000,"granularity":4320000,"groups":[{"linux":{"count":1163.0}},{"windowsx64":{"count":476.0}}],"groups_timeseries":[{"linux":{"groups_timeseries":[],"series":[{"count":45.0},{"count":21.0},{"count":16.0},{"count":270.0},{"count":27.0},{"count":43.0},{"count":27.0},{"count":39.0},{"count":29.0},{"count":646.0}],"totals":{"count":1163.0}}},{"windowsx64":{"groups_timeseries":[],"series":[{"count":54.0},{"count":40.0},{"count":60.0},{"count":37.0},{"count":42.0},{"count":62.0},{"count":41.0},{"count":47.0},{"count":49.0},{"count":44.0}],"totals":{"count":476.0}}}],"others":{"series":[]},"stats":{},"status":200,"timeseries":{},"to":1699622414000,"type":"count"}}'
       count:
         title: Count
         description: Number of log entries found
@@ -2064,13 +2066,13 @@ actions:
         description: Query Results
         type: "[]events"
         required: false
-        example: [{"labels": [],"timestamp": 1601598638768,"sequence_number": 123456789123456789,"log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313","message": {"timestamp": "2020-10-02T00:29:14.649Z","destination_asset": "iagent-win7","source_asset_address": "192.168.100.50","destination_asset_address": "example-host","destination_local_account": "user","logon_type": "NETWORK","result": "SUCCESS","new_authentication": "false","service": "ntlmssp ","source_json": {"sourceName": "Microsoft-Windows-Security-Auditing","insertionStrings": ["S-1-0-0","-","-","0x0","X-X-X-XXXXXXXXXXX","user@example.com","example-host","0x204f163c","3","NtLmSsp ","NTLM","","{00000000-0000-0000-0000-000000000000}","-","NTLM V2","128","0x0","-","192.168.50.1","59090"],"eventCode": 4624,"computerName": "example-host","sid": "","isDomainController": false,"eventData": null,"timeWritten": "2020-10-02T00:29:13.670722000Z"}},"links": [{"rel": "Context","href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}],"sequence_number_str": "123456789123456789"}]
+        example: '[{"labels": [],"timestamp": 1601598638768,"sequence_number": 123456789123456789,"log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313","message": {"timestamp": "2020-10-02T00:29:14.649Z","destination_asset": "iagent-win7","source_asset_address": "192.168.100.50","destination_asset_address": "example-host","destination_local_account": "user","logon_type": "NETWORK","result": "SUCCESS","new_authentication": "false","service": "ntlmssp ","source_json": {"sourceName": "Microsoft-Windows-Security-Auditing","insertionStrings": ["S-1-0-0","-","-","0x0","X-X-X-XXXXXXXXXXX","user@example.com","example-host","0x204f163c","3","NtLmSsp ","NTLM","","{00000000-0000-0000-0000-000000000000}","-","NTLM V2","128","0x0","-","192.168.50.1","59090"],"eventCode": 4624,"computerName": "example-host","sid": "","isDomainController": false,"eventData": null,"timeWritten": "2020-10-02T00:29:13.670722000Z"}},"links": [{"rel": "Context","href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}],"sequence_number_str": "123456789123456789"}]'
       results_statistical:
         title: Query Results (Statistical)
         description: Query Results
         type: statistics
         required: false
-        example: {"leql": {"during": {"from": 1699579214000,"to": 1699622414000},"statement": "groupby(r7_context.asset.name)"},"logs": ["123456-abcd-1234-abcd-123456abc"],"search_stats": {"bytes_all": 9961260,"bytes_checked": 9961260,"duration_ms": 19,"events_all": 1640,"events_checked": 1640,"events_matched": 1639,"index_factor": 0.0},"statistics": {"all_exact_result": true,"cardinality": 0,"from": 1699579214000,"granularity": 4320000,"groups": [{"linux": {"count": 1163.0}},{"windowsx64": {"count": 476.0}}],"groups_timeseries": [{"linux": {"groups_timeseries": [],"series": [{"count": 45.0},{"count": 21.0},{"count": 16.0},{"count": 270.0},{"count": 27.0},{"count": 43.0},{"count": 27.},{"count": 39.0},{"count": 29.0},{"count": 646.0}],"totals": {"count": 1163.0}}},{"windowsx64": {"groups_timeseries": [],"series": [{"count": 54.0},{"count": 40.0},{"count": 60.0},{"count": 37.0},{"count": 42.0},{"count": 62.0},{"count": 41.0},{"count": 47.0},{"count": 49.0},{"count": 44.0}],"totals": {"count": 476.0}}}],"others": {"series": []},"stats": {},"status": 200,"timeseries": {},"to": 1699622414000,"type": "count"}}
+        example: '{"leql":{"during":{"from":1699579214000,"to":1699622414000},"statement":"groupby(r7_context.asset.name)"},"logs":["123456-abcd-1234-abcd-123456abc"],"search_stats":{"bytes_all":9961260,"bytes_checked":9961260,"duration_ms":19,"events_all":1640,"events_checked":1640,"events_matched":1639,"index_factor":0.0},"statistics":{"all_exact_result":true,"cardinality":0,"from":1699579214000,"granularity":4320000,"groups":[{"linux":{"count":1163.0}},{"windowsx64":{"count":476.0}}],"groups_timeseries":[{"linux":{"groups_timeseries":[],"series":[{"count":45.0},{"count":21.0},{"count":16.0},{"count":270.0},{"count":27.0},{"count":43.0},{"count":27.0},{"count":39.0},{"count":29.0},{"count":646.0}],"totals":{"count":1163.0}}},{"windowsx64":{"groups_timeseries":[],"series":[{"count":54.0},{"count":40.0},{"count":60.0},{"count":37.0},{"count":42.0},{"count":62.0},{"count":41.0},{"count":47.0},{"count":49.0},{"count":44.0}],"totals":{"count":476.0}}}],"others":{"series":[]},"stats":{},"status":200,"timeseries":{},"to":1699622414000,"type":"count"}}'
       count:
         title: Count
         description: Number of log entries found
@@ -2174,7 +2176,7 @@ actions:
         description: Saved LEQL queries
         type: "[]query"
         required: true
-        example: [{"id": "00000000-0000-9eec-0000-000000000000", "leql": {"during": {"from": null, "time_range": "yesterday", "to": null}, "statement": "where(931dde6c60>=800)"}, "logs": ["31a4d56e-460e-460f-9542-c2bc8edd7c6b"], "name": "Large Values Yesterday"}]
+        example: '[{"id": "00000000-0000-9eec-0000-000000000000", "leql": {"during": {"from": null, "time_range": "yesterday", "to": null}, "statement": "where(931dde6c60>=800)"}, "logs": ["31a4d56e-460e-460f-9542-c2bc8edd7c6b"], "name": "Large Values Yesterday"}]'
   get_a_saved_query:
     title: Get a Saved Query
     description: Retrieve a saved InsightIDR LEQL query by its ID
@@ -2552,30 +2554,30 @@ actions:
         description: A list of found alerts
         type: "[]alert_object"
         required: false
-        example: [{ "alerted_at": "2023-12-04T13:59:06.349Z","created_at": "2023-12-04T13:59:06.757109Z","disposition": "UNDECIDED","external_id": "12345678-abcd-cdef-1234-12345abc","external_source": "IDR ABA","fields": [],"ingested_at": "2023-12-04T13:59:06.751813Z","investigation_rrn":"rrn:investigation:us:12345678-abcd-cdef-1234-12345abc:investigation:ABCDEFGHI","organization": {"customer_id": "12345678-abcd-cdef-1234-12345abc","customer_name": "Dev Test","flags": [],"id": "12345678-abcd-cdef-1234-12345abc","name": "Dev Test","product_token": "abcdefgh12345abc","region": "us1"},"permissions": {"canEdit": false},"priority": "LOW","responsibility": "MDR","rrn":"rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abc","rule": {"mitre_tcodes": ["Credential Access","T1110"],"rrn": "rrn:cba:::detection-rule:ABCDEFGHIJK","version_rrn": "rrn:cba:::detection-rule:version:ABCDEFGHIJK"},"rule_keys_of_interest": [{"key": "result","values": ["SUCCESS"]},{"key": "account","values": ["test_account"]},{"key": "geoip_country_code","values": ["US"]},{"key": "source_ip","values": ["1.1.1.1"]}],"rule_matching_keys": [{"key": "entryType","values": ["ingress_auth"]},{"key": "orgId","values": ["12345678-abcd-cdef-1234-12345abc"]}],"status": "OPEN","tags": [],"title": "MVD Verification","type": "MVD Verification","updated_at": "2023-12-05T11:51:39.29059Z","version": 8 }]
+        example: '[{ "alerted_at": "2023-12-04T13:59:06.349Z","created_at": "2023-12-04T13:59:06.757109Z","disposition": "UNDECIDED","external_id": "12345678-abcd-cdef-1234-12345abc","external_source": "IDR ABA","fields": [],"ingested_at": "2023-12-04T13:59:06.751813Z","investigation_rrn":"rrn:investigation:us:12345678-abcd-cdef-1234-12345abc:investigation:ABCDEFGHI","organization": {"customer_id": "12345678-abcd-cdef-1234-12345abc","customer_name": "Dev Test","flags": [],"id": "12345678-abcd-cdef-1234-12345abc","name": "Dev Test","product_token": "abcdefgh12345abc","region": "us1"},"permissions": {"canEdit": false},"priority": "LOW","responsibility": "MDR","rrn":"rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abc","rule": {"mitre_tcodes": ["Credential Access","T1110"],"rrn": "rrn:cba:::detection-rule:ABCDEFGHIJK","version_rrn": "rrn:cba:::detection-rule:version:ABCDEFGHIJK"},"rule_keys_of_interest": [{"key": "result","values": ["SUCCESS"]},{"key": "account","values": ["test_account"]},{"key": "geoip_country_code","values": ["US"]},{"key": "source_ip","values": ["1.1.1.1"]}],"rule_matching_keys": [{"key": "entryType","values": ["ingress_auth"]},{"key": "orgId","values": ["12345678-abcd-cdef-1234-12345abc"]}],"status": "OPEN","tags": [],"title": "MVD Verification","type": "MVD Verification","updated_at": "2023-12-05T11:51:39.29059Z","version": 8 }]'
       rrns:
         title: RRNs
         description: A list of the rrns for the found alerts
         type: "[]string"
         required: false
-        example: ["rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abg", "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abd"]
+        example: '["rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abg", "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abd"]'
       metadata:
         title: Metadata
         description: The pagination parameters used to generate this page result
         type: investigation_metadata
         required: true
-        example: {"index": 0,"size": 1,"total_data": 1,"total_pages": 1}
+        example: '{"index": 0,"size": 1,"total_data": 1,"total_pages": 1}'
       aggregates:
         title: Aggregates
         description: The aggregation results
         type: "[]aggregate_response_object"
         required: false
-        example: [{"name": "example_id", "type": "BUCKET", "value": "example_value", "field_ids": ["example_field"], "buckets": [{"keys": ["example_key"], "count":1}]}]
+        example: '[{"name": "example_id", "type": "BUCKET", "value": "example_value", "field_ids": ["example_field"], "buckets": [{"keys": ["example_key"], "count":1}]}]'
       region_failures:
         title: Region Failures
         description: The regions where the request failed to execute. The presence of items in this field indicates partial failure
         type: "[]region_failure_object"
-        example: [{"region": "US", "message": "example_message"}]
+        example: '[{"region": "US", "message": "example_message"}]'
         required: false
   get_alert_evidence:
     title: Retrieve Evidence for a Single Alert
@@ -2687,13 +2689,13 @@ actions:
         description: The list of account information
         type: "[]account_object"
         required: true
-        example: [ { "rrn": "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:account:83002c85d7c6", "name": "jdoe@acme.com", "domain": "tor.acme.com", "disabled": true, "user": { "rrn": "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:user:83002c85d7c6", "name": "John Doe" }, "authentication_service": "ACTIVE_DIRECTORY" } ]
+        example: '[ { "rrn": "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:account:83002c85d7c6", "name": "jdoe@acme.com", "domain": "tor.acme.com", "disabled": true, "user": { "rrn": "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:user:83002c85d7c6", "name": "John Doe" }, "authentication_service": "ACTIVE_DIRECTORY" } ]'
       metadata:
         title: Metadata
         description: The pagination parameters used to generate this page result
         type: investigation_metadata
         required: true
-        example: {"index": 0,"size": 1,"total_data": 1,"total_pages": 1}
+        example: '{"index": 0,"size": 1,"total_data": 1,"total_pages": 1}'
   get_account_information:
     title: Get Account Information
     description: Get information from an account by RRN. The RRN determines which account information is retrieved from
