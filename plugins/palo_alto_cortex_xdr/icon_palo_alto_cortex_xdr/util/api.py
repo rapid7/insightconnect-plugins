@@ -191,7 +191,7 @@ class CortexXdrAPI:
     def get_alerts(
         self, from_time: int, to_time: int, time_sort_field: str = "creation_time", filters: List = None
     ) -> List[Dict]:
-        endpoint = "/public_api/v2/alerts/get_alerts_multi_events/"
+        endpoint = "/public_api/v1/alerts/get_alerts"
         response_alerts_field = "alerts"
         return self._get_items_from_endpoint(
             endpoint, from_time, to_time, response_alerts_field, time_sort_field, filters
@@ -443,3 +443,7 @@ class CortexXdrAPI:
 
         # Don't know, try hostname
         return self.ENDPOINT_HOSTNAME_TYPE
+
+
+class AuthenticationError(Exception):
+    pass
