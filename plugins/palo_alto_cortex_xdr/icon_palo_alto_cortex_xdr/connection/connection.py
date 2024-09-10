@@ -6,6 +6,7 @@ from datetime import datetime, timedelta, timezone
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 from icon_palo_alto_cortex_xdr.util.api import CortexXdrAPI
 from requests.exceptions import ConnectionError as con_error
+
 TIME_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
 
 
@@ -13,7 +14,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.xdr_api = None
-
 
     def connect(self, params):
         self.logger.info("Connect: Connecting...")
@@ -45,11 +45,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.logger.error("Running a Task Connection Test for Palo Alto Cortex")
         return_message = "The connection test to Palo Alto Cortex has failed \n"
 
-        #Gets the current time and converts to  Epoch Unix time (as get_alerts params require date to be an int)
+        # Gets the current time and converts to  Epoch Unix time (as get_alerts params require date to be an int)
         now = datetime.now(timezone.utc)
         start_time = (now - timedelta(minutes=5)).isoformat()
         start_time = datetime.fromisoformat(start_time)
-        #Timestamp in logs is in Miliseconds
+        # Timestamp in logs is in Miliseconds
         start_time = int(start_time.timestamp() * 1000)
 
         end_time = now.isoformat()
@@ -69,9 +69,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 return_message += e.assistance
             else:
                 return_message += "Please verify the credentials/setup is correct and try"
-            self.logger.info(
-                f"cause = {e.cause}, assistance = {e.assistance}, data {e.data}, error = {e}"
-            )
+            self.logger.info(f"cause = {e.cause}, assistance = {e.assistance}, data {e.data}, error = {e}")
             raise ConnectionTestException(
                 cause="The OAuth token credentials provided in the connection configuration is invalid.",
                 assistance="Please verify the credentials are correct and try again.",
@@ -83,8 +81,5 @@ class Connection(insightconnect_plugin_runtime.Connection):
             raise ConnectionTestException(
                 cause="The connection test to Palo Alto Cortex failed due to the URL being unreachable.",
                 assistance="Please ensure the URL is correct before attempting again.",
-                data=return_message
+                data=return_message,
             )
-
-
-
