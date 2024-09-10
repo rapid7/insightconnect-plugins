@@ -5,7 +5,7 @@ name: sentinelone
 title: SentinelOne
 version: 11.1.2
 connection_version: 10
-cloud_ready: true
+cloud_ready: truee
 fedramp_ready: true
 sdk:
   type: slim
