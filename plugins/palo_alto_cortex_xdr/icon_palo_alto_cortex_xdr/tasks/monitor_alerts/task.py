@@ -21,6 +21,7 @@ TIME_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
 MAX_LOOKBACK_DAYS = 7
 DEFAULT_LOOKBACK_HOURS = 24
 # TODO - Changing alert limit had no effect
+# Add default at end on var name
 ALERT_LIMIT = 100
 
 MAX_LIMIT = 7500
@@ -55,8 +56,9 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
     def run(self, params={}, state={}, custom_config: dict = {}):  # pylint: disable=unused-argument
         existing_state = state.copy()
         has_more_pages = False
-        parameters = {}
-        custom_config = {}
+        # TESTING PURPOSES
+        state = {LAST_SEARCH_FROM: None, LAST_SEARCH_TO: None}
+        custom_config = {"alert_limit": 20}
 
         try:
 
@@ -97,7 +99,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             return [], existing_state, False, 500, PluginException(cause=error.cause, data=error)
 
         except Exception as error:
-            print(f"{error = }")
             return [], existing_state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     ###########################
@@ -113,19 +114,13 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         # IT GOES 0 -> 100 | 101 -> 200 | 201 -> 300
         # IF NULL, SET FROM = 0
 
-        if not state.get(LAST_SEARCH_FROM):
-            search_from = 0
-        else:
-            # STARTS 1 RECORD AFTER THE LAST ONE PULLED
-            search_from = state.get(LAST_SEARCH_TO) + 1
-            self.logger.info(f"{search_from = }")
+        state.get(LAST_SEARCH_FROM)
+        search_from = (state.get(LAST_SEARCH_TO) + 1) if state.get(LAST_SEARCH_FROM) else 0
+        self.logger.info(f"{search_from = }")
 
         # IF NULL SET TO = 100
-        if not state.get(LAST_SEARCH_TO):
-            search_to = 100
-        else:
-            # SEARCH_TO GETS THE NEWEST SEARCH FROM VALUE AND WILL STOP AFTER PULLING 99 ADDITIONAL RECORDS (100 TOTAL)
-            search_to = search_from + 99
+        state.get(LAST_SEARCH_TO)
+        search_to = (search_from + 99) if state.get(LAST_SEARCH_TO) else 100
 
         state[LAST_SEARCH_FROM] = search_from
         state[LAST_SEARCH_TO] = search_to
@@ -134,6 +129,8 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         # search_to = state.get(LAST_SEARCH_TO, 100) + 100
 
         # search_to = search_from + ALERT_LIMIT
+
+        # TODO - Check if this is correct
         headers = self.connection.xdr_api.get_headers()
 
         post_body = {
@@ -156,9 +153,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         try:
             request = requests.Request(method="post", url=url, headers=headers, json=post_body)
-            response = make_request(
-                request, exception_custom_configs=custom_config, timeout=120, allowed_status_codes=[]
-            )
+            response = make_request(request, timeout=120)
 
             response = extract_json(response)
 
@@ -200,7 +195,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             return [], state, False, 500, PluginException(cause=error.cause, data=error)
 
         except Exception as error:
-            print(f"{error = }")
             return [], state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     ###########################

@@ -202,7 +202,6 @@ class CortexXdrAPI:
     ) -> List[Dict]:
         endpoint = "/public_api/v1/incidents/get_incidents/"
         response_incidents_field = "incidents"
-        print(f"Get Incidents {from_time = }\n{to_time = }\n{time_sort_field = }\n{filters = }")
         return self._get_items_from_endpoint(
             endpoint, from_time, to_time, response_incidents_field, time_sort_field, filters
         )
