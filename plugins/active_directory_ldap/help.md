@@ -18,23 +18,23 @@
 * Please make sure you enter your credentials with the DOMAIN\username format.
 
 # Supported Product Versions
-  
+
 * Azure Active Directory 2.0.89.0
 
 # Documentation
 
 ## Setup
-  
+
 The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|chase_referrals|boolean|True|True|Allows the plugin to follow referrals from the specified Active Directory server to other Active Directory servers|None|True|
-|host|string|None|True|Server Host, e.g. example.com|None|example.com|
-|port|integer|389|True|Port, e.g. 389|None|389|
-|use_ssl|boolean|None|True|Use SSL?|None|True|
-|username_password|credential_username_password|None|True|Username and password|None|{"username":"user1", "password":"mypassword"}|
-  
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|chase_referrals|boolean|True|True|Allows the plugin to follow referrals from the specified Active Directory server to other Active Directory servers|None|True|None|None|
+|host|string|None|True|Server Host, e.g. example.com|None|example.com|None|None|
+|port|integer|389|True|Port, e.g. 389|None|389|None|None|
+|use_ssl|boolean|None|True|Use SSL?|None|True|None|None|
+|username_password|credential_username_password|None|True|Username and password|None|{"username":"user1", "password":"mypassword"}|None|None|
+
 Example input:
 
 ```
@@ -56,22 +56,22 @@ Example input:
 
 
 #### Add User
-  
+
 This action is used to add the specified Active Directory user
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|account_disabled|boolean|True|True|Set this to true to disable the user account at creation|None|True|
-|additional_parameters|object|None|False|Add additional user parameters in JSON format|None|{"telephoneNumber":"(617)555-1234"}|
-|domain_name|string|None|True|The domain name this user will belong to|None|example.com|
-|first_name|string|None|True|User's first name|None|John|
-|last_name|string|None|True|User's last name|None|Doe|
-|logon_name|string|None|True|The logon name for the account|None|jdoe|
-|password|password|None|True|The account's starting password|None|mypassword|
-|user_ou|string|Users|True|The OU that the user account will be created in|None|Users|
-|user_principal_name|string|None|True|The users principal name|None|user@example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|account_disabled|boolean|True|True|Set this to true to disable the user account at creation|None|True|None|None|
+|additional_parameters|object|None|False|Add additional user parameters in JSON format|None|{"telephoneNumber":"(617)555-1234"}|None|None|
+|domain_name|string|None|True|The domain name this user will belong to|None|example.com|None|None|
+|first_name|string|None|True|User's first name|None|John|None|None|
+|last_name|string|None|True|User's last name|None|Doe|None|None|
+|logon_name|string|None|True|The logon name for the account|None|jdoe|None|None|
+|password|password|None|True|The account's starting password|None|mypassword|None|None|
+|user_ou|string|Users|True|The OU that the user account will be created in|None|Users|None|None|
+|user_principal_name|string|None|True|The users principal name|None|user@example.com|None|None|
   
 Example input:
 
@@ -106,14 +106,14 @@ Example output:
 ```
 
 #### Delete
-  
+
 This action is used to delete the LDAP object specified
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|distinguished_name|string|None|True|The distinguished name of the object to delete|None|CN=user,OU=domain_users,DC=example,DC=com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|distinguished_name|string|None|True|The distinguished name of the object to delete|None|CN=user,OU=domain_users,DC=example,DC=com|None|None|
   
 Example input:
 
@@ -138,14 +138,14 @@ Example output:
 ```
 
 #### Disable User
-  
+
 This action is used to disable an account
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|distinguished_name|string|None|True|The distinguished name of the user to disable|None|CN=user,OU=domain_users,DC=example,DC=com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|distinguished_name|string|None|True|The distinguished name of the user to disable|None|CN=user,OU=domain_users,DC=example,DC=com|None|None|
   
 Example input:
 
@@ -170,14 +170,14 @@ Example output:
 ```
 
 #### Disable Users
-  
+
 This action is used to disable multiple accounts
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|distinguished_names|[]string|None|True|The distinguished names of the users to disable|None|["CN=user,OU=domain_users,DC=example,DC=com"]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|distinguished_names|[]string|None|True|The distinguished names of the users to disable|None|["CN=user,OU=domain_users,DC=example,DC=com"]|None|None|
   
 Example input:
 
@@ -213,14 +213,14 @@ Example output:
 ```
 
 #### Enable User
-  
+
 This action is used to enable an account
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|distinguished_name|string|None|True|The distinguished name of the user to enable|None|CN=user,OU=domain_users,DC=example,DC=com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|distinguished_name|string|None|True|The distinguished name of the user to enable|None|CN=user,OU=domain_users,DC=example,DC=com|None|None|
   
 Example input:
 
@@ -245,14 +245,14 @@ Example output:
 ```
 
 #### Enable Users
-  
+
 This action is used to enable multiple accounts
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|distinguished_names|[]string|None|True|The distinguished names of the users to enable|None|["CN=user,OU=domain_users,DC=example,DC=com"]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|distinguished_names|[]string|None|True|The distinguished names of the users to enable|None|["CN=user,OU=domain_users,DC=example,DC=com"]|None|None|
   
 Example input:
 
@@ -288,14 +288,14 @@ Example output:
 ```
 
 #### Force Password Reset
-  
+
 This action is used to force a user to reset their password on next login
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|distinguished_name|string|None|True|The distinguished name of the user who will be forced to reset|None|CN=user,OU=domain_users,DC=example,DC=com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|distinguished_name|string|None|True|The distinguished name of the user who will be forced to reset|None|CN=user,OU=domain_users,DC=example,DC=com|None|None|
   
 Example input:
 
@@ -320,16 +320,16 @@ Example output:
 ```
 
 #### Add or Remove an Object from Group
-  
+
 This action is used to add or remove an object from an Active Directory group
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|add_remove|string|None|True|Add or remove the group|["add", "remove"]|add|
-|distinguished_name|string|None|True|The distinguished name of the object whose membership will be modified|None|CN=user,OU=domain_users,DC=mydomain,DC=com|
-|group_dn|string|None|True|The Distinguished Name of the group to add or remove|None|CN=group_name,OU=domain_groups,DC=example,DC=com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|add_remove|string|None|True|Add or remove the group|["add", "remove"]|add|None|None|
+|distinguished_name|string|None|True|The distinguished name of the object whose membership will be modified|None|CN=user,OU=domain_users,DC=mydomain,DC=com|None|None|
+|group_dn|string|None|True|The Distinguished Name of the group to add or remove|None|CN=group_name,OU=domain_groups,DC=example,DC=com|None|None|
   
 Example input:
 
@@ -356,16 +356,16 @@ Example output:
 ```
 
 #### Modify Object
-  
+
 This action is used to modify the attributes for an Active Directory object
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|attribute_to_modify|string|None|True|The name of the attribute to modify|None|postalCode|
-|attribute_value|string|None|True|The value of the attribute|None|02114|
-|distinguished_name|string|None|True|The distinguished name of the object to modify|None|CN=user,OU=domain_users,DC=example,DC=com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|attribute_to_modify|string|None|True|The name of the attribute to modify|None|postalCode|None|None|
+|attribute_value|string|None|True|The value of the attribute|None|02114|None|None|
+|distinguished_name|string|None|True|The distinguished name of the object to modify|None|CN=user,OU=domain_users,DC=example,DC=com|None|None|
   
 Example input:
 
@@ -392,15 +392,15 @@ Example output:
 ```
 
 #### Move Object
-  
+
 This action is used to move an Active Directory object from one organizational unit to another
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|distinguished_name|string|None|True|The distinguished name of the user whose membership will be modified|None|CN=user,OU=domain_users,DC=example,DC=com|
-|new_ou|string|None|True|The distinguished name of the OU to move the object to|None|OU=disabled_users,DC=example,DC=com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|distinguished_name|string|None|True|The distinguished name of the user whose membership will be modified|None|CN=user,OU=domain_users,DC=example,DC=com|None|None|
+|new_ou|string|None|True|The distinguished name of the OU to move the object to|None|OU=disabled_users,DC=example,DC=com|None|None|
   
 Example input:
 
@@ -426,16 +426,16 @@ Example output:
 ```
 
 #### Query
-  
+
 This action is used to run an LDAP query
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|attributes|[]string|None|False|Attributes to search. If empty return all attributes|None|["createTimestamp", "creatorsName"]|
-|search_base|string|None|True|The base of the search request|None|DC=example,DC=com|
-|search_filter|string|None|True|The filter of the search request. It must conform to the LDAP filter syntax specified in RFC4515|None|(sAMAccountName=joesmith)|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|attributes|[]string|None|False|Attributes to search. If empty return all attributes|None|["createTimestamp", "creatorsName"]|None|None|
+|search_base|string|None|True|The base of the search request|None|DC=example,DC=com|None|None|
+|search_filter|string|None|True|The filter of the search request. It must conform to the LDAP filter syntax specified in RFC4515|None|(sAMAccountName=joesmith)|None|None|
   
 Example input:
 
@@ -513,17 +513,17 @@ Example output:
 ```
 
 #### Query Group Membership
-  
+
 This action is used to return users and groups that belonging to the specific group
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|expand_nested_groups|boolean|None|False|Expand nested groups in results|None|True|
-|group_name|string|None|True|Name of the group for which membership will be checked|None|Domain Users|
-|include_groups|boolean|None|False|Include groups in results|None|True|
-|search_base|string|None|True|The base of the search request|None|DC=example,DC=com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|expand_nested_groups|boolean|None|False|Expand nested groups in results|None|True|None|None|
+|group_name|string|None|True|Name of the group for which membership will be checked|None|Domain Users|None|None|
+|include_groups|boolean|None|False|Include groups in results|None|True|None|None|
+|search_base|string|None|True|The base of the search request|None|DC=example,DC=com|None|None|
   
 Example input:
 
@@ -603,15 +603,15 @@ Example output:
 ```
 
 #### Reset Password
-  
+
 This action is used to reset a users password
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|distinguished_name|string|None|True|The distinguished name of the user whose membership will be modified|None|CN=user,OU=domain_users,DC=example,DC=com|
-|new_password|password|None|True|The new password|None|mypassword|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|distinguished_name|string|None|True|The distinguished name of the user whose membership will be modified|None|CN=user,OU=domain_users,DC=example,DC=com|None|None|
+|new_password|password|None|True|The new password|None|mypassword|None|None|
   
 Example input:
 
@@ -637,14 +637,14 @@ Example output:
 ```
 
 #### Unlock User
-  
+
 This action is used to unlock an account
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|distinguished_name|string|None|True|The distinguished name of the user to unlock|None|CN=user,OU=domain_users,DC=example,DC=com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|distinguished_name|string|None|True|The distinguished name of the user to unlock|None|CN=user,OU=domain_users,DC=example,DC=com|None|None|
   
 Example input:
 
@@ -758,8 +758,10 @@ To look up a Distinguished Name (DN) in Microsoft AD use the query action. Use t
 objectname is the logon name of the user you are looking for. The DN can then be fed into another action by Repeating a collection for
 the query results, and then using the variable step $item.dn
 
+
 # Version History
 
+* 9.0.3 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 9.0.2 - Updated the SDK to the latest version to address memory usage issues
 * 9.0.1 - Fix problem where some ASCII characters were not escaped properly
 * 9.0.0 - Action: `Disable User` & `Enable User` - Rename title of actions from `Disable` & `Enable` to `Disable Users` & `Enable Users` on the front-end.
@@ -767,7 +769,7 @@ the query results, and then using the variable step $item.dn
 * 7.0.0 - Update actions Enable Users and Enable Users to replace output Success with All Operations Succeeded True/False
 * 6.0.0 - Add actions Enable Users and Disable users allowing for the bulk enablement/disablement of users
 * 5.3.5 - Fix issue where JSON Marshaling error was raised when receiving unexpected API response in the Force Password Reset action
-* 5.3.4 - Fix issue with space character in DN in modify object action | Enhanced LDAP logging | Fix issue with variable error when connection fails 
+* 5.3.4 - Fix issue with space character in DN in modify object action | Enhanced LDAP logging | Fix issue with variable error when connection fails
 * 5.3.3 - Fix issue with escaping brackets in Query action
 * 5.3.2 - Improve LDAP connection handling
 * 5.3.1 - Improved error messaging in case the specified group was not found in the Query Group Membership action
@@ -811,11 +813,11 @@ the query results, and then using the variable step $item.dn
 
 # Links
 
-[Learn Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/)
-[AD LDAP](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/3c5916a9-f1a0-429d-b937-f8fe672d777c)
-[Microsoft's Active Directory service](https://social.technet.microsoft.com/wiki/contents/articles/5392.active-directory-ldap-syntax-filters.aspx)
+* [Learn Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/)
+* [AD LDAP](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/3c5916a9-f1a0-429d-b937-f8fe672d777c)
+* [Microsoft's Active Directory service](https://social.technet.microsoft.com/wiki/contents/articles/5392.active-directory-ldap-syntax-filters.aspx)
 
 ## References
 
-[Python LDAP3](https://ldap3.readthedocs.io)
-[RFC4515](https://tools.ietf.org/search/rfc4515)
+* [Python LDAP3](https://ldap3.readthedocs.io)
+* [RFC4515](https://tools.ietf.org/search/rfc4515)
