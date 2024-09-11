@@ -16,7 +16,7 @@ class State:
 
 
 class Output:
-    INCIDENTS = "incidents"
+    ALERTS = "alerts"
 
 
 class MonitorAlertsInput(insightconnect_plugin_runtime.Input):

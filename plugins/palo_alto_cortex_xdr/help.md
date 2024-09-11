@@ -581,13 +581,13 @@ This task is used to monitor alerts
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|incidents|[]object|False|Alerts|[ { } ]|
+|alerts|[]object|False|Alerts|[ { } ]|
   
 Example output:
 
 ```
 {
-  "incidents": [
+  "alerts": [
     {}
   ]
 }
