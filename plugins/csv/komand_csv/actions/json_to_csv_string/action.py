@@ -15,4 +15,8 @@ class JsonToCsvString(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {Output.CSV_STRING: json_to_csv(params.get(Input.JSON))}
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        json_object = params.get(Input.JSON, {})
+        # END INPUT BINDING - DO NOT REMOVE
+
+        return {Output.CSV_STRING: json_to_csv(json_object)}

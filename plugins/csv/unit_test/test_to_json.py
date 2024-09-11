@@ -6,6 +6,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
+
 from komand_csv.actions.to_json import ToJson
 from komand_csv.actions.to_json.schema import Input, Output
 
