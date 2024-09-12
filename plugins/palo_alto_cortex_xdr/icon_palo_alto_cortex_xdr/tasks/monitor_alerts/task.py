@@ -58,20 +58,21 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         has_more_pages = False
         # TESTING PURPOSES
         state = {LAST_SEARCH_FROM: None, LAST_SEARCH_TO: None}
-        custom_config = {"alert_limit": 20}
+        # custom_config = {"alert_limit": 20}
 
         try:
 
             now_time = self._get_current_time()
-            now = now_time - timedelta(minutes=15)
-            # last 15 minutes
-            end_time = now.strftime(TIME_FORMAT)
-            start_time, alert_limit = self._parse_custom_config(custom_config, now, state)
+            start_time, alert_limit = self._parse_custom_config(custom_config, now_time, state)
+
+            # TEMP TO RETRIEVE LOGS AS OLDEST ONE ISNT WITHIN LOOKBACK HOURS
+            start_time = 1694513478000
 
             self.logger.info("Starting to download alerts...")
 
+            # todo - starttime needs to be last alert time or default lookback
             response, state, has_more_pages, status_code, error_message = self.get_alerts_palo_alto(
-                state=state, custom_config=custom_config
+                state=state, start_time=start_time, end_time=now_time, alert_limit=alert_limit
             )
 
             # TODO - Are we supposed to show the total (MAX LIMIT) or the total (total_count)
@@ -104,12 +105,12 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
     ###########################
     # Make request
     ###########################
-    def get_alerts_palo_alto(self, state, custom_config):
+    def get_alerts_palo_alto(self, state, start_time, end_time, alert_limit):
         endpoint = "/public_api/v1/alerts/get_alerts"
         response_alerts_field = "alerts"
         time_sort_field = "creation_time"
 
-        self.logger.info(f"{ALERT_LIMIT = }")
+        self.logger.info(f"{alert_limit = }")
 
         # IT GOES 0 -> 100 | 101 -> 200 | 201 -> 300
         # IF NULL, SET FROM = 0
@@ -133,11 +134,19 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         # TODO - Check if this is correct
         headers = self.connection.xdr_api.get_headers()
 
+        filters = []
+        filters = filters or []
+        # If time constraints have been provided for the request, add them to the post body
+        if start_time is not None and end_time is not None:
+            filters.append({"field": time_sort_field, "operator": "gte", "value": start_time})
+            filters.append({"field": time_sort_field, "operator": "lte", "value": end_time})
+
         post_body = {
             "request_data": {
                 "search_from": search_from,
                 "search_to": search_to,
                 "sort": {"field": time_sort_field, "keyword": "asc"},
+                "filters": filters,
             }
         }
 
@@ -244,13 +253,15 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
     @staticmethod
     def _get_current_time():
-        return datetime.now(timezone.utc)
+        # Gets the last 15 minutes in UNIX
+        last_15_min = datetime.utcnow() - timedelta(minutes=15)
+        return int(last_15_min.timestamp()) * 1000
 
     ###########################
     # Custom Config
     ###########################
     def _parse_custom_config(
-        self, custom_config: Dict[str, Any], now: datetime, saved_state: Dict[str, str]
+        self, custom_config: Dict[str, Any], now: int, saved_state: Dict[str, str]
     ) -> Tuple[str, int]:
         """
         Takes custom config from CPS and allows the specification of a new start time for alerts,
@@ -263,6 +274,9 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         alerts to fetch per run.
         """
         state = saved_state.copy()
+        dt_now = datetime.fromtimestamp(now / 1000, tz=timezone.utc)
+        dt_now = dt_now.strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z"
+        dt_now = datetime.strptime(dt_now, "%Y-%m-%dT%H:%M:%S.%fZ")
 
         # set the alert limit from CPS if it exists, otherwise default to ALERT_LIMIT
         alert_limit = custom_config.get("alert_limit", ALERT_LIMIT)
@@ -275,12 +289,12 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             custom_timings = custom_config.get(LAST_ALERT_TIME, {})
             custom_date = custom_timings.get("date")
             custom_hours = custom_timings.get("hours", DEFAULT_LOOKBACK_HOURS)
-            start = datetime(**custom_date) if custom_date else (now - timedelta(hours=custom_hours))
+            start = datetime(**custom_date) if custom_date else (dt_now - timedelta(hours=custom_hours))
             state[LAST_ALERT_TIME] = start.strftime(TIME_FORMAT)
         else:
             # check if we have held the TS beyond our max lookback
             lookback_days = custom_config.get(f"{LAST_ALERT_TIME}_days", MAX_LOOKBACK_DAYS)
-            default_date_lookback = now - timedelta(days=lookback_days)  # if not passed from CPS create on the fly
+            default_date_lookback = dt_now - timedelta(days=lookback_days)  # if not passed from CPS create on the fly
             custom_lookback = custom_config.get(f"max_{LAST_ALERT_TIME}", {})
             comparison_date = datetime(**custom_lookback) if custom_lookback else default_date_lookback
             comparison_date = comparison_date.replace(tzinfo=timezone.utc).strftime(TIME_FORMAT)
@@ -298,7 +312,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             self.logger.info(
                 f"{log_msg}Applying the following start time='{state.get(FROM_TIME_FILTER)}'. " f"Limit={alert_limit}"
             )
-
+        start_time = int(dt_now.timestamp() * 1000)
         return start_time, alert_limit
 
     ###########################
