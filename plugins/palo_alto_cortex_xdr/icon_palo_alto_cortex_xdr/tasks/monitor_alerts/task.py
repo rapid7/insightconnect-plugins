@@ -100,22 +100,38 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
             # TODO - Change first None to response
             # It's set to none so we can see all the logging without the results getting in the way
-
             # Note - when running locally, we should only get the first 100
             # When has more pages is True, the task will be rerun automatically again (on staging / the cloud exec)
-
             # If has more pages == True, then we need to change the search index from 0-100 to 101-200 (Done below now I think)
 
             return response, state, has_more_pages, status_code, error_message
 
         except PluginException as error:
+            error_data = error.data.get("errors", [])
+
+            if error_data:
+                # if there is response data in the error then use it in the exception
+                status_code = error_data[0].get("code")
+                cause = error_data[0].get("message")
+
+            else:
+                status_code = 500
+                cause = error.cause
+
             self.logger.error(
-                f"A PluginException has occurred. Status code 500 returned. Error: {error.cause}. "
+                f"A PluginException has occurred. Status code {status_code} returned. Error: {cause}. "
                 f"Existing state: {existing_state}"
             )
-            return [], existing_state, False, 500, PluginException(cause=error.cause, data=error)
+
+            return [], existing_state, False, status_code, PluginException(cause=cause, data=error)
 
         except Exception as error:
+
+            self.logger.error(
+                f"An Unknown Exception has occurred. No results returned. Error: {error} "
+                f"Existing state: {existing_state}"
+            )
+
             return [], existing_state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     ###########################
@@ -178,66 +194,51 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         self.logger.info(f"{post_body = }")
         self.logger.info(f"{url = }")
 
-        try:
-            request = requests.Request(method="post", url=url, headers=headers, json=post_body)
-            response = make_request(request, timeout=120)
+        request = requests.Request(method="post", url=url, headers=headers, json=post_body)
+        response = make_request(request, timeout=120)
 
-            response = extract_json(response)
-            total_count = response.get("reply", {}).get("total_count", -1)
-            result_count = response.get("reply", {}).get("result_count", -1)
-            results = response.get("reply", {}).get(response_alerts_field, [])
+        response = extract_json(response)
+        total_count = response.get("reply", {}).get("total_count", -1)
+        result_count = response.get("reply", {}).get("result_count", -1)
+        results = response.get("reply", {}).get(response_alerts_field, [])
 
-            new_alerts, last_alert_hashes, last_alert_time = self._dedupe_and_get_highest_time(
-                results, start_time, state
+        new_alerts, last_alert_hashes, last_alert_time = self._dedupe_and_get_highest_time(results, start_time, state)
+
+        # for index, alert in enumerate(results):
+        #     alert_time = alert.get(TIMESTAMP_KEY)
+        #     alert_time = datetime.fromtimestamp(alert_time / 1000, tz=timezone.utc)
+        #     alert_time = alert_time.strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z"
+        #     self.logger.info(f"{alert_time= }")
+
+        is_paginating = ALERT_LIMIT < total_count
+
+        if is_paginating:
+            has_more_pages = True
+            state[LAST_SEARCH_FROM] = search_from
+            state[LAST_SEARCH_TO] = search_to
+            # state = {search_from: 0, search_to: 100}
+            # next run it should then be
+            # state = {search_from: 101, search_to: 200} or state = {search_from: 101, search_to: (total - search_from) (109 or whatever it equals)}
+            # and so on
+
+            self.logger.info(f"Found total alerts={total_count}, limit={ALERT_LIMIT}, is_paginating={is_paginating}")
+            self.logger.info(
+                f"Paginating alerts: Saving state with existing filters: "
+                f"from_time={search_from}"
+                f"to_time={search_to}"
             )
 
-            # for index, alert in enumerate(results):
-            #     alert_time = alert.get(TIMESTAMP_KEY)
-            #     alert_time = datetime.fromtimestamp(alert_time / 1000, tz=timezone.utc)
-            #     alert_time = alert_time.strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z"
-            #     self.logger.info(f"{alert_time= }")
+        else:
+            has_more_pages = False
+            state = self._drop_pagination_state(state)
 
-            is_paginating = ALERT_LIMIT < total_count
+        # add the last alert time to the state if it exists
+        # if not then set to the last queried time to move the filter forward
+        state[LAST_ALERT_TIME] = last_alert_time if last_alert_time else end_time
+        # update hashes in state only if we've got new ones
+        state[LAST_ALERT_HASH] = last_alert_hashes if last_alert_hashes else state.get(LAST_ALERT_HASH, [])
 
-            if is_paginating:
-                has_more_pages = True
-                state[LAST_SEARCH_FROM] = search_from
-                state[LAST_SEARCH_TO] = search_to
-                # state = {search_from: 0, search_to: 100}
-                # next run it should then be
-                # state = {search_from: 101, search_to: 200} or state = {search_from: 101, search_to: (total - search_from) (109 or whatever it equals)}
-                # and so on
-
-                self.logger.info(
-                    f"Found total alerts={total_count}, limit={ALERT_LIMIT}, is_paginating={is_paginating}"
-                )
-                self.logger.info(
-                    f"Paginating alerts: Saving state with existing filters: "
-                    f"from_time={search_from}"
-                    f"to_time={search_to}"
-                )
-
-            else:
-                has_more_pages = False
-                state = self._drop_pagination_state(state)
-
-            # add the last alert time to the state if it exists
-            # if not then set to the last queried time to move the filter forward
-            state[LAST_ALERT_TIME] = last_alert_time if last_alert_time else end_time
-            # update hashes in state only if we've got new ones
-            state[LAST_ALERT_HASH] = last_alert_hashes if last_alert_hashes else state.get(LAST_ALERT_HASH, [])
-
-            return new_alerts, state, has_more_pages, 200, None
-
-        except PluginException as error:
-            self.logger.error(
-                f"A PluginException has occurred. Status code 500 returned. Error: {error.cause}. "
-                f"Existing state: {state}"
-            )
-            return [], state, False, 500, PluginException(cause=error.cause, data=error)
-
-        except Exception as error:
-            return [], state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+        return new_alerts, state, has_more_pages, 200, None
 
     ###########################
     # Deduping
