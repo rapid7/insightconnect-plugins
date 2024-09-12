@@ -23,12 +23,13 @@ DEFAULT_LOOKBACK_HOURS = 24
 # TODO - Changing alert limit had no effect
 # Add default at end on var name
 ALERT_LIMIT = 100
+SORT_BY_FIELD = "last_modified_ts"
 
 MAX_LIMIT = 7500
 
 # State held values
-LAST_ALERT_TIME = "last_incident_time"
-LAST_ALERT_HASH = "last_incident_hash"
+LAST_ALERT_TIME = "last_alert_time"
+LAST_ALERT_HASH = "last_alert_hash"
 # State held values = CONOR
 LAST_SEARCH_FROM = "last_search_from"
 LAST_SEARCH_TO = "last_search_to"
@@ -57,8 +58,22 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         existing_state = state.copy()
         has_more_pages = False
         # TESTING PURPOSES
-        state = {LAST_SEARCH_FROM: None, LAST_SEARCH_TO: None}
-        # custom_config = {"alert_limit": 20}
+        custom_config = {
+            "last_alert_time": {
+                "date": {"year": 2024, "month": 8, "day": 1, "hour": 1, "minute": 2, "second": 3, "microsecond": 0}
+            },
+            "last_alert_time_days": 30,
+            "max_last_alert_time": {
+                "year": 2024,
+                "month": 8,
+                "day": 2,
+                "hour": 3,
+                "minute": 4,
+                "second": 5,
+                "microsecond": 0,
+            },
+            "alert_limit": 20,
+        }
 
         try:
 
@@ -66,7 +81,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             start_time, alert_limit = self._parse_custom_config(custom_config, now_time, state)
 
             # TEMP TO RETRIEVE LOGS AS OLDEST ONE ISNT WITHIN LOOKBACK HOURS
-            start_time = 1694513478000
+            # start_time = 1694513478000
 
             self.logger.info("Starting to download alerts...")
 
@@ -90,6 +105,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             # When has more pages is True, the task will be rerun automatically again (on staging / the cloud exec)
 
             # If has more pages == True, then we need to change the search index from 0-100 to 101-200 (Done below now I think)
+
             return response, state, has_more_pages, status_code, error_message
 
         except PluginException as error:
@@ -106,7 +122,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
     # Make request
     ###########################
     def get_alerts_palo_alto(self, state, start_time, end_time, alert_limit):
-        endpoint = "/public_api/v1/alerts/get_alerts"
+        endpoint = "public_api/v1/alerts/get_alerts"
         response_alerts_field = "alerts"
         time_sort_field = "creation_time"
 
@@ -145,12 +161,14 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             "request_data": {
                 "search_from": search_from,
                 "search_to": search_to,
-                "sort": {"field": time_sort_field, "keyword": "asc"},
+                "sort": {"field": time_sort_field, "keyword": "desc"},
                 "filters": filters,
             }
         }
 
-        url = urllib.parse.urljoin("https://api-rapid7.xdr.us.paloaltonetworks.com", endpoint)
+        # url = urllib.parse.urljoin("https://api-rapid7.xdr.us.paloaltonetworks.com", endpoint)
+        fqdn = self.connection.xdr_api.get_url()
+        url = f"{fqdn}{endpoint}"
 
         # Local debugging
         self.logger.info(f"State in UpDate: {state = }")
@@ -165,10 +183,19 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             response = make_request(request, timeout=120)
 
             response = extract_json(response)
-
             total_count = response.get("reply", {}).get("total_count", -1)
             result_count = response.get("reply", {}).get("result_count", -1)
             results = response.get("reply", {}).get(response_alerts_field, [])
+
+            new_alerts, last_alert_hashes, last_alert_time = self._dedupe_and_get_highest_time(
+                results, start_time, state
+            )
+
+            # for index, alert in enumerate(results):
+            #     alert_time = alert.get(TIMESTAMP_KEY)
+            #     alert_time = datetime.fromtimestamp(alert_time / 1000, tz=timezone.utc)
+            #     alert_time = alert_time.strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z"
+            #     self.logger.info(f"{alert_time= }")
 
             is_paginating = ALERT_LIMIT < total_count
 
@@ -194,7 +221,13 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 has_more_pages = False
                 state = self._drop_pagination_state(state)
 
-            return results, state, has_more_pages, 200, None
+            # add the last alert time to the state if it exists
+            # if not then set to the last queried time to move the filter forward
+            state[LAST_ALERT_TIME] = last_alert_time if last_alert_time else end_time
+            # update hashes in state only if we've got new ones
+            state[LAST_ALERT_HASH] = last_alert_hashes if last_alert_hashes else state.get(LAST_ALERT_HASH, [])
+
+            return new_alerts, state, has_more_pages, 200, None
 
         except PluginException as error:
             self.logger.error(
@@ -209,7 +242,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
     ###########################
     # Deduping
     ###########################
-    def _dedupe_and_get_highest_time(self, alerts: list, start_time: str, state: dict) -> Tuple[list, list, str]:
+    def _dedupe_and_get_highest_time(self, alerts: list, start_time: int, state: dict) -> Tuple[list, list, str]:
         """
         Function to dedupe alerts using existing hashes in the state, and return the highest
         timestamp.
@@ -221,11 +254,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         old_hashes, deduped_alerts, new_hashes, highest_timestamp = state.get(LAST_ALERT_HASH, []), [], [], ""
         for index, alert in enumerate(alerts):
-
-            # todo - make method to convert
-            alert_time = alert.get(TIMESTAMP_KEY) / 1000
-            alert_time = datetime.fromtimestamp(alert_time, tz=timezone.utc).strftime(TIME_FORMAT)
-
+            alert_time = alert.get(TIMESTAMP_KEY)
             if alert_time == start_time:
                 alert_hash = hash_sha1(alert)
                 if alert_hash not in old_hashes:
@@ -261,7 +290,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
     # Custom Config
     ###########################
     def _parse_custom_config(
-        self, custom_config: Dict[str, Any], now: int, saved_state: Dict[str, str]
+        self, custom_config: Dict[str, Any], now: int, saved_state: Dict[int, str]
     ) -> Tuple[str, int]:
         """
         Takes custom config from CPS and allows the specification of a new start time for alerts,
@@ -274,6 +303,12 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         alerts to fetch per run.
         """
         state = saved_state.copy()
+
+        """
+        As the DateTime object needs to contain milliseconds (as the log's UNIX time is in milliseconds),
+        it does not come preset with milliseconds so this converts it to a string which allows for milliseconds
+        to be added and after adding it gets converted back to a DateTime object, but with milliseconds added
+        """
         dt_now = datetime.fromtimestamp(now / 1000, tz=timezone.utc)
         dt_now = dt_now.strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z"
         dt_now = datetime.strptime(dt_now, "%Y-%m-%dT%H:%M:%S.%fZ")
@@ -305,14 +340,10 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 state = self._drop_pagination_state(state)
 
         start_time = state.get(LAST_ALERT_TIME)
-        if not state.get(FROM_TIME_FILTER):
-            self.logger.info(f"{log_msg}Applying the following start time='{start_time}'. Limit={alert_limit}.")
-        else:
-            # we're paginating, this will be the value used to query for alerts
-            self.logger.info(
-                f"{log_msg}Applying the following start time='{state.get(FROM_TIME_FILTER)}'. " f"Limit={alert_limit}"
-            )
-        start_time = int(dt_now.timestamp() * 1000)
+        self.logger.info(f"{log_msg}Applying the following start time='{start_time}'. Limit={alert_limit}.")
+
+        start_time = int(datetime.strptime(start_time, "%Y-%m-%dT%H:%M:%S.%fZ").timestamp()) * 1000
+
         return start_time, alert_limit
 
     ###########################
