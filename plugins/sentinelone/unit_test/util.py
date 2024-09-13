@@ -417,6 +417,8 @@ class Util:
             elif json_data.get("data", {}).get("targetSiteId", "") == "1234567891234567891":
                 return MockResponse(200, "move_between_sites_data")
         elif args[1] == "https://rapid7.sentinelone.net/web/api/v2.1/device-control/events":
+            if params.get("eventTime__gt") == "1999-12-25T00:00:00.000000Z":
+                return MockResponse(200, "monitor_logs_events_unexpected_timestamp")
             if params.get("cursor") == "401":
                 return MockResponse(401)
             if params.get("cursor") == "403":
