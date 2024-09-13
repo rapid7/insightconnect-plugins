@@ -35,6 +35,9 @@ class CortexXdrAPI:
     def get_headers(self):
         return self.headers
 
+    def get_url(self):
+        return self.fully_qualified_domain_name
+
     def test_connection(self):
         endpoint = "/api_keys/validate/"
         try:
