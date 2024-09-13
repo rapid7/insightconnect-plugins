@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Python 3 Script"
 Vendor = "rapid7"
-Version = "5.0.0"
+Version = "5.0.1"
 Description = "[Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.9.19 and its standard library as well as the following 3rd party libraries:"
 
 
