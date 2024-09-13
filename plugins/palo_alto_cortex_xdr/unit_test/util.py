@@ -93,7 +93,6 @@ class Util:
                 if self.status_code < 200 or self.status_code > 399:
                     raise requests.HTTPError()
 
-        print(kwargs)
         if kwargs.get("url") == "https://example.com/public_api/v1/incidents/get_incidents/":
             return MockResponse("get_incidents", 200)
         if kwargs.get("url") == "connection url":

@@ -2,9 +2,9 @@
     "parameters": [
         [
             "initial_run_no_more_pages",
-            "2000-01-01T00:00:00.000000Z",
+            "2024-01-29T15:01:00.000000Z",
             {},
-            true,
+            false,
             [
                 {
                     "agent_os_sub_type": "6.3.9600",
@@ -171,6 +171,8 @@
                 }
             ],
             {
+                "last_alert_hash": ["2bac70d9df7c36264bde5fa53a616c642626f510"],
+                "last_alert_time": 1706540499609,
                 "last_search_from": 0,
                 "last_search_to": 100
             },

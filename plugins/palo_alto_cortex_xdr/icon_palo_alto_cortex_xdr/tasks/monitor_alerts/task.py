@@ -144,9 +144,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         self.logger.info(f"{alert_limit = }")
 
-        # IT GOES 0 -> 100 | 101 -> 200 | 201 -> 300
-        # IF NULL, SET FROM = 0
-
         state.get(LAST_SEARCH_FROM)
         search_from = (state.get(LAST_SEARCH_TO) + 1) if state.get(LAST_SEARCH_FROM) else 0
         self.logger.info(f"{search_from = }")
@@ -158,12 +155,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         state[LAST_SEARCH_FROM] = search_from
         state[LAST_SEARCH_TO] = search_to
 
-        # search_from = state.get(LAST_SEARCH_FROM, 0)
-        # search_to = state.get(LAST_SEARCH_TO, 100) + 100
-
-        # search_to = search_from + ALERT_LIMIT
-
-        # TODO - Check if this is correct
         headers = self.connection.xdr_api.get_headers()
 
         filters = []
@@ -182,7 +173,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             }
         }
 
-        # url = urllib.parse.urljoin("https://api-rapid7.xdr.us.paloaltonetworks.com", endpoint)
         fqdn = self.connection.xdr_api.get_url()
         url = f"{fqdn}{endpoint}"
 
@@ -203,12 +193,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         results = response.get("reply", {}).get(response_alerts_field, [])
 
         new_alerts, last_alert_hashes, last_alert_time = self._dedupe_and_get_highest_time(results, start_time, state)
-
-        # for index, alert in enumerate(results):
-        #     alert_time = alert.get(TIMESTAMP_KEY)
-        #     alert_time = datetime.fromtimestamp(alert_time / 1000, tz=timezone.utc)
-        #     alert_time = alert_time.strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z"
-        #     self.logger.info(f"{alert_time= }")
 
         is_paginating = ALERT_LIMIT < total_count
 
