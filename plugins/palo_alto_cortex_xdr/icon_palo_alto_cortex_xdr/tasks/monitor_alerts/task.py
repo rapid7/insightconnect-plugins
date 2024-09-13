@@ -1,47 +1,31 @@
 import insightconnect_plugin_runtime
+from requests import Response
+
 from .schema import (
     MonitorAlertsInput,
     MonitorAlertsOutput,
     MonitorAlertsState,
-    Input,
-    Output,
     Component,
-    State,
 )
-import time
 from datetime import datetime, timedelta, timezone
-from insightconnect_plugin_runtime.exceptions import PluginException, APIException
-from insightconnect_plugin_runtime.helper import response_handler, extract_json, hash_sha1, make_request
+from insightconnect_plugin_runtime.exceptions import PluginException, ResponseExceptionData
+from insightconnect_plugin_runtime.helper import extract_json, hash_sha1, make_request
 from typing import Any, Dict, Tuple
 import requests
-import urllib
-
 
 TIME_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
 MAX_LOOKBACK_DAYS = 7
 DEFAULT_LOOKBACK_HOURS = 24
-# TODO - Changing alert limit had no effect
-# Add default at end on var name
 ALERT_LIMIT = 100
-SORT_BY_FIELD = "last_modified_ts"
-
-MAX_LIMIT = 7500
 
 # State held values
 LAST_ALERT_TIME = "last_alert_time"
 LAST_ALERT_HASH = "last_alert_hash"
-# State held values = CONOR
+
+# Pagination
 LAST_SEARCH_FROM = "last_search_from"
 LAST_SEARCH_TO = "last_search_to"
-
-# Used to paginate
-ALERTS_OFFSET = "alerts_offset"
-FROM_TIME_FILTER = "from_time_filter"
-TO_TIME_FILTER = "to_time_filter"
 TIMESTAMP_KEY = "event_timestamp"
-
-NEXT_PAGE_LINK = "next_page_link"
-# Custom imports below
 
 
 class MonitorAlerts(insightconnect_plugin_runtime.Task):
@@ -59,8 +43,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
     def run(self, params={}, state={}, custom_config: dict = {}):  # pylint: disable=unused-argument
         existing_state = state.copy()
-        has_more_pages = False
-        # TESTING PURPOSES
+        # todo - TESTING PURPOSES
         custom_config = {
             "last_alert_time": {
                 "date": {"year": 2024, "month": 8, "day": 1, "hour": 1, "minute": 2, "second": 3, "microsecond": 0}
@@ -86,27 +69,17 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             self.logger.info("Starting to download alerts...")
 
             # todo - starttime needs to be last alert time or default lookback
-            response, state, has_more_pages, status_code, error_message = self.get_alerts_palo_alto(
+            response, state, has_more_pages = self.get_alerts_palo_alto(
                 state=state, start_time=start_time, end_time=now_time, alert_limit=alert_limit
             )
 
-            self.logger.info(f"Total alerts returned: {len(response)}")
-
-            # Local Debugging
-            self.logger.info(f"{type(response) = }")
-            self.logger.info(f"{len(response) = }")
-            self.logger.info(f"{state}, {has_more_pages = }")
-
-            return response, state, has_more_pages, status_code, error_message
+            return response, state, has_more_pages, 200, None
 
         except PluginException as error:
-            error_data = error.data.get("errors", [])
-
-            if error_data:
+            if isinstance(error.data, Response):
                 # if there is response data in the error then use it in the exception
-                status_code = error_data[0].get("code")
-                cause = error_data[0].get("message")
-
+                status_code = error.data.status_code
+                cause = error.data.text
             else:
                 status_code = 500
                 cause = error.cause
@@ -115,16 +88,12 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 f"A PluginException has occurred. Status code {status_code} returned. Error: {cause}. "
                 f"Existing state: {existing_state}"
             )
-
             return [], existing_state, False, status_code, PluginException(cause=cause, data=error)
-
         except Exception as error:
-
             self.logger.error(
-                f"An Unknown Exception has occurred. No results returned. Error: {error} "
+                f"Unknown exception has occurred. No results returned. Error: {error} "
                 f"Existing state: {existing_state}"
             )
-
             return [], existing_state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     ###########################
@@ -139,6 +108,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         self.logger.info(f"{search_from = }")
 
         # IF NULL SET TO = 100
+        # todo - make changes on handling custom number of alerts
         state.get(LAST_SEARCH_TO)
         search_to = (search_from + 99) if state.get(LAST_SEARCH_TO) else 100
 
@@ -146,7 +116,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         state[LAST_SEARCH_TO] = search_to
 
         filters = []
-        filters = filters or []
         # If time constraints have been provided for the request, add them to the post body
         if start_time is not None and end_time is not None:
             filters.append({"field": self.time_sort_field, "operator": "gte", "value": start_time})
@@ -158,29 +127,26 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         new_alerts, last_alert_hashes, last_alert_time = self._dedupe_and_get_highest_time(results, start_time, state)
 
-        is_paginating = ALERT_LIMIT < total_count
+        # todo - maybe alert_limit < result_count
+        is_paginating = alert_limit < total_count
+
+        has_more_pages = False
 
         if is_paginating:
             has_more_pages = True
-
-            self.logger.info(f"Found total alerts={total_count}, limit={ALERT_LIMIT}, is_paginating={is_paginating}")
+            self.logger.info(f"Found total alerts={total_count}, limit={alert_limit}, is_paginating={is_paginating}")
             self.logger.info(
                 f"Paginating alerts: Saving state with existing filters: "
                 f"from_time={search_from}"
                 f"to_time={search_to}"
             )
 
-        else:
-            has_more_pages = False
-            # state = self._drop_pagination_state(state)
-
         # add the last alert time to the state if it exists
         # if not then set to the last queried time to move the filter forward
         state[LAST_ALERT_TIME] = last_alert_time if last_alert_time else end_time
         # update hashes in state only if we've got new ones
         state[LAST_ALERT_HASH] = last_alert_hashes if last_alert_hashes else state.get(LAST_ALERT_HASH, [])
-
-        return new_alerts, state, has_more_pages, 200, None
+        return new_alerts, state, has_more_pages
 
     ###########################
     # Deduping
@@ -234,7 +200,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
     ###########################
     def _parse_custom_config(
         self, custom_config: Dict[str, Any], now: int, saved_state: Dict[int, str]
-    ) -> Tuple[str, int]:
+    ) -> Tuple[int, int]:
         """
         Takes custom config from CPS and allows the specification of a new start time for alerts,
         and allows the limit to be customised.
@@ -285,30 +251,10 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         start_time = state.get(LAST_ALERT_TIME)
         self.logger.info(f"{log_msg}Applying the following start time='{start_time}'. Limit={alert_limit}.")
 
+        # CONVERTS BACK TO EPOCH
         start_time = int(datetime.strptime(start_time, "%Y-%m-%dT%H:%M:%S.%fZ").timestamp()) * 1000
 
         return start_time, alert_limit
-
-    ###########################
-    # Handle Pagination
-    ###########################
-    # def _drop_pagination_state(self, state: Dict[str, str]) -> Dict[str, str]:
-    #     """
-    #     Helper function to pop values from the state if we need to break out of pagination.
-    #     :return: state
-    #     """
-    #     log_msg = "Dropped the following keys from state: "
-    #     if state.get(TO_TIME_FILTER):
-    #         log_msg += f"{TO_TIME_FILTER}; "
-    #         state.pop(TO_TIME_FILTER)
-    #
-    #     if state.get(FROM_TIME_FILTER):
-    #         log_msg += f"{FROM_TIME_FILTER}; "
-    #         state.pop(FROM_TIME_FILTER)
-    #
-    #     self.logger.debug(log_msg)
-    #
-    #     return state
 
     ###########################
     # Make request
@@ -323,7 +269,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         url = f"{fqdn}{self.endpoint}"
 
         request = requests.Request(method="post", url=url, headers=headers, json=post_body)
-        response = make_request(request, timeout=120)
+        response = make_request(_request=request, timeout=60, exception_data_location=ResponseExceptionData.RESPONSE)
 
         response = extract_json(response)
         total_count = response.get("reply", {}).get("total_count", 0)
