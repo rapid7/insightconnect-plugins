@@ -53,6 +53,9 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             output=MonitorAlertsOutput(),
             state=MonitorAlertsState(),
         )
+        self.endpoint = "public_api/v1/alerts/get_alerts"
+        self.response_alerts_field = "alerts"
+        self.time_sort_field = "creation_time"
 
     def run(self, params={}, state={}, custom_config: dict = {}):  # pylint: disable=unused-argument
         existing_state = state.copy()
@@ -80,9 +83,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             now_time = self._get_current_time()
             start_time, alert_limit = self._parse_custom_config(custom_config, now_time, state)
 
-            # TEMP TO RETRIEVE LOGS AS OLDEST ONE ISNT WITHIN LOOKBACK HOURS
-            # start_time = 1694513478000
-
             self.logger.info("Starting to download alerts...")
 
             # todo - starttime needs to be last alert time or default lookback
@@ -90,19 +90,12 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 state=state, start_time=start_time, end_time=now_time, alert_limit=alert_limit
             )
 
-            # TODO - Are we supposed to show the total (MAX LIMIT) or the total (total_count)
             self.logger.info(f"Total alerts returned: {len(response)}")
 
             # Local Debugging
             self.logger.info(f"{type(response) = }")
             self.logger.info(f"{len(response) = }")
             self.logger.info(f"{state}, {has_more_pages = }")
-
-            # TODO - Change first None to response
-            # It's set to none so we can see all the logging without the results getting in the way
-            # Note - when running locally, we should only get the first 100
-            # When has more pages is True, the task will be rerun automatically again (on staging / the cloud exec)
-            # If has more pages == True, then we need to change the search index from 0-100 to 101-200 (Done below now I think)
 
             return response, state, has_more_pages, status_code, error_message
 
@@ -138,9 +131,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
     # Make request
     ###########################
     def get_alerts_palo_alto(self, state, start_time, end_time, alert_limit):
-        endpoint = "public_api/v1/alerts/get_alerts"
-        response_alerts_field = "alerts"
-        time_sort_field = "creation_time"
 
         self.logger.info(f"{alert_limit = }")
 
@@ -155,42 +145,16 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         state[LAST_SEARCH_FROM] = search_from
         state[LAST_SEARCH_TO] = search_to
 
-        headers = self.connection.xdr_api.get_headers()
-
         filters = []
         filters = filters or []
         # If time constraints have been provided for the request, add them to the post body
         if start_time is not None and end_time is not None:
-            filters.append({"field": time_sort_field, "operator": "gte", "value": start_time})
-            filters.append({"field": time_sort_field, "operator": "lte", "value": end_time})
+            filters.append({"field": self.time_sort_field, "operator": "gte", "value": start_time})
+            filters.append({"field": self.time_sort_field, "operator": "lte", "value": end_time})
 
-        post_body = {
-            "request_data": {
-                "search_from": search_from,
-                "search_to": search_to,
-                "sort": {"field": time_sort_field, "keyword": "desc"},
-                "filters": filters,
-            }
-        }
+        post_body = self.build_post_body(search_from=search_from, search_to=search_to, filters=filters)
 
-        fqdn = self.connection.xdr_api.get_url()
-        url = f"{fqdn}{endpoint}"
-
-        # Local debugging
-        self.logger.info(f"State in UpDate: {state = }")
-        self.logger.info(f"{search_from = }")
-        self.logger.info(f"{search_to = }")
-        self.logger.info(f"{headers = }")
-        self.logger.info(f"{post_body = }")
-        self.logger.info(f"{url = }")
-
-        request = requests.Request(method="post", url=url, headers=headers, json=post_body)
-        response = make_request(request, timeout=120)
-
-        response = extract_json(response)
-        total_count = response.get("reply", {}).get("total_count", -1)
-        result_count = response.get("reply", {}).get("result_count", -1)
-        results = response.get("reply", {}).get(response_alerts_field, [])
+        results, total_count = self.get_response(post_body=post_body)
 
         new_alerts, last_alert_hashes, last_alert_time = self._dedupe_and_get_highest_time(results, start_time, state)
 
@@ -200,10 +164,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             has_more_pages = True
             state[LAST_SEARCH_FROM] = search_from
             state[LAST_SEARCH_TO] = search_to
-            # state = {search_from: 0, search_to: 100}
-            # next run it should then be
-            # state = {search_from: 101, search_to: 200} or state = {search_from: 101, search_to: (total - search_from) (109 or whatever it equals)}
-            # and so on
 
             self.logger.info(f"Found total alerts={total_count}, limit={ALERT_LIMIT}, is_paginating={is_paginating}")
             self.logger.info(
@@ -351,3 +311,38 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         self.logger.debug(log_msg)
 
         return state
+
+    ###########################
+    # Make request
+    ###########################
+    def get_response(self, post_body: dict):
+        """
+        Helper method to return the response JSON and total count
+        """
+        headers = self.connection.xdr_api.get_headers()
+
+        fqdn = self.connection.xdr_api.get_url()
+        url = f"{fqdn}{self.endpoint}"
+
+        request = requests.Request(method="post", url=url, headers=headers, json=post_body)
+        response = make_request(request, timeout=120)
+
+        response = extract_json(response)
+        total_count = response.get("reply", {}).get("total_count", -1)
+        results = response.get("reply", {}).get(self.response_alerts_field, [])
+
+        return results, total_count
+
+    ###########################
+    # Build post body
+    ###########################
+    def build_post_body(self, search_from, search_to, filters):
+        post_body = {
+            "request_data": {
+                "search_from": search_from,
+                "search_to": search_to,
+                "sort": {"field": self.time_sort_field, "keyword": "desc"},
+                "filters": filters,
+            }
+        }
+        return post_body
