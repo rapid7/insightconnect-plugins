@@ -117,6 +117,7 @@ Some third-party modules defined in the Modules connection input (such as pandas
 
 # Version History
 
+* 5.0.1 - Updated SDK to the latest version | Initial updates for fedramp compliance
 * 5.0.0 - Updated SDK to the latest version | Removing records as its not maintained | Replacing maya with arrow (maya not maintained)
 * 4.0.10 - Updated the SDK to the latest version | Updated Python version to `3.9.19` | Fixed issue with invalid unicode character
 * 4.0.9 - Updated the SDK to the latest version to address memory usage issues
