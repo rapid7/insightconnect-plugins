@@ -7,6 +7,7 @@ class Input:
     APPLICATION_ID = "application_id"
     APPLICATION_SECRET = "application_secret"
     DIRECTORY_ID = "directory_id"
+    ENDPOINT = "endpoint"
 
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -32,12 +33,25 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "title": "Directory ID",
       "description": "Directory (tenant) ID",
       "order": 3
+    },
+    "endpoint": {
+      "type": "string",
+      "title": "Endpoint",
+      "description": "The type of endpoint to connect to: normal service, GCC (government), GCC High (government), DoD (military)",
+      "enum": [
+        "Normal",
+        "GCC",
+        "GCC High",
+        "DoD"
+      ],
+      "order": 4
     }
   },
   "required": [
     "application_id",
     "application_secret",
-    "directory_id"
+    "directory_id",
+    "endpoint"
   ],
   "definitions": {
     "credential_secret_key": {

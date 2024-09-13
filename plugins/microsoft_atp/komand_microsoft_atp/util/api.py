@@ -9,10 +9,29 @@ import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
+# we do not have an instance to test [gcc, gcc high, dod], but endpoint taken from link below
+# https://learn.microsoft.com/en-us/defender-endpoint/gov#api
+
+RESOURCE_URL = {
+    "Normal": "https://api.securitycenter.windows.com",
+    "GCC": "https://api-gcc.securitycenter.microsoft.us",
+    "GCC High": "https://api-gov.securitycenter.microsoft.us",
+    "DoD": "https://api-gov.securitycenter.microsoft.us",
+}
+
+AUTH_URL = {
+    "Normal": "https://login.windows.net",
+    "GCC": "https://login.microsoftonline.com",
+    "GCC High": "https://login.microsoftonline.us",
+    "DoD": "https://login.microsoftonline.us",
+}
+
+
 class WindwosDefenderATP_API:
-    def __init__(self, app_id: str, app_secret: str, tenant: str, logger: Logger):
+    def __init__(self, app_id: str, app_secret: str, tenant: str, endpoint: str, logger: Logger):
         self.session = requests.Session()
-        self.resource_url = "https://api.securitycenter.windows.com"
+        self.resource_url = RESOURCE_URL.get(endpoint)
+        self.auth_url = f"{AUTH_URL.get(endpoint)}/{tenant}/oauth2/token"
         self.api_token = None
         self.time_ago = 0  # Jan 1, 1970
         self.time_now = time.time()  # More than 1 hour since 1978
@@ -25,12 +44,11 @@ class WindwosDefenderATP_API:
         self.check_and_refresh_api_token()
 
     def get_token(self):
-        auth_url = f"https://login.windows.net/{self.tenant}/oauth2/token"
         self.logger.info("Updating Auth Token...")
-        self.logger.info(f"Getting token from: {auth_url}")
+        self.logger.info(f"Getting token from: {self.auth_url}")
         result_json = self._call_api(
             "POST",
-            auth_url,
+            self.auth_url,
             data={
                 "resource": self.resource_url,
                 "client_id": self.app_id,
