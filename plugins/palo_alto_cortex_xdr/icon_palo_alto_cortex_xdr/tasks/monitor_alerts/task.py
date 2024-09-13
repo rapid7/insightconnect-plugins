@@ -162,8 +162,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         if is_paginating:
             has_more_pages = True
-            state[LAST_SEARCH_FROM] = search_from
-            state[LAST_SEARCH_TO] = search_to
 
             self.logger.info(f"Found total alerts={total_count}, limit={ALERT_LIMIT}, is_paginating={is_paginating}")
             self.logger.info(
@@ -174,7 +172,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         else:
             has_more_pages = False
-            state = self._drop_pagination_state(state)
+            # state = self._drop_pagination_state(state)
 
         # add the last alert time to the state if it exists
         # if not then set to the last queried time to move the filter forward
@@ -282,7 +280,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 self.logger.info(f"Saved time ({saved_time}) exceeds cut off, moving to ({comparison_date}).")
                 state[LAST_ALERT_TIME] = comparison_date
                 # pop state held time filters if they exist, incase customer has paused integration when paginating
-                state = self._drop_pagination_state(state)
+                # state = self._drop_pagination_state(state)
 
         start_time = state.get(LAST_ALERT_TIME)
         self.logger.info(f"{log_msg}Applying the following start time='{start_time}'. Limit={alert_limit}.")
@@ -294,23 +292,23 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
     ###########################
     # Handle Pagination
     ###########################
-    def _drop_pagination_state(self, state: Dict[str, str]) -> Dict[str, str]:
-        """
-        Helper function to pop values from the state if we need to break out of pagination.
-        :return: state
-        """
-        log_msg = "Dropped the following keys from state: "
-        if state.get(TO_TIME_FILTER):
-            log_msg += f"{TO_TIME_FILTER}; "
-            state.pop(TO_TIME_FILTER)
-
-        if state.get(FROM_TIME_FILTER):
-            log_msg += f"{FROM_TIME_FILTER}; "
-            state.pop(FROM_TIME_FILTER)
-
-        self.logger.debug(log_msg)
-
-        return state
+    # def _drop_pagination_state(self, state: Dict[str, str]) -> Dict[str, str]:
+    #     """
+    #     Helper function to pop values from the state if we need to break out of pagination.
+    #     :return: state
+    #     """
+    #     log_msg = "Dropped the following keys from state: "
+    #     if state.get(TO_TIME_FILTER):
+    #         log_msg += f"{TO_TIME_FILTER}; "
+    #         state.pop(TO_TIME_FILTER)
+    #
+    #     if state.get(FROM_TIME_FILTER):
+    #         log_msg += f"{FROM_TIME_FILTER}; "
+    #         state.pop(FROM_TIME_FILTER)
+    #
+    #     self.logger.debug(log_msg)
+    #
+    #     return state
 
     ###########################
     # Make request
@@ -328,7 +326,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         response = make_request(request, timeout=120)
 
         response = extract_json(response)
-        total_count = response.get("reply", {}).get("total_count", -1)
+        total_count = response.get("reply", {}).get("total_count", 0)
         results = response.get("reply", {}).get(self.response_alerts_field, [])
 
         return results, total_count
