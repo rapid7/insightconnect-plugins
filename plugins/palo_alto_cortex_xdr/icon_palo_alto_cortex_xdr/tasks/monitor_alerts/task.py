@@ -221,6 +221,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         saved_time = state.get(LAST_ALERT_TIME)
         print(f"first saved time: {saved_time}")
         log_msg = ""
+        first_run = True
         if not saved_time:
             log_msg += "No previous alert time within state. "
             custom_timings = custom_config.get(LAST_ALERT_TIME, {})
@@ -228,10 +229,8 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             custom_hours = custom_timings.get("hours", DEFAULT_LOOKBACK_HOURS)
             start = datetime(**custom_date) if custom_date else (dt_now - timedelta(hours=custom_hours))
             state[LAST_ALERT_TIME] = start.strftime(TIME_FORMAT)
-            start_time = state.get(LAST_ALERT_TIME)
-            start_time = self.convert_to_unix(start_time)
-
         else:
+            first_run = False
             # check if we have held the TS beyond our max lookback
             lookback_days = custom_config.get(f"{LAST_ALERT_TIME}_days", MAX_LOOKBACK_DAYS)
             default_date_lookback = dt_now - timedelta(days=lookback_days)  # if not passed from CPS create on the fly
@@ -246,14 +245,13 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 # pop state held time filters if they exist, incase customer has paused integration when paginating
                 # state = self._drop_pagination_state(state)
 
-        x = state.get(LAST_ALERT_TIME, "")
-        if x:
-            self.logger.info(f"{log_msg}Applying the following start time='{x}'. Limit={alert_limit}.")
+        start_time = state.get(LAST_ALERT_TIME)
+        self.logger.info(f"{log_msg}Applying the following start time='{start_time}'. Limit={alert_limit}.")
 
-            # TODO - NEEDS TAKEN AWAY AFTER INITIAL RUN AS IT TRIES TO CONVERT THE INT MADE FROM THE FIRST CONVERSION
-            print("hit 256")
-            return x, alert_limit
-        print("hit 257")
+        # TODO - NEEDS TAKEN AWAY AFTER INITIAL RUN AS IT TRIES TO CONVERT THE INT MADE FROM THE FIRST CONVERSION
+        if first_run:
+            start_time = self.convert_to_unix(start_time)
+
         return start_time, alert_limit
 
     ###########################
