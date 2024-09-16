@@ -27,7 +27,7 @@ hub_tags:
   features: []
 sdk: 
   type: full 
-  version: 6.1.1
+  version: 6.1.2
   user: nobody
 links:
  - "[Windows Defender ATP](https://www.microsoft.com/en-us/windowsforbusiness/windows-atp)"
