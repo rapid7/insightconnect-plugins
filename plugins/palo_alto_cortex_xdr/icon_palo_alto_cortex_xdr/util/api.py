@@ -3,7 +3,7 @@ import time
 import secrets
 import string
 import hashlib
-from typing import List, Dict
+from typing import List, Dict, Tuple
 
 import requests
 import urllib
@@ -427,7 +427,13 @@ class CortexXdrAPI:
         # Don't know, try hostname
         return self.ENDPOINT_HOSTNAME_TYPE
 
-    def get_response_alerts(self, post_body: dict):
+    def get_response_alerts(self, post_body: dict) -> Tuple[list, int, int]:
+        """
+        Helper method to make the request in `monitor_alerts` task.
+
+        :param post_body: Object containing the post body (filters etc) to send in the requests
+
+        """
         headers = self.get_headers()
         fqdn = self.get_url()
         endpoint = "public_api/v1/alerts/get_alerts"

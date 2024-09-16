@@ -10,7 +10,7 @@ from .schema import (
 from datetime import datetime, timedelta, timezone
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import hash_sha1
-from typing import Any, Dict, Tuple
+from typing import Any, Dict, Tuple, Union, List
 
 TIME_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
 MAX_LOOKBACK_DAYS = 7
@@ -123,7 +123,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         new_alerts, last_alert_hashes, last_alert_time = self._dedupe_and_get_highest_time(results, start_time, state)
 
-        # todo - maybe alert_limit < result_count
         is_paginating = alert_limit < total_count
 
         has_more_pages = False
@@ -142,6 +141,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         state[LAST_ALERT_TIME] = last_alert_time if last_alert_time else end_time
         # update hashes in state only if we've got new ones
         state[LAST_ALERT_HASH] = last_alert_hashes if last_alert_hashes else state.get(LAST_ALERT_HASH, [])
+
         return new_alerts, state, has_more_pages
 
     ###########################
@@ -255,9 +255,17 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
     ###########################
     # Build post body
     ###########################
-    def build_post_body(self, search_from: int, search_to: int, filters: list):
+    def build_post_body(
+        self, search_from: int, search_to: int, filters: List[Dict[str, Union[str, int]]]
+    ) -> Dict[str, Dict[str, Union[int, Dict[str, str], List[Dict[str, Union[str, int]]]]]]:
         """
         Helper method to build the post body for the request
+
+        :param search_from: An integer representing the starting offset within the query result set from which you want alerts returned
+        :param search_to: An integer representing the end offset within the result set after which you do not want alerts returned
+        :param filters: An array of filter fields
+
+        :return post_body:
         """
         post_body = {
             "request_data": {
