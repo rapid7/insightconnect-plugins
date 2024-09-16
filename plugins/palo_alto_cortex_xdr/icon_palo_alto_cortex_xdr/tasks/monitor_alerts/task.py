@@ -16,6 +16,7 @@ import requests
 TIME_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
 MAX_LOOKBACK_DAYS = 7
 DEFAULT_LOOKBACK_HOURS = 24
+# This is the max amount of alerts that can be returned by the API in search from -> search_to
 ALERT_LIMIT = 100
 
 # State held values
@@ -58,13 +59,13 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 "second": 5,
                 "microsecond": 0,
             },
-            "alert_limit": 20,
+            "alert_limit": 2,
         }
 
         try:
 
             now_time = self._get_current_time()
-            start_time, alert_limit = self._parse_custom_config(custom_config, now_time, state)
+            start_time, alert_limit = self._parse_custom_config(custom_config, now_time, existing_state)
 
             self.logger.info("Starting to download alerts...")
 
@@ -72,7 +73,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             response, state, has_more_pages = self.get_alerts_palo_alto(
                 state=state, start_time=start_time, end_time=now_time, alert_limit=alert_limit
             )
-
+            self.logger.info(f"{len(response)}")
             return response, state, has_more_pages, 200, None
 
         except PluginException as error:
@@ -99,16 +100,16 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
     ###########################
     # Make request
     ###########################
-    def get_alerts_palo_alto(self, state, start_time, end_time, alert_limit):
+    def get_alerts_palo_alto(self, state: dict, start_time, end_time, alert_limit):
+        """ """
 
         self.logger.info(f"{alert_limit = }")
 
-        search_from = (state.get(LAST_SEARCH_TO) + 1) if state.get(LAST_SEARCH_FROM) else 0
+        search_from = state.get(LAST_SEARCH_TO, 0)
         self.logger.info(f"{search_from = }")
 
-        # IF NULL SET TO = 100
-        # todo - make changes on handling custom number of alerts
-        search_to = (search_from + 99) if state.get(LAST_SEARCH_TO) else 100
+        search_to = search_from + alert_limit
+        self.logger.info(f"{search_to = }")
 
         state[LAST_SEARCH_FROM] = search_from
         state[LAST_SEARCH_TO] = search_to
@@ -121,7 +122,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         post_body = self.build_post_body(search_from=search_from, search_to=search_to, filters=filters)
 
-        results, total_count = self.get_response(post_body=post_body)
+        results, results_count, total_count = self.get_response(post_body=post_body)
 
         new_alerts, last_alert_hashes, last_alert_time = self._dedupe_and_get_highest_time(results, start_time, state)
 
@@ -167,6 +168,8 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 if alert_hash not in old_hashes:
                     deduped_alerts.append(alert)
             elif alert_time > start_time:
+                print(f"{type(alert_time)}")
+                print(f"{type(start_time)}")
                 deduped_alerts += alerts[index:]
                 break
 
@@ -216,6 +219,13 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         # set the alert limit from CPS if it exists, otherwise default to ALERT_LIMIT
         alert_limit = custom_config.get("alert_limit", ALERT_LIMIT)
 
+        # Safety check if user tries to make search greater than 100
+        if alert_limit > ALERT_LIMIT:
+            print(f"{type(alert_limit) = }")
+            print(f"{type(ALERT_LIMIT) = }")
+            self.logger.info(f"Alert limit exceeds {ALERT_LIMIT}, falling back to {ALERT_LIMIT}")
+            alert_limit = ALERT_LIMIT
+
         saved_time = state.get(LAST_ALERT_TIME)
 
         log_msg = ""
@@ -233,6 +243,9 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             custom_lookback = custom_config.get(f"max_{LAST_ALERT_TIME}", {})
             comparison_date = datetime(**custom_lookback) if custom_lookback else default_date_lookback
             comparison_date = comparison_date.replace(tzinfo=timezone.utc).strftime(TIME_FORMAT)
+            # TODO - It's comparing this string to this int
+            print(f"{comparison_date = }")
+            comparison_date = self.convert_to_unix(comparison_date)
             if comparison_date > saved_time:
                 self.logger.info(f"Saved time ({saved_time}) exceeds cut off, moving to ({comparison_date}).")
                 state[LAST_ALERT_TIME] = comparison_date
@@ -264,14 +277,18 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         response = extract_json(response)
         total_count = response.get("reply", {}).get("total_count", 0)
+        results_count = response.get("reply", {}).get("result_count", 0)
         results = response.get("reply", {}).get(self.response_alerts_field, [])
 
-        return results, total_count
+        return results, results_count, total_count
 
     ###########################
     # Build post body
     ###########################
     def build_post_body(self, search_from, search_to, filters):
+        """
+        Helper method to build the post body for the request
+        """
         post_body = {
             "request_data": {
                 "search_from": search_from,
@@ -282,6 +299,9 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         }
         return post_body
 
+    ###########################
+    # Datetime Helpers
+    ###########################
     def convert_unix_to_datetime(self, unix_time: int):
         return datetime.fromtimestamp(unix_time / 1000, tz=timezone.utc)
 
