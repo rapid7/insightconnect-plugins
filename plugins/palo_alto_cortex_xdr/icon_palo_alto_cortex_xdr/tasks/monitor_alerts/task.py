@@ -103,13 +103,11 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         self.logger.info(f"{alert_limit = }")
 
-        state.get(LAST_SEARCH_FROM)
         search_from = (state.get(LAST_SEARCH_TO) + 1) if state.get(LAST_SEARCH_FROM) else 0
         self.logger.info(f"{search_from = }")
 
         # IF NULL SET TO = 100
         # todo - make changes on handling custom number of alerts
-        state.get(LAST_SEARCH_TO)
         search_to = (search_from + 99) if state.get(LAST_SEARCH_TO) else 100
 
         state[LAST_SEARCH_FROM] = search_from
@@ -213,14 +211,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         """
         state = saved_state.copy()
 
-        """
-        As the DateTime object needs to contain milliseconds (as the log's UNIX time is in milliseconds),
-        it does not come preset with milliseconds so this converts it to a string which allows for milliseconds
-        to be added and after adding it gets converted back to a DateTime object, but with milliseconds added
-        """
-        dt_now = datetime.fromtimestamp(now / 1000, tz=timezone.utc)
-        dt_now = dt_now.strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z"
-        dt_now = datetime.strptime(dt_now, "%Y-%m-%dT%H:%M:%S.%fZ")
+        dt_now = self.convert_unix_to_datetime(now)
 
         # set the alert limit from CPS if it exists, otherwise default to ALERT_LIMIT
         alert_limit = custom_config.get("alert_limit", ALERT_LIMIT)
@@ -252,7 +243,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         self.logger.info(f"{log_msg}Applying the following start time='{start_time}'. Limit={alert_limit}.")
 
         # CONVERTS BACK TO EPOCH
-        start_time = int(datetime.strptime(start_time, "%Y-%m-%dT%H:%M:%S.%fZ").timestamp()) * 1000
+        start_time = self.convert_to_unix(start_time)
 
         return start_time, alert_limit
 
@@ -290,3 +281,9 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             }
         }
         return post_body
+
+    def convert_unix_to_datetime(self, unix_time: int):
+        return datetime.fromtimestamp(unix_time / 1000, tz=timezone.utc)
+
+    def convert_to_unix(self, date_time):
+        return int(datetime.strptime(date_time, TIME_FORMAT).timestamp()) * 1000
