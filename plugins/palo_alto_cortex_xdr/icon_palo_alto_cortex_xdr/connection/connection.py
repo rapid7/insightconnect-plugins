@@ -64,12 +64,14 @@ class Connection(insightconnect_plugin_runtime.Connection):
             self.logger.info(message)
             return {"success": True}, message
 
-        except PluginException as e:
-            if "401" or "402" or "403" or "404" in e.cause:
-                return_message += e.assistance
+        except PluginException as error:
+            if error.cause in ("401", "402", "403", "404"):
+                return_message += error.assistance
             else:
                 return_message += "Please verify the credentials/setup is correct and try"
-            self.logger.info(f"cause = {e.cause}, assistance = {e.assistance}, data {e.data}, error = {e}")
+            self.logger.info(
+                f"cause = {error.cause}, assistance = {error.assistance}, data {error.data}, error = {error}"
+            )
             raise ConnectionTestException(
                 cause="The OAuth token credentials provided in the connection configuration is invalid.",
                 assistance="Please verify the credentials are correct and try again.",
