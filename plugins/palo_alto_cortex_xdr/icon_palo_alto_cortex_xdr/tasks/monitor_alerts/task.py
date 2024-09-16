@@ -22,10 +22,13 @@ ALERT_LIMIT = 100
 LAST_ALERT_TIME = "last_alert_time"
 LAST_ALERT_HASH = "last_alert_hash"
 
+LAST_QUERY_TIME = "last_query_time"
+
+
 # Pagination
 LAST_SEARCH_FROM = "last_search_from"
 LAST_SEARCH_TO = "last_search_to"
-TIMESTAMP_KEY = "event_timestamp"
+TIMESTAMP_KEY = "detection_timestamp"
 
 
 class MonitorAlerts(insightconnect_plugin_runtime.Task):
@@ -56,7 +59,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 "second": 5,
                 "microsecond": 0,
             },
-            "alert_limit": 1,
+            "alert_limit": 105,
         }
 
         try:
@@ -110,6 +113,9 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         filters = []
         # If time constraints have been provided for the request, add them to the post body
+        self.logger.info(f"{start_time = }")
+        self.logger.info(f"{end_time = }")
+
         if start_time is not None and end_time is not None:
             filters.append({"field": self.time_sort_field, "operator": "gte", "value": start_time})
             filters.append({"field": self.time_sort_field, "operator": "lte", "value": end_time})
@@ -134,6 +140,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             )
             state[LAST_SEARCH_FROM] = search_from
             state[LAST_SEARCH_TO] = search_to
+            state[LAST_QUERY_TIME] = start_time
 
         # add the last alert time to the state if it exists
         # if not then set to the last queried time to move the filter forward
@@ -218,7 +225,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             self.logger.info(f"Alert limit exceeds {ALERT_LIMIT}, falling back to {ALERT_LIMIT}")
             alert_limit = ALERT_LIMIT
 
-        saved_time = state.get(LAST_ALERT_TIME)
+        saved_time = state.get(LAST_QUERY_TIME, state.get(LAST_ALERT_TIME))
         print(f"first saved time: {saved_time}")
         log_msg = ""
         first_run = True
