@@ -11,7 +11,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.session = requests.Session()
-        self.resource_url = "https://api.securitycenter.windows.com"
         self.client = None
 
     def connect(self, params):
@@ -21,6 +20,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             params.get(Input.APPLICATION_ID),
             params.get(Input.APPLICATION_SECRET).get("secretKey"),
             params.get(Input.DIRECTORY_ID),
+            params.get(Input.ENDPOINT),
             self.logger,
         )
 
