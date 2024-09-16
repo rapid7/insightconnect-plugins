@@ -97,7 +97,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
     ###########################
     # Make request
     ###########################
-    def get_alerts_palo_alto(self, state: dict, start_time, end_time, alert_limit):
+    def get_alerts_palo_alto(self, state: dict, start_time: int, end_time: int, alert_limit: int):
         """ """
 
         self.logger.info(f"{alert_limit = }")
@@ -107,9 +107,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         search_to = search_from + alert_limit
         self.logger.info(f"{search_to = }")
-
-        state[LAST_SEARCH_FROM] = search_from
-        state[LAST_SEARCH_TO] = search_to
 
         filters = []
         # If time constraints have been provided for the request, add them to the post body
@@ -132,9 +129,11 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             self.logger.info(f"Found total alerts={total_count}, limit={alert_limit}, is_paginating={is_paginating}")
             self.logger.info(
                 f"Paginating alerts: Saving state with existing filters: "
-                f"from_time={search_from}"
-                f"to_time={search_to}"
+                f"search_from = {search_from} "
+                f"search_to = {search_to}"
             )
+            state[LAST_SEARCH_FROM] = search_from
+            state[LAST_SEARCH_TO] = search_to
 
         # add the last alert time to the state if it exists
         # if not then set to the last queried time to move the filter forward
@@ -220,7 +219,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             alert_limit = ALERT_LIMIT
 
         saved_time = state.get(LAST_ALERT_TIME)
-
+        print(f"first saved time: {saved_time}")
         log_msg = ""
         if not saved_time:
             log_msg += "No previous alert time within state. "
@@ -229,6 +228,9 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             custom_hours = custom_timings.get("hours", DEFAULT_LOOKBACK_HOURS)
             start = datetime(**custom_date) if custom_date else (dt_now - timedelta(hours=custom_hours))
             state[LAST_ALERT_TIME] = start.strftime(TIME_FORMAT)
+            start_time = state.get(LAST_ALERT_TIME)
+            start_time = self.convert_to_unix(start_time)
+
         else:
             # check if we have held the TS beyond our max lookback
             lookback_days = custom_config.get(f"{LAST_ALERT_TIME}_days", MAX_LOOKBACK_DAYS)
@@ -244,12 +246,14 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 # pop state held time filters if they exist, incase customer has paused integration when paginating
                 # state = self._drop_pagination_state(state)
 
-        start_time = state.get(LAST_ALERT_TIME)
-        self.logger.info(f"{log_msg}Applying the following start time='{start_time}'. Limit={alert_limit}.")
+        x = state.get(LAST_ALERT_TIME, "")
+        if x:
+            self.logger.info(f"{log_msg}Applying the following start time='{x}'. Limit={alert_limit}.")
 
-        # TODO - NEEDS TAKEN AWAY AFTER INITIAL RUN AS IT TRIES TO CONVERT THE INT MADE FROM THE FIRST CONVERSION
-        start_time = self.convert_to_unix(start_time)
-
+            # TODO - NEEDS TAKEN AWAY AFTER INITIAL RUN AS IT TRIES TO CONVERT THE INT MADE FROM THE FIRST CONVERSION
+            print("hit 256")
+            return x, alert_limit
+        print("hit 257")
         return start_time, alert_limit
 
     ###########################
