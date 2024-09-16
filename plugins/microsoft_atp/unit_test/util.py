@@ -18,6 +18,7 @@ STUB_CONNECTION = {
     Input.DIRECTORY_ID: "12345",
     Input.APPLICATION_ID: {"secretKey": "12345"},
     Input.APPLICATION_SECRET: {"secretKey": "12345"},
+    Input.ENDPOINT: "Normal",
 }
 RESOURCE_URL = "https://api.securitycenter.windows.com/api/"
 
