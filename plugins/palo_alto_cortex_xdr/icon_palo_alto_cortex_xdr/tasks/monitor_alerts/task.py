@@ -38,8 +38,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             output=MonitorAlertsOutput(),
             state=MonitorAlertsState(),
         )
-        self.endpoint = "public_api/v1/alerts/get_alerts"
-        self.response_alerts_field = "alerts"
         self.time_sort_field = "creation_time"
 
     def run(self, params={}, state={}, custom_config: dict = {}):  # pylint: disable=unused-argument
@@ -59,7 +57,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 "second": 5,
                 "microsecond": 0,
             },
-            "alert_limit": 102,
+            "alert_limit": 1,
         }
 
         try:
@@ -122,7 +120,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         post_body = self.build_post_body(search_from=search_from, search_to=search_to, filters=filters)
 
-        results, results_count, total_count = self.get_response(post_body=post_body)
+        results, results_count, total_count = self.connection.xdr_api.get_response_alerts(post_body)
 
         new_alerts, last_alert_hashes, last_alert_time = self._dedupe_and_get_highest_time(results, start_time, state)
 
@@ -219,8 +217,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         # Safety check if user tries to make search greater than 100
         if alert_limit > ALERT_LIMIT:
-            print(f"{type(alert_limit) = }")
-            print(f"{type(ALERT_LIMIT) = }")
             self.logger.info(f"Alert limit exceeds {ALERT_LIMIT}, falling back to {ALERT_LIMIT}")
             alert_limit = ALERT_LIMIT
 
@@ -258,31 +254,9 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         return start_time, alert_limit
 
     ###########################
-    # Make request
-    ###########################
-    def get_response(self, post_body: dict):
-        """
-        Helper method to return the response JSON and total count
-        """
-        headers = self.connection.xdr_api.get_headers()
-
-        fqdn = self.connection.xdr_api.get_url()
-        url = f"{fqdn}{self.endpoint}"
-
-        request = requests.Request(method="post", url=url, headers=headers, json=post_body)
-        response = make_request(_request=request, timeout=60, exception_data_location=ResponseExceptionData.RESPONSE)
-
-        response = extract_json(response)
-        total_count = response.get("reply", {}).get("total_count", 0)
-        results_count = response.get("reply", {}).get("result_count", 0)
-        results = response.get("reply", {}).get(self.response_alerts_field, [])
-
-        return results, results_count, total_count
-
-    ###########################
     # Build post body
     ###########################
-    def build_post_body(self, search_from, search_to, filters):
+    def build_post_body(self, search_from: int, search_to: int, filters: list):
         """
         Helper method to build the post body for the request
         """
