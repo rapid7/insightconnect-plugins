@@ -11,9 +11,8 @@ import urllib
 from re import match
 from datetime import datetime, timezone
 from icon_palo_alto_cortex_xdr.util.util import Util
-from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
-from insightconnect_plugin_runtime.helper import extract_json, hash_sha1, make_request
-from insightconnect_plugin_runtime.exceptions import PluginException, ResponseExceptionData
+from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException, ResponseExceptionData
+from insightconnect_plugin_runtime.helper import extract_json, make_request
 
 
 class CortexXdrAPI:

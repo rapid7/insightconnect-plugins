@@ -8,10 +8,9 @@ from .schema import (
     Component,
 )
 from datetime import datetime, timedelta, timezone
-from insightconnect_plugin_runtime.exceptions import PluginException, ResponseExceptionData
-from insightconnect_plugin_runtime.helper import extract_json, hash_sha1, make_request
+from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.helper import hash_sha1
 from typing import Any, Dict, Tuple
-import requests
 
 TIME_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
 MAX_LOOKBACK_DAYS = 7
