@@ -59,7 +59,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 "second": 5,
                 "microsecond": 0,
             },
-            "alert_limit": 2,
+            "alert_limit": 102,
         }
 
         try:
@@ -168,8 +168,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 if alert_hash not in old_hashes:
                     deduped_alerts.append(alert)
             elif alert_time > start_time:
-                print(f"{type(alert_time)}")
-                print(f"{type(start_time)}")
                 deduped_alerts += alerts[index:]
                 break
 
@@ -244,7 +242,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             comparison_date = datetime(**custom_lookback) if custom_lookback else default_date_lookback
             comparison_date = comparison_date.replace(tzinfo=timezone.utc).strftime(TIME_FORMAT)
             # TODO - It's comparing this string to this int
-            print(f"{comparison_date = }")
             comparison_date = self.convert_to_unix(comparison_date)
             if comparison_date > saved_time:
                 self.logger.info(f"Saved time ({saved_time}) exceeds cut off, moving to ({comparison_date}).")
@@ -255,7 +252,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         start_time = state.get(LAST_ALERT_TIME)
         self.logger.info(f"{log_msg}Applying the following start time='{start_time}'. Limit={alert_limit}.")
 
-        # CONVERTS BACK TO EPOCH
+        # TODO - NEEDS TAKEN AWAY AFTER INITIAL RUN AS IT TRIES TO CONVERT THE INT MADE FROM THE FIRST CONVERSION
         start_time = self.convert_to_unix(start_time)
 
         return start_time, alert_limit
