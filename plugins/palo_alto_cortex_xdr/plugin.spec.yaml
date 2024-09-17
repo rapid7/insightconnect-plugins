@@ -8,7 +8,7 @@ version: 4.1.0
 connection_version: 4
 sdk:
   type: slim
-  version: 6.1.1
+  version: 6.1.2
   user: nobody
 supported_versions: ["2024-07-15 Palo Alto Cortex XDR API"]
 vendor: rapid7

@@ -119,7 +119,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         results, results_count, total_count = self.connection.xdr_api.get_response_alerts(post_body)
 
         state[TOTAL_COUNT] = total_count
-        state[CURRENT_COUNT] = results_count
+        state[CURRENT_COUNT] = state.get(CURRENT_COUNT, 0) + results_count
 
         # current_count = state.get(CURRENT_COUNT, 0)
 
@@ -129,15 +129,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         #     current_count = current_count + results_count
 
         new_alerts, last_alert_hashes, last_alert_time = self._dedupe_and_get_highest_time(results, start_time, state)
-
-<<<<<<< HEAD
-        # is_paginating = alert_limit < total_count
-
-        is_paginating = state.get(TOTAL_COUNT) != state.get(CURRENT_COUNT)
-=======
-        is_paginating = (state.get(LAST_SEARCH_TO, 0) + len(new_alerts)) <= state.get(TOTAL_COUNT)
->>>>>>> e1612d2d8 (Add len)
-
+        is_paginating = state.get(CURRENT_COUNT, 0) != total_count
         has_more_pages = False
 
         if is_paginating:
@@ -148,9 +140,11 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 f"search_from = {search_from} "
                 f"search_to = {search_to}"
             )
-            state[LAST_SEARCH_FROM] = search_from
             state[LAST_SEARCH_TO] = search_to
             state[LAST_QUERY_TIME] = start_time
+            state[LAST_SEARCH_FROM] = search_from
+        else:
+            state = self._drop_pagination_state(state)
 
         # add the last alert time to the state if it exists
         # if not then set to the last queried time to move the filter forward
@@ -263,10 +257,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 # pop state held time filters if they exist, incase customer has paused integration when paginating
                 # state = self._drop_pagination_state(state)
 
-            # Check if total results have been paged through
-            if state.get(LAST_SEARCH_TO) > state.get(TOTAL_COUNT):
-                state = self._drop_pagination_state(state)
-
         start_time = state.get(LAST_ALERT_TIME)
         self.logger.info(f"{log_msg}Applying the following start time='{start_time}'. Limit={alert_limit}.")
 
@@ -323,6 +313,10 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         if state.get(LAST_SEARCH_TO):
             log_msg += f"{LAST_SEARCH_TO}; "
             state.pop(LAST_SEARCH_TO)
+
+        if state.get(TOTAL_COUNT):
+            log_msg += f"{TOTAL_COUNT}; "
+            state.pop(TOTAL_COUNT)
 
         if state.get(LAST_QUERY_TIME):
             log_msg += f"{LAST_QUERY_TIME}; "
