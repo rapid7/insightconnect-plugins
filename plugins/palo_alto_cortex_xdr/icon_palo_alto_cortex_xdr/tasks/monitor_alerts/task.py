@@ -25,6 +25,11 @@ LAST_QUERY_TIME = "last_query_time"
 TOTAL_COUNT = "total_count"
 CURRENT_COUNT = "current_count"
 
+# Paging through results
+HAS_MORE_PAGES = "has_more_pages"
+END_TIME = "end_time"
+START_TIME = "start_time"
+
 # Pagination
 LAST_SEARCH_FROM = "last_search_from"
 LAST_SEARCH_TO = "last_search_to"
@@ -59,21 +64,28 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 "second": 5,
                 "microsecond": 0,
             },
-            "alert_limit": 20,
+            "alert_limit": 75,
         }
 
         try:
+            alert_limit = self.get_alert_limit(custom_config=custom_config)
 
+            # if state.get(HAS_MORE_PAGES, False):
+            #     start_time = state.get(START_TIME)
+            #     now_time = state.get(END_TIME)
+            #     print(f"second run start time {start_time = }")
+            #     print(f"second run end time {now_time = }")
+            # else:
             now_time = self._get_current_time()
-            start_time, alert_limit = self._parse_custom_config(custom_config, now_time, existing_state)
+            start_time = self._parse_custom_config(custom_config, now_time, existing_state)
 
             self.logger.info("Starting to download alerts...")
-
-            # todo - starttime needs to be last alert time or default lookback
+            print(f"{start_time = }")
+            print(f"{now_time = }")
             response, state, has_more_pages = self.get_alerts_palo_alto(
                 state=state, start_time=start_time, end_time=now_time, alert_limit=alert_limit
             )
-
+            print(f"{len(response)}")
             return response, state, has_more_pages, 200, None
 
         except PluginException as error:
@@ -117,21 +129,20 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         post_body = self.build_post_body(search_from=search_from, search_to=search_to, filters=filters)
 
         results, results_count, total_count = self.connection.xdr_api.get_response_alerts(post_body)
+        print(f"{len(results) = }")
         print(f"{results_count = }")
-        print(f"{total_count = }")
         state[TOTAL_COUNT] = total_count
         state[CURRENT_COUNT] = state.get(CURRENT_COUNT, 0) + results_count
 
         new_alerts, last_alert_hashes, last_alert_time = self._dedupe_and_get_highest_time(results, start_time, state)
-
-        print(f"{state.get(CURRENT_COUNT)}")
-        print(f"{state.get(TOTAL_COUNT) = }")
+        print(f"{len(new_alerts) = }")
         is_paginating = state.get(CURRENT_COUNT, 0) != state.get(TOTAL_COUNT)
-        print(f"{is_paginating = }")
+
         has_more_pages = False
 
         if is_paginating:
             has_more_pages = True
+            state[HAS_MORE_PAGES] = True
             self.logger.info(f"Found total alerts={total_count}, limit={alert_limit}, is_paginating={is_paginating}")
             self.logger.info(
                 f"Paginating alerts: Saving state with existing filters: "
@@ -143,16 +154,20 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             state[LAST_SEARCH_TO] = search_to
             state[LAST_QUERY_TIME] = start_time
             state[LAST_SEARCH_FROM] = search_from
+            state[START_TIME] = start_time
+            state[END_TIME] = end_time
         else:
             state = self._drop_pagination_state(state)
-            self.logger.info("Final page of logs")
+            self.logger.info(f"Remaining alerts: {len(new_alerts)}, is_paginating: {is_paginating}, \nstate: {state}")
+            has_more_pages = False
+            # return new_alerts, state, has_more_pages
 
         # add the last alert time to the state if it exists
         # if not then set to the last queried time to move the filter forward
         state[LAST_ALERT_TIME] = last_alert_time if last_alert_time else end_time
         # update hashes in state only if we've got new ones
         state[LAST_ALERT_HASH] = last_alert_hashes if last_alert_hashes else state.get(LAST_ALERT_HASH, [])
-
+        self.logger.info(f"state: {state}")
         return new_alerts, state, has_more_pages
 
     ###########################
@@ -179,8 +194,9 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 deduped_alerts += alerts[index:]
                 break
 
-        num_alerts = len(deduped_alerts)
-        self.logger.info(f"Received {num_alerts} alerts, and after dedupe there is {num_alerts} results.")
+        num_deduped_alerts = len(deduped_alerts)
+        num_alerts = len(alerts)
+        self.logger.info(f"Received {num_alerts} alerts, and after dedupe there is {num_deduped_alerts} results.")
 
         if deduped_alerts:
             # alert results are already sorted by CS API, so get the latest timestamp
@@ -222,18 +238,11 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         dt_now = self.convert_unix_to_datetime(now)
 
-        # set the alert limit from CPS if it exists, otherwise default to ALERT_LIMIT
-        # Safety check if user tries to make search greater than 100
-        alert_limit = custom_config.get("alert_limit", ALERT_LIMIT)
-
-        if alert_limit > ALERT_LIMIT:
-            self.logger.info(f"Alert limit exceeds {ALERT_LIMIT}, falling back to {ALERT_LIMIT}")
-            alert_limit = ALERT_LIMIT
-
         saved_time = state.get(LAST_QUERY_TIME, state.get(LAST_ALERT_TIME))
 
         log_msg = ""
         first_run = True
+        start_time = saved_state.get(START_TIME, saved_time)
 
         if not saved_time:
             log_msg += "No previous alert time within state. "
@@ -247,6 +256,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             # check if we have held the TS beyond our max lookback
             lookback_days = custom_config.get(f"{LAST_ALERT_TIME}_days", MAX_LOOKBACK_DAYS)
             default_date_lookback = dt_now - timedelta(days=lookback_days)  # if not passed from CPS create on the fly
+
             custom_lookback = custom_config.get(f"max_{LAST_ALERT_TIME}", {})
             comparison_date = datetime(**custom_lookback) if custom_lookback else default_date_lookback
             comparison_date = comparison_date.replace(tzinfo=timezone.utc).strftime(TIME_FORMAT)
@@ -259,12 +269,13 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 # state = self._drop_pagination_state(state)
 
         start_time = state.get(LAST_ALERT_TIME)
-        self.logger.info(f"{log_msg}Applying the following start time='{start_time}'. Limit={alert_limit}.")
+        self.logger.info(f"{log_msg}Applying the following start time='{start_time}'.")
 
         if first_run:
             start_time = self.convert_to_unix(start_time)
+            state[START_TIME] = start_time
 
-        return start_time, alert_limit
+        return start_time
 
     ###########################
     # Build post body
@@ -285,7 +296,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             "request_data": {
                 "search_from": search_from,
                 "search_to": search_to,
-                "sort": {"field": self.time_sort_field, "keyword": "desc"},
+                "sort": {"field": self.time_sort_field, "keyword": "asc"},
                 "filters": filters,
             }
         }
@@ -314,18 +325,43 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             log_msg += f"{LAST_SEARCH_TO}; "
             state.pop(LAST_SEARCH_TO)
 
-        if state.get(TOTAL_COUNT):
-            log_msg += f"{TOTAL_COUNT}; "
-            state.pop(TOTAL_COUNT)
+        # if state.get(TOTAL_COUNT):
+        #     log_msg += f"{TOTAL_COUNT}; "
+        #     state.pop(TOTAL_COUNT)
 
-        if state.get(CURRENT_COUNT):
-            log_msg += f"{CURRENT_COUNT}; "
-            state.pop(CURRENT_COUNT)
+        # if state.get(CURRENT_COUNT):
+        #     log_msg += f"{CURRENT_COUNT}; "
+        #     state.pop(CURRENT_COUNT)
 
         if state.get(LAST_QUERY_TIME):
             log_msg += f"{LAST_QUERY_TIME}; "
             state.pop(LAST_QUERY_TIME)
 
+        # if state.get(HAS_MORE_PAGES):
+        #     log_msg += f"{HAS_MORE_PAGES}; "
+        #     state.pop(HAS_MORE_PAGES)
+
+        if state.get(START_TIME):
+            log_msg += f"{START_TIME}; "
+            state.pop(START_TIME)
+
+        if state.get(END_TIME):
+            log_msg += f"{END_TIME}; "
+            state.pop(END_TIME)
+
         self.logger.debug(log_msg)
 
         return state
+
+    def get_alert_limit(self, custom_config: dict) -> int:
+        """ """
+
+        # set the alert limit from CPS if it exists, otherwise default to ALERT_LIMIT
+        # Safety check if user tries to make search greater than 100
+        alert_limit = custom_config.get("alert_limit", ALERT_LIMIT)
+
+        if alert_limit > ALERT_LIMIT:
+            self.logger.info(f"Alert limit exceeds {ALERT_LIMIT}, falling back to {ALERT_LIMIT}")
+            alert_limit = ALERT_LIMIT
+
+        return alert_limit
