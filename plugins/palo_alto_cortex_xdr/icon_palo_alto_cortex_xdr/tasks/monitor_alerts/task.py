@@ -130,9 +130,13 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         new_alerts, last_alert_hashes, last_alert_time = self._dedupe_and_get_highest_time(results, start_time, state)
 
+<<<<<<< HEAD
         # is_paginating = alert_limit < total_count
 
         is_paginating = state.get(TOTAL_COUNT) != state.get(CURRENT_COUNT)
+=======
+        is_paginating = (state.get(LAST_SEARCH_TO, 0) + len(new_alerts)) <= state.get(TOTAL_COUNT)
+>>>>>>> e1612d2d8 (Add len)
 
         has_more_pages = False
 
