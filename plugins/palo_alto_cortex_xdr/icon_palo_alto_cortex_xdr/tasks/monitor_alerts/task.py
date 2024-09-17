@@ -108,8 +108,8 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         search_to = search_from + alert_limit
 
         filters = []
-        # If time constraints have been provided for the request, add them to the post body
 
+        # If time constraints have been provided for the request, add them to the post body
         if start_time is not None and end_time is not None:
             filters.append({"field": self.time_sort_field, "operator": "gte", "value": start_time})
             filters.append({"field": self.time_sort_field, "operator": "lte", "value": end_time})
@@ -121,14 +121,8 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         state[TOTAL_COUNT] = total_count
         state[CURRENT_COUNT] = state.get(CURRENT_COUNT, 0) + results_count
 
-        # current_count = state.get(CURRENT_COUNT, 0)
-
-        # if current_count == 0:
-        #     state[CURRENT_COUNT] = current_count
-        # elif current_count > 0:
-        #     current_count = current_count + results_count
-
         new_alerts, last_alert_hashes, last_alert_time = self._dedupe_and_get_highest_time(results, start_time, state)
+
         is_paginating = state.get(CURRENT_COUNT, 0) != total_count
         has_more_pages = False
 
@@ -139,6 +133,8 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 f"Paginating alerts: Saving state with existing filters: "
                 f"search_from = {search_from} "
                 f"search_to = {search_to}"
+                f"current_count = {state.get(CURRENT_COUNT)}"
+                f"total_count = {state.get(TOTAL_COUNT)}"
             )
             state[LAST_SEARCH_TO] = search_to
             state[LAST_QUERY_TIME] = start_time
@@ -299,7 +295,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
     def convert_to_unix(self, date_time):
         return int(datetime.strptime(date_time, TIME_FORMAT).timestamp()) * 1000
 
-    # TODO - Drop pagination state - DROP last_query_time
     def _drop_pagination_state(self, state: dict) -> dict:
         """
         Helper function to pop values from the state if we need to break out of pagination.
@@ -317,6 +312,10 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         if state.get(TOTAL_COUNT):
             log_msg += f"{TOTAL_COUNT}; "
             state.pop(TOTAL_COUNT)
+
+        if state.get(CURRENT_COUNT):
+            log_msg += f"{CURRENT_COUNT}; "
+            state.pop(CURRENT_COUNT)
 
         if state.get(LAST_QUERY_TIME):
             log_msg += f"{LAST_QUERY_TIME}; "
