@@ -890,7 +890,7 @@ Example output:
 
 # Version History
 
-* 7.0.1 - Output for `Asset Search` and `Get Asset` to label fields `ID` and `Solution Type` as un-required
+* 8.0.0 - Output for `Asset Search` and `Get Asset` to label fields `ID` and `Solution Type` as un-required
 * 7.0.0 - `Asset Search` and `Get Asset` actions output field `remediated` updated to type array of object
 * 6.0.0 - Asset Search: Modify type of output field `new` when `comparison_time` input is used.
 * 5.0.0 - Vulnerability Search: fix malware_kits output and remove Asset Criteria input | Updated the documentation with links related to query builder and operators | Updated the SDK
