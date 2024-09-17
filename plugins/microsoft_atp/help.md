@@ -32,6 +32,7 @@ The connection configuration accepts the following parameters:
 |application_id|string|None|True|Application (client) ID|None|a74dfb10-i33o-44e1-ba87-5fn2bb4e6b4d|None|None|
 |application_secret|credential_secret_key|None|True|Application secret|None|kQDFcZoJYmxJpiS1x7rdyleyNFwhvLgcOZCkYG+5=|None|None|
 |directory_id|string|None|True|Directory (tenant) ID|None|3a522933-ae5e-2b63-96ab-3c004b4f7f10|None|None|
+|endpoint|string|None|True|The type of endpoint to connect to: normal service, GCC (government), GCC High (government), DoD (military)|["Normal", "GCC", "GCC High", "DoD"]|Normal|None|None|
 
 Example input:
 
@@ -39,7 +40,8 @@ Example input:
 {
   "application_id": "a74dfb10-i33o-44e1-ba87-5fn2bb4e6b4d",
   "application_secret": "kQDFcZoJYmxJpiS1x7rdyleyNFwhvLgcOZCkYG+5=",
-  "directory_id": "3a522933-ae5e-2b63-96ab-3c004b4f7f10"
+  "directory_id": "3a522933-ae5e-2b63-96ab-3c004b4f7f10",
+  "endpoint": "Normal"
 }
 ```
 
@@ -871,7 +873,7 @@ This action is used to updates properties of existing alert
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|alert_fields|object|None|True|Fields of the alert to update|None|{'status': 'Resolved', 'assignedTo': 'email@example.com', 'classification': 'FalsePositive', 'determination': 'Malware', 'comment': 'Resolve my alert and assign to secop2'}|None|None|
+|alert_fields|object|None|True|Fields of the alert to update|None|{'status': 'Resolved', 'assignedTo': 'user@example.com', 'classification': 'FalsePositive', 'determination': 'Malware', 'comment': 'Resolve my alert and assign to secop2'}|None|None|
 |alert_id|string|None|True|ID of alert to update|None|1216885583807651612136280442|None|None|
   
 Example input:
@@ -879,7 +881,7 @@ Example input:
 ```
 {
   "alert_fields": {
-    "assignedTo": "email@example.com",
+    "assignedTo": "user@example.com",
     "classification": "FalsePositive",
     "comment": "Resolve my alert and assign to secop2",
     "determination": "Malware",
@@ -1329,10 +1331,11 @@ Example output:
 
 ## Troubleshooting
   
-*There is no troubleshooting for this plugin.*
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 6.0.0 - Updated SDK to the latest version | Initial updates for fedramp compliance
 * 5.2.0 - Add new action: Update Alert
 * 5.1.0 - Adding the following as new action types to `blacklist` action ['Warn', 'Block', 'Audit'] | Add a new flag in the `blacklist` action to toggle generateAlerts flag | Bump SDK to version 5.4.9
 * 5.0.0 - Updated the SDK version | Cloud enabled | fixed bug when machine_id is used for find_first_machine

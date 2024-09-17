@@ -4,12 +4,13 @@ products: ["insightconnect"]
 name: microsoft_atp
 title: Microsoft Windows Defender ATP
 description: The Windows Defender Advanced Threat Protection plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files
-version: 5.2.0
-connection_version: 5
+version: 6.0.0
+connection_version: 6
 supported_versions: ["2024-05-21"]
 vendor: rapid7
 support: community
 cloud_ready: true
+fedramp_ready: true
 status: []
 resources:
   vendor_url: https://www.microsoft.com/
@@ -26,7 +27,7 @@ hub_tags:
   features: []
 sdk: 
   type: full 
-  version: 5.4.9 
+  version: 6.1.2
   user: nobody
 links:
  - "[Windows Defender ATP](https://www.microsoft.com/en-us/windowsforbusiness/windows-atp)"
@@ -34,6 +35,7 @@ references:
  - "[Windows Defender ATP API Start Page](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-atp/use-apis)"
  - "[Windows Defender ATP API Endpoints](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-atp/exposed-apis-list)"
 version_history:
+ - "6.0.0 - Updated SDK to the latest version | Initial updates for fedramp compliance"
  - "5.2.0 - Add new action: Update Alert"
  - "5.1.0 - Adding the following as new action types to `blacklist` action ['Warn', 'Block', 'Audit'] | Add a new flag in the `blacklist` action to toggle generateAlerts flag | Bump SDK to version 5.4.9"
  - "5.0.0 - Updated the SDK version | Cloud enabled | fixed bug when machine_id is used for find_first_machine"
@@ -1046,6 +1048,18 @@ connection:
     required: true
     example: 3a522933-ae5e-2b63-96ab-3c004b4f7f10
     order: 3
+  endpoint:
+    title: Endpoint
+    description: "The type of endpoint to connect to: normal service, GCC (government), GCC High (government), DoD (military)"
+    type: string
+    required: true
+    example: Normal
+    enum:
+    - Normal
+    - GCC
+    - "GCC High"
+    - DoD
+    order: 4
 
 actions:
   get_machine_information:
@@ -1484,7 +1498,7 @@ actions:
         description: Fields of the alert to update
         type: object
         required: true
-        example: {"status": "Resolved","assignedTo": "email@example.com","classification": "FalsePositive","determination": "Malware","comment": "Resolve my alert and assign to secop2"}
+        example: {"status": "Resolved","assignedTo": "user@example.com","classification": "FalsePositive","determination": "Malware","comment": "Resolve my alert and assign to secop2"}
     output:
       alert:
         title: Alert
