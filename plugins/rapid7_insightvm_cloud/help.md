@@ -715,7 +715,7 @@ Example output:
 |Fix|string|None|False|The steps that are part of the fix this solution prescribes|None|
 |Solution ID|string|None|False|The identifier of the solution|None|
 |Solution Summary|string|None|False|Remediation summary|None|
-|Solution Type|string|None|True|Remediation type|None|
+|Solution Type|string|None|False|Remediation type|None|
 |Status|string|None|False|Status, i.e. vulnerable|None|
 |Vulnerability ID|string|None|False|The identifier of the vulnerability|None|
   
@@ -822,7 +822,7 @@ Example output:
 |Critical Vulnerabilities|integer|None|False|Number of critical vulnerabilities|None|
 |Exploits|integer|None|False|Number of exploits|None|
 |Hostname|string|None|False|Primary host name (local or FQDN) of the asset|None|
-|ID|string|None|True|Identifier of the asset|None|
+|ID|string|None|False|Identifier of the asset|None|
 |IP|string|None|False|Primary IPv4 or IPv6 address of the asset|None|
 |Last Assessed For Vulnerabilities|string|None|False|Date of last scan|None|
 |Last Scan End|string|None|False|When the last scan was ended|None|
@@ -890,6 +890,7 @@ Example output:
 
 # Version History
 
+* 7.0.1 - Output for `Asset Search` and `Get Asset` to label fields `ID` and `Solution Type` as un-required
 * 7.0.0 - `Asset Search` and `Get Asset` actions output field `remediated` updated to type array of object
 * 6.0.0 - Asset Search: Modify type of output field `new` when `comparison_time` input is used.
 * 5.0.0 - Vulnerability Search: fix malware_kits output and remove Asset Criteria input | Updated the documentation with links related to query builder and operators | Updated the SDK
