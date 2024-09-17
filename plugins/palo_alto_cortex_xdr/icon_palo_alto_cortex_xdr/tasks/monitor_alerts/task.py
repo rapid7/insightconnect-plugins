@@ -21,9 +21,9 @@ ALERT_LIMIT = 100
 # State held values
 LAST_ALERT_TIME = "last_alert_time"
 LAST_ALERT_HASH = "last_alert_hash"
-
 LAST_QUERY_TIME = "last_query_time"
-
+TOTAL_COUNT = "total_count"
+CURRENT_COUNT = "current_count"
 
 # Pagination
 LAST_SEARCH_FROM = "last_search_from"
@@ -103,18 +103,12 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
     def get_alerts_palo_alto(self, state: dict, start_time: int, end_time: int, alert_limit: int):
         """ """
 
-        self.logger.info(f"{alert_limit = }")
-
         search_from = state.get(LAST_SEARCH_TO, 0)
-        self.logger.info(f"{search_from = }")
 
         search_to = search_from + alert_limit
-        self.logger.info(f"{search_to = }")
 
         filters = []
         # If time constraints have been provided for the request, add them to the post body
-        self.logger.info(f"{start_time = }")
-        self.logger.info(f"{end_time = }")
 
         if start_time is not None and end_time is not None:
             filters.append({"field": self.time_sort_field, "operator": "gte", "value": start_time})
@@ -124,9 +118,21 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         results, results_count, total_count = self.connection.xdr_api.get_response_alerts(post_body)
 
+        state[TOTAL_COUNT] = total_count
+        state[CURRENT_COUNT] = results_count
+
+        # current_count = state.get(CURRENT_COUNT, 0)
+
+        # if current_count == 0:
+        #     state[CURRENT_COUNT] = current_count
+        # elif current_count > 0:
+        #     current_count = current_count + results_count
+
         new_alerts, last_alert_hashes, last_alert_time = self._dedupe_and_get_highest_time(results, start_time, state)
 
-        is_paginating = alert_limit < total_count
+        # is_paginating = alert_limit < total_count
+
+        is_paginating = state.get(TOTAL_COUNT) != state.get(CURRENT_COUNT)
 
         has_more_pages = False
 
@@ -226,9 +232,10 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             alert_limit = ALERT_LIMIT
 
         saved_time = state.get(LAST_QUERY_TIME, state.get(LAST_ALERT_TIME))
-        print(f"first saved time: {saved_time}")
+
         log_msg = ""
         first_run = True
+
         if not saved_time:
             log_msg += "No previous alert time within state. "
             custom_timings = custom_config.get(LAST_ALERT_TIME, {})
@@ -244,18 +251,21 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             custom_lookback = custom_config.get(f"max_{LAST_ALERT_TIME}", {})
             comparison_date = datetime(**custom_lookback) if custom_lookback else default_date_lookback
             comparison_date = comparison_date.replace(tzinfo=timezone.utc).strftime(TIME_FORMAT)
-            # TODO - It's comparing this string to this int
             comparison_date = self.convert_to_unix(comparison_date)
+
             if comparison_date > saved_time:
                 self.logger.info(f"Saved time ({saved_time}) exceeds cut off, moving to ({comparison_date}).")
                 state[LAST_ALERT_TIME] = comparison_date
                 # pop state held time filters if they exist, incase customer has paused integration when paginating
                 # state = self._drop_pagination_state(state)
 
+            # Check if total results have been paged through
+            if state.get(LAST_SEARCH_TO) > state.get(TOTAL_COUNT):
+                state = self._drop_pagination_state(state)
+
         start_time = state.get(LAST_ALERT_TIME)
         self.logger.info(f"{log_msg}Applying the following start time='{start_time}'. Limit={alert_limit}.")
 
-        # TODO - NEEDS TAKEN AWAY AFTER INITIAL RUN AS IT TRIES TO CONVERT THE INT MADE FROM THE FIRST CONVERSION
         if first_run:
             start_time = self.convert_to_unix(start_time)
 
@@ -294,3 +304,26 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
     def convert_to_unix(self, date_time):
         return int(datetime.strptime(date_time, TIME_FORMAT).timestamp()) * 1000
+
+    # TODO - Drop pagination state - DROP last_query_time
+    def _drop_pagination_state(self, state: dict) -> dict:
+        """
+        Helper function to pop values from the state if we need to break out of pagination.
+        :return: state
+        """
+        log_msg = "Dropped the following keys from state: "
+        if state.get(LAST_SEARCH_FROM):
+            log_msg += f"{LAST_SEARCH_FROM}; "
+            state.pop(LAST_SEARCH_FROM)
+
+        if state.get(LAST_SEARCH_TO):
+            log_msg += f"{LAST_SEARCH_TO}; "
+            state.pop(LAST_SEARCH_TO)
+
+        if state.get(LAST_QUERY_TIME):
+            log_msg += f"{LAST_QUERY_TIME}; "
+            state.pop(LAST_QUERY_TIME)
+
+        self.logger.debug(log_msg)
+
+        return state
