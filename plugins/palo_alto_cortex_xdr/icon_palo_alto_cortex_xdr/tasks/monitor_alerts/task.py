@@ -26,8 +26,8 @@ TOTAL_COUNT = "total_count"
 CURRENT_COUNT = "current_count"
 
 # Paging through results
-END_TIME = "end_time"
-START_TIME = "start_time"
+SEARCH_START_TIME = "start_time"
+SEARCH_END_TIME = "end_time"
 
 # Pagination
 LAST_SEARCH_FROM = "last_search_from"
@@ -144,8 +144,8 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             state[LAST_SEARCH_TO] = search_to
             state[LAST_QUERY_TIME] = start_time
             state[LAST_SEARCH_FROM] = search_from
-            state[START_TIME] = start_time
-            state[END_TIME] = end_time
+            state[SEARCH_START_TIME] = start_time
+            state[SEARCH_END_TIME] = end_time
         else:
             state = self._drop_pagination_state(state)
             self.logger.info(f"Remaining alerts: {len(new_alerts)}, is_paginating: {is_paginating}, \nstate: {state}")
@@ -294,13 +294,13 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
     ###########################
     # Datetime Helpers
     ###########################
-    def convert_unix_to_datetime(self, unix_time: int):
+    def convert_unix_to_datetime(self, unix_time: int) -> datetime:
         return datetime.fromtimestamp(unix_time / 1000, tz=timezone.utc)
 
-    def convert_to_unix(self, date_time):
+    def convert_to_unix(self, date_time: datetime) -> int:
         return int(datetime.strptime(date_time, TIME_FORMAT).timestamp()) * 1000
 
-    def _drop_pagination_state(self, state: dict) -> dict:
+    def _drop_pagination_state(self, state: dict) -> Dict[str, Union[int, str, list]]:
         """
         Helper function to pop values from the state if we need to break out of pagination.
 
@@ -327,13 +327,13 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             log_msg += f"{LAST_QUERY_TIME}; "
             state.pop(LAST_QUERY_TIME)
 
-        if state.get(START_TIME):
-            log_msg += f"{START_TIME}; "
-            state.pop(START_TIME)
+        if state.get(SEARCH_START_TIME):
+            log_msg += f"{SEARCH_START_TIME}; "
+            state.pop(SEARCH_START_TIME)
 
-        if state.get(END_TIME):
-            log_msg += f"{END_TIME}; "
-            state.pop(END_TIME)
+        if state.get(SEARCH_END_TIME):
+            log_msg += f"{SEARCH_END_TIME}; "
+            state.pop(SEARCH_END_TIME)
 
         self.logger.debug(log_msg)
 
