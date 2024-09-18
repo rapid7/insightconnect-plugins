@@ -20,10 +20,10 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def connect(self, params={}):
         self.client = MimecastAPI(
             params.get(Input.REGION, DEFAULT_REGION),
-            params.get(Input.ACCESS_KEY).get("secretKey"),
-            params.get(Input.SECRET_KEY).get("secretKey"),
-            params.get(Input.APP_ID),
-            params.get(Input.APP_KEY).get("secretKey"),
+            params.get(Input.ACCESS_KEY, {}).get("secretKey", "").strip(),
+            params.get(Input.SECRET_KEY, {}).get("secretKey", "").strip(),
+            params.get(Input.APP_ID, "").strip(),
+            params.get(Input.APP_KEY, {}).get("secretKey", "").strip(),
             self.logger,
         )
 
@@ -42,7 +42,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def test_task(self):
         self.logger.info("Running a connection test to Mimecast")
         try:
-            _, _, _ = self.client.get_siem_logs("")
+            _, _, _, _ = self.client.get_siem_logs("")
             message = "The connection test to Mimecast was successful"
             self.logger.info(message)
             return {"success": True}, message
