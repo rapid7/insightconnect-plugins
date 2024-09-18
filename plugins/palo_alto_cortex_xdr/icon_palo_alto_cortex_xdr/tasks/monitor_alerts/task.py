@@ -22,12 +22,11 @@ ALERT_LIMIT = 100
 LAST_ALERT_TIME = "last_alert_time"
 LAST_ALERT_HASH = "last_alert_hash"
 LAST_QUERY_TIME = "last_query_time"
-TOTAL_COUNT = "total_count"
 CURRENT_COUNT = "current_count"
 
 # State held values for paging through results
-SEARCH_START_TIME = "start_time"
-SEARCH_END_TIME = "end_time"
+QUERY_START_TIME = "query_start_time"
+QUERY_END_TIME = "query_end_time"
 
 # General [agination
 LAST_SEARCH_FROM = "last_search_from"
@@ -104,12 +103,11 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         results, results_count, total_count = self.connection.xdr_api.get_response_alerts(post_body)
 
-        state[TOTAL_COUNT] = total_count
         state[CURRENT_COUNT] = state.get(CURRENT_COUNT, 0) + results_count
 
         new_alerts, last_alert_hashes, last_alert_time = self._dedupe_and_get_highest_time(results, start_time, state)
 
-        is_paginating = state.get(CURRENT_COUNT, 0) != state.get(TOTAL_COUNT)
+        is_paginating = state.get(CURRENT_COUNT, 0) <= total_count
 
         has_more_pages = False
 
@@ -121,13 +119,13 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 f"search_from = {search_from} "
                 f"search_to = {search_to} "
                 f"current_count = {state.get(CURRENT_COUNT)} "
-                f"total_count = {state.get(TOTAL_COUNT)}"
+                f"total_count = {state.get(total_count)}"
             )
             state[LAST_SEARCH_TO] = search_to
             state[LAST_QUERY_TIME] = start_time
             state[LAST_SEARCH_FROM] = search_from
-            state[SEARCH_START_TIME] = start_time
-            state[SEARCH_END_TIME] = end_time
+            state[QUERY_START_TIME] = start_time
+            state[QUERY_END_TIME] = end_time
         else:
             state = self._drop_pagination_state(state)
             self.logger.info(f"Remaining alerts: {len(new_alerts)}, is_paginating: {is_paginating}, \nstate: {state}")
@@ -214,7 +212,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         # TODO - Fix this it's confusing
         saved_time = state.get(LAST_QUERY_TIME, state.get(LAST_ALERT_TIME))
-        start_time = saved_state.get(SEARCH_START_TIME, saved_time)
+        start_time = state.get(QUERY_START_TIME, saved_time)
 
         if not saved_time:
             log_msg += "No previous alert time within state. "
@@ -244,7 +242,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         if first_run:
             start_time = self.convert_to_unix(start_time)
-            state[SEARCH_START_TIME] = start_time
+            state[QUERY_START_TIME] = start_time
 
         return start_time
 
@@ -297,10 +295,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             log_msg += f"{LAST_SEARCH_TO}; "
             state.pop(LAST_SEARCH_TO)
 
-        if state.get(TOTAL_COUNT):
-            log_msg += f"{TOTAL_COUNT}; "
-            state.pop(TOTAL_COUNT)
-
         if state.get(CURRENT_COUNT):
             log_msg += f"{CURRENT_COUNT}; "
             state.pop(CURRENT_COUNT)
@@ -309,23 +303,28 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             log_msg += f"{LAST_QUERY_TIME}; "
             state.pop(LAST_QUERY_TIME)
 
-        if state.get(SEARCH_START_TIME):
-            log_msg += f"{SEARCH_START_TIME}; "
-            state.pop(SEARCH_START_TIME)
+        if state.get(QUERY_START_TIME):
+            log_msg += f"{QUERY_START_TIME}; "
+            state.pop(QUERY_START_TIME)
 
-        if state.get(SEARCH_END_TIME):
-            log_msg += f"{SEARCH_END_TIME}; "
-            state.pop(SEARCH_END_TIME)
+        if state.get(QUERY_END_TIME):
+            log_msg += f"{QUERY_END_TIME}; "
+            state.pop(QUERY_END_TIME)
 
         self.logger.debug(log_msg)
 
         return state
 
     def get_alert_limit(self, custom_config: dict) -> int:
-        """ """
+        """
+        Set the alert limit from CPS if it exists, otherwise default to ALERT_LIMIT
+        Safety check if user tries to make search greater than 100
 
-        # set the alert limit from CPS if it exists, otherwise default to ALERT_LIMIT
-        # Safety check if user tries to make search greater than 100
+        :param custom_config: Custom config dict to parse for alert limit
+
+        :return: Alert limit integer
+        """
+
         alert_limit = custom_config.get("alert_limit", ALERT_LIMIT)
 
         if alert_limit > ALERT_LIMIT:
