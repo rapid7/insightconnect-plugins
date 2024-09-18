@@ -47,6 +47,22 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
     def run(self, params={}, state={}, custom_config: dict = {}):  # pylint: disable=unused-argument
         existing_state = state.copy()
+        custom_config = {
+            "last_alert_time": {
+                "date": {"year": 2024, "month": 8, "day": 1, "hour": 1, "minute": 2, "second": 3, "microsecond": 0}
+            },
+            "last_alert_time_days": 30,
+            "max_last_alert_time": {
+                "year": 2024,
+                "month": 8,
+                "day": 2,
+                "hour": 3,
+                "minute": 4,
+                "second": 5,
+                "microsecond": 0,
+            },
+            "alert_limit": 75,
+        }
 
         try:
             alert_limit = self.get_alert_limit(custom_config=custom_config)
@@ -107,7 +123,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         new_alerts, last_alert_hashes, last_alert_time = self._dedupe_and_get_highest_time(results, start_time, state)
 
-        is_paginating = state.get(CURRENT_COUNT, 0) <= total_count
+        is_paginating = state.get(CURRENT_COUNT) < total_count
 
         has_more_pages = False
 
@@ -119,7 +135,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 f"search_from = {search_from} "
                 f"search_to = {search_to} "
                 f"current_count = {state.get(CURRENT_COUNT)} "
-                f"total_count = {state.get(total_count)}"
+                f"total_count = {total_count}"
             )
             state[LAST_SEARCH_TO] = search_to
             state[LAST_QUERY_TIME] = start_time
@@ -286,32 +302,16 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         :return: state
         """
-        log_msg = "Dropped the following keys from state: "
-        if state.get(LAST_SEARCH_FROM):
-            log_msg += f"{LAST_SEARCH_FROM}; "
-            state.pop(LAST_SEARCH_FROM)
-
-        if state.get(LAST_SEARCH_TO):
-            log_msg += f"{LAST_SEARCH_TO}; "
-            state.pop(LAST_SEARCH_TO)
-
-        if state.get(CURRENT_COUNT):
-            log_msg += f"{CURRENT_COUNT}; "
-            state.pop(CURRENT_COUNT)
-
-        if state.get(LAST_QUERY_TIME):
-            log_msg += f"{LAST_QUERY_TIME}; "
-            state.pop(LAST_QUERY_TIME)
-
-        if state.get(QUERY_START_TIME):
-            log_msg += f"{QUERY_START_TIME}; "
-            state.pop(QUERY_START_TIME)
-
-        if state.get(QUERY_END_TIME):
-            log_msg += f"{QUERY_END_TIME}; "
-            state.pop(QUERY_END_TIME)
-
-        self.logger.debug(log_msg)
+        for key in (
+            LAST_SEARCH_FROM,
+            LAST_SEARCH_TO,
+            CURRENT_COUNT,
+            LAST_QUERY_TIME,
+            QUERY_START_TIME,
+            QUERY_END_TIME,
+            LAST_ALERT_HASH,
+        ):
+            state.pop(key, None)
 
         return state
 

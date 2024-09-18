@@ -444,9 +444,14 @@ class CortexXdrAPI:
         response = make_request(_request=request, timeout=60, exception_data_location=ResponseExceptionData.RESPONSE)
 
         response = extract_json(response)
-        total_count = response.get("reply", {}).get("total_count", 0)
+        print(f"{response = }")
+        total_count = response.get("reply", {}).get("total_count")
         results_count = response.get("reply", {}).get("result_count", 0)
         results = response.get("reply", {}).get("alerts", [])
+
+        # They physically return None so we can't default 0 in .get()
+        if total_count is None:
+            total_count = 0
 
         return results, results_count, total_count
 
