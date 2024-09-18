@@ -214,7 +214,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         # TODO - Fix this it's confusing
         saved_time = state.get(LAST_QUERY_TIME, state.get(LAST_ALERT_TIME))
-        start_time = saved_state.get(START_TIME, saved_time)
+        start_time = saved_state.get(SEARCH_START_TIME, saved_time)
 
         if not saved_time:
             log_msg += "No previous alert time within state. "
@@ -244,7 +244,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         if first_run:
             start_time = self.convert_to_unix(start_time)
-            state[START_TIME] = start_time
+            state[SEARCH_START_TIME] = start_time
 
         return start_time
 
