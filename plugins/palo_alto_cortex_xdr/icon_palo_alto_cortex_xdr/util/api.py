@@ -444,7 +444,6 @@ class CortexXdrAPI:
         response = make_request(_request=request, timeout=60, exception_data_location=ResponseExceptionData.RESPONSE)
 
         response = extract_json(response)
-        print(f"{response = }")
         total_count = response.get("reply", {}).get("total_count")
         results_count = response.get("reply", {}).get("result_count", 0)
         results = response.get("reply", {}).get("alerts", [])
