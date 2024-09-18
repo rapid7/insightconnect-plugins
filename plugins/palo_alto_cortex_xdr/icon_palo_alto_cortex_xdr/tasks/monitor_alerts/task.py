@@ -25,11 +25,11 @@ LAST_QUERY_TIME = "last_query_time"
 TOTAL_COUNT = "total_count"
 CURRENT_COUNT = "current_count"
 
-# Paging through results
+# State held values for paging through results
 SEARCH_START_TIME = "start_time"
 SEARCH_END_TIME = "end_time"
 
-# Pagination
+# General [agination
 LAST_SEARCH_FROM = "last_search_from"
 LAST_SEARCH_TO = "last_search_to"
 TIMESTAMP_KEY = "detection_timestamp"
@@ -48,23 +48,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
     def run(self, params={}, state={}, custom_config: dict = {}):  # pylint: disable=unused-argument
         existing_state = state.copy()
-        # todo - TESTING PURPOSES
-        custom_config = {
-            "last_alert_time": {
-                "date": {"year": 2024, "month": 8, "day": 1, "hour": 1, "minute": 2, "second": 3, "microsecond": 0}
-            },
-            "last_alert_time_days": 30,
-            "max_last_alert_time": {
-                "year": 2024,
-                "month": 8,
-                "day": 2,
-                "hour": 3,
-                "minute": 4,
-                "second": 5,
-                "microsecond": 0,
-            },
-            "alert_limit": 75,
-        }
 
         try:
             alert_limit = self.get_alert_limit(custom_config=custom_config)
@@ -72,12 +55,11 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             start_time = self._parse_custom_config(custom_config, now_time, existing_state)
 
             self.logger.info("Starting to download alerts...")
-            print(f"{start_time = }")
-            print(f"{now_time = }")
+
             response, state, has_more_pages = self.get_alerts_palo_alto(
                 state=state, start_time=start_time, end_time=now_time, alert_limit=alert_limit
             )
-            print(f"{len(response)}")
+
             return response, state, has_more_pages, 200, None
 
         except PluginException as error:
