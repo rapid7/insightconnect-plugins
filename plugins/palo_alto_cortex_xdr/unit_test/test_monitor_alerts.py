@@ -14,8 +14,8 @@ from icon_palo_alto_cortex_xdr.connection.schema import Input
 from parameterized import parameterized
 from jsonschema import validate
 from freezegun import freeze_time
-from unit_test.util import Util
-from unit_test.mock import mock_request_200, mocked_request
+from util import Util
+from mock import mock_request_200, mocked_request
 
 
 class TestMonitorAlerts(TestCase):
