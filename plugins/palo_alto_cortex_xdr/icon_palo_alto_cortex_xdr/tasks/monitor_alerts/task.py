@@ -26,7 +26,6 @@ TOTAL_COUNT = "total_count"
 CURRENT_COUNT = "current_count"
 
 # Paging through results
-HAS_MORE_PAGES = "has_more_pages"
 END_TIME = "end_time"
 START_TIME = "start_time"
 
@@ -69,13 +68,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         try:
             alert_limit = self.get_alert_limit(custom_config=custom_config)
-
-            # if state.get(HAS_MORE_PAGES, False):
-            #     start_time = state.get(START_TIME)
-            #     now_time = state.get(END_TIME)
-            #     print(f"second run start time {start_time = }")
-            #     print(f"second run end time {now_time = }")
-            # else:
             now_time = self._get_current_time()
             start_time = self._parse_custom_config(custom_config, now_time, existing_state)
 
@@ -129,20 +121,18 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         post_body = self.build_post_body(search_from=search_from, search_to=search_to, filters=filters)
 
         results, results_count, total_count = self.connection.xdr_api.get_response_alerts(post_body)
-        print(f"{len(results) = }")
-        print(f"{results_count = }")
+
         state[TOTAL_COUNT] = total_count
         state[CURRENT_COUNT] = state.get(CURRENT_COUNT, 0) + results_count
 
         new_alerts, last_alert_hashes, last_alert_time = self._dedupe_and_get_highest_time(results, start_time, state)
-        print(f"{len(new_alerts) = }")
+
         is_paginating = state.get(CURRENT_COUNT, 0) != state.get(TOTAL_COUNT)
 
         has_more_pages = False
 
         if is_paginating:
             has_more_pages = True
-            state[HAS_MORE_PAGES] = True
             self.logger.info(f"Found total alerts={total_count}, limit={alert_limit}, is_paginating={is_paginating}")
             self.logger.info(
                 f"Paginating alerts: Saving state with existing filters: "
@@ -167,7 +157,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         state[LAST_ALERT_TIME] = last_alert_time if last_alert_time else end_time
         # update hashes in state only if we've got new ones
         state[LAST_ALERT_HASH] = last_alert_hashes if last_alert_hashes else state.get(LAST_ALERT_HASH, [])
-        self.logger.info(f"state: {state}")
+
         return new_alerts, state, has_more_pages
 
     ###########################
@@ -235,13 +225,13 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         alerts to fetch per run.
         """
         state = saved_state.copy()
+        log_msg = ""
+        first_run = True
 
         dt_now = self.convert_unix_to_datetime(now)
 
+        # TODO - Fix this it's confusing
         saved_time = state.get(LAST_QUERY_TIME, state.get(LAST_ALERT_TIME))
-
-        log_msg = ""
-        first_run = True
         start_time = saved_state.get(START_TIME, saved_time)
 
         if not saved_time:
@@ -253,6 +243,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             state[LAST_ALERT_TIME] = start.strftime(TIME_FORMAT)
         else:
             first_run = False
+
             # check if we have held the TS beyond our max lookback
             lookback_days = custom_config.get(f"{LAST_ALERT_TIME}_days", MAX_LOOKBACK_DAYS)
             default_date_lookback = dt_now - timedelta(days=lookback_days)  # if not passed from CPS create on the fly
@@ -265,8 +256,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             if comparison_date > saved_time:
                 self.logger.info(f"Saved time ({saved_time}) exceeds cut off, moving to ({comparison_date}).")
                 state[LAST_ALERT_TIME] = comparison_date
-                # pop state held time filters if they exist, incase customer has paused integration when paginating
-                # state = self._drop_pagination_state(state)
 
         start_time = state.get(LAST_ALERT_TIME)
         self.logger.info(f"{log_msg}Applying the following start time='{start_time}'.")
@@ -314,6 +303,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
     def _drop_pagination_state(self, state: dict) -> dict:
         """
         Helper function to pop values from the state if we need to break out of pagination.
+
         :return: state
         """
         log_msg = "Dropped the following keys from state: "
@@ -325,21 +315,17 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             log_msg += f"{LAST_SEARCH_TO}; "
             state.pop(LAST_SEARCH_TO)
 
-        # if state.get(TOTAL_COUNT):
-        #     log_msg += f"{TOTAL_COUNT}; "
-        #     state.pop(TOTAL_COUNT)
+        if state.get(TOTAL_COUNT):
+            log_msg += f"{TOTAL_COUNT}; "
+            state.pop(TOTAL_COUNT)
 
-        # if state.get(CURRENT_COUNT):
-        #     log_msg += f"{CURRENT_COUNT}; "
-        #     state.pop(CURRENT_COUNT)
+        if state.get(CURRENT_COUNT):
+            log_msg += f"{CURRENT_COUNT}; "
+            state.pop(CURRENT_COUNT)
 
         if state.get(LAST_QUERY_TIME):
             log_msg += f"{LAST_QUERY_TIME}; "
             state.pop(LAST_QUERY_TIME)
-
-        # if state.get(HAS_MORE_PAGES):
-        #     log_msg += f"{HAS_MORE_PAGES}; "
-        #     state.pop(HAS_MORE_PAGES)
 
         if state.get(START_TIME):
             log_msg += f"{START_TIME}; "
