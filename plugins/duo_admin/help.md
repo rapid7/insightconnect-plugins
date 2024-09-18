@@ -22,7 +22,7 @@
 
 # Supported Product Versions
 
-* Duo Admin API 2024-06-25
+* Duo Admin API 2024-09-17
 
 # Documentation
 
@@ -1010,6 +1010,7 @@ Many actions in this plugin take a User ID as input. A User ID is not the userna
 
 # Version History
 
+* 5.0.1 - Update to enable Plugin as FedRAMP ready | Update SDK (`6.1.2`)
 * 5.0.0 - Updated to include latest SDK v5.5.5 | Removing Unused fields from User Object
 * 4.4.2 - Updated to include latest SDK v5.4.9 | Task `Monitor Logs` updated to increase max lookback cutoff to 7 days
 * 4.4.1 - `Monitor Logs` task updated to stop logging of trust monitor events response
