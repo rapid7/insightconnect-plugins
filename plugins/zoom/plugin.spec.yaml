@@ -35,6 +35,7 @@ resources:
 enable_cache: false
 
 version_history:
+  - "4.1.16 - Update SDK | Update error handling"
   - "4.1.15 - Error Handling Updated | SDK Bump to 6.1.0"
   - "4.1.14 - SDK Bumped to 6.0.1 | Task connection test added"
   - "4.1.13 - Fix defect where Event objects failed to create on a missing attribute | Update insight-plugin-runtime to version 5.5.5"

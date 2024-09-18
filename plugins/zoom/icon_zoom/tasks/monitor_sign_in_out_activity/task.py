@@ -425,7 +425,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                         data=exception.data,
                     ),
                 )
-            elif hasattr(exception, "data") and "No permission." in exception.data:
+            elif hasattr(exception, "data") and ("No permission." in exception.data or "Only available for" in exception.data):
                 self.logger.error(self.PERMISSIONS_ERROR_MESSAGE_USER)
                 return TaskOutput(
                     output=[],
@@ -440,8 +440,26 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                         data=exception.data,
                     ),
                 )
+            else:
+                return TaskOutput(
+                    output=[],
+                    state={
+                        self.LAST_REQUEST_TIMESTAMP: now,
+                    },
+                    has_more_pages=False,
+                    status_code=500,
+                    error=exception,
+                )
         else:
-            raise exception
+            return TaskOutput(
+                    output=[],
+                    state={
+                        self.LAST_REQUEST_TIMESTAMP: now,
+                    },
+                    has_more_pages=False,
+                    status_code=500,
+                    error=exception,
+                )
 
     @staticmethod
     def _dedupe_events(all_events: [Event], latest_event_timestamp: Optional[str] = None) -> [Event]:
