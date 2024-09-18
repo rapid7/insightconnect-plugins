@@ -1,7 +1,7 @@
 {
-	"spec": "2fb04d208580295eb2130af367993059",
-	"manifest": "28e4d2cb40027a13b74ccd2156ed9798",
-	"setup": "c7621059ff603f9c8aa42bbbe2ce39e8",
+	"spec": "4c06e448bf6ccf7c85af71567947cf7c",
+	"manifest": "14b35211c0ebf40e6fad3e569f26aeae",
+	"setup": "97182fc26a28ec7fc9c4cd98d2ce7d83",
 	"schemas": [
 		{
 			"identifier": "fetch_forensics/schema.py",

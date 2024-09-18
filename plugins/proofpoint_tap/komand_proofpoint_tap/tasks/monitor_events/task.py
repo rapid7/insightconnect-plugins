@@ -38,6 +38,10 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
         self.connection.client.toggle_rate_limiting = False
         has_more_pages = False
         try:
+            forced_status_code = custom_config.get("status_code", 404)
+            error = ApiException(status_code=forced_status_code, data="error testing", assistance="assistance message", cause="testing")
+            return [], state, False, error.status_code, error
+
             last_collection_date = state.get(self.LAST_COLLECTION_DATE)
             self.logger.info(f"Last collection date retrieved: {last_collection_date}")
             next_page_index = state.get(self.NEXT_PAGE_INDEX)
