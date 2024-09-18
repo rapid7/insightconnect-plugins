@@ -19,7 +19,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.logger.info("Connect: Connecting...")
 
         api_key = params.get(Input.API_KEY, {}).get("secretKey", "").strip()
-        api_key_id = params.get(Input.API_KEY_ID, "").strip()
+        api_key_id = params.get(Input.API_KEY_ID, "")
         fqdn = params.get(Input.URL, "").strip()
         fqdn = self.clean_up_fqdn(fqdn)
 
