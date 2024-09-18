@@ -40,7 +40,7 @@ hub_tags:
   keywords: [mimecast, email, cloud_enabled]
   features: []
 version_history:
-- "5.3.18 - Fix task connection test | Trim whitespace from connection inputs"
+- "5.3.18 - Fix task connection test | Trim whitespace from connection inputs | bump SDK to version 6.1.2"
 - "5.3.17 - Task `monitor_siem_logs` update the mapping used for the USBCOM region"
 - "5.3.16 - Task `monitor_siem_logs` Limit the number of events per run to 7500 | bump SDK to version 6.1.0"
 - "5.3.15 - Fix snyk vulnerabilities | bump SDK to version 6.0.1 | Allow for the task connection tests to pass back a message along side a status"
