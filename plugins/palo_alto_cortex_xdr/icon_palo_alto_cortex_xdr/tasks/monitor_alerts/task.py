@@ -205,9 +205,9 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         dt_now = self.convert_unix_to_datetime(now)
 
-        saved_time_unix = state.get(QUERY_START_TIME, state.get(LAST_ALERT_TIME))
+        saved_time = state.get(QUERY_START_TIME, state.get(LAST_ALERT_TIME))
 
-        if not saved_time_unix:
+        if not saved_time:
             log_msg += "No previous alert time within state.\n"
             custom_timings = custom_config.get(LAST_ALERT_TIME, {})
             custom_date = custom_timings.get("date")
@@ -221,14 +221,14 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             custom_lookback = custom_config.get(f"max_{LAST_ALERT_TIME}", {})
             comparison_date = datetime(**custom_lookback) if custom_lookback else default_date_lookback
 
-            comparison_date_unix = self.convert_datetime_to_unix(comparison_date.strftime(TIME_FORMAT))
+            comparison_unix = self.convert_datetime_to_unix(comparison_date.strftime(TIME_FORMAT))
 
-            comparison_date_string = self.convert_timestamp_to_string(comparison_date_unix)
-            saved_time_string = self.convert_timestamp_to_string(saved_time_unix)
-
-            if comparison_date_unix > saved_time_unix:
-                self.logger.info(f"Saved time {saved_time_string} exceeds cut off, moving to {comparison_date_string}.")
-                state[LAST_ALERT_TIME] = comparison_date_unix
+            # Update state if saved time exceeds the lookback limit
+            if comparison_unix > saved_time:
+                saved_time_str = self.convert_timestamp_to_string(saved_time)
+                comparison_str = self.convert_timestamp_to_string(comparison_unix)
+                self.logger.info(f"Saved time {saved_time_str} exceeds cut off, moving to {comparison_str}.")
+                state[LAST_ALERT_TIME] = comparison_unix
 
         start_time = state.get(LAST_ALERT_TIME)
         state[QUERY_START_TIME] = state.get(LAST_ALERT_TIME)
