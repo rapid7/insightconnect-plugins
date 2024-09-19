@@ -31,6 +31,9 @@ def read_file_to_string(filename):
 
 
 class MockConnection:
+    def __init__(self) -> None:
+        self.resource_endpoint = "https://graph.microsoft.com"
+
     def get_headers(self):
         return {"header": "value"}
 

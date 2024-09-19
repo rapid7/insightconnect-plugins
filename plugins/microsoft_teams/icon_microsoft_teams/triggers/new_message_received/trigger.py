@@ -179,7 +179,7 @@ class NewMessageReceived(insightconnect_plugin_runtime.Trigger):
         team_id = team[0].get("id")
         channel = get_channels_from_microsoft(self.logger, self.connection, team_id, channel_name)
         channel_id = channel[0].get("id")
-        messages_endpoint = f"https://graph.microsoft.com/beta/teams/{team_id}/channels/{channel_id}/messages"
+        messages_endpoint = f"{self.connection.resource_endpoint}/beta/teams/{team_id}/channels/{channel_id}/messages"
         return messages_endpoint
 
     def get_indicators(self, message: str) -> object:

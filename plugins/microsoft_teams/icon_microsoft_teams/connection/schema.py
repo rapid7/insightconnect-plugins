@@ -7,6 +7,7 @@ class Input:
     APPLICATION_ID = "application_id"
     APPLICATION_SECRET = "application_secret"
     DIRECTORY_ID = "directory_id"
+    ENDPOINT = "endpoint"
     USERNAME_PASSWORD = "username_password"
 
 
@@ -34,6 +35,18 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "Directory (tenant) ID",
       "order": 2
     },
+    "endpoint": {
+      "type": "string",
+      "title": "Endpoint",
+      "description": "The type of endpoint to connect to: normal service, GCC (government), GCC High (government), DoD (military)",
+      "enum": [
+        "Normal",
+        "GCC",
+        "GCC High",
+        "DoD"
+      ],
+      "order": 5
+    },
     "username_password": {
       "$ref": "#/definitions/credential_username_password",
       "title": "Credentials",
@@ -45,6 +58,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "application_id",
     "application_secret",
     "directory_id",
+    "endpoint",
     "username_password"
   ],
   "definitions": {
