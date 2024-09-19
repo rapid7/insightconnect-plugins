@@ -1,6 +1,8 @@
 import sys
 from typing import Any, Dict, List
 
+import icon_zoom.tasks.monitor_sign_in_out_activity.task
+
 sys.path.append("../")
 
 import datetime
@@ -206,6 +208,62 @@ class TestGetUserActivityEvents(unittest.TestCase):
         self.assertFalse(output, expected_has_more_pages)
         self.assertEqual(status_code, expected_status_code)
         self.assertEqual(error, expected_error)
+
+        validate(output, MonitorSignInOutActivityOutput.schema)
+        validate(state, MonitorSignInOutActivityState.schema)
+
+    @patch(GET_DATETIME_LAST_X_HOURS_PATH, side_effect=[STUB_DATETIME_LAST_24_HOURS])
+    @patch(GET_DATETIME_NOW_PATH, side_effect=[STUB_DATETIME_NOW + datetime.timedelta(minutes=DEFAULT_TIMEDELTA)])
+    @patch(
+        GET_USER_ACTIVITY_EVENTS_PATH,
+        side_effect=PluginException(
+            preset=PluginException.Preset.SERVER_ERROR,
+            data={"code": 200, "message": "Only available for Paid or ZMP account: ABCDEFGHIJKLMNOP"},
+        ),
+    )
+    def test_permissions_error_response(
+        self, mock_call: MagicMock, mock_datetime_now: MagicMock, mock_datetime_last_24: MagicMock
+    ) -> None:
+        expected_state = {"last_request_timestamp": "2023-02-23T22:05:00Z"}
+        output, state, has_more_pages, status_code, error = self.task.run(state=STUB_EXPECTED_PAGINATION_ERROR_STATE)
+        expected_error_cause = PluginException.causes.get(PluginException.Preset.UNAUTHORIZED, "")
+        expected_error_assistance = MonitorSignInOutActivity.PERMISSIONS_ERROR_MESSAGE_USER
+
+        expected_output, expected_has_more_pages, expected_status_code = [], False, 403
+        self.assertListEqual(output, expected_output)
+        self.assertDictEqual(state, expected_state)
+        self.assertFalse(output, expected_has_more_pages)
+        self.assertEqual(status_code, expected_status_code)
+        self.assertEqual(error.cause, expected_error_cause)
+        self.assertEqual(error.assistance, expected_error_assistance)
+
+        validate(output, MonitorSignInOutActivityOutput.schema)
+        validate(state, MonitorSignInOutActivityState.schema)
+
+
+    @patch(GET_DATETIME_LAST_X_HOURS_PATH, side_effect=[STUB_DATETIME_LAST_24_HOURS])
+    @patch(GET_DATETIME_NOW_PATH, side_effect=[STUB_DATETIME_NOW + datetime.timedelta(minutes=DEFAULT_TIMEDELTA)])
+    @patch(
+        GET_USER_ACTIVITY_EVENTS_PATH,
+        side_effect=Exception("Something went wrong"),
+    )
+    def test_runtime_exception(
+        self, mock_call: MagicMock, mock_datetime_now: MagicMock, mock_datetime_last_24: MagicMock
+    ) -> None:
+        expected_state = {"last_request_timestamp": "2023-02-23T22:05:00Z"}
+        output, state, has_more_pages, status_code, error = self.task.run(state=STUB_EXPECTED_PAGINATION_ERROR_STATE)
+        expected_error_cause = PluginException.causes.get(PluginException.Preset.UNKNOWN, "")
+        expected_error_assistance = PluginException.assistances.get(PluginException.Preset.UNKNOWN, "")
+        expected_error_data = "Something went wrong"
+
+        expected_output, expected_has_more_pages, expected_status_code = [], False, 500
+        self.assertListEqual(output, expected_output)
+        self.assertDictEqual(state, expected_state)
+        self.assertFalse(output, expected_has_more_pages)
+        self.assertEqual(status_code, expected_status_code)
+        self.assertEqual(error.cause, expected_error_cause)
+        self.assertEqual(error.assistance, expected_error_assistance)
+        self.assertEqual(error.data, expected_error_data)
 
         validate(output, MonitorSignInOutActivityOutput.schema)
         validate(state, MonitorSignInOutActivityState.schema)

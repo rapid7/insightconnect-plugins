@@ -451,6 +451,10 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                     error=exception,
                 )
         else:
+            plugin_exception = PluginException(
+                preset=PluginException.Preset.UNKNOWN,
+                data=exception
+            )
             return TaskOutput(
                     output=[],
                     state={
@@ -458,7 +462,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                     },
                     has_more_pages=False,
                     status_code=500,
-                    error=exception,
+                    error=plugin_exception,
                 )
 
     @staticmethod
