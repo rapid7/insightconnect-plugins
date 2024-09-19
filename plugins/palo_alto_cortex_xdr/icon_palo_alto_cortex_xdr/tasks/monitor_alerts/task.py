@@ -99,7 +99,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         state[CURRENT_COUNT] = state.get(CURRENT_COUNT, 0) + results_count
 
-        new_alerts, last_alert_hashes, last_alert_time = self._dedupe_and_get_highest_time(results, start_time, state)
+        new_alerts, new_alert_hashes, last_alert_time = self._dedupe_and_get_highest_time(results, start_time, state)
 
         is_paginating = state.get(CURRENT_COUNT) < total_count
 
@@ -123,7 +123,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         # if not then set to the last queried time to move the filter forward
         state[LAST_ALERT_TIME] = last_alert_time if last_alert_time else end_time
         # update hashes in state only if we've got new ones
-        state[LAST_ALERT_HASH] = last_alert_hashes if last_alert_hashes else state.get(LAST_ALERT_HASH, [])
+        state[LAST_ALERT_HASH] = new_alert_hashes if new_alert_hashes else state.get(LAST_ALERT_HASH, [])
 
         return new_alerts, state, is_paginating
 
@@ -151,9 +151,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 deduped_alerts += alerts[index:]
                 break
 
-        num_deduped_alerts = len(deduped_alerts)
-        num_alerts = len(alerts)
-        self.logger.info(f"Received {num_alerts} alerts, and after dedupe there is {num_deduped_alerts} results.")
+        self.logger.info(f"Received {len(alerts)} alerts, and after dedupe there is {len(deduped_alerts)} results.")
 
         if deduped_alerts:
             # alert results are already sorted by CS API, so get the latest timestamp
@@ -162,7 +160,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             for alert in deduped_alerts:
                 if alert.get(TIMESTAMP_KEY) == highest_timestamp:
                     new_hashes.append(hash_sha1(alert))
-                    self.logger.info(f"Hashed latest event with timestamp {highest_timestamp}.")
 
             self.logger.debug(f"Highest timestamp is {highest_timestamp}")
             self.logger.debug(f"Last hash is {new_hashes}")
