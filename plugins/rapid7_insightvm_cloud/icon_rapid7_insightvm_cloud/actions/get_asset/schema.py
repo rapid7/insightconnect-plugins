@@ -279,10 +279,7 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
           },
           "order": 31
         }
-      },
-      "required": [
-        "id"
-      ]
+      }
     },
     "creds": {
       "type": "object",
@@ -412,10 +409,7 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
           "description": "The identifier of the vulnerability",
           "order": 10
         }
-      },
-      "required": [
-        "solution_type"
-      ]
+      }
     }
   }
 }

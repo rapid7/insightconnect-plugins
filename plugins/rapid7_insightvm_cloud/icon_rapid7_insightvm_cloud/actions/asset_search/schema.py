@@ -301,10 +301,7 @@ class AssetSearchOutput(insightconnect_plugin_runtime.Output):
           },
           "order": 31
         }
-      },
-      "required": [
-        "id"
-      ]
+      }
     },
     "creds": {
       "type": "object",
