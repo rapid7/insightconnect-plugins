@@ -202,42 +202,40 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         """
         state = saved_state.copy()
         log_msg = ""
-        first_run = True
 
         dt_now = self.convert_unix_to_datetime(now)
 
-        saved_time = state.get(QUERY_START_TIME, state.get(LAST_ALERT_TIME))
+        saved_time_unix = state.get(QUERY_START_TIME, state.get(LAST_ALERT_TIME))
 
-        if not saved_time:
+        if not saved_time_unix:
             log_msg += "No previous alert time within state.\n"
             custom_timings = custom_config.get(LAST_ALERT_TIME, {})
             custom_date = custom_timings.get("date")
             custom_hours = custom_timings.get("hours", DEFAULT_LOOKBACK_HOURS)
             start = datetime(**custom_date) if custom_date else (dt_now - timedelta(hours=custom_hours))
-            state[LAST_ALERT_TIME] = start.strftime(TIME_FORMAT)
+            state[LAST_ALERT_TIME] = self.convert_datetime_to_unix(start.strftime(TIME_FORMAT))
         else:
-            first_run = False
-
             # check if we have held the TS beyond our max lookback
             lookback_days = custom_config.get(f"{LAST_ALERT_TIME}_days", MAX_LOOKBACK_DAYS)
             default_date_lookback = dt_now - timedelta(days=lookback_days)  # if not passed from CPS create on the fly
-
             custom_lookback = custom_config.get(f"max_{LAST_ALERT_TIME}", {})
             comparison_date = datetime(**custom_lookback) if custom_lookback else default_date_lookback
-            comparison_date = comparison_date.replace(tzinfo=timezone.utc).strftime(TIME_FORMAT)
-            comparison_date = self.convert_to_unix(comparison_date)
 
-            if comparison_date > saved_time:
-                self.logger.info(f"Saved time ({saved_time}) exceeds cut off, moving to ({comparison_date}).")
-                state[LAST_ALERT_TIME] = comparison_date
+            comparison_date_unix = self.convert_datetime_to_unix(comparison_date.strftime(TIME_FORMAT))
+
+            comparison_date_string = self.convert_timestamp_to_string(comparison_date_unix)
+            saved_time_string = self.convert_timestamp_to_string(saved_time_unix)
+
+            if comparison_date_unix > saved_time_unix:
+                self.logger.info(f"Saved time {saved_time_string} exceeds cut off, moving to {comparison_date_string}.")
+                state[LAST_ALERT_TIME] = comparison_date_unix
 
         start_time = state.get(LAST_ALERT_TIME)
+        state[QUERY_START_TIME] = state.get(LAST_ALERT_TIME)
 
-        self.logger.info(f"{log_msg}Applying the following start time='{start_time}'.")
-
-        if first_run:
-            start_time = self.convert_to_unix(start_time)
-            state[QUERY_START_TIME] = start_time
+        self.logger.info(
+            f"{log_msg}Applying the following start time='{self.convert_timestamp_to_string(start_time)}'."
+        )
 
         return start_time
 
@@ -259,6 +257,10 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             {"field": self.time_sort_field, "operator": "lte", "value": end_time},
         ]
 
+        self.logger.info(
+            f"Query start time: {self.convert_timestamp_to_string(start_time)}, Query end time: {self.convert_timestamp_to_string(end_time)}"
+        )
+
         post_body = {
             "request_data": {
                 "search_from": search_from,
@@ -267,6 +269,9 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 "filters": filters,
             }
         }
+
+        self.logger.info(f"Post Body: {post_body}")
+
         return post_body
 
     ###########################
@@ -275,8 +280,11 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
     def convert_unix_to_datetime(self, unix_time: int) -> datetime:
         return datetime.fromtimestamp(unix_time / 1000, tz=timezone.utc)
 
-    def convert_to_unix(self, date_time: datetime) -> int:
+    def convert_datetime_to_unix(self, date_time: datetime) -> int:
         return int(datetime.strptime(date_time, TIME_FORMAT).timestamp()) * 1000
+
+    def convert_timestamp_to_string(self, timestamp: int) -> str:
+        return datetime.fromtimestamp(timestamp / 1000, tz=timezone.utc).strftime(TIME_FORMAT)
 
     @staticmethod
     def _get_current_time():
