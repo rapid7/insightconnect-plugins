@@ -21,14 +21,13 @@ ALERT_LIMIT = 100
 # State held values
 LAST_ALERT_TIME = "last_alert_time"
 LAST_ALERT_HASH = "last_alert_hash"
-LAST_QUERY_TIME = "last_query_time"
 CURRENT_COUNT = "current_count"
 
 # State held values for paging through results
 QUERY_START_TIME = "query_start_time"
 QUERY_END_TIME = "query_end_time"
 
-# General [agination
+# General Pagination
 LAST_SEARCH_FROM = "last_search_from"
 LAST_SEARCH_TO = "last_search_to"
 TIMESTAMP_KEY = "detection_timestamp"
@@ -122,7 +121,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 f"total_count = {total_count}"
             )
             state[LAST_SEARCH_TO] = search_to
-            state[LAST_QUERY_TIME] = start_time
             state[LAST_SEARCH_FROM] = search_from
             state[QUERY_START_TIME] = start_time
             state[QUERY_END_TIME] = end_time
@@ -210,8 +208,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         dt_now = self.convert_unix_to_datetime(now)
 
         # TODO - Fix this it's confusing
-        saved_time = state.get(LAST_QUERY_TIME, state.get(LAST_ALERT_TIME))
-        start_time = state.get(QUERY_START_TIME, saved_time)
+        saved_time = state.get(QUERY_START_TIME, state.get(LAST_ALERT_TIME))
 
         if not saved_time:
             log_msg += "No previous alert time within state. "
@@ -289,7 +286,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             LAST_SEARCH_FROM,
             LAST_SEARCH_TO,
             CURRENT_COUNT,
-            LAST_QUERY_TIME,
             QUERY_START_TIME,
             QUERY_END_TIME,
         ):
