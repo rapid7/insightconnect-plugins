@@ -6,6 +6,8 @@ from insightconnect_plugin_runtime.exceptions import ConnectionTestException, Pl
 import requests
 import time
 
+TIMEOUT = 120
+
 # we do not have an instance to test [gcc, gcc high, dod], but endpoint taken from link below
 # https://learn.microsoft.com/en-us/defender-endpoint/gov#api
 # https://learn.microsoft.com/en-us/graph/deployments
@@ -70,7 +72,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             body["refresh_token"] = self.refresh_token
 
         self.logger.info(f"Getting token from: {token_url}")
-        result = requests.post(token_url, data=body)
+        result = requests.post(token_url, data=body, timeout=TIMEOUT)
 
         try:
             result.raise_for_status()

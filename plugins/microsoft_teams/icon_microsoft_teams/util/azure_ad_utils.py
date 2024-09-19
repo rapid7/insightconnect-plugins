@@ -4,6 +4,8 @@ import requests
 from logging import Logger
 import insightconnect_plugin_runtime.connection
 
+TIMEOUT = 120
+
 
 def get_user_info(logger: Logger, connection: insightconnect_plugin_runtime.connection, user_login: str) -> dict:
     """
@@ -20,7 +22,7 @@ def get_user_info(logger: Logger, connection: insightconnect_plugin_runtime.conn
     headers = connection.get_headers()
 
     logger.info(f"Getting user information from:\n{endpoint}")
-    result = requests.get(endpoint, headers=headers)
+    result = requests.get(endpoint, headers=headers, timeout=TIMEOUT)
 
     try:
         result.raise_for_status()
@@ -67,7 +69,7 @@ def add_user_to_group(
     logger.info(f"Adding user with: {endpoint}")
     user_payload = {"@odata.id": f"{connection.resource_endpoint}/v1.0/{connection.tenant_id}/users/{user_id}"}
 
-    result = requests.post(endpoint, json=user_payload, headers=headers)
+    result = requests.post(endpoint, json=user_payload, headers=headers, timeout=TIMEOUT)
     try:
         result.raise_for_status()
     except Exception as e:
@@ -103,7 +105,7 @@ def remove_user_from_group(
     headers = connection.get_headers()
     logger.info(f"Removing user with: {endpoint}")
 
-    result = requests.delete(endpoint, headers=headers)
+    result = requests.delete(endpoint, headers=headers, timeout=TIMEOUT)
     try:
         result.raise_for_status()
     except Exception as e:
@@ -168,7 +170,7 @@ def create_group(
         payload["members@odata.bind"] = members_payload
 
     logger.info(f"Creating group with: {endpoint}")
-    result = requests.post(endpoint, json=payload, headers=headers)
+    result = requests.post(endpoint, json=payload, headers=headers, timeout=TIMEOUT)
     try:
         result.raise_for_status()
     except Exception as e:
@@ -224,7 +226,7 @@ def delete_group(logger: Logger, connection: insightconnect_plugin_runtime.conne
     headers = connection.get_headers()
 
     logger.info(f"Deleting group with: {endpoint}")
-    result = requests.delete(endpoint, headers=headers)
+    result = requests.delete(endpoint, headers=headers, timeout=TIMEOUT)
     try:
         result.raise_for_status()
     except Exception as e:
@@ -258,7 +260,7 @@ def get_group_id_from_name(
     headers = connection.get_headers()
 
     logger.info(f"Getting group ID with: {endpoint}")
-    result = requests.get(endpoint, headers=headers)
+    result = requests.get(endpoint, headers=headers, timeout=TIMEOUT)
 
     try:
         result.raise_for_status()
@@ -319,7 +321,7 @@ def enable_teams_for_group(logger, connection, group_id):
     }
 
     logger.info(f"Enabling team with: {endpoint}")
-    result = requests.put(endpoint, json=payload, headers=headers)
+    result = requests.put(endpoint, json=payload, headers=headers, timeout=TIMEOUT)
     if result.status_code == 201:
         logger.info("Team was enabled successfully.")
         return True
@@ -332,7 +334,7 @@ def enable_teams_for_group(logger, connection, group_id):
             f"Sleeping for 10 seconds and trying again. Attempt number: {i}"
         )
         sleep(10)
-        result = requests.put(endpoint, json=payload, headers=headers)
+        result = requests.put(endpoint, json=payload, headers=headers, timeout=TIMEOUT)
         if result.status_code == 201:
             logger.info("Team was enabled successfully.")
             return True
@@ -356,6 +358,7 @@ def add_user_to_owners(
         endpoint,
         json={"@odata.id": f"{connection.resource_endpoint}/beta/users/{user_id}"},
         headers=connection.get_headers(),
+        timeout=TIMEOUT,
     )
     if result.status_code == 204:
         logger.info("User was added successfully.")
@@ -412,6 +415,7 @@ def add_user_to_channel(
             "user@odata.bind": f"{connection.resource_endpoint}/beta/users/{user_id}",
         },
         headers=connection.get_headers(),
+        timeout=TIMEOUT,
     )
     if result.status_code == 201:
         logger.info("User was added successfully.")
