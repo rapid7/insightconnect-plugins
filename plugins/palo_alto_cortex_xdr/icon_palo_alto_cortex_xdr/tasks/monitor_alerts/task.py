@@ -10,7 +10,7 @@ from .schema import (
 from datetime import datetime, timedelta, timezone
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import hash_sha1
-from typing import Any, Dict, Tuple, Union, List
+from typing import Any, Dict, Tuple, Union
 
 TIME_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
 MAX_LOOKBACK_DAYS = 7
@@ -46,22 +46,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
     def run(self, params={}, state={}, custom_config: dict = {}):  # pylint: disable=unused-argument
         existing_state = state.copy()
-        custom_config = {
-            "last_alert_time": {
-                "date": {"year": 2024, "month": 8, "day": 1, "hour": 1, "minute": 2, "second": 3, "microsecond": 0}
-            },
-            "last_alert_time_days": 30,
-            "max_last_alert_time": {
-                "year": 2024,
-                "month": 8,
-                "day": 2,
-                "hour": 3,
-                "minute": 4,
-                "second": 5,
-                "microsecond": 0,
-            },
-            "alert_limit": 20,
-        }
 
         try:
             alert_limit = self.get_alert_limit(custom_config=custom_config)
