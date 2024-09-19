@@ -12,7 +12,7 @@ requirements:
   - "API credentials for OAuth 2.0:
       \n\t* Requires account ID as well as client ID and secret from a Server-to-Server OAuth app in the Zoom Marketplace.
       \n\t* Server-to-Server OAuth app has the `report:read:admin` scope enabled."
-version: 4.1.15
+version: 4.1.16
 connection_version: 4
 vendor: rapid7
 support: rapid7
