@@ -103,10 +103,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         is_paginating = state.get(CURRENT_COUNT) < total_count
 
-        has_more_pages = False
-
         if is_paginating:
-            has_more_pages = True
             self.logger.info(f"Found total alerts={total_count}, limit={alert_limit}, is_paginating={is_paginating}")
             self.logger.info(
                 f"Paginating alerts: Saving state with existing filters: "
@@ -121,8 +118,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             state[QUERY_END_TIME] = end_time
         else:
             state = self._drop_pagination_state(state)
-            self.logger.info(f"Remaining alerts: {len(new_alerts)}, is_paginating: {is_paginating}")
-            has_more_pages = False
 
         # add the last alert time to the state if it exists
         # if not then set to the last queried time to move the filter forward
@@ -130,7 +125,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         # update hashes in state only if we've got new ones
         state[LAST_ALERT_HASH] = last_alert_hashes if last_alert_hashes else state.get(LAST_ALERT_HASH, [])
 
-        return new_alerts, state, has_more_pages
+        return new_alerts, state, is_paginating
 
     ###########################
     # Deduping

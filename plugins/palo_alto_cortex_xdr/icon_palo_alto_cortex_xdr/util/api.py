@@ -445,12 +445,16 @@ class CortexXdrAPI:
 
         response = extract_json(response)
         total_count = response.get("reply", {}).get("total_count")
-        results_count = response.get("reply", {}).get("result_count", 0)
+        results_count = response.get("reply", {}).get("result_count")
         results = response.get("reply", {}).get("alerts", [])
 
         # They physically return None so we can't default 0 in .get()
         if total_count is None:
             total_count = 0
+
+        # Also including results count just to be safe.
+        if results_count is None:
+            results_count = 0
 
         return results, results_count, total_count
 
