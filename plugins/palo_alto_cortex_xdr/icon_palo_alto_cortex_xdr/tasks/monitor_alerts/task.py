@@ -91,14 +91,9 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         search_to = search_from + alert_limit
 
-        filters = []
-
-        # If time constraints have been provided for the request, add them to the post body
-        if start_time is not None and end_time is not None:
-            filters.append({"field": self.time_sort_field, "operator": "gte", "value": start_time})
-            filters.append({"field": self.time_sort_field, "operator": "lte", "value": end_time})
-
-        post_body = self.build_post_body(search_from=search_from, search_to=search_to, filters=filters)
+        post_body = self.build_post_body(
+            search_from=search_from, search_to=search_to, start_time=start_time, end_time=end_time
+        )
 
         results, results_count, total_count = self.connection.xdr_api.get_response_alerts(post_body)
 
@@ -126,7 +121,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             state[QUERY_END_TIME] = end_time
         else:
             state = self._drop_pagination_state(state)
-            self.logger.info(f"Remaining alerts: {len(new_alerts)}, is_paginating: {is_paginating}, \nstate: {state}")
+            self.logger.info(f"Remaining alerts: {len(new_alerts)}, is_paginating: {is_paginating}")
             has_more_pages = False
 
         # add the last alert time to the state if it exists
@@ -207,7 +202,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         dt_now = self.convert_unix_to_datetime(now)
 
-        # TODO - Fix this it's confusing
         saved_time = state.get(QUERY_START_TIME, state.get(LAST_ALERT_TIME))
 
         if not saved_time:
@@ -245,9 +239,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
     ###########################
     # Build post body
     ###########################
-    def build_post_body(
-        self, search_from: int, search_to: int, filters: List[Dict[str, Union[str, int]]]
-    ) -> Dict[str, Dict[str, Union[int, Dict[str, str], List[Dict[str, Union[str, int]]]]]]:
+    def build_post_body(self, search_from: int, search_to: int, start_time: int, end_time: int) -> dict:
         """
         Helper method to build the post body for the request
 
@@ -257,6 +249,11 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         :return post_body:
         """
+        filters = [
+            {"field": self.time_sort_field, "operator": "gte", "value": start_time},
+            {"field": self.time_sort_field, "operator": "lte", "value": end_time},
+        ]
+
         post_body = {
             "request_data": {
                 "search_from": search_from,
@@ -276,7 +273,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
     def convert_to_unix(self, date_time: datetime) -> int:
         return int(datetime.strptime(date_time, TIME_FORMAT).timestamp()) * 1000
 
-    def _drop_pagination_state(self, state: dict) -> Dict[str, Union[int, str, list]]:
+    def _drop_pagination_state(self, state: dict = {}) -> Dict[str, Union[int, str, list]]:
         """
         Helper function to pop values from the state if we need to break out of pagination.
 

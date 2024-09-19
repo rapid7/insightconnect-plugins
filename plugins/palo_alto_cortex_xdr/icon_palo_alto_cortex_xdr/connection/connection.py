@@ -56,8 +56,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
         end_time = datetime.fromisoformat(end_time)
         end_time = int(end_time.timestamp() * 1000)
 
-        self.logger.info(f"{start_time= }, {end_time= }")
-
         try:
             _ = self.xdr_api.get_alerts(start_time, end_time)
             message = "The connection test to Palo Alto Cortex was successful"
@@ -68,7 +66,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             if error.cause in ("401", "402", "403", "404"):
                 return_message += error.assistance
             else:
-                return_message += "Please verify the credentials/setup is correct and try"
+                return_message += "Please verify the credentials/setup is correct and try again."
             self.logger.info(
                 f"cause = {error.cause}, assistance = {error.assistance}, data {error.data}, error = {error}"
             )
