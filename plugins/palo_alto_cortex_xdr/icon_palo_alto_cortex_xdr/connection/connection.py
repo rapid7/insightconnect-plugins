@@ -45,19 +45,29 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.logger.error("Running a Task Connection Test for Palo Alto Cortex")
         return_message = "The connection test to Palo Alto Cortex has failed \n"
 
-        # Gets the current time and converts to  Epoch Unix time (as get_alerts params require date to be an int)
+        # Gets the current time and converts to  Epoch Unix time
         now = datetime.now(timezone.utc)
-        start_time = (now - timedelta(minutes=5)).isoformat()
-        start_time = datetime.fromisoformat(start_time)
-        # Timestamp in logs is in Miliseconds
-        start_time = int(start_time.timestamp() * 1000)
 
-        end_time = now.isoformat()
-        end_time = datetime.fromisoformat(end_time)
-        end_time = int(end_time.timestamp() * 1000)
+        start_time = int((now - timedelta(minutes=5)).timestamp() * 1000)
+        end_time = int(now.timestamp() * 1000)
+        time_sort_field = "creation_time"
+
+        filters = [
+            {"field": time_sort_field, "operator": "gte", "value": start_time},
+            {"field": time_sort_field, "operator": "lte", "value": end_time},
+        ]
+
+        post_body = {
+            "request_data": {
+                "search_from": 0,
+                "search_to": 100,
+                "sort": {"field": time_sort_field, "keyword": "asc"},
+                "filters": filters,
+            }
+        }
 
         try:
-            _ = self.xdr_api.get_alerts(start_time, end_time)
+            _, _, _ = self.xdr_api.get_response_alerts(post_body)
             message = "The connection test to Palo Alto Cortex was successful"
             self.logger.info(message)
             return {"success": True}, message
