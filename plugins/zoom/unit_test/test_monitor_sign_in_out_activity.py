@@ -240,7 +240,6 @@ class TestGetUserActivityEvents(unittest.TestCase):
         validate(output, MonitorSignInOutActivityOutput.schema)
         validate(state, MonitorSignInOutActivityState.schema)
 
-
     @patch(GET_DATETIME_LAST_X_HOURS_PATH, side_effect=[STUB_DATETIME_LAST_24_HOURS])
     @patch(GET_DATETIME_NOW_PATH, side_effect=[STUB_DATETIME_NOW + datetime.timedelta(minutes=DEFAULT_TIMEDELTA)])
     @patch(
