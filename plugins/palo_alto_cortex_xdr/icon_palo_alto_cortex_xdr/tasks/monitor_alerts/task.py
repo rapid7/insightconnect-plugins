@@ -46,6 +46,22 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
     def run(self, params={}, state={}, custom_config: dict = {}):  # pylint: disable=unused-argument
         existing_state = state.copy()
+        custom_config = {
+            "last_alert_time": {
+                "date": {"year": 2024, "month": 8, "day": 1, "hour": 1, "minute": 2, "second": 3, "microsecond": 0}
+            },
+            "last_alert_time_days": 30,
+            "max_last_alert_time": {
+                "year": 2024,
+                "month": 8,
+                "day": 2,
+                "hour": 3,
+                "minute": 4,
+                "second": 5,
+                "microsecond": 0,
+            },
+            "alert_limit": 20,
+        }
 
         try:
             alert_limit = self.get_alert_limit(custom_config=custom_config)
@@ -87,8 +103,10 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
     def get_alerts_palo_alto(self, state: dict, start_time: int, end_time: int, alert_limit: int):
         """ """
 
-        search_from = state.get(LAST_SEARCH_TO, 0)
+        query_start_time = state.get(QUERY_START_TIME, start_time)
+        query_end_time = state.get(QUERY_END_TIME, end_time)
 
+        search_from = state.get(LAST_SEARCH_TO, 0)
         search_to = search_from + alert_limit
 
         post_body = self.build_post_body(
@@ -114,8 +132,8 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             )
             state[LAST_SEARCH_TO] = search_to
             state[LAST_SEARCH_FROM] = search_from
-            state[QUERY_START_TIME] = start_time
-            state[QUERY_END_TIME] = end_time
+            state[QUERY_START_TIME] = query_start_time
+            state[QUERY_END_TIME] = query_end_time
         else:
             state = self._drop_pagination_state(state)
 
@@ -166,12 +184,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         return deduped_alerts, new_hashes, highest_timestamp
 
-    @staticmethod
-    def _get_current_time():
-        # Gets the last 15 minutes in UNIX
-        last_15_min = datetime.utcnow() - timedelta(minutes=15)
-        return int(last_15_min.timestamp()) * 1000
-
     ###########################
     # Custom Config
     ###########################
@@ -197,7 +209,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         saved_time = state.get(QUERY_START_TIME, state.get(LAST_ALERT_TIME))
 
         if not saved_time:
-            log_msg += "No previous alert time within state. "
+            log_msg += "No previous alert time within state.\n"
             custom_timings = custom_config.get(LAST_ALERT_TIME, {})
             custom_date = custom_timings.get("date")
             custom_hours = custom_timings.get("hours", DEFAULT_LOOKBACK_HOURS)
@@ -220,6 +232,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 state[LAST_ALERT_TIME] = comparison_date
 
         start_time = state.get(LAST_ALERT_TIME)
+
         self.logger.info(f"{log_msg}Applying the following start time='{start_time}'.")
 
         if first_run:
@@ -264,6 +277,12 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
     def convert_to_unix(self, date_time: datetime) -> int:
         return int(datetime.strptime(date_time, TIME_FORMAT).timestamp()) * 1000
+
+    @staticmethod
+    def _get_current_time():
+        # Gets the last 15 minutes in UNIX
+        last_15_min = datetime.utcnow() - timedelta(minutes=15)
+        return int(last_15_min.timestamp()) * 1000
 
     def _drop_pagination_state(self, state: dict = {}) -> Dict[str, Union[int, str, list]]:
         """
