@@ -42,7 +42,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def connect(self, params):
         self.app_id = params.get(Input.APPLICATION_ID)
         self.tenant_id = params.get(Input.DIRECTORY_ID)
-        self.endpoint = params.get(Input.ENDPOINT)
+        self.endpoint = params.get(Input.ENDPOINT, "Normal")
         self.app_secret = params.get(Input.APPLICATION_SECRET).get("secretKey")
         self.username = params.get(Input.USERNAME_PASSWORD).get("username")
         self.password = params.get(Input.USERNAME_PASSWORD).get("password")

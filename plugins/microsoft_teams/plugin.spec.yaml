@@ -23,10 +23,10 @@ resources:
   vendor_url: https://www.microsoft.com
   docs_url: https://docs.rapid7.com/insightconnect/microsoft-teams/
 tags:
-- microsoft
-- teams
-- office 365
-- chat
+  - microsoft
+  - teams
+  - office 365
+  - chat
 sdk:
   type: slim
   version: 6.1.2
