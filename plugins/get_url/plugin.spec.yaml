@@ -9,7 +9,7 @@ supported_versions: ["_There are no supported product versions listed._"]
 vendor: rapid7
 support: community
 sdk:
-  type: full
+  type: slim
   version: 6.1.2
   user: nobody
 status: []
@@ -29,6 +29,8 @@ hub_tags:
 key_features:
   - Get the contents of a web page
   - Check a web page for changes
+links:
+  - "[Get URL](https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/get_url)"
 version_history:
   - "2.1.0 - Fix issue with getting the same URL multiple times | Refresh with latest SDK (6.1.2)"
   - "2.0.1 - Fix file decoding error after file download | Update SDK to version 4 | Update unit tests after changing SDK version"

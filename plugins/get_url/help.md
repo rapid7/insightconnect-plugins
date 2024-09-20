@@ -133,8 +133,8 @@ Example output:
 * 0.1.0 - Initial plugin
 
 # Links
-  
-*This plugin does not contain any links.*
+
+* [Get URL](https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/get_url)
 
 ## References
   
