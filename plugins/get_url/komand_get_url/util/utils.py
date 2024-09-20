@@ -79,13 +79,18 @@ class Utils(object):
         if insightconnect_plugin_runtime.helper.check_cachefile(meta.get("metafile")):
             headers = self.check_url_meta_file(meta)
 
+        # Caching headers from meta info can be None
+        # request.urlopen expects str or bytes
+        etag = headers.get("etag", "") or ""
+        last_modified = headers.get("last-modified", "") or ""
+
         # Download file
         url_object = insightconnect_plugin_runtime.helper.open_url(
             url,
             timeout=timeout,
             verify=is_verify,
-            If_None_Match=headers.get("etag", ""),
-            If_Modified_Since=headers.get("last-modified", ""),
+            If_None_Match=etag,
+            If_Modified_Since=last_modified,
             User_Agent=user_agent,
         )
         return url_object, meta
