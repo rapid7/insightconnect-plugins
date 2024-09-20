@@ -1,8 +1,6 @@
 # Description
 
-[Microsoft Teams](https://products.office.com/en-us/microsoft-teams/group-chat-software) is a unified communications platform that combines persistent workplace chat, video meetings, file storage, and application integration. The Microsoft Teams plugin allows you to send and trigger workflows on new messages. The plugin will also allow for teams management with the ability to add and remove teams, channels, and users.
-
-This plugin uses the [Microsoft Teams API](https://docs.microsoft.com/en-us/graph/api/resources/teams-api-overview?view=graph-rest-1.0) to interact with Microsoft Teams.
+[Microsoft Teams](https://products.office.com/en-us/microsoft-teams/group-chat-software) is a unified communications platform that combines persistent workplace chat, video meetings, file storage, and application integration. The Microsoft Teams plugin allows you to send and trigger workflows on new messages. The plugin will also allow for teams management with the ability to add and remove teams, channels, and users. This plugin uses the [Microsoft Teams API](https://docs.microsoft.com/en-us/graph/api/resources/teams-api-overview?view=graph-rest-1.0) to interact with Microsoft Teams
 
 # Key Features
 
@@ -14,22 +12,23 @@ This plugin uses the [Microsoft Teams API](https://docs.microsoft.com/en-us/grap
 * Secret Key, similar to API Key
 
 # Supported Product Versions
-  
-* Microsoft Graph API v1.0 2021-11-28
+
+* Microsoft Graph API v1.0 2024-09-13
 
 # Documentation
 
 ## Setup
-  
+
 The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|application_id|string|None|True|Application (client) ID|None|63a0cad6-ac64-435c-a221-5d37c97b763e|
-|application_secret|credential_secret_key|None|True|Application secret|None|aMeCAEYdOLlK+qRcD9AjdyxLkCaqZH1UPm7adjJQ5Og=|
-|directory_id|string|None|True|Directory (tenant) ID|None|9e538ff5-dcb2-46a9-9a28-f93b8250deb0|
-|username_password|credential_username_password|None|True|Username and password|None|{ "username": "user", "password": "mypassword" }|
-  
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|application_id|string|None|True|Application (client) ID|None|63a0cad6-ac64-435c-a221-5d37c97b763e|None|None|
+|application_secret|credential_secret_key|None|True|Application secret|None|aMeCAEYdOLlK+qRcD9AjdyxLkCaqZH1UPm7adjJQ5Og=|None|None|
+|directory_id|string|None|True|Directory (tenant) ID|None|9e538ff5-dcb2-46a9-9a28-f93b8250deb0|None|None|
+|endpoint|string|None|True|The type of endpoint to connect to: normal service, GCC (government), GCC High (government), DoD (military)|["Normal", "GCC", "GCC High", "DoD"]|Normal|None|None|
+|username_password|credential_username_password|None|True|Username and password|None|{ "username": "user", "password": "mypassword" }|None|None|
+
 Example input:
 
 ```
@@ -37,6 +36,7 @@ Example input:
   "application_id": "63a0cad6-ac64-435c-a221-5d37c97b763e",
   "application_secret": "aMeCAEYdOLlK+qRcD9AjdyxLkCaqZH1UPm7adjJQ5Og=",
   "directory_id": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0",
+  "endpoint": "Normal",
   "username_password": {
     "password": "mypassword",
     "username": "user"
@@ -50,17 +50,17 @@ Example input:
 
 
 #### Add Channel to Team
-  
+
 This action is used to add a channel to a team
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|channel_description|string|None|True|Channel description|None|This is a test channel.|
-|channel_name|string|None|True|Channel name|None|InsightConnect Channel|
-|channel_type|string|Standard|True|Type of channel to be added|["Standard", "Private"]|Standard|
-|team_name|string|None|True|Team name|None|InsightConnect Team|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|channel_description|string|None|True|Channel description|None|This is a test channel.|None|None|
+|channel_name|string|None|True|Channel name|None|InsightConnect Channel|None|None|
+|channel_type|string|Standard|True|Type of channel to be added|["Standard", "Private"]|Standard|None|None|
+|team_name|string|None|True|Team name|None|InsightConnect Team|None|None|
   
 Example input:
 
@@ -88,15 +88,15 @@ Example output:
 ```
 
 #### Add Group Owner
-  
+
 This action is used to add a user to the group's list of owners
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|group_name|string|None|True|Name of the group or team to which the member is to be added as the owner|None|InsightConnect Team|
-|member_login|string|None|True|The login of the group member to be added as the owner|None|user@example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|group_name|string|None|True|Name of the group or team to which the member is to be added as the owner|None|InsightConnect Team|None|None|
+|member_login|string|None|True|The login of the group member to be added as the owner|None|user@example.com|None|None|
   
 Example input:
 
@@ -122,17 +122,17 @@ Example output:
 ```
 
 #### Add Member to Channel
-  
+
 This action is used to add a conversation member to a private channel
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|channel_name|string|None|True|Name of the channel to which the member is to be added|None|InsightConnect Channel|
-|group_name|string|None|True|Name of the group in which the channel is located|None|InsightConnect Team|
-|member_login|string|None|True|The login of the group member to be added to a channel|None|user@example.com|
-|role|string|Member|True|Role of the member to add|["Owner", "Member"]|Owner|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|channel_name|string|None|True|Name of the channel to which the member is to be added|None|InsightConnect Channel|None|None|
+|group_name|string|None|True|Name of the group in which the channel is located|None|InsightConnect Team|None|None|
+|member_login|string|None|True|The login of the group member to be added to a channel|None|user@example.com|None|None|
+|role|string|Member|True|Role of the member to add|["Owner", "Member"]|Owner|None|None|
   
 Example input:
 
@@ -160,15 +160,15 @@ Example output:
 ```
 
 #### Add Member to Team
-  
+
 This action is used to add a member to a team
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|member_login|string|None|True|Member login e.g. user@example.com|None|user@example.com|
-|team_name|string|None|True|Team name|None|InsightConnect Team|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|member_login|string|None|True|Member login e.g. user@example.com|None|user@example.com|None|None|
+|team_name|string|None|True|Team name|None|InsightConnect Team|None|None|
   
 Example input:
 
@@ -194,15 +194,15 @@ Example output:
 ```
 
 #### Create Teams Chat
-  
+
 This action is used to create a chat in Microsoft Teams
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|members|[]itemMember|None|True|A list of usernames to set as members|None|[{"user_info": "user@example.com", "role": "owner"}, {"user_info": "ab123bcd-123a-412a3-abc1-a123456b789c", "role": "owner"}]|
-|topic|string|None|False|Topic of chat to be added (only available for group chats)|None|example_topic|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|members|[]itemMember|None|True|A list of usernames to set as members|None|[{"user_info": "user@example.com", "role": "owner"}, {"user_info": "ab123bcd-123a-412a3-abc1-a123456b789c", "role": "owner"}]|None|None|
+|topic|string|None|False|Topic of chat to be added (only available for group chats)|None|example_topic|None|None|
   
 Example input:
 
@@ -245,19 +245,19 @@ Example output:
 ```
 
 #### Create Teams Enabled Group
-  
+
 This action is used to create a group in Azure and enable it for Microsoft Teams
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|group_description|string|None|True|Group description|None|A test group|
-|group_name|string|None|True|Team name|None|test_group|
-|mail_enabled|boolean|None|True|Should e-mail should be enabled for this group|None|True|
-|mail_nickname|string|None|True|The nickname for the email address of this group in Outlook|None|TestGroup|
-|members|[]string|None|False|A list of usernames to set as members|None|["user@example.com"]|
-|owners|[]string|None|False|A list of usernames to set as owners|None|["user@example.com"]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|group_description|string|None|True|Group description|None|A test group|None|None|
+|group_name|string|None|True|Team name|None|test_group|None|None|
+|mail_enabled|boolean|None|True|Should e-mail should be enabled for this group|None|True|None|None|
+|mail_nickname|string|None|True|The nickname for the email address of this group in Outlook|None|TestGroup|None|None|
+|members|[]string|None|False|A list of usernames to set as members|None|["user@example.com"]|None|None|
+|owners|[]string|None|False|A list of usernames to set as owners|None|["user@example.com"]|None|None|
   
 Example input:
 
@@ -300,14 +300,14 @@ Example output:
 ```
 
 #### Delete Team
-  
+
 This action is used to delete a team and the associated group from Azure
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|team_name|string|None|True|Team Name|None|Test Team|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|team_name|string|None|True|Team Name|None|Test Team|None|None|
   
 Example input:
 
@@ -332,15 +332,15 @@ Example output:
 ```
 
 #### Get Channels for Team
-  
+
 This action is used to returns all the channels associated with a team
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|channel_name|string|None|False|Optional regex-capable channel to look for|None|InsightConnect Channel|
-|team_name|string|None|True|Team name to look for|None|InsightConnect Team|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|channel_name|string|None|False|Optional regex-capable channel to look for|None|InsightConnect Channel|None|None|
+|team_name|string|None|True|Team name to look for|None|InsightConnect Team|None|None|
   
 Example input:
 
@@ -372,17 +372,17 @@ Example output:
 ```
 
 #### Get Message in Channel
-  
+
 This action is used to retrieve a single message or a message reply in a channel
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|channel_id|string|None|True|The ID of channel|None|11:examplechannel.name|
-|message_id|string|None|True|The ID of message|None|1234567891|
-|reply_id|string|None|False|The ID of reply message|None|1234567890|
-|team_id|string|None|True|The ID of team|None|example-team-id|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|channel_id|string|None|True|The ID of channel|None|11:examplechannel.name|None|None|
+|message_id|string|None|True|The ID of message|None|1234567891|None|None|
+|reply_id|string|None|False|The ID of reply message|None|1234567890|None|None|
+|team_id|string|None|True|The ID of team|None|example-team-id|None|None|
   
 Example input:
 
@@ -439,16 +439,16 @@ Example output:
 ```
 
 #### Get Message in Chat
-  
+
 This action is used to retrieve a single message or a message reply in a chat
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|chat_id|string|None|True|The ID of chat|None|11:examplechat.name|
-|message_id|string|None|True|The ID of message|None|1234567890|
-|username|string|None|True|The ID of user or his email|None|user@example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|chat_id|string|None|True|The ID of chat|None|11:examplechat.name|None|None|
+|message_id|string|None|True|The ID of message|None|1234567890|None|None|
+|username|string|None|True|The ID of user or his email|None|user@example.com|None|None|
   
 Example input:
 
@@ -506,16 +506,16 @@ Example output:
 ```
 
 #### Get Reply List
-  
+
 This action is used to list all the replies to a message in a channel of a team
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|channel_name|string|None|True|Channel|None|InsightConnect Channel|
-|message_id|string|None|True|The ID of message|None|1234567891|
-|team_name|string|None|True|Team name|None|InsightConnect Team|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|channel_name|string|None|True|Channel|None|InsightConnect Channel|None|None|
+|message_id|string|None|True|The ID of message|None|1234567891|None|None|
+|team_name|string|None|True|Team name|None|InsightConnect Team|None|None|
   
 Example input:
 
@@ -569,14 +569,14 @@ Example output:
 ```
 
 #### Get Teams
-  
+
 This action is used to returns all the teams the configured user is allowed to see
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|team_name|string|None|False|Optional regex-capable team name to look for|None|InsightConnect Team|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|team_name|string|None|False|Optional regex-capable team name to look for|None|InsightConnect Team|None|None|
   
 Example input:
 
@@ -607,14 +607,14 @@ Example output:
 ```
 
 #### List Messages from a Chat
-  
+
 This action is used to retrieve up to the last 50 messages in a chat
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|chat_id|string|None|True|The ID of chat|None|11:examplechat.name|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|chat_id|string|None|True|The ID of chat|None|11:examplechat.name|None|None|
   
 Example input:
 
@@ -666,15 +666,15 @@ Example output:
 ```
 
 #### Remove Channel from Team
-  
+
 This action is used to remove a channel from a team
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|channel_name|string|None|True|Channel name|None|InsightConnect Channel|
-|team_name|string|None|True|Team name|None|InsightConnect Team|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|channel_name|string|None|True|Channel name|None|InsightConnect Channel|None|None|
+|team_name|string|None|True|Team name|None|InsightConnect Team|None|None|
   
 Example input:
 
@@ -700,15 +700,15 @@ Example output:
 ```
 
 #### Remove Member from Team
-  
+
 This action is used to remove a member from a team
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|member_login|string|None|True|Member Login e.g. user@example.com|None|user@example.com|
-|team_name|string|None|True|Team name|None|InsightConnect Team|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|member_login|string|None|True|Member Login e.g. user@example.com|None|user@example.com|None|None|
+|team_name|string|None|True|Team name|None|InsightConnect Team|None|None|
   
 Example input:
 
@@ -734,17 +734,17 @@ Example output:
 ```
 
 #### Send HTML Message
-  
+
 This action is used to send HTML as a message
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|channel_name|string|None|True|Channel name|None|InsightConnect Channel|
-|message_content|string|None|True|HTML content to send|None|<b>Hello!</b>|
-|team_name|string|None|True|Team name|None|InsightConnect Team|
-|thread_id|string|None|False|To post in a thread, select parent message ID|None|1595889908700|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|channel_name|string|None|True|Channel name|None|InsightConnect Channel|None|None|
+|message_content|string|None|True|HTML content to send|None|<b>Hello!</b>|None|None|
+|team_name|string|None|True|Team name|None|InsightConnect Team|None|None|
+|thread_id|string|None|False|To post in a thread, select parent message ID|None|1595889908700|None|None|
   
 Example input:
 
@@ -798,18 +798,18 @@ Example output:
 ```
 
 #### Send Message
-  
+
 This action is used to send a message
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|channel_name|string|None|False|Channel|None|InsightConnect Channel|
-|chat_id|string|None|False|The ID of the chat|None|19:209856c0f3f847a28431deb8eb300807_thread.v2|
-|message|string|None|True|Message to send|None|Hello!|
-|team_name|string|None|False|Team name|None|InsightConnect Team|
-|thread_id|string|None|False|To post in a thread, select parent message ID|None|1595889908700|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|channel_name|string|None|False|Channel|None|InsightConnect Channel|None|None|
+|chat_id|string|None|False|The ID of the chat|None|19:209856c0f3f847a28431deb8eb300807_thread.v2|None|None|
+|message|string|None|True|Message to send|None|Hello!|None|None|
+|team_name|string|None|False|Team name|None|InsightConnect Team|None|None|
+|thread_id|string|None|False|To post in a thread, select parent message ID|None|1595889908700|None|None|
   
 Example input:
 
@@ -864,18 +864,18 @@ Example output:
 ```
 
 #### Send Message by GUID
-  
+
 This action is used to sends a message using the GUID for the team and channel. This is more performant than send 
 message
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|channel_guid|string|None|True|Channel GUID|None|xxxxx-xxxxx-xxxx-xxxx|
-|is_html|boolean|None|True|Is the message HTML|None|True|
-|message|string|None|True|Message to send|None|Hello!|
-|team_guid|string|None|True|Team GUID|None|xxxxx-xxxxx-xxxx-xxxx|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|channel_guid|string|None|True|Channel GUID|None|xxxxx-xxxxx-xxxx-xxxx|None|None|
+|is_html|boolean|None|True|Is the message HTML|None|True|None|None|
+|message|string|None|True|Message to send|None|Hello!|None|None|
+|team_guid|string|None|True|Team GUID|None|xxxxx-xxxxx-xxxx-xxxx|None|None|
   
 Example input:
 
@@ -931,16 +931,16 @@ Example output:
 
 
 #### New Message Received
-  
+
 This trigger is used to poll a channel for new messages
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|channel_name|string|None|True|Channel|None|InsightConnect Channel|
-|message_content|string|None|False|Regex to match new messages against|None|[Tt]est|
-|team_name|string|None|True|Team name|None|InsightConnect Team|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|channel_name|string|None|True|Channel|None|InsightConnect Channel|None|None|
+|message_content|string|None|False|Regex to match new messages against|None|[Tt]est|None|None|
+|team_name|string|None|True|Team name|None|InsightConnect Team|None|None|
   
 Example input:
 
@@ -1210,12 +1210,13 @@ If there is more than one team with the same name in your organization, the olde
 
 # Version History
 
+* 7.0.0 - Updated SDK to the latest version | Initial updates for fedramp compliance
 * 6.0.1 - Using exact match on channel names rather than search, from user input channel names when getting the channel id | using urllib to encode any team names in API calls to avoid symbols not being parsed correctly
-* 6.0.0 - New actions: `create_teams_chat` | `list_messages_in_chat` | update type of `Event Detail` to type object 
+* 6.0.0 - New actions: `create_teams_chat` | `list_messages_in_chat` | update type of `Event Detail` to type object
 * 5.1.0 - New actions: Get Reply List | Improve typing on message
 * 5.0.0 - New actions: Get Message in Chat, Get Message in Channel | Update to latest SDK version | Change required fields in message schema
 * 4.2.0 - New Message Received: Fixed issue where `font-size` value appeared in the `urls`, and `domains` output fields | Can choose the role of a member when adding them to a channel | Fix bug where case-sensitive URLs were returned in lower case | Improved reliability of domains output value
-* 4.1.0 - Cloud enabled | Add Channel to Team: The user has the option to select the type of channel to be created. The available types are `Standard`, and `Private` 
+* 4.1.0 - Cloud enabled | Add Channel to Team: The user has the option to select the type of channel to be created. The available types are `Standard`, and `Private`
 * 4.0.0 - Fix issue with Create Teams Enabled Group action's members, and owners input field types
 * 3.2.0 - Send Message Action is updated to support chat messages via chat_id parameter, team_name is set to optional. | Update SDK to latest version.
 * 3.1.5 - Add `microsoft_teams` and `office365` keywords | Removed `microsoft, teams, office 365` keywords
@@ -1248,7 +1249,7 @@ If there is more than one team with the same name in your organization, the olde
 
 # Links
 
-[MicrosoftTeams in Extension Library](https://extensions.rapid7.com/extension/microsoft-teams)
+* [MicrosoftTeams in Extension Library](https://extensions.rapid7.com/extension/microsoft-teams)
 
 ## References
 

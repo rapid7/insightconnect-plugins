@@ -10,6 +10,7 @@ sys.path.append(os.path.abspath("../"))
 class MockConnection:
     def __init__(self):
         self.tenant_id = "1"
+        self.resource_endpoint = "https://graph.microsoft.com"
 
     def get_headers(self):
         return

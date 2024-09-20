@@ -36,9 +36,9 @@ def get_teams_from_microsoft(  # noqa: C901
     # See if we are looking for a team name exactly or not
     if explicit:
         parsed_team_name = urllib.parse.quote(team_name, safe="")
-        teams_url = f"https://graph.microsoft.com/beta/groups?$filter=resourceProvisioningOptions/Any(x:x eq 'Team') and displayName eq '{parsed_team_name}'"
+        teams_url = f"{connection.resource_endpoint}/beta/groups?$filter=resourceProvisioningOptions/Any(x:x eq 'Team') and displayName eq '{parsed_team_name}'"
     else:
-        teams_url = "https://graph.microsoft.com/beta/groups?$filter=resourceProvisioningOptions/Any(x:x eq 'Team')"
+        teams_url = f"{connection.resource_endpoint}/beta/groups?$filter=resourceProvisioningOptions/Any(x:x eq 'Team')"
     headers = connection.get_headers()
     teams_result = requests.get(teams_url, headers=headers)  # nosec B113
     try:
@@ -112,9 +112,9 @@ def get_channels_from_microsoft(  # noqa: C901
 
     # See if we are looking for a channel name exactly or not
     if explicit:
-        channels_url = f"https://graph.microsoft.com/beta/{connection.tenant_id}/teams/{team_id}/channels?filter=displayName eq '{channel_name}'"
+        channels_url = f"{connection.resource_endpoint}/beta/{connection.tenant_id}/teams/{team_id}/channels?filter=displayName eq '{channel_name}'"
     else:
-        channels_url = f"https://graph.microsoft.com/beta/{connection.tenant_id}/teams/{team_id}/channels"
+        channels_url = f"{connection.resource_endpoint}/beta/{connection.tenant_id}/teams/{team_id}/channels"
     headers = connection.get_headers()
     channels_result = requests.get(channels_url, headers=headers)  # nosec B113
     try:
@@ -169,9 +169,9 @@ def send_message(
     """
 
     if chat_id:
-        send_message_url = f"https://graph.microsoft.com/beta/chats/{chat_id}/messages"
+        send_message_url = f"{connection.resource_endpoint}/beta/chats/{chat_id}/messages"
     else:
-        send_message_url = f"https://graph.microsoft.com/beta/teams/{team_id}/channels/{channel_id}/messages"
+        send_message_url = f"{connection.resource_endpoint}/beta/teams/{team_id}/channels/{channel_id}/messages"
         if thread_id:
             send_message_url = f"{send_message_url}/{thread_id}/replies"
 
@@ -209,7 +209,7 @@ def send_html_message(
     :param thread_id: string
     :return: dict
     """
-    send_message_url = f"https://graph.microsoft.com/beta/teams/{team_id}/channels/{channel_id}/messages"
+    send_message_url = f"{connection.resource_endpoint}/beta/teams/{team_id}/channels/{channel_id}/messages"
 
     if thread_id:
         send_message_url = send_message_url + f"/{thread_id}/replies"
@@ -238,7 +238,7 @@ def create_chat(connection: insightconnect_plugin_runtime.connection, members: l
     :return: dict
     """
 
-    create_chat_endpoint = "https://graph.microsoft.com/beta/chats/"
+    create_chat_endpoint = f"{connection.resource_endpoint}/beta/chats/"
     create_chat_payload = {}
 
     list_members = []
@@ -246,7 +246,7 @@ def create_chat(connection: insightconnect_plugin_runtime.connection, members: l
         formatted_member = {
             "@odata.type": "#microsoft.graph.aadUserConversationMember",
             "roles": [f"{member.get('role')}"],
-            "user@odata.bind": f"https://graph.microsoft.com/v1.0/users('{member.get('user_info')}')",
+            "user@odata.bind": f"{connection.resource_endpoint}/v1.0/users('{member.get('user_info')}')",
         }
         list_members.append(formatted_member)
 
@@ -299,7 +299,7 @@ def create_channel(
     :return: boolean
     """
 
-    create_channel_endpoint = f"https://graph.microsoft.com/beta/teams/{team_id}/channels"
+    create_channel_endpoint = f"{connection.resource_endpoint}/beta/teams/{team_id}/channels"
     create_channel_payload = {
         "description": description,
         "displayName": channel_name,
@@ -338,7 +338,7 @@ def delete_channel(
     """
 
     delete_channel_endpoint = (
-        f"https://graph.microsoft.com/v1.0/{connection.tenant_id}/teams/{team_id}/channels/{channel_id}"
+        f"{connection.resource_endpoint}/v1.0/{connection.tenant_id}/teams/{team_id}/channels/{channel_id}"
     )
 
     headers = connection.get_headers()
@@ -366,9 +366,9 @@ def get_message_from_channel(  # noqa: C901
     message_id: str,
     reply_id: str = None,
 ) -> list:
-    message_url = f"https://graph.microsoft.com/beta/{connection.tenant_id}/teams/{team_id}/channels/{channel_id}/messages/{message_id}"
+    message_url = f"{connection.resource_endpoint}/beta/{connection.tenant_id}/teams/{team_id}/channels/{channel_id}/messages/{message_id}"
     if reply_id:
-        message_url = f"https://graph.microsoft.com/beta/{connection.tenant_id}/teams/{team_id}/channels/{channel_id}/messages/{message_id}/replies/{reply_id}"
+        message_url = f"{connection.resource_endpoint}/beta/{connection.tenant_id}/teams/{team_id}/channels/{channel_id}/messages/{message_id}/replies/{reply_id}"
     headers = connection.get_headers()
     response = requests.get(message_url, headers=headers)  # nosec B113
     try:
@@ -388,7 +388,7 @@ def get_message_from_chat(  # noqa: C901
     chat_id: str,
     message_id: str,
 ) -> list:
-    message_url = f"https://graph.microsoft.com/beta/{connection.tenant_id}/users/{username}/chats/{chat_id}/messages/{message_id}"
+    message_url = f"{connection.resource_endpoint}/beta/{connection.tenant_id}/users/{username}/chats/{chat_id}/messages/{message_id}"
     headers = connection.get_headers()
     response = requests.get(message_url, headers=headers)  # nosec B113
 
@@ -413,7 +413,7 @@ def list_messages_from_chat(connection: insightconnect_plugin_runtime.connection
     """
 
     params = {"$top": 50, "$orderby": "createdDateTime desc"}
-    message_url = f"https://graph.microsoft.com/beta/{connection.tenant_id}/chats/{chat_id}/messages/"
+    message_url = f"{connection.resource_endpoint}/beta/{connection.tenant_id}/chats/{chat_id}/messages/"
     headers = connection.get_headers()
     response = requests.get(message_url, headers=headers, params=params)  # nosec B113
 
@@ -441,7 +441,7 @@ def get_reply_list(  # noqa: C901
     channel_id: str,
     message_id: str,
 ) -> list:
-    message_url = f"https://graph.microsoft.com/beta/{connection.tenant_id}/teams/{team_id}/channels/{channel_id}/messages/{message_id}/replies"
+    message_url = f"{connection.resource_endpoint}/beta/{connection.tenant_id}/teams/{team_id}/channels/{channel_id}/messages/{message_id}/replies"
     headers = connection.get_headers()
     response = requests.get(message_url, headers=headers)  # nosec B113
 
