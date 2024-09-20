@@ -19,20 +19,15 @@ class Connection(insightconnect_plugin_runtime.Connection):
         # Sending a request using the secretKey to test if it is valid
         url = "http://api.ipstack.com/" + "rapid7.com" + "?access_key=" + self.token + "&output=json"
 
-        invalid_status_codes = {
-            "404": "The requested resource does not exist, Error 404",
-            "101": "The access key is blank or invalid",
-            "102": "The access key was recognized but the user account is not active",
-            "104": "The maximum monthly ip lookups has been hit",
-            "106": "The supplied host address/domain is invalid"
-        }
+        invalid_status_codes = ["404", "101", "102", "104", "106"]
 
         resp = insightconnect_plugin_runtime.helper.open_url(url)
         dic = json.loads(resp.read())
-        if "error" not in dic:
-            return {"success": True}
+        if any(invalid_status_codes) in dic or "error" in dic:
+            raise PluginException(
+                data=dic,
+                assistance="Please check your credentials and try again. If the issue persists, please contact support.",
+                cause="An error has occurred. Please check your credentials are correct and that you have not exceeded the lookup limits.",
+            )
         else:
-            for error, cause in invalid_status_codes.items():
-                self.logger.info(f"Error: {error} . {cause}")
-                raise PluginException(cause=cause, data=dic)
-                break
+            return {"success": True}
