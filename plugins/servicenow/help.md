@@ -1686,6 +1686,7 @@ Example output:
 
 # Version History
 
+* 8.0.2 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 8.0.1 - Update Setuptool to version 70.0.0 | Update SDK to version 6.0.0
 * 8.0.0 - `Incident Created, Vulnerability Updated`: Updated triggers to allow users to check a list of system_ids or all of them
 * 7.4.1 - `Incident Created`: Resolved issue related to trigger not working. Updated SDK
