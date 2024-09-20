@@ -77,8 +77,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
             return_message += f"This failure was caused by: '{error.cause}'\n"
             return_message += f"Error assistance: {error.assistance}\n"
 
-            self.logger.info(f"error = {error.cause}")
-
             raise ConnectionTestException(
                 cause="The OAuth token credentials provided in the connection configuration is invalid.",
                 assistance="Please verify the credentials are correct and try again.",
