@@ -73,13 +73,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
             return {"success": True}, message
 
         except PluginException as error:
-            if error.cause in ("401", "402", "403", "404"):
-                return_message += error.assistance
-            else:
-                return_message += "Please verify the credentials/setup is correct and try again."
-            self.logger.info(
-                f"cause = {error.cause}, assistance = {error.assistance}, data {error.data}, error = {error}"
-            )
+            return_message = f"The connection test to Palo Alto Cortex failed.\n"
+            return_message += f"This failure was caused by: '{error.cause}'\n"
+            return_message += f"Error assistance: {error.assistance}\n"
+
+            self.logger.info(f"error = {error.cause}")
+
             raise ConnectionTestException(
                 cause="The OAuth token credentials provided in the connection configuration is invalid.",
                 assistance="Please verify the credentials are correct and try again.",

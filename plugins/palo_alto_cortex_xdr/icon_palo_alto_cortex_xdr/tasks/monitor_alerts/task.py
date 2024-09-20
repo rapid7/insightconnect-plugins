@@ -64,16 +64,15 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             if isinstance(error.data, Response):
                 # if there is response data in the error then use it in the exception
                 status_code = error.data.status_code
-                cause = error.data.text
             else:
                 status_code = 500
-                cause = error.cause
 
             self.logger.error(
-                f"A PluginException has occurred. Status code {status_code} returned. Error: {cause}. "
+                f"A PluginException has occurred. Status code {status_code} returned. Error: {error}. "
                 f"Existing state: {existing_state}"
             )
-            return [], existing_state, False, status_code, PluginException(cause=cause, data=error)
+            return [], existing_state, False, status_code, error
+
         except Exception as error:
             self.logger.error(
                 f"Unknown exception has occurred. No results returned. Error: {error} "
@@ -265,6 +264,10 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         return datetime.fromtimestamp(unix_time / 1000, tz=timezone.utc)
 
     def convert_datetime_to_unix(self, date_time: datetime) -> int:
+        # Ensure the datetime object is in UTC
+        if date_time.tzinfo is None:
+            date_time = date_time.replace(tzinfo=timezone.utc)
+
         return int(date_time.timestamp() * 1000)
 
     def convert_timestamp_to_string(self, timestamp: int) -> str:
