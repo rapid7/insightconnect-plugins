@@ -73,7 +73,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             return {"success": True}, message
 
         except PluginException as error:
-            return_message = f"The connection test to Palo Alto Cortex failed.\n"
+            return_message = "The connection test to Palo Alto Cortex failed.\n"
             return_message += f"This failure was caused by: '{error.cause}'\n"
             return_message += f"Error assistance: {error.assistance}\n"
 
