@@ -197,7 +197,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             custom_date = custom_timings.get("date")
             custom_hours = custom_timings.get("hours", DEFAULT_LOOKBACK_HOURS)
             start = datetime(**custom_date) if custom_date else (dt_now - timedelta(hours=custom_hours))
-            state[LAST_ALERT_TIME] = self.convert_datetime_to_unix(start.strftime(TIME_FORMAT))
+            state[LAST_ALERT_TIME] = self.convert_datetime_to_unix(start)
         else:
             # check if we have held the TS beyond our max lookback
             lookback_days = custom_config.get(f"{LAST_ALERT_TIME}_days", MAX_LOOKBACK_DAYS)
@@ -205,7 +205,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             custom_lookback = custom_config.get(f"max_{LAST_ALERT_TIME}", {})
             comparison_date = datetime(**custom_lookback) if custom_lookback else default_date_lookback
 
-            comparison_unix = self.convert_datetime_to_unix(comparison_date.strftime(TIME_FORMAT))
+            comparison_unix = self.convert_datetime_to_unix(comparison_date)
 
             # Update state if saved time exceeds the lookback limit
             if comparison_unix > saved_time:
@@ -265,7 +265,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         return datetime.fromtimestamp(unix_time / 1000, tz=timezone.utc)
 
     def convert_datetime_to_unix(self, date_time: datetime) -> int:
-        return int(datetime.strptime(date_time, TIME_FORMAT).timestamp()) * 1000
+        return int(date_time.timestamp() * 1000)
 
     def convert_timestamp_to_string(self, timestamp: int) -> str:
         return datetime.fromtimestamp(timestamp / 1000, tz=timezone.utc).strftime(TIME_FORMAT)
