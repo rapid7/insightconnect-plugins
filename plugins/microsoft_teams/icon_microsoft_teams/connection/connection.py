@@ -6,6 +6,26 @@ from insightconnect_plugin_runtime.exceptions import ConnectionTestException, Pl
 import requests
 import time
 
+TIMEOUT = 120
+
+# we do not have an instance to test [gcc, gcc high, dod], but endpoint taken from link below
+# https://learn.microsoft.com/en-us/defender-endpoint/gov#api
+# https://learn.microsoft.com/en-us/graph/deployments
+
+RESOURCE_URL = {
+    "Normal": "https://graph.microsoft.com",
+    "GCC": "https://graph.microsoft.com",
+    "GCC High": "https://graph.microsoft.us",
+    "DoD": "https://graph.microsoft.us",
+}
+
+AUTH_URL = {
+    "Normal": "https://login.microsoftonline.com",
+    "GCC": "https://login.microsoftonline.com",
+    "GCC High": "https://login.microsoftonline.us",
+    "DoD": "https://login.microsoftonline.us",
+}
+
 
 class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
@@ -17,10 +37,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.password = None
         self.api_token = None
         self.refresh_token = None
+        self.resource_endpoint = None
 
     def connect(self, params):
         self.app_id = params.get(Input.APPLICATION_ID)
         self.tenant_id = params.get(Input.DIRECTORY_ID)
+        self.endpoint = params.get(Input.ENDPOINT, "Normal")
         self.app_secret = params.get(Input.APPLICATION_SECRET).get("secretKey")
         self.username = params.get(Input.USERNAME_PASSWORD).get("username")
         self.password = params.get(Input.USERNAME_PASSWORD).get("password")
@@ -29,14 +51,16 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.time_ago = 0  # Jan 1, 1970
         self.time_now = time.time()  # More than 1 hour since 1978
 
+        self.resource_endpoint = RESOURCE_URL.get(self.endpoint)
+
         self.check_and_refresh_api_token()
 
     def get_token(self):
         self.logger.info("Updating Auth Token...")
-        token_url = f"https://login.microsoftonline.com/{self.tenant_id}/oauth2/token"
+        token_url = f"{AUTH_URL.get(self.endpoint)}/{self.tenant_id}/oauth2/token"
 
         body = {
-            "resource": "https://graph.microsoft.com",
+            "resource": self.resource_endpoint,
             "grant_type": "password",
             "client_id": self.app_id,
             "client_secret": self.app_secret,
@@ -48,7 +72,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             body["refresh_token"] = self.refresh_token
 
         self.logger.info(f"Getting token from: {token_url}")
-        result = requests.post(token_url, data=body)
+        result = requests.post(token_url, data=body, timeout=TIMEOUT)
 
         try:
             result.raise_for_status()
