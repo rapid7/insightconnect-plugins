@@ -4,13 +4,14 @@ products: ["insightconnect"]
 name: servicenow
 title: ServiceNow
 description: ServiceNow is a tool for managing incidents and configuration management. Using the ServiceNow plugin for Rapid7 InsightConnect, users can manage all aspects of incidents including creation, search, updates, as well as monitor them for changes
-version: 8.0.1
+version: 8.0.2
 connection_version: 8
 supported_versions: ["2023-10-28 Tokyo"]
 vendor: rapid7
 support: rapid7
 status: []
 cloud_ready: true
+fedramp_ready: true
 resources:
   vendor_url: https://www.servicenow.com/
   docs_url: https://docs.rapid7.com/insightconnect/servicenow
@@ -25,7 +26,7 @@ hub_tags:
   features: []
 sdk:
   type: slim
-  version: 6.0.0
+  version: 6.1.2
   user: nobody
 key_features:
   - "Search, Read, Create, Delete, and Update incidents to accelerate ticketing operations"
@@ -45,6 +46,7 @@ references:
   - "[ServiceNow Operators](https://docs.servicenow.com/bundle/quebec-platform-user-interface/page/use/common-ui-elements/reference/r_OpAvailableFiltersQueries.html)"
   - "[ServiceNow Plugin Setup Guide](https://docs.rapid7.com/insightconnect/servicenow)"
 version_history:
+  - "8.0.2 - Initial updates for fedramp compliance | Updated SDK to the latest version"
   - "8.0.1 - Update Setuptool to version 70.0.0 | Update SDK to version 6.0.0"
   - "8.0.0 - `Incident Created, Vulnerability Updated`: Updated triggers to allow users to check a list of system_ids or all of them"
   - "7.4.1 - `Incident Created`: Resolved issue related to trigger not working. Updated SDK"
