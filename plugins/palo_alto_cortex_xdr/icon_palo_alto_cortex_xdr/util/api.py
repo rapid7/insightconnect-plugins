@@ -3,7 +3,7 @@ import time
 import secrets
 import string
 import hashlib
-from typing import List, Dict
+from typing import List, Dict, Tuple
 
 import requests
 import urllib
@@ -11,7 +11,8 @@ import urllib
 from re import match
 from datetime import datetime, timezone
 from icon_palo_alto_cortex_xdr.util.util import Util
-from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException, ResponseExceptionData
+from insightconnect_plugin_runtime.helper import extract_json, make_request
 
 
 class CortexXdrAPI:
@@ -31,6 +32,12 @@ class CortexXdrAPI:
             self.headers = self._advanced_authentication(self.api_key_id, self.api_key)
         else:
             self.headers = self._standard_authentication(self.api_key_id, self.api_key)
+
+    def get_headers(self):
+        return self.headers
+
+    def get_url(self):
+        return self.fully_qualified_domain_name
 
     def test_connection(self):
         endpoint = "/api_keys/validate/"
@@ -419,3 +426,34 @@ class CortexXdrAPI:
 
         # Don't know, try hostname
         return self.ENDPOINT_HOSTNAME_TYPE
+
+    def get_response_alerts(self, post_body: dict) -> Tuple[list, int, int]:
+        """
+        Helper method to make the request in `monitor_alerts` task.
+
+        :param post_body: Object containing the post body (filters etc) to send in the requests
+
+        """
+        headers = self.get_headers()
+        fqdn = self.get_url()
+        endpoint = "public_api/v1/alerts/get_alerts"
+
+        url = f"{fqdn}{endpoint}"
+
+        request = requests.Request(method="post", url=url, headers=headers, json=post_body)
+        response = make_request(_request=request, timeout=60, exception_data_location=ResponseExceptionData.RESPONSE)
+
+        response = extract_json(response)
+        total_count = response.get("reply", {}).get("total_count")
+        results_count = response.get("reply", {}).get("result_count")
+        results = response.get("reply", {}).get("alerts", [])
+
+        # They physically return None so we can't default 0 in .get()
+        if total_count is None:
+            total_count = 0
+
+        # Also including results count just to be safe.
+        if results_count is None:
+            results_count = 0
+
+        return results, results_count, total_count

@@ -6,6 +6,7 @@ from typing import Callable
 sys.path.append(os.path.abspath("../"))
 
 from unittest import mock
+from unittest.mock import MagicMock
 
 import requests
 from icon_palo_alto_cortex_xdr.connection.schema import Input
@@ -28,6 +29,9 @@ class MockResponse:
         self.filename = filename
         self.status_code = status_code
         self.text = text
+        self.request = MagicMock()
+        self.headers = MagicMock()
+        self.raise_for_status = MagicMock()
 
     def json(self):
         with open(
@@ -38,7 +42,7 @@ class MockResponse:
 
 def mocked_request(side_effect: Callable) -> None:
     mock_function = requests
-    mock_function.post = mock.Mock(side_effect=side_effect)
+    mock_function.Session.post = mock.Mock(side_effect=side_effect)
 
 
 def mock_conditions(url: str, status_code: int) -> MockResponse:
@@ -46,9 +50,15 @@ def mock_conditions(url: str, status_code: int) -> MockResponse:
         return MockResponse("start_xql_query", status_code)
     if url == STUB_URL + "public_api/v1/xql/get_query_results/":
         return MockResponse("get_query_results", status_code)
+    if url == STUB_URL + "/public_api/v1/alerts/get_alerts":
+        return MockResponse("monitor_alerts", status_code)
+    if url == "task":
+        return MockResponse("monitor_alerts", status_code)
 
 
 def mock_request_200(*args, **kwargs) -> MockResponse:
+    if kwargs.get("verify", {}):
+        return mock_conditions("task", 200)
     return mock_conditions(kwargs.get("url"), 200)
 
 

@@ -27,7 +27,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |api_key|credential_secret_key|None|True|The Cortex XDR API Key that is generated when creating a new key|None|1234123412341234asdfasdfasdfasdfasdf1234123412341234123412341234asdfasdfasdfasdfasdf123412341234123412341234asdfasdfasdfasdfasdf|None|None|
-|api_key_id|int|None|True|The API Key ID shown in the Cortex XDR API Keys table in settings. e.g. 1, 2, 3|None|1|None|None|
+|api_key_id|integer|None|True|The API Key ID shown in the Cortex XDR API Keys table in settings. e.g. 1, 2, 3|None|1|None|None|
 |security_level|string|Standard|True|The Security Level of the key provided. This can be found in the API Key settings table in the Cortex XDR settings|["Advanced", "Standard"]|Standard|None|None|
 |url|string|None|True|Cortex XDR API URL|None|https://api-example.xdr.us.paloaltonetworks.com/|None|None|
 
@@ -569,75 +569,182 @@ Example output:
 ### Tasks
 
 
-#### Monitor Incident Events
+#### Monitor Alerts
 
-This task is used to monitor incident events
+This task is used to monitor alerts
 
 ##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|descriptions|[]string|None|False|Descriptions|None|["Behavioral threat detected (rule: heuristic.b.205)"]|None|None|
-|incident_id_list|[]string|None|False|Incident ID list|None|["5"]|None|None|
-|status|string|None|False|Status|["any", "new", "under_investigation", "resolved_threat_handled", "resolved_known_issue", "resolved_false_positive", "resolved_other", "resolved_auto"]|new|None|None|
-|time_sorting_field|string|None|False|Field to use to sort Incident events|["modification_time", "creation_time"]|modification_time|None|None|
   
-Example input:
-
-```
-{
-  "descriptions": [
-    "Behavioral threat detected (rule: heuristic.b.205)"
-  ],
-  "incident_id_list": [
-    "5"
-  ],
-  "status": "new",
-  "time_sorting_field": "modification_time"
-}
-```
+*This task does not contain any inputs.*
 
 ##### Output
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|events|[]incident|False|Incident events|[ { "Alert Count": 0, "Assigned User Mail": "", "Assigned User Pretty Name": {}, "Creation Time": {}, "Description": {}, "Detection Time": {}, "High Severity Alert Count": {}, "Host Count": {}, "Hosts": [ {} ], "Incident ID": {}, "Incident Name": {}, "Incident Sources": {}, "Low Severity Alert Count": {}, "Manual Description": {}, "Manual Score": {}, "Manual Severity": {}, "Med Severity Alert Count": {}, "Modification Time": {}, "Notes": {}, "Resolve Comment": {}, "Rule Based Score": {}, "Severity": {}, "Starred": "true", "Status": {}, "User Count": {}, "Users": {}, "XDR URL": {} } ]|
+|alerts|[]object|False|Alerts|[ { "action": "BLOCKED", "action_country": "UNKNOWN", "action_external_hostname": null, "action_file_macro_sha256": null, "action_file_md5": null, "action_file_name": null, "action_file_path": null, "action_file_sha256": null, "action_local_ip": null, "action_local_ip_v6": null, "action_local_port": null, "action_pretty": "Prevented (Blocked)", "action_process_causality_id": null, "action_process_image_command_line": null, "action_process_image_name": null, "action_process_image_sha256": null, "action_process_instance_id": null, "action_process_signature_status": "N/A", "action_process_signature_vendor": null, "action_registry_data": null, "action_registry_full_key": null, "action_registry_key_name": null, "action_registry_value_name": null, "action_remote_ip": null, "action_remote_ip_v6": null, "action_remote_port": null, "actor_causality_id": null, "actor_process_causality_id": null, "actor_process_command_line": "\"C:\\Users\\Administrator\\Downloads\\filename3.exe\" ", "actor_process_image_md5": null, "actor_process_image_name": "filename3.exe", "actor_process_image_path": "C:\\Users\\Administrator\\Downloads\\filename3.exe", "actor_process_image_sha256": "347874EEE7A8DA0E9277D1F601DA1326480E37D09766142BBD050D536090043F", "actor_process_instance_id": "Adr1YUm6dfgAAAnkAAAAAA==", "actor_process_os_pid": 2532, "actor_process_signature_status": "N/A", "actor_process_signature_vendor": null, "actor_thread_thread_id": null, "agent_data_collection_status": false, "agent_device_domain": "WORKGROUP", "agent_fqdn": "cortex-xdr-w12.WORKGROUP", "agent_host_boot_time": null, "agent_install_type": "STANDARD", "agent_ip_addresses_v6": null, "agent_is_vdi": false, "agent_os_sub_type": "6.2.9200", "agent_os_type": "Windows", "agent_version": "7.5.0.36150", "alert_id": "18", "alert_type": "Unclassified", "association_strength": 50, "attempt_counter": 0, "bioc_category_enum_key": null, "bioc_indicator": null, "case_id": 8, "category": "Malware", "causality_actor_causality_id": null, "causality_actor_process_command_line": null, "causality_actor_process_execution_time": null, "causality_actor_process_image_md5": null, "causality_actor_process_image_name": null, "causality_actor_process_image_path": null, "causality_actor_process_image_sha256": null, "causality_actor_process_signature_status": "N/A", "causality_actor_process_signature_vendor": null, "cloud_provider": null, "cluster_name": null, "container_id": null, "container_name": null, "contains_featured_host": "NO", "contains_featured_ip": "NO", "contains_featured_user": "NO", "deduplicate_tokens": "72515d0bdf934b9e82338cd1f32d6413", "description": "Suspicious executable detected", "detection_timestamp": 1724420114000, "dns_query_name": null, "dst_action_country": null, "dst_action_external_hostname": null, "dst_action_external_port": null, "dst_agent_id": null, "dst_association_strength": null, "dst_causality_actor_process_execution_time": null, "dynamic_fields": null, "end_match_attempt_ts": null, "endpoint_id": "13629dd5c7284859a2954c19c275285f", "event_id": null, "event_sub_type": null, "event_timestamp": 1724420114000, "event_type": "Process Execution", "events_length": 1, "external_id": "82ad0920baaf4a4fbc08990958217808", "filter_rule_id": null, "fw_app_category": null, "fw_app_id": null, "fw_app_subcategory": null, "fw_app_technology": null, "fw_device_name": null, "fw_email_recipient": null, "fw_email_sender": null, "fw_email_subject": null, "fw_interface_from": null, "fw_interface_to": null, "fw_is_phishing": "N/A", "fw_misc": null, "fw_rule": null, "fw_rule_id": null, "fw_serial_number": null, "fw_url_domain": null, "fw_vsys": null, "fw_xff": null, "host_ip": "10.4.92.53", "host_name": "cortex-xdr-w12", "identity_sub_type": null, "identity_type": null, "image_id": null, "image_name": null, "is_pcap": false, "is_whitelisted": false, "last_modified_ts": null, "local_insert_ts": 1724420117968, "mac": "00:50:56:94:42:04", "malicious_urls": null, "matching_service_rule_id": null, "matching_status": "UNMATCHABLE", "mitre_tactic_id_and_name": null, "mitre_technique_id_and_name": null, "module_id": "Local Analysis", "name": "Local Analysis Malware", "namespace": null, "operation_name": null, "original_tags": "DS:PANW/XDR Agent", "os_actor_causality_id": null, "os_actor_effective_username": null, "os_actor_process_causality_id": null, "os_actor_process_command_line": null, "os_actor_process_image_name": null, "os_actor_process_image_path": null, "os_actor_process_image_sha256": null, "os_actor_process_instance_id": null, "os_actor_process_os_pid": null, "os_actor_process_signature_status": "N/A", "os_actor_process_signature_vendor": null, "os_actor_thread_thread_id": null, "project": null, "referenced_resource": null, "resolution_comment": null, "resolution_status": "STATUS_010_NEW", "resource_sub_type": null, "resource_type": null, "severity": "medium", "source": "XDR Agent", "starred": false, "story_id": null, "tags": "DS:PANW/XDR Agent", "user_agent": null, "user_name": "Administrator" }]|
   
 Example output:
 
 ```
 {
-  "events": [
+  "alerts": [
     {
-      "Alert Count": 0,
-      "Assigned User Mail": "",
-      "Assigned User Pretty Name": {},
-      "Creation Time": {},
-      "Description": {},
-      "Detection Time": {},
-      "High Severity Alert Count": {},
-      "Host Count": {},
-      "Hosts": [
-        {}
-      ],
-      "Incident ID": {},
-      "Incident Name": {},
-      "Incident Sources": {},
-      "Low Severity Alert Count": {},
-      "Manual Description": {},
-      "Manual Score": {},
-      "Manual Severity": {},
-      "Med Severity Alert Count": {},
-      "Modification Time": {},
-      "Notes": {},
-      "Resolve Comment": {},
-      "Rule Based Score": {},
-      "Severity": {},
-      "Starred": "true",
-      "Status": {},
-      "User Count": {},
-      "Users": {},
-      "XDR URL": {}
+      "action": "BLOCKED",
+      "action_country": "UNKNOWN",
+      "action_external_hostname": null,
+      "action_file_macro_sha256": null,
+      "action_file_md5": null,
+      "action_file_name": null,
+      "action_file_path": null,
+      "action_file_sha256": null,
+      "action_local_ip": null,
+      "action_local_ip_v6": null,
+      "action_local_port": null,
+      "action_pretty": "Prevented (Blocked)",
+      "action_process_causality_id": null,
+      "action_process_image_command_line": null,
+      "action_process_image_name": null,
+      "action_process_image_sha256": null,
+      "action_process_instance_id": null,
+      "action_process_signature_status": "N/A",
+      "action_process_signature_vendor": null,
+      "action_registry_data": null,
+      "action_registry_full_key": null,
+      "action_registry_key_name": null,
+      "action_registry_value_name": null,
+      "action_remote_ip": null,
+      "action_remote_ip_v6": null,
+      "action_remote_port": null,
+      "actor_causality_id": null,
+      "actor_process_causality_id": null,
+      "actor_process_command_line": "\"C:\\Users\\Administrator\\Downloads\\filename3.exe\" ",
+      "actor_process_image_md5": null,
+      "actor_process_image_name": "filename3.exe",
+      "actor_process_image_path": "C:\\Users\\Administrator\\Downloads\\filename3.exe",
+      "actor_process_image_sha256": "347874EEE7A8DA0E9277D1F601DA1326480E37D09766142BBD050D536090043F",
+      "actor_process_instance_id": "Adr1YUm6dfgAAAnkAAAAAA==",
+      "actor_process_os_pid": 2532,
+      "actor_process_signature_status": "N/A",
+      "actor_process_signature_vendor": null,
+      "actor_thread_thread_id": null,
+      "agent_data_collection_status": false,
+      "agent_device_domain": "WORKGROUP",
+      "agent_fqdn": "cortex-xdr-w12.WORKGROUP",
+      "agent_host_boot_time": null,
+      "agent_install_type": "STANDARD",
+      "agent_ip_addresses_v6": null,
+      "agent_is_vdi": false,
+      "agent_os_sub_type": "6.2.9200",
+      "agent_os_type": "Windows",
+      "agent_version": "7.5.0.36150",
+      "alert_id": "18",
+      "alert_type": "Unclassified",
+      "association_strength": 50,
+      "attempt_counter": 0,
+      "bioc_category_enum_key": null,
+      "bioc_indicator": null,
+      "case_id": 8,
+      "category": "Malware",
+      "causality_actor_causality_id": null,
+      "causality_actor_process_command_line": null,
+      "causality_actor_process_execution_time": null,
+      "causality_actor_process_image_md5": null,
+      "causality_actor_process_image_name": null,
+      "causality_actor_process_image_path": null,
+      "causality_actor_process_image_sha256": null,
+      "causality_actor_process_signature_status": "N/A",
+      "causality_actor_process_signature_vendor": null,
+      "cloud_provider": null,
+      "cluster_name": null,
+      "container_id": null,
+      "container_name": null,
+      "contains_featured_host": "NO",
+      "contains_featured_ip": "NO",
+      "contains_featured_user": "NO",
+      "deduplicate_tokens": "72515d0bdf934b9e82338cd1f32d6413",
+      "description": "Suspicious executable detected",
+      "detection_timestamp": 1724420114000,
+      "dns_query_name": null,
+      "dst_action_country": null,
+      "dst_action_external_hostname": null,
+      "dst_action_external_port": null,
+      "dst_agent_id": null,
+      "dst_association_strength": null,
+      "dst_causality_actor_process_execution_time": null,
+      "dynamic_fields": null,
+      "end_match_attempt_ts": null,
+      "endpoint_id": "13629dd5c7284859a2954c19c275285f",
+      "event_id": null,
+      "event_sub_type": null,
+      "event_timestamp": 1724420114000,
+      "event_type": "Process Execution",
+      "events_length": 1,
+      "external_id": "82ad0920baaf4a4fbc08990958217808",
+      "filter_rule_id": null,
+      "fw_app_category": null,
+      "fw_app_id": null,
+      "fw_app_subcategory": null,
+      "fw_app_technology": null,
+      "fw_device_name": null,
+      "fw_email_recipient": null,
+      "fw_email_sender": null,
+      "fw_email_subject": null,
+      "fw_interface_from": null,
+      "fw_interface_to": null,
+      "fw_is_phishing": "N/A",
+      "fw_misc": null,
+      "fw_rule": null,
+      "fw_rule_id": null,
+      "fw_serial_number": null,
+      "fw_url_domain": null,
+      "fw_vsys": null,
+      "fw_xff": null,
+      "host_ip": "10.4.92.53",
+      "host_name": "cortex-xdr-w12",
+      "identity_sub_type": null,
+      "identity_type": null,
+      "image_id": null,
+      "image_name": null,
+      "is_pcap": false,
+      "is_whitelisted": false,
+      "last_modified_ts": null,
+      "local_insert_ts": 1724420117968,
+      "mac": "00:50:56:94:42:04",
+      "malicious_urls": null,
+      "matching_service_rule_id": null,
+      "matching_status": "UNMATCHABLE",
+      "mitre_tactic_id_and_name": null,
+      "mitre_technique_id_and_name": null,
+      "module_id": "Local Analysis",
+      "name": "Local Analysis Malware",
+      "namespace": null,
+      "operation_name": null,
+      "original_tags": "DS:PANW/XDR Agent",
+      "os_actor_causality_id": null,
+      "os_actor_effective_username": null,
+      "os_actor_process_causality_id": null,
+      "os_actor_process_command_line": null,
+      "os_actor_process_image_name": null,
+      "os_actor_process_image_path": null,
+      "os_actor_process_image_sha256": null,
+      "os_actor_process_instance_id": null,
+      "os_actor_process_os_pid": null,
+      "os_actor_process_signature_status": "N/A",
+      "os_actor_process_signature_vendor": null,
+      "os_actor_thread_thread_id": null,
+      "project": null,
+      "referenced_resource": null,
+      "resolution_comment": null,
+      "resolution_status": "STATUS_010_NEW",
+      "resource_sub_type": null,
+      "resource_type": null,
+      "severity": "medium",
+      "source": "XDR Agent",
+      "starred": false,
+      "story_id": null,
+      "tags": "DS:PANW/XDR Agent",
+      "user_agent": null,
+      "user_name": "Administrator"
     }
   ]
 }
@@ -820,7 +927,7 @@ Isolate Endpoint fails with 500 error - This will happen if an isolation action 
 
 # Version History
 
-* 4.0.0 - `Get Alerts`: Fixed issue where trigger was failing due to empty output fields | SDK Bump to 6.1.0
+* 4.0.0 - `Get Alerts`: Fixed issue where trigger was failing due to empty output fields | Added Monitor_alert tasks | SDK Bump to 6.1.2
 * 3.0.0 - Updated `hosts` output of `Get Incident` trigger and `Monitor Incident Events` task to separate host values | Update `insightconnect-plugin-runtime` to version 5
 * 2.3.0 - Add types `xql_query_result` to `Get XQL Query Results` action's response | Add new trigger `Get Query Results`
 * 2.2.1 - Fix issue in Get Incidents trigger where fields with null values were causing trigger to fail
