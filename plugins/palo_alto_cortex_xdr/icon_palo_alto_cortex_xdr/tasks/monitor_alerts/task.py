@@ -254,7 +254,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             }
         }
 
-        self.logger.info(f"Post Body: {post_body}")
+        self.logger.debug(f"Post Body: {post_body}")
 
         return post_body
 

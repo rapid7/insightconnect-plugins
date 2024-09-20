@@ -457,7 +457,3 @@ class CortexXdrAPI:
             results_count = 0
 
         return results, results_count, total_count
-
-
-class AuthenticationError(Exception):
-    pass
