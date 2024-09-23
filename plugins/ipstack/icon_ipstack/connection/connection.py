@@ -19,6 +19,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         # Sending a request using the secretKey to test if it is valid
         url = "http://api.ipstack.com/" + "rapid7.com" + "?access_key=" + self.token + "&output=json"
 
+        #These contain custom status codes (101, 102, 104, 106) returned from IPStack, as seen in the lookup action.py
         invalid_status_codes = ["404", "101", "102", "104", "106"]
 
         resp = insightconnect_plugin_runtime.helper.open_url(url)
