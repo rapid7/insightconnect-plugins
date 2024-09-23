@@ -213,6 +213,10 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 self.logger.info(f"Saved time {saved_time_str} exceeds cut off, moving to {comparison_str}.")
                 state[LAST_ALERT_TIME] = comparison_unix
 
+                # Reset the offsets when changing search timer
+                state[LAST_SEARCH_FROM] = 0
+                state[LAST_SEARCH_TO] = custom_config.get("alert_limit", ALERT_LIMIT)
+
         start_time = state.get(LAST_ALERT_TIME)
         state[QUERY_START_TIME] = state.get(LAST_ALERT_TIME)
 
