@@ -217,6 +217,9 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 state[LAST_SEARCH_FROM] = 0
                 state[LAST_SEARCH_TO] = custom_config.get("alert_limit", ALERT_LIMIT)
 
+                # Reset the end time / default to now
+                state[QUERY_END_TIME] = dt_now
+
         start_time = state.get(LAST_ALERT_TIME)
         state[QUERY_START_TIME] = state.get(LAST_ALERT_TIME)
 
