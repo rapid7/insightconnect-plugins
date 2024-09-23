@@ -15,6 +15,6 @@ ADD . /python/src
 RUN python setup.py build && python setup.py install
 
 # User to run plugin code. The two supported users are: root, nobody
-USER nobody
+USER root
 
 ENTRYPOINT ["/usr/local/bin/komand_get_url"]
