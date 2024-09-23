@@ -3,11 +3,15 @@ extension: plugin
 products: [insightconnect]
 name: get_url
 title: Get URL
-description: Get URL plugin downloads files by URL using HTTP, HTTPS, or FTP
-version: 2.0.1
+description: "The Get URL plugin allows you to download files from a URL. Supported protocols are HTTP, HTTPS, and FTP. This plugin's cache is enabled across workflows to store previously downloaded files to reduce future web requests. To reduce the number of subsequent requests the Etag and If-Modified-Since fields are also checked"
+version: 2.1.0
 supported_versions: ["_There are no supported product versions listed._"]
 vendor: rapid7
 support: community
+sdk:
+  type: slim
+  version: 6.1.2
+  user: nobody
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/get_url
@@ -22,11 +26,24 @@ hub_tags:
   use_cases: [data_utility]
   keywords: [url, files, document, http]
   features: []
+key_features:
+  - Get the contents of a web page
+  - Check a web page for changes
+links:
+  - "[Get URL](https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/get_url)"
+version_history:
+  - "2.1.0 - Fix issue with getting the same URL multiple times | Refresh with latest SDK (6.1.2)"
+  - "2.0.1 - Fix file decoding error after file download | Update SDK to version 4 | Update unit tests after changing SDK version"
+  - "2.0.0 - Use input and output constants | Add example inputs | Changed `Exception` to `PluginException` | Added 'f' strings | Move test from actions to connection | Change in return `file` key to `bytes` | Add new input User Agent to Get File action and Poll URL trigger"
+  - "1.0.1 - New spec and help.md format for the Extension Library"
+  - "1.0.0 - Support web server mode"
+  - "0.1.1 - SSL bug fix in SDK"
+  - "0.1.0 - Initial plugin"
 enable_cache: true
 triggers:
   poll_file:
     title: Poll URL
-    description: Download modified file by URL
+    description: Monitor the contents of a URL for changes. The contents are returned when a change has been detected
     input:
       url:
         title: URL
@@ -61,15 +78,17 @@ triggers:
         type: bytes
         required: false
         description: Bytes
+        example: "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
       status_code:
         title: Status Codes
         type: integer
         required: false
         description: Status code
+        example: 200
 actions:
   get_file:
     title: Get URL
-    description: Download a file by URL
+    description: Download the contents of a URL
     input:
       url:
         title: URL
@@ -110,8 +129,10 @@ actions:
         type: bytes
         required: false
         description: Bytes
+        example: "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
       status_code:
         title: Status Codes
         type: integer
         required: false
         description: Status code
+        example: 200
