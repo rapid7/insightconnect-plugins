@@ -17,7 +17,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def test(self):
         # Sending a request using the secretKey to test if it is valid
-        url = f"http://api.ipstack.com/" + "example.com" + "?access_key=" + self.token + "&output=json"
+        url = f"http://api.ipstack.com/example.com?access_key={self.token}&output=json"
 
         try:
             response = insightconnect_plugin_runtime.helper.open_url(url)
