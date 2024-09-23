@@ -13,22 +13,24 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.token = None
 
     def connect(self, params):
-        self.token = params.get(Input.CRED_TOKEN).get("secretKey")
+        self.token = params.get(Input.CRED_TOKEN, {}).get("secretKey", "").strip()
 
     def test(self):
         # Sending a request using the secretKey to test if it is valid
-        url = "http://api.ipstack.com/" + "rapid7.com" + "?access_key=" + self.token + "&output=json"
+        url = f"http://api.ipstack.com/" + "example.com" + "?access_key=" + self.token + "&output=json"
 
-        # These contain custom status codes (101, 102, 104, 106) returned from IPStack, as seen in the lookup action.py
-        invalid_status_codes = ["404", "101", "102", "104", "106"]
+        try:
+            response = insightconnect_plugin_runtime.helper.open_url(url)
+            parsed_response = json.loads(response.read())
+        except Exception:
+            raise PluginException(PluginException.Preset.SERVER_ERROR)
 
-        resp = insightconnect_plugin_runtime.helper.open_url(url)
-        dic = json.loads(resp.read())
-        if any(invalid_status_codes) in dic or "error" in dic:
-            raise PluginException(
-                data=dic,
-                assistance="Please check your credentials and try again. If the issue persists, please contact support.",
-                cause="An error has occurred. Please check your credentials are correct and that you have not exceeded the lookup limits.",
-            )
-        else:
+        # All requests are returned as a 200 from IPStack. To find out if successful or not, we need to look in the parsed response to find if any error messages are returned or not
+        success = parsed_response.get("success", True)
+        if success:
             return {"success": True}
+        raise PluginException(
+            data=parsed_response,
+            assistance="Please check your credentials and try again. If the issue persists, please contact support.",
+            cause="An error has occurred. Please check your credentials are correct and that you have not exceeded the lookup limits.",
+        )
