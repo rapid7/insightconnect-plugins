@@ -215,7 +215,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
                 # Reset the offsets when changing search timer
                 state[LAST_SEARCH_FROM] = 0
-                state[LAST_SEARCH_TO] = custom_config.get("alert_limit", ALERT_LIMIT)
+                state = state.pop(LAST_SEARCH_TO)
 
                 # Reset the end time / default to now
                 state[QUERY_END_TIME] = now
