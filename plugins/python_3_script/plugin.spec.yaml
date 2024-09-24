@@ -13,7 +13,7 @@ supported_versions: ["Python 3.9.19"]
 fedramp_ready: true
 sdk:
   type: slim
-  version: 6.1.1
+  version: 6.1.2
   user: root
   packages:
     - libxslt-dev
