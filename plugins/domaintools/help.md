@@ -1,7 +1,6 @@
 # Description
 
-[DomainTools](https://www.domaintools.com) data and products work in harmony to enable security teams to start getting ahead of attacks, gain context and visibility into potential threats, and lower the skills barrier. The DomainTools plugin for InsightConnect allows for the automation of domain lookups and retrieval of threat information related to the domain.
-This plugin utilizes the [DomainTools Python API](https://github.com/domaintools/python_api).
+DomainTools (https://www.domaintools.com) data and products work in harmony to enable security teams to start getting ahead of attacks, gain context and visibility into potential threats, and lower the skills barrier. The DomainTools plugin for InsightConnect allows for the automation of domain lookups and retrieval of threat information related to the domain. This plugin utilizes the [DomainTools Python API](https://github.com/domaintools/python_api)
 
 # Key Features
 
@@ -1131,6 +1130,7 @@ There is no troubleshooting for this Plugin
 
 # Version History
 
+* 2.0.3 - Bumping 'anyio' and 'zipp' | SDK Bump to 6.1.2
 * 2.0.2 - Updated SDK and packages to the latest version
 * 2.0.1 - 'SDK' Bump | adding 'anyio' into requirements and bumping 'DomainTools' to '2.0.0'
 * 2.0.0 - Update `DomainTools` to `1.0.1` | Update to latest SDK version | Fix import issues on all actions | Change `Days Back` input of `Name Server Monitor` to type `int` | Remove `Query` input from `Reverse IP WHOIS` | Add `Server` to `WHOIS History` output `Response` | Add `Reasons` to `Reputation` output `Response` | Change `Meta` to type `List` for `Domain Profile` output `Response`
