@@ -1,9 +1,7 @@
 import os
 import sys
 
-from unit_test.util import Util
-
-sys.path.append(os.path.abspath("../"))
+from util import Util
 
 from unittest import TestCase
 from komand_get_url.actions.get_file import GetFile
