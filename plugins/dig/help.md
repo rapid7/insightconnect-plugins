@@ -13,7 +13,7 @@ The DNS plugin is used for forward and reverse DNS lookups. This plugin uses [Di
 
 # Supported Product Versions
 
-* 2023-10-12
+* 2024-09-10
 
 # Documentation
 
@@ -32,11 +32,11 @@ This action is used to request a forward lookup for a domain
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|domain|string|None|True|Domain name to resolve|None|rapid7.com|
-|query|string|None|True|Query type e.g. ANY, A, MX, NS, etc|["A", "AAAA", "ANY", "CNAME", "MX", "NS", "PTR", "SOA"]|MX|
-|resolver|string|None|False|Resolver. Leave blank to use default resolver for the system|None|8.8.8.8|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|domain|string|None|True|Domain name to resolve|None|rapid7.com|None|None|
+|query|string|None|True|Query type e.g. ANY, A, MX, NS, etc|["A", "AAAA", "ANY", "CNAME", "MX", "NS", "PTR", "SOA"]|MX|None|None|
+|resolver|string|None|False|Resolver. Leave blank to use default resolver for the system|None|8.8.8.8|None|None|
   
 Example input:
 
@@ -96,10 +96,10 @@ This action is used to request a reverse lookup for an IP address
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|address|string|None|True|Internet address to resolve|None|1.2.3.4|
-|resolver|string|None|False|Resolver. Leave blank to use default resolver for the system|None|8.8.8.8|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|address|string|None|True|Internet address to resolve|None|1.2.3.4|None|None|
+|resolver|string|None|False|Resolver. Leave blank to use default resolver for the system|None|8.8.8.8|None|None|
   
 Example input:
 
@@ -183,8 +183,10 @@ Common examples:
 * `status = "NOERRROR"` - The DNS response contains an answer
 * `status = "NXDOMAIN"` - The DNS response did not have an answer i.e. Non-Existent Domain
 
+
 # Version History
 
+* 2.0.3 - Initial updates for fedramp compliance | Updated SDK to the latest
 * 2.0.2 - Updated SDK to the latest version | Added validation for input parameters
 * 2.0.1 - Added `__init__.py` file to `unit_test` folder | Refreshed with new Tooling
 * 2.0.0 - Rename Dig plugin to DNS
