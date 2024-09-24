@@ -24,8 +24,8 @@ hub_tags:
   keywords: [firewall, cisco, firesight, firepower]
   features: []
 key_features:
-- Create block URL policy
-- Address object management to block and unblock hosts, and check if a host is already blocked
+  - Create block URL policy
+  - Address object management to block and unblock hosts, and check if a host is already blocked
 requirements:
 - "Cisco Firepower Management Center server name"
 - "Cisco Firepower Management Center username and password"
