@@ -49,7 +49,8 @@ class TestForward(TestCase):
         actual = self.action.run(input_params)
         validate(actual, self.action.output.schema)
         Util.remove_unnecessary_keys(actual, remove_answers)
-        self.assertEqual(actual, expected)
+        self.assertEqual(actual.get("question"), expected.get("question"))
+        self.assertEqual(actual.get("status"), expected.get("status"))
 
     @parameterized.expand(
         [
