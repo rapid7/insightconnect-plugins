@@ -440,7 +440,8 @@ class CortexXdrAPI:
         :param post_body: Object containing the post body (filters etc) to send in the requests
 
         """
-        headers = self.get_headers()
+
+        headers = self._advanced_authentication(self.api_key_id, self.api_key)
         fqdn = self.get_url()
         endpoint = "public_api/v1/alerts/get_alerts"
 
