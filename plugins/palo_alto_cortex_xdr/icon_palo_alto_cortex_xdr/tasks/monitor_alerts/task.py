@@ -71,14 +71,20 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 f"A PluginException has occurred. Status code {status_code} returned. Error: {error}. "
                 f"Existing state: {existing_state}"
             )
-            return [], existing_state, False, status_code, error
+            return [], existing_state, False, status_code, PluginException(data=error)
 
         except Exception as error:
             self.logger.error(
                 f"Unknown exception has occurred. No results returned. Error: {error} "
                 f"Existing state: {existing_state}"
             )
-            return [], existing_state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+            return (
+                [],
+                existing_state,
+                False,
+                500,
+                PluginException(preset=PluginException.Preset.UNKNOWN, data=error.data),
+            )
 
     ###########################
     # Make request
