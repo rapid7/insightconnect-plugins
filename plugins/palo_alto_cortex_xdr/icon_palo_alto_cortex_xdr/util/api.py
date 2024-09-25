@@ -11,8 +11,14 @@ import urllib
 from re import match
 from datetime import datetime, timezone
 from icon_palo_alto_cortex_xdr.util.util import Util
-from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException, ResponseExceptionData
+from insightconnect_plugin_runtime.exceptions import (
+    PluginException,
+    ConnectionTestException,
+    ResponseExceptionData,
+    HTTPStatusCodes,
+)
 from insightconnect_plugin_runtime.helper import extract_json, make_request
+from requests import Response
 
 
 class CortexXdrAPI:
@@ -434,16 +440,19 @@ class CortexXdrAPI:
         :param post_body: Object containing the post body (filters etc) to send in the requests
 
         """
+
         headers = self.get_headers()
         fqdn = self.get_url()
         endpoint = "public_api/v1/alerts/get_alerts"
 
         url = f"{fqdn}{endpoint}"
 
-        request = requests.Request(method="post", url=url, headers=headers, json=post_body)
-        response = make_request(_request=request, timeout=60, exception_data_location=ResponseExceptionData.RESPONSE)
+        response = self.build_request(url=url, headers=headers, post_body=post_body)
+
+        response = self._handle_401(response=response, url=url, post_body=post_body)
 
         response = extract_json(response)
+
         total_count = response.get("reply", {}).get("total_count")
         results_count = response.get("reply", {}).get("result_count")
         results = response.get("reply", {}).get("alerts", [])
@@ -457,3 +466,36 @@ class CortexXdrAPI:
             results_count = 0
 
         return results, results_count, total_count
+
+    def _handle_401(self, response: Response, url: str, post_body: dict):
+        """
+        In the event of 401 after 15 minutes when creds expire,
+        re-run the creds generation
+        """
+
+        if response.status_code == 401:
+            self.logger.info(f"Received HTTP {response.status_code}, re-authenticating to Palo Alto Cortex XDR")
+
+            new_headers = self._advanced_authentication(api_key=self.api_key, api_key_id=self.api_key_id)
+            new_response = self.build_request(url=url, headers=new_headers, post_body=post_body)
+
+            return new_response
+
+        else:
+            return response
+
+    def build_request(self, url: str, headers: dict, post_body: dict):
+        """
+        Helper method to build the request and return response object
+        """
+
+        request = requests.Request(method="post", url=url, headers=headers, json=post_body)
+
+        response = make_request(
+            _request=request,
+            timeout=60,
+            exception_data_location=ResponseExceptionData.RESPONSE,
+            allowed_status_codes=[HTTPStatusCodes.UNAUTHORIZED],
+        )
+
+        return response

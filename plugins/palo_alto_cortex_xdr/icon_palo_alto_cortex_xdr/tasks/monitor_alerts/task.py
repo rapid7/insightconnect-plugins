@@ -78,12 +78,13 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 f"Unknown exception has occurred. No results returned. Error: {error} "
                 f"Existing state: {existing_state}"
             )
+
             return (
                 [],
                 existing_state,
                 False,
                 500,
-                PluginException(preset=PluginException.Preset.UNKNOWN, data=error.data),
+                PluginException(preset=PluginException.Preset.UNKNOWN, data=error),
             )
 
     ###########################
