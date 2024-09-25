@@ -449,7 +449,7 @@ class CortexXdrAPI:
 
         response = self.build_request(url=url, headers=headers, post_body=post_body)
 
-        self._handle_401(response=response, url=url, post_body=post_body)
+        response = self._handle_401(response=response, url=url, post_body=post_body)
 
         response = extract_json(response)
 
@@ -473,15 +473,21 @@ class CortexXdrAPI:
         re-run the creds generation
         """
 
-        print(f"Refresh creds hit")
         if response.status_code == 401:
             self.logger.info(f"Received HTTP {response.status_code}, re-authenticating to Palo Alto Cortex XDR")
-            response = self.build_request(url=url, headers=self.get_headers(), post_body=post_body)
-            print("new response hit")
+
+            new_headers = self._advanced_authentication(api_key=self.api_key, api_key_id=self.api_key_id)
+            response = self.build_request(url=url, headers=new_headers, post_body=post_body)
+
+            return response
+
+        else:
             return response
 
     def build_request(self, url: str, headers: dict, post_body: dict):
-        """ """
+        """
+        Helper method to build the request and return response object
+        """
 
         request = requests.Request(method="post", url=url, headers=headers, json=post_body)
 
@@ -489,7 +495,7 @@ class CortexXdrAPI:
             _request=request,
             timeout=60,
             exception_data_location=ResponseExceptionData.RESPONSE,
-            allowed_status_codes=HTTPStatusCodes.UNAUTHORIZED,
+            allowed_status_codes=[HTTPStatusCodes.UNAUTHORIZED],
         )
 
         return response
