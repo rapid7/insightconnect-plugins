@@ -71,7 +71,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 f"A PluginException has occurred. Status code {status_code} returned. Error: {error}. "
                 f"Existing state: {existing_state}"
             )
-            return [], existing_state, False, status_code, error.data
+            return [], existing_state, False, status_code, PluginException(data=error)
 
         except Exception as error:
             self.logger.error(
