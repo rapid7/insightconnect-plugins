@@ -15,26 +15,26 @@ In this example, adding an address object to a group attached to a deny-all rule
 * Cisco Firepower Management Center username and password
 
 # Supported Product Versions
-  
+
 * 6.6.0
 
 # Documentation
 
 ## Setup
-  
+
 The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|certificate|bytes|None|True|Base64-encoded certificate in PKCS12 format to authenticate with the host input API|None|VGhpcyBpcyBhIHNhbXBsZSBiYXNlNjQtZW5jb2RlZCBjZXJ0aWZpY2F0ZSB0byBhdXRoZW50aWNhdGUgd2l0aCB0aGUgaG9zdCBpbnB1dCBBUEku|
-|certificate_passphrase|credential_secret_key|None|True|The passphrase to access the certificate|None|passphrase|
-|domain|string|Global|False|Cisco FirePower Management Center Domain|None|Global|
-|host_input_port|integer|8307|False|The port number for the provided host used in the Host Input API calls|None|8307|
-|port|integer|443|False|The port number for provided host|None|443|
-|server|string|None|False|Enter the address for the server|None|www.example.com|
-|ssl_verify|boolean|True|False|Validate TLS / SSL certificate|None|True|
-|username_and_password|credential_username_password|None|True|Cisco username and password|None|{"username":"user1", "password":"mypassword"}|
-  
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|certificate|bytes|None|True|Base64-encoded certificate in PKCS12 format to authenticate with the host input API|None|VGhpcyBpcyBhIHNhbXBsZSBiYXNlNjQtZW5jb2RlZCBjZXJ0aWZpY2F0ZSB0byBhdXRoZW50aWNhdGUgd2l0aCB0aGUgaG9zdCBpbnB1dCBBUEku|None|None|
+|certificate_passphrase|credential_secret_key|None|True|The passphrase to access the certificate|None|passphrase|None|None|
+|domain|string|Global|False|Cisco FirePower Management Center Domain|None|Global|None|None|
+|host_input_port|integer|8307|False|The port number for the provided host used in the Host Input API calls|None|8307|None|None|
+|port|integer|443|False|The port number for provided host|None|443|None|None|
+|server|string|None|False|Enter the address for the server|None|www.example.com|None|None|
+|ssl_verify|boolean|True|False|Validate TLS / SSL certificate|None|True|None|None|
+|username_and_password|credential_username_password|None|True|Cisco username and password|None|{"username":"user1", "password":"mypassword"}|None|None|
+
 Example input:
 
 ```
@@ -59,15 +59,15 @@ Example input:
 
 
 #### Add Address to Group
-  
+
 This action is used to adds an existing address object to a group
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|address|string|None|True|Name of address object|None|MaliciousHost|
-|group|string|None|True|Name of address group to add the address to|None|MaliciousAddressGroup|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|address|string|None|True|Name of address object|None|MaliciousHost|None|None|
+|group|string|None|True|Name of address group to add the address to|None|MaliciousAddressGroup|None|None|
   
 Example input:
 
@@ -129,15 +129,15 @@ Example output:
 ```
 
 #### Add Scan Result
-  
+
 This action is used to add a scan result from a third-party vulnerability scanner
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|operation|string|None|True|The operation to be performed when adding scan results. ScanFlush to remove existing scan results or ScanUpdate to keep existing scan results|["ScanUpdate", "ScanFlush"]|ScanUpdate|
-|scan_result|scan_result|None|False|The host scan result to be added|None|{"host": {"ip_address": "0.0.0.164", "operating_system": {"name": "Ubuntu", "vendor": "Canonical", "version": "16.04"}}, "scan_result_details": {"description": "Example description", "protocol_id": "6", "scanner_id": "ProductZImport", "source_id": "ProductZ", "vulnerability_id": "943387", "vulnerability_title": "Virus Wire 0"}}|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|operation|string|None|True|The operation to be performed when adding scan results. ScanFlush to remove existing scan results or ScanUpdate to keep existing scan results|["ScanUpdate", "ScanFlush"]|ScanUpdate|None|None|
+|scan_result|scan_result|None|False|The host scan result to be added|None|{"host": {"ip_address": "0.0.0.164", "operating_system": {"name": "Ubuntu", "vendor": "Canonical", "version": "16.04"}}, "scan_result_details": {"description": "Example description", "protocol_id": "6", "scanner_id": "ProductZImport", "source_id": "ProductZ", "vulnerability_id": "943387", "vulnerability_title": "Virus Wire 0"}}|None|None|
   
 Example input:
 
@@ -182,16 +182,16 @@ Example output:
 ```
 
 #### Block URL Policy
-  
+
 This action is used to create a new block URL policy
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|access_policy|string|None|True|Name for the access policy to be created|None|Example Access Policy|
-|rule_name|string|None|True|Name for the access rule to be created|None|Example Access Rule|
-|url_objects|[]url_object|None|True|URL objects to block|None|[{'name': 'example_url', 'url': 'https://example.com'}]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|access_policy|string|None|True|Name for the access policy to be created|None|Example Access Policy|None|None|
+|rule_name|string|None|True|Name for the access rule to be created|None|Example Access Rule|None|None|
+|url_objects|[]url_object|None|True|URL objects to block|None|[{'name': 'example_url', 'url': 'https://example.com'}]|None|None|
   
 Example input:
 
@@ -218,15 +218,15 @@ Example output:
 ```
 
 #### Bulk Add Scan Result
-  
+
 This action is used to add scan results from a third-party vulnerability scanner
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|operation|string|None|True|The operation to be performed when adding scan results. ScanFlush to remove existing scan results or ScanUpdate to keep existing scan results|["ScanUpdate", "ScanFlush"]|ScanUpdate|
-|scan_results|[]scan_result|None|False|Host scan results to be added|None|[{"host": {"ip_address": "0.0.0.164", "operating_system": {"name": "Ubuntu", "vendor": "Canonical", "version": "16.04"}}, "scan_result_details": {"description": "Example description", "protocol_id": "6", "scanner_id": "ProductZImport", "source_id": "ProductZ", "vulnerability_id": "943387", "vulnerability_title": "Virus Wire 0"}}]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|operation|string|None|True|The operation to be performed when adding scan results. ScanFlush to remove existing scan results or ScanUpdate to keep existing scan results|["ScanUpdate", "ScanFlush"]|ScanUpdate|None|None|
+|scan_results|[]scan_result|None|False|Host scan results to be added|None|[{"host": {"ip_address": "0.0.0.164", "operating_system": {"name": "Ubuntu", "vendor": "Canonical", "version": "16.04"}}, "scan_result_details": {"description": "Example description", "protocol_id": "6", "scanner_id": "ProductZImport", "source_id": "ProductZ", "vulnerability_id": "943387", "vulnerability_title": "Virus Wire 0"}}]|None|None|
   
 Example input:
 
@@ -273,16 +273,16 @@ Example output:
 ```
 
 #### Check if Address in Group
-  
+
 This action is used to checks if provided Address Object name or host exists in the Address Group
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|address|string|None|True|Address Object name, or IP, CIDR, or domain name when Enable Search is on|None|MaliciousHost|
-|enable_search|boolean|False|False|When enabled, the Address input will accept an IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don't know the Address Object by its name|None|False|
-|group|string|None|True|Name of address group to check|None|MaliciousAddressGroup|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|address|string|None|True|Address Object name, or IP, CIDR, or domain name when Enable Search is on|None|MaliciousHost|None|None|
+|enable_search|boolean|False|False|When enabled, the Address input will accept an IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don't know the Address Object by its name|None|False|None|None|
+|group|string|None|True|Name of address group to check|None|MaliciousAddressGroup|None|None|
   
 Example input:
 
@@ -342,17 +342,17 @@ Example output:
 ```
 
 #### Create Address Object
-  
+
 This action is used to creates a new address object
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|address|string|None|True|IP address, CIDR IP address, or domain name to assign to the Address Object|None|example.com|
-|address_object|string|None|False|Name of the address object, defaults to the value address in the address field if no name is given|None|MaliciousHost|
-|skip_private_address|boolean|None|True|If set to true, any addresses that are defined in the RFC1918 space will not be blocked. e.g. 10/8, 172.16/12, 192.168/16|None|True|
-|whitelist|[]string|None|False|This list contains a set of hosts that should not be blocked. This can include IP addresses, CIDR IP addresses, and domains|None|["198.51.100.100", "192.0.2.0/24", "example.com"]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|address|string|None|True|IP address, CIDR IP address, or domain name to assign to the Address Object|None|example.com|None|None|
+|address_object|string|None|False|Name of the address object, defaults to the value address in the address field if no name is given|None|MaliciousHost|None|None|
+|skip_private_address|boolean|None|True|If set to true, any addresses that are defined in the RFC1918 space will not be blocked. e.g. 10/8, 172.16/12, 192.168/16|None|True|None|None|
+|whitelist|[]string|None|False|This list contains a set of hosts that should not be blocked. This can include IP addresses, CIDR IP addresses, and domains|None|["198.51.100.100", "192.0.2.0/24", "example.com"]|None|None|
   
 Example input:
 
@@ -407,14 +407,14 @@ Example output:
 ```
 
 #### Delete Address Object
-  
+
 This action is used to deletes an address object
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|address_object|string|None|True|Name of the address object to delete|None|MaliciousHost|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|address_object|string|None|True|Name of the address object to delete|None|MaliciousHost|None|None|
   
 Example input:
 
@@ -462,15 +462,15 @@ Example output:
 ```
 
 #### Remove Address from Group
-  
+
 This action is used to removes an address from a group
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|address|string|None|True|The address object name, hostname, an IP address or subnet address expressed in CIDR notation to remove from group|None|MaliciousHost|
-|group|string|None|True|Name of the group to remove the address from|None|MaliciousAddressGroup|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|address|string|None|True|The address object name, hostname, an IP address or subnet address expressed in CIDR notation to remove from group|None|MaliciousHost|None|None|
+|group|string|None|True|Name of the group to remove the address from|None|MaliciousAddressGroup|None|None|
   
 Example input:
 
@@ -706,12 +706,12 @@ Example output:
 
 
 ## Troubleshooting
-  
-* The certificate authentication is used solely in two actions, namely: `Add Scan Result` and `Bulk Add Scan Result`. Please remember, that the data entered into the certificate input field in the connection is required to be a base-64 encoded PKCS12 certificate file, exported from the Firepower Management Center server. The passphrase is a password created during the PKCS12 certificate file export.
-* `SSL Verify` field is used by all other actions (i.e. excluding `Add Scan Result` and `Bulk Add Scan Result`), for SSL certificate verification. If the certificate is self-signed then SSL Verify should be set to `False` for those actions.
+
+The certificate authentication is used solely in two actions, namely: `Add Scan Result` and `Bulk Add Scan Result`. Please remember, that the data entered into the certificate input field in the connection is required to be a base-64 encoded PKCS12 certificate file, exported from the Firepower Management Center server. The passphrase is a password created during the PKCS12 certificate file export.`SSL Verify` field is used by all other actions (i.e. excluding `Add Scan Result` and `Bulk Add Scan Result`), for SSL certificate verification. If the certificate is self-signed then SSL Verify should be set to `False` for those actions.
 
 # Version History
 
+* 2.1.3 - Bumped 'cryptography' | SDK Bump to 6.1.2
 * 2.1.2 - `Block URL Policy` - Refactor the action to use local API calls | Remove vulnerable dependencies
 * 2.1.1 - Updated to latest SDK version | Fixed issue related to pagination
 * 2.1.0 - `Check if Address in Group`: Extended search for manually added literals | Added new output field `literal_objects`
