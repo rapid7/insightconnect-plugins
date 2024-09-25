@@ -15,6 +15,10 @@ class GetAlerts(insightconnect_plugin_runtime.Trigger):
         )
 
     def run(self, params={}):
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        frequency = params.get(Input.FREQUENCY, 5)
+        # END INPUT BINDING - DO NOT REMOVE
+
         # For the Alerts API, you filter alerts by `creation_time` when requesting data, however the timestamp field in
         # the returned Alerts is `detection_time`
         alert_timestamp_field = "detection_timestamp"
@@ -27,6 +31,7 @@ class GetAlerts(insightconnect_plugin_runtime.Trigger):
         self.logger.info("Initializing Get Alerts trigger for the Palo Alto Cortex XDR plugin.")
 
         while True:
+            self.logger.info("Getting alerts...")
             alerts = self.connection.xdr_api.get_alerts(from_time=start_time, to_time=end_time)
             for alert_time in Util.send_items_to_platform_for_trigger(
                 self, alerts, Output.ALERT, last_event_processed_time_ms, alert_timestamp_field
@@ -34,7 +39,8 @@ class GetAlerts(insightconnect_plugin_runtime.Trigger):
                 last_event_processed_time_ms = alert_time
 
             # Back off before next iteration
-            time.sleep(params.get(Input.FREQUENCY, 5))
+            self.logger.info(f"Sleeping for {frequency} seconds...")
+            time.sleep(frequency)
 
             # Update the start and end times for the next iteration. Don't request events older than our
             # last_processed_time_ms and set the end_time for the request to now.
