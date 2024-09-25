@@ -441,7 +441,7 @@ class CortexXdrAPI:
 
         """
 
-        headers = self.get_headers()
+        headers = self._advanced_authentication(self.api_key_id, self.api_key)
         fqdn = self.get_url()
         endpoint = "public_api/v1/alerts/get_alerts"
 
