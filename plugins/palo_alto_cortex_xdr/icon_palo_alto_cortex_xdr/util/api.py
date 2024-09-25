@@ -477,9 +477,9 @@ class CortexXdrAPI:
             self.logger.info(f"Received HTTP {response.status_code}, re-authenticating to Palo Alto Cortex XDR")
 
             new_headers = self._advanced_authentication(api_key=self.api_key, api_key_id=self.api_key_id)
-            response = self.build_request(url=url, headers=new_headers, post_body=post_body)
+            new_response = self.build_request(url=url, headers=new_headers, post_body=post_body)
 
-            return response
+            return new_response
 
         else:
             return response
