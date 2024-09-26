@@ -55,7 +55,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             self.logger.info("Starting to download alerts...")
 
             response, state, has_more_pages = self.get_alerts_palo_alto(
-                state=state, start_time=start_time, alert_limit=alert_limit
+                state=state, start_time=start_time, now=now_time, alert_limit=alert_limit
             )
 
             return response, state, has_more_pages, 200, None
@@ -90,7 +90,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
     ###########################
     # Make request
     ###########################
-    def get_alerts_palo_alto(self, state: dict, start_time: Optional[int], alert_limit: int):
+    def get_alerts_palo_alto(self, state: dict, start_time: Optional[int], now: int, alert_limit: int):
         """ """
 
         query_start_time = state.get(QUERY_START_TIME, start_time)
@@ -136,7 +136,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         # add the last alert time to the state if it exists
         # if not then set to the last queried time to move the filter forward
-        state[LAST_ALERT_TIME] = last_alert_time if last_alert_time else end_time
+        state[LAST_ALERT_TIME] = last_alert_time if last_alert_time else now
         # update hashes in state only if we've got new ones
         state[LAST_ALERT_HASH] = new_alert_hashes if new_alert_hashes else state.get(LAST_ALERT_HASH, [])
 
