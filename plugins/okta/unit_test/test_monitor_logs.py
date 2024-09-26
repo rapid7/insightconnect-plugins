@@ -1,12 +1,14 @@
-from unittest import TestCase
-from komand_okta.tasks.monitor_logs.task import MonitorLogs
-from util import Util
-from unittest.mock import patch, call
-from parameterized import parameterized
-from datetime import datetime, timezone
-
-import sys
 import os
+import sys
+from datetime import datetime, timezone
+from typing import Any, Dict
+from unittest import TestCase
+from unittest.mock import MagicMock, call, patch
+
+from komand_okta.tasks.monitor_logs.task import MonitorLogs
+from parameterized import parameterized
+
+from util import Util
 
 sys.path.append(os.path.abspath("../"))
 
@@ -57,7 +59,16 @@ class TestMonitorLogs(TestCase):
             ],
         ]
     )
-    def test_monitor_logs(self, mocked_warn, mock_request, _mock_get_time, test_name, current_state, expected, config):
+    def test_monitor_logs(
+        self,
+        mocked_warn: MagicMock,
+        mock_request: MagicMock,
+        _mock_get_time: MagicMock,
+        test_name: str,
+        current_state: Dict[str, Any],
+        expected: Dict[str, Any],
+        config: Dict[str, Any],
+    ) -> None:
         # Tests and their workflow descriptions:
         # 1. without_state - first run, query from 24 hours ago until now and results returned.
         # 2. with_state - queries using the saved 'last_collection_timestamp' to pull new logs.
@@ -85,7 +96,7 @@ class TestMonitorLogs(TestCase):
             self.assertIn(log_call, mocked_warn.call_args_list)
 
     @patch("logging.Logger.info")
-    def test_monitor_logs_filters_events(self, mocked_logger, *_mocks):
+    def test_monitor_logs_filters_events(self, mocked_logger: MagicMock, *_mocks) -> None:
         # Test the filtering of events returned in a previous iteration. Workflow being tested:
         # 1. C2C executed and queried for events until 8am however the last event time was '2023-04-27T08:49:21.764Z'
         # 2. The next execution will use this timestamp, meaning the last event will be returned again from Okta.
@@ -111,7 +122,9 @@ class TestMonitorLogs(TestCase):
         self.assertEqual(actual, expected_logs)
 
     @patch("logging.Logger.info")
-    def test_monitor_logs_filters_single_event(self, mocked_info_log, mocked_warn_log, *mocks):
+    def test_monitor_logs_filters_single_event(
+        self, mocked_info_log: MagicMock, mocked_warn_log: MagicMock, *mocks
+    ) -> None:
         # Test filtering when a single event is returned that was in the previous iteration.
 
         # temp change mocked timestamp to be within the cutoff time without changing mocked response data.
@@ -160,7 +173,7 @@ class TestMonitorLogs(TestCase):
         self.assertIn(logger, mocked_info_log.call_args_list)
 
     @patch("logging.Logger.info")
-    def test_filter_on_pagination(self, mocked_info_log, *_mocks):
+    def test_filter_on_pagination(self, mocked_info_log: MagicMock, *_mocks) -> None:
         # If we have made a call to Okta using the next_page_link state then we don't need to filter any events from
         # this response, as this can cause the loss of events that match the same timestamp but on the next page.
 

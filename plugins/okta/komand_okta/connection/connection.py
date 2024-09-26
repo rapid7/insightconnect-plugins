@@ -16,7 +16,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def connect(self, params={}):
         self.logger.info("Connect: Connecting...")
-        okta_url = params.get(Input.OKTAURL)
+        okta_url = params.get(Input.OKTAURL, "")
         base_url = f"https://{get_hostname(okta_url.rstrip('/'))}"
 
         valid_url = validate_url(base_url)

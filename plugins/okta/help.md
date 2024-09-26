@@ -1593,11 +1593,12 @@ Example output:
 
 
 ## Troubleshooting
-  
+
 Actions may fail depending on the state of the resource you attempt to operate over. They will return a best-effort message indicating why the Okta API responded the way it did when possible. Depending on the API endpoint, this message is either provided by Okta themselves, or constructed by the plugin based on the information it has at hand.
 
 # Version History
 
+* 4.2.11 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 4.2.10 - Monitor Logs Task: Add exception handling if invalid subdomain provided
 * 4.2.9 - SDK Bump to 6.1.0 | Task Connection test added
 * 4.2.8 - Connection: Set appropriate error code when domain is invalid
