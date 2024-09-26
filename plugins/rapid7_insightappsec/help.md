@@ -18,7 +18,7 @@ DAST capabilities and InsightConnects automation prowess can help you simplify y
 
 # Supported Product Versions
 
-* Rapid7 InsightAppSec 19.08.2024
+* Rapid7 InsightAppSec 26/09/2024
 
 # Documentation
 
@@ -996,7 +996,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|vulnerabilities|[]vulnerabilityItem|False|List of newly discovered vulnerabilities|[{"id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "app": {"id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0"}, "rootCause": {"url": "http://example.com", "parameter": "Unnamed", "method": "GET"}, "severity": "INFORMATIONAL", "status": "UNREVIEWED", "firstDiscovered": "2023-03-20T14:29:10.686575", "lastDiscovered": "2023-03-20T14:29:10.686575", "newlyDiscovered": True, "variances": [{"id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "originalExchange": {"id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "request": "GET /example/path/file.php", "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nDate: Mon, 20 Mar 2023 11:47:37 GMT\r\n"}, "module": {"id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0"}, "attack": {"id": "R_02"}, "attackValue": "test", "proof": "test", "attackExchanges": [{"id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "request": "GET /example/path/file.php", "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nDate: Mon, 20 Mar 2023 13:49:33 GMT\r\n"}]}], "vectorString": "AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N", "insightUiUrl": "https://example.com", "links": [{"rel": "self", "href": "https://example.com"}]}]|
+|vulnerabilities|[]vulnerabilityItem|False|List of newly discovered vulnerabilities|[{"id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "app": {"id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0"}, "rootCause": {"url": "http://example.com", "parameter": "Unnamed", "method": "GET"}, "severity": "INFORMATIONAL", "status": "UNREVIEWED", "firstDiscovered": "2023-03-20T14:29:10.686575", "lastDiscovered": "2023-03-20T14:29:10.686575", "newlyDiscovered": true, "variances": [{"id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "originalExchange": {"id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "request": "GET /example/path/file.php", "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nDate: Mon, 20 Mar 2023 11:47:37 GMT\r\n"}, "module": {"id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0"}, "attack": {"id": "R_02"}, "attackValue": "test", "proof": "test", "attackExchanges": [{"id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "request": "GET /example/path/file.php", "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nDate: Mon, 20 Mar 2023 13:49:33 GMT\r\n"}]}], "vectorString": "AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N", "insightUiUrl": "https://example.com", "links": [{"rel": "self", "href": "https://example.com"}]}]|
   
 Example output:
 
@@ -1219,6 +1219,7 @@ More information about the frequency and recurrence rule parameters used in the 
 
 # Version History
 
+* 1.2.2 - Fix `Create Scan Config` action `404` error
 * 1.2.1 - Fix broken URLs for Scans and Vulnerabilities API calls | Update SDK
 * 1.2.0 - Add New Vulnerabilities trigger
 * 1.1.0 - Add new actions: `Get Vulnerabilities`, `Get Vulnerability`, `Create Schedule`, `Get Vulnerability Discovery`, `Get Vulnerability Discoveries`
