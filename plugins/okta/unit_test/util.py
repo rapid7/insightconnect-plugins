@@ -1,14 +1,12 @@
 import json
 import logging
-import sys
 import os
-
+import sys
 from typing import Dict
 
 sys.path.append(os.path.abspath("../"))
 
 import insightconnect_plugin_runtime
-
 from komand_okta.connection import Connection
 from komand_okta.connection.schema import Input
 
