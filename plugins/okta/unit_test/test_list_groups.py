@@ -1,13 +1,17 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
+from typing import Any, Dict
 from unittest import TestCase
+from unittest.mock import MagicMock, patch
+
+from jsonschema import validate
 from komand_okta.actions.list_groups import ListGroups
-from util import Util
-from unittest.mock import patch
 from parameterized import parameterized
+
+from util import Util
 
 
 @patch("requests.request", side_effect=Util.mock_request)
@@ -35,6 +39,9 @@ class TestListGroups(TestCase):
             ],
         ]
     )
-    def test_list_groups(self, mock_request, test_name, input_params, expected):
+    def test_list_groups(
+        self, mock_request: MagicMock, test_name: str, input_params: Dict[str, Any], expected: Dict[str, Any]
+    ) -> None:
         actual = self.action.run(input_params)
+        validate(actual, self.action.output.schema)
         self.assertEqual(actual, expected)

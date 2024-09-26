@@ -1,15 +1,19 @@
-import sys
 import os
+import sys
+
 import timeout_decorator
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest import TestCase
-from komand_okta.triggers.users_added_removed_from_group import UsersAddedRemovedFromGroup
-from komand_okta.triggers.users_added_removed_from_group.schema import Input
-from util import Util
-from unittest.mock import patch
 from typing import Callable, Optional
+from unittest import TestCase
+from unittest.mock import MagicMock, patch
+
+from jsonschema import validate
+from komand_okta.triggers.users_added_removed_from_group import UsersAddedRemovedFromGroup
+from komand_okta.triggers.users_added_removed_from_group.schema import Input, UsersAddedRemovedFromGroupOutput
+
+from util import Util
 
 
 def timeout_pass(error_callback: Optional[Callable] = None):
@@ -37,6 +41,7 @@ class MockTrigger:
 
 def check_error():
     expected = Util.read_file_to_dict("expected/users.json.exp")
+    validate(MockTrigger.actual, UsersAddedRemovedFromGroupOutput.schema)
     if MockTrigger.actual == expected:
         return True
     TestCase.assertDictEqual(TestCase(), MockTrigger.actual, expected)
@@ -51,5 +56,7 @@ class TestUsersAddedRemovedFromGroup(TestCase):
     @timeout_pass(error_callback=check_error)
     @timeout_decorator.timeout(2)
     @patch("insightconnect_plugin_runtime.Trigger.send", side_effect=MockTrigger.send)
-    def test_users_added_removed_from_group_some_function_to_test(self, mock_request, mock_send):
+    def test_users_added_removed_from_group_some_function_to_test(
+        self, mock_request: MagicMock, mock_send: MockTrigger
+    ) -> None:
         self.action.run({Input.GROUPIDS: ["12345"], Input.INTERVAL: 10})
