@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="python_3_script-rapid7-plugin",
-      version="5.0.0",
+      version="5.0.1",
       description="[Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.9.19 and its standard library as well as the following 3rd party libraries:",
       author="rapid7",
       author_email="",

@@ -7,12 +7,13 @@ vendor: rapid7
 support: rapid7
 status: []
 description: '[Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.9.19 and its standard library as well as the following 3rd party libraries:'
-version: 5.0.0
+version: 5.0.1
 connection_version: 4
 supported_versions: ["Python 3.9.19"]
+fedramp_ready: true
 sdk:
   type: slim
-  version: 6.0.1
+  version: 6.1.2
   user: root
   packages:
     - libxslt-dev
@@ -40,6 +41,7 @@ references: ["[Python 3 Language Reference](https://docs.python.org/3/reference/
 links:
   - '[Python](https://www.python.org/)'
 version_history:
+  - '5.0.1 - Updated SDK to the latest version | Initial updates for fedramp compliance'
   - '5.0.0 - Updated SDK to the latest version | Removing records as its not maintained | Replacing maya with arrow (maya not maintained)'
   - '4.0.10 - Updated the SDK to the latest version | Updated Python version to `3.9.19` | Fixed issue with invalid unicode character'
   - '4.0.9 - Updated the SDK to the latest version to address memory usage issues'
