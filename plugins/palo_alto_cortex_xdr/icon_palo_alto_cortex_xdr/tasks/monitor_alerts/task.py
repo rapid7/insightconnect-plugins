@@ -10,7 +10,7 @@ from .schema import (
 from datetime import datetime, timedelta, timezone
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import hash_sha1
-from typing import Any, Dict, Tuple, Union
+from typing import Any, Dict, Tuple, Union, Optional
 
 TIME_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
 MAX_LOOKBACK_DAYS = 7
@@ -55,7 +55,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             self.logger.info("Starting to download alerts...")
 
             response, state, has_more_pages = self.get_alerts_palo_alto(
-                state=state, start_time=start_time, end_time=now_time, alert_limit=alert_limit
+                state=state, start_time=start_time, alert_limit=alert_limit
             )
 
             return response, state, has_more_pages, 200, None
@@ -90,17 +90,17 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
     ###########################
     # Make request
     ###########################
-    def get_alerts_palo_alto(self, state: dict, start_time: int, end_time: int, alert_limit: int):
+    def get_alerts_palo_alto(self, state: dict, start_time: Optional[int], alert_limit: int):
         """ """
 
         query_start_time = state.get(QUERY_START_TIME, start_time)
-        query_end_time = state.get(QUERY_END_TIME, end_time)
+        query_end_time = state.get(QUERY_END_TIME)
 
         search_from = state.get(LAST_SEARCH_TO, 0)
         search_to = search_from + alert_limit
 
         post_body = self.build_post_body(
-            search_from=search_from, search_to=search_to, start_time=start_time, end_time=end_time
+            search_from=search_from, search_to=search_to, start_time=query_start_time, end_time=query_end_time
         )
 
         results, results_count, total_count = self.connection.xdr_api.get_response_alerts(post_body)
@@ -125,6 +125,13 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             state[QUERY_START_TIME] = query_start_time
             state[QUERY_END_TIME] = query_end_time
         else:
+            self.logger.info(
+                f"Paginating final page of alerts: "
+                f"search_from = {search_from} "
+                f"search_to = {search_to} "
+                f"current_count = {state.get(CURRENT_COUNT)} "
+                f"total_count = {total_count} "
+            )
             state = self._drop_pagination_state(state)
 
         # add the last alert time to the state if it exists
@@ -193,7 +200,8 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         state = saved_state.copy()
         log_msg = ""
 
-        dt_now = self.convert_unix_to_datetime(now)
+        end_time = state.get(QUERY_END_TIME, now)
+        dt_now = self.convert_unix_to_datetime(end_time)
 
         saved_time = state.get(QUERY_START_TIME, state.get(LAST_ALERT_TIME))
 
