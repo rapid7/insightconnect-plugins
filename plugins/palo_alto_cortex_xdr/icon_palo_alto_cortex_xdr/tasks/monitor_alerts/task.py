@@ -31,6 +31,7 @@ QUERY_END_TIME = "query_end_time"
 LAST_SEARCH_FROM = "last_search_from"
 LAST_SEARCH_TO = "last_search_to"
 TIMESTAMP_KEY = "detection_timestamp"
+ALERT_ID_KEY = "alert_id"
 
 
 class MonitorAlerts(insightconnect_plugin_runtime.Task):
@@ -122,7 +123,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         state[CURRENT_COUNT] = state.get(CURRENT_COUNT, 0) + results_count
 
-        new_alerts, new_alert_hashes, last_alert_time = self._dedupe_and_get_highest_time(results, start_time, state)
+        new_alerts, new_alert_hashes, last_alert_time = self._dedupe_and_get_highest_time(results, state)
 
         is_paginating = state.get(CURRENT_COUNT) < total_count
 
@@ -160,41 +161,50 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
     ###########################
     # Deduping
     ###########################
-    def _dedupe_and_get_highest_time(self, alerts: list, start_time: int, state: dict) -> Tuple[list, list, str]:
+    def _dedupe_and_get_highest_time(self, alerts: list, state: dict) -> Tuple[list, list, int]:
         """
         Function to dedupe alerts using existing hashes in the state, and return the highest
         timestamp.
 
         :param alerts: list of alerts
         :param state: state of the plugin
-        :return: list of deduped alerts, list of new hashes, and the highest timestamp
+
+        :return: list of unique alerts, list of new hashes, and the highest timestamp
         """
+        old_hashes = state.get(LAST_ALERT_HASH, [])
+        deduped_alerts = 0
+        new_alerts = []
+        new_hashes = []
+        highest_timestamp = state.get(LAST_ALERT_TIME, 0)
 
-        old_hashes, deduped_alerts, new_hashes, highest_timestamp = state.get(LAST_ALERT_HASH, []), [], [], ""
-        for index, alert in enumerate(alerts):
-            alert_time = alert.get(TIMESTAMP_KEY)
-            if alert_time == start_time:
-                alert_hash = hash_sha1(alert)
-                if alert_hash not in old_hashes:
-                    deduped_alerts.append(alert)
-            elif alert_time > start_time:
-                deduped_alerts += alerts[index:]
-                break
+        # Create a new hash for every new alert
+        for _, alert in enumerate(alerts):
+            # Hash the current alert
+            alert_hash = hash_sha1(alert)
+            # Add this new hash to the new hash list
+            new_hashes.append(alert_hash)
+            # Check to see if this new hash is in the list of old hashes
+            if alert_hash in old_hashes:
+                # If it is, add it to the deduped alerts
+                deduped_alerts += 1
+            # Otherwise
+            else:
+                # Add this new unique alert to undeduped (the whole object, not the hash)
+                new_alerts.append(alert)
 
-        self.logger.info(f"Received {len(alerts)} alerts, and after dedupe there is {len(deduped_alerts)} results.")
+        # If len is 0, all results are deduped so we get list index error, so do quick if check
+        if len(new_alerts) > 0:
+            # Get the timestamp of the latest alert in the list of results
+            highest_timestamp = new_alerts[-1].get(TIMESTAMP_KEY)
 
-        if deduped_alerts:
-            # alert results are already sorted by CS API, so get the latest timestamp
-            highest_timestamp = deduped_alerts[-1].get(TIMESTAMP_KEY)
+        self.logger.info(f"Received {len(alerts)} alerts")
+        self.logger.info(f"Number of duplicates found: {deduped_alerts}")
+        self.logger.info(f"Number of unique/new alerts found: {len(new_alerts)}")
 
-            for alert in deduped_alerts:
-                if alert.get(TIMESTAMP_KEY) == highest_timestamp:
-                    new_hashes.append(hash_sha1(alert))
+        self.logger.debug(f"Highest timestamp is {highest_timestamp}")
+        self.logger.debug(f"Last hash is {new_hashes}")
 
-            self.logger.debug(f"Highest timestamp is {highest_timestamp}")
-            self.logger.debug(f"Last hash is {new_hashes}")
-
-        return deduped_alerts, new_hashes, highest_timestamp
+        return new_alerts, new_hashes, highest_timestamp
 
     ###########################
     # Custom Config
