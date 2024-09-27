@@ -10,7 +10,7 @@ from .schema import (
 from datetime import datetime, timedelta, timezone
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import hash_sha1
-from typing import Any, Dict, Tuple, Union
+from typing import Any, Dict, Tuple, Union, Optional
 
 TIME_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
 MAX_LOOKBACK_DAYS = 7
@@ -31,6 +31,7 @@ QUERY_END_TIME = "query_end_time"
 LAST_SEARCH_FROM = "last_search_from"
 LAST_SEARCH_TO = "last_search_to"
 TIMESTAMP_KEY = "detection_timestamp"
+ALERT_ID_KEY = "alert_id"
 
 
 class MonitorAlerts(insightconnect_plugin_runtime.Task):
@@ -55,7 +56,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             self.logger.info("Starting to download alerts...")
 
             response, state, has_more_pages = self.get_alerts_palo_alto(
-                state=state, start_time=start_time, end_time=now_time, alert_limit=alert_limit
+                state=state, start_time=start_time, now=now_time, alert_limit=alert_limit
             )
 
             return response, state, has_more_pages, 200, None
@@ -89,24 +90,24 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
     ###########################
     # Make request
     ###########################
-    def get_alerts_palo_alto(self, state: dict, start_time: int, end_time: int, alert_limit: int):
+    def get_alerts_palo_alto(self, state: dict, start_time: Optional[int], now: int, alert_limit: int):
         """ """
 
         query_start_time = state.get(QUERY_START_TIME, start_time)
-        query_end_time = state.get(QUERY_END_TIME, end_time)
+        query_end_time = state.get(QUERY_END_TIME, now)
 
         search_from = state.get(LAST_SEARCH_TO, 0)
         search_to = search_from + alert_limit
 
         post_body = self.build_post_body(
-            search_from=search_from, search_to=search_to, start_time=start_time, end_time=end_time
+            search_from=search_from, search_to=search_to, start_time=query_start_time, end_time=query_end_time
         )
 
         results, results_count, total_count = self.connection.xdr_api.get_response_alerts(post_body)
 
         state[CURRENT_COUNT] = state.get(CURRENT_COUNT, 0) + results_count
 
-        new_alerts, new_alert_hashes, last_alert_time = self._dedupe_and_get_highest_time(results, start_time, state)
+        new_alerts, new_alert_hashes, last_alert_time = self._dedupe_and_get_highest_time(results, state)
 
         is_paginating = state.get(CURRENT_COUNT) < total_count
 
@@ -124,11 +125,18 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             state[QUERY_START_TIME] = query_start_time
             state[QUERY_END_TIME] = query_end_time
         else:
+            self.logger.info(
+                f"Paginating final page of alerts: "
+                f"search_from = {search_from} "
+                f"search_to = {search_to} "
+                f"current_count = {state.get(CURRENT_COUNT)} "
+                f"total_count = {total_count} "
+            )
             state = self._drop_pagination_state(state)
 
         # add the last alert time to the state if it exists
         # if not then set to the last queried time to move the filter forward
-        state[LAST_ALERT_TIME] = last_alert_time if last_alert_time else end_time
+        state[LAST_ALERT_TIME] = last_alert_time if last_alert_time else now
         # update hashes in state only if we've got new ones
         state[LAST_ALERT_HASH] = new_alert_hashes if new_alert_hashes else state.get(LAST_ALERT_HASH, [])
 
@@ -137,41 +145,50 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
     ###########################
     # Deduping
     ###########################
-    def _dedupe_and_get_highest_time(self, alerts: list, start_time: int, state: dict) -> Tuple[list, list, str]:
+    def _dedupe_and_get_highest_time(self, alerts: list, state: dict) -> Tuple[list, list, int]:
         """
         Function to dedupe alerts using existing hashes in the state, and return the highest
         timestamp.
 
         :param alerts: list of alerts
         :param state: state of the plugin
-        :return: list of deduped alerts, list of new hashes, and the highest timestamp
+
+        :return: list of unique alerts, list of new hashes, and the highest timestamp
         """
+        old_hashes = state.get(LAST_ALERT_HASH, [])
+        deduped_alerts = 0
+        new_alerts = []
+        new_hashes = []
+        highest_timestamp = state.get(LAST_ALERT_TIME, 0)
 
-        old_hashes, deduped_alerts, new_hashes, highest_timestamp = state.get(LAST_ALERT_HASH, []), [], [], ""
-        for index, alert in enumerate(alerts):
-            alert_time = alert.get(TIMESTAMP_KEY)
-            if alert_time == start_time:
-                alert_hash = hash_sha1(alert)
-                if alert_hash not in old_hashes:
-                    deduped_alerts.append(alert)
-            elif alert_time > start_time:
-                deduped_alerts += alerts[index:]
-                break
+        # Create a new hash for every new alert
+        for _, alert in enumerate(alerts):
+            # Hash the current alert
+            alert_hash = hash_sha1(alert)
+            # Add this new hash to the new hash list
+            new_hashes.append(alert_hash)
+            # Check to see if this new hash is in the list of old hashes
+            if alert_hash in old_hashes:
+                # If it is, add it to the deduped alerts
+                deduped_alerts += 1
+            # Otherwise
+            else:
+                # Add this new unique alert to undeduped (the whole object, not the hash)
+                new_alerts.append(alert)
 
-        self.logger.info(f"Received {len(alerts)} alerts, and after dedupe there is {len(deduped_alerts)} results.")
+        # If len is 0, all results are deduped so we get list index error, so do quick if check
+        if len(new_alerts) > 0:
+            # Get the timestamp of the latest alert in the list of results
+            highest_timestamp = new_alerts[-1].get(TIMESTAMP_KEY)
 
-        if deduped_alerts:
-            # alert results are already sorted by CS API, so get the latest timestamp
-            highest_timestamp = deduped_alerts[-1].get(TIMESTAMP_KEY)
+        self.logger.info(f"Received {len(alerts)} alerts")
+        self.logger.info(f"Number of duplicates found: {deduped_alerts}")
+        self.logger.info(f"Number of unique/new alerts found: {len(new_alerts)}")
 
-            for alert in deduped_alerts:
-                if alert.get(TIMESTAMP_KEY) == highest_timestamp:
-                    new_hashes.append(hash_sha1(alert))
+        self.logger.debug(f"Highest timestamp is {highest_timestamp}")
+        self.logger.debug(f"Last hash is {new_hashes}")
 
-            self.logger.debug(f"Highest timestamp is {highest_timestamp}")
-            self.logger.debug(f"Last hash is {new_hashes}")
-
-        return deduped_alerts, new_hashes, highest_timestamp
+        return new_alerts, new_hashes, highest_timestamp
 
     ###########################
     # Custom Config
@@ -192,7 +209,8 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         state = saved_state.copy()
         log_msg = ""
 
-        dt_now = self.convert_unix_to_datetime(now)
+        end_time = state.get(QUERY_END_TIME, now)
+        dt_now = self.convert_unix_to_datetime(end_time)
 
         saved_time = state.get(QUERY_START_TIME, state.get(LAST_ALERT_TIME))
 
