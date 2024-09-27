@@ -4,9 +4,9 @@ products: [insightconnect]
 name: rapid7_insightappsec
 title: Rapid7 InsightAppSec
 description: DAST capabilities and InsightConnects automation prowess can help you simplify your SDLC Process with this scan management plugin. The need for automation becomes paramount in the fast moving landscape of modern web scanning and automating you web app scanning with this plugin can save you loads of time to allow you to focus on remediating issues to get your app into product faster!
-version: 1.2.1
+version: 1.2.2
 connection_version: 1
-supported_versions: ["Rapid7 InsightAppSec 19.08.2024"]
+supported_versions: ["Rapid7 InsightAppSec 26/09/2024"]
 vendor: rapid7
 status: []
 support: rapid7
@@ -37,6 +37,7 @@ links:
 references: 
   - "[Rapid7 InsightAppSec API](https://docs.rapid7.com/insightappsec/api-get-started)"
 version_history:
+  - "1.2.2 - Fix `Create Scan Config` action `404` error"
   - "1.2.1 - Fix broken URLs for Scans and Vulnerabilities API calls | Update SDK"
   - "1.2.0 - Add New Vulnerabilities trigger"
   - "1.1.0 - Add new actions: `Get Vulnerabilities`, `Get Vulnerability`, `Create Schedule`, `Get Vulnerability Discovery`, `Get Vulnerability Discoveries`"
@@ -47,7 +48,7 @@ version_history:
   - "1.0.0 - Initial plugin"
 sdk:
   type: slim
-  version: 6.1.0
+  version: 6.1.3
   user: nobody
 troubleshooting: "More information about the frequency and recurrence rule parameters used in the Create Schedule action can be found [here](https://help.rapid7.com/insightappsec/en-us/api/v1/docs.html#tag/Schedules)."
 types:
