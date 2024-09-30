@@ -1,8 +1,6 @@
 # Description
 
-[ServiceNow](https://www.servicenow.com/) is a tool for managing incidents and configuration management. This plugin allows users to manage all aspects of incidents including creation, search, and updates. Additionally, incident changes can be monitored and processed for use in a Rapid7 InsightConnect workflow.
-
-Note: This plugin affects only the underlying tables in a ServiceNow instance, not its UI. Hence, this plugin will work seamlessly with Virtual Task Boards.
+ServiceNow is a tool for managing incidents and configuration management. Using the ServiceNow plugin for Rapid7 InsightConnect, users can manage all aspects of incidents including creation, search, updates, as well as monitor them for changes
 
 # Key Features
 
@@ -16,13 +14,6 @@ Note: This plugin affects only the underlying tables in a ServiceNow instance, n
 * ServiceNow username and password (for basic authentication)
 * ServiceNow username, password, client ID, and client secret (for OAuth authentication) 
 * ServiceNow instance name
-
-Please note that to use certain actions it's necessary to use scopes that have permissions on certain tables. Depending on the actions, it's necessary to add specific auth scopes:
-
-- Create/Read/Update/Delete Incident and Incident Attachments (table `incident` with permissions create/read/write/delete)
-- Create/Read/Update/Delete Security Incident (table `sn_si_incident` with permissions create/read/write/delete)
-- Create/Read/Update/Delete Vulnerability (table `sn_vul_vulnerable_item` with permissions create/read/write/delete)
-- Create Change Request (table `sn_chg_rest` with create permissions)
 
 # Supported Product Versions
 
@@ -688,7 +679,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|security_incident|security_incident|False|Details of the security incident|{"active":false,"activity_due":"2023-07-28 10:18:55","affected_user":{"link":"example.com/1234","value":"1234"},"alert_id":"dca801f11b1cb5506bf1ed78b04bcb5f","alert_rule":"test","alert_sensor":{"link":"example.com/1234","value":"1234"},"assigned_to":{"link":"example.com/1234","value":"1234"},"assignment_group":{"link":"example.com/1234","value":"1234"},"business_criticality":3,"caller":{"link":"example.com/1234","value":"1234"},"category":"Phishing","close_code":-100,"close_notes":"test close notes","closed_at":"2023-08-01 08:03:28","closed_by":{"link":"example.com/1234","value":"1234"},"cmdb_ci":{"link":"example.com/1234","value":"1234"},"contact_type":"phone","description":"example description","location":{"link":"example.com/1234","value":"1234"},"number":"SIR00000001","opened_at":"2023-07-28 10:18:55","opened_by":{"link":"example.com/1234","value":"1234"},"opened_for":{"link":"example.com/1234","value":"1234"},"priority":4,"risk_score":38,"risk_score_override":false,"secure_notes":"﷠﷡﷢56715c0aff1331007a6dffffffffff54﷌﷍CzXu70QS9L8TfvWt92rByQ==﷎﷏","security_tags":"dca801f11b1cb5506bf1ed78b04bcb5f","short_description":"test","special_access_write":"dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g","state":3,"subcategory":"25","substate":1,"sys_created_by":"user","sys_created_on":"2023-07-28 10:18:55","sys_id":"g123456","sys_updated_by":"user","sys_updated_on":"2023-08-01 08:03:32","watch_list":"dca801f11b1cb5506bf1ed78b04bcb5f","work_notes_list":"dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g"}|
+|security_incident|security_incident|False|Details of the security incident|{"active":false,"activity_due":"2023-07-28 10:18:55","affected_user":{"link":"example.com/1234","value":"1234"},"alert_id":"dca801f11b1cb5506bf1ed78b04bcb5f","alert_rule":"test","alert_sensor":{"link":"example.com/1234","value":"1234"},"assigned_to":{"link":"example.com/1234","value":"1234"},"assignment_group":{"link":"example.com/1234","value":"1234"},"business_criticality":3,"caller":{"link":"example.com/1234","value":"1234"},"category":"Phishing","close_code":-100,"close_notes":"test close notes","closed_at":"2023-08-01 08:03:28","closed_by":{"link":"example.com/1234","value":"1234"},"cmdb_ci":{"link":"example.com/1234","value":"1234"},"contact_type":"phone","description":"example description","location":{"link":"example.com/1234","value":"1234"},"number":"SIR00000001","opened_at":"2023-07-28 10:18:55","opened_by":{"link":"example.com/1234","value":"1234"},"opened_for":{"link":"example.com/1234","value":"1234"},"priority":4,"risk_score":38,"risk_score_override":false,"secure_notes":"﷠﷡﷢56715c0aff1331007a6dffffffffff54﷌﷍CzXu70QS9L8TfvWt92rByQ==","security_tags":"dca801f11b1cb5506bf1ed78b04bcb5f","short_description":"test","special_access_write":"dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g","state":3,"subcategory":"25","substate":1,"sys_created_by":"user","sys_created_on":"2023-07-28 10:18:55","sys_id":"g123456","sys_updated_by":"user","sys_updated_on":"2023-08-01 08:03:32","watch_list":"dca801f11b1cb5506bf1ed78b04bcb5f","work_notes_list":"dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g"}|
   
 Example output:
 
@@ -751,7 +742,7 @@ Example output:
     "priority": 4,
     "risk_score": 38,
     "risk_score_override": false,
-    "secure_notes": "\ufde0\ufde1\ufde256715c0aff1331007a6dffffffffff54\ufdcc\ufdcdCzXu70QS9L8TfvWt92rByQ==\ufdce\ufdcf",
+    "secure_notes": "\ufde0\ufde1\ufde256715c0aff1331007a6dffffffffff54\ufdcc\ufdcdCzXu70QS9L8TfvWt92rByQ==",
     "security_tags": "dca801f11b1cb5506bf1ed78b04bcb5f",
     "short_description": "test",
     "special_access_write": "dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g",
@@ -1075,7 +1066,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|security_incidents|[]security_incident|False|Details of the matching security incidents|[{"active":false,"activity_due":"2023-07-28 10:18:55","affected_user":{"link":"example.com/1234","value":"1234"},"alert_id":"dca801f11b1cb5506bf1ed78b04bcb5f","alert_rule":"test","alert_sensor":{"link":"example.com/1234","value":"1234"},"assigned_to":{"link":"example.com/1234","value":"1234"},"assignment_group":{"link":"example.com/1234","value":"1234"},"business_criticality":3,"caller":{"link":"example.com/1234","value":"1234"},"category":"Phishing","close_code":-100,"close_notes":"test close notes","closed_at":"2023-08-01 08:03:28","closed_by":{"link":"example.com/1234","value":"1234"},"cmdb_ci":{"link":"example.com/1234","value":"1234"},"contact_type":"phone","description":"example description","location":{"link":"example.com/1234","value":"1234"},"number":"SIR00000002","opened_at":"2023-07-28 10:18:55","opened_by":{"link":"example.com/1234","value":"1234"},"opened_for":{"link":"example.com/1234","value":"1234"},"priority":3,"risk_score":38,"risk_score_override":false,"secure_notes":"﷠﷡﷢56715c0aff1331007a6dffffffffff54﷌﷍CzXu70QS9L8TfvWt92rByQ==﷎﷏","security_tags":"dca801f11b1cb5506bf1ed78b04bcb5f","short_description":"test","special_access_write":"dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g","state":3,"subcategory":"25","substate":1,"sys_created_by":"user","sys_created_on":"2023-07-28 10:18:55","sys_id":"g12345678","sys_updated_by":"user","sys_updated_on":"2023-08-01 08:03:32","watch_list":"dca801f11b1cb5506bf1ed78b04bcb5f","work_notes_list":"dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g"},{"active":false,"activity_due":"2023-07-28 10:18:55","affected_user":{"link":"example.com/1234","value":"1234"},"alert_id":"dca801f11b1cb5506bf1ed78b04bcb5f","alert_rule":"test","alert_sensor":{"link":"example.com/1234","value":"1234"},"assigned_to":{"link":"example.com/1234","value":"1234"},"assignment_group":{"link":"example.com/1234","value":"1234"},"business_criticality":3,"caller":{"link":"example.com/1234","value":"1234"},"category":"Phishing","close_code":-100,"close_notes":"test close notes","closed_at":"2023-08-01 08:03:28","closed_by":{"link":"example.com/1234","value":"1234"},"cmdb_ci":{"link":"example.com/1234","value":"1234"},"contact_type":"phone","description":"example description","location":{"link":"example.com/1234","value":"1234"},"number":"SIR00000003","opened_at":"2023-07-28 10:18:55","opened_by":{"link":"example.com/1234","value":"1234"},"opened_for":{"link":"example.com/1234","value":"1234"},"priority":3,"risk_score":38,"risk_score_override":false,"secure_notes":"﷠﷡﷢56715c0aff1331007a6dffffffffff54﷌﷍CzXu70QS9L8TfvWt92rByQ==﷎﷏","security_tags":"dca801f11b1cb5506bf1ed78b04bcb5f","short_description":"test","special_access_write":"dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g","state":3,"subcategory":"25","substate":1,"sys_created_by":"user","sys_created_on":"2023-07-28 10:18:55","sys_id":"g123456789","sys_updated_by":"user","sys_updated_on":"2023-08-01 08:03:32","watch_list":"dca801f11b1cb5506bf1ed78b04bcb5f","work_notes_list":"dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g"}]|
+|security_incidents|[]security_incident|False|Details of the matching security incidents|[{"active":false,"activity_due":"2023-07-28 10:18:55","affected_user":{"link":"example.com/1234","value":"1234"},"alert_id":"dca801f11b1cb5506bf1ed78b04bcb5f","alert_rule":"test","alert_sensor":{"link":"example.com/1234","value":"1234"},"assigned_to":{"link":"example.com/1234","value":"1234"},"assignment_group":{"link":"example.com/1234","value":"1234"},"business_criticality":3,"caller":{"link":"example.com/1234","value":"1234"},"category":"Phishing","close_code":-100,"close_notes":"test close notes","closed_at":"2023-08-01 08:03:28","closed_by":{"link":"example.com/1234","value":"1234"},"cmdb_ci":{"link":"example.com/1234","value":"1234"},"contact_type":"phone","description":"example description","location":{"link":"example.com/1234","value":"1234"},"number":"SIR00000002","opened_at":"2023-07-28 10:18:55","opened_by":{"link":"example.com/1234","value":"1234"},"opened_for":{"link":"example.com/1234","value":"1234"},"priority":3,"risk_score":38,"risk_score_override":false,"secure_notes":"﷠﷡﷢56715c0aff1331007a6dffffffffff54﷌﷍CzXu70QS9L8TfvWt92rByQ==","security_tags":"dca801f11b1cb5506bf1ed78b04bcb5f","short_description":"test","special_access_write":"dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g","state":3,"subcategory":"25","substate":1,"sys_created_by":"user","sys_created_on":"2023-07-28 10:18:55","sys_id":"g12345678","sys_updated_by":"user","sys_updated_on":"2023-08-01 08:03:32","watch_list":"dca801f11b1cb5506bf1ed78b04bcb5f","work_notes_list":"dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g"},{"active":false,"activity_due":"2023-07-28 10:18:55","affected_user":{"link":"example.com/1234","value":"1234"},"alert_id":"dca801f11b1cb5506bf1ed78b04bcb5f","alert_rule":"test","alert_sensor":{"link":"example.com/1234","value":"1234"},"assigned_to":{"link":"example.com/1234","value":"1234"},"assignment_group":{"link":"example.com/1234","value":"1234"},"business_criticality":3,"caller":{"link":"example.com/1234","value":"1234"},"category":"Phishing","close_code":-100,"close_notes":"test close notes","closed_at":"2023-08-01 08:03:28","closed_by":{"link":"example.com/1234","value":"1234"},"cmdb_ci":{"link":"example.com/1234","value":"1234"},"contact_type":"phone","description":"example description","location":{"link":"example.com/1234","value":"1234"},"number":"SIR00000003","opened_at":"2023-07-28 10:18:55","opened_by":{"link":"example.com/1234","value":"1234"},"opened_for":{"link":"example.com/1234","value":"1234"},"priority":3,"risk_score":38,"risk_score_override":false,"secure_notes":"﷠﷡﷢56715c0aff1331007a6dffffffffff54﷌﷍CzXu70QS9L8TfvWt92rByQ==","security_tags":"dca801f11b1cb5506bf1ed78b04bcb5f","short_description":"test","special_access_write":"dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g","state":3,"subcategory":"25","substate":1,"sys_created_by":"user","sys_created_on":"2023-07-28 10:18:55","sys_id":"g123456789","sys_updated_by":"user","sys_updated_on":"2023-08-01 08:03:32","watch_list":"dca801f11b1cb5506bf1ed78b04bcb5f","work_notes_list":"dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g"}]|
   
 Example output:
 
@@ -1139,7 +1130,7 @@ Example output:
       "priority": 3,
       "risk_score": 38,
       "risk_score_override": false,
-      "secure_notes": "\ufde0\ufde1\ufde256715c0aff1331007a6dffffffffff54\ufdcc\ufdcdCzXu70QS9L8TfvWt92rByQ==\ufdce\ufdcf",
+      "secure_notes": "\ufde0\ufde1\ufde256715c0aff1331007a6dffffffffff54\ufdcc\ufdcdCzXu70QS9L8TfvWt92rByQ==",
       "security_tags": "dca801f11b1cb5506bf1ed78b04bcb5f",
       "short_description": "test",
       "special_access_write": "dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g",
@@ -1211,7 +1202,7 @@ Example output:
       "priority": 3,
       "risk_score": 38,
       "risk_score_override": false,
-      "secure_notes": "\ufde0\ufde1\ufde256715c0aff1331007a6dffffffffff54\ufdcc\ufdcdCzXu70QS9L8TfvWt92rByQ==\ufdce\ufdcf",
+      "secure_notes": "\ufde0\ufde1\ufde256715c0aff1331007a6dffffffffff54\ufdcc\ufdcdCzXu70QS9L8TfvWt92rByQ==",
       "security_tags": "dca801f11b1cb5506bf1ed78b04bcb5f",
       "short_description": "test",
       "special_access_write": "dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g",
@@ -1686,6 +1677,7 @@ Example output:
 
 # Version History
 
+* 8.0.3 - Update to resolve issue parsing response from ServiceNow if XML is received
 * 8.0.2 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 8.0.1 - Update Setuptool to version 70.0.0 | Update SDK to version 6.0.0
 * 8.0.0 - `Incident Created, Vulnerability Updated`: Updated triggers to allow users to check a list of system_ids or all of them

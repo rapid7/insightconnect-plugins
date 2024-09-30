@@ -3,7 +3,7 @@ from enum import Enum
 import json
 from logging import Logger
 from typing import Optional
-
+import xmltodict
 import requests
 from requests.auth import HTTPBasicAuth, AuthBase
 
@@ -84,6 +84,7 @@ class RequestHelper(object):
 
         if response.status_code in range(200, 299):
             content_type = response.headers.get("Content-Type", "")
+            self.logger.info(f"Response received in content-type {content_type}")
 
             if response.status_code == 204:
                 resource = None
@@ -93,8 +94,20 @@ class RequestHelper(object):
                         resource = response.json()
                     except json.decoder.JSONDecodeError:
                         raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
+                elif "xml" in content_type:
+                    resource = xmltodict.parse(response.content).get("response", {})
                 else:
                     resource = response.content
+                    try:
+                        resource_string = resource.decode("utf-8")
+                    except UnicodeDecodeError:
+                        self.logger.info("Error: Resource content could note be decoded")
+                        self.logger.info(f"Content: {resource}")
+                    try:
+                        resource = json.loads(resource_string)
+                    except (json.decoder.JSONDecodeError, TypeError, ValueError):
+                        self.logger.info("Error: Resource content could note be converted into JSON")
+                        self.logger.info(f"Content: {resource_string}")
 
             return {"resource": resource, "status": response.status_code, "content-type": content_type}
 
