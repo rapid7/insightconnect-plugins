@@ -4,9 +4,9 @@ class ScanConfig:
         """
         URI for all scan_config operations
         :param console_url: URL to the InsightAppSec console
-        :return: pre-populated ias/v1/scan-configs/
+        :return: pre-populated ias/v1/scan-configs
         """
-        return f"{console_url}ias/v1/scan-configs/"
+        return f"{console_url}ias/v1/scan-configs"
 
 
 class Scans:

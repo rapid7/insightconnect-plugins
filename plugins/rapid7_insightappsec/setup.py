@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="rapid7_insightappsec-rapid7-plugin",
-      version="1.2.1",
+      version="1.2.2",
       description="DAST capabilities and InsightConnects automation prowess can help you simplify your SDLC Process with this scan management plugin. The need for automation becomes paramount in the fast moving landscape of modern web scanning and automating you web app scanning with this plugin can save you loads of time to allow you to focus on remediating issues to get your app into product faster!",
       author="rapid7",
       author_email="",
