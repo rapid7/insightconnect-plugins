@@ -1,4 +1,6 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 from .schema import UpdateSecurityIncidentInput, UpdateSecurityIncidentOutput, Input, Output, Component
 
 # Custom imports below
@@ -19,14 +21,18 @@ class UpdateSecurityIncident(insightconnect_plugin_runtime.Action):
         json_data = remove_integer_fields_with_zero(params.copy())
         incident_sys_id = json_data.pop(Input.SYS_ID)
         json_data.update(json_data.pop(Input.ADDITIONAL_FIELDS, {}))
-        response = (
-            self.connection.request.make_request(
-                endpoint=f"{self.connection.security_incident_url}/{incident_sys_id}",
-                method="PATCH",
-                payload=return_non_empty(json_data),
-                params={"sysparm_fields": "sys_id,number"},
-            )
-            .get("resource", {})
-            .get("result", {})
+        response = self.connection.request.make_request(
+            endpoint=f"{self.connection.security_incident_url}/{incident_sys_id}",
+            method="PATCH",
+            payload=return_non_empty(json_data),
+            params={"sysparm_fields": "sys_id,number"},
         )
-        return {Output.SYSTEM_ID: response.get("sys_id"), Output.NUMBER: response.get("number")}
+
+        try:
+            result = response.get("resource", {}).get("result", [])
+        except KeyError:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+        except AttributeError:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
+
+        return {Output.SYSTEM_ID: result.get("sys_id"), Output.NUMBER: response.get("number")}

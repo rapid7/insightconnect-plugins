@@ -40,7 +40,9 @@ class GetIncidentCommentsWorknotes(insightconnect_plugin_runtime.Action):
 
         try:
             result = response["resource"].get("result")
-        except KeyError as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text) from e
+        except KeyError:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+        except AttributeError:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 
         return {Output.INCIDENT_COMMENTS_WORKNOTES: result}

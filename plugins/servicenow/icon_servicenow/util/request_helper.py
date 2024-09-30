@@ -90,15 +90,14 @@ class RequestHelper(object):
                 resource = None
             else:
                 if "application/json" in content_type:
-                    print("JSON")
                     try:
                         resource = response.json()
                     except json.decoder.JSONDecodeError:
                         raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
                 elif "xml" in content_type:
-                    print("XML")
                     resource = xmltodict.parse(response.content).get("response", {})
                 else:
+                    print(response.content)
                     resource = response.content
 
             return {"resource": resource, "status": response.status_code, "content-type": content_type}

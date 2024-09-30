@@ -22,8 +22,10 @@ class SearchCi(insightconnect_plugin_runtime.Action):
         response = self.connection.request.make_request(url, method, params=query)
 
         try:
-            result = response["resource"].get("result")
-        except KeyError as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text) from e
+            result = response.get("resource", {}).get("result")
+        except KeyError:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+        except AttributeError:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 
         return {Output.SERVICENOW_CIS: result}

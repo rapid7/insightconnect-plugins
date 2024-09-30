@@ -1,4 +1,6 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 from .schema import GetSecurityIncidentInput, GetSecurityIncidentOutput, Input, Output, Component
 
 # Custom imports below
@@ -16,14 +18,15 @@ class GetSecurityIncident(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {
-            Output.SECURITY_INCIDENT: convert_security_incident_fields(
-                return_non_empty(
-                    self.connection.request.make_request(
-                        endpoint=f"{self.connection.security_incident_url}/{params.get(Input.SYS_ID)}", method="GET"
-                    )
-                    .get("resource", {})
-                    .get("result", {})
-                )
-            )
-        }
+
+        response = self.connection.request.make_request(
+            endpoint=f"{self.connection.security_incident_url}/{params.get(Input.SYS_ID)}", method="GET"
+        )
+        try:
+            result = response.get("resource", {}).get("result", {})
+        except KeyError:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+        except AttributeError:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
+
+        return {Output.SECURITY_INCIDENT: convert_security_incident_fields(return_non_empty(result))}

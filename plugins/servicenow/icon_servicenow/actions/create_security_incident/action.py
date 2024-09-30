@@ -27,14 +27,17 @@ class CreateSecurityIncident(insightconnect_plugin_runtime.Action):
                 "provided.",
             )
         json_data.update(json_data.pop(Input.ADDITIONAL_FIELDS, {}))
-        response = (
-            self.connection.request.make_request(
-                endpoint=self.connection.security_incident_url,
-                method="POST",
-                payload=return_non_empty(json_data),
-                params={"sysparm_fields": "sys_id,number"},
-            )
-            .get("resource", {})
-            .get("result", {})
+        response = self.connection.request.make_request(
+            endpoint=self.connection.security_incident_url,
+            method="POST",
+            payload=return_non_empty(json_data),
+            params={"sysparm_fields": "sys_id,number"},
         )
-        return {Output.SYSTEM_ID: response.get("sys_id"), Output.NUMBER: response.get("number")}
+
+        try:
+            result = response.get("resource", {}).get("result", {})
+        except KeyError as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text) from error
+        except AttributeError:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
+        return {Output.SYSTEM_ID: result.get("sys_id"), Output.NUMBER: result.get("number")}

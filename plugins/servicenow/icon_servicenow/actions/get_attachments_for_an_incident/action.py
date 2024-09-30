@@ -1,4 +1,6 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 from .schema import GetAttachmentsForAnIncidentInput, GetAttachmentsForAnIncidentOutput, Input, Output, Component
 
 # Custom imports below
@@ -18,8 +20,14 @@ class GetAttachmentsForAnIncident(insightconnect_plugin_runtime.Action):
         response = self.connection.request.make_request(
             f"{self.connection.attachment_url}?sysparm_query=table_sys_id={params.get(Input.INCIDENT_ID)}", "get"
         )
-        attachment = response.get("resource").get("result")
-        attachments = []
+        try:
+            attachment = response.get("resource", {}).get("result")
+            attachments = []
+        except KeyError as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text) from error
+        except AttributeError:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
+
         for item in attachment:
             attachments.append(
                 {

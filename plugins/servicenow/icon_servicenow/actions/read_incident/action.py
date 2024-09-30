@@ -25,8 +25,10 @@ class ReadIncident(insightconnect_plugin_runtime.Action):
 
         try:
             for field in fields:
-                filtered_incident[field] = response["resource"]["result"].get(field, "")
-        except KeyError as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text) from e
+                filtered_incident[field] = response.get("resource", {}).get("result", {}).get(field, "")
+        except KeyError:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+        except AttributeError:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 
         return {Output.FILTERED_INCIDENT: filtered_incident}
