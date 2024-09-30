@@ -97,7 +97,6 @@ class RequestHelper(object):
                 elif "xml" in content_type:
                     resource = xmltodict.parse(response.content).get("response", {})
                 else:
-                    print(response.content)
                     resource = response.content
 
             return {"resource": resource, "status": response.status_code, "content-type": content_type}

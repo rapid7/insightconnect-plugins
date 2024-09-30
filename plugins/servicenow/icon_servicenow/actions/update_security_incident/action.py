@@ -35,4 +35,4 @@ class UpdateSecurityIncident(insightconnect_plugin_runtime.Action):
         except AttributeError:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 
-        return {Output.SYSTEM_ID: result.get("sys_id"), Output.NUMBER: response.get("number")}
+        return {Output.SYSTEM_ID: result.get("sys_id"), Output.NUMBER: result.get("number")}

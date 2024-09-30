@@ -32,7 +32,7 @@ class CreateCi(insightconnect_plugin_runtime.Action):
 
         if sys_id is None:
             raise PluginException(
-                cause=f"Error: create_ci failed - no system_id returned.",
+                cause="Error: create_ci failed - no system_id returned.",
                 assistance=f"Response: {response.text}",
             )
 
