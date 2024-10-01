@@ -36,8 +36,6 @@ class CreateSecurityIncident(insightconnect_plugin_runtime.Action):
 
         try:
             result = response.get("resource", {}).get("result", {})
-        except KeyError as error:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text) from error
         except AttributeError:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
         return {Output.SYSTEM_ID: result.get("sys_id"), Output.NUMBER: result.get("number")}

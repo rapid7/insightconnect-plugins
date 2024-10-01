@@ -40,9 +40,7 @@ class CreateIncident(insightconnect_plugin_runtime.Action):
         )
 
         try:
-            result = response["resource"].get("result")
-        except KeyError as error:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text) from error
+            result = response.get("resource", {}).get("result")
         except AttributeError:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 

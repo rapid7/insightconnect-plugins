@@ -23,8 +23,6 @@ class GetAttachmentsForAnIncident(insightconnect_plugin_runtime.Action):
         try:
             attachment = response.get("resource", {}).get("result")
             attachments = []
-        except KeyError as error:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text) from error
         except AttributeError:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 

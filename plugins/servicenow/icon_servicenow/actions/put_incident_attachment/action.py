@@ -40,8 +40,6 @@ class PutIncidentAttachment(insightconnect_plugin_runtime.Action):
 
         try:
             result = response.get("resource", {}).get("result")
-        except KeyError:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
         except AttributeError:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 
