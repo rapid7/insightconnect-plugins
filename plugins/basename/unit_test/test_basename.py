@@ -1,7 +1,12 @@
+import sys
+
+sys.path.append("../")
+
 from unittest import TestCase
+
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_basename.actions.basename import Basename
 from komand_basename.actions.basename.schema import Input
-from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class TestBasename(TestCase):
