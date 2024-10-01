@@ -22,7 +22,7 @@ class CreateCi(insightconnect_plugin_runtime.Action):
         response = self.connection.request.make_request(url, method, payload=payload)
 
         try:
-            result = response.get("resource",{}).get("result")
+            result = response.get("resource", {}).get("result")
         except AttributeError:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 
