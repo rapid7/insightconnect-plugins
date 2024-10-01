@@ -16,9 +16,12 @@ class DataExtraction(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        flags = shared.constructFlags(params)
-        regex = "(" + params.get(Input.IN_REGEX) + ")"
-        findall = re.findall(regex, params.get(Input.IN_STRING), flags=flags)
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        regex = f"({params.get(Input.IN_REGEX, '')})"
+        input_string = params.get(Input.IN_STRING, "")
+        # END INPUT BINDING - DO NOT REMOVE
+
+        findall = re.findall(regex, input_string, flags=shared.construct_flags(params))
         matches = []
         for match in findall:
             if isinstance(match, str):
