@@ -1,4 +1,5 @@
 import re
+from typing import Dict, Any
 
 
 class Input:
@@ -9,16 +10,14 @@ class Input:
     MULTILINE = "multiline"
 
 
-def constructFlags(input):
+def construct_flags(parameters: Dict[str, Any]) -> int:
     combined_flags = 0
-
-    if input.get(Input.IGNORECASE, False):
+    if parameters.get(Input.IGNORECASE, False):
         combined_flags = combined_flags | re.IGNORECASE
-    if input.get(Input.MULTILINE, False):
+    if parameters.get(Input.MULTILINE, False):
         combined_flags = combined_flags | re.MULTILINE
-    if input.get(Input.DOTALL, False):
+    if parameters.get(Input.DOTALL, False):
         combined_flags = combined_flags | re.DOTALL
-    if input.get(Input.ASCII, False):
+    if parameters.get(Input.ASCII, False):
         combined_flags = combined_flags | re.ASCII
-
     return combined_flags
