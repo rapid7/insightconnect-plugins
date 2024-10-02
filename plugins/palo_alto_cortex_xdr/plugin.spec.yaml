@@ -4,13 +4,14 @@ products: [insightconnect]
 name: palo_alto_cortex_xdr
 title: Palo Alto Cortex XDR
 description: Stop modern attacks with the industry's first extended detection and response platform that spans your endpoints, network and cloud data
-version: 3.0.0
+version: 4.0.0
 connection_version: 2
+cloud_ready: true
 sdk:
   type: slim
-  version: 5
+  version: 6.1.3
   user: nobody
-supported_versions: ["2022-08-09 Palo Alto Cortex XDR API v1"]
+supported_versions: ["2024-07-15 Palo Alto Cortex XDR API"]
 vendor: rapid7
 support: rapid7
 status: []
@@ -19,679 +20,448 @@ resources:
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.paloaltonetworks.com/cortex/cortex-xdr
 tags:
-- cortex xdr
-- palo alto
-- endpoint
-- detection
+  - cortex xdr
+  - palo alto
+  - endpoint
+  - detection
 hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [cortex, endpoint, detection]
   features: []
 requirements:
-  - A Palo Alto Cortex XDR API key
-  - A Palo Alto Cortex XDR API key ID
-  - The URL to your Palo Alto Cortex XDR API instance
+  - "A Palo Alto Cortex XDR API key"
+  - "A Palo Alto Cortex XDR API key ID"
+  - "The URL to your Palo Alto Cortex XDR API instance"
 key_features:
-  - Get Endpoint Information
-  - Isolate or Unisolate an endpoint
-  - Add files to the block or allow lists
+  - "Get Endpoint Information"
+  - "Isolate or Unisolate an endpoint"
+  - "Add files to the block or allow lists"
+troubleshooting: "Isolate Endpoint fails with 500 error - This will happen if an isolation action (Isolate or Unisolate) is in progress on the selected endpoint. Wait a few minutes and try again."
+version_history:
+  - "4.0.0 - `Get Alerts`: Fixed issue where trigger was failing due to empty and different typed output fields - updated to generic object | Added Monitor_alert tasks | SDK Bump to 6.1.2"
+  - "3.0.0 - Updated `hosts` output of `Get Incident` trigger and `Monitor Incident Events` task to separate host values | Update `insightconnect-plugin-runtime` to version 5"
+  - "2.3.0 - Add types `xql_query_result` to `Get XQL Query Results` action's response | Add new trigger `Get Query Results`"
+  - "2.2.1 - Fix issue in Get Incidents trigger where fields with null values were causing trigger to fail"
+  - "2.2.0 - New action Get XQL Query Results | Update SDK to insightconnect-python-3-38-slim-plugin:4"
+  - "2.1.1 - Fix issue in Monitor Incident Events task where fields with null values aren't removed from incidents leading to validation errors"
+  - "2.1.0 - New task Monitor Incident Events"
+  - "2.0.0 - New action Get File Quarantine Status | New trigger Get Alerts"
+  - "1.0.0 - Initial plugin"
+links:
+  - "[Palo Alto Cortex XDR](https://www.paloaltonetworks.com/cortex/cortex-xdr)"
+references:
+  - "This plugin was tested using Viewer, Security Admin, and Instance Administrator Roles using both Standard and Advanced Security Levels. Please ensure your selected Role has adequate permissions to perform the desired actions."
 types:
-  event:
-    action_country:
-      title: Action Country
-      type: string
-      description: Action country
-      required: false
-    action_external_hostname:
-      title: Action External Hostname
-      type: string
-      description: Action external hostname
-      required: false
-    action_file_macro_sha256:
-      title: Action File Macro SHA256
-      type: string
-      description: Action file macro SHA256
-      required: false
-    action_file_md5:
-      title: Action File MD5
-      type: string
-      description: Action file MD5
-      required: false
-    action_file_name:
-      title: Action File Name
-      type: string
-      description: Action file name
-      required: false
-    action_file_path:
-      title: Action File Path
-      type: string
-      description: Action file path
-      required: false
-    action_file_sha256:
-      title: Action File SHA256
-      type: string
-      description: Action file SHA256
-      required: false
-    action_local_ip:
-      title: Action Local IP
-      type: string
-      description: Action local IP
-      required: false
-    action_local_port:
-      title: Action Local Port
-      type: string
-      description: Action local port
-      required: false
-    action_process_causality_id:
-      title: Action Process Causality ID
-      type: string
-      description: Action process causality ID
-      required: false
-    action_process_image_command_line:
-      title: Action Process Image Command Line
-      type: string
-      description: Action process image command line
-      required: false
-    action_process_image_name:
-      title: Action Process Image Name
-      type: string
-      description: Action process image name
-      required: false
-    action_process_image_sha256:
-      title: Action Process Image SHA256
-      type: string
-      description: Action process image SHA256
-      required: false
-    action_process_instance_id:
-      title: Action Process Instance ID
-      type: string
-      description: Action process instance ID
-      required: false
-    action_process_signature_status:
-      title: Action Process Signature Status
-      type: string
-      description: Action process signature status
-      required: false
-    action_process_signature_vendor:
-      title: Action Process Signature Vendor
-      type: string
-      description: Action process signature vendor
-      required: false
-    action_registry_data:
-      title: Action Registry Data
-      type: string
-      description: Action registry data
-      required: false
-    action_registry_full_key:
-      title: Action Registry Full Key
-      type: string
-      description: Action registry full key
-      required: false
-    action_registry_key_name:
-      title: Action Registry Key Name
-      type: string
-      description: Action registry key name
-      required: false
-    action_registry_value_name:
-      title: Action Registry Value Name
-      type: string
-      description: Action registry value name
-      required: false
-    action_remote_ip:
-      title: Action Remote IP
-      type: string
-      description: Action remote IP
-      required: false
-    action_remote_port:
-      title: Action Remote Port
-      type: string
-      description: Action remote port
-      required: false
-    actor_causality_id:
-      title: Actor Causality ID
-      type: string
-      description: Actor causality ID
-      required: false
-    actor_process_causality_id:
-      title: Actor Process Causality ID
-      type: string
-      description: Actor process causality ID
-      required: false
-    actor_process_command_line:
-      title: Actor Process Command Line
-      type: string
-      description: Actor process command line
-      required: false
-    actor_process_image_md5:
-      title: Actor Process Image MD5
-      type: string
-      description: Actor process image MD5
-      required: false
-    actor_process_image_name:
-      title: Actor Process Image Name
-      type: string
-      description: Actor process image name
-      required: false
-    actor_process_image_path:
-      title: Actor Process Image Path
-      type: string
-      description: Actor process image path
-      required: false
-    actor_process_image_sha256:
-      title: Actor Process Image SHA256
-      type: string
-      description: Actor process image SHA256
-      required: false
-    actor_process_instance_id:
-      title: Actor Process Instance ID
-      type: string
-      description: Actor process instance ID
-      required: false
-    actor_process_os_pid:
-      title: Actor Process OS PID
-      type: integer
-      description: Actor process OS PID
-      required: false
-    actor_process_signature_status:
-      title: Actor Process Signature Status
-      type: string
-      description: Actor process signature status
-      required: false
-    actor_process_signature_vendor:
-      title: Actor Process Signature Vendor
-      type: string
-      description: Actor process signature vendor
-      required: false
-    actor_thread_thread_id:
-      title: Actor Thread Thread ID
-      type: string
-      description: Actor thread thread ID
-      required: false
-    agent_host_boot_time:
-      title: Agent Host Boot Time
-      type: string
-      description: Agent host boot time
-      required: false
-    agent_install_type:
-      title: Agent Install Type
-      type: string
-      description: Agent install type
-      required: false
-    association_strength:
-      title: Association Strength
-      type: string
-      description: Association strength
-      required: false
-    causality_actor_causality_id:
-      title: Causality Actor Causality ID
-      type: string
-      description: Causality actor causality ID
-      required: false
-    causality_actor_process_command_line:
-      title: Causality Actor Process Command Line
-      type: string
-      description: Causality actor process command line
-      required: false
-    causality_actor_process_execution_time:
-      title: Causality Actor Process Execution Time
-      type: string
-      description: Causality actor process execution time
-      required: false
-    causality_actor_process_image_md5:
-      title: Causality Actor Process Image MD5
-      type: string
-      description: Causality actor process image MD5
-      required: false
-    causality_actor_process_image_name:
-      title: Causality Actor Process Image Name
-      type: string
-      description: Causality actor process image name
-      required: false
-    causality_actor_process_image_path:
-      title: Causality Actor Process Image Path
-      type: string
-      description: Causality actor process image path
-      required: false
-    causality_actor_process_image_sha256:
-      title: Causality Actor Process Image SHA256
-      type: string
-      description: Causality actor process image SHA256
-      required: false
-    causality_actor_process_signature_status:
-      title: Causality Actor Process Signature Status
-      type: string
-      description: Causality actor process signature status
-      required: false
-    causality_actor_process_signature_vendor:
-      title: Causality Actor Process Signature Vendor
-      type: string
-      description: Causality actor process signature vendor
-      required: false
-    cluster_name:
-      title: Cluster Name
-      type: string
-      description: Cluster name
-      required: false
-    container_id:
-      title: Container ID
-      type: string
-      description: Container ID
-      required: false
-    contains_featured_host:
-      title: Contains Featured Host
-      type: string
-      description: Contains featured host
-      required: false
-    contains_featured_ip:
-      title: Contains Featured IP
-      type: string
-      description: Contains featured IP
-      required: false
-    contains_featured_user:
-      title: Contains Featured User
-      type: string
-      description: Contains featured user
-      required: false
-    dns_query_name:
-      title: DNS Query Name
-      type: string
-      description: DNS query name
-      required: false
-    dst_action_country:
-      title: DST Action Country
-      type: string
-      description: DST action country
-      required: false
-    dst_action_external_hostname:
-      title: DST Action External Hostname
-      type: string
-      description: DST action external hostname
-      required: false
-    dst_action_external_port:
-      title: DST Action External Port
-      type: string
-      description: DST action external port
-      required: false
-    dst_agent_id:
-      title: DST Agent ID
-      type: string
-      description: DST agent ID
-      required: false
-    dst_association_strength:
-      title: DST Association Strength
-      type: string
-      description: DST association strength
-      required: false
-    dst_causality_actor_process_execution_time:
-      title: DST Causality Actor Process Execution Time
-      type: string
-      description: DST causality actor process execution time
-      required: false
-    event_id:
-      title: Event ID
-      type: string
-      description: Event ID
-      required: false
-    event_sub_type:
-      title: Event Sub Type
-      type: string
-      description: Event sub type
-      required: false
-    event_timestamp:
-      title: Event Timestamp
-      type: integer
-      description: Event timestamp
-      required: false
-    event_type:
-      title: Event Type
-      type: string
-      description: Event type
-      required: false
-    fw_app_category:
-      title: FW App Category
-      type: string
-      description: FW app category
-      required: false
-    fw_app_id:
-      title: FW App ID
-      type: string
-      description: FW app ID
-      required: false
-    fw_app_subcategory:
-      title: FW App Subcategory
-      type: string
-      description: FW app subcategory
-      required: false
-    fw_app_technology:
-      title: FW App Technology
-      type: string
-      description: FW app technology
-      required: false
-    fw_device_name:
-      title: FW Device Name
-      type: string
-      description: FW device name
-      required: false
-    fw_email_recipient:
-      title: FW Email Recipient
-      type: string
-      description: FW email recipient
-      required: false
-    fw_email_sender:
-      title: FW Email Sender
-      type: string
-      description: FW email sender
-      required: false
-    fw_email_subject:
-      title: FW Email Subject
-      type: string
-      description: FW email subject
-      required: false
-    fw_interface_from:
-      title: FW Interface From
-      type: string
-      description: FW interface from
-      required: false
-    fw_interface_to:
-      title: FW Interface To
-      type: string
-      description: FW interface to
-      required: false
-    fw_is_phishing:
-      title: FW Is Phishing
-      type: string
-      description: FW is phishing
-      required: false
-    fw_misc:
-      title: FW Misc
-      type: string
-      description: FW misc
-      required: false
-    fw_rule:
-      title: FW Rule
-      type: string
-      description: FW rule
-      required: false
-    fw_rule_id:
-      title: FW Rule ID
-      type: string
-      description: FW rule ID
-      required: false
-    fw_serial_number:
-      title: FW Serial Number
-      type: string
-      description: FW serial number
-      required: false
-    fw_url_domain:
-      title: FW URL Domain
-      type: string
-      description: FW URL domain
-      required: false
-    fw_vsys:
-      title: FW VSYS
-      type: string
-      description: FW VSYS
-      required: false
-    fw_xff:
-      title: FW XFF
-      type: string
-      description: FW XFF
-      required: false
-    image_name:
-      title: Image Name
-      type: string
-      description: Image name
-      required: false
-    module_id:
-      title: Module ID
-      type: string
-      description: Module ID
-      required: false
-    os_actor_causality_id:
-      title: OS Actor Causality ID
-      type: string
-      description: OS actor causality ID
-      required: false
-    os_actor_effective_username:
-      title: OS Actor Effective Username
-      type: string
-      description: OS actor effective username
-      required: false
-    os_actor_process_causality_id:
-      title: OS Actor Process Causality ID
-      type: string
-      description: OS actor process causality ID
-      required: false
-    os_actor_process_command_line:
-      title: OS Actor Process Command Line
-      type: string
-      description: OS actor process command line
-      required: false
-    os_actor_process_image_name:
-      title: OS Actor Process Image Name
-      type: string
-      description: OS actor process image name
-      required: false
-    os_actor_process_image_path:
-      title: OS Actor Process Image Path
-      type: string
-      description: OS actor process image path
-      required: false
-    os_actor_process_image_sha256:
-      title: OS Actor Process Image SHA256
-      type: string
-      description: OS actor process image SHA256
-      required: false
-    os_actor_process_instance_id:
-      title: OS Actor Process Instance ID
-      type: string
-      description: OS actor process instance ID
-      required: false
-    os_actor_process_os_pid:
-      title: OS Actor Process OS PID
-      type: string
-      description: OS actor process OS PID
-      required: false
-    os_actor_process_signature_status:
-      title: OS Actor Process Signature Status
-      type: string
-      description: OS actor process signature status
-      required: false
-    os_actor_process_signature_vendor:
-      title: OS Actor Process Signature Vendor
-      type: string
-      description: OS actor process signature vendor
-      required: false
-    os_actor_thread_thread_id:
-      title: OS Actor Thread Thread ID
-      type: string
-      description: OS actor thread thread ID
-      required: false
-    story_id:
-      title: Story ID
-      type: string
-      description: Story ID
-      required: false
-    user_name:
-      title: User Name
-      type: string
-      description: User name
-      required: false
   alert:
-    action:
-      title: Action
-      type: string
-      description: Action
-      required: false
-    action_pretty:
-      title: Action Pretty
-      type: string
-      description: Action pretty
-      required: false
-    agent_data_collection_status:
-      title: Agent Data Collection Status
-      type: boolean
-      description: Agent data collection status
-      required: false
-    agent_device_domain:
-      title: Agent Device Domain
-      type: string
-      description: Agent device domain
-      required: false
-    agent_fqdn:
-      title: Agent FQDN
-      type: string
-      description: Agent FQDN
-      required: false
     agent_os_sub_type:
       title: Agent OS Sub Type
+      description: The subtype of the operating system running on the agent.
       type: string
-      description: Agent OS sub type
-      required: false
-    agent_os_type:
-      title: Agent OS Type
-      type: string
-      description: Agent OS type
-      required: false
-    agent_version:
-      title: Agent Version
-      type: string
-      description: Agent version
-      required: false
-    alert_id:
-      title: Alert ID
-      type: string
-      description: Alert ID
-      required: false
-    attempt_counter:
-      title: Attempt Counter
-      type: string
-      description: Attempt counter
-      required: false
-    bioc_category_enum_key:
-      title: BIOC Category Enum Key
-      type: string
-      description: BIOC category enum key
-      required: false
-    bioc_indicator:
-      title: BIOC Indicator
-      type: string
-      description: BIOC indicator
       required: false
     category:
       title: Category
+      description: The general category of the event.
       type: string
-      description: Category
       required: false
-    deduplicate_tokens:
-      title: Deduplicate Tokens
-      type: string
-      description: Deduplicate tokens
+    causality_actor_process_command_line:
+      title: Causality Actor Process Command Line
+      description: The command line arguments of the causality actor process.
+      type: '[]string'
+      required: false
+    causality_actor_process_image_md5:
+      title: Causality Actor Process Image MD5
+      description: The MD5 hash of the causality actor process image.
+      type: '[]string'
+      required: false
+    causality_actor_process_image_name:
+      title: Causality Actor Process Image Name
+      description: The name of the causality actor process image.
+      type: '[]string'
+      required: false
+    causality_actor_process_image_path:
+      title: Causality Actor Process Image Path
+      description: The path to the causality actor process image.
+      type: '[]string'
+      required: false
+    causality_actor_process_image_sha256:
+      title: Causality Actor Process Image SHA256
+      description: The SHA256 hash of the causality actor process image.
+      type: '[]string'
+      required: false
+    causality_actor_process_signature_status:
+      title: Causality Actor Process Signature Status
+      description: The status of the signature associated with the causality actor process.
+      type: '[]string'
+      required: false
+    causality_actor_process_signature_vendor:
+      title: Causality Actor Process Signature Vendor
+      description: The vendor of the signature associated with the causality actor process.
+      type: '[]string'
+      required: false
+    causality_actor_causality_id:
+      title: Causality Actor Causality ID
+      description: The causality ID of the causality actor.
+      type: '[]string'
+      required: false
+    contains_featured_host:
+      title: Contains Featured Host
+      description: Indicates if the event contains a featured host.
+      type: '[]string'
+      required: false
+    contains_featured_ip:
+      title: Contains Featured IP
+      description: Indicates if the event contains a featured IP address.
+      type: '[]string'
+      required: false
+    contains_featured_user:
+      title: Contains Featured User
+      description: Indicates if the event contains a featured user.
+      type: '[]string'
+      required: false
+    action_country:
+      title: Action Country
+      description: The country where the action took place.
+      type: '[]string'
       required: false
     description:
       title: Description
+      description: A textual description of the event.
       type: string
-      description: Description
       required: false
-    detection_timestamp:
-      title: Detection Timestamp
-      type: integer
-      description: Detection timestamp
-      required: false
-    end_match_attempt_ts:
-      title: End Match Attempt TS
-      type: string
-      description: End match attempt TS
-      required: false
-    endpoint_id:
-      title: Endpoint ID
-      type: string
-      description: Endpoint ID
-      required: false
-    events:
-      title: Events
-      type: "[]event"
-      description: Events
-      required: false
-    external_id:
-      title: External ID
-      type: string
-      description: External ID
-      required: false
-    filter_rule_id:
-      title: Filter Rule ID
-      type: string
-      description: Filter rule ID
-      required: false
-    host_ip:
-      title: Host IP
-      type: "[]string"
-      description: Host IP
-      required: false
-    host_name:
-      title: Host Name
-      type: string
-      description: Host name
+    event_type:
+      title: Event Type
+      description: The type of the event.
+      type: '[]string'
       required: false
     is_whitelisted:
       title: Is Whitelisted
+      description: Indicates if the event is whitelisted.
       type: boolean
-      description: Is whitelisted
       required: false
-    local_insert_ts:
-      title: Local Insert TS
-      type: integer
-      description: Local insert TS
-      required: false
-    mac:
-      title: MAC
+    action_file_macro_sha256:
+      title: Action File Macro SHA256
+      description: The SHA256 hash of the macro file involved in the action.
       type: string
-      description: MAC
       required: false
-    mac_addresses:
-      title: MAC Addresses
-      type: "[]string"
-      description: MAC addresses
+    action_file_md5:
+      title: Action File MD5
+      description: The MD5 hash of the file involved in the action.
+      type: string
+      required: false
+    action_file_name:
+      title: Action File Name
+      description: The name of the file involved in the action.
+      type: string
+      required: false
+    action_file_path:
+      title: Action File Path
+      description: The path to the file involved in the action.
+      type: string
+      required: false
+    action_file_sha256:
+      title: Action File SHA256
+      description: The SHA256 hash of the file involved in the action.
+      type: string
+      required: false
+    fw_device_name:
+      title: Firewall Device Name
+      description: The name of the firewall device.
+      type: string
+      required: false
+    agent_fqdn:
+      title: Agent Fully Qualified Domain Name
+      description: The fully qualified domain name of the agent.
+      type: string
+      required: false
+    agent_os_type:
+      title: Agent Operating System Type
+      description: The type of the operating system running on the agent.
+      type: string
+      required: false
+    image_name:
+      title: Image Name
+      description: The name of the image.
+      type: string
+      required: false
+    actor_process_image_name:
+      title: Actor Process Image Name
+      description: The name of the actor process image.
+      type: '[]string'
+      required: false
+    actor_process_command_line:
+      title: Actor Process Command Line
+      description: The command line arguments of the actor process.
+      type: '[]string'
+      required: false
+    actor_process_image_md5:
+      title: Actor Process Image MD5
+      description: The MD5 hash of the actor process image.
+      type: '[]string'
+      required: false
+    actor_process_image_path:
+      title: Actor Process Image Path
+      description: The path to the actor process image.
+      type: '[]string'
+      required: false
+    actor_process_os_pid:
+      title: Actor Process Operating System PID
+      description: The process ID of the actor process on the operating system.
+      type: '[]integer'
+      required: false
+    actor_process_image_sha256:
+      title: Actor Process Image SHA256
+      description: The SHA256 hash of the actor process image.
+      type: '[]string'
+      required: false
+    actor_process_signature_status:
+      title: Actor Process Signature Status
+      description: The status of the signature associated with the actor process.
+      type: '[]string'
+      required: false
+    actor_process_signature_vendor:
+      title: Actor Process Signature Vendor
+      description: The vendor of the signature associated with the actor process.
+      type: '[]string'
+      required: false
+    actor_thread_thread_id:
+      title: Actor Thread Thread ID
+      description: The thread ID of the actor thread.
+      type: '[]integer'
+      required: false
+    fw_is_phishing:
+      title: Firewall Is Phishing
+      description: Indicates if the event is related to phishing.
+      type: '[]string'
+      required: false
+    mitre_tactic_id_and_name:
+      title: MITRE Tactic ID and Name
+      description: The ID and name of the MITRE tactic.
+      type: '[]string'
+      required: false
+    mitre_technique_id_and_name:
+      title: MITRE Technique ID and Name
+      description: The ID and name of the MITRE technique.
+      type: '[]string'
+      required: false
+    module_id:
+      title: Module ID
+      description: The ID of the module.
+      type: '[]string'
+      required: false
+    os_actor_process_command_line:
+      title: OS Actor Process Command Line
+      description: The command line arguments of the OS actor process.
+      type: '[]string'
+      required: false
+    os_actor_thread_thread_id:
+      title: OS Actor Thread Thread ID
+      description: The thread ID of the OS actor thread.
+      type: '[]integer'
+      required: false
+    os_actor_process_image_name:
+      title: OS Actor Process Image Name
+      description: The name of the OS actor process image.
+      type: '[]string'
+      required: false
+    os_actor_process_os_pid:
+      title: OS Actor Process Operating System PID
+      description: The process ID of the OS actor process on the operating system.
+      type: '[]integer'
+      required: false
+    os_actor_process_image_sha256:
+      title: OS Actor Process Image SHA256
+      description: The SHA256 hash of the OS actor process image.
+      type: '[]string'
+      required: false
+    os_actor_process_signature_status:
+      title: OS Actor Process Signature Status
+      description: The status of the signature associated with the OS actor process.
+      type: '[]string'
+      required: false
+    os_actor_process_signature_vendor:
+      title: OS Actor Process Signature Vendor
+      description: The vendor of the signature associated with the OS actor process.
+      type: '[]string'
+      required: false
+    action_process_signature_status:
+      title: Action Process Signature Status
+      description: The status of the signature associated with the action process.
+      type: '[]string'
       required: false
     matching_service_rule_id:
       title: Matching Service Rule ID
+      description: The ID of the service rule matched.
       type: string
-      description: Matching service rule ID
-      required: false
-    matching_status:
-      title: Matching Status
-      type: string
-      description: Matching status
-      required: false
-    mitre_tactic_id_and_name:
-      title: MITRE Tactic ID And Name
-      type: "[]string"
-      description: MITRE tactic ID and name
-      required: false
-    mitre_technique_id_and_name:
-      title: MITRE Technique ID And Name
-      type: "[]string"
-      description: MITRE technique ID and name
-      required: false
-    name:
-      title: Name
-      type: string
-      description: Name
-      required: false
-    severity:
-      title: Severity
-      type: string
-      description: Severity
-      required: false
-    source:
-      title: Source
-      type: string
-      description: Source
       required: false
     starred:
       title: Starred
+      description: Indicates if the alert is starred.
       type: boolean
-      description: Starred
+      required: false
+    external_id:
+      title: External ID
+      description: An external identifier for the alert.
+      type: string
+      required: false
+    severity:
+      title: Severity
+      description: The severity level of the alert.
+      type: string
+      required: false
+    matching_status:
+      title: Matching Status
+      description: The status of the matching process.
+      type: string
+      required: false
+    local_insert_ts:
+      title: Local Insert Timestamp
+      description: The timestamp when the alert was inserted locally.
+      type: integer
+      required: false
+    attempt_counter:
+      title: Attempt Counter
+      description: The counter for attempts made.
+      type: integer
+      required: false
+    case_id:
+      title: Case ID
+      description: The case ID associated with the alert.
+      type: integer
+      required: false
+    agent_version:
+      title: Agent Version
+      description: The version of the agent.
+      type: string
+      required: false
+    agent_data_collection_status:
+      title: Agent Data Collection Status
+      description: The status of data collection by the agent.
+      type: boolean
+      required: false
+    agent_is_vdi:
+      title: Agent Is VDI
+      description: Indicates if the agent is running on a VDI.
+      type: boolean
+      required: false
+    agent_install_type:
+      title: Agent Install Type
+      description: The install type of the agent.
+      type: string
+      required: false
+    agent_host_boot_time:
+      title: Agent Host Boot Time
+      description: The boot time of the host.
+      type: '[]integer'
+      required: false
+    event_sub_type:
+      title: Event Sub Type
+      description: The subtype of the event.
+      type: '[]integer'
+      required: false
+    association_strength:
+      title: Association Strength
+      description: The strength of association between entities.
+      type: '[]integer'
+      required: false
+    event_timestamp:
+      title: Event Timestamp
+      description: The timestamp of the event.
+      type: '[]integer'
+      required: false
+    actor_process_instance_id:
+      title: Actor Process Instance ID
+      description: The instance ID of the actor process.
+      type: '[]string'
+      required: false
+    causality_actor_process_execution_time:
+      title: Causality Actor Process Execution Time
+      description: The execution time of the causality actor process.
+      type: '[]integer'
+      required: false
+    os_actor_process_image_path:
+      title: OS Actor Process Image Path
+      description: The path to the OS actor process image.
+      type: '[]string'
+      required: false
+    is_pcap:
+      title: Is PCAP
+      description: Indicates if the alert involves PCAP data.
+      type: boolean
+      required: false
+    alert_type:
+      title: Alert Type
+      description: The type of the alert.
+      type: string
+      required: false
+    resolution_status:
+      title: Resolution Status
+      description: The resolution status of the alert.
+      type: string
+      required: false
+    tags:
+      title: Tags
+      description: Tags associated with the alert.
+      type: '[]string'
+      required: false
+    alert_id:
+      title: Alert ID
+      description: The unique ID of the alert.
+      type: string
+      required: false
+    detection_timestamp:
+      title: Detection Timestamp
+      description: The timestamp when the detection occurred.
+      type: integer
+      required: false
+    name:
+      title: Name
+      description: The name of the alert.
+      type: string
+      required: false
+    endpoint_id:
+      title: Endpoint ID
+      description: The ID of the endpoint.
+      type: string
+      required: false
+    host_ip:
+      title: Host IP
+      description: The IP address of the host.
+      type: '[]string'
+      required: false
+    host_name:
+      title: Host Name
+      description: The name of the host.
+      type: string
+      required: false
+    action:
+      title: Action
+      description: The action taken.
+      type: string
+      required: false
+    original_tags:
+      title: Original Tags
+      description: The original tags associated with the alert.
+      type: '[]string'
+      required: false
+    user_name:
+      title: User Name
+      description: The name of the user.
+      type: '[]string'
+      required: false
+    mac_addresses:
+      title: MAC Addresses
+      description: The MAC addresses associated with the alert.
+      type: '[]string'
+      required: false
+    source:
+      title: Source
+      description: The source of the alert.
+      type: string
+      required: false
+    action_pretty:
+      title: Action Pretty
+      description: A pretty-printed representation of the action.
+      type: string
       required: false
   incident:
     alert_count:
@@ -988,7 +758,7 @@ connection:
   api_key_id:
     title: API Key ID
     description: The API Key ID shown in the Cortex XDR API Keys table in settings. e.g. 1, 2, 3
-    type: int
+    type: integer
     required: true
     example: 1
   api_key:
@@ -1228,9 +998,9 @@ triggers:
       alert:
         title: Alert
         description: Alert
-        type: alert
+        type: object
         required: false
-        example: '{ "Action": "", "Action Pretty": {}, "Agent Data Collection Status": "true", "Agent Device Domain": {}, "Agent FQDN": {}, "Agent OS Sub Type": {}, "Agent OS Type": {}, "Agent Version": {}, "Alert ID": {}, "Attempt Counter": {}, "BIOC Category Enum Key": {}, "BIOC Indicator": {}, "Category": {}, "Deduplicate Tokens": {}, "Description": {}, "Detection Timestamp": 0, "End Match Attempt TS": {}, "Endpoint ID": {}, "Events": [ { "Action Country": {}, "Action External Hostname": {}, "Action File MD5": {}, "Action File Macro SHA256": {}, "Action File Name": {}, "Action File Path": {}, "Action File SHA256": {}, "Action Local IP": {}, "Action Local Port": {}, "Action Process Causality ID": {}, "Action Process Image Command Line": {}, "Action Process Image Name": {}, "Action Process Image SHA256": {}, "Action Process Instance ID": {}, "Action Process Signature Status": {}, "Action Process Signature Vendor": {}, "Action Registry Data": {}, "Action Registry Full Key": {}, "Action Registry Key Name": {}, "Action Registry Value Name": {}, "Action Remote IP": {}, "Action Remote Port": {}, "Actor Causality ID": {}, "Actor Process Causality ID": {}, "Actor Process Command Line": {}, "Actor Process Image MD5": {}, "Actor Process Image Name": {}, "Actor Process Image Path": {}, "Actor Process Image SHA256": {}, "Actor Process Instance ID": {}, "Actor Process OS PID": {}, "Actor Process Signature Status": {}, "Actor Process Signature Vendor": {}, "Actor Thread Thread ID": {}, "Agent Host Boot Time": {}, "Agent Install Type": {}, "Association Strength": {}, "Causality Actor Causality ID": {}, "Causality Actor Process Command Line": {}, "Causality Actor Process Execution Time": {}, "Causality Actor Process Image MD5": {}, "Causality Actor Process Image Name": {}, "Causality Actor Process Image Path": {}, "Causality Actor Process Image SHA256": {}, "Causality Actor Process Signature Status": {}, "Causality Actor Process Signature Vendor": {}, "Cluster Name": {}, "Container ID": {}, "Contains Featured Host": {}, "Contains Featured IP": {}, "Contains Featured User": {}, "DNS Query Name": {}, "DST Action Country": {}, "DST Action External Hostname": {}, "DST Action External Port": {}, "DST Agent ID": {}, "DST Association Strength": {}, "DST Causality Actor Process Execution Time": {}, "Event ID": {}, "Event Sub Type": {}, "Event Timestamp": {}, "Event Type": {}, "FW App Category": {}, "FW App ID": {}, "FW App Subcategory": {}, "FW App Technology": {}, "FW Device Name": {}, "FW Email Recipient": {}, "FW Email Sender": {}, "FW Email Subject": {}, "FW Interface From": {}, "FW Interface To": {}, "FW Is Phishing": {}, "FW Misc": {}, "FW Rule": {}, "FW Rule ID": {}, "FW Serial Number": {}, "FW URL Domain": {}, "FW VSYS": {}, "FW XFF": {}, "Image Name": {}, "Module ID": {}, "OS Actor Causality ID": {}, "OS Actor Effective Username": {}, "OS Actor Process Causality ID": {}, "OS Actor Process Command Line": {}, "OS Actor Process Image Name": {}, "OS Actor Process Image Path": {}, "OS Actor Process Image SHA256": {}, "OS Actor Process Instance ID": {}, "OS Actor Process OS PID": {}, "OS Actor Process Signature Status": {}, "OS Actor Process Signature Vendor": {}, "OS Actor Thread Thread ID": {}, "Story ID": {}, "User Name": {} } ], "External ID": {}, "Filter Rule ID": {}, "Host IP": [ {} ], "Host Name": {}, "Is Whitelisted": {}, "Local Insert TS": {}, "MAC": {}, "MAC Addresses": {}, "MITRE Tactic ID And Name": {}, "MITRE Technique ID And Name": {}, "Matching Service Rule ID": {}, "Matching Status": {}, "Name": {}, "Severity": {}, "Source": {}, "Starred": {} }'
+        example: '{"external_id":"12345","severity":"high","matching_status":"UNMATCHABLE","local_insert_ts":1721031230123,"attempt_counter":0,"case_id":1,"is_whitelisted":false,"starred":false,"mitre_technique_id_and_name":["T000.000 - Example Technique: Name"],"mitre_tactic_id_and_name":["ExampleTacticIDName"],"agent_version":"7.5.0.36150","agent_device_domain":"ExampleDomain","agent_fqdn":"ExampleFQDN","agent_os_type":"Windows","agent_os_sub_type":"6","agent_data_collection_status":false,"agent_is_vdi":false,"agent_install_type":"STANDARD","module_id":["Behavioral Threat Protection"],"association_strength":[50],"event_type":["Process Execution"],"event_timestamp":[1721031230123],"actor_process_instance_id":["ExampleID"],"actor_process_image_path":["C:\\Windows\\System32\\cmd.exe"],"actor_process_image_name":["cmd.exe"],"actor_process_command_line":["\"C:\\Windows\\System32\\cmd.exe\" "],"actor_process_signature_status":["N/A"],"actor_process_signature_vendor":["Microsoft Windows","Microsoft Corporation"],"actor_process_image_sha256":["275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"],"actor_process_os_pid":[123],"causality_actor_process_signature_status":["N/A"],"action_country":["UNKNOWN"],"action_process_signature_status":["N/A"],"os_actor_process_signature_status":["N/A"],"fw_is_phishing":["N/A"],"is_pcap":false,"contains_featured_host":["NO"],"contains_featured_user":["NO"],"contains_featured_ip":["NO"],"alert_type":"Unclassified","resolution_status":"STATUS_010_NEW","tags":["XDR Agent"],"alert_id":"8","detection_timestamp":1721031230123,"name":"Behavioral Threat","category":"Malware","endpoint_id":"13629dd5c7284859a2954c19c275285f","description":"Example Description","host_ip":["198.51.100.1"],"host_name":"ExampleHostName","action":"BLOCKED","source":"XDR Agent","original_tags":["XDR Agent"],"user_name":["ExampleUsername"],"mac_addresses":["00:00:00:00:00:00"],"action_pretty":"Prevented (Blocked)"}'
   get_query_results:
     title: Get Query Results
     description: Runs the XQL and returns the output data results
@@ -1269,62 +1039,13 @@ triggers:
         required: true
         example: '{ "Number of Results": 0, "Query Cost": {}, "Remaining Quota": 0.0, "Results": { "Data": [ {} ], "Event Subtype": {} }, "Status": "" }'
 tasks:
-  monitor_incident_events:
-    title: Monitor Incident Events
-    description: Monitor incident events
-    input:
-      status:
-        title: Status
-        description: Status
-        type: string
-        enum:
-          - "any"
-          - "new"
-          - "under_investigation"
-          - "resolved_threat_handled"
-          - "resolved_known_issue"
-          - "resolved_false_positive"
-          - "resolved_other"
-          - "resolved_auto"
-        example: new
-        required: false
-      incident_id_list:
-        title: Incident ID List
-        description: Incident ID list
-        type: "[]string"
-        example: ["5"]
-        required: false
-      descriptions:
-        title: Descriptions
-        description: Descriptions
-        type: "[]string"
-        example: '["Behavioral threat detected (rule: heuristic.b.205)"]'
-        required: false
-      time_sorting_field:
-        title: Time Sorting Field
-        description: Field to use to sort Incident events
-        type: string
-        enum:
-          - "modification_time"
-          - "creation_time"
-        example: modification_time
-        required: false
+  monitor_alerts:
+    title: Monitor Alerts
+    description: Monitor alerts
     output:
-      events:
-        title: Incident Events
-        description: Incident events
-        type: "[]incident"
+      alerts:
+        title: Alerts
+        description: Alerts
+        type: "[]object"
         required: false
-        example: '[ { "Alert Count": 0, "Assigned User Mail": "", "Assigned User Pretty Name": {}, "Creation Time": {}, "Description": {}, "Detection Time": {}, "High Severity Alert Count": {}, "Host Count": {}, "Hosts": [ {} ], "Incident ID": {}, "Incident Name": {}, "Incident Sources": {}, "Low Severity Alert Count": {}, "Manual Description": {}, "Manual Score": {}, "Manual Severity": {}, "Med Severity Alert Count": {}, "Modification Time": {}, "Notes": {}, "Resolve Comment": {}, "Rule Based Score": {}, "Severity": {}, "Starred": "true", "Status": {}, "User Count": {}, "Users": {}, "XDR URL": {} } ]'
-    schedule:
-      title: Schedule for Retrieving Events
-      type: string
-      enum:
-        - "cron"
-        - "minutes"
-      default: minutes
-    state:
-      last_event_time:
-        title: Last Event Time
-        description: The datetime of the last retrieved incident event
-        type: string
+        example: '[ { "action": "BLOCKED", "action_country": "UNKNOWN", "action_external_hostname": null, "action_file_macro_sha256": null, "action_file_md5": null, "action_file_name": null, "action_file_path": null, "action_file_sha256": null, "action_local_ip": null, "action_local_ip_v6": null, "action_local_port": null, "action_pretty": "Prevented (Blocked)", "action_process_causality_id": null, "action_process_image_command_line": null, "action_process_image_name": null, "action_process_image_sha256": null, "action_process_instance_id": null, "action_process_signature_status": "N/A", "action_process_signature_vendor": null, "action_registry_data": null, "action_registry_full_key": null, "action_registry_key_name": null, "action_registry_value_name": null, "action_remote_ip": null, "action_remote_ip_v6": null, "action_remote_port": null, "actor_causality_id": null, "actor_process_causality_id": null, "actor_process_command_line": "\"C:\\Users\\Administrator\\Downloads\\filename3.exe\" ", "actor_process_image_md5": null, "actor_process_image_name": "filename3.exe", "actor_process_image_path": "C:\\Users\\Administrator\\Downloads\\filename3.exe", "actor_process_image_sha256": "347874EEE7A8DA0E9277D1F601DA1326480E37D09766142BBD050D536090043F", "actor_process_instance_id": "Adr1YUm6dfgAAAnkAAAAAA==", "actor_process_os_pid": 2532, "actor_process_signature_status": "N/A", "actor_process_signature_vendor": null, "actor_thread_thread_id": null, "agent_data_collection_status": false, "agent_device_domain": "WORKGROUP", "agent_fqdn": "cortex-xdr-w12.WORKGROUP", "agent_host_boot_time": null, "agent_install_type": "STANDARD", "agent_ip_addresses_v6": null, "agent_is_vdi": false, "agent_os_sub_type": "6.2.9200", "agent_os_type": "Windows", "agent_version": "7.5.0.36150", "alert_id": "18", "alert_type": "Unclassified", "association_strength": 50, "attempt_counter": 0, "bioc_category_enum_key": null, "bioc_indicator": null, "case_id": 8, "category": "Malware", "causality_actor_causality_id": null, "causality_actor_process_command_line": null, "causality_actor_process_execution_time": null, "causality_actor_process_image_md5": null, "causality_actor_process_image_name": null, "causality_actor_process_image_path": null, "causality_actor_process_image_sha256": null, "causality_actor_process_signature_status": "N/A", "causality_actor_process_signature_vendor": null, "cloud_provider": null, "cluster_name": null, "container_id": null, "container_name": null, "contains_featured_host": "NO", "contains_featured_ip": "NO", "contains_featured_user": "NO", "deduplicate_tokens": "72515d0bdf934b9e82338cd1f32d6413", "description": "Suspicious executable detected", "detection_timestamp": 1724420114000, "dns_query_name": null, "dst_action_country": null, "dst_action_external_hostname": null, "dst_action_external_port": null, "dst_agent_id": null, "dst_association_strength": null, "dst_causality_actor_process_execution_time": null, "dynamic_fields": null, "end_match_attempt_ts": null, "endpoint_id": "13629dd5c7284859a2954c19c275285f", "event_id": null, "event_sub_type": null, "event_timestamp": 1724420114000, "event_type": "Process Execution", "events_length": 1, "external_id": "82ad0920baaf4a4fbc08990958217808", "filter_rule_id": null, "fw_app_category": null, "fw_app_id": null, "fw_app_subcategory": null, "fw_app_technology": null, "fw_device_name": null, "fw_email_recipient": null, "fw_email_sender": null, "fw_email_subject": null, "fw_interface_from": null, "fw_interface_to": null, "fw_is_phishing": "N/A", "fw_misc": null, "fw_rule": null, "fw_rule_id": null, "fw_serial_number": null, "fw_url_domain": null, "fw_vsys": null, "fw_xff": null, "host_ip": "10.4.92.53", "host_name": "cortex-xdr-w12", "identity_sub_type": null, "identity_type": null, "image_id": null, "image_name": null, "is_pcap": false, "is_whitelisted": false, "last_modified_ts": null, "local_insert_ts": 1724420117968, "mac": "00:50:56:94:42:04", "malicious_urls": null, "matching_service_rule_id": null, "matching_status": "UNMATCHABLE", "mitre_tactic_id_and_name": null, "mitre_technique_id_and_name": null, "module_id": "Local Analysis", "name": "Local Analysis Malware", "namespace": null, "operation_name": null, "original_tags": "DS:PANW/XDR Agent", "os_actor_causality_id": null, "os_actor_effective_username": null, "os_actor_process_causality_id": null, "os_actor_process_command_line": null, "os_actor_process_image_name": null, "os_actor_process_image_path": null, "os_actor_process_image_sha256": null, "os_actor_process_instance_id": null, "os_actor_process_os_pid": null, "os_actor_process_signature_status": "N/A", "os_actor_process_signature_vendor": null, "os_actor_thread_thread_id": null, "project": null, "referenced_resource": null, "resolution_comment": null, "resolution_status": "STATUS_010_NEW", "resource_sub_type": null, "resource_type": null, "severity": "medium", "source": "XDR Agent", "starred": false, "story_id": null, "tags": "DS:PANW/XDR Agent", "user_agent": null, "user_name": "Administrator" }]'

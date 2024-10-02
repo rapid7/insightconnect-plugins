@@ -3,7 +3,7 @@ import time
 import secrets
 import string
 import hashlib
-from typing import List, Dict
+from typing import List, Dict, Tuple
 
 import requests
 import urllib
@@ -11,13 +11,21 @@ import urllib
 from re import match
 from datetime import datetime, timezone
 from icon_palo_alto_cortex_xdr.util.util import Util
-from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import (
+    PluginException,
+    ConnectionTestException,
+    ResponseExceptionData,
+    HTTPStatusCodes,
+)
+from insightconnect_plugin_runtime.helper import extract_json, make_request
+from requests import Response
 
 
 class CortexXdrAPI:
     ENDPOINT_ID_TYPE = "endpoint_id_list"
     ENDPOINT_IP_TYPE = "ip_list"
     ENDPOINT_HOSTNAME_TYPE = "hostname"
+    DEFAULT_TIMEOUT = 120
 
     def __init__(self, api_key_id, api_key, fully_qualified_domain_name, security_level, logger):
         # Disable all the too-many-arguments violations in this function.
@@ -31,15 +39,21 @@ class CortexXdrAPI:
         else:
             self.headers = self._standard_authentication(self.api_key_id, self.api_key)
 
+    def get_headers(self):
+        return self.headers
+
+    def get_url(self):
+        return self.fully_qualified_domain_name
+
     def test_connection(self):
         endpoint = "/api_keys/validate/"
         try:
             self._post_to_api(endpoint, {})
-        except Exception as e:
+        except Exception as error:
             raise ConnectionTestException(
                 cause="Connection Test Failed.",
                 assistance="Please check your connection settings and try again.",
-                data=e,
+                data=error,
             )
 
     @Util.retry(tries=1, timeout=900, exceptions=PluginException, backoff_seconds=1)
@@ -174,7 +188,7 @@ class CortexXdrAPI:
     def get_alerts(
         self, from_time: int, to_time: int, time_sort_field: str = "creation_time", filters: List = None
     ) -> List[Dict]:
-        endpoint = "/public_api/v1/alerts/get_alerts_multi_events/"
+        endpoint = "/public_api/v2/alerts/get_alerts_multi_events/"
         response_alerts_field = "alerts"
         return self._get_items_from_endpoint(
             endpoint, from_time, to_time, response_alerts_field, time_sort_field, filters
@@ -353,11 +367,10 @@ class CortexXdrAPI:
     # Disable all the inconsistent-return-statements violations in this function. Either return or raise an
     # exception. The implicit return of this function is unreachable.
     # pylint: disable=inconsistent-return-statements
-    def _post_to_api(self, endpoint, post_body):
+    def _post_to_api(self, endpoint, post_body):  # noqa MC0001
         url = urllib.parse.urljoin(self.fully_qualified_domain_name, endpoint)
         try:
-            response = requests.post(url=url, json=post_body, headers=self.headers)
-
+            response = requests.post(url=url, json=post_body, headers=self.headers, timeout=self.DEFAULT_TIMEOUT)
             response_text = response.text
 
             if response.status_code == 400:
@@ -397,11 +410,11 @@ class CortexXdrAPI:
                 return response.json()
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
-        except json.decoder.JSONDecodeError as e:
-            self.logger.info(f"Invalid json: {e}")
+        except json.decoder.JSONDecodeError as error:
+            self.logger.info(f"Invalid json: {error}")
             raise PluginException(preset=PluginException.Preset.INVALID_JSON)
-        except requests.exceptions.HTTPError as e:
-            self.logger.info(f"Request to {url} failed: {e}")
+        except requests.exceptions.HTTPError as error:
+            self.logger.info(f"Request to {url} failed: {error}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
     def _get_endpoint_type(self, endpoint_info):
@@ -419,3 +432,68 @@ class CortexXdrAPI:
 
         # Don't know, try hostname
         return self.ENDPOINT_HOSTNAME_TYPE
+
+    def get_response_alerts(self, post_body: dict) -> Tuple[list, int, int]:
+        """
+        Helper method to make the request in `monitor_alerts` task.
+
+        :param post_body: Object containing the post body (filters etc) to send in the requests
+
+        """
+
+        headers = self._advanced_authentication(self.api_key_id, self.api_key)
+        fqdn = self.get_url()
+        endpoint = "public_api/v1/alerts/get_alerts"
+
+        url = f"{fqdn}{endpoint}"
+
+        request = requests.Request(method="post", url=url, headers=headers, json=post_body)
+        response = make_request(_request=request, timeout=60, exception_data_location=ResponseExceptionData.RESPONSE)
+
+        response = extract_json(response)
+        total_count = response.get("reply", {}).get("total_count")
+        results_count = response.get("reply", {}).get("result_count")
+        results = response.get("reply", {}).get("alerts", [])
+
+        # They physically return None so we can't default 0 in .get()
+        if total_count is None:
+            total_count = 0
+
+        # Also including results count just to be safe.
+        if results_count is None:
+            results_count = 0
+
+        return results, results_count, total_count
+
+    def _handle_401(self, response: Response, url: str, post_body: dict):
+        """
+        In the event of 401 after 15 minutes when creds expire,
+        re-run the creds generation
+        """
+
+        if response.status_code == 401:
+            self.logger.info(f"Received HTTP {response.status_code}, re-authenticating to Palo Alto Cortex XDR")
+
+            new_headers = self._advanced_authentication(api_key=self.api_key, api_key_id=self.api_key_id)
+            new_response = self.build_request(url=url, headers=new_headers, post_body=post_body)
+
+            return new_response
+
+        else:
+            return response
+
+    def build_request(self, url: str, headers: dict, post_body: dict):
+        """
+        Helper method to build the request and return response object
+        """
+
+        request = requests.Request(method="post", url=url, headers=headers, json=post_body)
+
+        response = make_request(
+            _request=request,
+            timeout=60,
+            exception_data_location=ResponseExceptionData.RESPONSE,
+            allowed_status_codes=[HTTPStatusCodes.UNAUTHORIZED],
+        )
+
+        return response

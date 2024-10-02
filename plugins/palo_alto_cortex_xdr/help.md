@@ -3,34 +3,34 @@
 Stop modern attacks with the industry's first extended detection and response platform that spans your endpoints, network and cloud data
 
 # Key Features
-  
-* Get Endpoint Information  
-* Isolate or Unisolate an endpoint  
+
+* Get Endpoint Information
+* Isolate or Unisolate an endpoint
 * Add files to the block or allow lists
 
 # Requirements
-  
-* A Palo Alto Cortex XDR API key  
-* A Palo Alto Cortex XDR API key ID  
+
+* A Palo Alto Cortex XDR API key
+* A Palo Alto Cortex XDR API key ID
 * The URL to your Palo Alto Cortex XDR API instance
 
 # Supported Product Versions
-  
-* 2022-08-09 Palo Alto Cortex XDR API v1
+
+* 2024-07-15 Palo Alto Cortex XDR API
 
 # Documentation
 
 ## Setup
-  
+
 The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|api_key|credential_secret_key|None|True|The Cortex XDR API Key that is generated when creating a new key|None|1234123412341234asdfasdfasdfasdfasdf1234123412341234123412341234asdfasdfasdfasdfasdf123412341234123412341234asdfasdfasdfasdfasdf|
-|api_key_id|int|None|True|The API Key ID shown in the Cortex XDR API Keys table in settings. e.g. 1, 2, 3|None|1|
-|security_level|string|Standard|True|The Security Level of the key provided. This can be found in the API Key settings table in the Cortex XDR settings|['Advanced', 'Standard']|Standard|
-|url|string|None|True|Cortex XDR API URL|None|https://api-example.xdr.us.paloaltonetworks.com/|
-  
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|api_key|credential_secret_key|None|True|The Cortex XDR API Key that is generated when creating a new key|None|1234123412341234asdfasdfasdfasdfasdf1234123412341234123412341234asdfasdfasdfasdfasdf123412341234123412341234asdfasdfasdfasdfasdf|None|None|
+|api_key_id|integer|None|True|The API Key ID shown in the Cortex XDR API Keys table in settings. e.g. 1, 2, 3|None|1|None|None|
+|security_level|string|Standard|True|The Security Level of the key provided. This can be found in the API Key settings table in the Cortex XDR settings|["Advanced", "Standard"]|Standard|None|None|
+|url|string|None|True|Cortex XDR API URL|None|https://api-example.xdr.us.paloaltonetworks.com/|None|None|
+
 Example input:
 
 ```
@@ -48,16 +48,16 @@ Example input:
 
 
 #### Allow File
-  
-Add a file to the allow list
+
+This action is used to add a file to the allow list
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|comment|string|File allowed by InsightConnect|True|String that represents additional information regarding the action|None|File allowed by InsightConnect|
-|file_hash|string|None|True|A SHA256 file hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
-|incident_id|string|None|False|If this is related to an incident, the ID should be entered here|None|5|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|comment|string|File allowed by InsightConnect|True|String that represents additional information regarding the action|None|File allowed by InsightConnect|None|None|
+|file_hash|string|None|True|A SHA256 file hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|None|None|
+|incident_id|string|None|False|If this is related to an incident, the ID should be entered here|None|5|None|None|
   
 Example input:
 
@@ -84,16 +84,16 @@ Example output:
 ```
 
 #### Block File
-  
-Add a file to the block list
+
+This action is used to add a file to the block list
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|comment|string|File blocked by InsightConnect|True|String that represents additional information regarding the action|None|File blocked by InsightConnect|
-|file_hash|string|None|True|A SHA256 file hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
-|incident_id|string|None|False|If this is related to an incident, the ID should be entered here|None|5|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|comment|string|File blocked by InsightConnect|True|String that represents additional information regarding the action|None|File blocked by InsightConnect|None|None|
+|file_hash|string|None|True|A SHA256 file hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|None|None|
+|incident_id|string|None|False|If this is related to an incident, the ID should be entered here|None|5|None|None|
   
 Example input:
 
@@ -120,14 +120,14 @@ Example output:
 ```
 
 #### Get Endpoint Details
-  
-Get information about an endpoint
+
+This action is used to get information about an endpoint
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|endpoint|string|None|True|The endpoint to get information about. This can be an IPv4 address, hostname, or endpoint ID|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|endpoint|string|None|True|The endpoint to get information about. This can be an IPv4 address, hostname, or endpoint ID|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
   
 Example input:
 
@@ -178,16 +178,16 @@ Example output:
 ```
 
 #### Get File Quarantine Status
-  
-Get quarantine status for a file
+
+This action is used to get quarantine status for a file
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|endpoint_id|string|None|True|Endpoint ID|None|example_ID|
-|file_hash|string|None|True|File Hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
-|file_path|string|None|True|File path|None|powershell.exe|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|endpoint_id|string|None|True|Endpoint ID|None|example_ID|None|None|
+|file_hash|string|None|True|File Hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|None|None|
+|file_path|string|None|True|File path|None|powershell.exe|None|None|
   
 Example input:
 
@@ -214,19 +214,19 @@ Example output:
 ```
 
 #### Get XQL Query Results
-  
-Start an XQL query and retrieve the query results
+
+This action is used to start an XQL query and retrieve the query results
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|end_time|integer|None|False|Integer in timestamp epoch milliseconds for end of the time range, Cortex XDR calls by default the last 24 hours if both 'Start Time' and 'End Time' values are not present|None|1598907600000|
-|limit|integer|20|False|Integer representing the maximum number of results to return, defaults to 20, max value 1000|None|100|
-|query|string|None|True|String of the XQL query|None|dataset=xdr_data I fields event_id, event_type, event_sub_type I limit 3|
-|start_time|integer|None|False|Integer in timestamp epoch milliseconds for start of the time range, Cortex XDR calls by default the last 24 hours if both 'Start Time' and 'End Time' values are not present|None|1599080399000|
-|tenants|[]string|None|True|List of strings used when querying tenants managed by Managed Security Services Providers (MSSP)|None|["tenantID", "tenantID"]|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|end_time|integer|None|False|Integer in timestamp epoch milliseconds for end of the time range, Cortex XDR calls by default the last 24 hours if both 'Start Time' and 'End Time' values are not present|None|1598907600000|None|None|
+|limit|integer|20|False|Integer representing the maximum number of results to return, defaults to 20, max value 1000|None|100|None|None|
+|query|string|None|True|String of the XQL query|None|dataset=xdr_data I fields event_id, event_type, event_sub_type I limit 3|None|None|
+|start_time|integer|None|False|Integer in timestamp epoch milliseconds for start of the time range, Cortex XDR calls by default the last 24 hours if both 'Start Time' and 'End Time' values are not present|None|1599080399000|None|None|
+|tenants|[]string|None|True|List of strings used when querying tenants managed by Managed Security Services Providers (MSSP)|None|["tenantID", "tenantID"]|None|None|
+  
 Example input:
 
 ```
@@ -235,7 +235,10 @@ Example input:
   "limit": 20,
   "query": "dataset=xdr_data I fields event_id, event_type, event_sub_type I limit 3",
   "start_time": 1599080399000,
-  "tenants": "tenantID"
+  "tenants": [
+    "tenantID",
+    "tenantID"
+  ]
 }
 ```
 
@@ -265,17 +268,17 @@ Example output:
 ```
 
 #### Isolate Endpoint
-  
-Isolate or unisolate an endpoint
+
+This action is used to isolate or unisolate an endpoint
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|endpoint|string|None|True|Endpoint to isolate or unisolate. This can be an IPv4 address, hostname, or endpoint ID|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|isolation_state|string|Isolate|True|Isolation state to set|['Isolate', 'Unisolate']|Unisolate|
-|whitelist|[]string|[]|False|This list contains a set of devices that should not be blocked. This can be a combination of IPv4 addresses, hostnames, or endpoint IDs|None|["198.51.100.100", "hostname123", "225494730938493804"]|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|endpoint|string|None|True|Endpoint to isolate or unisolate. This can be an IPv4 address, hostname, or endpoint ID|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
+|isolation_state|string|Isolate|True|Isolation state to set|["Isolate", "Unisolate"]|Unisolate|None|None|
+|whitelist|[]string|[]|False|This list contains a set of devices that should not be blocked. This can be a combination of IPv4 addresses, hostnames, or endpoint IDs|None|["198.51.100.100", "hostname123", "225494730938493804"]|None|None|
+  
 Example input:
 
 ```
@@ -307,14 +310,14 @@ Example output:
 
 
 #### Get Alerts
-  
-Get alerts
+
+This trigger is used to get alerts
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|frequency|integer|5|False|Poll frequency in seconds|None|5|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|frequency|integer|5|False|Poll frequency in seconds|None|5|None|None|
   
 Example input:
 
@@ -328,162 +331,137 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|alert|alert|False|Alert|{ "Action": "", "Action Pretty": {}, "Agent Data Collection Status": "true", "Agent Device Domain": {}, "Agent FQDN": {}, "Agent OS Sub Type": {}, "Agent OS Type": {}, "Agent Version": {}, "Alert ID": {}, "Attempt Counter": {}, "BIOC Category Enum Key": {}, "BIOC Indicator": {}, "Category": {}, "Deduplicate Tokens": {}, "Description": {}, "Detection Timestamp": 0, "End Match Attempt TS": {}, "Endpoint ID": {}, "Events": [ { "Action Country": {}, "Action External Hostname": {}, "Action File MD5": {}, "Action File Macro SHA256": {}, "Action File Name": {}, "Action File Path": {}, "Action File SHA256": {}, "Action Local IP": {}, "Action Local Port": {}, "Action Process Causality ID": {}, "Action Process Image Command Line": {}, "Action Process Image Name": {}, "Action Process Image SHA256": {}, "Action Process Instance ID": {}, "Action Process Signature Status": {}, "Action Process Signature Vendor": {}, "Action Registry Data": {}, "Action Registry Full Key": {}, "Action Registry Key Name": {}, "Action Registry Value Name": {}, "Action Remote IP": {}, "Action Remote Port": {}, "Actor Causality ID": {}, "Actor Process Causality ID": {}, "Actor Process Command Line": {}, "Actor Process Image MD5": {}, "Actor Process Image Name": {}, "Actor Process Image Path": {}, "Actor Process Image SHA256": {}, "Actor Process Instance ID": {}, "Actor Process OS PID": {}, "Actor Process Signature Status": {}, "Actor Process Signature Vendor": {}, "Actor Thread Thread ID": {}, "Agent Host Boot Time": {}, "Agent Install Type": {}, "Association Strength": {}, "Causality Actor Causality ID": {}, "Causality Actor Process Command Line": {}, "Causality Actor Process Execution Time": {}, "Causality Actor Process Image MD5": {}, "Causality Actor Process Image Name": {}, "Causality Actor Process Image Path": {}, "Causality Actor Process Image SHA256": {}, "Causality Actor Process Signature Status": {}, "Causality Actor Process Signature Vendor": {}, "Cluster Name": {}, "Container ID": {}, "Contains Featured Host": {}, "Contains Featured IP": {}, "Contains Featured User": {}, "DNS Query Name": {}, "DST Action Country": {}, "DST Action External Hostname": {}, "DST Action External Port": {}, "DST Agent ID": {}, "DST Association Strength": {}, "DST Causality Actor Process Execution Time": {}, "Event ID": {}, "Event Sub Type": {}, "Event Timestamp": {}, "Event Type": {}, "FW App Category": {}, "FW App ID": {}, "FW App Subcategory": {}, "FW App Technology": {}, "FW Device Name": {}, "FW Email Recipient": {}, "FW Email Sender": {}, "FW Email Subject": {}, "FW Interface From": {}, "FW Interface To": {}, "FW Is Phishing": {}, "FW Misc": {}, "FW Rule": {}, "FW Rule ID": {}, "FW Serial Number": {}, "FW URL Domain": {}, "FW VSYS": {}, "FW XFF": {}, "Image Name": {}, "Module ID": {}, "OS Actor Causality ID": {}, "OS Actor Effective Username": {}, "OS Actor Process Causality ID": {}, "OS Actor Process Command Line": {}, "OS Actor Process Image Name": {}, "OS Actor Process Image Path": {}, "OS Actor Process Image SHA256": {}, "OS Actor Process Instance ID": {}, "OS Actor Process OS PID": {}, "OS Actor Process Signature Status": {}, "OS Actor Process Signature Vendor": {}, "OS Actor Thread Thread ID": {}, "Story ID": {}, "User Name": {} } ], "External ID": {}, "Filter Rule ID": {}, "Host IP": [ {} ], "Host Name": {}, "Is Whitelisted": {}, "Local Insert TS": {}, "MAC": {}, "MAC Addresses": {}, "MITRE Tactic ID And Name": {}, "MITRE Technique ID And Name": {}, "Matching Service Rule ID": {}, "Matching Status": {}, "Name": {}, "Severity": {}, "Source": {}, "Starred": {} }|
+|alert|object|False|Alert|{"external_id":"12345","severity":"high","matching_status":"UNMATCHABLE","local_insert_ts":1721031230123,"attempt_counter":0,"case_id":1,"is_whitelisted":false,"starred":false,"mitre_technique_id_and_name":["T000.000 - Example Technique: Name"],"mitre_tactic_id_and_name":["ExampleTacticIDName"],"agent_version":"7.5.0.36150","agent_device_domain":"ExampleDomain","agent_fqdn":"ExampleFQDN","agent_os_type":"Windows","agent_os_sub_type":"6","agent_data_collection_status":false,"agent_is_vdi":false,"agent_install_type":"STANDARD","module_id":["Behavioral Threat Protection"],"association_strength":[50],"event_type":["Process Execution"],"event_timestamp":[1721031230123],"actor_process_instance_id":["ExampleID"],"actor_process_image_path":["C:\\Windows\\System32\\cmd.exe"],"actor_process_image_name":["cmd.exe"],"actor_process_command_line":["\"C:\\Windows\\System32\\cmd.exe\" "],"actor_process_signature_status":["N/A"],"actor_process_signature_vendor":["Microsoft Windows","Microsoft Corporation"],"actor_process_image_sha256":["275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"],"actor_process_os_pid":[123],"causality_actor_process_signature_status":["N/A"],"action_country":["UNKNOWN"],"action_process_signature_status":["N/A"],"os_actor_process_signature_status":["N/A"],"fw_is_phishing":["N/A"],"is_pcap":false,"contains_featured_host":["NO"],"contains_featured_user":["NO"],"contains_featured_ip":["NO"],"alert_type":"Unclassified","resolution_status":"STATUS_010_NEW","tags":["XDR Agent"],"alert_id":"8","detection_timestamp":1721031230123,"name":"Behavioral Threat","category":"Malware","endpoint_id":"13629dd5c7284859a2954c19c275285f","description":"Example Description","host_ip":["198.51.100.1"],"host_name":"ExampleHostName","action":"BLOCKED","source":"XDR Agent","original_tags":["XDR Agent"],"user_name":["ExampleUsername"],"mac_addresses":["00:00:00:00:00:00"],"action_pretty":"Prevented (Blocked)"}|
   
 Example output:
 
 ```
 {
   "alert": {
-    "Action": "",
-    "Action Pretty": {},
-    "Agent Data Collection Status": "true",
-    "Agent Device Domain": {},
-    "Agent FQDN": {},
-    "Agent OS Sub Type": {},
-    "Agent OS Type": {},
-    "Agent Version": {},
-    "Alert ID": {},
-    "Attempt Counter": {},
-    "BIOC Category Enum Key": {},
-    "BIOC Indicator": {},
-    "Category": {},
-    "Deduplicate Tokens": {},
-    "Description": {},
-    "Detection Timestamp": 0,
-    "End Match Attempt TS": {},
-    "Endpoint ID": {},
-    "Events": [
-      {
-        "Action Country": {},
-        "Action External Hostname": {},
-        "Action File MD5": {},
-        "Action File Macro SHA256": {},
-        "Action File Name": {},
-        "Action File Path": {},
-        "Action File SHA256": {},
-        "Action Local IP": {},
-        "Action Local Port": {},
-        "Action Process Causality ID": {},
-        "Action Process Image Command Line": {},
-        "Action Process Image Name": {},
-        "Action Process Image SHA256": {},
-        "Action Process Instance ID": {},
-        "Action Process Signature Status": {},
-        "Action Process Signature Vendor": {},
-        "Action Registry Data": {},
-        "Action Registry Full Key": {},
-        "Action Registry Key Name": {},
-        "Action Registry Value Name": {},
-        "Action Remote IP": {},
-        "Action Remote Port": {},
-        "Actor Causality ID": {},
-        "Actor Process Causality ID": {},
-        "Actor Process Command Line": {},
-        "Actor Process Image MD5": {},
-        "Actor Process Image Name": {},
-        "Actor Process Image Path": {},
-        "Actor Process Image SHA256": {},
-        "Actor Process Instance ID": {},
-        "Actor Process OS PID": {},
-        "Actor Process Signature Status": {},
-        "Actor Process Signature Vendor": {},
-        "Actor Thread Thread ID": {},
-        "Agent Host Boot Time": {},
-        "Agent Install Type": {},
-        "Association Strength": {},
-        "Causality Actor Causality ID": {},
-        "Causality Actor Process Command Line": {},
-        "Causality Actor Process Execution Time": {},
-        "Causality Actor Process Image MD5": {},
-        "Causality Actor Process Image Name": {},
-        "Causality Actor Process Image Path": {},
-        "Causality Actor Process Image SHA256": {},
-        "Causality Actor Process Signature Status": {},
-        "Causality Actor Process Signature Vendor": {},
-        "Cluster Name": {},
-        "Container ID": {},
-        "Contains Featured Host": {},
-        "Contains Featured IP": {},
-        "Contains Featured User": {},
-        "DNS Query Name": {},
-        "DST Action Country": {},
-        "DST Action External Hostname": {},
-        "DST Action External Port": {},
-        "DST Agent ID": {},
-        "DST Association Strength": {},
-        "DST Causality Actor Process Execution Time": {},
-        "Event ID": {},
-        "Event Sub Type": {},
-        "Event Timestamp": {},
-        "Event Type": {},
-        "FW App Category": {},
-        "FW App ID": {},
-        "FW App Subcategory": {},
-        "FW App Technology": {},
-        "FW Device Name": {},
-        "FW Email Recipient": {},
-        "FW Email Sender": {},
-        "FW Email Subject": {},
-        "FW Interface From": {},
-        "FW Interface To": {},
-        "FW Is Phishing": {},
-        "FW Misc": {},
-        "FW Rule": {},
-        "FW Rule ID": {},
-        "FW Serial Number": {},
-        "FW URL Domain": {},
-        "FW VSYS": {},
-        "FW XFF": {},
-        "Image Name": {},
-        "Module ID": {},
-        "OS Actor Causality ID": {},
-        "OS Actor Effective Username": {},
-        "OS Actor Process Causality ID": {},
-        "OS Actor Process Command Line": {},
-        "OS Actor Process Image Name": {},
-        "OS Actor Process Image Path": {},
-        "OS Actor Process Image SHA256": {},
-        "OS Actor Process Instance ID": {},
-        "OS Actor Process OS PID": {},
-        "OS Actor Process Signature Status": {},
-        "OS Actor Process Signature Vendor": {},
-        "OS Actor Thread Thread ID": {},
-        "Story ID": {},
-        "User Name": {}
-      }
+    "action": "BLOCKED",
+    "action_country": [
+      "UNKNOWN"
     ],
-    "External ID": {},
-    "Filter Rule ID": {},
-    "Host IP": [
-      {}
+    "action_pretty": "Prevented (Blocked)",
+    "action_process_signature_status": [
+      "N/A"
     ],
-    "Host Name": {},
-    "Is Whitelisted": {},
-    "Local Insert TS": {},
-    "MAC": {},
-    "MAC Addresses": {},
-    "MITRE Tactic ID And Name": {},
-    "MITRE Technique ID And Name": {},
-    "Matching Service Rule ID": {},
-    "Matching Status": {},
-    "Name": {},
-    "Severity": {},
-    "Source": {},
-    "Starred": {}
+    "actor_process_command_line": [
+      "\"C:\\Windows\\System32\\cmd.exe\" "
+    ],
+    "actor_process_image_name": [
+      "cmd.exe"
+    ],
+    "actor_process_image_path": [
+      "C:\\Windows\\System32\\cmd.exe"
+    ],
+    "actor_process_image_sha256": [
+      "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
+    ],
+    "actor_process_instance_id": [
+      "ExampleID"
+    ],
+    "actor_process_os_pid": [
+      123
+    ],
+    "actor_process_signature_status": [
+      "N/A"
+    ],
+    "actor_process_signature_vendor": [
+      "Microsoft Windows",
+      "Microsoft Corporation"
+    ],
+    "agent_data_collection_status": false,
+    "agent_device_domain": "ExampleDomain",
+    "agent_fqdn": "ExampleFQDN",
+    "agent_install_type": "STANDARD",
+    "agent_is_vdi": false,
+    "agent_os_sub_type": "6",
+    "agent_os_type": "Windows",
+    "agent_version": "7.5.0.36150",
+    "alert_id": "8",
+    "alert_type": "Unclassified",
+    "association_strength": [
+      50
+    ],
+    "attempt_counter": 0,
+    "case_id": 1,
+    "category": "Malware",
+    "causality_actor_process_signature_status": [
+      "N/A"
+    ],
+    "contains_featured_host": [
+      "NO"
+    ],
+    "contains_featured_ip": [
+      "NO"
+    ],
+    "contains_featured_user": [
+      "NO"
+    ],
+    "description": "Example Description",
+    "detection_timestamp": 1721031230123,
+    "endpoint_id": "13629dd5c7284859a2954c19c275285f",
+    "event_timestamp": [
+      1721031230123
+    ],
+    "event_type": [
+      "Process Execution"
+    ],
+    "external_id": "12345",
+    "fw_is_phishing": [
+      "N/A"
+    ],
+    "host_ip": [
+      "198.51.100.1"
+    ],
+    "host_name": "ExampleHostName",
+    "is_pcap": false,
+    "is_whitelisted": false,
+    "local_insert_ts": 1721031230123,
+    "mac_addresses": [
+      "00:00:00:00:00:00"
+    ],
+    "matching_status": "UNMATCHABLE",
+    "mitre_tactic_id_and_name": [
+      "ExampleTacticIDName"
+    ],
+    "mitre_technique_id_and_name": [
+      "T000.000 - Example Technique: Name"
+    ],
+    "module_id": [
+      "Behavioral Threat Protection"
+    ],
+    "name": "Behavioral Threat",
+    "original_tags": [
+      "XDR Agent"
+    ],
+    "os_actor_process_signature_status": [
+      "N/A"
+    ],
+    "resolution_status": "STATUS_010_NEW",
+    "severity": "high",
+    "source": "XDR Agent",
+    "starred": false,
+    "tags": [
+      "XDR Agent"
+    ],
+    "user_name": [
+      "ExampleUsername"
+    ]
   }
 }
 ```
 
 #### Get Incidents
-  
-Get incidents
+
+This trigger is used to get incidents
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|frequency|integer|5|False|Poll frequency in seconds|None|5|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|frequency|integer|5|False|Poll frequency in seconds|None|5|None|None|
   
 Example input:
 
@@ -538,18 +516,18 @@ Example output:
 ```
 
 #### Get Query Results
-  
-Runs the XQL and returns the output data results
+
+This trigger is used to runs the XQL and returns the output data results
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|frequency|integer|5|True|Poll frequency in seconds|None|5|
-|limit|integer|20|False|Integer representing the maximum number of results to return, defaults to 20, max value 1000|None|100|
-|query|string|None|True|String of the XQL query|None|dataset=xdr_data I fields event_id, event_type, event_sub_type I limit 3|
-|tenants|[]string|None|True|List of strings used when querying tenants managed by Managed Security Services Providers (MSSP)|None|["tenantID", "tenantID"]|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|frequency|integer|5|True|Poll frequency in seconds|None|5|None|None|
+|limit|integer|20|False|Integer representing the maximum number of results to return, defaults to 20, max value 1000|None|100|None|None|
+|query|string|None|True|String of the XQL query|None|dataset=xdr_data I fields event_id, event_type, event_sub_type I limit 3|None|None|
+|tenants|[]string|None|True|List of strings used when querying tenants managed by Managed Security Services Providers (MSSP)|None|["tenantID", "tenantID"]|None|None|
+  
 Example input:
 
 ```
@@ -557,7 +535,10 @@ Example input:
   "frequency": 5,
   "limit": 20,
   "query": "dataset=xdr_data I fields event_id, event_type, event_sub_type I limit 3",
-  "tenants": "tenantID"
+  "tenants": [
+    "tenantID",
+    "tenantID"
+  ]
 }
 ```
 
@@ -588,220 +569,275 @@ Example output:
 ### Tasks
 
 
-#### Monitor Incident Events
-  
-Monitor incident events
+#### Monitor Alerts
+
+This task is used to monitor alerts
 
 ##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|descriptions|[]string|None|False|Descriptions|None|["Behavioral threat detected (rule: heuristic.b.205)"]|
-|incident_id_list|[]string|None|False|Incident ID list|None|["5"]|
-|status|string|None|False|Status|['any', 'new', 'under_investigation', 'resolved_threat_handled', 'resolved_known_issue', 'resolved_false_positive', 'resolved_other', 'resolved_auto']|new|
-|time_sorting_field|string|None|False|Field to use to sort Incident events|['modification_time', 'creation_time']|modification_time|
   
-Example input:
-
-```
-{
-  "descriptions": [
-    "Behavioral threat detected (rule: heuristic.b.205)"
-  ],
-  "incident_id_list": 5,
-  "status": "new",
-  "time_sorting_field": "modification_time"
-}
-```
+*This task does not contain any inputs.*
 
 ##### Output
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|events|[]incident|False|Incident events|[ { "Alert Count": 0, "Assigned User Mail": "", "Assigned User Pretty Name": {}, "Creation Time": {}, "Description": {}, "Detection Time": {}, "High Severity Alert Count": {}, "Host Count": {}, "Hosts": [ {} ], "Incident ID": {}, "Incident Name": {}, "Incident Sources": {}, "Low Severity Alert Count": {}, "Manual Description": {}, "Manual Score": {}, "Manual Severity": {}, "Med Severity Alert Count": {}, "Modification Time": {}, "Notes": {}, "Resolve Comment": {}, "Rule Based Score": {}, "Severity": {}, "Starred": "true", "Status": {}, "User Count": {}, "Users": {}, "XDR URL": {} } ]|
+|alerts|[]object|False|Alerts|[ { "action": "BLOCKED", "action_country": "UNKNOWN", "action_external_hostname": null, "action_file_macro_sha256": null, "action_file_md5": null, "action_file_name": null, "action_file_path": null, "action_file_sha256": null, "action_local_ip": null, "action_local_ip_v6": null, "action_local_port": null, "action_pretty": "Prevented (Blocked)", "action_process_causality_id": null, "action_process_image_command_line": null, "action_process_image_name": null, "action_process_image_sha256": null, "action_process_instance_id": null, "action_process_signature_status": "N/A", "action_process_signature_vendor": null, "action_registry_data": null, "action_registry_full_key": null, "action_registry_key_name": null, "action_registry_value_name": null, "action_remote_ip": null, "action_remote_ip_v6": null, "action_remote_port": null, "actor_causality_id": null, "actor_process_causality_id": null, "actor_process_command_line": "\"C:\\Users\\Administrator\\Downloads\\filename3.exe\" ", "actor_process_image_md5": null, "actor_process_image_name": "filename3.exe", "actor_process_image_path": "C:\\Users\\Administrator\\Downloads\\filename3.exe", "actor_process_image_sha256": "347874EEE7A8DA0E9277D1F601DA1326480E37D09766142BBD050D536090043F", "actor_process_instance_id": "Adr1YUm6dfgAAAnkAAAAAA==", "actor_process_os_pid": 2532, "actor_process_signature_status": "N/A", "actor_process_signature_vendor": null, "actor_thread_thread_id": null, "agent_data_collection_status": false, "agent_device_domain": "WORKGROUP", "agent_fqdn": "cortex-xdr-w12.WORKGROUP", "agent_host_boot_time": null, "agent_install_type": "STANDARD", "agent_ip_addresses_v6": null, "agent_is_vdi": false, "agent_os_sub_type": "6.2.9200", "agent_os_type": "Windows", "agent_version": "7.5.0.36150", "alert_id": "18", "alert_type": "Unclassified", "association_strength": 50, "attempt_counter": 0, "bioc_category_enum_key": null, "bioc_indicator": null, "case_id": 8, "category": "Malware", "causality_actor_causality_id": null, "causality_actor_process_command_line": null, "causality_actor_process_execution_time": null, "causality_actor_process_image_md5": null, "causality_actor_process_image_name": null, "causality_actor_process_image_path": null, "causality_actor_process_image_sha256": null, "causality_actor_process_signature_status": "N/A", "causality_actor_process_signature_vendor": null, "cloud_provider": null, "cluster_name": null, "container_id": null, "container_name": null, "contains_featured_host": "NO", "contains_featured_ip": "NO", "contains_featured_user": "NO", "deduplicate_tokens": "72515d0bdf934b9e82338cd1f32d6413", "description": "Suspicious executable detected", "detection_timestamp": 1724420114000, "dns_query_name": null, "dst_action_country": null, "dst_action_external_hostname": null, "dst_action_external_port": null, "dst_agent_id": null, "dst_association_strength": null, "dst_causality_actor_process_execution_time": null, "dynamic_fields": null, "end_match_attempt_ts": null, "endpoint_id": "13629dd5c7284859a2954c19c275285f", "event_id": null, "event_sub_type": null, "event_timestamp": 1724420114000, "event_type": "Process Execution", "events_length": 1, "external_id": "82ad0920baaf4a4fbc08990958217808", "filter_rule_id": null, "fw_app_category": null, "fw_app_id": null, "fw_app_subcategory": null, "fw_app_technology": null, "fw_device_name": null, "fw_email_recipient": null, "fw_email_sender": null, "fw_email_subject": null, "fw_interface_from": null, "fw_interface_to": null, "fw_is_phishing": "N/A", "fw_misc": null, "fw_rule": null, "fw_rule_id": null, "fw_serial_number": null, "fw_url_domain": null, "fw_vsys": null, "fw_xff": null, "host_ip": "10.4.92.53", "host_name": "cortex-xdr-w12", "identity_sub_type": null, "identity_type": null, "image_id": null, "image_name": null, "is_pcap": false, "is_whitelisted": false, "last_modified_ts": null, "local_insert_ts": 1724420117968, "mac": "00:50:56:94:42:04", "malicious_urls": null, "matching_service_rule_id": null, "matching_status": "UNMATCHABLE", "mitre_tactic_id_and_name": null, "mitre_technique_id_and_name": null, "module_id": "Local Analysis", "name": "Local Analysis Malware", "namespace": null, "operation_name": null, "original_tags": "DS:PANW/XDR Agent", "os_actor_causality_id": null, "os_actor_effective_username": null, "os_actor_process_causality_id": null, "os_actor_process_command_line": null, "os_actor_process_image_name": null, "os_actor_process_image_path": null, "os_actor_process_image_sha256": null, "os_actor_process_instance_id": null, "os_actor_process_os_pid": null, "os_actor_process_signature_status": "N/A", "os_actor_process_signature_vendor": null, "os_actor_thread_thread_id": null, "project": null, "referenced_resource": null, "resolution_comment": null, "resolution_status": "STATUS_010_NEW", "resource_sub_type": null, "resource_type": null, "severity": "medium", "source": "XDR Agent", "starred": false, "story_id": null, "tags": "DS:PANW/XDR Agent", "user_agent": null, "user_name": "Administrator" }]|
   
 Example output:
 
 ```
 {
-  "events": [
+  "alerts": [
     {
-      "Alert Count": 0,
-      "Assigned User Mail": "",
-      "Assigned User Pretty Name": {},
-      "Creation Time": {},
-      "Description": {},
-      "Detection Time": {},
-      "High Severity Alert Count": {},
-      "Host Count": {},
-      "Hosts": [
-        {}
-      ],
-      "Incident ID": {},
-      "Incident Name": {},
-      "Incident Sources": {},
-      "Low Severity Alert Count": {},
-      "Manual Description": {},
-      "Manual Score": {},
-      "Manual Severity": {},
-      "Med Severity Alert Count": {},
-      "Modification Time": {},
-      "Notes": {},
-      "Resolve Comment": {},
-      "Rule Based Score": {},
-      "Severity": {},
-      "Starred": "true",
-      "Status": {},
-      "User Count": {},
-      "Users": {},
-      "XDR URL": {}
+      "action": "BLOCKED",
+      "action_country": "UNKNOWN",
+      "action_external_hostname": null,
+      "action_file_macro_sha256": null,
+      "action_file_md5": null,
+      "action_file_name": null,
+      "action_file_path": null,
+      "action_file_sha256": null,
+      "action_local_ip": null,
+      "action_local_ip_v6": null,
+      "action_local_port": null,
+      "action_pretty": "Prevented (Blocked)",
+      "action_process_causality_id": null,
+      "action_process_image_command_line": null,
+      "action_process_image_name": null,
+      "action_process_image_sha256": null,
+      "action_process_instance_id": null,
+      "action_process_signature_status": "N/A",
+      "action_process_signature_vendor": null,
+      "action_registry_data": null,
+      "action_registry_full_key": null,
+      "action_registry_key_name": null,
+      "action_registry_value_name": null,
+      "action_remote_ip": null,
+      "action_remote_ip_v6": null,
+      "action_remote_port": null,
+      "actor_causality_id": null,
+      "actor_process_causality_id": null,
+      "actor_process_command_line": "\"C:\\Users\\Administrator\\Downloads\\filename3.exe\" ",
+      "actor_process_image_md5": null,
+      "actor_process_image_name": "filename3.exe",
+      "actor_process_image_path": "C:\\Users\\Administrator\\Downloads\\filename3.exe",
+      "actor_process_image_sha256": "347874EEE7A8DA0E9277D1F601DA1326480E37D09766142BBD050D536090043F",
+      "actor_process_instance_id": "Adr1YUm6dfgAAAnkAAAAAA==",
+      "actor_process_os_pid": 2532,
+      "actor_process_signature_status": "N/A",
+      "actor_process_signature_vendor": null,
+      "actor_thread_thread_id": null,
+      "agent_data_collection_status": false,
+      "agent_device_domain": "WORKGROUP",
+      "agent_fqdn": "cortex-xdr-w12.WORKGROUP",
+      "agent_host_boot_time": null,
+      "agent_install_type": "STANDARD",
+      "agent_ip_addresses_v6": null,
+      "agent_is_vdi": false,
+      "agent_os_sub_type": "6.2.9200",
+      "agent_os_type": "Windows",
+      "agent_version": "7.5.0.36150",
+      "alert_id": "18",
+      "alert_type": "Unclassified",
+      "association_strength": 50,
+      "attempt_counter": 0,
+      "bioc_category_enum_key": null,
+      "bioc_indicator": null,
+      "case_id": 8,
+      "category": "Malware",
+      "causality_actor_causality_id": null,
+      "causality_actor_process_command_line": null,
+      "causality_actor_process_execution_time": null,
+      "causality_actor_process_image_md5": null,
+      "causality_actor_process_image_name": null,
+      "causality_actor_process_image_path": null,
+      "causality_actor_process_image_sha256": null,
+      "causality_actor_process_signature_status": "N/A",
+      "causality_actor_process_signature_vendor": null,
+      "cloud_provider": null,
+      "cluster_name": null,
+      "container_id": null,
+      "container_name": null,
+      "contains_featured_host": "NO",
+      "contains_featured_ip": "NO",
+      "contains_featured_user": "NO",
+      "deduplicate_tokens": "72515d0bdf934b9e82338cd1f32d6413",
+      "description": "Suspicious executable detected",
+      "detection_timestamp": 1724420114000,
+      "dns_query_name": null,
+      "dst_action_country": null,
+      "dst_action_external_hostname": null,
+      "dst_action_external_port": null,
+      "dst_agent_id": null,
+      "dst_association_strength": null,
+      "dst_causality_actor_process_execution_time": null,
+      "dynamic_fields": null,
+      "end_match_attempt_ts": null,
+      "endpoint_id": "13629dd5c7284859a2954c19c275285f",
+      "event_id": null,
+      "event_sub_type": null,
+      "event_timestamp": 1724420114000,
+      "event_type": "Process Execution",
+      "events_length": 1,
+      "external_id": "82ad0920baaf4a4fbc08990958217808",
+      "filter_rule_id": null,
+      "fw_app_category": null,
+      "fw_app_id": null,
+      "fw_app_subcategory": null,
+      "fw_app_technology": null,
+      "fw_device_name": null,
+      "fw_email_recipient": null,
+      "fw_email_sender": null,
+      "fw_email_subject": null,
+      "fw_interface_from": null,
+      "fw_interface_to": null,
+      "fw_is_phishing": "N/A",
+      "fw_misc": null,
+      "fw_rule": null,
+      "fw_rule_id": null,
+      "fw_serial_number": null,
+      "fw_url_domain": null,
+      "fw_vsys": null,
+      "fw_xff": null,
+      "host_ip": "10.4.92.53",
+      "host_name": "cortex-xdr-w12",
+      "identity_sub_type": null,
+      "identity_type": null,
+      "image_id": null,
+      "image_name": null,
+      "is_pcap": false,
+      "is_whitelisted": false,
+      "last_modified_ts": null,
+      "local_insert_ts": 1724420117968,
+      "mac": "00:50:56:94:42:04",
+      "malicious_urls": null,
+      "matching_service_rule_id": null,
+      "matching_status": "UNMATCHABLE",
+      "mitre_tactic_id_and_name": null,
+      "mitre_technique_id_and_name": null,
+      "module_id": "Local Analysis",
+      "name": "Local Analysis Malware",
+      "namespace": null,
+      "operation_name": null,
+      "original_tags": "DS:PANW/XDR Agent",
+      "os_actor_causality_id": null,
+      "os_actor_effective_username": null,
+      "os_actor_process_causality_id": null,
+      "os_actor_process_command_line": null,
+      "os_actor_process_image_name": null,
+      "os_actor_process_image_path": null,
+      "os_actor_process_image_sha256": null,
+      "os_actor_process_instance_id": null,
+      "os_actor_process_os_pid": null,
+      "os_actor_process_signature_status": "N/A",
+      "os_actor_process_signature_vendor": null,
+      "os_actor_thread_thread_id": null,
+      "project": null,
+      "referenced_resource": null,
+      "resolution_comment": null,
+      "resolution_status": "STATUS_010_NEW",
+      "resource_sub_type": null,
+      "resource_type": null,
+      "severity": "medium",
+      "source": "XDR Agent",
+      "starred": false,
+      "story_id": null,
+      "tags": "DS:PANW/XDR Agent",
+      "user_agent": null,
+      "user_name": "Administrator"
     }
   ]
 }
 ```
 
-### Custom Output Types
-  
-**event**
-
-|Name|Type|Default|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- |
-|Action Country|string|None|False|Action country|None|
-|Action External Hostname|string|None|False|Action external hostname|None|
-|Action File Macro SHA256|string|None|False|Action file macro SHA256|None|
-|Action File MD5|string|None|False|Action file MD5|None|
-|Action File Name|string|None|False|Action file name|None|
-|Action File Path|string|None|False|Action file path|None|
-|Action File SHA256|string|None|False|Action file SHA256|None|
-|Action Local IP|string|None|False|Action local IP|None|
-|Action Local Port|string|None|False|Action local port|None|
-|Action Process Causality ID|string|None|False|Action process causality ID|None|
-|Action Process Image Command Line|string|None|False|Action process image command line|None|
-|Action Process Image Name|string|None|False|Action process image name|None|
-|Action Process Image SHA256|string|None|False|Action process image SHA256|None|
-|Action Process Instance ID|string|None|False|Action process instance ID|None|
-|Action Process Signature Status|string|None|False|Action process signature status|None|
-|Action Process Signature Vendor|string|None|False|Action process signature vendor|None|
-|Action Registry Data|string|None|False|Action registry data|None|
-|Action Registry Full Key|string|None|False|Action registry full key|None|
-|Action Registry Key Name|string|None|False|Action registry key name|None|
-|Action Registry Value Name|string|None|False|Action registry value name|None|
-|Action Remote IP|string|None|False|Action remote IP|None|
-|Action Remote Port|string|None|False|Action remote port|None|
-|Actor Causality ID|string|None|False|Actor causality ID|None|
-|Actor Process Causality ID|string|None|False|Actor process causality ID|None|
-|Actor Process Command Line|string|None|False|Actor process command line|None|
-|Actor Process Image MD5|string|None|False|Actor process image MD5|None|
-|Actor Process Image Name|string|None|False|Actor process image name|None|
-|Actor Process Image Path|string|None|False|Actor process image path|None|
-|Actor Process Image SHA256|string|None|False|Actor process image SHA256|None|
-|Actor Process Instance ID|string|None|False|Actor process instance ID|None|
-|Actor Process OS PID|integer|None|False|Actor process OS PID|None|
-|Actor Process Signature Status|string|None|False|Actor process signature status|None|
-|Actor Process Signature Vendor|string|None|False|Actor process signature vendor|None|
-|Actor Thread Thread ID|string|None|False|Actor thread thread ID|None|
-|Agent Host Boot Time|string|None|False|Agent host boot time|None|
-|Agent Install Type|string|None|False|Agent install type|None|
-|Association Strength|string|None|False|Association strength|None|
-|Causality Actor Causality ID|string|None|False|Causality actor causality ID|None|
-|Causality Actor Process Command Line|string|None|False|Causality actor process command line|None|
-|Causality Actor Process Execution Time|string|None|False|Causality actor process execution time|None|
-|Causality Actor Process Image MD5|string|None|False|Causality actor process image MD5|None|
-|Causality Actor Process Image Name|string|None|False|Causality actor process image name|None|
-|Causality Actor Process Image Path|string|None|False|Causality actor process image path|None|
-|Causality Actor Process Image SHA256|string|None|False|Causality actor process image SHA256|None|
-|Causality Actor Process Signature Status|string|None|False|Causality actor process signature status|None|
-|Causality Actor Process Signature Vendor|string|None|False|Causality actor process signature vendor|None|
-|Cluster Name|string|None|False|Cluster name|None|
-|Container ID|string|None|False|Container ID|None|
-|Contains Featured Host|string|None|False|Contains featured host|None|
-|Contains Featured IP|string|None|False|Contains featured IP|None|
-|Contains Featured User|string|None|False|Contains featured user|None|
-|DNS Query Name|string|None|False|DNS query name|None|
-|DST Action Country|string|None|False|DST action country|None|
-|DST Action External Hostname|string|None|False|DST action external hostname|None|
-|DST Action External Port|string|None|False|DST action external port|None|
-|DST Agent ID|string|None|False|DST agent ID|None|
-|DST Association Strength|string|None|False|DST association strength|None|
-|DST Causality Actor Process Execution Time|string|None|False|DST causality actor process execution time|None|
-|Event ID|string|None|False|Event ID|None|
-|Event Sub Type|string|None|False|Event sub type|None|
-|Event Timestamp|integer|None|False|Event timestamp|None|
-|Event Type|string|None|False|Event type|None|
-|FW App Category|string|None|False|FW app category|None|
-|FW App ID|string|None|False|FW app ID|None|
-|FW App Subcategory|string|None|False|FW app subcategory|None|
-|FW App Technology|string|None|False|FW app technology|None|
-|FW Device Name|string|None|False|FW device name|None|
-|FW Email Recipient|string|None|False|FW email recipient|None|
-|FW Email Sender|string|None|False|FW email sender|None|
-|FW Email Subject|string|None|False|FW email subject|None|
-|FW Interface From|string|None|False|FW interface from|None|
-|FW Interface To|string|None|False|FW interface to|None|
-|FW Is Phishing|string|None|False|FW is phishing|None|
-|FW Misc|string|None|False|FW misc|None|
-|FW Rule|string|None|False|FW rule|None|
-|FW Rule ID|string|None|False|FW rule ID|None|
-|FW Serial Number|string|None|False|FW serial number|None|
-|FW URL Domain|string|None|False|FW URL domain|None|
-|FW VSYS|string|None|False|FW VSYS|None|
-|FW XFF|string|None|False|FW XFF|None|
-|Image Name|string|None|False|Image name|None|
-|Module ID|string|None|False|Module ID|None|
-|OS Actor Causality ID|string|None|False|OS actor causality ID|None|
-|OS Actor Effective Username|string|None|False|OS actor effective username|None|
-|OS Actor Process Causality ID|string|None|False|OS actor process causality ID|None|
-|OS Actor Process Command Line|string|None|False|OS actor process command line|None|
-|OS Actor Process Image Name|string|None|False|OS actor process image name|None|
-|OS Actor Process Image Path|string|None|False|OS actor process image path|None|
-|OS Actor Process Image SHA256|string|None|False|OS actor process image SHA256|None|
-|OS Actor Process Instance ID|string|None|False|OS actor process instance ID|None|
-|OS Actor Process OS PID|string|None|False|OS actor process OS PID|None|
-|OS Actor Process Signature Status|string|None|False|OS actor process signature status|None|
-|OS Actor Process Signature Vendor|string|None|False|OS actor process signature vendor|None|
-|OS Actor Thread Thread ID|string|None|False|OS actor thread thread ID|None|
-|Story ID|string|None|False|Story ID|None|
-|User Name|string|None|False|User name|None|
+### Custom Types
   
 **alert**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Action|string|None|False|Action|None|
-|Action Pretty|string|None|False|Action pretty|None|
-|Agent Data Collection Status|boolean|None|False|Agent data collection status|None|
-|Agent Device Domain|string|None|False|Agent device domain|None|
-|Agent FQDN|string|None|False|Agent FQDN|None|
-|Agent OS Sub Type|string|None|False|Agent OS sub type|None|
-|Agent OS Type|string|None|False|Agent OS type|None|
-|Agent Version|string|None|False|Agent version|None|
-|Alert ID|string|None|False|Alert ID|None|
-|Attempt Counter|string|None|False|Attempt counter|None|
-|BIOC Category Enum Key|string|None|False|BIOC category enum key|None|
-|BIOC Indicator|string|None|False|BIOC indicator|None|
-|Category|string|None|False|Category|None|
-|Deduplicate Tokens|string|None|False|Deduplicate tokens|None|
-|Description|string|None|False|Description|None|
-|Detection Timestamp|integer|None|False|Detection timestamp|None|
-|End Match Attempt TS|string|None|False|End match attempt TS|None|
-|Endpoint ID|string|None|False|Endpoint ID|None|
-|Events|[]event|None|False|Events|None|
-|External ID|string|None|False|External ID|None|
-|Filter Rule ID|string|None|False|Filter rule ID|None|
-|Host IP|[]string|None|False|Host IP|None|
-|Host Name|string|None|False|Host name|None|
-|Is Whitelisted|boolean|None|False|Is whitelisted|None|
-|Local Insert TS|integer|None|False|Local insert TS|None|
-|MAC|string|None|False|MAC|None|
-|MAC Addresses|[]string|None|False|MAC addresses|None|
-|Matching Service Rule ID|string|None|False|Matching service rule ID|None|
-|Matching Status|string|None|False|Matching status|None|
-|MITRE Tactic ID And Name|[]string|None|False|MITRE tactic ID and name|None|
-|MITRE Technique ID And Name|[]string|None|False|MITRE technique ID and name|None|
-|Name|string|None|False|Name|None|
-|Severity|string|None|False|Severity|None|
-|Source|string|None|False|Source|None|
-|Starred|boolean|None|False|Starred|None|
+|Action|string|None|False|The action taken.|None|
+|Action Country|[]string|None|False|The country where the action took place.|None|
+|Action File Macro SHA256|string|None|False|The SHA256 hash of the macro file involved in the action.|None|
+|Action File MD5|string|None|False|The MD5 hash of the file involved in the action.|None|
+|Action File Name|string|None|False|The name of the file involved in the action.|None|
+|Action File Path|string|None|False|The path to the file involved in the action.|None|
+|Action File SHA256|string|None|False|The SHA256 hash of the file involved in the action.|None|
+|Action Pretty|string|None|False|A pretty-printed representation of the action.|None|
+|Action Process Signature Status|[]string|None|False|The status of the signature associated with the action process.|None|
+|Actor Process Command Line|[]string|None|False|The command line arguments of the actor process.|None|
+|Actor Process Image MD5|[]string|None|False|The MD5 hash of the actor process image.|None|
+|Actor Process Image Name|[]string|None|False|The name of the actor process image.|None|
+|Actor Process Image Path|[]string|None|False|The path to the actor process image.|None|
+|Actor Process Image SHA256|[]string|None|False|The SHA256 hash of the actor process image.|None|
+|Actor Process Instance ID|[]string|None|False|The instance ID of the actor process.|None|
+|Actor Process Operating System PID|[]integer|None|False|The process ID of the actor process on the operating system.|None|
+|Actor Process Signature Status|[]string|None|False|The status of the signature associated with the actor process.|None|
+|Actor Process Signature Vendor|[]string|None|False|The vendor of the signature associated with the actor process.|None|
+|Actor Thread Thread ID|[]integer|None|False|The thread ID of the actor thread.|None|
+|Agent Data Collection Status|boolean|None|False|The status of data collection by the agent.|None|
+|Agent Fully Qualified Domain Name|string|None|False|The fully qualified domain name of the agent.|None|
+|Agent Host Boot Time|[]integer|None|False|The boot time of the host.|None|
+|Agent Install Type|string|None|False|The install type of the agent.|None|
+|Agent Is VDI|boolean|None|False|Indicates if the agent is running on a VDI.|None|
+|Agent OS Sub Type|string|None|False|The subtype of the operating system running on the agent.|None|
+|Agent Operating System Type|string|None|False|The type of the operating system running on the agent.|None|
+|Agent Version|string|None|False|The version of the agent.|None|
+|Alert ID|string|None|False|The unique ID of the alert.|None|
+|Alert Type|string|None|False|The type of the alert.|None|
+|Association Strength|[]integer|None|False|The strength of association between entities.|None|
+|Attempt Counter|integer|None|False|The counter for attempts made.|None|
+|Case ID|integer|None|False|The case ID associated with the alert.|None|
+|Category|string|None|False|The general category of the event.|None|
+|Causality Actor Causality ID|[]string|None|False|The causality ID of the causality actor.|None|
+|Causality Actor Process Command Line|[]string|None|False|The command line arguments of the causality actor process.|None|
+|Causality Actor Process Execution Time|[]integer|None|False|The execution time of the causality actor process.|None|
+|Causality Actor Process Image MD5|[]string|None|False|The MD5 hash of the causality actor process image.|None|
+|Causality Actor Process Image Name|[]string|None|False|The name of the causality actor process image.|None|
+|Causality Actor Process Image Path|[]string|None|False|The path to the causality actor process image.|None|
+|Causality Actor Process Image SHA256|[]string|None|False|The SHA256 hash of the causality actor process image.|None|
+|Causality Actor Process Signature Status|[]string|None|False|The status of the signature associated with the causality actor process.|None|
+|Causality Actor Process Signature Vendor|[]string|None|False|The vendor of the signature associated with the causality actor process.|None|
+|Contains Featured Host|[]string|None|False|Indicates if the event contains a featured host.|None|
+|Contains Featured IP|[]string|None|False|Indicates if the event contains a featured IP address.|None|
+|Contains Featured User|[]string|None|False|Indicates if the event contains a featured user.|None|
+|Description|string|None|False|A textual description of the event.|None|
+|Detection Timestamp|integer|None|False|The timestamp when the detection occurred.|None|
+|Endpoint ID|string|None|False|The ID of the endpoint.|None|
+|Event Sub Type|[]integer|None|False|The subtype of the event.|None|
+|Event Timestamp|[]integer|None|False|The timestamp of the event.|None|
+|Event Type|[]string|None|False|The type of the event.|None|
+|External ID|string|None|False|An external identifier for the alert.|None|
+|Firewall Device Name|string|None|False|The name of the firewall device.|None|
+|Firewall Is Phishing|[]string|None|False|Indicates if the event is related to phishing.|None|
+|Host IP|[]string|None|False|The IP address of the host.|None|
+|Host Name|string|None|False|The name of the host.|None|
+|Image Name|string|None|False|The name of the image.|None|
+|Is PCAP|boolean|None|False|Indicates if the alert involves PCAP data.|None|
+|Is Whitelisted|boolean|None|False|Indicates if the event is whitelisted.|None|
+|Local Insert Timestamp|integer|None|False|The timestamp when the alert was inserted locally.|None|
+|MAC Addresses|[]string|None|False|The MAC addresses associated with the alert.|None|
+|Matching Service Rule ID|string|None|False|The ID of the service rule matched.|None|
+|Matching Status|string|None|False|The status of the matching process.|None|
+|MITRE Tactic ID and Name|[]string|None|False|The ID and name of the MITRE tactic.|None|
+|MITRE Technique ID and Name|[]string|None|False|The ID and name of the MITRE technique.|None|
+|Module ID|[]string|None|False|The ID of the module.|None|
+|Name|string|None|False|The name of the alert.|None|
+|Original Tags|[]string|None|False|The original tags associated with the alert.|None|
+|OS Actor Process Command Line|[]string|None|False|The command line arguments of the OS actor process.|None|
+|OS Actor Process Image Name|[]string|None|False|The name of the OS actor process image.|None|
+|OS Actor Process Image Path|[]string|None|False|The path to the OS actor process image.|None|
+|OS Actor Process Image SHA256|[]string|None|False|The SHA256 hash of the OS actor process image.|None|
+|OS Actor Process Operating System PID|[]integer|None|False|The process ID of the OS actor process on the operating system.|None|
+|OS Actor Process Signature Status|[]string|None|False|The status of the signature associated with the OS actor process.|None|
+|OS Actor Process Signature Vendor|[]string|None|False|The vendor of the signature associated with the OS actor process.|None|
+|OS Actor Thread Thread ID|[]integer|None|False|The thread ID of the OS actor thread.|None|
+|Resolution Status|string|None|False|The resolution status of the alert.|None|
+|Severity|string|None|False|The severity level of the alert.|None|
+|Source|string|None|False|The source of the alert.|None|
+|Starred|boolean|None|False|Indicates if the alert is starred.|None|
+|Tags|[]string|None|False|Tags associated with the alert.|None|
+|User Name|[]string|None|False|The name of the user.|None|
   
 **incident**
 
@@ -887,12 +923,13 @@ Example output:
 
 ## Troubleshooting
 
-* Isolate Endpoint fails with 500 error - This will happen if an isolation action (Isolate or Unisolate) is in progress on the selected endpoint. Wait a few minutes and try again. 
+Isolate Endpoint fails with 500 error - This will happen if an isolation action (Isolate or Unisolate) is in progress on the selected endpoint. Wait a few minutes and try again.
 
 # Version History
 
+* 4.0.0 - `Get Alerts`: Fixed issue where trigger was failing due to empty and different typed output fields - updated to generic object | Added Monitor_alert tasks | SDK Bump to 6.1.2
 * 3.0.0 - Updated `hosts` output of `Get Incident` trigger and `Monitor Incident Events` task to separate host values | Update `insightconnect-plugin-runtime` to version 5
-* 2.3.0 - Add types `xql_query_result` to `Get XQL Query Results` action's response | Add new trigger `Get Query Results` 
+* 2.3.0 - Add types `xql_query_result` to `Get XQL Query Results` action's response | Add new trigger `Get Query Results`
 * 2.2.1 - Fix issue in Get Incidents trigger where fields with null values were causing trigger to fail
 * 2.2.0 - New action Get XQL Query Results | Update SDK to insightconnect-python-3-38-slim-plugin:4
 * 2.1.1 - Fix issue in Monitor Incident Events task where fields with null values aren't removed from incidents leading to validation errors
