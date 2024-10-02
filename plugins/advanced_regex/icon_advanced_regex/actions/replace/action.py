@@ -16,9 +16,14 @@ class Replace(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        flags = shared.constructFlags(params)
-        regex = params.get(Input.IN_REGEX)
-        new = params.get(Input.REPLACE_STRING, "")
-        replace_num = params.get(Input.MAX_REPLACE)
-        replaced = re.sub(regex, new, params.get(Input.IN_STRING), count=replace_num, flags=flags)
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        regex = params.get(Input.IN_REGEX, "")
+        input_string = params.get(Input.IN_STRING, "")
+        replace_string = params.get(Input.REPLACE_STRING, "")
+        replace_number = params.get(Input.MAX_REPLACE)
+        # END INPUT BINDING - DO NOT REMOVE
+
+        replaced = re.sub(
+            regex, replace_string, input_string, count=replace_number, flags=shared.construct_flags(params)
+        )
         return {Output.RESULT: replaced}
