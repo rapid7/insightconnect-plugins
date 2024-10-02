@@ -20,7 +20,7 @@ class SearchIncident(insightconnect_plugin_runtime.Action):
         response = self.connection.request.make_request(url, method, params=query)
 
         try:
-            results = response["resource"].get("result")
+            results = response.get("resource", {}).get("result", {})
             system_ids = [result.get("sys_id") for result in results if isinstance(result, dict)]
         except Exception as error:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
