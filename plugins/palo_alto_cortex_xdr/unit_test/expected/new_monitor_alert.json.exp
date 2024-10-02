@@ -1,10 +1,6 @@
-{
-  "reply": {
-    "total_count": 1000,
-    "result_count": 1,
-    "alerts": [
-      {
-        "agent_os_sub_type": "6.3.420",
+[
+    {
+        "agent_os_sub_type": "6.2.420",
         "fw_app_category": null,
         "fw_app_id": null,
         "fw_app_subcategory": null,
@@ -33,7 +29,7 @@
         "action_country": "UNKNOWN",
         "fw_interface_to": null,
         "dns_query_name": null,
-        "agent_device_domain": "attractions.conor.com",
+        "agent_device_domain": "attractions.yahoo.com",
         "fw_email_recipient": null,
         "fw_email_sender": null,
         "fw_email_subject": null,
@@ -48,7 +44,7 @@
         "fw_rule_id": null,
         "fw_rule": null,
         "fw_serial_number": null,
-        "agent_fqdn": "FL-ATR-DC3-04.attractions.disney.com",
+        "agent_fqdn": "FL-ATR-DC3-04.amusements.disney.com",
         "mac": "2001:db8:1:1:1:1:1:1",
         "agent_os_type": "Windows",
         "image_name": null,
@@ -165,7 +161,5 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      }
-    ]
-  }
-}
+    }
+]
