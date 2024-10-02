@@ -1,0 +1,6 @@
+[
+    "401",
+    {"last_alert_time": 1727795997000, "last_alert_hash": []},
+    Received HTTP 401, re-authenticating to Palo Alto Cortex XDR,
+    
+]
