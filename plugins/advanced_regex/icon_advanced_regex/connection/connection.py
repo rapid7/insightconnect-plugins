@@ -2,6 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import ConnectionSchema
 
 # Custom imports below
+from typing import Dict
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -11,5 +12,5 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def connect(self, params):
         pass
 
-    def test(self):
-        pass
+    def test(self) -> Dict[str, bool]:
+        return {"success": True}

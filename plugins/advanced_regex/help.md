@@ -9,175 +9,180 @@ The Advanced Regex plugin is used to extract or manipulate targeted text using r
 * Split text
 
 # Requirements
+  
+*This plugin does not contain any requirements.*
 
-_This plugin does not contain any requirements._
+# Supported Product Versions
+
+* 2024-10-01
 
 # Documentation
 
 ## Setup
-
-_This plugin does not contain a connection._
+  
+*This plugin does not contain a connection.*
 
 ## Technical Details
 
 ### Actions
 
+
 #### Data Extraction
 
-This action is used to extract data via regex from a string.
+This action is used to extract data via regex from a string
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|ascii|boolean|False|False|Make \w \W \b \B follow ASCII rules|None|False|
-|dotall|boolean|False|False|Make . match newline|None|True|
-|ignorecase|boolean|False|False|Make regex non-case sensitive|None|True|
-|in_regex|string|None|True|Regex to use for data extraction|None|lorem|
-|in_string|string|None|True|Input string|None|Lorem ipsum dolor sit amet, consectetur 
-adipiscing elit. Aliquam sapien ex, lorems odales|
-|multiline|boolean|False|False|Make begin/end consider each line|None|True|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|ascii|boolean|False|False|Make \w \W \b \B follow ASCII rules|None|False|None|None|
+|dotall|boolean|False|False|Make . match newline|None|True|None|None|
+|ignorecase|boolean|False|False|Make regex non-case sensitive|None|True|None|None|
+|in_regex|string|None|True|Regex to use for data extraction|None|lorem|None|None|
+|in_string|string|None|True|Input string|None|Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sapien ex, lorems odales|None|None|
+|multiline|boolean|False|False|Make begin/end consider each line|None|True|None|None|
+  
 Example input:
 
 ```
 {
   "ascii": false,
-  "dotall": true,
-  "ignorecase": true,
-  "in_regex": "((lo)r(em))",
-  "in_string": "Lorem ipsum dolor sit amet, consectetur \nadipiscing elit. Aliquam sapien ex, lorems odales sed luctus ac, dapibus quis augue. Vivamus in cursus libero. (Donec vehicula turpis eu ante viverra, id lacinia.",
-  "multiline": true
+  "dotall": false,
+  "ignorecase": false,
+  "in_regex": "lorem",
+  "in_string": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sapien ex, lorems odales",
+  "multiline": false
 }
 ```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|matches|[][]string|True|An array of string arrays matching the output of Python re.findall()|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|matches|[][]string|True|An array of string arrays matching the output of Python re.findall()|[["lorem"]]|
+  
 Example output:
 
 ```
 {
   "matches": [
-    "Lorem",
-    "lorem"
+    [
+      "lorem"
+    ]
   ]
 }
 ```
 
 #### Search and Replace
 
-This action is used to regex search and replace string.
+This action is used to regex search and replace string
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|ascii|boolean|False|False|Make \w \W \b \B follow ASCII rules|None|False|
-|dotall|boolean|False|False|Make . match newline|None|True|
-|ignorecase|boolean|False|False|Make regex non-case sensitive|None|True|
-|in_regex|string|None|True|Regex to match|None|lorem|
-|in_string|string|None|True|Input string|None|Lorem ipsum dolor sit amet, consectetur 
-adipiscing elit. Aliquam sapien ex, lorems odales|
-|max_replace|integer|0|False|Max occurrences to replace - if zero all will be replaced|None|0|
-|multiline|boolean|False|False|Make begin/end consider each line|None|True|
-|replace_string|string|None|False|The string to replace matches with|None|REPLACED|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|ascii|boolean|False|False|Make \w \W \b \B follow ASCII rules|None|False|None|None|
+|dotall|boolean|False|False|Make . match newline|None|True|None|None|
+|ignorecase|boolean|False|False|Make regex non-case sensitive|None|True|None|None|
+|in_regex|string|None|True|Regex to match|None|lorem|None|None|
+|in_string|string|None|True|Input string|None|Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sapien ex, lorems odales|None|None|
+|max_replace|integer|0|False|Max occurrences to replace - if zero all will be replaced|None|0|None|None|
+|multiline|boolean|False|False|Make begin/end consider each line|None|True|None|None|
+|replace_string|string|None|False|The string to replace matches with|None|REPLACED|None|None|
+  
 Example input:
 
 ```
 {
   "ascii": false,
-  "dotall": true,
-  "ignorecase": true,
+  "dotall": false,
+  "ignorecase": false,
   "in_regex": "lorem",
-  "in_string": "Lorem ipsum dolor sit amet, consectetur \nadipiscing elit. Aliquam sapien ex, lorems odales sed luctus ac, dapibus quis augue. Vivamus in cursus libero. Donec vehicula turpis eu ante viverra, id lacinia.",
+  "in_string": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sapien ex, lorems odales",
   "max_replace": 0,
-  "multiline": true,
+  "multiline": false,
   "replace_string": "REPLACED"
 }
 ```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|result|string|True|The result of the replace operation|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|result|string|True|The result of the replace operation|Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sapien ex, REPLACEDs odales|
+  
 Example output:
 
 ```
 {
-  "result": "REPLACED ipsum dolor sit amet, consectetur \nadipiscing elit. Aliquam sapien ex, REPLACEDs odales sed luctus ac, dapibus quis augue. Vivamus in cursus libero. Donec vehicula turpis eu ante viverra, lacinia."
+  "result": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sapien ex, REPLACEDs odales"
 }
 ```
 
 #### Split by Regex
 
-This action is used to split a string into array using regex.
+This action is used to split a string into array using regex
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|ascii|boolean|False|False|Make \w \W \b \B follow ASCII rules|None|False|
-|dotall|boolean|False|False|Make . match newline|None|True|
-|ignorecase|boolean|False|False|Make regex non-case sensitive|None|True|
-|in_regex|string|None|True|Regex to split string on matches|None|lorem|
-|in_string|string|None|True|Input string|None|Lorem ipsum dolor sit amet, consectetur 
-adipiscing elit. Aliquam sapien ex, lorems odales sed|
-|max_split|integer|0|False|Max splits - if non-zero last element is remainder of string|None|0|
-|multiline|boolean|False|False|Make begin/end consider each line|None|True|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|ascii|boolean|False|False|Make \w \W \b \B follow ASCII rules|None|False|None|None|
+|dotall|boolean|False|False|Make . match newline|None|True|None|None|
+|ignorecase|boolean|False|False|Make regex non-case sensitive|None|True|None|None|
+|in_regex|string|None|True|Regex to split string on matches|None|lorem|None|None|
+|in_string|string|None|True|Input string|None|Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sapien ex, lorems odales sed|None|None|
+|max_split|integer|0|False|Max splits - if non-zero last element is remainder of string|None|0|None|None|
+|multiline|boolean|False|False|Make begin/end consider each line|None|True|None|None|
+  
 Example input:
 
 ```
 {
   "ascii": false,
-  "dotall": true,
-  "ignorecase": true,
+  "dotall": false,
+  "ignorecase": false,
   "in_regex": "lorem",
-  "in_string": "Lorem ipsum dolor sit amet, consectetur \nadipiscing elit. Aliquam sapien ex, lorems odales sed luctus ac, dapibus quis augue. Vivamus in cursus libero. Donec vehicula turpis eu ante viverra, id lacinia.",
+  "in_string": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sapien ex, lorems odales sed",
   "max_split": 0,
-  "multiline": true
+  "multiline": false
 }
 ```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|result|[]string|True|An array of the strings returned by the split operation|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|result|[]string|True|An array of the strings returned by the split operation|["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sapien ex, ", "s odales sed"]|
+  
 Example output:
 
 ```
 {
   "result": [
-    "",
-    " ipsum dolor sit amet, consectetur \nadipiscing elit. Aliquam sapien ex, ",
-    "s odales sed luctus ac, dapibus quis augue. Vivamus in cursus libero. Donec vehicula turpis eu ante viverra, lacinia."
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sapien ex, ",
+    "s odales sed"
   ]
 }
 ```
-
 ### Triggers
+  
+*This plugin does not contain any triggers.*
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-_This plugin does not contain any triggers._
-
-### Custom Output Types
-
-_This plugin does not contain any custom output types._
+### Custom Types
+  
+*This plugin does not contain any custom output types.*
 
 ## Troubleshooting
-
-_This plugin does not contain any troubleshooting information._
+  
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 1.0.4 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 1.0.3 - Update to make replace string non-required
 * 1.0.2 - Update to v4 Python plugin runtime | Add example inputs
 * 1.0.1 - New spec and help.md format for the Extension Library
@@ -185,7 +190,8 @@ _This plugin does not contain any troubleshooting information._
 
 # Links
 
+* [Python Regex](https://docs.python.org/library/re.html)
+
 ## References
 
 * [Python Regex](https://docs.python.org/library/re.html)
-
