@@ -22,15 +22,15 @@ class CreateCi(insightconnect_plugin_runtime.Action):
         response = self.connection.request.make_request(url, method, payload=payload)
 
         try:
-            result = response["resource"].get("result")
-        except KeyError as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text) from e
+            result = response.get("resource", {}).get("result")
+        except AttributeError:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 
         sys_id = result.get("sys_id")
 
         if sys_id is None:
             raise PluginException(
-                cause=f"Error: create_ci failed - no system_id returned.",
+                cause="Error: create_ci failed - no system_id returned.",
                 assistance=f"Response: {response.text}",
             )
 

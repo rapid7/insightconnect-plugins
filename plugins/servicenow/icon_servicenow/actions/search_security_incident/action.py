@@ -1,4 +1,6 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 from .schema import SearchSecurityIncidentInput, SearchSecurityIncidentOutput, Input, Output, Component
 
 # Custom imports below
@@ -27,18 +29,19 @@ class SearchSecurityIncident(insightconnect_plugin_runtime.Action):
             "sysparm_fields": params.get(Input.FIELDS),
         }
 
-        response = (
-            self.connection.request.make_request(
-                endpoint=self.connection.security_incident_url,
-                method="GET",
-                params=return_non_empty(search_params),
-            )
-            .get("resource", {})
-            .get("result", [])
+        response = self.connection.request.make_request(
+            endpoint=self.connection.security_incident_url,
+            method="GET",
+            params=return_non_empty(search_params),
         )
+
+        try:
+            result = response.get("resource", {}).get("result", [])
+        except AttributeError:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 
         return {
             Output.SECURITY_INCIDENTS: [
-                convert_security_incident_fields(return_non_empty(security_incident)) for security_incident in response
+                convert_security_incident_fields(return_non_empty(security_incident)) for security_incident in result
             ]
         }
