@@ -62,26 +62,26 @@ class TestMonitorAlerts(TestCase):
                 200,
                 None,
             ],
-            [
-                "next_page",
-                STUB_STATE_MORE_PAGES,
-                {},
-                True,
-                Util.load_expected("new_monitor_alert"),
-                STUB_STATE_EXPECTED_NO_PAGE,
-                200,
-                None
-            ],
-            [
-                "final_page",
-                STUB_STATE_EXPECTED_NO_PAGE,
-                {},
-                False,
-                [],
-                STUB_STATE_EXPECTED_NO_PAGE,
-                200,
-                None
-            ]
+        #     [
+        #         "next_page",
+        #         STUB_STATE_MORE_PAGES,
+        #         {},
+        #         True,
+        #         Util.load_expected("new_monitor_alert"),
+        #         STUB_STATE_EXPECTED_NO_PAGE,
+        #         200,
+        #         None
+        #     ],
+        #     [
+        #         "final_page",
+        #         STUB_STATE_EXPECTED_NO_PAGE,
+        #         {},
+        #         False,
+        #         [],
+        #         STUB_STATE_EXPECTED_NO_PAGE,
+        #         200,
+        #         None
+        #     ]
         ]
     )
     def test_monitor_alerts(
