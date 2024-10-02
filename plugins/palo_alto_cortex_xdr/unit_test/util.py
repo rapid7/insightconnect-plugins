@@ -54,6 +54,17 @@ class Util:
         )
 
     @staticmethod
+    def load_expected(filename: str) -> Dict[str, Any]:
+        return json.loads(
+            Util.read_file_to_string(
+                os.path.join(
+                    os.path.dirname(os.path.realpath(__file__)),
+                    f"expected/{filename}.json.exp",
+                )
+            )
+        )
+
+    @staticmethod
     def default_connector(action, connect_params: object = None):
         default_connection = Connection()
         default_connection.logger = logging.getLogger("connection logger")
