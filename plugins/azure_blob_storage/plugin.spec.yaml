@@ -4,7 +4,8 @@ products: [insightconnect]
 name: azure_blob_storage
 title: Azure Blob Storage
 description: Azure Blob storage is Microsoft's massively scalable and secure object storage for cloud-native workloads, archives, data lakes, high-performance computing, and machine learning. Azure Blob Storage helps you create data lakes for your analytics needs, and provides storage to build powerful cloud-native and mobile apps. Optimize costs with tiered storage for your long-term data, and flexibly scale up for high-performance computing and machine learning workloads
-version: 1.0.0
+version: 1.0.1
+connection_version: 1
 supported_versions: ["Azure Storage 2021-08-06"]
 vendor: rapid7
 support: rapid7
@@ -13,6 +14,24 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/azure_blob_storage
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.microsoft.com/
+sdk:
+  type: slim
+  version: 6.1.3
+  user: nobody
+key_features:
+  - "Create, list and delete Azure containers"
+  - "Create, list, get and delete Azure blobs"
+requirements:
+  - "Azure credentials - Application ID, Application Secret Key, Tenant ID, Storage Account"
+  - "`Storage Blob Data Owner` permission assigned for the `Storage account` used in the connection. This permission can be granted in the Azure -> Storage  Accounts -> {account_name} -> Access Control (IAM) tab by choosing an app  registered previously in the Azure Active Directory."
+troubleshooting: "This plugin does not contain a troubleshooting."
+version_history:
+  - "1.0.1 - Initial updates | Updated SDK to the latest version"
+  - "1.0.0 - Initial plugin"
+links:
+  - "[Azure Blob Storage](https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/azure_blob_storage)"
+references:
+  - "[Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)"
 tags:
 - Azure Blob Storage
 - Azure
@@ -180,7 +199,7 @@ connection:
     description: The application secret key that the application registration portal assigned to your app
     type: credential_secret_key
     required: true
-    example: 9de5069c5afe602b2ea0a04b66beb2c0
+    example: '{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}'
   tenant_id:
     title: Tenant ID
     description: The ID of the directory that identifies the tenant
@@ -209,8 +228,7 @@ actions:
         description: Additional headers to pass to the API request
         type: object
         required: false
-        example: '{"x-ms-meta-Name":"StorageSample","x-ms-blob-public-access":"blob"}'
-        default: '{}'
+        example: '{ "x-ms-meta-Name": "StorageSample", "x-ms-blob-public-access": "blob" }'
     output:
       success:
         title: Success
@@ -240,28 +258,24 @@ actions:
         type: integer
         required: false
         example: 12
-        default: 20
       include:
         title: Include
         description: Specifies one or more datasets to include in the response. Datasets available to choose are 'system', 'deleted', and 'metadata'
         type: "[]string"
         required: false
         example: ["system", "deleted"]
-        default: []
       timeout:
         title: Timeout
         description: Maximum time to wait for server response in seconds, between 0 and 30
         type: integer
         required: false
         example: 14
-        default: 30
       additional_headers:
         title: Additional Headers
         description: Additional headers to pass to the API request
         type: object
         required: false
-        example: '{"x-ms-client-request-id":"some_request_id"}'
-        default: '{}'
+        example: '{ "x-ms-client-request-id":"some_request_id" }'
     output:
       prefix:
         title: Prefix
@@ -280,6 +294,7 @@ actions:
         description: Containers list
         type: "[]container"
         required: false
+        example: '[ { "name": "example", "properties": { "last_modified": "Wed, 08 Jun 2022 12: 48: 16 GMT", "public_access": "blob", "etag": "\"0x8DA494D2826EA21\"" }, "metadata": {} }, { "name": "new", "properties": { "last_modified": "Wed, 08 Jun 2022 12: 44: 35 GMT", "etag": "\"0x8DA494CA481C42D\"" }, "metadata": {} } ]'
   delete_container:
     title: Delete Container
     description: The Delete Container action marks the specified container for deletion. The container and any blobs contained within it are later deleted during garbage collection
@@ -295,8 +310,7 @@ actions:
         description: Additional headers to pass to the API request
         type: object
         required: false
-        example: '{"x-ms-meta-Name":"StorageSample","x-ms-blob-public-access":"blob"}'
-        default: '{}'
+        example: '{ "x-ms-meta-Name":"StorageSample", "x-ms-blob-public-access":"blob" }'
     output:
       success:
         title: Success
@@ -338,28 +352,24 @@ actions:
         type: integer
         required: false
         example: 12
-        default: 20
       include:
         title: Include
         description: Specifies one or more datasets to include in the response. Available values - 'snapshots', 'metadata', 'uncommittedblobs', 'copy', 'deleted', 'tags', 'versions', 'deletedwithversions', 'immutabilitypolicy', 'legalhold', 'permissions'
         type: "[]string"
         required: false
         example: ["uncommittedblob", "copy", "deleted", "tags", "versions"]
-        default: []
       timeout:
         title: Timeout
         description: Maximum time to wait for server response in seconds, between 0 and 30
         type: integer
         required: false
         example: 14
-        default: 30
       additional_headers:
         title: Additional Headers
         description: Additional headers to pass to the API request
         type: object
         required: false
-        example: '{"x-ms-client-request-id":"some_request_id"}'
-        default: '{}'
+        example: '{ "x-ms-client-request-id":"some_request_id" }'
     output:
       prefix:
         title: Prefix
@@ -372,24 +382,25 @@ actions:
         description: The Delimiter given as input, if present
         type: string
         required: false
-        example: bob
+        example: plugin
       max_results:
         title: Max Results
         description: Max results given as input
         type: string
         required: false
-        example: 12
+        example: 20
       blobs:
         title: Blobs
         description: Blobs list
         type: "[]blob"
         required: false
+        example: [ { "name": "new_blob.PNG", "version_id": "2022-06-14T12:32:03.9792491Z", "is_current_version": "true", "properties": { "creation_time": "Wed, 25 May 2022 13:03:28 GMT", "tag_count": "2", "server_encrypted": "true", "last_modified": "Tue, 14 Jun 2022 12:32:03 GMT", "content_type": "image/png", "blob_type": "BlockBlob", "access_tier": "Hot", "etag": "0x8DA4E01E2EE85B" }, "metadata": { "key": "value", "second_key": "second_value" }, "tags": [ { "Key": "example", "Value": "value" }, { "Key": "x", "Value": "z" } ] }, { "name": "new_example_blob", "version_id": "2022-06-15T08:35:15.4662051Z", "is_current_version": "true", "properties": { "creation_time": "Wed, 15 Jun 2022 08:35:15 GMT", "server_encrypted": "true", "last_modified": "Wed, 15 Jun 2022 08:35:15 GMT", "content_type": "application/octet-stream", "blob_type": "BlockBlob", "access_tier": "Hot", "etag": "0x8DA4EA9F8A9C6A3" }, "metadata": {}, "tags": [] } ]
       blobs_with_delimiter_match:
         title: Blobs with Delimiter Match
         description: Blobs which contains 'delimiter' in name
         type: '[]string'
         required: false
-        example: '["first_bob","sebob"]'
+        example: '[ "example_bob", "blob_named_bob", "random123bob" ]'
   put_blob:
     title: Put Blob
     description: The Put Blob action creates a new block, page, or append blob, or updates the content of an existing block blob
@@ -412,7 +423,6 @@ actions:
         type: integer
         required: false
         example: 14
-        default: 30
       blob_type:
         title: Blob Type
         description: Specifies the type of blob to create - block blob, page blob, or append blob
@@ -423,7 +433,6 @@ actions:
           - PageBlob
           - AppendBlob
         example: BlockBlob
-        default: PageBlob
       blob_content:
         title: Blob Content
         description: Content of the new blob. This field is allowed only for BlockBlob type
@@ -441,7 +450,6 @@ actions:
           - Archive
           - None
         example: Hot
-        default: Cool
       blob_content_length:
         title: Blob Content Length
         description: Required for page blobs. This header specifies the maximum size for the page blob, up to 8 TiB. The page blob size must be aligned to a 512-byte boundary
@@ -454,7 +462,6 @@ actions:
         type: object
         required: false
         example: '{"x-ms-client-request-id":"some_request_id","x-ms-lease-id":"some_123_id"}'
-        default: '{}'
     output:
       success:
         title: Success
@@ -502,14 +509,12 @@ actions:
         type: boolean
         required: false
         example: true
-        default: false
       additional_headers:
         title: Additional Headers
         description: Additional headers to pass to the API request
         type: object
         required: false
-        example: '{"x-ms-client-request-id":"some_request_id"}'
-        default: '{}'
+        example: '{ "x-ms-client-request-id":"some_request_id" }'
     output:
       data:
         title: Data
@@ -560,8 +565,7 @@ actions:
         description: Additional headers to pass to the API request
         type: object
         required: false
-        example: '{"x-ms-client-request-id":"some_request_id","x-ms-lease-id":"exa12_lease_id"}'
-        default: '{}'
+        example: '{ "x-ms-client-request-id":"some_request_id", "x-ms-lease-id":"exa12_lease_id" }'
     output:
       success:
         title: Success
@@ -580,4 +584,4 @@ actions:
         description: Blob's delete type
         type: string
         required: true
-        example: permanent
+        example: soft
