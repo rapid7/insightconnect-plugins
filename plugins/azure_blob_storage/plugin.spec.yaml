@@ -33,9 +33,9 @@ links:
 references:
   - "[Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)"
 tags:
-- Azure Blob Storage
-- Azure
-- Storage
+  - Azure Blob Storage
+  - Azure
+  - Storage
 hub_tags:
   use_cases: [data_enrichment, asset_inventory]
   keywords: [microsoft, azure, storage]
