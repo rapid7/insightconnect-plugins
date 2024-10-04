@@ -4,11 +4,13 @@ Protect your Microsoft Office 365 and G-Suite environments with next-generation 
 
 # Key Features
 
-* This Plugin does not contain any Key Features.
+* Retrieve details of an individual case and list up to 100 cases identified by Abnormal Security.
+* Retrieve details of a single threat and list up to 100 threats identified by Abnormal Security.
+* Manage a case or threat.
 
 # Requirements
 
-* This Plugin does not contain any Requirements.
+* This plugin does not contain any Requirements.
 
 # Supported Product Versions
 
@@ -451,8 +453,8 @@ Example output:
 
 
 ## Troubleshooting
-
-There is no troubleshooting for this plugin.
+  
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 

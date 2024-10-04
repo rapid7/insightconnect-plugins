@@ -25,10 +25,11 @@ resources:
   vendor_url: https://abnormalsecurity.com/
 enable_cache: true
 key_features:
-  - "This Plugin does not contain any Key Features."
+  - "Retrieve details of an individual case and list up to 100 cases identified by Abnormal Security."
+  - "Retrieve details of a single threat and list up to 100 threats identified by Abnormal Security."
+  - "Manage a case or threat."
 requirements:
-  - "This Plugin does not contain any Requirements."
-troubleshooting: "There is no troubleshooting for this plugin."
+  - "This plugin does not contain any Requirements."
 version_history:
   - '2.0.3 - Fix issue where Case ID was being returned as an integer in the `get_cases` and `get_case_details` action'
   - '2.0.2 - Fix bug where toTime was being used as gte rather than lte in requests, used in the `get_cases` and `get_threats` actions'
