@@ -14,4 +14,11 @@ class GetCaseDetails(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {Output.CASE_DETAILS: self.connection.api.get_case_details(params.get(Input.CASE_ID))}
+
+        # Solution to convert Case ID to string if it gets returned as an integer
+        case_id = params.get(Input.CASE_ID, "")
+
+        response = self.connection.api.get_case_details(case_id)
+        if isinstance(response.get("caseId"), int):
+            response["caseId"] = str(response.get("caseId"))
+        return {Output.CASE_DETAILS: response}
