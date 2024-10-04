@@ -70,6 +70,7 @@ class PutBlobInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Blob Type",
       "description": "Specifies the type of blob to create - block blob, page blob, or append blob",
+      "default": "BlockBlob",
       "enum": [
         "BlockBlob",
         "PageBlob",
@@ -87,6 +88,7 @@ class PutBlobInput(insightconnect_plugin_runtime.Input):
       "type": "integer",
       "title": "Timeout",
       "description": "Maximum time to wait for server response in seconds, not larger than 10 minutes per megabyte",
+      "default": 30,
       "order": 3
     }
   },

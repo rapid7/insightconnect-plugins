@@ -242,7 +242,7 @@ This action is used to the List Blobs action returns a list of the blobs under t
 |include|[]string|None|False|Specifies one or more datasets to include in the response. Available values - 'snapshots', 'metadata', 'uncommittedblobs', 'copy', 'deleted', 'tags', 'versions', 'deletedwithversions', 'immutabilitypolicy', 'legalhold', 'permissions'|None|["uncommittedblob", "copy", "deleted", "tags", "versions"]|None|None|
 |max_results|integer|None|False|Specifies the maximum number of blobs to return. If the request does not specify max_results, or specifies a value greater than 100, the action will return up to 100 items|None|12|None|None|
 |prefix|string|None|False|Filters the results to return only blobs whose name begins with the specified prefix|None|new|None|None|
-|timeout|integer|None|False|Maximum time to wait for server response in seconds, between 0 and 30|None|14|None|None|
+|timeout|integer|30|False|Maximum time to wait for server response in seconds, between 0 and 30|None|30|None|None|
   
 Example input:
 
@@ -262,7 +262,7 @@ Example input:
   ],
   "max_results": 12,
   "prefix": "new",
-  "timeout": 14
+  "timeout": 30
 }
 ```
 
@@ -351,7 +351,7 @@ This action is used to the List Containers action returns a list of the containe
 |include|[]string|None|False|Specifies one or more datasets to include in the response. Datasets available to choose are 'system', 'deleted', and 'metadata'|None|["system", "deleted"]|None|None|
 |max_results|integer|None|False|Specifies the maximum number of containers to return. If the request does not specify max_results, or specifies a value greater than 100, the action will return up to 100 items|None|12|None|None|
 |prefix|string|None|False|Filters the results to return only containers whose name begins with the specified prefix|None|new|None|None|
-|timeout|integer|None|False|Maximum time to wait for server response in seconds, between 0 and 30|None|14|None|None|
+|timeout|integer|30|False|Maximum time to wait for server response in seconds, between 0 and 30|None|30|None|None|
   
 Example input:
 
@@ -366,7 +366,7 @@ Example input:
   ],
   "max_results": 12,
   "prefix": "new",
-  "timeout": 14
+  "timeout": 30
 }
 ```
 
@@ -427,9 +427,9 @@ A blob name must conforming to the following naming rules:
 |blob_content|string|None|False|Content of the new blob. This field is allowed only for BlockBlob type|None|hello world|None|None|
 |blob_content_length|integer|None|False|Required for page blobs. This header specifies the maximum size for the page blob, up to 8 TiB. The page blob size must be aligned to a 512-byte boundary|None|512|None|None|
 |blob_name|string|None|True|Name of the new blob|None|my_new_blob|None|None|
-|blob_type|string|None|False|Specifies the type of blob to create - block blob, page blob, or append blob|["BlockBlob", "PageBlob", "AppendBlob"]|BlockBlob|None|None|
+|blob_type|string|BlockBlob|False|Specifies the type of blob to create - block blob, page blob, or append blob|["BlockBlob", "PageBlob", "AppendBlob"]|BlockBlob|None|None|
 |container_name|string|None|True|Container name where the new blob will be put|None|example_container_name|None|None|
-|timeout|integer|None|False|Maximum time to wait for server response in seconds, not larger than 10 minutes per megabyte|None|14|None|None|
+|timeout|integer|30|False|Maximum time to wait for server response in seconds, not larger than 10 minutes per megabyte|None|30|None|None|
   
 Example input:
 
@@ -445,7 +445,7 @@ Example input:
   "blob_name": "my_new_blob",
   "blob_type": "BlockBlob",
   "container_name": "example_container_name",
-  "timeout": 14
+  "timeout": 30
 }
 ```
 

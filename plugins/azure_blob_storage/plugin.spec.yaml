@@ -269,7 +269,8 @@ actions:
         description: Maximum time to wait for server response in seconds, between 0 and 30
         type: integer
         required: false
-        example: 14
+        example: 30
+        default: 30
       additional_headers:
         title: Additional Headers
         description: Additional headers to pass to the API request
@@ -363,7 +364,8 @@ actions:
         description: Maximum time to wait for server response in seconds, between 0 and 30
         type: integer
         required: false
-        example: 14
+        example: 30
+        default: 30
       additional_headers:
         title: Additional Headers
         description: Additional headers to pass to the API request
@@ -422,7 +424,8 @@ actions:
         description: Maximum time to wait for server response in seconds, not larger than 10 minutes per megabyte
         type: integer
         required: false
-        example: 14
+        example: 30
+        default: 30
       blob_type:
         title: Blob Type
         description: Specifies the type of blob to create - block blob, page blob, or append blob
@@ -433,6 +436,7 @@ actions:
           - PageBlob
           - AppendBlob
         example: BlockBlob
+        default: BlockBlob
       blob_content:
         title: Blob Content
         description: Content of the new blob. This field is allowed only for BlockBlob type

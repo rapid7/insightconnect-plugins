@@ -58,6 +58,7 @@ class ListContainersInput(insightconnect_plugin_runtime.Input):
       "type": "integer",
       "title": "Timeout",
       "description": "Maximum time to wait for server response in seconds, between 0 and 30",
+      "default": 30,
       "order": 4
     }
   },
