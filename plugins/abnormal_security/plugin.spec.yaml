@@ -40,7 +40,7 @@ version_history:
   - '1.1.0 - New actions Get Cases and Get Case Details'
   - '1.0.0 - Initial plugin'
 references:
-  - '[Abnormal Security](https://abnormalsecurity.com/)'
+  - '[Abnormal Security](https://app.swaggerhub.com/apis-docs/abnormal-security/abx/1.4.1)'
 links:
   - "[Abnormal Security](https://abnormalsecurity.com/)"
 types:

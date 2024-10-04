@@ -473,4 +473,4 @@ Example output:
 
 ## References
 
-* [Abnormal Security](https://abnormalsecurity.com/)
+* [Abnormal Security](https://app.swaggerhub.com/apis-docs/abnormal-security/abx/1.4.1)
