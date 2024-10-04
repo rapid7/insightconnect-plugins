@@ -11,10 +11,13 @@ class GetCases(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {
-            Output.CASES: self.connection.api.get_cases(
-                from_date=params.get(Input.FROM_DATE),
-                to_date=params.get(Input.TO_DATE),
-                filter_key=params.get(Input.FILTER_KEY, "lastModifiedTime"),
-            )
-        }
+        response = self.connection.api.get_cases(
+            from_date=params.get(Input.FROM_DATE),
+            to_date=params.get(Input.TO_DATE),
+            filter_key=params.get(Input.FILTER_KEY, "lastModifiedTime"),
+        )
+        # Solution to convert Case ID to string if it gets returned as an integer
+        for case in response:
+            if isinstance(case.get("caseId"), int):
+                case["caseId"] = str(case["caseId"])
+        return {Output.CASES: response}
