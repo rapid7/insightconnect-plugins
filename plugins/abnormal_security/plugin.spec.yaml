@@ -4,11 +4,16 @@ products: [insightconnect]
 name: abnormal_security
 title: Abnormal Security
 description: Protect your Microsoft Office 365 and G-Suite environments with next-generation email security that uses the most advanced AI detection techniques to stop targeted phishing attacks
-version: 2.0.2
+version: 2.0.3
+connection_version: 2
 supported_versions: ["abnormal-security API abx v1.4.2"]
 vendor: rapid7
 support: rapid7
 status: []
+sdk:
+  type: slim
+  version: 6.1.3
+  user: nobody
 tags: [investigate, malware, threat intel]
 hub_tags:
   use_cases: [threat_detection_and_response, vulnerability_management]
@@ -19,7 +24,13 @@ resources:
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://abnormalsecurity.com/
 enable_cache: true
+key_features:
+  - "This Plugin does not contain any Key Features."
+requirements:
+  - "This Plugin does not contain any Requirements."
+troubleshooting: "There is no troubleshooting for this plugin."
 version_history:
+  - '2.0.3 - Fix issue where Case ID was being returned as an integer in the `get_cases` and `get_case_details` action'
   - '2.0.2 - Fix bug where toTime was being used as gte rather than lte in requests, used in the `get_cases` and `get_threats` actions'
   - '2.0.1 - To remove formatting of the fromTime or toTime values used in the `get_cases` and `get_threats` actions'
   - '2.0.0 - Add support to select the time filter filed in `get_cases` action | bump SDK version'
@@ -29,6 +40,8 @@ version_history:
   - '1.0.0 - Initial plugin'
 references:
   - '[Abnormal Security](https://abnormalsecurity.com/)'
+links:
+  - "[Abnormal Security](https://abnormalsecurity.com/)"
 types:
   threat:
     threatId:

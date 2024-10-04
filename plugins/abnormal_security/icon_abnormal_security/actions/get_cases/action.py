@@ -16,7 +16,7 @@ class GetCases(insightconnect_plugin_runtime.Action):
             to_date=params.get(Input.TO_DATE),
             filter_key=params.get(Input.FILTER_KEY, "lastModifiedTime"),
         )
-        # This is a possible solution to SI-25434
+        # Solution to convert Case ID to string if it gets returned as an integer
         for case in response:
             if isinstance(case.get("caseId"), int):
                 case["caseId"] = str(case["caseId"])
