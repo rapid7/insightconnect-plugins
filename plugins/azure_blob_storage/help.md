@@ -242,7 +242,7 @@ This action is used to the List Blobs action returns a list of the blobs under t
 |include|[]string|["uncommittedblob", "copy", "deleted", "tags", "versions"]|False|Specifies one or more datasets to include in the response. Available values - 'snapshots', 'metadata', 'uncommittedblobs', 'copy', 'deleted', 'tags', 'versions', 'deletedwithversions', 'immutabilitypolicy', 'legalhold', 'permissions'|None|["uncommittedblob", "copy", "deleted", "tags", "versions"]|None|None|
 |max_results|integer|12|False|Specifies the maximum number of blobs to return. If the request does not specify max_results, or specifies a value greater than 100, the action will return up to 100 items|None|12|None|None|
 |prefix|string|None|False|Filters the results to return only blobs whose name begins with the specified prefix|None|new|None|None|
-|timeout|integer|None|False|Maximum time to wait for server response in seconds, between 0 and 30|None|14|None|None|
+|timeout|integer|14|False|Maximum time to wait for server response in seconds, between 0 and 30|None|14|None|None|
   
 Example input:
 

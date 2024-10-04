@@ -372,6 +372,7 @@ actions:
         type: integer
         required: false
         example: 14
+        default: 14
       additional_headers:
         title: Additional Headers
         description: Additional headers to pass to the API request
