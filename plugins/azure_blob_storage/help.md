@@ -61,7 +61,7 @@ A container name must be a valid DNS name, conforming to the following naming ru
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|additional_headers|object|None|False|Additional headers to pass to the API request|None|{ "x-ms-meta-Name": "StorageSample", "x-ms-blob-public-access": "blob" }|None|None|
+|additional_headers|object|{ "x-ms-meta-Name": "StorageSample", "x-ms-blob-public-access": "blob" }|False|Additional headers to pass to the API request|None|{ "x-ms-meta-Name": "StorageSample", "x-ms-blob-public-access": "blob" }|None|None|
 |container_name|string|None|True|Name of the new container. Container name should contain only lowercase letters, numbers and dash|None|my-new-container-432|None|None|
   
 Example input:
@@ -102,7 +102,7 @@ delete both at the same time using snapshots = include parameter
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|additional_headers|object|None|False|Additional headers to pass to the API request|None|{ "x-ms-client-request-id":"some_request_id", "x-ms-lease-id":"exa12_lease_id" }|None|None|
+|additional_headers|object|{ "x-ms-client-request-id":"some_request_id", "x-ms-lease-id":"exa12_lease_id" }|False|Additional headers to pass to the API request|None|{ "x-ms-client-request-id":"some_request_id", "x-ms-lease-id":"exa12_lease_id" }|None|None|
 |blob_name|string|None|True|Name of the blob to delete|None|my_old_blob|None|None|
 |container_name|string|None|True|Name of the container|None|example_container_name|None|None|
 |snapshot_id|string|None|False|The snapshot parameter is an opaque DateTime value that, when present, specifies the blob snapshot to delete|None|2022-05-24 15:22:30.161683+00:00|None|None|
@@ -152,7 +152,7 @@ blobs contained within it are later deleted during garbage collection
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|additional_headers|object|None|False|Additional headers to pass to the API request|None|{ "x-ms-meta-Name":"StorageSample", "x-ms-blob-public-access":"blob" }|None|None|
+|additional_headers|object|{ "x-ms-meta-Name":"StorageSample", "x-ms-blob-public-access":"blob" }|False|Additional headers to pass to the API request|None|{ "x-ms-meta-Name":"StorageSample", "x-ms-blob-public-access":"blob" }|None|None|
 |container_name|string|None|True|Name of the container to delete|None|my_container|None|None|
   
 Example input:
@@ -192,9 +192,9 @@ properties. You can also use Get Blob to read a snapshot
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|additional_headers|object|None|False|Additional headers to pass to the API request|None|{ "x-ms-client-request-id":"some_request_id" }|None|None|
+|additional_headers|object|{ "x-ms-client-request-id":"some_request_id" }|False|Additional headers to pass to the API request|None|{ "x-ms-client-request-id":"some_request_id" }|None|None|
 |blob_name|string|None|True|Name of the blob to retrieve|None|my_new_blob|None|None|
-|byte_to_string|boolean|None|False|Whether output data should be converted from bytes to string or not|None|True|None|None|
+|byte_to_string|boolean|True|False|Whether output data should be converted from bytes to string or not|None|True|None|None|
 |container_name|string|None|True|Name of the container|None|example_container_name|None|None|
 |snapshot_id|string|None|False|The snapshot parameter is an opaque DateTime value that, when present, specifies the blob snapshot|None|2022-05-24 15:22:30.161683+00:00|None|None|
 |version_id|string|None|False|The versionid parameter is an opaque DateTime value that, when present, specifies the Version of the blob|None|2022-05-20 15:38:24.824024+00:00|None|None|
@@ -236,11 +236,11 @@ This action is used to the List Blobs action returns a list of the blobs under t
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|additional_headers|object|None|False|Additional headers to pass to the API request|None|{ "x-ms-client-request-id":"some_request_id" }|None|None|
+|additional_headers|object|{ "x-ms-client-request-id":"some_request_id" }|False|Additional headers to pass to the API request|None|{ "x-ms-client-request-id":"some_request_id" }|None|None|
 |container_name|string|None|True|Name of the container|None|example_container_name|None|None|
 |delimiter|string|None|False|When this parameter is provided, the action returns a 'blobs_with_delimiter_match' element in the output that acts as a placeholder for all blobs whose names begin with the same substring up to the appearance of the delimiter character. The delimiter may be a single character or a string|None|bob|None|None|
-|include|[]string|None|False|Specifies one or more datasets to include in the response. Available values - 'snapshots', 'metadata', 'uncommittedblobs', 'copy', 'deleted', 'tags', 'versions', 'deletedwithversions', 'immutabilitypolicy', 'legalhold', 'permissions'|None|["uncommittedblob", "copy", "deleted", "tags", "versions"]|None|None|
-|max_results|integer|None|False|Specifies the maximum number of blobs to return. If the request does not specify max_results, or specifies a value greater than 100, the action will return up to 100 items|None|12|None|None|
+|include|[]string|["uncommittedblob", "copy", "deleted", "tags", "versions"]|False|Specifies one or more datasets to include in the response. Available values - 'snapshots', 'metadata', 'uncommittedblobs', 'copy', 'deleted', 'tags', 'versions', 'deletedwithversions', 'immutabilitypolicy', 'legalhold', 'permissions'|None|["uncommittedblob", "copy", "deleted", "tags", "versions"]|None|None|
+|max_results|integer|12|False|Specifies the maximum number of blobs to return. If the request does not specify max_results, or specifies a value greater than 100, the action will return up to 100 items|None|12|None|None|
 |prefix|string|None|False|Filters the results to return only blobs whose name begins with the specified prefix|None|new|None|None|
 |timeout|integer|None|False|Maximum time to wait for server response in seconds, between 0 and 30|None|14|None|None|
   
@@ -347,11 +347,11 @@ This action is used to the List Containers action returns a list of the containe
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|additional_headers|object|None|False|Additional headers to pass to the API request|None|{ "x-ms-client-request-id":"some_request_id" }|None|None|
-|include|[]string|None|False|Specifies one or more datasets to include in the response. Datasets available to choose are 'system', 'deleted', and 'metadata'|None|["system", "deleted"]|None|None|
-|max_results|integer|None|False|Specifies the maximum number of containers to return. If the request does not specify max_results, or specifies a value greater than 100, the action will return up to 100 items|None|12|None|None|
+|additional_headers|object|{ "x-ms-client-request-id":"some_request_id" }|False|Additional headers to pass to the API request|None|{ "x-ms-client-request-id":"some_request_id" }|None|None|
+|include|[]string|["system", "deleted"]|False|Specifies one or more datasets to include in the response. Datasets available to choose are 'system', 'deleted', and 'metadata'|None|["system", "deleted"]|None|None|
+|max_results|integer|12|False|Specifies the maximum number of containers to return. If the request does not specify max_results, or specifies a value greater than 100, the action will return up to 100 items|None|12|None|None|
 |prefix|string|None|False|Filters the results to return only containers whose name begins with the specified prefix|None|new|None|None|
-|timeout|integer|None|False|Maximum time to wait for server response in seconds, between 0 and 30|None|14|None|None|
+|timeout|integer|14|False|Maximum time to wait for server response in seconds, between 0 and 30|None|14|None|None|
   
 Example input:
 
@@ -422,14 +422,14 @@ A blob name must conforming to the following naming rules:
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|access_tier|string|None|False|Indicates the tier to be set on blob. For page blobs on a premium storage account only. Valid values for block blob tiers are Hot/Cool/Archive. For detailed information about block blob tiering see https://docs.microsoft.com/enus/azure/storage/blobs/access -tiers-overview|["Hot", "Cool", "Archive", "None"]|Hot|None|None|
-|additional_headers|object|None|False|Additional headers to pass to the API request|None|{"x-ms-client-request-id":"some_request_id","x-ms-lease-id":"some_123_id"}|None|None|
+|access_tier|string|Hot|False|Indicates the tier to be set on blob. For page blobs on a premium storage account only. Valid values for block blob tiers are Hot/Cool/Archive. For detailed information about block blob tiering see https://docs.microsoft.com/enus/azure/storage/blobs/access -tiers-overview|["Hot", "Cool", "Archive", "None"]|Hot|None|None|
+|additional_headers|object|{"x-ms-client-request-id":"some_request_id","x-ms-lease-id":"some_123_id"}|False|Additional headers to pass to the API request|None|{"x-ms-client-request-id":"some_request_id","x-ms-lease-id":"some_123_id"}|None|None|
 |blob_content|string|None|False|Content of the new blob. This field is allowed only for BlockBlob type|None|hello world|None|None|
 |blob_content_length|integer|None|False|Required for page blobs. This header specifies the maximum size for the page blob, up to 8 TiB. The page blob size must be aligned to a 512-byte boundary|None|512|None|None|
 |blob_name|string|None|True|Name of the new blob|None|my_new_blob|None|None|
-|blob_type|string|None|False|Specifies the type of blob to create - block blob, page blob, or append blob|["BlockBlob", "PageBlob", "AppendBlob"]|BlockBlob|None|None|
+|blob_type|string|BlockBlob|False|Specifies the type of blob to create - block blob, page blob, or append blob|["BlockBlob", "PageBlob", "AppendBlob"]|BlockBlob|None|None|
 |container_name|string|None|True|Container name where the new blob will be put|None|example_container_name|None|None|
-|timeout|integer|None|False|Maximum time to wait for server response in seconds, not larger than 10 minutes per megabyte|None|14|None|None|
+|timeout|integer|14|False|Maximum time to wait for server response in seconds, not larger than 10 minutes per megabyte|None|14|None|None|
   
 Example input:
 

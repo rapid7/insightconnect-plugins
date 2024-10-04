@@ -33,6 +33,7 @@ class PutBlobInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Access Tier",
       "description": "Indicates the tier to be set on blob. For page blobs on a premium storage account only. Valid values for block blob tiers are Hot/Cool/Archive. For detailed information about block blob tiering see https://docs.microsoft.com/enus/azure/storage/blobs/access -tiers-overview",
+      "default": "Hot",
       "enum": [
         "Hot",
         "Cool",
@@ -45,6 +46,7 @@ class PutBlobInput(insightconnect_plugin_runtime.Input):
       "type": "object",
       "title": "Additional Headers",
       "description": "Additional headers to pass to the API request",
+      "default": "{\"x-ms-client-request-id\":\"some_request_id\",\"x-ms-lease-id\":\"some_123_id\"}",
       "order": 8
     },
     "blob_content": {
@@ -69,6 +71,7 @@ class PutBlobInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Blob Type",
       "description": "Specifies the type of blob to create - block blob, page blob, or append blob",
+      "default": "BlockBlob",
       "enum": [
         "BlockBlob",
         "PageBlob",
@@ -86,6 +89,7 @@ class PutBlobInput(insightconnect_plugin_runtime.Input):
       "type": "integer",
       "title": "Timeout",
       "description": "Maximum time to wait for server response in seconds, not larger than 10 minutes per megabyte",
+      "default": 14,
       "order": 3
     }
   },

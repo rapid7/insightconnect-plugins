@@ -30,6 +30,7 @@ class GetBlobInput(insightconnect_plugin_runtime.Input):
       "type": "object",
       "title": "Additional Headers",
       "description": "Additional headers to pass to the API request",
+      "default": "{ \"x-ms-client-request-id\":\"some_request_id\" }",
       "order": 6
     },
     "blob_name": {
@@ -42,6 +43,7 @@ class GetBlobInput(insightconnect_plugin_runtime.Input):
       "type": "boolean",
       "title": "Byte to String",
       "description": "Whether output data should be converted from bytes to string or not",
+      "default": true,
       "order": 5
     },
     "container_name": {

@@ -32,6 +32,7 @@ class DeleteBlobInput(insightconnect_plugin_runtime.Input):
       "type": "object",
       "title": "Additional Headers",
       "description": "Additional headers to pass to the API request",
+      "default": "{ \"x-ms-client-request-id\":\"some_request_id\", \"x-ms-lease-id\":\"exa12_lease_id\" }",
       "order": 6
     },
     "blob_name": {
