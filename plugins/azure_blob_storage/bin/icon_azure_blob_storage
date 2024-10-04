@@ -23,7 +23,7 @@ def main():
             monkey.patch_all()
 
     import insightconnect_plugin_runtime
-    from icon_azure_blob_storage import connection, actions, triggers
+    from icon_azure_blob_storage import connection, actions, triggers, tasks
 
     class ICONAzureBlobStorage(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
