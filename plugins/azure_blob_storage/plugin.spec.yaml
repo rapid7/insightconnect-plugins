@@ -229,7 +229,6 @@ actions:
         type: object
         required: false
         example: '{ "x-ms-meta-Name": "StorageSample", "x-ms-blob-public-access": "blob" }'
-        default: '{ "x-ms-meta-Name": "StorageSample", "x-ms-blob-public-access": "blob" }'
     output:
       success:
         title: Success
@@ -259,28 +258,24 @@ actions:
         type: integer
         required: false
         example: 12
-        default: 12
       include:
         title: Include
         description: Specifies one or more datasets to include in the response. Datasets available to choose are 'system', 'deleted', and 'metadata'
         type: "[]string"
         required: false
         example: ["system", "deleted"]
-        default: ["system", "deleted"]
       timeout:
         title: Timeout
         description: Maximum time to wait for server response in seconds, between 0 and 30
         type: integer
         required: false
         example: 14
-        default: 14
       additional_headers:
         title: Additional Headers
         description: Additional headers to pass to the API request
         type: object
         required: false
         example: '{ "x-ms-client-request-id":"some_request_id" }'
-        default: '{ "x-ms-client-request-id":"some_request_id" }'
     output:
       prefix:
         title: Prefix
@@ -316,7 +311,6 @@ actions:
         type: object
         required: false
         example: '{ "x-ms-meta-Name":"StorageSample", "x-ms-blob-public-access":"blob" }'
-        default: '{ "x-ms-meta-Name":"StorageSample", "x-ms-blob-public-access":"blob" }'
     output:
       success:
         title: Success
@@ -358,28 +352,24 @@ actions:
         type: integer
         required: false
         example: 12
-        default: 12
       include:
         title: Include
         description: Specifies one or more datasets to include in the response. Available values - 'snapshots', 'metadata', 'uncommittedblobs', 'copy', 'deleted', 'tags', 'versions', 'deletedwithversions', 'immutabilitypolicy', 'legalhold', 'permissions'
         type: "[]string"
         required: false
         example: ["uncommittedblob", "copy", "deleted", "tags", "versions"]
-        default: ["uncommittedblob", "copy", "deleted", "tags", "versions"]
       timeout:
         title: Timeout
         description: Maximum time to wait for server response in seconds, between 0 and 30
         type: integer
         required: false
         example: 14
-        default: 14
       additional_headers:
         title: Additional Headers
         description: Additional headers to pass to the API request
         type: object
         required: false
         example: '{ "x-ms-client-request-id":"some_request_id" }'
-        default: '{ "x-ms-client-request-id":"some_request_id" }'
     output:
       prefix:
         title: Prefix
@@ -433,7 +423,6 @@ actions:
         type: integer
         required: false
         example: 14
-        default: 14
       blob_type:
         title: Blob Type
         description: Specifies the type of blob to create - block blob, page blob, or append blob
@@ -444,7 +433,6 @@ actions:
           - PageBlob
           - AppendBlob
         example: BlockBlob
-        default: BlockBlob
       blob_content:
         title: Blob Content
         description: Content of the new blob. This field is allowed only for BlockBlob type
@@ -475,7 +463,6 @@ actions:
         type: object
         required: false
         example: '{"x-ms-client-request-id":"some_request_id","x-ms-lease-id":"some_123_id"}'
-        default: '{"x-ms-client-request-id":"some_request_id","x-ms-lease-id":"some_123_id"}'
     output:
       success:
         title: Success
@@ -523,14 +510,12 @@ actions:
         type: boolean
         required: false
         example: true
-        default: true
       additional_headers:
         title: Additional Headers
         description: Additional headers to pass to the API request
         type: object
         required: false
         example: '{ "x-ms-client-request-id":"some_request_id" }'
-        default: '{ "x-ms-client-request-id":"some_request_id" }'
     output:
       data:
         title: Data
@@ -582,7 +567,6 @@ actions:
         type: object
         required: false
         example: '{ "x-ms-client-request-id":"some_request_id", "x-ms-lease-id":"exa12_lease_id" }'
-        default: '{ "x-ms-client-request-id":"some_request_id", "x-ms-lease-id":"exa12_lease_id" }'
     output:
       success:
         title: Success

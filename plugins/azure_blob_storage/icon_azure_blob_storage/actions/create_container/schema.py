@@ -27,7 +27,6 @@ class CreateContainerInput(insightconnect_plugin_runtime.Input):
       "type": "object",
       "title": "Additional Headers",
       "description": "Additional headers to pass to the API request",
-      "default": "{ \"x-ms-meta-Name\": \"StorageSample\", \"x-ms-blob-public-access\": \"blob\" }",
       "order": 2
     },
     "container_name": {

@@ -35,7 +35,6 @@ class ListBlobsInput(insightconnect_plugin_runtime.Input):
       "type": "object",
       "title": "Additional Headers",
       "description": "Additional headers to pass to the API request",
-      "default": "{ \"x-ms-client-request-id\":\"some_request_id\" }",
       "order": 7
     },
     "container_name": {
@@ -54,13 +53,6 @@ class ListBlobsInput(insightconnect_plugin_runtime.Input):
       "type": "array",
       "title": "Include",
       "description": "Specifies one or more datasets to include in the response. Available values - 'snapshots', 'metadata', 'uncommittedblobs', 'copy', 'deleted', 'tags', 'versions', 'deletedwithversions', 'immutabilitypolicy', 'legalhold', 'permissions'",
-      "default": [
-        "uncommittedblob",
-        "copy",
-        "deleted",
-        "tags",
-        "versions"
-      ],
       "items": {
         "type": "string"
       },
@@ -70,7 +62,6 @@ class ListBlobsInput(insightconnect_plugin_runtime.Input):
       "type": "integer",
       "title": "Max Results",
       "description": "Specifies the maximum number of blobs to return. If the request does not specify max_results, or specifies a value greater than 100, the action will return up to 100 items",
-      "default": 12,
       "order": 4
     },
     "prefix": {
@@ -83,7 +74,6 @@ class ListBlobsInput(insightconnect_plugin_runtime.Input):
       "type": "integer",
       "title": "Timeout",
       "description": "Maximum time to wait for server response in seconds, between 0 and 30",
-      "default": 14,
       "order": 6
     }
   },

@@ -46,7 +46,6 @@ class PutBlobInput(insightconnect_plugin_runtime.Input):
       "type": "object",
       "title": "Additional Headers",
       "description": "Additional headers to pass to the API request",
-      "default": "{\"x-ms-client-request-id\":\"some_request_id\",\"x-ms-lease-id\":\"some_123_id\"}",
       "order": 8
     },
     "blob_content": {
@@ -71,7 +70,6 @@ class PutBlobInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Blob Type",
       "description": "Specifies the type of blob to create - block blob, page blob, or append blob",
-      "default": "BlockBlob",
       "enum": [
         "BlockBlob",
         "PageBlob",
@@ -89,7 +87,6 @@ class PutBlobInput(insightconnect_plugin_runtime.Input):
       "type": "integer",
       "title": "Timeout",
       "description": "Maximum time to wait for server response in seconds, not larger than 10 minutes per megabyte",
-      "default": 14,
       "order": 3
     }
   },
