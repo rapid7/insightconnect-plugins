@@ -3,28 +3,30 @@
 Protect your Microsoft Office 365 and G-Suite environments with next-generation email security that uses the most advanced AI detection techniques to stop targeted phishing attacks
 
 # Key Features
-  
-*This plugin does not contain any key features.*
+
+* Retrieve details of an individual case and list up to 100 cases identified by Abnormal Security.
+* Retrieve details of a single threat and list up to 100 threats identified by Abnormal Security.
+* Manage a case or threat.
 
 # Requirements
-  
-*This plugin does not contain any requirements.*
+
+* This plugin does not contain any Requirements.
 
 # Supported Product Versions
-  
+
 * abnormal-security API abx v1.4.2
 
 # Documentation
 
 ## Setup
-  
+
 The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|URL|string|https://api.abnormalplatform.com|True|Abnormal Security URL|None|https://api.abnormalplatform.com|
-|api_key|credential_secret_key|None|True|Abnormal Security API Key|None|9de5069c5afe602b2ea0a04b66beb2c0|
-  
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|URL|string|https://api.abnormalplatform.com|True|Abnormal Security URL|None|https://api.abnormalplatform.com|None|None|
+|api_key|credential_secret_key|None|True|Abnormal Security API Key|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
+
 Example input:
 
 ```
@@ -40,14 +42,14 @@ Example input:
 
 
 #### Get Case Details
-  
+
 This action is used to get details of a case identified by Abnormal Security
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|case_id|string|None|True|A string representing the case|None|19377|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|case_id|string|None|True|A string representing the case|None|19377|None|None|
   
 Example input:
 
@@ -77,17 +79,17 @@ Example output:
 ```
 
 #### Get Cases
-  
+
 This action is used to get a list of up to 100 cases identified by Abnormal Security, if no input filter dates are 
 provided, it will return up to 100 latest results
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|filter_key|string|lastModifiedTime|False|This input enables you to select what timestamp to filter on, default is lastModifiedTime|['lastModifiedTime', 'createdTime', 'customerVisableTime', '']|lastModifiedTime|
-|from_date|string|None|False|This input enables you to filter your results from a certain date, the date has to be in ISO 8601 format - YYYY-MM-DDTHH:MM:SSZ|None|2021-03-01 21:11:38+00:00|
-|to_date|string|None|False|This input enables you to filter your results to a certain date, the date has to be in ISO 8601 format - YYYY-MM-DDTHH:MM:SSZ|None|2021-03-11 21:11:38+00:00|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|filter_key|string|lastModifiedTime|False|This input enables you to select what timestamp to filter on, default is lastModifiedTime|["lastModifiedTime", "createdTime", "customerVisableTime", ""]|lastModifiedTime|None|None|
+|from_date|string|None|False|This input enables you to filter your results from a certain date, the date has to be in ISO 8601 format - YYYY-MM-DDTHH:MM:SSZ|None|2021-03-01 21:11:38+00:00|None|None|
+|to_date|string|None|False|This input enables you to filter your results to a certain date, the date has to be in ISO 8601 format - YYYY-MM-DDTHH:MM:SSZ|None|2021-03-11 21:11:38+00:00|None|None|
   
 Example input:
 
@@ -109,22 +111,24 @@ Example output:
 
 ```
 {
-  "cases": {
-    "caseId": "19377",
-    "severity": "Potential Account Takeover"
-  }
+  "cases": [
+    {
+      "caseId": "19377",
+      "severity": "Potential Account Takeover"
+    }
+  ]
 }
 ```
 
 #### Get Threat Details
-  
+
 This action is used to get details of a threat identified by Abnormal Security
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|threat_id|string|None|True|A UUID representing the threat|None|184712ab-6d8b-47b3-89d3-a314efef79e2|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|threat_id|string|None|True|A UUID representing the threat|None|184712ab-6d8b-47b3-89d3-a314efef79e2|None|None|
   
 Example input:
 
@@ -248,16 +252,16 @@ Example output:
 ```
 
 #### Get Threats
-  
+
 This action is used to get a list of up to 100 threats identified in the Abnormal Security Threat Log, if no input 
 filter dates are provided, it will return up to 100 latest results
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|from_date|string|None|False|This input enables you to filter your results from a certain date, the date has to be in ISO 8601 format - YYYY-MM-DDTHH:MM:SSZ|None|2021-03-01 21:11:38+00:00|
-|to_date|string|None|False|This input enables you to filter your results to a certain date, the date has to be in ISO 8601 format - YYYY-MM-DDTHH:MM:SSZ|None|2021-03-11 21:11:38+00:00|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|from_date|string|None|False|This input enables you to filter your results from a certain date, the date has to be in ISO 8601 format - YYYY-MM-DDTHH:MM:SSZ|None|2021-03-01 21:11:38+00:00|None|None|
+|to_date|string|None|False|This input enables you to filter your results to a certain date, the date has to be in ISO 8601 format - YYYY-MM-DDTHH:MM:SSZ|None|2021-03-11 21:11:38+00:00|None|None|
   
 Example input:
 
@@ -278,22 +282,24 @@ Example output:
 
 ```
 {
-  "threats": {
-    "threatId": "184712ab-6d8b-47b3-89d3-a314efef79e2"
-  }
+  "threats": [
+    {
+      "threatId": "184712ab-6d8b-47b3-89d3-a314efef79e2"
+    }
+  ]
 }
 ```
 
 #### Manage Case
-  
+
 This action is used to manage an Abnormal Case
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|action|string|None|True|Acknowledge or take another remediation action on a case|['Action Required', 'Acknowledge in Progress', 'Acknowledge Resolved', 'Acknowledge not an Attack']|Action Required|
-|case_id|string|None|True|An ID representing the case|None|12345|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|action|string|None|True|Acknowledge or take another remediation action on a case|["Action Required", "Acknowledge in Progress", "Acknowledge Resolved", "Acknowledge not an Attack"]|Action Required|None|None|
+|case_id|string|None|True|An ID representing the case|None|12345|None|None|
   
 Example input:
 
@@ -324,15 +330,15 @@ Example output:
 ```
 
 #### Manage Threat
-  
+
 This action is used to manage a Threat identified by Abnormal Security
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|action|string|None|True|Remediate or unremediate a threat|['remediate', 'unremediate']|remediate|
-|threat_id|string|None|True|A UUID representing the threat|None|184712ab-6d8b-47b3-89d3-a314efef79e2|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|action|string|None|True|Remediate or unremediate a threat|["remediate", "unremediate"]|remediate|None|None|
+|threat_id|string|None|True|A UUID representing the threat|None|184712ab-6d8b-47b3-89d3-a314efef79e2|None|None|
   
 Example input:
 
@@ -448,16 +454,17 @@ Example output:
 
 ## Troubleshooting
   
-*There is no troubleshooting for this plugin.*
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
-* 2.0.2 - Fix bug where toTime was being used as gte rather than lte in requests, used in the `get_cases` and `get_threats` actions  
-* 2.0.1 - To remove formatting of the fromTime or toTime values used in the `get_cases` and `get_threats` actions  
-* 2.0.0 - Add support to select the time filter filed in `get_cases` action | bump SDK version  
-* 1.3.0 - New logo and requirements update  
-* 1.2.0 - New actions Manage Case and Manage Threat  
-* 1.1.0 - New actions Get Cases and Get Case Details  
+* 2.0.3 - Fix issue where Case ID was being returned as an integer in the `get_cases` and `get_case_details` action
+* 2.0.2 - Fix bug where toTime was being used as gte rather than lte in requests, used in the `get_cases` and `get_threats` actions
+* 2.0.1 - To remove formatting of the fromTime or toTime values used in the `get_cases` and `get_threats` actions
+* 2.0.0 - Add support to select the time filter filed in `get_cases` action | bump SDK version
+* 1.3.0 - New logo and requirements update
+* 1.2.0 - New actions Manage Case and Manage Threat
+* 1.1.0 - New actions Get Cases and Get Case Details
 * 1.0.0 - Initial plugin
 
 # Links
@@ -466,4 +473,4 @@ Example output:
 
 ## References
 
-* [Abnormal Security](https://abnormalsecurity.com/)
+* [Abnormal Security](https://app.swaggerhub.com/apis-docs/abnormal-security/abx/1.4.1)
