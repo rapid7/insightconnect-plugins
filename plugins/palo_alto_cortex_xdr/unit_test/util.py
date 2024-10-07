@@ -11,6 +11,7 @@ from icon_palo_alto_cortex_xdr.connection.connection import Connection
 from icon_palo_alto_cortex_xdr.connection.schema import Input
 
 from typing import Dict, Any
+from unittest.mock import MagicMock
 
 
 class MockTrigger:
@@ -90,6 +91,9 @@ class Util:
                 self.status_code = status_code
                 self.text = ""
                 self.url = url
+                self.request = MagicMock()
+                self.headers = MagicMock()
+                self.raise_for_status = MagicMock()
 
             def json(self):
                 return json.loads(
@@ -104,8 +108,18 @@ class Util:
                 if self.status_code < 200 or self.status_code > 399:
                     raise requests.HTTPError()
 
+        # breakpoint()
         if kwargs.get("url") == "https://example.com/public_api/v1/incidents/get_incidents/":
             return MockResponse("get_incidents", 200)
         if kwargs.get("url") == "connection url":
             return MockResponse("connection", 200)
+        if kwargs.get("url") == "https://example.com/public_api/v1/alerts/get_alerts":
+            post_body = kwargs.get("post_body").get("request_data")
+            if post_body.get("search_from") == 0:
+                return MockResponse("monitor_alerts", 200)
+            if post_body.get("search_from") == 100:
+                return MockResponse("monitor_alerts_two", 200)
+            if post_body.get("search_from") == 200:
+                return MockResponse("monitor_alerts_three", 200)
+
         raise Exception("Not implemented")
