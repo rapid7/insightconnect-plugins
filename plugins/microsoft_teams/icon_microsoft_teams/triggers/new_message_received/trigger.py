@@ -16,6 +16,8 @@ import requests
 import maya
 import validators
 
+TIMEOUT = 120
+
 
 class NewMessageReceived(insightconnect_plugin_runtime.Trigger):
     def __init__(self):
@@ -131,7 +133,7 @@ class NewMessageReceived(insightconnect_plugin_runtime.Trigger):
         :return: list (of json messages)
         """
         headers = self.connection.get_headers()
-        messages_result = requests.get(messages_endpoint, headers=headers)
+        messages_result = requests.get(messages_endpoint, headers=headers, timeout=TIMEOUT)
         try:
             messages_result.raise_for_status()
 
@@ -141,7 +143,7 @@ class NewMessageReceived(insightconnect_plugin_runtime.Trigger):
             self.logger.info("Get messages failed, refreshing token and trying again.")
             time.sleep(10)  # sleep for 10 seconds to make sure we're not killing the API
             headers = self.connection.get_headers(True)  # This will force a refresh of our auth token
-            messages_result = requests.get(messages_endpoint, headers=headers)
+            messages_result = requests.get(messages_endpoint, headers=headers, timeout=TIMEOUT)
             try:
                 messages_result.raise_for_status()
             except Exception as error:
@@ -179,7 +181,7 @@ class NewMessageReceived(insightconnect_plugin_runtime.Trigger):
         team_id = team[0].get("id")
         channel = get_channels_from_microsoft(self.logger, self.connection, team_id, channel_name)
         channel_id = channel[0].get("id")
-        messages_endpoint = f"https://graph.microsoft.com/beta/teams/{team_id}/channels/{channel_id}/messages"
+        messages_endpoint = f"{self.connection.resource_endpoint}/beta/teams/{team_id}/channels/{channel_id}/messages"
         return messages_endpoint
 
     def get_indicators(self, message: str) -> object:

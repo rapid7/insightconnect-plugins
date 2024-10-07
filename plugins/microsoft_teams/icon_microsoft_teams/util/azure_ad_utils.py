@@ -4,6 +4,8 @@ import requests
 from logging import Logger
 import insightconnect_plugin_runtime.connection
 
+TIMEOUT = 120
+
 
 def get_user_info(logger: Logger, connection: insightconnect_plugin_runtime.connection, user_login: str) -> dict:
     """
@@ -15,12 +17,12 @@ def get_user_info(logger: Logger, connection: insightconnect_plugin_runtime.conn
     :return: object (user information dictionary)
     """
     endpoint = (
-        f"https://graph.microsoft.com/v1.0/{connection.tenant_id}/users?$filter=userPrincipalName eq '{user_login}'"
+        f"{connection.resource_endpoint}/v1.0/{connection.tenant_id}/users?$filter=userPrincipalName eq '{user_login}'"
     )
     headers = connection.get_headers()
 
     logger.info(f"Getting user information from:\n{endpoint}")
-    result = requests.get(endpoint, headers=headers)
+    result = requests.get(endpoint, headers=headers, timeout=TIMEOUT)
 
     try:
         result.raise_for_status()
@@ -61,13 +63,13 @@ def add_user_to_group(
     :param user_id: string
     :return: boolean
     """
-    endpoint = f"https://graph.microsoft.com/v1.0/{connection.tenant_id}/groups/{group_id}/members/$ref"
+    endpoint = f"{connection.resource_endpoint}/v1.0/{connection.tenant_id}/groups/{group_id}/members/$ref"
     headers = connection.get_headers()
 
     logger.info(f"Adding user with: {endpoint}")
-    user_payload = {"@odata.id": f"https://graph.microsoft.com/v1.0/{connection.tenant_id}/users/{user_id}"}
+    user_payload = {"@odata.id": f"{connection.resource_endpoint}/v1.0/{connection.tenant_id}/users/{user_id}"}
 
-    result = requests.post(endpoint, json=user_payload, headers=headers)
+    result = requests.post(endpoint, json=user_payload, headers=headers, timeout=TIMEOUT)
     try:
         result.raise_for_status()
     except Exception as e:
@@ -99,11 +101,11 @@ def remove_user_from_group(
     :param user_id: string
     :return: boolean
     """
-    endpoint = f"https://graph.microsoft.com/v1.0/{connection.tenant_id}/groups/{group_id}/members/{user_id}/$ref"
+    endpoint = f"{connection.resource_endpoint}/v1.0/{connection.tenant_id}/groups/{group_id}/members/{user_id}/$ref"
     headers = connection.get_headers()
     logger.info(f"Removing user with: {endpoint}")
 
-    result = requests.delete(endpoint, headers=headers)
+    result = requests.delete(endpoint, headers=headers, timeout=TIMEOUT)
     try:
         result.raise_for_status()
     except Exception as e:
@@ -149,7 +151,7 @@ def create_group(
     :return: object
     """
 
-    endpoint = f"https://graph.microsoft.com/v1.0/{connection.tenant_id}/groups"
+    endpoint = f"{connection.resource_endpoint}/v1.0/{connection.tenant_id}/groups"
     headers = connection.get_headers()
     payload = {
         "description": group_description,
@@ -168,7 +170,7 @@ def create_group(
         payload["members@odata.bind"] = members_payload
 
     logger.info(f"Creating group with: {endpoint}")
-    result = requests.post(endpoint, json=payload, headers=headers)
+    result = requests.post(endpoint, json=payload, headers=headers, timeout=TIMEOUT)
     try:
         result.raise_for_status()
     except Exception as e:
@@ -204,7 +206,7 @@ def create_user_payload(logger: Logger, connection: insightconnect_plugin_runtim
         logger.info(f"Getting user ID: {user_login}")
         user_object = get_user_info(logger, connection, user_login)
         user_id = user_object.get("id")
-        user_odata_thing = f"https://graph.microsoft.com/v1.0/{connection.tenant_id}/users/{user_id}"
+        user_odata_thing = f"{connection.resource_endpoint}/v1.0/{connection.tenant_id}/users/{user_id}"
         user_payload.append(user_odata_thing)
 
     return user_payload
@@ -220,11 +222,11 @@ def delete_group(logger: Logger, connection: insightconnect_plugin_runtime.conne
     :return: boolean
     """
     group_id = get_group_id_from_name(logger, connection, group_name)
-    endpoint = f"https://graph.microsoft.com/v1.0/{connection.tenant_id}/groups/{group_id}"
+    endpoint = f"{connection.resource_endpoint}/v1.0/{connection.tenant_id}/groups/{group_id}"
     headers = connection.get_headers()
 
     logger.info(f"Deleting group with: {endpoint}")
-    result = requests.delete(endpoint, headers=headers)
+    result = requests.delete(endpoint, headers=headers, timeout=TIMEOUT)
     try:
         result.raise_for_status()
     except Exception as e:
@@ -252,11 +254,13 @@ def get_group_id_from_name(
     :param group_name: string
     :return: string
     """
-    endpoint = f"https://graph.microsoft.com/v1.0/{connection.tenant_id}/groups?$filter=displayName eq '{group_name}'"
+    endpoint = (
+        f"{connection.resource_endpoint}/v1.0/{connection.tenant_id}/groups?$filter=displayName eq '{group_name}'"
+    )
     headers = connection.get_headers()
 
     logger.info(f"Getting group ID with: {endpoint}")
-    result = requests.get(endpoint, headers=headers)
+    result = requests.get(endpoint, headers=headers, timeout=TIMEOUT)
 
     try:
         result.raise_for_status()
@@ -290,7 +294,7 @@ def enable_teams_for_group(logger, connection, group_id):
     :param group_id: string
     :return: boolean
     """
-    endpoint = f"https://graph.microsoft.com/v1.0/{connection.tenant_id}/groups/{group_id}/team"
+    endpoint = f"{connection.resource_endpoint}/v1.0/{connection.tenant_id}/groups/{group_id}/team"
     headers = connection.get_headers()
     payload = {
         "memberSettings": {
@@ -317,7 +321,7 @@ def enable_teams_for_group(logger, connection, group_id):
     }
 
     logger.info(f"Enabling team with: {endpoint}")
-    result = requests.put(endpoint, json=payload, headers=headers)
+    result = requests.put(endpoint, json=payload, headers=headers, timeout=TIMEOUT)
     if result.status_code == 201:
         logger.info("Team was enabled successfully.")
         return True
@@ -330,7 +334,7 @@ def enable_teams_for_group(logger, connection, group_id):
             f"Sleeping for 10 seconds and trying again. Attempt number: {i}"
         )
         sleep(10)
-        result = requests.put(endpoint, json=payload, headers=headers)
+        result = requests.put(endpoint, json=payload, headers=headers, timeout=TIMEOUT)
         if result.status_code == 201:
             logger.info("Team was enabled successfully.")
             return True
@@ -347,13 +351,14 @@ def enable_teams_for_group(logger, connection, group_id):
 def add_user_to_owners(
     logger: Logger, connection: insightconnect_plugin_runtime.connection.Connection, group_id: str, user_id: str
 ) -> bool:
-    endpoint = f"https://graph.microsoft.com/beta/groups/{group_id}/owners/$ref"
+    endpoint = f"{connection.resource_endpoint}/beta/groups/{group_id}/owners/$ref"
     logger.info(f"Adding user to group owners with: {endpoint}")
 
     result = requests.post(
         endpoint,
-        json={"@odata.id": f"https://graph.microsoft.com/beta/users/{user_id}"},
+        json={"@odata.id": f"{connection.resource_endpoint}/beta/users/{user_id}"},
         headers=connection.get_headers(),
+        timeout=TIMEOUT,
     )
     if result.status_code == 204:
         logger.info("User was added successfully.")
@@ -399,7 +404,7 @@ def add_user_to_channel(
     user_id: str,
     role: str,
 ) -> bool:
-    endpoint = f"https://graph.microsoft.com/beta/teams/{group_id}/channels/{channel_id}/members/"
+    endpoint = f"{connection.resource_endpoint}/beta/teams/{group_id}/channels/{channel_id}/members/"
     logger.info(f"Adding user to channel with: {endpoint}")
 
     result = requests.post(
@@ -407,9 +412,10 @@ def add_user_to_channel(
         json={
             "@odata.type": "#microsoft.graph.aadUserConversationMember",
             "roles": [role],
-            "user@odata.bind": f"https://graph.microsoft.com/beta/users/{user_id}",
+            "user@odata.bind": f"{connection.resource_endpoint}/beta/users/{user_id}",
         },
         headers=connection.get_headers(),
+        timeout=TIMEOUT,
     )
     if result.status_code == 201:
         logger.info("User was added successfully.")
