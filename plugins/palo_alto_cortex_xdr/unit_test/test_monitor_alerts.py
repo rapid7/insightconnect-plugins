@@ -166,10 +166,7 @@ class TestMonitorAlerts(TestCase):
             [
                 "Load first",
                 STUB_STATE_DEDUPE,
-                TaskUtil.load_expected("monitor_alerts"),
-                True,
                 "monitor_alerts",
-                STUB_STATE_DEDUPE,
                 200,
             ]
         ]
@@ -179,10 +176,7 @@ class TestMonitorAlerts(TestCase):
         mock_req: MagicMock,
         test_name: str,
         input_state: dict,
-        expected_output,
-        expected_has_more_pages,
         response_file: str,
-        output_state,
         expected_status_code,
     ) -> None:
 
