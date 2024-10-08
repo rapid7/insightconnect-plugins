@@ -12,6 +12,10 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_insightcloudsec
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.rapid7.com
+sdk:
+  type: "slim"
+  version: "6.1.3"
+  user: nobody
 tags: ["rapid7", "insightcloudsec"]
 support: rapid7
 status: []
@@ -204,6 +208,42 @@ types:
       description: Value of the resource tag
       type: string
       required: false
+  resource:
+    resourceId:
+      title: Resource ID
+      description: Resource of the resource ID
+      type: string
+      required: false
+    resourceType:
+      title: Resource Type
+      description: Resource type of the resource
+      type: string
+      required: false
+    providerId:
+      title: Provider ID
+      description: Provider ID of the resource
+      type: string
+      required: false
+    name:
+      title: Name
+      description: Name of the resource
+      type: string
+      required: false
+    accountId:
+      title: Account ID
+      description: Account ID of the resource
+      type: string
+      required: false
+    cloudTypeId:
+      title: Cloud type ID
+      description: Cloud type ID of the resource
+      type: string
+      required: false
+    account:
+      title: Account
+      description: Account of the resource
+      type: string
+      required: false
 connection:
   apiKey:
     title: API Key
@@ -225,6 +265,41 @@ connection:
     default: true
     example: true
 actions:
+  get_resource_id:
+    title: Get Resource ID
+    description: Gets a InsightCloudSec resource ID from a given search string.
+    input:
+      limit:
+        title: Limit
+        description: The maximum number of resources returned if resources match the provided criteria. The value can be between 1 and 1000.
+        type: integer
+        required: false
+        example: 0
+      offset:
+        title: Offset
+        description: The number of entries to skip over before returning anything.
+        type: integer
+        required: false
+        example: 0
+      search_string:
+        title: Search String
+        description: Partial or full literal string to search for. f.e. you could search for an instance ID, image ID, or resource name.
+        type: string
+        required: true
+        example: "i-1234567890"
+    output:
+      resources:
+        title: Resources
+        description: List of the resource IDs
+        type: "[]resource"
+        required: false
+        example: [ { "resource_id": "instance:******:ap-northeast-1:*******************:", "resource_type": "instance", "provider_id": "*******************", "name": "my-instance-name", "account_id": "************", "cloud_type_id": "AWS", "account": "my-account-name" }, { "resource_id": "instance:******:ap-northeast-1:*******************:", "resource_type": "instance", "provider_id": "*******************", "name": "my-instance-name", "account_id": "************", "cloud_type_id": "AWS", "account": "my-account-name" } ]
+      totalCount:
+        title: Total Count
+        description: Number of resources retrieved
+        type: integer
+        required: false
+        example: 2
   get_resource_details:
     title: Get Resource Details
     description: Get all of the details about a resource based on provided resource ID

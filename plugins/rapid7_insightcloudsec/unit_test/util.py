@@ -56,6 +56,8 @@ class Util:
 
         if kwargs.get("url") == "https://example.com/v2/prototype/cloud/linked/list":
             return MockResponse("get_accounts", 200)
+        if kwargs.get("url") == "https://example.com/v2/public/resource/common/search":
+            return MockResponse("get_resource_id", 200)
         if kwargs.get("url") == "https://example.com/v2/public/resource/instance:123:example:i-1234567890:/tags/list":
             return MockResponse("list_resource_tags", 200)
         if kwargs.get("url") == "https://example.com/v2/public/resource/instance:123:not_found:i-1234567890:/tags/list":

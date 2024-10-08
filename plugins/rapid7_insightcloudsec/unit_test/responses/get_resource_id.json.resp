@@ -1,0 +1,23 @@
+{
+  "resources": [
+    {
+      "resource_id": "instance:******:ap-northeast-1:*******************:",
+      "resource_type": "instance",
+      "provider_id": "*******************",
+      "name": "my-instance-name",
+      "account_id": "************",
+      "cloud_type_id": "AWS",
+      "account": "my-account-name"
+    },
+    {
+      "resource_id": "instance:******:ap-northeast-1:*******************:",
+      "resource_type": "instance",
+      "provider_id": "*******************",
+      "name": "my-instance-name",
+      "account_id": "************",
+      "cloud_type_id": "AWS",
+      "account": "my-account-name"
+    }
+  ],
+  "total_count": 2
+}
