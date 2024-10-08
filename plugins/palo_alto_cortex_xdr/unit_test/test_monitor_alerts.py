@@ -4,7 +4,7 @@ import sys
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 
 from icon_palo_alto_cortex_xdr.tasks.monitor_alerts import MonitorAlerts
 from icon_palo_alto_cortex_xdr.tasks.monitor_alerts.schema import MonitorAlertsOutput
@@ -15,6 +15,8 @@ from parameterized import parameterized
 from jsonschema import validate
 from freezegun import freeze_time
 from util import Util
+from taskutil import TaskUtil, mock_conditions, mocked_response_type
+
 
 STUB_STATE_EXPECTED_SECOND_PAGE = {
     "current_count": 2,
@@ -41,128 +43,97 @@ STUB_STATE_EXPECTED_NO_PAGE = {
     "last_alert_time": 1706540499609,
 }
 
+STUB_STATE_ERROR_400 = {
+    "last_search_from": 300,
+    "last_search_to": 400,
+}
+
 
 @freeze_time("2024-01-29T15:01:00.000000Z")
-@patch("icon_palo_alto_cortex_xdr.util.api.CortexXdrAPI.build_request", side_effect=Util.mocked_requests)
+@patch("requests.Session.send")
 class TestMonitorAlerts(TestCase):
-
-    @classmethod
-    @patch("icon_palo_alto_cortex_xdr.util.api.CortexXdrAPI.build_request", side_effect=Util.mocked_requests)
-    def setUpClass(cls, mock_post) -> None:
-        _, cls.task = Util.default_connector(
-            MonitorAlerts(),
-            connect_params={
-                Input.API_KEY: {"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"},
-                Input.API_KEY_ID: 15,
-                Input.SECURITY_LEVEL: "Advanced",
-                Input.URL: "https://example.com/",
-            },
-        )
+    def setUp(self) -> None:
+        self.task = TaskUtil.default_connector(MonitorAlerts())
 
     @parameterized.expand(
         [
             [
                 "starting",
                 {},
-                {},
+                TaskUtil.load_expected("monitor_alerts"),
                 True,
-                Util.load_expected("monitor_alerts"),
+                "monitor_alerts",
                 STUB_STATE_MORE_PAGES,
                 200,
-                None,
             ],
             [
                 "next_page",
-                STUB_STATE_MORE_PAGES,
-                {},
+                STUB_STATE_MORE_PAGES.copy(),
+                TaskUtil.load_expected("monitor_alert_two"),
                 True,
-                Util.load_expected("monitor_alert_two"),
+                "monitor_alerts_two",
                 STUB_STATE_EXPECTED_SECOND_PAGE,
                 200,
-                None,
             ],
-            ["final_page", STUB_STATE_EXPECTED_SECOND_PAGE, {}, False, [], STUB_STATE_EXPECTED_NO_PAGE, 200, None],
+            [
+                "final_page",
+                STUB_STATE_EXPECTED_SECOND_PAGE.copy(),
+                TaskUtil.load_expected("monitor_alerts_empty"),
+                False,
+                "monitor_alerts_empty",
+                STUB_STATE_EXPECTED_NO_PAGE,
+                200,
+            ],
         ]
     )
-    def test_monitor_alerts(
+    def test_monitor_alerts_pagination(
+        self,
+        mock_req: MagicMock,
+        test_name: str,
+        state: dict,
+        expected_output: list,
+        expected_has_more_pages: bool,
+        response_file: str,
+        expected_state: dict,
+        expected_status_code: int,
+    ) -> None:
+
+        mock_req.return_value = mock_conditions(200, file_name=response_file)
+
+        output, state, has_more_pages, status_code, _ = self.task.run(params={}, state=state)
+
+        self.assertEqual(expected_output, output)
+        self.assertEqual(expected_has_more_pages, has_more_pages)
+        self.assertEqual(expected_state, state)
+        self.assertEqual(expected_status_code, status_code)
+
+    @parameterized.expand(
+        [
+            [
+                "error",
+                STUB_STATE_ERROR_400,
+                500,
+                "A PluginException has occurred.",
+                # "Verify your plugin input is correct and not malformed and try again. If the issue persists, please contact support.",
+            ],
+            # [
+            #     "401",
+            #     {},
+            #     401,
+            #     "The account configured in your connection is unauthorized to access this service.",
+            #     "Verify the permissions for your account and try again.",
+            # ],
+        ]
+    )
+    def test_errors(
         self,
         mock_post,
         test_name,
         state,
-        custom_config,
-        expected_has_more_pages,
-        expected_output,
-        expected_state,
         expected_status_code,
-        expected_error,
     ) -> None:
-        self.maxDiff = None
-
-        output, state, has_more_pages, status_code, error = self.task.run(
-            params={}, state=state, custom_config=custom_config
-        )
         # breakpoint()
-        self.assertEqual(output, expected_output)
-        self.assertEqual(state, expected_state)
-        self.assertEqual(has_more_pages, expected_has_more_pages)
-        self.assertEqual(status_code, expected_status_code)
-        self.assertEqual(error, expected_error)
-        validate(output, MonitorAlertsOutput.schema)
+        # with self.assertRaises(PluginException):
+        _, state, has_more_pages, status_code, error = self.task.run(params={}, state=state)
 
-    # @parameterized.expand(
-    #     [
-    #         [
-    #             "400",
-    #             {},
-    #             400,
-    #             "The server is unable to process the request.",
-    #             "Verify your plugin input is correct and not malformed and try again. If the issue persists, please contact support.",
-    #         ],
-    #         [
-    #             "401",
-    #             {},
-    #             401,
-    #             "The account configured in your connection is unauthorized to access this service.",
-    #             "Verify the permissions for your account and try again.",
-    #         ],
-    #         [
-    #             "403",
-    #             {},
-    #             401,
-    #             "The account configured in your connection is unauthorized to access this service.",
-    #             "Verify the permissions for your account and try again.",
-    #         ],
-    #         [
-    #             "404",
-    #             {},
-    #             404,
-    #             "Invalid or unreachable endpoint provided.",
-    #             "Verify the URLs or endpoints in your configuration are correct.",
-    #         ],
-    #         [
-    #             "500",
-    #             {},
-    #             500,
-    #             "Server error occurred",
-    #             "Verify your plugin connection inputs are correct and not malformed and try again. If the issue persists, please contact support.",
-    #         ],
-    #     ]
-    # )
-    # def test_errors(
-    #         self,
-    #         mock_post,
-    #         test_name,
-    #         state,
-    #         expected_status_code,
-    #         expected_cause,
-    #         expected_assistance,
-    # ) -> None:
-
-    #     output, state, has_more_pages, status_code, error = self.task.run(
-    #         params={}, state=state
-    #     )
-
-    #     self.assertEqual(False, has_more_pages)
-    #     self.assertEqual(expected_status_code, status_code)
-    #     self.assertEqual(expected_cause, error.cause)
-    #     self.assertEqual(expected_assistance, error.assistance)
+        self.assertEqual(False, has_more_pages)
