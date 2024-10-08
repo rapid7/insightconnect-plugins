@@ -39,7 +39,7 @@ STUB_STATE_EXPECTED_NO_PAGE = {
     "last_alert_time": 1706540499609,
 }
 
-STUB_STATE_ERROR_400 = {
+STUB_STATE_ERROR = {
     "last_search_from": 300,
     "last_search_to": 400,
 }
@@ -107,37 +107,53 @@ class TestMonitorAlerts(TestCase):
         [
             [
                 "Bad Request",
-                STUB_STATE_ERROR_400,
-                dumps({"error": "Unknown", "message": "Unknown status code we don't know about"}),
+                STUB_STATE_ERROR,
                 PluginException(
                     data="An error occurred during plugin execution!\n\nThe server is unable to process the request. Verify your plugin input is correct and not malformed and try again. If the issue persists, please contact support."
                 ),
                 400,
             ],
-            # [
-            #     "401",
-            #     {},
-            #     401,
-            #     "The account configured in your connection is unauthorized to access this service.",
-            #     "Verify the permissions for your account and try again.",
-            # ],
+            [
+                "Forbidden",
+                STUB_STATE_ERROR,
+                PluginException(
+                    data="An error occurred during plugin execution!\n\nThe server is unable to process the request. Verify your plugin input is correct and not malformed and try again. If the issue persists, please contact support."
+                ),
+                403,
+            ],
+            [
+                "Not Found",
+                STUB_STATE_ERROR,
+                PluginException(
+                    data="An error occurred during plugin execution!\n\nThe server is unable to process the request. Verify your plugin input is correct and not malformed and try again. If the issue persists, please contact support."
+                ),
+                404,
+            ],
         ]
     )
     def test_monitor_alerts_error_handling(
         self,
         mock_req: MagicMock,
         test_name: str,
-        state: dict,
-        auth_error: str,
+        input_state: dict,
         error_msg: str,
         error_code: int,
     ) -> None:
 
-        mocked_response = mocked_response_type(error_code, auth_error)
+        mocked_response = mocked_response_type(error_code)
         mock_req.return_value = mocked_response
 
-        _, state, has_more_pages, status_code, error = self.task.run(state=state)
-        # breakpoint()
+        output, state, has_more_pages, status_code, error = self.task.run(state=input_state)
+
+        self.assertEqual(output, [])
+        self.assertEqual(input_state, state)
         self.assertEqual(error_code, status_code)
         # self.assertEqual(error_msg, error)
         self.assertEqual(False, has_more_pages)
+
+    # TODO - Add test for handle 401 functionality
+    # Test for if results count = 0 & total count = 0
+    # Custom config
+    # Dedupe alert
+    # Regular Exception
+    # Error where error.data is not of type Response

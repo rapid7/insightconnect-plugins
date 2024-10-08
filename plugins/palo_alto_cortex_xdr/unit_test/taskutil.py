@@ -78,7 +78,7 @@ def mock_conditions(status_code: int, file_name: str = "", **kwargs: Dict[str, A
     raise Exception("Response has been not implemented")
 
 
-def mocked_response_type(status_code: int, text: str) -> requests.Response:
+def mocked_response_type(status_code: int, text: str = None) -> requests.Response:
     """
     Function to mock a Response containing a status code and content.
     :param status_code: Status code of the mocked Response
@@ -87,5 +87,6 @@ def mocked_response_type(status_code: int, text: str) -> requests.Response:
     """
     response = requests.Response()
     response.status_code = status_code
-    response._content = text.encode("utf-8")
+    if text:
+        response._content = text.encode("utf-8")
     return response
