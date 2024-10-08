@@ -1,7 +1,7 @@
 {
     "reply": {
-        "total_count": 0,
-        "result_count": 0,
+        "total_count": null,
+        "result_count": null,
         "alerts": [
 
         ]
