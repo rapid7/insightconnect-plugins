@@ -1,9 +1,8 @@
 import insightconnect_plugin_runtime
-import pypandoc
-import base64
-import re
 from .schema import MarkdownInput, MarkdownOutput, Input, Output, Component
-from insightconnect_plugin_runtime.exceptions import PluginException
+from icon_html.util.api import HTMLConverter
+from icon_html.util.strategies import ConvertToMarkdown
+from icon_html.util.helpers import encode_to_base64
 
 
 class Markdown(insightconnect_plugin_runtime.Action):
@@ -16,16 +15,12 @@ class Markdown(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        tag_parser = "(?i)<\/?\w+((\s+\w+(\s*=\s*(?:\".*?\"|'.*?'|[^'\">\s]+))?)+\s*|\s*)\/?>"  # noqa: W605
-        doc = params.get(Input.DOC)
-        tags = re.findall(tag_parser, doc)
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        document = params.get(Input.DOC, "")
+        # END INPUT BINDING - DO NOT REMOVE
 
-        if not tags:
-            raise PluginException(cause="Invalid input.", assistance="Input must be of type HTML.")
-
-        try:
-            output = pypandoc.convert_text(doc, "md", format="html")
-        except RuntimeError as error:
-            raise PluginException(cause="Error converting doc file. ", assistance="Check stack trace log.", data=error)
-        file_ = base64.b64encode(output.encode("ascii")).decode()
-        return {Output.MARKDOWN_CONTENTS: output, Output.MARKDOWN_FILE: file_}
+        converted_markdown = HTMLConverter(ConvertToMarkdown()).convert(document)
+        return {
+            Output.MARKDOWN_CONTENTS: converted_markdown,
+            Output.MARKDOWN_FILE: encode_to_base64(converted_markdown),
+        }

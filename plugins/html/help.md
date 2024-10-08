@@ -12,7 +12,7 @@ Hypertext Markup Language (HTML) is the standard markup language for documents d
 
 # Supported Product Versions
 
-* 2023-08-30
+* 2024-09-30
 
 # Documentation
 
@@ -271,6 +271,7 @@ Example output:
 
 # Version History
 
+* 1.2.7 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 1.2.6 - SDK Bump | Addressing Snyk vulnerabilities | Fixing Unit Tests | Dockerfile USER permission updated
 * 1.2.5 - Update requirements for pypandoc
 * 1.2.4 - Actions modified in order to implement PluginExceptions
