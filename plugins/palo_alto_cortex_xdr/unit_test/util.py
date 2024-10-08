@@ -10,7 +10,7 @@ import requests
 from icon_palo_alto_cortex_xdr.connection.connection import Connection
 from icon_palo_alto_cortex_xdr.connection.schema import Input
 
-from typing import Dict, Any, Callable
+from typing import Dict, Any
 
 
 class MockTrigger:
@@ -66,12 +66,10 @@ class Util:
     @staticmethod
     def mocked_requests(*args, **kwargs):
         class MockResponse:
-            def __init__(self, status_code, filename: str = None, url: str = None):
+            def __init__(self, filename, status_code, url: str = None):
                 self.filename = filename
                 self.status_code = status_code
-                self.text = "Error text"
-                if filename:
-                    self.text = Util.read_file_to_string(f"responses/{filename}.json.resp")
+                self.text = ""
                 self.url = url
 
             def json(self):
