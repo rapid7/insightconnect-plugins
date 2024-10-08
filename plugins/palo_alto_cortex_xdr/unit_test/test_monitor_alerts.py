@@ -7,16 +7,12 @@ from unittest import TestCase
 from unittest.mock import patch, MagicMock
 
 from icon_palo_alto_cortex_xdr.tasks.monitor_alerts import MonitorAlerts
-from icon_palo_alto_cortex_xdr.tasks.monitor_alerts.schema import MonitorAlertsOutput
-
-from icon_palo_alto_cortex_xdr.connection.schema import Input
 
 from parameterized import parameterized
-from jsonschema import validate
 from freezegun import freeze_time
-from util import Util
+from json import dumps, loads
 from taskutil import TaskUtil, mock_conditions, mocked_response_type
-
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 STUB_STATE_EXPECTED_SECOND_PAGE = {
     "current_count": 2,
@@ -100,7 +96,7 @@ class TestMonitorAlerts(TestCase):
 
         mock_req.return_value = mock_conditions(200, file_name=response_file)
 
-        output, state, has_more_pages, status_code, _ = self.task.run(params={}, state=state)
+        output, state, has_more_pages, status_code, _ = self.task.run(state=state)
 
         self.assertEqual(expected_output, output)
         self.assertEqual(expected_has_more_pages, has_more_pages)
@@ -110,11 +106,13 @@ class TestMonitorAlerts(TestCase):
     @parameterized.expand(
         [
             [
-                "error",
+                "Bad Request",
                 STUB_STATE_ERROR_400,
-                500,
-                "A PluginException has occurred.",
-                # "Verify your plugin input is correct and not malformed and try again. If the issue persists, please contact support.",
+                dumps({"error": "Unknown", "message": "Unknown status code we don't know about"}),
+                PluginException(
+                    data="An error occurred during plugin execution!\n\nThe server is unable to process the request. Verify your plugin input is correct and not malformed and try again. If the issue persists, please contact support."
+                ),
+                400,
             ],
             # [
             #     "401",
@@ -125,15 +123,21 @@ class TestMonitorAlerts(TestCase):
             # ],
         ]
     )
-    def test_errors(
+    def test_monitor_alerts_error_handling(
         self,
-        mock_post,
-        test_name,
-        state,
-        expected_status_code,
+        mock_req: MagicMock,
+        test_name: str,
+        state: dict,
+        auth_error: str,
+        error_msg: str,
+        error_code: int,
     ) -> None:
-        # breakpoint()
-        # with self.assertRaises(PluginException):
-        _, state, has_more_pages, status_code, error = self.task.run(params={}, state=state)
 
+        mocked_response = mocked_response_type(error_code, auth_error)
+        mock_req.return_value = mocked_response
+
+        _, state, has_more_pages, status_code, error = self.task.run(state=state)
+        # breakpoint()
+        self.assertEqual(error_code, status_code)
+        # self.assertEqual(error_msg, error)
         self.assertEqual(False, has_more_pages)
