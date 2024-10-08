@@ -44,6 +44,16 @@ STUB_STATE_ERROR = {
     "last_search_to": 400,
 }
 
+STUB_STATE_DEDUPE = {
+    "current_count": 1,
+    "last_search_to": 100,
+    "last_search_from": 0,
+    "query_start_time": 1706453160000,
+    "query_end_time": 1706539560000,
+    "last_alert_time": 1706540499609,
+    "last_alert_hash": ["a502a9c50798186882ad8dc91ac2b38eb185c404"],
+}
+
 
 @freeze_time("2024-01-29T15:01:00.000000Z")
 @patch("requests.Session.send")
@@ -151,9 +161,41 @@ class TestMonitorAlerts(TestCase):
         # self.assertEqual(error_msg, error)
         self.assertEqual(False, has_more_pages)
 
+    @parameterized.expand(
+        [
+            [
+                "Load first",
+                STUB_STATE_DEDUPE,
+                TaskUtil.load_expected("monitor_alerts"),
+                True,
+                "monitor_alerts",
+                STUB_STATE_DEDUPE,
+                200,
+            ]
+        ]
+    )
+    def test_monitor_alerts_dedupe(
+        self,
+        mock_req: MagicMock,
+        test_name: str,
+        input_state: dict,
+        expected_output,
+        expected_has_more_pages,
+        response_file: str,
+        output_state,
+        expected_status_code,
+    ) -> None:
+
+        mock_req.return_value = mock_conditions(200, file_name=response_file)
+
+        output, state, has_more_pages, status_code, _ = self.task.run(state=input_state)
+
+        self.assertEqual(status_code, expected_status_code)
+        self.assertEqual(input_state, state)
+        self.assertEqual(has_more_pages, True)
+        self.assertEqual(output, [])
+
     # TODO - Add test for handle 401 functionality
-    # Test for if results count = 0 & total count = 0
     # Custom config
-    # Dedupe alert
     # Regular Exception
     # Error where error.data is not of type Response
