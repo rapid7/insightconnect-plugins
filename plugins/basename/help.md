@@ -1,18 +1,18 @@
 # Description
 
-This plugin is used to get the last item of a file path or URL using Python's Basename utility
+This plugin is used to get the last item of a file path or URL using Python's basename utility
 
 # Key Features
-  
-* Obtain Basename of a file path or URL.
+
+* Obtain basename of a file path or URL.
 
 # Requirements
   
 *This plugin does not contain any requirements.*
 
 # Supported Product Versions
-  
-* Python 3.38
+
+* Python 3.9
 
 # Documentation
 
@@ -26,14 +26,14 @@ This plugin is used to get the last item of a file path or URL using Python's Ba
 
 
 #### Basename
-  
-Get the Basename of a path
+
+This action is used to get the basename of a path
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|path|string|None|True|URL or file path|None|https://example.com/text.txt|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|path|string|None|True|URL or file path|None|https://example.com/text.txt|None|None|
   
 Example input:
 
@@ -63,7 +63,7 @@ Example output:
   
 *This plugin does not contain any tasks.*
 
-### Custom Output Types
+### Custom Types
   
 *This plugin does not contain any custom output types.*
 
@@ -73,6 +73,7 @@ If the input doesn't contain a slash `/` in the path the result will be the orig
 
 # Version History
 
+* 1.1.3 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 1.1.2 - Added `__init__.py` file to `unit_test` folder | Refreshed with new Tooling
 * 1.1.1 - Update SDK to version 5
 * 1.1.0 - Add missing `title` in action Basename | Use input and output constants | Add example input and output | Changed `Exception` to `PluginException` | Added "f" strings
@@ -80,7 +81,7 @@ If the input doesn't contain a slash `/` in the path the result will be the orig
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Support web server mode
 * 0.1.1 - Update to v2 Python plugin architecture
-* 0.1.0 - Initial plugin
+* 0.1.0 - Initial plugin 
 
 # Links
 
