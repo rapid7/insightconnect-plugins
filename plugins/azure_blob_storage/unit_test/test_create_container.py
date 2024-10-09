@@ -7,7 +7,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
-from unit_test.util import Util
+from util import Util
 from parameterized import parameterized
 from icon_azure_blob_storage.actions.create_container import CreateContainer
 from icon_azure_blob_storage.actions.create_container.schema import Input
