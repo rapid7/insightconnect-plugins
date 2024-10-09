@@ -14,12 +14,14 @@ class Basename(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        path = params.get(Input.PATH)
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        path = params.get(Input.PATH, "")
+        # END INPUT BINDING - DO NOT REMOVE
+
         basename = os.path.basename(path)
-        if basename is None or basename == "":
+        if not basename:
             raise PluginException(
                 cause="Unable to find basename.",
                 assistance=f"Not able to retrieve basename of {path}.",
             )
-
         return {Output.BASENAME: basename}
