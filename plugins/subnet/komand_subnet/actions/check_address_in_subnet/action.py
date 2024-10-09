@@ -17,8 +17,11 @@ class CheckAddressInSubnet(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         ip = params.get(Input.IP_ADDRESS)
         subnet = params.get(Input.SUBNET)
+        # END INPUT BINDING - DO NOT REMOVE
+
         if not validators.ipv4(ip):
             raise PluginException(
                 cause="Invalid IP address.",
