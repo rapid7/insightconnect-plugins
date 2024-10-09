@@ -1,7 +1,10 @@
+from typing import Union
+
 import insightconnect_plugin_runtime
-from .schema import CalculateInput, CalculateOutput, Input, Output, Component
 from insightconnect_plugin_runtime.exceptions import PluginException
 from simpleeval import simple_eval
+
+from .schema import CalculateInput, CalculateOutput, Component, Input, Output
 
 
 class Calculate(insightconnect_plugin_runtime.Action):
@@ -16,19 +19,29 @@ class Calculate(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        equation = params.get(Input.EQUATION)
-        result = Calculate.execute_equation(equation)
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        equation = params.get(Input.EQUATION, "")
+        # END INPUT BINDING - DO NOT REMOVE
 
+        try:
+            result = Calculate.execute_equation(equation)
+        except Exception as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
         if result is None:
             raise PluginException(
                 cause="Calculation error",
                 assistance="Error occurred while calculating the equation. Check to make sure it is valid and try "
-                "again. ",
+                "again.",
             )
-
         return {Output.RESULT: result}
 
     @staticmethod
-    def execute_equation(eq):
-        eq = str().join([c for c in eq if (c.isdecimal() or c in ["+", "-", "*", "/", "**", "%", "(", ")", "."])])
-        return simple_eval(eq)
+    def execute_equation(equation) -> Union[int, float]:
+        equation = str().join(
+            [
+                character
+                for character in equation
+                if (character.isdecimal() or character in ["+", "-", "*", "/", "**", "%", "(", ")", "."])
+            ]
+        )
+        return simple_eval(equation)
