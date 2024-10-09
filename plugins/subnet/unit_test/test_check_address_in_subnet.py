@@ -1,7 +1,12 @@
+import sys
+
+sys.path.append("../")
+
 from unittest import TestCase
-from komand_subnet.actions.check_address_in_subnet import CheckAddressInSubnet
-from komand_subnet.actions.check_address_in_subnet.schema import Input, Output
+
 from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_subnet.actions.check_address_in_subnet import CheckAddressInSubnet
+from komand_subnet.actions.check_address_in_subnet.schema import Input
 from parameterized import parameterized
 
 
