@@ -447,10 +447,12 @@ class CortexXdrAPI:
 
         url = f"{fqdn}{endpoint}"
 
-        request = requests.Request(method="post", url=url, headers=headers, json=post_body)
-        response = make_request(_request=request, timeout=60, exception_data_location=ResponseExceptionData.RESPONSE)
+        response = self.build_request(url=url, headers=headers, post_body=post_body)
+
+        response = self._handle_401(response=response, url=url, post_body=post_body)
 
         response = extract_json(response)
+
         total_count = response.get("reply", {}).get("total_count")
         results_count = response.get("reply", {}).get("result_count")
         results = response.get("reply", {}).get("alerts", [])
@@ -482,7 +484,7 @@ class CortexXdrAPI:
         else:
             return response
 
-    def build_request(self, url: str, headers: dict, post_body: dict):
+    def build_request(self, url: str, headers: dict, post_body: dict) -> Response:
         """
         Helper method to build the request and return response object
         """

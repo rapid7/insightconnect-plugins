@@ -21,14 +21,6 @@ class MockTrigger:
         MockTrigger.actual = params
 
 
-class MockTask:
-    actual = None
-
-    @staticmethod
-    def send(params):
-        MockTask.actual = params
-
-
 class Util:
     @staticmethod
     def read_file_to_dict(filename):
@@ -97,4 +89,5 @@ class Util:
             return MockResponse("get_incidents", 200)
         if kwargs.get("url") == "connection url":
             return MockResponse("connection", 200)
+
         raise Exception("Not implemented")
