@@ -17,10 +17,12 @@ class Calculate(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         cidr = params.get(Input.CIDR)
+        # END INPUT BINDING - DO NOT REMOVE
 
         # Test for correct input
-        if validators.ipv4_cidr(cidr):
+        if validators.ipv4(cidr, cidr=True, strict=True):
             subnet = ipcalc.Network(cidr)
         else:
             raise PluginException(
