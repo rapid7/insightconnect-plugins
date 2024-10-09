@@ -1,10 +1,12 @@
-import komand
 import time
-from .schema import SleepInput, SleepOutput, Input, Output, Component
-from komand.exceptions import PluginException
+
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+
+from .schema import Component, Input, Output, SleepInput, SleepOutput
 
 
-class Sleep(komand.Action):
+class Sleep(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="sleep",
@@ -14,11 +16,14 @@ class Sleep(komand.Action):
         )
 
     def run(self, params={}):
-        time_ = params.get(Input.INTERVAL)
-        if int(time_) < 0:
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        interval = params.get(Input.INTERVAL)
+        # END INPUT BINDING - DO NOT REMOVE
+
+        if int(interval) < 0:
             raise PluginException(
                 cause="Wrong input",
                 assistance=f"{Input.INTERVAL.capitalize()} should not be less than zero",
             )
-        time.sleep(time_)
-        return {Output.SLEPT: time_}
+        time.sleep(interval)
+        return {Output.SLEPT: interval}
