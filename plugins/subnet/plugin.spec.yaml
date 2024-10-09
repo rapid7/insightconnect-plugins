@@ -6,6 +6,7 @@ title: Subnet
 description: The Subnet plugin takes input as a network in CIDR notation and returns useful information, such as the number of hosts, the ID, host address range, and broadcast address
 version: 2.0.1
 connection_version: 2
+fedramp_ready: true
 vendor: rapid7
 support: community
 supported_versions: ["2024-10-09"]
