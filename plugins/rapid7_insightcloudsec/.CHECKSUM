@@ -1,7 +1,7 @@
 {
-	"spec": "38c446f01465f52c7be5fa2463db7025",
-	"manifest": "e83d62665fa743c3cdc0c7e22e1d83b7",
-	"setup": "c1aa4492323d4f1cafed66dbccc19bf9",
+	"spec": "d6d60b0ca6e1f5e9f24e2a75a0c1f2e7",
+	"manifest": "6d8a32bc07e7bba543fc6414c5d1b4e1",
+	"setup": "71ad12e7c7d1db068e83d1f3b3b2506d",
 	"schemas": [
 		{
 			"identifier": "create_exemption/schema.py",
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "get_resource_id/schema.py",
-			"hash": "2baa1050c7f50c28070fc40535e84b48"
+			"hash": "c7e4892c4bc76f7daf27c06770c526d7"
 		},
 		{
 			"identifier": "list_resource_tags/schema.py",

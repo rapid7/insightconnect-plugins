@@ -3,12 +3,19 @@
 InsightCloudSec by Rapid7 (formerly DivvyCloud) is a Cloud-Native Security Platform that provides real-time analysis and automated remediation for continuous security and compliance for your multi-cloud environment
 
 # Key Features
-  
-*This plugin does not contain any key features.*
+
+* Create and remove an exemption
+* Detach policy
+* Get account details
+* Get resource details
+* Get resource id
+* List resource tags
+* Run a bot on demand
+* Switch organization
 
 # Requirements
-  
-*This plugin does not contain any requirements.*
+
+* InsightCloudSec API key
 
 # Supported Product Versions
 
@@ -79,7 +86,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|exemption|[]exemption|False|Information about a created exemption|None|
+|exemption|[]exemption|False|Information about a created exemption|[{"approver": "user@example.com", "createDate": "2022-10-20 12:00:00+02:00", "creatorId": 123, "enabled": True, "exemptionId": 100, "expirationDate": "2022-10-20 12:00:00+02:00", "insightId": 12345, "insightSource": "backoffice", "notes": "example note", "organizationId": 1, "resourceId": "storagecontainer:123:us-east-1:123456789:", "resourceType": "storagecontainer", "startDate": "2022-10-20 12:00:00+02:00"}]|
   
 Example output:
 
@@ -87,32 +94,19 @@ Example output:
 {
   "exemption": [
     {
-      "Account": "",
-      "Account ID": 0,
-      "Approver": {},
-      "Bot ID": {},
-      "Bot Name": {},
-      "Cloud Type ID": {},
-      "Create Date": {},
-      "Creator ID": {},
-      "Creator Name": {},
-      "Enabled": "true",
-      "Exemption ID": {},
-      "Expiration Date": {},
-      "Insight ID": {},
-      "Insight Name": {},
-      "Insight Source": {},
-      "Notes": {},
-      "Organization ID": {},
-      "Provider ID": {},
-      "Resource ID": {},
-      "Resource Name": {},
-      "Resource Type": {},
-      "Resource Type Label": {},
-      "ResourceIds": [
-        {}
-      ],
-      "Start Date": {}
+      "approver": "user@example.com",
+      "createDate": "2022-10-20 12:00:00+02:00",
+      "creatorId": 123,
+      "enabled": true,
+      "exemptionId": 100,
+      "expirationDate": "2022-10-20 12:00:00+02:00",
+      "insightId": 12345,
+      "insightSource": "backoffice",
+      "notes": "example note",
+      "organizationId": 1,
+      "resourceId": "storagecontainer:123:us-east-1:123456789:",
+      "resourceType": "storagecontainer",
+      "startDate": "2022-10-20 12:00:00+02:00"
     }
   ]
 }
@@ -142,7 +136,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|boolean|True|Whether the action was successful|None|
+|success|boolean|True|Whether the action was successful|True|
   
 Example output:
 
@@ -174,31 +168,91 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|resourceDetails|resourceDetails|False|Information about the resource for the provided ID|None|
+|resourceDetails|resourceDetails|False|Information about the resource for the provided ID|{'dependencies': {'serviceaccesskey': [{'id': 'ABC123456790', 'name': 'ABC123456790', 'resourceId': 'serviceaccesskey:1:ABC123456790:', 'type': 'serviceaccesskey'}], 'servicepolicy': [{'id': 'ABC0987654321', 'name': 'Example-Policy', 'resourceId': 'servicepolicy:1:ABC0987654321:', 'type': 'servicepolicy'}]}, 'details': {'resourceType': 'serviceuser', 'serviceuser': {'actionCount': 0, 'activeApiKeys': 1, 'ageInDays': 10, 'common': {'account': 'Test', 'accountId': '123456789098', 'accountStatus': 'DEFAULT', 'cloud': 'AWS', 'creationTimestamp': '2022-10-20 11:16:57', 'directLink': 'https://example.com', 'discoveredTimestamp': '2022-10-20 11:33:49', 'documents': {}, 'lastHarvestedTimestamp': '2022-10-21T08:02:52', 'modifiedTimestamp': '2022-10-21 06:03:03', 'namespaceId': 'arn:aws:iam::123456789098:user/Example-User', 'noncompliance': [], 'organizationServiceId': 1, 'properties': {'propertyList': []}, 'resourceId': 'serviceuser:1:ABC1234567890:', 'resourceName': 'Example-User', 'resourceType': 'serviceuser'}, 'createDate': '2022-10-20 11:16:57', 'disabled': False, 'inactiveApiKeys': 0, 'inlinePolicies': 0, 'lastActivity': '2022-10-21 05:46:00', 'loginProfile': False, 'managedPolicyCount': 0, 'passwordLastChanged': 'None', 'passwordLastUsed': 'None', 'path': '/', 'policyCount': 1, 'serviceCount': 0, 'twoFactorEnabled': False, 'userId': 'ABC1234567890', 'userName': 'Example-User', 'wildcardServiceCount': 0}}}|
   
 Example output:
 
 ```
 {
   "resourceDetails": {
-    "Dependencies": {},
-    "Details": {},
-    "Related Resources": {}
+    "dependencies": {
+      "serviceaccesskey": [
+        {
+          "id": "ABC123456790",
+          "name": "ABC123456790",
+          "resourceId": "serviceaccesskey:1:ABC123456790:",
+          "type": "serviceaccesskey"
+        }
+      ],
+      "servicepolicy": [
+        {
+          "id": "ABC0987654321",
+          "name": "Example-Policy",
+          "resourceId": "servicepolicy:1:ABC0987654321:",
+          "type": "servicepolicy"
+        }
+      ]
+    },
+    "details": {
+      "resourceType": "serviceuser",
+      "serviceuser": {
+        "actionCount": 0,
+        "activeApiKeys": 1,
+        "ageInDays": 10,
+        "common": {
+          "account": "Test",
+          "accountId": "123456789098",
+          "accountStatus": "DEFAULT",
+          "cloud": "AWS",
+          "creationTimestamp": "2022-10-20 11:16:57",
+          "directLink": "https://example.com",
+          "discoveredTimestamp": "2022-10-20 11:33:49",
+          "documents": {},
+          "lastHarvestedTimestamp": "2022-10-21T08:02:52",
+          "modifiedTimestamp": "2022-10-21 06:03:03",
+          "namespaceId": "arn:aws:iam::123456789098:user/Example-User",
+          "noncompliance": [],
+          "organizationServiceId": 1,
+          "properties": {
+            "propertyList": []
+          },
+          "resourceId": "serviceuser:1:ABC1234567890:",
+          "resourceName": "Example-User",
+          "resourceType": "serviceuser"
+        },
+        "createDate": "2022-10-20 11:16:57",
+        "disabled": false,
+        "inactiveApiKeys": 0,
+        "inlinePolicies": 0,
+        "lastActivity": "2022-10-21 05:46:00",
+        "loginProfile": false,
+        "managedPolicyCount": 0,
+        "passwordLastChanged": "None",
+        "passwordLastUsed": "None",
+        "path": "/",
+        "policyCount": 1,
+        "serviceCount": 0,
+        "twoFactorEnabled": false,
+        "userId": "ABC1234567890",
+        "userName": "Example-User",
+        "wildcardServiceCount": 0
+      }
+    }
   }
 }
 ```
 
 #### Get Resource ID
 
-This action is used to gets a InsightCloudSec resource ID from a given search string.
+This action is used to gets a InsightCloudSec resource ID from a given search string
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|limit|integer|None|False|The maximum number of resources returned if resources match the provided criteria. The value can be between 1 and 1000.|None|0|None|None|
-|offset|integer|None|False|The number of entries to skip over before returning anything.|None|0|None|None|
-|search_string|string|None|True|Partial or full literal string to search for. f.e. you could search for an instance ID, image ID, or resource name.|None|i-1234567890|None|None|
+|limit|integer|None|False|The maximum number of resources returned if resources match the provided criteria. The value can be between 1 and 1000|None|0|None|None|
+|offset|integer|None|False|The number of entries to skip over before returning anything|None|0|None|None|
+|search_string|string|None|True|Partial or full literal string to search for. f.e. you could search for an instance ID, image ID, or resource name|None|i-1234567890|None|None|
   
 Example input:
 
@@ -267,7 +321,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|resourceTags|[]resourceTag|False|Resource tags for the provided ID|None|
+|resourceTags|[]resourceTag|False|Resource tags for the provided ID|[{"key": "tag1", "value": "test_tag_1"}, {"key": "tag2", "value": "test_tag_2"}, {"key": "tag3", "value": "test_tag_3"}]|
   
 Example output:
 
@@ -275,8 +329,16 @@ Example output:
 {
   "resourceTags": [
     {
-      "Key": "",
-      "Value": {}
+      "key": "tag1",
+      "value": "test_tag_1"
+    },
+    {
+      "key": "tag2",
+      "value": "test_tag_2"
+    },
+    {
+      "key": "tag3",
+      "value": "test_tag_3"
     }
   ]
 }
@@ -307,7 +369,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|boolean|True|Whether the action was successful|None|
+|success|boolean|True|Whether the action was successful|True|
   
 Example output:
 
@@ -339,7 +401,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|boolean|True|Whether the action was successful|None|
+|success|boolean|True|Whether the action was successful|True|
   
 Example output:
 
@@ -417,27 +479,31 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Account|string|None|False|Account of the resource|None|
-|Account ID|string|None|False|Account ID of the resource|None|
-|Cloud type ID|string|None|False|Cloud type ID of the resource|None|
-|Name|string|None|False|Name of the resource|None|
-|Provider ID|string|None|False|Provider ID of the resource|None|
-|Resource ID|string|None|False|Resource of the resource ID|None|
-|Resource Type|string|None|False|Resource type of the resource|None|
+|Account|string|None|False|Account of the resource|my-account-name|
+|Account ID|string|None|False|Account ID of the resource|************|
+|Cloud type ID|string|None|False|Cloud type ID of the resource|AWS|
+|Name|string|None|False|Name of the resource|my-instance-name|
+|Provider ID|string|None|False|Provider ID of the resource|*******************|
+|Resource ID|string|None|False|Resource of the resource ID|instance:******:ap-northeast-1:*******************:|
+|Resource Type|string|None|False|Resource type of the resource|instance|
 
 
 ## Troubleshooting
-  
-*This plugin does not contain a troubleshooting.*
+
+_This plugin does not contain any troubleshooting information._
 
 # Version History
-  
-*This plugin does not contain a version history.*
+
+* 2.1.0 - Updated SDK to the latest version | Adding a get resource id functionality
+* 2.0.0 - Enable plugin to run in cloud | Remove actions using defective API endpoints
+* 1.0.0 - Initial plugin | Add Get Account Details, Get Resource Details, List Resource Tags, Create Exemption, Remove Exemption, Detach Policy, Run Bot on Demand and Switch Organization actions
 
 # Links
-  
-*This plugin does not contain any links.*
+
+* [Rapid7 InsightCloudSec](https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_insightcloudsec)
+* [Docs](https://docs.rapid7.com/insightcloudsec/api/v2/)
 
 ## References
-  
-*This plugin does not contain any references.*
+
+* [Rapid7 InsightCloudSec](https://www.rapid7.com/products/insightcloudsec/)
+* You can find testing credentials under the Shared-Integration Lab/DivvyCloud - Demo @ 1Password

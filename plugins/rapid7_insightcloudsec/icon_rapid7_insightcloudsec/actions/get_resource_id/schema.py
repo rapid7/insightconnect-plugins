@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Gets a InsightCloudSec resource ID from a given search string."
+    DESCRIPTION = "Gets a InsightCloudSec resource ID from a given search string"
 
 
 class Input:
@@ -27,19 +27,19 @@ class GetResourceIdInput(insightconnect_plugin_runtime.Input):
     "limit": {
       "type": "integer",
       "title": "Limit",
-      "description": "The maximum number of resources returned if resources match the provided criteria. The value can be between 1 and 1000.",
+      "description": "The maximum number of resources returned if resources match the provided criteria. The value can be between 1 and 1000",
       "order": 1
     },
     "offset": {
       "type": "integer",
       "title": "Offset",
-      "description": "The number of entries to skip over before returning anything.",
+      "description": "The number of entries to skip over before returning anything",
       "order": 2
     },
     "search_string": {
       "type": "string",
       "title": "Search String",
-      "description": "Partial or full literal string to search for. f.e. you could search for an instance ID, image ID, or resource name.",
+      "description": "Partial or full literal string to search for. f.e. you could search for an instance ID, image ID, or resource name",
       "order": 3
     }
   },
