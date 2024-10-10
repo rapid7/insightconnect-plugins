@@ -6,7 +6,7 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from icon_rapid7_insightcloudsec.actions.list_resource_tags import ListResourceTags
 from icon_rapid7_insightcloudsec.actions.list_resource_tags.schema import Input
-from util import Util
+from unit_test.util import Util
 from unittest.mock import patch
 from parameterized import parameterized
 from insightconnect_plugin_runtime.exceptions import PluginException

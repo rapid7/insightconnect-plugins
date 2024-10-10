@@ -4,7 +4,7 @@ import os
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from util import Util
+from unit_test.util import Util
 from parameterized import parameterized
 from icon_rapid7_insightcloudsec.util.helpers import dict_keys_to_camel_case, process_list, parse_date_from_datetime
 

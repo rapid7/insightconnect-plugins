@@ -7,7 +7,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
-from util import Util
+from unit_test.util import Util
 from jsonschema import validate
 from parameterized import parameterized
 from icon_rapid7_insightcloudsec.actions.get_resource_id import GetResourceId
