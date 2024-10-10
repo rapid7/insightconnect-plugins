@@ -506,4 +506,3 @@ _This plugin does not contain any troubleshooting information._
 ## References
 
 * [Rapid7 InsightCloudSec](https://www.rapid7.com/products/insightcloudsec/)
-* You can find testing credentials under the Shared-Integration Lab/DivvyCloud - Demo @ 1Password

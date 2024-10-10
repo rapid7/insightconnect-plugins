@@ -38,7 +38,6 @@ links:
   - "[Docs](https://docs.rapid7.com/insightcloudsec/api/v2/)"
 references:
   - "[Rapid7 InsightCloudSec](https://www.rapid7.com/products/insightcloudsec/)"
-  - "You can find testing credentials under the Shared-Integration Lab/DivvyCloud - Demo @ 1Password"
 tags: ["rapid7", "insightcloudsec"]
 support: rapid7
 status: []
