@@ -56,7 +56,11 @@ class Util:
 
         if kwargs.get("url") == "https://example.com/v2/prototype/cloud/linked/list":
             return MockResponse("get_accounts", 200)
-        if kwargs.get("url") == "https://example.com/v2/public/resource/common/search" and kwargs.get("json", {}) == {'limit': 'some_string', 'offset': 'another_string', 'search_string': 1}:
+        if kwargs.get("url") == "https://example.com/v2/public/resource/common/search" and kwargs.get("json", {}) == {
+            "limit": "some_string",
+            "offset": "another_string",
+            "search_string": 1,
+        }:
             return MockResponse("get_resource_id", 400)
         if kwargs.get("url") == "https://example.com/v2/public/resource/common/search":
             return MockResponse("get_resource_id", 200)

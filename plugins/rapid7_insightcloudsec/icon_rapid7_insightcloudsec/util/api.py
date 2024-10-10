@@ -82,12 +82,11 @@ class InsightCloudSecAPI:
         )
 
     def get_resource_id(self, json_data: dict) -> dict:
-        return dict_keys_to_camel_case(self.make_json_request(
-            path=GET_RESOURCE_ID_ENDPOINT,
-            method="POST",
-            json_data=json_data,
-            headers=self.get_headers()
-        ))
+        return dict_keys_to_camel_case(
+            self.make_json_request(
+                path=GET_RESOURCE_ID_ENDPOINT, method="POST", json_data=json_data, headers=self.get_headers()
+            )
+        )
 
     def run_bot_on_demand(self, bot_id: str) -> bool:
         self.make_json_request(
