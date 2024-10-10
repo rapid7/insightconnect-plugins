@@ -2,6 +2,7 @@ import insightconnect_plugin_runtime
 import requests
 from .schema import ValidateOutput, ValidateInput, Input, Output, Component
 from insightconnect_plugin_runtime.exceptions import PluginException
+from icon_html.util.constants import REQUESTS_TIMEOUT
 
 
 class Validate(insightconnect_plugin_runtime.Action):
@@ -14,18 +15,24 @@ class Validate(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        # Configure requests
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        html_contents = params.get(Input.HTML_CONTENTS, "").encode()
+        # END INPUT BINDING - DO NOT REMOVE
 
-        headers = {"Content-Type": "text/html; charset=utf-8"}
-        api_call = "https://validator.w3.org/nu/?out=json"
-        html_data = params.get(Input.HTML_CONTENTS).encode()
         try:
-            response = requests.post(api_call, headers=headers, data=html_data, timeout=10)
-            msgs = response.json()["messages"]
-            if len(msgs) == 0:
+            response = requests.post(
+                "https://validator.w3.org/nu/?out=json",
+                headers={"Content-Type": "text/html; charset=utf-8"},
+                data=html_contents,
+                timeout=REQUESTS_TIMEOUT,
+            )
+            messages = response.json()["messages"]
+            if not messages:
                 self.logger.info("Run: No response from web service, can't determine validity")
                 return {Output.VALIDATED: False}
-            status = msgs[0]["type"]
+            status = messages[0]["type"]
             return {Output.VALIDATED: (not status == "error")}
-        except requests.exceptions.RequestException:
-            return PluginException(cause="Error validating input. ", assistance="Please check logs.")
+        except requests.exceptions.RequestException as error:
+            raise PluginException(cause="Error validating input.", assistance="Please check logs.", data=error)
+        except Exception as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)

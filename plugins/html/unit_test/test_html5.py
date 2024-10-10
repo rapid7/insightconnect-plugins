@@ -1,6 +1,12 @@
+import os
+import sys
+
+sys.path.append(os.path.abspath("../"))
+
 from unittest import TestCase
-from insightconnect_plugin_runtime.exceptions import PluginException
+
 from icon_html.actions.html5 import Html5
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class TestHtml5(TestCase):

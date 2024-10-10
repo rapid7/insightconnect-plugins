@@ -1,10 +1,7 @@
 import insightconnect_plugin_runtime
-import base64
-import pypandoc
-import re
-
-from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import DocxInput, DocxOutput, Output, Input, Component
+from icon_html.util.api import HTMLConverter
+from icon_html.util.strategies import ConvertToDocx
 
 
 class Docx(insightconnect_plugin_runtime.Action):
@@ -14,18 +11,8 @@ class Docx(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        temp_file = "temp_html_2_docx.docx"
-        tag_parser = "(?i)<\/?\w+((\s+\w+(\s*=\s*(?:\".*?\"|'.*?'|[^'\">\s]+))?)+\s*|\s*)\/?>"  # noqa: W605
-        doc = params.get(Input.DOC)
-        tags = re.findall(tag_parser, doc)
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        document = params.get(Input.DOC, "")
+        # END INPUT BINDING - DO NOT REMOVE
 
-        if not tags:
-            raise PluginException(cause="Invalid input.", assistance="Input must be of type HTML.")
-
-        try:
-            pypandoc.convert_text(doc, "docx", outputfile=temp_file, format="html")
-        except RuntimeError as error:
-            raise PluginException(cause="Error converting doc file. ", assistance="Check stack trace log.", data=error)
-        with open(temp_file, "rb") as output:
-            # Reading the output and sending it in base64
-            return {Output.DOCX: base64.b64encode(output.read()).decode("utf-8")}
+        return {Output.DOCX: HTMLConverter(ConvertToDocx()).convert(document)}

@@ -12,14 +12,16 @@ class Text(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        in_text = params.get(Input.DOC)
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        document = params.get(Input.DOC, "")
         remove_scripts = params.get(Input.REMOVE_SCRIPTS, False)
-        if in_text:  # BeautifulSoup will bomb on null text
-            soup = BeautifulSoup(in_text, features="html.parser")
-            if remove_scripts:
-                for script in soup(["script", "style"]):  # remove all javascript and stylesheet code
-                    script.extract()
-            output = soup.get_text()
-            return {Output.TEXT: output}
-        else:
+        # END INPUT BINDING - DO NOT REMOVE
+
+        if not document:
             return {Output.TEXT: ""}
+
+        soup = BeautifulSoup(document, features="html.parser")
+        if remove_scripts:
+            for script in soup(["script", "style"]):  # remove all javascript and stylesheet code
+                script.extract()
+        return {Output.TEXT: soup.get_text()}
