@@ -4,27 +4,76 @@ products: ["insightconnect"]
 name: extractit
 title: ExtractIt
 description: The ExtractIt plugin has a collection of actions used to extract various information from text. These include URLs, domains, emails, IPs, and more
-version: 3.0.8
+version: 3.0.9
+connection_version: 3
 vendor: rapid7
 support: rapid7
-supported_versions: ["2022-10-19"]
+supported_versions: ["2024-10-02"]
 status: []
 cloud_ready: true
+fedramp_ready: true
 resources:
   vendor_url: https://www.rapid7.com
 tags:
-- extract
-- extractor
-- MD5
-- SHA
+  - extract
+  - extractor
+  - MD5
+  - SHA
 hub_tags:
   use_cases: [threat_detection_and_response, data_utility]
   keywords: [extraction, domains, email, url, ip_address, ioc, cloud_enabled]
   features: []
 sdk:
-  type: full
-  version: 5
+  type: slim
+  version: 6.1.3
   user: nobody
+key_features:
+  - Extract dates from a string or file for use in subsequent workflow actions
+  - Extract domains from a string or file for use in subsequent workflow actions
+  - Extract email addresses from a string or file for use in subsequent workflow actions
+  - Extract file paths from a string or file for use in subsequent workflow actions
+  - Extract indicators of compromise from a string or file for use in subsequent workflow actions
+  - Extract URLs from a string or file for use in subsequent workflow actions
+  - Extract IP addresses from a string or file for use in subsequent workflow actions
+  - Extract MAC addresses from a string or file for use in subsequent workflow actions
+  - Extract MD5, SHA1, SHA256, and SHA512 hashes from a string or file for use in subsequent workflow actions
+  - Extract UUIDs from a string or file for use in subsequent workflow actions
+  - Extract CVEs from a string or file for use in subsequent workflow actions
+  - Extract all indicators from a string or file for use in subsequent workflow actions
+version_history:
+  - "3.0.9 - Initial updates for fedramp compliance | Updated SDK to the latest version"
+  - "3.0.8 - Adding in extra logic to handle wrapping of lines in pdfs"
+  - "3.0.7 - Resolved issues related to `PDF`, `ODP`, `ODT`, `ODF` files extractions"
+  - "3.0.6 - Resolved issue where users experienced a `Not in list` value error when submitted multiple URLs with the same linked URL in the URL Extractor action"
+  - "3.0.5 - Updated error message in extractor.py | Updated help.md description | Updated URL extraction | Fix issue with extracting dates from `.XLSX` files"
+  - "3.0.4 - Fix issue with extracting URLs from link query parameters"
+  - "3.0.3 - Remove duplicate date formats from action inputs"
+  - "3.0.2 - Fix issue where domains and URLs were not parsed correctly if top level domain contained uppercase | Fix issue where parts of URL were incorrectly recognized as domains if URL contained port"
+  - "3.0.1 - Fix issue where encoded URLs would be incorrectly extracted after the top level domain for Extract URL action"
+  - "3.0.0 - Update to support date format for Date Extractor and Extract All actions"
+  - "2.3.1 - Support special character ! for URL Extractor action"
+  - "2.3.0 - Support extraction from binary files for all actions"
+  - "2.2.1 - Support domain extraction from encoded URL | Fix issue where subdomain removal did not work properly in some cases | Improve domain extraction by limiting the number of false positive results"
+  - "2.2.0 - Add Extract All, UUID Extractor and CVE Extractor actions | Cloud enabled"
+  - "2.1.2 - Rollback URL matching regex used in HTML email extraction."
+  - "2.1.1 - Rewrite plugin to use the Python SDK | Add input and output examples in plugin.spec and held.md | Fix issue in domain extractor where multiple domains were extracted from a single URL | Fix issue where the URL extractor does not extract URLs containing an email address | Fix issue where hash extractors would return part of SHA256 or SHA512 hashes as SHA1 hash and part of SHA512 hash as SHA256 hash | Update the MD5 regex to exclude spaces or other extra characters in the results | Fix issue where the file path extractor was extracting part of a URL or date as a file path | Add unit tests"
+  - "2.1.0 - Fix issue in domain extractor where a colon could crash the plugin | Update to support unicode domains in extract domain | Fix issue where extract domain output could have invalid characters. e.g. email address and email headers"
+  - "2.0.0 - URL Extractor action no longer falsely identifies email addresses as URLs"
+  - "1.1.7 - New spec and help.md format for the Extension Library"
+  - "1.1.6 - Fix issue where IP Extractor would return inaccurate IPs"
+  - "1.1.5 - Fix issue where URL Extractor parsing was missing URLs"
+  - "1.1.4 - Fix issue where URL Extractor would return IPs"
+  - "1.1.3 - Regenerate with latest Go SDK to solve bug with triggers"
+  - "1.1.2 - Updating to Go SDK 2.6.4"
+  - "1.1.1 - Fix issue where test method for Domain Extractor was not properly testing the action"
+  - "1.1.0 - Port to V2 architecture | Support web server mode | MD5 matching bugfix"
+  - "1.0.1 - Bugfix Email Extractor"
+  - "1.0.0 - Domain Extractor bugfix"
+  - "0.1.0 - Initial plugin"
+links:
+  - "[ExtractIt in Extension Library](https://extensions.rapid7.com/extension/extractit)"
+references:
+  - "[ExtractIt in Extension Library](https://extensions.rapid7.com/extension/extractit)"
 types:
   hashes:
     md5_hashes:
