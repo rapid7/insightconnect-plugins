@@ -1,10 +1,7 @@
 import insightconnect_plugin_runtime
-import base64
-import pypandoc
-import re
-
-from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import EpubInput, EpubOutput, Input, Output, Component
+from icon_html.util.api import HTMLConverter
+from icon_html.util.strategies import ConvertToEpub
 
 
 class Epub(insightconnect_plugin_runtime.Action):
@@ -14,18 +11,8 @@ class Epub(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        temp_file = "temp_html_3_epub.epub"
-        tag_parser = "(?i)<\/?\w+((\s+\w+(\s*=\s*(?:\".*?\"|'.*?'|[^'\">\s]+))?)+\s*|\s*)\/?>"  # noqa: W605
-        doc = params.get(Input.DOC)
-        tags = re.findall(tag_parser, doc)
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        document = params.get(Input.DOC, "")
+        # END INPUT BINDING - DO NOT REMOVE
 
-        if not tags:
-            raise PluginException(cause="Invalid input.", assistance="Input must be of type HTML.")
-
-        try:
-            pypandoc.convert_text(doc, "epub", outputfile=temp_file, format="html")
-        except RuntimeError as error:
-            raise PluginException(cause="Error converting doc file. ", assistance="Check stack trace log.", data=error)
-        with open(temp_file, "rb") as output:
-            # Reading the output and sending it in base64
-            return {Output.EPUB: base64.b64encode(output.read()).decode("utf-8")}
+        return {Output.EPUB: HTMLConverter(ConvertToEpub()).convert(document)}
