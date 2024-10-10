@@ -7,7 +7,6 @@ from .schema import GetResourceIdInput, GetResourceIdOutput, Input, Output, Comp
 
 
 class GetResourceId(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_resource_id",
