@@ -1,5 +1,7 @@
 import insightconnect_plugin_runtime
+
 from .schema import GetResourceIdInput, GetResourceIdOutput, Input, Output, Component
+
 
 # Custom imports below
 
