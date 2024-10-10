@@ -8,6 +8,7 @@ from icon_rapid7_insightcloudsec.util.endpoints import (
     DELETE_EXEMPTION_ENDPOINT,
     DETACH_POLICY_ENDPOINT,
     GET_RESOURCE_DETAILS_ENDPOINT,
+    GET_RESOURCE_ID_ENDPOINT,
     LINKED_CLOUD_ACCOUNTS_ENDPOINT,
     LIST_ORGANIZATIONS_ENDPOINT,
     LIST_RESOURCE_TAGS_ENDPOINT,
@@ -78,6 +79,13 @@ class InsightCloudSecAPI:
     def list_resource_tags(self, resource_id: str) -> dict:
         return self.make_json_request(
             path=LIST_RESOURCE_TAGS_ENDPOINT.format(resource_id=resource_id), headers=self.get_headers()
+        )
+
+    def get_resource_id(self, json_data: dict) -> dict:
+        return dict_keys_to_camel_case(
+            self.make_json_request(
+                path=GET_RESOURCE_ID_ENDPOINT, method="POST", json_data=json_data, headers=self.get_headers()
+            )
         )
 
     def run_bot_on_demand(self, bot_id: str) -> bool:
