@@ -1,7 +1,7 @@
 # List third-party dependencies here, separated by newlines.
 # All dependencies must be version-pinned, eg. requests==1.2.0
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
-beautifulsoup4==4.9.1
-pypandoc==1.13
-wheel==0.38.0
-setuptools==70.0.0
+beautifulsoup4==4.12.3
+pypandoc_binary==1.13
+wheel==0.44.0
+setuptools==75.1.0

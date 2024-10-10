@@ -1,12 +1,12 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
+
 from icon_html.actions.markdown import Markdown
 from insightconnect_plugin_runtime.exceptions import PluginException
-
 
 sys.path.append(os.path.abspath("../"))
 

@@ -1,15 +1,14 @@
+import os
+import sys
+
+sys.path.append(os.path.abspath("../"))
 from unittest import TestCase, mock
 
 import requests
-
 from icon_html.actions.validate import Validate
 from icon_html.actions.validate.schema import Input
-from util import Util, STUB_VALID_INPUT
 
-import sys
-import os
-
-sys.path.append(os.path.abspath("../"))
+from util import STUB_VALID_INPUT, Util
 
 
 class TestValidate(TestCase):

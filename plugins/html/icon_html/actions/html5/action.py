@@ -1,9 +1,8 @@
 import insightconnect_plugin_runtime
-from insightconnect_plugin_runtime.exceptions import PluginException
-import pypandoc
-import base64
-import re
 from .schema import Html5Input, Html5Output, Input, Output, Component
+from icon_html.util.api import HTMLConverter
+from icon_html.util.helpers import encode_to_base64
+from icon_html.util.strategies import ConvertToHTML, ConvertToHTML5
 
 
 class Html5(insightconnect_plugin_runtime.Action):
@@ -16,18 +15,13 @@ class Html5(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        tag_parser = "(?i)<\/?\w+((\s+\w+(\s*=\s*(?:\".*?\"|'.*?'|[^'\">\s]+))?)+\s*|\s*)\/?>"  # noqa: W605
-        doc = params.get(Input.DOC)
-        tags = re.findall(tag_parser, doc)
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        document = params.get(Input.DOC, "")
+        # END INPUT BINDING - DO NOT REMOVE
 
-        if not tags:
-            raise PluginException(cause="Invalid input.", assistance="Input must be of type HTML.")
-
-        try:
-            output = pypandoc.convert_text(doc, "html", format="md")
-            new_output = pypandoc.convert_text(output, "html5", format="md")
-        except RuntimeError as error:
-            raise PluginException(cause="Error converting doc file. ", assistance="Check stack trace log.", data=error)
-
-        file_ = base64.b64encode(new_output.encode("utf-8")).decode()
-        return {Output.HTML5_CONTENTS: output, Output.HTML5_FILE: file_}
+        converted_html = HTMLConverter(ConvertToHTML()).convert(document)
+        converted_html5 = HTMLConverter(ConvertToHTML5()).convert(converted_html)
+        return {
+            Output.HTML5_CONTENTS: converted_html,
+            Output.HTML5_FILE: encode_to_base64(converted_html5),
+        }
