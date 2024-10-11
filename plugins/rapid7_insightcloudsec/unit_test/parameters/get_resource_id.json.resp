@@ -1,0 +1,33 @@
+{
+  "parameters": [
+    [
+      "success",
+      25,
+      0,
+      "i-555",
+      {
+        "resources": [
+          {
+            "resourceId": "instance:******:ap-northeast-1:*******************:",
+            "resourceType": "instance",
+            "providerId": "*******************",
+            "name": "my-instance-name",
+            "accountId": "************",
+            "cloudTypeId": "AWS",
+            "account": "my-account-name"
+          },
+          {
+            "resourceId": "instance:******:ap-northeast-1:*******************:",
+            "resourceType": "instance",
+            "providerId": "*******************",
+            "name": "my-instance-name",
+            "accountId": "************",
+            "cloudTypeId": "AWS",
+            "account": "my-account-name"
+          }
+        ],
+        "totalCount": 2
+      }
+    ]
+  ]
+}
