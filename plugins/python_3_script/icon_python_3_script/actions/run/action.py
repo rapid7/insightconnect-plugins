@@ -1,7 +1,7 @@
 import subprocess  # nosec B404
 import sys
 from pathlib import Path
-from typing import Any, Dict, Union
+from typing import Any, Dict, Optional, Union
 from uuid import uuid4
 
 import insightconnect_plugin_runtime
@@ -31,13 +31,23 @@ class Run(insightconnect_plugin_runtime.Action):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         function_ = params.get(Input.FUNCTION, "")
         input_parameters = params.get(Input.INPUT, {})
+        timeout = params.get(Input.TIMEOUT, DEFAULT_PROCESS_TIMEOUT)
         # END INPUT BINDING - DO NOT REMOVE
 
-        self.logger.info(f"Input: (below)\n\n{params.get(Input.INPUT)}\n")
-        self.logger.info(f"Function: (below)\n\n{params.get(Input.FUNCTION)}\n")
+        if timeout <= 0:
+            raise PluginException(
+                cause="Invalid timeout value specified.",
+                assistance="Please make sure the timeout value is greater than 0 and try again.",
+            )
+
+        self.logger.info(f"Input: (below)\n\n{input_parameters}\n")
+        self.logger.info(f"Function: (below)\n\n{function_}\n")
+        self.logger.info(f"Timeout: {timeout}\n")
 
         try:
-            output = self._execute_function_as_process(function_, input_parameters, self.connection.script_credentials)
+            output = self._execute_function_as_process(
+                function_, input_parameters, self.connection.script_credentials, timeout
+            )
         except Exception as error:
             raise PluginException(cause="Could not run supplied script", data=error) from None
         try:
@@ -70,7 +80,11 @@ class Run(insightconnect_plugin_runtime.Action):
         return locals()[function_name](params.get(Input.INPUT))
 
     def _execute_function_as_process(
-        self, function_: str, parameters: Dict[str, Any], credentials: Dict[str, Any]
+        self,
+        function_: str,
+        parameters: Dict[str, Any],
+        credentials: Dict[str, Any],
+        timeout: Optional[int] = DEFAULT_PROCESS_TIMEOUT,
     ) -> Union[Dict[str, Any], None]:
         """
         Execute a function as a separate process and return its data.
@@ -102,13 +116,13 @@ class Run(insightconnect_plugin_runtime.Action):
                 execution_arguments,
                 shell=False,
                 stderr=subprocess.PIPE,
-                timeout=DEFAULT_PROCESS_TIMEOUT,
+                timeout=timeout * 60,
             )
             return extract_output_from_stdout(output.decode(DEFAULT_ENCODING), execution_id)
         except subprocess.CalledProcessError as error:
             raise PluginException(error.stderr.decode(DEFAULT_ENCODING).replace(execution_id, "")) from None
         except subprocess.TimeoutExpired:
-            raise PluginException(f"Function got timed out after {DEFAULT_PROCESS_TIMEOUT} seconds.") from None
+            raise PluginException(f"Function got timed out after {timeout} minutes.") from None
         finally:
             if execution_file.is_file():
                 execution_file.unlink()
