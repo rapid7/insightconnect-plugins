@@ -2,13 +2,13 @@
 
 [Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.9.19 and its standard library as well as the following 3rd party libraries:
 
-* [requests 2.31.0](https://requests.readthedocs.io/en/latest/)
+* [requests 2.32.2](https://requests.readthedocs.io/en/latest/)
 * [arrow 1.3.0](https://pypi.org/project/arrow/) 
-* [lxml 5.2.2](http://lxml.de/) 
-* [beautifulsoup 4.12.2](https://www.crummy.com/software/BeautifulSoup/) 
-* [pyyaml 6.0.1](http://pyyaml.org/) 
+* [lxml 5.3.0](http://lxml.de/) 
+* [beautifulsoup 4.12.3](https://www.crummy.com/software/BeautifulSoup/) 
+* [pyyaml 6.0.2](http://pyyaml.org/) 
 * [parameterized 0.8.1](https://pypi.org/project/parameterized/) 
-* [setuptools 71.1.0](https://pypi.org/project/setuptools/)
+* [setuptools 75.1.0](https://pypi.org/project/setuptools/)
 * [datetime 5.5](https://pypi.org/project/DateTime/)
 
 The Python 3 Script plugin also allows you to load custom modules via its connection parameters.
@@ -20,11 +20,12 @@ Also, this plugin allows you to provide additional credentials in the connection
 * Run a Python 3 Script to securely orchestrate, automate, and respond to (almost) anything
 
 # Requirements
-
+  
+*This plugin does not contain any requirements.*
 
 # Supported Product Versions
 
-* Python 3.9.19
+* Python 3.9.18
 
 # Documentation
 
@@ -73,6 +74,7 @@ This action is used to run a Python 3 function
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |function|python|def run(params={}):\n    return {}|True|Function definition. Must be named `run`. Accepts the `input` object as params. Returns the dict as output. In this action you can use `username`, `password`, `secret_key` variables if defined in connection|None|def run(params={}):\n\tprint(params.get('some_input'))\n\tprint(username, password)\n\treturn {}|None|None|
 |input|object|None|False|Input object to be passed as `params={}` to the `run` function|None|{"some_input": "example input"}|None|None|
+|timeout|integer|30|False|Timeout (in minutes) for function execution|None|30|None|None|
   
 Example input:
 
@@ -81,7 +83,8 @@ Example input:
   "function": "def run(params={}):\\n    return {}",
   "input": {
     "some_input": "example input"
-  }
+  },
+  "timeout": 30
 }
 ```
 
@@ -117,6 +120,7 @@ Some third-party modules defined in the Modules connection input (such as pandas
 
 # Version History
 
+* 5.1.0 - Action `Run`: Added `timeout` optional parameter | Updated SDK to the latest version
 * 5.0.1 - Updated SDK to the latest version | Initial updates for fedramp compliance
 * 5.0.0 - Updated SDK to the latest version | Removing records as its not maintained | Replacing maya with arrow (maya not maintained)
 * 4.0.10 - Updated the SDK to the latest version | Updated Python version to `3.9.19` | Fixed issue with invalid unicode character

@@ -10,6 +10,7 @@ class Component:
 class Input:
     FUNCTION = "function"
     INPUT = "input"
+    TIMEOUT = "timeout"
 
 
 class Output:
@@ -33,6 +34,13 @@ class RunInput(insightconnect_plugin_runtime.Input):
       "type": "object",
       "description": "Input object to be passed as `params={}` to the `run` function",
       "order": 2
+    },
+    "timeout": {
+      "type": "integer",
+      "title": "Timeout",
+      "description": "Timeout (in minutes) for function execution",
+      "default": 30,
+      "order": 3
     }
   },
   "required": [
