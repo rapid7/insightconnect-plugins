@@ -71,57 +71,57 @@ class TestMonitorAlerts(TestCase):
     def setUp(self) -> None:
         self.task = TaskUtil.default_connector(MonitorAlerts())
 
-    # @parameterized.expand(
-    #     [
-    #         [
-    #             "starting",
-    #             {},
-    #             TaskUtil.load_expected("monitor_alerts"),
-    #             True,
-    #             "monitor_alerts",
-    #             STUB_STATE_MORE_PAGES,
-    #             200,
-    #         ],
-    #         [
-    #             "next_page",
-    #             STUB_STATE_MORE_PAGES.copy(),
-    #             TaskUtil.load_expected("monitor_alert_two"),
-    #             True,
-    #             "monitor_alerts_two",
-    #             STUB_STATE_EXPECTED_SECOND_PAGE,
-    #             200,
-    #         ],
-    #         [
-    #             "final_page",
-    #             STUB_STATE_EXPECTED_SECOND_PAGE.copy(),
-    #             TaskUtil.load_expected("monitor_alerts_empty"),
-    #             False,
-    #             "monitor_alerts_empty",
-    #             STUB_STATE_EXPECTED_NO_PAGE,
-    #             200,
-    #         ],
-    #     ]
-    # )
-    # def test_monitor_alerts_pagination(
-    #     self,
-    #     mock_req: MagicMock,
-    #     test_name: str,
-    #     state: dict,
-    #     expected_output: list,
-    #     expected_has_more_pages: bool,
-    #     response_file: str,
-    #     expected_state: dict,
-    #     expected_status_code: int,
-    # ) -> None:
+    @parameterized.expand(
+        [
+            [
+                "starting",
+                {},
+                TaskUtil.load_expected("monitor_alerts"),
+                True,
+                "monitor_alerts",
+                STUB_STATE_MORE_PAGES,
+                200,
+            ],
+            [
+                "next_page",
+                STUB_STATE_MORE_PAGES.copy(),
+                TaskUtil.load_expected("monitor_alert_two"),
+                True,
+                "monitor_alerts_two",
+                STUB_STATE_EXPECTED_SECOND_PAGE,
+                200,
+            ],
+            [
+                "final_page",
+                STUB_STATE_EXPECTED_SECOND_PAGE.copy(),
+                TaskUtil.load_expected("monitor_alerts_empty"),
+                False,
+                "monitor_alerts_empty",
+                STUB_STATE_EXPECTED_NO_PAGE,
+                200,
+            ],
+        ]
+    )
+    def test_monitor_alerts_pagination(
+        self,
+        mock_req: MagicMock,
+        test_name: str,
+        state: dict,
+        expected_output: list,
+        expected_has_more_pages: bool,
+        response_file: str,
+        expected_state: dict,
+        expected_status_code: int,
+    ) -> None:
 
-    #     mock_req.return_value = mock_conditions(200, file_name=response_file)
+        mock_req.return_value = mock_conditions(200, file_name=response_file)
 
-    #     output, state, has_more_pages, status_code, _ = self.task.run(state=state)
+        output, state, has_more_pages, status_code, _ = self.task.run(state=state)
 
-    #     self.assertEqual(expected_output, output)
-    #     self.assertEqual(expected_has_more_pages, has_more_pages)
-    #     self.assertEqual(expected_state, state)
-    #     self.assertEqual(expected_status_code, status_code)
+        self.assertEqual(expected_output, output)
+        self.assertEqual(expected_has_more_pages, has_more_pages)
+        self.assertEqual(expected_state, state)
+        self.assertEqual(expected_status_code, status_code)
 
     @parameterized.expand(
         [
@@ -153,14 +153,9 @@ class TestMonitorAlerts(TestCase):
                 "error.data is not of type response",
                 STUB_STATE_ERROR,
                 "An error occurred during plugin execution!\n\nFailed to connect to the server. Please check your network connection and try again.",
-                699
+                699,
             ],
-            [
-                "regular exception",
-                STUB_STATE_ERROR,
-                "'list' object has no attribute 'get'",
-                500
-            ],
+            ["regular exception", STUB_STATE_ERROR, "'list' object has no attribute 'get'", 500],
         ]
     )
     def test_monitor_alerts_error_handling(
@@ -171,13 +166,9 @@ class TestMonitorAlerts(TestCase):
         error_msg: Union[str, PluginException],
         error_code: int,
     ) -> None:
-        # breakpoint()
         # This if statement is to handle the "if not type response" statement specifically
         if error_code == 500:
-            if "'list' object" in error_msg:
-                mocked_response = mock_conditions(200, file_name="monitor_alerts_faulty_response")
-            else:
-                mocked_response = mock_conditions(error_code, file_name="500_response")
+            mocked_response = mock_conditions(200, file_name="monitor_alerts_faulty_response")
 
         # This else applies to every other usual exception
         else:
@@ -187,9 +178,9 @@ class TestMonitorAlerts(TestCase):
             mock_req.return_value = mocked_response
         else:
             from requests import ConnectionError
+
             mock_req.side_effect = ConnectionError
             error_code = 500
-            # mock_req.return_value = mocked_response
 
         output, state, has_more_pages, status_code, error = self.task.run(state=input_state)
         self.assertEqual(output, [])
@@ -203,137 +194,136 @@ class TestMonitorAlerts(TestCase):
 
         # For our 'not type response' error, it is just a string
         else:
-            # breakpoint()
             self.assertEqual(error_msg, error.data)
 
         self.assertEqual(False, has_more_pages)
 
-    # @parameterized.expand(
-    #     [
-    #         [
-    #             "Load first",
-    #             STUB_STATE_DEDUPE,
-    #             "monitor_alerts",
-    #             200,
-    #         ]
-    #     ]
-    # )
-    # def test_monitor_alerts_dedupe(
-    #     self,
-    #     mock_req: MagicMock,
-    #     test_name: str,
-    #     input_state: dict,
-    #     response_file: str,
-    #     expected_status_code,
-    # ) -> None:
+    @parameterized.expand(
+        [
+            [
+                "Load first",
+                STUB_STATE_DEDUPE,
+                "monitor_alerts",
+                200,
+            ]
+        ]
+    )
+    def test_monitor_alerts_dedupe(
+        self,
+        mock_req: MagicMock,
+        test_name: str,
+        input_state: dict,
+        response_file: str,
+        expected_status_code,
+    ) -> None:
 
-    #     mock_req.return_value = mock_conditions(200, file_name=response_file)
+        mock_req.return_value = mock_conditions(200, file_name=response_file)
 
-    #     output, state, has_more_pages, status_code, _ = self.task.run(state=input_state)
+        output, state, has_more_pages, status_code, _ = self.task.run(state=input_state)
 
-    #     self.assertEqual(status_code, expected_status_code)
-    #     self.assertEqual(input_state, state)
-    #     self.assertEqual(has_more_pages, True)
-    #     self.assertEqual(output, [])
+        self.assertEqual(status_code, expected_status_code)
+        self.assertEqual(input_state, state)
+        self.assertEqual(has_more_pages, True)
+        self.assertEqual(output, [])
 
-    # @parameterized.expand(
-    #     [
-    #         [
-    #             "custom_config_last_alert_time",
-    #             {},
-    #             TaskUtil.load_expected("monitor_alerts"),
-    #             "monitor_alerts",
-    #             200,
-    #             {
-    #                 "last_alert_time": {
-    #                     "date": {
-    #                         "year": 2024,
-    #                         "month": 8,
-    #                         "day": 1,
-    #                         "hour": 1,
-    #                         "minute": 2,
-    #                         "second": 3,
-    #                         "microsecond": 0,
-    #                     }
-    #                 },
-    #                 "alert_limit": 10,
-    #             },
-    #         ],
-    #         [
-    #             "custom_config_max_alert_time",
-    #             {},
-    #             TaskUtil.load_expected("monitor_alerts"),
-    #             "monitor_alerts",
-    #             200,
-    #             {
-    #                 "max_last_alert_time": {
-    #                     "year": 2024,
-    #                     "month": 8,
-    #                     "day": 2,
-    #                     "hour": 3,
-    #                     "minute": 4,
-    #                     "second": 5,
-    #                     "microsecond": 0,
-    #                 },
-    #                 "alert_limit": 10,
-    #             },
-    #         ],
-    #         [
-    #             "custom_config_comparison_time_exceeds_saved_time",
-    #             STUB_STATE_EXCEED_LOOKBACK,
-    #             TaskUtil.load_expected("monitor_alerts_empty"),
-    #             "monitor_alerts",
-    #             200,
-    #             {
-    #                 "max_last_alert_time": {
-    #                     "year": 2024,
-    #                     "month": 10,
-    #                     "day": 2,
-    #                     "hour": 3,
-    #                     "minute": 4,
-    #                     "second": 5,
-    #                     "microsecond": 0,
-    #                 },
-    #                 "alert_limit": 10,
-    #             },
-    #         ],
-    #         [
-    #             "custom_config_alert_limit_exceeds_100",
-    #             STUB_STATE_EXCEED_LOOKBACK,
-    #             TaskUtil.load_expected("monitor_alerts_empty"),
-    #             "monitor_alerts",
-    #             200,
-    #             {
-    #                 "max_last_alert_time": {
-    #                     "year": 2024,
-    #                     "month": 10,
-    #                     "day": 2,
-    #                     "hour": 3,
-    #                     "minute": 4,
-    #                     "second": 5,
-    #                     "microsecond": 0,
-    #                 },
-    #                 "alert_limit": 101,
-    #             },
-    #         ],
-    #     ]
-    # )
-    # def test_monitor_alerts_custom_config(
-    #     self,
-    #     mock_req: MagicMock,
-    #     test_name: str,
-    #     input_state: dict,
-    #     expected_output: list,
-    #     response_file: str,
-    #     expected_status_code: int,
-    #     custom_config: dict,
-    # ) -> None:
+    @parameterized.expand(
+        [
+            [
+                "custom_config_last_alert_time",
+                {},
+                TaskUtil.load_expected("monitor_alerts"),
+                "monitor_alerts",
+                200,
+                {
+                    "last_alert_time": {
+                        "date": {
+                            "year": 2024,
+                            "month": 8,
+                            "day": 1,
+                            "hour": 1,
+                            "minute": 2,
+                            "second": 3,
+                            "microsecond": 0,
+                        }
+                    },
+                    "alert_limit": 10,
+                },
+            ],
+            [
+                "custom_config_max_alert_time",
+                {},
+                TaskUtil.load_expected("monitor_alerts"),
+                "monitor_alerts",
+                200,
+                {
+                    "max_last_alert_time": {
+                        "year": 2024,
+                        "month": 8,
+                        "day": 2,
+                        "hour": 3,
+                        "minute": 4,
+                        "second": 5,
+                        "microsecond": 0,
+                    },
+                    "alert_limit": 10,
+                },
+            ],
+            [
+                "custom_config_comparison_time_exceeds_saved_time",
+                STUB_STATE_EXCEED_LOOKBACK,
+                TaskUtil.load_expected("monitor_alerts_empty"),
+                "monitor_alerts",
+                200,
+                {
+                    "max_last_alert_time": {
+                        "year": 2024,
+                        "month": 10,
+                        "day": 2,
+                        "hour": 3,
+                        "minute": 4,
+                        "second": 5,
+                        "microsecond": 0,
+                    },
+                    "alert_limit": 10,
+                },
+            ],
+            [
+                "custom_config_alert_limit_exceeds_100",
+                STUB_STATE_EXCEED_LOOKBACK,
+                TaskUtil.load_expected("monitor_alerts_empty"),
+                "monitor_alerts",
+                200,
+                {
+                    "max_last_alert_time": {
+                        "year": 2024,
+                        "month": 10,
+                        "day": 2,
+                        "hour": 3,
+                        "minute": 4,
+                        "second": 5,
+                        "microsecond": 0,
+                    },
+                    "alert_limit": 101,
+                },
+            ],
+        ]
+    )
+    def test_monitor_alerts_custom_config(
+        self,
+        mock_req: MagicMock,
+        test_name: str,
+        input_state: dict,
+        expected_output: list,
+        response_file: str,
+        expected_status_code: int,
+        custom_config: dict,
+    ) -> None:
 
-    #     mock_req.return_value = mock_conditions(200, file_name=response_file)
+        mock_req.return_value = mock_conditions(200, file_name=response_file)
 
-    #     output, state, has_more_pages, status_code, _ = self.task.run(state=input_state, custom_config=custom_config)
+        output, state, has_more_pages, status_code, _ = self.task.run(state=input_state, custom_config=custom_config)
 
-    #     self.assertEqual(output, expected_output)
-    #     self.assertEqual(status_code, expected_status_code)
-    #     self.assertEqual(input_state, state)
-    #     self.assertEqual(has_more_pages, True)
+        self.assertEqual(output, expected_output)
+        self.assertEqual(status_code, expected_status_code)
+        self.assertEqual(input_state, state)
+        self.assertEqual(has_more_pages, True)
