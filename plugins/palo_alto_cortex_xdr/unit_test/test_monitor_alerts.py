@@ -54,6 +54,16 @@ STUB_STATE_DEDUPE = {
     "last_alert_hash": ["a502a9c50798186882ad8dc91ac2b38eb185c404"],
 }
 
+STUB_STATE_EXCEED_LOOKBACK = {
+    "current_count": 1,
+    "last_search_to": 100,
+    "last_search_from": 0,
+    "query_start_time": 1706453160000,
+    "query_end_time": 1706539560000,
+    "last_alert_time": 1706540499609,
+    "last_alert_hash": ["a502a9c50798186882ad8dc91ac2b38eb185c404"],
+}
+
 
 @freeze_time("2024-01-29T15:01:00.000000Z")
 @patch("requests.Session.send")
@@ -189,7 +199,108 @@ class TestMonitorAlerts(TestCase):
         self.assertEqual(has_more_pages, True)
         self.assertEqual(output, [])
 
+    @parameterized.expand(
+        [
+            [
+                "custom_config_last_alert_time",
+                {},
+                TaskUtil.load_expected("monitor_alerts"),
+                "monitor_alerts",
+                200,
+                {
+                    "last_alert_time": {
+                        "date": {
+                            "year": 2024,
+                            "month": 8,
+                            "day": 1,
+                            "hour": 1,
+                            "minute": 2,
+                            "second": 3,
+                            "microsecond": 0,
+                        }
+                    },
+                    "alert_limit": 10,
+                },
+            ],
+            [
+                "custom_config_max_alert_time",
+                {},
+                TaskUtil.load_expected("monitor_alerts"),
+                "monitor_alerts",
+                200,
+                {
+                    "max_last_alert_time": {
+                        "year": 2024,
+                        "month": 8,
+                        "day": 2,
+                        "hour": 3,
+                        "minute": 4,
+                        "second": 5,
+                        "microsecond": 0,
+                    },
+                    "alert_limit": 10,
+                },
+            ],
+            [
+                "custom_config_comparison_time_exceeds_saved_time",
+                STUB_STATE_EXCEED_LOOKBACK,
+                TaskUtil.load_expected("monitor_alerts_empty"),
+                "monitor_alerts",
+                200,
+                {
+                    "max_last_alert_time": {
+                        "year": 2024,
+                        "month": 10,
+                        "day": 2,
+                        "hour": 3,
+                        "minute": 4,
+                        "second": 5,
+                        "microsecond": 0,
+                    },
+                    "alert_limit": 10,
+                },
+            ],
+            [
+                "custom_config_alert_limit_exceeds_100",
+                STUB_STATE_EXCEED_LOOKBACK,
+                TaskUtil.load_expected("monitor_alerts_empty"),
+                "monitor_alerts",
+                200,
+                {
+                    "max_last_alert_time": {
+                        "year": 2024,
+                        "month": 10,
+                        "day": 2,
+                        "hour": 3,
+                        "minute": 4,
+                        "second": 5,
+                        "microsecond": 0,
+                    },
+                    "alert_limit": 101,
+                },
+            ],
+        ]
+    )
+    def test_monitor_alerts_custom_config(
+        self,
+        mock_req: MagicMock,
+        test_name: str,
+        input_state: dict,
+        expected_output: list,
+        response_file: str,
+        expected_status_code: int,
+        custom_config: dict,
+    ) -> None:
+
+        mock_req.return_value = mock_conditions(200, file_name=response_file)
+
+        output, state, has_more_pages, status_code, _ = self.task.run(state=input_state, custom_config=custom_config)
+
+        self.assertEqual(output, expected_output)
+        self.assertEqual(status_code, expected_status_code)
+        self.assertEqual(input_state, state)
+        self.assertEqual(has_more_pages, True)
+
     # TODO - Add test for handle 401 functionality
-    # Custom config
     # Regular Exception
     # Error where error.data is not of type Response
