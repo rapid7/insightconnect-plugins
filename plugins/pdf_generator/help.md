@@ -31,9 +31,9 @@ This action is used to generate a PDF from a text input
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|text|string|None|True|Text input|None|example|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|text|string|None|True|Text input|None|example|None|None|
   
 Example input:
 
@@ -69,10 +69,11 @@ Example output:
 
 ## Troubleshooting
   
-*There is no troubleshooting for this plugin.*
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 1.0.6 - Bumping requirements.txt | SDK Bump
 * 1.0.5 - Pin additional version dependency
 * 1.0.4 - Update SDK | Update vulnerable libraries
 * 1.0.3 - Change library to generate PDF

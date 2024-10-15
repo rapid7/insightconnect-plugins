@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="pdf_generator-rapid7-plugin",
-      version="1.0.5",
+      version="1.0.6",
       description="The PDF Generator plugin creates a PDF from user provided data",
       author="rapid7",
       author_email="",
