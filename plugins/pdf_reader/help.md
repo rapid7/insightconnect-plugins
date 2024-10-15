@@ -2,7 +2,7 @@
 
 PDF Reader is a plugin for extracting text from a PDF file. 
 
-This plugin utilizes a Python package called [pdfplumber](https://pypi.org/project/pdfplumber/).
+This plugin utilizes a Python package called [pdfplumber](https://pypi.org/project/pdfplumber/)
 
 # Key Features
 
