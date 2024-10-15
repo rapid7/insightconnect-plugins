@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: pdf_reader
 title: PDF Reader
-description: Tools for extracting text from a PDF
+description: PDF Reader is a plugin for extracting text from a PDF file. This plugin utilizes a Python package called [pdfplumber](https://pypi.org/project/pdfplumber/).
 version: 1.0.4
 connection_version: 1
 vendor: rapid7
@@ -34,8 +34,6 @@ version_history:
   - "0.1.0 - Initial plugin"
 key_features:
   - "Extract text from a PDF document"
-requirements:
-  - "This Plugin does not contain any requirements."
 links:
   - "This plugin is based on pdfplumber. [pdfplumber](https://pypi.org/project/pdfplumber/)"
 references:
