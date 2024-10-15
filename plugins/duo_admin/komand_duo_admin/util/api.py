@@ -59,7 +59,7 @@ class DuoAdminAPI:
         self.toggle_rate_limiting = True
 
     def _get_hostname(self, hostname):
-        return hostname.replace("https://", "").replace("http://", "")
+        return hostnamex.replace("https://", "").replace("http://", "")
 
     def add_user(self, params: dict) -> dict:
         return self.make_json_request(method="POST", path=USERS_ENDPOINT, params=params)
