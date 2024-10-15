@@ -62,8 +62,6 @@ class MockResponse:
     def json(self):
         if self.filename == "empty_response":
             return {}
-        elif self.filename == "500_response":
-            return {"there is an error": "the error is 500"}
 
         with open(
             os.path.join(os.path.dirname(os.path.realpath(__file__)), f"responses/{self.filename}.json.resp")
