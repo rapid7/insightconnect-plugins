@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name="pdf_reader-rapid7-plugin",
-      version="1.0.3",
-      description="Tools for extracting text from a PDF",
+      version="1.0.4",
+      description="PDF Reader is a plugin for extracting text from a PDF file. This plugin utilizes a Python package called [pdfplumber](https://pypi.org/project/pdfplumber/)",
       author="rapid7",
       author_email="",
       url="",
