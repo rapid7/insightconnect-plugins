@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "PDF Reader"
 Vendor = "rapid7"
-Version = "1.0.3"
+Version = "1.0.4"
 Description = "Tools for extracting text from a PDF"
 
 
