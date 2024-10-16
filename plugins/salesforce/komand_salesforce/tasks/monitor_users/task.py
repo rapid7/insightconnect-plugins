@@ -6,6 +6,7 @@ from .schema import MonitorUsersInput, MonitorUsersOutput, MonitorUsersState, Co
 from datetime import datetime, timedelta, timezone
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_salesforce.util.exceptions import ApiException
+from typing import Tuple
 
 DEFAULT_CUTOFF_HOURS = 24 * 7
 INITIAL_LOOKBACK = 24
@@ -234,7 +235,7 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
             )
         return new_ts
 
-    def _get_timings(self, now: datetime, custom_config: dict, state: dict) -> (datetime, datetime):
+    def _get_timings(self, now: datetime, custom_config: dict, state: dict) -> Tuple[datetime, datetime]:
         """
         If custom_config values have been passed to the task use these to calculate lookback and cut off
         values otherwise default to a lookback and cut off being 24 hours.
