@@ -84,7 +84,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 existing_state,
                 False,
                 500,
-                PluginException(preset=PluginException.Preset.UNKNOWN, data=error.data),
+                PluginException(preset=PluginException.Preset.UNKNOWN, data=error),
             )
 
     ###########################

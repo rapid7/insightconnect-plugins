@@ -50,15 +50,9 @@ def mock_conditions(url: str, status_code: int) -> MockResponse:
         return MockResponse("start_xql_query", status_code)
     if url == STUB_URL + "public_api/v1/xql/get_query_results/":
         return MockResponse("get_query_results", status_code)
-    if url == STUB_URL + "/public_api/v1/alerts/get_alerts":
-        return MockResponse("monitor_alerts", status_code)
-    if url == "task":
-        return MockResponse("monitor_alerts", status_code)
 
 
 def mock_request_200(*args, **kwargs) -> MockResponse:
-    if kwargs.get("verify", {}):
-        return mock_conditions("task", 200)
     return mock_conditions(kwargs.get("url"), 200)
 
 
