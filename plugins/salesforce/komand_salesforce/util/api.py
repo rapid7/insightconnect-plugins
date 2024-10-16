@@ -368,11 +368,18 @@ class SalesforceAPI:
                     401,
                 )
             if error_desc:
-                return (
-                    f"Salesforce error: '{error_desc}'",
-                    PluginException.assistances[PluginException.Preset.UNKNOWN],
-                    "",
-                )
+                if "retry your request" in error_desc:
+                    return (
+                        f"Salesforce error: '{error_desc}'",
+                        PluginException.assistances[PluginException.Preset.UNAUTHORIZED],
+                        500,
+                    )
+                else:
+                    return (
+                        f"Salesforce error: '{error_desc}'",
+                        PluginException.assistances[PluginException.Preset.UNKNOWN],
+                        "",
+                    )
         except JSONDecodeError:
             pass
 
