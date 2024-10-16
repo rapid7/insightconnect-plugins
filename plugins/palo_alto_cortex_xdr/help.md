@@ -927,6 +927,7 @@ Isolate Endpoint fails with 500 error - This will happen if an isolation action 
 
 # Version History
 
+* 4.0.2 - SDK bump to 6.1.4
 * 4.0.1 - SDK Bump to 6.1.3
 * 4.0.0 - `Get Alerts`: Fixed issue where trigger was failing due to empty and different typed output fields - updated to generic object | Added Monitor_alert tasks | SDK Bump to 6.1.2
 * 3.0.0 - Updated `hosts` output of `Get Incident` trigger and `Monitor Incident Events` task to separate host values | Update `insightconnect-plugin-runtime` to version 5
