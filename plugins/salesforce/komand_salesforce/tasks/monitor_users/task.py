@@ -6,7 +6,6 @@ from .schema import MonitorUsersInput, MonitorUsersOutput, MonitorUsersState, Co
 from datetime import datetime, timedelta, timezone
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_salesforce.util.exceptions import ApiException
-from typing import Tuple
 
 DEFAULT_CUTOFF_HOURS = 24 * 7
 INITIAL_LOOKBACK = 24
