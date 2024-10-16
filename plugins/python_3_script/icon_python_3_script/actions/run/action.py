@@ -122,7 +122,7 @@ class Run(insightconnect_plugin_runtime.Action):
         except subprocess.CalledProcessError as error:
             raise PluginException(error.stderr.decode(DEFAULT_ENCODING).replace(execution_id, "")) from None
         except subprocess.TimeoutExpired:
-            raise PluginException(f"Function got timed out after {timeout} minutes.") from None
+            raise PluginException(f"Function timed out after {timeout} minutes.") from None
         finally:
             if execution_file.is_file():
                 execution_file.unlink()
