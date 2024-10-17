@@ -11,6 +11,7 @@
 * For local Orchestrator execution, ensure connectivity to any network resources the script will use
 * For remote server execution, a PowerShell-enabled server and administrative credentials
 * When adding a password for the script, try to avoid special or escape characters such as single or double quotes
+* Round Robin is not supported
 
 # Supported Product Versions
 
@@ -152,6 +153,8 @@ Example output:
 
 ## Troubleshooting
 
+Round Robin is not supported
+
 If Auth Type is set to "None" the PowerShell script will execute locally on the Komand host.
 This can also by accomplished by leaving the address field blank.
 
@@ -196,7 +199,8 @@ Invoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw
 
 # Version History
 
-* 3.0.4 - Upgrade user from `nobody` to `root` | bump SDK to 6.1.0 | Add in the realm package
+* 3.0.5 - Bump requirements.txt | Bump SDK to 6.1.4 | Update help.md to enforce 'Round Robin' is not supported
+* 3.0.4 - Upgrade user from `nobody` to `root` | bump SDK to 6.0.1 and switch back to `Bullseye` based SDK image
 * 3.0.3 - Fix decoding error in `Execute Script` action | Update SDK | Update packages for alpine image
 * 3.0.2 - Updated the SDK version to include output masking | Updated all the dependencies to the newest versions
 * 3.0.1 - Bug fix - Fix issue where single quotes in password causes parsing error
