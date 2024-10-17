@@ -440,6 +440,7 @@ Example output:
 
 # Version History
 
+* 2.2.7 - Restrain the observability window to a configurable amount if data collection falls behind
 * 2.2.6 - Update SDK to 6.1.4
 * 2.2.5 - To split the PAGE_SIZE limit into ALERT_PAGE_SIZE and OBSERVATION_PAGE_SIZE
 * 2.2.4 - Add new connection tests for tasks | Update SDK to 6.1.0
