@@ -1,0 +1,14 @@
+
+{
+  "clientId": "retry-request",
+  "clientSecret": {
+    "secretKey": "example-secret-key"
+  },
+  "salesforceAccountUsernameAndPassword": {
+    "username": "example-username",
+    "password": "example-password"
+  },
+  "securityToken": {
+    "secretKey": "example-secret-key"
+  }
+}

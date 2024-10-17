@@ -52,7 +52,7 @@ class Util:
                     if filename == "bytes":
                         self.content = b"test"
                     else:
-                        file_content = Util.read_file_to_string(f"responses/{filename}")
+                        file_content = Util.read_file_to_string(f"responses/{filename}.json.resp")
                         self.text = file_content
                         self.content = f"{file_content}".encode()
 
@@ -66,14 +66,16 @@ class Util:
 
         if url == "https://login.salesforce.com/services/oauth2/token":
             if data.get("client_id") == "invalid-client-id":
-                return MockResponse(400, "invalid_grant.json.resp")  # returns 400 when failing to get a token.
+                return MockResponse(400, "invalid_grant")  # returns 400 when failing to get a token.
             if data.get("client_id") == "valid-id-bad-endpoint":
                 return MockResponse(503)
             if data.get("client_id") == "invalid-id-for-connection":
-                return MockResponse(400, "invalid_client_id.json.resp")
-            return MockResponse(200, "get_token.json.resp")
+                return MockResponse(400, "invalid_client_id")
+            if data.get("client_id") == "retry-request":
+                return MockResponse(400, "retry_request")
+            return MockResponse(200, "get_token")
         if url == "https://example.com/services/data/":
-            return MockResponse(200, "get_version.json.resp")
+            return MockResponse(200, "get_version")
 
         if method == "POST":
             if url == "https://example.com/services/data/v58.0/sobjects/Topic":
@@ -83,9 +85,9 @@ class Util:
             if url == "https://example.com/services/data/v58.0/sobjects/invalid_object_name":
                 return MockResponse(404)
             if url == "https://example.com/services/data/v58.0/sobjects/Account":
-                return MockResponse(201, "create_record_success_account.json.resp")
+                return MockResponse(201, "create_record_success_account")
             if url == "https://example.com/services/data/v58.0/sobjects/Document":
-                return MockResponse(201, "create_record_success_document.json.resp")
+                return MockResponse(201, "create_record_success_document")
 
         if method == "DELETE":
             if url == "https://example.com/services/data/v58.0/sobjects/invalid_object_name/100AA000000aa0aAAA":
@@ -110,11 +112,11 @@ class Util:
                 # all of these query until now - just check the start parameter to determine the mocked resp
                 params_start = params.get("start")
                 if params_start == "2023-07-20T16:10:15.340+00:00":
-                    return MockResponse(200, "get_updated_users_empty.json.resp")
+                    return MockResponse(200, "get_updated_users_empty")
                 elif params_start == "invalid":
                     return MockResponse(400)
                 else:
-                    return MockResponse(200, "get_updated_users.json.resp")
+                    return MockResponse(200, "get_updated_users")
             if url == "https://example.com/services/data/v58.0/sobjects/Document/invalid/body":
                 return MockResponse(404)
             if url == "https://example.com/services/data/v58.0/sobjects/Invalid/015Hn000002ge67890/body":
@@ -131,11 +133,11 @@ class Util:
                 return MockResponse(404)
             if url == "https://example.com/services/data/v58.0/sobjects/Account/001Hn00001uLl12345":
                 if params == {"fields": "Id,Name,Description"}:
-                    return MockResponse(200, "get_fields_1.json.resp")
+                    return MockResponse(200, "get_fields_1")
                 if params == {"fields": "Name"}:
-                    return MockResponse(200, "get_fields_2.json.resp")
+                    return MockResponse(200, "get_fields_2")
                 if params == {"fields": "id,Name,deScription,ParentId"}:
-                    return MockResponse(200, "get_fields_3.json.resp")
+                    return MockResponse(200, "get_fields_3")
                 if params == {"fields": "invalid"}:
                     return MockResponse(400)
             if url == "https://example.com/services/data/v58.0/query":
@@ -146,7 +148,7 @@ class Util:
                         params_q
                         == "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard' AND LastModifiedDate >= 2023-07-20T16:10:15.340262+00:00 AND LastModifiedDate < 2023-07-20T16:21:15.340262+00:00"
                     ):
-                        return MockResponse(200, "get_specific_user_empty.json.resp")
+                        return MockResponse(200, "get_specific_user_empty")
                     if (
                         params_q
                         == "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard' AND LastModifiedDate >= invalid AND LastModifiedDate < 2023-07-20T16:21:15.340262+00:00"
@@ -156,39 +158,39 @@ class Util:
                         params_q
                         == "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard'"
                     ):
-                        return MockResponse(200, "get_users.json.resp")
-                    return MockResponse(200, "get_specific_user.json.resp")
+                        return MockResponse(200, "get_users")
+                    return MockResponse(200, "get_specific_user")
                 if params_db_table == "LoginHistory":
                     if (
                         params_q
                         == "SELECT LoginTime, UserId, LoginType, LoginUrl, SourceIp, Status, Application, Browser FROM LoginHistory WHERE LoginTime >= 2023-07-20T14:21:15.340262+00:00 AND LoginTime < 2023-07-20T16:21:15.340262+00:00"
                     ):
-                        return MockResponse(200, "get_login_history_empty.json.resp")
-                    return MockResponse(200, "get_login_history.json.resp")
+                        return MockResponse(200, "get_login_history_empty")
+                    return MockResponse(200, "get_login_history")
                 if params == {"q": "SELECT FIELDS(STANDARD) FROM Folder"}:
-                    return MockResponse(200, "advanced_search_all.json.resp")
+                    return MockResponse(200, "advanced_search_all")
                 if params == {"q": "SELECT FIELDS(STANDARD) FROM Account WHERE Name='Example Account'"}:
-                    return MockResponse(200, "advanced_search_by_name.json.resp")
+                    return MockResponse(200, "advanced_search_by_name")
                 if params == {"q": "SELECT FIELDS(STANDARD) FROM Account WHERE Name='Test'"}:
-                    return MockResponse(200, "advanced_search_first_page.json.resp")
+                    return MockResponse(200, "advanced_search_first_page")
                 if params == {"q": "SELECT FIELDS(STANDARD) FROM Account WHERE Name='Empty'"}:
-                    return MockResponse(200, "advanced_search_empty.json.resp")
+                    return MockResponse(200, "advanced_search_empty")
                 if params == {"q": "SELECT LastName FROM Contact LIMIT=10"}:
                     return MockResponse(400)
             if url == "https://example.com/services/data/v58.0/query/01gRO0000012345678-500":
-                return MockResponse(200, "advanced_search_second_page.json.resp")
+                return MockResponse(200, "advanced_search_second_page")
             if url == "https://example.com/services/data/v58.0/query/01gRO0000087654321-500":
-                return MockResponse(200, "get_users_next_page.json.resp")
+                return MockResponse(200, "get_users_next_page")
             if url == "https://example.com/services/data/v58.0/query/02cS10000087654321-500":
-                return MockResponse(200, "get_login_history_next_page.json.resp")
+                return MockResponse(200, "get_login_history_next_page")
 
             if url == "https://example.com/services/data/v58.0/parameterizedSearch":
                 if params.get("q") == "test":
-                    return MockResponse(200, "simple_search_valid_text.json.resp")
+                    return MockResponse(200, "simple_search_valid_text")
                 if params.get("q") == "":
                     return MockResponse(400)
             if url == "https://example.com/services/data/v58.0/sobjects/Folder/00lHn000002nFolder":
-                return MockResponse(200, "get_record_valid.json.resp")
+                return MockResponse(200, "get_record_valid")
             if url == "https://example.com/services/data/v58.0/sobjects/Folder/NOT_FOUND/00lHn00000not_found":
                 return MockResponse(404)
 

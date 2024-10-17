@@ -60,6 +60,12 @@ class TestConnection(TestCase):
                 "Salesforce error: 'Invalid client ID supplied.'",
                 PluginException.assistances[PluginException.Preset.INVALID_CREDENTIALS],
             ],
+            [
+                "retry_your_request",
+                Util.read_file_to_dict("inputs/connection_retry_request.json.inp"),
+                "Salesforce error: 'retry your request'",
+                PluginException.assistances[PluginException.Preset.UNKNOWN],
+            ],
         ]
     )
     def test_connection_raise_exception(
