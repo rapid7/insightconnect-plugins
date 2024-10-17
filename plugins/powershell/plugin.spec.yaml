@@ -12,7 +12,7 @@ requirements:
   - "For local Orchestrator execution, ensure connectivity to any network resources the script will use"
   - "For remote server execution, a PowerShell-enabled server and administrative credentials"
   - "When adding a password for the script, try to avoid special or escape characters such as single or double quotes"
-  - "Round Robin is not supported"
+  - "Currently we do not support the use of round-robin DNS lookups"
 sdk:
   type: slim
   version: 6.1.4
@@ -28,7 +28,7 @@ supported_versions: ["PowerShell 6.1.2"]
 vendor: rapid7
 support: community
 status: []
-troubleshooting: "Round Robin is not supported"
+troubleshooting: "Currently we do not support the use of round-robin DNS lookups"
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/powershell
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -42,7 +42,7 @@ hub_tags:
   keywords: [powershell, microsoft]
   features: []
 version_history:
-  - "3.0.5 - Bump requirements.txt | Bump SDK to 6.1.4 | Update help.md to enforce 'Round Robin' is not supported"
+  - "3.0.5 - Bump requirements.txt | Bump SDK to 6.1.4 | Update help.md to enforce 'round-robin' is currently not supported"
   - "3.0.4 - Upgrade user from `nobody` to `root` | bump SDK to 6.0.1 and switch back to `Bullseye` based SDK image" 
   - "3.0.3 - Fix decoding error in `Execute Script` action | Update SDK | Update packages for alpine image"
   - "3.0.2 - Updated the SDK version to include output masking | Updated all the dependencies to the newest versions"
