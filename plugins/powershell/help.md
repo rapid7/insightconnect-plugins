@@ -11,7 +11,7 @@
 * For local Orchestrator execution, ensure connectivity to any network resources the script will use
 * For remote server execution, a PowerShell-enabled server and administrative credentials
 * When adding a password for the script, try to avoid special or escape characters such as single or double quotes
-* Currently we do not support the use of round-robin DNS lookups
+* The use of round-robin DNS lookups is not supported
 
 # Supported Product Versions
 
@@ -153,6 +153,8 @@ Example output:
 
 ## Troubleshooting
 
+The use of round-robin DNS lookups is not supported
+
 Currently we do not support the use of round-robin DNS lookups.
 
 If Auth Type is set to "None" the PowerShell script will execute locally on the Komand host.
@@ -199,7 +201,7 @@ Invoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw
 
 # Version History
 
-* 3.0.5 - Bump requirements.txt | Bump SDK to 6.1.4 | Update help.md to enforce 'round-robin' is currently not supported
+* 3.0.5 - Bump requirements.txt | Bump SDK to 6.1.4 | Update help.md to enforce that the use of round-robin DNS lookups is not supported
 * 3.0.4 - Upgrade user from `nobody` to `root` | bump SDK to 6.0.1 and switch back to `Bullseye` based SDK image
 * 3.0.3 - Fix decoding error in `Execute Script` action | Update SDK | Update packages for alpine image
 * 3.0.2 - Updated the SDK version to include output masking | Updated all the dependencies to the newest versions
