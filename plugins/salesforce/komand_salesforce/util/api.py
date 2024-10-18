@@ -225,6 +225,7 @@ class SalesforceAPI:
                     return self._get_token(client_id, client_secret, username, password, security_token, oauth_url)
                 else:
                     self.logger.error(f"SalesforceAPI: Max retry attempts reached ({self.retry_count}). Exiting...")
+                    self.logger.error(f"SalesforceAPI: Unknown error occured after 2 retry attempts: {cause_error}")
                     preset_error = "" if cause_error else PluginException.Preset.UNKNOWN
 
             # reset counter back to 1 so the next task execution can try again - some errors could've persisted for
@@ -344,7 +345,7 @@ class SalesforceAPI:
         """
         self.token = None
 
-    def get_error(self, response: str) -> Tuple[str, str, Any]:
+    def get_error(self, response: str) -> Tuple[str, str, int]:
         """
         Small helper method that takes Salesforce content response and attempts to reflect the best error message
         back to the customer on the UI. First check for invalid credential inputs which we know the error values,
@@ -367,10 +368,11 @@ class SalesforceAPI:
                     401,
                 )
             if error_desc:
-                status_code = ""
+                status_code = 0
                 if "retry your request" in error_desc:
                     status_code = 500
                     self.logger.info("Salesforce has hit an unhandled exception for retrieving an oAuth token")
+
                 return (
                     f"Salesforce error: '{error_desc}'",
                     PluginException.assistances[PluginException.Preset.UNKNOWN],
@@ -380,4 +382,4 @@ class SalesforceAPI:
         except JSONDecodeError:
             pass
 
-        return "", "", ""
+        return "", "", 0
