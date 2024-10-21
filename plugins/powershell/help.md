@@ -155,8 +155,6 @@ Example output:
 
 The use of round-robin DNS lookups is not supported
 
-Currently we do not support the use of round-robin DNS lookups.
-
 If Auth Type is set to "None" the PowerShell script will execute locally on the Komand host.
 This can also by accomplished by leaving the address field blank.
 
