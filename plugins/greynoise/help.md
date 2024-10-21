@@ -5,7 +5,7 @@ opportunistic internet scanning or common business services, not targeted threat
 on what matters most.  The GreyNoise Plugin provides users with context on an IP address around the activity
 GreyNoise has observed.
 
-More information can be found at [greynoise.io/tech](https://greynoise.io/tech)
+More information can be found at [https://greynoise.io/why-greynoise](https://greynoise.io/why-greynoise)
 
 # Key Features
 

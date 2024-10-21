@@ -7,7 +7,7 @@ vendor: greynoise
 support: partner
 status: []
 description: GreyNoise helps analysts recognize events not worth their attention. Indicators in GreyNoise are likely associated with opportunistic internet scanning or common business services, not targeted threats. This context helps analysts focus on what matters most
-version: 1.0.1
+version: 1.1.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/greynoise
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -74,6 +74,47 @@ types:
       type: boolean
       description: TOR
       required: false
+    sensor_count:
+      title: Sensor Count
+      type: integer
+      description: Count of Sensors that observed traffic from this IP
+      required: false
+    sensor_hits:
+      title: Sensor Hits
+      type: integer
+      description: Count of Sensor events observed from this IP
+      required: false
+    destination_countries:
+      title: Destination Countries
+      type: "[]string"
+      description: List of countries with GreyNoise sensors that observed this IP
+      required: false
+    destination_country_codes:
+      title: Destination Country Codes
+      type: "[]string"
+      description: List of countries (by code) with GreyNoise sensors that observed this IP
+      required: false
+    source_country:
+      title: Source Country
+      type: string
+      description: Source country where this IP is located
+      required: false
+    source_country_code:
+      title: Source Country Code
+      type: string
+      description:  Source country (by code) where this IP is located
+      required: false
+  web:
+    useragents:
+      title: "User Agents"
+      type: "[]string"
+      description: "User Agents"
+      required: false
+    paths:
+      title: "User Agents"
+      type: "[]string"
+      description: "User Agents"
+      required: false
   scan:
     port:
       title: "Port"
@@ -85,15 +126,37 @@ types:
       type: string
       description: "Protocol"
       required: false
+  hassh:
+    port:
+      title: "Port"
+      type: integer
+      description: "Port"
+      required: false
+    fingerprint:
+      title: "Fingerprint"
+      type: string
+      description: "Fingerprint"
+      required: false
+  ja3:
+    port:
+      title: "Port"
+      type: integer
+      description: "Port"
+      required: false
+    fingerprint:
+      title: "Fingerprint"
+      type: string
+      description: "Fingerprint"
+      required: false
   raw_data:
     hassh:
       title: "HASSH"
-      type: "[]object"
+      type: "[]hassh"
       description: "HASSH"
       required: false
     ja3:
       title: "JA3"
-      type: "[]object"
+      type: "[]ja3"
       description: "Ja3"
       required: false
     scan:
@@ -103,7 +166,7 @@ types:
       required: false
     web:
       title: "Web"
-      type: object
+      type: web
       description: "Web"
       required: false
   data:
@@ -322,6 +385,11 @@ actions:
         description: Additional reference information
         type: string
         required: false
+      trust_level:
+        title: GreyNoise RIOT Trust Level
+        description: IP Trust Level information
+        type: string
+        required: false
       viz_url:
         title: GreyNoise Visualizer Link
         type: string
@@ -413,7 +481,7 @@ actions:
         description: Query in GreyNoise Query Language (GNQL) Syntax
         type: string
         required: true
-        example: "last_seen:1d"
+        example: "last_seen:1d classification:'malicious' metadata.asn:'AS8452'"
       size:
         title: Max Size
         description: Max Number of IPs to Return Data For
@@ -423,24 +491,24 @@ actions:
         example: "10"
     output:
       complete:
-        title: GreyNoise Query
+        title: GreyNoise Complete Flag
         type: boolean
-        description: GreyNoise Query Completed
+        description: Indicates if all pages of the query have been returned by the API
         required: false
       count:
         title: GreyNoise Count
         type: integer
-        description: Count of IPs In Query
+        description: Total count of IPs returned Query
         required: false
       data:
         title: GreyNoise Query Data
         type: "[]data"
-        description: GreyNoise Query Data
+        description: GreyNoise Data Object, Contains IP Object for each IP returned by the query
         required: false
       message:
         title: GreyNoise Query Message
         type: string
-        description: GreyNoise Query Message
+        description: GreyNoise Query Message, indicates if there were issues with the query
         required: false
       query:
         title: GreyNoise Query
