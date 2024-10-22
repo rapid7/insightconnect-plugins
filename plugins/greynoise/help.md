@@ -3,22 +3,26 @@
 GreyNoise helps analysts recognize events not worth their attention. Indicators in GreyNoise are likely associated with opportunistic internet scanning or common business services, not targeted threats. This context helps analysts focus on what matters most
 
 # Key Features
-  
-*This plugin does not contain any key features.*
+
+* Perform a GreyNoise IP Context Lookup
+* Perform a GreyNoise IP Quick Lookup
+* Perform a GreyNoise IP RIOT Lookup
+* Query for additional Tag details
+* Perform a GreyNoise Community IP Lookup
 
 # Requirements
-  
-*This plugin does not contain any requirements.*
+
+* A GreyNoise API key
 
 # Supported Product Versions
-  
-*This plugin does not contain any supported product versions.*
+
+* GreyNoise API v1/2/3
 
 # Documentation
 
 ## Setup
 
-The connection configuration accepts the following parameters:  
+The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -46,7 +50,7 @@ This action is used to query a routable IPv4 address in the GreyNoise Community 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |ip_address|string|None|True|Routable IPv4 address to query|None|1.2.3.4|None|None|
-  
+
 Example input:
 
 ```
@@ -59,25 +63,25 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|classification|string|False|GreyNoise Classification|None|
-|ip|string|False|Value that was Queried|None|
-|last_seen|string|False|Last Seen By GreyNoise|None|
-|link|string|False|Link to GreyNoise Visualizer for IP Details|None|
-|message|string|False|GreyNoise Community API Status Message|None|
-|name|string|False|GreyNoise Actor or Service Name Associated with IP|None|
-|noise|boolean|False|Defines if IP is Internet Noise|None|
-|riot|boolean|False|Defines if IP is part of GreyNoise RIOT dataset|None|
-  
+|classification|string|False|GreyNoise Classification|benign|
+|ip|string|False|Value that was Queried|1.2.3.4|
+|last_seen|string|False|Last Seen By GreyNoise|2024-01-01|
+|link|string|False|Link to GreyNoise Visualizer for IP Details|https://viz.greynoise.io/ip/1.1.1.1|
+|message|string|False|GreyNoise Community API Status Message|IP found|
+|name|string|False|GreyNoise Actor or Service Name Associated with IP|Acme Inc.|
+|noise|boolean|False|Defines if IP is Internet Noise|True|
+|riot|boolean|False|Defines if IP is part of GreyNoise RIOT dataset|True|
+
 Example output:
 
 ```
 {
-  "classification": "",
-  "ip": "",
-  "last_seen": "",
-  "link": "",
-  "message": "",
-  "name": "",
+  "classification": "benign",
+  "ip": "1.2.3.4",
+  "last_seen": "2024-01-01",
+  "link": "https://viz.greynoise.io/ip/1.1.1.1",
+  "message": "IP found",
+  "name": "Acme Inc.",
   "noise": true,
   "riot": true
 }
@@ -92,7 +96,7 @@ This action is used to query a routable IPv4 address in the GreyNoise Context AP
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |ip_address|string|None|True|Routable IPv4 address to query|None|1.2.3.4|None|None|
-  
+
 Example input:
 
 ```
@@ -105,35 +109,36 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|actor|string|False|GreyNoise Actor Associated with IP|None|
-|bot|boolean|False|GreyNoise has identified this as a Bot|None|
-|classification|string|False|GreyNoise Classification|None|
-|cve|[]string|False|CVEs associated with GreyNoise Tags|None|
-|first_seen|date|False|First Seen By GreyNoise|None|
-|ip|string|False|Value that was Queried|None|
-|last_seen|string|False|Last Seen By GreyNoise|None|
+|actor|string|False|GreyNoise Actor Associated with IP|Acme, Inc|
+|bot|boolean|False|GreyNoise has identified this as a Bot|False|
+|classification|string|False|GreyNoise Classification|malicious|
+|cve|[]string|False|CVEs associated with GreyNoise Tags|["CVE-1111-1111", "CVE-2222-2222"]|
+|first_seen|date|False|First Seen By GreyNoise|2024-01-01|
+|ip|string|False|Value that was Queried|1.2.3.4|
+|last_seen|string|False|Last Seen By GreyNoise|2024-01-01|
 |metadata|metadata|False|GreyNoise IP Metadata|None|
 |raw_data|raw_data|False|GreyNoise IP Raw Data|None|
-|seen|boolean|False|Has this IP been Seen by GreyNoise|None|
-|spoofable|boolean|False|IP address may be spoofed|None|
-|tags|[]string|False|GreyNoise Tags Associated with IP|None|
-|viz_url|string|False|Link to GreyNoise Visualizer for IP Details|None|
-|vpn|boolean|False|GreyNoise has identified this as a VPN|None|
-|vpn_service|string|False|Name of VPN Service|None|
-  
+|seen|boolean|False|Has this IP been Seen by GreyNoise|True|
+|spoofable|boolean|False|IP address may be spoofed|False|
+|tags|[]string|False|GreyNoise Tags Associated with IP|Tag 1, Tag2|
+|viz_url|string|False|Link to GreyNoise Visualizer for IP Details|https://viz.greynoise.io/ip/1.1.1.1|
+|vpn|boolean|False|GreyNoise has identified this as a VPN|False|
+|vpn_service|string|False|Name of VPN Service|My VPN|
+
 Example output:
 
 ```
 {
-  "actor": "",
-  "bot": true,
-  "classification": "",
+  "actor": "Acme, Inc",
+  "bot": false,
+  "classification": "malicious",
   "cve": [
-    ""
+    "CVE-1111-1111",
+    "CVE-2222-2222"
   ],
-  "first_seen": "",
-  "ip": "",
-  "last_seen": "",
+  "first_seen": "2024-01-01",
+  "ip": "1.2.3.4",
+  "last_seen": "2024-01-01",
   "metadata": {
     "ASN": "",
     "Category": {},
@@ -178,13 +183,11 @@ Example output:
     }
   },
   "seen": true,
-  "spoofable": true,
-  "tags": [
-    ""
-  ],
-  "viz_url": "",
-  "vpn": true,
-  "vpn_service": ""
+  "spoofable": false,
+  "tags": "Tag 1, Tag2",
+  "viz_url": "https://viz.greynoise.io/ip/1.1.1.1",
+  "vpn": false,
+  "vpn_service": "My VPN"
 }
 ```
 
@@ -197,7 +200,7 @@ This action is used to get Details of a GreyNoise Tag
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |tag_name|string|None|True|Tag Name to get additional Details From|None|BingBot|None|None|
-  
+
 Example input:
 
 ```
@@ -210,29 +213,25 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|category|string|False|Tag Category|None|
-|cves|[]object|False|CVEs associate with Tag|None|
-|description|string|False|Description of the Tag|None|
-|intention|string|False|Tag Intention|None|
-|name|string|False|Name of GreyNoise Tag|None|
-|recommend_block|boolean|False|GreyNoise Recommends Blocking IPs associated with this Tag|None|
-|references|[]object|False|References|None|
-  
+|category|string|False|Tag Category|activity|
+|cves|[]string|False|CVEs associate with Tag|CVE-2020-1234,CVE-1241-23521|
+|description|string|False|Description of the Tag|This is a tag description|
+|intention|string|False|Tag Intention|malicious|
+|name|string|False|Name of GreyNoise Tag|BingBot|
+|recommend_block|boolean|False|GreyNoise Recommends Blocking IPs associated with this Tag|False|
+|references|[]object|False|References|https://thisisareference.url|
+
 Example output:
 
 ```
 {
-  "category": "",
-  "cves": [
-    {}
-  ],
-  "description": "",
-  "intention": "",
-  "name": "",
-  "recommend_block": true,
-  "references": [
-    {}
-  ]
+  "category": "activity",
+  "cves": "CVE-2020-1234,CVE-1241-23521",
+  "description": "This is a tag description",
+  "intention": "malicious",
+  "name": "BingBot",
+  "recommend_block": false,
+  "references": "https://thisisareference.url"
 }
 ```
 
@@ -246,7 +245,7 @@ This action is used to perform a GreyNoise GNQL Query
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |query|string|None|True|Query in GreyNoise Query Language (GNQL) Syntax|None|last_seen:1d classification:'malicious' metadata.asn:'AS8452'|None|None|
 |size|string|10|False|Max Number of IPs to Return Data For|None|10|None|None|
-  
+
 Example input:
 
 ```
@@ -260,79 +259,21 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|complete|boolean|False|Indicates if all pages of the query have been returned by the API|None|
-|count|integer|False|Total count of IPs returned Query|None|
-|data|[]data|False|GreyNoise Data Object, Contains IP Object for each IP returned by the query|None|
-|message|string|False|GreyNoise Query Message, indicates if there were issues with the query|None|
-|query|string|False|GreyNoise Query Sent to API|None|
-  
+|complete|boolean|False|Indicates if all pages of the query have been returned by the API|True|
+|count|integer|False|Total count of IPs returned Query|10|
+|data|[]data|False|GreyNoise Data Object, Contains IP Object for each IP returned by the query||
+|message|string|False|GreyNoise Query Message, indicates if there were issues with the query|ok|
+|query|string|False|GreyNoise Query Sent to API|sample query|
+
 Example output:
 
 ```
 {
   "complete": true,
-  "count": 0,
-  "data": [
-    {
-      "GreyNoise Actor": {},
-      "GreyNoise Bot": {},
-      "GreyNoise CVEs": {},
-      "GreyNoise Classification": {},
-      "GreyNoise First Seen": "",
-      "GreyNoise Last Seen": {},
-      "GreyNoise Metadata": {
-        "ASN": {},
-        "Category": {},
-        "City": {},
-        "Country": {},
-        "Country Code": {},
-        "Destination Countries": {},
-        "Destination Country Codes": {},
-        "OS": {},
-        "Organization": {},
-        "Region": {},
-        "Sensor Count": 0,
-        "Sensor Hits": {},
-        "Source Country": {},
-        "Source Country Code": {},
-        "TOR": {},
-        "rDNS": {}
-      },
-      "GreyNoise Raw Data": {
-        "HASSH": [
-          {
-            "Fingerprint": {},
-            "Port": {}
-          }
-        ],
-        "JA3": [
-          {
-            "Fingerprint": {},
-            "Port": {}
-          }
-        ],
-        "Scan": [
-          {
-            "Port": {},
-            "Protocol": {}
-          }
-        ],
-        "Web": {
-          "User Agents": {}
-        }
-      },
-      "GreyNoise Seen": "true",
-      "GreyNoise Spoofable": {},
-      "GreyNoise Tags": [
-        {}
-      ],
-      "GreyNoise VPN": {},
-      "GreyNoise VPN Service": {},
-      "IP Address": ""
-    }
-  ],
-  "message": "",
-  "query": ""
+  "count": 10,
+  "data": "",
+  "message": "ok",
+  "query": "sample query"
 }
 ```
 
@@ -345,7 +286,7 @@ This action is used to query a routable IPv4 address in the GreyNoise Quick API 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |ip_address|string|None|True|Routable IPv4 address to query|None|1.2.3.4|None|None|
-  
+
 Example input:
 
 ```
@@ -358,19 +299,21 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|code|string|False|Response Code from Quick API endpoint|None|
-|code_message|string|False|Response Code Message from Quick API endpoint|None|
-|ip|string|False|Value that was Queried|None|
-|noise|boolean|False|Defines if IP is Internet Noise|None|
-  
+|code|string|False|Response Code from Quick API endpoint|00x0|
+|code_message|string|False|Response Code Message from Quick API endpoint|Internet noise found|
+|ip|string|False|Value that was Queried|1.2.3.4|
+|noise|boolean|False|Defines if IP is Internet Noise|True|
+|riot|boolean|False|Defines if IP is a Common Business Service|True|
+
 Example output:
 
 ```
 {
-  "code": "",
-  "code_message": "",
-  "ip": "",
-  "noise": true
+  "code": "00x0",
+  "code_message": "Internet noise found",
+  "ip": "1.2.3.4",
+  "noise": true,
+  "riot": true
 }
 ```
 
@@ -383,7 +326,7 @@ This action is used to query a routable IPv4 address in the GreyNoise RIOT API e
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |ip_address|string|None|True|Routable IPv4 address to query|None|1.2.3.4|None|None|
-  
+
 Example input:
 
 ```
@@ -396,42 +339,42 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|category|string|False|RIOT Category IP is part of|None|
-|description|string|False|Description of the IP service|None|
-|explanation|string|False|Explanation for why this is likely benign|None|
-|ip|string|False|Value that was Queried|None|
-|last_updated|date|False|Last time this IP was updated in RIOT dataset|None|
-|name|string|False|Vendor Name IP belongs to|None|
-|reference|string|False|Additional reference information|None|
-|riot|boolean|False|Defines if IP is part of GreyNoise RIOT dataset|None|
-|trust_level|string|False|IP Trust Level information|None|
-|viz_url|string|False|Link to GreyNoise Visualizer for IP Details|None|
-  
+|category|string|False|RIOT Category IP is part of|cdn|
+|description|string|False|Description of the IP service|Acme Inc is just an example.|
+|explanation|string|False|Explanation for why this is likely a common service|This is an explanation.|
+|ip|string|False|Value that was Queried|1.2.3.4|
+|last_updated|date|False|Last time this IP was updated in RIOT dataset|2024-01-01|
+|name|string|False|Vendor Name IP belongs to|Acme Inc.|
+|reference|string|False|Additional reference information|http://one.one.one.one|
+|riot|boolean|False|Defines if IP is part of GreyNoise RIOT dataset|True|
+|trust_level|string|False|IP Trust Level information|1|
+|viz_url|string|False|Link to GreyNoise Visualizer for IP Details|https://viz.greynoise.io/ip/1.1.1.1|
+
 Example output:
 
 ```
 {
-  "category": "",
-  "description": "",
-  "explanation": "",
-  "ip": "",
-  "last_updated": "",
-  "name": "",
-  "reference": "",
+  "category": "cdn",
+  "description": "Acme Inc is just an example.",
+  "explanation": "This is an explanation.",
+  "ip": "1.2.3.4",
+  "last_updated": "2024-01-01",
+  "name": "Acme Inc.",
+  "reference": "http://one.one.one.one",
   "riot": true,
-  "trust_level": "",
-  "viz_url": ""
+  "trust_level": 1,
+  "viz_url": "https://viz.greynoise.io/ip/1.1.1.1"
 }
 ```
 ### Triggers
-  
+
 *This plugin does not contain any triggers.*
 ### Tasks
-  
+
 *This plugin does not contain any tasks.*
 
 ### Custom Types
-  
+
 **metadata**
 
 |Name|Type|Default|Required|Description|Example|
@@ -452,35 +395,35 @@ Example output:
 |Source Country|string|None|False|Source country where this IP is located|None|
 |Source Country Code|string|None|False|Source country (by code) where this IP is located|None|
 |TOR|boolean|None|False|TOR|None|
-  
+
 **web**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |User Agents|[]string|None|False|User Agents|None|
 |User Agents|[]string|None|False|User Agents|None|
-  
+
 **scan**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Port|integer|None|False|Port|None|
 |Protocol|string|None|False|Protocol|None|
-  
+
 **hassh**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Fingerprint|string|None|False|Fingerprint|None|
 |Port|integer|None|False|Port|None|
-  
+
 **ja3**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Fingerprint|string|None|False|Fingerprint|None|
 |Port|integer|None|False|Port|None|
-  
+
 **raw_data**
 
 |Name|Type|Default|Required|Description|Example|
@@ -489,7 +432,7 @@ Example output:
 |JA3|[]ja3|None|False|Ja3|None|
 |Scan|[]scan|None|False|Scan|None|
 |Web|web|None|False|Web|None|
-  
+
 **data**
 
 |Name|Type|Default|Required|Description|Example|
@@ -511,22 +454,21 @@ Example output:
 
 
 ## Troubleshooting
-  
-*This plugin does not contain a troubleshooting.*
+
+Ensure that the GreyNoise API key used has appropriate access for the actions being used.
 
 # Version History
 
-* 2.0.0- Update GreyNoise SDK, Update Command Outputs, Add new `cve lookup` action
+* 2.0.0 - Upgrade GreyNoise SDK v2.3.0, Fix Action Outputs, Add `cve` lookup action
 * 1.0.1 - Fix bug with connection parameters
-* 1.0.0 - Initial plugin
+* 1.0.0 - Initial plugin.
 
 # Links
-  
-*This plugin does not contain any links.*
+
+* [GreyNoise](https://greynoise.io)
 
 ## References
-  
-* [GreyNoise](https://greynoise.io)
-* [GreyNoise Developer Docs](https://docs.greynoise.io)
+
+* [GreyNoise Documentation](https://docs.greynoise.io)
 * [GreyNoise Free Trial Signup](https://viz.greynoise.io/signup)
 * [GreyNoise Account Info](https://viz.greynoise.io/account)

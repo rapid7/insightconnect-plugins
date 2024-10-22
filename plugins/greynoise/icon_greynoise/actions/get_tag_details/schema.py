@@ -62,7 +62,7 @@ class GetTagDetailsOutput(insightconnect_plugin_runtime.Output):
       "title": "CVEs",
       "description": "CVEs associate with Tag",
       "items": {
-        "type": "object"
+        "type": "string"
       },
       "order": 7
     },

@@ -1,7 +1,7 @@
 {
-	"spec": "307aba93db247a2ba7efbd12ac2ec0be",
-	"manifest": "08398f3accbe62a5edef8e1c8bfd660d",
-	"setup": "e8ae54d8254c3b5d0f58518b34d3aefc",
+	"spec": "a98730fc78b02f89c61a4b97f4a9c0ed",
+	"manifest": "db04b78016bee2aa0bc0886f59d31e13",
+	"setup": "7d0148b4efc7745f17003a77e9e73c55",
 	"schemas": [
 		{
 			"identifier": "community_lookup/schema.py",
@@ -13,7 +13,7 @@
 		},
 		{
 			"identifier": "get_tag_details/schema.py",
-			"hash": "64ee77c83347b2f3b2196cd0a87f4bc4"
+			"hash": "a295f565f4baa12930daa815139db5d4"
 		},
 		{
 			"identifier": "gnql_query/schema.py",
@@ -21,11 +21,11 @@
 		},
 		{
 			"identifier": "quick_lookup/schema.py",
-			"hash": "3936614471600f9c6eb417ef21db836d"
+			"hash": "a0b8045428133eca9d2ac6cc2ffe4a7a"
 		},
 		{
 			"identifier": "riot_lookup/schema.py",
-			"hash": "f15e72535745585b5fbe2c181050b4a8"
+			"hash": "0ee1bf7d6db7ee88dfd7f105bfb50ea6"
 		},
 		{
 			"identifier": "connection/schema.py",

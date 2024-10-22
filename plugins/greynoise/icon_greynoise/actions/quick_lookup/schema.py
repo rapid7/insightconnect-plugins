@@ -16,6 +16,7 @@ class Output:
     CODE_MESSAGE = "code_message"
     IP = "ip"
     NOISE = "noise"
+    RIOT = "riot"
 
 
 class QuickLookupInput(insightconnect_plugin_runtime.Input):
@@ -52,13 +53,13 @@ class QuickLookupOutput(insightconnect_plugin_runtime.Output):
       "type": "string",
       "title": "API Response Code",
       "description": "Response Code from Quick API endpoint",
-      "order": 3
+      "order": 4
     },
     "code_message": {
       "type": "string",
       "title": "API Response Code Message",
       "description": "Response Code Message from Quick API endpoint",
-      "order": 4
+      "order": 5
     },
     "ip": {
       "type": "string",
@@ -71,6 +72,12 @@ class QuickLookupOutput(insightconnect_plugin_runtime.Output):
       "title": "GreyNoise Noise",
       "description": "Defines if IP is Internet Noise",
       "order": 2
+    },
+    "riot": {
+      "type": "boolean",
+      "title": "GreyNoise RIOT",
+      "description": "Defines if IP is a Common Business Service",
+      "order": 3
     }
   },
   "definitions": {}

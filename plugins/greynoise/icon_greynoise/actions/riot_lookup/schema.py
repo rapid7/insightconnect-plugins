@@ -69,7 +69,7 @@ class RiotLookupOutput(insightconnect_plugin_runtime.Output):
     "explanation": {
       "type": "string",
       "title": "GreyNoise RIOT Explanation",
-      "description": "Explanation for why this is likely benign",
+      "description": "Explanation for why this is likely a common service",
       "order": 6
     },
     "ip": {
