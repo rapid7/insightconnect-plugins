@@ -516,7 +516,7 @@ Example output:
 
 # Version History
 
-* 1.1.0 - Update GreyNoise SDK, Update Command Outputs, Add new `cve lookup` action
+* 2.0.0- Update GreyNoise SDK, Update Command Outputs, Add new `cve lookup` action
 * 1.0.1 - Fix bug with connection parameters
 * 1.0.0 - Initial plugin
 
@@ -527,6 +527,6 @@ Example output:
 ## References
   
 * [GreyNoise](https://greynoise.io)
-* [GreyNoise Developer Docs](https://doc.greynoise.io)
+* [GreyNoise Developer Docs](https://docs.greynoise.io)
 * [GreyNoise Free Trial Signup](https://viz.greynoise.io/signup)
 * [GreyNoise Account Info](https://viz.greynoise.io/account)

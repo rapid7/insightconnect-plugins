@@ -2,9 +2,9 @@ import insightconnect_plugin_runtime
 from .schema import CommunityLookupInput, CommunityLookupOutput, Input, Component
 
 # Custom imports below
+from insightconnect_plugin_runtime.exceptions import PluginException
 from icon_greynoise.util.util import GNRequestFailure, GNValueError
 from greynoise import GreyNoise
-from greynoise.exceptions import RequestFailure
 import pendulum
 
 
@@ -30,9 +30,15 @@ class CommunityLookup(insightconnect_plugin_runtime.Action):
                 resp["last_seen"] = pendulum.parse(resp["last_seen"]).to_rfc3339_string()
 
         except RequestFailure as e:
-            raise GNRequestFailure(e.args[0], e.args[1])
+            raise PluginException(
+                cause=f"API responded with ERROR: {e.args[0]} - {e.args[1]}.",
+                assistance="Please check error and try again.",
+            )
 
         except ValueError as e:
-            raise GNValueError(e.args[0])
+            raise PluginException(
+                cause=f"Input does not appear to be valid: {Input.IP_ADDRESS}. Error Message: {e.args[0]}",
+                assistance="Please provide a valid public IPv4 address.",
+            )
 
         return resp

@@ -4,8 +4,14 @@ products: [insightconnect]
 name: greynoise
 title: GreyNoise
 description: GreyNoise helps analysts recognize events not worth their attention. Indicators in GreyNoise are likely associated with opportunistic internet scanning or common business services, not targeted threats. This context helps analysts focus on what matters most
-version: 1.1.0
-supported_versions: []
+version: 2.0.0
+connection_version: 2
+cloud_ready: false
+sdk:
+  type: slim
+  version: 6.1.4
+  user: nobody
+supported_versions: ["GreyNoise API v1/2/3"]
 vendor: greynoise
 status: []
 tags: [greynoise, ip lookup, threat intel, intelligence]
@@ -18,6 +24,25 @@ hub_tags:
   use_cases: [data_enrichment, threat_detection_and_response,vulnerability_management]
   keywords: [ip lookup, intelligence, greynoise]
   features: []
+requirements:
+  - "A GreyNoise API key"
+key_features:
+  - "Perform a GreyNoise IP Context Lookup"
+  - "Perform a GreyNoise IP Quick Lookup"
+  - "Perform a GreyNoise IP RIOT Lookup"
+  - "Query for additional Tag details"
+  - "Perform a GreyNoise Community IP Lookup"
+troubleshooting: "Ensure that the GreyNoise API key used has appropriate access for the actions being used."
+version_history:
+  - "2.0.0 - Upgrade GreyNoise SDK v2.3.0, Fix Action Outputs, Add `cve` lookup action"
+  - "1.0.1 - Fix bug with connection parameters"
+  - "1.0.0 - Initial plugin."
+links:
+ - "[GreyNoise](https://greynoise.io)"
+references:
+ - "[GreyNoise Documentation](https://docs.greynoise.io)"
+ - "[GreyNoise Free Trial Signup](https://viz.greynoise.io/signup)"
+ - "[GreyNoise Account Info](https://viz.greynoise.io/account)"
 enable_cache: false
 types:
   metadata:
@@ -267,56 +292,67 @@ actions:
         type: date
         description: First Seen By GreyNoise
         required: false
+        example: "2024-01-01"
       last_seen:
         title: GreyNoise Last Seen
         type: string
         description: Last Seen By GreyNoise
         required: false
+        example: "2024-01-01"
       seen:
         title: GreyNoise Seen
         type: boolean
         description: Has this IP been Seen by GreyNoise
         required: false
+        example: true
       tags:
         title: GreyNoise Tags
         type: "[]string"
         description: GreyNoise Tags Associated with IP
         required: false
+        example: "Tag 1, Tag2"
       actor:
         title: GreyNoise Actor
         type: string
         description: GreyNoise Actor Associated with IP
         required: false
+        example: "Acme, Inc"
       spoofable:
         title: GreyNoise Spoofable
         type: boolean
         description: IP address may be spoofed
         required: false
+        example: false
       classification:
         title: GreyNoise Classification
         type: string
         description: GreyNoise Classification
         required: false
+        example: "malicious"
       cve:
         title: GreyNoise CVEs
         type: "[]string"
         description: CVEs associated with GreyNoise Tags
         required: false
+        example: ["CVE-1111-1111", "CVE-2222-2222"]
       bot:
         title: GreyNoise Bot
         type: boolean
         description: GreyNoise has identified this as a Bot
         required: false
+        example: false
       vpn:
         title: GreyNoise VPN
         type: boolean
         description: GreyNoise has identified this as a VPN
         required: false
+        example: false
       vpn_service:
         title: GreyNoise VPN Service
         type: string
         description: Name of VPN Service
         required: false
+        example: "My VPN"
       metadata:
         title: GreyNoise Metadata
         type: metadata
@@ -332,6 +368,7 @@ actions:
         type: string
         description: Link to GreyNoise Visualizer for IP Details
         required: false
+        example: "https://viz.greynoise.io/ip/1.1.1.1"
   riot_lookup:
     title: RIOT IP Lookup
     description: Query a routable IPv4 address in the GreyNoise RIOT API endpoint
@@ -354,46 +391,55 @@ actions:
         description: Defines if IP is part of GreyNoise RIOT dataset
         type: boolean
         required: false
+        example: true
       category:
         title: GreyNoise RIOT Category
         description: RIOT Category IP is part of
         type: string
         required: false
+        example: "cdn"
       name:
         title: GreyNoise RIOT Vendor Name
         description: Vendor Name IP belongs to
         type: string
         required: false
+        example: "Acme Inc."
       description:
         title: GreyNoise RIOT Service Description
         description: Description of the IP service
         type: string
         required: false
+        example: "Acme Inc is just an example."
       explanation:
         title: GreyNoise RIOT Explanation
-        description: Explanation for why this is likely benign
+        description: Explanation for why this is likely a common service
         type: string
         required: false
+        example: "This is an explanation."
       last_updated:
         title: GreyNoise RIOT Last Updated
         description: Last time this IP was updated in RIOT dataset
         type: date
         required: false
+        example: "2024-01-01"
       reference:
         title: GreyNoise RIOT Reference
         description: Additional reference information
         type: string
         required: false
+        example: "http://one.one.one.one"
       trust_level:
         title: GreyNoise RIOT Trust Level
         description: IP Trust Level information
         type: string
         required: false
+        example: "1"
       viz_url:
         title: GreyNoise Visualizer Link
         type: string
         description: Link to GreyNoise Visualizer for IP Details
         required: false
+        example: "https://viz.greynoise.io/ip/1.1.1.1"
   quick_lookup:
     title: Quick IP Lookup
     description: Query a routable IPv4 address in the GreyNoise Quick API endpoint
@@ -416,16 +462,25 @@ actions:
         description: Defines if IP is Internet Noise
         type: boolean
         required: false
+        example: true
+      riot:
+        title: GreyNoise RIOT
+        description: Defines if IP is a Common Business Service
+        type: boolean
+        required: false
+        example: true
       code:
         title: API Response Code
         description: Response Code from Quick API endpoint
         type: string
         required: false
+        example: "00x0"
       code_message:
         title: API Response Code Message
         description: Response Code Message from Quick API endpoint
         type: string
         required: false
+        example: "Internet noise found"
   get_tag_details:
     title: Get Tag Details
     description: Get Details of a GreyNoise Tag
@@ -435,43 +490,50 @@ actions:
         description: Tag Name to get additional Details From
         type: string
         required: true
-        example: BingBot
+        example: "BingBot"
     output:
       name:
         title: "Tag Name"
         type: string
         description: "Name of GreyNoise Tag"
         required: false
+        example: "BingBot"
       category:
         title: "Tag Category"
         type: string
         description: "Tag Category"
         required: false
+        example: "activity"
       intention:
         title: "Tag Intention"
         type: string
         description: "Tag Intention"
         required: false
+        example: "malicious"
       description:
         title: "Tag Description"
         type: string
         description: "Description of the Tag"
         required: false
+        example: "This is a tag description"
       references:
         title: "References"
         type: "[]object"
         description: "References"
         required: false
+        example: "https://thisisareference.url"
       recommend_block:
         title: "Recommend Block"
         type: boolean
         description: "GreyNoise Recommends Blocking IPs associated with this Tag"
         required: false
+        example: false
       cves:
         title: "CVEs"
-        type: "[]object"
+        type: "[]string"
         description: "CVEs associate with Tag"
         required: false
+        example: "CVE-2020-1234,CVE-1241-23521"
   gnql_query:
     title: GreyNoise Query
     description: Perform a GreyNoise GNQL Query
@@ -495,26 +557,31 @@ actions:
         type: boolean
         description: Indicates if all pages of the query have been returned by the API
         required: false
+        example: true
       count:
         title: GreyNoise Count
         type: integer
         description: Total count of IPs returned Query
         required: false
+        example: 10
       data:
         title: GreyNoise Query Data
         type: "[]data"
         description: GreyNoise Data Object, Contains IP Object for each IP returned by the query
         required: false
+        example: ""
       message:
         title: GreyNoise Query Message
         type: string
         description: GreyNoise Query Message, indicates if there were issues with the query
         required: false
+        example: "ok"
       query:
         title: GreyNoise Query
         type: string
         description: GreyNoise Query Sent to API
         required: false
+        example: "sample query"
   community_lookup:
     title: Community IP Lookup
     description: Query a routable IPv4 address in the GreyNoise Community API
@@ -537,33 +604,40 @@ actions:
         description: Defines if IP is Internet Noise
         type: boolean
         required: false
+        example: true
       riot:
         title: GreyNoise RIOT
         description: Defines if IP is part of GreyNoise RIOT dataset
         type: boolean
         required: false
+        example: true
       classification:
         title: GreyNoise Classification
         type: string
         description: GreyNoise Classification
         required: false
+        example: "benign"
       link:
         title: GreyNoise Visualizer Link
         type: string
         description: Link to GreyNoise Visualizer for IP Details
         required: false
+        example: "https://viz.greynoise.io/ip/1.1.1.1"
       last_seen:
         title: GreyNoise Last Seen
         type: string
         description: Last Seen By GreyNoise
         required: false
+        example: "2024-01-01"
       message:
         title: GreyNoise Status Message
         type: string
         description: GreyNoise Community API Status Message
         required: false
+        example: "IP found"
       name:
         title: GreyNoise Name
         type: string
         description: GreyNoise Actor or Service Name Associated with IP
         required: false
+        example: "Acme Inc."

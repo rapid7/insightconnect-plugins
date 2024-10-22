@@ -25,6 +25,9 @@ class GnqlQuery(insightconnect_plugin_runtime.Action):
             resp = self.connection.gn_client.query(query, size=size)
 
         except RequestFailure as e:
-            raise GNRequestFailure(e.args[0], e.args[1])
+            raise PluginException(
+                cause=f"API responded with ERROR: {e.args[0]} - {e.args[1]}.",
+                assistance="Please check error and try again.",
+            )
 
         return resp
