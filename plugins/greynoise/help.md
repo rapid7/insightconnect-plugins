@@ -9,6 +9,7 @@ GreyNoise helps analysts recognize events not worth their attention. Indicators 
 * Perform a GreyNoise IP RIOT Lookup
 * Query for additional Tag details
 * Perform a GreyNoise Community IP Lookup
+* Perform a GreyNoise Vulnerability Lookup
 
 # Requirements
 
@@ -377,6 +378,92 @@ Example output:
 }
 ```
 
+#### IP Timeline Lookup
+
+This action is used to query a routable IPv4 address in the GreyNoise for Scanner Daily Timeline details
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|ip_address|string|None|True|Routable IPv4 address to query|None|1.2.3.4|None|None|
+  
+Example input:
+
+```
+{
+  "ip_address": "1.2.3.4"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|activity|[]timeline_activity|False|IP Timeline Activity Events|None|
+|ip|string|False|Value that was Queried|1.2.3.4|
+|metadata|timeline_metadata|False|IP Timeline Metadata|None|
+  
+Example output:
+
+```
+{
+  "activity": [
+    {
+      "ASN": "",
+      "Category": {},
+      "City": {},
+      "Country": {},
+      "Country Code": {},
+      "Destinations": [
+        {
+          "Country": {},
+          "Country Code": {}
+        }
+      ],
+      "Event Timestamp": "",
+      "GreyNoise Classification": {},
+      "HASSH Fingerprints": [
+        {}
+      ],
+      "HTTP User Agents": {},
+      "HTTP Web Paths": {},
+      "JA3 Fingerprints": {},
+      "Organization": {},
+      "Protocols": [
+        {
+          "App Protocol": {},
+          "Port": 0,
+          "Transport Protocol": {}
+        }
+      ],
+      "Region": {},
+      "Spoofable": "true",
+      "Tags": [
+        {
+          "Tag Category": {},
+          "Tag Description": {},
+          "Tag Intention": {},
+          "Tag Name": {}
+        }
+      ],
+      "Tor Exit Node": {},
+      "VPN": {},
+      "VPN Service": {},
+      "rDNS": {}
+    }
+  ],
+  "ip": "1.2.3.4",
+  "metadata": {
+    "Cursor Value": {},
+    "Event Limit": 0,
+    "IP Address": "",
+    "Timeline Period End Time": "",
+    "Timeline Period Start Time": {}
+  }
+}
+```
+
 #### Vulnerability Lookup
 
 This action is used to check GreyNoise for Vulnerability information.
@@ -422,7 +509,7 @@ Example output:
     "Benign IP Count - 1 day": {},
     "Benign IP Count - 10 days": 0,
     "Benign IP Count - 30 days": {},
-    "GreyNoise Observed Activity": "",
+    "GreyNoise Observed Activity": "true",
     "Threat IP Count - 1 day": {},
     "Threat IP Count - 10 days": {},
     "Threat IP Count - 30 days": {}
@@ -563,7 +650,7 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|GreyNoise Observed Activity|string|None|False|GreyNoise Observed Activity|None|
+|GreyNoise Observed Activity|boolean|None|False|GreyNoise Observed Activity|None|
 |Benign IP Count - 10 days|integer|None|False|Benign IP Count - 10 days|None|
 |Benign IP Count - 1 day|integer|None|False|Benign IP Count - 1 day|None|
 |Benign IP Count - 30 days|integer|None|False|Benign IP Count - 30 days|None|
@@ -581,6 +668,66 @@ Example output:
 |Vendor Name|string|None|False|Vendor Name|None|
 |Vulnerability Description|string|None|False|Vulnerability Description|None|
 |Vulnerability Name|string|None|False|Vulnerability Name|None|
+  
+**timeline_metadata**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Timeline Period End Time|date|None|False|Timeline Period End Time|None|
+|IP Address|string|None|False|IP Queried|None|
+|Event Limit|integer|None|False|Max number of events to return|None|
+|Cursor Value|string|None|False|Cursor value for additional pages of details|None|
+|Timeline Period Start Time|date|None|False|Timeline Period Start Time|None|
+  
+**timeline_activity**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ASN|string|None|False|ASN|None|
+|Category|string|None|False|Category|None|
+|City|string|None|False|City|None|
+|GreyNoise Classification|string|None|False|GreyNoise Classification|None|
+|Country|string|None|False|Country|None|
+|Country Code|string|None|False|Country Code|None|
+|Destinations|[]destinations|None|False|Destinations|None|
+|HASSH Fingerprints|[]string|None|False|HASSH Fingerprints|None|
+|HTTP Web Paths|[]string|None|False|HTTP Web Paths|None|
+|HTTP User Agents|[]string|None|False|HTTP User Agents|None|
+|JA3 Fingerprints|[]string|None|False|JA3 Fingerprints|None|
+|Organization|string|None|False|Organization|None|
+|Protocols|[]protocols|None|False|Destinations|None|
+|rDNS|string|None|False|rDNS|None|
+|Region|string|None|False|Region|None|
+|Spoofable|boolean|None|False|Spoofable|None|
+|Tags|[]tags|None|False|Tags|None|
+|Event Timestamp|date|None|False|Event Timestamp|None|
+|Tor Exit Node|boolean|None|False|Tor Exit Node|None|
+|VPN|boolean|None|False|VPN|None|
+|VPN Service|string|None|False|VPN Service|None|
+  
+**destinations**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Country|string|None|False|Country|None|
+|Country Code|string|None|False|Country Code|None|
+  
+**protocols**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|App Protocol|string|None|False|App Protocol|None|
+|Port|integer|None|False|Port|None|
+|Transport Protocol|string|None|False|Transport Protocol|None|
+  
+**tags**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Tag Category|string|None|False|Tag Category|None|
+|Tag Description|string|None|False|Tag Description|None|
+|Tag Intention|string|None|False|Tag Intention|None|
+|Tag Name|string|None|False|Tag Name|None|
 
 
 ## Troubleshooting
@@ -589,7 +736,7 @@ Ensure that the GreyNoise API key used has appropriate access for the actions be
 
 # Version History
 
-* 2.0.0 - Upgrade GreyNoise SDK v2.3.0, Fix Action Outputs, Add `cve` lookup action
+* 2.0.0 - Upgrade GreyNoise SDK v2.3.0, Fix Action Outputs, Add `vulnerability_lookup` action
 * 1.0.1 - Fix bug with connection parameters
 * 1.0.0 - Initial plugin.
 

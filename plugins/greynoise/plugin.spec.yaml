@@ -32,9 +32,10 @@ key_features:
   - "Perform a GreyNoise IP RIOT Lookup"
   - "Query for additional Tag details"
   - "Perform a GreyNoise Community IP Lookup"
+  - "Perform a GreyNoise Vulnerability Lookup"
 troubleshooting: "Ensure that the GreyNoise API key used has appropriate access for the actions being used."
 version_history:
-  - "2.0.0 - Upgrade GreyNoise SDK v2.3.0, Fix Action Outputs, Add `cve` lookup action"
+  - "2.0.0 - Upgrade GreyNoise SDK v2.3.0, Fix Action Outputs, Add `vulnerability_lookup` action, Add `timeline_lookup` action"
   - "1.0.1 - Fix bug with connection parameters"
   - "1.0.0 - Initial plugin."
 links:
@@ -323,7 +324,7 @@ types:
   vuln_exploitation_activity:
     activity_seen:
       title: "GreyNoise Observed Activity"
-      type: string
+      type: boolean
       description: "GreyNoise Observed Activity"
       required: false
     benign_ip_count_10d:
@@ -386,6 +387,186 @@ types:
       title: "Vulnerability Name"
       type: string
       description: "Vulnerability Name"
+      required: false
+  timeline_metadata:
+    end_time:
+      title: "Timeline Period End Time"
+      type: date
+      description: "Timeline Period End Time"
+      required: false
+    ip:
+      title: "IP Address"
+      type: string
+      description: "IP Queried"
+      required: false
+    limit:
+      title: "Event Limit"
+      type: integer
+      description: "Max number of events to return"
+      required: false
+    next_cursor:
+      title: "Cursor Value"
+      type: string
+      description: "Cursor value for additional pages of details"
+      required: false
+    start_time:
+      title: "Timeline Period Start Time"
+      type: date
+      description: "Timeline Period Start Time"
+      required: false
+  timeline_activity:
+    asn:
+      title: ASN
+      type: string
+      description: ASN
+      required: false
+    category:
+      title: Category
+      type: string
+      description: Category
+      required: false
+    city:
+      title: City
+      type: string
+      description: City
+      required: false
+    classification:
+      title: GreyNoise Classification
+      type: string
+      description: GreyNoise Classification
+      required: false
+    country:
+      title: Country
+      type: string
+      description: Country
+      required: false
+    country_code:
+      title: Country Code
+      type: string
+      description: Country Code
+      required: false
+    destinations:
+      title: Destinations
+      type: "[]destinations"
+      description: Destinations
+      required: false
+    hassh_fingerprints:
+      title: HASSH Fingerprints
+      type: "[]string"
+      description: HASSH Fingerprints
+      required: false
+    http_paths:
+      title: HTTP Web Paths
+      type: "[]string"
+      description: HTTP Web Paths
+      required: false
+    http_user_agents:
+      title: HTTP User Agents
+      type: "[]string"
+      description: HTTP User Agents
+      required: false
+    ja3_fingerprints:
+      title: JA3 Fingerprints
+      type: "[]string"
+      description: JA3 Fingerprints
+      required: false
+    organization:
+      title: Organization
+      type: string
+      description: Organization
+      required: false
+    protocols:
+      title: Protocols
+      type: "[]protocols"
+      description: Destinations
+      required: false
+    rdns:
+      title: rDNS
+      type: string
+      description: rDNS
+      required: false
+    region:
+      title: Region
+      type: string
+      description: Region
+      required: false
+    spoofable:
+      title: Spoofable
+      type: boolean
+      description: Spoofable
+      required: false
+    tags:
+      title: Tags
+      type: "[]tags"
+      description: Tags
+      required: false
+    timestamp:
+      title: Event Timestamp
+      type: date
+      description: Event Timestamp
+      required: false
+    tor:
+      title: Tor Exit Node
+      type: boolean
+      description: Tor Exit Node
+      required: false
+    vpn:
+      title: VPN
+      type: boolean
+      description: VPN
+      required: false
+    vpn_service:
+      title: VPN Service
+      type: string
+      description:  VPN Service
+      required: false
+  destinations:
+    country:
+      title: Country
+      type: string
+      description: Country
+      required: false
+    country_code:
+      title: Country Code
+      type: string
+      description: Country Code
+      required: false
+  protocols:
+    port:
+      title: Port
+      type: integer
+      description: Port
+      required: false
+    transport_protocol:
+      title: Transport Protocol
+      type: string
+      description: Transport Protocol
+      required: false
+    app_protocol:
+      title: App Protocol
+      type: string
+      description: App Protocol
+      required: false
+  tags:
+    category:
+      title: Tag Category
+      type: string
+      description: Tag Category
+      required: false
+    description:
+      title: Tag Description
+      type: string
+      description: Tag Description
+      required: false
+    intention:
+      title: Tag Intention
+      type: string
+      description: Tag Intention
+      required: false
+    name:
+      title: Tag Name
+      type: string
+      description: Tag Name
       required: false
 connection:
   credentials:
@@ -837,4 +1018,31 @@ actions:
         title: GreyNoise Vulnerability Timeline
         description: GreyNoise Vulnerability Timeline
         type: vuln_timeline
+        required: false
+  timeline_lookup:
+    title: IP Timeline Lookup
+    description: Query a routable IPv4 address in the GreyNoise for Scanner Daily Timeline details
+    input:
+      ip_address:
+        title: IP Address
+        description: Routable IPv4 address to query
+        type: string
+        required: true
+        example: 1.2.3.4
+    output:
+      ip:
+        title: IP Queried
+        type: string
+        description: Value that was Queried
+        required: false
+        example: 1.2.3.4
+      metadata:
+        title: IP Timeline Metadata
+        type: timeline_metadata
+        description: IP Timeline Metadata
+        required: false
+      activity:
+        title: IP Timeline Activity
+        type: "[]timeline_activity"
+        description: IP Timeline Activity Events
         required: false
