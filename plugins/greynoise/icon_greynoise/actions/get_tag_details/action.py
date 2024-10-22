@@ -24,7 +24,7 @@ class GetTagDetails(insightconnect_plugin_runtime.Action):
                 if tag["name"].lower() == tag_name:
                     output = tag
         except RequestFailure as e:
-            raise GNRequestFailure(e.args[0], e.args[1])
+            raise PluginException(e.args[0], e.args[1])
         if output:
             return output
         else:

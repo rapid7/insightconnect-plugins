@@ -515,8 +515,10 @@ Example output:
 *This plugin does not contain a troubleshooting.*
 
 # Version History
-  
-*This plugin does not contain a version history.*
+
+* 1.1.0 - Update GreyNoise SDK, Update Command Outputs, Add new `cve lookup` action
+* 1.0.1 - Fix bug with connection parameters
+* 1.0.0 - Initial plugin
 
 # Links
   
@@ -524,4 +526,7 @@ Example output:
 
 ## References
   
-*This plugin does not contain any references.*
+* [GreyNoise](https://greynoise.io)
+* [GreyNoise Developer Docs](https://doc.greynoise.io)
+* [GreyNoise Free Trial Signup](https://viz.greynoise.io/signup)
+* [GreyNoise Account Info](https://viz.greynoise.io/account)
