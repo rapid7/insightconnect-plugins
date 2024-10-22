@@ -22,7 +22,7 @@ GreyNoise helps analysts recognize events not worth their attention. Indicators 
 
 ## Setup
 
-The connection configuration accepts the following parameters:
+The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -50,7 +50,7 @@ This action is used to query a routable IPv4 address in the GreyNoise Community 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |ip_address|string|None|True|Routable IPv4 address to query|None|1.2.3.4|None|None|
-
+  
 Example input:
 
 ```
@@ -71,7 +71,7 @@ Example input:
 |name|string|False|GreyNoise Actor or Service Name Associated with IP|Acme Inc.|
 |noise|boolean|False|Defines if IP is Internet Noise|True|
 |riot|boolean|False|Defines if IP is part of GreyNoise RIOT dataset|True|
-
+  
 Example output:
 
 ```
@@ -96,7 +96,7 @@ This action is used to query a routable IPv4 address in the GreyNoise Context AP
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |ip_address|string|None|True|Routable IPv4 address to query|None|1.2.3.4|None|None|
-
+  
 Example input:
 
 ```
@@ -124,7 +124,7 @@ Example input:
 |viz_url|string|False|Link to GreyNoise Visualizer for IP Details|https://viz.greynoise.io/ip/1.1.1.1|
 |vpn|boolean|False|GreyNoise has identified this as a VPN|False|
 |vpn_service|string|False|Name of VPN Service|My VPN|
-
+  
 Example output:
 
 ```
@@ -200,7 +200,7 @@ This action is used to get Details of a GreyNoise Tag
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |tag_name|string|None|True|Tag Name to get additional Details From|None|BingBot|None|None|
-
+  
 Example input:
 
 ```
@@ -214,24 +214,34 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |category|string|False|Tag Category|activity|
+|created_at|string|False|The date the tag was added to GreyNoise tag library.|2024-01-01|
 |cves|[]string|False|CVEs associate with Tag|CVE-2020-1234,CVE-1241-23521|
 |description|string|False|Description of the Tag|This is a tag description|
+|id|string|False|The unique ID for the tag.|aa-bb-cc-dd|
 |intention|string|False|Tag Intention|malicious|
+|label|string|False|The unique label for the tag.|BINGBOT_SCANNER|
 |name|string|False|Name of GreyNoise Tag|BingBot|
 |recommend_block|boolean|False|GreyNoise Recommends Blocking IPs associated with this Tag|False|
-|references|[]object|False|References|https://thisisareference.url|
-
+|references|[]string|False|References|https://thisisareference.url|
+|related_tags|[]string|False|Tags that are related to this tag.|BingBot Scanner|
+|slug|string|False|The unique slug for the tag.|bingbot-scanner|
+  
 Example output:
 
 ```
 {
   "category": "activity",
+  "created_at": "2024-01-01",
   "cves": "CVE-2020-1234,CVE-1241-23521",
   "description": "This is a tag description",
+  "id": "aa-bb-cc-dd",
   "intention": "malicious",
+  "label": "BINGBOT_SCANNER",
   "name": "BingBot",
   "recommend_block": false,
-  "references": "https://thisisareference.url"
+  "references": "https://thisisareference.url",
+  "related_tags": "BingBot Scanner",
+  "slug": "bingbot-scanner"
 }
 ```
 
@@ -245,7 +255,7 @@ This action is used to perform a GreyNoise GNQL Query
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |query|string|None|True|Query in GreyNoise Query Language (GNQL) Syntax|None|last_seen:1d classification:'malicious' metadata.asn:'AS8452'|None|None|
 |size|string|10|False|Max Number of IPs to Return Data For|None|10|None|None|
-
+  
 Example input:
 
 ```
@@ -264,7 +274,7 @@ Example input:
 |data|[]data|False|GreyNoise Data Object, Contains IP Object for each IP returned by the query||
 |message|string|False|GreyNoise Query Message, indicates if there were issues with the query|ok|
 |query|string|False|GreyNoise Query Sent to API|sample query|
-
+  
 Example output:
 
 ```
@@ -286,7 +296,7 @@ This action is used to query a routable IPv4 address in the GreyNoise Quick API 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |ip_address|string|None|True|Routable IPv4 address to query|None|1.2.3.4|None|None|
-
+  
 Example input:
 
 ```
@@ -304,7 +314,7 @@ Example input:
 |ip|string|False|Value that was Queried|1.2.3.4|
 |noise|boolean|False|Defines if IP is Internet Noise|True|
 |riot|boolean|False|Defines if IP is a Common Business Service|True|
-
+  
 Example output:
 
 ```
@@ -326,7 +336,7 @@ This action is used to query a routable IPv4 address in the GreyNoise RIOT API e
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |ip_address|string|None|True|Routable IPv4 address to query|None|1.2.3.4|None|None|
-
+  
 Example input:
 
 ```
@@ -349,7 +359,7 @@ Example input:
 |riot|boolean|False|Defines if IP is part of GreyNoise RIOT dataset|True|
 |trust_level|string|False|IP Trust Level information|1|
 |viz_url|string|False|Link to GreyNoise Visualizer for IP Details|https://viz.greynoise.io/ip/1.1.1.1|
-
+  
 Example output:
 
 ```
@@ -366,15 +376,86 @@ Example output:
   "viz_url": "https://viz.greynoise.io/ip/1.1.1.1"
 }
 ```
-### Triggers
 
+#### Vulnerability Lookup
+
+This action is used to check GreyNoise for Vulnerability information.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|cve_id|string|None|True|A CVE ID to look up in GreyNoise|None|CVE-2020-12345|None|None|
+  
+Example input:
+
+```
+{
+  "cve_id": "CVE-2020-12345"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|details|vuln_details|False|GreyNoise Vulnerability Details|None|
+|exploitation_activity|vuln_exploitation_activity|False|GreyNoise Vulnerability Exploitation Activity|None|
+|exploitation_details|vuln_exploitation_details|False|GreyNoise Vulnerability Exploitation Details|None|
+|exploitation_stats|vuln_exploitation_stats|False|GreyNoise Vulnerability Exploitation Stats|None|
+|id|string|False|Value that was searched|CVE-2020-12345|
+|timeline|vuln_timeline|False|GreyNoise Vulnerability Timeline|None|
+  
+Example output:
+
+```
+{
+  "details": {
+    "CVE CVSS Score": 0.0,
+    "Is CVE Published in NIST NVD": "true",
+    "Product Name": "",
+    "Vendor Name": {},
+    "Vulnerability Description": {},
+    "Vulnerability Name": {}
+  },
+  "exploitation_activity": {
+    "Benign IP Count - 1 day": {},
+    "Benign IP Count - 10 days": 0,
+    "Benign IP Count - 30 days": {},
+    "GreyNoise Observed Activity": "",
+    "Threat IP Count - 1 day": {},
+    "Threat IP Count - 10 days": {},
+    "Threat IP Count - 30 days": {}
+  },
+  "exploitation_details": {
+    "Attack Vector": "",
+    "EPSS Score": 0.0,
+    "Exploit Found": "true",
+    "Exploitation Registered in KEV": {}
+  },
+  "exploitation_stats": {
+    "Number of Associated Botnets": {},
+    "Number of Available Exploits": 0,
+    "Number of Threat Actors Exploiting Vulnerability": {}
+  },
+  "id": "CVE-2020-12345",
+  "timeline": {
+    "Date Added to CISA KEV": "",
+    "Date CVE was Last Updated": {},
+    "Date CVE was Published": {},
+    "Date of First Published POC": {}
+  }
+}
+```
+### Triggers
+  
 *This plugin does not contain any triggers.*
 ### Tasks
-
+  
 *This plugin does not contain any tasks.*
 
 ### Custom Types
-
+  
 **metadata**
 
 |Name|Type|Default|Required|Description|Example|
@@ -395,35 +476,35 @@ Example output:
 |Source Country|string|None|False|Source country where this IP is located|None|
 |Source Country Code|string|None|False|Source country (by code) where this IP is located|None|
 |TOR|boolean|None|False|TOR|None|
-
+  
 **web**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |User Agents|[]string|None|False|User Agents|None|
 |User Agents|[]string|None|False|User Agents|None|
-
+  
 **scan**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Port|integer|None|False|Port|None|
 |Protocol|string|None|False|Protocol|None|
-
+  
 **hassh**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Fingerprint|string|None|False|Fingerprint|None|
 |Port|integer|None|False|Port|None|
-
+  
 **ja3**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Fingerprint|string|None|False|Fingerprint|None|
 |Port|integer|None|False|Port|None|
-
+  
 **raw_data**
 
 |Name|Type|Default|Required|Description|Example|
@@ -432,7 +513,7 @@ Example output:
 |JA3|[]ja3|None|False|Ja3|None|
 |Scan|[]scan|None|False|Scan|None|
 |Web|web|None|False|Web|None|
-
+  
 **data**
 
 |Name|Type|Default|Required|Description|Example|
@@ -451,6 +532,55 @@ Example output:
 |GreyNoise Tags|[]string|None|False|GreyNoise Tags Associated with IP|None|
 |GreyNoise VPN|boolean|None|False|GreyNoise has identified this as a VPN|None|
 |GreyNoise VPN Service|string|None|False|Name of VPN Service|None|
+  
+**vuln_timeline**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Date Added to CISA KEV|string|None|False|Date Added to CISA KEV|None|
+|Date CVE was Last Updated|string|None|False|Date CVE was Last Updated|None|
+|Date CVE was Published|string|None|False|Date CVE was Published|None|
+|Date of First Published POC|string|None|False|Date of First Published POC|None|
+  
+**vuln_exploitation_stats**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Number of Available Exploits|integer|None|False|Number of Available Exploits|None|
+|Number of Associated Botnets|integer|None|False|Number of Associated Botnets|None|
+|Number of Threat Actors Exploiting Vulnerability|integer|None|False|Number of Threat Actors Exploiting Vulnerability|None|
+  
+**vuln_exploitation_details**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Attack Vector|string|None|False|Attack Vector|None|
+|EPSS Score|float|None|False|EPSS Score|None|
+|Exploit Found|boolean|None|False|Exploit Found|None|
+|Exploitation Registered in KEV|boolean|None|False|Exploitation Registered in KEV|None|
+  
+**vuln_exploitation_activity**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|GreyNoise Observed Activity|string|None|False|GreyNoise Observed Activity|None|
+|Benign IP Count - 10 days|integer|None|False|Benign IP Count - 10 days|None|
+|Benign IP Count - 1 day|integer|None|False|Benign IP Count - 1 day|None|
+|Benign IP Count - 30 days|integer|None|False|Benign IP Count - 30 days|None|
+|Threat IP Count - 10 days|integer|None|False|Threat IP Count - 10 days|None|
+|Threat IP Count - 1 day|integer|None|False|Threat IP Count - 1 day|None|
+|Threat IP Count - 30 days|integer|None|False|Threat IP Count - 30 days|None|
+  
+**vuln_details**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|CVE CVSS Score|float|None|False|CVE CVSS Score|None|
+|Product Name|string|None|False|Product Name|None|
+|Is CVE Published in NIST NVD|boolean|None|False|Is CVE Published in NIST NVD|None|
+|Vendor Name|string|None|False|Vendor Name|None|
+|Vulnerability Description|string|None|False|Vulnerability Description|None|
+|Vulnerability Name|string|None|False|Vulnerability Name|None|
 
 
 ## Troubleshooting

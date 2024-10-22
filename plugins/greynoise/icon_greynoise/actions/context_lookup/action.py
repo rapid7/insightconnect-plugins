@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import ContextLookupInput, ContextLookupOutput, Input, Component
 
 # Custom imports below
-from icon_greynoise.util.util import GNRequestFailure, GNValueError
+from insightconnect_plugin_runtime.exceptions import PluginException
 from greynoise.exceptions import RequestFailure
 import pendulum
 

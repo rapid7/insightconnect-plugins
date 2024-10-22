@@ -262,6 +262,131 @@ types:
       type: raw_data
       description: GreyNoise IP Raw Data
       required: false
+  vuln_timeline:
+    cisa_kev_date_added:
+      title: "Date Added to CISA KEV"
+      type: string
+      description: "Date Added to CISA KEV"
+      required: false
+    cve_last_updated_date:
+      title: "Date CVE was Last Updated"
+      type: string
+      description: "Date CVE was Last Updated"
+      required: false
+    cve_published_date:
+      title: "Date CVE was Published"
+      type: string
+      description: "Date CVE was Published"
+      required: false
+    first_known_published_date:
+      title: "Date of First Published POC"
+      type: string
+      description: "Date of First Published POC"
+      required: false
+  vuln_exploitation_stats:
+    number_of_available_exploits:
+      title: "Number of Available Exploits"
+      type: integer
+      description: "Number of Available Exploits"
+      required: false
+    number_of_botnets_exploiting_vulnerability:
+      title: "Number of Associated Botnets"
+      type: integer
+      description: "Number of Associated Botnets"
+      required: false
+    number_of_threat_actors_exploiting_vulnerability:
+      title: "Number of Threat Actors Exploiting Vulnerability"
+      type: integer
+      description: "Number of Threat Actors Exploiting Vulnerability"
+      required: false
+  vuln_exploitation_details:
+    attack_vector:
+      title: "Attack Vector"
+      type: string
+      description: "Attack Vector"
+      required: false
+    epss_score:
+      title: "EPSS Score"
+      type: float
+      description: "EPSS Score"
+      required: false
+    exploit_found:
+      title: "Exploit Found"
+      type: boolean
+      description: "Exploit Found"
+      required: false
+    exploitation_registered_in_kev:
+      title: "Exploitation Registered in KEV"
+      type: boolean
+      description: "Exploitation Registered in KEV"
+      required: false
+  vuln_exploitation_activity:
+    activity_seen:
+      title: "GreyNoise Observed Activity"
+      type: string
+      description: "GreyNoise Observed Activity"
+      required: false
+    benign_ip_count_10d:
+      title: "Benign IP Count - 10 days"
+      type: integer
+      description: "Benign IP Count - 10 days"
+      required: false
+    benign_ip_count_1d:
+      title: "Benign IP Count - 1 day"
+      type: integer
+      description: "Benign IP Count - 1 day"
+      required: false
+    benign_ip_count_30d:
+      title: "Benign IP Count - 30 days"
+      type: integer
+      description: "Benign IP Count - 30 days"
+      required: false
+    threat_ip_count_10d:
+      title: "Threat IP Count - 10 days"
+      type: integer
+      description: "Threat IP Count - 10 days"
+      required: false
+    threat_ip_count_1d:
+      title: "Threat IP Count - 1 day"
+      type: integer
+      description: "Threat IP Count - 1 day"
+      required: false
+    threat_ip_count_30d:
+      title: "Threat IP Count - 30 days"
+      type: integer
+      description: "Threat IP Count - 30 days"
+      required: false
+  vuln_details:
+    cve_cvss_score:
+      title: "CVE CVSS Score"
+      type: float
+      description: "CVE CVSS Score"
+      required: false
+    product:
+      title: "Product Name"
+      type: string
+      description: "Product Name"
+      required: false
+    published_to_nist_nvd:
+      title: "Is CVE Published in NIST NVD"
+      type: boolean
+      description: "Is CVE Published in NIST NVD"
+      required: false
+    vendor:
+      title: "Vendor Name"
+      type: string
+      description: "Vendor Name"
+      required: false
+    vulnerability_description:
+      title: "Vulnerability Description"
+      type: string
+      description: "Vulnerability Description"
+      required: false
+    vulnerability_name:
+      title: "Vulnerability Name"
+      type: string
+      description: "Vulnerability Name"
+      required: false
 connection:
   credentials:
     title: GreyNoise API Key
@@ -517,23 +642,53 @@ actions:
         required: false
         example: "This is a tag description"
       references:
-        title: "References"
-        type: "[]object"
+        title: "Tag References"
+        type: "[]string"
         description: "References"
         required: false
         example: "https://thisisareference.url"
       recommend_block:
-        title: "Recommend Block"
+        title: "Tag Recommend Block"
         type: boolean
         description: "GreyNoise Recommends Blocking IPs associated with this Tag"
         required: false
         example: false
       cves:
-        title: "CVEs"
+        title: "Tag Associated CVEs"
         type: "[]string"
         description: "CVEs associate with Tag"
         required: false
         example: "CVE-2020-1234,CVE-1241-23521"
+      created_at:
+        title: "Tag Created At"
+        type: string
+        description: "The date the tag was added to GreyNoise tag library."
+        required: false
+        example: "2024-01-01"
+      id:
+        title: "Tag ID"
+        type: string
+        description: "The unique ID for the tag."
+        required: false
+        example: "aa-bb-cc-dd"
+      label:
+        title: "Tag Label"
+        type: string
+        description: "The unique label for the tag."
+        required: false
+        example: "BINGBOT_SCANNER"
+      slug:
+        title: "Tag Slug"
+        type: string
+        description: "The unique slug for the tag."
+        required: false
+        example: "bingbot-scanner"
+      related_tags:
+        title: "Tag Related Tags"
+        type: "[]string"
+        description: "Tags that are related to this tag."
+        required: false
+        example: "BingBot Scanner"
   gnql_query:
     title: GreyNoise Query
     description: Perform a GreyNoise GNQL Query
@@ -641,3 +796,45 @@ actions:
         description: GreyNoise Actor or Service Name Associated with IP
         required: false
         example: "Acme Inc."
+  vulnerability_lookup:
+    title: Vulnerability Lookup
+    description: Check GreyNoise for Vulnerability information.
+    input:
+      cve_id:
+        title: CVE ID
+        description: A CVE ID to look up in GreyNoise
+        type: string
+        required: true
+        example: CVE-2020-12345
+    output:
+      id:
+        title: CVE ID
+        description: Value that was searched
+        type: string
+        required: false
+        example: CVE-2020-12345
+      details:
+        title: GreyNoise Vulnerability Details
+        description: GreyNoise Vulnerability Details
+        type: vuln_details
+        required: false
+      exploitation_activity:
+        title: GreyNoise Vulnerability Exploitation Activity
+        description: GreyNoise Vulnerability Exploitation Activity
+        type: vuln_exploitation_activity
+        required: false
+      exploitation_details:
+        title: GreyNoise Vulnerability Exploitation Details
+        description: GreyNoise Vulnerability Exploitation Details
+        type: vuln_exploitation_details
+        required: false
+      exploitation_stats:
+        title: GreyNoise Vulnerability Exploitation Stats
+        description: GreyNoise Vulnerability Exploitation Stats
+        type: vuln_exploitation_stats
+        required: false
+      timeline:
+        title: GreyNoise Vulnerability Timeline
+        description: GreyNoise Vulnerability Timeline
+        type: vuln_timeline
+        required: false

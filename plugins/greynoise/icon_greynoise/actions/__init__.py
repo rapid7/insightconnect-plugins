@@ -12,3 +12,5 @@ from .gnql_query.action import GnqlQuery
 
 from .community_lookup.action import CommunityLookup
 
+from .vulnerability_lookup.action import VulnerabilityLookup
+

@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import GetTagDetailsInput, GetTagDetailsOutput, Input, Component
 
 # Custom imports below
-from icon_greynoise.util.util import GNRequestFailure
+from insightconnect_plugin_runtime.exceptions import PluginException
 from greynoise.exceptions import RequestFailure
 
 

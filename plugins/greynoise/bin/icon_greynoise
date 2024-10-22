@@ -45,6 +45,8 @@ def main():
             self.add_action(actions.GnqlQuery())
         
             self.add_action(actions.CommunityLookup())
+
+            self.add_action(actions.VulnerabilityLookup())
         
 
     """Run plugin"""

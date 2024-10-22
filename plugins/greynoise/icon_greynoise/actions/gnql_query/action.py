@@ -3,7 +3,6 @@ from .schema import GnqlQueryInput, GnqlQueryOutput, Input, Component
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
-from icon_greynoise.util.util import GNRequestFailure
 from greynoise.exceptions import RequestFailure
 
 

@@ -1,6 +1,6 @@
 {
-	"spec": "a98730fc78b02f89c61a4b97f4a9c0ed",
-	"manifest": "db04b78016bee2aa0bc0886f59d31e13",
+	"spec": "76d5392533ce7a55178d793fa41c1ce0",
+	"manifest": "c15acc1010cdfffa3221e9a51064cd30",
 	"setup": "7d0148b4efc7745f17003a77e9e73c55",
 	"schemas": [
 		{
@@ -13,7 +13,7 @@
 		},
 		{
 			"identifier": "get_tag_details/schema.py",
-			"hash": "a295f565f4baa12930daa815139db5d4"
+			"hash": "66fd60aed88d9b9a3fd1ef8b3f74a6f7"
 		},
 		{
 			"identifier": "gnql_query/schema.py",
@@ -26,6 +26,10 @@
 		{
 			"identifier": "riot_lookup/schema.py",
 			"hash": "0ee1bf7d6db7ee88dfd7f105bfb50ea6"
+		},
+		{
+			"identifier": "vulnerability_lookup/schema.py",
+			"hash": "7e81bb2eeded003ea9e66b43148fb430"
 		},
 		{
 			"identifier": "connection/schema.py",

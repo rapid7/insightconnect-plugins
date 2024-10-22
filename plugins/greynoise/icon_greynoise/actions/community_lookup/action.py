@@ -3,7 +3,7 @@ from .schema import CommunityLookupInput, CommunityLookupOutput, Input, Componen
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
-from icon_greynoise.util.util import GNRequestFailure, GNValueError
+from greynoise.exceptions import RequestFailure
 from greynoise import GreyNoise
 import pendulum
 
