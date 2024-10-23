@@ -533,6 +533,7 @@ Example output:
 
 # Version History
 
+* 2.1.11 - Task Monitor Users: Return 500 for retry your request error | Bump SDK to 6.1.4
 * 2.1.10 - Set Monitor Users task output length | Fix to remove whitespace from connection inputs
 * 2.1.9 - SDK Bump to 6.1.0 | Task Connection test added
 * 2.1.8 - Task Monitor Users: Allow lookback to be 7 days and initial run to be 24 hours & raise PluginException for API errors.
