@@ -33,9 +33,11 @@ key_features:
   - "Query for additional Tag details"
   - "Perform a GreyNoise Community IP Lookup"
   - "Perform a GreyNoise Vulnerability Lookup"
+  - "Perform a GreyNoise IP Timeline Lookup"
+  - "Perform a GreyNoise IP Similarity Lookup"
 troubleshooting: "Ensure that the GreyNoise API key used has appropriate access for the actions being used."
 version_history:
-  - "2.0.0 - Upgrade GreyNoise SDK v2.3.0, Fix Action Outputs, Add `vulnerability_lookup` action, Add `timeline_lookup` action"
+  - "2.0.0 - Upgrade GreyNoise SDK v2.3.0, Fix Action Outputs, Add `vulnerability_lookup` action, Add `timeline_lookup` action, Add `similar_lookup` action"
   - "1.0.1 - Fix bug with connection parameters"
   - "1.0.0 - Initial plugin."
 links:
@@ -568,6 +570,118 @@ types:
       type: string
       description: Tag Name
       required: false
+  ip_sim:
+    actor:
+      title: Actor
+      type: string
+      description: Actor
+      required: false
+    asn:
+      title: ASN
+      type: string
+      description: ASN
+      required: false
+    city:
+      title: City
+      type: string
+      description: City
+      required: false
+    classification:
+      title: Classification
+      type: string
+      description: Classification
+      required: false
+    country:
+      title: Country
+      type: string
+      description: Country
+      required: false
+    country_code:
+      title: Country Code
+      type: string
+      description: Country Code
+      required: false
+    first_seen:
+      title: First Seen
+      type: string
+      description: First Seen
+      required: false
+    ip:
+      title: IP Address
+      type: string
+      description: IP Address
+      required: false
+    last_seen:
+      title: Last Seen
+      type: string
+      description: Last Seen
+      required: false
+    organization:
+      title: Organization
+      type: string
+      description: Organization
+      required: false
+  similar_ip:
+    actor:
+      title: Actor
+      type: string
+      description: Actor
+      required: false
+    asn:
+      title: ASN
+      type: string
+      description: ASN
+      required: false
+    city:
+      title: City
+      type: string
+      description: City
+      required: false
+    classification:
+      title: Classification
+      type: string
+      description: Classification
+      required: false
+    country:
+      title: Country
+      type: string
+      description: Country
+      required: false
+    country_code:
+      title: Country Code
+      type: string
+      description: Country Code
+      required: false
+    features:
+      title: Features Matched
+      type: "[]string"
+      description: Features Matched
+      required: false
+    first_seen:
+      title: First Seen
+      type: string
+      description: First Seen
+      required: false
+    ip:
+      title: IP Address
+      type: string
+      description: IP Address
+      required: false
+    last_seen:
+      title: Last Seen
+      type: string
+      description: Last Seen
+      required: false
+    organization:
+      title: Organization
+      type: string
+      description: Organization
+      required: false
+    score:
+      title: Similarity Score
+      type: float
+      description: Similarity Score
+      required: false
 connection:
   credentials:
     title: GreyNoise API Key
@@ -843,31 +957,31 @@ actions:
       created_at:
         title: "Tag Created At"
         type: string
-        description: "The date the tag was added to GreyNoise tag library."
+        description: "The date the tag was added to GreyNoise tag library"
         required: false
         example: "2024-01-01"
       id:
         title: "Tag ID"
         type: string
-        description: "The unique ID for the tag."
+        description: "The unique ID for the tag"
         required: false
         example: "aa-bb-cc-dd"
       label:
         title: "Tag Label"
         type: string
-        description: "The unique label for the tag."
+        description: "The unique label for the tag"
         required: false
         example: "BINGBOT_SCANNER"
       slug:
         title: "Tag Slug"
         type: string
-        description: "The unique slug for the tag."
+        description: "The unique slug for the tag"
         required: false
         example: "bingbot-scanner"
       related_tags:
         title: "Tag Related Tags"
         type: "[]string"
-        description: "Tags that are related to this tag."
+        description: "Tags that are related to this tag"
         required: false
         example: "BingBot Scanner"
   gnql_query:
@@ -979,7 +1093,7 @@ actions:
         example: "Acme Inc."
   vulnerability_lookup:
     title: Vulnerability Lookup
-    description: Check GreyNoise for Vulnerability information.
+    description: Check GreyNoise for Vulnerability information
     input:
       cve_id:
         title: CVE ID
@@ -1046,3 +1160,30 @@ actions:
         type: "[]timeline_activity"
         description: IP Timeline Activity Events
         required: false
+  similar_lookup:
+    title: IP Similarity Lookup
+    description: Query a routable IPv4 address in the GreyNoise for similar IPs
+    input:
+      ip_address:
+        title: IP Address
+        description: Routable IPv4 address to query
+        type: string
+        required: true
+        example: 1.2.3.4
+    output:
+      ip:
+        title: IP Similarity Metadata
+        type: ip_sim
+        description: IP Similarity Metadata
+        required: false
+      similar_ips:
+        title: Similar IPs
+        type: "[]similar_ip"
+        description: Similar IPs
+        required: false
+      total:
+        title: Total Number of IPs
+        type: integer
+        description: Total Number of Similar IPs returned
+        required: false
+        example: 5

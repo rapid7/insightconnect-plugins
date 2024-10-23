@@ -35,20 +35,23 @@ def main():
                 connection=connection.Connection()
             )
             self.add_action(actions.ContextLookup())
-
+        
             self.add_action(actions.RiotLookup())
-
+        
             self.add_action(actions.QuickLookup())
-
+        
             self.add_action(actions.GetTagDetails())
-
+        
             self.add_action(actions.GnqlQuery())
-
+        
             self.add_action(actions.CommunityLookup())
-
+        
             self.add_action(actions.VulnerabilityLookup())
-
+        
             self.add_action(actions.TimelineLookup())
+        
+            self.add_action(actions.SimilarLookup())
+        
 
     """Run plugin"""
     cli = insightconnect_plugin_runtime.CLI(ICONGreynoise())

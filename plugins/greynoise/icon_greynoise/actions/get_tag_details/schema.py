@@ -65,7 +65,7 @@ class GetTagDetailsOutput(insightconnect_plugin_runtime.Output):
     "created_at": {
       "type": "string",
       "title": "Tag Created At",
-      "description": "The date the tag was added to GreyNoise tag library.",
+      "description": "The date the tag was added to GreyNoise tag library",
       "order": 8
     },
     "cves": {
@@ -86,7 +86,7 @@ class GetTagDetailsOutput(insightconnect_plugin_runtime.Output):
     "id": {
       "type": "string",
       "title": "Tag ID",
-      "description": "The unique ID for the tag.",
+      "description": "The unique ID for the tag",
       "order": 9
     },
     "intention": {
@@ -98,7 +98,7 @@ class GetTagDetailsOutput(insightconnect_plugin_runtime.Output):
     "label": {
       "type": "string",
       "title": "Tag Label",
-      "description": "The unique label for the tag.",
+      "description": "The unique label for the tag",
       "order": 10
     },
     "name": {
@@ -125,7 +125,7 @@ class GetTagDetailsOutput(insightconnect_plugin_runtime.Output):
     "related_tags": {
       "type": "array",
       "title": "Tag Related Tags",
-      "description": "Tags that are related to this tag.",
+      "description": "Tags that are related to this tag",
       "items": {
         "type": "string"
       },
@@ -134,7 +134,7 @@ class GetTagDetailsOutput(insightconnect_plugin_runtime.Output):
     "slug": {
       "type": "string",
       "title": "Tag Slug",
-      "description": "The unique slug for the tag.",
+      "description": "The unique slug for the tag",
       "order": 11
     }
   },

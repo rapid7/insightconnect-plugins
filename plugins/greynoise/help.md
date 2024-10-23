@@ -215,17 +215,17 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |category|string|False|Tag Category|activity|
-|created_at|string|False|The date the tag was added to GreyNoise tag library.|2024-01-01|
+|created_at|string|False|The date the tag was added to GreyNoise tag library|2024-01-01|
 |cves|[]string|False|CVEs associate with Tag|CVE-2020-1234,CVE-1241-23521|
 |description|string|False|Description of the Tag|This is a tag description|
-|id|string|False|The unique ID for the tag.|aa-bb-cc-dd|
+|id|string|False|The unique ID for the tag|aa-bb-cc-dd|
 |intention|string|False|Tag Intention|malicious|
-|label|string|False|The unique label for the tag.|BINGBOT_SCANNER|
+|label|string|False|The unique label for the tag|BINGBOT_SCANNER|
 |name|string|False|Name of GreyNoise Tag|BingBot|
 |recommend_block|boolean|False|GreyNoise Recommends Blocking IPs associated with this Tag|False|
 |references|[]string|False|References|https://thisisareference.url|
-|related_tags|[]string|False|Tags that are related to this tag.|BingBot Scanner|
-|slug|string|False|The unique slug for the tag.|bingbot-scanner|
+|related_tags|[]string|False|Tags that are related to this tag|BingBot Scanner|
+|slug|string|False|The unique slug for the tag|bingbot-scanner|
   
 Example output:
 
@@ -378,6 +378,70 @@ Example output:
 }
 ```
 
+#### IP Similarity Lookup
+
+This action is used to query a routable IPv4 address in the GreyNoise for similar IPs
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|ip_address|string|None|True|Routable IPv4 address to query|None|1.2.3.4|None|None|
+  
+Example input:
+
+```
+{
+  "ip_address": "1.2.3.4"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|ip|ip_sim|False|IP Similarity Metadata|None|
+|similar_ips|[]similar_ip|False|Similar IPs|None|
+|total|integer|False|Total Number of Similar IPs returned|None|
+  
+Example output:
+
+```
+{
+  "ip": {
+    "ASN": {},
+    "Actor": "",
+    "City": {},
+    "Classification": {},
+    "Country": {},
+    "Country Code": {},
+    "First Seen": {},
+    "IP Address": {},
+    "Last Seen": {},
+    "Organization": {}
+  },
+  "similar_ips": [
+    {
+      "ASN": {},
+      "Actor": "",
+      "City": {},
+      "Classification": {},
+      "Country": {},
+      "Country Code": {},
+      "Features Matched": [
+        {}
+      ],
+      "First Seen": {},
+      "IP Address": {},
+      "Last Seen": {},
+      "Organization": {},
+      "Similarity Score": 0.0
+    }
+  ],
+  "total": 0
+}
+```
+
 #### IP Timeline Lookup
 
 This action is used to query a routable IPv4 address in the GreyNoise for Scanner Daily Timeline details
@@ -466,7 +530,7 @@ Example output:
 
 #### Vulnerability Lookup
 
-This action is used to check GreyNoise for Vulnerability information.
+This action is used to check GreyNoise for Vulnerability information
 
 ##### Input
 
@@ -728,6 +792,38 @@ Example output:
 |Tag Description|string|None|False|Tag Description|None|
 |Tag Intention|string|None|False|Tag Intention|None|
 |Tag Name|string|None|False|Tag Name|None|
+  
+**ip_sim**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Actor|string|None|False|Actor|None|
+|ASN|string|None|False|ASN|None|
+|City|string|None|False|City|None|
+|Classification|string|None|False|Classification|None|
+|Country|string|None|False|Country|None|
+|Country Code|string|None|False|Country Code|None|
+|First Seen|string|None|False|First Seen|None|
+|IP Address|string|None|False|IP Address|None|
+|Last Seen|string|None|False|Last Seen|None|
+|Organization|string|None|False|Organization|None|
+  
+**similar_ip**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Actor|string|None|False|Actor|None|
+|ASN|string|None|False|ASN|None|
+|City|string|None|False|City|None|
+|Classification|string|None|False|Classification|None|
+|Country|string|None|False|Country|None|
+|Country Code|string|None|False|Country Code|None|
+|Features Matched|[]string|None|False|Features Matched|None|
+|First Seen|string|None|False|First Seen|None|
+|IP Address|string|None|False|IP Address|None|
+|Last Seen|string|None|False|Last Seen|None|
+|Organization|string|None|False|Organization|None|
+|Similarity Score|float|None|False|Similarity Score|None|
 
 
 ## Troubleshooting
@@ -736,7 +832,7 @@ Ensure that the GreyNoise API key used has appropriate access for the actions be
 
 # Version History
 
-* 2.0.0 - Upgrade GreyNoise SDK v2.3.0, Fix Action Outputs, Add `vulnerability_lookup` action
+* 2.0.0 - Upgrade GreyNoise SDK v2.3.0, Fix Action Outputs, Add `vulnerability_lookup` action, Add `timeline_lookup` action
 * 1.0.1 - Fix bug with connection parameters
 * 1.0.0 - Initial plugin.
 

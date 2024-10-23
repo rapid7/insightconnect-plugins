@@ -15,3 +15,6 @@ from .community_lookup.action import CommunityLookup
 from .vulnerability_lookup.action import VulnerabilityLookup
 
 from .timeline_lookup.action import TimelineLookup
+
+from .similar_lookup.action import SimilarLookup
+
