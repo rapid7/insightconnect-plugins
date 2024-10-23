@@ -10,6 +10,8 @@ GreyNoise helps analysts recognize events not worth their attention. Indicators 
 * Query for additional Tag details
 * Perform a GreyNoise Community IP Lookup
 * Perform a GreyNoise Vulnerability Lookup
+* Perform a GreyNoise IP Timeline Lookup
+* Perform a GreyNoise IP Similarity Lookup
 
 # Requirements
 
@@ -402,7 +404,7 @@ Example input:
 | :--- | :--- | :--- | :--- | :--- |
 |ip|ip_sim|False|IP Similarity Metadata|None|
 |similar_ips|[]similar_ip|False|Similar IPs|None|
-|total|integer|False|Total Number of Similar IPs returned|None|
+|total|integer|False|Total Number of Similar IPs returned|5|
   
 Example output:
 
@@ -438,7 +440,7 @@ Example output:
       "Similarity Score": 0.0
     }
   ],
-  "total": 0
+  "total": 5
 }
 ```
 
@@ -832,7 +834,7 @@ Ensure that the GreyNoise API key used has appropriate access for the actions be
 
 # Version History
 
-* 2.0.0 - Upgrade GreyNoise SDK v2.3.0, Fix Action Outputs, Add `vulnerability_lookup` action, Add `timeline_lookup` action
+* 2.0.0 - Upgrade GreyNoise SDK v2.3.0, Fix Action Outputs, Add `vulnerability_lookup` action, Add `timeline_lookup` action, Add `similar_lookup` action
 * 1.0.1 - Fix bug with connection parameters
 * 1.0.0 - Initial plugin.
 
