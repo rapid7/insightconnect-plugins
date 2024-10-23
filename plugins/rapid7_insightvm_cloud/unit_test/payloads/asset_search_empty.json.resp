@@ -1,0 +1,16 @@
+{
+  "data": [
+  ],
+  "metadata": {
+    "number": 0,
+    "size": 100,
+    "totalResources": 2,
+    "totalPages": 1
+  },
+  "links": [
+    {
+      "href": "https://us.api.insight.rapid7.com:443/vm/v4/integration/assets?asset_criteria=last_scan_end+%3E+2000-01-01T00%3A00%3A00.000Z&sort_criteria=risk-score&sort_criteria=criticality-tag&vuln_criteria=severity+IN+%5B%27Critical%27%2C+%27Severe%27%5D&page=0&size=10&sort=id,asc",
+      "rel": "self"
+    }
+  ]
+}
