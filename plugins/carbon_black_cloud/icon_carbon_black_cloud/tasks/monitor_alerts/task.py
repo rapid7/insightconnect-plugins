@@ -233,7 +233,8 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                     )
                     has_more_pages = True
 
-            else:
+            # we use if not observations, vs else, to ensure we pick up on the case where we dedupe every observation
+            if not observations:
                 state[LAST_OBSERVATION_TIME] = state.get(OBSERVATION_QUERY_END_TIME)
 
             if not has_more_pages:
@@ -347,6 +348,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 if comparison_date > saved_time:
                     self.logger.info(f"Saved time ({saved_time}) exceeds cut off, moving to ({comparison_date}).")
                     state[cb_type_time] = comparison_date
+                    state.pop(OBSERVATION_JOB_OFFSET, None)
 
         alerts_start = state.get(LAST_ALERT_TIME)
         observation_start = state.get(LAST_OBSERVATION_TIME)
