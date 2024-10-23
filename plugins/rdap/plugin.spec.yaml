@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rdap
 title: RDAP
 description: "The Registration Data Access Protocol (RDAP) is the successor to WHOIS. Like WHOIS, RDAP provides access to information about Internet resources (domain names, autonomous system numbers, and IP addresses)"
-version: 2.0.2
+version: 2.0.3
 connection_version: 2
 vendor: rapid7
 support: rapid7
@@ -14,13 +14,14 @@ fedramp_ready: true
 supported_versions: ["RDAP 20-12-2022"]
 sdk:
   type: slim
-  version: 6.1.0
+  version: 6.1.4
   user: nobody
 key_features:
   - IP Lookup
   - Domain Lookup
   - ASN Lookup
 version_history:
+  - "2.0.3 - Bumping requirements.txt | SDK Bump to 6.1.4"
   - "2.0.2 - Initial updates for fedramp compliance | Updated SDK to the latest version"
   - "2.0.1 - Updated SDK to the latest version"
   - "2.0.0 - `Domain Lookup`, `IP Address Lookup`, `ASN Lookup`: Updated action outputs and refactored"
