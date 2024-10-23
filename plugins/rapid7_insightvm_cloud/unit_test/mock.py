@@ -51,9 +51,11 @@ def mock_request_post(url, params, headers, data):  # noqa: MC0001
     if headers.get("x-api-key") == STUB_SECRET_KEY_SERVER_ERROR:
         return MockResponse("server_error", 500)
     if url == f"https://{STUB_REGION}.api.insight.rapid7.com/vm/v4/integration/assets":
-        if data.get("asset") == STUB_BAD_ASSET_CRITERIA:
+        if params.get("page"):
+            return MockResponse("asset_search_empty", 200)
+        if data.get("asset", "") == STUB_BAD_ASSET_CRITERIA or STUB_BAD_ASSET_CRITERIA in data.get("asset", ""):
             return MockResponse("asset_search_invalid_asset_criteria", 400)
-        if data.get("vulnerability") == STUB_BAD_VULN_CRITERIA:
+        if data.get("vulnerability") == STUB_BAD_VULN_CRITERIA or STUB_BAD_VULN_CRITERIA in data.get("asset", ""):
             return MockResponse("asset_search_invalid_vuln_criteria", 400)
         return MockResponse("asset_search", 200)
     if url == f"https://{STUB_REGION}.api.insight.rapid7.com/vm/v4/integration/vulnerabilities":
