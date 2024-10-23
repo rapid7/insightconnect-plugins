@@ -745,38 +745,37 @@ Example output:
 ```
 {
   "has_more": true,
-  "results": [
-    {
-      "_id": "",
-      "page": {
-        "asn": {},
-        "asnname": {},
-        "city": {},
-        "country": {},
-        "domain": {},
-        "ip": {},
-        "ptr": {},
-        "server": {},
-        "url": {}
+  [
+   {
+      "_id":"9b135a8b-d6ba-4d39-a93c-de0cd4378dcc",
+      "page":{
+         "asn":"AS24940",
+         "asnname":"HETZNER-AS, DE",
+         "city":"",
+         "country":"DE",
+         "domain":"urlscan.io",
+         "ip":"148.251.45.170",
+         "ptr":"urlscan.io",
+         "server":"nginx",
+         "url":"https://urlscan.io/"
       },
-      "result": {},
-      "stats": {
-        "consoleMsgs": 0,
-        "dataLength": {},
-        "encodedDataLength": {},
-        "requests": {},
-        "uniqIPs": {}
+      "result":"https://urlscan.io/api/v1/result/9b135a8b-d6ba-4d39-a93c-de0cd4378dcc",
+      "stats":{
+         "consoleMsgs":0,
+         "dataLength":835633,
+         "encodedDataLength":296287,
+         "requests":30,
+         "uniqIPs":6
       },
-      "task": {
-        "method": {},
-        "options": {},
-        "source": {},
-        "time": "",
-        "url": {},
-        "visibility": {}
+      "task":{
+         "method":"api",
+         "source":"api",
+         "time":"2019-01-03T16:00:28.529Z",
+         "url":"http://urlscan.io",
+         "visibility":"public"
       },
-      "uniq_countries": {}
-    }
+      "uniq_countries":2
+   }
   ],
   "total": 0
 }
