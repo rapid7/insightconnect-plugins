@@ -53,8 +53,9 @@ This action is used to search for assets using filtered asset search
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |asset_criteria|string|None|False|Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames|None|asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'|None|None|
 |comparison_time|date|None|False|The date and time to compare the asset current state against to detect changes|None|2021-04-15T17:56:47Z|None|None|
+|criteria_operator|string|None|False|The logical query operator used to combine asset and/or vulnerability criteria. Only applicable when both asset and vulnerability criteria are entered|["", "AND", "OR"]|AND|None|None|
 |current_time|date|None|False|The current date and time to compare against the asset state to detect changes|None|2021-04-15T17:56:47Z|None|None|
-|size|integer|200|False|The number of assets to retrieve. If blank then will default to 200 assets returned, the maximum limit is 500 assets|None|100|None|None|
+|size|integer|200|False|The number of assets to retrieve. If blank then will default to 200 assets returned|None|100|None|None|
 |sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{"risk-score": "asc", "criticality-tag": "desc"}|None|None|
 |vuln_criteria|string|None|False|Vulnerability criteria to filter by|None|vulnerability.categories IN ['example']|None|None|
   
@@ -64,6 +65,7 @@ Example input:
 {
   "asset_criteria": "asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'",
   "comparison_time": "2021-04-15T17:56:47Z",
+  "criteria_operator": "AND",
   "current_time": "2021-04-15T17:56:47Z",
   "size": 200,
   "sort_criteria": {
@@ -890,6 +892,7 @@ Example output:
 
 # Version History
 
+* 8.1.0 - Action `Asset Search`: Added optional asset and vulnerability criteria logical operator | Updated action to return more than 500 results
 * 8.0.0 - Output for `Asset Search` and `Get Asset` to label fields `ID` and `Solution Type` as un-required
 * 7.0.0 - `Asset Search` and `Get Asset` actions output field `remediated` updated to type array of object
 * 6.0.0 - Asset Search: Modify type of output field `new` when `comparison_time` input is used.
