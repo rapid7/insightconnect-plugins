@@ -1132,7 +1132,7 @@ actions:
     input:
       size:
         title: Size
-        description: The number of assets to retrieve. If blank then will default to 200 assets returned, the maximum limit is 500 assets
+        description: The number of assets to retrieve. If blank then will default to 200 assets returned
         type: integer
         required: false
         default: 200
