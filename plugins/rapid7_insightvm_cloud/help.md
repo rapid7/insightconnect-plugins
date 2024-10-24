@@ -55,7 +55,7 @@ This action is used to search for assets using filtered asset search
 |comparison_time|date|None|False|The date and time to compare the asset current state against to detect changes|None|2021-04-15T17:56:47Z|None|None|
 |criteria_operator|string|None|False|The logical query operator used to combine asset and/or vulnerability criteria. Only applicable when both asset and vulnerability criteria are entered|["", "AND", "OR"]|AND|None|None|
 |current_time|date|None|False|The current date and time to compare against the asset state to detect changes|None|2021-04-15T17:56:47Z|None|None|
-|size|integer|200|False|The number of assets to retrieve. If blank then will default to 200 assets returned, the maximum limit is 500 assets|None|100|None|None|
+|size|integer|200|False|The number of assets to retrieve. If blank then will default to 200 assets returned|None|100|None|None|
 |sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{"risk-score": "asc", "criticality-tag": "desc"}|None|None|
 |vuln_criteria|string|None|False|Vulnerability criteria to filter by|None|vulnerability.categories IN ['example']|None|None|
   
