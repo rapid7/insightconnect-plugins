@@ -129,15 +129,23 @@ class TestMonitorAlerts(TestCase):
                 "Bad Request",
                 STUB_STATE_ERROR,
                 PluginException(
-                    data="An error occurred during plugin execution!\n\nThe server is unable to process the request. Verify your plugin input is correct and not malformed and try again. If the issue persists, please contact support."
+                    data="An error occurred during plugin execution!\n\nAPI Error.  Bad request, invalid JSON."
                 ),
                 400,
+            ],
+            [
+                "Wrong License",
+                STUB_STATE_ERROR,
+                PluginException(
+                    data="An error occurred during plugin execution!\n\nAPI Error.  Unauthorized access. User does not have the required license type to run this API."
+                ),
+                402,
             ],
             [
                 "Forbidden",
                 STUB_STATE_ERROR,
                 PluginException(
-                    data="An error occurred during plugin execution!\n\nThe account configured in your connection is unauthorized to access this service. Verify the permissions for your account and try again."
+                    data="An error occurred during plugin execution!\n\nAPI Error.  Forbidden. The provided API Key does not have the required RBAC permissions to run this API."
                 ),
                 403,
             ],
@@ -145,7 +153,7 @@ class TestMonitorAlerts(TestCase):
                 "Not Found",
                 STUB_STATE_ERROR,
                 PluginException(
-                    data="An error occurred during plugin execution!\n\nInvalid or unreachable endpoint provided. Verify the URLs or endpoints in your configuration are correct."
+                    data="An error occurred during plugin execution!\n\nAPI Error.  The object at https://example.com/public_api/v1/alerts/get_alerts does not exist. Check the FQDN connection setting and try again."
                 ),
                 404,
             ],
@@ -166,6 +174,7 @@ class TestMonitorAlerts(TestCase):
         error_msg: Union[str, PluginException],
         error_code: int,
     ) -> None:
+        self.maxDiff = None
         # This if statement is to handle the "if not type response" statement specifically
         if error_code == 500:
             mocked_response = mock_conditions(200, file_name="monitor_alerts_faulty_response")
