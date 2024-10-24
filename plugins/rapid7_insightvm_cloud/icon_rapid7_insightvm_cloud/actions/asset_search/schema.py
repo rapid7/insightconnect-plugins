@@ -63,7 +63,7 @@ class AssetSearchInput(insightconnect_plugin_runtime.Input):
     "size": {
       "type": "integer",
       "title": "Size",
-      "description": "The number of assets to retrieve. If blank then will default to 200 assets returned, the maximum limit is 500 assets",
+      "description": "The number of assets to retrieve. If blank then will default to 200 assets returned",
       "default": 200,
       "order": 1
     },
