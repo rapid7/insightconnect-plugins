@@ -33,7 +33,7 @@ class GetIncidents(insightconnect_plugin_runtime.Trigger):
             )
             # Separate the host identifier values
             for incident in incidents:
-                incident["hosts"] = Util.split_list_values(incident.get("hosts", []), ":")
+                incident["hosts"] = Util.split_list_values(incident.get("hosts", []))
             # Process incidents from oldest to newest
             for incident_time in Util.send_items_to_platform_for_trigger(
                 self, incidents, Output.INCIDENT, last_event_processed_time_ms, time_field
