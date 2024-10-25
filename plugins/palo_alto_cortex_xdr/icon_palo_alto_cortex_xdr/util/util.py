@@ -29,8 +29,9 @@ class Util:
             if isinstance(item, str):
                 item_split = item.split(":")
                 if len(item_split) == 2:
-                    output_list.append({"hostname": item_split[0], "endpoint_id": item_split[1]})
-        # duplicates = set()
+                    output_list.append({'hostname': item_split[0], 'endpoint_id': item_split[1]})
+                else:
+                    output_list.append({"hostname": item_split[0]})
         return output_list
 
     @staticmethod
