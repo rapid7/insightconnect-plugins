@@ -26,24 +26,13 @@
 
 ## Setup
 
-To locate your base URI and key:
+The connection configuration accepts the following parameters:  
 
-1. Log in to the ZIA Admin Portal using your admin credentials.
-2. Go to **Administration > API Key Management**.
-
-In order to view the API Key Management page, the admin must be assigned an admin role that includes the Authentication Configuration functional scope.
-
-In the **Organization API Key** tab, the base URI and key details are displayed within the table.
-
-For more information see the [Zscaler getting started guide](https://help.zscaler.com/zia/api-getting-started) on obtaining the API key and base URL.
-
-The connection configuration accepts the following parameters:
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|Enter organization API key|None|14M2d25A7c12|
-|credentials|credential_username_password|None|True|Username and password to access Zscaler|None|{"username":"user@example.com", "password":"mypassword"}|
-|url|string|None|True|Base URL, ex. 'https://admin.zscalerbeta.net'. See https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey for details|None|https://admin.zscalerbeta.net|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|api_key|credential_secret_key|None|True|Enter organization API key|None|14M2d25A7c12|None|None|
+|credentials|credential_username_password|None|True|Username and password to access Zscaler|None|{"username":"user@example.com", "password":"mypassword"}|None|None|
+|url|string|None|True|Base URL, ex. 'https://admin.zscalerbeta.net'. See https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey for details|None|https://admin.zscalerbeta.net|None|None|
 
 Example input:
 
@@ -51,8 +40,8 @@ Example input:
 {
   "api_key": "14M2d25A7c12",
   "credentials": {
-    "username":"user@example.com",
-    "password":"mypassword"
+    "password": "mypassword",
+    "username": "user@example.com"
   },
   "url": "https://admin.zscalerbeta.net"
 }
@@ -62,20 +51,162 @@ Example input:
 
 ### Actions
 
-#### Get Blacklist URL
 
-This action is used to get blacklisted URLs.
+#### Blacklist URL
+
+This action is used to add or remove URLs from a blacklist. These URLs will appear in the "Blocked Malicious URLs" section on the Advanced Threats Policy page.
 
 ##### Input
 
-_This action does not contain any inputs._
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|activate_configuration|boolean|False|True|Set to true to activate configuration changes|None|False|None|None|
+|blacklist_state|boolean|True|False|True to blacklist a URL, false to unblacklist a URL|None|True|None|None|
+|urls|[]string|None|True|A given set of one or more URLs or domains to update in the blacklist|None|["www.example.com", "http://rapid7.com"]|None|None|
+  
+Example input:
+
+```
+{
+  "activate_configuration": false,
+  "blacklist_state": true,
+  "urls": [
+    "www.example.com",
+    "http://rapid7.com"
+  ]
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|blacklisted_urls|[]string|False|URLs added to the blacklist|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|status|string|True|Activation status for a configuration change|ACTIVE|
+|success|boolean|True|Whether or not the request succeeded|True|
+  
+Example output:
 
+```
+{
+  "status": "ACTIVE",
+  "success": true
+}
+```
+
+#### Create User
+
+This action is used to adds a new user. A user can belong to multiple groups, but can only belong to one department
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|comments|string|None|False|Additional information about this user|None|Example comment|None|None|
+|departmentName|string|None|True|Department a user belongs to|None|Department Name|None|None|
+|email|string|None|True|User email consists of a user name and domain name. It does not have to be a valid email address, but it must be unique and its domain must belong to the organization|None|user@example.com|None|None|
+|groupNames|[]string|None|True|List of groups a user belongs to|None|["Group Name"]|None|None|
+|name|string|None|True|User name|None|John|None|None|
+|password|password|None|True|User's password. Applicable only when authentication type is Hosted DB. Password strength must follow what is defined in the auth settings|None|password12!|None|None|
+|tempAuthEmail|string|None|False|If you enabled one-time tokens or links, enter the email address to which the Zscaler service sends the tokens or links. If this is empty, the service sends the email to the User email|None|user@example.com|None|None|
+  
+Example input:
+
+```
+{
+  "comments": "Example comment",
+  "departmentName": "Department Name",
+  "email": "user@example.com",
+  "groupNames": [
+    "Group Name"
+  ],
+  "name": "John",
+  "password": "password12!",
+  "tempAuthEmail": "user@example.com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|user|user|False|An organization user|{}|
+  
+Example output:
+
+```
+{
+  "user": {
+    "id": 123456789,
+    "name": "Sample user",
+    "email": "user@example.com",
+    "groups": [
+      {
+        "id": 123456789,
+        "name": "Test Group",
+        "idpId": 123456789,
+        "comments": "Sample comment"
+      }
+    ],
+    "department": {
+      "id": 123456789,
+      "name": "Test Department",
+      "idpId": 123456789,
+      "comments": "Sample comment",
+      "deleted": false
+    },
+    "comments": "Sample comment",
+    "tempAuthEmail": "user@example.com",
+    "adminUser": false
+  }
+}
+```
+
+#### Delete User
+
+This action is used to deletes the user for the specified ID
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|userId|integer|None|True|The unique identifier for the user|None|12345678|None|None|
+  
+Example input:
+
+```
+{
+  "userId": 12345678
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|False|Whether or not the request succeeded|True|
+  
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Get Blacklist URL
+
+This action is used to get blacklisted URLs
+
+##### Input
+  
+*This action does not contain any inputs.*
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|blacklisted_urls|[]string|False|URLs added to the blacklist|None|
+  
 Example output:
 
 ```
@@ -94,14 +225,14 @@ Example output:
 
 #### Get Sandbox Report for Hash
 
-This action is used to get a full report for an MD5 hash of a file that was analyzed by Sandbox.
+This action is used to get a full report for an MD5 hash of a file that was analyzed by Sandbox
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|hash|string|None|True|MD5 hash to get report|None|9de5069c5afe602b2ea0a04b66beb2c0|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|hash|string|None|True|MD5 hash to get report|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
+  
 Example input:
 
 ```
@@ -112,10 +243,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|full_report|full_report|True|Full report of an analyzed MD5 hash|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|full_report|full_report|True|Full report of an analyzed MD5 hash|None|
+  
 Example output:
 
 ```
@@ -179,269 +310,17 @@ Example output:
 }
 ```
 
-#### Blacklist URL
-
-This action is used to add or remove URLs from a blacklist. These URLs will appear in the "Blocked Malicious URLs" section on the Advanced Threats Policy page.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|activate_configuration|boolean|False|True|Set to true to activate configuration changes|None|False|
-|blacklist_state|boolean|True|False|True to blacklist a URL, false to unblacklist a URL|None|True|
-|urls|[]string|None|True|A given set of one or more URLs or domains to update in the blacklist|None|["www.example.com", "http://rapid7.com"]|
-
-Example input:
-
-```
-{
-  "activate_configuration": false,
-  "blacklist_state": true,
-  "urls": [
-    "www.example.com",
-    "http://rapid7.com"
-  ]
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|status|string|True|Activation status for a configuration change|
-|success|boolean|True|Whether or not the request succeeded|
-
-Example output:
-
-```
-{
-  "success": true,
-  "status": "PENDING"
-}
-```
-
-#### Lookup URL
-
-This action is used to look up the categorization of a given set of URLs.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|urls|[]string|None|True|The given set of URLs or domains to be looked up|None|["example.com", "https://rapid7.com"]|
-
-Example input:
-
-```
-{
-  "urls": [
-    "example.com",
-    "https://rapid7.com"
-  ]
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|url_categorization|[]url_categorization|True|Information about given URLs|
-
-Example output:
-
-```
-{
-  "url_categorization": [
-    {
-      "url": "example.com",
-      "urlClassifications": [
-        "REFERENCE_SITES",
-        "INTERNET_SERVICES"
-      ],
-      "urlClassificationsWithSecurityAlert": []
-    },
-    {
-      "url": "rapid7.com",
-      "urlClassifications": [
-        "CORPORATE_MARKETING",
-        "PROFESSIONAL_SERVICES"
-      ],
-      "urlClassificationsWithSecurityAlert": []
-    }
-  ]
-}
-```
-
-#### Get Users
-
-This action gets a list of all users and allows user filtering by name, department, or group. The name search parameter performs a partial match. The dept and group parameters perform a 'starts with' match.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|department|string|None|False|Filters by department name|None|Department Name|
-|group|string|None|False|Filters by group name|None|Group Name|
-|name|string|None|False|Filters by user name|None|John|
-|page|integer|None|False|Specifies the page offset|None|1|
-|pageSize|integer|None|False|Specifies the page size|None|100|
-
-Example input:
-
-```
-{
-  "department": "Department Name",
-  "group": "Group Name",
-  "name": "John",
-  "page": 1,
-  "pageSize": 100
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|users|[]user|False|List of organization users|[]|
-
-Example output:
-
-```
-{
-  "users": [
-    {
-      "id": 123456789,
-      "name": "Sample user",
-      "email": "user@example.com",
-      "groups": [
-        {
-          "id": 123456789,
-          "name": "Test Group"
-        }
-      ],
-      "department": {
-        "id": 123456789,
-        "name": "Test Department"
-      },
-      "adminUser": false,
-      "isNonEditable": false,
-      "deleted": false
-    }
-  ]
-}
-```
-
-#### Delete User
-
-This action deletes the user for the specified ID.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|userId|integer|None|True|The unique identifier for the user|None|12345678|
-
-Example input:
-
-```
-{
-  "userId": 12345678
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|success|boolean|False|Whether or not the request succeeded|True|
-
-Example output:
-
-```
-{
-  "success": true
-}
-```
-
-#### Create User
-
-This action adds a new user. A user can belong to multiple groups, but can only belong to one department.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|comments|string|None|False|Additional information about this user|None|Example comment|
-|departmentName|string|None|True|Department a user belongs to|None|Department Name|
-|email|string|None|True|User email consists of a user name and domain name. It does not have to be a valid email address, but it must be unique and its domain must belong to the organization|None|user@example.com|
-|groupNames|[]string|None|True|List of groups a user belongs to|None|["Group Name"]|
-|name|string|None|True|User name|None|John|
-|password|password|None|True|User's password. Applicable only when authentication type is Hosted DB. Password strength must follow what is defined in the auth settings|None|password12!|
-|tempAuthEmail|string|None|False|If you enabled one-time tokens or links, enter the email address to which the Zscaler service sends the tokens or links. If this is empty, the service sends the email to the User email|None|user@example.com|
-
-Example input:
-
-```
-{
-  "comments": "Example comment",
-  "departmentName": "Department Name",
-  "email": "user@example.com",
-  "groupNames": [
-    "Group Name"
-  ],
-  "name": "John",
-  "password": "password12!",
-  "tempAuthEmail": "user@example.com"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|user|user|False|An organization user|{}|
-
-Example output:
-
-```
-{
-  "user": {
-    "id": 123456789,
-    "name": "Sample user",
-    "email": "user@example.com",
-    "groups": [
-      {
-        "id": 123456789,
-        "name": "Test Group",
-        "idpId": 123456789,
-        "comments": "Sample comment"
-      }
-    ],
-    "department": {
-      "id": 123456789,
-      "name": "Test Department",
-      "idpId": 123456789,
-      "comments": "Sample comment",
-      "deleted": false
-    },
-    "comments": "Sample comment",
-    "tempAuthEmail": "user@example.com",
-    "adminUser": false
-  }
-}
-```
-
 #### Get URL Category by Name
 
 This action gets the URL category information for the specified name.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|customUrlCategoryName|string|None|False|Name of the custom URL category to be returned. If this field is filled then the 'URL Category Name' input will be ignored|None|Custom Category Example|
-|urlCategoryName|string|Adult Sex Education|False|Name of the URL category to be returned. This field will be ignored if the 'Custom URL Category Name' input is filled|['Adult Sex Education', 'Adult Themes', 'Advertising', 'Alcohol/Tobacco', 'Alt/New Age', 'Anonymizer', 'Art/Culture', 'Blogs', 'Body Art', 'CDN', 'Classifieds', 'Computer Hacking', 'Continuing Education/Colleges', 'Copyright Infringement', 'Corporate Marketing', 'Cult', 'Custom Encrypted Content', 'DNS Over HTTPS Services', 'Dining/Restaurant', 'Discussion Forum', 'Dynamic DNS Host', 'Entertainment', 'Family Issues', 'FileHost', 'Finance', 'Gambling', 'Government', 'Health', 'History', 'Hobbies/Leisure', 'Image Host', 'Internet Services', 'Job/Employment Search', 'K-12', 'K-12 Sex Education', 'Lifestyle', 'Lingerie/Bikini', 'Marijuana', 'Mature Humor', 'Militancy/Hate and Extremism', 'Military', 'Miscellaneous or Unknown', 'Music and Audio Streaming', 'Newly Registered and Observed Domains', 'Newly Revived Domains', 'News and Media', 'Non Categorizable', 'Nudity', 'Online Auctions', 'Online Chat', 'Online Shopping', 'Online Trading, Brokerage, Insurance', 'Online and Other Games', 'Operating System and Software Updates', 'Other Adult Material', 'Other Business and Economy', 'Other Drugs', 'Other Education', 'Other Entertainment/Recreation', 'Other Government and Politics', 'Other Illegal or Questionable', 'Other Information Technology', 'Other Internet Communication', 'Other Miscellaneous', 'Other Religion', 'Other Security', 'Other Shopping and Auctions', 'Other Social and Family Issues', 'Other Society and Lifestyle', 'Peer-to-Peer Site', 'Politics', 'Pornography', 'Portals', 'Profanity', 'Professional Services', 'Questionable', 'Radio', 'Real Estate', 'Reference Sites', 'Remote Access Tools', 'Safe Search Engine', 'Science/Tech', 'Shareware Download', 'Social Issues', 'Social Networking', 'Social Networking Adult', 'Social Networking Games', 'Special Interests/Social Organizations', 'Sports', 'Spyware/Adware', 'Tasteless', 'Television/Movies', 'Traditional Religion', 'Translators', 'Travel', 'User-Defined', 'Vehicles', 'Video Streaming', 'Violence', 'Weapons/Bomb', 'Web Conferencing', 'Web Host', 'Web Search', 'Webmail', 'Zscaler Proxy IPs']|Travel|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|customUrlCategoryName|string|None|False|Name of the custom URL category to be returned. If this field is filled then the 'URL Category Name' input will be ignored|None|Custom Category Example|None|None|
+|urlCategoryName|string|Adult Sex Education|False|Name of the URL category to be returned. This field will be ignored if the 'Custom URL Category Name' input is filled|["Adult Sex Education", "Adult Themes", "Advertising", "Alcohol/Tobacco", "Alt/New Age", "Anonymizer", "Art/Culture", "Blogs", "Body Art", "CDN", "Classifieds", "Computer Hacking", "Continuing Education/Colleges", "Copyright Infringement", "Corporate Marketing", "Cult", "Custom Encrypted Content", "DNS Over HTTPS Services", "Dining/Restaurant", "Discussion Forum", "Dynamic DNS Host", "Entertainment", "Family Issues", "FileHost", "Finance", "Gambling", "Government", "Health", "History", "Hobbies/Leisure", "Image Host", "Internet Services", "Job/Employment Search", "K-12", "K-12 Sex Education", "Lifestyle", "Lingerie/Bikini", "Marijuana", "Mature Humor", "Militancy/Hate and Extremism", "Military", "Miscellaneous or Unknown", "Music and Audio Streaming", "Newly Registered and Observed Domains", "Newly Revived Domains", "News and Media", "Non Categorizable", "Nudity", "Online Auctions", "Online Chat", "Online Shopping", "Online Trading, Brokerage, Insurance", "Online and Other Games", "Operating System and Software Updates", "Other Adult Material", "Other Business and Economy", "Other Drugs", "Other Education", "Other Entertainment/Recreation", "Other Government and Politics", "Other Illegal or Questionable", "Other Information Technology", "Other Internet Communication", "Other Miscellaneous", "Other Religion", "Other Security", "Other Shopping and Auctions", "Other Social and Family Issues", "Other Society and Lifestyle", "Peer-to-Peer Site", "Politics", "Pornography", "Portals", "Profanity", "Professional Services", "Questionable", "Radio", "Real Estate", "Reference Sites", "Remote Access Tools", "Safe Search Engine", "Science/Tech", "Shareware Download", "Social Issues", "Social Networking", "Social Networking Adult", "Social Networking Games", "Special Interests/Social Organizations", "Sports", "Spyware/Adware", "Tasteless", "Television/Movies", "Traditional Religion", "Translators", "Travel", "User-Defined", "Vehicles", "Video Streaming", "Violence", "Weapons/Bomb", "Web Conferencing", "Web Host", "Web Search", "Webmail", "Zscaler Proxy IPs"]|Travel|None|None|
+  
 Example input:
 
 ```
@@ -454,9 +333,9 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+| :--- | :--- | :--- | :--- | :--- |
 |urlCategory|urlCategory|False|Information about the given URL category|{}|
-
+  
 Example output:
 
 ```
@@ -521,19 +400,131 @@ Example output:
 }
 ```
 
+#### Get Users
+
+This action is used to gets a list of all users and allows user filtering by name, department, or group. The name 
+search parameter performs a partial match. The dept and group parameters perform a 'starts with' match
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|department|string|None|False|Filters by department name|None|Department Name|None|None|
+|group|string|None|False|Filters by group name|None|Group Name|None|None|
+|name|string|None|False|Filters by user name|None|John|None|None|
+|page|integer|None|False|Specifies the page offset|None|1|None|None|
+|pageSize|integer|None|False|Specifies the page size|None|100|None|None|
+  
+Example input:
+
+```
+{
+  "department": "Department Name",
+  "group": "Group Name",
+  "name": "John",
+  "page": 1,
+  "pageSize": 100
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|users|[]user|False|List of organization users|[]|
+  
+Example output:
+
+```
+{
+  "users": [
+    {
+      "id": 123456789,
+      "name": "Sample user",
+      "email": "user@example.com",
+      "groups": [
+        {
+          "id": 123456789,
+          "name": "Test Group"
+        }
+      ],
+      "department": {
+        "id": 123456789,
+        "name": "Test Department"
+      },
+      "adminUser": false,
+      "isNonEditable": false,
+      "deleted": false
+    }
+  ]
+}
+```
+
+#### Lookup URL
+
+This action is used to look up the categorization of a given set of URLs
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|urls|[]string|None|True|The given set of URLs or domains to be looked up|None|["example.com", "https://rapid7.com"]|None|None|
+  
+Example input:
+
+```
+{
+  "urls": [
+    "example.com",
+    "https://rapid7.com"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|url_categorization|[]url_categorization|True|Information about given URLs|None|
+  
+Example output:
+
+```
+{
+  "url_categorization": [
+    {
+      "url": "example.com",
+      "urlClassifications": [
+        "REFERENCE_SITES",
+        "INTERNET_SERVICES"
+      ],
+      "urlClassificationsWithSecurityAlert": []
+    },
+    {
+      "url": "rapid7.com",
+      "urlClassifications": [
+        "CORPORATE_MARKETING",
+        "PROFESSIONAL_SERVICES"
+      ],
+      "urlClassificationsWithSecurityAlert": []
+    }
+  ]
+}
+```
+
 #### Update URLs of URL Category
 
 This action adds or removes URLs for the specified URL category.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|action|string|None|True|The action applied to the URLs|['Add to the list', 'Remove from the list']|Add to the list|
-|customUrlCategoryName|string|None|False|Name of the custom URL category to be returned. If this field is filled then the 'URL Category Name' input will be ignored|None|Custom Category Example|
-|urlCategoryName|string|Adult Sex Education|False|Name of the URL category to be returned. This field will be ignored if the 'Custom URL Category Name' input is filled|['Adult Sex Education', 'Adult Themes', 'Advertising', 'Alcohol/Tobacco', 'Alt/New Age', 'Anonymizer', 'Art/Culture', 'Blogs', 'Body Art', 'CDN', 'Classifieds', 'Computer Hacking', 'Continuing Education/Colleges', 'Copyright Infringement', 'Corporate Marketing', 'Cult', 'Custom Encrypted Content', 'DNS Over HTTPS Services', 'Dining/Restaurant', 'Discussion Forum', 'Dynamic DNS Host', 'Entertainment', 'Family Issues', 'FileHost', 'Finance', 'Gambling', 'Government', 'Health', 'History', 'Hobbies/Leisure', 'Image Host', 'Internet Services', 'Job/Employment Search', 'K-12', 'K-12 Sex Education', 'Lifestyle', 'Lingerie/Bikini', 'Marijuana', 'Mature Humor', 'Militancy/Hate and Extremism', 'Military', 'Miscellaneous or Unknown', 'Music and Audio Streaming', 'Newly Registered and Observed Domains', 'Newly Revived Domains', 'News and Media', 'Non Categorizable', 'Nudity', 'Online Auctions', 'Online Chat', 'Online Shopping', 'Online Trading, Brokerage, Insurance', 'Online and Other Games', 'Operating System and Software Updates', 'Other Adult Material', 'Other Business and Economy', 'Other Drugs', 'Other Education', 'Other Entertainment/Recreation', 'Other Government and Politics', 'Other Illegal or Questionable', 'Other Information Technology', 'Other Internet Communication', 'Other Miscellaneous', 'Other Religion', 'Other Security', 'Other Shopping and Auctions', 'Other Social and Family Issues', 'Other Society and Lifestyle', 'Peer-to-Peer Site', 'Politics', 'Pornography', 'Portals', 'Profanity', 'Professional Services', 'Questionable', 'Radio', 'Real Estate', 'Reference Sites', 'Remote Access Tools', 'Safe Search Engine', 'Science/Tech', 'Shareware Download', 'Social Issues', 'Social Networking', 'Social Networking Adult', 'Social Networking Games', 'Special Interests/Social Organizations', 'Sports', 'Spyware/Adware', 'Tasteless', 'Television/Movies', 'Traditional Religion', 'Translators', 'Travel', 'User-Defined', 'Vehicles', 'Video Streaming', 'Violence', 'Weapons/Bomb', 'Web Conferencing', 'Web Host', 'Web Search', 'Webmail', 'Zscaler Proxy IPs']|Travel|
-|urlList|[]string|None|True|List of the URLs to be updated|None|["example.com", "example1.com"]|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|action|string|None|True|The action applied to the URLs|["Add to the list", "Remove from the list"]|Add to the list|None|None|
+|customUrlCategoryName|string|None|False|Name of the custom URL category to be returned. If this field is filled then the 'URL Category Name' input will be ignored|None|Custom Category Example|None|None|
+|urlCategoryName|string|Adult Sex Education|False|Name of the URL category to be returned. This field will be ignored if the 'Custom URL Category Name' input is filled|["Adult Sex Education", "Adult Themes", "Advertising", "Alcohol/Tobacco", "Alt/New Age", "Anonymizer", "Art/Culture", "Blogs", "Body Art", "CDN", "Classifieds", "Computer Hacking", "Continuing Education/Colleges", "Copyright Infringement", "Corporate Marketing", "Cult", "Custom Encrypted Content", "DNS Over HTTPS Services", "Dining/Restaurant", "Discussion Forum", "Dynamic DNS Host", "Entertainment", "Family Issues", "FileHost", "Finance", "Gambling", "Government", "Health", "History", "Hobbies/Leisure", "Image Host", "Internet Services", "Job/Employment Search", "K-12", "K-12 Sex Education", "Lifestyle", "Lingerie/Bikini", "Marijuana", "Mature Humor", "Militancy/Hate and Extremism", "Military", "Miscellaneous or Unknown", "Music and Audio Streaming", "Newly Registered and Observed Domains", "Newly Revived Domains", "News and Media", "Non Categorizable", "Nudity", "Online Auctions", "Online Chat", "Online Shopping", "Online Trading, Brokerage, Insurance", "Online and Other Games", "Operating System and Software Updates", "Other Adult Material", "Other Business and Economy", "Other Drugs", "Other Education", "Other Entertainment/Recreation", "Other Government and Politics", "Other Illegal or Questionable", "Other Information Technology", "Other Internet Communication", "Other Miscellaneous", "Other Religion", "Other Security", "Other Shopping and Auctions", "Other Social and Family Issues", "Other Society and Lifestyle", "Peer-to-Peer Site", "Politics", "Pornography", "Portals", "Profanity", "Professional Services", "Questionable", "Radio", "Real Estate", "Reference Sites", "Remote Access Tools", "Safe Search Engine", "Science/Tech", "Shareware Download", "Social Issues", "Social Networking", "Social Networking Adult", "Social Networking Games", "Special Interests/Social Organizations", "Sports", "Spyware/Adware", "Tasteless", "Television/Movies", "Traditional Religion", "Translators", "Travel", "User-Defined", "Vehicles", "Video Streaming", "Violence", "Weapons/Bomb", "Web Conferencing", "Web Host", "Web Search", "Webmail", "Zscaler Proxy IPs"]|Travel|None|None|
+|urlList|[]string|None|True|List of the URLs to be updated|None|["example.com", "example1.com"]|None|None|
+  
 Example input:
 
 ```
@@ -551,9 +542,9 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+| :--- | :--- | :--- | :--- | :--- |
 |urlCategory|urlCategory|False|Information about the updated URL category|{}|
-
+  
 Example output:
 
 ```
@@ -617,171 +608,175 @@ Example output:
   }
 }
 ```
-
 ### Triggers
+  
+*This plugin does not contain any triggers.*
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-_This plugin does not contain any triggers._
+### Custom Types
+  
+**url_categorization**
 
-### Custom Output Types
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|URL|string|None|False|Checked URL|None|
+|URL Classifications|[]string|None|False|URL classifications|None|
+|URL classifications with security alert|[]string|None|False|URL classifications with security alert|None|
+  
+**Classification**
 
-#### Classification
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Category|string|None|False|Category|None|
+|Detected Malware|string|None|False|Detected malware|None|
+|Score|integer|None|False|Score|None|
+|Type|string|None|False|Type|None|
+  
+**FileProperties**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Category|string|False|Category|
-|Detected Malware|string|False|Detected malware|
-|Score|integer|False|Score|
-|Type|string|False|Type|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Digital Certificate|string|None|False|Digital certificate|None|
+|File Size|integer|None|False|File size|None|
+|File Type|string|None|False|File type|None|
+|Issuer|string|None|False|Issuer|None|
+|MD5|string|None|False|MD5|None|
+|Root CA|string|None|False|Root CA|None|
+|SHA1|string|None|False|SHA1|None|
+|SS Deep|string|None|False|SS deep|None|
+|SHA256|string|None|False|SHA256|None|
+  
+**PersistenceSummary**
 
-#### FileProperties
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Risk|string|None|False|Risk|None|
+|Signature|string|None|False|Signature|None|
+|Signature Sources|[]string|None|False|Signature sources|None|
+  
+**Summary**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Digital Certificate|string|False|Digital certificate|
-|File Size|integer|False|File size|
-|File Type|string|False|File type|
-|Issuer|string|False|Issuer|
-|MD5|string|False|MD5|
-|Root CA|string|False|Root CA|
-|SHA1|string|False|SHA1|
-|SS Deep|string|False|SS deep|
-|SHA256|string|False|SHA256|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Category|string|None|False|Category|None|
+|Duration|integer|None|False|Duration|None|
+|File Type|string|None|False|File type|None|
+|Start Time|integer|None|False|Start time|None|
+|Status|string|None|False|Status|None|
+  
+**FullDetails**
 
-#### FullDetails
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Classification|Classification|None|False|Classification|None|
+|File Properties|FileProperties|None|False|File properties|None|
+|Networking|[]PersistenceSummary|None|False|Networking|None|
+|Persistence|[]PersistenceSummary|None|False|Persistence|None|
+|Security Bypass|[]PersistenceSummary|None|False|Security bypass|None|
+|Stealth|[]PersistenceSummary|None|False|Stealth|None|
+|Summary|Summary|None|False|Summary|None|
+|System Summary|[]PersistenceSummary|None|False|System summary|None|
+  
+**full_report**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Classification|Classification|False|Classification|
-|File Properties|FileProperties|False|File properties|
-|Networking|[]PersistenceSummary|False|Networking|
-|Persistence|[]PersistenceSummary|False|Persistence|
-|Security Bypass|[]PersistenceSummary|False|Security bypass|
-|Stealth|[]PersistenceSummary|False|Stealth|
-|Summary|Summary|False|Summary|
-|System Summary|[]PersistenceSummary|False|System summary|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Full Details|FullDetails|None|False|Full details|None|
+  
+**department**
 
-#### PersistenceSummary
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Comments|string|None|False|Additional information about this department|Example comment|
+|Deleted|boolean|None|False|Is department deleted|False|
+|ID|integer|None|False|Department ID|123456789|
+|IdpId|integer|None|False|Identity provider (IdP) ID|123456789|
+|Name|string|None|False|Department name|Department Name|
+  
+**group**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Risk|string|False|Risk|
-|Signature|string|False|Signature|
-|Signature Sources|[]string|False|Signature sources|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Comments|string|None|False|Additional information about the group|Example comment|
+|ID|integer|None|False|Unique identifier for the group|123456789|
+|IdpId|integer|None|False|Unique identifier for the identity provider (IdP)|123456789|
+|Name|string|None|False|Group name|Group Name|
+  
+**user**
 
-#### Summary
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Admin User|boolean|None|False|True if this user is an Admin user|False|
+|Comments|string|None|False|Additional information about this user|Example comment|
+|Deleted|boolean|None|False|Is user deleted|False|
+|Department|department|None|False|Department a user belongs to|{}|
+|Email|string|None|False|User email consists of a user name and domain name. It does not have to be a valid email address, but it must be unique and its domain must belong to the organization|user@example.com|
+|Groups|[]group|None|False|List of groups a user belongs to|[]|
+|ID|integer|None|False|User ID|123456789|
+|Is Non Editable|boolean|None|False|Is user non-editable|False|
+|Name|string|None|False|User name|John|
+|Temporary Authentication Email|string|None|False|If you enabled one-time tokens or links, enter the email address to which the Zscaler service sends the tokens or links. If this is empty, the service sends the email to the User email|user@example.com|
+|Type|string|None|False|User type. Provided only if this user is not an end user|ADMIN|
+  
+**urlKeywordCounts**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Category|string|False|Category|
-|Duration|integer|False|Duration|
-|File Type|string|False|File type|
-|Start Time|integer|False|Start time|
-|Status|string|False|Status|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Retain Parent Keyword Count|integer|None|False|Count of total keywords with retain parent category|0|
+|Retain Parent URL Count|integer|None|False|Count of URLs with retain parent category|0|
+|Total Keyword Count|integer|None|False|Total keyword count for the category|1|
+|Total URL Count|integer|None|False|Custom URL count for the category|1|
+  
+**entityReference**
 
-#### full_report
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Extensions|object|None|False|Extensions|{}|
+|ID|integer|None|False|Identifier that uniquely identifies an entity|12345678|
+|Name|string|None|False|The configured name of the entity|Entity Name|
+  
+**adminScope**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Full Details|FullDetails|False|Full details|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Scope Entities|[]entityReference|None|False|Based on the admin scope type, the entities can be the ID/name pair of departments, locations, or location groups|[]|
+|Scope Group Member Entities|[]entityReference|None|False|List of ID/name pairs of locations within the location group|[]|
+|Type|string|None|False|The admin scope type|ORGANIZATION|
+  
+**urlCategory**
 
-#### url_categorization
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Configured Name|string|None|False|Name of the URL category|Example Name|
+|Custom Category|boolean|None|False|Whether the URL category is custom. Up to 48 custom URL categories can be added per organization|True|
+|Custom IP Ranges Count|integer|None|False|The number of custom IP address ranges associated to the URL category|0|
+|Custom URLs Count|integer|None|False|The number of custom URLs associated to the URL category|1|
+|DB Categorized URLs|[]string|None|False|URLs added to a custom URL category are also retained under the original parent URL category (i.e., the predefined category the URL previously belonged to). The URLs entered are covered by policies that reference the original parent URL category as well as those that reference the custom URL category|[]|
+|Description|string|None|False|Description of the URL category. Contains tag name and needs to be localized on client side in case of predefined category, else it contains the user-entered description which does not have localization support|Example description|
+|Editable|boolean|None|False|Value is set to false for custom URL category when due to scope user does not have edit permission|True|
+|ID|string|None|False|The identifier of the URL category|CUSTOM_01|
+|IP Ranges|[]string|None|False|Custom IP address ranges associated with a URL category. Up to 2000 custom IP address ranges and retaining parent custom IP address ranges can be added, per organization, across all categories|[]|
+|IP Ranges Retaining Parent Category|[]string|None|False|The retaining parent custom IP address ranges associated with a URL category. Up to 2000 custom IP ranges and retaining parent custom IP address ranges can be added, per organization, across all categories|[]|
+|IP Ranges Retaining Parent Category Count|integer|None|False|The number of custom IP address ranges associated to the URL category, that also need to be retained under the original parent category|0|
+|Keywords|[]string|None|False|Custom keywords associated with a URL category. Up to 2048 custom keywords can be added per organization across all categories|[]|
+|Keywords Retaining Parent Category|[]string|None|False|Retained custom keywords from the parent URL category that is associated to a URL category. Up to 2048 retained parent keywords can be added per organization across all categories (including bandwidth classes)|[]|
+|Scopes|[]adminScope|None|False|Scope of the custom categories|[]|
+|Super Category|string|None|False|Super Category of the URL category|Games|
+|Type|string|None|False|Type of the URL category|URL_CATEGORY|
+|URL Keyword Counts|urlKeywordCounts|None|False|URL and keyword counts for the URL category|{}|
+|URLs|[]string|None|False|Custom URLs to add to a URL category. Up to 25,000 custom URLs can be added per organization across all categories (including bandwidth classes)|[]|
+|URLs Retaining Parent Category Count|integer|None|False|The number of custom URLs associated to the URL category, that also need to be retained under the original parent category|0|
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|URL|string|False|Checked URL|
-|URL Classifications|[]string|False|URL classifications|
-|URL classifications with security alert|[]string|False|URL classifications with security alert|
-
-#### department
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Comments|string|False|Additional information about this department|
-|Deleted|boolean|False|Is department deleted|
-|ID|integer|False|Department ID|
-|IdpId|integer|False|Identity provider (IdP) ID|
-|Name|string|False|Department name|
-
-#### group
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Comments|string|False|Additional information about the group|
-|ID|integer|False|Unique identifier for the group|
-|IdpId|integer|False|Unique identifier for the identity provider (IdP)|
-|Name|string|False|Group name|
-
-#### user
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Admin User|boolean|False|True if this user is an Admin user|
-|Comments|string|False|Additional information about this user|
-|Deleted|boolean|False|Is user deleted|
-|Department|department|False|Department a user belongs to|
-|Email|string|False|User email consists of a user name and domain name. It does not have to be a valid email address, but it must be unique and its domain must belong to the organization|
-|Groups|[]group|False|List of groups a user belongs to|
-|ID|integer|False|User ID|
-|Is Non Editable|boolean|False|Is user non-editable|
-|Name|string|False|User name|
-|Temporary Authentication Email|string|False|If you enabled one-time tokens or links, enter the email address to which the Zscaler service sends the tokens or links. If this is empty, the service sends the email to the User email|
-|Type|string|False|User type. Provided only if this user is not an end user|
-
-#### adminScope
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Scope Entities|[]entityReference|False|Based on the admin scope type, the entities can be the ID/name pair of departments, locations, or location groups|
-|Scope Group Member Entities|[]entityReference|False|List of ID/name pairs of locations within the location group|
-|Type|string|False|The admin scope type|
-
-#### entityReference
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Extensions|object|False|Extensions|
-|ID|integer|False|Identifier that uniquely identifies an entity|
-|Name|string|False|The configured name of the entity|
-
-#### urlCategory
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Configured Name|string|False|Name of the URL category|
-|Custom Category|boolean|False|Whether the URL category is custom. Up to 48 custom URL categories can be added per organization|
-|Custom IP Ranges Count|integer|False|The number of custom IP address ranges associated to the URL category|
-|Custom URLs Count|integer|False|The number of custom URLs associated to the URL category|
-|DB Categorized URLs|[]string|False|URLs added to a custom URL category are also retained under the original parent URL category (i.e., the predefined category the URL previously belonged to). The URLs entered are covered by policies that reference the original parent URL category as well as those that reference the custom URL category|
-|Description|string|False|Description of the URL category. Contains tag name and needs to be localized on client side in case of predefined category, else it contains the user-entered description which does not have localization support|
-|Editable|boolean|False|Value is set to false for custom URL category when due to scope user does not have edit permission|
-|ID|string|False|The identifier of the URL category|
-|IP Ranges|[]string|False|Custom IP address ranges associated with a URL category. Up to 2000 custom IP address ranges and retaining parent custom IP address ranges can be added, per organization, across all categories|
-|IP Ranges Retaining Parent Category|[]string|False|The retaining parent custom IP address ranges associated with a URL category. Up to 2000 custom IP ranges and retaining parent custom IP address ranges can be added, per organization, across all categories|
-|IP Ranges Retaining Parent Category Count|integer|False|The number of custom IP address ranges associated to the URL category, that also need to be retained under the original parent category|
-|Keywords|[]string|False|Custom keywords associated with a URL category. Up to 2048 custom keywords can be added per organization across all categories|
-|Keywords Retaining Parent Category|[]string|False|Retained custom keywords from the parent URL category that is associated to a URL category. Up to 2048 retained parent keywords can be added per organization across all categories (including bandwidth classes)|
-|Scopes|[]adminScope|False|Scope of the custom categories|
-|Super Category|string|False|Super Category of the URL category|
-|Type|string|False|Type of the URL category|
-|URL Keyword Counts|urlKeywordCounts|False|URL and keyword counts for the URL category|
-|URLs|[]string|False|Custom URLs to add to a URL category. Up to 25,000 custom URLs can be added per organization across all categories (including bandwidth classes)|
-|URLs Retaining Parent Category Count|integer|False|The number of custom URLs associated to the URL category, that also need to be retained under the original parent category|
-
-#### urlKeywordCounts
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Retain Parent Keyword Count|integer|False|Count of total keywords with retain parent category|
-|Retain Parent URL Count|integer|False|Count of URLs with retain parent category|
-|Total Keyword Count|integer|False|Total keyword count for the category|
-|Total URL Count|integer|False|Custom URL count for the category|
 
 ## Troubleshooting
-
-_This plugin does not contain any troubleshooting information._
+  
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 1.5.1 - Requirements.txt bumped | SDK Bump to 6.1.4
 * 1.5.0 - Add Actions: `Create User`, `Delete User`, `Get Users`, `Get URL Category by Name`, `Update URLs of URL Category`
 * 1.4.0 - Add Activate Configuration input in Blacklist URL action
 * 1.3.0 - Add Get Blacklist URL action
