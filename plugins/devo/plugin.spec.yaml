@@ -4,7 +4,12 @@ products: [insightconnect]
 name: devo
 title: Devo
 description: Devo is the cloud-native logging and security analytics solution that delivers real-time visibility for security and operations teams
-version: 3.0.1
+version: 3.0.2
+connection_version: 3
+sdk:
+  type: slim
+  version: 6.1.4
+  user: nobody
 supported_versions: ["v7.8.0"]
 vendor: rapid7
 support: community
@@ -18,11 +23,27 @@ tags:
 - siem
 - logs
 - cloud
+key_features:
+- "Query for log results"
+- "Trigger workflows on new alerts"
+requirements:
+- "A Devo authentication token"
 hub_tags:
   use_cases: [threat_detection_and_response, reporting_and_analytics, data_utility, alerting_and_notifications]
   keywords: [logs]
   features: []
-
+version_history:
+  - "3.0.2 - Bumping requirements.txt | SDK Bump to 6.1.4"
+  - "3.0.1 - Fix an issue in Get New Alerts trigger to catch missing alerts"
+  - "3.0.0 - Fix an issue in Get New Alerts trigger to filter duplicate alerts. Output contains list of new alerts"
+  - "2.0.0 - Configuration for interval input parameter"
+  - "1.0.0 - Initial plugin"
+links:
+  - "[Devo](https://www.devo.com/)"
+references:
+  - "[Devo](https://www.devo.com/)"
+  - "[Authentication Token Documentation](https://docs.devo.com/confluence/ndt/latest/domain-administration/security-credentials/authentication-tokens)"
+troubleshooting: "The plugin doesn't return all my results from a query? The plugin is limited to 1000 entries or 200MB of data for queries, whichever is hit first. To avoid this issue either rewrite your query to return fewer results, or you can use the `offset` keyword to paginate data."
 types:
   alert:
     eventdate:
