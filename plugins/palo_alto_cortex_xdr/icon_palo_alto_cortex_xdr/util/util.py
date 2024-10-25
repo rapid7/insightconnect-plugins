@@ -15,7 +15,7 @@ class Util:
         return int(time.time() * 1000)
 
     @staticmethod
-    def split_list_values(input_list: list, separator: str) -> list:
+    def split_list_values(input_list: list) -> list:
         """Splits each string in a list based on a separator and returns a list of all separated values
         :param input_list: Input list of string
         :type input_list: list, required
@@ -27,10 +27,12 @@ class Util:
         output_list = []
         for item in input_list:
             if isinstance(item, str):
-                item_split = item.split(separator)
-                output_list.extend(item_split)
-        duplicates = set()
-        return [item for item in output_list if not (item in duplicates or duplicates.add(item))]
+                item_split = item.split(":")
+                if len(item_split) == 2:
+                    output_list.append({"hostname": item_split[0], "endpoint_id": item_split[1]})
+                else:
+                    output_list.append({"hostname": item_split[0]})
+        return output_list
 
     @staticmethod
     def send_items_to_platform_for_trigger(
