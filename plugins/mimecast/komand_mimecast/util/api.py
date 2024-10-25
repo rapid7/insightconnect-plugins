@@ -168,11 +168,11 @@ class MimecastAPI:
         except json.JSONDecodeError:
             return False
 
-    def _check_rate_limiting(self, request):
+    def _check_rate_limiting(self, response):
         rate_limit_status_code = 429
-        if request.status_code == rate_limit_status_code:
+        if response.status_code == rate_limit_status_code:
             raise ApiClientException(
-                preset=PluginException.Preset.RATE_LIMIT, status_code=rate_limit_status_code, data=request.text
+                preset=PluginException.Preset.RATE_LIMIT, status_code=rate_limit_status_code, data=response.text
             )
 
     def _handle_status_code_response(self, response: requests.request, status_code: int):

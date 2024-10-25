@@ -76,11 +76,12 @@ class Util:
                 return 200
 
         class MockResponseZip:
-            def __init__(self, status_code, content, headers, json):
+            def __init__(self, status_code, content, headers, json, text=""):
                 self.status_code = status_code
                 self.content = content
                 self.headers_value = headers
                 self.json_value = json
+                self.text = text
 
             @property
             def headers(self):
@@ -170,6 +171,22 @@ class Util:
                     ],
                 }
                 resp = MockResponseZip(401, b"", {}, json.dumps(json_value))
+            if "force_429" in data:
+                json_value = {
+                    "meta": {"isLastToken": False, "status": 429},
+                    "fail": [
+                        {
+                            "errors": [
+                                {
+                                    "code": "err_xdk_invalid_signature",
+                                    "message": "0004 Invalid Signature",
+                                    "retryable": False,
+                                }
+                            ]
+                        }
+                    ],
+                }
+                resp = MockResponseZip(429, b"", {}, json.dumps(json_value))
             elif "force_json" in data:
                 resp = MockResponseZip(200, b'{ "type" : "MTA", "data" : ', headers, '{"meta": {"status": 200}}')
             elif "force_single_json_error" in data:

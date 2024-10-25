@@ -1014,6 +1014,7 @@ For the Create Managed URL action, the URL must include `http://` or `https://` 
 
 # Version History
 
+* 5.3.19 - Update Task `monitor_siem_logs` to delay retry if a rate limit error is returned from Mimecast
 * 5.3.18 - Fix task connection test | Trim whitespace from connection inputs | bump SDK to version 6.1.2
 * 5.3.17 - Task `monitor_siem_logs` update the mapping used for the USBCOM region
 * 5.3.16 - Task `monitor_siem_logs` Limit the number of events per run to 7500 | bump SDK to version 6.1.0

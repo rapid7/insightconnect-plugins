@@ -1,9 +1,14 @@
 from typing import Dict, Any, Union
+from datetime import datetime
 
 from komand_mimecast.util.constants import BASE_HOSTNAME_MAP, DEFAULT_REGION
 
 
 class Utils:
+    @staticmethod
+    def convert_epoch_to_readable(epoch_time: int) -> str:
+        return datetime.utcfromtimestamp(epoch_time).strftime("%Y-%m-%d %H:%M:%S")
+
     @staticmethod
     def prepare_base_url(region: str = DEFAULT_REGION) -> str:
         if region == "USBCOM":
