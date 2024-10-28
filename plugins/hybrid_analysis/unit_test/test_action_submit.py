@@ -3,11 +3,11 @@ import sys
 from unittest import TestCase
 from unittest.mock import patch
 
+sys.path.append(os.path.abspath("../"))
+
 from icon_hybrid_analysis.actions.submit import Submit
 from icon_hybrid_analysis.actions.submit.schema import Input
 from unit_test.util import Util
-
-sys.path.append(os.path.abspath("../"))
 
 
 class TestSubmit(TestCase):
