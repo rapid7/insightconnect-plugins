@@ -230,12 +230,14 @@ Example output:
 
 ```
 {
-  "related_reports": [{
-    "job_id": "61dc148b0cad612f7371d2d3",
-    "environment_id": 300,
-    "state": "SUCCESS",
-    "sha256": "275a021bbfb6489e54d411499f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
-  }],
+  "related_reports": [
+    {
+      "job_id": "61dc148b0cad612f7371d2d3",
+      "environment_id": 300,
+      "state": "SUCCESS",
+      "sha256": "275a021bbfb6489e54d411499f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
+    }
+  ],
   "state": "SUCCESS"
 }
 ```
