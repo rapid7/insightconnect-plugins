@@ -3,12 +3,12 @@ import sys
 from unittest import TestCase
 from unittest.mock import patch
 
+sys.path.append(os.path.abspath("../"))
+
 from icon_hybrid_analysis.actions.lookup_terms import LookupTerms
 from icon_hybrid_analysis.actions.lookup_terms.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
-from unit_test.util import Util
-
-sys.path.append(os.path.abspath("../"))
+from util import Util
 
 
 class TestLookUpTerms(TestCase):
