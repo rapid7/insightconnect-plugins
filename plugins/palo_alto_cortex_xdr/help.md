@@ -927,6 +927,7 @@ Isolate Endpoint fails with 500 error - This will happen if an isolation action 
 
 # Version History
 
+* 4.0.4 - `Get Incidents` - Update `Hosts` output to map hostname and endpoint ID
 * 4.0.3 - `Monitor Incidents` - Add custom config exception handling
 * 4.0.2 - SDK bump to 6.1.4
 * 4.0.1 - SDK Bump to 6.1.3
