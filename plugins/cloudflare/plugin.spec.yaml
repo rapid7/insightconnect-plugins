@@ -4,16 +4,45 @@ products: [insightconnect]
 name: cloudflare
 title: Cloudflare
 description: Cloudflare is a global network designed to make everything you connect to the Internet secure, private, fast, and reliable. This plugin allows you to list accounts, zones, zone access rules and lists and create or delete access rules for specific zones
-version: 1.0.0
+version: 1.0.1
+connection_version: 1
 supported_versions: ["Cloudflare API v4 2023-02-10"]
 vendor: rapid7
 support: rapid7
+sdk:
+  type: slim
+  version: 6.1.4
+  user: nobody
 cloud_ready: true
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/cloudflare
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.cloudflare.com
+key_features:
+  - "Get Accounts"
+  - "Get Zones"
+  - "Get Lists"
+  - "Create Zone Access Rule"
+  - "Delete Zone Access Rule"
+  - "Get Zone Access Rules"
+requirements:
+  - "Cloudflare API token"
+  - "The used API token must have the following permissions:\n\n
+     For all account:"
+  - "Account Filter Lists:Read`"
+  - "`Account Firewall Access Rules:Read`\n"
+  - "For all zones:"
+  - "`Firewall Services:Read`"
+  - "`Firewall Services:Edit`"
+  - "`Zone:Read`"
+version_history:
+  - "1.0.1 - Bumping requirements.txt | SDK bump to 6.1.4"
+  - "1.0.0 - Initial plugin | Add Get Accounts, Get Zones, Get Lists, Get Zone Access Rules, Create Zone Access Rule and Delete Zone Access Rule actions"
+links:
+  - "[Cloudflare](https://www.cloudflare.com)"
+references:
+  - "[Cloudflare](https://www.cloudflare.com)"
 tags:
   - cloudflare
   - security
