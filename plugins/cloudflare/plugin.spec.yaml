@@ -42,7 +42,7 @@ version_history:
 links:
   - "[Cloudflare](https://www.cloudflare.com)"
 references:
-  - "[Cloudflare](https://www.cloudflare.com)"
+  - "[Cloudflare](https://developers.cloudflare.com/api/)"
 tags:
   - cloudflare
   - security
