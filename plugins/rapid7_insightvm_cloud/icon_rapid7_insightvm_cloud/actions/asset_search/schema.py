@@ -10,6 +10,7 @@ class Component:
 class Input:
     ASSET_CRITERIA = "asset_criteria"
     COMPARISON_TIME = "comparison_time"
+    CRITERIA_OPERATOR = "criteria_operator"
     CURRENT_TIME = "current_time"
     SIZE = "size"
     SORT_CRITERIA = "sort_criteria"
@@ -38,7 +39,18 @@ class AssetSearchInput(insightconnect_plugin_runtime.Input):
       "displayType": "date",
       "title": "Comparison Time",
       "description": "The date and time to compare the asset current state against to detect changes",
-      "order": 6
+      "order": 7
+    },
+    "criteria_operator": {
+      "type": "string",
+      "title": "Criteria Logical Operator",
+      "description": "The logical query operator used to combine asset and/or vulnerability criteria. Only applicable when both asset and vulnerability criteria are entered",
+      "enum": [
+        "",
+        "AND",
+        "OR"
+      ],
+      "order": 5
     },
     "current_time": {
       "type": "string",
@@ -46,12 +58,12 @@ class AssetSearchInput(insightconnect_plugin_runtime.Input):
       "displayType": "date",
       "title": "Current Time",
       "description": "The current date and time to compare against the asset state to detect changes",
-      "order": 5
+      "order": 6
     },
     "size": {
       "type": "integer",
       "title": "Size",
-      "description": "The number of assets to retrieve. If blank then will default to 200 assets returned, the maximum limit is 500 assets",
+      "description": "The number of assets to retrieve. If blank then will default to 200 assets returned",
       "default": 200,
       "order": 1
     },
