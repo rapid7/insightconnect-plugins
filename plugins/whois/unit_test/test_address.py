@@ -8,6 +8,7 @@ from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
 from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 from komand_whois.actions.address import Address
 from parameterized import parameterized
 
@@ -29,8 +30,9 @@ class TestAddress(TestCase):
             ]
         ]
     )
-    def test_address(self, _test_mock: MagicMock, _test_name: str, input_params: str, expected: Dict[str, Any]):
+    def test_address(self, _test_mock: MagicMock, _test_name: str, input_params: str, expected: Dict[str, Any]) -> None:
         actual = self.action.run(input_params)
+        validate(actual, self.action.output.schema)
         self.assertEqual(actual, expected)
 
     @parameterized.expand(
@@ -45,7 +47,7 @@ class TestAddress(TestCase):
     )
     def test_address_error(
         self, _test_mock: MagicMock, _test_name: str, input_params: str, cause: str, assistance: str
-    ):
+    ) -> None:
         with self.assertRaises(PluginException) as error:
             self.action.run(input_params)
         self.assertEqual(error.exception.cause, cause)

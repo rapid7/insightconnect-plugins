@@ -1,13 +1,16 @@
-import insightconnect_plugin_runtime
-from .schema import AddressInput, AddressOutput, Input, Output
 import re
+from typing import Any, Dict
+
+import insightconnect_plugin_runtime
 import validators
 from insightconnect_plugin_runtime.exceptions import PluginException
+
+from .schema import AddressInput, AddressOutput, Input
 
 
 class Address(insightconnect_plugin_runtime.Action):
     ARIN, LACNIC, APNIC, RIPE = "arin", "lacnic", "apnic", "ripe"
-
+    RESOURCE_LINK = "ResourceLink"
     NORMALIZATION_MAP = {
         RIPE: {
             "netname": "netname",
@@ -106,12 +109,14 @@ class Address(insightconnect_plugin_runtime.Action):
             )
         return results
 
-    def _get_stdout_pairs(self, stdout):
+    @staticmethod
+    def _get_stdout_pairs(stdout: str) -> Dict[str, Any]:
         """
         Run a regex against the stdout string to extract pairings
         :param stdout: Stdout from the whois query
         :return: Pairs
         """
+
         regex = r"\S*:\s*.*"
         r = re.compile(pattern=regex, flags=re.IGNORECASE | re.MULTILINE)
         results = r.findall(string=stdout)
@@ -119,11 +124,11 @@ class Address(insightconnect_plugin_runtime.Action):
         pairs = {}
         for result in results:
             pair = list(map(str.strip, result.split(":")))
-            pairs[pair[0]] = pair[1]
-
+            if pair[0] not in pairs:
+                pairs[pair[0]] = ":".join(pair[1:])
         return pairs
 
-    def _get_registry(self, stdout):
+    def _get_registry(self, stdout: str) -> str:
         lines = stdout.splitlines()[:4]
         if list(filter(lambda l: self.ARIN in l.lower(), lines)):
             registry = self.ARIN
@@ -136,10 +141,9 @@ class Address(insightconnect_plugin_runtime.Action):
         else:
             self.logger.info("Warning: No WHOIS registry detected from stdout, defaulting to ARIN...")
             registry = self.ARIN
-
         return registry
 
-    def _load_normalization_map(self, refer):
+    def _load_normalization_map(self, refer: str) -> Dict[str, Any]:
         if refer not in self.NORMALIZATION_MAP:
             self.logger.info(
                 f"Warning: No normalization map found for: {refer}\n"
@@ -147,10 +151,17 @@ class Address(insightconnect_plugin_runtime.Action):
             )
         return self.NORMALIZATION_MAP[refer]
 
-    def parse_stdout(self, registrar, stdout):
+    def parse_stdout(self, registrar: str, stdout: str) -> Dict[str, Any]:
         pairs = self._get_stdout_pairs(stdout)
         if not registrar or registrar == "Autodetect":
             registry = self._get_registry(stdout=stdout)
+
+            # This allows to handle referrals from ARIN to other registries
+            if self.RESOURCE_LINK in pairs:
+                for new_registry in (self.LACNIC, self.APNIC, self.RIPE):
+                    if new_registry in pairs.get(self.RESOURCE_LINK, ""):
+                        registry = new_registry
+                        break
         else:
             registry = registrar.lower()
 
@@ -162,5 +173,4 @@ class Address(insightconnect_plugin_runtime.Action):
             for n_key, n_value in loaded_map.items():
                 if p_key == n_value:
                     output[n_key] = p_value
-
         return output

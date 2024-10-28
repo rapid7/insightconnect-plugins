@@ -8,6 +8,7 @@ from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
 from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 from komand_whois.actions.domain import Domain
 from parameterized import parameterized
 
@@ -33,6 +34,7 @@ class TestDomain(TestCase):
         self, _mock_request: MagicMock, _test_name: str, input_params: Dict[str, Any], expected: Dict[str, Any]
     ):
         actual = self.action.run(input_params)
+        validate(actual, self.action.output.schema)
         self.assertDictEqual(actual, expected)
 
     @parameterized.expand(
