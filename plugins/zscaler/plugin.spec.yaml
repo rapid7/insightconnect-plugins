@@ -3,16 +3,25 @@ extension: plugin
 products: [insightconnect]
 name: zscaler
 title: Zscaler
-version: 1.5.0
+version: 1.5.1
+connection_version: 1
 supported_versions: ["Zscaler API 2023-02-20"]
 description: Zscaler is a SaaS security platform that provides fast, secure connections between client applications, regardless of device, location, or network
 vendor: rapid7
 support: rapid7
 status: []
+sdk:
+  type: slim
+  version: 6.1.4
+  user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/zscaler
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.zscaler.com/
+links:
+  - "[Zscaler](https://www.zscaler.com/)"
+references:
+  - "[Zscaler](https://www.zscaler.com/)"
 tags:
 - zscaler
 - security
@@ -21,7 +30,29 @@ hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [url, blacklist]
   features: []
-
+key_features:
+  - "Lookup categories for a given URL"
+  - "Blacklist or unblacklist URLs"
+  - "Create user"
+  - "Delete user"
+  - "Get users"
+  - "Get URL category by name"
+  - "Update URLs of URL category"
+requirements:
+  - "[Requires a Zscaler organization API Key](https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey)"
+  - "Requires a Zscaler username and password"
+  - "[Requires a Zscaler base URI](https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey), such as: https://admin.zscalerbeta.net"
+version_history:
+  - "1.5.1 - Requirements.txt bumped | SDK Bump to 6.1.4"
+  - "1.5.0 - Add Actions: `Create User`, `Delete User`, `Get Users`, `Get URL Category by Name`, `Update URLs of URL Category`"
+  - "1.4.0 - Add Activate Configuration input in Blacklist URL action"
+  - "1.3.0 - Add Get Blacklist URL action"
+  - "1.2.1 - Usability updates and updated icon"
+  - "1.2.0 - New action Get Sandbox Report for Hash"
+  - "1.1.2 - Support both domains and URL inputs in the Blacklist URL and Lookup URL actions"
+  - "1.1.1 - Improve documentation around action inputs"
+  - "1.1.0 - New action Blacklist URL"
+  - "1.0.0 - Initial plugin"
 types:
   url_categorization:
     url:
@@ -563,10 +594,12 @@ actions:
         description: Whether or not the request succeeded
         type: boolean
         required: true
+        example: true
       status:
         title: Status
         description: Activation status for a configuration change
         type: string
+        example: ACTIVE
         required: true
   get_sandbox_report_for_hash:
     title: Get Sandbox Report for Hash
@@ -650,6 +683,7 @@ actions:
         description: Whether or not the request succeeded
         type: boolean
         required: false
+        example: true
   create_user:
     title: Create User
     description: Adds a new user. A user can belong to multiple groups, but can only belong to one department
