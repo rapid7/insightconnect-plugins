@@ -67,7 +67,7 @@ def check_error():
     }
     if MockTrigger.actual == expected:
         return True
-
+    TestCase.maxDiff = None
     TestCase.assertDictEqual(TestCase(), MockTrigger.actual, expected)
 
 

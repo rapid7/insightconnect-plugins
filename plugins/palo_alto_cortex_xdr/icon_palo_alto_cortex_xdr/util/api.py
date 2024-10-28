@@ -491,9 +491,29 @@ class CortexXdrAPI:
 
         request = requests.Request(method="post", url=url, headers=headers, json=post_body)
 
+        custom_config_exceptions = {
+            HTTPStatusCodes.BAD_REQUEST: PluginException(cause="API Error. ", assistance="Bad request, invalid JSON."),
+            HTTPStatusCodes.UNAUTHORIZED: PluginException(
+                cause="API Error. ", assistance="Authorization failed. Check your API Key ID & API Key."
+            ),
+            HTTPStatusCodes.PAYMENT_REQUIRED: PluginException(
+                cause="API Error. ",
+                assistance="Unauthorized access. User does not have the required license type to run this API.",
+            ),
+            HTTPStatusCodes.FORBIDDEN: PluginException(
+                cause="API Error. ",
+                assistance="Forbidden. The provided API Key does not have the required RBAC permissions to run this API.",
+            ),
+            HTTPStatusCodes.NOT_FOUND: PluginException(
+                cause="API Error. ",
+                assistance=f"The object at {url} does not exist. Check the FQDN connection setting and try again.",
+            ),
+        }
+
         response = make_request(
             _request=request,
             timeout=60,
+            exception_custom_configs=custom_config_exceptions,
             exception_data_location=ResponseExceptionData.RESPONSE,
             allowed_status_codes=[HTTPStatusCodes.UNAUTHORIZED],
         )
