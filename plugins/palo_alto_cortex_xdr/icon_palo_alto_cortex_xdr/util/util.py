@@ -29,7 +29,7 @@ class Util:
             if isinstance(item, str):
                 item_split = item.split(":")
                 output_list.extend(item_split)
-        
+
         duplicates = set()
 
         return [item for item in output_list if not (item in duplicates or duplicates.add(item))]
