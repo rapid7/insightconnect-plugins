@@ -8,7 +8,7 @@ sys.path.append(os.path.abspath("../"))
 from icon_hybrid_analysis.actions.lookup_hash import LookupHash
 from icon_hybrid_analysis.actions.lookup_hash.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
-from unit_test.util import Util
+from util import Util
 
 
 class TestLookUpHash(TestCase):
