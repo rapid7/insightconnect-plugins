@@ -230,21 +230,13 @@ Example output:
 
 ```
 {
-  "error": "File \\\"testing.com.txt\\\" was detected as \\\"unknown\\\", this format is not supported on WINDOWS",
-  "error_origin": "CLIENT",
-  "error_type": "FILE_TYPE_BAD_ERROR",
-  "related_reports": [
-    {
-      "Environment ID": 0,
-      "Error Origin": "",
-      "Error Type": {},
-      "Job ID": {},
-      "SHA256": {},
-      "State": {},
-      "Verdict": {}
-    }
-  ],
-  "state": "ERROR"
+  "related_reports": [{
+    "job_id": "61dc148b0cad612f7371d2d3",
+    "environment_id": 300,
+    "state": "SUCCESS",
+    "sha256": "275a021bbfb6489e54d411499f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
+  }],
+  "state": "SUCCESS"
 }
 ```
 
