@@ -34,10 +34,10 @@ For testing purposes, to give access to all tables, use `*.*.**`. This is not re
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|authentication_token|credential_secret_key|None|True|Devo authentication token|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|region|string|None|True|Region|['USA', 'EU', 'VDC (Spain)']|USA|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|authentication_token|credential_secret_key|None|True|Devo authentication token|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
+|region|string|None|True|Region|["USA", "EU", "VDC (Spain)"]|USA|None|None|
 
 Example input:
 
@@ -52,18 +52,19 @@ Example input:
 
 ### Actions
 
+
 #### Query Logs
 
 This action is used to run a LINQ query against the logs.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|from_date|string|None|True|Earliest date to query events from, will accept relative or absolute times, e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now|None|5 minutes ago|
-|query|string|None|True|A query. The response is limited to 200MB of raw data or 1000 entries, whichever is hit first|None|from demo.ecommerce.data select *|
-|to_date|string|Now|True|Latest date to query events from, will accept relative or absolute times, e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now|None|Now|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|from_date|string|None|True|Earliest date to query events from, will accept relative or absolute times, e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now|None|5 minutes ago|None|None|
+|query|string|None|True|A query. The response is limited to 200MB of raw data or 1000 entries, whichever is hit first|None|from demo.ecommerce.data select *|None|None|
+|to_date|string|Now|True|Latest date to query events from, will accept relative or absolute times, e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now|None|Now|None|None|
+  
 Example input:
 
 ```
@@ -76,10 +77,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|results|query_result|True|An object containing information and results about the query that was run|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|results|query_result|True|An object containing information and results about the query that was run|None|
+  
 Example output:
 
 ```
@@ -107,19 +108,19 @@ Example output:
   }
 }
 ```
-
 ### Triggers
+
 
 #### Get New Alerts
 
-This trigger is used to get new alerts.
+This trigger is used to get new alerts
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|interval|integer|10|False|Interval time in seconds|None|5|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|interval|integer|10|False|Interval time in seconds|None|5|None|None|
+  
 Example input:
 
 ```
@@ -130,10 +131,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|alerts|[]object|True|An object containing information and results about the alerts from interval time|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|alerts|[]object|True|An object containing information and results about the alerts from interval time|None|
+  
 Example output:
 
 ```
@@ -168,10 +169,63 @@ Example output:
   ]
 }
 ```
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-### Custom Output Types
+### Custom Types
+  
+**alert**
 
-_This plugin does not contain any custom output types._
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Alert Host|string|None|False|Alert host|None|
+|Alert ID|string|None|False|Alert ID|None|
+|Application|string|None|False|Application|None|
+|Category|string|None|False|Category|None|
+|Context|string|None|False|Context|None|
+|Domain|string|None|False|Domain|None|
+|Destination Host|string|None|False|Destination host|None|
+|Destination IP|string|None|False|Destination IP|None|
+|Destination Port|string|None|False|Destination port|None|
+|Engine|string|None|False|Engine|None|
+|Event Date|integer|None|False|Event date|None|
+|Extra Data|string|None|False|Extra data|None|
+|Priority|float|None|False|Priority|None|
+|Protocol|string|None|False|Protocol|None|
+|Source Host|string|None|False|Source host|None|
+|Source IP|string|None|False|Source IP|None|
+|Source Port|string|None|False|Source port|None|
+|Status|integer|None|False|Status|None|
+|Username|string|None|False|Username|None|
+  
+**log_entry**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Bytes Transferred|integer|None|False|Bytes transferred|None|
+|Client IP Address|string|None|False|Client IP address|None|
+|Cookie|string|None|False|Cookie|None|
+|Event Date|integer|None|False|Event date|None|
+|Method|string|None|False|Method|None|
+|Protocol|string|None|False|Protocol|None|
+|Referral URI|string|None|False|Referral URI|None|
+|Status Code|integer|None|False|Status code|None|
+|Time Taken|integer|None|False|Time taken|None|
+|Timestamp|string|None|False|Timestamp|None|
+|URI|string|None|False|URI|None|
+|User Agent|string|None|False|User agent|None|
+  
+**query_result**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|CID|string|None|False|CID|None|
+|Message|string|None|False|Message|None|
+|Log Entries|[]log_entry|None|False|Log entries|None|
+|Status|integer|None|False|Status|None|
+|Timestamp|integer|None|False|Timestamp|None|
+
 
 ## Troubleshooting
 
@@ -183,12 +237,15 @@ _This plugin does not contain any custom output types._
 
 # Version History
 
+* 3.0.2 - Bumping requirements.txt | SDK Bump to 6.1.4
 * 3.0.1 - Fix an issue in Get New Alerts trigger to catch missing alerts
 * 3.0.0 - Fix an issue in Get New Alerts trigger to filter duplicate alerts. Output contains list of new alerts
 * 2.0.0 - Configuration for interval input parameter
 * 1.0.0 - Initial plugin
 
 # Links
+
+* [Devo](https://www.devo.com/)
 
 ## References
 
