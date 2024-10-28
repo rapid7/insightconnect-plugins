@@ -174,7 +174,7 @@ class TestMonitorAlerts(TestCase):
         error_msg: Union[str, PluginException],
         error_code: int,
     ) -> None:
-        self.maxDiff = None
+
         # This if statement is to handle the "if not type response" statement specifically
         if error_code == 500:
             mocked_response = mock_conditions(200, file_name="monitor_alerts_faulty_response")
