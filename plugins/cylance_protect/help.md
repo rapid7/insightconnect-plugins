@@ -3,19 +3,19 @@
 The [BlackBerry CylancePROTECT](https://www.cylance.com/en-us/platform/products/cylance-protect.html) plugin allows you to automate response operations for CylancePROTECT and CylanceOPTICS
 
 # Key Features
-  
-* Get agent details  
-* Blacklist a malicious hash  
-* Quarantine endpoints  
-* Search threats  
+
+* Get agent details
+* Blacklist a malicious hash
+* Quarantine endpoints
+* Search threats
 * Delete assets
 
 # Requirements
-  
+
 * CylancePROTECT configured with an Custom Application
 
 # Supported Product Versions
-  
+
 * v2
 
 # Documentation
@@ -31,13 +31,13 @@ You must create a Custom Application by following this procedure from the Cylanc
   
 The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|application_id|credential_secret_key|None|True|Application ID for CylancePROTECT instance|None|1abc234d-5efa-6789-bcde-0f1abcde23f5|
-|application_secret|credential_secret_key|None|True|Generated token that allows access to Cylance Resources|None|1abc234d-5efa-6789-bcde-0f1abcde23f5|
-|tenant_id|credential_secret_key|None|True|The unique tenant ID of the tenant that the device belongs to|None|1abc234d-5efa-6789-bcde-0f1abcde23f5|
-|url|string|https://protectapi.cylance.com|True|Web API URL|None|https://protectapi.cylance.com|
-  
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|application_id|credential_secret_key|None|True|Application ID for CylancePROTECT instance|None|1abc234d-5efa-6789-bcde-0f1abcde23f5|None|None|
+|application_secret|credential_secret_key|None|True|Generated token that allows access to Cylance Resources|None|1abc234d-5efa-6789-bcde-0f1abcde23f5|None|None|
+|tenant_id|credential_secret_key|None|True|The unique tenant ID of the tenant that the device belongs to|None|1abc234d-5efa-6789-bcde-0f1abcde23f5|None|None|
+|url|string|https://protectapi.cylance.com|True|Web API URL|None|https://protectapi.cylance.com|None|None|
+
 Example input:
 
 ```
@@ -55,16 +55,16 @@ Example input:
 
 
 #### Blacklist
-  
+
 This action is used to blacklist (quarantine) a hash globally
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|blacklist_state|boolean|None|True|True to blacklist hash, false to unblacklist hash|None|True|
-|description|string|Hash Blacklisted from InsightConnect|True|Description for why the hash is blacklisted|None|Hash Blacklisted from InsightConnect|
-|hash|string|None|True|Create a blacklist item from a SHA256 hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|blacklist_state|boolean|None|True|True to blacklist hash, false to unblacklist hash|None|True|None|None|
+|description|string|Hash Blacklisted from InsightConnect|True|Description for why the hash is blacklisted|None|Hash Blacklisted from InsightConnect|None|None|
+|hash|string|None|True|Create a blacklist item from a SHA256 hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|None|None|
   
 Example input:
 
@@ -91,15 +91,15 @@ Example output:
 ```
 
 #### Delete Asset
-  
+
 This action is used to delete assets/devices from the Console
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|agents|[]string|None|True|Device(s) to delete. Accepts IP address, MAC address, hostname, or device ID|None|["Example-Hostname", "198.51.100.1"]|
-|whitelist|[]string|None|False|This list contains a set of hosts that should not be deleted. This can include IPs, hostnames or device IDs|None|["198.51.100.100","Example-Hostname", "1abc234d-5efa-6789-bcde-0f1abcde23f5"]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|agents|[]string|None|True|Device(s) to delete. Accepts IP address, MAC address, hostname, or device ID|None|["Example-Hostname", "198.51.100.1"]|None|None|
+|whitelist|[]string|None|False|This list contains a set of hosts that should not be deleted. This can include IPs, hostnames or device IDs|None|["198.51.100.100","Example-Hostname", "1abc234d-5efa-6789-bcde-0f1abcde23f5"]|None|None|
   
 Example input:
 
@@ -141,14 +141,14 @@ Example output:
 ```
 
 #### Get Agent Details
-  
+
 This action is used to retrieve agent information
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|agent|string|None|True|Agent to retrieve device information from. Accepts MAC address, hostname, or agent ID|None|cylance-agent-win12|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|agent|string|None|True|Agent to retrieve device information from. Accepts MAC address, hostname, or agent ID|None|cylance-agent-win12|None|None|
   
 Example input:
 
@@ -197,15 +197,15 @@ Example output:
 ```
 
 #### Quarantine
-  
+
 This action is used to quarantine (isolate) an endpoint
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|agent|string|None|True|Device to perform quarantine action on. Accepts IP address, MAC address, hostname, or device ID|None|Example-Hostname|
-|whitelist|[]string|None|False|This list contains a set of hosts that should not be blocked. This can include IPs, hostnames or device IDs|None|["198.51.100.100", "Example-Hostname", "1abc234d-5efa-6789-bcde-0f1abcde23f5"]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|agent|string|None|True|Device to perform quarantine action on. Accepts IP address, MAC address, hostname, or device ID|None|Example-Hostname|None|None|
+|whitelist|[]string|None|False|This list contains a set of hosts that should not be blocked. This can include IPs, hostnames or device IDs|None|["198.51.100.100", "Example-Hostname", "1abc234d-5efa-6789-bcde-0f1abcde23f5"]|None|None|
   
 Example input:
 
@@ -247,14 +247,14 @@ Example output:
 ```
 
 #### Search Agents
-  
+
 This action is used to this action searches for agents and returns device information details
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|agent|string|None|True|Agent to retrieve device information from. Accepts IP address, MAC address, name, or device ID|None|EXAMPLE-HOSTNAME|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|agent|string|None|True|Agent to retrieve device information from. Accepts IP address, MAC address, name, or device ID|None|EXAMPLE-HOSTNAME|None|None|
   
 Example input:
 
@@ -299,14 +299,14 @@ Example output:
 ```
 
 #### Get Devices Affected by Threat
-  
+
 This action is used to retrieve a list of devices affected by a threat
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|threat_identifier|string|None|True|The threat to search for. The input should be a threat name, MD5, or SHA256 hash|None|44d88612fea8a8f36de82e1278abb02f|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|threat_identifier|string|None|True|The threat to search for. The input should be a threat name, MD5, or SHA256 hash|None|44d88612fea8a8f36de82e1278abb02f|None|None|
   
 Example input:
 
@@ -350,15 +350,15 @@ Example output:
 ```
 
 #### Search Threats
-  
+
 This action is used to finds and displays detailed information about one or more threats
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|score|integer|None|False|Filter the search by the Cylance score assigned to the threat. Accepts an integer within the range [-1,1]|None|-1|
-|threat_identifier|[]string|None|True|The threat(s) to search for. The input should be an array of threat names, MD5, or SHA256 hashes|None|["44d88612fea8a8f36de82e1278abb02f", "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f", "Example-Threat-Name"]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|score|integer|None|False|Filter the search by the Cylance score assigned to the threat. Accepts an integer within the range [-1,1]|None|-1|None|None|
+|threat_identifier|[]string|None|True|The threat(s) to search for. The input should be an array of threat names, MD5, or SHA256 hashes|None|["44d88612fea8a8f36de82e1278abb02f", "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f", "Example-Threat-Name"]|None|None|
   
 Example input:
 
@@ -404,18 +404,18 @@ Example output:
 ```
 
 #### Update Agent
-  
+
 This action is used to adds or removes zones and/or updates the policy of a specific Console device resource belonging 
 to a Tenant
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|add_zones|[]string|None|False|The list of zone identifiers which the device is to be assigned. The input should be an array of zone IDs|None|["1abc234d-5efa-6789-bcde-0f1abcde23f5"]|
-|agent|string|None|True|Agent to update device information from. Accepts IP address, MAC address, hostname, or device ID|None|Example-Hostname|
-|policy|string|None|False|The unique identifier for the policy to assign to the device. Specify policy, or leave the string empty to remove the current policy from the device|None|1abc234d-5efa-6789-bcde-0f1abcde23f5|
-|remove_zones|[]string|None|False|The list of zone identifiers from which the device is to be removed. The input should be an array of zone IDs|None|["1abc234d-5efa-6789-bcde-0f1abcde23f5"]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|add_zones|[]string|None|False|The list of zone identifiers which the device is to be assigned. The input should be an array of zone IDs|None|["1abc234d-5efa-6789-bcde-0f1abcde23f5"]|None|None|
+|agent|string|None|True|Agent to update device information from. Accepts IP address, MAC address, hostname, or device ID|None|Example-Hostname|None|None|
+|policy|string|None|False|The unique identifier for the policy to assign to the device. Specify policy, or leave the string empty to remove the current policy from the device|None|1abc234d-5efa-6789-bcde-0f1abcde23f5|None|None|
+|remove_zones|[]string|None|False|The list of zone identifiers from which the device is to be removed. The input should be an array of zone IDs|None|["1abc234d-5efa-6789-bcde-0f1abcde23f5"]|None|None|
   
 Example input:
 
@@ -447,16 +447,16 @@ Example output:
 ```
 
 #### Update Agent Threat
-  
+
 This action is used to updates the status (waive or quarantine) of a convicted threat on a selected device
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|agent|string|None|True|Device to update threat on. Accepts IP address, MAC address, hostname, or device ID|None|Example-Hostname|
-|quarantine_state|boolean|None|True|True to quarantine threat, false to waive threat|None|True|
-|threat_identifier|string|None|True|The threat to search for. The input should be a threat name, MD5 or SHA256 hash|None|44d88612fea8a8f36de82e1278abb02f|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|agent|string|None|True|Device to update threat on. Accepts IP address, MAC address, hostname, or device ID|None|Example-Hostname|None|None|
+|quarantine_state|boolean|None|True|True to quarantine threat, false to waive threat|None|True|None|None|
+|threat_identifier|string|None|True|The threat to search for. The input should be a threat name, MD5 or SHA256 hash|None|44d88612fea8a8f36de82e1278abb02f|None|None|
   
 Example input:
 
@@ -597,20 +597,21 @@ Example output:
 
 ## Troubleshooting
   
-*There is no troubleshooting for this plugin.*
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
-* 1.5.2 - Bumped the version of the SDK used | Bumped versions of all pythion packages used | Ran refresh to bring code up to latest standard | Added unit tests for all actions 
-* 1.5.1 - Bug fixes in Delete Asset, hostname whitelisting, and IP address inputs  
-* 1.5.0 - New action Delete Asset | Rework utility function  
-* 1.4.0 - New actions Update Agent Threat, Update Agent  
-* 1.3.0 - New action Search Agents  
-* 1.2.0 - New actions Search Threats, Get Devices Affected by Threat  
-* 1.1.0 - New action Quarantine  
-* 1.0.3 - Match official branding in plugin title  
-* 1.0.2 - Update to fix connection test  
-* 1.0.1 - Add SHA256 input validation in Blacklist action  
+* 1.5.3 - Bumping requirements.txt | SDK bump to 6.1.4
+* 1.5.2 - Bumped the version of the SDK used | Bumped versions of all pythion packages used | Ran refresh to bring code up to latest standard | Added unit tests for all actions
+* 1.5.1 - Bug fixes in Delete Asset, hostname whitelisting, and IP address inputs
+* 1.5.0 - New action Delete Asset | Rework utility function
+* 1.4.0 - New actions Update Agent Threat, Update Agent
+* 1.3.0 - New action Search Agents
+* 1.2.0 - New actions Search Threats, Get Devices Affected by Threat
+* 1.1.0 - New action Quarantine
+* 1.0.3 - Match official branding in plugin title
+* 1.0.2 - Update to fix connection test
+* 1.0.1 - Add SHA256 input validation in Blacklist action
 * 1.0.0 - Initial plugin
 
 # Links
@@ -618,5 +619,5 @@ Example output:
 * [BlackBerry CylancePROTECT](https://www.cylance.com)
 
 ## References
-  
-* [BlackBerry CylancePROTECT](https://www.cylance.com)
+
+* [BlackBerry CylancePROTECT API](https://documentation.securonix.com/bundle/securonix-on-prem-user-guide/page/content/active-deployment-guides/cylance-protect-api-kvp.htm)
