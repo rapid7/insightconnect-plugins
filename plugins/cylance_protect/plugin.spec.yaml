@@ -5,9 +5,14 @@ name: cylance_protect
 title: BlackBerry CylancePROTECT
 description: The [BlackBerry CylancePROTECT](https://www.cylance.com/en-us/platform/products/cylance-protect.html) plugin allows you to automate response operations for CylancePROTECT and CylanceOPTICS
 supported_versions: [v2]
-version: 1.5.2
+version: 1.5.3
+connection_version: 1
 vendor: rapid7
 support: rapid7
+sdk:
+  type: slim
+  version: 6.1.4
+  user: nobody
 status: []
 tags: [cylance, protect, edr, blacklist]
 hub_tags:
@@ -24,22 +29,25 @@ key_features:
   - Quarantine endpoints
   - Search threats
   - Delete assets
+links:
+  - "[BlackBerry CylancePROTECT](https://www.cylance.com)"
 requirements:
   - CylancePROTECT configured with an Custom Application
 references:
-  - "[BlackBerry CylancePROTECT](https://www.cylance.com)"
+  - "[BlackBerry CylancePROTECT API](https://documentation.securonix.com/bundle/securonix-on-prem-user-guide/page/content/active-deployment-guides/cylance-protect-api-kvp.htm)"
 version_history:
-  - 1.5.2 - Bumped the version of the SDK used | Bumped versions of all pythion packages used | Ran refresh to bring code up to latest standard | Added unit tests for all actions
-  - 1.5.1 - Bug fixes in Delete Asset, hostname whitelisting, and IP address inputs
-  - 1.5.0 - New action Delete Asset | Rework utility function
-  - 1.4.0 - New actions Update Agent Threat, Update Agent
-  - 1.3.0 - New action Search Agents
-  - 1.2.0 - New actions Search Threats, Get Devices Affected by Threat
-  - 1.1.0 - New action Quarantine
-  - 1.0.3 - Match official branding in plugin title
-  - 1.0.2 - Update to fix connection test
-  - 1.0.1 - Add SHA256 input validation in Blacklist action
-  - 1.0.0 - Initial plugin
+  - "1.5.3 - Bumping requirements.txt | SDK bump to 6.1.4"
+  - "1.5.2 - Bumped the version of the SDK used | Bumped versions of all pythion packages used | Ran refresh to bring code up to latest standard | Added unit tests for all actions"
+  - "1.5.1 - Bug fixes in Delete Asset, hostname whitelisting, and IP address inputs"
+  - "1.5.0 - New action Delete Asset | Rework utility function"
+  - "1.4.0 - New actions Update Agent Threat, Update Agent"
+  - "1.3.0 - New action Search Agents"
+  - "1.2.0 - New actions Search Threats, Get Devices Affected by Threat"
+  - "1.1.0 - New action Quarantine"
+  - "1.0.3 - Match official branding in plugin title"
+  - "1.0.2 - Update to fix connection test"
+  - "1.0.1 - Add SHA256 input validation in Blacklist action"
+  - "1.0.0 - Initial plugin"
 types:
   policy:
     id:
