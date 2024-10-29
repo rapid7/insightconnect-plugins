@@ -34,7 +34,7 @@ links:
 requirements:
   - CylancePROTECT configured with an Custom Application
 references:
-  - "[BlackBerry CylancePROTECT API](https://documentation.securonix.com/bundle/securonix-on-prem-user-guide/page/content/active-deployment-guides/cylance-protect-api-kvp.htm)"
+  - "[BlackBerry CylancePROTECT API](https://docs.blackberry.com/en/unified-endpoint-security/blackberry-ues/Cylance-API-user-guide/Application_Management)"
 version_history:
   - "1.5.3 - Bumping requirements.txt | SDK bump to 6.1.4"
   - "1.5.2 - Bumped the version of the SDK used | Bumped versions of all pythion packages used | Ran refresh to bring code up to latest standard | Added unit tests for all actions"
