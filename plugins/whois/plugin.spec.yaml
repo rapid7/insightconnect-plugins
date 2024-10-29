@@ -4,7 +4,7 @@ products: [insightconnect]
 name: whois
 title: WHOIS
 description: "[WHOIS](https://en.wikipedia.org/wiki/WHOIS) is a query and response protocol that is widely used for querying databases that store the registered users or assignee's of an Internet resource, such as a domain name, an IP address block, or an autonomous system"
-version: 3.1.4
+version: 3.1.5
 connection_version: 3
 vendor: rapid7
 support: community
@@ -12,7 +12,7 @@ supported_versions: ["2024-09-09"]
 status: []
 sdk:
   type: slim
-  version: 6.1.0
+  version: 6.1.4
   user: nobody
   packages:
     - whois
@@ -34,6 +34,7 @@ references: ["[WHOIS](https://en.wikipedia.org/wiki/WHOIS)"]
 links: ["[WHOIS](https://en.wikipedia.org/wiki/WHOIS)"]
 troubleshooting: "Multiple records can be returned by the server, this plugin currently only returns the first unique records found."
 version_history:
+  - "3.1.5 - Action `Address`: Fixed issue with result parsing"
   - "3.1.4 - Initial updates for fedramp compliance | Updated SDK to the latest version"
   - "3.1.3 - Updated SDK to the latest version (v6.0.0) | Bump setuptools version to v70.0.0"
   - "3.1.2 - Updated SDK to the latest version | Added validation for input parameters"

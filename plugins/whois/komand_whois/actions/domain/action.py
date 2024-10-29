@@ -1,11 +1,12 @@
 import insightconnect_plugin_runtime
-from .schema import DomainInput, DomainOutput, Input, Output
-
-# Custom imports below
-import whois
 import validators
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import clean
+
+# Custom imports below
+import whois
+
+from .schema import DomainInput, DomainOutput, Input
 
 
 class Domain(insightconnect_plugin_runtime.Action):
