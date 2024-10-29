@@ -601,8 +601,43 @@ Example output:
 }
 ```
 ### Triggers
+
+
+#### Trigger a GreyNoise Alert
+
+This trigger is used to trigger a GreyNoise Alert based on IP List every interval
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|interval|integer|3600|True|How frequently (in seconds) to trigger a greeting|None|3600|None|None|
+|ip_list|[]string|None|True|List of IP Addresses or CIDR blocks to check for scanning activity|None|1.2.3.4,5.2.3.0/24|None|None|
+|lookback_days|integer|1|True|Number of Days to look back for scanning activity|None|1|None|None|
   
-*This plugin does not contain any triggers.*
+Example input:
+
+```
+{
+  "interval": 3600,
+  "ip_list": "1.2.3.4,5.2.3.0/24",
+  "lookback_days": 1
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|ip_list|[]string|True|The list of IPs that were found scanning|1.2.3.4,5.2.3.0/24|
+  
+Example output:
+
+```
+{
+  "ip_list": "1.2.3.4,5.2.3.0/24"
+}
+```
 ### Tasks
   
 *This plugin does not contain any tasks.*

@@ -689,6 +689,38 @@ connection:
     type: credential_secret_key
     required: true
     example: abcdefghijklmnopqrstuvwxyz0123456789
+triggers:
+  greynoise_alert:
+    title: Trigger a GreyNoise Alert
+    description: Trigger a GreyNoise Alert based on IP List every interval
+    input:
+      interval:
+        title: Interval
+        description: How frequently (in seconds) to trigger a greeting
+        type: integer
+        default: 3600
+        required: true
+        example: 3600
+      ip_list:
+        title: List of IPs
+        description: List of IP Addresses or CIDR blocks to check for scanning activity
+        type: "[]string"
+        required: true
+        example: "1.2.3.4,5.2.3.0/24"
+      lookback_days:
+        title: Number of days
+        description: Number of Days to look back for scanning activity
+        type: integer
+        required: true
+        default: 1
+        example: 1
+    output:
+      ip_list:
+        title: List of IPs
+        description: The list of IPs that were found scanning
+        type: "[]string"
+        required: true
+        example: "1.2.3.4,5.2.3.0/24"
 actions:
   context_lookup:
     title: Context IP Lookup
