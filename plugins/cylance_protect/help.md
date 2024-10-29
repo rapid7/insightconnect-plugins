@@ -620,4 +620,4 @@ Example output:
 
 ## References
 
-* [BlackBerry CylancePROTECT API](https://documentation.securonix.com/bundle/securonix-on-prem-user-guide/page/content/active-deployment-guides/cylance-protect-api-kvp.htm)
+* [BlackBerry CylancePROTECT API](https://docs.blackberry.com/en/unified-endpoint-security/blackberry-ues/Cylance-API-user-guide/Application_Management)
