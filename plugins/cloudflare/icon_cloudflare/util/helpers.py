@@ -51,12 +51,12 @@ def clean(item_to_clean: Union[dict, list]) -> Union[dict, list]:
 
 
 def set_configuration(target: str) -> dict:
-    if validators.ipv4(target):
+    if validators.ipv4(target, cidr=False):
         return {"value": target, "target": "ip"}
-    if validators.ipv6(target):
+    if validators.ipv6(target, cidr=False):
         return {"value": target, "target": "ip6"}
-    if (validators.ipv4_cidr(target) and target.endswith(("/16", "/24"))) or (
-        validators.ipv6_cidr(target) and target.endswith(("/32", "/48", "/64"))
+    if (validators.ipv4(target) and target.endswith(("/16", "/24"))) or (
+        validators.ipv6(target) and target.endswith(("/32", "/48", "/64"))
     ):
         return {"value": target, "target": "ip_range"}
     if fullmatch("^[a-zA-Z]{2}$", target):
