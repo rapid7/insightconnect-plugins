@@ -5,7 +5,24 @@ task_first_run_output = {
     "last_alert_hashes": ["b78568edeb07d22535d7b06454a4ce89a6589768"],
     "last_alert_time": "2024-04-25T15:38:38.389Z",
     "last_observation_hashes": ["f1c41f48654ec39d4614a0e924b2a6b96fa9f32e"],
-    "last_observation_time": "2024-04-25T15:39:38.389Z",
+    "last_observation_time": "2024-04-25T15:40:00.000000Z",
+}
+
+task_first_run_output_with_offset = {
+    "observation_end_time": "2024-04-25T15:45:00.000000Z",
+    "last_alert_hashes": ["b78568edeb07d22535d7b06454a4ce89a6589768"],
+    "last_alert_time": "2024-04-25T15:38:38.389Z",
+    "last_observation_hashes": ["f1c41f48654ec39d4614a0e924b2a6b96fa9f32e"],
+    "last_observation_time": "2024-04-25T15:40:00.000000Z",
+    "observation_job_offset": 2,
+}
+
+task_first_run_output_within_window = {
+    "observation_end_time": "2024-04-25T15:45:00.000000Z",
+    "last_alert_hashes": ["b78568edeb07d22535d7b06454a4ce89a6589768"],
+    "last_alert_time": "2024-04-25T15:38:38.389Z",
+    "last_observation_hashes": ["8e4938516e75f89203799a179447ac9586f06843"],
+    "last_observation_time": "2024-04-25T15:43:00.000Z",
 }
 
 task_subsequent_output = {
@@ -21,7 +38,7 @@ task_subsequent_output_no_observation_job = {
     "last_alert_hashes": ["b78568edeb07d22535d7b06454a4ce89a6589768"],  # hash of last alert retrieved
     "last_alert_time": "2024-04-25T15:45:00.000000Z",  # now - 15 minutes as no new alerts returned
     "last_observation_hashes": ["f1c41f48654ec39d4614a0e924b2a6b96fa9f32e"],
-    "last_observation_time": "2024-04-25T15:39:38.389Z",
+    "last_observation_time": "2024-04-25T15:40:00.000000Z",
     "observation_end_time": "2024-04-25T15:45:00.000000Z",
 }
 
@@ -39,7 +56,7 @@ observation_job_not_finished = {
     "last_alert_hashes": ["9bceab49bf5441923e8fe8345195d5ec4d270193"],
     "last_alert_time": "2024-04-25T15:50:38.389Z",
     "last_observation_hashes": ["f1c41f48654ec39d4614a0e924b2a6b96fa9f32e"],
-    "last_observation_time": "2024-04-25T15:39:38.389Z",
+    "last_observation_time": "2024-04-25T15:40:00.000000Z",
     "last_observation_job": "1234-abcd-5678-sqs",
     "last_observation_job_time": "2024-04-25T16:00:00.000000Z",
 }
@@ -59,7 +76,7 @@ task_401_on_second_request = {
     "last_alert_hashes": ["b78568edeb07d22535d7b06454a4ce89a6589768"],
     "last_alert_time": "2024-04-25T15:38:38.389Z",
     "last_observation_hashes": ["f1c41f48654ec39d4614a0e924b2a6b96fa9f32e"],
-    "last_observation_time": "2024-04-25T15:39:38.389Z",
+    "last_observation_time": "2024-04-25T15:40:00.000000Z",
     "last_observation_job": "1234-abcd-5678-sqs",
     "last_observation_job_time": "2024-04-25T16:00:00.000000Z",
 }
@@ -70,7 +87,7 @@ task_404_on_third_request = {
     "last_alert_hashes": ["9bceab49bf5441923e8fe8345195d5ec4d270193"],
     "last_alert_time": "2024-04-25T15:50:38.389Z",
     "last_observation_hashes": ["f1c41f48654ec39d4614a0e924b2a6b96fa9f32e"],
-    "last_observation_time": "2024-04-25T15:39:38.389Z",
+    "last_observation_time": "2024-04-25T15:40:00.000000Z",
 }
 
 observation_job_exceeded = {
