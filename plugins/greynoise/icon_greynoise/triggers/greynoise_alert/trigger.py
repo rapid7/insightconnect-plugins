@@ -1,19 +1,20 @@
 import insightconnect_plugin_runtime
 import time
 from .schema import GreynoiseAlertInput, GreynoiseAlertOutput, Input, Output, Component
+
 # Custom imports below
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class GreynoiseAlert(insightconnect_plugin_runtime.Trigger):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name="greynoise_alert",
-                description=Component.DESCRIPTION,
-                input=GreynoiseAlertInput(),
-                output=GreynoiseAlertOutput())
+            name="greynoise_alert",
+            description=Component.DESCRIPTION,
+            input=GreynoiseAlertInput(),
+            output=GreynoiseAlertOutput(),
+        )
 
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
@@ -52,13 +53,14 @@ class GreynoiseAlert(insightconnect_plugin_runtime.Trigger):
                     alert_ip_list = []
                     for item in response["data"]:
                         alert_ip_list.append(item["ip"])
-                    self.send({
-                        Output.ALERT_IP_LIST: alert_ip_list,
-                    })
+                    self.send(
+                        {
+                            Output.ALERT_IP_LIST: alert_ip_list,
+                        }
+                    )
             except Exception as e:
                 raise PluginException(
                     cause=f"Plugin exception occurred: {e}",
                     assistance="Please check the input and try again.",
                 )
             time.sleep(interval)
-

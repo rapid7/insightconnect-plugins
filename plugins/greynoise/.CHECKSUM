@@ -1,5 +1,5 @@
 {
-	"spec": "c096c62b5bf440d5aadb32046acf25d5",
+	"spec": "68d6964e65e8c8fc1ce6173cb3092793",
 	"manifest": "a3a078aff38b7dd7cb3d26c2d506a97c",
 	"setup": "7d0148b4efc7745f17003a77e9e73c55",
 	"schemas": [
@@ -45,7 +45,7 @@
 		},
 		{
 			"identifier": "greynoise_alert/schema.py",
-			"hash": "749cccab54d160242c64555a942be69f"
+			"hash": "49ce1f4f78deafa4dd101f11024520a4"
 		}
 	]
 }

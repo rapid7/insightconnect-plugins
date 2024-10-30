@@ -1,16 +1,17 @@
 import insightconnect_plugin_runtime
 from .schema import TimelineLookupInput, TimelineLookupOutput, Input, Output, Component
+
 # Custom imports below
 
 
 class TimelineLookup(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name="timeline_lookup",
-                description=Component.DESCRIPTION,
-                input=TimelineLookupInput(),
-                output=TimelineLookupOutput())
+            name="timeline_lookup",
+            description=Component.DESCRIPTION,
+            input=TimelineLookupInput(),
+            output=TimelineLookupOutput(),
+        )
 
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION

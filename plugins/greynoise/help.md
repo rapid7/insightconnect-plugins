@@ -603,7 +603,7 @@ Example output:
 ### Triggers
 
 
-#### Monitor IP list in GreyNoise
+#### Monitor IP List in GreyNoise
 
 This trigger is used to query a list of IPs in GreyNoise based on IP List every interval to identify if any of them are
  actively scanning the internet

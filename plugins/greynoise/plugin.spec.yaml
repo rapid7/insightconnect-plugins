@@ -691,7 +691,7 @@ connection:
     example: abcdefghijklmnopqrstuvwxyz0123456789
 triggers:
   greynoise_alert:
-    title: Monitor IP list in GreyNoise
+    title: Monitor IP List in GreyNoise
     description: Query a list of IPs in GreyNoise based on IP List every interval to identify if any of them are actively scanning the internet
     input:
       interval:
@@ -708,7 +708,7 @@ triggers:
         required: true
         example: "[1.2.3.4,5.2.3.0/24]"
       lookback_days:
-        title: Number of days
+        title: Number of Days
         description: Number of Days to look back for scanning activity. Recommended "1", Max "90"
         type: integer
         required: true

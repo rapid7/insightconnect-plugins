@@ -41,7 +41,7 @@ class GreynoiseAlertInput(insightconnect_plugin_runtime.Input):
     },
     "lookback_days": {
       "type": "integer",
-      "title": "Number of days",
+      "title": "Number of Days",
       "description": "Number of Days to look back for scanning activity. Recommended \"1\", Max \"90\"",
       "default": 1,
       "order": 3
