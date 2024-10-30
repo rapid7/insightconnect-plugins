@@ -17,7 +17,7 @@ class RiotLookup(insightconnect_plugin_runtime.Action):
             resp = self.connection.gn_client.riot(params.get(Input.IP_ADDRESS))
             if resp["riot"]:
                 resp.pop("logo_url", None)
-                resp["viz_url"] = "https://viz.greynoise.io/riot/" + str(params.get(Input.IP_ADDRESS))
+                resp["viz_url"] = "https://viz.greynoise.io/ip/" + str(params.get(Input.IP_ADDRESS))
         except RequestFailure as e:
             raise PluginException(
                 cause=f"API responded with ERROR: {e.args[0]} - {e.args[1]}.",
