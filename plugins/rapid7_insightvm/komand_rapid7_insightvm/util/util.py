@@ -1,10 +1,13 @@
+import time
+from functools import wraps
+from typing import Any, Callable, Dict
+
+import insightconnect_plugin_runtime
+from dateutil.parser import parse
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
-import insightconnect_plugin_runtime
-from insightconnect_plugin_runtime.exceptions import PluginException
-import time
-from dateutil.parser import parse
-from typing import Dict, Any
 
 
 def convert_date_to_iso8601(date: str) -> str:
@@ -105,3 +108,24 @@ def check_not_null(account: Dict[str, Any], var_name: str) -> str:
         raise PluginException(cause=f"{var_name} has not been entered.", assistance=f"Enter valid {var_name}")
     else:
         return value
+
+
+def retry_request(maximum_tries: int, delay: int = 5) -> Callable:
+    def _decorator(function_: Callable) -> Callable:
+        @wraps(function_)
+        def wrapper(self, *args, **kwargs):
+            error_, counter = None, 0
+            while counter < maximum_tries:
+                try:
+                    return function_(self, *args, **kwargs)
+                except PluginException as error:
+                    self.logger.info(
+                        f"{error} Retrying the API call in {delay} seconds... ({counter + 1}/{maximum_tries})"
+                    )
+                    counter, error_ = counter + 1, error
+                    time.sleep(delay)
+            raise error_
+
+        return wrapper
+
+    return _decorator
