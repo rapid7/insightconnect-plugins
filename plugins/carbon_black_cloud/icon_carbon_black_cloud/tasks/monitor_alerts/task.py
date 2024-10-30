@@ -245,10 +245,13 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             del state[LAST_OBSERVATION_JOB]
             del state[LAST_OBSERVATION_JOB_TIME]
 
-            # if LAST_OBSERVATION_TIME was not changed by the dedupe function we put the page size in state as an index
-            # for the next search job to use as a pagination token
-            if state.get(LAST_OBSERVATION_TIME) is start_observation_time:
+            # if LAST_OBSERVATION_TIME hasn't got moved forward then we need to query the same time frame
+            # this is because observations can arrive before the start time and also occur so frequently
+            # that they can be returned in a page size but not move the time forward
+            if state.get(LAST_OBSERVATION_TIME) <= start_observation_time:
                 state[OBSERVATION_JOB_OFFSET] = state.get(OBSERVATION_JOB_OFFSET, 0) + page_size
+                state[LAST_OBSERVATION_TIME] = start_observation_time
+                has_more_pages = True
             else:
                 state.pop(OBSERVATION_JOB_OFFSET, None)
 
@@ -280,7 +283,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             alert_time = alert.get(time_key)
             # Observations quirk that it can return an alert time < start_time of the job search, should be in previous
             # run but return anyway as it won't be held in the hash values.
-            if (alert_time == start_time and hash_sha1(alert) not in old_hashes) or alert_time < start_time:
+            if alert_time <= start_time and hash_sha1(alert) not in old_hashes:
                 deduped_alerts.append(alert)
             elif alert_time > start_time:
                 deduped_alerts += alerts[index:]  # we've gone past start time, keep the rest of the alerts
