@@ -27,6 +27,8 @@ from util import (
 from responses.task_test_data import (
     task_first_run,
     task_first_run_output,
+    task_first_run_output_within_window,
+    task_first_run_output_with_offset,
     task_subsequent_output,
     task_rate_limit_getting_observations,
     task_subsequent_output_no_observation_job,
@@ -65,15 +67,15 @@ class TestMonitorAlerts(TestCase):
             [
                 "first run",
                 task_first_run.copy(),
-                ("observation_id", "first_alerts", "first_observations"),
-                task_first_run_output,
+                ("observation_id", "first_alerts", "first_observations_within_window"),
+                task_first_run_output_within_window,
                 4,  # all data in mocked responses are returned as no hashes to dedupe
             ],
             [
                 "first run - has more pages",
                 task_first_run.copy(),
                 ("observation_id", "alerts_more_pages", "first_observations"),
-                task_first_run_output,
+                task_first_run_output_with_offset,
                 4,  # all data in mocked responses are returned as no hashes to dedupe
             ],
             [
@@ -140,6 +142,7 @@ class TestMonitorAlerts(TestCase):
         response, new_state, has_more_pages, _status_code, _exception = self.task.run(state=test_state)
 
         expected_has_more_pages = "has more pages" in test
+        self.maxDiff = None
         self.assertEqual(expected_has_more_pages, has_more_pages)
         self.assertEqual(logs, len(response))
         self.assertDictEqual(state_output, new_state)
