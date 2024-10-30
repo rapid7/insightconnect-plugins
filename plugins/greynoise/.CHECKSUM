@@ -1,6 +1,6 @@
 {
-	"spec": "f37bf67b1e097131c4812f195332e490",
-	"manifest": "4264325d8b444f91b006285f2b0f8c68",
+	"spec": "3cf89fa29af9f0ac11fa185624810226",
+	"manifest": "a3a078aff38b7dd7cb3d26c2d506a97c",
 	"setup": "7d0148b4efc7745f17003a77e9e73c55",
 	"schemas": [
 		{
@@ -42,6 +42,10 @@
 		{
 			"identifier": "connection/schema.py",
 			"hash": "f7a3e43e3b17d8e2059b6499b67e7e5a"
+		},
+		{
+			"identifier": "greynoise_alert/schema.py",
+			"hash": "749cccab54d160242c64555a942be69f"
 		}
 	]
 }

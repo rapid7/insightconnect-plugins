@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Trigger a GreyNoise Alert based on IP List every interval"
+    DESCRIPTION = "Query a list of IPs in GreyNoise based on IP List every interval to identify if any of them are actively scanning the internet"
 
 
 class Input:
@@ -14,7 +14,7 @@ class Input:
 
 
 class Output:
-    IP_LIST = "ip_list"
+    ALERT_IP_LIST = "alert_ip_list"
 
 
 class GreynoiseAlertInput(insightconnect_plugin_runtime.Input):
@@ -42,7 +42,7 @@ class GreynoiseAlertInput(insightconnect_plugin_runtime.Input):
     "lookback_days": {
       "type": "integer",
       "title": "Number of days",
-      "description": "Number of Days to look back for scanning activity",
+      "description": "Number of Days to look back for scanning activity. Recommended \"1\", Max \"90\"",
       "default": 1,
       "order": 3
     }
@@ -66,7 +66,7 @@ class GreynoiseAlertOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "ip_list": {
+    "alert_ip_list": {
       "type": "array",
       "title": "List of IPs",
       "description": "The list of IPs that were found scanning",
@@ -77,7 +77,7 @@ class GreynoiseAlertOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "ip_list"
+    "alert_ip_list"
   ],
   "definitions": {}
 }

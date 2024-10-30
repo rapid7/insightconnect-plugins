@@ -603,24 +603,25 @@ Example output:
 ### Triggers
 
 
-#### Trigger a GreyNoise Alert
+#### Monitor IP list in GreyNoise
 
-This trigger is used to trigger a GreyNoise Alert based on IP List every interval
+This trigger is used to query a list of IPs in GreyNoise based on IP List every interval to identify if any of them are
+ actively scanning the internet
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |interval|integer|3600|True|How frequently (in seconds) to trigger a greeting|None|3600|None|None|
-|ip_list|[]string|None|True|List of IP Addresses or CIDR blocks to check for scanning activity|None|1.2.3.4,5.2.3.0/24|None|None|
-|lookback_days|integer|1|True|Number of Days to look back for scanning activity|None|1|None|None|
+|ip_list|[]string|None|True|List of IP Addresses or CIDR blocks to check for scanning activity|None|[1.2.3.4,5.2.3.0/24]|None|None|
+|lookback_days|integer|1|True|Number of Days to look back for scanning activity. Recommended "1", Max "90"|None|1|None|None|
   
 Example input:
 
 ```
 {
   "interval": 3600,
-  "ip_list": "1.2.3.4,5.2.3.0/24",
+  "ip_list": "[1.2.3.4,5.2.3.0/24]",
   "lookback_days": 1
 }
 ```
@@ -629,13 +630,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|ip_list|[]string|True|The list of IPs that were found scanning|1.2.3.4,5.2.3.0/24|
+|alert_ip_list|[]string|True|The list of IPs that were found scanning|1.2.3.4,5.2.3.5|
   
 Example output:
 
 ```
 {
-  "ip_list": "1.2.3.4,5.2.3.0/24"
+  "alert_ip_list": "1.2.3.4,5.2.3.5"
 }
 ```
 ### Tasks

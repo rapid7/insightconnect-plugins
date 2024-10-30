@@ -691,8 +691,8 @@ connection:
     example: abcdefghijklmnopqrstuvwxyz0123456789
 triggers:
   greynoise_alert:
-    title: Trigger a GreyNoise Alert
-    description: Trigger a GreyNoise Alert based on IP List every interval
+    title: Monitor IP list in GreyNoise
+    description: Query a list of IPs in GreyNoise based on IP List every interval to identify if any of them are actively scanning the internet
     input:
       interval:
         title: Interval
@@ -706,21 +706,21 @@ triggers:
         description: List of IP Addresses or CIDR blocks to check for scanning activity
         type: "[]string"
         required: true
-        example: "1.2.3.4,5.2.3.0/24"
+        example: "[1.2.3.4,5.2.3.0/24]"
       lookback_days:
         title: Number of days
-        description: Number of Days to look back for scanning activity
+        description: Number of Days to look back for scanning activity. Recommended "1", Max "90"
         type: integer
         required: true
         default: 1
         example: 1
     output:
-      ip_list:
+      alert_ip_list:
         title: List of IPs
         description: The list of IPs that were found scanning
         type: "[]string"
         required: true
-        example: "1.2.3.4,5.2.3.0/24"
+        example: "1.2.3.4,5.2.3.5"
 actions:
   context_lookup:
     title: Context IP Lookup

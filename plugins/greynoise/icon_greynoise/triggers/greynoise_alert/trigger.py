@@ -17,37 +17,48 @@ class GreynoiseAlert(insightconnect_plugin_runtime.Trigger):
 
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
-        interval = params.get(Input.INTERVAL, 3600)
+        interval = params.get(Input.INTERVAL)
         ip_list = params.get(Input.IP_LIST)
         lookback_days = params.get(Input.LOOKBACK_DAYS)
         # END INPUT BINDING - DO NOT REMOVE
 
+        self.logger.info("Loading GreyNoise Alert Trigger")
         while True:
-            query_ips = ""
-            counter = 0
-            for ip in ip_list:
-                if counter == 0:
-                    query_ips = str(ip)
-                    counter = counter + 1
-                else:
-                    query_ips = query_ips + " OR " + str(ip)
-                    counter = counter + 1
             try:
-                int(lookback_days)
-            except Exception:
+                query_ips = ""
+                counter = 0
+                for ip in ip_list:
+                    if counter == 0:
+                        query_ips = "(" + str(ip)
+                        counter = counter + 1
+                    else:
+                        query_ips = query_ips + " OR " + str(ip)
+                        counter = counter + 1
+                query_ips = query_ips + ")"
+                try:
+                    int(lookback_days)
+                except Exception:
+                    raise PluginException(
+                        cause=f"Lookback Days value is not a valid integer.",
+                        assistance="Please check the input and try again.",
+                    )
+
+                self.logger.info("Checking GreyNoise for IP list")
+                query = query_ips + " last_seen:" + str(lookback_days) + "d"
+                response = self.connection.gn_client.query(query)
+
+                if response.get("count") != 0:
+                    self.logger.info("IPs found in GreyNoise")
+                    alert_ip_list = []
+                    for item in response["data"]:
+                        alert_ip_list.append(item["ip"])
+                    self.send({
+                        Output.ALERT_IP_LIST: alert_ip_list,
+                    })
+            except Exception as e:
                 raise PluginException(
-                    cause=f"Lookback Days value is not a valid integer.",
+                    cause=f"Plugin exception occurred: {e}",
                     assistance="Please check the input and try again.",
                 )
-
-            query = query_ips + "last_seen:" + str(lookback_days) + "d"
-            response = self.connection.gn_client.query(query)
-
-            if response.get(count) != "0":
-                alert_ip_list = []
-                for item in response["data"]:
-                    alert_ip_list.append(item["ip"])
-                self.send({
-                    Output.IP_LIST: alert_ip_list,
-                })
             time.sleep(interval)
+
