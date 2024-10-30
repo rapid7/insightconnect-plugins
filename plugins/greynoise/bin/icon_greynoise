@@ -35,7 +35,7 @@ def main():
                 connection=connection.Connection()
             )
             self.add_trigger(triggers.GreynoiseAlert())
-
+        
             self.add_action(actions.ContextLookup())
         
             self.add_action(actions.RiotLookup())
