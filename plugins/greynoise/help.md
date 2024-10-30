@@ -12,6 +12,7 @@ GreyNoise helps analysts recognize events not worth their attention. Indicators 
 * Perform a GreyNoise Vulnerability Lookup
 * Perform a GreyNoise IP Timeline Lookup
 * Perform a GreyNoise IP Similarity Lookup
+* Query a list of IPs on a Trigger
 
 # Requirements
 
@@ -870,7 +871,7 @@ Ensure that the GreyNoise API key used has appropriate access for the actions be
 
 # Version History
 
-* 2.0.0 - Upgrade GreyNoise SDK v2.3.0, Fix Action Outputs, Add `vulnerability_lookup` action, Add `timeline_lookup` action, Add `similar_lookup` action
+* 2.0.0 - Upgrade GreyNoise SDK v2.3.0, Fix Action Outputs, Add `vulnerability_lookup` action, Add `timeline_lookup` action, Add `similar_lookup` action, Add new `greynoise_alert` tigger
 * 1.0.1 - Fix bug with connection parameters
 * 1.0.0 - Initial plugin.
 
