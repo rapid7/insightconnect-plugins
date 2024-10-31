@@ -4,7 +4,8 @@ products: [insightconnect]
 name: crowdstrike_falcon_intelligence
 title: CrowdStrike Falcon Intelligence
 description: CrowdStrike Falcon Intelligence is used to automatically investigate incidents and accelerate alert triage and response. Built into the Falcon Platform, it is operational in seconds
-version: 1.0.0
+version: 1.1.0
+connection_version: 1
 supported_versions: ["2022-11-28 Crowdstrike API v2"]
 vendor: rapid7
 support: rapid7
@@ -19,7 +20,27 @@ hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [antivirus, cloud_enabled]
   features: []
-  
+sdk:
+  type: slim
+  version: 6.1.4
+  user: nobody
+key_features:
+  - "Get full or short report"
+  - "Submit file for analysis"
+  - "Check analysis status"
+  - "Get submissions ids"
+  - "Get reports ids"
+requirements:
+  - "URL of your Crowdstrike Platform instance"
+  - "Client ID"
+  - "Client Secret"
+version_history:
+  - "1.1.0 - New action added: `Upload Malware Sample` | Updated SDK to the latest version"
+  - "1.0.0 - Initial plugin | Check Analysis Status, Download Artifact, Get Full Report, Get Reports IDs, Get Short Report, Get Submissions IDs, Submit Analysis"
+links:
+  - "[CrowdStrike Falcon Intelligence](https://www.crowdstrike.com/products/threat-intelligence/falcon-intelligence-automated-intelligence/)"
+references:
+  - "[CrowdStrike Falcon Intelligence](https://www.crowdstrike.com/products/threat-intelligence/falcon-intelligence-automated-intelligence/)"
 types:
   extractedInterestingStrings:
     value:
@@ -576,7 +597,7 @@ types:
       description: User name
       type: string
       required: false
-      example: mike_rinehart@rapid7.com
+      example: user@example.com
     userUuid:
       title: User UUID
       description: User UUID
@@ -895,7 +916,7 @@ actions:
         description: List of artifacts
         type: '[]artifact'
         required: true
-        example: '[]'
+        example: '[{"ioc":"44d88612fea8a8f36de82e1278abb02f","source":"extracted","type":"md5"},{"ioc":"44d88612fea8a8f36de82e1278abb02f","source":"extracted","type":"md5"},{"ioc":"44d88612fea8a8f36de82e1278abb02f","source":"extracted","type":"md5"},{"ioc":"44d88612fea8a8f36de82e1278abb02f","source":"extracted","type":"md5"},{"ioc":"3395856ce81f2b7382dee72602f798b642f14140","source":"extracted","type":"sha1"},{"ioc":"3395856ce81f2b7382dee72602f798b642f14140","source":"extracted","type":"sha1"},{"ioc":"3395856ce81f2b7382dee72602f798b642f14140","source":"extracted","type":"sha1"},{"ioc":"3395856ce81f2b7382dee72602f798b642f14140","source":"extracted","type":"sha1"},{"ioc":"275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f","source":"extracted","type":"sha256"},{"ioc":"275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f","source":"extracted","type":"sha256"},{"ioc":"275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f","source":"extracted","type":"sha256"},{"ioc":"275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f","source":"extracted","type":"sha256"},{"ioc":"275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f","source":"input","type":"sha256"},{"ioc":"275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f","source":"runtime","type":"sha256"},{"ioc":"275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f","source":"runtime","type":"sha256"}]'
   getShortReport:
     title: Get Short Report
     description: Get a short summary version of a sandbox report
@@ -912,7 +933,7 @@ actions:
         description: List of short sandbox reports
         type: '[]reportShort'
         required: true
-        example: '[]'
+        example: '[{"cid":"9382986b58cb4bb4935e7eba079842f3","createdTimestamp":"2022-09-28T07:45:34Z","id":"9382986b58cb4bb4935e7eba079842f3_d1ce821d74484545897f2fd5db40d0a7","origin":"uiproxy","sandbox":[{"environmentDescription":"Windows 7 32 bit","environmentId":100,"errorMessage":"The file \"Dockerfile\" has the file format \"text\", which is not supported","errorOrigin":"CLIENT","errorType":"FILE_TYPE_BAD_ERROR","fileType":"ASCII text","sha256":"275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f","submissionType":"file","submitName":"Dockerfile"}],"userId":"9de5069c5afe602b2ea0a04b66beb2c0","userName":"https://example.com","verdict":"no verdict"}]'
   getFullReport:
     title: Get Full Report
     description: Get a full sandbox report
@@ -929,7 +950,7 @@ actions:
         description: List of sandbox reports
         type: '[]report'
         required: true
-        example: '[]'
+        example: '["9de5069c5afe602b2ea0a11b66beb2c0_9aa5069c5afe602b2ea0a04b66beb2c0"]'
   checkAnalysisStatus:
     title: Check Analysis Status
     description: Check the status of a sandbox analysis. Time required for analysis varies but is usually less than 15 minutes
@@ -946,7 +967,7 @@ actions:
         description: List of submissions
         type: '[]submission'
         required: true
-        example: '[]'
+        example: '[{"id":"9382986b58cb4b44935e7eba079842f3_7c6d4bf5ab0c4459b855aaa345f4bcf9","cid":"9382986b58cb4b44935e7eba079842f3","userId":"3e7da174cb6944e8a4cd8a5a59a76727","userName":"user@example.com","userUuid":"a149764d-21ee-42af-ac9f-023f5d23ab81","origin":"uiproxy","state":"error","createdTimestamp":"2022-08-30T09:25:35Z","sandbox":[{"sha256":"275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f","environmentId":300,"submitName":"action.py"}]},{"id":"9382986b58cb4b44935e7eba079842f3_63aca0772bf342648b2a8779c7bfcadd","cid":"9382986b58cb4b44935e7eba079842f3","userId":"3e7da174cb6944e8a4cd8a5a59a76727","userName":"user@example.com","userUuid":"a149764d-21ee-42af-ac9f-023f5d23ab81","origin":"uiproxy","state":"error","createdTimestamp":"2022-08-30T09:21:00Z","sandbox":[{"sha256":"275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f","environmentId":100,"submitName":"Archive.zip"}]}]'
   submitAnalysis:
     title: Submit Analysis
     description: Submit an uploaded file or a URL for sandbox analysis. Time required for analysis varies but is usually less than 15 minutes
@@ -958,11 +979,11 @@ actions:
         required: true
         example: 110
         enum:
-        - 100
-        - 110
-        - 160
-        - 200
-        - 300
+          - 100
+          - 110
+          - 160
+          - 200
+          - 300
       sha256:
         title: SHA256
         description: ID of the sample, which is a SHA256 hash value. Find a sample ID from the response when uploading a malware sample or search with `Get Submissions IDs` action. The `url` parameter must be unset if `sha256` is used
@@ -982,12 +1003,12 @@ actions:
         required: false
         example: default_openie
         enum:
-        - default
-        - default_maxantievasion
-        - default_randomfiles
-        - default_randomtheme
-        - default_openie
-        - ''
+          - ""
+          - default
+          - default_maxantievasion
+          - default_randomfiles
+          - default_randomtheme
+          - default_openie
       commandLine:
         title: Command Line
         description: Command line script passed to the submitted file at runtime. Max length is 2048 characters
@@ -1007,11 +1028,11 @@ actions:
         required: false
         example: tor
         enum:
-        - default
-        - tor
-        - simulated
-        - offline
-        - ''
+          - ""
+          - default
+          - tor
+          - simulated
+          - offline
       submitName:
         title: Submit Name
         description: Name of the malware sample that's used for file type detection and analysis
@@ -1030,7 +1051,7 @@ actions:
         description: Submission
         type: 'submission'
         required: true
-        example: '{}'
+        example: '{"cid":"9de5069c5mne602b2ea0a04b66beb2c0","createdTimestamp":"2022-11-22T06:10:42Z","id":"9de5069c5mne602b2ea0a04b66beb2c0_8de5069c5afe602b2ea0a04b66beb2c0","origin":"apigateway","sandbox":[{"actionScript":"default_openie","environmentId":110,"networkSettings":"tor","sha256":"275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f","submitName":"my_sample","systemDate":"2022-12-22","systemTime":"17:33"}],"state":"created"}'
   getReportsIDs:
     title: Get Reports IDs
     description: Find sandbox reports by providing an FQL filter and paging details. Returns a set of report IDs that match your criteria
@@ -1078,7 +1099,7 @@ actions:
         example: 5
       limit:
         title: Limit
-        description:  Maximum number of report IDs to return - less or equal to 5000
+        description: Maximum number of report IDs to return - less or equal to 5000
         type: integer
         required: false
         example: 324
@@ -1088,4 +1109,46 @@ actions:
         description: List of submission IDs
         type: '[]string'
         required: true
-        example: ['9382986b58cb4b44935e7eba071142f3_92c8b7525e2b4888bd9e2jj7391c7104']
+        example: '["9382986b58cb4b44935e7eba071142f3_92c8b7525e2b4888bd9e2jj7391c7104"]'
+  uploadMalwareSample:
+    title: Upload Malware Samples
+    description: Upload malware sample
+    input:
+      sample:
+        title: Sample
+        description: The samples of file to be sent for analysis (max file size is 256 MB)
+        type: file
+        required: true
+        example: UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==
+      filename:
+        title: Filename
+        description: The name of file to be used to override the default filename
+        type: string
+        required: true
+        example: ExampleFilename.exe
+      comment:
+        title: Comment
+        description: A descriptive comment to identify the file for other users
+        type: string
+        required: true
+        example: ExampleComment
+      isConfidential:
+        title: Is Confidential
+        description: Defines visibility of this file in Falcon MalQuery, either via the API or the Falcon console. `True` means that file is only shown to users within your customer account. `False` means that file can be seen by other CrowdStrike customers
+        type: boolean
+        required: false
+        example: true
+        default: true
+    output:
+      sha256:
+        title: SHA256
+        description: The ID of the sample, which is a SHA256 hash value
+        type: string
+        required: true
+        example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
+      fileName:
+        title: Filename
+        description: The name of uploaded malware sample file
+        type: string
+        required: true
+        example: ExampleMalwareSampleFile.exe
