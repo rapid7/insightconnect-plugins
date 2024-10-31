@@ -15,17 +15,17 @@ Broadcom Symantec Endpoint Protection delivers the most complete, integrated end
 # Documentation
 
 ## Setup
-  
+
 The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|credentials|credential_username_password|None|True|Username and password|None|{"username": example, "password": "test"}|
-|domain|string|None|False|The Symantec Endpoint Protection Manager domain to which the username logs on|None|mydomain|
-|host|string|None|True|Symantec Endpoint Protection Manager host, either IP address or domain|None|sepm-14|
-|port|integer|8446|True|Symantec Endpoint Protection server port, typically 8446|None|8446|
-|ssl_verify|boolean|None|True|Whether to enable SSL verification for HTTP requests|None|True|
-  
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|credentials|credential_username_password|None|True|Username and password|None|{"username": example, "password": "test"}|None|None|
+|domain|string|None|False|The Symantec Endpoint Protection Manager domain to which the username logs on|None|mydomain|None|None|
+|host|string|None|True|Symantec Endpoint Protection Manager host, either IP address or domain|None|sepm-14|None|None|
+|port|integer|8446|True|Symantec Endpoint Protection server port, typically 8446|None|8446|None|None|
+|ssl_verify|boolean|None|True|Whether to enable SSL verification for HTTP requests|None|True|None|None|
+
 Example input:
 
 ```
@@ -47,17 +47,17 @@ Example input:
 
 
 #### Blacklist
-  
+
 This action is used to blacklist MD5 hashes
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|description|string|None|True|Description for the blacklist|None|Hashes Blacklisted from InsightConnect|
-|domain_id|string|None|False|ID of the domain to apply the blacklist to. Omitting this input will apply the blacklist to all domains (globally)|None|0AF740760A0414711FAA4F8BD5293158|
-|hashes|[]string|None|True|MD5 hashes to add to the blacklist|None|["9de5069c5afe602b2ea0a04b66beb2c0"]|
-|name|string|None|True|Name for the blacklist|None|InsightConnect Blacklist|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|description|string|None|True|Description for the blacklist|None|Hashes Blacklisted from InsightConnect|None|None|
+|domain_id|string|None|False|ID of the domain to apply the blacklist to. Omitting this input will apply the blacklist to all domains (globally)|None|0AF740760A0414711FAA4F8BD5293158|None|None|
+|hashes|[]string|None|True|MD5 hashes to add to the blacklist|None|["9de5069c5afe602b2ea0a04b66beb2c0"]|None|None|
+|name|string|None|True|Name for the blacklist|None|InsightConnect Blacklist|None|None|
   
 Example input:
 
@@ -90,14 +90,14 @@ Example output:
 ```
 
 #### Get Agent Details
-  
+
 This action is used to get details about an agent by MAC address or computer hostname
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|agent|string|None|True|Agent to retrieve device from. This can be by MAC address or computer hostname|None|example|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|agent|string|None|True|Agent to retrieve device from. This can be by MAC address or computer hostname|None|example|None|None|
   
 Example input:
 
@@ -259,16 +259,16 @@ Example output:
 ```
 
 #### Quarantine
-  
+
 This action is used to quarantine (isolate) endpoint an endpoint
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|agent|string|None|True|Agent to perform quarantine action on. This must be either a MAC address or hostname|None|example_host|
-|quarantine_state|boolean|True|True|True to quarantine host, false to unquarantine host|None|True|
-|whitelist|[]string|None|False|MAC addresses for machines to avoid quarantining. Both hyphenated and colon-delimited formats are acceptable|None|["01:23:45:67:89:AB", "89-67-45-23-10-CD"]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|agent|string|None|True|Agent to perform quarantine action on. This must be either a MAC address or hostname|None|example_host|None|None|
+|quarantine_state|boolean|True|True|True to quarantine host, false to unquarantine host|None|True|None|None|
+|whitelist|[]string|None|False|MAC addresses for machines to avoid quarantining. Both hyphenated and colon-delimited formats are acceptable|None|["01:23:45:67:89:AB", "89-67-45-23-10-CD"]|None|None|
   
 Example input:
 
@@ -481,6 +481,7 @@ Domain IDs are not the actual domain names - they are individual, unique IDs tha
 
 # Version History
 
+* 2.0.1 - Bumping requirements.txt | SDK bump to 6.1.4
 * 2.0.0 - Update Connection to add `ssl_verify` parameters to enable SSL verification on HTTP requests
 * 1.0.3 - Update SDK to version to 5.4.4 | Update aiohttp to 3.9.2
 * 1.0.2 - Update Blacklist action to not accept SHA256 hashes
