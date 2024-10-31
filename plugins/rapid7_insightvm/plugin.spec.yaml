@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightvm
 title: Rapid7 InsightVM Console
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses an orchestrator to get top remediations, scan results and start scans
-version: 8.0.5
+version: 8.0.6
 connection_version: 8
 supported_versions: ["Rapid7 InsightVM API v3 2022-05-25"]
 fedramp_ready: true
@@ -12,16 +12,17 @@ vendor: rapid7
 support: rapid7
 status: []
 key_features:
-  - Get top remediations
-  - Start scans
-  - Get scan results
+  - "Get top remediations"
+  - "Start scans"
+  - "Get scan results"
 requirements:
-  - Username and password for a user with the necessary permissions
+  - "Username and password for a user with the necessary permissions"
 links:
   - "[InsightVM](https://www.rapid7.com/products/insightvm/)"
 references:
   - "[InsightVM API 3](https://help.rapid7.com/insightvm/en-us/api/index.html)"
 version_history:
+  - "8.0.6 - Trigger `New Exception Request`: Updated the trigger with retry mechanism"
   - "8.0.5 - Initial updates for fedramp compliance | `New Exception Request`: Fixed an issue where it would not trigger in certain scenarios | Updated SDK to the latest version"
   - "8.0.4 - Updated SDK to the latest version | Update dependencies"
   - "8.0.3 - Updated `Dockerfile` permissions from `nobody` to `root`"
@@ -77,7 +78,7 @@ version_history:
   - "1.0.0 - Initial plugin release"
 sdk:
   type: full
-  version: 6.1.0
+  version: 6.1.4
   user: root
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_insightvm
