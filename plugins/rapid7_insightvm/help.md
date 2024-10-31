@@ -4012,6 +4012,7 @@ Example output:
 
 # Version History
 
+* 8.0.6 - Trigger `New Exception Request`: Updated the trigger with retry mechanism
 * 8.0.5 - Initial updates for fedramp compliance | `New Exception Request`: Fixed an issue where it would not trigger in certain scenarios | Updated SDK to the latest version
 * 8.0.4 - Updated SDK to the latest version | Update dependencies
 * 8.0.3 - Updated `Dockerfile` permissions from `nobody` to `root`
