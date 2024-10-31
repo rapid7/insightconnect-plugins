@@ -1,15 +1,18 @@
-import sys
 import os
+import sys
+from typing import Any, Dict
 from unittest import TestCase
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 
 sys.path.append(os.path.abspath("../"))
 
-from unit_test.util import Util
-from parameterized import parameterized
 from icon_crowdstrike_falcon_intelligence.actions.getSubmissionsIDs import GetSubmissionsIDs
+from parameterized import parameterized
+
+from util import Util
 
 
 @patch("requests.request", side_effect=Util.mock_request)
@@ -27,8 +30,11 @@ class TestGetSubmissionsIDs(TestCase):
             ]
         ]
     )
-    def test_get_submission_ids(self, mock_request, test_name, input_params, expected):
+    def test_get_submission_ids(
+        self, mock_request: MagicMock, test_name: str, input_params: Dict[str, Any], expected: Dict[str, Any]
+    ) -> None:
         actual = self.action.run(input_params)
+        validate(actual, self.action.output.schema)
         self.assertEqual(actual, expected)
 
     @parameterized.expand(
@@ -41,7 +47,9 @@ class TestGetSubmissionsIDs(TestCase):
             ]
         ]
     )
-    def test_get_submission_ids_raise_exception(self, mock_request, test_name, input_parameters, cause, assistance):
+    def test_get_submission_ids_raise_exception(
+        self, mock_request: MagicMock, test_name: str, input_parameters: Dict[str, Any], cause: str, assistance: str
+    ) -> None:
         with self.assertRaises(PluginException) as error:
             self.action.run(input_parameters)
         self.assertEqual(error.exception.cause, cause)
