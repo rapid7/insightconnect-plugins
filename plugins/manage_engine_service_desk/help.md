@@ -1,6 +1,6 @@
 # Description
 
-ManageEngine's Service Desk has the ability to centralize and capture reported issues, allowing security and IT administrators to track and manage all incidents in an easy manner. The numerous help desk tickets raised are organized and tracked in the Requests module. The Requests module enables you to handle tickets promptly, assign tickets to technicians, merge similar requests, and so on.
+ManageEngine's Service Desk has the ability to centralize and capture reported issues, allowing security and IT administrators to track and manage all incidents in an easy manner. The numerous help desk tickets raised are organized and tracked in the Requests module. The Requests module enables you to handle tickets promptly, assign tickets to technicians, merge similar requests, and so on
 
 # Key Features
 
@@ -9,7 +9,7 @@ ManageEngine's Service Desk has the ability to centralize and capture reported i
 
 # Requirements
 
-The authentication between ServiceDesk Plus and an Insight Connect application is through an API key. A unique key is generated for a technician with login permission in the ServiceDesk Plus application.
+* The authentication between ServiceDesk Plus and an Insight Connect application is through an API key. A unique key is generated for a technician with login permission in the ServiceDesk Plus application.
 * To generate the API Key, click Admin -> Technicians under User block.
 * If you want to generate the API key for an existing technician, then click the edit icon beside the technician.
 * If you want to generate the API key for a new technician, click Add New Technician link, enter the technician details and provide login permission.
@@ -24,13 +24,13 @@ The authentication between ServiceDesk Plus and an Insight Connect application i
 
 ## Setup
 
-The connection configuration accepts the following parameters:
+The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|Manage Engine Service Desk Technican's API key|None|EXAMPLE1-API2-KEY3-HDFS-48GS24WSA6GE|
-|sdp_base_url|string|None|True|Service Desk Plus Base URL|None|https://example.com|
-|ssl_verify|boolean|True|True|SSL verify|None|True|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|api_key|credential_secret_key|None|True|Manage Engine Service Desk Technican's API key|None|EXAMPLE1-API2-KEY3-HDFS-48GS24WSA6GE|None|None|
+|sdp_base_url|string|None|True|Service Desk Plus Base URL|None|http://me-sdeskplus.dev.example.com:8080|None|None|
+|ssl_verify|boolean|True|True|SSL verify|None|True|None|None|
 
 Example input:
 
@@ -46,42 +46,92 @@ Example input:
 
 ### Actions
 
-#### Add Request
 
-Add new a request. Subject and requester parameters are required, others are optional. In every parameter containing `ID` and `Name` fields please provide at least one of them.
+#### Add Request
+  
+This action is used to add a new request. Subject and requester parameters are required, others are optional. In every 
+parameter containing `ID` and `Name` fields please provide at least one of them
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|assets|[]asset|None|False|Array of asset objects associated with this request|None|["{"name": "Software", "barcode": "test-barcode"}"]|
-|category|category|None|False|Category to which this request belongs|None|{"name": "Operating System"}|
-|description|string|None|False|Description of this request|None|Example description|
-|email_ids_to_notify|[]string|None|False|Array of Email ids, which needs to be notified about the happenings of this request|None|["user@example.com"]|
-|group|group|None|False|The group to which the request belongs|None|{"name": "Network"}|
-|impact|impact|None|False|Impact of this request|None|{"name": "High"}|
-|is_fcr|boolean|None|False|Boolean value indicating if the request has been marked as First Call Resolution|None|True|
-|item|item|None|False|Item of this request|None|{"name": "Install"}|
-|level|level|None|False|Level of the request|None|{"name": "Tier 4"}|
-|mode|mode|None|False|The mode in which this request is created|None|{"name": "Web Form"}|
-|priority|priority|None|False|Priority of the request|None|{"name": "High"}|
-|request_type|request_type|None|False|Type of this request|None|{"name" "Incident"}|
-|requester|user_input|None|True|The requester of the request|None|{"name": "John"}|
-|service_category|service_category|None|False|Service category to which this request belongs|None|{"name": "User Management"}|
-|site|site|None|False|Denotes the site to which this request belongs|None|{"name": "Custom Site"}|
-|status|status|None|False|Indicates the current status of this request|None|{"name": "Open"}|
-|subcategory|subcategory|None|False|Subcategory to which this request belongs|None|{"name": "Mac OS X"}|
-|subject|string|None|True|Subject of this request|None|Need a Monitor|
-|technician|technician|None|False|The technician that was assigned to the request|None|{"name": "John"}|
-|urgency|urgency|None|False|Urgency of the request|None|{"name": "Low"}|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|assets|[]asset|None|False|Array of asset objects associated with this request|None|["{\"name\": \"Software\", \"barcode\": \"test-barcode\"}"]|None|None|
+|category|category|None|False|Category to which this request belongs|None|{"name": "Operating System"}|None|None|
+|description|string|None|False|Description of this request|None|Example description|None|None|
+|email_ids_to_notify|[]string|None|False|Array of Email ids, which needs to be notified about the happenings of this request|None|["user@example.com"]|None|None|
+|group|group|None|False|The group to which the request belongs|None|{"name": "Network"}|None|None|
+|impact|impact|None|False|Impact of this request|None|{"name": "High"}|None|None|
+|is_fcr|boolean|None|False|Boolean value indicating if the request has been marked as First Call Resolution|None|True|None|None|
+|item|item|None|False|Item of this request|None|{"name": "Install"}|None|None|
+|level|level|None|False|Level of the request|None|{"name": "Tier 4"}|None|None|
+|mode|mode|None|False|The mode in which this request is created|None|{"name": "Web Form"}|None|None|
+|priority|priority|None|False|Priority of the request|None|{"name": "High"}|None|None|
+|request_type|request_type|None|False|Type of this request|None|{"name" "Incident"}|None|None|
+|requester|user_input|None|True|The requester of the request|None|{"name": "John"}|None|None|
+|service_category|service_category|None|False|Service category to which this request belongs|None|{"name": "User Management"}|None|None|
+|site|site|None|False|Denotes the site to which this request belongs|None|{"name": "Custom Site"}|None|None|
+|status|status|None|False|Indicates the current status of this request|None|{"name": "Open"}|None|None|
+|subcategory|subcategory|None|False|Subcategory to which this request belongs|None|{"name": "Mac OS X"}|None|None|
+|subject|string|None|True|Subject of this request|None|Need a Monitor|None|None|
+|technician|technician|None|False|The technician that was assigned to the request|None|{"name": "John"}|None|None|
+|urgency|urgency|None|False|Urgency of the request|None|{"name": "Low"}|None|None|
+  
 Example input:
 
 ```
 {
-  "subject": "Install xyz",
+  "assets": [
+    "{\"name\": \"Software\", \"barcode\": \"test-barcode\"}"
+  ],
+  "category": {
+    "name": "Operating System"
+  },
+  "description": "Example description",
+  "email_ids_to_notify": [
+    "user@example.com"
+  ],
+  "group": {
+    "name": "Network"
+  },
+  "impact": {
+    "name": "High"
+  },
+  "is_fcr": true,
+  "item": {
+    "name": "Install"
+  },
+  "level": {
+    "name": "Tier 4"
+  },
+  "mode": {
+    "name": "Web Form"
+  },
+  "priority": {
+    "name": "High"
+  },
+  "request_type": "{\"name\" \"Incident\"}",
   "requester": {
-    "name": Mike"
+    "name": "John"
+  },
+  "service_category": {
+    "name": "User Management"
+  },
+  "site": {
+    "name": "Custom Site"
+  },
+  "status": {
+    "name": "Open"
+  },
+  "subcategory": {
+    "name": "Mac OS X"
+  },
+  "subject": "Need a Monitor",
+  "technician": {
+    "name": "John"
+  },
+  "urgency": {
+    "name": "Low"
   }
 }
 ```
@@ -89,11 +139,11 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|--------|
+| :--- | :--- | :--- | :--- | :--- |
 |request_id|integer|False|The id of newly created request|55|
 |status|string|True|Status of the request|success|
 |status_code|integer|False|Status code of the request|2000|
-
+  
 Example output:
 
 ```
@@ -106,19 +156,19 @@ Example output:
 
 #### Add Request Note
 
-Add a note to an existing request.
+This action is used to add a note to an existing request
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|add_to_linked_request|boolean|None|False|Whether to add the note to the linked requests|None|False|
-|description|string|None|True|Note description (the content of the note) in HTML format|None|Additional information required...|
-|mark_first_response|boolean|None|False|Whether to set the responded date of the request/ticket|None|True|
-|notify_technician|boolean|None|False|Whether to notify the technician or not|None|True|
-|request_id|integer|None|True|The id of the request|None|55|
-|show_to_requester|boolean|None|False|Whether to show the note to requester or not|None|False|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|add_to_linked_request|boolean|None|False|Whether to add the note to the linked requests|None|False|None|None|
+|description|string|None|True|Note description (the content of the note) in HTML format|None|Additional information required...|None|None|
+|mark_first_response|boolean|None|False|Whether to set the responded date of the request/ticket|None|True|None|None|
+|notify_technician|boolean|None|False|Whether to notify the technician or not|None|True|None|None|
+|request_id|integer|None|True|The id of the request|None|55|None|None|
+|show_to_requester|boolean|None|False|Whether to show the note to requester or not|None|False|None|None|
+  
 Example input:
 
 ```
@@ -134,19 +184,19 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
 |request_id|integer|False|The id of the request|55|
 |request_note_id|integer|False|The id of the request note|209|
 |status|string|True|Status of the request|success|
 |status_code|integer|False|Status code of the request|2000|
-
+  
 Example output:
 
 ```
 {
   "request_id": 55,
-  "request_note_id": 336,
+  "request_note_id": 209,
   "status": "success",
   "status_code": 2000
 }
@@ -154,16 +204,16 @@ Example output:
 
 #### Add Resolution
 
-Add or update the resolution of a request.
+Add or update the resolution of a request
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|request_id|integer|None|True|The id of the request|None|27|
-|content|string|None|True|Resolution content|None|Sample resolution|
-|add_to_linked_requests|boolean|None|True|Whether the resolution should be added to linked requests|None|True|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|add_to_linked_requests|boolean|None|True|Whether the resolution should be added to linked requests|None|True|None|None|
+|content|string|None|True|Resolution content|None|Sample resolution|None|None|
+|request_id|integer|None|True|The id of the request|None|27|None|None|
+  
 Example input:
 
 ```
@@ -177,11 +227,11 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|--------|
+| :--- | :--- | :--- | :--- | :--- |
 |request_id|integer|False|The id of the request|27|
 |status|string|True|Status of the request|success|
 |status_code|integer|False|Status code of the request|2000|
-
+  
 Example output:
 
 ```
@@ -194,16 +244,16 @@ Example output:
 
 #### Assign Request
 
-Assign a request to a technician or group. Request ID is required, as well as at least one of Group or Technician. In every parameter containing `ID` and `Name` fields please provide only one or the other.
+Assign a request to a technician or group. Request ID is required, as well as at least one of Group or Technician. In every parameter containing `ID` and `Name` fields please provide only one or the other
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|group|group|None|False|The group to which the request belongs|None|{"name": "Network"}|
-|request_id|integer|None|True|The request id that should be assigned|None|27|
-|technician|technician|None|False|The technician that was assigned to the request|None|{"name": "John"}|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|group|group|None|False|The group to which the request belongs|None|{"name": "Network"}|None|None|
+|request_id|integer|None|True|The request id that should be assigned|None|27|None|None|
+|technician|technician|None|False|The technician that was assigned to the request|None|{"name": "John"}|None|None|
+  
 Example input:
 
 ```
@@ -221,11 +271,11 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|--------|
+| :--- | :--- | :--- | :--- | :--- |
 |request_id|integer|False|The id of the assigned request|27|
 |status|string|True|Status of the request|success|
 |status_code|integer|False|Status code of the request|2000|
-
+  
 Example output:
 
 ```
@@ -238,18 +288,18 @@ Example output:
 
 #### Close Request
 
-Close the given request.
+Close the given request
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|closure_code|closure_code|None|False|Closure code to add to the request|None|{"name": "Success"}|
-|closure_comments|string|None|False|The comments that should be added when closing the request|None|Reset the password solved the issue|
-|request_id|integer|None|True|The request id that should be closed|None|54|
-|requester_ack_comments|string|None|False|The requester comments|None|Mail fetching is up and running now|
-|requester_ack_resolution|boolean|None|False|The requester resolution|None|True|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|closure_code|closure_code|None|False|Closure code to add to the request|None|{"name": "Success"}|None|None|
+|closure_comments|string|None|False|The comments that should be added when closing the request|None|Reset the password solved the issue|None|None|
+|request_id|integer|None|True|The request id that should be closed|None|54|None|None|
+|requester_ack_comments|string|None|False|The requester comments|None|Mail fetching is up and running now|None|None|
+|requester_ack_resolution|boolean|None|False|The requester resolution|None|True|None|None|
+  
 Example input:
 
 ```
@@ -267,11 +317,11 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|--------|
+| :--- | :--- | :--- | :--- | :--- |
 |request_id|integer|False|The id of the closed request|54|
 |status|string|True|Status of the request|success|
 |status_code|integer|False|Status code of the request|2000|
-
+  
 Example output:
 
 ```
@@ -284,14 +334,14 @@ Example output:
 
 #### Delete Request
 
-Delete the given request (move it to the trash).
+Delete the given request (move it to the trash)
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|request_id|integer|None|True|The ID of a request to delete|None|54|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|request_id|integer|None|True|The ID of a request to delete|None|54|None|None|
+  
 Example input:
 
 ```
@@ -303,11 +353,11 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|--------|
+| :--- | :--- | :--- | :--- | :--- |
 |request_id|integer|False|The id of deleted request|54|
 |status|string|True|Status of the request|success|
 |status_code|integer|False|Status code of the request|2000|
-
+  
 Example output:
 
 ```
@@ -320,15 +370,15 @@ Example output:
 
 #### Delete Request Note
 
-Delete a given request note on a specific request.
+Delete a given request note on a specific request
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|request_id|integer|None|True|The id of the request|None|55|
-|request_note_id|integer|None|True|The id of the request note to delete|None|208|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|request_id|integer|None|True|The id of the request|None|55|None|None|
+|request_note_id|integer|None|True|The id of the request note to delete|None|208|None|None|
+  
 Example input:
 
 ```
@@ -341,11 +391,11 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|--------|
+| :--- | :--- | :--- | :--- | :--- |
 |request_id|integer|False|The id of the request|55|
 |status|string|True|Status of the request|success|
 |status_code|integer|False|Status code of the request|2000|
-
+  
 Example output:
 
 ```
@@ -358,34 +408,34 @@ Example output:
 
 #### Edit Request
 
-Update the given request. At least one parameter other than Request ID is required. In every parameter containing `ID` and `Name` fields please provide only one or the other.
+Update the given request. At least one parameter other than Request ID is required. In every parameter containing `ID` and `Name` fields please provide only one or the other
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|assets|[]asset|None|False|Array of asset objects associated with this request|None|["{"name": "Software", "barcode": "test-barcode"}"]|
-|category|category|None|False|Category to which this request belongs|None|{"name": "Operating System"}|
-|description|string|None|False|Description of this request|None|Example description|
-|email_ids_to_notify|[]string|None|False|Array of Email ids, which needs to be notified about the happenings of this request|None|["user@example.com"]|
-|group|group|None|False|The group to which the request belongs|None|{"name": "Network"}|
-|impact|impact|None|False|Impact of this request|None|{"name": "High"}|
-|is_fcr|boolean|None|False|Boolean value indicating if the request has been marked as First Call Resolution|None|True|
-|item|item|None|False|Item of this request|None|{"name": "Install"}|
-|level|level|None|False|Level of the request|None|{"name": "Tier 4"}|
-|mode|mode|None|False|The mode in which this request is created|None|{"name": "Web Form"}|
-|priority|priority|None|False|Priority of the request|None|{"name": "High"}|
-|request_id|integer|None|True|The ID of a request to edit|None|54|
-|request_type|request_type|None|False|Type of this request|None|{"name" "Incident"}|
-|requester|user_input|None|False|The requester of the request|None|{"name": "John"}|
-|service_category|service_category|None|False|Service category to which this request belongs|None|{"name": "User Management"}|
-|site|site|None|False|Denotes the site to which this request belongs|None|{"name": "Custom Site"}|
-|status|status|None|False|Indicates the current status of this request|None|{"name": "Open"}|
-|subcategory|subcategory|None|False|Subcategory to which this request belongs|None|{"name": "Mac OS X"}|
-|subject|string|None|False|Subject of this request|None|Need a Monitor|
-|technician|technician|None|False|The technician that was assigned to the request|None|{"name": "John"}|
-|urgency|urgency|None|False|Urgency of the request|None|{"name": "Low"}|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|assets|[]asset|None|False|Array of asset objects associated with this request|None|["{\"name\": \"Software\", \"barcode\": \"test-barcode\"}"]|None|None|
+|category|category|None|False|Category to which this request belongs|None|{"name": "Operating System"}|None|None|
+|description|string|None|False|Description of this request|None|Example description|None|None|
+|email_ids_to_notify|[]string|None|False|Array of Email ids, which needs to be notified about the happenings of this request|None|["user@example.com"]|None|None|
+|group|group|None|False|The group to which the request belongs|None|{"name": "Network"}|None|None|
+|impact|impact|None|False|Impact of this request|None|{"name": "High"}|None|None|
+|is_fcr|boolean|None|False|Boolean value indicating if the request has been marked as First Call Resolution|None|True|None|None|
+|item|item|None|False|Item of this request|None|{"name": "Install"}|None|None|
+|level|level|None|False|Level of the request|None|{"name": "Tier 4"}|None|None|
+|mode|mode|None|False|The mode in which this request is created|None|{"name": "Web Form"}|None|None|
+|priority|priority|None|False|Priority of the request|None|{"name": "High"}|None|None|
+|request_id|integer|None|True|The ID of a request to edit|None|54|None|None|
+|request_type|request_type|None|False|Type of this request|None|{"name" "Incident"}|None|None|
+|requester|user_input|None|False|The requester of the request|None|{"name": "John"}|None|None|
+|service_category|service_category|None|False|Service category to which this request belongs|None|{"name": "User Management"}|None|None|
+|site|site|None|False|Denotes the site to which this request belongs|None|{"name": "Custom Site"}|None|None|
+|status|status|None|False|Indicates the current status of this request|None|{"name": "Open"}|None|None|
+|subcategory|subcategory|None|False|Subcategory to which this request belongs|None|{"name": "Mac OS X"}|None|None|
+|subject|string|None|False|Subject of this request|None|Need a Monitor|None|None|
+|technician|technician|None|False|The technician that was assigned to the request|None|{"name": "John"}|None|None|
+|urgency|urgency|None|False|Urgency of the request|None|{"name": "Low"}|None|None|
+  
 Example input:
 
 ```
@@ -393,7 +443,7 @@ Example input:
   "request_id": 54,
   "subject": "Install xyz",
   "requester": {
-    "name": Mike"
+    "name": "Mike"
   }
 }
 ```
@@ -401,11 +451,11 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|--------|
+| :--- | :--- | :--- | :--- | :--- |
 |request_id|integer|False|The id of edited request|54|
 |status|string|True|Status of the request|success|
 |status_code|integer|False|Status code of the request|2000|
-
+  
 Example output:
 
 ```
@@ -418,20 +468,20 @@ Example output:
 
 #### Edit Request Note
 
-Update a note on the given request. At least one parameter other than Request ID and Note ID is required.
+Update a note on the given request. At least one parameter other than Request ID and Note ID is required
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|add_to_linked_request|boolean|None|False|Whether to add the note to the linked requests|None|False|
-|description|string|None|False|Note description in HTML format|None|Need help|
-|mark_first_response|boolean|None|False|Whether to set the responded date of the request/ticket|None|True|
-|notify_technician|boolean|None|False|Whether to notify the technician or not|None|True|
-|request_id|integer|None|True|The id of the request|None|55|
-|request_note_id|integer|None|True|The id of the request note|None|209|
-|show_to_requester|boolean|None|False|Whether to show the note to requester or not|None|False|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|add_to_linked_request|boolean|None|False|Whether to add the note to the linked requests|None|False|None|None|
+|description|string|None|False|Note description in HTML format|None|Need help|None|None|
+|mark_first_response|boolean|None|False|Whether to set the responded date of the request/ticket|None|True|None|None|
+|notify_technician|boolean|None|False|Whether to notify the technician or not|None|True|None|None|
+|request_id|integer|None|True|The id of the request|None|55|None|None|
+|request_note_id|integer|None|True|The id of the request note|None|209|None|None|
+|show_to_requester|boolean|None|False|Whether to show the note to requester or not|None|False|None|None|
+  
 Example input:
 
 ```
@@ -449,11 +499,11 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|--------|
+| :--- | :--- | :--- | :--- | :--- |
 |request_id|integer|False|The id of the request|55|
 |status|string|True|Status of the request|success|
 |status_code|integer|False|Status code of the request|2000|
-
+  
 Example output:
 
 ```
@@ -466,18 +516,18 @@ Example output:
 
 #### Get List Request
 
-View the details of a list of requests matching a search.
+View the details of a list of requests matching a search
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|page_size|integer|10|False|By default, will return only the first 10 requests|None|15|
-|search_fields|object|None|False|The column name and value to be searched|None|{"subject": "test","priority.name": "Low"}|
-|sort_field|string|subject|False|FieldName for sorting|None|subject|
-|sort_order|string|asc|False|Sort order for the results|['asc', 'desc', 'None']|asc|
-|start_index|integer|None|False|Use this to get a list of tasks starting from this index|None|2|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|page_size|integer|10|False|By default, will return only the first 10 requests|None|15|None|None|
+|search_fields|object|None|False|The column name and value to be searched|None|{"subject": "test","priority.name": "Low"}|None|None|
+|sort_field|string|subject|False|FieldName for sorting|None|subject|None|None|
+|sort_order|string|asc|False|Sort order for the results|["asc", "desc", "None"]|asc|None|None|
+|start_index|integer|None|False|Use this to get a list of tasks starting from this index|None|2|None|None|
+  
 Example input:
 
 ```
@@ -496,10 +546,10 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|--------|
-|requests|[]request_output|False|List of requests|["{"subject": "Install xyz", "requester": {"name": "Mike"}}"]|
+| :--- | :--- | :--- | :--- | :--- |
+|requests|[]request_output|False|List of requests|["{\"subject\": \"Install xyz\", \"requester\": {\"name\": \"Mike\"}}"]|
 |status|string|True|Status of the request|success|
-
+  
 Example output:
 
 ```
@@ -652,14 +702,14 @@ Example output:
 
 #### Get List Request Notes
 
-Get the list of all notes associated with the given request.
+Get the list of all notes associated with the given request
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|request_id|integer|None|True|The id of the request|None|55|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|request_id|integer|None|True|The id of the request|None|55|None|None|
+  
 Example input:
 
 ```
@@ -671,12 +721,12 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|--------|
+| :--- | :--- | :--- | :--- | :--- |
+|notes|[]note|False|Notes assigned to the request|["{\"note_id\": \"312\", \"added_time\": \"Jul 8, 2022 02:02 AM\", \"added_by\": {\"name\": \"John\"}"]|
 |request_id|integer|True|The id of the request|55|
-|notes|[]note|False|Notes assigned to the request|["{"note_id": "312", "added_time": "Jul 8, 2022 02:02 AM", "added_by": {"name": "John", "id": "71"}}"]|
 |status|string|True|Status of the request|success|
 |status_code|integer|False|Status code of the request|2000|
-
+  
 Example output:
 
 ```
@@ -717,14 +767,14 @@ Example output:
 
 #### Get Request
 
-View the details of a request given the request id.
+View the details of a request given the request ID
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|request_id|integer|None|True|The request id that should be returned|None|54|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|request_id|integer|None|True|The request id that should be returned|None|54|None|None|
+  
 Example input:
 
 ```
@@ -736,11 +786,11 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|--------|
+| :--- | :--- | :--- | :--- | :--- |
 |request|request_output|False|Request|{"subject": "Install xyz", "requester": {"name": "Mike"}}|
 |status|string|True|Status of the request|success|
 |status_code|integer|False|Status code of the request|2000|
-
+  
 Example output:
 
 ```
@@ -830,14 +880,14 @@ Example output:
 
 #### Get Resolution
 
-Get the resolution of the given request.
+Get the resolution of the given request
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|request_id|integer|None|True|The id of the request|None|27|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|request_id|integer|None|True|The id of the request|None|27|None|None|
+  
 Example input:
 
 ```
@@ -848,13 +898,13 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|content|string|False|Resolution content|Sample resolution|
 |request_id|integer|False|The id of the request|27|
 |status|string|True|Status of the request|success|
 |status_code|integer|False|Status code of the request|2000|
-|content|string|False|Resolution content|Sample resolution|
-
+  
 Example output:
 
 ```
@@ -868,14 +918,14 @@ Example output:
 
 #### Pickup Request
 
-Pick up (assign) a given request in your name as a technician.
+Pick up (assign) a given request in your name as a technician
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|request_id|integer|None|True|The request id that should be assigned|None|27|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|request_id|integer|None|True|The request id that should be assigned|None|27|None|None|
+  
 Example input:
 
 ```
@@ -887,11 +937,11 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|--------|
+| :--- | :--- | :--- | :--- | :--- |
 |request_id|integer|False|The id of the picked up request|27|
 |status|string|True|Status of the request|success|
 |status_code|integer|False|Status code of the request|2000|
-
+  
 Example output:
 
 ```
@@ -901,214 +951,216 @@ Example output:
   "status_code": 2000
 }
 ```
-
 ### Triggers
+  
+*This plugin does not contain any triggers.*
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-_This plugin does not contain any triggers._
+### Custom Types
+  
+**request_type**
 
-### Custom Output Types
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|integer|None|False|ID of the request type|1|
+|Name|string|None|False|Name of the request type|Incident|
+  
+**impact**
 
-#### added_by
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|integer|None|False|ID of the impact|1|
+|Name|string|None|False|Name impact|High|
+  
+**status**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|ID|integer|False|Id of the creator|
-|Name|string|False|Name of the creator|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|integer|None|False|ID of the current status|2|
+|Name|string|None|False|Name of the current status|Open|
+  
+**mode**
 
-#### asset
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|integer|None|False|Id of the mode|2|
+|Name|string|None|False|Name of the mode|Web Form|
+  
+**level**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Barcode|string|False|Barcode of the asset|
-|Id|integer|False|Id of the asset|
-|Name|string|False|Name of the asset|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|integer|None|False|Id of the level|4|
+|Name|string|None|False|Name of the level|Tier 4|
+  
+**urgency**
 
-#### category
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|integer|None|False|Id of the urgency|2|
+|Name|string|None|False|Name of the urgency|High|
+  
+**priority**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Id|integer|False|ID of the category|
-|Name|string|False|Name of the category|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|integer|None|False|ID of the priority|4|
+|Name|string|None|False|Name of the priority|High|
+  
+**service_category**
 
-#### closure_code
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|integer|None|False|ID of the service category|8|
+|Name|string|None|False|Name of the service category|User Management|
+  
+**user_output**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Id|integer|False|Closure Code ID|
-|Name|string|False|Closure Code name|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|integer|None|False|User ID|71|
+|Is Vipuser|boolean|None|False|Whether the user is a vip user or not|False|
+|Name|string|None|False|User name|John|
+  
+**user_input**
 
-#### group
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|integer|None|False|User ID|71|
+|Name|string|None|False|User name|John|
+  
+**asset**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|ID|integer|False|Group's id|
-|Name|string|False|Group's name|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Barcode|string|None|False|Barcode of the asset|test-barcode|
+|ID|integer|None|False|Id of the asset|4541563|
+|Name|string|None|False|Name of the asset|Software|
+  
+**site**
 
-#### impact
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|integer|None|False|Site's id|2235435|
+|Name|string|None|False|Site's name|Custom Site|
+  
+**group**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Id|integer|False|ID of the impact|
-|Name|string|False|Name impact|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|integer|None|False|Group's id|2|
+|Name|string|None|False|Group's name|Network|
+  
+**technician**
 
-#### item
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|integer|None|False|Technician ID|3|
+|Name|string|None|False|Technician Name|Samuel|
+  
+**category**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Id|integer|False|ID of the item|
-|Name|string|False|Name of the item|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|integer|None|False|ID of the category|8|
+|Name|string|None|False|Name of the category|Operating System|
+  
+**subcategory**
 
-#### last_updated_by
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|integer|None|False|ID of the subcategory|24|
+|Name|string|None|False|Name of the subcategory|Mac OS X|
+  
+**item**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|ID|integer|False|Id of the last editor|
-|Name|string|False|Name of the last editor|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|integer|None|False|ID of the item|1|
+|Name|string|None|False|Name of the item|Install|
+  
+**request_output**
 
-#### level
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Assets|[]asset|None|False|Array of asset objects associated with this request|["{\"name\": \"Software\", \"id\": 4541563, \"barcode\": \"test-barcode\"}"]|
+|Category|category|None|False|Category to which this request belongs|{"name": "Operating System", "id": 8}|
+|Created By|user_output|None|False|Creator of the request|{"name": "John", "id": 71}|
+|Created Time|date|None|False|Time the request was created|Jul 9, 2022 04:02 AM|
+|Description|string|None|False|Description of this request|Example description|
+|Due By Time|date|None|False|The due date of the request|Jul 13, 2022 04:02 AM|
+|Email IDs to Notify|[]string|None|False|Array of Email ids, which needs to be notified about the happenings of this request|["user@example.com"]|
+|Group|group|None|False|The group to which the request belongs|{"name": "Network", "id": 2}|
+|Has Notes|boolean|None|False|Indicates whether the request has notes|True|
+|ID|integer|None|False|Id of the request|92|
+|Impact|impact|None|False|Impact of this request|{"id": 1, "name": "High"}|
+|Is Fcr|boolean|None|False|Boolean value indicating if the request has been marked as First Call Resolution|True|
+|Is Overdue|boolean|None|False|Indicates if the request is overdue|True|
+|Is Service Request|boolean|None|False|Indicates whether the request is a service request or not|True|
+|Item|item|None|False|Item of this request|{"name": "Install", "id": 1}|
+|Level|level|None|False|Level of the request|{"name": "Tier 4", "id": 4}|
+|Mode|mode|None|False|The mode in which this request is created|{"name": "Web Form", "id": 4}|
+|Priority|priority|None|False|Priority of the request|{"name": "High", "id": 4}|
+|Request Type|request_type|None|False|Type of this request|{"id": 1, "name" "Incident"}|
+|Requester|user_output|None|False|The requester of the request|{"name": "John", "id": 7, "is_vipuser": true}|
+|Service Category|service_category|None|False|Service category to which this request belongs|{"name": "User Management", "id": 8}|
+|Site|site|None|False|Denotes the site to which this request belongs|{"name": "Custom Site", "id": 71}|
+|Status|status|None|False|Indicates the current status of this request|{"name": "Open", "id": 2}|
+|Subcategory|subcategory|None|False|Subcategory to which this request belongs|{"name": "Mac OS X", "id": 24}|
+|Subject|string|None|False|Subject of this request|Need a Monitor|
+|Technician|technician|None|False|The technician that was assigned to the request|{"name": "John", "id": 71}|
+|Udf Fields|object|None|False|Holds udf fields values associated with the request|{"udf_sline_51":"abc test.com","udf_pick_52":"Tony Stark"}|
+|Urgency|urgency|None|False|Urgency of the request|{"name": "Low", "id": 1}|
+  
+**closure_code**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Id|integer|False|Id of the level|
-|Name|string|False|Name of the level|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|integer|None|False|Closure Code ID|1|
+|Name|string|None|False|Closure Code name|Success|
+  
+**last_updated_by**
 
-#### mode
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|integer|None|False|Id of the last editor|3|
+|Name|string|None|False|Name of the last editor|Samuel|
+  
+**added_by**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Id|integer|False|Id of the mode|
-|Name|string|False|Name of the mode|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|integer|None|False|Id of the creator|3|
+|Name|string|None|False|Name of the creator|Samuel|
+  
+**note**
 
-#### note
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Added by|added_by|False|Added by details|
-|Added time|date|False|The time the request note was added|
-|ID|integer|False|Note ID|
-|Last updated by|last_updated_by|False|Last updated by details|
-|Last updated time|date|False|The time the request note was updated|
-|Show to Requester|boolean|False|Whether to show the note to requester or not|
-
-#### priority
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Id|integer|False|ID of the priority|
-|Name|string|False|Name of the priority|
-
-#### request_output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Assets|[]asset|False|Array of asset objects associated with this request|
-|Category|category|False|Category to which this request belongs|
-|Created By|user_output|False|Creator of the request|
-|Created Time|date|False|Time the request was created|
-|Description|string|False|Description of this request|
-|Due By Time|date|False|The due date of the request|
-|email_ids_to_notify|[]string|False|Array of Email ids, which needs to be notified about the happenings of this request|
-|Group|group|False|The group to which the request belongs|
-|Has Notes|boolean|False|Indicates whether the request has notes|
-|Id|integer|False|Id of the request|
-|Impact|impact|False|Impact of this request|
-|is_fcr|boolean|False|Boolean value indicating if the request has been marked as First Call Resolution|
-|Is Overdue|boolean|False|Indicates if the request is overdue|
-|Is Service Request|boolean|False|Indicates whether the request is a service request or not|
-|item|item|False|Item of this request|
-|Level|level|False|Level of the request|
-|mode|mode|False|The mode in which this request is created|
-|Priority|priority|False|Priority of the request|
-|Request Type|request_type|False|Type of this request|
-|Requester|user_output|True|The requester of the request|
-|Service Category|service_category|False|Service category to which this request belongs|
-|site|site|False|Denotes the site to which this request belongs|
-|status|status|False|Indicates the current status of this request|
-|subcategory|subcategory|False|Subcategory to which this request belongs|
-|Subject|string|True|Subject of this request|
-|Technician|technician|False|The technician that was assigned to the request|
-|Udf Fields|object|False|Holds udf fields values associated with the request|
-|Urgency|urgency|False|Urgency of the request|
-
-#### request_type
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Id|integer|False|ID of the request type|
-|Name|string|False|Name of the request type|
-
-#### service_category
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Id|integer|False|ID of the service category|
-|Name|string|False|Name of the service category|
-
-#### site
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|ID|integer|False|Site's id|
-|Name|string|False|Site's name|
-
-#### status
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Id|integer|False|ID of the current status|
-|Name|string|False|Name of the current status|
-
-#### subcategory
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Id|integer|False|ID of the subcategory|
-|Name|string|False|Name of the subcategory|
-
-#### technician
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|ID|integer|False|Technician ID|
-|Name|string|False|Technician Name|
-
-#### urgency
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Id|integer|False|Id of the urgency|
-|Name|string|False|Name of the urgency|
-
-#### user_input
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|ID|integer|False|User ID|
-|Name|string|False|User name|
-
-#### user_output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|ID|integer|False|User ID|
-|Is Vipuser|boolean|False|Whether the user is a vip user or not|
-|Name|string|False|User name|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Added By|added_by|None|False|Added by details|{"name": "John", "id": 71}|
+|Added Time|date|None|False|The time the request note was added|Jul 8, 2022 02:01 AM|
+|ID|integer|None|False|Note ID|543|
+|Last Updated By|last_updated_by|None|False|Last updated by details|{"name": "John", "id": 71}|
+|Last Updated Time|date|None|False|The time the request note was updated|Jul 9, 2022 04:02 AM|
+|Show to Requester|boolean|None|False|Whether to show the note to requester or not|False|
 
 
 ## Troubleshooting
-
-_This plugin does not contain any troubleshooting information._
+  
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 1.0.2 - Bumping requirements.txt | SDK bump to 6.1.4
 * 1.0.1 - Fix `int` conversion issue in `Get List Request` and `Get Request` actions
 * 1.0.0 - Initial plugin - Create actions: `Add Request`, `Add Request Note`, `Add Resolution`, `Assign Request`, `Close Request`, `Delete Request`, `Delete Request Note`, `Edit Request`, `Edit Request Note`, `Get List Request`, `Get List Request Notes`, `Get Request`, `Get Resolution`, `Pickup Request`
 
 # Links
 
-* [Manage Engine Service Desk API Docs](https://www.manageengine.com/products/service-desk/sdpod-v3-api)
+* [Manage Engine Service Desk](https://manageengine.com/products/service-desk)
 
 ## References
 
-* [Manage Engine Service Desk](https://manageengine.com/products/service-desk)
-
+* [Manage Engine Service Desk API Docs](https://www.manageengine.com/products/service-desk/sdpod-v3-api)
