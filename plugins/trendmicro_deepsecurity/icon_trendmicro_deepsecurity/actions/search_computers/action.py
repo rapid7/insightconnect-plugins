@@ -1,16 +1,16 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import SearchComputersInput, SearchComputersOutput, Input, Output, Component
 
 # Custom imports below
 
 import json
 import requests
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from icon_trendmicro_deepsecurity.util.shared import tryJSON
 from icon_trendmicro_deepsecurity.util.shared import checkResponse
 
 
-class SearchComputers(komand.Action):
+class SearchComputers(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="search_computers",

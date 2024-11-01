@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import DeployRulesInput, DeployRulesOutput, Input, Output, Component
 
 # Custom imports below
@@ -9,7 +9,7 @@ from icon_trendmicro_deepsecurity.util.shared import tryJSON
 from icon_trendmicro_deepsecurity.util.shared import checkResponse
 
 
-class DeployRules(komand.Action):
+class DeployRules(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="deploy_rules",

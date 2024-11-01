@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import ListRulesInput, ListRulesOutput, Input, Output, Component
 
 # Custom imports below
@@ -8,7 +8,7 @@ from icon_trendmicro_deepsecurity.util.shared import checkResponse
 import requests
 
 
-class ListRules(komand.Action):
+class ListRules(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="list_rules",

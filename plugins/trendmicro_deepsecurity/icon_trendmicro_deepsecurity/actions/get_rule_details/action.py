@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetRuleDetailsInput, GetRuleDetailsOutput, Input, Output, Component
 
 # Custom imports below
@@ -8,7 +8,7 @@ from icon_trendmicro_deepsecurity.util.shared import checkResponse
 import requests
 
 
-class GetRuleDetails(komand.Action):
+class GetRuleDetails(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_rule_details",

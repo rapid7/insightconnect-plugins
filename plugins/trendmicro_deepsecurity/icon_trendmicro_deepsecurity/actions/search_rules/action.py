@@ -1,5 +1,5 @@
 from typing import Tuple
-import komand
+import insightconnect_plugin_runtime
 import requests
 from .schema import SearchRulesInput, SearchRulesOutput, Input, Output, Component
 
@@ -10,7 +10,7 @@ from icon_trendmicro_deepsecurity.util.shared import tryJSON
 from icon_trendmicro_deepsecurity.util.shared import checkResponse
 
 
-class SearchRules(komand.Action):
+class SearchRules(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="search_rules",

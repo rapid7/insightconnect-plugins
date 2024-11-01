@@ -1,31 +1,31 @@
 {
-	"spec": "87df02f543c20dbd826f7b2f50c1a40a",
-	"manifest": "a2b7ef210c31ec64898d6dbeba7c56fe",
-	"setup": "f8c03ed81b7496550e9ac4b44ca81bbc",
+	"spec": "c24b11137bc6c86ba10296dd19d2a409",
+	"manifest": "a87fb2d79f552a29d4b6d6e698fa52eb",
+	"setup": "139cf33ec232a2888bb62b92b08ed651",
 	"schemas": [
 		{
 			"identifier": "deploy_rules/schema.py",
-			"hash": "8674123f170310085c72627eb16cb103"
+			"hash": "ac52aeab22921a006441d8cd14819b7b"
 		},
 		{
 			"identifier": "get_rule_details/schema.py",
-			"hash": "0eb15d3e0354f05e7d24fa53a5c48888"
+			"hash": "12022e88fc85aa2aa0ba67c553ba3728"
 		},
 		{
 			"identifier": "list_rules/schema.py",
-			"hash": "234d239b2226033398e195fe476e255b"
+			"hash": "ec8407791e5814ec61d60b2e3129b7d3"
 		},
 		{
 			"identifier": "search_computers/schema.py",
-			"hash": "dbbbb50f7f5c3fe3fb2a5ad1bff0558b"
+			"hash": "1c12b4aac599e5d8cb1f3382a17e5282"
 		},
 		{
 			"identifier": "search_rules/schema.py",
-			"hash": "cadb6a7fecb480b49bab55a55f48382f"
+			"hash": "701bc13aee0460e1579ee0dba473f94f"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "39722fd7c5ae424e3941b7a534a713df"
+			"hash": "c9dca0c588f6c8129395f5db3f96fa28"
 		}
 	]
 }

@@ -1,5 +1,5 @@
-import komand
 from .schema import ConnectionSchema, Input
+import insightconnect_plugin_runtime
 
 # Custom imports below
 
@@ -8,7 +8,7 @@ from icon_trendmicro_deepsecurity.util.shared import tryJSON
 from icon_trendmicro_deepsecurity.util.shared import checkResponse
 
 
-class Connection(komand.Connection):
+class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
