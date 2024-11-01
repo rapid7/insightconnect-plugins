@@ -1,14 +1,14 @@
-import komand
+import insightconnect_plugin_runtime
 import time
 from .schema import SqsFeedInput, SqsFeedOutput, Input, Output, Component
 
 import json
 
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class SqsFeed(komand.Trigger):
+class SqsFeed(insightconnect_plugin_runtime.Trigger):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="sqs_feed",
