@@ -520,8 +520,8 @@ This action is used to get scanned machine details.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|hostname|string|None|True|Hostname|None|hostname-1|
-|scan_id|string|None|True|Scan ID|None|01234567-89AB-CDEF-0123-456789ABCDEF|
+|scan_id|string|None|True|Scan ID|None|01234567-89AB-CDEF-0123-456789ABCDEF|None|None|
+|hostname|string|None|True|Hostname|None|hostname-1|None|None|
 
 Example input:
 
@@ -536,8 +536,8 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|detected_patches|[]detected_patch|True|Detected patches|
-|patch_scan_machine|patch_scan_machine|True|Patch scan machine|
+|patch_scan_machine|patch_scan_machine|True|Patch scan machine|None|
+|detected_patches|[]detected_patch|True|Detected patches|None|
 
 Example output:
 
@@ -616,7 +616,7 @@ This action is used to get patch scan status.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|scan_id|string|None|True|Scan ID|None|01234567-89AB-CDEF-0123-456789ABCDEF|
+|scan_id|string|None|True|Scan ID|None|01234567-89AB-CDEF-0123-456789ABCDEF|None|None|
 
 Example input:
 
@@ -630,8 +630,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|patch_scan_status_details|patch_scan_status_details|True|Patch scan status details|
-
+|patch_scan_status_details|patch_scan_status_details|True|Patch scan status details|None|
 Example output:
 
 ```
