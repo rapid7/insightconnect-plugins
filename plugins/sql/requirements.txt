@@ -1,4 +1,4 @@
-SQLAlchemy==1.2.18
+SQLAlchemy==1.2.19
 psycopg2==2.8.6
 SQLAlchemy-Utils==0.32.21
 pymssql==2.2.5
