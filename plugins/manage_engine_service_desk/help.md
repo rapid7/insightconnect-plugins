@@ -54,7 +54,7 @@ parameter containing `ID` and `Name` fields please provide at least one of them
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|assets|[]asset|None|False|Array of asset objects associated with this request|None|["{\"name\": \"Software\", \"barcode\": \"test-barcode\"}"]|None|None|
+|assets|[]asset|None|False|Array of asset objects associated with this request|None|["{"name": "Software", "barcode": "test-barcode"}"]|None|None|
 |category|category|None|False|Category to which this request belongs|None|{"name": "Operating System"}|None|None|
 |description|string|None|False|Description of this request|None|Example description|None|None|
 |email_ids_to_notify|[]string|None|False|Array of Email ids, which needs to be notified about the happenings of this request|None|["user@example.com"]|None|None|
@@ -364,7 +364,7 @@ Update the given request. At least one parameter other than Request ID is requir
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|assets|[]asset|None|False|Array of asset objects associated with this request|None|["{\"name\": \"Software\", \"barcode\": \"test-barcode\"}"]|None|None|
+|assets|[]asset|None|False|Array of asset objects associated with this request|None|["{"name": "Software", "barcode": "test-barcode"}"]|None|None|
 |category|category|None|False|Category to which this request belongs|None|{"name": "Operating System"}|None|None|
 |description|string|None|False|Description of this request|None|Example description|None|None|
 |email_ids_to_notify|[]string|None|False|Array of Email ids, which needs to be notified about the happenings of this request|None|["user@example.com"]|None|None|
@@ -497,7 +497,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|requests|[]request_output|False|List of requests|["{\"subject\": \"Install xyz\", \"requester\": {\"name\": \"Mike\"}}"]|
+|requests|[]request_output|False|List of requests|["{"subject": "Install xyz", "requester": {"name": "Mike"}}"]|
 |status|string|True|Status of the request|success|
   
 Example output:
@@ -672,11 +672,8 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|notes|[]note|False|Notes assigned to the request|["{\"note_id\": \"312\", \"added_time\": \"Jul 8, 2022 02:02 AM\", \"added_by\": {\"name\": \"John\"}"]|
-|request_id|integer|True|The id of the request|55|
-|status|string|True|Status of the request|success|
-|status_code|integer|False|Status code of the request|2000|
-  
+|notes|[]note|False|Notes assigned to the request|["{"note_id": "312", "added_time": "Jul 8, 2022 02:02 AM", "added_by": {"name": "John"}"]|
+|request_id|integer|True|The id of the request|55|', '|status|string|True|Status of the request|success|', '|status_code|integer|False|Status code of the request|2000|
 Example output:
 
 ```
