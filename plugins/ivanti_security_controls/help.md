@@ -699,8 +699,8 @@ This action is used to retrieve Agent from Ivanti Security Controls.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|agent_configuration_filter|string|All|False|Filters agents based on listening configuration|['Listening', 'Not Listening', 'All']|All|
-|name_filter|string|None|False|Filters agents where host or DNS name equals this value|None|hostname-1|
+|agent_configuration_filter|string|All|False|Filters agents based on listening configuration|["Listening", "Not Listening", "All"]|All|None|None|
+|name_filter|string|None|False|Filters agents where host or DNS name equals this value|None|hostname-1|None|None|
 
 Example input:
 
@@ -715,8 +715,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|agents|[]agent_detail|False|List of agent details|
-|count|integer|False|Number of agents returned|
+|count|integer|False|Number of agents returned|1|', '|agents|[]agent_detail|False|List of agent details|None|
 
 Example output:
 
@@ -764,7 +763,7 @@ This action is used to retrieve Agent Status from Ivanti Security Controls.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|Agent Identifier|None|ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCD|
+|id|string|None|True|Agent Identifier|None|ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCD|None|None|
 
 Example input:
 
@@ -778,7 +777,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|agent_status|agent_status|True|Agent status with details|
+|agent_status|agent_status|True|Agent status with details|None|
 
 Example output:
 
@@ -819,7 +818,7 @@ This action is used to retrieve Agent from Ivanti Security Controls.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|Agent Identifier|None|ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCD|
+|id|string|None|True|Agent Identifier|None|ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCD|None|None|
 
 Example input:
 
@@ -833,7 +832,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|agent|agent_detail|True|Details about an agent|
+|agent|agent_detail|True|Details about an agent|None|
 
 Example output:
 
