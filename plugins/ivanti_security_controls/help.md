@@ -1,6 +1,6 @@
 # Description
 
-Ivanti Security Controls is a unified IT management platform used for managing and protecting through Patch Management, Application Control, and Asset Inventory functionality.
+Ivanti Security Controls is a unified IT management platform used for managing and protecting through Patch Management, Application Control, and Asset Inventory functionality
 
 # Key Features
 
@@ -14,26 +14,30 @@ Ivanti Security Controls is a unified IT management platform used for managing a
 * Username and password of Windows account where Ivanti Security Controls is installed
 * (Recommended) Ivanti Security Controls certificate in order to enforce certificate verification
 
+# Supported Product Versions
+
+* 2024-11-1
+
 # Documentation
 
 ## Setup
 
-The connection configuration accepts the following parameters:
+The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|credentials|credential_username_password|None|True|Username and password|None|{"username":"user1", "password":"mypassword"}|
-|host|string|None|True|Enter the hostname|None|example.com|
-|port|integer|3121|True|Enter the port|None|3121|
-|ssl_verify|boolean|True|True|Validate certificate|None|True|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|credentials|credential_username_password|None|True|Username and password|None|{"username":"user1", "password":"mypassword"}|None|None|
+|host|string|None|True|Enter the hostname|None|example.com|None|None|
+|port|integer|3121|True|Enter the port|None|3121|None|None|
+|ssl_verify|boolean|True|True|Validate certificate|None|True|None|None|
 
 Example input:
 
 ```
 {
   "credentials": {
-    "username": "user1",
-    "password": "mypassword"
+    "password": "mypassword",
+    "username": "user1"
   },
   "host": "example.com",
   "port": 3121,
@@ -45,126 +49,19 @@ Example input:
 
 ### Actions
 
-#### Update Patch Group
-
-This action is used to add CVEs or Patch IDs to an existing patch group.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|patch_group|string|None|True|Name or ID of an existing patch group|None|Patch Group created from InsightConnect|
-|vulnerability_identifier|[]string|None|True|List of patch IDs or CVEs to add to an existing patch group|None|["CVE-2019-0708", "12345"]|
-
-Example input:
-
-```
-{
-  "patch_group": "Patch Group created from InsightConnect",
-  "vulnerability_identifier": [
-    "CVE-2019-0708",
-    "12345"
-  ]
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Was operation successful|
-
-Example output:
-
-```
-{
-  "success": true
-}
-```
-
-#### Start Patch Deployment
-
-This action is used to start a patch deployment. It accepts a scan and template by ID or by name.
-
-Note that scan names are not unique in Ivanti, in the event that there are duplicate names, the action will automatically use the latest scan. If you want a specific scan that is not the latest, pass in the scan ID instead.
-
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|download_patches|boolean|None|True|Boolean to initiate patch download before starting the deployment|None|False|
-|scan_identifier|string|None|True|A scan ID or scan name|None|01234567-89AB-CDEF-0123-456789ABCDEF|
-|template_identifier|string|None|True|A template ID or template name|None|Deployment Template created from InsightConnect|
-
-Example input:
-
-```
-{
-  "download_patches": false,
-  "scan_identifier": "01234567-89AB-CDEF-0123-456789ABCDEF",
-  "template_identifier": "Deployment Template created from InsightConnect"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Was operation successful|
-
-Example output:
-
-```
-{
-  "success": true
-}
-```
-
-#### Get Patch Deployment Template ID
-
-This action is used to get a Patch Deployment Template ID by searching for the Patch Deployment Template Name.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|patch_deployment_template_name|string|None|True|The name of the patch deployment template|None|Patch Deployment Template created from InsightConnect|
-
-Example input:
-
-```
-{
-  "patch_deployment_template_name": "Patch Deployment Template created from InsightConnect"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|patch_deployment_template_id|string|True|The ID of the patch deployment template|
-
-Example output:
-
-```
-{
-  "patch_deployment_template_id": "01234567-89AB-CDEF-0123-456789ABCDEF"
-}
-```
 
 #### Create Patch Group
 
-This action is used to create a new patch group with CVEs.
+This action is used to create a new patch group with CVEs
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|cves|[]string|None|True|The CVEs that should be included in the new patch group|None|["cve-2019-0701", "CVE-2019-0708"]|
-|name|string|None|True|The name of the new patch group|None|New Patch Group|
-|path|string|None|False|The path that describes the location of the patch group within the Patch Templates and Groups list in the navigation pane|None|Lab\Servers|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|cves|[]string|None|True|The CVEs that should be included in the new patch group|None|["cve-2019-0701", "CVE-2019-0708"]|None|None|
+|name|string|None|True|The name of the new patch group|None|New Patch Group|None|None|
+|path|string|None|False|The path that describes the location of the patch group within the Patch Templates and Groups list in the navigation pane|None|Lab\Servers|None|None|
+  
 Example input:
 
 ```
@@ -180,10 +77,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|patch_group|patch_group|True|Detailed information about the patch group|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|patch_group|patch_group|True|Detailed information about the patch group|None|
+  
 Example output:
 
 ```
@@ -208,18 +105,18 @@ Example output:
 
 #### Create Patch Scan Template
 
-This action is used to create a new patch scan template.
+This action is used to create a new patch scan template
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|description|string|None|False|Description that explains the purpose of this patch scan template|None|Patch Scan Template created from InsightConnect|
-|name|string|None|True|Name of the patch scan template|None|ExamplePatchScanTemplate|
-|patchGroupIds|[]integer|None|True|The IDs of the patch groups to use|None|1|
-|path|string|None|False|Path to the location of the machine group within the Patch Scan Templates list in the navigation pane|None|Lab\Servers|
-|threadCount|integer|None|False|Specifies maximum number of machines that can be simultaneously scanned during one patch scan|None|1|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|description|string|None|False|Description that explains the purpose of this patch scan template|None|Patch Scan Template created from InsightConnect|None|None|
+|name|string|None|True|Name of the patch scan template|None|ExamplePatchScanTemplate|None|None|
+|patchGroupIds|[]integer|None|True|The IDs of the patch groups to use|None|1|None|None|
+|path|string|None|False|Path to the location of the machine group within the Patch Scan Templates list in the navigation pane|None|Lab\Servers|None|None|
+|threadCount|integer|None|False|Specifies maximum number of machines that can be simultaneously scanned during one patch scan|None|1|None|None|
+  
 Example input:
 
 ```
@@ -234,59 +131,59 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|patch_scan_template|patch_scan_template|True|Detailed information about the patch scan template|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|patch_scan_template|patch_scan_template|True|Detailed information about the patch scan template|None|
+  
 Example output:
 
 ```
 {
-    "patch_scan_template": {
-        "creator": "IVANTI-W16\\Administrator",
-        "description": "Example Patch Scan Templete Description",
-        "id": "4374292d-3465-4d77-b752-c4eccd91bba5",
-        "isSystem": false,
-        "links": {
-            "self": {
-                "href": "https://example.com:3121/st/console/api/v1.0/patch/scanTemplates/4374292d-3465-4d77-b752-c4eccd91bba5"
-            },
-            "usedby": {
-                "href": "https://example.com:3121/st/console/api/v1.0/patch/scanTemplates/4374292d-3465-4d77-b752-c4eccd91bba5/usedby"
-            }
-        },
-        "name": "example-patch-scan-template",
-        "patchFilter": {
-            "patchGroupFilterType": "Scan",
-            "patchGroupIds": [
-                2,
-                3
-            ],
-            "patchPropertyFilter": {
-                "customActions": false,
-                "nonSecurityPatchSeverities": "None",
-                "securityPatchSeverities": "None",
-                "securityTools": false
-            },
-            "scanFor": "NecessaryExplicitlyInstalled",
-            "softwareDistribution": false,
-            "vendorFamilyProductFilter": {}
-        }
+  "patch_scan_template": {
+    "creator": "IVANTI-W16\\Administrator",
+    "description": "Example Patch Scan Templete Description",
+    "id": "4374292d-3465-4d77-b752-c4eccd91bba5",
+    "isSystem": false,
+    "links": {
+      "self": {
+        "href": "https://example.com:3121/st/console/api/v1.0/patch/scanTemplates/4374292d-3465-4d77-b752-c4eccd91bba5"
+      },
+      "usedby": {
+        "href": "https://example.com:3121/st/console/api/v1.0/patch/scanTemplates/4374292d-3465-4d77-b752-c4eccd91bba5/usedby"
+      }
+    },
+    "name": "example-patch-scan-template",
+    "patchFilter": {
+      "patchGroupFilterType": "Scan",
+      "patchGroupIds": [
+        2,
+        3
+      ],
+      "patchPropertyFilter": {
+        "customActions": false,
+        "nonSecurityPatchSeverities": "None",
+        "securityPatchSeverities": "None",
+        "securityTools": false
+      },
+      "scanFor": "NecessaryExplicitlyInstalled",
+      "softwareDistribution": false,
+      "vendorFamilyProductFilter": {}
     }
+  }
 }
 ```
 
 #### Get Patch Deployment
 
-This action is used to retrieve information about a specific patch deployment.
+This action is used to retrieve information about a specific patch deployment
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|deployment_id|string|None|True|Patch deployment ID|None|5dbcb89f-eec3-4182-a9aa-1e6074fb0acb|
-|machine_id|integer|None|False|ID of a machine involved with a specific patch deployment|None|7|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|deployment_id|string|None|True|Patch deployment ID|None|5dbcb89f-eec3-4182-a9aa-1e6074fb0acb|None|None|
+|machine_id|integer|None|False|ID of a machine involved with a specific patch deployment|None|7|None|None|
+  
 Example input:
 
 ```
@@ -298,11 +195,11 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|machine_information|machine_deploy_state|True|Information about a machine involved with the patch deployment|
-|patch_deployment_details|patch_deployment|True|Detailed information about a specific deployment|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|machine_information|machine_deploy_state|True|Information about a machine involved with the patch deployment|None|
+|patch_deployment_details|patch_deployment|True|Detailed information about a specific deployment|None|
+  
 Example output:
 
 ```
@@ -363,7 +260,38 @@ Example output:
     }
   ]
 }
+```
 
+#### Get Patch Deployment Template ID
+
+This action is used to get a Patch Deployment Template ID by searching for the Patch Deployment Template Name
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|patch_deployment_template_name|string|None|True|The name of the patch deployment template|None|Patch Deployment Template created from InsightConnect|None|None|
+  
+Example input:
+
+```
+{
+  "patch_deployment_template_name": "Patch Deployment Template created from InsightConnect"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|patch_deployment_template_id|string|True|The ID of the patch deployment template|01234567-89AB-CDEF-0123-456789ABCDEF|
+  
+Example output:
+
+```
+{
+  "patch_deployment_template_id": "01234567-89AB-CDEF-0123-456789ABCDEF"
+}
 ```
 
 #### Get Patch Details
@@ -372,10 +300,10 @@ This action is used to retrieve information about a patch from Ivanti Security C
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|The vulnerability ID|None|4693|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|integer|None|True|The vulnerability ID|None|4693|None|None|
+  
 Example input:
 
 ```
@@ -386,10 +314,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|patch|vulnerability|True|Detailed information about a patch|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|patch|vulnerability|True|Detailed information about a patch|None|
+  
 Example output:
 
 ```
@@ -422,14 +350,14 @@ Example output:
 
 #### Search Patches
 
-This action is used to find and display detailed information about patch.
+This action is used to find and display detailed information about patch
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|security_id|[]string|None|True|Security Vulnerability ID|None|["MS99-031", "Q240346", "CVE-2015-4485", "4693"]|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|security_id|[]string|None|True|Security Vulnerability ID|None|["MS99-031", "Q240346", "CVE-2015-4485", "4693"]|None|None|
+  
 Example input:
 
 ```
@@ -445,10 +373,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|vulnerabilities|[]vulnerability|True|Details about an agent|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|vulnerabilities|[]vulnerability|True|Details about an agent|None|
+  
 Example output:
 
 ```
@@ -481,24 +409,63 @@ Example output:
 }
 ```
 
-#### Start a Patch Scan
+#### Start Patch Deployment
 
-This action is used to start a patch scan.
+This action is used to start a patch deployment. It accepts a scan and template by ID or by name.
+
+Note that scan names are not unique in Ivanti, in the event that there are duplicate names, the action will automatically use the latest scan. If you want a specific scan that is not the latest, pass in the scan ID instead.
+
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|credential_id|string|None|False|Credential ID|None|01234567-89AB-CDEF-0123-456789ABCDEF|
-|diagnostic_trace_enabled|boolean|None|False|An indication whether diagnostics tracing should be enabled during scan|None|False|
-|hostnames|[]string|None|False|Hostnames - Either hostnames or machine group IDs must be specified|None|hostname-1|
-|machine_group_ids|[]string|None|False|List of machine groups to scan. Either hostnames or machine group IDs must be specified|None|["1", "2"]|
-|max_poll_time|integer|300|True|Max poll time|None|300|
-|name|string|None|False|Name to be given to scan|None|test-scan|
-|run_as_credential_id|string|None|False|Reference to a credential to use to start a scan. Overwrites RunAsDefault behavior|None|01234567-89AB-CDEF-0123-456789ABCDEF|
-|template_id|string|None|True|Patch scan template ID|None|01234567-89AB-CDEF-0123-456789ABCDEF|
-|use_machine_credential|boolean|None|False|An indication whether to use machine credentials. If No is specified, then either group-level credentials, default credentials or integrated Windows authentication credentials (in that order) will be used. This parameter is only used if an endpoint name is specified|None|False|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|download_patches|boolean|None|True|Boolean to initiate patch download before starting the deployment|None|False|None|None|
+|scan_identifier|string|None|True|A scan ID or scan name|None|01234567-89AB-CDEF-0123-456789ABCDEF|None|None|
+|template_identifier|string|None|True|A template ID or template name|None|Deployment Template created from InsightConnect|None|None|
+  
+Example input:
 
+```
+{
+  "download_patches": false,
+  "scan_identifier": "01234567-89AB-CDEF-0123-456789ABCDEF",
+  "template_identifier": "Deployment Template created from InsightConnect"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|True|Was operation successful|True|
+  
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Start a Patch Scan
+
+This action is used to start a patch scan
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|credential_id|string|None|False|Credential ID|None|01234567-89AB-CDEF-0123-456789ABCDEF|None|None|
+|diagnostic_trace_enabled|boolean|None|False|An indication whether diagnostics tracing should be enabled during scan|None|False|None|None|
+|hostnames|[]string|None|False|Hostnames - Either hostnames or machine group IDs must be specified|None|hostname-1|None|None|
+|machine_group_ids|[]string|None|False|List of machine groups to scan. Either hostnames or machine group IDs must be specified|None|["1", "2"]|None|None|
+|max_poll_time|integer|300|True|Max poll time|None|300|None|None|
+|name|string|None|False|Name to be given to scan|None|test-scan|None|None|
+|run_as_credential_id|string|None|False|Reference to a credential to use to start a scan. Overwrites RunAsDefault behavior|None|01234567-89AB-CDEF-0123-456789ABCDEF|None|None|
+|template_id|string|None|True|Patch scan template ID|None|01234567-89AB-CDEF-0123-456789ABCDEF|None|None|
+|use_machine_credential|boolean|None|False|An indication whether to use machine credentials. If No is specified, then either group-level credentials, default credentials or integrated Windows authentication credentials (in that order) will be used. This parameter is only used if an endpoint name is specified|None|False|None|None|
+  
 Example input:
 
 ```
@@ -520,10 +487,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|scan_details|scan_details|True|Scan details|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|scan_details|scan_details|True|Scan details|None|
+  
 Example output:
 
 ```
@@ -604,6 +571,43 @@ Example output:
 }
 ```
 
+#### Update Patch Group
+
+This action is used to add CVEs or Patch IDs to an existing patch group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|patch_group|string|None|True|Name or ID of an existing patch group|None|Patch Group created from InsightConnect|None|None|
+|vulnerability_identifier|[]string|None|True|List of patch IDs or CVEs to add to an existing patch group|None|["CVE-2019-0708", "12345"]|None|None|
+  
+Example input:
+
+```
+{
+  "patch_group": "Patch Group created from InsightConnect",
+  "vulnerability_identifier": [
+    "CVE-2019-0708",
+    "12345"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|True|Was operation successful|True|
+  
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
 #### Get Patch Scan Status
 
 This action is used to get patch scan status.
@@ -671,19 +675,19 @@ Example output:
     }
   ],
   "patch_scan_machine": {
-        "completedOn": "2020-05-12T21:53:57.71Z",
-        "domain": "WORKGROUP",
-        "errorNumber": 0,
-        "id": 72,
-        "installedPatchCount": 16,
-        "links": {
-          "patches": {
-            "href": "https://localhost:3121/st/console/api/v1.0/patch/scans/f447bd51-de32-4bd6-a28e-ad834694d5ac/machines/72/patches"
-          }
-        },
-        "missingPatchCount": 3,
-        "missingServicePackCount": 1,
-        "name": "hostname-1"
+    "completedOn": "2020-05-12T21:53:57.71Z",
+    "domain": "WORKGROUP",
+    "errorNumber": 0,
+    "id": 72,
+    "installedPatchCount": 16,
+    "links": {
+      "patches": {
+        "href": "https://localhost:3121/st/console/api/v1.0/patch/scans/f447bd51-de32-4bd6-a28e-ad834694d5ac/machines/72/patches"
+      }
+    },
+    "missingPatchCount": 3,
+    "missingServicePackCount": 1,
+    "name": "hostname-1"
   }
 }
 ```
@@ -869,114 +873,227 @@ Example output:
 ```
 
 ### Triggers
+  
+*This plugin does not contain any triggers.*
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-_This plugin does not contain any triggers._
+### Custom Types
+  
+**agent_detail**
 
-### Custom Output Types
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Agent ID|string|None|True|The agent ID|None|
+|Assigned Policy ID|string|None|False|The unique identifier of the policy that is in effect for this agent|None|
+|DNS Name|string|None|False|The DNS name of the agent machine|None|
+|Domain|string|None|False|The domain of the agent machine|None|
+|Framework Version|string|None|False|The installed agent framework version|None|
+|Is Listening|boolean|None|False|Specifies if the agent is a listening agent|None|
+|Last Check-In|string|None|False|The date and time of the most recent check-in|None|
+|Last Known IP Address|string|None|False|The last known IP address of the agent machine|None|
+|Agent Links|object|None|False|Shows the related URLs for the agent|None|
+|Listening Port|integer|None|False|The listening port number|None|
+|Machine Name|string|None|False|The agent machine's host name|None|
+|Reported Policy ID|string|None|False|The agent policy ID|None|
+|Status|string|None|True|The current status of the agent|None|
+  
+**agent_status**
 
-#### agent_detail
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Agent ID|string|None|True|The agent ID|None|
+|Framework Version|object|None|False|The installed agent framework version|None|
+|Installed Packages|[]string|None|False|The list of engines installed on the agent machine|None|
+|Last Check-In|string|None|False|The date and time of the most recent check-in|None|
+|Agent Links|object|None|False|Shows the related URLs for the agent|None|
+|Machine Name|string|None|False|The agent machine's host name|None|
+|Reported On|string|None|False|The time the information was gathered from the agent machine|None|
+|Running Policy ID|string|None|False|The agent's running policy ID|None|
+|Running Policy Version|integer|None|False|The agent's policy ID|None|
+  
+**patch_scan_machine**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Agent ID|string|True|The agent ID|
-|Assigned Policy ID|string|False|The unique identifier of the policy that is in effect for this agent|
-|DNS Name|string|False|The DNS name of the agent machine|
-|Domain|string|False|The domain of the agent machine|
-|Framework Version|string|False|The installed agent framework version|
-|Is Listening|boolean|False|Specifies if the agent is a listening agent|
-|Last Check-In|string|False|The date and time of the most recent check-in|
-|Last Known IP Address|string|False|The last known IP address of the agent machine|
-|Agent Links|object|False|Shows the related URLs for the agent|
-|Listening Port|integer|False|The listening port number|
-|Machine Name|string|False|The agent machine's host name|
-|Reported Policy ID|string|False|The agent policy ID|
-|Status|string|True|The current status of the agent|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Completed On|string|None|False|The date and time that the machine assessment was completed|None|
+|Domain|string|None|False|The domain short-name of the assessed machine|None|
+|Error Description|string|None|False|Description of the patch scan or resolution error|None|
+|Error Number|integer|None|False|An error code representing a resolution or assessment failure|None|
+|ID|integer|None|False|The unique identifier of the machine patch assessment|None|
+|Installed Patch Count|integer|None|False|The total number of installed patches found in the assessment|None|
+|Links|object|None|False|Shows the related URLs|None|
+|Missing Patch Count|integer|None|False|The total number of missing patches detected in the assessment|None|
+|Missing Service Pack Count|integer|None|False|The total number of missing service packs detected in the assessment|None|
+|Host Name|string|None|False|The resolved short-name or host name of the machine|None|
+|Virtual Machine Path|string|None|False|The virtual machine path if this is a hosted VM|None|
+|Virtual Server|string|None|False|The virtual machine server name if this is a hosted VM|None|
+  
+**scan_details**
 
-#### agent_status
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Scan ID|string|None|True|Scan ID|None|
+|Is Complete|boolean|None|True|Is complete|None|
+|Scan Links|object|None|True|Scan links|None|
+|Scan Name|string|None|False|Scan name|None|
+|Scan Type|string|None|True|Scan Type|None|
+|Scan Start Time|string|None|True|Scan start time|None|
+|Update Time|string|None|True|Update Time|None|
+|Username|string|None|True|Username|None|
+  
+**patch_scan_status_details**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Agent ID|string|True|The agent ID|
-|Framework Version|object|False|The installed agent framework version|
-|Installed Packages|[]string|False|The list of engines installed on the agent machine|
-|Last Check-In|string|False|The date and time of the most recent check-in|
-|Agent Links|object|False|Shows the related URLs for the agent|
-|Machine Name|string|False|The agent machine's host name|
-|Reported On|string|False|The time the information was gathered from the agent machine|
-|Running Policy ID|string|False|The agent's running policy ID|
-|Running Policy Version|integer|False|The agent's policy ID|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Console Name|string|None|True|Console Name|None|
+|Definition Date|string|None|False|Definition Date|None|
+|Definition Version|string|None|False|Definition version|None|
+|Expected Result Total|integer|None|True|Expected result total count|None|
+|Scan ID|string|None|True|Scan ID|None|
+|Is Complete|boolean|None|True|Is Complete|None|
+|Links|object|None|True|Scan links|None|
+|Scan Name|string|None|True|Scan name|None|
+|Received Result Count|integer|None|True|Received result count|None|
+|Scan Type|string|None|True|Scan Type|None|
+|Scan Start Time|string|None|True|Scan start time|None|
+|Update Time|string|None|True|Update time|None|
+|Username|string|None|True|Username|None|
+  
+**detected_patch**
 
-#### detected_patch
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Bulletin ID|string|None|True|Bulletin ID|None|
+|Culture Name|string|None|True|Culture name|None|
+|KB|string|None|True|KB issued by the vendor of the patch|None|
+|Links|object|None|False|Shows the related URLs|None|
+|Patch ID|string|None|True|Patch ID|None|
+|Patch Type|string|None|True|Patch Type|None|
+|Product ID|string|None|True|Product ID|None|
+|Product Name|string|None|True|Product name|None|
+|Scan Item ID|integer|None|True|Scan ID of the patch summary|None|
+|Scan State|string|None|True|The state of the patch installation|None|
+|Service Pack Name|string|None|True|The name of the service pack to which the patch applies|None|
+|Vendor Severity|string|None|True|The vendor-defined severity of the security risk or issue that this patch corrects|None|
+  
+**next**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Bulletin ID|string|True|Bulletin ID|
-|Culture Name|string|True|Culture Name|
-|KB|string|True|KB issued by the vendor of the patch|
-|Links|object|False|Shows the related URLs|
-|Patch ID|string|True|Patch ID|
-|Patch Type|string|True|Patch Type|
-|Product ID|string|True|Product ID|
-|Product Name|string|True|Product name|
-|Scan Item ID|integer|True|Scan ID of the patch summary|
-|Scan State|string|True|The state of the patch installation|
-|Service Pack Name|string|True|The name of the service pack to which the patch applies|
-|Vendor Severity|string|True|The vendor-defined severity of the security risk or issue that this patch corrects.|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|HREF|string|None|False|Href|None|
+  
+**links**
 
-#### patch_scan_machine
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Next|next|None|False|Next|None|
+  
+**links_self**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Completed On|string|False|The date and time that the machine assessment was completed|
-|Domain|string|False|The domain short-name of the assessed machine|
-|Error Description|string|False|Description of the patch scan or resolution error|
-|Error Number|integer|False|An error code representing a resolution or assessment failure|
-|ID|integer|False|The unique identifier of the machine patch assessment|
-|Installed Patch Count|integer|False|The total number of installed patches found in the assessment|
-|Links|object|False|Shows the related URLs|
-|Missing Patch Count|integer|False|The total number of missing patches detected in the assessment|
-|Missing Service Pack Count|integer|False|The total number of missing service packs detected in the assessment|
-|Host Name|string|False|The resolved short-name or host name of the machine|
-|Virtual Machine Path|string|False|The virtual machine path if this is a hosted VM|
-|Virtual Server|string|False|The virtual machine server name if this is a hosted VM|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Self|next|None|False|Self|None|
+  
+**vulnerability**
 
-#### patch_scan_status_details
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Bulletin ID|string|None|False|Bulletinid|None|
+|CVE|[]string|None|False|CVE|None|
+|Patch ID|integer|None|False|Id|None|
+|Is Supported|boolean|None|False|Issupported|None|
+|Kb|string|None|False|Kb|None|
+|Links|links_self|None|False|Links|None|
+|Patchids|[]string|None|False|Patch IDs|None|
+|Patchtype|string|None|False|Patch Type|None|
+|Releasedate|string|None|False|Release Date|None|
+|Replaced By|[]string|None|False|Replacedby|None|
+  
+**patch_deployment**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Console Name|string|True|Console Name|
-|Definition Date|string|False|Definition Date|
-|Definition Version|string|False|Definition version|
-|Expected Result Total|integer|True|Expected result total count|
-|Scan ID|string|True|Scan ID|
-|Is Complete|boolean|True|Is Complete|
-|Links|object|True|Scan links|
-|Scan Name|string|True|Scan name|
-|Received Result Count|integer|True|Received result count|
-|Scan Type|string|True|Scan Type|
-|Scan Start Time|string|True|Scan start time|
-|Update Time|string|True|Update Time|
-|Username|string|True|Username|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Completed Machine Count|integer|None|False|Number of machines that has the deployment completed|None|
+|Creator|string|None|False|Initiator of the deployment|None|
+|Expected Machine Count|integer|None|False|Number of machines in this deployment|None|
+|ID|string|None|True|The unique operation identifier assigned to the patch deployment|None|
+|Completed|boolean|None|False|Completion status of the deployment|None|
+|Last Updated On|string|None|False|Date of receipt of the last status update|None|
+|Links|object|None|False|Shows the related URLs for the deployment, the machines and the template|None|
+|Name|string|None|False|Name of the deployment template|None|
+|Started On|string|None|False|Deployment start date|None|
+  
+**machine_deploy_state**
 
-#### scan_details
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Address|string|None|False|The IP address of the machine|None|
+|Completed Patches|integer|None|False|The count of in-progress patches|None|
+|DNS Name|string|None|False|The DNS name of the machine|None|
+|Domain|string|None|False|The domain name of the machine|None|
+|Error Code|integer|None|False|The error code reported on failure by the machine|None|
+|ID|integer|None|False|The unique machine identifier for the machine being deployed to|None|
+|Last Updated|string|None|False|Specifies when the deployment status was last updated|None|
+|Links|object|None|False|Shows the related URL for the deployment to the machine|None|
+|Name|string|None|False|The hostname of the machine|None|
+|Overall State|string|None|False|The overall state of the machine deployment|None|
+|Patch States|[]object|None|False|The status of each patch in the deployment|None|
+|Status Description|string|None|False|A description of the status of the deployment|None|
+  
+**patch_property_filter**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Scan ID|string|True|Scan ID|
-|Is Complete|boolean|True|Is complete|
-|Scan Links|object|True|Scan links|
-|Scan Name|string|False|Scan name|
-|Scan Type|string|True|Scan Type|
-|Scan Start Time|string|True|Scan start time|
-|Update Time|string|True|Update Time|
-|Username|string|True|Username|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Custom Actions|boolean|None|False|Custom actions|None|
+|Non Security Patch Severities|string|None|False|The non-security patch severities|None|
+|Security Patch Severities|string|None|False|The security patch severities|None|
+|Security Tools|boolean|None|False|Security tools|None|
+  
+**patch_filter**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Patch File Path|string|None|False|The patch file path|None|
+|Patch Group Filter Type|string|None|False|The patch's filter describes how this filter will be applied. The values can be Scan, Skip, or None|None|
+|Patch Group IDs|[]integer|None|False|The IDs of the patch groups to use|None|
+|Patch Property Filter|patch_property_filter|None|False|Patch property filter (security, non-security, critical, etc.)|None|
+|Scan For|string|None|False|Gets or sets the type of patches to scan for|None|
+|Software Distribution|boolean|None|False|Is software distribution included in the scan|None|
+|Vendor Family Product Filter|object|None|False|Vendor and family product hierarchy|None|
+  
+**patch_scan_template**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Creator|string|None|False|The name of the person who created the template|None|
+|Description|string|None|False|Provides a description that explains the purpose of this patch scan template|None|
+|ID|string|None|False|Specifies the ID of the patch scan template|None|
+|Is System|boolean|None|False|Indicates if this is a system template|None|
+|Links|object|None|False|Shows the related URLs for each patch scan template and for the usedby list|None|
+|Name|string|None|False|Specifies the patch scan template name|None|
+|Patch Filter|patch_filter|None|False|Specifies the mode|None|
+|Path|string|None|False|The path that describes the location of the machine group within the Patch Scan Templates list in the navigation pane|None|
+|Thread Count|integer|None|False|Specifies maximum number of machines that can be simultaneously scanned during one patch scan|None|
+  
+**patch_group**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|integer|None|False|The patch group ID|None|
+|Links|object|None|False|Shows the related URLs for the patch group|None|
+|Name|string|None|False|The name of the patch group|None|
+|Path|string|None|False|The path that describes the location of the patch group within the Windows Patch Groups list in the navigation pane|None|
+
 
 ## Troubleshooting
-
-_This plugin does not contain any troubleshooting information._
+  
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 1.5.1 - Bumping requirements.txt | SDK bump to 6.1.4
 * 1.5.0 - New action Update Patch Group
 * 1.4.0 - New actions Get Patch Deployment Template ID, Start Patch Deployment
 * 1.3.0 - New actions Create Patch Group and Add CVEs, Create Patch Scan Template
@@ -988,7 +1105,8 @@ _This plugin does not contain any troubleshooting information._
 
 # Links
 
+* [Ivanti Security Controls](https://www.ivanti.com/products/security-controls)
+
 ## References
 
-* [Ivanti Security Controls](https://www.ivanti.com/products/security-controls)
 * [Ivanti Security Controls API Documentation](https://help.ivanti.com/iv/help/en_US/isec/API/Topics/Welcome.htm)
