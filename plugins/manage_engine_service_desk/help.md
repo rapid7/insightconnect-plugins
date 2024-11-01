@@ -9,12 +9,10 @@ ManageEngine's Service Desk has the ability to centralize and capture reported i
 
 # Requirements
 
-* The authentication between ServiceDesk Plus and an Insight Connect application is through an API key. A unique key is generated for a technician with login permission in the ServiceDesk Plus application.
+The authentication between ServiceDesk Plus and an Insight Connect application is through an API key. A unique key is generated for a technician with login permission in the ServiceDesk Plus application.
 * To generate the API Key, click Admin -> Technicians under User block.
 * If you want to generate the API key for an existing technician, then click the edit icon beside the technician.
 * If you want to generate the API key for a new technician, click Add New Technician link, enter the technician details and provide login permission.
-* Click Generate link under the API key details block. You can select a time frame for the key to expire using the calendar icon or simply retain the same key indefinitely.
-* If a key is already generated for the technician, a Re-generate link appears.
 
 # Supported Product Versions
 
@@ -81,57 +79,9 @@ Example input:
 
 ```
 {
-  "assets": [
-    "{\"name\": \"Software\", \"barcode\": \"test-barcode\"}"
-  ],
-  "category": {
-    "name": "Operating System"
-  },
-  "description": "Example description",
-  "email_ids_to_notify": [
-    "user@example.com"
-  ],
-  "group": {
-    "name": "Network"
-  },
-  "impact": {
-    "name": "High"
-  },
-  "is_fcr": true,
-  "item": {
-    "name": "Install"
-  },
-  "level": {
-    "name": "Tier 4"
-  },
-  "mode": {
-    "name": "Web Form"
-  },
-  "priority": {
-    "name": "High"
-  },
-  "request_type": "{\"name\" \"Incident\"}",
+  "subject": "Install xyz",
   "requester": {
-    "name": "John"
-  },
-  "service_category": {
-    "name": "User Management"
-  },
-  "site": {
-    "name": "Custom Site"
-  },
-  "status": {
-    "name": "Open"
-  },
-  "subcategory": {
-    "name": "Mac OS X"
-  },
-  "subject": "Need a Monitor",
-  "technician": {
-    "name": "John"
-  },
-  "urgency": {
-    "name": "Low"
+    "name": "Mike"
   }
 }
 ```
