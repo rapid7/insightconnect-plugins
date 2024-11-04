@@ -85,7 +85,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                         f"An exception has been raised during retrieval of siem logs. Status code: {error.status_code} "
                         f"Error: {error}, returning state={state}, has_more_pages={has_more_pages}"
                     )
-                    self.check_rate_limit_error(error.response, error.status_code, state)
+                    self.check_rate_limit_error(error, error.response, error.status_code, state)
                     return [], state, has_more_pages, error.status_code, error
 
                 # check if the hashed file list from the previous run is the same as this run
@@ -278,7 +278,9 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             del state[self.RATE_LIMIT_DATETIME]
             self.logger.info(log_msg)
 
-    def check_rate_limit_error(self, response: Response, status_code: int, state: dict) -> None:
+    def check_rate_limit_error(
+        self, error: ApiClientException, response: Response, status_code: int, state: dict
+    ) -> None:
         if status_code == 429:
             rate_limit_response_time = response.headers.get("X-RateLimit-Reset")
             if rate_limit_response_time:
@@ -288,3 +290,5 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             new_run_time_string = Utils.convert_epoch_to_readable(new_run_time)
             self.logger.error(f"A rate limit error has occurred, task will resume after {new_run_time_string}")
             state[self.RATE_LIMIT_DATETIME] = new_run_time
+            error.cause = PluginException.causes.get(PluginException.Preset.RATE_LIMIT)
+            error.assistance = "Task will resume collection of logs after the rate limiting period has expired."

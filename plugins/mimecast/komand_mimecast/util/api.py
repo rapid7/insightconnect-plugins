@@ -172,8 +172,7 @@ class MimecastAPI:
         rate_limit_status_code = 429
         if response.status_code == rate_limit_status_code:
             raise ApiClientException(
-                cause=PluginException.causes.get(PluginException.Preset.RATE_LIMIT),
-                assistance="Task will resume collection of logs after the rate limiting period has expired.",
+                preset=PluginException.Preset.RATE_LIMIT,
                 status_code=rate_limit_status_code,
                 data=response.text,
                 response=response,
@@ -384,6 +383,8 @@ class MimecastAPI:
             )
         except requests.exceptions.RequestException as e:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=e)
+
+        self._check_rate_limiting(request)
 
         try:
             response = request.json()
