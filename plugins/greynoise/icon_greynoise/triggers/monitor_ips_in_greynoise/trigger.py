@@ -10,7 +10,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 class MonitorIpsInGreynoise(insightconnect_plugin_runtime.Trigger):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="greynoise_alert",
+            name="monitor_ips_in_greynoise",
             description=Component.DESCRIPTION,
             input=MonitorIpsInGreynoiseInput(),
             output=MonitorIpsInGreynoiseOutput(),
