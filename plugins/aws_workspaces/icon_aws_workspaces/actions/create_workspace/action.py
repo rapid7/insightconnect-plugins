@@ -101,5 +101,3 @@ class CreateWorkspace(insightconnect_plugin_runtime.Action):
                 )
 
         self.error_handling(payload)
-
-
