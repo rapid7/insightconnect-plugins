@@ -208,7 +208,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
 
     def _check_hash_of_file_names(self, file_name_list: List[str]) -> str:
         file_name_list = sorted(file_name_list)
-        return hashlib.md5(str(file_name_list).encode("utf-8")).hexdigest()  # nosec B303
+        return hashlib.md5(str(file_name_list).encode("utf-8")).hexdigest()  # nosec B324
 
     def _get_filter_time(self, custom_config: Dict[str, int], normal_running_cutoff: bool = False) -> int:
         """
