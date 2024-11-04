@@ -39,7 +39,11 @@ class SearchRules(insightconnect_plugin_runtime.Action):
 
         # Search for IPS rules
         response = requests.post(
-            url, data=json.dumps(data), verify=self.connection.dsm_verify_ssl, headers=self.connection.headers
+            url,
+            data=json.dumps(data),
+            verify=self.connection.dsm_verify_ssl,
+            headers=self.connection.headers,
+            timeout=60,
         )
 
         # Check response errors
@@ -80,7 +84,11 @@ class SearchRules(insightconnect_plugin_runtime.Action):
             # Send Request
             url = f"{self.connection.dsm_url}/api/intrusionpreventionrules/search"
             response = requests.post(
-                url, data=json.dumps(data), verify=self.connection.dsm_verify_ssl, headers=self.connection.headers
+                url,
+                data=json.dumps(data),
+                verify=self.connection.dsm_verify_ssl,
+                headers=self.connection.headers,
+                timeout=60,
             )
 
             # Check response errors

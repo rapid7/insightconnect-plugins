@@ -40,7 +40,7 @@ class ListRules(insightconnect_plugin_runtime.Action):
             url = f"{self.connection.dsm_url}/api/policies/{self.id}/intrusionprevention/rules"
 
         # Send request
-        response = requests.get(url, verify=self.connection.dsm_verify_ssl, headers=self.connection.headers)
+        response = requests.get(url, verify=self.connection.dsm_verify_ssl, headers=self.connection.headers, timeout=60)
 
         self.logger.info(f"url: {response.url}")
         self.logger.info(f"status: {response.status_code}")

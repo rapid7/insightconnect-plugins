@@ -42,7 +42,11 @@ class DeployRules(insightconnect_plugin_runtime.Action):
 
         # Set rules
         response = requests.post(
-            url, data=json.dumps(data), verify=self.connection.dsm_verify_ssl, headers=self.connection.headers
+            url,
+            data=json.dumps(data),
+            verify=self.connection.dsm_verify_ssl,
+            headers=self.connection.headers,
+            timeout=60,
         )
 
         self.logger.info(f"url: {response.url}")
