@@ -67,7 +67,7 @@ class TestMonitorSiemLogs(TestCase):
     def test_monitor_siem_logs_raises_429(self, _mock_data):
         state_params = {"next_token": "force_429", "last_log_line": 0}
         expected_state = state_params.copy()
-        expected_state.update({"rate_limit_datetime": 1641038700.0})
+        expected_state.update({"rate_limit_datetime": 1641039000.0})
         response, new_state, has_more_pages, status_code, error = self.task.run(params={}, state=state_params)
         self.assertEqual(status_code, 429)
         self.assertEqual(response, [])

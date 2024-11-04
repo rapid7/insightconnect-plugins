@@ -186,7 +186,8 @@ class Util:
                         }
                     ],
                 }
-                resp = MockResponseZip(429, b"", {}, json.dumps(json_value))
+                headers = {"X-RateLimit-Reset": 600000}
+                resp = MockResponseZip(429, b"", headers, json.dumps(json_value))
             elif "force_json" in data:
                 resp = MockResponseZip(200, b'{ "type" : "MTA", "data" : ', headers, '{"meta": {"status": 200}}')
             elif "force_single_json_error" in data:

@@ -8,6 +8,7 @@ from typing import Dict, List, Any, Tuple
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import get_time_hours_ago
+from requests import Response
 
 from .schema import MonitorSiemLogsInput, MonitorSiemLogsOutput, MonitorSiemLogsState, Component
 from komand_mimecast.util.constants import IS_LAST_TOKEN_FIELD
@@ -84,7 +85,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                         f"An exception has been raised during retrieval of siem logs. Status code: {error.status_code} "
                         f"Error: {error}, returning state={state}, has_more_pages={has_more_pages}"
                     )
-                    self.check_rate_limit_error(error.status_code, state)
+                    self.check_rate_limit_error(error.response, error.status_code, state)
                     return [], state, has_more_pages, error.status_code, error
 
                 # check if the hashed file list from the previous run is the same as this run
@@ -277,9 +278,13 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             del state[self.RATE_LIMIT_DATETIME]
             self.logger.info(log_msg)
 
-    def check_rate_limit_error(self, status_code: int, state: dict) -> None:
+    def check_rate_limit_error(self, response: Response, status_code: int, state: dict) -> None:
         if status_code == 429:
-            new_run_time = time() + 300
+            rate_limit_response_time = response.headers.get("X-RateLimit-Reset")
+            if rate_limit_response_time:
+                new_run_time = time() + (rate_limit_response_time / 1000)
+            else:
+                new_run_time = time() + 300
             new_run_time_string = Utils.convert_epoch_to_readable(new_run_time)
             self.logger.error(f"A rate limit error has occurred, task will resume after {new_run_time_string}")
             state[self.RATE_LIMIT_DATETIME] = new_run_time
