@@ -17,6 +17,10 @@ This plugin utilizes the [AWS Security Hub API](https://docs.aws.amazon.com/secu
 * AWS secret key for signing requests with the given AWS access key ID
 * AWS region to use for requests
 
+# Supported Product Versions
+
+* 2024-10-31
+
 # Documentation
 
 ## Setup
@@ -25,32 +29,51 @@ Check out the [plugin guide](https://insightconnect.help.rapid7.com/docs/aws-sec
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|aws_access_key_id|credential_secret_key|None|True|The ID of the AWS Access Key to use for authentication with AWS|None|
-|aws_secret_access_key|credential_secret_key|None|True|The AWS Secret Access Key used for signing requests with the given AWS Access Key ID|None|
-|region|string|None|False|AWS Region. This is not required|['us-east-2', 'us-east-1', 'us-west-1', 'us-west-2', 'ca-central-1', 'ap-south-1', 'ap-northeast-2', 'ap-southeast-1', 'ap-southeast-2', 'ap-northeast-1', 'eu-central-1', 'eu-west-1', 'eu-west-2', 'sa-east-1']|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|aws_access_key_id|credential_secret_key|None|True|The ID of the AWS Access Key to use for authentication with AWS|None|PSIETEWUYWWB776HFG|None|None|
+|aws_secret_access_key|credential_secret_key|None|True|The AWS Secret Access Key used for signing requests with the given AWS Access Key ID|None|WwwivfnwvwjsNN229933ksERE8|None|None|
+|region|string|None|False|AWS Region. This is not required|["us-east-2", "us-east-1", "us-west-1", "us-west-2", "ca-central-1", "ap-south-1", "ap-northeast-2", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "eu-central-1", "eu-west-1", "eu-west-2", "sa-east-1"]|us-east-2|None|None|
+
+Example input:
+
+```
+{
+  "aws_access_key_id": "PSIETEWUYWWB776HFG",
+  "aws_secret_access_key": "WwwivfnwvwjsNN229933ksERE8",
+  "region": "us-east-2"
+}
+```
 
 ## Technical Details
 
 ### Actions
 
+
 #### Get Findings
 
-This action is used to lists and describes Security Hub-aggregated findings that are specified by filter attributes.
+This action is used to lists and describes Security Hub-aggregated findings that are specified by filter attributes
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|filters|object|None|False|An object of filters|None|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|filters|object|None|False|An object of filters|None|{}|None|None|
+  
+Example input:
+
+```
+{
+  "filters": {}
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Findings|[]Findings|False|Security Hub-aggregated findings|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|Findings|[]Findings|False|Security Hub-aggregated findings|None|
+  
 Example output:
 
 ```
@@ -111,8 +134,8 @@ Example output:
   ]
 }
 ```
-
 ### Triggers
+
 
 #### Get SQS Message
 
@@ -120,25 +143,44 @@ This trigger is used to poll from a SQS Queue.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|AttributeNames|[]string|['All']|False|A list of attributes that need to be returned along with each message ['All', 'Policy', 'VisibilityTimeout', 'MaximumMessageSize', 'MessageRetentionPeriod', 'ApproximateNumberOfMessages', 'ApproximateNumberOfMessagesNotVisible', 'CreatedTimestamp', 'LastModifiedTimestamp', 'QueueArn', 'ApproximateNumberOfMessagesDelayed', 'DelaySeconds', 'ReceiveMessageWaitTimeSeconds', 'RedrivePolicy', 'FifoQueue', 'ContentBasedDeduplication', 'KmsMasterKeyId', 'KmsDataKeyReusePeriodSeconds']|None|
-|MaxNumberOfMessages|integer|1|False|The maximum number of messages to return. Amazon SQS never returns more messages than this value. Valid values 1 to 10. Default 1|None|
-|MessageAttributeNames|[]string|['All']|False|The name of the message attribute|None|
-|ReceiveRequestAttemptId|string||False|This parameter applies only to FIFO (first-in-first-out) queues|None|
-|VisibilityTimeout|integer|0|False|The duration (in seconds) that the received messages are hidden from subsequent retrieve requests after being retrieved by a ReceiveMessage request|None|
-|WaitTimeSeconds|integer|0|False|The duration (in seconds) for which the call waits for a message to arrive in the queue before returning. If a message is available, the call returns sooner than WaitTimeSeconds|None|
-|interval|integer|5|True|How many seconds to wait until next poll|None|
-|queue_url|string|None|True|URL for the SQS queue|None|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|AttributeNames|[]string|["All"]|False|A list of attributes that need to be returned along with each message ['All', 'Policy', 'VisibilityTimeout', 'MaximumMessageSize', 'MessageRetentionPeriod', 'ApproximateNumberOfMessages', 'ApproximateNumberOfMessagesNotVisible', 'CreatedTimestamp', 'LastModifiedTimestamp', 'QueueArn', 'ApproximateNumberOfMessagesDelayed', 'DelaySeconds', 'ReceiveMessageWaitTimeSeconds', 'RedrivePolicy', 'FifoQueue', 'ContentBasedDeduplication', 'KmsMasterKeyId', 'KmsDataKeyReusePeriodSeconds']|None|All|None|None|
+|MaxNumberOfMessages|integer|1|False|The maximum number of messages to return. Amazon SQS never returns more messages than this value. Valid values 1 to 10. Default 1|None|1|None|None|
+|MessageAttributeNames|[]string|["All"]|False|The name of the message attribute|None|All|None|None|
+|ReceiveRequestAttemptId|string||False|This parameter applies only to FIFO (first-in-first-out) queues|None|b57d1e3f-0a3f-4b67-9bb9-3a6d5f9b4f8c|None|None|
+|VisibilityTimeout|integer|0|False|The duration (in seconds) that the received messages are hidden from subsequent retrieve requests after being retrieved by a ReceiveMessage request|None|0|None|None|
+|WaitTimeSeconds|integer|0|False|The duration (in seconds) for which the call waits for a message to arrive in the queue before returning. If a message is available, the call returns sooner than WaitTimeSeconds|None|0|None|None|
+|interval|integer|5|True|How many seconds to wait until next poll|None|5|None|None|
+|queue_url|string|None|True|URL for the SQS queue|None|https://sqs.us-east-1.amazonaws.com/177715257436/MyQueue|None|None|
+  
+Example input:
+
+```
+{
+  "AttributeNames": [
+    "All"
+  ],
+  "MaxNumberOfMessages": 1,
+  "MessageAttributeNames": [
+    "All"
+  ],
+  "ReceiveRequestAttemptId": "",
+  "VisibilityTimeout": 0,
+  "WaitTimeSeconds": 0,
+  "interval": 5,
+  "queue_url": "https://sqs.us-east-1.amazonaws.com/177715257436/MyQueue"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Message|Message|False|Security Hub message|
-|ResponseMetadata|ResponseMetadata|False|Security Hub response metadata|
-|securityhubevent|securityHubPayload|False|Security Hub event payload|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|Message|Message|False|Security Hub message|None|
+|ResponseMetadata|ResponseMetadata|False|Security Hub response metadata|None|
+|securityhubevent|securityHubPayload|False|Security Hub event payload|None|
+  
 Example output:
 
 ```
@@ -183,17 +225,358 @@ Example output:
   }
 }
 ```
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-### Custom Output Types
+### Custom Types
+  
+**Compliance**
 
-_This plugin does not contain any custom output types._
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Status|string|None|False|Status|None|
+  
+**Malware**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Name|string|None|False|Name|None|
+|Path|string|None|False|Path|None|
+|State|string|None|False|State|None|
+|Type|string|None|False|Type|None|
+  
+**Network**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Destination Domain|string|None|False|Destination domain|None|
+|Destination IPv4|string|None|False|Destination IPv4|None|
+|Destination IPv6|string|None|False|Destination IPv6|None|
+|Destination Port|integer|None|False|Destination port|None|
+|Direction|string|None|False|Direction|None|
+|Protocol|string|None|False|Protocol|None|
+|Source Domain|string|None|False|Source domain|None|
+|Source IPv4|string|None|False|Source IPv4|None|
+|Source IPv6|string|None|False|Source IPv6|None|
+|Source MAC|string|None|False|Source MAC|None|
+|Source Port|integer|None|False|Source port|None|
+  
+**Note**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Text|string|None|False|Text|None|
+|Updated At|string|None|False|Updated At|None|
+|Updated By|string|None|False|Updated by|None|
+  
+**Process**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Launched At|string|None|False|Launched at|None|
+|Name|string|None|False|Name|None|
+|Parent PID|integer|None|False|Parent PID|None|
+|Path|string|None|False|Path|None|
+|PID|integer|None|False|PID|None|
+|Terminated At|string|None|False|Terminated at|None|
+  
+**ProductFields**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|String|string|None|False|String|None|
+  
+**RelatedFindings**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|string|None|False|ID|None|
+|Product ARN|string|None|False|Product ARN|None|
+  
+**Recommendation**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Text|string|None|False|Text|None|
+|URL|string|None|False|URL|None|
+  
+**Remediation**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Recommendation|Recommendation|None|False|Recommendation|None|
+  
+**AwsEc2Instance**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|IAM Instance Profile ARN|string|None|False|IAM instance profile ARN|None|
+|Image ID|string|None|False|Image ID|None|
+|IPv4 Addresses|[]string|None|False|IPv4 addresses|None|
+|IPv6 Addresses|[]string|None|False|IPv6 addresses|None|
+|Keyname|string|None|False|Keyname|None|
+|Launched At|string|None|False|Launched at|None|
+|Subnet ID|string|None|False|Subnet ID|None|
+|Type|string|None|False|Type|None|
+|VPC ID|string|None|False|VPC ID|None|
+  
+**AwsIamAccessKey**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Created At|string|None|False|Created at|None|
+|Status|string|None|False|Status|None|
+|Username|string|None|False|Username|None|
+  
+**AwsS3Bucket**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Owner ID|string|None|False|Owner ID|None|
+|Owner Name|string|None|False|Owner name|None|
+  
+**Container**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Image ID|string|None|False|Image ID|None|
+|Image Name|string|None|False|Image name|None|
+|Launched At|string|None|False|Launched at|None|
+|Name|string|None|False|Name|None|
+  
+**Details**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|AWS EC2 Instance|AwsEc2Instance|None|False|AWS EC2 instance|None|
+|AWS IAM Access Key|AwsIamAccessKey|None|False|AWS IAM access key|None|
+|AWS S3 Bucket|AwsS3Bucket|None|False|AWS S3 bucket|None|
+|Container|Container|None|False|Container|None|
+|Other|ProductFields|None|False|Other|None|
+  
+**Resources**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Details|Details|None|False|Details|None|
+|ID|string|None|False|ID|None|
+|Partition|string|None|False|Partition|None|
+|Region|string|None|False|Region|None|
+|Tags|ProductFields|None|False|Tags|None|
+|Type|string|None|False|Type|None|
+  
+**Severity**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Normalized|integer|None|False|Normalized|None|
+|Product|integer|None|False|Product|None|
+  
+**ThreatIntelIndicators**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Category|string|None|False|Category|None|
+|Last Observed At|string|None|False|Last observed at|None|
+|Source|string|None|False|Source|None|
+|Source URL|string|None|False|Source URL|None|
+|Type|string|None|False|Type|None|
+|Value|string|None|False|Value|None|
+  
+**Findings**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|AWS account ID|string|None|False|AWS account ID|None|
+|Compliance|Compliance|None|False|Compliance|None|
+|Confidence|integer|None|False|Confidence|None|
+|Created At|string|None|False|Created at|None|
+|Criticality|integer|None|False|Criticality|None|
+|Description|string|None|False|Description|None|
+|First Observed At|string|None|False|First observed at|None|
+|Generator ID|string|None|False|Generator ID|None|
+|ID|string|None|False|ID|None|
+|Last Observed At|string|None|False|Last observed at|None|
+|Malware|[]Malware|None|False|Malware|None|
+|Network|Network|None|False|Network|None|
+|Note|Note|None|False|Note|None|
+|Process|Process|None|False|Process|None|
+|Product ARN|string|None|False|Product ARN|None|
+|Product Fields|ProductFields|None|False|Product fields|None|
+|Record State|string|None|False|Record state|None|
+|Related Findings|[]RelatedFindings|None|False|Related findings|None|
+|Remediation|Remediation|None|False|Remediation|None|
+|Resources|[]Resources|None|False|Resources|None|
+|Schema Version|string|None|False|Schema version|None|
+|Severity|Severity|None|False|Severity|None|
+|Source URL|string|None|False|Source URL|None|
+|Threat Intel Indicators|[]ThreatIntelIndicators|None|False|Threat intel indicators|None|
+|Title|string|None|False|Title|None|
+|Types|[]string|None|False|Types|None|
+|Updated At|string|None|False|Updated at|None|
+|User-defined Fields|ProductFields|None|False|User-defined fields|None|
+|Verification State|string|None|False|Verification state|None|
+|Workflow State|string|None|False|Workflow state|None|
+  
+**Attributes**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Sent Timestamp|string|None|False|Sent timestamp|None|
+  
+**Author**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Data Type|string|None|False|Data type|None|
+|String Value|string|None|False|String value|None|
+  
+**MessageAttributes**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Author|Author|None|False|Author|None|
+|Title|Author|None|False|Title|None|
+|Weeks On|Author|None|False|Weeks on|None|
+  
+**Message**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Attributes|Attributes|None|False|Attributes|None|
+|Body|string|None|False|Body|None|
+|MD5 of Body|string|None|False|MD5 of body|None|
+|MD5 of Message attributes|string|None|False|MD5 of message attributes|None|
+|Message Attributes|MessageAttributes|None|False|Message attributes|None|
+|Message ID|string|None|False|Message ID|None|
+|Receipt Handle|string|None|False|Receipt handle|None|
+  
+**HTTPHeaders**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Content Length|string|None|False|Content length|None|
+|Content Type|string|None|False|Content type|None|
+|Date|string|None|False|Date|None|
+|Amazon Request ID|string|None|False|X-amzn-requestid|None|
+  
+**ResponseMetadata**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|HTTP Headers|HTTPHeaders|None|False|HTTP headers|None|
+|HTTP Status Code|integer|None|False|HTTP status code|None|
+|Request ID|string|None|False|Request ID|None|
+|Retry Attempts|integer|None|False|Retry attempts|None|
+  
+**SHCompliance**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Status|string|None|False|Status|None|
+  
+**SHProductFields**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Recommendationurl|string|None|False|Recommendationurl|None|
+|Recordstate|string|None|False|Recordstate|None|
+|Relatedawsresources:0/Name|string|None|False|Relatedawsresources:0/name|None|
+|Relatedawsresources:0/Type|string|None|False|Relatedawsresources:0/type|None|
+|Ruleid|string|None|False|Ruleid|None|
+|Standardsguidearn|string|None|False|Standardsguidearn|None|
+|Standardsguidesubscriptionarn|string|None|False|Standardsguidesubscriptionarn|None|
+|Aws/Securityhub/Companyname|string|None|False|Aws/securityhub/companyname|None|
+|Aws/Securityhub/Findingid|string|None|False|Aws/securityhub/findingid|None|
+|Aws/Securityhub/Productname|string|None|False|Aws/securityhub/productname|None|
+|Aws/Securityhub/Severitylabel|string|None|False|Aws/securityhub/severitylabel|None|
+  
+**SHRecommendation**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Text|string|None|False|Text|None|
+|URL|string|None|False|URL|None|
+  
+**SHRemediation**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Recommendation|SHRecommendation|None|False|Recommendation|None|
+  
+**SHResources**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Id|string|None|False|Id|None|
+|Partition|string|None|False|Partition|None|
+|Region|string|None|False|Region|None|
+|Type|string|None|False|Type|None|
+  
+**SHSeverity**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Normalized|integer|None|False|Normalized|None|
+|Product|integer|None|False|Product|None|
+  
+**findings**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Awsaccountid|string|None|False|Awsaccountid|None|
+|Compliance|SHCompliance|None|False|Compliance|None|
+|Createdat|string|None|False|Createdat|None|
+|Description|string|None|False|Description|None|
+|Firstobservedat|string|None|False|Firstobservedat|None|
+|Generatorid|string|None|False|Generatorid|None|
+|Id|string|None|False|Id|None|
+|Lastobservedat|string|None|False|Lastobservedat|None|
+|Productarn|string|None|False|Productarn|None|
+|Productfields|SHProductFields|None|False|Productfields|None|
+|Recordstate|string|None|False|Recordstate|None|
+|Remediation|SHRemediation|None|False|Remediation|None|
+|Resources|[]SHResources|None|False|Resources|None|
+|Schemaversion|string|None|False|Schemaversion|None|
+|Severity|SHSeverity|None|False|Severity|None|
+|Title|string|None|False|Title|None|
+|Types|[]string|None|False|Types|None|
+|Updatedat|string|None|False|Updatedat|None|
+|Workflowstate|string|None|False|Workflowstate|None|
+|Approximatearrivaltimestamp|float|None|False|Approximatearrivaltimestamp|None|
+|Updatedat|string|None|False|Updatedat|None|
+  
+**detail**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Actiondescription|string|None|False|Actiondescription|None|
+|Actionname|string|None|False|Actionname|None|
+|Findings|[]findings|None|False|Findings|None|
+  
+**securityHubPayload**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Account|string|None|False|Account|None|
+|Detail|detail|None|False|Detail|None|
+|Detail-Type|string|None|False|Detail-type|None|
+|Id|string|None|False|Id|None|
+|Region|string|None|False|Region|None|
+|Resources|[]string|None|False|Resources|None|
+|Source|string|None|False|Source|None|
+|Time|string|None|False|Time|None|
+|Version|string|None|False|Version|None|
+
 
 ## Troubleshooting
-
-This plugin does not contain any troubleshooting information.
+  
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 2.0.4 - Bumping requirements.txt | SDK bump to 6.1.4
 * 2.0.3 - Update `docs_url` in plugin spec with a new link to [plugin setup guide](https://docs.rapid7.com/insightconnect/aws-security-hub/)
 * 2.0.2 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/aws-security-hub)
 * 2.0.1 - Removed unused variables
@@ -202,9 +585,11 @@ This plugin does not contain any troubleshooting information.
 
 # Links
 
+* [AWS Security Hub](https://aws.amazon.com/security-hub/)
+
 ## References
 
-* [AWS Security Hub](https://aws.amazon.com/security-hub/)
+* [ AWS Security Hub](https://aws.amazon.com/security-hub/)
 * [AWS Security Hub API](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Operations.html)
 * [Boto3](https://github.com/boto/boto3)
 * [InsightConnect Plugin Guide](https://docs.rapid7.com/insightconnect/aws-security-hub/)
