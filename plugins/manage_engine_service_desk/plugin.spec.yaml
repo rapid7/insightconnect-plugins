@@ -4,7 +4,8 @@ products: [insightconnect]
 name: manage_engine_service_desk
 title: Manage Engine Service Desk
 description: ManageEngine's Service Desk has the ability to centralize and capture reported issues, allowing security and IT administrators to track and manage all incidents in an easy manner. The numerous help desk tickets raised are organized and tracked in the Requests module. The Requests module enables you to handle tickets promptly, assign tickets to technicians, merge similar requests, and so on
-version: 1.0.1
+version: 1.0.2
+connection_version: 1
 supported_versions: ["ServiceDesk Plus 13008"]
 vendor: rapid7
 support: rapid7
@@ -17,10 +18,32 @@ resources:
 tags:
 - Manage Engine
 - Service Desk
+key_features:
+  - "Manage requests - add, edit, add resolution, assign, close, delete, pickup, get details and get list of requests"
+  - "Manage request notes - add, edit, delete, get list of notes"
+sdk:
+  type: full
+  version: 6.1.4
+  user: nobody
+links:
+  - "[Manage Engine Service Desk](https://manageengine.com/products/service-desk)"
+references:
+  - "[Manage Engine Service Desk API Docs](https://www.manageengine.com/products/service-desk/sdpod-v3-api)"
+requirements:
+  - "The authentication between ServiceDesk Plus and an Insight Connect application is through an API key. A unique key is generated for a technician with login permission in the ServiceDesk Plus application."
+  - "To generate the API Key, click Admin -> Technicians under User block."
+  - "If you want to generate the API key for an existing technician, then click the edit icon beside the technician."
+  - "If you want to generate the API key for a new technician, click Add New Technician link, enter the technician details and provide login permission."
+  - "Click Generate link under the API key details block. You can select a time frame for the key to expire using the calendar icon or simply retain the same key indefinitely."
+  - "If a key is already generated for the technician, a Re-generate link appears."
 hub_tags:
   use_cases: [user_management]
   keywords: [management]
   features: []
+version_history:
+  - "1.0.2 - Bumping requirements.txt | SDK bump to 6.1.4"
+  - "1.0.1 - Fix `int` conversion issue in `Get List Request` and `Get Request` actions"
+  - "1.0.0 - Initial plugin - Create actions: `Add Request`, `Add Request Note`, `Add Resolution`, `Assign Request`, `Close Request`, `Delete Request`, `Delete Request Note`, `Edit Request`, `Edit Request Note`, `Get List Request`, `Get List Request Notes`, `Get Request`, `Get Resolution`, `Pickup Request`"
 types:
   request_type:
     id:
@@ -610,7 +633,7 @@ actions:
         example: 2000
   add_request:
     title: Add Request
-    description: Add a new request. Subject and requester parameters are required, others are optional. In every parameter containing `ID` and `Name` fields please provide at least one of them
+    description: This action is used to add a new request. Subject and requester parameters are required, others are optional. In every parameter containing `ID` and `Name` fields please provide at least one of them
     input:
       subject:
         title: Subject
