@@ -11,7 +11,9 @@ from icon_carbon_black_cloud.tasks.monitor_alerts.task import (
     LAST_OBSERVATION_JOB,
     LAST_OBSERVATION_TIME,
     LAST_ALERT_TIME,
+    OBSERVATION_QUERY_END_TIME,
 )
+from icon_carbon_black_cloud.util.constants import OBSERVATION_TIME_FIELD
 from icon_carbon_black_cloud.util.exceptions import RateLimitException
 
 from util import (
@@ -25,6 +27,8 @@ from util import (
 from responses.task_test_data import (
     task_first_run,
     task_first_run_output,
+    task_first_run_output_within_window,
+    task_first_run_output_with_offset,
     task_subsequent_output,
     task_rate_limit_getting_observations,
     task_subsequent_output_no_observation_job,
@@ -35,6 +39,8 @@ from responses.task_test_data import (
     observation_job_exceeded,
     observation_job_not_finished_but_parsed,
     task_404_on_second_request,
+    no_logs_in_window_back,
+    no_logs_in_window,
 )
 
 import os
@@ -61,15 +67,15 @@ class TestMonitorAlerts(TestCase):
             [
                 "first run",
                 task_first_run.copy(),
-                ("observation_id", "first_alerts", "first_observations"),
-                task_first_run_output,
+                ("observation_id", "first_alerts", "first_observations_within_window"),
+                task_first_run_output_within_window,
                 4,  # all data in mocked responses are returned as no hashes to dedupe
             ],
             [
                 "first run - has more pages",
                 task_first_run.copy(),
                 ("observation_id", "alerts_more_pages", "first_observations"),
-                task_first_run_output,
+                task_first_run_output_with_offset,
                 4,  # all data in mocked responses are returned as no hashes to dedupe
             ],
             [
@@ -101,11 +107,18 @@ class TestMonitorAlerts(TestCase):
                 1,  # 1 alert after dedupe and 0 observations as job not finished
             ],
             [
-                "subsequent run - observations not finished but job time has exceeded",
+                "subsequent run - observations not finished but job time has exceeded - has more pages",
                 observation_job_exceeded.copy(),
                 ("first_alerts", "observation_not_finished", "not_used_response"),
                 observation_job_not_finished_but_parsed,
                 4,  # all 2 alerts and the 2 observations
+            ],
+            [
+                "subsequent run - no logs - has more pages",
+                no_logs_in_window.copy(),
+                ("empty_response", "empty_response", "empty_response"),
+                no_logs_in_window_back.copy(),
+                0,
             ],
         ]
     )
@@ -129,6 +142,7 @@ class TestMonitorAlerts(TestCase):
         response, new_state, has_more_pages, _status_code, _exception = self.task.run(state=test_state)
 
         expected_has_more_pages = "has more pages" in test
+        self.maxDiff = None
         self.assertEqual(expected_has_more_pages, has_more_pages)
         self.assertEqual(logs, len(response))
         self.assertDictEqual(state_output, new_state)
@@ -341,6 +355,15 @@ class TestMonitorAlerts(TestCase):
                 },
                 {LAST_OBSERVATION_TIME: "2024-04-25T12:00:35.000000Z", LAST_ALERT_TIME: "2024-04-20T10:45:55.000000Z"},
             ],
+            [
+                {LAST_OBSERVATION_TIME: "2024-04-25T10:35:00.000000Z", LAST_ALERT_TIME: "2024-04-25T15:25:00.000000Z"},
+                {OBSERVATION_QUERY_END_TIME: 1},
+                {
+                    LAST_OBSERVATION_TIME: "2024-04-25T10:35:00.000000Z",
+                    LAST_ALERT_TIME: "2024-04-25T15:25:00.000000Z",
+                    OBSERVATION_QUERY_END_TIME: "2024-04-25T11:35:00.000000Z",
+                },
+            ],
         ],
     )
     def test_custom_config_timings(
@@ -362,9 +385,13 @@ class TestMonitorAlerts(TestCase):
         # check we called the request with the correct parameters passed from CPS
         requested_observation_time = mock_req.call_args_list[0].kwargs.get("json").get("time_range").get("start")
         requested_alert_time = mock_req.call_args_list[1].kwargs.get("json").get("time_range").get("start")
+        requested_end_time = mock_req.call_args_list[1].kwargs.get("json").get("time_range").get("end")
 
         self.assertEqual(exp_dates[LAST_OBSERVATION_TIME], requested_observation_time)
         self.assertEqual(exp_dates[LAST_ALERT_TIME], requested_alert_time)
+
+        if exp_dates.get(OBSERVATION_TIME_FIELD):
+            self.assertEqual(exp_dates[OBSERVATION_QUERY_END_TIME], requested_end_time)
 
     @parameterized.expand(
         [
