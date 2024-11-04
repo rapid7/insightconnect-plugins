@@ -703,7 +703,7 @@ triggers:
         required: true
         example: 3600
       ip_list:
-        title: List of IPs
+        title: List of IPs to Monitor
         description: List of IP Addresses or CIDR blocks to check for scanning activity
         type: "[]string"
         required: true
@@ -717,10 +717,10 @@ triggers:
         example: 1
     output:
       alert_ip_list:
-        title: List of IPs
+        title: List of IPs found Scanning
         description: The list of IPs that were found scanning
         type: "[]string"
-        required: true
+        required: false
         example: "1.2.3.4,5.2.3.5"
 actions:
   context_lookup:

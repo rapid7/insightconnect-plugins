@@ -1,5 +1,5 @@
 {
-	"spec": "5a2b9b8e6dabb195961323fef9cfdd57",
+	"spec": "5886e242f0d9793c6fcf377d9c1a8b29",
 	"manifest": "9d3f4a959fda3eb80588c86648597b40",
 	"setup": "7d0148b4efc7745f17003a77e9e73c55",
 	"schemas": [
@@ -45,7 +45,7 @@
 		},
 		{
 			"identifier": "monitor_ips_in_greynoise/schema.py",
-			"hash": "000436d053bd25720271c4cedc0d09c2"
+			"hash": "0c689d459bff3330a682b006cb5e6876"
 		}
 	]
 }

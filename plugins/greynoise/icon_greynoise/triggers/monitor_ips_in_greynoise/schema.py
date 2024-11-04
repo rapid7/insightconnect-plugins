@@ -32,7 +32,7 @@ class MonitorIpsInGreynoiseInput(insightconnect_plugin_runtime.Input):
     },
     "ip_list": {
       "type": "array",
-      "title": "List of IPs",
+      "title": "List of IPs to Monitor",
       "description": "List of IP Addresses or CIDR blocks to check for scanning activity",
       "items": {
         "type": "string"
@@ -68,7 +68,7 @@ class MonitorIpsInGreynoiseOutput(insightconnect_plugin_runtime.Output):
   "properties": {
     "alert_ip_list": {
       "type": "array",
-      "title": "List of IPs",
+      "title": "List of IPs found Scanning",
       "description": "The list of IPs that were found scanning",
       "items": {
         "type": "string"
@@ -76,9 +76,6 @@ class MonitorIpsInGreynoiseOutput(insightconnect_plugin_runtime.Output):
       "order": 1
     }
   },
-  "required": [
-    "alert_ip_list"
-  ],
   "definitions": {}
 }
     """)

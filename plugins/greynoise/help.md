@@ -631,7 +631,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|alert_ip_list|[]string|True|The list of IPs that were found scanning|1.2.3.4,5.2.3.5|
+|alert_ip_list|[]string|False|The list of IPs that were found scanning|1.2.3.4,5.2.3.5|
   
 Example output:
 
