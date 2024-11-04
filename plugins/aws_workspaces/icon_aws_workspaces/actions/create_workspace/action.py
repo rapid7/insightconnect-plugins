@@ -15,43 +15,37 @@ class CreateWorkspace(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        directory_id = params.get(Input.DIRECTORY_ID)
-        username = params.get(Input.USERNAME)
-        bundle_id = params.get(Input.BUNDLE_ID)
-        volume_encryption_key = params.get(Input.VOLUME_ENCRYPTION_KEY)
-        user_volume_encryption_enabled = params.get(Input.USER_VOLUME_ENCRYPTION_ENABLED)
-        root_volume_encryption_enabled = params.get(Input.ROOT_VOLUME_ENCRYPTION_ENABLED)
-        workspace_properties = params.get(Input.WORKSPACE_PROPERTIES)
-        tags = params.get(Input.TAGS)
         result = {}
 
         payload = {
-            "DirectoryId": directory_id,
-            "UserName": username,
-            "BundleId": bundle_id,
-            "Tags": tags,
+            "DirectoryId": params.get(Input.DIRECTORY_ID),
+            "UserName": params.get(Input.USERNAME),
+            "BundleId": params.get(Input.BUNDLE_ID),
+            "Tags": params.get(Input.TAGS),
             "WorkspaceProperties": {
-                "ComputeTypeName": workspace_properties["compute_type_name"],
-                "RootVolumeSizeGib": workspace_properties["root_volume_size"],
-                "RunningMode": workspace_properties["running_mode"],
-                "RunningModeAutoStopTimeoutInMinutes": workspace_properties["running_mode_auto_stop_time_out"],
-                "UserVolumeSizeGib": workspace_properties["user_volume_size"],
+                "ComputeTypeName": params.get(Input.WORKSPACE_PROPERTIES)["compute_type_name"],
+                "RootVolumeSizeGib": params.get(Input.WORKSPACE_PROPERTIES)["root_volume_size"],
+                "RunningMode": params.get(Input.WORKSPACE_PROPERTIES)["running_mode"],
+                "RunningModeAutoStopTimeoutInMinutes": params.get(Input.WORKSPACE_PROPERTIES)[
+                    "running_mode_auto_stop_time_out"
+                ],
+                "UserVolumeSizeGib": params.get(Input.WORKSPACE_PROPERTIES)["user_volume_size"],
             },
         }
 
-        if user_volume_encryption_enabled and root_volume_encryption_enabled:
+        if params.get(Input.USER_VOLUME_ENCRYPTION_ENABLED) and params.get(Input.ROOT_VOLUME_ENCRYPTION_ENABLED):
             raise PluginException(
                 cause="Both user and root volume encrypted flags are set.",
                 assistance="Only one of the encryption flags can be set.",
             )
 
-        if user_volume_encryption_enabled:
-            payload["UserVolumeEncryptionEnabled"] = user_volume_encryption_enabled
-        if root_volume_encryption_enabled:
-            payload["RootVolumeEncryptionEnabled"] = root_volume_encryption_enabled
-        if user_volume_encryption_enabled or root_volume_encryption_enabled:
-            if volume_encryption_key:
-                payload["VolumeEncryptionKey"] = volume_encryption_key
+        if params.get(Input.USER_VOLUME_ENCRYPTION_ENABLED):
+            payload["UserVolumeEncryptionEnabled"] = params.get(Input.USER_VOLUME_ENCRYPTION_ENABLED)
+        if params.get(Input.ROOT_VOLUME_ENCRYPTION_ENABLED):
+            payload["RootVolumeEncryptionEnabled"] = params.get(Input.ROOT_VOLUME_ENCRYPTION_ENABLED)
+        if params.get(Input.USER_VOLUME_ENCRYPTION_ENABLED) or params.get(Input.ROOT_VOLUME_ENCRYPTION_ENABLED):
+            if params.get(Input.VOLUME_ENCRYPTION_KEY):
+                payload["VolumeEncryptionKey"] = params.get(Input.VOLUME_ENCRYPTION_KEY)
             else:
                 raise PluginException(
                     cause="Invalid value for Volume Encryption Key input.",
