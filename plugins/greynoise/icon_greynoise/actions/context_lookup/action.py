@@ -17,22 +17,23 @@ class ContextLookup(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        viz_base_url = "https://viz.greynoise.io/ip/"
         try:
             resp = self.connection.gn_client.ip(params.get(Input.IP_ADDRESS))
             if resp["seen"]:
                 resp["first_seen"] = pendulum.parse(resp["first_seen"]).to_rfc3339_string()
                 resp["last_seen"] = pendulum.parse(resp["last_seen"]).to_rfc3339_string()
-                resp["viz_url"] = "https://viz.greynoise.io/ip/" + str(params.get(Input.IP_ADDRESS))
+                resp["viz_url"] = viz_base_url + str(params.get(Input.IP_ADDRESS))
 
-        except RequestFailure as e:
+        except RequestFailure as error:
             raise PluginException(
-                cause=f"API responded with ERROR: {e.args[0]} - {e.args[1]}.",
+                cause=f"API responded with ERROR: {error.args[0]} - {error.args[1]}.",
                 assistance="Please check error and try again.",
             )
 
-        except ValueError as e:
+        except ValueError as error:
             raise PluginException(
-                cause=f"Input does not appear to be valid: {Input.IP_ADDRESS}. Error Message: {e.args[0]}",
+                cause=f"Input does not appear to be valid: {Input.IP_ADDRESS}. Error Message: {error.args[0]}",
                 assistance="Please provide a valid public IPv4 address.",
             )
 

@@ -29,15 +29,15 @@ class CommunityLookup(insightconnect_plugin_runtime.Action):
             if resp["noise"] or resp["riot"]:
                 resp["last_seen"] = pendulum.parse(resp["last_seen"]).to_rfc3339_string()
 
-        except RequestFailure as e:
+        except RequestFailure as error:
             raise PluginException(
-                cause=f"API responded with ERROR: {e.args[0]} - {e.args[1]}.",
+                cause=f"API responded with ERROR: {error.args[0]} - {error.args[1]}.",
                 assistance="Please check error and try again.",
             )
 
-        except ValueError as e:
+        except ValueError as error:
             raise PluginException(
-                cause=f"Input does not appear to be valid: {Input.IP_ADDRESS}. Error Message: {e.args[0]}",
+                cause=f"Input does not appear to be valid: {Input.IP_ADDRESS}. Error Message: {error.args[0]}",
                 assistance="Please provide a valid public IPv4 address.",
             )
 

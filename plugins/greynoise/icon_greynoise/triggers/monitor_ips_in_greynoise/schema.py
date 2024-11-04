@@ -17,7 +17,7 @@ class Output:
     ALERT_IP_LIST = "alert_ip_list"
 
 
-class GreynoiseAlertInput(insightconnect_plugin_runtime.Input):
+class MonitorIpsInGreynoiseInput(insightconnect_plugin_runtime.Input):
     schema = json.loads(r"""
    {
   "type": "object",
@@ -60,7 +60,7 @@ class GreynoiseAlertInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class GreynoiseAlertOutput(insightconnect_plugin_runtime.Output):
+class MonitorIpsInGreynoiseOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads(r"""
    {
   "type": "object",

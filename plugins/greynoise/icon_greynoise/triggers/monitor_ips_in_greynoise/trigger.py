@@ -1,19 +1,19 @@
 import insightconnect_plugin_runtime
 import time
-from .schema import GreynoiseAlertInput, GreynoiseAlertOutput, Input, Output, Component
+from .schema import MonitorIpsInGreynoiseInput, MonitorIpsInGreynoiseOutput, Input, Output, Component
 
 # Custom imports below
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class GreynoiseAlert(insightconnect_plugin_runtime.Trigger):
+class MonitorIpsInGreynoise(insightconnect_plugin_runtime.Trigger):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="greynoise_alert",
             description=Component.DESCRIPTION,
-            input=GreynoiseAlertInput(),
-            output=GreynoiseAlertOutput(),
+            input=MonitorIpsInGreynoiseInput(),
+            output=MonitorIpsInGreynoiseOutput(),
         )
 
     def run(self, params={}):
@@ -36,13 +36,6 @@ class GreynoiseAlert(insightconnect_plugin_runtime.Trigger):
                         query_ips = query_ips + " OR " + str(ip)
                         counter = counter + 1
                 query_ips = query_ips + ")"
-                try:
-                    int(lookback_days)
-                except Exception:
-                    raise PluginException(
-                        cause=f"Lookback Days value is not a valid integer.",
-                        assistance="Please check the input and try again.",
-                    )
 
                 self.logger.info("Checking GreyNoise for IP list")
                 query = query_ips + " last_seen:" + str(lookback_days) + "d"
@@ -58,9 +51,9 @@ class GreynoiseAlert(insightconnect_plugin_runtime.Trigger):
                             Output.ALERT_IP_LIST: alert_ip_list,
                         }
                     )
-            except Exception as e:
+            except Exception as error:
                 raise PluginException(
-                    cause=f"Plugin exception occurred: {e}",
+                    cause=f"Plugin exception occurred: {error}",
                     assistance="Please check the input and try again.",
                 )
             time.sleep(interval)

@@ -1,0 +1,37 @@
+{
+  "id": "CVE-1234-1234",
+  "details": {
+    "vulnerability_name": "name",
+    "vulnerability_description": "description",
+    "cve_cvss_score": 8.1,
+    "product": "product",
+    "vendor": "vendor",
+    "published_to_nist_nvd": true
+  },
+  "timeline": {
+    "cve_published_date": "2020-07-08T17:15:10Z",
+    "cve_last_updated_date": "2020-07-14T17:44:41Z",
+    "first_known_published_date": "",
+    "cisa_kev_date_added": ""
+  },
+  "exploitation_details": {
+    "attack_vector": "NETWORK",
+    "exploit_found": false,
+    "exploitation_registered_in_kev": false,
+    "epss_score": 0
+  },
+  "exploitation_stats": {
+    "number_of_available_exploits": 0,
+    "number_of_threat_actors_exploiting_vulnerability": 0,
+    "number_of_botnets_exploiting_vulnerability": 0
+  },
+  "exploitation_activity": {
+    "activity_seen": true,
+    "benign_ip_count_1d": 0,
+    "benign_ip_count_10d": 0,
+    "benign_ip_count_30d": 0,
+    "threat_ip_count_1d": 5,
+    "threat_ip_count_10d": 20,
+    "threat_ip_count_30d": 53
+  }
+}

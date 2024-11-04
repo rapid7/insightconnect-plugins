@@ -21,15 +21,15 @@ class SimilarLookup(insightconnect_plugin_runtime.Action):
         try:
             resp = self.connection.gn_client.similar(ip_address)
 
-        except RequestFailure as e:
+        except RequestFailure as error:
             raise PluginException(
-                cause=f"API responded with ERROR: {e.args[0]} - {e.args[1]}.",
+                cause=f"API responded with ERROR: {error.args[0]} - {error.args[1]}.",
                 assistance="Please check error and try again.",
             )
 
-        except ValueError as e:
+        except ValueError as error:
             raise PluginException(
-                cause=f"Input does not appear to be valid: {ip_address}. Error Message: {e.args[0]}",
+                cause=f"Input does not appear to be valid: {ip_address}. Error Message: {error.args[0]}",
                 assistance="Please provide a valid IPv4 Address.",
             )
 

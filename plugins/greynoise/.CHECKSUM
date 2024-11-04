@@ -1,6 +1,6 @@
 {
-	"spec": "6f4d58148ddb391f6bd38c979b1586f3",
-	"manifest": "a3a078aff38b7dd7cb3d26c2d506a97c",
+	"spec": "5a2b9b8e6dabb195961323fef9cfdd57",
+	"manifest": "9d3f4a959fda3eb80588c86648597b40",
 	"setup": "7d0148b4efc7745f17003a77e9e73c55",
 	"schemas": [
 		{
@@ -44,8 +44,8 @@
 			"hash": "f7a3e43e3b17d8e2059b6499b67e7e5a"
 		},
 		{
-			"identifier": "greynoise_alert/schema.py",
-			"hash": "49ce1f4f78deafa4dd101f11024520a4"
+			"identifier": "monitor_ips_in_greynoise/schema.py",
+			"hash": "000436d053bd25720271c4cedc0d09c2"
 		}
 	]
 }

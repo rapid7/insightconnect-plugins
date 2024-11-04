@@ -23,9 +23,9 @@ class GetTagDetails(insightconnect_plugin_runtime.Action):
             for tag in resp["metadata"]:
                 if tag["name"].lower() == tag_name:
                     output = tag
-        except RequestFailure as e:
+        except RequestFailure as error:
             raise PluginException(
-                cause=f"API responded with ERROR: {e.args[0]} - {e.args[1]}.",
+                cause=f"API responded with ERROR: {error.args[0]} - {error.args[1]}.",
                 assistance="Please check error and try again.",
             )
 
