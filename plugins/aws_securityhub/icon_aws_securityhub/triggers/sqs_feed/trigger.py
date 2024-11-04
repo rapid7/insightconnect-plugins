@@ -1,14 +1,14 @@
-import komand
+import insightconnect_plugin_runtime
 import time
 from .schema import SqsFeedInput, SqsFeedOutput, Input, Output, Component
 
 import json
 
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class SqsFeed(komand.Trigger):
+class SqsFeed(insightconnect_plugin_runtime.Trigger):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="sqs_feed",
@@ -52,7 +52,7 @@ class SqsFeed(komand.Trigger):
         if set(attrNames) - valid_attrNames:
             invalid_attrnames = set(attrNames) - valid_attrNames
             raise PluginException(
-                cause=f"Invalid attribute names",
+                cause="Invalid attribute names",
                 assistance=f"""Attribute Names: {invalid_attrnames} and invalid \n Valid Attribute Names: 'All','Policy','VisibilityTimeout','MaximumMessageSize','MessageRetentionPeriod','ApproximateNumberOfMessages','ApproximateNumberOfMessagesNotVisible','CreatedTimestamp','LastModifiedTimestamp','QueueArn','ApproximateNumberOfMessagesDelayed','DelaySeconds','ReceiveMessageWaitTimeSeconds', 'RedrivePolicy', 'FifoQueue', 'ContentBasedDeduplication', 'KmsMasterKeyId', 'KmsDataKeyReusePeriodSeconds'""",
             )
 
@@ -77,7 +77,7 @@ class SqsFeed(komand.Trigger):
                             security_hub_event = json.loads(message["Body"])
                         except Exception as e:
                             raise PluginException(
-                                cause=f"Invalid attribute names",
+                                cause="Invalid attribute names",
                                 assistance=f"An unexpected event occurred when processing the Security Hub Event: {e}",
                             )
 

@@ -3,11 +3,25 @@ extension: plugin
 products: [insightconnect]
 name: aws_securityhub
 title: "AWS Security Hub"
-description: This plugin utilizes AWS Security Hub to lists and describes security hub-aggregated findings and retrieve SQS messages
-version: 2.0.3
+description: "This plugin utilizes AWS Security Hub to lists and describes security hub-aggregated findings and retrieve SQS messages"
+version: 2.0.4
+connection_version: 2
+supported_versions: ["2024-10-31"]
 vendor: rapid7
 support: rapid7
 status: []
+sdk:
+  type: slim
+  version: 6.1.4
+  user: nobody
+key_features:
+  - "Lists and describes Security Hub-aggregated findings"
+  - "Get SQS messages"
+requirements:
+  - "AWS account"
+  - "AWS access key ID for authentication"
+  - "AWS secret key for signing requests with the given AWS access key ID"
+  - "AWS region to use for requests"
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/aws_securityhub
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -21,7 +35,20 @@ hub_tags:
   use_cases: [threat_detection_and_response, data_utility]
   keywords: [aws, securityhub, alerts]
   features: []
-
+links:
+  - "[AWS Security Hub](https://aws.amazon.com/security-hub/)"
+references:
+    - "[ AWS Security Hub](https://aws.amazon.com/security-hub/)"
+    - "[AWS Security Hub API](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Operations.html)"
+    - "[Boto3](https://github.com/boto/boto3)"
+    - "[InsightConnect Plugin Guide](https://docs.rapid7.com/insightconnect/aws-security-hub/)"
+version_history:
+  - "2.0.4 - Bumping requirements.txt | SDK bump to 6.1.4"
+  - "2.0.3 - Update `docs_url` in plugin spec with a new link to [plugin setup guide](https://docs.rapid7.com/insightconnect/aws-security-hub/)"
+  - "2.0.2 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/aws-security-hub)"
+  - "2.0.1 - Removed unused variables"
+  - "2.0.0 - New spec and help.md format for the Extension Library | Variable names updated as acronyms"
+  - "1.0.0 - Initial plugin"
 types:
   Compliance:
     Status:
@@ -932,12 +959,14 @@ connection:
     description: The ID of the AWS Access Key to use for authentication with AWS
     type: credential_secret_key
     required: true
+    example: PSIETEWUYWWB776HFG
   aws_secret_access_key:
     title: AWS Secret Access Key
     description: "The AWS Secret Access Key used for signing requests with the given
       AWS Access Key ID"
     type: credential_secret_key
     required: true
+    example: WwwivfnwvwjsNN229933ksERE8
   region:
     description: AWS Region. This is not required
     type: string
@@ -957,6 +986,7 @@ connection:
     - eu-west-2
     - sa-east-1
     required: false
+    example: us-east-2
 
 actions:
   get_findings:
@@ -968,6 +998,7 @@ actions:
         description: An object of filters
         type: object
         required: false
+        example: {}
     output:
       Findings:
         title: Findings
@@ -985,48 +1016,56 @@ triggers:
         description: URL for the SQS queue
         type: string
         required: true
+        example: https://sqs.us-east-1.amazonaws.com/177715257436/MyQueue
       AttributeNames:
         title: Attribute Names
         description: A list of attributes that need to be returned along with each message ['All', 'Policy', 'VisibilityTimeout', 'MaximumMessageSize', 'MessageRetentionPeriod', 'ApproximateNumberOfMessages', 'ApproximateNumberOfMessagesNotVisible', 'CreatedTimestamp', 'LastModifiedTimestamp', 'QueueArn', 'ApproximateNumberOfMessagesDelayed', 'DelaySeconds', 'ReceiveMessageWaitTimeSeconds', 'RedrivePolicy', 'FifoQueue', 'ContentBasedDeduplication', 'KmsMasterKeyId', 'KmsDataKeyReusePeriodSeconds']
         type: "[]string"
         required: false
         default: ["All"]
+        example: All
       MaxNumberOfMessages:
         title: Max Number of Messages
         description: The maximum number of messages to return. Amazon SQS never returns more messages than this value. Valid values 1 to 10. Default 1
         type: integer
         required: false
         default: 1
+        example: 1
       MessageAttributeNames:
         title: Message Attribute Names
         description: The name of the message attribute
         type: "[]string"
         required: false
         default: ["All"]
+        example: All
       VisibilityTimeout:
         title: Visibility Timeout
         description: The duration (in seconds) that the received messages are hidden from subsequent retrieve requests after being retrieved by a ReceiveMessage request
         type: integer
         required: false
         default: 0
+        example: 0
       WaitTimeSeconds:
         title: Wait Time Seconds
         description: The duration (in seconds) for which the call waits for a message to arrive in the queue before returning. If a message is available, the call returns sooner than WaitTimeSeconds
         type: integer
         required: false
         default: 0
+        example: 0
       ReceiveRequestAttemptId:
         title: Receive Request Attempt ID
         description: This parameter applies only to FIFO (first-in-first-out) queues
         type: string
         required: false
         default: ""
+        example: b57d1e3f-0a3f-4b67-9bb9-3a6d5f9b4f8c
       interval:
         title: Interval
         description: How many seconds to wait until next poll
         type: integer
         required: true
         default: 5
+        example: 5
     output:
       Message:
         title: Message
