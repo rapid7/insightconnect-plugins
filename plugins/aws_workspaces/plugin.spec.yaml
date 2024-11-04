@@ -2,16 +2,29 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: aws_workspaces
-title: AWS WorkSpaces
+title: "AWS WorkSpaces"
 vendor: rapid7
 support: community
 status: []
+sdk:
+  type: slim
+  version: 6.1.4
+  user: nobody
+supported_versions: ["2024-11-4"]
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/aws_workspaces
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://aws.amazon.com
-description: Enables creation of workspaces on Amazons WorkSpace service
-version: 1.0.1
+description: This plugin utilizes [AWS WorkSpaces](https://aws.amazon.com/workspaces/) to create workspaces. Amazon WorkSpaces is a fully managed desktop computing service in the cloud that allows its customers to provide cloud-based desktops to their end-users. Can be utilized for bring your own device policies and product testing
+version: 2.0.0
+connection_version: 2
+key_features:
+  - "Create workspace"
+requirements:
+  - "AWS account"
+  -  "AWS access key ID for authentication"
+  - "AWS secret key for signing requests with the given AWS access key ID"
+  - "AWS region to use for requests"
 tags:
 - aws
 - workspaces
@@ -19,6 +32,14 @@ hub_tags:
   use_cases: [application_management]
   keywords: [aws, workspaces]
   features: []
+links:
+  - "[AWS WorkSpaces](https://aws.amazon.com/workspaces/)"
+references:
+  - "[AWS WorkSpaces API Docs](https://docs.aws.amazon.com/workspaces/latest/api/welcome.html)"
+version_history:
+  - "2.0.0 - Bumping requirements.txt | SDK bump to 6.1.4"
+  - "1.0.1 - New spec and help.md format for the Extension Library"
+  - "1.0.0 - Initial plugin"
 types:
   workspace_properties:
     running_mode:
@@ -88,17 +109,20 @@ connection:
     description: The ID of the AWS access key to use for authentication
     type: credential_secret_key
     required: true
+    example: AKIAEXAMPLEACCESSKEY
   aws_secret_access_key:
     title: AWS Secret Access Key
     description: The AWS secret access key used for signing requests with the given
       AWS access key ID
     type: credential_secret_key
     required: true
+    example: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
   region:
     title: Region
     description: The AWS region to use for requests. An example would be us-east-1
     type: string
     required: true
+    example: us-west-2
 actions:
   create_workspace:
     title: Create Workspace
@@ -109,41 +133,49 @@ actions:
         description: The identifier of the AWS Directory Service directory for the workspace
         type: string
         required: true
+        example: d-926722edaf
       username:
         title: Username
         description: The username of the user for the workspace
         type: string
         required: true
+        example: Mateo
       bundle_id:
         title: Bundle ID
         description: The identifier of the bundle for the workspace
         type: string
         required: true
+        example: wsb-0zsvgp8fc
       volume_encryption_key:
         title: Volume Encryption Key
         description: The KMS key used to encrypt data stored on your workspace
         type: string
         required: false
+        example: arn:aws:kms:us-west-2:123456789012:key/abcd1234-5678-90ef-gh12-ijkl3456mnop
       user_volume_encryption_enabled:
         title: User Volume Encryption Enabled
         description: Flag indicating whether the data stored on the user volume is encrypted
         type: boolean
         required: false
+        example: true
       root_volume_encryption_enabled:
         title: Root Volume Encryption Enabled
         description: Flag indicating whether the data stored on the root volume is encrypted
         type: boolean
         required: false
+        example: true
       workspace_properties:
         title: Workspace Properties
         description: Workspace properties
         type: workspace_properties
         required: false
+        example: '{ "running_mode": "AUTO_STOP", "running_mode_auto_stop_time_out": 60, "root_volume_size": 80, "user_volume_size": 50, "compute_type_name": "VALUE" }'
       tags:
         title: Tags
         description: Tags
-        type: '[] tag'
+        type: '[]string'
         required: false
+        example: [{ "Key": "Environment", "Value": "Production" }]
     output:
       workspace_id_state:
         title: Workspace ID and State

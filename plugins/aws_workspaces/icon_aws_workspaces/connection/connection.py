@@ -1,5 +1,5 @@
-import komand
-from komand.exceptions import ConnectionTestException
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
 from .schema import ConnectionSchema
 
@@ -7,7 +7,7 @@ from .schema import ConnectionSchema
 import boto3
 
 
-class Connection(komand.Connection):
+class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
