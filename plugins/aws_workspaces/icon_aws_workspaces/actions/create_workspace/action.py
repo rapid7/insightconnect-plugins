@@ -14,8 +14,7 @@ class CreateWorkspace(insightconnect_plugin_runtime.Action):
             output=CreateWorkspaceOutput(),
         )
 
-    def run(self, params={}):
-        result = {}
+    def build_payload(self, params: dict) -> dict:
 
         payload = {
             "DirectoryId": params.get(Input.DIRECTORY_ID),
@@ -32,20 +31,28 @@ class CreateWorkspace(insightconnect_plugin_runtime.Action):
                 "UserVolumeSizeGib": params.get(Input.WORKSPACE_PROPERTIES)["user_volume_size"],
             },
         }
+        return payload
 
-        if params.get(Input.USER_VOLUME_ENCRYPTION_ENABLED) and params.get(Input.ROOT_VOLUME_ENCRYPTION_ENABLED):
+    def run(self, params={}):
+        result = {}
+        payload = self.build_payload(params)
+        user_volume_encryption_enabled = params.get(Input.USER_VOLUME_ENCRYPTION_ENABLED)
+        root_volume_encryption_enabled = params.get(Input.ROOT_VOLUME_ENCRYPTION_ENABLED)
+        volume_encryption_key = params.get(Input.VOLUME_ENCRYPTION_KEY)
+
+        if user_volume_encryption_enabled and root_volume_encryption_enabled:
             raise PluginException(
                 cause="Both user and root volume encrypted flags are set.",
                 assistance="Only one of the encryption flags can be set.",
             )
 
-        if params.get(Input.USER_VOLUME_ENCRYPTION_ENABLED):
-            payload["UserVolumeEncryptionEnabled"] = params.get(Input.USER_VOLUME_ENCRYPTION_ENABLED)
-        if params.get(Input.ROOT_VOLUME_ENCRYPTION_ENABLED):
-            payload["RootVolumeEncryptionEnabled"] = params.get(Input.ROOT_VOLUME_ENCRYPTION_ENABLED)
-        if params.get(Input.USER_VOLUME_ENCRYPTION_ENABLED) or params.get(Input.ROOT_VOLUME_ENCRYPTION_ENABLED):
-            if params.get(Input.VOLUME_ENCRYPTION_KEY):
-                payload["VolumeEncryptionKey"] = params.get(Input.VOLUME_ENCRYPTION_KEY)
+        if user_volume_encryption_enabled:
+            payload["UserVolumeEncryptionEnabled"] = user_volume_encryption_enabled
+        if root_volume_encryption_enabled:
+            payload["RootVolumeEncryptionEnabled"] = root_volume_encryption_enabled
+        if user_volume_encryption_enabled or root_volume_encryption_enabled:
+            if volume_encryption_key:
+                payload["VolumeEncryptionKey"] = volume_encryption_key
             else:
                 raise PluginException(
                     cause="Invalid value for Volume Encryption Key input.",
@@ -91,3 +98,4 @@ class CreateWorkspace(insightconnect_plugin_runtime.Action):
             )
 
         return {Output.WORKSPACE_ID_STATE: result}
+
