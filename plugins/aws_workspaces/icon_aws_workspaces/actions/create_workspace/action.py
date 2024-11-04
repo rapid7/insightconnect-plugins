@@ -33,32 +33,8 @@ class CreateWorkspace(insightconnect_plugin_runtime.Action):
         }
         return payload
 
-    def run(self, params={}):
+    def error_handling(self, payload: dict) -> dict:
         result = {}
-        payload = self.build_payload(params)
-        user_volume_encryption_enabled = params.get(Input.USER_VOLUME_ENCRYPTION_ENABLED)
-        root_volume_encryption_enabled = params.get(Input.ROOT_VOLUME_ENCRYPTION_ENABLED)
-        volume_encryption_key = params.get(Input.VOLUME_ENCRYPTION_KEY)
-
-        if user_volume_encryption_enabled and root_volume_encryption_enabled:
-            raise PluginException(
-                cause="Both user and root volume encrypted flags are set.",
-                assistance="Only one of the encryption flags can be set.",
-            )
-
-        if user_volume_encryption_enabled:
-            payload["UserVolumeEncryptionEnabled"] = user_volume_encryption_enabled
-        if root_volume_encryption_enabled:
-            payload["RootVolumeEncryptionEnabled"] = root_volume_encryption_enabled
-        if user_volume_encryption_enabled or root_volume_encryption_enabled:
-            if volume_encryption_key:
-                payload["VolumeEncryptionKey"] = volume_encryption_key
-            else:
-                raise PluginException(
-                    cause="Invalid value for Volume Encryption Key input.",
-                    assistance="Please provide a valid value for the input.",
-                )
-
         try:
             result = self.connection.aws.client("workspaces").create_workspaces(Workspaces=[payload])
         except:
@@ -98,3 +74,32 @@ class CreateWorkspace(insightconnect_plugin_runtime.Action):
             )
 
         return {Output.WORKSPACE_ID_STATE: result}
+
+    def run(self, params={}):
+        payload = self.build_payload(params)
+        user_volume_encryption_enabled = params.get(Input.USER_VOLUME_ENCRYPTION_ENABLED)
+        root_volume_encryption_enabled = params.get(Input.ROOT_VOLUME_ENCRYPTION_ENABLED)
+        volume_encryption_key = params.get(Input.VOLUME_ENCRYPTION_KEY)
+
+        if user_volume_encryption_enabled and root_volume_encryption_enabled:
+            raise PluginException(
+                cause="Both user and root volume encrypted flags are set.",
+                assistance="Only one of the encryption flags can be set.",
+            )
+
+        if user_volume_encryption_enabled:
+            payload["UserVolumeEncryptionEnabled"] = user_volume_encryption_enabled
+        if root_volume_encryption_enabled:
+            payload["RootVolumeEncryptionEnabled"] = root_volume_encryption_enabled
+        if user_volume_encryption_enabled or root_volume_encryption_enabled:
+            if volume_encryption_key:
+                payload["VolumeEncryptionKey"] = volume_encryption_key
+            else:
+                raise PluginException(
+                    cause="Invalid value for Volume Encryption Key input.",
+                    assistance="Please provide a valid value for the input.",
+                )
+
+        self.error_handling(payload)
+
+
