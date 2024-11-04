@@ -1,5 +1,5 @@
 from typing import Tuple
-import komand
+import insightconnect_plugin_runtime
 import requests
 from .schema import SearchRulesInput, SearchRulesOutput, Input, Output, Component
 
@@ -10,7 +10,7 @@ from icon_trendmicro_deepsecurity.util.shared import tryJSON
 from icon_trendmicro_deepsecurity.util.shared import checkResponse
 
 
-class SearchRules(komand.Action):
+class SearchRules(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="search_rules",
@@ -39,7 +39,11 @@ class SearchRules(komand.Action):
 
         # Search for IPS rules
         response = requests.post(
-            url, data=json.dumps(data), verify=self.connection.dsm_verify_ssl, headers=self.connection.headers
+            url,
+            data=json.dumps(data),
+            verify=self.connection.dsm_verify_ssl,
+            headers=self.connection.headers,
+            timeout=60,
         )
 
         # Check response errors
@@ -80,7 +84,11 @@ class SearchRules(komand.Action):
             # Send Request
             url = f"{self.connection.dsm_url}/api/intrusionpreventionrules/search"
             response = requests.post(
-                url, data=json.dumps(data), verify=self.connection.dsm_verify_ssl, headers=self.connection.headers
+                url,
+                data=json.dumps(data),
+                verify=self.connection.dsm_verify_ssl,
+                headers=self.connection.headers,
+                timeout=60,
             )
 
             # Check response errors
