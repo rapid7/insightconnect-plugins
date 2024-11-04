@@ -98,4 +98,3 @@ class CreateWorkspace(insightconnect_plugin_runtime.Action):
             )
 
         return {Output.WORKSPACE_ID_STATE: result}
-
