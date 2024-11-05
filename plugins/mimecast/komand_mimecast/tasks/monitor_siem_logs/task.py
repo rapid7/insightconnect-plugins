@@ -272,7 +272,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             if rate_limited > now:
                 log_msg += "Still within rate limiting period, skipping task execution..."
                 self.logger.info(log_msg)
-                return [], state, False, 200, None
+                return [], state, False, 429, None
 
             log_msg += "However no longer in rate limiting period, so task can be executed..."
             del state[self.RATE_LIMIT_DATETIME]
