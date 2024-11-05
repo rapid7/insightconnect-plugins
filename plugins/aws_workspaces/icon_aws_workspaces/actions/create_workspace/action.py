@@ -37,41 +37,35 @@ class CreateWorkspace(insightconnect_plugin_runtime.Action):
         result = {}
         try:
             result = self.connection.aws.client("workspaces").create_workspaces(Workspaces=[payload])
-        except:
-            raise PluginException(cause="An unknown error occurred", data=result)
-
-        try:
-            if result["FailedRequests"]:
+            fail_request, pending_request = result.get("FailedRequests"), result.get("PendingRequests")
+            if fail_request:
                 raise PluginException(
-                    cause=result["FailedRequests"][0].get("ErrorCode"),
-                    assistance=result["FailedRequests"][0].get("ErrorMessage"),
+                    cause=fail_request[0].get("ErrorCode"),
+                    assistance=fail_request[0].get("ErrorMessage"),
                     data=result,
                 )
-        except KeyError:
-            raise PluginException(
-                cause="The output did not contain expected keys.",
-                assistance="Contact support for help.",
-                data=result,
-            )
-
-        try:
-            if result["PendingRequests"][0].get("ErrorCode"):
+            if pending_request[0].get("ErrorCode"):
                 raise PluginException(
-                    cause=result["PendingRequests"][0].get("ErrorCode"),
-                    assistance=result["PendingRequests"][0].get("ErrorMessage"),
+                    cause=pending_request[0].get("ErrorCode"),
+                    assistance=pending_request[0].get("ErrorMessage"),
                     data=result,
                 )
             else:
                 result = {
-                    "id": result["PendingRequests"][0].get("WorkspaceId"),
-                    "state": result["PendingRequests"][0].get("State"),
+                    "id": pending_request[0].get("WorkspaceId"),
+                    "state": pending_request[0].get("State"),
                 }
+
         except (IndexError, KeyError):
             raise PluginException(
                 cause="The output did not contain expected keys.",
                 assistance="Contact support for help.",
                 data=result,
             )
+
+        except Exception as catch_all:
+            self.logger.info(f"Hit an unhandled exception during plugin execution: {catch_all}", exc_info=True)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
         return {Output.WORKSPACE_ID_STATE: result}
 
