@@ -55,3 +55,4 @@ ERROR_CASES = {
     VALIDATION_INVALID_EMAIL_ADDRESS_ERROR: "Email address is not valid.",
     INVALID_SIEM_TOKEN: "The SIEM token is invalid",
 }
+RATE_LIMIT_ASSISTANCE = "Task will resume collection of logs after the rate limiting period has expired."

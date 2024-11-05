@@ -69,10 +69,10 @@ class TestMonitorSiemLogs(TestCase):
         expected_state = state_params.copy()
         expected_state.update({"rate_limit_datetime": 1641039000.0})
         response, new_state, has_more_pages, status_code, error = self.task.run(params={}, state=state_params)
-        self.assertEqual(status_code, 429)
+        self.assertEqual(status_code, 200)
         self.assertEqual(response, [])
         self.assertEqual(new_state, expected_state)
-        self.assertEqual(type(error), ApiClientException)
+        self.assertEqual(error, None)
 
     @patch("logging.Logger.error")
     def test_monitor_siem_logs_stops_path_traversal(self, mock_logger, _mock_data):
