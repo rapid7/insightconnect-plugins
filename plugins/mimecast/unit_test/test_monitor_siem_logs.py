@@ -70,6 +70,7 @@ class TestMonitorSiemLogs(TestCase):
         expected_state.update({"rate_limit_datetime": 1641039000.0})
         response, new_state, has_more_pages, status_code, error = self.task.run(params={}, state=state_params)
         self.assertEqual(status_code, 200)
+        self.assertEqual(has_more_pages, True)
         self.assertEqual(response, [])
         self.assertEqual(new_state, expected_state)
         self.assertEqual(error, None)
