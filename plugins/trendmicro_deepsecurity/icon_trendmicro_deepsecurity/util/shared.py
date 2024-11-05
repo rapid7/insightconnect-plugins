@@ -1,4 +1,4 @@
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from requests.models import Response
 
 import json
@@ -33,7 +33,7 @@ def checkResponse(response: Response) -> None:
             message = f"{response.status_code}, {response.text}"
 
         raise PluginException(
-            cause="Received HTTP %d status code. The request was not successful." % response.status_code,
+            cause=f"Received HTTP {response.status_code} status code. The request was not successful.",
             assistance=f"[{response.url}]",
             data=message,
         )

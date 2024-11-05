@@ -4,9 +4,19 @@ products: [insightconnect]
 name: trendmicro_deepsecurity
 title: Trend Micro Deep Security
 description: Utilize the Deep Security IPS engine to protect against vulnerabilities without installing a patch (virtual patching)
-version: 2.2.2
+version: 2.2.3
+connection_version: 2
 vendor: rapid7
+supported_versions: ["2024-11-1"]
 support: community
+sdk:
+  type: slim
+  version: 6.1.4
+  user: nobody
+key_features:
+  - "Utilize the Deep Security IPS engine to protect against vulnerabilities without installing a patch (virtual patching)"
+requirements:
+  - "Trend Micro Deep Security"
 status: []
 enable_cache: false
 resources:
@@ -22,6 +32,18 @@ tags:
 - remediation
 - trend_micro
 - deep_security
+references:
+  - "[Trend Micro Deep Security](https://help.deepsecurity.trendmicro.com/10/0/rest-api.html)"
+links:
+  - "[Trend Micro Deep Security](https://www.trendmicro.com/en_gb/business/products/hybrid-cloud/deep-security.html)"
+version_history:
+  - "2.2.3 - Bumping requirements.txt | SDK bump to 6.1.4"
+  - "2.2.2 - Fixed memory leak"
+  - "2.2.1 - Improve the search for IPS rules"
+  - "2.2.0 - Add new action Search Computers to receive a list and details of computers matching the search criteria"
+  - "2.1.0 - Add new actions Get Details and List to receive assigned IPS rules from computers and policies"
+  - "2.0.0 - Add an option to toggle DSM certificate verification in the connection"
+  - "1.0.0 - Initial plugin"
 hub_tags:
   use_cases: [vulnerability_management, cloud_security, remediation_management, threat_detection_and_response ]
   keywords: [vulnerability scanning, vulnerability management, remediation, virtual patching, intrusion, detection, prevention, response, trend micro, deep security, trendmicro, deepsecurity]
@@ -161,26 +183,31 @@ actions:
         description: Name of the rule
         type: string
         required: false
+        example: Identified Suspicious OpenSSL TLS/DTLS Heartbeat Request (ATT\u0026CK T1032)
       description:
         title: Description
         description: Description of the rule
         type: string
         required: false
+        example: The TLS and DTLS implementations in OpenSSL do not properly handle Heartbeat Extension packets, which allow remote attackers to obtain sensitive information from process memory via crafted packets. This is a heuristic based rule to identify such suspicious Heartbeat requests.
       severity:
         title: Severity
         description: Severity level of the IPS rule
         type: string
         required: false
+        example: medium
       type:
         title: Type
         description: Rule type
         type: string
         required: false
+        example: smart
       cvss_score:
         title: CVSS Score
         description: CVSS score
         type: string
         required: false
+        example: 5.00
       cves:
         title: CVEs
         description: List of related CVEs

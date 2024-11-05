@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetRuleDetailsInput, GetRuleDetailsOutput, Input, Output, Component
 
 # Custom imports below
@@ -8,7 +8,7 @@ from icon_trendmicro_deepsecurity.util.shared import checkResponse
 import requests
 
 
-class GetRuleDetails(komand.Action):
+class GetRuleDetails(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_rule_details",
@@ -31,7 +31,7 @@ class GetRuleDetails(komand.Action):
         url = f"{self.connection.dsm_url}/api/intrusionpreventionrules/{self.id}"
 
         # Send request
-        response = requests.get(url, verify=self.connection.dsm_verify_ssl, headers=self.connection.headers)
+        response = requests.get(url, verify=self.connection.dsm_verify_ssl, headers=self.connection.headers, timeout=60)
 
         self.logger.info(f"url: {response.url}")
         self.logger.info(f"status: {response.status_code}")
