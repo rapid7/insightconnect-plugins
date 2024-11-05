@@ -22,7 +22,7 @@ hub_tags:
   features: []
 sdk:
   type: slim
-  version: 6.1.4
+  version: 6.2.0
   user: nobody
 key_features:
   - "Get full or short report"
@@ -1130,11 +1130,11 @@ actions:
         title: Comment
         description: A descriptive comment to identify the file for other users
         type: string
-        required: true
+        required: false
         example: ExampleComment
       isConfidential:
         title: Is Confidential
-        description: Defines visibility of this file in Falcon MalQuery, either via the API or the Falcon console. `True` means that file is only shown to users within your customer account. `False` means that file can be seen by other CrowdStrike customers
+        description: Defines visibility of this file in Falcon MalQuery, either via the API or the Falcon console. True means that file is only shown to users within your customer account. False means that file can be seen by other CrowdStrike customers
         type: boolean
         required: false
         example: true

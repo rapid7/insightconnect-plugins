@@ -113,11 +113,19 @@ class CrowdStrikeAPI:
         ).get("resources")
 
     def upload_malware_sample(self, sample: Dict[str, str], filename: str, comment: str, is_confidential: bool = True):
+        # Get authentication headers
         headers = self.get_headers()
+
+        # Overwrite the filename if it's empty (required by API)
+        sample_filename = sample.get("filename", "")
+        if not sample_filename:
+            sample_filename = filename
+
+        # Create Multipart object to be sent via request
         self._logger.info("Uploading malware sample for analysis...")
         multipart_form_data = MultipartEncoder(
             fields={
-                "sample": (sample.get("filename", ""), b64decode(sample.get("content", "")), "text/plain"),
+                "sample": (sample_filename, b64decode(sample.get("content", "")), "text/plain"),
                 "file_name": filename,
                 "comment": comment,
                 "is_confidential": f"{is_confidential}".lower(),

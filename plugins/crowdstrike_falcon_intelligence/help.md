@@ -468,9 +468,9 @@ This action is used to upload malware sample
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|comment|string|None|True|A descriptive comment to identify the file for other users|None|ExampleComment|None|None|
+|comment|string|None|False|A descriptive comment to identify the file for other users|None|ExampleComment|None|None|
 |filename|string|None|True|The name of file to be used to override the default filename|None|ExampleFilename.exe|None|None|
-|isConfidential|boolean|True|False|Defines visibility of this file in Falcon MalQuery, either via the API or the Falcon console. `True` means that file is only shown to users within your customer account. `False` means that file can be seen by other CrowdStrike customers|None|True|None|None|
+|isConfidential|boolean|True|False|Defines visibility of this file in Falcon MalQuery, either via the API or the Falcon console. True means that file is only shown to users within your customer account. False means that file can be seen by other CrowdStrike customers|None|True|None|None|
 |sample|file|None|True|The samples of file to be sent for analysis (max file size is 256 MB)|None|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|None|None|
   
 Example input:

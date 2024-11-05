@@ -1,5 +1,5 @@
 {
-	"spec": "bca05caa222aec0f714b712f496460c2",
+	"spec": "890372d2bb4f207b051661411295fd9d",
 	"manifest": "afdb962b3049ec3c26e64bd74f3845f0",
 	"setup": "97a6c06a57546bbc57a253436e4ca559",
 	"schemas": [
@@ -33,7 +33,7 @@
 		},
 		{
 			"identifier": "uploadMalwareSample/schema.py",
-			"hash": "dff311370f3503cc5b4d506ec0a4e8f3"
+			"hash": "cbb6705b78a4c6b8b1d5b487acbaaf6c"
 		},
 		{
 			"identifier": "connection/schema.py",
