@@ -8,7 +8,7 @@ support: community
 status: []
 sdk:
   type: slim
-  version: 6.1.4
+  version: 6.2.0
   user: nobody
 supported_versions: ["2024-11-4"]
 resources:
@@ -37,7 +37,7 @@ links:
 references:
   - "[AWS WorkSpaces API Docs](https://docs.aws.amazon.com/workspaces/latest/api/welcome.html)"
 version_history:
-  - "2.0.0 - Bumping requirements.txt | SDK bump to 6.1.4"
+  - "2.0.0 - Bumping requirements.txt | SDK bump to 6.2.0"
   - "1.0.1 - New spec and help.md format for the Extension Library"
   - "1.0.0 - Initial plugin"
 types:

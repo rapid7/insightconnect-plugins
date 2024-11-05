@@ -144,7 +144,7 @@ Example output:
 
 # Version History
 
-* 2.0.0 - Bumping requirements.txt | SDK bump to 6.1.4
+* 2.0.0 - Bumping requirements.txt | SDK bump to 6.2.0
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 
