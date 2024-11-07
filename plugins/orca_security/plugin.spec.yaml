@@ -4,22 +4,43 @@ products: [insightconnect]
 name: orca_security
 title: "Orca Security"
 description: Orca's agentless, cloud-native security and compliance platform detects, monitors, and prioritizes the most critical cloud security risks for AWS, Azure, and Google Cloud estates
-version: 2.0.0
+version: 2.0.1
+connection_version: 2
 supported_versions: ["Orca Security API 2022-08-15"]
 vendor: rapid7
 support: rapid7
 status: []
 cloud_ready: true
+sdk:
+  type: full
+  version: 6.2.0
+  user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/orca_security
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://orca.security
 tags: ["orca", "security"]
-hub_tags: 
+hub_tags:
   use_cases: [threat_detection_and_response, alerting_and_notifications]
   keywords: [orca, security, cloud_enabled]
   features: []
-
+links:
+  - "[Orca Security](https://orca.security/)"
+references:
+  - "[Orca Security](https://orca.security/)"
+requirements:
+  - "Orca Security API Token generated using [this instruction](https://docs.orcasecurity.io/docs/create-a-token-for-api-usage)"
+  - "Administrator privileges to use Get Users, Add User and Delete User actions"
+key_features:
+  - "Get assets"
+  - "Get alerts"
+  - "Update alert status and severity"
+  - "Initiate alert verification"
+  - "Get, add and delete users"
+version_history:
+  - "2.0.1 - Bumping requirements.txt | SDK bump to 6.2.0"
+  - "2.0.0 - Get Users: Updated the API endpoint to return an array of users"
+  - "1.0.0 - Initial plugin | Add Get Assets, Get Asset by ID, Get Alerts, Get Alert by ID, Update Alert Severity, Update Alert Status, Verify Alert, Download Malicious File, Get Users, Add User and Delete User actions | Add New Alert trigger"
 types:
   alert_data:
     headline:
@@ -895,16 +916,19 @@ actions:
         description: Total number of assets
         type: integer
         required: true
+        example: 1
       total_ungrouped_items:
         title: Total Ungrouped Items
         description: Total number of ungrouped assets
         type: integer
         required: false
+        example: 10
       total_supported_items:
         title: Total Supported Items
         description: Total number of supported assets
         type: integer
         required: false
+        example: 1000
   get_asset_by_id:
     title: Get Asset by ID
     description: Get asset information by providing asset unique ID
@@ -1025,11 +1049,13 @@ actions:
         description: Whether the action was successful
         type: boolean
         required: true
+        example: true
       content:
         title: Content
         description: Content of the file
         type: bytes
         required: false
+        example: UEsDBBQAAQAIAEOc4VDdLFoEwgAAADQBAAANAAAAZWljYXJjb20yLnppcHh/TfxnimPnPKhgQN2dbxgmser+vfLMNzzE1xAxvrcMW29TW94War8gHCOQ3uAHD+InNly2Rm9lZcSEwSRaDbMgc4Er6/yC7KWSO7g4Kkb7dcHoYWfSDZt6Wjkvoc1hUy6jm2AZKg4FExQN/wS7n03sWy7VhU0CYVmsp1pmkVGqb4czd3OaAC07HmC/K9E3LO9yi9OejcZ+MJpA6zCLnUvZMr2KYjdl0s+9ENEspL/oTLErcDboDQ2DBJkKQpUsK0fRUEsBAgAAFAABAAgAQ5zhUN0sWgTCAAAANAEAAA0AAAAAAAAAAAAAAAAAAAAAAGVpY2FyY29tMi56aXBQSwUGAAAAAAEAAQA7AAAA7QAAAAAA
   verify_alert:
     title: Verify Alert
     description: Initiate verification for a given alert ID to check if it is resolved
@@ -1046,11 +1072,13 @@ actions:
         description: Whether the action was successful
         type: boolean
         required: true
+        example: true
       status:
         title: Status
         description: Current verification status
         type: string
         required: false
+        example: scanning
   get_users:
     title: Get Users
     description: Get organization users information. Administrator privileges are required to perform this action
@@ -1100,6 +1128,7 @@ actions:
         description: Status of the action performed
         type: string
         required: true
+        example: success
   delete_user:
     title: Delete User
     description: Delete an invitation to the organization for the specified user. Administrator privileges are required to perform this action
@@ -1116,3 +1145,4 @@ actions:
         description: Status of the action performed
         type: string
         required: true
+        example: success
