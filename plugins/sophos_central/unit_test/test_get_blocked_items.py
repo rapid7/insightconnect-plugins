@@ -1,14 +1,15 @@
 import sys
 import os
 
+sys.path.append(os.path.abspath("../"))
+
+
 from unittest import TestCase
 from unittest.mock import patch
 from parameterized import parameterized
 
-from unit_test.util import Util
+from util import Util
 from icon_sophos_central.actions.get_blocked_items import GetBlockedItems
-
-sys.path.append(os.path.abspath("../"))
 
 
 @patch("requests.request", side_effect=Util.mock_request)
