@@ -15,21 +15,21 @@ GitLab is a next generation developer collaboration software with version contro
 * GitLab account username and password (or token)
 
 # Supported Product Versions
-  
+
 * GitLab API v4
 
 # Documentation
 
 ## Setup
-  
+
 The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|credentials|credential_username_password|None|True|Enter GitLab username and password (or token)|None|{'username': 'user_name', 'password': 'personal_access_token'}|
-|ssl_verify|boolean|None|True|Toggle SSL verify on or off for requests|None|True|
-|url|string|None|True|Host URL|None|https://gitlab.example.com:8000/api/v4/|
-  
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|credentials|credential_username_password|None|True|Enter GitLab username and password (or token)|None|{'username': 'user_name', 'password': 'personal_access_token'}|None|None|
+|ssl_verify|boolean|None|True|Toggle SSL verify on or off for requests|None|True|None|None|
+|url|string|None|True|Host URL|None|https://gitlab.example.com:8000/api/v4/|None|None|
+
 Example input:
 
 ```
@@ -49,14 +49,14 @@ Example input:
 
 
 #### Block User
-  
+
 This action is used to block GitLab user
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|integer|None|True|User ID to block|None|17|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|integer|None|True|User ID to block|None|17|None|None|
   
 Example input:
 
@@ -81,24 +81,24 @@ Example output:
 ```
 
 #### Create Issue
-  
+
 This action is used to create issue
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|assignee_ids|[]integer|None|False|The ID of a user to assign issue|None|[1, 2, 3, 4]|
-|confidential|boolean|None|False|Set an issue to be confidential|None|False|
-|created_at|date|None|False|Date, ISO 8601 formatted (requires admin or project owner rights)|None|2016-01-07 12:44:33.959000+00:00|
-|description|string|None|False|The description of an issue|None|Description of the issue|
-|discussion_resolve|string|None|False|The ID of a discussion to resolve|None|TheDiscussion|
-|due_date|date|None|False|Date time string in the format YEAR-MONTH-DAY|None|2016-01-07 12:44:33.959000+00:00|
-|labels|string|None|False|Comma-separated label names for an issue|None|False,Alert,Seen,Unseen|
-|merge_request|integer|None|False|The IID of a merge request in which to resolve all issues|None|13|
-|milestone_id|integer|None|False|The ID of a milestone to assign issue|None|23|
-|project_id|integer|None|True|ID of project|None|4|
-|title|string|None|True|The title of an issue|None|Issues with auth|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|assignee_ids|[]integer|None|False|The ID of a user to assign issue|None|[1, 2, 3, 4]|None|None|
+|confidential|boolean|None|False|Set an issue to be confidential|None|False|None|None|
+|created_at|date|None|False|Date, ISO 8601 formatted (requires admin or project owner rights)|None|2016-01-07 12:44:33.959000+00:00|None|None|
+|description|string|None|False|The description of an issue|None|Description of the issue|None|None|
+|discussion_resolve|string|None|False|The ID of a discussion to resolve|None|TheDiscussion|None|None|
+|due_date|date|None|False|Date time string in the format YEAR-MONTH-DAY|None|2016-01-07 12:44:33.959000+00:00|None|None|
+|labels|string|None|False|Comma-separated label names for an issue|None|False,Alert,Seen,Unseen|None|None|
+|merge_request|integer|None|False|The IID of a merge request in which to resolve all issues|None|13|None|None|
+|milestone_id|integer|None|False|The ID of a milestone to assign issue|None|23|None|None|
+|project_id|integer|None|True|ID of project|None|4|None|None|
+|title|string|None|True|The title of an issue|None|Issues with auth|None|None|
   
 Example input:
 
@@ -194,15 +194,15 @@ Example output:
 ```
 
 #### Delete User SSH Key
-  
+
 This action is used to delete user SSH key
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|integer|None|True|User ID|None|18|
-|key_id|integer|None|True|Key ID|None|17|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|integer|None|True|User ID|None|18|None|None|
+|key_id|integer|None|True|Key ID|None|17|None|None|
   
 Example input:
 
@@ -228,14 +228,14 @@ Example output:
 ```
 
 #### Delete User
-  
+
 This action is used to delete GitLab user
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|integer|None|True|User ID to unblock|None|34|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|integer|None|True|User ID to unblock|None|34|None|None|
   
 Example input:
 
@@ -260,14 +260,14 @@ Example output:
 ```
 
 #### Get User
-  
+
 This action is used to get GitLab user
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|integer|None|True|User ID|None|17|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|integer|None|True|User ID|None|17|None|None|
   
 Example input:
 
@@ -307,14 +307,14 @@ Example output:
 ```
 
 #### List User SSH Keys
-  
+
 This action is used to list user SSH keys
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|integer|None|True|The ID of the user|None|17|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|integer|None|True|The ID of the user|None|17|None|None|
   
 Example input:
 
@@ -352,14 +352,14 @@ Example output:
 ```
 
 #### Unblock User
-  
+
 This action is used to unlock GitLab user
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|integer|None|True|User ID to unblock|None|17|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|integer|None|True|User ID to unblock|None|17|None|None|
   
 Example input:
 
@@ -386,19 +386,19 @@ Example output:
 
 
 #### Get New Issues
-  
+
 This trigger is used to monitor new issues
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|iids|[]integer|None|False|Return only the issues having the given iid|None|[116, 115]|
-|interval|integer|None|False|How often to check for new issues|None|10|
-|labels|string|None|False|Comma-separated list of label names, issues must have all labels to be returned|None|label1,label2,label3|
-|milestone|string|None|False|The milestone title|None|v4.0|
-|search|string|None|False|Search issues against their title and description|None|Example issue|
-|state|string|None|False|Return all issues or just those that are opened or closed|["Opened", "Closed"]|Opened|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|iids|[]integer|None|False|Return only the issues having the given iid|None|[116, 115]|None|None|
+|interval|integer|None|False|How often to check for new issues|None|10|None|None|
+|labels|string|None|False|Comma-separated list of label names, issues must have all labels to be returned|None|label1,label2,label3|None|None|
+|milestone|string|None|False|The milestone title|None|v4.0|None|None|
+|search|string|None|False|Search issues against their title and description|None|Example issue|None|None|
+|state|string|None|False|Return all issues or just those that are opened or closed|["Opened", "Closed"]|Opened|None|None|
   
 Example input:
 
@@ -601,14 +601,15 @@ Example output:
 
 ## Troubleshooting
   
-*There is no troubleshooting for this plugin.*
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
-* 2.0.0 - Update SDK | Refactor Plugin | `Connection` - New input: `ssl_verify` | `Issues` - Renamed to `Get New Issues` | Added unit tests  
-* 1.0.1 - New spec and help.md format for the Extension Library  
-* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types  
-* 0.1.1 - SSL bug fix in SDK  
+* 2.0.1 - Update requirements.txt to remove dependencies | SDK bump to 6.2.0
+* 2.0.0 - Update SDK | Refactor Plugin | `Connection` - New input: `ssl_verify` | `Issues` - Renamed to `Get New Issues` | Added unit tests
+* 1.0.1 - New spec and help.md format for the Extension Library
+* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+* 0.1.1 - SSL bug fix in SDK
 * 0.1.0 - Initial plugin
 
 # Links
@@ -616,5 +617,5 @@ Example output:
 * [GitLab](https://gitlab.com)
 
 ## References
-  
+
 * [GitLab API](https://docs.gitlab.com/ce/api/README.html)
