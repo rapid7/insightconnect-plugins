@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="cisco_asa-rapid7-plugin",
-      version="2.0.0",
+      version="1.5.1",
       description="Cisco Adaptive Security Appliances(https://www.cisco.com/c/en/us/products/security/adaptive-security-appliance-asa-software/index.html) deliver enterprise-class firewall capabilities and the Cisco ASA plugin allows you to automate the management of network objects for ASA appliances",
       author="rapid7",
       author_email="",

@@ -136,7 +136,7 @@ Example output:
 }
 ```
 
-#### Check if Address in Group
+#### Check If Address in Group
 
 This action checks to see if an IP address, CIDR IP address, or domain is in an Address Group. Supports IPv6
 
@@ -363,7 +363,7 @@ Example output:
 
 # Version History
 
-* 2.0.0 - Bumping requirements.txt | SDK bump to 6.2.0
+* 1.5.1 - Bumping requirements.txt | SDK bump to 6.2.0
 * 1.5.0 - Add new actions Get Blocked Hosts and Block Host
 * 1.4.2 - Add `docs_url` in plugin spec | Update `source_url` in plugin spec
 * 1.4.1 - Fix None check in actions Add Address to Group and Create Address Object
