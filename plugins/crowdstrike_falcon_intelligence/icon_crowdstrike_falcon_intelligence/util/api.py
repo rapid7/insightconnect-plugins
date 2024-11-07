@@ -1,20 +1,23 @@
 import json
+from base64 import b64decode
 from logging import Logger
-from typing import Union
+from typing import Dict, Union
 
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
+from requests_toolbelt import MultipartEncoder
 
-from icon_crowdstrike_falcon_intelligence.util.helpers import clean_dict
 from icon_crowdstrike_falcon_intelligence.util.endpoints import (
-    AUTHENTICATION_ENDPOINT,
     ARTIFACTS_ENDPOINT,
+    AUTHENTICATION_ENDPOINT,
+    REPORT_SUMMARIES_ENDPOINT,
     REPORTS_ENDPOINT,
     REPORTS_QUERY_ENDPOINT,
-    REPORT_SUMMARIES_ENDPOINT,
     SUBMISSIONS_ENDPOINT,
     SUBMISSIONS_QUERY_ENDPOINT,
+    UPLOAD_MALWARE_ENDPOINT,
 )
+from icon_crowdstrike_falcon_intelligence.util.helpers import clean_dict
 
 
 class CrowdStrikeAPI:
@@ -109,20 +112,49 @@ class CrowdStrikeAPI:
             params={"limit": limit, "offset": offset, "filter": filter_query},
         ).get("resources")
 
+    def upload_malware_sample(self, sample: Dict[str, str], filename: str, comment: str, is_confidential: bool = True):
+        # Get authentication headers
+        headers = self.get_headers()
+
+        # Overwrite the filename if it's empty (required by API)
+        sample_filename = sample.get("filename", "")
+        if not sample_filename:
+            sample_filename = filename
+
+        # Create Multipart object to be sent via request
+        self._logger.info("Uploading malware sample for analysis...")
+        multipart_form_data = MultipartEncoder(
+            fields={
+                "sample": (sample_filename, b64decode(sample.get("content", "")), "text/plain"),
+                "file_name": filename,
+                "comment": comment,
+                "is_confidential": f"{is_confidential}".lower(),
+            }
+        )
+        response = self.make_json_request(
+            "POST",
+            f"{self._base_url}{UPLOAD_MALWARE_ENDPOINT}",
+            data=multipart_form_data,
+            headers={**headers, "Content-Type": multipart_form_data.content_type},
+        )
+        self._logger.info("Uploading completed.")
+        return response
+
     def make_request(
-        self,
-        method: str,
-        url: str,
-        params: dict = None,
-        json_data: dict = None,
+        self, method: str, url: str, *args, params: dict = None, json_data: dict = None, headers: dict = None, **kwargs
     ) -> requests.Response:
         try:
+            if not headers:
+                headers = self.get_headers()
+
             response = requests.request(
+                *args,
                 method=method,
                 url=url,
-                headers=self.get_headers(),
+                headers=headers,
                 params=clean_dict(params),
                 json=clean_dict(json_data),
+                **kwargs,
             )
 
             if response.status_code == 400:
@@ -155,10 +187,10 @@ class CrowdStrikeAPI:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     def make_json_request(
-        self, method: str, url: str, params: dict = None, json_data: dict = None
+        self, method: str, url: str, *args, params: dict = None, json_data: dict = None, **kwargs
     ) -> Union[list, dict]:
         try:
-            response = self.make_request(method=method, url=url, params=params, json_data=json_data)
+            response = self.make_request(method=method, url=url, params=params, json_data=json_data, *args, **kwargs)
             return response.json()
         except json.decoder.JSONDecodeError as error:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)

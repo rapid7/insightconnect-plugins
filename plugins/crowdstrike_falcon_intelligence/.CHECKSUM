@@ -1,39 +1,43 @@
 {
-	"spec": "7c7b6f205e09b0c7f5deb31fe0f99610",
-	"manifest": "afec6aa4a72f7d5adfcaa33e693e49d4",
-	"setup": "5b4346fa75c78350298f5de8407d989b",
+	"spec": "890372d2bb4f207b051661411295fd9d",
+	"manifest": "afdb962b3049ec3c26e64bd74f3845f0",
+	"setup": "97a6c06a57546bbc57a253436e4ca559",
 	"schemas": [
 		{
 			"identifier": "checkAnalysisStatus/schema.py",
-			"hash": "b33491d2d597f6e98afc65a472df3cef"
+			"hash": "12fd58e742d161c70cc8ec7cda83757a"
 		},
 		{
 			"identifier": "downloadArtifact/schema.py",
-			"hash": "2ca7c6d488baaf4f6e20bf3f96dc694c"
+			"hash": "5ea60d06ef05140eaf3a1f01fd445e63"
 		},
 		{
 			"identifier": "getFullReport/schema.py",
-			"hash": "6e729794f718416ff53344586ef9cc78"
+			"hash": "035f4efe2488b60ac649df07bfac8313"
 		},
 		{
 			"identifier": "getReportsIDs/schema.py",
-			"hash": "2edc81eb0a7546bb0b9b14d0b985c5a5"
+			"hash": "b5636243ce257e3cb52f51f31d57868f"
 		},
 		{
 			"identifier": "getShortReport/schema.py",
-			"hash": "2f85634b911c8eabbdbcf6204f0a25c0"
+			"hash": "8fcd82d864a2a039734a5bc2336fb323"
 		},
 		{
 			"identifier": "getSubmissionsIDs/schema.py",
-			"hash": "b53506b55ad8003fd347bf0bc95ef19e"
+			"hash": "bcd8d0c7824a9f85c70f8cec4237614f"
 		},
 		{
 			"identifier": "submitAnalysis/schema.py",
-			"hash": "115798e956c58449ba2eef7a288ec95f"
+			"hash": "405eb43871561756ca0bdbd41af48058"
+		},
+		{
+			"identifier": "uploadMalwareSample/schema.py",
+			"hash": "cbb6705b78a4c6b8b1d5b487acbaaf6c"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "137057253a8e6ce38707b2ad62d4a4b0"
+			"hash": "39ebbb9d8b8ba4c668ea6b6986841962"
 		}
 	]
 }
