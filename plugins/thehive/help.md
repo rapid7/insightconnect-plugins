@@ -1,7 +1,6 @@
 # Description
 
-TheHive is a scalable, open source security incident response solution designed for SOCs & CERTs to collaborate, 
-elaborate, analyze and get their job done
+TheHive is a scalable, open source security incident response solution designed for SOCs & CERTs to collaborate, elaborate, analyze and get their job done
 
 # Key Features
 
@@ -17,25 +16,25 @@ elaborate, analyze and get their job done
 * TheHive username and password
 
 # Supported Product Versions
-  
+
 * 2023-05-17
 
 # Documentation
 
 ## Setup
-  
+
 The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|api_key|credential_secret_key|None|False|An optional API key for authentication via bearer token|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|credentials|credential_username_password|None|False|Username and password|None|{}|
-|host|string|None|True|TheHive host|None|thehive.company.com or 10.3.4.50|
-|port|string|9000|True|TheHive API port|None|9000|
-|protocol|string|None|True|HTTP Protocol|['http', 'https']|http|
-|proxy|object|None|False|An optional dictionary containing proxy data, with HTTP or HTTPS as the key, and the proxy URL as the value|None|{}|
-|verify|boolean|True|True|Verify the certificate|None|True|
-  
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|api_key|credential_secret_key|None|False|An optional API key for authentication via bearer token|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
+|credentials|credential_username_password|None|False|Username and password|None|{}|None|None|
+|host|string|None|True|TheHive host|None|thehive.company.com or 10.3.4.50|None|None|
+|port|string|9000|True|TheHive API port|None|9000|None|None|
+|protocol|string|None|True|HTTP Protocol|["http", "https"]|http|None|None|
+|proxy|object|None|False|An optional dictionary containing proxy data, with HTTP or HTTPS as the key, and the proxy URL as the value|None|{}|None|None|
+|verify|boolean|True|True|Verify the certificate|None|True|None|None|
+
 Example input:
 
 ```
@@ -61,10 +60,10 @@ Close a case by ID
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|force|boolean|False|False|True to physically delete the case, False to mark the case as delete|None|False|
-|id|string|None|True|ID for the case|None|50|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|force|boolean|False|False|True to physically delete the case, False to mark the case as delete|None|False|None|None|
+|id|string|None|True|ID for the case|None|50|None|None|
   
 Example input:
 
@@ -95,21 +94,21 @@ Create a new case
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|customFields|object|None|False|Case custom fields|None|{}|
-|description|string|None|False|Description of the case, supports markdown|None|Case description|
-|flag|boolean|False|False|Case's flag, True to mark case as important|None|True|
-|jsonData|object|None|False|If the field is not equal to None, the case is instantiated using the JSON value instead of the arguements|None|{}|
-|metrics|object|None|False|Case metrics collection. A JSON object where keys are defining metric name, and values are defining metric value|None|{}|
-|owner|string|None|False|Case's assignee|None|admin|
-|pap|integer|2|False|Password Authentication Protocol|[0, 1, 2, 3]|2|
-|severity|integer|2|False|Case severity|[1, 2, 3, 4]|2|
-|startDate|integer|None|False|Case start date (datetime in ms) (will default to now if left blank)|None|1684170163000|
-|tags|[]string|None|False|List of case tags|None|["case_tag_1", "case_tag_2"]|
-|template|string|None|False|Case template's name. If specified then the case is created using the given template|None|Case template name|
-|title|string|None|True|Name of the case|None|Case title|
-|tlp|integer|2|False|Traffic Light Protocol level|[0, 1, 2, 3]|2|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|customFields|object|None|False|Case custom fields|None|{}|None|None|
+|description|string|None|False|Description of the case, supports markdown|None|Case description|None|None|
+|flag|boolean|False|False|Case's flag, True to mark case as important|None|True|None|None|
+|jsonData|object|None|False|If the field is not equal to None, the case is instantiated using the JSON value instead of the arguements|None|{}|None|None|
+|metrics|object|None|False|Case metrics collection. A JSON object where keys are defining metric name, and values are defining metric value|None|{}|None|None|
+|owner|string|None|False|Case's assignee|None|admin|None|None|
+|pap|integer|2|False|Password Authentication Protocol|[0, 1, 2, 3]|2|None|None|
+|severity|integer|2|False|Case severity|[1, 2, 3, 4]|2|None|None|
+|startDate|integer|None|False|Case start date (datetime in ms) (will default to now if left blank)|None|1684170163000|None|None|
+|tags|[]string|None|False|List of case tags|None|["case_tag_1", "case_tag_2"]|None|None|
+|template|string|None|False|Case template's name. If specified then the case is created using the given template|None|Case template name|None|None|
+|title|string|None|True|Name of the case|None|Case title|None|None|
+|tlp|integer|2|False|Traffic Light Protocol level|[0, 1, 2, 3]|2|None|None|
   
 Example input:
 
@@ -177,20 +176,20 @@ Create a new case observable
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|data|string|None|False|Observable's data|None|Test data for observable|
-|datatype|string|None|False|Observables Data Type|None|domain, ip, url, fqdn, uri_path, user-agent, hash, email, mail, mail_subject, registry, regexp, other|
-|id|string|None|False|ID for the case|None|AYgQXmjbfMffAh_St-fk|
-|ignoreSimilarity|boolean|False|False|Observable's similarity ignore flag. True to ignore the observable during similarity computing|None|False|
-|ioc|boolean|False|False|Observable's IOC, True to mark an observable as IOC|None|False|
-|jsonData|object|None|False|All fields included in one JSON object. If using this, all other fields will be ignored|None|json object containing all necessary fields|
-|message|string|None|False|Observable's description. If tags is empty, this is required|None|Observable message|
-|pap|integer|2|False|Case's PAP|[0, 1, 2, 3]|2|
-|sighted|boolean|False|False|Observable's sighted flag, True to mark the observable as sighted|None|False|
-|startDate|integer|None|False|Observable start date (datetime in ms) (will default to now if left blank)|None|1640000000000|
-|tags|[]string|None|False|List of observable tags, required if message is None|None|["tag_one", "tag_two"]|
-|tlp|integer|2|False|Case's TLP|[0, 1, 2, 3]|2|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|data|string|None|False|Observable's data|None|Test data for observable|None|None|
+|datatype|string|None|False|Observables Data Type|None|domain, ip, url, fqdn, uri_path, user-agent, hash, email, mail, mail_subject, registry, regexp, other|None|None|
+|id|string|None|False|ID for the case|None|AYgQXmjbfMffAh_St-fk|None|None|
+|ignoreSimilarity|boolean|False|False|Observable's similarity ignore flag. True to ignore the observable during similarity computing|None|False|None|None|
+|ioc|boolean|False|False|Observable's IOC, True to mark an observable as IOC|None|False|None|None|
+|jsonData|object|None|False|All fields included in one JSON object. If using this, all other fields will be ignored|None|json object containing all necessary fields|None|None|
+|message|string|None|False|Observable's description. If tags is empty, this is required|None|Observable message|None|None|
+|pap|integer|2|False|Case's PAP|[0, 1, 2, 3]|2|None|None|
+|sighted|boolean|False|False|Observable's sighted flag, True to mark the observable as sighted|None|False|None|None|
+|startDate|integer|None|False|Observable start date (datetime in ms) (will default to now if left blank)|None|1640000000000|None|None|
+|tags|[]string|None|False|List of observable tags, required if message is None|None|["tag_one", "tag_two"]|None|None|
+|tlp|integer|2|False|Case's TLP|[0, 1, 2, 3]|2|None|None|
   
 Example input:
 
@@ -244,16 +243,16 @@ Create a new case task
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|description|string|None|False|Task's description|None|Task description|
-|flag|boolean|False|False|Task's flag, 'True' to mark the task as important|None|False|
-|id|string|None|False|ID for the case|None|AYgQXmjbfMffAh_St-fk|
-|jsonData|object|None|False|If the field is not equal to None, the Task is instantiated using the JSON value instead of the arguements|None|json object containing all necessary fields|
-|owner|string|None|False|Task's assignee|None|admin|
-|startDate|integer|None|False|Task's start date (datetime in ms) (will default to now if left blank)|None|1684170163000|
-|status|string|Waiting|False|Task's status|['Waiting', 'InProgress', 'Cancel', 'Completed']|Waiting|
-|title|string|None|False|Task's title|None|Task title|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|description|string|None|False|Task's description|None|Task description|None|None|
+|flag|boolean|False|False|Task's flag, 'True' to mark the task as important|None|False|None|None|
+|id|string|None|False|ID for the case|None|AYgQXmjbfMffAh_St-fk|None|None|
+|jsonData|object|None|False|If the field is not equal to None, the Task is instantiated using the JSON value instead of the arguements|None|json object containing all necessary fields|None|None|
+|owner|string|None|False|Task's assignee|None|admin|None|None|
+|startDate|integer|None|False|Task's start date (datetime in ms) (will default to now if left blank)|None|1684170163000|None|None|
+|status|string|Waiting|False|Task's status|["Waiting", "InProgress", "Cancel", "Completed"]|Waiting|None|None|
+|title|string|None|False|Task's title|None|Task title|None|None|
   
 Example input:
 
@@ -303,9 +302,9 @@ Retrieve a case by ID
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|string|None|True|ID for the case|None|50|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|string|None|True|ID for the case|None|50|None|None|
   
 Example input:
 
@@ -434,8 +433,8 @@ Example output:
 ```
 
 #### Get Current User
-  
-Get information about the current user
+
+This action is used to get information about the current user
 
 ##### Input
   
@@ -461,9 +460,9 @@ Get information about a specific user
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|string|None|True|The ID of the user|None|50|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|string|None|True|The ID of the user|None|50|None|None|
   
 Example input:
 
@@ -486,11 +485,9 @@ Example output:
   "success": {}
 }
 ```
-
 ### Triggers
   
 *This plugin does not contain any triggers.*
-
 ### Tasks
   
 *This plugin does not contain any tasks.*
@@ -594,12 +591,14 @@ Example output:
 |TLP|integer|None|None|Traffic Light Protocol level|None|
 |user|string|None|None|Observable user|None|
 
+
 ## Troubleshooting
   
-*There is no troubleshooting for this plugin.*
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 5.0.2 - Updating requirements.txt | SDK bump to 6.2.0
 * 5.0.1 - Update requests module to version 2.31.0
 * 5.0.0 - Refactor: Fixed issues in previous refactor that caused connection issues and made the schemas for actions more compatible with outputs.
 * 4.0.0 - Added additional error handling for issues that occur outside the expected status codes | Action: `create_case` remade to not include task input
@@ -612,7 +611,7 @@ Example output:
 * 2.0.0 - Update to new credential types
 * 1.0.0 - Custom Field support added to Create Case action | Support web server mode
 * 0.2.0 - Bug fix, add more input variables for Close Case action
-* 0.1.2 - Bug fix for constant "waiting" in Status field | Updated to v2 architecture
+* 0.1.2 - Bug fix for constant 'waiting' in Status field | Updated to v2 architecture
 * 0.1.1 - SSL bug fix in SDK
 * 0.1.0 - Initial plugin
 
