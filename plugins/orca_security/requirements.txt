@@ -3,4 +3,4 @@
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 parameterized==0.8.1
 timeout-decorator==0.5.0
-validators==0.20.0
+validators==0.34.0
