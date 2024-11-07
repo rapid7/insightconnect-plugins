@@ -339,249 +339,6 @@ Example output:
 }
 ```
 
-#### Get Assets
-
-This action is used to get assets that match the specified filter criteria. If no inputs are given, all assets will be returned.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|asset_labels|string|None|False|The label of the asset|None|internet_facing|
-|asset_state|string|None|False|The state of the asset|None|running|
-|asset_type|string|None|False|The type of the asset|None|container|
-|asset_unique_id|string|None|False|Unique ID of the asset for which information will be obtained|None|example-asset-123|
-|cloud_provider_id|string|None|False|ID of the cloud provider for which the assets will be returned|None|123456789|
-|compute_regions|string|None|False|The region for which the assets will be returned|None|us-east-1|
-|compute_vpcs|string|None|False|The virtual private cloud|None|vpc-1234567890|
-|internet_facing|string|None|False|Whether asset is accessible from the internet|None|True|
-|state_score|string|None|False|The score of the asset|None|4|
-|state_severity|string|None|False|The severity of the asset|None|informational|
-
-Example input:
-
-```
-{
-  "asset_labels": "internet_facing",
-  "asset_state": "running",
-  "asset_type": "container",
-  "asset_unique_id": "example-asset-123",
-  "cloud_provider_id": 123456789,
-  "compute_regions": "us-east-1",
-  "compute_vpcs": "vpc-1234567890",
-  "internet_facing": true,
-  "state_score": 4,
-  "state_severity": "informational"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|assets|[]asset|False|Results containing information about assets|
-|total_items|integer|True|Total number of assets|
-|total_supported_items|integer|False|Total number of supported assets|
-|total_ungrouped_items|integer|False|Total number of ungrouped assets|
-
-Example output:
-
-```
-{
-  "total_items": 1,
-  "total_ungrouped_items": 10,
-  "total_supported_items": 1000,
-  "assets": [
-    {
-      "group_val": "group",
-      "asset_type_string": "VM",
-      "configuration": {},
-      "group_type_string": "VM",
-      "group_type": "asg",
-      "cluster_type": "asg",
-      "type": "vm",
-      "group_unique_id": "group-12345",
-      "tags_value_list": [
-        "ECSAutoScalingGroup"
-      ],
-      "vm_asset_unique_ids": [
-        "vm_12345"
-      ],
-      "cloud_account_id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
-      "compute": {
-        "distribution_name": "Amazon",
-        "num_cpus": 10,
-        "memory": 7891,
-        "num_vcpus_api": 2,
-        "regions": [
-          "us-east-1"
-        ],
-        "disks": [
-          {
-            "size": "7.87 GB",
-            "used": "1.35 GB"
-          }
-        ],
-        "private_dnss": [
-          "ip-198-51-100-100.ec2.internal"
-        ],
-        "hardware_info_from_disk": 7,
-        "roles": [
-          {
-            "name": "ssh",
-            "is_public": false,
-            "type": "ssh"
-          }
-        ],
-        "memory_api": 8192,
-        "regions_names": [
-          "N. Virginia"
-        ],
-        "data_frameworks": [
-          "cis_os_dist_indep"
-        ],
-        "cpu_type": "Intel(R) Xeon(R) Platinum 8252C CPU",
-        "os_bit_mode_api": 64,
-        "public_dnss": [
-          "ec2-198-51-100-100.compute-1.amazonaws.com"
-        ],
-        "subnets": [
-          "subnet-059fa51de12f0855c",
-          "subnet-02ad498d5134c5499"
-        ],
-        "vpcs": [
-          "vpc-1234567890"
-        ],
-        "os_bit_mode": 64,
-        "mac_addresses": [
-          "10:DD:32:45:00:11"
-        ],
-        "public_ips": [
-          "198.51.100.100"
-        ],
-        "auto_updates": "off",
-        "availability_zones": [
-          "us-east-1a",
-          "us-east-1b"
-        ],
-        "iam_role": "arn:aws:iam::12345:instance-profile/TestInstanceProfile-123",
-        "num_vcpus": 2,
-        "distribution_major_version": "1",
-        "uptime": "2022-07-24T09:55:41+00:00",
-        "security_groups": [
-          "TestHostSecurityGroup-123"
-        ],
-        "last_update_time": "2022-05-26",
-        "kernel_version": "4.14.281-144.502.amzn1.x86_64 (mockbuild@koji-pdx-corp-builder-64001) (gcc version 7.2.1 20170915 (Red Hat 7.2.1-2) (GCC)) #1 SMP Thu May 26 10:34:22 UTC 2022",
-        "distribution_version": "2018.03 (2022.06.13)",
-        "private_ips": [
-          "198.51.100.100"
-        ],
-        "cpu_frequency": 3800,
-        "cpu_frequency_api": 4500,
-        "total_disks_bytes": 42265006080
-      },
-      "internet_facing_new": false,
-      "asset_name": "test-asset",
-      "tags_key_list": [
-        "aws:autoscaling:groupName"
-      ],
-      "account_name": "test-account",
-      "context": "data",
-      "asset_type": "asg",
-      "children_unique_ids": [
-        "vm_12345"
-      ],
-      "model": {
-        "data": {
-          "AwsEc2Instance": {
-            "AutoScalingGroup": {
-              "model": {
-                "name": "TestAutoScalingGroup-123",
-                "asset_unique_id": "AwsAsg_542760197740_44d88612-fea8-a8f3-6de8-2e1278abb02f",
-                "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
-                "type": "AwsAsg"
-              }
-            }
-          },
-          "Vm": {
-            "ImageName": "amzn-ami-2018.03.20220627-amazon-ecs-optimized",
-            "ImageOwnerId": "591542846629",
-            "ImageIsPublic": "True",
-            "ImageId": "ami-061c737b1691cb15f",
-            "ImageDescription": "Amazon Linux AMI amzn-ami-2018.03.20220627 x86_64 ECS HVM GP2",
-            "InstanceType": "m5zn.large",
-            "Name": "i-041e727ac105d8bd5"
-          },
-          "Inventory": {
-            "NewSubCategory": "Virtual Instances",
-            "DetectedCrownJewelReason": "Access: Host compromise",
-            "Category": "VM",
-            "UiUniqueField": "i-041e727ac105d8bd5",
-            "IsInternetFacing": false,
-            "NewCategory": "Compute Services",
-            "Name": "i-041e727ac105d8bd5",
-            "DetectedCrownJewelScore": 10,
-            "SubCategory": "VM",
-            "ModelTags": "{\"Category\": \"Compute\"}"
-          }
-        },
-        "name": "i-041e727ac105d8bd5",
-        "asset_unique_id": "example-asset-123",
-        "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
-        "type": "AwsEc2Instance"
-      },
-      "state": {
-        "severity": "informational",
-        "score": 4,
-        "safe_since": "2022-07-31T14:03:04+00:00",
-        "last_seen": "2022-08-13T01:22:08+00:00",
-        "created_at": "2022-07-31T14:03:04+00:00",
-        "status_time": "2022-07-31T14:03:04+00:00",
-        "status": "exists"
-      },
-      "cluster_unique_id": "12345",
-      "cluster_name": "test-cluster",
-      "create_time": "2022-07-24T09:55:31+00:00",
-      "tags_list": [
-        {
-          "value": "ECSAutoScalingGroup",
-          "key": "aws:cloudformation:logical-id"
-        }
-      ],
-      "group_name": "TestAutoScalingGroup-123",
-      "level": 0,
-      "tags_info_list": [
-        "aws:cloudformation:logical-id|ECSAutoScalingGroup"
-      ],
-      "cloud_provider": "aws",
-      "internet_facing": true,
-      "organization_name": "Test",
-      "asset_subcategory": "VM",
-      "cloud_vendor_id": "1234567890",
-      "asset_category": "VM",
-      "asset_state": "running",
-      "asset_labels": [
-        "brute-force_attempts",
-        "internet_facing"
-      ],
-      "organization_id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
-      "vm": {
-        "image_name": "amzn-ami-2018.03.20220627-amazon-ecs-optimized",
-        "image_description": "Amazon Linux AMI amzn-ami-2018.03.20220627 x86_64 ECS HVM GP2",
-        "image_is_public": true,
-        "image_id": "ami-061c737b1691cb15f",
-        "instance_type": "m5zn.large",
-        "image_owner_id": "591542846629"
-      },
-      "cloud_provider_id": "123456789",
-      "asset_unique_id": "example-asset-123",
-      "num_children_unique_ids": 1
-    }
-  ]
-}
-```
-
 #### Get Asset by ID
 
 This action is used to get asset information by providing asset unique ID
@@ -795,20 +552,264 @@ Example output:
 }
 ```
 
-#### Get Users
+#### Get Assets
 
-This action is used to get organization users information. Administrator privileges are required to perform this action.
+This action is used to get assets that match the specified filter criteria. If no inputs are given, all assets will be 
+returned
 
 ##### Input
 
-_This action does not contain any inputs._
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|asset_labels|string|None|False|The label of the asset|None|internet_facing|None|None|
+|asset_state|string|None|False|The state of the asset|None|running|None|None|
+|asset_type|string|None|False|The type of the asset|None|container|None|None|
+|asset_unique_id|string|None|False|Unique ID of the asset for which information will be obtained|None|example-asset-123|None|None|
+|cloud_provider_id|string|None|False|ID of the cloud provider for which the assets will be returned|None|123456789|None|None|
+|compute_regions|string|None|False|The region for which the assets will be returned|None|us-east-1|None|None|
+|compute_vpcs|string|None|False|The virtual private cloud|None|vpc-1234567890|None|None|
+|internet_facing|string|None|False|Whether asset is accessible from the internet|None|True|None|None|
+|state_score|string|None|False|The score of the asset|None|4|None|None|
+|state_severity|string|None|False|The severity of the asset|None|informational|None|None|
+  
+Example input:
+
+```
+{
+  "asset_labels": "internet_facing",
+  "asset_state": "running",
+  "asset_type": "container",
+  "asset_unique_id": "example-asset-123",
+  "cloud_provider_id": 123456789,
+  "compute_regions": "us-east-1",
+  "compute_vpcs": "vpc-1234567890",
+  "internet_facing": true,
+  "state_score": 4,
+  "state_severity": "informational"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|users|[]get_users_response|True|A response containing information about users|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|assets|[]asset|False|Results containing information about assets|None|
+|total_items|integer|True|Total number of assets|1|
+|total_supported_items|integer|False|Total number of supported assets|1000|
+|total_ungrouped_items|integer|False|Total number of ungrouped assets|10|
+  
+Example output:
 
+```
+{
+  "total_items": 1,
+  "total_ungrouped_items": 10,
+  "total_supported_items": 1000,
+  "assets": [
+    {
+      "group_val": "group",
+      "asset_type_string": "VM",
+      "configuration": {},
+      "group_type_string": "VM",
+      "group_type": "asg",
+      "cluster_type": "asg",
+      "type": "vm",
+      "group_unique_id": "group-12345",
+      "tags_value_list": [
+        "ECSAutoScalingGroup"
+      ],
+      "vm_asset_unique_ids": [
+        "vm_12345"
+      ],
+      "cloud_account_id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "compute": {
+        "distribution_name": "Amazon",
+        "num_cpus": 10,
+        "memory": 7891,
+        "num_vcpus_api": 2,
+        "regions": [
+          "us-east-1"
+        ],
+        "disks": [
+          {
+            "size": "7.87 GB",
+            "used": "1.35 GB"
+          }
+        ],
+        "private_dnss": [
+          "ip-198-51-100-100.ec2.internal"
+        ],
+        "hardware_info_from_disk": 7,
+        "roles": [
+          {
+            "name": "ssh",
+            "is_public": false,
+            "type": "ssh"
+          }
+        ],
+        "memory_api": 8192,
+        "regions_names": [
+          "N. Virginia"
+        ],
+        "data_frameworks": [
+          "cis_os_dist_indep"
+        ],
+        "cpu_type": "Intel(R) Xeon(R) Platinum 8252C CPU",
+        "os_bit_mode_api": 64,
+        "public_dnss": [
+          "ec2-198-51-100-100.compute-1.amazonaws.com"
+        ],
+        "subnets": [
+          "subnet-059fa51de12f0855c",
+          "subnet-02ad498d5134c5499"
+        ],
+        "vpcs": [
+          "vpc-1234567890"
+        ],
+        "os_bit_mode": 64,
+        "mac_addresses": [
+          "10:DD:32:45:00:11"
+        ],
+        "public_ips": [
+          "198.51.100.100"
+        ],
+        "auto_updates": "off",
+        "availability_zones": [
+          "us-east-1a",
+          "us-east-1b"
+        ],
+        "iam_role": "arn:aws:iam::12345:instance-profile/TestInstanceProfile-123",
+        "num_vcpus": 2,
+        "distribution_major_version": "1",
+        "uptime": "2022-07-24T09:55:41+00:00",
+        "security_groups": [
+          "TestHostSecurityGroup-123"
+        ],
+        "last_update_time": "2022-05-26",
+        "kernel_version": "4.14.281-144.502.amzn1.x86_64 (mockbuild@koji-pdx-corp-builder-64001) (gcc version 7.2.1 20170915 (Red Hat 7.2.1-2) (GCC)) #1 SMP Thu May 26 10:34:22 UTC 2022",
+        "distribution_version": "2018.03 (2022.06.13)",
+        "private_ips": [
+          "198.51.100.100"
+        ],
+        "cpu_frequency": 3800,
+        "cpu_frequency_api": 4500,
+        "total_disks_bytes": 42265006080
+      },
+      "internet_facing_new": false,
+      "asset_name": "test-asset",
+      "tags_key_list": [
+        "aws:autoscaling:groupName"
+      ],
+      "account_name": "test-account",
+      "context": "data",
+      "asset_type": "asg",
+      "children_unique_ids": [
+        "vm_12345"
+      ],
+      "model": {
+        "data": {
+          "AwsEc2Instance": {
+            "AutoScalingGroup": {
+              "model": {
+                "name": "TestAutoScalingGroup-123",
+                "asset_unique_id": "AwsAsg_542760197740_44d88612-fea8-a8f3-6de8-2e1278abb02f",
+                "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+                "type": "AwsAsg"
+              }
+            }
+          },
+          "Vm": {
+            "ImageName": "amzn-ami-2018.03.20220627-amazon-ecs-optimized",
+            "ImageOwnerId": "591542846629",
+            "ImageIsPublic": "True",
+            "ImageId": "ami-061c737b1691cb15f",
+            "ImageDescription": "Amazon Linux AMI amzn-ami-2018.03.20220627 x86_64 ECS HVM GP2",
+            "InstanceType": "m5zn.large",
+            "Name": "i-041e727ac105d8bd5"
+          },
+          "Inventory": {
+            "NewSubCategory": "Virtual Instances",
+            "DetectedCrownJewelReason": "Access: Host compromise",
+            "Category": "VM",
+            "UiUniqueField": "i-041e727ac105d8bd5",
+            "IsInternetFacing": false,
+            "NewCategory": "Compute Services",
+            "Name": "i-041e727ac105d8bd5",
+            "DetectedCrownJewelScore": 10,
+            "SubCategory": "VM",
+            "ModelTags": "{\"Category\": \"Compute\"}"
+          }
+        },
+        "name": "i-041e727ac105d8bd5",
+        "asset_unique_id": "example-asset-123",
+        "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+        "type": "AwsEc2Instance"
+      },
+      "state": {
+        "severity": "informational",
+        "score": 4,
+        "safe_since": "2022-07-31T14:03:04+00:00",
+        "last_seen": "2022-08-13T01:22:08+00:00",
+        "created_at": "2022-07-31T14:03:04+00:00",
+        "status_time": "2022-07-31T14:03:04+00:00",
+        "status": "exists"
+      },
+      "cluster_unique_id": "12345",
+      "cluster_name": "test-cluster",
+      "create_time": "2022-07-24T09:55:31+00:00",
+      "tags_list": [
+        {
+          "value": "ECSAutoScalingGroup",
+          "key": "aws:cloudformation:logical-id"
+        }
+      ],
+      "group_name": "TestAutoScalingGroup-123",
+      "level": 0,
+      "tags_info_list": [
+        "aws:cloudformation:logical-id|ECSAutoScalingGroup"
+      ],
+      "cloud_provider": "aws",
+      "internet_facing": true,
+      "organization_name": "Test",
+      "asset_subcategory": "VM",
+      "cloud_vendor_id": "1234567890",
+      "asset_category": "VM",
+      "asset_state": "running",
+      "asset_labels": [
+        "brute-force_attempts",
+        "internet_facing"
+      ],
+      "organization_id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "vm": {
+        "image_name": "amzn-ami-2018.03.20220627-amazon-ecs-optimized",
+        "image_description": "Amazon Linux AMI amzn-ami-2018.03.20220627 x86_64 ECS HVM GP2",
+        "image_is_public": true,
+        "image_id": "ami-061c737b1691cb15f",
+        "instance_type": "m5zn.large",
+        "image_owner_id": "591542846629"
+      },
+      "cloud_provider_id": "123456789",
+      "asset_unique_id": "example-asset-123",
+      "num_children_unique_ids": 1
+    }
+  ]
+}
+```
+
+#### Get Users
+
+This action is used to get organization users information. Administrator privileges are required to perform this action
+
+##### Input
+  
+*This action does not contain any inputs.*
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|users|[]get_users_response|True|A response containing information about users|None|
+  
 Example output:
 
 ```
@@ -926,38 +927,6 @@ Example output:
       "to": "closed"
     }
   }
-}
-```
-
-#### Get Alerts
-
-This action is used to get alerts that match the specified filter criteria. If no filters are given, all alerts will be returned.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|filters|object|None|False|The object containing the fields against which the alerts will be filtered|None|{"state.severity": "hazardous"}|
-|limit|integer|20|False|Maximum number of alerts returned (max value: 1000)|None|20|
-
-Example input:
-
-```
-{
-  "filters": {
-    "state.severity": "hazardous"
-  },
-  "limit": 20
-}
-```
-
-```
-{
-  "filters": {
-    "state.status": "open",
-    "alert_labels": "mitre: discovery"
-  },
-  "limit": 20
 }
 ```
 
