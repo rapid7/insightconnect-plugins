@@ -144,30 +144,31 @@ Example output:
   "ip": "1.2.3.4",
   "last_seen": "2024-01-01",
   "metadata": {
-    "ASN": "",
+    "ASN": "AS12345",
     "Category": {},
     "City": {},
     "Country": {},
     "Country Code": {},
     "Destination Countries": [
-      {}
+      "Brazil",
+      "Spain"
     ],
     "Destination Country Codes": {},
     "OS": {},
     "Organization": {},
     "Region": {},
-    "Sensor Count": 0,
+    "Sensor Count": 5,
     "Sensor Hits": {},
     "Source Country": {},
     "Source Country Code": {},
-    "TOR": "true",
+    "TOR": false,
     "rDNS": {}
   },
   "raw_data": {
     "HASSH": [
       {
-        "Fingerprint": "",
-        "Port": 0
+        "Fingerprint": "abcdefg1234567",
+        "Port": 22
       }
     ],
     "JA3": [
@@ -183,7 +184,10 @@ Example output:
       }
     ],
     "Web": {
-      "User Agents": {}
+      "User Agents": [
+        "user-agent"
+      ],
+      "Web Paths": {}
     }
   },
   "seen": true,
@@ -413,7 +417,7 @@ Example output:
 {
   "ip": {
     "ASN": {},
-    "Actor": "",
+    "Actor": "Acme Inc.",
     "City": {},
     "Classification": {},
     "Country": {},
@@ -426,19 +430,20 @@ Example output:
   "similar_ips": [
     {
       "ASN": {},
-      "Actor": "",
+      "Actor": "Acme Inc",
       "City": {},
       "Classification": {},
       "Country": {},
       "Country Code": {},
       "Features Matched": [
-        {}
+        "feature-1",
+        "feature-2"
       ],
       "First Seen": {},
       "IP Address": {},
       "Last Seen": {},
       "Organization": {},
-      "Similarity Score": 0.0
+      "Similarity Score": 0.83
     }
   ],
   "total": 5
@@ -477,7 +482,7 @@ Example output:
 {
   "activity": [
     {
-      "ASN": "",
+      "ASN": "AS12345",
       "Category": {},
       "City": {},
       "Country": {},
@@ -488,10 +493,11 @@ Example output:
           "Country Code": {}
         }
       ],
-      "Event Timestamp": "",
+      "Event Timestamp": "2020-07-08T17:15:10Z",
       "GreyNoise Classification": {},
       "HASSH Fingerprints": [
-        {}
+        "asdfa1412",
+        "asasdf2125"
       ],
       "HTTP User Agents": {},
       "HTTP Web Paths": {},
@@ -500,12 +506,12 @@ Example output:
       "Protocols": [
         {
           "App Protocol": {},
-          "Port": 0,
+          "Port": 22,
           "Transport Protocol": {}
         }
       ],
       "Region": {},
-      "Spoofable": "true",
+      "Spoofable": false,
       "Tags": [
         {
           "Tag Category": {},
@@ -523,9 +529,9 @@ Example output:
   "ip": "1.2.3.4",
   "metadata": {
     "Cursor Value": {},
-    "Event Limit": 0,
-    "IP Address": "",
-    "Timeline Period End Time": "",
+    "Event Limit": 5,
+    "IP Address": "1.2.3.4",
+    "Timeline Period End Time": "2020-07-08T17:15:10Z",
     "Timeline Period Start Time": {}
   }
 }
@@ -565,36 +571,36 @@ Example output:
 ```
 {
   "details": {
-    "CVE CVSS Score": 0.0,
-    "Is CVE Published in NIST NVD": "true",
-    "Product Name": "",
+    "CVE CVSS Score": 9.8,
+    "Is CVE Published in NIST NVD": false,
+    "Product Name": "Product Name",
     "Vendor Name": {},
     "Vulnerability Description": {},
     "Vulnerability Name": {}
   },
   "exploitation_activity": {
     "Benign IP Count - 1 day": {},
-    "Benign IP Count - 10 days": 0,
+    "Benign IP Count - 10 days": 5,
     "Benign IP Count - 30 days": {},
-    "GreyNoise Observed Activity": "true",
+    "GreyNoise Observed Activity": true,
     "Threat IP Count - 1 day": {},
     "Threat IP Count - 10 days": {},
     "Threat IP Count - 30 days": {}
   },
   "exploitation_details": {
-    "Attack Vector": "",
+    "Attack Vector": "NETWORK",
     "EPSS Score": 0.0,
-    "Exploit Found": "true",
+    "Exploit Found": false,
     "Exploitation Registered in KEV": {}
   },
   "exploitation_stats": {
     "Number of Associated Botnets": {},
-    "Number of Available Exploits": 0,
+    "Number of Available Exploits": 1,
     "Number of Threat Actors Exploiting Vulnerability": {}
   },
   "id": "CVE-2020-12345",
   "timeline": {
-    "Date Added to CISA KEV": "",
+    "Date Added to CISA KEV": "2020-07-08T17:15:10Z",
     "Date CVE was Last Updated": {},
     "Date CVE was Published": {},
     "Date of First Published POC": {}
@@ -650,50 +656,50 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|ASN|string|None|False|ASN|None|
-|Category|string|None|False|Category|None|
-|City|string|None|False|City|None|
-|Country|string|None|False|Country|None|
-|Country Code|string|None|False|Country Code|None|
-|Destination Countries|[]string|None|False|List of countries with GreyNoise sensors that observed this IP|None|
-|Destination Country Codes|[]string|None|False|List of countries (by code) with GreyNoise sensors that observed this IP|None|
-|Organization|string|None|False|Organization|None|
-|OS|string|None|False|OS|None|
-|rDNS|string|None|False|rDNS|None|
-|Region|string|None|False|Region|None|
-|Sensor Count|integer|None|False|Count of Sensors that observed traffic from this IP|None|
-|Sensor Hits|integer|None|False|Count of Sensor events observed from this IP|None|
-|Source Country|string|None|False|Source country where this IP is located|None|
-|Source Country Code|string|None|False|Source country (by code) where this IP is located|None|
-|TOR|boolean|None|False|TOR|None|
+|ASN|string|None|False|ASN|AS12345|
+|Category|string|None|False|Category|isp|
+|City|string|None|False|City|Reno|
+|Country|string|None|False|Country|Brazil|
+|Country Code|string|None|False|Country Code|BZ|
+|Destination Countries|[]string|None|False|List of countries with GreyNoise sensors that observed this IP|["Brazil", "Spain"]|
+|Destination Country Codes|[]string|None|False|List of countries (by code) with GreyNoise sensors that observed this IP|["BZ", "ES"]|
+|Organization|string|None|False|Organization|Acme Inc.|
+|OS|string|None|False|OS|Windows XP|
+|rDNS|string|None|False|rDNS|scanner.example.io|
+|Region|string|None|False|Region|Arizona|
+|Sensor Count|integer|None|False|Count of Sensors that observed traffic from this IP|5|
+|Sensor Hits|integer|None|False|Count of Sensor events observed from this IP|5|
+|Source Country|string|None|False|Source country where this IP is located|Brazil|
+|Source Country Code|string|None|False|Source country (by code) where this IP is located|BE|
+|TOR|boolean|None|False|TOR|False|
   
 **web**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|User Agents|[]string|None|False|User Agents|None|
-|User Agents|[]string|None|False|User Agents|None|
+|Web Paths|[]string|None|False|User Agents|["/", "/robots.txt"]|
+|User Agents|[]string|None|False|User Agents|["user-agent"]|
   
 **scan**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Port|integer|None|False|Port|None|
-|Protocol|string|None|False|Protocol|None|
+|Port|integer|None|False|Port|22|
+|Protocol|string|None|False|Protocol|TCP|
   
 **hassh**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Fingerprint|string|None|False|Fingerprint|None|
-|Port|integer|None|False|Port|None|
+|Fingerprint|string|None|False|Fingerprint|abcdefg1234567|
+|Port|integer|None|False|Port|22|
   
 **ja3**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Fingerprint|string|None|False|Fingerprint|None|
-|Port|integer|None|False|Port|None|
+|Fingerprint|string|None|False|Fingerprint|abcdefg1234567|
+|Port|integer|None|False|Port|22|
   
 **raw_data**
 
@@ -708,161 +714,161 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|GreyNoise Actor|string|None|False|GreyNoise Actor Associated with IP|None|
-|GreyNoise Bot|boolean|None|False|GreyNoise has identified this as a Bot|None|
-|GreyNoise Classification|string|None|False|GreyNoise Classification|None|
-|GreyNoise CVEs|[]string|None|False|CVEs associated with GreyNoise Tags|None|
-|GreyNoise First Seen|date|None|False|First Seen By GreyNoise|None|
-|IP Address|string|None|False|IP Address|None|
-|GreyNoise Last Seen|string|None|False|Last Seen By GreyNoise|None|
+|GreyNoise Actor|string|None|False|GreyNoise Actor Associated with IP|Actor Name|
+|GreyNoise Bot|boolean|None|False|GreyNoise has identified this as a Bot|False|
+|GreyNoise Classification|string|None|False|GreyNoise Classification|benign|
+|GreyNoise CVEs|[]string|None|False|CVEs associated with GreyNoise Tags|CVE-1234-12345|
+|GreyNoise First Seen|date|None|False|First Seen By GreyNoise|2024-01-01|
+|IP Address|string|None|False|IP Address|1.2.4.5|
+|GreyNoise Last Seen|string|None|False|Last Seen By GreyNoise|2024-01-01|
 |GreyNoise Metadata|metadata|None|False|GreyNoise IP Metadata|None|
 |GreyNoise Raw Data|raw_data|None|False|GreyNoise IP Raw Data|None|
-|GreyNoise Seen|boolean|None|False|Has this IP been Seen by GreyNoise|None|
-|GreyNoise Spoofable|boolean|None|False|IP address may be spoofed|None|
-|GreyNoise Tags|[]string|None|False|GreyNoise Tags Associated with IP|None|
-|GreyNoise VPN|boolean|None|False|GreyNoise has identified this as a VPN|None|
-|GreyNoise VPN Service|string|None|False|Name of VPN Service|None|
+|GreyNoise Seen|boolean|None|False|Has this IP been Seen by GreyNoise|False|
+|GreyNoise Spoofable|boolean|None|False|IP address may be spoofed|False|
+|GreyNoise Tags|[]string|None|False|GreyNoise Tags Associated with IP|["tag1", "tag2"]|
+|GreyNoise VPN|boolean|None|False|GreyNoise has identified this as a VPN|False|
+|GreyNoise VPN Service|string|None|False|Name of VPN Service|VPN Name|
   
 **vuln_timeline**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Date Added to CISA KEV|string|None|False|Date Added to CISA KEV|None|
-|Date CVE was Last Updated|string|None|False|Date CVE was Last Updated|None|
-|Date CVE was Published|string|None|False|Date CVE was Published|None|
-|Date of First Published POC|string|None|False|Date of First Published POC|None|
+|Date Added to CISA KEV|string|None|False|Date Added to CISA KEV|2020-07-08T17:15:10Z|
+|Date CVE was Last Updated|string|None|False|Date CVE was Last Updated|2020-07-08T17:15:10Z|
+|Date CVE was Published|string|None|False|Date CVE was Published|2020-07-08T17:15:10Z|
+|Date of First Published POC|string|None|False|Date of First Published POC|2020-07-08T17:15:10Z|
   
 **vuln_exploitation_stats**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Number of Available Exploits|integer|None|False|Number of Available Exploits|None|
-|Number of Associated Botnets|integer|None|False|Number of Associated Botnets|None|
-|Number of Threat Actors Exploiting Vulnerability|integer|None|False|Number of Threat Actors Exploiting Vulnerability|None|
+|Number of Available Exploits|integer|None|False|Number of Available Exploits|1|
+|Number of Associated Botnets|integer|None|False|Number of Associated Botnets|1|
+|Number of Threat Actors Exploiting Vulnerability|integer|None|False|Number of Threat Actors Exploiting Vulnerability|1|
   
 **vuln_exploitation_details**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Attack Vector|string|None|False|Attack Vector|None|
-|EPSS Score|float|None|False|EPSS Score|None|
-|Exploit Found|boolean|None|False|Exploit Found|None|
-|Exploitation Registered in KEV|boolean|None|False|Exploitation Registered in KEV|None|
+|Attack Vector|string|None|False|Attack Vector|NETWORK|
+|EPSS Score|float|None|False|EPSS Score|0.0|
+|Exploit Found|boolean|None|False|Exploit Found|False|
+|Exploitation Registered in KEV|boolean|None|False|Exploitation Registered in KEV|False|
   
 **vuln_exploitation_activity**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|GreyNoise Observed Activity|boolean|None|False|GreyNoise Observed Activity|None|
-|Benign IP Count - 10 days|integer|None|False|Benign IP Count - 10 days|None|
-|Benign IP Count - 1 day|integer|None|False|Benign IP Count - 1 day|None|
-|Benign IP Count - 30 days|integer|None|False|Benign IP Count - 30 days|None|
-|Threat IP Count - 10 days|integer|None|False|Threat IP Count - 10 days|None|
-|Threat IP Count - 1 day|integer|None|False|Threat IP Count - 1 day|None|
-|Threat IP Count - 30 days|integer|None|False|Threat IP Count - 30 days|None|
+|GreyNoise Observed Activity|boolean|None|False|GreyNoise Observed Activity|True|
+|Benign IP Count - 10 days|integer|None|False|Benign IP Count - 10 days|5|
+|Benign IP Count - 1 day|integer|None|False|Benign IP Count - 1 day|5|
+|Benign IP Count - 30 days|integer|None|False|Benign IP Count - 30 days|5|
+|Threat IP Count - 10 days|integer|None|False|Threat IP Count - 10 days|5|
+|Threat IP Count - 1 day|integer|None|False|Threat IP Count - 1 day|5|
+|Threat IP Count - 30 days|integer|None|False|Threat IP Count - 30 days|5|
   
 **vuln_details**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|CVE CVSS Score|float|None|False|CVE CVSS Score|None|
-|Product Name|string|None|False|Product Name|None|
-|Is CVE Published in NIST NVD|boolean|None|False|Is CVE Published in NIST NVD|None|
-|Vendor Name|string|None|False|Vendor Name|None|
-|Vulnerability Description|string|None|False|Vulnerability Description|None|
-|Vulnerability Name|string|None|False|Vulnerability Name|None|
+|CVE CVSS Score|float|None|False|CVE CVSS Score|9.8|
+|Product Name|string|None|False|Product Name|Product Name|
+|Is CVE Published in NIST NVD|boolean|None|False|Is CVE Published in NIST NVD|False|
+|Vendor Name|string|None|False|Vendor Name|Acme Inc|
+|Vulnerability Description|string|None|False|Vulnerability Description|This is a product description.|
+|Vulnerability Name|string|None|False|Vulnerability Name|This is a vuln name.|
   
 **timeline_metadata**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Timeline Period End Time|date|None|False|Timeline Period End Time|None|
-|IP Address|string|None|False|IP Queried|None|
-|Event Limit|integer|None|False|Max number of events to return|None|
-|Cursor Value|string|None|False|Cursor value for additional pages of details|None|
-|Timeline Period Start Time|date|None|False|Timeline Period Start Time|None|
+|Timeline Period End Time|date|None|False|Timeline Period End Time|2020-07-08T17:15:10Z|
+|IP Address|string|None|False|IP Queried|1.2.3.4|
+|Event Limit|integer|None|False|Max number of events to return|5|
+|Cursor Value|string|None|False|Cursor value for additional pages of details|asdf142qas3241asdf234sfa|
+|Timeline Period Start Time|date|None|False|Timeline Period Start Time|2020-07-08T17:15:10Z|
   
 **timeline_activity**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|ASN|string|None|False|ASN|None|
-|Category|string|None|False|Category|None|
-|City|string|None|False|City|None|
-|GreyNoise Classification|string|None|False|GreyNoise Classification|None|
-|Country|string|None|False|Country|None|
-|Country Code|string|None|False|Country Code|None|
+|ASN|string|None|False|ASN|AS12345|
+|Category|string|None|False|Category|isp|
+|City|string|None|False|City|Seattle|
+|GreyNoise Classification|string|None|False|GreyNoise Classification|benign|
+|Country|string|None|False|Country|Spain|
+|Country Code|string|None|False|Country Code|ES|
 |Destinations|[]destinations|None|False|Destinations|None|
-|HASSH Fingerprints|[]string|None|False|HASSH Fingerprints|None|
-|HTTP Web Paths|[]string|None|False|HTTP Web Paths|None|
-|HTTP User Agents|[]string|None|False|HTTP User Agents|None|
-|JA3 Fingerprints|[]string|None|False|JA3 Fingerprints|None|
-|Organization|string|None|False|Organization|None|
+|HASSH Fingerprints|[]string|None|False|HASSH Fingerprints|["asdfa1412", "asasdf2125"]|
+|HTTP Web Paths|[]string|None|False|HTTP Web Paths|["/", "/robots.txt"]|
+|HTTP User Agents|[]string|None|False|HTTP User Agents|["/", "/robots.txt"]|
+|JA3 Fingerprints|[]string|None|False|JA3 Fingerprints|["abasdfas", "abasdfasdf"]|
+|Organization|string|None|False|Organization|Acme Inc|
 |Protocols|[]protocols|None|False|Destinations|None|
-|rDNS|string|None|False|rDNS|None|
-|Region|string|None|False|Region|None|
-|Spoofable|boolean|None|False|Spoofable|None|
+|rDNS|string|None|False|rDNS|scanner.acme.io|
+|Region|string|None|False|Region|Arizona|
+|Spoofable|boolean|None|False|Spoofable|False|
 |Tags|[]tags|None|False|Tags|None|
-|Event Timestamp|date|None|False|Event Timestamp|None|
-|Tor Exit Node|boolean|None|False|Tor Exit Node|None|
-|VPN|boolean|None|False|VPN|None|
-|VPN Service|string|None|False|VPN Service|None|
+|Event Timestamp|date|None|False|Event Timestamp|2020-07-08T17:15:10Z|
+|Tor Exit Node|boolean|None|False|Tor Exit Node|False|
+|VPN|boolean|None|False|VPN|False|
+|VPN Service|string|None|False|VPN Service|VPN Name|
   
 **destinations**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Country|string|None|False|Country|None|
-|Country Code|string|None|False|Country Code|None|
+|Country|string|None|False|Country|Brazil|
+|Country Code|string|None|False|Country Code|BE|
   
 **protocols**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|App Protocol|string|None|False|App Protocol|None|
-|Port|integer|None|False|Port|None|
-|Transport Protocol|string|None|False|Transport Protocol|None|
+|App Protocol|string|None|False|App Protocol|http|
+|Port|integer|None|False|Port|22|
+|Transport Protocol|string|None|False|Transport Protocol|TCP|
   
 **tags**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Tag Category|string|None|False|Tag Category|None|
-|Tag Description|string|None|False|Tag Description|None|
-|Tag Intention|string|None|False|Tag Intention|None|
-|Tag Name|string|None|False|Tag Name|None|
+|Tag Category|string|None|False|Tag Category|activity|
+|Tag Description|string|None|False|Tag Description|This is a description of the tag.|
+|Tag Intention|string|None|False|Tag Intention|malicious|
+|Tag Name|string|None|False|Tag Name|IoT Bot Tag|
   
 **ip_sim**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Actor|string|None|False|Actor|None|
-|ASN|string|None|False|ASN|None|
-|City|string|None|False|City|None|
-|Classification|string|None|False|Classification|None|
-|Country|string|None|False|Country|None|
-|Country Code|string|None|False|Country Code|None|
-|First Seen|string|None|False|First Seen|None|
-|IP Address|string|None|False|IP Address|None|
-|Last Seen|string|None|False|Last Seen|None|
-|Organization|string|None|False|Organization|None|
+|Actor|string|None|False|Actor|Acme Inc.|
+|ASN|string|None|False|ASN|AS12345|
+|City|string|None|False|City|Seattle|
+|Classification|string|None|False|Classification|benign|
+|Country|string|None|False|Country|Brazil|
+|Country Code|string|None|False|Country Code|BE|
+|First Seen|string|None|False|First Seen|2020-07-08T17:15:10Z|
+|IP Address|string|None|False|IP Address|1.2.3.4|
+|Last Seen|string|None|False|Last Seen|2020-07-08T17:15:10Z|
+|Organization|string|None|False|Organization|Acme Inc|
   
 **similar_ip**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Actor|string|None|False|Actor|None|
-|ASN|string|None|False|ASN|None|
-|City|string|None|False|City|None|
-|Classification|string|None|False|Classification|None|
-|Country|string|None|False|Country|None|
-|Country Code|string|None|False|Country Code|None|
-|Features Matched|[]string|None|False|Features Matched|None|
-|First Seen|string|None|False|First Seen|None|
-|IP Address|string|None|False|IP Address|None|
-|Last Seen|string|None|False|Last Seen|None|
-|Organization|string|None|False|Organization|None|
-|Similarity Score|float|None|False|Similarity Score|None|
+|Actor|string|None|False|Actor|Acme Inc|
+|ASN|string|None|False|ASN|AS12345|
+|City|string|None|False|City|New York|
+|Classification|string|None|False|Classification|benign|
+|Country|string|None|False|Country|Ukraine|
+|Country Code|string|None|False|Country Code|UK|
+|Features Matched|[]string|None|False|Features Matched|["feature-1", "feature-2"]|
+|First Seen|string|None|False|First Seen|2020-07-08T17:15:10Z|
+|IP Address|string|None|False|IP Address|1.2.3.4|
+|Last Seen|string|None|False|Last Seen|2020-07-08T17:15:10Z|
+|Organization|string|None|False|Organization|Acme Inc|
+|Similarity Score|float|None|False|Similarity Score|0.83|
 
 
 ## Troubleshooting

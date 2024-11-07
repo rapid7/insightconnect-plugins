@@ -26,26 +26,14 @@ class MonitorIpsInGreynoise(insightconnect_plugin_runtime.Trigger):
         self.logger.info("Loading GreyNoise Alert Trigger")
         while True:
             try:
-                query_ips = ""
-                counter = 0
-                for ip in ip_list:
-                    if counter == 0:
-                        query_ips = "(" + str(ip)
-                        counter = counter + 1
-                    else:
-                        query_ips = query_ips + " OR " + str(ip)
-                        counter = counter + 1
-                query_ips = query_ips + ")"
+                query = f"({' OR '.join(ip_list)}) last_seen:{lookback_days}d"
 
                 self.logger.info("Checking GreyNoise for IP list")
-                query = query_ips + " last_seen:" + str(lookback_days) + "d"
                 response = self.connection.gn_client.query(query)
 
-                if response.get("count") != 0:
+                if response.get("count", 0) != 0:
                     self.logger.info("IPs found in GreyNoise")
-                    alert_ip_list = []
-                    for item in response["data"]:
-                        alert_ip_list.append(item["ip"])
+                    alert_ip_list = [item["ip"] for item in response["data"]]
                     self.send(
                         {
                             Output.ALERT_IP_LIST: alert_ip_list,

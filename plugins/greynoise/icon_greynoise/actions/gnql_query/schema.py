@@ -406,7 +406,7 @@ class GnqlQueryOutput(insightconnect_plugin_runtime.Output):
         },
         "paths": {
           "type": "array",
-          "title": "User Agents",
+          "title": "Web Paths",
           "description": "User Agents",
           "items": {
             "type": "string"

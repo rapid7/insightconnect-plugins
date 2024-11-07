@@ -68,7 +68,7 @@ class MonitorIpsInGreynoiseOutput(insightconnect_plugin_runtime.Output):
   "properties": {
     "alert_ip_list": {
       "type": "array",
-      "title": "List of IPs found Scanning",
+      "title": "List of IPs Found Scanning",
       "description": "The list of IPs that were found scanning",
       "items": {
         "type": "string"

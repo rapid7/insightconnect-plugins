@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.1.4
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.2.0
 
 LABEL organization=greynoise
 LABEL sdk=python

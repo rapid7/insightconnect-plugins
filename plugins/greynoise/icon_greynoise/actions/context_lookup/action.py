@@ -23,7 +23,7 @@ class ContextLookup(insightconnect_plugin_runtime.Action):
             if resp["seen"]:
                 resp["first_seen"] = pendulum.parse(resp["first_seen"]).to_rfc3339_string()
                 resp["last_seen"] = pendulum.parse(resp["last_seen"]).to_rfc3339_string()
-                resp["viz_url"] = viz_base_url + str(params.get(Input.IP_ADDRESS))
+                resp["viz_url"] = viz_base_url + str(resp["ip"])
 
         except RequestFailure as error:
             raise PluginException(

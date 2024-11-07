@@ -1,34 +1,9 @@
-import sys
-import os
-
-sys.path.append(os.path.abspath("../"))
-
-from unittest import TestCase, mock
-from icon_greynoise.connection.connection import Connection
-from icon_greynoise.actions.gnql_query import GnqlQuery
-from greynoise import GreyNoise
-import json
 import logging
+from unittest import TestCase, mock
 
+from icon_greynoise.actions.gnql_query import GnqlQuery
 
-def read_file_to_string(filename):
-    with open(filename) as my_file:
-        return my_file.read()
-
-
-def mocked_requests_get(*args, **kwargs):
-    actual_path = os.path.dirname(os.path.realpath(__file__))
-    actual_joined_path = os.path.join(actual_path, "payloads/gnql_query.json")
-    get_messages_from_user_payload = read_file_to_string(actual_joined_path)
-    return json.loads(get_messages_from_user_payload)
-
-
-class MockConnection:
-    def __init__(self):
-        self.server = "test_server"
-        self.api_key = "test_api_key"
-        self.user_agent = "test_user_agent"
-        self.gn_client = GreyNoise(api_key=self.api_key, api_server=self.server, integration_name=self.user_agent)
+from .util import MockConnection, mocked_requests_get
 
 
 class TestGnqlQuery(TestCase):
@@ -39,7 +14,7 @@ class TestGnqlQuery(TestCase):
         test_gnql.connection = MockConnection()
         test_gnql.logger = log
 
-        working_params = {"query": "last_seen:1d"}
+        working_params = {"query": "gnql_query"}
         results = test_gnql.run(working_params)
         expected = {
             "complete": True,

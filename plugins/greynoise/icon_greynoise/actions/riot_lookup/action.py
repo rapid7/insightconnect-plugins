@@ -18,7 +18,7 @@ class RiotLookup(insightconnect_plugin_runtime.Action):
             resp = self.connection.gn_client.riot(params.get(Input.IP_ADDRESS))
             if resp["riot"]:
                 resp.pop("logo_url", None)
-                resp["viz_url"] = viz_base_url + str(params.get(Input.IP_ADDRESS))
+                resp["viz_url"] = viz_base_url + str(resp["ip"])
         except RequestFailure as error:
             raise PluginException(
                 cause=f"API responded with ERROR: {error.args[0]} - {error.args[1]}.",
