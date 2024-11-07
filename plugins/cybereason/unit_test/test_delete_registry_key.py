@@ -1,5 +1,6 @@
 import sys
 import os
+
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
@@ -9,7 +10,6 @@ from icon_cybereason.actions.delete_registry_key import DeleteRegistryKey
 from insightconnect_plugin_runtime.exceptions import PluginException
 from icon_cybereason.actions.delete_registry_key.schema import Input, Output
 from util import Util
-
 
 
 class TestDeleteRegistryKey(TestCase):

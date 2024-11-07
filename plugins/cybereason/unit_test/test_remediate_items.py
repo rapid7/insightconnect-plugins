@@ -1,5 +1,6 @@
 import sys
 import os
+
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
@@ -7,7 +8,6 @@ from unittest.mock import patch
 from icon_cybereason.actions.remediate_items import RemediateItems
 from icon_cybereason.actions.remediate_items.schema import Input, Output
 from util import Util
-
 
 
 class TestRemediateItems(TestCase):
