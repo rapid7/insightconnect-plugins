@@ -12,7 +12,7 @@ from icon_cybereason.actions.quarantine_file.schema import Input
 from unittest import TestCase
 from insightconnect_plugin_runtime.exceptions import PluginException
 from icon_cybereason.actions.quarantine_file import QuarantineFile
-from unit_test.util import Util
+from util import Util
 
 
 class TestQuarantineFile(TestCase):

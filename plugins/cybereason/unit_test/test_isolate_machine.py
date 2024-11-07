@@ -1,13 +1,14 @@
 import sys
 import os
+sys.path.append(os.path.abspath("../"))
+
 from unittest import TestCase
 from unittest.mock import patch
 from parameterized import parameterized
 from icon_cybereason.actions.isolate_machine import IsolateMachine
 from icon_cybereason.actions.isolate_machine.schema import Input, Output
-from unit_test.util import Util
+from util import Util
 
-sys.path.append(os.path.abspath("../"))
 
 
 class TestIsolateMachine(TestCase):
