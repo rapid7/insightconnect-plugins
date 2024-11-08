@@ -9,7 +9,7 @@ from unittest.mock import patch
 from icon_cybereason.actions.archive_sensor.schema import Input
 from unittest import TestCase
 from icon_cybereason.actions.archive_sensor import ArchiveSensor
-from unit_test.util import Util
+from util import Util
 
 
 class TestArchiveSensor(TestCase):
