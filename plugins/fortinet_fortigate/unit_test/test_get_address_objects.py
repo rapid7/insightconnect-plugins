@@ -1,15 +1,17 @@
 import sys
 import os
 
+sys.path.append(os.path.abspath("../"))
+
+
 from unittest import TestCase
 from icon_fortinet_fortigate.actions.get_address_objects import GetAddressObjects
 from icon_fortinet_fortigate.actions.get_address_objects.schema import Input, Output
-from unit_test.util import Util
+from util import Util
 from unittest.mock import patch
 from parameterized import parameterized
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-sys.path.append(os.path.abspath("../"))
 
 parameters = Util.load_data("get_address_object_parameters").get("parameters")
 
