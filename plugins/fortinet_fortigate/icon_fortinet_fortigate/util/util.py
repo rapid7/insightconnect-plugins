@@ -85,9 +85,9 @@ class Helpers(object):
     def determine_address_type(address: str) -> str:
         if validators.domain(address):
             return "fqdn"
-        if validators.ipv4(address) or validators.ipv4_cidr(address):
+        if validators.ipv4(address) or validators.ipv4(address, cidr=True):
             return "ipmask"
-        if validators.ipv6(address) or validators.ipv6_cidr(address):
+        if validators.ipv6(address) or validators.ipv6(address, cidr=True):
             return "ipprefix"
         else:
             raise PluginException(

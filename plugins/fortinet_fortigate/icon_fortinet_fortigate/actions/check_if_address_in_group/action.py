@@ -77,7 +77,7 @@ class CheckIfAddressInGroup(insightconnect_plugin_runtime.Action):
         address_found = ""
         result_type = result.get("type")
         # If address_object is a IPv6
-        if result_type == "ipprefix" and (validators.ipv6(address) or validators.ipv6_cidr(address)):
+        if result_type == "ipprefix" and (validators.ipv6(address) or validators.ipv6(address, cidr=True)):
             address = str(ipaddress.IPv6Network(address))
             result_ipv6 = result.get("ip6")
             if address == result_ipv6:
