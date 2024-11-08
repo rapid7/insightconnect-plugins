@@ -4,11 +4,25 @@ products: ["insightconnect"]
 name: easyvista
 title: EasyVista
 description: EasyVista Service Manager platform supports even the most complex requirements, while bringing a new level of simplicity, agility, and mobility required to make cloud based IT Service Management (ITSM) software easy to use and easy to deliver. Using the EasyVista plugin for Rapid7 InsightConnect, users can manage the creation, update, search and closure of incident, service request, problem or event tickets
-version: 2.0.0
+version: 2.0.1
+connection_version: 2
 supported_versions: ["EasyVista API v1 2022-05-25"]
 vendor: rapid7
 support: rapid7
 status: []
+sdk:
+  type: slim
+  version: 6.2.0
+  user: nobody
+requirements:
+  - "EasyVista Service Manager username and password"
+  - "EasyVista Service Manager server URL and account"
+key_features:
+  - "Create, close, update and search tickets"
+links:
+  - "[EasyVista](https://www.easyvista.com)"
+references:
+  - "[EasyVista API Docs](https://docs.blinkops.com/docs/integrations/easyvista)"
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/easyvista
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -20,7 +34,11 @@ hub_tags:
   use_cases: [remediation_management]
   keywords: [itsm]
   features: []
-
+version_history:
+  - "2.0.1 - Bumping requirements.txt | SDK bump to 6.2.0"
+  - "2.0.0 - Fix issue where Create Ticket and Update Ticket actions did not work if `impact_id`, `severity_id` and `urgent_id` were given as `0` | Add error handling for invalid inputs"
+  - "1.0.1 - Fix issue where connection test was failing"
+  - "1.0.0 - Initial plugin"
 types:
   comment:
     HREF:
@@ -718,7 +736,7 @@ actions:
         required: true
   search_tickets:
     title: Search Tickets
-    description: Search for EasyVista tickets
+    description: This action is used to search for EasyVista tickets. All available search filters can be found [here](https://wiki.easyvista.com/xwiki/bin/view/Documentation/REST+API+-+Options+for+Fields#SearchFilterOptions)
     input:
       query:
         title: Query
