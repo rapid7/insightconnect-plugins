@@ -1,16 +1,17 @@
 import os
 import sys
+
+sys.path.append(os.path.abspath("../"))
+
 from unittest import TestCase, mock
 from unittest.mock import patch
 
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 from parameterized import parameterized
-from unit_test.util import Util
+from util import Util
 
 from icon_sophos_central.actions.antivirus_scan import AntivirusScan
-
-sys.path.append(os.path.abspath("../"))
 
 
 class TestAntivirusScan(TestCase):
