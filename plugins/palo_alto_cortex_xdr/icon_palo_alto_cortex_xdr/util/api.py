@@ -16,6 +16,7 @@ from insightconnect_plugin_runtime.exceptions import (
     ConnectionTestException,
     ResponseExceptionData,
     HTTPStatusCodes,
+    APIException,
 )
 from insightconnect_plugin_runtime.helper import extract_json, make_request
 from requests import Response
@@ -473,11 +474,20 @@ class CortexXdrAPI:
         re-run the creds generation
         """
 
-        if response.status_code == 401:
-            self.logger.info(f"Received HTTP {response.status_code}, re-authenticating to Palo Alto Cortex XDR")
+        if response.status_code in [401, 403]:
+            self.logger.info(f"Received HTTP {response.status_code}, attempting to refresh token")
 
             new_headers = self._advanced_authentication(api_key=self.api_key, api_key_id=self.api_key_id)
             new_response = self.build_request(url=url, headers=new_headers, post_body=post_body)
+
+            if new_response.status_code in [401, 403]:
+                self.logger.info("Token is still invalid, raising exception")
+                raise APIException(
+                    cause=PluginException.causes.get(PluginException.Preset.API_KEY),
+                    assistance=PluginException.assistances.get(PluginException.Preset.API_KEY),
+                    status_code=401,
+                    data=response.text,
+                )
 
             return new_response
 

@@ -8,7 +8,7 @@ from .schema import (
     Component,
 )
 from datetime import datetime, timedelta, timezone
-from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException, APIException
 from insightconnect_plugin_runtime.helper import hash_sha1
 from typing import Any, Dict, Tuple, Union, Optional
 
@@ -60,6 +60,15 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             )
 
             return response, state, has_more_pages, 200, None
+
+        except APIException as error:
+            return (
+                [],
+                {},
+                False,
+                error.status_code,
+                PluginException(data=error, cause=error.cause, assistance=error.assistance),
+            )
 
         except PluginException as error:
             if isinstance(error.data, Response):
