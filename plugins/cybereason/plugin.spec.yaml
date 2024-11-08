@@ -4,12 +4,39 @@ products: [insightconnect]
 name: cybereason
 title: Cybereason
 description: The Cybereason platform provides military-grade cyber security with real-time awareness and detection. Respond to threats and remediate in seconds using the Cybereason plugin
-version: 3.0.0
+version: 3.0.1
+connection_version: 3
 supported_versions: ["Cybereason API 2023-04-12"]
 vendor: rapid7
 support: rapid7
 status: []
 tags: [investigate, malware, threat intel]
+sdk:
+  type: slim
+  version: 6.2.0
+  user: nobody
+references:
+    - "[Cybereason Plugin API](https://nest.cybereason.com/documentation/api-documentation)"
+    - "[Cybereason Plugin API](https://nest.cybereason.com/user/login?destination=/documentation/api-documentation/all-versions/cybereason-api-guide)"
+links:
+  - "[Cybereason Plugin](https://www.cybereason.com/)"
+key_features:
+  - "Quickly respond to threats by quarantining (isolating) a machine associated with a Malop"
+  - "Search files on machines"
+requirements:
+  - "Requires a Cybereason username and password"
+  - "Cybereason account configured as shown [here](https://nest.cybereason.com/user/login?destination=/documentation/product-documentation/191/search-and-browse-files-machines-0#pre-requisites) for File Search capabilities"
+version_history:
+    - "3.0.1 - Bumping requirements.txt | SDK bump to 6.2.0"
+    - "3.0.0 - Fix Output for `Get Sensor`"
+    - "2.2.0 - Added new actions: `Get Sensor` & `Archive Sensor`"
+    - "2.1.0 - New action Delete Registry Key | Add support product versions"
+    - "2.0.2 - Remove ISOLATE_MACHINE option from Remediate Items action documentation"
+    - "2.0.1 - Fix incorrect error messaging when invalid credentials are used"
+    - "2.0.0 - Update action Isolate Machine | New action Remediate Items"
+    - "1.2.0 - Add new action Quarantine File"
+    - "1.1.0 - Add new action Isolate Machine"
+    - "1.0.0 - Initial plugin"
 hub_tags:
   use_cases: [threat_detection_and_response, vulnerability_management]
   keywords: [investigate]

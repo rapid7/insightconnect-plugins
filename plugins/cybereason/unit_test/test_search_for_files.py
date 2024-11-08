@@ -9,7 +9,7 @@ from unittest.mock import patch
 from icon_cybereason.actions.search_for_files.schema import Input
 from unittest import TestCase
 from icon_cybereason.actions.search_for_files import SearchForFiles
-from unit_test.util import Util
+from util import Util
 
 
 class TestSearchForFiles(TestCase):

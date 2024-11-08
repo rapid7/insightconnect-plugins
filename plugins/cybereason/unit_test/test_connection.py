@@ -7,7 +7,7 @@ sys.path.append(os.path.abspath("../"))
 from unittest.mock import patch
 from unittest import TestCase
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
-from unit_test.util import Util
+from util import Util
 
 
 class TestQuarantineFile(TestCase):
@@ -16,7 +16,7 @@ class TestQuarantineFile(TestCase):
         with self.assertRaises(ConnectionTestException) as context:
             action = Util.default_connector_bad()
 
-        cause = "The service this plugin is designed for is currently unavailable."
+        cause = "The service is currently unavailable."
         assist = f"Try again later. If the issue persists, please contact support."
 
         self.assertEqual(cause, context.exception.cause)
