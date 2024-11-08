@@ -4,14 +4,28 @@ products: [insightconnect]
 name: redis
 title: Redis
 description: The Redis plugin allows you to add, update, and manage data in a Redis database
-version: 1.0.1
+version: 1.0.2
+connection_version: 1
 vendor: rapid7
 support: community
 status: []
+supported_versions: ["2024-11-8"]
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/redis
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://redis.io/
+sdk:
+  type: slim
+  version: 6.2.0
+  user: nobody
+key_features:
+  - "Set and retrieve data from Redis"
+requirements:
+  - "Connection information for your Redis database"
+links:
+  - "[REDIS](https://redis.io/)"
+references:
+  - "[REDIS API Docs](https://redis.io/docs/latest/apis/)"
 tags:
 - database
 - redis
@@ -19,6 +33,13 @@ hub_tags:
   use_cases: [data_utility, reporting_and_analytics]
   keywords: [database, redis]
   features: []
+version_history:
+  - "1.0.2 - Bumping requirements.txt | SDK bump to 6.2.0"
+  - "1.0.1 - New spec and help.md format for the Extension Library"
+  - "1.0.0 - Support web server mode | Add actions HMSET, HMGET and HINCRBY"
+  - "0.1.2 - Update to new plugin architecture, fix action 'keys'"
+  - "0.1.1 - SSL bug fix in SDK"
+  - "0.1.0 - Initial plugin"
 connection:
   host:
     type: string
@@ -31,7 +52,7 @@ connection:
     required: true
   db:
     type: integer
-    description: Db to use usually (0-15)
+    description: DB to use usually (0-15)
     default: 0
     required: true
 actions:
@@ -44,6 +65,7 @@ actions:
         type: string
         description: Key to delete
         required: true
+        example: example:1234:session
     output:
       count:
         title: Count
@@ -59,16 +81,19 @@ actions:
         type: string
         description: Key to set
         required: true
+        example: example:1234:session
       value:
         title: Value
         type: string
         description: Value to set
         required: true
+        example: active
       expire:
         title: Expire
         type: integer
         description: Expiration in seconds
         required: false
+        example: 100
     output:
       reply:
         title: Reply
@@ -84,6 +109,7 @@ actions:
         type: string
         description: Key to get
         required: true
+        example: example:1234:active
     output:
       found:
         title: Found
@@ -104,6 +130,7 @@ actions:
         type: string
         description: Pattern, e.g. *o*
         required: true
+        example: example:*:session
     output:
       count:
         title: Count
@@ -124,16 +151,19 @@ actions:
         type: string
         description: Key
         required: true
+        example: user:1234
       values:
         title: Values
         type: object
         description: Object hash field:value to set
         required: true
+        example: {"name": "John Doe", "email": "johndoe@example.com", "age": "30"}
       expire:
         title: Expire
         type: integer
         description: Expiration in seconds
         required: false
+        example: 100
     output:
       reply:
         title: Reply

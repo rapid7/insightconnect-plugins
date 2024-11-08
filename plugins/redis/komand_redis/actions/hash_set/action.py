@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import HashSetInput, HashSetOutput
 
 # Custom imports below
 
 
-class HashSet(komand.Action):
+class HashSet(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="hash_set", description="Set Hash", input=HashSetInput(), output=HashSetOutput()

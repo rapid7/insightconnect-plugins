@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import HmgetInput, HmgetOutput
 
 # Custom imports below
 
 
-class Hmget(komand.Action):
+class Hmget(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="hmget",

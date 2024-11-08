@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import SetInput, SetOutput
 
 # Custom imports below
 
 
-class Set(komand.Action):
+class Set(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(name="set", description="Set", input=SetInput(), output=SetOutput())
 
