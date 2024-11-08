@@ -19,13 +19,13 @@ EasyVista Service Manager platform supports even the most complex requirements, 
 
 ## Setup
 
-The connection configuration accepts the following parameters:
+The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|account|integer|50004|True|Service Manager account used|None|50004|
-|client_login|credential_username_password|None|True|The EasyVista username and password for basic authentication API interaction|None|{"username":"user1", "password":"mypassword"}|
-|url|string|None|True|The full URL for your EasyVista server, e.g. https://example.easyvista.com|None|https://example.easyvista.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|account|integer|50004|True|Service Manager account used|None|50004|None|None|
+|client_login|credential_username_password|None|True|The EasyVista username and password for basic authentication API interaction|None|{"username":"user1", "password":"mypassword"}|None|None|
+|url|string|None|True|The full URL for your EasyVista server, e.g. https://example.easyvista.com|None|https://example.easyvista.com|None|None|
 
 Example input:
 
@@ -33,8 +33,8 @@ Example input:
 {
   "account": 50004,
   "client_login": {
-    "username": "user1",
-    "password": "mypassword"
+    "password": "mypassword",
+    "username": "user1"
   },
   "url": "https://example.easyvista.com"
 }
@@ -44,16 +44,153 @@ Example input:
 
 ### Actions
 
-#### Search Tickets
 
-This action is used to search for EasyVista tickets. All available search filters can be found [here](https://wiki.easyvista.com/xwiki/bin/view/Documentation/REST+API+-+Options+for+Fields#SearchFilterOptions).
+#### Close Ticket
+
+This action is used to close an EasyVista ticket
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|query|string|None|False|Search query. Returns all tickets if left empty|None|rfc_number:I210412_000001|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|catalog_guid|string|None|False|Identifier of the topic of the ticket. Required if the ticket needs to be requalified before closing|None|44D88612-FEA8-A8F3-6DE8-2E1278ABB02F|None|None|
+|comment|string|None|False|Comment that explains why the ticket was closed|None|Ticket closed via InsightConnect|None|None|
+|delete_actions|boolean|False|False|Used to indicate the measures to be taken for ongoing actions in the ticket|None|False|None|None|
+|end_date|string|None|False|Closing date of open actions associated with the ticket and the anticipated closure action. By default, the current date|None|04/20/2021 12:00:00|None|None|
+|rfc_number|string|None|True|Reference number of the ticket to be closed|None|I210412_000001|None|None|
+|status_guid|string|None|False|Identifier (GUID) of the final status of the ticket|None|DC97DD1D-0F35-4153-B0E1-0F2E0155365D|None|None|
+  
+Example input:
 
+```
+{
+  "catalog_guid": "44D88612-FEA8-A8F3-6DE8-2E1278ABB02F",
+  "comment": "Ticket closed via InsightConnect",
+  "delete_actions": false,
+  "end_date": "04/20/2021 12:00:00",
+  "rfc_number": "I210412_000001",
+  "status_guid": "DC97DD1D-0F35-4153-B0E1-0F2E0155365D"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|result|ticket_data|True|Result that includes URL link (HREF) and reference number of the closed ticket|None|
+  
+Example output:
+
+```
+{
+  "result": {
+    "href_hyperlink": "https://example.easyvista.com/api/v1...",
+    "reference_number": "I210409_000006"
+  }
+}
+```
+
+#### Create Ticket
+
+This action is used to create a new EasyVista ticket. The only required input parameter is `catalog`. All other input 
+parameters are optional, and you can only provide the ones you need
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|asset_id|string|None|False|Identifier of the asset|None|123|None|None|
+|asset_name|string|None|False|Name of the asset|None|Example asset name|None|None|
+|asset_tag|string|None|False|Tag of the asset|None|10564S|None|None|
+|catalog|string|None|True|Identifier (GUID) or code for the subject of the ticket|None|44D88612-FEA8-A8F3-6DE8-2E1278ABB02F|None|None|
+|ci_asset_tag|string|None|False|Asset tag of the Configuration Item|None|10564S|None|None|
+|ci_id|string|None|False|Identifier of the Configuration Item|None|1|None|None|
+|ci_name|string|None|False|Name of the Configuration Item|None|SQL-RDB_IT|None|None|
+|department_code|string|None|False|Department code of the requestor|None|DEP01|None|None|
+|department_id|string|None|False|Department ID of the requestor|None|1|None|None|
+|description|string|None|False|Description of the ticket|None|Example ticket description|None|None|
+|external_reference|string|None|False|Identifier of the object attributed by an external application|None|external_ref_example|None|None|
+|impact_id|string|None|False|Identifier of the impact level|None|2|None|None|
+|location_code|string|None|False|Location code of the requestor|None|LOC01|None|None|
+|location_id|string|None|False|Location ID of the requestor|None|10|None|None|
+|origin|string|None|False|Identifier of the origin|None|Email|None|None|
+|parentrequest|string|None|False|Identifier of the related request (parent request) attached to the object|None|5|None|None|
+|phone|string|None|False|Phone number of the requestor|None|11111111|None|None|
+|recipient_id|string|None|False|Identifier of the recipient|None|1|None|None|
+|recipient_identification|string|None|False|Employee number of the recipient|None|12345|None|None|
+|recipient_mail|string|None|False|Email address of the recipient|None|user@example.com|None|None|
+|recipient_name|string|None|False|Name of the recipient|None|Example Recipient|None|None|
+|requestor_identification|string|None|False|Employee number of the requestor|None|12345|None|None|
+|requestor_mail|string|None|False|Email address of the requestor|None|user@example.com|None|None|
+|requestor_name|string|None|False|Name of the requestor|None|Example Requestor|None|None|
+|severity_id|string|None|False|Identifier of the severity level|None|1|None|None|
+|submit_date|string|None|False|Creation date of the ticket|None|04/12/2021 2:00:00 pm|None|None|
+|title|string|None|False|Title of the ticket|None|Example ticket title|None|None|
+|urgency_id|string|None|False|Identifier of the urgency level|None|1|None|None|
+  
+Example input:
+
+```
+{
+  "asset_id": 123,
+  "asset_name": "Example asset name",
+  "asset_tag": "10564S",
+  "catalog": "44D88612-FEA8-A8F3-6DE8-2E1278ABB02F",
+  "ci_asset_tag": "10564S",
+  "ci_id": 1,
+  "ci_name": "SQL-RDB_IT",
+  "department_code": "DEP01",
+  "department_id": 1,
+  "description": "Example ticket description",
+  "external_reference": "external_ref_example",
+  "impact_id": 2,
+  "location_code": "LOC01",
+  "location_id": 10,
+  "origin": "Email",
+  "parentrequest": 5,
+  "phone": 11111111,
+  "recipient_id": 1,
+  "recipient_identification": 12345,
+  "recipient_mail": "user@example.com",
+  "recipient_name": "Example Recipient",
+  "requestor_identification": 12345,
+  "requestor_mail": "user@example.com",
+  "requestor_name": "Example Requestor",
+  "severity_id": 1,
+  "submit_date": "04/12/2021 2:00:00 pm",
+  "title": "Example ticket title",
+  "urgency_id": 1
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|result|ticket_data|True|Result that includes URL link (HREF) and reference number of the created ticket|None|
+  
+Example output:
+
+```
+{
+  "result": {
+    "href_hyperlink": "https://example.easyvista.com/api/v1...",
+    "reference_number": "I210412_000001"
+  }
+}
+```
+
+#### Search Tickets
+  
+This action is used to search for EasyVista tickets. All available search filters can be found 
+[here](https://wiki.easyvista.com/xwiki/bin/view/Documentation/REST+API+-+Options+for+Fields#SearchFilterOptions)
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|query|string|None|False|Search query. Returns all tickets if left empty|None|rfc_number:I210412_000001|None|None|
+  
 Example input:
 
 ```
@@ -64,10 +201,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|results|search_ticket_results|True|Search results for the given query|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|results|search_ticket_results|True|Search results for the given query|None|
+  
 Example output:
 
 ```
@@ -139,7 +276,7 @@ Example output:
           "STATUS_ID": "8"
         },
         "SUBMIT_DATE_UT": "2021-04-09T11:29:36.947Z"
-      },
+      }
     ],
     "total_record_count": "1",
     "HREF": "https://example.easyvista.com/api/v1..."
@@ -147,87 +284,42 @@ Example output:
 }
 ```
 
-#### Close Ticket
-
-This action is used to close an EasyVista ticket.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|catalog_guid|string|None|False|Identifier of the topic of the ticket. Required if the ticket needs to be requalified before closing|None|44D88612-FEA8-A8F3-6DE8-2E1278ABB02F|
-|comment|string|None|False|Comment that explains why the ticket was closed|None|Ticket closed via InsightConnect|
-|delete_actions|boolean|False|False|Used to indicate the measures to be taken for ongoing actions in the ticket|None|False|
-|end_date|string|None|False|Closing date of open actions associated with the ticket and the anticipated closure action. By default, the current date|None|04/20/2021 12:00:00|
-|rfc_number|string|None|True|Reference number of the ticket to be closed|None|I210412_000001|
-|status_guid|string|None|False|Identifier (GUID) of the final status of the ticket|None|DC97DD1D-0F35-4153-B0E1-0F2E0155365D|
-
-Example input:
-
-```
-{
-  "catalog_guid": "44D88612-FEA8-A8F3-6DE8-2E1278ABB02F",
-  "comment": "Ticket closed via InsightConnect",
-  "delete_actions": false,
-  "end_date": "04/20/2021 12:00:00",
-  "rfc_number": "I210412_000001",
-  "status_guid": "DC97DD1D-0F35-4153-B0E1-0F2E0155365D"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|result|ticket_data|True|Result that includes URL link (HREF) and reference number of the closed ticket|
-
-Example output:
-
-```
-{
-  "result": {
-    "href_hyperlink": "https://example.easyvista.com/api/v1...",
-    "reference_number": "I210409_000006"
-  }
-}
-```
-
 #### Update Ticket
 
-This action is used to update an EasyVista ticket.
+This action is used to update an EasyVista ticket
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|analytical_charge_id|string|None|False|Analytical charge ID or code|None|132|
-|asset_id|string|None|False|Identifier of the asset|None|123|
-|asset_serial|string|None|False|Serial number of the asset|None|MXRADF|
-|asset_tag|string|None|False|Tag of the asset|None|10564S|
-|ci|string|None|False|Name of the Configuration Item|None|SQL-RDB_IT|
-|ci_id|string|None|False|Identifier of the Configuration Item|None|1|
-|ci_serial|string|None|False|Serial number of the Configuration Item|None|KD78QGJYU|
-|comment|string|None|False|Comment that explains the reason for the update|None|Comment updated via InsightConnect|
-|continuity_plan_id|string|None|False|Continuity plan ID or code|None|CP01|
-|description|string|None|False|Description of the ticket|None|Example description|
-|external_reference|string|None|False|Identifier of the object used by an external application|None|external_ref_example|
-|impact_id|string|None|False|Identifier of the impact level|None|2|
-|known_problems_id|string|None|False|Identifier of the known problems|None|1|
-|net_price_cur_id|string|None|False|Price currency or currency ID|None|EUR|
-|origin_tool_id|string|None|False|Identifier of the origin tool|None|1|
-|owner_id|string|None|False|Identifier of the owner (Employee ID or name)|None|16|
-|owning_group_id|string|None|False|Owning group ID or name|None|Desktop USA|
-|release_id|string|None|False|Release ID or code|None|1|
-|rental_net_price_cur_id|string|None|False|Rental price currency or currency ID|None|EUR|
-|request_origin_id|string|None|False|Request origin name or ID|None|Email|
-|requestor_phone|string|None|False|Phone number of the requestor|None|11111111|
-|rfc_number|string|None|True|Reference number of the ticket to be updated|None|I210412_000001|
-|root_cause_id|string|None|False|Root Cause ID or name|None|Virus|
-|submit_date_ut|string|None|False|Creation date of the ticket|None|4/12/2021 2:00:00 pm|
-|system_id|string|None|False|System ID or name|None|Supervisor|
-|title|string|None|False|Title of the ticket|None|Example ticket title|
-|urgency_id|string|None|False|Identifier of the urgency level|None|1|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|analytical_charge_id|string|None|False|Analytical charge ID or code|None|132|None|None|
+|asset_id|string|None|False|Identifier of the asset|None|123|None|None|
+|asset_serial|string|None|False|Serial number of the asset|None|MXRADF|None|None|
+|asset_tag|string|None|False|Tag of the asset|None|10564S|None|None|
+|ci|string|None|False|Name of the Configuration Item|None|SQL-RDB_IT|None|None|
+|ci_id|string|None|False|Identifier of the Configuration Item|None|1|None|None|
+|ci_serial|string|None|False|Serial number of the Configuration Item|None|KD78QGJYU|None|None|
+|comment|string|None|False|Comment that explains the reason for the update|None|Comment updated via InsightConnect|None|None|
+|continuity_plan_id|string|None|False|Continuity plan ID or code|None|CP01|None|None|
+|description|string|None|False|Description of the ticket|None|Example description|None|None|
+|external_reference|string|None|False|Identifier of the object used by an external application|None|external_ref_example|None|None|
+|impact_id|string|None|False|Identifier of the impact level|None|2|None|None|
+|known_problems_id|string|None|False|Identifier of the known problems|None|1|None|None|
+|net_price_cur_id|string|None|False|Price currency or currency ID|None|EUR|None|None|
+|origin_tool_id|string|None|False|Identifier of the origin tool|None|1|None|None|
+|owner_id|string|None|False|Identifier of the owner (Employee ID or name)|None|16|None|None|
+|owning_group_id|string|None|False|Owning group ID or name|None|Desktop USA|None|None|
+|release_id|string|None|False|Release ID or code|None|1|None|None|
+|rental_net_price_cur_id|string|None|False|Rental price currency or currency ID|None|EUR|None|None|
+|request_origin_id|string|None|False|Request origin name or ID|None|Email|None|None|
+|requestor_phone|string|None|False|Phone number of the requestor|None|11111111|None|None|
+|rfc_number|string|None|True|Reference number of the ticket to be updated|None|I210412_000001|None|None|
+|root_cause_id|string|None|False|Root Cause ID or name|None|Virus|None|None|
+|submit_date_ut|string|None|False|Creation date of the ticket|None|4/12/2021 2:00:00 pm|None|None|
+|system_id|string|None|False|System ID or name|None|Supervisor|None|None|
+|title|string|None|False|Title of the ticket|None|Example ticket title|None|None|
+|urgency_id|string|None|False|Identifier of the urgency level|None|1|None|None|
+  
 Example input:
 
 ```
@@ -264,10 +356,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|result|ticket_data|True|Result that includes URL link (HREF) and reference number of the updated ticket|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|result|ticket_data|True|Result that includes URL link (HREF) and reference number of the updated ticket|None|
+  
 Example output:
 
 ```
@@ -278,217 +370,134 @@ Example output:
   }
 }
 ```
-
-#### Create Ticket
-
-This action is used to create a new EasyVista ticket. The only required input parameter is `catalog`. All other input parameters are optional, and you can only provide the ones you need.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|asset_id|string|None|False|Identifier of the asset|None|123|
-|asset_name|string|None|False|Name of the asset|None|Example asset name|
-|asset_tag|string|None|False|Tag of the asset|None|10564S|
-|catalog|string|None|True|Identifier (GUID) or code for the subject of the ticket|None|44D88612-FEA8-A8F3-6DE8-2E1278ABB02F|
-|ci_asset_tag|string|None|False|Asset tag of the Configuration Item|None|10564S|
-|ci_id|string|None|False|Identifier of the Configuration Item|None|1|
-|ci_name|string|None|False|Name of the Configuration Item|None|SQL-RDB_IT|
-|department_code|string|None|False|Department code of the requestor|None|DEP01|
-|department_id|string|None|False|Department ID of the requestor|None|1|
-|description|string|None|False|Description of the ticket|None|Example ticket description|
-|external_reference|string|None|False|Identifier of the object attributed by an external application|None|external_ref_example|
-|impact_id|string|None|False|Identifier of the impact level|None|2|
-|location_code|string|None|False|Location code of the requestor|None|LOC01|
-|location_id|string|None|False|Location ID of the requestor|None|10|
-|origin|string|None|False|Identifier of the origin|None|Email|
-|parentrequest|string|None|False|Identifier of the related request (parent request) attached to the object|None|5|
-|phone|string|None|False|Phone number of the requestor|None|11111111|
-|recipient_id|string|None|False|Identifier of the recipient|None|1|
-|recipient_identification|string|None|False|Employee number of the recipient|None|12345|
-|recipient_mail|string|None|False|Email address of the recipient|None|user@example.com|
-|recipient_name|string|None|False|Name of the recipient|None|Example Recipient|
-|requestor_identification|string|None|False|Employee number of the requestor|None|12345|
-|requestor_mail|string|None|False|Email address of the requestor|None|user@example.com|
-|requestor_name|string|None|False|Name of the requestor|None|Example Requestor|
-|severity_id|string|None|False|Identifier of the severity level|None|1|
-|submit_date|string|None|False|Creation date of the ticket|None|04/12/2021 2:00:00 pm|
-|title|string|None|False|Title of the ticket|None|Example ticket title|
-|urgency_id|string|None|False|Identifier of the urgency level|None|1|
-
-Example input:
-
-```
-{
-  "asset_id": 123,
-  "asset_name": "Example asset name",
-  "asset_tag": "10564S",
-  "catalog": "44D88612-FEA8-A8F3-6DE8-2E1278ABB02F",
-  "ci_asset_tag": "10564S",
-  "ci_id": 1,
-  "ci_name": "SQL-RDB_IT",
-  "department_code": "DEP01",
-  "department_id": 1,
-  "description": "Example ticket description",
-  "external_reference": "external_ref_example",
-  "impact_id": 2,
-  "location_code": "LOC01",
-  "location_id": 10,
-  "origin": "Email",
-  "parentrequest": 5,
-  "phone": 11111111,
-  "recipient_id": 1,
-  "recipient_identification": 12345,
-  "recipient_mail": "user@example.com",
-  "recipient_name": "Example Recipient",
-  "requestor_identification": 12345,
-  "requestor_mail": "user@example.com",
-  "requestor_name": "Example Requestor",
-  "severity_id": 1,
-  "submit_date": "04/12/2021 2:00:00 pm",
-  "title": "Example ticket title",
-  "urgency_id": 1
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|result|ticket_data|True|Result that includes URL link (HREF) and reference number of the created ticket|
-
-Example output:
-
-```
-{
-  "result": {
-    "href_hyperlink": "https://example.easyvista.com/api/v1...",
-    "reference_number": "I210412_000001"
-  }
-}
-```
-
 ### Triggers
+  
+*This plugin does not contain any triggers.*
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-_This plugin does not contain any triggers._
+### Custom Types
+  
+**comment**
 
-### Custom Output Types
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|HREF|string|None|False|HREF hyperlink|None|
+  
+**catalog_request**
 
-#### catalog_request
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Catalog Request Path|string|None|False|Catalog request path|None|
+|Code|string|None|False|Code|None|
+|HREF|string|None|False|HREF hyperlink|None|
+|SD Catalog ID|string|None|False|SD catalog ID|None|
+|Title EN|string|None|False|Title EN|None|
+  
+**status**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Catalog Request Path|string|False|Catalog request path|
-|Code|string|False|Code|
-|HREF|string|False|HREF hyperlink|
-|SD Catalog ID|string|False|SD catalog ID|
-|Title EN|string|False|Title EN|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|HREF|string|None|False|HREF hyperlink|None|
+|Status EN|string|None|False|Status EN|None|
+|Status GUID|string|None|False|Status GUID|None|
+|Status ID|string|None|False|Status ID|None|
+  
+**employee**
 
-#### comment
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Begin of Contract|string|None|False|Begin of contract|None|
+|Cellular Number|string|None|False|Cellular number|None|
+|Department Path|string|None|False|Department path|None|
+|Employee ID|string|None|False|Employee ID|None|
+|Email|string|None|False|Email|None|
+|Last Name|string|None|False|Last name|None|
+|Location Path|string|None|False|Location path|None|
+|Phone Number|string|None|False|Phone number|None|
+  
+**location**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|HREF|string|False|HREF hyperlink|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|City|string|None|False|City|None|
+|HREF|string|None|False|HREF hyperlink|None|
+|Location Code|string|None|False|Location code|None|
+|Location EN|string|None|False|Location EN|None|
+|Location ID|string|None|False|Location ID|None|
+|Location Path|string|None|False|Location path|None|
+  
+**department**
 
-#### department
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Department Code|string|None|False|Department code|None|
+|Department EN|string|None|False|Department EN|None|
+|Department ID|string|None|False|Department ID|None|
+|Department Label|string|None|False|Department label|None|
+|Department Path|string|None|False|Department path|None|
+|HREF|string|None|False|HREF hyperlink|None|
+  
+**known_error**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Department Code|string|False|Department code|
-|Department EN|string|False|Department EN|
-|Department ID|string|False|Department ID|
-|Department Label|string|False|Department label|
-|Department Path|string|False|Department path|
-|HREF|string|False|HREF hyperlink|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Known Error Path|string|None|False|Known error path|None|
+|Known Problems ID|string|None|False|Known problems ID|None|
+|KP Number|string|None|False|KP number|None|
+|Question EN|string|None|False|Question EN|None|
+  
+**record**
 
-#### employee
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Catalog Request|catalog_request|None|False|Catalog request|None|
+|Comment|comment|None|False|Comment|None|
+|Department|department|None|False|Department|None|
+|HREF|string|None|False|HREF hyperlink|None|
+|Known Error|known_error|None|False|Known error|None|
+|Location|location|None|False|Location|None|
+|Max Resolution Date|string|None|False|Max resolution date|None|
+|Recipient|employee|None|False|Recipient|None|
+|Requestor|employee|None|False|Requestor|None|
+|Request ID|string|None|False|Request ID|None|
+|RFC Number|string|None|False|RFC number|None|
+|Status|status|None|False|Status|None|
+|Submit Date|string|None|False|Submit date|None|
+  
+**search_ticket_results**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Begin of Contract|string|False|Begin of contract|
-|Cellular Number|string|False|Cellular number|
-|Department Path|string|False|Department path|
-|Employee ID|string|False|Employee ID|
-|Email|string|False|Email|
-|Last Name|string|False|Last name|
-|Location Path|string|False|Location path|
-|Phone Number|string|False|Phone number|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|HREF|string|None|False|HREF hyperlink|None|
+|Record Count|string|None|False|Record count|None|
+|Records|[]record|None|False|Records|None|
+|Total Record Count|string|None|False|Total record count|None|
+  
+**ticket_data**
 
-#### known_error
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|HREF Hyperlink|string|None|False|URL link (HREF) to the ticket|None|
+|Reference Number|string|None|False|Reference number of the ticket|None|
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Known Error Path|string|False|Known error path|
-|Known Problems ID|string|False|Known problems ID|
-|KP Number|string|False|KP number|
-|Question EN|string|False|Question EN|
-
-#### location
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|City|string|False|City|
-|HREF|string|False|HREF hyperlink|
-|Location Code|string|False|Location code|
-|Location EN|string|False|Location EN|
-|Location ID|string|False|Location ID|
-|Location Path|string|False|Location path|
-
-#### record
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Catalog Request|catalog_request|False|Catalog request|
-|Comment|comment|False|Comment|
-|Department|department|False|Department|
-|HREF|string|False|HREF hyperlink|
-|Known Error|known_error|False|Known error|
-|Location|location|False|Location|
-|Max Resolution Date|string|False|Max resolution date|
-|Recipient|employee|False|Recipient|
-|Requestor|employee|False|Requestor|
-|Request ID|string|False|Request ID|
-|RFC Number|string|False|RFC number|
-|Status|status|False|Status|
-|Submit Date|string|False|Submit date|
-
-#### search_ticket_results
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|HREF|string|False|HREF hyperlink|
-|Record Count|string|False|Record count|
-|Records|[]record|False|Records|
-|Total Record Count|string|False|Total record count|
-
-#### status
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|HREF|string|False|HREF hyperlink|
-|Status EN|string|False|Status EN|
-|Status GUID|string|False|Status GUID|
-|Status ID|string|False|Status ID|
-
-#### ticket_data
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|HREF Hyperlink|string|False|URL link (HREF) to the ticket|
-|Reference Number|string|False|Reference number of the ticket|
 
 ## Troubleshooting
-
-_This plugin does not contain any troubleshooting information._
+  
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 2.0.1 - Bumping requirements.txt | SDK bump to 6.2.0
 * 2.0.0 - Fix issue where Create Ticket and Update Ticket actions did not work if `impact_id`, `severity_id` and `urgent_id` were given as `0` | Add error handling for invalid inputs
 * 1.0.1 - Fix issue where connection test was failing
 * 1.0.0 - Initial plugin
 
 # Links
 
+* [EasyVista](https://www.easyvista.com)
+
 ## References
 
-* [EasyVista](https://www.easyvista.com)
+* [EasyVista API Docs](https://docs.blinkops.com/docs/integrations/easyvista)
