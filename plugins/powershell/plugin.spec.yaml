@@ -4,7 +4,7 @@ products: [insightconnect]
 name: powershell
 title: PowerShell
 description: "[PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-6) is a task-based command-line shell and scripting language from Microsoft that helps system administrators, power-users, and InsightConnect customers rapidly automate tasks that manage operating systems and processes. This plugin runs a PowerShell script on a remote host or locally on an InsightConnect Orchestrator"
-version: 3.0.5
+version: 3.0.6
 connection_version: 3
 key_features:
   - "Run a PowerShell script to manage (remote) computers from the command line"
@@ -15,7 +15,7 @@ requirements:
   - "The use of round-robin DNS lookups is not supported"
 sdk:
   type: slim
-  version: 6.1.4
+  version: 6.2.0
   user: nobody
 links:
   - "[InsightConnect Powershell Plugin Guide](https://docs.rapid7.com/insightconnect/mass-delete-with-PowerShell/)"
@@ -42,8 +42,9 @@ hub_tags:
   keywords: [powershell, microsoft]
   features: []
 version_history:
+  - "3.0.5 - Bump SDK to 6.2.0"
   - "3.0.5 - Bump requirements.txt | Bump SDK to 6.1.4 | Update help.md to enforce that the use of round-robin DNS lookups is not supported"
-  - "3.0.4 - Upgrade user from `nobody` to `root` | bump SDK to 6.0.1 and switch back to `Bullseye` based SDK image" 
+  - "3.0.4 - Upgrade user from `nobody` to `root` | bump SDK to 6.0.1 and switch back to `Bullseye` based SDK image"
   - "3.0.3 - Fix decoding error in `Execute Script` action | Update SDK | Update packages for alpine image"
   - "3.0.2 - Updated the SDK version to include output masking | Updated all the dependencies to the newest versions"
   - "3.0.1 - Bug fix - Fix issue where single quotes in password causes parsing error"
