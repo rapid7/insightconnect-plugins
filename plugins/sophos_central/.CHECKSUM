@@ -1,87 +1,87 @@
 {
-	"spec": "e58caa8f4af6d398f239d7c5a90cd4b5",
-	"manifest": "614d8a82e255a76c9a5836bc06d88b69",
-	"setup": "58f83a7a69eac9b33431d95d9c2b8fe6",
+	"spec": "a279e014ba26d483979d1c444acea3d0",
+	"manifest": "d6ddcd64d83a1164f3426d1746dce47a",
+	"setup": "70f342d9487baff77a6447a31070e2a5",
 	"schemas": [
 		{
 			"identifier": "add_allowed_item/schema.py",
-			"hash": "b6f919f7c10276ab5dab95ba562f94b6"
+			"hash": "7b3dc98604f9908d00fbb1c94346e881"
 		},
 		{
 			"identifier": "add_blocked_item/schema.py",
-			"hash": "c81b0f7555003b239835a38ed57a3dd4"
+			"hash": "63bb896feffe7b50272aea1924099804"
 		},
 		{
 			"identifier": "add_endpoint_group/schema.py",
-			"hash": "02bf5fec3b3341c0c931e08f1f395488"
+			"hash": "7a31674c987bfc011820cbbfe899d04d"
 		},
 		{
 			"identifier": "add_endpoint_to_group/schema.py",
-			"hash": "9673cd7d48aa8a642927ee07a72b8851"
+			"hash": "c5a8345b0a170aa3cb2364df859843be"
 		},
 		{
 			"identifier": "antivirus_scan/schema.py",
-			"hash": "391a4975524a07e94378847a2b046f92"
+			"hash": "e0a4311c6b73c19cb9fe267ba49d42f0"
 		},
 		{
 			"identifier": "blacklist/schema.py",
-			"hash": "702e8f89a14e8b955df2ff9e79062401"
+			"hash": "97a0482ae0bdb9fed734fbfe002b840c"
 		},
 		{
 			"identifier": "check_tamper_protection_status/schema.py",
-			"hash": "83e50f3e6a2c664fabc80ca2abace725"
+			"hash": "da954e27ca931f239145fe27c85af18c"
 		},
 		{
 			"identifier": "get_agent_details/schema.py",
-			"hash": "a93cf6d2c54e939b4cb50b2ae72c1815"
+			"hash": "d368e2f8108e0c856aca1e1a9ebebcf2"
 		},
 		{
 			"identifier": "get_alerts/schema.py",
-			"hash": "9d87a01d865cb8d3737b7109894e8121"
+			"hash": "4fda1998008d0a33ae6a54a83585da42"
 		},
 		{
 			"identifier": "get_allowed_items/schema.py",
-			"hash": "472347e8bdf4dd836efbf9b37c61b347"
+			"hash": "4ea2b48fb20a3b0da82da67d91ead29b"
 		},
 		{
 			"identifier": "get_blocked_items/schema.py",
-			"hash": "3d797043df94432d00babde6534c2326"
+			"hash": "b39baf82d06b442337583056230d8d35"
 		},
 		{
 			"identifier": "get_endpoint_group/schema.py",
-			"hash": "9fb4645e1988f7f9ec050b6a240479ff"
+			"hash": "6eefaa938349f2f39dde6a1e82fe89d1"
 		},
 		{
 			"identifier": "get_endpoint_groups/schema.py",
-			"hash": "dd5902e18782acc3a92ac4d2182d9b5c"
+			"hash": "50763fca69f3c52f7e5eeb9fa52a10ed"
 		},
 		{
 			"identifier": "get_endpoints/schema.py",
-			"hash": "ace04e73e5a406b8091226953a31951d"
+			"hash": "79b2f395d0fc570dd2a17cbfc911c03d"
 		},
 		{
 			"identifier": "get_endpoints_in_group/schema.py",
-			"hash": "d1198941a5c566ef5d2361691b8792d0"
+			"hash": "2aeb1f8ba678472ea140497003ab834a"
 		},
 		{
 			"identifier": "isolate_endpoint/schema.py",
-			"hash": "193d1210d4d4587eb72693641a024baf"
+			"hash": "0e1ffe4c506a32eca6f5c886445cae45"
 		},
 		{
 			"identifier": "remove_allowed_item/schema.py",
-			"hash": "8b6f325fc3200ab33330fbb697259a3e"
+			"hash": "e6a3e8a2fc15872443e68d7b4b27f60f"
 		},
 		{
 			"identifier": "remove_blocked_item/schema.py",
-			"hash": "3c1bdb765cf23654369da4cc7067f754"
+			"hash": "40c3400ee8ef0f43b41a3f2bd487b00b"
 		},
 		{
 			"identifier": "remove_endpoint_from_group/schema.py",
-			"hash": "4f5bb5f8ed9631ee513f2f144caa1d12"
+			"hash": "72f3c5bbd0ffa5c69f7b49db93b36c5c"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "12662a65e1c3e0081c5926bfb611b12a"
+			"hash": "5c6ed0dbbbee18313b0ac8138e2cd807"
 		}
 	]
 }

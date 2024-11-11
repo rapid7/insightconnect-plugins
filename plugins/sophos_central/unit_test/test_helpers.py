@@ -1,11 +1,11 @@
 import os
 import sys
 
+sys.path.append(os.path.abspath("../"))
+
 from unittest import TestCase
 from parameterized import parameterized
 from icon_sophos_central.util.helpers import clean
-
-sys.path.append(os.path.abspath("../"))
 
 
 class TestHelpers(TestCase):
