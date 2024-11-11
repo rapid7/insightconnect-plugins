@@ -8,11 +8,13 @@ from typing import Dict, List, Any, Tuple
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import get_time_hours_ago
+from requests import Response
 
 from .schema import MonitorSiemLogsInput, MonitorSiemLogsOutput, MonitorSiemLogsState, Component
-from ...util.constants import IS_LAST_TOKEN_FIELD
-from ...util.event import EventLogs
-from ...util.exceptions import ApiClientException
+from komand_mimecast.util.constants import IS_LAST_TOKEN_FIELD, RATE_LIMIT_ASSISTANCE
+from komand_mimecast.util.event import EventLogs
+from komand_mimecast.util.exceptions import ApiClientException
+from komand_mimecast.util.util import Utils
 
 FIRST_RUN_CUTOFF = 24
 NORMAL_RUNNING_CUTOFF = 24 * 7
@@ -23,6 +25,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
     NEXT_TOKEN = "next_token"  # nosec
     HEADER_NEXT_TOKEN = "mc-siem-token"  # nosec
     STATUS_CODE = "status_code"  # nosec
+    RATE_LIMIT_DATETIME = "rate_limit_datetime"
 
     NORMAL_RUNNING_CUTOFF = "normal_running_cutoff"  # nosec
     LAST_LOG_LINE = "last_log_line"  # nosec
@@ -42,6 +45,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         self, params={}, state={}, custom_config={}
     ) -> (List[Dict], Dict, Dict):
         try:
+            self.check_rate_limit(state)
             has_more_pages = False
             header_next_token = state.get(self.NEXT_TOKEN, "")
             normal_running_cutoff = state.get(self.NORMAL_RUNNING_CUTOFF, False)
@@ -81,7 +85,10 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                         f"An exception has been raised during retrieval of siem logs. Status code: {error.status_code} "
                         f"Error: {error}, returning state={state}, has_more_pages={has_more_pages}"
                     )
-                    return [], state, has_more_pages, error.status_code, error
+                    status_code, error, has_more_pages = self.check_rate_limit_error(
+                        error, error.response, error.status_code, state
+                    )
+                    return [], state, has_more_pages, status_code, error
 
                 # check if the hashed file list from the previous run is the same as this run
                 if len(output) > max_events_per_run:
@@ -203,7 +210,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
 
     def _check_hash_of_file_names(self, file_name_list: List[str]) -> str:
         file_name_list = sorted(file_name_list)
-        return hashlib.md5(str(file_name_list).encode("utf-8")).hexdigest()  # nosec B303
+        return hashlib.md5(str(file_name_list).encode("utf-8")).hexdigest()  # nosec B324
 
     def _get_filter_time(self, custom_config: Dict[str, int], normal_running_cutoff: bool = False) -> int:
         """
@@ -257,3 +264,37 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         self.logger.info(f"The following filter time will be used: {filter_time}")
 
         return filter_time
+
+    def check_rate_limit(self, state: Dict):
+        rate_limited = state.get(self.RATE_LIMIT_DATETIME)
+        now = time()
+        if rate_limited:
+            rate_limit_string = Utils.convert_epoch_to_readable(rate_limited)
+            log_msg = f"Rate limit value stored in state: {rate_limit_string}. "
+            if rate_limited > now:
+                log_msg += "Still within rate limiting period, skipping task execution..."
+                self.logger.info(log_msg)
+                error = PluginException(
+                    cause=PluginException.causes.get(PluginException.Preset.RATE_LIMIT),
+                    assistance=RATE_LIMIT_ASSISTANCE,
+                )
+                return [], state, False, 429, error
+
+            log_msg += "However no longer in rate limiting period, so task can be executed..."
+            del state[self.RATE_LIMIT_DATETIME]
+            self.logger.info(log_msg)
+
+    def check_rate_limit_error(
+        self, error: ApiClientException, response: Response, status_code: int, state: dict
+    ) -> Tuple[int, ApiClientException]:
+        if status_code == 429:
+            rate_limit_response_time = response.headers.get("X-RateLimit-Reset")
+            if rate_limit_response_time:
+                new_run_time = time() + (rate_limit_response_time / 1000)
+            else:
+                new_run_time = time() + 300
+            new_run_time_string = Utils.convert_epoch_to_readable(new_run_time)
+            self.logger.error(f"A rate limit error has occurred, task will resume after {new_run_time_string}")
+            state[self.RATE_LIMIT_DATETIME] = new_run_time
+            return 200, None, True
+        return status_code, error, False
