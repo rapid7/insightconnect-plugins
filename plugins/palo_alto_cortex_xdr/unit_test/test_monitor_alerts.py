@@ -13,6 +13,7 @@ from freezegun import freeze_time
 from taskutil import TaskUtil, mock_conditions, mocked_response_type
 from insightconnect_plugin_runtime.exceptions import PluginException
 from typing import Union
+from mock_helper import MockResponse
 
 STUB_STATE_EXPECTED_SECOND_PAGE = {
     "current_count": 2,
@@ -142,6 +143,16 @@ class TestMonitorAlerts(TestCase):
                 402,
             ],
             [
+                "Unauthorized",
+                {},
+                PluginException(
+                    cause=PluginException.causes.get(PluginException.Preset.API_KEY),
+                    assistance=PluginException.assistances.get(PluginException.Preset.API_KEY),
+                    data='An error occurred during plugin execution!\n\nInvalid API key provided. Verify your API key configured in your connection is correct. Response was: {"reply": {"err_code": 401, "err_msg": "Public API request unauthorized", "err_extra": null}}',
+                ),
+                401,
+            ],
+            [
                 "Forbidden",
                 STUB_STATE_ERROR,
                 PluginException(
@@ -178,6 +189,13 @@ class TestMonitorAlerts(TestCase):
         # This if statement is to handle the "if not type response" statement specifically
         if error_code == 500:
             mocked_response = mock_conditions(200, file_name="monitor_alerts_faulty_response")
+
+        elif error_code == 401:
+            mocked_response = MockResponse(
+                filename="monitor_alerts_faulty_response",
+                status_code=401,
+                text='{"reply": {"err_code": 401, "err_msg": "Public API request unauthorized", "err_extra": null}}',
+            )
 
         # This else applies to every other usual exception
         else:
