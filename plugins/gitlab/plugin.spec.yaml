@@ -7,15 +7,14 @@ vendor: rapid7
 support: community
 status: []
 description: GitLab is a next generation developer collaboration software with version control capabilities. The GitLab InsightConnect plugin enables user and issue management
-version: 2.0.0
+version: 2.0.1
 connection_version: 2
 supported_versions: [GitLab API v4]
-version_history: ['2.0.0 - Update SDK | Refactor Plugin | `Connection` - New input: `ssl_verify` | `Issues` - Renamed to `Get New Issues` | Added unit tests', 1.0.1 - New spec and help.md format for the Extension Library, 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types, 0.1.1 - SSL bug fix in SDK, 0.1.0 - Initial plugin]
 links: ['[GitLab](https://gitlab.com)']
 references: ['[GitLab API](https://docs.gitlab.com/ce/api/README.html)']
 sdk:
   type: slim
-  version: 5.4.4
+  version: 6.2.0
   user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/gitlab
@@ -32,8 +31,21 @@ hub_tags:
   use_cases: [user_management]
   keywords: [gitlab, version control, repository, manage, project, snippet]
   features: []
-key_features: [Block and unblock users, Delete SSH keys, Retrieve users details, Create issues]
-requirements: ['GitLab host URL', 'GitLab account username and password (or token)']
+key_features:
+  - "Block and unblock users"
+  - "Delete SSH keys"
+  - "Retrieve users details"
+  - "Create issues"
+requirements:
+  - "GitLab host URL"
+  - "GitLab account username and password (or token)"
+version_history:
+  - "2.0.1 - Update requirements.txt to remove dependencies | SDK bump to 6.2.0"
+  - "2.0.0 - Update SDK | Refactor Plugin | `Connection` - New input: `ssl_verify` | `Issues` - Renamed to `Get New Issues` | Added unit tests"
+  - "1.0.1 - New spec and help.md format for the Extension Library"
+  - "1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types"
+  - "0.1.1 - SSL bug fix in SDK"
+  - "0.1.0 - Initial plugin"
 types:
   ssh_output:
     id:
