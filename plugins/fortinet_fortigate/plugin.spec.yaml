@@ -4,7 +4,8 @@ products: [insightconnect]
 name: fortinet_fortigate
 title: Fortinet FortiGate
 description: FortiGate Next Generation Firewalls (NGFWs) enable security-driven networking and consolidate industry-leading security capabilities such as intrusion prevention system (IPS), web filtering, secure sockets layer (SSL) inspection, and automated threat protection
-version: 6.0.1
+version: 6.0.2
+connection_version: 6
 supported_versions: ["7.2.4"]
 vendor: rapid7
 support: community
@@ -14,6 +15,39 @@ resources:
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.fortinet.com/products/next-generation-firewall.html
   docs_url: https://docs.rapid7.com/insightconnect/fortinet-fortigate/
+sdk:
+  type: slim
+  version: 6.2.0
+  user: nobody
+links:
+  - "[Fortinet FortiGate](https://www.fortinet.com/)"
+references:
+  - "[Fortinet FortiGate API](https://docs.fortinet.com/document/fortigate/7.6.0/administration-guide/940602/using-apis)"
+key_features:
+  - "Create network address objects"
+  - "Add address object to address groups\n"
+  - "The intended way to use this plugin is to have an existing policy in place with a predefined address group in it.\nAs threats are detected, their address can be added to your existing policy through the address group. This allows for flexible policy management of large groups of dynamic addresses"
+requirements:
+  - "An admin API key"
+  - "The IP of the orchestrator must be set as a trusted host in Settings > Administrator (Edit button) > Trusted Hosts"
+troubleshooting: "To accomplish this, log into the FortiGate firewall. Go to the System tab -> Administrator subtab and then select and edit the API admin.\n
+     Add the orchestrator's IP address to the trusted hosts in CIDR form e.g. `198.51.100.100/32`"
+version_history:
+  - "6.0.2 - Bumping requirements.txt | SDK bump to 6.2.0 | Fixing 'cidr' function in unit test"
+  - "6.0.1 - Resolve connection test failure with Fortigate version 6.4.1 and above | Fix bug in action 'Check if Address in Group', where the action would fail if the IPV6 Group did not exist"
+  - "6.0.0 - Fix the issue where creating address objects for domains does not work in the Create Address Object action | Fix the issue where address objects for IPv4 were created using the wrong endpoint in the Create Address Object action | Correct the payloads for creating address objects for domains and IPv6 in the Create Address Object action | Add support for checking if IPv6 is whitelisted in the Create Address Object action | Fix IPv6 support in all actions | Code refactor | Add default value for SSL verify parameter in connection configuration"
+  - "5.1.1 - Add `docs_url` in plugin spec | Update `source_url` in plugin spec"
+  - "5.1.0 - Support for IPV6 in all actions"
+  - "5.0.0 - Improve input handling to allow IPs, CIDRs, and subnet masks in actions | Fix output of Get Address Objects action to return usable data | Update Get Address Objects action to allow for additional search parameters"
+  - "4.0.4 - Improve error messaging around HTTP 401 status codes to indicate that the InsightConnect orchestrator IP address not being in the trusted host list may be the cause"
+  - "4.0.3 - Improve assistance message when the API returns an Internal Server Error"
+  - "4.0.2 - Support host URL in connection | Improve Create Address Object action to allow for IPs and CIDRs as input"
+  - "4.0.1 - Bug fix where some names were being incorrectly parsed in the Check if Address in Group action causing the action to fail"
+  - "4.0.0 - Update Create Address Object action to accept a RFC1918 whitelist | Add enable_search functionality to Check if Address in Group action"
+  - "3.0.0 - Revise action input/output naming schemes | Add example inputs | New action Remove Address Object from Group"
+  - "2.0.0 - Simplify the Create Address Object action to auto-detect the input type | Add whitelist safety check to Create Address Object action"
+  - "1.1.0 - New Action Check if IP is in Address Group"
+  - "1.0.0 - Initial plugin"
 tags:
 - firewall
 - fortinet

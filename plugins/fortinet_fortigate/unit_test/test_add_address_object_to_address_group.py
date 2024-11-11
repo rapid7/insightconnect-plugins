@@ -1,15 +1,16 @@
 import sys
 import os
 
+sys.path.append(os.path.abspath("../"))
+
+
 from unittest import TestCase
 from icon_fortinet_fortigate.actions.add_address_object_to_address_group import AddAddressObjectToAddressGroup
 from icon_fortinet_fortigate.actions.add_address_object_to_address_group.schema import Input, Output
-from unit_test.util import Util
+from util import Util
 from unittest.mock import patch
 from parameterized import parameterized
 from insightconnect_plugin_runtime.exceptions import PluginException
-
-sys.path.append(os.path.abspath("../"))
 
 
 @patch("requests.Session.request", side_effect=Util.mocked_requests)
