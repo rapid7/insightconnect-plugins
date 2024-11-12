@@ -186,7 +186,8 @@ class Util:
                         }
                     ],
                 }
-                headers = {"X-RateLimit-Reset": 600000}
+                reset_value = "not an integer value" if "force_429_error" in data else "600000"
+                headers = {"X-RateLimit-Reset": reset_value}
                 resp = MockResponseZip(429, b"", headers, json.dumps(json_value))
             elif "force_json" in data:
                 resp = MockResponseZip(200, b'{ "type" : "MTA", "data" : ', headers, '{"meta": {"status": 200}}')

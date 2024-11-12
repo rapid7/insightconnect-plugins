@@ -286,15 +286,20 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
 
     def check_rate_limit_error(
         self, error: ApiClientException, response: Response, status_code: int, state: dict
-    ) -> Tuple[int, ApiClientException]:
+    ) -> Tuple[int, Any, bool]:
         if status_code == 429:
-            rate_limit_response_time = response.headers.get("X-RateLimit-Reset")
-            if rate_limit_response_time:
-                new_run_time = time() + (rate_limit_response_time / 1000)
-            else:
-                new_run_time = time() + 300
-            new_run_time_string = Utils.convert_epoch_to_readable(new_run_time)
-            self.logger.error(f"A rate limit error has occurred, task will resume after {new_run_time_string}")
-            state[self.RATE_LIMIT_DATETIME] = new_run_time
+            new_run_time = time() + 300
+            try:
+                rate_limit_response_time = response.headers.get("X-RateLimit-Reset")
+                if rate_limit_response_time:
+                    new_run_time = time() + (int(rate_limit_response_time) / 1000)
+                new_run_time_string = Utils.convert_epoch_to_readable(new_run_time)
+                self.logger.error(f"A rate limit error has occurred, task will resume after {new_run_time_string}")
+                state[self.RATE_LIMIT_DATETIME] = new_run_time
+            except Exception as err:
+                self.logger.error(
+                    f"Unable to calculate new run time, no rate limiting applied to the state. Error: {repr(err)}",
+                    exc_info=True,
+                )
             return 200, None, True
         return status_code, error, False

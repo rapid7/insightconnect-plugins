@@ -6,7 +6,7 @@ from komand_mimecast.util.constants import BASE_HOSTNAME_MAP, DEFAULT_REGION
 
 class Utils:
     @staticmethod
-    def convert_epoch_to_readable(epoch_time: int) -> str:
+    def convert_epoch_to_readable(epoch_time: float) -> str:
         return datetime.utcfromtimestamp(epoch_time).strftime("%Y-%m-%d %H:%M:%S")
 
     @staticmethod

@@ -76,6 +76,20 @@ class TestMonitorSiemLogs(TestCase):
         self.assertEqual(error, None)
 
     @patch("logging.Logger.error")
+    def test_monitor_siem_logs_raises_429_and_errors(self, mocked_logger, _mock_data):
+        state_params = {"next_token": "force_429_error", "last_log_line": 0}
+        response, new_state, has_more_pages, status_code, error = self.task.run(params={}, state=state_params)
+        self.assertEqual(status_code, 200)
+        self.assertEqual(has_more_pages, True)
+        self.assertEqual(response, [])
+        self.assertEqual(new_state, state_params)
+        self.assertEqual(error, None)
+        mocked_logger.assert_called()
+        self.assertIn(
+            "Unable to calculate new run time, no rate limiting applied to the state", mocked_logger.call_args[0][0]
+        )
+
+    @patch("logging.Logger.error")
     def test_monitor_siem_logs_stops_path_traversal(self, mock_logger, _mock_data):
         test_state = {
             "next_token": "path_traversal",

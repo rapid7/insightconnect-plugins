@@ -17,7 +17,7 @@ links:
  - "[Mimecast](http://mimecast.com)"
 references:
  - "[Mimecast API](https://www.mimecast.com/developer/documentation)"
-version: 5.3.19
+version: 5.3.20
 connection_version: 5
 supported_versions: ["Mimecast API 2024-06-18"]
 vendor: rapid7
@@ -40,6 +40,7 @@ hub_tags:
   keywords: [mimecast, email, cloud_enabled]
   features: []
 version_history:
+- "5.3.20 - Update Task `monitor_siem_logs` to catch any failure on calculating new run time."
 - "5.3.19 - Update Task `monitor_siem_logs` to delay retry if a rate limit error is returned from Mimecast | Update SDK to version 6.2.0"
 - "5.3.18 - Fix task connection test | Trim whitespace from connection inputs | bump SDK to version 6.1.2"
 - "5.3.17 - Task `monitor_siem_logs` update the mapping used for the USBCOM region"
