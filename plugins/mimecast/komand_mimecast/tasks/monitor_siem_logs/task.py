@@ -45,7 +45,9 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         self, params={}, state={}, custom_config={}
     ) -> (List[Dict], Dict, Dict):
         try:
-            self.check_rate_limit(state)
+            rate_limited = self.check_rate_limit(state)
+            if rate_limited:
+                return [], state, False, 429, rate_limited
             has_more_pages = False
             header_next_token = state.get(self.NEXT_TOKEN, "")
             normal_running_cutoff = state.get(self.NORMAL_RUNNING_CUTOFF, False)
@@ -278,7 +280,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                     cause=PluginException.causes.get(PluginException.Preset.RATE_LIMIT),
                     assistance=RATE_LIMIT_ASSISTANCE,
                 )
-                return [], state, False, 429, error
+                return error
 
             log_msg += "However no longer in rate limiting period, so task can be executed..."
             del state[self.RATE_LIMIT_DATETIME]
@@ -286,15 +288,22 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
 
     def check_rate_limit_error(
         self, error: ApiClientException, response: Response, status_code: int, state: dict
-    ) -> Tuple[int, ApiClientException]:
+    ) -> Tuple[int, Any, bool]:
         if status_code == 429:
-            rate_limit_response_time = response.headers.get("X-RateLimit-Reset")
-            if rate_limit_response_time:
-                new_run_time = time() + (rate_limit_response_time / 1000)
-            else:
-                new_run_time = time() + 300
-            new_run_time_string = Utils.convert_epoch_to_readable(new_run_time)
-            self.logger.error(f"A rate limit error has occurred, task will resume after {new_run_time_string}")
-            state[self.RATE_LIMIT_DATETIME] = new_run_time
+            new_run_time = time() + 600  # default to wait 10 minutes before the next run
+            try:
+                # This value should be the amount of time in milliseconds until the next call is allowed
+                rate_limit_response_time = response.headers.get("X-RateLimit-Reset")
+                if rate_limit_response_time:
+                    self.logger.info(f"Got X-RateLimit-Reset value from headers: {rate_limit_response_time}")
+                    new_run_time = time() + (int(rate_limit_response_time) / 1000)
+                new_run_time_string = Utils.convert_epoch_to_readable(new_run_time)
+                self.logger.error(f"A rate limit error has occurred, task will resume after {new_run_time_string}")
+                state[self.RATE_LIMIT_DATETIME] = new_run_time
+            except Exception as err:
+                self.logger.error(
+                    f"Unable to calculate new run time, no rate limiting applied to the state. Error: {repr(err)}",
+                    exc_info=True,
+                )
             return 200, None, True
         return status_code, error, False
