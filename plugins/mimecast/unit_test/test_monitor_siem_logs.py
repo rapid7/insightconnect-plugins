@@ -3,9 +3,10 @@ import os
 import sys
 import logging
 from jsonschema import validate
-from unittest import TestCase, skip
+from unittest import TestCase
 from unittest.mock import patch
 from freezegun import freeze_time
+from time import time
 
 sys.path.append(os.path.abspath("../"))
 
@@ -67,13 +68,55 @@ class TestMonitorSiemLogs(TestCase):
     def test_monitor_siem_logs_raises_429(self, _mock_data):
         state_params = {"next_token": "force_429", "last_log_line": 0}
         expected_state = state_params.copy()
-        expected_state.update({"rate_limit_datetime": 1641039000.0})
+        expected_state.update({"rate_limit_datetime": 1641039600.0})  # current time + header value of 5 minutes
         response, new_state, has_more_pages, status_code, error = self.task.run(params={}, state=state_params)
         self.assertEqual(status_code, 200)
         self.assertEqual(has_more_pages, True)
         self.assertEqual(response, [])
         self.assertEqual(new_state, expected_state)
         self.assertEqual(error, None)
+
+        # Second run should return 429 status code
+        _, new_state_2, has_more_pages, exp_status_code, error = self.task.run(params={}, state=expected_state)
+        self.assertEqual(429, exp_status_code)
+        self.assertEqual(new_state_2, expected_state)  # state doesn't change until the time has passed
+
+    @patch("logging.Logger.error")
+    def test_monitor_siem_logs_raises_429_and_errors(self, mocked_logger, _mock_data):
+        state_params = {"next_token": "force_429_error", "last_log_line": 0}
+        response, new_state, has_more_pages, status_code, error = self.task.run(params={}, state=state_params)
+        self.assertEqual(status_code, 200)
+        self.assertEqual(has_more_pages, True)
+        self.assertEqual(response, [])
+        self.assertEqual(new_state, state_params)
+        self.assertEqual(error, None)
+        mocked_logger.assert_called()
+        self.assertIn(
+            "Unable to calculate new run time, no rate limiting applied to the state", mocked_logger.call_args[0][0]
+        )
+
+    def test_monitor_siem_logs_raises_429_no_header(self, _mock_data):
+        state_params = {"next_token": "force_429_no_header", "last_log_line": 0}
+        expected_state = state_params.copy()
+        expected_state.update({"rate_limit_datetime": 1641039000})  # uses current time + 10 minutes
+        response, new_state, has_more_pages, status_code, error = self.task.run(params={}, state=state_params)
+        self.assertEqual(status_code, 200)
+        self.assertEqual(has_more_pages, True)
+        self.assertEqual(response, [])
+        self.assertEqual(new_state, expected_state)
+        self.assertEqual(error, None)
+
+    @patch("logging.Logger.info")
+    def test_monitor_logs_rate_limit_has_passed(self, mock_logger, _mock_data):
+        # force the time to be the pasts then next run is able to run again
+        state = {"rate_limit_datetime": time()}
+        _, rate_limit_passed_state, _, status_code, _ = self.task.run(params={}, state=state)
+        self.assertEqual(200, status_code)
+        self.assertNotIn("rate_limit_datetime", rate_limit_passed_state.keys())
+
+        self.assertIn(
+            "However no longer in rate limiting period, so task can be executed...", mock_logger.call_args_list[0][0][0]
+        )
 
     @patch("logging.Logger.error")
     def test_monitor_siem_logs_stops_path_traversal(self, mock_logger, _mock_data):

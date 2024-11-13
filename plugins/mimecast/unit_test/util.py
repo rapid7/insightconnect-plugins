@@ -186,7 +186,15 @@ class Util:
                         }
                     ],
                 }
-                headers = {"X-RateLimit-Reset": 600000}
+
+                # This value should be the amount of time in milliseconds until the next call is allowed
+                # in the mock make the customer wait 20 minutes. # todo - WHY IS THIS NOT WORKING
+                reset_value = "not an integer value" if "force_429_error" in data else "1200000"
+                headers = {"X-RateLimit-Reset": reset_value}
+
+                # default to calculate a new time in the task based on no return value
+                if "force_429_no_header" in data:
+                    del headers["X-RateLimit-Reset"]
                 resp = MockResponseZip(429, b"", headers, json.dumps(json_value))
             elif "force_json" in data:
                 resp = MockResponseZip(200, b'{ "type" : "MTA", "data" : ', headers, '{"meta": {"status": 200}}')
