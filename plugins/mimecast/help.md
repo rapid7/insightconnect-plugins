@@ -1014,6 +1014,7 @@ For the Create Managed URL action, the URL must include `http://` or `https://` 
 
 # Version History
 
+* 5.3.20 - Update Task `monitor_siem_logs` bump default rate limit period to 10 minutes and catch unexpected errors
 * 5.3.19 - Update Task `monitor_siem_logs` to delay retry if a rate limit error is returned from Mimecast | Update SDK to version 6.2.0
 * 5.3.18 - Fix task connection test | Trim whitespace from connection inputs | bump SDK to version 6.1.2
 * 5.3.17 - Task `monitor_siem_logs` update the mapping used for the USBCOM region
