@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import CommunityLookupInput, CommunityLookupOutput, Input, Component
+from .schema import CommunityLookupInput, CommunityLookupOutput, Input, Output, Component
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -41,4 +41,13 @@ class CommunityLookup(insightconnect_plugin_runtime.Action):
                 assistance="Please provide a valid public IPv4 address.",
             )
 
-        return resp
+        return {
+            Output.CLASSIFICATION: resp.get("classification"),
+            Output.IP: resp.get("ip"),
+            Output.LAST_SEEN: resp.get("last_seen"),
+            Output.LINK: resp.get("link"),
+            Output.MESSAGE: resp.get("message"),
+            Output.NAME: resp.get("name"),
+            Output.NOISE: resp.get("noise"),
+            Output.RIOT: resp.get("riot"),
+        }

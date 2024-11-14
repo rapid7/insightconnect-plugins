@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import RiotLookupInput, RiotLookupOutput, Input, Component
+from .schema import RiotLookupInput, RiotLookupOutput, Input, Output, Component
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -31,4 +31,15 @@ class RiotLookup(insightconnect_plugin_runtime.Action):
                 assistance="Please provide a valid public IPv4 address.",
             )
 
-        return resp
+        return {
+            Output.IP: resp.get("ip"),
+            Output.RIOT: resp.get("riot"),
+            Output.DESCRIPTION: resp.get("description"),
+            Output.VIZ_URL: resp.get("viz_url"),
+            Output.NAME: resp.get("name"),
+            Output.CATEGORY: resp.get("category"),
+            Output.EXPLANATION: resp.get("explanation"),
+            Output.LAST_UPDATED: resp.get("last_updated"),
+            Output.REFERENCE: resp.get("reference"),
+            Output.TRUST_LEVEL: resp.get("trust_level"),
+        }

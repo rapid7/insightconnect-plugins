@@ -33,4 +33,4 @@ class SimilarLookup(insightconnect_plugin_runtime.Action):
                 assistance="Please provide a valid IPv4 Address.",
             )
 
-        return resp
+        return {Output.IP: resp.get("ip"), Output.SIMILAR_IPS: resp.get("similar_ips"), Output.TOTAL: resp.get("total")}

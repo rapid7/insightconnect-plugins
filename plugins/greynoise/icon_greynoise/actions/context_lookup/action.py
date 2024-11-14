@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import ContextLookupInput, ContextLookupOutput, Input, Component
+from .schema import ContextLookupInput, ContextLookupOutput, Input, Output, Component
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -37,4 +37,20 @@ class ContextLookup(insightconnect_plugin_runtime.Action):
                 assistance="Please provide a valid public IPv4 address.",
             )
 
-        return resp
+        return {
+            Output.ACTOR: get.resp("actor"),
+            Output.BOT: get.resp("bot"),
+            Output.CLASSIFICATION: get.resp("classification"),
+            Output.CVE: get.resp("cve"),
+            Output.FIRST_SEEN: get.resp("first_seen"),
+            Output.IP: get.resp("ip"),
+            Output.LAST_SEEN: get.resp("last_seen"),
+            Output.METADATA: get.resp("metadata"),
+            Output.RAW_DATA: get.resp("raw_data"),
+            Output.SEEN: get.resp("seen"),
+            Output.SPOOFABLE: get.resp("spoofable"),
+            Output.TAGS: get.resp("tags"),
+            Output.VIZ_URL: get.resp("viz_url"),
+            Output.VPN: get.resp("vpn"),
+            Output.VPN_SERVICE: get.resp("vpn_service"),
+        }

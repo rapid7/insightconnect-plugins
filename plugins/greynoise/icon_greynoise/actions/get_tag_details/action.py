@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import GetTagDetailsInput, GetTagDetailsOutput, Input, Component
+from .schema import GetTagDetailsInput, GetTagDetailsOutput, Input, Output, Component
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -29,7 +29,20 @@ class GetTagDetails(insightconnect_plugin_runtime.Action):
                 assistance="Please check error and try again.",
             )
 
-        if output:
-            return output
-        else:
-            return {"name": params.get(Input.TAG_NAME), "description": "Tag Not Found"}
+        if not output:
+            output = {"name": params.get(Input.TAG_NAME), "description": "Tag Not Found"}
+
+        return {
+            Output.CATEGORY: output.get("category"),
+            Output.CREATED_A: output.get("created_at"),
+            Output.CVES: output.get("cves"),
+            Output.DESCRIPTION: output.get("description"),
+            Output.ID: output.get("id"),
+            Output.INTENTION: output.get("intention"),
+            Output.LABEL: output.get("label"),
+            Output.NAME: output.get("name"),
+            Output.RECOMMEND_BLOCK: output.get("recommend_block"),
+            Output.REFERENCES: output.get("references"),
+            Output.RELATED_TAGS: output.get("related_tags"),
+            Output.SLUG: output.get("slug"),
+        }

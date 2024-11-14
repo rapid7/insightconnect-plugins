@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import QuickLookupInput, QuickLookupOutput, Input, Component
+from .schema import QuickLookupInput, QuickLookupOutput, Input, Output, Component
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -32,4 +32,10 @@ class QuickLookup(insightconnect_plugin_runtime.Action):
                 assistance="Please provide a valid public IPv4 address.",
             )
 
-        return resp_out
+        return {
+            Output.IP: resp_out.get("ip"),
+            Output.CODE: resp_out.get("code"),
+            Output.NOISE: resp_out.get("noise"),
+            Output.RIOT: resp_out.get("riot"),
+            Output.CODE: resp_out.get("code"),
+        }

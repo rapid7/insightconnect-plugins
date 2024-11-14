@@ -33,4 +33,4 @@ class TimelineLookup(insightconnect_plugin_runtime.Action):
                 assistance="Please provide a valid IPv4 Address.",
             )
 
-        return resp
+        return {Output.IP: resp.get("ip"), Output.ACTIVITY: resp.get("activity"), Output.METADATA: resp.get("metadata")}
