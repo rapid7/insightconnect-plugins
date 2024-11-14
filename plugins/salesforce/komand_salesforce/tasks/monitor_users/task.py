@@ -10,6 +10,11 @@ from komand_salesforce.util.exceptions import ApiException
 DEFAULT_CUTOFF_HOURS = 24 * 7
 INITIAL_LOOKBACK = 24
 
+exp_frmt = "%Y-%m-%d %H:%M:%S.%f%z"  # the format the state should be in
+old_frmt = "%Y-%m-%dT%H:%M:%S.%f%z"  # an old backwards compatible state
+bugged_frmt = "%Y-%m-%d %H:%M:%S%z"  # str value without the microseconds - SOAR-18202
+SUPPORTED_STR_TYPES = [exp_frmt, old_frmt, bugged_frmt]
+
 
 class MonitorUsers(insightconnect_plugin_runtime.Task):
     USER_LOGIN_QUERY = "SELECT LoginTime, UserId, LoginType, LoginUrl, SourceIp, Status, Application, Browser FROM LoginHistory WHERE LoginTime >= {start_timestamp} AND LoginTime < {end_timestamp}"
@@ -63,15 +68,17 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
 
                 # we only check Salesforce for new users every 24 hours / first run
                 get_users = True
-                state[self.NEXT_USER_COLLECTION_TIMESTAMP] = str(now + timedelta(hours=24))
+                state[self.NEXT_USER_COLLECTION_TIMESTAMP] = self.convert_dt_to_string(now + timedelta(hours=24))
 
                 # we check for any user profile updates every task execution
-                state[self.LAST_USER_UPDATE_COLLECTION_TIMESTAMP] = str(user_update_last_collection)
+                state[self.LAST_USER_UPDATE_COLLECTION_TIMESTAMP] = self.convert_dt_to_string(
+                    user_update_last_collection
+                )
 
                 # we only check for login data every hour
                 get_user_login_history = True
-                state[self.NEXT_USER_LOGIN_COLLECTION_TIMESTAMP] = str(now + timedelta(hours=1))
-                state[self.LAST_USER_LOGIN_COLLECTION_TIMESTAMP] = str(user_login_end_timestamp)
+                state[self.NEXT_USER_LOGIN_COLLECTION_TIMESTAMP] = self.convert_dt_to_string(now + timedelta(hours=1))
+                state[self.LAST_USER_LOGIN_COLLECTION_TIMESTAMP] = self.convert_dt_to_string(user_login_end_timestamp)
             elif users_next_page_id or user_login_next_page_id or updated_users_next_page_id:
                 self.logger.info("Getting next page of results...")
                 if users_next_page_id:
@@ -82,9 +89,11 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
             else:
                 self.logger.info("Subsequent run")
 
-                is_valid_state, key = self._is_valid_state(state)
-                if not is_valid_state:
-                    self.logger.info(f"Bad request error occurred. Invalid timestamp format for {key}")
+                valid_state, key = self._make_valid_state(state)
+                if not valid_state:
+                    self.logger.info(
+                        f"Bad request error occurred. Invalid timestamp format for {key}. Got value {state[key]}"
+                    )
                     return (
                         [],
                         state,
@@ -100,7 +109,9 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
                     state, cut_off_time, self.LAST_USER_UPDATE_COLLECTION_TIMESTAMP
                 )
                 # move the end time stamp to now
-                state[self.LAST_USER_UPDATE_COLLECTION_TIMESTAMP] = str(user_update_last_collection)
+                state[self.LAST_USER_UPDATE_COLLECTION_TIMESTAMP] = self.convert_dt_to_string(
+                    user_update_last_collection
+                )
 
                 # this allows us to poll for new users every 24 hours
                 next_user_collection_timestamp = state.get(self.NEXT_USER_COLLECTION_TIMESTAMP)
@@ -108,7 +119,8 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
                     now, self.convert_to_datetime(next_user_collection_timestamp)
                 ):
                     get_users = True
-                    state[self.NEXT_USER_COLLECTION_TIMESTAMP] = str(now + timedelta(hours=24))  # poll again in 24 hrs
+                    # poll again in 24 hrs
+                    state[self.NEXT_USER_COLLECTION_TIMESTAMP] = self.convert_dt_to_string(now + timedelta(hours=24))
 
                 # this allows us to poll for user login data every hour
                 next_user_login_collection_timestamp = state.get(self.NEXT_USER_LOGIN_COLLECTION_TIMESTAMP)
@@ -116,13 +128,15 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
                     now, self.convert_to_datetime(next_user_login_collection_timestamp)
                 ):
                     get_user_login_history = True
-                    state[self.NEXT_USER_LOGIN_COLLECTION_TIMESTAMP] = str(
+                    state[self.NEXT_USER_LOGIN_COLLECTION_TIMESTAMP] = self.convert_dt_to_string(
                         now + timedelta(hours=1)
                     )  # poll again in 1 hr
                     user_login_start_timestamp = self._get_recent_timestamp(
                         state, cut_off_time, self.LAST_USER_LOGIN_COLLECTION_TIMESTAMP
                     )
-                    state[self.LAST_USER_LOGIN_COLLECTION_TIMESTAMP] = str(user_login_end_timestamp)
+                    state[self.LAST_USER_LOGIN_COLLECTION_TIMESTAMP] = self.convert_dt_to_string(
+                        user_login_end_timestamp
+                    )
 
             try:
                 records = []
@@ -134,8 +148,8 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
                     self.logger.info(msg)
                     response = self.connection.api.query(
                         self.UPDATED_USERS_QUERY.format(
-                            start_timestamp=user_update_start_timestamp.isoformat(),
-                            end_timestamp=user_update_last_collection.isoformat(),
+                            start_timestamp=user_update_start_timestamp.isoformat(timespec="microseconds"),
+                            end_timestamp=user_update_last_collection.isoformat(timespec="microseconds"),
                         ),
                         updated_users_next_page_id,
                     )
@@ -169,8 +183,8 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
                     self.logger.info(msg)
                     response = self.connection.api.query(
                         self.USER_LOGIN_QUERY.format(
-                            start_timestamp=user_login_start_timestamp.isoformat(),
-                            end_timestamp=user_login_end_timestamp.isoformat(),
+                            start_timestamp=user_login_start_timestamp.isoformat(timespec="microseconds"),
+                            end_timestamp=user_login_end_timestamp.isoformat(timespec="microseconds"),
                         ),
                         user_login_next_page_id,
                     )
@@ -197,16 +211,21 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
             self.connection.api.unset_token()
             return [], state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
-    def _is_valid_state(self, state: dict) -> Tuple[bool, str]:
+    def _make_valid_state(self, state: dict) -> Tuple[bool, str]:
+        # it looks like we used to store the timestamp in the state with the `T` delimiter and then swapped when we
+        # started to do str(datetime) which does not have this delimiter but then swap it back and forward throughout
+        # the task logic. Allow the state to have any and a time without the microseconds also.
+        last_attempt = len(SUPPORTED_STR_TYPES) - 1
         for key, value in state.items():
-            try:
-                self.convert_to_datetime(value)
-            except ValueError:
+            for attempt_x, str_format in enumerate(SUPPORTED_STR_TYPES):
                 try:
-                    state[key] = str(self.convert_to_datetime_from_old_format(value))
+                    dt_value = datetime.strptime(value, str_format)
+                    state[key] = self.convert_dt_to_string(dt_value)
+                    break  # we're happy with this state value now move to the next one
                 except ValueError:
-                    state[key] = str(self.get_current_time())
-                    return False, key
+                    if attempt_x != last_attempt:
+                        continue  # try the next type
+                return False, key
         return True, ""
 
     def _get_recent_timestamp(self, state: dict, fallback_timestamp: datetime, key: str) -> datetime:
@@ -331,5 +350,7 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
             record["DataType"] = field_value
         return records
 
-    def convert_to_datetime_from_old_format(self, timestamp: str) -> datetime:
-        return datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S.%f%z")
+    @staticmethod
+    def convert_dt_to_string(timestamp: datetime) -> str:
+        # Force microseconds to keep microseconds in the string but remove the `T`
+        return timestamp.isoformat(timespec="microseconds").replace("T", " ")
