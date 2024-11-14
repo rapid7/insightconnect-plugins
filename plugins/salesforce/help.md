@@ -529,10 +529,11 @@ Example output:
 
 ## Troubleshooting
   
-*There is no troubleshooting for this plugin.*
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 2.1.12 - Task Monitor Users: ensure datetime includes microseconds | Bump SDK to 6.2.0
 * 2.1.11 - Task Monitor Users: Return 500 for retry your request error | Bump SDK to 6.1.4
 * 2.1.10 - Set Monitor Users task output length | Fix to remove whitespace from connection inputs
 * 2.1.9 - SDK Bump to 6.1.0 | Task Connection test added
