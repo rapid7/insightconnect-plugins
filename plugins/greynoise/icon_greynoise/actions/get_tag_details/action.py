@@ -34,7 +34,7 @@ class GetTagDetails(insightconnect_plugin_runtime.Action):
 
         return {
             Output.CATEGORY: output.get("category"),
-            Output.CREATED_A: output.get("created_at"),
+            Output.CREATED_AT: output.get("created_at"),
             Output.CVES: output.get("cves"),
             Output.DESCRIPTION: output.get("description"),
             Output.ID: output.get("id"),
