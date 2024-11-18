@@ -120,8 +120,8 @@ Example input:
 |first_seen|date|False|First Seen By GreyNoise|2024-01-01|
 |ip|string|False|Value that was Queried|1.2.3.4|
 |last_seen|string|False|Last Seen By GreyNoise|2024-01-01|
-|metadata|metadata|False|GreyNoise IP Metadata|None|
-|raw_data|raw_data|False|GreyNoise IP Raw Data|None|
+|metadata|metadata|False|GreyNoise IP Metadata|{'ASN': 'AS12345', 'Category': 'isp', 'City': 'Reno', 'Country': 'Brazil', 'Country Code': 'BZ', 'Destination Countries': ['Brazil', 'Spain'], 'Destination Country Codes': ['BZ', 'ES'], 'Organization': 'Acme Inc.', 'OS': 'Windows XP', 'rDNS': 'scanner.example.io', 'Region': 'Arizona', 'Sensor Count': 5, 'Sensor Hits': 5, 'Source Country': 'Brazil', 'Source Country Code': 'BE', 'TOR': False}|
+|raw_data|raw_data|False|GreyNoise IP Raw Data|{'HASSH': [{'Fingerprint': 'abcdefg1234567', 'Port': 22}], 'JA3': [{'Fingerprint': 'abcdefg1234567', 'Port': 22}], 'Scan': [{'Port': 22, 'Protocol': 'TCP'}], 'Web': {'Web Paths': ['/', '/robots.txt'], 'User Agents': ['user-agent']}}|
 |seen|boolean|False|Has this IP been Seen by GreyNoise|True|
 |spoofable|boolean|False|IP address may be spoofed|False|
 |tags|[]string|False|GreyNoise Tags Associated with IP|Tag 1, Tag2|
@@ -145,24 +145,27 @@ Example output:
   "last_seen": "2024-01-01",
   "metadata": {
     "ASN": "AS12345",
-    "Category": {},
-    "City": {},
-    "Country": {},
-    "Country Code": {},
+    "Category": "isp",
+    "City": "Reno",
+    "Country": "Brazil",
+    "Country Code": "BZ",
     "Destination Countries": [
       "Brazil",
       "Spain"
     ],
-    "Destination Country Codes": {},
-    "OS": {},
-    "Organization": {},
-    "Region": {},
+    "Destination Country Codes": [
+      "BZ",
+      "ES"
+    ],
+    "OS": "Windows XP",
+    "Organization": "Acme Inc.",
+    "Region": "Arizona",
     "Sensor Count": 5,
-    "Sensor Hits": {},
-    "Source Country": {},
-    "Source Country Code": {},
+    "Sensor Hits": 5,
+    "Source Country": "Brazil",
+    "Source Country Code": "BE",
     "TOR": false,
-    "rDNS": {}
+    "rDNS": "scanner.example.io"
   },
   "raw_data": {
     "HASSH": [
@@ -173,21 +176,24 @@ Example output:
     ],
     "JA3": [
       {
-        "Fingerprint": {},
-        "Port": {}
+        "Fingerprint": "abcdefg1234567",
+        "Port": 22
       }
     ],
     "Scan": [
       {
-        "Port": {},
-        "Protocol": {}
+        "Port": 22,
+        "Protocol": "TCP"
       }
     ],
     "Web": {
       "User Agents": [
         "user-agent"
       ],
-      "Web Paths": {}
+      "Web Paths": [
+        "/",
+        "/robots.txt"
+      ]
     }
   },
   "seen": true,
@@ -231,7 +237,7 @@ Example input:
 |name|string|False|Name of GreyNoise Tag|BingBot|
 |recommend_block|boolean|False|GreyNoise Recommends Blocking IPs associated with this Tag|False|
 |references|[]string|False|References|https://thisisareference.url|
-|related_tags|[]string|False|Tags that are related to this tag|BingBot Scanner|
+|related_tags|[]string|False|Tags that are related to this tag|["BingBot Scanner"]|
 |slug|string|False|The unique slug for the tag|bingbot-scanner|
   
 Example output:
@@ -248,7 +254,9 @@ Example output:
   "name": "BingBot",
   "recommend_block": false,
   "references": "https://thisisareference.url",
-  "related_tags": "BingBot Scanner",
+  "related_tags": [
+    "BingBot Scanner"
+  ],
   "slug": "bingbot-scanner"
 }
 ```
@@ -279,7 +287,7 @@ Example input:
 | :--- | :--- | :--- | :--- | :--- |
 |complete|boolean|False|Indicates if all pages of the query have been returned by the API|True|
 |count|integer|False|Total count of IPs returned Query|10|
-|data|[]data|False|GreyNoise Data Object, Contains IP Object for each IP returned by the query||
+|data|[]data|False|GreyNoise Data Object, Contains IP Object for each IP returned by the query|["data"]|
 |message|string|False|GreyNoise Query Message, indicates if there were issues with the query|ok|
 |query|string|False|GreyNoise Query Sent to API|sample query|
   
@@ -289,7 +297,9 @@ Example output:
 {
   "complete": true,
   "count": 10,
-  "data": "",
+  "data": [
+    "data"
+  ],
   "message": "ok",
   "query": "sample query"
 }
@@ -407,8 +417,8 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|ip|ip_sim|False|IP Similarity Metadata|None|
-|similar_ips|[]similar_ip|False|Similar IPs|None|
+|ip|ip_sim|False|IP Similarity Metadata|{'Actor': 'Acme Inc.', 'ASN': 'AS12345', 'City': 'Seattle', 'Classification': 'benign', 'Country': 'Brazil', 'Country Code': 'BE', 'First Seen': '2020-07-08T17:15:10Z', 'IP Address': '1.2.3.4', 'Last Seen': '2020-07-08T17:15:10Z', 'Organization': 'Acme Inc'}|
+|similar_ips|[]similar_ip|False|Similar IPs|[{"Actor": "Acme Inc", "ASN": "AS12345", "City": "New York", "Classification": "benign", "Country": "Ukraine", "Country Code": "UK", "Features Matched": ["feature-1", "feature-2"], "First Seen": "2020-07-08T17:15:10Z", "IP Address": "1.2.3.4", "Last Seen": "2020-07-08T17:15:10Z", "Organization": "Acme Inc", "Similarity Score": 0.83}]|
 |total|integer|False|Total Number of Similar IPs returned|5|
   
 Example output:
@@ -416,33 +426,33 @@ Example output:
 ```
 {
   "ip": {
-    "ASN": {},
+    "ASN": "AS12345",
     "Actor": "Acme Inc.",
-    "City": {},
-    "Classification": {},
-    "Country": {},
-    "Country Code": {},
-    "First Seen": {},
-    "IP Address": {},
-    "Last Seen": {},
-    "Organization": {}
+    "City": "Seattle",
+    "Classification": "benign",
+    "Country": "Brazil",
+    "Country Code": "BE",
+    "First Seen": "2020-07-08T17:15:10Z",
+    "IP Address": "1.2.3.4",
+    "Last Seen": "2020-07-08T17:15:10Z",
+    "Organization": "Acme Inc"
   },
   "similar_ips": [
     {
-      "ASN": {},
+      "ASN": "AS12345",
       "Actor": "Acme Inc",
-      "City": {},
-      "Classification": {},
-      "Country": {},
-      "Country Code": {},
+      "City": "New York",
+      "Classification": "benign",
+      "Country": "Ukraine",
+      "Country Code": "UK",
       "Features Matched": [
         "feature-1",
         "feature-2"
       ],
-      "First Seen": {},
-      "IP Address": {},
-      "Last Seen": {},
-      "Organization": {},
+      "First Seen": "2020-07-08T17:15:10Z",
+      "IP Address": "1.2.3.4",
+      "Last Seen": "2020-07-08T17:15:10Z",
+      "Organization": "Acme Inc",
       "Similarity Score": 0.83
     }
   ],
@@ -472,67 +482,24 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|activity|[]timeline_activity|False|IP Timeline Activity Events|None|
+|activity|[]timeline_activity|False|IP Timeline Activity Events|["timeline_activity"]|
 |ip|string|False|Value that was Queried|1.2.3.4|
-|metadata|timeline_metadata|False|IP Timeline Metadata|None|
+|metadata|timeline_metadata|False|IP Timeline Metadata|{'Timeline Period End Time': '2020-07-08T17:15:10Z', 'IP Address': '1.2.3.4', 'Event Limit': 5, 'Cursor Value': 'asdf142qas3241asdf234sfa', 'Timeline Period Start Time': '2020-07-08T17:15:10Z'}|
   
 Example output:
 
 ```
 {
   "activity": [
-    {
-      "ASN": "AS12345",
-      "Category": {},
-      "City": {},
-      "Country": {},
-      "Country Code": {},
-      "Destinations": [
-        {
-          "Country": {},
-          "Country Code": {}
-        }
-      ],
-      "Event Timestamp": "2020-07-08T17:15:10Z",
-      "GreyNoise Classification": {},
-      "HASSH Fingerprints": [
-        "asdfa1412",
-        "asasdf2125"
-      ],
-      "HTTP User Agents": {},
-      "HTTP Web Paths": {},
-      "JA3 Fingerprints": {},
-      "Organization": {},
-      "Protocols": [
-        {
-          "App Protocol": {},
-          "Port": 22,
-          "Transport Protocol": {}
-        }
-      ],
-      "Region": {},
-      "Spoofable": false,
-      "Tags": [
-        {
-          "Tag Category": {},
-          "Tag Description": {},
-          "Tag Intention": {},
-          "Tag Name": {}
-        }
-      ],
-      "Tor Exit Node": {},
-      "VPN": {},
-      "VPN Service": {},
-      "rDNS": {}
-    }
+    "timeline_activity"
   ],
   "ip": "1.2.3.4",
   "metadata": {
-    "Cursor Value": {},
+    "Cursor Value": "asdf142qas3241asdf234sfa",
     "Event Limit": 5,
     "IP Address": "1.2.3.4",
     "Timeline Period End Time": "2020-07-08T17:15:10Z",
-    "Timeline Period Start Time": {}
+    "Timeline Period Start Time": "2020-07-08T17:15:10Z"
   }
 }
 ```
@@ -559,12 +526,12 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|details|vuln_details|False|GreyNoise Vulnerability Details|None|
-|exploitation_activity|vuln_exploitation_activity|False|GreyNoise Vulnerability Exploitation Activity|None|
-|exploitation_details|vuln_exploitation_details|False|GreyNoise Vulnerability Exploitation Details|None|
-|exploitation_stats|vuln_exploitation_stats|False|GreyNoise Vulnerability Exploitation Stats|None|
+|details|vuln_details|False|GreyNoise Vulnerability Details|{'CVE CVSS Score': 9.8, 'Product Name': 'Product Name', 'Is CVE Published in NIST NVD': False, 'Vendor Name': 'Acme Inc', 'Vulnerability Description': 'This is a product description.', 'Vulnerability Name': 'This is a vuln name.'}|
+|exploitation_activity|vuln_exploitation_activity|False|GreyNoise Vulnerability Exploitation Activity|{'GreyNoise Observed Activity': True, 'Benign IP Count - 10 days': 5, 'Benign IP Count - 1 day': 5, 'Benign IP Count - 30 days': 5, 'Threat IP Count - 10 days': 5, 'Threat IP Count - 1 day': 5, 'Threat IP Count - 30 days': 5}|
+|exploitation_details|vuln_exploitation_details|False|GreyNoise Vulnerability Exploitation Details|{'Attack Vector': 'NETWORK', 'EPSS Score': 0.0, 'Exploit Found': True, 'Exploitation Registered in KEV': False}|
+|exploitation_stats|vuln_exploitation_stats|False|GreyNoise Vulnerability Exploitation Stats|{'Number of Available Exploits': 1, 'Number of Associated Botnets': 1, 'Number of Threat Actors Exploiting Vulnerability': 1}|
 |id|string|False|Value that was searched|CVE-2020-12345|
-|timeline|vuln_timeline|False|GreyNoise Vulnerability Timeline|None|
+|timeline|vuln_timeline|False|GreyNoise Vulnerability Timeline|{'Date Added to CISA KEV': '2020-07-08T17:15:10Z', 'Date CVE was Last Updated': '2020-07-08T17:15:10Z', 'Date CVE was Published': '2020-07-08T17:15:10Z', 'Date of First Published POC': '2020-07-08T17:15:10Z'}|
   
 Example output:
 
@@ -574,36 +541,36 @@ Example output:
     "CVE CVSS Score": 9.8,
     "Is CVE Published in NIST NVD": false,
     "Product Name": "Product Name",
-    "Vendor Name": {},
-    "Vulnerability Description": {},
-    "Vulnerability Name": {}
+    "Vendor Name": "Acme Inc",
+    "Vulnerability Description": "This is a product description.",
+    "Vulnerability Name": "This is a vuln name."
   },
   "exploitation_activity": {
-    "Benign IP Count - 1 day": {},
+    "Benign IP Count - 1 day": 5,
     "Benign IP Count - 10 days": 5,
-    "Benign IP Count - 30 days": {},
+    "Benign IP Count - 30 days": 5,
     "GreyNoise Observed Activity": true,
-    "Threat IP Count - 1 day": {},
-    "Threat IP Count - 10 days": {},
-    "Threat IP Count - 30 days": {}
+    "Threat IP Count - 1 day": 5,
+    "Threat IP Count - 10 days": 5,
+    "Threat IP Count - 30 days": 5
   },
   "exploitation_details": {
     "Attack Vector": "NETWORK",
     "EPSS Score": 0.0,
-    "Exploit Found": false,
-    "Exploitation Registered in KEV": {}
+    "Exploit Found": true,
+    "Exploitation Registered in KEV": false
   },
   "exploitation_stats": {
-    "Number of Associated Botnets": {},
+    "Number of Associated Botnets": 1,
     "Number of Available Exploits": 1,
-    "Number of Threat Actors Exploiting Vulnerability": {}
+    "Number of Threat Actors Exploiting Vulnerability": 1
   },
   "id": "CVE-2020-12345",
   "timeline": {
     "Date Added to CISA KEV": "2020-07-08T17:15:10Z",
-    "Date CVE was Last Updated": {},
-    "Date CVE was Published": {},
-    "Date of First Published POC": {}
+    "Date CVE was Last Updated": "2020-07-08T17:15:10Z",
+    "Date CVE was Published": "2020-07-08T17:15:10Z",
+    "Date of First Published POC": "2020-07-08T17:15:10Z"
   }
 }
 ```
@@ -721,8 +688,8 @@ Example output:
 |GreyNoise First Seen|date|None|False|First Seen By GreyNoise|2024-01-01|
 |IP Address|string|None|False|IP Address|1.2.4.5|
 |GreyNoise Last Seen|string|None|False|Last Seen By GreyNoise|2024-01-01|
-|GreyNoise Metadata|metadata|None|False|GreyNoise IP Metadata|None|
-|GreyNoise Raw Data|raw_data|None|False|GreyNoise IP Raw Data|None|
+|GreyNoise Metadata|metadata|None|False|GreyNoise IP Metadata|{'ASN': 'AS12345', 'Category': 'isp', 'City': 'Reno', 'Country': 'Brazil', 'Country Code': 'BZ', 'Destination Countries': ['Brazil', 'Spain'], 'Destination Country Codes': ['BZ', 'ES'], 'Organization': 'Acme Inc.', 'OS': 'Windows XP', 'rDNS': 'scanner.example.io', 'Region': 'Arizona', 'Sensor Count': 5, 'Sensor Hits': 5, 'Source Country': 'Brazil', 'Source Country Code': 'BE', 'TOR': False}|
+|GreyNoise Raw Data|raw_data|None|False|GreyNoise IP Raw Data|{'HASSH': [{'Fingerprint': 'abcdefg1234567', 'Port': 22}], 'JA3': [{'Fingerprint': 'abcdefg1234567', 'Port': 22}], 'Scan': [{'Port': 22, 'Protocol': 'TCP'}], 'Web': {'Web Paths': ['/', '/robots.txt'], 'User Agents': ['user-agent']}}|
 |GreyNoise Seen|boolean|None|False|Has this IP been Seen by GreyNoise|False|
 |GreyNoise Spoofable|boolean|None|False|IP address may be spoofed|False|
 |GreyNoise Tags|[]string|None|False|GreyNoise Tags Associated with IP|["tag1", "tag2"]|

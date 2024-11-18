@@ -297,11 +297,13 @@ types:
       type: metadata
       description: GreyNoise IP Metadata
       required: false
+      example: {"ASN": "AS12345","Category": "isp","City": "Reno","Country": "Brazil","Country Code": "BZ","Destination Countries": ["Brazil","Spain"],"Destination Country Codes": ["BZ","ES"],"Organization": "Acme Inc.","OS": "Windows XP","rDNS": "scanner.example.io","Region": "Arizona","Sensor Count": 5,"Sensor Hits": 5,"Source Country": "Brazil","Source Country Code": "BE","TOR": false}
     raw_data:
       title: GreyNoise Raw Data
       type: raw_data
       description: GreyNoise IP Raw Data
       required: false
+      example: {"HASSH": [{"Fingerprint": "abcdefg1234567","Port": 22}],"JA3": [{"Fingerprint": "abcdefg1234567","Port": 22}],"Scan": [{"Port": 22,"Protocol": "TCP"}],"Web": {"Web Paths": ["/","/robots.txt"],"User Agents": ["user-agent"]}}
   vuln_timeline:
     cisa_kev_date_added:
       title: "Date Added to CISA KEV"
@@ -925,11 +927,13 @@ actions:
         type: metadata
         description: GreyNoise IP Metadata
         required: false
+        example: {"ASN": "AS12345","Category": "isp","City": "Reno","Country": "Brazil","Country Code": "BZ","Destination Countries": ["Brazil","Spain"],"Destination Country Codes": ["BZ","ES"],"Organization": "Acme Inc.","OS": "Windows XP","rDNS": "scanner.example.io","Region": "Arizona","Sensor Count": 5,"Sensor Hits": 5,"Source Country": "Brazil","Source Country Code": "BE","TOR": false}
       raw_data:
         title: GreyNoise Raw Data
         type: raw_data
         description: GreyNoise IP Raw Data
         required: false
+        example: {"HASSH": [{"Fingerprint": "abcdefg1234567","Port": 22}],"JA3": [{"Fingerprint": "abcdefg1234567","Port": 22}],"Scan": [{"Port": 22,"Protocol": "TCP"}],"Web": {"Web Paths": ["/","/robots.txt"],"User Agents": ["user-agent"]}}
       viz_url:
         title: GreyNoise Visualizer Link
         type: string
@@ -1130,7 +1134,7 @@ actions:
         type: "[]string"
         description: "Tags that are related to this tag"
         required: false
-        example: "BingBot Scanner"
+        example: ["BingBot Scanner"]
   gnql_query:
     title: GreyNoise Query
     description: Perform a GreyNoise GNQL Query
@@ -1166,7 +1170,7 @@ actions:
         type: "[]data"
         description: GreyNoise Data Object, Contains IP Object for each IP returned by the query
         required: false
-        example: ""
+        example: [data]
       message:
         title: GreyNoise Query Message
         type: string
@@ -1260,26 +1264,31 @@ actions:
         description: GreyNoise Vulnerability Details
         type: vuln_details
         required: false
+        example: {"CVE CVSS Score": 9.8,"Product Name": "Product Name","Is CVE Published in NIST NVD": false,"Vendor Name": "Acme Inc","Vulnerability Description": "This is a product description.","Vulnerability Name": "This is a vuln name."}
       exploitation_activity:
         title: GreyNoise Vulnerability Exploitation Activity
         description: GreyNoise Vulnerability Exploitation Activity
         type: vuln_exploitation_activity
         required: false
+        example: {"GreyNoise Observed Activity": true,"Benign IP Count - 10 days": 5,"Benign IP Count - 1 day": 5,"Benign IP Count - 30 days": 5,"Threat IP Count - 10 days": 5,"Threat IP Count - 1 day": 5,"Threat IP Count - 30 days": 5}
       exploitation_details:
         title: GreyNoise Vulnerability Exploitation Details
         description: GreyNoise Vulnerability Exploitation Details
         type: vuln_exploitation_details
         required: false
+        example: {"Attack Vector": "NETWORK","EPSS Score": 0.0,"Exploit Found": true,"Exploitation Registered in KEV": false}
       exploitation_stats:
         title: GreyNoise Vulnerability Exploitation Stats
         description: GreyNoise Vulnerability Exploitation Stats
         type: vuln_exploitation_stats
         required: false
+        example: {"Number of Available Exploits": 1,"Number of Associated Botnets": 1,"Number of Threat Actors Exploiting Vulnerability": 1}
       timeline:
         title: GreyNoise Vulnerability Timeline
         description: GreyNoise Vulnerability Timeline
         type: vuln_timeline
         required: false
+        example: {"Date Added to CISA KEV": "2020-07-08T17:15:10Z","Date CVE was Last Updated": "2020-07-08T17:15:10Z","Date CVE was Published": "2020-07-08T17:15:10Z","Date of First Published POC": "2020-07-08T17:15:10Z"}
   timeline_lookup:
     title: IP Timeline Lookup
     description: Query a routable IPv4 address in the GreyNoise for Scanner Daily Timeline details
@@ -1302,11 +1311,14 @@ actions:
         type: timeline_metadata
         description: IP Timeline Metadata
         required: false
+        example: {"Timeline Period End Time": "2020-07-08T17:15:10Z","IP Address": "1.2.3.4","Event Limit": 5,"Cursor Value": "asdf142qas3241asdf234sfa","Timeline Period Start Time": "2020-07-08T17:15:10Z"}
       activity:
         title: IP Timeline Activity
         type: "[]timeline_activity"
         description: IP Timeline Activity Events
         required: false
+        ##example: [{"ASN": "AS12345","Category": "isp","City": "Seattle","GreyNoise Classification": "benign","Country": "Spain","Country Code": "ES","Destinations": [{"Country": "Brazil","Country Code": "BE"}],"HASSH Fingerprints": ["asdfa1412","asasdf2125"],"HTTP Web Paths": ["robots.txt"],"HTTP User Agents": ["Hello World"],"JA3 Fingerprints": ["abasdfas","abasdfasdf"],"Organization": "Acme Inc","Protocols": [{"Port": 22,"Transport Protocol": "TCP","App Protocol": "TCP"}],"rDNS": "scanner.acme.io","Region": "Arizona","Spoofable": false,"Tags": [{"Tag Category": "activity","Tag Description": "This is a description of the tag.","Tag Intention": "malicious","Tag Name": "IoT Bot Tag"}],"Event Timestamp": "2020-07-08T17:15:10Z","Tor Exit Node": false,"VPN": false,"VPN Service": "VPN Name"}]
+        example: [timeline_activity]
   similar_lookup:
     title: IP Similarity Lookup
     description: Query a routable IPv4 address in the GreyNoise for similar IPs
@@ -1323,11 +1335,13 @@ actions:
         type: ip_sim
         description: IP Similarity Metadata
         required: false
+        example: {"Actor": "Acme Inc.","ASN": "AS12345","City": "Seattle","Classification": "benign","Country": "Brazil","Country Code": "BE","First Seen": "2020-07-08T17:15:10Z","IP Address": "1.2.3.4","Last Seen": "2020-07-08T17:15:10Z","Organization": "Acme Inc"}
       similar_ips:
         title: Similar IPs
         type: "[]similar_ip"
         description: Similar IPs
         required: false
+        example: [{"Actor": "Acme Inc","ASN": "AS12345","City": "New York","Classification": "benign","Country": "Ukraine","Country Code": "UK","Features Matched": ["feature-1","feature-2"],"First Seen": "2020-07-08T17:15:10Z","IP Address": "1.2.3.4","Last Seen": "2020-07-08T17:15:10Z","Organization": "Acme Inc","Similarity Score": 0.83}]
       total:
         title: Total Number of IPs
         type: integer
