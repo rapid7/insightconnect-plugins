@@ -1,7 +1,7 @@
 {
-	"spec": "e65a2ba63a0336dd71483fe60f8fc09e",
-	"manifest": "cc99bad588629becc537d4e9726b339c",
-	"setup": "a3be16b44e39ce0215df20244b1b719d",
+	"spec": "d3a3c54a6cc4009e9e997792b2c21ffa",
+	"manifest": "a613c9c4b5853d61cfcc13528600116b",
+	"setup": "4efb422e05d1ff929fa90a296d69a426",
 	"schemas": [
 		{
 			"identifier": "get_agent_details/schema.py",

@@ -119,12 +119,19 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             state[RATE_LIMITED] = (self._get_current_time() + timedelta(minutes=5)).strftime(TIME_FORMAT)
             return alerts_and_observations, state, False, 200, rate_limit_error
         except HTTPErrorException as http_error:
-            state = self._update_state_in_404(http_error.status_code, state, alerts_success)
+
+            status_code, has_more_pages, error, state = self._handle_404_status_code(http_error, state, alerts_success)
+
             self.logger.info(
-                f"HTTP error from Carbon Black. State={state}, Status code={http_error.status_code}, returning"
-                f" {(len(alerts_and_observations))} items..."
+                "HTTP error from Carbon Black",
+                error=http_error.cause,
+                status_code=http_error.status_code,
+                returning_code=status_code,
+                state=state,
             )
-            return alerts_and_observations, state, False, http_error.status_code, http_error
+
+            return alerts_and_observations, state, has_more_pages, status_code, error
+
         except Exception as error:
             self.logger.error(
                 f"Hit an unexpected error during task execution. State={state}, Error={error}", exc_info=True
@@ -378,11 +385,17 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         return False  # job time is still valid - honor contact vs completed values
 
-    def _update_state_in_404(self, status_code: int, state: Dict[str, str], alerts_success: bool) -> Dict[str, str]:
+    def _handle_404_status_code(
+        self, http_exception: HTTPErrorException, state: Dict[str, str], alerts_success: bool
+    ) -> tuple[int, bool, HTTPErrorException, Dict[str, str]]:
         """
         In the case that the observation ID from CB is no longer available and we return a 404, we should delete this ID
         from the state so that the next run can move on and not continually poll for this missing job.
         """
+
+        has_more_pages = False
+        status_code = http_exception.status_code
+        http_error = http_exception
         if alerts_success and status_code == 404:
             observation_job_id = state.get(LAST_OBSERVATION_JOB)
             if observation_job_id:
@@ -392,9 +405,13 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 )
                 # Only delete the observation ID and the time this was triggered
                 # But keep the hashes and timings in the state for the next job
+                status_code = 200
+                has_more_pages = True
+                http_error = None
                 del state[LAST_OBSERVATION_JOB]
                 del state[LAST_OBSERVATION_JOB_TIME]
-        return state
+
+        return status_code, has_more_pages, http_error, state
 
     @staticmethod
     def _get_current_time():
