@@ -20,7 +20,7 @@ The [VMware Carbon Black Cloud](https://www.carbonblack.com/products/vmware-carb
 
 ## Setup
 
-The connection configuration accepts the following parameters:  
+The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -54,7 +54,7 @@ This action is used to get agent details
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |agent|string|None|True|Agent to retrieve device information from. Accepts IP address, hostname, or device ID. Search results are case-sensitive|None|198.51.100.100|None|None|
-  
+
 Example input:
 
 ```
@@ -68,7 +68,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |agent|agent|False|Details about the agent|{"adGroupId":0,"policyOverride":false,"currentSensorPolicyName":null,"deviceMetaDataItemList":null,"lastDevicePolicyRequestedTime":null,"lastDevicePolicyChangedTime":null,"lastPolicyUpdatedTime":null,"loginUserName":null,"messages":null,"lastReportedTime":1591962280381,"uninstallCode":null,"organizationId":1105,"deviceId":3466056,"createTime":null,"deviceGuid":null,"email":"user@example.com","deviceSessionId":null,"deviceType":"WINDOWS","assignedToId":null,"assignedToName":null,"lastName":"User","firstName":"Test","middleName":null,"deviceOwnerId":12345,"activationCode":"1A2B3C","targetPriorityType":"HIGH","organizationName":"example.com","sensorVersion":"3.5.0.1680","activationCodeExpiryTime":1234567891011,"sensorKitType":null,"osVersion":"Server 2012 x64","registeredTime":1234567891011,"lastContact":1234567891011,"windowsPlatform":null,"vdiBaseDevice":null,"avStatus":["AV_ACTIVE","ONDEMAND_SCAN_DISABLED"],"deregisteredTime":null,"sensorStates":["ACTIVE","LIVE_RESPONSE_NOT_RUNNING","LIVE_RESPONSE_NOT_KILLED","LIVE_RESPONSE_ENABLED","SECURITY_CENTER_OPTLN_DISABLED"],"rootedBySensor":false,"rootedBySensorTime":null,"quarantined":false,"lastInternalIpAddress":"198.51.100.100","macAddress":"000000000000","lastExternalIpAddress":"198.51.100.100","lastLocation":"OFFSITE","sensorOutOfDate":false,"avUpdateServers":null,"passiveMode":false,"lastResetTime":0,"lastShutdownTime":0,"scanStatus":null,"scanLastActionTime":0,"scanLastCompleteTime":0,"linuxKernelVersion":null,"avEngine":"4.13.0.207-ave.8.3.60.40:avpack.8.5.0.60:vdf.8.18.2.56:apc.2.10.0.149","avProductVersion":"4.13.0.207","avAveVersion":"8.3.60.40","avPackVersion":"8.5.0.60","avVdfVersion":"8.18.2.56","avLastScanTime":0,"virtualMachine":false,"virtualizationProvider":"UNKNOWN","sensorPendingUpdate":false,"rootedByAnalytics":false,"rootedByAnalyticsTime":null,"avMaster":false,"firstVirusActivityTime":0,"lastVirusActivityTime":0,"testId":-1,"uninstalledTime":null,"encodedActivationCode":null,"originEventHash":null,"name":"example-host","status":"REGISTERED","policyId":12345,"policyName":"test"}|
-  
+
 Example output:
 
 ```
@@ -174,7 +174,7 @@ This action is used to quarantine an agent
 |agent|string|None|True|Agent to retrieve device information from. Accepts IP address, hostname, or device ID. Search results are case-sensitive|None|198.51.100.100|None|None|
 |quarantine_state|boolean|True|True|Set to true to quarantine the agent, set to false to unquarantine an agent|None|True|None|None|
 |whitelist|[]string|None|False|An array of IPs, hostnames, or device ID that a user can pass in that will not be quarantined|None|["198.51.100.100", "win-test"]|None|None|
-  
+
 Example input:
 
 ```
@@ -193,7 +193,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |quarantined|boolean|True|Indicates whether or not the agent has been quarantined|True|
-  
+
 Example output:
 
 ```
@@ -202,7 +202,7 @@ Example output:
 }
 ```
 ### Triggers
-  
+
 *This plugin does not contain any triggers.*
 ### Tasks
 
@@ -212,7 +212,7 @@ Example output:
 This task is used to monitor alerts and observations in your Carbon Black Cloud instance
 
 ##### Input
-  
+
 *This task does not contain any inputs.*
 
 ##### Output
@@ -220,7 +220,7 @@ This task is used to monitor alerts and observations in your Carbon Black Cloud 
 |Name|Type|Required|Description| Example                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | :--- | :--- | :--- | :--- |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |alerts|[]alert|True|List of all alerts and observations|[{"org_key": "ABCD1234", "alert_url": "https://defense.conferdeploy.net/alerts?s[c][query_string]=id:52fa009d-e2d1-4118-8a8d-04f521ae66aa&orgKey=ABCD1234", "id": "12ab345cd6-e2d1-4118-8a8d-04f521ae66aa", "type": "WATCHLIST", "backend_timestamp": "2023-04-14T21:30:40.570Z", "user_update_timestamp": "None", "backend_update_timestamp": "2023-04-14T21:30:40.570Z", "detection_timestamp": "2023-04-14T21:27:14.719Z", "first_event_timestamp": "2023-04-14T21:21:42.193Z", "last_event_timestamp": "2023-04-14T21:21:42.193Z", "severity": 8, "reason": "Process infdefaultinstall.exe was detected by the report Defense Evasion - Signed Binary Proxy Execution - InfDefaultInstall in 6 watchlists", "reason_code": "05696200-88e6-3691-a1e3-8d9a64dbc24e:7828aec8-8502-3a43-ae68-41b5050dab5b", "threat_id": "0569620088E6669121E38D9A64DBC24E", "primary_event_id": "-7RlZFHcSGWKSrF55B_4Ig-0", "policy_applied": "NOT_APPLIED", "run_state": "RAN", "sensor_action": "ALLOW", "workflow": {"change_timestamp": "2023-04-14T21:30:40.570Z", "changed_by_type": "SYSTEM", "changed_by": "ALERT_CREATION", "closure_reason": "NO_REASON", "status": "OPEN"}, "determination": "None", "tags": ["tag1", "tag2"], "alert_notes_present": False, "threat_notes_present": False, "is_updated": False, "device_id": 18118174, "device_name": "pscr-test-01-1677785028.620244-9", "device_uem_id": "", "device_target_value": "LOW", "device_policy": "123abcde-c21b-4d64-9e3e-53595ef9c7af", "device_policy_id": 1234567, "device_os": "WINDOWS", "device_os_version": "Windows 10 x64 SP: 1", "device_username": "user@example.com", "device_location": "UNKNOWN", "device_external_ip": "1.2.3.4", "mdr_alert": False, "report_id": "oJFtoawGS92fVMXlELC1Ow-b4ee93fc-ec58-436a-a940-b4d33a613513", "report_name": "Defense Evasion - Signed Binary Proxy Execution - InfDefaultInstall", "report_description": "\\n\\nThreat:\\nThis behavior may be abused by adversaries to execute malicious files that could bypass application whitelisting and signature validation on systems.\\n\\nFalse Positives:\\nSome environments may legitimate use this, but should be rare.\\n\\nScore:\\n85", "report_tags": ["tag1"], "report_link": "https://attack.mitre.org/wiki/Technique/T1218", "ioc_id": "b4ee93fc-ec58-436a-a940-b4d33a613513-0", "ioc_hit": "((process_name:InfDefaultInstall.exe)) -enriched:true", "watchlists": [{"id": "hfnsh73543jdt", "name": "Carbon Black Advanced Threats"}], "process_guid": "ABCD1234-0114761e-00002ae4-00000000-19db1ded53e8000", "process_pid": 10980, "process_name": "infdefaultinstall.exe", "process_sha256": "1a2345cd88666a458f804e5d0fe925a9f55cf016733458c58c1980addc44cd774", "process_md5": "12c34567894a49f13193513b0138f72a9", "process_effective_reputation": "LOCAL_WHITE", "process_reputation": "NOT_LISTED", "process_cmdline": "InfDefaultInstall.exe C:\\\\Users\\\\username\\\\userdir\\\\Infdefaultinstall.inf", "process_username": "DEMO\\\\DEMOUSER", "process_issuer": "Demo Code Signing CA - G2", "process_publisher": "Demo Test Authority", "childproc_guid": "", "childproc_username": "", "childproc_cmdline": "", "ml_classification_final_verdict": "NOT_ANOMALOUS", "ml_classification_global_prevalence": "LOW", "ml_classification_org_prevalence": "LOW"}, {"backend_timestamp": "2024-04-25T13:13:14.268Z", "device_group_id": 0, "device_id": 1234567, "device_name": "device\\\\name", "device_policy_id": 1234, "device_timestamp": "2024-04-25T13:12:16.965Z", "enriched": True, "enriched_event_type": ["CREATE_PROCESS"], "event_description": "Threat:\\nThis behavior may be abused by adversaries to execute malicious files that could bypass application whitelisting", "event_id": "123abc456hij987", "event_type": "childproc", "ingress_time": 1714050766940, "legacy": True, "observation_description": "Threat:\\nThis behavior may be abused by adversaries to execute malicious files that could bypass application whitelisting", "observation_id": "123abc456hij987", "observation_type": "CONTEXTUAL_ACTIVITY", "org_id": "ABCD123", "parent_guid": "7DESJ9GN-00663165-00000e3c-00000000-1da90da1398f66e", "parent_pid": 1234, "process_guid": "7DESJ9GN-00663165-0000490c-00000000-1da971229580df5", "process_hash": ["460091df9292bf9307cb92d1aef8d0e5", "e59c1ee25d223308115101b022e15bb887a3deba629be743ab03e08439c2b6f6"], "process_name": "c:\\\\program files\\\\directory\\\\example.exe", "process_pid": [18700], "process_username": ["USER\\\\NAME"]}]|
-  
+
 Example output:
 
 ```
@@ -345,7 +345,7 @@ Example output:
 ```
 
 ### Custom Types
-  
+
 **agent**
 
 |Name|Type|Default|Required|Description|Example|
@@ -426,7 +426,7 @@ Example output:
 |Virtual Machine|boolean|None|False|Virtual machine|None|
 |Virtualization Provider|string|None|False|Virtualization provider|None|
 |Windows Platform|string|None|False|Windows platform|None|
-  
+
 **alert**
 
 |Name|Type|Default|Required|Description|Example|
@@ -435,11 +435,12 @@ Example output:
 
 
 ## Troubleshooting
-  
+
 *This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 2.2.8 - Fix error handling for HTTP Not Found status code responses from Carbon Black Cloud | Update SDK to 6.2.0
 * 2.2.7 - Restrain the observability window to a configurable amount if data collection falls behind
 * 2.2.6 - Update SDK to 6.1.4
 * 2.2.5 - To split the PAGE_SIZE limit into ALERT_PAGE_SIZE and OBSERVATION_PAGE_SIZE

@@ -257,7 +257,7 @@ class TestMonitorAlerts(TestCase):
                 ],
                 task_404_on_third_request,
                 1,  # able to retrieve the alerts then dedupe and save the observation ID,
-                404,
+                200,
             ],
             [
                 [ConnectTimeout(), "empty_response", "empty_response"],
@@ -294,7 +294,7 @@ class TestMonitorAlerts(TestCase):
 
         self.assertEqual(expected_status_code, status_code)
         self.assertEqual(num_logs, len(response))
-        self.assertFalse(has_more_pages)
+        self.assertEqual(has_more_pages, status_code == 200)
 
         self.assertDictEqual(expected_state, new_state)
 
