@@ -120,8 +120,8 @@ Example input:
 |first_seen|date|False|First Seen By GreyNoise|2024-01-01|
 |ip|string|False|Value that was Queried|1.2.3.4|
 |last_seen|string|False|Last Seen By GreyNoise|2024-01-01|
-|metadata|metadata|False|GreyNoise IP Metadata|{'ASN': 'AS12345', 'Category': 'isp', 'City': 'Reno', 'Country': 'Brazil', 'Country Code': 'BZ', 'Destination Countries': ['Brazil', 'Spain'], 'Destination Country Codes': ['BZ', 'ES'], 'Organization': 'Acme Inc.', 'OS': 'Windows XP', 'rDNS': 'scanner.example.io', 'Region': 'Arizona', 'Sensor Count': 5, 'Sensor Hits': 5, 'Source Country': 'Brazil', 'Source Country Code': 'BE', 'TOR': False}|
-|raw_data|raw_data|False|GreyNoise IP Raw Data|{'HASSH': [{'Fingerprint': 'abcdefg1234567', 'Port': 22}], 'JA3': [{'Fingerprint': 'abcdefg1234567', 'Port': 22}], 'Scan': [{'Port': 22, 'Protocol': 'TCP'}], 'Web': {'Web Paths': ['/', '/robots.txt'], 'User Agents': ['user-agent']}}|
+|metadata|metadata|False|GreyNoise IP Metadata|{'asn': 'AS12345', 'category': 'isp', 'city': 'Reno', 'country': 'Brazil', 'country_code': 'BZ', 'destination_countries': ['Brazil', 'Spain'], 'destination_country_codes': ['BZ', 'ES'], 'organization': 'Acme Inc.', 'os': 'Windows XP', 'rdns': 'scanner.example.io', 'region': 'Arizona', 'sensor_count': 5, 'sensor_hits': 5, 'source_country': 'Brazil', 'source_country_code': 'BE', 'tor': False}|
+|raw_data|raw_data|False|GreyNoise IP Raw Data|{'hassh': [{'fingerprint': 'abcdefg1234567', 'port': 22}], 'ja3': [{'fingerprint': 'abcdefg1234567', 'port': 22}], 'scan': [{'port': 22, 'protocol': 'TCP'}], 'web': {'paths': ['/', '/robots.txt'], 'useragents': ['user-agent']}}|
 |seen|boolean|False|Has this IP been Seen by GreyNoise|True|
 |spoofable|boolean|False|IP address may be spoofed|False|
 |tags|[]string|False|GreyNoise Tags Associated with IP|Tag 1, Tag2|
@@ -144,55 +144,55 @@ Example output:
   "ip": "1.2.3.4",
   "last_seen": "2024-01-01",
   "metadata": {
-    "ASN": "AS12345",
-    "Category": "isp",
-    "City": "Reno",
-    "Country": "Brazil",
-    "Country Code": "BZ",
-    "Destination Countries": [
+    "asn": "AS12345",
+    "category": "isp",
+    "city": "Reno",
+    "country": "Brazil",
+    "country_code": "BZ",
+    "destination_countries": [
       "Brazil",
       "Spain"
     ],
-    "Destination Country Codes": [
+    "destination_country_codes": [
       "BZ",
       "ES"
     ],
-    "OS": "Windows XP",
-    "Organization": "Acme Inc.",
-    "Region": "Arizona",
-    "Sensor Count": 5,
-    "Sensor Hits": 5,
-    "Source Country": "Brazil",
-    "Source Country Code": "BE",
-    "TOR": false,
-    "rDNS": "scanner.example.io"
+    "organization": "Acme Inc.",
+    "os": "Windows XP",
+    "rdns": "scanner.example.io",
+    "region": "Arizona",
+    "sensor_count": 5,
+    "sensor_hits": 5,
+    "source_country": "Brazil",
+    "source_country_code": "BE",
+    "tor": false
   },
   "raw_data": {
-    "HASSH": [
+    "hassh": [
       {
-        "Fingerprint": "abcdefg1234567",
-        "Port": 22
+        "fingerprint": "abcdefg1234567",
+        "port": 22
       }
     ],
-    "JA3": [
+    "ja3": [
       {
-        "Fingerprint": "abcdefg1234567",
-        "Port": 22
+        "fingerprint": "abcdefg1234567",
+        "port": 22
       }
     ],
-    "Scan": [
+    "scan": [
       {
-        "Port": 22,
-        "Protocol": "TCP"
+        "port": 22,
+        "protocol": "TCP"
       }
     ],
-    "Web": {
-      "User Agents": [
-        "user-agent"
-      ],
-      "Web Paths": [
+    "web": {
+      "paths": [
         "/",
         "/robots.txt"
+      ],
+      "useragents": [
+        "user-agent"
       ]
     }
   },
@@ -287,7 +287,7 @@ Example input:
 | :--- | :--- | :--- | :--- | :--- |
 |complete|boolean|False|Indicates if all pages of the query have been returned by the API|True|
 |count|integer|False|Total count of IPs returned Query|10|
-|data|[]data|False|GreyNoise Data Object, Contains IP Object for each IP returned by the query|["data"]|
+|data|[]data|False|GreyNoise Data Object, Contains IP Object for each IP returned by the query|[{"actor": "Acme, Inc", "bot": false, "classification": "malicious", "cve": ["CVE-1111-1111", "CVE-2222-2222"], "first_seen": "2024-01-01", "ip": "1.2.3.4", "last_seen": "2024-01-01", "metadata": {"asn": "AS12345", "category": "isp", "city": "Reno", "country": "Brazil", "country_code": "BZ", "destination_countries": ["Brazil", "Spain"], "destination_country_codes": ["BZ", "ES"], "organization": "Acme Inc.", "os": "Windows XP", "rdns": "scanner.example.io", "region": "Arizona", "sensor_count": 5, "sensor_hits": 5, "source_country": "Brazil", "source_country_code": "BE", "tor": false}, "raw_data": {"hassh": [{"fingerprint": "abcdefg1234567", "port": 22}], "ja3": [{"fingerprint": "abcdefg1234567", "port": 22}], "scan": [{"port": 22, "protocol": "TCP"}], "web": {"paths": ["/", "/robots.txt"], "useragents": ["user-agent"]}}, "seen": true, "spoofable": false, "tags": "Tag 1, Tag2", "vpn": false, "vpn_service": "My VPN"}]|
 |message|string|False|GreyNoise Query Message, indicates if there were issues with the query|ok|
 |query|string|False|GreyNoise Query Sent to API|sample query|
   
@@ -298,7 +298,76 @@ Example output:
   "complete": true,
   "count": 10,
   "data": [
-    "data"
+    {
+      "actor": "Acme, Inc",
+      "bot": false,
+      "classification": "malicious",
+      "cve": [
+        "CVE-1111-1111",
+        "CVE-2222-2222"
+      ],
+      "first_seen": "2024-01-01",
+      "ip": "1.2.3.4",
+      "last_seen": "2024-01-01",
+      "metadata": {
+        "asn": "AS12345",
+        "category": "isp",
+        "city": "Reno",
+        "country": "Brazil",
+        "country_code": "BZ",
+        "destination_countries": [
+          "Brazil",
+          "Spain"
+        ],
+        "destination_country_codes": [
+          "BZ",
+          "ES"
+        ],
+        "organization": "Acme Inc.",
+        "os": "Windows XP",
+        "rdns": "scanner.example.io",
+        "region": "Arizona",
+        "sensor_count": 5,
+        "sensor_hits": 5,
+        "source_country": "Brazil",
+        "source_country_code": "BE",
+        "tor": false
+      },
+      "raw_data": {
+        "hassh": [
+          {
+            "fingerprint": "abcdefg1234567",
+            "port": 22
+          }
+        ],
+        "ja3": [
+          {
+            "fingerprint": "abcdefg1234567",
+            "port": 22
+          }
+        ],
+        "scan": [
+          {
+            "port": 22,
+            "protocol": "TCP"
+          }
+        ],
+        "web": {
+          "paths": [
+            "/",
+            "/robots.txt"
+          ],
+          "useragents": [
+            "user-agent"
+          ]
+        }
+      },
+      "seen": true,
+      "spoofable": false,
+      "tags": "Tag 1, Tag2",
+      "vpn": false,
+      "vpn_service": "My VPN"
+    }
   ],
   "message": "ok",
   "query": "sample query"
@@ -417,8 +486,8 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|ip|ip_sim|False|IP Similarity Metadata|{'Actor': 'Acme Inc.', 'ASN': 'AS12345', 'City': 'Seattle', 'Classification': 'benign', 'Country': 'Brazil', 'Country Code': 'BE', 'First Seen': '2020-07-08T17:15:10Z', 'IP Address': '1.2.3.4', 'Last Seen': '2020-07-08T17:15:10Z', 'Organization': 'Acme Inc'}|
-|similar_ips|[]similar_ip|False|Similar IPs|[{"Actor": "Acme Inc", "ASN": "AS12345", "City": "New York", "Classification": "benign", "Country": "Ukraine", "Country Code": "UK", "Features Matched": ["feature-1", "feature-2"], "First Seen": "2020-07-08T17:15:10Z", "IP Address": "1.2.3.4", "Last Seen": "2020-07-08T17:15:10Z", "Organization": "Acme Inc", "Similarity Score": 0.83}]|
+|ip|ip_sim|False|IP Similarity Metadata|{'actor': 'Acme Inc.', 'asn': 'AS12345', 'city': 'Seattle', 'classification': 'benign', 'country': 'Brazil', 'country_code': 'BE', 'first_seen': '2020-07-08T17:15:10Z', 'ip': '1.2.3.4', 'last_seen': '2020-07-08T17:15:10Z', 'organization': 'Acme Inc'}|
+|similar_ips|[]similar_ip|False|Similar IPs|[{"actor": "Acme Inc", "asn": "AS12345", "city": "New York", "classification": "benign", "country": "Ukraine", "country_code": "UK", "features_matched": ["feature-1", "feature-2"], "first_seen": "2020-07-08T17:15:10Z", "ip": "1.2.3.4", "last_seen": "2020-07-08T17:15:10Z", "organization": "Acme Inc", "score": 0.83}]|
 |total|integer|False|Total Number of Similar IPs returned|5|
   
 Example output:
@@ -426,34 +495,34 @@ Example output:
 ```
 {
   "ip": {
-    "ASN": "AS12345",
-    "Actor": "Acme Inc.",
-    "City": "Seattle",
-    "Classification": "benign",
-    "Country": "Brazil",
-    "Country Code": "BE",
-    "First Seen": "2020-07-08T17:15:10Z",
-    "IP Address": "1.2.3.4",
-    "Last Seen": "2020-07-08T17:15:10Z",
-    "Organization": "Acme Inc"
+    "actor": "Acme Inc.",
+    "asn": "AS12345",
+    "city": "Seattle",
+    "classification": "benign",
+    "country": "Brazil",
+    "country_code": "BE",
+    "first_seen": "2020-07-08T17:15:10Z",
+    "ip": "1.2.3.4",
+    "last_seen": "2020-07-08T17:15:10Z",
+    "organization": "Acme Inc"
   },
   "similar_ips": [
     {
-      "ASN": "AS12345",
-      "Actor": "Acme Inc",
-      "City": "New York",
-      "Classification": "benign",
-      "Country": "Ukraine",
-      "Country Code": "UK",
-      "Features Matched": [
+      "actor": "Acme Inc",
+      "asn": "AS12345",
+      "city": "New York",
+      "classification": "benign",
+      "country": "Ukraine",
+      "country_code": "UK",
+      "features_matched": [
         "feature-1",
         "feature-2"
       ],
-      "First Seen": "2020-07-08T17:15:10Z",
-      "IP Address": "1.2.3.4",
-      "Last Seen": "2020-07-08T17:15:10Z",
-      "Organization": "Acme Inc",
-      "Similarity Score": 0.83
+      "first_seen": "2020-07-08T17:15:10Z",
+      "ip": "1.2.3.4",
+      "last_seen": "2020-07-08T17:15:10Z",
+      "organization": "Acme Inc",
+      "score": 0.83
     }
   ],
   "total": 5
@@ -482,24 +551,74 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|activity|[]timeline_activity|False|IP Timeline Activity Events|["timeline_activity"]|
+|activity|[]timeline_activity|False|IP Timeline Activity Events|[{"asn": "AS12345", "category": "isp", "city": "Seattle", "classification": "benign", "country": "Spain", "country_code": "ES", "destinations": [{"country": "Brazil", "country_code": "BE"}], "hassh_fingerprints": ["asdfa1412", "asasdf2125"], "http_web_paths": ["robots.txt"], "http_user_agents": ["Hello World"], "ja3_fingerprints": ["abasdfas", "abasdfasdf"], "organization": "Acme Inc", "protocols": [{"port": 22, "transport_protocol": "TCP", "app_protocol": "TCP"}], "rdns": "scanner.acme.io", "region": "Arizona", "spoofable": false, "tags": [{"tag_category": "activity", "tag_description": "This is a description of the tag.", "tag_intention": "malicious", "tag_name": "IoT Bot Tag"}], "timestampe": "2020-07-08T17:15:10Z", "tor": false, "vpn": false, "vpn_service": "VPN Name"}]|
 |ip|string|False|Value that was Queried|1.2.3.4|
-|metadata|timeline_metadata|False|IP Timeline Metadata|{'Timeline Period End Time': '2020-07-08T17:15:10Z', 'IP Address': '1.2.3.4', 'Event Limit': 5, 'Cursor Value': 'asdf142qas3241asdf234sfa', 'Timeline Period Start Time': '2020-07-08T17:15:10Z'}|
+|metadata|timeline_metadata|False|IP Timeline Metadata|{'end_time': '2020-07-08T17:15:10Z', 'ip': '1.2.3.4', 'limit': 5, 'next_cursor': 'asdf142qas3241asdf234sfa', 'start_time': '2020-07-08T17:15:10Z'}|
   
 Example output:
 
 ```
 {
   "activity": [
-    "timeline_activity"
+    {
+      "asn": "AS12345",
+      "category": "isp",
+      "city": "Seattle",
+      "classification": "benign",
+      "country": "Spain",
+      "country_code": "ES",
+      "destinations": [
+        {
+          "country": "Brazil",
+          "country_code": "BE"
+        }
+      ],
+      "hassh_fingerprints": [
+        "asdfa1412",
+        "asasdf2125"
+      ],
+      "http_user_agents": [
+        "Hello World"
+      ],
+      "http_web_paths": [
+        "robots.txt"
+      ],
+      "ja3_fingerprints": [
+        "abasdfas",
+        "abasdfasdf"
+      ],
+      "organization": "Acme Inc",
+      "protocols": [
+        {
+          "app_protocol": "TCP",
+          "port": 22,
+          "transport_protocol": "TCP"
+        }
+      ],
+      "rdns": "scanner.acme.io",
+      "region": "Arizona",
+      "spoofable": false,
+      "tags": [
+        {
+          "tag_category": "activity",
+          "tag_description": "This is a description of the tag.",
+          "tag_intention": "malicious",
+          "tag_name": "IoT Bot Tag"
+        }
+      ],
+      "timestampe": "2020-07-08T17:15:10Z",
+      "tor": false,
+      "vpn": false,
+      "vpn_service": "VPN Name"
+    }
   ],
   "ip": "1.2.3.4",
   "metadata": {
-    "Cursor Value": "asdf142qas3241asdf234sfa",
-    "Event Limit": 5,
-    "IP Address": "1.2.3.4",
-    "Timeline Period End Time": "2020-07-08T17:15:10Z",
-    "Timeline Period Start Time": "2020-07-08T17:15:10Z"
+    "end_time": "2020-07-08T17:15:10Z",
+    "ip": "1.2.3.4",
+    "limit": 5,
+    "next_cursor": "asdf142qas3241asdf234sfa",
+    "start_time": "2020-07-08T17:15:10Z"
   }
 }
 ```
@@ -526,51 +645,51 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|details|vuln_details|False|GreyNoise Vulnerability Details|{'CVE CVSS Score': 9.8, 'Product Name': 'Product Name', 'Is CVE Published in NIST NVD': False, 'Vendor Name': 'Acme Inc', 'Vulnerability Description': 'This is a product description.', 'Vulnerability Name': 'This is a vuln name.'}|
-|exploitation_activity|vuln_exploitation_activity|False|GreyNoise Vulnerability Exploitation Activity|{'GreyNoise Observed Activity': True, 'Benign IP Count - 10 days': 5, 'Benign IP Count - 1 day': 5, 'Benign IP Count - 30 days': 5, 'Threat IP Count - 10 days': 5, 'Threat IP Count - 1 day': 5, 'Threat IP Count - 30 days': 5}|
-|exploitation_details|vuln_exploitation_details|False|GreyNoise Vulnerability Exploitation Details|{'Attack Vector': 'NETWORK', 'EPSS Score': 0.0, 'Exploit Found': True, 'Exploitation Registered in KEV': False}|
-|exploitation_stats|vuln_exploitation_stats|False|GreyNoise Vulnerability Exploitation Stats|{'Number of Available Exploits': 1, 'Number of Associated Botnets': 1, 'Number of Threat Actors Exploiting Vulnerability': 1}|
+|details|vuln_details|False|GreyNoise Vulnerability Details|{'cve_cvss_score': 9.8, 'product': 'Product Name', 'published_to_nist_nvd': False, 'vendor': 'Acme Inc', 'vulnerability_description': 'This is a product description.', 'vulnerability_name': 'This is a vuln name.'}|
+|exploitation_activity|vuln_exploitation_activity|False|GreyNoise Vulnerability Exploitation Activity|{'activity_seen': True, 'benign_ip_count_10d': 5, 'benign_ip_count_1d': 5, 'benign_ip_count_30d': 5, 'threat_ip_count_10d': 5, 'threat_ip_count_1d': 5, 'threat_ip_count_30d': 5}|
+|exploitation_details|vuln_exploitation_details|False|GreyNoise Vulnerability Exploitation Details|{'attack_vector': 'NETWORK', 'epss_score': 0.0, 'exploit_found': True, 'exploitation_registered_in_kev': False}|
+|exploitation_stats|vuln_exploitation_stats|False|GreyNoise Vulnerability Exploitation Stats|{'number_of_available_exploits': 1, 'number_of_botnets_exploiting_vulnerability': 1, 'number_of_threat_actors_exploiting_vulnerability': 1}|
 |id|string|False|Value that was searched|CVE-2020-12345|
-|timeline|vuln_timeline|False|GreyNoise Vulnerability Timeline|{'Date Added to CISA KEV': '2020-07-08T17:15:10Z', 'Date CVE was Last Updated': '2020-07-08T17:15:10Z', 'Date CVE was Published': '2020-07-08T17:15:10Z', 'Date of First Published POC': '2020-07-08T17:15:10Z'}|
+|timeline|vuln_timeline|False|GreyNoise Vulnerability Timeline|{'cisa_kev_date_added': '2020-07-08T17:15:10Z', 'cve_last_updated_date': '2020-07-08T17:15:10Z', 'cve_published_date': '2020-07-08T17:15:10Z', 'first_known_published_date': '2020-07-08T17:15:10Z'}|
   
 Example output:
 
 ```
 {
   "details": {
-    "CVE CVSS Score": 9.8,
-    "Is CVE Published in NIST NVD": false,
-    "Product Name": "Product Name",
-    "Vendor Name": "Acme Inc",
-    "Vulnerability Description": "This is a product description.",
-    "Vulnerability Name": "This is a vuln name."
+    "cve_cvss_score": 9.8,
+    "product": "Product Name",
+    "published_to_nist_nvd": false,
+    "vendor": "Acme Inc",
+    "vulnerability_description": "This is a product description.",
+    "vulnerability_name": "This is a vuln name."
   },
   "exploitation_activity": {
-    "Benign IP Count - 1 day": 5,
-    "Benign IP Count - 10 days": 5,
-    "Benign IP Count - 30 days": 5,
-    "GreyNoise Observed Activity": true,
-    "Threat IP Count - 1 day": 5,
-    "Threat IP Count - 10 days": 5,
-    "Threat IP Count - 30 days": 5
+    "activity_seen": true,
+    "benign_ip_count_10d": 5,
+    "benign_ip_count_1d": 5,
+    "benign_ip_count_30d": 5,
+    "threat_ip_count_10d": 5,
+    "threat_ip_count_1d": 5,
+    "threat_ip_count_30d": 5
   },
   "exploitation_details": {
-    "Attack Vector": "NETWORK",
-    "EPSS Score": 0.0,
-    "Exploit Found": true,
-    "Exploitation Registered in KEV": false
+    "attack_vector": "NETWORK",
+    "epss_score": 0.0,
+    "exploit_found": true,
+    "exploitation_registered_in_kev": false
   },
   "exploitation_stats": {
-    "Number of Associated Botnets": 1,
-    "Number of Available Exploits": 1,
-    "Number of Threat Actors Exploiting Vulnerability": 1
+    "number_of_available_exploits": 1,
+    "number_of_botnets_exploiting_vulnerability": 1,
+    "number_of_threat_actors_exploiting_vulnerability": 1
   },
   "id": "CVE-2020-12345",
   "timeline": {
-    "Date Added to CISA KEV": "2020-07-08T17:15:10Z",
-    "Date CVE was Last Updated": "2020-07-08T17:15:10Z",
-    "Date CVE was Published": "2020-07-08T17:15:10Z",
-    "Date of First Published POC": "2020-07-08T17:15:10Z"
+    "cisa_kev_date_added": "2020-07-08T17:15:10Z",
+    "cve_last_updated_date": "2020-07-08T17:15:10Z",
+    "cve_published_date": "2020-07-08T17:15:10Z",
+    "first_known_published_date": "2020-07-08T17:15:10Z"
   }
 }
 ```

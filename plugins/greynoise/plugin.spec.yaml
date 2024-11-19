@@ -927,13 +927,13 @@ actions:
         type: metadata
         description: GreyNoise IP Metadata
         required: false
-        example: {"ASN": "AS12345","Category": "isp","City": "Reno","Country": "Brazil","Country Code": "BZ","Destination Countries": ["Brazil","Spain"],"Destination Country Codes": ["BZ","ES"],"Organization": "Acme Inc.","OS": "Windows XP","rDNS": "scanner.example.io","Region": "Arizona","Sensor Count": 5,"Sensor Hits": 5,"Source Country": "Brazil","Source Country Code": "BE","TOR": false}
+        example: {"asn": "AS12345","category": "isp","city": "Reno","country": "Brazil","country_code": "BZ","destination_countries": ["Brazil","Spain"],"destination_country_codes": ["BZ","ES"],"organization": "Acme Inc.","os": "Windows XP","rdns": "scanner.example.io","region": "Arizona","sensor_count": 5,"sensor_hits": 5,"source_country": "Brazil","source_country_code": "BE","tor": false}
       raw_data:
         title: GreyNoise Raw Data
         type: raw_data
         description: GreyNoise IP Raw Data
         required: false
-        example: {"HASSH": [{"Fingerprint": "abcdefg1234567","Port": 22}],"JA3": [{"Fingerprint": "abcdefg1234567","Port": 22}],"Scan": [{"Port": 22,"Protocol": "TCP"}],"Web": {"Web Paths": ["/","/robots.txt"],"User Agents": ["user-agent"]}}
+        example: {"hassh": [{"fingerprint": "abcdefg1234567","port": 22}],"ja3": [{"fingerprint": "abcdefg1234567","port": 22}],"scan": [{"port": 22,"protocol": "TCP"}],"web": {"paths": ["/","/robots.txt"],"useragents": ["user-agent"]}}
       viz_url:
         title: GreyNoise Visualizer Link
         type: string
@@ -1170,7 +1170,7 @@ actions:
         type: "[]data"
         description: GreyNoise Data Object, Contains IP Object for each IP returned by the query
         required: false
-        example: [data]
+        example: [{"actor": "Acme, Inc","bot": false,"classification": "malicious","cve": ["CVE-1111-1111","CVE-2222-2222"],"first_seen": "2024-01-01","ip": "1.2.3.4","last_seen": "2024-01-01","metadata": {"asn": "AS12345","category": "isp","city": "Reno","country": "Brazil","country_code": "BZ","destination_countries": ["Brazil","Spain"],"destination_country_codes": ["BZ","ES"],"organization": "Acme Inc.","os": "Windows XP","rdns": "scanner.example.io","region": "Arizona","sensor_count": 5,"sensor_hits": 5,"source_country": "Brazil","source_country_code": "BE","tor": false},"raw_data": {"hassh": [{"fingerprint": "abcdefg1234567","port": 22}],"ja3": [{"fingerprint": "abcdefg1234567","port": 22}],"scan": [{"port": 22,"protocol": "TCP"}],"web": {"paths": ["/","/robots.txt"],"useragents": ["user-agent"]}},"seen": true,"spoofable": false,"tags": "Tag 1, Tag2","vpn": false,"vpn_service": "My VPN"}]
       message:
         title: GreyNoise Query Message
         type: string
@@ -1264,31 +1264,31 @@ actions:
         description: GreyNoise Vulnerability Details
         type: vuln_details
         required: false
-        example: {"CVE CVSS Score": 9.8,"Product Name": "Product Name","Is CVE Published in NIST NVD": false,"Vendor Name": "Acme Inc","Vulnerability Description": "This is a product description.","Vulnerability Name": "This is a vuln name."}
+        example: {"cve_cvss_score": 9.8,"product": "Product Name","published_to_nist_nvd": false,"vendor": "Acme Inc","vulnerability_description": "This is a product description.","vulnerability_name": "This is a vuln name."}
       exploitation_activity:
         title: GreyNoise Vulnerability Exploitation Activity
         description: GreyNoise Vulnerability Exploitation Activity
         type: vuln_exploitation_activity
         required: false
-        example: {"GreyNoise Observed Activity": true,"Benign IP Count - 10 days": 5,"Benign IP Count - 1 day": 5,"Benign IP Count - 30 days": 5,"Threat IP Count - 10 days": 5,"Threat IP Count - 1 day": 5,"Threat IP Count - 30 days": 5}
+        example: {"activity_seen": true,"benign_ip_count_10d": 5,"benign_ip_count_1d": 5,"benign_ip_count_30d": 5,"threat_ip_count_10d": 5,"threat_ip_count_1d": 5,"threat_ip_count_30d": 5}
       exploitation_details:
         title: GreyNoise Vulnerability Exploitation Details
         description: GreyNoise Vulnerability Exploitation Details
         type: vuln_exploitation_details
         required: false
-        example: {"Attack Vector": "NETWORK","EPSS Score": 0.0,"Exploit Found": true,"Exploitation Registered in KEV": false}
+        example: {"attack_vector": "NETWORK","epss_score": 0.0,"exploit_found": true,"exploitation_registered_in_kev": false}
       exploitation_stats:
         title: GreyNoise Vulnerability Exploitation Stats
         description: GreyNoise Vulnerability Exploitation Stats
         type: vuln_exploitation_stats
         required: false
-        example: {"Number of Available Exploits": 1,"Number of Associated Botnets": 1,"Number of Threat Actors Exploiting Vulnerability": 1}
+        example: {"number_of_available_exploits": 1,"number_of_botnets_exploiting_vulnerability": 1,"number_of_threat_actors_exploiting_vulnerability": 1}
       timeline:
         title: GreyNoise Vulnerability Timeline
         description: GreyNoise Vulnerability Timeline
         type: vuln_timeline
         required: false
-        example: {"Date Added to CISA KEV": "2020-07-08T17:15:10Z","Date CVE was Last Updated": "2020-07-08T17:15:10Z","Date CVE was Published": "2020-07-08T17:15:10Z","Date of First Published POC": "2020-07-08T17:15:10Z"}
+        example: {"cisa_kev_date_added": "2020-07-08T17:15:10Z","cve_last_updated_date": "2020-07-08T17:15:10Z","cve_published_date": "2020-07-08T17:15:10Z","first_known_published_date": "2020-07-08T17:15:10Z"}
   timeline_lookup:
     title: IP Timeline Lookup
     description: Query a routable IPv4 address in the GreyNoise for Scanner Daily Timeline details
@@ -1311,14 +1311,13 @@ actions:
         type: timeline_metadata
         description: IP Timeline Metadata
         required: false
-        example: {"Timeline Period End Time": "2020-07-08T17:15:10Z","IP Address": "1.2.3.4","Event Limit": 5,"Cursor Value": "asdf142qas3241asdf234sfa","Timeline Period Start Time": "2020-07-08T17:15:10Z"}
+        example: {"end_time": "2020-07-08T17:15:10Z","ip": "1.2.3.4","limit": 5,"next_cursor": "asdf142qas3241asdf234sfa","start_time": "2020-07-08T17:15:10Z"}
       activity:
         title: IP Timeline Activity
         type: "[]timeline_activity"
         description: IP Timeline Activity Events
         required: false
-        ##example: [{"ASN": "AS12345","Category": "isp","City": "Seattle","GreyNoise Classification": "benign","Country": "Spain","Country Code": "ES","Destinations": [{"Country": "Brazil","Country Code": "BE"}],"HASSH Fingerprints": ["asdfa1412","asasdf2125"],"HTTP Web Paths": ["robots.txt"],"HTTP User Agents": ["Hello World"],"JA3 Fingerprints": ["abasdfas","abasdfasdf"],"Organization": "Acme Inc","Protocols": [{"Port": 22,"Transport Protocol": "TCP","App Protocol": "TCP"}],"rDNS": "scanner.acme.io","Region": "Arizona","Spoofable": false,"Tags": [{"Tag Category": "activity","Tag Description": "This is a description of the tag.","Tag Intention": "malicious","Tag Name": "IoT Bot Tag"}],"Event Timestamp": "2020-07-08T17:15:10Z","Tor Exit Node": false,"VPN": false,"VPN Service": "VPN Name"}]
-        example: [timeline_activity]
+        example: [{"asn": "AS12345","category": "isp","city": "Seattle","classification": "benign","country": "Spain","country_code": "ES","destinations": [{"country": "Brazil","country_code": "BE"}],"hassh_fingerprints": ["asdfa1412","asasdf2125"],"http_web_paths": ["robots.txt"],"http_user_agents": ["Hello World"],"ja3_fingerprints": ["abasdfas","abasdfasdf"],"organization": "Acme Inc","protocols": [{"port": 22,"transport_protocol": "TCP","app_protocol": "TCP"}],"rdns": "scanner.acme.io","region": "Arizona","spoofable": false,"tags": [{"tag_category": "activity","tag_description": "This is a description of the tag.","tag_intention": "malicious","tag_name": "IoT Bot Tag"}],"timestampe": "2020-07-08T17:15:10Z","tor": false,"vpn": false,"vpn_service": "VPN Name"}]
   similar_lookup:
     title: IP Similarity Lookup
     description: Query a routable IPv4 address in the GreyNoise for similar IPs
@@ -1335,13 +1334,13 @@ actions:
         type: ip_sim
         description: IP Similarity Metadata
         required: false
-        example: {"Actor": "Acme Inc.","ASN": "AS12345","City": "Seattle","Classification": "benign","Country": "Brazil","Country Code": "BE","First Seen": "2020-07-08T17:15:10Z","IP Address": "1.2.3.4","Last Seen": "2020-07-08T17:15:10Z","Organization": "Acme Inc"}
+        example: {"actor": "Acme Inc.","asn": "AS12345","city": "Seattle","classification": "benign","country": "Brazil","country_code": "BE","first_seen": "2020-07-08T17:15:10Z","ip": "1.2.3.4","last_seen": "2020-07-08T17:15:10Z","organization": "Acme Inc"}
       similar_ips:
         title: Similar IPs
         type: "[]similar_ip"
         description: Similar IPs
         required: false
-        example: [{"Actor": "Acme Inc","ASN": "AS12345","City": "New York","Classification": "benign","Country": "Ukraine","Country Code": "UK","Features Matched": ["feature-1","feature-2"],"First Seen": "2020-07-08T17:15:10Z","IP Address": "1.2.3.4","Last Seen": "2020-07-08T17:15:10Z","Organization": "Acme Inc","Similarity Score": 0.83}]
+        example: [{"actor": "Acme Inc","asn": "AS12345","city": "New York","classification": "benign","country": "Ukraine","country_code": "UK","features_matched": ["feature-1","feature-2"],"first_seen": "2020-07-08T17:15:10Z","ip": "1.2.3.4","last_seen": "2020-07-08T17:15:10Z","organization": "Acme Inc","score": 0.83}]
       total:
         title: Total Number of IPs
         type: integer
