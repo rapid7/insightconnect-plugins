@@ -3392,6 +3392,7 @@ Example output:
 
 # Version History
 
+* 10.3.3 - Bumping requirements.txt | SDK bump to 6.2.0
 * 10.3.2 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 10.3.1 - `Advanced Query On Log / Log Set` - Fixed issue where results >500 returned none | Update SDK
 * 10.3.0 - New Action Added: Update Alert
