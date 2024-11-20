@@ -6,6 +6,7 @@ import sys
 sys.path.append(os.path.abspath("../"))
 from komand_redis.connection import Connection
 
+
 class Util:
     @staticmethod
     def default_connector(action):
@@ -34,7 +35,7 @@ class Util:
 
             @staticmethod
             def hmget(key_name: str, fields: list):
-                return [b'20', b'Test User']
+                return [b"20", b"Test User"]
 
             @staticmethod
             def hgetall(key_name: str):
