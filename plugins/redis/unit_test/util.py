@@ -5,8 +5,6 @@ import sys
 
 sys.path.append(os.path.abspath("../"))
 from komand_redis.connection import Connection
-from komand_redis.connection.schema import Input
-
 
 class Util:
     @staticmethod
@@ -33,6 +31,10 @@ class Util:
             @staticmethod
             def delete(key_name: str):
                 return 10
+
+            @staticmethod
+            def hmget(key_name: str, fields: list):
+                return [b'20', b'Test User']
 
             @staticmethod
             def hgetall(key_name: str):

@@ -34,7 +34,7 @@ hub_tags:
   keywords: [database, redis]
   features: []
 version_history:
-  - "1.0.2 - Bumping requirements.txt | SDK bump to 6.2.0"
+  - "1.0.2 - Bumping requirements.txt | SDK bump to 6.2.0 | Added Unit Tests"
   - "1.0.1 - New spec and help.md format for the Extension Library"
   - "1.0.0 - Support web server mode | Add actions HMSET, HMGET and HINCRBY"
   - "0.1.2 - Update to new plugin architecture, fix action 'keys'"

@@ -1,9 +1,8 @@
 {
-    "fields":
-    [
-       "name",
-       "email"
-     ],
-    "get_all": true,
-    "key": "user:profile:123"
+            "fields": [
+               "age",
+               "name"
+            ],
+            "get_all": false,
+            "key": "user:4567"
 }

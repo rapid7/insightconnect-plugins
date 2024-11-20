@@ -1,5 +1,6 @@
 {
     "values": {
-      "login_count": "0"
-               }
+                "age": "20",
+                "name": "Test User"
+            }
 }
