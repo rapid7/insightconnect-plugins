@@ -1,0 +1,9 @@
+{
+    "fields":
+    [
+       "name",
+       "email"
+     ],
+    "get_all": true,
+    "key": "user:profile:123"
+}

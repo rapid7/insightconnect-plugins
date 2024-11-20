@@ -7,7 +7,7 @@ from sys import argv
 Name = "Redis"
 Vendor = "rapid7"
 Version = "1.0.2"
-Description = "The Redis plugin allows you to add, update, and manage data in a Redis database"
+Description = "Redis is an in-memory data structure project implementing a distributed, in-memory key-value database with optional durability. Redis supports different kinds of abstract data structures, such as strings, lists, maps, sets, sorted sets, HyperLogLogs, bitmaps, streams, and spatial indexes.\nThis package allows you to interact with the [Redis](https://redis.io/) database API"
 
 
 def main():
@@ -23,6 +23,8 @@ def main():
             monkey.patch_all()
 
     import insightconnect_plugin_runtime
+    import sys
+    sys.path.append(os.path.abspath("../"))
     from komand_redis import connection, actions, triggers, tasks
 
     class ICONRedis(insightconnect_plugin_runtime.Plugin):

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Set a key"
+    DESCRIPTION = "This action is used to set a key to a string value. There is an optional expiration timeout which will auto remove the key when `expire` seconds have passed"
 
 
 class Input:

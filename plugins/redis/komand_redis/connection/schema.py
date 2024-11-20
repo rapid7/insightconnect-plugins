@@ -17,17 +17,20 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "properties": {
     "db": {
       "type": "integer",
+      "title": "DB",
       "description": "DB to use usually (0-15)",
       "default": 0,
       "order": 3
     },
     "host": {
       "type": "string",
+      "title": "Host",
       "description": "Host, e.g. 10.4.4.4",
       "order": 1
     },
     "port": {
       "type": "integer",
+      "title": "Port",
       "description": "Port",
       "default": 6379,
       "order": 2

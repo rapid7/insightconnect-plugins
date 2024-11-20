@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get a key"
+    DESCRIPTION = "This action is used to get a key. It will return the key at `value` if found, otherwise found will be false"
 
 
 class Input:

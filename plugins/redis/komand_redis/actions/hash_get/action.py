@@ -13,7 +13,8 @@ class HashGet(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         """Run action"""
         values = self.connection.redis.hgetall(params["key"])
-        found = not not values
+        found = bool(values)
+
         if values:
             v = {}
             for key, val in values.items():

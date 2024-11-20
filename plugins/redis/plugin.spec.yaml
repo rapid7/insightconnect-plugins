@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: redis
 title: Redis
-description: The Redis plugin allows you to add, update, and manage data in a Redis database
+description: Redis is an in-memory data structure project implementing a distributed, in-memory key-value database with optional durability. Redis supports different kinds of abstract data structures, such as strings, lists, maps, sets, sorted sets, HyperLogLogs, bitmaps, streams, and spatial indexes.\nThis package allows you to interact with the [Redis](https://redis.io/) database API
 version: 1.0.2
 connection_version: 1
 vendor: rapid7
@@ -42,19 +42,25 @@ version_history:
   - "0.1.0 - Initial plugin"
 connection:
   host:
+    title: Host
     type: string
     description: Host, e.g. 10.4.4.4
     required: true
+    example: 10.4.4.4
   port:
+    title: Port
     type: integer
     description: Port
     default: 6379
     required: true
+    example: 6379
   db:
+    title: DB
     type: integer
     description: DB to use usually (0-15)
     default: 0
     required: true
+    example: 10
 actions:
   delete:
     title: Delete
@@ -72,9 +78,10 @@ actions:
         type: integer
         description: Number of keys deleted
         required: false
+        example: 1
   set:
     title: Set
-    description: Set a key
+    description: This action is used to set a key to a string value. There is an optional expiration timeout which will auto remove the key when `expire` seconds have passed
     input:
       key:
         title: Key
@@ -100,9 +107,10 @@ actions:
         type: string
         description: Reply (usually OK)
         required: false
+        example: OK
   get:
     title: Get
-    description: Get a key
+    description: This action is used to get a key. It will return the key at `value` if found, otherwise found will be false
     input:
       key:
         title: Key
@@ -116,11 +124,13 @@ actions:
         type: boolean
         description: True if found
         required: false
+        example: true
       value:
         title: Value
         type: string
         description: Value
         required: false
+        example: true
   keys:
     title: Keys
     description: Return keys matching pattern
@@ -137,11 +147,13 @@ actions:
         type: integer
         description: Count of keys found
         required: false
+        example: 1
       keys:
         title: Keys
         type: '[]string'
         description: Keys returned
         required: false
+        example: [ "example:1234:session", "example:5678:session", "example:abcd:session" ]
   hash_set:
     title: Hash Set
     description: Set key's hash
@@ -170,6 +182,7 @@ actions:
         type: string
         description: Reply (usually OK)
         required: false
+        example: OK
   hash_get:
     title: Hash Get
     description: Get key's hash
@@ -179,17 +192,20 @@ actions:
         type: string
         description: Key to get
         required: true
+        example: user:profile
     output:
       found:
         title: Found
         type: boolean
         description: True if found
         required: false
+        example: true
       values:
         title: Values
         type: object
         description: Values
         required: false
+        example: { "name": "Example Name", "email": "Example.email@example.com", "age": "30" }
   list_push:
     title: List Push
     description: List key's push
@@ -199,22 +215,26 @@ actions:
         type: string
         description: Key
         required: true
+        example: user:task_list:123
       value:
         title: Value
         type: string
         description: Value to append
         required: true
+        example: Complete monthly report
       expire:
         title: Expire
         type: integer
         description: Expiration in seconds
         required: false
+        example: 100
     output:
       reply:
         title: Reply
         type: string
         description: Reply (usually OK)
         required: false
+        example: OK
   list_get:
     title: List Get
     description: Get all elements in a list
@@ -224,23 +244,27 @@ actions:
         type: string
         description: Key to get
         required: true
+        example: user:task_list:123
       count:
         title: Count
         type: integer
         description: Max results to return
         default: 1000
         required: false
+        example: 1000
     output:
       found:
         title: Found
         type: boolean
         description: True if found
         required: false
+        example: true
       values:
         title: Values
         type: '[]string'
         description: Values
         required: false
+        example: ["task1", "task2", "task3", "task4"]
   hmset:
     title: Hash Multi Set
     description: Sets the specified fields to their respective values in the hash
@@ -251,22 +275,26 @@ actions:
         type: string
         description: Key
         required: true
+        example: user:profile:123
       values:
         title: Values
         type: object
         description: Object hash field:value to set
         required: true
+        example: { "name": "Test Name", "email": "Test.Name@example.com", "age": "30"}
       expire:
         title: Expire
         type: integer
         description: Expiration in seconds
         required: false
+        example: 100
     output:
       reply:
         title: Reply
         type: boolean
         description: Reply (usually OK)
         required: false
+        example: true
   hmget:
     title: Hash Multi Get
     description: Returns the values associated with the specified fields in the hash
@@ -277,23 +305,27 @@ actions:
         type: string
         description: Key to get
         required: true
+        example: user:profile:123
       fields:
         title: Fields
         type: '[]string'
         description: Fields to retrieve values from
         required: false
+        example: ["name", "email"]
       get_all:
         title: Get All
         type: boolean
         description: Get all values
         required: true
         default: false
+        example: false
     output:
       values:
         title: Values
         type: object
         description: Values returned from HMGET
         required: false
+        example: { "name": "Ryan Test", "email": "Ryan.test@example.com" }
   hincrby:
     title: Hash Increment By
     description: Increments the number stored at field in the hash stored at key by
@@ -304,20 +336,24 @@ actions:
         description: Key to lookup
         type: string
         required: true
+        example: user:profile:123
       field:
         title: Field
         description: Field to increment
         type: string
         required: true
+        example: login_count
       value:
         title: Value
         description: How much to increment by
         type: integer
         required: true
         default: 0
+        example: 1
     output:
       result:
         title: Result
         description: Result returned after operation is ran
         type: integer
         required: false
+        example: 1

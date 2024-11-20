@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name="redis-rapid7-plugin",
       version="1.0.2",
-      description="The Redis plugin allows you to add, update, and manage data in a Redis database",
+      description="Redis is an in-memory data structure project implementing a distributed, in-memory key-value database with optional durability. Redis supports different kinds of abstract data structures, such as strings, lists, maps, sets, sorted sets, HyperLogLogs, bitmaps, streams, and spatial indexes.\nThis package allows you to interact with the [Redis](https://redis.io/) database API",
       author="rapid7",
       author_email="",
       url="",
