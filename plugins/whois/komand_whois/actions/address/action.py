@@ -23,7 +23,7 @@ class Address(insightconnect_plugin_runtime.Action):
             "address": "address",
             "country": "country",
             "org_abuse_email": "abuse-mailbox",
-            "description": "descr"
+            "description": "descr",
         },
         ARIN: {
             "netname": "NetName",
