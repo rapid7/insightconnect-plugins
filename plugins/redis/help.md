@@ -1,230 +1,110 @@
 # Description
 
-Redis is an in-memory data structure project implementing a distributed, in-memory key-value database with optional durability. Redis supports different kinds of abstract data structures, such as strings, lists, maps, sets, sorted sets, HyperLogLogs, bitmaps, streams, and spatial indexes.
-
-This package allows you to interact with the [Redis](https://redis.io/) database API.
+Redis is an in-memory data structure project implementing a distributed, in-memory key-value database with optional durability. Redis supports different kinds of abstract data structures, such as strings, lists, maps, sets, sorted sets, HyperLogLogs, bitmaps, streams, and spatial indexes.\nThis package allows you to interact with the [Redis](https://redis.io/) database API
 
 # Key Features
 
-* Set and retrieve data from Redis.
+* Set and retrieve data from Redis
 
 # Requirements
 
 * Connection information for your Redis database
 
+# Supported Product Versions
+
+* 2024-11-8
+
 # Documentation
 
 ## Setup
 
-The connection configuration accepts the following parameters:
+The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|host|string|None|True|Host, e.g. 10.4.4.4|None|
-|db|integer|0|True|Db to use usually (0-15)|None|
-|port|integer|6379|True|Port|None|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|db|integer|0|True|DB to use usually (0-15)|None|10|None|None|
+|host|string|None|True|Host, e.g. 10.4.4.4|None|10.4.4.4|None|None|
+|port|integer|6379|True|Port|None|6379|None|None|
+
+Example input:
+
+```
+{
+  "db": 0,
+  "host": "10.4.4.4",
+  "port": 6379
+}
+```
 
 ## Technical Details
 
 ### Actions
 
-#### Set
 
-This action is used to set a key to a string value.
-There is an optional expiration timeout which will auto remove the key when `expire` seconds have passed.
+#### Delete
 
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|expire|integer|None|False|Expiration in seconds|None|
-|key|string|None|True|Key to set|None|
-|value|string|None|True|Value to set|None|
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|reply|string|False|Reply (usually OK)|
-
-Example output:
-
-```
-
-{
-  "reply": "OK"
-}
-
-```
-
-#### List Get
-
-This action is used to get all elements in a list.
+This action is used to delete a key
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|count|integer|1000|False|Max results to return|None|
-|key|string|None|True|Key to get|None|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|key|string|None|True|Key to delete|None|example:1234:session|None|None|
+  
+Example input:
+
+```
+{
+  "key": "example:1234:session"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|found|boolean|False|True if found|
-|values|[]string|False|Values|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|count|integer|False|Number of keys deleted|1|
+  
 Example output:
 
 ```
-
 {
-  "found": false,
-  "values": []
+  "count": 1
 }
-
 ```
 
 #### Get
-
+  
 This action is used to get a key. Get will return a value at `key` if found, otherwise found will be false
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|key|string|None|True|Key to get|None|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|key|string|None|True|Key to get|None|example:1234:active|None|None|
+  
+Example input:
+
+```
+{
+  "key": "example:1234:active"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|found|boolean|False|True if found|
-|value|string|False|Value|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|found|boolean|False|True if found|True|
+|value|string|False|Value|True|
+  
 Example output:
 
 ```
-
 {
-  "value": "",
-  "found": false
+  "found": true,
+  "value": true
 }
-
-```
-
-#### Keys
-
-This action is used to return all keys matching a pattern.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|pattern|string|None|True|Pattern, e.g. *o*|None|
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|count|integer|False|Count of keys found|
-|keys|[]string|False|Keys returned|
-
-Example output:
-
-```
-
-{
-  "count": 27,
-  "keys": [
-    "hashfoo",
-    "LogonToAssetFilter:1f78ace5-bdef-4512-abed-4c96548dc043:207f28a4-8787-445b-af29-5e467f77c503",
-    "LogonToAssetFilter:821dfdb4-22c2-46fe-b693-752d00802f9d:e9a804f6-1b84-44e9-8e56-e81d06082c57",
-    "LogonToAssetFilter:821dfdb4-22c2-46fe-b693-752d00802f9d:316ea7f6-2d1b-44d8-97f9-290460f5b18b",
-    "LogonToAssetFilter:821dfdb4-22c2-46fe-b693-752d00802f9d:5c74f7fe-9dfd-440a-8b50-ba0acc49b264",
-    "LogonToAssetFilter:1f78ace5-bdef-4512-abed-4c96548dc043:3e49f67a-1fbf-4207-84d8-2a88f1032239",
-    "CollectorHeartbeat:821dfdb4-22c2-46fe-b693-752d00802f9d:4fa0c9df-c61a-4d99-935e-633ff7c65112",
-    "CollectorHeartbeat:a4cabb19-cac1-4e1d-975a-e012d3b68bc8:aa485f7e-854e-4c43-b41c-035baf16b0a7",
-    "LogonToAssetFilter:1f78ace5-bdef-4512-abed-4c96548dc043:98705784-1c5e-4dc5-af96-838f59ee369b",
-    "LogonToAssetFilter:1f78ace5-bdef-4512-abed-4c96548dc043:46273cef-0300-4ac6-b9f7-0ccc21d220d4",
-    "LogonToAssetFilter:1f78ace5-bdef-4512-abed-4c96548dc043:b22dd672-e901-4738-a1dd-7428fbe06749",
-    "spring:session:index:org.springframework.session.FindByIndexNameSessionRepository.PRINCIPAL_NAME_INDEX_NAME:dev",
-    "LogonToAssetFilter:1f78ace5-bdef-4512-abed-4c96548dc043:538151a3-5588-49e3-9199-0e06f410dac1",
-    "LogonToAssetFilter:1f78ace5-bdef-4512-abed-4c96548dc043:d0d31086-4891-4da8-a649-900c672a2c07",
-    "LogonToAssetFilter:821dfdb4-22c2-46fe-b693-752d00802f9d:1d7677e6-f4a7-48d6-bb31-7cfc0fcc6089",
-    "LogonToAssetFilter:1f78ace5-bdef-4512-abed-4c96548dc043:9002df97-dabe-4024-9017-2452f3cc56f1",
-    "CollectorHeartbeat:821dfdb4-22c2-46fe-b693-752d00802f9d:a652b834-fa52-438a-885a-609d84bc44cd",
-    "LogonToAssetFilter:1f78ace5-bdef-4512-abed-4c96548dc043:c4be1a2a-b5e2-4f52-9b82-815fd26ca32d",
-    "LogonToAssetFilter:1f78ace5-bdef-4512-abed-4c96548dc043:54eb9391-9524-487b-8352-94e8627bf5a3",
-    "CollectorHeartbeat:1f78ace5-bdef-4512-abed-4c96548dc043:c8198ec1-5afb-4561-bb0f-d1a308d94471",
-    "keylist",
-    "LogonToAssetFilter:821dfdb4-22c2-46fe-b693-752d00802f9d:3e8c29da-fa56-4643-9b1e-5c74f90c1ae6",
-    "LogonToAssetFilter:1f78ace5-bdef-4512-abed-4c96548dc043:4cafcba4-0614-48b5-9ba9-418c5a3bb95e",
-    "LogonToAssetFilter:1f78ace5-bdef-4512-abed-4c96548dc043:14038b45-f012-41fc-9c22-ee824e9700c4",
-    "CollectorHeartbeat:1f78ace5-bdef-4512-abed-4c96548dc043:52253bef-7a4c-4f09-9d3b-f188f1477f41",
-    "LogonToAssetFilter:821dfdb4-22c2-46fe-b693-752d00802f9d:77efac95-c6ff-437d-b1c4-e5d021ad2bd7",
-    "LogonToAssetFilter:821dfdb4-22c2-46fe-b693-752d00802f9d:acc4c70f-9440-4ba5-8610-4602935752af"
-  ]
-}
-
-```
-
-#### Hash Set
-
-This action is used to set a given key to a key:value object. All values must be strings.
-There is an optional expiration timeout which will auto remove the key when `expire` seconds have passed.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|expire|integer|None|False|Expiration in seconds|None|
-|values|object|None|True|Object hash field:value to set|None|
-|key|string|None|True|Key|None|
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|reply|string|False|Reply (usually OK)|
-
-Example output:
-
-```
-
-{
-  "reply": "OK"
-}
-
-```
-
-#### List Push
-
-This action is used to list key's push.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|expire|integer|None|False|Expiration in seconds|None|
-|key|string|None|True|Key|None|
-|value|string|None|True|Value to append|None|
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|reply|string|False|Reply (usually OK)|
-
-Example output:
-
-```
-
-{
-  "reply": "OK"
-}
-
 ```
 
 #### Hash Get
@@ -233,52 +113,78 @@ This action is used to return all hash values at `key`. If no hash values are fo
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|key|string|None|True|Key to get|None|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|key|string|None|True|Key to get|None|user:profile|None|None|
+  
+Example input:
+
+```
+{
+  "key": "user:profile"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|found|boolean|False|True if found|
-|values|object|False|Values|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|found|boolean|False|True if found|True|
+|values|object|False|Values|{'name': 'Example Name', 'email': 'Example.email@example.com', 'age': '30'}|
+  
 Example output:
 
 ```
-
 {
-  "values": {},
-  "found": false
+  "found": true,
+  "values": {
+    "age": "30",
+    "email": "Example.email@example.com",
+    "name": "Example Name"
+  }
 }
-
 ```
 
-#### Delete
+#### Hash Set
 
-This action is used to delete a key.
+This action is used to set a given key to a key:value object. All values must be strings.
+There is an optional expiration timeout which will auto remove the key when `expire` seconds have passed
+
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|key|string|None|True|Key to delete|None|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|expire|integer|None|False|Expiration in seconds|None|100|None|None|
+|key|string|None|True|Key|None|user:1234|None|None|
+|values|object|None|True|Object hash field:value to set|None|{'name': 'John Doe', 'email': 'johndoe@example.com', 'age': '30'}|None|None|
+  
+Example input:
+
+```
+{
+  "expire": 100,
+  "key": "user:1234",
+  "values": {
+    "age": "30",
+    "email": "johndoe@example.com",
+    "name": "John Doe"
+  }
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|count|integer|False|Number of keys deleted|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|reply|string|False|Reply (usually OK)|OK|
+  
 Example output:
 
 ```
-
 {
-  "count": 1
+  "reply": "OK"
 }
-
 ```
 
 #### Hash Increment By
@@ -288,58 +194,76 @@ If key does not exist, a new key holding a hash is created. If field does not ex
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|key|string|None|True|Key to lookup|None|
-|field|string|None|True|Field to increment|None|
-|value|integer|0|True|How much to increment by|None|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|field|string|None|True|Field to increment|None|login_count|None|None|
+|key|string|None|True|Key to lookup|None|user:profile:123|None|None|
+|value|integer|0|True|How much to increment by|None|1|None|None|
+  
+Example input:
+
+```
+{
+  "field": "login_count",
+  "key": "user:profile:123",
+  "value": 0
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|result|integer|False|Result returned after operation is ran|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|result|integer|False|Result returned after operation is ran|1|
+  
 Example output:
 
 ```
-
 {
-  "result": 18
+  "result": 1
 }
-
 ```
 
 #### Hash Multi Get
 
-This action is used to returns the values associated with the specified fields in the hash stored at key.
+This action is used to returns the values associated with the specified fields in the hash stored at key
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|key|string|None|True|Key to get|None|
-|fields|[]string|None|False|Fields to retrieve values from|None|
-|get_all|boolean|False|True|Get all values|None|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|fields|[]string|None|False|Fields to retrieve values from|None|["name", "email"]|None|None|
+|get_all|boolean|False|True|Get all values|None|False|None|None|
+|key|string|None|True|Key to get|None|user:profile:123|None|None|
+  
+Example input:
+
+```
+{
+  "fields": [
+    "name",
+    "email"
+  ],
+  "get_all": false,
+  "key": "user:profile:123"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|values|object|False|Values returned from HMGET|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|values|object|False|Values returned from HMGET|{'name': 'Ryan Test', 'email': 'Ryan.test@example.com'}|
+  
 Example output:
 
 ```
-
 {
   "values": {
-    "address": "192.168.0.1",
-    "type": "ipv4",
-    "subnet": "255.255.255.0"
+    "email": "Ryan.test@example.com",
+    "name": "Ryan Test"
   }
 }
-
 ```
 
 #### Hash Multi Set
@@ -349,51 +273,219 @@ This command overwrites any specified fields already existing in the hash. If ke
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|key|string|None|True|Key|None|
-|values|object|None|True|Object hash field:value to set|None|
-|expire|integer|None|False|Expiration in seconds|None|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|expire|integer|None|False|Expiration in seconds|None|100|None|None|
+|key|string|None|True|Key|None|user:profile:123|None|None|
+|values|object|None|True|Object hash field:value to set|None|{'name': 'Test Name', 'email': 'Test.Name@example.com', 'age': '30'}|None|None|
+  
+Example input:
+
+```
+{
+  "expire": 100,
+  "key": "user:profile:123",
+  "values": {
+    "age": "30",
+    "email": "Test.Name@example.com",
+    "name": "Test Name"
+  }
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|reply|boolean|False|Reply (usually OK)|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|reply|boolean|False|Reply (usually OK)|True|
+  
 Example output:
 
 ```
-
 {
   "reply": true
 }
-
 ```
 
+#### Keys
+
+This action is used to return keys matching pattern
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|pattern|string|None|True|Pattern, e.g. *o*|None|example:*:session|None|None|
+  
+Example input:
+
+```
+{
+  "pattern": "example:*:session"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|count|integer|False|Count of keys found|1|
+|keys|[]string|False|Keys returned|["example:1234:session", "example:5678:session", "example:abcd:session"]|
+  
+Example output:
+
+```
+{
+  "count": 1,
+  "keys": [
+    "example:1234:session",
+    "example:5678:session",
+    "example:abcd:session"
+  ]
+}
+```
+
+#### List Get
+
+This action is used to get all elements in a list
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|count|integer|1000|False|Max results to return|None|1000|None|None|
+|key|string|None|True|Key to get|None|user:task_list:123|None|None|
+  
+Example input:
+
+```
+{
+  "count": 1000,
+  "key": "user:task_list:123"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|found|boolean|False|True if found|True|
+|values|[]string|False|Values|["task1", "task2", "task3", "task4"]|
+  
+Example output:
+
+```
+{
+  "found": true,
+  "values": [
+    "task1",
+    "task2",
+    "task3",
+    "task4"
+  ]
+}
+```
+
+#### List Push
+
+This action is used to list key's push
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|expire|integer|None|False|Expiration in seconds|None|100|None|None|
+|key|string|None|True|Key|None|user:task_list:123|None|None|
+|value|string|None|True|Value to append|None|Complete monthly report|None|None|
+  
+Example input:
+
+```
+{
+  "expire": 100,
+  "key": "user:task_list:123",
+  "value": "Complete monthly report"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|reply|string|False|Reply (usually OK)|OK|
+  
+Example output:
+
+```
+{
+  "reply": "OK"
+}
+```
+
+#### Set
+  
+This action is used to set a key to a string value.
+There is an optional expiration timeout which will auto remove the key when `expire` seconds have passed
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|expire|integer|None|False|Expiration in seconds|None|100|None|None|
+|key|string|None|True|Key to set|None|example:1234:session|None|None|
+|value|string|None|True|Value to set|None|active|None|None|
+  
+Example input:
+
+```
+{
+  "expire": 100,
+  "key": "example:1234:session",
+  "value": "active"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|reply|string|False|Reply (usually OK)|OK|
+  
+Example output:
+
+```
+{
+  "reply": "OK"
+}
+```
 ### Triggers
+  
+*This plugin does not contain any triggers.*
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-_This plugin does not contain any triggers._
-
-### Custom Output Types
-
-_This plugin does not contain any custom output types._
+### Custom Types
+  
+*This plugin does not contain any custom output types.*
 
 ## Troubleshooting
-
-_This plugin does not contain any troubleshooting information._
+  
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 1.0.2 - Bumping requirements.txt | SDK bump to 6.2.0
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Support web server mode | Add actions HMSET, HMGET and HINCRBY
-* 0.1.2 - Update to new plugin architecture, fix action "keys"
+* 0.1.2 - Update to new plugin architecture, fix action 'keys'
 * 0.1.1 - SSL bug fix in SDK
 * 0.1.0 - Initial plugin
 
 # Links
 
-## References
-
 * [REDIS](https://redis.io/)
 
+## References
+
+* [REDIS API Docs](https://redis.io/docs/latest/apis/)
