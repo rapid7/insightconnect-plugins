@@ -241,7 +241,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                     has_more_pages = True
 
             # we use if not observations, vs else, to ensure we pick up on the case where we dedupe every observation
-            if not observations:
+            if not observations and not job_time_exceeded:
                 state[LAST_OBSERVATION_TIME] = state.get(OBSERVATION_QUERY_END_TIME)
 
             if not has_more_pages:
