@@ -20,7 +20,7 @@ The [VMware Carbon Black Cloud](https://www.carbonblack.com/products/vmware-carb
 
 ## Setup
 
-The connection configuration accepts the following parameters:
+The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -54,7 +54,7 @@ This action is used to get agent details
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |agent|string|None|True|Agent to retrieve device information from. Accepts IP address, hostname, or device ID. Search results are case-sensitive|None|198.51.100.100|None|None|
-
+  
 Example input:
 
 ```
@@ -68,7 +68,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |agent|agent|False|Details about the agent|{"adGroupId":0,"policyOverride":false,"currentSensorPolicyName":null,"deviceMetaDataItemList":null,"lastDevicePolicyRequestedTime":null,"lastDevicePolicyChangedTime":null,"lastPolicyUpdatedTime":null,"loginUserName":null,"messages":null,"lastReportedTime":1591962280381,"uninstallCode":null,"organizationId":1105,"deviceId":3466056,"createTime":null,"deviceGuid":null,"email":"user@example.com","deviceSessionId":null,"deviceType":"WINDOWS","assignedToId":null,"assignedToName":null,"lastName":"User","firstName":"Test","middleName":null,"deviceOwnerId":12345,"activationCode":"1A2B3C","targetPriorityType":"HIGH","organizationName":"example.com","sensorVersion":"3.5.0.1680","activationCodeExpiryTime":1234567891011,"sensorKitType":null,"osVersion":"Server 2012 x64","registeredTime":1234567891011,"lastContact":1234567891011,"windowsPlatform":null,"vdiBaseDevice":null,"avStatus":["AV_ACTIVE","ONDEMAND_SCAN_DISABLED"],"deregisteredTime":null,"sensorStates":["ACTIVE","LIVE_RESPONSE_NOT_RUNNING","LIVE_RESPONSE_NOT_KILLED","LIVE_RESPONSE_ENABLED","SECURITY_CENTER_OPTLN_DISABLED"],"rootedBySensor":false,"rootedBySensorTime":null,"quarantined":false,"lastInternalIpAddress":"198.51.100.100","macAddress":"000000000000","lastExternalIpAddress":"198.51.100.100","lastLocation":"OFFSITE","sensorOutOfDate":false,"avUpdateServers":null,"passiveMode":false,"lastResetTime":0,"lastShutdownTime":0,"scanStatus":null,"scanLastActionTime":0,"scanLastCompleteTime":0,"linuxKernelVersion":null,"avEngine":"4.13.0.207-ave.8.3.60.40:avpack.8.5.0.60:vdf.8.18.2.56:apc.2.10.0.149","avProductVersion":"4.13.0.207","avAveVersion":"8.3.60.40","avPackVersion":"8.5.0.60","avVdfVersion":"8.18.2.56","avLastScanTime":0,"virtualMachine":false,"virtualizationProvider":"UNKNOWN","sensorPendingUpdate":false,"rootedByAnalytics":false,"rootedByAnalyticsTime":null,"avMaster":false,"firstVirusActivityTime":0,"lastVirusActivityTime":0,"testId":-1,"uninstalledTime":null,"encodedActivationCode":null,"originEventHash":null,"name":"example-host","status":"REGISTERED","policyId":12345,"policyName":"test"}|
-
+  
 Example output:
 
 ```
@@ -174,7 +174,7 @@ This action is used to quarantine an agent
 |agent|string|None|True|Agent to retrieve device information from. Accepts IP address, hostname, or device ID. Search results are case-sensitive|None|198.51.100.100|None|None|
 |quarantine_state|boolean|True|True|Set to true to quarantine the agent, set to false to unquarantine an agent|None|True|None|None|
 |whitelist|[]string|None|False|An array of IPs, hostnames, or device ID that a user can pass in that will not be quarantined|None|["198.51.100.100", "win-test"]|None|None|
-
+  
 Example input:
 
 ```
@@ -193,7 +193,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |quarantined|boolean|True|Indicates whether or not the agent has been quarantined|True|
-
+  
 Example output:
 
 ```
@@ -202,7 +202,7 @@ Example output:
 }
 ```
 ### Triggers
-
+  
 *This plugin does not contain any triggers.*
 ### Tasks
 
@@ -212,7 +212,7 @@ Example output:
 This task is used to monitor alerts and observations in your Carbon Black Cloud instance
 
 ##### Input
-
+  
 *This task does not contain any inputs.*
 
 ##### Output
@@ -345,7 +345,7 @@ Example output:
 ```
 
 ### Custom Types
-
+  
 **agent**
 
 |Name|Type|Default|Required|Description|Example|
@@ -426,7 +426,7 @@ Example output:
 |Virtual Machine|boolean|None|False|Virtual machine|None|
 |Virtualization Provider|string|None|False|Virtualization provider|None|
 |Windows Platform|string|None|False|Windows platform|None|
-
+  
 **alert**
 
 |Name|Type|Default|Required|Description|Example|
@@ -435,11 +435,12 @@ Example output:
 
 
 ## Troubleshooting
-
+  
 *This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 2.2.9 - Fix error handing for when we don't get results served correctly from observations API
 * 2.2.8 - Fix error handling for HTTP Not Found status code responses from Carbon Black Cloud | Update SDK to 6.2.0
 * 2.2.7 - Restrain the observability window to a configurable amount if data collection falls behind
 * 2.2.6 - Update SDK to 6.1.4
