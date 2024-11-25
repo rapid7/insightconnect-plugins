@@ -1,0 +1,5 @@
+{
+    "key": "example:1234:session",
+    "expire": 10,
+    "value": "active"
+}

@@ -1,0 +1,8 @@
+{
+            "fields": [
+               "age",
+               "name"
+            ],
+            "get_all": false,
+            "key": "user:4567"
+}

@@ -1,0 +1,8 @@
+{
+    "key": "user:1234",
+    "values": {
+        "age": "30",
+        "email": "johndoe@example.com",
+        "name": "John Doe"
+    }
+}

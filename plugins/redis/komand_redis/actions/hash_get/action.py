@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import HashGetInput, HashGetOutput
 
 # Custom imports below
 
 
-class HashGet(komand.Action):
+class HashGet(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="hash_get", description="Get Hash", input=HashGetInput(), output=HashGetOutput()
@@ -13,7 +13,8 @@ class HashGet(komand.Action):
     def run(self, params={}):
         """Run action"""
         values = self.connection.redis.hgetall(params["key"])
-        found = not not values
+        found = bool(values)
+
         if values:
             v = {}
             for key, val in values.items():
