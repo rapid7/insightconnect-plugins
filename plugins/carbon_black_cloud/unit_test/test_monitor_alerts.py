@@ -41,6 +41,7 @@ from responses.task_test_data import (
     task_404_on_second_request,
     no_logs_in_window_back,
     no_logs_in_window,
+    observation_job_not_finished_no_observations,
 )
 
 import os
@@ -119,6 +120,13 @@ class TestMonitorAlerts(TestCase):
                 ("empty_response", "empty_response", "empty_response"),
                 no_logs_in_window_back.copy(),
                 0,
+            ],
+            [
+                "subsequent run - no observations and job time has exceeded - has more pages",
+                observation_job_exceeded.copy(),
+                ("first_alerts", "empty_response", "empty_response"),
+                observation_job_not_finished_no_observations,
+                2,  # 2 alerts and the 0 observations
             ],
         ]
     )
