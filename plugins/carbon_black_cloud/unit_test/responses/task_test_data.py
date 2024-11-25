@@ -105,6 +105,14 @@ observation_job_not_finished_but_parsed = {
     "last_observation_time": "2024-04-25T15:39:38.389Z",
 }
 
+observation_job_not_finished_no_observations = {
+    "observation_end_time": "2024-04-01T16:34:03.626Z",
+    "last_alert_hashes": ["b78568edeb07d22535d7b06454a4ce89a6589768"],
+    "last_alert_time": "2024-04-25T15:38:38.389Z",
+    "last_observation_time": "2024-04-01T15:39:00.000000Z",
+    "observation_job_offset": 0,
+}
+
 no_logs_in_window = {
     "last_observation_job_time": "2024-04-25T15:58:00.000000Z",
     "observation_end_time": "2024-04-25T08:25:00.000000Z",
