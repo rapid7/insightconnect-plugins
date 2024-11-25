@@ -241,6 +241,8 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                     has_more_pages = True
 
             # we use if not observations, vs else, to ensure we pick up on the case where we dedupe every observation
+            # it was noticed that during a Carbon Black API outage that if we did move the timestamp forward it was resulting in data gaps
+            # in the event that job_time_exceeded is true but we haven't seen any observations we don't want to move the timestamp forward
             if not observations and not job_time_exceeded:
                 state[LAST_OBSERVATION_TIME] = state.get(OBSERVATION_QUERY_END_TIME)
 
@@ -256,7 +258,12 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             # this is because observations can arrive before the start time and also occur so frequently
             # that they can be returned in a page size but not move the time forward
             if state.get(LAST_OBSERVATION_TIME) <= start_observation_time:
-                state[OBSERVATION_JOB_OFFSET] = state.get(OBSERVATION_JOB_OFFSET, 0) + page_size
+                # if there is no observations found and the job time has been exceeded,
+                # then we want to leave the offset at the same value to ensure there is no gaps
+                if not observations and job_time_exceeded:
+                    state[OBSERVATION_JOB_OFFSET] = state.get(OBSERVATION_JOB_OFFSET, 0)
+                else:
+                    state[OBSERVATION_JOB_OFFSET] = state.get(OBSERVATION_JOB_OFFSET, 0) + page_size
                 state[LAST_OBSERVATION_TIME] = start_observation_time
                 has_more_pages = True
             else:
