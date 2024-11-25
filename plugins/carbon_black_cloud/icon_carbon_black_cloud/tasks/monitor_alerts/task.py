@@ -261,6 +261,9 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 # if there is no observations found and the job time has been exceeded,
                 # then we want to leave the offset at the same value to ensure there is no gaps
                 if not observations and job_time_exceeded:
+                    self.logger.info(
+                        "Job time has been exceeded, but there was no observations found. Not increasing the page_size"
+                    )
                     state[OBSERVATION_JOB_OFFSET] = state.get(OBSERVATION_JOB_OFFSET, 0)
                 else:
                     state[OBSERVATION_JOB_OFFSET] = state.get(OBSERVATION_JOB_OFFSET, 0) + page_size
