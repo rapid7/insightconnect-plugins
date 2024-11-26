@@ -1,9 +1,8 @@
 import insightconnect_plugin_runtime
-from .schema import GnqlQueryInput, GnqlQueryOutput, Input, Component
+from .schema import GnqlQueryInput, GnqlQueryOutput, Input, Output, Component
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
-from icon_greynoise.util.util import GNRequestFailure
 from greynoise.exceptions import RequestFailure
 
 
@@ -24,7 +23,16 @@ class GnqlQuery(insightconnect_plugin_runtime.Action):
         try:
             resp = self.connection.gn_client.query(query, size=size)
 
-        except RequestFailure as e:
-            raise GNRequestFailure(e.args[0], e.args[1])
+        except RequestFailure as error:
+            raise PluginException(
+                cause=f"API responded with ERROR: {error.args[0]} - {error.args[1]}.",
+                assistance="Please check error and try again.",
+            )
 
-        return resp
+        return {
+            Output.QUERY: resp.get("query"),
+            Output.DATA: resp.get("data"),
+            Output.COUNT: resp.get("count"),
+            Output.MESSAGE: resp.get("message"),
+            Output.COMPLETE: resp.get("complete"),
+        }
