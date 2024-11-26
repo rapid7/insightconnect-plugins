@@ -3,24 +3,50 @@ extension: plugin
 products: [insightconnect]
 name: greynoise
 title: GreyNoise
-vendor: greynoise
-support: partner
-status: []
 description: GreyNoise helps analysts recognize events not worth their attention. Indicators in GreyNoise are likely associated with opportunistic internet scanning or common business services, not targeted threats. This context helps analysts focus on what matters most
-version: 1.0.1
+version: 2.0.0
+connection_version: 2
+cloud_ready: false
+sdk:
+  type: slim
+  version: 6.2.0
+  user: nobody
+supported_versions: ["GreyNoise API v1/2/3"]
+vendor: greynoise
+status: []
+tags: [greynoise, ip lookup, threat intel, intelligence]
+support: partner
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/greynoise
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://greynoise.io
-tags:
-  - greynoise
-  - ip
-  - threat intel
-  - intelligence
 hub_tags:
-  use_cases: [data_enrichment, threat_detection_and_response]
-  keywords: [ip, intelligence, greynoise]
+  use_cases: [data_enrichment, threat_detection_and_response,vulnerability_management]
+  keywords: [ip lookup, intelligence, greynoise]
   features: []
+requirements:
+  - "A GreyNoise API key"
+key_features:
+  - "Perform a GreyNoise IP Context Lookup"
+  - "Perform a GreyNoise IP Quick Lookup"
+  - "Perform a GreyNoise IP RIOT Lookup"
+  - "Query for additional Tag details"
+  - "Perform a GreyNoise Community IP Lookup"
+  - "Perform a GreyNoise Vulnerability Lookup"
+  - "Perform a GreyNoise IP Timeline Lookup"
+  - "Perform a GreyNoise IP Similarity Lookup"
+  - "Query a list of IPs on a Trigger"
+troubleshooting: "Ensure that the GreyNoise API key used has appropriate access for the actions being used."
+version_history:
+  - "2.0.0 - Upgrade GreyNoise SDK v2.3.0 | Fix Action Outputs | New actions:`vulnerability_lookup`, `timeline_lookup`, `similar_lookup` | New trigger: `greynoise_alert`"
+  - "1.0.1 - Fix bug with connection parameters"
+  - "1.0.0 - Initial plugin."
+links:
+ - "[GreyNoise](https://greynoise.io)"
+references:
+ - "[GreyNoise Documentation](https://docs.greynoise.io)"
+ - "[GreyNoise Free Trial Signup](https://viz.greynoise.io/signup)"
+ - "[GreyNoise Account Info](https://viz.greynoise.io/account)"
 enable_cache: false
 types:
   metadata:
@@ -29,71 +55,158 @@ types:
       type: string
       description: ASN
       required: false
+      example: "AS12345"
     category:
       title: Category
       type: string
       description: Category
       required: false
+      example: "isp"
     city:
       title: City
       type: string
       description: City
       required: false
+      example: "Reno"
     country:
       title: Country
       type: string
       description: Country
       required: false
+      example: "Brazil"
     country_code:
       title: Country Code
       type: string
       description: Country Code
       required: false
+      example: "BZ"
     organization:
       title: Organization
       type: string
       description: Organization
       required: false
+      example: "Acme Inc."
     os:
       title: OS
       type: string
       description: OS
       required: false
+      example: "Windows XP"
     rdns:
       title: rDNS
       type: string
       description: rDNS
       required: false
+      example: "scanner.example.io"
     region:
       title: Region
       type: string
       description: Region
       required: false
+      example: "Arizona"
     tor:
       title: TOR
       type: boolean
       description: TOR
       required: false
+      example: false
+    sensor_count:
+      title: Sensor Count
+      type: integer
+      description: Count of Sensors that observed traffic from this IP
+      required: false
+      example: 5
+    sensor_hits:
+      title: Sensor Hits
+      type: integer
+      description: Count of Sensor events observed from this IP
+      required: false
+      example: 5
+    destination_countries:
+      title: Destination Countries
+      type: "[]string"
+      description: List of countries with GreyNoise sensors that observed this IP
+      required: false
+      example: ["Brazil","Spain"]
+    destination_country_codes:
+      title: Destination Country Codes
+      type: "[]string"
+      description: List of countries (by code) with GreyNoise sensors that observed this IP
+      required: false
+      example: ["BZ","ES"]
+    source_country:
+      title: Source Country
+      type: string
+      description: Source country where this IP is located
+      required: false
+      example: "Brazil"
+    source_country_code:
+      title: Source Country Code
+      type: string
+      description:  Source country (by code) where this IP is located
+      required: false
+      example: "BE"
+  web:
+    useragents:
+      title: "User Agents"
+      type: "[]string"
+      description: "User Agents"
+      required: false
+      example: ["user-agent"]
+    paths:
+      title: "Web Paths"
+      type: "[]string"
+      description: "User Agents"
+      required: false
+      example: ["/","/robots.txt"]
   scan:
     port:
       title: "Port"
       type: integer
       description: "Port"
       required: false
+      example: 22
     protocol:
       title: "Protocol"
       type: string
       description: "Protocol"
       required: false
+      example: "TCP"
+  hassh:
+    port:
+      title: "Port"
+      type: integer
+      description: "Port"
+      required: false
+      example: 22
+    fingerprint:
+      title: "Fingerprint"
+      type: string
+      description: "Fingerprint"
+      required: false
+      example: "abcdefg1234567"
+  ja3:
+    port:
+      title: "Port"
+      type: integer
+      description: "Port"
+      required: false
+      example: 22
+    fingerprint:
+      title: "Fingerprint"
+      type: string
+      description: "Fingerprint"
+      required: false
+      example: "abcdefg1234567"
   raw_data:
     hassh:
       title: "HASSH"
-      type: "[]object"
+      type: "[]hassh"
       description: "HASSH"
       required: false
     ja3:
       title: "JA3"
-      type: "[]object"
+      type: "[]ja3"
       description: "Ja3"
       required: false
     scan:
@@ -103,7 +216,7 @@ types:
       required: false
     web:
       title: "Web"
-      type: object
+      type: web
       description: "Web"
       required: false
   data:
@@ -112,71 +225,580 @@ types:
       type: string
       description: IP Address
       required: false
+      example: "1.2.4.5"
     first_seen:
       title: GreyNoise First Seen
       type: date
       description: First Seen By GreyNoise
       required: false
+      example: "2024-01-01"
     last_seen:
       title: GreyNoise Last Seen
       type: string
       description: Last Seen By GreyNoise
       required: false
+      example: "2024-01-01"
     seen:
       title: GreyNoise Seen
       type: boolean
       description: Has this IP been Seen by GreyNoise
       required: false
+      example: false
     tags:
       title: GreyNoise Tags
       type: "[]string"
       description: GreyNoise Tags Associated with IP
       required: false
+      example: ["tag1","tag2"]
     actor:
       title: GreyNoise Actor
       type: string
       description: GreyNoise Actor Associated with IP
       required: false
+      example: "Actor Name"
     spoofable:
       title: GreyNoise Spoofable
       type: boolean
       description: IP address may be spoofed
       required: false
+      example: false
     classification:
       title: GreyNoise Classification
       type: string
       description: GreyNoise Classification
       required: false
+      example: "benign"
     cve:
       title: GreyNoise CVEs
       type: "[]string"
       description: CVEs associated with GreyNoise Tags
       required: false
+      example: "CVE-1234-12345"
     bot:
       title: GreyNoise Bot
       type: boolean
       description: GreyNoise has identified this as a Bot
       required: false
+      example: false
     vpn:
       title: GreyNoise VPN
       type: boolean
       description: GreyNoise has identified this as a VPN
       required: false
+      example: false
     vpn_service:
       title: GreyNoise VPN Service
       type: string
       description: Name of VPN Service
       required: false
+      example: "VPN Name"
     metadata:
       title: GreyNoise Metadata
       type: metadata
       description: GreyNoise IP Metadata
       required: false
+      example: {"ASN": "AS12345","Category": "isp","City": "Reno","Country": "Brazil","Country Code": "BZ","Destination Countries": ["Brazil","Spain"],"Destination Country Codes": ["BZ","ES"],"Organization": "Acme Inc.","OS": "Windows XP","rDNS": "scanner.example.io","Region": "Arizona","Sensor Count": 5,"Sensor Hits": 5,"Source Country": "Brazil","Source Country Code": "BE","TOR": false}
     raw_data:
       title: GreyNoise Raw Data
       type: raw_data
       description: GreyNoise IP Raw Data
       required: false
+      example: {"HASSH": [{"Fingerprint": "abcdefg1234567","Port": 22}],"JA3": [{"Fingerprint": "abcdefg1234567","Port": 22}],"Scan": [{"Port": 22,"Protocol": "TCP"}],"Web": {"Web Paths": ["/","/robots.txt"],"User Agents": ["user-agent"]}}
+  vuln_timeline:
+    cisa_kev_date_added:
+      title: "Date Added to CISA KEV"
+      type: string
+      description: "Date Added to CISA KEV"
+      required: false
+      example: "2020-07-08T17:15:10Z"
+    cve_last_updated_date:
+      title: "Date CVE was Last Updated"
+      type: string
+      description: "Date CVE was Last Updated"
+      required: false
+      example: "2020-07-08T17:15:10Z"
+    cve_published_date:
+      title: "Date CVE was Published"
+      type: string
+      description: "Date CVE was Published"
+      required: false
+      example: "2020-07-08T17:15:10Z"
+    first_known_published_date:
+      title: "Date of First Published POC"
+      type: string
+      description: "Date of First Published POC"
+      required: false
+      example: "2020-07-08T17:15:10Z"
+  vuln_exploitation_stats:
+    number_of_available_exploits:
+      title: "Number of Available Exploits"
+      type: integer
+      description: "Number of Available Exploits"
+      required: false
+      example: 1
+    number_of_botnets_exploiting_vulnerability:
+      title: "Number of Associated Botnets"
+      type: integer
+      description: "Number of Associated Botnets"
+      required: false
+      example: 1
+    number_of_threat_actors_exploiting_vulnerability:
+      title: "Number of Threat Actors Exploiting Vulnerability"
+      type: integer
+      description: "Number of Threat Actors Exploiting Vulnerability"
+      required: false
+      example: 1
+  vuln_exploitation_details:
+    attack_vector:
+      title: "Attack Vector"
+      type: string
+      description: "Attack Vector"
+      required: false
+      example: "NETWORK"
+    epss_score:
+      title: "EPSS Score"
+      type: float
+      description: "EPSS Score"
+      required: false
+      example: 0.0
+    exploit_found:
+      title: "Exploit Found"
+      type: boolean
+      description: "Exploit Found"
+      required: false
+      example: false
+    exploitation_registered_in_kev:
+      title: "Exploitation Registered in KEV"
+      type: boolean
+      description: "Exploitation Registered in KEV"
+      required: false
+      example: false
+  vuln_exploitation_activity:
+    activity_seen:
+      title: "GreyNoise Observed Activity"
+      type: boolean
+      description: "GreyNoise Observed Activity"
+      required: false
+      example: true
+    benign_ip_count_10d:
+      title: "Benign IP Count - 10 days"
+      type: integer
+      description: "Benign IP Count - 10 days"
+      required: false
+      example: 5
+    benign_ip_count_1d:
+      title: "Benign IP Count - 1 day"
+      type: integer
+      description: "Benign IP Count - 1 day"
+      required: false
+      example: 5
+    benign_ip_count_30d:
+      title: "Benign IP Count - 30 days"
+      type: integer
+      description: "Benign IP Count - 30 days"
+      required: false
+      example: 5
+    threat_ip_count_10d:
+      title: "Threat IP Count - 10 days"
+      type: integer
+      description: "Threat IP Count - 10 days"
+      required: false
+      example: 5
+    threat_ip_count_1d:
+      title: "Threat IP Count - 1 day"
+      type: integer
+      description: "Threat IP Count - 1 day"
+      required: false
+      example: 5
+    threat_ip_count_30d:
+      title: "Threat IP Count - 30 days"
+      type: integer
+      description: "Threat IP Count - 30 days"
+      required: false
+      example: 5
+  vuln_details:
+    cve_cvss_score:
+      title: "CVE CVSS Score"
+      type: float
+      description: "CVE CVSS Score"
+      required: false
+      example: 9.8
+    product:
+      title: "Product Name"
+      type: string
+      description: "Product Name"
+      required: false
+      example: "Product Name"
+    published_to_nist_nvd:
+      title: "Is CVE Published in NIST NVD"
+      type: boolean
+      description: "Is CVE Published in NIST NVD"
+      required: false
+      example: false
+    vendor:
+      title: "Vendor Name"
+      type: string
+      description: "Vendor Name"
+      required: false
+      example: "Acme Inc"
+    vulnerability_description:
+      title: "Vulnerability Description"
+      type: string
+      description: "Vulnerability Description"
+      required: false
+      example: "This is a product description."
+    vulnerability_name:
+      title: "Vulnerability Name"
+      type: string
+      description: "Vulnerability Name"
+      required: false
+      example: "This is a vuln name."
+  timeline_metadata:
+    end_time:
+      title: "Timeline Period End Time"
+      type: date
+      description: "Timeline Period End Time"
+      required: false
+      example: "2020-07-08T17:15:10Z"
+    ip:
+      title: "IP Address"
+      type: string
+      description: "IP Queried"
+      required: false
+      example: "1.2.3.4"
+    limit:
+      title: "Event Limit"
+      type: integer
+      description: "Max number of events to return"
+      required: false
+      example: 5
+    next_cursor:
+      title: "Cursor Value"
+      type: string
+      description: "Cursor value for additional pages of details"
+      required: false
+      example: "asdf142qas3241asdf234sfa"
+    start_time:
+      title: "Timeline Period Start Time"
+      type: date
+      description: "Timeline Period Start Time"
+      required: false
+      example: "2020-07-08T17:15:10Z"
+  timeline_activity:
+    asn:
+      title: ASN
+      type: string
+      description: ASN
+      required: false
+      example: "AS12345"
+    category:
+      title: Category
+      type: string
+      description: Category
+      required: false
+      example: "isp"
+    city:
+      title: City
+      type: string
+      description: City
+      required: false
+      example: "Seattle"
+    classification:
+      title: GreyNoise Classification
+      type: string
+      description: GreyNoise Classification
+      required: false
+      example: "benign"
+    country:
+      title: Country
+      type: string
+      description: Country
+      required: false
+      example: "Spain"
+    country_code:
+      title: Country Code
+      type: string
+      description: Country Code
+      required: false
+      example: "ES"
+    destinations:
+      title: Destinations
+      type: "[]destinations"
+      description: Destinations
+      required: false
+    hassh_fingerprints:
+      title: HASSH Fingerprints
+      type: "[]string"
+      description: HASSH Fingerprints
+      required: false
+      example: ["asdfa1412","asasdf2125"]
+    http_paths:
+      title: HTTP Web Paths
+      type: "[]string"
+      description: HTTP Web Paths
+      required: false
+      example: ["/","/robots.txt"]
+    http_user_agents:
+      title: HTTP User Agents
+      type: "[]string"
+      description: HTTP User Agents
+      required: false
+      example: ["/","/robots.txt"]
+    ja3_fingerprints:
+      title: JA3 Fingerprints
+      type: "[]string"
+      description: JA3 Fingerprints
+      required: false
+      example: ["abasdfas","abasdfasdf"]
+    organization:
+      title: Organization
+      type: string
+      description: Organization
+      required: false
+      example: "Acme Inc"
+    protocols:
+      title: Protocols
+      type: "[]protocols"
+      description: Destinations
+      required: false
+    rdns:
+      title: rDNS
+      type: string
+      description: rDNS
+      required: false
+      example: "scanner.acme.io"
+    region:
+      title: Region
+      type: string
+      description: Region
+      required: false
+      example: "Arizona"
+    spoofable:
+      title: Spoofable
+      type: boolean
+      description: Spoofable
+      required: false
+      example: false
+    tags:
+      title: Tags
+      type: "[]tags"
+      description: Tags
+      required: false
+    timestamp:
+      title: Event Timestamp
+      type: date
+      description: Event Timestamp
+      required: false
+      example: "2020-07-08T17:15:10Z"
+    tor:
+      title: Tor Exit Node
+      type: boolean
+      description: Tor Exit Node
+      required: false
+      example: false
+    vpn:
+      title: VPN
+      type: boolean
+      description: VPN
+      required: false
+      example: false
+    vpn_service:
+      title: VPN Service
+      type: string
+      description:  VPN Service
+      required: false
+      example: "VPN Name"
+  destinations:
+    country:
+      title: Country
+      type: string
+      description: Country
+      required: false
+      example: "Brazil"
+    country_code:
+      title: Country Code
+      type: string
+      description: Country Code
+      required: false
+      example: "BE"
+  protocols:
+    port:
+      title: Port
+      type: integer
+      description: Port
+      required: false
+      example: 22
+    transport_protocol:
+      title: Transport Protocol
+      type: string
+      description: Transport Protocol
+      required: false
+      example: "TCP"
+    app_protocol:
+      title: App Protocol
+      type: string
+      description: App Protocol
+      required: false
+      example: "http"
+  tags:
+    category:
+      title: Tag Category
+      type: string
+      description: Tag Category
+      required: false
+      example: "activity"
+    description:
+      title: Tag Description
+      type: string
+      description: Tag Description
+      required: false
+      example: "This is a description of the tag."
+    intention:
+      title: Tag Intention
+      type: string
+      description: Tag Intention
+      required: false
+      example: "malicious"
+    name:
+      title: Tag Name
+      type: string
+      description: Tag Name
+      required: false
+      example: "IoT Bot Tag"
+  ip_sim:
+    actor:
+      title: Actor
+      type: string
+      description: Actor
+      required: false
+      example: "Acme Inc."
+    asn:
+      title: ASN
+      type: string
+      description: ASN
+      required: false
+      example: "AS12345"
+    city:
+      title: City
+      type: string
+      description: City
+      required: false
+      example: "Seattle"
+    classification:
+      title: Classification
+      type: string
+      description: Classification
+      required: false
+      example: "benign"
+    country:
+      title: Country
+      type: string
+      description: Country
+      required: false
+      example: "Brazil"
+    country_code:
+      title: Country Code
+      type: string
+      description: Country Code
+      required: false
+      example: "BE"
+    first_seen:
+      title: First Seen
+      type: string
+      description: First Seen
+      required: false
+      example: "2020-07-08T17:15:10Z"
+    ip:
+      title: IP Address
+      type: string
+      description: IP Address
+      required: false
+      example: "1.2.3.4"
+    last_seen:
+      title: Last Seen
+      type: string
+      description: Last Seen
+      required: false
+      example: "2020-07-08T17:15:10Z"
+    organization:
+      title: Organization
+      type: string
+      description: Organization
+      required: false
+      example: "Acme Inc"
+  similar_ip:
+    actor:
+      title: Actor
+      type: string
+      description: Actor
+      required: false
+      example: "Acme Inc"
+    asn:
+      title: ASN
+      type: string
+      description: ASN
+      required: false
+      example: "AS12345"
+    city:
+      title: City
+      type: string
+      description: City
+      required: false
+      example: "New York"
+    classification:
+      title: Classification
+      type: string
+      description: Classification
+      required: false
+      example: "benign"
+    country:
+      title: Country
+      type: string
+      description: Country
+      required: false
+      example: "Ukraine"
+    country_code:
+      title: Country Code
+      type: string
+      description: Country Code
+      required: false
+      example: "UK"
+    features:
+      title: Features Matched
+      type: "[]string"
+      description: Features Matched
+      required: false
+      example: ["feature-1","feature-2"]
+    first_seen:
+      title: First Seen
+      type: string
+      description: First Seen
+      required: false
+      example: "2020-07-08T17:15:10Z"
+    ip:
+      title: IP Address
+      type: string
+      description: IP Address
+      required: false
+      example: "1.2.3.4"
+    last_seen:
+      title: Last Seen
+      type: string
+      description: Last Seen
+      required: false
+      example: "2020-07-08T17:15:10Z"
+    organization:
+      title: Organization
+      type: string
+      description: Organization
+      required: false
+      example: "Acme Inc"
+    score:
+      title: Similarity Score
+      type: float
+      description: Similarity Score
+      required: false
+      example: 0.83
 connection:
   credentials:
     title: GreyNoise API Key
@@ -184,6 +806,38 @@ connection:
     type: credential_secret_key
     required: true
     example: abcdefghijklmnopqrstuvwxyz0123456789
+triggers:
+  monitor_ips_in_greynoise:
+    title: Monitor IP List in GreyNoise
+    description: Query a list of IPs in GreyNoise based on IP List every interval to identify if any of them are actively scanning the internet
+    input:
+      interval:
+        title: Interval
+        description: How frequently (in seconds) to trigger a greeting
+        type: integer
+        default: 3600
+        required: true
+        example: 3600
+      ip_list:
+        title: List of IPs to Monitor
+        description: List of IP Addresses or CIDR blocks to check for scanning activity
+        type: "[]string"
+        required: true
+        example: "[1.2.3.4,5.2.3.0/24]"
+      lookback_days:
+        title: Number of Days
+        description: Number of Days to look back for scanning activity. Recommended "1", Max "90"
+        type: integer
+        required: true
+        default: 1
+        example: 1
+    output:
+      alert_ip_list:
+        title: List of IPs Found Scanning
+        description: The list of IPs that were found scanning
+        type: "[]string"
+        required: false
+        example: "1.2.3.4,5.2.3.5"
 actions:
   context_lookup:
     title: Context IP Lookup
@@ -201,76 +855,91 @@ actions:
         type: string
         description: Value that was Queried
         required: false
+        example: 1.2.3.4
       first_seen:
         title: GreyNoise First Seen
         type: date
         description: First Seen By GreyNoise
         required: false
+        example: "2024-01-01"
       last_seen:
         title: GreyNoise Last Seen
         type: string
         description: Last Seen By GreyNoise
         required: false
+        example: "2024-01-01"
       seen:
         title: GreyNoise Seen
         type: boolean
         description: Has this IP been Seen by GreyNoise
         required: false
+        example: true
       tags:
         title: GreyNoise Tags
         type: "[]string"
         description: GreyNoise Tags Associated with IP
         required: false
+        example: "Tag 1, Tag2"
       actor:
         title: GreyNoise Actor
         type: string
         description: GreyNoise Actor Associated with IP
         required: false
+        example: "Acme, Inc"
       spoofable:
         title: GreyNoise Spoofable
         type: boolean
         description: IP address may be spoofed
         required: false
+        example: false
       classification:
         title: GreyNoise Classification
         type: string
         description: GreyNoise Classification
         required: false
+        example: "malicious"
       cve:
         title: GreyNoise CVEs
         type: "[]string"
         description: CVEs associated with GreyNoise Tags
         required: false
+        example: ["CVE-1111-1111", "CVE-2222-2222"]
       bot:
         title: GreyNoise Bot
         type: boolean
         description: GreyNoise has identified this as a Bot
         required: false
+        example: false
       vpn:
         title: GreyNoise VPN
         type: boolean
         description: GreyNoise has identified this as a VPN
         required: false
+        example: false
       vpn_service:
         title: GreyNoise VPN Service
         type: string
         description: Name of VPN Service
         required: false
+        example: "My VPN"
       metadata:
         title: GreyNoise Metadata
         type: metadata
         description: GreyNoise IP Metadata
         required: false
+        example: {"asn": "AS12345","category": "isp","city": "Reno","country": "Brazil","country_code": "BZ","destination_countries": ["Brazil","Spain"],"destination_country_codes": ["BZ","ES"],"organization": "Acme Inc.","os": "Windows XP","rdns": "scanner.example.io","region": "Arizona","sensor_count": 5,"sensor_hits": 5,"source_country": "Brazil","source_country_code": "BE","tor": false}
       raw_data:
         title: GreyNoise Raw Data
         type: raw_data
         description: GreyNoise IP Raw Data
         required: false
+        example: {"hassh": [{"fingerprint": "abcdefg1234567","port": 22}],"ja3": [{"fingerprint": "abcdefg1234567","port": 22}],"scan": [{"port": 22,"protocol": "TCP"}],"web": {"paths": ["/","/robots.txt"],"useragents": ["user-agent"]}}
       viz_url:
         title: GreyNoise Visualizer Link
         type: string
         description: Link to GreyNoise Visualizer for IP Details
         required: false
+        example: "https://viz.greynoise.io/ip/1.1.1.1"
   riot_lookup:
     title: RIOT IP Lookup
     description: Query a routable IPv4 address in the GreyNoise RIOT API endpoint
@@ -287,46 +956,61 @@ actions:
         description: Value that was Queried
         type: string
         required: false
+        example: 1.2.3.4
       riot:
         title: GreyNoise RIOT
         description: Defines if IP is part of GreyNoise RIOT dataset
         type: boolean
         required: false
+        example: true
       category:
         title: GreyNoise RIOT Category
         description: RIOT Category IP is part of
         type: string
         required: false
+        example: "cdn"
       name:
         title: GreyNoise RIOT Vendor Name
         description: Vendor Name IP belongs to
         type: string
         required: false
+        example: "Acme Inc."
       description:
         title: GreyNoise RIOT Service Description
         description: Description of the IP service
         type: string
         required: false
+        example: "Acme Inc is just an example."
       explanation:
         title: GreyNoise RIOT Explanation
-        description: Explanation for why this is likely benign
+        description: Explanation for why this is likely a common service
         type: string
         required: false
+        example: "This is an explanation."
       last_updated:
         title: GreyNoise RIOT Last Updated
         description: Last time this IP was updated in RIOT dataset
         type: date
         required: false
+        example: "2024-01-01"
       reference:
         title: GreyNoise RIOT Reference
         description: Additional reference information
         type: string
         required: false
+        example: "http://one.one.one.one"
+      trust_level:
+        title: GreyNoise RIOT Trust Level
+        description: IP Trust Level information
+        type: string
+        required: false
+        example: "1"
       viz_url:
         title: GreyNoise Visualizer Link
         type: string
         description: Link to GreyNoise Visualizer for IP Details
         required: false
+        example: "https://viz.greynoise.io/ip/1.1.1.1"
   quick_lookup:
     title: Quick IP Lookup
     description: Query a routable IPv4 address in the GreyNoise Quick API endpoint
@@ -343,21 +1027,31 @@ actions:
         description: Value that was Queried
         type: string
         required: false
+        example: 1.2.3.4
       noise:
         title: GreyNoise Noise
         description: Defines if IP is Internet Noise
         type: boolean
         required: false
+        example: true
+      riot:
+        title: GreyNoise RIOT
+        description: Defines if IP is a Common Business Service
+        type: boolean
+        required: false
+        example: true
       code:
         title: API Response Code
         description: Response Code from Quick API endpoint
         type: string
         required: false
+        example: "00x0"
       code_message:
         title: API Response Code Message
         description: Response Code Message from Quick API endpoint
         type: string
         required: false
+        example: "Internet noise found"
   get_tag_details:
     title: Get Tag Details
     description: Get Details of a GreyNoise Tag
@@ -367,43 +1061,80 @@ actions:
         description: Tag Name to get additional Details From
         type: string
         required: true
-        example: BingBot
+        example: "BingBot"
     output:
       name:
         title: "Tag Name"
         type: string
         description: "Name of GreyNoise Tag"
         required: false
+        example: "BingBot"
       category:
         title: "Tag Category"
         type: string
         description: "Tag Category"
         required: false
+        example: "activity"
       intention:
         title: "Tag Intention"
         type: string
         description: "Tag Intention"
         required: false
+        example: "malicious"
       description:
         title: "Tag Description"
         type: string
         description: "Description of the Tag"
         required: false
+        example: "This is a tag description"
       references:
-        title: "References"
-        type: "[]object"
+        title: "Tag References"
+        type: "[]string"
         description: "References"
         required: false
+        example: "https://thisisareference.url"
       recommend_block:
-        title: "Recommend Block"
+        title: "Tag Recommend Block"
         type: boolean
         description: "GreyNoise Recommends Blocking IPs associated with this Tag"
         required: false
+        example: false
       cves:
-        title: "CVEs"
-        type: "[]object"
+        title: "Tag Associated CVEs"
+        type: "[]string"
         description: "CVEs associate with Tag"
         required: false
+        example: "CVE-2020-1234,CVE-1241-23521"
+      created_at:
+        title: "Tag Created At"
+        type: string
+        description: "The date the tag was added to GreyNoise tag library"
+        required: false
+        example: "2024-01-01"
+      id:
+        title: "Tag ID"
+        type: string
+        description: "The unique ID for the tag"
+        required: false
+        example: "aa-bb-cc-dd"
+      label:
+        title: "Tag Label"
+        type: string
+        description: "The unique label for the tag"
+        required: false
+        example: "BINGBOT_SCANNER"
+      slug:
+        title: "Tag Slug"
+        type: string
+        description: "The unique slug for the tag"
+        required: false
+        example: "bingbot-scanner"
+      related_tags:
+        title: "Tag Related Tags"
+        type: "[]string"
+        description: "Tags that are related to this tag"
+        required: false
+        example: ["BingBot Scanner"]
   gnql_query:
     title: GreyNoise Query
     description: Perform a GreyNoise GNQL Query
@@ -413,7 +1144,7 @@ actions:
         description: Query in GreyNoise Query Language (GNQL) Syntax
         type: string
         required: true
-        example: "last_seen:1d"
+        example: "last_seen:1d classification:'malicious' metadata.asn:'AS8452'"
       size:
         title: Max Size
         description: Max Number of IPs to Return Data For
@@ -423,30 +1154,35 @@ actions:
         example: "10"
     output:
       complete:
-        title: GreyNoise Query
+        title: GreyNoise Complete Flag
         type: boolean
-        description: GreyNoise Query Completed
+        description: Indicates if all pages of the query have been returned by the API
         required: false
+        example: true
       count:
         title: GreyNoise Count
         type: integer
-        description: Count of IPs In Query
+        description: Total count of IPs returned Query
         required: false
+        example: 10
       data:
         title: GreyNoise Query Data
         type: "[]data"
-        description: GreyNoise Query Data
+        description: GreyNoise Data Object, Contains IP Object for each IP returned by the query
         required: false
+        example: [{"actor": "Acme, Inc","bot": false,"classification": "malicious","cve": ["CVE-1111-1111","CVE-2222-2222"],"first_seen": "2024-01-01","ip": "1.2.3.4","last_seen": "2024-01-01","metadata": {"asn": "AS12345","category": "isp","city": "Reno","country": "Brazil","country_code": "BZ","destination_countries": ["Brazil","Spain"],"destination_country_codes": ["BZ","ES"],"organization": "Acme Inc.","os": "Windows XP","rdns": "scanner.example.io","region": "Arizona","sensor_count": 5,"sensor_hits": 5,"source_country": "Brazil","source_country_code": "BE","tor": false},"raw_data": {"hassh": [{"fingerprint": "abcdefg1234567","port": 22}],"ja3": [{"fingerprint": "abcdefg1234567","port": 22}],"scan": [{"port": 22,"protocol": "TCP"}],"web": {"paths": ["/","/robots.txt"],"useragents": ["user-agent"]}},"seen": true,"spoofable": false,"tags": "Tag 1, Tag2","vpn": false,"vpn_service": "My VPN"}]
       message:
         title: GreyNoise Query Message
         type: string
-        description: GreyNoise Query Message
+        description: GreyNoise Query Message, indicates if there were issues with the query
         required: false
+        example: "ok"
       query:
         title: GreyNoise Query
         type: string
         description: GreyNoise Query Sent to API
         required: false
+        example: "sample query"
   community_lookup:
     title: Community IP Lookup
     description: Query a routable IPv4 address in the GreyNoise Community API
@@ -463,38 +1199,151 @@ actions:
         description: Value that was Queried
         type: string
         required: false
+        example: 1.2.3.4
       noise:
         title: GreyNoise Noise
         description: Defines if IP is Internet Noise
         type: boolean
         required: false
+        example: true
       riot:
         title: GreyNoise RIOT
         description: Defines if IP is part of GreyNoise RIOT dataset
         type: boolean
         required: false
+        example: true
       classification:
         title: GreyNoise Classification
         type: string
         description: GreyNoise Classification
         required: false
+        example: "benign"
       link:
         title: GreyNoise Visualizer Link
         type: string
         description: Link to GreyNoise Visualizer for IP Details
         required: false
+        example: "https://viz.greynoise.io/ip/1.1.1.1"
       last_seen:
         title: GreyNoise Last Seen
         type: string
         description: Last Seen By GreyNoise
         required: false
+        example: "2024-01-01"
       message:
         title: GreyNoise Status Message
         type: string
         description: GreyNoise Community API Status Message
         required: false
+        example: "IP found"
       name:
         title: GreyNoise Name
         type: string
         description: GreyNoise Actor or Service Name Associated with IP
         required: false
+        example: "Acme Inc."
+  vulnerability_lookup:
+    title: Vulnerability Lookup
+    description: Check GreyNoise for Vulnerability information
+    input:
+      cve_id:
+        title: CVE ID
+        description: A CVE ID to look up in GreyNoise
+        type: string
+        required: true
+        example: CVE-2020-12345
+    output:
+      id:
+        title: CVE ID
+        description: Value that was searched
+        type: string
+        required: false
+        example: CVE-2020-12345
+      details:
+        title: GreyNoise Vulnerability Details
+        description: GreyNoise Vulnerability Details
+        type: vuln_details
+        required: false
+        example: {"cve_cvss_score": 9.8,"product": "Product Name","published_to_nist_nvd": false,"vendor": "Acme Inc","vulnerability_description": "This is a product description.","vulnerability_name": "This is a vuln name."}
+      exploitation_activity:
+        title: GreyNoise Vulnerability Exploitation Activity
+        description: GreyNoise Vulnerability Exploitation Activity
+        type: vuln_exploitation_activity
+        required: false
+        example: {"activity_seen": true,"benign_ip_count_10d": 5,"benign_ip_count_1d": 5,"benign_ip_count_30d": 5,"threat_ip_count_10d": 5,"threat_ip_count_1d": 5,"threat_ip_count_30d": 5}
+      exploitation_details:
+        title: GreyNoise Vulnerability Exploitation Details
+        description: GreyNoise Vulnerability Exploitation Details
+        type: vuln_exploitation_details
+        required: false
+        example: {"attack_vector": "NETWORK","epss_score": 0.0,"exploit_found": true,"exploitation_registered_in_kev": false}
+      exploitation_stats:
+        title: GreyNoise Vulnerability Exploitation Stats
+        description: GreyNoise Vulnerability Exploitation Stats
+        type: vuln_exploitation_stats
+        required: false
+        example: {"number_of_available_exploits": 1,"number_of_botnets_exploiting_vulnerability": 1,"number_of_threat_actors_exploiting_vulnerability": 1}
+      timeline:
+        title: GreyNoise Vulnerability Timeline
+        description: GreyNoise Vulnerability Timeline
+        type: vuln_timeline
+        required: false
+        example: {"cisa_kev_date_added": "2020-07-08T17:15:10Z","cve_last_updated_date": "2020-07-08T17:15:10Z","cve_published_date": "2020-07-08T17:15:10Z","first_known_published_date": "2020-07-08T17:15:10Z"}
+  timeline_lookup:
+    title: IP Timeline Lookup
+    description: Query a routable IPv4 address in the GreyNoise for Scanner Daily Timeline details
+    input:
+      ip_address:
+        title: IP Address
+        description: Routable IPv4 address to query
+        type: string
+        required: true
+        example: 1.2.3.4
+    output:
+      ip:
+        title: IP Queried
+        type: string
+        description: Value that was Queried
+        required: false
+        example: 1.2.3.4
+      metadata:
+        title: IP Timeline Metadata
+        type: timeline_metadata
+        description: IP Timeline Metadata
+        required: false
+        example: {"end_time": "2020-07-08T17:15:10Z","ip": "1.2.3.4","limit": 5,"next_cursor": "asdf142qas3241asdf234sfa","start_time": "2020-07-08T17:15:10Z"}
+      activity:
+        title: IP Timeline Activity
+        type: "[]timeline_activity"
+        description: IP Timeline Activity Events
+        required: false
+        example: [{"asn": "AS12345","category": "isp","city": "Seattle","classification": "benign","country": "Spain","country_code": "ES","destinations": [{"country": "Brazil","country_code": "BE"}],"hassh_fingerprints": ["asdfa1412","asasdf2125"],"http_web_paths": ["robots.txt"],"http_user_agents": ["Hello World"],"ja3_fingerprints": ["abasdfas","abasdfasdf"],"organization": "Acme Inc","protocols": [{"port": 22,"transport_protocol": "TCP","app_protocol": "TCP"}],"rdns": "scanner.acme.io","region": "Arizona","spoofable": false,"tags": [{"tag_category": "activity","tag_description": "This is a description of the tag.","tag_intention": "malicious","tag_name": "IoT Bot Tag"}],"timestampe": "2020-07-08T17:15:10Z","tor": false,"vpn": false,"vpn_service": "VPN Name"}]
+  similar_lookup:
+    title: IP Similarity Lookup
+    description: Query a routable IPv4 address in the GreyNoise for similar IPs
+    input:
+      ip_address:
+        title: IP Address
+        description: Routable IPv4 address to query
+        type: string
+        required: true
+        example: 1.2.3.4
+    output:
+      ip:
+        title: IP Similarity Metadata
+        type: ip_sim
+        description: IP Similarity Metadata
+        required: false
+        example: {"actor": "Acme Inc.","asn": "AS12345","city": "Seattle","classification": "benign","country": "Brazil","country_code": "BE","first_seen": "2020-07-08T17:15:10Z","ip": "1.2.3.4","last_seen": "2020-07-08T17:15:10Z","organization": "Acme Inc"}
+      similar_ips:
+        title: Similar IPs
+        type: "[]similar_ip"
+        description: Similar IPs
+        required: false
+        example: [{"actor": "Acme Inc","asn": "AS12345","city": "New York","classification": "benign","country": "Ukraine","country_code": "UK","features_matched": ["feature-1","feature-2"],"first_seen": "2020-07-08T17:15:10Z","ip": "1.2.3.4","last_seen": "2020-07-08T17:15:10Z","organization": "Acme Inc","score": 0.83}]
+      total:
+        title: Total Number of IPs
+        type: integer
+        description: Total Number of Similar IPs returned
+        required: false
+        example: 5
