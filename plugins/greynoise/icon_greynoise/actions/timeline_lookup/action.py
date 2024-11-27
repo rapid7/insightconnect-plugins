@@ -34,5 +34,5 @@ class TimelineLookup(insightconnect_plugin_runtime.Action):
                 cause=f"Input does not appear to be valid: {ip_address}. Error Message: {error.args[0]}",
                 assistance="Please provide a valid IPv4 Address.",
             )
-        breakpoint()
+
         return {Output.IP: resp.get("ip"), Output.ACTIVITY: resp.get("activity"), Output.METADATA: resp.get("metadata")}
