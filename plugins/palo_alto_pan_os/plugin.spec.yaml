@@ -4,10 +4,10 @@ products: [insightconnect]
 name: palo_alto_pan_os
 title: Palo Alto Firewall
 description: "[PAN-OS](https://www.paloaltonetworks.com/documentation/80/pan-os) is the software that runs all Palo Alto Networks next-generation firewalls. This plugin utilizes the [PAN-OS API](https://www.paloaltonetworks.com/documentation/80/pan-os/xml-api) to provide programmatic management of the Palo Alto Firewall appliance(s). It supports managing firewalls individually or centralized via [Panorama](https://www.paloaltonetworks.com/network-security/panorama)"
-version: 6.1.6
+version: 6.1.7
 sdk:
   type: full
-  version: 6.0.0
+  version: 6.2.0
   user: nobody
 supported_versions: ["9.0.3"]
 connection_version: 6
@@ -32,6 +32,7 @@ requirements: ["Access to Palo Alto Next Generation firewall or Palo Alto Panora
 references: ["[Palo Alto PAN-OS API](https://www.paloaltonetworks.com/documentation/80/pan-os/xml-api)"]
 links: ["[Palo Alto PAN-OS](https://www.paloaltonetworks.com/documentation/80/pan-os)"]
 version_history:
+ - "6.1.7 - Fix issue in 'add_address_object_to_group' action | SDK bump to 6.2.0 | Bumping requirements.txt"
  - "6.1.6 - Update SDK | Fix critical Snyk vulnerability"
  - "6.1.5 - Bumping requirements of `gunicorn` and `validators` | update the SDK to 5.4.9 | Added examples to all actions | Updated unit tests to include schema checks" 
  - "6.1.4 - Add information to every action on whether it uses Panorama or a direct firewall connection"
