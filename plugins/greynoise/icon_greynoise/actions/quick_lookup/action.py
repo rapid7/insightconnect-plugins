@@ -37,5 +37,5 @@ class QuickLookup(insightconnect_plugin_runtime.Action):
             Output.CODE: resp_out.get("code"),
             Output.NOISE: resp_out.get("noise"),
             Output.RIOT: resp_out.get("riot"),
-            Output.CODE: resp_out.get("code"),
+            Output.CODE_MESSAGE: resp_out.get("code_message"),
         }

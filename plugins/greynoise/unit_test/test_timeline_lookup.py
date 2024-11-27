@@ -3,7 +3,7 @@ from unittest import TestCase, mock
 
 from icon_greynoise.actions.timeline_lookup import TimelineLookup
 
-from .util import MockConnection, mocked_requests_get
+from unit_test.util import MockConnection, mocked_requests_get
 
 
 class TestTimelineLookup(TestCase):
