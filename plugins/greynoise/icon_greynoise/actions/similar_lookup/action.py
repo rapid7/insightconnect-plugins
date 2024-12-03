@@ -2,6 +2,8 @@ import insightconnect_plugin_runtime
 from .schema import SimilarLookupInput, SimilarLookupOutput, Input, Output, Component
 
 # Custom imports below
+from insightconnect_plugin_runtime.exceptions import PluginException
+from greynoise.exceptions import RequestFailure
 
 
 class SimilarLookup(insightconnect_plugin_runtime.Action):
