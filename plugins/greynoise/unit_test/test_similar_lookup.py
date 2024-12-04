@@ -16,39 +16,37 @@ class TestSimilarLookup(TestCase):
 
         working_params = {"ip_address": "similar_lookup"}
         results = test_similar.run(working_params)
-        expected = [
-            {
-                "ip": {
-                    "actor": "Acme Inc",
+        expected = {
+            "ip": {
+                "actor": "Acme Inc",
+                "asn": "AS12345",
+                "city": "Berlin",
+                "classification": "benign",
+                "country": "Germany",
+                "country_code": "DE",
+                "first_seen": "2019-07-29",
+                "ip": "1.2.3.4",
+                "last_seen": "2024-11-04",
+                "organization": "Acme Inc",
+            },
+            "similar_ips": [
+                {
+                    "actor": "Alpha Strike Labs",
                     "asn": "AS12345",
                     "city": "Berlin",
                     "classification": "benign",
                     "country": "Germany",
                     "country_code": "DE",
-                    "first_seen": "2019-07-29",
-                    "ip": "1.2.3.4",
+                    "features": ["hassh_fp", "mass_scan_bool", "os", "ports", "useragents", "web_paths"],
+                    "first_seen": "2019-07-11",
+                    "ip": "2.3.4.5",
                     "last_seen": "2024-11-04",
                     "organization": "Acme Inc",
-                },
-                "similar_ips": [
-                    {
-                        "actor": "Alpha Strike Labs",
-                        "asn": "AS12345",
-                        "city": "Berlin",
-                        "classification": "benign",
-                        "country": "Germany",
-                        "country_code": "DE",
-                        "features": ["hassh_fp", "mass_scan_bool", "os", "ports", "useragents", "web_paths"],
-                        "first_seen": "2019-07-11",
-                        "ip": "2.3.4.5",
-                        "last_seen": "2024-11-04",
-                        "organization": "Acme Inc",
-                        "score": 0.98933446,
-                    }
-                ],
-                "total": 1,
-            }
-        ]
+                    "score": 0.98933446,
+                }
+            ],
+            "total": 1,
+        }
 
         self.assertNotEqual({}, results, "returns non - empty results")
         self.assertEqual(expected, results)
