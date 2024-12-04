@@ -3,7 +3,7 @@ from unittest import TestCase, mock
 
 from icon_greynoise.actions.similar_lookup import SimilarLookup
 
-from unit_test.util import MockConnection, mocked_requests_get
+from util import MockConnection, mocked_requests_get
 
 
 class TestSimilarLookup(TestCase):

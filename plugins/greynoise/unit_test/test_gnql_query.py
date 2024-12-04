@@ -3,7 +3,7 @@ from unittest import TestCase, mock
 
 from icon_greynoise.actions.gnql_query import GnqlQuery
 
-from unit_test.util import MockConnection, mocked_requests_get
+from util import MockConnection, mocked_requests_get
 
 
 class TestGnqlQuery(TestCase):
