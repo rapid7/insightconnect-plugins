@@ -3,7 +3,7 @@ from unittest import TestCase, mock
 
 from icon_greynoise.actions.riot_lookup import RiotLookup
 
-from unit_test.util import MockConnection, mocked_requests_get
+from util import MockConnection, mocked_requests_get
 
 
 class TestRiotLookup(TestCase):

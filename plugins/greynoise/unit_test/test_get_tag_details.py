@@ -3,7 +3,7 @@ from unittest import TestCase, mock
 
 from icon_greynoise.actions.get_tag_details import GetTagDetails
 
-from unit_test.util import MockConnection, mocked_requests_get
+from util import MockConnection, mocked_requests_get
 
 
 class TestGetTagDetails(TestCase):
