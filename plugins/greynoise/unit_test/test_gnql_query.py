@@ -61,7 +61,6 @@ class TestGnqlQuery(TestCase):
             ],
             "message": "ok",
             "query": "query",
-            "scroll": "token",
         }
 
         self.assertNotEqual({}, results, "returns non - empty results")
