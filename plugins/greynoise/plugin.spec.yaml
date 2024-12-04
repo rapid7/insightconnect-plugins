@@ -9,7 +9,7 @@ connection_version: 2
 cloud_ready: false
 sdk:
   type: slim
-  version: 6.2.0
+  version: 6.2.2
   user: nobody
 supported_versions: ["GreyNoise API v1/2/3"]
 vendor: greynoise
