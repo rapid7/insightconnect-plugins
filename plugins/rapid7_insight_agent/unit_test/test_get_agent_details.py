@@ -30,5 +30,4 @@ class TestGetAgentDetails(TestCase):
         action = Util.default_connector(GetAgentDetails())
         actual = action.run({Input.AGENT: "badID"})
         expected = {}
-        self.assertEqual(
-            actual, expected)
+        self.assertEqual(actual, expected)
