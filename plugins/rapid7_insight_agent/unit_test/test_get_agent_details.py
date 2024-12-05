@@ -27,13 +27,8 @@ class TestGetAgentDetails(TestCase):
         self.assertEqual(expect, actual)
 
     def test_get_agent_by_hostname_bad(self, mock_request: MagicMock) -> None:
-        with self.assertRaises(PluginException) as exception:
-            action = Util.default_connector(GetAgentDetails())
-            action.run({Input.AGENT: "badID"})
+        action = Util.default_connector(GetAgentDetails())
+        actual = action.run({Input.AGENT: "badID"})
+        expected = {}
         self.assertEqual(
-            exception.exception.cause, "Could not find agent matching badID of type Host Name. No more pages of data."
-        )
-        self.assertEqual(
-            exception.exception.assistance,
-            "Check the agent input value and try again.",
-        )
+            actual, expected)
