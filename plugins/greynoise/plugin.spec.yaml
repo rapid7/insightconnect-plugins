@@ -6,7 +6,7 @@ title: GreyNoise
 description: GreyNoise helps analysts recognize events not worth their attention. Indicators in GreyNoise are likely associated with opportunistic internet scanning or common business services, not targeted threats. This context helps analysts focus on what matters most
 version: 2.0.0
 connection_version: 2
-cloud_ready: false
+cloud_ready: true
 sdk:
   type: slim
   version: 6.2.2
