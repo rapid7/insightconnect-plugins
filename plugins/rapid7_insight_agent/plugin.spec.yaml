@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insight_agent
 title: Rapid7 Insight Agent
 description: Using the Insight Agent plugin from InsightConnect, you can quarantine, unquarantine and monitor potentially malicious IPs, addresses, hostnames, and devices across your organization
-version: 3.0.0
+version: 3.0.1
 connection_version: 2
 supported_versions: ["Rapid7 Insight Agent 2024-08-23"]
 vendor: rapid7
@@ -14,7 +14,7 @@ cloud_ready: true
 fedramp_ready: true
 sdk:
   type: slim
-  version: 6.1.0
+  version: 6.2.2
   user: nobody
 key_features:
   - "The agent is used by [Rapid7 InsightIDR](https://www.rapid7.com/products/insightidr/) and [InsightVM](https://www.rapid7.com/products/insightvm/) customers to monitor endpoints."
@@ -27,6 +27,7 @@ links:
 references:
   - "[Manage Platform API Keys](https://docs.rapid7.com/insight/managing-platform-api-keys/)"
 version_history:
+  - "3.0.1 - Update 'Get Agent Details' to allow no assets to be returned | SDK bump to latest version"
   - "3.0.0 - Update `Get Agent Details` and `Get All Agents by IP` to return the next page token if more pages are available to search | Update `Get Agent Details` to return agent location details | Initial updates for fedramp compliance | Updated SDK to the latest version"
   - "2.1.2 - Improve logging | Update SDK"
   - "2.1.1 - `Get All Agents by IP Address`: Fixed issue where action failed when agent did not have a primary address, and extended output to include agent location details | `Get Agent Details`: Extended output to include agent's public IP address and location"
