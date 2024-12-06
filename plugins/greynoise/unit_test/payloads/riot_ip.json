@@ -1,0 +1,11 @@
+{
+  "ip": "1.2.3.4",
+  "riot": true,
+  "category": "public_dns",
+  "name": "Acme Inc",
+  "description": "description",
+  "explanation": "explanation",
+  "last_updated": "2024-11-04T17:10:58Z",
+  "reference": "reference",
+  "trust_level": "1"
+}

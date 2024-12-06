@@ -1,0 +1,9 @@
+[
+  {
+    "code": "0x01",
+    "ip": "1.2.3.4",
+    "code_message": "IP has been observed by the GreyNoise sensor network",
+    "noise": true,
+    "riot": false
+  }
+]
