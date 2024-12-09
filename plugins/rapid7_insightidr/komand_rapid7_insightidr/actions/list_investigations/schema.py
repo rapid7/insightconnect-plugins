@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Retrieve a page of investigations matching the given request parameters"
+    DESCRIPTION = "Retrieve a page of investigations matching the given request parameters. If there is no 'start_time' and 'end_time' provided, 'start_time' will  default to 28 days prior, and 'end_time' will default to the current time.'"
 
 
 class Input:
