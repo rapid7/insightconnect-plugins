@@ -382,10 +382,8 @@ class ApiConnection:
         if agent:
             return agent, None
         else:
-            raise PluginException(
-                cause=f"Could not find agent matching {agent_input} of type {agent_type}. No more pages of data.",
-                assistance="Check the agent input value and try again.",
-            )
+            self.logger.info("No assets were found")
+            return None, None
 
     def _get_agents(self, agents_input: List[str]) -> [Tuple[str, dict]]:
         """
