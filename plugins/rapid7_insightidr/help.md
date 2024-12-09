@@ -3,8 +3,15 @@
 This plugin allows you to add indicators to a threat and see the status of investigations
 
 # Key Features
-  
-*This plugin does not contain any key features.*
+
+* System Information and Event Management
+* Endpoint Detection and Response
+* Network Traffic Analysis
+* User and Entity Behaviour Analytics
+* Cloud and Integrations
+* Embedded Threat Intelligence
+* Deception Technology
+* Incident Response and Investigations
 
 # Requirements
   
@@ -3392,6 +3399,7 @@ Example output:
 
 # Version History
 
+* 10.3.4 - Bumping requirements.txt | SDK bump to 6.2.2
 * 10.3.3 - Bumping requirements.txt | SDK bump to 6.2.0
 * 10.3.2 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 10.3.1 - `Advanced Query On Log / Log Set` - Fixed issue where results >500 returned none | Update SDK

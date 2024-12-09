@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 10.3.3
+version: 10.3.4
 connection_version: 5
 supported_versions: ["Latest release successfully tested on 2024-09-10."]
 vendor: rapid7
@@ -22,11 +22,21 @@ hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [siem, rapid7, cloud_enabled]
   features: []
+key_features:
+  - "System Information and Event Management"
+  - "Endpoint Detection and Response"
+  - "Network Traffic Analysis"
+  - "User and Entity Behaviour Analytics"
+  - "Cloud and Integrations"
+  - "Embedded Threat Intelligence"
+  - "Deception Technology"
+  - "Incident Response and Investigations"
 sdk:
   type: full
-  version: 6.2.0
+  version: 6.2.2
   user: nobody
 version_history:
+  - "10.3.4 - Bumping requirements.txt | SDK bump to 6.2.2"
   - "10.3.3 - Bumping requirements.txt | SDK bump to 6.2.0"
   - "10.3.2 - Initial updates for fedramp compliance | Updated SDK to the latest version"
   - "10.3.1 - `Advanced Query On Log / Log Set` - Fixed issue where results >500 returned none | Update SDK"
