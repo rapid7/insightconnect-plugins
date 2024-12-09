@@ -27,12 +27,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
         try:
             resp = self.gn_client.test_connection()
 
-        except RequestFailure as e:
-            if e.args[0] == 401:
-                raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY, data=e.args[1])
-            elif e.args[0] == 429:
-                raise ConnectionTestException(preset=ConnectionTestException.Preset.RATE_LIMIT, data=e.args[1])
-            elif e.args[0] == 500:
-                raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVER_ERROR, data=e.args[1])
+        except RequestFailure as error:
+            if error.args[0] == 401:
+                raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY, data=error.args[1])
+            elif error.args[0] == 429:
+                raise ConnectionTestException(preset=ConnectionTestException.Preset.RATE_LIMIT, data=error.args[1])
+            elif error.args[0] == 500:
+                raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVER_ERROR, data=error.args[1])
 
         return resp
