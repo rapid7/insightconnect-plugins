@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 10.3.3
+version: 10.3.4
 connection_version: 5
 supported_versions: ["Latest release successfully tested on 2024-09-10."]
 vendor: rapid7
@@ -22,11 +22,21 @@ hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [siem, rapid7, cloud_enabled]
   features: []
+key_features:
+  - "System Information and Event Management"
+  - "Endpoint Detection and Response"
+  - "Network Traffic Analysis"
+  - "User and Entity Behaviour Analytics"
+  - "Cloud and Integrations"
+  - "Embedded Threat Intelligence"
+  - "Deception Technology"
+  - "Incident Response and Investigations"
 sdk:
   type: full
-  version: 6.2.0
+  version: 6.2.2
   user: nobody
 version_history:
+  - "10.3.4 - Bumping requirements.txt | SDK bump to 6.2.2"
   - "10.3.3 - Bumping requirements.txt | SDK bump to 6.2.0"
   - "10.3.2 - Initial updates for fedramp compliance | Updated SDK to the latest version"
   - "10.3.1 - `Advanced Query On Log / Log Set` - Fixed issue where results >500 returned none | Update SDK"
@@ -1369,7 +1379,7 @@ actions:
         example: {"name": "bad-virus","note": "test","published": False,"indicator_count": 2}
   list_investigations:
     title: List Investigations
-    description: Retrieve a page of investigations matching the given request parameters
+    description: Retrieve a page of investigations matching the given request parameters. If there is no 'start_time' and 'end_time' provided, 'start_time' will  default to 28 days prior, and 'end_time' will default to the current time
     input:
       statuses:
         title: Statuses
@@ -1379,13 +1389,13 @@ actions:
         example: ["CLOSED"]
       start_time:
         title: Start Time
-        description: An optional ISO-formatted timestamp, where only investigations whose createTime is after this date will be returned
+        description: An optional ISO-formatted timestamp, where only investigations whose createTime is after this date will be returned. If there is no value provided this will default to 28 days prior
         type: date
         required: false
         example: "2020-06-01T12:11:13+05:30"
       end_time:
         title: End Time
-        description: An optional-ISO formatted timestamp, where only investigations whose createTime is before this date will be returned
+        description: An optional-ISO formatted timestamp, where only investigations whose createTime is before this date will be returned. If there is no value provided, this will default to the current time
         type: date
         required: false
         example: "2020-06-01T12:11:13+05:30"

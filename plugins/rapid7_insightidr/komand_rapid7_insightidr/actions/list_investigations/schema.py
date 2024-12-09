@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Retrieve a page of investigations matching the given request parameters"
+    DESCRIPTION = "Retrieve a page of investigations matching the given request parameters. If there is no 'start_time' and 'end_time' provided, 'start_time' will  default to 28 days prior, and 'end_time' will default to the current time"
 
 
 class Input:
@@ -41,7 +41,7 @@ class ListInvestigationsInput(insightconnect_plugin_runtime.Input):
       "format": "date-time",
       "displayType": "date",
       "title": "End Time",
-      "description": "An optional-ISO formatted timestamp, where only investigations whose createTime is before this date will be returned",
+      "description": "An optional-ISO formatted timestamp, where only investigations whose createTime is before this date will be returned. If there is no value provided, this will default to the current time",
       "order": 3
     },
     "index": {
@@ -102,7 +102,7 @@ class ListInvestigationsInput(insightconnect_plugin_runtime.Input):
       "format": "date-time",
       "displayType": "date",
       "title": "Start Time",
-      "description": "An optional ISO-formatted timestamp, where only investigations whose createTime is after this date will be returned",
+      "description": "An optional ISO-formatted timestamp, where only investigations whose createTime is after this date will be returned. If there is no value provided this will default to 28 days prior",
       "order": 2
     },
     "statuses": {
