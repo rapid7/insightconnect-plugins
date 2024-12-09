@@ -1379,7 +1379,7 @@ actions:
         example: {"name": "bad-virus","note": "test","published": False,"indicator_count": 2}
   list_investigations:
     title: List Investigations
-    description: Retrieve a page of investigations matching the given request parameters. If there is no 'start_time' and 'end_time' provided, 'start_time' will  default to 28 days prior, and 'end_time' will default to the current time.'
+    description: Retrieve a page of investigations matching the given request parameters. If there is no 'start_time' and 'end_time' provided, 'start_time' will  default to 28 days prior, and 'end_time' will default to the current time
     input:
       statuses:
         title: Statuses
@@ -1389,13 +1389,13 @@ actions:
         example: ["CLOSED"]
       start_time:
         title: Start Time
-        description: An optional ISO-formatted timestamp, where only investigations whose createTime is after this date will be returned
+        description: An optional ISO-formatted timestamp, where only investigations whose createTime is after this date will be returned. If there is no value provided this will default to 28 days prior
         type: date
         required: false
         example: "2020-06-01T12:11:13+05:30"
       end_time:
         title: End Time
-        description: An optional-ISO formatted timestamp, where only investigations whose createTime is before this date will be returned
+        description: An optional-ISO formatted timestamp, where only investigations whose createTime is before this date will be returned. If there is no value provided, this will default to the current time
         type: date
         required: false
         example: "2020-06-01T12:11:13+05:30"
