@@ -3,8 +3,15 @@
 This plugin allows you to add indicators to a threat and see the status of investigations
 
 # Key Features
-  
-*This plugin does not contain any key features.*
+
+* System Information and Event Management
+* Endpoint Detection and Response
+* Network Traffic Analysis
+* User and Entity Behaviour Analytics
+* Cloud and Integrations
+* Embedded Threat Intelligence
+* Deception Technology
+* Incident Response and Investigations
 
 # Requirements
   
@@ -1844,20 +1851,22 @@ Example output:
 
 #### List Investigations
 
-This action is used to retrieve a page of investigations matching the given request parameters
+This action is used to retrieve a page of investigations matching the given request parameters. If there is no 
+'start_time' and 'end_time' provided, 'start_time' will  default to 28 days prior, and 'end_time' will default to the 
+current time
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |email|string|None|False|A user's email address, where only investigations assigned to that user will be included|None|user@example.com|None|None|
-|end_time|date|None|False|An optional-ISO formatted timestamp, where only investigations whose createTime is before this date will be returned|None|2020-06-01T12:11:13+05:30|None|None|
+|end_time|date|None|False|An optional-ISO formatted timestamp, where only investigations whose createTime is before this date will be returned. If there is no value provided, this will default to the current time|None|2020-06-01T12:11:13+05:30|None|None|
 |index|integer|0|True|Zero-based index of the page to retrieve, where value must be greater than or equal to 0|None|1|None|None|
 |priorities|[]string|None|False|A comma-separated list of investigation priorities to include in the result, where possible values are LOW, MEDIUM, HIGH, CRITICAL|None|["LOW", "MEDIUM", "HIGH", "CRITICAL"]|None|None|
 |size|integer|100|True|Amount of data for a page to retrieve, where its value must be greater than 0 and less than or equal to 100|None|100|None|None|
 |sort|string|None|False|A field for investigations to be sorted|["", "Created time Ascending", "Created time Descending", "Priority Ascending", "Priority Descending", "RRN Ascending", "RRN Descending", "Alerts most recent created time Ascending", "Alerts most recent created time Descending", "Alerts most recent detection created time Ascending", "Alerts most recent detection created time Descending", "Responsibility Ascending", "Responsibility Descending"]|Created time Ascending|None|None|
 |sources|[]string|None|False|A comma-separated list of investigation sources to include in the result, where possible values are USER, ALERT, HUNT, AUTOMATION|None|["USER","ALERT"]|None|None|
-|start_time|date|None|False|An optional ISO-formatted timestamp, where only investigations whose createTime is after this date will be returned|None|2020-06-01T12:11:13+05:30|None|None|
+|start_time|date|None|False|An optional ISO-formatted timestamp, where only investigations whose createTime is after this date will be returned. If there is no value provided this will default to 28 days prior|None|2020-06-01T12:11:13+05:30|None|None|
 |statuses|[]string|None|False|Comma-separated list of investigation statuses to include in the result. Possible values are OPEN, CLOSED, INVESTIGATING, WAITING|None|["CLOSED"]|None|None|
   
 Example input:
@@ -3392,6 +3401,7 @@ Example output:
 
 # Version History
 
+* 10.3.4 - Bumping requirements.txt | SDK bump to 6.2.2
 * 10.3.3 - Bumping requirements.txt | SDK bump to 6.2.0
 * 10.3.2 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 10.3.1 - `Advanced Query On Log / Log Set` - Fixed issue where results >500 returned none | Update SDK
