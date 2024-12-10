@@ -481,6 +481,7 @@ Domain IDs are not the actual domain names - they are individual, unique IDs tha
 
 # Version History
 
+* 2.0.3 - Bumping requirements.txt ('aiohttp' package) | SDK bump to 6.2.2
 * 2.0.2 - Bumping requirements.txt ('aiohttp' package) | SDK bump to 6.2.0
 * 2.0.1 - Bumping requirements.txt | SDK bump to 6.1.4
 * 2.0.0 - Update Connection to add `ssl_verify` parameters to enable SSL verification on HTTP requests
