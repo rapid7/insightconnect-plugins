@@ -1,10 +1,10 @@
 import insightconnect_plugin_runtime
-from .schema import CommunityLookupInput, CommunityLookupOutput, Input, Component
+from .schema import CommunityLookupInput, CommunityLookupOutput, Input, Output, Component
 
 # Custom imports below
-from icon_greynoise.util.util import GNRequestFailure, GNValueError
-from greynoise import GreyNoise
+from insightconnect_plugin_runtime.exceptions import PluginException
 from greynoise.exceptions import RequestFailure
+from greynoise import GreyNoise
 import pendulum
 
 
@@ -29,10 +29,25 @@ class CommunityLookup(insightconnect_plugin_runtime.Action):
             if resp["noise"] or resp["riot"]:
                 resp["last_seen"] = pendulum.parse(resp["last_seen"]).to_rfc3339_string()
 
-        except RequestFailure as e:
-            raise GNRequestFailure(e.args[0], e.args[1])
+        except RequestFailure as error:
+            raise PluginException(
+                cause=f"API responded with ERROR: {error.args[0]} - {error.args[1]}.",
+                assistance="Please check error and try again.",
+            )
 
-        except ValueError as e:
-            raise GNValueError(e.args[0])
+        except ValueError as error:
+            raise PluginException(
+                cause=f"Input does not appear to be valid: {Input.IP_ADDRESS}. Error Message: {error.args[0]}",
+                assistance="Please provide a valid public IPv4 address.",
+            )
 
-        return resp
+        return {
+            Output.CLASSIFICATION: resp.get("classification"),
+            Output.IP: resp.get("ip"),
+            Output.LAST_SEEN: resp.get("last_seen"),
+            Output.LINK: resp.get("link"),
+            Output.MESSAGE: resp.get("message"),
+            Output.NAME: resp.get("name"),
+            Output.NOISE: resp.get("noise"),
+            Output.RIOT: resp.get("riot"),
+        }

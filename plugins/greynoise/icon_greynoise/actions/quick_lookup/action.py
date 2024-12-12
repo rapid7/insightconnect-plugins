@@ -1,8 +1,8 @@
 import insightconnect_plugin_runtime
-from .schema import QuickLookupInput, QuickLookupOutput, Input, Component
+from .schema import QuickLookupInput, QuickLookupOutput, Input, Output, Component
 
 # Custom imports below
-from icon_greynoise.util.util import GNRequestFailure, GNValueError
+from insightconnect_plugin_runtime.exceptions import PluginException
 from greynoise.exceptions import RequestFailure
 
 
@@ -20,9 +20,22 @@ class QuickLookup(insightconnect_plugin_runtime.Action):
             else:
                 resp_out = {"ip": params.get(Input.IP_ADDRESS), "code": "0x07", "code_message": "Input Not A Valid IP"}
 
-        except RequestFailure as e:
-            raise GNRequestFailure(e.args[0], e.args[1])
-        except ValueError as e:
-            raise GNValueError(e.args[0])
+        except RequestFailure as error:
+            raise PluginException(
+                cause=f"API responded with ERROR: {error.args[0]} - {error.args[1]}.",
+                assistance="Please check error and try again.",
+            )
 
-        return resp_out
+        except ValueError as error:
+            raise PluginException(
+                cause=f"Input does not appear to be valid: {Input.IP_ADDRESS}. Error Message: {error.args[0]}",
+                assistance="Please provide a valid public IPv4 address.",
+            )
+
+        return {
+            Output.IP: resp_out.get("ip"),
+            Output.CODE: resp_out.get("code"),
+            Output.NOISE: resp_out.get("noise"),
+            Output.RIOT: resp_out.get("riot"),
+            Output.CODE_MESSAGE: resp_out.get("code_message"),
+        }
