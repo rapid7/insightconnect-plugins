@@ -450,28 +450,23 @@ types:
       description: Links
       type: "[]link"
   results_statistics:
-    statistics:
-      title: statistics
-      description: Holds the overall statistical results
-      type: statistics
-      required: false
     leql:
-      title: leql
+      title: LEQL
       description: The LEQL 'WHERE' clause to match against
       type: object
       required: false
     logs:
-      title: logs
+      title: Logs
       description: Holds the Log ID of the matching log entry
       type: array
       required: false
     search_stats:
-      title: search_stats
+      title: Search Stats
       description: Holds data regarding the query execution
       type: object
       required: false
     statement:
-      title: statement
+      title: Statement
       description: Query command/operation executed
       type: object
       required: false
@@ -1998,13 +1993,13 @@ actions:
         order: 7
     output:
       results_events:
-        title: Query Results (Events)
+        title: Results Events
         description: Query Results
         type: "[]events"
         required: false
         example: '[{"labels": [],"timestamp": 1601598638768,"sequence_number": 123456789123456789,"log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313","message": {"timestamp": "2020-10-02T00:29:14.649Z","destination_asset": "iagent-win7","source_asset_address": "192.168.100.50","destination_asset_address": "example-host","destination_local_account": "user","logon_type": "NETWORK","result": "SUCCESS","new_authentication": "false","service": "ntlmssp ","source_json": {"sourceName": "Microsoft-Windows-Security-Auditing","insertionStrings": ["S-1-0-0","-","-","0x0","X-X-X-XXXXXXXXXXX","user@example.com","example-host","0x204f163c","3","NtLmSsp ","NTLM","","{00000000-0000-0000-0000-000000000000}","-","NTLM V2","128","0x0","-","192.168.50.1","59090"],"eventCode": 4624,"computerName": "example-host","sid": "","isDomainController": false,"eventData": null,"timeWritten": "2020-10-02T00:29:13.670722000Z"}},"links": [{"rel": "Context","href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}],"sequence_number_str": "123456789123456789"}]'
       results_statistical:
-        title: Query Results (Statistical)
+        title: Results Statistical
         description: Query Results
         type: results_statistics
         required: false
@@ -2100,13 +2095,13 @@ actions:
           - Web Proxy Activity
     output:
       results_events:
-        title: Query Results (Events)
+        title: Results Events
         description: Query Results
         type: "[]events"
         required: false
         example: '[{"labels": [],"timestamp": 1601598638768,"sequence_number": 123456789123456789,"log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313","message": {"timestamp": "2020-10-02T00:29:14.649Z","destination_asset": "iagent-win7","source_asset_address": "192.168.100.50","destination_asset_address": "example-host","destination_local_account": "user","logon_type": "NETWORK","result": "SUCCESS","new_authentication": "false","service": "ntlmssp ","source_json": {"sourceName": "Microsoft-Windows-Security-Auditing","insertionStrings": ["S-1-0-0","-","-","0x0","X-X-X-XXXXXXXXXXX","user@example.com","example-host","0x204f163c","3","NtLmSsp ","NTLM","","{00000000-0000-0000-0000-000000000000}","-","NTLM V2","128","0x0","-","192.168.50.1","59090"],"eventCode": 4624,"computerName": "example-host","sid": "","isDomainController": false,"eventData": null,"timeWritten": "2020-10-02T00:29:13.670722000Z"}},"links": [{"rel": "Context","href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}],"sequence_number_str": "123456789123456789"}]'
       results_statistical:
-        title: Query Results (Statistical)
+        title: Results Statistical
         description: Query Results
         type: statistics
         required: false

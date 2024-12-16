@@ -3091,11 +3091,10 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|leql|object|None|False|The LEQL 'WHERE' clause to match against|None|
-|logs|array|None|False|Holds the Log ID of the matching log entry|None|
-|search_stats|object|None|False|Holds data regarding the query execution|None|
-|statement|object|None|False|Query command/operation executed|None|
-|statistics|statistics|None|False|Holds the overall statistical results|None|
+|LEQL|object|None|False|The LEQL 'WHERE' clause to match against|None|
+|Logs|array|None|False|Holds the Log ID of the matching log entry|None|
+|Search Stats|object|None|False|Holds data regarding the query execution|None|
+|Statement|object|None|False|Query command/operation executed|None|
   
 **statistics**
 
