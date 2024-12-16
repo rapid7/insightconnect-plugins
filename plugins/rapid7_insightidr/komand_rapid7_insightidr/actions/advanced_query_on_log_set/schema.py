@@ -132,7 +132,7 @@ class AdvancedQueryOnLogSetOutput(insightconnect_plugin_runtime.Output):
     },
     "results_events": {
       "type": "array",
-      "title": "Results Events",
+      "title": "Query Results (Events)",
       "description": "Query Results",
       "items": {
         "$ref": "#/definitions/events"
@@ -141,7 +141,7 @@ class AdvancedQueryOnLogSetOutput(insightconnect_plugin_runtime.Output):
     },
     "results_statistical": {
       "$ref": "#/definitions/statistics",
-      "title": "Results Statistical",
+      "title": "Query Results (Statistical)",
       "description": "Query Results",
       "order": 2
     }

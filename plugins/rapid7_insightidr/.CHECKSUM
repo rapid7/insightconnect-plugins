@@ -1,5 +1,5 @@
 {
-	"spec": "fd4a1ba356fb9c3b51b5058cf8bee435",
+	"spec": "ed557ded0b51e5458aefc217bdfde130",
 	"manifest": "bf5b8c1274de589f792fc43909fcb102",
 	"setup": "1964faaf291c2cbe3485c2bfd7ae7231",
 	"schemas": [
@@ -9,11 +9,11 @@
 		},
 		{
 			"identifier": "advanced_query_on_log/schema.py",
-			"hash": "c29d038d9e7020d8e1327a8c6ad4e3d5"
+			"hash": "5095f41c5b730886b330614a79dc0551"
 		},
 		{
 			"identifier": "advanced_query_on_log_set/schema.py",
-			"hash": "6ecdb6192aa5e8c99cafc712a6c9d6fb"
+			"hash": "b5b2c8b6a3b884b33241f87004815459"
 		},
 		{
 			"identifier": "assign_user_to_investigation/schema.py",

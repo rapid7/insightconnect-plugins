@@ -3094,7 +3094,7 @@ Example output:
 |LEQL|object|None|False|The LEQL 'WHERE' clause to match against|None|
 |Logs|array|None|False|Holds the Log ID of the matching log entry|None|
 |Search Stats|object|None|False|Holds data regarding the query execution|None|
-|Statement|object|None|False|Query command/operation executed|None|
+|statistics|statistics|None|False|Holds the overall statistical results|None|
   
 **statistics**
 
