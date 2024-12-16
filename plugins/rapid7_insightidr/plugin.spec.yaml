@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 10.3.4
+version: 10.3.5
 connection_version: 5
 supported_versions: ["Latest release successfully tested on 2024-09-10."]
 vendor: rapid7
@@ -36,6 +36,7 @@ sdk:
   version: 6.2.2
   user: nobody
 version_history:
+  - "10.3.5 - Updating schema for 'advanced_query_on_log' action to account for missing keys"
   - "10.3.4 - Bumping requirements.txt | SDK bump to 6.2.2"
   - "10.3.3 - Bumping requirements.txt | SDK bump to 6.2.0"
   - "10.3.2 - Initial updates for fedramp compliance | Updated SDK to the latest version"
@@ -448,6 +449,32 @@ types:
       title: Links
       description: Links
       type: "[]link"
+  results_statistics:
+    statistics:
+      title: statistics
+      description: Holds the overall statistical results
+      type: statistics
+      required: false
+    leql:
+      title: leql
+      description: The LEQL 'WHERE' clause to match against
+      type: object
+      required: false
+    logs:
+      title: logs
+      description: Holds the Log ID of the matching log entry
+      type: array
+      required: false
+    search_stats:
+      title: search_stats
+      description: Holds data regarding the query execution
+      type: object
+      required: false
+    statement:
+      title: statement
+      description: Query command/operation executed
+      type: object
+      required: false
   statistics:
     stats:
       title: Stats
@@ -1979,7 +2006,7 @@ actions:
       results_statistical:
         title: Query Results (Statistical)
         description: Query Results
-        type: statistics
+        type: results_statistics
         required: false
         example: '{"leql":{"during":{"from":1699579214000,"to":1699622414000},"statement":"groupby(r7_context.asset.name)"},"logs":["123456-abcd-1234-abcd-123456abc"],"search_stats":{"bytes_all":9961260,"bytes_checked":9961260,"duration_ms":19,"events_all":1640,"events_checked":1640,"events_matched":1639,"index_factor":0.0},"statistics":{"all_exact_result":true,"cardinality":0,"from":1699579214000,"granularity":4320000,"groups":[{"linux":{"count":1163.0}},{"windowsx64":{"count":476.0}}],"groups_timeseries":[{"linux":{"groups_timeseries":[],"series":[{"count":45.0},{"count":21.0},{"count":16.0},{"count":270.0},{"count":27.0},{"count":43.0},{"count":27.0},{"count":39.0},{"count":29.0},{"count":646.0}],"totals":{"count":1163.0}}},{"windowsx64":{"groups_timeseries":[],"series":[{"count":54.0},{"count":40.0},{"count":60.0},{"count":37.0},{"count":42.0},{"count":62.0},{"count":41.0},{"count":47.0},{"count":49.0},{"count":44.0}],"totals":{"count":476.0}}}],"others":{"series":[]},"stats":{},"status":200,"timeseries":{},"to":1699622414000,"type":"count"}}'
       count:

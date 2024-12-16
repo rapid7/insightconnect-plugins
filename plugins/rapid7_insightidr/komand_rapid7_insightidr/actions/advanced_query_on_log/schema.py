@@ -122,7 +122,7 @@ class AdvancedQueryOnLogOutput(insightconnect_plugin_runtime.Output):
       "order": 1
     },
     "results_statistical": {
-      "$ref": "#/definitions/statistics",
+      "$ref": "#/definitions/results_statistics",
       "title": "Query Results (Statistical)",
       "description": "Query Results",
       "order": 2
@@ -164,7 +164,7 @@ class AdvancedQueryOnLogOutput(insightconnect_plugin_runtime.Output):
           "order": 4
         },
         "message": {
-          "type": ["object", "string"],
+          "$ref": "#/definitions/message",
           "title": "Message",
           "description": "Message",
           "order": 5
@@ -177,6 +177,47 @@ class AdvancedQueryOnLogOutput(insightconnect_plugin_runtime.Output):
             "$ref": "#/definitions/link"
           },
           "order": 6
+        }
+      }
+    },
+    "message": {
+      "type": "object",
+      "title": "message",
+      "properties": {
+        "sourceName": {
+          "type": "string",
+          "title": "Source Name",
+          "order": 1
+        },
+        "eventCode": {
+          "type": "integer",
+          "title": "Event Code",
+          "order": 2
+        },
+        "computerName": {
+          "type": "string",
+          "title": "Computer Name",
+          "order": 3
+        },
+        "sid": {
+          "type": "string",
+          "title": "SID",
+          "order": 4
+        },
+        "isDomainController": {
+          "type": "boolean",
+          "title": "Is Domain Controller",
+          "order": 5
+        },
+        "eventData": {
+          "$ref": "#/definitions/eventData",
+          "title": "Event Data",
+          "order": 6
+        },
+        "timeWritten": {
+          "type": "string",
+          "title": "Time Written",
+          "order": 7
         }
       }
     },
@@ -354,6 +395,41 @@ class AdvancedQueryOnLogOutput(insightconnect_plugin_runtime.Output):
           "title": "HREF",
           "description": "HREF",
           "order": 2
+        }
+      }
+    },
+    "results_statistics": {
+      "type": "object",
+      "title": "results_statistics",
+      "properties": {
+        "statistics": {
+          "$ref": "#/definitions/statistics",
+          "title": "statistics",
+          "description": "Holds the overall statistical results",
+          "order": 1
+        },
+        "leql": {
+          "type": "object",
+          "title": "leql",
+          "description": "The LEQL 'WHERE' clause to match against",
+          "order": 2
+        },
+        "logs": {
+          "title": "logs",
+          "description": "Holds the Log ID of the matching log entry",
+          "order": 3
+        },
+        "search_stats": {
+          "type": "object",
+          "title": "search_stats",
+          "description": "Holds data regarding the query execution",
+          "order": 4
+        },
+        "statement": {
+          "type": "object",
+          "title": "statement",
+          "description": "Query command/operation executed",
+          "order": 5
         }
       }
     },
