@@ -177,6 +177,12 @@ class AdvancedQueryOnLogOutput(insightconnect_plugin_runtime.Output):
             "$ref": "#/definitions/link"
           },
           "order": 6
+        },
+        "sequence_number_str": {
+          "type": "string",
+          "title": "Sequence Number String",
+          "description": "Sequence number string",
+          "order": 7
         }
       }
     },
@@ -184,40 +190,106 @@ class AdvancedQueryOnLogOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "message",
       "properties": {
+        "timestamp": {
+          "type": "string",
+          "title": "Timestamp",
+          "order": 1
+        },
+        "destination_asset": {
+          "type": "string",
+          "title": "Destination Asset",
+          "order": 2
+        },
+        "source_asset_address": {
+          "type": "string",
+          "title": "Source Asset Address",
+          "order": 3
+        },
+        "destination_asset_address": {
+          "type": "string",
+          "title": "Destination Asset Address",
+          "order": 4
+        },
+        "destination_local_account": {
+          "type": "string",
+          "title": "Destination Local Account",
+          "order": 5
+        },
+        "logon_type": {
+          "type": "string",
+          "title": "Logon Type",
+          "order": 6
+        },
+        "result": {
+          "type": "string",
+          "title": "Result",
+          "order": 7
+        },
+        "new_authentication": {
+          "type": "string",
+          "title": "New Authentication",
+          "order": 8
+        },
+        "service": {
+          "type": "string",
+          "title": "Service",
+          "order": 9
+        },
+        "source_json": {
+          "$ref": "#/definitions/source_json",
+          "title": "Source JSON",
+          "order": 10
+        }
+      }
+    },
+    "source_json": {
+      "type": "object",
+      "title": "source_json",
+      "properties": {
         "sourceName": {
           "type": "string",
           "title": "Source Name",
+          "description": "Source Name",
           "order": 1
+        },
+        "insertionStrings": {
+          "type": "array",
+          "title": "Insertion Strings",
+          "description": "Insertion Strings",
+          "items": {
+            "type": "string"
+          },
+          "order": 2
         },
         "eventCode": {
           "type": "integer",
           "title": "Event Code",
-          "order": 2
+          "order": 3
         },
         "computerName": {
           "type": "string",
           "title": "Computer Name",
-          "order": 3
+          "order": 4
         },
         "sid": {
           "type": "string",
           "title": "SID",
-          "order": 4
+          "order": 5
         },
         "isDomainController": {
           "type": "boolean",
           "title": "Is Domain Controller",
-          "order": 5
+          "order": 6
         },
         "eventData": {
           "$ref": "#/definitions/eventData",
           "title": "Event Data",
-          "order": 6
+          "order": 7
         },
         "timeWritten": {
           "type": "string",
           "title": "Time Written",
-          "order": 7
+          "order": 8
         }
       }
     },

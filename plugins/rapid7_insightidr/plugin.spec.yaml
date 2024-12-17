@@ -36,7 +36,7 @@ sdk:
   version: 6.2.2
   user: nobody
 version_history:
-  - "11.0.0 - Updating schema for 'advanced_query_on_log' action to account for missing keys"
+  - "11.0.0 - Updating schema for query actions (`advanced_query_on_log`, `advanced_query_on_log_set` & `query`) to account for missing keys/invalid mapping in the schema"
   - "10.3.4 - Bumping requirements.txt | SDK bump to 6.2.2"
   - "10.3.3 - Bumping requirements.txt | SDK bump to 6.2.0"
   - "10.3.2 - Initial updates for fedramp compliance | Updated SDK to the latest version"
@@ -403,27 +403,36 @@ types:
       description: Last full scan age
       required: false
   message:
-    sourceName:
-      title: Source Name
+    timestamp:
+      title: Timestamp
       type: string
-    eventCode:
-      title: Event Code
-      type: integer
-    computerName:
-      title: Computer Name
+    destination_asset:
+      title: Destination Asset
       type: string
-    sid:
-      title: SID
+    source_asset_address:
+      title: Source Asset Address
       type: string
-    isDomainController:
-      title: Is Domain Controller
-      type: boolean
-    eventData:
-      title: Event Data
-      type: eventData
-    timeWritten:
-      title: Time Written
+    destination_asset_address:
+      title: Destination Asset Address
       type: string
+    destination_local_account:
+      title: Destination Local Account
+      type: string
+    logon_type:
+      title: Logon Type
+      type: string
+    result:
+      title: Result
+      type: string
+    new_authentication:
+      title: New Authentication
+      type: string
+    service:
+      title: Service
+      type: string
+    source_json:
+      title: Source JSON
+      type: source_json
   events:
     labels:
       title: Labels
@@ -449,6 +458,10 @@ types:
       title: Links
       description: Links
       type: "[]link"
+    sequence_number_str:
+      title: Sequence Number String
+      description: Sequence number string
+      type: string
   results_statistics:
     statistics:
       title: statistics
@@ -535,6 +548,41 @@ types:
       title: All Exact Results
       description: Boolean indicating whether groups are calculated approximately (approximated if a groupby query involves over 10,000 groups)
       type: boolean
+      required: false
+  source_json:
+    sourceName:
+      title: Source Name
+      type: string
+      description: Source Name
+      required: false
+    insertionStrings:
+      title: Insertion Strings
+      type: "[]string"
+      description: Insertion Strings
+      required: false
+    eventCode:
+      title: Event Code
+      type: integer
+      required: false
+    computerName:
+      title: Computer Name
+      type: string
+      required: false
+    sid:
+      title: SID
+      type: string
+      required: false
+    isDomainController:
+      title: Is Domain Controller
+      type: boolean
+      required: false
+    eventData:
+      title: Event Data
+      type: eventData
+      required: false
+    timeWritten:
+      title: Time Written
+      type: string
       required: false
   links:
     href:
@@ -2103,7 +2151,7 @@ actions:
       results_statistical:
         title: Query Results (Statistical)
         description: Query Results
-        type: statistics
+        type: results_statistics
         required: false
         example: '{"leql":{"during":{"from":1699579214000,"to":1699622414000},"statement":"groupby(r7_context.asset.name)"},"logs":["123456-abcd-1234-abcd-123456abc"],"search_stats":{"bytes_all":9961260,"bytes_checked":9961260,"duration_ms":19,"events_all":1640,"events_checked":1640,"events_matched":1639,"index_factor":0.0},"statistics":{"all_exact_result":true,"cardinality":0,"from":1699579214000,"granularity":4320000,"groups":[{"linux":{"count":1163.0}},{"windowsx64":{"count":476.0}}],"groups_timeseries":[{"linux":{"groups_timeseries":[],"series":[{"count":45.0},{"count":21.0},{"count":16.0},{"count":270.0},{"count":27.0},{"count":43.0},{"count":27.0},{"count":39.0},{"count":29.0},{"count":646.0}],"totals":{"count":1163.0}}},{"windowsx64":{"groups_timeseries":[],"series":[{"count":54.0},{"count":40.0},{"count":60.0},{"count":37.0},{"count":42.0},{"count":62.0},{"count":41.0},{"count":47.0},{"count":49.0},{"count":44.0}],"totals":{"count":476.0}}}],"others":{"series":[]},"stats":{},"status":200,"timeseries":{},"to":1699622414000,"type":"count"}}'
       count:
