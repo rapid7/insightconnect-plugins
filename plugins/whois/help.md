@@ -181,6 +181,7 @@ Multiple records can be returned by the server, this plugin currently only retur
 
 # Version History
 
+* 3.1.7 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
 * 3.1.6 - Fix mapping issue (RIPE) for address action. Adding 'description' output field for RIPE (address action) | SDK bump to 6.2.0
 * 3.1.5 - Action `Address`: Fixed issue with result parsing
 * 3.1.4 - Initial updates for fedramp compliance | Updated SDK to the latest version
