@@ -459,7 +459,7 @@ If the actions `Get Agent Details` and `Get All Agents by IP` return a `next cur
 
 # Version History
 
-* 3.0.2 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
+* 3.0.2 - Updated to use latest buildpack to address vulnerabilities
 * 3.0.1 - Update 'Get Agent Details' to allow no assets to be returned | SDK bump to latest version
 * 3.0.0 - Update `Get Agent Details` and `Get All Agents by IP` to return the next page token if more pages are available to search | Update `Get Agent Details` to return agent location details | Initial updates for fedramp compliance | Updated SDK to the latest version
 * 2.1.2 - Improve logging | Update SDK
