@@ -44,7 +44,7 @@ class MonitorLogsOutput(insightconnect_plugin_runtime.Output):
   "title": "Logs",
   "description": "List of activity, device control event, and threat logs within the specified time range",
   "items": {
-    "$ref": {}
+    "type": "object"
   },
   "definitions": {}
 }
