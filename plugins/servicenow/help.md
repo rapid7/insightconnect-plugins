@@ -1686,6 +1686,7 @@ Example output:
 
 # Version History
 
+* 8.0.4 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
 * 8.0.3 - Update to resolve issue parsing response from ServiceNow if XML is received
 * 8.0.2 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 8.0.1 - Update Setuptool to version 70.0.0 | Update SDK to version 6.0.0
