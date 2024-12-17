@@ -448,6 +448,7 @@ Example output:
 
 # Version History
 
+* 2.0.4 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
 * 2.0.3 - Bumping requirements.txt | SDK Bump to 6.1.4
 * 2.0.2 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 2.0.1 - Updated SDK to the latest version
