@@ -168,7 +168,7 @@ Example output:
 
 #### Split String to List
 
-This action is used to convert a string to a list of strings.
+This action is used to converts a string to a list of strings
 
 ##### Input
 
@@ -352,6 +352,7 @@ There may be complex string manipulation needs that are likely outside the scope
 
 # Version History
 
+* 1.4.2 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
 * 1.4.1 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 1.4.0 - New action Replace
 * 1.3.1 - Update to v4 Python plugin runtime
