@@ -3410,7 +3410,7 @@ Example output:
 
 # Version History
 
-* 10.3.5 - Updating schema for 'advanced_query_on_log' action to account for missing keys
+* 11.0.0 - Updating schema for 'advanced_query_on_log' action to account for missing keys
 * 10.3.4 - Bumping requirements.txt | SDK bump to 6.2.2
 * 10.3.3 - Bumping requirements.txt | SDK bump to 6.2.0
 * 10.3.2 - Initial updates for fedramp compliance | Updated SDK to the latest version

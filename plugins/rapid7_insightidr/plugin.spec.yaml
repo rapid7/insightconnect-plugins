@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 10.3.5
+version: 11.0.0
 connection_version: 5
 supported_versions: ["Latest release successfully tested on 2024-09-10."]
 vendor: rapid7
@@ -36,7 +36,7 @@ sdk:
   version: 6.2.2
   user: nobody
 version_history:
-  - "10.3.5 - Updating schema for 'advanced_query_on_log' action to account for missing keys"
+  - "11.0.0 - Updating schema for 'advanced_query_on_log' action to account for missing keys"
   - "10.3.4 - Bumping requirements.txt | SDK bump to 6.2.2"
   - "10.3.3 - Bumping requirements.txt | SDK bump to 6.2.0"
   - "10.3.2 - Initial updates for fedramp compliance | Updated SDK to the latest version"
