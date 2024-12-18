@@ -1598,6 +1598,7 @@ Actions may fail depending on the state of the resource you attempt to operate o
 
 # Version History
 
+* 4.2.12 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
 * 4.2.11 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 4.2.10 - Monitor Logs Task: Add exception handling if invalid subdomain provided
 * 4.2.9 - SDK Bump to 6.1.0 | Task Connection test added
