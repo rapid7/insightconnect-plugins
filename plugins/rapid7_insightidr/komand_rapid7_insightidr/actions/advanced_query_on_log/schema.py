@@ -122,7 +122,7 @@ class AdvancedQueryOnLogOutput(insightconnect_plugin_runtime.Output):
       "order": 1
     },
     "results_statistical": {
-      "$ref": "#/definitions/statistics",
+      "$ref": "#/definitions/results_statistics",
       "title": "Query Results (Statistical)",
       "description": "Query Results",
       "order": 2
@@ -164,7 +164,7 @@ class AdvancedQueryOnLogOutput(insightconnect_plugin_runtime.Output):
           "order": 4
         },
         "message": {
-          "type": ["object", "string"],
+          "$ref": "#/definitions/message",
           "title": "Message",
           "description": "Message",
           "order": 5
@@ -177,6 +177,119 @@ class AdvancedQueryOnLogOutput(insightconnect_plugin_runtime.Output):
             "$ref": "#/definitions/link"
           },
           "order": 6
+        },
+        "sequence_number_str": {
+          "type": "string",
+          "title": "Sequence Number String",
+          "description": "Sequence number string",
+          "order": 7
+        }
+      }
+    },
+    "message": {
+      "type": "object",
+      "title": "message",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "title": "Timestamp",
+          "order": 1
+        },
+        "destination_asset": {
+          "type": "string",
+          "title": "Destination Asset",
+          "order": 2
+        },
+        "source_asset_address": {
+          "type": "string",
+          "title": "Source Asset Address",
+          "order": 3
+        },
+        "destination_asset_address": {
+          "type": "string",
+          "title": "Destination Asset Address",
+          "order": 4
+        },
+        "destination_local_account": {
+          "type": "string",
+          "title": "Destination Local Account",
+          "order": 5
+        },
+        "logon_type": {
+          "type": "string",
+          "title": "Logon Type",
+          "order": 6
+        },
+        "result": {
+          "type": "string",
+          "title": "Result",
+          "order": 7
+        },
+        "new_authentication": {
+          "type": "string",
+          "title": "New Authentication",
+          "order": 8
+        },
+        "service": {
+          "type": "string",
+          "title": "Service",
+          "order": 9
+        },
+        "source_json": {
+          "$ref": "#/definitions/source_json",
+          "title": "Source JSON",
+          "order": 10
+        }
+      }
+    },
+    "source_json": {
+      "type": "object",
+      "title": "source_json",
+      "properties": {
+        "sourceName": {
+          "type": "string",
+          "title": "Source Name",
+          "description": "Source Name",
+          "order": 1
+        },
+        "insertionStrings": {
+          "type": "array",
+          "title": "Insertion Strings",
+          "description": "Insertion Strings",
+          "items": {
+            "type": "string"
+          },
+          "order": 2
+        },
+        "eventCode": {
+          "type": "integer",
+          "title": "Event Code",
+          "order": 3
+        },
+        "computerName": {
+          "type": "string",
+          "title": "Computer Name",
+          "order": 4
+        },
+        "sid": {
+          "type": "string",
+          "title": "SID",
+          "order": 5
+        },
+        "isDomainController": {
+          "type": "boolean",
+          "title": "Is Domain Controller",
+          "order": 6
+        },
+        "eventData": {
+          "$ref": "#/definitions/eventData",
+          "title": "Event Data",
+          "order": 7
+        },
+        "timeWritten": {
+          "type": "string",
+          "title": "Time Written",
+          "order": 8
         }
       }
     },
@@ -354,6 +467,35 @@ class AdvancedQueryOnLogOutput(insightconnect_plugin_runtime.Output):
           "title": "HREF",
           "description": "HREF",
           "order": 2
+        }
+      }
+    },
+    "results_statistics": {
+      "type": "object",
+      "title": "results_statistics",
+      "properties": {
+        "statistics": {
+          "$ref": "#/definitions/statistics",
+          "title": "statistics",
+          "description": "Holds the overall statistical results",
+          "order": 1
+        },
+        "leql": {
+          "type": "object",
+          "title": "LEQL",
+          "description": "The LEQL 'WHERE' clause to match against",
+          "order": 2
+        },
+        "logs": {
+          "title": "Logs",
+          "description": "Holds the Log ID of the matching log entry",
+          "order": 3
+        },
+        "search_stats": {
+          "type": "object",
+          "title": "Search Stats",
+          "description": "Holds data regarding the query execution",
+          "order": 4
         }
       }
     },
