@@ -494,6 +494,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.1 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
 * 2.1.0 - Updated SDK to the latest version | Adding a get resource id functionality
 * 2.0.0 - Enable plugin to run in cloud | Remove actions using defective API endpoints
 * 1.0.0 - Initial plugin | Add Get Account Details, Get Resource Details, List Resource Tags, Create Exemption, Remove Exemption, Detach Policy, Run Bot on Demand and Switch Organization actions

@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="rapid7_insightcloudsec-rapid7-plugin",
-      version="2.1.0",
+      version="2.1.1",
       description="InsightCloudSec by Rapid7 (formerly DivvyCloud) is a Cloud-Native Security Platform that provides real-time analysis and automated remediation for continuous security and compliance for your multi-cloud environment",
       author="rapid7",
       author_email="",
