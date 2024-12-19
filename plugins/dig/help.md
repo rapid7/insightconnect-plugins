@@ -186,6 +186,7 @@ Common examples:
 
 # Version History
 
+* 2.0.4 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
 * 2.0.3 - Initial updates for fedramp compliance | Updated SDK to the latest
 * 2.0.2 - Updated SDK to the latest version | Added validation for input parameters
 * 2.0.1 - Added `__init__.py` file to `unit_test` folder | Refreshed with new Tooling
