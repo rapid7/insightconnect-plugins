@@ -1010,6 +1010,7 @@ Many actions in this plugin take a User ID as input. A User ID is not the userna
 
 # Version History
 
+* 5.0.2 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
 * 5.0.1 - Update to enable Plugin as FedRAMP ready | Update SDK (`6.1.2`)
 * 5.0.0 - Updated to include latest SDK v5.5.5 | Removing Unused fields from User Object
 * 4.4.2 - Updated to include latest SDK v5.4.9 | Task `Monitor Logs` updated to increase max lookback cutoff to 7 days
