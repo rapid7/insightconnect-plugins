@@ -3,19 +3,47 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 11.1.2
+version: 11.1.3
 connection_version: 10
 cloud_ready: true
 fedramp_ready: true
 sdk:
   type: slim
-  version: 6.1.0
+  version: 6.2.2
   user: nobody
 supported_versions: ["2.1.0"]
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
 vendor: rapid7
 support: rapid7
 status: []
+key_features:
+  - "Get activities"
+  - "Get activity types"
+  - "Blacklist hashes"
+  - "Run agent actions"
+  - "Reload agent modules"
+  - "Get information about agents"
+  - "Search agents"
+  - "Get information about agent applications"
+  - "Create, get and cancel query"
+  - "Create IOC threat"
+  - "Enable and disable agent"
+  - "Fetch files"
+  - "Get events"
+  - "Get information about threats"
+  - "Manage threats"
+  - "Quarantine endpoints"
+  - "Run remote scripts"
+  - "Check account name availability"
+  - "Execute scans"
+  - "Trigger workflows on security alerts"
+links:
+  - "[SentinelOne Product Page](https://www.sentinelone.com/)"
+references:
+  - "[SentinelOne Product Page](https://www.sentinelone.com/)"
+requirements:
+  - "SentinelOne API key"
+troubleshooting: "* To generate an API key, create a new Service User or select an existing one with adequate permissions from the SentinelOne console\n* To convert `threat` into an array use Type Converter Plugin\n* For the Trigger settings, only set the Resolved field to False if solely resolved threats should be retrieved (i.e. setting to False will not include unresolved threats)\n* The Run Remote Script action may require starting a protected actions session to function properly. To do this, in the `code` input field, enter the passcode from a third-party app, such as Duo Mobile or Google Authenticator, set up in two-factor authentication. Entering the code is not required each time you run the action, because the session is valid for 30 minutes"
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/sentinelone
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -29,6 +57,44 @@ hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [sentinelone, endpoint, detection, cloud_enabled]
   features: []
+version_history:
+  - "11.1.3 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities"
+  - "11.1.2 - Resolve issue where unexpected timestamps returned from SentinelOne were not parsed in task `Monitor Logs` | Update plugin to be FedRAMP compliant"
+  - "11.1.1 - Updated Plugin connection to improve `instance` input usability"
+  - "11.1.0 - Added connection test for task `Monitor Logs` | Update SDK"
+  - "11.0.0 - Removed `Monitor Logs` task input options | Update SDK"
+  - "10.0.0 - Added `Monitor Logs` task | Removed `User Type` from connection | A Service User API Key must now be provided to provide enhanced security"
+  - "9.1.2 - Retry functionality added to requests to SenintelOne that result in a 429 (too many requests) or 503 (service unavailable) error."
+  - "9.1.1 - `Threats Fetch File`: Updated action to prevent possible movement through file system"
+  - "9.1.0 - `Move Agent to Another Site`: Action added"
+  - "9.0.0 - Update plugin to allow cloud connections to be configured | Rename URL input to Instance in connection | Code refactor"
+  - "8.1.0 - Added New actions: Fetch file for agent ID and Run remote script. Updated description for Trigger resolved field"
+  - "8.0.1 - Search Agents: Remove duplicate results when Case Sensitive is false"
+  - "8.0.0 - Connection: Added Service user (API only user type) authentication | Removed Basic Authentication"
+  - "7.1.0 - Update for Blacklist action: Fix for unblocked action | Update for Quarantine action: unification of the output data when action fails | Add troubleshooting information about use Type Converter | Mark as Benign action: update description"
+  - "7.0.0 - Add new actions Update Analyst Verdict and Update Incident Status | Fix Get Agent Details and Search Agents actions to handle more response scenarios | Add option to authentication with API key"
+  - "6.2.0 - New actions Create Query, Get Query Status, Cancel Running Query, Get Events, Get Events By Type"
+  - "6.1.0 - Add new actions Disable Agent and Enable Agent"
+  - "6.0.0 - Add `operational_state` field to input of Get Agent Details and Search Agent actions | Update schema to return new outputs such as Active Directory, firewall, location, and quarantine information for Get Agent Details and Search Agent actions | Use API version 2.1 | Update capitalization according to style in Activities List action for Created Than Date and Less Than Dates inputs to Greater than Date and Less than Date"
+  - "5.0.1 - Correct spelling in help.md"
+  - "5.0.0 - Consolidate various Agent actions | Use API version 2.1 where possible | Delete obsolete Blacklist by IOC Hash and Agent Processes"
+  - "4.1.1 - Update the Get Threat Summary action to return all threat summaries instead of 10"
+  - "4.1.0 - Add case sensitivity option for Agent lookups"
+  - "4.0.1 - Fix Agent Active parameter in Get Agent Details action | Update Quarantine action whitelist for IP addresses"
+  - "4.0.0 - Update ID input for Fetch Threats File action to a string"
+  - "3.1.0 - Add new action Fetch Threats File"
+  - "3.0.0 - Update help.md for the Extension Library | Update title in action Blacklist by IOC Hash, Get Activities, Count Summary and Connect to Network"
+  - "2.1.1 - Upgrade trigger Get Threats to only return threats since trigger start"
+  - "2.1.0 - Add `agent_active` field to input in action Search Agents"
+  - "2.0.0 - Upgrade trigger input Agent is Active to default true"
+  - "1.4.0 - New actions Quarantine, Get Agent Details, Search Agents"
+  - "1.3.0 - Add new action Blacklist"
+  - "1.2.2 - Update error message in Connection"
+  - "1.2.1 - Update to use the `komand/python-3-37-slim-plugin` Docker image to reduce plugin size"
+  - "1.2.0 - New spec and help.md format for the Extension Library | New actions activities_list, activities_types, agents_abort_scan, agents_connect, agents_decommission, agents_disconnect, agents_fetch_logs, agents_initiate, agents_processes, agents_reload, agents_restart, agents_shutdown, agents_summary, agents_uninstall, apps_by_agent_ids, name_available"
+  - "1.1.0 - New trigger Get Threats | New actions Mitigate Threat, Mark as Benign, Mark as Threat and Create IOC Threat"
+  - "1.0.1 - Update to add Blacklist by IOC Hash and Blacklist by Content Hash"
+  - "1.0.0 - Initial plugin"
 types:
   activityTypes:
     id:
