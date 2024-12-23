@@ -1335,6 +1335,7 @@ Example output:
 
 # Version History
 
+* 6.0.1 - Update to latest SDK (v6.2.2) | Address vulnerabilities
 * 6.0.0 - Updated SDK to the latest version | Initial updates for fedramp compliance
 * 5.2.0 - Add new action: Update Alert
 * 5.1.0 - Adding the following as new action types to `blacklist` action ['Warn', 'Block', 'Audit'] | Add a new flag in the `blacklist` action to toggle generateAlerts flag | Bump SDK to version 5.4.9
