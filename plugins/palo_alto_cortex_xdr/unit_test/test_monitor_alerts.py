@@ -94,7 +94,7 @@ class TestMonitorAlerts(TestCase):
                 TaskUtil.load_expected("monitor_alert_two"),
                 False,
                 "monitor_alerts_two",
-                STUB_STATE_NO_PAGES,
+                STUB_STATE_EXPECTED_NO_PAGE,
                 200,
             ],
             [
