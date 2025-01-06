@@ -25,9 +25,7 @@ STUB_STATE_EXPECTED_SECOND_PAGE = {
     "last_alert_hash": ["f4ef7617f46fef7b78410498f563e01df2a5f030"],
 }
 
-STUB_STATE_NO_PAGES = {
-
-}
+STUB_STATE_NO_PAGES = {}
 
 STUB_STATE_MORE_PAGES = {
     "current_count": 1,
