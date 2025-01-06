@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Find and display detailed information about a device. If additional pages of agents are available, the action should be run again with the returned next cursor"
+    DESCRIPTION = "This action is used to find and display detailed information about a device. If additional pages of agents are available, the action should be run again with the returned next cursor"
 
 
 class Input:
