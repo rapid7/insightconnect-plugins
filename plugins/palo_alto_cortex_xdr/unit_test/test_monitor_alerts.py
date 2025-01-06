@@ -2,6 +2,7 @@ import os
 import sys
 
 sys.path.append(os.path.abspath("../"))
+from logging import logging
 
 from unittest import TestCase
 from unittest.mock import patch, MagicMock
@@ -122,8 +123,8 @@ class TestMonitorAlerts(TestCase):
         mock_req.return_value = mock_conditions(200, file_name=response_file)
 
         output, state, has_more_pages, status_code, _ = self.task.run(state=state)
-        print(state)
-        print(expected_state)
+        logging.info(state)
+        logging.info(expected_state)
 
         self.assertEqual(expected_output, output)
         self.assertEqual(expected_has_more_pages, has_more_pages)
