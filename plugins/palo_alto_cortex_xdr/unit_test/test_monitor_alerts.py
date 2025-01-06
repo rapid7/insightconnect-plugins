@@ -78,7 +78,7 @@ class TestMonitorAlerts(TestCase):
                 "starting",
                 {},
                 TaskUtil.load_expected("monitor_alerts"),
-                True,
+                False,
                 "monitor_alerts",
                 STUB_STATE_MORE_PAGES,
                 200,
@@ -87,7 +87,7 @@ class TestMonitorAlerts(TestCase):
                 "next_page",
                 STUB_STATE_MORE_PAGES.copy(),
                 TaskUtil.load_expected("monitor_alert_two"),
-                True,
+                False,
                 "monitor_alerts_two",
                 STUB_STATE_EXPECTED_SECOND_PAGE,
                 200,
@@ -250,7 +250,7 @@ class TestMonitorAlerts(TestCase):
 
         self.assertEqual(status_code, expected_status_code)
         self.assertEqual(input_state, state)
-        self.assertEqual(has_more_pages, True)
+        self.assertEqual(has_more_pages, False)
         self.assertEqual(output, [])
 
     @parameterized.expand(
@@ -353,4 +353,4 @@ class TestMonitorAlerts(TestCase):
         self.assertEqual(output, expected_output)
         self.assertEqual(status_code, expected_status_code)
         self.assertEqual(input_state, state)
-        self.assertEqual(has_more_pages, True)
+        self.assertEqual(has_more_pages, False)
