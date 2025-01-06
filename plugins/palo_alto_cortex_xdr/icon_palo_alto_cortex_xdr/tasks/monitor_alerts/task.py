@@ -117,8 +117,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         state[CURRENT_COUNT] = state.get(CURRENT_COUNT, 0) + results_count
 
         new_alerts, new_alert_hashes, last_alert_time = self._dedupe_and_get_highest_time(results, state)
-
-        is_paginating = state.get(CURRENT_COUNT) < total_count
+        is_paginating = results_count >= alert_limit
 
         if is_paginating:
             self.logger.info(f"Found total alerts={total_count}, limit={alert_limit}, is_paginating={is_paginating}")
