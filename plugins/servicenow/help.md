@@ -1680,7 +1680,7 @@ Example output:
 |Work Notes List|string|None|False|Users interested in work notes|None|
 
 
-## Troubleshooting
+# Troubleshooting
   
 *This plugin does not contain a troubleshooting.*
 
