@@ -455,7 +455,7 @@ Example output:
 |Hostname|string|None|False|Hostname|None|
 
 
-# Troubleshooting
+## Troubleshooting
 
 * If the actions `Get Agent Details` and `Get All Agents by IP` return a `next cursor` value, it is an indication that more pages of data are available to be reviewed. In this instance, it is recommended to run the action multiple times and pass the `next cursor` value, recording all agents found.
 
