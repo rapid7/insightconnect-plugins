@@ -25,6 +25,10 @@ STUB_STATE_EXPECTED_SECOND_PAGE = {
     "last_alert_hash": ["f4ef7617f46fef7b78410498f563e01df2a5f030"],
 }
 
+STUB_STATE_NO_PAGES = {
+
+}
+
 STUB_STATE_MORE_PAGES = {
     "current_count": 1,
     "last_search_to": 100,
@@ -118,6 +122,8 @@ class TestMonitorAlerts(TestCase):
         mock_req.return_value = mock_conditions(200, file_name=response_file)
 
         output, state, has_more_pages, status_code, _ = self.task.run(state=state)
+        print(state)
+        print(expected_state)
 
         self.assertEqual(expected_output, output)
         self.assertEqual(expected_has_more_pages, has_more_pages)
