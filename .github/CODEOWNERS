@@ -1,0 +1,3 @@
+.github/CODEOWNERS @rapid7/pd-code-owners
+docs/CODEOWNERS  @rapid7/pd-code-owners
+.snyk @rapid7/snyk-exceptions @rapid7/pd-code-owners
