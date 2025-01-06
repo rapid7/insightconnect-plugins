@@ -25,6 +25,11 @@ STUB_STATE_EXPECTED_SECOND_PAGE = {
     "last_alert_hash": ["f4ef7617f46fef7b78410498f563e01df2a5f030"],
 }
 
+STUB_STATE_NO_PAGES = {
+    "last_alert_time": 1706540499609,
+    "last_alert_hash": ["a502a9c50798186882ad8dc91ac2b38eb185c404"],
+}
+
 STUB_STATE_MORE_PAGES = {
     "current_count": 1,
     "last_search_to": 100,
@@ -78,18 +83,18 @@ class TestMonitorAlerts(TestCase):
                 "starting",
                 {},
                 TaskUtil.load_expected("monitor_alerts"),
-                True,
+                False,
                 "monitor_alerts",
-                STUB_STATE_MORE_PAGES,
+                STUB_STATE_NO_PAGES,
                 200,
             ],
             [
                 "next_page",
                 STUB_STATE_MORE_PAGES.copy(),
                 TaskUtil.load_expected("monitor_alert_two"),
-                True,
+                False,
                 "monitor_alerts_two",
-                STUB_STATE_EXPECTED_SECOND_PAGE,
+                STUB_STATE_EXPECTED_NO_PAGE,
                 200,
             ],
             [
@@ -250,7 +255,7 @@ class TestMonitorAlerts(TestCase):
 
         self.assertEqual(status_code, expected_status_code)
         self.assertEqual(input_state, state)
-        self.assertEqual(has_more_pages, True)
+        self.assertEqual(has_more_pages, False)
         self.assertEqual(output, [])
 
     @parameterized.expand(
@@ -353,4 +358,4 @@ class TestMonitorAlerts(TestCase):
         self.assertEqual(output, expected_output)
         self.assertEqual(status_code, expected_status_code)
         self.assertEqual(input_state, state)
-        self.assertEqual(has_more_pages, True)
+        self.assertEqual(has_more_pages, False)
