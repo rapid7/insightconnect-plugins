@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Find all agents that share the same public or private IP address and display details about them. If additional pages of agents are available, the action should be run again with the returned next cursor"
+    DESCRIPTION = "This action is used to find all agents that share the same public or private IP address and display details about them. If additional pages of agents are available, the action should be run again with the returned next cursor"
 
 
 class Input:
