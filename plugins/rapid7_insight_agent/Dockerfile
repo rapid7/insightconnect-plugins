@@ -5,8 +5,6 @@ LABEL sdk=python
 
 WORKDIR /python/src
 
-
-
 ADD ./plugin.spec.yaml /plugin.spec.yaml
 ADD ./requirements.txt /python/src/requirements.txt
 
