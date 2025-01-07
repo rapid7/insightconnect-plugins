@@ -80,7 +80,8 @@ Example output:
 
 #### Get Agent Details
 
-This action is used to find and display detailed information about a device. If additional pages of agents are available, the action should be run again with the returned next cursor
+This action is used to find and display detailed information about a device. If additional pages of agents are 
+available, the action should be run again with the returned next cursor
 
 ##### Input
 
@@ -142,8 +143,9 @@ Example output:
 ```
 
 #### Get All Agents by IP Address
-
-This action is used to find all agents that share the same public or private IP address and display details about them. If additional pages of agents are available, the action should be run again with the returned next cursor
+  
+This action is used to find all agents that share the same public or private IP address and display details about them. 
+If additional pages of agents are available, the action should be run again with the returned next cursor
 
 ##### Input
 
@@ -455,7 +457,7 @@ Example output:
 
 ## Troubleshooting
 
-If the actions `Get Agent Details` and `Get All Agents by IP` return a `next cursor` value, it is an indication that more pages of data are available to be reviewed. In this instance, it is recommended to run the action multiple times and pass the `next cursor` value, recording all agents found.
+* If the actions `Get Agent Details` and `Get All Agents by IP` return a `next cursor` value, it is an indication that more pages of data are available to be reviewed. In this instance, it is recommended to run the action multiple times and pass the `next cursor` value, recording all agents found.
 
 # Version History
 
