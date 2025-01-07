@@ -19,7 +19,8 @@ key_features:
   - Search Database for vulnerabilities
   - Retrieve vulnerability or Metasploit module details based on a CVE or module identifier
 requirements: "_This plugin does not contain any requirements._"
-troubleshooting: "_This plugin does not contain any troubleshooting information._"
+troubleshooting:
+  - "This plugin does not contain any troubleshooting information."
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_vulndb
