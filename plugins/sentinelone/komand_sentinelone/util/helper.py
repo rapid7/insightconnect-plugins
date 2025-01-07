@@ -88,9 +88,9 @@ def format_subdomain(instance: str) -> str:
 
     # Remove the scheme if it exists
     if instance.startswith("http://"):
-        instance = instance[len("http://"):]
+        instance = instance[len("http://") :]
     elif instance.startswith("https://"):
-        instance = instance[len("https://"):]
+        instance = instance[len("https://") :]
 
     # Remove the SentinelOne domain suffix
     if ".sentinelone.net" in instance:
