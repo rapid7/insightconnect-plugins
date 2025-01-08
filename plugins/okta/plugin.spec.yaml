@@ -30,7 +30,8 @@ hub_tags:
   use_cases: [application_management, user_management]
   keywords: [sso, provisioning, deprovisioning, saml, cloud_enabled]
   features: []
-troubleshooting: "Actions may fail depending on the state of the resource you attempt to operate over. They will return a best-effort message indicating why the Okta API responded the way it did when possible. Depending on the API endpoint, this message is either provided by Okta themselves, or constructed by the plugin based on the information it has at hand."
+troubleshooting:
+  - "Actions may fail depending on the state of the resource you attempt to operate over. They will return a best-effort message indicating why the Okta API responded the way it did when possible. Depending on the API endpoint, this message is either provided by Okta themselves, or constructed by the plugin based on the information it has at hand."
 version_history:
   - "4.2.12 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities"
   - "4.2.11 - Initial updates for fedramp compliance | Updated SDK to the latest version"
