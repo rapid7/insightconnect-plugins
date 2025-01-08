@@ -86,11 +86,14 @@ def format_subdomain(instance: str) -> str:
     If an input subdomain contains a scheme or the SentinelOne second-level domain, strip these values
     """
 
+    # Remove leading and trailing whitespace
+    instance = instance.strip()
+
     # Remove the scheme if it exists
     if instance.startswith("http://"):
-        instance = instance[len("http://") :]
+        instance = instance[7:]
     elif instance.startswith("https://"):
-        instance = instance[len("https://") :]
+        instance = instance[8:]
 
     # Remove the SentinelOne domain suffix
     if ".sentinelone.net" in instance:

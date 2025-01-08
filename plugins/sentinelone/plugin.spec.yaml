@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 11.1.4
+version: 11.1.3
 connection_version: 10
 cloud_ready: true
 fedramp_ready: true
@@ -58,8 +58,7 @@ hub_tags:
   keywords: [sentinelone, endpoint, detection, cloud_enabled]
   features: []
 version_history:
-  - "11.1.4 - Fix issue with URL input validation"
-  - "11.1.3 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities"
+  - "11.1.3 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities | Fix issue with URL input validation"
   - "11.1.2 - Resolve issue where unexpected timestamps returned from SentinelOne were not parsed in task `Monitor Logs` | Update plugin to be FedRAMP compliant"
   - "11.1.1 - Updated Plugin connection to improve `instance` input usability"
   - "11.1.0 - Added connection test for task `Monitor Logs` | Update SDK"
