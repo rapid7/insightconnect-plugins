@@ -51,43 +51,52 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         try:
             alert_limit = self.get_alert_limit(custom_config=custom_config)
             now_time = self._get_current_time()
-            start_time = self._parse_custom_config(custom_config, now_time, existing_state)
+            start_time, end_time, search_from, search_to = self.get_query_values(custom_config, now_time, existing_state, alert_limit)
+
+            query_values = {
+                QUERY_START_TIME: start_time,
+                QUERY_END_TIME: end_time,
+                "search_from": search_from,
+                "search_to": search_to,
+            }
 
             self.logger.info("Starting to download alerts...")
 
             response, state, has_more_pages = self.get_alerts_palo_alto(
-                state=state, start_time=start_time, now=now_time, alert_limit=alert_limit
+                state=state, query_values=query_values
             )
 
             return response, state, has_more_pages, 200, None
 
         except APIException as error:
+            raise error
             return (
                 [],
                 {},
                 False,
                 error.status_code,
-                PluginException(data=error, cause=error.cause, assistance=error.assistance),
+                error
             )
 
         except PluginException as error:
+            status_code = 500
             if isinstance(error.data, Response):
                 # if there is response data in the error then use it in the exception
-                status_code = error.data.status_code
-            else:
-                status_code = 500
-
+                if error.data.status_code != 200:
+                    status_code = error.data.status_code
+            raise error
             self.logger.error(
                 f"A PluginException has occurred. Status code {status_code} returned. Error: {error}. "
                 f"Existing state: {existing_state}"
             )
-            return [], existing_state, False, status_code, PluginException(data=error)
+            return [], existing_state, False, status_code, error
 
         except Exception as error:
             self.logger.error(
                 f"Unknown exception has occurred. No results returned. Error: {error} "
                 f"Existing state: {existing_state}"
             )
+            raise error
             return (
                 [],
                 existing_state,
@@ -99,33 +108,29 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
     ###########################
     # Make request
     ###########################
-    def get_alerts_palo_alto(self, state: dict, start_time: Optional[int], now: int, alert_limit: int):
-        """ """
-
-        query_start_time = state.get(QUERY_START_TIME, start_time)
-        query_end_time = state.get(QUERY_END_TIME, now)
-
-        search_from = state.get(LAST_SEARCH_TO, 0)
-        search_to = search_from + alert_limit
+    def get_alerts_palo_alto(self, state: dict, query_values: dict, alert_limit: int):
 
         post_body = self.build_post_body(
-            search_from=search_from, search_to=search_to, start_time=query_start_time, end_time=query_end_time
+            search_from=query_values.get("search_from"),
+            search_to=query_values.get("search_to"),
+            start_time=query_values.get(QUERY_START_TIME),
+            end_time=query_values.get(QUERY_END_TIME)
         )
 
         results, results_count, total_count = self.connection.xdr_api.get_response_alerts(post_body)
 
-        state[CURRENT_COUNT] = state.get(CURRENT_COUNT, 0) + results_count
-
         new_alerts, new_alert_hashes, last_alert_time = self._dedupe_and_get_highest_time(results, state)
+
+        state[CURRENT_COUNT] = state.get(CURRENT_COUNT, 0) + new_alerts
+
         is_paginating = results_count >= alert_limit
 
         if is_paginating:
             self.logger.info(f"Found total alerts={total_count}, limit={alert_limit}, is_paginating={is_paginating}")
             self.logger.info(
-                f"Paginating alerts: Saving state with existing filters: "
+                f"More pages available, saving existing search window to state: "
                 f"search_from = {search_from} "
                 f"search_to = {search_to} "
-                f"results returned this page = {results_count} "
                 f"current_count = {state.get(CURRENT_COUNT)} "
                 f"total_count = {total_count}"
             )
@@ -135,14 +140,13 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             state[QUERY_END_TIME] = query_end_time
         else:
             self.logger.info(
-                f"Paginating final page of alerts: "
+                f"Read all pages of alerts: "
                 f"search_from = {search_from} "
                 f"search_to = {search_to} "
-                f"results returned this page = {results_count} "
                 f"current_count = {state.get(CURRENT_COUNT)} "
                 f"total_count = {total_count} "
             )
-            state = self._drop_pagination_state(state)
+            state = {}
 
         # add the last alert time to the state if it exists
         # if not then set to the last queried time to move the filter forward
@@ -199,6 +203,61 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         self.logger.debug(f"Last hash is {new_hashes}")
 
         return new_alerts, new_hashes, highest_timestamp
+
+    def get_query_values(self, custom_config, now_unix, saved_state, alert_limit):
+        """
+        Takes custom config from CPS and allows the specification of a new start time for alerts,
+        and allows the limit to be customised.
+
+        :param custom_config: custom_config for the plugin
+        :param now: datetime representing 'now' in unix
+        :param saved_state: existing state of the integration
+        :param: if pagination is required
+        :return: unix time to apply to queries, and current alert
+        """
+        now_date_time = self.convert_unix_to_datetime(now_unix)
+        start_time, end_time, max_lookback_date_time = self.get_query_times(saved_state, now_unix)
+        search_from = saved_state.get(LAST_SEARCH_FROM, 0)
+        search_to = saved_state.get(LAST_SEARCH_TO, 0) + alert_limit
+
+        if custom_config and not saved_state:
+            self.logger.info("Custom config found and task is in its first run")
+            start_time, max_lookback_date_time = self._parse_custom_config2(custom_config, now_date_time)
+
+        # First run
+        if not start_time:
+            start_time = self.convert_datetime_to_unix(now_date_time - timedelta(hours=DEFAULT_LOOKBACK_HOURS))
+
+        # Check start_time in comparison to max_lookback
+        max_lookback_unix = self.convert_datetime_to_unix(max_lookback_date_time)
+        if start_time < max_lookback_unix:
+            self.logger.info(f"Start time of {start_time} exceeds cutoff of {max_lookback_unix}")
+            start_time = max_lookback_unix
+            search_from = 0
+            search_to = alert_limit
+
+        self.logger.info(f"Setting query start time to {start_time}")
+        self.logger.info(f"Setting query end time to {end_time}")
+        return start_time, end_time, search_from, search_to
+
+
+    def _parse_custom_config2(self, custom_config, now_datetime):
+        self.logger.info("Custom config found and task is in it's first run")
+        # Get custom config lookback value only if start_time in state is cleared
+        custom_timings = custom_config.get(LAST_ALERT_TIME, {})
+        custom_date = custom_timings.get("date")
+        custom_hours = custom_timings.get("hours", DEFAULT_LOOKBACK_HOURS)
+        start_time = datetime(**custom_date) if custom_date else (now_datetime - timedelta(hours=custom_hours))
+        start_time = self.convert_datetime_to_unix(start_time)
+
+        # Get max lookback from custom config
+        max_lookback_days = custom_config.get(MAX_LOOKBACK_DAYS, MAX_LOOKBACK_DAYS)
+        max_lookback_time = custom_config.get(f"max_{LAST_ALERT_TIME}", {})
+        max_lookback = (
+            datetime(**max_lookback_time) if max_lookback_time else now_datetime - timedelta(days=max_lookback_days)
+        )
+
+        return start_time, max_lookback
 
     ###########################
     # Custom Config
@@ -314,11 +373,10 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
     def convert_timestamp_to_string(self, timestamp: int) -> str:
         return datetime.fromtimestamp(timestamp / 1000, tz=timezone.utc).strftime(TIME_FORMAT)
 
-    @staticmethod
-    def _get_current_time():
+    def _get_current_time(self):
         # Gets the last 15 minutes in UNIX
         last_15_min = datetime.utcnow() - timedelta(minutes=15)
-        return int(last_15_min.timestamp()) * 1000
+        return self.convert_datetime_to_unix(last_15_min)
 
     def _drop_pagination_state(self, state: dict = {}) -> Dict[str, Union[int, str, list]]:
         """
@@ -354,3 +412,19 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             alert_limit = ALERT_LIMIT
 
         return alert_limit
+
+    def get_query_times(self, state, now_unix):
+        now_date_time = self.convert_unix_to_datetime(now_unix)
+
+        last_query_start_time = state.get(QUERY_START_TIME)
+        last_query_end_time = state.get(QUERY_END_TIME)
+        max_lookback_date = now_date_time - timedelta(days=MAX_LOOKBACK_DAYS)
+
+        if last_query_start_time and last_query_end_time:
+            self.logger.info("More pages available, attempting to retain query start and end times")
+            start_time = last_query_start_time
+            end_time = last_query_end_time
+        else:
+            start_time = last_query_end_time
+            end_time = now_unix
+        return start_time, end_time, max_lookback_date
