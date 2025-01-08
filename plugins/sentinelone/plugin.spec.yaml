@@ -3,6 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
+description: "[SentinelOne](https://www.sentinelone.com/) is a next-gen cybersecurity company focused on protecting the enterprise through the endpoint. The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne.\n\nThis plugin utilizes the SentinelOne API, the documentation is located in the SentinelOne console"
 version: 11.1.3
 connection_version: 10
 cloud_ready: true
@@ -12,7 +13,6 @@ sdk:
   version: 6.2.2
   user: nobody
 supported_versions: ["2.1.0"]
-description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
 vendor: rapid7
 support: rapid7
 status: []
@@ -43,7 +43,11 @@ references:
   - "[SentinelOne Product Page](https://www.sentinelone.com/)"
 requirements:
   - "SentinelOne API key"
-troubleshooting: "* To generate an API key, create a new Service User or select an existing one with adequate permissions from the SentinelOne console\n* To convert `threat` into an array use Type Converter Plugin\n* For the Trigger settings, only set the Resolved field to False if solely resolved threats should be retrieved (i.e. setting to False will not include unresolved threats)\n* The Run Remote Script action may require starting a protected actions session to function properly. To do this, in the `code` input field, enter the passcode from a third-party app, such as Duo Mobile or Google Authenticator, set up in two-factor authentication. Entering the code is not required each time you run the action, because the session is valid for 30 minutes"
+troubleshooting:
+- "To generate an API key, create a new Service User or select an existing one with adequate permissions from the SentinelOne console"
+- "To convert `threat` into an array use Type Converter Plugin"
+- "For the Trigger settings, only set the Resolved field to False if solely resolved threats should be retrieved (i.e. setting to False will not include unresolved threats)"
+- "The Run Remote Script action may require starting a protected actions session to function properly. To do this, in the `code` input field, enter the passcode from a third-party app, such as Duo Mobile or Google Authenticator, set up in two-factor authentication. Entering the code is not required each time you run the action, because the session is valid for 30 minutes"
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/sentinelone
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -58,7 +62,7 @@ hub_tags:
   keywords: [sentinelone, endpoint, detection, cloud_enabled]
   features: []
 version_history:
-  - "11.1.3 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities"
+  - "11.1.3 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities | Fix issue with URL input validation"
   - "11.1.2 - Resolve issue where unexpected timestamps returned from SentinelOne were not parsed in task `Monitor Logs` | Update plugin to be FedRAMP compliant"
   - "11.1.1 - Updated Plugin connection to improve `instance` input usability"
   - "11.1.0 - Added connection test for task `Monitor Logs` | Update SDK"
