@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_vulndb
 title: Rapid7 Vulnerability & Exploit Database
 description: Make searching the Rapid7 vulnerability and exploit data fast, easy and efficient with the InsightConnect plugin. Leverage this curated repository of vetted computer software exploits and exploitable vulnerabilities to ensure your security operations are always aware of the latest threats that could be used against your environment vulnerabilities
-version: 2.1.4
+version: 2.1.5
 connection_version: 2
 supported_versions: ["v1"]
 vendor: rapid7
@@ -13,13 +13,14 @@ cloud_ready: true
 fedramp_ready: true
 sdk:
   type: slim
-  version: 6.1.0
+  version: 6.2.2
   user: nobody
 key_features:
   - Search Database for vulnerabilities
   - Retrieve vulnerability or Metasploit module details based on a CVE or module identifier
 requirements: "_This plugin does not contain any requirements._"
-troubleshooting: "_This plugin does not contain any troubleshooting information._"
+troubleshooting:
+  - "This plugin does not contain any troubleshooting information."
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_vulndb
@@ -36,6 +37,7 @@ references:
 links:
 - "[Rapid7 Vulnerability & Exploit Database API Specification](https://vdb.rapid7.com/swagger_doc)"
 version_history:
+- "2.1.5 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities"
 - "2.1.4 - Initial updates for fedramp compliance | Updated SDK to the latest version"
 - "2.1.3 - Fix critical Snyk vulnerability | Update SDK"
 - "2.1.2 - Bumping SDK version to 5.6.1"
