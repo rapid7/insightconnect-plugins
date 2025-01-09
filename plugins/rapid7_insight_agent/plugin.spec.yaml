@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insight_agent
 title: Rapid7 Insight Agent
 description: Using the Insight Agent plugin from InsightConnect, you can quarantine, unquarantine and monitor potentially malicious IPs, addresses, hostnames, and devices across your organization
-version: 3.0.1
+version: 3.0.2
 connection_version: 2
 supported_versions: ["Rapid7 Insight Agent 2024-08-23"]
 vendor: rapid7
@@ -21,12 +21,14 @@ key_features:
 requirements:
   - "[Platform API Key](https://docs.rapid7.com/insight/managing-platform-api-keys/)"
   - "Administrator access to InsightIDR"
-troubleshooting: "If the actions `Get Agent Details` and `Get All Agents by IP` return a `next cursor` value, it is an indication that more pages of data are available to be reviewed. In this instance, it is recommended to run the action multiple times and pass the `next cursor` value, recording all agents found."
+troubleshooting:
+  - "If the actions `Get Agent Details` and `Get All Agents by IP` return a `next cursor` value, it is an indication that more pages of data are available to be reviewed. In this instance, it is recommended to run the action multiple times and pass the `next cursor` value, recording all agents found."
 links:
   - "[Rapid7 Insight Agent](https://docs.rapid7.com/insight-agent/overview/)"
 references:
   - "[Manage Platform API Keys](https://docs.rapid7.com/insight/managing-platform-api-keys/)"
 version_history:
+  - "3.0.2 - Updated to use latest buildpack to address vulnerabilities | Update `Get Agent Details`:  extended output to include `agent` field when no assets are found"
   - "3.0.1 - Update 'Get Agent Details' to allow no assets to be returned | SDK bump to latest version"
   - "3.0.0 - Update `Get Agent Details` and `Get All Agents by IP` to return the next page token if more pages are available to search | Update `Get Agent Details` to return agent location details | Initial updates for fedramp compliance | Updated SDK to the latest version"
   - "2.1.2 - Improve logging | Update SDK"
@@ -318,7 +320,7 @@ actions:
         example: 9de5069c5afe602b2ea0a04b66beb2c0
   get_all_agents_by_ip:
     title: Get All Agents by IP Address
-    description: Find all agents that share the same public or private IP address and display details about them. If additional pages of agents are available, the action should be run again with the returned next cursor
+    description: This action is used to find all agents that share the same public or private IP address and display details about them. If additional pages of agents are available, the action should be run again with the returned next cursor
     input:
       ip_address:
         title: IP Address
