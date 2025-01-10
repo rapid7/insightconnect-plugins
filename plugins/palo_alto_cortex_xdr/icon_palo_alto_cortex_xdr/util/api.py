@@ -447,8 +447,17 @@ class CortexXdrAPI:
         endpoint = "public_api/v1/alerts/get_alerts"
 
         url = f"{fqdn}{endpoint}"
-
-        response = self.build_request(url=url, headers=headers, post_body=post_body)
+        try:
+            response = self.build_request(url=url, headers=headers, post_body=post_body)
+        except PluginException as error:
+            if isinstance(error.data, Response):
+                raise APIException(
+                    cause=error.cause,
+                    assistance=error.assistance,
+                    data=error.data.text,
+                    status_code=error.data.status_code,
+                )
+            raise error
 
         response = self._handle_401(response=response, url=url, post_body=post_body)
 
@@ -502,20 +511,24 @@ class CortexXdrAPI:
         request = requests.Request(method="post", url=url, headers=headers, json=post_body)
 
         custom_config_exceptions = {
-            HTTPStatusCodes.BAD_REQUEST: PluginException(cause="API Error. ", assistance="Bad request, invalid JSON."),
+            HTTPStatusCodes.BAD_REQUEST: PluginException(
+                cause=PluginException.causes.get(PluginException.Preset.BAD_REQUEST),
+                assistance="Bad request, invalid JSON.",
+            ),
             HTTPStatusCodes.UNAUTHORIZED: PluginException(
-                cause="API Error. ", assistance="Authorization failed. Check your API Key ID & API Key."
+                cause=PluginException.causes.get(PluginException.Preset.INVALID_CREDENTIALS),
+                assistance="Authorization failed. Check your API Key ID & API Key.",
             ),
             HTTPStatusCodes.PAYMENT_REQUIRED: PluginException(
-                cause="API Error. ",
+                cause=PluginException.causes.get(PluginException.Preset.UNAUTHORIZED),
                 assistance="Unauthorized access. User does not have the required license type to run this API.",
             ),
             HTTPStatusCodes.FORBIDDEN: PluginException(
-                cause="API Error. ",
+                cause=PluginException.causes.get(PluginException.Preset.UNAUTHORIZED),
                 assistance="Forbidden. The provided API Key does not have the required RBAC permissions to run this API.",
             ),
             HTTPStatusCodes.NOT_FOUND: PluginException(
-                cause="API Error. ",
+                cause=PluginException.causes.get(PluginException.Preset.NOT_FOUND),
                 assistance=f"The object at {url} does not exist. Check the FQDN connection setting and try again.",
             ),
         }
