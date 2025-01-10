@@ -112,7 +112,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             end_time=query_values.QUERY_END_TIME,
         )
 
-        results, results_count, total_count = self.connection.xdr_api.get_response_alerts(post_body)
+        results, _, total_count = self.connection.xdr_api.get_response_alerts(post_body)
 
         new_alerts, new_alert_hashes = self._dedupe_and_get_highest_time(results, state)
 
