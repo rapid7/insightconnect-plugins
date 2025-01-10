@@ -10,7 +10,9 @@ from .schema import (
 from datetime import datetime, timedelta, timezone
 from insightconnect_plugin_runtime.exceptions import PluginException, APIException
 from insightconnect_plugin_runtime.helper import hash_sha1
-from typing import Any, Dict, Tuple, Union, Optional
+from typing import Any, Dict, Tuple, Union
+from dataclasses import dataclass
+
 
 TIME_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
 MAX_LOOKBACK_DAYS = 7
@@ -19,19 +21,27 @@ DEFAULT_LOOKBACK_HOURS = 24
 ALERT_LIMIT = 100
 
 # State held values
-LAST_ALERT_TIME = "last_alert_time"
 LAST_ALERT_HASH = "last_alert_hash"
 CURRENT_COUNT = "current_count"
-
-# State held values for paging through results
 QUERY_START_TIME = "query_start_time"
 QUERY_END_TIME = "query_end_time"
+QUERY_SEARCH_FROM = "search_from"
+QUERY_SEARCH_TO = "search_to"
 
 # General Pagination
 LAST_SEARCH_FROM = "last_search_from"
 LAST_SEARCH_TO = "last_search_to"
-TIMESTAMP_KEY = "detection_timestamp"
+ALERT_TIMESTAMP_KEY = "detection_timestamp"
 ALERT_ID_KEY = "alert_id"
+QUERY_TIMESTAMP_KEY = "creation_time"
+
+
+@dataclass
+class QueryValues:
+    QUERY_START_TIME: int
+    QUERY_END_TIME: int
+    QUERY_SEARCH_FROM: int
+    QUERY_SEARCH_TO: int
 
 
 class MonitorAlerts(insightconnect_plugin_runtime.Task):
@@ -43,40 +53,25 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             output=MonitorAlertsOutput(),
             state=MonitorAlertsState(),
         )
-        self.time_sort_field = "creation_time"
 
     def run(self, params={}, state={}, custom_config: dict = {}):  # pylint: disable=unused-argument
         existing_state = state.copy()
 
         try:
             alert_limit = self.get_alert_limit(custom_config=custom_config)
-            now_time = self._get_current_time()
-            start_time, end_time, search_from, search_to = self.get_query_values(custom_config, now_time, existing_state, alert_limit)
-
-            query_values = {
-                QUERY_START_TIME: start_time,
-                QUERY_END_TIME: end_time,
-                "search_from": search_from,
-                "search_to": search_to,
-            }
+            now_time_unix = self._get_current_time()
+            query_values = self.calculate_query_values(custom_config, now_time_unix, existing_state, alert_limit)
 
             self.logger.info("Starting to download alerts...")
 
             response, state, has_more_pages = self.get_alerts_palo_alto(
-                state=state, query_values=query_values
+                state=state, query_values=query_values, alert_limit=alert_limit
             )
 
             return response, state, has_more_pages, 200, None
 
         except APIException as error:
-            raise error
-            return (
-                [],
-                {},
-                False,
-                error.status_code,
-                error
-            )
+            return ([], existing_state, False, error.status_code, error)
 
         except PluginException as error:
             status_code = 500
@@ -84,7 +79,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 # if there is response data in the error then use it in the exception
                 if error.data.status_code != 200:
                     status_code = error.data.status_code
-            raise error
             self.logger.error(
                 f"A PluginException has occurred. Status code {status_code} returned. Error: {error}. "
                 f"Existing state: {existing_state}"
@@ -96,7 +90,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 f"Unknown exception has occurred. No results returned. Error: {error} "
                 f"Existing state: {existing_state}"
             )
-            raise error
             return (
                 [],
                 existing_state,
@@ -108,49 +101,40 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
     ###########################
     # Make request
     ###########################
-    def get_alerts_palo_alto(self, state: dict, query_values: dict, alert_limit: int):
+    def get_alerts_palo_alto(self, state: dict, query_values: QueryValues, alert_limit: int):
 
         post_body = self.build_post_body(
-            search_from=query_values.get("search_from"),
-            search_to=query_values.get("search_to"),
-            start_time=query_values.get(QUERY_START_TIME),
-            end_time=query_values.get(QUERY_END_TIME)
+            search_from=query_values.QUERY_SEARCH_FROM,
+            search_to=query_values.QUERY_SEARCH_TO,
+            start_time=query_values.QUERY_START_TIME,
+            end_time=query_values.QUERY_END_TIME,
         )
 
         results, results_count, total_count = self.connection.xdr_api.get_response_alerts(post_body)
 
         new_alerts, new_alert_hashes, last_alert_time = self._dedupe_and_get_highest_time(results, state)
 
-        state[CURRENT_COUNT] = state.get(CURRENT_COUNT, 0) + new_alerts
+        state[CURRENT_COUNT] = state.get(CURRENT_COUNT, 0) + len(new_alerts)
 
         is_paginating = results_count >= alert_limit
 
-        if is_paginating:
-            self.logger.info(f"Found total alerts={total_count}, limit={alert_limit}, is_paginating={is_paginating}")
-            self.logger.info(
-                f"More pages available, saving existing search window to state: "
-                f"search_from = {search_from} "
-                f"search_to = {search_to} "
-                f"current_count = {state.get(CURRENT_COUNT)} "
-                f"total_count = {total_count}"
-            )
-            state[LAST_SEARCH_TO] = search_to
-            state[LAST_SEARCH_FROM] = search_from
-            state[QUERY_START_TIME] = query_start_time
-            state[QUERY_END_TIME] = query_end_time
-        else:
-            self.logger.info(
-                f"Read all pages of alerts: "
-                f"search_from = {search_from} "
-                f"search_to = {search_to} "
-                f"current_count = {state.get(CURRENT_COUNT)} "
-                f"total_count = {total_count} "
-            )
-            state = {}
+        log_string = (
+            f"search_from = {query_values.QUERY_SEARCH_FROM} "
+            f"search_to = {query_values.QUERY_SEARCH_TO} "
+            f"current_count = {state.get(CURRENT_COUNT, 0)} "
+            f"total_count = {total_count}"
+        )
 
-        # add the last alert time to the state if it exists
-        # if not then set to the last queried time to move the filter forward
-        state[LAST_ALERT_TIME] = last_alert_time if last_alert_time else now
+        if is_paginating:
+            state[QUERY_START_TIME] = query_values.QUERY_START_TIME
+            state[QUERY_END_TIME] = query_values.QUERY_END_TIME
+            state[LAST_SEARCH_FROM] = query_values.QUERY_SEARCH_FROM
+            state[LAST_SEARCH_TO] = query_values.QUERY_SEARCH_TO
+            self.logger.info(f"More pages available, saving existing search window to state: {log_string}")
+        else:
+            self.logger.info(f"Read all pages of alerts: {log_string}")
+            state = {QUERY_END_TIME: query_values.QUERY_END_TIME}
+
         # update hashes in state only if we've got new ones
         state[LAST_ALERT_HASH] = new_alert_hashes if new_alert_hashes else state.get(LAST_ALERT_HASH, [])
 
@@ -173,7 +157,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         deduped_alerts = 0
         new_alerts = []
         new_hashes = []
-        highest_timestamp = state.get(LAST_ALERT_TIME, 0)
+        highest_timestamp = 0
 
         # Create a new hash for every new alert
         for _, alert in enumerate(alerts):
@@ -193,134 +177,103 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         # If len is 0, all results are deduped so we get list index error, so do quick if check
         if len(new_alerts) > 0:
             # Get the timestamp of the latest alert in the list of results
-            highest_timestamp = new_alerts[-1].get(TIMESTAMP_KEY)
+            highest_timestamp = new_alerts[-1].get(ALERT_TIMESTAMP_KEY)
 
         self.logger.info(f"Received {len(alerts)} alerts")
         self.logger.info(f"Number of duplicates found: {deduped_alerts}")
-        self.logger.info(f"Number of unique/new alerts found: {len(new_alerts)}")
-
-        self.logger.debug(f"Highest timestamp is {highest_timestamp}")
+        self.logger.info(f"Number of new alerts found: {len(new_alerts)}")
+        self.logger.debug(f"Last alert timestamp is {highest_timestamp}")
         self.logger.debug(f"Last hash is {new_hashes}")
 
         return new_alerts, new_hashes, highest_timestamp
 
-    def get_query_values(self, custom_config, now_unix, saved_state, alert_limit):
+    def calculate_query_values(self, custom_config: dict, now_unix: int, saved_state: dict, alert_limit: int):
         """
         Takes custom config from CPS and allows the specification of a new start time for alerts,
         and allows the limit to be customised.
 
         :param custom_config: custom_config for the plugin
-        :param now: datetime representing 'now' in unix
+        :param now_unix: datetime representing 'now' in unix
         :param saved_state: existing state of the integration
-        :param: if pagination is required
-        :return: unix time to apply to queries, and current alert
+        :param: alert_limit: Maximum results per page
+        :return: QueryValues: Get Alerts query input values
         """
         now_date_time = self.convert_unix_to_datetime(now_unix)
         start_time, end_time, max_lookback_date_time = self.get_query_times(saved_state, now_unix)
-        search_from = saved_state.get(LAST_SEARCH_FROM, 0)
+        search_from = saved_state.get(LAST_SEARCH_TO, 0)
         search_to = saved_state.get(LAST_SEARCH_TO, 0) + alert_limit
 
-        if custom_config and not saved_state:
-            self.logger.info("Custom config found and task is in its first run")
-            start_time, max_lookback_date_time = self._parse_custom_config2(custom_config, now_date_time)
+        if custom_config:
+            self.logger.info("Custom config detected")
+            start_time, max_lookback_date_time = self._parse_custom_config(custom_config, now_date_time, start_time)
 
-        # First run
+        # Non pagination run
         if not start_time:
             start_time = self.convert_datetime_to_unix(now_date_time - timedelta(hours=DEFAULT_LOOKBACK_HOURS))
+            end_time = now_unix
 
         # Check start_time in comparison to max_lookback
         max_lookback_unix = self.convert_datetime_to_unix(max_lookback_date_time)
         if start_time < max_lookback_unix:
-            self.logger.info(f"Start time of {start_time} exceeds cutoff of {max_lookback_unix}")
+            self.logger.info(
+                f"Start time of {self.convert_unix_to_datetime(start_time)} exceeds cutoff of {max_lookback_date_time}"
+            )
+            self.logger.info("Adjusting start time to cutoff value")
             start_time = max_lookback_unix
-            search_from = 0
-            search_to = alert_limit
+            if not custom_config:
+                self.logger.info("Resetting search_from and search_to")
+                search_from = 0
+                search_to = alert_limit
 
-        self.logger.info(f"Setting query start time to {start_time}")
-        self.logger.info(f"Setting query end time to {end_time}")
-        return start_time, end_time, search_from, search_to
+        self.logger.info(f"Setting query start time to {self.convert_unix_to_datetime(start_time)}")
+        self.logger.info(f"Setting query end time to {self.convert_unix_to_datetime(end_time)}")
 
-
-    def _parse_custom_config2(self, custom_config, now_datetime):
-        self.logger.info("Custom config found and task is in it's first run")
-        # Get custom config lookback value only if start_time in state is cleared
-        custom_timings = custom_config.get(LAST_ALERT_TIME, {})
-        custom_date = custom_timings.get("date")
-        custom_hours = custom_timings.get("hours", DEFAULT_LOOKBACK_HOURS)
-        start_time = datetime(**custom_date) if custom_date else (now_datetime - timedelta(hours=custom_hours))
-        start_time = self.convert_datetime_to_unix(start_time)
-
-        # Get max lookback from custom config
-        max_lookback_days = custom_config.get(MAX_LOOKBACK_DAYS, MAX_LOOKBACK_DAYS)
-        max_lookback_time = custom_config.get(f"max_{LAST_ALERT_TIME}", {})
-        max_lookback = (
-            datetime(**max_lookback_time) if max_lookback_time else now_datetime - timedelta(days=max_lookback_days)
+        return QueryValues(
+            QUERY_START_TIME=start_time,
+            QUERY_END_TIME=end_time,
+            QUERY_SEARCH_FROM=search_from,
+            QUERY_SEARCH_TO=search_to,
         )
 
-        return start_time, max_lookback
+    def get_query_times(self, state, now_unix):
+        now_date_time = self.convert_unix_to_datetime(now_unix)
+
+        last_query_start_time = state.get(QUERY_START_TIME)
+        last_query_end_time = state.get(QUERY_END_TIME)
+        max_lookback_date_time = now_date_time - timedelta(days=MAX_LOOKBACK_DAYS)
+
+        if last_query_start_time and last_query_end_time:
+            self.logger.info("More pages available, attempting to retain query start and end times")
+            start_time = last_query_start_time
+            end_time = last_query_end_time
+        else:
+            start_time = last_query_end_time
+            end_time = now_unix
+        return start_time, end_time, max_lookback_date_time
 
     ###########################
     # Custom Config
     ###########################
-    def _parse_custom_config(
-        self, custom_config: Dict[str, Any], now: int, saved_state: Dict[int, str]
-    ) -> Tuple[int, int]:
-        """
-        Takes custom config from CPS and allows the specification of a new start time for alerts,
-        and allows the limit to be customised.
+    def _parse_custom_config(self, custom_config, now_datetime, start_time):
+        # Get custom config lookback value only if start_time in state is cleared
+        custom_timings = custom_config.get("lookback", {})
+        custom_date = custom_timings.get("date")
+        custom_hours = custom_timings.get("hours", DEFAULT_LOOKBACK_HOURS)
+        if not start_time:
+            self.logger.info("Task is in its first run")
+            start_time = datetime(**custom_date) if custom_date else (now_datetime - timedelta(hours=custom_hours))
+            start_time = self.convert_datetime_to_unix(start_time)
 
-        :param custom_config: custom_config for the plugin
-        :param now: datetime representing 'now'
-        :param saved_state: existing state of the integration
-        :return: string formatted time to apply to our alert queries, and limit integer to set how many
-        alerts to fetch per run.
-        """
-        state = saved_state.copy()
-        log_msg = ""
-
-        end_time = state.get(QUERY_END_TIME, now)
-        dt_now = self.convert_unix_to_datetime(end_time)
-
-        saved_time = state.get(QUERY_START_TIME, state.get(LAST_ALERT_TIME))
-
-        if not saved_time:
-            log_msg += "No previous alert time within state.\n"
-            custom_timings = custom_config.get(LAST_ALERT_TIME, {})
-            custom_date = custom_timings.get("date")
-            custom_hours = custom_timings.get("hours", DEFAULT_LOOKBACK_HOURS)
-            start = datetime(**custom_date) if custom_date else (dt_now - timedelta(hours=custom_hours))
-            state[LAST_ALERT_TIME] = self.convert_datetime_to_unix(start)
-        else:
-            # check if we have held the TS beyond our max lookback
-            lookback_days = custom_config.get(f"{LAST_ALERT_TIME}_days", MAX_LOOKBACK_DAYS)
-            default_date_lookback = dt_now - timedelta(days=lookback_days)  # if not passed from CPS create on the fly
-            custom_lookback = custom_config.get(f"max_{LAST_ALERT_TIME}", {})
-            comparison_date = datetime(**custom_lookback) if custom_lookback else default_date_lookback
-
-            comparison_unix = self.convert_datetime_to_unix(comparison_date)
-
-            # Update state if saved time exceeds the lookback limit
-            if comparison_unix > saved_time:
-                saved_time_str = self.convert_timestamp_to_string(saved_time)
-                comparison_str = self.convert_timestamp_to_string(comparison_unix)
-                self.logger.info(f"Saved time {saved_time_str} exceeds cut off, moving to {comparison_str}.")
-                state[LAST_ALERT_TIME] = comparison_unix
-
-                # Reset the offsets when changing search timer
-                state[LAST_SEARCH_FROM] = 0
-                state.pop(LAST_SEARCH_TO, None)
-
-                # Reset the end time / default to now
-                state[QUERY_END_TIME] = now
-
-        start_time = state.get(LAST_ALERT_TIME)
-        state[QUERY_START_TIME] = state.get(LAST_ALERT_TIME)
-
-        self.logger.info(
-            f"{log_msg}Applying the following start time='{self.convert_timestamp_to_string(start_time)}'."
+        # Get max lookback from custom config
+        max_lookback_days = custom_config.get("max_lookback_days", MAX_LOOKBACK_DAYS)
+        max_lookback_date_time = custom_config.get("max_lookback_date_time", {})
+        max_lookback = (
+            datetime(**max_lookback_date_time)
+            if max_lookback_date_time
+            else now_datetime - timedelta(days=max_lookback_days)
         )
 
-        return start_time
+        return start_time, max_lookback
 
     ###########################
     # Build post body
@@ -336,19 +289,15 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         :return post_body:
         """
         filters = [
-            {"field": self.time_sort_field, "operator": "gte", "value": start_time},
-            {"field": self.time_sort_field, "operator": "lte", "value": end_time},
+            {"field": QUERY_TIMESTAMP_KEY, "operator": "gte", "value": start_time},
+            {"field": QUERY_TIMESTAMP_KEY, "operator": "lte", "value": end_time},
         ]
-
-        self.logger.info(
-            f"Query start time: {self.convert_timestamp_to_string(start_time)}, Query end time: {self.convert_timestamp_to_string(end_time)}"
-        )
 
         post_body = {
             "request_data": {
                 "search_from": search_from,
                 "search_to": search_to,
-                "sort": {"field": self.time_sort_field, "keyword": "asc"},
+                "sort": {"field": QUERY_TIMESTAMP_KEY, "keyword": "asc"},
                 "filters": filters,
             }
         }
@@ -370,30 +319,10 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         return int(date_time.timestamp() * 1000)
 
-    def convert_timestamp_to_string(self, timestamp: int) -> str:
-        return datetime.fromtimestamp(timestamp / 1000, tz=timezone.utc).strftime(TIME_FORMAT)
-
     def _get_current_time(self):
         # Gets the last 15 minutes in UNIX
         last_15_min = datetime.utcnow() - timedelta(minutes=15)
         return self.convert_datetime_to_unix(last_15_min)
-
-    def _drop_pagination_state(self, state: dict = {}) -> Dict[str, Union[int, str, list]]:
-        """
-        Helper function to pop values from the state if we need to break out of pagination.
-
-        :return: state
-        """
-        for key in (
-            LAST_SEARCH_FROM,
-            LAST_SEARCH_TO,
-            CURRENT_COUNT,
-            QUERY_START_TIME,
-            QUERY_END_TIME,
-        ):
-            state.pop(key, None)
-
-        return state
 
     def get_alert_limit(self, custom_config: dict) -> int:
         """
@@ -412,19 +341,3 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             alert_limit = ALERT_LIMIT
 
         return alert_limit
-
-    def get_query_times(self, state, now_unix):
-        now_date_time = self.convert_unix_to_datetime(now_unix)
-
-        last_query_start_time = state.get(QUERY_START_TIME)
-        last_query_end_time = state.get(QUERY_END_TIME)
-        max_lookback_date = now_date_time - timedelta(days=MAX_LOOKBACK_DAYS)
-
-        if last_query_start_time and last_query_end_time:
-            self.logger.info("More pages available, attempting to retain query start and end times")
-            start_time = last_query_start_time
-            end_time = last_query_end_time
-        else:
-            start_time = last_query_end_time
-            end_time = now_unix
-        return start_time, end_time, max_lookback_date
