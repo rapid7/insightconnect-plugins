@@ -4,7 +4,4 @@
 # These owners will be the default owners for everything in the repo.
 *      @rapid7/soar-backend
 
-
-.github/CODEOWNERS @rapid7/pd-code-owners
-docs/CODEOWNERS  @rapid7/pd-code-owners
 .snyk @rapid7/snyk-exceptions @rapid7/pd-code-owners
