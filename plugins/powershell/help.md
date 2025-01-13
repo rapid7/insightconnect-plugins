@@ -192,13 +192,12 @@ Run this PowerShell command on a Windows host first to set up a unsigned certifi
 This will not be needed if the host already has a SSL certificate set up for Winrm
 
 ```
-
 Invoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1'))
-
 ```
 
 # Version History
 
+* 3.0.7 - Updated dependencies | Updated SDK to the latest version
 * 3.0.6 - Bump SDK to 6.2.0
 * 3.0.5 - Bump requirements.txt | Bump SDK to 6.1.4 | Update help.md to enforce that the use of round-robin DNS lookups is not supported
 * 3.0.4 - Upgrade user from `nobody` to `root` | bump SDK to 6.0.1 and switch back to `Bullseye` based SDK image
