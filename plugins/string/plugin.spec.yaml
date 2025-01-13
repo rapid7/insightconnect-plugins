@@ -45,6 +45,8 @@ version_history:
   - "1.0.0 - Initial plugin"
 troubleshooting:
   - "There may be complex string manipulation needs that are likely outside the scope of this plugin. If this is the case, consider using the Python 3 Script plugin instead."
+  - "For the `Split String to Object` action:, \n\nAny input requiring more than a single key:value pair, e.g. `USER=Bob` needs to use the `block_delimiter` option.\nIn this case, the input string is split by the `block_delimiter` character first, and the resulting items are then split\nby the `string_delimiter` option. Stripping of double-quotes is automatically applied in this situation for each item before the plugin returns it.\n\nThe [output schema](https://docs.komand.com/v0.42.1/docs/python-script-plugins#section-configure-the-plugin-output-schema) on the action's page can be modified to pre-populate the workflow with the names of the keys.\nIt allows users the ability to use the green selector and choose a specific variable later in the workflow by name.\n[Input templating](https://docs.komand.com/docs/input-templating) would need to be used to obtain variables by name otherwise\n"
+  - "More complex string input that contains multiple key:value pairs. These pairs are separated from each other by a space, and the keys and values within each pair are separated by an equal sign:\n\n ```Computer_ID=\"bef41e8b-47b8-e188-8e43-3a2b662dd55d\" Computer_Name=\"dgdemo\ RGWin64\" Computer_Type=\"Windows\" ``` \n\n Setting `block_delimiter` to ` ` and `string_delimiter` to `=` will return the information presented in the example below.\n\n Example output: \n\n ``` { \"object\": { \"Computer_ID\": \"bef41e8b-47b8-e188-8e43-3a2b662dd55d\", \"Computer_Name\": \"dgdemo\ RGWin64\", \"Computer_Type\": \"Windows\" } } ```"
 links:
   - "[Python 3 String Methods](https://docs.python.org/3/library/stdtypes.html#string-methods)"
 references:
@@ -110,7 +112,7 @@ actions:
         example: '["This", "is", "a", "sentence"]'
   split_to_object:
     title: Split String to Object
-    description: "This action is used to convert a string to an object containing key:value strings.\n\nAny input requiring more than a single key:value pair, e.g. `USER=Bob` needs to use the `block_delimiter` option.\nIn this case, the input string is split by the `block_delimiter` character first, and the resulting items are then split\nby the `string_delimiter` option. Stripping of double-quotes is automatically applied in this situation for each item before the plugin returns it.\nThe [output schema](https://docs.komand.com/v0.42.1/docs/python-script-plugins#section-configure-the-plugin-output-schema) on the action's page can be modified to pre-populate the workflow with the names of the keys.\nIt allows users the ability to use the green selector and choose a specific variable later in the workflow by name.\n[Input templating](https://docs.komand.com/docs/input-templating) would need to be used to obtain variables by name otherwise"
+    description: "This action is used to convert a string to an object containing key:value strings"
     input:
       string:
         title: String Input

@@ -207,21 +207,7 @@ Example output:
 
 #### Split String to Object
   
-This action is used to convert a string to an object containing key:value strings.
-
-Any input requiring more than a 
-single key:value pair, e.g. `USER=Bob` needs to use the `block_delimiter` option.
-In this case, the input string is 
-split by the `block_delimiter` character first, and the resulting items are then split
-by the `string_delimiter` option.
- Stripping of double-quotes is automatically applied in this situation for each item before the plugin returns it.
-The 
-[output schema](https://docs.komand.com/v0.42.1/docs/python-script-plugins#section-configure-the-plugin-output-schema) 
-on the action's page can be modified to pre-populate the workflow with the names of the keys.
-It allows users the 
-ability to use the green selector and choose a specific variable later in the workflow by name.
-[Input 
-templating](https://docs.komand.com/docs/input-templating) would need to be used to obtain variables by name otherwise
+This action is used to convert a string to an object containing key:value strings
 
 ##### Input
 
@@ -334,6 +320,25 @@ Example output:
 ## Troubleshooting
 
 * There may be complex string manipulation needs that are likely outside the scope of this plugin. If this is the case, consider using the Python 3 Script plugin instead.
+* For the `Split String to Object` action:, 
+
+Any input requiring more than a single key:value pair, e.g. `USER=Bob` needs to use the `block_delimiter` option.
+In this case, the input string is split by the `block_delimiter` character first, and the resulting items are then split
+by the `string_delimiter` option. Stripping of double-quotes is automatically applied in this situation for each item before the plugin returns it.
+
+The [output schema](https://docs.komand.com/v0.42.1/docs/python-script-plugins#section-configure-the-plugin-output-schema) on the action's page can be modified to pre-populate the workflow with the names of the keys.
+It allows users the ability to use the green selector and choose a specific variable later in the workflow by name.
+[Input templating](https://docs.komand.com/docs/input-templating) would need to be used to obtain variables by name otherwise
+
+* More complex string input that contains multiple key:value pairs. These pairs are separated from each other by a space, and the keys and values within each pair are separated by an equal sign:
+
+ ```Computer_ID="bef41e8b-47b8-e188-8e43-3a2b662dd55d" Computer_Name="dgdemo RGWin64" Computer_Type="Windows" ``` 
+
+ Setting `block_delimiter` to ` ` and `string_delimiter` to `=` will return the information presented in the example below.
+
+ Example output: 
+
+ ``` { "object": { "Computer_ID": "bef41e8b-47b8-e188-8e43-3a2b662dd55d", "Computer_Name": "dgdemo RGWin64", "Computer_Type": "Windows" } } ```
 
 # Version History
 
