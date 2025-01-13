@@ -3,7 +3,7 @@ extension: plugin
 products: ["insightconnect"]
 name: servicenow
 title: ServiceNow
-description: ServiceNow is a tool for managing incidents and configuration management. Using the ServiceNow plugin for Rapid7 InsightConnect, users can manage all aspects of incidents including creation, search, updates, as well as monitor them for changes
+description: "[ServiceNow](https://www.servicenow.com/) is a tool for managing incidents and configuration management. This plugin allows users to manage all aspects of incidents including creation, search, and updates. Additionally, incident changes can be monitored and processed for use in a Rapid7 InsightConnect workflow.\n\nNote: This plugin affects only the underlying tables in a ServiceNow instance, not its UI. Hence, this plugin will work seamlessly with Virtual Task Boards"
 version: 8.0.4
 connection_version: 8
 supported_versions: ["2023-10-28 Tokyo"]
@@ -36,7 +36,8 @@ key_features:
 requirements:
   - "ServiceNow username and password (for basic authentication)"
   - "ServiceNow username, password, client ID, and client secret (for OAuth authentication) "
-  - "ServiceNow instance name"
+  - "ServiceNow instance name\n"
+  - "Please note that to use certain actions it's necessary to use scopes that have permissions on certain tables. Depending on the actions, it's necessary to add specific auth scopes:\n\n- Create/Read/Update/Delete Incident and Incident Attachments (table `incident` with permissions create/read/write/delete)\n- Create/Read/Update/Delete Security Incident (table `sn_si_incident` with permissions create/read/write/delete)\n- Create/Read/Update/Delete Vulnerability (table `sn_vul_vulnerable_item` with permissions create/read/write/delete)\n- Create Change Request (table `sn_chg_rest` with create permissions)"
 links:
   - "[ServiceNow](https://www.servicenow.com/)"
 references:
