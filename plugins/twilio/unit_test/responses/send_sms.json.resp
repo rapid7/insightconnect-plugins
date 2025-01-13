@@ -1,0 +1,24 @@
+{
+  "account_sid": "ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+  "api_version": "2010-04-01",
+  "body": "Hi there",
+  "date_created": "Thu, 24 Aug 2023 05:01:45 +0000",
+  "date_sent": "Thu, 24 Aug 2023 05:01:45 +0000",
+  "date_updated": "Thu, 24 Aug 2023 05:01:45 +0000",
+  "direction": "outbound-api",
+  "error_code": null,
+  "error_message": null,
+  "from": "+15557122661",
+  "num_media": "0",
+  "num_segments": "1",
+  "price": null,
+  "price_unit": null,
+  "messaging_service_sid": "ExampleSSID",
+  "sid": "ExampleMessageSID",
+  "status": "queued",
+  "subresource_uris": {
+    "media": "/2010-04-01/Accounts/ExampleUsername/Messages/ExampleSID/Media.json"
+  },
+  "to": "+15558675310",
+  "uri": "/2010-04-01/Accounts/ExampleUsername/Messages/ExampleSID.json"
+}

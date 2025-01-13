@@ -1,23 +1,33 @@
-import komand
-from .schema import SendSmsInput, SendSmsOutput
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+from .schema import SendSmsInput, SendSmsOutput, Input, Output, Component
+from twilio.base.exceptions import TwilioRestException
+from komand_twilio.util.utils import handle_exception_status_code
 
 
-class SendSms(komand.Action):
+class SendSms(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="send_sms",
-            description="Send an SMS message to a phone number",
+            description=Component.DESCRIPTION,
             input=SendSmsInput(),
             output=SendSmsOutput(),
         )
 
     def run(self, params={}):
-        message = self.connection.client.messages.create(
-            body=params.get("message"),
-            to=params.get("to_number"),
-            from_=self.connection.twilio_phone_number,
-        )
-        return {"message_sid": message.sid}
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        message = params.get(Input.MESSAGE, "")
+        send_to_number = params.get(Input.TO_NUMBER, "").strip()
+        # END INPUT BINDING - DO NOT REMOVE
 
-    def test(self):
-        return {"message_sid": "SM91b89296d763426db7b50d165f6eadfb"}
+        try:
+            message = self.connection.client.messages.create(
+                body=message,
+                to=send_to_number,
+                from_=self.connection.twilio_phone_number,
+            )
+            return {Output.MESSAGE_SID: message.sid}
+        except TwilioRestException as error:
+            handle_exception_status_code(error)
+        except Exception as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
