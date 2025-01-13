@@ -1,5 +1,5 @@
 [
-      {
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -161,8 +161,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -324,8 +324,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -487,8 +487,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -650,8 +650,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -813,8 +813,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -976,8 +976,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -1139,8 +1139,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -1302,8 +1302,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -1465,8 +1465,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -1628,8 +1628,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -1791,8 +1791,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -1954,8 +1954,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -2117,8 +2117,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -2280,8 +2280,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -2443,8 +2443,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -2606,8 +2606,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -2769,8 +2769,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -2932,8 +2932,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -3095,8 +3095,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -3258,8 +3258,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -3421,8 +3421,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -3584,8 +3584,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -3747,8 +3747,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -3910,8 +3910,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -4073,8 +4073,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -4236,8 +4236,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -4399,8 +4399,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -4562,8 +4562,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -4725,8 +4725,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -4888,8 +4888,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -5051,8 +5051,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -5214,8 +5214,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -5377,8 +5377,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -5540,8 +5540,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -5703,8 +5703,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -5866,8 +5866,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-       {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -6029,8 +6029,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -6192,8 +6192,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -6355,8 +6355,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -6518,8 +6518,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -6681,8 +6681,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -6844,8 +6844,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -7007,8 +7007,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -7170,8 +7170,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -7333,8 +7333,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -7496,8 +7496,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -7659,8 +7659,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -7822,8 +7822,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -7985,8 +7985,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -8148,8 +8148,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -8311,8 +8311,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -8474,8 +8474,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -8637,8 +8637,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -8800,8 +8800,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -8963,8 +8963,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -9126,8 +9126,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -9289,8 +9289,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -9452,8 +9452,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -9615,8 +9615,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -9778,8 +9778,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -9941,8 +9941,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -10104,8 +10104,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -10267,8 +10267,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -10430,8 +10430,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -10593,8 +10593,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -10756,8 +10756,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -10919,8 +10919,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -11082,8 +11082,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -11245,8 +11245,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -11408,8 +11408,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -11571,8 +11571,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -11734,8 +11734,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -11897,8 +11897,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -12060,8 +12060,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -12223,8 +12223,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -12386,8 +12386,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -12549,8 +12549,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -12712,8 +12712,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -12875,8 +12875,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -13038,8 +13038,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -13201,8 +13201,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -13364,8 +13364,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -13527,8 +13527,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -13690,8 +13690,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -13853,8 +13853,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -14016,8 +14016,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -14179,8 +14179,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -14342,8 +14342,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -14505,8 +14505,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -14668,8 +14668,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -14831,8 +14831,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -14994,8 +14994,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -15157,8 +15157,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -15320,8 +15320,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -15483,8 +15483,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -15646,8 +15646,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -15809,8 +15809,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -15972,8 +15972,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -16135,8 +16135,8 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      },
-      {
+    },
+    {
         "agent_os_sub_type": "6.3.420",
         "fw_app_category": null,
         "fw_app_id": null,
@@ -16298,6 +16298,5 @@
         "user_name": null,
         "events_length": 1,
         "original_tags": "AS:PANE/XDR Agent"
-      }
-    ]
-
+    }
+]
