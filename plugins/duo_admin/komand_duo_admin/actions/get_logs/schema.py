@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get auth logs, limited to past 180 days"
+    DESCRIPTION = "This action is used to get auth logs, limited to past 180 days.[Currentmillis.com](https://currentmillis.com/) is useful for finding a usable UNIX timestamp.Available inputs for parameters can be found in [Duo Admin API docs](https://duo.com/docs/adminapi#logs:~:text=The%20factor%20or%20method%20used%20for%20an%20authentication%20attempt.%20One%20of%3A)"
 
 
 class Input:
