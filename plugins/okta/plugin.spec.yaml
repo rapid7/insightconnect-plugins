@@ -11,11 +11,11 @@ status: []
 supported_versions: ["Okta API 22-05-2023"]
 sdk:
   type: slim
-  version: 6.1.3
+  version: 6.2.2
   user: nobody
 description: "[Okta](https://www.okta.com/) is a SSO and account lifecycle management provider that allows companies
   to integrate their central user account system with a wide variety of other applications and services"
-version: 4.2.11
+version: 4.2.12
 connection_version: 4
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/okta
@@ -30,8 +30,10 @@ hub_tags:
   use_cases: [application_management, user_management]
   keywords: [sso, provisioning, deprovisioning, saml, cloud_enabled]
   features: []
-troubleshooting: "Actions may fail depending on the state of the resource you attempt to operate over. They will return a best-effort message indicating why the Okta API responded the way it did when possible. Depending on the API endpoint, this message is either provided by Okta themselves, or constructed by the plugin based on the information it has at hand."
+troubleshooting:
+  - "Actions may fail depending on the state of the resource you attempt to operate over. They will return a best-effort message indicating why the Okta API responded the way it did when possible. Depending on the API endpoint, this message is either provided by Okta themselves, or constructed by the plugin based on the information it has at hand."
 version_history:
+  - "4.2.12 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities"
   - "4.2.11 - Initial updates for fedramp compliance | Updated SDK to the latest version"
   - "4.2.10 - Monitor Logs Task: Add exception handling if invalid subdomain provided"
   - "4.2.9 - SDK Bump to 6.1.0 | Task Connection test added"
