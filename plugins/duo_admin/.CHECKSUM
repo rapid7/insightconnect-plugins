@@ -1,5 +1,5 @@
 {
-	"spec": "8368d943b289ee91de79aa9a3f7f4ecf",
+	"spec": "fad15a03e907369003cfbd533d509bdc",
 	"manifest": "b4029998fe0d9bcc85c8016d009d19b3",
 	"setup": "5965f3fd331d7855550e5afad6ea8956",
 	"schemas": [
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "get_logs/schema.py",
-			"hash": "412d7f456b6aba9f4a7b87092212e7d3"
+			"hash": "c00274766932d81a15c5afe9a50d4501"
 		},
 		{
 			"identifier": "get_phones_by_user_id/schema.py",
