@@ -177,7 +177,7 @@ Example output:
 
 ## Troubleshooting
 
-Multiple records can be returned by the server, this plugin currently only returns the first unique records found.
+* Multiple records can be returned by the server, this plugin currently only returns the first unique records found.
 
 # Version History
 
