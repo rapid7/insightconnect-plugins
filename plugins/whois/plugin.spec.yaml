@@ -16,7 +16,7 @@ sdk:
   user: nobody
   packages:
     - whois
-    - git
+    - git -y
 cloud_ready: true
 fedramp_ready: true
 resources:
@@ -32,7 +32,8 @@ hub_tags:
 key_features: ["Perform a WHOIS lookup for a provided IP address or domain to gain information on who is responsible for a domain or IP"]
 references: ["[WHOIS](https://en.wikipedia.org/wiki/WHOIS)"]
 links: ["[WHOIS](https://en.wikipedia.org/wiki/WHOIS)"]
-troubleshooting: "Multiple records can be returned by the server, this plugin currently only returns the first unique records found."
+troubleshooting:
+  - "Multiple records can be returned by the server, this plugin currently only returns the first unique records found."
 version_history:
   - "3.1.7 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities"
   - "3.1.6 - Fix mapping issue (RIPE) for address action. Adding 'description' output field for RIPE (address action) | SDK bump to 6.2.0"
