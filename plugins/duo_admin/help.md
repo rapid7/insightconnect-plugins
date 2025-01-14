@@ -946,7 +946,7 @@ Example output:
 
 ## Troubleshooting
 
-* Many actions in this plugin take a User ID as input. A User ID is not the username - instead it's a unique identifier e.g. DU9I6T0F7R2S1J4XZHHA. A User ID can be obtained by passing a username to the Get User Status action.
+Many actions in this plugin take a User ID as input. A User ID is not the username - instead it's a unique identifier e.g. DU9I6T0F7R2S1J4XZHHA. A User ID can be obtained by passing a username to the Get User Status action.
 
 # Version History
 

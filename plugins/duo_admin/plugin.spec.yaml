@@ -47,8 +47,7 @@ links:
 - "[Duo Security](https://duo.com/)"
 references:
 - "[Duo Admin API](https://duo.com/docs/adminapi)"
-troubleshooting:
-  - "Many actions in this plugin take a User ID as input. A User ID is not the username - instead it's a unique identifier e.g. DU9I6T0F7R2S1J4XZHHA. A User ID can be obtained by passing a username to the Get User Status action."
+troubleshooting: "Many actions in this plugin take a User ID as input. A User ID is not the username - instead it's a unique identifier e.g. DU9I6T0F7R2S1J4XZHHA. A User ID can be obtained by passing a username to the Get User Status action."
 version_history:
 - "5.0.2 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities"
 - "5.0.1 - Update to enable Plugin as FedRAMP ready | Update SDK (`6.1.2`)"

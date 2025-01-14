@@ -21,7 +21,7 @@ from datetime import datetime, timezone
 class TestMonitorLogs(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.action = Util.default_connector(MonitorLogs())
+        cls.task = Util.default_connector(MonitorLogs())
         cls.custom_config = {"cutoff": {"date": "2023-04-30T08:34:46.000Z"}, "lookback": "2023-04-30T08:34:46.000Z"}
 
     @parameterized.expand(
@@ -36,6 +36,12 @@ class TestMonitorLogs(TestCase):
                     "filter_cutoff_trust_monitor_events_logs": {"date": "2023-04-30T08:34:46.000Z"},
                     "lookback": "2023-04-30T08:34:46.000Z",
                 },
+            ],
+            [
+                "with_rate_limit",
+                Util.read_file_to_dict("inputs/monitor_logs_with_rate_limit.json.inp"),
+                Util.read_file_to_dict("expected/monitor_logs_rate_limit.json.exp"),
+                {},
             ],
             [
                 "with_state",
@@ -94,7 +100,7 @@ class TestMonitorLogs(TestCase):
         expected,
         config,
     ):
-        actual, actual_state, has_more_pages, status_code, _ = self.action.run(
+        actual, actual_state, has_more_pages, status_code, _ = self.task.run(
             state=current_state, custom_config=config
         )
         self.assertEqual(actual, expected.get("logs"))
