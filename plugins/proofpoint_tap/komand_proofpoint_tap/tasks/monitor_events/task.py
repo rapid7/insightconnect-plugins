@@ -35,6 +35,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
         )
 
     def run(self, params={}, state={}, custom_config={}):  # noqa: MC0001
+        existing_state = state.copy()
         self.connection.client.toggle_rate_limiting = False
         has_more_pages = False
         try:
@@ -44,7 +45,8 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             now = self.get_current_time() - timedelta(minutes=1)
 
             first_run = not state or not last_collection_date
-            max_allowed_lookback, backfill_date = self._apply_custom_timings(custom_config, now, first_run)
+            is_paginating = True if (not first_run) and next_page_index else False
+            max_allowed_lookback, backfill_date = self._apply_custom_timings(custom_config, now, first_run, is_paginating)
 
             # [PLGN-727] skip comparison check if first run of a backfill, next run should specify lookback to match.
             if not backfill_date:
@@ -62,21 +64,23 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
 
             if first_run:
                 task_start = "First run... "
-                first_time = now - timedelta(hours=1)
+                start_time = now - timedelta(hours=1)
                 if backfill_date:
-                    first_time = backfill_date  # PLGN-727: allow backfill
+                    start_time = backfill_date  # PLGN-727: allow backfill
                     task_start += f"Using custom value of {backfill_date}"
                 self.logger.info(task_start)
-                last_time = first_time + timedelta(hours=1)
-                state[self.LAST_COLLECTION_DATE] = last_time.isoformat()
-                parameters = SiemUtils.prepare_time_range(first_time.isoformat(), last_time.isoformat(), query_params)
+                end_time = (start_time + timedelta(hours=1)).isoformat()
+                start_time = start_time.isoformat()
+                parameters = SiemUtils.prepare_time_range(start_time, end_time, query_params)
             else:
                 if next_page_index:
                     state.pop(self.NEXT_PAGE_INDEX)
+                    end_time = last_collection_date
+                    start_time = (datetime.fromisoformat(last_collection_date) - timedelta(hours=1)).isoformat()
                     self.logger.info(f"Getting the next page (page index {next_page_index}) of results...")
                     parameters = SiemUtils.prepare_time_range(
-                        (datetime.fromisoformat(last_collection_date) - timedelta(hours=1)).isoformat(),
-                        last_collection_date,
+                        start_time,
+                        end_time,
                         query_params,
                     )
                 else:
@@ -99,7 +103,6 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
                         self.logger.info("Do not query API this time round")
                         return [], state, has_more_pages, 200, None
                     else:
-                        state[self.LAST_COLLECTION_DATE] = end_time
                         parameters = SiemUtils.prepare_time_range(start_time, end_time, query_params)
 
             self.logger.info(f"Parameters used to query endpoint: {parameters}")
@@ -125,17 +128,18 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
                     else new_logs_hashes
                 )
 
+                state[self.LAST_COLLECTION_DATE] = end_time
+
                 self.logger.info(f"Retrieved {len(new_unique_logs)} events. Returning has_more_pages={has_more_pages}")
                 return new_unique_logs, state, has_more_pages, 200, None
 
             except ApiException as error:
                 self.logger.info(f"API Exception occurred: status_code: {error.status_code}, error: {error}")
                 state[self.PREVIOUS_LOGS_HASHES] = []
-                return [], state, False, error.status_code, error
+                return [], existing_state, False, error.status_code, error
         except Exception as error:
             self.logger.info(f"Exception occurred in monitor events task: {error}", exc_info=True)
-            state[self.PREVIOUS_LOGS_HASHES] = []
-            return [], state, has_more_pages, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+            return [], existing_state, has_more_pages, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     def determine_page_and_state_values(
         self,
@@ -210,8 +214,15 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             )
         return logs_to_return, new_logs_hashes
 
+    def _get_api_limit_date_time(self, is_paginating, limit_delta_hours, now):
+        if not is_paginating:
+            api_limit_date_time = now - timedelta(hours=limit_delta_hours) + timedelta(minutes=15)
+        else:
+            api_limit_date_time = now - timedelta(hours=limit_delta_hours) + timedelta(minutes=5)
+        return api_limit_date_time
+
     def _apply_custom_timings(
-        self, custom_config: Dict[str, Dict], now: datetime, first_run: bool
+        self, custom_config: Dict[str, Dict], now: datetime, first_run: bool, is_paginating: bool
     ) -> (datetime, datetime):
         """
         If a custom_config is supplied to the plugin we can modify our timing logic.
@@ -239,7 +250,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
 
         # Ensure we never pass values that exceed the API limit of Proofpoint.
         # But allow 5 minutes latency window as we actually have now = now - 1 minute
-        api_limit_date = (now - timedelta(hours=API_MAX_LOOKBACK)) + timedelta(minutes=5)
+        api_limit_date = self._get_api_limit_date_time(is_paginating, API_MAX_LOOKBACK, now)
         if api_limit_date > max_lookback:
             max_lookback = api_limit_date
             self.logger.info(f"**Supplied a max lookback further than allowed. Moving this to {api_limit_date}")

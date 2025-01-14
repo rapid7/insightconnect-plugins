@@ -1,17 +1,18 @@
 import sys
 import os
 
+sys.path.append(os.path.abspath("../"))
+
+
 from unittest.mock import patch
 
 from komand_proofpoint_tap.tasks import MonitorEvents
-from test_util import Util
+from unit_test.test_util import Util
 from unittest import TestCase
 from parameterized import parameterized
 from datetime import datetime, timezone, timedelta
 from json import loads
 from jsonschema import validate
-
-sys.path.append(os.path.abspath("../"))
 
 ENV_VALUE = '{"year": 2024, "month": 1, "day": 27, "hour": 0, "minute": 0, "second": 0}'
 ENV_VALUE_2 = '{"year": 2024, "month": 2, "day": 20, "hour": 12, "minute": 0, "second": 0}'
@@ -73,9 +74,9 @@ class TestMonitorEvents(TestCase):
             state=current_state, custom_config={}
         )
         validate(actual, self.action.output.schema)
-        self.assertEqual(actual, expected.get("events"))
-        self.assertEqual(actual_state, expected.get("state"))
-        self.assertEqual(has_more_pages, expected.get("has_more_pages"))
+        self.assertEqual(expected.get("events"), actual)
+        self.assertEqual(expected.get("state"), actual_state )
+        self.assertEqual(expected.get("has_more_pages"), has_more_pages)
 
     def test_monitor_events_last_page_not_queried_to_now(self, _mock_request, mock_time):
         """
