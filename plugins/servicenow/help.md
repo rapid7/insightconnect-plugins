@@ -2,7 +2,7 @@
 
 [ServiceNow](https://www.servicenow.com/) is a tool for managing incidents and configuration management. This plugin allows users to manage all aspects of incidents including creation, search, and updates. Additionally, incident changes can be monitored and processed for use in a Rapid7 InsightConnect workflow.
 
-Note: This plugin affects only the underlying tables in a ServiceNow instance, not its UI. Hence, this plugin will work seamlessly with Virtual Task Boards.
+Note: This plugin affects only the underlying tables in a ServiceNow instance, not its UI. Hence, this plugin will work seamlessly with Virtual Task Boards
 
 # Key Features
 
@@ -17,12 +17,12 @@ Note: This plugin affects only the underlying tables in a ServiceNow instance, n
 * ServiceNow username, password, client ID, and client secret (for OAuth authentication) 
 * ServiceNow instance name
 
-Please note that to use certain actions it's necessary to use scopes that have permissions on certain tables. Depending on the actions, it's necessary to add specific auth scopes:
+* Please note that to use certain actions it's necessary to use scopes that have permissions on certain tables. Depending on the actions, it's necessary to add specific auth scopes:
 
-- Create/Read/Update/Delete Incident and Incident Attachments (table `incident` with permissions create/read/write/delete)
-- Create/Read/Update/Delete Security Incident (table `sn_si_incident` with permissions create/read/write/delete)
-- Create/Read/Update/Delete Vulnerability (table `sn_vul_vulnerable_item` with permissions create/read/write/delete)
-- Create Change Request (table `sn_chg_rest` with create permissions)
+  - Create/Read/Update/Delete Incident and Incident Attachments (table `incident` with permissions create/read/write/delete)
+  - Create/Read/Update/Delete Security Incident (table `sn_si_incident` with permissions create/read/write/delete)
+  - Create/Read/Update/Delete Vulnerability (table `sn_vul_vulnerable_item` with permissions create/read/write/delete)
+  - Create Change Request (table `sn_chg_rest` with create permissions)
 
 # Supported Product Versions
 
@@ -1681,11 +1681,12 @@ Example output:
 
 
 ## Troubleshooting
-  
-*This plugin does not contain a troubleshooting.*
+
+* This plugin does not contain a troubleshooting.
 
 # Version History
 
+* 8.0.4 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
 * 8.0.3 - Update to resolve issue parsing response from ServiceNow if XML is received
 * 8.0.2 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 8.0.1 - Update Setuptool to version 70.0.0 | Update SDK to version 6.0.0
