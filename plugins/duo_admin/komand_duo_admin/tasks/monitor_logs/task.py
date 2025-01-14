@@ -127,7 +127,9 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             del state[self.RATE_LIMIT_DATETIME]
             self.logger.info(log_msg)
 
-    def check_rate_limit_error(self, error: ApiException, status_code: int, state: dict, rate_limit_delay: int) -> Tuple[int, Any]:
+    def check_rate_limit_error(
+        self, error: ApiException, status_code: int, state: dict, rate_limit_delay: int
+    ) -> Tuple[int, Any]:
         if status_code == 429:
             new_run_time = time() + rate_limit_delay  # default to wait 10 minutes before the next run
             try:
