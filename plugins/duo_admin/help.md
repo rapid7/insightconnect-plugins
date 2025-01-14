@@ -950,6 +950,7 @@ Many actions in this plugin take a User ID as input. A User ID is not the userna
 
 # Version History
 
+* 5.0.3 - Update Task `monitor_logs` to delay retry if a rate limit error is returned from Duo Admin
 * 5.0.2 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
 * 5.0.1 - Update to enable Plugin as FedRAMP ready | Update SDK (`6.1.2`)
 * 5.0.0 - Updated to include latest SDK v5.5.5 | Removing Unused fields from User Object
