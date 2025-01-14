@@ -100,9 +100,7 @@ class TestMonitorLogs(TestCase):
         expected,
         config,
     ):
-        actual, actual_state, has_more_pages, status_code, _ = self.task.run(
-            state=current_state, custom_config=config
-        )
+        actual, actual_state, has_more_pages, status_code, _ = self.task.run(state=current_state, custom_config=config)
         self.assertEqual(actual, expected.get("logs"))
         self.assertEqual(actual_state, expected.get("state"))
         self.assertEqual(status_code, expected.get("status_code"))
