@@ -1,5 +1,5 @@
 {
-	"spec": "fad15a03e907369003cfbd533d509bdc",
+	"spec": "95c3a26e6ef8734d0a1abb73a67c12d6",
 	"manifest": "b4029998fe0d9bcc85c8016d009d19b3",
 	"setup": "5965f3fd331d7855550e5afad6ea8956",
 	"schemas": [
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "get_logs/schema.py",
-			"hash": "c00274766932d81a15c5afe9a50d4501"
+			"hash": "3502cb177351d18ff8a31266a49db228"
 		},
 		{
 			"identifier": "get_phones_by_user_id/schema.py",
@@ -49,7 +49,7 @@
 		},
 		{
 			"identifier": "monitor_logs/schema.py",
-			"hash": "ff4f7adf6cbae20cd793af79e763a06d"
+			"hash": "26f03015b329bc573a7e6f3a688fb861"
 		}
 	]
 }
