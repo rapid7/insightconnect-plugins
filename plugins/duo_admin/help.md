@@ -176,8 +176,11 @@ Example output:
 
 #### Get Authentication Logs
   
-This action is used to get auth logs, limited to past 180 days. [Currentmillis.com](https://currentmillis.com/) is 
-useful for finding a usable UNIX timestamp. Available inputs for parameters can be found in [Duo Admin API 
+This action is used to get auth logs, limited to past 180 days.
+[Currentmillis.com](https://currentmillis.com/) is 
+useful for finding a usable UNIX timestamp.
+
+Available inputs for parameters can be found in [Duo Admin API 
 docs](https://duo.com/docs/adminapi#logs:~:text=The%20factor%20or%20method%20used%20for%20an%20authentication%20attempt.%20One%20of%3A)
 
 ##### Input
@@ -943,7 +946,7 @@ Example output:
 
 ## Troubleshooting
 
-Many actions in this plugin take a User ID as input. A User ID is not the username - instead it's a unique identifier e.g. DU9I6T0F7R2S1J4XZHHA. A User ID can be obtained by passing a username to the Get User Status action.
+* Many actions in this plugin take a User ID as input. A User ID is not the username - instead it's a unique identifier e.g. DU9I6T0F7R2S1J4XZHHA. A User ID can be obtained by passing a username to the Get User Status action.
 
 # Version History
 

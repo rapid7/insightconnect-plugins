@@ -1,10 +1,10 @@
 from datetime import datetime, timedelta, timezone
-from hashlib import sha1
 from time import time
-from typing import Dict, Tuple, Any
+from typing import Any, Dict, Tuple, Union
 
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.helper import hash_sha1
 
 # Custom imports below
 from komand_duo_admin.util.constants import Assistance
@@ -108,7 +108,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         self.logger.info(f"Retrieve data from {mintime} to {maxtime}. Get next page is set to {get_next_page}")
         return mintime, maxtime, get_next_page
 
-    def check_rate_limit(self, state: Dict):
+    def check_rate_limit(self, state: Dict) -> Union[PluginException, None]:
         rate_limited = state.get(self.RATE_LIMIT_DATETIME)
         now = time()
         if rate_limited:
@@ -328,18 +328,11 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             log["log_type"] = value
         return logs
 
-    @staticmethod
-    def sha1(log: dict) -> str:
-        hash_ = sha1(usedforsecurity=False)  # nosec B303
-        for key, value in log.items():
-            hash_.update(f"{key}{value}".encode("utf-8"))
-        return hash_.hexdigest()
-
     def compare_hashes(self, previous_logs_hashes: list, new_logs: list):
         new_logs_hashes = []
         logs_to_return = []
         for log in new_logs:
-            hash_ = self.sha1(log)
+            hash_ = hash_sha1(log)
             if hash_ not in previous_logs_hashes:
                 new_logs_hashes.append(hash_)
                 logs_to_return.append(log)
