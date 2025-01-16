@@ -27,7 +27,7 @@ hub_tags:
   features: []
 sdk: 
   type: full 
-  version: 6.2.2
+  version: 6.2.3
   user: nobody
 troubleshooting:
   - "For information on how to setup your Azure application and assign permissions go [here](https://docs.microsoft.com/en-us/windows/security/threat-protection/microsoft-defender-atp/exposed-apis-create-app-webapp)"
