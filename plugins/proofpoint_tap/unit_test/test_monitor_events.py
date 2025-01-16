@@ -78,6 +78,26 @@ class TestMonitorEvents(TestCase):
         self.assertEqual(expected.get("state"), actual_state)
         self.assertEqual(expected.get("has_more_pages"), has_more_pages)
 
+    @parameterized.expand(
+        [
+            [
+                "sub_30_seconds",
+                {"last_collection_date": "2023-04-03T05:59:00+00:00"},
+                {"state": {"last_collection_date": "2023-04-03T05:59:00+00:00"}, "has_more_pages": False},
+            ],
+            [
+                "beyond_api_limit",
+                {"last_collection_date": "2023-04-03T04:59:00+00:00"},
+                {"state": {}, "has_more_pages": False},
+            ],
+        ]
+    )
+    def test_monitor_events_handle_api_error(self, _mock_request, _mock_get_time, _test_name, state, expected):
+        actual, actual_state, has_more_pages, status_code, error = self.action.run(state=state, custom_config={})
+        self.assertEqual([], actual)
+        self.assertEqual(expected.get("state"), actual_state)
+        self.assertEqual(expected.get("has_more_pages"), has_more_pages)
+
     def test_monitor_events_last_page_not_queried_to_now(self, _mock_request, mock_time):
         """
         Reuse the 'last_page' parameters from the test above but mock the time to be + 1 hour and we should

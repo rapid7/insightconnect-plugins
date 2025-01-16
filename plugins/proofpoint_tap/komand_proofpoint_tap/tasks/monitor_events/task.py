@@ -44,7 +44,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             previous_logs_hashes = state.get(self.PREVIOUS_LOGS_HASHES, [])
 
             first_run = not state
-            is_paginating = ((not first_run) and next_page_index)
+            is_paginating = (not first_run) and next_page_index
 
             api_limit = self._get_api_limit_date_time(is_paginating, API_MAX_LOOKBACK, now)
             start_time = self._determine_start_time(now, first_run, is_paginating, last_collection_date)
