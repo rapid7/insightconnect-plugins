@@ -31,7 +31,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             state=MonitorEventsState(),
         )
 
-    def run(self, params={}, state={}, custom_config={}):
+    def run(self, params={}, state={}, custom_config={}):  # pylint: disable=unused-argument
         existing_state = state.copy()
         self.connection.client.toggle_rate_limiting = False
         has_more_pages = False
