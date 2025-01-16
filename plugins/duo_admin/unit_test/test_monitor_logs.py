@@ -1,5 +1,6 @@
 import sys
 import os
+from time import time
 
 sys.path.append(os.path.abspath("../"))
 
@@ -104,3 +105,21 @@ class TestMonitorLogs(TestCase):
         self.assertEqual(actual, expected.get("logs"))
         self.assertEqual(actual_state, expected.get("state"))
         self.assertEqual(status_code, expected.get("status_code"))
+
+
+    def test_monitor_logs_with_rate_limit_whole_flow(self, mock_request, mock_request_instance, mock_get_headers, mock_get_time):
+        future_time_state = {"rate_limit_datetime": time() + 600}
+        passed_time_state = {"rate_limit_datetime": time() - 600}
+
+        actual, new_state, has_more_pages, status_code, _ = self.task.run(state=future_time_state, custom_config={})
+
+        self.assertEqual(actual, [])
+        self.assertEqual(future_time_state, new_state)
+        self.assertEqual(has_more_pages, False)
+        self.assertEqual(status_code, 429)
+
+        actual_2, new_state_2, _, status_code_2, _ = self.task.run(state=passed_time_state, custom_config={})
+
+        self.assertTrue(actual_2)
+        self.assertTrue(new_state_2)
+        self.assertEqual(status_code_2, 200)
