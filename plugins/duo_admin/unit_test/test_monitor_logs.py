@@ -106,8 +106,9 @@ class TestMonitorLogs(TestCase):
         self.assertEqual(actual_state, expected.get("state"))
         self.assertEqual(status_code, expected.get("status_code"))
 
-
-    def test_monitor_logs_with_rate_limit_whole_flow(self, mock_request, mock_request_instance, mock_get_headers, mock_get_time):
+    def test_monitor_logs_with_rate_limit_whole_flow(
+        self, mock_request, mock_request_instance, mock_get_headers, mock_get_time
+    ):
         future_time_state = {"rate_limit_datetime": time() + 600}
         passed_time_state = {"rate_limit_datetime": time() - 600}
 
