@@ -1361,9 +1361,9 @@ Example output:
 
 # Links
 
-* [Windows Defender ATP](https://www.microsoft.com/en-us/windowsforbusiness/windows-atp)
+* [Windows Defender for Endpoint](https://www.microsoft.com/en-us/security/business/endpoint-security/microsoft-defender-endpoint)
 
 ## References
 
-* [Windows Defender ATP API Start Page](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-atp/use-apis)
-* [Windows Defender ATP API Endpoints](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-atp/exposed-apis-list)
+* [Windows Defender for Endpoint API Start Page](https://learn.microsoft.com/en-us/defender-endpoint/api/apis-intro)
+* [Windows Defender for Endpoint API Endpoints](https://learn.microsoft.com/en-us/defender-endpoint/api/exposed-apis-list)
