@@ -7,7 +7,7 @@ sys.path.append(os.path.abspath("../"))
 from unittest.mock import patch
 
 from komand_proofpoint_tap.tasks import MonitorEvents
-from unit_test.test_util import Util
+from test_util import Util
 from unittest import TestCase
 from parameterized import parameterized
 from datetime import datetime, timezone, timedelta

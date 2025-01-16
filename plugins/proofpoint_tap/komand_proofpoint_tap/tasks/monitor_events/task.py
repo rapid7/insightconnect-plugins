@@ -1,7 +1,6 @@
 from datetime import datetime, timedelta, timezone
 from hashlib import sha1
 from typing import Dict
-from requests import Response
 
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -45,7 +44,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             previous_logs_hashes = state.get(self.PREVIOUS_LOGS_HASHES, [])
 
             first_run = not state
-            is_paginating = True if (not first_run) and next_page_index else False
+            is_paginating = ((not first_run) and next_page_index)
 
             api_limit = self._get_api_limit_date_time(is_paginating, API_MAX_LOOKBACK, now)
             start_time = self._determine_start_time(now, first_run, is_paginating, last_collection_date)
@@ -63,7 +62,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             query_params = {"format": "JSON"}
             parameters = SiemUtils.prepare_time_range(start_time, end_time, query_params)
             self.logger.info(f"Using following parameters in query: {parameters}")
-            """GET AND DEDUPE"""
+
             try:
                 parsed_logs = self.parse_logs(
                     self.connection.client.siem_action(Endpoint.get_all_threats(), parameters)
@@ -105,7 +104,6 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
                 state[self.PREVIOUS_LOGS_HASHES] = []
                 return [], existing_state, False, error.status_code, error
         except Exception as error:
-            raise error
             self.logger.info(f"Exception occurred in monitor events task: {error}", exc_info=True)
             return (
                 [],
@@ -173,7 +171,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
 
     @staticmethod
     def sha1(log: dict) -> str:
-        hash_ = sha1()  # nosec B303
+        hash_ = sha1(usedforsecurity=False)  # nosec B303
         for key, value in log.items():
             hash_.update(f"{key}{value}".encode("utf-8"))
         return hash_.hexdigest()
@@ -193,8 +191,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
         return logs_to_return, new_logs_hashes
 
     def _check_end_time(self, end_time, now):
-        if end_time > now:
-            end_time = now
+        end_time = min(end_time, now)
         return end_time
 
     def _get_api_limit_date_time(self, is_paginating, limit_delta_hours, now):

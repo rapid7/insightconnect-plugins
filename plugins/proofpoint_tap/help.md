@@ -1175,7 +1175,7 @@ Example output:
 
 # Version History
 
-* 4.1.11 - SDK Bump to 6.2.2 | `Monitor Events` task updated to handle requests outside of Proofpoint TAP API limits
+* 4.1.11 - SDK Bump to 6.2.3 | `Monitor Events` task updated to handle requests outside of Proofpoint TAP API limits
 * 4.1.10 - SDK Bump to 6.1.0 | Task Connection test added Update `Parse Tap Alert` to utilise BeautifulSoup resolving vulnerabilities
 * 4.1.9 - Update connection fields to be required.
 * 4.1.8 - Include SDK 5.4.9 | Task - Use cutoff of 7 days for first query, use cutoff of 1 hours for subsequent queries
