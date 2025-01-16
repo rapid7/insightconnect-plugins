@@ -3,4 +3,4 @@
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 parameterized==0.8.1
 validators==0.34.0
-git+https://github.com/komand/python-whois.git@0.7.0
+git+https://github.com/komand/python-whois.git@0.7.1
