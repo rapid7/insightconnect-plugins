@@ -15,8 +15,37 @@ requirements:
   - "The use of round-robin DNS lookups is not supported"
 sdk:
   type: slim
-  version: 6.2.2
+  version: 6.2.3
   user: root
+  custom_cmd:
+    - "# Add any package dependencies here"
+    - ENV DEBIAN_FRONTEND noninteractive
+    - "# Kerberos dependencies"
+    - "RUN apt-get update && apt-get install -y \\"
+    - "    apt-transport-https \\"
+    - "    curl \\"
+    - "    gcc python-dev libkrb5-dev \\"
+    - "    git \\"
+    - "    gnupg \\"
+    - "    krb5-user \\"
+    - "    libssl1.1 \\"
+    - "    ntp adcli sssd \\"
+    - "    samba-common \\"
+    - "    software-properties-common \\"
+    - "    sudo \\"
+    - "    realmd \\"
+    - "    wget"
+    - ""
+    - "# Local PowerShell dependencies"
+    - 'RUN echo "deb http://security.ubuntu.com/ubuntu bionic-security main" | sudo tee -a /etc/apt/sources.list.d/bionic.list && \'
+    - "    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32 && sudo apt-get update && apt-cache policy libssl1.0-dev && \\"
+    - "    sudo apt-get install -y libssl1.0-dev && \\"
+    - "    wget http://mirrors.kernel.org/ubuntu/pool/main/i/icu/libicu52_52.1-3ubuntu0.8_amd64.deb && \\"
+    - "    sudo apt install -y ./libicu52_52.1-3ubuntu0.8_amd64.deb && \\"
+    - "    rm ./libicu52_52.1-3ubuntu0.8_amd64.deb && \\"
+    - "    wget https://github.com/PowerShell/PowerShell/releases/download/v7.4.6/powershell_7.4.6-1.deb_amd64.deb && \\"
+    - "    sudo apt install -y ./powershell_7.4.6-1.deb_amd64.deb && \\"
+    - "    rm ./powershell_7.4.6-1.deb_amd64.deb"
 links:
   - "[InsightConnect Powershell Plugin Guide](https://docs.rapid7.com/insightconnect/mass-delete-with-PowerShell/)"
 references:
@@ -24,7 +53,7 @@ references:
   - "[samba-common](https://packages.debian.org/sid/samba-common)"
   - "[krb5-user](https://packages.debian.org/search?keywords=krb5-user)"
   - "[realmd](https://packages.debian.org/jessie/admin/realmd)"
-supported_versions: ["PowerShell 6.1.2"]
+supported_versions: ["PowerShell 7.4.6"]
 vendor: rapid7
 support: community
 status: []
@@ -41,7 +70,13 @@ hub_tags:
   keywords: [powershell, microsoft]
   features: []
 troubleshooting:
-  - The use of round-robin DNS lookups is not supported.
+  - "The use of round-robin DNS lookups is not supported"
+  - "If Auth Type is set to \"None\" the PowerShell script will execute locally on the Komand host. This can also be accomplished by leaving the address field blank."
+  - "The username supplied must have local admin privileges on the remote host Windows computer."
+  - "When using a domain account with NTLM the username must be in the following format MYDOMAIN\\username"
+  - "When using the Kerberos connection option the username must be a domain account that has permission to join computers to the domain."
+  - "This plugin can connect over HTTP, the default port for this is 5985.\nIt should be noted that this type of connection is not secure as all information passed is in plain text. In addition, Windows will not allow HTTP connections by default.\n\nThe following commands must be run on the Windows computer that you want to connect to.\n\nFor more information see [Compromising Yourself with WinRM's AllowUnencrypted = True](https://blogs.msdn.microsoft.com/PowerShell/2015/10/27/compromising-yourself-with-winrms-allowunencrypted-true/)\n\n```\nwinrm set winrm/config/client/auth '@{Basic=\"true\"}'\nwinrm set winrm/config/service/auth '@{Basic=\"true\"}'\nwinrm set winrm/config/service '@{AllowUnencrypted=\"true\"}'\n```\n"
+  - "When using the Kerberos connection option, the username should not include an @example.com or other domain identifier. These will be added by the plugin as needed.\nThis plugin will join the Komand docker instance to the Windows domain as a computer if the Kerberos option is used.\nFor the Execute Script action PowerShell code should be submitted as base64. This can be done by copying a `.txt` file with the PowerShell code into the plugin.\n\n_This plugin does not validate the PowerShell code._\nAny errors generated on the remote computer by the PowerShell code are forwarded to the log file.\n\nRun this PowerShell command on a Windows host first to set up a unsigned certificate for authentication:\nThis will not be needed if the host already has a SSL certificate set up for Winrm\n\n```\nInvoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1'))\n```"
 version_history:
   - "3.0.7 - Updated dependencies | Updated SDK to the latest version"
   - "3.0.6 - Bump SDK to 6.2.0"
