@@ -10,8 +10,7 @@ from komand_proofpoint_tap.tasks import MonitorEvents
 from test_util import Util
 from unittest import TestCase
 from parameterized import parameterized
-from datetime import datetime, timezone, timedelta
-from json import loads
+from datetime import datetime, timezone
 from jsonschema import validate
 
 ENV_VALUE = '{"year": 2024, "month": 1, "day": 27, "hour": 0, "minute": 0, "second": 0}'
