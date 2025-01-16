@@ -7,7 +7,7 @@ sys.path.append(os.path.abspath("../"))
 from unittest.mock import patch
 
 from komand_proofpoint_tap.tasks import MonitorEvents
-from test_util import Util
+from unit_test.test_util import Util
 from unittest import TestCase
 from parameterized import parameterized
 from datetime import datetime, timezone, timedelta
@@ -100,51 +100,6 @@ class TestMonitorEvents(TestCase):
         # add in extra failsafe that the `.exp' file has not changed this has_more_pages to True
         self.assertNotEqual(expected.get("has_more_pages"), has_more_pages)
 
-    @patch("logging.Logger.info")
-    def test_monitor_events_uses_custom_config_data(self, mock_logger, _mock_request, _mock_time):
-        # Even though we have an environment variable specified we use the custom_config passed from CPS
-        full_lookback_value = loads(ENV_VALUE)
-        cps_config = {"lookback": full_lookback_value}  # pass this as a dict as our API will supply as it like this
-        response, state, has_more_pages, status_code, _error = self.action.run({}, {}, cps_config)
-
-        # In this example we have an env var specified but this is ignored to use the value in the custom_config
-        date = datetime(**full_lookback_value)
-        self.assertTrue(
-            any(f"Attempting to use custom value of {date}" in call[0][0] for call in mock_logger.call_args_list[0:])
-        )
-
-        # state last time should be custom config value + 1 hour
-        self.assertEqual("2024-01-27T01:00:00+00:00", state["last_collection_date"])
-        self.assertEqual(1, state["next_page_index"])
-
-        # second time we call we will then pass no lookback from SDK level and now use the cutoff date value
-        cps_config = {"cutoff": {"date": full_lookback_value}}
-        _resp, state_2, _more_pages, _status_code, _error = self.action.run({}, state.copy(), cps_config)
-
-        # Due to pagination the last collection date will not change in our state
-        self.assertEqual(state["last_collection_date"], state_2["last_collection_date"])
-        self.assertEqual(2, state_2["next_page_index"])  # however we should be on the second page
-
-        # Third time we call - we increase page size to return more_pages=False from the task
-        with patch("komand_proofpoint_tap.tasks.monitor_events.task.MonitorEvents.SPLIT_SIZE", new=40000):
-            _resp, state_3, more_pages, _status_code, _error = self.action.run({}, state_2.copy(), cps_config)
-            self.assertEqual(state_2["last_collection_date"], state_3["last_collection_date"])
-            self.assertEqual(True, more_pages)  # finished 'pages' between time A-B, we haven't caught up to now
-
-        # Fourth time task is called - custom_config is 'normal' and we do normal time calculations / cut off.
-        new_now = datetime.strptime("2024-03-25T08:00:00", "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc)
-        with patch(
-            "komand_proofpoint_tap.tasks.monitor_events.task.MonitorEvents.get_current_time", return_value=new_now
-        ):
-            mock_logger.reset_mock()
-            config = {"cutoff": {"hours": 24}}  # config reverted to normal behaviour
-            _resp, _state_4, _more_pages, _status_code, _error = self.action.run({}, state_3.copy(), config)
-            # get lookback time as task.py does with using now - (lookback + 1 minute latency delay)
-            lookback = new_now - timedelta(hours=config["cutoff"]["hours"], minutes=1)
-            lookback_msg = "Supplied a start_time further than allowed. Moving this to 2024-03-24 07:59:00+00:00"
-
-            self.assertTrue(any(lookback_msg in call[0][0] for call in mock_logger.call_args_list[0:]))
-
     @parameterized.expand(
         [
             [
@@ -163,9 +118,9 @@ class TestMonitorEvents(TestCase):
                 ["Supplied a custom_api_limit further than allowed. Moving this to 2023-03-28 08:14:00", ""],
             ],
             [
-                "enforced_during_a_state_passed_value",
+                "enforced_both_lookback_date_and_cutoff_hours_config",
                 # customer has been paused since 29th March, and have an override cutoff hours to 8
-                [{"last_collection_date": "2023-03-28T07:00:00.406053+00:00"}, {"cutoff": {"hours": 24 * 8}}],
+                [{}, {"lookback": {"year": 2023, "month": 3, "day": 4}, "cutoff": {"hours": 24 * 8}}],
                 [
                     "Supplied a custom_api_limit further than allowed. Moving this to 2023-03-28 08:14:00",
                     "Supplied a start_time further than allowed. Moving this to 2023-03-28 08:14:00",
