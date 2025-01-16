@@ -2,9 +2,9 @@ plugin_spec_version: v2
 extension: plugin
 products: ["insightconnect"]
 name: microsoft_atp
-title: Microsoft Windows Defender ATP
-description: The Windows Defender Advanced Threat Protection plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files
-version: 6.0.0
+title: Microsoft Defender for Endpoint
+description: The Microsoft Defender for Endpoint plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files
+version: 6.0.1
 connection_version: 6
 supported_versions: ["2024-05-21"]
 vendor: rapid7
@@ -27,14 +27,17 @@ hub_tags:
   features: []
 sdk: 
   type: full 
-  version: 6.1.2
+  version: 6.2.3
   user: nobody
+troubleshooting:
+  - "For information on how to setup your Azure application and assign permissions go [here](https://docs.microsoft.com/en-us/windows/security/threat-protection/microsoft-defender-atp/exposed-apis-create-app-webapp)"
 links:
- - "[Windows Defender ATP](https://www.microsoft.com/en-us/windowsforbusiness/windows-atp)"
+ - "[Windows Defender for Endpoint](https://www.microsoft.com/en-us/security/business/endpoint-security/microsoft-defender-endpoint)"
 references:
- - "[Windows Defender ATP API Start Page](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-atp/use-apis)"
- - "[Windows Defender ATP API Endpoints](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-atp/exposed-apis-list)"
+ - "[Windows Defender for Endpoint API Start Page](https://learn.microsoft.com/en-us/defender-endpoint/api/apis-intro)"
+ - "[Windows Defender for Endpoint API Endpoints](https://learn.microsoft.com/en-us/defender-endpoint/api/exposed-apis-list)"
 version_history:
+ - "6.0.1 - Update to latest SDK (v6.2.2) | Address vulnerabilities | Rebrand to `Microsoft Defender for Endpoint`"
  - "6.0.0 - Updated SDK to the latest version | Initial updates for fedramp compliance"
  - "5.2.0 - Add new action: Update Alert"
  - "5.1.0 - Adding the following as new action types to `blacklist` action ['Warn', 'Block', 'Audit'] | Add a new flag in the `blacklist` action to toggle generateAlerts flag | Bump SDK to version 5.4.9"
