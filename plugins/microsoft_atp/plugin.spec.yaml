@@ -27,15 +27,15 @@ hub_tags:
   features: []
 sdk: 
   type: full 
-  version: 6.2.2
+  version: 6.2.3
   user: nobody
 troubleshooting:
   - "For information on how to setup your Azure application and assign permissions go [here](https://docs.microsoft.com/en-us/windows/security/threat-protection/microsoft-defender-atp/exposed-apis-create-app-webapp)"
 links:
- - "[Windows Defender ATP](https://www.microsoft.com/en-us/windowsforbusiness/windows-atp)"
+ - "[Windows Defender for Endpoint](https://www.microsoft.com/en-us/security/business/endpoint-security/microsoft-defender-endpoint)"
 references:
- - "[Windows Defender ATP API Start Page](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-atp/use-apis)"
- - "[Windows Defender ATP API Endpoints](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-atp/exposed-apis-list)"
+ - "[Windows Defender for Endpoint API Start Page](https://learn.microsoft.com/en-us/defender-endpoint/api/apis-intro)"
+ - "[Windows Defender for Endpoint API Endpoints](https://learn.microsoft.com/en-us/defender-endpoint/api/exposed-apis-list)"
 version_history:
  - "6.0.1 - Update to latest SDK (v6.2.2) | Address vulnerabilities | Rebrand to `Microsoft Defender for Endpoint`"
  - "6.0.0 - Updated SDK to the latest version | Initial updates for fedramp compliance"
