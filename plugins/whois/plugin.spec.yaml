@@ -16,7 +16,7 @@ sdk:
   user: nobody
   packages:
     - whois
-    - git -y
+    - git
 cloud_ready: true
 fedramp_ready: true
 resources:
