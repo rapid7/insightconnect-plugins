@@ -209,7 +209,9 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         if custom_config:
             self.logger.info("Custom config detected")
-            start_time, max_lookback_date_time, backfill = self._parse_custom_config(custom_config, now_date_time, start_time)
+            start_time, max_lookback_date_time, backfill = self._parse_custom_config(
+                custom_config, now_date_time, start_time
+            )
 
         # Non pagination run
         if not start_time:
