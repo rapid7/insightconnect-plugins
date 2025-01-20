@@ -1,15 +1,15 @@
 {
-	"spec": "9a9da19b82f3ad4f23ab7a0725695422",
-	"manifest": "48735bedd2e407af0784bdd90e706896",
-	"setup": "d0fc4557b513a4944506a2e885cd0a32",
+	"spec": "ff85d692a483975710c09a54310d6e74",
+	"manifest": "c0f72d9ea137585ca83d612bfd3c23bb",
+	"setup": "426658221d9fe1e3eca5dca34163072a",
 	"schemas": [
 		{
 			"identifier": "auth/schema.py",
-			"hash": "fbc5545cf3c14ba63cabf57255f3273d"
+			"hash": "3730109fc4e5ae4a226cec9d4caaed6c"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "b4dd28f9a040343bb03350fc8a29d096"
+			"hash": "3507436916c3cb62d4113a3d5092ac33"
 		}
 	]
 }
