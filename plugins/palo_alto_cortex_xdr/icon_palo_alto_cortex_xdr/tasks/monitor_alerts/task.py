@@ -162,7 +162,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         highest_timestamp = 0
 
         # Create a new hash for every new alert
-        for _, alert in enumerate(alerts):
+        for alert in alerts:
             # Hash the current alert
             alert_hash = hash_sha1(alert)
             # Add this new hash to the new hash list
@@ -209,7 +209,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         if custom_config:
             self.logger.info("Custom config detected")
-            start_time, max_lookback_date_time = self._parse_custom_config(custom_config, now_date_time, start_time)
+            start_time, max_lookback_date_time, backfill = self._parse_custom_config(custom_config, now_date_time, start_time)
 
         # Non pagination run
         if not start_time:
@@ -225,7 +225,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             self.logger.info("Adjusting start time to cutoff value")
             start_time = max_lookback_unix
             # Reset search_from and search_to if this is not a backfill
-            if not custom_config:
+            if not backfill:
                 self.logger.info("Resetting search_from and search_to")
                 search_from = 0
                 search_to = alert_limit
@@ -271,9 +271,10 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         :param custom_config:
         :param now_datetime:
         :param start_time:
-        :return: start time and maxlookback time
+        :return: start time, maxlookback time, if backfill values present
         """
         # Get custom config lookback value only if start_time in state is cleared
+        backfill = False
         custom_timings = custom_config.get("lookback", {})
         custom_date = custom_timings.get("date")
         custom_hours = custom_timings.get("hours", DEFAULT_LOOKBACK_HOURS)
@@ -290,8 +291,11 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             if max_lookback_date_time
             else now_datetime - timedelta(days=max_lookback_days)
         )
+        lookback_values = [bool(custom_timings), custom_config.get("max_lookback_days"), bool(max_lookback_date_time)]
+        if any(lookback_value for lookback_value in lookback_values):
+            backfill = True
 
-        return start_time, max_lookback
+        return start_time, max_lookback, backfill
 
     ###########################
     # Build post body
