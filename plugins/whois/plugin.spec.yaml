@@ -4,7 +4,7 @@ products: [insightconnect]
 name: whois
 title: WHOIS
 description: "[WHOIS](https://en.wikipedia.org/wiki/WHOIS) is a query and response protocol that is widely used for querying databases that store the registered users or assignee's of an Internet resource, such as a domain name, an IP address block, or an autonomous system"
-version: 3.1.6
+version: 3.1.7
 connection_version: 3
 vendor: rapid7
 support: community
@@ -12,7 +12,7 @@ supported_versions: ["2024-09-09"]
 status: []
 sdk:
   type: slim
-  version: 6.2.0
+  version: 6.2.3
   user: nobody
   packages:
     - whois
@@ -32,8 +32,10 @@ hub_tags:
 key_features: ["Perform a WHOIS lookup for a provided IP address or domain to gain information on who is responsible for a domain or IP"]
 references: ["[WHOIS](https://en.wikipedia.org/wiki/WHOIS)"]
 links: ["[WHOIS](https://en.wikipedia.org/wiki/WHOIS)"]
-troubleshooting: "Multiple records can be returned by the server, this plugin currently only returns the first unique records found."
+troubleshooting:
+  - "Multiple records can be returned by the server, this plugin currently only returns the first unique records found."
 version_history:
+  - "3.1.7 - Updated SDK to the latest version (v6.2.3) | Address vulnerabilities | Updated `Whois` dependency"
   - "3.1.6 - Fix mapping issue (RIPE) for address action. Adding 'description' output field for RIPE (address action) | SDK bump to 6.2.0"
   - "3.1.5 - Action `Address`: Fixed issue with result parsing"
   - "3.1.4 - Initial updates for fedramp compliance | Updated SDK to the latest version"
