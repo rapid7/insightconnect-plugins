@@ -1,5 +1,6 @@
 import sys
 import os
+from time import time
 
 sys.path.append(os.path.abspath("../"))
 
@@ -21,7 +22,7 @@ from datetime import datetime, timezone
 class TestMonitorLogs(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.action = Util.default_connector(MonitorLogs())
+        cls.task = Util.default_connector(MonitorLogs())
         cls.custom_config = {"cutoff": {"date": "2023-04-30T08:34:46.000Z"}, "lookback": "2023-04-30T08:34:46.000Z"}
 
     @parameterized.expand(
@@ -36,6 +37,12 @@ class TestMonitorLogs(TestCase):
                     "filter_cutoff_trust_monitor_events_logs": {"date": "2023-04-30T08:34:46.000Z"},
                     "lookback": "2023-04-30T08:34:46.000Z",
                 },
+            ],
+            [
+                "with_rate_limit",
+                Util.read_file_to_dict("inputs/monitor_logs_with_rate_limit.json.inp"),
+                Util.read_file_to_dict("expected/monitor_logs_rate_limit.json.exp"),
+                {},
             ],
             [
                 "with_state",
@@ -94,9 +101,26 @@ class TestMonitorLogs(TestCase):
         expected,
         config,
     ):
-        actual, actual_state, has_more_pages, status_code, _ = self.action.run(
-            state=current_state, custom_config=config
-        )
+        actual, actual_state, has_more_pages, status_code, _ = self.task.run(state=current_state, custom_config=config)
         self.assertEqual(actual, expected.get("logs"))
         self.assertEqual(actual_state, expected.get("state"))
         self.assertEqual(status_code, expected.get("status_code"))
+
+    def test_monitor_logs_with_rate_limit_whole_flow(
+        self, mock_request, mock_request_instance, mock_get_headers, mock_get_time
+    ):
+        future_time_state = {"rate_limit_datetime": time() + 600}
+        passed_time_state = {"rate_limit_datetime": time() - 600}
+
+        actual, new_state, has_more_pages, status_code, _ = self.task.run(state=future_time_state, custom_config={})
+
+        self.assertEqual(actual, [])
+        self.assertEqual(future_time_state, new_state)
+        self.assertEqual(has_more_pages, False)
+        self.assertEqual(status_code, 429)
+
+        actual_2, new_state_2, _, status_code_2, _ = self.task.run(state=passed_time_state, custom_config={})
+
+        self.assertTrue(actual_2)
+        self.assertTrue(new_state_2)
+        self.assertEqual(status_code_2, 200)
