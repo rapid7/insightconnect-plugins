@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightcloudsec
 title: Rapid7 InsightCloudSec
 description: InsightCloudSec by Rapid7 (formerly DivvyCloud) is a Cloud-Native Security Platform that provides real-time analysis and automated remediation for continuous security and compliance for your multi-cloud environment 
-version: 2.1.0
+version: 2.1.1
 connection_version: 2
 supported_versions: ["22.10.19"]
 cloud_ready: true
@@ -15,7 +15,7 @@ resources:
   vendor_url: https://www.rapid7.com
 sdk:
   type: "slim"
-  version: "6.1.3"
+  version: 6.2.3
   user: nobody
 key_features:
   - "Create and remove an exemption"
@@ -28,8 +28,10 @@ key_features:
   - "Switch organization"
 requirements:
   - "InsightCloudSec API key"
-troubleshooting: "_This plugin does not contain any troubleshooting information._"
+troubleshooting:
+  - "This plugin does not contain any troubleshooting information"
 version_history:
+  - "2.1.1 - Updated SDK to the latest version (v6.2.3) | Address vulnerabilities"
   - "2.1.0 - Updated SDK to the latest version | Adding a get resource id functionality"
   - "2.0.0 - Enable plugin to run in cloud | Remove actions using defective API endpoints"
   - "1.0.0 - Initial plugin | Add Get Account Details, Get Resource Details, List Resource Tags, Create Exemption, Remove Exemption, Detach Policy, Run Bot on Demand and Switch Organization actions"
