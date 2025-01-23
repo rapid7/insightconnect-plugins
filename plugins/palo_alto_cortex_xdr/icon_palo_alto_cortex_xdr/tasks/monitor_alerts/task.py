@@ -205,7 +205,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         start_time, end_time, max_lookback_date_time = self.get_query_times(saved_state, now_date_time)
         search_from = saved_state.get(LAST_SEARCH_TO, 0)
         search_to = saved_state.get(LAST_SEARCH_TO, 0) + alert_limit
-        backfill = False
         if custom_config:
             self.logger.info("Custom config detected")
             start_time, max_lookback_date_time = self._parse_custom_config(custom_config, now_date_time, start_time)
