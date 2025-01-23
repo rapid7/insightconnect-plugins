@@ -1,0 +1,15 @@
+{
+	"spec": "4f06521e5c8a2a4506cf3cda093ee4ad",
+	"manifest": "e0e42959bee1c96589545b1afb0b1f61",
+	"setup": "ea867af34e3163ba06ef9660ec9023fc",
+	"schemas": [
+		{
+			"identifier": "connection/schema.py",
+			"hash": "8918ffcfac8cbf4e1b5696cb9dd9ddaf"
+		},
+		{
+			"identifier": "monitor_siem_logs/schema.py",
+			"hash": "0a566c7d94e6689de4d0528d24470b94"
+		}
+	]
+}
