@@ -3,10 +3,10 @@ extension: plugin
 products: [insightconnect]
 name: ssh
 title: SSH
-description: The SSH protocol is a method for secure remote login from one computer to another
-version: 4.0.2
+description: "[Secure Shell](https://en.wikipedia.org/wiki/Secure_Shell) (SSH) is a cryptographic network protocol for operating network services securely over an unsecured network. This plugin uses the [paramiko](http://www.paramiko.org/) to connect to a remote host via the library. The SSH plugin allows you to run commands on a remote host"
+version: 4.0.3
 connection_version: 4
-supported_versions: ["SSH 2024-09-09"]
+supported_versions: ["SSH 2025-01-15"]
 vendor: rapid7
 support: community
 status: []
@@ -24,14 +24,17 @@ hub_tags:
 fedramp_ready: true
 sdk:
   type: slim
-  version: 6.1.0
+  version: 6.2.3
   user: nobody
 key_features:
   - Run remote commands with SSH
 requirements:
   - Credentials for the target remote host
   - Address and port for the target remote host
+troubleshooting:
+  - "The `key` field in connection setup takes a base64 encoded RSA private key which must contain a newline character after the BEGIN marker and before the END marker:\nE.g.\n\n```\n-----BEGIN RSA PRIVATE KEY-----\nMIIEogIBAAKCAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7g4h53s=\n...\n-----END RSA PRIVATE KEY-----\n```\n\nYou can easily encode a private key file and copy a key to your clipboard on MacOS with the following command: `base64 < .ssh/id_rsa | pbcopy`.\nThis can then be pasted into the Connection's `key` input field"
 version_history:
+  - "4.0.3 - Updated dependencies | Updated SDK to the latest version"
   - "4.0.2 - Initial updates for fedramp compliance | Updated SDK to the latest version"
   - "4.0.1 - Update from komand to insight-plugin-runtime"
   - "4.0.0 - Upgrade the plugin runtime to `komand/python-3-37-plugin` and run as least-privileged user | Change the SSH key credential type to `credential_secret_key` to skip PEM validation in the product UI"
