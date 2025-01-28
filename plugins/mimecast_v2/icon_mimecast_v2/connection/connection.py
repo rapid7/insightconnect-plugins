@@ -2,11 +2,11 @@ import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 from .schema import ConnectionSchema, Input
 from icon_mimecast_v2.util.api import API
+
 # Custom imports below
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
@@ -16,8 +16,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.client_id = params.get(Input.CLIENT_ID).get("secretKey")
         self.api = API(client_id=self.client_id, client_secret=self.client_secret, logger=self.logger)
         self.api.authenticate()
-
-
 
     def test(self):
         try:

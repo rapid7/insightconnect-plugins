@@ -28,7 +28,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             state=MonitorSiemLogsState(),
         )
 
-    def run(self, params={}, state={}, custom_config={}):
+    def run(self, params={}, state={}, custom_config={}):  # pylint: disable=unused-argument
         self.logger.info(f"TASK: Received State: {state}")
         existing_state = state.copy()
         try:
@@ -36,9 +36,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             self.logger.info(f"TASK: Current run state is {run_condition}")
             now = datetime.now(tz=timezone.utc)
             now_date = now.date()
-            max_api_lookback_date, max_run_lookback_date = self.get_max_lookback_date(
-                now, run_condition, bool(custom_config)
-            )
+            max_run_lookback_date = self.get_max_lookback_date(now, run_condition, bool(custom_config))
             if not state:
                 state = INITIAL_STATE
                 self.apply_custom_config(state, custom_config)
@@ -47,17 +45,14 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             exit_state, has_more_pages = self.prepare_exit_state(query_config, now_date)
             return logs, exit_state, has_more_pages, 200, None
         except APIException as error:
-            raise error
             self.logger.info(
                 f"Error: An API exception has occurred. Status code: {error.status_code} returned. Cause: {error.cause}. Error data: {error.data}."
             )
             return [], existing_state, False, error.status_code, error
         except PluginException as error:
-            raise error
             self.logger.info(f"Error: A Plugin exception has occurred. Cause: {error.cause}  Error data: {error.data}.")
             return [], existing_state, False, error.status_code, error
         except Exception as error:
-            raise error
             self.logger.info(f"Error: Unknown exception has occurred. No results returned. Error Data: {error}")
             return [], existing_state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
@@ -78,20 +73,18 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         self, now: datetime, run_condition: str, custom_config: bool
     ) -> Tuple[datetime, datetime]:
         """
-        Get max API lookback date and max lookback date for run condition
+        Get max lookback date for run condition
         :param now:
         :param run_condition:
         :param custom_config:
-        :return: max_api_lookback_date, max_run_lookback_date
+        :return: max_run_lookback_date
         """
-        max_api_lookback_days = MAX_LOOKBACK_DAYS
-        max_run_lookback_days = max_api_lookback_days
+        max_run_lookback_days = MAX_LOOKBACK_DAYS
         if run_condition in [INITIAL_RUN] and not custom_config:
             max_run_lookback_days = INITIAL_MAX_LOOKBACK_DAYS
 
-        max_api_lookback_date = (now - timedelta(days=max_api_lookback_days)).date()
         max_run_lookback_date = (now - timedelta(days=max_run_lookback_days)).date()
-        return max_api_lookback_date, max_run_lookback_date
+        return max_run_lookback_date
 
     def apply_custom_config(self, current_query_config: Dict, custom_config: Dict) -> None:
         """
@@ -172,7 +165,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         :return: state, has_more_pages
         """
         has_more_pages = False
-        for log_type, log_type_config in state.items():
+        for log_type_config in state.values():
             query_date = log_type_config.get("query_date")
             if log_type_config.get("caught_up") is True:
                 has_more_pages = True
