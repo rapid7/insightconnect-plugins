@@ -12,8 +12,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def connect(self, params):
         self.logger.info("Connect: Connecting...")
-        self.client_secret = params.get(Input.CLIENT_SECRET).get("secretKey")
-        self.client_id = params.get(Input.CLIENT_ID).get("secretKey")
+        self.client_secret = params.get(Input.CLIENT_SECRET, {}).get("secretKey", "").strip()
+        self.client_id = params.get(Input.CLIENT_ID, {}).get("secretKey", "").strip()
         self.api = API(client_id=self.client_id, client_secret=self.client_secret, logger=self.logger)
         self.api.authenticate()
 

@@ -10,7 +10,7 @@ from logging import Logger
 from requests import Response, Request
 from io import BytesIO
 from icon_mimecast_v2.util.endpoints import Endpoints
-from typing import Dict, List
+from typing import Dict, List, Tuple
 import gzip
 import json
 
@@ -19,13 +19,13 @@ POST = "POST"
 
 
 class API:
-    def __init__(self, client_id: str, client_secret: str, logger: Logger):
+    def __init__(self, client_id: str, client_secret: str, logger: Logger) -> None:
         self.client_id = client_id
         self.client_secret = client_secret
         self.logger = logger
         self.access_token = None
 
-    def authenticate(self):
+    def authenticate(self) -> None:
         self.logger.info("API: Authenticating...")
         data = {"client_id": self.client_id, "client_secret": self.client_secret, "grant_type": "client_credentials"}
         response = self.make_api_request(
@@ -38,24 +38,22 @@ class API:
         self.access_token = response.get("access_token")
         self.logger.info("API: Authenticated")
 
-    def get_siem_logs(self, log_type: str, query_date: str, next_page: str):
-        batch_download_urls, result_next_page, caught_up = self.get_siem_batches(log_type, query_date, next_page)
+    def get_siem_logs(self, log_type: str, query_date: str, next_page: str, page_size: int = 100) -> Tuple[List[str], str, bool]:
+        batch_download_urls, result_next_page, caught_up = self.get_siem_batches(log_type, query_date, next_page, page_size)
         logs = []
         self.logger.info(f"API: Getting SIEM logs from batches for log type {log_type}...")
         for url in batch_download_urls:
             batch_logs = self.get_siem_logs_from_batch(url=url)
-            if isinstance(batch_logs, List):
+            if isinstance(batch_logs, (List, Dict)):
                 logs.extend(batch_logs)
-            if isinstance(batch_logs, Dict):
-                logs.append(batch_logs)
         self.logger.info(f"API: Discovered {len(logs)} logs for log type {log_type}")
         return logs, result_next_page, caught_up
 
-    def get_siem_batches(self, log_type: str, query_date: str, next_page: str):
+    def get_siem_batches(self, log_type: str, query_date: str, next_page: str, page_size: int = 100) -> Tuple[List[str], str, bool]:
         self.logger.info(
             f"API: Getting SIEM batches for log type {log_type} for {query_date} with page token {next_page}..."
         )
-        params = {"type": log_type, "dateRangeStartsAt": query_date, "dateRangeEndsAt": query_date, "pageSize": 100}
+        params = {"type": log_type, "dateRangeStartsAt": query_date, "dateRangeEndsAt": query_date, "pageSize": page_size}
         if next_page:
             params.update({"nextPage": next_page})
         batch_response = self.make_api_request(url=Endpoints.GET_SIEM_LOGS_BATCH, method=GET, params=params)
@@ -64,17 +62,15 @@ class API:
         self.logger.info(
             f"API: Discovered {len(batch_list)} batches for log type {log_type}. Response reporting {caught_up} that logs have caught up to query window"
         )
-        urls = []
-        for batch in batch_list:
-            urls.append(batch.get("url"))
+        urls = [batch.get("url") for batch in batch_list]
         return urls, batch_response.get("@nextPage"), caught_up
 
     def get_siem_logs_from_batch(self, url: str):
         response = requests.request(method=GET, url=url, stream=False)
-        with gzip.GzipFile(fileobj=BytesIO(response.content), mode="rb") as f:
+        with gzip.GzipFile(fileobj=BytesIO(response.content), mode="rb") as file_:
             logs = []
             # Iterate over lines in the decompressed file, decode and load the JSON
-            for line in f:
+            for line in file_:
                 decoded_line = line.decode("utf-8").strip()
                 logs.append(json.loads(decoded_line))
         return logs

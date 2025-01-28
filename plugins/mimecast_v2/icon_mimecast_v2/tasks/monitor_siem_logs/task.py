@@ -6,11 +6,6 @@ from datetime import datetime, timezone, timedelta
 
 
 LOG_TYPES = ["receipt", "url protect", "attachment protect"]
-INITIAL_STATE = {
-    "receipt": {"caught_up": False},
-    "url protect": {"caught_up": False},
-    "attachment protect": {"caught_up": False},
-}
 MAX_LOOKBACK_DAYS = 7
 INITIAL_MAX_LOOKBACK_DAYS = 1
 INITIAL_RUN = "initial_run"
@@ -34,13 +29,14 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         try:
             run_condition = self.detect_run_condition(state)
             self.logger.info(f"TASK: Current run state is {run_condition}")
-            now = datetime.now(tz=timezone.utc)
-            now_date = now.date()
-            max_run_lookback_date = self.get_max_lookback_date(now, run_condition, bool(custom_config))
+            now_date = datetime.now(tz=timezone.utc).date()
+            max_run_lookback_date = self.get_max_lookback_date(now_date, run_condition, bool(custom_config))
             if not state:
-                state = INITIAL_STATE
+                # Check if all of the three necessary log types are always in the query config
+                initial_log_type_config = {"caught_up": False}
+                state = {"query_config": dict.fromkeys(LOG_TYPES, initial_log_type_config.copy())}
                 self.apply_custom_config(state, custom_config)
-            query_config = self.prepare_query_params(state, max_run_lookback_date, now_date)
+            query_config = self.prepare_query_params(state.get("query_config"), max_run_lookback_date, now_date)
             logs, query_config = self.get_all_logs(run_condition, query_config)
             exit_state, has_more_pages = self.prepare_exit_state(query_config, now_date)
             return logs, exit_state, has_more_pages, 200, None
@@ -70,11 +66,11 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         return SUBSEQUENT_RUN
 
     def get_max_lookback_date(
-        self, now: datetime, run_condition: str, custom_config: bool
-    ) -> Tuple[datetime, datetime]:
+        self, now_date: datetime, run_condition: str, custom_config: bool
+    ) -> datetime:
         """
         Get max lookback date for run condition
-        :param now:
+        :param now_date:
         :param run_condition:
         :param custom_config:
         :return: max_run_lookback_date
@@ -83,16 +79,17 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         if run_condition in [INITIAL_RUN] and not custom_config:
             max_run_lookback_days = INITIAL_MAX_LOOKBACK_DAYS
 
-        max_run_lookback_date = (now - timedelta(days=max_run_lookback_days)).date()
+        max_run_lookback_date = (now_date - timedelta(days=max_run_lookback_days))
         return max_run_lookback_date
 
-    def apply_custom_config(self, current_query_config: Dict, custom_config: Dict) -> None:
+    def apply_custom_config(self, state: Dict, custom_config: Dict) -> None:
         """
         Apply custom configuration for lookback, query date applies to start and end time of query
         :param current_query_config:
         :param custom_config:
         :return: N/A
         """
+        current_query_config = state.get("query_config")
         for log_type, lookback_date_string in custom_config.items():
             self.logger.info(f"TASK: Supplied lookback date of {lookback_date_string} for {log_type} log type")
             current_query_config[log_type] = {"query_date": lookback_date_string}
