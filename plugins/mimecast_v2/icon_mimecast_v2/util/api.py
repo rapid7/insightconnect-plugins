@@ -66,6 +66,7 @@ class API:
         return urls, batch_response.get("@nextPage"), caught_up
 
     def get_siem_logs_from_batch(self, url: str):
+        # TODO: Threading
         response = requests.request(method=GET, url=url, stream=False)
         with gzip.GzipFile(fileobj=BytesIO(response.content), mode="rb") as file_:
             logs = []
@@ -89,6 +90,7 @@ class API:
         if auth:
             headers["Authorization"] = f"Bearer {self.access_token}"
         request = Request(url=url, method=method, headers=headers, params=params, data=data, json=json)
+        # TODO: Handle rate limit, handle retry backoff
         try:
             response = make_request(
                 _request=request,
