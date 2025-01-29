@@ -41,17 +41,14 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             exit_state, has_more_pages = self.prepare_exit_state(state, query_config, now_date)
             return logs, exit_state, has_more_pages, 200, None
         except APIException as error:
-            raise error
             self.logger.info(
                 f"Error: An API exception has occurred. Status code: {error.status_code} returned. Cause: {error.cause}. Error data: {error.data}."
             )
             return [], existing_state, False, error.status_code, error
         except PluginException as error:
-            raise error
             self.logger.info(f"Error: A Plugin exception has occurred. Cause: {error.cause}  Error data: {error.data}.")
             return [], existing_state, False, error.status_code, error
         except Exception as error:
-            raise error
             self.logger.info(f"Error: Unknown exception has occurred. No results returned. Error Data: {error}")
             return [], existing_state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 

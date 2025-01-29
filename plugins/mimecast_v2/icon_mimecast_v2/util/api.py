@@ -38,8 +38,12 @@ class API:
         self.access_token = response.get("access_token")
         self.logger.info("API: Authenticated")
 
-    def get_siem_logs(self, log_type: str, query_date: str, next_page: str, page_size: int = 100) -> Tuple[List[str], str, bool]:
-        batch_download_urls, result_next_page, caught_up = self.get_siem_batches(log_type, query_date, next_page, page_size)
+    def get_siem_logs(
+        self, log_type: str, query_date: str, next_page: str, page_size: int = 100
+    ) -> Tuple[List[str], str, bool]:
+        batch_download_urls, result_next_page, caught_up = self.get_siem_batches(
+            log_type, query_date, next_page, page_size
+        )
         logs = []
         self.logger.info(f"API: Getting SIEM logs from batches for log type {log_type}...")
         for url in batch_download_urls:
@@ -49,11 +53,18 @@ class API:
         self.logger.info(f"API: Discovered {len(logs)} logs for log type {log_type}")
         return logs, result_next_page, caught_up
 
-    def get_siem_batches(self, log_type: str, query_date: str, next_page: str, page_size: int = 100) -> Tuple[List[str], str, bool]:
+    def get_siem_batches(
+        self, log_type: str, query_date: str, next_page: str, page_size: int = 100
+    ) -> Tuple[List[str], str, bool]:
         self.logger.info(
             f"API: Getting SIEM batches for log type {log_type} for {query_date} with page token {next_page}..."
         )
-        params = {"type": log_type, "dateRangeStartsAt": query_date, "dateRangeEndsAt": query_date, "pageSize": page_size}
+        params = {
+            "type": log_type,
+            "dateRangeStartsAt": query_date,
+            "dateRangeEndsAt": query_date,
+            "pageSize": page_size,
+        }
         if next_page:
             params.update({"nextPage": next_page})
         batch_response = self.make_api_request(url=Endpoints.GET_SIEM_LOGS_BATCH, method=GET, params=params)
