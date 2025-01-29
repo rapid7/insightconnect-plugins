@@ -1,20 +1,25 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 from .schema import ConnectionSchema, Input
+from icon_mimecast_v2.util.api import API
+
 # Custom imports below
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
     def connect(self, params):
         self.logger.info("Connect: Connecting...")
-        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
-        self.cleint_secret = params.get(Input.CLEINT_SECRET)
-        self.client_id = params.get(Input.CLIENT_ID)
-        # END INPUT BINDING - DO NOT REMOVE
+        self.client_secret = params.get(Input.CLIENT_SECRET, {}).get("secretKey", "").strip()
+        self.client_id = params.get(Input.CLIENT_ID, {}).get("secretKey", "").strip()
+        self.api = API(client_id=self.client_id, client_secret=self.client_secret, logger=self.logger)
+        self.api.authenticate()
 
     def test(self):
-        # TODO: Implement connection test
-        pass
+        try:
+            self.api.health_check()
+            return {"success": True}
+        except PluginException as error:
+            raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=error.data)
