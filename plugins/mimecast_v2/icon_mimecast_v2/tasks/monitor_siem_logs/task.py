@@ -145,7 +145,9 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             if query_date_str:
                 query_date = datetime.strptime(query_date_str, DATE_FORMAT).date()
             if not query_date_str:
-                self.logger.info(f"TASK: Query date for {log_type} log type is not present. Initializing a {max_lookback_date}")
+                self.logger.info(
+                    f"TASK: Query date for {log_type} log type is not present. Initializing a {max_lookback_date}"
+                )
                 log_type_config[QUERY_DATE] = max_lookback_date
             elif query_date < now_date and log_type_config.get(CAUGHT_UP) is True:
                 self.logger.info(f"TASK: Log type {log_type} has caught up for {query_date}")
@@ -172,7 +174,9 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             log_type_config[QUERY_DATE] = now_date
         return log_type_config
 
-    def get_all_logs(self, run_condition: str, query_config: Dict, page_size: int, thead_count: int) -> Tuple[List, Dict]:
+    def get_all_logs(
+        self, run_condition: str, query_config: Dict, page_size: int, thead_count: int
+    ) -> Tuple[List, Dict]:
         """
         Gets all logs of provided log type. First retrieves batch URLs. Then downloads and reads batches, pooling logs.
         :param run_condition:
@@ -189,7 +193,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                     query_date=log_type_config.get(QUERY_DATE),
                     next_page=log_type_config.get(NEXT_PAGE),
                     page_size=page_size,
-                    max_threads=thead_count
+                    max_threads=thead_count,
                 )
                 complete_logs.extend(logs)
                 log_type_config.update({NEXT_PAGE: results_next_page, CAUGHT_UP: caught_up})
@@ -197,7 +201,9 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                 self.logger.info(f"TASK: Query for {log_type} is caught up. Skipping as we are currently paginating")
         return complete_logs, query_config
 
-    def prepare_exit_state(self, state: dict, query_config: dict, now_date: datetime, log_hashes: List[str]) -> Tuple[Dict, bool]:
+    def prepare_exit_state(
+        self, state: dict, query_config: dict, now_date: datetime, log_hashes: List[str]
+    ) -> Tuple[Dict, bool]:
         """
         Prepare state and pagination for task completion. Format date time.
         :param state:

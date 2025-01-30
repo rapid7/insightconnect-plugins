@@ -128,9 +128,7 @@ class API:
             return self.make_api_request(url, method, headers, json, data, params, return_json, auth)
         elif response.status_code == HTTPStatusCodes.UNAUTHORIZED:
             raise APIException(
-                preset=PluginException.Preset.API_KEY,
-                data=response.text,
-                status_code=response.status_code
+                preset=PluginException.Preset.API_KEY, data=response.text, status_code=response.status_code
             )
         if return_json:
             json_data = extract_json(response)
