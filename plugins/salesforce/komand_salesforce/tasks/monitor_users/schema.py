@@ -43,6 +43,7 @@ class MonitorUsersOutput(insightconnect_plugin_runtime.Output):
   "type": "array",
   "title": "Users",
   "description": "Information about users, their login history and which users have been updated",
+  "items": {},
   "required": [
     "users"
   ],

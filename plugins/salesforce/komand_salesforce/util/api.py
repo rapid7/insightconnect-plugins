@@ -18,6 +18,7 @@ from komand_salesforce.util.endpoints import (
     SOBJECT_UPDATED_USERS,
 )
 from komand_salesforce.util.exceptions import ApiException
+from requests.exceptions import ConnectionError as DNSError
 
 
 def rate_limiting(max_tries: int):
@@ -190,17 +191,27 @@ class SalesforceAPI:
         client_url = f"https://{salesforce_url}/services/oauth2/token"
 
         self.logger.info(f"SalesforceAPI: Getting API token from {client_url}... ")
-        response = requests.request(
-            method="POST",
-            url=client_url,
-            data={
-                "grant_type": "password",
-                "client_id": client_id,
-                "client_secret": client_secret,
-                "username": username,
-                "password": password + security_token,
-            },
-        )
+
+        try:
+            response = requests.request(
+                method="POST",
+                url=client_url,
+                data={
+                    "grant_type": "password",
+                    "client_id": client_id,
+                    "client_secret": client_secret,
+                    "username": username,
+                    "password": password + security_token,
+                },
+            )
+        except DNSError as error_message:
+            self.logger.info(f"Network error or DNS resolution failed: {error_message}")
+            raise ApiException(
+                cause="Network error or DNS resolution failed. Please check the domain entered",
+                assistance="Network error or DNS resolution failed. Please check the domain entered",
+                status_code=400,
+                data="Network error or DNS resolution failed. Please check the domain entered",
+            )
 
         if 400 <= response.status_code <= 504:
             decoded_response = response.content.decode()
@@ -357,6 +368,7 @@ class SalesforceAPI:
             "invalid_grant": "Invalid password or security token supplied.",
             "invalid_client_id": "Invalid client ID supplied.",
             "invalid_client": "Invalid client secret supplied.",
+            "unsupported_grant_type": "Grant type not supported, Please ensure correct login URL is provided",
         }
 
         try:
