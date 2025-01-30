@@ -213,7 +213,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         :return: state, has_more_pages
         """
         has_more_pages = False
-        for log_type, log_type_config in query_config.items():
+        for log_type_config in query_config.values:
             query_date = log_type_config.get(QUERY_DATE)
             if isinstance(query_date, str):
                 query_date = datetime.strptime(query_date, DATE_FORMAT).date()
