@@ -231,7 +231,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             QUERY_SEARCH_TO=search_to,
         )
 
-    def get_query_times(self, state, now_date_time) -> Tuple[int, int, datetime]:
+    def get_query_times(self, state, now_date_time) -> Tuple[datetime, datetime, datetime]:
         """
         Get initial query times in unix for get alerts query, and max lookback date time
         :param state:
