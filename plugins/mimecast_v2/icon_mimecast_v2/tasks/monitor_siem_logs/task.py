@@ -57,14 +57,17 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             exit_state, has_more_pages = self.prepare_exit_state(state, query_config, now_date, log_hashes)
             return logs, exit_state, has_more_pages, 200, None
         except APIException as error:
+            raise error
             self.logger.info(
                 f"Error: An API exception has occurred. Status code: {error.status_code} returned. Cause: {error.cause}. Error data: {error.data}."
             )
             return [], existing_state, False, error.status_code, error
         except PluginException as error:
+            raise error
             self.logger.info(f"Error: A Plugin exception has occurred. Cause: {error.cause}  Error data: {error.data}.")
             return [], existing_state, False, error.status_code, error
         except Exception as error:
+            raise error
             self.logger.info(f"Error: Unknown exception has occurred. No results returned. Error Data: {error}")
             return [], existing_state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
@@ -88,7 +91,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         :param state:
         :return: State
         """
-        initial_log_type_config = {CAUGHT_UP: False, PAGE_SIZE: DEFAULT_PAGE_SIZE}
+        initial_log_type_config = {CAUGHT_UP: False}
         if not state:
             self.logger.info("TASK: Initializing first state...")
             state = {QUERY_CONFIG: {log_type: copy.deepcopy(initial_log_type_config) for log_type in LOG_TYPES}}
@@ -213,7 +216,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         :return: state, has_more_pages
         """
         has_more_pages = False
-        for log_type_config in query_config.values:
+        for log_type_config in query_config.values():
             query_date = log_type_config.get(QUERY_DATE)
             if isinstance(query_date, str):
                 query_date = datetime.strptime(query_date, DATE_FORMAT).date()
