@@ -5,12 +5,13 @@ from insightconnect_plugin_runtime.exceptions import (
     HTTPStatusCodes,
     ResponseExceptionData,
 )
-from insightconnect_plugin_runtime.helper import make_request, extract_json
+from insightconnect_plugin_runtime.helper import extract_json, make_request, rate_limiting
 from logging import Logger
 from requests import Response, Request
 from io import BytesIO
-from icon_mimecast_v2.util.endpoints import Endpoints
+from icon_mimecast_v2.util.constants import Endpoints
 from typing import Dict, List, Tuple
+from multiprocessing.dummy import Pool
 import gzip
 import json
 
@@ -39,17 +40,19 @@ class API:
         self.logger.info("API: Authenticated")
 
     def get_siem_logs(
-        self, log_type: str, query_date: str, next_page: str, page_size: int = 100
+        self, log_type: str, query_date: str, next_page: str, page_size: int = 100, max_threads: int = 10
     ) -> Tuple[List[str], str, bool]:
         batch_download_urls, result_next_page, caught_up = self.get_siem_batches(
             log_type, query_date, next_page, page_size
         )
         logs = []
         self.logger.info(f"API: Getting SIEM logs from batches for log type {log_type}...")
-        for url in batch_download_urls:
-            batch_logs = self.get_siem_logs_from_batch(url=url)
-            if isinstance(batch_logs, (List, Dict)):
-                logs.extend(batch_logs)
+        self.logger.info(f"API: Applying page size limit of {page_size}")
+        with Pool(max_threads) as pool:
+            batch_logs = pool.imap(self.get_siem_logs_from_batch, batch_download_urls)
+            for result in batch_logs:
+                if isinstance(result, (List, Dict)):
+                    logs.extend(result)
         self.logger.info(f"API: Discovered {len(logs)} logs for log type {log_type}")
         return logs, result_next_page, caught_up
 
@@ -77,7 +80,6 @@ class API:
         return urls, batch_response.get("@nextPage"), caught_up
 
     def get_siem_logs_from_batch(self, url: str):
-        # TODO: Threading
         response = requests.request(method=GET, url=url, stream=False)
         with gzip.GzipFile(fileobj=BytesIO(response.content), mode="rb") as file_:
             logs = []
@@ -87,6 +89,7 @@ class API:
                 logs.append(json.loads(decoded_line))
         return logs
 
+    @rate_limiting(5)
     def make_api_request(
         self,
         url: str,
@@ -101,7 +104,6 @@ class API:
         if auth:
             headers["Authorization"] = f"Bearer {self.access_token}"
         request = Request(url=url, method=method, headers=headers, params=params, data=data, json=json)
-        # TODO: Handle rate limit, handle retry backoff
         try:
             response = make_request(
                 _request=request,
@@ -117,11 +119,16 @@ class API:
                     status_code=exception.data.status_code,
                 )
             raise exception
-        if (
-            response.status_code == HTTPStatusCodes.UNAUTHORIZED
-            and extract_json(response).get("fail", [{}])[0].get("code") == "token_expired"
-        ):
-            self.authenticate()
+        if response.status_code == HTTPStatusCodes.UNAUTHORIZED:
+            json_data = extract_json(response)
+            if json_data.get("fail", [{}])[0].get("code") == "token_expired":
+                self.authenticate()
+                self.logger.info("API: Token has expired, attempting re-authentication...")
+                return self.make_api_request(url, method, headers, json, data, params, return_json, auth)
+        if response.status_code == HTTPStatusCodes.UNAUTHORIZED:
+            raise APIException(
+                preset=PluginException.Preset.API_KEY, data=response.text, status_code=response.status_code
+            )
         if return_json:
             json_data = extract_json(response)
             return json_data

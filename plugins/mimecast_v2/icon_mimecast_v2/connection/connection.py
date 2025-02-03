@@ -4,6 +4,7 @@ from .schema import ConnectionSchema, Input
 from icon_mimecast_v2.util.api import API
 
 # Custom imports below
+from datetime import datetime, timezone
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -23,3 +24,27 @@ class Connection(insightconnect_plugin_runtime.Connection):
             return {"success": True}
         except PluginException as error:
             raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=error.data)
+
+    def test_task(self):
+        try:
+            now_date = datetime.now(tz=timezone.utc).date()
+            self.api.get_siem_logs(log_type="receipt", query_date=now_date, page_size=1, max_threads=1, next_page=None)
+            self.logger.info("The connection test to Mimecast was successful.")
+            return {"success": True}
+        except PluginException as error:
+            return_message = ""
+            failed_message = "The connection test to Mimecast for has failed."
+            self.logger.info(failed_message)
+            return_message += f"{failed_message}\n"
+
+            cause_message = f"This failure was caused by: '{error.cause}'"
+            self.logger.info(cause_message)
+            return_message += f"{cause_message}\n"
+
+            self.logger.info(error.assistance)
+            return_message += f"{error.assistance}\n"
+            raise ConnectionTestException(
+                cause="Configured credentials do not have permission for this API endpoint.",
+                assistance="Please ensure credentials have required permissions.",
+                data=return_message,
+            )
