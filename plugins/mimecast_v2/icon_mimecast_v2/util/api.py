@@ -119,14 +119,13 @@ class API:
                     status_code=exception.data.status_code,
                 )
             raise exception
-        if (
-            response.status_code == HTTPStatusCodes.UNAUTHORIZED
-            and extract_json(response).get("fail", [{}])[0].get("code") == "token_expired"
-        ):
-            self.authenticate()
-            self.logger.info("API: Token has expired, attempting re-authentication...")
-            return self.make_api_request(url, method, headers, json, data, params, return_json, auth)
-        elif response.status_code == HTTPStatusCodes.UNAUTHORIZED:
+        if response.status_code == HTTPStatusCodes.UNAUTHORIZED:
+            json_data = extract_json(response)
+            if json_data.get("fail", [{}])[0].get("code") == "token_expired":
+                self.authenticate()
+                self.logger.info("API: Token has expired, attempting re-authentication...")
+                return self.make_api_request(url, method, headers, json, data, params, return_json, auth)
+        if response.status_code == HTTPStatusCodes.UNAUTHORIZED:
             raise APIException(
                 preset=PluginException.Preset.API_KEY, data=response.text, status_code=response.status_code
             )

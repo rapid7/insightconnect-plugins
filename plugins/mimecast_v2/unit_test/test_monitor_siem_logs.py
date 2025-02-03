@@ -78,7 +78,7 @@ STUB_CUSTOM_CONFIG = {
         "url protect": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "1999-12-31"},
     },
     "page_size": 1,
-    "thread_count": 1
+    "thread_count": 1,
 }
 
 STUB_CUSTOM_CONFIG_EXCEED_DATE = {
@@ -88,7 +88,7 @@ STUB_CUSTOM_CONFIG_EXCEED_DATE = {
         "url protect": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "1999-12-30"},
     },
     "page_size": 1,
-    "thread_count": 1
+    "thread_count": 1,
 }
 
 
@@ -174,4 +174,52 @@ class TestMonitorLogs(TestCase):
         self.assertEqual(expected_has_more_pages, has_more_pages)
         self.assertEqual(expected_status_code, status_code)
         self.assertEqual(expected_error, error)
+        validate(output, MonitorSiemLogsOutput.schema)
+
+    @parameterized.expand(
+        [
+            [
+                "401",
+                {"query_config": {"receipt": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "2000-01-01"}}},
+                "Invalid API key provided.",
+                "Verify your API key configured in your connection is correct.",
+                401,
+            ],
+            [
+                "500",
+                {"query_config": {"receipt": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "2000-01-02"}}},
+                "Something unexpected occurred.",
+                "Check the logs and if the issue persists please contact support.",
+                500,
+            ],
+            [
+                "json_decode",
+                {"query_config": {"receipt": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "2000-01-03"}}},
+                "Received an unexpected response from the server.",
+                "(non-JSON or no response was received).",
+                500,
+            ],
+            [
+                "unknown",
+                {"query_config": {"receipt": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "2000-01-04"}}},
+                "Something unexpected occurred.",
+                "Check the logs and if the issue persists please contact support.",
+                500,
+            ],
+        ]
+    )
+    @patch("requests.Session.send", side_effect=Util.mocked_request)
+    def test_monitor_logs_errors(
+        self,
+        test_name,
+        state,
+        expected_cause,
+        expected_assistance,
+        expected_status_code,
+        mock_request,
+    ):
+        output, state, has_more_pages, status_code, error = self.task.run(params={}, state=state)
+        self.assertEqual(expected_status_code, status_code)
+        self.assertEqual(expected_cause, error.cause)
+        self.assertEqual(expected_assistance, error.assistance)
         validate(output, MonitorSiemLogsOutput.schema)

@@ -12,6 +12,7 @@ from icon_mimecast_v2.util.constants import BASE_URL
 import gzip
 from io import BytesIO
 
+
 class Util:
     @staticmethod
     def default_connector(action, connect_params: object = None):
@@ -61,8 +62,8 @@ class Util:
             def _gzip_compress(self, data):
                 """Compress content using gzip."""
                 buf = BytesIO()  # Create a buffer to hold the gzipped content
-                with gzip.GzipFile(fileobj=buf, mode='wb') as f:
-                    f.write(data.encode('utf-8'))  # Write the string data to gzip (must be bytes)
+                with gzip.GzipFile(fileobj=buf, mode="wb") as f:
+                    f.write(data.encode("utf-8"))  # Write the string data to gzip (must be bytes)
                 return buf.getvalue()
 
             def json(self):
@@ -73,9 +74,6 @@ class Util:
                     return
                 raise HTTPError("Bad response", response=self)
 
-        params = kwargs.get("params", {})
-        json_data = kwargs.get("json", {})
-        print(args[0].url)
         if args[0].url == f"{BASE_URL}oauth/token":
             return MockResponse(200, "authenticate")
         if args[0].url in [
@@ -93,5 +91,20 @@ class Util:
             f"{BASE_URL}siem/v1/batch/events/cg?type=url+protect&dateRangeStartsAt=1999-12-31&dateRangeEndsAt=1999-12-31&pageSize=1",
         ]:
             return MockResponse(200, "monitor_siem_logs_batch")
+        if (
+            args[0].url
+            == f"{BASE_URL}siem/v1/batch/events/cg?type=receipt&dateRangeStartsAt=2000-01-02&dateRangeEndsAt=2000-01-02&pageSize=100"
+        ):
+            return MockResponse(401, "monitor_siem_logs_error")
+        if (
+            args[0].url
+            == f"{BASE_URL}siem/v1/batch/events/cg?type=receipt&dateRangeStartsAt=2000-01-04&dateRangeEndsAt=2000-01-04&pageSize=100"
+        ):
+            return MockResponse(401, "monitor_siem_logs_json_error")
+        if (
+            args[0].url
+            == f"{BASE_URL}siem/v1/batch/events/cg?type=receipt&dateRangeStartsAt=2000-01-05&dateRangeEndsAt=2000-01-05&pageSize=100"
+        ):
+            raise AttributeError
         if args[0].url == "https://example.com/":
             return MockResponse(200, "monitor_siem_logs", gzip=True)
