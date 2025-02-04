@@ -118,8 +118,9 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         """
         Apply custom configuration for lookback, query date applies to start and end time of query
         :param current_query_config:
+        :param run_type:
         :param custom_config:
-        :return:
+        :return: Page size and thread count
         """
         custom_query_config = {}
         if custom_config:
