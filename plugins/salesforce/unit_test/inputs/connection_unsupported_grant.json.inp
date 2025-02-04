@@ -1,0 +1,13 @@
+{
+  "clientId": "unsupported-grant-type",
+  "clientSecret": {
+    "secretKey": "example-secret-key"
+  },
+  "salesforceAccountUsernameAndPassword": {
+    "username": "example-username",
+    "password": "example-password"
+  },
+  "securityToken": {
+    "secretKey": "example-secret-key"
+  }
+}
