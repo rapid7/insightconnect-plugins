@@ -11,6 +11,7 @@ from unittest.mock import MagicMock, patch
 from jsonschema import validate
 from komand_salesforce.tasks.monitor_users.schema import MonitorUsersOutput
 from komand_salesforce.tasks.monitor_users.task import MonitorUsers
+from komand_salesforce.connection.schema import Input
 from parameterized import parameterized
 
 from util import Util
@@ -179,3 +180,47 @@ class TestMonitorUsers(TestCase):
         self.assertEqual(user_login_cutoff, mocked_logger.call_args_list[3][0][0])
 
         mock_unset.assert_called()
+
+    @parameterized.expand(
+        [
+            [
+                "without_state",
+                {
+                    "last_user_update_collection_timestamp": "2025-07-21 15:21:15.340262+00:00",
+                    "next_user_collection_timestamp": "2023-07-21 15:21:15.340262+00:00",
+                    "next_user_login_collection_timestamp": "2023-07-20 15:21:15.340262+00:00",
+                    "last_user_login_collection_timestamp": "2023-07-20 14:21:15.340262+00:00",
+                },
+                {},
+            ],
+        ]
+    )
+    def test_bad_domain_provided(
+        self,
+        mocked_unset: MagicMock,
+        mocked_logger: MagicMock,
+        _mock_request: MagicMock,
+        _mock_get_time: MagicMock,
+        test_name: str,
+        current_state: Dict[str, Any],
+        expected: Dict[str, Any],
+    ) -> None:
+
+        params = {
+            Input.CLIENTID: "example-client-id",
+            Input.CLIENTSECRET: {"secretKey": "example-secret-key"},
+            Input.SALESFORCEACCOUNTUSERNAMEANDPASSWORD: {
+                "username": "example-username",
+                "password": "example-password",
+            },
+            Input.SECURITYTOKEN: {"secretKey": "example-secret-key"},
+            Input.LOGINURL: "bad_domain",
+        }
+
+        self.action = Util.default_connector(MonitorUsers(), params=params)
+        actual, _actual_state, _has_more_pages, status_code, error = self.action.run(state=current_state)
+
+        self.assertEqual(error.cause, "Network error or DNS resolution failed. Please check the domain entered")
+        self.assertEqual(status_code, 400)
+
+        validate(actual, MonitorUsersOutput.schema)

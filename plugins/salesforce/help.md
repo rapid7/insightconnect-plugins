@@ -533,6 +533,7 @@ Example output:
 
 # Version History
 
+* 2.1.13 - Task Monitor Users: improve error response to UI | Bump SDK to 6.2.4
 * 2.1.12 - Task Monitor Users: ensure datetime includes microseconds | Bump SDK to 6.2.0
 * 2.1.11 - Task Monitor Users: Return 500 for retry your request error | Bump SDK to 6.1.4
 * 2.1.10 - Set Monitor Users task output length | Fix to remove whitespace from connection inputs
