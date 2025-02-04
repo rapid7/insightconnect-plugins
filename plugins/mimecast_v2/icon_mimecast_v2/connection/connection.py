@@ -20,7 +20,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def test(self):
         try:
-            self.api.health_check()
+            now_date = datetime.now(tz=timezone.utc).date()
+            self.api.get_siem_logs(log_type="receipt", query_date=now_date, page_size=1, max_threads=1, next_page=None)
             return {"success": True}
         except PluginException as error:
             raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=error.data)

@@ -47,7 +47,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             run_condition = self.detect_run_condition(state.get(QUERY_CONFIG, {}), now_date)
             self.logger.info(f"TASK: Run state is {run_condition}")
             state = self.update_state(state)
-            page_size, thead_count = self.apply_custom_config(state, custom_config)
+            page_size, thead_count = self.apply_custom_config(state, run_condition, custom_config)
             max_run_lookback_date = self.get_max_lookback_date(now_date, run_condition, bool(custom_config))
             query_config = self.prepare_query_params(state.get(QUERY_CONFIG, {}), max_run_lookback_date, now_date)
             logs, query_config = self.get_all_logs(run_condition, query_config, page_size, thead_count)
@@ -114,20 +114,24 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         max_run_lookback_date = now_date - timedelta(days=max_run_lookback_days)
         return max_run_lookback_date
 
-    def apply_custom_config(self, state: Dict, custom_config: Dict = {}) -> Tuple[int, int]:
+    def apply_custom_config(self, state: Dict, run_type: str, custom_config: Dict = {}) -> Tuple[int, int]:
         """
         Apply custom configuration for lookback, query date applies to start and end time of query
         :param current_query_config:
+        :param run_type:
         :param custom_config:
-        :return:
+        :return: Page size and thread count
         """
+        custom_query_config = {}
         if custom_config:
             self.logger.info("TASK: Custom config detected")
-        if not state:
+            custom_query_config = custom_config.get("query_config", {})
+        if run_type == INITIAL_RUN:
             current_query_config = state.get(QUERY_CONFIG)
-            for log_type, query_date_string in custom_config.items():
-                self.logger.info(f"TASK: Supplied lookback date of {query_date_string} for log type {log_type}")
-                current_query_config[log_type] = {QUERY_DATE: query_date_string}
+            for log_type, log_query_config in custom_query_config.items():
+                log_query_date = log_query_config.get("query_date", None)
+                self.logger.info(f"TASK: Supplied lookback date of {log_query_date} for log type {log_type}")
+                current_query_config[log_type] = {QUERY_DATE: log_query_date}
         page_size = max(1, min(custom_config.get(PAGE_SIZE, DEFAULT_PAGE_SIZE), DEFAULT_PAGE_SIZE))
         thread_count = max(1, custom_config.get(THREAD_COUNT, DEFAULT_THREAD_COUNT))
         return page_size, thread_count
