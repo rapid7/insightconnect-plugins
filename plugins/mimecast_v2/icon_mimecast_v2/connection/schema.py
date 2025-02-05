@@ -18,12 +18,16 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "$ref": "#/definitions/credential_secret_key",
       "title": "Client ID",
       "description": "The Mimecast 2.0 Application Client ID",
+      "placeholder": "Client ID",
+      "tooltip": "Enter the Client ID obtained from the Mimecast 2.0 API Application",
       "order": 1
     },
     "client_secret": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "Client Secret",
       "description": "The Mimecast 2.0 Application Client Secret",
+      "placeholder": "Client Secret",
+      "tooltip": "Enter the Client ID obtained from the Mimecast 2.0 API Application",
       "order": 2
     }
   },
