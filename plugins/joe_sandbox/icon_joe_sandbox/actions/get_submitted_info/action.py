@@ -8,7 +8,7 @@ from .schema import GetSubmittedInfoInput, GetSubmittedInfoOutput, Input, Output
 class GetSubmittedInfo(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="get_submission_info",
+            name="get_submitted_info",
             description=Component.DESCRIPTION,
             input=GetSubmittedInfoInput(),
             output=GetSubmittedInfoOutput(),

@@ -3,31 +3,31 @@
 Joe Sandbox Cloud executes files and URLs fully automated in a controlled environment and monitors the behavior of applications and the operating system for suspicious activities
 
 # Key Features
-  
-* Submit samples and URLs for sandbox analysis  
-* Search, list, get, download, and delete analyses  
+
+* Submit samples and URLs for sandbox analysis
+* Search, list, get, download, and delete analyses
 * Get, list, and manage server and user info
 
 # Requirements
-  
-* API Key  
+
+* API Key
 * Sandbox server (if not using cloud)
 
 # Supported Product Versions
-  
+
 * Joe Sandbox API v2
 
 # Documentation
 
 ## Setup
-  
+
 The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|api_key|credential_secret_key|None|True|API key generated for Joe Sandbox user|None|8e8786182c66e8bc2abdab9198f1385691987bfe2a4917be1268e915e457dbc5|
-|url|string|https://jbxcloud.joesecurity.org/api|False|API URL of the Joe Sandbox instance. Default is for Joe Sandbox Cloud. On-premise installations use the following URL format http://example.com/joesandbox/index.php/api|None|http://example.com/joesandbox/index.php/api|
-  
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|api_key|credential_secret_key|None|True|API key generated for Joe Sandbox user|None|8e8786182c66e8bc2abdab9198f1385691987bfe2a4917be1268e915e457dbc5|None|None|
+|url|string|https://jbxcloud.joesecurity.org/api|False|API URL of the Joe Sandbox instance. Default is for Joe Sandbox Cloud. On-premise installations use the following URL format http://example.com/joesandbox/index.php/api|None|http://example.com/joesandbox/index.php/api|None|None|
+
 Example input:
 
 ```
@@ -43,7 +43,7 @@ Example input:
 
 
 #### Check Server Status
-  
+
 This action is used to check if Joe Sandbox is online or in maintenance mode
 
 ##### Input
@@ -65,7 +65,7 @@ Example output:
 ```
 
 #### Delete Analysis
-  
+
 This action is used to delete an analysis
 
 ##### Input
@@ -97,7 +97,7 @@ Example output:
 ```
 
 #### Download Analysis
-  
+
 This action is used to download a resource for an analysis. This can be a full report, binaries, screenshots, etc
 
 ##### Input
@@ -135,7 +135,7 @@ Example output:
 ```
 
 #### Get Account Info
-  
+
 This action is used to query information about Joe Sandbox user account
 
 ##### Input
@@ -170,7 +170,7 @@ Example output:
 ```
 
 #### Get Analysis Info
-  
+
 This action is used to show the status and most important attributes of an analysis
 
 ##### Input
@@ -226,7 +226,7 @@ Example output:
 ```
 
 #### Get Server Info
-  
+
 This action is used to query information about the server
 
 ##### Input
@@ -248,7 +248,7 @@ Example output:
 ```
 
 #### Get Submitted Info
-  
+
 This action is used to show the status and info of submission
 
 ##### Input
@@ -280,7 +280,7 @@ Example output:
 ```
 
 #### List Analyses
-  
+
 This action is used to fetch a list of all analyses
 
 ##### Input
@@ -306,7 +306,7 @@ Example output:
 ```
 
 #### List Countries
-  
+
 This action is used to retrieve a list of localized internet anonymization countries
 
 ##### Input
@@ -335,7 +335,7 @@ Example output:
 ```
 
 #### List Languages and Locales
-  
+
 This action is used to retrieve a list of available keyboard layouts for Windows analyzers
 
 ##### Input
@@ -364,7 +364,7 @@ Example output:
 ```
 
 #### List Systems
-  
+
 This action is used to retrieve a list of systems on the server
 
 ##### Input
@@ -393,7 +393,7 @@ Example output:
 ```
 
 #### Search Analysis
-  
+
 This action is used to lists the web IDs of the analyses that match the given query. Searches in MD5, SHA1, SHA256, 
 filename, cookbook name, comment, URL and report ID
 
@@ -430,7 +430,7 @@ Example output:
 ```
 
 #### Submit Cookbook
-  
+
 This action is used to submit a cookbook for analysis and return the associated web IDs for the cookbook
 
 ##### Input
@@ -474,7 +474,7 @@ Example output:
 ```
 
 #### Submit Sample
-  
+
 This action is used to submit a sample for analysis and return the associated web IDs for the sample
 
 ##### Input
@@ -511,21 +511,18 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|webids|[]string|True|Web IDs associated with the sample|["1234567", "7654321"]|
+|submission_id|string|True|Submission ID associated with the sample|1234567|
   
 Example output:
 
 ```
 {
-  "webids": [
-    "1234567",
-    "7654321"
-  ]
+  "submission_id": 1234567
 }
 ```
 
 #### Submit Sample URL
-  
+
 This action is used to submit a sample at a given URL for analysis and return the associated web IDs for the sample
 
 ##### Input
@@ -569,7 +566,7 @@ Example output:
 ```
 
 #### Submit URL
-  
+
 This action is used to submit a website for analysis and return the associated web IDs for the sample
 
 ##### Input
@@ -611,11 +608,9 @@ Example output:
   "submission_id": 1001
 }
 ```
-
 ### Triggers
   
 *This plugin does not contain any triggers.*
-
 ### Tasks
   
 *This plugin does not contain any tasks.*
@@ -709,10 +704,11 @@ Example output:
 
 # Version History
 
+* 3.0.0 - Buffering encoded strings and fixing issues related to the actions | Updated SDK to 6.2.4 version
 * 2.0.0 - Update `jbxapi` dependency | `List Keyboard Layouts` - Renamed to `List Languages and Locales` | Updated SDK | `Get Submitted Info` - New action
 * 1.0.4 - Add extra optional input for Submit Sample action
 * 1.0.3 - Add example inputs
-* 1.0.2 - Fix misspelling in error message | Remove generic "automation" keyword
+* 1.0.2 - Fix misspelling in error message | Remove generic 'automation' keyword
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 
