@@ -1,11 +1,11 @@
 {
-	"spec": "09e7a8073da54693bcc990b37ec6e2a4",
+	"spec": "a075e9a45f8da26b40eae68c765d196e",
 	"manifest": "e0e42959bee1c96589545b1afb0b1f61",
 	"setup": "ea867af34e3163ba06ef9660ec9023fc",
 	"schemas": [
 		{
 			"identifier": "connection/schema.py",
-			"hash": "8918ffcfac8cbf4e1b5696cb9dd9ddaf"
+			"hash": "3253f4b76caee91ee0f0cdc596b64a98"
 		},
 		{
 			"identifier": "monitor_siem_logs/schema.py",
