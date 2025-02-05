@@ -11,7 +11,6 @@ from jsonschema import validate
 from mock import Util, mock_request_200, mocked_request, MagicMock
 
 
-
 class TestGetSubmittedInfo(TestCase):
     @patch("requests.request", side_effect=mock_request_200)
     def setUp(self, mock_client) -> None:
@@ -84,7 +83,6 @@ class TestGetSubmittedInfo(TestCase):
                 },
             }
         }
-
 
         validate(response, self.action.output.schema)
         self.assertEqual(response, expected)
