@@ -34,7 +34,6 @@ hub_tags:
   use_cases: [application_management, cloud_security, reporting_and_analytics]
   keywords: [sandbox, malware, analysis]
   features: [sandbox, analysis]
-troubleshooting: "This plugin does not contain a troubleshooting."
 version_history:
   - "3.0.0 - Buffering encoded strings and fixing issues related to the actions | Updated SDK to 6.2.4 version"
   - "2.0.0 - Update `jbxapi` dependency | `List Keyboard Layouts` - Renamed to `List Languages and Locales` | Updated SDK | `Get Submitted Info` - New action"
