@@ -1,6 +1,6 @@
 # Description
 
-[Threat Command](https://intsights.com/) by Rapid7 is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
+[Threat Command](https://www.rapid7.com/products/threat-command) by Rapid7 is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
 
 # Key Features
 
@@ -1427,10 +1427,11 @@ Example output:
 
 ## Troubleshooting
   
-*There is no troubleshooting for this plugin.*
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 5.2.1 - Updated plugin title | Updated SDK to the latest version
 * 5.2.0 - Update exception presets in API and unit tests | New `subtype` output to `get_indicator_by_value` action
 * 5.1.1 - Better handling of response from the threat connect API when using the `takedown_request` action | Bumped to use the newest version of the SDK | Updated old unit tests / added new unit tests
 * 5.1.0 - Add actions -> `Get Cyber Terms by Filter`, `Get IOCs for Cyber Term`, `Get CVEs for Cyber Term`, `Close Alert`. Add new input for `Get IOCs By Filter` action

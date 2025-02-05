@@ -1,7 +1,7 @@
 {
-	"spec": "63bb9e1c5603228258adaf80b9d60092",
-	"manifest": "c3bb4f3dedae0e4981e665aaca08cd3a",
-	"setup": "4eaf77e407dde5e40eea2fc57d79cab8",
+	"spec": "05f73a5bba4ba6756530fdc07ba16cda",
+	"manifest": "7e6eccb58e86ff2bdd5f7668be1c67bf",
+	"setup": "aad75ea3d29240e7d810a32a522d1380",
 	"schemas": [
 		{
 			"identifier": "add_cve/schema.py",

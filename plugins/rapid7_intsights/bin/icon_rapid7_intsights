@@ -4,10 +4,10 @@ import os
 import json
 from sys import argv
 
-Name = "Threat Command"
+Name = "Rapid7 Threat Command"
 Vendor = "rapid7"
-Version = "5.2.0"
-Description = "Threat Command by Rapid7 is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy"
+Version = "5.2.1"
+Description = "[Threat Command](https://www.rapid7.com/products/threat-command) by Rapid7 is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy"
 
 
 def main():
