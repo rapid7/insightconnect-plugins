@@ -1,3 +1,5 @@
+from io import BytesIO
+
 import insightconnect_plugin_runtime
 from .schema import SubmitCookbookInput, SubmitCookbookOutput, Input, Output, Component
 
@@ -26,7 +28,7 @@ class SubmitCookbook(insightconnect_plugin_runtime.Action):
         additional_parameters.update({"accept-tac": 1})
 
         try:
-            cookbook_bytes = b64decode(cookbook) if cookbook else None
+            cookbook_bytes = BytesIO(b64decode(cookbook)) if cookbook else None
         except binascii.Error:
             raise PluginException(
                 cause='Unable to decode base64 input for "cookbook". ',
@@ -34,7 +36,7 @@ class SubmitCookbook(insightconnect_plugin_runtime.Action):
             )
 
         try:
-            webids = self.connection.api.submit_cookbook(cookbook_bytes, parameters, additional_parameters)
+            submission_id = self.connection.api.submit_cookbook(cookbook_bytes, parameters, additional_parameters)
         except jbxapi.MissingParameterError as error:
             raise ConnectionTestException(
                 cause=f"An error occurred: {error}",
@@ -48,4 +50,4 @@ class SubmitCookbook(insightconnect_plugin_runtime.Action):
                 assistance="If the issue persists please contact support.",
             )
 
-        return {Output.SUBMISSION_ID: webids.get("submission_id")}
+        return {Output.SUBMISSION_ID: submission_id.get("submission_id")}

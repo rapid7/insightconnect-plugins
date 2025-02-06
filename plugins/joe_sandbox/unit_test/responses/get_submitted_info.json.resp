@@ -1,0 +1,57 @@
+{
+  "data": {
+    "submission_info": {
+      "analyses": [
+        {
+          "analysisid": "1111",
+          "classification": "",
+          "comments": "",
+          "detection": "clean",
+          "duration": 595,
+          "encrypted": false,
+          "filename": "test.csv",
+          "has_malwareconfig": false,
+          "md5": "df7761075b3e745e58ae6c9607721d04",
+          "runs": [
+            {
+              "detection": "clean",
+              "error": null,
+              "score": 0,
+              "sigma": false,
+              "suricata": false,
+              "system": "w10x64_21h1_office",
+              "yara": false
+            },
+            {
+              "detection": "clean",
+              "error": null,
+              "score": 0,
+              "sigma": false,
+              "suricata": false,
+              "system": "w7x64_office",
+              "yara": false
+            }
+          ],
+          "score": 0,
+          "scriptname": "default.jbs",
+          "sha1": "111",
+          "sha256": "1111",
+          "status": "finished",
+          "tags": [],
+          "threatname": "",
+          "time": "2025-02-04T15:44:08+01:00",
+          "webid": "1111"
+        }
+      ],
+      "most_relevant_analysis": {
+        "detection": "clean",
+        "score": 0,
+        "webid": "1111"
+      },
+      "name": "test.csv",
+      "status": "finished",
+      "submission_id": "12345",
+      "time": "2025-02-04T15:44:06+01:00"
+    }
+  }
+}
