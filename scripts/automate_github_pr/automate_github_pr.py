@@ -58,7 +58,7 @@ if __name__ == '__main__':
     # Generate client
     github_client = GithubClient(args.ghorg, args.ghrepo, os.getenv('GITHUB_API_KEY'))
 
-    body = f"Automated pull request to bump the SDK version to <SDK_VERSION> for <PLUGIN_NAME>"
+    body = f"Automated pull request to bump the SDK version to"
     
     n, s = github_client.create_pull_request(
         args.pr_release_title,
