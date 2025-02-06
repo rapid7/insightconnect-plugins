@@ -43,9 +43,6 @@ class GithubClient:
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Upload extensions to hub.')
-    parser.add_argument('--environment', '-e', required=True, action='store', type=str,
-                        choices=['staging', 'production'],
-                        help='The environment for making changes')
     parser.add_argument('--branch', '-b', required=True, action='store', type=str,
                         help='The branch name with committed changes')
     parser.add_argument('--base', '-d', action='store', type=str, default='master',
