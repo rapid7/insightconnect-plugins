@@ -43,9 +43,7 @@ class MonitorSiemLogsOutput(insightconnect_plugin_runtime.Output):
   "type": "array",
   "title": "Data",
   "description": "List of logs",
-  "items": {
-    "type": "object"
-  },
+  "items": {},
   "required": [
     "data"
   ],
