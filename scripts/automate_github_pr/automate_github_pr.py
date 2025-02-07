@@ -53,12 +53,14 @@ if __name__ == '__main__':
                         help='The github repository in scope')
     parser.add_argument('--pr_release_title', required=True, action='store', type=str,
                         help='The title of the release PR')
+    parser.add_argument('--sdk_version', required=True, action='store', type=str,
+                        help='The version of the SDK the plugin is being bumped to')
     args = parser.parse_args()
 
     # Generate client
     github_client = GithubClient(args.ghorg, args.ghrepo, os.getenv('GITHUB_API_KEY'))
 
-    body = f"Automated pull request to bump the SDK version to"
+    body = f"Automated pull request to bump the SDK version to {args.sdk_version}"
     
     n, s = github_client.create_pull_request(
         args.pr_release_title,
