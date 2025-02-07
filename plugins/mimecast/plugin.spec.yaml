@@ -3,7 +3,10 @@ extension: plugin
 products: [insightconnect]
 name: mimecast
 title: Mimecast
-description: "[Mimecast](https://www.mimecast.com) is a set of cloud services designed to provide next generation protection against advanced email-borne threats such as malicious URLs, malware, impersonation attacks, as well as internally generated threats, with a focus on email security. This plugin utilizes the [Mimecast API](https://www.mimecast.com/developer/documentation)"
+description: '[Mimecast](https://www.mimecast.com) is a set of cloud services designed
+  to provide next generation protection against advanced email-borne threats such
+  as malicious URLs, malware, impersonation attacks, as well as internally generated
+  threats, with a focus on email security. This plugin utilizes the [Mimecast API](https://www.mimecast.com/developer/documentation)'
 key_features:
 - Email security
 - Malicious URL and attachment detection
@@ -12,20 +15,21 @@ requirements:
 - Secret Key
 - Mimecast server
 - API Username and Password
-troubleshooting: "For the Create Managed URL action, the URL must include `http://` or `https://` e.g. `http://google.com` Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api-overview/global-base-urls/)"
-links: 
- - "[Mimecast](http://mimecast.com)"
+troubleshooting: For the Create Managed URL action, the URL must include `http://`
+  or `https://` e.g. `http://google.com` Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api-overview/global-base-urls/)
+links:
+- '[Mimecast](http://mimecast.com)'
 references:
- - "[Mimecast API](https://www.mimecast.com/developer/documentation)"
-version: 5.3.20
+- '[Mimecast API](https://www.mimecast.com/developer/documentation)'
+version: 5.3.21
 connection_version: 5
-supported_versions: ["Mimecast API 2024-06-18"]
+supported_versions: [Mimecast API 2024-06-18]
 vendor: rapid7
 support: rapid7
 cloud_ready: true
 sdk:
   type: slim
-  version: 6.2.0
+  version: 6.2.4
   user: nobody
 status: []
 resources:
@@ -40,50 +44,79 @@ hub_tags:
   keywords: [mimecast, email, cloud_enabled]
   features: []
 version_history:
-- "5.3.20 - Update Task `monitor_siem_logs` bump default rate limit period to 10 minutes and catch unexpected errors"
-- "5.3.19 - Update Task `monitor_siem_logs` to delay retry if a rate limit error is returned from Mimecast | Update SDK to version 6.2.0"
-- "5.3.18 - Fix task connection test | Trim whitespace from connection inputs | bump SDK to version 6.1.2"
-- "5.3.17 - Task `monitor_siem_logs` update the mapping used for the USBCOM region"
-- "5.3.16 - Task `monitor_siem_logs` Limit the number of events per run to 7500 | bump SDK to version 6.1.0"
-- "5.3.15 - Fix snyk vulnerabilities | bump SDK to version 6.0.1 | Allow for the task connection tests to pass back a message along side a status"
-- "5.3.14 - Improving task connection tests logging | bump SDK to version 5.6.1"
-- "5.3.13 - Adding in task connection tests | bump SDK to version 5.5.5 | Fix issue with logging bad JSON error"
-- "5.3.12 - Task `monitor_siem_logs` to ingest events if there is no datetime field | bump version of werkzeug used"
-- "5.3.11 - Task `monitor_siem_logs` to now use 24hrs as initial lookback, then 7 days for normal running | Task `monitor_siem_logs` allowing for a date to be supplied as a custom config | Task `monitor_siem_logs` to now log the request id of failed request to Mimecast | bump SDK to version 5.4.9"
-- "5.3.10 - Task `monitor_siem_logs`: To move token to next file even if there is no files found | bump SDK to 5.4.7"
-- "5.3.9 - Task `monitor_siem_logs`: Add in better error messages if the wrong region is provided"
-- "5.3.8 - Task `monitor_siem_logs` Update to use SDK 5.4.4 | Add additional logger for traceability when no logs returned | Improve error handling."
-- "5.3.7 - Task `monitor_siem_logs` adding in sanitization for names of files to be read in | Include SDK 5.4 which adds new task custom_config parameter | Bump setuptools." 
-- "5.3.6 - Task `monitor_siem_logs` revert filter logic to 24 hours."
-- "5.3.5 - Task `monitor_siem_logs` further error logging and bump filter logic to 108 hours."
-- "5.3.4 - Task `monitor_siem_logs` exception handling for JSONDecodeError."
-- "5.3.3 - Task `monitor_siem_logs` improved error logging and sanitization of filenames | SDK bump | fix schema for `find_groups` & `get_audit_events` | bump validators version."
-- "5.3.2 - Connection: added regions USB and USBCOM | Monitor SIEM Logs: added logs for request and results information, removed `token` input parameter, updated pagination handler"
-- "5.3.1 - Monitor SIEM Logs: stop parsing datetime field"
-- "5.3.0 - Handled rate limiting error messaging | Update to latest plugin SDK"
-- "5.2.2 - Handled status code for `Monitor SIEM Logs` | Request limit set to 1 minute in `Monitor SIEM Logs`"
-- "5.2.1 - Connection: add connection version"
-- "5.2.0 - New task added `Monitor SIEM Logs` | Update plugin to be cloud enabled"
-- "5.1.0 - Create Blocked Sender Policy: Changed defaults to `individual_email_address` | New actions added `Delete Blocked Sender Policy`, `Track Messages`"
-- "5.1.0 - Create Blocked Sender Policy: Changed defaults to `individual_email_address` | New actions added `Delete Blocked Sender Policy`, `Track Messages`"
-- "5.0.2 - Add Group Member: Fix issue when users were running into email validation error when they add a domain, and leave the email address blank on the input section." 
-- "5.0.1 - Add Sandbox availability in region"
-- "5.0.0 - Update SDK version | Add new action Get Audit Events | Add unit tests for all actions | Update error handling for all action | Create separate class for API communication | Add base URL of API for plugin"
-- "4.1.2 - Fix bug in connection test where it could succeed when an empty response was returned"
-- "4.1.1 - Fix bug where the connection test would sometimes pass even with invalid credentials"
-- "4.1.0 - Update Get TTP URL Logs action to use pagination"
-- "4.0.1 - Add example inputs"
-- "4.0.0 - Update Get TTP URL Logs to allow for better URL filtering"
-- "3.1.0 - New action Delete Managed URL and Delete Group Member"
-- "3.0.1 - New spec and help.md format for the Extension Library"
-- "3.0.0 - Add URL in Get TTP URL Logs action to filter output | Update connection settings to the proper authentication supported by the Mimecast API"
-- "2.5.0 - New action Decode URL"
-- "2.4.0 - New action Get TTP URL Logs"
-- "2.3.0 - New actions Add Group Member and Find Group"
-- "2.2.0 - New action Create Blocked Sender Policy"
-- "2.1.0 - New action Permit or Block Sender"
-- "2.0.0 - Add Get Managed URL Action | Update descriptions and output titles"
-- "1.0.0 - Initial plugin"
+- 5.3.21 - Updated SDK to the latest version (6.2.4)
+- 5.3.20 - Update Task `monitor_siem_logs` bump default rate limit period to 10 minutes
+  and catch unexpected errors
+- 5.3.19 - Update Task `monitor_siem_logs` to delay retry if a rate limit error is
+  returned from Mimecast | Update SDK to version 6.2.0
+- 5.3.18 - Fix task connection test | Trim whitespace from connection inputs | bump
+  SDK to version 6.1.2
+- 5.3.17 - Task `monitor_siem_logs` update the mapping used for the USBCOM region
+- 5.3.16 - Task `monitor_siem_logs` Limit the number of events per run to 7500 | bump
+  SDK to version 6.1.0
+- 5.3.15 - Fix snyk vulnerabilities | bump SDK to version 6.0.1 | Allow for the task
+  connection tests to pass back a message along side a status
+- 5.3.14 - Improving task connection tests logging | bump SDK to version 5.6.1
+- 5.3.13 - Adding in task connection tests | bump SDK to version 5.5.5 | Fix issue
+  with logging bad JSON error
+- 5.3.12 - Task `monitor_siem_logs` to ingest events if there is no datetime field
+  | bump version of werkzeug used
+- 5.3.11 - Task `monitor_siem_logs` to now use 24hrs as initial lookback, then 7 days
+  for normal running | Task `monitor_siem_logs` allowing for a date to be supplied
+  as a custom config | Task `monitor_siem_logs` to now log the request id of failed
+  request to Mimecast | bump SDK to version 5.4.9
+- '5.3.10 - Task `monitor_siem_logs`: To move token to next file even if there is
+  no files found | bump SDK to 5.4.7'
+- '5.3.9 - Task `monitor_siem_logs`: Add in better error messages if the wrong region
+  is provided'
+- 5.3.8 - Task `monitor_siem_logs` Update to use SDK 5.4.4 | Add additional logger
+  for traceability when no logs returned | Improve error handling.
+- 5.3.7 - Task `monitor_siem_logs` adding in sanitization for names of files to be
+  read in | Include SDK 5.4 which adds new task custom_config parameter | Bump setuptools.
+- 5.3.6 - Task `monitor_siem_logs` revert filter logic to 24 hours.
+- 5.3.5 - Task `monitor_siem_logs` further error logging and bump filter logic to
+  108 hours.
+- 5.3.4 - Task `monitor_siem_logs` exception handling for JSONDecodeError.
+- 5.3.3 - Task `monitor_siem_logs` improved error logging and sanitization of filenames
+  | SDK bump | fix schema for `find_groups` & `get_audit_events` | bump validators
+  version.
+- '5.3.2 - Connection: added regions USB and USBCOM | Monitor SIEM Logs: added logs
+  for request and results information, removed `token` input parameter, updated pagination
+  handler'
+- '5.3.1 - Monitor SIEM Logs: stop parsing datetime field'
+- 5.3.0 - Handled rate limiting error messaging | Update to latest plugin SDK
+- 5.2.2 - Handled status code for `Monitor SIEM Logs` | Request limit set to 1 minute
+  in `Monitor SIEM Logs`
+- '5.2.1 - Connection: add connection version'
+- 5.2.0 - New task added `Monitor SIEM Logs` | Update plugin to be cloud enabled
+- '5.1.0 - Create Blocked Sender Policy: Changed defaults to `individual_email_address`
+  | New actions added `Delete Blocked Sender Policy`, `Track Messages`'
+- '5.1.0 - Create Blocked Sender Policy: Changed defaults to `individual_email_address`
+  | New actions added `Delete Blocked Sender Policy`, `Track Messages`'
+- '5.0.2 - Add Group Member: Fix issue when users were running into email validation
+  error when they add a domain, and leave the email address blank on the input section.'
+- 5.0.1 - Add Sandbox availability in region
+- 5.0.0 - Update SDK version | Add new action Get Audit Events | Add unit tests for
+  all actions | Update error handling for all action | Create separate class for API
+  communication | Add base URL of API for plugin
+- 4.1.2 - Fix bug in connection test where it could succeed when an empty response
+  was returned
+- 4.1.1 - Fix bug where the connection test would sometimes pass even with invalid
+  credentials
+- 4.1.0 - Update Get TTP URL Logs action to use pagination
+- 4.0.1 - Add example inputs
+- 4.0.0 - Update Get TTP URL Logs to allow for better URL filtering
+- 3.1.0 - New action Delete Managed URL and Delete Group Member
+- 3.0.1 - New spec and help.md format for the Extension Library
+- 3.0.0 - Add URL in Get TTP URL Logs action to filter output | Update connection
+  settings to the proper authentication supported by the Mimecast API
+- 2.5.0 - New action Decode URL
+- 2.4.0 - New action Get TTP URL Logs
+- 2.3.0 - New actions Add Group Member and Find Group
+- 2.2.0 - New action Create Blocked Sender Policy
+- 2.1.0 - New action Permit or Block Sender
+- 2.0.0 - Add Get Managed URL Action | Update descriptions and output titles
+- 1.0.0 - Initial plugin
 types:
   managed_url:
     id:
@@ -103,7 +136,8 @@ types:
       required: false
     port:
       title: Port
-      description: The specified in the managed URL. Default value is -1 if no port was provided
+      description: The specified in the managed URL. Default value is -1 if no port
+        was provided
       type: integer
       required: false
     path:
@@ -123,7 +157,7 @@ types:
       required: false
     action:
       title: Action
-      description:  Action to take for when URL is clicked. Either block or permit
+      description: Action to take for when URL is clicked. Either block or permit
       type: string
       required: false
     comment:
@@ -277,7 +311,7 @@ types:
       type: string
       required: false
     source:
-      title: Source 
+      title: Source
       description: Source of the group, either cloud or LDAP
       type: string
       required: false
@@ -349,7 +383,8 @@ types:
       required: false
     ttpDefinition:
       title: TTP Definition
-      description: The description of the definition that triggered the URL to be rewritten by Mimecast
+      description: The description of the definition that triggered the URL to be
+        rewritten by Mimecast
       type: string
       required: false
     userOverride:
@@ -363,25 +398,25 @@ types:
       description: The start date of events in ISO 8601 date time format
       type: string
       required: true
-      example: "2011-12-03T10:15:30+0000"
+      example: 2011-12-03T10:15:30+0000
     endDateTime:
       title: End Date Time
       description: The end date of events in ISO 8601 date time format
       type: string
       required: true
-      example: "2015-12-03T10:15:30+0000"
+      example: 2015-12-03T10:15:30+0000
     query:
       title: Query
       description: A character string to search for the audit events
       type: string
       required: false
-      example: "test query"
+      example: test query
     categories:
       title: Categories
       description: A list of audit category types
-      type: "[]string"
+      type: '[]string'
       required: false
-      example: ["test", "malware"]
+      example: [test, malware]
   audit_events_request_pagination:
     pageSize:
       title: Page Size
@@ -428,12 +463,14 @@ types:
       required: false
     next:
       title: Next
-      description: A pageToken value that can be used to request the next page of results. Only returned if there are more results to return
+      description: A pageToken value that can be used to request the next page of
+        results. Only returned if there are more results to return
       type: string
       required: false
     previous:
       title: Previous
-      description: A pageToken value that can be used to request the previous page of results. Only returned if there is a previous page
+      description: A pageToken value that can be used to request the previous page
+        of results. Only returned if there is a previous page
       type: string
       required: false
   search_criteria_object:
@@ -485,7 +522,8 @@ types:
     url:
       title: URL
       type: string
-      description: URL used to create the remediation incident, if remediation type is URL
+      description: URL used to create the remediation incident, if remediation type
+        is URL
       required: false
   response_remediation_incident:
     search_criteria_object:
@@ -496,7 +534,8 @@ types:
     code:
       title: Code
       type: string
-      description: The incident code generated at creation, to be used as a reference for the remediation incident lookup
+      description: The incident code generated at creation, to be used as a reference
+        for the remediation incident lookup
       required: false
     create:
       title: Create
@@ -516,12 +555,14 @@ types:
     fileRemediationCancelled:
       title: File Remediation Cancelled
       type: string
-      description: Timestamp of an incident cancellation, if it has been cancelled, in ISO 8601 format
+      description: Timestamp of an incident cancellation, if it has been cancelled,
+        in ISO 8601 format
       required: false
     fileRemediationExpiryTime:
       title: File Remediation Expiry Time
       type: string
-      description: Timestamp of a file-bases remediation should expiration in ISO 8601 format
+      description: Timestamp of a file-bases remediation should expiration in ISO
+        8601 format
       required: false
     id:
       title: ID
@@ -536,7 +577,8 @@ types:
     modified:
       title: Modified
       type: string
-      description: Timestamp of the incident's last modification date in ISO 8601 format
+      description: Timestamp of the incident's last modification date in ISO 8601
+        format
       required: false
     reason:
       title: Reason
@@ -552,8 +594,8 @@ types:
       title: Remove From Device
       type: string
       enum:
-        - recipient
-        - all
+      - recipient
+      - all
       description: The devices where the downloaded file should be removed from
       required: false
     restored:
@@ -570,10 +612,10 @@ types:
       title: Type
       type: string
       enum:
-        - notify_only
-        - automatic
-        - manual
-        - restored
+      - notify_only
+      - automatic
+      - manual
+      - restored
       description: Type of incident
       required: false
   searchCriteria:
@@ -615,7 +657,8 @@ types:
     unremediateCode:
       title: Unremediate Code
       type: string
-      description: Code used to restore messages that were previously removed by remediation incident
+      description: Code used to restore messages that were previously removed by remediation
+        incident
       required: false
   get_remediation_incident_response:
     code:
@@ -631,12 +674,14 @@ types:
     failed:
       title: Failed
       type: integer
-      description: The number of messages that failed to remediate as part of the incident
+      description: The number of messages that failed to remediate as part of the
+        incident
       required: false
     id:
       title: ID
       type: string
-      description: The Mimecast ID of the remediation incident, provided when the incident was created
+      description: The Mimecast ID of the remediation incident, provided when the
+        incident was created
       required: false
     identified:
       title: Identified
@@ -660,8 +705,9 @@ types:
       required: false
     searchCriteria:
       title: Searchcriteria
-      type: "[]searchCriteria"
-      description: Conditions used to build a remediation incident. Includes messageId, file-hash, from or to addresses.
+      type: '[]searchCriteria'
+      description: Conditions used to build a remediation incident. Includes messageId,
+        file-hash, from or to addresses.
       required: false
     successful:
       title: Successful
@@ -671,7 +717,8 @@ types:
     type:
       title: Type
       type: string
-      description: The type of incident action taken. Can be one of notify_only, automatic, manual or restored
+      description: The type of incident action taken. Can be one of notify_only, automatic,
+        manual or restored
       required: false
   find_remediation_searchBy:
     value:
@@ -684,10 +731,10 @@ types:
       description: Incident fields to filter based on
       type: string
       enum:
-        - all
-        - code
-        - file_hash
-        - reason
+      - all
+      - code
+      - file_hash
+      - reason
       required: false
   find_remediation_filterBy:
     type:
@@ -695,10 +742,10 @@ types:
       description: Specify the type of incidents to return
       type: string
       enum:
-        - notify_only
-        - automatic
-        - manual
-        - restore
+      - notify_only
+      - automatic
+      - manual
+      - restore
       required: false
   searchCritera:
     unremediateCode:
@@ -752,10 +799,10 @@ types:
       description: The incident type
       type: string
       enum:
-        - notify_only
-        - automatic
-        - manual
-        - restored
+      - notify_only
+      - automatic
+      - manual
+      - restored
       required: false
     reason:
       title: Reason
@@ -774,7 +821,8 @@ types:
       required: false
     identified:
       title: Identified
-      description: The total number of messages identified as part of the remediation incident
+      description: The total number of messages identified as part of the remediation
+        incident
       type: integer
       required: false
     successful:
@@ -800,7 +848,7 @@ types:
     searchCriteria:
       title: Search Criteria
       description: Criteria used when the remediation incident was created
-      type: "searchCritera"
+      type: searchCritera
       required: false
   sender:
     emailAddress:
@@ -853,11 +901,12 @@ types:
     to:
       title: To
       description: An array of recipients
-      type: "[]recipient"
+      type: '[]recipient'
       required: false
     fromHdr:
       title: Header From
-      description: An object describing the header from address information of the message
+      description: An object describing the header from address information of the
+        message
       type: sender
       required: false
     fromEnv:
@@ -896,16 +945,16 @@ connection:
     description: The region for the Mimecast server
     type: string
     enum:
-      - EU
-      - DE
-      - US
-      - CA
-      - ZA
-      - AU
-      - Offshore
-      - Sandbox
-      - USB
-      - USBCOM
+    - EU
+    - DE
+    - US
+    - CA
+    - ZA
+    - AU
+    - Offshore
+    - Sandbox
+    - USB
+    - USBCOM
     required: true
     example: EU
     default: EU
@@ -936,7 +985,9 @@ connection:
 actions:
   track_messages:
     title: Track Messages
-    description: Search for messages processing, and current state using specific message information. Either one of `Send From`, `Send To`, `Subject`, `Sender IP` fields, or `Message ID` must not be empty
+    description: Search for messages processing, and current state using specific
+      message information. Either one of `Send From`, `Send To`, `Subject`, `Sender
+      IP` fields, or `Message ID` must not be empty
     input:
       search_reason:
         title: Search Reason
@@ -964,8 +1015,9 @@ actions:
         required: false
       routes:
         title: Routes
-        description: An array of routes to filter by. Possible values are internal, outbound and inbound
-        type: "[]string"
+        description: An array of routes to filter by. Possible values are internal,
+          outbound and inbound
+        type: '[]string'
         example: '["internal", "outbound"]'
         required: false
       send_from:
@@ -996,9 +1048,13 @@ actions:
       tracked_emails:
         title: Tracked Emails
         description: An array of found tracked emails
-        type: "[]tracked_emails"
+        type: '[]tracked_emails'
         required: true
-        example: [{"detectionLevel": "","fromEnv": {"emailAddress": "user@example.com"},"fromHdr": {"emailAddress": ""},"id": "123456789","info": "Envelope Rejected","received": "2022-12-01T12:49:46+0000","route": "inbound","senderIP": "192.168.0.1","sent": "2022-12-01T12:49:46+0000","spamScore": 0,"status": "rejected","subject": "Example Subject","to": [{"displayableName": "Example User","emailAddress": "user@example.com"}]}]
+        example: [{detectionLevel: '', fromEnv: {emailAddress: user@example.com},
+            fromHdr: {emailAddress: ''}, id: '123456789', info: Envelope Rejected,
+            received: 2022-12-01T12:49:46+0000, route: inbound, senderIP: 192.168.0.1,
+            sent: 2022-12-01T12:49:46+0000, spamScore: 0, status: rejected, subject: Example
+              Subject, to: [{displayableName: Example User, emailAddress: user@example.com}]}]
   delete_blocked_sender_policy:
     title: Delete Blocked Sender Policy
     description: Delete a blocked sender policy
@@ -1037,20 +1093,20 @@ actions:
         description: Disable rewriting of this URL in emails. Applies only if action
           = 'permit'
         type: boolean
-        example: True
+        example: true
         required: true
       disable_user_awareness:
         title: Disable User Awareness
         description: Disable User Awareness challenges for this URL. Applies only
           if action = 'permit'
         type: boolean
-        example: False
+        example: false
         required: true
       disable_log_click:
         title: Disable Log Click
         description: Disable logging of user clicks on the URL
         type: boolean
-        example: False
+        example: false
         required: true
       action:
         title: Action
@@ -1079,7 +1135,10 @@ actions:
         description: Managed URL that was created
         type: '[]managed_url'
         required: false
-        example: [{"id": "wOi3MCwjYFqOT7D-I9AbwlwvY3ImP7QVjTLhGwOgsDbzzFK8SjGLNE4","scheme": "https","domain": "www.test.net","port": -1,"path": "/","queryString": "","matchType": "explicit","action": "permit","comment": "","disableUserAwareness": False,"disableRewrite": False,"disableLogClick": False}]
+        example: [{id: wOi3MCwjYFqOT7D-I9AbwlwvY3ImP7QVjTLhGwOgsDbzzFK8SjGLNE4, scheme: https,
+            domain: www.test.net, port: -1, path: /, queryString: '', matchType: explicit,
+            action: permit, comment: '', disableUserAwareness: false, disableRewrite: false,
+            disableLogClick: false}]
   delete_managed_url:
     title: Delete Managed URL
     description: Delete a managed URL
@@ -1109,7 +1168,8 @@ actions:
         example: https://example.com
       exactMatch:
         title: Exact Match
-        description: If true, the domainOrUrl value to act as an exact match value. If false, any partial matches will be returned
+        description: If true, the domainOrUrl value to act as an exact match value.
+          If false, any partial matches will be returned
         type: boolean
         required: false
         default: false
@@ -1128,9 +1188,9 @@ actions:
         required: false
         default: None
         enum:
-          - 'None'
-          - 'False'
-          - 'True'
+        - None
+        - 'False'
+        - 'True'
       disable_log_click:
         title: 'Filter: Log Click'
         description: Filter on whether or not clicks are logged for this URL
@@ -1139,9 +1199,9 @@ actions:
         example: true
         default: None
         enum:
-          - 'None'
-          - 'False'
-          - 'True'
+        - None
+        - 'False'
+        - 'True'
       action:
         title: 'Filter: Action'
         description: Filter on whether or not the action is "block" or "permit"
@@ -1150,9 +1210,9 @@ actions:
         example: block
         default: none
         enum:
-          - none
-          - block
-          - permit
+        - none
+        - block
+        - permit
       match_type:
         title: 'Filter: Match Type'
         description: Filter on whether or not the match type is "explicit" or "domain"
@@ -1161,9 +1221,9 @@ actions:
         required: false
         default: none
         enum:
-          - none
-          - explicit
-          - domain
+        - none
+        - explicit
+        - domain
       scheme:
         title: 'Filter: Scheme'
         description: Filter on whether or not the protocol is HTTP or HTTPS
@@ -1178,9 +1238,9 @@ actions:
         required: false
         default: None
         enum:
-          - 'None'
-          - 'False'
-          - 'True'
+        - None
+        - 'False'
+        - 'True'
       id:
         title: 'Filter: ID'
         description: Filter on the Mimecast secure ID of the managed URL
@@ -1193,7 +1253,9 @@ actions:
         description: 'Managed URLs matching '
         type: '[]managed_url'
         required: false
-        example: [{"id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLho3KMtTMfYm2C21vDPXvKC5vmEJWDAcvTHtH4L4Kw20c","scheme": "https","domain": "steam.com","port": -1,"matchType": "explicit","action": "block","comment": "ui test","disableUserAwareness": True,"disableRewrite": True,"disableLogClick": False}]
+        example: [{id: wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLho3KMtTMfYm2C21vDPXvKC5vmEJWDAcvTHtH4L4Kw20c,
+            scheme: https, domain: steam.com, port: -1, matchType: explicit, action: block,
+            comment: ui test, disableUserAwareness: true, disableRewrite: true, disableLogClick: false}]
   permit_or_block_sender:
     title: Permit or Block Sender
     description: Permit or block a sender
@@ -1227,7 +1289,8 @@ actions:
         description: The Managed Sender that was created
         type: '[]managed_sender'
         required: false
-        example: [{"id": "MTOKEN:eNoVzbEOgjAUQNF_eTMDGArK1oC2GARFjTpi-zQQ28ZWDGr8d3G-ybkfcCh6i62EBM4MB5Z2hpIiWlM_n0tecYv8nkXLBVH8WOvVTb_Kfcze-ZWefDUUzWHXVeYS1jHdgAeidw-j0AojcRTTbZkFNJ6RcGxPtK41GpLAA9Voh1r-t5OATL8_1zIraQ","sender": "user@example.com","to": "user@example.com","type": "Block"}]
+        example: [{id: MTOKEN:eNoVzbEOgjAUQNF_eTMDGArK1oC2GARFjTpi-zQQ28ZWDGr8d3G-ybkfcCh6i62EBM4MB5Z2hpIiWlM_n0tecYv8nkXLBVH8WOvVTb_Kfcze-ZWefDUUzWHXVeYS1jHdgAeidw-j0AojcRTTbZkFNJ6RcGxPtK41GpLAA9Voh1r-t5OATL8_1zIraQ,
+            sender: user@example.com, to: user@example.com, type: Block}]
   create_blocked_sender_policy:
     title: Create Blocked Sender Policy
     description: Create a blocked sender policy
@@ -1323,7 +1386,13 @@ actions:
         description: The policy that was created
         type: '[]sender_policy'
         required: false
-        example: [{"option": "block_sender","id": "eNo1jU0LgjAYgP_LrgpusZl2EzWwUoaKJHibb7W-pk4tif57euj-fHyQBjF0IGu0QW0c20cSFkXgKt_Z2Zz6nNN8wjqU5aqyEuOcRmP6arfgGXl_Si_X_UE0-p0pGFhl6RsyUaPuUkxLjzDiONREYtC9ekAnVA3zxc-SgHhrl9GZHqHTUj1n-G_mUwPRYmNM8fcHIHEysg","policy": {"description": "komand test","fromPart": "envelope_from","from": {"type": "email_domain","emailDomain": "example.com"},"to": {"type": "everyone"},"fromType": "email_domain","fromValue": "example.com","toType": "everyone","fromEternal": True,"toEternal": True,"fromDate": "1900-01-01T00:00:00+0000","toDate": "2100-01-01T23:59:59+0000","override": False,"bidirectional": False,"conditions": {},"createTime": "2019-01-28T17:09:01+0000","lastUpdated": "2019-01-28T17:09:01+0000"}}]
+        example: [{option: block_sender, id: eNo1jU0LgjAYgP_LrgpusZl2EzWwUoaKJHibb7W-pk4tif57euj-fHyQBjF0IGu0QW0c20cSFkXgKt_Z2Zz6nNN8wjqU5aqyEuOcRmP6arfgGXl_Si_X_UE0-p0pGFhl6RsyUaPuUkxLjzDiONREYtC9ekAnVA3zxc-SgHhrl9GZHqHTUj1n-G_mUwPRYmNM8fcHIHEysg,
+            policy: {description: komand test, fromPart: envelope_from, from: {type: email_domain,
+                emailDomain: example.com}, to: {type: everyone}, fromType: email_domain,
+              fromValue: example.com, toType: everyone, fromEternal: true, toEternal: true,
+              fromDate: 1900-01-01T00:00:00+0000, toDate: 2100-01-01T23:59:59+0000,
+              override: false, bidirectional: false, conditions: {}, createTime: 2019-01-28T17:09:01+0000,
+              lastUpdated: 2019-01-28T17:09:01+0000}}]
   add_group_member:
     title: Add Group Member
     description: Add an email address or domain to a group
@@ -1336,7 +1405,8 @@ actions:
         required: true
       email_address:
         title: Email Address
-        description: The email address of a user to add to a group. Use either email address or domain
+        description: The email address of a user to add to a group. Use either email
+          address or domain
         example: user@example.com
         type: string
         required: false
@@ -1349,7 +1419,8 @@ actions:
     output:
       folder_id:
         title: Folder ID
-        description: The Mimecast ID of the group that the user / domain was added to
+        description: The Mimecast ID of the group that the user / domain was added
+          to
         type: string
         required: false
         example: eNoVzssKgkAUgOF3OWuhvDHlTjMqgjIilWgzN0UdHZnjBBK9e7b_
@@ -1383,7 +1454,8 @@ actions:
         required: true
       email_address:
         title: Email Address
-        description: The email address to remove from group. Use either email address or domain
+        description: The email address to remove from group. Use either email address
+          or domain
         type: string
         example: user@example.com
         required: false
@@ -1424,28 +1496,35 @@ actions:
       groups:
         title: Groups
         description: A list of groups that mach the query
-        type: "[]group"
+        type: '[]group'
         required: false
-        example: [{"id": "eNoVzrEOgjAUQNF_eTMDaLGBDSUCBjAWjDqS9qGYlmorRjH-u7jfnNwPWOSDwU5ACJkbXJLZklWJ5nlBajWyFaeY3uPFZu2r9Mj6Qvbvck-TMTtHJ1e98uZQX7e6JYxGO3BAiuYGYdtIiw7wwT60QsO1wIlfVWXsRTTwyRQ-0dhO9xB6DrRaCjT_BULn1Pv-ACT0L3A","description": "Relay","source": "cloud","parentId": "eNoVzr0OgjAUQOF3uasMkFAq3RqJ4h8E1IAjaS8EU6i2oqLx3cX95Mv5gEUxGGwlMHgWzUgCvk2t0HbI5iFXM0kxvkXBZkm6uMz7verH5ERX73XDz2732lXF8ZLq2s8pz8ABJasrsLpSFh0Qg73rDo3QEid-cUgij9OQ-FP4QGNb3QPzHKi1kmj-C-73B7L7LyY","userCount": 0,"folderCount": 0},{"id": "eNoVzssOgjAQQNF_mTWJoGAjOwIqGkVFQUnc1HYgaKHaCvER_x3c35zcL2hkjcKSgwsqbWlmJmx6Hmz9NNAXJymam8LwEYyXM6cKT3G9FvU7Ssj8syi8zKxeK3o8XDcyt2Pi7cAAwekd3JwKjQawRj9lhYpJjr3v76PA8sjEsfuwRaVLWYNrGZBLwVH9H2wyIsNfB8G2MJw","description": "Permitted senders","source": "cloud","parentId": "eNoVzr0OgjAUQOF3uasMkFAq3RqJ4h8E1IAjaS8EU6i2oqLx3cX95Mv5gEUxGGwlMHgWzUgCvk2t0HbI5iFXM0kxvkXBZkm6uMz7verH5ERX73XDz2732lXF8ZLq2s8pz8ABJasrsLpSFh0Qg73rDo3QEid-cUgij9OQ-FP4QGNb3QPzHKi1kmj-C-73B7L7LyY","userCount": 0,"folderCount": 0}]
+        example: [{id: eNoVzrEOgjAUQNF_eTMDaLGBDSUCBjAWjDqS9qGYlmorRjH-u7jfnNwPWOSDwU5ACJkbXJLZklWJ5nlBajWyFaeY3uPFZu2r9Mj6Qvbvck-TMTtHJ1e98uZQX7e6JYxGO3BAiuYGYdtIiw7wwT60QsO1wIlfVWXsRTTwyRQ-0dhO9xB6DrRaCjT_BULn1Pv-ACT0L3A,
+            description: Relay, source: cloud, parentId: eNoVzr0OgjAUQOF3uasMkFAq3RqJ4h8E1IAjaS8EU6i2oqLx3cX95Mv5gEUxGGwlMHgWzUgCvk2t0HbI5iFXM0kxvkXBZkm6uMz7verH5ERX73XDz2732lXF8ZLq2s8pz8ABJasrsLpSFh0Qg73rDo3QEid-cUgij9OQ-FP4QGNb3QPzHKi1kmj-C-73B7L7LyY,
+            userCount: 0, folderCount: 0}, {id: eNoVzssOgjAQQNF_mTWJoGAjOwIqGkVFQUnc1HYgaKHaCvER_x3c35zcL2hkjcKSgwsqbWlmJmx6Hmz9NNAXJymam8LwEYyXM6cKT3G9FvU7Ssj8syi8zKxeK3o8XDcyt2Pi7cAAwekd3JwKjQawRj9lhYpJjr3v76PA8sjEsfuwRaVLWYNrGZBLwVH9H2wyIsNfB8G2MJw,
+            description: Permitted senders, source: cloud, parentId: eNoVzr0OgjAUQOF3uasMkFAq3RqJ4h8E1IAjaS8EU6i2oqLx3cX95Mv5gEUxGGwlMHgWzUgCvk2t0HbI5iFXM0kxvkXBZkm6uMz7verH5ERX73XDz2732lXF8ZLq2s8pz8ABJasrsLpSFh0Qg73rDo3QEid-cUgij9OQ-FP4QGNb3QPzHKi1kmj-C-73B7L7LyY,
+            userCount: 0, folderCount: 0}]
   get_ttp_url_logs:
     title: Get TTP URL Logs
     description: Get TTP URL logs
     input:
       from:
         title: From
-        description: Start date of logs to return in the following format 2015-11-16T14:49:18+0000. Default is the start of the current day
+        description: Start date of logs to return in the following format 2015-11-16T14:49:18+0000.
+          Default is the start of the current day
         example: 2018-11-22T14:49:18+0000
         type: string
         required: false
       to:
         title: To
-        description: End date of logs to return in the following format 2015-11-16T14:49:18+0000. Default is time of request
+        description: End date of logs to return in the following format 2015-11-16T14:49:18+0000.
+          Default is time of request
         example: 2018-11-22T14:49:18+0000
         type: string
         required: false
       route:
         title: Route
-        description: Filters logs by route, must be one of inbound, outbound, internal, or all
+        description: Filters logs by route, must be one of inbound, outbound, internal,
+          or all
         type: string
         example: inbound
         required: true
@@ -1457,7 +1536,8 @@ actions:
         - internal
       scan_result:
         title: Scan Result
-        description: Filters logs by scan result, must be one of clean, malicious, or all
+        description: Filters logs by scan result, must be one of clean, malicious,
+          or all
         type: string
         example: malicious
         required: true
@@ -1468,7 +1548,8 @@ actions:
         - all
       oldest_first:
         title: Oldest First
-        description: When true return results in descending order with oldest result first
+        description: When true return results in descending order with oldest result
+          first
         type: boolean
         example: false
         required: false
@@ -1482,7 +1563,8 @@ actions:
         example: 10
       url_to_filter:
         title: URL Regular Expression Filter
-        description: Regular expression to filter on. e.g. `examp` will return only URLs with the letters examp in them
+        description: Regular expression to filter on. e.g. `examp` will return only
+          URLs with the letters examp in them
         example: exam.*
         type: string
         required: false
@@ -1497,9 +1579,12 @@ actions:
       click_logs:
         title: Click Logs
         description: Click Logs
-        type: "[]click_logs"
+        type: '[]click_logs'
         required: false
-        example: [{"userEmailAddress": "user@example.com","url": "https://example.com","ttpDefinition": "Default URL Protection Definition","action": "warn","adminOverride": "N/A","userOverride": None,"scanResult": "malicious","category": "Compromised","userAwarenessAction": "N/A","date": "2019-04-23T19:50:28+0000","route": "inbound"}]
+        example: [{userEmailAddress: user@example.com, url: https://example.com, ttpDefinition: Default
+              URL Protection Definition, action: warn, adminOverride: N/A, userOverride: None,
+            scanResult: malicious, category: Compromised, userAwarenessAction: N/A,
+            date: 2019-04-23T19:50:28+0000, route: inbound}]
   decode_url:
     title: Decode URL
     description: Decode a Mimecast encoded URL
@@ -1524,28 +1609,32 @@ actions:
       audit_events_data:
         title: Audit Events Data
         description: Data for request
-        type: "audit_events_data"
+        type: audit_events_data
         required: true
-        example: '{"categories": ["test", "malware"], "endDateTime": "2022-02-02T08:15:30-05:00", "query": "example query", "startDateTime": "2022-02-02T08:15:30-05:00"}'
+        example: '{"categories": ["test", "malware"], "endDateTime": "2022-02-02T08:15:30-05:00",
+          "query": "example query", "startDateTime": "2022-02-02T08:15:30-05:00"}'
       audit_events_pagination:
         title: Audit Events Pagination
         description: Pagination object for request
-        type: "audit_events_request_pagination"
+        type: audit_events_request_pagination
         required: false
         example: '{"pageSize": 25, "pageToken": "9de5069c5afe602b2ea0a04b66beb2c0"}'
     output:
       response:
         title: Response
         description: Event logs data
-        type: "[]audit_events_response"
+        type: '[]audit_events_response'
         required: true
-        example: [{"id": "wOi3MCwj2RMAhvN30QSmqOT7D-g10nypvPqTB5X5oQtdKJE4Qkl51X5Ue_U","scheme": "https","domain": "www.testset3444412312.net","port": -1,"path": "/","queryString": "","matchType": "explicit","action": "block","comment": "","disableUserAwareness": False,"disableRewrite": False,"disableLogClick": False}]
+        example: [{id: wOi3MCwj2RMAhvN30QSmqOT7D-g10nypvPqTB5X5oQtdKJE4Qkl51X5Ue_U,
+            scheme: https, domain: www.testset3444412312.net, port: -1, path: /, queryString: '',
+            matchType: explicit, action: block, comment: '', disableUserAwareness: false,
+            disableRewrite: false, disableLogClick: false}]
       pagination:
         title: Pagination
         description: Pagination for request
-        type: "pagination"
+        type: pagination
         required: false
-        example: {"pageSize": 25,"pageToken": "9de5069c5afe602b2ea0a04b66beb2c0"}
+        example: {pageSize: 25, pageToken: 9de5069c5afe602b2ea0a04b66beb2c0}
 tasks:
   monitor_siem_logs:
     title: Monitor SIEM Logs
@@ -1554,6 +1643,7 @@ tasks:
       data:
         title: Data
         description: List of logs
-        type: "[]object"
+        type: '[]object'
         required: true
-        example: [{"Dir": "Example", "Rcpt": "user@example.com", "RcptHdrType": "To", "Sender": "user1@example.com","aCode": "1234code","acc": "ABCD12345", "datetime": "2023-05-09T12:00:00"}]
+        example: [{Dir: Example, Rcpt: user@example.com, RcptHdrType: To, Sender: user1@example.com,
+            aCode: 1234code, acc: ABCD12345, datetime: '2023-05-09T12:00:00'}]
