@@ -112,7 +112,8 @@ Example output:
 
 This action is used to realtime query an InsightIDR log. This will query individual logs for results. Note only 500 
 results will be returned from a single call, if all results are required for this query please use smaller timeranges. 
-If both a log name and log ID are provided, the log ID will used over the log name
+If both a log name and a log ID are provided, the log ID will be used. However, either the log name OR log ID is 
+required for the action to execute
 
 ##### Input
 
@@ -3427,6 +3428,7 @@ Example output:
 
 # Version History
 
+* 11.0.1 - Updating `Advanced Query on Log` description
 * 11.0.0 - Updating schema for query actions (`advanced_query_on_log`, `advanced_query_on_log_set` & `query`) to account for missing keys/invalid mapping in the schema
 * 10.3.4 - Bumping requirements.txt | SDK bump to 6.2.2
 * 10.3.3 - Bumping requirements.txt | SDK bump to 6.2.0
