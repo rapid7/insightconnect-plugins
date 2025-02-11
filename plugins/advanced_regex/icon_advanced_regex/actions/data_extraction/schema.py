@@ -89,12 +89,6 @@ class DataExtractionOutput(insightconnect_plugin_runtime.Output):
       "type": "array",
       "title": "Matches",
       "description": "An array of string arrays matching the output of Python re.findall()",
-      "items": {
-        "type": "array",
-        "items": {
-          "type": "string"
-        }
-      },
       "order": 1
     }
   },
