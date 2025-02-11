@@ -166,9 +166,9 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 self.logger.info(
                     f"Backwards compatibility - update all timestamps to the last known timestamp {last_collection_timestamp}"
                 )
-                trust_monitor_last_log_timestamp = (
-                    auth_logs_last_log_timestamp
-                ) = admin_logs_last_log_timestamp = last_collection_timestamp
+                trust_monitor_last_log_timestamp = auth_logs_last_log_timestamp = admin_logs_last_log_timestamp = (
+                    last_collection_timestamp
+                )
                 # Update the old last collection timestamp to None so it is not considered in future runs
                 state[self.LAST_COLLECTION_TIMESTAMP] = None
                 backward_comp_first_run = True
