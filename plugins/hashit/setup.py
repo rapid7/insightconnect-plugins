@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="hashit-rapid7-plugin",
-      version="2.0.5",
+      version="2.0.6",
       description="Generate Common Hashes from a File or String",
       author="rapid7",
       author_email="",
