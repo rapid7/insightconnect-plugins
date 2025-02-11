@@ -726,10 +726,10 @@ Example output:
 
 ## Troubleshooting
 
-Please note only Jira cloud is supported with InsightConnect cloud. For JIRA OnPrem, please use an orchestrator for connecting.
 
 # Version History
 
+* 6.5.1 - Updated SDK to the latest version (6.2.5)
 * 6.5.0 - Cloud enable the plugin | Bump SDK version to 6.1.0 | Added an error message if trying to connect to Jira on-prem for ICON cloud
 * 6.4.0 - Fix Issue Where Create Issue failed when multiple versions of the input Issue Type exists in Jira | Fix failed connection test response for PAT based connection | Include Fields input added to New Issue and Monitor Issues triggers, to specify whether to return Issue fields in the output | Removed empty Fields output from returned Issues when not requested or available
 * 6.3.0 - Add PAT authentication scheme for Jira on-prem
