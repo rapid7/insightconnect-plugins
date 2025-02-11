@@ -1,10 +1,6 @@
 # Description
 
-[Comma Separated Value](https://en.wikipedia.org/wiki/Comma-separated_values) (CSV) is a common format to express data.
-This plugin allows one to extract fields from CSV strings and files.
-
-Using the CSV plugin, users can automate conversions between JSON and CSV to help enable service interoperability
-as well as filter data within a CSV file.
+CSV (Comma Separated Values) is a simple data format for storing data. This plugin allows one to extract fields from CSV strings and files
 
 # Key Features
 
@@ -235,12 +231,10 @@ Example output:
 
 ## Troubleshooting
 
-Ensure that the supplied file or string is valid CSV. Any CSV files containing double-quotes will need to have them triple escaped to work properly.
-
-CSV files must not have non-CSV data such as comments.
 
 # Version History
 
+* 2.0.3 - Updated SDK to the latest version (6.2.5)
 * 2.0.2 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 2.0.1 - Fix bug with extra space character in JSON keys in `To JSON` action | Fix bugs with parsing cells with quotes and comma in `To JSON`, `Filter Bytes` and `Filter String` actions | Add unit tests for `To JSON`, `Filter Bytes` and `Filter String` actions
 * 2.0.0 - Add JSON to CSV String action | Rename JSON to CSV action to JSON to CSV Bytes
