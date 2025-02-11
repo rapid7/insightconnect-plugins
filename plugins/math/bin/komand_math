@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Math"
 Vendor = "rapid7"
-Version = "1.2.3"
+Version = "1.2.4"
 Description = "Basic mathematical operations"
 
 
