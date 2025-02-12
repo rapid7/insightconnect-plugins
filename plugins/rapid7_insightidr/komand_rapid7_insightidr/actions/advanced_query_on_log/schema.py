@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Realtime query an InsightIDR log. This will query individual logs for results. Note only 500 results will be returned from a single call, if all results are required for this query please use smaller timeranges. If both a log name and a log ID are provided, the log ID will be used. However, either the log name or log ID is required for the action to execute"
+    DESCRIPTION = "Realtime query an InsightIDR log. This will query individual logs for results. Note only 500 results will be returned from a single call, if all results are required for this query please use smaller timeranges. If both a log name and a log ID are provided, the log ID will be used. However, either the log name OR log ID is required for the action to execute"
 
 
 class Input:
