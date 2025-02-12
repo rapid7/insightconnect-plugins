@@ -25,7 +25,7 @@ class SetPriorityOfInvestigationInput(insightconnect_plugin_runtime.Input):
     "id": {
       "type": "string",
       "title": "ID or RRN",
-      "description": "The ID or RNN of the investigation to change the priority of",
+      "description": "The ID or RRN of the investigation to change the priority of",
       "order": 1
     },
     "priority": {
