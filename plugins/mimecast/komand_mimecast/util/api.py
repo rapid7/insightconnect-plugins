@@ -212,9 +212,10 @@ class MimecastAPI:
         method: str,
         uri: str,
         data: dict = None,
+        params: dict = None,
         meta_data: dict = None,
         header_fields: dict = {},
-        existing_request: Request = None,
+        existing_request: bool = False,
         authenticating: bool = False,
     ) -> dict:
         payload = data
@@ -222,22 +223,16 @@ class MimecastAPI:
             payload[META_FIELD] = meta_data
         if not authenticating:
             payload = str({DATA_FIELD: ([data] if data is not None else [])})
+        if not existing_request:
+            uri = f"{API}{uri}"
         try:
-            if existing_request:
-                request = requests.request(
-                    method=existing_request.method,
-                    url=existing_request.url,
-                    headers=self._prepare_header(existing_request.headers, self.access_token),
-                    params=existing_request.params,
-                    data=existing_request.body,
-                )
-            else:
-                request = requests.request(
-                    method=method.upper(),
-                    url=f"{API}{uri}",
-                    headers=self._prepare_header(header_fields, self.access_token),
-                    data=payload,
-                )
+            request = requests.request(
+                method=method.upper(),
+                url=uri,
+                headers=self._prepare_header(header_fields, self.access_token),
+                data=payload,
+                params=params
+            )
         except requests.exceptions.RequestException as e:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=e)
 
@@ -257,7 +252,15 @@ class MimecastAPI:
                 self.logger.info("Token has expired, attempting re-authentication...")
                 self.access_token = None
                 self.authenticate()
-                return self._handle_rest_call(request=response.request)
+                request = response.request
+                return self._handle_rest_call(
+                    method=request.method,
+                    uri=request.url,
+                    header_fields=self._prepare_header(request.headers, self.access_token),
+                    data=request.body,
+                    params=request.params,
+                    existing_request=True,
+                )
             else:
                 self._handle_error_response(response)
 
