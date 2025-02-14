@@ -9,7 +9,7 @@ import copy
 # Date format for conversion
 DATE_FORMAT = "%Y-%m-%d"
 # Default and max values
-LOG_TYPES = ["url protect"]
+LOG_TYPES = ["receipt", "url protect", "attachment protect"]
 DEFAULT_THREAD_COUNT = 10
 DEFAULT_PAGE_SIZE = 100
 MAX_LOOKBACK_DAYS = 7
