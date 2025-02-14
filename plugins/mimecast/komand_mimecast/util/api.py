@@ -231,7 +231,7 @@ class MimecastAPI:
                 url=uri,
                 headers=self._prepare_header(header_fields, self.access_token),
                 data=payload,
-                params=params
+                params=params,
             )
         except requests.exceptions.RequestException as e:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=e)
