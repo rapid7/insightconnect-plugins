@@ -11,7 +11,6 @@ from komand_mimecast.connection.schema import Input
 from komand_mimecast.util.constants import API, DATA_FIELD
 
 
-
 FILE_ZIP_CONTENT_1 = {"acc": "ABC123", "datetime": "2022-01-01T12:00:00"}
 FILE_ZIP_CONTENT_2 = {"acc": "ABC1234", "datetime": "2022-01-01T12:00:00"}
 FILE_ZIP_CONTENT_3 = {"acc": "ABC12345"}
