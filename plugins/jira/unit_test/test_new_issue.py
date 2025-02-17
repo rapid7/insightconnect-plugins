@@ -1,15 +1,17 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
-import timeout_decorator
+from typing import Callable, Optional
 from unittest import TestCase
 from unittest.mock import patch
-from komand_jira.triggers.new_issue import NewIssue
+
+import timeout_decorator
 from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_jira.triggers.new_issue import NewIssue
+
 import util
-from typing import Callable, Optional
 
 
 def timeout_pass(error_callback: Optional[Callable] = None):
@@ -17,7 +19,7 @@ def timeout_pass(error_callback: Optional[Callable] = None):
         def func_wrapper(*args, **kwargs):
             try:
                 return func(*args, **kwargs)
-            except timeout_decorator.timeout_decorator.TimeoutError as e:
+            except timeout_decorator.timeout_decorator.TimeoutError:
                 if error_callback:
                     return error_callback()
 
