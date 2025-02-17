@@ -3,46 +3,50 @@ extension: plugin
 products: [insightconnect]
 name: rdap
 title: RDAP
-description: "The Registration Data Access Protocol (RDAP) is the successor to WHOIS. Like WHOIS, RDAP provides access to information about Internet resources (domain names, autonomous system numbers, and IP addresses)"
-version: 2.0.4
+description: The Registration Data Access Protocol (RDAP) is the successor to WHOIS.
+  Like WHOIS, RDAP provides access to information about Internet resources (domain
+  names, autonomous system numbers, and IP addresses)
+version: 2.0.5
 connection_version: 2
 vendor: rapid7
 support: rapid7
 status: []
 cloud_ready: true
 fedramp_ready: true
-supported_versions: ["RDAP 20-12-2022"]
+supported_versions: [RDAP 20-12-2022]
 sdk:
   type: slim
-  version: 6.2.2
+  version: 6.2.5
   user: nobody
 key_features:
-  - IP Lookup
-  - Domain Lookup
-  - ASN Lookup
+- IP Lookup
+- Domain Lookup
+- ASN Lookup
 version_history:
-  - "2.0.4 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities"
-  - "2.0.3 - Bumping requirements.txt | SDK Bump to 6.1.4"
-  - "2.0.2 - Initial updates for fedramp compliance | Updated SDK to the latest version"
-  - "2.0.1 - Updated SDK to the latest version"
-  - "2.0.0 - `Domain Lookup`, `IP Address Lookup`, `ASN Lookup`: Updated action outputs and refactored"
-  - "1.0.0 - Initial plugin - Actions: `Domain Lookup`, `IP Address Lookup`, `ASN Lookup`"
+- 2.0.5 - Updated SDK to the latest version (6.2.5)
+- 2.0.4 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
+- 2.0.3 - Bumping requirements.txt | SDK Bump to 6.1.4
+- 2.0.2 - Initial updates for fedramp compliance | Updated SDK to the latest version
+- 2.0.1 - Updated SDK to the latest version
+- '2.0.0 - `Domain Lookup`, `IP Address Lookup`, `ASN Lookup`: Updated action outputs
+  and refactored'
+- '1.0.0 - Initial plugin - Actions: `Domain Lookup`, `IP Address Lookup`, `ASN Lookup`'
 links:
-  - "[RDAP](https://rdap.org)"
+- '[RDAP](https://rdap.org)'
 references:
-  - "[RDAP](https://rdap.org)"
-  - "[ipwhois](https://ipwhois.readthedocs.io/en/latest/index.html)"
+- '[RDAP](https://rdap.org)'
+- '[ipwhois](https://ipwhois.readthedocs.io/en/latest/index.html)'
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rdap
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://rdap.org
 tags:
-  - domain
-  - lookup
-  - rdap
-  - api
-  - search
-  - ip
+- domain
+- lookup
+- rdap
+- api
+- search
+- ip
 hub_tags:
   use_cases: [data_utility, reporting_and_analytics]
   keywords: [rdap, domains, api, search, cloud_enabled]
@@ -62,12 +66,14 @@ types:
   variant:
     relation:
       title: Relation
-      description: The relationship between the variants and the containing domain object
+      description: The relationship between the variants and the containing domain
+        object
       type: '[]string'
       required: false
     idnTable:
       title: IDN Table
-      description: The Internationalized Domain Name (IDN) table that has been registered in the IANA Repository of IDN Practices
+      description: The Internationalized Domain Name (IDN) table that has been registered
+        in the IANA Repository of IDN Practices
       type: string
       required: false
     variantName:
@@ -223,7 +229,8 @@ types:
       required: false
     port43:
       title: Port 43
-      description: The fully qualified host name or IP address of the WHOIS server where the containing object instance may be found
+      description: The fully qualified host name or IP address of the WHOIS server
+        where the containing object instance may be found
       type: string
       required: false
   dsData:
@@ -304,7 +311,7 @@ actions:
         description: Domain for which information will be searched
         type: string
         required: true
-        example: "example.com"
+        example: example.com
     output:
       name:
         title: LDH Name
@@ -320,10 +327,12 @@ actions:
         example: 2336799_DOMAIN_COM-VRSN
       entities:
         title: Entities
-        description: Information of organizations, corporations, governments, non-profits, clubs, individual persons, and informal groups of people
+        description: Information of organizations, corporations, governments, non-profits,
+          clubs, individual persons, and informal groups of people
         type: '[]entity'
         required: false
-        example: '[{"roles":["registrar"],"handle":"376","fullname":"RESERVED-Internet Assigned Numbers Authority"}]'
+        example: '[{"roles":["registrar"],"handle":"376","fullname":"RESERVED-Internet
+          Assigned Numbers Authority"}]'
       variants:
         title: Variants
         description: List of variants
@@ -347,10 +356,13 @@ actions:
         description: List of events that have occurred
         type: '[]event'
         required: false
-        example: '[{"eventAction":"registration","eventDate":"1995-08-14T04:00:00Z"},{"eventAction":"expiration","eventDate":"2023-08-13T04:00:00Z"},{"eventAction":"last changed","eventDate":"2022-08-14T07:01:31Z"},{"eventAction":"last update of RDAP database","eventDate":"2022-12-19T13:17:15Z"}]'
+        example: '[{"eventAction":"registration","eventDate":"1995-08-14T04:00:00Z"},{"eventAction":"expiration","eventDate":"2023-08-13T04:00:00Z"},{"eventAction":"last
+          changed","eventDate":"2022-08-14T07:01:31Z"},{"eventAction":"last update
+          of RDAP database","eventDate":"2022-12-19T13:17:15Z"}]'
       port43:
         title: Port 43
-        description: The fully qualified host name or IP address of the WHOIS server where the containing object instance may be found
+        description: The fully qualified host name or IP address of the WHOIS server
+          where the containing object instance may be found
         type: string
         required: false
         example: whois.ripe.net
@@ -359,7 +371,8 @@ actions:
         description: The state of the IP network
         type: '[]string'
         required: false
-        example: '["client delete prohibited","client transfer prohibited","client update prohibited"]'
+        example: '["client delete prohibited","client transfer prohibited","client
+          update prohibited"]'
       publicIds:
         title: Public IDs
         description: List of public IDs
@@ -371,7 +384,7 @@ actions:
         description: The unicode name of the domain
         type: string
         required: false
-        example: 'ExampleUnicodeName'
+        example: ExampleUnicodeName
   asnLookup:
     title: ASN Lookup
     description: Perform an ASN (autonomous system number) lookup
@@ -403,13 +416,15 @@ actions:
         example: 12345
       name:
         title: Name
-        description: The identifier assigned to the autonomous number registration by the registration holder
+        description: The identifier assigned to the autonomous number registration
+          by the registration holder
         type: string
         required: false
         example: AS12345
       type:
         title: Type
-        description: The RIR-specific classification of the autonomous number per that RIR's registration model
+        description: The RIR-specific classification of the autonomous number per
+          that RIR's registration model
         type: string
         required: false
         example: ExampleType
@@ -422,27 +437,30 @@ actions:
       events:
         title: Events
         description: List of events that have occurred
-        type: "[]event"
+        type: '[]event'
         required: false
         example: '[{"eventAction":"last changed","eventDate":"2020-05-13T13:44:31Z"}]'
       entities:
         title: Entities
-        description: Information of organizations, corporations, governments, non-profits, clubs, individual persons, and informal groups of people
-        type: "[]entity"
+        description: Information of organizations, corporations, governments, non-profits,
+          clubs, individual persons, and informal groups of people
+        type: '[]entity'
         required: false
         example: '[{"roles":["registrant"],"handle":"RIPE-NCC-END-MNT"},{"roles":["administrative"],"handle":"PG12821-RIPE"},{"roles":["registrant"],"handle":"ORG-GSs1-RIPE"},{"roles":["technical","administrative"],"handle":"LG1196-ORG"},{"roles":["registrant"],"handle":"AS12345-MNT"}]'
       port43:
         title: Port 43
-        description: The fully qualified host name or IP address of the WHOIS server where the containing object instance may be found
+        description: The fully qualified host name or IP address of the WHOIS server
+          where the containing object instance may be found
         type: string
         required: false
         example: whois.ripe.net
       status:
         title: Status
         description: The state of the autnum
-        type: "[]string"
+        type: '[]string'
         required: false
-        example: '["client delete prohibited","client transfer prohibited","client update prohibited"]'
+        example: '["client delete prohibited","client transfer prohibited","client
+          update prohibited"]'
   ipLookup:
     title: IP Address Lookup
     description: Perform an IP address lookup
@@ -452,7 +470,7 @@ actions:
         description: IP address for which information will be searched
         type: string
         required: true
-        example: '1.1.1.1'
+        example: 1.1.1.1
       getAsn:
         title: Get ASN
         description: Whether to return ASN information
@@ -465,13 +483,13 @@ actions:
         description: ASN
         type: string
         required: false
-        example: "3215"
+        example: '3215'
       asnCidr:
         title: ASN CIDR
         description: ASN CIDR
         type: string
         required: false
-        example: "2.2.0.0/16"
+        example: 2.2.0.0/16
       ansCountryCode:
         title: ASN Country Code
         description: ASN country code
@@ -489,46 +507,49 @@ actions:
         description: ASN description
         type: string
         required: false
-        example: "France Telecom - Orange, FR"
+        example: France Telecom - Orange, FR
       ansRegistry:
         title: ASN Registry
         description: ASN registry
         type: string
         required: false
-        example: "ripencc"
+        example: ripencc
       handle:
         title: Handle
         description: The RIR-unique identifier of the network registration
         type: string
         required: false
-        example: "2.0.0.0 - 2.15.255.255"
+        example: 2.0.0.0 - 2.15.255.255
       startAddress:
         title: Start Address
         description: The starting IP address of the network, either IPv4 or IPv6
         type: string
         required: false
-        example: "2.0.0.0"
+        example: 2.0.0.0
       endAddress:
         title: End Address
         description: The ending IP address of the network, either IPv4 or IPv6
         type: string
         required: false
-        example: "2.15.255.255"
+        example: 2.15.255.255
       ipVersion:
         title: IP Version
-        description: The IP protocol version of the network, 'v4' signifies an IPv4 network, and 'v6' signifies an IPv6 network
+        description: The IP protocol version of the network, 'v4' signifies an IPv4
+          network, and 'v6' signifies an IPv6 network
         type: string
         required: false
         example: v4
       name:
         title: Name
-        description: The identifier assigned to the network registration by the registration holder
+        description: The identifier assigned to the network registration by the registration
+          holder
         type: string
         required: false
         example: FR-TELECOM-20100712
       type:
         title: Type
-        description: The RIR-specific classification of the network per that RIR's registration model
+        description: The RIR-specific classification of the network per that RIR's
+          registration model
         type: string
         required: false
         example: ALLOCATED PA
@@ -540,10 +561,11 @@ actions:
         example: FR
       parentHandle:
         title: Parent Handle
-        description: The RIR-unique identifier of the parent network of this network registration
+        description: The RIR-unique identifier of the parent network of this network
+          registration
         type: string
         required: false
-        example: "0.0.0.0 - 255.255.255.255"
+        example: 0.0.0.0 - 255.255.255.255
       events:
         title: Events
         description: List of events that have occurred
@@ -552,13 +574,15 @@ actions:
         example: '[{"eventAction":"last changed","eventDate":"2017-04-10T14:16:37Z"}]'
       entities:
         title: Entities
-        description: Information of organizations, corporations, governments, non-profits, clubs, individual persons, and informal groups of people
+        description: Information of organizations, corporations, governments, non-profits,
+          clubs, individual persons, and informal groups of people
         type: '[]entity'
         required: false
         example: '[{"roles":["registrant"],"handle":"FT-BRX"}]'
       port43:
         title: Port 43
-        description: The fully qualified host name or IP address of the WHOIS server where the containing object instance may be found
+        description: The fully qualified host name or IP address of the WHOIS server
+          where the containing object instance may be found
         type: string
         required: false
         example: whoios.ripe.net
@@ -567,4 +591,5 @@ actions:
         description: The state of the IP network
         type: '[]string'
         required: false
-        example: '["client delete prohibited","client transfer prohibited","client update prohibited"]'
+        example: '["client delete prohibited","client transfer prohibited","client
+          update prohibited"]'

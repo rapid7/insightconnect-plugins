@@ -1,7 +1,7 @@
 {
-	"spec": "aa645c10dfc2fa3af14f4315d4cf4c62",
-	"manifest": "7e5815e5cd6f2b4be21bcb272c8bed06",
-	"setup": "0c207f1485f6e215c15ead8ad41cec51",
+	"spec": "5f8db91436f3a55493fcc06dbbb248f3",
+	"manifest": "45da6d1224c93ad754e31059a688d74c",
+	"setup": "ff21b6d6106a3192c4d43e41d6295065",
 	"schemas": [
 		{
 			"identifier": "asnLookup/schema.py",
