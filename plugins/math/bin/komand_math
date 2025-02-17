@@ -7,7 +7,7 @@ from sys import argv
 Name = "Math"
 Vendor = "rapid7"
 Version = "1.2.4"
-Description = "Basic mathematical operations"
+Description = "This plugin allows basic arithmetic functions to be performed"
 
 
 def main():

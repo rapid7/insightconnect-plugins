@@ -1,6 +1,6 @@
 # Description
 
-Basic mathematical operations
+This plugin allows basic arithmetic functions to be performed
 
 # Key Features
 

@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: math
 title: Math
-description: Basic mathematical operations
+description: This plugin allows basic arithmetic functions to be performed
 version: 1.2.4
 connection_version: 1
 vendor: rapid7
