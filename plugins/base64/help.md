@@ -1,6 +1,6 @@
 # Description
 
-Encode and decode data using the base64 alphabet
+[Base64](https://en.wikipedia.org/wiki/Base64) is a common binary-to-text encoding scheme used in various protocols and software such as MIME to carry data stored in binary formats across channels that only reliably support text content. This plugin allows data to be Base64-encoded or decoded using the standard Base64 alphabet
 
 # Key Features
 
@@ -104,6 +104,8 @@ Example output:
 
 ## Troubleshooting
 
+* For the Base64 decode action, be sure that the input contains valid Base64 data.
+* If the Base64 you're decoding contains any non UTF-8 characters the plugin will fail. To remedy this issue, there's a option to set how errors are to be handled. These options are "replace" and "ignore". Replace will change all non UTF-8 characters to `\uffd` or `?`. While ignore will drop the character from the output.
 
 # Version History
 
