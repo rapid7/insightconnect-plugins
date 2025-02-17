@@ -4,85 +4,94 @@ products: [insightconnect]
 name: azure_ad_admin
 title: Azure AD Admin
 description: Perform administrative operations in Azure AD
-version: 4.2.0
+version: 4.2.1
 connection_version: 4
 vendor: rapid7
 cloud_ready: true
 support: community
-supported_versions: ["2022-05-30"]
+supported_versions: ['2022-05-30']
 status: []
 sdk:
   type: slim
-  version: 6.1.0
+  version: 6.2.5
   user: nobody
 key_features:
-  - Add and remove users
-  - Disable and enable users
-  - Force users to change their password
-  - Enable, disable, get, search and delete devices
+- Add and remove users
+- Disable and enable users
+- Force users to change their password
+- Enable, disable, get, search and delete devices
 requirements:
-  - "The application this plugin connects to needs the following permissions:
-      \n\t* Directory.AccessAsUser.All
-      \n\t* Directory.ReadWrite.All
-      \n\t* User.ReadWrite.All
-      \n\t* IdentityRiskEvent.Read.All (Types: Delegated, Application)
-      \n\t* Device.ReadWrite.All
-      \n\nAll those permissions can be set in Azure Portal. Under `App registrations` -> `<SELECT_YOUR_AZURE_AD_ADMIN_APP>` -> `API permissions`.\n"
-  - "The application will need to be added to the `Global Administrator` role. This can be done in `Roles and administrators` in Microsoft Entra ID (Azure Active Directory) via the Azure Portal.
-  \n\nTo set this up, go to `Microsoft Entra ID` -> `Application Registrations`. Select the application to which you want to add the role and open the `Roles and Administrators` tab.
-  Above the `Roles` table you will see a note saying `[...] this resource and can only be assigned here at directory level`. Click on this `here` link.
-  \n\nThis should open the `All Roles' tab. Locate `Global Administrator` and click on it. To add your application to the role, you'll need to click the `Add assignments` button.
-  Browse and select your application and click `Add`."
-troubleshooting: "Trigger `risk_detection` needs Application permission to set as `IdentityRiskEvent.Read.All`"
+- "The application this plugin connects to needs the following permissions: \n\t*\
+  \ Directory.AccessAsUser.All \n\t* Directory.ReadWrite.All \n\t* User.ReadWrite.All\
+  \ \n\t* IdentityRiskEvent.Read.All (Types: Delegated, Application) \n\t* Device.ReadWrite.All\
+  \ \n\nAll those permissions can be set in Azure Portal. Under `App registrations`\
+  \ -> `<SELECT_YOUR_AZURE_AD_ADMIN_APP>` -> `API permissions`.\n"
+- "The application will need to be added to the `Global Administrator` role. This\
+  \ can be done in `Roles and administrators` in Microsoft Entra ID (Azure Active\
+  \ Directory) via the Azure Portal. \n\nTo set this up, go to `Microsoft Entra ID`\
+  \ -> `Application Registrations`. Select the application to which you want to add\
+  \ the role and open the `Roles and Administrators` tab. Above the `Roles` table\
+  \ you will see a note saying `[...] this resource and can only be assigned here\
+  \ at directory level`. Click on this `here` link. \n\nThis should open the `All\
+  \ Roles' tab. Locate `Global Administrator` and click on it. To add your application\
+  \ to the role, you'll need to click the `Add assignments` button. Browse and select\
+  \ your application and click `Add`."
+troubleshooting: Trigger `risk_detection` needs Application permission to set as `IdentityRiskEvent.Read.All`
 version_history:
-  - "4.2.0 - New action | List Group Members"
-  - "4.1.2 - Updated SDK to the latest version | Added additional details in requirements section | `Risk Detection`: Fixed issue where detections were triggered randomly"
-  - "4.1.1 - Update requirements in help.md"
-  - "4.1.0 - New actions Enable Device, Disable Device, Get Device, Search Device, Delete Device"
-  - "4.0.0 - Get User Info action: fix data validation | New action: Change User Password"
-  - "3.0.1 - Enable cloud orchestrator"
-  - "3.0.0 - Fix issue with incorrect data validation in Get User Info action"
-  - "2.2.6 - Update SDK runtime | Adding additional manager response to Get User Info action"
-  - "2.2.5 - Correct spelling in help.md"
-  - "2.2.4 - Fix issue where Get User Info would fail on a disabled account"
-  - "2.2.3 - Fix issue where Get User Info occasionally fails with an SSL error in secondary call for user status"
-  - "2.2.2 - Fix issue where retry expected a valid response"
-  - "2.2.1 - Fix issue where Get User Info occasionally fails with an SSL error"
-  - "2.2.0 - New action Revoke Sign-In Sessions"
-  - "2.1.1 - Update incorrect title of `user_type` to User Type  |  Return `group_id` in Add User to Groups By IDs action's error message to improve debugging"
-  - "2.1.0 - New action Add User to Groups By IDs"
-  - "2.0.0 - New action Update User Info"
-  - "1.4.1 - Extension Library styling update"
-  - "1.4.0 - New trigger Risk Detection"
-  - "1.3.1 - New spec and help.md format for the Extension Library"
-  - "1.3.0 - New action Create User"
-  - "1.2.0 - New actions Get Group by Name, Add User to Group, and Remove User from Group"
-  - "1.1.0 - New action Force User to Change Password"
-  - "1.0.0 - Initial plugin"
+- 4.2.1 - Updated SDK to the latest version (6.2.5)
+- 4.2.0 - New action | List Group Members
+- '4.1.2 - Updated SDK to the latest version | Added additional details in requirements
+  section | `Risk Detection`: Fixed issue where detections were triggered randomly'
+- 4.1.1 - Update requirements in help.md
+- 4.1.0 - New actions Enable Device, Disable Device, Get Device, Search Device, Delete
+  Device
+- '4.0.0 - Get User Info action: fix data validation | New action: Change User Password'
+- 3.0.1 - Enable cloud orchestrator
+- 3.0.0 - Fix issue with incorrect data validation in Get User Info action
+- 2.2.6 - Update SDK runtime | Adding additional manager response to Get User Info
+  action
+- 2.2.5 - Correct spelling in help.md
+- 2.2.4 - Fix issue where Get User Info would fail on a disabled account
+- 2.2.3 - Fix issue where Get User Info occasionally fails with an SSL error in secondary
+  call for user status
+- 2.2.2 - Fix issue where retry expected a valid response
+- 2.2.1 - Fix issue where Get User Info occasionally fails with an SSL error
+- 2.2.0 - New action Revoke Sign-In Sessions
+- 2.1.1 - Update incorrect title of `user_type` to User Type  |  Return `group_id`
+  in Add User to Groups By IDs action's error message to improve debugging
+- 2.1.0 - New action Add User to Groups By IDs
+- 2.0.0 - New action Update User Info
+- 1.4.1 - Extension Library styling update
+- 1.4.0 - New trigger Risk Detection
+- 1.3.1 - New spec and help.md format for the Extension Library
+- 1.3.0 - New action Create User
+- 1.2.0 - New actions Get Group by Name, Add User to Group, and Remove User from Group
+- 1.1.0 - New action Force User to Change Password
+- 1.0.0 - Initial plugin
 links:
-  - "[Azure AD Admin](https://azure.microsoft.com)"
+- '[Azure AD Admin](https://azure.microsoft.com)'
 references:
-  - "[User API](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0)"
-  - "[Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-1.0)"
+- '[User API](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0)'
+- '[Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-1.0)'
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/azure_ad_admin
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.microsoft.com/
 tags:
-  - Microsoft
-  - Azure
-  - Active Directory
-  - Administration
+- Microsoft
+- Azure
+- Active Directory
+- Administration
 hub_tags:
   use_cases: [threat_detection_and_response, user_management]
   keywords: [azure, microsoft, active directory, administration, cloud_enabled]
   features: []
 types:
   manager:
-    "@odata.context":
-      title: "@odata.type"
+    '@odata.context':
+      title: '@odata.type'
       type: string
-      description: "@odata.type"
+      description: '@odata.type'
       required: false
     id:
       title: ID
@@ -106,7 +115,7 @@ types:
       required: false
     businessPhones:
       title: Business Phones
-      type: "[]string"
+      type: '[]string'
       description: Business phones
       required: false
     companyName:
@@ -246,7 +255,7 @@ types:
       required: false
     otherMails:
       title: Other Mails
-      type: "[]string"
+      type: '[]string'
       description: Other Mails
       required: false
     passwordPolicies:
@@ -271,7 +280,7 @@ types:
       required: false
     proxyAddresses:
       title: Proxy Addresses
-      type: "[]string"
+      type: '[]string'
       description: Proxy Addresses
       required: false
     refreshTokensValidFromDateTime:
@@ -281,7 +290,7 @@ types:
       required: false
     imAddresses:
       title: Im Addresses
-      type: "[]string"
+      type: '[]string'
       description: Im Addresses
       required: false
     isResourceAccount:
@@ -341,22 +350,22 @@ types:
       required: false
     assignedLicenses:
       title: Assigned Licenses
-      type: "[]object"
+      type: '[]object'
       description: Assigned Licenses
       required: false
     assignedPlans:
       title: Assigned Plans
-      type: "[]object"
+      type: '[]object'
       description: Assigned Plans
       required: false
     identities:
       title: Identities
-      type: "[]object"
+      type: '[]object'
       description: Identities
       required: false
     onPremisesProvisioningErrors:
       title: On Premises Provisioning Errors
-      type: "[]string"
+      type: '[]string'
       description: On Premises Provisioning Errors
       required: false
     passwordProfile:
@@ -371,145 +380,145 @@ types:
       required: false
     provisionedPlans:
       title: Provisioned Plans
-      type: "[]object"
+      type: '[]object'
       description: Provisioned Plans
       required: false
   user_information:
     accountEnabled:
-      title: "Account Enabled"
+      title: Account Enabled
       type: boolean
-      description: "Account enabled"
+      description: Account enabled
       required: false
     displayName:
-      title: "Display Name"
+      title: Display Name
       type: string
-      description: "Display name"
+      description: Display name
       required: false
     mobilePhone:
-      title: "Mobile Phone"
+      title: Mobile Phone
       type: string
-      description: "Mobile phone"
+      description: Mobile phone
       required: false
     preferredLanguage:
-      title: "Preferred Language"
+      title: Preferred Language
       type: string
-      description: "Preferred language"
+      description: Preferred language
       required: false
     jobTitle:
-      title: "Job Title"
+      title: Job Title
       type: string
-      description: "Job title"
+      description: Job title
       required: false
     userPrincipalName:
-      title: "User Principal Name"
+      title: User Principal Name
       type: string
-      description: "User principal name"
+      description: User principal name
       required: false
-    "@odata.context":
-      title: "@odata.Context"
+    '@odata.context':
+      title: '@odata.Context'
       type: string
-      description: "@odata.context"
+      description: '@odata.context'
       required: false
     officeLocation:
-      title: "Office Location"
+      title: Office Location
       type: string
-      description: "Office location"
+      description: Office location
       required: false
     businessPhones:
-      title: "Business Phones"
-      type: "[]string"
-      description: "Business phones"
+      title: Business Phones
+      type: '[]string'
+      description: Business phones
       required: false
     mail:
-      title: "Mail"
+      title: Mail
       type: string
-      description: "Mail"
+      description: Mail
       required: false
     surname:
-      title: "Surname"
+      title: Surname
       type: string
-      description: "Surname"
+      description: Surname
       required: false
     givenName:
-      title: "Given Name"
+      title: Given Name
       type: string
-      description: "Given Name"
+      description: Given Name
       required: false
     id:
-      title: "ID"
+      title: ID
       type: string
-      description: "ID"
+      description: ID
       required: false
     manager:
       title: Manager
       description: Manager
       type: manager
-      required: False
+      required: false
   group:
     mailNickname:
-      title: "Mail Nickname"
+      title: Mail Nickname
       type: string
-      description: "Mail nickname"
+      description: Mail nickname
       required: false
     groupTypes:
-      title: "Group Types"
-      type: "[]string"
-      description: "Group types"
+      title: Group Types
+      type: '[]string'
+      description: Group types
       required: false
     displayName:
-      title: "Display Name"
+      title: Display Name
       type: string
-      description: "Display name"
+      description: Display name
       required: false
     description:
-      title: "Description"
+      title: Description
       type: string
-      description: "Description"
+      description: Description
       required: false
     createdDateTime:
-      title: "Created Date Time"
+      title: Created Date Time
       type: string
-      description: "Created date time"
+      description: Created date time
       required: false
     securityEnabled:
-      title: "Security Enabled"
+      title: Security Enabled
       type: boolean
-      description: "Security enabled"
+      description: Security enabled
       required: false
     renewedDateTime:
-      title: "Renewed Date Time"
+      title: Renewed Date Time
       type: string
-      description: "Renewed date time"
+      description: Renewed date time
       required: false
     proxyAddresses:
-      title: "Proxy Addresses"
-      type: "[]string"
-      description: "Proxy addresses"
+      title: Proxy Addresses
+      type: '[]string'
+      description: Proxy addresses
       required: false
     visibility:
-      title: "Visibility"
+      title: Visibility
       type: string
-      description: "Visibility"
+      description: Visibility
       required: false
     mail:
-      title: "Mail"
+      title: Mail
       type: string
-      description: "Mail"
+      description: Mail
       required: false
     isAssignableToRole:
-      title: "Is Assignable to Role"
+      title: Is Assignable to Role
       type: boolean
-      description: "Is assignable to role"
+      description: Is assignable to role
       required: false
     id:
-      title: "ID"
+      title: ID
       type: string
-      description: "ID"
+      description: ID
       required: false
     mailEnabled:
-      title: "Mail Enabled"
+      title: Mail Enabled
       type: boolean
-      description: "Mail enabled"
+      description: Mail enabled
       required: false
   geo_coordinates:
     altitude:
@@ -530,12 +539,14 @@ types:
   sign_in_location:
     city:
       title: City
-      description: City where the sign-in originated. This is calculated using latitude/longitude information from the sign-in activity
+      description: City where the sign-in originated. This is calculated using latitude/longitude
+        information from the sign-in activity
       type: string
       required: false
     country_or_region:
       title: Country Or Region
-      description: Country code info (2 letter code) where the sign-in originated. This is calculated using latitude/longitude information from the sign-in activity
+      description: Country code info (2 letter code) where the sign-in originated.
+        This is calculated using latitude/longitude information from the sign-in activity
       type: string
       required: false
     geo_coordinates:
@@ -545,7 +556,8 @@ types:
       required: false
     state:
       title: State
-      description: State where the sign-in originated. This is calculated using latitude/longitude information from the sign-in activity
+      description: State where the sign-in originated. This is calculated using latitude/longitude
+        information from the sign-in activity
       type: string
       required: false
   risk:
@@ -556,12 +568,14 @@ types:
       required: true
     request_id:
       title: Request ID
-      description: Request ID of the sign-in associated with the risk detection. This property is null if the risk detection is not associated with a sign-in
+      description: Request ID of the sign-in associated with the risk detection. This
+        property is null if the risk detection is not associated with a sign-in
       type: string
       required: false
     correlation_id:
       title: Correlation ID
-      description: Correlation ID of the sign-in associated with the risk detection. This property is null if the risk detection is not associated with a sign-in
+      description: Correlation ID of the sign-in associated with the risk detection.
+        This property is null if the risk detection is not associated with a sign-in
       type: string
       required: false
     risk_type:
@@ -581,7 +595,9 @@ types:
       required: false
     risk_detail:
       title: Risk Detail
-      description: Details of the detected risk. Details for this property are only available for Azure AD Premium P2 customers. P1 customers will be returned hidden
+      description: Details of the detected risk. Details for this property are only
+        available for Azure AD Premium P2 customers. P1 customers will be returned
+        hidden
       type: string
       required: false
     source:
@@ -591,17 +607,20 @@ types:
       required: false
     detection_timing_type:
       title: Detection Timimg Type
-      description: Timing of the detected risk (real-time/offline). The possible values are notDefined, realtime, nearRealtime, offline, unknownFutureValue
+      description: Timing of the detected risk (real-time/offline). The possible values
+        are notDefined, realtime, nearRealtime, offline, unknownFutureValue
       type: string
       required: false
     activity:
       title: Activity
-      description: Indicates the activity type the detected risk is linked to. The possible values are signin, user, unknownFutureValue
+      description: Indicates the activity type the detected risk is linked to. The
+        possible values are signin, user, unknownFutureValue
       type: string
       required: false
     token_issuer_type:
       title: Token Issuer Type
-      description: Indicates the type of token issuer for the detected sign-in risk. The possible values are AzureAD, ADFederationServices, and unknownFutureValue
+      description: Indicates the type of token issuer for the detected sign-in risk.
+        The possible values are AzureAD, ADFederationServices, and unknownFutureValue
       type: string
       required: false
     ip_address:
@@ -661,7 +680,7 @@ types:
       description: Key
       type: string
       required: false
-      example: ["WAA1ADAAOQA6ADwAUwBIAEEAMQAtAFQAUAAtAFAAVQBC"]
+      example: [WAA1ADAAOQA6ADwAUwBIAEEAMQAtAFQAUAAtAFAAVQBC]
     type:
       title: Type
       description: Type
@@ -786,13 +805,15 @@ types:
       example: 2023-06-08T13:08:47Z
     deviceCategory:
       title: Device Category
-      description: User-defined property set by Intune to automatically add devices to groups and simplify managing devices
+      description: User-defined property set by Intune to automatically add devices
+        to groups and simplify managing devices
       type: string
       required: false
       example: my-device-category
     deviceId:
       title: Device ID
-      description: Unique identifier set by Azure Device Registration Service at the time of registration
+      description: Unique identifier set by Azure Device Registration Service at the
+        time of registration
       type: string
       required: false
       example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
@@ -837,7 +858,7 @@ types:
       description: Exchange active sync IDs of the device
       type: '[]string'
       required: false
-      example: ["eas::9de5069c-5afe-602b-2ea0-a04b66beb2c0"]
+      example: [eas::9de5069c-5afe-602b-2ea0-a04b66beb2c0]
     extensionAttributes:
       title: Extension Attributes
       description: Contains extension attributes 1-15 for the device
@@ -852,7 +873,8 @@ types:
       example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
     isCompliant:
       title: Is Compliant
-      description: Whether the device complies with Mobile Device Management (MDM) policies
+      description: Whether the device complies with Mobile Device Management (MDM)
+        policies
       type: boolean
       required: false
       example: false
@@ -894,7 +916,9 @@ types:
       example: Android SDK built for x86
     onPremisesLastSyncDateTime:
       title: On Premises Last Sync Date Time
-      description: The last time at which the object was synced with the on-premises directory. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time.
+      description: The last time at which the object was synced with the on-premises
+        directory. The Timestamp type represents date and time information using ISO
+        8601 format and is always in UTC time.
       type: string
       required: false
       example: 2014-01-01T00:00:00Z
@@ -921,7 +945,7 @@ types:
       description: List of physical IDs
       type: '[]string'
       required: false
-      example: ["[GID]:g:6966545952520216"]
+      example: ['[GID]:g:6966545952520216']
     profileType:
       title: Profile Type
       description: The profile type of the device
@@ -930,7 +954,9 @@ types:
       example: RegisteredDevice
     registrationDateTime:
       title: Registration Date Time
-      description: Date and time of when the device was registered. The timestamp type represents date and time information using ISO 8601 format and is always in UTC time
+      description: Date and time of when the device was registered. The timestamp
+        type represents date and time information using ISO 8601 format and is always
+        in UTC time
       type: string
       required: false
       example: 2014-01-01T00:00:00Z
@@ -939,7 +965,7 @@ types:
       description: List of labels applied to the device by the system
       type: '[]string'
       required: false
-      example: ["test"]
+      example: [test]
     trustType:
       title: Trust Type
       description: Type of trust for the joined device
@@ -962,14 +988,16 @@ connection:
     example: 6731de76-14a6-49ae-97bc-6eba6914391e
   application_secret:
     title: App Secret
-    description: The secret of the registered application that obtained the refresh token
+    description: The secret of the registered application that obtained the refresh
+      token
     type: credential_secret_key
     required: true
     example: JqQX2PNo9bpM0uEihUPzyrh
 actions:
   disable_user_account:
     title: Disable User Account
-    description: Disable a user account. This action will not disable an administrative account
+    description: Disable a user account. This action will not disable an administrative
+      account
     input:
       user_id:
         title: User ID
@@ -1017,10 +1045,12 @@ actions:
         description: Information about a user
         type: user_information
         required: true
-        example: '{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#users/$entity","businessPhones":[],"displayName":"Joey McAdams","givenName":"Joey","jobTitle":"Sr. Software Engineer","mail":"","mobilePhone":"","officeLocation":"","preferredLanguage":"","surname":"McAdams","userPrincipalName":"user@example.com","id":"08290005-23ba-46b4-a377-b381d651a2fb","accountEnabled":true}'
+        example: '{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#users/$entity","businessPhones":[],"displayName":"Joey
+          McAdams","givenName":"Joey","jobTitle":"Sr. Software Engineer","mail":"","mobilePhone":"","officeLocation":"","preferredLanguage":"","surname":"McAdams","userPrincipalName":"user@example.com","id":"08290005-23ba-46b4-a377-b381d651a2fb","accountEnabled":true}'
   create_user:
     title: Create User and Notify
-    description: Create a user with a randomly generated password and send out an email with the password
+    description: Create a user with a randomly generated password and send out an
+      email with the password
     input:
       display_name:
         title: Display Name
@@ -1051,7 +1081,8 @@ actions:
         required: false
         title: Notify Email Body
         type: string
-        description: Body of the email to be sent out. Use $password to place the generated password
+        description: Body of the email to be sent out. Use $password to place the
+          generated password
         example: Example message to send
       notify_recipient:
         required: true
@@ -1123,12 +1154,13 @@ actions:
         required: true
         example: displayName
     output:
-        group:
-          title: Group
-          description: Group
-          type: group
-          required: false
-          example: '{"id":"bb4d41d4-eb13-4a33-99b5-7d7290df22e9","deletedDateTime":null,"classification":null,"createdDateTime":"2019-09-20T12:15:21Z","creationOptions":[],"description":"Azure AD Test Group","displayName":"Azure AD Test Group","groupTypes":["Unified"],"isAssignableToRole":false,"mail":"user@example.com","mailEnabled":true,"mailNickname":"AzureADTestGroup","onPremisesLastSyncDateTime":null,"onPremisesSecurityIdentifier":null,"onPremisesSyncEnabled":null,"preferredDataLocation":null,"proxyAddresses":["SPO:SPO_618d645a-541b-4349-a7c0-3bb73eedd701@SPO_5c824599-dc8c-4d31-96fb-3b886d4f8f10","SMTP:user@example.com"],"renewedDateTime":"2019-09-20T12:15:21Z","resourceBehaviorOptions":[],"resourceProvisioningOptions":[],"securityEnabled":true,"visibility":"Public","onPremisesProvisioningErrors":[]}'
+      group:
+        title: Group
+        description: Group
+        type: group
+        required: false
+        example: '{"id":"bb4d41d4-eb13-4a33-99b5-7d7290df22e9","deletedDateTime":null,"classification":null,"createdDateTime":"2019-09-20T12:15:21Z","creationOptions":[],"description":"Azure
+          AD Test Group","displayName":"Azure AD Test Group","groupTypes":["Unified"],"isAssignableToRole":false,"mail":"user@example.com","mailEnabled":true,"mailNickname":"AzureADTestGroup","onPremisesLastSyncDateTime":null,"onPremisesSecurityIdentifier":null,"onPremisesSyncEnabled":null,"preferredDataLocation":null,"proxyAddresses":["SPO:SPO_618d645a-541b-4349-a7c0-3bb73eedd701@SPO_5c824599-dc8c-4d31-96fb-3b886d4f8f10","SMTP:user@example.com"],"renewedDateTime":"2019-09-20T12:15:21Z","resourceBehaviorOptions":[],"resourceProvisioningOptions":[],"securityEnabled":true,"visibility":"Public","onPremisesProvisioningErrors":[]}'
   add_user_to_group:
     title: Add User to Group
     description: Add a user to a group
@@ -1165,9 +1197,9 @@ actions:
       group_id:
         title: Group IDs
         description: IDs of Groups to Add User to
-        type: "[]string"
+        type: '[]string'
         required: true
-        example: ["b4d41d4-eb13-4a33-99b5-7d7290df22e9"]
+        example: [b4d41d4-eb13-4a33-99b5-7d7290df22e9]
     output:
       success:
         title: Success
@@ -1211,7 +1243,8 @@ actions:
       country:
         title: Country
         type: string
-        description: The country or region in which the user is located; for example, US or UK
+        description: The country or region in which the user is located; for example,
+          US or UK
         required: false
         example: US
       department:
@@ -1241,7 +1274,8 @@ actions:
       user_type:
         title: User Type
         type: string
-        description: A string value that can be used to classify user types in your directory, such as Member and Guest
+        description: A string value that can be used to classify user types in your
+          directory, such as Member and Guest
         required: false
         example: Member
     output:
@@ -1253,7 +1287,8 @@ actions:
         example: true
   revoke_sign_in_sessions:
     title: Revoke Sign-In Sessions
-    description: This will require the user to log back in after any page they are on is refreshed by invalidating all refresh tokens and cookies
+    description: This will require the user to log back in after any page they are
+      on is refreshed by invalidating all refresh tokens and cookies
     input:
       user_id:
         title: User ID
@@ -1335,14 +1370,18 @@ actions:
         description: Information about the device
         type: device
         required: false
-        example: '{"id":"9de5069c-5afe-602b-2ea0-a04b66beb2c0","accountEnabled":true,"approximateLastSignInDateTime":"2020-06-20T21:15:48Z","createdDateTime":"2020-06-10T23:11:21Z","deviceId":"9de5069c-5afe-602b-2ea0-a04b66beb2c0","deviceOwnership":"Company","deviceVersion":2,"displayName":"DESKTOP-D10L83K","enrollmentType":"AzureDomainJoined","exchangeActiveSyncIds":["eas:415F14BD1A98FEA919DF00327EA5DC81:9de5069c-5afe-602b-2ea0-a04b66beb2c0:20200610T231818"],"isCompliant":false,"isManaged":true,"isRooted":false,"managementType":"MDM","manufacturer":"innotek GmbH","mdmAppId":"0000000a-0000-0000-c000-000000000000","model":"VirtualBox","operatingSystem":"Windows","operatingSystemVersion":"10.0.19041.329","physicalIds":["[USER-GID]:9de5069c-5afe-602b-2ea0-a04b66beb2c0:6755416654410028","[GID]:g:6755416654410028","[USER-HWID]:9de5069c-5afe-602b-2ea0-a04b66beb2c0:6755416654410025","[HWID]:h:6755416654410025"],"profileType":"RegisteredDevice","registrationDateTime":"2020-06-10T23:11:20Z","trustType":"AzureAd","alternativeSecurityIds":[{"type":2,"key":"WAA1ADAAOQA6ADwAUwBIAEEAM"}]}'
+        example: '{"id":"9de5069c-5afe-602b-2ea0-a04b66beb2c0","accountEnabled":true,"approximateLastSignInDateTime":"2020-06-20T21:15:48Z","createdDateTime":"2020-06-10T23:11:21Z","deviceId":"9de5069c-5afe-602b-2ea0-a04b66beb2c0","deviceOwnership":"Company","deviceVersion":2,"displayName":"DESKTOP-D10L83K","enrollmentType":"AzureDomainJoined","exchangeActiveSyncIds":["eas:415F14BD1A98FEA919DF00327EA5DC81:9de5069c-5afe-602b-2ea0-a04b66beb2c0:20200610T231818"],"isCompliant":false,"isManaged":true,"isRooted":false,"managementType":"MDM","manufacturer":"innotek
+          GmbH","mdmAppId":"0000000a-0000-0000-c000-000000000000","model":"VirtualBox","operatingSystem":"Windows","operatingSystemVersion":"10.0.19041.329","physicalIds":["[USER-GID]:9de5069c-5afe-602b-2ea0-a04b66beb2c0:6755416654410028","[GID]:g:6755416654410028","[USER-HWID]:9de5069c-5afe-602b-2ea0-a04b66beb2c0:6755416654410025","[HWID]:h:6755416654410025"],"profileType":"RegisteredDevice","registrationDateTime":"2020-06-10T23:11:20Z","trustType":"AzureAd","alternativeSecurityIds":[{"type":2,"key":"WAA1ADAAOQA6ADwAUwBIAEEAM"}]}'
   search_device:
     title: Search Device
-    description: Search for devices using a given query. For more information about queries visit https://learn.microsoft.com/en-us/graph/filter-query-parameter?tabs=http; https://learn.microsoft.com/en-us/graph/search-query-parameter?tabs=http; https://learn.microsoft.com/en-us/graph/aad-advanced-queries?tabs=http#device-properties
+    description: Search for devices using a given query. For more information about
+      queries visit https://learn.microsoft.com/en-us/graph/filter-query-parameter?tabs=http;
+      https://learn.microsoft.com/en-us/graph/search-query-parameter?tabs=http; https://learn.microsoft.com/en-us/graph/aad-advanced-queries?tabs=http#device-properties
     input:
       search:
         title: Search
-        description: Search parameters by query. See details about query in action description
+        description: Search parameters by query. See details about query in action
+          description
         type: string
         required: false
         example: displayName:INTUNE
@@ -1361,19 +1400,21 @@ actions:
       select:
         title: Select
         description: Fields to be included in the output
-        type: "[]string"
+        type: '[]string'
         required: false
-        example: ["id", "createdDateTime"]
+        example: [id, createdDateTime]
     output:
       devices:
         title: Devices
         description: Information about the devices
-        type: "[]device"
+        type: '[]device'
         required: false
-        example: '[{"id":"9de5069c-5afe-602b-2ea0-a04b66beb2c0","accountEnabled":true,"approximateLastSignInDateTime":"2020-06-20T21:15:48Z","createdDateTime":"2020-06-10T23:11:21Z","deviceId":"9de5069c-5afe-602b-2ea0-a04b66beb2c0","deviceOwnership":"Company","deviceVersion":2,"displayName":"DESKTOP-D10L83K","enrollmentType":"AzureDomainJoined","exchangeActiveSyncIds":["eas:415F14BD1A98FEA919DF00327EA5DC81:9de5069c-5afe-602b-2ea0-a04b66beb2c0:20200610T231818"],"isCompliant":false,"isManaged":true,"isRooted":false,"managementType":"MDM","manufacturer":"innotek GmbH","mdmAppId":"0000000a-0000-0000-c000-000000000000","model":"VirtualBox","operatingSystem":"Windows","operatingSystemVersion":"10.0.19041.329","physicalIds":["[USER-GID]:9de5069c-5afe-602b-2ea0-a04b66beb2c0:6755416654410028","[GID]:g:6755416654410028","[USER-HWID]:9de5069c-5afe-602b-2ea0-a04b66beb2c0:6755416654410025","[HWID]:h:6755416654410025"],"profileType":"RegisteredDevice","registrationDateTime":"2020-06-10T23:11:20Z","systemLabels":[],"trustType":"AzureAd","alternativeSecurityIds":[{"type":2,"key":"WAA1ADAAOQA6ADwAUwBIAEEAM"}]}]'
+        example: '[{"id":"9de5069c-5afe-602b-2ea0-a04b66beb2c0","accountEnabled":true,"approximateLastSignInDateTime":"2020-06-20T21:15:48Z","createdDateTime":"2020-06-10T23:11:21Z","deviceId":"9de5069c-5afe-602b-2ea0-a04b66beb2c0","deviceOwnership":"Company","deviceVersion":2,"displayName":"DESKTOP-D10L83K","enrollmentType":"AzureDomainJoined","exchangeActiveSyncIds":["eas:415F14BD1A98FEA919DF00327EA5DC81:9de5069c-5afe-602b-2ea0-a04b66beb2c0:20200610T231818"],"isCompliant":false,"isManaged":true,"isRooted":false,"managementType":"MDM","manufacturer":"innotek
+          GmbH","mdmAppId":"0000000a-0000-0000-c000-000000000000","model":"VirtualBox","operatingSystem":"Windows","operatingSystemVersion":"10.0.19041.329","physicalIds":["[USER-GID]:9de5069c-5afe-602b-2ea0-a04b66beb2c0:6755416654410028","[GID]:g:6755416654410028","[USER-HWID]:9de5069c-5afe-602b-2ea0-a04b66beb2c0:6755416654410025","[HWID]:h:6755416654410025"],"profileType":"RegisteredDevice","registrationDateTime":"2020-06-10T23:11:20Z","systemLabels":[],"trustType":"AzureAd","alternativeSecurityIds":[{"type":2,"key":"WAA1ADAAOQA6ADwAUwBIAEEAM"}]}]'
   list_group_members:
     title: List Group Members
-    description: Get a list of the group's direct members. A group can have users, organizational contacts, devices, service principals and other groups as members
+    description: Get a list of the group's direct members. A group can have users,
+      organizational contacts, devices, service principals and other groups as members
     input:
       group_id:
         title: Group ID
@@ -1385,9 +1426,10 @@ actions:
       members:
         title: Members
         description: Members
-        type: "[]user_information"
+        type: '[]user_information'
         required: false
-        example: '[{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#users/$entity","businessPhones":[],"displayName":"Joey McAdams","givenName":"Joey","jobTitle":"Sr. Software Engineer","mail":"","mobilePhone":"","officeLocation":"","preferredLanguage":"","surname":"McAdams","userPrincipalName":"user@example.com","id":"08290005-23ba-46b4-a377-b381d651a2fb","accountEnabled":true}]'
+        example: '[{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#users/$entity","businessPhones":[],"displayName":"Joey
+          McAdams","givenName":"Joey","jobTitle":"Sr. Software Engineer","mail":"","mobilePhone":"","officeLocation":"","preferredLanguage":"","surname":"McAdams","userPrincipalName":"user@example.com","id":"08290005-23ba-46b4-a377-b381d651a2fb","accountEnabled":true}]'
       count:
         title: Count
         description: Count of members in group
@@ -1397,7 +1439,8 @@ actions:
 triggers:
   risk_detection:
     title: Risk Detection
-    description: Provides list of both user and sign-in linked risk detections and associated information about the detection
+    description: Provides list of both user and sign-in linked risk detections and
+      associated information about the detection
     input:
       frequency:
         type: integer
@@ -1411,12 +1454,12 @@ triggers:
         type: string
         required: true
         enum:
-          - "low"
-          - "medium"
-          - "high"
-          - "hidden"
-          - "none"
-          - "all"
+        - low
+        - medium
+        - high
+        - hidden
+        - none
+        - all
         example: all
     output:
       risk:
@@ -1424,4 +1467,5 @@ triggers:
         description: Risk
         type: risk
         required: true
-        example: '{"id":"04da6f53cd292d990314fd05b2ba6cc06b3acc3a2eb85bf2fe6d48f2edbec301","requestId":"04c82f8e-f0c0-4971-a546-c18125fa3300","correlationId":"0977e5da-93a4-4e97-b1a2-bb03b8007e93","riskType":"unfamiliarFeatures","riskState":"atRisk","riskLevel":"low","riskDetail":"none","source":"IdentityProtection","detectionTimingType":"realtime","activity":"signin","tokenIssuerType":"AzureAD","ipAddress":"66.207.205.214","activityDateTime":"2019-11-25T14:09:08.6953666Z","detectedDateTime":"2019-11-25T14:09:08.6953666Z","lastUpdatedDateTime":"2019-11-25T14:12:04.5431877Z","userId":"ac785ffe-530a-45a1-bbf4-e275457e464b","userDisplayName":"User Name","userPrincipalName":"user@domain","additionalInfo":"[{\"Key\":\"userAgent\",\"Value\":\"python-requests/2.22.0\"}]","location":{"city":"Toronto","state":"Ontario","countryOrRegion":"CA","geoCoordinates":{"latitude":43.63831,"longitude":-79.42555}}}'
+        example: '{"id":"04da6f53cd292d990314fd05b2ba6cc06b3acc3a2eb85bf2fe6d48f2edbec301","requestId":"04c82f8e-f0c0-4971-a546-c18125fa3300","correlationId":"0977e5da-93a4-4e97-b1a2-bb03b8007e93","riskType":"unfamiliarFeatures","riskState":"atRisk","riskLevel":"low","riskDetail":"none","source":"IdentityProtection","detectionTimingType":"realtime","activity":"signin","tokenIssuerType":"AzureAD","ipAddress":"66.207.205.214","activityDateTime":"2019-11-25T14:09:08.6953666Z","detectedDateTime":"2019-11-25T14:09:08.6953666Z","lastUpdatedDateTime":"2019-11-25T14:12:04.5431877Z","userId":"ac785ffe-530a-45a1-bbf4-e275457e464b","userDisplayName":"User
+          Name","userPrincipalName":"user@domain","additionalInfo":"[{\"Key\":\"userAgent\",\"Value\":\"python-requests/2.22.0\"}]","location":{"city":"Toronto","state":"Ontario","countryOrRegion":"CA","geoCoordinates":{"latitude":43.63831,"longitude":-79.42555}}}'

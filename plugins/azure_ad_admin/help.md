@@ -1,9 +1,6 @@
 # Description
 
-[Azure](https://azure.microsoft.com) AD Admin performs administrative tasks in Azure AD.
-
-It uses the [User](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0) endpoint in
-the [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-1.0).
+Perform administrative operations in Azure AD
 
 # Key Features
 
@@ -1103,10 +1100,10 @@ Example output:
 
 ## Troubleshooting
 
-Trigger `risk_detection` needs Application permission to set as `IdentityRiskEvent.Read.All`
 
 # Version History
 
+* 4.2.1 - Updated SDK to the latest version (6.2.5)
 * 4.2.0 - New action | List Group Members
 * 4.1.2 - Updated SDK to the latest version | Added additional details in requirements section | `Risk Detection`: Fixed issue where detections were triggered randomly
 * 4.1.1 - Update requirements in help.md
