@@ -1206,10 +1206,10 @@ Example output:
 
 ## Troubleshooting
 
-If there is more than one team with the same name in your organization, the oldest team between the two will be used.
 
 # Version History
 
+* 7.0.1 - Updated SDK to the latest version (6.2.5)
 * 7.0.0 - Updated SDK to the latest version | Initial updates for fedramp compliance
 * 6.0.1 - Using exact match on channel names rather than search, from user input channel names when getting the channel id | using urllib to encode any team names in API calls to avoid symbols not being parsed correctly
 * 6.0.0 - New actions: `create_teams_chat` | `list_messages_in_chat` | update type of `Event Detail` to type object
