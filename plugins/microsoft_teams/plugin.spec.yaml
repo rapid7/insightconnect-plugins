@@ -42,8 +42,8 @@ hub_tags:
     user_management]
   keywords: [microsoft_teams, office365, chat, cloud_enabled]
   features: []
-troubleshooting: If there is more than one team with the same name in your organization,
-  the oldest team between the two will be used.
+troubleshooting:
+- If there is more than one team with the same name in your organization, the oldest team between the two will be used.
 links:
 - '[MicrosoftTeams in Extension Library](https://extensions.rapid7.com/extension/microsoft-teams)'
 references:
