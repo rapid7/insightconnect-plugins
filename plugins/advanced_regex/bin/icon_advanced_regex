@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Advanced Regex"
 Vendor = "rapid7"
-Version = "1.0.4"
+Version = "1.0.5"
 Description = "Perform advanced regular expression operations on a string using Python regex"
 
 
