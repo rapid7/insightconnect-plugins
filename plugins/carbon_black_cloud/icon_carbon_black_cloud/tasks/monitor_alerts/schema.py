@@ -43,9 +43,7 @@ class MonitorAlertsOutput(insightconnect_plugin_runtime.Output):
   "type": "array",
   "title": "Alerts",
   "description": "List of all alerts and observations",
-  "items": {
-    "$ref": "#/definitions/alert"
-  },
+  "items": {},
   "required": [
     "alerts"
   ],
