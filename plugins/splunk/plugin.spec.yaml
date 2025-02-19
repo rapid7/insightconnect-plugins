@@ -3,8 +3,8 @@ extension: plugin
 products: [insightconnect]
 name: splunk
 title: Splunk
-description: The Splunk plugin allows you to search, monitor, and analyze machine data
-version: 3.0.4
+description: "[Splunk](https://www.splunk.com/) captures, indexes, and correlates real-time data in a searchable repository from which it can generate graphs, reports, alerts, dashboards, and visualizations. This plugin allows you to interact with Splunk by hooking alerts to trigger InsightConnect workflows, run (saved) searches, retrieve search results, and even insert data back into Splunk from a workflow"
+version: 3.0.5
 connection_version: 3
 vendor: rapid7
 support: rapid7
@@ -21,10 +21,16 @@ requirements:
   - Administrative credentials
   - Splunk host IP address or hostname
   - Splunk API port
+troubleshooting:
+  - "If issues are encountered when using the `Search` action, try prefixing your query with `search`, example: `search index=\"*\" | head 5`."
 sdk:
   type: slim
-  version: 5.3.2
+  version: 6.2.5
   user: nobody
+links:
+  - "[Splunk](https://www.splunk.com/)"
+references:
+  - "[Splunk](https://www.splunk.com/)"
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/splunk
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -34,6 +40,25 @@ hub_tags:
   use_cases: [threat_detection_and_response, reporting_and_analytics, data_utility, alerting_and_notifications]
   keywords: [splunk, siem, logs]
   features: []
+version_history:
+  - 3.0.5 - Updated SDK to latest version (6.2.5)
+  - 3.0.4 - Updated SDK to latest version | Refreshed the plugin | Added unittests | Updated packages
+  - 3.0.3 - Add `search_timeframe` input to Search action
+  - 3.0.2 - Fix issue with typos in help.md and plugin description
+  - 3.0.1 - New spec and help.md format for the Extension Library
+  - 3.0.0 - Remove Komand-specific Alert trigger | Fix invalid output properties | Numerous typographical fixes | Improve error handling | Smaller plugin size due to slim SDK migration | New connection test code
+  - 2.0.0 - Support SSL Verify option in the Connection | Improve error handling in Connection | Update documentation
+  - 1.1.0 - Add support for user specified number of results in the Search action
+  - 1.0.1 - Fix issue where JSON module was not imported in Search action
+  - 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Support free Splunk license
+  - 0.2.4 - SSL bug fix in SDK
+  - 0.2.3 - UTF-8 encode events in the insert action
+  - 0.2.2 - Fix bug when using multiple alert names
+  - 0.2.1 - Bugfix in connection attempts
+  - 0.2.0 - Add 8 saved search and related actions
+  - 0.1.2 - Remove logging of username and password
+  - 0.1.1 - Added poll interval input to Alert trigger
+  - 0.1.0 - Initial plugin
 connection:
   host:
     title: Host
