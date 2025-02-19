@@ -30,8 +30,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
         try:
             now_date = datetime.now(tz=timezone.utc).date()
             self.api.get_siem_logs(log_type="receipt", query_date=now_date, page_size=1, max_threads=1, next_page=None)
-            self.logger.info("The connection test to Mimecast was successful.")
-            return {"success": True}
+            return_messsage = "The connection test to Mimecast was successful."
+            self.logger.info(return_messsage)
+            return {"success": True}, return_messsage
         except PluginException as error:
             return_message = ""
             failed_message = "The connection test to Mimecast for has failed."
