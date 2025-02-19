@@ -103,6 +103,7 @@ Example output:
 
 # Version History
 
+* 1.0.1 - Update SDK | Improve output for a successful connection test
 * 1.0.0 - Initial plugin
 
 # Links
