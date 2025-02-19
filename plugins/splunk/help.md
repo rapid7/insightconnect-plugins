@@ -1,45 +1,41 @@
 # Description
 
-[Splunk](https://www.splunk.com/) captures, indexes, and correlates real-time data in a searchable repository from which it can generate graphs, reports, alerts, dashboards, and visualizations. This plugin allows you to interact with Splunk by hooking alerts to trigger InsightConnect workflows, run (saved) searches, retrieve search results, and even insert data back into Splunk from a workflow.
-
-To get Splunk alerts or send saved searches to InsightConnect, please use the [InsightConnect Splunk App](https://splunkbase.splunk.com/app/4673/).
+[Splunk](https://www.splunk.com/) captures, indexes, and correlates real-time data in a searchable repository from which it can generate graphs, reports, alerts, dashboards, and visualizations. This plugin allows you to interact with Splunk by hooking alerts to trigger InsightConnect workflows, run (saved) searches, retrieve search results, and even insert data back into Splunk from a workflow
 
 # Key Features
-  
-* Run a search query to get the results from your Splunk instance  
-* Display search results from a specified job  
-* Run, create, delete, and list saved searches to store and rerun queries over time  
-* List and modify saved search properties to view and update your reusable queries  
-* Get saved search job history to retrieve the history of a specified saved search  
+
+* Run a search query to get the results from your Splunk instance
+* Display search results from a specified job
+* Run, create, delete, and list saved searches to store and rerun queries over time
+* List and modify saved search properties to view and update your reusable queries
+* Get saved search job history to retrieve the history of a specified saved search
 * Insert events into an index to update your Splunk instance
 
 # Requirements
-  
-* Administrative credentials  
-* Splunk host IP address or hostname  
+
+* Administrative credentials
+* Splunk host IP address or hostname
 * Splunk API port
 
 # Supported Product Versions
-  
+
 * Splunk SDK 1.7.4
 
 # Documentation
 
 ## Setup
 
-To connect to Splunk, you must have valid credentials and network access to the Splunk API port (Splunk's default is TCP/8089). This plugin supports both the Free and Enterprise Splunk licenses.
+The connection configuration accepts the following parameters:  
 
-The connection configuration accepts the following parameters:
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|credentials|credential_username_password|None|False|Username and password|None|{"username":"ExampleUser","password":"ExamplePassword"}|None|None|
+|host|string|None|True|Hostname or IP address of Splunk server to connect to|None|splunk.example.com|None|None|
+|license|string|None|True|License type for Splunk host|["Enterprise", "Free"]|Free|None|None|
+|port|integer|8089|True|Port the Splunk API is listening on. Default is 8089|None|8089|None|None|
+|ssl_verify|boolean|None|True|Verify server's SSL/TLS certificate|None|True|None|None|
+|use_ssl|boolean|None|True|Whether or not to use SSL|None|True|None|None|
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|credentials|credential_username_password|None|False|Username and password|None|{"username":"ExampleUser","password":"ExamplePassword"}|
-|host|string|None|True|Hostname or IP address of Splunk server to connect to|None|splunk.example.com|
-|license|string|None|True|License type for Splunk host|["Enterprise", "Free"]|Free|
-|port|integer|8089|True|Port the Splunk API is listening on. Default is 8089|None|8089|
-|ssl_verify|boolean|None|True|Verify server's SSL/TLS certificate|None|True|
-|use_ssl|boolean|None|True|Whether or not to use SSL|None|True|
-  
 Example input:
 
 ```
@@ -62,16 +58,16 @@ Example input:
 
 
 #### Create Saved Search
-  
+
 This action is used to creates a saved search
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|properties|object|None|False|JSON object containing additional properties to save with the saved search|None|{"description":"ExampleDescription","is_scheduled":true}|
-|query|string|None|True|Search query|None|search *|
-|saved_search_name|string|None|True|Name to give to the saved search|None|ExampleSavedSearchName|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|properties|object|None|False|JSON object containing additional properties to save with the saved search|None|{"description":"ExampleDescription","is_scheduled":true}|None|None|
+|query|string|None|True|Search query|None|search *|None|None|
+|saved_search_name|string|None|True|Name to give to the saved search|None|ExampleSavedSearchName|None|None|
   
 Example input:
 
@@ -106,14 +102,14 @@ Example output:
 ```
 
 #### Delete Saved Search
-  
+
 This action is used to deletes a saved search
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|saved_search_name|string|None|True|Name of the saved search to delete|None|ExampleSavedSearchName|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|saved_search_name|string|None|True|Name of the saved search to delete|None|ExampleSavedSearchName|None|None|
   
 Example input:
 
@@ -138,15 +134,15 @@ Example output:
 ```
 
 #### Display Search Results
-  
+
 This action is used to displays the search results from a job
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|job_id|string|None|True|The Job ID to look up results for|None|12345|
-|timeout|number|None|True|Duration of time, in seconds, to wait for retrieving results|None|5|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|job_id|string|None|True|The Job ID to look up results for|None|12345|None|None|
+|timeout|number|None|True|Duration of time, in seconds, to wait for retrieving results|None|5|None|None|
   
 Example input:
 
@@ -185,14 +181,14 @@ Example output:
 ```
 
 #### Get Saved Search Job History
-  
+
 This action is used to returns the job history of a specified saved search
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|saved_search_name|string|None|True|Name of a saved search|None|ExampleSavedSearchName|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|saved_search_name|string|None|True|Name of a saved search|None|ExampleSavedSearchName|None|None|
   
 Example input:
 
@@ -232,18 +228,18 @@ Example output:
 ```
 
 #### Insert
-  
+
 This action is used to insert events into an index
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|event|string|None|True|The event to submit|None|User logged in|
-|host|string|None|False|The source host|None|example_host|
-|index|string|None|True|Name of index|None|ExampleIndexName|
-|source|string|None|False|Source of the event|None|ExampleEventSource|
-|source_type|string|None|False|The optional source type value of the event|None|ExampleEventSourceType|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|event|string|None|True|The event to submit|None|User logged in|None|None|
+|host|string|None|False|The source host|None|example_host|None|None|
+|index|string|None|True|Name of index|None|ExampleIndexName|None|None|
+|source|string|None|False|Source of the event|None|ExampleEventSource|None|None|
+|source_type|string|None|False|The optional source type value of the event|None|ExampleEventSourceType|None|None|
   
 Example input:
 
@@ -272,7 +268,7 @@ Example output:
 ```
 
 #### List Saved Searches
-  
+
 This action is used to lists all saved searches
 
 ##### Input
@@ -329,15 +325,15 @@ Example output:
 ```
 
 #### Modify Saved Search Properties
-  
+
 This action is used to modifies the properties of a saved search
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|properties|object|None|True|JSON object of properties and values to modify|None|{"description":"ExampleDescription","is_scheduled":true}|
-|saved_search_name|string|None|True|Name of saved search to display properties for|None|ExampleSavedSearchName|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|properties|object|None|True|JSON object of properties and values to modify|None|{"description":"ExampleDescription","is_scheduled":true}|None|None|
+|saved_search_name|string|None|True|Name of saved search to display properties for|None|ExampleSavedSearchName|None|None|
   
 Example input:
 
@@ -366,14 +362,14 @@ Example output:
 ```
 
 #### Run Saved Search
-  
+
 This action is used to runs a saved search
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|saved_search_name|string|None|True|Name of saved search to run|None|ExampleSavedSearchName|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|saved_search_name|string|None|True|Name of saved search to run|None|ExampleSavedSearchName|None|None|
   
 Example input:
 
@@ -398,16 +394,16 @@ Example output:
 ```
 
 #### Search
-  
+
 This action is used to run a query
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|count|integer|100|True|The maximum number of results to return. Set to 0 for unlimited results|None|100|
-|query|string|None|True|Run a search query|None|search *|
-|search_timeframe|string|None|False|The specified timeframe for the search. Default searches over all time. Separated with dash, in the form of Unix epoch timestamps, e.g. 1498824598-1598824598. If end time is left blank, it defaults to the current time|None|1598984278-1598984478|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|count|integer|100|True|The maximum number of results to return. Set to 0 for unlimited results|None|100|None|None|
+|query|string|None|True|Run a search query|None|search *|None|None|
+|search_timeframe|string|None|False|The specified timeframe for the search. Default searches over all time. Separated with dash, in the form of Unix epoch timestamps, e.g. 1498824598-1598824598. If end time is left blank, it defaults to the current time|None|1598984278-1598984478|None|None|
   
 Example input:
 
@@ -441,14 +437,14 @@ Example output:
 ```
 
 #### View Saved Search Properties
-  
+
 This action is used to returns the properties for a saved search
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|saved_search_name|string|None|True|Name of saved search to display properties for|None|ExampleSavedSearchName|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|saved_search_name|string|None|True|Name of saved search to display properties for|None|ExampleSavedSearchName|None|None|
   
 Example input:
 
@@ -491,6 +487,7 @@ Example output:
 
 # Version History
 
+* 3.0.5 - Updated SDK to latest version (6.2.5)
 * 3.0.4 - Updated SDK to latest version | Refreshed the plugin | Added unittests | Updated packages
 * 3.0.3 - Add `search_timeframe` input to Search action
 * 3.0.2 - Fix issue with typos in help.md and plugin description
@@ -516,4 +513,3 @@ Example output:
 ## References
 
 * [Splunk](https://www.splunk.com/)
-* [InsightConnect Splunk App](https://splunkbase.splunk.com/app/4673/)
