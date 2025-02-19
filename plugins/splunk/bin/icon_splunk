@@ -6,8 +6,8 @@ from sys import argv
 
 Name = "Splunk"
 Vendor = "rapid7"
-Version = "3.0.4"
-Description = "The Splunk plugin allows you to search, monitor, and analyze machine data"
+Version = "3.0.5"
+Description = "[Splunk](https://www.splunk.com/) captures, indexes, and correlates real-time data in a searchable repository from which it can generate graphs, reports, alerts, dashboards, and visualizations. This plugin allows you to interact with Splunk by hooking alerts to trigger InsightConnect workflows, run (saved) searches, retrieve search results, and even insert data back into Splunk from a workflow"
 
 
 def main():
