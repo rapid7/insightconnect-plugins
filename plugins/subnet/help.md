@@ -123,10 +123,10 @@ Example output:
 
 ## Troubleshooting
 
-The number of hosts per network does not include the ID and broadcast address. However, the number of network does include the all-ones and all-zeros network.
 
 # Version History
 
+* 2.0.2 - Updated SDK to the latest version (67.67.67)
 * 2.0.1 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 2.0.0 - Add new action Check Address in Subnet | Code refactor
 * 1.0.2 - New spec and help.md format for the Extension Library
