@@ -9,18 +9,23 @@ import copy
 # Date format for conversion
 DATE_FORMAT = "%Y-%m-%d"
 # Default and max values
-LOG_TYPES = ["receipt", "url protect", "attachment protect"]
+RECEIPT = "receipt"
+URL_PROTECT = "url protect"
+ATTACHMENT_PROTECT = "attachment protect"
+LOG_TYPES = [RECEIPT, URL_PROTECT, ATTACHMENT_PROTECT]
 DEFAULT_THREAD_COUNT = 10
 DEFAULT_PAGE_SIZE = 100
 MAX_LOOKBACK_DAYS = 7
 INITIAL_MAX_LOOKBACK_DAYS = 1
-LOG_HASH_SIZE_LIMIT = 1000
+LARGE_LOG_HASH_SIZE_LIMIT = 4800
+SMALL_LOG_HASH_SIZE_LIMIT = 100
 # Run type
 INITIAL_RUN = "initial_run"
 SUBSEQUENT_RUN = "subsequent_run"
 PAGINATION_RUN = "pagination_run"
 # Access keys for state and custom config
 LOG_HASHES = "log_hashes"
+LOG_HASH_LIMIT = "log_hash_limit"
 QUERY_CONFIG = "query_config"
 QUERY_DATE = "query_date"
 CAUGHT_UP = "caught_up"
@@ -53,9 +58,8 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             query_config = self.prepare_query_params(state.get(QUERY_CONFIG, {}), max_run_lookback_date, now_date)
             logs, query_config = self.get_all_logs(run_condition, query_config, page_size, thead_count)
             self.logger.info(f"TASK: Total logs collected this run {len(logs)}")
-            logs, log_hashes = self.compare_and_dedupe_hashes(state.get(LOG_HASHES, []), logs)
             self.logger.info(f"TASK: Total logs after deduplication {len(logs)}")
-            exit_state, has_more_pages = self.prepare_exit_state(state, query_config, now_date, log_hashes)
+            exit_state, has_more_pages = self.prepare_exit_state(state, query_config, now_date)
             return logs, exit_state, has_more_pages, 200, None
         except APIException as error:
             self.logger.info(
@@ -63,9 +67,11 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             )
             return [], existing_state, False, error.status_code, error
         except PluginException as error:
+            raise error
             self.logger.info(f"Error: A Plugin exception has occurred. Cause: {error.cause}  Error data: {error.data}.")
             return [], existing_state, False, 500, error
         except Exception as error:
+            raise error
             self.logger.info(f"Error: Unknown exception has occurred. No results returned. Error Data: {error}")
             return [], existing_state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
@@ -200,13 +206,23 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                     page_size=page_size,
                     max_threads=thead_count,
                 )
+                # Receipt logs are much higher volume than others, so should make up the bulk of the log hashes
+                log_hash_size_limit = LARGE_LOG_HASH_SIZE_LIMIT if log_type == RECEIPT else SMALL_LOG_HASH_SIZE_LIMIT
+                deduplicated_logs, log_hashes = self.compare_and_dedupe_hashes(
+                    query_config.get(LOG_HASHES, []), logs, log_hash_size_limit
+                )
+                self.logger.info(
+                    f"TASK: Number of logs after de-duplication:{len(deduplicated_logs)} for log type {log_type}"
+                )
                 complete_logs.extend(logs)
-                log_type_config.update({NEXT_PAGE: results_next_page, CAUGHT_UP: caught_up})
+                log_type_config.update({NEXT_PAGE: results_next_page, CAUGHT_UP: caught_up, LOG_HASHES: log_hashes})
             else:
                 self.logger.info(f"TASK: Query for {log_type} is caught up. Skipping as we are currently paginating")
         return complete_logs, query_config
 
-    def compare_and_dedupe_hashes(self, previous_logs_hashes: list, new_logs: list) -> Tuple[list, list]:
+    def compare_and_dedupe_hashes(
+        self, previous_logs_hashes: list, new_logs: list, log_hash_size_limit: int = SMALL_LOG_HASH_SIZE_LIMIT
+    ) -> Tuple[list, list]:
         """
         Iterate through two lists of values, hashing each. Compare hash value to a list of existing hash values.
         If the hash exists, return both it and the value in separate lists once iterated.
@@ -220,7 +236,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         new_logs_hashes = []
         logs_to_return = []
         # Limit the amount of log hashes saved in order to reduce state size
-        log_hash_save_start = len(new_logs) - LOG_HASH_SIZE_LIMIT
+        log_hash_save_start = len(new_logs) - log_hash_size_limit
         new_logs.sort(key=lambda x: x["timestamp"])
         for index, log in enumerate(new_logs):
             hash_ = hash_sha1(log)
@@ -228,14 +244,9 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                 logs_to_return.append(log)
                 if index >= log_hash_save_start:
                     new_logs_hashes.append(hash_)
-        self.logger.info(
-            f"Original number of logs:{len(new_logs)}. Number of logs after de-duplication:{len(logs_to_return)}"
-        )
         return logs_to_return, new_logs_hashes
 
-    def prepare_exit_state(
-        self, state: dict, query_config: dict, now_date: datetime, log_hashes: List[str]
-    ) -> Tuple[Dict, bool]:
+    def prepare_exit_state(self, state: dict, query_config: dict, now_date: datetime) -> Tuple[Dict, bool]:
         """
         Prepare state and pagination for task completion. Format date time.
         :param state:
@@ -253,5 +264,4 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                 has_more_pages = True
             log_type_config[QUERY_DATE] = query_date.strftime(DATE_FORMAT)
         state[QUERY_CONFIG] = query_config
-        state[LOG_HASHES] = log_hashes
         return state, has_more_pages
