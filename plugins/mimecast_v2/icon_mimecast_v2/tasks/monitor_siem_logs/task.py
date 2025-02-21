@@ -1,6 +1,6 @@
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import APIException, PluginException
-from insightconnect_plugin_runtime.helper import compare_and_dedupe_hashes, hash_sha1
+from insightconnect_plugin_runtime.helper import hash_sha1
 from .schema import MonitorSiemLogsInput, MonitorSiemLogsOutput, MonitorSiemLogsState, Input, Output, Component, State
 from typing import Dict, List, Tuple
 from datetime import datetime, timezone, timedelta
@@ -14,6 +14,7 @@ DEFAULT_THREAD_COUNT = 10
 DEFAULT_PAGE_SIZE = 100
 MAX_LOOKBACK_DAYS = 7
 INITIAL_MAX_LOOKBACK_DAYS = 1
+LOG_HASH_SIZE_LIMIT = 1000
 # Run type
 INITIAL_RUN = "initial_run"
 SUBSEQUENT_RUN = "subsequent_run"
@@ -52,7 +53,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             query_config = self.prepare_query_params(state.get(QUERY_CONFIG, {}), max_run_lookback_date, now_date)
             logs, query_config = self.get_all_logs(run_condition, query_config, page_size, thead_count)
             self.logger.info(f"TASK: Total logs collected this run {len(logs)}")
-            logs, log_hashes = compare_and_dedupe_hashes(state.get(LOG_HASHES, []), logs)
+            logs, log_hashes = self.compare_and_dedupe_hashes(state.get(LOG_HASHES, []), logs)
             self.logger.info(f"TASK: Total logs after deduplication {len(logs)}")
             exit_state, has_more_pages = self.prepare_exit_state(state, query_config, now_date, log_hashes)
             return logs, exit_state, has_more_pages, 200, None
@@ -204,6 +205,33 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             else:
                 self.logger.info(f"TASK: Query for {log_type} is caught up. Skipping as we are currently paginating")
         return complete_logs, query_config
+
+    def compare_and_dedupe_hashes(self, previous_logs_hashes: list, new_logs: list) -> Tuple[list, list]:
+        """
+        Iterate through two lists of values, hashing each. Compare hash value to a list of existing hash values.
+        If the hash exists, return both it and the value in separate lists once iterated.
+        :param previous_logs_hashes: List of existing hashes to compare against.
+        :type list:
+        :param new_logs: New values to hash and compare to existing list of hashes.
+        :type list:
+        :return: Hex digest of hash.
+        :rtype: Tuple[list, list]
+        """
+        new_logs_hashes = []
+        logs_to_return = []
+        # Limit the amount of log hashes saved in order to reduce state size
+        log_hash_save_start = max(len(new_logs) - LOG_HASH_SIZE_LIMIT, 0)
+        new_logs.sort(key=lambda x: x["timestamp"])
+        for index, log in enumerate(new_logs):
+            hash_ = hash_sha1(log)
+            if hash_ not in previous_logs_hashes:
+                logs_to_return.append(log)
+                if index >= log_hash_save_start:
+                    new_logs_hashes.append(hash_)
+        self.logger.info(
+            f"Original number of logs:{len(new_logs)}. Number of logs after de-duplication:{len(logs_to_return)}"
+        )
+        return logs_to_return, new_logs_hashes
 
     def prepare_exit_state(
         self, state: dict, query_config: dict, now_date: datetime, log_hashes: List[str]
