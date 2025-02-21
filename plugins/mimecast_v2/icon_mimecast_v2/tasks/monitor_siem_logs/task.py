@@ -220,7 +220,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         new_logs_hashes = []
         logs_to_return = []
         # Limit the amount of log hashes saved in order to reduce state size
-        log_hash_save_start = max(len(new_logs) - LOG_HASH_SIZE_LIMIT, 0)
+        log_hash_save_start = len(new_logs) - LOG_HASH_SIZE_LIMIT
         new_logs.sort(key=lambda x: x["timestamp"])
         for index, log in enumerate(new_logs):
             hash_ = hash_sha1(log)
