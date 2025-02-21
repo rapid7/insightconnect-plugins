@@ -4012,6 +4012,7 @@ Example output:
 
 # Version History
 
+* 8.0.10 - Updated SDK to the latest version (67.67.67)
 * 8.0.9 - Address vulnerabilities in buildpack
 * 8.0.8 - Bumping requirements.txt | SDK bump to 6.2.2
 * 8.0.7 - Bumping requirements.txt | SDK bump to 6.2.0
