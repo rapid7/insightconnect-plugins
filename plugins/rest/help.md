@@ -2,10 +2,6 @@
 
 The HTTP Requests plugin makes it easy to integrate with RESTful services
 
-The HTTP Requests plugin allows users to automate HTTP requests to API services such as [RESTful based services](https://en.wikipedia.org/wiki/Representational_state_transfer).
-
-This plugin is often used to integrate with ad-hoc 3rd party API's in a workflow without going through the process of [building a new plugin](https://komand.github.io/python/index.html). It supports DELETE, GET, PATCH, POST, or PUT requests to the provided URI.
-
 # Key Features
 
 * Make RESTful API calls
@@ -336,12 +332,10 @@ Example output:
 
 ## Troubleshooting
 
-Any headers set in the action will overwrite the default ones in the connection.
-Any issues connecting to the remote service should be present in the log of the job that ran. If you find any issues that represent bugs in the plugin itself, please contact someone at Komand directly.
-
 
 # Version History
 
+* 6.0.9 - Updated SDK to the latest version (67.67.67)
 * 6.0.8 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 6.0.7 - Connection: fix hard overriding custom header from `CUSTOM_SECRET_INPUT`
 * 6.0.6 - Updated the SDK to the latest version to address memory usage issues
