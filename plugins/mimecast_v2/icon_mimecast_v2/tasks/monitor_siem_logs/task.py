@@ -67,11 +67,9 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             )
             return [], existing_state, False, error.status_code, error
         except PluginException as error:
-            raise error
             self.logger.info(f"Error: A Plugin exception has occurred. Cause: {error.cause}  Error data: {error.data}.")
             return [], existing_state, False, 500, error
         except Exception as error:
-            raise error
             self.logger.info(f"Error: Unknown exception has occurred. No results returned. Error Data: {error}")
             return [], existing_state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
@@ -214,7 +212,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                 self.logger.info(
                     f"TASK: Number of logs after de-duplication:{len(deduplicated_logs)} for log type {log_type}"
                 )
-                complete_logs.extend(logs)
+                complete_logs.extend(deduplicated_logs)
                 log_type_config.update({NEXT_PAGE: results_next_page, CAUGHT_UP: caught_up, LOG_HASHES: log_hashes})
             else:
                 self.logger.info(f"TASK: Query for {log_type} is caught up. Skipping as we are currently paginating")
