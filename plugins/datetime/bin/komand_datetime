@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Datetime"
 Vendor = "rapid7"
-Version = "3.0.1"
+Version = "3.0.2"
 Description = "This plugin manipulates timestamps using Python's maya library"
 
 
