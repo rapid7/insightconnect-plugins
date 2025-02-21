@@ -271,6 +271,7 @@ Example output:
 
 # Version History
 
+* 1.2.8 - Updated SDK to the latest version (67.67.67)
 * 1.2.7 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 1.2.6 - SDK Bump | Addressing Snyk vulnerabilities | Fixing Unit Tests | Dockerfile USER permission updated
 * 1.2.5 - Update requirements for pypandoc
