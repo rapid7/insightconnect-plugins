@@ -2,19 +2,6 @@
 
 [Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.9.19 and its standard library as well as the following 3rd party libraries:
 
-* [requests 2.32.2](https://requests.readthedocs.io/en/latest/)
-* [arrow 1.3.0](https://pypi.org/project/arrow/) 
-* [lxml 5.3.0](http://lxml.de/) 
-* [beautifulsoup 4.12.3](https://www.crummy.com/software/BeautifulSoup/) 
-* [pyyaml 6.0.2](http://pyyaml.org/) 
-* [parameterized 0.8.1](https://pypi.org/project/parameterized/) 
-* [setuptools 75.1.0](https://pypi.org/project/setuptools/)
-* [datetime 5.5](https://pypi.org/project/DateTime/)
-
-The Python 3 Script plugin also allows you to load custom modules via its connection parameters.
-
-Also, this plugin allows you to provide additional credentials in the connection such as username, password, secret_key available in the script as Python variables (`username`, `password`, `secret_key`)
-
 # Key Features
 
 * Run a Python 3 Script to securely orchestrate, automate, and respond to (almost) anything
@@ -116,10 +103,10 @@ Example output:
 
 ## Troubleshooting
 
-Some third-party modules defined in the Modules connection input (such as pandas) can take a long time to install. If installation fails, try increasing the Timeout connection input to 900 (15 minutes)
 
 # Version History
 
+* 5.1.1 - Updated SDK to the latest version (67.67.67)
 * 5.1.0 - Action `Run`: Added `timeout` optional parameter | Updated SDK to the latest version
 * 5.0.1 - Updated SDK to the latest version | Initial updates for fedramp compliance
 * 5.0.0 - Updated SDK to the latest version | Removing records as its not maintained | Replacing maya with arrow (maya not maintained)
