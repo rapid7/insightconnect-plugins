@@ -150,6 +150,7 @@ Example output:
 
 # Version History
 
+* 2.1.6 - Updated SDK to the latest version (67.67.67)
 * 2.1.5 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
 * 2.1.4 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 2.1.3 - Fix critical Snyk vulnerability | Update SDK
