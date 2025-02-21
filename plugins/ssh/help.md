@@ -124,6 +124,7 @@ This can then be pasted into the Connection's `key` input field
 
 # Version History
 
+* 4.0.4 - Updated SDK to the latest version (67.67.67)
 * 4.0.3 - Updated dependencies | Updated SDK to the latest version
 * 4.0.2 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 4.0.1 - Update from komand to insight-plugin-runtime
