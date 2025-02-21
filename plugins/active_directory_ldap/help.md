@@ -1,6 +1,6 @@
 # Description
 
-[AD LDAP](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/3c5916a9-f1a0-429d-b937-f8fe672d777c) (Active Directory Lightweight Directory Access Protocol) is an application protocol for querying and modifying items in Active Directory. This plugin queries [Microsoft's Active Directory service](https://social.technet.microsoft.com/wiki/contents/articles/5392.active-directory-ldap-syntax-filters.aspx) to programmatically manage and query an Active Directory environment.
+This plugin utilizes Microsoft's Active Directory service to create and manage domains, users, and objects within a network
 
 # Key Features
 
@@ -57,7 +57,7 @@ Example input:
 
 #### Add User
 
-This action is used to add the specified Active Directory user
+This action is used to adds the specified Active Directory user
 
 ##### Input
 
@@ -107,7 +107,7 @@ Example output:
 
 #### Delete
 
-This action is used to delete the LDAP object specified
+This action is used to deletes the LDAP object specified
 
 ##### Input
 
@@ -736,31 +736,10 @@ Example output:
 
 ## Troubleshooting
 
-Objects that contain an equals sign `=` or an asterisk `*` require the signs to be escaped.
-For example `CN=Robert = bob Smith,OU=domain_users,DC=rapid7,DC=com` must be escaped as`CN=Robert \= bob Smith,OU=domain_users,DC=mattsdomain,DC=local` in the input.
-A second example would be `CN=C**l guy,OU=domain_users,DC=rapid7,DC=com`. This must be escaped as `CN=C\*\*l guy,OU=domain_users,DC=rapid7,DC=com`.
-
-This plugin does not support objects and unpaired `\(\)` as part of their names.
-Paired `\(\)` are supported.
-For example `CN=Robert (Bob) Smith,OU=domain_users,DC=rapid7,DC=com` is supported
-but `CN=Robert Bob) Smith,OU=domain_users,DC=rapid7,DC=com` is not.
-
-All inputs to the query action must be correctly escaped.
-
-If you cannot connect, ensure that network access is available, and view the logs to identify any auth errors.
-
-For the Add User action it is recommended that SSL be enabled. Without SSL the action is only partially functional.
-It will create the user, but it will not be able to assign a password or enable the account.
-
-SSL must be enabled for the Reset Password action to function.
-
-To look up a Distinguished Name (DN) in Microsoft AD use the query action. Use the search filter (sAMAccountName=objectname ) where
-objectname is the logon name of the user you are looking for. The DN can then be fed into another action by Repeating a collection for
-the query results, and then using the variable step $item.dn
-
 
 # Version History
 
+* 9.0.4 - Updated SDK to the latest version (888.888.888)
 * 9.0.3 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 9.0.2 - Updated the SDK to the latest version to address memory usage issues
 * 9.0.1 - Fix problem where some ASCII characters were not escaped properly
