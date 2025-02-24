@@ -6,7 +6,7 @@ title: Jira
 vendor: rapid7
 support: rapid7
 status: []
-description: "[Jira](https://www.atlassian.com/software/jira) is an issue tracking product developed by Atlassian that allows teams to plan, track, and release great software. This plugin uses the [Jira REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v2/) to programmatically manage and create issues and users. The Jira plugin supports cloud and on-premise versions of Jira Software, Jira Server, and Jira ServiceDesk products from Atlassian. Please note that only JIRA cloud is supported with InsightConnect cloud connections"
+description: "[Jira](https://www.atlassian.com/software/jira) is an issue tracking product developed by Atlassian that allows teams to plan, track, and release great software. This plugin uses the [Jira REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v2/) to programmatically manage and create issues and users. The Jira plugin supports cloud (only with InsightConnect cloud connections) and on-premise versions of Jira Software, Jira Server, and Jira ServiceDesk products from Atlassian."
 version: 6.5.1
 connection_version: 6
 supported_versions: ["Jira Server 6.0", "Jira (Cloud)", "Jira ServiceDesk (Cloud)"]
