@@ -59,6 +59,35 @@ STUB_STATE_PAGINATING_LAST_PAGE = {
     },
 }
 
+STUB_STATE_LIMIT_LOGS = {
+    "query_config": {
+        "attachment protect": {
+            "caught_up": False,
+            "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
+            "next_page": None,
+            "query_date": "1999-12-31",
+            "saved_file_position": 2,
+            "saved_file_url": "https://example.com",
+        },
+        "receipt": {
+            "caught_up": False,
+            "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
+            "next_page": None,
+            "query_date": "1999-12-31",
+            "saved_file_position": 2,
+            "saved_file_url": "https://example.com",
+        },
+        "url protect": {
+            "caught_up": False,
+            "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
+            "next_page": None,
+            "query_date": "1999-12-31",
+            "saved_file_position": 2,
+            "saved_file_url": "https://example.com",
+        },
+    }
+}
+
 STUB_STATE_SECOND_RUN_EXPECTED = {
     "query_config": {
         "attachment protect": {
@@ -117,6 +146,64 @@ STUB_STATE_EXPECTED_CUSTOM_CONFIG = {
     },
 }
 
+STUB_STATE_EXPECTED_LOG_LIMIT = {
+    "query_config": {
+        "attachment protect": {
+            "caught_up": False,
+            "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
+            "next_page": None,
+            "query_date": "1999-12-31",
+            "saved_file_position": 1,
+            "saved_file_url": "https://example.com",
+        },
+        "receipt": {
+            "caught_up": False,
+            "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
+            "next_page": None,
+            "query_date": "1999-12-31",
+            "saved_file_position": 1,
+            "saved_file_url": "https://example.com",
+        },
+        "url protect": {
+            "caught_up": False,
+            "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
+            "next_page": None,
+            "query_date": "1999-12-31",
+            "saved_file_position": 1,
+            "saved_file_url": "https://example.com",
+        },
+    }
+}
+
+STUB_STATE_EXPECTED_LOG_LIMIT_SECOND_RUN = {
+    "query_config": {
+        "attachment protect": {
+            "caught_up": True,
+            "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
+            "next_page": "NDU1NA==",
+            "query_date": "1999-12-31",
+            "saved_file_position": None,
+            "saved_file_url": None,
+        },
+        "receipt": {
+            "caught_up": True,
+            "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
+            "next_page": "NDU1NA==",
+            "query_date": "1999-12-31",
+            "saved_file_position": None,
+            "saved_file_url": None,
+        },
+        "url protect": {
+            "caught_up": True,
+            "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
+            "next_page": "NDU1NA==",
+            "query_date": "1999-12-31",
+            "saved_file_position": None,
+            "saved_file_url": None,
+        },
+    }
+}
+
 STUB_CUSTOM_CONFIG = {
     "query_config": {
         "attachment protect": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "1999-12-31"},
@@ -135,6 +222,29 @@ STUB_CUSTOM_CONFIG_EXCEED_DATE = {
     },
     "page_size": 1,
     "thread_count": 1,
+}
+
+STUB_CUSTOM_CONFIG_LIMIT_LOGS = {
+    "query_config": {
+        "attachment protect": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "1999-12-30"},
+        "receipt": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "1999-12-30"},
+        "url protect": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "1999-12-30"},
+    },
+    "page_size": 1,
+    "thread_count": 1,
+    "log_limit": 1,
+}
+
+
+STUB_CUSTOM_CONFIG_LIMIT_LOGS_SECOND_RUN = {
+    "query_config": {
+        "attachment protect": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "1999-12-30"},
+        "receipt": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "1999-12-30"},
+        "url protect": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "1999-12-30"},
+    },
+    "page_size": 1,
+    "thread_count": 1,
+    "log_limit": 100,
 }
 
 
@@ -193,6 +303,26 @@ class TestMonitorLogs(TestCase):
                 STUB_CUSTOM_CONFIG_EXCEED_DATE,
                 Util.read_file_to_dict("expected/monitor_siem_logs.json.exp"),
                 STUB_STATE_EXPECTED_CUSTOM_CONFIG,
+                True,
+                200,
+                None,
+            ],
+            [
+                "stop_parsing_file",
+                {},
+                STUB_CUSTOM_CONFIG_LIMIT_LOGS,
+                Util.read_file_to_dict("expected/monitor_siem_logs.json.exp"),
+                STUB_STATE_EXPECTED_LOG_LIMIT,
+                True,
+                200,
+                None,
+            ],
+            [
+                "continue_parsing_file",
+                STUB_STATE_LIMIT_LOGS,
+                STUB_CUSTOM_CONFIG_LIMIT_LOGS_SECOND_RUN,
+                Util.read_file_to_dict("expected/monitor_siem_logs.json.exp"),
+                STUB_STATE_EXPECTED_LOG_LIMIT_SECOND_RUN,
                 True,
                 200,
                 None,
