@@ -14,6 +14,7 @@ from typing import Dict, List, Tuple
 from multiprocessing.dummy import Manager, Pool
 import gzip
 import json
+from itertools import islice
 from urllib.parse import urlparse, urlunparse
 
 GET = "GET"
@@ -82,8 +83,7 @@ class API:
                             self.logger.info(f"API: Saving file for next run: {saved_file} at line {saved_position}")
                             self.logger.info(f"API: {leftover_logs_count} left to process in file")
                             break
-                        else:
-                            logs.extend(batch_logs)
+                        logs.extend(batch_logs)
         self.logger.info(f"API: Discovered {len(logs)} logs for log type {log_type}")
         return logs, result_next_page, caught_up, saved_file, saved_position
 
@@ -136,7 +136,7 @@ class API:
         with gzip.GzipFile(fileobj=BytesIO(response.content), mode="rb") as file_:
             logs = []
             # Iterate over lines in the decompressed file, decode and load the JSON
-            for line_number, line in enumerate(file_, start=line_start):
+            for line in islice(file_, line_start, None):
                 decoded_line = line.decode("utf-8").strip()
                 logs.append(json.loads(decoded_line))
         return logs, url

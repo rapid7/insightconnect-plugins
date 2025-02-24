@@ -27,7 +27,6 @@ SUBSEQUENT_RUN = "subsequent_run"
 PAGINATION_RUN = "pagination_run"
 # Access keys for state and custom config
 LOG_HASHES = "log_hashes"
-LOG_HASH_LIMIT = "log_hash_limit"
 QUERY_CONFIG = "query_config"
 QUERY_DATE = "query_date"
 CAUGHT_UP = "caught_up"
