@@ -14,7 +14,6 @@ from typing import Dict, List, Tuple
 from multiprocessing.dummy import Manager, Pool
 import gzip
 import json
-from itertools import islice
 from urllib.parse import urlparse, urlunparse
 
 GET = "GET"
