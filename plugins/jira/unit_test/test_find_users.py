@@ -1,13 +1,13 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest import TestCase
-from komand_jira.connection.connection import Connection
-from komand_jira.actions.find_users import FindUsers
-import json
 import logging
+from unittest import TestCase
+
+from komand_jira.actions.find_users import FindUsers
+from komand_jira.connection.connection import Connection
 
 
 class User:
@@ -17,6 +17,7 @@ class User:
         self.emailAddress = "test@example.com"
         self.accountId = account_id
         self.name = name
+        self.raw = self.__dict__
 
 
 class MockClient:
