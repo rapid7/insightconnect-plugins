@@ -49,7 +49,7 @@ class API:
         page_size: int = 100,
         max_threads: int = 10,
         starting_url: str = None,
-        starting_position: int = 1,
+        starting_position: int = 0,
         log_size_limit: int = 250,
     ) -> Tuple[List[str], str, bool]:
         batch_download_urls, result_next_page, caught_up = self.get_siem_batches(
@@ -136,7 +136,7 @@ class API:
         with gzip.GzipFile(fileobj=BytesIO(response.content), mode="rb") as file_:
             logs = []
             # Iterate over lines in the decompressed file, decode and load the JSON
-            for line in islice(file_, line_start, None):
+            for _, line in enumerate(file_, start=line_start):
                 decoded_line = line.decode("utf-8").strip()
                 logs.append(json.loads(decoded_line))
         return logs, url

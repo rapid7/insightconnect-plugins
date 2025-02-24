@@ -36,6 +36,7 @@ SAVED_FILE_POSITION = "saved_file_position"
 # Access keys for custom config
 THREAD_COUNT = "thread_count"
 PAGE_SIZE = "page_size"
+LOG_LIMIT = "log_limit"
 
 
 class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
@@ -49,19 +50,17 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         )
 
     def run(self, params={}, state={}, custom_config={}):  # pylint: disable=unused-argument
-        self.logger.info(f"TASK: Received State: {state.get(QUERY_CONFIG)}")
         existing_state = state.copy()
         try:
             now_date = datetime.now(tz=timezone.utc).date()
             run_condition = self.detect_run_condition(state.get(QUERY_CONFIG, {}), now_date)
             self.logger.info(f"TASK: Run state is {run_condition}")
             state = self.update_state(state)
-            page_size, thead_count = self.apply_custom_config(state, run_condition, custom_config)
+            page_size, thead_count, log_limit = self.apply_custom_config(state, run_condition, custom_config)
             max_run_lookback_date = self.get_max_lookback_date(now_date, run_condition, bool(custom_config))
             query_config = self.prepare_query_params(state.get(QUERY_CONFIG, {}), max_run_lookback_date, now_date)
-            logs, query_config = self.get_all_logs(run_condition, query_config, page_size, thead_count)
+            logs, query_config = self.get_all_logs(run_condition, query_config, page_size, thead_count, log_limit)
             self.logger.info(f"TASK: Total logs collected this run {len(logs)}")
-            self.logger.info(f"TASK: Total logs after deduplication {len(logs)}")
             exit_state, has_more_pages = self.prepare_exit_state(state, query_config, now_date)
             return logs, exit_state, has_more_pages, 200, None
         except APIException as error:
@@ -142,7 +141,8 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                 current_query_config[log_type] = {QUERY_DATE: log_query_date}
         page_size = max(1, min(custom_config.get(PAGE_SIZE, DEFAULT_PAGE_SIZE), DEFAULT_PAGE_SIZE))
         thread_count = max(1, custom_config.get(THREAD_COUNT, DEFAULT_THREAD_COUNT))
-        return page_size, thread_count
+        log_limit = custom_config.get(LOG_LIMIT)
+        return page_size, thread_count, log_limit
 
     def prepare_query_params(self, query_config: Dict, max_lookback_date: Dict, now_date: datetime) -> Dict:
         """
@@ -187,7 +187,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         return log_type_config
 
     def get_all_logs(
-        self, run_condition: str, query_config: Dict, page_size: int, thead_count: int
+        self, run_condition: str, query_config: Dict, page_size: int, thead_count: int, log_limit: int = None
     ) -> Tuple[List, Dict]:
         """
         Gets all logs of provided log type. First retrieves batch URLs. Then downloads and reads batches, pooling logs.
@@ -195,13 +195,17 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         :param query_config:
         :param page_size:
         :param thead_count:
+        :param log_limit:
         :return: Logs, updated query configuration (state)
         """
         complete_logs = []
         for log_type, log_type_config in query_config.items():
             if (not log_type_config.get(CAUGHT_UP)) or (run_condition != PAGINATION_RUN):
                 # Receipt logs are much higher volume than others, so should make up the bulk of the logs queried
-                log_size_limit = LARGE_LOG_SIZE_LIMIT if log_type == RECEIPT else SMALL_LOG_SIZE_LIMIT
+                if log_limit:
+                    log_size_limit = log_limit
+                else:
+                    log_size_limit = LARGE_LOG_SIZE_LIMIT if log_type == RECEIPT else SMALL_LOG_SIZE_LIMIT
                 logs, results_next_page, caught_up, saved_file, saved_position = self.connection.api.get_siem_logs(
                     log_type=log_type,
                     query_date=log_type_config.get(QUERY_DATE),
