@@ -6,19 +6,12 @@ title: Jira
 vendor: rapid7
 support: rapid7
 status: []
-description: "[Jira](https://www.atlassian.com/software/jira) is an issue tracking product developed by Atlassian that allows teams to plan, track, and release great software. This plugin uses the [Jira REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v2/) to programmatically manage and create issues and users. The Jira plugin supports cloud and on-premise versions of Jira Software, Jira Server, and Jira ServiceDesk products from Atlassian. Please note that only JIRA cloud is supported with InsightConnect cloud connections"
-key_features:
- - Create, find, edit, comment, and generally manage your Jira tickets through the Jira REST API to expedite operations
- - (Re-)Assign issues to users to orchestrate operations
- - Find and create new users in your Jira instance to automate account provisioning
-requirements:
- - URL for Jira Software, Jira Server, or Jira ServiceDesk
- - Jira user email address and API key when using Jira Cloud (Only JIRA cloud is supported with InsightConnect cloud connections.)
- - Jira username and password credentials when using on-prem Jira server
-version: 6.5.0
+description: "[Jira](https://www.atlassian.com/software/jira) is an issue tracking product developed by Atlassian that allows teams to plan, track, and release great software. This plugin uses the [Jira REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v2/) to programmatically manage and create issues and users. The Jira plugin supports cloud (only with InsightConnect cloud connections) and on-premise versions of Jira Software, Jira Server, and Jira ServiceDesk products from Atlassian."
+version: 6.5.1
 connection_version: 6
 supported_versions: ["Jira Server 6.0", "Jira (Cloud)", "Jira ServiceDesk (Cloud)"]
 cloud_ready: true
+fedramp_ready: true
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/jira
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -33,53 +26,64 @@ hub_tags:
   features: []
 sdk:
   type: slim
-  version: 6.1.0
+  version: 6.2.5
   user: nobody
-fedramp_ready: true
+  custom_cmd:
+    - "ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1"
+key_features:
+ - "Create, find, edit, comment, and generally manage your Jira tickets through the Jira REST API to expedite operations"
+ - "(Re-)Assign issues to users to orchestrate operations"
+ - "Find and create new users in your Jira instance to automate account provisioning"
+requirements:
+ - "URL for Jira Software, Jira Server, or Jira ServiceDesk"
+ - "Jira user email address and API key when using Jira Cloud (Only JIRA cloud is supported with InsightConnect cloud connections.)"
+ - "Jira username and password credentials when using on-prem Jira server"
+troubleshooting:
+  - "Please note only Jira cloud is supported with InsightConnect cloud. For JIRA OnPrem, please use an orchestrator for connecting."
 version_history:
+ - "6.5.1 - Updated normalizing user object | Updated SDK to the latest version"
  - "6.5.0 - Cloud enable the plugin | Bump SDK version to 6.1.0 | Added an error message if trying to connect to Jira on-prem for ICON cloud"
- - 6.4.0 - Fix Issue Where Create Issue failed when multiple versions of the input Issue Type exists in Jira | Fix failed connection test response for PAT based connection | Include Fields input added to New Issue and Monitor Issues triggers, to specify whether to return Issue fields in the output | Removed empty Fields output from returned Issues when not requested or available
- - 6.3.0 - Add PAT authentication scheme for Jira on-prem
- - 6.2.1 - Fix issue in Find Issues action where normalize_user has an attribute error for labels | Changed Dockerfile to don't use slim version
- - 6.2.0 - Fix issue in Get Comments actions where normalize_user is missing the is_cloud argument from client connection
- - 6.1.1 - Fix issue where attachments added in tickets were empty
- - 6.1.0 - Add Monitor Issues trigger | Update New Issue trigger to only trigger in case of recently created tickets | Change `required` property to false for `project` input in New Issue trigger | Fix issue in New Issue trigger to include all results that match JQL | Fix issue in New Issue trigger with retrieving attachments
- - 6.0.8 - Fix issue where exception type was wrong in Create Issue
- - 6.0.7 - Fix issue in Create Issue and Attach Issue actions where adding attachments failed
- - 6.0.6 - Fix build issue
- - 6.0.5 - Add more documentation on authentication
- - 6.0.4 - Update to v4 Python plugin runtime
- - 6.0.3 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://docs.rapid7.com/insightconnect/jira)
- - 6.0.2 - Fix in Comment Issue action where the Python module attributes were logged | Remove duplicate ConnectionTestException call from Connection Test
- - 6.0.1 - Update documentation to include supported Jira products
- - 6.0.0 - Update Create User, Delete User and Find Users to reflect [Jira Cloud API privacy changes](https://developer.atlassian.com/cloud/jira/platform/api-changes-for-user-privacy-announcement/) to support `accountId` | Fix issue in connection test where the error was logged but did not fail for users | Update connection schema to match the API key and username inputs
- - 5.0.0 - Fix user enumeration  in `Find Users` | Add example input | Update titles of Attachment Filename input in Attach Issue action and Poll Timeout input in New Issue trigger to match style
- - 4.0.2 - Moved `apk add` in Dockerfile to use cache | Changed bare strings in params.get and output to static fields from schema | Remove duplicated code in actions | Changed `Exception` to `PluginException`
- - 3.2.1 - Update Get Issue, Find Issues and New Issue action to support a Get Attachments option
- - 3.2.0 - Update Transition Issue action to allow for assignment of fields during issue transition
- - 3.1.2 - Update Create Issue action to remove newlines from summaries
- - 3.1.1 - Update connection input labels to reflect Jira API changes
- - 3.1.0 - Added new Edit Issue action
- - 3.0.5 - Fix issue where description in Get Issue action would return None if description was left empty
- - 3.0.4 - Improve error handling by checking for known issue type before creating ticket in Create Issue action
- - 3.0.3 - Implement new connection test messaging
- - 3.0.2 - Update action and trigger descriptions
- - 3.0.1 - Fix issue where the New Issue trigger and Create Issue action may not output properly
- - 3.0.0 - Rename 'Attach Issue' action to 'Add Attachment to Issue' | Update 'Create Issue' action description to include note about case sensitivity | Update 'Create Issue' action and 'New Issue' trigger to use uniform 'Issue' output type | Fix issue where attachments were not being uploaded properly | Fix issue where trigger could fail with an empty ticket description
- - 2.0.1 - Fix issue where test method is missing in Create Issue action
- - 2.0.0 - Support web server mode
- - 1.0.4 - Update to v2 Python plugin architecture
- - 1.0.3 - Fix custom fields adding to Create Issue request
- - 1.0.2 - Fix custom fields input in Create Issue
- - 1.0.1 - SSL bug fix in SDK
+ - "6.4.0 - Fix Issue Where Create Issue failed when multiple versions of the input Issue Type exists in Jira | Fix failed connection test response for PAT based connection | Include Fields input added to New Issue and Monitor Issues triggers, to specify whether to return Issue fields in the output | Removed empty Fields output from returned Issues when not requested or available"
+ - "6.3.0 - Add PAT authentication scheme for Jira on-prem"
+ - "6.2.1 - Fix issue in Find Issues action where normalize_user has an attribute error for labels | Changed Dockerfile to don't use slim version"
+ - "6.2.0 - Fix issue in Get Comments actions where normalize_user is missing the is_cloud argument from client connection"
+ - "6.1.1 - Fix issue where attachments added in tickets were empty"
+ - "6.1.0 - Add Monitor Issues trigger | Update New Issue trigger to only trigger in case of recently created tickets | Change `required` property to false for `project` input in New Issue trigger | Fix issue in New Issue trigger to include all results that match JQL | Fix issue in New Issue trigger with retrieving attachments"
+ - "6.0.8 - Fix issue where exception type was wrong in Create Issue"
+ - "6.0.7 - Fix issue in Create Issue and Attach Issue actions where adding attachments failed"
+ - "6.0.6 - Fix build issue"
+ - "6.0.5 - Add more documentation on authentication"
+ - "6.0.4 - Update to v4 Python plugin runtime"
+ - "6.0.3 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://docs.rapid7.com/insightconnect/jira)"
+ - "6.0.2 - Fix in Comment Issue action where the Python module attributes were logged | Remove duplicate ConnectionTestException call from Connection Test"
+ - "6.0.1 - Update documentation to include supported Jira products"
+ - "6.0.0 - Update Create User, Delete User and Find Users to reflect [Jira Cloud API privacy changes](https://developer.atlassian.com/cloud/jira/platform/api-changes-for-user-privacy-announcement/) to support `accountId` | Fix issue in connection test where the error was logged but did not fail for users | Update connection schema to match the API key and username inputs"
+ - "5.0.0 - Fix user enumeration  in `Find Users` | Add example input | Update titles of Attachment Filename input in Attach Issue action and Poll Timeout input in New Issue trigger to match style"
+ - "4.0.2 - Moved `apk add` in Dockerfile to use cache | Changed bare strings in params.get and output to static fields from schema | Remove duplicated code in actions | Changed `Exception` to `PluginException`"
+ - "3.2.1 - Update Get Issue, Find Issues and New Issue action to support a Get Attachments option"
+ - "3.2.0 - Update Transition Issue action to allow for assignment of fields during issue transition"
+ - "3.1.2 - Update Create Issue action to remove newlines from summaries"
+ - "3.1.1 - Update connection input labels to reflect Jira API changes"
+ - "3.1.0 - Added new Edit Issue action"
+ - "3.0.5 - Fix issue where description in Get Issue action would return None if description was left empty"
+ - "3.0.4 - Improve error handling by checking for known issue type before creating ticket in Create Issue action"
+ - "3.0.3 - Implement new connection test messaging"
+ - "3.0.2 - Update action and trigger descriptions"
+ - "3.0.1 - Fix issue where the New Issue trigger and Create Issue action may not output properly"
+ - "3.0.0 - Rename 'Attach Issue' action to 'Add Attachment to Issue' | Update 'Create Issue' action description to include note about case sensitivity | Update 'Create Issue' action and 'New Issue' trigger to use uniform 'Issue' output type | Fix issue where attachments were not being uploaded properly | Fix issue where trigger could fail with an empty ticket description"
+ - "2.0.1 - Fix issue where test method is missing in Create Issue action"
+ - "2.0.0 - Support web server mode"
+ - "1.0.4 - Update to v2 Python plugin architecture"
+ - "1.0.3 - Fix custom fields adding to Create Issue request"
+ - "1.0.2 - Fix custom fields input in Create Issue"
+ - "1.0.1 - SSL bug fix in SDK"
  - "1.0.0 - Fix action: Create Issue"
  - "0.2.2 - Fix action: Find Issue"
- - 0.1.0 - Initial plugin
+ - "0.1.0 - Initial plugin"
 links:
  - "[Jira](https://www.atlassian.com/software/jira)"
 references:
  - "[Jira](https://www.atlassian.com/software/jira)"
-troubleshooting: "Please note only Jira cloud is supported with InsightConnect cloud. For JIRA OnPrem, please use an orchestrator for connecting."
 types:
   user:
     accountId:

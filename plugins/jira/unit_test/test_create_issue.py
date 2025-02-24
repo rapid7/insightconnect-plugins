@@ -1,14 +1,16 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 import logging
-from unittest import TestCase, mock
-from komand_jira.connection import Connection
-from komand_jira.actions.create_issue import CreateIssue
 from collections import namedtuple
-from payloads.client_fields import client_fields
+from unittest import TestCase
+
 from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_jira.actions.create_issue import CreateIssue
+from komand_jira.connection import Connection
+
+from payloads.client_fields import client_fields
 
 ######################
 # MOCKS
