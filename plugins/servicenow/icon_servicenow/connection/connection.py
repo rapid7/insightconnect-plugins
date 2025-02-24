@@ -29,7 +29,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         oauth_client_id = params.get(Input.CLIENT_ID)
         oauth_client_secret = params.get(Input.CLIENT_SECRET, {}).get("secretKey")
 
-        if not oauth_client_id or not oauth_client_secret:
+        if not oauth_client_id or not oauth_client_secret and username and password:
             self.logger.info(
                 "Either client ID or client secret (or both) were not provided, using basic authentication"
             )
