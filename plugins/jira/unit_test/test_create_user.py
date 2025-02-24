@@ -1,14 +1,13 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest import TestCase
-from komand_jira.connection.connection import Connection
-from komand_jira.actions.create_user import CreateUser
-import json
 import logging
-import util
+from unittest import TestCase
+
+from komand_jira.actions.create_user import CreateUser
+from komand_jira.connection.connection import Connection
 
 
 class MockClient:

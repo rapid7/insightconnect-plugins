@@ -1,14 +1,14 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 import logging
-from parameterized import parameterized, param
-from unittest import TestCase, mock
-from komand_jira.connection import Connection
+from unittest import TestCase
 
 from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_jira.connection import Connection
+from parameterized import param, parameterized
 
 
 class TestConnection(TestCase):
