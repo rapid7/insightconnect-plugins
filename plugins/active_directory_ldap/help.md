@@ -1,6 +1,6 @@
 # Description
 
-[AD LDAP](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/3c5916a9-f1a0-429d-b937-f8fe672d777c) (Active Directory Lightweight Directory Access Protocol) is an application protocol for querying and modifying items in Active Directory. This plugin queries [Microsoft's Active Directory service](https://social.technet.microsoft.com/wiki/contents/articles/5392.active-directory-ldap-syntax-filters.aspx) to programmatically manage and query an Active Directory environment.
+[AD LDAP](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/3c5916a9-f1a0-429d-b937-f8fe672d777c) (Active Directory Lightweight Directory Access Protocol) is an application protocol for querying and modifying items in Active Directory. This plugin queries [Microsoft's Active Directory service](https://social.technet.microsoft.com/wiki/contents/articles/5392.active-directory-ldap-syntax-filters.aspx) to programmatically manage and query an Active Directory environment
 
 # Key Features
 
@@ -736,7 +736,7 @@ Example output:
 
 ## Troubleshooting
 
-Objects that contain an equals sign `=` or an asterisk `*` require the signs to be escaped.
+* Objects that contain an equals sign `=` or an asterisk `*` require the signs to be escaped.
 For example `CN=Robert = bob Smith,OU=domain_users,DC=rapid7,DC=com` must be escaped as`CN=Robert \= bob Smith,OU=domain_users,DC=mattsdomain,DC=local` in the input.
 A second example would be `CN=C**l guy,OU=domain_users,DC=rapid7,DC=com`. This must be escaped as `CN=C\*\*l guy,OU=domain_users,DC=rapid7,DC=com`.
 
@@ -758,9 +758,9 @@ To look up a Distinguished Name (DN) in Microsoft AD use the query action. Use t
 objectname is the logon name of the user you are looking for. The DN can then be fed into another action by Repeating a collection for
 the query results, and then using the variable step $item.dn
 
-
 # Version History
 
+* 9.0.4 - Updated SDK to the latest version (6.2.5)
 * 9.0.3 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 9.0.2 - Updated the SDK to the latest version to address memory usage issues
 * 9.0.1 - Fix problem where some ASCII characters were not escaped properly
