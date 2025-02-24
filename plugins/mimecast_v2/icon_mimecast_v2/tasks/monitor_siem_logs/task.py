@@ -17,6 +17,8 @@ DEFAULT_THREAD_COUNT = 10
 DEFAULT_PAGE_SIZE = 100
 MAX_LOOKBACK_DAYS = 7
 INITIAL_MAX_LOOKBACK_DAYS = 1
+LARGE_LOG_SIZE_LIMIT = 7000
+SMALL_LOG_SIZE_LIMIT = 250
 LARGE_LOG_HASH_SIZE_LIMIT = 4800
 SMALL_LOG_HASH_SIZE_LIMIT = 100
 # Run type
@@ -30,6 +32,8 @@ QUERY_CONFIG = "query_config"
 QUERY_DATE = "query_date"
 CAUGHT_UP = "caught_up"
 NEXT_PAGE = "next_page"
+SAVED_FILE_URL = "saved_file_url"
+SAVED_FILE_POSITION = "saved_file_position"
 # Access keys for custom config
 THREAD_COUNT = "thread_count"
 PAGE_SIZE = "page_size"
@@ -197,14 +201,18 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         complete_logs = []
         for log_type, log_type_config in query_config.items():
             if (not log_type_config.get(CAUGHT_UP)) or (run_condition != PAGINATION_RUN):
-                logs, results_next_page, caught_up = self.connection.api.get_siem_logs(
+                # Receipt logs are much higher volume than others, so should make up the bulk of the logs queried
+                log_size_limit = LARGE_LOG_SIZE_LIMIT if log_type == RECEIPT else SMALL_LOG_SIZE_LIMIT
+                logs, results_next_page, caught_up, saved_file, saved_position = self.connection.api.get_siem_logs(
                     log_type=log_type,
                     query_date=log_type_config.get(QUERY_DATE),
                     next_page=log_type_config.get(NEXT_PAGE),
                     page_size=page_size,
                     max_threads=thead_count,
+                    starting_url=log_type_config.get(SAVED_FILE_URL),
+                    starting_position=log_type_config.get(SAVED_FILE_POSITION),
+                    log_size_limit=log_size_limit,
                 )
-                # Receipt logs are much higher volume than others, so should make up the bulk of the log hashes
                 log_hash_size_limit = LARGE_LOG_HASH_SIZE_LIMIT if log_type == RECEIPT else SMALL_LOG_HASH_SIZE_LIMIT
                 deduplicated_logs, log_hashes = self.compare_and_dedupe_hashes(
                     query_config.get(LOG_HASHES, []), logs, log_hash_size_limit
@@ -213,7 +221,15 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                     f"TASK: Number of logs after de-duplication:{len(deduplicated_logs)} for log type {log_type}"
                 )
                 complete_logs.extend(deduplicated_logs)
-                log_type_config.update({NEXT_PAGE: results_next_page, CAUGHT_UP: caught_up, LOG_HASHES: log_hashes})
+                log_type_config.update(
+                    {
+                        NEXT_PAGE: results_next_page,
+                        CAUGHT_UP: caught_up,
+                        LOG_HASHES: log_hashes,
+                        SAVED_FILE_URL: saved_file,
+                        SAVED_FILE_POSITION: saved_position,
+                    }
+                )
             else:
                 self.logger.info(f"TASK: Query for {log_type} is caught up. Skipping as we are currently paginating")
         return complete_logs, query_config

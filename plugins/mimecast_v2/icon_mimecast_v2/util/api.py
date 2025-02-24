@@ -11,9 +11,10 @@ from requests import Response, Request
 from io import BytesIO
 from icon_mimecast_v2.util.constants import Endpoints
 from typing import Dict, List, Tuple
-from multiprocessing.dummy import Pool
+from multiprocessing.dummy import Manager, Pool
 import gzip
 import json
+from urllib.parse import urlparse, urlunparse
 
 GET = "GET"
 POST = "POST"
@@ -40,21 +41,51 @@ class API:
         self.logger.info("API: Authenticated")
 
     def get_siem_logs(
-        self, log_type: str, query_date: str, next_page: str, page_size: int = 100, max_threads: int = 10
+        self,
+        log_type: str,
+        query_date: str,
+        next_page: str,
+        page_size: int = 100,
+        max_threads: int = 10,
+        starting_url: str = None,
+        starting_position: int = 1,
+        log_size_limit: int = 250,
     ) -> Tuple[List[str], str, bool]:
         batch_download_urls, result_next_page, caught_up = self.get_siem_batches(
             log_type, query_date, next_page, page_size
         )
-        logs = []
+        pool_data = self.resume_from_batch(batch_download_urls, starting_url, starting_position)
         self.logger.info(f"API: Getting SIEM logs from batches for log type {log_type}...")
         self.logger.info(f"API: Applying page size limit of {page_size}")
+        log_count = 0
+        manager = Manager()
+        saved_file = None
+        saved_position = None
+        total_count = manager.Value("i", log_count)
+        logs = manager.list()
+        lock = manager.Lock()
         with Pool(max_threads) as pool:
-            batch_logs = pool.imap(self.get_siem_logs_from_batch, batch_download_urls)
-            for result in batch_logs:
-                if isinstance(result, (List, Dict)):
-                    logs.extend(result)
+            result = pool.imap(self.get_siem_logs_from_batch, pool_data)
+            for batch_logs, url in result:
+                if isinstance(batch_logs, (List, Dict)):
+                    with lock:
+                        total_count.value = total_count.value + len(batch_logs)
+                        if total_count.value >= log_size_limit:
+                            leftover_logs_count = total_count.value - log_size_limit
+                            subsection_of_logs = batch_logs[0 : (len(batch_logs) - leftover_logs_count)]
+                            logs.extend(subsection_of_logs)
+                            saved_file = self.strip_query_params(url)
+                            saved_position = len(subsection_of_logs)
+                            caught_up = False
+                            result_next_page = next_page
+                            self.logger.info(f"API: Log limit reached for log type {log_type} at {log_size_limit}")
+                            self.logger.info(f"API: Saving file for next run: {saved_file} at line {saved_position}")
+                            self.logger.info(f"API: {leftover_logs_count} left to process in file")
+                            break
+                        else:
+                            logs.extend(batch_logs)
         self.logger.info(f"API: Discovered {len(logs)} logs for log type {log_type}")
-        return logs, result_next_page, caught_up
+        return logs, result_next_page, caught_up, saved_file, saved_position
 
     def get_siem_batches(
         self, log_type: str, query_date: str, next_page: str, page_size: int = 100
@@ -79,15 +110,41 @@ class API:
         urls = [batch.get("url") for batch in batch_list]
         return urls, batch_response.get("@nextPage"), caught_up
 
-    def get_siem_logs_from_batch(self, url: str):
+    def resume_from_batch(
+        self, list_of_batches: List[str], saved_url: str, starting_position: int = 1
+    ) -> Tuple[str, int]:
+        """
+        Return a pairing of download URL and starting position in file in URL. Attempt to find a previously fully unread
+        file if available, and trim list of URLs to that starting point.
+        :param list_of_batches:
+        :param saved_url:
+        :param starting_position:
+        :return pool_data: Tuple of URL and starting position in file
+        """
+        if saved_url:
+            self.logger.info(f"API: Attempting to resume from last file at {saved_url}")
+            list_of_batches = list_of_batches[
+                next((index for index, url in enumerate(list_of_batches) if saved_url in url), len(list_of_batches)) :
+            ]
+
+        pool_data = [(url, starting_position if saved_url and saved_url in url else 1) for url in list_of_batches]
+        return pool_data
+
+    def get_siem_logs_from_batch(self, url_and_position: Tuple[str, int]) -> Tuple[List[Dict], str]:
+        url, line_start = url_and_position
         response = requests.request(method=GET, url=url, stream=False)
         with gzip.GzipFile(fileobj=BytesIO(response.content), mode="rb") as file_:
             logs = []
             # Iterate over lines in the decompressed file, decode and load the JSON
-            for line in file_:
+            for line_number, line in enumerate(file_, start=line_start):
                 decoded_line = line.decode("utf-8").strip()
                 logs.append(json.loads(decoded_line))
-        return logs
+        return logs, url
+
+    def strip_query_params(self, url: str) -> str:
+        parsed_url = urlparse(url)
+        stripped_url = urlunparse(parsed_url._replace(query=""))
+        return stripped_url
 
     @rate_limiting(5)
     def make_api_request(
