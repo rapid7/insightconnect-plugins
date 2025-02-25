@@ -43,10 +43,47 @@ STUB_STATE_EXPECTED = {
     }
 }
 
+STUB_STATE_EXPECTED_INVALID_RECEIPT = {
+    "query_config": {
+        "attachment protect": {
+            "caught_up": True,
+            "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
+            "next_page": "NDU1NA==",
+            "query_date": "2000-01-06",
+            "saved_file_position": None,
+            "saved_file_url": None,
+        },
+        "receipt": {
+            "caught_up": True,
+            "log_hashes": [],
+            "next_page": "NDU1NA==",
+            "query_date": "2000-01-05",
+            "saved_file_position": None,
+            "saved_file_url": None,
+        },
+        "url protect": {
+            "caught_up": True,
+            "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
+            "next_page": "NDU1NA==",
+            "query_date": "2000-01-06",
+            "saved_file_position": None,
+            "saved_file_url": None,
+        },
+    }
+}
+
 STUB_STATE_PAGINATING = {
     "query_config": {
         "attachment protect": {"caught_up": False, "next_page": "NDU1NA==", "query_date": "2000-01-06"},
         "receipt": {"caught_up": False, "next_page": "NDU1NA==", "query_date": "2000-01-06"},
+        "url protect": {"caught_up": False, "next_page": "NDU1NA==", "query_date": "2000-01-06"},
+    },
+}
+
+STUB_STATE_DECODE_ERROR = {
+    "query_config": {
+        "attachment protect": {"caught_up": False, "next_page": "NDU1NA==", "query_date": "2000-01-06"},
+        "receipt": {"caught_up": False, "next_page": "JDU1NA==", "query_date": "2000-01-05"},
         "url protect": {"caught_up": False, "next_page": "NDU1NA==", "query_date": "2000-01-06"},
     },
 }
@@ -232,7 +269,7 @@ STUB_CUSTOM_CONFIG_LIMIT_LOGS = {
     },
     "page_size": 1,
     "thread_count": 1,
-    "log_limit": 1,
+    "log_limits": {"receipt": 1, "url protect": 1, "attachment protect": 1},
 }
 
 
@@ -244,7 +281,7 @@ STUB_CUSTOM_CONFIG_LIMIT_LOGS_SECOND_RUN = {
     },
     "page_size": 1,
     "thread_count": 1,
-    "log_limit": 100,
+    "log_limits": {"receipt": 100, "url protect": 100, "attachment protect": 100},
 }
 
 
@@ -323,6 +360,16 @@ class TestMonitorLogs(TestCase):
                 STUB_CUSTOM_CONFIG_LIMIT_LOGS_SECOND_RUN,
                 Util.read_file_to_dict("expected/monitor_siem_logs.json.exp"),
                 STUB_STATE_EXPECTED_LOG_LIMIT_SECOND_RUN,
+                True,
+                200,
+                None,
+            ],
+            [
+                "json_decode_error",
+                STUB_STATE_DECODE_ERROR,
+                {},
+                Util.read_file_to_dict("expected/monitor_siem_logs_invalid_receipt.json.exp"),
+                STUB_STATE_EXPECTED_INVALID_RECEIPT,
                 True,
                 200,
                 None,

@@ -36,7 +36,7 @@ SAVED_FILE_POSITION = "saved_file_position"
 # Access keys for custom config
 THREAD_COUNT = "thread_count"
 PAGE_SIZE = "page_size"
-LOG_LIMIT = "log_limit"
+LOG_LIMITS = "log_limits"
 
 
 class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
@@ -141,7 +141,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                 current_query_config[log_type] = {QUERY_DATE: log_query_date}
         page_size = max(1, min(custom_config.get(PAGE_SIZE, DEFAULT_PAGE_SIZE), DEFAULT_PAGE_SIZE))
         thread_count = max(1, custom_config.get(THREAD_COUNT, DEFAULT_THREAD_COUNT))
-        log_limit = custom_config.get(LOG_LIMIT)
+        log_limit = custom_config.get(LOG_LIMITS, {})
         return page_size, thread_count, log_limit
 
     def prepare_query_params(self, query_config: Dict, max_lookback_date: Dict, now_date: datetime) -> Dict:
@@ -187,7 +187,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         return log_type_config
 
     def get_all_logs(
-        self, run_condition: str, query_config: Dict, page_size: int, thead_count: int, log_limit: int = None
+        self, run_condition: str, query_config: Dict, page_size: int, thead_count: int, log_limits: Dict = {}
     ) -> Tuple[List, Dict]:
         """
         Gets all logs of provided log type. First retrieves batch URLs. Then downloads and reads batches, pooling logs.
@@ -202,10 +202,9 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         for log_type, log_type_config in query_config.items():
             if (not log_type_config.get(CAUGHT_UP)) or (run_condition != PAGINATION_RUN):
                 # Receipt logs are much higher volume than others, so should make up the bulk of the logs queried
-                if log_limit:
-                    log_size_limit = log_limit
-                else:
-                    log_size_limit = LARGE_LOG_SIZE_LIMIT if log_type == RECEIPT else SMALL_LOG_SIZE_LIMIT
+                log_size_limit = LARGE_LOG_SIZE_LIMIT if log_type == RECEIPT else SMALL_LOG_SIZE_LIMIT
+                if log_limits:
+                    log_size_limit = log_limits.get(log_type, log_size_limit)
                 logs, results_next_page, caught_up, saved_file, saved_position = self.connection.api.get_siem_logs(
                     log_type=log_type,
                     query_date=log_type_config.get(QUERY_DATE),

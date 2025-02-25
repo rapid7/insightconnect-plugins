@@ -1,3 +1,4 @@
+import functools
 import requests
 from insightconnect_plugin_runtime.exceptions import (
     APIException,
@@ -54,7 +55,7 @@ class API:
         batch_download_urls, result_next_page, caught_up = self.get_siem_batches(
             log_type, query_date, next_page, page_size
         )
-        pool_data = self.resume_from_batch(batch_download_urls, starting_url, starting_position)
+        pool_data = self.resume_from_batch(batch_download_urls, starting_url)
         self.logger.info(f"API: Getting SIEM logs from batches for log type {log_type}...")
         self.logger.info(f"API: Applying page size limit of {page_size}")
         log_count = 0
@@ -65,24 +66,29 @@ class API:
         logs = manager.list()
         lock = manager.Lock()
         with Pool(max_threads) as pool:
-            result = pool.imap(self.get_siem_logs_from_batch, pool_data)
+            result = pool.imap(
+                functools.partial(
+                    self.get_siem_logs_from_batch, saved_url=starting_url, saved_position=starting_position
+                ),
+                pool_data,
+            )
             for batch_logs, url in result:
-                if isinstance(batch_logs, (List, Dict)):
-                    with lock:
-                        total_count.value = total_count.value + len(batch_logs)
-                        if total_count.value >= log_size_limit:
-                            leftover_logs_count = total_count.value - log_size_limit
-                            subsection_of_logs = batch_logs[0 : (len(batch_logs) - leftover_logs_count)]
-                            logs.extend(subsection_of_logs)
-                            saved_file = self.strip_query_params(url)
-                            saved_position = len(subsection_of_logs)
-                            caught_up = False
-                            result_next_page = next_page
-                            self.logger.info(f"API: Log limit reached for log type {log_type} at {log_size_limit}")
-                            self.logger.info(f"API: Saving file for next run: {saved_file} at line {saved_position}")
-                            self.logger.info(f"API: {leftover_logs_count} left to process in file")
-                            break
-                        logs.extend(batch_logs)
+                with lock:
+                    batch_logs_count = len(batch_logs)
+                    total_count.value = total_count.value + batch_logs_count
+                    if total_count.value >= log_size_limit:
+                        leftover_logs_count = total_count.value - log_size_limit
+                        subsection_of_logs = batch_logs[: (batch_logs_count - leftover_logs_count)]
+                        logs.extend(subsection_of_logs)
+                        saved_file = self.strip_query_params(url)
+                        saved_position = len(subsection_of_logs)
+                        caught_up = False
+                        result_next_page = next_page
+                        self.logger.info(f"API: Log limit reached for log type {log_type} at {log_size_limit}")
+                        self.logger.info(f"API: Saving file for next run: {saved_file} at line {saved_position}")
+                        self.logger.info(f"API: {leftover_logs_count} left to process in file")
+                        break
+                    logs.extend(batch_logs)
         self.logger.info(f"API: Discovered {len(logs)} logs for log type {log_type}")
         return logs, result_next_page, caught_up, saved_file, saved_position
 
@@ -109,35 +115,38 @@ class API:
         urls = [batch.get("url") for batch in batch_list]
         return urls, batch_response.get("@nextPage"), caught_up
 
-    def resume_from_batch(
-        self, list_of_batches: List[str], saved_url: str, starting_position: int = 1
-    ) -> Tuple[str, int]:
+    def resume_from_batch(self, list_of_batches: List[str], saved_url: str) -> Tuple[str, int]:
         """
-        Return a pairing of download URL and starting position in file in URL. Attempt to find a previously fully unread
-        file if available, and trim list of URLs to that starting point.
+        Attempt to find a previously fully unread file if available, and trim list of URLs to that starting point.
         :param list_of_batches:
         :param saved_url:
-        :param starting_position:
-        :return pool_data: Tuple of URL and starting position in file
+        :return list_of_batches: Trimmed list of batches
         """
-        if saved_url:
-            self.logger.info(f"API: Attempting to resume from last file at {saved_url}")
-            list_of_batches = list_of_batches[
-                next((index for index, url in enumerate(list_of_batches) if saved_url in url), len(list_of_batches)) :
-            ]
+        sub_list = list_of_batches[
+            next(
+                (index for index, url in enumerate(list_of_batches) if saved_url and saved_url in url),
+                len(list_of_batches),
+            ) :
+        ]
+        if sub_list:
+            return sub_list
+        return list_of_batches
 
-        pool_data = [(url, starting_position if saved_url and saved_url in url else 1) for url in list_of_batches]
-        return pool_data
-
-    def get_siem_logs_from_batch(self, url_and_position: Tuple[str, int]) -> Tuple[List[Dict], str]:
-        url, line_start = url_and_position
-        response = requests.request(method=GET, url=url, stream=False)
+    def get_siem_logs_from_batch(self, url: str, saved_url: str, saved_position: int) -> Tuple[List[Dict], str]:
+        line_start = 0
+        if saved_url and saved_url in url:
+            line_start = saved_position
+        response = requests.request(method=GET, url=url)
+        logs = []
         with gzip.GzipFile(fileobj=BytesIO(response.content), mode="rb") as file_:
-            logs = []
             # Iterate over lines in the decompressed file, decode and load the JSON
             for _, line in enumerate(file_, start=line_start):
                 decoded_line = line.decode("utf-8").strip()
-                logs.append(json.loads(decoded_line))
+                try:
+                    logs.append(json.loads(decoded_line))
+                except json.JSONDecodeError:
+                    self.logger.info("API: Invalid JSON detected, skipping remainder of file")
+                    break
         return logs, url
 
     def strip_query_params(self, url: str) -> str:

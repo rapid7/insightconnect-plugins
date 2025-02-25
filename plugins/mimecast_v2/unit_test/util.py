@@ -93,6 +93,11 @@ class Util:
             return MockResponse(200, "monitor_siem_logs_batch")
         if (
             args[0].url
+            == f"{BASE_URL}siem/v1/batch/events/cg?type=receipt&dateRangeStartsAt=2000-01-05&dateRangeEndsAt=2000-01-05&pageSize=100&nextPage=JDU1NA%3D%3D"
+        ):
+            return MockResponse(200, "monitor_siem_logs_batch_to_invalid_json")
+        if (
+            args[0].url
             == f"{BASE_URL}siem/v1/batch/events/cg?type=receipt&dateRangeStartsAt=2000-01-02&dateRangeEndsAt=2000-01-02&pageSize=100"
         ):
             return MockResponse(401, "monitor_siem_logs_error")
@@ -108,3 +113,5 @@ class Util:
             raise AttributeError
         if args[0].url == "https://example.com/":
             return MockResponse(200, "monitor_siem_logs", gzip=True)
+        if args[0].url == "https://invalidjson.com/":
+            return MockResponse(200, "monitor_siem_logs_json_error", gzip=True)
