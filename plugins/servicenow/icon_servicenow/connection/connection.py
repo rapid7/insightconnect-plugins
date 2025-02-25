@@ -5,7 +5,7 @@ from .schema import ConnectionSchema, Input
 import requests
 from requests.auth import HTTPBasicAuth
 from icon_servicenow.util.request_helper import RequestHelper, AuthenticationType
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -28,6 +28,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         oauth_client_id = params.get(Input.CLIENT_ID)
         oauth_client_secret = params.get(Input.CLIENT_SECRET, {}).get("secretKey")
+
+        if all([not username, not password, not oauth_client_id, not oauth_client_secret]):
+            raise PluginException(
+                cause=f"No credentials were provided.",
+                assistance="Ensure credentials and ServiceNow endpoint are correct.",
+            )
 
         if not oauth_client_id or not oauth_client_secret and username and password:
             self.logger.info(

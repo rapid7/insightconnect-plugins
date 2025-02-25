@@ -7,7 +7,7 @@ import xmltodict
 import requests
 from requests.auth import HTTPBasicAuth, AuthBase
 
-from insightconnect_plugin_runtime.exceptions import PluginException, APIException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_servicenow.util.error_messages import MISSING_CREDENTIALS
 
@@ -142,7 +142,7 @@ class RequestHelper(object):
         """
 
         if not self.client_id and not self.client_secret:
-            raise APIException(status_code=400, cause=MISSING_CREDENTIALS)
+            raise PluginException(status_code=400, cause=MISSING_CREDENTIALS)
 
         # Automatic grant_type detection
         if self.username and self.password:
