@@ -1,6 +1,8 @@
 import os
 import sys
 
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
@@ -8,7 +10,7 @@ from unittest.mock import patch
 
 from icon_servicenow.actions.create_security_incident import CreateSecurityIncident
 from icon_servicenow.actions.create_security_incident.schema import CreateSecurityIncidentOutput
-from insightconnect_plugin_runtime.exceptions import PluginException
+
 from jsonschema import validate
 from parameterized import parameterized
 
