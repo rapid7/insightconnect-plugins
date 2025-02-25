@@ -3,10 +3,14 @@ extension: plugin
 products: [insightconnect]
 name: csv
 title: CSV
-description: CSV (Comma Separated Values) is a simple data format for storing data. This plugin allows one to extract fields from CSV strings and files
-version: 2.0.2
+description: "[Comma Separated Value](https://en.wikipedia.org/wiki/Comma-separated_values)\
+  \ (CSV) is a common format to express data.\nThis plugin allows one to extract fields\
+  \ from CSV strings and files.\n\nUsing the CSV plugin, users can automate conversions\
+  \ between JSON and CSV to help enable service interoperability\nas well as filter\
+  \ data within a CSV file"
+version: 2.0.3
 connection_version: 2
-supported_versions: ["2024-09-06"]
+supported_versions: ['2025-02-25']
 vendor: rapid7
 support: community
 status: []
@@ -16,39 +20,50 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/csv
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
-  - csv
-  - utilities
+- csv
+- utilities
 hub_tags:
   use_cases: [data_utility]
   keywords: [csv, cloud_enabled]
   features: []
 sdk:
   type: slim
-  version: 6.1.0
+  version: 6.2.5
   user: nobody
 key_features:
-  - "Convert between JSON and CSV"
-  - "Filter strings"
+- Convert between JSON and CSV
+- Filter strings
 version_history:
-  - "2.0.2 - Initial updates for fedramp compliance | Updated SDK to the latest version"
-  - "2.0.1 - Fix bug with extra space character in JSON keys in `To JSON` action | Fix bugs with parsing cells with quotes and comma in `To JSON`, `Filter Bytes` and `Filter String` actions | Add unit tests for `To JSON`, `Filter Bytes` and `Filter String` actions"
-  - "2.0.0 - Add JSON to CSV String action | Rename JSON to CSV action to JSON to CSV Bytes"
-  - "1.1.6 - Update to v4 Python plugin runtime"
-  - "1.1.5 - Use input and output constants | Change docker image from `komand/python-2-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Changed `Exception` to `PluginException`"
-  - "1.1.4 - New spec and help.md format for the Extension Library | Add missing title values for actions in plugin.spec.yaml"
-  - "1.1.3 - Fix issue where connection tests were failing, output did not match spec"
-  - "1.1.2 - Support webserver mode"
-  - "1.1.1 - Fix JSON to CSV action to account for correct input type"
-  - "1.1.0 - Add JSON to CSV action"
-  - "1.0.0 - Add CSV to JSON action | Support web server mode"
-  - "0.1.2 - Update to v2 Python plugin architecture"
-  - "0.1.1 - SSL bug fix in SDK"
-  - "0.1.0 - Initial plugin"
-troubleshooting: "Ensure that the supplied file or string is valid CSV. Any CSV files containing double-quotes will need to have them triple escaped to work properly.\n\nCSV files must not have non-CSV data such as comments."
+- 2.0.3 - Updated SDK to the latest version (6.2.5)
+- 2.0.2 - Initial updates for fedramp compliance | Updated SDK to the latest version
+- 2.0.1 - Fix bug with extra space character in JSON keys in `To JSON` action | Fix
+  bugs with parsing cells with quotes and comma in `To JSON`, `Filter Bytes` and `Filter
+  String` actions | Add unit tests for `To JSON`, `Filter Bytes` and `Filter String`
+  actions
+- 2.0.0 - Add JSON to CSV String action | Rename JSON to CSV action to JSON to CSV
+  Bytes
+- 1.1.6 - Update to v4 Python plugin runtime
+- 1.1.5 - Use input and output constants | Change docker image from `komand/python-2-plugin:2`
+  to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Changed `Exception`
+  to `PluginException`
+- 1.1.4 - New spec and help.md format for the Extension Library | Add missing title
+  values for actions in plugin.spec.yaml
+- 1.1.3 - Fix issue where connection tests were failing, output did not match spec
+- 1.1.2 - Support webserver mode
+- 1.1.1 - Fix JSON to CSV action to account for correct input type
+- 1.1.0 - Add JSON to CSV action
+- 1.0.0 - Add CSV to JSON action | Support web server mode
+- 0.1.2 - Update to v2 Python plugin architecture
+- 0.1.1 - SSL bug fix in SDK
+- 0.1.0 - Initial plugin
+troubleshooting:
+- Ensure that the supplied file or string is valid CSV. Any CSV files containing double-quotes
+  will need to have them triple escaped to work properly.
+- CSV files must not have non-CSV data such as comments.
 links:
-  - "[CSV](https://en.wikipedia.org/wiki/Comma-separated_values)"
+- '[CSV](https://en.wikipedia.org/wiki/Comma-separated_values)'
 references:
-  - "[CSV](https://en.wikipedia.org/wiki/Comma-separated_values)"
+- '[CSV](https://en.wikipedia.org/wiki/Comma-separated_values)'
 actions:
   filter_string:
     title: Filter String
@@ -123,7 +138,8 @@ actions:
         type: '[]object'
         description: JSON array to convert to CSV bytes
         required: true
-        example: "[{\"column1\": \"value1\",\"column2\": \"value2\",\"column3\": \"value3\"},{\"column1\": \"value4\",\"column2\": \"value5\",\"column3\": \"value6\"}]"
+        example: '[{"column1": "value1","column2": "value2","column3": "value3"},{"column1":
+          "value4","column2": "value5","column3": "value6"}]'
     output:
       csv_bytes:
         title: CSV Bytes
@@ -140,7 +156,8 @@ actions:
         type: '[]object'
         description: JSON array to convert to CSV string
         required: true
-        example: "[{\"column1\": \"value1\",\"column2\": \"value2\",\"column3\": \"value3\"},{\"column1\": \"value4\",\"column2\": \"value5\",\"column3\": \"value6\"}]"
+        example: '[{"column1": "value1","column2": "value2","column3": "value3"},{"column1":
+          "value4","column2": "value5","column3": "value6"}]'
     output:
       csv_string:
         title: CSV String
