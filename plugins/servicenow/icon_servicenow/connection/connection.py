@@ -31,7 +31,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         if all([not username, not password, not oauth_client_id, not oauth_client_secret]):
             raise PluginException(
-                cause=f"No credentials were provided.",
+                cause="No credentials were provided.",
                 assistance="Ensure credentials and ServiceNow endpoint are correct.",
             )
 
