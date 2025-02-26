@@ -257,7 +257,7 @@ def strip_subdomains(matches: list) -> list:
                 subdomains = subdomain.split(".")
                 matches[match[0]] = f"{subdomains[len(subdomains) - 1]}.{suffix}"
         else:
-            matches[match[0]] = ".".join(stripped_domain[1:3])
+            matches[match[0]] = f"{stripped_domain.domain}.{stripped_domain.suffix}"
     return list(dict.fromkeys(matches))
 
 
