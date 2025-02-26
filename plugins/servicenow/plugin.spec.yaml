@@ -9,7 +9,7 @@ description: "[ServiceNow](https://www.servicenow.com/) is a tool for managing i
   \ can be monitored and processed for use in a Rapid7 InsightConnect workflow.\n\n\
   Note: This plugin affects only the underlying tables in a ServiceNow instance, not\
   \ its UI. Hence, this plugin will work seamlessly with Virtual Task Boards"
-version: 8.1.4
+version: 8.1.0
 connection_version: 8
 supported_versions: [2023-10-28 Tokyo]
 vendor: rapid7
@@ -65,7 +65,7 @@ references:
 troubleshooting:
 - This plugin does not contain a troubleshooting.
 version_history:
-- 8.1.4 - Add ability to use OAuth 2.0 flow named client credentials | Updated SDK
+- 8.1.0 - Add ability to use OAuth 2.0 flow named client credentials | Updated SDK
   to the latest version (v6.2.5)
 - 8.0.4 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
 - 8.0.3 - Update to resolve issue parsing response from ServiceNow if XML is received
