@@ -127,7 +127,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         :param current_query_config:
         :param run_type:
         :param custom_config:
-        :return: Page size and thread count
+        :return: Page size, thread count and log limit
         """
         custom_query_config = {}
         if custom_config:
@@ -220,7 +220,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                     query_config.get(LOG_HASHES, []), logs, log_hash_size_limit
                 )
                 self.logger.info(
-                    f"TASK: Number of logs after de-duplication:{len(deduplicated_logs)} for log type {log_type}"
+                    f"TASK: Number of logs after de-duplication: {len(deduplicated_logs)} for log type {log_type}"
                 )
                 complete_logs.extend(deduplicated_logs)
                 log_type_config.update(

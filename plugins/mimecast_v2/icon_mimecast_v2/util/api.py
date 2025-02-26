@@ -65,7 +65,7 @@ class API:
         total_count = manager.Value("i", log_count)
         logs = manager.list()
         lock = manager.Lock()
-        with Pool(max_threads) as pool:
+        with Pool(1) as pool:
             result = pool.imap(
                 functools.partial(
                     self.get_siem_logs_from_batch, saved_url=starting_url, saved_position=starting_position
@@ -78,10 +78,10 @@ class API:
                     total_count.value = total_count.value + batch_logs_count
                     if total_count.value >= log_size_limit:
                         leftover_logs_count = total_count.value - log_size_limit
-                        subsection_of_logs = batch_logs[: (batch_logs_count - leftover_logs_count)]
-                        logs.extend(subsection_of_logs)
+                        batch_logs = batch_logs[: (batch_logs_count - leftover_logs_count)]
+                        logs.extend(batch_logs)
                         saved_file = self.strip_query_params(url)
-                        saved_position = len(subsection_of_logs)
+                        saved_position = len(batch_logs)
                         caught_up = False
                         result_next_page = next_page
                         self.logger.info(f"API: Log limit reached for log type {log_type} at {log_size_limit}")
@@ -130,23 +130,44 @@ class API:
         ]
         if sub_list:
             return sub_list
+        if saved_url:
+            self.logger.info(f"API: Saved URL {saved_url} not found in list of batches")
+            self.logger.info("API: Processing entire batch list")
         return list_of_batches
 
     def get_siem_logs_from_batch(self, url: str, saved_url: str, saved_position: int) -> Tuple[List[Dict], str]:
         line_start = 0
         if saved_url and saved_url in url:
             line_start = saved_position
-        response = requests.request(method=GET, url=url)
+
+        # Make the request with stream=True to download the content incrementally
+        response = requests.request(method="GET", url=url, stream=True)
         logs = []
-        with gzip.GzipFile(fileobj=BytesIO(response.content), mode="rb") as file_:
-            # Iterate over lines in the decompressed file, decode and load the JSON
-            for _, line in enumerate(file_, start=line_start):
-                decoded_line = line.decode("utf-8").strip()
-                try:
-                    logs.append(json.loads(decoded_line))
-                except json.JSONDecodeError:
-                    self.logger.info("API: Invalid JSON detected, skipping remainder of file")
-                    break
+        lines_count = 0
+        buffer = BytesIO()  # Buffer to hold chunks of the decompressed content
+        with gzip.GzipFile(fileobj=buffer, mode="rb") as file_:
+            for chunk in response.iter_content(chunk_size=8192):  # Stream content in chunks
+                buffer.write(chunk)  # Write chunk to buffer
+                buffer.seek(0)  # Reposition the pointer to the start of the buffer
+                file_.fileobj = buffer  # Ensure the GzipFile object reads from the buffer
+                # Process lines in the decompressed file
+                for line in file_:
+                    if lines_count < line_start:
+                        lines_count += 1
+                        continue  # Skip lines before the starting point
+                    decoded_line = line.decode("utf-8").strip()
+                    try:
+                        # Parse JSON and add it to the logs
+                        logs.append(json.loads(decoded_line))
+                    except json.JSONDecodeError:
+                        # Log or handle invalid JSON
+                        self.logger.info("API: Invalid JSON detected, skipping remainder of file")
+                        return logs, url
+
+                # Reset the buffer's internal pointer to the end after processing the chunk
+                buffer.seek(0)
+                buffer.truncate(0)
+
         return logs, url
 
     def strip_query_params(self, url: str) -> str:
