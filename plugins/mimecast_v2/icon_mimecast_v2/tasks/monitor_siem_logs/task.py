@@ -212,7 +212,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                     page_size=page_size,
                     max_threads=thead_count,
                     starting_url=log_type_config.get(SAVED_FILE_URL),
-                    starting_position=log_type_config.get(SAVED_FILE_POSITION),
+                    starting_position=log_type_config.get(SAVED_FILE_POSITION, 0),
                     log_size_limit=log_size_limit,
                 )
                 log_hash_size_limit = LARGE_LOG_HASH_SIZE_LIMIT if log_type == RECEIPT else SMALL_LOG_HASH_SIZE_LIMIT

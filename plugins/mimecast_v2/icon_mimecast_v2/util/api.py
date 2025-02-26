@@ -81,7 +81,7 @@ class API:
                         batch_logs = batch_logs[: (batch_logs_count - leftover_logs_count)]
                         logs.extend(batch_logs)
                         saved_file = self.strip_query_params(url)
-                        saved_position = len(batch_logs)
+                        saved_position = len(batch_logs) + starting_position
                         caught_up = False
                         result_next_page = next_page
                         self.logger.info(f"API: Log limit reached for log type {log_type} at {log_size_limit}")
