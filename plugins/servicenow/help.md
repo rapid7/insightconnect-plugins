@@ -1687,7 +1687,7 @@ Example output:
 
 # Version History
 
-* 8.0.5 - Add ability to use OAuth 2.0 flow named client credentials | Updated SDK to the latest version (v6.2.5)
+* 8.1.4 - Add ability to use OAuth 2.0 flow named client credentials | Updated SDK to the latest version (v6.2.5)
 * 8.0.4 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
 * 8.0.3 - Update to resolve issue parsing response from ServiceNow if XML is received
 * 8.0.2 - Initial updates for fedramp compliance | Updated SDK to the latest version
