@@ -1,3 +1,4 @@
+import functools
 import requests
 from insightconnect_plugin_runtime.exceptions import (
     APIException,
@@ -11,9 +12,10 @@ from requests import Response, Request
 from io import BytesIO
 from icon_mimecast_v2.util.constants import Endpoints
 from typing import Dict, List, Tuple
-from multiprocessing.dummy import Pool
+from multiprocessing.dummy import Manager, Pool
 import gzip
 import json
+from urllib.parse import urlparse, urlunparse
 
 GET = "GET"
 POST = "POST"
@@ -40,21 +42,55 @@ class API:
         self.logger.info("API: Authenticated")
 
     def get_siem_logs(
-        self, log_type: str, query_date: str, next_page: str, page_size: int = 100, max_threads: int = 10
+        self,
+        log_type: str,
+        query_date: str,
+        next_page: str,
+        page_size: int = 100,
+        max_threads: int = 10,
+        starting_url: str = None,
+        starting_position: int = 0,
+        log_size_limit: int = 250,
     ) -> Tuple[List[str], str, bool]:
         batch_download_urls, result_next_page, caught_up = self.get_siem_batches(
             log_type, query_date, next_page, page_size
         )
-        logs = []
+        pool_data = self.resume_from_batch(batch_download_urls, starting_url)
         self.logger.info(f"API: Getting SIEM logs from batches for log type {log_type}...")
         self.logger.info(f"API: Applying page size limit of {page_size}")
+        log_count = 0
+        manager = Manager()
+        saved_file = None
+        saved_position = None
+        total_count = manager.Value("i", log_count)
+        logs = manager.list()
+        lock = manager.Lock()
         with Pool(max_threads) as pool:
-            batch_logs = pool.imap(self.get_siem_logs_from_batch, batch_download_urls)
-            for result in batch_logs:
-                if isinstance(result, (List, Dict)):
-                    logs.extend(result)
+            result = pool.imap(
+                functools.partial(
+                    self.get_siem_logs_from_batch, saved_url=starting_url, saved_position=starting_position
+                ),
+                pool_data,
+            )
+            for batch_logs, url in result:
+                with lock:
+                    batch_logs_count = len(batch_logs)
+                    total_count.value = total_count.value + batch_logs_count
+                    if total_count.value >= log_size_limit:
+                        leftover_logs_count = total_count.value - log_size_limit
+                        batch_logs = batch_logs[: (batch_logs_count - leftover_logs_count)]
+                        logs.extend(batch_logs)
+                        saved_file = self.strip_query_params(url)
+                        saved_position = len(batch_logs)
+                        caught_up = False
+                        result_next_page = next_page
+                        self.logger.info(f"API: Log limit reached for log type {log_type} at {log_size_limit}")
+                        self.logger.info(f"API: Saving file for next run: {saved_file} at line {saved_position}")
+                        self.logger.info(f"API: {leftover_logs_count} left to process in file")
+                        break
+                    logs.extend(batch_logs)
         self.logger.info(f"API: Discovered {len(logs)} logs for log type {log_type}")
-        return logs, result_next_page, caught_up
+        return logs, result_next_page, caught_up, saved_file, saved_position
 
     def get_siem_batches(
         self, log_type: str, query_date: str, next_page: str, page_size: int = 100
@@ -79,15 +115,61 @@ class API:
         urls = [batch.get("url") for batch in batch_list]
         return urls, batch_response.get("@nextPage"), caught_up
 
-    def get_siem_logs_from_batch(self, url: str):
-        response = requests.request(method=GET, url=url, stream=False)
-        with gzip.GzipFile(fileobj=BytesIO(response.content), mode="rb") as file_:
-            logs = []
-            # Iterate over lines in the decompressed file, decode and load the JSON
-            for line in file_:
-                decoded_line = line.decode("utf-8").strip()
-                logs.append(json.loads(decoded_line))
-        return logs
+    def resume_from_batch(self, list_of_batches: List[str], saved_url: str) -> Tuple[str, int]:
+        """
+        Attempt to find a previously fully unread file if available, and trim list of URLs to that starting point.
+        :param list_of_batches:
+        :param saved_url:
+        :return list_of_batches: Trimmed list of batches
+        """
+        sub_list = list_of_batches[
+            next(
+                (index for index, url in enumerate(list_of_batches) if saved_url and saved_url in url),
+                len(list_of_batches),
+            ) :
+        ]
+        if sub_list:
+            return sub_list
+        if saved_url:
+            self.logger.info(f"API: Saved URL {saved_url} not found in list of batches")
+            self.logger.info("API: Processing entire batch list")
+        return list_of_batches
+
+    def get_siem_logs_from_batch(self, url: str, saved_url: str, saved_position: int) -> Tuple[List[Dict], str]:
+        line_start = 0
+        if saved_url and saved_url in url:
+            line_start = saved_position
+
+        response = requests.request(method="GET", url=url, stream=True)
+        logs = []
+        lines_count = 0
+        buffer = BytesIO()
+        with gzip.GzipFile(fileobj=buffer, mode="rb") as file_:
+            for chunk in response.iter_content(chunk_size=8192):
+                buffer.write(chunk)
+                buffer.seek(0)
+                file_.fileobj = buffer
+                for line in file_:
+                    if lines_count < line_start:
+                        lines_count += 1
+                        continue
+                    try:
+                        decoded_line = line.decode("utf-8").strip()
+                        logs.append(json.loads(decoded_line))
+                    except (json.JSONDecodeError, UnicodeDecodeError) as error:
+                        self.logger.info("API: Invalid JSON or encoding error detected, skipping remainder of file")
+                        self.logger.info(f"API: Error is: {error}")
+                        return logs, url
+                # Reset buffer to clean state to begin again for next chunk
+                buffer.seek(0)
+                buffer.truncate(0)
+
+        return logs, url
+
+    def strip_query_params(self, url: str) -> str:
+        parsed_url = urlparse(url)
+        stripped_url = urlunparse(parsed_url._replace(query=""))
+        return stripped_url
 
     @rate_limiting(5)
     def make_api_request(
