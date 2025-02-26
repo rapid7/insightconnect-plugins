@@ -1,4 +1,5 @@
 import insightconnect_plugin_runtime
+
 # Custom imports below
 from icon_servicenow.util.request_helper import RequestHelper, AuthenticationType
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
