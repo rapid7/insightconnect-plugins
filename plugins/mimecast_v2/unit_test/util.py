@@ -79,7 +79,6 @@ class Util:
                     return
                 raise HTTPError("Bad response", response=self)
 
-        print(args[0].url)
         if args[0].url == f"{BASE_URL}oauth/token":
             return MockResponse(200, "authenticate")
         if args[0].url in [

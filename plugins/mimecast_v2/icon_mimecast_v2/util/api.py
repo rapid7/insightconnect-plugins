@@ -153,13 +153,14 @@ class API:
                     if lines_count < line_start:
                         lines_count += 1
                         continue
-                    decoded_line = line.decode("utf-8").strip()
                     try:
+                        decoded_line = line.decode("utf-8").strip()
                         logs.append(json.loads(decoded_line))
-                    except json.JSONDecodeError:
-                        self.logger.info("API: Invalid JSON detected, skipping remainder of file")
+                    except (json.JSONDecodeError, UnicodeDecodeError) as error:
+                        self.logger.info("API: Invalid JSON or encoding error detected, skipping remainder of file")
+                        self.logger.info(f"API: Error is: {error}")
                         return logs, url
-
+                # Reset buffer to clean state to begin again for next chunk
                 buffer.seek(0)
                 buffer.truncate(0)
 
