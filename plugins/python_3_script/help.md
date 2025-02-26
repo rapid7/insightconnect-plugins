@@ -110,6 +110,7 @@ Example output:
 
 ## Troubleshooting
 
+* Some third-party modules defined in the Modules connection input (such as pandas) can take a long time to install. If installation fails, try increasing the Timeout connection input to 900 (15 minutes)
 
 # Version History
 
