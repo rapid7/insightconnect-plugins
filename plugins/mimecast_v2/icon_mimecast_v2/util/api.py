@@ -65,7 +65,7 @@ class API:
         total_count = manager.Value("i", log_count)
         logs = manager.list()
         lock = manager.Lock()
-        with Pool(1) as pool:
+        with Pool(max_threads) as pool:
             result = pool.imap(
                 functools.partial(
                     self.get_siem_logs_from_batch, saved_url=starting_url, saved_position=starting_position
