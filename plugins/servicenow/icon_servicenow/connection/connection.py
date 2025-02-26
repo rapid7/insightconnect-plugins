@@ -1,11 +1,9 @@
 import insightconnect_plugin_runtime
-from .schema import ConnectionSchema, Input
-
 # Custom imports below
-import requests
-from requests.auth import HTTPBasicAuth
 from icon_servicenow.util.request_helper import RequestHelper, AuthenticationType
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
+
+from .schema import ConnectionSchema, Input
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
