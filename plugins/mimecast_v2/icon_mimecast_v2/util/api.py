@@ -140,31 +140,26 @@ class API:
         if saved_url and saved_url in url:
             line_start = saved_position
 
-        # Make the request with stream=True to download the content incrementally
         response = requests.request(method="GET", url=url, stream=True)
         logs = []
         lines_count = 0
-        buffer = BytesIO()  # Buffer to hold chunks of the decompressed content
+        buffer = BytesIO()
         with gzip.GzipFile(fileobj=buffer, mode="rb") as file_:
-            for chunk in response.iter_content(chunk_size=8192):  # Stream content in chunks
-                buffer.write(chunk)  # Write chunk to buffer
-                buffer.seek(0)  # Reposition the pointer to the start of the buffer
-                file_.fileobj = buffer  # Ensure the GzipFile object reads from the buffer
-                # Process lines in the decompressed file
+            for chunk in response.iter_content(chunk_size=8192):
+                buffer.write(chunk)
+                buffer.seek(0)
+                file_.fileobj = buffer
                 for line in file_:
                     if lines_count < line_start:
                         lines_count += 1
-                        continue  # Skip lines before the starting point
+                        continue
                     decoded_line = line.decode("utf-8").strip()
                     try:
-                        # Parse JSON and add it to the logs
                         logs.append(json.loads(decoded_line))
                     except json.JSONDecodeError:
-                        # Log or handle invalid JSON
                         self.logger.info("API: Invalid JSON detected, skipping remainder of file")
                         return logs, url
 
-                # Reset the buffer's internal pointer to the end after processing the chunk
                 buffer.seek(0)
                 buffer.truncate(0)
 
