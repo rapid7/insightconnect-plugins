@@ -4,7 +4,6 @@
 pywinrm==0.5.0
 requests-kerberos==0.15.0
 requests-credssp==2.0.0
-parameterized==0.8.1
 requests==2.32.3
-cryptography==44.0.0
+cryptography==44.0.1
 idna==3.10
