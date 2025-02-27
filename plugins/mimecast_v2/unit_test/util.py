@@ -54,6 +54,7 @@ class Util:
                 self.status_code = status_code
                 self.text = "This is some error text"
                 self.url = url
+                self.gzip = gzip
                 if filename:
                     self.text = Util.read_file_to_string(f"responses/{filename}.json.resp")
                 if gzip:
@@ -65,6 +66,10 @@ class Util:
                 with gzip.GzipFile(fileobj=buf, mode="wb") as f:
                     f.write(data.encode("utf-8"))  # Write the string data to gzip (must be bytes)
                 return buf.getvalue()
+
+            def iter_content(self, chunk_size: int = 8192):
+                for index in range(0, len(self.content), chunk_size):
+                    yield self.content[index : index + chunk_size]
 
             def json(self):
                 return json.loads(self.text)
@@ -91,6 +96,17 @@ class Util:
             f"{BASE_URL}siem/v1/batch/events/cg?type=url+protect&dateRangeStartsAt=1999-12-31&dateRangeEndsAt=1999-12-31&pageSize=1",
         ]:
             return MockResponse(200, "monitor_siem_logs_batch")
+        if args[0].url in [
+            "https://api.services.mimecast.com/siem/v1/batch/events/cg?type=attachment+protect&dateRangeStartsAt=1999-12-31&dateRangeEndsAt=1999-12-31&pageSize=1&nextPage=KDU1NA%3D%3D",
+            "https://api.services.mimecast.com/siem/v1/batch/events/cg?type=receipt&dateRangeStartsAt=1999-12-31&dateRangeEndsAt=1999-12-31&pageSize=1&nextPage=KDU1NA%3D%3D",
+            "https://api.services.mimecast.com/siem/v1/batch/events/cg?type=url+protect&dateRangeStartsAt=1999-12-31&dateRangeEndsAt=1999-12-31&pageSize=1&nextPage=KDU1NA%3D%3D",
+        ]:
+            return MockResponse(200, "monitor_siem_logs_batch_additional")
+        if (
+            args[0].url
+            == f"{BASE_URL}siem/v1/batch/events/cg?type=receipt&dateRangeStartsAt=2000-01-05&dateRangeEndsAt=2000-01-05&pageSize=100&nextPage=JDU1NA%3D%3D"
+        ):
+            return MockResponse(200, "monitor_siem_logs_batch_to_invalid_json")
         if (
             args[0].url
             == f"{BASE_URL}siem/v1/batch/events/cg?type=receipt&dateRangeStartsAt=2000-01-02&dateRangeEndsAt=2000-01-02&pageSize=100"
@@ -108,3 +124,7 @@ class Util:
             raise AttributeError
         if args[0].url == "https://example.com/":
             return MockResponse(200, "monitor_siem_logs", gzip=True)
+        if args[0].url == "https://exampleadditional.com/":
+            return MockResponse(200, "monitor_siem_logs_additional", gzip=True)
+        if args[0].url == "https://invalidjson.com/":
+            return MockResponse(200, "monitor_siem_logs_json_error", gzip=True)
