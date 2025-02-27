@@ -21,7 +21,7 @@ STUB_STATE_EXPECTED = {
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
             "next_page": "NDU1NA==",
             "query_date": "2000-01-06",
-            "saved_file_position": None,
+            "saved_file_position": 0,
             "saved_file_url": None,
         },
         "receipt": {
@@ -29,7 +29,7 @@ STUB_STATE_EXPECTED = {
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
             "next_page": "NDU1NA==",
             "query_date": "2000-01-06",
-            "saved_file_position": None,
+            "saved_file_position": 0,
             "saved_file_url": None,
         },
         "url protect": {
@@ -37,7 +37,7 @@ STUB_STATE_EXPECTED = {
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
             "next_page": "NDU1NA==",
             "query_date": "2000-01-06",
-            "saved_file_position": None,
+            "saved_file_position": 0,
             "saved_file_url": None,
         },
     }
@@ -50,7 +50,7 @@ STUB_STATE_EXPECTED_INVALID_RECEIPT = {
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
             "next_page": "NDU1NA==",
             "query_date": "2000-01-06",
-            "saved_file_position": None,
+            "saved_file_position": 0,
             "saved_file_url": None,
         },
         "receipt": {
@@ -58,7 +58,7 @@ STUB_STATE_EXPECTED_INVALID_RECEIPT = {
             "log_hashes": [],
             "next_page": "NDU1NA==",
             "query_date": "2000-01-05",
-            "saved_file_position": None,
+            "saved_file_position": 0,
             "saved_file_url": None,
         },
         "url protect": {
@@ -66,7 +66,7 @@ STUB_STATE_EXPECTED_INVALID_RECEIPT = {
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
             "next_page": "NDU1NA==",
             "query_date": "2000-01-06",
-            "saved_file_position": None,
+            "saved_file_position": 0,
             "saved_file_url": None,
         },
     }
@@ -132,7 +132,7 @@ STUB_STATE_SECOND_RUN_EXPECTED = {
             "next_page": "NDU1NA==",
             "query_date": "2000-01-07",
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
-            "saved_file_position": None,
+            "saved_file_position": 0,
             "saved_file_url": None,
         },
         "receipt": {
@@ -140,7 +140,7 @@ STUB_STATE_SECOND_RUN_EXPECTED = {
             "next_page": "NDU1NA==",
             "query_date": "2000-01-07",
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
-            "saved_file_position": None,
+            "saved_file_position": 0,
             "saved_file_url": None,
         },
         "url protect": {
@@ -148,7 +148,7 @@ STUB_STATE_SECOND_RUN_EXPECTED = {
             "next_page": "NDU1NA==",
             "query_date": "2000-01-07",
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
-            "saved_file_position": None,
+            "saved_file_position": 0,
             "saved_file_url": None,
         },
     },
@@ -161,7 +161,7 @@ STUB_STATE_EXPECTED_CUSTOM_CONFIG = {
             "next_page": "NDU1NA==",
             "query_date": "1999-12-31",
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
-            "saved_file_position": None,
+            "saved_file_position": 0,
             "saved_file_url": None,
         },
         "receipt": {
@@ -169,7 +169,7 @@ STUB_STATE_EXPECTED_CUSTOM_CONFIG = {
             "next_page": "NDU1NA==",
             "query_date": "1999-12-31",
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
-            "saved_file_position": None,
+            "saved_file_position": 0,
             "saved_file_url": None,
         },
         "url protect": {
@@ -177,7 +177,7 @@ STUB_STATE_EXPECTED_CUSTOM_CONFIG = {
             "next_page": "NDU1NA==",
             "query_date": "1999-12-31",
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
-            "saved_file_position": None,
+            "saved_file_position": 0,
             "saved_file_url": None,
         },
     },
@@ -219,7 +219,7 @@ STUB_STATE_EXPECTED_LOG_LIMIT_SECOND_RUN = {
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
             "next_page": "NDU1NA==",
             "query_date": "1999-12-31",
-            "saved_file_position": None,
+            "saved_file_position": 0,
             "saved_file_url": None,
         },
         "receipt": {
@@ -227,7 +227,7 @@ STUB_STATE_EXPECTED_LOG_LIMIT_SECOND_RUN = {
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
             "next_page": "NDU1NA==",
             "query_date": "1999-12-31",
-            "saved_file_position": None,
+            "saved_file_position": 0,
             "saved_file_url": None,
         },
         "url protect": {
@@ -235,7 +235,7 @@ STUB_STATE_EXPECTED_LOG_LIMIT_SECOND_RUN = {
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
             "next_page": "NDU1NA==",
             "query_date": "1999-12-31",
-            "saved_file_position": None,
+            "saved_file_position": 0,
             "saved_file_url": None,
         },
     }
