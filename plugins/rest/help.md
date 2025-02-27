@@ -1,10 +1,10 @@
 # Description
 
-The HTTP Requests plugin makes it easy to integrate with RESTful services
+The HTTP Requests plugin simplifies integration with RESTful services, letting users automate HTTP requests (`DELETE`, `GET`, `PATCH`, `POST`, `PUT`) to APIs.
 
-The HTTP Requests plugin allows users to automate HTTP requests to API services such as [RESTful based services](https://en.wikipedia.org/wiki/Representational_state_transfer).
+It's ideal for ad-hoc third-party API integration within workflows without [building a new plugin](https://komand.github.io/python/index.html).
 
-This plugin is often used to integrate with ad-hoc 3rd party API's in a workflow without going through the process of [building a new plugin](https://komand.github.io/python/index.html). It supports DELETE, GET, PATCH, POST, or PUT requests to the provided URI.
+Learn more about RESTful services [here](https://en.wikipedia.org/wiki/Representational_state_transfer)
 
 # Key Features
 
@@ -17,7 +17,7 @@ This plugin is often used to integrate with ad-hoc 3rd party API's in a workflow
 
 # Supported Product Versions
 
-* 2024-09-10
+* 2025-02-26
 
 # Documentation
 
@@ -336,12 +336,12 @@ Example output:
 
 ## Troubleshooting
 
-Any headers set in the action will overwrite the default ones in the connection.
-Any issues connecting to the remote service should be present in the log of the job that ran. If you find any issues that represent bugs in the plugin itself, please contact someone at Komand directly.
-
+* Any headers set in the action will overwrite the default ones in the connection.
+* Any issues connecting to the remote service should be present in the log of the job that ran. If you find any issues that represent bugs in the plugin itself, please contact someone at Komand directly.
 
 # Version History
 
+* 6.0.9 - Updated SDK to the latest version (6.2.5)
 * 6.0.8 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 6.0.7 - Connection: fix hard overriding custom header from `CUSTOM_SECRET_INPUT`
 * 6.0.6 - Updated the SDK to the latest version to address memory usage issues
