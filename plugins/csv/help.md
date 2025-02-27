@@ -4,7 +4,7 @@
 This plugin allows one to extract fields from CSV strings and files.
 
 Using the CSV plugin, users can automate conversions between JSON and CSV to help enable service interoperability
-as well as filter data within a CSV file.
+as well as filter data within a CSV file
 
 # Key Features
 
@@ -17,7 +17,7 @@ as well as filter data within a CSV file.
 
 # Supported Product Versions
 
-* 2024-09-06
+* 2025-02-25
 
 # Documentation
 
@@ -235,12 +235,12 @@ Example output:
 
 ## Troubleshooting
 
-Ensure that the supplied file or string is valid CSV. Any CSV files containing double-quotes will need to have them triple escaped to work properly.
-
-CSV files must not have non-CSV data such as comments.
+* Ensure that the supplied file or string is valid CSV. Any CSV files containing double-quotes will need to have them triple escaped to work properly.
+* CSV files must not have non-CSV data such as comments.
 
 # Version History
 
+* 2.0.3 - Updated SDK to the latest version (6.2.5)
 * 2.0.2 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 2.0.1 - Fix bug with extra space character in JSON keys in `To JSON` action | Fix bugs with parsing cells with quotes and comma in `To JSON`, `Filter Bytes` and `Filter String` actions | Add unit tests for `To JSON`, `Filter Bytes` and `Filter String` actions
 * 2.0.0 - Add JSON to CSV String action | Rename JSON to CSV action to JSON to CSV Bytes
