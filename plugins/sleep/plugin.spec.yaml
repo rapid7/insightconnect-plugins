@@ -6,17 +6,19 @@ title: Sleep
 vendor: rapid7
 support: community
 status: []
-description: "Sleep allows Rapid7 InsightConnect users to suspend workflow execution for a specified period of time. Popular uses are to avoid rate limiting by a service or to wait for processing by a service to complete"
-version: 1.0.3
+description: Sleep allows Rapid7 InsightConnect users to suspend workflow execution
+  for a specified period of time. Popular uses are to avoid rate limiting by a service
+  or to wait for processing by a service to complete
+version: 1.0.4
 connection_version: 1
-supported_versions: ["2024-10-09"]
+supported_versions: ['2024-10-09']
 fedramp_ready: true
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/sleep
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
-  - sleep
-  - delay
+- sleep
+- delay
 hub_tags:
   use_cases: [data_utility]
   keywords: [sleep, delay]
@@ -24,21 +26,24 @@ hub_tags:
 enable_cache: false
 sdk:
   type: slim
-  version: 6.1.3
+  version: 6.2.5
   user: nobody
 key_features:
-  - Suspend workflow execution for a given number of seconds
+- Suspend workflow execution for a given number of seconds
 version_history:
-  - "1.0.3 - Initial updates for fedramp compliance | Updated SDK to the latest version"
-  - "1.0.2 - Use input and output constants | Change docker image from `komand/python-pypy3-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Add interval input validation"
-  - "1.0.1 - New spec and help.md format for the Extension Library"
-  - "1.0.0 - Update to v2 Python plugin architecture | Support web server mode"
-  - "0.1.1 - SSL bug fix in SDK"
-  - "0.1.0 - Initial plugin"
+- 1.0.4 - Updated SDK to the latest version (6.2.5)
+- 1.0.3 - Initial updates for fedramp compliance | Updated SDK to the latest version
+- 1.0.2 - Use input and output constants | Change docker image from `komand/python-pypy3-plugin:2`
+  to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Add interval
+  input validation
+- 1.0.1 - New spec and help.md format for the Extension Library
+- 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
+- 0.1.1 - SSL bug fix in SDK
+- 0.1.0 - Initial plugin
 links:
-  - "[Python Time Sleep](https://docs.python.org/3/library/time.html#time.sleep)"
+- '[Python Time Sleep](https://docs.python.org/3/library/time.html#time.sleep)'
 references:
-  - "[Python Time Sleep](https://docs.python.org/3/library/time.html#time.sleep)"
+- '[Python Time Sleep](https://docs.python.org/3/library/time.html#time.sleep)'
 actions:
   sleep:
     title: Sleep
