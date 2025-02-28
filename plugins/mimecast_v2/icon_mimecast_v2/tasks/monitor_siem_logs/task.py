@@ -217,7 +217,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                 )
                 log_hash_size_limit = LARGE_LOG_HASH_SIZE_LIMIT if log_type == RECEIPT else SMALL_LOG_HASH_SIZE_LIMIT
                 deduplicated_logs, log_hashes = self.compare_and_dedupe_hashes(
-                    query_config.get(LOG_HASHES, []), logs, log_hash_size_limit
+                    log_type_config.get(LOG_HASHES, []), logs, log_hash_size_limit
                 )
                 self.logger.info(
                     f"TASK: Number of logs after de-duplication: {len(deduplicated_logs)} for log type {log_type}"

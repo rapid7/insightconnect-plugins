@@ -6,12 +6,12 @@ from insightconnect_plugin_runtime.exceptions import (
     HTTPStatusCodes,
     ResponseExceptionData,
 )
-from insightconnect_plugin_runtime.helper import extract_json, make_request, rate_limiting
+from insightconnect_plugin_runtime.helper import extract_json, make_request, rate_limiting, response_handler
 from logging import Logger
 from requests import Response, Request
 from io import BytesIO
 from icon_mimecast_v2.util.constants import Endpoints
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Iterator
 from multiprocessing.dummy import Manager, Pool
 import gzip
 import json
@@ -72,25 +72,30 @@ class API:
                 ),
                 pool_data,
             )
-            for batch_logs, url in result:
+            for content, url in result:
                 with lock:
-                    batch_logs_count = len(batch_logs)
-                    total_count.value = total_count.value + batch_logs_count
-                    if total_count.value >= log_size_limit:
-                        leftover_logs_count = total_count.value - log_size_limit
-                        batch_logs = batch_logs[: (batch_logs_count - leftover_logs_count)]
-                        logs.extend(batch_logs)
-                        saved_file = self.strip_query_params(url)
-                        if starting_url and starting_url not in url:
-                            starting_position = 0
-                        saved_position = len(batch_logs) + (starting_position or 0)
-                        caught_up = False
-                        result_next_page = next_page
-                        self.logger.info(f"API: Log limit reached for log type {log_type} at {log_size_limit}")
-                        self.logger.info(f"API: Saving file for next run: {saved_file} at line {saved_position}")
-                        self.logger.info(f"API: {leftover_logs_count} left to process in file")
-                        break
-                    logs.extend(batch_logs)
+                    for index, new_line in enumerate(content):
+                        try:
+                            decoded_line = new_line.decode("utf-8").strip()
+                            json_log = json.loads(decoded_line)
+                            logs.append(json_log)
+                        except (json.JSONDecodeError, UnicodeDecodeError) as error:
+                            self.logger.info(f"API: JSON or decode error in file {url}. Skipping file...")
+                            self.logger.info(f"API: Error is {error}")
+                            break
+                        total_count.value = total_count.value + 1
+                        if total_count.value >= log_size_limit:
+                            batch_logs_count = 0
+                            if starting_url and starting_url in url:
+                                if starting_position:
+                                    batch_logs_count = starting_position
+                            saved_position = 1 + batch_logs_count + index
+                            saved_file = url
+                            caught_up = False
+                            result_next_page = next_page
+                            self.logger.info(f"API: Log limit reached for log type {log_type} at {log_size_limit}")
+                            self.logger.info(f"API: Saving file for next run: {saved_file} at line {saved_position}")
+                            return logs, result_next_page, caught_up, saved_file, saved_position
         self.logger.info(f"API: Discovered {len(logs)} logs for log type {log_type}")
         return logs, result_next_page, caught_up, saved_file, saved_position
 
@@ -131,42 +136,46 @@ class API:
             ) :
         ]
         if sub_list:
+            self.logger.info(f"API: Resuming log collection of {saved_url}")
             return sub_list
         if saved_url:
             self.logger.info(f"API: Saved URL {saved_url} not found in list of batches")
             self.logger.info("API: Processing entire batch list")
         return list_of_batches
 
-    def get_siem_logs_from_batch(self, url: str, saved_url: str, saved_position: int) -> Tuple[List[Dict], str]:
-        line_start = 0
-        if saved_url and saved_url in url:
-            line_start = saved_position
+    def get_siem_logs_from_batch(self, url: str, saved_url: str, saved_position: int) -> Tuple[Iterator[bytes], str]:
+        try:
+            line_start = 0
+            if saved_url and saved_url in url:
+                line_start = saved_position
+            response = requests.request(method="GET", url=url)
+            url = self.strip_query_params(url)
+            response_handler(response=response, data_location=ResponseExceptionData.RESPONSE)
+            content = self.get_gzip_content(response.content, line_start, url)
+            return content, url
+        except PluginException as error:
+            self.logger.info(f"API: Error requesting file {url}. Skipping...")
+            self.logger.info(f"API: Error is {error}")
+            return iter([]), url
 
-        response = requests.request(method="GET", url=url, stream=True)
-        logs = []
+    def get_gzip_content(self, content: bytes, line_start: int, url: str) -> Iterator[bytes]:
+        if not content:
+            return iter([])
         lines_count = 0
-        buffer = BytesIO()
-        with gzip.GzipFile(fileobj=buffer, mode="rb") as file_:
-            for chunk in response.iter_content(chunk_size=8192):
-                buffer.write(chunk)
-                buffer.seek(0)
-                file_.fileobj = buffer
-                for line in file_:
-                    if lines_count < line_start:
+        try:
+            with BytesIO(content) as byte_io:
+                with gzip.GzipFile(fileobj=byte_io, mode="rb") as file_:
+                    for line in file_:
                         lines_count += 1
-                        continue
-                    try:
-                        decoded_line = line.decode("utf-8").strip()
-                        logs.append(json.loads(decoded_line))
-                    except (json.JSONDecodeError, UnicodeDecodeError) as error:
-                        self.logger.info("API: Invalid JSON or encoding error detected, skipping remainder of file")
-                        self.logger.info(f"API: Error is: {error}")
-                        return logs, url
-                # Reset buffer to clean state to begin again for next chunk
-                buffer.seek(0)
-                buffer.truncate(0)
-
-        return logs, url
+                        if lines_count > line_start:
+                            yield line
+        except gzip.BadGzipFile:
+            self.logger.error(f"API: Bad GZIP file found: {url}. Skipping...")
+        except Exception as error:
+            self.logger.error(f"API: Error in processing log file for url {self.strip_query_params(url)}")
+            self.logger.error(f"API: Error was {error}")
+            self.logger.error("Skipping...")
+        return iter([])
 
     def strip_query_params(self, url: str) -> str:
         parsed_url = urlparse(url)
