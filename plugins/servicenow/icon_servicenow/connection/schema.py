@@ -50,7 +50,6 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "client_login",
     "instance"
   ],
   "definitions": {
