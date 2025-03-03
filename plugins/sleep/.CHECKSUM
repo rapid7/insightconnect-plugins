@@ -1,7 +1,7 @@
 {
-	"spec": "2e2d4084062066fa1302b47589b99920",
-	"manifest": "aabc2fef42c3aea504fe593138342e2d",
-	"setup": "f938e45357d369573ca3b86d487ca2b6",
+	"spec": "c177757c5575b9b315f122aeae1e68bb",
+	"manifest": "7e0f5048dfb00f2a1b275993d9ace37e",
+	"setup": "ba1e085e51951b27e225e6e4a59268fc",
 	"schemas": [
 		{
 			"identifier": "sleep/schema.py",
