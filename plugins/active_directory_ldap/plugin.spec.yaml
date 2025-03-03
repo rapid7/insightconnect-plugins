@@ -3,10 +3,14 @@ extension: plugin
 products: [insightconnect]
 name: active_directory_ldap
 title: Active Directory LDAP
-description: "This plugin utilizes Microsoft's Active Directory service to create and manage domains, users, and objects within a network"
-version: 9.0.3
+description: "[AD LDAP](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/3c5916a9-f1a0-429d-b937-f8fe672d777c)\
+  \ (Active Directory Lightweight Directory Access Protocol) is an application protocol\
+  \ for querying and modifying items in Active Directory. This plugin queries [Microsoft's\
+  \ Active Directory service](https://social.technet.microsoft.com/wiki/contents/articles/5392.active-directory-ldap-syntax-filters.aspx)\
+  \ to programmatically manage and query an Active Directory environment"
+version: 9.0.4
 connection_version: 9
-supported_versions: ["Azure Active Directory 2.0.89.0"]
+supported_versions: [Azure Active Directory 2.0.89.0]
 fedramp_ready: true
 vendor: rapid7
 support: rapid7
@@ -16,107 +20,124 @@ resources:
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.microsoft.com
 tags:
-  - ldap
-  - active directory
-  - microsoft
+- ldap
+- active directory
+- microsoft
 hub_tags:
   use_cases: [user_management, credential_management, application_management, threat_detection_and_response]
   keywords: [ldap, microsoft]
   features: []
 sdk:
   type: slim
-  version: 6.1.0
+  version: 6.2.5
   user: nobody
 key_features:
-  - "Add and remove user accounts to automate provisioning/deprovisioning of users"
-  - "Disable and enable user accounts to contain security risks"
-  - "Reset user passwords when a user forgets their login information"
-  - "Modify user groups to add or remove users from custom and built-in groups"
-  - "Run a custom LDAP query to retrieve, add, modify, or delete Active Directory objects"
+- Add and remove user accounts to automate provisioning/deprovisioning of users
+- Disable and enable user accounts to contain security risks
+- Reset user passwords when a user forgets their login information
+- Modify user groups to add or remove users from custom and built-in groups
+- Run a custom LDAP query to retrieve, add, modify, or delete Active Directory objects
 requirements:
-  - "Host name and port number (the default TCP/UDP port for LDAP is 389, and 636 for LDAP over SSL)"
-  - "Administrative credentials"
-  - "To connect, you must have NTLM credentials."
-  - "Please make sure you enter your credentials with the DOMAIN\\username format."
-troubleshooting: |
-  Objects that contain an equals sign `=` or an asterisk `*` require the signs to be escaped.
-  For example `CN=Robert = bob Smith,OU=domain_users,DC=rapid7,DC=com` must be escaped as`CN=Robert \= bob Smith,OU=domain_users,DC=mattsdomain,DC=local` in the input.
-  A second example would be `CN=C**l guy,OU=domain_users,DC=rapid7,DC=com`. This must be escaped as `CN=C\*\*l guy,OU=domain_users,DC=rapid7,DC=com`.
-
-  This plugin does not support objects and unpaired `\(\)` as part of their names.
-  Paired `\(\)` are supported.
-  For example `CN=Robert (Bob) Smith,OU=domain_users,DC=rapid7,DC=com` is supported
-  but `CN=Robert Bob) Smith,OU=domain_users,DC=rapid7,DC=com` is not.
-
-  All inputs to the query action must be correctly escaped.
-
-  If you cannot connect, ensure that network access is available, and view the logs to identify any auth errors.
-
-  For the Add User action it is recommended that SSL be enabled. Without SSL the action is only partially functional.
-  It will create the user, but it will not be able to assign a password or enable the account.
-
-  SSL must be enabled for the Reset Password action to function.
-
-  To look up a Distinguished Name (DN) in Microsoft AD use the query action. Use the search filter (sAMAccountName=objectname ) where
-  objectname is the logon name of the user you are looking for. The DN can then be fed into another action by Repeating a collection for
-  the query results, and then using the variable step $item.dn
+- Host name and port number (the default TCP/UDP port for LDAP is 389, and 636 for
+  LDAP over SSL)
+- Administrative credentials
+- To connect, you must have NTLM credentials.
+- Please make sure you enter your credentials with the DOMAIN\username format.
+troubleshooting:
+- "Objects that contain an equals sign `=` or an asterisk `*` require the signs to\
+  \ be escaped.\nFor example `CN=Robert = bob Smith,OU=domain_users,DC=rapid7,DC=com`\
+  \ must be escaped as`CN=Robert \\= bob Smith,OU=domain_users,DC=mattsdomain,DC=local`\
+  \ in the input.\nA second example would be `CN=C**l guy,OU=domain_users,DC=rapid7,DC=com`.\
+  \ This must be escaped as `CN=C\\*\\*l guy,OU=domain_users,DC=rapid7,DC=com`.\n\n\
+  This plugin does not support objects and unpaired `\\(\\)` as part of their names.\n\
+  Paired `\\(\\)` are supported.\nFor example `CN=Robert (Bob) Smith,OU=domain_users,DC=rapid7,DC=com`\
+  \ is supported\nbut `CN=Robert Bob) Smith,OU=domain_users,DC=rapid7,DC=com` is not.\n\
+  \nAll inputs to the query action must be correctly escaped.\n\nIf you cannot connect,\
+  \ ensure that network access is available, and view the logs to identify any auth\
+  \ errors.\n\nFor the Add User action it is recommended that SSL be enabled. Without\
+  \ SSL the action is only partially functional.\nIt will create the user, but it\
+  \ will not be able to assign a password or enable the account.\n\nSSL must be enabled\
+  \ for the Reset Password action to function.\n\nTo look up a Distinguished Name\
+  \ (DN) in Microsoft AD use the query action. Use the search filter (sAMAccountName=objectname\
+  \ ) where\nobjectname is the logon name of the user you are looking for. The DN\
+  \ can then be fed into another action by Repeating a collection for\nthe query results,\
+  \ and then using the variable step $item.dn"
 version_history:
-  - "9.0.3 - Initial updates for fedramp compliance | Updated SDK to the latest version"
-  - "9.0.2 - Updated the SDK to the latest version to address memory usage issues"
-  - "9.0.1 - Fix problem where some ASCII characters were not escaped properly"
-  - "9.0.0 - Action: `Disable User` & `Enable User` - Rename title of actions from `Disable` & `Enable` to `Disable Users` & `Enable Users` on the front-end."
-  - "8.0.0 - Update actions Enable Users and Enable Users to add outputs Completed and Failed and remove output All Operations Succeeded"
-  - "7.0.0 - Update actions Enable Users and Enable Users to replace output Success with All Operations Succeeded True/False"
-  - "6.0.0 - Add actions Enable Users and Disable users allowing for the bulk enablement/disablement of users"
-  - "5.3.5 - Fix issue where JSON Marshaling error was raised when receiving unexpected API response in the Force Password Reset action"
-  - "5.3.4 - Fix issue with space character in DN in modify object action | Enhanced LDAP logging | Fix issue with variable error when connection fails"
-  - "5.3.3 - Fix issue with escaping brackets in Query action"
-  - "5.3.2 - Improve LDAP connection handling"
-  - "5.3.1 - Improved error messaging in case the specified group was not found in the Query Group Membership action"
-  - "5.3.0 - Add Unlock User action"
-  - "5.2.2 - Add automatic pagination in Query Group Membership and Query actions"
-  - "5.2.1 - Add default prefix `ldap://` and `ldaps://` to provided host"
-  - "5.2.0 - New action Query Group Membership"
-  - "5.1.0 - Update error handling in Add User, Force Password Reset, Reset Password actions | Update connection.py to raise PluginException rather than ConnectionTestException"
-  - "5.0.0 - Add Chase Referrals input to the connection to support multi-domain environments | Rename Add action to Add User to be more explicit | Refactor reusable code from actions into util.py"
-  - "4.1.0 - Add new input Attributes in action Query | Add new output Count in action Query"
-  - "4.0.3 - Fix issue with connection documentation incorrectly stating a protocol prefix is required"
-  - "4.0.2 - Fix issue where some host names were being incorrectly parsed"
-  - "4.0.1 - Fix issue were logging of connection info did not display hostname correctly"
-  - "4.0.0 - New action Modify Object | Rename Modify Groups action to 'Add or Remove an Object from Group' | Fix issue where non-ASCII characters were not being escaped"
-  - "3.2.10 - Fix issue where escaped characters were not being handled correctly"
-  - "3.2.9 - Fix issue with error handling and logging for the Modify Groups action | Add example inputs | Update to use ldap3 2.7 and Python 3.8"
-  - "3.2.8 - Fix issue were adding objects to containers might fail"
-  - "3.2.7 - New spec and help.md format for the Extension Library"
-  - "3.2.6 - Update help to document supported Windows Server versions"
-  - "3.2.5 - Clean connection test output"
-  - "3.2.4 - Fix issue with Query where some output was not unescaped properly | Update to exception handling to leverage PluginException"
-  - "3.2.3 - Fix issue with Add User action disable and enable flags | Update Query action to allow for `<=` and `>=` searches"
-  - "3.2.2 - Fix issue regarding escaping of `(` and `)` in the Query action"
-  - "3.2.1 - Fix issue regarding escaping Distinguished Names containing commas"
-  - "3.2.0 - New action Force Password Reset"
-  - "3.1.4 - Add Connection test | Improve error handling in Connection"
-  - "3.1.3 - Update action descriptions"
-  - "3.1.2 - Update help to clarify use of LDAP URI prefix"
-  - "3.1.1 - Bug fix for normalizing Distinguished Name"
-  - "3.1.0 - Add user action expanded to allow setting of all attributes"
-  - "3.0.1 - Bug fix preventing successful connections"
-  - "3.0.0 - Support web server mode | Update to new credential types"
-  - "2.2.0 - Add actions for move object, reset password and improved error logging"
-  - "2.1.0 - Add actions for account add/delete, disable/enable, modify"
-  - "2.0.2 - SSL bug fix in SDK"
-  - "2.0.1 - Update host input description"
-  - '2.0.0 - Simplify output to "attributes" and "dn", return attributes fixed, and major code cleanup'
-  - "1.0.1 - Bugfix for potentially non-existent raw_attributes"
-  - "1.0.0 - Revise input names, bugfixes for missing attributes and character escaping, fix security issue"
-  - "0.1.0 - Initial plugin"
+- 9.0.4 - Updated SDK to the latest version (6.2.5)
+- 9.0.3 - Initial updates for fedramp compliance | Updated SDK to the latest version
+- 9.0.2 - Updated the SDK to the latest version to address memory usage issues
+- 9.0.1 - Fix problem where some ASCII characters were not escaped properly
+- '9.0.0 - Action: `Disable User` & `Enable User` - Rename title of actions from `Disable`
+  & `Enable` to `Disable Users` & `Enable Users` on the front-end.'
+- 8.0.0 - Update actions Enable Users and Enable Users to add outputs Completed and
+  Failed and remove output All Operations Succeeded
+- 7.0.0 - Update actions Enable Users and Enable Users to replace output Success with
+  All Operations Succeeded True/False
+- 6.0.0 - Add actions Enable Users and Disable users allowing for the bulk enablement/disablement
+  of users
+- 5.3.5 - Fix issue where JSON Marshaling error was raised when receiving unexpected
+  API response in the Force Password Reset action
+- 5.3.4 - Fix issue with space character in DN in modify object action | Enhanced
+  LDAP logging | Fix issue with variable error when connection fails
+- 5.3.3 - Fix issue with escaping brackets in Query action
+- 5.3.2 - Improve LDAP connection handling
+- 5.3.1 - Improved error messaging in case the specified group was not found in the
+  Query Group Membership action
+- 5.3.0 - Add Unlock User action
+- 5.2.2 - Add automatic pagination in Query Group Membership and Query actions
+- 5.2.1 - Add default prefix `ldap://` and `ldaps://` to provided host
+- 5.2.0 - New action Query Group Membership
+- 5.1.0 - Update error handling in Add User, Force Password Reset, Reset Password
+  actions | Update connection.py to raise PluginException rather than ConnectionTestException
+- 5.0.0 - Add Chase Referrals input to the connection to support multi-domain environments
+  | Rename Add action to Add User to be more explicit | Refactor reusable code from
+  actions into util.py
+- 4.1.0 - Add new input Attributes in action Query | Add new output Count in action
+  Query
+- 4.0.3 - Fix issue with connection documentation incorrectly stating a protocol prefix
+  is required
+- 4.0.2 - Fix issue where some host names were being incorrectly parsed
+- 4.0.1 - Fix issue were logging of connection info did not display hostname correctly
+- 4.0.0 - New action Modify Object | Rename Modify Groups action to 'Add or Remove
+  an Object from Group' | Fix issue where non-ASCII characters were not being escaped
+- 3.2.10 - Fix issue where escaped characters were not being handled correctly
+- 3.2.9 - Fix issue with error handling and logging for the Modify Groups action |
+  Add example inputs | Update to use ldap3 2.7 and Python 3.8
+- 3.2.8 - Fix issue were adding objects to containers might fail
+- 3.2.7 - New spec and help.md format for the Extension Library
+- 3.2.6 - Update help to document supported Windows Server versions
+- 3.2.5 - Clean connection test output
+- 3.2.4 - Fix issue with Query where some output was not unescaped properly | Update
+  to exception handling to leverage PluginException
+- 3.2.3 - Fix issue with Add User action disable and enable flags | Update Query action
+  to allow for `<=` and `>=` searches
+- 3.2.2 - Fix issue regarding escaping of `(` and `)` in the Query action
+- 3.2.1 - Fix issue regarding escaping Distinguished Names containing commas
+- 3.2.0 - New action Force Password Reset
+- 3.1.4 - Add Connection test | Improve error handling in Connection
+- 3.1.3 - Update action descriptions
+- 3.1.2 - Update help to clarify use of LDAP URI prefix
+- 3.1.1 - Bug fix for normalizing Distinguished Name
+- 3.1.0 - Add user action expanded to allow setting of all attributes
+- 3.0.1 - Bug fix preventing successful connections
+- 3.0.0 - Support web server mode | Update to new credential types
+- 2.2.0 - Add actions for move object, reset password and improved error logging
+- 2.1.0 - Add actions for account add/delete, disable/enable, modify
+- 2.0.2 - SSL bug fix in SDK
+- 2.0.1 - Update host input description
+- 2.0.0 - Simplify output to "attributes" and "dn", return attributes fixed, and major
+  code cleanup
+- 1.0.1 - Bugfix for potentially non-existent raw_attributes
+- 1.0.0 - Revise input names, bugfixes for missing attributes and character escaping,
+  fix security issue
+- 0.1.0 - Initial plugin
 links:
-  - "[Learn Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/)"
-  - "[AD LDAP](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/3c5916a9-f1a0-429d-b937-f8fe672d777c)"
-  - "[Microsoft's Active Directory service](https://social.technet.microsoft.com/wiki/contents/articles/5392.active-directory-ldap-syntax-filters.aspx)"
+- '[Learn Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/)'
+- '[AD LDAP](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/3c5916a9-f1a0-429d-b937-f8fe672d777c)'
+- "[Microsoft's Active Directory service](https://social.technet.microsoft.com/wiki/contents/articles/5392.active-directory-ldap-syntax-filters.aspx)"
 references:
-  - "[Python LDAP3](https://ldap3.readthedocs.io)"
-  - "[RFC4515](https://tools.ietf.org/search/rfc4515)"
+- '[Python LDAP3](https://ldap3.readthedocs.io)'
+- '[RFC4515](https://tools.ietf.org/search/rfc4515)'
 types:
   attributes:
     accountExpires:
@@ -135,7 +156,7 @@ types:
       description: Bad password time
       required: false
     badPwdCount:
-      title:  Bad PWD Count
+      title: Bad PWD Count
       type: integer
       description: Bad PWD count
       required: false
@@ -156,12 +177,12 @@ types:
       required: false
     dSCorePropagationData:
       title: DS Core Propagation Data
-      type: "[]string"
+      type: '[]string'
       description: DS core propagation data
       required: false
     description:
       title: Description
-      type: "[]string"
+      type: '[]string'
       description: Description
       required: false
     distinguishedName:
@@ -201,7 +222,7 @@ types:
       required: false
     memberOf:
       title: Member Of
-      type: "[]string"
+      type: '[]string'
       description: Member of
       required: false
     name:
@@ -216,7 +237,7 @@ types:
       required: false
     objectClass:
       title: Object Class
-      type: "[]string"
+      type: '[]string'
       description: Object class
       required: false
     objectGUID:
@@ -332,7 +353,8 @@ connection:
   chase_referrals:
     title: Chase Referrals
     type: boolean
-    description: Allows the plugin to follow referrals from the specified Active Directory server to other Active Directory servers
+    description: Allows the plugin to follow referrals from the specified Active Directory
+      server to other Active Directory servers
     required: true
     default: true
     example: true
@@ -344,16 +366,16 @@ actions:
       search_filter:
         title: Search Filter
         type: string
-        description: 'The filter of the search request. It must conform to the LDAP
-          filter syntax specified in RFC4515'
+        description: The filter of the search request. It must conform to the LDAP
+          filter syntax specified in RFC4515
         required: true
-        example: "(sAMAccountName=joesmith)"
+        example: (sAMAccountName=joesmith)
       search_base:
         title: Search Base
         type: string
         description: The base of the search request
         required: true
-        example: "DC=example,DC=com"
+        example: DC=example,DC=com
       attributes:
         title: Attributes
         description: Attributes to search. If empty return all attributes
@@ -375,7 +397,7 @@ actions:
         example: 1
   delete:
     title: Delete
-    description: Deletes the LDAP object specified
+    description: Delete the LDAP object specified
     input:
       distinguished_name:
         title: Distinguished Name
@@ -392,7 +414,7 @@ actions:
         example: true
   add_user:
     title: Add User
-    description: Adds the specified Active Directory user
+    description: Add the specified Active Directory user
     input:
       domain_name:
         title: Domain Name
@@ -446,7 +468,7 @@ actions:
         example: user@example.com
       additional_parameters:
         title: Additional Parameters
-        description: 'Add additional user parameters in JSON format'
+        description: Add additional user parameters in JSON format
         type: object
         required: false
         example: '{"telephoneNumber":"(617)555-1234"}'
@@ -480,7 +502,7 @@ actions:
     input:
       distinguished_names:
         title: Distinguished Name
-        type: "[]string"
+        type: '[]string'
         description: The distinguished names of the users to enable
         required: true
         example: '["CN=user,OU=domain_users,DC=example,DC=com"]'
@@ -488,15 +510,16 @@ actions:
       completed:
         title: Completed
         description: List of successfully enabled users
-        type: "[]string"
+        type: '[]string'
         required: false
         example: '["CN=user,OU=domain_users,DC=example,DC=com"]'
       failed:
         title: Failed
         description: List of unsuccessfully enabled users
-        type: "[]modified_user_error"
+        type: '[]modified_user_error'
         required: false
-        example: '[ { "dn": "CN=user,OU=domain_users,DC=test,DC=com", "error": "The DN CN=empty_search,DC=example,DC=com was not found" } ]'
+        example: '[ { "dn": "CN=user,OU=domain_users,DC=test,DC=com", "error": "The
+          DN CN=empty_search,DC=example,DC=com was not found" } ]'
   disable_user:
     title: Disable User
     description: Disable an account
@@ -520,7 +543,7 @@ actions:
     input:
       distinguished_names:
         title: Distinguished Name
-        type: "[]string"
+        type: '[]string'
         description: The distinguished names of the users to disable
         required: true
         example: '["CN=user,OU=domain_users,DC=example,DC=com"]'
@@ -528,15 +551,16 @@ actions:
       completed:
         title: Completed
         description: List of successfully disabled users
-        type: "[]string"
+        type: '[]string'
         required: false
         example: '["CN=user,OU=domain_users,DC=example,DC=com"]'
       failed:
         title: Failed
         description: List of unsuccessfully disabled users
-        type: "[]modified_user_error"
+        type: '[]modified_user_error'
         required: false
-        example: '[ { "dn": "CN=user,OU=domain_users,DC=test,DC=com", "error": "The DN CN=empty_search,DC=example,DC=com was not found" } ]'
+        example: '[ { "dn": "CN=user,OU=domain_users,DC=test,DC=com", "error": "The
+          DN CN=empty_search,DC=example,DC=com was not found" } ]'
   modify_groups:
     title: Add or Remove an Object from Group
     description: Add or remove an object from an Active Directory group
@@ -544,7 +568,8 @@ actions:
       distinguished_name:
         title: Distinguished Name
         type: string
-        description: The distinguished name of the object whose membership will be modified
+        description: The distinguished name of the object whose membership will be
+          modified
         required: true
         example: CN=user,OU=domain_users,DC=mydomain,DC=com
       group_dn:
@@ -636,7 +661,7 @@ actions:
         description: The value of the attribute
         type: string
         required: true
-        example: "02114"
+        example: '02114'
     output:
       success:
         title: Success
@@ -676,7 +701,7 @@ actions:
         description: The base of the search request
         type: string
         required: true
-        example: "DC=example,DC=com"
+        example: DC=example,DC=com
       include_groups:
         title: Include Groups
         description: Include groups in results
@@ -695,7 +720,22 @@ actions:
         description: Results returned
         type: '[]results'
         required: false
-        example: '[ { "attributes": { "accountExpires": "9999-12-31 23:59:59.999999+00:00", "adminCount": 0, "badPasswordTime": "1601-01-01 00:00:00+00:00", "badPwdCount": 0, "cn": "Example User", "codePage": 0, "countryCode": 0, "dSCorePropagationData": [ "2021-01-14 18:17:28+00:00", "2021-01-14 17:48:27+00:00", "1601-01-01 00:04:16+00:00" ], "description": [ "Example Account" ], "distinguishedName": "CN=Example User,CN=Users,DC=example,DC=com", "instanceType": 4, "isCriticalSystemObject": true, "lastLogoff": "1601-01-01 00:00:00+00:00", "lastLogon": "1601-01-01 00:00:00+00:00", "logonCount": 0, "memberOf": [ "CN=Domain Users,CN=Users,example,DC=com" ], "name": "Example User", "objectCategory": "CN=Person,CN=Schema,CN=Configuration,DC=example,DC=com", "objectClass": [ "top", "person", "organizationalPerson", "user" ], "objectGUID": "{b45138aa-be39-47d9-ab57-3aee8f381f87}", "objectSid": "S-1-5-33-3456299977-1009817396-2685666617-303", "primaryGroupID": 513, "pwdLastSet": "2021-01-14 17:48:26.197384+00:00", "sAMAccountName": "Example User", "sAMAccountType": 489006322, "showInAdvancedViewOnly": true, "uSNChanged": 16419, "uSNCreated": 12324, "userAccountControl": 514, "whenChanged": "2021-01-14 18:17:28+00:00", "whenCreated": "2021-01-14 17:48:26+00:00" }, "dn": "CN=Example User,CN=Users,DC=example,DC=com" } ]'
+        example: '[ { "attributes": { "accountExpires": "9999-12-31 23:59:59.999999+00:00",
+          "adminCount": 0, "badPasswordTime": "1601-01-01 00:00:00+00:00", "badPwdCount":
+          0, "cn": "Example User", "codePage": 0, "countryCode": 0, "dSCorePropagationData":
+          [ "2021-01-14 18:17:28+00:00", "2021-01-14 17:48:27+00:00", "1601-01-01
+          00:04:16+00:00" ], "description": [ "Example Account" ], "distinguishedName":
+          "CN=Example User,CN=Users,DC=example,DC=com", "instanceType": 4, "isCriticalSystemObject":
+          true, "lastLogoff": "1601-01-01 00:00:00+00:00", "lastLogon": "1601-01-01
+          00:00:00+00:00", "logonCount": 0, "memberOf": [ "CN=Domain Users,CN=Users,example,DC=com"
+          ], "name": "Example User", "objectCategory": "CN=Person,CN=Schema,CN=Configuration,DC=example,DC=com",
+          "objectClass": [ "top", "person", "organizationalPerson", "user" ], "objectGUID":
+          "{b45138aa-be39-47d9-ab57-3aee8f381f87}", "objectSid": "S-1-5-33-3456299977-1009817396-2685666617-303",
+          "primaryGroupID": 513, "pwdLastSet": "2021-01-14 17:48:26.197384+00:00",
+          "sAMAccountName": "Example User", "sAMAccountType": 489006322, "showInAdvancedViewOnly":
+          true, "uSNChanged": 16419, "uSNCreated": 12324, "userAccountControl": 514,
+          "whenChanged": "2021-01-14 18:17:28+00:00", "whenCreated": "2021-01-14 17:48:26+00:00"
+          }, "dn": "CN=Example User,CN=Users,DC=example,DC=com" } ]'
       count:
         title: Count
         description: Number of results

@@ -3,4 +3,4 @@
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 ldap3==2.9.1
 pycryptodome==3.20.0
-parameterized==0.8.1
+parameterized==0.9.0
