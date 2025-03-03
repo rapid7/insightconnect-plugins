@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name="python_3_script-rapid7-plugin",
       version="5.1.1",
-      description="[Python](https://www.python.org/) is a language for fast development and system integration. This plugin runs Python 3.9.19 with its standard library and other libraries such as:* [requests](https://requests.readthedocs.io/en/latest/)* [arrow](https://pypi.org/project/arrow/)* [lxml](http://lxml.de/)* [beautifulsoup](https://www.crummy.com/software/BeautifulSoup/)It supports loading custom modules and passing credentials (`username`, `password`, `secret_key`)",
+      description="[Python](https://www.python.org/) is a language for fast development and system integration. This plugin runs Python 3.12.8 with its standard library and other libraries such as:* [requests](https://requests.readthedocs.io/en/latest/)* [arrow](https://pypi.org/project/arrow/)* [lxml](http://lxml.de/)* [beautifulsoup](https://www.crummy.com/software/BeautifulSoup/)It supports loading custom modules and passing credentials (`username`, `password`, `secret_key`)",
       author="rapid7",
       author_email="",
       url="",

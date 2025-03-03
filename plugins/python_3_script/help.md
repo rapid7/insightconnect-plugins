@@ -1,6 +1,6 @@
 # Description
 
-[Python](https://www.python.org/) is a language for fast development and system integration. This plugin runs Python 3.9.19 with its standard library and other libraries such as:
+[Python](https://www.python.org/) is a language for fast development and system integration. This plugin runs Python 3.12.8 with its standard library and other libraries such as:
 
 * [requests](https://requests.readthedocs.io/en/latest/)
 * [arrow](https://pypi.org/project/arrow/)
@@ -19,7 +19,7 @@ It supports loading custom modules and passing credentials (`username`, `passwor
 
 # Supported Product Versions
 
-* Python 3.9.18
+* Python 3.12.8
 
 # Documentation
 
