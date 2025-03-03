@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="ssh-rapid7-plugin",
-      version="4.0.3",
+      version="4.0.4",
       description="[Secure Shell](https://en.wikipedia.org/wiki/Secure_Shell) (SSH) is a cryptographic network protocol for operating network services securely over an unsecured network. This plugin uses the [paramiko](http://www.paramiko.org/) to connect to a remote host via the library. The SSH plugin allows you to run commands on a remote host",
       author="rapid7",
       author_email="",
