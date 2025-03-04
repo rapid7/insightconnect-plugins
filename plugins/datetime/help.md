@@ -1,6 +1,6 @@
 # Description
 
-Timestamps, timezones, and Datetimes can be difficult to work with, especially when dealing with different locales on different systems. The Datetime InsightConnect plugin manipulates timestamps using Python's [Maya](https://pypi.org/project/maya/) library, which makes the simple things much easier while admitting that time is an illusion (timezones doubly so).
+Timestamps, timezones, and Datetimes can be difficult to work with, especially when dealing with different locales on different systems. The Datetime InsightConnect plugin manipulates timestamps using Python's [Maya](https://pypi.org/project/maya/) library, which makes the simple things much easier while admitting that time is an illusion (timezones doubly so)
 
 # Key Features
 
@@ -377,6 +377,7 @@ Example output:
 
 # Version History
 
+* 3.0.2 - Updated SDK to the latest version (6.2.5)
 * 3.0.1 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 3.0.0 - Add support for epochs in milliseconds, microseconds and nanoseconds in Date from Epoch action
 * 2.2.0 - Add new action Get Future Time
