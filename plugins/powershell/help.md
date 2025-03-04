@@ -188,7 +188,7 @@ Invoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw
 
 # Version History
 
-* 3.0.8 - Updated SDK to the latest version (6.2.5) | bumping `cryptography` package
+* 3.0.8 - Updated clean message | Updated SDK to the latest version (6.2.5) | bumping `cryptography` package
 * 3.0.7 - Updated dependencies | Updated SDK to the latest version
 * 3.0.6 - Bump SDK to 6.2.0
 * 3.0.5 - Bump requirements.txt | Bump SDK to 6.1.4 | Update help.md to enforce that the use of round-robin DNS lookups is not supported
