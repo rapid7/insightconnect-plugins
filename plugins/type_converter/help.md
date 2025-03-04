@@ -1,7 +1,6 @@
 # Description
 
-Type Converter is a utility plugin for converting data types within a Rapid7 InsightConnect workflow. This is useful
-for enabling input interoperability between certain plugins.
+Type Converter is a utility plugin for converting data types within a Rapid7 InsightConnect workflow. This is useful for enabling input interoperability between certain plugins
 
 # Key Features
 
@@ -631,6 +630,7 @@ Example output:
 
 # Version History
 
+* 1.8.4 - Updated SDK to the latest version (6.2.5)
 * 1.8.3 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 1.8.2 - Updated error handling for string_to_int & string_to_float
 * 1.8.1 - Help.md input examples updated

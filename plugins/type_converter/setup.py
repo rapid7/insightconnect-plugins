@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name="type_converter-rapid7-plugin",
-      version="1.8.3",
-      description="Type Converter is a utility plugin for converting data types within a Rapid7 InsightConnect workflow",
+      version="1.8.4",
+      description="Type Converter is a utility plugin for converting data types within a Rapid7 InsightConnect workflow. This is useful for enabling input interoperability between certain plugins",
       author="rapid7",
       author_email="",
       url="",
