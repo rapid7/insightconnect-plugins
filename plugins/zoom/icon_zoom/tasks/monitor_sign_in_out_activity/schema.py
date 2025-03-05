@@ -43,9 +43,7 @@ class MonitorSignInOutActivityOutput(insightconnect_plugin_runtime.Output):
   "type": "array",
   "title": "Activity Logs",
   "description": "All activity logs within the specified time range",
-  "items": {
-    "$ref": "#/definitions/user_activity"
-  },
+  "items": {},
   "required": [
     "activity_logs"
   ],
