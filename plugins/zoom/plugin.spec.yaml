@@ -3,29 +3,34 @@ extension: plugin
 products: [insightconnect]
 name: zoom
 title: Zoom
-description: "[Zoom](https://zoom.us) is a cloud platform for video and audio conferencing, chat, and webinars. The Zoom plugin allows you to add and remove users as part of of workflow, while also providing the ability to trigger workflows on new user sign-in and sign-out activity events. This plugin uses the [Zoom API](https://marketplace.zoom.us/docs/api-reference/introduction) and requires a Pro, Business, or Enterprise plan"
-key_features: 
-  - "Trigger workflows on user sign-in and sign-out activity events"
-  - "Add and remove user accounts to automate provisioning/deprovisioning of users"
+description: '[Zoom](https://zoom.us) is a cloud platform for video and audio conferencing,
+  chat, and webinars. The Zoom plugin allows you to add and remove users as part of
+  of workflow, while also providing the ability to trigger workflows on new user sign-in
+  and sign-out activity events. This plugin uses the [Zoom API](https://marketplace.zoom.us/docs/api-reference/introduction)
+  and requires a Pro, Business, or Enterprise plan'
+key_features:
+- Trigger workflows on user sign-in and sign-out activity events
+- Add and remove user accounts to automate provisioning/deprovisioning of users
 requirements:
-  - "Must have Zoom Pro, Business, or Enterprise plan to support REST API"
-  - "API credentials for OAuth 2.0:
-      \n\t* Requires account ID as well as client ID and secret from a Server-to-Server OAuth app in the Zoom Marketplace.
-      \n\t* Server-to-Server OAuth app has the `report:read:admin` scope enabled."
-version: 4.1.16
+- Must have Zoom Pro, Business, or Enterprise plan to support REST API
+- "API credentials for OAuth 2.0: \n\t* Requires account ID as well as client ID and
+  secret from a Server-to-Server OAuth app in the Zoom Marketplace. \n\t* Server-to-Server
+  OAuth app has the `report:read:admin` scope enabled."
+version: 4.1.17
 connection_version: 4
 vendor: rapid7
 support: rapid7
 status: []
-supported_versions: ["Zoom API v2.10"]
+supported_versions: [Zoom API v2.10]
 cloud_ready: true
 tags: [zoom, chat]
 sdk:
   type: full
-  version: 6.1.2
+  version: 6.2.5
   user: nobody
 hub_tags:
-  use_cases: [alerting_and_notifications, application_management, threat_detection_and_response, user_management]
+  use_cases: [alerting_and_notifications, application_management, threat_detection_and_response,
+    user_management]
   keywords: [zoom, chat, cloud_enabled]
   features: []
 resources:
@@ -35,35 +40,52 @@ resources:
 enable_cache: false
 
 version_history:
-  - "4.1.16 - Update SDK | Update error handling"
-  - "4.1.15 - Error Handling Updated | SDK Bump to 6.1.0"
-  - "4.1.14 - SDK Bumped to 6.0.1 | Task connection test added"
-  - "4.1.13 - Fix defect where Event objects failed to create on a missing attribute | Update insight-plugin-runtime to version 5.5.5"
-  - "4.1.12 - Fix defect where 401 errors may not be raised or logged correctly | Update insight-plugin-runtime to version 5.5.0"
-  - "4.1.11 - Update Task `monitor_sign_in_out_activity` to reduce instances of duplicate results"
-  - "4.1.10 - Update Task `monitor_sign_in_out_activity` handle invalid or expired pagination token errors"
-  - "4.1.9 - Updated to include latest SDK functionality v5.4.8 | Task `monitor_sign_in_out_activity` updated to increase max lookback cutoff to 7 days"
-  - "4.1.8 - Updated to include latest SDK functionality v5.4.5 | Adding logic to `monitor_sign_in_out_activity` task to keep paginating until endtime catches up to now"
-  - "4.1.7 - Updated to include latest SDK functionality"
-  - "4.1.6 - Adding better handling to `monitor_sign_in_out_activity` task, if the users account does not have all of the required permissions | Include SDK 5.4 which adds new task custom_config parameter"
-  - "4.1.5 - Monitor Sign in and out Activity: Added exception logging and bumped latest plugin SDK"
-  - "4.1.4 - Update to the latest plugin SDK"
-  - "4.1.3 - Monitor Sign in and out Activity: set cutoff time of 24 hours"
-  - "4.1.2 - Fix required fields for GetUserOutput schema"
-  - "4.1.1 - Fix external pagination support for Monitor Sign in and Out Activity task"
-  - "4.1.0 - Implement external pagination for Monitor Sign in and Out Activity task | Update to latest plugin SDK"
-  - "4.0.2 - Reordered status checks to avoid JSON parsing issue with 204s | Added examples to spec file and help.md"
-  - "4.0.1 - Return Zoom API status codes in Monitor Sign in And Out Activity task state"
-  - "4.0.0 - Fix time boundary checking in Monitor Sign in And Out Activity task by tracking last request time instead of latest event time | Remove JWT authentication"
-  - "3.0.0 - Add back JWT authentication in addition to OAuth (please note JWT will be removed from the Zoom API in June 2023) | Improve OAuth logic to help prevent infinite looping"
-  - "2.1.0 - Create user: Removed redundant enum option from `type` input | Added unit tests | Improve authentication logic"
-  - "2.0.0 - Update connection for latest Zoom API authentication | Add Monitor Sign In and Out Activity task"
-  - "1.0.0 - Initial plugin"
+- 4.1.17 - Updated SDK to the latest version (6.2.5)
+- 4.1.16 - Update SDK | Update error handling
+- 4.1.15 - Error Handling Updated | SDK Bump to 6.1.0
+- 4.1.14 - SDK Bumped to 6.0.1 | Task connection test added
+- 4.1.13 - Fix defect where Event objects failed to create on a missing attribute
+  | Update insight-plugin-runtime to version 5.5.5
+- 4.1.12 - Fix defect where 401 errors may not be raised or logged correctly | Update
+  insight-plugin-runtime to version 5.5.0
+- 4.1.11 - Update Task `monitor_sign_in_out_activity` to reduce instances of duplicate
+  results
+- 4.1.10 - Update Task `monitor_sign_in_out_activity` handle invalid or expired pagination
+  token errors
+- 4.1.9 - Updated to include latest SDK functionality v5.4.8 | Task `monitor_sign_in_out_activity`
+  updated to increase max lookback cutoff to 7 days
+- 4.1.8 - Updated to include latest SDK functionality v5.4.5 | Adding logic to `monitor_sign_in_out_activity`
+  task to keep paginating until endtime catches up to now
+- 4.1.7 - Updated to include latest SDK functionality
+- 4.1.6 - Adding better handling to `monitor_sign_in_out_activity` task, if the users
+  account does not have all of the required permissions | Include SDK 5.4 which adds
+  new task custom_config parameter
+- '4.1.5 - Monitor Sign in and out Activity: Added exception logging and bumped latest
+  plugin SDK'
+- 4.1.4 - Update to the latest plugin SDK
+- '4.1.3 - Monitor Sign in and out Activity: set cutoff time of 24 hours'
+- 4.1.2 - Fix required fields for GetUserOutput schema
+- 4.1.1 - Fix external pagination support for Monitor Sign in and Out Activity task
+- 4.1.0 - Implement external pagination for Monitor Sign in and Out Activity task
+  | Update to latest plugin SDK
+- 4.0.2 - Reordered status checks to avoid JSON parsing issue with 204s | Added examples
+  to spec file and help.md
+- 4.0.1 - Return Zoom API status codes in Monitor Sign in And Out Activity task state
+- 4.0.0 - Fix time boundary checking in Monitor Sign in And Out Activity task by tracking
+  last request time instead of latest event time | Remove JWT authentication
+- 3.0.0 - Add back JWT authentication in addition to OAuth (please note JWT will be
+  removed from the Zoom API in June 2023) | Improve OAuth logic to help prevent infinite
+  looping
+- '2.1.0 - Create user: Removed redundant enum option from `type` input | Added unit
+  tests | Improve authentication logic'
+- 2.0.0 - Update connection for latest Zoom API authentication | Add Monitor Sign
+  In and Out Activity task
+- 1.0.0 - Initial plugin
 references:
-  - "[Zoom](https://zoom.us/)"
-  - "[Zoom API Documentation](https://marketplace.zoom.us/docs/api-reference/introduction)"
+- '[Zoom](https://zoom.us/)'
+- '[Zoom API Documentation](https://marketplace.zoom.us/docs/api-reference/introduction)'
 links:
-  - "[Zoom](https://zoom.us/)"
+- '[Zoom](https://zoom.us/)'
 connection:
   client_id:
     title: Client ID
@@ -76,7 +98,7 @@ connection:
     description: Zoom app client secret, required for OAuth authentication
     type: credential_secret_key
     required: true
-    example: {"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}
+    example: {secretKey: 9de5069c5afe602b2ea0a04b66beb2c0}
   account_id:
     title: Account ID
     description: Zoom app account ID, required for OAuth authentication
@@ -85,7 +107,8 @@ connection:
     example: dBs0x4Kf7HuIK0LLbzMduW
   authentication_retry_limit:
     title: OAuth Authentication Retry Limit
-    description: How many times to retry authentication to Zoom before failing, required for OAuth authentication
+    description: How many times to retry authentication to Zoom before failing, required
+      for OAuth authentication
     type: integer
     required: true
     default: 5
@@ -101,7 +124,8 @@ types:
       example: user@example.com
     time:
       title: Time
-      description: Time during which the activity occurred in 'yyyy-mm-ddThh:mm:ssZ' format
+      description: Time during which the activity occurred in 'yyyy-mm-ddThh:mm:ssZ'
+        format
       type: string
       required: true
       example: 2023-05-21T20:15:01Z
@@ -131,7 +155,7 @@ types:
       description: The version of the client of the user's device
       type: string
       required: false
-      example: "5.12.2"
+      example: 5.12.2
   user:
     id:
       title: ID
@@ -239,15 +263,15 @@ types:
     group_ids:
       title: Web Group IDs
       description: IDs of the web groups user belongs to
-      type: "[]string"
+      type: '[]string'
       required: false
-      example: ["t-_-d56CSWG-7BF15LLrOw", "t-_-d56CSWG-7BF15LLrow"]
+      example: [t-_-d56CSWG-7BF15LLrOw, t-_-d56CSWG-7BF15LLrow]
     im_group_ids:
       title: IM Group IDs
       description: IM IDs of the groups user belongs to
-      type: "[]string"
+      type: '[]string'
       required: false
-      example: ["t-_-d56CSWG-7BF15LLrOw", "t-_-d56CSWG-7BF15LLrow"]
+      example: [t-_-d56CSWG-7BF15LLrOw, t-_-d56CSWG-7BF15LLrow]
     account_id:
       title: Account ID
       description: Account ID of user
@@ -295,7 +319,8 @@ actions:
         description: User details
         type: user
         required: true
-        example: { "email": "user@example.com", "first_name": "John", "id": "T9ti3NBxR42swGKrqABGig", "last_name": "Smith", "type": 1 }
+        example: {email: user@example.com, first_name: John, id: T9ti3NBxR42swGKrqABGig,
+          last_name: Smith, type: 1}
   create_user:
     title: Create User
     description: Create user associated to account
@@ -448,7 +473,8 @@ triggers:
         description: User Activity
         type: user_activity
         required: false
-        example: { "email": "user@example.com", "time": "2020-06-05T16:51:28Z", "type": "Sign in", "ip_address": "198.51.100.100", "client_type": "Browser", "version": "5.12.2" }
+        example: {email: user@example.com, time: '2020-06-05T16:51:28Z', type: Sign
+            in, ip_address: 198.51.100.100, client_type: Browser, version: 5.12.2}
 
 tasks:
   monitor_sign_in_out_activity:
@@ -458,6 +484,9 @@ tasks:
       activity_logs:
         title: Activity Logs
         description: All activity logs within the specified time range
-        type: "[]user_activity"
+        type: '[]user_activity'
         required: true
-        example: [{ "email": "user@example.com", "time": "2020-06-05T16:51:28Z", "type": "Sign in", "ip_address": "198.51.100.100", "client_type": "Browser", "version": "5.12.2" }, { "email": "user@example.com", "time": "2020-06-05T17:51:28Z", "type": "Sign out", "ip_address": "198.51.100.100", "client_type": "Browser", "version": "5.12.2" }]
+        example: [{email: user@example.com, time: '2020-06-05T16:51:28Z', type: Sign
+              in, ip_address: 198.51.100.100, client_type: Browser, version: 5.12.2},
+          {email: user@example.com, time: '2020-06-05T17:51:28Z', type: Sign out,
+            ip_address: 198.51.100.100, client_type: Browser, version: 5.12.2}]
