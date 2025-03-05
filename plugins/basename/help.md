@@ -69,10 +69,11 @@ Example output:
 
 ## Troubleshooting
 
-If the input doesn't contain a slash `/` in the path the result will be the original string unmodified.
+* If the input doesn't contain a slash `/` in the path the result will be the original string unmodified.
 
 # Version History
 
+* 1.1.4 - Updated SDK to the latest version (6.2.5)
 * 1.1.3 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 1.1.2 - Added `__init__.py` file to `unit_test` folder | Refreshed with new Tooling
 * 1.1.1 - Update SDK to version 5
