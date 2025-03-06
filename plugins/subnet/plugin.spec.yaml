@@ -3,52 +3,57 @@ extension: plugin
 products: [insightconnect]
 name: subnet
 title: Subnet
-description: The Subnet plugin takes input as a network in CIDR notation and returns useful information, such as the number of hosts, the ID, host address range, and broadcast address
-version: 2.0.1
+description: The Subnet plugin takes input as a network in CIDR notation and returns
+  useful information, such as the number of hosts, the ID, host address range, and
+  broadcast address
+version: 2.0.2
 connection_version: 2
 fedramp_ready: true
 vendor: rapid7
 support: community
-supported_versions: ["2024-10-09"]
+supported_versions: ['2024-10-09']
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/subnet
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
-  - subnet
-  - ip
-  - netmask
-  - network
-  - utilities
+- subnet
+- ip
+- netmask
+- network
+- utilities
 hub_tags:
   use_cases: [data_utility, threat_detection_and_response]
   keywords: [subnet, ip_address]
   features: []
 sdk:
   type: slim
-  version: 6.1.3
+  version: 6.2.5
   user: nobody
 key_features:
-  - "Returns network information about CIDR"
-troubleshooting: The number of hosts per network does not include the ID and broadcast address. However, the number of network does include the all-ones and all-zeros network.
+- Returns network information about CIDR
+troubleshooting:
+- The number of hosts per network does not include the ID and broadcast address. However,
+  the number of network does include the all-ones and all-zeros network.
 version_history:
-  - "2.0.1 - Initial updates for fedramp compliance | Updated SDK to the latest version"
-  - "2.0.0 - Add new action Check Address in Subnet | Code refactor"
-  - "1.0.2 - New spec and help.md format for the Extension Library"
-  - "1.0.1 - Add `utilities` plugin tag for Marketplace searchability"
-  - "1.0.0 - Update to v2 Python plugin architecture | Support web server mode"
-  - "0.1.1 - SSL bug fix in SDK"
-  - "0.1.0 - Initial plugin"
+- 2.0.2 - Updated SDK to the latest version (6.2.5)
+- 2.0.1 - Initial updates for fedramp compliance | Updated SDK to the latest version
+- 2.0.0 - Add new action Check Address in Subnet | Code refactor
+- 1.0.2 - New spec and help.md format for the Extension Library
+- 1.0.1 - Add `utilities` plugin tag for Marketplace searchability
+- 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
+- 0.1.1 - SSL bug fix in SDK
+- 0.1.0 - Initial plugin
 links:
-  - "[Subnetwork](https://en.wikipedia.org/wiki/Subnetwork)"
-  - "[Python IPCalc](https://github.com/tehmaze/ipcalc)"
+- '[Subnetwork](https://en.wikipedia.org/wiki/Subnetwork)'
+- '[Python IPCalc](https://github.com/tehmaze/ipcalc)'
 references:
-  - "[Subnetwork](https://en.wikipedia.org/wiki/Subnetwork)"
-  - "[Python IPCalc](https://github.com/tehmaze/ipcalc)"
+- '[Subnetwork](https://en.wikipedia.org/wiki/Subnetwork)'
+- '[Python IPCalc](https://github.com/tehmaze/ipcalc)'
 actions:
   calculate:
     title: Calculate
-    description: Return subnet information for IP and Netmask
+    description: Return Subnet information for IP and Netmask
     input:
       cidr:
         title: Network
@@ -125,7 +130,7 @@ actions:
         example: 192.168.1.255
   check_address_in_subnet:
     title: Check Address in Subnet
-    description: Determine if the provided IP address is in the subnet
+    description: Determine if the provided IP address is in the Subnet
     input:
       ip_address:
         title: IP Address
@@ -135,7 +140,7 @@ actions:
         example: 198.51.100.100
       subnet:
         title: Subnet
-        description: The subnet in CIDR notation or Netmask
+        description: The Subnet in CIDR notation or Netmask
         type: string
         required: true
         example: 198.51.100.0/24
