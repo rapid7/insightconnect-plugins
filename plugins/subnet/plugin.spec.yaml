@@ -53,7 +53,7 @@ references:
 actions:
   calculate:
     title: Calculate
-    description: Return subnet information for IP and Netmask
+    description: Return Subnet information for IP and Netmask
     input:
       cidr:
         title: Network
@@ -130,7 +130,7 @@ actions:
         example: 192.168.1.255
   check_address_in_subnet:
     title: Check Address in Subnet
-    description: Determine if the provided IP address is in the subnet
+    description: Determine if the provided IP address is in the Subnet
     input:
       ip_address:
         title: IP Address
@@ -140,7 +140,7 @@ actions:
         example: 198.51.100.100
       subnet:
         title: Subnet
-        description: The subnet in CIDR notation or Netmask
+        description: The Subnet in CIDR notation or Netmask
         type: string
         required: true
         example: 198.51.100.0/24

@@ -27,7 +27,7 @@ The Subnet plugin takes input as a network in CIDR notation and returns useful i
 
 #### Calculate
 
-This action is used to return subnet information for IP and Netmask
+This action is used to return Subnet information for IP and Netmask
 
 ##### Input
 
@@ -79,14 +79,14 @@ Example output:
 
 #### Check Address in Subnet
 
-This action is used to determine if the provided IP address is in the subnet
+This action is used to determine if the provided IP address is in the Subnet
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |ip_address|string|None|True|The IP address|None|198.51.100.100|None|None|
-|subnet|string|None|True|The subnet in CIDR notation or Netmask|None|198.51.100.0/24|None|None|
+|subnet|string|None|True|The Subnet in CIDR notation or Netmask|None|198.51.100.0/24|None|None|
   
 Example input:
 
