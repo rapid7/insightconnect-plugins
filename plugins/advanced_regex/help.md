@@ -1,6 +1,6 @@
 # Description
 
-The Advanced Regex plugin is used to extract or manipulate targeted text using regular expressions operations on a string using Python specific regex.
+The Advanced Regex plugin is used to extract or manipulate targeted text using regular expressions operations on a string using Python specific regex
 
 # Key Features
 
@@ -182,6 +182,7 @@ Example output:
 
 # Version History
 
+* 1.0.5 - Updated SDK to the latest version (6.2.5)
 * 1.0.4 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 1.0.3 - Update to make replace string non-required
 * 1.0.2 - Update to v4 Python plugin runtime | Add example inputs
