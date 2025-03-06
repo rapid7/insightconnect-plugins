@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get the basename of a path"
+    DESCRIPTION = "Get the Basename of a path"
 
 
 class Input:
