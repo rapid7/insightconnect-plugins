@@ -34,8 +34,8 @@ hub_tags:
 troubleshooting:
 - "The `status` variable contains the [DNS status code](https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml)
   name from the DNS server's response.\nDig has at least the following status codes
-  implemented:\n\n```\nNOERROR\nFORMERR\nSERVFAIL\nNXDOMAIN\nNOTIMP\nREFUSED\nYXDOMAIN\n
-  YXRRSET\nNXRRSET\nNOTAUTH\nNOTZONE\nBADVERS\n```\n\nYou can test the `status` variable
+  implemented:\n\n```\nNOERROR\nFORMERR\nSERVFAIL\nNXDOMAIN\nNOTIMP\nREFUSED\nYXDOMAIN
+    \nYXRRSET\nNXRRSET\nNOTAUTH\nNOTZONE\nBADVERS\n```\n\nYou can test the `status` variable
   in a Decision or Filter step to check for its value.\nFor example, in your workflow,
   if the resolution doesn't return an answer, then you may want to attempt a second
   lookup from a passive DNS service.\n\nCommon examples:\n\n* `status = \"NOERRROR\"\
