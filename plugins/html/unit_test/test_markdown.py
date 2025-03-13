@@ -38,7 +38,8 @@ class TestMarkdown(TestCase):
         print(result)
 
         self.assertEqual(
-            result["markdown_contents"], "Rapid7 InsightConnect\n=====================\n\nConvert HTML to Markdown\n"
+            result["markdown_contents"],
+            "Rapid7 InsightConnect\n=====================\n\nConvert HTML to Markdown\n",
         )
 
         self.assertEqual(

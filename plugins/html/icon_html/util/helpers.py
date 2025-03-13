@@ -31,12 +31,24 @@ def delete_file(file_name):
 
 
 def convert_with_temporary_file(
-        input_html_string: str, to_format: str, from_format: str, file_type: str, *args, **kwargs
+    input_html_string: str,
+    to_format: str,
+    from_format: str,
+    file_type: str,
+    *args,
+    **kwargs,
 ) -> str:
     file_name = f"{uuid.uuid4()}_{file_type}"
 
     try:
-        pypandoc.convert_text(input_html_string, to_format, from_format, outputfile=file_name, *args, **kwargs)
+        pypandoc.convert_text(
+            input_html_string,
+            to_format,
+            from_format,
+            outputfile=file_name,
+            *args,
+            **kwargs,
+        )
         file = read_file_content(file_name)
     except Exception as e:
         log = structlog.getLogger("action logger")
