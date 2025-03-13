@@ -1,10 +1,11 @@
 import base64
 import os
 import uuid
-from typing import Union
 
 import pypandoc
 import structlog
+from insightconnect_plugin_runtime.exceptions import PluginException
+from typing import Union
 
 from icon_html.util.constants import DEFAULT_ENCODING
 
@@ -53,7 +54,11 @@ def convert_with_temporary_file(
     except Exception as e:
         log = structlog.getLogger("action logger")
         log.error("failed to execute action step", file_name=file_name, exception=e)
-        raise e
+        raise PluginException(
+            cause="failed to execute step",
+            assistance="Check the plugin logs. If executing in the cloud, ensure html tags are not linking to resources on the internet.",
+            data=e,
+        )
     finally:
         delete_file(file_name)
 
