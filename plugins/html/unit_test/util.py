@@ -16,7 +16,10 @@ class Util:
     def load_data(filename, path="payloads"):
         return json.loads(
             Util.read_file_to_string(
-                os.path.join(os.path.dirname(os.path.realpath(__file__)), f"{path}/{filename}.json.resp")
+                os.path.join(
+                    os.path.dirname(os.path.realpath(__file__)),
+                    f"{path}/{filename}.json.resp",
+                )
             )
         )
 

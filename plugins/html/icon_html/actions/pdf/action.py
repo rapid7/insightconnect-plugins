@@ -7,7 +7,10 @@ from icon_html.util.strategies import ConvertToPDF
 class Pdf(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="pdf", description=Component.DESCRIPTION, input=PdfInput(), output=PdfOutput()
+            name="pdf",
+            description=Component.DESCRIPTION,
+            input=PdfInput(),
+            output=PdfOutput(),
         )
 
     def run(self, params={}):
