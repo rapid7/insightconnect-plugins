@@ -82,7 +82,8 @@ class NewScans(insightconnect_plugin_runtime.Trigger):
                 util.write_to_cache(self.logger, self.CACHE_FILE_NAME, json.dumps(cache_site_scans))  # noqa: B608
             except TypeError as error:
                 raise PluginException(
-                    cause="Failed to save cache to file", assistance=f"Exception returned was {error}"
+                    cause="Failed to save cache to file",
+                    assistance=f"Exception returned was {error}",
                 )
 
             # Sleep for configured frequency in minutes
@@ -104,7 +105,10 @@ class NewScans(insightconnect_plugin_runtime.Trigger):
         try:
             return json.loads(util.read_from_cache(self.logger, self.CACHE_FILE_NAME))
         except ValueError as error:
-            raise PluginException(cause="Failed to load cache file", assistance=f"Exception returned was {error}")
+            raise PluginException(
+                cause="Failed to load cache file",
+                assistance=f"Exception returned was {error}",
+            )
 
     def get_track_site_scans(self, site_scans: dict) -> dict:
         track_site_scans = {}

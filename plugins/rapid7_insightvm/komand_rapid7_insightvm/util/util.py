@@ -107,7 +107,10 @@ def check_not_null(account: Dict[str, Any], var_name: str) -> str:
     """
     value = account.get(var_name)
     if value in (None, ""):
-        raise PluginException(cause=f"{var_name} has not been entered.", assistance=f"Enter valid {var_name}")
+        raise PluginException(
+            cause=f"{var_name} has not been entered.",
+            assistance=f"Enter valid {var_name}",
+        )
     else:
         return value
 
