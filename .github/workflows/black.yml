@@ -31,7 +31,7 @@ jobs:
           
           if ! [[ ${#CHANGED_FILES[*]} == 0 ]]
           then
-            echo ${CHANGED_FILES[*]} | xargs black --check
+            echo ${CHANGED_FILES[*]} | xargs black --check --line-length 120
           else
             echo "No Python files were changed."
           fi
