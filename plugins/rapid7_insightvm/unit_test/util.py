@@ -20,7 +20,6 @@ class Util:
         action.connection = default_connection
         action.logger = logging.getLogger("action logger")
         return action
-        return action
 
     @staticmethod
     def read_file_to_string(filename):

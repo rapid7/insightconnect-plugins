@@ -38,7 +38,7 @@ class NewScans(insightconnect_plugin_runtime.Trigger):
             f"Writing state of site scans during initialization of trigger (Site regex: "
             f"{params.get(Input.SITE_NAME_FILTER)})"
         )
-        util.write_to_cache(self.CACHE_FILE_NAME, json.dumps(track_site_scans))
+        util.write_to_cache(self.logger, self.CACHE_FILE_NAME, json.dumps(track_site_scans))
 
         while True:
             site_scans = NewScans.get_site_scans(self, params)
@@ -79,7 +79,7 @@ class NewScans(insightconnect_plugin_runtime.Trigger):
             # Update cache file
             self.logger.info("Writing to " + self.CACHE_FILE_NAME)
             try:
-                util.write_to_cache(self.CACHE_FILE_NAME, json.dumps(cache_site_scans))  # noqa: B608
+                util.write_to_cache(self.logger, self.CACHE_FILE_NAME, json.dumps(cache_site_scans))  # noqa: B608
             except TypeError as error:
                 raise PluginException(
                     cause="Failed to save cache to file", assistance=f"Exception returned was {error}"
@@ -102,7 +102,7 @@ class NewScans(insightconnect_plugin_runtime.Trigger):
 
     def get_cache_site_scans(self) -> dict:
         try:
-            return json.loads(util.read_from_cache(self.CACHE_FILE_NAME))
+            return json.loads(util.read_from_cache(self.logger, self.CACHE_FILE_NAME))
         except ValueError as error:
             raise PluginException(cause="Failed to load cache file", assistance=f"Exception returned was {error}")
 
