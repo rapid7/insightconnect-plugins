@@ -15,11 +15,13 @@ class Util:
     def default_connector(action):
         default_connection = Connection()
         default_connection.logger = logging.getLogger("connection logger")
-        params = {Input.URL: "https://example.com", Input.CREDENTIALS: {"password": "password", "username": "user"}}
+        params = {
+            Input.URL: "https://example.com",
+            Input.CREDENTIALS: {"password": "password", "username": "user"},
+        }
         default_connection.connect(params)
         action.connection = default_connection
         action.logger = logging.getLogger("action logger")
-        return action
         return action
 
     @staticmethod
@@ -41,7 +43,10 @@ class Util:
 
             def load_data(self):
                 return Util.read_file_to_string(
-                    os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{self.filename}.json.resp")
+                    os.path.join(
+                        os.path.dirname(os.path.realpath(__file__)),
+                        f"payloads/{self.filename}.json.resp",
+                    )
                 )
 
             def json(self):
@@ -166,7 +171,10 @@ class Util:
 
             def load_data(self):
                 return Util.read_file_to_string(
-                    os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{self.filename}.json.resp")
+                    os.path.join(
+                        os.path.dirname(os.path.realpath(__file__)),
+                        f"payloads/{self.filename}.json.resp",
+                    )
                 )
 
             async def json(self):

@@ -16,8 +16,13 @@ class TestNewScans(TestCase):
     def setUpClass(cls) -> None:
         cls.action = Util.default_connector(NewScans())
 
-    @patch("insightconnect_plugin_runtime.helper.open_cachefile", mock_open(read_data='{"foo": "bar"}'))
-    def test_get_cache_site_scans(self):
+    @patch("os.makedirs")
+    @patch(
+        "komand_rapid7_insightvm.util.cache_file_manager.CacheFileManager",
+        mock_open(read_data='{"foo": "bar"}'),
+    )
+    @patch("builtins.open", mock_open(read_data='{"foo": "bar"}'))
+    def test_get_cache_site_scans(self, mocked_makedirs):
         actual = NewScans.get_cache_site_scans(NewScans())
         expected = {"foo": "bar"}
         self.assertEqual(expected, actual)
