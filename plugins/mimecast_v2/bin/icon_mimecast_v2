@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Mimecast V2"
 Vendor = "rapid7"
-Version = "1.0.3"
+Version = "1.0.4"
 Description = "[Mimecast](https://www.mimecast.com) is a set of cloud services designed to provide next generation protection against advanced email-borne threats such as malicious URLs, malware, impersonation attacks, as well as internally generated threats, with a focus on email security. This plugin utilizes the [Mimecast API](https://www.mimecast.com/developer/documentation)"
 
 
