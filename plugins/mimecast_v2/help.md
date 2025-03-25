@@ -59,8 +59,8 @@ This task is used to monitor and retrieve the latest logs
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|data|[]object|True|List of logs|[{"processingId": "processingId", "aggregateId": "aggregateId", "spamProcessingDetail": "Spam Processing Detail", "numberAttachments": "1", "subject": "siem_recipient - email subject line", "tlsVersion": "TLSv1.2", "senderEnvelope": "user@example.com", "messageId": "messageId", "senderHeader": "user@example.com", "rejectionType": "rejectionType", "eventType": "receipt", "accountId": "C0A0", "recipients": "user@example.com", "tlsCipher": "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384", "action": "Allow", "subType": "Allow", "spamInfo": None, "senderIp": "123.123.123.123", "timestamp": 1689685338597, "direction": "Inbound", "spamScore": "0", "spamDetectionLevel": "0"}]|
-
+|data|[]object|True|List of logs|[{"processingId": "processingId", "aggregateId": "aggregateId", "spamProcessingDetail": "Spam Processing Detail", "numberAttachments": "1", "subject": "siem_recipient - email subject line", "tlsVersion": "TLSv1.2", "senderEnvelope": "user@example.com", "messageId": "messageId", "senderHeader": "user@example.com", "rejectionType": "rejectionType", "eventType": "receipt", "accountId": "C0A0", "recipients": "user@example.com", "tlsCipher": "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384", "action": "Allow", "subType": "Allow", "spamInfo": null, "senderIp": "123.123.123.123", "timestamp": 1689685338597, "direction": "Inbound", "spamScore": "0", "spamDetectionLevel": "0"}]|
+  
 Example output:
 
 ```
@@ -103,6 +103,7 @@ Example output:
 
 # Version History
 
+* 1.0.4 - `Monitor SIEM Logs` Fix issue where duplicate batches in a page are processed
 * 1.0.3 - `Monitor SIEM Logs` Fix issue retrieving logs from larger log files
 * 1.0.2 - `Monitor SIEM Logs` Limit the amount of logs used to deduplicate logs in subsequent runs
 * 1.0.1 - Update SDK | Improve output for a successful connection test
