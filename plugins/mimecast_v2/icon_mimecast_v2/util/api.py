@@ -63,18 +63,12 @@ class API:
         log_size_limit: int = 250,
         saved_url_position: int = 0,
     ) -> Tuple[List[str], str, bool]:
-        self.logger.info(
-            f"API: Applying page size limit of {page_size} for log type {log_type}"
+        self.logger.info(f"API: Applying page size limit of {page_size} for log type {log_type}")
+        batch_download_urls, url_count, result_next_page, caught_up = self.get_siem_batches(
+            log_type, query_date, next_page, page_size
         )
-        batch_download_urls, url_count, result_next_page, caught_up = (
-            self.get_siem_batches(log_type, query_date, next_page, page_size)
-        )
-        pool_data = self.resume_from_batch(
-            batch_download_urls, starting_url, saved_url_position
-        )
-        self.logger.info(
-            f"API: Getting SIEM logs from batches for log type {log_type}..."
-        )
+        pool_data = self.resume_from_batch(batch_download_urls, starting_url, saved_url_position)
+        self.logger.info(f"API: Getting SIEM logs from batches for log type {log_type}...")
         log_count = 0
         manager = Manager()
         saved_file = None
@@ -101,9 +95,7 @@ class API:
                             json_log = json.loads(decoded_line)
                             logs.append(json_log)
                         except (json.JSONDecodeError, UnicodeDecodeError) as error:
-                            self.logger.info(
-                                f"API: JSON or decode error in file {stripped_url}. Skipping file..."
-                            )
+                            self.logger.info(f"API: JSON or decode error in file {stripped_url}. Skipping file...")
                             self.logger.info(f"API: Error is {error}")
                             break
                         total_count.value = total_count.value + 1
@@ -116,15 +108,9 @@ class API:
                             saved_file = stripped_url
                             caught_up = False
                             result_next_page = next_page
-                            self.logger.info(
-                                f"API: Log limit reached for log type {log_type} at {log_size_limit}"
-                            )
-                            self.logger.info(
-                                f"API: Saving file for next run: {saved_file} at line {saved_position}"
-                            )
-                            self.logger.info(
-                                f"API: File position in page: {printable_index}/{url_count}"
-                            )
+                            self.logger.info(f"API: Log limit reached for log type {log_type} at {log_size_limit}")
+                            self.logger.info(f"API: Saving file for next run: {saved_file} at line {saved_position}")
+                            self.logger.info(f"API: File position in page: {printable_index}/{url_count}")
                             return (
                                 logs,
                                 result_next_page,
@@ -133,9 +119,7 @@ class API:
                                 saved_position,
                                 index_of_current_url,
                             )
-        self.logger.info(
-            f"API: Discovered {len(logs)} logs for log type {log_type} and page has completed"
-        )
+        self.logger.info(f"API: Discovered {len(logs)} logs for log type {log_type} and page has completed")
         return logs, result_next_page, caught_up, saved_file, saved_position, 0
 
     def get_siem_batches(
@@ -152,9 +136,7 @@ class API:
         }
         if next_page:
             params.update({"nextPage": next_page})
-        batch_response = self.make_api_request(
-            url=Endpoints.GET_SIEM_LOGS_BATCH, method=GET, params=params
-        )
+        batch_response = self.make_api_request(url=Endpoints.GET_SIEM_LOGS_BATCH, method=GET, params=params)
         batch_list = batch_response.get("value", [])
         urls = list(OrderedDict.fromkeys([batch.get("url") for batch in batch_list]))
         url_count = len(urls)
@@ -163,9 +145,7 @@ class API:
         self.logger.info(
             f"API: Discovered {url_count} batches for log type {log_type}. Response reporting {caught_up} that logs have caught up to query window"
         )
-        self.logger.info(
-            f"API: Next page token returned by Mimecast is {next_page_token}"
-        )
+        self.logger.info(f"API: Next page token returned by Mimecast is {next_page_token}")
         return urls, url_count, next_page_token, caught_up
 
     def resume_from_batch(
@@ -181,11 +161,7 @@ class API:
         batch_length = len(list_of_batches)
         sub_list = list_of_batches[
             next(
-                (
-                    index
-                    for index, url in enumerate(list_of_batches)
-                    if saved_url and saved_url in url
-                ),
+                (index for index, url in enumerate(list_of_batches) if saved_url and saved_url in url),
                 batch_length,
             ) :
         ]
@@ -198,28 +174,20 @@ class API:
             self.logger.info(f"API: Saved URL {saved_url} not found in list of batches")
             next_position = saved_file_position + 1
             if next_position > batch_length:
-                self.logger.info(
-                    f"API: No more files left to process in list: {next_position}/{batch_length}"
-                )
+                self.logger.info(f"API: No more files left to process in list: {next_position}/{batch_length}")
                 return []
-            self.logger.info(
-                f"API: Processing from saved file position: {next_position}/{batch_length}"
-            )
+            self.logger.info(f"API: Processing from saved file position: {next_position}/{batch_length}")
             list_of_batches = list_of_batches[next_position:]
         return list_of_batches
 
-    def get_siem_logs_from_batch(
-        self, url: str, saved_url: str, saved_position: int
-    ) -> Tuple[Iterator[bytes], str]:
+    def get_siem_logs_from_batch(self, url: str, saved_url: str, saved_position: int) -> Tuple[Iterator[bytes], str]:
         try:
             stripped_url = self.strip_query_params(url)
             line_start = 0
             if saved_url and saved_url in url:
                 line_start = saved_position
             response = requests.request(method="GET", url=url)
-            response_handler(
-                response=response, data_location=ResponseExceptionData.RESPONSE
-            )
+            response_handler(response=response, data_location=ResponseExceptionData.RESPONSE)
             content = self.get_gzip_content(response.content, line_start, stripped_url)
             return content, url, stripped_url
         except PluginException as error:
@@ -227,9 +195,7 @@ class API:
             self.logger.info(f"API: Error is {error}")
             return iter([]), url, stripped_url
 
-    def get_gzip_content(
-        self, content: bytes, line_start: int, stripped_url: str
-    ) -> Iterator[bytes]:
+    def get_gzip_content(self, content: bytes, line_start: int, stripped_url: str) -> Iterator[bytes]:
         if not content:
             return iter([])
         lines_count = 0
@@ -243,9 +209,7 @@ class API:
         except gzip.BadGzipFile:
             self.logger.error(f"API: Bad GZIP file found: {stripped_url}. Skipping...")
         except Exception as error:
-            self.logger.error(
-                f"API: Error in processing log file for url {stripped_url}"
-            )
+            self.logger.error(f"API: Error in processing log file for url {stripped_url}")
             self.logger.error(f"API: Error was {error}")
             self.logger.error("Skipping...")
         return iter([])
@@ -269,9 +233,7 @@ class API:
     ) -> Response:
         if auth:
             headers["Authorization"] = f"Bearer {self.access_token}"
-        request = Request(
-            url=url, method=method, headers=headers, params=params, data=data, json=json
-        )
+        request = Request(url=url, method=method, headers=headers, params=params, data=data, json=json)
         try:
             response = make_request(
                 _request=request,
@@ -291,12 +253,8 @@ class API:
             json_data = extract_json(response)
             if json_data.get("fail", [{}])[0].get("code") == "token_expired":
                 self.authenticate()
-                self.logger.info(
-                    "API: Token has expired, attempting re-authentication..."
-                )
-                return self.make_api_request(
-                    url, method, headers, json, data, params, return_json, auth
-                )
+                self.logger.info("API: Token has expired, attempting re-authentication...")
+                return self.make_api_request(url, method, headers, json, data, params, return_json, auth)
         if response.status_code == HTTPStatusCodes.UNAUTHORIZED:
             raise APIException(
                 preset=PluginException.Preset.API_KEY,
