@@ -51,11 +51,15 @@ class API:
         starting_url: str = None,
         starting_position: int = 0,
         log_size_limit: int = 250,
+        read_page_filenames: List[str] = [],
+        saved_file_position: int = 0,
     ) -> Tuple[List[str], str, bool]:
-        batch_download_urls, result_next_page, caught_up = self.get_siem_batches(
+        batch_download_urls, result_next_page, caught_up, new_filenames = self.get_siem_batches(
             log_type, query_date, next_page, page_size
         )
-        pool_data = self.resume_from_batch(batch_download_urls, starting_url)
+        merged_page_filenames = list(set(read_page_filenames + new_filenames))
+        pool_data = self.resume_from_batch(batch_download_urls, starting_url, saved_file_position)
+        pool_data = self.remove_read_download_urls(batch_download_urls, read_page_filenames)
         self.logger.info(f"API: Getting SIEM logs from batches for log type {log_type}...")
         self.logger.info(f"API: Applying page size limit of {page_size}")
         log_count = 0
@@ -95,9 +99,9 @@ class API:
                             result_next_page = next_page
                             self.logger.info(f"API: Log limit reached for log type {log_type} at {log_size_limit}")
                             self.logger.info(f"API: Saving file for next run: {saved_file} at line {saved_position}")
-                            return logs, result_next_page, caught_up, saved_file, saved_position
+                            return logs, result_next_page, caught_up, saved_file, saved_position, saved_page_filenames
         self.logger.info(f"API: Discovered {len(logs)} logs for log type {log_type}")
-        return logs, result_next_page, caught_up, saved_file, saved_position
+        return logs, result_next_page, caught_up, saved_file, saved_position, []
 
     def get_siem_batches(
         self, log_type: str, query_date: str, next_page: str, page_size: int = 100
@@ -120,19 +124,29 @@ class API:
             f"API: Discovered {len(batch_list)} batches for log type {log_type}. Response reporting {caught_up} that logs have caught up to query window"
         )
         urls = [batch.get("url") for batch in batch_list]
-        return urls, batch_response.get("@nextPage"), caught_up
+        filenames = []
+        for url in urls:
+            filenames.append(self.retrieve_filename(url))
+        return urls, batch_response.get("@nextPage"), caught_up, filenames
 
-    def resume_from_batch(self, list_of_batches: List[str], saved_url: str) -> Tuple[str, int]:
+    def retrieve_filename(self, url: str) -> str:
+        stripped_url = self.strip_query_params(url)
+        return stripped_url.rsplit('/', 1)[-1].replace('.json.gz', '')
+
+
+    def resume_from_batch(self, list_of_batches: List[str], saved_url: str, saved_file_position: int = 0) -> Tuple[str, int]:
         """
         Attempt to find a previously fully unread file if available, and trim list of URLs to that starting point.
+        If file is not found, default to using file positions and attempt to continue
         :param list_of_batches:
         :param saved_url:
         :return list_of_batches: Trimmed list of batches
         """
+        batch_length = len(list_of_batches)
         sub_list = list_of_batches[
             next(
                 (index for index, url in enumerate(list_of_batches) if saved_url and saved_url in url),
-                len(list_of_batches),
+                batch_length,
             ) :
         ]
         if sub_list:
@@ -140,8 +154,18 @@ class API:
             return sub_list
         if saved_url:
             self.logger.info(f"API: Saved URL {saved_url} not found in list of batches")
-            self.logger.info("API: Processing entire batch list")
+            next_position = saved_file_position + 1
+            if next_position > batch_length:
+                self.logger.info(f"API: No more files left to process in list: {next_position}/{batch_length}")
+                return []
+            self.logger.info(f"API: Processing from saved file position: {next_position}/{batch_length}")
+            list_of_batches = list_of_batches[next_position:]
         return list_of_batches
+
+    def remove_read_download_urls(self, list_of_batches: List[str] = [], read_page_filenames: List[str] = []):
+        read_filename_set = set(read_page_filenames)
+        filtered_batch_list = [url for url in list_of_batches if not any(filename in url for filename in read_filename_set)]
+        return filtered_batch_list
 
     def get_siem_logs_from_batch(self, url: str, saved_url: str, saved_position: int) -> Tuple[Iterator[bytes], str]:
         try:
