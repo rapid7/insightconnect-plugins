@@ -3,13 +3,17 @@ extension: plugin
 products: [insightconnect]
 name: palo_alto_pan_os
 title: Palo Alto Firewall
-description: "[PAN-OS](https://www.paloaltonetworks.com/documentation/80/pan-os) is the software that runs all Palo Alto Networks next-generation firewalls. This plugin utilizes the [PAN-OS API](https://www.paloaltonetworks.com/documentation/80/pan-os/xml-api) to provide programmatic management of the Palo Alto Firewall appliance(s). It supports managing firewalls individually or centralized via [Panorama](https://www.paloaltonetworks.com/network-security/panorama)"
-version: 6.1.7
+description: '[PAN-OS](https://www.paloaltonetworks.com/documentation/80/pan-os) is
+  the software that runs all Palo Alto Networks next-generation firewalls. This plugin
+  utilizes the [PAN-OS API](https://www.paloaltonetworks.com/documentation/80/pan-os/xml-api)
+  to provide programmatic management of the Palo Alto Firewall appliance(s). It supports
+  managing firewalls individually or centralized via [Panorama](https://www.paloaltonetworks.com/network-security/panorama)'
+version: 6.1.8
 sdk:
   type: full
-  version: 6.2.0
+  version: 6.2.6
   user: nobody
-supported_versions: ["9.0.3"]
+supported_versions: [9.0.3]
 connection_version: 6
 vendor: rapid7
 support: rapid7
@@ -19,57 +23,83 @@ resources:
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.paloaltonetworks.com/
   docs_url: https://docs.rapid7.com/insightconnect/palo-alto-firewall/
-key_features: 
- - "Create a new security policy rule to allow or block traffic based on IP addresses, services, applications, users, and zones"
- - "Add rules to and remove rules from existing policies to update the active or candidate firewall configuration"
- - "Commit the candidate configuration to update the active firewall configuration"
- - "Set, Edit, and Delete Objects in order to construct, schedule, and search for policy rules"
- - "Add an external dynamic list of IP addresses, URLs, and domains to an enforcement policy"
- - "Run an operational command to manage your firewall(s)"
- - "Query firewall log events to search for matches or patterns"
- - "Get candidate configuration and show active configuration to view configuration settings"
-requirements: ["Access to Palo Alto Next Generation firewall or Palo Alto Panorama device"]
-references: ["[Palo Alto PAN-OS API](https://www.paloaltonetworks.com/documentation/80/pan-os/xml-api)"]
-links: ["[Palo Alto PAN-OS](https://www.paloaltonetworks.com/documentation/80/pan-os)"]
+key_features:
+- Create a new security policy rule to allow or block traffic based on IP addresses,
+  services, applications, users, and zones
+- Add rules to and remove rules from existing policies to update the active or candidate
+  firewall configuration
+- Commit the candidate configuration to update the active firewall configuration
+- Set, Edit, and Delete Objects in order to construct, schedule, and search for policy
+  rules
+- Add an external dynamic list of IP addresses, URLs, and domains to an enforcement
+  policy
+- Run an operational command to manage your firewall(s)
+- Query firewall log events to search for matches or patterns
+- Get candidate configuration and show active configuration to view configuration
+  settings
+requirements: [Access to Palo Alto Next Generation firewall or Palo Alto Panorama
+    device]
+references: ['[Palo Alto PAN-OS API](https://www.paloaltonetworks.com/documentation/80/pan-os/xml-api)']
+links: ['[Palo Alto PAN-OS](https://www.paloaltonetworks.com/documentation/80/pan-os)']
 version_history:
- - "6.1.7 - Fix issue in 'add_address_object_to_group' action | SDK bump to 6.2.0 | Bumping requirements.txt"
- - "6.1.6 - Update SDK | Fix critical Snyk vulnerability"
- - "6.1.5 - Bumping requirements of `gunicorn` and `validators` | update the SDK to 5.4.9 | Added examples to all actions | Updated unit tests to include schema checks" 
- - "6.1.4 - Add information to every action on whether it uses Panorama or a direct firewall connection"
- - "6.1.3 - Fix `check_if_private` method in Set Address Object action | Improve `determine_address_type` method in Set Address Object action | Fix issue where Add External Dynamic List action fails when `repeat` input has been set to retrieve updates from list weekly | Add example for `filter` input for Retrieve Logs action"
- - "6.1.2 - Add `docs_url` in plugin spec | Update `source_url` in plugin spec"
- - "6.1.1 - Remove duplicate Troubleshooting section in documentation"
- - "6.1.0 - Improve error handling for xpath elements and paths in `pa_os_request.py` | New action Get Addresses from Group | Support adding a list of address objects in Add Address Object to Group action"
- - "6.0.4 - Update error handling in Add Address Object to Group, Check if Address in Group, Get Policy and Remove Address Object from Group actions"
- - "6.0.3 - Add Input and Output examples"
- - "6.0.2 - Fix issue where Set Network Object did not support IPv6"
- - "6.0.1 - Improve error handling in `pa_os_request.py`"
- - "6.0.0 - Update to Create Address Object to add Skip RFC 1918 input"
- - "5.1.1 - Fix issue where IPv6 address were not supported"
- - "5.1.0 - New action Add Address Object to Group"
- - "5.0.0 - Change plugin title to \"Palo Alto Firewall\" from \"Palo Alto PAN-OS\" and update remaining references"
- - "4.0.0 - Update to Create Address Object to make input consistent with other actions"
- - "3.0.0 - New action Remove Address Object from Group | Update to Check if Address in Group to match input of Remove Address Object from Group"
- - "2.2.0 - New action Check if Address in Group"
- - "2.1.0 - New action Get Policy"
- - "2.0.0 - Update to rename Set Address Object to Create Address Object | Update Create Address Object to accept a whitelist of address objects and auto detect the type of incoming object"
- - "1.5.7 - Default value of Commit action updated"
- - "1.5.6 - Fix issue where edit action was causing an error with certain input"
- - "1.5.5 - New spec and help.md format for the Extension Library"
- - "1.5.4 - Fix issue where new plugin version was causing SSL to fail"
- - "1.5.3 - Fix issue where undefined objects in security configurations caused actions to crash | Add debug logging to assist with future troubleshooting | Update to use the `komand/python-3-37-slim-plugin:3` Docker image to reduce plugin size"
- - "1.5.2 - Fix typo in plugin spec"
- - "1.5.1 - Fix issue where the Add to Policy action would sometimes fail with candidate configurations"
- - "1.5.0 - New action Set Address Object"
- - "1.4.1 - Update connection tests"
- - "1.4.0 - Update Add to Policy action to allow for updates to active configuration or candidate objects | Update Remove from Policy action to allow for updates to active configuration or candidate objects"
- - "1.3.1 - Update descriptions"
- - "1.3.0 - New action Add External Dynamic List"
- - "1.2.0 - New action Remove from Policy"
- - "1.1.0 - New action Add to Policy"
- - "1.0.0 - Add action to set a new security policy | Update to v2 Python plugin architecture | Support web server mode | Add error handling"
- - "0.1.1 - SSL bug fix in SDK"
- - "0.1.0 - Initial plugin"
+- 6.1.8 - Updated SDK to the latest version (6.2.6)
+- 6.1.7 - Fix issue in 'add_address_object_to_group' action | SDK bump to 6.2.0 |
+  Bumping requirements.txt
+- 6.1.6 - Update SDK | Fix critical Snyk vulnerability
+- 6.1.5 - Bumping requirements of `gunicorn` and `validators` | update the SDK to
+  5.4.9 | Added examples to all actions | Updated unit tests to include schema checks
+- 6.1.4 - Add information to every action on whether it uses Panorama or a direct
+  firewall connection
+- 6.1.3 - Fix `check_if_private` method in Set Address Object action | Improve `determine_address_type`
+  method in Set Address Object action | Fix issue where Add External Dynamic List
+  action fails when `repeat` input has been set to retrieve updates from list weekly
+  | Add example for `filter` input for Retrieve Logs action
+- 6.1.2 - Add `docs_url` in plugin spec | Update `source_url` in plugin spec
+- 6.1.1 - Remove duplicate Troubleshooting section in documentation
+- 6.1.0 - Improve error handling for xpath elements and paths in `pa_os_request.py`
+  | New action Get Addresses from Group | Support adding a list of address objects
+  in Add Address Object to Group action
+- 6.0.4 - Update error handling in Add Address Object to Group, Check if Address in
+  Group, Get Policy and Remove Address Object from Group actions
+- 6.0.3 - Add Input and Output examples
+- 6.0.2 - Fix issue where Set Network Object did not support IPv6
+- 6.0.1 - Improve error handling in `pa_os_request.py`
+- 6.0.0 - Update to Create Address Object to add Skip RFC 1918 input
+- 5.1.1 - Fix issue where IPv6 address were not supported
+- 5.1.0 - New action Add Address Object to Group
+- 5.0.0 - Change plugin title to "Palo Alto Firewall" from "Palo Alto PAN-OS" and
+  update remaining references
+- 4.0.0 - Update to Create Address Object to make input consistent with other actions
+- 3.0.0 - New action Remove Address Object from Group | Update to Check if Address
+  in Group to match input of Remove Address Object from Group
+- 2.2.0 - New action Check if Address in Group
+- 2.1.0 - New action Get Policy
+- 2.0.0 - Update to rename Set Address Object to Create Address Object | Update Create
+  Address Object to accept a whitelist of address objects and auto detect the type
+  of incoming object
+- 1.5.7 - Default value of Commit action updated
+- 1.5.6 - Fix issue where edit action was causing an error with certain input
+- 1.5.5 - New spec and help.md format for the Extension Library
+- 1.5.4 - Fix issue where new plugin version was causing SSL to fail
+- 1.5.3 - Fix issue where undefined objects in security configurations caused actions
+  to crash | Add debug logging to assist with future troubleshooting | Update to use
+  the `komand/python-3-37-slim-plugin:3` Docker image to reduce plugin size
+- 1.5.2 - Fix typo in plugin spec
+- 1.5.1 - Fix issue where the Add to Policy action would sometimes fail with candidate
+  configurations
+- 1.5.0 - New action Set Address Object
+- 1.4.1 - Update connection tests
+- 1.4.0 - Update Add to Policy action to allow for updates to active configuration
+  or candidate objects | Update Remove from Policy action to allow for updates to
+  active configuration or candidate objects
+- 1.3.1 - Update descriptions
+- 1.3.0 - New action Add External Dynamic List
+- 1.2.0 - New action Remove from Policy
+- 1.1.0 - New action Add to Policy
+- 1.0.0 - Add action to set a new security policy | Update to v2 Python plugin architecture
+  | Support web server mode | Add error handling
+- 0.1.1 - SSL bug fix in SDK
+- 0.1.0 - Initial plugin
 tags:
 - pan os
 - firewall
@@ -78,6 +108,26 @@ hub_tags:
   use_cases: [asset_inventory, threat_detection_and_response]
   keywords: [pan_os, firewall, palo_alto]
   features: []
+troubleshooting:
+- "For the URL, include `https://` e.g. `https://10.0.0.1` or `https://myfirewall.`\n\
+  \n When using the `Add External Dynamic List` action, a day and time must be chosen,\
+  \ even if they are not used.\n\n Action Connection Type:\n\n | Action name     \
+  \                 | Connection type       |\n | -----------                    \
+  \  | --------------------- |\n | Add Address Object to Group      | Direct firewall\
+  \       |\n | Add External Dynamic List        | Direct firewall       |\n | Add\
+  \ to Policy                    | Direct firewall       |\n | Check if Address in\
+  \ Group        | Direct firewall       |\n | Commit                           |\
+  \ Direct firewall       |\n | Create Address Object            | Direct firewall\
+  \       |\n | Delete                           | Panorama              |\n | Edit\
+  \                             | Panorama              |\n | Get                \
+  \              | Panorama              |\n | Get Addresses from Group         |\
+  \ Direct firewall       |\n | Get Policy                       | Direct firewall\
+  \       |\n | Op                               | Direct firewall       |\n | Remove\
+  \ Address Object from Group | Direct firewall       |\n | Remove from Policy   \
+  \            | Direct firewall       |\n | Retrieve Logs                    | Direct\
+  \ firewall       |\n | Set                              | Panorama             \
+  \ |\n | Set Security Policy Rule         | Direct firewall       |\n | Show    \
+  \                         | Panorama              |\n"
 types:
   config:
     data:
@@ -91,7 +141,7 @@ connection:
     type: string
     description: URL pointing to instance of Panorama or an individual Palo Alto Firewall
     required: true
-    example: "http://www.example.com"
+    example: http://www.example.com
   credentials:
     title: Credentials
     description: Username and password
@@ -101,14 +151,15 @@ connection:
   verify_cert:
     title: Verify Cert
     type: boolean
-    description: If true, validate the server's TLS certificate when contacting the firewall
-      over HTTPS
+    description: If true, validate the server's TLS certificate when contacting the
+      firewall over HTTPS
     required: true
     example: true
 actions:
   set_security_policy_rule:
     title: Set Security Policy Rule
-    description: Creates a new Security Policy Rule. This action uses a direct connection to the firewall
+    description: Creates a new Security Policy Rule. This action uses a direct connection
+      to the firewall
     input:
       rule_name:
         title: Rule Name
@@ -217,7 +268,7 @@ actions:
         description: Response from the firewall
         type: config
         required: false
-        example: {"@status": "success", "@code": "20", "msg": "command succeeded"}
+        example: {'@status': success, '@code': '20', msg: command succeeded}
   show:
     title: Show
     description: Gets active configuration. This action uses Panorama
@@ -234,7 +285,19 @@ actions:
         description: Response from the firewall
         type: config
         required: false
-        example: { "@status": "success", "result": { "system": { "hostname": "firewall", "ip-address": "10.27.0.0", "netmask": "255.255.254.0", "default-gateway": "10.27.0.1", "is-dhcp": "no", "ipv6-address": "unknown", "ipv6-link-local-address": "fe80::21b:17dd:dedf:c04a/64", "mac-address": "00:1b:17:ff:c0:4a", "time": "Wed Feb 10 13:03:32 2016", "uptime": "1 days, 19:35:51", "devicename": "firewall", "family": "3000", "model": "PA-3020", "serial": "001901000114", "sw-version": "7.1.", "global-protect-client-package-version": "2.0.0", "app-version": "557-3138", "app-release-date": "2016/02/09 16:56:02", "av-version": "2261-2700", "av-release-date": "2016/02/09 15:26:53", "threat-version": "557-3138", "threat-release-date": "2016/02/09 16:56:02", "wf-private-version": "0", "wf-private-release-date": "unknown", "url-db": "paloaltonetworks", "wildfire-version": "27518-28208", "wildfire-release-date": "2016/01/08 11:08:16", "url-filtering-version": "2016.01.08.407", "global-protect-datafile-version": "1452328885", "global-protect-datafile-release-date": "2016/01/09 08:41:25", "logdb-version": "7.0.9", "platform-family": "3000", "vpn-disable-mode": "off", "multi-vsys": "on", "operational-mode": "normal" } } }
+        example: {'@status': success, result: {system: {hostname: firewall, ip-address: 10.27.0.0,
+              netmask: 255.255.254.0, default-gateway: 10.27.0.1, is-dhcp: "no", ipv6-address: unknown,
+              ipv6-link-local-address: fe80::21b:17dd:dedf:c04a/64, mac-address: 00:1b:17:ff:c0:4a,
+              time: Wed Feb 10 13:03:32 2016, uptime: '1 days, 19:35:51', devicename: firewall,
+              family: '3000', model: PA-3020, serial: '001901000114', sw-version: 7.1.,
+              global-protect-client-package-version: 2.0.0, app-version: 557-3138,
+              app-release-date: 2016/02/09 16:56:02, av-version: 2261-2700, av-release-date: 2016/02/09
+                15:26:53, threat-version: 557-3138, threat-release-date: 2016/02/09
+                16:56:02, wf-private-version: '0', wf-private-release-date: unknown,
+              url-db: paloaltonetworks, wildfire-version: 27518-28208, wildfire-release-date: 2016/01/08
+                11:08:16, url-filtering-version: 2016.01.08.407, global-protect-datafile-version: '1452328885',
+              global-protect-datafile-release-date: 2016/01/09 08:41:25, logdb-version: 7.0.9,
+              platform-family: '3000', vpn-disable-mode: "off", multi-vsys: "on", operational-mode: normal}}}
   get:
     title: Get
     description: Get candidate configuration. This action uses Panorama
@@ -251,7 +314,12 @@ actions:
         description: Response from the firewall
         type: config
         required: false
-        example: {'@status':'success', '@code':'19', 'result': {'@total-count': '1', '@count':'1', 'entry': {'@name':'test_group', '@admin':'admin', '@dirtyid':'4', '@time':'2020/08/25 09:35:48', 'static':{'@admin':'admin', '@dirtyid':'4', '@time':'2020/08/25 09:35:48', 'member':{'@admin':'admin', '@dirtyid':'4', '@time':'2020/08/25 09:35:48', '#text': '1.1.1.1'}}, 'description': {'@admin':'admin', '@dirtyid':'4', '@time': '2020/08/25 09:35:48', '#text': 'test'}}}}
+        example: {'@status': success, '@code': '19', result: {'@total-count': '1',
+            '@count': '1', entry: {'@name': test_group, '@admin': admin, '@dirtyid': '4',
+              '@time': 2020/08/25 09:35:48, static: {'@admin': admin, '@dirtyid': '4',
+                '@time': 2020/08/25 09:35:48, member: {'@admin': admin, '@dirtyid': '4',
+                  '@time': 2020/08/25 09:35:48, '#text': 1.1.1.1}}, description: {
+                '@admin': admin, '@dirtyid': '4', '@time': 2020/08/25 09:35:48, '#text': test}}}}
   delete:
     title: Delete
     description: Delete an object. This action uses Panorama
@@ -268,7 +336,7 @@ actions:
         description: Response from the firewall
         type: config
         required: false
-        example: {"@status":"success", "@code":"20", "msg":"command succeeded"}
+        example: {'@status': success, '@code': '20', msg: command succeeded}
   set:
     title: Set
     description: Create a new object. This action uses Panorama
@@ -278,20 +346,21 @@ actions:
         type: string
         description: Xpath location to create the new object
         required: true
-        example: /config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='test rule']
+        example: /config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='test
+          rule']
       element:
         title: Element
         type: string
         description: XML representation of the object to be created
         required: true
-        example: "<application><member>8x8</member></application>"
+        example: <application><member>8x8</member></application>
     output:
       response:
         title: Response
         description: Response from the firewall
         type: object
         required: false
-        example: {"@status": "success", "@code": "20", "msg": "command succeeded"}
+        example: {'@status': success, '@code': '20', msg: command succeeded}
   edit:
     title: Edit
     description: Edit an existing object. This action uses Panorama
@@ -301,35 +370,37 @@ actions:
         type: string
         description: Xpath location of the object to edit
         required: true
-        example: /config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='test rule']/application
+        example: /config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='test
+          rule']/application
       element:
         title: Element
         type: string
         description: XML representation of the updated object. This replaces the previous
           object entirely, any unchanged attributes must be restated
         required: true
-        example: "<application><member>8x8</member></application>"
+        example: <application><member>8x8</member></application>
     output:
       response:
         title: Response
         description: Response from the firewall
         type: object
         required: false
-        example: {"@status":"success", "@code":"20", "msg":"command succeeded"}
+        example: {'@status': success, '@code': '20', msg: command succeeded}
   commit:
     title: Commit
-    description: Commits the candidate configuration. This action uses a direct connection to the firewall
+    description: Commits the candidate configuration. This action uses a direct connection
+      to the firewall
     input:
       cmd:
         title: CMD
         type: string
         description: XML specifying any commit arguments
         required: true
-        example: "<commit></commit>"
+        example: <commit></commit>
       action:
         title: Action
         type: string
-        description: 'Commit action (Default: ''all'')'
+        description: "Commit action (Default: 'all')"
         default: all
         required: false
         example: all
@@ -339,27 +410,42 @@ actions:
         description: Response from the firewall
         type: object
         required: false
-        example: {"@status": "success", "@code": "19", "result": {"msg": {"line": "Commit job enqueued with jobid 152" }, "job": "152"}}
+        example: {'@status': success, '@code': '19', result: {msg: {line: Commit job
+                enqueued with jobid 152}, job: '152'}}
   op:
     title: Op
-    description: Runs operational command. This action uses a direct connection to the firewall
+    description: Runs operational command. This action uses a direct connection to
+      the firewall
     input:
       cmd:
         title: CMD
         type: string
         description: XML specifying operation to be completed
         required: false
-        example: "<show><commit-locks/></show>"
+        example: <show><commit-locks/></show>
     output:
       response:
         title: Response
         description: Response from the firewall
         type: object
         required: false
-        example: { "@status": "success", "result": { "system": { "hostname": "firewall", "ip-address": "10.27.0.8", "netmask": "255.255.254.0", "default-gateway": "10.27.0.1", "is-dhcp": "no", "ipv6-address": "unknown", "ipv6-link-local-address": "fe80::21b:17dd:dedf:c04a/64", "mac-address": "00:1b:17:ff:c0:4a", "time": "Wed Feb 10 13:03:32 2016", "uptime": "1 days, 19:35:51", "devicename": "firewall", "family": "3000", "model": "PA-3020", "serial": "001901000114", "sw-version": "7.1.", "global-protect-client-package-version": "2.0.0", "app-version": "557-3138", "app-release-date": "2016/02/09  16:56:02", "av-version": "2261-2700", "av-release-date": "2016/02/09  15:26:53", "threat-version": "557-3138", "threat-release-date": "2016/02/09  16:56:02", "wf-private-version": "0", "wf-private-release-date": "unknown", "url-db": "paloaltonetworks", "wildfire-version": "27518-28208", "wildfire-release-date": "2016/01/08  11:08:16", "url-filtering-version": "2016.01.08.407", "global-protect-datafile-version": "1452328885", "global-protect-datafile-release-date": "2016/01/09 08:41:25", "logdb-version": "7.0.9", "platform-family": "3000", "vpn-disable-mode": "off", "multi-vsys": "on", "operational-mode": "normal" } } }
+        example: {'@status': success, result: {system: {hostname: firewall, ip-address: 10.27.0.8,
+              netmask: 255.255.254.0, default-gateway: 10.27.0.1, is-dhcp: "no", ipv6-address: unknown,
+              ipv6-link-local-address: fe80::21b:17dd:dedf:c04a/64, mac-address: 00:1b:17:ff:c0:4a,
+              time: Wed Feb 10 13:03:32 2016, uptime: '1 days, 19:35:51', devicename: firewall,
+              family: '3000', model: PA-3020, serial: '001901000114', sw-version: 7.1.,
+              global-protect-client-package-version: 2.0.0, app-version: 557-3138,
+              app-release-date: 2016/02/09  16:56:02, av-version: 2261-2700, av-release-date: 2016/02/09  15:26:53,
+              threat-version: 557-3138, threat-release-date: 2016/02/09  16:56:02,
+              wf-private-version: '0', wf-private-release-date: unknown, url-db: paloaltonetworks,
+              wildfire-version: 27518-28208, wildfire-release-date: 2016/01/08  11:08:16,
+              url-filtering-version: 2016.01.08.407, global-protect-datafile-version: '1452328885',
+              global-protect-datafile-release-date: 2016/01/09 08:41:25, logdb-version: 7.0.9,
+              platform-family: '3000', vpn-disable-mode: "off", multi-vsys: "on", operational-mode: normal}}}
   retrieve_logs:
     title: Retrieve Logs
-    description: Queries firewall logs. This action uses a direct connection to the firewall
+    description: Queries firewall logs. This action uses a direct connection to the
+      firewall
     input:
       log_type:
         title: Log Type
@@ -394,7 +480,7 @@ actions:
         type: string
         description: Search query. Format as a log filter expression
         required: false
-        example: "receive_time geq '2021/12/22 08:00:00'"
+        example: receive_time geq '2021/12/22 08:00:00'
       interval:
         title: Interval
         type: float
@@ -426,10 +512,14 @@ actions:
         description: Response from the firewall
         type: log
         required: false
-        example: {"@status": "success", "result": {"job": {"tenq": "17:32:53", "tdeq": "17:32:53", "tlast": "17:32:53", "status": "FIN", "id": "1466", "cached-logs": "0"}, "log": {"logs":{"-count": "0", "-progress": "100"}}, "meta": {"devices": {"entry": {"-name":"localhost.localdomain", "hostname": "localhost.localdomain", "vsys": {"entry": {"-name":"vsys1", "display-name": "vsys1"}}}}}}}
+        example: {'@status': success, result: {job: {tenq: "17:32:53", tdeq: "17:32:53",
+              tlast: "17:32:53", status: FIN, id: '1466', cached-logs: '0'}, log: {
+              logs: {-count: '0', -progress: '100'}}, meta: {devices: {entry: {-name: localhost.localdomain,
+                  hostname: localhost.localdomain, vsys: {entry: {-name: vsys1, display-name: vsys1}}}}}}}
   add_to_policy:
     title: Add to Policy
-    description: Add a rule to a firewall security policy. This action uses a direct connection to the firewall
+    description: Add a rule to a firewall security policy. This action uses a direct
+      connection to the firewall
     input:
       rule_name:
         title: Rule Name
@@ -518,22 +608,23 @@ actions:
         description: Status of the requested operation e.g. success, error, etc
         type: string
         required: false
-        example: "success"
+        example: success
       code:
         title: Code
         description: Response code from firewall
         type: string
         required: false
-        example: "20"
+        example: '20'
       message:
         title: Message
         description: A message with more detail about the status
         type: string
         required: false
-        example: "command succeeded"
+        example: command succeeded
   remove_from_policy:
     title: Remove from Policy
-    description: Remove a rule from a firewall security policy. This action uses a direct connection to the firewall
+    description: Remove a rule from a firewall security policy. This action uses a
+      direct connection to the firewall
     input:
       rule_name:
         title: Rule Name
@@ -622,22 +713,23 @@ actions:
         description: Status of the requested operation e.g. success, error, etc
         type: string
         required: false
-        example: "success"
+        example: success
       code:
         title: Code
         description: Response code from the firewall
         type: string
         required: false
-        example: "20"
+        example: '20'
       message:
         title: Message
         description: A message with more detail about the status
         type: string
         required: false
-        example: "command succeeded"
+        example: command succeeded
   add_external_dynamic_list:
     title: Add External Dynamic List
-    description: Add an external dynamic list. This action uses a direct connection to the firewall
+    description: Add an external dynamic list. This action uses a direct connection
+      to the firewall
     input:
       name:
         title: The Name of the List
@@ -681,8 +773,8 @@ actions:
         example: Five Minute
       time:
         title: Time
-        description: 'If repeat is daily or weekly, choose an hour on a 24 hour clock
-          to update (Default: '''')'
+        description: "If repeat is daily or weekly, choose an hour on a 24 hour clock\
+          \ to update (Default: '')"
         type: string
         required: true
         enum:
@@ -711,8 +803,8 @@ actions:
         - '21'
         - '22'
         - '23'
-        default: ""
-        example: "00"
+        default: ''
+        example: '00'
       day:
         title: Day
         description: If repeat is weekly, choose a day to update
@@ -727,7 +819,7 @@ actions:
         - Friday
         - Saturday
         - Sunday
-        default: ""
+        default: ''
         example: Monday
     output:
       status:
@@ -735,26 +827,28 @@ actions:
         description: The status of the requested operation e.g. success, error, etc
         type: string
         required: false
-        example: "success"
+        example: success
       code:
         title: Code
         description: Response code from the firewall
         type: string
         required: false
-        example: "20"
+        example: '20'
       message:
         title: Message
         description: A message with more detail about the status
         type: string
         required: false
-        example: "command succeeded"
+        example: command succeeded
   set_address_object:
     title: Create Address Object
-    description: Create a new address object. Supports IPv6. This action uses a direct connection to the firewall
+    description: Create a new address object. Supports IPv6. This action uses a direct
+      connection to the firewall
     input:
       address:
         title: Address
-        description: The IP address, network CIDR, or FQDN e.g. 192.168.1.1, 192.168.1.0/24, google.com
+        description: The IP address, network CIDR, or FQDN e.g. 192.168.1.1, 192.168.1.0/24,
+          google.com
         type: string
         example: 1.1.1.1
         required: true
@@ -772,7 +866,8 @@ actions:
         required: false
       tags:
         title: Tags
-        description: Tags for the address object. Use commas to separate multiple tags
+        description: Tags for the address object. Use commas to separate multiple
+          tags
         type: string
         example: malware
         required: false
@@ -785,9 +880,11 @@ actions:
         default: false
       whitelist:
         title: Whitelist
-        description: This list contains a set of network objects that should not be blocked. This can include IPs, CIDR notation, or domains. It can not include an IP range (such as 10.0.0.0-10.0.0.10)
-        type: "[]string"
-        example: ["198.51.100.100", "192.0.2.0/24", "example.com"]
+        description: This list contains a set of network objects that should not be
+          blocked. This can include IPs, CIDR notation, or domains. It can not include
+          an IP range (such as 10.0.0.0-10.0.0.10)
+        type: '[]string'
+        example: [198.51.100.100, 192.0.2.0/24, example.com]
         required: false
     output:
       status:
@@ -795,22 +892,23 @@ actions:
         description: The status of the requested operation e.g. success, error, etc
         type: string
         required: false
-        example: "success"
+        example: success
       code:
         title: Code
         description: Response code from the firewall
         type: string
         required: false
-        example: "20"
+        example: '20'
       message:
         title: Message
         description: A message with more detail about the status
         type: string
         required: false
-        example: "command succeeded"
+        example: command succeeded
   get_policy:
     title: Get Policy
-    description: Get a policy by name. This action uses a direct connection to the firewall
+    description: Get a policy by name. This action uses a direct connection to the
+      firewall
     input:
       policy_name:
         title: Policy Name
@@ -823,9 +921,9 @@ actions:
         title: Device Name
         description: Device name
         type: string
-        default: "localhost.localdomain"
+        default: localhost.localdomain
         required: true
-        example: "localhost.localdomain"
+        example: localhost.localdomain
         order: 2
       virtual_system:
         title: Virtual System Name
@@ -839,66 +937,68 @@ actions:
       to:
         title: To
         description: To
-        type: "[]string"
+        type: '[]string'
         required: false
-        example: ["any"]
+        example: [any]
       from:
         title: From
         description: From
-        type: "[]string"
+        type: '[]string'
         required: false
-        example: ["any"]
+        example: [any]
       source:
         title: Source
         description: Source
-        type: "[]string"
+        type: '[]string'
         required: false
-        example: ["1.1.1.1", "1.1.1.2"]
+        example: [1.1.1.1, 1.1.1.2]
       destination:
         title: Destination
         description: Destination
-        type: "[]string"
+        type: '[]string'
         required: false
-        example: ["any"]
+        example: [any]
       source_user:
         title: Source User
         description: Source user
-        type: "[]string"
+        type: '[]string'
         required: false
-        example: ["any"]
+        example: [any]
       category:
         title: Category
         description: Category
-        type: "[]string"
+        type: '[]string'
         required: false
-        example: ["any"]
+        example: [any]
       application:
         title: Application
         description: Application
-        type: "[]string"
+        type: '[]string'
         required: false
-        example: ["any"]
+        example: [any]
       service:
         title: Service
         description: Service
-        type: "[]string"
+        type: '[]string'
         required: false
-        example: ["application-default"]
+        example: [application-default]
       hip_profiles:
         title: HIP Profiles
         description: Host Information in Policy Enforcement profile
-        type: "[]string"
+        type: '[]string'
         required: false
-        example: ["any"]
+        example: [any]
       action:
         title: Action
         description: Action
-        type: "string"
+        type: string
         required: false
-        example: ["drop"]
+        example: [drop]
   check_if_address_object_in_group:
     title: Check if Address in Group
-    description: Checks to see if an IP address, CIDR IP address, or domain is in an Address Group. Supports IPv6. This action uses a direct connection to the firewall
+    description: Checks to see if an IP address, CIDR IP address, or domain is in
+      an Address Group. Supports IPv6. This action uses a direct connection to the
+      firewall
     input:
       group:
         title: Group
@@ -909,14 +1009,18 @@ actions:
         order: 1
       address:
         title: Address
-        description: The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, domain) within the address object instead of matching the name
+        description: The Address Object name to check. If Enable Search is set to
+          true then we search the addresses (IP, CIDR, domain) within the address
+          object instead of matching the name
         type: string
         example: 198.51.100.100
         required: true
         order: 2
       enable_search:
         title: Enable Search
-        description: When enabled, the Address input will accept a IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don't know the Address Object by its name
+        description: When enabled, the Address input will accept a IP, CIDR, or domain
+          name to search across the available Address Objects in the system. This
+          is useful when you don't know the Address Object by its name
         type: boolean
         example: false
         default: false
@@ -948,12 +1052,13 @@ actions:
       address_objects:
         title: Address Objects
         description: The names of the address objects that match or contain address
-        type: "[]string"
+        type: '[]string'
         required: false
-        example: ["198.51.100.100"]
+        example: [198.51.100.100]
   remove_address_object_from_group:
     title: Remove Address Object from Group
-    description: Removes an address object from an address group. Supports IPv6. This action uses a direct connection to the firewall
+    description: Removes an address object from an address group. Supports IPv6. This
+      action uses a direct connection to the firewall
     input:
       address_object:
         title: Address Object
@@ -994,13 +1099,14 @@ actions:
         example: true
   add_address_object_to_group:
     title: Add Address Object to Group
-    description: Adds address objects to an address group. This action uses a direct connection to the firewall
+    description: Adds address objects to an address group. This action uses a direct
+      connection to the firewall
     input:
       address_object:
         title: Address Object
         description: The names of the address objects to add
-        type: "[]string"
-        example: ["198.51.100.100", "198.51.100.101", "example.com"]
+        type: '[]string'
+        example: [198.51.100.100, 198.51.100.101, example.com]
         required: true
         order: 1
       group:
@@ -1036,12 +1142,14 @@ actions:
       address_objects:
         title: Address Objects
         description: Address objects currently in group
-        type: "[]string"
+        type: '[]string'
         required: true
-        example: ["test.com", "domain.com", "198.51.100.102", "198.51.100.100", "198.51.100.101", "example.com"]
+        example: [test.com, domain.com, 198.51.100.102, 198.51.100.100, 198.51.100.101,
+          example.com]
   get_addresses_from_group:
     title: Get Addresses from Group
-    description: Get addresses from an address group. This action uses a direct connection to the firewall
+    description: Get addresses from an address group. This action uses a direct connection
+      to the firewall
     input:
       group:
         title: Group
@@ -1076,24 +1184,27 @@ actions:
       fqdn_addresses:
         title: FQDN Addresses
         description: FQDN addresses currently in group
-        type: "[]string"
+        type: '[]string'
         required: true
-        example: ["domain.com", "test.com", "example1.com", "example2.com"]
+        example: [domain.com, test.com, example1.com, example2.com]
       ipv4_addresses:
         title: IPv4 Addresses
         description: IPv4 addresses currently in group
-        type: "[]string"
+        type: '[]string'
         required: true
-        example: ["1.1.1.1", "1.1.1.1/24", "1.2.3.4", "2.2.2.2", "2.2.4.5", "5.182.39.91", "8.8.8.8", "8.8.8.9", "8.8.8.10", "8.8.8.11", "20.20.20.20"]
+        example: [1.1.1.1, 1.1.1.1/24, 1.2.3.4, 2.2.2.2, 2.2.4.5, 5.182.39.91, 8.8.8.8,
+          8.8.8.9, 8.8.8.10, 8.8.8.11, 20.20.20.20]
       ipv6_addresses:
         title: IPv6 Addresses
         description: IPv6 addresses currently in group
-        type: "[]string"
+        type: '[]string'
         required: true
-        example: ["2001:0db8:85a3:0000:0000:8a2e:0370:7334"]
+        example: [2001:0db8:85a3:0000:0000:8a2e:0370:7334]
       all_addresses:
         title: All Addresses
         description: Addresses currently in group
-        type: "[]string"
+        type: '[]string'
         required: true
-        example: ["1.1.1.1", "1.1.1.1/24", "1.2.3.4", "2.2.2.2", "2.2.4.5", "5.182.39.91", "8.8.8.8", "8.8.8.9", "8.8.8.10", "8.8.8.11", "20.20.20.20", "2001:0db8:85a3:0000:0000:8a2e:0370:7334", "domain.com", "test.com", "example1.com", "example2.com"]
+        example: [1.1.1.1, 1.1.1.1/24, 1.2.3.4, 2.2.2.2, 2.2.4.5, 5.182.39.91, 8.8.8.8,
+          8.8.8.9, 8.8.8.10, 8.8.8.11, 20.20.20.20, 2001:0db8:85a3:0000:0000:8a2e:0370:7334,
+          domain.com, test.com, example1.com, example2.com]
