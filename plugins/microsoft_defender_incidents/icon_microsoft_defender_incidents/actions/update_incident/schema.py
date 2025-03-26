@@ -33,7 +33,8 @@ class Output:
 
 
 class UpdateIncidentInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -74,7 +75,15 @@ class UpdateIncidentInput(insightconnect_plugin_runtime.Input):
         "SecurityPersonnel",
         "SecurityTesting",
         "UnwantedSoftware",
-        "Other"
+        "Other",
+        "MultiStagedAttack",
+        "MaliciousUserActivity",
+        "CompromisedUser",
+        "Phishing",
+        "LineOfBusinessApplication",
+        "ConfirmedUserActivity",
+        "Clean",
+        "InsufficientData"
       ],
       "order": 5
     },
@@ -111,14 +120,16 @@ class UpdateIncidentInput(insightconnect_plugin_runtime.Input):
   ],
   "definitions": {}
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class UpdateIncidentOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -622,7 +633,8 @@ class UpdateIncidentOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

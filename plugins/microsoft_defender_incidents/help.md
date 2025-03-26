@@ -15,7 +15,7 @@ Manage security incidents with Microsoft Defender 365
 
 # Supported Product Versions
 
-* 2024-06-24
+* 2025-03-26
 
 # Documentation
 
@@ -233,7 +233,7 @@ This action is used to updates specific incident by ID
 |assignedTo|string|None|False|Owner of the incident|None|ExampleOwner|None|None|
 |classification|string|None|False|Incident's classification|["", "Unknown", "FalsePositive", "TruePositive"]|Unknown|None|None|
 |comments|string|None|False|Comment to be added to the incident|None|Example Comment|None|None|
-|determination|string|None|False|Specifies the determination of the incident|["", "NotAvailable", "Apt", "Malware", "SecurityPersonnel", "SecurityTesting", "UnwantedSoftware", "Other"]|ExampleOwner|None|None|
+|determination|string|None|False|Specifies the determination of the incident|["", "NotAvailable", "Apt", "Malware", "SecurityPersonnel", "SecurityTesting", "UnwantedSoftware", "Other", "MultiStagedAttack", "MaliciousUserActivity", "CompromisedUser", "Phishing", "LineOfBusinessApplication", "ConfirmedUserActivity", "Clean", "InsufficientData"]|ExampleOwner|None|None|
 |identifier|integer|None|True|Incident's ID|None|1|None|None|
 |status|string|None|False|Specifies the current status of incidents to show|["", "Active", "Resolved", "Redirected"]|Active|None|None|
 |tags|[]string|None|False|List of incident tags|None|["Tag1", "Tag2"]|None|None|
@@ -524,6 +524,7 @@ Example output:
 
 # Version History
 
+* 2.0.1 - Adding additional `determination` values | SDK bump to 6.2.6
 * 2.0.0 - Add better error handling for missing output values
 * 1.0.0 - Initial plugin (Actions: List All Incidents, Get Incident, Update Incident, Triggers: Get New Incidents)
 

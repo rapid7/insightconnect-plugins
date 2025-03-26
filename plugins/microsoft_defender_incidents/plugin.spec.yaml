@@ -4,13 +4,13 @@ products: [insightconnect]
 name: microsoft_defender_incidents
 title: Microsoft Defender Incidents
 description: Manage security incidents with Microsoft Defender 365
-version: 2.0.0
+version: 2.0.1
 connection_version: 2
 key_features: ["List All Incidents", "Get Incident", "Update Incident", "Get New Incidents Trigger"]
 requirements: ["Requires a set of Azure credentials such as application (client) ID, tenant ID, and client secret key with necessary permissions (Microsoft Threat Protection -> Incident.Read.All, Incident.ReadWrite.All, and AdvancedHunting.Read.All) to monitor and modify Microsoft Defender Incidents"]
 vendor: rapid7
 support: rapid7
-supported_versions: ["2024-06-24"]
+supported_versions: ["2025-03-26"]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/microsoft_defender_incidents
@@ -22,7 +22,7 @@ tags:
   - defender
 sdk:
   type: slim
-  version: 5.6.0
+  version: 6.2.6
   user: nobody
 hub_tags:
   use_cases: [data_utility]
@@ -34,6 +34,7 @@ links:
 references:
   - "[Microsoft Defender XDR API Documentation](https://learn.microsoft.com/en-us/defender-xdr/)"
 version_history:
+  - "2.0.1 - Adding additional `determination` values | SDK bump to 6.2.6"
   - "2.0.0 - Add better error handling for missing output values"
   - "1.0.0 - Initial plugin (Actions: List All Incidents, Get Incident, Update Incident, Triggers: Get New Incidents)"
 connection:
@@ -559,6 +560,14 @@ actions:
           - SecurityTesting
           - UnwantedSoftware
           - Other
+          - MultiStagedAttack
+          - MaliciousUserActivity
+          - CompromisedUser
+          - Phishing
+          - LineOfBusinessApplication
+          - ConfirmedUserActivity
+          - Clean
+          - InsufficientData
         type: string
         required: false
         example: ExampleOwner
