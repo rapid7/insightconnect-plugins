@@ -1,4 +1,6 @@
-import komand
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 from .schema import ListShareFilesInput, ListShareFilesOutput, Input, Output
 
 # Custom imports below
@@ -8,7 +10,7 @@ import smb
 from komand_smb.util import utils
 
 
-class ListShareFiles(komand.Action):
+class ListShareFiles(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="list_share_files",
@@ -23,7 +25,7 @@ class ListShareFiles(komand.Action):
         try:
             tz = pytz.timezone(tz_input)
         except pytz.exceptions.UnknownTimeZoneError as e:
-            raise Exception(
+            raise PluginException(
                 f"{tz_input} is not a valid timezone; "
                 f"reference https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for valid "
                 f"timezone names"
@@ -50,18 +52,18 @@ class ListShareFiles(komand.Action):
                         "file_size": f.file_size,
                     }
                 )
-        except smb.smb_structs.OperationFailure as e:
+        except smb.smb_structs.OperationFailure as e:  # noqa: c-extension-no-member
             self.logger.error(e)
-            raise Exception(
-                "Failed to list files from share. This may occur when the share name or path are not " "valid."
+            raise PluginException(
+                "Failed to list files from share. This may occur when the share name or path are not valid."
             ) from e
-        except smb.base.SMBTimeout as e:
-            raise Exception(
+        except smb.base.SMBTimeout as e:  # noqa: c-extension-no-member
+            raise PluginException(
                 "Timeout reached when connecting to SMB endpoint. Validate network connectivity or "
                 "extend connection timeout"
             ) from e
-        except smb.base.NotReadyError as e:
-            raise Exception(
+        except smb.base.NotReadyError as e:  # noqa: c-extension-no-member
+            raise PluginException(
                 "The SMB connection is not authenticated or the authentication has failed.  Verify the "
                 "credentials of the connection in use."
             ) from e
