@@ -1,6 +1,6 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetAttributesInput, GetAttributesOutput, Input, Output, Component
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import smb
@@ -8,7 +8,7 @@ import pytz
 from komand_smb.util import utils
 
 
-class GetAttributes(komand.Action):
+class GetAttributes(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_attributes",
@@ -28,8 +28,7 @@ class GetAttributes(komand.Action):
         except pytz.exceptions.UnknownTimeZoneError as e:
             raise PluginException(
                 cause=f"{tz_input} is not a valid timezone.",
-                assistance=f"Reference https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for valid "
-                f"timezone names.",
+                assistance="Reference: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for valid timezone names.",
             ) from e
 
         try:
@@ -44,17 +43,17 @@ class GetAttributes(komand.Action):
                 "file_size": attr.file_size,
             }
             return {Output.ATTRIBUTES: file_attributes}
-        except smb.smb_structs.OperationFailure as e:
+        except smb.smb_structs.OperationFailure as e:  # noqa: c-extension-no-member
             raise PluginException(
                 cause="Failed to get file attributes.", assistance="This may occur when the file does not exist."
             )
-        except smb.base.SMBTimeout as e:
+        except smb.base.SMBTimeout as e:  # noqa: c-extension-no-member
             raise PluginException(
                 cause="Timeout reached when connecting to SMB endpoint.",
                 assistance="Validate network connectivity.",
                 data=e,
             )
-        except smb.base.NotReadyError as e:
+        except smb.base.NotReadyError as e:  # noqa: c-extension-no-member
             raise PluginException(
                 cause="The SMB connection is not authenticated or the authentication has failed.",
                 assistance="Verify the credentials of the connection in use.",

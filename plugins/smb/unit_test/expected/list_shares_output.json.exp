@@ -1,0 +1,23 @@
+{
+    "shares": [
+        {
+            "comments": "Remote Admin",
+            "name": "ADMIN$"
+        },
+        {
+            "comments": "Default share",
+            "name": "C$"
+        }
+    ],
+
+    "shares": [
+        {
+            "comments": "Remote Admin",
+             "name": "ADMIN$"
+        },
+        {
+             "comments": "Default Share",
+             "name": "C$"
+        }
+    ]
+}

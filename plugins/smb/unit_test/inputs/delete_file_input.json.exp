@@ -1,0 +1,5 @@
+{
+    "share_name": "smbshare",
+    "file_path": "test.txt",
+    "timeout": 30
+}

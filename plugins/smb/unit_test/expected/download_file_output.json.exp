@@ -1,0 +1,6 @@
+{
+    "file": {
+        "content": "this is a new log 1\r\nthis is a new log 2\r\nthis is a new log 3\r\nthis is a new log 4\r\n\r\n",
+        "filename": "filetailertest.log"
+    }
+}
