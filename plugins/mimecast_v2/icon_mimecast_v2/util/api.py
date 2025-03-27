@@ -89,8 +89,7 @@ class API:
                 pool_data,
             )
             for content, url, stripped_url in result:
-                index_of_current_url = batch_download_urls.index(url)
-                printable_index = index_of_current_url + 1
+                printable_index = batch_download_urls.index(url) + 1
                 with lock:
                     for index, new_line in enumerate(content):
                         try:
@@ -120,10 +119,9 @@ class API:
                                 caught_up,
                                 saved_file,
                                 saved_position,
-                                index_of_current_url,
                             )
         self.logger.info(f"API: Discovered {len(logs)} logs for log type {log_type} and page has completed")
-        return logs, result_next_page, caught_up, saved_file, saved_position, 0
+        return logs, result_next_page, caught_up, saved_file, saved_position
 
     def get_siem_batches(
         self, log_type: str, query_date: str, next_page: str, page_size: int = 100
