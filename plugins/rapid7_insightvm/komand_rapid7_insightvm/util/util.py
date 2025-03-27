@@ -1,13 +1,15 @@
 import time
 from functools import wraps
+from logging import Logger
 from typing import Any, Callable, Dict
 
-import insightconnect_plugin_runtime
 from dateutil.parser import parse
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
+
+from komand_rapid7_insightvm.util.cache_file_manager import CacheFileManager
 
 
 def convert_date_to_iso8601(date: str) -> str:
@@ -84,13 +86,13 @@ def adhoc_sql_report(connection, logger, report_payload: dict):
     return report_contents
 
 
-def write_to_cache(filename, data):
-    with insightconnect_plugin_runtime.helper.open_cachefile(filename) as cache_file:
+def write_to_cache(logger: Logger, filename: str, data: str) -> None:
+    with CacheFileManager(logger, filename) as cache_file:
         cache_file.write(data)
 
 
-def read_from_cache(filename):
-    with insightconnect_plugin_runtime.helper.open_cachefile(filename) as cache_file:
+def read_from_cache(logger: Logger, filename: str) -> str:
+    with CacheFileManager(logger, filename) as cache_file:
         contents = cache_file.read()
 
         return contents
@@ -105,7 +107,10 @@ def check_not_null(account: Dict[str, Any], var_name: str) -> str:
     """
     value = account.get(var_name)
     if value in (None, ""):
-        raise PluginException(cause=f"{var_name} has not been entered.", assistance=f"Enter valid {var_name}")
+        raise PluginException(
+            cause=f"{var_name} has not been entered.",
+            assistance=f"Enter valid {var_name}",
+        )
     else:
         return value
 
