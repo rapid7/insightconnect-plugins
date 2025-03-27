@@ -103,6 +103,7 @@ Example output:
 
 # Version History
 
+* 1.0.4 - `Monitor SIEM Logs` Fix issue where duplicate batches in a page are processed | SDK update to 6.2.6
 * 1.0.3 - `Monitor SIEM Logs` Fix issue retrieving logs from larger log files
 * 1.0.2 - `Monitor SIEM Logs` Limit the amount of logs used to deduplicate logs in subsequent runs
 * 1.0.1 - Update SDK | Improve output for a successful connection test

@@ -1,0 +1,16 @@
+{
+    "value": [
+        {
+            "url": "https://example.com",
+            "expiry": "2000-01-10T00:10:00.000Z",
+            "size": 354
+        },
+        {
+            "url": "https://example.com",
+            "expiry": "2000-01-10T00:10:00.000Z",
+            "size": 354
+        }
+    ],
+    "@nextPage": "NDU1NA==",
+    "isCaughtUp": true
+}

@@ -3,6 +3,7 @@ from insightconnect_plugin_runtime.exceptions import APIException, PluginExcepti
 from insightconnect_plugin_runtime.helper import hash_sha1
 from .schema import MonitorSiemLogsInput, MonitorSiemLogsOutput, MonitorSiemLogsState, Input, Output, Component, State
 from typing import Dict, List, Tuple
+from logging import getLevelName
 from datetime import datetime, timezone, timedelta
 import copy
 
@@ -50,6 +51,8 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         )
 
     def run(self, params={}, state={}, custom_config={}):  # pylint: disable=unused-argument
+        log_level = self.get_log_level(custom_config.get("log_level", "info"))
+        self.connection.api.set_log_level(log_level)
         existing_state = state.copy()
         try:
             now_date = datetime.now(tz=timezone.utc).date()
@@ -281,3 +284,12 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             log_type_config[QUERY_DATE] = query_date.strftime(DATE_FORMAT)
         state[QUERY_CONFIG] = query_config
         return state, has_more_pages
+
+    def get_log_level(self, log_level: str = "info") -> int:
+        log_level_mappings = {
+            "INFO": "DEBUG",  # we want to keep logging to a minimal so don't print our debug logs
+            "DEBUG": "INFO",
+            # we want to change loggers in this task to be of type "info" and included for traceability
+        }
+
+        return getLevelName(log_level_mappings.get(log_level.upper()))
