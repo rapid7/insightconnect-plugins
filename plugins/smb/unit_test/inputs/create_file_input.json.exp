@@ -1,0 +1,7 @@
+{
+    "share_name": "smbshare",
+    "file_path": "test.txt",
+    "file_content": "V2hhdCdzIHVwIGd1eXMh",
+    "overwrite_existing": true,
+    "timeout": 30
+}

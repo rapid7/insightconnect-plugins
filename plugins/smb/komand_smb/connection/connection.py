@@ -1,12 +1,13 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
 
 # Custom imports below
 from smb.SMBConnection import SMBConnection
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 import socket
 
 
-class Connection(komand.Connection):
+class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         self.conn = None
         super(self.__class__, self).__init__(input=ConnectionSchema())
@@ -45,19 +46,17 @@ class Connection(komand.Connection):
             result = self.conn.connect(host, port, timeout=params.get(Input.TIMEOUT))
             if not result:
                 error = "Failed to authenticate to SMB endpoint. Validate credentials and connection details."
-                raise Exception(error)
+                raise PluginException(error)
         except socket.timeout:
-            raise Exception(
+            raise PluginException(
                 "Timeout reached when connecting to SMB endpoint. Validate network connectivity or "
                 "extend connection timeout"
             )
-        except Exception as e:
+        except PluginException as e:
             self.logger.error(f"Error connecting to SMB endpoint: {e}")
             raise
 
     def test(self):
-        from komand.exceptions import ConnectionTestException
-
         message = "Hello World"
         try:
             echo_response = self.conn.echo(message.encode())
