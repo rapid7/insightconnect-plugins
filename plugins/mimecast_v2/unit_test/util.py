@@ -134,4 +134,3 @@ class Util:
             return MockResponse(200, "monitor_siem_logs_additional", gzip=True)
         if args[0].url == "https://invalidjson.com/":
             return MockResponse(200, "monitor_siem_logs_json_error", gzip=True)
-        print("Uhoh")
