@@ -139,11 +139,11 @@ class API:
             params.update({"nextPage": next_page})
         batch_response = self.make_api_request(url=Endpoints.GET_SIEM_LOGS_BATCH, method=GET, params=params)
         batch_list = batch_response.get("value", [])
-        urls = list(OrderedDict.fromkeys([batch.get("url") for batch in batch_list]))
+        urls = list(OrderedDict.fromkeys([batch.get("url") for batch in batch_list]))  # Remove duplicates from list
         url_count = len(urls)
         caught_up = batch_response.get("isCaughtUp")
         next_page_token = batch_response.get("@nextPage")
-        if self.log_level != 10:
+        if self.log_level != 10:  # If we are running in debug logging
             stripped_urls = []
             for url in urls:
                 stripped_urls.append(self.strip_query_params(url))

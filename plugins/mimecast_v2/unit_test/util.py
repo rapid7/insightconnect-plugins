@@ -97,6 +97,12 @@ class Util:
         ]:
             return MockResponse(200, "monitor_siem_logs_batch")
         if args[0].url in [
+            f"{BASE_URL}siem/v1/batch/events/cg?type=receipt&dateRangeStartsAt=2000-01-03&dateRangeEndsAt=2000-01-03&pageSize=100",
+            f"{BASE_URL}siem/v1/batch/events/cg?type=attachment+protect&dateRangeStartsAt=2000-01-03&dateRangeEndsAt=2000-01-03&pageSize=100",
+            f"{BASE_URL}siem/v1/batch/events/cg?type=url+protect&dateRangeStartsAt=2000-01-03&dateRangeEndsAt=2000-01-03&pageSize=100",
+        ]:
+            return MockResponse(200, "monitor_siem_logs_batch_duplicates")
+        if args[0].url in [
             "https://api.services.mimecast.com/siem/v1/batch/events/cg?type=attachment+protect&dateRangeStartsAt=1999-12-31&dateRangeEndsAt=1999-12-31&pageSize=1&nextPage=KDU1NA%3D%3D",
             "https://api.services.mimecast.com/siem/v1/batch/events/cg?type=receipt&dateRangeStartsAt=1999-12-31&dateRangeEndsAt=1999-12-31&pageSize=1&nextPage=KDU1NA%3D%3D",
             "https://api.services.mimecast.com/siem/v1/batch/events/cg?type=url+protect&dateRangeStartsAt=1999-12-31&dateRangeEndsAt=1999-12-31&pageSize=1&nextPage=KDU1NA%3D%3D",
@@ -128,3 +134,4 @@ class Util:
             return MockResponse(200, "monitor_siem_logs_additional", gzip=True)
         if args[0].url == "https://invalidjson.com/":
             return MockResponse(200, "monitor_siem_logs_json_error", gzip=True)
+        print("Uhoh")
