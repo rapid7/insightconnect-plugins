@@ -33,6 +33,10 @@ class API:
         self.client_secret = client_secret
         self.logger = logger
         self.access_token = None
+        self.log_level = 10  # Default info log level
+
+    def set_log_level(self, log_level: str) -> None:
+        self.log_level = log_level
 
     def authenticate(self) -> None:
         self.logger.info("API: Authenticating...")
@@ -61,13 +65,12 @@ class API:
         starting_url: str = None,
         starting_position: int = 0,
         log_size_limit: int = 250,
-        saved_url_position: int = 0,
     ) -> Tuple[List[str], str, bool]:
         self.logger.info(f"API: Applying page size limit of {page_size} for log type {log_type}")
         batch_download_urls, url_count, result_next_page, caught_up = self.get_siem_batches(
             log_type, query_date, next_page, page_size
         )
-        pool_data = self.resume_from_batch(batch_download_urls, starting_url, saved_url_position)
+        pool_data = self.resume_from_batch(batch_download_urls, starting_url)
         self.logger.info(f"API: Getting SIEM logs from batches for log type {log_type}...")
         log_count = 0
         manager = Manager()
@@ -142,15 +145,21 @@ class API:
         url_count = len(urls)
         caught_up = batch_response.get("isCaughtUp")
         next_page_token = batch_response.get("@nextPage")
+        if self.log_level != 10:
+            stripped_urls = []
+            for url in urls:
+                stripped_urls.append(self.strip_query_params(url))
+            self.logger.log(self.log_level, f"API DEBUG: Batch count: {url_count}")
+            self.logger.log(self.log_level, f"API DEBUG: Caught up: {caught_up}")
+            self.logger.log(self.log_level, f"API DEBUG: Next page token: {next_page}")
+            self.logger.log(self.log_level, f"API DEBUG: Batch URLS: {stripped_urls}")
         self.logger.info(
             f"API: Discovered {url_count} batches for log type {log_type}. Response reporting {caught_up} that logs have caught up to query window"
         )
         self.logger.info(f"API: Next page token returned by Mimecast is {next_page_token}")
         return urls, url_count, next_page_token, caught_up
 
-    def resume_from_batch(
-        self, list_of_batches: List[str], saved_url: str, saved_file_position: int = 0
-    ) -> Tuple[str, int]:
+    def resume_from_batch(self, list_of_batches: List[str], saved_url: str) -> List:
         """
         Attempt to find a previously fully unread file if available, and trim list of URLs to that starting point.
         If file is not found, default to using file positions and attempt to continue
@@ -172,15 +181,12 @@ class API:
             return sub_list
         if saved_url:
             self.logger.info(f"API: Saved URL {saved_url} not found in list of batches")
-            next_position = saved_file_position + 1
-            if next_position > batch_length:
-                self.logger.info(f"API: No more files left to process in list: {next_position}/{batch_length}")
-                return []
-            self.logger.info(f"API: Processing from saved file position: {next_position}/{batch_length}")
-            list_of_batches = list_of_batches[next_position:]
+            self.logger.info("API: Processing entire batch list")
         return list_of_batches
 
-    def get_siem_logs_from_batch(self, url: str, saved_url: str, saved_position: int) -> Tuple[Iterator[bytes], str]:
+    def get_siem_logs_from_batch(
+        self, url: str, saved_url: str, saved_position: int
+    ) -> Tuple[Iterator[bytes], str, str]:
         try:
             stripped_url = self.strip_query_params(url)
             line_start = 0

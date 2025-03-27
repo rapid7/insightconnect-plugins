@@ -23,7 +23,6 @@ STUB_STATE_EXPECTED = {
             "query_date": "2000-01-06",
             "saved_file_position": 0,
             "saved_file_url": None,
-            "saved_file_url_position": 0,
         },
         "receipt": {
             "caught_up": True,
@@ -32,7 +31,6 @@ STUB_STATE_EXPECTED = {
             "query_date": "2000-01-06",
             "saved_file_position": 0,
             "saved_file_url": None,
-            "saved_file_url_position": 0,
         },
         "url protect": {
             "caught_up": True,
@@ -41,7 +39,6 @@ STUB_STATE_EXPECTED = {
             "query_date": "2000-01-06",
             "saved_file_position": 0,
             "saved_file_url": None,
-            "saved_file_url_position": 0,
         },
     }
 }
@@ -55,7 +52,6 @@ STUB_STATE_EXPECTED_INVALID_RECEIPT = {
             "query_date": "2000-01-06",
             "saved_file_position": 0,
             "saved_file_url": None,
-            "saved_file_url_position": 0,
         },
         "receipt": {
             "caught_up": True,
@@ -64,7 +60,6 @@ STUB_STATE_EXPECTED_INVALID_RECEIPT = {
             "query_date": "2000-01-05",
             "saved_file_position": 0,
             "saved_file_url": None,
-            "saved_file_url_position": 0,
         },
         "url protect": {
             "caught_up": True,
@@ -73,7 +68,6 @@ STUB_STATE_EXPECTED_INVALID_RECEIPT = {
             "query_date": "2000-01-06",
             "saved_file_position": 0,
             "saved_file_url": None,
-            "saved_file_url_position": 0,
         },
     }
 }
@@ -111,7 +105,6 @@ STUB_STATE_LIMIT_LOGS = {
             "query_date": "1999-12-31",
             "saved_file_position": 1,
             "saved_file_url": "https://exampleadditional.com",
-            "saved_file_url_position": 0,
         },
         "receipt": {
             "caught_up": False,
@@ -120,7 +113,6 @@ STUB_STATE_LIMIT_LOGS = {
             "query_date": "1999-12-31",
             "saved_file_position": 1,
             "saved_file_url": "https://exampleadditional.com",
-            "saved_file_url_position": 0,
         },
         "url protect": {
             "caught_up": False,
@@ -129,7 +121,6 @@ STUB_STATE_LIMIT_LOGS = {
             "query_date": "1999-12-31",
             "saved_file_position": 1,
             "saved_file_url": "https://exampleadditional.com",
-            "saved_file_url_position": 0,
         },
     }
 }
@@ -143,7 +134,6 @@ STUB_STATE_SECOND_RUN_EXPECTED = {
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
             "saved_file_position": 0,
             "saved_file_url": None,
-            "saved_file_url_position": 0,
         },
         "receipt": {
             "caught_up": True,
@@ -152,7 +142,6 @@ STUB_STATE_SECOND_RUN_EXPECTED = {
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
             "saved_file_position": 0,
             "saved_file_url": None,
-            "saved_file_url_position": 0,
         },
         "url protect": {
             "caught_up": True,
@@ -161,7 +150,6 @@ STUB_STATE_SECOND_RUN_EXPECTED = {
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
             "saved_file_position": 0,
             "saved_file_url": None,
-            "saved_file_url_position": 0,
         },
     },
 }
@@ -175,7 +163,6 @@ STUB_STATE_EXPECTED_CUSTOM_CONFIG = {
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
             "saved_file_position": 0,
             "saved_file_url": None,
-            "saved_file_url_position": 0,
         },
         "receipt": {
             "caught_up": True,
@@ -184,7 +171,6 @@ STUB_STATE_EXPECTED_CUSTOM_CONFIG = {
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
             "saved_file_position": 0,
             "saved_file_url": None,
-            "saved_file_url_position": 0,
         },
         "url protect": {
             "caught_up": True,
@@ -193,7 +179,6 @@ STUB_STATE_EXPECTED_CUSTOM_CONFIG = {
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
             "saved_file_position": 0,
             "saved_file_url": None,
-            "saved_file_url_position": 0,
         },
     },
 }
@@ -207,7 +192,6 @@ STUB_STATE_EXPECTED_LOG_LIMIT = {
             "query_date": "1999-12-31",
             "saved_file_position": 1,
             "saved_file_url": "https://example.com",
-            "saved_file_url_position": 0,
         },
         "receipt": {
             "caught_up": False,
@@ -216,7 +200,6 @@ STUB_STATE_EXPECTED_LOG_LIMIT = {
             "query_date": "1999-12-31",
             "saved_file_position": 1,
             "saved_file_url": "https://example.com",
-            "saved_file_url_position": 0,
         },
         "url protect": {
             "caught_up": False,
@@ -225,7 +208,6 @@ STUB_STATE_EXPECTED_LOG_LIMIT = {
             "query_date": "1999-12-31",
             "saved_file_position": 1,
             "saved_file_url": "https://example.com",
-            "saved_file_url_position": 0,
         },
     }
 }
@@ -239,7 +221,6 @@ STUB_STATE_EXPECTED_LOG_LIMIT_SECOND_RUN = {
             "query_date": "1999-12-31",
             "saved_file_position": 0,
             "saved_file_url": None,
-            "saved_file_url_position": 0,
         },
         "receipt": {
             "caught_up": True,
@@ -248,7 +229,6 @@ STUB_STATE_EXPECTED_LOG_LIMIT_SECOND_RUN = {
             "query_date": "1999-12-31",
             "saved_file_position": 0,
             "saved_file_url": None,
-            "saved_file_url_position": 0,
         },
         "url protect": {
             "caught_up": True,
@@ -257,7 +237,6 @@ STUB_STATE_EXPECTED_LOG_LIMIT_SECOND_RUN = {
             "query_date": "1999-12-31",
             "saved_file_position": 0,
             "saved_file_url": None,
-            "saved_file_url_position": 0,
         },
     }
 }
