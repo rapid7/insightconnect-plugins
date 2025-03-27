@@ -208,17 +208,15 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                 log_size_limit = LARGE_LOG_SIZE_LIMIT if log_type == RECEIPT else SMALL_LOG_SIZE_LIMIT
                 if log_limits:
                     log_size_limit = log_limits.get(log_type, log_size_limit)
-                logs, results_next_page, caught_up, saved_file, saved_position = (
-                    self.connection.api.get_siem_logs(
-                        log_type=log_type,
-                        query_date=log_type_config.get(QUERY_DATE),
-                        next_page=log_type_config.get(NEXT_PAGE),
-                        page_size=page_size,
-                        max_threads=thead_count,
-                        starting_url=log_type_config.get(SAVED_FILE_URL),
-                        starting_position=log_type_config.get(SAVED_FILE_POSITION, 0),
-                        log_size_limit=log_size_limit,
-                    )
+                logs, results_next_page, caught_up, saved_file, saved_position = self.connection.api.get_siem_logs(
+                    log_type=log_type,
+                    query_date=log_type_config.get(QUERY_DATE),
+                    next_page=log_type_config.get(NEXT_PAGE),
+                    page_size=page_size,
+                    max_threads=thead_count,
+                    starting_url=log_type_config.get(SAVED_FILE_URL),
+                    starting_position=log_type_config.get(SAVED_FILE_POSITION, 0),
+                    log_size_limit=log_size_limit,
                 )
                 log_hash_size_limit = LARGE_LOG_HASH_SIZE_LIMIT if log_type == RECEIPT else SMALL_LOG_HASH_SIZE_LIMIT
                 deduplicated_logs, log_hashes = self.compare_and_dedupe_hashes(
