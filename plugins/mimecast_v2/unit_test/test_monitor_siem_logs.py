@@ -43,6 +43,35 @@ STUB_STATE_EXPECTED = {
     }
 }
 
+STUB_STATE_EXPECTED_DUPLICATES = {
+    "query_config": {
+        "attachment protect": {
+            "caught_up": True,
+            "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
+            "next_page": "NDU1NA==",
+            "query_date": "2000-01-03",
+            "saved_file_position": 0,
+            "saved_file_url": None,
+        },
+        "receipt": {
+            "caught_up": True,
+            "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
+            "next_page": "NDU1NA==",
+            "query_date": "2000-01-03",
+            "saved_file_position": 0,
+            "saved_file_url": None,
+        },
+        "url protect": {
+            "caught_up": True,
+            "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
+            "next_page": "NDU1NA==",
+            "query_date": "2000-01-03",
+            "saved_file_position": 0,
+            "saved_file_url": None,
+        },
+    }
+}
+
 STUB_STATE_EXPECTED_INVALID_RECEIPT = {
     "query_config": {
         "attachment protect": {
@@ -66,6 +95,35 @@ STUB_STATE_EXPECTED_INVALID_RECEIPT = {
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
             "next_page": "NDU1NA==",
             "query_date": "2000-01-06",
+            "saved_file_position": 0,
+            "saved_file_url": None,
+        },
+    }
+}
+
+STUB_STATE_BATCH_DUPLICATES = {
+    "query_config": {
+        "attachment protect": {
+            "caught_up": True,
+            "log_hashes": [],
+            "next_page": "NDU1NA==",
+            "query_date": "2000-01-02",
+            "saved_file_position": 0,
+            "saved_file_url": None,
+        },
+        "receipt": {
+            "caught_up": True,
+            "log_hashes": [],
+            "next_page": "NDU1NA==",
+            "query_date": "2000-01-02",
+            "saved_file_position": 0,
+            "saved_file_url": None,
+        },
+        "url protect": {
+            "caught_up": True,
+            "log_hashes": [],
+            "next_page": "NDU1NA==",
+            "query_date": "2000-01-02",
             "saved_file_position": 0,
             "saved_file_url": None,
         },
@@ -370,6 +428,16 @@ class TestMonitorLogs(TestCase):
                 {},
                 Util.read_file_to_dict("expected/monitor_siem_logs_invalid_receipt.json.exp"),
                 STUB_STATE_EXPECTED_INVALID_RECEIPT,
+                True,
+                200,
+                None,
+            ],
+            [
+                "remove_duplicates",
+                STUB_STATE_BATCH_DUPLICATES,
+                {},
+                Util.read_file_to_dict("expected/monitor_siem_logs.json.exp"),
+                STUB_STATE_EXPECTED_DUPLICATES,
                 True,
                 200,
                 None,
