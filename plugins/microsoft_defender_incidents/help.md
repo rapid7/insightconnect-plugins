@@ -233,7 +233,7 @@ This action is used to updates specific incident by ID
 |assignedTo|string|None|False|Owner of the incident|None|ExampleOwner|None|None|
 |classification|string|None|False|Incident's classification|["", "TruePositive", "FalsePositive", "InformationalExpectedActivity"]|TruePositive|None|None|
 |comments|string|None|False|Comment to be added to the incident|None|Example Comment|None|None|
-|determination|string|None|False|Specifies the determination of the incident|["", "MultiStagedAttack", "MaliciousUserActivity", "CompromisedUser", "Malware", "Phishing", "UnwantedSoftware", "SecurityTesting", "LineOfBusinessApplication", "NoEnoughDataToValidate", "ConfirmedUserActivity", "Clean", "Other"]|Phishing|None|None|
+|determination|string|None|False|Specifies the determination of the incident|["", "MultiStagedAttack", "MaliciousUserActivity", "CompromisedAccount", "Malware", "Phishing", "UnwantedSoftware", "SecurityTesting", "LineOfBusinessApplication", "NoEnoughDataToValidate", "ConfirmedActivity", "Other"]|Phishing|None|None|
 |identifier|integer|None|True|Incident's ID|None|1|None|None|
 |status|string|None|False|Specifies the current status of incidents to show|["", "Active", "Resolved", "Redirected", "InProgress"]|Active|None|None|
 |tags|[]string|None|False|List of incident tags|None|["Tag1", "Tag2"]|None|None|
@@ -264,7 +264,7 @@ Example input:
 |classification|string|True|Specification for the incident, where possible values are - InformationalExpectedActivity, FalsePositive, and TruePositive|TruePositive|
 |comments|[]comment|True|Array of comments created by secops when managing the incident|[{"comment": "pen testing", "createdBy": "user@example.com", "createdTime": "2021-05-02T09:34:21.5519738Z"}, {"comment": "valid incident", "createdBy": "user@example.com", "createdTime": "2021-05-02T09:36:27.6652581Z"}]|
 |createdTime|date|True|Time when incident was first created|2022-05-06T12:20:18.364306|
-|determination|string|True|Specifies the determination of the incident, where possible values are - MultiStagedAttack, MaliciousUserActivity, CompromisedUser, Malware, Phishing, UnwantedSoftware, SecurityTesting, LineOfBusinessApplication, NoEnoughDataToValidate, ConfirmedUserActivity, Clean and Other|Malware|
+|determination|string|True|Specifies the determination of the incident, where possible values are - MultiStagedAttack, MaliciousUserActivity, CompromisedAccount, Malware, Phishing, UnwantedSoftware, SecurityTesting, LineOfBusinessApplication, NoEnoughDataToValidate, ConfirmedActivity and Other|Malware|
 |incidentId|integer|True|Identifier of incident|1|
 |incidentName|string|True|String value containing incident's name|IncidentName|
 |lastUpdateTime|date|True|Time when incident was last updated on the backend|2022-05-06T12:20:18.364306|

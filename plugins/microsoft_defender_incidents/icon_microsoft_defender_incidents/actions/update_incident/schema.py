@@ -71,15 +71,14 @@ class UpdateIncidentInput(insightconnect_plugin_runtime.Input):
         "",
         "MultiStagedAttack",
         "MaliciousUserActivity",
-        "CompromisedUser",
+        "CompromisedAccount",
         "Malware",
         "Phishing",
         "UnwantedSoftware",
         "SecurityTesting",
         "LineOfBusinessApplication",
         "NoEnoughDataToValidate",
-        "ConfirmedUserActivity",
-        "Clean",
+        "ConfirmedActivity",
         "Other"
       ],
       "order": 5
@@ -173,7 +172,7 @@ class UpdateIncidentOutput(insightconnect_plugin_runtime.Output):
     "determination": {
       "type": "string",
       "title": "Determination",
-      "description": "Specifies the determination of the incident, where possible values are - MultiStagedAttack, MaliciousUserActivity, CompromisedUser, Malware, Phishing, UnwantedSoftware, SecurityTesting, LineOfBusinessApplication, NoEnoughDataToValidate, ConfirmedUserActivity, Clean and Other",
+      "description": "Specifies the determination of the incident, where possible values are - MultiStagedAttack, MaliciousUserActivity, CompromisedAccount, Malware, Phishing, UnwantedSoftware, SecurityTesting, LineOfBusinessApplication, NoEnoughDataToValidate, ConfirmedActivity and Other",
       "order": 7
     },
     "incidentId": {
