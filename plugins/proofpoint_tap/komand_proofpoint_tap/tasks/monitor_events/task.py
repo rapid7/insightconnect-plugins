@@ -13,6 +13,7 @@ from .schema import MonitorEventsInput, MonitorEventsOutput, MonitorEventsState,
 INITIAL_LOOKBACK_HOURS = 24  # Lookback time in hours for first run
 SUBSEQUENT_LOOKBACK_HOURS = 24 * 7  # Lookback time in hours for subsequent runs
 API_MAX_LOOKBACK = 24 * 7  # API limits to 7 days ago
+END_TIME_MINUTES = 60  # End time window of 60 minutes from now
 
 
 class MonitorEvents(insightconnect_plugin_runtime.Task):
@@ -35,6 +36,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
         existing_state = state.copy()
         self.connection.client.toggle_rate_limiting = False
         has_more_pages = False
+        end_time_minutes = custom_config.get("end_time_minutes", END_TIME_MINUTES)
         try:
             now = self.get_current_time() - timedelta(minutes=1)
             last_collection_date = state.get(self.LAST_COLLECTION_DATE)
@@ -57,7 +59,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
                 )
                 api_limit, _ = self._apply_api_limit(api_limit, custom_api_limit, 0, "custom_api_limit")
             start_time, next_page_index = self._apply_api_limit(api_limit, start_time, next_page_index, "start_time")
-            end_time = self._check_end_time((start_time + timedelta(hours=1)), now).isoformat()
+            end_time = self._check_end_time((start_time + timedelta(minutes=end_time_minutes)), now).isoformat()
             start_time = start_time.isoformat()
             query_params = {"format": "JSON"}
             parameters = SiemUtils.prepare_time_range(start_time, end_time, query_params)
