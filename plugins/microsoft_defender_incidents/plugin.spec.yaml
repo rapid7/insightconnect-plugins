@@ -557,15 +557,14 @@ actions:
           - ""
           - MultiStagedAttack
           - MaliciousUserActivity
-          - CompromisedUser
+          - CompromisedAccount
           - Malware
           - Phishing
           - UnwantedSoftware
           - SecurityTesting
           - LineOfBusinessApplication
           - NoEnoughDataToValidate
-          - ConfirmedUserActivity
-          - Clean
+          - ConfirmedActivity
           - Other
         type: string
         required: false
@@ -621,7 +620,7 @@ actions:
         example: TruePositive
       determination:
         title: Determination
-        description: Specifies the determination of the incident, where possible values are - MultiStagedAttack, MaliciousUserActivity, CompromisedUser, Malware, Phishing, UnwantedSoftware, SecurityTesting, LineOfBusinessApplication, NoEnoughDataToValidate, ConfirmedUserActivity, Clean and Other
+        description: Specifies the determination of the incident, where possible values are - MultiStagedAttack, MaliciousUserActivity, CompromisedAccount, Malware, Phishing, UnwantedSoftware, SecurityTesting, LineOfBusinessApplication, NoEnoughDataToValidate, ConfirmedActivity and Other
         type: string
         required: true
         example: Malware
