@@ -13,7 +13,7 @@ from .schema import MonitorEventsInput, MonitorEventsOutput, MonitorEventsState,
 INITIAL_LOOKBACK_HOURS = 24  # Lookback time in hours for first run
 SUBSEQUENT_LOOKBACK_HOURS = 24 * 7  # Lookback time in hours for subsequent runs
 API_MAX_LOOKBACK = 24 * 7  # API limits to 7 days ago
-END_TIME_MINUTES = 60  # End time window of 60 minutes from now
+MINUTES_BOUNDARY = 60  # Start time window boundary of 60 minutes from now
 
 
 class MonitorEvents(insightconnect_plugin_runtime.Task):
@@ -36,7 +36,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
         existing_state = state.copy()
         self.connection.client.toggle_rate_limiting = False
         has_more_pages = False
-        end_time_minutes = custom_config.get("end_time_minutes", END_TIME_MINUTES)
+        minutes_boundary = custom_config.get("minutes_boundary", MINUTES_BOUNDARY)
         try:
             now = self.get_current_time() - timedelta(minutes=1)
             last_collection_date = state.get(self.LAST_COLLECTION_DATE)
@@ -49,7 +49,9 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             is_paginating = (not first_run) and next_page_index
 
             api_limit = self._get_api_limit_date_time(is_paginating, API_MAX_LOOKBACK, now)
-            start_time = self._determine_start_time(now, first_run, is_paginating, last_collection_date)
+            start_time = self._determine_start_time(
+                now, first_run, is_paginating, last_collection_date, minutes_boundary
+            )
             if custom_config and first_run:
                 custom_api_limit, start_time = self._apply_custom_config(
                     now, custom_config, API_MAX_LOOKBACK, start_time
@@ -59,7 +61,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
                 )
                 api_limit, _ = self._apply_api_limit(api_limit, custom_api_limit, 0, "custom_api_limit")
             start_time, next_page_index = self._apply_api_limit(api_limit, start_time, next_page_index, "start_time")
-            end_time = self._check_end_time((start_time + timedelta(minutes=end_time_minutes)), now).isoformat()
+            end_time = self._check_end_time((start_time + timedelta(minutes=minutes_boundary)), now).isoformat()
             start_time = start_time.isoformat()
             query_params = {"format": "JSON"}
             parameters = SiemUtils.prepare_time_range(start_time, end_time, query_params)
@@ -227,13 +229,13 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             specific_date = start_time
         return cutoff_date_time, specific_date
 
-    def _determine_start_time(self, now, first_run, is_paginating, last_collection_date) -> int:
+    def _determine_start_time(self, now, first_run, is_paginating, last_collection_date, minutes_boundary: int) -> int:
         if first_run:
             integration_status = "First run"
             start_time = now - timedelta(hours=1)
         elif is_paginating:
             integration_status = "Pagination run"
-            start_time = last_collection_date - timedelta(hours=1)
+            start_time = last_collection_date - timedelta(minutes=minutes_boundary)
         else:
             integration_status = "Subsequent run"
             start_time = last_collection_date
