@@ -71,7 +71,7 @@ Example input:
 |classification|string|True|Specification for the incident, where possible values are - Unknown, FalsePositive, and TruePositive|Unknown|
 |comments|[]comment|True|Array of comments created by secops when managing the incident|[{"comment": "pen testing", "createdBy": "user@example.com", "createdTime": "2021-05-02T09:34:21.5519738Z"}, {"comment": "valid incident", "createdBy": "user@example.com", "createdTime": "2021-05-02T09:36:27.6652581Z"}]|
 |createdTime|date|True|Time when incident was first created|2022-05-06T12:20:18.364306|
-|determination|string|True|Specifies the determination of the incident, where possible values are - NotAvailable, Apt, Malware, SecurityPersonnel, SecurityTesting, UnwantedSoftware, and Other|NotAvailable|
+|determination|string|True|Specifies the determination of the incident, where possible values are - NotAvailable, Malware, SecurityTesting, UnwantedSoftware, and Other|NotAvailable|
 |incidentId|integer|True|Identifier of incident|1|
 |incidentName|string|True|String value containing incident's name|IncidentName|
 |lastUpdateTime|date|True|Time when incident was last updated on the backend|2022-05-06T12:20:18.364306|
@@ -231,11 +231,11 @@ This action is used to updates specific incident by ID
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |assignedTo|string|None|False|Owner of the incident|None|ExampleOwner|None|None|
-|classification|string|None|False|Incident's classification|["", "Unknown", "FalsePositive", "TruePositive"]|Unknown|None|None|
+|classification|string|None|False|Incident's classification|["", "TruePositive", "FalsePositive", "InformationalExpectedActivity"]|TruePositive|None|None|
 |comments|string|None|False|Comment to be added to the incident|None|Example Comment|None|None|
-|determination|string|None|False|Specifies the determination of the incident|["", "NotAvailable", "Apt", "Malware", "SecurityPersonnel", "SecurityTesting", "UnwantedSoftware", "Other", "MultiStagedAttack", "MaliciousUserActivity", "CompromisedUser", "Phishing", "LineOfBusinessApplication", "ConfirmedUserActivity", "Clean", "InsufficientData"]|ExampleOwner|None|None|
+|determination|string|None|False|Specifies the determination of the incident|["", "MultiStagedAttack", "MaliciousUserActivity", "CompromisedUser", "Malware", "Phishing", "UnwantedSoftware", "SecurityTesting", "LineOfBusinessApplication", "NoEnoughDataToValidate", "ConfirmedUserActivity", "Clean", "Other"]|Phishing|None|None|
 |identifier|integer|None|True|Incident's ID|None|1|None|None|
-|status|string|None|False|Specifies the current status of incidents to show|["", "Active", "Resolved", "Redirected"]|Active|None|None|
+|status|string|None|False|Specifies the current status of incidents to show|["", "Active", "Resolved", "Redirected", "InProgress"]|Active|None|None|
 |tags|[]string|None|False|List of incident tags|None|["Tag1", "Tag2"]|None|None|
   
 Example input:
@@ -243,9 +243,9 @@ Example input:
 ```
 {
   "assignedTo": "ExampleOwner",
-  "classification": "Unknown",
+  "classification": "TruePositive",
   "comments": "Example Comment",
-  "determination": "ExampleOwner",
+  "determination": "Phishing",
   "identifier": 1,
   "status": "Active",
   "tags": [
@@ -261,10 +261,10 @@ Example input:
 | :--- | :--- | :--- | :--- | :--- |
 |alerts|[]alert|False|Array containing all of the alerts related to the incident|[{"alertId": "faf8edc936-85f8-a603-b800-08d8525cf099", "incidentId": 924518, "serviceSource": "OfficeATP", "creationTime": "2020-09-06T12:07:54.3716642Z", "lastUpdatedTime": "2020-09-06T12:37:40.88Z", "firstActivity": "2020-09-06T12:04:00Z", "lastActivity": "2020-09-06T12:04:00Z", "title": "Email reported by user as malware or phish", "description": "This alert is triggered when any email message is reported as malware or phish by users -V1.0.0.2", "category": "InitialAccess", "status": "InProgress", "severity": "Informational", "investigationState": "Queued", "detectionSource": "OfficeATP", "assignedTo": "Automation", "entities": [{"entityType": "MailBox", "userPrincipalName": "user@example.com", "mailboxDisplayName": "user", "mailboxAddress": "user@example.com"}]}]|
 |assignedTo|string|True|Owner of the incident|user@example.com|
-|classification|string|True|Specification for the incident, where possible values are - Unknown, FalsePositive, and TruePositive|TruePositive|
+|classification|string|True|Specification for the incident, where possible values are - InformationalExpectedActivity, FalsePositive, and TruePositive|TruePositive|
 |comments|[]comment|True|Array of comments created by secops when managing the incident|[{"comment": "pen testing", "createdBy": "user@example.com", "createdTime": "2021-05-02T09:34:21.5519738Z"}, {"comment": "valid incident", "createdBy": "user@example.com", "createdTime": "2021-05-02T09:36:27.6652581Z"}]|
 |createdTime|date|True|Time when incident was first created|2022-05-06T12:20:18.364306|
-|determination|string|True|Specifies the determination of the incident, where possible values are - NotAvailable, Apt, Malware, SecurityPersonnel, SecurityTesting, UnwantedSoftware, and Other|Malware|
+|determination|string|True|Specifies the determination of the incident, where possible values are - MultiStagedAttack, MaliciousUserActivity, CompromisedUser, Malware, Phishing, UnwantedSoftware, SecurityTesting, LineOfBusinessApplication, NoEnoughDataToValidate, ConfirmedUserActivity, Clean and Other|Malware|
 |incidentId|integer|True|Identifier of incident|1|
 |incidentName|string|True|String value containing incident's name|IncidentName|
 |lastUpdateTime|date|True|Time when incident was last updated on the backend|2022-05-06T12:20:18.364306|
@@ -502,7 +502,7 @@ Example output:
 |Comments|[]comment|None|None|Array of comments created by secops when managing the incident|None|
 |Created Time|date|None|None|Time when incident was first created|None|
 |Detection Source|string|None|None|Specifies source of detection|None|
-|Determination|string|None|None|Specifies the determination of the incident, where possible values are - NotAvailable, Apt, Malware, SecurityPersonnel, SecurityTesting, UnwantedSoftware, and Other|None|
+|Determination|string|None|None|Specifies the determination of the incident, where possible values are - NotAvailable, Malware, SecurityTesting, UnwantedSoftware, and Other|None|
 |Incident ID|integer|None|None|Identifier of incident|None|
 |Incident Name|string|None|None|String value containing incident's name|None|
 |Last Updated Time|date|None|None|Time when incident was last updated on the backend|None|
@@ -524,6 +524,7 @@ Example output:
 
 # Version History
 
+* 2.0.2 - Updating `update_incident` input values to correlate with documentation
 * 2.0.1 - Adding additional `determination` values | SDK bump to 6.2.6
 * 2.0.0 - Add better error handling for missing output values
 * 1.0.0 - Initial plugin (Actions: List All Incidents, Get Incident, Update Incident, Triggers: Get New Incidents)
