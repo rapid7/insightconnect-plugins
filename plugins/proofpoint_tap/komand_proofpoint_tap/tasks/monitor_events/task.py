@@ -13,13 +13,14 @@ from .schema import MonitorEventsInput, MonitorEventsOutput, MonitorEventsState,
 INITIAL_LOOKBACK_HOURS = 24  # Lookback time in hours for first run
 SUBSEQUENT_LOOKBACK_HOURS = 24 * 7  # Lookback time in hours for subsequent runs
 API_MAX_LOOKBACK = 24 * 7  # API limits to 7 days ago
+MINUTES_BOUNDARY = 60  # Start time window boundary of 60 minutes from now
+DEFAULT_SPLIT_SIZE = 1000
 
 
 class MonitorEvents(insightconnect_plugin_runtime.Task):
     LAST_COLLECTION_DATE = "last_collection_date"
     NEXT_PAGE_INDEX = "next_page_index"
     STATUS_CODE = "status_code"
-    SPLIT_SIZE = 1000
     PREVIOUS_LOGS_HASHES = "previous_logs_hashes"
 
     def __init__(self):
@@ -30,11 +31,14 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             output=MonitorEventsOutput(),
             state=MonitorEventsState(),
         )
+        self.split_size = DEFAULT_SPLIT_SIZE
 
     def run(self, params={}, state={}, custom_config={}):  # pylint: disable=unused-argument
         existing_state = state.copy()
         self.connection.client.toggle_rate_limiting = False
         has_more_pages = False
+        minutes_boundary = custom_config.get("minutes_boundary", MINUTES_BOUNDARY)
+        self.split_size = custom_config.get("split_size", DEFAULT_SPLIT_SIZE)
         try:
             now = self.get_current_time() - timedelta(minutes=1)
             last_collection_date = state.get(self.LAST_COLLECTION_DATE)
@@ -47,7 +51,9 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             is_paginating = (not first_run) and next_page_index
 
             api_limit = self._get_api_limit_date_time(is_paginating, API_MAX_LOOKBACK, now)
-            start_time = self._determine_start_time(now, first_run, is_paginating, last_collection_date)
+            start_time = self._determine_start_time(
+                now, first_run, is_paginating, last_collection_date, minutes_boundary
+            )
             if custom_config and first_run:
                 custom_api_limit, start_time = self._apply_custom_config(
                     now, custom_config, API_MAX_LOOKBACK, start_time
@@ -57,7 +63,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
                 )
                 api_limit, _ = self._apply_api_limit(api_limit, custom_api_limit, 0, "custom_api_limit")
             start_time, next_page_index = self._apply_api_limit(api_limit, start_time, next_page_index, "start_time")
-            end_time = self._check_end_time((start_time + timedelta(hours=1)), now).isoformat()
+            end_time = self._check_end_time((start_time + timedelta(minutes=minutes_boundary)), now).isoformat()
             start_time = start_time.isoformat()
             query_params = {"format": "JSON"}
             parameters = SiemUtils.prepare_time_range(start_time, end_time, query_params)
@@ -73,7 +79,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
                 # Send back a maximum of SPLIT_SIZE events at a time (use page index to track this in state)
                 new_unique_logs, new_logs_hashes = self.compare_hashes(
                     previous_logs_hashes,
-                    parsed_logs[current_page_index * self.SPLIT_SIZE : (current_page_index + 1) * self.SPLIT_SIZE],
+                    parsed_logs[current_page_index * self.split_size : (current_page_index + 1) * self.split_size],
                 )
 
                 state, has_more_pages = self.determine_page_and_state_values(
@@ -82,7 +88,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
 
                 # PLGN-811: reduce the number of pages of hashes we store to prevent hitting DynamoDB limits
                 state[self.PREVIOUS_LOGS_HASHES] = (
-                    [*previous_logs_hashes[-self.SPLIT_SIZE :], *new_logs_hashes]
+                    [*previous_logs_hashes[-self.split_size :], *new_logs_hashes]
                     if current_page_index > 0
                     else new_logs_hashes
                 )
@@ -123,8 +129,8 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
         now: datetime,
     ) -> (dict, bool):
         # Determine pagination based on the response from API or if we've queried until now.
-        if (not next_page_index and len(parsed_logs) > self.SPLIT_SIZE) or (
-            next_page_index and (next_page_index + 1) * self.SPLIT_SIZE < len(parsed_logs)
+        if (not next_page_index and len(parsed_logs) > self.split_size) or (
+            next_page_index and (next_page_index + 1) * self.split_size < len(parsed_logs)
         ):
             state[self.NEXT_PAGE_INDEX] = next_page_index + 1 if next_page_index else 1
             has_more_pages = True
@@ -225,13 +231,13 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             specific_date = start_time
         return cutoff_date_time, specific_date
 
-    def _determine_start_time(self, now, first_run, is_paginating, last_collection_date) -> int:
+    def _determine_start_time(self, now, first_run, is_paginating, last_collection_date, minutes_boundary: int) -> int:
         if first_run:
             integration_status = "First run"
             start_time = now - timedelta(hours=1)
         elif is_paginating:
             integration_status = "Pagination run"
-            start_time = last_collection_date - timedelta(hours=1)
+            start_time = last_collection_date - timedelta(minutes=minutes_boundary)
         else:
             integration_status = "Subsequent run"
             start_time = last_collection_date

@@ -2,13 +2,14 @@
 from setuptools import setup, find_packages
 
 
-setup(name="proofpoint_tap-rapid7-plugin",
-      version="4.1.11",
-      description="[Proofpoint Targeted Attack Protection](https://www.proofpoint.com/us/products/ransomware-and-targeted-attack-protection) (TAP) helps you stay ahead of attackers with an innovative approach that detects, analyzes and blocks advanced threats before they reach your inbox. This plugin enables users to parse TAP alerts",
-      author="rapid7",
-      author_email="",
-      url="",
-      packages=find_packages(),
-      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_proofpoint_tap']
-      )
+setup(
+    name="proofpoint_tap-rapid7-plugin",
+    version="4.1.12",
+    description="[Proofpoint Targeted Attack Protection](https://www.proofpoint.com/us/products/ransomware-and-targeted-attack-protection) (TAP) helps you stay ahead of attackers with an innovative approach that detects, analyzes and blocks advanced threats before they reach your inbox. This plugin enables users to parse TAP alerts",
+    author="rapid7",
+    author_email="",
+    url="",
+    packages=find_packages(),
+    install_requires=["insightconnect-plugin-runtime"],  # Add third-party dependencies to requirements.txt, not here!
+    entry_points={"console_scripts": ["komand_proofpoint_tap = bin.komand_proofpoint_tap:main"]},
+)

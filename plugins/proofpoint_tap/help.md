@@ -50,7 +50,8 @@ Example input:
 
 #### Fetch Forensics
 
-This action is used to pull detailed forensic evidence about individual threats or campaigns. Either 'threatId' or 'campaignId' should be specified
+This action is used to pull detailed forensic evidence about individual threats or campaigns. Either 'threatId' or 
+'campaignId' should be specified
 
 ##### Input
 
@@ -249,8 +250,8 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description| Example                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| :--- | :--- | :--- | :--- |:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
 |results|blockedClicks|True|The results containing blocked clicks|{'clicksBlocked': [{'GUID': 'X7sh5TwRxBZOAXb-d8ESyugsIdtfv3u', 'classification': 'malware', 'clickIP': '198.51.100.1', 'clickTime': '2021-04-20T21:08:13.000Z', 'id': '9de5069c-5afe-602b-2ea0-a04b66beb2c0', 'messageID': '<user@example.com>', 'recipient': 'user@example.com', 'sender': 'user@example.com', 'senderIP': '198.51.100.1', 'threatID': 'f1f23718b35b8db3db005cd498ff0812e53fe994537567ff0a...', 'threatStatus': 'active', 'threatTime': '2021-04-20T21:08:38.000Z', 'threatURL': 'https://example.com', 'url': 'https://example.com', 'userAgent': 'Mozilla/5.0 (Macintosh; Intel MAC OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36'}], 'queryEndTime': '2021-04-21T13:00:00Z'}|
   
 Example output:
@@ -543,8 +544,8 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description| Example                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| :--- | :--- | :--- | :--- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
 |results|permittedClicks|True|The results containing permitted clicks|{'clicksPermitted': [{'GUID': 'X7sh5TwRxBZOAXb-d8ESyugsIdtfv3u', 'classification': 'malware', 'clickIP': '198.51.100.1', 'clickTime': '2021-04-20T21:08:13.000Z', 'id': '9de5069c-5afe-602b-2ea0-a04b66beb2c0', 'messageID': '<user@example.com>', 'recipient': 'user@example.com', 'sender': 'user@example.com', 'senderIP': '198.51.100.1', 'threatID': 'f1f23718b35b8db3db005cd498ff0812e53fe994537567ff0a...', 'threatStatus': 'active', 'threatTime': '2021-04-20T21:08:38.000Z', 'threatURL': 'https://example.com', 'url': 'https://example.com', 'userAgent': 'Mozilla/5.0 (Macintosh; Intel MAC OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36'}], 'queryEndTime': '2021-04-21T13:00:00Z'}|
   
 Example output:
@@ -736,7 +737,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|urls|[]urls|False|Decoded URLs|[{"encodedUrl": "https://urldefense.proofpoint.com/v1/url?u=http://www.example.com/&amp;k=oIvRg1%2BdGAgOoM1BIlLLqw%3D%3D%0A&amp;r=IKM5u8%2B%2F%2Fi8EBhWOS%2BqGbTqCC%2BrMqWI%2FVfEAEsQO%2F0Y%3D%0A&amp;m=Ww6iaHO73mDQpPQwOwfLfN8WMapqHyvtu8jM8SjqmVQ%3D%0A&amp;s=d3583cfa53dade97025bc6274c6c8951dc29fe0f38830cf8e5a447723b9f1c9a"", "decodedUrl": "http://www.example.com/", "success": True}]|
+|urls|[]urls|False|Decoded URLs|[{"encodedUrl": "https://urldefense.proofpoint.com/v1/url?u=http://www.example.com/&amp;k=oIvRg1%2BdGAgOoM1BIlLLqw%3D%3D%0A&amp;r=IKM5u8%2B%2F%2Fi8EBhWOS%2BqGbTqCC%2BrMqWI%2FVfEAEsQO%2F0Y%3D%0A&amp;m=Ww6iaHO73mDQpPQwOwfLfN8WMapqHyvtu8jM8SjqmVQ%3D%0A&amp;s=d3583cfa53dade97025bc6274c6c8951dc29fe0f38830cf8e5a447723b9f1c9a\"", "decodedUrl": "http://www.example.com/", "success": true}]|
   
 Example output:
 
@@ -769,7 +770,7 @@ This task is used to monitor events for all clicks and messages relating to know
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|events|[]event|True|List of all events|[{"eventType": "messageBlocked", "ccAddresses": ["user@example.com"], "clusterId": "example_hosted", "completelyRewritten": True, "fromAddress": ["user@example.com"], "GUID": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "headerFrom": ""example" <user@example.com> ", "headerReplyTo": "user@example.com", "impostorScore": 0, "malwareScore": 0, "messageID": "<user@example.com>", "messageParts": [{"disposition": "inline", "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f", "md5": "9de5069c5afe602b2ea0a04b66beb2c0", "filename": "text.txt", "oContentType": "text/plain", "contentType": "text/plain"}], "messageSize": 0, "messageTime": "2023-06-01T23:57:22.000Z", "modulesRun": ["spam"], "phishScore": 0, "policyRoutes": ["default_inbound"], "QID": "9de5069c5afe602b2ea0a04b66beb2c0", "quarantineFolder": "Impostor", "quarantineRule": "impostor", "recipient": ["user@example.com"], "replyToAddress": ["user@example.com"], "sender": "user@example.com", "senderIP": "198.51.100.1", "spamScore": 100, "subject": "Transfer and Balance Request", "threatsInfoMap": [{"threat": "example.ab.cd/", "threatID": "9de5069c5afe602b2ea0a04b66beb2c0", "threatStatus": "active", "threatTime": "2021-02-09T15:59:49.000Z", "threatType": "url", "threatUrl": "https://example.com", "classification": "phish"}], "toAddresses": ["user@example.com"]}, {"eventType": "clickBlocked", "campaignId": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "classification": "malware", "clickIP": "198.51.100.1", "clickTime": "2021-04-20T21:08:13.000Z", "GUID": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "recipient": "user@example.com", "sender": "user@example.com", "senderIP": "198.51.100.1", "threatID": "9de5069c5afe602b2ea0a04b66beb2c0", "threatTime": "2016-06-24T19:17:46.000Z", "threatURL": "https://example.com", "threatStatus": "active", "url": "https://example.com", "userAgent": "Mozilla/5.0(WindowsNT6.1;WOW64;rv:27.0)Gecko/20100101Firefox/27.0"}]|
+|events|[]event|True|List of all events|[{"eventType": "messageBlocked", "ccAddresses": ["user@example.com"], "clusterId": "example_hosted", "completelyRewritten": true, "fromAddress": ["user@example.com"], "GUID": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "headerFrom": "\"example\" <user@example.com> ", "headerReplyTo": "user@example.com", "impostorScore": 0, "malwareScore": 0, "messageID": "<user@example.com>", "messageParts": [{"disposition": "inline", "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f", "md5": "9de5069c5afe602b2ea0a04b66beb2c0", "filename": "text.txt", "oContentType": "text/plain", "contentType": "text/plain"}], "messageSize": 0, "messageTime": "2023-06-01T23:57:22.000Z", "modulesRun": ["spam"], "phishScore": 0, "policyRoutes": ["default_inbound"], "QID": "9de5069c5afe602b2ea0a04b66beb2c0", "quarantineFolder": "Impostor", "quarantineRule": "impostor", "recipient": ["user@example.com"], "replyToAddress": ["user@example.com"], "sender": "user@example.com", "senderIP": "198.51.100.1", "spamScore": 100, "subject": "Transfer and Balance Request", "threatsInfoMap": [{"threat": "example.ab.cd/", "threatID": "9de5069c5afe602b2ea0a04b66beb2c0", "threatStatus": "active", "threatTime": "2021-02-09T15:59:49.000Z", "threatType": "url", "threatUrl": "https://example.com", "classification": "phish"}], "toAddresses": ["user@example.com"]}, {"eventType": "clickBlocked", "campaignId": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "classification": "malware", "clickIP": "198.51.100.1", "clickTime": "2021-04-20T21:08:13.000Z", "GUID": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "recipient": "user@example.com", "sender": "user@example.com", "senderIP": "198.51.100.1", "threatID": "9de5069c5afe602b2ea0a04b66beb2c0", "threatTime": "2016-06-24T19:17:46.000Z", "threatURL": "https://example.com", "threatStatus": "active", "url": "https://example.com", "userAgent": "Mozilla/5.0(WindowsNT6.1;WOW64;rv:27.0)Gecko/20100101Firefox/27.0"}]|
   
 Example output:
 
@@ -1175,6 +1176,7 @@ Example output:
 
 # Version History
 
+* 4.1.12 - `Monitor Events`: Updated boundary and split size properties | Updated SDK to latest version (6.2.6)
 * 4.1.11 - SDK Bump to 6.2.3 | `Monitor Events` task updated to handle requests outside of Proofpoint TAP API limits
 * 4.1.10 - SDK Bump to 6.1.0 | Task Connection test added Update `Parse Tap Alert` to utilise BeautifulSoup resolving vulnerabilities
 * 4.1.9 - Update connection fields to be required.
