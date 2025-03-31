@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Microsoft Defender Incidents"
 Vendor = "rapid7"
-Version = "2.0.1"
+Version = "2.0.2"
 Description = "Manage security incidents with Microsoft Defender 365"
 
 

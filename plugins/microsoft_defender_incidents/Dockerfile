@@ -19,6 +19,7 @@ LABEL sdk=python
 WORKDIR /python/src
 
 COPY --from=builder /python/src /python/src
+COPY --from=builder /plugin.spec.yaml /plugin.spec.yaml
 
 
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
