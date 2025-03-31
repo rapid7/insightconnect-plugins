@@ -22,7 +22,7 @@ TEST_PAGE_SIZE = 2
     "komand_proofpoint_tap.tasks.monitor_events.task.MonitorEvents.get_current_time",
     return_value=datetime.strptime("2023-04-04T08:00:00", "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc),
 )
-@patch("komand_proofpoint_tap.tasks.monitor_events.task.MonitorEvents.SPLIT_SIZE", new=TEST_PAGE_SIZE)
+@patch("komand_proofpoint_tap.tasks.monitor_events.task.DEFAULT_SPLIT_SIZE", new=TEST_PAGE_SIZE)
 @patch("requests.request", side_effect=Util.mocked_requests_get)
 class TestMonitorEvents(TestCase):
     @classmethod
