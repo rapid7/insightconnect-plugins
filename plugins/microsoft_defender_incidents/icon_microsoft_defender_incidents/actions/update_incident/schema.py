@@ -51,9 +51,9 @@ class UpdateIncidentInput(insightconnect_plugin_runtime.Input):
       "description": "Incident's classification",
       "enum": [
         "",
-        "Unknown",
+        "TruePositive",
         "FalsePositive",
-        "TruePositive"
+        "InformationalExpectedActivity"
       ],
       "order": 4
     },
@@ -69,21 +69,18 @@ class UpdateIncidentInput(insightconnect_plugin_runtime.Input):
       "description": "Specifies the determination of the incident",
       "enum": [
         "",
-        "NotAvailable",
-        "Apt",
-        "Malware",
-        "SecurityPersonnel",
-        "SecurityTesting",
-        "UnwantedSoftware",
-        "Other",
         "MultiStagedAttack",
         "MaliciousUserActivity",
         "CompromisedUser",
+        "Malware",
         "Phishing",
+        "UnwantedSoftware",
+        "SecurityTesting",
         "LineOfBusinessApplication",
+        "NoEnoughDataToValidate",
         "ConfirmedUserActivity",
         "Clean",
-        "InsufficientData"
+        "Other"
       ],
       "order": 5
     },
@@ -101,7 +98,8 @@ class UpdateIncidentInput(insightconnect_plugin_runtime.Input):
         "",
         "Active",
         "Resolved",
-        "Redirected"
+        "Redirected",
+        "InProgress"
       ],
       "order": 2
     },
@@ -152,7 +150,7 @@ class UpdateIncidentOutput(insightconnect_plugin_runtime.Output):
     "classification": {
       "type": "string",
       "title": "Classification",
-      "description": "Specification for the incident, where possible values are - Unknown, FalsePositive, and TruePositive",
+      "description": "Specification for the incident, where possible values are - InformationalExpectedActivity, FalsePositive, and TruePositive",
       "order": 6
     },
     "comments": {
@@ -175,7 +173,7 @@ class UpdateIncidentOutput(insightconnect_plugin_runtime.Output):
     "determination": {
       "type": "string",
       "title": "Determination",
-      "description": "Specifies the determination of the incident, where possible values are - NotAvailable, Apt, Malware, SecurityPersonnel, SecurityTesting, UnwantedSoftware, and Other",
+      "description": "Specifies the determination of the incident, where possible values are - MultiStagedAttack, MaliciousUserActivity, CompromisedUser, Malware, Phishing, UnwantedSoftware, SecurityTesting, LineOfBusinessApplication, NoEnoughDataToValidate, ConfirmedUserActivity, Clean and Other",
       "order": 7
     },
     "incidentId": {

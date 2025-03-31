@@ -100,7 +100,7 @@ class GetIncidentOutput(insightconnect_plugin_runtime.Output):
     "determination": {
       "type": "string",
       "title": "Determination",
-      "description": "Specifies the determination of the incident, where possible values are - NotAvailable, Apt, Malware, SecurityPersonnel, SecurityTesting, UnwantedSoftware, and Other",
+      "description": "Specifies the determination of the incident, where possible values are - NotAvailable, Malware, SecurityTesting, UnwantedSoftware, and Other",
       "order": 7
     },
     "incidentId": {
