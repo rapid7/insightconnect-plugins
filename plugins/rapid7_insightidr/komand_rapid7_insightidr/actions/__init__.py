@@ -75,4 +75,3 @@ from .search_accounts.action import SearchAccounts
 from .get_account_information.action import GetAccountInformation
 
 from .update_alert.action import UpdateAlert
-
