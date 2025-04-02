@@ -63,7 +63,11 @@ class AddUser(insightconnect_plugin_runtime.Action):
         try:
             return {
                 Output.SUCCESS: self.connection.client.add_user(
-                    dn, user_account_control, self.connection.use_ssl, password, parameters
+                    dn,
+                    user_account_control,
+                    self.connection.use_ssl,
+                    password,
+                    parameters,
                 )
             }
         except PluginException:

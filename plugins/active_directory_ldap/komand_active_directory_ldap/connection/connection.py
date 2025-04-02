@@ -32,6 +32,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
             # pylint: disable=no-value-for-parameter
             self.client.who_am_i()
         except LDAPExtensionError as e:
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.UNAUTHORIZED, data=e)
+            raise ConnectionTestException(
+                preset=ConnectionTestException.Preset.UNAUTHORIZED, data=e
+            )
 
         return {"connection": "successful"}

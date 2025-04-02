@@ -50,8 +50,14 @@ class TestActionModifyGroups(TestCase):
                 }
             )
 
-        self.assertEqual("Either the user or group distinguished name was not found.", context.exception.cause)
-        self.assertEqual("Please check that the distinguished names are correct", context.exception.assistance)
+        self.assertEqual(
+            "Either the user or group distinguished name was not found.",
+            context.exception.cause,
+        )
+        self.assertEqual(
+            "Please check that the distinguished names are correct",
+            context.exception.assistance,
+        )
 
     @mock.patch("ldap3.Server", mock.MagicMock(return_value=MockServer))
     @mock.patch("ldap3.Connection", mock.MagicMock(return_value=MockConnection()))
@@ -66,4 +72,7 @@ class TestActionModifyGroups(TestCase):
             )
 
         self.assertEqual("The DN was not found.", context.exception.cause)
-        self.assertEqual("The DN CN=LDAPInvalidDnError,DC=example,DC=com was not found.", context.exception.assistance)
+        self.assertEqual(
+            "The DN CN=LDAPInvalidDnError,DC=example,DC=com was not found.",
+            context.exception.assistance,
+        )

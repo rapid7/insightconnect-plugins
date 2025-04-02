@@ -2,7 +2,13 @@ import insightconnect_plugin_runtime
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
-from .schema import QueryGroupMembershipInput, QueryGroupMembershipOutput, Input, Output, Component
+from .schema import (
+    QueryGroupMembershipInput,
+    QueryGroupMembershipOutput,
+    Input,
+    Output,
+    Component,
+)
 
 
 class QueryGroupMembership(insightconnect_plugin_runtime.Action):
@@ -22,5 +28,7 @@ class QueryGroupMembership(insightconnect_plugin_runtime.Action):
         expand_nested_groups = params.get(Input.EXPAND_NESTED_GROUPS)
         # END INPUT BINDING - DO NOT REMOVE
 
-        entries = self.connection.client.query_group_membership(base, group_name, include_groups, expand_nested_groups)
+        entries = self.connection.client.query_group_membership(
+            base, group_name, include_groups, expand_nested_groups
+        )
         return {Output.RESULTS: entries, Output.COUNT: len(entries)}

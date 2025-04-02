@@ -10,12 +10,19 @@ from .schema import QueryInput, QueryOutput, Input, Output
 class Query(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="query", description="Run a LDAP query", input=QueryInput(), output=QueryOutput()
+            name="query",
+            description="Run a LDAP query",
+            input=QueryInput(),
+            output=QueryOutput(),
         )
 
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
-        query = params.get(Input.SEARCH_FILTER, "").replace("\\>=", ">=").replace("\\<=", "<=")
+        query = (
+            params.get(Input.SEARCH_FILTER, "")
+            .replace("\\>=", ">=")
+            .replace("\\<=", "<=")
+        )
         search_base = params.get(Input.SEARCH_BASE)
         attributes = params.get(Input.ATTRIBUTES, [])
         # END INPUT BINDING - DO NOT REMOVE
@@ -28,11 +35,15 @@ class Query(insightconnect_plugin_runtime.Action):
             attributes = [ldap3.ALL_ATTRIBUTES, ldap3.ALL_OPERATIONAL_ATTRIBUTES]
 
         try:
-            entries = self.connection.client.query(search_base, escaped_query, attributes)
+            entries = self.connection.client.query(
+                search_base, escaped_query, attributes
+            )
         except PluginException:
             self.logger.info("Escaping non-ascii characters...")
             entries = self.connection.client.query(
-                search_base, ADUtils.escape_non_ascii_characters(escaped_query), attributes
+                search_base,
+                ADUtils.escape_non_ascii_characters(escaped_query),
+                attributes,
             )
 
         if entries:

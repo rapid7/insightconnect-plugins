@@ -36,11 +36,17 @@ class MoveObject(insightconnect_plugin_runtime.Action):
             self.logger.debug(relative_dn)
 
         try:
-            return {Output.SUCCESS: self.connection.client.move_object(distinguished_name, relative_dn, new_ou)}
+            return {
+                Output.SUCCESS: self.connection.client.move_object(
+                    distinguished_name, relative_dn, new_ou
+                )
+            }
         except PluginException:
             self.logger.info("Escaping non-ascii characters...")
             return {
                 Output.SUCCESS: self.connection.client.move_object(
-                    ADUtils.escape_non_ascii_characters(distinguished_name), relative_dn, new_ou
+                    ADUtils.escape_non_ascii_characters(distinguished_name),
+                    relative_dn,
+                    new_ou,
                 )
             }

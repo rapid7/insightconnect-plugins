@@ -21,7 +21,9 @@ class TestActionModifyObject(TestCase):
     @mock.patch("ldap3.Connection", mock.MagicMock(return_value=MockConnection()))
     @default_connector(action=ModifyObject())
     def test_modify_object_false(self, action):
-        actual = action.run({Input.DISTINGUISHED_NAME: "CN=wrong_result,DC=example,DC=com"})
+        actual = action.run(
+            {Input.DISTINGUISHED_NAME: "CN=wrong_result,DC=example,DC=com"}
+        )
         expected = {Output.SUCCESS: False}
 
         self.assertEqual(actual, expected)

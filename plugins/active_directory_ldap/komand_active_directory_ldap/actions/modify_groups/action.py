@@ -42,6 +42,9 @@ class ModifyGroups(insightconnect_plugin_runtime.Action):
             self.logger.info("Escaping non-ascii characters...")
             return {
                 Output.SUCCESS: self.connection.client.modify_groups(
-                    ADUtils.escape_non_ascii_characters(distinguished_name), search_base, add_remove, group_dn
+                    ADUtils.escape_non_ascii_characters(distinguished_name),
+                    search_base,
+                    add_remove,
+                    group_dn,
                 )
             }

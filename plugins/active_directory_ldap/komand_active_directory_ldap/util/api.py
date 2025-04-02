@@ -5,8 +5,17 @@ from typing import List
 import ldap3
 from ldap3 import MODIFY_REPLACE, ALL_ATTRIBUTES, ALL_OPERATIONAL_ATTRIBUTES
 from ldap3 import extend
-from ldap3.core.exceptions import LDAPBindError, LDAPAuthorizationDeniedResult, LDAPSocketOpenError, LDAPException
-from ldap3.utils.log import set_library_log_detail_level, set_library_log_hide_sensitive_data, ERROR
+from ldap3.core.exceptions import (
+    LDAPBindError,
+    LDAPAuthorizationDeniedResult,
+    LDAPSocketOpenError,
+    LDAPException,
+)
+from ldap3.utils.log import (
+    set_library_log_detail_level,
+    set_library_log_hide_sensitive_data,
+    ERROR,
+)
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_active_directory_ldap.util.utils import ADUtils
@@ -28,7 +37,16 @@ def with_connection(action):
 
 
 class ActiveDirectoryLdapAPI:
-    def __init__(self, logger=None, use_ssl=None, host=None, port=None, referrals=None, user_name=None, password=None):
+    def __init__(
+        self,
+        logger=None,
+        use_ssl=None,
+        host=None,
+        port=None,
+        referrals=None,
+        user_name=None,
+        password=None,
+    ):
         self.logger = logger
         self.use_ssl = use_ssl
         self.host = host
@@ -66,7 +84,9 @@ class ActiveDirectoryLdapAPI:
         except LDAPException:
             # An exception here is likely caused because the ldap server dose use NTLM
             # A basic auth connection will be tried instead
-            self.logger.info("Failed to connect to the server with NTLM, attempting to connect with basic auth")
+            self.logger.info(
+                "Failed to connect to the server with NTLM, attempting to connect with basic auth"
+            )
             conn = self.__connect_to_server(server)
 
         self.logger.info("Connected!")
@@ -83,11 +103,17 @@ class ActiveDirectoryLdapAPI:
                 authentication=authentication,
             )
         except LDAPBindError as error:
-            raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=error)
+            raise PluginException(
+                preset=PluginException.Preset.USERNAME_PASSWORD, data=error
+            )
         except LDAPAuthorizationDeniedResult as error:
-            raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=error)
+            raise PluginException(
+                preset=PluginException.Preset.UNAUTHORIZED, data=error
+            )
         except LDAPSocketOpenError as error:
-            raise PluginException(preset=PluginException.Preset.SERVICE_UNAVAILABLE, data=error)
+            raise PluginException(
+                preset=PluginException.Preset.SERVICE_UNAVAILABLE, data=error
+            )
         return conn
 
     def host_formatter(self, host: str) -> str:
@@ -101,10 +127,14 @@ class ActiveDirectoryLdapAPI:
                 if host[1].find("//") != -1:
                     host = host[1][2:]
                 else:
-                    self.logger.info("Port was provided in hostname, using value from Port field instead")
+                    self.logger.info(
+                        "Port was provided in hostname, using value from Port field instead"
+                    )
                     host = host[0]
             elif colons == 2:
-                self.logger.info("Port was provided in hostname, using value from Port field instead")
+                self.logger.info(
+                    "Port was provided in hostname, using value from Port field instead"
+                )
                 host = host[1]
                 if host.find("//") != -1:
                     host = host[2:]
@@ -120,7 +150,15 @@ class ActiveDirectoryLdapAPI:
         return host
 
     @with_connection
-    def add_user(self, conn, dn: str, user_account_control: int, ssl: bool, password: str, parameters: dict):
+    def add_user(
+        self,
+        conn,
+        dn: str,
+        user_account_control: int,
+        ssl: bool,
+        password: str,
+        parameters: dict,
+    ):
         try:
             conn.raise_exceptions = True
             conn.add(dn, ["person", "user"], parameters)
@@ -136,12 +174,18 @@ class ActiveDirectoryLdapAPI:
             try:
                 extend.ad_modify_password(conn, dn, password, None)
             except LDAPException:
-                self.logger.error("User account created successfully, but unable to update the password.")
+                self.logger.error(
+                    "User account created successfully, but unable to update the password."
+                )
                 success = False
         else:
-            self.logger.info("Warning SSL is not enabled. User password can not be set. User account will be disabled")
+            self.logger.info(
+                "Warning SSL is not enabled. User password can not be set. User account will be disabled"
+            )
 
-        change_uac_attribute = {"userAccountControl": (MODIFY_REPLACE, [user_account_control])}
+        change_uac_attribute = {
+            "userAccountControl": (MODIFY_REPLACE, [user_account_control])
+        }
         conn.modify(dn, change_uac_attribute)
         self.logger.info(conn.result)
 
@@ -158,7 +202,8 @@ class ActiveDirectoryLdapAPI:
 
         self.logger.error(f"failed: error message {output}")
         raise PluginException(
-            cause=PluginException.causes[PluginException.Preset.UNKNOWN], assistance=f"failed: error message {output}"
+            cause=PluginException.causes[PluginException.Preset.UNKNOWN],
+            assistance=f"failed: error message {output}",
         )
 
     @with_connection
@@ -208,7 +253,9 @@ class ActiveDirectoryLdapAPI:
         return True
 
     @with_connection
-    def modify_groups(self, conn, dn: str, search_base: str, add_remove: str, group_dn: tuple):
+    def modify_groups(
+        self, conn, dn: str, search_base: str, add_remove: str, group_dn: tuple
+    ):
         # Check that dn exists in AD
         if not ADUtils.check_user_dn_is_valid(conn, dn, search_base):
             self.logger.error(f"The DN {dn} was not found")
@@ -219,9 +266,13 @@ class ActiveDirectoryLdapAPI:
 
         try:
             if add_remove == "add":
-                group = extend.ad_add_members_to_groups(conn, dn, group_dn, fix=True, raise_error=True)
+                group = extend.ad_add_members_to_groups(
+                    conn, dn, group_dn, fix=True, raise_error=True
+                )
             else:
-                group = extend.ad_remove_members_from_groups(conn, dn, group_dn, fix=True, raise_error=True)
+                group = extend.ad_remove_members_from_groups(
+                    conn, dn, group_dn, fix=True, raise_error=True
+                )
         except LDAPException as error:
             raise PluginException(
                 cause="Either the user or group distinguished name was not found.",
@@ -230,7 +281,9 @@ class ActiveDirectoryLdapAPI:
             )
 
         if group is False:
-            self.logger.error(f"ModifyGroups: Unexpected result for group. Group was {str(group)}")
+            self.logger.error(
+                f"ModifyGroups: Unexpected result for group. Group was {str(group)}"
+            )
             raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
         return group
@@ -254,7 +307,10 @@ class ActiveDirectoryLdapAPI:
                 assistance=f"Please check that the specified DN {dn} is correct and try again.",
             )
 
-        conn.modify(ADUtils().unescape_asterisk(dn), {attribute: [(MODIFY_REPLACE, [attribute_value])]})
+        conn.modify(
+            ADUtils().unescape_asterisk(dn),
+            {attribute: [(MODIFY_REPLACE, [attribute_value])]},
+        )
         result = conn.result
         output = result["description"]
 
@@ -297,9 +353,18 @@ class ActiveDirectoryLdapAPI:
             )
 
     @with_connection
-    def query_group_membership(self, conn, base: str, group_name: str, include_groups: str, expand_nested_groups: str):
+    def query_group_membership(
+        self,
+        conn,
+        base: str,
+        group_name: str,
+        include_groups: str,
+        expand_nested_groups: str,
+    ):
         try:
-            group = self.__search_data(conn, base=base, filter_query=f"(sAMAccountName={group_name})").get("entries")
+            group = self.__search_data(
+                conn, base=base, filter_query=f"(sAMAccountName={group_name})"
+            ).get("entries")
             if group and isinstance(group, list):
                 group_dn = group[0].get("dn")
             else:
@@ -315,7 +380,9 @@ class ActiveDirectoryLdapAPI:
                 query = f"(&(objectClass=user)(memberOf:1.2.840.113556.1.4.1941:={group_dn}))"
             else:
                 query = f"(&(objectClass=user)(memberOf:={group_dn}))"
-            entries = self.__search_data(conn, base=base, filter_query=query).get("entries")
+            entries = self.__search_data(conn, base=base, filter_query=query).get(
+                "entries"
+            )
             return entries
         except (AttributeError, IndexError) as error:
             raise PluginException(
@@ -339,7 +406,9 @@ class ActiveDirectoryLdapAPI:
     def reset_password(self, conn, dn: str, new_password: str):
         try:
             conn.raise_exceptions = True
-            success = extend.ad_modify_password(conn, dn, new_password, old_password=None)
+            success = extend.ad_modify_password(
+                conn, dn, new_password, old_password=None
+            )
         except LDAPException as error:
             raise PluginException(
                 cause="LDAP returned an error in the response.",
@@ -351,7 +420,9 @@ class ActiveDirectoryLdapAPI:
 
     @with_connection
     def unblock_user(self, conn, dn: str, user_flag: int):
-        return ADUtils.change_useraccountcontrol_property(conn, dn, True, user_flag, self.logger)
+        return ADUtils.change_useraccountcontrol_property(
+            conn, dn, True, user_flag, self.logger
+        )
 
     @with_connection
     def who_am_i(self, conn):

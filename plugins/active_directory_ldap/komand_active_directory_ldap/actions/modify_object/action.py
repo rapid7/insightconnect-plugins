@@ -30,12 +30,16 @@ class ModifyObject(insightconnect_plugin_runtime.Action):
 
         try:
             return {
-                Output.SUCCESS: self.connection.client.modify_object(distinguished_name, attribute, attribute_value)
+                Output.SUCCESS: self.connection.client.modify_object(
+                    distinguished_name, attribute, attribute_value
+                )
             }
         except PluginException:
             self.logger.info("Escaping non-ascii characters...")
             return {
                 Output.SUCCESS: self.connection.client.modify_object(
-                    ADUtils.escape_non_ascii_characters(distinguished_name), attribute, attribute_value
+                    ADUtils.escape_non_ascii_characters(distinguished_name),
+                    attribute,
+                    attribute_value,
                 )
             }

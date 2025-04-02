@@ -25,4 +25,6 @@ class TestActionDelete(TestCase):
             action.run({Input.DISTINGUISHED_NAME: "with_error"})
 
         self.assertTrue("Something unexpected occurred." in context.exception.cause)
-        self.assertTrue("failed: error message test description" in context.exception.assistance)
+        self.assertTrue(
+            "failed: error message test description" in context.exception.assistance
+        )

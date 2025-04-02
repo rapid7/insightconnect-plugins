@@ -8,7 +8,10 @@ from .schema import EnableUsersInput, EnableUsersOutput, Input, Output, Componen
 class EnableUsers(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="enable_users", description=Component.DESCRIPTION, input=EnableUsersInput(), output=EnableUsersOutput()
+            name="enable_users",
+            description=Component.DESCRIPTION,
+            input=EnableUsersInput(),
+            output=EnableUsersOutput(),
         )
 
     def run(self, params={}):

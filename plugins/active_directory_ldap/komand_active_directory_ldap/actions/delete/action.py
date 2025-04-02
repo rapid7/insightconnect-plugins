@@ -28,5 +28,7 @@ class Delete(insightconnect_plugin_runtime.Action):
         except PluginException:
             self.logger.info("Escaping non-ascii characters...")
             return {
-                Output.SUCCESS: self.connection.client.delete(ADUtils.escape_non_ascii_characters(distinguished_name))
+                Output.SUCCESS: self.connection.client.delete(
+                    ADUtils.escape_non_ascii_characters(distinguished_name)
+                )
             }

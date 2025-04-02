@@ -26,21 +26,35 @@ class TestActionUnlockUser(TestCase):
         with self.assertRaises(PluginException) as context:
             action.run({Input.DISTINGUISHED_NAME: "CN=empty_search,DC=example,DC=com"})
 
-        self.assertEqual("The DN CN=empty_search,DC=example,DC=com was not found.", context.exception.cause)
-        self.assertEqual("Please provide a valid DN and try again.", context.exception.assistance)
+        self.assertEqual(
+            "The DN CN=empty_search,DC=example,DC=com was not found.",
+            context.exception.cause,
+        )
+        self.assertEqual(
+            "Please provide a valid DN and try again.", context.exception.assistance
+        )
 
     @mock.patch("ldap3.Server", mock.MagicMock(return_value=MockServer))
     @mock.patch("ldap3.Connection", mock.MagicMock(return_value=MockConnection()))
     @default_connector(action=UnlockUser())
     def test_unlock_user_raise(self, action):
         with self.assertRaises(PluginException) as context:
-            action.run({Input.DISTINGUISHED_NAME: "CN=LDAPInvalidDnError,DC=example,DC=com"})
+            action.run(
+                {Input.DISTINGUISHED_NAME: "CN=LDAPInvalidDnError,DC=example,DC=com"}
+            )
 
         self.assertEqual("The DN was not found.", context.exception.cause)
-        self.assertEqual("The DN CN=LDAPInvalidDnError,DC=example,DC=com was not found.", context.exception.assistance)
+        self.assertEqual(
+            "The DN CN=LDAPInvalidDnError,DC=example,DC=com was not found.",
+            context.exception.assistance,
+        )
 
         with self.assertRaises(PluginException) as context:
-            action.run({Input.DISTINGUISHED_NAME: "CN=LDAPOperationsErrorResult,DC=example,DC=com"})
+            action.run(
+                {
+                    Input.DISTINGUISHED_NAME: "CN=LDAPOperationsErrorResult,DC=example,DC=com"
+                }
+            )
 
         self.assertEqual("Server error occurred", context.exception.cause)
         self.assertEqual(
@@ -56,8 +70,13 @@ class TestActionUnlockUser(TestCase):
         with self.assertRaises(PluginException) as context:
             action.run({Input.DISTINGUISHED_NAME: "CN=wrong_result,DC=example,DC=com"})
 
-        self.assertEqual("The DN CN=wrong_result,DC=example,DC=com was not found.", context.exception.cause)
-        self.assertEqual("Please provide a valid DN and try again.", context.exception.assistance)
+        self.assertEqual(
+            "The DN CN=wrong_result,DC=example,DC=com was not found.",
+            context.exception.cause,
+        )
+        self.assertEqual(
+            "Please provide a valid DN and try again.", context.exception.assistance
+        )
 
     def test_unlock_user_integration(self):
         log = logging.getLogger("Test")

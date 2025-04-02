@@ -40,4 +40,7 @@ class TestActionAddUser(TestCase):
             )
 
         self.assertTrue("LDAP returned an error message." in context.exception.cause)
-        self.assertTrue("Creating new user failed, error returned by LDAP." in context.exception.assistance)
+        self.assertTrue(
+            "Creating new user failed, error returned by LDAP."
+            in context.exception.assistance
+        )

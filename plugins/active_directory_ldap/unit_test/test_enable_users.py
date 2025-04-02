@@ -30,7 +30,12 @@ class TestActionEnableUsers(TestCase):
                 },
             ),
             (
-                {Input.DISTINGUISHED_NAMES: ["CN=empty_search,DC=example,DC=com", "CN=Users,DC=example," "DC=com"]},
+                {
+                    Input.DISTINGUISHED_NAMES: [
+                        "CN=empty_search,DC=example,DC=com",
+                        "CN=Users,DC=example," "DC=com",
+                    ]
+                },
                 {
                     Output.FAILED: [
                         {
@@ -67,5 +72,10 @@ class TestActionEnableUsers(TestCase):
     def test_empty_input(self, action):
         with self.assertRaises(PluginException) as context:
             action.run({Input.DISTINGUISHED_NAMES: []})
-        self.assertEqual("Distinguished Names must contain at least one entry", context.exception.cause)
-        self.assertEqual("Please enter one or more Distinguished Names", context.exception.assistance)
+        self.assertEqual(
+            "Distinguished Names must contain at least one entry",
+            context.exception.cause,
+        )
+        self.assertEqual(
+            "Please enter one or more Distinguished Names", context.exception.assistance
+        )

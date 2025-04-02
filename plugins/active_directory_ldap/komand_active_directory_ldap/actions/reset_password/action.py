@@ -27,15 +27,21 @@ class ResetPassword(insightconnect_plugin_runtime.Action):
 
         if self.connection.use_ssl is False:
             raise PluginException(
-                cause="SSL must be enabled", assistance="SSL must be enabled for the reset password action"
+                cause="SSL must be enabled",
+                assistance="SSL must be enabled for the reset password action",
             )
 
         try:
-            return {Output.SUCCESS: self.connection.client.reset_password(distinguished_name, new_password)}
+            return {
+                Output.SUCCESS: self.connection.client.reset_password(
+                    distinguished_name, new_password
+                )
+            }
         except PluginException:
             self.logger.info("Escaping non-ascii characters...")
             return {
                 Output.SUCCESS: self.connection.client.reset_password(
-                    ADUtils.escape_non_ascii_characters(distinguished_name), new_password
+                    ADUtils.escape_non_ascii_characters(distinguished_name),
+                    new_password,
                 )
             }

@@ -65,7 +65,9 @@ class ADUtils:
             # Escape special characters
             for escaped_char in character_list:
                 if f"\\{escaped_char}" not in value:
-                    dn_list[idx] = dn_list[idx].replace(escaped_char, f"\\{escaped_char}")
+                    dn_list[idx] = dn_list[idx].replace(
+                        escaped_char, f"\\{escaped_char}"
+                    )
         # escape \\ as needed
         for idx, value in enumerate(dn_list):
             location = value.find("\\")
@@ -75,7 +77,9 @@ class ADUtils:
                 and not value[location + 1] in manual_escape
                 and not value[location + 1] == "\\"
             ):
-                dn_list[idx] = dn_list[idx][:location] + "\\\\" + dn_list[idx][location + 1 :]
+                dn_list[idx] = (
+                    dn_list[idx][:location] + "\\\\" + dn_list[idx][location + 1 :]
+                )
 
         # Re add the removed ,..= to dn_list strings then remove the unneeded comma
         try:
@@ -137,11 +141,15 @@ class ADUtils:
                 temp_stack.append(idx)
             elif char == ")":
                 if len(temp_stack) == 0:
-                    raise PluginException(cause="No matching closing parentheses at: " + str(idx))
+                    raise PluginException(
+                        cause="No matching closing parentheses at: " + str(idx)
+                    )
                 pairs[temp_stack.pop()] = idx
 
         if len(temp_stack) > 0:
-            raise PluginException(cause="No matching opening parentheses at: " + str(temp_stack.pop()))
+            raise PluginException(
+                cause="No matching opening parentheses at: " + str(temp_stack.pop())
+            )
 
         return pairs
 
@@ -177,7 +185,9 @@ class ADUtils:
             change = False
             pairs = ADUtils.find_parentheses_pairs(query)
             for key, value in pairs.items():
-                if not ADUtils.find_characters_in_string(["=", ">", "<"], query, key, value):
+                if not ADUtils.find_characters_in_string(
+                    ["=", ">", "<"], query, key, value
+                ):
                     query = query[:value] + "\\29" + query[value + 1 :]
                     query = query[:key] + "\\28" + query[key + 1 :]
                     change = True
@@ -198,10 +208,14 @@ class ADUtils:
             )
         except LDAPInvalidDnError as error:
             raise PluginException(
-                cause="The DN was not found.", assistance=f"The DN {user_dn} was not found.", data=error
+                cause="The DN was not found.",
+                assistance=f"The DN {user_dn} was not found.",
+                data=error,
             )
         except LDAPOperationsErrorResult as error:
-            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=error)
+            raise PluginException(
+                preset=PluginException.Preset.SERVER_ERROR, data=error
+            )
         return len([d["dn"] for d in conn.response if "dn" in d]) > 0
 
     @staticmethod
@@ -212,7 +226,8 @@ class ADUtils:
         if not ADUtils.check_user_dn_is_valid(conn, dn, search_base):
             logger.error(f"The DN {dn} was not found")
             raise PluginException(
-                cause=f"The DN {dn} was not found.", assistance="Please provide a valid DN and try again."
+                cause=f"The DN {dn} was not found.",
+                assistance="Please provide a valid DN and try again.",
             )
         user_list = [d["attributes"] for d in conn.response if "attributes" in d]
         user_control = user_list[0]
@@ -254,7 +269,8 @@ class ADUtils:
         if not ADUtils.check_user_dn_is_valid(conn, dn, search_base):
             logger.error(f"The DN {dn} was not found")
             raise PluginException(
-                cause=f"The DN {dn} was not found.", assistance="Please provide a valid DN and try again."
+                cause=f"The DN {dn} was not found.",
+                assistance="Please provide a valid DN and try again.",
             )
         user_list = [d["attributes"] for d in conn.response if "attributes" in d]
 

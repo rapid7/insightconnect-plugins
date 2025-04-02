@@ -6,7 +6,11 @@ import ldap3
 from komand_active_directory_ldap import connection
 from komand_active_directory_ldap.connection.schema import Input
 from ldap3.core.connection import SyncStrategy
-from ldap3.core.exceptions import LDAPInvalidDnError, LDAPObjectClassError, LDAPOperationsErrorResult
+from ldap3.core.exceptions import (
+    LDAPInvalidDnError,
+    LDAPObjectClassError,
+    LDAPOperationsErrorResult,
+)
 from ldap3.core.results import RESULT_OPERATIONS_ERROR, RESULT_SUCCESS
 
 
@@ -39,7 +43,9 @@ class MockConnection:
     def modify(self, dn: str, changes: dict, controls=None):
         return self.default_modify(dn)
 
-    def modify_dn(self, dn, relative_dn, delete_old_dn=True, new_superior=None, controls=None):
+    def modify_dn(
+        self, dn, relative_dn, delete_old_dn=True, new_superior=None, controls=None
+    ):
         return self.default_modify(dn)
 
     def delete(self, dn: str, controls=None):
@@ -79,7 +85,10 @@ class MockConnection:
         if "CN=wrong_result,DC=example,DC=com" in search_filter:
             self.result[self.RESULT] = RESULT_OPERATIONS_ERROR
             return
-        if "CN=empty_search,DC=example,DC=com" in search_filter or "CN=empty_search,DC=example,DC=com" in search_base:
+        if (
+            "CN=empty_search,DC=example,DC=com" in search_filter
+            or "CN=empty_search,DC=example,DC=com" in search_base
+        ):
             self.result[self.DESCRIPTION] = "empty_search"
             return
         if "CN=empty_group,DC=example,DC=com" in search_base:
@@ -88,12 +97,16 @@ class MockConnection:
 
         self.result[self.RESULT] = RESULT_SUCCESS
         self.result[self.DESCRIPTION] = "success"
-        self.response = [{"dn": search_base, "attributes": {"userAccountControl": False}}]
+        self.response = [
+            {"dn": search_base, "attributes": {"userAccountControl": False}}
+        ]
 
     class extend:
         class standard:
             @staticmethod
-            def paged_search(search_base, search_filter, attributes, paged_size, generator):
+            def paged_search(
+                search_base, search_filter, attributes, paged_size, generator
+            ):
                 if "CN=empty_search,DC=example,DC=com" in search_base:
                     MockConnection.SEARCH_RESULT = "empty_search"
                     return

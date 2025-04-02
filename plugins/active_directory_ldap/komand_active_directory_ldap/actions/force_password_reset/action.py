@@ -26,11 +26,16 @@ class ForcePasswordReset(insightconnect_plugin_runtime.Action):
         password_expire = {"pwdLastSet": ("MODIFY_REPLACE", [0])}
 
         try:
-            return {Output.SUCCESS: self.connection.client.force_password_reset(distinguished_name, password_expire)}
+            return {
+                Output.SUCCESS: self.connection.client.force_password_reset(
+                    distinguished_name, password_expire
+                )
+            }
         except PluginException:
             self.logger.info("Escaping non-ascii characters...")
             return {
                 Output.SUCCESS: self.connection.client.force_password_reset(
-                    ADUtils.escape_non_ascii_characters(distinguished_name), password_expire
+                    ADUtils.escape_non_ascii_characters(distinguished_name),
+                    password_expire,
                 )
             }

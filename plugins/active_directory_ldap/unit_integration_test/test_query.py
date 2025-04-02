@@ -41,7 +41,10 @@ class TestQuery(TestCase):
         print(actual.get("dn"))
 
         self.assertEqual(actual.get("cn"), 'Bob "Sponge,Pants" (somestuff)')
-        self.assertEqual(dn, 'CN=Bob "Sponge,Pants" (somestuff),OU=Test Users,OU=User,DC=intad,DC=dslab,DC=internal')
+        self.assertEqual(
+            dn,
+            'CN=Bob "Sponge,Pants" (somestuff),OU=Test Users,OU=User,DC=intad,DC=dslab,DC=internal',
+        )
         self.assertEqual(
             actual.get("distinguishedName"),
             'CN=Bob "Sponge,Pants" (somestuff),OU=Test Users,OU=User,DC=intad,DC=dslab,DC=internal',

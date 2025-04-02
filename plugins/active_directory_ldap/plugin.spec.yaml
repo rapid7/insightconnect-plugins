@@ -8,7 +8,7 @@ description: "[AD LDAP](https://docs.microsoft.com/en-us/openspecs/windows_proto
   \ for querying and modifying items in Active Directory. This plugin queries [Microsoft's\
   \ Active Directory service](https://social.technet.microsoft.com/wiki/contents/articles/5392.active-directory-ldap-syntax-filters.aspx)\
   \ to programmatically manage and query an Active Directory environment"
-version: 9.0.4
+version: 9.0.5
 connection_version: 9
 supported_versions: [Azure Active Directory 2.0.89.0]
 fedramp_ready: true
@@ -29,7 +29,7 @@ hub_tags:
   features: []
 sdk:
   type: slim
-  version: 6.2.5
+  version: 6.3.0
   user: nobody
 key_features:
 - Add and remove user accounts to automate provisioning/deprovisioning of users
@@ -63,6 +63,7 @@ troubleshooting:
   \ can then be fed into another action by Repeating a collection for\nthe query results,\
   \ and then using the variable step $item.dn"
 version_history:
+- 9.0.5 - Updated SDK to the latest version (6.3.0)
 - 9.0.4 - Updated SDK to the latest version (6.2.5)
 - 9.0.3 - Initial updates for fedramp compliance | Updated SDK to the latest version
 - 9.0.2 - Updated the SDK to the latest version to address memory usage issues

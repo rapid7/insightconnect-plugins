@@ -21,7 +21,11 @@ class EnableUser(insightconnect_plugin_runtime.Action):
         # END INPUT BINDING - DO NOT REMOVE
 
         try:
-            return {Output.SUCCESS: self.connection.client.manage_user(distinguished_name, True)}
+            return {
+                Output.SUCCESS: self.connection.client.manage_user(
+                    distinguished_name, True
+                )
+            }
         except PluginException:
             self.logger.info("Escaping non-ascii characters...")
             return {

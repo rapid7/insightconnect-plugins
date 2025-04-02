@@ -9,7 +9,10 @@ from .schema import UnlockUserInput, UnlockUserOutput, Input, Output, Component
 class UnlockUser(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="unlock_user", description=Component.DESCRIPTION, input=UnlockUserInput(), output=UnlockUserOutput()
+            name="unlock_user",
+            description=Component.DESCRIPTION,
+            input=UnlockUserInput(),
+            output=UnlockUserOutput(),
         )
 
     def run(self, params={}):
@@ -18,11 +21,16 @@ class UnlockUser(insightconnect_plugin_runtime.Action):
         # END INPUT BINDING - DO NOT REMOVE
 
         try:
-            return {Output.SUCCESS: self.connection.client.unblock_user(distinguished_name, UserAccountFlags.LOCKOUT)}
+            return {
+                Output.SUCCESS: self.connection.client.unblock_user(
+                    distinguished_name, UserAccountFlags.LOCKOUT
+                )
+            }
         except PluginException:
             self.logger.info("Escaping non-ascii characters...")
             return {
                 Output.SUCCESS: self.connection.client.unblock_user(
-                    ADUtils.escape_non_ascii_characters(distinguished_name), UserAccountFlags.LOCKOUT
+                    ADUtils.escape_non_ascii_characters(distinguished_name),
+                    UserAccountFlags.LOCKOUT,
                 )
             }
