@@ -3,4 +3,3 @@
 from .get_new_alerts.trigger import GetNewAlerts
 
 from .get_new_investigations.trigger import GetNewInvestigations
-
