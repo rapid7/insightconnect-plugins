@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="microsoft_defender_incidents-rapid7-plugin",
-    version="2.0.2",
+    version="2.0.3",
     description="Manage security incidents with Microsoft Defender 365",
     author="rapid7",
     author_email="",
