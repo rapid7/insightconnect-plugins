@@ -22,14 +22,14 @@ class TestParseDates(TestCase):
         res5, res6 = parse_dates(time_test5, time_test6, time_test_rel)
         res7, res8 = parse_dates(time_test7, time_test8, time_test_rel)
 
-        self.assertEqual(res1, 1130778669000)
-        self.assertEqual(res2, 1577836800000)
-        self.assertEqual(res3, 1577901661000)
-        self.assertEqual(res4, 257126400000)
+        self.assertEqual(res1, 1130775069000)
+        self.assertEqual(res2, 1577833200000)
+        self.assertEqual(res3, 1577898061000)
+        self.assertEqual(res4, 257122800000)
         self.assertIsNotNone(res5)  # This will be today @ 1:25 PM.
-        self.assertEqual(res6, 1580162400000)
-        self.assertEqual(res7, 1577836800000)
-        self.assertEqual(res8, 1609372800000)
+        self.assertEqual(res6, 1580158800000)
+        self.assertEqual(res7, 1577833200000)
+        self.assertEqual(res8, 1609369200000)
 
         not_used, now_result = parse_dates(time_test1, None, time_test_rel)
         self.assertIsNotNone(now_result)
@@ -42,7 +42,7 @@ class TestParseDates(TestCase):
         time_rel = "Absolute Time To"
 
         res1, _ = parse_dates(time_test1, time_test1, time_rel)
-        self.assertEqual(res1, 1130778669000)
+        self.assertEqual(res1, 1130775069000)
 
         time_rel = "Last 5 Minutes"
         res1, _ = parse_dates(time_test1, "", time_rel)
