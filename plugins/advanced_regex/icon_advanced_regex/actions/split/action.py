@@ -22,5 +22,10 @@ class Split(insightconnect_plugin_runtime.Action):
         max_split = params.get(Input.MAX_SPLIT)
         # END INPUT BINDING - DO NOT REMOVE
 
-        split = re.split(regex, input_string, maxsplit=max_split, flags=shared.construct_flags(params))
+        split = re.split(
+            regex,
+            input_string,
+            maxsplit=max_split,
+            flags=shared.construct_flags(params),
+        )
         return {Output.RESULT: split}

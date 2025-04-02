@@ -35,7 +35,9 @@ class TestReplace(TestCase):
             )
         ]
     )
-    def test_replace(self, parameters: Dict[str, Any], expected: Dict[str, Any]) -> None:
+    def test_replace(
+        self, parameters: Dict[str, Any], expected: Dict[str, Any]
+    ) -> None:
         response = self.action.run(parameters)
         validate(response, self.action.output.schema)
         self.assertEqual(response, expected)

@@ -24,6 +24,10 @@ class Replace(insightconnect_plugin_runtime.Action):
         # END INPUT BINDING - DO NOT REMOVE
 
         replaced = re.sub(
-            regex, replace_string, input_string, count=replace_number, flags=shared.construct_flags(params)
+            regex,
+            replace_string,
+            input_string,
+            count=replace_number,
+            flags=shared.construct_flags(params),
         )
         return {Output.RESULT: replaced}
