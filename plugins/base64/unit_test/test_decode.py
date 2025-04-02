@@ -8,7 +8,10 @@ from unittest import TestCase
 from komand_base64.actions.decode import Decode
 from komand_base64.actions.decode.schema import Input, Output
 
-STUB_INPUT_PARAMS = {Input.BASE64: "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cgo=", Input.ERRORS: "nothing"}
+STUB_INPUT_PARAMS = {
+    Input.BASE64: "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cgo=",
+    Input.ERRORS: "nothing",
+}
 
 
 class TestDecode(TestCase):

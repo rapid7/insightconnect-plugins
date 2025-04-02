@@ -3,8 +3,12 @@ extension: plugin
 products: [insightconnect]
 name: base64
 title: Base64
-description: "[Base64](https://en.wikipedia.org/wiki/Base64) is a common binary-to-text encoding scheme used in various protocols and software such as MIME to carry data stored in binary formats across channels that only reliably support text content. This plugin allows data to be Base64-encoded or decoded using the standard Base64 alphabet"
-version: 1.1.9
+description: '[Base64](https://en.wikipedia.org/wiki/Base64) is a common binary-to-text
+  encoding scheme used in various protocols and software such as MIME to carry data
+  stored in binary formats across channels that only reliably support text content.
+  This plugin allows data to be Base64-encoded or decoded using the standard Base64
+  alphabet'
+version: 1.1.10
 connection_version: 1
 vendor: rapid7
 support: community
@@ -17,15 +21,19 @@ resources:
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 sdk:
   type: slim
-  version: 6.2.5
+  version: 6.3.0
   user: nobody
 key_features:
 - Encode data in Base64 to transfer binary data, image files, etc. in a text format
 - Decode Base64 encoded text to reveal the plaintext
 troubleshooting:
 - For the Base64 decode action, be sure that the input contains valid Base64 data.
-- If the Base64 you're decoding contains any non UTF-8 characters the plugin will fail. To remedy this issue, there's a option to set how errors are to be handled. These options are "replace" and "ignore". Replace will change all non UTF-8 characters to `\uffd` or `?`. While ignore will drop the character from the output.
+- If the Base64 you're decoding contains any non UTF-8 characters the plugin will
+  fail. To remedy this issue, there's a option to set how errors are to be handled.
+  These options are "replace" and "ignore". Replace will change all non UTF-8 characters
+  to `\uffd` or `?`. While ignore will drop the character from the output.
 version_history:
+- 1.1.10 - Updated SDK to the latest version (6.3.0)
 - 1.1.9 - Updated SDK to the latest version (6.2.5)
 - 1.1.8 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
 - 1.1.7 - Initial updates for fedramp compliance | Updated SDK to the latest version
