@@ -4,7 +4,7 @@ products: [insightconnect]
 name: microsoft_defender_incidents
 title: Microsoft Defender Incidents
 description: Manage security incidents with Microsoft Defender 365
-version: 2.0.2
+version: 2.0.3
 connection_version: 2
 key_features: ["List All Incidents", "Get Incident", "Update Incident", "Get New Incidents Trigger"]
 requirements: ["Requires a set of Azure credentials such as application (client) ID, tenant ID, and client secret key with necessary permissions (Microsoft Threat Protection -> Incident.Read.All, Incident.ReadWrite.All, and AdvancedHunting.Read.All) to monitor and modify Microsoft Defender Incidents"]
@@ -34,6 +34,7 @@ links:
 references:
   - "[Microsoft Defender XDR API Documentation](https://learn.microsoft.com/en-us/defender-xdr/)"
 version_history:
+  - "2.0.3 - Allowing `NotMalicious` to be used in `determination` field for `update_incident`"
   - "2.0.2 - Updating `update_incident` input values to correlate with documentation"
   - "2.0.1 - Adding additional `determination` values | SDK bump to 6.2.6"
   - "2.0.0 - Add better error handling for missing output values"
@@ -47,7 +48,7 @@ connection:
     example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
   client_secret:
     title: Client Secret
-    description: The application secret that you generated for your app in the appregistration portal
+    description: The application secret that you generated for your app in the app registration portal
     type: credential_secret_key
     required: true
     example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
@@ -566,6 +567,7 @@ actions:
           - NoEnoughDataToValidate
           - ConfirmedActivity
           - Other
+          - NotMalicious
         type: string
         required: false
         example: Phishing
@@ -620,7 +622,7 @@ actions:
         example: TruePositive
       determination:
         title: Determination
-        description: Specifies the determination of the incident, where possible values are - MultiStagedAttack, MaliciousUserActivity, CompromisedAccount, Malware, Phishing, UnwantedSoftware, SecurityTesting, LineOfBusinessApplication, NoEnoughDataToValidate, ConfirmedActivity and Other
+        description: Specifies the determination of the incident, where possible values are - MultiStagedAttack, MaliciousUserActivity, CompromisedAccount, Malware, Phishing, UnwantedSoftware, SecurityTesting, LineOfBusinessApplication, NoEnoughDataToValidate, ConfirmedActivity, NotMalicious and Other
         type: string
         required: true
         example: Malware
