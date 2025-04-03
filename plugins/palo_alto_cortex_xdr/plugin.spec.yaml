@@ -4,12 +4,12 @@ products: [insightconnect]
 name: palo_alto_cortex_xdr
 title: Palo Alto Cortex XDR
 description: Stop modern attacks with the industry's first extended detection and response platform that spans your endpoints, network and cloud data
-version: 4.0.6
+version: 4.0.7
 connection_version: 2
 cloud_ready: true
 sdk:
   type: slim
-  version: 6.2.4
+  version: 6.3.1
   user: nobody
 supported_versions: ["2024-07-15 Palo Alto Cortex XDR API"]
 vendor: rapid7
@@ -38,6 +38,7 @@ key_features:
   - "Add files to the block or allow lists"
 troubleshooting: "Isolate Endpoint fails with 500 error - This will happen if an isolation action (Isolate or Unisolate) is in progress on the selected endpoint. Wait a few minutes and try again."
 version_history:
+  - "4.0.7 - Update `MonitorAlerts` to keep the previous hashes | Bump SDK to 6.2.6"
   - "4.0.6 - Update `MonitorAlerts` to resume alert monitoring from the last task run time | Update error handling to log additional data | Update SDK to 6.2.4"
   - "4.0.5 - Update `MonitorAlerts` task pagination decision handling | update SDK to 6.2.2"
   - "4.0.4 - Raise authentication errors if provided invalid credentials"

@@ -161,25 +161,29 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         new_hashes = []
         highest_timestamp = 0
 
-        # Create a new hash for every new alert
-        for alert in alerts:
-            # Hash the current alert
-            alert_hash = hash_sha1(alert)
-            # Add this new hash to the new hash list
-            new_hashes.append(alert_hash)
-            # Check to see if this new hash is in the list of old hashes
-            if alert_hash in old_hashes:
-                # If it is, add it to the deduped alerts
-                deduped_alerts += 1
-            # Otherwise
-            else:
-                # Add this new unique alert to undeduped (the whole object, not the hash)
-                new_alerts.append(alert)
+        if alerts:
+            # Create a new hash for every new alert
+            for alert in alerts:
+                # Hash the current alert
+                alert_hash = hash_sha1(alert)
+                # Add this new hash to the new hash list
+                new_hashes.append(alert_hash)
+                # Check to see if this new hash is in the list of old hashes
+                if alert_hash in old_hashes:
+                    # If it is, add it to the deduped alerts
+                    deduped_alerts += 1
+                # Otherwise
+                else:
+                    # Add this new unique alert to undeduped (the whole object, not the hash)
+                    new_alerts.append(alert)
 
-        # If len is 0, all results are deduped so we get list index error, so do quick if check
-        if len(new_alerts) > 0:
-            # Get the timestamp of the latest alert in the list of results
-            highest_timestamp = new_alerts[-1].get(ALERT_TIMESTAMP_KEY)
+            # If len is 0, all results are deduped so we get list index error, so do quick if check
+            if len(new_alerts) > 0:
+                # Get the timestamp of the latest alert in the list of results
+                highest_timestamp = new_alerts[-1].get(ALERT_TIMESTAMP_KEY)
+        else:
+            # Keep the old hashes
+            new_hashes = old_hashes
 
         self.logger.info(f"Received {len(alerts)} alerts")
         self.logger.info(f"Number of duplicates found: {deduped_alerts}")
