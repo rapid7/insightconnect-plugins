@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "SMB"
 Vendor = "rapid7"
-Version = "2.1.0"
+Version = "3.0.0"
 Description = "[SMB](https://en.wikipedia.org/wiki/Server_Message_Block) is a protocol used for interacting with files on an SMB server. Using this plugin, users can interact with shares and delete files automatically within Rapid7 InsightConnect workflows"
 
 
@@ -36,19 +36,11 @@ def main():
             )
             self.add_action(actions.Echo())
         
-            self.add_action(actions.ListShares())
-        
-            self.add_action(actions.ListShareFiles())
-        
             self.add_action(actions.DeleteFile())
-        
-            self.add_action(actions.DeleteFiles())
         
             self.add_action(actions.CreateFile())
         
             self.add_action(actions.DownloadFile())
-        
-            self.add_action(actions.GetAttributes())
         
 
     """Run plugin"""

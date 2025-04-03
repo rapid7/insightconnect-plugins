@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="smb-rapid7-plugin",
-    version="2.1.0",
+    version="3.0.0",
     description="[SMB](https://en.wikipedia.org/wiki/Server_Message_Block) is a protocol used for interacting with files on an SMB server. Using this plugin, users can interact with shares and delete files automatically within Rapid7 InsightConnect workflows",
     author="rapid7",
     author_email="",

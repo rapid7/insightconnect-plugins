@@ -1,17 +1,16 @@
+import uuid
+import socket
+
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
-
 from .schema import EchoInput, EchoOutput, Input, Output
-
-# Custom imports below
-import smb
 
 
 class Echo(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="echo",
-            description="Send a message to remote SMB/CIFS server and receive same message as reply if successful",
+            description="Send a message to remote SMB/CIFS server and receive the same message as a reply if successful",
             input=EchoInput(),
             output=EchoOutput(),
         )
@@ -19,18 +18,19 @@ class Echo(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         try:
             message = params.get(Input.MESSAGE).encode()
-            echo_response = self.connection.conn.echo(message)
-        except smb.smb_structs.OperationFailure as e:  # noqa: c-extension-no-member
-            raise e
-        except smb.base.SMBTimeout as e:  # noqa: c-extension-no-member
-            raise PluginException(
-                "Timeout reached when connecting to SMB endpoint. Validate network connectivity or "
-                "extend connection timeout"
-            ) from e
-        except smb.base.NotReadyError as e:  # noqa: c-extension-no-member
-            raise PluginException(
-                "The SMB connection is not authenticated or the authentication has failed.  Verify the "
-                "credentials of the connection in use."
-            ) from e
 
-        return {Output.RESPONSE: echo_response.decode()}
+            # Calls method to establish a connection
+            call_to_connection = self.connection._connect_to_smb_share  # noqa: E1101
+
+            return {Output.RESPONSE: message.decode()}
+
+        except socket.timeout:
+            raise PluginException(
+                cause="Timeout reached when connecting to SMB endpoint.",
+                assistance="Ensure the server can allow connections or increase the timeout duration",
+            )
+        except Exception as e:
+            raise PluginException(
+                cause="Unexpected error occurred during Echo.",
+                assistance=f"Error details: {str(e)}",
+            )

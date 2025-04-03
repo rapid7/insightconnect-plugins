@@ -7,10 +7,8 @@ class Input:
     CREDENTIALS = "credentials"
     DOMAIN = "domain"
     HOST = "host"
-    NETBIOS_NAME = "netbios_name"
     PORT = "port"
     TIMEOUT = "timeout"
-    USE_NTLMV2 = "use_ntlmv2"
 
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -38,12 +36,6 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "Address or hostname of the SMB server",
       "order": 1
     },
-    "netbios_name": {
-      "type": "string",
-      "title": "Server NetBIOS Name",
-      "description": "The NetBIOS machine name of the remote server",
-      "order": 5
-    },
     "port": {
       "type": "integer",
       "title": "Port",
@@ -56,22 +48,13 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "title": "Timeout",
       "description": "Connection timeout",
       "default": 60,
-      "order": 7
-    },
-    "use_ntlmv2": {
-      "type": "boolean",
-      "title": "Use NTLMv2",
-      "description": "Defines use of NTLMv2 for authentication; will use NTLMv1 if set to false",
-      "default": true,
-      "order": 6
+      "order": 5
     }
   },
   "required": [
     "credentials",
     "host",
-    "netbios_name",
-    "timeout",
-    "use_ntlmv2"
+    "timeout"
   ],
   "definitions": {
     "credential_username_password": {

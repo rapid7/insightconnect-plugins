@@ -1,7 +1,0 @@
-{
-    "path": "/",
-    "pattern": "generator.bat",
-    "share_name": "smbshare",
-    "timeout": 30,
-    "timezone": "UTC"
-}
