@@ -1,14 +1,13 @@
-import komand
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import DownloadFileInput, DownloadFileOutput, Input, Output, Component
-from komand.exceptions import PluginException
 
-# Custom imports below
-import chardet
-import io
-import smb
+from smbprotocol.open import Open, ImpersonationLevel, CreateDisposition, CreateOptions, ShareAccess
+from smbprotocol.file_info import FileAttributes
+from smbprotocol.exceptions import SMBException
 
 
-class DownloadFile(komand.Action):
+class DownloadFile(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="download_file",
@@ -20,28 +19,51 @@ class DownloadFile(komand.Action):
     def run(self, params={}):
         file_path = params.get(Input.FILE_PATH)
         share_name = params.get(Input.SHARE_NAME)
-        timeout = params.get(Input.TIMEOUT, 30)
 
         try:
-            file_obj = io.BytesIO()
-            self.connection.conn.retrieveFile(share_name, file_path, file_obj, timeout=timeout)
-        except smb.smb_structs.OperationFailure as e:
-            raise PluginException(
-                cause="Failed to retrieve file content",
-                assistance="This may occur when the file does not exist.",
-                data=e,
+            # Calls method to establish a connection
+            tree = self.connection._connect_to_smb_share(share_name)  # noqa: E1101
+
+            open_file = Open(tree, file_path)
+            open_file.create(
+                impersonation_level=ImpersonationLevel.Impersonation,
+                file_attributes=FileAttributes.FILE_ATTRIBUTE_NORMAL,
+                desired_access=0x1,  # standard read access
+                share_access=ShareAccess.FILE_SHARE_READ,
+                create_disposition=CreateDisposition.FILE_OPEN,
+                create_options=CreateOptions.FILE_NON_DIRECTORY_FILE,
             )
-        except smb.base.SMBTimeout as e:
+
+            file_content = open_file.read(0, open_file.end_of_file)
+
+            open_file.close()
+            tree.disconnect()
+
+            if not file_content:
+                raise PluginException(
+                    cause="File is empty or no content returned.",
+                    assistance="Ensure the file contains valid content.",
+                )
+
+            decoded_content = file_content.decode("utf-8", errors="replace")
+
+            return {Output.FILE: {"content": decoded_content, "filename": file_path}}
+
+        except SMBException as error:
+            if "STATUS_BAD_NETWORK_NAME" in str(error):
+                raise PluginException(
+                    cause=f"The requested share: {share_name} is not a valid share name.",
+                    assistance=f"Please ensure the share name: {share_name} is correct and try again.",
+                )
+
+            elif "STATUS_OBJECT_NAME_NOT_FOUND" in str(error):
+                raise PluginException(
+                    cause="File not found.",
+                    assistance=f"The file: {file_path} does not exist in the share: {share_name}. Please check the path and try again.",
+                )
+
             raise PluginException(
-                cause="Timeout reached when connecting to SMB endpoint.",
-                assistance="Validate network connectivity.",
-                data=e,
+                cause="Failed to download file.",
+                assistance="Ensure the file exists and that the correct permissions are set.",
+                data=error,
             )
-        except smb.base.NotReadyError as e:
-            raise PluginException(
-                cause="The SMB connection is not authenticated or the authentication has failed.",
-                assistance="Verify the credentials of the connection in use.",
-                data=e,
-            )
-        encoding = chardet.detect(file_obj.getvalue()).get("encoding", "utf-8")
-        return {Output.FILE: {"content": file_obj.getvalue().decode(encoding), "filename": file_path}}
