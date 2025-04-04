@@ -29,8 +29,8 @@ class Echo(insightconnect_plugin_runtime.Action):
                 cause="Timeout reached when connecting to SMB endpoint.",
                 assistance="Ensure the server can allow connections or increase the timeout duration",
             )
-        except Exception as e:
+        except Exception as error:
             raise PluginException(
                 cause="Unexpected error occurred during Echo.",
-                assistance=f"Error details: {str(e)}",
+                assistance=f"Error details: {error}",
             )

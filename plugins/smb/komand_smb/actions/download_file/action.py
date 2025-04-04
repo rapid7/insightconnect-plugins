@@ -59,11 +59,11 @@ class DownloadFile(insightconnect_plugin_runtime.Action):
             elif "STATUS_OBJECT_NAME_NOT_FOUND" in str(error):
                 raise PluginException(
                     cause="File not found.",
-                    assistance=f"The file '{file_path}' does not exist in the share '{share_name}'. Please check the path and try again.",
+                    assistance=f"The file: {file_path} does not exist in the share: {share_name}. Please check the path and try again.",
                 )
 
             raise PluginException(
                 cause="Failed to download file.",
                 assistance="Ensure the file exists and that the correct permissions are set.",
-                data=str(error),
+                data=error,
             )

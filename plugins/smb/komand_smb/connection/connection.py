@@ -57,9 +57,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
             self.logger.info(f"Successfully connected to SMB server: {share_name}")
             return tree
 
-        except PluginException as e:
-            self.logger.error(f"Failed to connect to SMB server: '{share_name}': {e}")
-            raise PluginException(f"Unable to connect to SMB server: '{share_name}'. Error: {e}")
+        except PluginException as error:
+            self.logger.error(f"Failed to connect to SMB server: '{share_name}': {error}")
+            raise PluginException(f"Unable to connect to SMB server: '{share_name}'. Error: {error}")
 
     def test(self):
         try:
@@ -68,5 +68,5 @@ class Connection(insightconnect_plugin_runtime.Connection):
             self.logger.info("Connectivity test to SMB server was successful")
             return
 
-        except PluginException as e:
-            raise ConnectionTestException(cause="Connection test to SMB server failed.", assistance=str(e))
+        except PluginException as error:
+            raise ConnectionTestException(cause="Connection test to SMB server failed.", assistance=error)

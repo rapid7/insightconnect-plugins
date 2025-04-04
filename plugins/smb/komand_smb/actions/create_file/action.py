@@ -27,7 +27,7 @@ class CreateFile(insightconnect_plugin_runtime.Action):
             )
 
         file_path = params.get(Input.FILE_PATH, "").strip()
-        share_name = params.get(Input.SHARE_NAME).strip()
+        share_name = params.get(Input.SHARE_NAME, "").strip()
         file_content = params.get(Input.FILE_CONTENT)
         overwrite_existing = params.get(Input.OVERWRITE_EXISTING)
 
@@ -60,7 +60,7 @@ class CreateFile(insightconnect_plugin_runtime.Action):
             if "STATUS_OBJECT_NAME_COLLISION" in str(error) and not overwrite_existing:
                 raise PluginException(
                     cause="File already exists and overwrite_existing is set to False.",
-                    assistance=f"File '{file_path}' already exists, and overwrite_existing is False. Please set overwrite_existing to True if you want to overwrite the file.",
+                    assistance=f"File: {file_path} already exists, and overwrite_existing is False. Please set overwrite_existing to True if you want to overwrite the file.",
                 )
             elif "STATUS_OBJECT_NAME_INVALID" in str(error) or "STATUS_OBJECT_NAME_COLLISION" in str(error):
                 raise PluginException(
@@ -90,7 +90,7 @@ class CreateFile(insightconnect_plugin_runtime.Action):
         except PluginException as e:
             raise PluginException(
                 cause="Failed to create a file",
-                assistance=f"Ensure the share name '{share_name}' and file path '{file_path}' are correct, and that the correct permissions have been granted.",
+                assistance=f"Ensure the share name: {share_name} and file path {file_path} are correct, and that the correct permissions have been granted.",
                 data=str(e),
             )
         finally:

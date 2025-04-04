@@ -1,7 +1,7 @@
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from .schema import DeleteFileInput, DeleteFileOutput, Input, Output
+from .schema import DeleteFileInput, DeleteFileOutput, Input, Output, Component
 
 from smbprotocol.open import Open, ImpersonationLevel, CreateDisposition, CreateOptions, FilePipePrinterAccessMask
 from smbprotocol.file_info import FileAttributes
@@ -12,7 +12,7 @@ class DeleteFile(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="delete_file",
-            description="Delete a file from an SMB share",
+            description=Component.DESCRIPTION,
             input=DeleteFileInput(),
             output=DeleteFileOutput(),
         )
@@ -24,7 +24,10 @@ class DeleteFile(insightconnect_plugin_runtime.Action):
         # Prevent wildcard value deletions
         if "*" in file_path:
             self.logger.error("Wildcard deletions are not allowed.")
-            return {Output.DELETED: False}
+            raise PluginException(
+                cause="Wildcard * is not a valid input.",
+                assistance=f"The file input {file_path} is not allowed. Please ensure there are no wildcard values in the file path.",
+            )
 
         try:
             self.logger.info(f"Attempting to delete file: {file_path} from share: {share_name}")
@@ -43,7 +46,7 @@ class DeleteFile(insightconnect_plugin_runtime.Action):
             )
             open_file.close()
 
-            self.logger.info(f"File '{file_path}' deleted successfully.")
+            self.logger.info(f"File: {file_path} was deleted successfully.")
             tree.disconnect()
 
             return {Output.DELETED: True}
@@ -56,12 +59,12 @@ class DeleteFile(insightconnect_plugin_runtime.Action):
                 )
             elif "STATUS_OBJECT_NAME_NOT_FOUND" in str(error):
                 raise PluginException(
-                    cause=f"File '{file_path}' not found",
+                    cause=f"File: {file_path} not found",
                     assistance=f"Please ensure {file_path} file exists before attempting to delete it.",
                 )
 
             raise PluginException(
                 cause="Failed to delete file.",
-                assistance=f"The file '{file_path}' may not exist or is locked. Ensure it exists and is not in use.",
-                data=str(error),
+                assistance=f"The file: {file_path} may not exist or is locked. Ensure it exists and is not in use.",
+                data=error,
             ) from error
