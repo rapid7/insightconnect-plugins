@@ -14,7 +14,7 @@ cloud_ready: true
 fedramp_ready: true
 sdk:
   type: slim
-  version: 6.3.1
+  version: 6.3.2
   user: nobody
 supported_versions: [2.1.0]
 vendor: rapid7
