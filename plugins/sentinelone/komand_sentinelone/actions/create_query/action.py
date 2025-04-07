@@ -8,7 +8,10 @@ from komand_sentinelone.util.helper import clean
 class CreateQuery(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="create_query", description=Component.DESCRIPTION, input=CreateQueryInput(), output=CreateQueryOutput()
+            name="create_query",
+            description=Component.DESCRIPTION,
+            input=CreateQueryInput(),
+            output=CreateQueryOutput(),
         )
 
     def run(self, params={}):

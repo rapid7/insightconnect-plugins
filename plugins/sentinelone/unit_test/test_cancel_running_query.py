@@ -6,7 +6,9 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import patch
 from komand_sentinelone.actions.cancel_running_query import CancelRunningQuery
-from komand_sentinelone.actions.cancel_running_query.schema import CancelRunningQueryOutput
+from komand_sentinelone.actions.cancel_running_query.schema import (
+    CancelRunningQueryOutput,
+)
 from util import Util
 from insightconnect_plugin_runtime.exceptions import PluginException
 from parameterized import parameterized

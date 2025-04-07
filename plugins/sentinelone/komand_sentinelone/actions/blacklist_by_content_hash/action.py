@@ -1,5 +1,11 @@
 import insightconnect_plugin_runtime
-from .schema import BlacklistByContentHashInput, BlacklistByContentHashOutput, Component, Input, Output
+from .schema import (
+    BlacklistByContentHashInput,
+    BlacklistByContentHashOutput,
+    Component,
+    Input,
+    Output,
+)
 
 # Custom imports below
 

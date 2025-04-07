@@ -6,7 +6,9 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import patch
 from komand_sentinelone.actions.update_incident_status import UpdateIncidentStatus
-from komand_sentinelone.actions.update_incident_status.schema import UpdateIncidentStatusOutput
+from komand_sentinelone.actions.update_incident_status.schema import (
+    UpdateIncidentStatusOutput,
+)
 from insightconnect_plugin_runtime.exceptions import PluginException
 from util import Util
 from parameterized import parameterized

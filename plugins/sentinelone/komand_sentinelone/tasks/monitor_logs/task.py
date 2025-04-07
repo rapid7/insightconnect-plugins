@@ -41,9 +41,18 @@ EVENTS_LOGS = "events_logs"
 THREATS_LOGS = "threats_logs"
 
 LOG_TYPE_MAP = {
-    ACTIVITIES_LOGS: {"LAST_LOG_TIMESTAMP": ACTIVITIES_LAST_LOG_TIMESTAMP, "PAGE_TOKEN": ACTIVITIES_PAGE_CURSOR},
-    EVENTS_LOGS: {"LAST_LOG_TIMESTAMP": EVENTS_LAST_LOG_TIMESTAMP, "PAGE_TOKEN": EVENTS_PAGE_CURSOR},
-    THREATS_LOGS: {"LAST_LOG_TIMESTAMP": THREATS_LAST_LOG_TIMESTAMP, "PAGE_TOKEN": THREATS_PAGE_CURSOR},
+    ACTIVITIES_LOGS: {
+        "LAST_LOG_TIMESTAMP": ACTIVITIES_LAST_LOG_TIMESTAMP,
+        "PAGE_TOKEN": ACTIVITIES_PAGE_CURSOR,
+    },
+    EVENTS_LOGS: {
+        "LAST_LOG_TIMESTAMP": EVENTS_LAST_LOG_TIMESTAMP,
+        "PAGE_TOKEN": EVENTS_PAGE_CURSOR,
+    },
+    THREATS_LOGS: {
+        "LAST_LOG_TIMESTAMP": THREATS_LAST_LOG_TIMESTAMP,
+        "PAGE_TOKEN": THREATS_PAGE_CURSOR,
+    },
 }
 
 
@@ -95,7 +104,13 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             # Check if all ran queries have returned 401 or 403 errors and raise an exception if so
             if total_forbidden_responses >= total_queries > 0:
                 self.logger.info("Error: Total unauthorized/forbidden responses exceed threshold")
-                return [], existing_state, False, 401, PluginException(preset=PluginException.Preset.UNAUTHORIZED)
+                return (
+                    [],
+                    existing_state,
+                    False,
+                    401,
+                    PluginException(preset=PluginException.Preset.UNAUTHORIZED),
+                )
             has_more_pages = self.determine_next_pagination_cycle(state, current_run_timestamp)
             return all_logs, state, has_more_pages, 200, None
         except ApiException as error:
@@ -105,7 +120,13 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             return [], existing_state, False, error.status_code, error
         except Exception as error:
             self.logger.info(f"Error: Unknown exception has occurred. No results returned. Error Data: {error}")
-            return [], existing_state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+            return (
+                [],
+                existing_state,
+                False,
+                500,
+                PluginException(preset=PluginException.Preset.UNKNOWN, data=error),
+            )
 
     def check_initial_run(self, state: Dict) -> bool:
         """
@@ -203,7 +224,12 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 self.logger.info(f"Received status code {status_code} for {log_type} query")
             response_handler(response, allowed_status_codes=[401, 403])
         except PluginException as error:
-            raise ApiException(cause=error.cause, assistance=error.assistance, status_code=status_code, data=response)
+            raise ApiException(
+                cause=error.cause,
+                assistance=error.assistance,
+                status_code=status_code,
+                data=response,
+            )
         logs, next_page_cursor, total_forbidden_responses = self.extract_query_response(
             response, total_forbidden_responses
         )
@@ -215,7 +241,13 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             self.logger.info(f"New next page cursor received for {log_type}: {next_page_cursor}")
         return logs, total_forbidden_responses
 
-    def get_query_params(self, log_type: str, lookback_timestamp: str, current_run_timestamp: str, cursor: str) -> Dict:
+    def get_query_params(
+        self,
+        log_type: str,
+        lookback_timestamp: str,
+        current_run_timestamp: str,
+        cursor: str,
+    ) -> Dict:
         """
         Generate query parameters based on log type and availability of pagination cursor
         """
@@ -236,7 +268,10 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         """
         Return the log sand the pagination cursor from a query response
         """
-        if response.status_code in [HTTPStatusCodes.UNAUTHORIZED, HTTPStatusCodes.FORBIDDEN]:
+        if response.status_code in [
+            HTTPStatusCodes.UNAUTHORIZED,
+            HTTPStatusCodes.FORBIDDEN,
+        ]:
             total_forbidden_responses += 1
             return [], None, total_forbidden_responses
         response_json = extract_json(response)
@@ -281,7 +316,11 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         Return true if pagination expected next cycle.
         """
         has_more_pages = any(
-            [state.get(ACTIVITIES_PAGE_CURSOR), state.get(EVENTS_PAGE_CURSOR), state.get(THREATS_PAGE_CURSOR)]
+            [
+                state.get(ACTIVITIES_PAGE_CURSOR),
+                state.get(EVENTS_PAGE_CURSOR),
+                state.get(THREATS_PAGE_CURSOR),
+            ]
         )
         if has_more_pages:
             self.logger.info(

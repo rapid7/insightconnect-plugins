@@ -1,5 +1,11 @@
 import insightconnect_plugin_runtime
-from .schema import FetchFileByAgentIdInput, FetchFileByAgentIdOutput, Input, Output, Component
+from .schema import (
+    FetchFileByAgentIdInput,
+    FetchFileByAgentIdOutput,
+    Input,
+    Output,
+    Component,
+)
 
 # Custom imports below
 from komand_sentinelone.util.helper import check_password_meets_requirements

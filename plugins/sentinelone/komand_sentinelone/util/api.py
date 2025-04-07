@@ -62,11 +62,17 @@ class SentineloneAPI:
         return self._call_api("GET", APPS_BY_AGENT_IDS_ENDPOINT, params={"ids": identifiers})
 
     def agents_action(self, action: str, agents_filter: str) -> dict:
-        return self._call_api("POST", AGENTS_ACTION_ENDPOINT.format(action=action), json={"filter": agents_filter})
+        return self._call_api(
+            "POST",
+            AGENTS_ACTION_ENDPOINT.format(action=action),
+            json={"filter": agents_filter},
+        )
 
     def agents_action_move_agent_to_new_site(self, agents_filter: dict, data: dict, action: str) -> dict:
         return self._call_api(
-            "POST", AGENTS_ACTION_ENDPOINT.format(action=action), json={"filter": agents_filter, "data": data}
+            "POST",
+            AGENTS_ACTION_ENDPOINT.format(action=action),
+            json={"filter": agents_filter, "data": data},
         )
 
     def agents_support_action(self, action: str, json_data: dict) -> dict:
@@ -77,7 +83,10 @@ class SentineloneAPI:
         return self._call_api(
             "POST",
             BLACKLIST_BY_CONTENT_HASH_ENDPOINT,
-            json={"filter": {"contentHashes": hash_value}, "data": {"targetScope": "site"}},
+            json={
+                "filter": {"contentHashes": hash_value},
+                "data": {"targetScope": "site"},
+            },
         )
 
     def create_blacklist_item(self, blacklist_hash: str, description: str) -> bool:
@@ -153,7 +162,12 @@ class SentineloneAPI:
         response = self._call_api(
             "GET",
             BLOCKLIST_ENDPOINT,
-            params={"type": "black_hash", "ids": ids, "includeChildren": True, "includeParents": True},
+            params={
+                "type": "black_hash",
+                "ids": ids,
+                "includeChildren": True,
+                "includeParents": True,
+            },
         )
 
         existing_os_types = []
@@ -166,7 +180,12 @@ class SentineloneAPI:
         restrictions = self._call_api(
             "GET",
             BLOCKLIST_ENDPOINT,
-            params={"type": "black_hash", "includeChildren": True, "includeParents": True, "value": blacklist_hash},
+            params={
+                "type": "black_hash",
+                "includeChildren": True,
+                "includeParents": True,
+                "value": blacklist_hash,
+            },
         ).get("data", [])
 
         ids = []
@@ -179,7 +198,9 @@ class SentineloneAPI:
 
     def enable_agent(self, reboot: bool, agent_filter: dict) -> dict:
         return self._call_api(
-            "POST", ENABLE_AGENT_ENDPOINT, json={"data": {"shouldReboot": reboot}, "filter": agent_filter}
+            "POST",
+            ENABLE_AGENT_ENDPOINT,
+            json={"data": {"shouldReboot": reboot}, "filter": agent_filter},
         )
 
     def fetch_file_by_agent_id(self, agent_id: str, file_path: str, password: str) -> bool:
@@ -202,7 +223,11 @@ class SentineloneAPI:
         return self._call_api("GET", ACCOUNT_NAME_AVAILABLE_ENDPOINT, params={"name": name})
 
     def mitigate_threat(self, threat_id: str, action: str) -> dict:
-        return self._call_api("POST", MITIGATE_THREAT_ENDPOINT.format(action=action), {"filter": {"ids": [threat_id]}})
+        return self._call_api(
+            "POST",
+            MITIGATE_THREAT_ENDPOINT.format(action=action),
+            {"filter": {"ids": [threat_id]}},
+        )
 
     def mark_as_benign(self, threat_id: str, whitening_option: str, target_scope: str) -> dict:
         # Mark as benign does not exist in v2.1
@@ -211,7 +236,10 @@ class SentineloneAPI:
             MARK_AS_BENIGN_ENDPOINT,
             json={
                 "filter": {"ids": [threat_id]},
-                "data": {"whiteningOption": whitening_option, "targetScope": target_scope},
+                "data": {
+                    "whiteningOption": whitening_option,
+                    "targetScope": target_scope,
+                },
             },
             override_api_version="2.0",
         )
@@ -223,7 +251,10 @@ class SentineloneAPI:
             MARK_AS_THREAT_ENDPOINT,
             {
                 "filter": {"ids": [threat_id]},
-                "data": {"whiteningOption": whitening_option, "targetScope": target_scope},
+                "data": {
+                    "whiteningOption": whitening_option,
+                    "targetScope": target_scope,
+                },
             },
             override_api_version="2.0",
         )
@@ -232,7 +263,11 @@ class SentineloneAPI:
         return self._call_api("GET", ALERTS_ENDPOINT, params=params)
 
     def get_threats(
-        self, params: dict, api_version: str = "2.0", full_response: bool = False, raise_for_status: bool = True
+        self,
+        params: dict,
+        api_version: str = "2.0",
+        full_response: bool = False,
+        raise_for_status: bool = True,
     ) -> dict:
         # GET /threats has different response schemas for 2.1 and 2.0
         # Use 2.0 endpoint to be consistent and support as many S1 consoles as possible
@@ -249,12 +284,15 @@ class SentineloneAPI:
         threats = self.get_threats({"ids": threat_ids}, api_version="2.1")
         if not threats.get("data"):
             raise PluginException(
-                cause="Invalid threat IDs provided.", assistance="Please provide valid threat ID and try again."
+                cause="Invalid threat IDs provided.",
+                assistance="Please provide valid threat ID and try again.",
             )
 
     def threats_fetch_file(self, password: str, agents_filter: dict) -> int:
         return self._call_api(
-            "POST", THREATS_FETCH_FILE_ENDPOINT, {"data": {"password": password}, "filter": agents_filter}
+            "POST",
+            THREATS_FETCH_FILE_ENDPOINT,
+            {"data": {"password": password}, "filter": agents_filter},
         )
 
     def download_file(self, agent_filter: dict, fetch_date: str, password: str) -> dict:
@@ -329,7 +367,12 @@ class SentineloneAPI:
         params["cursor"] = threats.get("pagination", {}).get("nextCursor")
 
         while params.get("cursor"):
-            next_threats = self._call_api("GET", THREAT_SUMMARY_ENDPOINT, params=params, override_api_version="2.0")
+            next_threats = self._call_api(
+                "GET",
+                THREAT_SUMMARY_ENDPOINT,
+                params=params,
+                override_api_version="2.0",
+            )
             all_threads_data.extend(next_threats.get("data", []))
             params["cursor"] = next_threats.get("pagination", {}).get("nextCursor")
         threats["data"] = all_threads_data
@@ -486,7 +529,10 @@ class SentineloneAPI:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)
         except requests.exceptions.HTTPError as error:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
-        except (requests.exceptions.ConnectionError, requests.exceptions.SSLError) as error:
+        except (
+            requests.exceptions.ConnectionError,
+            requests.exceptions.SSLError,
+        ) as error:
             raise PluginException(
                 data=error,
                 cause=PluginException.causes.get(PluginException.Preset.CONNECTION_ERROR),
@@ -513,7 +559,12 @@ class SentineloneAPI:
         return f"{scheme}://{netloc}/"
 
     def get_agents_data(
-        self, agent: str, api_version: str, search: str, agent_active: bool, results: List[Dict[str, Any]]
+        self,
+        agent: str,
+        api_version: str,
+        search: str,
+        agent_active: bool,
+        results: List[Dict[str, Any]],
     ) -> None:
         """
         Gets agents Data
@@ -533,7 +584,12 @@ class SentineloneAPI:
         :type: List[Dict[str, Any]]
         """
         params = {search: agent, "isActive": agent_active}
-        output = self._call_api("GET", SEARCH_AGENTS_ENDPOINT, params=params, override_api_version=api_version)
+        output = self._call_api(
+            "GET",
+            SEARCH_AGENTS_ENDPOINT,
+            params=params,
+            override_api_version=api_version,
+        )
         for agent_data in output.get("data", []):
             if agent_data not in results:
                 results.append(agent_data)
@@ -568,7 +624,10 @@ class SentineloneAPI:
                 self.get_agents_data(agent_details, api_version, search, agent_active, results)
         else:
             output = self._call_api(
-                "GET", SEARCH_AGENTS_ENDPOINT, params={"isActive": agent_active}, override_api_version=api_version
+                "GET",
+                SEARCH_AGENTS_ENDPOINT,
+                params={"isActive": agent_active},
+                override_api_version=api_version,
             )
             results.extend(output.get("data", []))
         if operational_state and operational_state != "Any":
@@ -588,7 +647,8 @@ class SentineloneAPI:
         agents = self.search_agents(agent, api_version="2.1")
         if self.__check_agents_found(agents):
             raise PluginException(
-                cause=f"No agents found for: {agent}.", assistance="Please check provided information and try again."
+                cause=f"No agents found for: {agent}.",
+                assistance="Please check provided information and try again.",
             )
         else:
             agent_uuid = agents[0].get("uuid")

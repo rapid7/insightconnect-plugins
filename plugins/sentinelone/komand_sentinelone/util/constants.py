@@ -135,7 +135,10 @@ TIMEZONES_MAP = {
         "Papua New Guinea Time [PGT]",
         "Vladivostok Time [VLAT]",
     ],
-    "GMT +10:30": ["Australian Central Daylight Saving Time [ACDT]", "Lord Howe Standard Time [LHST]"],
+    "GMT +10:30": [
+        "Australian Central Daylight Saving Time [ACDT]",
+        "Lord Howe Standard Time [LHST]",
+    ],
     "GMT +11:00": [
         "Australian Eastern Daylight Saving Time [AEDT]",
         "Bougainville Standard Time [BST]",
@@ -170,7 +173,11 @@ TIMEZONES_MAP = {
     ],
     "GMT +13:45": ["Chatham Daylight Time [CHADT]"],
     "GMT +14:00": ["Line Islands Time [LINT]"],
-    "GMT -01:00": ["Azores Standard Time [AZOT]", "Cape Verde Time [CVT]", "Eastern Greenland Time [EGT]"],
+    "GMT -01:00": [
+        "Azores Standard Time [AZOT]",
+        "Cape Verde Time [CVT]",
+        "Eastern Greenland Time [EGT]",
+    ],
     "GMT -02:00": [
         "Brasília Summer Time [BRST]",
         "Fernando de Noronha Time [FNT]",
@@ -226,7 +233,10 @@ TIMEZONES_MAP = {
         "Galápagos Time [GALT]",
         "Mountain Daylight Time (North America) [MDT]",
     ],
-    "GMT -07:00": ["Mountain Standard Time (North America) [MST]", "Pacific Daylight Time (North America) [PDT]"],
+    "GMT -07:00": [
+        "Mountain Standard Time (North America) [MST]",
+        "Pacific Daylight Time (North America) [PDT]",
+    ],
     "GMT -08:00": [
         "Alaska Daylight Time [AKDT]",
         "Clipperton Island Standard Time [CIST]",
@@ -246,5 +256,8 @@ TIMEZONES_MAP = {
         "Tahiti Time [TAHT]",
     ],
     "GMT -11:00": ["Niue Time [NUT]", "Samoa Standard Time [SST]"],
-    "GMT -12:00": ["Baker Island Time [BIT]", "International Day Line West time zone [IDLW]"],
+    "GMT -12:00": [
+        "Baker Island Time [BIT]",
+        "International Day Line West time zone [IDLW]",
+    ],
 }

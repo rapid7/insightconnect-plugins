@@ -231,7 +231,10 @@ class TestMonitorLogs(TestCase):
     ):
         task = Util.default_connector(
             MonitorLogs(),
-            {ConnectionInput.INSTANCE: "https://rapid7.sentinelone.net", ConnectionInput.APIKEY: {"secretKey": "test"}},
+            {
+                ConnectionInput.INSTANCE: "https://rapid7.sentinelone.net",
+                ConnectionInput.APIKEY: {"secretKey": "test"},
+            },
         )
         output, state, has_more_pages, status_code, error = task.run(
             params={}, state=state, custom_config=custom_config
@@ -258,7 +261,17 @@ class TestMonitorLogs(TestCase):
             [
                 "cutoff_lookback",
                 {},
-                {"cutoff": 48, "lookback": {"year": 1999, "month": 12, "day": 30, "hour": 0, "minute": 0, "second": 0}},
+                {
+                    "cutoff": 48,
+                    "lookback": {
+                        "year": 1999,
+                        "month": 12,
+                        "day": 30,
+                        "hour": 0,
+                        "minute": 0,
+                        "second": 0,
+                    },
+                },
                 Util.read_file_to_dict("expected/monitor_logs.json.exp"),
                 STUB_STATE_EXPECTED,
                 True,
@@ -268,7 +281,17 @@ class TestMonitorLogs(TestCase):
             [
                 "lookback_continuation",
                 STUB_STATE_CONTINUATION,
-                {"cutoff": 48, "lookback": {"year": 1999, "month": 12, "day": 30, "hour": 0, "minute": 0, "second": 0}},
+                {
+                    "cutoff": 48,
+                    "lookback": {
+                        "year": 1999,
+                        "month": 12,
+                        "day": 30,
+                        "hour": 0,
+                        "minute": 0,
+                        "second": 0,
+                    },
+                },
                 Util.read_file_to_dict("expected/monitor_logs.json.exp"),
                 STUB_STATE_CONTINUATION,
                 True,
@@ -278,7 +301,17 @@ class TestMonitorLogs(TestCase):
             [
                 "lookback_pagination",
                 STUB_STATE,
-                {"cutoff": 48, "lookback": {"year": 1999, "month": 12, "day": 30, "hour": 0, "minute": 0, "second": 0}},
+                {
+                    "cutoff": 48,
+                    "lookback": {
+                        "year": 1999,
+                        "month": 12,
+                        "day": 30,
+                        "hour": 0,
+                        "minute": 0,
+                        "second": 0,
+                    },
+                },
                 Util.read_file_to_dict("expected/monitor_logs.json.exp"),
                 STUB_STATE,
                 True,
@@ -320,14 +353,22 @@ class TestMonitorLogs(TestCase):
             ],
             [
                 "401",
-                {"activities_page_cursor": "401", "events_page_cursor": "401", "threats_page_cursor": "401"},
+                {
+                    "activities_page_cursor": "401",
+                    "events_page_cursor": "401",
+                    "threats_page_cursor": "401",
+                },
                 401,
                 "The account configured in your connection is unauthorized to access this service.",
                 "Verify the permissions for your account and try again.",
             ],
             [
                 "403",
-                {"activities_page_cursor": "403", "events_page_cursor": "403", "threats_page_cursor": "403"},
+                {
+                    "activities_page_cursor": "403",
+                    "events_page_cursor": "403",
+                    "threats_page_cursor": "403",
+                },
                 401,
                 "The account configured in your connection is unauthorized to access this service.",
                 "Verify the permissions for your account and try again.",
@@ -349,7 +390,13 @@ class TestMonitorLogs(TestCase):
         ]
     )
     def test_monitor_logs_api_errors(
-        self, mock_request, test_name, state, expected_status_code, expected_cause, expected_assistance
+        self,
+        mock_request,
+        test_name,
+        state,
+        expected_status_code,
+        expected_cause,
+        expected_assistance,
     ):
         output, state, has_more_pages, status_code, error = self.task.run(params={}, state=state)
         self.assertEqual(False, has_more_pages)

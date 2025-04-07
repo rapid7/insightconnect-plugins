@@ -72,7 +72,7 @@ hub_tags:
   keywords: [sentinelone, endpoint, detection, cloud_enabled]
   features: []
 version_history:
-- 11.1.5 - Updated SDK to the latest version (6.3.1)
+- 11.1.5 - Updated SDK to the latest version (6.3.2)
 - 11.1.4 - Updated SDK to the latest version (6.2.5)
 - 11.1.3 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities |
   Fix issue with URL input validation

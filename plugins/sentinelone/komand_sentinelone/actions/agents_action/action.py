@@ -18,7 +18,13 @@ class AgentsAction(insightconnect_plugin_runtime.Action):
         agent_filter = params.get(Input.FILTER, "")
         action = params.get(Input.ACTION, None)
 
-        if action in ["decommission", "disconnect", "restart-machine", "shutdown", "uninstall"]:
+        if action in [
+            "decommission",
+            "disconnect",
+            "restart-machine",
+            "shutdown",
+            "uninstall",
+        ]:
             if "ids" not in agent_filter and "groupIds" not in agent_filter and "filterId" not in agent_filter:
                 raise PluginException(
                     cause="Wrong filter parameter.",

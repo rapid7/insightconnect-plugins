@@ -7,7 +7,9 @@ from unittest.mock import patch
 from util import Util
 from unittest import TestCase
 from komand_sentinelone.actions.fetch_file_by_agent_id import FetchFileByAgentId
-from komand_sentinelone.actions.fetch_file_by_agent_id.schema import FetchFileByAgentIdOutput
+from komand_sentinelone.actions.fetch_file_by_agent_id.schema import (
+    FetchFileByAgentIdOutput,
+)
 from insightconnect_plugin_runtime.exceptions import PluginException
 from parameterized import parameterized
 from jsonschema import validate

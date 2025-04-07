@@ -71,7 +71,11 @@ def rate_limiting(max_tries: int, back_off_function: Callable = backoff_function
                         PluginException.causes[PluginException.Preset.SERVICE_UNAVAILABLE],
                     ]:
                         logging.info(
-                            "%s Retrying in %.1f seconds (%d/%d)", error.cause, delay, attempts_counter, max_tries
+                            "%s Retrying in %.1f seconds (%d/%d)",
+                            error.cause,
+                            delay,
+                            attempts_counter,
+                            max_tries,
                         )
                         retry = True
             return func(self, *args, **kwargs)
@@ -114,7 +118,10 @@ def check_password_meets_requirements(password: str):
     A method to determine if password meets required format (minimum length and no whitespace)
     :param password: The password to check
     """
-    if not re.match("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$", password):
+    if not re.match(
+        "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$",
+        password,
+    ):
         raise PluginException(
             cause="Invalid password.",
             assistance="The password must be 10 or more characters with a mix of upper and lower case letters, numbers,"

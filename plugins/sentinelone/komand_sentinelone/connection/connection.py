@@ -1,6 +1,9 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
+from insightconnect_plugin_runtime.exceptions import (
+    ConnectionTestException,
+    PluginException,
+)
 from komand_sentinelone.util.helper import format_subdomain
 from komand_sentinelone.util.api import SentineloneAPI
 
@@ -70,7 +73,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
                     failed_assistance = "Please check your permissions and credentials before trying again."
                     self.logger.info(failed_assistance)
 
-                    raise ConnectionTestException(cause=failed_cause, assistance=failed_assistance, data=return_message)
+                    raise ConnectionTestException(
+                        cause=failed_cause,
+                        assistance=failed_assistance,
+                        data=return_message,
+                    )
         results_message = (
             f"The connection test was successful for {total_queries-total_failures}/{total_queries}" f" event types."
         )

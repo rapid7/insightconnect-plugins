@@ -1,5 +1,11 @@
 import insightconnect_plugin_runtime
-from .schema import CreateIocThreatInput, CreateIocThreatOutput, Input, Output, Component
+from .schema import (
+    CreateIocThreatInput,
+    CreateIocThreatOutput,
+    Input,
+    Output,
+    Component,
+)
 
 # Custom imports below
 from komand_sentinelone.util.helper import clean

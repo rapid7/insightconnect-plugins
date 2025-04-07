@@ -1,5 +1,11 @@
 import insightconnect_plugin_runtime
-from .schema import ThreatsFetchFileInput, ThreatsFetchFileOutput, Input, Output, Component
+from .schema import (
+    ThreatsFetchFileInput,
+    ThreatsFetchFileOutput,
+    Input,
+    Output,
+    Component,
+)
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException

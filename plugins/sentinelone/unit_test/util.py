@@ -30,7 +30,9 @@ class Util:
     @staticmethod
     def read_file_to_string(filename: str) -> str:
         with open(
-            os.path.join(os.path.dirname(os.path.realpath(__file__)), filename), "r", encoding="utf-8"
+            os.path.join(os.path.dirname(os.path.realpath(__file__)), filename),
+            "r",
+            encoding="utf-8",
         ) as file_reader:
             return file_reader.read()
 
@@ -134,7 +136,10 @@ class Util:
                 "data": {"targetScope": "site"},
             }:
                 return MockResponse(200, "affected_1")
-            if json_data == {"filter": {"contentHashes": "invalid_hash"}, "data": {"targetScope": "site"}}:
+            if json_data == {
+                "filter": {"contentHashes": "invalid_hash"},
+                "data": {"targetScope": "site"},
+            }:
                 return MockResponse(200, "affected_0")
         elif args[1] == "https://rapid7.sentinelone.net/web/api/v2.1/threats/fetch-file":
             return MockResponse(200, "threats_fetch_file")
@@ -234,7 +239,10 @@ class Util:
                     return MockResponse(400)
             return MockResponse(200, "affected_1")
         elif args[1] == "https://rapid7.sentinelone.net/web/api/v2.1/private/agents/support-actions/reload":
-            if json_data == {"filter": {"ids": ["invalid_id"]}, "data": {"module": "monitor"}}:
+            if json_data == {
+                "filter": {"ids": ["invalid_id"]},
+                "data": {"module": "monitor"},
+            }:
                 return MockResponse(200, "affected_0")
             return MockResponse(200, "affected_1")
         elif args[1] == "https://rapid7.sentinelone.net/web/api/v2.1/private/agents/summary":
@@ -344,7 +352,10 @@ class Util:
                 return MockResponse(200, "threats")
             if params.get("ids") == ["same_status_threat_id_1"]:
                 return MockResponse(200, "threats_same_status")
-            if params.get("ids") in [["non_existing_threat_id_1"], ["0000000000000000000"]]:
+            if params.get("ids") in [
+                ["non_existing_threat_id_1"],
+                ["0000000000000000000"],
+            ]:
                 return MockResponse(200, "threats_not_found")
             return MockResponse(200, "monitor_logs_threats")
         elif args[1] == "https://rapid7.sentinelone.net/web/api/v2.1/cloud-detection/alerts":
@@ -360,9 +371,15 @@ class Util:
             or args[1] == "https://rapid7.sentinelone.net/web/api/v2.1/threats/incident"
             or args[1] == "https://rapid7.sentinelone.net/web/api/v2.1/cloud-detection/alerts/incident"
         ):
-            if sorted(json_data.get("filter", {}).get("ids")) == ["valid_threat_id_1", "valid_threat_id_2"]:
+            if sorted(json_data.get("filter", {}).get("ids")) == [
+                "valid_threat_id_1",
+                "valid_threat_id_2",
+            ]:
                 return MockResponse(200, "affected_2")
-            if sorted(json_data.get("filter", {}).get("ids")) == ["valid_alert_id_1", "valid_alert_id_2"]:
+            if sorted(json_data.get("filter", {}).get("ids")) == [
+                "valid_alert_id_1",
+                "valid_alert_id_2",
+            ]:
                 return MockResponse(200, "affected_2")
             return MockResponse(200, "affected_1")
         elif args[1] == "https://rapid7.sentinelone.net/web/api/v2.0/threats":

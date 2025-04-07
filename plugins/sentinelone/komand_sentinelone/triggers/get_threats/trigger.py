@@ -11,7 +11,10 @@ from komand_sentinelone.util.helper import clean
 class GetThreats(insightconnect_plugin_runtime.Trigger):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="get_threats", description=Component.DESCRIPTION, input=GetThreatsInput(), output=GetThreatsOutput()
+            name="get_threats",
+            description=Component.DESCRIPTION,
+            input=GetThreatsInput(),
+            output=GetThreatsOutput(),
         )
 
     def run(self, params={}):

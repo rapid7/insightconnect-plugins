@@ -6,7 +6,9 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import patch
 from komand_sentinelone.actions.blacklist_by_content_hash import BlacklistByContentHash
-from komand_sentinelone.actions.blacklist_by_content_hash.schema import BlacklistByContentHashOutput
+from komand_sentinelone.actions.blacklist_by_content_hash.schema import (
+    BlacklistByContentHashOutput,
+)
 from util import Util
 from parameterized import parameterized
 from jsonschema import validate

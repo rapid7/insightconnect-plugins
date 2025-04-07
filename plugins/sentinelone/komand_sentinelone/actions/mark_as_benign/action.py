@@ -15,6 +15,8 @@ class MarkAsBenign(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         response = self.connection.client.mark_as_benign(
-            params.get(Input.THREATID), params.get(Input.WHITENINGOPTION) or None, params.get(Input.TARGETSCOPE)
+            params.get(Input.THREATID),
+            params.get(Input.WHITENINGOPTION) or None,
+            params.get(Input.TARGETSCOPE),
         )
         return {Output.AFFECTED: response.get("data", {}).get("affected", 0)}
