@@ -3428,6 +3428,7 @@ Example output:
 
 # Version History
 
+* 11.0.3 - Added log entry validation using regular expressions | SDK bump to 6.2.6
 * 11.0.2 - Updating descriptions for 'set_priority_of_investigation' & 'set_disposition_of_investigation'
 * 11.0.1 - Updating `Advanced Query on Log` description
 * 11.0.0 - Updating schema for query actions (`advanced_query_on_log`, `advanced_query_on_log_set` & `query`) to account for missing keys/invalid mapping in the schema
