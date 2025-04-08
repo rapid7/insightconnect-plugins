@@ -25,8 +25,6 @@ class Text(insightconnect_plugin_runtime.Action):
 
         soup = BeautifulSoup(document, features="html.parser")
         if remove_scripts:
-            for script in soup(
-                ["script", "style"]
-            ):  # remove all javascript and stylesheet code
+            for script in soup(["script", "style"]):  # remove all javascript and stylesheet code
                 script.extract()
         return {Output.TEXT: soup.get_text()}

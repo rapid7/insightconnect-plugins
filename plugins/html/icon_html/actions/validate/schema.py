@@ -4,9 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = (
-        "Validate an HTML document using the [W3 validator](https://validator.w3.org)"
-    )
+    DESCRIPTION = "Validate an HTML document using the [W3 validator](https://validator.w3.org)"
 
 
 class Input:

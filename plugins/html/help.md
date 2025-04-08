@@ -271,6 +271,7 @@ Example output:
 
 # Version History
 
+* 2.0.1 - Updated SDK to the latest version (6.3.2)
 * 2.0.0 - Updated SDK to the latest version (6.2.6) | Enable Sandbox mode
 * 1.2.8 - Updated SDK to the latest version (6.2.5)
 * 1.2.7 - Initial updates for fedramp compliance | Updated SDK to the latest version
