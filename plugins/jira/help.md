@@ -730,6 +730,7 @@ Example output:
 
 # Version History
 
+* 6.5.2 - Updated SDK to the latest version (6.3.2)
 * 6.5.1 - Updated normalizing user object | Updated SDK to the latest version
 * 6.5.0 - Cloud enable the plugin | Bump SDK version to 6.1.0 | Added an error message if trying to connect to Jira on-prem for ICON cloud
 * 6.4.0 - Fix Issue Where Create Issue failed when multiple versions of the input Issue Type exists in Jira | Fix failed connection test response for PAT based connection | Include Fields input added to New Issue and Monitor Issues triggers, to specify whether to return Issue fields in the output | Removed empty Fields output from returned Issues when not requested or available
