@@ -9,7 +9,7 @@ status: []
 description: Sleep allows Rapid7 InsightConnect users to suspend workflow execution
   for a specified period of time. Popular uses are to avoid rate limiting by a service
   or to wait for processing by a service to complete
-version: 1.0.4
+version: 1.0.5
 connection_version: 1
 supported_versions: ['2024-10-09']
 fedramp_ready: true
@@ -26,11 +26,12 @@ hub_tags:
 enable_cache: false
 sdk:
   type: slim
-  version: 6.2.5
+  version: 6.3.2
   user: nobody
 key_features:
 - Suspend workflow execution for a given number of seconds
 version_history:
+- 1.0.5 - Updated SDK to the latest version (6.3.2)
 - 1.0.4 - Updated SDK to the latest version (6.2.5)
 - 1.0.3 - Initial updates for fedramp compliance | Updated SDK to the latest version
 - 1.0.2 - Use input and output constants | Change docker image from `komand/python-pypy3-plugin:2`
