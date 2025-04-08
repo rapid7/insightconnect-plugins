@@ -124,6 +124,7 @@ This can then be pasted into the Connection's `key` input field
 
 # Version History
 
+* 4.0.5 - Updated SDK to the latest version (6.3.2)
 * 4.0.4 - Updated SDK to the latest version (6.2.5)
 * 4.0.3 - Updated dependencies | Updated SDK to the latest version
 * 4.0.2 - Initial updates for fedramp compliance | Updated SDK to the latest version

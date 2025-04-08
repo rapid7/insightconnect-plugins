@@ -8,7 +8,7 @@ description: '[Secure Shell](https://en.wikipedia.org/wiki/Secure_Shell) (SSH) i
   unsecured network. This plugin uses the [paramiko](http://www.paramiko.org/) to
   connect to a remote host via the library. The SSH plugin allows you to run commands
   on a remote host'
-version: 4.0.4
+version: 4.0.5
 connection_version: 4
 supported_versions: [SSH 2025-01-15]
 vendor: rapid7
@@ -28,7 +28,7 @@ hub_tags:
 fedramp_ready: true
 sdk:
   type: slim
-  version: 6.2.5
+  version: 6.3.2
   user: nobody
 key_features:
 - Run remote commands with SSH
@@ -36,14 +36,15 @@ requirements:
 - Credentials for the target remote host
 - Address and port for the target remote host
 troubleshooting:
-- "The `key` field in connection setup takes a base64 encoded RSA private key which
-  must contain a newline character after the BEGIN marker and before the END marker:\n
-  E.g.\n\n```\n-----BEGIN RSA PRIVATE KEY-----\nMIIEogIBAAKCAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7g4h53s=\n
-  ...\n-----END RSA PRIVATE KEY-----\n```\n\nYou can easily encode a private key file
-  and copy a key to your clipboard on MacOS with the following command: `base64 <
-  .ssh/id_rsa | pbcopy`.\nThis can then be pasted into the Connection's `key` input
-  field"
+- "The `key` field in connection setup takes a base64 encoded RSA private key which\
+  \ must contain a newline character after the BEGIN marker and before the END marker:\n\
+  \ E.g.\n\n```\n-----BEGIN RSA PRIVATE KEY-----\nMIIEogIBAAKCAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7g4h53s=\n\
+  \ ...\n-----END RSA PRIVATE KEY-----\n```\n\nYou can easily encode a private key\
+  \ file and copy a key to your clipboard on MacOS with the following command: `base64\
+  \ < .ssh/id_rsa | pbcopy`.\nThis can then be pasted into the Connection's `key`\
+  \ input field"
 version_history:
+- 4.0.5 - Updated SDK to the latest version (6.3.2)
 - 4.0.4 - Updated SDK to the latest version (6.2.5)
 - 4.0.3 - Updated dependencies | Updated SDK to the latest version
 - 4.0.2 - Initial updates for fedramp compliance | Updated SDK to the latest version
