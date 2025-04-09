@@ -345,6 +345,7 @@ Example output:
 
 # Version History
 
+* 1.4.4 - Updated SDK to the latest version (6.3.3)
 * 1.4.3 - Updated SDK to the latest version (6.2.5)
 * 1.4.2 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
 * 1.4.1 - Initial updates for fedramp compliance | Updated SDK to the latest version
