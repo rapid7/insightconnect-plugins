@@ -6,7 +6,7 @@ title: Subnet
 description: The Subnet plugin takes input as a network in CIDR notation and returns
   useful information, such as the number of hosts, the ID, host address range, and
   broadcast address
-version: 2.0.2
+version: 2.0.3
 connection_version: 2
 fedramp_ready: true
 vendor: rapid7
@@ -28,7 +28,7 @@ hub_tags:
   features: []
 sdk:
   type: slim
-  version: 6.2.5
+  version: 6.3.3
   user: nobody
 key_features:
 - Returns network information about CIDR
@@ -36,6 +36,7 @@ troubleshooting:
 - The number of hosts per network does not include the ID and broadcast address. However,
   the number of network does include the all-ones and all-zeros network.
 version_history:
+- 2.0.3 - Updated SDK to the latest version (6.3.3)
 - 2.0.2 - Updated SDK to the latest version (6.2.5)
 - 2.0.1 - Initial updates for fedramp compliance | Updated SDK to the latest version
 - 2.0.0 - Add new action Check Address in Subnet | Code refactor

@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Subnet"
 Vendor = "rapid7"
-Version = "2.0.2"
+Version = "2.0.3"
 Description = "The Subnet plugin takes input as a network in CIDR notation and returns useful information, such as the number of hosts, the ID, host address range, and broadcast address"
 
 
