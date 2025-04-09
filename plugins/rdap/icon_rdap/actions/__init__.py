@@ -5,4 +5,3 @@ from .domainLookup.action import DomainLookup
 from .asnLookup.action import AsnLookup
 
 from .ipLookup.action import IpLookup
-
