@@ -1,22 +1,36 @@
-FROM --platform=linux/amd64 rapid7/insightconnect-python-3-plugin:6.2.5
-
-LABEL organization=rapid7
-LABEL sdk=python
-
-RUN apk update && apk add --no-cache --virtual bind-tools
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-plugin:6.3.3 AS builder
 
 WORKDIR /python/src
 
 ADD ./plugin.spec.yaml /plugin.spec.yaml
 ADD ./requirements.txt /python/src/requirements.txt
+ADD . /python/src
+
+
+RUN apk update && apk add --no-cache --virtual bind-tools
+
+
+RUN pip install .
+RUN pip uninstall -y setuptools
+
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-plugin:6.3.3
+
+LABEL organization=rapid7
+LABEL sdk=python
+
+WORKDIR /python/src
+
+COPY --from=builder /python/src /python/src
+COPY --from=builder /plugin.spec.yaml /plugin.spec.yaml
+
 
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-ADD . /python/src
+ENV PYTHONPATH="/python/src:${PYTHONPATH}"
 
-RUN pip install .
+RUN rm -rf /root/.cache;
 
 # User to run plugin code. The two supported users are: root, nobody
 USER nobody
 
-ENTRYPOINT ["/usr/local/bin/komand_dig"]
+ENTRYPOINT ["python", "/python/src/bin/komand_dig"]
