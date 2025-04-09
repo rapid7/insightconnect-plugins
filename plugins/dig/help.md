@@ -158,6 +158,7 @@ Common examples:
 
 # Version History
 
+* 2.0.6 - Updated SDK to the latest version (6.3.2)
 * 2.0.5 - Updated SDK to the latest version (6.2.5)
 * 2.0.4 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
 * 2.0.3 - Initial updates for fedramp compliance | Updated SDK to the latest

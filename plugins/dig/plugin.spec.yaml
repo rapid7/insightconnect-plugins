@@ -7,7 +7,7 @@ description: The DNS plugin is used for forward and reverse DNS lookups. This pl
   uses [Dig](https://linux.die.net/man/1/dig), or Domain Information Groper, which
   is a network administration command-line tool for querying Domain Name System (DNS)
   name servers
-version: 2.0.5
+version: 2.0.6
 connection_version: 2
 vendor: rapid7
 support: community
@@ -15,7 +15,7 @@ supported_versions: ['2024-09-10']
 status: []
 sdk:
   type: full
-  version: 6.2.5
+  version: 6.3.2
   user: nobody
   packages:
   - bind-tools
@@ -32,15 +32,15 @@ hub_tags:
   keywords: [dig, dns, cloud_enabled]
   features: []
 troubleshooting:
-- "The `status` variable contains the [DNS status code](https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml)
-  name from the DNS server's response.\nDig has at least the following status codes
-  implemented:\n\n```\nNOERROR\nFORMERR\nSERVFAIL\nNXDOMAIN\nNOTIMP\nREFUSED\nYXDOMAIN
-    \nYXRRSET\nNXRRSET\nNOTAUTH\nNOTZONE\nBADVERS\n```\n\nYou can test the `status` variable
-  in a Decision or Filter step to check for its value.\nFor example, in your workflow,
-  if the resolution doesn't return an answer, then you may want to attempt a second
-  lookup from a passive DNS service.\n\nCommon examples:\n\n* `status = \"NOERRROR\"\
-  ` - The DNS response contains an answer\n* `status = \"NXDOMAIN\"` - The DNS response
-  did not have an answer i.e. Non-Existent Domain"
+- "The `status` variable contains the [DNS status code](https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml)\
+  \ name from the DNS server's response.\nDig has at least the following status codes\
+  \ implemented:\n\n```\nNOERROR\nFORMERR\nSERVFAIL\nNXDOMAIN\nNOTIMP\nREFUSED\nYXDOMAIN\
+  \ \nYXRRSET\nNXRRSET\nNOTAUTH\nNOTZONE\nBADVERS\n```\n\nYou can test the `status`\
+  \ variable in a Decision or Filter step to check for its value.\nFor example, in\
+  \ your workflow, if the resolution doesn't return an answer, then you may want to\
+  \ attempt a second lookup from a passive DNS service.\n\nCommon examples:\n\n* `status\
+  \ = \"NOERRROR\"` - The DNS response contains an answer\n* `status = \"NXDOMAIN\"\
+  ` - The DNS response did not have an answer i.e. Non-Existent Domain"
 key_features:
 - Forward DNS lookup to find an IP address from a domain name
 - Reverse DNS lookup to find a domain name from an IP address
@@ -50,6 +50,7 @@ references:
 - '[Dig](https://linux.die.net/man/1/dig)'
 - '[DNS Status Code](https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml)'
 version_history:
+- 2.0.6 - Updated SDK to the latest version (6.3.2)
 - 2.0.5 - Updated SDK to the latest version (6.2.5)
 - 2.0.4 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
 - 2.0.3 - Initial updates for fedramp compliance | Updated SDK to the latest
