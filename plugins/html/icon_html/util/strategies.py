@@ -38,23 +38,17 @@ class ConvertToEpub(HTMLConverterStrategy):
 
 class ConvertToHTML(HTMLConverterStrategy):
     def convert(self, input_html_string: str) -> str:
-        return pypandoc.convert_text(
-            input_html_string, "html", "md", sandbox=is_running_in_cloud()
-        )
+        return pypandoc.convert_text(input_html_string, "html", "md", sandbox=is_running_in_cloud())
 
 
 class ConvertToHTML5(HTMLConverterStrategy):
     def convert(self, input_html_string: str) -> str:
-        return pypandoc.convert_text(
-            input_html_string, "html5", "md", sandbox=is_running_in_cloud()
-        )
+        return pypandoc.convert_text(input_html_string, "html5", "md", sandbox=is_running_in_cloud())
 
 
 class ConvertToMarkdown(HTMLConverterStrategy):
     def convert(self, input_html_string: str) -> str:
-        return pypandoc.convert_text(
-            input_html_string, "rst", "html", sandbox=is_running_in_cloud()
-        )
+        return pypandoc.convert_text(input_html_string, "rst", "html", sandbox=is_running_in_cloud())
 
 
 class ConvertToPDF(HTMLConverterStrategy):

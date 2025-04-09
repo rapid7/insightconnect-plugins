@@ -7,7 +7,7 @@ description: 'Hypertext Markup Language (HTML) is the standard markup language f
   documents designed to be displayed in a web browser. This plugin provides the ability
   to convert an HTML document into a variety of formats using [pypandoc](https://pypi.python.org/pypi/pypandoc).
   Supported formats are: DOCX, EPUB, Markdown, PDF, HTML5, Plain Text'
-version: 2.0.0
+version: 2.0.1
 connection_version: 1
 vendor: rapid7
 support: community
@@ -32,7 +32,7 @@ hub_tags:
   features: []
 sdk:
   type: slim
-  version: 6.2.6
+  version: 6.3.3
   user: root
   custom_cmd:
   - RUN apt-get update && apt-get install -y texlive lmodern --no-install-recommends
@@ -44,6 +44,7 @@ key_features:
 - Convert an HTML document into another format to more easily export, share, or edit
   the document's contents
 version_history:
+- 2.0.1 - Updated SDK to the latest version (6.3.3)
 - 2.0.0 - Updated SDK to the latest version (6.2.6) | Enable Sandbox mode
 - 1.2.8 - Updated SDK to the latest version (6.2.5)
 - 1.2.7 - Initial updates for fedramp compliance | Updated SDK to the latest version

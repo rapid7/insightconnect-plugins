@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.2.6 AS builder
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.3.3 AS builder
 
 WORKDIR /python/src
 
@@ -11,7 +11,7 @@ ADD . /python/src
 RUN pip install .
 RUN pip uninstall -y setuptools
 
-FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.2.6
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.3.3
 
 LABEL organization=rapid7
 LABEL sdk=python
@@ -19,6 +19,7 @@ LABEL sdk=python
 WORKDIR /python/src
 
 COPY --from=builder /python/src /python/src
+COPY --from=builder /plugin.spec.yaml /plugin.spec.yaml
 
 RUN apt-get update && apt-get install -y texlive lmodern --no-install-recommends
 # root is required for the conversion to work. If USER set to nobody, actions/tests will fail
