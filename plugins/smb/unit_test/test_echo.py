@@ -7,7 +7,7 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from komand_smb.actions.echo import Echo
 from jsonschema import validate
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 
 class TestEcho(TestCase):
@@ -17,8 +17,10 @@ class TestEcho(TestCase):
 
     def test_echo(self):
         input_param = {"message": "Hello world"}
+        validate(input_param, self.action.input.schema)
+
         expect = {"response": "Hello world"}
         actual = self.action.run(input_param)
-        validate(input_param, self.action.input.schema)
+
         self.assertEqual(expect, actual)
         validate(actual, self.action.output.schema)

@@ -235,7 +235,7 @@ Example output:
 
 # Version History
 
-* 3.0.0 - Migrated from `pysmb` to `smbprotocol` (allow for SMB2/3 support) | Added SDK (v6.3.2) | `echo` unit test added
+* 3.0.0 - Migrated from `pysmb` to `smbprotocol` (allow for SMB2/3 support) | Added SDK (v6.3.2) | Unit Tests added
 * 2.0.0 - New actions Create File, Download File, Get Attributes | Update Echo action output
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
