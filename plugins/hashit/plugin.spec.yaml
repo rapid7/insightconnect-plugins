@@ -8,7 +8,7 @@ support: community
 status: []
 description: "The HashIt plugin will generate common hashes from a file or string.\
   \ Supported hashes are:\n\n* MD5\n* SHA1\n* SHA256\n* SHA512"
-version: 2.0.6
+version: 2.0.7
 connection_version: 2
 supported_versions: ['2025-02-25']
 resources:
@@ -28,12 +28,13 @@ hub_tags:
   features: []
 sdk:
   type: slim
-  version: 6.2.5
+  version: 6.3.3
   user: nobody
 key_features:
 - Generate a hash from a provided Base64 encoded file input
 - Generate a hash from a provided text string input
 version_history:
+- 2.0.7 - Updated SDK to the latest version (6.3.3)
 - 2.0.6 - Updated SDK to the latest version (6.2.5)
 - 2.0.5 - Initial updates for fedramp compliance | Updated SDK to the latest version
 - 2.0.4 - Update to v4 Python plugin runtime
