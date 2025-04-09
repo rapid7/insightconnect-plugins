@@ -760,6 +760,7 @@ the query results, and then using the variable step $item.dn
 
 # Version History
 
+* 9.0.5 - Updated SDK to the latest version (6.3.3)
 * 9.0.4 - Updated SDK to the latest version (6.2.5)
 * 9.0.3 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 9.0.2 - Updated the SDK to the latest version to address memory usage issues
