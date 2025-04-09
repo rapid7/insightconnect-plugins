@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "HTTP Requests"
 Vendor = "rapid7"
-Version = "6.0.9"
+Version = "6.0.10"
 Description = "The HTTP Requests plugin simplifies integration with RESTful services, letting users automate HTTP requests (`DELETE`, `GET`, `PATCH`, `POST`, `PUT`) to APIs.It's ideal for ad-hoc third-party API integration within workflows without [building a new plugin](https://komand.github.io/python/index.html).Learn more about RESTful services [here](https://en.wikipedia.org/wiki/Representational_state_transfer)"
 
 

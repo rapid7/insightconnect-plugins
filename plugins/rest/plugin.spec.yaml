@@ -8,7 +8,7 @@ description: "The HTTP Requests plugin simplifies integration with RESTful servi
   \ to APIs.\n\nIt's ideal for ad-hoc third-party API integration within workflows\
   \ without [building a new plugin](https://komand.github.io/python/index.html).\n\
   \nLearn more about RESTful services [here](https://en.wikipedia.org/wiki/Representational_state_transfer)"
-version: 6.0.9
+version: 6.0.10
 connection_version: 6
 vendor: rapid7
 support: community
@@ -38,7 +38,7 @@ hub_tags:
 enable_cache: true
 sdk:
   type: full
-  version: 6.2.5
+  version: 6.3.3
   user: root
 troubleshooting:
 - Any headers set in the action will overwrite the default ones in the connection.
@@ -46,6 +46,7 @@ troubleshooting:
   job that ran. If you find any issues that represent bugs in the plugin itself, please
   contact someone at Komand directly.
 version_history:
+- 6.0.10 - Updated SDK to the latest version (6.3.3)
 - 6.0.9 - Updated SDK to the latest version (6.2.5)
 - 6.0.8 - Initial updates for fedramp compliance | Updated SDK to the latest version
 - '6.0.7 - Connection: fix hard overriding custom header from `CUSTOM_SECRET_INPUT`'

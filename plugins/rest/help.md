@@ -341,6 +341,7 @@ Example output:
 
 # Version History
 
+* 6.0.10 - Updated SDK to the latest version (6.3.3)
 * 6.0.9 - Updated SDK to the latest version (6.2.5)
 * 6.0.8 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 6.0.7 - Connection: fix hard overriding custom header from `CUSTOM_SECRET_INPUT`
