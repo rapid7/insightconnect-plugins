@@ -2,13 +2,14 @@
 from setuptools import setup, find_packages
 
 
-setup(name="advanced_regex-rapid7-plugin",
-      version="1.0.5",
-      description="The Advanced Regex plugin is used to extract or manipulate targeted text using regular expressions operations on a string using Python specific regex",
-      author="rapid7",
-      author_email="",
-      url="",
-      packages=find_packages(),
-      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/icon_advanced_regex']
-      )
+setup(
+    name="advanced_regex-rapid7-plugin",
+    version="1.0.6",
+    description="The Advanced Regex plugin is used to extract or manipulate targeted text using regular expressions operations on a string using Python specific regex",
+    author="rapid7",
+    author_email="",
+    url="",
+    packages=find_packages(),
+    install_requires=["insightconnect-plugin-runtime"],  # Add third-party dependencies to requirements.txt, not here!
+    entry_points={"console_scripts": ["icon_advanced_regex = bin.icon_advanced_regex:main"]},
+)
