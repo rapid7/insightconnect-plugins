@@ -114,6 +114,7 @@ Example output:
 
 # Version History
 
+* 5.1.2 - Updated SDK to the latest version (6.3.2)
 * 5.1.1 - Updated SDK to the latest version (6.2.5)
 * 5.1.0 - Action `Run`: Added `timeout` optional parameter | Updated SDK to the latest version
 * 5.0.1 - Updated SDK to the latest version | Initial updates for fedramp compliance
