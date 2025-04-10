@@ -21,7 +21,8 @@ class Output:
 
 
 class CloseInvestigationsInBulkInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -69,14 +70,16 @@ class CloseInvestigationsInBulkInput(insightconnect_plugin_runtime.Input):
   },
   "definitions": {}
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class CloseInvestigationsInBulkOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -103,7 +106,8 @@ class CloseInvestigationsInBulkOutput(insightconnect_plugin_runtime.Output):
   ],
   "definitions": {}
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
