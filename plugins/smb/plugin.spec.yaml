@@ -3,20 +3,46 @@ extension: plugin
 products: [insightconnect]
 name: smb
 title: SMB
-description: "Server Message Block (SMB) is a protocol used for interacting with files on an SMB server. Using this
-plugin, users can interact with shares and delete files"
-version: 2.0.0
+connection_version: 3
+description: '[SMB](https://en.wikipedia.org/wiki/Server_Message_Block) is a protocol
+  used for interacting with files on an SMB server. Using this plugin, users can interact
+  with shares and delete files automatically within Rapid7 InsightConnect workflows'
+version: 3.0.0
 vendor: rapid7
 support: community
+supported_versions: [SMB1, SMB2, SMB3]
+sdk:
+  type: slim
+  version: 6.3.3
+  user: nobody
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/smb
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+key_features:
+- Delete files
+- Create files
+- Download files
+requirements:
+- SMB server hostname
+- SMB server credentials
+- SMB server Domain
 tags:
 - smb
 - file transfer
 - samba
 - cifs
+version_history:
+- 3.0.0 - Migrated from `pysmb` to `smbprotocol` (allow for SMB2/3 support) | Added SDK (v6.3.3) | Unit Tests added
+- 2.0.0 - New actions Create File, Download File, Get Attributes | Update Echo action
+  output
+- 1.0.1 - New spec and help.md format for the Extension Library
+- 1.0.0 - Initial plugin
+references:
+- '[smbprotocol](https://pypi.org/project/smbprotocol/)'
+- '[SMB](https://en.wikipedia.org/wiki/Server_Message_Block)'
+links:
+- '[SMB](https://en.wikipedia.org/wiki/Server_Message_Block)'
 hub_tags:
   use_cases: [data_utility, application_management]
   keywords: [smb, file transfer, samba, cifs]
@@ -36,6 +62,7 @@ types:
       title: File Name
       description: File name
       type: string
+      example: string
     short_name:
       title: Short Name
       description: Short name
@@ -86,20 +113,6 @@ connection:
     type: string
     required: false
     example: example.com
-  netbios_name:
-    title: Server NetBIOS Name
-    description: The NetBIOS machine name of the remote server
-    type: string
-    required: true
-    example: example.com
-  use_ntlmv2:
-    title: Use NTLMv2
-    description: Defines use of NTLMv2 for authentication; will use NTLMv1 if set
-      to false
-    type: boolean
-    required: true
-    default: true
-    example: true
   timeout:
     title: Timeout
     description: Connection timeout
@@ -125,69 +138,7 @@ actions:
         title: Response
         type: string
         required: true
-  list_shares:
-    title: List Shares
-    description: List shares on the remote server
-    input:
-      timeout:
-        title: Timeout
-        description: Request timeout of operation in seconds
-        type: integer
-        required: false
-        default: 30
-        example: 30
-    output:
-      shares:
-        title: Shares
-        description: List of shares
-        type: '[]share'
-        required: true
-  list_share_files:
-    title: List Share Files
-    description: List files on the remote server share
-    input:
-      share_name:
-        title: Share Name
-        description: Name of the SMB share
-        type: string
-        required: true
-        example: data
-      path:
-        title: Path
-        description: Path relative to share to return files
-        type: string
-        required: true
-        default: /
-        example: test.csv
-      pattern:
-        title: Pattern
-        description: Pattern used to filter results
-        type: string
-        required: false
-        default: '*'
-        example: '*'
-      timeout:
-        title: Timeout
-        description: Request timeout of operation in seconds
-        type: integer
-        required: false
-        default: 30
-        example: 30
-      timezone:
-        title: Timezone
-        description: Timezone to be applied to datetime fields (eg. UTC, US/Eastern,
-          US/Pacific, Europe/London). Reference https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-          for valid timezone names
-        type: string
-        required: true
-        default: UTC
-        example: UTC
-    output:
-      files:
-        title: Files
-        description: List of Files
-        type: '[]file'
-        required: true
+        example: Hello world
   delete_file:
     title: Delete File
     description: Delete a file from the share
@@ -217,35 +168,7 @@ actions:
         description: Deletion success
         type: boolean
         required: true
-  delete_files:
-    title: Delete Files
-    description: Delete file(s) from the share; allows wildcards
-    input:
-      share_name:
-        title: Share Name
-        description: Name of the SMB share
-        type: string
-        required: true
-        example: data
-      file_path:
-        title: File Path
-        description: Path of file(s) to delete, accepts wildcard patterns
-        type: string
-        required: true
-        example: test*.csv
-      timeout:
-        title: Timeout
-        description: Request timeout of operation in seconds
-        type: integer
-        required: false
-        default: 30
-        example: 30
-    output:
-      deleted:
-        title: Deleted
-        description: Deletion success
-        type: boolean
-        required: true
+        example: true
   create_file:
     title: Create File
     description: Create a file in a given share
@@ -288,6 +211,7 @@ actions:
         description: Creation success
         type: boolean
         required: false
+        example: true
   download_file:
     title: Download File
     description: Download a file
@@ -297,13 +221,13 @@ actions:
         description: Name of the SMB share
         type: string
         required: true
-        example: data
+        example: smbshare
       file_path:
         title: File Path
         description: Path relative to share of the file to download
         type: string
         required: true
-        example: test.csv
+        example: test.txt
       timeout:
         title: Timeout
         description: Request timeout of operation in seconds
@@ -317,42 +241,4 @@ actions:
         type: file
         description: Downloaded file
         required: false
-  get_attributes:
-    title: Get Attributes
-    description: Get attributes
-    input:
-      share_name:
-        title: Share Name
-        description: Name of the SMB share
-        type: string
-        required: true
-        example: data
-      file_path:
-        title: File Path
-        description: Path relative to share to get file attributes
-        type: string
-        required: true
-        example: test.csv
-      timezone:
-        title: Timezone
-        description: Timezone to be applied to datetime fields (eg. UTC, US/Eastern,
-          US/Pacific, Europe/London). Reference https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-          for valid timezone names
-        type: string
-        required: false
-        default: UTC
-        example: UTC
-      timeout:
-        title: Timeout
-        description: Request timeout of operation in seconds
-        type: integer
-        required: false
-        default: 30
-        example: 30
-    output:
-      attributes:
-        title: Attributes
-        description: File attributes
-        type: file
-        required: true
-
+        example: {content: What's up guys!, filename: text.txt}
