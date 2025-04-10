@@ -15,4 +15,3 @@ from .trim.action import Trim
 from .length.action import Length
 
 from .replace.action import Replace
-
