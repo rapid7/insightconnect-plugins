@@ -3,28 +3,42 @@ extension: plugin
 products: [insightconnect]
 name: rapid7_surface_command
 title: Rapid7 Surface Command
-description: Surface Command gives you full visibilty over your assets and identies across multiple technology platforms.
+description: Surface Command gives you full visibilty over your assets and identies across multiple technology platforms
 version: 1.0.0
-supported_versions: ["v1.0.790"]
-vendor: rapid7
-status: []
-tags: [caasm]
+version_history:
+- 1.0.0 - Initial plugin
 
+supported_versions: [v1]
+vendor: rapid7
+support: rapid7
+status: []
+tags: [caasm, rapid7, surface_command]
+connection_version: 1
 hub_tags:
   use_cases: [data_enrichment]
-  keywords: [caasm, rapid7, surface_command, cloud_enabled]
+  keywords: [rapid7, cloud_enabled]
   features: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/example
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.rapid7.com
 
+key_features:
+  - Query Surface Command Data
+
+requirements: _This plugin does not contain any requirements._
+
+troubleshooting: This plugin does not contain any troubleshooting information.
+
 cloud_ready: true
 enable_cache: false
 sdk:
   type: slim
-  version: 5
+  version: latest
   user: nobody
+
+links:
+  - "[Rapid7 Surface Command](https://www.rapid7.com/products/command/attack-surface-management-asm/)"
 
 references:
   - '[Identify Data Region](https://docs.rapid7.com/insight/navigate-the-insight-platform/#check-your-data-region)'
@@ -59,8 +73,8 @@ actions:
     description: Run and execute Surface Command Query
     input:
       query_id:
-        title: ID of Query to run
-        description: Query ID (UUID) to run from Surface Command
+        title: ID of Query to Run
+        description: Query ID (UUID) to Run from Surface Command
         type: string
         required: true
         example: 12345678-1234-1234-1234-123456789012
@@ -68,6 +82,6 @@ actions:
       items:
         title: Items
         description: Array of Items
-        type: items
+        type: "[]object"
         example: "[]"
         required: false

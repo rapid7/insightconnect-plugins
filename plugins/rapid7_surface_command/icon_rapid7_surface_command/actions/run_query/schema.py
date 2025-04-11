@@ -16,15 +16,16 @@ class Output:
 
 
 class RunQueryInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
     "query_id": {
       "type": "string",
-      "title": "ID of Query to run",
-      "description": "Query ID (UUID) to run from Surface Command",
+      "title": "ID of Query to Run",
+      "description": "Query ID (UUID) to Run from Surface Command",
       "order": 1
     }
   },
@@ -33,27 +34,34 @@ class RunQueryInput(insightconnect_plugin_runtime.Input):
   ],
   "definitions": {}
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class RunQueryOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
     "items": {
+      "type": "array",
       "title": "Items",
       "description": "Array of Items",
+      "items": {
+        "type": "object"
+      },
       "order": 1
     }
   },
   "definitions": {}
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

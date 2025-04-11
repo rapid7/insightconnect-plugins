@@ -1,7 +1,15 @@
 import logging
 
 import furl
-import requests
+from requests import Response, Request
+
+from insightconnect_plugin_runtime.helper import make_request
+from insightconnect_plugin_runtime.exceptions import (
+    APIException,
+    HTTPStatusCodes,
+    PluginException,
+    ResponseExceptionData,
+)
 
 
 REGION_MAP = {
@@ -37,10 +45,32 @@ class ApiConnection:
         Execute Surface Command Query
         """
         url = furl.furl(self.url).set(args={"format": "json"})
-        response = requests.post(
-            url,
+        request = Request(
+            method="post",
+            url=url,
             headers={"X-Api-Key": f"{self.api_key}"},
             json={"query_id": query_id},
         )
-        response.raise_for_status()
+
+        try:
+            response = make_request(
+                _request=request,
+                exception_custom_configs={
+                    HTTPStatusCodes.UNPROCESSABLE_ENTITY: PluginException(
+                        cause="Server was unable to process the request",
+                        assistance="Please validate the request to Claroty",
+                    )
+                },
+                exception_data_location=ResponseExceptionData.RESPONSE,
+            )
+        except PluginException as exception:
+            if isinstance(exception.data, Response):
+                raise APIException(
+                    cause=exception.cause,
+                    assistance=exception.assistance,
+                    data=exception.data.text,
+                    status_code=exception.data.status_code,
+                )
+            raise exception
+
         return response.json()

@@ -7,7 +7,7 @@ from sys import argv
 Name = "Rapid7 Surface Command"
 Vendor = "rapid7"
 Version = "1.0.0"
-Description = "Surface Command gives you full visibilty over your assets and identies across multiple technology platforms."
+Description = "Surface Command gives you full visibilty over your assets and identies across multiple technology platforms"
 
 
 def main():

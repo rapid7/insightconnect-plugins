@@ -1,18 +1,17 @@
 # Description
 
-Surface Command gives you full visibilty over your assets and identies across multiple technology platforms.
+Surface Command gives you full visibilty over your assets and identies across multiple technology platforms
 
 # Key Features
-  
-*This plugin does not contain any key features.*
+
+* Query Surface Command Data
 
 # Requirements
-  
-*This plugin does not contain any requirements.*
+
 
 # Supported Product Versions
 
-* v1.0.790
+* v1
 
 # Documentation
 
@@ -47,7 +46,7 @@ This action is used to run and execute Surface Command Query
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|query_id|string|None|True|Query ID (UUID) to run from Surface Command|None|12345678-1234-1234-1234-123456789012|None|None|
+|query_id|string|None|True|Query ID (UUID) to Run from Surface Command|None|12345678-1234-1234-1234-123456789012|None|None|
   
 Example input:
 
@@ -61,7 +60,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|items|items|False|Array of Items|[]|
+|items|[]object|False|Array of Items|[]|
   
 Example output:
 
@@ -82,16 +81,15 @@ Example output:
 *This plugin does not contain any custom output types.*
 
 ## Troubleshooting
-  
-*This plugin does not contain a troubleshooting.*
+
 
 # Version History
-  
-*This plugin does not contain a version history.*
+
+* 1.0.0 - Initial plugin
 
 # Links
-  
-*This plugin does not contain any links.*
+
+* [Rapid7 Surface Command](https://www.rapid7.com/products/command/attack-surface-management-asm/)
 
 ## References
 
