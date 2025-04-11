@@ -94,5 +94,6 @@ Example output:
 *This plugin does not contain any links.*
 
 ## References
-  
-*This plugin does not contain any references.*
+
+* [Identify Data Region](https://docs.rapid7.com/insight/navigate-the-insight-platform/#check-your-data-region)
+* [Generate User API Key](https://docs.rapid7.com/insight/managing-platform-api-keys/#generating-a-user-key)
