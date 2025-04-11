@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Determine if the provided IP address is in the subnet"
+    DESCRIPTION = "Determine if the provided IP address is in the Subnet"
 
 
 class Input:
@@ -31,7 +31,7 @@ class CheckAddressInSubnetInput(insightconnect_plugin_runtime.Input):
     "subnet": {
       "type": "string",
       "title": "Subnet",
-      "description": "The subnet in CIDR notation or Netmask",
+      "description": "The Subnet in CIDR notation or Netmask",
       "order": 2
     }
   },

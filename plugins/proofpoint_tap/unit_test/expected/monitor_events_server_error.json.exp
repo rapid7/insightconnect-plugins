@@ -2,7 +2,8 @@
   "events": [],
   "state": {
     "last_collection_date": "2023-04-04T05:00:00+00:00",
-    "previous_logs_hashes": []
+    "next_page_index": 2,
+    "previous_logs_hashes": ["df05d563ebc4c2044954cd88b4debf63d5845b78", "8cebe23f0ce9d4bf19d2a2f700b372108d98b45d"]
   },
   "has_more_pages": false,
   "status_code": 500

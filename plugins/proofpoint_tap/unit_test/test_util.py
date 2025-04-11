@@ -40,10 +40,10 @@ class Util:
     @staticmethod
     def mocked_requests_get(*args, **kwargs):
         class MockResponse:
-            def __init__(self, filename, status_code):
+            def __init__(self, filename, status_code, text="This is some error text"):
                 self.filename = filename
                 self.status_code = status_code
-                self.text = "This is some error text"
+                self.text = text
 
             def json(self):
                 if self.filename == "error":
@@ -152,6 +152,10 @@ class Util:
                 return MockResponse("blocked_clicks_without_time_start_end", 200)
 
         if "siem/all" in url:
+            if interval == "2023-04-03T05:59:00+00:00/2023-04-03T06:59:00+00:00":
+                return MockResponse("", 400, "The requested interval is too short.")
+            if interval == "2023-04-03T04:59:00+00:00/2023-04-03T05:59:00+00:00":
+                return MockResponse("", 400, "The requested start time is too far into the past.")
             if interval == "2023-04-03T06:59:00+00:00/2023-04-03T07:59:00+00:00":
                 return MockResponse("", 400)  # input state is 07:59 but we lookback an hour because of page state
             if interval == "2023-04-04T04:00:00+00:00/2023-04-04T05:00:00+00:00":

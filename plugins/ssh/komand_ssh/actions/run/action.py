@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
-from .schema import RunInput, RunOutput, Input, Output
+
+from .schema import Input, Output, RunInput, RunOutput
 
 # Custom imports below
 
@@ -12,8 +13,8 @@ class Run(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
-        command = params.get(Input.COMMAND)
-        host = params.get(Input.HOST)
+        host = params.get(Input.HOST, "")
+        command = params.get(Input.COMMAND, "")
         # END INPUT BINDING - DO NOT REMOVE
 
         results = {}

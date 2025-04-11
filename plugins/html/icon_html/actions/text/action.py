@@ -8,7 +8,10 @@ from bs4 import BeautifulSoup
 class Text(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="text", description=Component.DESCRIPTION, input=TextInput(), output=TextOutput()
+            name="text",
+            description=Component.DESCRIPTION,
+            input=TextInput(),
+            output=TextOutput(),
         )
 
     def run(self, params={}):
@@ -22,6 +25,8 @@ class Text(insightconnect_plugin_runtime.Action):
 
         soup = BeautifulSoup(document, features="html.parser")
         if remove_scripts:
-            for script in soup(["script", "style"]):  # remove all javascript and stylesheet code
+            for script in soup(
+                ["script", "style"]
+            ):  # remove all javascript and stylesheet code
                 script.extract()
         return {Output.TEXT: soup.get_text()}

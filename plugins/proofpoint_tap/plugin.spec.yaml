@@ -6,12 +6,12 @@ title: Proofpoint TAP
 description: "[Proofpoint Targeted Attack Protection](https://www.proofpoint.com/us/products/ransomware-and-targeted-attack-protection)
 (TAP) helps you stay ahead of attackers with an innovative approach that detects, analyzes and blocks advanced
 threats before they reach your inbox. This plugin enables users to parse TAP alerts"
-version: 4.1.10
+version: 4.1.12
 connection_version: 4
 supported_versions: ["Proofpoint TAP API v2", "Tested on 2024-06-04"]
 sdk:
   type: slim
-  version: 6.1.0
+  version: 6.2.6
   user: nobody
 vendor: rapid7
 support: community
@@ -24,9 +24,9 @@ resources:
 requirements:
   - "Proofpoint TAP [service principal and secret](https://ptr-docs.proofpoint.com/ptr-guides/integrations-files/ptr-tap/#generate-tap-service-credentials)"
 tags:
-- Proofpoint
-- TAP
-- parser
+  - Proofpoint
+  - TAP
+  - parser
 hub_tags:
   use_cases: [alerting_and_notifications, threat_detection_and_response]
   keywords: [proofpoint, tap, parser, cloud_enabled]
@@ -46,6 +46,8 @@ links:
 references:
   - "[Proofpoint TAP](https://www.proofpoint.com/us/products/ransomware-and-targeted-attack-protection)"
 version_history:
+  - "4.1.12 - `Monitor Events`: Updated boundary and split size properties | Updated SDK to latest version (6.2.6)"
+  - "4.1.11 - SDK Bump to 6.2.3 | `Monitor Events` task updated to handle requests outside of Proofpoint TAP API limits"
   - "4.1.10 - SDK Bump to 6.1.0 | Task Connection test added Update `Parse Tap Alert` to utilise BeautifulSoup resolving vulnerabilities"
   - "4.1.9 - Update connection fields to be required."
   - "4.1.8 - Include SDK 5.4.9 | Task - Use cutoff of 7 days for first query, use cutoff of 1 hours for subsequent queries"
@@ -1888,13 +1890,7 @@ actions:
         description: Decoded URLs
         type: '[]urls'
         required: false
-        example: [
-            {
-              "encodedUrl": "https://urldefense.proofpoint.com/v1/url?u=http://www.example.com/&amp;k=oIvRg1%2BdGAgOoM1BIlLLqw%3D%3D%0A&amp;r=IKM5u8%2B%2F%2Fi8EBhWOS%2BqGbTqCC%2BrMqWI%2FVfEAEsQO%2F0Y%3D%0A&amp;m=Ww6iaHO73mDQpPQwOwfLfN8WMapqHyvtu8jM8SjqmVQ%3D%0A&amp;s=d3583cfa53dade97025bc6274c6c8951dc29fe0f38830cf8e5a447723b9f1c9a\"",
-              "decodedUrl": "http://www.example.com/",
-              "success": true
-            }
-        ]
+        example: '[{"encodedUrl": "https://urldefense.proofpoint.com/v1/url?u=http://www.example.com/&amp;k=oIvRg1%2BdGAgOoM1BIlLLqw%3D%3D%0A&amp;r=IKM5u8%2B%2F%2Fi8EBhWOS%2BqGbTqCC%2BrMqWI%2FVfEAEsQO%2F0Y%3D%0A&amp;m=Ww6iaHO73mDQpPQwOwfLfN8WMapqHyvtu8jM8SjqmVQ%3D%0A&amp;s=d3583cfa53dade97025bc6274c6c8951dc29fe0f38830cf8e5a447723b9f1c9a\"", "decodedUrl": "http://www.example.com/", "success": true}]'
   fetch_forensics:
     title: Fetch Forensics
     description: Pull detailed forensic evidence about individual threats or campaigns. Either 'threatId' or 'campaignId' should be specified
@@ -1967,86 +1963,4 @@ tasks:
         description: List of all events
         type: "[]event"
         required: true
-        example: [
-          {
-            "eventType": "messageBlocked",
-            "ccAddresses": [
-              "user@example.com"
-            ],
-            "clusterId": "example_hosted",
-            "completelyRewritten": true,
-            "fromAddress": [
-              "user@example.com"
-            ],
-            "GUID": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
-            "headerFrom": "\"example\" <user@example.com> ",
-            "headerReplyTo": "user@example.com",
-            "impostorScore": 0,
-            "malwareScore": 0,
-            "messageID": "<user@example.com>",
-            "messageParts": [
-              {
-                "disposition": "inline",
-                "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
-                "md5": "9de5069c5afe602b2ea0a04b66beb2c0",
-                "filename": "text.txt",
-                "oContentType": "text/plain",
-                "contentType": "text/plain"
-              }
-            ],
-            "messageSize": 0,
-            "messageTime": "2023-06-01T23:57:22.000Z",
-            "modulesRun": [
-              "spam"
-            ],
-            "phishScore": 0,
-            "policyRoutes": [
-              "default_inbound"
-            ],
-            "QID": "9de5069c5afe602b2ea0a04b66beb2c0",
-            "quarantineFolder": "Impostor",
-            "quarantineRule": "impostor",
-            "recipient": [
-              "user@example.com"
-            ],
-            "replyToAddress": [
-              "user@example.com"
-            ],
-            "sender": "user@example.com",
-            "senderIP": "198.51.100.1",
-            "spamScore": 100,
-            "subject": "Transfer and Balance Request",
-            "threatsInfoMap": [
-              {
-                "threat": "example.ab.cd/",
-                "threatID": "9de5069c5afe602b2ea0a04b66beb2c0",
-                "threatStatus": "active",
-                "threatTime": "2021-02-09T15:59:49.000Z",
-                "threatType": "url",
-                "threatUrl": "https://example.com",
-                "classification": "phish"
-              }
-            ],
-            "toAddresses": [
-              "user@example.com"
-            ]
-          },
-          {
-            "eventType": "clickBlocked",
-            "campaignId": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
-            "classification": "malware",
-            "clickIP": "198.51.100.1",
-            "clickTime": "2021-04-20T21:08:13.000Z",
-            "GUID": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
-            "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
-            "recipient": "user@example.com",
-            "sender": "user@example.com",
-            "senderIP": "198.51.100.1",
-            "threatID": "9de5069c5afe602b2ea0a04b66beb2c0",
-            "threatTime": "2016-06-24T19:17:46.000Z",
-            "threatURL": "https://example.com",
-            "threatStatus": "active",
-            "url": "https://example.com",
-            "userAgent": "Mozilla/5.0(WindowsNT6.1;WOW64;rv:27.0)Gecko/20100101Firefox/27.0"
-          }
-        ]
+        example: '[{"eventType": "messageBlocked", "ccAddresses": ["user@example.com"], "clusterId": "example_hosted", "completelyRewritten": true, "fromAddress": ["user@example.com"], "GUID": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "headerFrom": "\"example\" <user@example.com> ", "headerReplyTo": "user@example.com", "impostorScore": 0, "malwareScore": 0, "messageID": "<user@example.com>", "messageParts": [{"disposition": "inline", "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f", "md5": "9de5069c5afe602b2ea0a04b66beb2c0", "filename": "text.txt", "oContentType": "text/plain", "contentType": "text/plain"}], "messageSize": 0, "messageTime": "2023-06-01T23:57:22.000Z", "modulesRun": ["spam"], "phishScore": 0, "policyRoutes": ["default_inbound"], "QID": "9de5069c5afe602b2ea0a04b66beb2c0", "quarantineFolder": "Impostor", "quarantineRule": "impostor", "recipient": ["user@example.com"], "replyToAddress": ["user@example.com"], "sender": "user@example.com", "senderIP": "198.51.100.1", "spamScore": 100, "subject": "Transfer and Balance Request", "threatsInfoMap": [{"threat": "example.ab.cd/", "threatID": "9de5069c5afe602b2ea0a04b66beb2c0", "threatStatus": "active", "threatTime": "2021-02-09T15:59:49.000Z", "threatType": "url", "threatUrl": "https://example.com", "classification": "phish"}], "toAddresses": ["user@example.com"]}, {"eventType": "clickBlocked", "campaignId": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "classification": "malware", "clickIP": "198.51.100.1", "clickTime": "2021-04-20T21:08:13.000Z", "GUID": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "recipient": "user@example.com", "sender": "user@example.com", "senderIP": "198.51.100.1", "threatID": "9de5069c5afe602b2ea0a04b66beb2c0", "threatTime": "2016-06-24T19:17:46.000Z", "threatURL": "https://example.com", "threatStatus": "active", "url": "https://example.com", "userAgent": "Mozilla/5.0(WindowsNT6.1;WOW64;rv:27.0)Gecko/20100101Firefox/27.0"}]'

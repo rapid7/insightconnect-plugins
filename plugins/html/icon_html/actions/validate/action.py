@@ -28,11 +28,17 @@ class Validate(insightconnect_plugin_runtime.Action):
             )
             messages = response.json()["messages"]
             if not messages:
-                self.logger.info("Run: No response from web service, can't determine validity")
+                self.logger.info(
+                    "Run: No response from web service, can't determine validity"
+                )
                 return {Output.VALIDATED: False}
             status = messages[0]["type"]
             return {Output.VALIDATED: (not status == "error")}
         except requests.exceptions.RequestException as error:
-            raise PluginException(cause="Error validating input.", assistance="Please check logs.", data=error)
+            raise PluginException(
+                cause="Error validating input.",
+                assistance="Please check logs.",
+                data=error,
+            )
         except Exception as error:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)

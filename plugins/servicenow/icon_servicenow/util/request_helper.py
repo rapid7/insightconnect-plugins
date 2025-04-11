@@ -9,6 +9,8 @@ from requests.auth import HTTPBasicAuth, AuthBase
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
+from icon_servicenow.util.error_messages import MISSING_CREDENTIALS
+
 
 class BearerAuth(AuthBase):
     """
@@ -132,15 +134,36 @@ class RequestHelper(object):
         return str(base64.b64encode(result), "utf-8")
 
     def _get_oauth_token(self) -> str:
+        """
+        Sends a POST request to an OAuth server, automatically determining 'grant_password'
+
+        - If `username` and `password` are provided, grant_type = 'password'
+        - If `username` and `password` are not provided, grant_type = 'client_credentials'
+        """
+
+        if not self.client_id and not self.client_secret:
+            raise PluginException(status_code=400, cause=MISSING_CREDENTIALS)
+
+        # Automatic grant_type detection
+        if self.username and self.password:
+            grant_type = "password"
+        else:
+            grant_type = "client_credentials"
+
+        # Building the payload
+        payload = {
+            "grant_type": grant_type,
+            "client_id": self.client_id,
+            "client_secret": self.client_secret,
+        }
+
+        if grant_type == "password":
+            payload["username"] = self.username
+            payload["password"] = self.password
+
         response = requests.post(
             url=f"{self.base_url}oauth_token.do",
-            data={
-                "grant_type": "password",
-                "client_id": self.client_id,
-                "client_secret": self.client_secret,
-                "username": self.username,
-                "password": self.password,
-            },
+            data=payload,
             timeout=30,
         )
 

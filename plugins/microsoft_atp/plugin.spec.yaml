@@ -1,12 +1,14 @@
 plugin_spec_version: v2
 extension: plugin
-products: ["insightconnect"]
+products: [insightconnect]
 name: microsoft_atp
-title: Microsoft Windows Defender ATP
-description: The Windows Defender Advanced Threat Protection plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files
-version: 6.0.0
+title: Microsoft Defender for Endpoint
+description: The Microsoft Defender for Endpoint plugin allows Rapid7 InsightConnect
+  users to quickly take remediation actions across their organization. This plugin
+  can isolate machines, run virus scans, and quarantine files
+version: 6.0.2
 connection_version: 6
-supported_versions: ["2024-05-21"]
+supported_versions: ['2024-05-21']
 vendor: rapid7
 support: community
 cloud_ready: true
@@ -22,58 +24,74 @@ tags:
 - microsoft
 - defender
 hub_tags:
-  use_cases: [threat_detection_and_response, user_management, alerting_and_notifications, devops]
+  use_cases: [threat_detection_and_response, user_management, alerting_and_notifications,
+    devops]
   keywords: [windows, atp, microsoft, defender, cloud_enabled]
   features: []
-sdk: 
-  type: full 
-  version: 6.1.2
+sdk:
+  type: full
+  version: 6.2.5
   user: nobody
+troubleshooting:
+- For information on how to setup your Azure application and assign permissions go
+  [here](https://docs.microsoft.com/en-us/windows/security/threat-protection/microsoft-defender-atp/exposed-apis-create-app-webapp)
 links:
- - "[Windows Defender ATP](https://www.microsoft.com/en-us/windowsforbusiness/windows-atp)"
+- '[Windows Defender for Endpoint](https://www.microsoft.com/en-us/security/business/endpoint-security/microsoft-defender-endpoint)'
 references:
- - "[Windows Defender ATP API Start Page](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-atp/use-apis)"
- - "[Windows Defender ATP API Endpoints](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-atp/exposed-apis-list)"
+- '[Windows Defender for Endpoint API Start Page](https://learn.microsoft.com/en-us/defender-endpoint/api/apis-intro)'
+- '[Windows Defender for Endpoint API Endpoints](https://learn.microsoft.com/en-us/defender-endpoint/api/exposed-apis-list)'
 version_history:
- - "6.0.0 - Updated SDK to the latest version | Initial updates for fedramp compliance"
- - "5.2.0 - Add new action: Update Alert"
- - "5.1.0 - Adding the following as new action types to `blacklist` action ['Warn', 'Block', 'Audit'] | Add a new flag in the `blacklist` action to toggle generateAlerts flag | Bump SDK to version 5.4.9"
- - "5.0.0 - Updated the SDK version | Cloud enabled | fixed bug when machine_id is used for find_first_machine"
- - "4.8.1 - Fixed a problem where some actions could not find the machine"
- - "4.8.0 - Add Evidence output for Get Alerts trigger and Get Alert Matching Key trigger"
- - "4.7.1 - Fix bug in Get Alerts trigger which caused trigger to crash"
- - "4.7.0 - Add new action Collect Investigation Package"
- - "4.6.0 - Add new actions Get Installed Software, Get Related Machines and Manage Tags"
- - "4.5.1 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://docs.rapid7.com/insightconnect/microsoft-defender-ATP)"
- - "4.5.0 - Add new action Get Missing Software Updates"
- - "4.4.1 - Add validation MD5 hash in Blacklist action | Set default value for Title, Expiration Time and Description input in action Blacklist"
- - "4.4.0 - Add new action Get Security Recommendations"
- - "4.3.0 - Add new action Get Machine Vulnerabilities"
- - "4.2.0 - Add new action Blacklist"
- - "4.1.0 - Add new action Find Machines with Installed Software"
- - "4.0.0 - Add custom type to output in action Get Machine Information"
- - "3.0.0 - Move connection functions to their own util class | Changed `Exception` to `PluginException` | Added error handling around \"Action already in progress\" state in Isolate Machine, Unisolate Machine, Stop and Quarantine File, and Run Antivirus Scan actions | Rename `machine_id` to `machine` in machine-related actions to support hostnames and IP addresses in addition to machine IDs."
- - "2.0.0 - Update to refactor connection and actions"
- - "1.5.1 - New spec and help.md format for the Extension Library"
- - "1.5.0 - Fix issue where triggers always returned a blank payload"
- - "1.4.0 - New trigger Get Alerts | New action Get Machine Action"
- - "1.3.0 - New actions Stop and Quarantine File and Run Antivirus Scan"
- - "1.2.0 - New action Get File IDs from Alert"
- - "1.1.0 - New actions Get Machine ID from Alert, Isolate Machine, and Unisolate Machine"
- - "1.0.0 - Initial plugin"
+- 6.0.2 - Updated SDK to the latest version (6.2.5)
+- 6.0.1 - Update to latest SDK (v6.2.2) | Address vulnerabilities | Rebrand to `Microsoft
+  Defender for Endpoint`
+- 6.0.0 - Updated SDK to the latest version | Initial updates for fedramp compliance
+- '5.2.0 - Add new action: Update Alert'
+- 5.1.0 - Adding the following as new action types to `blacklist` action ['Warn',
+  'Block', 'Audit'] | Add a new flag in the `blacklist` action to toggle generateAlerts
+  flag | Bump SDK to version 5.4.9
+- 5.0.0 - Updated the SDK version | Cloud enabled | fixed bug when machine_id is used
+  for find_first_machine
+- 4.8.1 - Fixed a problem where some actions could not find the machine
+- 4.8.0 - Add Evidence output for Get Alerts trigger and Get Alert Matching Key trigger
+- 4.7.1 - Fix bug in Get Alerts trigger which caused trigger to crash
+- 4.7.0 - Add new action Collect Investigation Package
+- 4.6.0 - Add new actions Get Installed Software, Get Related Machines and Manage
+  Tags
+- 4.5.1 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://docs.rapid7.com/insightconnect/microsoft-defender-ATP)
+- 4.5.0 - Add new action Get Missing Software Updates
+- 4.4.1 - Add validation MD5 hash in Blacklist action | Set default value for Title,
+  Expiration Time and Description input in action Blacklist
+- 4.4.0 - Add new action Get Security Recommendations
+- 4.3.0 - Add new action Get Machine Vulnerabilities
+- 4.2.0 - Add new action Blacklist
+- 4.1.0 - Add new action Find Machines with Installed Software
+- 4.0.0 - Add custom type to output in action Get Machine Information
+- 3.0.0 - Move connection functions to their own util class | Changed `Exception`
+  to `PluginException` | Added error handling around "Action already in progress"
+  state in Isolate Machine, Unisolate Machine, Stop and Quarantine File, and Run Antivirus
+  Scan actions | Rename `machine_id` to `machine` in machine-related actions to support
+  hostnames and IP addresses in addition to machine IDs.
+- 2.0.0 - Update to refactor connection and actions
+- 1.5.1 - New spec and help.md format for the Extension Library
+- 1.5.0 - Fix issue where triggers always returned a blank payload
+- 1.4.0 - New trigger Get Alerts | New action Get Machine Action
+- 1.3.0 - New actions Stop and Quarantine File and Run Antivirus Scan
+- 1.2.0 - New action Get File IDs from Alert
+- 1.1.0 - New actions Get Machine ID from Alert, Isolate Machine, and Unisolate Machine
+- 1.0.0 - Initial plugin
 key_features:
- - Trigger workflows on new security alerts
- - Manage isolation of network resources
- - Start virus scans
- - Stop execution of malicious code
+- Trigger workflows on new security alerts
+- Manage isolation of network resources
+- Start virus scans
+- Stop execution of malicious code
 requirements:
- - Windows Defender Advanced Threat Protection application credentials
+- Windows Defender Advanced Threat Protection application credentials
 types:
   manage_tags_response:
-    "@odata.context":
-      title: "@Odata.Context"
+    '@odata.context':
+      title: '@Odata.Context'
       type: string
-      description: "@odata.context"
+      description: '@odata.context'
       required: false
     agentVersion:
       title: Agent Version
@@ -132,7 +150,7 @@ types:
       required: false
     machineTags:
       title: Machine Tags
-      type: "[]string"
+      type: '[]string'
       description: Machine tags
       required: false
     osBuild:
@@ -208,8 +226,8 @@ types:
       required: false
   related_user_object:
     domainName:
-      title: "Domain Name"
-      description: "Domain name"
+      title: Domain Name
+      description: Domain name
       required: false
       type: string
     userName:
@@ -345,369 +363,369 @@ types:
       type: string
   alert:
     id:
-      title: "ID"
+      title: ID
       type: string
-      description: "ID"
+      description: ID
       required: false
     incidentId:
-      title: "Incident ID"
+      title: Incident ID
       type: integer
-      description: "Incident ID"
+      description: Incident ID
       required: false
     investigationId:
-      title: "Investigation ID"
+      title: Investigation ID
       type: integer
-      description: "Investigation ID"
+      description: Investigation ID
       required: false
     assignedTo:
-      title: "Assigned To"
+      title: Assigned To
       type: string
-      description: "Assigned To"
+      description: Assigned To
       required: false
     severity:
-      title: "Severity"
+      title: Severity
       type: string
-      description: "Severity"
+      description: Severity
       required: false
     status:
-      title: "Status"
+      title: Status
       type: string
-      description: "Status"
+      description: Status
       required: false
     classification:
-      title: "Classification"
+      title: Classification
       type: string
-      description: "Classification"
+      description: Classification
       required: false
     determination:
-      title: "Determination"
+      title: Determination
       type: string
-      description: "Determination"
+      description: Determination
       required: false
     investigationState:
-      title: "Investigation State"
+      title: Investigation State
       type: string
-      description: "Investigation state"
+      description: Investigation state
       required: false
     detectionSource:
-      title: "Detection Source"
+      title: Detection Source
       type: string
-      description: "Detection source"
+      description: Detection source
       required: false
     category:
-      title: "Category"
+      title: Category
       type: string
-      description: "Category"
+      description: Category
       required: false
     threatFamilyName:
-      title: "Threat Family Name"
+      title: Threat Family Name
       type: string
-      description: "Threat family name"
+      description: Threat family name
       required: false
     title:
-      title: "Title"
+      title: Title
       type: string
-      description: "Title"
+      description: Title
       required: false
     description:
-      title: "Description"
+      title: Description
       type: string
-      description: "Description"
+      description: Description
       required: false
     alertCreationTime:
-      title: "Alert Creation Time"
+      title: Alert Creation Time
       type: string
-      description: "Alert creation time"
+      description: Alert creation time
       required: false
     firstEventTime:
-      title: "First Event Time"
+      title: First Event Time
       type: string
-      description: "First event time"
+      description: First event time
       required: false
     lastEventTime:
-      title: "Last Event Time"
+      title: Last Event Time
       type: string
-      description: "Last event time"
+      description: Last event time
       required: false
     lastUpdateTime:
-      title: "Last Update Time"
+      title: Last Update Time
       type: string
-      description: "Last update time"
+      description: Last update time
       required: false
     resolvedTime:
-      title: "Resolved Time"
+      title: Resolved Time
       type: string
-      description: "Resolved time"
+      description: Resolved time
       required: false
     machineId:
-      title: "Machine ID"
+      title: Machine ID
       type: string
-      description: "Machine ID"
+      description: Machine ID
       required: false
     computerDnsName:
-      title: "Computer DNS Name"
+      title: Computer DNS Name
       type: string
-      description: "Computer DNS name"
+      description: Computer DNS name
       required: false
     rbacGroupName:
-      title: "RBAC Group Name"
+      title: RBAC Group Name
       type: string
-      description: "RBAC group name"
+      description: RBAC group name
       required: false
     aadTenantId:
-      title: "AAD Tenant ID"
+      title: AAD Tenant ID
       type: string
-      description: "AAD tenant ID"
+      description: AAD tenant ID
       required: false
     relatedUser:
-      title: "Related User"
+      title: Related User
       type: related_user_object
-      description: "Related user"
+      description: Related user
       required: false
     evidence:
-      title: "Evidence"
-      type: "[]evidence"
+      title: Evidence
+      type: '[]evidence'
       description: List of related alert evidence
       required: false
   file_type:
     sha1:
-      title: "SHA1"
+      title: SHA1
       type: string
-      description: "SHA1"
+      description: SHA1
       required: false
     sha256:
-      title: "SHA256"
+      title: SHA256
       type: string
-      description: "SHA256"
+      description: SHA256
       required: false
     md5:
-      title: "MD5"
+      title: MD5
       type: string
-      description: "MD5"
+      description: MD5
       required: false
     globalPrevalence:
-      title: "Global Prevalence"
+      title: Global Prevalence
       type: integer
-      description: "Global prevalence"
+      description: Global prevalence
       required: false
     globalFirstObserved:
-      title: "Global First Observed"
+      title: Global First Observed
       type: string
-      description: "Global first observed"
+      description: Global first observed
       required: false
     globalLastObserved:
-      title: "Global Last Observed"
+      title: Global Last Observed
       type: string
-      description: "Global last observed"
+      description: Global last observed
       required: false
     size:
-      title: "Size"
+      title: Size
       type: integer
-      description: "Size"
+      description: Size
       required: false
     fileType:
-      title: "File Type"
+      title: File Type
       type: string
-      description: "File type"
+      description: File type
       required: false
     isPeFile:
-      title: "Is PE File"
+      title: Is PE File
       type: boolean
-      description: "Is PE File"
+      description: Is PE File
       required: false
     filePublisher:
-      title: "File Publisher"
+      title: File Publisher
       type: string
-      description: "File publisher"
+      description: File publisher
       required: false
     fileProductName:
-      title: "File Product Name"
+      title: File Product Name
       type: string
-      description: "File product name"
+      description: File product name
       required: false
     signer:
-      title: "Signer"
+      title: Signer
       type: string
-      description: "Signer"
+      description: Signer
       required: false
     issuer:
-      title: "Issuer"
+      title: Issuer
       type: string
-      description: "Issuer"
+      description: Issuer
       required: false
     signerHash:
-      title: "Signer Hash"
+      title: Signer Hash
       type: string
-      description: "Signer hash"
+      description: Signer hash
       required: false
     isValidCertificate:
-      title: "Is Valid Certificate"
+      title: Is Valid Certificate
       type: boolean
-      description: "Is valid certificate"
+      description: Is valid certificate
       required: false
     determinationType:
-      title: "Determination Type"
+      title: Determination Type
       type: string
-      description: "Determination type"
+      description: Determination type
       required: false
     determinationValue:
-      title: "Determination Value"
+      title: Determination Value
       type: string
-      description: "Determination value"
+      description: Determination value
       required: false
   machine_software:
-     id:
-       title: ID
-       type: string
-       description: ID
-       required: false
-     computerDnsName:
-       title: Computer DNS Name
-       type: string
-       description: Computer DNS name
-       required: false
-     osPlatform:
-       title: OS Platform
-       type: string
-       description: OS platform
-       required: false
-     rbacGroupName:
-       title: RBAC Group Name
-       type: string
-       description: RBAC group name
-       required: false
-     rbacGroupId:
-       title: RBAC Group ID
-       type: number
-       description: RBAC group ID
-       required: false
-  machine:
-     agentVersion:
-       title: "Agent Version"
-       type: string
-       description: "Agent version"
-       required: false
-     computerDnsName:
-       title: "Computer DNS Name"
-       type: string
-       description: "Computer DNS name"
-       required: false
-     exposureLevel:
-       title: "Exposure Level"
-       type: string
-       description: "Exposure level"
-       required: false
-     firstSeen:
-       title: "First Seen"
-       type: string
-       description: "First seen"
-       required: false
-     healthStatus:
-       title: "Health Status"
-       type: string
-       description: "Health status"
-       required: false
-     id:
-       title: "ID"
-       type: string
-       description: "ID"
-       required: false
-     lastExternalIpAddress:
-       title: "Last External IP Address"
-       type: string
-       description: "Last external IP address"
-       required: false
-     lastIpAddress:
-       title: "Last IP Address"
-       type: string
-       description: "Last IP address"
-       required: false
-     lastSeen:
-       title: "Last Seen"
-       type: string
-       description: "Last seen"
-       required: false
-     osBuild:
-       title: "OS Build"
-       type: integer
-       description: "OS build"
-       required: false
-     osPlatform:
-       title: "OS Platform"
-       type: string
-       description: "OS platform"
-       required: false
-     osProcessor:
-       title: "OS Processor"
-       type: string
-       description: "OS processor"
-       required: false
-     rbacGroupId:
-       title: "RBAC Group ID"
-       type: integer
-       description: "RBAC group ID"
-       required: false
-     riskScore:
-       title: "Risk Score"
-       type: string
-       description: "Risk score"
-       required: false
-     version:
-       title: "Version"
-       type: string
-       description: "Version"
-       required: false
-     machineTags:
-       title: "Machine Tags"
-       type: '[]string'
-       description: "Machine Tags"
-       required: false
-  machine_action:
-     creationDateTimeUtc:
-       title: "Creation Date Time UTC"
-       type: string
-       description: "Creation date time UTC"
-       required: false
-     errorHResult:
-       title: "Error HResult"
-       type: integer
-       description: "Error HResult"
-       required: false
-     id:
-       title: "ID"
-       type: string
-       description: "ID"
-       required: false
-     lastUpdateDateTimeUtc:
-       title: "Last Update Date Time UTC"
-       type: string
-       description: "Last update date time UTC"
-       required: false
-     machineId:
-       title: "Machine ID"
-       type: string
-       description: "Machine ID"
-       required: false
-     requestor:
-       title: "Requestor"
-       type: string
-       description: "Requestor"
-       required: false
-     requestorComment:
-       title: "Requestor Comment"
-       type: string
-       description: "Requestor comment"
-       required: false
-     status:
-       title: "Status"
-       type: string
-       description: "Status"
-       required: false
-  indicator_action:
-    "@odata.context":
-      title: "@Odata.Context"
+    id:
+      title: ID
       type: string
-      description: "@odata.context"
+      description: ID
+      required: false
+    computerDnsName:
+      title: Computer DNS Name
+      type: string
+      description: Computer DNS name
+      required: false
+    osPlatform:
+      title: OS Platform
+      type: string
+      description: OS platform
+      required: false
+    rbacGroupName:
+      title: RBAC Group Name
+      type: string
+      description: RBAC group name
+      required: false
+    rbacGroupId:
+      title: RBAC Group ID
+      type: number
+      description: RBAC group ID
+      required: false
+  machine:
+    agentVersion:
+      title: Agent Version
+      type: string
+      description: Agent version
+      required: false
+    computerDnsName:
+      title: Computer DNS Name
+      type: string
+      description: Computer DNS name
+      required: false
+    exposureLevel:
+      title: Exposure Level
+      type: string
+      description: Exposure level
+      required: false
+    firstSeen:
+      title: First Seen
+      type: string
+      description: First seen
+      required: false
+    healthStatus:
+      title: Health Status
+      type: string
+      description: Health status
+      required: false
+    id:
+      title: ID
+      type: string
+      description: ID
+      required: false
+    lastExternalIpAddress:
+      title: Last External IP Address
+      type: string
+      description: Last external IP address
+      required: false
+    lastIpAddress:
+      title: Last IP Address
+      type: string
+      description: Last IP address
+      required: false
+    lastSeen:
+      title: Last Seen
+      type: string
+      description: Last seen
+      required: false
+    osBuild:
+      title: OS Build
+      type: integer
+      description: OS build
+      required: false
+    osPlatform:
+      title: OS Platform
+      type: string
+      description: OS platform
+      required: false
+    osProcessor:
+      title: OS Processor
+      type: string
+      description: OS processor
+      required: false
+    rbacGroupId:
+      title: RBAC Group ID
+      type: integer
+      description: RBAC group ID
+      required: false
+    riskScore:
+      title: Risk Score
+      type: string
+      description: Risk score
+      required: false
+    version:
+      title: Version
+      type: string
+      description: Version
+      required: false
+    machineTags:
+      title: Machine Tags
+      type: '[]string'
+      description: Machine Tags
+      required: false
+  machine_action:
+    creationDateTimeUtc:
+      title: Creation Date Time UTC
+      type: string
+      description: Creation date time UTC
+      required: false
+    errorHResult:
+      title: Error HResult
+      type: integer
+      description: Error HResult
+      required: false
+    id:
+      title: ID
+      type: string
+      description: ID
+      required: false
+    lastUpdateDateTimeUtc:
+      title: Last Update Date Time UTC
+      type: string
+      description: Last update date time UTC
+      required: false
+    machineId:
+      title: Machine ID
+      type: string
+      description: Machine ID
+      required: false
+    requestor:
+      title: Requestor
+      type: string
+      description: Requestor
+      required: false
+    requestorComment:
+      title: Requestor Comment
+      type: string
+      description: Requestor comment
+      required: false
+    status:
+      title: Status
+      type: string
+      description: Status
+      required: false
+  indicator_action:
+    '@odata.context':
+      title: '@Odata.Context'
+      type: string
+      description: '@odata.context'
       required: false
     id:
       title: Indicator ID
@@ -717,7 +735,8 @@ types:
     indicatorValue:
       title: Indicator Value
       type: string
-      description: "The potentially malicious indicator of one of the following types: IP addresses, URLs, domains, and SHA1 and SHA256 hashes"
+      description: 'The potentially malicious indicator of one of the following types:
+        IP addresses, URLs, domains, and SHA1 and SHA256 hashes'
       required: false
     indicatorType:
       type: string
@@ -734,13 +753,15 @@ types:
     action:
       type: string
       title: Action
-      description: The action that will be taken if the indicator will be discovered in the organization
+      description: The action that will be taken if the indicator will be discovered
+        in the organization
       example: AlertAndBlock
       required: false
     sourceType:
       type: string
       title: Source Type
-      description: User in case the Indicator created by a user (e.g. from the portal), AadApp in case it submitted using automated application via the API.
+      description: User in case the Indicator created by a user (e.g. from the portal),
+        AadApp in case it submitted using automated application via the API.
       example: AadApp
       required: false
     source:
@@ -780,7 +801,7 @@ types:
       title: Last Updated By
       description: Identity of the user/application that last updated the indicator
       required: false
-      example: "82f42fca-e931-4f03-b54c-47af94bd394d"
+      example: 82f42fca-e931-4f03-b54c-47af94bd394d
     mitreTechniques:
       title: MITRE Techniques
       type: '[]string'
@@ -829,7 +850,8 @@ types:
     rbacGroupNames:
       type: '[]string'
       title: RBAC Group Names
-      description: RBAC device group names where the indicator is exposed and active. Empty list in case it exposed to all devices
+      description: RBAC device group names where the indicator is exposed and active.
+        Empty list in case it exposed to all devices
       required: false
   vulnerability:
     cvssV3:
@@ -1007,7 +1029,7 @@ types:
     productsNames:
       title: Products Names
       description: Update products names
-      type: "[]string"
+      type: '[]string'
       required: false
     url:
       title: URL
@@ -1050,14 +1072,15 @@ connection:
     order: 3
   endpoint:
     title: Endpoint
-    description: "The type of endpoint to connect to: normal service, GCC (government), GCC High (government), DoD (military)"
+    description: 'The type of endpoint to connect to: normal service, GCC (government),
+      GCC High (government), DoD (military)'
     type: string
     required: true
     example: Normal
     enum:
     - Normal
     - GCC
-    - "GCC High"
+    - GCC High
     - DoD
     order: 4
 
@@ -1078,7 +1101,13 @@ actions:
         description: Machine information
         type: machine
         required: true
-        example: {"@odata.context": "https://api.securitycenter.windows.com/api/$metadata#Machines/$entity","id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73","computerDnsName": "desktop-qo15on7","firstSeen": "2020-06-26T19:54:48.0962745Z","lastSeen": "2020-07-02T18:34:23.1871866Z","osPlatform": "Windows10","osProcessor": "x64","version": "2004","lastIpAddress": "198.51.100.100","lastExternalIpAddress": "198.51.100.100","agentVersion": "10.7150.19041.153","osBuild": 19041,"healthStatus": "Active","rbacGroupId": 0,"riskScore": "Medium","exposureLevel": "Low","machineTags": []}
+        example: {'@odata.context': https://api.securitycenter.windows.com/api/$metadata#Machines/$entity,
+          id: 2df36d707c1ee5084cef77f3dbfc95db65bc4a73, computerDnsName: desktop-qo15on7,
+          firstSeen: '2020-06-26T19:54:48.0962745Z', lastSeen: '2020-07-02T18:34:23.1871866Z',
+          osPlatform: Windows10, osProcessor: x64, version: '2004', lastIpAddress: 198.51.100.100,
+          lastExternalIpAddress: 198.51.100.100, agentVersion: 10.7150.19041.153,
+          osBuild: 19041, healthStatus: Active, rbacGroupId: 0, riskScore: Medium,
+          exposureLevel: Low, machineTags: []}
   get_file_id_from_alert_id:
     title: Get Files from Alert
     description: Retrieve a list of file information objects related to an alert
@@ -1093,9 +1122,13 @@ actions:
       file_list:
         title: File Information
         description: The file ID related to the given alert ID
-        type: "[]file_type"
+        type: '[]file_type'
         required: true
-        example: [{"sha1": "f093e7767bb63ac973b697d3fd1d40a78b87b8bf","sha256": "470a75fe3da2ddf9d27fb3f9c96e6c665506ea7ba26ab89f0c89606f678ae4a2","md5": "a69acb01b99959efec7c0a2a8caa7545","globalPrevalence": 437,"globalFirstObserved": "2015-11-01T02:48:27.1103102Z","globalLastObserved": "2020-07-05T07:58:26.8760293Z","size": 740544,"isPeFile": true,"signerHash": "006276223396f7510653e20f0d10cd1a5d97176e","isValidCertificate": false,"determinationType": "Unknown","determinationValue": "HackTool:MSIL/AutoKms"}]
+        example: [{sha1: f093e7767bb63ac973b697d3fd1d40a78b87b8bf, sha256: 470a75fe3da2ddf9d27fb3f9c96e6c665506ea7ba26ab89f0c89606f678ae4a2,
+            md5: a69acb01b99959efec7c0a2a8caa7545, globalPrevalence: 437, globalFirstObserved: '2015-11-01T02:48:27.1103102Z',
+            globalLastObserved: '2020-07-05T07:58:26.8760293Z', size: 740544, isPeFile: true,
+            signerHash: 006276223396f7510653e20f0d10cd1a5d97176e, isValidCertificate: false,
+            determinationType: Unknown, determinationValue: HackTool:MSIL/AutoKms}]
   isolate_machine:
     title: Isolate Machine
     description: Isolate a machine from the network
@@ -1125,9 +1158,14 @@ actions:
       machine_isolation_response:
         type: machine_action
         title: Machine Action Response
-        description: A response that includes the result of the action, and supplemental information about the action taken
+        description: A response that includes the result of the action, and supplemental
+          information about the action taken
         required: true
-        example: {"@odata.context": "https://api.securitycenter.windows.com/api/$metadata#MachineActions/$entity","id": "b89eb834-4578-496c-8be0-03f004061435","type": "Isolate","requestor": "user@example.com","requestorComment": "Isolate machine due to alert 1234","status": "InProgress","machineId": "1e5bc9d7e413ddd7902c2932e418702b84d0cc07","creationDateTimeUtc": "2017-12-04T12:12:18.9725659Z","lastUpdateTimeUtc": "2017-12-04T12:12:18.9725659Z","relatedFileInfo": null}
+        example: {'@odata.context': https://api.securitycenter.windows.com/api/$metadata#MachineActions/$entity,
+          id: b89eb834-4578-496c-8be0-03f004061435, type: Isolate, requestor: user@example.com,
+          requestorComment: Isolate machine due to alert 1234, status: InProgress,
+          machineId: 1e5bc9d7e413ddd7902c2932e418702b84d0cc07, creationDateTimeUtc: '2017-12-04T12:12:18.9725659Z',
+          lastUpdateTimeUtc: '2017-12-04T12:12:18.9725659Z', relatedFileInfo: null}
   unisolate_machine:
     title: Unisolate Machine
     description: Restore network connectivity to a machine
@@ -1151,7 +1189,11 @@ actions:
         description: A response that includes the result of the action, and supplemental
           information about the action taken
         required: true
-        example: {"@odata.context": "https://api.securitycenter.windows.com/api/$metadata#MachineActions/$entity","id": "b89eb834-4578-496c-8be0-03f004061435","type": "Unisolate","requestor": "user@example.com","requestorComment": "Isolate machine due to alert 1234","status": "InProgress","machineId": "1e5bc9d7e413ddd7902c2932e418702b84d0cc07","creationDateTimeUtc": "2017-12-04T12:12:18.9725659Z","lastUpdateTimeUtc": "2017-12-04T12:12:18.9725659Z","relatedFileInfo": null}
+        example: {'@odata.context': https://api.securitycenter.windows.com/api/$metadata#MachineActions/$entity,
+          id: b89eb834-4578-496c-8be0-03f004061435, type: Unisolate, requestor: user@example.com,
+          requestorComment: Isolate machine due to alert 1234, status: InProgress,
+          machineId: 1e5bc9d7e413ddd7902c2932e418702b84d0cc07, creationDateTimeUtc: '2017-12-04T12:12:18.9725659Z',
+          lastUpdateTimeUtc: '2017-12-04T12:12:18.9725659Z', relatedFileInfo: null}
   stop_and_quarantine_file:
     title: Stop and Quarantine File
     description: Stop the execution of a file on a machine and delete it
@@ -1181,7 +1223,13 @@ actions:
         description: A response that includes the result of the action, and supplemental
           information about the action taken
         required: true
-        example: {"@odata.context": "https://api.securitycenter.windows.com/api/$metadata#MachineActions/$entity","id": "141408d1-384c-4c19-8b57-ba39e378011a","type": "StopAndQuarantineFile","requestor": "user@example.com","requestorComment": "Stop and quarantine file on machine due to alert 441688558380765161_2136280442","status": "InProgress","machineId": "1e5bc9d7e413ddd7902c2932e418702b84d0cc07","creationDateTimeUtc": "2018-12-04T12:15:04.3825985Z","lastUpdateTimeUtc": "2018-12-04T12:15:04.3825985Z","relatedFileInfo": {"fileIdentifier": "87662bc3d60e4200ceaf7aae249d1c343f4b83c9","fileIdentifierType": "Sha1"}}
+        example: {'@odata.context': https://api.securitycenter.windows.com/api/$metadata#MachineActions/$entity,
+          id: 141408d1-384c-4c19-8b57-ba39e378011a, type: StopAndQuarantineFile, requestor: user@example.com,
+          requestorComment: Stop and quarantine file on machine due to alert 441688558380765161_2136280442,
+          status: InProgress, machineId: 1e5bc9d7e413ddd7902c2932e418702b84d0cc07,
+          creationDateTimeUtc: '2018-12-04T12:15:04.3825985Z', lastUpdateTimeUtc: '2018-12-04T12:15:04.3825985Z',
+          relatedFileInfo: {fileIdentifier: 87662bc3d60e4200ceaf7aae249d1c343f4b83c9,
+            fileIdentifierType: Sha1}}
   run_antivirus_scan:
     title: Run Antivirus Scan
     description: Initiate a Windows Defender Antivirus scan on a machine
@@ -1214,7 +1262,11 @@ actions:
         description: A response that includes the result of the action, and supplemental
           information about the action taken
         required: true
-        example: {"@odata.context": "https://api.securitycenter.windows.com/api/$metadata#MachineActions/$entity","id": "2e9da30d-27f6-4208-81f2-9cd3d67893ba","type": "RunAntiVirusScan","requestor": "user@example.com","requestorComment": "Check machine for viruses due to alert 3212","status": "InProgress","machineId": "1e5bc9d7e413ddd7902c2932e418702b84d0cc07","creationDateTimeUtc": "2018-12-04T12:18:27.1293487Z","lastUpdateTimeUtc": "2018-12-04T12:18:27.1293487Z","relatedFileInfo": null}    
+        example: {'@odata.context': https://api.securitycenter.windows.com/api/$metadata#MachineActions/$entity,
+          id: 2e9da30d-27f6-4208-81f2-9cd3d67893ba, type: RunAntiVirusScan, requestor: user@example.com,
+          requestorComment: Check machine for viruses due to alert 3212, status: InProgress,
+          machineId: 1e5bc9d7e413ddd7902c2932e418702b84d0cc07, creationDateTimeUtc: '2018-12-04T12:18:27.1293487Z',
+          lastUpdateTimeUtc: '2018-12-04T12:18:27.1293487Z', relatedFileInfo: null}
   get_machine_action:
     title: Get Machine Action
     description: Retrieve details about an action taken on a machine
@@ -1232,10 +1284,15 @@ actions:
         description: A response that includes the result of the action, and supplemental
           information about the action taken
         required: true
-        example: {"@odata.context": "https://api.securitycenter.windows.com/api/$metadata#MachineActions/$entity","id": "2e9da30d-27f6-4208-81f2-9cd3d67893ba","type": "RunAntiVirusScan","requestor": "user@example.com","requestorComment": "Check machine for viruses due to alert 3212","status": "InProgress","machineId": "1e5bc9d7e413ddd7902c2932e418702b84d0cc07","creationDateTimeUtc": "2018-12-04T12:18:27.1293487Z","lastUpdateTimeUtc": "2018-12-04T12:18:27.1293487Z","relatedFileInfo": null}
+        example: {'@odata.context': https://api.securitycenter.windows.com/api/$metadata#MachineActions/$entity,
+          id: 2e9da30d-27f6-4208-81f2-9cd3d67893ba, type: RunAntiVirusScan, requestor: user@example.com,
+          requestorComment: Check machine for viruses due to alert 3212, status: InProgress,
+          machineId: 1e5bc9d7e413ddd7902c2932e418702b84d0cc07, creationDateTimeUtc: '2018-12-04T12:18:27.1293487Z',
+          lastUpdateTimeUtc: '2018-12-04T12:18:27.1293487Z', relatedFileInfo: null}
   find_machines_with_installed_software:
     title: Find Machines with Installed Software
-    description: Retrieve a list of device references that have specific software installed
+    description: Retrieve a list of device references that have specific software
+      installed
     input:
       software:
         title: Software
@@ -1249,31 +1306,34 @@ actions:
         description: List of machines with provided software
         type: '[]machine_software'
         required: true
-        example: [{"computerDnsName": "mseewin10","id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73","osPlatform": "Windows10","rbacGroupId": 0}]
+        example: [{computerDnsName: mseewin10, id: 2df36d707c1ee5084cef77f3dbfc95db65bc4a73,
+            osPlatform: Windows10, rbacGroupId: 0}]
   blacklist:
     title: Blacklist
     description: Submit or update new indicator
     input:
       indicator:
         title: Indicator
-        description: A supported indicator to blacklist or unblacklist. Supported indicators are IP addresses, URLs, domains, and SHA1 and SHA256 hashes
+        description: A supported indicator to blacklist or unblacklist. Supported
+          indicators are IP addresses, URLs, domains, and SHA1 and SHA256 hashes
         type: string
         example: 220e7d15b011d7fac48f2bd61114db1022197f7f
         required: true
       action:
         title: Action
-        description: The action that will be taken if the indicator will be discovered in the organization
+        description: The action that will be taken if the indicator will be discovered
+          in the organization
         type: string
         example: AlertAndBlock
         default: AlertAndBlock
         required: false
         enum:
-          - Alert
-          - AlertAndBlock
-          - Allowed
-          - Audit
-          - Block
-          - Warn
+        - Alert
+        - AlertAndBlock
+        - Allowed
+        - Audit
+        - Block
+        - Warn
       application:
         title: Application
         description: The application associated with the indicator
@@ -1295,9 +1355,10 @@ actions:
         required: false
       expiration_time:
         title: Expiration Time
-        description: The expiration time of the indicator, default value is one year from now
+        description: The expiration time of the indicator, default value is one year
+          from now
         type: string
-        example: "2020-12-12T00:00:00Z"
+        example: '2020-12-12T00:00:00Z'
         required: false
       severity:
         title: Severity
@@ -1307,10 +1368,10 @@ actions:
         default: High
         required: false
         enum:
-          - Informational
-          - Low
-          - Medium
-          - High
+        - Informational
+        - Low
+        - Medium
+        - High
       recommended_actions:
         title: Recommended Actions
         description: TI indicator alert recommended actions
@@ -1332,7 +1393,9 @@ actions:
         required: false
       generate_alert:
         title: Generate Alerts
-        description: True if alert generation is required, False if this indicator shouldn't generate an alert. Please note this flag only affects the following action types [Allowed, Block, Warn]
+        description: True if alert generation is required, False if this indicator
+          shouldn't generate an alert. Please note this flag only affects the following
+          action types [Allowed, Block, Warn]
         type: boolean
         example: true
         default: false
@@ -1340,13 +1403,24 @@ actions:
     output:
       indicator_action_response:
         title: Indicator Action Response
-        description: A response that includes the result of the action, and supplemental information about the action taken
+        description: A response that includes the result of the action, and supplemental
+          information about the action taken
         type: indicator_action
         required: false
-        example: {"@odata.context": "https://api.securitycenter.windows.com/api/$metadata#Indicators/$entity","action": "Alert","application": "application","category": 1,"createdBy": "82f42fca-e931-4f03-b54c-47af94bd394d","createdByDisplayName": "WindowsDefenderATPSiemConnector","createdBySource": "PublicApi","creationTimeDateTimeUtc": "2020-07-30T19:01:56.6543461Z","description": "some description","expirationTime": "2020-12-12T00:00:00Z","generateAlert": true,"historicalDetection": false,"id": "11","indicatorType": "Url","indicatorValue": "http://google.com","lastUpdateTime": "2020-07-30T19:02:10.9680026Z","lastUpdatedBy": "82f42fca-e931-4f03-b54c-47af94bd394d","mitreTechniques": [],"rbacGroupIds": [],"rbacGroupNames": [],"recommendedActions": "nothing","severity": "Informational","source": "WindowsDefenderATPSiemConnector","sourceType": "AadApp","title": "Title"}
+        example: {'@odata.context': https://api.securitycenter.windows.com/api/$metadata#Indicators/$entity,
+          action: Alert, application: application, category: 1, createdBy: 82f42fca-e931-4f03-b54c-47af94bd394d,
+          createdByDisplayName: WindowsDefenderATPSiemConnector, createdBySource: PublicApi,
+          creationTimeDateTimeUtc: '2020-07-30T19:01:56.6543461Z', description: some
+            description, expirationTime: '2020-12-12T00:00:00Z', generateAlert: true,
+          historicalDetection: false, id: '11', indicatorType: Url, indicatorValue: http://google.com,
+          lastUpdateTime: '2020-07-30T19:02:10.9680026Z', lastUpdatedBy: 82f42fca-e931-4f03-b54c-47af94bd394d,
+          mitreTechniques: [], rbacGroupIds: [], rbacGroupNames: [], recommendedActions: nothing,
+          severity: Informational, source: WindowsDefenderATPSiemConnector, sourceType: AadApp,
+          title: Title}
   get_machine_vulnerabilities:
     title: Get Machine Vulnerabilities
-    description: Retrieves a collection of discovered vulnerabilities related to a given device
+    description: Retrieves a collection of discovered vulnerabilities related to a
+      given device
     input:
       machine:
         title: Machine
@@ -1360,7 +1434,20 @@ actions:
         title: Vulnerabilities
         description: List of vulnerabilities of the machine
         required: true
-        example: [{"id": "CVE-2020-14711","name": "CVE-2020-14711","description": "Vulnerability in the Oracle VM VirtualBox product of Oracle Virtualization (component: Core).  Supported versions that are affected are Prior to 5.2.44, prior to 6.0.24 and  prior to 6.1.12. Easily exploitable vulnerability allows high privileged attacker with logon to the infrastructure where Oracle VM VirtualBox executes to compromise Oracle VM VirtualBox.  Successful attacks require human interaction from a person other than the attacker. Successful attacks of this vulnerability can result in takeover of Oracle VM VirtualBox.  Note: The CVE-2020-14711 is applicable to macOS host only. CVSS 3.1 Base Score 6.5 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:L/AC:L/PR:H/UI:R/S:U/C:H/I:H/A:H).","severity": "Medium","cvssV3": 6.5,"exposedMachines": 1,"publishedOn": "2020-07-14T00:00:00Z","updatedOn": "2020-07-27T22:00:00Z","publicExploit": false,"exploitVerified": false,"exploitInKit": false,"exploitTypes": [],"exploitUris": []}]
+        example: [{id: CVE-2020-14711, name: CVE-2020-14711, description: 'Vulnerability
+              in the Oracle VM VirtualBox product of Oracle Virtualization (component:
+              Core).  Supported versions that are affected are Prior to 5.2.44, prior
+              to 6.0.24 and  prior to 6.1.12. Easily exploitable vulnerability allows
+              high privileged attacker with logon to the infrastructure where Oracle
+              VM VirtualBox executes to compromise Oracle VM VirtualBox.  Successful
+              attacks require human interaction from a person other than the attacker.
+              Successful attacks of this vulnerability can result in takeover of Oracle
+              VM VirtualBox.  Note: The CVE-2020-14711 is applicable to macOS host
+              only. CVSS 3.1 Base Score 6.5 (Confidentiality, Integrity and Availability
+              impacts).  CVSS Vector: (CVSS:3.1/AV:L/AC:L/PR:H/UI:R/S:U/C:H/I:H/A:H).',
+            severity: Medium, cvssV3: 6.5, exposedMachines: 1, publishedOn: '2020-07-14T00:00:00Z',
+            updatedOn: '2020-07-27T22:00:00Z', publicExploit: false, exploitVerified: false,
+            exploitInKit: false, exploitTypes: [], exploitUris: []}]
   get_security_recommendations:
     title: Get Security Recommendations
     description: Retrieve a list of security recommendations
@@ -1377,7 +1464,13 @@ actions:
         description: List of security recommendations
         type: '[]recommendation'
         required: true
-        example: [{"activeAlert": false,"associatedThreats": [],"configScoreImpact": 0.0,"exposedMachinesCount": 1,"exposureImpact": 0.0,"id": "va-_-microsoft-_-.net_framework","nonProductivityImpactedAssets": 0,"productName": ".net_framework","publicExploit": false,"recommendationCategory": "Application","recommendationName": "Update Microsoft .net Framework","relatedComponent": ".net Framework","remediationType": "Update","severityScore": 0.0,"status": "Active","totalMachineCount": 0,"vendor": "microsoft","weaknesses": 1}]
+        example: [{activeAlert: false, associatedThreats: [], configScoreImpact: 0.0,
+            exposedMachinesCount: 1, exposureImpact: 0.0, id: va-_-microsoft-_-.net_framework,
+            nonProductivityImpactedAssets: 0, productName: .net_framework, publicExploit: false,
+            recommendationCategory: Application, recommendationName: Update Microsoft
+              .net Framework, relatedComponent: .net Framework, remediationType: Update,
+            severityScore: 0.0, status: Active, totalMachineCount: 0, vendor: microsoft,
+            weaknesses: 1}]
   get_missing_software_updates:
     title: Get Missing Software Updates
     description: Retrieve a list of software updates
@@ -1394,10 +1487,13 @@ actions:
         description: List of updates
         type: '[]update'
         required: true
-        example: [{"machineMissedOn": 1,"name": "September 2020 Security Updates","osBuild": 17763,"productsNames": ["windows_10","internet_explorer"],"url": "https://catalog.update.microsoft.com/v7/site/Searc...","cveAddressed": 68,"id": "4570333"}]
+        example: [{machineMissedOn: 1, name: September 2020 Security Updates, osBuild: 17763,
+            productsNames: [windows_10, internet_explorer], url: https://catalog.update.microsoft.com/v7/site/Searc...,
+            cveAddressed: 68, id: '4570333'}]
   get_installed_software:
     title: Get Installed Software
-    description: Retrieves a collection of installed software related to a given machine IP address, hostname, or machine ID
+    description: Retrieves a collection of installed software related to a given machine
+      IP address, hostname, or machine ID
     input:
       machine:
         title: Machine
@@ -1411,7 +1507,11 @@ actions:
         description: List of installed software on the machine
         type: '[]software'
         required: true
-        example: [{"publicExploit": true,"vendor": "microsoft","weaknesses": 1056,"activeAlert": false,"exposedMachines": 1,"id": "microsoft-_-windows_10","impactScore": 63.8,"name": "windows_10"}, {"exposedMachines": 0,"id": "microsoft-_-edge_chromium-based","impactScore": 0,"name": "edge_chromium-based","publicExploit": false,"vendor": "microsoft","weaknesses": 0,"activeAlert": false}]
+        example: [{publicExploit: true, vendor: microsoft, weaknesses: 1056, activeAlert: false,
+            exposedMachines: 1, id: microsoft-_-windows_10, impactScore: 63.8, name: windows_10},
+          {exposedMachines: 0, id: microsoft-_-edge_chromium-based, impactScore: 0,
+            name: edge_chromium-based, publicExploit: false, vendor: microsoft, weaknesses: 0,
+            activeAlert: false}]
   manage_tags:
     title: Manage Tags
     description: Add or remove machine tags
@@ -1438,10 +1538,17 @@ actions:
     output:
       manage_tags_response:
         title: Manage Tags Response
-        description: A response that includes updated tags and supplemental information about the machine
+        description: A response that includes updated tags and supplemental information
+          about the machine
         type: manage_tags_response
         required: true
-        example: {"computerDnsName": "msedgewin10","deviceValue": "Normal","machineTags": ["tag1", "tag2", "example tag"],"riskScore": "None","@odata.context": "https://api.securitycenter.windows.com/api/$metada...","id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73","osProcessor": "x64","rbacGroupId": 0,"version": "1809","osPlatform": "Windows10","agentVersion": "10.5850.17763.348","exposureLevel": "Medium","isAadJoined": false,"lastExternalIpAddress": "83.220.117.67","lastIpAddress": "10.0.2.15","osBuild": 17763,"firstSeen": "2020-12-08T09:33:03.1262943Z","healthStatus": "Active","lastSeen": "2020-12-08T10:37:41.2907723Z"}
+        example: {computerDnsName: msedgewin10, deviceValue: Normal, machineTags: [
+            tag1, tag2, example tag], riskScore: None, '@odata.context': https://api.securitycenter.windows.com/api/$metada...,
+          id: 2df36d707c1ee5084cef77f3dbfc95db65bc4a73, osProcessor: x64, rbacGroupId: 0,
+          version: '1809', osPlatform: Windows10, agentVersion: 10.5850.17763.348,
+          exposureLevel: Medium, isAadJoined: false, lastExternalIpAddress: 83.220.117.67,
+          lastIpAddress: 10.0.2.15, osBuild: 17763, firstSeen: '2020-12-08T09:33:03.1262943Z',
+          healthStatus: Active, lastSeen: '2020-12-08T10:37:41.2907723Z'}
   get_related_machines:
     title: Get Related Machines
     description: Get machines related to an file hash(SHA1), domain or username indicator
@@ -1458,7 +1565,12 @@ actions:
         description: Machines related to an file hash(SHA1), domain or username indicator
         type: '[]machine'
         required: true
-        example: [{"exposureLevel": "Medium","lastIpAddress": "10.0.2.15","machineTags": ["tag1","tag2"],"agentVersion": "10.5850.17763.348","lastSeen": "2020-12-08T10:37:41.2907723Z","osBuild": 17763,"osPlatform": "Windows10","rbacGroupId": 0,"computerDnsName": "msedgewin10","firstSeen": "2020-12-08T09:33:03.1262943Z","osProcessor": "x64","version": "1809","deviceValue": "Normal","healthStatus": "Active","id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73","isAadJoined": false,"lastExternalIpAddress": "83.220.117.67","riskScore": "None"}]
+        example: [{exposureLevel: Medium, lastIpAddress: 10.0.2.15, machineTags: [
+              tag1, tag2], agentVersion: 10.5850.17763.348, lastSeen: '2020-12-08T10:37:41.2907723Z',
+            osBuild: 17763, osPlatform: Windows10, rbacGroupId: 0, computerDnsName: msedgewin10,
+            firstSeen: '2020-12-08T09:33:03.1262943Z', osProcessor: x64, version: '1809',
+            deviceValue: Normal, healthStatus: Active, id: 2df36d707c1ee5084cef77f3dbfc95db65bc4a73,
+            isAadJoined: false, lastExternalIpAddress: 83.220.117.67, riskScore: None}]
   collect_investigation_package:
     title: Collect Investigation Package
     description: Collects investigation package from a machine
@@ -1482,7 +1594,13 @@ actions:
         description: A response that includes information about the action taken
         type: machine_action
         required: true
-        example: {"collect_investigation_package_response":  {"requestorComment": "Investigation package collected via InsightConnect" ,"status": "Pending" ,"type": "CollectInvestigationPackage" ,"commands": [] ,"creationDateTimeUtc": "2021-02-25T13:53:29.1889041Z" ,"requestSource": "PublicApi" ,"id": "7de39b39-107e-4556-855b-25cf652835ef" ,"lastUpdateDateTimeUtc": "2021-02-25T13:53:29.1889041Z" ,"machineId": "8de370ca0e0e58ff2c2513bbc16f632ffa6e6024" ,"requestor": "b6e46392-61b9-48c0-ada3-63e3cd30d95b" ,"@odata.context": "https://api.securitycenter.windows.com/api/$metada..." ,"computerDnsName": "msedgewin10" ,"errorHResult":  0 }}
+        example: {collect_investigation_package_response: {requestorComment: Investigation
+              package collected via InsightConnect, status: Pending, type: CollectInvestigationPackage,
+            commands: [], creationDateTimeUtc: '2021-02-25T13:53:29.1889041Z', requestSource: PublicApi,
+            id: 7de39b39-107e-4556-855b-25cf652835ef, lastUpdateDateTimeUtc: '2021-02-25T13:53:29.1889041Z',
+            machineId: 8de370ca0e0e58ff2c2513bbc16f632ffa6e6024, requestor: b6e46392-61b9-48c0-ada3-63e3cd30d95b,
+            '@odata.context': https://api.securitycenter.windows.com/api/$metada...,
+            computerDnsName: msedgewin10, errorHResult: 0}}
   update_alert:
     title: Update Alert
     description: Updates properties of existing alert
@@ -1491,21 +1609,36 @@ actions:
         title: Alert ID
         description: ID of alert to update
         type: string
-        example: 121688558380765161_2136280442
+        example: 12168855_8380765161_2136280442
         required: true
       alert_fields:
         title: Alert Fields
         description: Fields of the alert to update
         type: object
         required: true
-        example: {"status": "Resolved","assignedTo": "user@example.com","classification": "FalsePositive","determination": "Malware","comment": "Resolve my alert and assign to secop2"}
+        example: {status: Resolved, assignedTo: user@example.com, classification: FalsePositive,
+          determination: Malware, comment: Resolve my alert and assign to secop2}
     output:
       alert:
         title: Alert
         description: Alert entity with the updated properties
         type: Alert
         required: true
-        example: {"id":"da637292082891366787_322129023","incidentId":1,"investigationId":1,"assignedTo":"Automation","severity":"Informational","status":"Resolved","investigationState":"Benign","detectionSource":"WindowsDefenderAv","category":"Malware","title":"EICAR_Test_File malware was detected","description":"Malware and unwanted software are undesirable applications that perform annoying, disruptive, or harmful actions on affected machines. Some of these undesirable applications can replicate and spread from one machine to another. Others are able to receive commands from remote attackers and perform activities associated with cyber attacks. This detection might indicate that the malware was stopped from delivering its payload. However, it is prudent to check the machine for signs of infection.","alertCreationTime":"2020-07-01T13:51:29.0741799Z","firstEventTime":"2020-07-01T13:49:55.2853766Z","lastEventTime":"2020-07-01T13:49:55.8520351Z","lastUpdateTime":"2020-07-02T20:11:23.0966667Z","resolvedTime":"2020-07-01T14:02:24.4812386Z","machineId":"2df36d707c1ee508xyFf77f3dbfc95db65bc4a73","computerDnsName":"example-desktop","aadTenantId":"5c824599-ab2c-43ab-651x-3b886d4f8f10","comments":[],"evidence":[]}
+        example: {id: da637292082891366787_322129023, incidentId: 1, investigationId: 1,
+          assignedTo: Automation, severity: Informational, status: Resolved, investigationState: Benign,
+          detectionSource: WindowsDefenderAv, category: Malware, title: EICAR_Test_File
+            malware was detected, description: 'Malware and unwanted software are
+            undesirable applications that perform annoying, disruptive, or harmful
+            actions on affected machines. Some of these undesirable applications can
+            replicate and spread from one machine to another. Others are able to receive
+            commands from remote attackers and perform activities associated with
+            cyber attacks. This detection might indicate that the malware was stopped
+            from delivering its payload. However, it is prudent to check the machine
+            for signs of infection.', alertCreationTime: '2020-07-01T13:51:29.0741799Z',
+          firstEventTime: '2020-07-01T13:49:55.2853766Z', lastEventTime: '2020-07-01T13:49:55.8520351Z',
+          lastUpdateTime: '2020-07-02T20:11:23.0966667Z', resolvedTime: '2020-07-01T14:02:24.4812386Z',
+          machineId: 2df36d707c1ee508xyFf77f3dbfc95db65bc4a73, computerDnsName: example-desktop,
+          aadTenantId: 5c824599-ab2c-43ab-651x-3b886d4f8f10, comments: [], evidence: []}
 triggers:
   get_alert_matching_key:
     title: Get Alerts Matching Key
@@ -1513,13 +1646,15 @@ triggers:
     input:
       key:
         type: string
-        description: The key to look for in the alert. This key must match the case shown in the example output section in help
+        description: The key to look for in the alert. This key must match the case
+          shown in the example output section in help
         example: assignedTo
         required: true
         order: 1
       value:
         type: string
-        description: The value to look for in the alert. The value must match the case of the value returned
+        description: The value to look for in the alert. The value must match the
+          case of the value returned
         example: user@example.com
         required: true
         order: 2
@@ -1536,7 +1671,32 @@ triggers:
         description: An alert that contains the given key and matching value
         type: alert
         required: true
-        example: {"alert":{"id":"da637292082891366787_322129023","incidentId":1,"investigationId":1,"assignedTo":"Automation","severity":"Informational","status":"Resolved","investigationState":"Benign","detectionSource":"WindowsDefenderAv","category":"Malware","title":"EICAR_Test_File malware was detected","description":"Malware and unwanted software are undesirable applications that perform annoying, disruptive, or harmful actions on affected machines. Some of these undesirable applications can replicate and spread from one machine to another. Others are able to receive commands from remote attackers and perform activities associated with cyber attacks.\n\nThis detection might indicate that the malware was stopped from delivering its payload. However, it is prudent to check the machine for signs of infection.","alertCreationTime":"2020-07-01T13:51:29.0741799Z","firstEventTime":"2020-07-01T13:49:55.2853766Z","lastEventTime":"2020-07-01T13:49:55.8520351Z","lastUpdateTime":"2020-07-02T20:11:23.0966667Z","resolvedTime":"2020-07-01T14:02:24.4812386Z","machineId":"2df36d707c1ee508xyFf77f3dbfc95db65bc4a73","computerDnsName":"example-desktop","aadTenantId":"5c824599-ab2c-43ab-651x-3b886d4f8f10","comments":[],"evidence":[{"entityType": "User","evidenceCreationTime": "2021-01-26T20:33:58.42Z","sha1": "ff836cfb1af40252bd2a2ea843032e99a5b262ed","sha256": "a4752c71d81afd3d5865d24ddb11a6b0c615062fcc448d24050c2172d2cbccd6","fileName": "rundll32.exe","filePath": "C:\\Windows\\SysWOW64","processId": 3276,"processCommandLine": "rundll32.exe  c:\\temp\\suspicious.dll,RepeatAfterMe","processCreationTime": "2021-01-26T20:31:32.9581596Z","parentProcessId": 8420,"parentProcessCreationTime": "2021-01-26T20:31:32.9004163Z","parentProcessFileName": "rundll32.exe","parentProcessFilePath": "C:\\Windows\\System32","ipAddress": "8.8.8.8","url": null,"registryKey": "Test9999","registryHive": null,"registryValueType": null,"registryValue": null,"accountName": "name","domainName": "DOMAIN","userSid": "S-1-5-21-11111607-1111760036-109187956-75141","aadUserId": "11118379-2a59-1111-ac3c-a51eb4a3c627","userPrincipalName": "user@example.com","detectionStatus": "Detected"}]}}
+        example: {alert: {id: da637292082891366787_322129023, incidentId: 1, investigationId: 1,
+            assignedTo: Automation, severity: Informational, status: Resolved, investigationState: Benign,
+            detectionSource: WindowsDefenderAv, category: Malware, title: EICAR_Test_File
+              malware was detected, description: "Malware and unwanted software are\
+              \ undesirable applications that perform annoying, disruptive, or harmful\
+              \ actions on affected machines. Some of these undesirable applications\
+              \ can replicate and spread from one machine to another. Others are able\
+              \ to receive commands from remote attackers and perform activities associated\
+              \ with cyber attacks.\n\nThis detection might indicate that the malware\
+              \ was stopped from delivering its payload. However, it is prudent to\
+              \ check the machine for signs of infection.", alertCreationTime: '2020-07-01T13:51:29.0741799Z',
+            firstEventTime: '2020-07-01T13:49:55.2853766Z', lastEventTime: '2020-07-01T13:49:55.8520351Z',
+            lastUpdateTime: '2020-07-02T20:11:23.0966667Z', resolvedTime: '2020-07-01T14:02:24.4812386Z',
+            machineId: 2df36d707c1ee508xyFf77f3dbfc95db65bc4a73, computerDnsName: example-desktop,
+            aadTenantId: 5c824599-ab2c-43ab-651x-3b886d4f8f10, comments: [], evidence: [
+              {entityType: User, evidenceCreationTime: '2021-01-26T20:33:58.42Z',
+                sha1: ff836cfb1af40252bd2a2ea843032e99a5b262ed, sha256: a4752c71d81afd3d5865d24ddb11a6b0c615062fcc448d24050c2172d2cbccd6,
+                fileName: rundll32.exe, filePath: C:\Windows\SysWOW64, processId: 3276,
+                processCommandLine: 'rundll32.exe  c:\temp\suspicious.dll,RepeatAfterMe',
+                processCreationTime: '2021-01-26T20:31:32.9581596Z', parentProcessId: 8420,
+                parentProcessCreationTime: '2021-01-26T20:31:32.9004163Z', parentProcessFileName: rundll32.exe,
+                parentProcessFilePath: C:\Windows\System32, ipAddress: 8.8.8.8, url: null,
+                registryKey: Test9999, registryHive: null, registryValueType: null,
+                registryValue: null, accountName: name, domainName: DOMAIN, userSid: S-1-5-21-11111607-1111760036-109187956-75141,
+                aadUserId: 11118379-2a59-1111-ac3c-a51eb4a3c627, userPrincipalName: user@example.com,
+                detectionStatus: Detected}]}}
   get_alerts:
     title: Get Alerts
     description: Return all new alerts
@@ -1553,4 +1713,18 @@ triggers:
         description: Alert
         type: alert
         required: true
-        example: {"id":"da637292082891366787_322129023","incidentId":1,"investigationId":1,"assignedTo":"Automation","severity":"Informational","status":"Resolved","investigationState":"Benign","detectionSource":"WindowsDefenderAv","category":"Malware","title":"EICAR_Test_File malware was detected","description":"Malware and unwanted software are undesirable applications that perform annoying, disruptive, or harmful actions on affected machines. Some of these undesirable applications can replicate and spread from one machine to another. Others are able to receive commands from remote attackers and perform activities associated with cyber attacks. This detection might indicate that the malware was stopped from delivering its payload. However, it is prudent to check the machine for signs of infection.","alertCreationTime":"2020-07-01T13:51:29.0741799Z","firstEventTime":"2020-07-01T13:49:55.2853766Z","lastEventTime":"2020-07-01T13:49:55.8520351Z","lastUpdateTime":"2020-07-02T20:11:23.0966667Z","resolvedTime":"2020-07-01T14:02:24.4812386Z","machineId":"2df36d707c1ee508xyFf77f3dbfc95db65bc4a73","computerDnsName":"example-desktop","aadTenantId":"5c824599-ab2c-43ab-651x-3b886d4f8f10","comments":[],"evidence":[]}
+        example: {id: da637292082891366787_322129023, incidentId: 1, investigationId: 1,
+          assignedTo: Automation, severity: Informational, status: Resolved, investigationState: Benign,
+          detectionSource: WindowsDefenderAv, category: Malware, title: EICAR_Test_File
+            malware was detected, description: 'Malware and unwanted software are
+            undesirable applications that perform annoying, disruptive, or harmful
+            actions on affected machines. Some of these undesirable applications can
+            replicate and spread from one machine to another. Others are able to receive
+            commands from remote attackers and perform activities associated with
+            cyber attacks. This detection might indicate that the malware was stopped
+            from delivering its payload. However, it is prudent to check the machine
+            for signs of infection.', alertCreationTime: '2020-07-01T13:51:29.0741799Z',
+          firstEventTime: '2020-07-01T13:49:55.2853766Z', lastEventTime: '2020-07-01T13:49:55.8520351Z',
+          lastUpdateTime: '2020-07-02T20:11:23.0966667Z', resolvedTime: '2020-07-01T14:02:24.4812386Z',
+          machineId: 2df36d707c1ee508xyFf77f3dbfc95db65bc4a73, computerDnsName: example-desktop,
+          aadTenantId: 5c824599-ab2c-43ab-651x-3b886d4f8f10, comments: [], evidence: []}

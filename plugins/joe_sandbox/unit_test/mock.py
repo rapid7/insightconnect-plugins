@@ -57,6 +57,12 @@ def mock_conditions(url: str, status_code: int) -> MockResponse:
         return MockResponse("get_server_info", status_code)
     if url == "https://example.com/v2/submission/info":
         return MockResponse("get_submitted_info", status_code)
+    if url == "https://example.com/v2/submission/new":
+        return MockResponse("submit_sample", status_code)
+    if url == "https://example.com/v2/submission/chunked-sample":
+        return MockResponse("chunked_sample", status_code)
+    if url == "https://example.com/v2/submission/info":
+        return MockResponse("get_submitted_info", status_code)
     if url == "https://example.com/v2/analysis/list":
         return MockResponse("list_analysis", status_code)
     if url == "https://example.com/v2/server/lia_countries":

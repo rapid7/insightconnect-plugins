@@ -9,19 +9,20 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v1
-
-    - uses: actions/setup-python@v1
+    - uses: actions/checkout@v4
       with:
-        python-version: '3.9'
+        fetch-depth: 0
+
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
 
     - name: Run Unit Tests on Plugin(s)
       env: 
         PACKAGE_CLOUD_TOKEN: ${{ secrets.CI_PACKAGECLOUD_TOKEN }}
       run: |
-        sudo apt-get update && sudo apt-get install -y apt-transport-https curl gcc libkrb5-dev git gnupg krb5-user libffi-dev libssl1.1 ntp adcli sssd samba-common software-properties-common sudo realmd wget pandoc
+        sudo apt-get update && sudo apt-get install -y apt-transport-https curl gcc libkrb5-dev git gnupg krb5-user libffi-dev libssl3 ntp adcli sssd samba-common software-properties-common sudo realmd wget pandoc
         python -m pip install --upgrade pip setuptools
         curl -s "https://${PACKAGE_CLOUD_TOKEN}@packagecloud.io/install/repositories/rapid7/insightconnect_internal_python_tooling/script.python.sh" | bash
         python -m pip install --user icon-integrations-ci --no-cache-dir --no-warn-script-location

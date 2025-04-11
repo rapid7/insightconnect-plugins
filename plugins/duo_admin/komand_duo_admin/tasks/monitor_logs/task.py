@@ -1,14 +1,17 @@
-from typing import Dict
+from datetime import datetime, timedelta, timezone
+from time import time
+from typing import Any, Dict, Tuple, Union
 
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
-
-from .schema import MonitorLogsInput, MonitorLogsOutput, MonitorLogsState, Component, Input
+from insightconnect_plugin_runtime.helper import hash_sha1
 
 # Custom imports below
+from komand_duo_admin.util.constants import Assistance
 from komand_duo_admin.util.exceptions import ApiException
-from datetime import datetime, timedelta, timezone
-from hashlib import sha1
+from komand_duo_admin.util.util import Utils
+
+from .schema import MonitorLogsInput, MonitorLogsOutput, MonitorLogsState, Component, Input
 
 ADMIN_LOGS_LOG_TYPE = "Admin logs"
 AUTH_LOGS_LOG_TYPE = "Auth logs"
@@ -16,6 +19,7 @@ TRUST_MONITOR_EVENTS_LOG_TYPE = "Trust monitor events"
 INITIAL_CUTOFF_HOURS = 24
 MAX_CUTOFF_HOURS = 168
 API_CUTOFF_HOURS = 4320
+RATE_LIMIT_DELAY = 600
 
 
 class MonitorLogs(insightconnect_plugin_runtime.Task):
@@ -30,6 +34,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
     PREVIOUS_ADMIN_LOG_HASHES = "previous_admin_log_hashes"
     PREVIOUS_AUTH_LOG_HASHES = "previous_auth_log_hashes"
     PREVIOUS_TRUST_MONITOR_EVENT_HASHES = "previous_trust_monitor_event_hashes"
+    RATE_LIMIT_DATETIME = "rate_limit_datetime"
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -103,7 +108,46 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         self.logger.info(f"Retrieve data from {mintime} to {maxtime}. Get next page is set to {get_next_page}")
         return mintime, maxtime, get_next_page
 
+    def check_rate_limit(self, state: Dict) -> Union[PluginException, None]:
+        rate_limited = state.get(self.RATE_LIMIT_DATETIME)
+        now = time()
+        if rate_limited:
+            rate_limit_string = Utils.convert_epoch_to_readable(rate_limited)
+            log_msg = f"Rate limit value stored in state: {rate_limit_string}. "
+            if rate_limited > now:
+                log_msg += "Still within rate limiting period, skipping task execution..."
+                self.logger.info(log_msg)
+                error = PluginException(
+                    cause=PluginException.causes.get(PluginException.Preset.RATE_LIMIT),
+                    assistance=Assistance.RATE_LIMIT,
+                )
+                return error
+
+            log_msg += "However no longer in rate limiting period, so task can be executed..."
+            del state[self.RATE_LIMIT_DATETIME]
+            self.logger.info(log_msg)
+
+    def check_rate_limit_error(
+        self, error: ApiException, status_code: int, state: dict, rate_limit_delay: int
+    ) -> Tuple[int, Any]:
+        if status_code == 429:
+            new_run_time = time() + rate_limit_delay  # default to wait 10 minutes before the next run
+            try:
+                new_run_time_string = Utils.convert_epoch_to_readable(new_run_time)
+                self.logger.error(f"A rate limit error has occurred, task will resume after {new_run_time_string}")
+                state[self.RATE_LIMIT_DATETIME] = new_run_time
+            except Exception as err:
+                self.logger.error(
+                    f"Unable to calculate new run time, no rate limiting applied to the state. Error: {repr(err)}",
+                    exc_info=True,
+                )
+            return 200, None
+        return status_code, error
+
     def run(self, params={}, state={}, custom_config={}):  # noqa: C901
+        rate_limit_delay = custom_config.get("rate_limit_delay", RATE_LIMIT_DELAY)
+        if rate_limited := self.check_rate_limit(state):
+            return [], state, False, 429, rate_limited
         self.connection.admin_api.toggle_rate_limiting = False
         has_more_pages = False
         backward_comp_first_run = False
@@ -257,7 +301,8 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 state[self.PREVIOUS_TRUST_MONITOR_EVENT_HASHES] = []
                 state[self.PREVIOUS_ADMIN_LOG_HASHES] = []
                 state[self.PREVIOUS_AUTH_LOG_HASHES] = []
-                return [], state, False, error.status_code, error
+                status_code, error = self.check_rate_limit_error(error, error.status_code, state, rate_limit_delay)
+                return [], state, False, status_code, error
         except Exception as error:
             self.logger.info(f"An Exception has been raised. Error: {error}")
             state[self.PREVIOUS_TRUST_MONITOR_EVENT_HASHES] = []
@@ -283,18 +328,11 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             log["log_type"] = value
         return logs
 
-    @staticmethod
-    def sha1(log: dict) -> str:
-        hash_ = sha1()  # nosec B303
-        for key, value in log.items():
-            hash_.update(f"{key}{value}".encode("utf-8"))
-        return hash_.hexdigest()
-
     def compare_hashes(self, previous_logs_hashes: list, new_logs: list):
         new_logs_hashes = []
         logs_to_return = []
         for log in new_logs:
-            hash_ = self.sha1(log)
+            hash_ = hash_sha1(log)
             if hash_ not in previous_logs_hashes:
                 new_logs_hashes.append(hash_)
                 logs_to_return.append(log)

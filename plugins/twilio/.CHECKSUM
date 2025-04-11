@@ -1,15 +1,15 @@
 {
-	"spec": "c44c0f5ab7e3a322044a83acfb10b817",
-	"manifest": "621d693d051b5c4549806163cea779b7",
-	"setup": "50e952cec8d2c9a5404f295fcf472b33",
+	"spec": "5ce0b7dac7109afb51e0c6eb702a35c9",
+	"manifest": "796fa28ed7a5550eff84aca20e347207",
+	"setup": "0aa42478906c348fb90dce4ab409e91f",
 	"schemas": [
 		{
 			"identifier": "send_sms/schema.py",
-			"hash": "af20fb89e065530bc9ca6b92313cf3dc"
+			"hash": "d2bd4c43600e8995db3526323e37d446"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "08ac8deb36b6dc3f3430221f8c2a20c8"
+			"hash": "f43143c7fef8d5dff52d63bbff8ece45"
 		}
 	]
 }

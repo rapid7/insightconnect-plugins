@@ -3,19 +3,61 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 11.1.2
+description: "[SentinelOne](https://www.sentinelone.com/) is a next-gen cybersecurity\
+  \ company focused on protecting the enterprise through the endpoint. The SentinelOne\
+  \ plugin allows you to manage and mitigate all your security operations through\
+  \ SentinelOne.\n\nThis plugin utilizes the SentinelOne API, the documentation is\
+  \ located in the SentinelOne console"
+version: 11.1.4
 connection_version: 10
 cloud_ready: true
 fedramp_ready: true
 sdk:
   type: slim
-  version: 6.1.0
+  version: 6.2.5
   user: nobody
-supported_versions: ["2.1.0"]
-description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
+supported_versions: [2.1.0]
 vendor: rapid7
 support: rapid7
 status: []
+key_features:
+- Get activities
+- Get activity types
+- Blacklist hashes
+- Run agent actions
+- Reload agent modules
+- Get information about agents
+- Search agents
+- Get information about agent applications
+- Create, get and cancel query
+- Create IOC threat
+- Enable and disable agent
+- Fetch files
+- Get events
+- Get information about threats
+- Manage threats
+- Quarantine endpoints
+- Run remote scripts
+- Check account name availability
+- Execute scans
+- Trigger workflows on security alerts
+links:
+- '[SentinelOne Product Page](https://www.sentinelone.com/)'
+references:
+- '[SentinelOne Product Page](https://www.sentinelone.com/)'
+requirements:
+- SentinelOne API key
+troubleshooting:
+- To generate an API key, create a new Service User or select an existing one with
+  adequate permissions from the SentinelOne console
+- To convert `threat` into an array use Type Converter Plugin
+- For the Trigger settings, only set the Resolved field to False if solely resolved
+  threats should be retrieved (i.e. setting to False will not include unresolved threats)
+- The Run Remote Script action may require starting a protected actions session to
+  function properly. To do this, in the `code` input field, enter the passcode from
+  a third-party app, such as Duo Mobile or Google Authenticator, set up in two-factor
+  authentication. Entering the code is not required each time you run the action,
+  because the session is valid for 30 minutes
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/sentinelone
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -29,6 +71,72 @@ hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [sentinelone, endpoint, detection, cloud_enabled]
   features: []
+version_history:
+- 11.1.4 - Updated SDK to the latest version (6.2.5)
+- 11.1.3 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities |
+  Fix issue with URL input validation
+- 11.1.2 - Resolve issue where unexpected timestamps returned from SentinelOne were
+  not parsed in task `Monitor Logs` | Update plugin to be FedRAMP compliant
+- 11.1.1 - Updated Plugin connection to improve `instance` input usability
+- 11.1.0 - Added connection test for task `Monitor Logs` | Update SDK
+- 11.0.0 - Removed `Monitor Logs` task input options | Update SDK
+- 10.0.0 - Added `Monitor Logs` task | Removed `User Type` from connection | A Service
+  User API Key must now be provided to provide enhanced security
+- 9.1.2 - Retry functionality added to requests to SenintelOne that result in a 429
+  (too many requests) or 503 (service unavailable) error.
+- '9.1.1 - `Threats Fetch File`: Updated action to prevent possible movement through
+  file system'
+- '9.1.0 - `Move Agent to Another Site`: Action added'
+- 9.0.0 - Update plugin to allow cloud connections to be configured | Rename URL input
+  to Instance in connection | Code refactor
+- '8.1.0 - Added New actions: Fetch file for agent ID and Run remote script. Updated
+  description for Trigger resolved field'
+- '8.0.1 - Search Agents: Remove duplicate results when Case Sensitive is false'
+- '8.0.0 - Connection: Added Service user (API only user type) authentication | Removed
+  Basic Authentication'
+- '7.1.0 - Update for Blacklist action: Fix for unblocked action | Update for Quarantine
+  action: unification of the output data when action fails | Add troubleshooting information
+  about use Type Converter | Mark as Benign action: update description'
+- 7.0.0 - Add new actions Update Analyst Verdict and Update Incident Status | Fix
+  Get Agent Details and Search Agents actions to handle more response scenarios |
+  Add option to authentication with API key
+- 6.2.0 - New actions Create Query, Get Query Status, Cancel Running Query, Get Events,
+  Get Events By Type
+- 6.1.0 - Add new actions Disable Agent and Enable Agent
+- 6.0.0 - Add `operational_state` field to input of Get Agent Details and Search Agent
+  actions | Update schema to return new outputs such as Active Directory, firewall,
+  location, and quarantine information for Get Agent Details and Search Agent actions
+  | Use API version 2.1 | Update capitalization according to style in Activities List
+  action for Created Than Date and Less Than Dates inputs to Greater than Date and
+  Less than Date
+- 5.0.1 - Correct spelling in help.md
+- 5.0.0 - Consolidate various Agent actions | Use API version 2.1 where possible |
+  Delete obsolete Blacklist by IOC Hash and Agent Processes
+- 4.1.1 - Update the Get Threat Summary action to return all threat summaries instead
+  of 10
+- 4.1.0 - Add case sensitivity option for Agent lookups
+- 4.0.1 - Fix Agent Active parameter in Get Agent Details action | Update Quarantine
+  action whitelist for IP addresses
+- 4.0.0 - Update ID input for Fetch Threats File action to a string
+- 3.1.0 - Add new action Fetch Threats File
+- 3.0.0 - Update help.md for the Extension Library | Update title in action Blacklist
+  by IOC Hash, Get Activities, Count Summary and Connect to Network
+- 2.1.1 - Upgrade trigger Get Threats to only return threats since trigger start
+- 2.1.0 - Add `agent_active` field to input in action Search Agents
+- 2.0.0 - Upgrade trigger input Agent is Active to default true
+- 1.4.0 - New actions Quarantine, Get Agent Details, Search Agents
+- 1.3.0 - Add new action Blacklist
+- 1.2.2 - Update error message in Connection
+- 1.2.1 - Update to use the `komand/python-3-37-slim-plugin` Docker image to reduce
+  plugin size
+- 1.2.0 - New spec and help.md format for the Extension Library | New actions activities_list,
+  activities_types, agents_abort_scan, agents_connect, agents_decommission, agents_disconnect,
+  agents_fetch_logs, agents_initiate, agents_processes, agents_reload, agents_restart,
+  agents_shutdown, agents_summary, agents_uninstall, apps_by_agent_ids, name_available
+- 1.1.0 - New trigger Get Threats | New actions Mitigate Threat, Mark as Benign, Mark
+  as Threat and Create IOC Threat
+- 1.0.1 - Update to add Blacklist by IOC Hash and Blacklist by Content Hash
+- 1.0.0 - Initial plugin
 types:
   activityTypes:
     id:
@@ -42,7 +150,8 @@ types:
       description: Activity description template as seen in activity page
       type: string
       required: false
-      example: "The Management user {{ username }} created Account {{ account_name }}."
+      example: The Management user {{ username }} created Account {{ account_name
+        }}.
     action:
       title: Action
       description: Action described in the activity
@@ -188,7 +297,7 @@ types:
       description: Date when application installed
       type: string
       required: false
-      example: 2023-01-01T11:11:11.000000Z
+      example: 2023-01-01T11:11:11Z
     version:
       title: Version
       description: Version of installed application
@@ -322,13 +431,13 @@ types:
       type: string
       description: Created At
       required: false
-      example: 2023-01-01T10:00:00.000000Z
+      example: 2023-01-01T10:00:00Z
     whiteningOptions:
       title: Whitening Options
       type: '[]string'
       description: Whitening options
       required: false
-      example: ["hash"]
+      example: [hash]
     maliciousProcessArguments:
       title: Malicious Process Arguments
       type: string
@@ -346,7 +455,7 @@ types:
       type: '[]string'
       description: Engines
       required: false
-      example: ["penetration"]
+      example: [penetration]
     collectionId:
       title: Collection ID
       type: string
@@ -478,13 +587,13 @@ types:
       type: string
       description: Created date
       required: false
-      example: 2023-01-01T10:00:00.000000Z
+      example: 2023-01-01T10:00:00Z
     updatedAt:
       title: Updated At
       type: string
       description: Updated at
       required: false
-      example: 2023-01-01T10:00:00.000000Z
+      example: 2023-01-01T10:00:00Z
     agentOsType:
       title: Agent OS Type
       type: string
@@ -594,7 +703,7 @@ types:
       description: Computer member of
       type: '[]string'
       required: false
-      example: ["example"]
+      example: [example]
     lastUserDistinguishedName:
       title: Last User Distinguished Name
       description: Last user distinguished name
@@ -606,7 +715,7 @@ types:
       description: Last user member of
       type: '[]string'
       required: false
-      example: ["example"]
+      example: [example]
     computerDistinguishedName:
       title: Computer Distinguished Name
       description: Computer distinguished name
@@ -625,7 +734,7 @@ types:
       description: IPv6 addresses
       type: '[]string'
       required: false
-      example: ["2001:db8:1:1:1:1:1:1"]
+      example: [2001:db8:1:1:1:1:1:1]
     id:
       title: ID
       description: ID
@@ -655,14 +764,14 @@ types:
       description: IPv4 addresses
       type: '[]string'
       required: false
-      example: ["198.51.100.1"]
+      example: [198.51.100.1]
   agentData:
     scanFinishedAt:
       title: Scan Finished At
       description: Finish time of last scan
       type: string
       required: false
-      example: 2023-01-01T00:00:00.000000Z
+      example: 2023-01-01T00:00:00Z
     inRemoteShellSession:
       title: In Remote Shell Session
       description: Is the Agent in a remote shell session
@@ -692,7 +801,7 @@ types:
       description: Abort time of last scan
       type: string
       required: false
-      example: 2023-01-01T00:00:00.000000Z
+      example: 2023-01-01T00:00:00Z
     appsVulnerabilityStatus:
       title: Apps Vulnerability Status
       description: Apps vulnerability status
@@ -710,13 +819,13 @@ types:
       description: Created at date
       type: string
       required: false
-      example: 2023-01-01T00:00:00.000000Z
+      example: 2023-01-01T00:00:00Z
     userActionsNeeded:
       title: User Actions Needed
       description: A list of pending user actions
-      type: "[]string"
+      type: '[]string'
       required: false
-      example: ["example action"]
+      example: [example action]
     groupId:
       title: Group ID
       description: A reference to the containing network group
@@ -752,7 +861,7 @@ types:
       description: Last boot time
       type: string
       required: false
-      example: 2023-01-01T00:00:00.000000Z
+      example: 2023-01-01T00:00:00Z
     activeDirectory:
       title: Active Directory
       description: Active Directory data
@@ -762,7 +871,7 @@ types:
     networkInterfaces:
       title: Network Interfaces
       description: Device's network interfaces
-      type: "[]networkInterfaces"
+      type: '[]networkInterfaces'
       required: false
       example: []
     rangerStatus:
@@ -779,7 +888,8 @@ types:
       example: 100000000000000000
     threatRebootRequired:
       title: Threat Reboot Required
-      description: Has at least one threat with at least one mitigation action that is pending reboot to succeed
+      description: Has at least one threat with at least one mitigation action that
+        is pending reboot to succeed
       type: boolean
       required: false
       example: false
@@ -815,7 +925,8 @@ types:
       example: Example Group
     consoleMigrationStatus:
       title: Console Migration Status
-      description: What step the agent is at in the process of migrating to another console, if any
+      description: What step the agent is at in the process of migrating to another
+        console, if any
       type: string
       required: false
       example: N/A
@@ -836,7 +947,7 @@ types:
       description: Last updated date
       type: string
       required: false
-      example: 2023-01-01T00:00:00.000000Z
+      example: 2023-01-01T00:00:00Z
     machineType:
       title: Machine Type
       description: Machine type
@@ -860,13 +971,13 @@ types:
       description: Start time of last scan
       type: string
       required: false
-      example: 2023-01-01T00:00:00.000000Z
+      example: 2023-01-01T00:00:00Z
     policyUpdatedAt:
       title: Policy Updated At
       description: Date of when the policy was last updated
       type: string
       required: false
-      example: 2023-01-01T00:00:00.000000Z
+      example: 2023-01-01T00:00:00Z
     encryptedApplications:
       title: Encrypted Applications
       description: Disk encryption status
@@ -876,7 +987,7 @@ types:
     locations:
       title: Locations
       description: A list of locations reported by the Agent
-      type: "[]location"
+      type: '[]location'
       required: false
       example: []
     domain:
@@ -896,7 +1007,7 @@ types:
       description: Time of first registration to management console (similar to createdAt)
       type: string
       required: false
-      example: 2023-01-01T00:00:00.000000Z
+      example: 2023-01-01T00:00:00Z
     totalMemory:
       title: Total Memory
       description: Memory size (MB)
@@ -908,7 +1019,7 @@ types:
       description: Date of when the group was last updated
       type: string
       required: false
-      example: 2023-01-01T00:00:00.000000Z
+      example: 2023-01-01T00:00:00Z
     computerName:
       title: Computer Name
       description: Computer name
@@ -1016,7 +1127,7 @@ types:
       description: Last active date
       type: string
       required: false
-      example: 2023-01-01T00:00:00.000000Z
+      example: 2023-01-01T00:00:00Z
     osType:
       title: OS Type
       description: OS type
@@ -1070,7 +1181,7 @@ types:
       description: Agent operational state expiration
       type: string
       required: false
-      example: 2023-01-01T00:00:00.000000Z
+      example: 2023-01-01T00:00:00Z
     locationEnabled:
       title: Location Enabled
       description: Location enabled
@@ -1152,7 +1263,7 @@ types:
       description: Process is WOW64
       type: string
       required: false
-      example: "True"
+      example: 'True'
     networkSource:
       title: Network Source
       description: Network source
@@ -1218,7 +1329,7 @@ types:
       description: Process start time
       type: string
       required: false
-      example: 2023-01-01T00:00:00.000000Z
+      example: 2023-01-01T00:00:00Z
     agentInfected:
       title: Agent Infected
       description: Agent infected
@@ -1260,7 +1371,7 @@ types:
       description: Process CMD
       type: string
       required: false
-      example: "C:\\Windows\\system32\\example.exe"
+      example: C:\Windows\system32\example.exe
     agentIsActive:
       title: Agent is Active
       description: Agent is active
@@ -1272,7 +1383,7 @@ types:
       description: Process is redirected command processor
       type: string
       required: false
-      example: "True"
+      example: 'True'
     verifiedStatus:
       title: Verified Status
       description: Verified status
@@ -1284,7 +1395,7 @@ types:
       description: Process root
       type: string
       required: false
-      example: "False"
+      example: 'False'
     signatureSignedInvalidReason:
       title: Signature Signed Invalid Reason
       description: Signature signed invalid reason
@@ -1434,7 +1545,7 @@ types:
       description: Parent process start time
       type: string
       required: false
-      example: 2023-01-01T00:00:00.000000Z
+      example: 2023-01-01T00:00:00Z
     srcIp:
       title: Source IP
       description: Source IP
@@ -1458,7 +1569,7 @@ types:
       description: Created at
       type: string
       required: false
-      example: 2023-01-01T00:00:00.000000Z
+      example: 2023-01-01T00:00:00Z
     indicatorDescription:
       title: Indicator Description
       description: Indicator description
@@ -1506,7 +1617,7 @@ types:
       description: Related to threat
       type: string
       required: false
-      example: "False"
+      example: 'False'
     loginsBaseType:
       title: Logins Base Type
       description: Logins base type
@@ -1650,11 +1761,11 @@ types:
       description: Agent timestamp
       type: string
       required: false
-      example: 2023-01-01T00:00:00.000000Z
+      example: 2023-01-01T00:00:00Z
     attributes:
       title: Attributes
       description: Attributes
-      type: "[]object"
+      type: '[]object'
       required: false
       example: []
     childProcCount:
@@ -1686,7 +1797,7 @@ types:
       description: Event time
       type: string
       required: false
-      example: 2023-01-01T00:00:00.000000Z
+      example: 2023-01-01T00:00:00Z
 
 connection:
   apiKey:
@@ -1715,7 +1826,7 @@ actions:
         type: pagination
         description: Pagination
         required: false
-        example: { "totalItems": 1 }
+        example: {totalItems: 1}
       errors:
         title: Errors
         type: '[]object'
@@ -1727,10 +1838,29 @@ actions:
         type: '[]threatData'
         description: Data
         required: false
-        example: [ { "agentOsType": "windows", "automaticallyResolved": false, "cloudVerdict": "black", "id": "1000000000000000000", "engines": [ "reputation" ], "fileContentHash": "3395856ce81f2b7382dee72602f798b642f14140", "fromCloud": false, "mitigationMode": "protect", "mitigationReport": { "quarantine": { "status": "success" }, "kill": { "status": "success" } }, "rank": 7, "siteName": "Example Site", "whiteningOptions": [ "hash" ], "agentComputerName": "vagrant-pc", "collectionId": "1000000000000000000", "createdAt": "2019-02-21T16:05:49.251201Z", "mitigationStatus": "active", "classificationSource": "Static", "resolved": true, "accountName": "Example Account", "fileVerificationType": "NotSigned", "siteId": "1000000000000000000", "fileIsExecutable": false, "fromScan": false, "agentNetworkStatus": "disconnecting", "createdDate": "2019-02-21T16:05:49.175000Z", "accountId": "1000000000000000000", "initiatedBy": "agentPolicy", "initiatedByDescription": "Agent Policy", "threatAgentVersion": "3.0.1.3", "username": "vagrant-pc\\vagrant", "agentVersion": "3.0.1.3", "classifierName": "STATIC", "fileExtensionType": "Executable", "agentDomain": "WORKGROUP", "fileIsSystem": false, "agentInfected": false, "isCertValid": false, "isInteractiveSession": false, "isPartialStory": false, "updatedAt": "2020-05-28T21:53:36.064425Z", "agentId": "1000000000000000000", "agentMachineType": "desktop", "classification": "Malware", "markedAsBenign": false, "threatName": "EICAR.com", "agentIsDecommissioned": true, "description": "malware detected - not mitigated yet (static engin...", "fileDisplayName": "EICAR.com", "agentIp": "198.51.100.1", "agentIsActive": false, "fileObjectId": "1234567890", "filePath": "\\Device\\HarddiskVolume2\\Users\\vagrant\\Desktop\\EICA...", "maliciousGroupId": "1234567890" } ]
+        example: [{agentOsType: windows, automaticallyResolved: false, cloudVerdict: black,
+            id: '1000000000000000000', engines: [reputation], fileContentHash: 3395856ce81f2b7382dee72602f798b642f14140,
+            fromCloud: false, mitigationMode: protect, mitigationReport: {quarantine: {
+                status: success}, kill: {status: success}}, rank: 7, siteName: Example
+              Site, whiteningOptions: [hash], agentComputerName: vagrant-pc, collectionId: '1000000000000000000',
+            createdAt: '2019-02-21T16:05:49.251201Z', mitigationStatus: active, classificationSource: Static,
+            resolved: true, accountName: Example Account, fileVerificationType: NotSigned,
+            siteId: '1000000000000000000', fileIsExecutable: false, fromScan: false,
+            agentNetworkStatus: disconnecting, createdDate: '2019-02-21T16:05:49.175000Z',
+            accountId: '1000000000000000000', initiatedBy: agentPolicy, initiatedByDescription: Agent
+              Policy, threatAgentVersion: 3.0.1.3, username: vagrant-pc\vagrant, agentVersion: 3.0.1.3,
+            classifierName: STATIC, fileExtensionType: Executable, agentDomain: WORKGROUP,
+            fileIsSystem: false, agentInfected: false, isCertValid: false, isInteractiveSession: false,
+            isPartialStory: false, updatedAt: '2020-05-28T21:53:36.064425Z', agentId: '1000000000000000000',
+            agentMachineType: desktop, classification: Malware, markedAsBenign: false,
+            threatName: EICAR.com, agentIsDecommissioned: true, description: malware
+              detected - not mitigated yet (static engin..., fileDisplayName: EICAR.com,
+            agentIp: 198.51.100.1, agentIsActive: false, fileObjectId: '1234567890',
+            filePath: \Device\HarddiskVolume2\Users\vagrant\Desktop\EICA..., maliciousGroupId: '1234567890'}]
   blacklist_by_content_hash:
     title: Blacklist by Content Hash
-    description: Add hashed content to global blacklist. The input makes use of contentHash from the threat summary
+    description: Add hashed content to global blacklist. The input makes use of contentHash
+      from the threat summary
     input:
       hash:
         title: Hash
@@ -1760,7 +1890,7 @@ actions:
         description: Agent ID for the slim threat
         type: string
         required: true
-        example: "1000000000000000000"
+        example: '1000000000000000000'
       note:
         title: Note
         description: Note added to the created threat
@@ -1772,7 +1902,7 @@ actions:
         description: ID of the group
         type: string
         required: false
-        example: "1000000000000000001"
+        example: '1000000000000000001'
       path:
         title: Path
         description: File path
@@ -1795,7 +1925,7 @@ actions:
         description: ID of a threat
         type: string
         required: true
-        example: "1000000000000000000"
+        example: '1000000000000000000'
       action:
         title: Action
         description: Mitigation action
@@ -1824,7 +1954,7 @@ actions:
         description: ID of a threat
         type: string
         required: true
-        example: "1000000000000000000"
+        example: '1000000000000000000'
       targetScope:
         title: Target Scope
         description: Scope to be used for exclusions
@@ -1858,7 +1988,8 @@ actions:
         example: 1
   mark_as_threat:
     title: Mark as Threat
-    description: Mark as threat detections that the Agent considers suspicious and that match the filter
+    description: Mark as threat detections that the Agent considers suspicious and
+      that match the filter
     input:
       threatId:
         title: Threat ID
@@ -1905,7 +2036,7 @@ actions:
         description: List of Group IDs
         type: '[]string'
         required: false
-        example: ["500000000000000000"]
+        example: ['500000000000000000']
       includeHidden:
         title: Include Hidden
         description: Include internal activities hidden from display
@@ -1914,7 +2045,8 @@ actions:
         example: true
       skip:
         title: Skip First N Items
-        description: Skip first number of items (0-1000). Will return the number entries specified in the 'limit' input (default is 10)
+        description: Skip first number of items (0-1000). Will return the number entries
+          specified in the 'limit' input (default is 10)
         type: integer
         required: false
         example: 1
@@ -1923,16 +2055,17 @@ actions:
         description: List of Site IDs to filter by
         type: '[]string'
         required: false
-        example: ["5000000000000001"]
+        example: ['5000000000000001']
       agentIds:
         title: Agent IDs
         description: Return activities related to specified agent IDs
         type: '[]string'
         required: false
-        example: ["9000000000000000"]
+        example: ['9000000000000000']
       skipCount:
         title: Skip Count
-        description: If true, total number of items will not be calculated, which speeds up execution time
+        description: If true, total number of items will not be calculated, which
+          speeds up execution time
         type: boolean
         required: false
         example: false
@@ -1941,40 +2074,45 @@ actions:
         description: List of Activity IDs
         type: '[]string'
         required: false
-        example: ["800000000000000008"]
+        example: ['800000000000000008']
       createdAtLt:
         title: Less than Date
         description: Return activities created before this date in ISO-8601
         type: date
         required: false
-        example: "2020-12-20T18:49:26.257525Z"
+        example: '2020-12-20T18:49:26.257525Z'
       createdAtLte:
         title: Less or Equal Date
-        description: Return activities created before or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z
+        description: Return activities created before or at this date in ISO-8601,
+          example 2020-12-18T18:49:26.257525Z
         type: date
         required: false
-        example: "2020-12-20T18:49:26.257525Z"
+        example: '2020-12-20T18:49:26.257525Z'
       createdAtGt:
         title: Greater than Date
-        description: Return activities created after or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z
+        description: Return activities created after or at this date in ISO-8601,
+          example 2020-12-18T18:49:26.257525Z
         type: date
         required: false
-        example: "2020-12-18T18:49:26.257525Z"
+        example: '2020-12-18T18:49:26.257525Z'
       createdAtGte:
         title: Greater or Equal Date
-        description: Return activities created after or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z
+        description: Return activities created after or at this date in ISO-8601,
+          example 2020-12-18T18:49:26.257525Z
         type: date
         required: false
-        example: "2020-12-20T18:49:26.257525Z"
+        example: '2020-12-20T18:49:26.257525Z'
       createdAtBetween:
         title: Between Dates
-        description: Return activities created within this range (inclusive), example 1514978764288-1514978999999
+        description: Return activities created within this range (inclusive), example
+          1514978764288-1514978999999
         type: string
         required: false
-        example: "1514978764288-1514978999999"
+        example: 1514978764288-1514978999999
       countOnly:
         title: Count Only
-        description: If true, only total number of items will be returned, without any of the actual objects
+        description: If true, only total number of items will be returned, without
+          any of the actual objects
         type: boolean
         required: false
         example: false
@@ -1983,7 +2121,7 @@ actions:
         description: List of Account IDs to filter by
         type: '[]string'
         required: false
-        example: ["400000000000000000"]
+        example: ['400000000000000000']
       limit:
         title: Limit
         description: Limit number of returned items (1-1000)
@@ -1997,32 +2135,32 @@ actions:
         type: string
         required: false
         enum:
-          - id
-          - activityType
-          - createdAt
-        example: "createdAt"
-        default: "createdAt"
+        - id
+        - activityType
+        - createdAt
+        example: createdAt
+        default: createdAt
       activityTypes:
         title: Activity Types
         description: Return only these activity codes
         type: '[]string'
         required: false
-        example: ["22", "23"]
+        example: ['22', '23']
       threatIds:
         title: Threat IDs
         description: Return activities related to specified threat IDs
         type: '[]string'
         required: false
-        example: ["100000000000000000"]
+        example: ['100000000000000000']
       sortOrder:
         title: Sort Order
         description: Sort direction
         type: string
         enum:
-          - asc
-          - desc
+        - asc
+        - desc
         required: false
-        default: "asc"
+        default: asc
         example: asc
       userEmail:
         title: User Email
@@ -2035,14 +2173,24 @@ actions:
         description: The user who invoked the activity (If applicable)
         type: '[]string'
         required: false
-        example: ["500000000000000003"]
+        example: ['500000000000000003']
     output:
       data:
         title: Data
         description: List of activities obtained for the given filters
         type: '[]activity'
         required: true
-        example: [ { "accountId": "400000000000000000", "accountName": "Example Account", "activityType": 22, "agentId": "9000000000000000", "createdAt": "2020-12-18T20:49:26.257525Z", "data": { "accountName": "Example Account", "computerName": "so-agent-win12", "confidenceLevel": "malicious", "fileContentHash": "02699626f388ed830012e5b787640e71c56d42d8", "fileDisplayName": "setup.exe", "filePath": "\\Device\\HarddiskVolume2\\Users\\Administrator\\Desktop\\setup.exe", "groupName": "Default Group", "siteName": "Example Site", "threatClassification": "Trojan", "threatClassificationSource": "Cloud" }, "groupId": "500000000000000000", "groupName": "Default Group", "id": "800000000000000008", "primaryDescription": "Threat with confidence level malicious detected: test.txt", "secondaryDescription": "02699626f388ed830012e5b787640e71c56d42d8", "siteId": "5000000000000001", "siteName": "Example", "threatId": "100000000000000000", "updatedAt": "2020-12-18T20:49:26.257525Z" } ]
+        example: [{accountId: '400000000000000000', accountName: Example Account,
+            activityType: 22, agentId: '9000000000000000', createdAt: '2020-12-18T20:49:26.257525Z',
+            data: {accountName: Example Account, computerName: so-agent-win12, confidenceLevel: malicious,
+              fileContentHash: 02699626f388ed830012e5b787640e71c56d42d8, fileDisplayName: setup.exe,
+              filePath: \Device\HarddiskVolume2\Users\Administrator\Desktop\setup.exe,
+              groupName: Default Group, siteName: Example Site, threatClassification: Trojan,
+              threatClassificationSource: Cloud}, groupId: '500000000000000000', groupName: Default
+              Group, id: '800000000000000008', primaryDescription: 'Threat with confidence
+              level malicious detected: test.txt', secondaryDescription: 02699626f388ed830012e5b787640e71c56d42d8,
+            siteId: '5000000000000001', siteName: Example, threatId: '100000000000000000',
+            updatedAt: '2020-12-18T20:49:26.257525Z'}]
       totalItems:
         title: Total Items
         description: Total number of activities found matching your query
@@ -2058,7 +2206,8 @@ actions:
         description: List of activity types
         type: '[]activityTypes'
         required: true
-        example: [ { "id": 1234, "descriptionTemplate": "The Management user {{ username }} created Account {{ account_name }}.", "action": "Account Created" } ]
+        example: [{id: 1234, descriptionTemplate: 'The Management user {{ username
+              }} created Account {{ account_name }}.', action: Account Created}]
   apps_by_agent_ids:
     title: Agents Applications
     description: Retrieve running applications for a specific agent
@@ -2068,14 +2217,16 @@ actions:
         description: Agent ID list
         type: '[]string'
         required: true
-        example: ["1000000000000000000"]
+        example: ['1000000000000000000']
     output:
       data:
         title: Agent Applications
         description: List of installed applications
         type: '[]agentApplications'
         required: true
-        example: [ { "installedDate": "2023-01-01T00:00:00.000000Z", "name": "Example App1", "publisher": "Microsoft Corporation", "size": 1234, "version": "1.0.4.5" }, { "installedDate": "2023-01-01T00:00:00.000000Z", "name": "Example App2", "publisher": "Example Publisher", "size": 1111, "version": "1.0.5.6" } ]
+        example: [{installedDate: '2023-01-01T00:00:00.000000Z', name: Example App1,
+            publisher: Microsoft Corporation, size: 1234, version: 1.0.4.5}, {installedDate: '2023-01-01T00:00:00.000000Z',
+            name: Example App2, publisher: Example Publisher, size: 1111, version: 1.0.5.6}]
   fetch_file_by_agent_id:
     title: Fetch File
     description: Fetch file for a specific agent id
@@ -2083,21 +2234,24 @@ actions:
       agentId:
         title: Agent ID
         description: Agent ID
-        type: 'string'
-        required: true
-        example: "1000000000000000000"
-      filePath:
-        title: File Path
-        description: File path of file to fetch. If a file can be fetched, it will be uploaded to the SentinelOne console for download
         type: string
         required: true
-        example: "C:/windows/system32/winevt/logs/application.evtx"
+        example: '1000000000000000000'
+      filePath:
+        title: File Path
+        description: File path of file to fetch. If a file can be fetched, it will
+          be uploaded to the SentinelOne console for download
+        type: string
+        required: true
+        example: C:/windows/system32/winevt/logs/application.evtx
       password:
         title: Password
-        description: File encryption password. The password cannot contain whitespace and must be 10 or more characters with a mix of upper and lower case letters, numbers, and symbols
+        description: File encryption password. The password cannot contain whitespace
+          and must be 10 or more characters with a mix of upper and lower case letters,
+          numbers, and symbols
         type: password
         required: true
-        example: "MySecretPass123!"
+        example: MySecretPass123!
     output:
       success:
         title: Success
@@ -2114,13 +2268,13 @@ actions:
         description: List of Site IDs to filter by
         type: '[]string'
         required: false
-        example: ["500000000000000000"]
+        example: ['500000000000000000']
       accountIds:
         title: Account IDs
         description: List of Account IDs to filter by
         type: '[]string'
         required: false
-        example: ["4000000000000000000"]
+        example: ['4000000000000000000']
     output:
       upToDate:
         title: Up to Date Number
@@ -2167,7 +2321,7 @@ actions:
         description: Account name to validate
         type: string
         required: true
-        example: "example"
+        example: example
     output:
       available:
         title: Available
@@ -2181,7 +2335,8 @@ actions:
     input:
       filter:
         title: Filter JSON
-        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
+        description: Applied filter - only matched agents will be affected by the
+          requested action. Leave empty to apply the action on all applicable agents
         type: object
         required: true
         example: '{"ids": ["1000000000000000000"]}'
@@ -2191,10 +2346,10 @@ actions:
         type: string
         required: true
         enum:
-          - monitor
-          - static
-          - agent
-          - log
+        - monitor
+        - static
+        - agent
+        - log
         example: monitor
     output:
       affected:
@@ -2205,11 +2360,17 @@ actions:
         example: 1
   agents_action:
     title: Run Agent Action
-    description: Perform actions relating to your SentinelOne agents. Initiate/Abort scan, connect/disconnect, decommission, restart/shutdown, fetch logs. Documentation for these actions can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions
+    description: Perform actions relating to your SentinelOne agents. Initiate/Abort
+      scan, connect/disconnect, decommission, restart/shutdown, fetch logs. Documentation
+      for these actions can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions
     input:
       filter:
         title: Filter JSON
-        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents. Note - decommission, disconnect, restart-machine, shutdown and uninstall actions require that one of the following filter arguments be supplied - ids, groupIds, or filterId
+        description: Applied filter - only matched agents will be affected by the
+          requested action. Leave empty to apply the action on all applicable agents.
+          Note - decommission, disconnect, restart-machine, shutdown and uninstall
+          actions require that one of the following filter arguments be supplied -
+          ids, groupIds, or filterId
         type: object
         required: true
         example: '{"ids": ["1000000000000000000"]}'
@@ -2219,16 +2380,16 @@ actions:
         type: string
         required: true
         enum:
-          - abort-scan
-          - connect
-          - decommission
-          - disconnect
-          - fetch-logs
-          - initiate-scan
-          - restart-machine
-          - shutdown
-          - uninstall
-        example: "connect"
+        - abort-scan
+        - connect
+        - decommission
+        - disconnect
+        - fetch-logs
+        - initiate-scan
+        - restart-machine
+        - shutdown
+        - uninstall
+        example: connect
     output:
       affected:
         title: Affected
@@ -2242,19 +2403,24 @@ actions:
     input:
       agent:
         title: Agent
-        description: Agent to retrieve device information from. Accepts IP address, MAC address, hostname, UUID or agent ID. If empty, this action will return all active or inactive agents depending on the value of the Agent Active input
+        description: Agent to retrieve device information from. Accepts IP address,
+          MAC address, hostname, UUID or agent ID. If empty, this action will return
+          all active or inactive agents depending on the value of the Agent Active
+          input
         type: string
         example: hostname123
         required: false
       agentActive:
         title: Agent Active
-        description: Return a list of active, inactive or all agents when Agent input is not specified. Note that leaving it empty can return a very large amount of data
+        description: Return a list of active, inactive or all agents when Agent input
+          is not specified. Note that leaving it empty can return a very large amount
+          of data
         type: string
         enum:
-          - "True"
-          - "False"
-          - ''
-        example: "True"
+        - 'True'
+        - 'False'
+        - ''
+        example: 'True'
         default: ''
         required: false
       operationalState:
@@ -2274,16 +2440,39 @@ actions:
       agents:
         title: Agents
         description: Detailed information about agents found
-        type: "[]agentData"
+        type: '[]agentData'
         required: false
-        example: [ { "accountId": "100000000000000000", "accountName": "Example Name", "activeThreats": 0, "agentVersion": "1.0.2.3", "allowRemoteShell": false, "appsVulnerabilityStatus": "up_to_date", "computerName": "hostname123", "consoleMigrationStatus": "N/A", "coreCount": 1, "cpuCount": 1, "cpuId": "CPU A0 v1 @ 3.00GHz", "createdAt": "2023-01-01T00:00:00.000000Z", "domain": "WORKGROUP", "encryptedApplications": false, "externalIp": "198.51.100.1", "firewallEnabled": true, "groupId": "100000000000000000", "groupIp": "1.2.3.x", "groupName": "Example Group", "id": "100000000000000000", "inRemoteShellSession": false, "infected": false, "installerType": ".exe", "isActive": true, "isDecommissioned": false, "isPendingUninstall": false, "isUninstalled": false, "isUpToDate": true, "lastActiveDate": "2023-01-01T00:00:00.000000Z", "lastIpToMgmt": "198.51.100.1", "locationEnabled": true, "locationType": "fallback", "locations": [ { "id": "100000000000000000", "name": "Fallback", "scope": "global" } ], "machineType": "server", "mitigationMode": "protect", "mitigationModeSuspicious": "detect", "modelName": "Example Model", "networkInterfaces": [ { "id": "100000000000000000", "inet": [ "198.51.100.1" ], "inet6": [ "2001:db8:1:1:1:1:1:1" ], "name": "Ethernet", "physical": "12-34-56-67-89-12" } ], "networkQuarantineEnabled": false, "networkStatus": "disconnected", "operationalState": "na", "operationalStateExpiration": "None", "osArch": "64 bit", "osName": "System Name", "osRevision": "9200", "osStartTime": "2023-01-01T00:00:00Z", "osType": "windows", "osUsername": "None", "rangerStatus": "NotApplicable", "rangerVersion": "None", "registeredAt": "2023-01-01T00:00:00.000000Z", "remoteProfilingState": "disabled", "remoteProfilingStateExpiration": "None", "scanAbortedAt": "None", "scanFinishedAt": "2023-01-01T00:00:00.000000Z", "scanStartedAt": "2023-01-01T00:00:00.000000Z", "scanStatus": "finished", "siteId": "100000000000000000", "siteName": "Example Site", "threatRebootRequired": false, "totalMemory": 1023, "updatedAt": "2023-01-01T00:00:00.000000Z", "uuid": "9de5069c5afe602b2ea0a04b66beb2c0" } ]
+        example: [{accountId: '100000000000000000', accountName: Example Name, activeThreats: 0,
+            agentVersion: 1.0.2.3, allowRemoteShell: false, appsVulnerabilityStatus: up_to_date,
+            computerName: hostname123, consoleMigrationStatus: N/A, coreCount: 1,
+            cpuCount: 1, cpuId: CPU A0 v1 @ 3.00GHz, createdAt: '2023-01-01T00:00:00.000000Z',
+            domain: WORKGROUP, encryptedApplications: false, externalIp: 198.51.100.1,
+            firewallEnabled: true, groupId: '100000000000000000', groupIp: 1.2.3.x,
+            groupName: Example Group, id: '100000000000000000', inRemoteShellSession: false,
+            infected: false, installerType: .exe, isActive: true, isDecommissioned: false,
+            isPendingUninstall: false, isUninstalled: false, isUpToDate: true, lastActiveDate: '2023-01-01T00:00:00.000000Z',
+            lastIpToMgmt: 198.51.100.1, locationEnabled: true, locationType: fallback,
+            locations: [{id: '100000000000000000', name: Fallback, scope: global}],
+            machineType: server, mitigationMode: protect, mitigationModeSuspicious: detect,
+            modelName: Example Model, networkInterfaces: [{id: '100000000000000000',
+                inet: [198.51.100.1], inet6: [2001:db8:1:1:1:1:1:1], name: Ethernet,
+                physical: 12-34-56-67-89-12}], networkQuarantineEnabled: false, networkStatus: disconnected,
+            operationalState: na, operationalStateExpiration: None, osArch: 64 bit,
+            osName: System Name, osRevision: '9200', osStartTime: '2023-01-01T00:00:00Z',
+            osType: windows, osUsername: None, rangerStatus: NotApplicable, rangerVersion: None,
+            registeredAt: '2023-01-01T00:00:00.000000Z', remoteProfilingState: disabled,
+            remoteProfilingStateExpiration: None, scanAbortedAt: None, scanFinishedAt: '2023-01-01T00:00:00.000000Z',
+            scanStartedAt: '2023-01-01T00:00:00.000000Z', scanStatus: finished, siteId: '100000000000000000',
+            siteName: Example Site, threatRebootRequired: false, totalMemory: 1023,
+            updatedAt: '2023-01-01T00:00:00.000000Z', uuid: 9de5069c5afe602b2ea0a04b66beb2c0}]
   get_agent_details:
     title: Get Agent Details
     description: Retrieve agent details
     input:
       agent:
         title: Agent
-        description: Agent to retrieve device information from. Accepts IP address, MAC address, hostname, UUID or agent ID
+        description: Agent to retrieve device information from. Accepts IP address,
+          MAC address, hostname, UUID or agent ID
         type: string
         example: hostname123
         required: true
@@ -2306,14 +2495,41 @@ actions:
         description: Detailed information about agent found
         type: agentData
         required: false
-        example: '{ "agent": { "accountId": "1000000000000000000", "accountName": "Example Name", "activeThreats": 0, "agentVersion": "1.0.2.3", "allowRemoteShell": false, "appsVulnerabilityStatus": "up_to_date", "computerName": "hostname123", "consoleMigrationStatus": "N/A", "coreCount": 1, "cpuCount": 1, "cpuId": "CPU A0 v1 @ 3.00GHz", "createdAt": "2023-01-01T00:00:00.000000Z", "domain": "WORKGROUP", "encryptedApplications": false, "externalIp": "198.51.100.1", "firewallEnabled": true, "groupId": "1000000000000000000", "groupIp": "1.2.3.x", "groupName": "Example Group", "id": "1000000000000000000", "inRemoteShellSession": false, "infected": false, "installerType": ".exe", "isActive": true, "isDecommissioned": false, "isPendingUninstall": false, "isUninstalled": false, "isUpToDate": true, "lastActiveDate": "2023-01-01T00:00:00.000000Z", "lastIpToMgmt": "198.51.100.1", "locationEnabled": true, "locationType": "fallback", "locations": [ { "id": "1000000000000000000", "name": "Fallback", "scope": "global" } ], "machineType": "server", "mitigationMode": "protect", "mitigationModeSuspicious": "detect", "modelName": "Example Model", "networkInterfaces": [ { "id": "1000000000000000000", "inet": [ "198.51.100.1" ], "inet6": [ "2001:db8:1:1:1:1:1:1" ], "name": "Ethernet", "physical": "12-23-45-67-89-12" } ], "networkQuarantineEnabled": false, "networkStatus": "disconnected", "operationalState": "na", "operationalStateExpiration": "None", "osArch": "64 bit", "osName": "System Name", "osRevision": "9200", "osStartTime": "2023-01-01T00:00:00Z", "osType": "windows", "osUsername": "None", "rangerStatus": "NotApplicable", "rangerVersion": "None", "registeredAt": "2023-01-01T00:00:00.000000Z", "remoteProfilingState": "disabled", "remoteProfilingStateExpiration": "None", "scanAbortedAt": "None", "scanFinishedAt": "2023-01-01T00:00:00.000000Z", "scanStartedAt": "2023-01-01T00:00:00.000000Z", "scanStatus": "finished", "siteId": "1000000000000000000", "siteName": "Example", "threatRebootRequired": false, "totalMemory": 1023, "updatedAt": "2023-01-01T00:00:00.000000Z", "uuid": "9de5069c5afe602b2ea0a04b66beb2c0" }'
+        example: '{ "agent": { "accountId": "1000000000000000000", "accountName":
+          "Example Name", "activeThreats": 0, "agentVersion": "1.0.2.3", "allowRemoteShell":
+          false, "appsVulnerabilityStatus": "up_to_date", "computerName": "hostname123",
+          "consoleMigrationStatus": "N/A", "coreCount": 1, "cpuCount": 1, "cpuId":
+          "CPU A0 v1 @ 3.00GHz", "createdAt": "2023-01-01T00:00:00.000000Z", "domain":
+          "WORKGROUP", "encryptedApplications": false, "externalIp": "198.51.100.1",
+          "firewallEnabled": true, "groupId": "1000000000000000000", "groupIp": "1.2.3.x",
+          "groupName": "Example Group", "id": "1000000000000000000", "inRemoteShellSession":
+          false, "infected": false, "installerType": ".exe", "isActive": true, "isDecommissioned":
+          false, "isPendingUninstall": false, "isUninstalled": false, "isUpToDate":
+          true, "lastActiveDate": "2023-01-01T00:00:00.000000Z", "lastIpToMgmt": "198.51.100.1",
+          "locationEnabled": true, "locationType": "fallback", "locations": [ { "id":
+          "1000000000000000000", "name": "Fallback", "scope": "global" } ], "machineType":
+          "server", "mitigationMode": "protect", "mitigationModeSuspicious": "detect",
+          "modelName": "Example Model", "networkInterfaces": [ { "id": "1000000000000000000",
+          "inet": [ "198.51.100.1" ], "inet6": [ "2001:db8:1:1:1:1:1:1" ], "name":
+          "Ethernet", "physical": "12-23-45-67-89-12" } ], "networkQuarantineEnabled":
+          false, "networkStatus": "disconnected", "operationalState": "na", "operationalStateExpiration":
+          "None", "osArch": "64 bit", "osName": "System Name", "osRevision": "9200",
+          "osStartTime": "2023-01-01T00:00:00Z", "osType": "windows", "osUsername":
+          "None", "rangerStatus": "NotApplicable", "rangerVersion": "None", "registeredAt":
+          "2023-01-01T00:00:00.000000Z", "remoteProfilingState": "disabled", "remoteProfilingStateExpiration":
+          "None", "scanAbortedAt": "None", "scanFinishedAt": "2023-01-01T00:00:00.000000Z",
+          "scanStartedAt": "2023-01-01T00:00:00.000000Z", "scanStatus": "finished",
+          "siteId": "1000000000000000000", "siteName": "Example", "threatRebootRequired":
+          false, "totalMemory": 1023, "updatedAt": "2023-01-01T00:00:00.000000Z",
+          "uuid": "9de5069c5afe602b2ea0a04b66beb2c0" }'
   quarantine:
     title: Quarantine
     description: Isolate (quarantine) endpoint from the network
     input:
       agent:
         title: Agent
-        description: Agent to perform quarantine action on. Accepts IP address, MAC address, hostname, UUID or agent ID
+        description: Agent to perform quarantine action on. Accepts IP address, MAC
+          address, hostname, UUID or agent ID
         type: string
         example: hostname123
         required: true
@@ -2325,9 +2541,10 @@ actions:
         required: true
       whitelist:
         title: Whitelist
-        description: This list contains a set of devices that should not be blocked. This can include IPs, hostnames, UUIDs and agent IDs
-        type: "[]string"
-        example: ["198.51.100.1", "hostname123", "1000000000000000000", "9de5069c5afe602b2ea0a04b66beb2c0"]
+        description: This list contains a set of devices that should not be blocked.
+          This can include IPs, hostnames, UUIDs and agent IDs
+        type: '[]string'
+        example: [198.51.100.1, hostname123, '1000000000000000000', 9de5069c5afe602b2ea0a04b66beb2c0]
         required: false
     output:
       affected:
@@ -2345,14 +2562,14 @@ actions:
         description: Create a blacklist item from a SHA1 hash
         type: string
         required: true
-        example: "3395856ce81f2b7382dee72602f798b642f14140"
+        example: 3395856ce81f2b7382dee72602f798b642f14140
       description:
         title: Description
         description: Description for why the hash is blacklisted
         type: string
-        default: "Hash blacklisted from InsightConnect"
+        default: Hash blacklisted from InsightConnect
         required: false
-        example: "Hash blacklisted from InsightConnect"
+        example: Hash blacklisted from InsightConnect
       blacklistState:
         title: Blacklist State
         description: True to create blacklist hash, false to unblacklist hash
@@ -2375,34 +2592,41 @@ actions:
         example: The given hash has been blacklisted
   threats_fetch_file:
     title: Fetch Threats File
-    description: Fetch a file associated with the threat that matches the filter. Your user role must have permissions to Fetch Threat File - Admin, IR Team, SOC
+    description: Fetch a file associated with the threat that matches the filter.
+      Your user role must have permissions to Fetch Threat File - Admin, IR Team,
+      SOC
     input:
       id:
         title: ID
         description: Threat ID
         type: string
         required: true
-        example: "1000000000000000000"
+        example: '1000000000000000000'
       password:
         title: Password
-        description: File encryption password. The password cannot contain whitespace and must be 10 or more characters with a mix of upper and lower case letters, numbers, and symbols
+        description: File encryption password. The password cannot contain whitespace
+          and must be 10 or more characters with a mix of upper and lower case letters,
+          numbers, and symbols
         type: password
         required: true
-        example: "R@pid7Insightc0nnect"
+        example: R@pid7Insightc0nnect
     output:
       file:
         title: File
         description: Base64 encoded threat file
         type: file
         required: true
-        example: '{ "file": { "filename": "report.txt", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==" } }'
+        example: '{ "file": { "filename": "report.txt", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
+          } }'
   disable_agent:
     title: Disable Agent
     description: Disable agents that match a filter
     input:
       agent:
         title: Agent
-        description: Agent to perform disable action on. Accepts IP address, MAC address, hostname, UUID or agent ID. Leave empty to perform action on all applicable Agents
+        description: Agent to perform disable action on. Accepts IP address, MAC address,
+          hostname, UUID or agent ID. Leave empty to perform action on all applicable
+          Agents
         type: string
         example: hostname123
         required: false
@@ -2419,207 +2643,207 @@ actions:
         type: string
         required: false
         enum:
-          - Australian Central Daylight Saving Time [ACDT]
-          - Australian Central Standard Time [ACST]
-          - Acre Time [ACT]
-          - Atlantic Daylight Time [ADT]
-          - Australian Eastern Daylight Saving Time [AEDT]
-          - Australian Eastern Standard Time [AEST]
-          - Australian Eastern Time [AET]
-          - Afghanistan Time [AFT]
-          - Alaska Daylight Time [AKDT]
-          - Alaska Standard Time [AKST]
-          - Alma-Ata Time [ALMT]
-          - Amazon Summer Time (Brazil) [AMST]
-          - Amazon Time (Brazil) [AMT]
-          - Armenia Time [AMT]
-          - Anadyr Time [ANAT]
-          - Aqtobe Time [AQTT]
-          - Argentina Time [ART]
-          - Arabia Standard Time [AST]
-          - Atlantic Standard Time [AST]
-          - Australian Western Standard Time [AWST]
-          - Azores Summer Time [AZOST]
-          - Azores Standard Time [AZOT]
-          - Azerbaijan Time [AZT]
-          - Brunei Time [BNT]
-          - British Indian Ocean Time [BIOT]
-          - Baker Island Time [BIT]
-          - Bolivia Time [BOT]
-          - Brasilia Summer Time [BRST]
-          - Brasilia Time [BRT]
-          - Bangladesh Standard Time [BST]
-          - Bougainville Standard Time [BST]
-          - Bhutan Time [BTT]
-          - Central Africa Time [CAT]
-          - Cocos Islands Time [CCT]
-          - Central Daylight Time (North America) [CDT]
-          - Cuba Daylight Time [CDT]
-          - Central European Summer Time [CEST]
-          - Central European Time [CET]
-          - Chatham Daylight Time [CHADT]
-          - Chatham Standard Time [CHAST]
-          - Choibalsan Standard Time [CHOT]
-          - Choibalsan Summer Time [CHOST]
-          - Chamorro Standard Time [CHST]
-          - Chuuk Time [CHUT]
-          - Clipperton Island Standard Time [CIST]
-          - Central Indonesia Time [WITA]
-          - Cook Island Time [CKT]
-          - Chile Summer Time [CLST]
-          - Chile Standard Time [CLT]
-          - Colombia Summer Time [COST]
-          - Colombia Time [COT]
-          - Central Standard Time (North America) [CST]
-          - China Standard Time [CST]
-          - Cuba Standard Time [CST]
-          - Central Time [CT]
-          - Cape Verde Time [CVT]
-          - Christmas Island Time [CXT]
-          - Davis Time [DAVT]
-          - Dumont dUrville Time [DDUT]
-          - AIX-specific equivalent of Central European Time [DFT]
-          - Easter Island Summer Time [EASST]
-          - Easter Island Standard Time [EAST]
-          - East Africa Time [EAT]
-          - Ecuador Time [ECT]
-          - Eastern Daylight Time (North America) [EDT]
-          - Eastern European Summer Time [EEST]
-          - Eastern European Time [EET]
-          - Eastern Greenland Summer Time [EGST]
-          - Eastern Greenland Time [EGT]
-          - Eastern Indonesian Time [WIT]
-          - Eastern Standard Time (North America) [EST]
-          - Further-eastern European Time [FET]
-          - Fiji Time [FJT]
-          - Falkland Islands Summer Time [FKST]
-          - Falkland Islands Time [FKT]
-          - Fernando de Noronha Time [FNT]
-          - Galapagos Time [GALT]
-          - Gambier Islands Time [GAMT]
-          - Georgia Standard Time [GET]
-          - French Guiana Time [GFT]
-          - Gilbert Island Time [GILT]
-          - Gambier Island Time [GIT]
-          - Greenwich Mean Time [GMT]
-          - South Georgia and the South Sandwich Islands Time [GST]
-          - Gulf Standard Time [GST]
-          - Guyana Time [GYT]
-          - Hawaii-Aleutian Daylight Time [HDT]
-          - Heure Avancee Europe Centrale French-language name for CEST [HAEC]
-          - Hawaii-Aleutian Standard Time [HST]
-          - Hong Kong Time [HKT]
-          - Heard and McDonald Islands Time [HMT]
-          - Hovd Time [HOVT]
-          - Indochina Time [ICT]
-          - International Day Line West time zone [IDLW]
-          - Israel Daylight Time [IDT]
-          - Indian Ocean Time [IOT]
-          - Iran Daylight Time [IRDT]
-          - Irkutsk Time [IRKT]
-          - Iran Standard Time [IRST]
-          - Indian Standard Time [IST]
-          - Irish Standard Time [IST]
-          - Israel Standard Time [IST]
-          - Japan Standard Time [JST]
-          - Kaliningrad Time [KALT]
-          - Kyrgyzstan Time [KGT]
-          - Kosrae Time [KOST]
-          - Krasnoyarsk Time [KRAT]
-          - Korea Standard Time [KST]
-          - Lord Howe Standard Time [LHST]
-          - Lord Howe Summer Time [LHST]
-          - Line Islands Time [LINT]
-          - Magadan Time [MAGT]
-          - Marquesas Islands Time [MART]
-          - Mawson Station Time [MAWT]
-          - Mountain Daylight Time (North America) [MDT]
-          - Middle European Time [MET]
-          - Middle European Summer Time [MEST]
-          - Marshall Islands Time [MHT]
-          - Macquarie Island Station Time [MIST]
-          - Marquesas Islands Time [MIT]
-          - Myanmar Standard Time [MMT]
-          - Moscow Time [MSK]
-          - Malaysia Standard Time [MST]
-          - Mountain Standard Time (North America) [MST]
-          - Mauritius Time [MUT]
-          - Maldives Time [MVT]
-          - Malaysia Time [MYT]
-          - New Caledonia Time [NCT]
-          - Newfoundland Daylight Time [NDT]
-          - Norfolk Island Time [NFT]
-          - Novosibirsk Time [NOVT]
-          - Nepal Time [NPT]
-          - Newfoundland Standard Time [NST]
-          - Newfoundland Time [NT]
-          - Niue Time [NUT]
-          - New Zealand Daylight Time [NZDT]
-          - New Zealand Standard Time [NZST]
-          - Omsk Time [OMST]
-          - Oral Time [ORAT]
-          - Pacific Daylight Time (North America) [PDT]
-          - Peru Time [PET]
-          - Kamchatka Time [PETT]
-          - Papua New Guinea Time [PGT]
-          - Phoenix Island Time [PHOT]
-          - Philippine Time [PHT]
-          - Pakistan Standard Time [PKT]
-          - Saint Pierre and Miquelon Daylight Time [PMDT]
-          - Saint Pierre and Miquelon Standard Time [PMST]
-          - Pohnpei Standard Time [PONT]
-          - Pacific Standard Time (North America) [PST]
-          - Philippine Standard Time [PST]
-          - Palau Time [PWT]
-          - Paraguay Summer Time [PYST]
-          - Paraguay Time [PYT]
-          - Reunion Time [RET]
-          - Rothera Research Station Time [ROTT]
-          - Sakhalin Island Time [SAKT]
-          - Samara Time [SAMT]
-          - South African Standard Time [SAST]
-          - Solomon Islands Time [SBT]
-          - Seychelles Time [SCT]
-          - Samoa Daylight Time [SDT]
-          - Singapore Time [SGT]
-          - Sri Lanka Standard Time [SLST]
-          - Srednekolymsk Time [SRET]
-          - Suriname Time [SRT]
-          - Samoa Standard Time [SST]
-          - Singapore Standard Time [SST]
-          - Showa Station Time [SYOT]
-          - Tahiti Time [TAHT]
-          - Thailand Standard Time [THA]
-          - French Southern and Antarctic Time [TFT]
-          - Tajikistan Time [TJT]
-          - Tokelau Time [TKT]
-          - Timor Leste Time [TLT]
-          - Turkmenistan Time [TMT]
-          - Turkey Time [TRT]
-          - Tonga Time [TOT]
-          - Tuvalu Time [TVT]
-          - Ulaanbaatar Summer Time [ULAST]
-          - Ulaanbaatar Standard Time [ULAT]
-          - Coordinated Universal Time [UTC]
-          - Uruguay Summer Time [UYST]
-          - Uruguay Standard Time [UYT]
-          - Uzbekistan Time [UZT]
-          - Venezuelan Standard Time [VET]
-          - Vladivostok Time [VLAT]
-          - Volgograd Time [VOLT]
-          - Vostok Station Time [VOST]
-          - Vanuatu Time [VUT]
-          - Wake Island Time [WAKT]
-          - West Africa Summer Time [WAST]
-          - West Africa Time [WAT]
-          - Western European Summer Time [WEST]
-          - Western European Time [WET]
-          - Western Indonesian Time [WIB]
-          - West Greenland Summer Time [WGST]
-          - West Greenland Time [WGT]
-          - Western Standard Time [WST]
-          - Yakutsk Time [YAKT]
-          - Yekaterinburg Time [YEKT]
+        - Australian Central Daylight Saving Time [ACDT]
+        - Australian Central Standard Time [ACST]
+        - Acre Time [ACT]
+        - Atlantic Daylight Time [ADT]
+        - Australian Eastern Daylight Saving Time [AEDT]
+        - Australian Eastern Standard Time [AEST]
+        - Australian Eastern Time [AET]
+        - Afghanistan Time [AFT]
+        - Alaska Daylight Time [AKDT]
+        - Alaska Standard Time [AKST]
+        - Alma-Ata Time [ALMT]
+        - Amazon Summer Time (Brazil) [AMST]
+        - Amazon Time (Brazil) [AMT]
+        - Armenia Time [AMT]
+        - Anadyr Time [ANAT]
+        - Aqtobe Time [AQTT]
+        - Argentina Time [ART]
+        - Arabia Standard Time [AST]
+        - Atlantic Standard Time [AST]
+        - Australian Western Standard Time [AWST]
+        - Azores Summer Time [AZOST]
+        - Azores Standard Time [AZOT]
+        - Azerbaijan Time [AZT]
+        - Brunei Time [BNT]
+        - British Indian Ocean Time [BIOT]
+        - Baker Island Time [BIT]
+        - Bolivia Time [BOT]
+        - Brasilia Summer Time [BRST]
+        - Brasilia Time [BRT]
+        - Bangladesh Standard Time [BST]
+        - Bougainville Standard Time [BST]
+        - Bhutan Time [BTT]
+        - Central Africa Time [CAT]
+        - Cocos Islands Time [CCT]
+        - Central Daylight Time (North America) [CDT]
+        - Cuba Daylight Time [CDT]
+        - Central European Summer Time [CEST]
+        - Central European Time [CET]
+        - Chatham Daylight Time [CHADT]
+        - Chatham Standard Time [CHAST]
+        - Choibalsan Standard Time [CHOT]
+        - Choibalsan Summer Time [CHOST]
+        - Chamorro Standard Time [CHST]
+        - Chuuk Time [CHUT]
+        - Clipperton Island Standard Time [CIST]
+        - Central Indonesia Time [WITA]
+        - Cook Island Time [CKT]
+        - Chile Summer Time [CLST]
+        - Chile Standard Time [CLT]
+        - Colombia Summer Time [COST]
+        - Colombia Time [COT]
+        - Central Standard Time (North America) [CST]
+        - China Standard Time [CST]
+        - Cuba Standard Time [CST]
+        - Central Time [CT]
+        - Cape Verde Time [CVT]
+        - Christmas Island Time [CXT]
+        - Davis Time [DAVT]
+        - Dumont dUrville Time [DDUT]
+        - AIX-specific equivalent of Central European Time [DFT]
+        - Easter Island Summer Time [EASST]
+        - Easter Island Standard Time [EAST]
+        - East Africa Time [EAT]
+        - Ecuador Time [ECT]
+        - Eastern Daylight Time (North America) [EDT]
+        - Eastern European Summer Time [EEST]
+        - Eastern European Time [EET]
+        - Eastern Greenland Summer Time [EGST]
+        - Eastern Greenland Time [EGT]
+        - Eastern Indonesian Time [WIT]
+        - Eastern Standard Time (North America) [EST]
+        - Further-eastern European Time [FET]
+        - Fiji Time [FJT]
+        - Falkland Islands Summer Time [FKST]
+        - Falkland Islands Time [FKT]
+        - Fernando de Noronha Time [FNT]
+        - Galapagos Time [GALT]
+        - Gambier Islands Time [GAMT]
+        - Georgia Standard Time [GET]
+        - French Guiana Time [GFT]
+        - Gilbert Island Time [GILT]
+        - Gambier Island Time [GIT]
+        - Greenwich Mean Time [GMT]
+        - South Georgia and the South Sandwich Islands Time [GST]
+        - Gulf Standard Time [GST]
+        - Guyana Time [GYT]
+        - Hawaii-Aleutian Daylight Time [HDT]
+        - Heure Avancee Europe Centrale French-language name for CEST [HAEC]
+        - Hawaii-Aleutian Standard Time [HST]
+        - Hong Kong Time [HKT]
+        - Heard and McDonald Islands Time [HMT]
+        - Hovd Time [HOVT]
+        - Indochina Time [ICT]
+        - International Day Line West time zone [IDLW]
+        - Israel Daylight Time [IDT]
+        - Indian Ocean Time [IOT]
+        - Iran Daylight Time [IRDT]
+        - Irkutsk Time [IRKT]
+        - Iran Standard Time [IRST]
+        - Indian Standard Time [IST]
+        - Irish Standard Time [IST]
+        - Israel Standard Time [IST]
+        - Japan Standard Time [JST]
+        - Kaliningrad Time [KALT]
+        - Kyrgyzstan Time [KGT]
+        - Kosrae Time [KOST]
+        - Krasnoyarsk Time [KRAT]
+        - Korea Standard Time [KST]
+        - Lord Howe Standard Time [LHST]
+        - Lord Howe Summer Time [LHST]
+        - Line Islands Time [LINT]
+        - Magadan Time [MAGT]
+        - Marquesas Islands Time [MART]
+        - Mawson Station Time [MAWT]
+        - Mountain Daylight Time (North America) [MDT]
+        - Middle European Time [MET]
+        - Middle European Summer Time [MEST]
+        - Marshall Islands Time [MHT]
+        - Macquarie Island Station Time [MIST]
+        - Marquesas Islands Time [MIT]
+        - Myanmar Standard Time [MMT]
+        - Moscow Time [MSK]
+        - Malaysia Standard Time [MST]
+        - Mountain Standard Time (North America) [MST]
+        - Mauritius Time [MUT]
+        - Maldives Time [MVT]
+        - Malaysia Time [MYT]
+        - New Caledonia Time [NCT]
+        - Newfoundland Daylight Time [NDT]
+        - Norfolk Island Time [NFT]
+        - Novosibirsk Time [NOVT]
+        - Nepal Time [NPT]
+        - Newfoundland Standard Time [NST]
+        - Newfoundland Time [NT]
+        - Niue Time [NUT]
+        - New Zealand Daylight Time [NZDT]
+        - New Zealand Standard Time [NZST]
+        - Omsk Time [OMST]
+        - Oral Time [ORAT]
+        - Pacific Daylight Time (North America) [PDT]
+        - Peru Time [PET]
+        - Kamchatka Time [PETT]
+        - Papua New Guinea Time [PGT]
+        - Phoenix Island Time [PHOT]
+        - Philippine Time [PHT]
+        - Pakistan Standard Time [PKT]
+        - Saint Pierre and Miquelon Daylight Time [PMDT]
+        - Saint Pierre and Miquelon Standard Time [PMST]
+        - Pohnpei Standard Time [PONT]
+        - Pacific Standard Time (North America) [PST]
+        - Philippine Standard Time [PST]
+        - Palau Time [PWT]
+        - Paraguay Summer Time [PYST]
+        - Paraguay Time [PYT]
+        - Reunion Time [RET]
+        - Rothera Research Station Time [ROTT]
+        - Sakhalin Island Time [SAKT]
+        - Samara Time [SAMT]
+        - South African Standard Time [SAST]
+        - Solomon Islands Time [SBT]
+        - Seychelles Time [SCT]
+        - Samoa Daylight Time [SDT]
+        - Singapore Time [SGT]
+        - Sri Lanka Standard Time [SLST]
+        - Srednekolymsk Time [SRET]
+        - Suriname Time [SRT]
+        - Samoa Standard Time [SST]
+        - Singapore Standard Time [SST]
+        - Showa Station Time [SYOT]
+        - Tahiti Time [TAHT]
+        - Thailand Standard Time [THA]
+        - French Southern and Antarctic Time [TFT]
+        - Tajikistan Time [TJT]
+        - Tokelau Time [TKT]
+        - Timor Leste Time [TLT]
+        - Turkmenistan Time [TMT]
+        - Turkey Time [TRT]
+        - Tonga Time [TOT]
+        - Tuvalu Time [TVT]
+        - Ulaanbaatar Summer Time [ULAST]
+        - Ulaanbaatar Standard Time [ULAT]
+        - Coordinated Universal Time [UTC]
+        - Uruguay Summer Time [UYST]
+        - Uruguay Standard Time [UYT]
+        - Uzbekistan Time [UZT]
+        - Venezuelan Standard Time [VET]
+        - Vladivostok Time [VLAT]
+        - Volgograd Time [VOLT]
+        - Vostok Station Time [VOST]
+        - Vanuatu Time [VUT]
+        - Wake Island Time [WAKT]
+        - West Africa Summer Time [WAST]
+        - West Africa Time [WAT]
+        - Western European Summer Time [WEST]
+        - Western European Time [WET]
+        - Western Indonesian Time [WIB]
+        - West Greenland Summer Time [WGST]
+        - West Greenland Time [WGT]
+        - Western Standard Time [WST]
+        - Yakutsk Time [YAKT]
+        - Yekaterinburg Time [YEKT]
         default: Central Standard Time (North America) [CST]
         example: Central Standard Time (North America) [CST]
       expirationTime:
@@ -2630,10 +2854,11 @@ actions:
         example: 2020-02-27T04:49:26.257525Z
       filter:
         title: Filter
-        description: Filter to apply action on specified agents. Leave empty to perform action on all applicable Agents
+        description: Filter to apply action on specified agents. Leave empty to perform
+          action on all applicable Agents
         required: false
         type: object
-        example: { "updatedAt__gt": "2019-02-27T04:49:26.257525Z" }
+        example: {updatedAt__gt: '2019-02-27T04:49:26.257525Z'}
     output:
       affected:
         title: Affected
@@ -2647,7 +2872,9 @@ actions:
     input:
       agent:
         title: Agent
-        description: Agent to perform disable action on. Accepts IP address, MAC address, hostname, UUID or agent ID. Leave empty to perform action on all applicable Agents
+        description: Agent to perform disable action on. Accepts IP address, MAC address,
+          hostname, UUID or agent ID. Leave empty to perform action on all applicable
+          Agents
         type: string
         example: hostname123
         required: false
@@ -2659,10 +2886,11 @@ actions:
         example: true
       filter:
         title: Filter
-        description: Filter to apply action on specified agents. Leave empty to perform action on all applicable Agents
+        description: Filter to apply action on specified agents. Leave empty to perform
+          action on all applicable Agents
         required: false
         type: object
-        example: { "updatedAt__gt": "2019-02-27T04:49:26.257525Z" }
+        example: {updatedAt__gt: '2019-02-27T04:49:26.257525Z'}
     output:
       affected:
         title: Affected
@@ -2672,7 +2900,8 @@ actions:
         example: 1
   create_query:
     title: Create Query
-    description: Start a Deep Visibility Query and get the queryId. You can use the queryId for other commands, such as Get Events and Get Query Status
+    description: Start a Deep Visibility Query and get the queryId. You can use the
+      queryId for other commands, such as Get Events and Get Query Status
     input:
       query:
         title: Query
@@ -2684,13 +2913,13 @@ actions:
         title: From Date
         description: Events created after this timestamp
         type: date
-        example: "2021-03-01T04:49:26+00:00"
+        example: '2021-03-01T04:49:26+00:00'
         required: true
       toDate:
         title: To Date
         description: Events created before or at this timestamp
         type: date
-        example: "2021-03-23T04:49:26+00:00"
+        example: '2021-03-23T04:49:26+00:00'
         required: true
       limit:
         title: Limit
@@ -2702,8 +2931,8 @@ actions:
       siteIds:
         title: Site IDs
         description: List of site IDs to filter by
-        type: "[]string"
-        example: ["1000000000000000000", "1000000000000000001"]
+        type: '[]string'
+        example: ['1000000000000000000', '1000000000000000001']
         required: false
       tenant:
         title: Tenant
@@ -2714,8 +2943,8 @@ actions:
       accountIds:
         title: Account IDs
         description: List of account IDs to filter by
-        type: "[]string"
-        example: ["1000000000000000000", "1000000000000000001"]
+        type: '[]string'
+        example: ['1000000000000000000', '1000000000000000001']
         required: false
       isVerbose:
         title: Is Verbose
@@ -2726,14 +2955,14 @@ actions:
       groupIds:
         title: Group IDs
         description: List of group IDs to filter by
-        type: "[]string"
-        example: ["1000000000000000000", "1000000000000000001"]
+        type: '[]string'
+        example: ['1000000000000000000', '1000000000000000001']
         required: false
       queryType:
         title: Query Type
         description: Query search type
-        type: "[]string"
-        example: ["events"]
+        type: '[]string'
+        example: [events]
         required: false
     output:
       queryId:
@@ -2758,7 +2987,8 @@ actions:
         description: Information about the status of the given query
         type: queryStatus
         required: false
-        example: { "progressStatus": 100, "queryModeInfo": { "lastActivatedAt": "2022-07-31T08:11:01+00:00", "mode": "scalyr" }, "responseState": "FINISHED" }
+        example: {progressStatus: 100, queryModeInfo: {lastActivatedAt: '2022-07-31T08:11:01+00:00',
+            mode: scalyr}, responseState: FINISHED}
   cancel_running_query:
     title: Cancel Running Query
     description: Stop a Deep Visibility Query by queryId
@@ -2775,7 +3005,7 @@ actions:
         description: SentinelOne API call response data
         type: querySuccess
         required: false
-        example: { "success": "FINISHED" }
+        example: {success: FINISHED}
   get_events:
     title: Get Events
     description: This action is used to get all Deep Visibility events from a queryId
@@ -2788,7 +3018,8 @@ actions:
         required: true
       limit:
         title: Limit
-        description: Limit number of returned items (1-1000), if no limit is provided returns all the results up to 20,000
+        description: Limit number of returned items (1-1000), if no limit is provided
+          returns all the results up to 20,000
         type: integer
         example: 10
         required: false
@@ -2802,18 +3033,45 @@ actions:
       events:
         title: Events
         description: Response events data
-        type: "[]eventData"
+        type: '[]eventData'
         required: false
-        example: [ { "accountId": "1000000000000000000", "agentDomain": "WORKGROUP", "agentGroupId": "1000000000000000000", "agentId": "1000000000000000000", "agentInfected": true, "agentIp": "198.51.100.1", "agentIsActive": true, "agentIsDecommissioned": false, "agentMachineType": "laptop", "agentName": "Example Name", "agentNetworkStatus": "connected", "agentOs": "windows", "agentTimestamp": "2023-10-23T00:00:00.000Z", "agentUuid": "9de5069c5afe602b2ea0a04b66beb2c0", "createdAt": "2023-10-23T00:00:00.000Z", "endpointMachineType": "desktop", "endpointName": "Example Name", "endpointOs": "windows", "eventTime": "2023-10-23T00:00:00.000Z", "eventType": "Task Update", "id": "1000000000000000000", "isAgentVersionFullySupportedForPg": false, "isAgentVersionFullySupportedForPgMessage": "Example message", "lastActivatedAt": "2023-10-23T00:00:00.000Z", "objectType": "scheduled_task", "parentProcessUniqueKey": "ABCD1234", "pid": "1234", "processGroupId": "ABCD1234", "processIntegrityLevel": "INTEGRITY_LEVEL_UNKNOWN", "processStartTime": "2023-10-23T00:00:00.000Z", "processUniqueKey": "ABCD1234", "relatedToThreat": "False", "siteId": "1000000000000000000", "storyline": "ABCD1234", "taskName": "Example Name", "trueContext": "ABCD1234" }, { "accountId": "1000000000000000001", "agentDomain": "WORKGROUP", "agentGroupId": "1000000000000000001", "agentId": "1000000000000000001", "agentInfected": true, "agentIp": "198.51.100.1", "agentIsActive": true, "agentIsDecommissioned": false, "agentMachineType": "laptop", "agentName": "Example Name", "agentNetworkStatus": "connected", "agentOs": "windows", "agentTimestamp": "2023-10-23T00:00:00.000Z", "agentUuid": "9de5069c5afe602b2ea0a04b66beb2c0", "createdAt": "2023-10-23T00:00:00.000Z", "endpointMachineType": "desktop", "endpointName": "Example Name", "endpointOs": "windows", "eventTime": "2023-10-23T00:00:00.000Z", "eventType": "Task Update", "id": "1000000000000000001", "isAgentVersionFullySupportedForPg": false, "isAgentVersionFullySupportedForPgMessage": "Example message", "lastActivatedAt": "2023-10-23T00:00:00.000Z", "objectType": "scheduled_task", "parentProcessUniqueKey": "ABCD1234", "pid": "1234", "processGroupId": "ABCD1234", "processIntegrityLevel": "INTEGRITY_LEVEL_UNKNOWN", "processStartTime": "2023-10-23T00:00:00.000Z", "processUniqueKey": "ABCD1234", "relatedToThreat": "False", "siteId": "1000000000000000001", "storyline": "ABCD1234", "taskName": "Example Name", "trueContext": "ABCD1234" } ]
+        example: [{accountId: '1000000000000000000', agentDomain: WORKGROUP, agentGroupId: '1000000000000000000',
+            agentId: '1000000000000000000', agentInfected: true, agentIp: 198.51.100.1,
+            agentIsActive: true, agentIsDecommissioned: false, agentMachineType: laptop,
+            agentName: Example Name, agentNetworkStatus: connected, agentOs: windows,
+            agentTimestamp: '2023-10-23T00:00:00.000Z', agentUuid: 9de5069c5afe602b2ea0a04b66beb2c0,
+            createdAt: '2023-10-23T00:00:00.000Z', endpointMachineType: desktop, endpointName: Example
+              Name, endpointOs: windows, eventTime: '2023-10-23T00:00:00.000Z', eventType: Task
+              Update, id: '1000000000000000000', isAgentVersionFullySupportedForPg: false,
+            isAgentVersionFullySupportedForPgMessage: Example message, lastActivatedAt: '2023-10-23T00:00:00.000Z',
+            objectType: scheduled_task, parentProcessUniqueKey: ABCD1234, pid: '1234',
+            processGroupId: ABCD1234, processIntegrityLevel: INTEGRITY_LEVEL_UNKNOWN,
+            processStartTime: '2023-10-23T00:00:00.000Z', processUniqueKey: ABCD1234,
+            relatedToThreat: 'False', siteId: '1000000000000000000', storyline: ABCD1234,
+            taskName: Example Name, trueContext: ABCD1234}, {accountId: '1000000000000000001',
+            agentDomain: WORKGROUP, agentGroupId: '1000000000000000001', agentId: '1000000000000000001',
+            agentInfected: true, agentIp: 198.51.100.1, agentIsActive: true, agentIsDecommissioned: false,
+            agentMachineType: laptop, agentName: Example Name, agentNetworkStatus: connected,
+            agentOs: windows, agentTimestamp: '2023-10-23T00:00:00.000Z', agentUuid: 9de5069c5afe602b2ea0a04b66beb2c0,
+            createdAt: '2023-10-23T00:00:00.000Z', endpointMachineType: desktop, endpointName: Example
+              Name, endpointOs: windows, eventTime: '2023-10-23T00:00:00.000Z', eventType: Task
+              Update, id: '1000000000000000001', isAgentVersionFullySupportedForPg: false,
+            isAgentVersionFullySupportedForPgMessage: Example message, lastActivatedAt: '2023-10-23T00:00:00.000Z',
+            objectType: scheduled_task, parentProcessUniqueKey: ABCD1234, pid: '1234',
+            processGroupId: ABCD1234, processIntegrityLevel: INTEGRITY_LEVEL_UNKNOWN,
+            processStartTime: '2023-10-23T00:00:00.000Z', processUniqueKey: ABCD1234,
+            relatedToThreat: 'False', siteId: '1000000000000000001', storyline: ABCD1234,
+            taskName: Example Name, trueContext: ABCD1234}]
       errors:
         title: Errors
         description: Errors
-        type: "[]object"
+        type: '[]object'
         required: false
         example: []
   get_events_by_type:
     title: Get Events by Type
-    description: This action is used to get Deep Visibility results from the query that matches the given event type
+    description: This action is used to get Deep Visibility results from the query
+      that matches the given event type
     input:
       queryId:
         title: Query ID
@@ -2874,7 +3132,8 @@ actions:
         required: true
       limit:
         title: Limit
-        description: Limit number of returned items (1-1000), if no limit is provided returns all the results up to 20,000
+        description: Limit number of returned items (1-1000), if no limit is provided
+          returns all the results up to 20,000
         type: integer
         example: 10
         required: false
@@ -2888,13 +3147,39 @@ actions:
       events:
         title: Events
         description: Response events data
-        type: "[]eventData"
+        type: '[]eventData'
         required: false
-        example: [ { "accountId": "1000000000000000000", "agentDomain": "WORKGROUP", "agentGroupId": "1000000000000000000", "agentId": "1000000000000000000", "agentInfected": true, "agentIp": "198.51.100.1", "agentIsActive": true, "agentIsDecommissioned": false, "agentMachineType": "laptop", "agentName": "Example Name", "agentNetworkStatus": "connected", "agentOs": "windows", "agentTimestamp": "2023-10-23T00:00:00.000Z", "agentUuid": "9de5069c5afe602b2ea0a04b66beb2c0", "createdAt": "2023-10-23T00:00:00.000Z", "endpointMachineType": "desktop", "endpointName": "Example Name", "endpointOs": "windows", "eventTime": "2023-10-23T00:00:00.000Z", "eventType": "Task Update", "id": "1000000000000000000", "isAgentVersionFullySupportedForPg": false, "isAgentVersionFullySupportedForPgMessage": "Example message", "lastActivatedAt": "2023-10-23T00:00:00.000Z", "objectType": "scheduled_task", "parentProcessUniqueKey": "ABCD1234", "pid": "1234", "processGroupId": "ABCD1234", "processIntegrityLevel": "INTEGRITY_LEVEL_UNKNOWN", "processStartTime": "2023-10-23T00:00:00.000Z", "processUniqueKey": "ABCD1234", "relatedToThreat": "False", "siteId": "1000000000000000000", "storyline": "ABCD1234", "taskName": "Example Name", "trueContext": "ABCD1234" }, { "accountId": "1000000000000000001", "agentDomain": "WORKGROUP", "agentGroupId": "1000000000000000001", "agentId": "1000000000000000001", "agentInfected": true, "agentIp": "198.51.100.1", "agentIsActive": true, "agentIsDecommissioned": false, "agentMachineType": "laptop", "agentName": "Example Name", "agentNetworkStatus": "connected", "agentOs": "windows", "agentTimestamp": "2023-10-23T00:00:00.000Z", "agentUuid": "9de5069c5afe602b2ea0a04b66beb2c0", "createdAt": "2023-10-23T00:00:00.000Z", "endpointMachineType": "desktop", "endpointName": "Example Name", "endpointOs": "windows", "eventTime": "2023-10-23T00:00:00.000Z", "eventType": "Task Update", "id": "1000000000000000001", "isAgentVersionFullySupportedForPg": false, "isAgentVersionFullySupportedForPgMessage": "Example message", "lastActivatedAt": "2023-10-23T00:00:00.000Z", "objectType": "scheduled_task", "parentProcessUniqueKey": "ABCD1234", "pid": "1234", "processGroupId": "ABCD1234", "processIntegrityLevel": "INTEGRITY_LEVEL_UNKNOWN", "processStartTime": "2023-10-23T00:00:00.000Z", "processUniqueKey": "ABCD1234", "relatedToThreat": "False", "siteId": "1000000000000000001", "storyline": "ABCD1234", "taskName": "Example Name", "trueContext": "ABCD1234" } ]
+        example: [{accountId: '1000000000000000000', agentDomain: WORKGROUP, agentGroupId: '1000000000000000000',
+            agentId: '1000000000000000000', agentInfected: true, agentIp: 198.51.100.1,
+            agentIsActive: true, agentIsDecommissioned: false, agentMachineType: laptop,
+            agentName: Example Name, agentNetworkStatus: connected, agentOs: windows,
+            agentTimestamp: '2023-10-23T00:00:00.000Z', agentUuid: 9de5069c5afe602b2ea0a04b66beb2c0,
+            createdAt: '2023-10-23T00:00:00.000Z', endpointMachineType: desktop, endpointName: Example
+              Name, endpointOs: windows, eventTime: '2023-10-23T00:00:00.000Z', eventType: Task
+              Update, id: '1000000000000000000', isAgentVersionFullySupportedForPg: false,
+            isAgentVersionFullySupportedForPgMessage: Example message, lastActivatedAt: '2023-10-23T00:00:00.000Z',
+            objectType: scheduled_task, parentProcessUniqueKey: ABCD1234, pid: '1234',
+            processGroupId: ABCD1234, processIntegrityLevel: INTEGRITY_LEVEL_UNKNOWN,
+            processStartTime: '2023-10-23T00:00:00.000Z', processUniqueKey: ABCD1234,
+            relatedToThreat: 'False', siteId: '1000000000000000000', storyline: ABCD1234,
+            taskName: Example Name, trueContext: ABCD1234}, {accountId: '1000000000000000001',
+            agentDomain: WORKGROUP, agentGroupId: '1000000000000000001', agentId: '1000000000000000001',
+            agentInfected: true, agentIp: 198.51.100.1, agentIsActive: true, agentIsDecommissioned: false,
+            agentMachineType: laptop, agentName: Example Name, agentNetworkStatus: connected,
+            agentOs: windows, agentTimestamp: '2023-10-23T00:00:00.000Z', agentUuid: 9de5069c5afe602b2ea0a04b66beb2c0,
+            createdAt: '2023-10-23T00:00:00.000Z', endpointMachineType: desktop, endpointName: Example
+              Name, endpointOs: windows, eventTime: '2023-10-23T00:00:00.000Z', eventType: Task
+              Update, id: '1000000000000000001', isAgentVersionFullySupportedForPg: false,
+            isAgentVersionFullySupportedForPgMessage: Example message, lastActivatedAt: '2023-10-23T00:00:00.000Z',
+            objectType: scheduled_task, parentProcessUniqueKey: ABCD1234, pid: '1234',
+            processGroupId: ABCD1234, processIntegrityLevel: INTEGRITY_LEVEL_UNKNOWN,
+            processStartTime: '2023-10-23T00:00:00.000Z', processUniqueKey: ABCD1234,
+            relatedToThreat: 'False', siteId: '1000000000000000001', storyline: ABCD1234,
+            taskName: Example Name, trueContext: ABCD1234}]
       errors:
         title: Errors
         description: Errors
-        type: "[]object"
+        type: '[]object'
         required: false
         example: []
   update_analyst_verdict:
@@ -2903,19 +3188,20 @@ actions:
     input:
       incidentIds:
         title: Incident IDs
-        description: A list of alert or threat IDs on which we may update the analyst verdict
-        type: "[]string"
-        example: ["1000000000000000000", "1000000000000000001"]
+        description: A list of alert or threat IDs on which we may update the analyst
+          verdict
+        type: '[]string'
+        example: ['1000000000000000000', '1000000000000000001']
         required: true
       analystVerdict:
         title: Analyst Verdict
         description: Analyst verdict
         type: string
         enum:
-          - true positive
-          - suspicious
-          - false positive
-          - undefined
+        - true positive
+        - suspicious
+        - false positive
+        - undefined
         example: true positive
         required: true
       type:
@@ -2923,8 +3209,8 @@ actions:
         description: Type of incidents
         type: string
         enum:
-          - threats
-          - alerts
+        - threats
+        - alerts
         example: threats
         required: true
     output:
@@ -2941,17 +3227,17 @@ actions:
       incidentIds:
         title: Incident IDs
         description: A list of alert or threat IDs to update the incident status on
-        type: "[]string"
-        example: ["1000000000000000000", "1000000000000000001"]
+        type: '[]string'
+        example: ['1000000000000000000', '1000000000000000001']
         required: true
       incidentStatus:
         title: Incident Status
         description: Incident status
         type: string
         enum:
-          - unresolved
-          - in progress
-          - resolved
+        - unresolved
+        - in progress
+        - resolved
         example: resolved
         required: true
       type:
@@ -2959,8 +3245,8 @@ actions:
         description: Type of incidents
         type: string
         enum:
-          - threats
-          - alerts
+        - threats
+        - alerts
         example: threats
         required: true
     output:
@@ -2976,59 +3262,67 @@ actions:
     input:
       ids:
         title: IDs
-        description: IDs of the agents to execute the script on. If no IDs provided, the script will run on ALL applicable agents. This id can be retrieved by using the get agent details action if neccessary
+        description: IDs of the agents to execute the script on. If no IDs provided,
+          the script will run on ALL applicable agents. This id can be retrieved by
+          using the get agent details action if neccessary
         type: '[]string'
         required: false
         example: '["100000000000000000"]'
       scriptId:
         title: Script ID
-        description: ID of the script to run (select the ID of a SentinelOne or user script from SentinelOne console)
+        description: ID of the script to run (select the ID of a SentinelOne or user
+          script from SentinelOne console)
         type: string
         required: true
-        example: "1234567891234"
+        example: '1234567891234'
       taskDescription:
         title: Task Description
         description: Task Description
         type: string
         required: true
-        example: "Task Description"
+        example: Task Description
       outputDestination:
         title: Output Destination
         description: Output destination of any script output
         type: string
         enum:
-          - Local
-          - None
-          - SentinelCloud
+        - Local
+        - None
+        - SentinelCloud
         example: SentinelCloud
         required: true
       outputDirectory:
         title: Output Directory
-        description: Output Directory (Only relevant if Local is selected for Output Destination)
+        description: Output Directory (Only relevant if Local is selected for Output
+          Destination)
         type: string
         required: false
-        example: "/tmp/script_output"
+        example: /tmp/script_output
       code:
         title: Code
-        description: Code from a third-party application, such as DUO or Google Authenticator, required to elevate the protected actions session
+        description: Code from a third-party application, such as DUO or Google Authenticator,
+          required to elevate the protected actions session
         type: string
         required: false
         example: 123456
       password:
         title: Password
-        description: Password (Only relevant if SentinelCloud is selected for Output Destination). At least 10 characters and no whitespace
+        description: Password (Only relevant if SentinelCloud is selected for Output
+          Destination). At least 10 characters and no whitespace
         type: string
         required: false
-        example: "Password123??"
+        example: Password123??
       inputParameters:
         title: Input Script Parameters
-        description: Parameters which will be passed to the remote script (may or may not be required, depending on script)
+        description: Parameters which will be passed to the remote script (may or
+          may not be required, depending on script)
         type: string
         required: false
-        example: "input_parameter1"
+        example: input_parameter1
       timeout:
         title: Script Execution Timeout
-        description: Script runtime timeout (in seconds) for current execution (Value between 60 and 172800 seconds)
+        description: Script runtime timeout (in seconds) for current execution (Value
+          between 60 and 172800 seconds)
         type: integer
         required: false
         default: 3600
@@ -3036,23 +3330,28 @@ actions:
     output:
       affected:
         title: Affected
-        description: Number of entities affected by requested operation. For detailed output from running the script, log onto the SentinelOne console. Note this may be lower than the number of agent ids submitted if the script cannot be run on a particular agent e.g. due to OS type
+        description: Number of entities affected by requested operation. For detailed
+          output from running the script, log onto the SentinelOne console. Note this
+          may be lower than the number of agent ids submitted if the script cannot
+          be run on a particular agent e.g. due to OS type
         type: integer
         required: true
         example: 1
   move_between_sites:
     title: Move Agent to Another Site
-    description: Move an agent to another site, This action requires Account or Global level access for your user role
+    description: Move an agent to another site, This action requires Account or Global
+      level access for your user role
     input:
       targetSiteId:
         title: Target Site ID
         description: The ID of the new site to move the agents to
         type: string
-        example: "1000000000000000000"
+        example: '1000000000000000000'
         required: true
       filter:
         title: Filter JSON
-        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
+        description: Applied filter - only matched agents will be affected by the
+          requested action. Leave empty to apply the action on all applicable agents
         type: object
         required: false
         example: '{"ids": ["1000000000000000000"]}'
@@ -3079,7 +3378,7 @@ triggers:
         description: List of classifications to search
         type: '[]string'
         required: false
-        example: ["classification"]
+        example: [classification]
       agentIsActive:
         title: Agent is Active
         description: Include agents currently connected to the management console
@@ -3092,7 +3391,7 @@ triggers:
         description: Included engines
         type: '[]string'
         required: false
-        example: ["engine"]
+        example: [engine]
       frequency:
         title: Frequency
         description: Poll frequency in seconds
@@ -3106,7 +3405,23 @@ triggers:
         description: Threat
         type: threatData
         required: false
-        example: { "agentComputerName": "Example Computer Name", "agentDomain": "WORKGROUP", "agentId": "1000000000000000000", "agentInfected": false, "agentIp": "198.51.100.1", "agentIsActive": true, "agentIsDecommissioned": false, "agentMachineType": "desktop", "agentNetworkStatus": "connected", "agentOsType": "windows", "agentVersion": "3.0.1.3", "classification": "Malware", "classificationSource": "Engine", "classifierName": "BLACKLIST", "cloudVerdict": "black", "collectionId": "1000000000000000000", "createdAt": "2019-02-13T15:05:21.948892Z", "createdDate": "2019-02-13T15:05:21.605000Z", "description": "malware detected - not mitigated yet (static engine)", "engines": [ "reputation" ], "fileContentHash": "3395856ce81f2b7382dee72602f798b642f14140", "fileDisplayName": "{ABCDEF}-EICAR.com", "fileExtensionType": "Executable", "fileIsExecutable": false, "fileIsSystem": false, "fileObjectId": "1000000000000000000", "filePath": "\\Device\\HarddiskVolume2\\ProgramData\\Microsoft\\Windows Defender\\LocalCopy\\{ABCDEF}-EICAR.com", "fileVerificationType": "NotSigned", "fromCloud": false, "fromScan": false, "id": "1000000000000000000", "isCertValid": false, "isInteractiveSession": false, "isPartialStory": false, "maliciousGroupId": "1000000000000000000", "mitigationMode": "protect", "mitigationReport": { "kill": { "status": "success" }, "quarantine": { "status": "success" } }, "mitigationStatus": "mitigated", "rank": 7, "resolved": false, "siteId": "1000000000000000000", "siteName": "Example Site", "threatAgentVersion": "3.0.1.3", "updatedAt": "2019-02-13T15:05:22.274291Z", "whiteningOptions": [ "hash" ] }
+        example: {agentComputerName: Example Computer Name, agentDomain: WORKGROUP,
+          agentId: '1000000000000000000', agentInfected: false, agentIp: 198.51.100.1,
+          agentIsActive: true, agentIsDecommissioned: false, agentMachineType: desktop,
+          agentNetworkStatus: connected, agentOsType: windows, agentVersion: 3.0.1.3,
+          classification: Malware, classificationSource: Engine, classifierName: BLACKLIST,
+          cloudVerdict: black, collectionId: '1000000000000000000', createdAt: '2019-02-13T15:05:21.948892Z',
+          createdDate: '2019-02-13T15:05:21.605000Z', description: malware detected
+            - not mitigated yet (static engine), engines: [reputation], fileContentHash: 3395856ce81f2b7382dee72602f798b642f14140,
+          fileDisplayName: '{ABCDEF}-EICAR.com', fileExtensionType: Executable, fileIsExecutable: false,
+          fileIsSystem: false, fileObjectId: '1000000000000000000', filePath: '\Device\HarddiskVolume2\ProgramData\Microsoft\Windows
+            Defender\LocalCopy\{ABCDEF}-EICAR.com', fileVerificationType: NotSigned,
+          fromCloud: false, fromScan: false, id: '1000000000000000000', isCertValid: false,
+          isInteractiveSession: false, isPartialStory: false, maliciousGroupId: '1000000000000000000',
+          mitigationMode: protect, mitigationReport: {kill: {status: success}, quarantine: {
+              status: success}}, mitigationStatus: mitigated, rank: 7, resolved: false,
+          siteId: '1000000000000000000', siteName: Example Site, threatAgentVersion: 3.0.1.3,
+          updatedAt: '2019-02-13T15:05:22.274291Z', whiteningOptions: [hash]}
 
 tasks:
   monitor_logs:
@@ -3115,7 +3430,74 @@ tasks:
     output:
       logs:
         title: Logs
-        description: List of activity, device control event, and threat logs within the specified time range
+        description: List of activity, device control event, and threat logs within
+          the specified time range
         type: '[]object'
         required: false
-        example: [ { "id": "225494730938493804", "userId": "225494730938493804", "data": { "computer_name": "COMP_1234", "username": "my_user" }, "secondaryDescription": "string", "threatId": "225494730938493804", "siteName": "string", "accountName": "string", "accountId": "225494730938493804", "updatedAt": "2018-02-27T04:49:26.257525Z", "agentUpdatedVersion": "2.5.1.1320", "groupId": "225494730938493804", "hash": "string", "description": "string", "activityUuid": "string", "comments": "string", "activityType": 0, "agentId": "225494730938493804", "osFamily": "windows", "siteId": "225494730938493804", "primaryDescription": "string", "groupName": "string", "createdAt": "2018-02-27T04:49:26.257525Z" }, { "eventType": "string", "accessPermission": "Read-Only", "deviceClass": "02h", "deviceName": "string", "id": "225494730938493804", "updatedAt": "2018-02-27T04:49:26.257525Z", "ruleId": "225494730938493804", "computerName": "JOHN-WIN-4125", "profileUuids": "string", "lastLoggedInUserName": "janedoe3", "deviceId": "02", "eventTime": "2018-02-27T04:49:26.257525Z", "serviceClass": "02", "interface": "USB", "agentId": "225494730938493804", "vendorId": "02", "uId": "02", "lmpVersion": "string", "eventId": "string", "createdAt": "2018-02-27T04:49:26.257525Z", "productId": "02", "minorClass": "string" }, { "mitigationStatus": [ { "groupNotFound": false, "latestReport": "string", "mitigationStartedAt": "2018-02-27T04:49:26.257525Z", "action": "kill", "mitigationEndedAt": "2018-02-27T04:49:26.257525Z", "actionsCounters": { "total": 0, "success": 0, "notFound": 0, "failed": 0, "pendingReboot": 0 }, "status": "success", "agentSupportsReport": false, "lastUpdate": "2018-02-27T04:49:26.257525Z", "reportId": "225494730938493804" } ], "ecsInfo": { "taskAvailabilityZone": "string", "serviceArn": "string", "taskDefinitionArn": "string", "clusterName": "string", "taskDefinitionFamily": "string", "serviceName": "string", "version": "string", "taskDefinitionRevision": "string", "type": "string", "taskArn": "string" }, "agentDetectionInfo": { "agentIpV6": "string", "agentMitigationMode": "detect", "agentOsRevision": "string", "agentIpV4": "string", "agentLastLoggedInUpn": "string", "agentRegisteredAt": "2018-02-27T04:49:26.257525Z", "agentLastLoggedInUserName": "janedoe3", "accountId": "225494730938493804", "siteId": "225494730938493804", "agentLastLoggedInUserMail": "string", "groupName": "string", "agentOsName": "string", "siteName": "string", "agentVersion": "3.6.1.14", "agentDetectionState": "string", "groupId": "225494730938493804", "agentUuid": "string", "externalIp": "string", "accountName": "string", "cloudProviders": { }, "agentDomain": "mybusiness.net" }, "id": "225494730938493804", "agentRealtimeInfo": { "agentOsRevision": "string", "agentVersion": "3.6.1.14", "agentId": "225494730938493804", "agentMitigationMode": "detect", "siteName": "string", "accountName": "string", "accountId": "225494730938493804", "agentInfected": false, "agentDomain": "string", "agentNetworkStatus": "connected", "networkInterfaces": [ { "name": "string", "id": "225494730938493804", "physical": "00:25:96:FF:FE:12:34:56", "inet": [ { "type": "string" } ], "inet6": [ { "type": "string" } ] } ], "groupId": "225494730938493804", "agentComputerName": "string", "scanStartedAt": "2018-02-27T04:49:26.257525Z", "scanStatus": "none", "agentUuid": "string", "operationalState": "string", "scanFinishedAt": "2018-02-27T04:49:26.257525Z", "activeThreats": 0, "scanAbortedAt": "2018-02-27T04:49:26.257525Z", "agentDecommissionedAt": false, "agentOsName": "string", "rebootRequired": false, "agentIsActive": false, "siteId": "225494730938493804", "groupName": "string", "agentIsDecommissioned": false, "storageName": "string", "storageType": "string", "agentMachineType": "unknown", "userActionsNeeded": [ { "type": "string", "example": "none", "enum": [ "none", "user_action_needed", "reboot_needed", "upgrade_needed", "incompatible_os", "unprotected", "rebootless_without_dynamic_detection", "extended_exclusions_partially_accepted", "reboot_required", "pending_deprecation", "ne_not_running", "ne_cf_not_active" ] } ], "agentOsType": "windows" }, "containerInfo": { "image": "string", "name": "string", "id": "string", "labels": [ { "type": "string" } ], "isContainerQuarantine": false }, "threatInfo": { "mitigationStatus": "not_mitigated", "maliciousProcessArguments": "string", "initiatedByDescription": { "readOnly": true, "description": "Initiated by description" }, "analystVerdictDescription": { "readOnly": true, "description": "Analyst verdict description" }, "storyline": "a00637fa-e18d-9b80-e803-f370524f8085", "pendingActions": false, "engines": [ "reputation", "pre_execution" ], "threatId": "225494730938493804", "state": "running", "pendingActionsCounter": 0, "mitigationMode": "prevent", "automaticDetection": true, "storylineParentId": "225494730938493804", "threatLevel": "0", "targetOfDetection": "process", "evidenceUuid": "225494730938493804", "hidden": false, "siteName": "string", "initiatedBy": "string", "analystVerdict": "string", "organizationId": "225494730938493804", "evidenceId": "225494730938493804", "tags": [ "string" ], "detectorId": "225494730938493804", "pendingActionsType": "none", "threatName": "string", "fileInfo": { "fileMaliciousContent": "string", "fileType": "string", "fileCreatedAt": "2018-02-27T04:49:26.257525Z", "filePath": "string", "fileMd5": "string", "fileSize": "0", "fileSha1": "string", "fileSha256": "string", "fileMagic": "string", "fileIsExecutable": false, "fileExtension": "string", "fileMaliciousClassification": "string" }, "resolvedBy": "string", "organizationName": "string", "processInfo": { "parentCommandLine": "string", "parentPid": "0", "commandLine": "string", "parentProcessGroup": "string", "username": "string", "pid": "0", "command": "string", "processGroup": "string", "md5": "string", "sha1": "string", "sha256": "string" }, "reportedAt": "2018-02-27T04:49:26.257525Z", "secondaryDescription": "string", "siteId": "225494730938493804", "primaryDescription": "string" } } ]
+        example: [{id: '225494730938493804', userId: '225494730938493804', data: {
+              computer_name: COMP_1234, username: my_user}, secondaryDescription: string,
+            threatId: '225494730938493804', siteName: string, accountName: string,
+            accountId: '225494730938493804', updatedAt: '2018-02-27T04:49:26.257525Z',
+            agentUpdatedVersion: 2.5.1.1320, groupId: '225494730938493804', hash: string,
+            description: string, activityUuid: string, comments: string, activityType: 0,
+            agentId: '225494730938493804', osFamily: windows, siteId: '225494730938493804',
+            primaryDescription: string, groupName: string, createdAt: '2018-02-27T04:49:26.257525Z'},
+          {eventType: string, accessPermission: Read-Only, deviceClass: 02h, deviceName: string,
+            id: '225494730938493804', updatedAt: '2018-02-27T04:49:26.257525Z', ruleId: '225494730938493804',
+            computerName: JOHN-WIN-4125, profileUuids: string, lastLoggedInUserName: janedoe3,
+            deviceId: '02', eventTime: '2018-02-27T04:49:26.257525Z', serviceClass: '02',
+            interface: USB, agentId: '225494730938493804', vendorId: '02', uId: '02',
+            lmpVersion: string, eventId: string, createdAt: '2018-02-27T04:49:26.257525Z',
+            productId: '02', minorClass: string}, {mitigationStatus: [{groupNotFound: false,
+                latestReport: string, mitigationStartedAt: '2018-02-27T04:49:26.257525Z',
+                action: kill, mitigationEndedAt: '2018-02-27T04:49:26.257525Z', actionsCounters: {
+                  total: 0, success: 0, notFound: 0, failed: 0, pendingReboot: 0},
+                status: success, agentSupportsReport: false, lastUpdate: '2018-02-27T04:49:26.257525Z',
+                reportId: '225494730938493804'}], ecsInfo: {taskAvailabilityZone: string,
+              serviceArn: string, taskDefinitionArn: string, clusterName: string,
+              taskDefinitionFamily: string, serviceName: string, version: string,
+              taskDefinitionRevision: string, type: string, taskArn: string}, agentDetectionInfo: {
+              agentIpV6: string, agentMitigationMode: detect, agentOsRevision: string,
+              agentIpV4: string, agentLastLoggedInUpn: string, agentRegisteredAt: '2018-02-27T04:49:26.257525Z',
+              agentLastLoggedInUserName: janedoe3, accountId: '225494730938493804',
+              siteId: '225494730938493804', agentLastLoggedInUserMail: string, groupName: string,
+              agentOsName: string, siteName: string, agentVersion: 3.6.1.14, agentDetectionState: string,
+              groupId: '225494730938493804', agentUuid: string, externalIp: string,
+              accountName: string, cloudProviders: {}, agentDomain: mybusiness.net},
+            id: '225494730938493804', agentRealtimeInfo: {agentOsRevision: string,
+              agentVersion: 3.6.1.14, agentId: '225494730938493804', agentMitigationMode: detect,
+              siteName: string, accountName: string, accountId: '225494730938493804',
+              agentInfected: false, agentDomain: string, agentNetworkStatus: connected,
+              networkInterfaces: [{name: string, id: '225494730938493804', physical: 00:25:96:FF:FE:12:34:56,
+                  inet: [type: string], inet6: [type: string]}], groupId: '225494730938493804',
+              agentComputerName: string, scanStartedAt: '2018-02-27T04:49:26.257525Z',
+              scanStatus: none, agentUuid: string, operationalState: string, scanFinishedAt: '2018-02-27T04:49:26.257525Z',
+              activeThreats: 0, scanAbortedAt: '2018-02-27T04:49:26.257525Z', agentDecommissionedAt: false,
+              agentOsName: string, rebootRequired: false, agentIsActive: false, siteId: '225494730938493804',
+              groupName: string, agentIsDecommissioned: false, storageName: string,
+              storageType: string, agentMachineType: unknown, userActionsNeeded: [
+                {type: string, example: none, enum: [none, user_action_needed, reboot_needed,
+                    upgrade_needed, incompatible_os, unprotected, rebootless_without_dynamic_detection,
+                    extended_exclusions_partially_accepted, reboot_required, pending_deprecation,
+                    ne_not_running, ne_cf_not_active]}], agentOsType: windows}, containerInfo: {
+              image: string, name: string, id: string, labels: [type: string], isContainerQuarantine: false},
+            threatInfo: {mitigationStatus: not_mitigated, maliciousProcessArguments: string,
+              initiatedByDescription: {readOnly: true, description: Initiated by description},
+              analystVerdictDescription: {readOnly: true, description: Analyst verdict
+                  description}, storyline: a00637fa-e18d-9b80-e803-f370524f8085, pendingActions: false,
+              engines: [reputation, pre_execution], threatId: '225494730938493804',
+              state: running, pendingActionsCounter: 0, mitigationMode: prevent, automaticDetection: true,
+              storylineParentId: '225494730938493804', threatLevel: '0', targetOfDetection: process,
+              evidenceUuid: '225494730938493804', hidden: false, siteName: string,
+              initiatedBy: string, analystVerdict: string, organizationId: '225494730938493804',
+              evidenceId: '225494730938493804', tags: [string], detectorId: '225494730938493804',
+              pendingActionsType: none, threatName: string, fileInfo: {fileMaliciousContent: string,
+                fileType: string, fileCreatedAt: '2018-02-27T04:49:26.257525Z', filePath: string,
+                fileMd5: string, fileSize: '0', fileSha1: string, fileSha256: string,
+                fileMagic: string, fileIsExecutable: false, fileExtension: string,
+                fileMaliciousClassification: string}, resolvedBy: string, organizationName: string,
+              processInfo: {parentCommandLine: string, parentPid: '0', commandLine: string,
+                parentProcessGroup: string, username: string, pid: '0', command: string,
+                processGroup: string, md5: string, sha1: string, sha256: string},
+              reportedAt: '2018-02-27T04:49:26.257525Z', secondaryDescription: string,
+              siteId: '225494730938493804', primaryDescription: string}}]

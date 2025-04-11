@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name="rest-rapid7-plugin",
-      version="6.0.8",
-      description="The HTTP Requests plugin makes it easy to integrate with RESTful services",
+      version="6.0.9",
+      description="The HTTP Requests plugin simplifies integration with RESTful services, letting users automate HTTP requests (`DELETE`, `GET`, `PATCH`, `POST`, `PUT`) to APIs.It's ideal for ad-hoc third-party API integration within workflows without [building a new plugin](https://komand.github.io/python/index.html).Learn more about RESTful services [here](https://en.wikipedia.org/wiki/Representational_state_transfer)",
       author="rapid7",
       author_email="",
       url="",

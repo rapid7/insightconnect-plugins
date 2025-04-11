@@ -6,13 +6,13 @@ title: Joe Sandbox
 description: Joe Sandbox Cloud executes files and URLs fully automated in a controlled
   environment and monitors the behavior of applications and the operating system for
   suspicious activities
-version: 2.0.0
+version: 3.0.0
 supported_versions: ['Joe Sandbox API v2']
 connection_version: 2
 requirements: ["API Key", "Sandbox server (if not using cloud)"]
 sdk:
   type: slim
-  version: 5.4.4
+  version: 6.2.4
   user: nobody
 vendor: rapid7
 support: community
@@ -34,6 +34,20 @@ hub_tags:
   use_cases: [application_management, cloud_security, reporting_and_analytics]
   keywords: [sandbox, malware, analysis]
   features: [sandbox, analysis]
+version_history:
+  - "3.0.0 - Buffering encoded strings and fixing issues related to the actions | Updated SDK to 6.2.4 version"
+  - "2.0.0 - Update `jbxapi` dependency | `List Keyboard Layouts` - Renamed to `List Languages and Locales` | Updated SDK | `Get Submitted Info` - New action"
+  - "1.0.4 - Add extra optional input for Submit Sample action"
+  - "1.0.3 - Add example inputs"
+  - "1.0.2 - Fix misspelling in error message | Remove generic 'automation' keyword"
+  - "1.0.1 - New spec and help.md format for the Extension Library"
+  - "1.0.0 - Initial plugin"
+links:
+  - "[Joe Sandbox](https://www.joesecurity.org)"
+references:
+  - "[Joe Sandbox API](https://jbxcloud.joesecurity.org/userguide?sphinxurl=usage%2Fwebapi.html)"
+  - "[Joe Sandbox API wrapper](https://github.com/joesecurity/jbxapi)"
+  - "[Report formats](https://jbxcloud.joesecurity.org/userguide?sphinxurl=usage/reportformats.html)"
 types:
   system:
     name:
@@ -338,11 +352,11 @@ actions:
         required: false
         example: '{ "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }'
     output:
-      webids:
-        title: Web IDs
-        description: Web IDs associated with the sample
-        type: "[]string"
-        example: ["1234567", "7654321"]
+      submission_id:
+        title: Submission ID
+        description: Submission ID associated with the sample
+        type: string
+        example: "1234567"
         required: true
   submit_sample_url:
     title: Submit Sample URL

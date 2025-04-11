@@ -1,7 +1,6 @@
 # Description
 
-[Secure Shell](https://en.wikipedia.org/wiki/Secure_Shell) (SSH) is a cryptographic network protocol for operating network services securely over an unsecured network.
-This plugin uses the [paramiko](http://www.paramiko.org/) to connect to a remote host via the library. The SSH plugin allows you to run commands on a remote host.
+[Secure Shell](https://en.wikipedia.org/wiki/Secure_Shell) (SSH) is a cryptographic network protocol for operating network services securely over an unsecured network. This plugin uses the [paramiko](http://www.paramiko.org/) to connect to a remote host via the library. The SSH plugin allows you to run commands on a remote host
 
 # Key Features
 
@@ -14,7 +13,7 @@ This plugin uses the [paramiko](http://www.paramiko.org/) to connect to a remote
 
 # Supported Product Versions
 
-* SSH 2024-09-09
+* SSH 2025-01-15
 
 # Documentation
 
@@ -47,19 +46,6 @@ Example input:
   "username": "user1"
 }
 ```
-
-The `key` field takes a base64 encoded RSA private key which must contain a newline character after the BEGIN marker and before the END marker:
-E.g.
-
-```
------BEGIN RSA PRIVATE KEY-----
-MIIEogIBAAKCAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7g4h53s=
-...
------END RSA PRIVATE KEY-----
-```
-
-You can easily encode a private key file and copy a key to your clipboard on MacOS with the following command: `base64 < .ssh/id_rsa | pbcopy`.
-This can then be pasted into the Connection's `key` input field.
 
 ## Technical Details
 
@@ -122,11 +108,24 @@ Example output:
 
 
 ## Troubleshooting
-  
-*This plugin does not contain a troubleshooting.*
+
+* The `key` field in connection setup takes a base64 encoded RSA private key which must contain a newline character after the BEGIN marker and before the END marker:
+ E.g.
+
+```
+-----BEGIN RSA PRIVATE KEY-----
+MIIEogIBAAKCAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7g4h53s=
+ ...
+-----END RSA PRIVATE KEY-----
+```
+
+You can easily encode a private key file and copy a key to your clipboard on MacOS with the following command: `base64 < .ssh/id_rsa | pbcopy`.
+This can then be pasted into the Connection's `key` input field
 
 # Version History
 
+* 4.0.4 - Updated SDK to the latest version (6.2.5)
+* 4.0.3 - Updated dependencies | Updated SDK to the latest version
 * 4.0.2 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 4.0.1 - Update from komand to insight-plugin-runtime
 * 4.0.0 - Upgrade the plugin runtime to `komand/python-3-37-plugin` and run as least-privileged user | Change the SSH key credential type to `credential_secret_key` to skip PEM validation in the product UI

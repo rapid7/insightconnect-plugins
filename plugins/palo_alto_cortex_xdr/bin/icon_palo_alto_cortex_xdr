@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Palo Alto Cortex XDR"
 Vendor = "rapid7"
-Version = "4.0.4"
+Version = "4.0.6"
 Description = "Stop modern attacks with the industry's first extended detection and response platform that spans your endpoints, network and cloud data"
 
 

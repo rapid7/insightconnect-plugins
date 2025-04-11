@@ -35,4 +35,3 @@ from .remove_address_object_from_group.action import RemoveAddressObjectFromGrou
 from .add_address_object_to_group.action import AddAddressObjectToGroup
 
 from .get_addresses_from_group.action import GetAddressesFromGroup
-

@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name="advanced_regex-rapid7-plugin",
-      version="1.0.4",
-      description="Perform advanced regular expression operations on a string using Python regex",
+      version="1.0.5",
+      description="The Advanced Regex plugin is used to extract or manipulate targeted text using regular expressions operations on a string using Python specific regex",
       author="rapid7",
       author_email="",
       url="",

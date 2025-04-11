@@ -383,7 +383,7 @@ class ApiConnection:
             return agent, None
         else:
             self.logger.info("No assets were found")
-            return None, None
+            return {}, None
 
     def _get_agents(self, agents_input: List[str]) -> [Tuple[str, dict]]:
         """

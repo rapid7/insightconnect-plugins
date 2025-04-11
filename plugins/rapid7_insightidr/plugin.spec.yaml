@@ -4,12 +4,11 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 11.0.0
+version: 11.0.3
 connection_version: 5
 supported_versions: ["Latest release successfully tested on 2024-09-10."]
 vendor: rapid7
 cloud_ready: true
-fedramp_ready: true
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_insightidr
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -33,9 +32,12 @@ key_features:
   - "Incident Response and Investigations"
 sdk:
   type: full
-  version: 6.2.2
+  version: 6.2.6
   user: nobody
 version_history:
+  - "11.0.3 - Added log entry validation using regular expressions | SDK bump to 6.2.6"
+  - "11.0.2 - Updating descriptions for 'set_priority_of_investigation' & 'set_disposition_of_investigation'"
+  - "11.0.1 - Updating `Advanced Query on Log` description"
   - "11.0.0 - Updating schema for query actions (`advanced_query_on_log`, `advanced_query_on_log_set` & `query`) to account for missing keys/invalid mapping in the schema"
   - "10.3.4 - Bumping requirements.txt | SDK bump to 6.2.2"
   - "10.3.3 - Bumping requirements.txt | SDK bump to 6.2.0"
@@ -1732,7 +1734,7 @@ actions:
     input:
       id:
         title: ID or RRN
-        description: The ID or RNN of the investigation to change the priority of
+        description: The ID or RRN of the investigation to change the priority of
         type: string
         required: true
         example: rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111
@@ -1761,7 +1763,7 @@ actions:
     input:
       id:
         title: ID
-        description: The ID or RNN of the investigation to change the disposition of
+        description: The ID or RRN of the investigation to change the disposition of
         type: string
         required: true
         example: rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111
@@ -1974,7 +1976,7 @@ actions:
         example: '[{"log": {"id": "0b9a242d-d2fb-4e42-8656-eb5ff64d652f","name": "Windows Defender","tokens": ["bc38a911-65f1-4755-cca3-a330a6336b3a"],"structures": ["1238a911-65f1-4755-cca3-a330a6336b3a"],"user_data": {"platform_managed": "true"},"source_type": "token","token_seed": null,"retention_period": "default","links": [{"rel": "Related","href": "https://example.com"}],"rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a","logsets_info": [{"id": "bc38a911-65f1-4755-cca3-a330a6336b3a","name": "Unparsed Data","rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a","links": [{"rel": "Self","href": "https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85"}]}]}}]'
   advanced_query_on_log:
     title: Advanced Query on Log
-    description: Realtime query an InsightIDR log. This will query individual logs for results. Note only 500 results will be returned from a single call, if all results are required for this query please use smaller timeranges. If both a log name and log ID are provided, the log ID will used over the log name
+    description: Realtime query an InsightIDR log. This will query individual logs for results. Note only 500 results will be returned from a single call, if all results are required for this query please use smaller timeranges. If both a log name and a log ID are provided, the log ID will be used. However, either the log name OR log ID is required for the action to execute
     input:
       query:
         title: Query

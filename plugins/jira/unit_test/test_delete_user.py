@@ -1,14 +1,14 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest import TestCase
-from komand_jira.connection.connection import Connection
-from komand_jira.actions.delete_user import DeleteUser
-import json
 import logging
+from unittest import TestCase
+
 from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_jira.actions.delete_user import DeleteUser
+from komand_jira.connection.connection import Connection
 
 
 class MockClient:
@@ -77,7 +77,7 @@ class TestDeleteUser(TestCase):
         self.test_action.connection = self.test_conn
 
         with self.assertRaises(PluginException) as plg_err:
-            result = self.test_action.run(action_params)
+            self.test_action.run(action_params)
 
         self.assertIn("Account ID not provided", plg_err.exception.cause)
 
@@ -90,6 +90,6 @@ class TestDeleteUser(TestCase):
         self.test_action.connection = self.test_conn
 
         with self.assertRaises(PluginException) as plg_err:
-            result = self.test_action.run(action_params)
+            self.test_action.run(action_params)
 
         self.assertIn("Username not provided", plg_err.exception.cause)

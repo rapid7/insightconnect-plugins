@@ -3,12 +3,15 @@ extension: plugin
 products: [insightconnect]
 name: html
 title: HTML
-description: "Hypertext Markup Language (HTML) is the standard markup language for documents designed to be displayed in a web browser. This plugin provides the ability to convert an HTML document into a variety of formats using [pypandoc](https://pypi.python.org/pypi/pypandoc). Supported formats are: DOCX, EPUB, Markdown, PDF, HTML5, Plain Text"
-version: 1.2.7
+description: 'Hypertext Markup Language (HTML) is the standard markup language for
+  documents designed to be displayed in a web browser. This plugin provides the ability
+  to convert an HTML document into a variety of formats using [pypandoc](https://pypi.python.org/pypi/pypandoc).
+  Supported formats are: DOCX, EPUB, Markdown, PDF, HTML5, Plain Text'
+version: 2.0.0
 connection_version: 1
 vendor: rapid7
 support: community
-supported_versions: ["2024-09-30"]
+supported_versions: ['2024-09-30']
 status: []
 cloud_ready: true
 fedramp_ready: true
@@ -16,41 +19,49 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/html
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
-  - markdown
-  - html
-  - pdf
-  - epub
-  - docx
-  - convert
-  - utilities
+- markdown
+- html
+- pdf
+- epub
+- docx
+- convert
+- utilities
 hub_tags:
   use_cases: [data_utility]
   keywords: [markdown, html, pdf, epub, docx, convert, utilities, cloud_enabled]
   features: []
 sdk:
   type: slim
-  version: 6.1.3
+  version: 6.2.6
   user: root
+  custom_cmd:
+  - RUN apt-get update && apt-get install -y texlive lmodern --no-install-recommends
+  - '# root is required for the conversion to work. If USER set to nobody, actions/tests
+    will fail'
 links:
-  - "[W3 Validator](https://validator.w3.org)"
+- '[W3 Validator](https://validator.w3.org)'
 key_features:
-  - Convert an HTML document into another format to more easily export, share, or edit the document's contents
+- Convert an HTML document into another format to more easily export, share, or edit
+  the document's contents
 version_history:
-  - "1.2.7 - Initial updates for fedramp compliance | Updated SDK to the latest version"
-  - "1.2.6 - SDK Bump | Addressing Snyk vulnerabilities | Fixing Unit Tests | Dockerfile USER permission updated"
-  - "1.2.5 - Update requirements for pypandoc"
-  - "1.2.4 - Actions modified in order to implement PluginExceptions"
-  - "1.2.3 - Action HTML5: fix error with encoding to file"
-  - "1.2.2 - Update to v4 Python plugin runtime"
-  - "1.2.1 - New spec and help.md format for the Extension Library"
-  - "1.2.0 - Update to add the Remove Scripts option to Text"
-  - "1.1.0 - New action: Text"
-  - "1.0.1 - Add `utilities` plugin tag for Marketplace searchability"
-  - "1.0.0 - Update to v2 Python plugin architecture | Support web server mode"
-  - "0.1.1 - SSL bug fix in SDK"
-  - "0.1.0 - Initial plugin"
+- 2.0.0 - Updated SDK to the latest version (6.2.6) | Enable Sandbox mode
+- 1.2.8 - Updated SDK to the latest version (6.2.5)
+- 1.2.7 - Initial updates for fedramp compliance | Updated SDK to the latest version
+- 1.2.6 - SDK Bump | Addressing Snyk vulnerabilities | Fixing Unit Tests | Dockerfile
+  USER permission updated
+- 1.2.5 - Update requirements for pypandoc
+- 1.2.4 - Actions modified in order to implement PluginExceptions
+- '1.2.3 - Action HTML5: fix error with encoding to file'
+- 1.2.2 - Update to v4 Python plugin runtime
+- 1.2.1 - New spec and help.md format for the Extension Library
+- 1.2.0 - Update to add the Remove Scripts option to Text
+- '1.1.0 - New action: Text'
+- 1.0.1 - Add `utilities` plugin tag for Marketplace searchability
+- 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
+- 0.1.1 - SSL bug fix in SDK
+- 0.1.0 - Initial plugin
 references:
-  - "[pypandoc](https://pypi.python.org/pypi/pypandoc)"
+- '[pypandoc](https://pypi.python.org/pypi/pypandoc)'
 actions:
   validate:
     title: Validate
@@ -61,7 +72,8 @@ actions:
         description: HTML Contents
         type: string
         required: true
-        example: "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Automate with InsightConnect (HTML)!</p></body></html>"
+        example: <!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Automate
+          with InsightConnect (HTML)!</p></body></html>
     output:
       validated:
         title: Is Validated
@@ -78,7 +90,8 @@ actions:
         description: Document to transform
         type: string
         required: true
-        example: "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to Markdown</p></body></html>"
+        example: <!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert
+          HTML to Markdown</p></body></html>
     output:
       markdown_contents:
         title: Contents
@@ -101,7 +114,8 @@ actions:
         description: Document to transform
         type: string
         required: true
-        example: "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to HTML5</p></body></html>"
+        example: <!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert
+          HTML to HTML5</p></body></html>
     output:
       html5_contents:
         title: Contents
@@ -124,7 +138,8 @@ actions:
         description: Document to transform
         type: string
         required: true
-        example: "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to PDF</p></body></html>"
+        example: <!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert
+          HTML to PDF</p></body></html>
     output:
       pdf:
         title: PDF
@@ -141,7 +156,8 @@ actions:
         description: Document to transform
         type: string
         required: true
-        example: "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to EPUB</p></body></html>"
+        example: <!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert
+          HTML to EPUB</p></body></html>
     output:
       epub:
         title: Epub
@@ -158,7 +174,8 @@ actions:
         description: Document to transform
         type: string
         required: true
-        example: "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to DOCX</p></body></html>"
+        example: <!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert
+          HTML to DOCX</p></body></html>
     output:
       docx:
         title: Docx
@@ -175,7 +192,8 @@ actions:
         description: Document to transform
         type: string
         required: true
-        example: <!DOCTYPE html><html><head><title>Rapid7 InsightConnect HTML</title></head><body><p>Automate with InsightConnect</p></body></html>
+        example: <!DOCTYPE html><html><head><title>Rapid7 InsightConnect HTML</title></head><body><p>Automate
+          with InsightConnect</p></body></html>
       remove_scripts:
         title: Remove Scripts
         description: Remove non-HTML scripts from the document

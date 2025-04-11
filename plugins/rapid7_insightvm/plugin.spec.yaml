@@ -3,92 +3,141 @@ extension: plugin
 products: [insightconnect]
 name: rapid7_insightvm
 title: Rapid7 InsightVM Console
-description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses an orchestrator to get top remediations, scan results and start scans
-version: 8.0.8
+description: InsightVM is a powerful vulnerability management tool which finds, prioritizes,
+  and remediates vulnerabilities. This plugin uses an orchestrator to get top remediations,
+  scan results and start scans
+version: 8.0.11
 connection_version: 8
-supported_versions: ["Rapid7 InsightVM API v3 2022-05-25"]
+supported_versions: [Rapid7 InsightVM API v3 2022-05-25]
 fedramp_ready: true
 vendor: rapid7
 support: rapid7
 status: []
 sdk:
   type: full
-  version: 6.2.2
+  version: 6.2.6
   user: root
+  custom_cmd:
+    - RUN apk add --no-cache --virtual .build-deps make gcc libc-dev libffi-dev openssl-dev libxml2-dev libxslt-dev
 key_features:
-  - "Get top remediations"
-  - "Start scans"
-  - "Get scan results"
+- Get top remediations
+- Start scans
+- Get scan results
 requirements:
-  - "Username and password for a user with the necessary permissions"
+- Username and password for a user with the necessary permissions
 links:
-  - "[InsightVM](https://www.rapid7.com/products/insightvm/)"
+- '[InsightVM](https://www.rapid7.com/products/insightvm/)'
 references:
-  - "[InsightVM API 3](https://help.rapid7.com/insightvm/en-us/api/index.html)"
+- '[InsightVM API 3](https://help.rapid7.com/insightvm/en-us/api/index.html)'
 version_history:
-  - "8.0.8 - Bumping requirements.txt | SDK bump to 6.2.2"
-  - "8.0.7 - Bumping requirements.txt | SDK bump to 6.2.0"
-  - "8.0.6 - Trigger `New Exception Request`: Updated the trigger with retry mechanism"
-  - "8.0.5 - Initial updates for fedramp compliance | `New Exception Request`: Fixed an issue where it would not trigger in certain scenarios | Updated SDK to the latest version"
-  - "8.0.4 - Updated SDK to the latest version | Update dependencies"
-  - "8.0.3 - Updated `Dockerfile` permissions from `nobody` to `root`"
-  - "8.0.2 - Updated SDK to the latest version | `Scan Completion`: Updated the query"
-  - "8.0.1 - Updated SDK to the latest version | Fixed issue where triggers were failing due to `SSL Verify`"
-  - "8.0.0 - Updated to the latest SDK version | Updated dependencies to the latest version | Added new connection parameter `SSL Verify`"
-  - "7.0.2 - `Scan Completion` - Update query outputs to match schema types"
-  - "7.0.1 - `Scan Completion` - Update query outputs to match schema names"
-  - "7.0.0 - `Scan Completion` - Rework trigger to use a new query, resulting in a new output & removed all inputs except for `site_id` | `Top Remediations` - Update vulnerability_id to nexpose_id"
-  - "6.2.0 - `Scan Completion` - New trigger added to retrieve vulnerability information on assets when a scan is completed | Improved error handling across all API calls"
-  - "6.1.1 - Update actions `Update Site Excluded Targets` and `Update Site Included Targets` to prevent error on empty addresses"
-  - "6.1.0 - Add new optional input `override_blackout` in `Scan` action"
-  - "6.0.0 - Fix file output type for `Generate Adhoc SQL Report` | Replace custom output type `file` with `insightvm_file` for each item in the `asset` `files` output in multiple actions"
-  - "5.1.0 - Add new action update shared credential"
-  - "5.0.1 - Fix issue in New Scans trigger where an exception was thrown if no scan IDs were previously cached for that site"
-  - "5.0.0 - Fix parameters type, input examples and description for `Get Asset Vulnerability Solutions`, `Get Asset Vulnerabilities`, `Get Asset Software` and `Get Asset` actions"
-  - "4.10.0 - Add new action Tag Assets"
-  - "4.9.2 - Add expiration date conversion to ISO8601 in Create Vulnerability Exception Submission and Update Vulnerability Exception Expiration Date actions | Fix issue with incorrect expiration date format in Get Expiring Vulnerability Exceptions action | Fix issue in List Reports action where first page of reports was not included | Fix issue in List Reports action where `found` output was returned as false even though list of reports was returned | Updated plugin SDK to latest version"
-  - '4.9.1 - Rename the plugin with "console" as there is a new cloud based plugin for InsightVM'
-  - "4.9.0 - Add new `size` input to List Inactive Assets | Update List Inactive Assets to return 500 results by default | Remove the usage of Maya from the plugin"
-  - "4.8.1 - Fixed an issue where some actions were expecting bytes data and were getting strings instead"
-  - "4.8.0 - New action Get Asset Vulnerability Solutions"
-  - "4.7.1 - Code refactor and bug fixes"
-  - "4.7.0 - Update Get Asset Vulnerabilities with new input and output"
-  - "4.6.0 - Update Get Asset Vulnerabilities with new output | Fix issue with RequestParams object set function"
-  - "4.5.0 - Update to Asset Search action to allow search result limiting and sorting"
-  - "4.4.3 - Update to error handling and documentation around console URL in connection"
-  - "4.4.2 - Fix issue where Update Site Included Targets could throw exception"
-  - "4.4.1 - Add improved error handling for List Inactive Assets action"
-  - "4.4.0 - New action Update Vulnerability Exception Expiration Date"
-  - "4.3.0 - New action Get Expiring Vulnerability Exceptions"
-  - "4.2.1 - Fix to make Create Asset Group description required"
-  - "4.2.0 - New action List Inactive Assets"
-  - "4.1.0 - New action Delete Asset"
-  - "4.0.1 - Add the option to limit a scan to specific hosts"
-  - "4.0.0 - Fix output for Generate Adhoc SQL Report action"
-  - "3.6.0 - Add Get Asset Group Assets action"
-  - "3.5.2 - Fix bug in New Vulnerability Exception Activity"
-  - "3.5.1 - New spec and help.md format for the Extension Library"
-  - "3.5.0 - New Actions Get Vulnerability Details, Create Vulnerability Exception Submission,  Delete Vulnerability Exception, Review Vulnerability Exception  | New Trigger New Vulnerability Exception Activity | Misc. Cleanup"
-  - "3.4.0 - New Action Get Asset Software | Fix issue with New Scan trigger not properly caching new scan IDs"
-  - "3.3.1 - Fix issue in Top Remediations action that causes assets without criticality tags to not be returned in asset list"
-  - "3.3.0 - New Actions Get Asset, Get Asset Tags, Get Scan Assets, Generate AdHoc SQL Report, Top Remediations | New trigger New Scans"
-  - "3.2.0 - New Actions Create Site, Update Site, Delete Site, Update Site Included Targets, Update Site Excluded Targets, Update Site Included Asset Groups, and Update Site Excluded Asset Groups"
-  - "3.1.0 - New Actions Get Authentication Sources, Get Authentication Source, Get Roles, Get Role, Get Users, Get User, Create User, Update User, Update User Asset Group Access, Add User Asset Group Access, Remove User Asset Group Access, Update User Site Access, Add User Site Access, Remove User Site Access, Disable User, Enable User, Delete User, Update User Role"
-  - "3.0.1 - Update descriptions"
-  - "3.0.0 - Rename Action Get Vulnerabilities to Get Asset Vulnerabilities | Correct output of Scan action | New Actions Get Vulnerabilities by CVE, Get Scans, Update Scan Status, Generate Shared Secret, Get Scan Engines, Get Scan Engine, Create Scan Engine, Delete Scan Engine, Get Scan Engine Pools, Get Scan Engine Pool, Create Scan Engine Pool, Add Scan Engine Pool Engine, Remove Scan Engine Pool Engine, Delete Scan Engine Pool, Update Site Scan Engine"
-  - "2.3.0 - New Actions Create Tag, Delete Tag, Get Tag, Get Tag Sites, Get Tag Assets, Get Tag Asset Groups, Get Tags, Remove Asset Tag, Remove Asset Group Tags, Remove Tag Asset Groups, Remove Tag Sites, Remove Tag Search Criteria, Tag Site, Tag Asset, Tag Asset Group, Update Tag Search Criteria, Asset Search, Get Sites, Get Site, Get Asset Groups, Get Asset Group, Create Asset Group, Delete Asset Group, and Update Asset Group Search Criteria"
-  - "2.2.1 - Correct output of the Get Scan action"
-  - "2.2.0 - New Action Get Vulnerability Affected Assets"
-  - "2.1.0 - Add Download Report and List Reports action"
-  - "2.0.0 - Support web server mode"
-  - "1.0.0 - Initial plugin release"
+- 8.0.11 - Updated the cache storage path and replaced the external function with internal implementation | Updated SDK to the latest version (6.2.6)
+- 8.0.10 - Updated SDK to the latest version (6.2.5)
+- 8.0.9 - Address vulnerabilities in buildpack
+- 8.0.8 - Bumping requirements.txt | SDK bump to 6.2.2
+- 8.0.7 - Bumping requirements.txt | SDK bump to 6.2.0
+- '8.0.6 - Trigger `New Exception Request`: Updated the trigger with retry mechanism'
+- '8.0.5 - Initial updates for fedramp compliance | `New Exception Request`: Fixed
+  an issue where it would not trigger in certain scenarios | Updated SDK to the latest
+  version'
+- 8.0.4 - Updated SDK to the latest version | Update dependencies
+- 8.0.3 - Updated `Dockerfile` permissions from `nobody` to `root`
+- '8.0.2 - Updated SDK to the latest version | `Scan Completion`: Updated the query'
+- 8.0.1 - Updated SDK to the latest version | Fixed issue where triggers were failing
+  due to `SSL Verify`
+- 8.0.0 - Updated to the latest SDK version | Updated dependencies to the latest version
+  | Added new connection parameter `SSL Verify`
+- 7.0.2 - `Scan Completion` - Update query outputs to match schema types
+- 7.0.1 - `Scan Completion` - Update query outputs to match schema names
+- 7.0.0 - `Scan Completion` - Rework trigger to use a new query, resulting in a new
+  output & removed all inputs except for `site_id` | `Top Remediations` - Update vulnerability_id
+  to nexpose_id
+- 6.2.0 - `Scan Completion` - New trigger added to retrieve vulnerability information
+  on assets when a scan is completed | Improved error handling across all API calls
+- 6.1.1 - Update actions `Update Site Excluded Targets` and `Update Site Included
+  Targets` to prevent error on empty addresses
+- 6.1.0 - Add new optional input `override_blackout` in `Scan` action
+- 6.0.0 - Fix file output type for `Generate Adhoc SQL Report` | Replace custom output
+  type `file` with `insightvm_file` for each item in the `asset` `files` output in
+  multiple actions
+- 5.1.0 - Add new action update shared credential
+- 5.0.1 - Fix issue in New Scans trigger where an exception was thrown if no scan
+  IDs were previously cached for that site
+- 5.0.0 - Fix parameters type, input examples and description for `Get Asset Vulnerability
+  Solutions`, `Get Asset Vulnerabilities`, `Get Asset Software` and `Get Asset` actions
+- 4.10.0 - Add new action Tag Assets
+- 4.9.2 - Add expiration date conversion to ISO8601 in Create Vulnerability Exception
+  Submission and Update Vulnerability Exception Expiration Date actions | Fix issue
+  with incorrect expiration date format in Get Expiring Vulnerability Exceptions action
+  | Fix issue in List Reports action where first page of reports was not included
+  | Fix issue in List Reports action where `found` output was returned as false even
+  though list of reports was returned | Updated plugin SDK to latest version
+- 4.9.1 - Rename the plugin with "console" as there is a new cloud based plugin for
+  InsightVM
+- 4.9.0 - Add new `size` input to List Inactive Assets | Update List Inactive Assets
+  to return 500 results by default | Remove the usage of Maya from the plugin
+- 4.8.1 - Fixed an issue where some actions were expecting bytes data and were getting
+  strings instead
+- 4.8.0 - New action Get Asset Vulnerability Solutions
+- 4.7.1 - Code refactor and bug fixes
+- 4.7.0 - Update Get Asset Vulnerabilities with new input and output
+- 4.6.0 - Update Get Asset Vulnerabilities with new output | Fix issue with RequestParams
+  object set function
+- 4.5.0 - Update to Asset Search action to allow search result limiting and sorting
+- 4.4.3 - Update to error handling and documentation around console URL in connection
+- 4.4.2 - Fix issue where Update Site Included Targets could throw exception
+- 4.4.1 - Add improved error handling for List Inactive Assets action
+- 4.4.0 - New action Update Vulnerability Exception Expiration Date
+- 4.3.0 - New action Get Expiring Vulnerability Exceptions
+- 4.2.1 - Fix to make Create Asset Group description required
+- 4.2.0 - New action List Inactive Assets
+- 4.1.0 - New action Delete Asset
+- 4.0.1 - Add the option to limit a scan to specific hosts
+- 4.0.0 - Fix output for Generate Adhoc SQL Report action
+- 3.6.0 - Add Get Asset Group Assets action
+- 3.5.2 - Fix bug in New Vulnerability Exception Activity
+- 3.5.1 - New spec and help.md format for the Extension Library
+- 3.5.0 - New Actions Get Vulnerability Details, Create Vulnerability Exception Submission,  Delete
+  Vulnerability Exception, Review Vulnerability Exception  | New Trigger New Vulnerability
+  Exception Activity | Misc. Cleanup
+- 3.4.0 - New Action Get Asset Software | Fix issue with New Scan trigger not properly
+  caching new scan IDs
+- 3.3.1 - Fix issue in Top Remediations action that causes assets without criticality
+  tags to not be returned in asset list
+- 3.3.0 - New Actions Get Asset, Get Asset Tags, Get Scan Assets, Generate AdHoc SQL
+  Report, Top Remediations | New trigger New Scans
+- 3.2.0 - New Actions Create Site, Update Site, Delete Site, Update Site Included
+  Targets, Update Site Excluded Targets, Update Site Included Asset Groups, and Update
+  Site Excluded Asset Groups
+- 3.1.0 - New Actions Get Authentication Sources, Get Authentication Source, Get Roles,
+  Get Role, Get Users, Get User, Create User, Update User, Update User Asset Group
+  Access, Add User Asset Group Access, Remove User Asset Group Access, Update User
+  Site Access, Add User Site Access, Remove User Site Access, Disable User, Enable
+  User, Delete User, Update User Role
+- 3.0.1 - Update descriptions
+- 3.0.0 - Rename Action Get Vulnerabilities to Get Asset Vulnerabilities | Correct
+  output of Scan action | New Actions Get Vulnerabilities by CVE, Get Scans, Update
+  Scan Status, Generate Shared Secret, Get Scan Engines, Get Scan Engine, Create Scan
+  Engine, Delete Scan Engine, Get Scan Engine Pools, Get Scan Engine Pool, Create
+  Scan Engine Pool, Add Scan Engine Pool Engine, Remove Scan Engine Pool Engine, Delete
+  Scan Engine Pool, Update Site Scan Engine
+- 2.3.0 - New Actions Create Tag, Delete Tag, Get Tag, Get Tag Sites, Get Tag Assets,
+  Get Tag Asset Groups, Get Tags, Remove Asset Tag, Remove Asset Group Tags, Remove
+  Tag Asset Groups, Remove Tag Sites, Remove Tag Search Criteria, Tag Site, Tag Asset,
+  Tag Asset Group, Update Tag Search Criteria, Asset Search, Get Sites, Get Site,
+  Get Asset Groups, Get Asset Group, Create Asset Group, Delete Asset Group, and Update
+  Asset Group Search Criteria
+- 2.2.1 - Correct output of the Get Scan action
+- 2.2.0 - New Action Get Vulnerability Affected Assets
+- 2.1.0 - Add Download Report and List Reports action
+- 2.0.0 - Support web server mode
+- 1.0.0 - Initial plugin release
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_insightvm
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.rapid7.com
 tags:
-  - insightvm
-  - rapid7
+- insightvm
+- rapid7
 hub_tags:
   use_cases: [asset_inventory, remediation_management, vulnerability_management, reporting_and_analytics]
   keywords: [insightvm, rapid7]
@@ -907,12 +956,14 @@ types:
   exception_scope:
     id:
       title: Vulnerability Scope ID
-      description: The identifer of the scope (asset, group, site) the vulnerability exception applies to
+      description: The identifer of the scope (asset, group, site) the vulnerability
+        exception applies to
       type: integer
       required: true
     key:
       title: Exception Scope Key
-      description: Optional key to discriminate the instance when the scope type is Instance
+      description: Optional key to discriminate the instance when the scope type is
+        Instance
       type: string
       required: false
     port:
@@ -922,7 +973,8 @@ types:
       required: false
     type:
       title: Exception Scope Type
-      description: The type of vulnerability exception - Global, Site, Asset, Asset Group, Instance
+      description: The type of vulnerability exception - Global, Site, Asset, Asset
+        Group, Instance
       type: string
       required: true
       enum:
@@ -1943,9 +1995,9 @@ types:
       required: false
       default: no-authentication
       enum:
-        - no-authentication
-        - md5
-        - sha
+      - no-authentication
+      - md5
+      - sha
     community_name:
       title: Community Name
       description: The community name that will be used for authenticating
@@ -1953,17 +2005,21 @@ types:
       required: false
     database:
       title: Database
-      description: The name of the database. If not specified, a default database name will be used during authentication
+      description: The name of the database. If not specified, a default database
+        name will be used during authentication
       type: string
       required: false
     domain:
       title: Domain
-      description: The address of the domain. This property cannot be specified unless property useWindowsAuthentication is set to true
+      description: The address of the domain. This property cannot be specified unless
+        property useWindowsAuthentication is set to true
       type: string
       required: false
     enumerate_sids:
       title: Enumerate SIDs
-      description: Boolean flag instructing the scan engine to attempt to enumerate SIDs from your environment. If set to true, set the Oracle Net Listener password in property oracleListenerPassword
+      description: Boolean flag instructing the scan engine to attempt to enumerate
+        SIDs from your environment. If set to true, set the Oracle Net Listener password
+        in property oracleListenerPassword
       type: string
       required: false
     notes_id_password:
@@ -1978,7 +2034,8 @@ types:
       required: false
     oracle_listener_password:
       title: Oracle Listener Password
-      description: The Oracle Net Listener password. Used to enumerate SIDs from your environment
+      description: The Oracle Net Listener password. Used to enumerate SIDs from your
+        environment
       type: string
       required: false
     password:
@@ -1993,30 +2050,39 @@ types:
       required: false
     permission_elevation:
       title: Permission Evaluation
-      description: Elevate scan engine permissions to administrative or root access, which is necessary to obtain certain data during the scan. Defaults to "none" if not specified
+      description: Elevate scan engine permissions to administrative or root access,
+        which is necessary to obtain certain data during the scan. Defaults to "none"
+        if not specified
       type: string
       required: false
       default: none
       enum:
-        - none
-        - sudo
-        - sudosu
-        - su
-        - pbrun
-        - privileged-exec
+      - none
+      - sudo
+      - sudosu
+      - su
+      - pbrun
+      - privileged-exec
     permission_elevation_password:
       title: Permission Elevation Password
-      description: The password for the account with elevated permissions. This property must not be specified when the property permissionElevation is set to either "none" or "pbrun"; otherwise the property is required
+      description: The password for the account with elevated permissions. This property
+        must not be specified when the property permissionElevation is set to either
+        "none" or "pbrun"; otherwise the property is required
       type: string
       required: false
     permission_elevation_username:
       title: Permission Elevation Username
-      description: The user name for the account with elevated permissions. This property must not be specified when the property permissionElevation is set to either "none" or "pbrun"; otherwise the property is required.
+      description: The user name for the account with elevated permissions. This property
+        must not be specified when the property permissionElevation is set to either
+        "none" or "pbrun"; otherwise the property is required.
       type: string
       required: false
     privacy_password:
       title: Privacy Password
-      description: The privacy password for the account that will be used for authenticating. Is required when the property authenticationType is set to valid value other than "no-authentication" and when the privacyType is set to a valid value other than code>"no-privacy"
+      description: The privacy password for the account that will be used for authenticating.
+        Is required when the property authenticationType is set to valid value other
+        than "no-authentication" and when the privacyType is set to a valid value
+        other than code>"no-privacy"
       type: string
       required: false
     privacy_type:
@@ -2026,13 +2092,13 @@ types:
       required: false
       default: no-privacy
       enum:
-        - no-privacy
-        - des
-        - aes-128
-        - aes-192
-        - aes-192-with-3-des-key-extension
-        - aes-256
-        - aes-265-with-3-des-key-extension
+      - no-privacy
+      - des
+      - aes-128
+      - aes-192
+      - aes-192-with-3-des-key-extension
+      - aes-256
+      - aes-265-with-3-des-key-extension
     private_key_password:
       title: Private Pey Password
       description: The password for private key
@@ -2049,34 +2115,37 @@ types:
       type: string
       required: true
       enum:
-        - as400
-        - cifs
-        - cifshash
-        - cvs
-        - db2
-        - ftp
-        - http
-        - ms-sql
-        - mysql
-        - notes
-        - oracle
-        - pop
-        - postgresql
-        - remote-exec
-        - snmp
-        - snmpv3
-        - ssh
-        - ssh-key
-        - sybase
-        - telnet
+      - as400
+      - cifs
+      - cifshash
+      - cvs
+      - db2
+      - ftp
+      - http
+      - ms-sql
+      - mysql
+      - notes
+      - oracle
+      - pop
+      - postgresql
+      - remote-exec
+      - snmp
+      - snmpv3
+      - ssh
+      - ssh-key
+      - sybase
+      - telnet
     sid:
       title: SID
-      description: The name of the database. If not specified, a default database name will be used during authentication
+      description: The name of the database. If not specified, a default database
+        name will be used during authentication
       type: string
       required: false
     use_windows_authentication:
       title: Use Windows Authentication
-      description: Boolean flag signaling whether to connect to the database using Windows authentication. When set to true, Windows authentication is attempted; when set to false, SQL authentication is attempted
+      description: Boolean flag signaling whether to connect to the database using
+        Windows authentication. When set to true, Windows authentication is attempted;
+        when set to false, SQL authentication is attempted
       type: boolean
       required: false
     username:
@@ -2118,8 +2187,8 @@ actions:
       hosts:
         title: Hosts
         description: The hosts that should be included in the scan
-        type: "[]string"
-        example: ["192.0.2.3", "192.0.2.10-192.0.2.20", "ADSRV.local"]
+        type: '[]string'
+        example: [192.0.2.3, 192.0.2.10-192.0.2.20, ADSRV.local]
         required: false
       override_blackout:
         title: Override Blackout
@@ -2149,7 +2218,7 @@ actions:
         title: Scan ID
         description: ID of the scan to obtain
         type: string
-        example: "11234abc-65c8-4628-adf4-e27f36ea0e2b"
+        example: 11234abc-65c8-4628-adf4-e27f36ea0e2b
         required: true
     output:
       status:
@@ -2176,25 +2245,25 @@ actions:
         title: Links
         type: '[]link'
         required: false
-        example: [ { "href": "https://insightvm:3780/api/3/scans/188934", "rel": "self" } ]
+        example: [{href: https://insightvm:3780/api/3/scans/188934, rel: self}]
       vulnerabilities:
         description: Counts of vulnerabilities found within the scan
         title: Vulnerabilities
         type: vulnerabilities_count
         required: false
-        example: { "critical": 0, "moderate": 0, "severe": 0, "total": 0 }
+        example: {critical: 0, moderate: 0, severe: 0, total: 0}
       startTime:
         description: Start time of the scan in ISO8601 format
         title: Start Time
         type: string
         required: false
-        example: 2018-04-23T04:21:05.500Z
+        example: 2018-04-23T04:21:05.500000Z
       duration:
         description: Duration of the scan in ISO8601 format
         title: Duration
         type: string
         required: false
-        example: 2018-04-23T04:21:05.500Z
+        example: 2018-04-23T04:21:05.500000Z
       engineName:
         description: Name of the engine used for the scan
         title: Engine Name
@@ -2206,7 +2275,7 @@ actions:
         title: End Time
         type: string
         required: false
-        example: 2018-04-23T04:21:05.500Z
+        example: 2018-04-23T04:21:05.500000Z
       id:
         description: ID of the scan
         title: ID
@@ -2227,7 +2296,7 @@ actions:
         title: Site ID
         description: ID of the site to get assets for
         type: string
-        example: "11234abc-65c8-4628-adf4-e27f36ea0e2b"
+        example: 11234abc-65c8-4628-adf4-e27f36ea0e2b
         required: true
     output:
       assets:
@@ -2279,7 +2348,8 @@ actions:
         example: []
   get_asset_software:
     title: Get Asset Software
-    description: Get software found on an asset. Can only be used if the asset has first been scanned
+    description: Get software found on an asset. Can only be used if the asset has
+      first been scanned
     input:
       asset_id:
         title: Asset ID
@@ -2308,7 +2378,7 @@ actions:
         title: Instance
         description: The identifier of the report instance, 'latest' or ID
         type: string
-        example: "latest"
+        example: latest
         required: true
     output:
       report:
@@ -2325,14 +2395,14 @@ actions:
         description: Name of report, otherwise all reports by criteria
         type: string
         required: false
-        example: "Name"
+        example: Name
       sort:
         description: Sort order, ascending or descending
         type: string
         enum:
         - Ascending
         - Descending
-        example: "Ascending"
+        example: Ascending
         required: true
     output:
       found:
@@ -2354,7 +2424,7 @@ actions:
         title: Vulnerability ID
         description: The identifier of the vulnerability
         type: string
-        example: "jre-vuln-cve-2013-2471"
+        example: jre-vuln-cve-2013-2471
         required: true
     output:
       links:
@@ -2377,14 +2447,14 @@ actions:
         title: Name
         description: Tag name
         type: string
-        example: "example name"
+        example: example name
         required: true
       type:
         title: Type
         description: Tag type
         type: string
         required: true
-        example: "owner"
+        example: owner
         enum:
         - owner
         - location
@@ -2395,7 +2465,7 @@ actions:
         type: string
         required: false
         default: default
-        example: "default"
+        example: default
         enum:
         - default
         - blue
@@ -2442,7 +2512,7 @@ actions:
         description: Tag name regular expression by which to filter
         type: string
         required: false
-        example: "example name"
+        example: example name
         default: ''
       type:
         title: Type
@@ -2451,7 +2521,7 @@ actions:
         type: string
         required: false
         default: ''
-        example: "owner"
+        example: owner
         enum:
         - owner
         - location
@@ -2677,8 +2747,8 @@ actions:
       asset_ids:
         title: Asset IDs
         description: Asset IDs to tag
-        type: "[]integer"
-        example: [1,2,3,4]
+        type: '[]integer'
+        example: [1, 2, 3, 4]
         required: true
       tag_id:
         title: Tag ID
@@ -2690,19 +2760,19 @@ actions:
         title: Tag Name
         description: Name of tag to add to assets
         type: string
-        example: "Very High"
+        example: Very High
         required: true
       tag_type:
         title: Tag Type
         description: Type of tag to add to assets
         type: string
-        example: "criticality"
+        example: criticality
         required: true
       tag_source:
         title: Tag Source
         description: Source of tag to add to assets
         type: string
-        example: "built-in"
+        example: built-in
         required: true
     output:
       success:
@@ -2769,14 +2839,16 @@ actions:
         required: true
       size:
         title: Size
-        description: The number of records to retrieve. If blank or '0' all assets that match the search will be returned
+        description: The number of records to retrieve. If blank or '0' all assets
+          that match the search will be returned
         type: number
         required: false
         default: 0
         example: 100
       sort_criteria:
         title: Sort Criteria
-        description: JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)
+        description: JSON object for sorting by criteria. Multiple criteria can be
+          specified with an order of 'asc' (ascending) or 'desc' (descending)
         type: object
         required: false
         example: "{'risk-score': 'asc', 'criticality-tag': 'desc'}"
@@ -2830,7 +2902,7 @@ actions:
         description: Site name regular expression by which to filter
         type: string
         default: ''
-        example: "example name"
+        example: example name
         required: false
     output:
       sites:
@@ -2864,13 +2936,13 @@ actions:
         title: Name
         description: The site name. Name must be unique
         type: string
-        example: "example name"
+        example: example name
         required: true
       description:
         title: Description
         description: The site's description
         type: string
-        example: "example description"
+        example: example description
         required: false
       engine_id:
         title: Engine ID
@@ -2884,7 +2956,7 @@ actions:
         description: The site importance
         type: string
         required: false
-        example: "low"
+        example: low
         enum:
         - very_low
         - low
@@ -2896,20 +2968,20 @@ actions:
         title: Scan Template ID
         description: The identifier of a scan template
         type: string
-        example: "12345-abcd"
+        example: 12345-abcd
         required: false
       included_addresses:
         title: Included Addresses
         description: List of addresses to include in scan scope
         type: '[]string'
-        example: ["1234-abcd", "4567-def"]
+        example: [1234-abcd, 4567-def]
         default: []
         required: false
       excluded_addresses:
         title: Excluded Addresses
         description: List of addresses to exclude in scan scope
         type: '[]string'
-        example: ["1234-abcd", "4567-def"]
+        example: [1234-abcd, 4567-def]
         default: []
         required: false
       included_asset_groups:
@@ -2955,13 +3027,13 @@ actions:
         title: Name
         description: The site name. Name must be unique
         type: string
-        example: "example name"
+        example: example name
         required: true
       description:
         title: Description
         description: The site's description
         type: string
-        example: "example description"
+        example: example description
         required: true
       engine_id:
         title: Engine ID
@@ -2975,7 +3047,7 @@ actions:
         description: The site importance
         type: string
         required: true
-        example: "low"
+        example: low
         enum:
         - very_low
         - low
@@ -3018,7 +3090,7 @@ actions:
         description: List of addresses that represent either a hostname, IPv4 address,
           IPv4 address range, IPv6 address, or CIDR notation
         type: '[]string'
-        example: ["10.2.144", "10.8.36.144"]
+        example: [10.2.144, 10.8.36.144]
         required: false
       overwrite:
         title: Overwrite
@@ -3057,7 +3129,7 @@ actions:
         description: List of addresses that represent either a hostname, IPv4 address,
           IPv4 address range, IPv6 address, or CIDR notation
         type: '[]string'
-        example: ["10.2.144", "10.8.36.144"]
+        example: [10.2.144, 10.8.36.144]
         required: false
       overwrite:
         title: Overwrite
@@ -3182,7 +3254,7 @@ actions:
         description: Asset group name regular expression by which to filter
         type: string
         default: ''
-        example: "example name"
+        example: example name
         required: false
     output:
       asset_groups:
@@ -3216,13 +3288,13 @@ actions:
         title: Name
         description: Asset group name
         type: string
-        example: "example name"
+        example: example name
         required: true
       description:
         title: Description
         description: Asset group description
         type: string
-        example: "example description"
+        example: example description
         required: true
       searchCriteria:
         title: Search Criteria
@@ -3235,7 +3307,7 @@ actions:
         description: Asset group type
         type: string
         required: true
-        example: "dynamic"
+        example: dynamic
         enum:
         - dynamic
         - static
@@ -3294,7 +3366,7 @@ actions:
         title: CVE ID
         description: Common Vulnerabilities and Exposures ID
         type: string
-        example: "CVE-2018-12345"
+        example: CVE-2018-12345
         required: true
     output:
       vulnerabilities:
@@ -3343,7 +3415,7 @@ actions:
         type: string
         required: true
         default: stop
-        example: "stop"
+        example: stop
         enum:
         - stop
         - resume
@@ -3382,14 +3454,14 @@ actions:
         description: Optional engine name by which to filter, accepts regular expression
           patterns
         type: string
-        example: "example name"
+        example: example name
         required: false
       address:
         title: Address
         description: Optional address (IP/hostname) by which to filter, accepts regular
           expression patterns
         type: string
-        example: "10.4.36.120"
+        example: 10.4.36.120
         required: false
     output:
       scan_engines:
@@ -3423,13 +3495,13 @@ actions:
         title: Name
         description: Scan engine name
         type: string
-        example: "example name"
+        example: example name
         required: true
       address:
         title: Address
         description: Scan engine address (IP/hostname)
         type: string
-        example: "10.4.36.120"
+        example: 10.4.36.120
         required: true
       port:
         title: Port
@@ -3484,7 +3556,7 @@ actions:
         description: Scan engine pool name by which to filter, accepts regular expression
           patterns
         type: string
-        example: "example name"
+        example: example name
         required: false
     output:
       scan_engine_pools:
@@ -3518,7 +3590,7 @@ actions:
         title: Name
         description: Scan engine pool name
         type: string
-        example: "example name"
+        example: example name
         required: true
       engines:
         title: Engines
@@ -3636,7 +3708,7 @@ actions:
         description: Authentication source name by which to filter, accepts regular
           expression patterns
         type: string
-        example: "example name"
+        example: example name
         required: false
       type:
         title: Type
@@ -3644,7 +3716,7 @@ actions:
         type: string
         required: false
         default: ''
-        example: "admin"
+        example: admin
         enum:
         - ''
         - admin
@@ -3684,7 +3756,7 @@ actions:
         title: Name
         description: Role name by which to filter, accepts regular expression patterns
         type: string
-        example: "example name"
+        example: example name
         required: false
     output:
       roles:
@@ -3701,7 +3773,7 @@ actions:
         title: ID
         description: Role ID
         type: string
-        example: "global-admin"
+        example: global-admin
         required: true
     output:
       role:
@@ -3719,14 +3791,14 @@ actions:
         description: User account name by which to filter, accepts regular expression
           patterns
         type: string
-        example: "example name"
+        example: example name
         required: false
       login:
         title: Login
         description: User account login name by which to filter, accepts regular expression
           patterns
         type: string
-        example: "account"
+        example: account
         required: false
     output:
       users:
@@ -3772,7 +3844,7 @@ actions:
         type: string
         required: true
         default: ldap
-        example: "ldap"
+        example: ldap
         enum:
         - kerberos
         - ldap
@@ -3781,7 +3853,7 @@ actions:
         title: Email
         description: The email address of the user
         type: string
-        example: "user@example.com"
+        example: user@example.com
         required: true
       enabled:
         title: Enabled
@@ -3794,13 +3866,13 @@ actions:
         title: Login
         description: The login name of the user
         type: string
-        example: "jdoe24"
+        example: jdoe24
         required: true
       name:
         title: Name
         description: The full name of the user
         type: string
-        example: "John Doe"
+        example: John Doe
         required: true
       access_all_asset_groups:
         title: Access All Asset Groups
@@ -3820,7 +3892,7 @@ actions:
         title: Role ID
         description: The identifier of the role to which the user should be assigned
         type: string
-        example: "global-admin"
+        example: global-admin
         required: true
     output:
       links:
@@ -3861,7 +3933,7 @@ actions:
         type: string
         required: true
         default: ldap
-        example: "ldap"
+        example: ldap
         enum:
         - normal
         - admin
@@ -3872,7 +3944,7 @@ actions:
         title: Email
         description: The email address of the user
         type: string
-        example: "user@example.com"
+        example: user@example.com
         required: true
       enabled:
         title: Enabled
@@ -3885,13 +3957,13 @@ actions:
         title: Login
         description: The login name of the user
         type: string
-        example: "jdoe24"
+        example: jdoe24
         required: true
       name:
         title: Name
         description: The full name of the user
         type: string
-        example: "John Doe"
+        example: John Doe
         required: true
       access_all_asset_groups:
         title: Access All Asset Groups
@@ -3911,7 +3983,7 @@ actions:
         title: Role ID
         description: The identifier of the role to which the user should be assigned
         type: string
-        example: "global-admin"
+        example: global-admin
         required: true
     output:
       links:
@@ -3999,7 +4071,7 @@ actions:
         title: Role ID
         description: The identifier of the role to which the user should be assigned
         type: string
-        example: "global-admin"
+        example: global-admin
         required: true
     output:
       links:
@@ -4162,40 +4234,44 @@ actions:
         default: 25
         example: 10
         enum:
-          - 10
-          - 25
-          - 50
-          - 100
+        - 10
+        - 25
+        - 50
+        - 100
       scope:
         title: Scope
-        description: Scope context for generated report; if set remediations will be scoped by each in scope ID
+        description: Scope context for generated report; if set remediations will
+          be scoped by each in scope ID
         type: string
         required: true
         default: none
-        example: "none"
+        example: none
         enum:
-          - none
-          - assets
-          - assetGroups
-          - sites
-          - tags
-          - scan
+        - none
+        - assets
+        - assetGroups
+        - sites
+        - tags
+        - scan
       scope_ids:
         title: Scope IDs
-        description: Scope IDs for which tickets should be generated, by default all are included
+        description: Scope IDs for which tickets should be generated, by default all
+          are included
         type: '[]integer'
         required: false
         example: [1234, 45]
         default: []
       asset_limit:
         title: Asset Limit
-        description: The amount of assets to be returned with each top remediation; this can be used to reduce message size and processing time
+        description: The amount of assets to be returned with each top remediation;
+          this can be used to reduce message size and processing time
         type: integer
         example: 4
         required: false
       vulnerability_limit:
         title: Vulnerability Limit
-        description: The amount of vulnerabilities to be returned with each top remediation; this can be used to reduce message size and processing time
+        description: The amount of vulnerabilities to be returned with each top remediation;
+          this can be used to reduce message size and processing time
         type: integer
         example: 2
         required: false
@@ -4208,7 +4284,8 @@ actions:
         example: []
   generate_adhoc_sql_report:
     title: Generate AdHoc SQL Report
-    description: Create, generate, download, and cleanup a SQL report based on the provided query
+    description: Create, generate, download, and cleanup a SQL report based on the
+      provided query
     input:
       query:
         title: Query
@@ -4218,31 +4295,35 @@ actions:
         required: true
       scope:
         title: Scope
-        description: Scope context for generated report; if set, remediations will be scoped by each in scope ID, e.g Site ID, Tag ID, Asset Group ID; scan scope only supports single scan ID as input
+        description: Scope context for generated report; if set, remediations will
+          be scoped by each in scope ID, e.g Site ID, Tag ID, Asset Group ID; scan
+          scope only supports single scan ID as input
         type: string
         required: true
         default: none
-        example: "none"
+        example: none
         enum:
-          - none
-          - assets
-          - assetGroups
-          - sites
-          - tags
-          - scan
+        - none
+        - assets
+        - assetGroups
+        - sites
+        - tags
+        - scan
       scope_ids:
         title: Scope IDs
-        description: Scope IDs for which tickets should be generated, by default all are included
+        description: Scope IDs for which tickets should be generated, by default all
+          are included
         type: '[]integer'
         required: false
         example: [1234, 5678]
         default: []
       filters:
         title: Report Filters
-        description: Filters in JSON format to be applied to the contents of the report; review InsightVM API documentation for filter options
+        description: Filters in JSON format to be applied to the contents of the report;
+          review InsightVM API documentation for filter options
         type: string
         required: false
-        example: "{filters}"
+        example: '{filters}'
         default: '{}'
     output:
       report:
@@ -4250,7 +4331,7 @@ actions:
         title: Base64 Encoded Report
         description: Base64 encoded file making up the report
         required: true
-        example: { "filename": "<name>", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==" }
+        example: {filename: <name>, content: UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==}
   review_exception:
     title: Review Vulnerability Exception
     description: Approve or Reject a Vulnerability Exception
@@ -4266,7 +4347,7 @@ actions:
         description: Approval or rejection of the exception
         type: string
         required: true
-        example: "Approved"
+        example: Approved
         enum:
         - Approved
         - Rejected
@@ -4274,7 +4355,7 @@ actions:
         title: Review Comment
         description: Comment to include in the review
         type: string
-        example: "example comment"
+        example: example comment
         required: false
     output:
       links:
@@ -4309,7 +4390,7 @@ actions:
         description: The type of vulnerability exception to create
         type: string
         required: true
-        example: "Global"
+        example: Global
         enum:
         - Global
         - Site
@@ -4320,11 +4401,12 @@ actions:
         title: Vulnerability
         description: The vulnerability this exception applies to
         type: string
-        example: "vulnerability"
+        example: vulnerability
         required: true
       scope:
         title: Scope ID
-        description: The ID of the scope the vulnerability exception applies to. May be empty if type is Global
+        description: The ID of the scope the vulnerability exception applies to. May
+          be empty if type is Global
         type: integer
         example: 1234
         required: false
@@ -4339,14 +4421,14 @@ actions:
         description: Comment to include in the vulnerability exception submission
         type: string
         required: true
-        example: "example comment"
+        example: example comment
         default: Exception created with InsightConnect
       reason:
         title: Reason
         description: Reason for the exception
         type: string
         required: true
-        example: "False Positive"
+        example: False Positive
         enum:
         - False Positive
         - Compensating Control
@@ -4357,7 +4439,7 @@ actions:
         title: Vulnerability Key
         description: The key to identify a specific instance if the type is Instance
         type: string
-        example: "9de5069c5afe602b2ea0a04b66beb2c0"
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
         required: false
       port:
         title: Vulnerability Port
@@ -4386,7 +4468,7 @@ actions:
         title: Vulnerability ID
         description: The identifier of the vulnerability to retrieve from InsightVM
         type: string
-        example: "1234-abcd"
+        example: 1234-abcd
         required: true
     output:
       vulnerability:
@@ -4437,7 +4519,8 @@ actions:
         example: false
   list_inactive_assets:
     title: List Inactive Assets
-    description: Returns a list of inactive assets (limit 1000) determined by how many days ago they were scanned
+    description: Returns a list of inactive assets (limit 1000) determined by how
+      many days ago they were scanned
     input:
       days_ago:
         title: Days Ago
@@ -4448,7 +4531,8 @@ actions:
         required: true
       size:
         title: Size
-        description: The number of assets to retrieve. If blank then 500 inactive assets will be returned, the maximum limit is 1000 assets
+        description: The number of assets to retrieve. If blank then 500 inactive
+          assets will be returned, the maximum limit is 1000 assets
         type: number
         required: false
         default: 500
@@ -4457,7 +4541,7 @@ actions:
       assets:
         title: Assets
         description: A list of inactive assets
-        type: "[]asset"
+        type: '[]asset'
         required: true
         example: []
   get_expiring_vulnerability_exceptions:
@@ -4475,7 +4559,7 @@ actions:
       exceptions:
         title: Exceptions
         description: Exceptions about to expire
-        type: "[]vulnerability_exception"
+        type: '[]vulnerability_exception'
         required: false
         example: []
   update_vulnerability_exception_expiration_date:
@@ -4493,17 +4577,18 @@ actions:
         description: Expiration date
         type: string
         required: true
-        example: "2020-02-24T06:59:59.999Z"
+        example: '2020-02-24T06:59:59.999Z'
     output:
       success:
         title: Success
         description: Was operation successful
         type: boolean
         required: true
-        example: True
+        example: true
   asset_vulnerability_solution:
     title: Get Asset Vulnerability Solutions
-    description: Return the highest-superceding rollup solutions for a list of vulnerabilities on an asset
+    description: Return the highest-superceding rollup solutions for a list of vulnerabilities
+      on an asset
     input:
       asset_id:
         title: Asset ID
@@ -4514,14 +4599,15 @@ actions:
       vulnerability_ids:
         title: Vulnerability IDs
         description: A list of identifiers of the vulnerabilities
-        type: "[]string"
+        type: '[]string'
         required: true
-        example: ["flash_player-cve-2017-11305"]
+        example: [flash_player-cve-2017-11305]
     output:
       vulnerabilities_solution:
         title: Solutions for Vulnerabilities
-        description: Highest-superceding rollup solutions for a vulnerabilities on an asset
-        type: "[]vulnerability_solution"
+        description: Highest-superceding rollup solutions for a vulnerabilities on
+          an asset
+        type: '[]vulnerability_solution'
         required: true
         example: []
   update_shared_credential:
@@ -4530,41 +4616,30 @@ actions:
     input:
       account:
         title: Account
-        description: Specify the type of service to authenticate as well as all of the information required by that service
+        description: Specify the type of service to authenticate as well as all of
+          the information required by that service
         type: account
         required: true
-        example: {
-          "authentication_type": "no-authentication",
-          "community_name": "rapid community",
-          "database": "rapid7_database",
-          "domain": "rapid7.com",
-          "enumerate_sids": false,
-          "notes_id_password": "notes_id_password",
-          "ntlm_hash": "86956E15C7F452086BEEB6BB005E0388",
-          "oracle_listener_password": "oracle_listener_password",
-          "password": "password",
-          "pem_key": "-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEA3Tz2mr7SZiAMfQyuvBj...",
-          "permission_elevation": "sudo",
-          "permission_elevation_password": "permission_elevation_password",
-          "permission_elevation_username": "permission_elevation_username",
-          "privacy_password": "privacy_password",
-          "privacy_type": "no-privacy",
-          "private_key_password": "private_key_password",
-          "realm": "realm0",
-          "service": "telnet",
-          "sid": "rapid7_database2",
-          "use_windows_authentication": false,
-          "username": "username"
-        }
+        example: {authentication_type: no-authentication, community_name: rapid community,
+          database: rapid7_database, domain: rapid7.com, enumerate_sids: false, notes_id_password: notes_id_password,
+          ntlm_hash: 86956E15C7F452086BEEB6BB005E0388, oracle_listener_password: oracle_listener_password,
+          password: password, pem_key: '-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEA3Tz2mr7SZiAMfQyuvBj...',
+          permission_elevation: sudo, permission_elevation_password: permission_elevation_password,
+          permission_elevation_username: permission_elevation_username, privacy_password: privacy_password,
+          privacy_type: no-privacy, private_key_password: private_key_password, realm: realm0,
+          service: telnet, sid: rapid7_database2, use_windows_authentication: false,
+          username: username}
       description:
         title: Description
         description: The description of the credential
         type: string
         required: false
-        example: example input with every field filled. Note real input will only have specific fields filled
+        example: example input with every field filled. Note real input will only
+          have specific fields filled
       host_restriction:
         title: Host Restriction
-        description: The host name or IP address that you want to restrict the credentials to
+        description: The host name or IP address that you want to restrict the credentials
+          to
         type: string
         required: false
         example: my-macbook-name
@@ -4582,25 +4657,36 @@ actions:
         example: my-AS400-credentials
       port_restriction:
         title: Port Restriction
-        description: Further restricts the credential to attempt to authenticate on a specific port. The port can only be restricted if the property hostRestriction is specified
+        description: Further restricts the credential to attempt to authenticate on
+          a specific port. The port can only be restricted if the property hostRestriction
+          is specified
         type: string
         required: false
         example: 8888
       site_assignment:
         title: Site Assignment
-        description: Assigns the shared scan credential either to be available to all sites or to a specific list of sites. All sites - The shared scan credential is assigned to all current and future sites. specific-sites - The shared scan credential is assigned to zero sites by default. Administrators must explicitly assign sites to the shared credential. Shared scan credentials assigned to a site can disabled within the site configuration, if needed
+        description: Assigns the shared scan credential either to be available to
+          all sites or to a specific list of sites. All sites - The shared scan credential
+          is assigned to all current and future sites. specific-sites - The shared
+          scan credential is assigned to zero sites by default. Administrators must
+          explicitly assign sites to the shared credential. Shared scan credentials
+          assigned to a site can disabled within the site configuration, if needed
         type: string
         required: true
-        example: "all-sites"
+        example: all-sites
         enum:
-          - all-sites
-          - specific-sites
+        - all-sites
+        - specific-sites
       sites:
         title: Sites
-        description: List of site identifiers. These sites are explicitly assigned access to the shared scan credential, allowing the site to use the credential for authentication during a scan. This property can only be set if the value of property siteAssignment is set to "specific-sites". When the property siteAssignment is set to "all-sites", this property will be null
+        description: List of site identifiers. These sites are explicitly assigned
+          access to the shared scan credential, allowing the site to use the credential
+          for authentication during a scan. This property can only be set if the value
+          of property siteAssignment is set to "specific-sites". When the property
+          siteAssignment is set to "all-sites", this property will be null
         type: '[]integer'
         required: false
-        example: [ ]
+        example: []
     output:
       links:
         title: Links
@@ -4625,21 +4711,23 @@ triggers:
         description: Regular expression to match sites where new scans should be triggered
         type: string
         required: true
-        example: "example name"
+        example: example name
         default: .*
       most_recent_scan:
         title: Most Recent Scan Only
-        description: Only process the most recent scan for a site since the last time the trigger was run
+        description: Only process the most recent scan for a site since the last time
+          the trigger was run
         type: boolean
         required: true
         example: true
         default: true
       status_filter:
         title: Status Filter
-        description: 'List of scan statuses to match for trigger; options include: Aborted, Successful, Running, Stopped, Failed, Paused, Unknown'
+        description: 'List of scan statuses to match for trigger; options include:
+          Aborted, Successful, Running, Stopped, Failed, Paused, Unknown'
         type: '[]string'
         required: false
-        example: ["Successful"]
+        example: [Successful]
         default: '["Successful"]'
     output:
       scan:
@@ -4654,17 +4742,19 @@ triggers:
     input:
       frequency:
         title: Frequency
-        description: How often the trigger should check for new vulnerability exception requests
+        description: How often the trigger should check for new vulnerability exception
+          requests
         type: integer
         required: true
         example: 5
         default: 5
       status_filter:
         title: Status Filter
-        description: 'List of vulnerability statuses to match against. Options include: Under Review and Approved'
+        description: 'List of vulnerability statuses to match against. Options include:
+          Under Review and Approved'
         type: '[]string'
         required: false
-        example: ["Under Review"]
+        example: [Under Review]
         default: '["Under Review"]'
     output:
       exception:
@@ -4679,7 +4769,8 @@ triggers:
     input:
       interval:
         title: Interval
-        description: How often the trigger should check for new vulnerability scans in minutes
+        description: How often the trigger should check for new vulnerability scans
+          in minutes
         type: integer
         required: true
         default: 5

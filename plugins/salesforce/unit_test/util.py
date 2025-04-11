@@ -64,6 +64,11 @@ class Util:
         url = kwargs.get("url", "")
         method = kwargs.get("method", "")
 
+        if url == "https://bad_domain/services/oauth2/token":
+            from requests.exceptions import ConnectionError as DNSError
+
+            raise DNSError()
+
         if url == "https://login.salesforce.com/services/oauth2/token":
             if data.get("client_id") == "invalid-client-id":
                 return MockResponse(400, "invalid_grant")  # returns 400 when failing to get a token.
@@ -73,6 +78,8 @@ class Util:
                 return MockResponse(400, "invalid_client_id")
             if data.get("client_id") == "retry-request":
                 return MockResponse(400, "retry_request")
+            if data.get("client_id") == "unsupported-grant-type":
+                return MockResponse(400, "unsupported_grant_type")
             return MockResponse(200, "get_token")
         if url == "https://example.com/services/data/":
             return MockResponse(200, "get_version")

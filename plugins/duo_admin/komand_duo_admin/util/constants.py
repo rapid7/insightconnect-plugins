@@ -19,6 +19,7 @@ class Assistance:
     VERIFY_INPUT = (
         "Verify your input is correct and not malformed and try again. If the issue persists, please contact support."
     )
+    RATE_LIMIT = "Task will resume collection of logs after the rate limiting period has expired."
 
 
 class PossibleInputs:

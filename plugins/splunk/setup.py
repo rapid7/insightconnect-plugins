@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name="splunk-rapid7-plugin",
-      version="3.0.4",
-      description="The Splunk plugin allows you to search, monitor, and analyze machine data",
+      version="3.0.5",
+      description="[Splunk](https://www.splunk.com/) captures, indexes, and correlates real-time data in a searchable repository from which it can generate graphs, reports, alerts, dashboards, and visualizations. This plugin allows you to interact with Splunk by hooking alerts to trigger InsightConnect workflows, run (saved) searches, retrieve search results, and even insert data back into Splunk from a workflow",
       author="rapid7",
       author_email="",
       url="",

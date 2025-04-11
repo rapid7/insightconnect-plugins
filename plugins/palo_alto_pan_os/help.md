@@ -1084,36 +1084,37 @@ Example output:
 
 ## Troubleshooting
 
-For the URL, include `https://` e.g. `https://10.0.0.1` or `https://myfirewall`.
+* For the URL, include `https://` e.g. `https://10.0.0.1` or `https://myfirewall.`
 
-When using the Add External Dynamic List action, a day and time must be chosen even if they are not used.
+ When using the `Add External Dynamic List` action, a day and time must be chosen, even if they are not used.
 
-Action connection type
+ Action Connection Type:
 
-   | Action name                       | Connection type |
-   | -----------                       | -------------------- |
-   | Add Address Object to Group       | Direct firewall |
-   | Add External Dynamic List         | Direct firewall |
-   | Add to Policy                     | Direct firewall |
-   | Check if Address in Group         | Direct firewall |
-   | Commit                            | Direct firewall |
-   | Create Address Object             | Direct firewall |
-   | Delete                            | Panorama |
-   | Edit                              | Panorama |
-   | Get                               | Panorama |
-   | Get Addresses from Group          | Direct firewall |
-   | Get Policy                        | Direct firewall |
-   | Op                                | Direct firewall |
-   | Remove Address Object from Group  | Direct firewall |
-   | Remove from Policy                | Direct firewall |
-   | Retrieve Logs                     | Direct firewall |
-   | Set                               | Panorama |
-   | Set Security Policy Rule          | Direct firewall |
-   | Show                              | Panorama |
+ | Action name                      | Connection type       |
+ | -----------                      | --------------------- |
+ | Add Address Object to Group      | Direct firewall       |
+ | Add External Dynamic List        | Direct firewall       |
+ | Add to Policy                    | Direct firewall       |
+ | Check if Address in Group        | Direct firewall       |
+ | Commit                           | Direct firewall       |
+ | Create Address Object            | Direct firewall       |
+ | Delete                           | Panorama              |
+ | Edit                             | Panorama              |
+ | Get                              | Panorama              |
+ | Get Addresses from Group         | Direct firewall       |
+ | Get Policy                       | Direct firewall       |
+ | Op                               | Direct firewall       |
+ | Remove Address Object from Group | Direct firewall       |
+ | Remove from Policy               | Direct firewall       |
+ | Retrieve Logs                    | Direct firewall       |
+ | Set                              | Panorama              |
+ | Set Security Policy Rule         | Direct firewall       |
+ | Show                             | Panorama              |
 
 
 # Version History
 
+* 6.1.8 - Updated SDK to the latest version (6.2.6)
 * 6.1.7 - Fix issue in 'add_address_object_to_group' action | SDK bump to 6.2.0 | Bumping requirements.txt
 * 6.1.6 - Update SDK | Fix critical Snyk vulnerability
 * 6.1.5 - Bumping requirements of `gunicorn` and `validators` | update the SDK to 5.4.9 | Added examples to all actions | Updated unit tests to include schema checks

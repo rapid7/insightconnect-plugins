@@ -2,7 +2,7 @@
 
 [Cisco Firepower Management Center](https://www.cisco.com/c/en/us/products/security/firepower-management-center/index.html) is your administrative nerve center for managing critical Cisco network security solutions.
 The Cisco Firepower Management Center InsightConnect plugin allows you to block URLs and hosts. Firewall best practices for blocking and unblocking hosts is to add and remove address objects from a group attached to an existing firewall policy such as a deny-all rule.
-In this example, adding an address object to a group attached to a deny-all rule will block the host, and removing the address object from the same group would unblock the host. Automating firewall blocking can be accomplished using the address object management actions in this plugin.
+In this example, adding an address object to a group attached to a deny-all rule will block the host, and removing the address object from the same group would unblock the host. Automating firewall blocking can be accomplished using the address object management actions in this plugin
 
 # Key Features
 
@@ -707,10 +707,11 @@ Example output:
 
 ## Troubleshooting
 
-The certificate authentication is used solely in two actions, namely: `Add Scan Result` and `Bulk Add Scan Result`. Please remember, that the data entered into the certificate input field in the connection is required to be a base-64 encoded PKCS12 certificate file, exported from the Firepower Management Center server. The passphrase is a password created during the PKCS12 certificate file export.`SSL Verify` field is used by all other actions (i.e. excluding `Add Scan Result` and `Bulk Add Scan Result`), for SSL certificate verification. If the certificate is self-signed then SSL Verify should be set to `False` for those actions.
+* The certificate authentication is used solely in two actions, namely: `Add Scan Result` and `Bulk Add Scan Result`. Please remember, that the data entered into the certificate input field in the connection is required to be a base-64 encoded PKCS12 certificate file, exported from the Firepower Management Center server. The passphrase is a password created during the PKCS12 certificate file export.`SSL Verify` field is used by all other actions (i.e. excluding `Add Scan Result` and `Bulk Add Scan Result`), for SSL certificate verification. If the certificate is self-signed then SSL Verify should be set to `False` for those actions.
 
 # Version History
 
+* 2.1.4 - Bumped 'cryptography' package to latest version | SDK Bump to 6.2.4
 * 2.1.3 - Bumped 'cryptography' | SDK Bump to 6.1.2
 * 2.1.2 - `Block URL Policy` - Refactor the action to use local API calls | Remove vulnerable dependencies
 * 2.1.1 - Updated to latest SDK version | Fixed issue related to pagination

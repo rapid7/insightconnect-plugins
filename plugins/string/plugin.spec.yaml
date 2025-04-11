@@ -3,50 +3,64 @@ extension: plugin
 products: [insightconnect]
 name: string
 title: String Operations
-description: The String plugin provides common programmatic string operations
-version: 1.4.1
+description: "The String Operations plugin allows easy manipulation of string data.\n
+  \nThis plugin utilizes the Python 3 String library [set of methods](https://docs.python.org/3/library/stdtypes.html#string-methods)"
+version: 1.4.3
 connection_version: 1
 vendor: rapid7
 support: community
 status: []
-supported_versions: ["2024-09-06"]
+supported_versions: ['2024-09-06']
 cloud_ready: true
 fedramp_ready: true
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/string
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
-  - utilities
-  - string
-  - split
+- utilities
+- string
+- split
 hub_tags:
   use_cases: [data_utility]
   keywords: [string, cloud_enabled]
   features: []
 sdk:
   type: slim
-  version: 6.1.0
+  version: 6.2.5
   user: nobody
 key_features:
-  - "Split a string to a list of elements"
-  - "Split a string to an object"
-  - "Upper case, lower case, and trim a string"
-  - "Replace parts of a string"
+- Split a string to a list of elements
+- Split a string to an object
+- Upper case, lower case, and trim a string
+- Replace parts of a string
 version_history:
-  - "1.4.1 - Initial updates for fedramp compliance | Updated SDK to the latest version"
-  - "1.4.0 - New action Replace"
-  - "1.3.1 - Update to v4 Python plugin runtime"
-  - "1.3.0 - New action Length | Add example inputs"
-  - "1.2.1 - New spec and help.md format for the Extension Library"
-  - "1.2.0 - New action Trim"
-  - "1.1.0 - New action Set Encoding"
-  - "1.0.1 - Update plugin tag from `util` to `utilities` for Marketplace searchability"
-  - "1.0.0 - Initial plugin"
-troubleshooting: "There may be complex string manipulation needs that are likely outside the scope of this plugin. If this is the case, consider using the Python 3 Script plugin instead."
+- 1.4.3 - Updated SDK to the latest version (6.2.5)
+- 1.4.2 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
+- 1.4.1 - Initial updates for fedramp compliance | Updated SDK to the latest version
+- 1.4.0 - New action Replace
+- 1.3.1 - Update to v4 Python plugin runtime
+- 1.3.0 - New action Length | Add example inputs
+- 1.2.1 - New spec and help.md format for the Extension Library
+- 1.2.0 - New action Trim
+- 1.1.0 - New action Set Encoding
+- 1.0.1 - Update plugin tag from `util` to `utilities` for Marketplace searchability
+- 1.0.0 - Initial plugin
+troubleshooting:
+- "`Split String to Object`: if the input contains multiple key:value pairs and these
+  pairs are separated from each other by a space, and the keys and values within each
+  pair are separated by an equal sign we can follow the below example:\n\n  + Example
+  text: `Computer_ID=\"bef41e8b-47b8-e188-8e43-3a2b662dd55d\" Computer_Name=\"dgdemo\\\
+  RGWin64\" Computer_Type=\"Windows\"`\n  + Example Input: `{\"block_delimiter\":
+  \" \",\"string\":\n\"Computer_ID=\"bef41e8b-47b8-e188-8e43-3a2b662dd55d\" Computer_Name=\"\
+  dgdemo RGWin64\" Computer_Type=\"Windows\",\"string_delimiter\": \"=\"}`\n  + Example
+  output: `{ \"object\": { \"Computer_ID\": \"bef41e8b-47b8-e188-8e43-3a2b662dd55d\"\
+  , \"Computer_Name\": \"dgdemo RGWin64\", \"Computer_Type\": \"Windows\" } }`\n\n"
+- There may be complex string manipulation needs that are likely outside the scope
+  of this plugin. If this is the case, consider using the Python 3 Script plugin instead.
 links:
-  - "[Python 3 String Methods](https://docs.python.org/3/library/stdtypes.html#string-methods)"
+- '[Python 3 String Methods](https://docs.python.org/3/library/stdtypes.html#string-methods)'
 references:
-  - "[Python 3 String Methods](https://docs.python.org/3/library/stdtypes.html#string-methods)"
+- '[Python 3 String Methods](https://docs.python.org/3/library/stdtypes.html#string-methods)'
 actions:
   set_encoding:
     title: Set Encoding
@@ -62,17 +76,17 @@ actions:
         type: string
         description: Encoding to use
         enum:
-          - "UTF-8"
-          - "ASCII"
+        - UTF-8
+        - ASCII
         required: true
         example: ASCII
       error_handling:
         type: string
         description: Error handler to use for encoding and decoding
         enum:
-          - "strict"
-          - "replace"
-          - "ignore"
+        - strict
+        - replace
+        - ignore
         required: true
         example: ignore
     output:
@@ -88,17 +102,17 @@ actions:
     input:
       string:
         title: String Input
-        description: "String to break into an array"
+        description: String to break into an array
         type: string
         required: true
-        example: "This,is,a,sentence"
+        example: This,is,a,sentence
       delimiter:
         title: Delimiter
         description: The character used to split the string into slices for the list.
           The default is a newline, if not provided by the user
         type: string
         required: false
-        example: ","
+        example: ','
     output:
       list:
         type: '[]string'
@@ -108,21 +122,32 @@ actions:
         example: '["This", "is", "a", "sentence"]'
   split_to_object:
     title: Split String to Object
-    description: Converts a string to an object containing key:value strings
+    description: "This action is used to convert a string to an object containing
+      key:value strings.\n\nAny input requiring more than a single key:value pair,
+      e.g. `USER=Bob` needs to use the `block_delimiter` option. In this case, the
+      input string is split by the `block_delimiter` character first, and the resulting
+      items are then split by the `string_delimiter` option. Stripping of double-quotes
+      is automatically applied in this situation for each item before the plugin returns
+      it.\n\nThe [output object](https://docs.komand.com/v0.42.1/docs/python-script-plugins#section-configure-the-plugin-output-schema)
+      on the action's page can be modified to pre-populate the workflow with the names
+      of the keys. It allows users the ability to use the green selector and choose
+      a specific variable later in the workflow by name. [Input templating](https://docs.komand.com/docs/input-templating)
+      would need to be used to obtain variables by name otherwise.\n\nPlease refer
+      to troubleshooting section for a more complex example"
     input:
       string:
         title: String Input
         description: String to convert e.g. USER=Bob
         type: string
         required: true
-        example: "User=Bob"
+        example: User=Bob
       string_delimiter:
         title: String Delimiter
         description: The character used to split the string into slices for the list.
           The default is a space, if not provided by the user
         type: string
         required: false
-        example: "="
+        example: '='
       block_delimiter:
         title: Block Delimiter
         description: The character delimiter for the initial string split, applied
@@ -130,7 +155,7 @@ actions:
           for more complex handling
         type: string
         required: false
-        example: "["
+        example: '['
     output:
       object:
         type: object
@@ -181,7 +206,7 @@ actions:
         description: String to trim
         type: string
         required: true
-        example: "Extra spaces at the end of this string     "
+        example: 'Extra spaces at the end of this string     '
     output:
       trimmed:
         type: string
@@ -198,7 +223,7 @@ actions:
         description: String to return length of
         type: string
         required: true
-        example: "return the number of characters in this string"
+        example: return the number of characters in this string
     output:
       length:
         type: integer
@@ -215,19 +240,21 @@ actions:
         description: The string to replace parts of
         type: string
         required: true
-        example: "this is a string"
+        example: this is a string
       string_part_to_find:
         title: String Part to Find
-        description: The string part to look for. All instances of this string will be replaced
+        description: The string part to look for. All instances of this string will
+          be replaced
         type: string
         required: true
-        example: "string"
+        example: string
       replacement_value:
         title: Replacement Value
-        description: The string that will replace the parts that are found. If left blank the characters to find will be deleted
+        description: The string that will replace the parts that are found. If left
+          blank the characters to find will be deleted
         type: string
         required: false
-        example: "replacement"
+        example: replacement
     output:
       result_string:
         title: Result String

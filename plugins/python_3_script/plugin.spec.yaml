@@ -6,72 +6,98 @@ title: Python 3 Script
 vendor: rapid7
 support: rapid7
 status: []
-description: "[Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.9.19 and its standard library as well as the following 3rd party libraries:"
-version: 5.1.0
+description: "[Python](https://www.python.org/) is a language for fast development\
+  \ and system integration. This plugin runs Python 3.12.8 with its standard library\
+  \ and other libraries such as:\n\n* [requests](https://requests.readthedocs.io/en/latest/)\n\
+  * [arrow](https://pypi.org/project/arrow/)\n* [lxml](http://lxml.de/)\n* [beautifulsoup](https://www.crummy.com/software/BeautifulSoup/)\n\
+  \nIt supports loading custom modules and passing credentials (`username`, `password`,\
+  \ `secret_key`)"
+version: 5.1.1
 connection_version: 4
-supported_versions: ["Python 3.9.18"]
+supported_versions: [Python 3.12.8]
 fedramp_ready: true
 sdk:
   type: slim
-  version: 6.1.4
+  version: 6.2.5
   user: root
   packages:
-    - libxslt-dev
-    - libxml2-dev
-    - gcc
-    - g++
+  - libxslt-dev
+  - libxml2-dev
+  - gcc
+  - g++
+  custom_cmd:
+  - ENV PYTHONUSERBASE=/var/cache/python_dependencies
+  - ENV PYTHONPATH=/var/cache/python_dependencies
 enable_cache: true
-troubleshooting: "Some third-party modules defined in the Modules connection input (such as pandas) can take a long time to install. If installation fails, try increasing the Timeout connection input to 900 (15 minutes)"
+troubleshooting:
+- Some third-party modules defined in the Modules connection input (such as pandas)
+  can take a long time to install. If installation fails, try increasing the Timeout
+  connection input to 900 (15 minutes)
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/python_3_script
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   docs_url: https://docs.rapid7.com/insightconnect/python-2-or-3-script/
 tags:
-   - python
-   - python3
-   - scripting
-   - utilities
+- python
+- python3
+- scripting
+- utilities
 hub_tags:
   use_cases: [data_utility]
   keywords: [python, scripting]
   features: []
-key_features: ["Run a Python 3 Script to securely orchestrate, automate, and respond to (almost) anything"]
-references: ["[Python 3 Language Reference](https://docs.python.org/3/reference/index.html)", "[InsightConnect Python Plugin Guide](https://docs.rapid7.com/insightconnect/python-2-or-3-script/)"]
+key_features: ['Run a Python 3 Script to securely orchestrate, automate, and respond
+    to (almost) anything']
+references: ['[Python 3 Language Reference](https://docs.python.org/3/reference/index.html)',
+  '[InsightConnect Python Plugin Guide](https://docs.rapid7.com/insightconnect/python-2-or-3-script/)']
 links:
-  - "[Python](https://www.python.org/)"
+- '[Python](https://www.python.org/)'
 version_history:
-  - "5.1.0 - Action `Run`: Added `timeout` optional parameter | Updated SDK to the latest version"
-  - "5.0.1 - Updated SDK to the latest version | Initial updates for fedramp compliance"
-  - "5.0.0 - Updated SDK to the latest version | Removing records as its not maintained | Replacing maya with arrow (maya not maintained)"
-  - "4.0.10 - Updated the SDK to the latest version | Updated Python version to `3.9.19` | Fixed issue with invalid unicode character"
-  - "4.0.9 - Updated the SDK to the latest version to address memory usage issues"
-  - "4.0.8 - Updated the SDK to latest version | Fix issue where input argument was too long"
-  - "4.0.7 - Updated the SDK | Updated Python version to `3.9.18` | Added handler to run function separately"
-  - "4.0.6 - Added empty `__init__.py` file to `unit_test` folder | Refreshed with new tooling"
-  - "4.0.5 - Updated the SDK version to include output masking | Updated all dependencies to the newest versions"
-  - "4.0.4 - Update Pyyaml to version 6.0.0"
-  - "4.0.3 - Run: Fix logging issue"
-  - "4.0.2 - Run: Fix issue with indentation where users have non-empty credentials for input function"
-  - "4.0.1 - Resolve issue where users experience issues with installing Python packages, and indentation for input function"
-  - "4.0.0 - Add custom script credentials in Connection"
-  - "3.0.0 - Add custom credentials in Run action"
-  - "2.0.4 - Update help documentation for installing third-party modules"
-  - "2.0.3 - Update `docs_url` in plugin spec with a new link to [plugin setup guide](https://docs.rapid7.com/insightconnect/python-2-or-3-script/)"
-  - "2.0.2 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/python-2-or-3-script)"
-  - "2.0.1 - New spec and help.md format for the Extension Library"
-  - "2.0.0 - Add the ability to download and install third-party libraries for use while configuring the plugin Connection"
-  - "1.0.6 - Fix issue where undefined output exceptions were not being handled correctly"
-  - "1.0.5 - Add `utilities` plugin tag for Marketplace searchability"
-  - "1.0.4 - Fix issue where run action was excluded from plugin on build"
-  - "1.0.3 - Update to v2 Python plugin architecture | Support web server mode | Add and pin 3rd party libraries: lxml, beautifulsoup, pyyaml, maya, and records;"
-  - "1.0.2 - SDK update"
-  - "1.0.1 - SSL bug fix in SDK"
-  - "0.1.0 - Initial plugin"
+- 5.1.1 - Updated SDK to the latest version (6.2.5)
+- '5.1.0 - Action `Run`: Added `timeout` optional parameter | Updated SDK to the latest
+  version'
+- 5.0.1 - Updated SDK to the latest version | Initial updates for fedramp compliance
+- 5.0.0 - Updated SDK to the latest version | Removing records as its not maintained
+  | Replacing maya with arrow (maya not maintained)
+- 4.0.10 - Updated the SDK to the latest version | Updated Python version to `3.9.19`
+  | Fixed issue with invalid unicode character
+- 4.0.9 - Updated the SDK to the latest version to address memory usage issues
+- 4.0.8 - Updated the SDK to latest version | Fix issue where input argument was too
+  long
+- 4.0.7 - Updated the SDK | Updated Python version to `3.9.18` | Added handler to
+  run function separately
+- 4.0.6 - Added empty `__init__.py` file to `unit_test` folder | Refreshed with new
+  tooling
+- 4.0.5 - Updated the SDK version to include output masking | Updated all dependencies
+  to the newest versions
+- 4.0.4 - Update Pyyaml to version 6.0.0
+- '4.0.3 - Run: Fix logging issue'
+- '4.0.2 - Run: Fix issue with indentation where users have non-empty credentials
+  for input function'
+- 4.0.1 - Resolve issue where users experience issues with installing Python packages,
+  and indentation for input function
+- 4.0.0 - Add custom script credentials in Connection
+- 3.0.0 - Add custom credentials in Run action
+- 2.0.4 - Update help documentation for installing third-party modules
+- 2.0.3 - Update `docs_url` in plugin spec with a new link to [plugin setup guide](https://docs.rapid7.com/insightconnect/python-2-or-3-script/)
+- 2.0.2 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/python-2-or-3-script)
+- 2.0.1 - New spec and help.md format for the Extension Library
+- 2.0.0 - Add the ability to download and install third-party libraries for use while
+  configuring the plugin Connection
+- 1.0.6 - Fix issue where undefined output exceptions were not being handled correctly
+- 1.0.5 - Add `utilities` plugin tag for Marketplace searchability
+- 1.0.4 - Fix issue where run action was excluded from plugin on build
+- '1.0.3 - Update to v2 Python plugin architecture | Support web server mode | Add
+  and pin 3rd party libraries: lxml, beautifulsoup, pyyaml, maya, and records;'
+- 1.0.2 - SDK update
+- 1.0.1 - SSL bug fix in SDK
+- 0.1.0 - Initial plugin
 connection:
   modules:
     title: Third-Party Modules
-    description: List of third-party modules to install for use in the supplied Python script
-    type: "[]string"
+    description: List of third-party modules to install for use in the supplied Python
+      script
+    type: '[]string'
     required: false
     example: '["pandas", "numpy"]'
   timeout:
@@ -89,7 +115,8 @@ connection:
     example: '{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}'
   script_username_and_password:
     title: Script Username and Password
-    description: Username and password available in script as python variables (`username`, `password`)
+    description: Username and password available in script as python variables (`username`,
+      `password`)
     type: credential_username_password
     required: false
     example: '{"username": "user", "password": "mypassword"}'
@@ -99,11 +126,14 @@ actions:
     description: Run a Python 3 function
     input:
       function:
-        description: Function definition. Must be named `run`. Accepts the `input` object as params. Returns the dict as output. In this action you can use `username`, `password`, `secret_key` variables if defined in connection
+        description: Function definition. Must be named `run`. Accepts the `input`
+          object as params. Returns the dict as output. In this action you can use
+          `username`, `password`, `secret_key` variables if defined in connection
         type: python
         required: true
         default: def run(params={}):\n    return {}
-        example: def run(params={}):\n\tprint(params.get('some_input'))\n\tprint(username, password)\n\treturn {}
+        example: def run(params={}):\n\tprint(params.get('some_input'))\n\tprint(username,
+          password)\n\treturn {}
       input:
         description: Input object to be passed as `params={}` to the `run` function
         type: object

@@ -7,7 +7,10 @@ from icon_html.util.strategies import ConvertToEpub
 class Epub(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="epub", description=Component.DESCRIPTION, input=EpubInput(), output=EpubOutput()
+            name="epub",
+            description=Component.DESCRIPTION,
+            input=EpubInput(),
+            output=EpubOutput(),
         )
 
     def run(self, params={}):

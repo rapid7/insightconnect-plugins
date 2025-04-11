@@ -6,8 +6,8 @@ from sys import argv
 
 Name = "CSV"
 Vendor = "rapid7"
-Version = "2.0.2"
-Description = "CSV (Comma Separated Values) is a simple data format for storing data. This plugin allows one to extract fields from CSV strings and files"
+Version = "2.0.3"
+Description = "[Comma Separated Value](https://en.wikipedia.org/wiki/Comma-separated_values) (CSV) is a common format to express data.This plugin allows one to extract fields from CSV strings and files.Using the CSV plugin, users can automate conversions between JSON and CSV to help enable service interoperabilityas well as filter data within a CSV file"
 
 
 def main():

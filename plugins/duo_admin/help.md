@@ -175,73 +175,13 @@ Example output:
 ```
 
 #### Get Authentication Logs
-
+  
 This action is used to get auth logs, limited to past 180 days.
-[Currentmillis.com](https://currentmillis.com/) is useful for finding a usable UNIX timestamp.
+[Currentmillis.com](https://currentmillis.com/) is 
+useful for finding a usable UNIX timestamp.
 
-Available inputs for parameters:
-
-* `factors` - a comma-separated list of factors, if left empty, the action returns the authentication logs for all factors used for an authentication attempt
-    * bypass_code
-    * digipass_go_7_token
-    * duo_mobile_passcode
-    * duo_push
-    * hardware_token
-    * not_available
-    * passcode
-    * phone_call
-    * remembered_device
-    * sms_passcode
-    * sms_refresh
-    * trusted_network
-    * u2f_token
-    * yubikey_code
-* `reasons` - a comma-separated list of reasons, if left empty, the action returns the authentication logs for all reasons associated with an authentication attempt
-    * allow_unenrolled_user
-    * allow_unenrolled_user_on_trusted_network
-    * allowed_by_policy
-    * anomalous_push
-    * anonymous_ip
-    * bypass_user
-    * call_timed_out
-    * could_not_determine_if_endpoint_was_trusted
-    * denied_by_policy
-    * deny_unenrolled_user
-    * endpoint_failed_google_verification
-    * endpoint_is_not_in_management_system
-    * endpoint_is_not_trusted
-    * error
-    * factor_restricted
-    * invalid_device
-    * invalid_management_certificate_collection_state
-    * invalid_passcode
-    * invalid_referring_hostname_provided
-    * location_restricted
-    * locked_out
-    * no_activated_duo_mobile_account
-    * no_disk_encryption
-    * no_duo_certificate_present
-    * no_keys_pressed
-    * no_referring_hostname_provided
-    * no_response
-    * no_screen_lock
-    * no_web_referer_match
-    * out_of_date
-    * platform_restricted
-    * remembered_device
-    * rooted_device
-    * software_restricted
-    * touch_id_disabled
-    * trusted_location
-    * trusted_network
-    * user_approved
-    * user_cancelled
-    * user_disabled
-    * user_marked_fraud
-    * user_not_in_permitted_group
-    * user_provided_invalid_certificate
-    * valid_passcode
-    * version_restricted
+Available inputs for parameters can be found in [Duo Admin API 
+docs](https://duo.com/docs/adminapi#logs:~:text=The%20factor%20or%20method%20used%20for%20an%20authentication%20attempt.%20One%20of%3A)
 
 ##### Input
 
@@ -1006,10 +946,13 @@ Example output:
 
 ## Troubleshooting
 
-Many actions in this plugin take a User ID as input. A User ID is not the username - instead it's a unique identifier e.g. DU9I6T0F7R2S1J4XZHHA. A User ID can be obtained by passing a username to the Get User Status action.
+* Many actions in this plugin take a User ID as input. A User ID is not the username - instead it's a unique identifier e.g. DU9I6T0F7R2S1J4XZHHA. A User ID can be obtained by passing a username to the Get User Status action.
 
 # Version History
 
+* 5.0.4 - Updated SDK to the latest version (6.2.5)
+* 5.0.3 - Bump the SDK to version 6.2.3 | Update Task `monitor_logs` to delay retry if a rate limit error is returned from Duo Admin
+* 5.0.2 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
 * 5.0.1 - Update to enable Plugin as FedRAMP ready | Update SDK (`6.1.2`)
 * 5.0.0 - Updated to include latest SDK v5.5.5 | Removing Unused fields from User Object
 * 4.4.2 - Updated to include latest SDK v5.4.9 | Task `Monitor Logs` updated to increase max lookback cutoff to 7 days

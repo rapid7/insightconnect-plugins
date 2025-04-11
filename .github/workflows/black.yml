@@ -4,19 +4,34 @@ on: [push]
 
 jobs:
   lint:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-
-      - name: Set up Python 3.9
-        uses: actions/setup-python@v2
+      - uses: actions/checkout@v4
         with:
-          python-version: 3.9
+          fetch-depth: 0
 
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
       - name: Install dependencies
         run: |
-          pip install black==22.3.0
-
+          pip install black==24.10.0
       - name: Lint
         run: |
-          black . --check
+          CHANGED_FILES=()
+          for OUTPUT in $(git diff --no-commit-id --name-only --no-renames HEAD..origin/master)
+          do
+            if [[ -f ${OUTPUT} ]] && [[ ${OUTPUT} == *.py ]]
+            then
+              echo "${OUTPUT}"
+              CHANGED_FILES+=( ${OUTPUT} )
+            fi
+          done
+          
+          if ! [[ ${#CHANGED_FILES[*]} == 0 ]]
+          then
+            echo ${CHANGED_FILES[*]} | xargs black --check --line-length 120
+          else
+            echo "No Python files were changed."
+          fi

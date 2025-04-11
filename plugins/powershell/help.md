@@ -15,13 +15,13 @@
 
 # Supported Product Versions
 
-* PowerShell 6.1.2
+* PowerShell 7.4.6
 
 # Documentation
 
 ## Setup
 
-The connection configuration accepts the following parameters. SSL is enforced for all ports except 5985:
+The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -153,52 +153,43 @@ Example output:
 
 ## Troubleshooting
 
-The use of round-robin DNS lookups is not supported
-
-If Auth Type is set to "None" the PowerShell script will execute locally on the Komand host.
-This can also by accomplished by leaving the address field blank.
-
-The username supplied must have local admin privileges on the remote host Windows computer.
-When using a domain account with NTLM the username must be in the following format MYDOMAIN\username
-When using the Kerberos connection option the username must be a domain account that has permission to join computers to the domain.
-
-This plugin can connect over HTTP, the default port for this is 5985. It should be noted that this type of connection is
-not secure as all information passed is in plain text. In addition, Windows will not allow HTTP connections by default.
+* The use of round-robin DNS lookups is not supported
+* If Auth Type is set to "None" the PowerShell script will execute locally on the Komand host. This can also be accomplished by leaving the address field blank.
+* The username supplied must have local admin privileges on the remote host Windows computer.
+* When using a domain account with NTLM the username must be in the following format MYDOMAIN\username
+* When using the Kerberos connection option the username must be a domain account that has permission to join computers to the domain.
+* This plugin can connect over HTTP, the default port for this is 5985.
+It should be noted that this type of connection is not secure as all information passed is in plain text. In addition, Windows will not allow HTTP connections by default.
+ 
 The following commands must be run on the Windows computer that you want to connect to.
 
 For more information see [Compromising Yourself with WinRM's AllowUnencrypted = True](https://blogs.msdn.microsoft.com/PowerShell/2015/10/27/compromising-yourself-with-winrms-allowunencrypted-true/)
-
+ 
 ```
-
 winrm set winrm/config/client/auth '@{Basic="true"}'
 winrm set winrm/config/service/auth '@{Basic="true"}'
 winrm set winrm/config/service '@{AllowUnencrypted="true"}'
-
 ```
 
-When using the Kerberos connection option, the username should not include an @example.com or other domain identifier. These will be added by the plugin as needed.
-
+* When using the Kerberos connection option, the username should not include an @example.com or other domain identifier. These will be added by the plugin as needed.
 This plugin will join the Komand docker instance to the Windows domain as a computer if the Kerberos option is used.
-
-For the Execute Script action PowerShell code should be submitted as base64. This can be done by
-copying a `.txt` file with the PowerShell code into the plugin.
+For the Execute Script action PowerShell code should be submitted as base64. This can be done by copying a `.txt` file with the PowerShell code into the plugin.
 
 _This plugin does not validate the PowerShell code._
-
-Any errors generated on the remote computer by the PowerShell code
-are forwarded to the log file.
+ Any errors generated on the remote computer by the PowerShell code are forwarded to the log file.
 
 Run this PowerShell command on a Windows host first to set up a unsigned certificate for authentication:
 This will not be needed if the host already has a SSL certificate set up for Winrm
 
 ```
-
 Invoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1'))
-
 ```
+* SSL is not configured for port `5985`
 
 # Version History
 
+* 3.0.8 - Updated clean message | Updated SDK to the latest version (6.2.5) | bumping `cryptography` package
+* 3.0.7 - Updated dependencies | Updated SDK to the latest version
 * 3.0.6 - Bump SDK to 6.2.0
 * 3.0.5 - Bump requirements.txt | Bump SDK to 6.1.4 | Update help.md to enforce that the use of round-robin DNS lookups is not supported
 * 3.0.4 - Upgrade user from `nobody` to `root` | bump SDK to 6.0.1 and switch back to `Bullseye` based SDK image

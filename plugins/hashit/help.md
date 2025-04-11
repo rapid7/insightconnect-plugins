@@ -18,7 +18,7 @@ The HashIt plugin will generate common hashes from a file or string. Supported h
 
 # Supported Product Versions
 
-* 2024-10-08
+* 2025-02-25
 
 # Documentation
 
@@ -123,6 +123,7 @@ Example output:
 
 # Version History
 
+* 2.0.6 - Updated SDK to the latest version (6.2.5)
 * 2.0.5 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 2.0.4 - Update to v4 Python plugin runtime
 * 2.0.3 - Change docker image from `komand/python-pypy3-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Use input and output constants | Remove test from actions

@@ -4012,6 +4012,9 @@ Example output:
 
 # Version History
 
+* 8.0.11 - Updated the cache storage path and replaced the external function with internal implementation | Updated SDK to the latest version (6.2.6)
+* 8.0.10 - Updated SDK to the latest version (6.2.5)
+* 8.0.9 - Address vulnerabilities in buildpack
 * 8.0.8 - Bumping requirements.txt | SDK bump to 6.2.2
 * 8.0.7 - Bumping requirements.txt | SDK bump to 6.2.0
 * 8.0.6 - Trigger `New Exception Request`: Updated the trigger with retry mechanism

@@ -1,6 +1,6 @@
 # Description
 
-This plugin allows basic arithmetic functions to be performed.
+This plugin allows basic arithmetic functions to be performed
 
 # Key Features
 
@@ -112,6 +112,7 @@ Example output:
 
 # Version History
 
+* 1.2.4 - Updated SDK to the latest version (6.2.5)
 * 1.2.3 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
 * 1.2.2 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 1.2.1 - Update to v4 Python plugin runtime

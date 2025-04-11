@@ -6,8 +6,8 @@ from sys import argv
 
 Name = "Datetime"
 Vendor = "rapid7"
-Version = "3.0.1"
-Description = "This plugin manipulates timestamps using Python's maya library"
+Version = "3.0.2"
+Description = "Timestamps, timezones, and Datetimes can be difficult to work with, especially when dealing with different locales on different systems. The Datetime InsightConnect plugin manipulates timestamps using Python's [Maya](https://pypi.org/project/maya/) library, which makes the simple things much easier while admitting that time is an illusion (timezones doubly so)"
 
 
 def main():

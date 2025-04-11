@@ -1,11 +1,12 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
-from collections import namedtuple
 import logging
+from collections import namedtuple
 from unittest import TestCase
+
 from komand_jira.util.util import look_up_project
 
 

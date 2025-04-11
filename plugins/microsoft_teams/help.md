@@ -1206,18 +1206,19 @@ Example output:
 
 ## Troubleshooting
 
-If there is more than one team with the same name in your organization, the oldest team between the two will be used.
+* If there is more than one team with the same name in your organization, the oldest team between the two will be used.
 
 # Version History
 
+* 7.0.1 - Updated SDK to the latest version (6.2.5)
 * 7.0.0 - Updated SDK to the latest version | Initial updates for fedramp compliance
 * 6.0.1 - Using exact match on channel names rather than search, from user input channel names when getting the channel id | using urllib to encode any team names in API calls to avoid symbols not being parsed correctly
-* 6.0.0 - New actions: `create_teams_chat` | `list_messages_in_chat` | update type of `Event Detail` to type object
-* 5.1.0 - New actions: Get Reply List | Improve typing on message
-* 5.0.0 - New actions: Get Message in Chat, Get Message in Channel | Update to latest SDK version | Change required fields in message schema
-* 4.2.0 - New Message Received: Fixed issue where `font-size` value appeared in the `urls`, and `domains` output fields | Can choose the role of a member when adding them to a channel | Fix bug where case-sensitive URLs were returned in lower case | Improved reliability of domains output value
-* 4.1.0 - Cloud enabled | Add Channel to Team: The user has the option to select the type of channel to be created. The available types are `Standard`, and `Private`
-* 4.0.0 - Fix issue with Create Teams Enabled Group action's members, and owners input field types
+* 6.0.0 - New actions - `create_teams_chat` | `list_messages_in_chat` | update type of `Event Detail` to type object
+* 5.1.0 - New actions - Get Reply List | Improve typing on message
+* 5.0.0 - New actions - Get Message in Chat, Get Message in Channel | Update to latest SDK version | Change required fields in message schema
+* 4.2.0 - New Message Received - Fixed issue where `font-size` value appeared in the `urls`, and `domains` output fields | Can choose the role of a member when adding them to a channel | Fix bug where case-sensitive URLs were returned in lower case | Improved reliability of domains output value
+* 4.1.0 - Cloud enabled | Add Channel to Team The user has the option to select the type of channel to be created. The available types are `Standard`, and `Private`
+* 4.0.0 - Fix issue with Create Teams Enabled Group actions members, and owners input field types
 * 3.2.0 - Send Message Action is updated to support chat messages via chat_id parameter, team_name is set to optional. | Update SDK to latest version.
 * 3.1.5 - Add `microsoft_teams` and `office365` keywords | Removed `microsoft, teams, office 365` keywords
 * 3.1.4 - Update help.md to include troubleshooting message about team names
@@ -1232,8 +1233,8 @@ If there is more than one team with the same name in your organization, the olde
 * 2.2.1 - Automatically extract UUIDs in the New Message Received trigger
 * 2.2.0 - Extract and return command security and network indicators in the New Message Received trigger
 * 2.1.0 - Update Send Message and Send HTML Message actions to accept `thread_id` input to support threaded replies | Update New Message Received trigger to output team and channel names so they can be passed into subsequent steps
-* 2.0.5 - Fix issue where auth token wasn't properly renewed
-* 2.0.4 - Fix issue where a message that only had an image in it could break the 'New Message Received' trigger
+* 2.0.5 - Fix issue where auth token was not properly renewed
+* 2.0.4 - Fix issue where a message that only had an image in it could break the "New Message Received" trigger
 * 2.0.3 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/microsoft-teams)
 * 2.0.2 - Fix issue where unexpected HTML messages would not trigger workflows
 * 2.0.1 - Update to Get Teams action to support more than 20 teams

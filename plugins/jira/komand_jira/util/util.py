@@ -1,8 +1,10 @@
 import logging
 import base64
+from jira import User
+from typing import Dict, Any
 
 
-def normalize_comment(source, is_cloud=False, logger=logging.getLogger()):
+def normalize_comment(source, is_cloud: bool = False, logger: logging.Logger = logging.getLogger()):
     comment = source.raw
     author = normalize_user(source.author, is_cloud, logger)
     comment["author"] = author
@@ -67,19 +69,17 @@ def normalize_issue(issue, get_attachments=False, include_raw_fields=False, logg
     return output
 
 
-def normalize_user(user, is_cloud=False, logger=logging.getLogger()):
+def normalize_user(user: User, is_cloud: bool = False, logger: logging.Logger = logging.getLogger()) -> Dict[str, Any]:
     output = {
-        "display_name": user.displayName,
-        "active": user.active,
-        "email_address": user.emailAddress,
+        "display_name": user.raw.get("displayName", ""),
+        "active": user.raw.get("active", False),
+        "email_address": user.raw.get("emailAddress", ""),
     }
     if is_cloud:
-        output["account_id"] = user.accountId
+        output["account_id"] = user.raw.get("accountId", "")
     else:
-        output["name"] = user.name
-
-    logger.debug("Result user: %s", output)
-
+        output["name"] = user.raw.get("name", "")
+    logger.debug(f"Result user: {output}")
     return output
 
 

@@ -38,7 +38,8 @@ class TestMarkdown(TestCase):
         print(result)
 
         self.assertEqual(
-            result["markdown_contents"], "Rapid7 InsightConnect\n=====================\n\nConvert HTML to Markdown\n"
+            result["markdown_contents"],
+            "Rapid7 InsightConnect\n=====================\n\nConvert HTML to Markdown\n",
         )
 
         self.assertEqual(
@@ -46,11 +47,25 @@ class TestMarkdown(TestCase):
             "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cj09PT09PT09PT09PT09PT09PT09PQoKQ29udmVydCBIVE1MIHRvIE1hcmtkb3duCg==",
         )
 
-    def test_action_empty_string(self):
-        params = {"doc": " "}
+    def test_markdown_cloud(self):
+        params = {
+            "doc": '<!DOCTYPE html><html><iframe src="https://www.google.com"></iframe></html>'
+        }
 
+        os.environ["PLUGIN_RUNTIME_ENVIRONMENT"] = "cloud"
         test_action = Markdown()
+        result = test_action.run(params)
+        del os.environ["PLUGIN_RUNTIME_ENVIRONMENT"]
 
-        with self.assertRaises(PluginException) as context:
-            test_action.run(params)
-        self.assertEqual(context.exception.cause, "Invalid input.")
+        self.assertEqual(result["markdown_file"], "Cg==")
+        self.assertEqual(result["markdown_contents"], "\n")
+
+
+def test_action_empty_string(self):
+    params = {"doc": " "}
+
+    test_action = Markdown()
+
+    with self.assertRaises(PluginException) as context:
+        test_action.run(params)
+    self.assertEqual(context.exception.cause, "Invalid input.")

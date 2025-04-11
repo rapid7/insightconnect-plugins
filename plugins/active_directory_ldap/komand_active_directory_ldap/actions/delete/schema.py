@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Deletes the LDAP object specified"
+    DESCRIPTION = "Delete the LDAP object specified"
 
 
 class Input:

@@ -1,7 +1,8 @@
-from komand_jira.connection import Connection
-from collections import namedtuple
 import logging
+from collections import namedtuple
 from unittest import TestCase
+
+from komand_jira.connection import Connection
 
 
 class MockIssue:

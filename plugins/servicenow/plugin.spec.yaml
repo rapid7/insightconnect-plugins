@@ -1,12 +1,17 @@
 plugin_spec_version: v2
 extension: plugin
-products: ["insightconnect"]
+products: [insightconnect]
 name: servicenow
 title: ServiceNow
-description: ServiceNow is a tool for managing incidents and configuration management. Using the ServiceNow plugin for Rapid7 InsightConnect, users can manage all aspects of incidents including creation, search, updates, as well as monitor them for changes
-version: 8.0.3
+description: "[ServiceNow](https://www.servicenow.com/) is a tool for managing incidents\
+  \ and configuration management. This plugin allows users to manage all aspects of\
+  \ incidents including creation, search, and updates. Additionally, incident changes\
+  \ can be monitored and processed for use in a Rapid7 InsightConnect workflow.\n\n\
+  Note: This plugin affects only the underlying tables in a ServiceNow instance, not\
+  \ its UI. Hence, this plugin will work seamlessly with Virtual Task Boards"
+version: 8.1.0
 connection_version: 8
-supported_versions: ["2023-10-28 Tokyo"]
+supported_versions: [2023-10-28 Tokyo]
 vendor: rapid7
 support: rapid7
 status: []
@@ -17,71 +22,100 @@ resources:
   docs_url: https://docs.rapid7.com/insightconnect/servicenow
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/servicenow
 tags:
-  - servicenow
-  - incident
-  - tables
+- servicenow
+- incident
+- tables
 hub_tags:
   use_cases: [remediation_management, asset_inventory]
   keywords: [servicenow, incidents, cmdb, cloud_enabled]
   features: []
 sdk:
   type: slim
-  version: 6.1.3
+  version: 6.2.5
   user: nobody
 key_features:
-  - "Search, Read, Create, Delete, and Update incidents to accelerate ticketing operations"
-  - "Search, Get, Put, and Delete incident attachments to update tickets with additional context"
-  - "Search, Get, Create, and Update CI records to manage your configuration items"
-  - "Create, Get, Delete, Update vulnerabilities to accelerate ticketing operations"
+- Search, Read, Create, Delete, and Update incidents to accelerate ticketing operations
+- Search, Get, Put, and Delete incident attachments to update tickets with additional
+  context
+- Search, Get, Create, and Update CI records to manage your configuration items
+- Create, Get, Delete, Update vulnerabilities to accelerate ticketing operations
 requirements:
-  - "ServiceNow username and password (for basic authentication)"
-  - "ServiceNow username, password, client ID, and client secret (for OAuth authentication) "
-  - "ServiceNow instance name"
+- ServiceNow username and password (for basic authentication)
+- 'ServiceNow client ID, and client secret (for OAuth authentication client credentials
+  grant type) '
+- 'ServiceNow username, password, client ID, and client secret (for OAuth authentication
+  password grant type) '
+- "ServiceNow instance name\n"
+- "Please note that to use certain actions it's necessary to use scopes that have\
+  \ permissions on certain tables. Depending on the actions, it's necessary to add\
+  \ specific auth scopes:\n\n  - Create/Read/Update/Delete Incident and Incident Attachments\
+  \ (table `incident` with permissions create/read/write/delete)\n  - Create/Read/Update/Delete\
+  \ Security Incident (table `sn_si_incident` with permissions create/read/write/delete)\n\
+  \  - Create/Read/Update/Delete Vulnerability (table `sn_vul_vulnerable_item` with\
+  \ permissions create/read/write/delete)\n  - Create Change Request (table `sn_chg_rest`\
+  \ with create permissions)"
 links:
-  - "[ServiceNow](https://www.servicenow.com/)"
+- '[ServiceNow](https://www.servicenow.com/)'
 references:
-  - "[ServiceNow](https://www.servicenow.com/)"
-  - "[ServiceNow API](https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/)"
-  - "[ServiceNow User Administration](https://docs.servicenow.com/bundle/rome-platform-administration/page/administer/roles/concept/c_UserAdministration.html)"
-  - "[ServiceNow Operators](https://docs.servicenow.com/bundle/quebec-platform-user-interface/page/use/common-ui-elements/reference/r_OpAvailableFiltersQueries.html)"
-  - "[ServiceNow Plugin Setup Guide](https://docs.rapid7.com/insightconnect/servicenow)"
+- '[ServiceNow](https://www.servicenow.com/)'
+- '[ServiceNow API](https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/)'
+- '[ServiceNow User Administration](https://docs.servicenow.com/bundle/rome-platform-administration/page/administer/roles/concept/c_UserAdministration.html)'
+- '[ServiceNow Operators](https://docs.servicenow.com/bundle/quebec-platform-user-interface/page/use/common-ui-elements/reference/r_OpAvailableFiltersQueries.html)'
+- '[ServiceNow Plugin Setup Guide](https://docs.rapid7.com/insightconnect/servicenow)'
+troubleshooting:
+- This plugin does not contain a troubleshooting.
 version_history:
-  - "8.0.3 - Update to resolve issue parsing response from ServiceNow if XML is received"
-  - "8.0.2 - Initial updates for fedramp compliance | Updated SDK to the latest version"
-  - "8.0.1 - Update Setuptool to version 70.0.0 | Update SDK to version 6.0.0"
-  - "8.0.0 - `Incident Created, Vulnerability Updated`: Updated triggers to allow users to check a list of system_ids or all of them"
-  - "7.4.1 - `Incident Created`: Resolved issue related to trigger not working. Updated SDK"
-  - "7.4.0 - Add ability to use OAuth for API authentication (requires OAuth Client ID and OAuth Client Secret in connection)"
-  - "7.3.1 - `Incident Created`: Resolved issue related to object parsing"
-  - "7.3.0 - Add new actions Create Security Incident, Update Security Incident, Delete Security Incident, Get Security Incident and Search Security Incident"
-  - "7.2.0 - Added new actions: Create Vulnerability, Get Vulnerability, Update Vulnerability, Delete Vulnerability | Added new trigger: Vulnerability Updated"
-  - "7.1.2 - Search Incident, Search Incident Attachment: Fix issue where the action were failing on bigger results. Update Incident: Ensure non updated fields are not reset during update."
-  - "7.1.1 - Create Incident: Resolved issue when nothing was passed to `additional_fields` input field "
-  - "7.1.0 - Add new action Create Change Request"
-  - "7.0.0 - Cloud enabled | Changed connection input `URL` to `instance`"
-  - "6.0.1 - Fix base64 decoding in Put Incident Attachment action"
-  - "6.0.0 - Add additional file information in output for Get Attachments for an Incident"
-  - "5.2.0 - Add new action Get Attachments for an Incident | Add unit test for action Get Attachments for an Incident and Get Incident Attachment"
-  - "5.1.1 - Fix output parsing bug in Get Incident Attachment action"
-  - "5.1.0 - Add new Incident URL output for Create Incident action"
-  - "5.0.1 - Add new Additional Fields input for Create Incident and Update Incident actions"
-  - "5.0.0 - Add input fields to Create Incident and Update Incident action instead of JSON object"
-  - "4.1.2 - Fix input parameter in Incident Created trigger"
-  - "4.1.1 - Add `docs_url` to plugin spec with link to plugin setup guide"
-  - "4.1.0 - Add trigger Incident Created"
-  - "4.0.0 - New Number output to create incident action"
-  - "3.1.1 - New spec and help.md format for the Extension Library"
-  - "3.1.0 - Add action Get Incident Comments and Work Notes"
-  - "3.0.0 - Rewrite in Python | Renamed incident specific actions | New actions Create CI, Get CI, Update CI, Search CI"
-  - "2.0.5 - Update descriptions"
-  - "2.0.4 - Regenerate with latest Go SDK to solve bug with triggers"
-  - "2.0.3 - Fixing the loss of metadata in action messages"
-  - "2.0.2 - Disable Connection Caching"
-  - "2.0.1 - Pull the ConnectionCacheKey update from SDK 2.6.3"
-  - "2.0.0 - Update to new credential types"
-  - "1.0.0 - Support web server mode"
-  - "0.1.1 - Bug fix for CI tool incorrectly uploading plugins"
-  - "0.1.0 - Initial plugin"
+- 8.1.0 - Add ability to use OAuth 2.0 flow named client credentials | Updated SDK
+  to the latest version (v6.2.5)
+- 8.0.4 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
+- 8.0.3 - Update to resolve issue parsing response from ServiceNow if XML is received
+- 8.0.2 - Initial updates for fedramp compliance | Updated SDK to the latest version
+- 8.0.1 - Update Setuptool to version 70.0.0 | Update SDK to version 6.0.0
+- '8.0.0 - `Incident Created, Vulnerability Updated`: Updated triggers to allow users
+  to check a list of system_ids or all of them'
+- '7.4.1 - `Incident Created`: Resolved issue related to trigger not working. Updated
+  SDK'
+- 7.4.0 - Add ability to use OAuth for API authentication (requires OAuth Client ID
+  and OAuth Client Secret in connection)
+- '7.3.1 - `Incident Created`: Resolved issue related to object parsing'
+- 7.3.0 - Add new actions Create Security Incident, Update Security Incident, Delete
+  Security Incident, Get Security Incident and Search Security Incident
+- '7.2.0 - Added new actions: Create Vulnerability, Get Vulnerability, Update Vulnerability,
+  Delete Vulnerability | Added new trigger: Vulnerability Updated'
+- '7.1.2 - Search Incident, Search Incident Attachment: Fix issue where the action
+  were failing on bigger results. Update Incident: Ensure non updated fields are not
+  reset during update.'
+- '7.1.1 - Create Incident: Resolved issue when nothing was passed to `additional_fields`
+  input field '
+- 7.1.0 - Add new action Create Change Request
+- 7.0.0 - Cloud enabled | Changed connection input `URL` to `instance`
+- 6.0.1 - Fix base64 decoding in Put Incident Attachment action
+- 6.0.0 - Add additional file information in output for Get Attachments for an Incident
+- 5.2.0 - Add new action Get Attachments for an Incident | Add unit test for action
+  Get Attachments for an Incident and Get Incident Attachment
+- 5.1.1 - Fix output parsing bug in Get Incident Attachment action
+- 5.1.0 - Add new Incident URL output for Create Incident action
+- 5.0.1 - Add new Additional Fields input for Create Incident and Update Incident
+  actions
+- 5.0.0 - Add input fields to Create Incident and Update Incident action instead of
+  JSON object
+- 4.1.2 - Fix input parameter in Incident Created trigger
+- 4.1.1 - Add `docs_url` to plugin spec with link to plugin setup guide
+- 4.1.0 - Add trigger Incident Created
+- 4.0.0 - New Number output to create incident action
+- 3.1.1 - New spec and help.md format for the Extension Library
+- 3.1.0 - Add action Get Incident Comments and Work Notes
+- 3.0.0 - Rewrite in Python | Renamed incident specific actions | New actions Create
+  CI, Get CI, Update CI, Search CI
+- 2.0.5 - Update descriptions
+- 2.0.4 - Regenerate with latest Go SDK to solve bug with triggers
+- 2.0.3 - Fixing the loss of metadata in action messages
+- 2.0.2 - Disable Connection Caching
+- 2.0.1 - Pull the ConnectionCacheKey update from SDK 2.6.3
+- 2.0.0 - Update to new credential types
+- 1.0.0 - Support web server mode
+- 0.1.1 - Bug fix for CI tool incorrectly uploading plugins
+- 0.1.0 - Initial plugin
 types:
   updated_vulnerability:
     sys_id:
@@ -91,7 +125,8 @@ types:
       required: true
     changed_fields:
       title: Changed Fields
-      description: JSON object representing changed fields (map of field name to previous and current values)
+      description: JSON object representing changed fields (map of field name to previous
+        and current values)
       type: object
       required: true
   comments_worknotes:
@@ -205,7 +240,8 @@ types:
       required: false
     caller:
       title: Requested By
-      description: Person requesting the work to be done. Determines suggested Location if no Affected CI is defined
+      description: Person requesting the work to be done. Determines suggested Location
+        if no Affected CI is defined
       type: link_value
       required: false
     category:
@@ -295,7 +331,8 @@ types:
       required: false
     priority:
       title: Priority
-      description: Sequence in which the security incident needs to be resolved, based on impact and urgency
+      description: Sequence in which the security incident needs to be resolved, based
+        on impact and urgency
       type: integer
       required: false
     problem:
@@ -330,7 +367,8 @@ types:
       required: false
     special_access_write:
       title: Special Access Write
-      description: Users in the 'Privileged access' list will be able to see the Security Incident, data related to it and edit all data fields on it
+      description: Users in the 'Privileged access' list will be able to see the Security
+        Incident, data related to it and edit all data fields on it
       type: string
       required: false
     state:
@@ -392,9 +430,10 @@ connection:
     example: instance
   client_login:
     title: Client Login Information
-    description: The ServiceNow username and password for basic authentication API interaction
+    description: The ServiceNow username and password for basic authentication API
+      interaction
     type: credential_username_password
-    required: true
+    required: false
     example: '{"username":"user1", "password":"mypassword"}'
   client_id:
     title: OAuth Client ID
@@ -418,11 +457,13 @@ connection:
 actions:
   create_change_request:
     title: Create Change Request
-    description: Creates a change request record based on the default change request record
+    description: Creates a change request record based on the default change request
+      record
     input:
       additional_fields:
         title: Additional Fields
-        description: JSON object containing name-value pairs for the field(s) to update in the associated change request
+        description: JSON object containing name-value pairs for the field(s) to update
+          in the associated change request
         type: object
         required: false
         example: '{"short_description": "My example short description"}'
@@ -451,7 +492,8 @@ actions:
         example: software
       subcategory:
         title: Subcategory
-        description: Subcategory code of incident (available values depends on the `Category` field)
+        description: Subcategory code of incident (available values depends on the
+          `Category` field)
         type: string
         required: false
         example: email
@@ -523,7 +565,8 @@ actions:
         example: Full details about new employee hire
       additional_fields:
         title: Additional Fields
-        description: JSON object containing the additional fields and values to create incident
+        description: JSON object containing the additional fields and values to create
+          incident
         type: object
         required: false
         example: '{"description": "incident description"}'
@@ -587,7 +630,8 @@ actions:
         description: JSON object representing the incident containing the given fields
         type: object
         required: true
-        example: '{"short_description":"Short description test","description":"Description test"}'
+        example: '{"short_description":"Short description test","description":"Description
+          test"}'
   update_incident:
     title: Update Incident
     description: Update a ServiceNow Incident with the given data
@@ -612,7 +656,8 @@ actions:
         example: hardware
       subcategory:
         title: Subcategory
-        description: Subcategory code of incident (available values depends on the `Category` field)
+        description: Subcategory code of incident (available values depends on the
+          `Category` field)
         type: string
         required: false
         example: monitor
@@ -684,7 +729,8 @@ actions:
         example: Full details about new employee hire update
       additional_fields:
         title: Additional Fields
-        description: JSON object containing the additional fields and values to update incident
+        description: JSON object containing the additional fields and values to update
+          incident
         type: object
         required: false
         example: '{"description": "incident description"}'
@@ -772,7 +818,8 @@ actions:
     input:
       name:
         title: Name
-        description: Name of the attachment, i.e. the base file name used to create it
+        description: Name of the attachment, i.e. the base file name used to create
+          it
         type: string
         required: true
         example: Example name
@@ -839,7 +886,11 @@ actions:
         description: JSON object representing the CI record returned
         type: object
         required: true
-        example: '{"firewall_status":"Intranet","operational_status":"1","sys_updated_on":"2019-06-26 20:45:21","first_discovered":"2018-05-14 18:07:23","used_for":"Production","sys_created_by":"admin","classification":"Production","can_print":"false","last_discovered":"2019-03-24 11:25:56","sys_class_name":"cmdb_ci_server","asset":{"link":"https://example.service-now.com/api/now/table/alm_asset/ff5a6a55dbdef7002e12ff00ba9619d6","value":"ff5a6a55dbdef7002e12ff00ba9619d6"},"sys_updated_by":"admin","sys_created_on":"2019-06-26 20:45:21","sys_domain":{"link":"https://example.service-now.com/api/now/table/sys_user_group/sysdomain","value":"sysdomain"},"fqdn":"fqdntest","hardware_status":"installed","install_status":"1","name":"TEST NAME","subcategory":"Computer","u_restricted_access":"false","sys_id":"375a6a55dbdef7002e12ff00ba9619d6","sys_class_path":"/!!/!G/!!/!$","mac_address":"234324234342","u_automated_patching":"false","sys_mod_count":"0","monitor":"false","ip_address":"10.0.0.1","model_id":{"link":"https://example.service-now.com/api/now/table/cmdb_model/59d4c676db0fc700553363835b961949","value":"59d4c676db0fc700553363835b961949"},"cost_cc":"USD","location":{"link":"https://example.service-now.com/api/now/table/cmn_location/US-East","value":"US-East"},"category":"Hardware","fault_count":"0"}'
+        example: '{"firewall_status":"Intranet","operational_status":"1","sys_updated_on":"2019-06-26
+          20:45:21","first_discovered":"2018-05-14 18:07:23","used_for":"Production","sys_created_by":"admin","classification":"Production","can_print":"false","last_discovered":"2019-03-24
+          11:25:56","sys_class_name":"cmdb_ci_server","asset":{"link":"https://example.service-now.com/api/now/table/alm_asset/ff5a6a55dbdef7002e12ff00ba9619d6","value":"ff5a6a55dbdef7002e12ff00ba9619d6"},"sys_updated_by":"admin","sys_created_on":"2019-06-26
+          20:45:21","sys_domain":{"link":"https://example.service-now.com/api/now/table/sys_user_group/sysdomain","value":"sysdomain"},"fqdn":"fqdntest","hardware_status":"installed","install_status":"1","name":"TEST
+          NAME","subcategory":"Computer","u_restricted_access":"false","sys_id":"375a6a55dbdef7002e12ff00ba9619d6","sys_class_path":"/!!/!G/!!/!$","mac_address":"234324234342","u_automated_patching":"false","sys_mod_count":"0","monitor":"false","ip_address":"10.0.0.1","model_id":{"link":"https://example.service-now.com/api/now/table/cmdb_model/59d4c676db0fc700553363835b961949","value":"59d4c676db0fc700553363835b961949"},"cost_cc":"USD","location":{"link":"https://example.service-now.com/api/now/table/cmn_location/US-East","value":"US-East"},"category":"Hardware","fault_count":"0"}'
   search_ci:
     title: Search CI
     description: Retrieve CI record(s) from ServiceNow based on the provided query
@@ -860,10 +911,15 @@ actions:
     output:
       servicenow_cis:
         title: ServiceNow CIs
-        description: List of JSON objects representing the CI record(s) returned by the query
+        description: List of JSON objects representing the CI record(s) returned by
+          the query
         type: '[]object'
         required: true
-        example: '[{"firewall_status":"Intranet","operational_status":"1","sys_updated_on":"2019-06-26 20:45:21","first_discovered":"2018-05-14 18:07:23","used_for":"Production","sys_created_by":"admin","classification":"Production","can_print":"false","last_discovered":"2019-03-24 11:25:56","sys_class_name":"cmdb_ci_server","cd_rom":"false","unverified":"false","asset":{"link":"https://example.service-now.com/api/now/table/alm_asset/ff5a6a55dbdef7002e12ff00ba9619d6","value":"ff5a6a55dbdef7002e12ff00ba9619d6"},"skip_sync":"false","sys_updated_by":"admin","sys_created_on":"2019-06-26 20:45:21","sys_domain":{"link":"https://example.service-now.com/api/now/table/sys_user_group/sysdomain","value":"sysdomain"},"fqdn":"fqdntest","hardware_status":"installed","install_status":"1","name":"TEST NAME","subcategory":"Computer","u_restricted_access":"false","virtual":"false","sys_id":"375a6a55dbdef7002e12ff00ba9619d6","sys_class_path":"/!!/!G/!!/!$","mac_address":"234324234342","u_automated_patching":"false","sys_mod_count":"0","monitor":"false","ip_address":"10.0.0.1","model_id":{"link":"https://example.service-now.com/api/now/table/cmdb_model/59d4c676db0fc700553363835b961949","value":"59d4c676db0fc700553363835b961949"},"cost_cc":"USD","location":{"link":"https://example.service-now.com/api/now/table/cmn_location/US-East","value":"US-East"},"category":"Hardware","fault_count":"0"}]'
+        example: '[{"firewall_status":"Intranet","operational_status":"1","sys_updated_on":"2019-06-26
+          20:45:21","first_discovered":"2018-05-14 18:07:23","used_for":"Production","sys_created_by":"admin","classification":"Production","can_print":"false","last_discovered":"2019-03-24
+          11:25:56","sys_class_name":"cmdb_ci_server","cd_rom":"false","unverified":"false","asset":{"link":"https://example.service-now.com/api/now/table/alm_asset/ff5a6a55dbdef7002e12ff00ba9619d6","value":"ff5a6a55dbdef7002e12ff00ba9619d6"},"skip_sync":"false","sys_updated_by":"admin","sys_created_on":"2019-06-26
+          20:45:21","sys_domain":{"link":"https://example.service-now.com/api/now/table/sys_user_group/sysdomain","value":"sysdomain"},"fqdn":"fqdntest","hardware_status":"installed","install_status":"1","name":"TEST
+          NAME","subcategory":"Computer","u_restricted_access":"false","virtual":"false","sys_id":"375a6a55dbdef7002e12ff00ba9619d6","sys_class_path":"/!!/!G/!!/!$","mac_address":"234324234342","u_automated_patching":"false","sys_mod_count":"0","monitor":"false","ip_address":"10.0.0.1","model_id":{"link":"https://example.service-now.com/api/now/table/cmdb_model/59d4c676db0fc700553363835b961949","value":"59d4c676db0fc700553363835b961949"},"cost_cc":"USD","location":{"link":"https://example.service-now.com/api/now/table/cmn_location/US-East","value":"US-East"},"category":"Hardware","fault_count":"0"}]'
   create_ci:
     title: Create CI
     description: Create a new ServiceNow CI record
@@ -876,7 +932,8 @@ actions:
         example: catalog_category_request
       create_data:
         title: Create Data
-        description: JSON object containing the fields and values to create a new CI
+        description: JSON object containing the fields and values to create a new
+          CI
         type: object
         required: true
         example: '{"Description": "Bug report", "ID": "58", "date": "2021-08-20 18:12:00"}'
@@ -905,7 +962,8 @@ actions:
         example: 9de5069c5afe602b2ea0a04b66beb2c0
       update_data:
         title: Update Data
-        description: JSON object containing the fields and values to perform a CI update
+        description: JSON object containing the fields and values to perform a CI
+          update
         type: object
         required: true
         example: '{"Description": "Bug report", "ID": "58"}'
@@ -922,19 +980,20 @@ actions:
     input:
       system_id:
         title: System ID
-        description: System ID of Incident record for which comments and work notes will be retrieved
+        description: System ID of Incident record for which comments and work notes
+          will be retrieved
         type: string
         required: true
         example: 9de5069c5afe602b2ea0a04b66beb2c0
       type:
-        title:  Type
+        title: Type
         description: Type of output to be retrieved
         type: string
         required: true
         enum:
-          - all
-          - comments
-          - work notes
+        - all
+        - comments
+        - work notes
         example: all
     output:
       incident_comments_worknotes:
@@ -942,7 +1001,13 @@ actions:
         description: List of comments and work notes for an incident
         type: '[]comments_worknotes'
         required: true
-        example: '[{"sys_id":"2c6420c31b0000506a4a85507e4bcb82","sys_created_on":"2019-09-26 21:19:11","name":"incident","element_id":"965f140bdb4c8c105f6f00b5ca961922","sys_tags":"","value":"Team is actively looking into it.","sys_created_by":"admin","element":"work_notes"},{"sys_id":"4db0e8cb1bcccc106a4a85507e4bcba2","sys_created_on":"2019-09-26 21:03:07","name":"incident","element_id":"965f140bdb4c8c105f6f00b5ca961922","sys_tags":"","value":"This is Sev1 incident.","sys_created_by":"admin","element":"comments"},{"sys_id":"f92024471b0000506a4a85507e4bcb78","sys_created_on":"2019-09-26 21:00:43","name":"incident","element_id":"965f140bdb4c8c105f6f00b5ca961922","sys_tags":"","value":"Testing comments","sys_created_by":"admin","element":"comments"}]'
+        example: '[{"sys_id":"2c6420c31b0000506a4a85507e4bcb82","sys_created_on":"2019-09-26
+          21:19:11","name":"incident","element_id":"965f140bdb4c8c105f6f00b5ca961922","sys_tags":"","value":"Team
+          is actively looking into it.","sys_created_by":"admin","element":"work_notes"},{"sys_id":"4db0e8cb1bcccc106a4a85507e4bcba2","sys_created_on":"2019-09-26
+          21:03:07","name":"incident","element_id":"965f140bdb4c8c105f6f00b5ca961922","sys_tags":"","value":"This
+          is Sev1 incident.","sys_created_by":"admin","element":"comments"},{"sys_id":"f92024471b0000506a4a85507e4bcb78","sys_created_on":"2019-09-26
+          21:00:43","name":"incident","element_id":"965f140bdb4c8c105f6f00b5ca961922","sys_tags":"","value":"Testing
+          comments","sys_created_by":"admin","element":"comments"}]'
   get_attachments_for_an_incident:
     title: Get Attachments for an Incident
     description: Search for attachments for a given incident ID
@@ -957,7 +1022,7 @@ actions:
       incident_attachments:
         title: Incident Attachments
         description: List of attachments for a given incident ID
-        type: "[]attachment_file"
+        type: '[]attachment_file'
         required: false
         example: '[{"content":"9de5069c5afe602b2ea0a04b66beb2c0","content_type":"text/plain","file_name":"example.txt"}]'
   create_vulnerability:
@@ -975,8 +1040,8 @@ actions:
         description: The state of the vulnerability
         type: string
         enum:
-          - Open
-          - Under Investigation
+        - Open
+        - Under Investigation
         required: false
         example: Open
       source:
@@ -987,7 +1052,8 @@ actions:
         example: ExampleSource
       vulnerability:
         title: Vulnerability
-        description: The reference of the found vulnerability (third-party vulnerability entry)
+        description: The reference of the found vulnerability (third-party vulnerability
+          entry)
         type: string
         required: false
         example: 9de5069c5afe602b2ea0a04b66beb2c0
@@ -1005,13 +1071,15 @@ actions:
         example: dns.example.com
       first_found:
         title: First Found
-        description: The time that represents the vulnerability was first found, in ISO format
+        description: The time that represents the vulnerability was first found, in
+          ISO format
         type: date
         required: false
         example: 2023-04-28T15:48:07
       last_found:
         title: Last Found
-        description: The time that represents when the vulnerability was last found, in ISO format
+        description: The time that represents when the vulnerability was last found,
+          in ISO format
         type: date
         required: false
         example: 2023-04-30T12:14:10
@@ -1029,7 +1097,8 @@ actions:
         example: Example short description
       additional_fields:
         title: Additional Fields
-        description: JSON object containing the additional fields and values to create the vulnerability
+        description: JSON object containing the additional fields and values to create
+          the vulnerability
         type: object
         required: false
         example: '{"description": "Example description"}'
@@ -1051,7 +1120,7 @@ actions:
         description: URL to newly created vulnerability
         type: string
         required: true
-        example: "https://example.service-now.com/sn_vul_vulnerable_item.do?sys_id=61..."
+        example: https://example.service-now.com/sn_vul_vulnerable_item.do?sys_id=61...
   get_vulnerability:
     title: Get Vulnerability
     description: Retrieve the vulnerability by ID
@@ -1072,7 +1141,8 @@ actions:
     output:
       filtered_vulnerability:
         title: Filtered Vulnerability
-        description: JSON object representing the vulnerability containing the given fields
+        description: JSON object representing the vulnerability containing the given
+          fields
         type: object
         required: true
         example: '{"number":"1","opened_by":{"link":"https://example.service-now.com/api/now/table/sys...","value":""},"state":"1"}'
@@ -1097,9 +1167,9 @@ actions:
         description: The state of the vulnerability
         type: string
         enum:
-          - ""
-          - Open
-          - Under Investigation
+        - ''
+        - Open
+        - Under Investigation
         required: false
         example: Open
       source:
@@ -1122,13 +1192,15 @@ actions:
         example: dns.example.com
       first_found:
         title: First Found
-        description: The time that represents the vulnerability was first found, in ISO format
+        description: The time that represents the vulnerability was first found, in
+          ISO format
         type: date
         required: false
         example: 2023-04-28T15:48:07
       last_found:
         title: Last Found
-        description: The time that represents when the vulnerability was last found, in ISO format
+        description: The time that represents when the vulnerability was last found,
+          in ISO format
         type: date
         required: false
         example: 2023-04-30T12:14:10
@@ -1146,7 +1218,8 @@ actions:
         example: Example short description
       additional_fields:
         title: Additional Fields
-        description: JSON object containing the additional fields and values to update the vulnerability item
+        description: JSON object containing the additional fields and values to update
+          the vulnerability item
         type: object
         required: false
         example: '{"description": "Example description"}'
@@ -1190,7 +1263,12 @@ actions:
         description: Details of the security incident
         type: security_incident
         required: false
-        example: '{"active":false,"activity_due":"2023-07-28 10:18:55","affected_user":{"link":"example.com/1234","value":"1234"},"alert_id":"dca801f11b1cb5506bf1ed78b04bcb5f","alert_rule":"test","alert_sensor":{"link":"example.com/1234","value":"1234"},"assigned_to":{"link":"example.com/1234","value":"1234"},"assignment_group":{"link":"example.com/1234","value":"1234"},"business_criticality":3,"caller":{"link":"example.com/1234","value":"1234"},"category":"Phishing","close_code":-100,"close_notes":"test close notes","closed_at":"2023-08-01 08:03:28","closed_by":{"link":"example.com/1234","value":"1234"},"cmdb_ci":{"link":"example.com/1234","value":"1234"},"contact_type":"phone","description":"example description","location":{"link":"example.com/1234","value":"1234"},"number":"SIR00000001","opened_at":"2023-07-28 10:18:55","opened_by":{"link":"example.com/1234","value":"1234"},"opened_for":{"link":"example.com/1234","value":"1234"},"priority":4,"risk_score":38,"risk_score_override":false,"secure_notes":"﷠﷡﷢56715c0aff1331007a6dffffffffff54﷌﷍CzXu70QS9L8TfvWt92rByQ==","security_tags":"dca801f11b1cb5506bf1ed78b04bcb5f","short_description":"test","special_access_write":"dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g","state":3,"subcategory":"25","substate":1,"sys_created_by":"user","sys_created_on":"2023-07-28 10:18:55","sys_id":"g123456","sys_updated_by":"user","sys_updated_on":"2023-08-01 08:03:32","watch_list":"dca801f11b1cb5506bf1ed78b04bcb5f","work_notes_list":"dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g"}'
+        example: '{"active":false,"activity_due":"2023-07-28 10:18:55","affected_user":{"link":"example.com/1234","value":"1234"},"alert_id":"dca801f11b1cb5506bf1ed78b04bcb5f","alert_rule":"test","alert_sensor":{"link":"example.com/1234","value":"1234"},"assigned_to":{"link":"example.com/1234","value":"1234"},"assignment_group":{"link":"example.com/1234","value":"1234"},"business_criticality":3,"caller":{"link":"example.com/1234","value":"1234"},"category":"Phishing","close_code":-100,"close_notes":"test
+          close notes","closed_at":"2023-08-01 08:03:28","closed_by":{"link":"example.com/1234","value":"1234"},"cmdb_ci":{"link":"example.com/1234","value":"1234"},"contact_type":"phone","description":"example
+          description","location":{"link":"example.com/1234","value":"1234"},"number":"SIR00000001","opened_at":"2023-07-28
+          10:18:55","opened_by":{"link":"example.com/1234","value":"1234"},"opened_for":{"link":"example.com/1234","value":"1234"},"priority":4,"risk_score":38,"risk_score_override":false,"secure_notes":"﷠﷡﷢56715c0aff1331007a6dffffffffff54﷌﷍CzXu70QS9L8TfvWt92rByQ==","security_tags":"dca801f11b1cb5506bf1ed78b04bcb5f","short_description":"test","special_access_write":"dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g","state":3,"subcategory":"25","substate":1,"sys_created_by":"user","sys_created_on":"2023-07-28
+          10:18:55","sys_id":"g123456","sys_updated_by":"user","sys_updated_on":"2023-08-01
+          08:03:32","watch_list":"dca801f11b1cb5506bf1ed78b04bcb5f","work_notes_list":"dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g"}'
   delete_security_incident:
     title: Delete Security Incident
     description: Deletes a security incident by sys_id
@@ -1242,7 +1320,18 @@ actions:
         description: Details of the matching security incidents
         type: '[]security_incident'
         required: false
-        example: '[{"active":false,"activity_due":"2023-07-28 10:18:55","affected_user":{"link":"example.com/1234","value":"1234"},"alert_id":"dca801f11b1cb5506bf1ed78b04bcb5f","alert_rule":"test","alert_sensor":{"link":"example.com/1234","value":"1234"},"assigned_to":{"link":"example.com/1234","value":"1234"},"assignment_group":{"link":"example.com/1234","value":"1234"},"business_criticality":3,"caller":{"link":"example.com/1234","value":"1234"},"category":"Phishing","close_code":-100,"close_notes":"test close notes","closed_at":"2023-08-01 08:03:28","closed_by":{"link":"example.com/1234","value":"1234"},"cmdb_ci":{"link":"example.com/1234","value":"1234"},"contact_type":"phone","description":"example description","location":{"link":"example.com/1234","value":"1234"},"number":"SIR00000002","opened_at":"2023-07-28 10:18:55","opened_by":{"link":"example.com/1234","value":"1234"},"opened_for":{"link":"example.com/1234","value":"1234"},"priority":3,"risk_score":38,"risk_score_override":false,"secure_notes":"﷠﷡﷢56715c0aff1331007a6dffffffffff54﷌﷍CzXu70QS9L8TfvWt92rByQ==","security_tags":"dca801f11b1cb5506bf1ed78b04bcb5f","short_description":"test","special_access_write":"dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g","state":3,"subcategory":"25","substate":1,"sys_created_by":"user","sys_created_on":"2023-07-28 10:18:55","sys_id":"g12345678","sys_updated_by":"user","sys_updated_on":"2023-08-01 08:03:32","watch_list":"dca801f11b1cb5506bf1ed78b04bcb5f","work_notes_list":"dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g"},{"active":false,"activity_due":"2023-07-28 10:18:55","affected_user":{"link":"example.com/1234","value":"1234"},"alert_id":"dca801f11b1cb5506bf1ed78b04bcb5f","alert_rule":"test","alert_sensor":{"link":"example.com/1234","value":"1234"},"assigned_to":{"link":"example.com/1234","value":"1234"},"assignment_group":{"link":"example.com/1234","value":"1234"},"business_criticality":3,"caller":{"link":"example.com/1234","value":"1234"},"category":"Phishing","close_code":-100,"close_notes":"test close notes","closed_at":"2023-08-01 08:03:28","closed_by":{"link":"example.com/1234","value":"1234"},"cmdb_ci":{"link":"example.com/1234","value":"1234"},"contact_type":"phone","description":"example description","location":{"link":"example.com/1234","value":"1234"},"number":"SIR00000003","opened_at":"2023-07-28 10:18:55","opened_by":{"link":"example.com/1234","value":"1234"},"opened_for":{"link":"example.com/1234","value":"1234"},"priority":3,"risk_score":38,"risk_score_override":false,"secure_notes":"﷠﷡﷢56715c0aff1331007a6dffffffffff54﷌﷍CzXu70QS9L8TfvWt92rByQ==","security_tags":"dca801f11b1cb5506bf1ed78b04bcb5f","short_description":"test","special_access_write":"dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g","state":3,"subcategory":"25","substate":1,"sys_created_by":"user","sys_created_on":"2023-07-28 10:18:55","sys_id":"g123456789","sys_updated_by":"user","sys_updated_on":"2023-08-01 08:03:32","watch_list":"dca801f11b1cb5506bf1ed78b04bcb5f","work_notes_list":"dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g"}]'
+        example: '[{"active":false,"activity_due":"2023-07-28 10:18:55","affected_user":{"link":"example.com/1234","value":"1234"},"alert_id":"dca801f11b1cb5506bf1ed78b04bcb5f","alert_rule":"test","alert_sensor":{"link":"example.com/1234","value":"1234"},"assigned_to":{"link":"example.com/1234","value":"1234"},"assignment_group":{"link":"example.com/1234","value":"1234"},"business_criticality":3,"caller":{"link":"example.com/1234","value":"1234"},"category":"Phishing","close_code":-100,"close_notes":"test
+          close notes","closed_at":"2023-08-01 08:03:28","closed_by":{"link":"example.com/1234","value":"1234"},"cmdb_ci":{"link":"example.com/1234","value":"1234"},"contact_type":"phone","description":"example
+          description","location":{"link":"example.com/1234","value":"1234"},"number":"SIR00000002","opened_at":"2023-07-28
+          10:18:55","opened_by":{"link":"example.com/1234","value":"1234"},"opened_for":{"link":"example.com/1234","value":"1234"},"priority":3,"risk_score":38,"risk_score_override":false,"secure_notes":"﷠﷡﷢56715c0aff1331007a6dffffffffff54﷌﷍CzXu70QS9L8TfvWt92rByQ==","security_tags":"dca801f11b1cb5506bf1ed78b04bcb5f","short_description":"test","special_access_write":"dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g","state":3,"subcategory":"25","substate":1,"sys_created_by":"user","sys_created_on":"2023-07-28
+          10:18:55","sys_id":"g12345678","sys_updated_by":"user","sys_updated_on":"2023-08-01
+          08:03:32","watch_list":"dca801f11b1cb5506bf1ed78b04bcb5f","work_notes_list":"dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g"},{"active":false,"activity_due":"2023-07-28
+          10:18:55","affected_user":{"link":"example.com/1234","value":"1234"},"alert_id":"dca801f11b1cb5506bf1ed78b04bcb5f","alert_rule":"test","alert_sensor":{"link":"example.com/1234","value":"1234"},"assigned_to":{"link":"example.com/1234","value":"1234"},"assignment_group":{"link":"example.com/1234","value":"1234"},"business_criticality":3,"caller":{"link":"example.com/1234","value":"1234"},"category":"Phishing","close_code":-100,"close_notes":"test
+          close notes","closed_at":"2023-08-01 08:03:28","closed_by":{"link":"example.com/1234","value":"1234"},"cmdb_ci":{"link":"example.com/1234","value":"1234"},"contact_type":"phone","description":"example
+          description","location":{"link":"example.com/1234","value":"1234"},"number":"SIR00000003","opened_at":"2023-07-28
+          10:18:55","opened_by":{"link":"example.com/1234","value":"1234"},"opened_for":{"link":"example.com/1234","value":"1234"},"priority":3,"risk_score":38,"risk_score_override":false,"secure_notes":"﷠﷡﷢56715c0aff1331007a6dffffffffff54﷌﷍CzXu70QS9L8TfvWt92rByQ==","security_tags":"dca801f11b1cb5506bf1ed78b04bcb5f","short_description":"test","special_access_write":"dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g","state":3,"subcategory":"25","substate":1,"sys_created_by":"user","sys_created_on":"2023-07-28
+          10:18:55","sys_id":"g123456789","sys_updated_by":"user","sys_updated_on":"2023-08-01
+          08:03:32","watch_list":"dca801f11b1cb5506bf1ed78b04bcb5f","work_notes_list":"dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g"}]'
   create_security_incident:
     title: Create Security Incident
     description: Create a new security incident
@@ -1261,7 +1350,8 @@ actions:
         example: Full description
       caller:
         title: Requested By
-        description: The user ID, email or system ID of the person requesting the work to be done
+        description: The user ID, email or system ID of the person requesting the
+          work to be done
         type: string
         required: false
         example: user@example.com
@@ -1273,7 +1363,8 @@ actions:
         example: Example CI
       affected_user:
         title: Affected User
-        description: The user ID, email or system ID of the user related to this security incident
+        description: The user ID, email or system ID of the user related to this security
+          incident
         type: string
         required: false
         example: jsmith
@@ -1291,7 +1382,8 @@ actions:
         example: malware
       subcategory:
         title: Subcategory
-        description: The code of the security incident subcategory (available values depends on the `Category` field)
+        description: The code of the security incident subcategory (available values
+          depends on the `Category` field)
         type: string
         required: false
         example: ransomware
@@ -1315,7 +1407,8 @@ actions:
         example: email
       priority:
         title: Priority
-        description: The code of the priority in which an Incident needs to be resolved, based on impact and urgency
+        description: The code of the priority in which an Incident needs to be resolved,
+          based on impact and urgency
         type: integer
         required: false
         example: 3
@@ -1327,16 +1420,19 @@ actions:
         example: Example Group
       assigned_to:
         title: Assigned To
-        description: The name, user ID, email or system id of the person primarily responsible for working this task
+        description: The name, user ID, email or system id of the person primarily
+          responsible for working this task
         type: string
         required: false
         example: test_user
       additional_fields:
         title: Additional Fields
-        description: JSON object containing the additional fields and values to create security incident
+        description: JSON object containing the additional fields and values to create
+          security incident
         type: object
         required: false
-        example: '{"risk_score": 40, "risk_score_override": true, "parent_security_incident": "SIR0010010"}'
+        example: '{"risk_score": 40, "risk_score_override": true, "parent_security_incident":
+          "SIR0010010"}'
     output:
       system_id:
         title: System ID
@@ -1374,7 +1470,8 @@ actions:
         example: Full description
       caller:
         title: Requested By
-        description: The user ID, email or system ID of the person requesting the work to be done
+        description: The user ID, email or system ID of the person requesting the
+          work to be done
         type: string
         required: false
         example: user@example.com
@@ -1386,7 +1483,8 @@ actions:
         example: Example CI
       affected_user:
         title: Affected User
-        description: The user ID, email or system ID of the user related to this security incident
+        description: The user ID, email or system ID of the user related to this security
+          incident
         type: string
         required: false
         example: jsmith
@@ -1404,7 +1502,8 @@ actions:
         example: malware
       subcategory:
         title: Subcategory
-        description: The code of the security incident subcategory (available values depends on the `Category` field)
+        description: The code of the security incident subcategory (available values
+          depends on the `Category` field)
         type: string
         required: false
         example: ransomware
@@ -1428,7 +1527,8 @@ actions:
         example: email
       priority:
         title: Priority
-        description: The code of the priority in which an Incident needs to be resolved, based on impact and urgency
+        description: The code of the priority in which an Incident needs to be resolved,
+          based on impact and urgency
         type: integer
         required: false
         example: 3
@@ -1440,7 +1540,8 @@ actions:
         example: Example Group
       assigned_to:
         title: Assigned To
-        description: The name, user ID, email or system id of the person primarily responsible for working this task
+        description: The name, user ID, email or system id of the person primarily
+          responsible for working this task
         type: string
         required: false
         example: test_user
@@ -1458,10 +1559,12 @@ actions:
         example: Example notes
       additional_fields:
         title: Additional Fields
-        description: JSON object containing the additional fields and values to update security incident
+        description: JSON object containing the additional fields and values to update
+          security incident
         type: object
         required: false
-        example: '{"risk_score": 40, "risk_score_override": true, "parent_security_incident": "SIR0010010"}'
+        example: '{"risk_score": 40, "risk_score_override": true, "parent_security_incident":
+          "SIR0010010"}'
     output:
       system_id:
         title: System ID
@@ -1483,7 +1586,7 @@ triggers:
       system_ids:
         title: System IDs
         description: List of system IDs of the incident records to monitor
-        type: "[]string"
+        type: '[]string'
         required: false
         example: '["9de5069c5afe602b2ea0a04b66beb2c0"]'
       monitored_fields:
@@ -1508,17 +1611,20 @@ triggers:
         example: 280b3cb71b9f1450c9768622dd4bcb32
       changed_fields:
         title: Changed Fields
-        description: JSON object representing changed fields (map of field name to previous and current values)
+        description: JSON object representing changed fields (map of field name to
+          previous and current values)
         type: object
         required: true
-        example: '{"description":{"previous":"Description 1","current":"Description 2"}}'
+        example: '{"description":{"previous":"Description 1","current":"Description
+          2"}}'
   incident_created:
     title: Incident Created
     description: Identifies if a new incident has been created
     input:
       query:
         title: Query
-        description: Non-encoded query string to match new incident records (will poll for any new incident if query is omitted)
+        description: Non-encoded query string to match new incident records (will
+          poll for any new incident if query is omitted)
         type: string
         required: false
         example: short_description=Newbug
@@ -1543,7 +1649,7 @@ triggers:
       system_ids:
         title: System IDs
         description: List of system IDs of the vulnerability record to monitor
-        type: "[]string"
+        type: '[]string'
         required: true
         example: '["9de5069c5afe602b2ea0a04b66beb2c0"]'
       monitored_fields:
@@ -1562,7 +1668,11 @@ triggers:
     output:
       updated_vulnerabilities:
         title: Changed Fields
-        description: List of JSON objects containing the system ID of the updated vulnerability and representation of the changed fields (map of field name from previous to current values)
-        type: "[]updated_vulnerability"
+        description: List of JSON objects containing the system ID of the updated
+          vulnerability and representation of the changed fields (map of field name
+          from previous to current values)
+        type: '[]updated_vulnerability'
         required: true
-        example: '{"updated_vulnerabilities": [{"system_id": "9de5069c5afe602b2ea0a04b66beb2c0", "changed_fields": {"description":{"previous":"Description 1","current":"Description 2"}}}]}'
+        example: '{"updated_vulnerabilities": [{"system_id": "9de5069c5afe602b2ea0a04b66beb2c0",
+          "changed_fields": {"description":{"previous":"Description 1","current":"Description
+          2"}}}]}'

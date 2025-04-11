@@ -4,32 +4,25 @@ import sys
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 from komand_ssh.actions.run import Run
-from komand_ssh.actions.run.schema import Output
+from komand_ssh.actions.run.schema import Input, Output
 
 from util import Util
+
+STUB_PARAMETERS = {Input.HOST: "example.com", Input.COMMAND: "ls -l"}
 
 
 class TestRun(TestCase):
     def setUp(self):
-        self.action = Run()
-        self.params = {
-            "host": "example.com",
-            "command": "ls -l",
-        }
-        self.action.connection = Util.default_connector()
+        self.action = Util.default_connector(Run())
 
-    def mock_execute_command(self):
-        file1 = open("./ssh/unit_test/results", "r")
-        return file1, file1, file1
-
-    @patch("paramiko.SSHClient.set_missing_host_key_policy", return_value=None)
-    @patch("paramiko.SSHClient.load_system_host_keys", return_value=None)
     @patch("paramiko.SSHClient.connect", return_value=None)
-    @patch("paramiko.SSHClient.exec_command", side_effect=mock_execute_command)
-    def test_run(self, mock_key_policy, mock_host_keys, mock_connect, mock_exec):
+    @patch("paramiko.SSHClient.exec_command", side_effect=Util.mock_execute_command)
+    def test_run(self, mock_connect: MagicMock, mock_exec: MagicMock) -> None:
+        response = self.action.run(STUB_PARAMETERS)
         expected = {Output.RESULTS: {"stdout": "/home/vagrant", "stderr": "", "all_output": "/home/vagrant"}}
-        actual = self.action.run(self.params)
-        self.assertEqual(actual, expected)
+        self.assertEqual(response, expected)
+        mock_connect.assert_called()
+        mock_exec.assert_called()

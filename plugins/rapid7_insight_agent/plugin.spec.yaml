@@ -3,10 +3,12 @@ extension: plugin
 products: [insightconnect]
 name: rapid7_insight_agent
 title: Rapid7 Insight Agent
-description: Using the Insight Agent plugin from InsightConnect, you can quarantine, unquarantine and monitor potentially malicious IPs, addresses, hostnames, and devices across your organization
-version: 3.0.1
+description: Using the Insight Agent plugin from InsightConnect, you can quarantine,
+  unquarantine and monitor potentially malicious IPs, addresses, hostnames, and devices
+  across your organization
+version: 3.0.3
 connection_version: 2
-supported_versions: ["Rapid7 Insight Agent 2024-08-23"]
+supported_versions: [Rapid7 Insight Agent 2024-08-23]
 vendor: rapid7
 support: rapid7
 status: []
@@ -14,64 +16,85 @@ cloud_ready: true
 fedramp_ready: true
 sdk:
   type: slim
-  version: 6.2.2
+  version: 6.2.5
   user: nobody
 key_features:
-  - "The agent is used by [Rapid7 InsightIDR](https://www.rapid7.com/products/insightidr/) and [InsightVM](https://www.rapid7.com/products/insightvm/) customers to monitor endpoints."
+- The agent is used by [Rapid7 InsightIDR](https://www.rapid7.com/products/insightidr/)
+  and [InsightVM](https://www.rapid7.com/products/insightvm/) customers to monitor
+  endpoints.
 requirements:
-  - "[Platform API Key](https://docs.rapid7.com/insight/managing-platform-api-keys/)"
-  - "Administrator access to InsightIDR"
-troubleshooting: "If the actions `Get Agent Details` and `Get All Agents by IP` return a `next cursor` value, it is an indication that more pages of data are available to be reviewed. In this instance, it is recommended to run the action multiple times and pass the `next cursor` value, recording all agents found."
+- '[Platform API Key](https://docs.rapid7.com/insight/managing-platform-api-keys/)'
+- Administrator access to InsightIDR
+troubleshooting:
+- If the actions `Get Agent Details` and `Get All Agents by IP` return a `next cursor`
+  value, it is an indication that more pages of data are available to be reviewed.
+  In this instance, it is recommended to run the action multiple times and pass the
+  `next cursor` value, recording all agents found.
 links:
-  - "[Rapid7 Insight Agent](https://docs.rapid7.com/insight-agent/overview/)"
+- '[Rapid7 Insight Agent](https://docs.rapid7.com/insight-agent/overview/)'
 references:
-  - "[Manage Platform API Keys](https://docs.rapid7.com/insight/managing-platform-api-keys/)"
+- '[Manage Platform API Keys](https://docs.rapid7.com/insight/managing-platform-api-keys/)'
 version_history:
-  - "3.0.1 - Update 'Get Agent Details' to allow no assets to be returned | SDK bump to latest version"
-  - "3.0.0 - Update `Get Agent Details` and `Get All Agents by IP` to return the next page token if more pages are available to search | Update `Get Agent Details` to return agent location details | Initial updates for fedramp compliance | Updated SDK to the latest version"
-  - "2.1.2 - Improve logging | Update SDK"
-  - "2.1.1 - `Get All Agents by IP Address`: Fixed issue where action failed when agent did not have a primary address, and extended output to include agent location details | `Get Agent Details`: Extended output to include agent's public IP address and location"
-  - "2.1.0 - Updated SDK to the latest version | New action added `Get All Agents by IP Address`"
-  - "2.0.1 - Update `Connection Test` to identify if `Region` is incorrect  | Update Plugin runtime to version 5"
-  - "2.0.0 - Update action `Quarantine Multiple` outputs to Completed and Failed, removed All Operations Successful, replaced output Agent IDs with Hostname"
-  - "1.2.0 - New action: `Quarantine Multiple`"
-  - "1.1.1 - Quarantine: Fix incorrect behavior for unquarantine when the agent ID is wrong"
-  - "1.1.0 - Cloud enabled"
-  - "1.0.4 - Add new supported regions for API | Create unit tests for actions Check Agent Status, Quarantine, Get Agent Details"
-  - "1.0.3 - Documentation update"
-  - "1.0.2 - Fix for a case-sensitive agent hostname"
-  - "1.0.1 - Documentation update"
-  - "1.0.0 - Initial plugin"
+- 3.0.3 - Updated SDK to the latest version (6.2.5)
+- '3.0.2 - Updated to use latest buildpack to address vulnerabilities | Update `Get
+  Agent Details`:  extended output to include `agent` field when no assets are found'
+- 3.0.1 - Update 'Get Agent Details' to allow no assets to be returned | SDK bump
+  to latest version
+- 3.0.0 - Update `Get Agent Details` and `Get All Agents by IP` to return the next
+  page token if more pages are available to search | Update `Get Agent Details` to
+  return agent location details | Initial updates for fedramp compliance | Updated
+  SDK to the latest version
+- 2.1.2 - Improve logging | Update SDK
+- "2.1.1 - `Get All Agents by IP Address`: Fixed issue where action failed when agent\
+  \ did not have a primary address, and extended output to include agent location\
+  \ details | `Get Agent Details`: Extended output to include agent's public IP address\
+  \ and location"
+- 2.1.0 - Updated SDK to the latest version | New action added `Get All Agents by
+  IP Address`
+- 2.0.1 - Update `Connection Test` to identify if `Region` is incorrect  | Update
+  Plugin runtime to version 5
+- 2.0.0 - Update action `Quarantine Multiple` outputs to Completed and Failed, removed
+  All Operations Successful, replaced output Agent IDs with Hostname
+- '1.2.0 - New action: `Quarantine Multiple`'
+- '1.1.1 - Quarantine: Fix incorrect behavior for unquarantine when the agent ID is
+  wrong'
+- 1.1.0 - Cloud enabled
+- 1.0.4 - Add new supported regions for API | Create unit tests for actions Check
+  Agent Status, Quarantine, Get Agent Details
+- 1.0.3 - Documentation update
+- 1.0.2 - Fix for a case-sensitive agent hostname
+- 1.0.1 - Documentation update
+- 1.0.0 - Initial plugin
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_insight_agent
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.rapid7.com
   docs_url: https://docs.rapid7.com/insightconnect/insight-agent
 tags:
-  - rapid7
-  - agent
-  - insight
-  - edr
-  - endpoint
-  - detection
-  - response
-  - idr
-  - ivm
+- rapid7
+- agent
+- insight
+- edr
+- endpoint
+- detection
+- response
+- idr
+- ivm
 hub_tags:
   use_cases: [threat_detection_and_response]
-  keywords: [rapid7, endpoint, incident_response, detection,  insightidr, cloud_enabled]
+  keywords: [rapid7, endpoint, incident_response, detection, insightidr, cloud_enabled]
   features: []
 types:
   attribute:
     key:
-      title: "Key"
+      title: Key
       type: string
-      description: "Key"
+      description: Key
       required: false
     value:
-      title: "Value"
+      title: Value
       type: string
-      description: "Value"
+      description: Value
       required: false
   quarantineState_object:
     currentState:
@@ -126,7 +149,7 @@ types:
   host:
     attributes:
       title: Attributes
-      type: "[]attribute"
+      type: '[]attribute'
       description: Attributes
       required: false
     description:
@@ -136,7 +159,7 @@ types:
       required: false
     hostNames:
       title: Hostnames
-      type: "[]hostName"
+      type: '[]hostName'
       description: Hostnames
       required: false
     primaryAddress:
@@ -146,7 +169,7 @@ types:
       required: false
     uniqueIdentity:
       title: Unique Identity
-      type: "[]uniqueIdentity_object"
+      type: '[]uniqueIdentity_object'
       description: Unique identity
       required: false
     vendor:
@@ -242,13 +265,13 @@ connection:
     example: United States
     required: true
     enum:
-      - United States
-      - United States 2
-      - United States 3
-      - Europe
-      - Canada
-      - Australia
-      - Japan
+    - United States
+    - United States 2
+    - United States 3
+    - Europe
+    - Canada
+    - Australia
+    - Japan
 actions:
   quarantine_multiple:
     title: Quarantine Multiple
@@ -257,12 +280,13 @@ actions:
       agent_array:
         title: Agent Array
         description: Agent hostnames to quarantine or unquarantine
-        type: "[]string"
+        type: '[]string'
         required: true
-        example: ["abcdef123", "abcdef123"]
+        example: [abcdef123, abcdef123]
       interval:
         title: Interval
-        description: Length of time in seconds to try to take action on a device. This is also called Advertisement Period
+        description: Length of time in seconds to try to take action on a device.
+          This is also called Advertisement Period
         type: int
         default: 604800
         example: 604800
@@ -278,28 +302,32 @@ actions:
       failed:
         title: Failed
         description: List of unsuccessfully quarantined hosts
-        type: "[]quarantine_multiple_error"
-        example: [{"hostname": "abcdef123", "error": "Hostname could not be found"}]
+        type: '[]quarantine_multiple_error'
+        example: [{hostname: abcdef123, error: Hostname could not be found}]
         required: false
       completed:
         title: Completed
         description: List of successfully quarantined hosts
-        type: "[]string"
-        example: ["abcdef123"]
+        type: '[]string'
+        example: [abcdef123]
         required: false
   get_agent_details:
     title: Get Agent Details
-    description: Find and display detailed information about a device. If additional pages of agents are available, the action should be run again with the returned next cursor
+    description: Find and display detailed information about a device. If additional
+      pages of agents are available, the action should be run again with the returned
+      next cursor
     input:
       agent:
         title: Agent
-        description: IP address, MAC address, or hostname of the device to get information from
+        description: IP address, MAC address, or hostname of the device to get information
+          from
         type: string
         required: true
         example: Example-Hostname
       next_cursor:
         title: Next Cursor
-        description: The next page cursor to continue an existing query and search additional pages of agents
+        description: The next page cursor to continue an existing query and search
+          additional pages of agents
         type: string
         required: false
         example: 9de5069c5afe602b2ea0a04b66beb2c0
@@ -312,23 +340,29 @@ actions:
         required: false
       next_cursor:
         title: Next Cursor
-        description: The next page cursor, if available, to continue the query and search additional pages of agents
+        description: The next page cursor, if available, to continue the query and
+          search additional pages of agents
         type: string
         required: false
         example: 9de5069c5afe602b2ea0a04b66beb2c0
   get_all_agents_by_ip:
     title: Get All Agents by IP Address
-    description: Find all agents that share the same public or private IP address and display details about them. If additional pages of agents are available, the action should be run again with the returned next cursor
+    description: This action is used to find all agents that share the same public
+      or private IP address and display details about them. If additional pages of
+      agents are available, the action should be run again with the returned next
+      cursor
     input:
       ip_address:
         title: IP Address
-        description: The public or private IP address for all the agents to be searched for
+        description: The public or private IP address for all the agents to be searched
+          for
         type: string
         required: true
         example: 192.168.0.1
       next_cursor:
         title: Next Cursor
-        description: The next page cursor to continue an existing query and search additional pages of agents
+        description: The next page cursor to continue an existing query and search
+          additional pages of agents
         type: string
         required: false
         example: 9de5069c5afe602b2ea0a04b66beb2c0
@@ -336,12 +370,13 @@ actions:
       agents:
         title: Agents
         description: The list of all found agents
-        type: "[]agent"
+        type: '[]agent'
         example: '[[{"id":"ExampleID1","platform":"linux","publicIpAddress":"192.168.0.2","host":{"vendor":"Ubuntu","version":"20.04","description":"ExampleDescription1","hostNames":[{"name":"ExampleHostname1"}],"primaryAddress":{"ip":"10.20.30.40","mac":"00:11:22:33:44:55"},"uniqueIdentity":["1234567890"],"attributes":["attribute1","attribute2"]},"agent_info":{"agentSemanticVersion":"ExampleVersion1","agentStatus":"ACTIVE","quarantineState":{"currentState":"QUARANTINED"}}},{"id":"ExampleID2","platform":"mac","publicIpAddress":"192.168.0.3","host":{"vendor":"Apple","version":"11","description":"ExampleDescription2","hostNames":[{"name":"ExampleHostname2"}],"primaryAddress":{"ip":"50.60.70.80","mac":"AA:BB:CC:DD:EE:FF"},"uniqueIdentity":["0987654321"],"attributes":["attribute3","attribute4"]},"agent_info":{"agentSemanticVersion":"ExampleVersion2","agentStatus":"INACTIVE","quarantineState":{"currentState":"QUARANTINED"}}},{"id":"ExampleID3","platform":"windows","publicIpAddress":"192.168.0.4","host":{"vendor":"Microsoft","version":"11","description":"ExampleDescription3","hostNames":[{"name":"ExampleHostname3"}],"primaryAddress":{"ip":"90.80.70.60","mac":"11:22:33:44:55:66"},"uniqueIdentity":["2468135790"],"attributes":["attribute5","attribute6"]},"agent_info":{"agentSemanticVersion":"ExampleVersion3","agentStatus":"STALE","quarantineState":{"currentState":"QUARANTINED"}}}]]'
         required: false
       next_cursor:
         title: Next Cursor
-        description: The next page cursor, if available, to continue the query and search additional pages of agents
+        description: The next page cursor, if available, to continue the query and
+          search additional pages of agents
         type: string
         required: false
         example: 9de5069c5afe602b2ea0a04b66beb2c0
@@ -366,7 +401,8 @@ actions:
         order: 2
       interval:
         title: Interval
-        description: Length of time in seconds to try to take action on a device. This is also called Advertisement Period
+        description: Length of time in seconds to try to take action on a device.
+          This is also called Advertisement Period
         type: int
         default: 604800
         example: 604800
@@ -409,7 +445,8 @@ actions:
         required: true
       is_asset_online:
         title: Is Asset Online
-        description: Indicates that the agent is connected to the Insight platform. This means the device is powered on and is connected to Rapid7
+        description: Indicates that the agent is connected to the Insight platform.
+          This means the device is powered on and is connected to Rapid7
         type: boolean
         example: true
         required: true

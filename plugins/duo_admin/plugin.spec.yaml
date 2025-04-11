@@ -8,13 +8,15 @@ support: rapid7
 cloud_ready: true
 fedramp_ready: true
 status: []
-supported_versions: ["Duo Admin API 2024-09-17"]
+supported_versions: [Duo Admin API 2024-09-17]
 sdk:
   type: full
-  version: 6.1.2
+  version: 6.2.5
   user: nobody
-description: "[Duo](https://duo.com/)'s Trusted Access platform verifies the identity of your users with two-factor authentication and
-security health of their devices before they connect to the apps they use. Using the Duo plugin for InsightConnect will allow Duo user management within automation workflows"
+description: "[Duo](https://duo.com/)'s Trusted Access platform verifies the identity\
+  \ of your users with two-factor authentication and security health of their devices\
+  \ before they connect to the apps they use. Using the Duo plugin for InsightConnect\
+  \ will allow Duo user management within automation workflows"
 key_features:
 - Add user
 - Delete user
@@ -27,9 +29,9 @@ key_features:
 - Get users
 - Modify user
 requirements:
-- "Two secret keys - `integration key` and `secret key`"
-- "`API hostname`"
-version: 5.0.1
+- Two secret keys - `integration key` and `secret key`
+- '`API hostname`'
+version: 5.0.4
 connection_version: 4
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/duo_admin
@@ -44,45 +46,63 @@ hub_tags:
   features: []
 enable_cache: false
 links:
-- "[Duo Security](https://duo.com/)"
+- '[Duo Security](https://duo.com/)'
 references:
-- "[Duo Admin API](https://duo.com/docs/adminapi)"
-troubleshooting: "Many actions in this plugin take a User ID as input. A User ID is not the username - instead it's a unique identifier e.g. DU9I6T0F7R2S1J4XZHHA. A User ID can be obtained by passing a username to the Get User Status action."
-
+- '[Duo Admin API](https://duo.com/docs/adminapi)'
+troubleshooting:
+- Many actions in this plugin take a User ID as input. A User ID is not the username
+  - instead it's a unique identifier e.g. DU9I6T0F7R2S1J4XZHHA. A User ID can be obtained
+  by passing a username to the Get User Status action.
 version_history:
-- "5.0.1 - Update to enable Plugin as FedRAMP ready | Update SDK (`6.1.2`)"
-- "5.0.0 - Updated to include latest SDK v5.5.5 | Removing Unused fields from User Object"
-- "4.4.2 - Updated to include latest SDK v5.4.9 | Task `Monitor Logs` updated to increase max lookback cutoff to 7 days"
-- "4.4.1 - `Monitor Logs` task updated to stop logging of trust monitor events response"
-- "4.4.0 - `Monitor Logs` task updated to handle `custom_config` parameter for each log type separately | Apply lookback limit of 180 days due to Duo Admin API limitation"
-- "4.3.2 - Monitor Logs task: Update to latest SDK | `Monitor Logs` task updated to handle `custom_config` parameter"
-- "4.3.1 - Monitor Logs task: Added exception logging and use latest plugin SDK (`5.3.1`)."
-- "4.3.0 - Monitor Logs task: Added inputs for collecting events and logs. Updated 403 error handling"
-- "4.2.2 - Monitor Logs task: updated unit tests"
-- "4.2.1 - Monitor Logs task: updated timestamp handling"
-- "4.2.0 - Monitor Logs task: removed formatting of task output"
-- "4.1.1 - Monitor Logs task: strip http/https in hostname, fix problem with generating header signature"
-- "4.1.0 - Update to latest plugin SDK"
-- "4.0.0 - Add Monitor Logs task | Code refactor | Update plugin to be cloud enabled"
-- "3.4.0 - Add `maxtime`, `applications`, `users`, `event_types`, `factors`, `groups`, `phone_numbers`, `reasons`, `results`, `registration_id`, `token_id`, `webauthnkey` inputs in `Get Logs` action | Update custom type for `authlogs` output"
-- "3.3.4 - Correct spelling in help.md"
-- "3.3.3 - Changed `Exception` to `PluginException` | Moved constants to class init | Use fstring instead of concatenation"
-- "3.3.2 - New spec and help.md format for the Extension Library"
-- "3.3.1 - Update default `mintime` input and description for `Get Logs` action"
-- "3.3.0 - New action Enroll User | Support Duo Admin API v2 where applicable | Various bug fixes & improvements"
-- "3.2.0 - New action Get Phones by User ID"
-- "3.1.0 - New Action to Add User | Updated duo_client version to 3.3.0"
-- "3.0.0 - Rename `Get User By ID` action to `Get User by ID` | Rename `Get User By Username` action to `Get User by Username` | Rename `Delete User By ID` action to `Delete User by ID` | Rename `Modify User By ID` action to `Modify User by ID`"
-- "2.0.0 - Update to new credential types | Add example output"
-- "1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Add action Get User By Username"
+- 5.0.4 - Updated SDK to the latest version (6.2.5)
+- 5.0.3 - Bump the SDK to version 6.2.3 | Update Task `monitor_logs` to delay retry
+  if a rate limit error is returned from Duo Admin
+- 5.0.2 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
+- 5.0.1 - Update to enable Plugin as FedRAMP ready | Update SDK (`6.1.2`)
+- 5.0.0 - Updated to include latest SDK v5.5.5 | Removing Unused fields from User
+  Object
+- 4.4.2 - Updated to include latest SDK v5.4.9 | Task `Monitor Logs` updated to increase
+  max lookback cutoff to 7 days
+- 4.4.1 - `Monitor Logs` task updated to stop logging of trust monitor events response
+- 4.4.0 - `Monitor Logs` task updated to handle `custom_config` parameter for each
+  log type separately | Apply lookback limit of 180 days due to Duo Admin API limitation
+- '4.3.2 - Monitor Logs task: Update to latest SDK | `Monitor Logs` task updated to
+  handle `custom_config` parameter'
+- '4.3.1 - Monitor Logs task: Added exception logging and use latest plugin SDK (`5.3.1`).'
+- '4.3.0 - Monitor Logs task: Added inputs for collecting events and logs. Updated
+  403 error handling'
+- '4.2.2 - Monitor Logs task: updated unit tests'
+- '4.2.1 - Monitor Logs task: updated timestamp handling'
+- '4.2.0 - Monitor Logs task: removed formatting of task output'
+- '4.1.1 - Monitor Logs task: strip http/https in hostname, fix problem with generating
+  header signature'
+- 4.1.0 - Update to latest plugin SDK
+- 4.0.0 - Add Monitor Logs task | Code refactor | Update plugin to be cloud enabled
+- 3.4.0 - Add `maxtime`, `applications`, `users`, `event_types`, `factors`, `groups`,
+  `phone_numbers`, `reasons`, `results`, `registration_id`, `token_id`, `webauthnkey`
+  inputs in `Get Logs` action | Update custom type for `authlogs` output
+- 3.3.4 - Correct spelling in help.md
+- 3.3.3 - Changed `Exception` to `PluginException` | Moved constants to class init
+  | Use fstring instead of concatenation
+- 3.3.2 - New spec and help.md format for the Extension Library
+- 3.3.1 - Update default `mintime` input and description for `Get Logs` action
+- 3.3.0 - New action Enroll User | Support Duo Admin API v2 where applicable | Various
+  bug fixes & improvements
+- 3.2.0 - New action Get Phones by User ID
+- 3.1.0 - New Action to Add User | Updated duo_client version to 3.3.0
+- 3.0.0 - Rename `Get User By ID` action to `Get User by ID` | Rename `Get User By
+  Username` action to `Get User by Username` | Rename `Delete User By ID` action to
+  `Delete User by ID` | Rename `Modify User By ID` action to `Modify User by ID`
+- 2.0.0 - Update to new credential types | Add example output
+- 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Add
+  action Get User By Username
 - "0.1.6 - Fix `NameError: global name 'param' is not defined` in Delete action"
-- "0.1.5 - SSL bug fix in SDK"
-- "0.1.4 - Bug fix in modify user action where None value is present in response, invalid schema in run and test method"
-- "0.1.3 - Bug fix in user status action when user doesn't exist"
-- "0.1.2 - Add action to get user status"
-- "0.1.0 - Initial plugin"
-
-
+- 0.1.5 - SSL bug fix in SDK
+- 0.1.4 - Bug fix in modify user action where None value is present in response, invalid
+  schema in run and test method
+- 0.1.3 - Bug fix in user status action when user doesn't exist
+- 0.1.2 - Add action to get user status
+- 0.1.0 - Initial plugin
 types:
   phoneUser:
     activated:
@@ -96,7 +116,7 @@ types:
       title: Capabilities
       type: '[]string'
       required: false
-      example: ["push"]
+      example: [push]
     encrypted:
       description: The encryption status of an Android or iOS device file system
       title: Encrypted
@@ -116,7 +136,8 @@ types:
       required: false
       example: Configured
     lastSeen:
-      description: An integer indicating the timestamp of the last contact between Duo's service and the activated Duo Mobile app installed on the phone
+      description: An integer indicating the timestamp of the last contact between
+        Duo's service and the activated Duo Mobile app installed on the phone
       title: Last Seen
       type: string
       required: false
@@ -152,13 +173,15 @@ types:
       required: false
       example: unknown
     postdelay:
-      description: The time (in seconds) to wait after the extension is dialed and before the speaking the prompt
+      description: The time (in seconds) to wait after the extension is dialed and
+        before the speaking the prompt
       title: Postdelay
       type: string
       required: false
       example: 3600
     predelay:
-      description: The time (in seconds) to wait after the number picks up and before dialing the extension
+      description: The time (in seconds) to wait after the number picks up and before
+        dialing the extension
       title: Predelay
       type: string
       required: false
@@ -264,7 +287,8 @@ types:
       example: Security Key
     user:
       title: User
-      description: Selected information about the end user attached to the WebAuthn credential
+      description: Selected information about the end user attached to the WebAuthn
+        credential
       type: object
       required: false
       example: {}
@@ -325,19 +349,24 @@ types:
       example: []
     isEnrolled:
       title: Is Enrolled
-      description: Whether the user has a phone, hardware token, U2F token, WebAuthn security key, or other WebAuthn method available for authentication
+      description: Whether the user has a phone, hardware token, U2F token, WebAuthn
+        security key, or other WebAuthn method available for authentication
       type: boolean
       required: false
       example: true
     lastDirectorySync:
       title: Last Directory Sync
-      description: An integer indicating the last update to the user via directory sync as a Unix timestamp, or null if the user has never synced with an external directory or if the directory that originally created the user has been deleted from Duo
+      description: An integer indicating the last update to the user via directory
+        sync as a Unix timestamp, or null if the user has never synced with an external
+        directory or if the directory that originally created the user has been deleted
+        from Duo
       type: integer
       required: false
       example: 1234
     lastLogin:
       title: Last Login
-      description: An integer indicating the last time this user logged in, as a Unix timestamp, or null if the user has not logged in
+      description: An integer indicating the last time this user logged in, as a Unix
+        timestamp, or null if the user has not logged in
       type: integer
       required: false
       example: 1234
@@ -425,9 +454,9 @@ types:
     groups:
       title: Groups
       description: Duo group membership information for the user
-      type: "[]string"
+      type: '[]string'
       required: false
-      example: ["Duo Users"]
+      example: [Duo Users]
     key:
       title: Key
       description: The ID of the user
@@ -498,19 +527,22 @@ types:
       example: 198.51.100.1
     isEncryptionEnabled:
       title: Is Encryption Enabled
-      description: Reports the disk encryption state as detected by the Duo Device Health app. One of true, false, or unknown
+      description: Reports the disk encryption state as detected by the Duo Device
+        Health app. One of true, false, or unknown
       type: string
       required: false
       example: true
     isFirewallEnabled:
       title: Is Firewall Enabled
-      description: Reports the firewall state as detected by the Duo Device Health app. One of true, false, or unknown
+      description: Reports the firewall state as detected by the Duo Device Health
+        app. One of true, false, or unknown
       type: string
       required: false
       example: true
     isPasswordSet:
       title: Is Password Set
-      description: Reports the system password state as detected by the Duo Device Health app. One of true, false, or unknown
+      description: Reports the system password state as detected by the Duo Device
+        Health app. One of true, false, or unknown
       type: string
       required: false
       example: true
@@ -553,7 +585,8 @@ types:
       example: 2022.07.19.001
     policyEnabled:
       title: Policy Enabled
-      description: Denotes if risk-based authentication was enabled by the policy under which the trust assessment was evaluated
+      description: Denotes if risk-based authentication was enabled by the policy
+        under which the trust assessment was evaluated
       type: boolean
       required: false
       example: false
@@ -565,7 +598,8 @@ types:
       example: Normal level of trust; no detection of known attack pattern
     trustLevel:
       title: Trust Level
-      description: "The trust assessment level. Can be one of: ERROR, LOW, NORMAL, UNKNOWN, or UNSET"
+      description: 'The trust assessment level. Can be one of: ERROR, LOW, NORMAL,
+        UNKNOWN, or UNSET'
       type: string
       required: false
       example: NORMAL
@@ -585,19 +619,24 @@ types:
   authLog:
     accessDevice:
       title: Access Device
-      description: Browser, plugin, and operating system information for the endpoint used to access the Duo-protected resource. Values present only when the application accessed features Duo's inline browser prompt
+      description: Browser, plugin, and operating system information for the endpoint
+        used to access the Duo-protected resource. Values present only when the application
+        accessed features Duo's inline browser prompt
       type: accessDevice
       required: false
       example: {}
     adaptiveTrustAssessments:
       title: Adaptive Trust Assessments
-      description: Risk-based authentication information. Values present only when the application accessed features Duo's inline browser prompt and has a Duo Risk-Based Authentication policy applied
+      description: Risk-based authentication information. Values present only when
+        the application accessed features Duo's inline browser prompt and has a Duo
+        Risk-Based Authentication policy applied
       type: adaptiveTrustAssessments
       required: false
       example: {}
     alias:
       title: Alias
-      description: The username alias used to log in. No value if the user logged in with their username instead of a username alias
+      description: The username alias used to log in. No value if the user logged
+        in with their username instead of a username alias
       type: string
       required: false
       example: test
@@ -639,7 +678,8 @@ types:
       example: 2020-02-13T18:56:20.351346+00:00
     oodSoftware:
       title: OOD Software
-      description: If authentication was denied due to out-of-date software, shows the name of the software
+      description: If authentication was denied due to out-of-date software, shows
+        the name of the software
       type: string
       required: false
       example: Chrome
@@ -651,7 +691,8 @@ types:
       example: user_approved
     result:
       title: Result
-      description: "The result of the authentication attempt. One of: 'success', 'denied', 'failure', 'error', or 'fraud'"
+      description: "The result of the authentication attempt. One of: 'success', 'denied',\
+        \ 'failure', 'error', or 'fraud'"
       type: string
       required: false
       example: success
@@ -702,19 +743,24 @@ types:
   log:
     access_device:
       title: Access Device
-      description: Browser, plugin, and operating system information for the endpoint used to access the Duo-protected resource. Values present only when the application accessed features Duo's inline browser prompt
+      description: Browser, plugin, and operating system information for the endpoint
+        used to access the Duo-protected resource. Values present only when the application
+        accessed features Duo's inline browser prompt
       type: accessDevice
       required: false
       example: {}
     adaptive_trust_assessments:
       title: Adaptive Trust Assessments
-      description: Risk-based authentication information. Values present only when the application accessed features Duo's inline browser prompt and has a Duo Risk-Based Authentication policy applied
+      description: Risk-based authentication information. Values present only when
+        the application accessed features Duo's inline browser prompt and has a Duo
+        Risk-Based Authentication policy applied
       type: adaptiveTrustAssessments
       required: false
       example: {}
     alias:
       title: Alias
-      description: The username alias used to log in. No value if the user logged in with their username instead of a username alias
+      description: The username alias used to log in. No value if the user logged
+        in with their username instead of a username alias
       type: string
       required: false
       example: test
@@ -762,7 +808,8 @@ types:
       example: auth
     ood_software:
       title: OOD Software
-      description: If authentication was denied due to out-of-date software, shows the name of the software
+      description: If authentication was denied due to out-of-date software, shows
+        the name of the software
       type: string
       required: false
       example: Chrome
@@ -774,7 +821,8 @@ types:
       example: user_approved
     result:
       title: Result
-      description: "The result of the authentication attempt. One of: 'success', 'denied', 'failure', 'error', or 'fraud'"
+      description: "The result of the authentication attempt. One of: 'success', 'denied',\
+        \ 'failure', 'error', or 'fraud'"
       type: string
       required: false
       example: success
@@ -807,7 +855,8 @@ types:
       description: String detailing what changed
       type: string
       required: false
-      example: "{\"notes\": \"Joe asked for their nickname to be displayed instead of Joseph.\", \"realname\": \"Joe Smith\"}"
+      example: '{"notes": "Joe asked for their nickname to be displayed instead of
+        Joseph.", "realname": "Joe Smith"}'
     object:
       title: Object
       description: The object that was acted on
@@ -822,7 +871,8 @@ types:
       example: admin
     bypass_status_enabled:
       title: Bypass Status Enabled
-      description: An integer indicating the Unix timestamp in milliseconds when bypass status was enabled for the user or group
+      description: An integer indicating the Unix timestamp in milliseconds when bypass
+        status was enabled for the user or group
       type: integer
       required: false
       example: 1604337058989
@@ -841,12 +891,13 @@ types:
     explanations:
       title: Explanations
       description: An array of objects describing why Trust Monitor surfaced the event
-      type: "[]explanation"
+      type: '[]explanation'
       required: false
       example: []
     from_common_netblock:
       title: From Common Netblock
-      description: A boolean describing if this event was created from a common IP netblock
+      description: A boolean describing if this event was created from a common IP
+        netblock
       type: boolean
       required: false
       example: true
@@ -858,7 +909,8 @@ types:
       example: false
     low_risk_ip:
       title: Low Risk IP
-      description: A boolean describing if this event was created from an IP address identified in the Risk Profile configuration as a low risk IP address
+      description: A boolean describing if this event was created from an IP address
+        identified in the Risk Profile configuration as a low risk IP address
       type: boolean
       required: false
       example: false
@@ -870,8 +922,9 @@ types:
       example: false
     priority_reasons:
       title: Priority Reasons
-      description: An array of objects describing how the event matches the Trust Monitor Risk Profile configuration
-      type: "[]priorityReason"
+      description: An array of objects describing how the event matches the Trust
+        Monitor Risk Profile configuration
+      type: '[]priorityReason'
       required: false
       example: []
     sekey:
@@ -888,7 +941,8 @@ types:
       example: new
     state_updated_timestamp:
       title: State Updated Timestamp
-      description: An integer indicating the Unix timestamp in milliseconds of the last change to the state of the event
+      description: An integer indicating the Unix timestamp in milliseconds of the
+        last change to the state of the event
       type: integer
       required: false
       example: 1675893605269
@@ -900,19 +954,23 @@ types:
       example: {}
     surfaced_timestamp:
       title: Surfaced Timestamp
-      description: An integer indicating the Unix timestamp in milliseconds when the event was surfaced by Trust Monitor
+      description: An integer indicating the Unix timestamp in milliseconds when the
+        event was surfaced by Trust Monitor
       type: integer
       required: false
       example: 1675893605269
     triaged_as_interesting:
       title: Triaged As Interesting
-      description: A boolean describing if this event was triaged as being interesting or not interesting
+      description: A boolean describing if this event was triaged as being interesting
+        or not interesting
       type: boolean
       required: false
       example: false
     triage_event_uri:
       title: Triage Event URI
-      description: A string representing the URI of the security event, which a Duo administrator can use to view and process the surfaced event in the Duo Admin Panel
+      description: A string representing the URI of the security event, which a Duo
+        administrator can use to view and process the surfaced event in the Duo Admin
+        Panel
       type: string
       required: false
       example: https://example.com
@@ -960,7 +1018,11 @@ actions:
         description: User details
         type: user
         required: false
-        example: { "created": 1111111111, "email": "user@example.com", "lastLogin": 1511423501, "phones": [ { "activated": true, "capabilities": [ "auto", "push", "sms", "phone", "mobile_otp" ], "lastSeen": "2018-08-20T06:52:20", "number": "+11111111111", "phoneId": "1234ABCDEFG", "platform": "Apple iOS", "smsPasscodesSent": false, "type": "Mobile" } ], "realname": "John Doe", "status": "active", "userId": "BUUUUUUUUUUUUUUUUUUZ", "username": "jdoe" }
+        example: {created: 1111111111, email: user@example.com, lastLogin: 1511423501,
+          phones: [{activated: true, capabilities: [auto, push, sms, phone, mobile_otp],
+              lastSeen: '2018-08-20T06:52:20', number: '+11111111111', phoneId: 1234ABCDEFG,
+              platform: Apple iOS, smsPasscodesSent: false, type: Mobile}], realname: John
+            Doe, status: active, userId: BUUUUUUUUUUUUUUUUUUZ, username: jdoe}
   get_user_by_username:
     title: Get User by Username
     description: Get a user by username
@@ -977,7 +1039,11 @@ actions:
         description: User details
         type: user
         required: false
-        example: { "created": 1462823674, "email": "user@example.com", "lastLogin": 1534446415, "phones": [ { "activated": true, "capabilities": [ "auto", "push", "sms", "phone", "mobile_otp" ], "lastSeen": "2018-08-21T15:57:34", "number": "+12222222222", "phoneId": "11111113RP6666666666", "platform": "Google Android", "smsPasscodesSent": false, "type": "Mobile" } ], "status": "active", "userId": "A777777777777777777W", "username": "jdoe" }
+        example: {created: 1462823674, email: user@example.com, lastLogin: 1534446415,
+          phones: [{activated: true, capabilities: [auto, push, sms, phone, mobile_otp],
+              lastSeen: '2018-08-21T15:57:34', number: '+12222222222', phoneId: 11111113RP6666666666,
+              platform: Google Android, smsPasscodesSent: false, type: Mobile}], status: active,
+          userId: A777777777777777777W, username: jdoe}
   delete_user:
     title: Delete User by ID
     description: Delete a user by ID
@@ -1071,21 +1137,30 @@ actions:
         description: User details
         type: user
         required: false
-        example: { "alias1": "alias1", "alias2": "alias2", "alias3": "alias3", "alias4": "alias4", "aliases": { "alias1": "alias1", "alias2": "alias2", "alias3": "alias3", "alias4": "alias4" }, "created": 1684765611, "email": "user@example.com", "isEnrolled": false, "notes": "Example", "realname": "Example", "status": "active", "userId": "DUCUULF6HBMZ43IG9MBH", "username": "Example" }
+        example: {alias1: alias1, alias2: alias2, alias3: alias3, alias4: alias4,
+          aliases: {alias1: alias1, alias2: alias2, alias3: alias3, alias4: alias4},
+          created: 1684765611, email: user@example.com, isEnrolled: false, notes: Example,
+          realname: Example, status: active, userId: DUCUULF6HBMZ43IG9MBH, username: Example}
   get_logs:
     title: Get Authentication Logs
-    description: Get auth logs, limited to past 180 days
+    description: "This action is used to get auth logs, limited to past 180 days.\n\
+      [Currentmillis.com](https://currentmillis.com/) is useful for finding a usable\
+      \ UNIX timestamp.\n\nAvailable inputs for parameters can be found in [Duo Admin\
+      \ API docs](https://duo.com/docs/adminapi#logs:~:text=The%20factor%20or%20method%20used%20for%20an%20authentication%20attempt.%20One%20of%3A)"
     input:
       mintime:
         title: Mintime
         type: integer
-        description: Minimum time in UNIX timestamp milliseconds. Must be 13 or more digits in length
+        description: Minimum time in UNIX timestamp milliseconds. Must be 13 or more
+          digits in length
         required: true
         example: 1609377288936
       maxtime:
         title: Maxtime
         type: integer
-        description: Maximum time in UNIX timestamp milliseconds. Must be 13 or more digits in length and greater than mintime. To use current time leave this parameter empty
+        description: Maximum time in UNIX timestamp milliseconds. Must be 13 or more
+          digits in length and greater than mintime. To use current time leave this
+          parameter empty
         required: false
         example: 1611069760000
       applications:
@@ -1093,62 +1168,82 @@ actions:
         type: '[]string'
         description: List of application IDs to filter on
         required: false
-        example: ["DIV9C5V7T6L02DRWL4RU"]
+        example: [DIV9C5V7T6L02DRWL4RU]
       users:
         title: Users
         type: '[]string'
         description: List of user IDs to filter on
         required: false
-        example: ["DUW2DKA44RFYECTU8R1O"]
+        example: [DUW2DKA44RFYECTU8R1O]
       eventTypes:
         title: Event Types
         type: '[]string'
-        description: List of event types(authentication, enrollment) to filter on, to include all leave this parameter empty
+        description: List of event types(authentication, enrollment) to filter on,
+          to include all leave this parameter empty
         required: false
-        example: ["authentication"]
+        example: [authentication]
       factors:
         title: Factors
         type: '[]string'
-        description: List of factors or methods used for an authentication attempt to filter on, to include all leave this parameter empty. Check the help documentation to see all available inputs
+        description: List of factors or methods used for an authentication attempt
+          to filter on, to include all leave this parameter empty. Check the help
+          documentation to see all available inputs
         required: false
-        example: ["duo_push", "sms_passcode"]
+        example: [duo_push, sms_passcode]
       groups:
         title: Groups
         type: '[]string'
         description: List of group IDs to filter on
         required: false
-        example: ["DG67EON0I1QA2ZDUF32M"]
+        example: [DG67EON0I1QA2ZDUF32M]
       phoneNumbers:
         title: Phone Numbers
         type: '[]string'
         description: List of phone numbers to filter on
         required: false
-        example: ["+11111111111"]
+        example: ['+11111111111']
       reasons:
         title: Reasons
         type: '[]string'
-        description: List of reasons associated with an authentication attempt to filter on, to include all leave this parameter empty. Check the help documentation to see all available inputs
+        description: List of reasons associated with an authentication attempt to
+          filter on, to include all leave this parameter empty. Check the help documentation
+          to see all available inputs
         required: false
-        example: ["user_disabled"]
+        example: [user_disabled]
       results:
         title: Results
         type: '[]string'
-        description: List of results of an authentication attempt(success, denied, fraud) to filter on, to include all leave this parameter empty
+        description: List of results of an authentication attempt(success, denied,
+          fraud) to filter on, to include all leave this parameter empty
         required: false
-        example: ["denied"]
+        example: [denied]
       tokens:
         title: Tokens
         type: '[]string'
-        description: List of FIDO U2F token registration IDs or WebAuthn security keys to filter on
+        description: List of FIDO U2F token registration IDs or WebAuthn security
+          keys to filter on
         required: false
-        example: ["WA4ED9AUVMSWUF00KES4"]
+        example: [WA4ED9AUVMSWUF00KES4]
     output:
       authLogs:
         title: Logs
-        type: "[]authLog"
+        type: '[]authLog'
         required: true
         description: Logs
-        example: '[ { "accessDevice": { "browser": "Chrome", "browserVersion": "67.0.3396.99", "flashVersion": "uninstalled", "ip": "198.51.100.1", "isEncryptionEnabled": "true", "isFirewallEnabled": "true", "isPasswordSet": "true", "javaVersion": "uninstalled", "location": { "city": "Bloomington", "country": "United States", "state": "Illinois" }, "os": "Mac OS X", "osVersion": "10.14.1" }, "alias": "test", "application": { "key": "DIV9C5V7T6L02DRWL4RU", "name": "Microsoft Azure Active Directory" }, "authDevice": { "ip": "198.51.100.1", "location": { "city": "Bloomington", "country": "United States", "state": "Illinois" }, "name": "+11111111111" }, "email": "user@example.com", "eventType": "authentication", "factor": "duo_push", "isotimestamp": "2021-01-19T14:47:24.309957+00:00", "reason": "user_disabled", "result": "denied", "timestamp": 1611067644, "txid": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "user": { "groups": [ "InsightConnect Group" ], "key": "DUW2DKA44RFYECTU8R1O", "name": "user@example.com" } } ]'
+        example: '[ { "accessDevice": { "browser": "Chrome", "browserVersion": "67.0.3396.99",
+          "flashVersion": "uninstalled", "ip": "198.51.100.1", "isEncryptionEnabled":
+          "true", "isFirewallEnabled": "true", "isPasswordSet": "true", "javaVersion":
+          "uninstalled", "location": { "city": "Bloomington", "country": "United States",
+          "state": "Illinois" }, "os": "Mac OS X", "osVersion": "10.14.1" }, "alias":
+          "test", "application": { "key": "DIV9C5V7T6L02DRWL4RU", "name": "Microsoft
+          Azure Active Directory" }, "authDevice": { "ip": "198.51.100.1", "location":
+          { "city": "Bloomington", "country": "United States", "state": "Illinois"
+          }, "name": "+11111111111" }, "email": "user@example.com", "eventType": "authentication",
+          "factor": "duo_push", "isotimestamp": "2021-01-19T14:47:24.309957+00:00",
+          "reason": "user_disabled", "result": "denied", "timestamp": 1611067644,
+          "txid": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "user": { "groups": [ "InsightConnect
+          Group" ], "key": "DUW2DKA44RFYECTU8R1O", "name": "user@example.com" } }
+          ]'
   get_users:
     title: Get Users
     description: Get list of users
@@ -1158,7 +1253,12 @@ actions:
         description: List of users
         type: '[]user'
         required: false
-        example: '[ { "created": 1111111111, "email": "user@example.com", "lastLogin": 1511423501, "phones": [ { "activated": true, "capabilities": [ "auto", "push", "sms", "phone", "mobile_otp" ], "lastSeen": "2018-08-20T06:52:20", "number": "+11111111111", "phoneId": "ABCDEFGHIJ", "platform": "Apple iOS", "smsPasscodesSent": false, "type": "Mobile" } ], "realname": "John Doe", "status": "active", "userId": "BUUUUUUUUUUUUUUUUUUZ", "username": "jdoe" } ]'
+        example: '[ { "created": 1111111111, "email": "user@example.com", "lastLogin":
+          1511423501, "phones": [ { "activated": true, "capabilities": [ "auto", "push",
+          "sms", "phone", "mobile_otp" ], "lastSeen": "2018-08-20T06:52:20", "number":
+          "+11111111111", "phoneId": "ABCDEFGHIJ", "platform": "Apple iOS", "smsPasscodesSent":
+          false, "type": "Mobile" } ], "realname": "John Doe", "status": "active",
+          "userId": "BUUUUUUUUUUUUUUUUUUZ", "username": "jdoe" } ]'
   get_user_status:
     title: Get User Status
     description: Get account status of a user
@@ -1197,7 +1297,7 @@ actions:
         description: User aliases. May have up to 4 unique amongst users
         type: '[]string'
         required: false
-        example: ["test-alias"]
+        example: [test-alias]
       realname:
         title: Real Name
         description: User's real name
@@ -1233,10 +1333,13 @@ actions:
         title: User
         type: user
         required: false
-        example: { "aliases": [ "test-alias" ], "created": 1538529180, "email": "user@example.com", "notes": "Example note", "realname": "Example User", "status": "active", "userId": "DUVSXMGU7NLM8H803W9L", "username": "example-user" }
+        example: {aliases: [test-alias], created: 1538529180, email: user@example.com,
+          notes: Example note, realname: Example User, status: active, userId: DUVSXMGU7NLM8H803W9L,
+          username: example-user}
   enroll_user:
     title: Enroll User
-    description: Enrolls a user and sends an enrollment email to the specified email address
+    description: Enrolls a user and sends an enrollment email to the specified email
+      address
     input:
       username:
         type: string
@@ -1253,7 +1356,8 @@ actions:
       timeToExpiration:
         type: number
         title: Time to Expiration
-        description: Amount of time in seconds until enrollment email expires. Use '0' for no expiration
+        description: Amount of time in seconds until enrollment email expires. Use
+          '0' for no expiration
         default: 0
         required: false
         example: 3600
@@ -1280,7 +1384,10 @@ actions:
         description: List of phones associated with the user's ID
         type: '[]phoneUser'
         required: false
-        example:  '[{ "activated": true, "capabilities": [ "auto", "push", "sms", "phone", "mobile_otp" ], "lastSeen": "2019-01-15T23:02:20", "number": "123456789", "phoneId": "DUCUULF6HBMZ43IG9MBH", "platform": "Google Android", "smsPasscodesSent": false, "type": "Mobile" }]'
+        example: '[{ "activated": true, "capabilities": [ "auto", "push", "sms", "phone",
+          "mobile_otp" ], "lastSeen": "2019-01-15T23:02:20", "number": "123456789",
+          "phoneId": "DUCUULF6HBMZ43IG9MBH", "platform": "Google Android", "smsPasscodesSent":
+          false, "type": "Mobile" }]'
 
 tasks:
   monitor_logs:
@@ -1289,14 +1396,16 @@ tasks:
     input:
       collectTrustMonitorEvents:
         title: Collect Duo Trust Monitor Events
-        description: Whether to collect Trust Monitor events (note requires appropriate level of Duo Admin license)
+        description: Whether to collect Trust Monitor events (note requires appropriate
+          level of Duo Admin license)
         type: boolean
         required: false
         default: true
         example: false
       collectAdminLogs:
         title: Collect Duo Admin Logs
-        description: Whether to collect Admin logs (note requires appropriate level of Duo Admin license)
+        description: Whether to collect Admin logs (note requires appropriate level
+          of Duo Admin license)
         type: boolean
         required: false
         default: true
@@ -1304,7 +1413,27 @@ tasks:
     output:
       logs:
         title: Logs
-        description: List of administrator, authentication and trust monitor event logs within the specified time range
-        type: "[]object"
+        description: List of administrator, authentication and trust monitor event
+          logs within the specified time range
+        type: '[]object'
         required: true
-        example: '[ { "accessDevice": { "browser": "Chrome", "browserVersion": "113.0.0.0", "ip": "198.51.100.1", "isEncryptionEnabled": "unknown", "isFirewallEnabled": "unknown", "isPasswordSet": "unknown", "location": { "city": "Los Angeles", "country": "United States", "state": "California" }, "os": "Mac OS X", "osVersion": "10.15.7" }, "alias": "unknown", "application": { "key": "DI8CODQSMK4BXPLYS47K", "name": "User Portal" }, "authDevice": { "key": "DPAVQAJMU3BW0LV7OCX3", "name": "Generic Smartphone" }, "eventType": "enrollment", "factor": "not_available", "isotimestamp": "2023-05-29T10:07:38.631165+00:00", "result": "success", "timestamp": 1685354858, "trustedEndpointStatus": "unknown", "txid": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "user": { "groups": [ "Test Group" ], "key": "DUOR48RKV2AYN7YVS9BT", "name": "example-user" }, "logType": "authentication" }, { "action": "user_create", "description": "{\"status\": \"Active\", \"email\": \"user@example.com\", \"realname\": \"\", \"notes\": \"\", \"uname\": \"user\"}", "isotimestamp": "2023-04-30T07:52:18+00:00", "object": "user", "timestamp": 1682836490, "username": "API (Admin API)", "logType": "administrator" }, { "bypassStatusEnabled": 1682836486230, "enabledBy": { "key": "DEKU19BYSSJSOABCD123", "name": "Admin" }, "enabledFor": { "key": "DUM07ZQ4LY00TABCD123", "name": "example-user" }, "priorityEvent": false, "sekey": "SE80GVU5Z47F0ABCD123", "state": "new", "surfacedTimestamp": 1682836486232, "triagedAsInteresting": false, "type": "bypass_status", "logType": "trust_monitor_event" } ]'
+        example: '[ { "accessDevice": { "browser": "Chrome", "browserVersion": "113.0.0.0",
+          "ip": "198.51.100.1", "isEncryptionEnabled": "unknown", "isFirewallEnabled":
+          "unknown", "isPasswordSet": "unknown", "location": { "city": "Los Angeles",
+          "country": "United States", "state": "California" }, "os": "Mac OS X", "osVersion":
+          "10.15.7" }, "alias": "unknown", "application": { "key": "DI8CODQSMK4BXPLYS47K",
+          "name": "User Portal" }, "authDevice": { "key": "DPAVQAJMU3BW0LV7OCX3",
+          "name": "Generic Smartphone" }, "eventType": "enrollment", "factor": "not_available",
+          "isotimestamp": "2023-05-29T10:07:38.631165+00:00", "result": "success",
+          "timestamp": 1685354858, "trustedEndpointStatus": "unknown", "txid": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+          "user": { "groups": [ "Test Group" ], "key": "DUOR48RKV2AYN7YVS9BT", "name":
+          "example-user" }, "logType": "authentication" }, { "action": "user_create",
+          "description": "{\"status\": \"Active\", \"email\": \"user@example.com\",
+          \"realname\": \"\", \"notes\": \"\", \"uname\": \"user\"}", "isotimestamp":
+          "2023-04-30T07:52:18+00:00", "object": "user", "timestamp": 1682836490,
+          "username": "API (Admin API)", "logType": "administrator" }, { "bypassStatusEnabled":
+          1682836486230, "enabledBy": { "key": "DEKU19BYSSJSOABCD123", "name": "Admin"
+          }, "enabledFor": { "key": "DUM07ZQ4LY00TABCD123", "name": "example-user"
+          }, "priorityEvent": false, "sekey": "SE80GVU5Z47F0ABCD123", "state": "new",
+          "surfacedTimestamp": 1682836486232, "triagedAsInteresting": false, "type":
+          "bypass_status", "logType": "trust_monitor_event" } ]'

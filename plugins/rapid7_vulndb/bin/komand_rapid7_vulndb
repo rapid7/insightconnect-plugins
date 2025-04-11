@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Rapid7 Vulnerability & Exploit Database"
 Vendor = "rapid7"
-Version = "2.1.4"
+Version = "2.1.6"
 Description = "Make searching the Rapid7 vulnerability and exploit data fast, easy and efficient with the InsightConnect plugin. Leverage this curated repository of vetted computer software exploits and exploitable vulnerabilities to ensure your security operations are always aware of the latest threats that could be used against your environment vulnerabilities"
 
 

@@ -146,10 +146,12 @@ Example output:
 
 ## Troubleshooting
 
-_This plugin does not contain any troubleshooting information._
+* This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.1.6 - Updated SDK to the latest version (6.2.5)
+* 2.1.5 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
 * 2.1.4 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 2.1.3 - Fix critical Snyk vulnerability | Update SDK
 * 2.1.2 - Bumping SDK version to 5.6.1

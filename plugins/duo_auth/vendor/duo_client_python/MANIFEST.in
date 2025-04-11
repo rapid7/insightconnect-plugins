@@ -1,8 +1,0 @@
-include apache-license-2.0.txt
-include LICENSE
-recursive-include examples *
-include tests/*.py
-include README.md
-include duo_client/ca_certs.pem
-include requirements.txt
-include requirements-dev.txt

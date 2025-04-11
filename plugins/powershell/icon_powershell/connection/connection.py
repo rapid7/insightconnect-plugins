@@ -25,5 +25,4 @@ class Connection(insightconnect_plugin_runtime.Connection):
             "password": params.get(Input.SCRIPT_USERNAME_AND_PASSWORD, {}).get("password"),
             "secret_key": params.get(Input.SCRIPT_SECRET_KEY, {}).get("secretKey"),
         }
-
         self.logger.info("Connect: Connecting..")

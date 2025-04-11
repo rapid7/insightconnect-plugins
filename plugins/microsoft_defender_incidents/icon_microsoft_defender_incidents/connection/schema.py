@@ -10,7 +10,8 @@ class Input:
 
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -24,7 +25,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "client_secret": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "Client Secret",
-      "description": "The application secret that you generated for your app in the appregistration portal",
+      "description": "The application secret that you generated for your app in the app registration portal",
       "order": 2
     },
     "tenant_id": {
@@ -60,7 +61,8 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     }
   }
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

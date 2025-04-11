@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="dig-rapid7-plugin",
-      version="2.0.3",
+      version="2.0.5",
       description="The DNS plugin is used for forward and reverse DNS lookups. This plugin uses [Dig](https://linux.die.net/man/1/dig), or Domain Information Groper, which is a network administration command-line tool for querying Domain Name System (DNS) name servers",
       author="rapid7",
       author_email="",

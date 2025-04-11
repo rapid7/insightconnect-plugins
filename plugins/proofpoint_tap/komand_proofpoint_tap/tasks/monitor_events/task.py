@@ -1,7 +1,5 @@
 from datetime import datetime, timedelta, timezone
 from hashlib import sha1
-from json import loads
-from os import getenv
 from typing import Dict
 
 import insightconnect_plugin_runtime
@@ -15,14 +13,14 @@ from .schema import MonitorEventsInput, MonitorEventsOutput, MonitorEventsState,
 INITIAL_LOOKBACK_HOURS = 24  # Lookback time in hours for first run
 SUBSEQUENT_LOOKBACK_HOURS = 24 * 7  # Lookback time in hours for subsequent runs
 API_MAX_LOOKBACK = 24 * 7  # API limits to 7 days ago
-SPECIFIC_DATE = getenv("SPECIFIC_DATE")
+MINUTES_BOUNDARY = 60  # Start time window boundary of 60 minutes from now
+DEFAULT_SPLIT_SIZE = 1000
 
 
 class MonitorEvents(insightconnect_plugin_runtime.Task):
     LAST_COLLECTION_DATE = "last_collection_date"
     NEXT_PAGE_INDEX = "next_page_index"
     STATUS_CODE = "status_code"
-    SPLIT_SIZE = 1000
     PREVIOUS_LOGS_HASHES = "previous_logs_hashes"
 
     def __init__(self):
@@ -33,109 +31,93 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             output=MonitorEventsOutput(),
             state=MonitorEventsState(),
         )
+        self.split_size = DEFAULT_SPLIT_SIZE
 
-    def run(self, params={}, state={}, custom_config={}):  # noqa: MC0001
+    def run(self, params={}, state={}, custom_config={}):  # pylint: disable=unused-argument
+        existing_state = state.copy()
         self.connection.client.toggle_rate_limiting = False
         has_more_pages = False
+        minutes_boundary = custom_config.get("minutes_boundary", MINUTES_BOUNDARY)
+        self.split_size = custom_config.get("split_size", DEFAULT_SPLIT_SIZE)
         try:
-            last_collection_date = state.get(self.LAST_COLLECTION_DATE)
-            self.logger.info(f"Last collection date retrieved: {last_collection_date}")
-            next_page_index = state.get(self.NEXT_PAGE_INDEX)
             now = self.get_current_time() - timedelta(minutes=1)
-
-            first_run = not state or not last_collection_date
-            max_allowed_lookback, backfill_date = self._apply_custom_timings(custom_config, now, first_run)
-
-            # [PLGN-727] skip comparison check if first run of a backfill, next run should specify lookback to match.
-            if not backfill_date:
-                # Don't allow collection to go back further than <*>_LOOKBACK_HOURS > (24) hours max
-                # Unless otherwise defined externally and passed in via custom_config parameter.
-                if last_collection_date and datetime.fromisoformat(last_collection_date) < max_allowed_lookback:
-                    last_collection_date = max_allowed_lookback.isoformat()
-                    if next_page_index:
-                        next_page_index = None
-                        state.pop(self.NEXT_PAGE_INDEX)
-                    self.logger.info(f"Last collection date reset to max lookback allowed: {last_collection_date}")
-
+            last_collection_date = state.get(self.LAST_COLLECTION_DATE)
+            if last_collection_date:
+                last_collection_date = datetime.fromisoformat(last_collection_date)
+            next_page_index = state.get(self.NEXT_PAGE_INDEX)
             previous_logs_hashes = state.get(self.PREVIOUS_LOGS_HASHES, [])
+
+            first_run = not state
+            is_paginating = (not first_run) and next_page_index
+
+            api_limit = self._get_api_limit_date_time(is_paginating, API_MAX_LOOKBACK, now)
+            start_time = self._determine_start_time(
+                now, first_run, is_paginating, last_collection_date, minutes_boundary
+            )
+            if custom_config and first_run:
+                custom_api_limit, start_time = self._apply_custom_config(
+                    now, custom_config, API_MAX_LOOKBACK, start_time
+                )
+                self.logger.info(
+                    f"Attempting to use custom value of {start_time} for start time and {custom_api_limit} for API limit"
+                )
+                api_limit, _ = self._apply_api_limit(api_limit, custom_api_limit, 0, "custom_api_limit")
+            start_time, next_page_index = self._apply_api_limit(api_limit, start_time, next_page_index, "start_time")
+            end_time = self._check_end_time((start_time + timedelta(minutes=minutes_boundary)), now).isoformat()
+            start_time = start_time.isoformat()
             query_params = {"format": "JSON"}
+            parameters = SiemUtils.prepare_time_range(start_time, end_time, query_params)
+            self.logger.info(f"Using following parameters in query: {parameters}")
 
-            if first_run:
-                task_start = "First run... "
-                first_time = now - timedelta(hours=1)
-                if backfill_date:
-                    first_time = backfill_date  # PLGN-727: allow backfill
-                    task_start += f"Using custom value of {backfill_date}"
-                self.logger.info(task_start)
-                last_time = first_time + timedelta(hours=1)
-                state[self.LAST_COLLECTION_DATE] = last_time.isoformat()
-                parameters = SiemUtils.prepare_time_range(first_time.isoformat(), last_time.isoformat(), query_params)
-            else:
-                if next_page_index:
-                    state.pop(self.NEXT_PAGE_INDEX)
-                    self.logger.info(f"Getting the next page (page index {next_page_index}) of results...")
-                    parameters = SiemUtils.prepare_time_range(
-                        (datetime.fromisoformat(last_collection_date) - timedelta(hours=1)).isoformat(),
-                        last_collection_date,
-                        query_params,
-                    )
-                else:
-                    self.logger.info("Subsequent run")
-                    start_time = last_collection_date
-                    end_time = (datetime.fromisoformat(last_collection_date) + timedelta(hours=1)).isoformat()
-                    if end_time > now.isoformat():
-                        self.logger.info(
-                            f"End time for lookup reset from {end_time} to {now.isoformat()} to avoid going out of range"
-                        )
-                        end_time = now.isoformat()
-
-                    # If the resulting time interval is invalid, do not query API this time around
-                    query_delta = datetime.fromisoformat(end_time) - datetime.fromisoformat(start_time)
-                    if start_time >= end_time or query_delta < timedelta(minutes=1):
-                        self.logger.info(f"Query delta: {query_delta} Time delta allowed: {timedelta(minutes=1)}")
-                        self.logger.info(
-                            f"Start time > End time or Insufficient interval between start time {start_time} and end time {end_time} to avoid going out of query range"
-                        )
-                        self.logger.info("Do not query API this time round")
-                        return [], state, has_more_pages, 200, None
-                    else:
-                        state[self.LAST_COLLECTION_DATE] = end_time
-                        parameters = SiemUtils.prepare_time_range(start_time, end_time, query_params)
-
-            self.logger.info(f"Parameters used to query endpoint: {parameters}")
             try:
                 parsed_logs = self.parse_logs(
                     self.connection.client.siem_action(Endpoint.get_all_threats(), parameters)
                 )
                 self.logger.info(f"Retrieved {len(parsed_logs)} total parsed events in time interval")
-                state, has_more_pages = self.determine_page_and_state_values(
-                    next_page_index, parsed_logs, has_more_pages, state, parameters, now
-                )
+
                 current_page_index = next_page_index if next_page_index else 0
                 # Send back a maximum of SPLIT_SIZE events at a time (use page index to track this in state)
                 new_unique_logs, new_logs_hashes = self.compare_hashes(
                     previous_logs_hashes,
-                    parsed_logs[current_page_index * self.SPLIT_SIZE : (current_page_index + 1) * self.SPLIT_SIZE],
+                    parsed_logs[current_page_index * self.split_size : (current_page_index + 1) * self.split_size],
+                )
+
+                state, has_more_pages = self.determine_page_and_state_values(
+                    next_page_index, parsed_logs, has_more_pages, state, parameters, now
                 )
 
                 # PLGN-811: reduce the number of pages of hashes we store to prevent hitting DynamoDB limits
                 state[self.PREVIOUS_LOGS_HASHES] = (
-                    [*previous_logs_hashes[-self.SPLIT_SIZE :], *new_logs_hashes]
+                    [*previous_logs_hashes[-self.split_size :], *new_logs_hashes]
                     if current_page_index > 0
                     else new_logs_hashes
                 )
+
+                state[self.LAST_COLLECTION_DATE] = end_time
 
                 self.logger.info(f"Retrieved {len(new_unique_logs)} events. Returning has_more_pages={has_more_pages}")
                 return new_unique_logs, state, has_more_pages, 200, None
 
             except ApiException as error:
+                if "The requested interval is too short" in error.data:
+                    self.logger.info("The requested interval is too short. Retrying in next run.")
+                    return [], existing_state, False, 200, None
+                if "The requested start time is too far into the past." in error.data:
+                    self.logger.info("The requested start time is too far into the past. Resetting state.")
+                    return [], {}, False, 200, None
+
                 self.logger.info(f"API Exception occurred: status_code: {error.status_code}, error: {error}")
                 state[self.PREVIOUS_LOGS_HASHES] = []
-                return [], state, False, error.status_code, error
+                return [], existing_state, False, error.status_code, error
         except Exception as error:
             self.logger.info(f"Exception occurred in monitor events task: {error}", exc_info=True)
-            state[self.PREVIOUS_LOGS_HASHES] = []
-            return [], state, has_more_pages, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+            return (
+                [],
+                existing_state,
+                has_more_pages,
+                500,
+                PluginException(preset=PluginException.Preset.UNKNOWN, data=error),
+            )
 
     def determine_page_and_state_values(
         self,
@@ -147,8 +129,8 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
         now: datetime,
     ) -> (dict, bool):
         # Determine pagination based on the response from API or if we've queried until now.
-        if (not next_page_index and len(parsed_logs) > self.SPLIT_SIZE) or (
-            next_page_index and (next_page_index + 1) * self.SPLIT_SIZE < len(parsed_logs)
+        if (not next_page_index and len(parsed_logs) > self.split_size) or (
+            next_page_index and (next_page_index + 1) * self.split_size < len(parsed_logs)
         ):
             state[self.NEXT_PAGE_INDEX] = next_page_index + 1 if next_page_index else 1
             has_more_pages = True
@@ -157,10 +139,14 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             )
         else:
             end_str, now_str = query_params.get("interval").split("/")[1], now.isoformat().replace("z", "")
+
             if now_str != end_str:  # we want to force more pages if the end query time is not 'now'
                 self.logger.info("Setting has more pages to True as interval params is not querying until now")
+                if state.get(self.NEXT_PAGE_INDEX):
+                    state.pop(self.NEXT_PAGE_INDEX)
                 has_more_pages = True
-
+        if not has_more_pages and state.get(self.NEXT_PAGE_INDEX):
+            state.pop(self.NEXT_PAGE_INDEX)
         return state, has_more_pages
 
     @staticmethod
@@ -191,7 +177,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
 
     @staticmethod
     def sha1(log: dict) -> str:
-        hash_ = sha1()  # nosec B303
+        hash_ = sha1(usedforsecurity=False)  # nosec B303
         for key, value in log.items():
             hash_.update(f"{key}{value}".encode("utf-8"))
         return hash_.hexdigest()
@@ -210,44 +196,50 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             )
         return logs_to_return, new_logs_hashes
 
-    def _apply_custom_timings(
-        self, custom_config: Dict[str, Dict], now: datetime, first_run: bool
-    ) -> (datetime, datetime):
-        """
-        If a custom_config is supplied to the plugin we can modify our timing logic.
-        Lookback is applied for the first run with no state.
-        Default is applied to the max look back hours being enforced on the parameters.
-        """
-        if first_run:
-            default_lookback_hours = INITIAL_LOOKBACK_HOURS
+    def _check_end_time(self, end_time, now):
+        end_time = min(end_time, now)
+        return end_time
+
+    def _get_api_limit_date_time(self, is_paginating, limit_delta_hours, now):
+        if is_paginating:
+            api_limit_date_time = now - timedelta(hours=limit_delta_hours) + timedelta(minutes=5)
         else:
-            default_lookback_hours = SUBSEQUENT_LOOKBACK_HOURS
+            api_limit_date_time = now - timedelta(hours=limit_delta_hours) + timedelta(minutes=15)
+        return api_limit_date_time
+
+    def _apply_api_limit(self, api_limit, time_to_check, next_page_index, time_name):
+        if api_limit >= time_to_check:
+            self.logger.info(f"Supplied a {time_name} further than allowed. Moving this to {api_limit}")
+            time_to_check = api_limit
+            if time_to_check == "start_time":
+                next_page_index = 0
+        return time_to_check, next_page_index
+
+    def _apply_custom_config(self, now, custom_config, default_lookback_hours, start_time):
         cutoff_values = custom_config.get("cutoff", {"hours": default_lookback_hours})
         cutoff_date, cutoff_hours = cutoff_values.get("date", {}), cutoff_values.get("hours")
         if cutoff_date:
-            max_lookback = datetime(**cutoff_date, tzinfo=timezone.utc)
+            cutoff_date_time = datetime(**cutoff_date, tzinfo=timezone.utc)
         else:
-            max_lookback = now - timedelta(hours=cutoff_hours)
+            cutoff_date_time = now - timedelta(hours=cutoff_hours)
 
         # if using env var we need to convert to dict from string, CPS API will return us a dict.
-        env_var_date = loads(SPECIFIC_DATE) if SPECIFIC_DATE else None
-        specific_date = custom_config.get("lookback", env_var_date)
-        self.logger.info(
-            "Plugin task execution received the following date values. "
-            f"Max lookback={max_lookback}, specific date={specific_date}"
-        )
-
-        # Ensure we never pass values that exceed the API limit of Proofpoint.
-        # But allow 5 minutes latency window as we actually have now = now - 1 minute
-        api_limit_date = (now - timedelta(hours=API_MAX_LOOKBACK)) + timedelta(minutes=5)
-        if api_limit_date > max_lookback:
-            max_lookback = api_limit_date
-            self.logger.info(f"**Supplied a max lookback further than allowed. Moving this to {api_limit_date}")
-
+        specific_date = custom_config.get("lookback")
         if specific_date:
             specific_date = datetime(**specific_date, tzinfo=timezone.utc)
-            if api_limit_date > specific_date:
-                self.logger.info(f"**Supplied a specific date further than allowed. Moving this to {api_limit_date}")
-                specific_date = api_limit_date
+        else:
+            specific_date = start_time
+        return cutoff_date_time, specific_date
 
-        return max_lookback, specific_date
+    def _determine_start_time(self, now, first_run, is_paginating, last_collection_date, minutes_boundary: int) -> int:
+        if first_run:
+            integration_status = "First run"
+            start_time = now - timedelta(hours=1)
+        elif is_paginating:
+            integration_status = "Pagination run"
+            start_time = last_collection_date - timedelta(minutes=minutes_boundary)
+        else:
+            integration_status = "Subsequent run"
+            start_time = last_collection_date
+        self.logger.info(f"Integration status: {integration_status}")
+        return start_time

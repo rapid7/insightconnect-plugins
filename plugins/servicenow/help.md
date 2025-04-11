@@ -2,7 +2,7 @@
 
 [ServiceNow](https://www.servicenow.com/) is a tool for managing incidents and configuration management. This plugin allows users to manage all aspects of incidents including creation, search, and updates. Additionally, incident changes can be monitored and processed for use in a Rapid7 InsightConnect workflow.
 
-Note: This plugin affects only the underlying tables in a ServiceNow instance, not its UI. Hence, this plugin will work seamlessly with Virtual Task Boards.
+Note: This plugin affects only the underlying tables in a ServiceNow instance, not its UI. Hence, this plugin will work seamlessly with Virtual Task Boards
 
 # Key Features
 
@@ -14,15 +14,16 @@ Note: This plugin affects only the underlying tables in a ServiceNow instance, n
 # Requirements
 
 * ServiceNow username and password (for basic authentication)
-* ServiceNow username, password, client ID, and client secret (for OAuth authentication) 
+* ServiceNow client ID, and client secret (for OAuth authentication client credentials grant type) 
+* ServiceNow username, password, client ID, and client secret (for OAuth authentication password grant type) 
 * ServiceNow instance name
 
-Please note that to use certain actions it's necessary to use scopes that have permissions on certain tables. Depending on the actions, it's necessary to add specific auth scopes:
+* Please note that to use certain actions it's necessary to use scopes that have permissions on certain tables. Depending on the actions, it's necessary to add specific auth scopes:
 
-- Create/Read/Update/Delete Incident and Incident Attachments (table `incident` with permissions create/read/write/delete)
-- Create/Read/Update/Delete Security Incident (table `sn_si_incident` with permissions create/read/write/delete)
-- Create/Read/Update/Delete Vulnerability (table `sn_vul_vulnerable_item` with permissions create/read/write/delete)
-- Create Change Request (table `sn_chg_rest` with create permissions)
+  - Create/Read/Update/Delete Incident and Incident Attachments (table `incident` with permissions create/read/write/delete)
+  - Create/Read/Update/Delete Security Incident (table `sn_si_incident` with permissions create/read/write/delete)
+  - Create/Read/Update/Delete Vulnerability (table `sn_vul_vulnerable_item` with permissions create/read/write/delete)
+  - Create Change Request (table `sn_chg_rest` with create permissions)
 
 # Supported Product Versions
 
@@ -37,7 +38,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |client_id|string|None|False|Client ID for an application within your application registry|None|ad0bc2109c2642106907050c2ca6ef0c|None|None|
-|client_login|credential_username_password|None|True|The ServiceNow username and password for basic authentication API interaction|None|{"username":"user1", "password":"mypassword"}|None|None|
+|client_login|credential_username_password|None|False|The ServiceNow username and password for basic authentication API interaction|None|{"username":"user1", "password":"mypassword"}|None|None|
 |client_secret|credential_secret_key|None|False|Client secret for an application within your application registry|None|ad0bc2109c2642106907050c2ca6ef0c|None|None|
 |instance|string|None|True|The instance of ServiceNow from the URL, e.g. https://{instance}.service-now.com|None|instance|None|None|
 |timeout|integer|30|False|The interval in seconds before abandoning an attempt to access ServiceNow|None|30|None|None|
@@ -1681,11 +1682,13 @@ Example output:
 
 
 ## Troubleshooting
-  
-*This plugin does not contain a troubleshooting.*
+
+* This plugin does not contain a troubleshooting.
 
 # Version History
 
+* 8.1.0 - Add ability to use OAuth 2.0 flow named client credentials | Updated SDK to the latest version (v6.2.5)
+* 8.0.4 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
 * 8.0.3 - Update to resolve issue parsing response from ServiceNow if XML is received
 * 8.0.2 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 8.0.1 - Update Setuptool to version 70.0.0 | Update SDK to version 6.0.0

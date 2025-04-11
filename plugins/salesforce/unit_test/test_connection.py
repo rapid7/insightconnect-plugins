@@ -66,6 +66,12 @@ class TestConnection(TestCase):
                 "Salesforce error: 'retry your request'",
                 PluginException.assistances[PluginException.Preset.UNKNOWN],
             ],
+            [
+                "unsupported_grant",
+                Util.read_file_to_dict("inputs/connection_unsupported_grant.json.inp"),
+                "Salesforce error: 'Grant type not supported, Please ensure correct login URL is provided'",
+                PluginException.assistances[PluginException.Preset.INVALID_CREDENTIALS],
+            ],
         ]
     )
     def test_connection_raise_exception(

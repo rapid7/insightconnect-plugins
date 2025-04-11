@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name="extractit-rapid7-plugin",
-      version="3.0.9",
-      description="The ExtractIt plugin has a collection of actions used to extract various information from text. These include URLs, domains, emails, IPs, and more",
+      version="3.0.11",
+      description="The ExtractIt plugin is a collection of data extraction actions. This plugin allows users to extract various pieces of information from blocks of text. The pieces of information this plugin can extract include IPs, URLs, file paths, dates, domains, hashes, MAC addresses, and email addresses",
       author="rapid7",
       author_email="",
       url="",

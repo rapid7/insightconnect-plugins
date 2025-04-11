@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name="hashit-rapid7-plugin",
-      version="2.0.5",
-      description="Generate Common Hashes from a File or String",
+      version="2.0.6",
+      description="The HashIt plugin will generate common hashes from a file or string. Supported hashes are:* MD5* SHA1* SHA256* SHA512",
       author="rapid7",
       author_email="",
       url="",

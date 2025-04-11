@@ -1,7 +1,7 @@
 {
-	"spec": "b9c8c812633bd9bd84b2ee5507f8f45c",
-	"manifest": "6d8a32bc07e7bba543fc6414c5d1b4e1",
-	"setup": "71ad12e7c7d1db068e83d1f3b3b2506d",
+	"spec": "7ed31e9655008fc06b824a3f0164cbd2",
+	"manifest": "abe1c1678a97e7a903e4b2f0c66b5da1",
+	"setup": "15ed7d67c7b8ce5b766d8a537bd87a74",
 	"schemas": [
 		{
 			"identifier": "create_exemption/schema.py",

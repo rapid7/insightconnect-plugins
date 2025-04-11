@@ -1,23 +1,36 @@
-FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.1.3
-
-LABEL organization=rapid7
-LABEL sdk=python
-LABEL type=plugin
-
-RUN apt-get update && apt-get install -y texlive lmodern --no-install-recommends
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.2.6 AS builder
 
 WORKDIR /python/src
 
 ADD ./plugin.spec.yaml /plugin.spec.yaml
 ADD ./requirements.txt /python/src/requirements.txt
+ADD . /python/src
+
+
+
+RUN pip install .
+RUN pip uninstall -y setuptools
+
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.2.6
+
+LABEL organization=rapid7
+LABEL sdk=python
+
+WORKDIR /python/src
+
+COPY --from=builder /python/src /python/src
+
+RUN apt-get update && apt-get install -y texlive lmodern --no-install-recommends
+# root is required for the conversion to work. If USER set to nobody, actions/tests will fail
+
 
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-ADD . /python/src
+ENV PYTHONPATH="/python/src:${PYTHONPATH}"
 
-RUN python setup.py build && python setup.py install
+RUN rm -rf /root/.cache;
 
-# root is required for the conversion to work. If USER set to nobody, actions/tests will fail
+# User to run plugin code. The two supported users are: root, nobody
 USER root
 
-ENTRYPOINT ["/usr/local/bin/icon_html"]
+ENTRYPOINT ["python", "/python/src/bin/icon_html"]

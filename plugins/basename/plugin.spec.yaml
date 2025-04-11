@@ -3,12 +3,13 @@ extension: plugin
 products: [insightconnect]
 name: basename
 title: Basename
-description: This plugin is used to get the last item of a file path or URL using Python's basename utility
-version: 1.1.3
+description: Basename is used to get the last item of a file path or URL using Python's
+  basename utility
+version: 1.1.4
 connection_version: 1
 vendor: rapid7
 support: community
-supported_versions: ["Python 3.9"]
+supported_versions: [Python 3.9]
 status: []
 cloud_ready: true
 fedramp_ready: true
@@ -16,29 +17,35 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/basename
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
-  - basename
-  - utilities
+- basename
+- utilities
 sdk:
   type: slim
-  version: 6.1.3
+  version: 6.2.5
   user: nobody
 key_features:
-  - "Obtain basename of a file path or URL."
-troubleshooting: "If the input doesn't contain a slash `/` in the path the result will be the original string unmodified."
+- Obtain Basename of a file path or URL.
+troubleshooting:
+- If the input doesn't contain a slash `/` in the path the result will be the original
+  string unmodified.
 version_history:
-  - "1.1.3 - Initial updates for fedramp compliance | Updated SDK to the latest version"
-  - "1.1.2 - Added `__init__.py` file to `unit_test` folder | Refreshed with new Tooling"
-  - "1.1.1 - Update SDK to version 5"
-  - '1.1.0 - Add missing `title` in action Basename | Use input and output constants | Add example input and output | Changed `Exception` to `PluginException` | Added "f" strings'
-  - "1.0.2 - Update to use the `insightconnect-python-3-38-slim-plugin:4` Docker image | Update plugin.spec.yaml to include `cloud_ready`"
-  - "1.0.1 - New spec and help.md format for the Extension Library"
-  - "1.0.0 - Support web server mode"
-  - "0.1.1 - Update to v2 Python plugin architecture"
-  - "0.1.0 - Initial plugin "
+- 1.1.4 - Updated SDK to the latest version (6.2.5)
+- 1.1.3 - Initial updates for fedramp compliance | Updated SDK to the latest version
+- 1.1.2 - Added `__init__.py` file to `unit_test` folder | Refreshed with new Tooling
+- 1.1.1 - Update SDK to version 5
+- 1.1.0 - Add missing `title` in action Basename | Use input and output constants
+  | Add example input and output | Changed `Exception` to `PluginException` | Added
+  "f" strings
+- 1.0.2 - Update to use the `insightconnect-python-3-38-slim-plugin:4` Docker image
+  | Update plugin.spec.yaml to include `cloud_ready`
+- 1.0.1 - New spec and help.md format for the Extension Library
+- 1.0.0 - Support web server mode
+- 0.1.1 - Update to v2 Python plugin architecture
+- '0.1.0 - Initial plugin '
 links:
-  - "[Python Basename](https://docs.python.org/3/library/os.path.html)"
+- '[Python Basename](https://docs.python.org/3/library/os.path.html)'
 references:
-  - "[Python Basename](https://docs.python.org/3/library/os.path.html)"
+- '[Python Basename](https://docs.python.org/3/library/os.path.html)'
 hub_tags:
   use_cases: [data_utility]
   keywords: [basename, utilities, cloud_enabled]
@@ -46,7 +53,7 @@ hub_tags:
 actions:
   basename:
     title: Basename
-    description: Get the basename of a path
+    description: Get the Basename of a path
     input:
       path:
         title: Path
@@ -60,4 +67,4 @@ actions:
         description: Basename result
         type: string
         required: false
-        example: "text.txt"
+        example: text.txt

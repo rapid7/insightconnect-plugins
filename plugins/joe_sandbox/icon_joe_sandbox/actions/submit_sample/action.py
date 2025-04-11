@@ -1,3 +1,5 @@
+from io import BytesIO
+
 import insightconnect_plugin_runtime
 from .schema import SubmitSampleInput, SubmitSampleOutput, Input, Output, Component
 
@@ -28,7 +30,7 @@ class SubmitSample(insightconnect_plugin_runtime.Action):
         if "hybrid-decompilation" not in additional_parameters:
             additional_parameters.update({"hybrid-decompilation": 0})
         try:
-            sample_bytes = b64decode(sample)
+            sample_bytes = BytesIO(b64decode(sample))
         except binascii.Error:
             raise PluginException(
                 cause='Unable to decode base64 input for "sample". ',
@@ -36,7 +38,7 @@ class SubmitSample(insightconnect_plugin_runtime.Action):
             )
 
         try:
-            cookbook_bytes = b64decode(cookbook) if cookbook else None
+            cookbook_bytes = BytesIO(b64decode(cookbook)) if cookbook else None
         except binascii.Error:
             raise PluginException(
                 cause='Unable to decode base64 input for "cookbook". ',
@@ -45,8 +47,15 @@ class SubmitSample(insightconnect_plugin_runtime.Action):
 
         if filename:
             sample_tuple = (filename, sample_bytes)
-            webids = self.connection.api.submit_sample(sample_tuple, cookbook_bytes, parameters, additional_parameters)
+            submission_id = self.connection.api.submit_sample(
+                sample_tuple, cookbook_bytes, parameters, additional_parameters
+            )
         else:
-            webids = self.connection.api.submit_sample(sample_bytes, cookbook_bytes, parameters, additional_parameters)
+            submission_id = self.connection.api.submit_sample(
+                sample_bytes, cookbook_bytes, parameters, additional_parameters
+            )
 
-        return {Output.WEBIDS: webids}
+        submission_id_object = submission_id.get("submission_id")
+        self.logger.info(f"submission_id {submission_id_object}")
+
+        return {Output.SUBMISSION_ID: submission_id_object}

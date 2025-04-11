@@ -1,12 +1,9 @@
-FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.2.0
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.2.5
 
 LABEL organization=rapid7
 LABEL sdk=python
-LABEL type=plugin
 
-ENV SSL_CERT_FILE /etc/ssl/certs/ca-certificates.crt
-ENV SSL_CERT_DIR /etc/ssl/certs
-ENV REQUESTS_CA_BUNDLE  /etc/ssl/certs/ca-certificates.crt
+WORKDIR /python/src
 
 # Add any package dependencies here
 ENV DEBIAN_FRONTEND noninteractive
@@ -33,18 +30,18 @@ RUN echo "deb http://security.ubuntu.com/ubuntu bionic-security main" | sudo tee
     wget http://mirrors.kernel.org/ubuntu/pool/main/i/icu/libicu52_52.1-3ubuntu0.8_amd64.deb && \
     sudo apt install -y ./libicu52_52.1-3ubuntu0.8_amd64.deb && \
     rm ./libicu52_52.1-3ubuntu0.8_amd64.deb && \
-    wget https://github.com/PowerShell/PowerShell/releases/download/v7.1.5/powershell_7.1.5-1.debian.9_amd64.deb && \
-    sudo apt install -y ./powershell_7.1.5-1.debian.9_amd64.deb && \
-    rm ./powershell_7.1.5-1.debian.9_amd64.deb
+    wget https://github.com/PowerShell/PowerShell/releases/download/v7.4.6/powershell_7.4.6-1.deb_amd64.deb && \
+    sudo apt install -y ./powershell_7.4.6-1.deb_amd64.deb && \
+    rm ./powershell_7.4.6-1.deb_amd64.deb
 
 ADD ./plugin.spec.yaml /plugin.spec.yaml
+ADD ./requirements.txt /python/src/requirements.txt
+
+RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
 ADD . /python/src
 
-WORKDIR /python/src
-
-# End package dependencies
-RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-RUN python setup.py build && python setup.py install
+RUN pip install .
 
 # User to run plugin code. The two supported users are: root, nobody
 USER root

@@ -3,84 +3,77 @@ extension: plugin
 products: [insightconnect]
 name: dig
 title: DNS
-description: The DNS plugin is used for forward and reverse DNS lookups. This plugin uses [Dig](https://linux.die.net/man/1/dig), or Domain Information Groper, which is a network administration command-line tool for querying Domain Name System (DNS) name servers
-version: 2.0.3
+description: The DNS plugin is used for forward and reverse DNS lookups. This plugin
+  uses [Dig](https://linux.die.net/man/1/dig), or Domain Information Groper, which
+  is a network administration command-line tool for querying Domain Name System (DNS)
+  name servers
+version: 2.0.5
 connection_version: 2
 vendor: rapid7
 support: community
-supported_versions: ["2024-09-10"]
+supported_versions: ['2024-09-10']
 status: []
 sdk:
   type: full
-  version: 6.1.2
+  version: 6.2.5
   user: nobody
   packages:
-    - bind-tools
+  - bind-tools
 cloud_ready: true
 fedramp_ready: true
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/dig
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
-  - dig
-  - dns
+- dig
+- dns
 hub_tags:
   use_cases: [threat_detection_and_response, offensive_security]
   keywords: [dig, dns, cloud_enabled]
   features: []
-troubleshooting: |
-  The `status` variable contains the [DNS status code](https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml) name from the DNS server's response.
-  Dig has at least the following status codes implemented:
-  
-  ```
-  NOERROR
-  FORMERR
-  SERVFAIL
-  NXDOMAIN
-  NOTIMP
-  REFUSED
-  YXDOMAIN
-  YXRRSET
-  NXRRSET
-  NOTAUTH
-  NOTZONE
-  BADVERS
-  ```
-  
-  You can test the `status` variable in a Decision or Filter step to check for its value.
-  For example, in your workflow, if the resolution doesn't return an answer, then you may want to attempt a second lookup from a passive DNS service.
-  
-  Common examples:
-  
-  * `status = "NOERRROR"` - The DNS response contains an answer
-  * `status = "NXDOMAIN"` - The DNS response did not have an answer i.e. Non-Existent Domain
+troubleshooting:
+- "The `status` variable contains the [DNS status code](https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml)
+  name from the DNS server's response.\nDig has at least the following status codes
+  implemented:\n\n```\nNOERROR\nFORMERR\nSERVFAIL\nNXDOMAIN\nNOTIMP\nREFUSED\nYXDOMAIN
+    \nYXRRSET\nNXRRSET\nNOTAUTH\nNOTZONE\nBADVERS\n```\n\nYou can test the `status` variable
+  in a Decision or Filter step to check for its value.\nFor example, in your workflow,
+  if the resolution doesn't return an answer, then you may want to attempt a second
+  lookup from a passive DNS service.\n\nCommon examples:\n\n* `status = \"NOERRROR\"\
+  ` - The DNS response contains an answer\n* `status = \"NXDOMAIN\"` - The DNS response
+  did not have an answer i.e. Non-Existent Domain"
 key_features:
-  - "Forward DNS lookup to find an IP address from a domain name"
-  - "Reverse DNS lookup to find a domain name from an IP address"
+- Forward DNS lookup to find an IP address from a domain name
+- Reverse DNS lookup to find a domain name from an IP address
 links:
-  - "[Dig](https://linux.die.net/man/1/dig)"
+- '[Dig](https://linux.die.net/man/1/dig)'
 references:
-  - "[Dig](https://linux.die.net/man/1/dig)"
-  - "[DNS Status Code](https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml)"
+- '[Dig](https://linux.die.net/man/1/dig)'
+- '[DNS Status Code](https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml)'
 version_history:
-  - "2.0.3 - Initial updates for fedramp compliance | Updated SDK to the latest"
-  - "2.0.2 - Updated SDK to the latest version | Added validation for input parameters"
-  - "2.0.1 - Added `__init__.py` file to `unit_test` folder | Refreshed with new Tooling"
-  - "2.0.0 - Rename Dig plugin to DNS"
-  - "1.0.7 - Fix bug in `safe_parse` function | Fix bug when `answers` in function `execute_command` is str"
-  - "1.0.6 - Upgrade to latest Python plugin runtime | Define `cloud_ready` in spec"
-  - "1.0.5 - Update to v4 Python plugin runtime"
-  - "1.0.4 - Add example inputs"
-  - '1.0.3 - Use input and output constants | Change docker image from `komand/python-2-slim-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Added "f" strings | Remove duplicate code | Add user nobody to Dockerfile'
-  - "1.0.2 - New spec and help.md format for the Extension Library"
-  - "1.0.1 - Update to use the `komand/python-2-slim-plugin:2` Docker image to reduce plugin size"
-  - "1.0.0 - Support web server mode"
-  - "0.3.2 - Update to v2 Python plugin architecture"
-  - "0.3.1 - SSL bug fix in SDK"
-  - "0.3.0 - Add all_answers and last_answer to the forward lookup action"
-  - "0.2.0 - Add option to use custom resolver"
-  - "0.1.1 - Increased result validation"
-  - "0.1.0 - Initial plugin"
+- 2.0.5 - Updated SDK to the latest version (6.2.5)
+- 2.0.4 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
+- 2.0.3 - Initial updates for fedramp compliance | Updated SDK to the latest
+- 2.0.2 - Updated SDK to the latest version | Added validation for input parameters
+- 2.0.1 - Added `__init__.py` file to `unit_test` folder | Refreshed with new Tooling
+- 2.0.0 - Rename Dig plugin to DNS
+- 1.0.7 - Fix bug in `safe_parse` function | Fix bug when `answers` in function `execute_command`
+  is str
+- 1.0.6 - Upgrade to latest Python plugin runtime | Define `cloud_ready` in spec
+- 1.0.5 - Update to v4 Python plugin runtime
+- 1.0.4 - Add example inputs
+- 1.0.3 - Use input and output constants | Change docker image from `komand/python-2-slim-plugin:2`
+  to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Added "f" strings
+  | Remove duplicate code | Add user nobody to Dockerfile
+- 1.0.2 - New spec and help.md format for the Extension Library
+- 1.0.1 - Update to use the `komand/python-2-slim-plugin:2` Docker image to reduce
+  plugin size
+- 1.0.0 - Support web server mode
+- 0.3.2 - Update to v2 Python plugin architecture
+- 0.3.1 - SSL bug fix in SDK
+- 0.3.0 - Add all_answers and last_answer to the forward lookup action
+- 0.2.0 - Add option to use custom resolver
+- 0.1.1 - Increased result validation
+- 0.1.0 - Initial plugin
 actions:
   forward:
     title: Forward Lookup
@@ -103,14 +96,14 @@ actions:
         description: Query type e.g. ANY, A, MX, NS, etc
         type: string
         enum:
-          - A
-          - AAAA
-          - ANY
-          - CNAME
-          - MX
-          - NS
-          - PTR
-          - SOA
+        - A
+        - AAAA
+        - ANY
+        - CNAME
+        - MX
+        - NS
+        - PTR
+        - SOA
         required: true
         example: MX
     output:
@@ -122,7 +115,8 @@ actions:
         example: \n; <<>> DiG 9.12.4-P2 <<>> google.com A\n;; global ...
       status:
         title: Query Status
-        description: "Query status [ NOERROR | FORMERR | NXDOMAIN | SERVFAIL | REFUSED ...]"
+        description: Query status [ NOERROR | FORMERR | NXDOMAIN | SERVFAIL | REFUSED
+          ...]
         type: string
         required: false
         example: NOERROR
@@ -178,10 +172,17 @@ actions:
         description: Full DNS output
         type: string
         required: false
-        example: '\n; <<>> Dig 9.9.5-9+deb8u9-Debian <<>> -x 8.8.8.8\n;; global options: +cmd\n;; Got answer:\n;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 59406\n;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version: 0, flags:; udp: 512\n;; QUESTION SECTION:\n;8.8.8.8.in-addr.arpa.\t\tIN\tPTR\n\n;; ANSWER SECTION:\n8.8.8.8.in-addr.arpa.\t68133\tIN\tPTR\tgoogle-public-dns-a.google.com.\n\n;; Query time: 22 msec\n;; SERVER: 10.0.2.3#53(10.0.2.3)\n;; WHEN: Thu Jan 26 23:43:43 UTC 2017\n;; MSG SIZE  rcvd: 93\n\n'
+        example: '\n; <<>> Dig 9.9.5-9+deb8u9-Debian <<>> -x 8.8.8.8\n;; global options:
+          +cmd\n;; Got answer:\n;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id:
+          59406\n;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL:
+          1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version: 0, flags:; udp: 512\n;; QUESTION
+          SECTION:\n;8.8.8.8.in-addr.arpa.\t\tIN\tPTR\n\n;; ANSWER SECTION:\n8.8.8.8.in-addr.arpa.\t68133\tIN\tPTR\tgoogle-public-dns-a.google.com.\n\n;;
+          Query time: 22 msec\n;; SERVER: 10.0.2.3#53(10.0.2.3)\n;; WHEN: Thu Jan
+          26 23:43:43 UTC 2017\n;; MSG SIZE  rcvd: 93\n\n'
       status:
         title: Query Status
-        description: Query status [ NOERROR | FORMERR | NXDOMAIN | SERVFAIL | REFUSED ...]
+        description: Query status [ NOERROR | FORMERR | NXDOMAIN | SERVFAIL | REFUSED
+          ...]
         type: string
         required: false
         example: NOERROR

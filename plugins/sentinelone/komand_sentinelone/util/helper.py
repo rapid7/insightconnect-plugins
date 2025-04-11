@@ -83,10 +83,24 @@ def rate_limiting(max_tries: int, back_off_function: Callable = backoff_function
 
 def format_subdomain(instance: str) -> str:
     """
-    If an input subdomain contains a scheme or the Sentinelone secondlevel domain, strip these values
+    If an input subdomain contains a scheme or the SentinelOne second-level domain, strip these values
     """
-    instance = instance.replace(".sentinelone.net", "")
-    return instance.replace("https://", "").replace("http://", "")
+
+    # Remove leading and trailing whitespace
+    instance = instance.strip()
+
+    # Remove the scheme if it exists
+    if instance.startswith("http://"):
+        instance = instance[7:]
+    elif instance.startswith("https://"):
+        instance = instance[8:]
+
+    # Remove the SentinelOne domain suffix
+    if ".sentinelone.net" in instance:
+        instance = instance.replace(".sentinelone.net", "")
+
+    # Remove any trailing slashes
+    return instance.rstrip("/")
 
 
 class Helper:

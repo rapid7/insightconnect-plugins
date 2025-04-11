@@ -4,13 +4,13 @@ products: [insightconnect]
 name: microsoft_defender_incidents
 title: Microsoft Defender Incidents
 description: Manage security incidents with Microsoft Defender 365
-version: 2.0.0
+version: 2.0.3
 connection_version: 2
 key_features: ["List All Incidents", "Get Incident", "Update Incident", "Get New Incidents Trigger"]
 requirements: ["Requires a set of Azure credentials such as application (client) ID, tenant ID, and client secret key with necessary permissions (Microsoft Threat Protection -> Incident.Read.All, Incident.ReadWrite.All, and AdvancedHunting.Read.All) to monitor and modify Microsoft Defender Incidents"]
 vendor: rapid7
 support: rapid7
-supported_versions: ["2024-06-24"]
+supported_versions: ["2025-03-26"]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/microsoft_defender_incidents
@@ -22,7 +22,7 @@ tags:
   - defender
 sdk:
   type: slim
-  version: 5.6.0
+  version: 6.2.6
   user: nobody
 hub_tags:
   use_cases: [data_utility]
@@ -34,6 +34,9 @@ links:
 references:
   - "[Microsoft Defender XDR API Documentation](https://learn.microsoft.com/en-us/defender-xdr/)"
 version_history:
+  - "2.0.3 - Allowing `NotMalicious` to be used in `determination` field for `update_incident`"
+  - "2.0.2 - Updating `update_incident` input values to correlate with documentation"
+  - "2.0.1 - Adding additional `determination` values | SDK bump to 6.2.6"
   - "2.0.0 - Add better error handling for missing output values"
   - "1.0.0 - Initial plugin (Actions: List All Incidents, Get Incident, Update Incident, Triggers: Get New Incidents)"
 connection:
@@ -45,7 +48,7 @@ connection:
     example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
   client_secret:
     title: Client Secret
-    description: The application secret that you generated for your app in the appregistration portal
+    description: The application secret that you generated for your app in the app registration portal
     type: credential_secret_key
     required: true
     example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
@@ -348,7 +351,7 @@ types:
       type: string
     determination:
       title: Determination
-      description: Specifies the determination of the incident, where possible values are - NotAvailable, Apt, Malware, SecurityPersonnel, SecurityTesting, UnwantedSoftware, and Other
+      description: Specifies the determination of the incident, where possible values are - NotAvailable, Malware, SecurityTesting, UnwantedSoftware, and Other
       type: string
     detectionSource:
       title: Detection Source
@@ -475,7 +478,7 @@ actions:
         example: "Unknown"
       determination:
         title: Determination
-        description: Specifies the determination of the incident, where possible values are - NotAvailable, Apt, Malware, SecurityPersonnel, SecurityTesting, UnwantedSoftware, and Other
+        description: Specifies the determination of the incident, where possible values are - NotAvailable, Malware, SecurityTesting, UnwantedSoftware, and Other
         type: string
         required: true
         example: "NotAvailable"
@@ -528,6 +531,7 @@ actions:
           - Active
           - Resolved
           - Redirected
+          - InProgress
         required: false
         example: Active
       assignedTo:
@@ -541,27 +545,32 @@ actions:
         description: Incident's classification
         enum:
           - ""
-          - Unknown
-          - FalsePositive
           - TruePositive
+          - FalsePositive
+          - InformationalExpectedActivity
         type: string
         required: false
-        example: Unknown
+        example: TruePositive
       determination:
         title: Determination
         description: Specifies the determination of the incident
         enum:
           - ""
-          - NotAvailable
-          - Apt
+          - MultiStagedAttack
+          - MaliciousUserActivity
+          - CompromisedAccount
           - Malware
-          - SecurityPersonnel
-          - SecurityTesting
+          - Phishing
           - UnwantedSoftware
+          - SecurityTesting
+          - LineOfBusinessApplication
+          - NoEnoughDataToValidate
+          - ConfirmedActivity
           - Other
+          - NotMalicious
         type: string
         required: false
-        example: ExampleOwner
+        example: Phishing
       tags:
         title: Tags
         description: List of incident tags
@@ -607,13 +616,13 @@ actions:
         example: "user@example.com"
       classification:
         title: Classification
-        description: Specification for the incident, where possible values are - Unknown, FalsePositive, and TruePositive
+        description: Specification for the incident, where possible values are - InformationalExpectedActivity, FalsePositive, and TruePositive
         type: string
         required: true
         example: TruePositive
       determination:
         title: Determination
-        description: Specifies the determination of the incident, where possible values are - NotAvailable, Apt, Malware, SecurityPersonnel, SecurityTesting, UnwantedSoftware, and Other
+        description: Specifies the determination of the incident, where possible values are - MultiStagedAttack, MaliciousUserActivity, CompromisedAccount, Malware, Phishing, UnwantedSoftware, SecurityTesting, LineOfBusinessApplication, NoEnoughDataToValidate, ConfirmedActivity, NotMalicious and Other
         type: string
         required: true
         example: Malware

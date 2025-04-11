@@ -892,6 +892,7 @@ Example output:
 
 # Version History
 
+* 8.1.1 - Updated SDK to the latest version (v6.2.3) | Address vulnerabilities
 * 8.1.0 - Action `Asset Search`: Added optional asset and vulnerability criteria logical operator | Updated action to return more than 500 results
 * 8.0.0 - Output for `Asset Search` and `Get Asset` to label fields `ID` and `Solution Type` as un-required
 * 7.0.0 - `Asset Search` and `Get Asset` actions output field `remediated` updated to type array of object

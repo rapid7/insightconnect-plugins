@@ -80,7 +80,8 @@ Example output:
 
 #### Get Agent Details
 
-This action is used to find and display detailed information about a device. If additional pages of agents are available, the action should be run again with the returned next cursor
+This action is used to find and display detailed information about a device. If additional pages of agents are 
+available, the action should be run again with the returned next cursor
 
 ##### Input
 
@@ -142,8 +143,9 @@ Example output:
 ```
 
 #### Get All Agents by IP Address
-
-This action is used to find all agents that share the same public or private IP address and display details about them. If additional pages of agents are available, the action should be run again with the returned next cursor
+  
+This action is used to find all agents that share the same public or private IP address and display details about them. 
+If additional pages of agents are available, the action should be run again with the returned next cursor
 
 ##### Input
 
@@ -455,10 +457,12 @@ Example output:
 
 ## Troubleshooting
 
-If the actions `Get Agent Details` and `Get All Agents by IP` return a `next cursor` value, it is an indication that more pages of data are available to be reviewed. In this instance, it is recommended to run the action multiple times and pass the `next cursor` value, recording all agents found.
+* If the actions `Get Agent Details` and `Get All Agents by IP` return a `next cursor` value, it is an indication that more pages of data are available to be reviewed. In this instance, it is recommended to run the action multiple times and pass the `next cursor` value, recording all agents found.
 
 # Version History
 
+* 3.0.3 - Updated SDK to the latest version (6.2.5)
+* 3.0.2 - Updated to use latest buildpack to address vulnerabilities | Update `Get Agent Details`:  extended output to include `agent` field when no assets are found
 * 3.0.1 - Update 'Get Agent Details' to allow no assets to be returned | SDK bump to latest version
 * 3.0.0 - Update `Get Agent Details` and `Get All Agents by IP` to return the next page token if more pages are available to search | Update `Get Agent Details` to return agent location details | Initial updates for fedramp compliance | Updated SDK to the latest version
 * 2.1.2 - Improve logging | Update SDK

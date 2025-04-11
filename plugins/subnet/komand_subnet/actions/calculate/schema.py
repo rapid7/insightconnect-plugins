@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Return subnet information for IP and Netmask"
+    DESCRIPTION = "Return Subnet information for IP and Netmask"
 
 
 class Input:

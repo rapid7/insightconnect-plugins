@@ -29,5 +29,5 @@ class TestGetAgentDetails(TestCase):
     def test_get_agent_by_hostname_bad(self, mock_request: MagicMock) -> None:
         action = Util.default_connector(GetAgentDetails())
         actual = action.run({Input.AGENT: "badID"})
-        expected = {}
+        expected = {"agent": {}}
         self.assertEqual(actual, expected)

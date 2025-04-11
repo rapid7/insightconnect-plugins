@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Adds the specified Active Directory user"
+    DESCRIPTION = "Add the specified Active Directory user"
 
 
 class Input:

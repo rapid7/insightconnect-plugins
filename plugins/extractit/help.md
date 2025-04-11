@@ -1,6 +1,6 @@
 # Description
 
-The ExtractIt plugin is a collection of data extraction actions. This plugin allows users to extract various pieces of information from blocks of text. The pieces of information this plugin can extract include IPs, URLs, file paths, dates, domains, hashes, MAC addresses, and email addresses.
+The ExtractIt plugin is a collection of data extraction actions. This plugin allows users to extract various pieces of information from blocks of text. The pieces of information this plugin can extract include IPs, URLs, file paths, dates, domains, hashes, MAC addresses, and email addresses
 
 # Key Features
 
@@ -673,6 +673,8 @@ Example output:
 
 # Version History
 
+* 3.0.11 - Updated tldextract to v5.1.3
+* 3.0.10 - Updated SDK to the latest version (6.2.5)
 * 3.0.9 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 3.0.8 - Adding in extra logic to handle wrapping of lines in pdfs
 * 3.0.7 - Resolved issues related to `PDF`, `ODP`, `ODT`, `ODF` files extractions

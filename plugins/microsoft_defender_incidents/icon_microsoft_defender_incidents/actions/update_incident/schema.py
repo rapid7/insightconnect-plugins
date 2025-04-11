@@ -33,7 +33,8 @@ class Output:
 
 
 class UpdateIncidentInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -50,9 +51,9 @@ class UpdateIncidentInput(insightconnect_plugin_runtime.Input):
       "description": "Incident's classification",
       "enum": [
         "",
-        "Unknown",
+        "TruePositive",
         "FalsePositive",
-        "TruePositive"
+        "InformationalExpectedActivity"
       ],
       "order": 4
     },
@@ -68,13 +69,18 @@ class UpdateIncidentInput(insightconnect_plugin_runtime.Input):
       "description": "Specifies the determination of the incident",
       "enum": [
         "",
-        "NotAvailable",
-        "Apt",
+        "MultiStagedAttack",
+        "MaliciousUserActivity",
+        "CompromisedAccount",
         "Malware",
-        "SecurityPersonnel",
-        "SecurityTesting",
+        "Phishing",
         "UnwantedSoftware",
-        "Other"
+        "SecurityTesting",
+        "LineOfBusinessApplication",
+        "NoEnoughDataToValidate",
+        "ConfirmedActivity",
+        "Other",
+        "NotMalicious"
       ],
       "order": 5
     },
@@ -92,7 +98,8 @@ class UpdateIncidentInput(insightconnect_plugin_runtime.Input):
         "",
         "Active",
         "Resolved",
-        "Redirected"
+        "Redirected",
+        "InProgress"
       ],
       "order": 2
     },
@@ -111,14 +118,16 @@ class UpdateIncidentInput(insightconnect_plugin_runtime.Input):
   ],
   "definitions": {}
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class UpdateIncidentOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -141,7 +150,7 @@ class UpdateIncidentOutput(insightconnect_plugin_runtime.Output):
     "classification": {
       "type": "string",
       "title": "Classification",
-      "description": "Specification for the incident, where possible values are - Unknown, FalsePositive, and TruePositive",
+      "description": "Specification for the incident, where possible values are - InformationalExpectedActivity, FalsePositive, and TruePositive",
       "order": 6
     },
     "comments": {
@@ -164,7 +173,7 @@ class UpdateIncidentOutput(insightconnect_plugin_runtime.Output):
     "determination": {
       "type": "string",
       "title": "Determination",
-      "description": "Specifies the determination of the incident, where possible values are - NotAvailable, Apt, Malware, SecurityPersonnel, SecurityTesting, UnwantedSoftware, and Other",
+      "description": "Specifies the determination of the incident, where possible values are - MultiStagedAttack, MaliciousUserActivity, CompromisedAccount, Malware, Phishing, UnwantedSoftware, SecurityTesting, LineOfBusinessApplication, NoEnoughDataToValidate, ConfirmedActivity, NotMalicious and Other",
       "order": 7
     },
     "incidentId": {
@@ -622,7 +631,8 @@ class UpdateIncidentOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

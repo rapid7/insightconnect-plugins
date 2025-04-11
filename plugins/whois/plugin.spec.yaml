@@ -3,68 +3,81 @@ extension: plugin
 products: [insightconnect]
 name: whois
 title: WHOIS
-description: "[WHOIS](https://en.wikipedia.org/wiki/WHOIS) is a query and response protocol that is widely used for querying databases that store the registered users or assignee's of an Internet resource, such as a domain name, an IP address block, or an autonomous system"
-version: 3.1.6
+description: "[WHOIS](https://en.wikipedia.org/wiki/WHOIS) is a query and response
+  protocol that is widely used for querying databases that store the registered users
+  or assignee's of an Internet resource, such as a domain name, an IP address block,
+  or an autonomous system"
+version: 3.1.8
 connection_version: 3
 vendor: rapid7
 support: community
-supported_versions: ["2024-09-09"]
+supported_versions: ['2024-09-09']
 status: []
 sdk:
   type: slim
-  version: 6.2.0
+  version: 6.2.5
   user: nobody
   packages:
-    - whois
-    - git
+  - whois
+  - git
 cloud_ready: true
 fedramp_ready: true
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/whois
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
-  - whois
-  - ip lookup
+- whois
+- ip lookup
 hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [whois, ip lookup, cloud_enabled]
   features: []
-key_features: ["Perform a WHOIS lookup for a provided IP address or domain to gain information on who is responsible for a domain or IP"]
-references: ["[WHOIS](https://en.wikipedia.org/wiki/WHOIS)"]
-links: ["[WHOIS](https://en.wikipedia.org/wiki/WHOIS)"]
-troubleshooting: "Multiple records can be returned by the server, this plugin currently only returns the first unique records found."
+key_features: [Perform a WHOIS lookup for a provided IP address or domain to gain
+    information on who is responsible for a domain or IP]
+references: ['[WHOIS](https://en.wikipedia.org/wiki/WHOIS)']
+links: ['[WHOIS](https://en.wikipedia.org/wiki/WHOIS)']
+troubleshooting:
+- Multiple records can be returned by the server, this plugin currently only returns
+  the first unique records found.
 version_history:
-  - "3.1.6 - Fix mapping issue (RIPE) for address action. Adding 'description' output field for RIPE (address action) | SDK bump to 6.2.0"
-  - "3.1.5 - Action `Address`: Fixed issue with result parsing"
-  - "3.1.4 - Initial updates for fedramp compliance | Updated SDK to the latest version"
-  - "3.1.3 - Updated SDK to the latest version (v6.0.0) | Bump setuptools version to v70.0.0"
-  - "3.1.2 - Updated SDK to the latest version | Added validation for input parameters"
-  - "3.1.1 - Add empty `__init__.py` file to `unit_test` folder | Refresh with new tooling"
-  - "3.1.0 - Add support for `.monster` and `.nl` domains"
-  - "3.0.3 - Add PluginException in Domain and Address action when response is empty"
-  - "3.0.2 - Support non-UTF-8 responses in the Address action"
-  - "3.0.1 - Clean up help.md formatting"
-  - "3.0.0 - Add input `registrar` for manual server selection to Address Lookup action"
-  - "2.0.3 - Upgrade to latest Python plugin runtime | Define `cloud_ready` in spec"
-  - "2.0.2 - Fix issue where com.br style domains could crash the plugin"
-  - "2.0.1 - Update to v4 Python plugin runtime"
-  - "2.0.0 - Add example inputs | Fix capitalization in the title of the `last_updated` output."
-  - "1.0.7 - Upgrade komand/python-whois version to 0.4.2 | Update whois.conf to support .in domains | Updated help.md for the Extension Library"
-  - "1.0.6 - New spec and help.md format for the Extension Library"
-  - "1.0.5 - Upgrade komand/python-whois version to 0.4.1 | Upgrade SDK"
-  - "1.0.4 - Fix variable name in domain lookup"
-  - "1.0.3 - Handle instances where domain name is prefixed with a protocol"
-  - "1.0.2 - Fix typo in plugin spec"
-  - "1.0.1 - Add support for LACNIC, APNIC, RIPE registries"
-  - "1.0.0 - Support web server mode"
-  - "0.3.3 - Bug fix for CI tool incorrectly uploading plugins"
-  - "0.3.2 - Added new date formats"
-  - "0.3.1 - Update to v2 Python plugin architecture"
-  - "0.3.0 - Support for more TLDs"
-  - "0.2.1 - SSL bug fix in SDK"
-  - "0.2.0 - Fix domain query and adjust output"
-  - "0.1.1 - Bugfixes and pagination support"
-  - "0.1.0 - Initial plugin"
+- 3.1.8 - Updated SDK to the latest version (6.2.5)
+- 3.1.7 - Updated SDK to the latest version (v6.2.3) | Address vulnerabilities | Updated
+  `Whois` dependency
+- 3.1.6 - Fix mapping issue (RIPE) for address action. Adding 'description' output
+  field for RIPE (address action) | SDK bump to 6.2.0
+- '3.1.5 - Action `Address`: Fixed issue with result parsing'
+- 3.1.4 - Initial updates for fedramp compliance | Updated SDK to the latest version
+- 3.1.3 - Updated SDK to the latest version (v6.0.0) | Bump setuptools version to
+  v70.0.0
+- 3.1.2 - Updated SDK to the latest version | Added validation for input parameters
+- 3.1.1 - Add empty `__init__.py` file to `unit_test` folder | Refresh with new tooling
+- 3.1.0 - Add support for `.monster` and `.nl` domains
+- 3.0.3 - Add PluginException in Domain and Address action when response is empty
+- 3.0.2 - Support non-UTF-8 responses in the Address action
+- 3.0.1 - Clean up help.md formatting
+- 3.0.0 - Add input `registrar` for manual server selection to Address Lookup action
+- 2.0.3 - Upgrade to latest Python plugin runtime | Define `cloud_ready` in spec
+- 2.0.2 - Fix issue where com.br style domains could crash the plugin
+- 2.0.1 - Update to v4 Python plugin runtime
+- 2.0.0 - Add example inputs | Fix capitalization in the title of the `last_updated`
+  output.
+- 1.0.7 - Upgrade komand/python-whois version to 0.4.2 | Update whois.conf to support
+  .in domains | Updated help.md for the Extension Library
+- 1.0.6 - New spec and help.md format for the Extension Library
+- 1.0.5 - Upgrade komand/python-whois version to 0.4.1 | Upgrade SDK
+- 1.0.4 - Fix variable name in domain lookup
+- 1.0.3 - Handle instances where domain name is prefixed with a protocol
+- 1.0.2 - Fix typo in plugin spec
+- 1.0.1 - Add support for LACNIC, APNIC, RIPE registries
+- 1.0.0 - Support web server mode
+- 0.3.3 - Bug fix for CI tool incorrectly uploading plugins
+- 0.3.2 - Added new date formats
+- 0.3.1 - Update to v2 Python plugin architecture
+- 0.3.0 - Support for more TLDs
+- 0.2.1 - SSL bug fix in SDK
+- 0.2.0 - Fix domain query and adjust output
+- 0.1.1 - Bugfixes and pagination support
+- 0.1.0 - Initial plugin
 actions:
   domain:
     title: Domain Lookup
@@ -82,43 +95,43 @@ actions:
         description: Domain name
         type: string
         required: false
-        example: "google.com"
+        example: google.com
       registrar:
         title: Domain Registrar
         description: Domain registrar
         type: string
         required: false
-        example: "MarkMonitor Inc."
+        example: MarkMonitor Inc.
       registrant_name:
         title: Registrant Name
         description: Registrant name
         type: string
         required: false
-        example: ""
+        example: ''
       registrant_cc:
         title: Registrant Country
         description: Registrant country
         type: string
         required: false
-        example: "US"
+        example: US
       creation_date:
         title: Creation Date
         description: Creation date
         type: date
         required: false
-        example: "1997-09-15T04:00:00"
+        example: '1997-09-15T04:00:00'
       expiration_date:
         title: Expiration Date
         description: Expiration date
         type: date
         required: false
-        example: ""
+        example: ''
       last_updated:
         title: Last Updated Date
         description: Last updated date
         type: date
         required: false
-        example: ""
+        example: ''
       name_servers:
         title: Nameservers
         description: Nameservers
@@ -130,49 +143,54 @@ actions:
         description: Registry domain ID
         type: string
         required: false
-        example: "2138514_domain_com-vrsn"
+        example: 2138514_domain_com-vrsn
       registrar_whois_server:
         title: Registrar WHOIS Server
         description: Registrar WHOIS server
         type: string
         required: false
-        example: "whois.markmonitor.com"
+        example: whois.markmonitor.com
       registrar_url:
         title: Registrar URL
         description: Registrar URL
         type: string
         required: false
-        example: "http://www.markmonitor.com"
+        example: http://www.markmonitor.com
       registrar_iana_id:
         title: Registrar IANA ID
         description: Registrar IANA ID
         type: string
         required: false
-        example: "292"
+        example: '292'
       registrar_abuse_contact_email:
         title: Registrar Abuse Contact Email
         description: Registrar abuse contact email
         type: string
         required: false
-        example: "user@example.com"
+        example: user@example.com
       registrar_abuse_contact_phone:
         title: Registrar Abuse Contact Phone
         description: Registrar abuse Contact phone
         type: string
         required: false
-        example: "+1.2083895740"
+        example: '+1.2083895740'
       domain_status:
         title: Domain Status
         type: '[]string'
         description: Domain status
         required: false
-        example: '["clientdeleteprohibited https://icann.org/epp#clientdeleteprohibited", "clienttransferprohibited https://icann.org/epp#clienttransferprohibited", "clientupdateprohibited https://icann.org/epp#clientupdateprohibited", "serverdeleteprohibited https://icann.org/epp#serverdeleteprohibited", "servertransferprohibited https://icann.org/epp#servertransferprohibited", "serverupdateprohibited https://icann.org/epp#serverupdateprohibited"]'
+        example: '["clientdeleteprohibited https://icann.org/epp#clientdeleteprohibited",
+          "clienttransferprohibited https://icann.org/epp#clienttransferprohibited",
+          "clientupdateprohibited https://icann.org/epp#clientupdateprohibited", "serverdeleteprohibited
+          https://icann.org/epp#serverdeleteprohibited", "servertransferprohibited
+          https://icann.org/epp#servertransferprohibited", "serverupdateprohibited
+          https://icann.org/epp#serverupdateprohibited"]'
       dnssec:
         title: DNSSEC
         description: DNSSEC
         type: string
         required: false
-        example: "unsigned"
+        example: unsigned
   address:
     title: Address Lookup
     description: This action is used to retrieve data about an IP address
@@ -188,11 +206,11 @@ actions:
         description: Domain Registrar
         type: string
         enum:
-          - Autodetect
-          - RIPE
-          - ARIN
-          - LACNIC
-          - APNIC
+        - Autodetect
+        - RIPE
+        - ARIN
+        - LACNIC
+        - APNIC
         required: false
         default: Autodetect
         example: Autodetect
@@ -202,100 +220,100 @@ actions:
         description: Network name
         type: string
         required: false
-        example: "LVLT-ORG-8-8"
+        example: LVLT-ORG-8-8
       nettype:
         title: Network Type
         description: Network type
         type: string
         required: false
-        example: "Direct Allocation"
+        example: Direct Allocation
       netrange:
         title: Network Range
         description: Network Range
         type: string
         required: false
-        example: "8.0.0.0 - 8.255.255.255"
+        example: 8.0.0.0 - 8.255.255.255
       cidr:
         title: CIDR
         description: CIDR
         type: string
         required: false
-        example: "8.0.0.0/8"
+        example: 8.0.0.0/8
       organization:
         title: Organization
         description: Organization
         type: string
         required: false
-        example: "Level 3 Communications, Inc. (LVLT)"
+        example: Level 3 Communications, Inc. (LVLT)
       orgname:
         title: Organization Name
         description: Organization name
         type: string
         required: false
-        example: "Level 3 Communications, Inc."
+        example: Level 3 Communications, Inc.
       regdate:
         title: Registration Date
         description: Registration date
         type: string
         required: false
-        example: "1992-12-01"
+        example: '1992-12-01'
       update:
         title: WHOIS Updated Date
         description: WHOIS updated date
         type: string
         required: false
-        example: "2012-02-24"
+        example: '2012-02-24'
       address:
         title: Address
         description: Address
         type: string
         required: false
-        example: "1025 Eldorado Blvd."
+        example: 1025 Eldorado Blvd.
       city:
         title: City
         description: City
         type: string
         required: false
-        example: "Broomfield"
+        example: Broomfield
       postal:
         title: Postal
         description: Postal
         type: string
         required: false
-        example: "80021"
+        example: '80021'
       state:
         title: State
         description: State
         type: string
         required: false
-        example: "CO"
+        example: CO
       country:
         title: Country
         description: Country
         type: string
         required: false
-        example: "US"
+        example: US
       org_abuse_email:
         title: Organization Abuse E-mail
         description: Organization abuse e-mail
         type: string
         required: false
-        example: "user@example.com"
+        example: user@example.com
       org_abuse_phone:
         title: Organization Abuse Phone
         description: Organization abuse phone
         type: string
         required: false
-        example: "+1-877-453-8353 "
+        example: '+1-877-453-8353 '
       org_tech_email:
         title: Organization Tech E-mail
         description: Organization tech e-mail
         type: string
         required: false
-        example: "user@example.com"
+        example: user@example.com
       org_tech_phone:
         title: Organization Tech Phone
         description: Organization tech phone
         type: string
         required: false
-        example: "+1-877-453-8353 "
+        example: '+1-877-453-8353 '

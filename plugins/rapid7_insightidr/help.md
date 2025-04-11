@@ -112,7 +112,8 @@ Example output:
 
 This action is used to realtime query an InsightIDR log. This will query individual logs for results. Note only 500 
 results will be returned from a single call, if all results are required for this query please use smaller timeranges. 
-If both a log name and log ID are provided, the log ID will used over the log name
+If both a log name and a log ID are provided, the log ID will be used. However, either the log name OR log ID is 
+required for the action to execute
 
 ##### Input
 
@@ -2416,7 +2417,7 @@ This action is used to allows to change the disposition of the investigation wit
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |disposition|string|None|True|Investigation's disposition|["BENIGN", "MALICIOUS", "NOT_APPLICABLE"]|BENIGN|None|None|
-|id|string|None|True|The ID or RNN of the investigation to change the disposition of|None|rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111|None|None|
+|id|string|None|True|The ID or RRN of the investigation to change the disposition of|None|rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111|None|None|
   
 Example input:
 
@@ -2465,7 +2466,7 @@ This action is used to allows to change the priority of the investigation with t
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|string|None|True|The ID or RNN of the investigation to change the priority of|None|rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111|None|None|
+|id|string|None|True|The ID or RRN of the investigation to change the priority of|None|rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111|None|None|
 |priority|string|None|True|Investigation's priority|["UNSPECIFIED", "LOW", "MEDIUM", "HIGH", "CRITICAL"]|LOW|None|None|
   
 Example input:
@@ -3427,6 +3428,9 @@ Example output:
 
 # Version History
 
+* 11.0.3 - Added log entry validation using regular expressions | SDK bump to 6.2.6
+* 11.0.2 - Updating descriptions for 'set_priority_of_investigation' & 'set_disposition_of_investigation'
+* 11.0.1 - Updating `Advanced Query on Log` description
 * 11.0.0 - Updating schema for query actions (`advanced_query_on_log`, `advanced_query_on_log_set` & `query`) to account for missing keys/invalid mapping in the schema
 * 10.3.4 - Bumping requirements.txt | SDK bump to 6.2.2
 * 10.3.3 - Bumping requirements.txt | SDK bump to 6.2.0

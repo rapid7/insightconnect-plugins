@@ -927,6 +927,8 @@ Isolate Endpoint fails with 500 error - This will happen if an isolation action 
 
 # Version History
 
+* 4.0.6 - Update `MonitorAlerts` to resume alert monitoring from the last task run time | Update error handling to log additional data | Update SDK to 6.2.4
+* 4.0.5 - Update `MonitorAlerts` task pagination decision handling | update SDK to 6.2.2
 * 4.0.4 - Raise authentication errors if provided invalid credentials
 * 4.0.3 - `Monitor Incidents` - Add custom config exception handling
 * 4.0.2 - SDK bump to 6.1.4

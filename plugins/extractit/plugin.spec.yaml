@@ -1,137 +1,161 @@
 plugin_spec_version: v2
 extension: plugin
-products: ["insightconnect"]
+products: [insightconnect]
 name: extractit
 title: ExtractIt
-description: The ExtractIt plugin has a collection of actions used to extract various information from text. These include URLs, domains, emails, IPs, and more
-version: 3.0.9
+description: The ExtractIt plugin is a collection of data extraction actions. This
+  plugin allows users to extract various pieces of information from blocks of text.
+  The pieces of information this plugin can extract include IPs, URLs, file paths,
+  dates, domains, hashes, MAC addresses, and email addresses
+version: 3.0.11
 connection_version: 3
 vendor: rapid7
 support: rapid7
-supported_versions: ["2024-10-02"]
+supported_versions: ['2024-10-02']
 status: []
 cloud_ready: true
 fedramp_ready: true
 resources:
   vendor_url: https://www.rapid7.com
 tags:
-  - extract
-  - extractor
-  - MD5
-  - SHA
+- extract
+- extractor
+- MD5
+- SHA
 hub_tags:
   use_cases: [threat_detection_and_response, data_utility]
   keywords: [extraction, domains, email, url, ip_address, ioc, cloud_enabled]
   features: []
 sdk:
   type: slim
-  version: 6.1.3
+  version: 6.2.5
   user: nobody
 key_features:
-  - Extract dates from a string or file for use in subsequent workflow actions
-  - Extract domains from a string or file for use in subsequent workflow actions
-  - Extract email addresses from a string or file for use in subsequent workflow actions
-  - Extract file paths from a string or file for use in subsequent workflow actions
-  - Extract indicators of compromise from a string or file for use in subsequent workflow actions
-  - Extract URLs from a string or file for use in subsequent workflow actions
-  - Extract IP addresses from a string or file for use in subsequent workflow actions
-  - Extract MAC addresses from a string or file for use in subsequent workflow actions
-  - Extract MD5, SHA1, SHA256, and SHA512 hashes from a string or file for use in subsequent workflow actions
-  - Extract UUIDs from a string or file for use in subsequent workflow actions
-  - Extract CVEs from a string or file for use in subsequent workflow actions
-  - Extract all indicators from a string or file for use in subsequent workflow actions
+- Extract dates from a string or file for use in subsequent workflow actions
+- Extract domains from a string or file for use in subsequent workflow actions
+- Extract email addresses from a string or file for use in subsequent workflow actions
+- Extract file paths from a string or file for use in subsequent workflow actions
+- Extract indicators of compromise from a string or file for use in subsequent workflow
+  actions
+- Extract URLs from a string or file for use in subsequent workflow actions
+- Extract IP addresses from a string or file for use in subsequent workflow actions
+- Extract MAC addresses from a string or file for use in subsequent workflow actions
+- Extract MD5, SHA1, SHA256, and SHA512 hashes from a string or file for use in subsequent
+  workflow actions
+- Extract UUIDs from a string or file for use in subsequent workflow actions
+- Extract CVEs from a string or file for use in subsequent workflow actions
+- Extract all indicators from a string or file for use in subsequent workflow actions
 version_history:
-  - "3.0.9 - Initial updates for fedramp compliance | Updated SDK to the latest version"
-  - "3.0.8 - Adding in extra logic to handle wrapping of lines in pdfs"
-  - "3.0.7 - Resolved issues related to `PDF`, `ODP`, `ODT`, `ODF` files extractions"
-  - "3.0.6 - Resolved issue where users experienced a `Not in list` value error when submitted multiple URLs with the same linked URL in the URL Extractor action"
-  - "3.0.5 - Updated error message in extractor.py | Updated help.md description | Updated URL extraction | Fix issue with extracting dates from `.XLSX` files"
-  - "3.0.4 - Fix issue with extracting URLs from link query parameters"
-  - "3.0.3 - Remove duplicate date formats from action inputs"
-  - "3.0.2 - Fix issue where domains and URLs were not parsed correctly if top level domain contained uppercase | Fix issue where parts of URL were incorrectly recognized as domains if URL contained port"
-  - "3.0.1 - Fix issue where encoded URLs would be incorrectly extracted after the top level domain for Extract URL action"
-  - "3.0.0 - Update to support date format for Date Extractor and Extract All actions"
-  - "2.3.1 - Support special character ! for URL Extractor action"
-  - "2.3.0 - Support extraction from binary files for all actions"
-  - "2.2.1 - Support domain extraction from encoded URL | Fix issue where subdomain removal did not work properly in some cases | Improve domain extraction by limiting the number of false positive results"
-  - "2.2.0 - Add Extract All, UUID Extractor and CVE Extractor actions | Cloud enabled"
-  - "2.1.2 - Rollback URL matching regex used in HTML email extraction."
-  - "2.1.1 - Rewrite plugin to use the Python SDK | Add input and output examples in plugin.spec and held.md | Fix issue in domain extractor where multiple domains were extracted from a single URL | Fix issue where the URL extractor does not extract URLs containing an email address | Fix issue where hash extractors would return part of SHA256 or SHA512 hashes as SHA1 hash and part of SHA512 hash as SHA256 hash | Update the MD5 regex to exclude spaces or other extra characters in the results | Fix issue where the file path extractor was extracting part of a URL or date as a file path | Add unit tests"
-  - "2.1.0 - Fix issue in domain extractor where a colon could crash the plugin | Update to support unicode domains in extract domain | Fix issue where extract domain output could have invalid characters. e.g. email address and email headers"
-  - "2.0.0 - URL Extractor action no longer falsely identifies email addresses as URLs"
-  - "1.1.7 - New spec and help.md format for the Extension Library"
-  - "1.1.6 - Fix issue where IP Extractor would return inaccurate IPs"
-  - "1.1.5 - Fix issue where URL Extractor parsing was missing URLs"
-  - "1.1.4 - Fix issue where URL Extractor would return IPs"
-  - "1.1.3 - Regenerate with latest Go SDK to solve bug with triggers"
-  - "1.1.2 - Updating to Go SDK 2.6.4"
-  - "1.1.1 - Fix issue where test method for Domain Extractor was not properly testing the action"
-  - "1.1.0 - Port to V2 architecture | Support web server mode | MD5 matching bugfix"
-  - "1.0.1 - Bugfix Email Extractor"
-  - "1.0.0 - Domain Extractor bugfix"
-  - "0.1.0 - Initial plugin"
+- 3.0.11 - Updated tldextract to v5.1.3
+- 3.0.10 - Updated SDK to the latest version (6.2.5)
+- 3.0.9 - Initial updates for fedramp compliance | Updated SDK to the latest version
+- 3.0.8 - Adding in extra logic to handle wrapping of lines in pdfs
+- 3.0.7 - Resolved issues related to `PDF`, `ODP`, `ODT`, `ODF` files extractions
+- 3.0.6 - Resolved issue where users experienced a `Not in list` value error when
+  submitted multiple URLs with the same linked URL in the URL Extractor action
+- 3.0.5 - Updated error message in extractor.py | Updated help.md description | Updated
+  URL extraction | Fix issue with extracting dates from `.XLSX` files
+- 3.0.4 - Fix issue with extracting URLs from link query parameters
+- 3.0.3 - Remove duplicate date formats from action inputs
+- 3.0.2 - Fix issue where domains and URLs were not parsed correctly if top level
+  domain contained uppercase | Fix issue where parts of URL were incorrectly recognized
+  as domains if URL contained port
+- 3.0.1 - Fix issue where encoded URLs would be incorrectly extracted after the top
+  level domain for Extract URL action
+- 3.0.0 - Update to support date format for Date Extractor and Extract All actions
+- 2.3.1 - Support special character ! for URL Extractor action
+- 2.3.0 - Support extraction from binary files for all actions
+- 2.2.1 - Support domain extraction from encoded URL | Fix issue where subdomain removal
+  did not work properly in some cases | Improve domain extraction by limiting the
+  number of false positive results
+- 2.2.0 - Add Extract All, UUID Extractor and CVE Extractor actions | Cloud enabled
+- 2.1.2 - Rollback URL matching regex used in HTML email extraction.
+- 2.1.1 - Rewrite plugin to use the Python SDK | Add input and output examples in
+  plugin.spec and held.md | Fix issue in domain extractor where multiple domains were
+  extracted from a single URL | Fix issue where the URL extractor does not extract
+  URLs containing an email address | Fix issue where hash extractors would return
+  part of SHA256 or SHA512 hashes as SHA1 hash and part of SHA512 hash as SHA256 hash
+  | Update the MD5 regex to exclude spaces or other extra characters in the results
+  | Fix issue where the file path extractor was extracting part of a URL or date as
+  a file path | Add unit tests
+- 2.1.0 - Fix issue in domain extractor where a colon could crash the plugin | Update
+  to support unicode domains in extract domain | Fix issue where extract domain output
+  could have invalid characters. e.g. email address and email headers
+- 2.0.0 - URL Extractor action no longer falsely identifies email addresses as URLs
+- 1.1.7 - New spec and help.md format for the Extension Library
+- 1.1.6 - Fix issue where IP Extractor would return inaccurate IPs
+- 1.1.5 - Fix issue where URL Extractor parsing was missing URLs
+- 1.1.4 - Fix issue where URL Extractor would return IPs
+- 1.1.3 - Regenerate with latest Go SDK to solve bug with triggers
+- 1.1.2 - Updating to Go SDK 2.6.4
+- 1.1.1 - Fix issue where test method for Domain Extractor was not properly testing
+  the action
+- 1.1.0 - Port to V2 architecture | Support web server mode | MD5 matching bugfix
+- 1.0.1 - Bugfix Email Extractor
+- 1.0.0 - Domain Extractor bugfix
+- 0.1.0 - Initial plugin
 links:
-  - "[ExtractIt in Extension Library](https://extensions.rapid7.com/extension/extractit)"
+- '[ExtractIt in Extension Library](https://extensions.rapid7.com/extension/extractit)'
 references:
-  - "[ExtractIt in Extension Library](https://extensions.rapid7.com/extension/extractit)"
+- '[ExtractIt in Extension Library](https://extensions.rapid7.com/extension/extractit)'
 types:
   hashes:
     md5_hashes:
       title: MD5 Hashes
       description: Extracted MD5 Hashes from message
-      type: "[]string"
+      type: '[]string'
       required: false
     sha1_hashes:
       title: SHA1 Hashes
       description: Extracted SHA1 hashes from message
-      type: "[]string"
+      type: '[]string'
       required: false
     sha256_hashes:
       title: SHA256 Hashes
       description: Extracted SHA256 hashes from message
-      type: "[]string"
+      type: '[]string'
       required: false
     sha512_hashes:
       title: SHA512 Hashes
       description: Extracted SHA512 hashes from message
-      type: "[]string"
+      type: '[]string'
       required: false
   ip_addresses:
     ipv4_addresses:
       title: IPv4 Addressses
       description: Extracted IPv4 addressses from message
-      type: "[]string"
+      type: '[]string'
       required: false
     ipv6_addresses:
       title: IPv6 Addressses
       description: Extracted IPv6 addresses from message
-      type: "[]string"
+      type: '[]string'
       required: false
   indicators:
     domains:
       title: Domains
       description: Extracted domains from message
-      type: "[]string"
+      type: '[]string'
       required: false
     dates:
       title: Dates
       description: Extracted dates from message
-      type: "[]string"
+      type: '[]string'
       required: false
     filepaths:
       title: Filepaths
       description: Extracted filepaths from message
-      type: "[]string"
+      type: '[]string'
       required: false
     urls:
       title: URLs
       description: Extracted URLs from message
-      type: "[]string"
+      type: '[]string'
       required: false
     email_addresses:
       title: Email Addresses
       description: Extracted email addresses from message
-      type: "[]string"
+      type: '[]string'
       required: false
     hashes:
       title: Hashes
@@ -146,17 +170,17 @@ types:
     mac_addresses:
       title: MAC Addresses
       description: Extracted MAC addresses from message
-      type: "[]string"
+      type: '[]string'
       required: false
     cves:
       title: CVEs
       description: Extracted CVEs from message
-      type: "[]string"
+      type: '[]string'
       required: false
     uuids:
       title: UUIDs
       description: Extracted UUIDs from message
-      type: "[]string"
+      type: '[]string'
       required: false
 actions:
   url_extractor:
@@ -171,13 +195,17 @@ actions:
         example: https://example.com is an example URL
       file:
         title: File
-        description: Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
+        description: Input file as bytes, supports text and binary file types such
+          as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
         type: bytes
         required: false
         example: aHR0cHM6Ly9leGFtcGxlLmNvbSBpcyBhbiBleGFtcGxlIFVSTA==
       keep_original_urls:
         title: Keep Original URLs
-        description: "Retain original URL encoding, if applicable, e.g: if true: http://foo.bar/?q=Test%20URL-encoded%20stuff will be extracted as http://foo.bar/?q=Test%20URL-encoded%20stuff. If false, http://foo.bar/?q=Test%20URL-encoded%20stuff will be extracted as http://foo.bar/?q=Test because %20 is decoded as a space"
+        description: 'Retain original URL encoding, if applicable, e.g: if true: http://foo.bar/?q=Test%20URL-encoded%20stuff
+          will be extracted as http://foo.bar/?q=Test%20URL-encoded%20stuff. If false,
+          http://foo.bar/?q=Test%20URL-encoded%20stuff will be extracted as http://foo.bar/?q=Test
+          because %20 is decoded as a space'
         type: boolean
         required: false
         example: false
@@ -201,7 +229,8 @@ actions:
         example: 198.51.100.100 and 2001:db8:8:4::2 are sample IP addresses
       file:
         title: File
-        description: Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
+        description: Input file as bytes, supports text and binary file types such
+          as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
         type: bytes
         required: false
         example: MTk4LjUxLjEwMC4xMDAgYW5kIDIwMDE6ZGI4Ojg6NDo6MiBhcmUgc2FtcGxlIElQIGFkZHJlc3Nlcw==
@@ -224,7 +253,8 @@ actions:
         example: user@example.com is an example email
       file:
         title: File
-        description: Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
+        description: Input file as bytes, supports text and binary file types such
+          as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
         type: bytes
         required: false
         example: dXNlckBleGFtcGxlLmNvbSBpcyBhbiBleGFtcGxlIGVtYWls
@@ -247,7 +277,8 @@ actions:
         example: 00:14:22:01:23:45 is an example MAC address
       file:
         title: File
-        description: Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
+        description: Input file as bytes, supports text and binary file types such
+          as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
         type: bytes
         required: false
         example: MDA6MTQ6MjI6MDE6MjM6NDUgaXMgYW4gZXhhbXBsZSBNQUMgYWRkcmVzcw==
@@ -270,7 +301,8 @@ actions:
         example: example.com is an example domain
       file:
         title: File
-        description: Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODF, TXT, ZIP
+        description: Input file as bytes, supports text and binary file types such
+          as PDF, DOCX, XLSX, PPTX, ODF, TXT, ZIP
         type: bytes
         required: false
         example: ZXhhbXBsZS5jb20gaXMgYW4gZXhhbXBsZSBkb21haW4=
@@ -299,7 +331,8 @@ actions:
         example: /tmp/image.jpg is an example file path
       file:
         title: File
-        description: Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
+        description: Input file as bytes, supports text and binary file types such
+          as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
         type: bytes
         required: false
         example: L3RtcC9pbWFnZS5qcGcgaXMgYW4gZXhhbXBsZSBmaWxlIHBhdGg=
@@ -316,50 +349,51 @@ actions:
     input:
       date_format:
         title: Date Format
-        description: Dates matching this format are extracted - If All Formats is selected, found dates will be processed in the listed order documented
+        description: Dates matching this format are extracted - If All Formats is
+          selected, found dates will be processed in the listed order documented
         type: string
         required: true
         enum:
-          - dd/mm/yyyy
-          - mm/dd/yyyy
-          - dd\mm\yyyy
-          - dd.mm.yyyy
-          - dd-mm-yyyy
-          - dd.mm.yy
-          - dd-mm-yy
-          - dd/mm/yy
-          - dd\mm\yy
-          - mm\dd\yyyy
-          - mm.dd.yyyy
-          - mm-dd-yyyy
-          - mm/dd/yy
-          - mm\dd\yy
-          - mm.dd.yy
-          - mm-dd-yy
-          - dd/mmm/yyyy
-          - dd\mmm\yyyy
-          - dd.mmm.yyyy
-          - dd-mmm-yyyy
-          - dd/mmm/yy
-          - dd\mmm\yy
-          - dd.mmm.yy
-          - dd-mmm-yy
-          - yyyy.mm.dd
-          - yyyy-mm-dd
-          - yyyy/mm/dd
-          - yyyy\mm\dd
-          - yyyy.mmm.dd
-          - yyyy-mmm-dd
-          - yyyy/mmm/dd
-          - yyyy\mmm\dd
-          - yy.mm.dd
-          - yy-mm-dd
-          - yy/mm/dd
-          - yy\mm\dd
-          - yyyy-mm-ddThh:mm
-          - yyyy-mm-ddThh:mm:ss
-          - All Formats
-          - ""
+        - dd/mm/yyyy
+        - mm/dd/yyyy
+        - dd\mm\yyyy
+        - dd.mm.yyyy
+        - dd-mm-yyyy
+        - dd.mm.yy
+        - dd-mm-yy
+        - dd/mm/yy
+        - dd\mm\yy
+        - mm\dd\yyyy
+        - mm.dd.yyyy
+        - mm-dd-yyyy
+        - mm/dd/yy
+        - mm\dd\yy
+        - mm.dd.yy
+        - mm-dd-yy
+        - dd/mmm/yyyy
+        - dd\mmm\yyyy
+        - dd.mmm.yyyy
+        - dd-mmm-yyyy
+        - dd/mmm/yy
+        - dd\mmm\yy
+        - dd.mmm.yy
+        - dd-mmm-yy
+        - yyyy.mm.dd
+        - yyyy-mm-dd
+        - yyyy/mm/dd
+        - yyyy\mm\dd
+        - yyyy.mmm.dd
+        - yyyy-mmm-dd
+        - yyyy/mmm/dd
+        - yyyy\mmm\dd
+        - yy.mm.dd
+        - yy-mm-dd
+        - yy/mm/dd
+        - yy\mm\dd
+        - yyyy-mm-ddThh:mm
+        - yyyy-mm-ddThh:mm:ss
+        - All Formats
+        - ''
         example: dd/mm/yyyy
       str:
         title: String
@@ -369,7 +403,8 @@ actions:
         example: 05/12/1982 is an example date
       file:
         title: File
-        description: Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
+        description: Input file as bytes, supports text and binary file types such
+          as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
         type: bytes
         required: false
         example: MDUvMTIvMTk4MiBpcyBhbiBleGFtcGxlIGRhdGU=
@@ -389,10 +424,12 @@ actions:
         description: Input string
         type: string
         required: false
-        example: user@example.com, 198.51.100.100 and 44d88612fea8a8f36de82e1278abb02f are IOC examples
+        example: user@example.com, 198.51.100.100 and 44d88612fea8a8f36de82e1278abb02f
+          are IOC examples
       file:
         title: File
-        description: Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
+        description: Input file as bytes, supports text and binary file types such
+          as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
         type: bytes
         required: false
         example: dXNlckBleGFtcGxlLmNvbSwgMTk4LjUxLjEwMC4xMDAgYW5kIDQ0ZDg4NjEyZmVhOGE4ZjM2ZGU4MmUxMjc4YWJiMDJmIGFyZSBJT0MgZXhhbXBsZXM=
@@ -415,7 +452,8 @@ actions:
         example: 44d88612fea8a8f36de82e1278abb02f is an example MD5 hash
       file:
         title: File
-        description: Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
+        description: Input file as bytes, supports text and binary file types such
+          as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
         type: bytes
         required: false
         example: NDRkODg2MTJmZWE4YThmMzZkZTgyZTEyNzhhYmIwMmYgaXMgYW4gZXhhbXBsZSBNRDUgaGFzaA==
@@ -438,7 +476,8 @@ actions:
         example: 3395856ce81f2b7382dee72602f798b642f14140 is an example SHA1 hash
       file:
         title: File
-        description: Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
+        description: Input file as bytes, supports text and binary file types such
+          as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
         type: bytes
         required: false
         example: MzM5NTg1NmNlODFmMmI3MzgyZGVlNzI2MDJmNzk4YjY0MmYxNDE0MCBpcyBhbiBleGFtcGxlIFNIQTEgaGFzaA==
@@ -458,10 +497,12 @@ actions:
         description: Input string
         type: string
         required: false
-        example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f is an example SHA256 hash
+        example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
+          is an example SHA256 hash
       file:
         title: File
-        description: Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
+        description: Input file as bytes, supports text and binary file types such
+          as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
         type: bytes
         required: false
         example: Mjc1YTAyMWJiZmI2NDg5ZTU0ZDQ3MTg5OWY3ZGI5ZDE2NjNmYzY5NWVjMmZlMmEyYzQ1MzhhYWJmNjUxZmQwZiBpcyBhbiBleGFtcGxlIFNIQTI1NiBoYXNo
@@ -481,10 +522,12 @@ actions:
         description: Input string
         type: string
         required: false
-        example: cc805d5fab1fd71a4ab352a9c533e65fb2d5b885518f4e565e68847223b8e6b85cb48f3afad842726d99239c9e36505c64b0dc9a061d9e507d833277ada336ab is an example SHA512 hash
+        example: cc805d5fab1fd71a4ab352a9c533e65fb2d5b885518f4e565e68847223b8e6b85cb48f3afad842726d99239c9e36505c64b0dc9a061d9e507d833277ada336ab
+          is an example SHA512 hash
       file:
         title: File
-        description: Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
+        description: Input file as bytes, supports text and binary file types such
+          as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
         type: bytes
         required: false
         example: Y2M4MDVkNWZhYjFmZDcxYTRhYjM1MmE5YzUzM2U2NWZiMmQ1Yjg4NTUxOGY0ZTU2NWU2ODg0NzIyM2I4ZTZiODVjYjQ4ZjNhZmFkODQyNzI2ZDk5MjM5YzllMzY1MDVjNjRiMGRjOWEwNjFkOWU1MDdkODMzMjc3YWRhMzM2YWIgaXMgYW4gZXhhbXBsZSBTSEE1MTIgaGFzaA==
@@ -507,7 +550,8 @@ actions:
         example: Test string of extract CVE-1234-1234567 2012/12/12
       file:
         title: File
-        description: Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
+        description: Input file as bytes, supports text and binary file types such
+          as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
         type: bytes
         required: false
         example: dGVzdCBzdHJpbmcgb2YgZXh0cmFjdCBDVkUtMTIzNC0xMjM0NTY3IDIwMTIvMTIvMTI=
@@ -530,7 +574,8 @@ actions:
         example: Test string of extract 123e4567-e12b-34c3-a456-426789124000
       file:
         title: File
-        description: Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
+        description: Input file as bytes, supports text and binary file types such
+          as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
         type: bytes
         required: false
         example: VGVzdCBzdHJpbmcgb2YgZXh0cmFjdCAxMjNlNDU2Ny1lMTJiLTM0YzMtYTQ1Ni00MjY3ODkxMjQwMDA=
@@ -543,64 +588,70 @@ actions:
         example: '["123e4567-e12b-34c3-a456-426789124000"]'
   extract_all:
     title: Extract All
-    description: Extracts all UUIDs, CVEs, dates, domains, emails, filepaths, IOCs, IPs, MACs, MD5 hashes, SHA1 hashes, SHA256 hashes, SHA 512 hashes and URLs from a string or file
+    description: Extracts all UUIDs, CVEs, dates, domains, emails, filepaths, IOCs,
+      IPs, MACs, MD5 hashes, SHA1 hashes, SHA256 hashes, SHA 512 hashes and URLs from
+      a string or file
     input:
       date_format:
         title: Date Format
-        description: Dates matching this format are extracted - If All Formats is selected, found dates will be processed in the listed order documented
+        description: Dates matching this format are extracted - If All Formats is
+          selected, found dates will be processed in the listed order documented
         type: string
         required: true
         enum:
-          - dd/mm/yyyy
-          - mm/dd/yyyy
-          - dd\mm\yyyy
-          - dd.mm.yyyy
-          - dd-mm-yyyy
-          - dd.mm.yy
-          - dd-mm-yy
-          - dd/mm/yy
-          - dd\mm\yy
-          - mm\dd\yyyy
-          - mm.dd.yyyy
-          - mm-dd-yyyy
-          - mm/dd/yy
-          - mm\dd\yy
-          - mm.dd.yy
-          - mm-dd-yy
-          - dd/mmm/yyyy
-          - dd\mmm\yyyy
-          - dd.mmm.yyyy
-          - dd-mmm-yyyy
-          - dd/mmm/yy
-          - dd\mmm\yy
-          - dd.mmm.yy
-          - dd-mmm-yy
-          - yyyy.mm.dd
-          - yyyy-mm-dd
-          - yyyy/mm/dd
-          - yyyy\mm\dd
-          - yyyy.mmm.dd
-          - yyyy-mmm-dd
-          - yyyy/mmm/dd
-          - yyyy\mmm\dd
-          - yy.mm.dd
-          - yy-mm-dd
-          - yy/mm/dd
-          - yy\mm\dd
-          - yyyy-mm-ddThh:mm
-          - yyyy-mm-ddThh:mm:ss
-          - All Formats
-          - ""
+        - dd/mm/yyyy
+        - mm/dd/yyyy
+        - dd\mm\yyyy
+        - dd.mm.yyyy
+        - dd-mm-yyyy
+        - dd.mm.yy
+        - dd-mm-yy
+        - dd/mm/yy
+        - dd\mm\yy
+        - mm\dd\yyyy
+        - mm.dd.yyyy
+        - mm-dd-yyyy
+        - mm/dd/yy
+        - mm\dd\yy
+        - mm.dd.yy
+        - mm-dd-yy
+        - dd/mmm/yyyy
+        - dd\mmm\yyyy
+        - dd.mmm.yyyy
+        - dd-mmm-yyyy
+        - dd/mmm/yy
+        - dd\mmm\yy
+        - dd.mmm.yy
+        - dd-mmm-yy
+        - yyyy.mm.dd
+        - yyyy-mm-dd
+        - yyyy/mm/dd
+        - yyyy\mm\dd
+        - yyyy.mmm.dd
+        - yyyy-mmm-dd
+        - yyyy/mmm/dd
+        - yyyy\mmm\dd
+        - yy.mm.dd
+        - yy-mm-dd
+        - yy/mm/dd
+        - yy\mm\dd
+        - yyyy-mm-ddThh:mm
+        - yyyy-mm-ddThh:mm:ss
+        - All Formats
+        - ''
         example: dd/mm/yyyy
       str:
         title: String
         description: Input string
         type: string
         required: false
-        example: test string of extract CVE-1234-1234567 12/12/2312 123e4567-e12b-34c3-a456-426789124000 user@example.com 3395856ce81f2b7382dee72602f798b642f14140 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f 198.51.100.0/24 1.1.1.1
+        example: test string of extract CVE-1234-1234567 12/12/2312 123e4567-e12b-34c3-a456-426789124000
+          user@example.com 3395856ce81f2b7382dee72602f798b642f14140 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
+          198.51.100.0/24 1.1.1.1
       file:
         title: File
-        description: Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
+        description: Input file as bytes, supports text and binary file types such
+          as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
         type: bytes
         required: false
         example: dGVzdCBzdHJpbmcgb2YgZXh0cmFjdCBDVkUtMTIzNC0xMjM0NTY3IDEyLzEyLzIzMTIgMTIzZTQ1NjctZTEyYi0zNGMzLWE0NTYtNDI2Nzg5MTI0MDAwIHVzZXJAZXhhbXBsZS5jb20gMzM5NTg1NmNlODFmMmI3MzgyZGVlNzI2MDJmNzk4YjY0MmYxNDE0MCAyNzVhMDIxYmJmYjY0ODllNTRkNDcxODk5ZjdkYjlkMTY2M2ZjNjk1ZWMyZmUyYTJjNDUzOGFhYmY2NTFmZDBmIDE5OC41MS4xMDAuMC8yNCAxLjEuMS4x

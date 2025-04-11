@@ -3,15 +3,15 @@ extension: plugin
 products: [insightconnect]
 name: microsoft_teams
 title: Microsoft Teams
-description: "[Microsoft Teams](https://products.office.com/en-us/microsoft-teams/group-chat-software) is a unified communications platform that combines persistent workplace chat, video meetings, file storage, and application integration. The Microsoft Teams plugin allows you to send and trigger workflows on new messages. The plugin will also allow for teams management with the ability to add and remove teams, channels, and users. This plugin uses the [Microsoft Teams API](https://docs.microsoft.com/en-us/graph/api/resources/teams-api-overview?view=graph-rest-1.0) to interact with Microsoft Teams"
+description: 'The Microsoft Teams plugin allows you to send and trigger workflows on new messages. The plugin will also allow for teams management with the ability to add and remove teams, channels, and users'
 key_features:
- - Communication Management for all microsoft products
+- Communication Management for all microsoft products
 requirements:
- - Username and Password
- - Secret Key, similar to API Key
-version: 7.0.0
+- Username and Password
+- Secret Key, similar to API Key
+version: 7.0.1
 connection_version: 7
-supported_versions: ["Microsoft Graph API v1.0 2024-09-13"]
+supported_versions: [Microsoft Graph API v1.0 2024-09-13]
 vendor: rapid7
 support: community
 status: []
@@ -23,35 +23,38 @@ resources:
   vendor_url: https://www.microsoft.com
   docs_url: https://docs.rapid7.com/insightconnect/microsoft-teams/
 tags:
-  - microsoft
-  - teams
-  - office 365
-  - chat
+- microsoft
+- teams
+- office 365
+- chat
 sdk:
   type: slim
-  version: 6.1.3
+  version: 6.2.5
   user: nobody
 hub_tags:
-  use_cases: [alerting_and_notifications, application_management, threat_detection_and_response, user_management]
+  use_cases: [alerting_and_notifications, application_management, threat_detection_and_response,
+    user_management]
   keywords: [microsoft_teams, office365, chat, cloud_enabled]
   features: []
-troubleshooting: "If there is more than one team with the same name in your organization, the oldest team between the two will be used."
+troubleshooting:
+- If there is more than one team with the same name in your organization, the oldest team between the two will be used.
 links:
-  - "[MicrosoftTeams in Extension Library](https://extensions.rapid7.com/extension/microsoft-teams)"
+- '[MicrosoftTeams in Extension Library](https://extensions.rapid7.com/extension/microsoft-teams)'
 references:
-  - "[Microsoft Teams](https://products.office.com/en-us/microsoft-teams/group-chat-software)"
-  - "[Microsoft Teams API](https://docs.microsoft.com/en-us/graph/api/resources/teams-api-overview?view=graph-rest-1.0)"
-  - "[Adaptive Cards Actions](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/cards/cards-actions#adaptive-cards-actions)"
-  - "[Python Regular Expression Library (Re)](https://docs.python.org/3.7/library/re.html)"
+- '[Microsoft Teams](https://products.office.com/en-us/microsoft-teams/group-chat-software)'
+- '[Microsoft Teams API](https://docs.microsoft.com/en-us/graph/api/resources/teams-api-overview?view=graph-rest-1.0)'
+- '[Adaptive Cards Actions](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/cards/cards-actions#adaptive-cards-actions)'
+- '[Python Regular Expression Library (Re)](https://docs.python.org/3.7/library/re.html)'
 version_history:
-- "7.0.0 - Updated SDK to the latest version | Initial updates for fedramp compliance"
-- "6.0.1 - Using exact match on channel names rather than search, from user input channel names when getting the channel id | using urllib to encode any team names in API calls to avoid symbols not being parsed correctly"
-- "6.0.0 - New actions: `create_teams_chat` | `list_messages_in_chat` | update type of `Event Detail` to type object" 
-- "5.1.0 - New actions: Get Reply List | Improve typing on message"
-- "5.0.0 - New actions: Get Message in Chat, Get Message in Channel | Update to latest SDK version | Change required fields in message schema"
-- "4.2.0 - New Message Received: Fixed issue where `font-size` value appeared in the `urls`, and `domains` output fields | Can choose the role of a member when adding them to a channel | Fix bug where case-sensitive URLs were returned in lower case | Improved reliability of domains output value"
-- "4.1.0 - Cloud enabled | Add Channel to Team: The user has the option to select the type of channel to be created. The available types are `Standard`, and `Private`" 
-- 4.0.0 - Fix issue with Create Teams Enabled Group action's members, and owners input field types
+- 7.0.1 - Updated SDK to the latest version (6.2.5)
+- 7.0.0 - Updated SDK to the latest version | Initial updates for fedramp compliance
+- 6.0.1 - Using exact match on channel names rather than search, from user input channel names when getting the channel id | using urllib to encode any team names in API calls to avoid symbols not being parsed correctly
+- 6.0.0 - New actions - `create_teams_chat` | `list_messages_in_chat` | update type of `Event Detail` to type object
+- 5.1.0 - New actions - Get Reply List | Improve typing on message
+- 5.0.0 - New actions - Get Message in Chat, Get Message in Channel | Update to latest SDK version | Change required fields in message schema
+- 4.2.0 - New Message Received - Fixed issue where `font-size` value appeared in the `urls`, and `domains` output fields | Can choose the role of a member when adding them to a channel | Fix bug where case-sensitive URLs were returned in lower case | Improved reliability of domains output value
+- 4.1.0 - Cloud enabled | Add Channel to Team The user has the option to select the type of channel to be created. The available types are `Standard`, and `Private`
+- 4.0.0 - Fix issue with Create Teams Enabled Group actions members, and owners input field types
 - 3.2.0 - Send Message Action is updated to support chat messages via chat_id parameter, team_name is set to optional. | Update SDK to latest version.
 - 3.1.5 - Add `microsoft_teams` and `office365` keywords | Removed `microsoft, teams, office 365` keywords
 - 3.1.4 - Update help.md to include troubleshooting message about team names
@@ -66,8 +69,8 @@ version_history:
 - 2.2.1 - Automatically extract UUIDs in the New Message Received trigger
 - 2.2.0 - Extract and return command security and network indicators in the New Message Received trigger
 - 2.1.0 - Update Send Message and Send HTML Message actions to accept `thread_id` input to support threaded replies | Update New Message Received trigger to output team and channel names so they can be passed into subsequent steps
-- 2.0.5 - Fix issue where auth token wasn't properly renewed
-- 2.0.4 - Fix issue where a message that only had an image in it could break the 'New Message Received' trigger
+- 2.0.5 - Fix issue where auth token was not properly renewed
+- 2.0.4 - Fix issue where a message that only had an image in it could break the "New Message Received" trigger
 - 2.0.3 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/microsoft-teams)
 - 2.0.2 - Fix issue where unexpected HTML messages would not trigger workflows
 - 2.0.1 - Update to Get Teams action to support more than 20 teams
@@ -83,62 +86,62 @@ version_history:
 types:
   team:
     displayName:
-        title: "Display Name"
-        type: string
-        description: "Display name"
-        required: false
+      title: Display Name
+      type: string
+      description: Display name
+      required: false
     id:
-        title: "ID"
-        type: string
-        description: "ID"
-        required: false
+      title: ID
+      type: string
+      description: ID
+      required: false
     description:
-        title: "Description"
-        type: string
-        description: "Description"
-        required: false
+      title: Description
+      type: string
+      description: Description
+      required: false
   hashes:
     md5_hashes:
       title: MD5 Hashes
       description: Extracted MD5 Hashes from message
-      type: "[]string"
+      type: '[]string'
       required: false
     sha1_hashes:
       title: SHA1 Hashes
       description: Extracted SHA1 hashes from message
-      type: "[]string"
+      type: '[]string'
       required: false
     sha256_hashes:
       title: SHA256 Hashes
       description: Extracted SHA256 hashes from message
-      type: "[]string"
+      type: '[]string'
       required: false
   ip_addresses:
     ipv4_addresses:
       title: IPv4 Addressses
       description: Extracted IPv4 addressses from message
-      type: "[]string"
+      type: '[]string'
       required: false
     ipv6_addresses:
       title: IPv6 Addressses
       description: Extracted IPv6 addresses from message
-      type: "[]string"
+      type: '[]string'
       required: false
   indicators:
     domains:
       title: Domains
       description: Extracted domains from message
-      type: "[]string"
+      type: '[]string'
       required: false
     urls:
       title: URLs
       description: Extracted URLs from message
-      type: "[]string"
+      type: '[]string'
       required: false
     email_addresses:
       title: Email Addresses
       description: Extracted email addresses from message
-      type: "[]string"
+      type: '[]string'
       required: false
     hashes:
       title: Hashes
@@ -153,313 +156,316 @@ types:
     mac_addresses:
       title: MAC Addresses
       description: Extracted MAC addresses from message
-      type: "[]string"
+      type: '[]string'
       required: false
     cves:
       title: CVEs
       description: Extracted CVEs from message
-      type: "[]string"
+      type: '[]string'
       required: false
     uuids:
       title: UUIDs
       description: Extracted UUIDs from message
-      type: "[]string"
+      type: '[]string'
       required: false
   channel:
     displayName:
-      title: "Display Name"
+      title: Display Name
       type: string
-      description: "Display name"
+      description: Display name
       required: false
     id:
-      title: "ID"
+      title: ID
       type: string
-      description: "ID"
+      description: ID
       required: false
     description:
-      title: "Description"
+      title: Description
       type: string
-      description: "Description"
+      description: Description
       required: false
   body:
     content:
-      title: "Content"
+      title: Content
       type: string
-      description: "Content"
+      description: Content
       required: false
     contentType:
-      title: "Content Type"
+      title: Content Type
       type: string
-      description: "Content type"
+      description: Content type
       required: false
   user:
     displayName:
-      title: "Display name"
+      title: Display name
       type: string
-      description: "Display name"
+      description: Display name
       required: false
     id:
-      title: "ID"
+      title: ID
       type: string
-      description: "ID"
+      description: ID
       required: false
   from:
     user:
-      title: "User"
+      title: User
       type: user
-      description: "User"
+      description: User
       required: false
   message:
-     body:
-       title: "Body"
-       type: body
-       description: "Body"
-       required: false
-     from:
-       title: "From"
-       type: from
-       description: "From"
-       required: false
-     createdDateTime:
-       title: "Created Date Time"
-       type: string
-       description: "Created date time"
-       required: false
-     webUrl:
-       title: "Web URL"
-       type: string
-       description: "Web URL"
-       required: false
-     importance:
-       title: "Importance"
-       type: string
-       description: "Importance"
-       required: false
-     messageType:
-       title: "Message Type"
-       type: string
-       description: "Message type"
-       required: false
-     locale:
-       title: "Locale"
-       type: string
-       description: "Locale"
-       required: false
-     id:
-       title: "ID"
-       type: string
-       description: "ID"
-       required: false
-     first_word:
-       title: First Word
-       description: Extracted first word from message (easy way to obtain a chat command)
-       type: string
-       required: false
-     words:
-       title: Words
-       description: The message split by spaces into a list of words. This list makes finding and using parameters in chat commands easier
-       type: "[]string"
-       required: false
-     channelIdentity:
-       title: "Channel Identity"
-       type: channelIdentity
-       description: "Represents identity of the channel"
-       required: false
+    body:
+      title: Body
+      type: body
+      description: Body
+      required: false
+    from:
+      title: From
+      type: from
+      description: From
+      required: false
+    createdDateTime:
+      title: Created Date Time
+      type: string
+      description: Created date time
+      required: false
+    webUrl:
+      title: Web URL
+      type: string
+      description: Web URL
+      required: false
+    importance:
+      title: Importance
+      type: string
+      description: Importance
+      required: false
+    messageType:
+      title: Message Type
+      type: string
+      description: Message type
+      required: false
+    locale:
+      title: Locale
+      type: string
+      description: Locale
+      required: false
+    id:
+      title: ID
+      type: string
+      description: ID
+      required: false
+    first_word:
+      title: First Word
+      description: Extracted first word from message (easy way to obtain a chat command)
+      type: string
+      required: false
+    words:
+      title: Words
+      description: The message split by spaces into a list of words. This list makes
+        finding and using parameters in chat commands easier
+      type: '[]string'
+      required: false
+    channelIdentity:
+      title: Channel Identity
+      type: channelIdentity
+      description: Represents identity of the channel
+      required: false
   group:
-      mailNickname:
-        title: "Mail Nickname"
-        type: string
-        description: "Mail nickname"
-        required: false
-      id:
-        title: "ID"
-        type: string
-        description: "ID"
-        required: false
-      mail:
-        title: "Mail"
-        type: string
-        description: "Mail"
-        required: false
-      description:
-        title: "Description"
-        type: string
-        description: "Description"
-        required: false
-      securityEnabled:
-        title: "Security Enabled"
-        type: boolean
-        description: "Security enabled"
-        required: false
-      displayName:
-        title: "Display Name"
-        type: string
-        description: "Display name"
-        required: false
-      createdDateTime:
-        title: "Created Date Time"
-        type: string
-        description: "Created date time"
-        required: false
-      mailEnabled:
-        title: "Mail Enabled"
-        type: boolean
-        description: "Mail enabled"
-        required: false
+    mailNickname:
+      title: Mail Nickname
+      type: string
+      description: Mail nickname
+      required: false
+    id:
+      title: ID
+      type: string
+      description: ID
+      required: false
+    mail:
+      title: Mail
+      type: string
+      description: Mail
+      required: false
+    description:
+      title: Description
+      type: string
+      description: Description
+      required: false
+    securityEnabled:
+      title: Security Enabled
+      type: boolean
+      description: Security enabled
+      required: false
+    displayName:
+      title: Display Name
+      type: string
+      description: Display name
+      required: false
+    createdDateTime:
+      title: Created Date Time
+      type: string
+      description: Created date time
+      required: false
+    mailEnabled:
+      title: Mail Enabled
+      type: boolean
+      description: Mail enabled
+      required: false
   itemBody:
-      content:
-        title: "Content"
-        type: string
-        description: "The content of the item"
-        required: false
-      contentType:
-        title: "Content Type"
-        type: string
-        description: "The type of the content, possible values are text and HTML"
-        required: false
+    content:
+      title: Content
+      type: string
+      description: The content of the item
+      required: false
+    contentType:
+      title: Content Type
+      type: string
+      description: The type of the content, possible values are text and HTML
+      required: false
   channelIdentity:
-      channelId:
-        title: "Channel ID"
-        type: string
-        description: "The identity of the channel in which the message was posted"
-        required: false
-      teamId:
-        title: "Team ID"
-        type: string
-        description: "The identity of the team in which the message was posted"
-        required: false
+    channelId:
+      title: Channel ID
+      type: string
+      description: The identity of the channel in which the message was posted
+      required: false
+    teamId:
+      title: Team ID
+      type: string
+      description: The identity of the team in which the message was posted
+      required: false
   chatMessageReaction:
-      createdDateTime:
-        title: "Created Date Time"
-        type: string
-        description: "Created date time"
-        required: false
-      reactionType:
-        title: "Reaction Type"
-        type: string
-        description: "Reaction Type"
-        required: false
-      user:
-        title: "User"
-        type: user
-        description: "The user who reacted to the message"
-        required: false
+    createdDateTime:
+      title: Created Date Time
+      type: string
+      description: Created date time
+      required: false
+    reactionType:
+      title: Reaction Type
+      type: string
+      description: Reaction Type
+      required: false
+    user:
+      title: User
+      type: user
+      description: The user who reacted to the message
+      required: false
   chatMessage:
-      attachments:
-        title: "Attachments"
-        type: "[]object"
-        description: "References to attached objects"
-        required: false
-      body:
-        title: "Body"
-        type: itemBody
-        description: "Representation of the content of the chat message"
-        required: false
-      chatId:
-        title: "Chat ID"
-        type: string
-        description: "Represents the identity of the chat"
-        required: false
-      channelIdentity:
-        title: "Channel Identity"
-        type: channelIdentity
-        description: "Represents identity of the channel"
-        required: false
-      createdDateTime:
-        title: "Created Date Time"
-        type: string
-        description: "Created date time"
-        required: false
-      deletedDateTime:
-        title: "Deleted Date Time"
-        type: string
-        description: "Deleted date time"
-        required: false
-      etag:
-        title: "Etag"
-        type: string
-        description: "Version number of the chat message"
-        required: false
-      eventDetail:
-        title: "Event Detail"
-        type: object
-        description: "Represents details of an event that happened in a chat"
-        required: false
-      from:
-        title: "From"
-        type: from
-        description: "Details of the sender of the chat message"
-        required: false
-      id:
-        title: "ID"
-        type: string
-        description: "Unique ID of the message"
-        required: false
-      importance:
-        title: "Importance"
-        type: string
-        description: "The importance of the chat message"
-        required: false
-      lastModifiedDateTime:
-        title: "Last Modified Date Time"
-        type: string
-        description: "Timestamp when the chat message is created (initial setting) or modified"
-        required: false
-      lastEditedDateTime:
-        title: "Last Edited Date Time"
-        type: string
-        description: "Timestamp when edits to the chat message were made"
-        required: false
-      locale:
-        title: "Locale"
-        type: string
-        description: "Locale of the chat message set by the client"
-        required: false
-      mentions:
-        title: "Mentions"
-        type: "[]object"
-        description: "List of entities mentioned in the chat message"
-        required: false
-      messageHistory:
-        title: "Message History"
-        type: "[]object"
-        description: "List of activity history of a message item"
-        required: false
-      messageType:
-        title: "Message Type"
-        type: string
-        description: "The type of chat message"
-        required: false
-      policyViolation:
-        title: "Policy Violation"
-        type: object
-        description: "Defines the properties of a policy violation"
-        required: false
-      reactions:
-        title: "Reactions"
-        type: "[]chatMessageReaction"
-        description: "Reactions for this chat message"
-        required: false
-      replyToId:
-        title: "Reply To ID"
-        type: string
-        description: "ID of the parent chat message or root chat message of the thread"
-        required: false
-      subject:
-        title: "Subject"
-        type: string
-        description: "The subject of the chat message, in plaintext"
-        required: false
-      summary:
-        title: "Summary"
-        type: string
-        description: "Summary text of the chat message that could be used for push notifications and summary views or fall back views"
-        required: false
-      webUrl:
-        title: "Web URL"
-        type: string
-        description: "Link to the message in Microsoft Teams"
-        required: false
+    attachments:
+      title: Attachments
+      type: '[]object'
+      description: References to attached objects
+      required: false
+    body:
+      title: Body
+      type: itemBody
+      description: Representation of the content of the chat message
+      required: false
+    chatId:
+      title: Chat ID
+      type: string
+      description: Represents the identity of the chat
+      required: false
+    channelIdentity:
+      title: Channel Identity
+      type: channelIdentity
+      description: Represents identity of the channel
+      required: false
+    createdDateTime:
+      title: Created Date Time
+      type: string
+      description: Created date time
+      required: false
+    deletedDateTime:
+      title: Deleted Date Time
+      type: string
+      description: Deleted date time
+      required: false
+    etag:
+      title: Etag
+      type: string
+      description: Version number of the chat message
+      required: false
+    eventDetail:
+      title: Event Detail
+      type: object
+      description: Represents details of an event that happened in a chat
+      required: false
+    from:
+      title: From
+      type: from
+      description: Details of the sender of the chat message
+      required: false
+    id:
+      title: ID
+      type: string
+      description: Unique ID of the message
+      required: false
+    importance:
+      title: Importance
+      type: string
+      description: The importance of the chat message
+      required: false
+    lastModifiedDateTime:
+      title: Last Modified Date Time
+      type: string
+      description: Timestamp when the chat message is created (initial setting) or
+        modified
+      required: false
+    lastEditedDateTime:
+      title: Last Edited Date Time
+      type: string
+      description: Timestamp when edits to the chat message were made
+      required: false
+    locale:
+      title: Locale
+      type: string
+      description: Locale of the chat message set by the client
+      required: false
+    mentions:
+      title: Mentions
+      type: '[]object'
+      description: List of entities mentioned in the chat message
+      required: false
+    messageHistory:
+      title: Message History
+      type: '[]object'
+      description: List of activity history of a message item
+      required: false
+    messageType:
+      title: Message Type
+      type: string
+      description: The type of chat message
+      required: false
+    policyViolation:
+      title: Policy Violation
+      type: object
+      description: Defines the properties of a policy violation
+      required: false
+    reactions:
+      title: Reactions
+      type: '[]chatMessageReaction'
+      description: Reactions for this chat message
+      required: false
+    replyToId:
+      title: Reply To ID
+      type: string
+      description: ID of the parent chat message or root chat message of the thread
+      required: false
+    subject:
+      title: Subject
+      type: string
+      description: The subject of the chat message, in plaintext
+      required: false
+    summary:
+      title: Summary
+      type: string
+      description: Summary text of the chat message that could be used for push notifications
+        and summary views or fall back views
+      required: false
+    webUrl:
+      title: Web URL
+      type: string
+      description: Link to the message in Microsoft Teams
+      required: false
   itemMember:
     user_info:
       title: User Info
@@ -472,10 +478,10 @@ types:
       description: The role of the user to be added to the chat
       required: true
       enum:
-        - owner
-        - guest
+      - owner
+      - guest
   itemChat:
-    "@odata.context":
+    '@odata.context':
       title: Data Context
       type: string
       description: The context of the newly created chat
@@ -500,11 +506,6 @@ types:
       type: string
       description: Last updated date time
       required: false
-    chatType:
-      title: Chat Type
-      type: string
-      description: The type of the newly created chat
-      required: false 
     tenantId:
       title: Tenant ID
       type: string
@@ -536,20 +537,21 @@ connection:
     example: aMeCAEYdOLlK+qRcD9AjdyxLkCaqZH1UPm7adjJQ5Og=
   username_password:
     type: credential_username_password
-    title: "Credentials"
-    description: "Username and password"
+    title: Credentials
+    description: Username and password
     required: true
     example: '{ "username": "user", "password": "mypassword" }'
   endpoint:
     title: Endpoint
-    description: "The type of endpoint to connect to: normal service, GCC (government), GCC High (government), DoD (military)"
+    description: 'The type of endpoint to connect to: normal service, GCC (government),
+      GCC High (government), DoD (military)'
     type: string
     required: true
     example: Normal
     enum:
     - Normal
     - GCC
-    - "GCC High"
+    - GCC High
     - DoD
 
 triggers:
@@ -577,20 +579,31 @@ triggers:
         type: string
         required: false
         order: 3
-        example: "[Tt]est"
+        example: '[Tt]est'
     output:
       message:
         title: Message
         description: The message object that was created
         type: message
         required: false
-        example: {"body": {"contentType": "text","content": "tests_v1"},"channelIdentity": {"teamId": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0","channelId": "11:examplechannel.name"},"First Word": "test","from": {"user": {"id": "3395856c-e81f-2b73-82de-e72602f798b6","displayName": "Example User","userIdentityType": "aadUser","tenantId": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0"}},"ID": "1234567891","messageType": "message","importance": "normal","locale": "en-us","webUrl": "https://teams.microsoft.com/l/message/11:examplechannel.name/1234567890groupId=example-team-id&tenantId=1&createdTime=1692623381&parentMessageId=1234567891","Words":[{}]}
+        example: {body: {contentType: text, content: tests_v1}, channelIdentity: {
+            teamId: 9e538ff5-dcb2-46a9-9a28-f93b8250deb0, channelId: 11:examplechannel.name},
+          First Word: test, from: {user: {id: 3395856c-e81f-2b73-82de-e72602f798b6,
+              displayName: Example User, userIdentityType: aadUser, tenantId: 9e538ff5-dcb2-46a9-9a28-f93b8250deb0}},
+          ID: '1234567891', messageType: message, importance: normal, locale: en-us,
+          webUrl: https://teams.microsoft.com/l/message/11:examplechannel.name/1234567890groupId=example-team-id&tenantId=1&createdTime=1692623381&parentMessageId=1234567891,
+          Words: [{}]}
       indicators:
         title: Indicators
         description: The indicators object that was extracted from message
         type: indicators
         required: false
-        example: {"CVEs": ["CVE-2024-1234"],"Domains": ["test.com"],"Email Addresses": ["user@example.com"],"Hashes": {"MD5 Hashes": ["938c2cc0dcc05f2b68c4287040cfcf71"],"SHA1 Hashes": ["2aae6c35c94fcfb415dbe95f408b9ce91ee846ed"],"SHA256 Hashes": ["ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"]},"IP Addressses": {"IPv4 Addressses": ["1.1.1.1"],"IPv6 Addressses": ["1111:1111:1111:1111:1111:1111:1111:1111"]},"MAC Addresses": ["00-00-00-00-00-00"],"URLs": ["https://www.user@example.com"],"UUIDs": ["123456789"]}
+        example: {CVEs: [CVE-2024-1234], Domains: [test.com], Email Addresses: [user@example.com],
+          Hashes: {MD5 Hashes: [938c2cc0dcc05f2b68c4287040cfcf71], SHA1 Hashes: [
+              2aae6c35c94fcfb415dbe95f408b9ce91ee846ed], SHA256 Hashes: [ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad]},
+          IP Addressses: {IPv4 Addressses: [1.1.1.1], IPv6 Addressses: [1111:1111:1111:1111:1111:1111:1111:1111]},
+          MAC Addresses: [00-00-00-00-00-00], URLs: [https://www.user@example.com],
+          UUIDs: ['123456789']}
       channel_name:
         title: Channel Name
         description: Name of the channel where the message was posted
@@ -619,9 +632,10 @@ actions:
       teams:
         title: Teams
         description: Array of team objects
-        type: "[]team"
+        type: '[]team'
         required: false
-        example: '[{"Description": "test description","Display Name": "test display name","ID": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0"}]'
+        example: '[{"Description": "test description","Display Name": "test display
+          name","ID": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0"}]'
   get_channels_for_team:
     title: Get Channels for Team
     description: Returns all the channels associated with a team
@@ -644,9 +658,10 @@ actions:
       channels:
         title: Channels
         description: Array of channels
-        type: "[]channel"
+        type: '[]channel'
         required: false
-        example: '[{"Description": "test description","Display Name": "test display name","ID": "12:a12345bc678d901e12345f67890g1234_thread.v2"}]'
+        example: '[{"Description": "test description","Display Name": "test display
+          name","ID": "12:a12345bc678d901e12345f67890g1234_thread.v2"}]'
   send_message:
     title: Send Message
     description: Send a message
@@ -692,10 +707,17 @@ actions:
         description: The message object that was created
         type: message
         required: false
-        example: {"body": {"contentType": "text","content": "tests_v1"},"channelIdentity": {"teamId": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0","channelId": "11:examplechannel.name"},"First Word": "test","from": {"user": {"id": "3395856c-e81f-2b73-82de-e72602f798b6","displayName": "Example User","userIdentityType": "aadUser","tenantId": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0"}},"ID": "1234567891","messageType": "message","importance": "normal","locale": "en-us","webUrl": "https://teams.microsoft.com/l/message/11:examplechannel.name/1234567890groupId=example-team-id&tenantId=1&createdTime=1692623381&parentMessageId=1234567891","Words":[{}]}
+        example: {body: {contentType: text, content: tests_v1}, channelIdentity: {
+            teamId: 9e538ff5-dcb2-46a9-9a28-f93b8250deb0, channelId: 11:examplechannel.name},
+          First Word: test, from: {user: {id: 3395856c-e81f-2b73-82de-e72602f798b6,
+              displayName: Example User, userIdentityType: aadUser, tenantId: 9e538ff5-dcb2-46a9-9a28-f93b8250deb0}},
+          ID: '1234567891', messageType: message, importance: normal, locale: en-us,
+          webUrl: https://teams.microsoft.com/l/message/11:examplechannel.name/1234567890groupId=example-team-id&tenantId=1&createdTime=1692623381&parentMessageId=1234567891,
+          Words: [{}]}
   send_message_by_guid:
     title: Send Message by GUID
-    description: Sends a message using the GUID for the team and channel. This is more performant than send message
+    description: Sends a message using the GUID for the team and channel. This is
+      more performant than send message
     input:
       team_guid:
         title: Team GUID
@@ -731,7 +753,13 @@ actions:
         description: The message object that was created
         type: message
         required: false
-        example: {"body": {"contentType": "text","content": "tests_v1"},"channelIdentity": {"teamId": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0","channelId": "11:examplechannel.name"},"First Word": "test","from": {"user": {"id": "3395856c-e81f-2b73-82de-e72602f798b6","displayName": "Example User","userIdentityType": "aadUser","tenantId": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0"}},"ID": "1234567891","messageType": "message","importance": "normal","locale": "en-us","webUrl": "https://teams.microsoft.com/l/message/11:examplechannel.name/1234567890groupId=example-team-id&tenantId=1&createdTime=1692623381&parentMessageId=1234567891","Words":[{}]}
+        example: {body: {contentType: text, content: tests_v1}, channelIdentity: {
+            teamId: 9e538ff5-dcb2-46a9-9a28-f93b8250deb0, channelId: 11:examplechannel.name},
+          First Word: test, from: {user: {id: 3395856c-e81f-2b73-82de-e72602f798b6,
+              displayName: Example User, userIdentityType: aadUser, tenantId: 9e538ff5-dcb2-46a9-9a28-f93b8250deb0}},
+          ID: '1234567891', messageType: message, importance: normal, locale: en-us,
+          webUrl: https://teams.microsoft.com/l/message/11:examplechannel.name/1234567890groupId=example-team-id&tenantId=1&createdTime=1692623381&parentMessageId=1234567891,
+          Words: [{}]}
   send_html_message:
     title: Send HTML Message
     description: Send HTML as a message
@@ -763,14 +791,20 @@ actions:
         type: string
         required: true
         order: 4
-        example: "<b>Hello!</b>"
+        example: <b>Hello!</b>
     output:
       message:
         title: Message
         description: The message object that was created
         type: message
         required: false
-        example: {"body": {"contentType": "text","content": "tests_v1"},"channelIdentity": {"teamId": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0","channelId": "11:examplechannel.name"},"First Word": "test","from": {"user": {"id": "3395856c-e81f-2b73-82de-e72602f798b6","displayName": "Example User","userIdentityType": "aadUser","tenantId": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0"}},"ID": "1234567891","messageType": "message","importance": "normal","locale": "en-us","webUrl": "https://teams.microsoft.com/l/message/11:examplechannel.name/1234567890groupId=example-team-id&tenantId=1&createdTime=1692623381&parentMessageId=1234567891","Words":[{}]}
+        example: {body: {contentType: text, content: tests_v1}, channelIdentity: {
+            teamId: 9e538ff5-dcb2-46a9-9a28-f93b8250deb0, channelId: 11:examplechannel.name},
+          First Word: test, from: {user: {id: 3395856c-e81f-2b73-82de-e72602f798b6,
+              displayName: Example User, userIdentityType: aadUser, tenantId: 9e538ff5-dcb2-46a9-9a28-f93b8250deb0}},
+          ID: '1234567891', messageType: message, importance: normal, locale: en-us,
+          webUrl: https://teams.microsoft.com/l/message/11:examplechannel.name/1234567890groupId=example-team-id&tenantId=1&createdTime=1692623381&parentMessageId=1234567891,
+          Words: [{}]}
   add_member_to_team:
     title: Add Member to Team
     description: Add a member to a team
@@ -852,8 +886,8 @@ actions:
         type: string
         required: true
         enum:
-          - Standard
-          - Private
+        - Standard
+        - Private
         example: Standard
         default: Standard
     output:
@@ -923,24 +957,27 @@ actions:
       owners:
         title: Owners
         description: A list of usernames to set as owners
-        type: "[]string"
+        type: '[]string'
         required: false
         order: 5
-        example: ['user@example.com']
+        example: [user@example.com]
       members:
         title: Members
         description: A list of usernames to set as members
-        type: "[]string"
+        type: '[]string'
         required: false
         order: 6
-        example: ['user@example.com']
+        example: [user@example.com]
     output:
       group:
         title: Group
         description: Information about the group that was created
         type: group
         required: false
-        example: {"Created Date Time": "2023-11-09T12:07:43.167Z","Description": "test description","Display Name": "test display name","ID": "12:a12345bc678d901e12345f67890g1234_thread.v2","Mail": "General - test display name <user@example.com>","Mail Enabled": true,"Mail Nickname": "TestNickname","Security Enabled": true}
+        example: {Created Date Time: '2023-11-09T12:07:43.167Z', Description: test
+            description, Display Name: test display name, ID: 12:a12345bc678d901e12345f67890g1234_thread.v2,
+          Mail: General - test display name <user@example.com>, Mail Enabled: true,
+          Mail Nickname: TestNickname, Security Enabled: true}
   delete_team:
     title: Delete Team
     description: Delete a team and the associated group from Azure
@@ -970,7 +1007,8 @@ actions:
         example: user@example.com
       group_name:
         title: Group Name
-        description: Name of the group or team to which the member is to be added as the owner
+        description: Name of the group or team to which the member is to be added
+          as the owner
         type: string
         required: true
         example: InsightConnect Team
@@ -1008,8 +1046,8 @@ actions:
         description: Role of the member to add
         type: string
         enum:
-          - Owner
-          - Member
+        - Owner
+        - Member
         required: true
         example: Owner
         default: Member
@@ -1054,7 +1092,13 @@ actions:
         description: The message object that was created
         type: chatMessage
         required: false
-        example: {"id": "1234567891","replyToId": "1234567890","etag": "1234567891","messageType": "message","createdDateTime": "2023-08-01T12:00:00.000Z","lastModifiedDateTime": "2023-08-01T12:00:00.000Z","importance": "normal","locale": "en-us","webUrl": "https://teams.microsoft.com/l/message/11:examplechannel.name/1234567890groupId=example-team-id&tenantId=1&createdTime=1692623381&parentMessageId=1234567891","from": {"user": {"id": "3395856c-e81f-2b73-82de-e72602f798b6","displayName": "Example User","userIdentityType": "aadUser","tenantId": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0"}},"body": {"contentType": "text","content": "tests_v1"},"channelIdentity": {"teamId": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0","channelId": "11:examplechannel.name"},"attachments": [],"mentions": [],"reactions": []}
+        example: {id: '1234567891', replyToId: '1234567890', etag: '1234567891', messageType: message,
+          createdDateTime: '2023-08-01T12:00:00.000Z', lastModifiedDateTime: '2023-08-01T12:00:00.000Z',
+          importance: normal, locale: en-us, webUrl: https://teams.microsoft.com/l/message/11:examplechannel.name/1234567890groupId=example-team-id&tenantId=1&createdTime=1692623381&parentMessageId=1234567891,
+          from: {user: {id: 3395856c-e81f-2b73-82de-e72602f798b6, displayName: Example
+                User, userIdentityType: aadUser, tenantId: 9e538ff5-dcb2-46a9-9a28-f93b8250deb0}},
+          body: {contentType: text, content: tests_v1}, channelIdentity: {teamId: 9e538ff5-dcb2-46a9-9a28-f93b8250deb0,
+            channelId: 11:examplechannel.name}, attachments: [], mentions: [], reactions: []}
   get_message_in_chat:
     title: Get Message in Chat
     description: Retrieve a single message or a message reply in a chat
@@ -1083,7 +1127,13 @@ actions:
         description: The message object that was created
         type: chatMessage
         required: false
-        example: {"message": {"id": "1234567891","replyToId": "1234567890","etag": "1234567891","messageType": "message","createdDateTime": "2023-08-01T12:00:00.000Z","lastModifiedDateTime": "2023-08-01T12:00:00.000Z","importance": "normal","locale": "en-us","webUrl": "https://teams.microsoft.com/l/message/11:examplechannel.name/1234567890groupId=example-team-id&tenantId=1&createdTime=1692623381&parentMessageId=1234567891","from": {"user": {"id": "3395856c-e81f-2b73-82de-e72602f798b6","displayName": "Example User","userIdentityType": "aadUser","tenantId": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0"}},"body": {"contentType": "text","content": "tests_v1"},"channelIdentity": {"teamId": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0","channelId": "11:examplechannel.name"},"attachments": [],"mentions": [],"reactions": []}}
+        example: {message: {id: '1234567891', replyToId: '1234567890', etag: '1234567891',
+            messageType: message, createdDateTime: '2023-08-01T12:00:00.000Z', lastModifiedDateTime: '2023-08-01T12:00:00.000Z',
+            importance: normal, locale: en-us, webUrl: https://teams.microsoft.com/l/message/11:examplechannel.name/1234567890groupId=example-team-id&tenantId=1&createdTime=1692623381&parentMessageId=1234567891,
+            from: {user: {id: 3395856c-e81f-2b73-82de-e72602f798b6, displayName: Example
+                  User, userIdentityType: aadUser, tenantId: 9e538ff5-dcb2-46a9-9a28-f93b8250deb0}},
+            body: {contentType: text, content: tests_v1}, channelIdentity: {teamId: 9e538ff5-dcb2-46a9-9a28-f93b8250deb0,
+              channelId: 11:examplechannel.name}, attachments: [], mentions: [], reactions: []}}
   get_reply_list:
     title: Get Reply List
     description: List all the replies to a message in a channel of a team
@@ -1110,9 +1160,15 @@ actions:
       messages:
         title: Message
         description: The message object that was created
-        type: "[]chatMessage"
+        type: '[]chatMessage'
         required: false
-        example: [{"attachments": [],"body": {"content": "Test message","contentType": "text"},"chatId": "12:a12345bc678d901e12345f67890g1234_thread.v2","createdDateTime": "2023-11-08T10:38:18.048Z","etag": "1234567890123","from": {"user": {"@odata.type": "#microsoft.graph.teamworkUserIdentity","displayName": "Test User","id": "8a234567-bc8d-9e01-23fg-4h567i8j9k98","tenantId": "1a234567-bc8d-9e01-23fg-4h567i8j9k01","userIdentityType": "aadUser"}},"id": "1234567890123","importance": "normal","lastModifiedDateTime": "2023-11-08T10:38:18.048Z","locale": "en-us","mentions": [],"messageType": "message","reactions": []}]
+        example: [{attachments: [], body: {content: Test message, contentType: text},
+            chatId: 12:a12345bc678d901e12345f67890g1234_thread.v2, createdDateTime: '2023-11-08T10:38:18.048Z',
+            etag: '1234567890123', from: {user: {'@odata.type': '#microsoft.graph.teamworkUserIdentity',
+                displayName: Test User, id: 8a234567-bc8d-9e01-23fg-4h567i8j9k98,
+                tenantId: 1a234567-bc8d-9e01-23fg-4h567i8j9k01, userIdentityType: aadUser}},
+            id: '1234567890123', importance: normal, lastModifiedDateTime: '2023-11-08T10:38:18.048Z',
+            locale: en-us, mentions: [], messageType: message, reactions: []}]
   list_messages_in_chat:
     title: List Messages from a Chat
     description: Retrieve up to the last 50 messages in a chat
@@ -1127,9 +1183,15 @@ actions:
       messages:
         title: Message
         description: The message object that was created
-        type: "[]chatMessage"
+        type: '[]chatMessage'
         required: false
-        example: [{"attachments": [],"body": {"content": "Test message","contentType": "text"},"chatId": "12:a12345bc678d901e12345f67890g1234_thread.v2","createdDateTime": "2023-11-08T10:38:18.048Z","etag": "1234567890123","from": {"user": {"@odata.type": "#microsoft.graph.teamworkUserIdentity","displayName": "Test User","id": "8a234567-bc8d-9e01-23fg-4h567i8j9k98","tenantId": "1a234567-bc8d-9e01-23fg-4h567i8j9k01","userIdentityType": "aadUser"}},"id": "1234567890123","importance": "normal","lastModifiedDateTime": "2023-11-08T10:38:18.048Z","locale": "en-us","mentions": [],"messageType": "message","reactions": []}]
+        example: [{attachments: [], body: {content: Test message, contentType: text},
+            chatId: 12:a12345bc678d901e12345f67890g1234_thread.v2, createdDateTime: '2023-11-08T10:38:18.048Z',
+            etag: '1234567890123', from: {user: {'@odata.type': '#microsoft.graph.teamworkUserIdentity',
+                displayName: Test User, id: 8a234567-bc8d-9e01-23fg-4h567i8j9k98,
+                tenantId: 1a234567-bc8d-9e01-23fg-4h567i8j9k01, userIdentityType: aadUser}},
+            id: '1234567890123', importance: normal, lastModifiedDateTime: '2023-11-08T10:38:18.048Z',
+            locale: en-us, mentions: [], messageType: message, reactions: []}]
   create_teams_chat:
     title: Create Teams Chat
     description: Create a chat in Microsoft Teams
@@ -1143,13 +1205,17 @@ actions:
       members:
         title: Members
         description: A list of usernames to set as members
-        type: "[]itemMember"
+        type: '[]itemMember'
         required: true
-        example: [{"user_info": "user@example.com","role": "owner"},{"user_info": "ab123bcd-123a-412a3-abc1-a123456b789c","role": "owner"}]
+        example: [{user_info: user@example.com, role: owner}, {user_info: ab123bcd-123a-412a3-abc1-a123456b789c,
+            role: owner}]
     output:
       chat:
         title: Chat
         description: Information about the chat that was created
         type: itemChat
         required: false
-        example: {"@odata.context": "https://graph.microsoft.com/beta/$metadata#chats/$entity","chatType": "group","createdDateTime": "2023-11-09T12:07:43.167Z","id": "12:a12345bc678d901e12345f67890g1234_thread.v2","lastUpdatedDateTime": "2023-11-09T12:07:43.167Z","tenantId": "1a234567-bc8d-9e01-23fg-4h567i8j9k01","webUrl": "https://teams.microsoft.com/l/chat/12%3AA12345BC678D901E12345F67890G1234%40thread.v2/0tenantId=1a234567-bc8d-9e01-23fg-4h567i8j9k01"}
+        example: {'@odata.context': https://graph.microsoft.com/beta/$metadata#chats/$entity,
+          chatType: group, createdDateTime: '2023-11-09T12:07:43.167Z', id: 12:a12345bc678d901e12345f67890g1234_thread.v2,
+          lastUpdatedDateTime: '2023-11-09T12:07:43.167Z', tenantId: 1a234567-bc8d-9e01-23fg-4h567i8j9k01,
+          webUrl: https://teams.microsoft.com/l/chat/12%3AA12345BC678D901E12345F67890G1234%40thread.v2/0tenantId=1a234567-bc8d-9e01-23fg-4h567i8j9k01}

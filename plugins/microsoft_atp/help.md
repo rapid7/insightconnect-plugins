@@ -1,6 +1,6 @@
 # Description
 
-The Windows Defender Advanced Threat Protection plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files
+The Microsoft Defender for Endpoint plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files
 
 # Key Features
 
@@ -21,10 +21,6 @@ The Windows Defender Advanced Threat Protection plugin allows Rapid7 InsightConn
 
 ## Setup
 
-This plugin uses the Windows Defender ATP API. It will use an Azure application to connect to the API and run actions from InsightConnect.
-
-For information on how to setup your application and assign permissions go here:
-https://docs.microsoft.com/en-us/windows/security/threat-protection/microsoft-defender-atp/exposed-apis-create-app-webapp
 The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
@@ -1330,11 +1326,13 @@ Example output:
 
 
 ## Troubleshooting
-  
-*This plugin does not contain a troubleshooting.*
+
+* For information on how to setup your Azure application and assign permissions go [here](https://docs.microsoft.com/en-us/windows/security/threat-protection/microsoft-defender-atp/exposed-apis-create-app-webapp)
 
 # Version History
 
+* 6.0.2 - Updated SDK to the latest version (6.2.5)
+* 6.0.1 - Update to latest SDK (v6.2.2) | Address vulnerabilities | Rebrand to `Microsoft Defender for Endpoint`
 * 6.0.0 - Updated SDK to the latest version | Initial updates for fedramp compliance
 * 5.2.0 - Add new action: Update Alert
 * 5.1.0 - Adding the following as new action types to `blacklist` action ['Warn', 'Block', 'Audit'] | Add a new flag in the `blacklist` action to toggle generateAlerts flag | Bump SDK to version 5.4.9
@@ -1364,9 +1362,9 @@ Example output:
 
 # Links
 
-* [Windows Defender ATP](https://www.microsoft.com/en-us/windowsforbusiness/windows-atp)
+* [Windows Defender for Endpoint](https://www.microsoft.com/en-us/security/business/endpoint-security/microsoft-defender-endpoint)
 
 ## References
 
-* [Windows Defender ATP API Start Page](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-atp/use-apis)
-* [Windows Defender ATP API Endpoints](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-atp/exposed-apis-list)
+* [Windows Defender for Endpoint API Start Page](https://learn.microsoft.com/en-us/defender-endpoint/api/apis-intro)
+* [Windows Defender for Endpoint API Endpoints](https://learn.microsoft.com/en-us/defender-endpoint/api/exposed-apis-list)

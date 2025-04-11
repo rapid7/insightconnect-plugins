@@ -3,32 +3,61 @@ extension: plugin
 products: [insightconnect]
 name: twilio
 title: Twilio
-description: Send SMS directly from a workflow using Twilio
-version: 1.0.2
+description: "[Twilio](https://www.twilio.com/) is a cloud communications platform for building SMS, voice, and messaging applications\non an API built for global scale. Users can send SMS using the Twilio plugin for Rapid7 for notification or other purposes"
+version: 1.0.3
+connection_version: 1
 vendor: rapid7
 support: community
+supported_versions: ["Twilio Client 9.4.2"]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/twilio
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
-- twilio
-- SMS
+  - twilio
+  - SMS
 hub_tags:
   use_cases: [alerting_and_notifications]
   keywords: [twilio, SMS]
   features: []
+sdk:
+  type: slim
+  version: 6.2.2
+  user: nobody
+key_features:
+  - Send SMS
+requirements:
+  - Twilio phone number
+  - Authentication token
+  - Account ID
+troubleshooting:
+  - Before sending the SMS make sure that the country you're sending the message to is enabled [here](https://www.twilio.com/console/sms/settings/geo-permissions).
+version_history:
+  - "1.0.3 - Updated dependencies | Updated SDK to the latest version"
+  - "1.0.2 - New spec and help.md format for the Extension Library"
+  - "1.0.1 - Update Twilio dependency to 6.19.1"
+  - "1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types"
+  - "0.1.1 - SSL bug fix in SDK"
+  - "0.1.0 - Initial plugin"
+links:
+  - "[Twilio](https://www.twilio.com/)"
+  - "[SMS Geo-permissions](https://www.twilio.com/console/sms/settings/geo-permissions)"
+references:
+  - "[Twilio](https://www.twilio.com/)"
+  - "[Twilio Python Library](https://www.twilio.com/docs/libraries/python)"
 connection:
   twilio_phone_number:
+    description: The phone number of a Twilio user from which the SMS will be sent
     type: string
-    description: Twilio phone number
     required: true
+    example: "+00000111222"
   credentials:
     title: Account SID and Auth Token
     description: Username should be your account ID, and your password should be your
       auth token
-    required: true
     type: credential_username_password
+    required: true
+    example: '{"username": "ExampleUsername", "password": "ExamplePassword"}'
 actions:
   send_sms:
     title: Send SMS
@@ -36,17 +65,20 @@ actions:
     input:
       message:
         title: Message
-        type: string
         description: Message to send
+        type: string
         required: true
+        example: ExampleMessage
       to_number:
         title: Number
-        type: string
         description: Phone number to send SMS message
+        type: string
         required: true
+        example: "+00000111222"
     output:
       message_sid:
         title: Message SID
-        type: string
         description: Message SID
+        type: string
         required: false
+        example: ExampleMessageSID

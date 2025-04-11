@@ -1,0 +1,73 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: mimecast_v2
+title: Mimecast V2
+description: "[Mimecast](https://www.mimecast.com) is a set of cloud services designed to provide next generation protection against advanced email-borne threats such as malicious URLs, malware, impersonation attacks, as well as internally generated threats, with a focus on email security. This plugin utilizes the [Mimecast API](https://www.mimecast.com/developer/documentation)"
+troubleshooting: "API 2.0 endpoints uses Client Id and Client Secret to authenticate the users. Please refer to Mimecast Customer Community to manage API 2.0 Application credentials. In order to create the Client Id and Client Secret, the designated administrator must be assigned a Role with the following criteria."
+key_features:
+- Email security
+- Malicious URL and attachment detection
+requirements:
+- Mimecast 2.0 Application Client ID
+- Mimecast 2.0 Application Client Secret
+links:
+ - "[Mimecast](http://mimecast.com)"
+references:
+ - "[Mimecast API](https://www.mimecast.com/developer/documentation)"
+version: 1.0.4
+connection_version: 1
+supported_versions: ["Mimecast 2.0 API 2025-01-23"]
+vendor: rapid7
+support: rapid7
+cloud_ready: true
+sdk:
+  type: slim
+  version: 6.2.6
+  user: nobody
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/mimecast_v2
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: http://mimecast.com
+tags:
+- mimecast
+- email
+hub_tags:
+  use_cases: [threat_detection_and_response]
+  keywords: [mimecast, email, cloud_enabled]
+  features: []
+version_history:
+- "1.0.4 - `Monitor SIEM Logs` Fix issue where duplicate batches in a page are processed | SDK update to 6.2.6"
+- "1.0.3 - `Monitor SIEM Logs` Fix issue retrieving logs from larger log files"
+- "1.0.2 - `Monitor SIEM Logs` Limit the amount of logs used to deduplicate logs in subsequent runs"
+- "1.0.1 - Update SDK | Improve output for a successful connection test"
+- "1.0.0 - Initial plugin"
+connection:
+  client_id:
+    title: Client ID
+    description: The Mimecast 2.0 Application Client ID
+    type: credential_secret_key
+    example: ZA7vkbu7NqcfBcGrXyWW8Rzk2sv2un2DCY7GGCX4BFWgJBZM
+    required: true
+    placeholder: Client ID
+    tooltip: Enter the Client ID obtained from the Mimecast 2.0 API Application
+  client_secret:
+    title: Client Secret
+    description: The Mimecast 2.0 Application Client Secret
+    type: credential_secret_key
+    example: ohknqKJpCd99XTkHjeVuc2TgYaKWrWn4tEEHCLkXFZhFgDRdcpNGVx3EipX2CvmE
+    required: true
+    placeholder: Client Secret
+    tooltip: Enter the Client ID obtained from the Mimecast 2.0 API Application
+tasks:
+  monitor_siem_logs:
+    title: Monitor SIEM Logs
+    description: Monitor and retrieve the latest logs
+    output:
+      data:
+        title: Data
+        description: List of logs
+        type: "[]object"
+        required: true
+        example: [{ "processingId": "processingId", "aggregateId": "aggregateId", "spamProcessingDetail": "Spam Processing Detail", "numberAttachments": "1", "subject": "siem_recipient - email subject line", "tlsVersion": "TLSv1.2", "senderEnvelope": "user@example.com", "messageId": "messageId", "senderHeader": "user@example.com", "rejectionType": "rejectionType", "eventType": "receipt", "accountId": "C0A0", "recipients": "user@example.com", "tlsCipher": "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384", "action": "Allow", "subType": "Allow", "spamInfo": null, "senderIp": "123.123.123.123", "timestamp": 1689685338597, "direction": "Inbound", "spamScore": "0", "spamDetectionLevel": "0" }]

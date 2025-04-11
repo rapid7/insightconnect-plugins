@@ -60,7 +60,7 @@ Example input:
 |question|string|False|Question asked|google.com|
 |status|string|False|Query status [ NOERROR | FORMERR | NXDOMAIN | SERVFAIL | REFUSED ...]|NOERROR|
   
-On success, the raw output will look like the following:
+Example output:
 
 ```
 {
@@ -74,20 +74,6 @@ On success, the raw output will look like the following:
   "question": "google.com",
   "status": "NOERROR"
 }
-```
-
-On failure, the raw output will look like the following:
-
-```
-
-{
-  "status": "NOERROR",
-  "answer": "google-public-dns-a.google.com",
-  "nameserver": "10.0.2.3",
-  "question": "8.8.8.8.8",
-  "fulloutput": "\n; <<>> Dig 9.9.5-9+deb8u9-Debian <<>> -x 8.8.8.8.8\n;; global options: +cmd\n;; Got answer:\n;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 20097\n;; flags: qr rd ra ad; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0\n\n;; QUESTION SECTION:\n;8.8.8.8.8.in-addr.arpa.\t\tIN\tPTR\n\n;; ANSWER SECTION:\n8.8.8.8.8.in-addr.arpa.\t62286\tIN\tPTR\tgoogle-public-dns-a.google.com.\n\n;; Query time: 2 msec\n;; SERVER: 10.0.2.3#53(10.0.2.3)\n;; WHEN: Fri Jan 27 01:21:10 UTC 2017\n;; MSG SIZE  rcvd: 84\n\n"
-},
-
 ```
 
 #### Reverse Lookup
@@ -120,7 +106,7 @@ Example input:
 |question|string|False|Question asked|8.8.8.8|
 |status|string|False|Query status [ NOERROR | FORMERR | NXDOMAIN | SERVFAIL | REFUSED ...]|NOERROR|
   
-On success, the raw output will look like the following:
+Example output:
 
 ```
 {
@@ -131,19 +117,6 @@ On success, the raw output will look like the following:
   "status": "NOERROR"
 }
 ```
-
-On failure, the raw output will look like the following:
-
-```
-{
-  "status": "NOERROR",
-  "answer": "dns.google",
-  "fulloutput": "\n; <<>> DiG 9.14.8 <<>> -x 8.8.8.8\n;; global optio...",
-  "nameserver": "192.168.65.1",
-  "question": "8.8.8.8"
-}
-```
-
 ### Triggers
   
 *This plugin does not contain any triggers.*
@@ -157,7 +130,7 @@ On failure, the raw output will look like the following:
 
 ## Troubleshooting
 
-The `status` variable contains the [DNS status code](https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml) name from the DNS server's response.
+* The `status` variable contains the [DNS status code](https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml) name from the DNS server's response.
 Dig has at least the following status codes implemented:
 
 ```
@@ -167,7 +140,7 @@ SERVFAIL
 NXDOMAIN
 NOTIMP
 REFUSED
-YXDOMAIN
+YXDOMAIN 
 YXRRSET
 NXRRSET
 NOTAUTH
@@ -183,9 +156,10 @@ Common examples:
 * `status = "NOERRROR"` - The DNS response contains an answer
 * `status = "NXDOMAIN"` - The DNS response did not have an answer i.e. Non-Existent Domain
 
-
 # Version History
 
+* 2.0.5 - Updated SDK to the latest version (6.2.5)
+* 2.0.4 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
 * 2.0.3 - Initial updates for fedramp compliance | Updated SDK to the latest
 * 2.0.2 - Updated SDK to the latest version | Added validation for input parameters
 * 2.0.1 - Added `__init__.py` file to `unit_test` folder | Refreshed with new Tooling

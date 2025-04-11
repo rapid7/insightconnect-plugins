@@ -3,31 +3,31 @@
 Joe Sandbox Cloud executes files and URLs fully automated in a controlled environment and monitors the behavior of applications and the operating system for suspicious activities
 
 # Key Features
-  
-* Submit samples and URLs for sandbox analysis  
-* Search, list, get, download, and delete analyses  
+
+* Submit samples and URLs for sandbox analysis
+* Search, list, get, download, and delete analyses
 * Get, list, and manage server and user info
 
 # Requirements
-  
-* API Key  
+
+* API Key
 * Sandbox server (if not using cloud)
 
 # Supported Product Versions
-  
+
 * Joe Sandbox API v2
 
 # Documentation
 
 ## Setup
-  
+
 The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|api_key|credential_secret_key|None|True|API key generated for Joe Sandbox user|None|8e8786182c66e8bc2abdab9198f1385691987bfe2a4917be1268e915e457dbc5|
-|url|string|https://jbxcloud.joesecurity.org/api|False|API URL of the Joe Sandbox instance. Default is for Joe Sandbox Cloud. On-premise installations use the following URL format http://example.com/joesandbox/index.php/api|None|http://example.com/joesandbox/index.php/api|
-  
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|api_key|credential_secret_key|None|True|API key generated for Joe Sandbox user|None|8e8786182c66e8bc2abdab9198f1385691987bfe2a4917be1268e915e457dbc5|None|None|
+|url|string|https://jbxcloud.joesecurity.org/api|False|API URL of the Joe Sandbox instance. Default is for Joe Sandbox Cloud. On-premise installations use the following URL format http://example.com/joesandbox/index.php/api|None|http://example.com/joesandbox/index.php/api|None|None|
+
 Example input:
 
 ```
@@ -43,7 +43,7 @@ Example input:
 
 
 #### Check Server Status
-  
+
 This action is used to check if Joe Sandbox is online or in maintenance mode
 
 ##### Input
@@ -65,14 +65,14 @@ Example output:
 ```
 
 #### Delete Analysis
-  
+
 This action is used to delete an analysis
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|webid|string|None|True|The web ID of the analysis|None|10001|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|webid|string|None|True|The web ID of the analysis|None|10001|None|None|
   
 Example input:
 
@@ -97,16 +97,16 @@ Example output:
 ```
 
 #### Download Analysis
-  
+
 This action is used to download a resource for an analysis. This can be a full report, binaries, screenshots, etc
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|run|integer|None|False|The number of the run. If not specified, Joe Sandbox will choose one automatically|None|1|
-|type|string|html|False|The report type|["bins", "binstrings", "classhtml", "classxml", "clusterxml", "cookbook", "executive", "graphreports", "html", "ida", "irjson", "irjsonfixed", "irxml", "ishots", "json", "jsonfixed", "lighthtml", "lightjson", "lightjsonfixed", "lightxml", "maec", "memdumps", "memstrings", "misp", "openioc", "pcap", "pcapslim", "pdf", "sample", "shoots", "unpack", "unpackpe", "xml", "yara"]|pdf|
-|webid|string|None|True|The web ID of the analysis|None|10001|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|run|integer|None|False|The number of the run. If not specified, Joe Sandbox will choose one automatically|None|1|None|None|
+|type|string|html|False|The report type|["bins", "binstrings", "classhtml", "classxml", "clusterxml", "cookbook", "executive", "graphreports", "html", "ida", "irjson", "irjsonfixed", "irxml", "ishots", "json", "jsonfixed", "lighthtml", "lightjson", "lightjsonfixed", "lightxml", "maec", "memdumps", "memstrings", "misp", "openioc", "pcap", "pcapslim", "pdf", "sample", "shoots", "unpack", "unpackpe", "xml", "yara"]|pdf|None|None|
+|webid|string|None|True|The web ID of the analysis|None|10001|None|None|
   
 Example input:
 
@@ -135,7 +135,7 @@ Example output:
 ```
 
 #### Get Account Info
-  
+
 This action is used to query information about Joe Sandbox user account
 
 ##### Input
@@ -170,14 +170,14 @@ Example output:
 ```
 
 #### Get Analysis Info
-  
+
 This action is used to show the status and most important attributes of an analysis
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|webid|string|None|True|The web ID of the analysis|None|10001|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|webid|string|None|True|The web ID of the analysis|None|10001|None|None|
   
 Example input:
 
@@ -226,7 +226,7 @@ Example output:
 ```
 
 #### Get Server Info
-  
+
 This action is used to query information about the server
 
 ##### Input
@@ -248,14 +248,14 @@ Example output:
 ```
 
 #### Get Submitted Info
-  
+
 This action is used to show the status and info of submission
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|submission_id|string|None|True|Submission ID from analysis|None|1001|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|submission_id|string|None|True|Submission ID from analysis|None|1001|None|None|
   
 Example input:
 
@@ -280,7 +280,7 @@ Example output:
 ```
 
 #### List Analyses
-  
+
 This action is used to fetch a list of all analyses
 
 ##### Input
@@ -306,7 +306,7 @@ Example output:
 ```
 
 #### List Countries
-  
+
 This action is used to retrieve a list of localized internet anonymization countries
 
 ##### Input
@@ -335,7 +335,7 @@ Example output:
 ```
 
 #### List Languages and Locales
-  
+
 This action is used to retrieve a list of available keyboard layouts for Windows analyzers
 
 ##### Input
@@ -364,7 +364,7 @@ Example output:
 ```
 
 #### List Systems
-  
+
 This action is used to retrieve a list of systems on the server
 
 ##### Input
@@ -393,15 +393,15 @@ Example output:
 ```
 
 #### Search Analysis
-  
+
 This action is used to lists the web IDs of the analyses that match the given query. Searches in MD5, SHA1, SHA256, 
 filename, cookbook name, comment, URL and report ID
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|query|string|None|True|String to search for|None|44d88612fea8a8f36de82e1278abb02f|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|query|string|None|True|String to search for|None|44d88612fea8a8f36de82e1278abb02f|None|None|
   
 Example input:
 
@@ -430,16 +430,16 @@ Example output:
 ```
 
 #### Submit Cookbook
-  
+
 This action is used to submit a cookbook for analysis and return the associated web IDs for the cookbook
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|additional_parameters|object|None|False|Additional parameters for Joe Sandbox Cloud, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0. Parameter `accept-tac` will always be set to 1|None|{ "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }|
-|cookbook|bytes|None|True|Cookbook to be uploaded together with the sample|None|TVqQAAMAAAAEAAAA//8AALgAAAAAAA...|
-|parameters|object|None|False|Custom sandbox parameters, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0|None|{ "comments": "Enabled hybrid code analysis for sample", "hybrid-code-analysis": 1 }|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|additional_parameters|object|None|False|Additional parameters for Joe Sandbox Cloud, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0. Parameter `accept-tac` will always be set to 1|None|{ "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }|None|None|
+|cookbook|bytes|None|True|Cookbook to be uploaded together with the sample|None|TVqQAAMAAAAEAAAA//8AALgAAAAAAA...|None|None|
+|parameters|object|None|False|Custom sandbox parameters, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0|None|{ "comments": "Enabled hybrid code analysis for sample", "hybrid-code-analysis": 1 }|None|None|
   
 Example input:
 
@@ -474,18 +474,18 @@ Example output:
 ```
 
 #### Submit Sample
-  
+
 This action is used to submit a sample for analysis and return the associated web IDs for the sample
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|additional_parameters|object|None|False|Additional parameters for Joe Sandbox Cloud, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0. Parameter `accept-tac` will always be set to 1|None|{ "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }|
-|cookbook|bytes|None|False|Cookbook to be uploaded together with the sample|None|TVqQAAMAAAAEAAAA//8AALgAAAAAAA...|
-|filename|string|None|False|Used to give Joe Sandbox a hint at what file type is being uploaded. File extension (eg .txt, .zip) required|None|example.jpg|
-|parameters|object|None|False|Custom sandbox parameters, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0. In case the `cookbook` option is used, most other options are silently ignored since they can be specified inside the cookbook|None|{ "comments": "Enabled hybrid code analysis for sample", "hybrid-code-analysis": 1 }|
-|sample|bytes|None|True|The sample to submit|None|TVqQAAMAAAAEAAAA//8AALgAAAAAAA...|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|additional_parameters|object|None|False|Additional parameters for Joe Sandbox Cloud, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0. Parameter `accept-tac` will always be set to 1|None|{ "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }|None|None|
+|cookbook|bytes|None|False|Cookbook to be uploaded together with the sample|None|TVqQAAMAAAAEAAAA//8AALgAAAAAAA...|None|None|
+|filename|string|None|False|Used to give Joe Sandbox a hint at what file type is being uploaded. File extension (eg .txt, .zip) required|None|example.jpg|None|None|
+|parameters|object|None|False|Custom sandbox parameters, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0. In case the `cookbook` option is used, most other options are silently ignored since they can be specified inside the cookbook|None|{ "comments": "Enabled hybrid code analysis for sample", "hybrid-code-analysis": 1 }|None|None|
+|sample|bytes|None|True|The sample to submit|None|TVqQAAMAAAAEAAAA//8AALgAAAAAAA...|None|None|
   
 Example input:
 
@@ -511,30 +511,27 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|webids|[]string|True|Web IDs associated with the sample|["1234567", "7654321"]|
+|submission_id|string|True|Submission ID associated with the sample|1234567|
   
 Example output:
 
 ```
 {
-  "webids": [
-    "1234567",
-    "7654321"
-  ]
+  "submission_id": 1234567
 }
 ```
 
 #### Submit Sample URL
-  
+
 This action is used to submit a sample at a given URL for analysis and return the associated web IDs for the sample
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|additional_parameters|object|None|False|Additional parameters for Joe Sandbox Cloud, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0. Parameter `accept-tac` will always be set to 1|None|{ "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }|
-|parameters|object|None|False|Custom sandbox parameters, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0|None|{ "comments": "Enabled hybrid code analysis for sample", "hybrid-code-analysis": 1 }|
-|sample_url|string|None|True|The URL of a sample to submit|None|https://example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|additional_parameters|object|None|False|Additional parameters for Joe Sandbox Cloud, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0. Parameter `accept-tac` will always be set to 1|None|{ "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }|None|None|
+|parameters|object|None|False|Custom sandbox parameters, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0|None|{ "comments": "Enabled hybrid code analysis for sample", "hybrid-code-analysis": 1 }|None|None|
+|sample_url|string|None|True|The URL of a sample to submit|None|https://example.com|None|None|
   
 Example input:
 
@@ -569,16 +566,16 @@ Example output:
 ```
 
 #### Submit URL
-  
+
 This action is used to submit a website for analysis and return the associated web IDs for the sample
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|additional_parameters|object|None|False|Additional parameters for Joe Sandbox Cloud, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0. Parameter `accept-tac` will always be set to 1|None|{ "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }|
-|parameters|object|None|False|Custom sandbox parameters, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0|None|{ "comments": "Enabled hybrid code analysis for sample", "hybrid-code-analysis": 1 }|
-|url|string|None|True|The URL of a website to submit|None|https://example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|additional_parameters|object|None|False|Additional parameters for Joe Sandbox Cloud, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0. Parameter `accept-tac` will always be set to 1|None|{ "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }|None|None|
+|parameters|object|None|False|Custom sandbox parameters, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0|None|{ "comments": "Enabled hybrid code analysis for sample", "hybrid-code-analysis": 1 }|None|None|
+|url|string|None|True|The URL of a website to submit|None|https://example.com|None|None|
   
 Example input:
 
@@ -611,11 +608,9 @@ Example output:
   "submission_id": 1001
 }
 ```
-
 ### Triggers
   
 *This plugin does not contain any triggers.*
-
 ### Tasks
   
 *This plugin does not contain any tasks.*
@@ -705,14 +700,15 @@ Example output:
 
 ## Troubleshooting
   
-*There is no troubleshooting for this plugin.*
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 3.0.0 - Buffering encoded strings and fixing issues related to the actions | Updated SDK to 6.2.4 version
 * 2.0.0 - Update `jbxapi` dependency | `List Keyboard Layouts` - Renamed to `List Languages and Locales` | Updated SDK | `Get Submitted Info` - New action
 * 1.0.4 - Add extra optional input for Submit Sample action
 * 1.0.3 - Add example inputs
-* 1.0.2 - Fix misspelling in error message | Remove generic "automation" keyword
+* 1.0.2 - Fix misspelling in error message | Remove generic 'automation' keyword
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 

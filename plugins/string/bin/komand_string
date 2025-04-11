@@ -6,8 +6,8 @@ from sys import argv
 
 Name = "String Operations"
 Vendor = "rapid7"
-Version = "1.4.1"
-Description = "The String plugin provides common programmatic string operations"
+Version = "1.4.3"
+Description = "The String Operations plugin allows easy manipulation of string data. This plugin utilizes the Python 3 String library [set of methods](https://docs.python.org/3/library/stdtypes.html#string-methods)"
 
 
 def main():

@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name="basename-rapid7-plugin",
-      version="1.1.3",
-      description="This plugin is used to get the last item of a file path or URL using Python's basename utility",
+      version="1.1.4",
+      description="Basename is used to get the last item of a file path or URL using Python's basename utility",
       author="rapid7",
       author_email="",
       url="",

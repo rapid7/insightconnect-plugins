@@ -4,10 +4,10 @@ import os
 import json
 from sys import argv
 
-Name = "Microsoft Windows Defender ATP"
+Name = "Microsoft Defender for Endpoint"
 Vendor = "rapid7"
-Version = "6.0.0"
-Description = "The Windows Defender Advanced Threat Protection plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files"
+Version = "6.0.2"
+Description = "The Microsoft Defender for Endpoint plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files"
 
 
 def main():

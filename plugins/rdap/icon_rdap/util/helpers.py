@@ -67,7 +67,7 @@ def convert_to_snake_case(input_string: str) -> str:
 
 
 def convert_dict_to_snake_case(
-    input_dict: Union[List[Dict[str, Any]], Dict[str, Any]]
+    input_dict: Union[List[Dict[str, Any]], Dict[str, Any]],
 ) -> Union[List[Dict[str, Any]], Dict[str, Any]]:
     """
     convert_dict_to_snake_case. Recursively convert a dictionary or nested dictionary keys from Camel to Snake case.

@@ -5,4 +5,3 @@ from .list_incidents.action import ListIncidents
 from .get_incident.action import GetIncident
 
 from .update_incident.action import UpdateIncident
-

@@ -16,23 +16,26 @@ from typing import Union
 from mock_helper import MockResponse
 
 STUB_STATE_EXPECTED_SECOND_PAGE = {
-    "current_count": 2,
+    "current_count": 100,
     "last_search_from": 100,
     "last_search_to": 200,
-    "last_alert_time": 1706540499609,
     "query_end_time": 1706539560000,
     "query_start_time": 1706453160000,
     "last_alert_hash": ["f4ef7617f46fef7b78410498f563e01df2a5f030"],
 }
 
+STUB_STATE_NO_PAGES = {
+    "query_end_time": 1706539560000,
+    "last_alert_hash": ["a502a9c50798186882ad8dc91ac2b38eb185c404"],
+}
+
 STUB_STATE_MORE_PAGES = {
-    "current_count": 1,
+    "current_count": 100,
     "last_search_to": 100,
     "last_search_from": 0,
     "query_start_time": 1706453160000,
     "query_end_time": 1706539560000,
-    "last_alert_time": 1706540499609,
-    "last_alert_hash": ["a502a9c50798186882ad8dc91ac2b38eb185c404"],
+    "last_alert_hash": ["a502a9c50798186882ad8dc91ac2b38eb185c403"],
 }
 
 STUB_STATE_EXPECTED_NO_PAGE = {
@@ -46,22 +49,21 @@ STUB_STATE_ERROR = {
 }
 
 STUB_STATE_DEDUPE = {
-    "current_count": 1,
+    "current_count": 100,
     "last_search_to": 100,
     "last_search_from": 0,
     "query_start_time": 1706453160000,
     "query_end_time": 1706539560000,
-    "last_alert_time": 1706540499609,
     "last_alert_hash": ["a502a9c50798186882ad8dc91ac2b38eb185c404"],
 }
 
 STUB_STATE_EXCEED_LOOKBACK = {
-    "current_count": 1,
-    "last_search_to": 100,
-    "last_search_from": 0,
-    "query_start_time": 1706453160000,
     "query_end_time": 1706539560000,
-    "last_alert_time": 1706540499609,
+    "last_alert_hash": ["a502a9c50798186882ad8dc91ac2b38eb185c404"],
+}
+
+STUB_STATE_EXCEED_LOOKBACK_NO_RESULTS = {
+    "query_end_time": 1706539560000,
     "last_alert_hash": ["a502a9c50798186882ad8dc91ac2b38eb185c404"],
 }
 
@@ -78,27 +80,36 @@ class TestMonitorAlerts(TestCase):
                 "starting",
                 {},
                 TaskUtil.load_expected("monitor_alerts"),
-                True,
-                "monitor_alerts",
-                STUB_STATE_MORE_PAGES,
-                200,
-            ],
-            [
-                "next_page",
-                STUB_STATE_MORE_PAGES.copy(),
-                TaskUtil.load_expected("monitor_alert_two"),
-                True,
-                "monitor_alerts_two",
-                STUB_STATE_EXPECTED_SECOND_PAGE,
-                200,
-            ],
-            [
-                "final_page",
-                STUB_STATE_EXPECTED_SECOND_PAGE.copy(),
-                TaskUtil.load_expected("monitor_alerts_empty"),
                 False,
-                "monitor_alerts_empty",
-                STUB_STATE_EXPECTED_NO_PAGE,
+                "monitor_alerts",
+                STUB_STATE_NO_PAGES,
+                200,
+            ],
+            [
+                "starting_more_pages",
+                {},
+                TaskUtil.load_expected("monitor_alerts_full_page"),
+                True,
+                "monitor_alerts_full_page",
+                TaskUtil.load_expected("monitor_alerts_full_page_state"),
+                200,
+            ],
+            [
+                "next_page_more_pages",
+                STUB_STATE_MORE_PAGES.copy(),
+                TaskUtil.load_expected("monitor_alerts_full_page"),
+                True,
+                "monitor_alerts_full_page",
+                TaskUtil.load_expected("monitor_alerts_full_next_page_state"),
+                200,
+            ],
+            [
+                "next_page_final_page",
+                STUB_STATE_EXPECTED_SECOND_PAGE.copy(),
+                TaskUtil.load_expected("monitor_alerts"),
+                False,
+                "monitor_alerts",
+                STUB_STATE_NO_PAGES,
                 200,
             ],
         ]
@@ -116,9 +127,8 @@ class TestMonitorAlerts(TestCase):
     ) -> None:
 
         mock_req.return_value = mock_conditions(200, file_name=response_file)
-
+        self.maxDiff = None
         output, state, has_more_pages, status_code, _ = self.task.run(state=state)
-
         self.assertEqual(expected_output, output)
         self.assertEqual(expected_has_more_pages, has_more_pages)
         self.assertEqual(expected_state, state)
@@ -130,7 +140,8 @@ class TestMonitorAlerts(TestCase):
                 "Bad Request",
                 STUB_STATE_ERROR,
                 PluginException(
-                    data="An error occurred during plugin execution!\n\nAPI Error.  Bad request, invalid JSON."
+                    cause=PluginException.causes.get(PluginException.Preset.INVALID_JSON),
+                    assistance="Bad request, invalid JSON.",
                 ),
                 400,
             ],
@@ -138,7 +149,8 @@ class TestMonitorAlerts(TestCase):
                 "Wrong License",
                 STUB_STATE_ERROR,
                 PluginException(
-                    data="An error occurred during plugin execution!\n\nAPI Error.  Unauthorized access. User does not have the required license type to run this API."
+                    cause=PluginException.causes.get(PluginException.Preset.UNAUTHORIZED),
+                    assistance="Unauthorized access. User does not have the required license type to run this API.",
                 ),
                 402,
             ],
@@ -148,7 +160,7 @@ class TestMonitorAlerts(TestCase):
                 PluginException(
                     cause=PluginException.causes.get(PluginException.Preset.API_KEY),
                     assistance=PluginException.assistances.get(PluginException.Preset.API_KEY),
-                    data='An error occurred during plugin execution!\n\nInvalid API key provided. Verify your API key configured in your connection is correct. Response was: {"reply": {"err_code": 401, "err_msg": "Public API request unauthorized", "err_extra": null}}',
+                    data='{"reply": {"err_code": 401, "err_msg": "Public API request unauthorized", "err_extra": null}}',
                 ),
                 401,
             ],
@@ -156,7 +168,8 @@ class TestMonitorAlerts(TestCase):
                 "Forbidden",
                 STUB_STATE_ERROR,
                 PluginException(
-                    data="An error occurred during plugin execution!\n\nAPI Error.  Forbidden. The provided API Key does not have the required RBAC permissions to run this API."
+                    cause=PluginException.causes.get(PluginException.Preset.UNAUTHORIZED),
+                    assistance="Forbidden. The provided API Key does not have the required RBAC permissions to run this API.",
                 ),
                 403,
             ],
@@ -164,14 +177,18 @@ class TestMonitorAlerts(TestCase):
                 "Not Found",
                 STUB_STATE_ERROR,
                 PluginException(
-                    data="An error occurred during plugin execution!\n\nAPI Error.  The object at https://example.com/public_api/v1/alerts/get_alerts does not exist. Check the FQDN connection setting and try again."
+                    cause=PluginException.causes.get(PluginException.Preset.NOT_FOUND),
+                    assistance="The object at https://example.com/public_api/v1/alerts/get_alerts does not exist. Check the FQDN connection setting and try again.",
                 ),
                 404,
             ],
             [
                 "error.data is not of type response",
                 STUB_STATE_ERROR,
-                "An error occurred during plugin execution!\n\nFailed to connect to the server. Please check your network connection and try again.",
+                PluginException(
+                    cause="Failed to connect to the server.",
+                    assistance="Please check your network connection and try again.",
+                ),
                 699,
             ],
             ["regular exception", STUB_STATE_ERROR, "'list' object has no attribute 'get'", 500],
@@ -247,10 +264,9 @@ class TestMonitorAlerts(TestCase):
         mock_req.return_value = mock_conditions(200, file_name=response_file)
 
         output, state, has_more_pages, status_code, _ = self.task.run(state=input_state)
-
         self.assertEqual(status_code, expected_status_code)
-        self.assertEqual(input_state, state)
-        self.assertEqual(has_more_pages, True)
+        self.assertEqual(STUB_STATE_NO_PAGES, state)
+        self.assertEqual(has_more_pages, False)
         self.assertEqual(output, [])
 
     @parameterized.expand(
@@ -262,7 +278,7 @@ class TestMonitorAlerts(TestCase):
                 "monitor_alerts",
                 200,
                 {
-                    "last_alert_time": {
+                    "lookback": {
                         "date": {
                             "year": 2024,
                             "month": 8,
@@ -283,7 +299,7 @@ class TestMonitorAlerts(TestCase):
                 "monitor_alerts",
                 200,
                 {
-                    "max_last_alert_time": {
+                    "max_lookback_date_time": {
                         "year": 2024,
                         "month": 8,
                         "day": 2,
@@ -302,7 +318,7 @@ class TestMonitorAlerts(TestCase):
                 "monitor_alerts",
                 200,
                 {
-                    "max_last_alert_time": {
+                    "max_lookback_date_time": {
                         "year": 2024,
                         "month": 10,
                         "day": 2,
@@ -321,7 +337,7 @@ class TestMonitorAlerts(TestCase):
                 "monitor_alerts",
                 200,
                 {
-                    "max_last_alert_time": {
+                    "max_lookback_date_time": {
                         "year": 2024,
                         "month": 10,
                         "day": 2,
@@ -352,5 +368,5 @@ class TestMonitorAlerts(TestCase):
 
         self.assertEqual(output, expected_output)
         self.assertEqual(status_code, expected_status_code)
-        self.assertEqual(input_state, state)
-        self.assertEqual(has_more_pages, True)
+        self.assertEqual(STUB_STATE_EXCEED_LOOKBACK_NO_RESULTS, state)
+        self.assertEqual(has_more_pages, False)

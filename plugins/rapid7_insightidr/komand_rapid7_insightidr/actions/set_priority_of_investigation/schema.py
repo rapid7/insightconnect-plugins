@@ -17,7 +17,8 @@ class Output:
 
 
 class SetPriorityOfInvestigationInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -25,7 +26,7 @@ class SetPriorityOfInvestigationInput(insightconnect_plugin_runtime.Input):
     "id": {
       "type": "string",
       "title": "ID or RRN",
-      "description": "The ID or RNN of the investigation to change the priority of",
+      "description": "The ID or RRN of the investigation to change the priority of",
       "order": 1
     },
     "priority": {
@@ -48,14 +49,16 @@ class SetPriorityOfInvestigationInput(insightconnect_plugin_runtime.Input):
   ],
   "definitions": {}
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class SetPriorityOfInvestigationOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -184,7 +187,8 @@ class SetPriorityOfInvestigationOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

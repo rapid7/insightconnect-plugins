@@ -1,7 +1,7 @@
 {
-	"spec": "f47b7b4bc59db3b5f839955535a59660",
-	"manifest": "087aa32ede6b854cd63bda601038017a",
-	"setup": "6628c0c3a6eb2e3828cdcc104e0c08d2",
+	"spec": "7cafb2d6226fa7b58edf9d109577cfa0",
+	"manifest": "ae25e6d0ab8cb7b56e1d43b5d1cf127e",
+	"setup": "3b2020838b4f085f61e89e023df71dbc",
 	"schemas": [
 		{
 			"identifier": "add_user/schema.py",
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "get_logs/schema.py",
-			"hash": "ee359e5ea79a88b4597a5afaa739b793"
+			"hash": "3502cb177351d18ff8a31266a49db228"
 		},
 		{
 			"identifier": "get_phones_by_user_id/schema.py",
@@ -49,7 +49,7 @@
 		},
 		{
 			"identifier": "monitor_logs/schema.py",
-			"hash": "4119a8c82613406e16d830d7b48e0c86"
+			"hash": "26f03015b329bc573a7e6f3a688fb861"
 		}
 	]
 }

@@ -661,15 +661,6 @@ Example output:
 }
 ```
 
-When no groups are found, the action returns:
-
-```
-{
-  "success": false,
-  "groups": []
-}
-```
-
 #### Remove User from Group
 
 This action is used to remove a user from an existing group
@@ -847,14 +838,6 @@ Example output:
   "login": "user@example.com",
   "success": true,
   "userId": "00a0a1qwertYUIoplK0j6"
-}
-```
-
-When the user is not found, the action returns:
-
-```
-{
-  "success": false
 }
 ```
 
@@ -1594,10 +1577,12 @@ Example output:
 
 ## Troubleshooting
 
-Actions may fail depending on the state of the resource you attempt to operate over. They will return a best-effort message indicating why the Okta API responded the way it did when possible. Depending on the API endpoint, this message is either provided by Okta themselves, or constructed by the plugin based on the information it has at hand.
+* Actions may fail depending on the state of the resource you attempt to operate over. They will return a best-effort message indicating why the Okta API responded the way it did when possible. Depending on the API endpoint, this message is either provided by Okta themselves, or constructed by the plugin based on the information it has at hand.
 
 # Version History
 
+* 4.2.13 - Updated SDK to the latest version (6.2.5)
+* 4.2.12 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
 * 4.2.11 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 4.2.10 - Monitor Logs Task: Add exception handling if invalid subdomain provided
 * 4.2.9 - SDK Bump to 6.1.0 | Task Connection test added

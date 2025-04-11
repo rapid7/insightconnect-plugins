@@ -32,12 +32,14 @@ class ExtractAll(insightconnect_plugin_runtime.Action):
         date_format = params.get(Input.DATE_FORMAT)
         indicators = {
             "cves": extract(Regex.CVE, string, file),
-            "dates": parse_time(extract(define_date_time_regex(date_format), string, file), date_format)
-            if date_format != "All Formats"
-            else parse_time_all_date_formats(
-                extract_all_date_formats(
-                    string,
-                    file,
+            "dates": (
+                parse_time(extract(define_date_time_regex(date_format), string, file), date_format)
+                if date_format != "All Formats"
+                else parse_time_all_date_formats(
+                    extract_all_date_formats(
+                        string,
+                        file,
+                    )
                 )
             ),
             "email_addresses": clear_emails(extract(Regex.Email, string, file)),

@@ -12,7 +12,7 @@ class FixWinrmSession(winrm.Session):
         encoded_ps = base64.b64encode(script.encode("utf_16_le")).decode("ascii")
         rs = self.run_cmd(f"powershell -encodedcommand {encoded_ps}")
         if len(rs.std_err):
-            rs.std_err = self._clean_error_msg(rs.std_err.decode(DECODING_TYPE))
+            rs.std_err = self._clean_error_msg(rs.std_err)
         return rs
 
 

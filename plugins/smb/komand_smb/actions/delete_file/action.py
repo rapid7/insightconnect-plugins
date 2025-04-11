@@ -1,42 +1,70 @@
-import komand
-from .schema import DeleteFileInput, DeleteFileOutput, Input, Output
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 
-# Custom imports below
-import smb
+from .schema import DeleteFileInput, DeleteFileOutput, Input, Output, Component
+
+from smbprotocol.open import Open, ImpersonationLevel, CreateDisposition, CreateOptions, FilePipePrinterAccessMask
+from smbprotocol.file_info import FileAttributes
+from smbprotocol.exceptions import SMBException
 
 
-class DeleteFile(komand.Action):
+class DeleteFile(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="delete_file",
-            description="Delete file from share",
+            description=Component.DESCRIPTION,
             input=DeleteFileInput(),
             output=DeleteFileOutput(),
         )
 
     def run(self, params={}):
-        if "*" in params.get(Input.FILE_PATH):
-            self.logger.error(
-                "The Delete File action does not allow use of wildcards; " "please leverage the Delete Files action"
+        file_path = params.get(Input.FILE_PATH)
+        share_name = params.get(Input.SHARE_NAME)
+
+        # Prevent wildcard value deletions
+        if "*" in file_path:
+            self.logger.error("Wildcard deletions are not allowed.")
+            raise PluginException(
+                cause="Wildcard * is not a valid input.",
+                assistance=f"The file input {file_path} is not allowed. Please ensure there are no wildcard values in the file path.",
             )
-            return {Output.DELETED: False}
 
         try:
-            self.connection.conn.deleteFiles(
-                params.get(Input.SHARE_NAME),
-                params.get(Input.FILE_PATH),
-                timeout=params.get(Input.TIMEOUT),
+            self.logger.info(f"Attempting to delete file: {file_path} from share: {share_name}")
+
+            # Calls method to establish a connection
+            tree = self.connection._connect_to_smb_share(share_name)  # noqa: E1101
+
+            open_file = Open(tree, file_path)
+            open_file.create(
+                impersonation_level=ImpersonationLevel.Impersonation,
+                file_attributes=FileAttributes.FILE_ATTRIBUTE_NORMAL,
+                desired_access=FilePipePrinterAccessMask.GENERIC_READ | FilePipePrinterAccessMask.DELETE,
+                share_access=0,
+                create_disposition=CreateDisposition.FILE_OPEN,
+                create_options=CreateOptions.FILE_NON_DIRECTORY_FILE | CreateOptions.FILE_DELETE_ON_CLOSE,
             )
+            open_file.close()
+
+            self.logger.info(f"File: {file_path} was deleted successfully.")
+            tree.disconnect()
+
             return {Output.DELETED: True}
-        except smb.smb_structs.OperationFailure as e:
-            raise Exception("Failed to delete file. This may occur when the file does not exist.") from e
-        except smb.base.SMBTimeout as e:
-            raise Exception(
-                "Timeout reached when connecting to SMB endpoint. Validate network connectivity or "
-                "extend connection timeout"
-            ) from e
-        except smb.base.NotReadyError as e:
-            raise Exception(
-                "The SMB connection is not authenticated or the authentication has failed.  Verify the "
-                "credentials of the connection in use."
-            ) from e
+
+        except SMBException as error:
+            if "STATUS_BAD_NETWORK_NAME" in str(error):
+                raise PluginException(
+                    cause=f"The requested share: {share_name} is not a valid share name.",
+                    assistance=f"Please ensure the share name: {share_name} is correct and try again.",
+                )
+            elif "STATUS_OBJECT_NAME_NOT_FOUND" in str(error):
+                raise PluginException(
+                    cause=f"File: {file_path} not found",
+                    assistance=f"Please ensure {file_path} file exists before attempting to delete it.",
+                )
+
+            raise PluginException(
+                cause="Failed to delete file.",
+                assistance=f"The file: {file_path} may not exist or is locked. Ensure it exists and is not in use.",
+                data=error,
+            ) from error
