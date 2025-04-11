@@ -50,6 +50,7 @@ class ApiConnection:
             url=url,
             headers={"X-Api-Key": f"{self.api_key}"},
             json={"query_id": query_id},
+            timeout=60
         )
 
         try:
