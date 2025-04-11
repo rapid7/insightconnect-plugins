@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Microsoft Defender for Endpoint"
 Vendor = "rapid7"
-Version = "6.0.2"
+Version = "6.0.3"
 Description = "The Microsoft Defender for Endpoint plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files"
 
 
