@@ -2,10 +2,10 @@
 from setuptools import setup, find_packages
 
 
-setup(name="rapid7_surface_command-Noetic-plugin",
+setup(name="rapid7_surface_command-rapid7-plugin",
       version="1.0.0",
       description="Surface Command gives you full visibilty over your assets and identies across multiple technology platforms.",
-      author="Noetic",
+      author="rapid7",
       author_email="",
       url="",
       packages=find_packages(),
