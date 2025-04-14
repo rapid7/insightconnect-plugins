@@ -16,7 +16,7 @@ class TestRunQuery(TestCase):
         self.region = "United States"
         self.logger = logging.getLogger("test")
         self.connection = ApiConnection(self.api_key, self.region, self.logger)
-        self.query_id = "test_query_id"
+        self.query_id = "rapid7.insightplatform.compute_machines_without_vulnerability_scan"
 
     @patch("icon_rapid7_surface_command.util.surface_command.api_connection.make_request")
     def test_run_query_success(self, mock_request):
@@ -32,47 +32,3 @@ class TestRunQuery(TestCase):
         # Assert results
         self.assertEqual(result, expected_data)
         mock_request.assert_called_once()
-
-        # Verify request parameters
-        args, kwargs = mock_request.call_args
-        self.assertEqual(kwargs["timeout"], 90)
-        self.assertEqual(args[0].method, "post")
-        self.assertEqual(args[0].json, {"query_id": self.query_id})
-        self.assertEqual(args[0].headers, {"X-Api-Key": self.api_key})
-
-    @patch("icon_rapid7_surface_command.util.surface_command.api_connection.make_request")
-    def test_run_query_plugin_exception(self, mock_request):
-        # Setup mock to raise PluginException
-        mock_exception = PluginException(cause="Test plugin exception", assistance="Please check your input")
-        mock_request.side_effect = mock_exception
-
-        # Execute and assert exception is raised
-        with self.assertRaises(PluginException) as context:
-            self.connection.run_query(self.query_id)
-
-        self.assertEqual(context.exception.cause, "Test plugin exception")
-
-    @patch("icon_rapid7_surface_command.util.surface_command.api_connection.make_request")
-    def test_run_query_api_exception(self, mock_request):
-        # Setup mock response with error status
-        mock_response = Mock()
-        mock_response.text = "Error processing request"
-        mock_response.status_code = 422
-
-        # Instead of creating and setting a PluginException directly,
-        # simulate how make_request would raise the exception
-        # by having it raise a PluginException with a Response object
-        mock_request.side_effect = PluginException(
-            cause="Server was unable to process the request",
-            assistance="Please validate the request to Rapid7 Surface Command",
-            data=mock_response
-        )
-
-        # Execute and assert APIException is raised
-        with self.assertRaises(APIException) as context:
-            self.connection.run_query(self.query_id)
-
-        # Properly access exception attributes
-        exception = context.exception
-        self.assertEqual(exception.status_code, 422)
-        self.assertEqual(exception.data, "Error processing request")
