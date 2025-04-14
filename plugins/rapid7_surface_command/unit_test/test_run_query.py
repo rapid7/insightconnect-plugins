@@ -1,14 +1,13 @@
-from unittest import TestCase
-from unittest.mock import patch, Mock
 import logging
 import os
 import sys
-import json
+from unittest import TestCase
+from unittest.mock import Mock, patch
 
 sys.path.append(os.path.abspath("../"))
 
 from icon_rapid7_surface_command.util.surface_command.api_connection import ApiConnection
-from insightconnect_plugin_runtime.exceptions import PluginException, APIException
+from insightconnect_plugin_runtime.exceptions import APIException, PluginException
 
 
 class TestRunQuery(TestCase):
