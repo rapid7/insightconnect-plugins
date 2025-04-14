@@ -44,9 +44,7 @@ class ApiConnection:
         self.api_key = api_key
         self.logger = logger
         region = REGION_MAP.get(region_string)
-        self.url = (
-            f"https://{region}.api.insight.rapid7.com/surface/graph-api/objects/table"
-        )
+        self.url = f"https://{region}.api.insight.rapid7.com/surface/graph-api/objects/table"
         self.timeout = timeout
 
     def run_query(self, query_id: str) -> dict:

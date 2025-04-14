@@ -24,16 +24,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.region = params.get(Input.REGION)
         # END INPUT BINDING - DO NOT REMOVE
 
-        self.api = ApiConnection(
-            self.api_key.get("secretKey"), self.region, self.logger
-        )
+        self.api = ApiConnection(self.api_key.get("secretKey"), self.region, self.logger)
         self.logger.info("Setup Complete")
 
     def test(self):
         if not self.api_key or not self.region:
-            raise ConnectionTestException(
-                "API Key and Region are required to test the connection."
-            )
+            raise ConnectionTestException("API Key and Region are required to test the connection.")
         try:
             # This is a usually fast query we can use to test.
             self.api.run_query("rapid7.insightplatform.admin_user_mfa_false_count")
