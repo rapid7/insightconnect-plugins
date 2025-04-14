@@ -1,15 +1,15 @@
 import logging
+from requests import Request, Response
 
 import furl
-from requests import Response, Request
 
-from insightconnect_plugin_runtime.helper import make_request
 from insightconnect_plugin_runtime.exceptions import (
     APIException,
     HTTPStatusCodes,
     PluginException,
     ResponseExceptionData,
 )
+from insightconnect_plugin_runtime.helper import make_request
 
 
 REGION_MAP = {
@@ -31,14 +31,23 @@ class ApiConnection:
     on Surface Command.
     """
 
-    def __init__(self, api_key: str, region_string: str, logger: logging.Logger) -> None:
+    def __init__(
+        self,
+        api_key: str,
+        region_string: str,
+        logger: logging.Logger,
+        timeout: int = 90,
+    ) -> None:
         """
         Init the connection and set the region
         """
         self.api_key = api_key
         self.logger = logger
         region = REGION_MAP.get(region_string)
-        self.url = f"https://{region}.api.insight.rapid7.com/surface/graph-api/objects/table"
+        self.url = (
+            f"https://{region}.api.insight.rapid7.com/surface/graph-api/objects/table"
+        )
+        self.timeout = timeout
 
     def run_query(self, query_id: str) -> dict:
         """
@@ -50,16 +59,16 @@ class ApiConnection:
             url=url,
             headers={"X-Api-Key": f"{self.api_key}"},
             json={"query_id": query_id},
-            timeout=60
         )
 
         try:
             response = make_request(
                 _request=request,
+                timeout=self.timeout,  # Timeout is properly handled here
                 exception_custom_configs={
                     HTTPStatusCodes.UNPROCESSABLE_ENTITY: PluginException(
                         cause="Server was unable to process the request",
-                        assistance="Please validate the request to Claroty",
+                        assistance="Please validate the request to Rapid7 Surface Command",
                     )
                 },
                 exception_data_location=ResponseExceptionData.RESPONSE,

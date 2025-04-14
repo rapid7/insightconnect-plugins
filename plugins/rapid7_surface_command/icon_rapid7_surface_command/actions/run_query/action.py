@@ -8,7 +8,10 @@ class RunQuery(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="run_query", description=Component.DESCRIPTION, input=RunQueryInput(), output=RunQueryOutput()
+            name="run_query",
+            description=Component.DESCRIPTION,
+            input=RunQueryInput(),
+            output=RunQueryOutput(),
         )
 
     def run(self, params={}):

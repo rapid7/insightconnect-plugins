@@ -1,13 +1,9 @@
-import sys
+from unittest import TestCase
+
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
-
-from unittest import TestCase
-from icon_rapid7_surface_command.connection.connection import Connection
-from icon_rapid7_surface_command.actions.run_query import RunQuery
-import json
-import logging
 
 
 class TestRunQuery(TestCase):
