@@ -2,13 +2,14 @@
 from setuptools import setup, find_packages
 
 
-setup(name="freshservice-rapid7-plugin",
-      version="1.0.1",
-      description="Freshservice is a cloud-based IT Service Management solution that was designed using ITIL best practices. Freshservice helps IT organizations streamline their service delivery processes with a strong focus on user experience and employee happiness",
-      author="rapid7",
-      author_email="",
-      url="",
-      packages=find_packages(),
-      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/icon_freshservice']
-      )
+setup(
+    name="freshservice-rapid7-plugin",
+    version="1.0.2",
+    description="Freshservice is a cloud-based IT Service Management solution that was designed using ITIL best practices. Freshservice helps IT organizations streamline their service delivery processes with a strong focus on user experience and employee happiness",
+    author="rapid7",
+    author_email="",
+    url="",
+    packages=find_packages(),
+    install_requires=["insightconnect-plugin-runtime"],  # Add third-party dependencies to requirements.txt, not here!
+    entry_points={"console_scripts": ["icon_freshservice = bin.icon_freshservice:main"]},
+)

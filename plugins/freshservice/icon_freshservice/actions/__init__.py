@@ -17,4 +17,3 @@ from .delete_ticket_task.action import DeleteTicketTask
 from .list_all_groups.action import ListAllGroups
 
 from .list_all_agents.action import ListAllAgents
-

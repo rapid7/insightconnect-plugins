@@ -16,23 +16,20 @@ Freshservice is a cloud-based IT Service Management solution that was designed u
 * Permissions to view agents and agent groups.
 
 # Supported Product Versions
-  
-* FreshService API v2 2022-11-14
+
+* FreshService API v2 2025-04-14
 
 # Documentation
 
 ## Setup
 
-It's necessary for a user role to have permissions to view/create/edit/delete tickets and ticket tasks, and view permissions to agents and agent groups. Please contact your administrator to set up the role. 
-If your account doesn't have the specific permissions required to perform the selected action, then unauthorised exception will occur.
-  
 The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|apiKey|credential_secret_key|None|True|FreshService API key|None|44d88612fea8a8f36de82e1278abb02f|
-|subdomain|string|None|True|Subdomain from your FreshService URL, for example "example-company" from "https://example-company.freshservice.com"|None|example-company|
-  
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|apiKey|credential_secret_key|None|True|FreshService API key|None|44d88612fea8a8f36de82e1278abb02f|None|None|
+|subdomain|string|None|True|Subdomain from your FreshService URL, for example "example-company" from "https://example-company.freshservice.com"|None|example-company|None|None|
+
 Example input:
 
 ```
@@ -48,38 +45,38 @@ Example input:
 
 
 #### Create Ticket
-  
-This action is used to create a new ticket in your service desk.
+
+This action is used to create a new ticket in your service desk
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|assets|[]assetInput|None|False|Assets that have to be associated with the ticket|None|{"displayId": 2}|
-|attachments|[]attachmentInput|None|False|Ticket attachments. The total size of these attachments cannot exceed 15MB|None|[{"name": "test.txt", "content": "dGVzdA=="}]|
-|category|string|None|False|Ticket category|None|Hardware|
-|ccEmails|[]string|None|False|Email addresses added in the 'cc' field of the incoming ticket email|None|["user@example.com"]|
-|customFields|object|None|False|Key value pairs containing the names and values of custom fields|None|{"key": "value"}|
-|departmentId|integer|None|False|Department ID of the requester|None|123456789|
-|description|string|None|True|HTML content of the ticket|None|Example description|
-|dueBy|date|None|False|Timestamp that denotes when the ticket is due to be resolved|None|2022-11-30 12:00:00+00:00|
-|email|string|None|False|Email address of the requester. If no contact exists with this email address in FreshService, it will be added as a new contact|None|user@example.com|
-|frDueBy|date|None|False|Timestamp that denotes when the first response is due|None|2022-11-30 12:00:00+00:00|
-|groupId|integer|None|False|ID of the group to which the ticket has been assigned|None|123456789|
-|impact|integer|1|False|Impact of the ticket|None|1|
-|itemCategory|string|None|False|Ticket item category|None|PC|
-|name|string|None|False|Name of the requester|None|Example Requester|
-|phone|string|None|False|Phone number of the requester. If no contact exists with this phone number in FreshService, it will be added as a new contact. If the phone number is set and the email address is not, then the name attribute is mandatory|None|11111111|
-|priority|integer|1|True|Priority of the ticket|None|1|
-|requesterId|integer|None|False|ID of the requester|None|123456789|
-|responderId|integer|None|False|ID of the agent to whom the ticket has been assigned|None|987654321|
-|source|integer|None|False|The channel through which the ticket was created|None|2|
-|status|integer|None|True|Status|None|2|
-|subCategory|string|None|False|Ticket sub category|None|Computer|
-|subject|string|None|True|Subject of the ticket|None|Example Subject|
-|tags|[]string|None|False|Tags that have been associated with the ticket|None|["tag1", "tag2"]|
-|type|string|None|False|Type of the ticket|None|Incident|
-|urgency|integer|1|False|Urgency|None|2|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|assets|[]assetInput|None|False|Assets that have to be associated with the ticket|None|{"displayId": 2}|None|None|
+|attachments|[]attachmentInput|None|False|Ticket attachments. The total size of these attachments cannot exceed 15MB|None|[{"name": "test.txt", "content": "dGVzdA=="}]|None|None|
+|category|string|None|False|Ticket category|None|Hardware|None|None|
+|ccEmails|[]string|None|False|Email addresses added in the 'cc' field of the incoming ticket email|None|["user@example.com"]|None|None|
+|customFields|object|None|False|Key value pairs containing the names and values of custom fields|None|{"key": "value"}|None|None|
+|departmentId|integer|None|False|Department ID of the requester|None|123456789|None|None|
+|description|string|None|True|HTML content of the ticket|None|Example description|None|None|
+|dueBy|date|None|False|Timestamp that denotes when the ticket is due to be resolved|None|2026-11-30 12:00:00+00:00|None|None|
+|email|string|None|False|Email address of the requester. If no contact exists with this email address in FreshService, it will be added as a new contact|None|user@example.com|None|None|
+|frDueBy|date|None|False|Timestamp that denotes when the first response is due|None|2022-11-30 12:00:00+00:00|None|None|
+|groupId|integer|None|False|ID of the group to which the ticket has been assigned|None|123456789|None|None|
+|impact|integer|1|False|Impact of the ticket|None|1|None|None|
+|itemCategory|string|None|False|Ticket item category|None|PC|None|None|
+|name|string|None|False|Name of the requester|None|Example Requester|None|None|
+|phone|string|None|False|Phone number of the requester. If no contact exists with this phone number in FreshService, it will be added as a new contact. If the phone number is set and the email address is not, then the name attribute is mandatory|None|11111111|None|None|
+|priority|integer|1|True|Priority of the ticket|None|1|None|None|
+|requesterId|integer|None|False|ID of the requester|None|123456789|None|None|
+|responderId|integer|None|False|ID of the agent to whom the ticket has been assigned|None|987654321|None|None|
+|source|integer|None|False|The channel through which the ticket was created|None|2|None|None|
+|status|integer|None|True|Status|None|2|None|None|
+|subCategory|string|None|False|Ticket sub category|None|Computer|None|None|
+|subject|string|None|True|Subject of the ticket|None|Example Subject|None|None|
+|tags|[]string|None|False|Tags that have been associated with the ticket|None|["tag1", "tag2"]|None|None|
+|type|string|None|False|Type of the ticket|None|Incident|None|None|
+|urgency|integer|1|False|Urgency|None|2|None|None|
   
 Example input:
 
@@ -95,13 +92,15 @@ Example input:
     }
   ],
   "category": "Hardware",
-  "ccEmails": "user@example.com",
+  "ccEmails": [
+    "user@example.com"
+  ],
   "customFields": {
     "key": "value"
   },
   "departmentId": 123456789,
   "description": "Example description",
-  "dueBy": "2022-11-30 12:00:00+00:00",
+  "dueBy": "2026-11-30 12:00:00+00:00",
   "email": "user@example.com",
   "frDueBy": "2022-11-30 12:00:00+00:00",
   "groupId": 123456789,
@@ -116,7 +115,10 @@ Example input:
   "status": 2,
   "subCategory": "Computer",
   "subject": "Example Subject",
-  "tags": "tag1",
+  "tags": [
+    "tag1",
+    "tag2"
+  ],
   "type": "Incident",
   "urgency": 1
 }
@@ -199,20 +201,20 @@ Example output:
 ```
 
 #### Create Ticket Task
-  
-This action is used to create a new task on a ticket request.
+
+This action is used to create a new task on a ticket request
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|description|string|None|False|Description of the task|None|Example description|
-|dueDate|date|None|False|Due date of the task|None|2022-11-14 00:00:00+00:00|
-|groupId|integer|None|False|Unique ID of the group to which the task will be  assigned|None|123456789|
-|notifyBefore|integer|None|False|Time in seconds before which notification is sent prior to due date|None|3600|
-|status|string|Open|False|Status of the task|['Open', 'In Progress', 'Completed']|Open|
-|ticketId|integer|None|True|ID of the ticket for which the task will be created|None|20|
-|title|string|None|True|Title of the task|None|Task|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|description|string|None|False|Description of the task|None|Example description|None|None|
+|dueDate|date|None|False|Due date of the task|None|2022-11-14 00:00:00+00:00|None|None|
+|groupId|integer|None|False|Unique ID of the group to which the task will be  assigned|None|123456789|None|None|
+|notifyBefore|integer|None|False|Time in seconds before which notification is sent prior to due date|None|3600|None|None|
+|status|string|Open|False|Status of the task|["Open", "In Progress", "Completed"]|Open|None|None|
+|ticketId|integer|None|True|ID of the ticket for which the task will be created|None|20|None|None|
+|title|string|None|True|Title of the task|None|Task|None|None|
   
 Example input:
 
@@ -254,14 +256,14 @@ Example output:
 ```
 
 #### Delete Ticket
-  
-This action is used to delete the given ticket.
+
+This action is used to delete the given ticket
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|ticketId|integer|None|True|ID of the ticket which will be deleted|None|20|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|ticketId|integer|None|True|ID of the ticket which will be deleted|None|20|None|None|
   
 Example input:
 
@@ -286,15 +288,15 @@ Example output:
 ```
 
 #### Delete Ticket Task
-  
-This action is used to delete a task on a ticket request.
+
+This action is used to delete a task on a ticket request
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|taskId|integer|None|True|ID of the task which will be deleted|None|10|
-|ticketId|integer|None|True|ID of the ticket for which the task will be deleted|None|20|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|taskId|integer|None|True|ID of the task which will be deleted|None|10|None|None|
+|ticketId|integer|None|True|ID of the ticket for which the task will be deleted|None|20|None|None|
   
 Example input:
 
@@ -320,19 +322,19 @@ Example output:
 ```
 
 #### List All Agents
-  
-This action is used to view information about all agents in the account. Use filters to view only specific agents (those who match the criteria
- that you choose).
+
+This action is used to view information about all agents in the account. Use filters to view only specific agents 
+(those who match the criteria that you choose)
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|active|string|all|False|Return active, deactivated or all agents|['true', 'false', 'all']|all|
-|email|string|None|False|Email address of the agent based on which the results will be filtered|None|user@example.com|
-|mobilePhoneNumber|string|None|False|Mobile phone number of the agent based on which the results will be filtered|None|664345|
-|state|string|all|False|Return fulltime, occasional or all agents|['fulltime', 'occasional', 'all']|all|
-|workPhoneNumber|string|None|False|Work phone number of the agent based on which the results will be filtered|None|5564435|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|active|string|all|False|Return active, deactivated or all agents|["True", "False", "all"]|all|None|None|
+|email|string|None|False|Email address of the agent based on which the results will be filtered|None|user@example.com|None|None|
+|mobilePhoneNumber|string|None|False|Mobile phone number of the agent based on which the results will be filtered|None|664345|None|None|
+|state|string|all|False|Return fulltime, occasional or all agents|["fulltime", "occasional", "all"]|all|None|None|
+|workPhoneNumber|string|None|False|Work phone number of the agent based on which the results will be filtered|None|5564435|None|None|
   
 Example input:
 
@@ -398,8 +400,8 @@ Example output:
 ```
 
 #### List All Groups
-  
-This action is used to view information about all groups in the account.
+
+This action is used to view information about all groups in the account
 
 ##### Input
   
@@ -438,21 +440,21 @@ Example output:
 ```
 
 #### List Tickets
-  
-This action is used to list all tickets for the given filters.
+
+This action is used to list all tickets for the given filters
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|email|string|None|False|Filter tickets by requester email|None|user@example.com|
-|filter|string|None|False|Filter tickets using predefined filters. The filters available are new_and_my_open, watching, spam, deleted|None|watching|
-|orderType|string|desc|False|Type of the order|['asc', 'desc']|desc|
-|page|integer|None|False|The number of the results page to be returned|None|1|
-|perPage|integer|20|False|The number of results per page|None|20|
-|requesterId|integer|None|False|Filter tickets by requester ID|None|123456789|
-|type|string|All|False|Filter tickets by type|['Incident', 'Service Request', 'All']|All|
-|updatedSince|date|None|False|Filter tickets by update date|None|2022-11-14 00:00:00+00:00|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|email|string|None|False|Filter tickets by requester email|None|user@example.com|None|None|
+|filter|string|None|False|Filter tickets using predefined filters. The filters available are new_and_my_open, watching, spam, deleted|None|watching|None|None|
+|orderType|string|desc|False|Type of the order|["asc", "desc"]|desc|None|None|
+|page|integer|None|False|The number of the results page to be returned|None|1|None|None|
+|perPage|integer|20|False|The number of results per page|None|20|None|None|
+|requesterId|integer|None|False|Filter tickets by requester ID|None|123456789|None|None|
+|type|string|All|False|Filter tickets by type|["Incident", "Service Request", "All"]|All|None|None|
+|updatedSince|date|None|False|Filter tickets by update date|None|2022-11-14 00:00:00+00:00|None|None|
   
 Example input:
 
@@ -517,38 +519,38 @@ Example output:
 ```
 
 #### Update Ticket
-  
-This action is used to update an existing ticket in your service desk.
+
+This action is used to update an existing ticket in your service desk
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|assets|[]assetInput|None|False|Assets that have to be associated with the ticket|None|{"displayId": 2}|
-|attachments|[]attachmentInput|None|False|Ticket attachments. The total size of these attachments cannot exceed 15MB|None|[{"name": "test.txt", "content": "dGVzdA=="}]|
-|category|string|None|False|Ticket category|None|Hardware|
-|customFields|object|None|False|Key value pairs containing the names and values of custom fields|None|{"key": "value"}|
-|departmentId|integer|None|False|Department ID of the requester|None|123456789|
-|description|string|None|False|HTML content of the ticket|None|Example description|
-|dueBy|date|None|False|Timestamp that denotes when the ticket is due to be resolved|None|2022-11-30 12:00:00+00:00|
-|email|string|None|False|Email address of the requester. If no contact exists with this email address in FreshService, it will be added as a new contact|None|user@example.com|
-|frDueBy|date|None|False|Timestamp that denotes when the first response is due|None|2022-11-30 12:00:00+00:00|
-|groupId|integer|None|False|ID of the group to which the ticket has been assigned|None|123456789|
-|impact|integer|1|False|Impact of the ticket|None|1|
-|itemCategory|string|None|False|Ticket item category|None|PC|
-|name|string|None|False|Name of the requester|None|Example Requester|
-|phone|string|None|False|Phone number of the requester. If no contact exists with this phone number in FreshService, it will be added as a new contact. If the phone number is set and the email address is not, then the name attribute is mandatory|None|11111111|
-|priority|integer|1|False|Priority of the ticket|None|1|
-|requesterId|integer|None|False|ID of the requester|None|123456789|
-|responderId|integer|None|False|ID of the agent to whom the ticket has been assigned|None|987654321|
-|source|integer|None|False|The channel through which the ticket was created|None|2|
-|status|integer|None|False|Status|None|2|
-|subCategory|string|None|False|Ticket sub category|None|Computer|
-|subject|string|None|False|Subject of the ticket|None|Example Subject|
-|tags|[]string|None|False|Tags that have been associated with the ticket|None|["tag1", "tag2"]|
-|ticketId|integer|None|True|ID of the ticket which will be updated|None|10|
-|type|string|None|False|Type of the ticket|None|Incident|
-|urgency|integer|1|False|Urgency|None|2|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|assets|[]assetInput|None|False|Assets that have to be associated with the ticket|None|{"displayId": 2}|None|None|
+|attachments|[]attachmentInput|None|False|Ticket attachments. The total size of these attachments cannot exceed 15MB|None|[{"name": "test.txt", "content": "dGVzdA=="}]|None|None|
+|category|string|None|False|Ticket category|None|Hardware|None|None|
+|customFields|object|None|False|Key value pairs containing the names and values of custom fields|None|{"key": "value"}|None|None|
+|departmentId|integer|None|False|Department ID of the requester|None|123456789|None|None|
+|description|string|None|False|HTML content of the ticket|None|Example description|None|None|
+|dueBy|date|None|False|Timestamp that denotes when the ticket is due to be resolved|None|2026-12-20 12:00:00+00:00|None|None|
+|email|string|None|False|Email address of the requester. If no contact exists with this email address in FreshService, it will be added as a new contact|None|user@example.com|None|None|
+|frDueBy|date|None|False|Timestamp that denotes when the first response is due|None|2026-11-30 12:00:00+00:00|None|None|
+|groupId|integer|None|False|ID of the group to which the ticket has been assigned|None|123456789|None|None|
+|impact|integer|1|False|Impact of the ticket|None|1|None|None|
+|itemCategory|string|None|False|Ticket item category|None|PC|None|None|
+|name|string|None|False|Name of the requester|None|Example Requester|None|None|
+|phone|string|None|False|Phone number of the requester. If no contact exists with this phone number in FreshService, it will be added as a new contact. If the phone number is set and the email address is not, then the name attribute is mandatory|None|11111111|None|None|
+|priority|integer|1|False|Priority of the ticket|None|1|None|None|
+|requesterId|integer|None|False|ID of the requester|None|123456789|None|None|
+|responderId|integer|None|False|ID of the agent to whom the ticket has been assigned|None|987654321|None|None|
+|source|integer|None|False|The channel through which the ticket was created|None|2|None|None|
+|status|integer|None|False|Status|None|2|None|None|
+|subCategory|string|None|False|Ticket sub category|None|Computer|None|None|
+|subject|string|None|False|Subject of the ticket|None|Example Subject|None|None|
+|tags|[]string|None|False|Tags that have been associated with the ticket|None|["tag1", "tag2"]|None|None|
+|ticketId|integer|None|True|ID of the ticket which will be updated|None|10|None|None|
+|type|string|None|False|Type of the ticket|None|Incident|None|None|
+|urgency|integer|1|False|Urgency|None|2|None|None|
   
 Example input:
 
@@ -569,9 +571,9 @@ Example input:
   },
   "departmentId": 123456789,
   "description": "Example description",
-  "dueBy": "2022-11-30 12:00:00+00:00",
+  "dueBy": "2026-12-20 12:00:00+00:00",
   "email": "user@example.com",
-  "frDueBy": "2022-11-30 12:00:00+00:00",
+  "frDueBy": "2026-11-30 12:00:00+00:00",
   "groupId": 123456789,
   "impact": 1,
   "itemCategory": "PC",
@@ -584,7 +586,10 @@ Example input:
   "status": 2,
   "subCategory": "Computer",
   "subject": "Example Subject",
-  "tags": "tag1",
+  "tags": [
+    "tag1",
+    "tag2"
+  ],
   "ticketId": 10,
   "type": "Incident",
   "urgency": 1
@@ -668,21 +673,21 @@ Example output:
 ```
 
 #### Update Ticket Task
-  
-This action is used to update an existing task on a ticket request.
+
+This action is used to update an existing task on a ticket request
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|description|string|None|False|Description of the task|None|Example description|
-|dueDate|date|None|False|Due date of the task|None|2022-11-14 00:00:00+00:00|
-|groupId|integer|None|False|Unique ID of the group to which the task will be  assigned|None|123456789|
-|notifyBefore|integer|None|False|Time in seconds before which notification is sent prior to due date|None|3600|
-|status|string|Open|False|Status of the task|['Open', 'In Progress', 'Completed']|Open|
-|taskId|integer|None|True|ID of the task which will be updated|None|10|
-|ticketId|integer|None|True|ID of the ticket for which the task will be updated|None|20|
-|title|string|None|False|Title of the task|None|Task|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|description|string|None|False|Description of the task|None|Example description|None|None|
+|dueDate|date|None|False|Due date of the task|None|2022-11-14 00:00:00+00:00|None|None|
+|groupId|integer|None|False|Unique ID of the group to which the task will be  assigned|None|123456789|None|None|
+|notifyBefore|integer|None|False|Time in seconds before which notification is sent prior to due date|None|3600|None|None|
+|status|string|Open|False|Status of the task|["Open", "In Progress", "Completed"]|Open|None|None|
+|taskId|integer|None|True|ID of the task which will be updated|None|10|None|None|
+|ticketId|integer|None|True|ID of the ticket for which the task will be updated|None|20|None|None|
+|title|string|None|False|Title of the task|None|Task|None|None|
   
 Example input:
 
@@ -916,18 +921,18 @@ Example output:
 
 ## Troubleshooting
   
-*There is no troubleshooting for this plugin.*
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 1.0.2 - Updated SDK to the latest version (6.3.3)
 * 1.0.1 - Updated the connection test | Added infomation about the roles and permissions necessary to run actions | `List All Agents`: Fixed issue related to the departament IDs field
 * 1.0.0 - Initial plugin | Add Create Ticket, Update Ticket, Delete Ticket, List Tickets, Create Ticket Task, Update Ticket Task, Delete Ticket Task, List Groups and List Agents actions
 
 # Links
 
 * [FreshService](https://freshservice.com)
-* [FreshService Role Setup](https://support.freshservice.com/en/support/solutions/articles/50000002933-setting-up-roles-role-based-access-controls)
 
 ## References
-  
-*This plugin does not contain any references.*
+
+* [FreshService Role Setup](https://support.freshservice.com/en/support/solutions/articles/50000002933-setting-up-roles-role-based-access-controls)

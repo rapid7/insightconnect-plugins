@@ -3,26 +3,50 @@ extension: plugin
 products: [insightconnect]
 name: freshservice
 title: FreshService
-description: Freshservice is a cloud-based IT Service Management solution that was designed using ITIL best practices. Freshservice helps IT organizations streamline their service delivery processes with a strong focus on user experience and employee happiness
-version: 1.0.1
+description: Freshservice is a cloud-based IT Service Management solution that was
+  designed using ITIL best practices. Freshservice helps IT organizations streamline
+  their service delivery processes with a strong focus on user experience and employee
+  happiness
+version: 1.0.2
 connection_version: 1
-supported_versions: ["FreshService API v2 2022-11-14"]
+supported_versions: [FreshService API v2 2025-04-14]
 vendor: rapid7
 cloud_ready: true
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/freshservice
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://freshservice.com
-tags: ["freshservice", "ticketing"]
+tags: [freshservice, ticketing]
 support: rapid7
 status: []
 hub_tags:
   use_cases: [reporting_and_analytics]
   keywords: [freshservice, ticketing, cloud_enabled]
   features: []
+links:
+  - "[FreshService](https://freshservice.com)"
+references:
+  - "[FreshService Role Setup](https://support.freshservice.com/en/support/solutions/articles/50000002933-setting-up-roles-role-based-access-controls)"
+key_features:
+- List groups
+- List agents
+- Create, update, delete and list tickets
+- Create, update and delete ticket tasks
+requirements:
+- FreshService API key
+- Permissions to view/create/edit/delete tickets and ticket tasks
+- Permissions to view agents and agent groups.
+version_history:
+- 1.0.2 - Updated SDK to the latest version (6.3.3)
+- '1.0.1 - Updated the connection test | Added infomation about the roles and permissions
+  necessary to run actions | `List All Agents`: Fixed issue related to the departament
+  IDs field'
+- 1.0.0 - Initial plugin | Add Create Ticket, Update Ticket, Delete Ticket, List Tickets,
+  Create Ticket Task, Update Ticket Task, Delete Ticket Task, List Groups and List
+  Agents actions
 sdk:
   type: full
-  version: 5
+  version: 6.3.3
   user: nobody
 types:
   role:
@@ -33,13 +57,15 @@ types:
       required: false
     assigmentScope:
       title: Assignment Scope
-      description: The scope in which the agent can use the permissions granted by this role
+      description: The scope in which the agent can use the permissions granted by
+        this role
       type: string
       required: false
     groups:
       title: Groups
-      description: Unique IDs of Groups in which the permissions granted by the role applies
-      type: "[]integer"
+      description: Unique IDs of Groups in which the permissions granted by the role
+        applies
+      type: '[]integer'
       required: false
   scope:
     ticket:
@@ -95,7 +121,8 @@ types:
       required: false
     occasional:
       title: Occasional
-      description: True if the agent is an occasional agent, and false if full-time agent
+      description: True if the agent is an occasional agent, and false if full-time
+        agent
       type: boolean
       required: false
     jobTitle:
@@ -121,11 +148,12 @@ types:
     departmentIds:
       title: Department IDs
       description: Unique IDs of the departments associated with the agent
-      type: "[]integer"
+      type: '[]integer'
       required: false
     canSeeAllTicketsFromAssociatedDepartments:
       title: Can See All Tickets from Associated Departments
-      description: Set to true if the agent must be allowed to view tickets filed by other members of the department, and false otherwise
+      description: Set to true if the agent must be allowed to view tickets filed
+        by other members of the department, and false otherwise
       type: boolean
       required: false
     reportingManagerId:
@@ -176,27 +204,29 @@ types:
     memberOf:
       title: Member Of
       description: Unique IDs of the groups that the agent is a member of
-      type: "[]integer"
+      type: '[]integer'
       required: false
     observerOf:
       title: Observer Of
       description: Unique IDs of the groups that the agent is an observer of
-      type: "[]integer"
+      type: '[]integer'
       required: false
     memberOfPendingApproval:
       title: Member Of Pending Approval
-      description: Unique IDs of the restricted groups to which the agent's addition as a member is pending approval
-      type: "[]integer"
+      description: Unique IDs of the restricted groups to which the agent's addition
+        as a member is pending approval
+      type: '[]integer'
       required: false
     observerOfPendingApproval:
       title: Observer Of Pending Approval
-      description: Unique IDs of the restricted groups to which the agent's addition as an observer is pending approval
-      type: "[]integer"
+      description: Unique IDs of the restricted groups to which the agent's addition
+        as an observer is pending approval
+      type: '[]integer'
       required: false
     roles:
       title: Roles
       description: Roles that are granted to the agent
-      type: "[]role"
+      type: '[]role'
       required: false
     scopes:
       title: Scopes
@@ -215,12 +245,14 @@ types:
       required: false
     customFields:
       title: Custom Fields
-      description: Key-value pair containing the names and values of the (custom) agent fields
+      description: Key-value pair containing the names and values of the (custom)
+        agent fields
       type: object
       required: false
     hasLoggedIn:
       title: Has Logged In
-      description: Set to true if the user has logged in to FreshService at least once, and false otherwise
+      description: Set to true if the user has logged in to FreshService at least
+        once, and false otherwise
       type: boolean
       required: false
     active:
@@ -375,33 +407,38 @@ types:
       required: false
     businessHoursId:
       title: Business Hours ID
-      description: Unique ID of the business hours configuration associated with the group
+      description: Unique ID of the business hours configuration associated with the
+        group
       type: integer
       required: false
     unassignedFor:
       title: Unassigned For
-      description: The time after which an escalation email is sent if a ticket in the group remains unassigned
+      description: The time after which an escalation email is sent if a ticket in
+        the group remains unassigned
       type: string
       required: false
     escalateTo:
       title: Escalate To
-      description: The Unique ID of the user to whom an escalation email is sent if a ticket in this group is unassigned
+      description: The Unique ID of the user to whom an escalation email is sent if
+        a ticket in this group is unassigned
       type: integer
       required: false
     agentIds:
       title: Agent IDs
       description: List of agent user IDs separated by commas
-      type: "[]integer"
+      type: '[]integer'
       required: false
     members:
       title: Members
-      description: A comma separated list of user IDs of agents who are members of this group
-      type: "[]integer"
+      description: A comma separated list of user IDs of agents who are members of
+        this group
+      type: '[]integer'
       required: false
     observers:
       title: Observers
-      description: A comma separated list of user IDs of agents who are observers of this group
-      type: "[]integer"
+      description: A comma separated list of user IDs of agents who are observers
+        of this group
+      type: '[]integer'
       required: false
     restricted:
       title: Restricted
@@ -410,27 +447,32 @@ types:
       required: false
     leaders:
       title: Leaders
-      description: A comma separated list of user IDs of agents who are leaders of this group
-      type: "[]integer"
+      description: A comma separated list of user IDs of agents who are leaders of
+        this group
+      type: '[]integer'
       required: false
     membersPendingApproval:
       title: Members Pending Approval
-      description: A comma-separated list of user IDs of agents whose member access to the group is pending approval by a group leader
-      type: "[]integer"
+      description: A comma-separated list of user IDs of agents whose member access
+        to the group is pending approval by a group leader
+      type: '[]integer'
       required: false
     observersPendingApproval:
       title: Observers Pending Approval
-      description: A comma-separated list of user IDs of agents whose observer access to the group is pending approval by a group leader
-      type: "[]integer"
+      description: A comma-separated list of user IDs of agents whose observer access
+        to the group is pending approval by a group leader
+      type: '[]integer'
       required: false
     leadersPendingApproval:
       title: Leaders Pending Approval
-      description: A comma-separated list of user IDs of agents whose leader access to the group is pending approval by an existing group leader
-      type: "[]integer"
+      description: A comma-separated list of user IDs of agents whose leader access
+        to the group is pending approval by an existing group leader
+      type: '[]integer'
       required: false
     approvalRequired:
       title: Approval Required
-      description: Whether the restricted group requires approvals for membership changes
+      description: Whether the restricted group requires approvals for membership
+        changes
       type: boolean
       required: false
     autoTicketAssign:
@@ -471,7 +513,8 @@ types:
       required: false
     notifyBefore:
       title: Notify Before
-      description: Time in seconds before which notification is sent prior to due date
+      description: Time in seconds before which notification is sent prior to due
+        date
       type: integer
       required: false
     title:
@@ -508,17 +551,18 @@ types:
     assets:
       title: Assets
       description: Assets associated with the ticket
-      type: "[]asset"
+      type: '[]asset'
       required: false
     attachments:
       title: Attachments
       description: Ticket attachments
-      type: "[]attachment"
+      type: '[]attachment'
       required: false
     ccEmails:
       title: CC Emails
-      description: Email addresses added in the 'cc' field of the incoming ticket email
-      type: "[]string"
+      description: Email addresses added in the 'cc' field of the incoming ticket
+        email
+      type: '[]string'
       required: false
     departmentId:
       title: Department ID
@@ -567,13 +611,14 @@ types:
       required: false
     frEscalated:
       title: First Response Escalated
-      description: Set to true if the ticket has been escalated as a result of the first response time being breached
+      description: Set to true if the ticket has been escalated as a result of the
+        first response time being breached
       type: boolean
       required: false
     fwdEmails:
       title: Fwd Emails
       description: Email addresses added while forwarding a ticket
-      type: "[]string"
+      type: '[]string'
       required: false
     groupId:
       title: Group ID
@@ -623,7 +668,7 @@ types:
     replyCcEmails:
       title: Reply CC Emails
       description: Email addresses added while replying to a ticket
-      type: "[]string"
+      type: '[]string'
       required: false
     requesterId:
       title: Requester ID
@@ -658,12 +703,12 @@ types:
     tags:
       title: Tags
       description: Tags that have been associated with the ticket
-      type: "[]string"
+      type: '[]string'
       required: false
     toEmails:
       title: To Emails
       description: Email addresses to which the ticket was originally sent
-      type: "[]string"
+      type: '[]string'
       required: false
     type:
       title: Type
@@ -699,7 +744,8 @@ connection:
     example: 44d88612fea8a8f36de82e1278abb02f
   subdomain:
     title: Subdomain
-    description: Subdomain from your FreshService URL, for example "example-company" from "https://example-company.freshservice.com"
+    description: Subdomain from your FreshService URL, for example "example-company"
+      from "https://example-company.freshservice.com"
     type: string
     required: true
     example: example-company
@@ -740,13 +786,17 @@ actions:
         example: 123456789
       email:
         title: Email
-        description: Email address of the requester. If no contact exists with this email address in FreshService, it will be added as a new contact
+        description: Email address of the requester. If no contact exists with this
+          email address in FreshService, it will be added as a new contact
         type: string
         required: false
         example: user@example.com
       phone:
         title: Phone
-        description: Phone number of the requester. If no contact exists with this phone number in FreshService, it will be added as a new contact. If the phone number is set and the email address is not, then the name attribute is mandatory
+        description: Phone number of the requester. If no contact exists with this
+          phone number in FreshService, it will be added as a new contact. If the
+          phone number is set and the email address is not, then the name attribute
+          is mandatory
         type: string
         required: false
         example: 11111111
@@ -785,16 +835,17 @@ actions:
         example: 987654321
       ccEmails:
         title: CC Emails
-        description: Email addresses added in the 'cc' field of the incoming ticket email
-        type: "[]string"
+        description: Email addresses added in the 'cc' field of the incoming ticket
+          email
+        type: '[]string'
         required: false
-        example: ["user@example.com"]
+        example: [user@example.com]
       dueBy:
         title: Due By
         description: Timestamp that denotes when the ticket is due to be resolved
         type: date
         required: false
-        example: 2022-11-30T12:00:00Z
+        example: 2026-11-30T12:00:00Z
       frDueBy:
         title: First Response Due By
         description: Timestamp that denotes when the first response is due
@@ -815,16 +866,17 @@ actions:
         example: 2
       attachments:
         title: Attachments
-        description: Ticket attachments. The total size of these attachments cannot exceed 15MB
-        type: "[]attachmentInput"
+        description: Ticket attachments. The total size of these attachments cannot
+          exceed 15MB
+        type: '[]attachmentInput'
         required: false
         example: '[{"name": "test.txt", "content": "dGVzdA=="}]'
       tags:
         title: Tags
         description: Tags that have been associated with the ticket
-        type: "[]string"
+        type: '[]string'
         required: false
-        example: ["tag1", "tag2"]
+        example: [tag1, tag2]
       departmentId:
         title: Department ID
         description: Department ID of the requester
@@ -852,7 +904,7 @@ actions:
       assets:
         title: Assets
         description: Assets that have to be associated with the ticket
-        type: "[]assetInput"
+        type: '[]assetInput'
         required: false
         example: '{"displayId": 2}'
       customFields:
@@ -867,7 +919,10 @@ actions:
         description: Information about created ticket
         type: ticket
         required: false
-        example: '{"ccEmails":["user@example.com"],"fwdEmails":[],"replyCcEmails":["user@example.com"],"frEscalated":false,"spam":false,"groupId":123456789,"priority":2,"requesterId":123456789,"requestedForId":123456789,"responderId":987654321,"source":2,"status":2,"subject":"Example Subject","departmentId":123456789,"id":10,"type":"Incident","dueBy":"2022-12-20T12:00:00Z","frDueBy":"2022-12-10T12:00:00Z","isEscalated":false,"description":"<div>Example description</div>","descriptionText":"Example description","category":"Hardware","subCategory":"Computer","itemCategory":"PC","customFields":{"key":"value"},"createdAt":"2022-11-24T17:31:33Z","updatedAt":"2022-11-24T17:31:33Z","tags":["tag1","tag2"],"attachments":[{"id":123,"contentType":"text/plain","size":4,"name":"test.txt","attachmentUrl":"https://example.com","createdAt":"2022-11-24T17:37:50Z","updatedAt":"2022-11-24T17:37:50Z"}],"assets":[{"name":"Dell Monitor","ciTypeId":1122334455,"impact":1,"created":"2022-11-17T16:14:17Z","updated":"2022-11-17T16:14:17Z","authorId":6677889900,"authorType":"User","deleted":false,"displayId":2}]}'
+        example: '{"ccEmails":["user@example.com"],"fwdEmails":[],"replyCcEmails":["user@example.com"],"frEscalated":false,"spam":false,"groupId":123456789,"priority":2,"requesterId":123456789,"requestedForId":123456789,"responderId":987654321,"source":2,"status":2,"subject":"Example
+          Subject","departmentId":123456789,"id":10,"type":"Incident","dueBy":"2022-12-20T12:00:00Z","frDueBy":"2022-12-10T12:00:00Z","isEscalated":false,"description":"<div>Example
+          description</div>","descriptionText":"Example description","category":"Hardware","subCategory":"Computer","itemCategory":"PC","customFields":{"key":"value"},"createdAt":"2022-11-24T17:31:33Z","updatedAt":"2022-11-24T17:31:33Z","tags":["tag1","tag2"],"attachments":[{"id":123,"contentType":"text/plain","size":4,"name":"test.txt","attachmentUrl":"https://example.com","createdAt":"2022-11-24T17:37:50Z","updatedAt":"2022-11-24T17:37:50Z"}],"assets":[{"name":"Dell
+          Monitor","ciTypeId":1122334455,"impact":1,"created":"2022-11-17T16:14:17Z","updated":"2022-11-17T16:14:17Z","authorId":6677889900,"authorType":"User","deleted":false,"displayId":2}]}'
   update_ticket:
     title: Update Ticket
     description: Update an existing ticket in your service desk
@@ -910,13 +965,17 @@ actions:
         example: 123456789
       email:
         title: Email
-        description: Email address of the requester. If no contact exists with this email address in FreshService, it will be added as a new contact
+        description: Email address of the requester. If no contact exists with this
+          email address in FreshService, it will be added as a new contact
         type: string
         required: false
         example: user@example.com
       phone:
         title: Phone
-        description: Phone number of the requester. If no contact exists with this phone number in FreshService, it will be added as a new contact. If the phone number is set and the email address is not, then the name attribute is mandatory
+        description: Phone number of the requester. If no contact exists with this
+          phone number in FreshService, it will be added as a new contact. If the
+          phone number is set and the email address is not, then the name attribute
+          is mandatory
         type: string
         required: false
         example: 11111111
@@ -958,13 +1017,13 @@ actions:
         description: Timestamp that denotes when the ticket is due to be resolved
         type: date
         required: false
-        example: 2022-11-30T12:00:00Z
+        example: 2026-12-20T12:00:00Z
       frDueBy:
         title: First Response Due By
         description: Timestamp that denotes when the first response is due
         type: date
         required: false
-        example: 2022-11-30T12:00:00Z
+        example: 2026-11-30T12:00:00Z
       groupId:
         title: Group ID
         description: ID of the group to which the ticket has been assigned
@@ -979,16 +1038,17 @@ actions:
         example: 2
       attachments:
         title: Attachments
-        description: Ticket attachments. The total size of these attachments cannot exceed 15MB
-        type: "[]attachmentInput"
+        description: Ticket attachments. The total size of these attachments cannot
+          exceed 15MB
+        type: '[]attachmentInput'
         required: false
         example: '[{"name": "test.txt", "content": "dGVzdA=="}]'
       tags:
         title: Tags
         description: Tags that have been associated with the ticket
-        type: "[]string"
+        type: '[]string'
         required: false
-        example: [ "tag1", "tag2" ]
+        example: [tag1, tag2]
       departmentId:
         title: Department ID
         description: Department ID of the requester
@@ -1016,7 +1076,7 @@ actions:
       assets:
         title: Assets
         description: Assets that have to be associated with the ticket
-        type: "[]assetInput"
+        type: '[]assetInput'
         required: false
         example: '{"displayId": 2}'
       customFields:
@@ -1031,14 +1091,18 @@ actions:
         description: Information about updated ticket
         type: ticket
         required: false
-        example: '{"ccEmails":["user@example.com"],"fwdEmails":[],"replyCcEmails":["user@example.com"],"frEscalated":false,"spam":false,"groupId":123456789,"priority":2,"requesterId":123456789,"requestedForId":123456789,"responderId":987654321,"source":2,"status":2,"subject":"Example Subject","departmentId":123456789,"id":10,"type":"Incident","dueBy":"2022-12-20T12:00:00Z","frDueBy":"2022-12-10T12:00:00Z","isEscalated":false,"description":"<div>Example description</div>","descriptionText":"Example description","category":"Hardware","subCategory":"Computer","itemCategory":"PC","customFields":{"key":"value"},"createdAt":"2022-11-24T17:31:33Z","updatedAt":"2022-11-24T17:31:33Z","tags":["tag1","tag2"],"attachments":[{"id":123,"contentType":"text/plain","size":4,"name":"test.txt","attachmentUrl":"https://example.com","createdAt":"2022-11-24T17:37:50Z","updatedAt":"2022-11-24T17:37:50Z"}],"assets":[{"name":"Dell Monitor","ciTypeId":1122334455,"impact":1,"created":"2022-11-17T16:14:17Z","updated":"2022-11-17T16:14:17Z","authorId":6677889900,"authorType":"User","deleted":false,"displayId":2}]}'
+        example: '{"ccEmails":["user@example.com"],"fwdEmails":[],"replyCcEmails":["user@example.com"],"frEscalated":false,"spam":false,"groupId":123456789,"priority":2,"requesterId":123456789,"requestedForId":123456789,"responderId":987654321,"source":2,"status":2,"subject":"Example
+          Subject","departmentId":123456789,"id":10,"type":"Incident","dueBy":"2022-12-20T12:00:00Z","frDueBy":"2022-12-10T12:00:00Z","isEscalated":false,"description":"<div>Example
+          description</div>","descriptionText":"Example description","category":"Hardware","subCategory":"Computer","itemCategory":"PC","customFields":{"key":"value"},"createdAt":"2022-11-24T17:31:33Z","updatedAt":"2022-11-24T17:31:33Z","tags":["tag1","tag2"],"attachments":[{"id":123,"contentType":"text/plain","size":4,"name":"test.txt","attachmentUrl":"https://example.com","createdAt":"2022-11-24T17:37:50Z","updatedAt":"2022-11-24T17:37:50Z"}],"assets":[{"name":"Dell
+          Monitor","ciTypeId":1122334455,"impact":1,"created":"2022-11-17T16:14:17Z","updated":"2022-11-17T16:14:17Z","authorId":6677889900,"authorType":"User","deleted":false,"displayId":2}]}'
   list_tickets:
     title: List Tickets
     description: List all tickets for the given filters
     input:
       filter:
         title: Predefined Filters
-        description: Filter tickets using predefined filters. The filters available are new_and_my_open, watching, spam, deleted
+        description: Filter tickets using predefined filters. The filters available
+          are new_and_my_open, watching, spam, deleted
         type: string
         required: false
         example: watching
@@ -1098,9 +1162,10 @@ actions:
       tickets:
         title: Tickets
         description: Information about all tickets obtained using the given filters
-        type: "[]ticket"
+        type: '[]ticket'
         required: false
-        example: '[{"subject":"Example Ticket","groupId":123456789,"departmentId":987654321,"category":"Hardware","subCategory":"Computer","itemCategory":"PC","requesterId":123456789,"responderId":987654321,"dueBy":"2022-12-20T12:00:00Z","frEscalated":false,"deleted":false,"spam":false,"fwdEmails":[],"replyCcEmails":[],"ccEmails":[],"isEscalated":false,"frDueBy":"2022-12-15T12:00:00Z","id":16,"priority":2,"status":2,"source":4,"createdAt":"2022-11-10T00:00:00Z","updatedAt":"2022-11-16T00:00:00Z","requestedForId":123456789,"type":"Incident","description":"Example description","descriptionText":"Example description","customFields":{"key":"value"}}]'
+        example: '[{"subject":"Example Ticket","groupId":123456789,"departmentId":987654321,"category":"Hardware","subCategory":"Computer","itemCategory":"PC","requesterId":123456789,"responderId":987654321,"dueBy":"2022-12-20T12:00:00Z","frEscalated":false,"deleted":false,"spam":false,"fwdEmails":[],"replyCcEmails":[],"ccEmails":[],"isEscalated":false,"frDueBy":"2022-12-15T12:00:00Z","id":16,"priority":2,"status":2,"source":4,"createdAt":"2022-11-10T00:00:00Z","updatedAt":"2022-11-16T00:00:00Z","requestedForId":123456789,"type":"Incident","description":"Example
+          description","descriptionText":"Example description","customFields":{"key":"value"}}]'
   delete_ticket:
     title: Delete Ticket
     description: Delete the given ticket
@@ -1159,7 +1224,8 @@ actions:
         example: 2022-11-14T00:00:00Z
       notifyBefore:
         title: Notify Before
-        description: Time in seconds before which notification is sent prior to due date
+        description: Time in seconds before which notification is sent prior to due
+          date
         type: integer
         required: false
         example: 3600
@@ -1175,7 +1241,8 @@ actions:
         description: Information about the created task for the provided ticket
         type: task
         required: false
-        example: '{"id":10,"status":1,"dueDate":"2022-12-14T00:00:00Z","notifyBefore":3600,"title":"Task","description":"Example description","createdAt":"2022-11-24T09:55:44Z","updatedAt":"2022-11-24T09:55:44Z","groupId":123456789,"deleted":false}'
+        example: '{"id":10,"status":1,"dueDate":"2022-12-14T00:00:00Z","notifyBefore":3600,"title":"Task","description":"Example
+          description","createdAt":"2022-11-24T09:55:44Z","updatedAt":"2022-11-24T09:55:44Z","groupId":123456789,"deleted":false}'
   update_ticket_task:
     title: Update Ticket Task
     description: Update an existing task on a ticket request
@@ -1209,9 +1276,9 @@ actions:
         description: Status of the task
         type: string
         enum:
-          - Open
-          - In Progress
-          - Completed
+        - Open
+        - In Progress
+        - Completed
         required: false
         example: Open
         default: Open
@@ -1223,7 +1290,8 @@ actions:
         example: 2022-11-14T00:00:00Z
       notifyBefore:
         title: Notify Before
-        description: Time in seconds before which notification is sent prior to due date
+        description: Time in seconds before which notification is sent prior to due
+          date
         type: integer
         required: false
         example: 3600
@@ -1239,7 +1307,8 @@ actions:
         description: Information about the created task for the provided ticket
         type: task
         required: false
-        example: '{"id":10,"status":1,"dueDate":"2022-12-14T00:00:00Z","notifyBefore":3600,"title":"Task","description":"Example description","createdAt":"2022-11-24T09:55:44Z","updatedAt":"2022-11-24T09:55:44Z","groupId":123456789,"deleted":false}'
+        example: '{"id":10,"status":1,"dueDate":"2022-12-14T00:00:00Z","notifyBefore":3600,"title":"Task","description":"Example
+          description","createdAt":"2022-11-24T09:55:44Z","updatedAt":"2022-11-24T09:55:44Z","groupId":123456789,"deleted":false}'
   delete_ticket_task:
     title: Delete Ticket Task
     description: Delete a task on a ticket request
@@ -1270,31 +1339,36 @@ actions:
       groups:
         title: Groups
         description: Information about all groups in the account
-        type: "[]group"
+        type: '[]group'
         required: false
-        example: '[{"id":1234567890,"name":"Incident Team","description":"Incident Management Team","createdAt":"2022-11-17T16:13:29Z","updatedAt":"2022-11-17T16:13:29Z","autoTicketAssign":false,"restricted":false,"approvalRequired":false,"agentIds":[],"members":[],"observers":[],"leaders":[],"membersPendingApproval":[],"leadersPendingApproval":[],"observersPendingApproval":[]}]'
+        example: '[{"id":1234567890,"name":"Incident Team","description":"Incident
+          Management Team","createdAt":"2022-11-17T16:13:29Z","updatedAt":"2022-11-17T16:13:29Z","autoTicketAssign":false,"restricted":false,"approvalRequired":false,"agentIds":[],"members":[],"observers":[],"leaders":[],"membersPendingApproval":[],"leadersPendingApproval":[],"observersPendingApproval":[]}]'
   list_all_agents:
     title: List All Agents
-    description: View information about all agents in the account. Use filters to view only specific agents (those who match the criteria that you choose)
+    description: View information about all agents in the account. Use filters to
+      view only specific agents (those who match the criteria that you choose)
     input:
       email:
         title: Email
-        description: Email address of the agent based on which the results will be filtered
+        description: Email address of the agent based on which the results will be
+          filtered
         type: string
         required: false
         example: user@example.com
       mobilePhoneNumber:
         title: Mobile Phone Number
-        description: Mobile phone number of the agent based on which the results will be filtered
+        description: Mobile phone number of the agent based on which the results will
+          be filtered
         type: string
         required: false
-        example: "664345"
+        example: '664345'
       workPhoneNumber:
         title: Work Phone Number
-        description: Work phone number of the agent based on which the results will be filtered
+        description: Work phone number of the agent based on which the results will
+          be filtered
         type: string
         required: false
-        example: "5564435"
+        example: '5564435'
       state:
         title: State
         description: Return fulltime, occasional or all agents
@@ -1311,9 +1385,9 @@ actions:
         description: Return active, deactivated or all agents
         type: string
         enum:
-        - "true"
-        - "false"
-        - "all"
+        - 'true'
+        - 'false'
+        - all
         required: false
         example: all
         default: all
@@ -1321,6 +1395,7 @@ actions:
       agents:
         title: Agents
         description: Information about agents in the account
-        type: "[]agent"
+        type: '[]agent'
         required: false
-        example: '[{"active":true,"autoAssignTickets":true,"canSeeAllTicketsFromAssociatedDepartments":false,"createdAt":"2022-11-17T16:13:30Z","customFields":{},"departmentIds":[],"email":"user@example.com","firstName":"User","hasLoggedIn":false,"id":1234567890,"language":"en","mobilePhoneNumber":664345,"occasional":false,"roleIds":[987654321],"roles":[{"roleId":987654321,"assignmentScope":"entire_helpdesk","groups":[]}],"scopes":{},"timeFormat":"12h","timeZone":"Eastern Time (US & Canada)","updatedAt":"2022-11-17T16:13:30Z","vipUser":false,"workPhoneNumber":"5564435","groupIds":[],"memberOf":[],"observerOf":[],"memberOfPendingApproval":[],"observerOfPendingApproval":[]}]'
+        example: '[{"active":true,"autoAssignTickets":true,"canSeeAllTicketsFromAssociatedDepartments":false,"createdAt":"2022-11-17T16:13:30Z","customFields":{},"departmentIds":[],"email":"user@example.com","firstName":"User","hasLoggedIn":false,"id":1234567890,"language":"en","mobilePhoneNumber":664345,"occasional":false,"roleIds":[987654321],"roles":[{"roleId":987654321,"assignmentScope":"entire_helpdesk","groups":[]}],"scopes":{},"timeFormat":"12h","timeZone":"Eastern
+          Time (US & Canada)","updatedAt":"2022-11-17T16:13:30Z","vipUser":false,"workPhoneNumber":"5564435","groupIds":[],"memberOf":[],"observerOf":[],"memberOfPendingApproval":[],"observerOfPendingApproval":[]}]'
