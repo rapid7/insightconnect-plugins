@@ -44,9 +44,7 @@ class TestRunQuery(TestCase):
         type(error_response).text = Mock(return_value='{"error": "Invalid API key"}')
 
         mock_request.side_effect = PluginException(
-            cause="API Authentication Failed",
-            assistance="Please verify your API key is correct",
-            data=error_response
+            cause="API Authentication Failed", assistance="Please verify your API key is correct", data=error_response
         )
 
         # Execute the method and check for exception
@@ -78,7 +76,7 @@ class TestRunQuery(TestCase):
         mock_request.side_effect = PluginException(
             cause="Server was unable to process the request",
             assistance="Please validate the request to Rapid7 Surface Command",
-            data=error_response
+            data=error_response,
         )
 
         # Execute the method and check for exception
@@ -87,3 +85,61 @@ class TestRunQuery(TestCase):
 
         # Verify exception details
         self.assertEqual(context.exception.cause, "Server was unable to process the request")
+        self.assertEqual(context.exception.assistance, "Please validate the request to Rapid7 Surface Command")
+
+    @patch("icon_rapid7_surface_command.util.surface_command.api_connection.make_request")
+    def test_run_query_timeout(self, mock_request):
+        # Setup mock to raise timeout exception
+        mock_request.side_effect = PluginException(
+            cause="Request timed out",
+            assistance="Please check your network connection or try again later"
+        )
+
+        # Execute the method and check for exception
+        with self.assertRaises(PluginException) as context:
+            self.connection.run_query(self.query_id)
+
+        # Verify exception details
+        self.assertEqual(context.exception.cause, "Request timed out")
+        self.assertEqual(context.exception.assistance, "Please check your network connection or try again later")
+
+    @patch("icon_rapid7_surface_command.util.surface_command.api_connection.make_request")
+    def test_run_query_server_error(self, mock_request):
+        # Setup mock for 500 server error
+        error_response = Mock(spec=Response)
+        error_response.status_code = 500
+        error_response._content = b'{"error": "Internal Server Error"}'
+        type(error_response).text = Mock(return_value='{"error": "Internal Server Error"}')
+
+        mock_request.side_effect = PluginException(
+            cause="Server Error",
+            assistance="An unexpected error occurred on the server. Please try again later or contact support.",
+            data=error_response
+        )
+
+        # Execute the method and check for exception
+        with self.assertRaises(PluginException) as context:
+            self.connection.run_query(self.query_id)
+
+        # Verify exception details
+        self.assertEqual(context.exception.cause, "Server Error")
+        self.assertEqual(
+            context.exception.assistance,
+            "An unexpected error occurred on the server. Please try again later or contact support."
+        )
+
+    @patch("icon_rapid7_surface_command.util.surface_command.api_connection.make_request")
+    def test_run_query_empty_response(self, mock_request):
+        # Setup mock response with empty results
+        mock_response = Mock()
+        expected_data = {"results": []}
+        mock_response.json.return_value = expected_data
+        mock_request.return_value = mock_response
+
+        # Execute the method
+        result = self.connection.run_query(self.query_id)
+
+        # Assert results
+        self.assertEqual(result, expected_data)
+        self.assertEqual(len(result["results"]), 0)
+        mock_request.assert_called_once()
