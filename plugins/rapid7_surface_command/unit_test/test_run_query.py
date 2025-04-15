@@ -4,11 +4,14 @@ import sys
 from unittest import TestCase
 from unittest.mock import Mock, patch
 
-sys.path.append(os.path.abspath("../"))
-
-from icon_rapid7_surface_command.util.surface_command.api_connection import ApiConnection
-from insightconnect_plugin_runtime.exceptions import APIException, PluginException
+from icon_rapid7_surface_command.util.surface_command.api_connection import (
+    ApiConnection,
+)
+from insightconnect_plugin_runtime.exceptions import PluginException
 from requests import Response
+
+
+sys.path.append(os.path.abspath("../"))
 
 
 class TestRunQuery(TestCase):
@@ -39,12 +42,14 @@ class TestRunQuery(TestCase):
         # Setup mock to raise PluginException
         error_response = Mock(spec=Response)
         error_response.status_code = 401
-        error_response._content = b'{"error": "Invalid API key"}'
+        error_response.content = b'{"error": "Invalid API key"}'
         # Mock the text property correctly
         type(error_response).text = Mock(return_value='{"error": "Invalid API key"}')
 
         mock_request.side_effect = PluginException(
-            cause="API Authentication Failed", assistance="Please verify your API key is correct", data=error_response
+            cause="API Authentication Failed",
+            assistance="Please verify your API key is correct",
+            data=error_response,
         )
 
         # Execute the method and check for exception
@@ -71,7 +76,7 @@ class TestRunQuery(TestCase):
         # Setup mock for 422 error
         error_response = Response()
         error_response.status_code = 422
-        error_response._content = b'{"error": "Invalid query parameters"}'
+        error_response.content = b'{"error": "Invalid query parameters"}'
 
         mock_request.side_effect = PluginException(
             cause="Server was unable to process the request",
@@ -85,14 +90,17 @@ class TestRunQuery(TestCase):
 
         # Verify exception details
         self.assertEqual(context.exception.cause, "Server was unable to process the request")
-        self.assertEqual(context.exception.assistance, "Please validate the request to Rapid7 Surface Command")
+        self.assertEqual(
+            context.exception.assistance,
+            "Please validate the request to Rapid7 Surface Command",
+        )
 
     @patch("icon_rapid7_surface_command.util.surface_command.api_connection.make_request")
     def test_run_query_timeout(self, mock_request):
         # Setup mock to raise timeout exception
         mock_request.side_effect = PluginException(
             cause="Request timed out",
-            assistance="Please check your network connection or try again later"
+            assistance="Please check your network connection or try again later",
         )
 
         # Execute the method and check for exception
@@ -101,20 +109,23 @@ class TestRunQuery(TestCase):
 
         # Verify exception details
         self.assertEqual(context.exception.cause, "Request timed out")
-        self.assertEqual(context.exception.assistance, "Please check your network connection or try again later")
+        self.assertEqual(
+            context.exception.assistance,
+            "Please check your network connection or try again later",
+        )
 
     @patch("icon_rapid7_surface_command.util.surface_command.api_connection.make_request")
     def test_run_query_server_error(self, mock_request):
         # Setup mock for 500 server error
         error_response = Mock(spec=Response)
         error_response.status_code = 500
-        error_response._content = b'{"error": "Internal Server Error"}'
+        error_response.content = b'{"error": "Internal Server Error"}'
         type(error_response).text = Mock(return_value='{"error": "Internal Server Error"}')
 
         mock_request.side_effect = PluginException(
             cause="Server Error",
             assistance="An unexpected error occurred on the server. Please try again later or contact support.",
-            data=error_response
+            data=error_response,
         )
 
         # Execute the method and check for exception
@@ -125,7 +136,7 @@ class TestRunQuery(TestCase):
         self.assertEqual(context.exception.cause, "Server Error")
         self.assertEqual(
             context.exception.assistance,
-            "An unexpected error occurred on the server. Please try again later or contact support."
+            "An unexpected error occurred on the server. Please try again later or contact support.",
         )
 
     @patch("icon_rapid7_surface_command.util.surface_command.api_connection.make_request")
