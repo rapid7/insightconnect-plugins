@@ -10,5 +10,5 @@ setup(name="mimecast-rapid7-plugin",
       url="",
       packages=find_packages(),
       install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_mimecast']
+      entry_points={"console_scripts": ["komand_mimecast = bin.komand_mimecast:main"]},
       )
