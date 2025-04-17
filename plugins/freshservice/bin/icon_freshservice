@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "FreshService"
 Vendor = "rapid7"
-Version = "1.0.1"
+Version = "1.0.2"
 Description = "Freshservice is a cloud-based IT Service Management solution that was designed using ITIL best practices. Freshservice helps IT organizations streamline their service delivery processes with a strong focus on user experience and employee happiness"
 
 
