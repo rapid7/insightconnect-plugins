@@ -24,9 +24,9 @@ hub_tags:
   keywords: [freshservice, ticketing, cloud_enabled]
   features: []
 links:
-  - "[FreshService](https://freshservice.com)"
+- '[FreshService](https://freshservice.com)'
 references:
-  - "[FreshService Role Setup](https://support.freshservice.com/en/support/solutions/articles/50000002933-setting-up-roles-role-based-access-controls)"
+- '[FreshService Role Setup](https://support.freshservice.com/en/support/solutions/articles/50000002933-setting-up-roles-role-based-access-controls)'
 key_features:
 - List groups
 - List agents
@@ -38,7 +38,7 @@ requirements:
 - Permissions to view agents and agent groups.
 version_history:
 - 1.0.2 - Updated SDK to the latest version (6.3.3)
-- '1.0.1 - Updated the connection test | Added infomation about the roles and permissions
+- '1.0.1 - Updated the connection test | Added information about the roles and permissions
   necessary to run actions | `List All Agents`: Fixed issue related to the departament
   IDs field'
 - 1.0.0 - Initial plugin | Add Create Ticket, Update Ticket, Delete Ticket, List Tickets,
@@ -845,13 +845,13 @@ actions:
         description: Timestamp that denotes when the ticket is due to be resolved
         type: date
         required: false
-        example: 2026-11-30T12:00:00Z
+        example: '2026-11-30T12:00:00Z'
       frDueBy:
         title: First Response Due By
         description: Timestamp that denotes when the first response is due
         type: date
         required: false
-        example: 2022-11-30T12:00:00Z
+        example: '2026-11-29T12:00:00Z'
       groupId:
         title: Group ID
         description: ID of the group to which the ticket has been assigned
@@ -1017,13 +1017,13 @@ actions:
         description: Timestamp that denotes when the ticket is due to be resolved
         type: date
         required: false
-        example: 2026-12-20T12:00:00Z
+        example: '2026-12-20T12:00:00Z'
       frDueBy:
         title: First Response Due By
         description: Timestamp that denotes when the first response is due
         type: date
         required: false
-        example: 2026-11-30T12:00:00Z
+        example: '2026-11-30T12:00:00Z'
       groupId:
         title: Group ID
         description: ID of the group to which the ticket has been assigned
@@ -1357,8 +1357,7 @@ actions:
         example: user@example.com
       mobilePhoneNumber:
         title: Mobile Phone Number
-        description: Mobile phone number of the agent based on which the results will
-          be filtered
+        description: Mobile phone number of the agent based on which the results will be filtered
         type: string
         required: false
         example: '664345'
@@ -1385,9 +1384,9 @@ actions:
         description: Return active, deactivated or all agents
         type: string
         enum:
-        - 'true'
-        - 'false'
-        - all
+        - "true"
+        - "false"
+        - "all"
         required: false
         example: all
         default: all

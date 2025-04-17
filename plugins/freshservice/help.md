@@ -59,9 +59,9 @@ This action is used to create a new ticket in your service desk
 |customFields|object|None|False|Key value pairs containing the names and values of custom fields|None|{"key": "value"}|None|None|
 |departmentId|integer|None|False|Department ID of the requester|None|123456789|None|None|
 |description|string|None|True|HTML content of the ticket|None|Example description|None|None|
-|dueBy|date|None|False|Timestamp that denotes when the ticket is due to be resolved|None|2026-11-30 12:00:00+00:00|None|None|
+|dueBy|date|None|False|Timestamp that denotes when the ticket is due to be resolved|None|2026-11-30T12:00:00Z|None|None|
 |email|string|None|False|Email address of the requester. If no contact exists with this email address in FreshService, it will be added as a new contact|None|user@example.com|None|None|
-|frDueBy|date|None|False|Timestamp that denotes when the first response is due|None|2022-11-30 12:00:00+00:00|None|None|
+|frDueBy|date|None|False|Timestamp that denotes when the first response is due|None|2026-11-29T12:00:00Z|None|None|
 |groupId|integer|None|False|ID of the group to which the ticket has been assigned|None|123456789|None|None|
 |impact|integer|1|False|Impact of the ticket|None|1|None|None|
 |itemCategory|string|None|False|Ticket item category|None|PC|None|None|
@@ -100,9 +100,9 @@ Example input:
   },
   "departmentId": 123456789,
   "description": "Example description",
-  "dueBy": "2026-11-30 12:00:00+00:00",
+  "dueBy": "2026-11-30T12:00:00Z",
   "email": "user@example.com",
-  "frDueBy": "2022-11-30 12:00:00+00:00",
+  "frDueBy": "2026-11-29T12:00:00Z",
   "groupId": 123456789,
   "impact": 1,
   "itemCategory": "PC",
@@ -330,7 +330,7 @@ This action is used to view information about all agents in the account. Use fil
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|active|string|all|False|Return active, deactivated or all agents|["True", "False", "all"]|all|None|None|
+|active|string|all|False|Return active, deactivated or all agents|["true", "false", "all"]|all|None|None|
 |email|string|None|False|Email address of the agent based on which the results will be filtered|None|user@example.com|None|None|
 |mobilePhoneNumber|string|None|False|Mobile phone number of the agent based on which the results will be filtered|None|664345|None|None|
 |state|string|all|False|Return fulltime, occasional or all agents|["fulltime", "occasional", "all"]|all|None|None|
@@ -532,9 +532,9 @@ This action is used to update an existing ticket in your service desk
 |customFields|object|None|False|Key value pairs containing the names and values of custom fields|None|{"key": "value"}|None|None|
 |departmentId|integer|None|False|Department ID of the requester|None|123456789|None|None|
 |description|string|None|False|HTML content of the ticket|None|Example description|None|None|
-|dueBy|date|None|False|Timestamp that denotes when the ticket is due to be resolved|None|2026-12-20 12:00:00+00:00|None|None|
+|dueBy|date|None|False|Timestamp that denotes when the ticket is due to be resolved|None|2026-12-20T12:00:00Z|None|None|
 |email|string|None|False|Email address of the requester. If no contact exists with this email address in FreshService, it will be added as a new contact|None|user@example.com|None|None|
-|frDueBy|date|None|False|Timestamp that denotes when the first response is due|None|2026-11-30 12:00:00+00:00|None|None|
+|frDueBy|date|None|False|Timestamp that denotes when the first response is due|None|2026-11-30T12:00:00Z|None|None|
 |groupId|integer|None|False|ID of the group to which the ticket has been assigned|None|123456789|None|None|
 |impact|integer|1|False|Impact of the ticket|None|1|None|None|
 |itemCategory|string|None|False|Ticket item category|None|PC|None|None|
@@ -571,9 +571,9 @@ Example input:
   },
   "departmentId": 123456789,
   "description": "Example description",
-  "dueBy": "2026-12-20 12:00:00+00:00",
+  "dueBy": "2026-12-20T12:00:00Z",
   "email": "user@example.com",
-  "frDueBy": "2026-11-30 12:00:00+00:00",
+  "frDueBy": "2026-11-30T12:00:00Z",
   "groupId": 123456789,
   "impact": 1,
   "itemCategory": "PC",
@@ -926,7 +926,7 @@ Example output:
 # Version History
 
 * 1.0.2 - Updated SDK to the latest version (6.3.3)
-* 1.0.1 - Updated the connection test | Added infomation about the roles and permissions necessary to run actions | `List All Agents`: Fixed issue related to the departament IDs field
+* 1.0.1 - Updated the connection test | Added information about the roles and permissions necessary to run actions | `List All Agents`: Fixed issue related to the departament IDs field
 * 1.0.0 - Initial plugin | Add Create Ticket, Update Ticket, Delete Ticket, List Tickets, Create Ticket Task, Update Ticket Task, Delete Ticket Task, List Groups and List Agents actions
 
 # Links
