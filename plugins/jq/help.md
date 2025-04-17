@@ -89,7 +89,7 @@ Example output:
 
 # Version History
 
-* 3.0.0 - Enabled plugin as `cloud_ready` | Updated `run` action to block certain filter inputs and `flag` field unavailable when used on cloud | Updated SDK to the latest version (6.3.3) | Unit Tests added
+* 3.0.0 - Enabled plugin as `cloud_ready` | Updated `run` action to block certain filter inputs on cloud and `flag` field unavailable when used on cloud | Updated SDK to the latest version (6.3.3) | Unit Tests added
 * 2.0.5 - New spec and help.md format for the Extension Library | Changed docker image from `komand/python-3-slim-plugin:2` to `komand/python-3-37-slim-plugin` | Change mutable function parameter to immutable | Removed comments | Changed concatenation to format in loggers
 * 2.0.4 - Fix issue where jq was not available in the docker image | Update to python | Update to use the `komand/python-3-slim-plugin:2` Docker image to reduce plugin size | Set a default `timeout` of 15 seconds in the Run action
 * 2.0.3 - Add `utilities` plugin tag for Marketplace searchability
