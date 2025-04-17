@@ -39,18 +39,19 @@ class RunJq(insightconnect_plugin_runtime.Action):
             raise PluginException("The timeout must be greater than 0 seconds.")
 
         jq_cmd_array = ["jq"]
-        blocked_patterns = [r"/proc/", r"/dev/", r'import\s+"']
-        #  Prevents possible malicious injections
-        for pattern in blocked_patterns:
-            if re.search(pattern, filter_, re.IGNORECASE):
-                raise PluginException(f"Blocked pattern found in filter: {pattern}")
 
         # Only allows flag field to be used on orchestrator
-        if not is_running_in_cloud:
+        if not is_running_in_cloud():
             flags = params.get(Input.FLAGS)
             if len(flags) > 0:
                 string_flags = " ".join(flags)
                 jq_cmd_array.append(string_flags)
+        else:
+            blocked_patterns = [r"/proc/", r"/dev/", r'import\s+"']
+            #  Prevents possible malicious injections
+            for pattern in blocked_patterns:
+                if re.search(pattern, filter_, re.IGNORECASE):
+                    raise PluginException(f"Blocked pattern found in filter: {pattern}")
 
         jq_cmd_array.append(filter_)
 
