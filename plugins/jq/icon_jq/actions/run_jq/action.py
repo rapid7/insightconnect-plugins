@@ -9,6 +9,7 @@ from subprocess import PIPE  # noqa: B404
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.telemetry import auto_instrument
+from insightconnect_plugin_runtime.util import is_running_in_cloud
 
 from .schema import RunJqInput, RunJqOutput, Input, Output
 
@@ -45,7 +46,7 @@ class RunJq(insightconnect_plugin_runtime.Action):
                 raise PluginException(f"Blocked pattern found in filter: {pattern}")
 
         # Only allows flag field to be used on orchestrator
-        if os.environ.get("PLUGIN_RUNTIME_ENVIRONMENT") != "cloud":
+        if not is_running_in_cloud:
             flags = params.get(Input.FLAGS)
             if len(flags) > 0:
                 string_flags = " ".join(flags)
