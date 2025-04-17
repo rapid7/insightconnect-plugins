@@ -1,26 +1,36 @@
-FROM komand/python-3-37-slim-plugin:3
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.3.3 AS builder
+
+WORKDIR /python/src
+
+ADD ./plugin.spec.yaml /plugin.spec.yaml
+ADD ./requirements.txt /python/src/requirements.txt
+ADD . /python/src
+
+
+
+RUN pip install .
+RUN pip uninstall -y setuptools
+
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.3.3
 
 LABEL organization=rapid7
 LABEL sdk=python
 
-# Add any custom package dependencies here
-# NOTE: Add pip packages to requirements.txt
-
-# End package dependencies
-
-# Add source code
 WORKDIR /python/src
-ADD ./plugin.spec.yaml /plugin.spec.yaml
-ADD . /python/src
 
-# Install pip dependencies
+COPY --from=builder /python/src /python/src
+COPY --from=builder /plugin.spec.yaml /plugin.spec.yaml
+
+RUN apt-get update && apt-get install -y jq
+
+
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-RUN python setup.py build && python setup.py install
 
-# Install jq
-RUN apk add --no-cache jq
+ENV PYTHONPATH="/python/src:${PYTHONPATH}"
+
+RUN rm -rf /root/.cache;
 
 # User to run plugin code. The two supported users are: root, nobody
 USER nobody
 
-ENTRYPOINT ["/usr/local/bin/icon_jq"]
+ENTRYPOINT ["python", "/python/src/bin/icon_jq"]
