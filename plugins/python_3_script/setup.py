@@ -2,13 +2,14 @@
 from setuptools import setup, find_packages
 
 
-setup(name="python_3_script-rapid7-plugin",
-      version="5.1.1",
-      description="[Python](https://www.python.org/) is a language for fast development and system integration. This plugin runs Python 3.12.8 with its standard library and other libraries such as:* [requests](https://requests.readthedocs.io/en/latest/)* [arrow](https://pypi.org/project/arrow/)* [lxml](http://lxml.de/)* [beautifulsoup](https://www.crummy.com/software/BeautifulSoup/)It supports loading custom modules and passing credentials (`username`, `password`, `secret_key`)",
-      author="rapid7",
-      author_email="",
-      url="",
-      packages=find_packages(),
-      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/icon_python_3_script']
-      )
+setup(
+    name="python_3_script-rapid7-plugin",
+    version="5.1.2",
+    description="[Python](https://www.python.org/) is a language for fast development and system integration. This plugin runs Python 3.12.8 with its standard library and other libraries such as:* [requests](https://requests.readthedocs.io/en/latest/)* [arrow](https://pypi.org/project/arrow/)* [lxml](http://lxml.de/)* [beautifulsoup](https://www.crummy.com/software/BeautifulSoup/)It supports loading custom modules and passing credentials (`username`, `password`, `secret_key`)",
+    author="rapid7",
+    author_email="",
+    url="",
+    packages=find_packages(),
+    install_requires=["insightconnect-plugin-runtime"],  # Add third-party dependencies to requirements.txt, not here!
+    entry_points={"console_scripts": ["icon_python_3_script = bin.icon_python_3_script:main"]},
+)

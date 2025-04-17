@@ -4,4 +4,4 @@ datetime==5.5
 setuptools==75.1.0
 PyYAML==6.0.2
 beautifulsoup4==4.12.3
-parameterized==0.8.1
+parameterized==0.9.0

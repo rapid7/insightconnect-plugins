@@ -31,7 +31,7 @@ class Run(insightconnect_plugin_runtime.Action):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         function_ = params.get(Input.FUNCTION, "")
         input_parameters = params.get(Input.INPUT, {})
-        timeout = params.get(Input.TIMEOUT, DEFAULT_PROCESS_TIMEOUT)
+        timeout = params.get(Input.TIMEOUT)
         # END INPUT BINDING - DO NOT REMOVE
 
         if timeout <= 0:
