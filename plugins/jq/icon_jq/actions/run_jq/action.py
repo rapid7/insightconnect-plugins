@@ -1,4 +1,5 @@
 import json
+import os
 import re
 
 # Custom imports below
@@ -27,7 +28,6 @@ class RunJq(insightconnect_plugin_runtime.Action):
             params = {}
 
         json_in = params.get(Input.JSON_IN)
-        flags = params.get(Input.FLAGS)
         filter_ = params.get(Input.FILTER)
         timeout = params.get(Input.TIMEOUT, 15)
 
@@ -44,9 +44,12 @@ class RunJq(insightconnect_plugin_runtime.Action):
             if re.search(pattern, filter_, re.IGNORECASE):
                 raise PluginException(f"Blocked pattern found in filter: {pattern}")
 
-        if len(flags) > 0:
-            string_flags = " ".join(flags)
-            jq_cmd_array.append(string_flags)
+        # Only allows flag field to be used on orchestrator
+        if os.environ.get("PLUGIN_RUNTIME_ENVIRONMENT") != "cloud":
+            flags = params.get(Input.FLAGS)
+            if len(flags) > 0:
+                string_flags = " ".join(flags)
+                jq_cmd_array.append(string_flags)
 
         jq_cmd_array.append(filter_)
 
@@ -55,7 +58,7 @@ class RunJq(insightconnect_plugin_runtime.Action):
         std_out, std_err = process.communicate(input=json.dumps(json_in).encode(), timeout=timeout)
         return_code = process.returncode
 
-        self.logger.info(f"Command to Run: {return_code}")
+        self.logger.info(f"Return Code: {return_code}")
         if return_code > 0:
             self.logger.info(f"JQ Standard Output: {std_out.decode()}")
             self.logger.info(f"JQ Standard Error: {std_err.decode}")
