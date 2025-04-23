@@ -33,8 +33,8 @@ This action is used to pass the given JSON to the jq command, using the given fl
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|filter|string|None|True|Filter expression to be used by the jq command not in surrounding quotes|None|.user.name|None|None|
-|flags|[]string|None|False|Flags with which to invoke the jq command (e.g. -c)|None|[]|None|None|
+|filter|string|None|False|Filter expression to be used by the jq command not in surrounding quotes|None|.user.name|None|None|
+|flags|[]string|None|False|Flags with which to invoke the jq command (e.g. ["-c"]). Multiple flags are supported in one action: ["-c", "-r", "--tab"]|None|[]|None|None|
 |json_in|object|None|True|Data in JSON format to be passed to jq|None|{'user': {'name': 'Alice', 'age': 30}}|None|None|
 |timeout|integer|15|False|Timeout in seconds during which the jq command runs|None|15|None|None|
   
@@ -89,7 +89,7 @@ Example output:
 
 # Version History
 
-* 3.0.0 - Enabled plugin as `cloud_ready` | Updated `run` action to block certain filter inputs and limit `flag` inputs | Updated SDK to the latest version (6.3.3) | Unit Tests added
+* 3.0.0 - Enabled plugin as `cloud_ready` | Updated `run` action to limit `flag` inputs | 'filter` input no longer required for action to run | Updated SDK to the latest version (6.3.3) | Unit Tests added
 * 2.0.5 - New spec and help.md format for the Extension Library | Changed docker image from `komand/python-3-slim-plugin:2` to `komand/python-3-37-slim-plugin` | Change mutable function parameter to immutable | Removed comments | Changed concatenation to format in loggers
 * 2.0.4 - Fix issue where jq was not available in the docker image | Update to python | Update to use the `komand/python-3-slim-plugin:2` Docker image to reduce plugin size | Set a default `timeout` of 15 seconds in the Run action
 * 2.0.3 - Add `utilities` plugin tag for Marketplace searchability

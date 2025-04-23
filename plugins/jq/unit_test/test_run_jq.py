@@ -49,6 +49,6 @@ class TestRunJq(TestCase):
             self.action.run(input_param)
 
         self.assertIn(
-            "The following flag(s) are not supported: ['--rawfile']. Please ensure your input meets the criteria of the following flags: ['-c', '-r', '-R']",
+            "The following flag(s) are not supported: ['--rawfile']",
             str(context.exception),
         )

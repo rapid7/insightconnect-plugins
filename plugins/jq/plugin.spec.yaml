@@ -52,7 +52,8 @@ links:
 references:
 - '[jq](https://stedolan.github.io/jq/)'
 version_history:
-- 3.0.0 - Enabled plugin as `cloud_ready` | Updated `run` action to block certain filter inputs and limit `flag` inputs | Updated SDK to the latest version (6.3.3) | Unit Tests added
+- 3.0.0 - Enabled plugin as `cloud_ready` | Updated `run` action to limit `flag` inputs | 'filter` input no longer required for action to run
+  | Updated SDK to the latest version (6.3.3) | Unit Tests added
 - 2.0.5 - New spec and help.md format for the Extension Library | Changed docker image
   from `komand/python-3-slim-plugin:2` to `komand/python-3-37-slim-plugin` | Change
   mutable function parameter to immutable | Removed comments | Changed concatenation
@@ -84,7 +85,7 @@ actions:
         example: {user: {name: Alice, age: 30}}
       flags:
         title: Flags
-        description: Flags with which to invoke the jq command (e.g. -c)
+        description: "Flags with which to invoke the jq command (e.g. [\"-c\"]). Multiple flags are supported in one action: [\"-c\", \"-r\", \"--tab\"]"
         type: '[]string'
         required: false
         example: []
@@ -93,7 +94,7 @@ actions:
         description: Filter expression to be used by the jq command not in surrounding
           quotes
         type: string
-        required: true
+        required: false
         example: .user.name
       timeout:
         title: Timeout
