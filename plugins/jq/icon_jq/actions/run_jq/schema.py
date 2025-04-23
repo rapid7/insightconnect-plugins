@@ -34,7 +34,7 @@ class RunJqInput(insightconnect_plugin_runtime.Input):
     "flags": {
       "type": "array",
       "title": "Flags",
-      "description": "Flags with which to invoke the jq command (e.g. -c)",
+      "description": "Flags with which to invoke the jq command (e.g. [\"-c\"]). Multiple flags are supported in one action: [\"-c\", \"-r\", \"--tab\"]",
       "items": {
         "type": "string"
       },
@@ -55,7 +55,6 @@ class RunJqInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "filter",
     "json_in"
   ],
   "definitions": {}
