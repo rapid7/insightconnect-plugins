@@ -68,7 +68,7 @@ This action is used to run a Python 3 function
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |function|python|def run(params={}):\n    return {}|True|Function definition. Must be named `run`. Accepts the `input` object as params. Returns the dict as output. In this action you can use `username`, `password`, `secret_key` variables if defined in connection|None|def run(params={}):\n\tprint(params.get('some_input'))\n\tprint(username, password)\n\treturn {}|None|None|
 |input|object|None|False|Input object to be passed as `params={}` to the `run` function|None|{"some_input": "example input"}|None|None|
-|timeout|integer|30|False|Timeout (in minutes) for function execution|None|30|None|None|
+|timeout|integer|30|False|Timeout (in minutes) for function execution. If this value is null it will default to 30 minutes|None|30|None|None|
   
 Example input:
 
@@ -114,6 +114,7 @@ Example output:
 
 # Version History
 
+* 5.1.2 - `timeout` description updated within `run` action | Updated SDK to the latest version (6.3.3)
 * 5.1.1 - Updated SDK to the latest version (6.2.5)
 * 5.1.0 - Action `Run`: Added `timeout` optional parameter | Updated SDK to the latest version
 * 5.0.1 - Updated SDK to the latest version | Initial updates for fedramp compliance

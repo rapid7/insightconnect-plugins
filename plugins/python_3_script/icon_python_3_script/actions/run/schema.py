@@ -19,7 +19,8 @@ class Output:
 
 
 class RunInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -38,7 +39,7 @@ class RunInput(insightconnect_plugin_runtime.Input):
     "timeout": {
       "type": "integer",
       "title": "Timeout",
-      "description": "Timeout (in minutes) for function execution",
+      "description": "Timeout (in minutes) for function execution. If this value is null it will default to 30 minutes",
       "default": 30,
       "order": 3
     }
@@ -54,14 +55,16 @@ class RunInput(insightconnect_plugin_runtime.Input):
     }
   }
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class RunOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -79,7 +82,8 @@ class RunOutput(insightconnect_plugin_runtime.Output):
   },
   "definitions": {}
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
