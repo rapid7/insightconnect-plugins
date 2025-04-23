@@ -53,7 +53,7 @@ references: ['[Python 3 Language Reference](https://docs.python.org/3/reference/
 links:
 - '[Python](https://www.python.org/)'
 version_history:
-- 5.1.2 - `timeout` field made required for `run` action | Updated SDK to the latest version (6.3.3)
+- 5.1.2 - `timeout` description updated within `run` action | Updated SDK to the latest version (6.3.3)
 - 5.1.1 - Updated SDK to the latest version (6.2.5)
 - '5.1.0 - Action `Run`: Added `timeout` optional parameter | Updated SDK to the latest
   version'
@@ -142,9 +142,9 @@ actions:
         example: '{"some_input": "example input"}'
       timeout:
         title: Timeout
-        description: Timeout (in minutes) for function execution
+        description: Timeout (in minutes) for function execution. If this value is null it will default to 30 minutes
         type: integer
-        required: true
+        required: false
         default: 30
         example: 30
     output:

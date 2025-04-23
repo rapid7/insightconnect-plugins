@@ -39,14 +39,13 @@ class RunInput(insightconnect_plugin_runtime.Input):
     "timeout": {
       "type": "integer",
       "title": "Timeout",
-      "description": "Timeout (in minutes) for function execution",
+      "description": "Timeout (in minutes) for function execution. If this value is null it will default to 30 minutes",
       "default": 30,
       "order": 3
     }
   },
   "required": [
-    "function",
-    "timeout"
+    "function"
   ],
   "definitions": {
     "python": {
