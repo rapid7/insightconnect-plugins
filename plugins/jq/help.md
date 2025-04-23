@@ -34,7 +34,7 @@ This action is used to pass the given JSON to the jq command, using the given fl
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |filter|string|None|False|Filter expression to be used by the jq command not in surrounding quotes|None|.user.name|None|None|
-|flags|[]string|None|False|Flags with which to invoke the jq command (e.g. ["-c"]). Multiple flags are supported in one action: ["-c", "-r", "--tab"]|None|[]|None|None|
+|flags|[]string|None|False|Flags with which to invoke the jq command (e.g. ["-c"]). Multiple flags are supported in one action: ["-c", "-r", "--tab"] and the following are all possible flags: ["-c", "-r", "-R", "-j", "-S", "-n", "--tab"]|None|[]|None|None|
 |json_in|object|None|True|Data in JSON format to be passed to jq|None|{'user': {'name': 'Alice', 'age': 30}}|None|None|
 |timeout|integer|15|False|Timeout in seconds during which the jq command runs|None|15|None|None|
   
