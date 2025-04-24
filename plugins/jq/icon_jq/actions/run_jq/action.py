@@ -75,7 +75,7 @@ class RunJq(insightconnect_plugin_runtime.Action):
         self.logger.info(f"Return Code: {return_code}")
         if return_code > 0:
             self.logger.info(f"JQ Standard Output: {std_out.decode()}")
-            self.logger.info(f"JQ Standard Error: {std_err.decode}")
+            self.logger.info(f"JQ Standard Error: {std_err.decode()}")
             raise PluginException(f"JQ failed with return code: {return_code}")
 
         output_string = std_out.decode("utf-8").strip()
