@@ -3,23 +3,74 @@ extension: plugin
 products: [insightconnect]
 name: jq
 title: jq
-description: Send JSON data through jq
-version: 2.0.5
+description: '[jq](https://stedolan.github.io/jq/) is a command-line tool used for
+  slicing, filtering, mapping, and transforming structured JSON data. The jq plugin
+  passes the given list of flags to the jq command, which then runs the given filter
+  expression on the given JSON input. For flexibility, the output is returned as a
+  string'
+version: 3.0.0
+supported_versions: ['2025-04-17']
 vendor: rapid7
 support: rapid7
+cloud_ready: true
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/jq
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+sdk:
+  type: slim
+  version: 6.3.3
+  user: nobody
+  custom_cmd:
+  - RUN apt-get update && apt-get install -y jq
+troubleshooting:
+- Note that the filter expression should not be surrounded by quotes. This differs
+  from use of jq on the command line, where the jq filter needs to be quoted to avoid
+  collision with special shell characters.
+- Likewise, individual command flags should not be surrounded by quotes.
+- If the flags or filter given to jq are not well formed, this plugin returns a string
+  beginning with "ill-formed jq command". One possible problem might be a mismatch
+  between the expected jq version and the version actually contained in the plugin.
+- If jq fails to produce output within the given timeout (or 10 seconds if not supplied)
+  this plugin returns the special string `"TIMEOUT"`.
+- Note that the jq command itself can return the string `"null"`. This may be expected,
+  or it may indicate a problem in the given filter string.
+- The `--seq` and `--stream` flags are not supported in version 0.1.0 of this plugin.
 tags:
 - jq
 - JSON
 - sed for JSON
 - utilities
+key_features:
+- JSON File processing
 hub_tags:
   use_cases: [data_utility]
-  keywords: [jq, JSON, sed for JSON, utilities]
+  keywords: [jq, JSON, sed for JSON, utilities, cloud_enabled]
   features: []
+links:
+- https://jqlang.org/
+references:
+- '[jq](https://stedolan.github.io/jq/)'
+version_history:
+- 3.0.0 - Enabled plugin as `cloud_ready` | Updated `run` action to limit `flag` inputs | 'filter` input no longer required for action to run
+  | Updated SDK to the latest version (6.3.3) | Unit Tests added
+- 2.0.5 - New spec and help.md format for the Extension Library | Changed docker image
+  from `komand/python-3-slim-plugin:2` to `komand/python-3-37-slim-plugin` | Change
+  mutable function parameter to immutable | Removed comments | Changed concatenation
+  to format in loggers
+- 2.0.4 - Fix issue where jq was not available in the docker image | Update to python
+  | Update to use the `komand/python-3-slim-plugin:2` Docker image to reduce plugin
+  size | Set a default `timeout` of 15 seconds in the Run action
+- 2.0.3 - Add `utilities` plugin tag for Marketplace searchability
+- 2.0.2 - Regenerate with latest Go SDK to solve bug with triggers
+- 2.0.1 - Updating to Go SDK 2.6.4
+- 2.0.0 - Rename "JQ" plugin title to "jq" | Rename "Run JQ" action to "Run"
+- 1.1.0 - Support web server mode
+- 1.0.0 - Update to v2 Go plugin architecture
+- 0.1.3 - Strip trailing newline on output
+- 0.1.2 - Larger inputs were blocking
+- 0.1.1 - Allow arrays to be passed into jq
+- 0.1.0 - Initial plugin
 actions:
   run_jq:
     title: Run
@@ -31,26 +82,31 @@ actions:
         description: Data in JSON format to be passed to jq
         type: object
         required: true
+        example: {user: {name: Alice, age: 30}}
       flags:
         title: Flags
-        description: Flags with which to invoke the jq command (e.g. -c)
+        description: "Flags with which to invoke the jq command (e.g. [\"-c\"]). Multiple flags are supported in one action: [\"-c\", \"-r\", \"--tab\"] and the following are all possible flags: [\"-c\", \"-r\", \"-R\", \"-j\", \"-S\", \"-n\", \"--tab\"]"
         type: '[]string'
         required: false
+        example: []
       filter:
         title: Filter
         description: Filter expression to be used by the jq command not in surrounding
           quotes
         type: string
-        required: true
+        required: false
+        example: .user.name
       timeout:
         title: Timeout
         description: Timeout in seconds during which the jq command runs
         type: integer
         default: 15
         required: false
+        example: 15
     output:
       json_out:
         title: JSON Out
         description: The output JSON
         type: string
         required: true
+        example: '"Alice"'
