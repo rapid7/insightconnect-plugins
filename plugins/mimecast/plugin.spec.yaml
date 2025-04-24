@@ -894,7 +894,7 @@ connection:
   client_id:
     title: Client ID
     description: The Mimecast 2.0 Application Client ID
-    type: credential_secret_key
+    type: string
     example: ZA7vkbu7NqcfBcGrXyWW8Rzk2sv2un2DCY7GGCX4BFWgJBZM
     required: true
   client_secret:

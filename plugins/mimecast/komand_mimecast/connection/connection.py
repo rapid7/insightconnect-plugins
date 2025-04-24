@@ -18,7 +18,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def connect(self, params={}):
         self.client = MimecastAPI(
-            params.get(Input.CLIENT_ID, {}).get("secretKey", "").strip(),
+            params.get(Input.CLIENT_ID, "").strip(),
             params.get(Input.CLIENT_SECRET, {}).get("secretKey", "").strip(),
             self.logger,
         )

@@ -26,7 +26,7 @@ class Util:
             params = connect_params
         else:
             params = {
-                Input.CLIENT_ID: {"secretKey": "test"},
+                Input.CLIENT_ID: "test",
                 Input.CLIENT_SECRET: {"secretKey": "test"},
             }
         default_connection.connect(params)

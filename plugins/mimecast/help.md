@@ -23,7 +23,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|client_id|credential_secret_key|None|True|The Mimecast 2.0 Application Client ID|None|ZA7vkbu7NqcfBcGrXyWW8Rzk2sv2un2DCY7GGCX4BFWgJBZM|None|None|
+|client_id|string|None|True|The Mimecast 2.0 Application Client ID|None|ZA7vkbu7NqcfBcGrXyWW8Rzk2sv2un2DCY7GGCX4BFWgJBZM|None|None|
 |client_secret|credential_secret_key|None|True|The Mimecast 2.0 Application Client Secret|None|ohknqKJpCd99XTkHjeVuc2TgYaKWrWn4tEEHCLkXFZhFgDRdcpNGVx3EipX2CvmE|None|None|
 
 Example input:

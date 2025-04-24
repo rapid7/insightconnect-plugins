@@ -16,7 +16,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "client_id": {
-      "$ref": "#/definitions/credential_secret_key",
+      "type": "string",
       "title": "Client ID",
       "description": "The Mimecast 2.0 Application Client ID",
       "order": 1
