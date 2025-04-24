@@ -37,61 +37,60 @@ class MimecastAPI:
         data = {"client_id": self.client_id, "client_secret": self.client_secret, "grant_type": "client_credentials"}
         response = self._handle_rest_call(
             "POST",
-            "/oauth/token",
+            f"{API}/oauth/token",
             header_fields={"Content-Type": "application/x-www-form-urlencoded"},
             data=data,
-            authenticating=True,
         )
         self.access_token = response.get("access_token")
         self.logger.info("Authenticated")
 
     def get_managed_url(self, data: dict) -> dict:
-        return self._handle_rest_call("POST", "/api/ttp/url/get-all-managed-urls", data=data)
+        return self._handle_rest_call("POST", f"{API}/api/ttp/url/get-all-managed-urls", data=data)
 
     def get_ttp_url_logs(self, data: dict, meta_data: dict) -> dict:
-        return self._handle_rest_call("POST", "/api/ttp/url/get-logs", data=data, meta_data=meta_data)
+        return self._handle_rest_call("POST", f"/{API}api/ttp/url/get-logs", data=data, meta_data=meta_data)
 
     def add_group_member(self, data: dict) -> dict:
-        return self._handle_rest_call("POST", "/api/directory/add-group-member", data=data)
+        return self._handle_rest_call("POST", f"{API}/api/directory/add-group-member", data=data)
 
     def create_blocked_sender_policy(self, data: dict) -> dict:
-        return self._handle_rest_call("POST", "/api/policy/blockedsenders/create-policy", data=data)
+        return self._handle_rest_call("POST", f"{API}/api/policy/blockedsenders/create-policy", data=data)
 
     def delete_blocked_sender_policy(self, data: dict) -> dict:
-        return self._handle_rest_call("POST", "/api/policy/blockedsenders/delete-policy", data=data)
+        return self._handle_rest_call("POST", f"{API}/api/policy/blockedsenders/delete-policy", data=data)
 
     def search_message_finder(self, data: dict) -> dict:
-        return self._handle_rest_call("POST", "/api/message-finder/search", data=data)
+        return self._handle_rest_call("POST", f"{API}/api/message-finder/search", data=data)
 
     def create_managed_url(self, data: dict) -> dict:
-        return self._handle_rest_call("POST", "/api/ttp/url/create-managed-url", data=data)
+        return self._handle_rest_call("POST", f"{API}/api/ttp/url/create-managed-url", data=data)
 
     def decode_url(self, data: dict) -> dict:
-        return self._handle_rest_call("POST", "/api/ttp/url/decode-url", data=data)
+        return self._handle_rest_call("POST", f"{API}/api/ttp/url/decode-url", data=data)
 
     def delete_group_member(self, data: dict) -> dict:
-        return self._handle_rest_call("POST", "/api/directory/remove-group-member", data=data)
+        return self._handle_rest_call("POST", f"{API}/api/directory/remove-group-member", data=data)
 
     def delete_managed_url(self, data: dict) -> dict:
-        return self._handle_rest_call("POST", "/api/ttp/url/delete-managed-url", data=data)
+        return self._handle_rest_call("POST", f"{API}/api/ttp/url/delete-managed-url", data=data)
 
     def find_groups(self, data: dict) -> dict:
-        return self._handle_rest_call("POST", "/api/directory/find-groups", data=data)
+        return self._handle_rest_call("POST", f"{API}/api/directory/find-groups", data=data)
 
     def permit_or_block_sender(self, data: dict) -> dict:
-        return self._handle_rest_call("POST", "/api/managedsender/permit-or-block-sender", data=data)
+        return self._handle_rest_call("POST", f"{API}/api/managedsender/permit-or-block-sender", data=data)
 
     def get_audit_events(self, data: dict, meta_data: dict) -> dict:
-        return self._handle_rest_call("POST", "/api/audit/get-audit-events", data=data, meta_data=meta_data)
+        return self._handle_rest_call("POST", f"{API}/api/audit/get-audit-events", data=data, meta_data=meta_data)
 
     def create_remediation_incident(self, data: dict) -> dict:
-        return self._handle_rest_call("POST", "/api/ttp/remediation/create", data=data)
+        return self._handle_rest_call("POST", f"{API}/api/ttp/remediation/create", data=data)
 
     def get_remediation_incident(self, data: dict) -> dict:
-        return self._handle_rest_call("POST", "/api/ttp/remediation/get-incident", data=data)
+        return self._handle_rest_call("POST", f"{API}/api/ttp/remediation/get-incident", data=data)
 
     def find_remediation_incidents(self, data: dict) -> dict:
-        return self._handle_rest_call("POST", "/api/ttp/remediation/find-incidents", data=data)
+        return self._handle_rest_call("POST", f"{API}/api/ttp/remediation/find-incidents", data=data)
 
     def _check_rate_limiting(self, response):
         rate_limit_status_code = 429
@@ -215,16 +214,12 @@ class MimecastAPI:
         params: dict = None,
         meta_data: dict = None,
         header_fields: dict = {},
-        existing_request: bool = False,
-        authenticating: bool = False,
     ) -> dict:
         payload = data
         if meta_data is not None:
             payload[META_FIELD] = meta_data
-        if not authenticating:
+        if not self.access_token:
             payload = str({DATA_FIELD: ([data] if data is not None else [])})
-        if not existing_request:
-            uri = f"{API}{uri}"
         try:
             request = requests.request(
                 method=method.upper(),
@@ -259,7 +254,6 @@ class MimecastAPI:
                     header_fields=self._prepare_header(request.headers, self.access_token),
                     data=request.body,
                     params=request.params,
-                    existing_request=True,
                 )
             else:
                 self._handle_error_response(response)
