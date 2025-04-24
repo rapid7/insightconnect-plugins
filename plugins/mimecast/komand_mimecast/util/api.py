@@ -48,7 +48,7 @@ class MimecastAPI:
         return self._handle_rest_call("POST", f"{API}/api/ttp/url/get-all-managed-urls", data=data)
 
     def get_ttp_url_logs(self, data: dict, meta_data: dict) -> dict:
-        return self._handle_rest_call("POST", f"/{API}api/ttp/url/get-logs", data=data, meta_data=meta_data)
+        return self._handle_rest_call("POST", f"{API}/api/ttp/url/get-logs", data=data, meta_data=meta_data)
 
     def add_group_member(self, data: dict) -> dict:
         return self._handle_rest_call("POST", f"{API}/api/directory/add-group-member", data=data)
