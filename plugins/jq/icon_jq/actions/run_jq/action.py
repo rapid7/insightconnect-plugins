@@ -1,5 +1,4 @@
 import json
-import re
 
 # Custom imports below
 import subprocess  # noqa: B404
@@ -31,32 +30,39 @@ class RunJq(insightconnect_plugin_runtime.Action):
 
         # Max time is 5 minutes
         if timeout > 300:
-            raise PluginException("JQ failed due to the timeout exceeding the maximum limit of 300 seconds.")
+            raise PluginException(
+                "JQ failed due to the timeout exceeding the maximum limit of 300 seconds.",
+                data=f"The timeout value: {timeout} is over 300 seconds.",
+                assistance="Please ensure the specified timeout is below 300 seconds.",
+            )
         elif timeout < 1:
-            raise PluginException("The timeout must be greater than 0 seconds.")
+            raise PluginException(
+                "JQ failed due to the timeout not exceeding 1 second.",
+                data=f"The timeout value {timeout} is below 1 second.",
+                assistance="Please ensure the timeout value is greater than 0 seconds.",
+            )
 
         jq_cmd_array = ["jq"]
         accepted_flags = ["-c", "-r", "-R", "-j", "-S", "-n", "--tab"]
 
         flags = params.get(Input.FLAGS)
 
+        invalid_flags = []
         if flags:
-            # Cleaning input of whitespace and splitting
-            flag_list = []
+            # Stripping whitespaces in input and checking if valid flag
             for item in flags:
-                split_items = item.split(",")
-                cleaned = [flag.strip() for flag in split_items if flag.strip()]
-                flag_list.extend(cleaned)
+                cleaned = item.strip()
+                if cleaned in accepted_flags:
+                    jq_cmd_array.append(cleaned)
+                else:
+                    invalid_flags.append(cleaned)
 
-            # Validate
-            if all(f in accepted_flags for f in flag_list):
-                jq_cmd_array.extend(flag_list)
-            else:
-                invalid_flags = [f for f in flag_list if f not in accepted_flags]
-                raise PluginException(
-                    f"The following flag(s) are not supported: {invalid_flags}. "
-                    f"Please ensure your input meets the criteria of the following flags: {accepted_flags}"
-                )
+        if invalid_flags:
+            raise PluginException(
+                cause=f"The following flag(s) are not supported: {invalid_flags}.",
+                assistance=f"Please remove the following in order for the action to run: {invalid_flags}.",
+                data=f"The following flag(s) are not accepted: {invalid_flags}. Please ensure all flags specified meet the criteria of: {accepted_flags}.",
+            )
 
         if filter_:
             jq_cmd_array.append(filter_)

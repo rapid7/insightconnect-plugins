@@ -35,9 +35,7 @@ class TestRunJq(TestCase):
 
         self.assertEqual(expected, actual)
 
-    @patch("subprocess.Popen")
-    def test_unsupported_flag(self, mock_popen):
-
+    def test_unsupported_flag(self):
         input_param = {
             "json_in": {"user": {"name": "Alice", "age": 30}},
             "flags": ["--rawfile"],  # Unsupported flag
