@@ -318,7 +318,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         return status_code, error, False
 
     def check_for_messages(self, custom_config: Dict[str, Any]) -> None:
-        custom_log_message = custom_config.get(self.CUSTOM_LOG_MESSAGE, None)
+        custom_log_message = custom_config.get(self.CUSTOM_LOG_MESSAGE)
         custom_status = custom_config.get(self.CUSTOM_STATUS, 200)
         if custom_status != 200:
             raise APIException(
