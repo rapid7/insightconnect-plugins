@@ -65,6 +65,18 @@ class TestMonitorSiemLogs(TestCase):
         self.assertEqual(new_state, state_params)  # we shouldn't change the state if we encounter an error
         self.assertEqual(type(error), ApiClientException)
 
+    def test_monitor_siem_logs_custom_message(self, _mock_data):
+        custom_config = {"custom_log_message": "Test", "custom_status": 400, "custom_assistance": "Test assistance"}
+        response, new_state, has_more_pages, status_code, error = self.task.run(
+            params={}, state={}, custom_config=custom_config
+        )
+
+        self.assertEqual(status_code, 400)
+        self.assertEqual(response, [])
+        self.assertEqual(new_state, {})
+        self.assertEqual(error.cause, "Test")
+        self.assertEqual(error.assistance, "Test assistance")
+
     def test_monitor_siem_logs_raises_429(self, _mock_data):
         state_params = {"next_token": "force_429", "last_log_line": 0}
         expected_state = state_params.copy()

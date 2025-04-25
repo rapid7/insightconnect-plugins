@@ -6,7 +6,7 @@ import hashlib
 import insightconnect_plugin_runtime
 from typing import Dict, List, Any, Tuple
 
-from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException, APIException
 from insightconnect_plugin_runtime.helper import get_time_hours_ago
 from requests import Response
 
@@ -31,6 +31,9 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
     LAST_LOG_LINE = "last_log_line"  # nosec
     LAST_RUNS_FILTER_TIME = "last_runs_filter_time"  # nosec
     PREVIOUS_FILE_HASH = "previous_file_hash"  # nosec
+    CUSTOM_LOG_MESSAGE = "custom_log_message"  # nosec
+    CUSTOM_STATUS = "custom_status"  # nosec
+    CUSTOM_ASSISTANCE = "custom_assistance"  # nosec
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -45,6 +48,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         self, params={}, state={}, custom_config={}
     ) -> (List[Dict], Dict, Dict):
         try:
+            self.check_for_messages(custom_config)
             rate_limited = self.check_rate_limit(state)
             if rate_limited:
                 return [], state, False, 429, rate_limited
@@ -135,6 +139,11 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                 state.pop(self.PREVIOUS_FILE_HASH, None)
 
             return output, state, has_more_pages, status_code, None
+        except APIException as api_error:
+            self.logger.error("An exception has been raised.")
+            self.logger.info(f"Error cause: {api_error.cause}")
+            self.logger.info(f"Error assistance: {api_error.assistance}")
+            return [], state, False, api_error.status_code, api_error
         except Exception as gen_error:
             gen_info, exp = f"Error: {gen_error}, returning state={state}, has_more_pages={has_more_pages}", None
             if "negative seek" in str(gen_error):
@@ -307,3 +316,17 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                 )
             return 200, None, True
         return status_code, error, False
+
+    def check_for_messages(self, custom_config: Dict[str, Any]) -> None:
+        custom_log_message = custom_config.get(self.CUSTOM_LOG_MESSAGE, None)
+        custom_status = custom_config.get(self.CUSTOM_STATUS, 200)
+        if custom_status != 200:
+            raise APIException(
+                cause=custom_log_message,
+                assistance=custom_config.get(
+                    self.CUSTOM_ASSISTANCE, PluginException.assistances.get(PluginException.Preset.UNKNOWN)
+                ),
+                status_code=custom_status,
+            )
+        if custom_log_message:
+            self.logger.info(custom_log_message)
