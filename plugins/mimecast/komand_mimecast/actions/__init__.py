@@ -25,4 +25,3 @@ from .get_ttp_url_logs.action import GetTtpUrlLogs
 from .decode_url.action import DecodeUrl
 
 from .get_audit_events.action import GetAuditEvents
-
