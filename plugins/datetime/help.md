@@ -377,6 +377,7 @@ Example output:
 
 # Version History
 
+* 3.0.3 - Updated SDK to the latest version (6.3.3)
 * 3.0.2 - Updated SDK to the latest version (6.2.5)
 * 3.0.1 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 3.0.0 - Add support for epochs in milliseconds, microseconds and nanoseconds in Date from Epoch action
