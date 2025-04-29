@@ -1010,10 +1010,10 @@ Example output:
 
 ## Troubleshooting
 
-For the Create Managed URL action, the URL must include `http://` or `https://` e.g. `http://google.com` Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api-overview/global-base-urls/)
 
 # Version History
 
+* 5.3.21 - Update Task `monitor_siem_logs` to use new logging and status management | Update SDK to version 6.3.3
 * 5.3.20 - Update Task `monitor_siem_logs` bump default rate limit period to 10 minutes and catch unexpected errors
 * 5.3.19 - Update Task `monitor_siem_logs` to delay retry if a rate limit error is returned from Mimecast | Update SDK to version 6.2.0
 * 5.3.18 - Fix task connection test | Trim whitespace from connection inputs | bump SDK to version 6.1.2
