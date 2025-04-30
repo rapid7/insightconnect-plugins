@@ -673,6 +673,7 @@ Example output:
 
 # Version History
 
+* 3.0.12 - Updated SDK to the latest version (6.3.3)
 * 3.0.11 - Updated tldextract to v5.1.3
 * 3.0.10 - Updated SDK to the latest version (6.2.5)
 * 3.0.9 - Initial updates for fedramp compliance | Updated SDK to the latest version

@@ -29,4 +29,3 @@ from .cve_extractor.action import CveExtractor
 from .uuid_extractor.action import UuidExtractor
 
 from .extract_all.action import ExtractAll
-
