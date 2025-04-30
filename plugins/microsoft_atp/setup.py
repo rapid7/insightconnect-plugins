@@ -2,13 +2,14 @@
 from setuptools import setup, find_packages
 
 
-setup(name="microsoft_atp-rapid7-plugin",
-      version="6.0.2",
-      description="The Microsoft Defender for Endpoint plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files",
-      author="rapid7",
-      author_email="",
-      url="",
-      packages=find_packages(),
-      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_microsoft_atp']
-      )
+setup(
+    name="microsoft_atp-rapid7-plugin",
+    version="6.0.3",
+    description="The Microsoft Defender for Endpoint plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files",
+    author="rapid7",
+    author_email="",
+    url="",
+    packages=find_packages(),
+    install_requires=["insightconnect-plugin-runtime"],  # Add third-party dependencies to requirements.txt, not here!
+    entry_points={"console_scripts": ["komand_microsoft_atp = bin.komand_microsoft_atp:main"]},
+)
