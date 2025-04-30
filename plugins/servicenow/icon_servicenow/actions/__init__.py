@@ -49,4 +49,3 @@ from .search_security_incident.action import SearchSecurityIncident
 from .create_security_incident.action import CreateSecurityIncident
 
 from .update_security_incident.action import UpdateSecurityIncident
-

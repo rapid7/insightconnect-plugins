@@ -20,12 +20,12 @@ class SearchSecurityIncident(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         search_params = {
             "sysparm_query": params.get(Input.QUERY),
-            "sysparm_limit": params.get(Input.LIMIT)
-            if params.get(Input.LIMIT) and params.get(Input.LIMIT) > 0
-            else None,
-            "sysparm_offset": params.get(Input.OFFSET)
-            if params.get(Input.OFFSET) and params.get(Input.OFFSET) >= 0
-            else None,
+            "sysparm_limit": (
+                params.get(Input.LIMIT) if params.get(Input.LIMIT) and params.get(Input.LIMIT) > 0 else None
+            ),
+            "sysparm_offset": (
+                params.get(Input.OFFSET) if params.get(Input.OFFSET) and params.get(Input.OFFSET) >= 0 else None
+            ),
             "sysparm_fields": params.get(Input.FIELDS),
         }
 
