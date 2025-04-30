@@ -31,4 +31,3 @@ from .reset_password.action import ResetPassword
 from .update_blacklist_zones.action import UpdateBlacklistZones
 
 from .get_user_groups.action import GetUserGroups
-
