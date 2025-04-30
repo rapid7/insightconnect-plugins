@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Type Converter"
 Vendor = "rapid7"
-Version = "1.8.4"
+Version = "1.8.5"
 Description = "Type Converter is a utility plugin for converting data types within a Rapid7 InsightConnect workflow. This is useful for enabling input interoperability between certain plugins"
 
 
