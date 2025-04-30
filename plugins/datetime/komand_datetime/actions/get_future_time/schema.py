@@ -30,7 +30,7 @@ class GetFutureTimeInput(insightconnect_plugin_runtime.Input):
       "format": "date-time",
       "displayType": "date",
       "title": "Base Timestamp",
-      "description": "Timestamp used for calculating a new delta timestamp eg. 2020-07-02T21:20:33.0Z, to use current time leave base timestamp parameter empty",
+      "description": "Timestamp used for calculating a new delta timestamp eg. 2020-07-02T21:20:33+00:00, to use current time leave base timestamp parameter empty",
       "order": 1
     },
     "time_amount": {

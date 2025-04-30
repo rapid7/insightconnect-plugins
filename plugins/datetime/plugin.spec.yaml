@@ -333,11 +333,11 @@ actions:
     input:
       base_timestamp:
         title: Base Timestamp
-        description: Timestamp used for calculating a new delta timestamp eg. 2020-07-02T21:20:33.0Z,
+        description: Timestamp used for calculating a new delta timestamp eg. 2020-07-02T21:20:33+00:00,
           to use current time leave base timestamp parameter empty
         type: date
         required: false
-        example: '2020-07-02T21:20:33.0Z'
+        example: '2020-07-02T21:20:33+00:00'
       time_amount:
         title: Time Amount
         description: The amount of time units to add to the base timestamp to get
@@ -1008,4 +1008,4 @@ actions:
         description: New timestamp
         type: date
         required: true
-        example: '2020-07-22T21:20:33.0Z'
+        example: '2020-07-02T21:20:33+00:00'
