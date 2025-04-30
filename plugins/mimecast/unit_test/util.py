@@ -2,14 +2,13 @@ import json
 import logging
 import os.path
 import sys
-from datetime import datetime
 from io import BytesIO
 from zipfile import ZipFile
 
 sys.path.append(os.path.abspath("../"))
 from komand_mimecast.connection import Connection
 from komand_mimecast.connection.schema import Input
-from komand_mimecast.util.constants import DATA_FIELD, DEFAULT_REGION
+from komand_mimecast.util.constants import API, DATA_FIELD
 
 
 FILE_ZIP_CONTENT_1 = {"acc": "ABC123", "datetime": "2022-01-01T12:00:00"}
@@ -20,16 +19,16 @@ SIEM_LOGS_HEADERS_RESPONSE = {"mc-siem-token": "token123"}
 
 class Util:
     @staticmethod
-    def default_connector(action):
+    def default_connector(action, connect_params: object = None):
         default_connection = Connection()
         default_connection.logger = logging.getLogger("connection logger")
-        params = {
-            Input.REGION: DEFAULT_REGION,
-            Input.ACCESS_KEY: {"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"},
-            Input.SECRET_KEY: {"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"},
-            Input.APP_ID: "9de5069c5afe602b2ea0a04b66beb2c0",
-            Input.APP_KEY: {"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"},
-        }
+        if connect_params:
+            params = connect_params
+        else:
+            params = {
+                Input.CLIENT_ID: "test",
+                Input.CLIENT_SECRET: {"secretKey": "test"},
+            }
         default_connection.connect(params)
         action.connection = default_connection
         action.logger = logging.getLogger("action logger")
@@ -90,40 +89,42 @@ class Util:
             def json(self):
                 return json.loads(self.json_value)
 
-        if kwargs.get("url") == "https://eu-api.mimecast.com/api/directory/add-group-member":
+        if kwargs.get("url") == f"{API}/oauth/token":
+            return MockResponse(200, "authenticate.json.resp")
+        if kwargs.get("url") == f"{API}/api/directory/add-group-member":
             if "test4@rapid7.com" in kwargs.get(DATA_FIELD):
                 return MockResponse("add_group_member.json.resp")
             elif "bad@rapid7.com" in kwargs.get(DATA_FIELD):
                 return MockResponse("add_group_member_bad.json.resp")
-        elif kwargs.get("url") == "https://eu-api.mimecast.com/api/policy/blockedsenders/create-policy":
+        elif kwargs.get("url") == f"{API}/api/policy/blockedsenders/create-policy":
             if "some test policy" in kwargs.get(DATA_FIELD):
                 return MockResponse("create_blocked_sender_policy.json.resp")
-        elif kwargs.get("url") == "https://eu-api.mimecast.com/api/policy/blockedsenders/delete-policy":
+        elif kwargs.get("url") == f"{API}/api/policy/blockedsenders/delete-policy":
             if "1234" in kwargs.get(DATA_FIELD):
                 return MockResponse("delete_blocked_sender_policy.json.resp")
             else:
                 return MockResponse("delete_blocked_sender_policy_bad.json.resp")
-        elif kwargs.get("url") == "https://eu-api.mimecast.com/api/message-finder/search":
+        elif kwargs.get("url") == f"{API}/api/message-finder/search":
             return MockResponse("search_message_tracking.json.resp")
-        elif kwargs.get("url") == "https://eu-api.mimecast.com/api/ttp/url/create-managed-url":
+        elif kwargs.get("url") == f"{API}/api/ttp/url/create-managed-url":
             if "https://www.test.net/" in kwargs.get(DATA_FIELD):
                 return MockResponse("create_managed_url.json.resp")
             if "https://www.bad.net/" in kwargs.get(DATA_FIELD):
                 return MockResponse("create_managed_url_bad.json.resp")
-        elif kwargs.get("url") == "https://eu-api.mimecast.com/api/ttp/url/decode-url":
+        elif kwargs.get("url") == f"{API}/api/ttp/url/decode-url":
             if "https://protect-xx.mimecast.com/" in kwargs.get(DATA_FIELD):
                 return MockResponse("decode_url.json.resp")
-        elif kwargs.get("url") == "https://eu-api.mimecast.com/api/directory/remove-group-member":
+        elif kwargs.get("url") == f"{API}/api/directory/remove-group-member":
             if "test4@rapid7.com" in kwargs.get(DATA_FIELD):
                 return MockResponse("delete_group_member.json.resp")
             elif "bad@rapid7.com" in kwargs.get(DATA_FIELD):
                 return MockResponse("delete_group_member_bad.json.resp")
-        elif kwargs.get("url") == "https://eu-api.mimecast.com/api/ttp/url/delete-managed-url":
+        elif kwargs.get("url") == f"{API}/api/ttp/url/delete-managed-url":
             if "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3I" in kwargs.get(DATA_FIELD):
                 return MockResponse("delete_managed_url.json.resp")
             elif "bad_id" in kwargs.get(DATA_FIELD):
                 return MockResponse("delete_managed_url_bad.json.resp")
-        elif kwargs.get("url") == "https://eu-api.mimecast.com/api/directory/find-groups":
+        elif kwargs.get("url") == f"{API}/api/directory/find-groups":
             if "test_query" in kwargs.get(DATA_FIELD):
                 return MockResponse("find_groups_empty_groups.json.resp")
             elif "500" in kwargs.get(DATA_FIELD):
@@ -134,16 +135,16 @@ class Util:
                 return MockResponse("find_groups_404.json.resp")
             else:
                 return MockResponse("find_groups.json.resp")
-        elif kwargs.get("url") == "https://eu-api.mimecast.com/api/audit/get-audit-events":
+        elif kwargs.get("url") == f"{API}/api/audit/get-audit-events":
             return MockResponse("get_audit_events.json.resp")
-        elif kwargs.get("url") == "https://eu-api.mimecast.com/api/ttp/url/get-all-managed-urls":
+        elif kwargs.get("url") == f"{API}/api/ttp/url/get-all-managed-urls":
             if "test_domain" in kwargs.get(DATA_FIELD):
                 return MockResponse("get_managed_url_empty_response.json.resp")
             else:
                 return MockResponse("get_managed_url.json.resp")
-        elif kwargs.get("url") == "https://eu-api.mimecast.com/api/ttp/url/get-logs":
+        elif kwargs.get("url") == f"{API}/api/ttp/url/get-logs":
             return MockResponse("get_ttp_url_logs.json.resp")
-        elif kwargs.get("url") == "https://eu-api.mimecast.com/api/managedsender/permit-or-block-sender":
+        elif kwargs.get("url") == f"{API}/api/managedsender/permit-or-block-sender":
             if "permit" in kwargs.get(DATA_FIELD):
                 return MockResponse("permit_or_block_sender.json.resp")
             elif "block" in kwargs.get(DATA_FIELD):
@@ -151,76 +152,6 @@ class Util:
                     return MockResponse("permit_or_block_sender_bad.json.resp")
                 else:
                     return MockResponse("block_sender.json.resp")
-        elif kwargs.get("url") == "https://eu-api.mimecast.com/api/audit/get-siem-logs":
-            data = kwargs.get("data")
-            headers = {"mc-siem-token": "token123", "Content-Disposition": "attachment"}
-            resp = MockResponseZip(200, Util.get_mocked_zip(), headers, json.dumps({"meta": {"status": 200}}))
-            if "force_401" in data:
-                json_value = {
-                    "meta": {"isLastToken": False, "status": 401},
-                    "fail": [
-                        {
-                            "errors": [
-                                {
-                                    "code": "err_xdk_invalid_signature",
-                                    "message": "0004 Invalid Signature",
-                                    "retryable": False,
-                                }
-                            ]
-                        }
-                    ],
-                }
-                resp = MockResponseZip(401, b"", {}, json.dumps(json_value))
-            if "force_429" in data:
-                json_value = {
-                    "meta": {"isLastToken": False, "status": 429},
-                    "fail": [
-                        {
-                            "errors": [
-                                {
-                                    "code": "err_xdk_invalid_signature",
-                                    "message": "0004 Invalid Signature",
-                                    "retryable": False,
-                                }
-                            ]
-                        }
-                    ],
-                }
-
-                # This value should be the amount of time in milliseconds until the next call is allowed
-                # in the mock make the customer wait 20 minutes. # todo - WHY IS THIS NOT WORKING
-                reset_value = "not an integer value" if "force_429_error" in data else "1200000"
-                headers = {"X-RateLimit-Reset": reset_value}
-
-                # default to calculate a new time in the task based on no return value
-                if "force_429_no_header" in data:
-                    del headers["X-RateLimit-Reset"]
-                resp = MockResponseZip(429, b"", headers, json.dumps(json_value))
-            elif "force_json" in data:
-                resp = MockResponseZip(200, b'{ "type" : "MTA", "data" : ', headers, '{"meta": {"status": 200}}')
-            elif "force_single_json_error" in data:
-                # isLastToken returns `true` when testing against live API and no results returned from Mimecast.
-                headers = headers.copy()
-                resp = MockResponseZip(
-                    200, Util.get_mocked_zip_json_decode_error(), headers, json.dumps({"meta": {"status": 200}})
-                )
-            elif "no_results" in data:
-                # isLastToken returns `true` when testing against live API and no results returned from Mimecast.
-                no_results = b'{"meta":{"isLastToken":true,"status":200},"data":[],"fail":[]}'
-                no_results_headers = headers.copy()
-                no_results_headers["isLastToken"] = "true"
-                resp = MockResponseZip(200, no_results, no_results_headers, '{"meta": {"status": 200}}')
-            elif "path_traversal" in data:
-                resp = MockResponseZip(200, Util.get_mocked_zip(True), headers, '{"meta": {"status": 200}}')
-            elif "request.json" in data:
-                # remove attachment header so we don't get an attachment, which causes the code to evaluate
-                # `_is_last_token` which i turn hits a JSON encode error, resulting in forcing the code into the last
-                # try/except in `get_siem_logs`
-                headers["Content-Disposition"] = ""
-                resp = MockResponseZip(200, "this is bad json returned", headers, "throw json error")
-            # elif "test_multi_log_lines" in data:
-            #     has
-            return resp
         return "Not implemented"
 
 
