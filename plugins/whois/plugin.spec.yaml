@@ -17,9 +17,9 @@ sdk:
   type: slim
   version: 6.3.3
   user: nobody
-  packages:
-  - whois
-  - git
+  custom_cmd:
+    - RUN apt-get update && apt-get install whois git -y
+
 cloud_ready: true
 fedramp_ready: true
 resources:

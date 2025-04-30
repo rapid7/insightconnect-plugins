@@ -7,8 +7,6 @@ ADD ./requirements.txt /python/src/requirements.txt
 ADD . /python/src
 
 
-RUN apt-get update && apt-get install whois git -y
-
 
 RUN pip install .
 RUN pip uninstall -y setuptools
@@ -22,6 +20,8 @@ WORKDIR /python/src
 
 COPY --from=builder /python/src /python/src
 COPY --from=builder /plugin.spec.yaml /plugin.spec.yaml
+
+RUN apt-get update && apt-get install whois git -y
 
 
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
