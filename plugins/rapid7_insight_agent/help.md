@@ -461,6 +461,7 @@ Example output:
 
 # Version History
 
+* 3.0.4 - Updated SDK to the latest version (6.3.3)
 * 3.0.3 - Updated SDK to the latest version (6.2.5)
 * 3.0.2 - Updated to use latest buildpack to address vulnerabilities | Update `Get Agent Details`:  extended output to include `agent` field when no assets are found
 * 3.0.1 - Update 'Get Agent Details' to allow no assets to be returned | SDK bump to latest version
