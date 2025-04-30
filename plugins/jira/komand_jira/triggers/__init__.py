@@ -3,4 +3,3 @@
 from .new_issue.trigger import NewIssue
 
 from .monitor_issues.trigger import MonitorIssues
-
