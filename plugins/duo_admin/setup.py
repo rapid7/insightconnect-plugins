@@ -2,13 +2,14 @@
 from setuptools import setup, find_packages
 
 
-setup(name="duo_admin-rapid7-plugin",
-      version="5.0.4",
-      description="[Duo](https://duo.com/)'s Trusted Access platform verifies the identity of your users with two-factor authentication and security health of their devices before they connect to the apps they use. Using the Duo plugin for InsightConnect will allow Duo user management within automation workflows",
-      author="rapid7",
-      author_email="",
-      url="",
-      packages=find_packages(),
-      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_duo_admin']
-      )
+setup(
+    name="duo_admin-rapid7-plugin",
+    version="5.0.5",
+    description="[Duo](https://duo.com/)'s Trusted Access platform verifies the identity of your users with two-factor authentication and security health of their devices before they connect to the apps they use. Using the Duo plugin for InsightConnect will allow Duo user management within automation workflows",
+    author="rapid7",
+    author_email="",
+    url="",
+    packages=find_packages(),
+    install_requires=["insightconnect-plugin-runtime"],  # Add third-party dependencies to requirements.txt, not here!
+    entry_points={"console_scripts": ["komand_duo_admin = bin.komand_duo_admin:main"]},
+)
