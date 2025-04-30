@@ -4,11 +4,8 @@ import json
 
 
 class Input:
-    ACCESS_KEY = "access_key"
-    APP_ID = "app_id"
-    APP_KEY = "app_key"
-    REGION = "region"
-    SECRET_KEY = "secret_key"
+    CLIENT_ID = "client_id"
+    CLIENT_SECRET = "client_secret"
 
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -18,56 +15,22 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "access_key": {
-      "$ref": "#/definitions/credential_secret_key",
-      "title": "Application Access Key",
-      "description": "The application access key",
-      "order": 5
-    },
-    "app_id": {
+    "client_id": {
       "type": "string",
-      "title": "App ID",
-      "description": "Application ID",
-      "order": 2
-    },
-    "app_key": {
-      "$ref": "#/definitions/credential_secret_key",
-      "title": "Application Key",
-      "description": "The application key",
-      "order": 3
-    },
-    "region": {
-      "type": "string",
-      "title": "Region",
-      "description": "The region for the Mimecast server",
-      "default": "EU",
-      "enum": [
-        "EU",
-        "DE",
-        "US",
-        "CA",
-        "ZA",
-        "AU",
-        "Offshore",
-        "Sandbox",
-        "USB",
-        "USBCOM"
-      ],
+      "title": "Client ID",
+      "description": "The Mimecast 2.0 Application Client ID",
       "order": 1
     },
-    "secret_key": {
+    "client_secret": {
       "$ref": "#/definitions/credential_secret_key",
-      "title": "Application Secret Key",
-      "description": "The application secret key",
-      "order": 4
+      "title": "Client Secret",
+      "description": "The Mimecast 2.0 Application Client Secret",
+      "order": 2
     }
   },
   "required": [
-    "access_key",
-    "app_id",
-    "app_key",
-    "region",
-    "secret_key"
+    "client_id",
+    "client_secret"
   ],
   "definitions": {
     "credential_secret_key": {

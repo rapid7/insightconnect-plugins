@@ -4,7 +4,5 @@
 validators==0.21.0
 parameterized==0.8.1
 python-dateutil==2.7
-jsonschema==3.2.0
-werkzeug==3.0.6
 setuptools==70.0.0
 freezegun==1.5.1
