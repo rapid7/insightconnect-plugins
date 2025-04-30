@@ -1,6 +1,5 @@
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
-from komand_mimecast.util.exceptions import ApiClientException
 from komand_mimecast.util.api import MimecastAPI
 from .schema import ConnectionSchema, Input
 from komand_mimecast.util.constants import API, META_FIELD, FAIL_FIELD, STATUS_FIELD
