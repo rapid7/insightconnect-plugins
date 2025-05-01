@@ -1,6 +1,6 @@
 # Description
 
-[Jira](https://www.atlassian.com/software/jira) is an issue tracking product developed by Atlassian that allows teams to plan, track, and release great software. This plugin uses the [Jira REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v2/) to programmatically manage and create issues and users. The Jira plugin supports cloud (only with InsightConnect cloud connections) and on-premise versions of Jira Software, Jira Server, and Jira ServiceDesk products from Atlassian.
+[Jira](https://www.atlassian.com/software/jira) is an issue tracking product developed by Atlassian that allows teams to plan, track, and release great software. This plugin uses the [Jira REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v2/) to programmatically manage and create issues and users. The Jira plugin supports cloud (only with InsightConnect cloud connections) and on-premise versions of Jira Software, Jira Server, and Jira ServiceDesk products from Atlassian
 
 # Key Features
 
@@ -730,6 +730,7 @@ Example output:
 
 # Version History
 
+* 6.5.2 - Updated SDK to the latest version (6.3.3)
 * 6.5.1 - Updated normalizing user object | Updated SDK to the latest version
 * 6.5.0 - Cloud enable the plugin | Bump SDK version to 6.1.0 | Added an error message if trying to connect to Jira on-prem for ICON cloud
 * 6.4.0 - Fix Issue Where Create Issue failed when multiple versions of the input Issue Type exists in Jira | Fix failed connection test response for PAT based connection | Include Fields input added to New Issue and Monitor Issues triggers, to specify whether to return Issue fields in the output | Removed empty Fields output from returned Issues when not requested or available

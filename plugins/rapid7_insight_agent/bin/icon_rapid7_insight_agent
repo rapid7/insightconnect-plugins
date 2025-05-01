@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Rapid7 Insight Agent"
 Vendor = "rapid7"
-Version = "3.0.3"
+Version = "3.0.4"
 Description = "Using the Insight Agent plugin from InsightConnect, you can quarantine, unquarantine and monitor potentially malicious IPs, addresses, hostnames, and devices across your organization"
 
 

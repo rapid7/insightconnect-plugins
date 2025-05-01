@@ -1,6 +1,6 @@
 # Description
 
-[Microsoft Teams](https://products.office.com/en-us/microsoft-teams/group-chat-software) is a unified communications platform that combines persistent workplace chat, video meetings, file storage, and application integration. The Microsoft Teams plugin allows you to send and trigger workflows on new messages. The plugin will also allow for teams management with the ability to add and remove teams, channels, and users. This plugin uses the [Microsoft Teams API](https://docs.microsoft.com/en-us/graph/api/resources/teams-api-overview?view=graph-rest-1.0) to interact with Microsoft Teams
+[Microsoft Teams](https://products.office.com/en-us/microsoft-teams/group-chat-software) is a unified communications platform. The Microsoft Teams plugin allows you to send and trigger workflows on new messages. The plugin will also allow for teams management with the ability to add and remove teams, channels, and users. This plugin uses the [Microsoft Teams API](https://docs.microsoft.com/en-us/graph/api/resources/teams-api-overview?view=graph-rest-1.0) to interact with Microsoft Teams
 
 # Key Features
 
@@ -1210,6 +1210,7 @@ Example output:
 
 # Version History
 
+* 7.0.2 - Updated SDK to the latest version (6.3.3)
 * 7.0.1 - Updated SDK to the latest version (6.2.5)
 * 7.0.0 - Updated SDK to the latest version | Initial updates for fedramp compliance
 * 6.0.1 - Using exact match on channel names rather than search, from user input channel names when getting the channel id | using urllib to encode any team names in API calls to avoid symbols not being parsed correctly

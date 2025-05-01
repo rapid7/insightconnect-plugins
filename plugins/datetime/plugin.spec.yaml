@@ -8,7 +8,7 @@ description: Timestamps, timezones, and Datetimes can be difficult to work with,
   plugin manipulates timestamps using Python's [Maya](https://pypi.org/project/maya/)
   library, which makes the simple things much easier while admitting that time is
   an illusion (timezones doubly so)
-version: 3.0.2
+version: 3.0.3
 connection_version: 3
 vendor: rapid7
 support: rapid7
@@ -18,7 +18,7 @@ cloud_ready: true
 fedramp_ready: true
 sdk:
   type: slim
-  version: 6.2.5
+  version: 6.3.3
   user: nobody
 key_features:
 - Convert a Datetime to an Epoch and vice versa
@@ -27,6 +27,7 @@ key_features:
 - Convert date from localtime to UTC
 - Convert date from UTC to localtime
 version_history:
+- 3.0.3 - Updated SDK to the latest version (6.3.3)
 - 3.0.2 - Updated SDK to the latest version (6.2.5)
 - 3.0.1 - Initial updates for fedramp compliance | Updated SDK to the latest version
 - 3.0.0 - Add support for epochs in milliseconds, microseconds and nanoseconds in
@@ -332,11 +333,11 @@ actions:
     input:
       base_timestamp:
         title: Base Timestamp
-        description: Timestamp used for calculating a new delta timestamp eg. 2020-07-02T21:20:33.0Z,
+        description: Timestamp used for calculating a new delta timestamp eg. 2020-07-02T21:20:33+00:00,
           to use current time leave base timestamp parameter empty
         type: date
         required: false
-        example: '2020-07-02T21:20:33.0Z'
+        example: '2020-07-02T21:20:33+00:00'
       time_amount:
         title: Time Amount
         description: The amount of time units to add to the base timestamp to get
@@ -1007,4 +1008,4 @@ actions:
         description: New timestamp
         type: date
         required: true
-        example: '2020-07-22T21:20:33.0Z'
+        example: '2020-07-02T21:20:33+00:00'

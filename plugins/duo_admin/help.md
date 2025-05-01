@@ -950,6 +950,7 @@ Example output:
 
 # Version History
 
+* 5.0.5 - Updated SDK to the latest version (6.3.3)
 * 5.0.4 - Updated SDK to the latest version (6.2.5)
 * 5.0.3 - Bump the SDK to version 6.2.3 | Update Task `monitor_logs` to delay retry if a rate limit error is returned from Duo Admin
 * 5.0.2 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities

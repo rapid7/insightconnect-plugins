@@ -3,4 +3,3 @@
 from .calculate.action import Calculate
 
 from .max.action import Max
-

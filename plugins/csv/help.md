@@ -240,6 +240,7 @@ Example output:
 
 # Version History
 
+* 2.0.4 - Updated SDK to the latest version (6.3.3)
 * 2.0.3 - Updated SDK to the latest version (6.2.5)
 * 2.0.2 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 2.0.1 - Fix bug with extra space character in JSON keys in `To JSON` action | Fix bugs with parsing cells with quotes and comma in `To JSON`, `Filter Bytes` and `Filter String` actions | Add unit tests for `To JSON`, `Filter Bytes` and `Filter String` actions

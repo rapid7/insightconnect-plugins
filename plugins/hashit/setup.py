@@ -2,13 +2,14 @@
 from setuptools import setup, find_packages
 
 
-setup(name="hashit-rapid7-plugin",
-      version="2.0.6",
-      description="The HashIt plugin will generate common hashes from a file or string. Supported hashes are:* MD5* SHA1* SHA256* SHA512",
-      author="rapid7",
-      author_email="",
-      url="",
-      packages=find_packages(),
-      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/icon_hashit']
-      )
+setup(
+    name="hashit-rapid7-plugin",
+    version="2.0.7",
+    description="The HashIt plugin will generate common hashes from a file or string. Supported hashes are:* MD5* SHA1* SHA256* SHA512",
+    author="rapid7",
+    author_email="",
+    url="",
+    packages=find_packages(),
+    install_requires=["insightconnect-plugin-runtime"],  # Add third-party dependencies to requirements.txt, not here!
+    entry_points={"console_scripts": ["icon_hashit = bin.icon_hashit:main"]},
+)

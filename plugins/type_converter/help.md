@@ -630,6 +630,7 @@ Example output:
 
 # Version History
 
+* 1.8.5 - Updated SDK to the latest version (6.3.3)
 * 1.8.4 - Updated SDK to the latest version (6.2.5)
 * 1.8.3 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 1.8.2 - Updated error handling for string_to_int & string_to_float
