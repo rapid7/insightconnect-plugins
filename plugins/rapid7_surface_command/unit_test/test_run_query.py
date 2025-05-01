@@ -14,6 +14,15 @@ from requests import Response
 sys.path.append(os.path.abspath("../"))
 
 
+class MockResponse:
+
+    def __init__(self, status_code, json_data=None, text=None, content=None):
+        self.status_code = status_code
+        self.json_data = json_data
+        self.text = text
+        self.content = content
+
+
 class TestRunQuery(TestCase):
     def setUp(self):
         self.api_key = "not_an_api_key"
@@ -74,9 +83,10 @@ class TestRunQuery(TestCase):
     @patch("icon_rapid7_surface_command.util.surface_command.api_connection.make_request")
     def test_run_query_unprocessable_entity(self, mock_request):
         # Setup mock for 422 error
-        error_response = Response()
-        error_response.status_code = 422
-        error_response.content = b'{"error": "Invalid query parameters"}'
+        error_response = MockResponse(
+            status_code=422,
+            content=b'{"error": "Invalid query parameters"}',
+        )
 
         mock_request.side_effect = PluginException(
             cause="Server was unable to process the request",
