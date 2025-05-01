@@ -25,4 +25,3 @@ from .attach_issue.action import AttachIssue
 from .create_issue.action import CreateIssue
 
 from .edit_issue.action import EditIssue
-
