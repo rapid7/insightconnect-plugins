@@ -12,17 +12,6 @@ from insightconnect_plugin_runtime.exceptions import (
 from insightconnect_plugin_runtime.helper import make_request
 
 
-REGION_MAP = {
-    "United States": "us",
-    "United States 2": "us2",
-    "United States 3": "us3",
-    "Europe": "eu",
-    "Canada": "ca",
-    "Australia": "au",
-    "Japan": "ap",
-}
-
-
 class ApiConnection:
     """
     ApiConnection(api_key, region_string, logger)
@@ -43,7 +32,7 @@ class ApiConnection:
         """
         self.api_key = api_key
         self.logger = logger
-        region = REGION_MAP.get(region_string)
+        region = region_string
         self.url = f"https://{region}.api.insight.rapid7.com/surface/graph-api/objects/table"
         self.timeout = timeout
 
@@ -78,7 +67,7 @@ class ApiConnection:
                     assistance=exception.assistance,
                     data=exception.data.text,
                     status_code=exception.data.status_code,
-                )
+                ) from exception
             raise exception
 
         return response.json()

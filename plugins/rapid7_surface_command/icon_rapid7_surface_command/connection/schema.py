@@ -25,15 +25,15 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Region",
       "description": "Region",
-      "default": "United States",
+      "default": "us",
       "enum": [
-        "United States",
-        "United States 2",
-        "United States 3",
-        "Europe",
-        "Canada",
-        "Australia",
-        "Japan"
+        "us",
+        "us2",
+        "us3",
+        "eu",
+        "ca",
+        "au",
+        "ap"
       ],
       "order": 2
     }

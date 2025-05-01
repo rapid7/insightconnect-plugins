@@ -17,7 +17,7 @@ sys.path.append(os.path.abspath("../"))
 class TestRunQuery(TestCase):
     def setUp(self):
         self.api_key = "not_an_api_key"
-        self.region = "United States"
+        self.region = "us"
         self.logger = logging.getLogger("test")
         self.connection = ApiConnection(self.api_key, self.region, self.logger)
         self.query_id = "rapid7.insightplatform.compute_machines_without_vulnerability_scan"

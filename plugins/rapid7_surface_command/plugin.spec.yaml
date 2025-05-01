@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: rapid7_surface_command
 title: Rapid7 Surface Command
-description: Surface Command gives you full visibilty over your assets and identies across multiple technology platforms
+description: Surface Command gives you full visibility over your assets and identities across multiple technology platforms
 version: 1.0.0
 version_history:
 - 1.0.0 - Initial plugin
@@ -12,26 +12,30 @@ supported_versions: [v1]
 vendor: rapid7
 support: rapid7
 status: []
-tags: [caasm, rapid7, surface_command]
+tags: [caasm, rapid7, surface_command, surface, command]
 connection_version: 1
 hub_tags:
   use_cases: [data_enrichment]
   keywords: [rapid7, cloud_enabled]
   features: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/example
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/rapid7_surface_command
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.rapid7.com
 
 key_features:
   - Query Surface Command Data
 
-requirements: _This plugin does not contain any requirements._
+requirements:
+  - User or Organization Key from the Insight Platform. To create one follow [Generate User API Key guide](https://docs.rapid7.com/insight/managing-platform-api-keys/#generating-a-user-key)
+  - The Region where your Rapid7 Surface Command instance is hosted. To identify your region, see [Identify Data Region](https://docs.rapid7.com/insight/navigate-the-insight-platform/#check-your-data-region)
+  - A valid Query ID (UUID) from Rapid7 Surface Command. To obtain a Query ID, edit a Saved Query in the Surface Command UI and retrieve its ID from the URL
 
-troubleshooting: This plugin does not contain any troubleshooting information.
+troubleshooting: _This plugin does not contain any troubleshooting information._
 
 cloud_ready: true
 enable_cache: false
+
 sdk:
   type: slim
   version: latest
@@ -55,17 +59,19 @@ connection:
     title: Region
     description: Region
     type: string
-    default: United States
-    example: United States
+    default: us
+    example: us
     required: true
     enum:
-      - United States
-      - United States 2
-      - United States 3
-      - Europe
-      - Canada
-      - Australia
-      - Japan
+      # NOTE: these should match the values of the URL as per the docs at
+      # https://docs.rapid7.com/insight/navigate-the-insight-platform/#check-your-data-region
+      - us
+      - us2
+      - us3
+      - eu
+      - ca
+      - au
+      - ap
 
 actions:
   run_query:
