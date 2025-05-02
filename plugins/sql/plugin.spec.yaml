@@ -3,8 +3,9 @@ extension: plugin
 products: [insightconnect]
 name: sql
 title: SQL
-description: The SQL plugin allows you to run SQL queries
-version: 3.0.7
+description: "[SQLAlchemy](http://docs.sqlalchemy.org/en/latest/) is the Python SQL toolkit and Object Relational Mapper that gives application developers the full power and flexibility of SQL.\nThis plugin allows users to run and execute queries against a SQL database"
+version: 3.0.8
+connection_version: 3
 supported_versions: ["MySQL 8.0.21", "MSSQL 2019 15.0.4223.1", "PostgresSQL 13.0"]
 vendor: rapid7
 support: community
@@ -13,6 +14,13 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/sql
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.sqlalchemy.org/
+key_features:
+  - Run SQL queries
+requirements:
+  - Type of SQL database (MSSQL, MySQL, PostgreSQL)
+  - The host and port of your SQL database
+  - Name of your SQL database
+  - Credentials (username and password) for your SQL database
 tags:
 - sql
 - postgres
@@ -23,8 +31,38 @@ hub_tags:
   features: []
 sdk:
   type: slim
-  version: 5
+  version: 6.3.3
   user: nobody
+  custom_cmd:
+    - ENV TDSVER=8.0
+    - RUN apt-get update && apt-get install -y libxslt-dev libxml2-dev unixodbc unixodbc-dev freetds-dev tdsodbc default-libmysqlclient-dev libpq-dev
+    - RUN pip install --upgrade pip
+    - RUN sed -i.bak 's/# TDS protocol version/tds version = 8.0/' /etc/freetds/freetds.conf
+    - RUN sed -i.bak '/tds version = 8.0/a\ \tclient charset = UTF-8' /etc/freetds/freetds.conf
+links:
+  - "[SQLAlchemy](http://docs.sqlalchemy.org/en/latest/)"
+references:
+  - "[SQLAlchemy](http://docs.sqlalchemy.org/en/latest/)"
+version_history:
+  - 3.0.8 - Bumped `SQLAlchemy` and `psycopg2` and removed 'SQLAlchemy-Utils' | SDK Bump to 6.3.3 | Updated query handling
+  - 3.0.7 - Bumped version of SQLAlchemy used to version 1.2.18 | bump version of SDK used to version 5
+  - 3.0.6 - Update plugin runtime to InsightConnect
+  - 3.0.5 - Update pymssql version library to support latest MSSQL update 2019 15.0.4223.1
+  - 3.0.4 - Fix issue with get method's keyword argument in Query action
+  - 3.0.3 - Change example input Port in Connection | Update file util.py to Python3
+  - 3.0.2 - Add default PORT for MSSQL and MySQL connection
+  - 3.0.1 - Close database connection after use
+  - 3.0.0 - Add example input and title in connection and Query action | Update python version to `python-3-37-plugin:3` | Add `USER` in Dockerfile | Update `psycopg2` and `mysqlclient` version | Code refactor in connection.py, util.py and Query action.py
+  - 2.0.7 - Add supported databases as a drop-down list | Add example inputs
+  - 2.0.6 - Fix issue where connection test always success
+  - 2.0.5 - New spec and help.md format for the Extension Library
+  - 2.0.4 - Add support for Microsoft SQL server
+  - 2.0.3 - Fix issue where credentials used incorrect username | Update help
+  - 2.0.2 - Fix issue where credentials was spelled wrong in connection
+  - 2.0.1 - Add MSSQL support
+  - 2.0.0 - Update to new credential types | Rename "query" action to "Query"
+  - 1.0.0 - Add port to connection, make results array of objects | Support web server mode
+  - 0.1.0 - Initial plugin
 connection:
   type:
     title: Type

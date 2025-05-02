@@ -1,7 +1,7 @@
 # Description
 
 [SQLAlchemy](http://docs.sqlalchemy.org/en/latest/) is the Python SQL toolkit and Object Relational Mapper that gives application developers the full power and flexibility of SQL.
-This plugin allows users to run and execute queries against a SQL database.
+This plugin allows users to run and execute queries against a SQL database
 
 # Key Features
 
@@ -23,17 +23,17 @@ This plugin allows users to run and execute queries against a SQL database.
 # Documentation
 
 ## Setup
-  
+
 The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|credentials|credential_username_password|None|True|Database username and password|None|{ "username": "user@example.com", "password": "mypassword"}|
-|db|string|None|True|Database name|None|database_name|
-|host|string|None|True|Database hostname|None|198.51.100.1|
-|port|string|None|False|Database port|None|1433|
-|type|string|None|True|Database type (MSSQL, MySQL, PostgreSQL)|['MSSQL', 'MySQL', 'PostgreSQL']|MySQL|
-  
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|credentials|credential_username_password|None|True|Database username and password|None|{ "username": "user@example.com", "password": "mypassword"}|None|None|
+|db|string|None|True|Database name|None|database_name|None|None|
+|host|string|None|True|Database hostname|None|198.51.100.1|None|None|
+|port|string|None|False|Database port|None|1433|None|None|
+|type|string|None|True|Database type (MSSQL, MySQL, PostgreSQL)|["MSSQL", "MySQL", "PostgreSQL"]|MySQL|None|None|
+
 Example input:
 
 ```
@@ -55,15 +55,15 @@ Example input:
 
 
 #### Query
-  
+
 This action is used to run an arbitrary SQL query against the connected database
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|parameters|object|None|False|Parameters for query|None|{ "name": "user" }|
-|query|string|None|True|Query to run|None|SELECT * FROM example WHERE name=:name|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|parameters|object|None|False|Parameters for query|None|{ "name": "user" }|None|None|
+|query|string|None|True|Query to run|None|SELECT * FROM example WHERE name=:name|None|None|
   
 Example input:
 
@@ -80,20 +80,28 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|header|[]string|False|Array of header fields for the columns|["name", "surname", "index", "alias"]|', '|results|[]object|False|Result rows, each as an object with header keys|[{"name": "User", "index": "1", "Surname": "Example", "alias": "Test"}]|
+|header|[]string|False|Array of header fields for the columns|["name", "surname", "index", "alias"]|
+|results|[]object|False|Result rows, each as an object with header keys|[{"name": "User", "index": "1", "Surname": "Example", "alias": "Test"}]|
 |status|string|True|Status message|operation success|
   
 Example output:
 
 ```
 {
-  "header": "name",
-  "results": {
-    "Surname": "Example",
-    "alias": "Test",
-    "index": "1",
-    "name": "User"
-  },
+  "header": [
+    "name",
+    "surname",
+    "index",
+    "alias"
+  ],
+  "results": [
+    {
+      "Surname": "Example",
+      "alias": "Test",
+      "index": "1",
+      "name": "User"
+    }
+  ],
   "status": "operation success"
 }
 ```
@@ -110,10 +118,11 @@ Example output:
 
 ## Troubleshooting
   
-*There is no troubleshooting for this plugin.*
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 3.0.8 - Bumped `SQLAlchemy` and `psycopg2` and removed 'SQLAlchemy-Utils' | SDK Bump to 6.3.3 | Updated query handling
 * 3.0.7 - Bumped version of SQLAlchemy used to version 1.2.18 | bump version of SDK used to version 5
 * 3.0.6 - Update plugin runtime to InsightConnect
 * 3.0.5 - Update pymssql version library to support latest MSSQL update 2019 15.0.4223.1
