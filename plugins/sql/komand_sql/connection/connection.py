@@ -74,7 +74,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 return {"status": "Success"}
             except Exception as error:
                 raise ConnectionTestException(
-                    cause="Unable to connect to the server.", assistance="Check connection credentials.", data=error
+                    cause="Unable to connect to the server.",
+                    assistance="Check connection credentials.",
+                    data=error,
                 )
             finally:
                 conn.session.close()
