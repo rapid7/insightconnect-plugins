@@ -28,7 +28,17 @@ def with_connection(action):
 
 
 class ActiveDirectoryLdapAPI:
-    def __init__(self, logger=None, use_ssl=None, host=None, port=None, referrals=None, user_name=None, password=None):
+    def __init__(
+        self,
+        logger=None,
+        use_ssl=None,
+        host=None,
+        port=None,
+        referrals=None,
+        user_name=None,
+        password=None,
+        use_channel_binding=None,
+    ):
         self.logger = logger
         self.use_ssl = use_ssl
         self.host = host
@@ -36,6 +46,7 @@ class ActiveDirectoryLdapAPI:
         self.referrals = referrals
         self.user_name = user_name
         self.password = password
+        self.use_channel_binding = use_channel_binding
 
         set_library_log_detail_level(ERROR)
         set_library_log_hide_sensitive_data(True)
@@ -78,7 +89,7 @@ class ActiveDirectoryLdapAPI:
                 server=server,
                 user=self.user_name,
                 password=self.password,
-                auto_bind=True,
+                auto_bind=ldap3.AUTO_BIND_TLS_BEFORE_BIND if self.use_channel_binding else True,
                 auto_referrals=self.referrals,
                 authentication=authentication,
             )
