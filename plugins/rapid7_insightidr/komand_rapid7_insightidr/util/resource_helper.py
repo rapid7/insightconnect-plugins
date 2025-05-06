@@ -2,7 +2,7 @@ import asyncio
 import base64
 import json
 import re
-from typing import Dict, List
+from typing import Any, Dict, List
 
 import aiohttp
 import requests
@@ -202,7 +202,7 @@ class ResourceHelper(object):
         return self.make_request(path=endpoint)
 
     @staticmethod
-    def extract_and_fix_json_all_strings(text: str) -> Dict[str, str]:
+    def extract_and_fix_json_all_strings(text: str) -> Dict[str, Any]:
         # Extract JSON-like content (enclosed in curly braces)
         match = re.search(r"\{.*}", text, re.DOTALL)
         if not match:
