@@ -1,38 +1,25 @@
-from sqlalchemy_utils import analyze
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-def generate_results(conn_type, connection, query, parameters, logger):
+def generate_results(connection, query, parameters, logger):  # noqa: MC0001
     output = {}
     results = []
-    operation = None
-    rows_affected = None
     header = None
 
-    if conn_type.lower() != "mssql":
-        analyze_response = {}
-        try:
-            analyze_response = analyze(connection.session, query).plan
-            logger.info(analyze_response)
-            rows_affected = analyze_response["Plan Rows"]
-            operation = analyze_response["Operation"]
-        except KeyError:
-            if analyze_response.get("Plan Rows", False):
-                rows_affected = analyze_response["Plan Rows"]
-            else:
-                rows_affected = 0
-            operation = "unknown"
-        except Exception as error:
-            logger.info(error)
-            operation = "unknown"
+    try:
+        if len(parameters) == 0:
+            rows = connection.session.execute(query)
+        else:
+            rows = connection.session.execute(query, parameters)
+        rows_affected = rows.rowcount
 
-    if len(parameters) == 0:
-        rows = connection.session.execute(query)
-    else:
-        rows = connection.session.execute(query, parameters)
+    except Exception as error:
+        logger.error(f"Error executing query {query}. Error: {error}")
+        return {"status": "error", "error": str(error)}
 
-    if rows.is_insert or operation == "Insert":
+    if query.strip().lower().startswith(("insert", "update", "delete")):
         connection.session.commit()
-        return {"status": f"successfully inserted {rows_affected} rows."}
+        return {"status": f"Successfully affected {rows_affected} rows."}
 
     if not rows.returns_rows:
         connection.session.commit()
@@ -51,7 +38,7 @@ def generate_results(conn_type, connection, query, parameters, logger):
             for j, col in enumerate(row.keys()):
                 try:
                     v = str(row[col])
-                except Exception:
+                except PluginException:
                     v = row[col]
                 result_row[header[j]] = v
             results.append(result_row)

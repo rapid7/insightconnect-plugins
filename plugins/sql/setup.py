@@ -2,13 +2,14 @@
 from setuptools import setup, find_packages
 
 
-setup(name="sql-rapid7-plugin",
-      version="3.0.7",
-      description="The SQL plugin allows you to run SQL queries",
-      author="rapid7",
-      author_email="",
-      url="",
-      packages=find_packages(),
-      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_sql']
-      )
+setup(
+    name="sql-rapid7-plugin",
+    version="3.0.8",
+    description="[SQLAlchemy](http://docs.sqlalchemy.org/en/latest/) is the Python SQL toolkit and Object Relational Mapper that gives application developers the full power and flexibility of SQL.This plugin allows users to run and execute queries against a SQL database",
+    author="rapid7",
+    author_email="",
+    url="",
+    packages=find_packages(),
+    install_requires=["insightconnect-plugin-runtime"],  # Add third-party dependencies to requirements.txt, not here!
+    entry_points={"console_scripts": ["komand_sql = bin.komand_sql:main"]},
+)
