@@ -32,7 +32,7 @@ The connection configuration accepts the following parameters:
 |chase_referrals|boolean|True|True|Allows the plugin to follow referrals from the specified Active Directory server to other Active Directory servers|None|True|None|None|
 |host|string|None|True|Server Host, e.g. example.com|None|example.com|None|None|
 |port|integer|389|True|Port, e.g. 389|None|389|None|None|
-|use_channel_binding|boolean|None|False|Enable this option to require a secure TLS channel before binding, as needed for LDAP connections that enforce channel binding|None|False|None|None|
+|use_channel_binding|boolean|False|False|Enable this option to require a secure TLS channel before binding, as needed for LDAP connections that enforce channel binding|None|False|None|None|
 |use_ssl|boolean|None|True|Use SSL?|None|True|None|None|
 |username_password|credential_username_password|None|True|Username and password|None|{"username":"user1", "password":"mypassword"}|None|None|
 

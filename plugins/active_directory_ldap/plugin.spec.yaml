@@ -350,6 +350,7 @@ connection:
     type: boolean
     description: Enable this option to require a secure TLS channel before binding, as needed for LDAP connections that enforce channel binding
     required: false
+    default: false
     example: false
   username_password:
     title: Username and Password

@@ -37,7 +37,7 @@ class ActiveDirectoryLdapAPI:
         referrals=None,
         user_name=None,
         password=None,
-        use_channel_binding=False,
+        use_channel_binding=None,
     ):
         self.logger = logger
         self.use_ssl = use_ssl

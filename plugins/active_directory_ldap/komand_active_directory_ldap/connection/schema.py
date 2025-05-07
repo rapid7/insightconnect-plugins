@@ -43,6 +43,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "type": "boolean",
       "title": "Use Channel Bind",
       "description": "Enable this option to require a secure TLS channel before binding, as needed for LDAP connections that enforce channel binding",
+      "default": false,
       "order": 4
     },
     "use_ssl": {
