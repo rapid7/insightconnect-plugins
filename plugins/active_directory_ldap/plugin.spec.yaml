@@ -9,7 +9,7 @@ description: "[AD LDAP](https://docs.microsoft.com/en-us/openspecs/windows_proto
   \ Active Directory service](https://social.technet.microsoft.com/wiki/contents/articles/5392.active-directory-ldap-syntax-filters.aspx)\
   \ to programmatically manage and query an Active Directory environment"
 version: 10.0.0
-connection_version: 10
+connection_version: 9
 supported_versions: [Azure Active Directory 2.0.89.0]
 fedramp_ready: true
 vendor: rapid7
