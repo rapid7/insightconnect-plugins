@@ -62,7 +62,6 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "chase_referrals",
     "host",
     "port",
-    "use_channel_binding",
     "use_ssl",
     "username_password"
   ],
