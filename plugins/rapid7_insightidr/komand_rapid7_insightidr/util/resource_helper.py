@@ -2,7 +2,7 @@ import asyncio
 import base64
 import json
 import re
-from typing import List
+from typing import Any, Dict, List
 
 import aiohttp
 import requests
@@ -202,6 +202,43 @@ class ResourceHelper(object):
         return self.make_request(path=endpoint)
 
     @staticmethod
+    def extract_and_fix_json_all_strings(text: str) -> Dict[str, Any]:
+        # Extract JSON-like content (enclosed in curly braces)
+        match = re.search(r"\{.*}", text, re.DOTALL)
+        if not match:
+            raise ValueError("No JSON-like fragment found in the input string")
+
+        json_fragment = match.group()
+
+        # Fix broken stringified arrays and unescaped control characters
+        def fix_broken_string_arrays_and_control_chars(fragment: str) -> str:
+            def replacer(match: re.Match) -> str:
+                key = match.group(1)
+                raw_value = match.group(2)
+
+                # If it looks like a broken stringified array (["..."])
+                if raw_value.startswith('["') and raw_value.endswith('"]'):
+                    inner = raw_value[1:-1]
+                    inner = inner.replace('"', '\\"')  # Escape inner quotes
+                    inner = inner.replace("\n", "\\n").replace("\r", "\\r")  # Escape control characters
+                    fixed_value = f'"{inner}"'
+                    return f'"{key}":{fixed_value}'
+
+                return match.group(0)  # Leave other values unchanged
+
+            # Match fields where the value is a stringified array (possibly malformed)
+            pattern = r'"([^"]+)"\s*:\s*"(\[.*?\])"'
+            return re.sub(pattern, replacer, fragment, flags=re.DOTALL)
+
+        fixed_json_str = fix_broken_string_arrays_and_control_chars(json_fragment)
+
+        # Attempt to parse the corrected JSON string
+        try:
+            return json.loads(fixed_json_str)
+        except json.decoder.JSONDecodeError:
+            return json.loads(json.dumps(fixed_json_str))
+
+    @staticmethod
     async def _get_log_entries_with_labels(connection: Connection, log_entries: [dict]) -> [dict]:  # noqa: C901
         label_ids = set()
         for log_entry in log_entries:
@@ -227,12 +264,7 @@ class ResourceHelper(object):
         new_log_entries: [dict] = []
         for log_entry in log_entries:
             new_log_entry = dict(log_entry)
-            match = re.search(r"\{.*}", log_entry.get("message", "{}"))
-
-            try:
-                new_log_entry["message"] = json.loads(match.group(0))
-            except json.decoder.JSONDecodeError:
-                new_log_entry["message"] = json.loads(json.dumps(match.group(0)))
+            new_log_entry["message"] = ResourceHelper.extract_and_fix_json_all_strings(log_entry.get("message", "{}"))
 
             entry_labels = []
             for label in log_entry.get("labels", []):

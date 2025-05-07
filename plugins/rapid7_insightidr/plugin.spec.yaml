@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 11.0.3
+version: 11.0.4
 connection_version: 5
 supported_versions: ["Latest release successfully tested on 2024-09-10."]
 vendor: rapid7
@@ -32,9 +32,10 @@ key_features:
   - "Incident Response and Investigations"
 sdk:
   type: full
-  version: 6.2.6
+  version: 6.3.3
   user: nobody
 version_history:
+  - "11.0.4 - Added support for parsing improperly formatted JSON-like strings | SDK bump to 6.3.3"
   - "11.0.3 - Added log entry validation using regular expressions | SDK bump to 6.2.6"
   - "11.0.2 - Updating descriptions for 'set_priority_of_investigation' & 'set_disposition_of_investigation'"
   - "11.0.1 - Updating `Advanced Query on Log` description"
