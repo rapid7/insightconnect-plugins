@@ -17,7 +17,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install prospector[with_bandit]==1.9.0
+          pip install prospector[with_bandit]==1.16.1
+          # Version 3.0.0 raised KeyError, this pins it to working version
+          pip install snowballstemmer==2.2.0
 
       - name: Prospector
         run: |
