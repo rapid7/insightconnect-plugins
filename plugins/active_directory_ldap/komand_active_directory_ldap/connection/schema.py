@@ -7,12 +7,14 @@ class Input:
     CHASE_REFERRALS = "chase_referrals"
     HOST = "host"
     PORT = "port"
+    USE_CHANNEL_BINDING = "use_channel_binding"
     USE_SSL = "use_ssl"
     USERNAME_PASSWORD = "username_password"
 
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -22,7 +24,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "title": "Chase Referrals",
       "description": "Allows the plugin to follow referrals from the specified Active Directory server to other Active Directory servers",
       "default": true,
-      "order": 5
+      "order": 6
     },
     "host": {
       "type": "string",
@@ -37,6 +39,13 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "default": 389,
       "order": 2
     },
+    "use_channel_binding": {
+      "type": "boolean",
+      "title": "Use Channel Bind",
+      "description": "Enable this option to require a secure TLS channel before binding, as needed for LDAP connections that enforce channel binding",
+      "default": false,
+      "order": 4
+    },
     "use_ssl": {
       "type": "boolean",
       "title": "Use SSL",
@@ -47,7 +56,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "$ref": "#/definitions/credential_username_password",
       "title": "Username and Password",
       "description": "Username and password",
-      "order": 4
+      "order": 5
     }
   },
   "required": [
@@ -86,7 +95,8 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     }
   }
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
