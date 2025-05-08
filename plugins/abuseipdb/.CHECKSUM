@@ -1,27 +1,27 @@
 {
-	"spec": "a16af347b0be8f51bd8d7af0baffaf4e",
-	"manifest": "f5548db9bb93ab015be8fbea0eaf8a21",
-	"setup": "2990c8cde61711991af6adc2bfeeedfb",
+	"spec": "a6095a594f34e78d2426c5d2ac13b8fe",
+	"manifest": "33cc8fa6cfce9ae59be3c8e94bcd4c19",
+	"setup": "604c71b0e4ae6e844ae16f301d10048e",
 	"schemas": [
 		{
 			"identifier": "check_cidr/schema.py",
-			"hash": "dea92b37791d025d7c7fe788db6a06e2"
+			"hash": "fa66100838d27a030f6c7f060efacefd"
 		},
 		{
 			"identifier": "check_ip/schema.py",
-			"hash": "4789907ca647b874877479ecf4a3868c"
+			"hash": "51b457cc36218c774619654da1161dd1"
 		},
 		{
 			"identifier": "get_blacklist/schema.py",
-			"hash": "85e7e679a99804f185f56a540ffa73fc"
+			"hash": "18d1d08abe9dc53757ba81960d3ac2fb"
 		},
 		{
 			"identifier": "report_ip/schema.py",
-			"hash": "b9931570833afe3d72d305582951c23d"
+			"hash": "cdc5cf04ea2ee51f0608db54d70747ac"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "ea25f7440b9f5d2de1cb0262728b8df4"
+			"hash": "e192d6934cd4cb8c150c4996f8512699"
 		}
 	]
 }

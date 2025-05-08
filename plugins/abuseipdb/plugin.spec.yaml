@@ -3,17 +3,39 @@ extension: plugin
 products: [insightconnect]
 name: abuseipdb
 title: AbuseIPDB
-description: Enables the look up of IP reports, provides list and details of blacklisted IPs, and submissions of abusive IPs
-version: 5.1.0
+description: "[AbuseIPDB](https://www.abuseipdb.com) is a database of reported malicious\
+  \ IP addresses that are involved in malicious activity such as spamming, hack attempts,\
+  \ DDoS attacks, etc.\n\nThis plugin utilizes the [AbuseIPDB API v2](https://docs.abuseipdb.com)\
+  \ to lookup and report malicious IP addresses"
+version: 5.1.1
+connection_version: 5
 vendor: rapid7
 support: community
-supported_versions: ["2022-07-21"]
+supported_versions: ['2022-07-21']
 status: []
 cloud_ready: true
+sdk:
+  type: slim
+  version: 6.3.3
+  user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/abuseipdb
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.abuseipdb.com
+key_features:
+- Look up an IP in the AbuseIP database to identify reported malicious IPs
+- Get a complete list of reported IPs from AbuseIPDB
+- Report an abusive IP address to add to AbuseIP's database
+requirements:
+- Requires a [free AbuseIPDB account](https://www.abuseipdb.com/register) and accompanying
+  API Key
+troubleshooting:
+  - "The `success` output field will be set to `false` if the output body is empty, or if the input cannot be found"
+  - "There's a rate limit on the free API service. The following error messages `429 Client Error: Too Many Requests for url` indicates that threshold has been hit"
+links:
+  - "[AbuseIPDB](https://www.abuseipdb.com)"
+references:
+  - "[AbuseIPDB API](https://docs.abuseipdb.com)"
 tags:
 - ip
 - intelligence
@@ -22,9 +44,32 @@ hub_tags:
   use_cases: [data_enrichment, threat_detection_and_response]
   keywords: [ip, intelligence, abuse, cloud_enabled]
   features: []
+version_history:
+- 5.1.1 - Updated SDK to the latest version (6.3.3)
+- 5.1.0 - Cloud Enabled
+- 5.0.9 - Fix incorrect status code for failed connection test
+- 5.0.8 - Set cloud_ready flag to false | Changed description for output 'found'
+- 5.0.7 - Fix error message in IPv4 search
+- 5.0.6 - Fix none type error in Check CIDR action
+- 5.0.5 - Correct spelling in help.md
+- 5.0.4 - Update to v4 Python plugin runtime
+- 5.0.3 - Add example inputs
+- 5.0.2 - Changed descriptions | Removed duplicated code | Use output constants |
+  Added "f" strings
+- 5.0.1 - New spec and help.md format for the Extension Library
+- 5.0.0 - Mark certain outputs as optional as they are not always returned by the
+  AbuseIPDB service | Clean output of null values
+- 4.0.1 - Transform null value of various output properties of Check IP action to
+  false or empty string.
+- 4.0.0 - Update to APIv2 and new action Get Blacklist
+- 3.0.1 - Improve error handling in the Check IP, Check CIDR, and Report IP actions
+  | Update to use the `komand/python-3-37-slim-plugin` Docker image to reduce plugin
+  size | Run plugin as least privileged user | Add connection test
+- 3.0.0 - Support new credential_secret_key type
+- 2.0.0 - Add `found` output to Check IP action | Support new credential type
+- 1.0.0 - Initial plugin
 enable_cache: false
 types:
-
   blacklisted:
     ipAddress:
       title: IP Address
@@ -36,7 +81,6 @@ types:
       description: Confidence that IP is abusive
       type: string
       required: true
-
   report:
     reportedAt:
       title: Reported At
@@ -106,7 +150,8 @@ actions:
     input:
       address:
         title: IP Address
-        description: IPv4 or IPv6 address e.g. 198.51.100.100, ::1, must be subscribed to accept bitmask wider than 255.255.255.0 (/24)
+        description: IPv4 or IPv6 address e.g. 198.51.100.100, ::1, must be subscribed
+          to accept bitmask wider than 255.255.255.0 (/24)
         type: string
         required: true
         example: 198.51.100.100
@@ -116,7 +161,7 @@ actions:
         type: string
         default: '30'
         required: true
-        example: 30
+        example: "30"
       verbose:
         title: Verbose
         description: When set, reports will include the comment (if any) and the reporter's
@@ -131,77 +176,91 @@ actions:
         description: Queried IP Address
         type: string
         required: false
+        example: 198.51.100.100
       isPublic:
         title: Is Public
         description: Whether or not the IP Address is public
         type: boolean
         required: false
+        example: true
       ipVersion:
         title: IP Version
         description: Version of IP Address
         type: integer
         required: false
+        example: 4
       isWhitelisted:
         title: Is Whitelisted
         description: Whether or not IP Address is whitelisted
         type: boolean
         required: false
+        example: true
       abuseConfidenceScore:
         title: Abuse Confidence Score
         description: Confidence of Abuse
         type: integer
         required: false
+        example: 0
       countryCode:
         title: Country Code
         description: Code of country IP is registered in
         type: string
         required: false
+        example: CN
       usageType:
         title: Usage Type
         description: How IP is used
         type: string
         required: false
+        example: Reserved
       isp:
         title: ISP
         description: Internet Service Provider for IP
         type: string
         required: false
+        example: Tencent Cloud Computing (Beijing) Co. Ltd
       domain:
         title: Domain
         description: Domain Name of IP
         type: string
         required: false
+        example: tencent.com
       countryName:
         title: Country Name
         description: Name of Country IP is registered in
         type: string
         required: false
+        example: China
       totalReports:
         title: Total Reports
         description: Total number of reports of abuse
         type: integer
         required: false
+        example: 0
       numDistinctUsers:
         title: Number of Distinct Users
         description: Number of distinct users who reported IP
         type: integer
         required: false
+        example: 0
       lastReportedAt:
         title: Last Reported At
         description: Date of last report
         type: string
         required: false
+        example: 2022-09-21T13:21:18+00:00
       reports:
         title: Reports
         description: List of reports
         type: '[]report'
         required: false
+        example: []
       found:
         title: Found
         description: Whether an IP address was found, indicating it may be malicious
         type: boolean
         required: false
-
+        example: true
   check_cidr:
     title: Check CIDR
     description: Look up a CIDR address in the database
@@ -211,55 +270,63 @@ actions:
         description: IPv4 address block in CIDR notation e.g. 207.126.144.0/20
         type: string
         required: true
-        example: 207.126.144.0/20
+        example: 207.196.144.0/24
       days:
         title: Days
         description: Check for CIDR reports in the last x days
         type: string
         default: '30'
         required: true
-        example: 30
+        example: "30"
     output:
       networkAddress:
         title: Network Address
         description: Network address in block
         type: string
         required: false
+        example: 207.196.144.0
       netmask:
         title: Netmask
         description: Netmask, ie. 24
         type: string
         required: false
+        example: 255.255.255.0
       minAddress:
         title: Minimum Address
         description: First address in block
         type: string
         required: false
+        example: 207.196.144.0
       maxAddress:
         title: Maximum Address
         description: Last address in block
         type: string
         required: false
+        example: 207.196.144.255
       numPossibleHosts:
         title: Number of Hosts
         description: Number of possible hosts
         type: integer
         required: false
+        example: 111
       addressSpaceDesc:
         title: Address Space Description
         description: Description of address space
         type: string
         required: false
+        example: Internet
       reportedAddress:
         title: Reported IPs
         description: List of reported IPs
         type: '[]reportedIPs'
         required: false
+        example: []
       found:
         title: Found
         description: Whether the CIDR was found in the database
         type: boolean
         required: true
+        example: true
   report_ip:
     title: Report IP
     description: Report an abusive IP address
@@ -290,23 +357,27 @@ actions:
         description: IP address submitted
         type: string
         required: false
+        example: 127.0.0.1
       abuseConfidenceScore:
         title: Abuse Confidence Score
         description: Confidence that reported IP is abusive
         type: integer
         required: false
+        example: 52
       success:
         title: Success
         description: Submission success
         type: boolean
-        required: True
+        required: true
+        example: true
   get_blacklist:
     title: Get Blacklist
     description: List of blacklisted IP addresses
     input:
       confidenceMinimum:
         title: Confidence Minimum
-        description: Minimum confidence to filter by, scaled 0-100, least to most confident
+        description: Minimum confidence to filter by, scaled 0-100, least to most
+          confident
         type: string
         required: true
         example: 90
@@ -322,8 +393,10 @@ actions:
         description: List of abusive IPs
         type: '[]blacklisted'
         required: false
+        example: [ { "ipAddress": "198.51.100.100", "abuseConfidenceScore": "100" }, { "ipAddress": "198.51.100.101", "abuseConfidenceScore": "100" }, { "ipAddress": "198.51.100.102", "abuseConfidenceScore": "100" } ]
       success:
         title: Success
         description: Was the blacklist successfully retrieved
         type: boolean
         required: true
+        example: true
