@@ -9,14 +9,12 @@
 
 # Requirements
 
-* Access API Key
-* Secret Key
-* Mimecast server
-* API Username and Password
+* Mimecast API 2.0 Client ID
+* Mimecast API 2.0 Client Secret
 
 # Supported Product Versions
 
-* Mimecast API 2024-06-18
+* Mimecast API 2.0 2025-06-18
 
 # Documentation
 
@@ -26,21 +24,15 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|access_key|credential_secret_key|None|True|The application access key|None|eWtOL3XZCOwG96BOiFTZRiC5rdvDmP4FFdwU2Y1DC1Us-gh7KyL5trUrZ9aEuzQMV7pPWWxTnPVtsJ6x3fajAh3cRskP0w8hNjaFFVkZB6G9dOytLM2ssQ7HY-p7gJoi|None|None|
-|app_id|string|None|True|Application ID|None|78d2e4b1-8cc2-4806-nt79-6ef332a47374|None|None|
-|app_key|credential_secret_key|None|True|The application key|None|475x54c6-4f61-4fab-8be7-a0710f3859e3|None|None|
-|region|string|EU|True|The region for the Mimecast server|["EU", "DE", "US", "CA", "ZA", "AU", "Offshore", "Sandbox", "USB", "USBCOM"]|EU|None|None|
-|secret_key|credential_secret_key|None|True|The application secret key|None|FgHrtydiP4TynI+rTZF42Qu0FtGuhJtuNM5bDh82goJQHed9kJZ5t/ORwGnI5r2hkl/bzCosZ+KVapJFeaf3Yw==|None|None|
+|client_id|string|None|True|The Mimecast 2.0 Application Client ID|None|ZA7vkbu7NqcfBcGrXyWW8Rzk2sv2un2DCY7GGCX4BFWgJBZM|None|None|
+|client_secret|credential_secret_key|None|True|The Mimecast 2.0 Application Client Secret|None|ohknqKJpCd99XTkHjeVuc2TgYaKWrWn4tEEHCLkXFZhFgDRdcpNGVx3EipX2CvmE|None|None|
 
 Example input:
 
 ```
 {
-  "access_key": "eWtOL3XZCOwG96BOiFTZRiC5rdvDmP4FFdwU2Y1DC1Us-gh7KyL5trUrZ9aEuzQMV7pPWWxTnPVtsJ6x3fajAh3cRskP0w8hNjaFFVkZB6G9dOytLM2ssQ7HY-p7gJoi",
-  "app_id": "78d2e4b1-8cc2-4806-nt79-6ef332a47374",
-  "app_key": "475x54c6-4f61-4fab-8be7-a0710f3859e3",
-  "region": "EU",
-  "secret_key": "FgHrtydiP4TynI+rTZF42Qu0FtGuhJtuNM5bDh82goJQHed9kJZ5t/ORwGnI5r2hkl/bzCosZ+KVapJFeaf3Yw=="
+  "client_id": "ZA7vkbu7NqcfBcGrXyWW8Rzk2sv2un2DCY7GGCX4BFWgJBZM",
+  "client_secret": "ohknqKJpCd99XTkHjeVuc2TgYaKWrWn4tEEHCLkXFZhFgDRdcpNGVx3EipX2CvmE"
 }
 ```
 
@@ -718,39 +710,8 @@ Example output:
   
 *This plugin does not contain any triggers.*
 ### Tasks
-
-
-#### Monitor SIEM Logs
-
-This task is used to monitor and retrieve the latest logs
-
-##### Input
   
-*This task does not contain any inputs.*
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- |
-|data|[]object|True|List of logs|[{"Dir": "Example", "Rcpt": "user@example.com", "RcptHdrType": "To", "Sender": "user1@example.com", "aCode": "1234code", "acc": "ABCD12345", "datetime": "2023-05-09T12:00:00"}]|
-  
-Example output:
-
-```
-{
-  "data": [
-    {
-      "Dir": "Example",
-      "Rcpt": "user@example.com",
-      "RcptHdrType": "To",
-      "Sender": "user1@example.com",
-      "aCode": "1234code",
-      "acc": "ABCD12345",
-      "datetime": "2023-05-09T12:00:00"
-    }
-  ]
-}
-```
+*This plugin does not contain any tasks.*
 
 ### Custom Types
   
@@ -1013,6 +974,7 @@ Example output:
 
 # Version History
 
+* 6.0.0 - Update to actions and triggers to utilize Mimecast API 2.0 | Update connection requirements to Mimecast API 2.0 requirements | Remove task `monitor_siem_logs` | Update third party documentation links for Mimecast API 2.0
 * 5.3.21 - Update Task `monitor_siem_logs` to use new logging and status management | Update SDK to version 6.3.3
 * 5.3.20 - Update Task `monitor_siem_logs` bump default rate limit period to 10 minutes and catch unexpected errors
 * 5.3.19 - Update Task `monitor_siem_logs` to delay retry if a rate limit error is returned from Mimecast | Update SDK to version 6.2.0
@@ -1065,4 +1027,4 @@ Example output:
 
 ## References
 
-* [Mimecast API](https://www.mimecast.com/developer/documentation)
+* [Mimecast API](https://developer.services.mimecast.com/api-overview)

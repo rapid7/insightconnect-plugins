@@ -8,18 +8,16 @@ key_features:
 - Email security
 - Malicious URL and attachment detection
 requirements:
-- Access API Key
-- Secret Key
-- Mimecast server
-- API Username and Password
+- Mimecast API 2.0 Client ID
+- Mimecast API 2.0 Client Secret
 troubleshooting: "For the Create Managed URL action, the URL must include `http://` or `https://` e.g. `http://google.com` Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api-overview/global-base-urls/)"
 links: 
  - "[Mimecast](http://mimecast.com)"
 references:
- - "[Mimecast API](https://www.mimecast.com/developer/documentation)"
-version: 5.3.21
-connection_version: 5
-supported_versions: ["Mimecast API 2024-06-18"]
+ - "[Mimecast API](https://developer.services.mimecast.com/api-overview)"
+version: 6.0.0
+connection_version: 6
+supported_versions: ["Mimecast API 2.0 2025-06-18"]
 vendor: rapid7
 support: rapid7
 cloud_ready: true
@@ -40,6 +38,7 @@ hub_tags:
   keywords: [mimecast, email, cloud_enabled]
   features: []
 version_history:
+- "6.0.0 - Update to actions and triggers to utilize Mimecast API 2.0 | Update connection requirements to Mimecast API 2.0 requirements | Remove task `monitor_siem_logs` | Update third party documentation links for Mimecast API 2.0"
 - "5.3.21 - Update Task `monitor_siem_logs` to use new logging and status management | Update SDK to version 6.3.3"
 - "5.3.20 - Update Task `monitor_siem_logs` bump default rate limit period to 10 minutes and catch unexpected errors"
 - "5.3.19 - Update Task `monitor_siem_logs` to delay retry if a rate limit error is returned from Mimecast | Update SDK to version 6.2.0"
@@ -892,47 +891,17 @@ types:
       type: integer
       required: false
 connection:
-  region:
-    title: Region
-    description: The region for the Mimecast server
+  client_id:
+    title: Client ID
+    description: The Mimecast 2.0 Application Client ID
     type: string
-    enum:
-      - EU
-      - DE
-      - US
-      - CA
-      - ZA
-      - AU
-      - Offshore
-      - Sandbox
-      - USB
-      - USBCOM
+    example: ZA7vkbu7NqcfBcGrXyWW8Rzk2sv2un2DCY7GGCX4BFWgJBZM
     required: true
-    example: EU
-    default: EU
-  app_id:
-    title: App ID
-    description: Application ID
-    type: string
-    example: 78d2e4b1-8cc2-4806-nt79-6ef332a47374
-    required: true
-  app_key:
-    title: Application Key
-    description: The application key
+  client_secret:
+    title: Client Secret
+    description: The Mimecast 2.0 Application Client Secret
     type: credential_secret_key
-    example: 475x54c6-4f61-4fab-8be7-a0710f3859e3
-    required: true
-  secret_key:
-    title: Application Secret Key
-    description: The application secret key
-    type: credential_secret_key
-    example: FgHrtydiP4TynI+rTZF42Qu0FtGuhJtuNM5bDh82goJQHed9kJZ5t/ORwGnI5r2hkl/bzCosZ+KVapJFeaf3Yw==
-    required: true
-  access_key:
-    title: Application Access Key
-    description: The application access key
-    type: credential_secret_key
-    example: eWtOL3XZCOwG96BOiFTZRiC5rdvDmP4FFdwU2Y1DC1Us-gh7KyL5trUrZ9aEuzQMV7pPWWxTnPVtsJ6x3fajAh3cRskP0w8hNjaFFVkZB6G9dOytLM2ssQ7HY-p7gJoi
+    example: ohknqKJpCd99XTkHjeVuc2TgYaKWrWn4tEEHCLkXFZhFgDRdcpNGVx3EipX2CvmE
     required: true
 actions:
   track_messages:
@@ -1547,14 +1516,3 @@ actions:
         type: "pagination"
         required: false
         example: {"pageSize": 25,"pageToken": "9de5069c5afe602b2ea0a04b66beb2c0"}
-tasks:
-  monitor_siem_logs:
-    title: Monitor SIEM Logs
-    description: Monitor and retrieve the latest logs
-    output:
-      data:
-        title: Data
-        description: List of logs
-        type: "[]object"
-        required: true
-        example: [{"Dir": "Example", "Rcpt": "user@example.com", "RcptHdrType": "To", "Sender": "user1@example.com","aCode": "1234code","acc": "ABCD12345", "datetime": "2023-05-09T12:00:00"}]
