@@ -1,13 +1,12 @@
 # Description
 
-[Python](https://www.python.org/) is a language for fast development and system integration. This plugin runs Python 3.12.8 with its standard library and other libraries such as:
+[Python](https://www.python.org/) is a language for fast development and integration. The plugin runs Python 3.12.8 with standard library and libraries like:
 
 * [requests](https://requests.readthedocs.io/en/latest/)
 * [arrow](https://pypi.org/project/arrow/)
-* [lxml](http://lxml.de/)
 * [beautifulsoup](https://www.crummy.com/software/BeautifulSoup/)
 
-It supports loading custom modules and passing credentials (`username`, `password`, `secret_key`)
+It supports loading custom modules and passing credentials (`username`, `password`, `secret_key`, `secret_credential_1`, `secret_credential_2`, `secret_credential_3`)
 
 # Key Features
 
@@ -32,6 +31,9 @@ The connection configuration accepts the following parameters:
 |modules|[]string|None|False|List of third-party modules to install for use in the supplied Python script|None|["pandas", "numpy"]|None|None|
 |script_secret_key|credential_secret_key|None|False|Credential secret key available in script as python variable (`secret_key`)|None|{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}|None|None|
 |script_username_and_password|credential_username_password|None|False|Username and password available in script as python variables (`username`, `password`)|None|{"username": "user", "password": "mypassword"}|None|None|
+|secret_credential_1|credential_secret_key|None|False|Additional secret connection field available in script as Python variable (`secret_credential_1`)|None|{"secretKey": "s083jh3ggJbsunb92hwbvacaiNAvsiz"}|None|None|
+|secret_credential_2|credential_secret_key|None|False|Additional secret connection field available in script as Python variable (`secret_credential_2`)|None|{"secretKey": "PXctwsnevfobd9sbskb2cXistwb0"}|None|None|
+|secret_credential_3|credential_secret_key|None|False|Additional secret connection field available in script as Python variable (`secret_credential_3`)|None|{"secretKey": "Mhga68YusiBo00shVsziapan7wgbw"}|None|None|
 |timeout|integer|60|True|Timeout (in seconds) for installing third-party modules|None|120|None|None|
 
 Example input:
@@ -48,6 +50,15 @@ Example input:
   "script_username_and_password": {
     "password": "mypassword",
     "username": "user"
+  },
+  "secret_credential_1": {
+    "secretKey": "s083jh3ggJbsunb92hwbvacaiNAvsiz"
+  },
+  "secret_credential_2": {
+    "secretKey": "PXctwsnevfobd9sbskb2cXistwb0"
+  },
+  "secret_credential_3": {
+    "secretKey": "Mhga68YusiBo00shVsziapan7wgbw"
   },
   "timeout": 60
 }
@@ -114,6 +125,7 @@ Example output:
 
 # Version History
 
+* 5.2.0 - Added 3 additional `Secret Credential Fields` as optional connection inputs
 * 5.1.2 - `timeout` description updated within `run` action | Updated SDK to the latest version (6.3.3)
 * 5.1.1 - Updated SDK to the latest version (6.2.5)
 * 5.1.0 - Action `Run`: Added `timeout` optional parameter | Updated SDK to the latest version

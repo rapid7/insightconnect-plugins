@@ -164,7 +164,7 @@ class Run(insightconnect_plugin_runtime.Action):
     ) -> str:
         """
         This function adds credentials to the function entered by the user. It looks for connection script
-        credentials: username, password, secret_key, and adds all of them to variables inside the function.
+        credentials: username, password, secret_key, secret_credential_1, secret_credential_2, secret_credential_3 and adds all of them to variables inside the function.
         :param function_: Python script function
         :type: str
 
