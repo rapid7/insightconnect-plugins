@@ -22,6 +22,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
             "username": params.get(Input.SCRIPT_USERNAME_AND_PASSWORD, {}).get("username"),
             "password": params.get(Input.SCRIPT_USERNAME_AND_PASSWORD, {}).get("password"),
             "secret_key": params.get(Input.SCRIPT_SECRET_KEY, {}).get("secretKey"),
+            "secret_credential_1": params.get(Input.SECRET_CREDENTIAL_1, {}).get("secretKey"),
+            "secret_credential_2": params.get(Input.SECRET_CREDENTIAL_2, {}).get("secretKey"),
+            "secret_credential_3": params.get(Input.SECRET_CREDENTIAL_3, {}).get("secretKey"),
         }
 
     def test(self) -> Dict[str, Any]:

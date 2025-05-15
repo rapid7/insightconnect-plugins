@@ -7,6 +7,9 @@ class Input:
     MODULES = "modules"
     SCRIPT_SECRET_KEY = "script_secret_key"
     SCRIPT_USERNAME_AND_PASSWORD = "script_username_and_password"
+    SECRET_CREDENTIAL_1 = "secret_credential_1"
+    SECRET_CREDENTIAL_2 = "secret_credential_2"
+    SECRET_CREDENTIAL_3 = "secret_credential_3"
     TIMEOUT = "timeout"
 
 
@@ -24,26 +27,44 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "items": {
         "type": "string"
       },
-      "order": 1
+      "order": 6
     },
     "script_secret_key": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "Script Secret Key",
       "description": "Credential secret key available in script as python variable (`secret_key`)",
-      "order": 3
+      "order": 1
     },
     "script_username_and_password": {
       "$ref": "#/definitions/credential_username_password",
       "title": "Script Username and Password",
       "description": "Username and password available in script as python variables (`username`, `password`)",
+      "order": 2
+    },
+    "secret_credential_1": {
+      "$ref": "#/definitions/credential_secret_key",
+      "title": "Secret Credential 1",
+      "description": "Additional secret connection field available in script as Python variable (`secret_credential_1`)",
+      "order": 3
+    },
+    "secret_credential_2": {
+      "$ref": "#/definitions/credential_secret_key",
+      "title": "Secret Credential 2",
+      "description": "Additional secret connection field available in script as Python variable (`secret_credential_2`)",
       "order": 4
+    },
+    "secret_credential_3": {
+      "$ref": "#/definitions/credential_secret_key",
+      "title": "Secret Credential 3",
+      "description": "Additional secret connection field available in script as Python variable (`secret_credential_3`)",
+      "order": 5
     },
     "timeout": {
       "type": "integer",
       "title": "Timeout",
       "description": "Timeout (in seconds) for installing third-party modules",
       "default": 60,
-      "order": 2
+      "order": 7
     }
   },
   "required": [
