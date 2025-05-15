@@ -146,9 +146,9 @@ class ResourceHelper(object):
         if response.status_code >= 500:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
 
-    def make_request(  # noqa: C901
+    def make_request(
         self, path: str, method: str = "GET", params: dict = None, json_data: dict = None, files: dict = None
-    ):  # pylint: disable=too-many-positional-arguments, too-complex
+    ):  # noqa: MC0001
         try:
             response = self.session.request(
                 method=method.upper(),
