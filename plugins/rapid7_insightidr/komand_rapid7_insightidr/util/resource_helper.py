@@ -147,13 +147,13 @@ class ResourceHelper(object):
 
     def _handle_response_status(
         self, response: requests.Response, method: str, path: str
-    ) -> Union[requests.Response, bytes, dict, None]:
+    ) -> None:
         """
         Handles the response status code and raises appropriate exceptions
         :param response: Response object from the request
         :param method: string representing the HTTP method used (GET, POST, etc.)
         :param path: string representing the API endpoint path
-        :return: Response
+        :return: None
         """
         if response.status_code == 400:
             raise PluginException(
@@ -188,9 +188,6 @@ class ResourceHelper(object):
             ):
                 return response.content
             return clean(response.json())
-
-        # Explicit return to satisfy static analyzers
-        return None
 
     def make_request(  # noqa: C901
         self,
