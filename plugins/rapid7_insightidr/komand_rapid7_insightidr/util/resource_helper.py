@@ -2,7 +2,7 @@ import asyncio
 import base64
 import json
 import re
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Union
 
 import aiohttp
 import requests
@@ -147,7 +147,7 @@ class ResourceHelper(object):
 
     def _handle_response_status(
         self, response: requests.Response, method: str, path: str
-    ) -> requests.Response:
+    ) -> Union[requests.Response, bytes, dict, None]:
         """
         Handles the response status code and raises appropriate exceptions
         :param response: Response object from the request
@@ -188,6 +188,9 @@ class ResourceHelper(object):
             ):
                 return response.content
             return clean(response.json())
+
+        # Explicit return to satisfy static analyzers
+        return None
 
     def make_request(  # noqa: C901
         self,
