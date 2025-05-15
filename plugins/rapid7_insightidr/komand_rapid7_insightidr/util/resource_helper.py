@@ -148,7 +148,7 @@ class ResourceHelper(object):
 
     def make_request(
         self, path: str, method: str = "GET", params: dict = None, json_data: dict = None, files: dict = None
-    ):  # noqa: C901  # pylint: disable=too-many-positional-arguments
+    ):  # noqa: MC0001, C901  # pylint: disable=too-many-positional-arguments
         try:
             response = self.session.request(
                 method=method.upper(),
