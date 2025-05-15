@@ -129,6 +129,36 @@ class ResourceHelper(object):
             )
             raise PluginException(f"InsightIDR returned a status code of {response.status_code}: {status_code_message}")
 
+    def _handle_response_status(self, response: requests.Response, method: str, path: str) -> requests.Response:
+        """
+        Handles the response status code and raises appropriate exceptions
+        :param response: Response object from the request
+        :param method: string representing the HTTP method used (GET, POST, etc.)
+        :param path: string representing the API endpoint path
+        :return: Response
+        """
+        if response.status_code == 400:
+            raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.text)
+        if response.status_code in [401, 403]:
+            raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
+        if response.status_code == 404:
+            raise PluginException(
+                cause="Resource not found.",
+                assistance="Verify your input is correct and not malformed and try again. If the issue persists, "
+                           "please contact support.",
+                data=response.text,
+            )
+        if 400 < response.status_code < 500:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+        if response.status_code >= 500:
+            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
+        if response.status_code == 204:
+            return response
+        if 200 <= response.status_code < 300:
+            if method == "GET" and "attachments/" in path and not path.endswith("/metadata"):
+                return response.content
+            return clean(response.json())
+
     def make_request(  # noqa: C901
         self, path: str, method: str = "GET", params: dict = None, json_data: dict = None, files: dict = None
     ):
@@ -140,27 +170,7 @@ class ResourceHelper(object):
                 params=params,
                 files=files,
             )
-            if response.status_code == 400:
-                raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.text)
-            if response.status_code in [401, 403]:
-                raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
-            if response.status_code == 404:
-                raise PluginException(
-                    cause="Resource not found.",
-                    assistance="Verify your input is correct and not malformed and try again. If the issue persists, "
-                    "please contact support.",
-                    data=response.text,
-                )
-            if 400 < response.status_code < 500:
-                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
-            if response.status_code >= 500:
-                raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
-            if response.status_code == 204:
-                return response
-            if 200 <= response.status_code < 300:
-                if method == "GET" and "attachments/" in path and not path.endswith("/metadata"):
-                    return response.content
-                return clean(response.json())
+            self._handle_response_status(response, method, path)
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
         except json.decoder.JSONDecodeError as error:
