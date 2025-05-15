@@ -129,9 +129,26 @@ class ResourceHelper(object):
             )
             raise PluginException(f"InsightIDR returned a status code of {response.status_code}: {status_code_message}")
 
-    def make_request(  # noqa: C901
+    def _handle_response_status(self, response: requests.Response) -> None:
+        """
+        Handles the response status code and raises appropriate exceptions
+        :param response: Response object from the request
+        :return: None
+        """
+        if response.status_code == 400:
+            raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.text)
+        if response.status_code in [401, 403]:
+            raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
+        if response.status_code == 404:
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
+        if 400 < response.status_code < 500:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+        if response.status_code >= 500:
+            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
+
+    def make_request(
         self, path: str, method: str = "GET", params: dict = None, json_data: dict = None, files: dict = None
-    ):
+    ):  # noqa: MC0001
         try:
             response = self.session.request(
                 method=method.upper(),
