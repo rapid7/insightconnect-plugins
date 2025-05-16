@@ -253,17 +253,30 @@ class API:
                     status_code=exception.data.status_code,
                 )
             raise exception
-        if response.status_code == HTTPStatusCodes.UNAUTHORIZED:
+
+        status_code = response.status_code
+        if status_code == HTTPStatusCodes.UNAUTHORIZED:
             json_data = extract_json(response)
-            if json_data.get("fail", [{}])[0].get("code") == "token_expired":
-                self.authenticate()
+            failure_code = json_data.get("fail", [{}])[0].get("code")
+
+            # Check if we are dealing with `token_expired` code in error message
+            if failure_code == "token_expired":
                 self.logger.info("API: Token has expired, attempting re-authentication...")
+                self.authenticate()
                 return self.make_api_request(url, method, headers, json, data, params, return_json, auth)
-        if response.status_code == HTTPStatusCodes.UNAUTHORIZED:
+
+            # Check if we're dealing with `Unauthorized Request` or `token_verification_failed` code in error message
+            elif failure_code in ("Unauthorized Request", "token_verification_failed"):
+                request_id = response.headers.get("x-request-id")
+                self.logger.info(
+                    f"API: Received 'Unauthorized Request' or 'token_verification_failed', setting status code to 500. The request id from response headers ({request_id})."
+                )
+                status_code = HTTPStatusCodes.INTERNAL_SERVER_ERROR
+
             raise APIException(
                 preset=PluginException.Preset.API_KEY,
                 data=response.text,
-                status_code=response.status_code,
+                status_code=status_code,
             )
         if return_json:
             json_data = extract_json(response)
