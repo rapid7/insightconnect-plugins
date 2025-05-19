@@ -53,6 +53,7 @@ class Util:
                 self.filename = filename
                 self.status_code = status_code
                 self.text = "This is some error text"
+                self.headers = {}
                 self.url = url
                 self.gzip = gzip
                 if filename:
