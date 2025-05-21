@@ -1013,6 +1013,7 @@ Example output:
 
 # Version History
 
+* 5.3.22 - Addressed Snyk Vulnerabilities | SDK bump to latest version (6.3.4)
 * 5.3.21 - Update Task `monitor_siem_logs` to use new logging and status management | Update SDK to version 6.3.3
 * 5.3.20 - Update Task `monitor_siem_logs` bump default rate limit period to 10 minutes and catch unexpected errors
 * 5.3.19 - Update Task `monitor_siem_logs` to delay retry if a rate limit error is returned from Mimecast | Update SDK to version 6.2.0
