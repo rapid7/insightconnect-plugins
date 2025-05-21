@@ -28,9 +28,7 @@ class Validate(insightconnect_plugin_runtime.Action):
             )
             messages = response.json()["messages"]
             if not messages:
-                self.logger.info(
-                    "Run: No response from web service, can't determine validity"
-                )
+                self.logger.info("Run: No response from web service, can't determine validity")
                 return {Output.VALIDATED: False}
             status = messages[0]["type"]
             return {Output.VALIDATED: (not status == "error")}

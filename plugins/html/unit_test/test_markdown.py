@@ -48,9 +48,7 @@ class TestMarkdown(TestCase):
         )
 
     def test_markdown_cloud(self):
-        params = {
-            "doc": '<!DOCTYPE html><html><iframe src="https://www.google.com"></iframe></html>'
-        }
+        params = {"doc": '<!DOCTYPE html><html><iframe src="https://www.google.com"></iframe></html>'}
 
         os.environ["PLUGIN_RUNTIME_ENVIRONMENT"] = "cloud"
         test_action = Markdown()
