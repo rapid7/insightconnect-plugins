@@ -13,7 +13,7 @@ supported_versions: [Python 3.12.8]
 fedramp_ready: true
 sdk:
   type: slim
-  version: 6.3.3
+  version: 6.3.4
   user: root
   packages:
   - libxslt-dev
@@ -48,7 +48,7 @@ references: ['[Python 3 Language Reference](https://docs.python.org/3/reference/
 links:
 - '[Python](https://www.python.org/)'
 version_history:
-- 5.2.1 - Addressed Snyk Vulnerability
+- 5.2.1 - Addressed Snyk Vulnerability | SDK bump to latest version (6.3.4)
 - 5.2.0 - Added 3 additional `Secret Credential Fields` as optional connection inputs
 - 5.1.2 - `timeout` description updated within `run` action | Updated SDK to the latest
   version (6.3.3)
