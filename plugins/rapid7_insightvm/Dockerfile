@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 rapid7/insightconnect-python-3-plugin:6.2.6 AS builder
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-plugin:6.3.4 AS builder
 
 WORKDIR /python/src
 
@@ -11,7 +11,7 @@ ADD . /python/src
 RUN pip install .
 RUN pip uninstall -y setuptools
 
-FROM --platform=linux/amd64 rapid7/insightconnect-python-3-plugin:6.2.6
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-plugin:6.3.4
 
 LABEL organization=rapid7
 LABEL sdk=python
@@ -19,6 +19,7 @@ LABEL sdk=python
 WORKDIR /python/src
 
 COPY --from=builder /python/src /python/src
+COPY --from=builder /plugin.spec.yaml /plugin.spec.yaml
 
 RUN apk add --no-cache --virtual .build-deps make gcc libc-dev libffi-dev openssl-dev libxml2-dev libxslt-dev
 
