@@ -125,6 +125,7 @@ Example output:
 
 # Version History
 
+* 5.2.1 - Addressed Snyk Vulnerability
 * 5.2.0 - Added 3 additional `Secret Credential Fields` as optional connection inputs
 * 5.1.2 - `timeout` description updated within `run` action | Updated SDK to the latest version (6.3.3)
 * 5.1.1 - Updated SDK to the latest version (6.2.5)
