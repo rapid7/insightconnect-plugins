@@ -7,13 +7,13 @@ vendor: rapid7
 support: rapid7
 status: []
 description: "[Python](https://www.python.org/) is a language for fast development and integration. The plugin runs Python 3.12.8 with standard library and libraries like:\n\n* [requests](https://requests.readthedocs.io/en/latest/)\n* [arrow](https://pypi.org/project/arrow/)\n* [beautifulsoup](https://www.crummy.com/software/BeautifulSoup/)\n\nIt supports loading custom modules and passing credentials (`username`, `password`, `secret_key`, `secret_credential_1`, `secret_credential_2`, `secret_credential_3`)"
-version: 5.2.0
+version: 5.2.1
 connection_version: 4
 supported_versions: [Python 3.12.8]
 fedramp_ready: true
 sdk:
   type: slim
-  version: 6.3.3
+  version: 6.3.4
   user: root
   packages:
   - libxslt-dev
@@ -48,6 +48,7 @@ references: ['[Python 3 Language Reference](https://docs.python.org/3/reference/
 links:
 - '[Python](https://www.python.org/)'
 version_history:
+- 5.2.1 - Addressed Snyk Vulnerability | SDK bump to latest version (6.3.4)
 - 5.2.0 - Added 3 additional `Secret Credential Fields` as optional connection inputs
 - 5.1.2 - `timeout` description updated within `run` action | Updated SDK to the latest
   version (6.3.3)
