@@ -4,7 +4,7 @@ products: [insightconnect]
 name: netmiko
 title: Netmiko
 description: "[Netmiko](https://github.com/ktbyers/netmiko) is a network device configuration tool that sends commands overSSHv2. Netmiko is a fork of Paramiko. The Netmiko plugin is used to send commands to a network device over SSH. Multiple commands can be sent over in a single SSH session"
-version: 2.0.1
+version: 2.0.2
 connection_version: 2
 supported_versions: ["2024-07-23"]
 cloud_ready: False
@@ -28,13 +28,18 @@ key_features:
 - Multiple SSH commands can be provided in one action
 sdk:
   type: slim
-  version: 6.0.1
+  version: 6.3.4
   user: root
+  custom_cmd:
+    - ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+    - ENV SSL_CERT_DIR=/etc/ssl/certs
+    - ENV REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 links: 
 - "[Paramiko](http://www.paramiko.org/)"
 enable_cache: true
 language: python
 version_history:
+- "2.0.2 - Addressed Snyk Vulnerability | SDK bump to latest version (6.3.4)"
 - "2.0.1 - Update SDK | Patch critical Snyk vulnerability"
 - "2.0.0 - Update `netmiko` and `paramiko` version in requirements | Update to use the `insightconnect-python-3-38-slim-plugin:4` Docker image | Use input and output constants | Code refactor | Add example input and output | Change output title in Execute Configuration Commands and Execute Show Commands actions | Fix bug where error occurs when SSH Key is empty"
 - "1.0.2 - Fix bug where the SSH private key was not being retrieved correctly from the user in the connection"

@@ -2,13 +2,14 @@
 from setuptools import setup, find_packages
 
 
-setup(name="netmiko-rapid7-plugin",
-      version="2.0.1",
-      description="[Netmiko](https://github.com/ktbyers/netmiko) is a network device configuration tool that sends commands overSSHv2. Netmiko is a fork of Paramiko. The Netmiko plugin is used to send commands to a network device over SSH. Multiple commands can be sent over in a single SSH session",
-      author="rapid7",
-      author_email="",
-      url="",
-      packages=find_packages(),
-      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_netmiko']
-      )
+setup(
+    name="netmiko-rapid7-plugin",
+    version="2.0.2",
+    description="[Netmiko](https://github.com/ktbyers/netmiko) is a network device configuration tool that sends commands overSSHv2. Netmiko is a fork of Paramiko. The Netmiko plugin is used to send commands to a network device over SSH. Multiple commands can be sent over in a single SSH session",
+    author="rapid7",
+    author_email="",
+    url="",
+    packages=find_packages(),
+    install_requires=["insightconnect-plugin-runtime"],  # Add third-party dependencies to requirements.txt, not here!
+    entry_points={"console_scripts": ["komand_netmiko = bin.komand_netmiko:main"]},
+)
