@@ -206,7 +206,7 @@ class MimecastAPI:
                 else:
                     self._handle_status_code_response(response, status_code)
 
-    def _handle_rest_call(  # noqa: C901
+    def _handle_rest_call(  # noqa: C901, pylint: disable=too-many-positional-arguments
         self,
         method: str,
         uri: str,
