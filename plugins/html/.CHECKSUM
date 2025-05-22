@@ -1,7 +1,7 @@
 {
-	"spec": "33f280644876cd71ba4112869461350c",
-	"manifest": "1c932692c9520b9afab8ff4b3502b315",
-	"setup": "e6dd8f0161c12fc73e44451284b9ecb8",
+	"spec": "7dcd098f41fc13aac4dc4b3477a95ec3",
+	"manifest": "7dac253e8602842f53585430a6ae7be2",
+	"setup": "7a3f6f48492a9009e69b0faaef49b14e",
 	"schemas": [
 		{
 			"identifier": "docx/schema.py",
@@ -29,7 +29,7 @@
 		},
 		{
 			"identifier": "validate/schema.py",
-			"hash": "03386af7f95c0bdbb8bb255526a10930"
+			"hash": "1ece8f44dfccb9c2d8a209678929dccd"
 		},
 		{
 			"identifier": "connection/schema.py",
