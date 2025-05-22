@@ -85,7 +85,9 @@ Example output:
 
 ```
 {
-  "results": "sudo -s\nroot@buster:/home/vagrant# ls -la\ntotal 125088\ndrwxr-xr-x  9 vagrant vagrant      4096 Mar 31 19:24 .\ndrwxr-xr-x  3 root    root         4096 May 10  2020 ..\n-rw-------  1 vagrant vagrant     74883 Mar 31 19:24 .bash_history\n-rw-r--r--  1 vagrant vagrant       220 May 10  2020 .bash_logout\n-rw-r--r--  1 vagrant vagrant      3685 Sep 20  2020 .bashrc\ndrwxr-xr-x  6 vagrant vagrant      4096 Sep 20  2020 .cache\ndrwxr-xr-x  4 vagrant vagrant      4096 Sep 16  2020 .gem\n-rw-r--r--  1 vagrant vagrant        24 Sep 20  2020 .gitconfig\ndrwx------  3 vagrant vagrant      4096 Sep 16  2020 .gnupg\ndrwxr-xr-x 10 root    root         4096 May  6  2019 go\n-rw-r--r--  1 root    root    127938445 Sep 16  2020 go1.12.5.linux-amd64.tar.gz\ndrwxr-xr-x  4 vagrant vagrant      4096 Sep 20  2020 go_work\ndrwx------  4 vagrant vagrant      4096 Nov 25 00:51 .local\n-rw-r--r--  1 vagrant vagrant       807 May 10  2020 .profile\ndrwx------  2 vagrant vagrant      4096 Nov  2 16:16 .ssh\n-rw-------  1 vagrant vagrant     19449 Mar 23 20:33 .viminfo\nroot@buster:/home/vagrant# "
+  "results": {
+    "results": "sudo -s\nroot@buster:/home/vagrant# ls -la\ntotal 125088\ndrwxr-xr-x  9 vagrant vagrant      4096 Mar 31 19:24 .\ndrwxr-xr-x  3 root    root         4096 May 10  2020 ..\n-rw-------  1 vagrant vagrant     74883 Mar 31 19:24 .bash_history\n-rw-r--r--  1 vagrant vagrant       220 May 10  2020 .bash_logout\n-rw-r--r--  1 vagrant vagrant      3685 Sep 20  2020 .bashrc\ndrwxr-xr-x  6 vagrant vagrant      4096 Sep 20  2020 .cache\ndrwxr-xr-x  4 vagrant vagrant      4096 Sep 16  2020 .gem\n-rw-r--r--  1 vagrant vagrant        24 Sep 20  2020 .gitconfig\ndrwx------  3 vagrant vagrant      4096 Sep 16  2020 .gnupg\ndrwxr-xr-x 10 root    root         4096 May  6  2019 go\n-rw-r--r--  1 root    root    127938445 Sep 16  2020 go1.12.5.linux-amd64.tar.gz\ndrwxr-xr-x  4 vagrant vagrant      4096 Sep 20  2020 go_work\ndrwx------  4 vagrant vagrant      4096 Nov 25 00:51 .local\n-rw-r--r--  1 vagrant vagrant       807 May 10  2020 .profile\ndrwx------  2 vagrant vagrant      4096 Nov  2 16:16 .ssh\n-rw-------  1 vagrant vagrant     19449 Mar 23 20:33 .viminfo\nroot@buster:/home/vagrant# "
+  }
 }
 ```
 
@@ -119,13 +121,14 @@ Example output:
 
 ```
 {
-  "results": "total 125088\ndrwxr-xr-x  9 vagrant vagrant      4096 Mar 31 19:24 .\ndrwxr-xr-x  3 root    root         4096 May 10  2020 ..\n-rw-------  1 vagrant vagrant     74883 Mar 31 19:24 .bash_history\n-rw-r--r--  1 vagrant vagrant       220 May 10  2020 .bash_logout\n-rw-r--r--  1 vagrant vagrant      3685 Sep 20  2020 .bashrc\ndrwxr-xr-x  6 vagrant vagrant      4096 Sep 20  2020 .cache\ndrwxr-xr-x  4 vagrant vagrant      4096 Sep 16  2020 .gem\n-rw-r--r--  1 vagrant vagrant        24 Sep 20  2020 .gitconfig\ndrwx------  3 vagrant vagrant      4096 Sep 16  2020 .gnupg\ndrwxr-xr-x 10 root    root         4096 May  6  2019 go\n-rw-r--r--  1 root    root    127938445 Sep 16  2020 go1.12.5.linux-amd64.tar.gz\ndrwxr-xr-x  4 vagrant vagrant      4096 Sep 20  2020 go_work\ndrwx------  4 vagrant vagrant      4096 Nov 25 00:51 .local\n-rw-r--r--  1 vagrant vagrant       807 May 10  2020 .profile\ndrwx------  2 vagrant vagrant      4096 Nov  2 16:16 .ssh\n-rw-------  1 vagrant vagrant     19449 Mar 23 20:33 .viminfo"
+  "results": {
+    "results": "total 125088\ndrwxr-xr-x  9 vagrant vagrant      4096 Mar 31 19:24 .\ndrwxr-xr-x  3 root    root         4096 May 10  2020 ..\n-rw-------  1 vagrant vagrant     74883 Mar 31 19:24 .bash_history\n-rw-r--r--  1 vagrant vagrant       220 May 10  2020 .bash_logout\n-rw-r--r--  1 vagrant vagrant      3685 Sep 20  2020 .bashrc\ndrwxr-xr-x  6 vagrant vagrant      4096 Sep 20  2020 .cache\ndrwxr-xr-x  4 vagrant vagrant      4096 Sep 16  2020 .gem\n-rw-r--r--  1 vagrant vagrant        24 Sep 20  2020 .gitconfig\ndrwx------  3 vagrant vagrant      4096 Sep 16  2020 .gnupg\ndrwxr-xr-x 10 root    root         4096 May  6  2019 go\n-rw-r--r--  1 root    root    127938445 Sep 16  2020 go1.12.5.linux-amd64.tar.gz\ndrwxr-xr-x  4 vagrant vagrant      4096 Sep 20  2020 go_work\ndrwx------  4 vagrant vagrant      4096 Nov 25 00:51 .local\n-rw-r--r--  1 vagrant vagrant       807 May 10  2020 .profile\ndrwx------  2 vagrant vagrant      4096 Nov  2 16:16 .ssh\n-rw-------  1 vagrant vagrant     19449 Mar 23 20:33 .viminfo"
+  }
 }
 ```
 ### Triggers
   
 *This plugin does not contain any triggers.*
-
 ### Tasks
   
 *This plugin does not contain any tasks.*
@@ -140,6 +143,7 @@ Example output:
 
 # Version History
 
+* 2.0.2 - Addressed Snyk Vulnerability | SDK bump to latest version (6.3.4)
 * 2.0.1 - Update SDK | Patch critical Snyk vulnerability
 * 2.0.0 - Update `netmiko` and `paramiko` version in requirements | Update to use the `insightconnect-python-3-38-slim-plugin:4` Docker image | Use input and output constants | Code refactor | Add example input and output | Change output title in Execute Configuration Commands and Execute Show Commands actions | Fix bug where error occurs when SSH Key is empty
 * 1.0.2 - Fix bug where the SSH private key was not being retrieved correctly from the user in the connection
