@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Palo Alto Firewall"
 Vendor = "rapid7"
-Version = "6.1.8"
+Version = "6.1.9"
 Description = "[PAN-OS](https://www.paloaltonetworks.com/documentation/80/pan-os) is the software that runs all Palo Alto Networks next-generation firewalls. This plugin utilizes the [PAN-OS API](https://www.paloaltonetworks.com/documentation/80/pan-os/xml-api) to provide programmatic management of the Palo Alto Firewall appliance(s). It supports managing firewalls individually or centralized via [Panorama](https://www.paloaltonetworks.com/network-security/panorama)"
 
 
