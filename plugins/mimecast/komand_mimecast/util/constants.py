@@ -1,19 +1,4 @@
-API = "/api"
-REGIONS = ["EU", "DE", "US", "CA", "ZA", "AU", "Offshore", "Sandbox", "USB", "USBCOM"]
-HOSTS = [
-    "eu-api",
-    "de-api",
-    "us-api",
-    "ca-api",
-    "za-api",
-    "au-api",
-    "je-api",
-    "sandbox-api",
-    "usb-api",
-    "uspcom-api.mimecast-pscom-us",
-]
-BASE_HOSTNAME_MAP = dict(zip(REGIONS, HOSTS))
-DEFAULT_REGION = "EU"
+API = "https://api.services.mimecast.com"
 DATA_FIELD = "data"
 META_FIELD = "meta"
 PAGINATION_FIELD = "pagination"
