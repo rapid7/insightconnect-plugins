@@ -25,6 +25,4 @@ class HTMLConverter:
     @staticmethod
     def _validate_input_html(input_html_string: str) -> None:
         if not re.findall(HTML_TAG_PARSER, input_html_string):
-            raise PluginException(
-                cause="Invalid input.", assistance="Input must be of type HTML."
-            )
+            raise PluginException(cause="Invalid input.", assistance="Input must be of type HTML.")
