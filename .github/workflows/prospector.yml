@@ -1,54 +1,52 @@
 name: Static Code Analysis
-
 on: [push]
 
 jobs:
   prospector:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Set up Python 3.11
+      - name: Set up Python 3.12
         uses: actions/setup-python@v5
         with:
-          python-version: 3.11
+          python-version: 3.12
 
       - name: Install dependencies
         run: |
-          pip install prospector[with_bandit]==1.16.1
-          # Version 3.0.0 raised KeyError, this pins it to working version
-          pip install snowballstemmer==2.2.0
+          pip install prospector[with_bandit]==1.17.1
 
       - name: Prospector
         run: |
-          if [[ ${GITHUB_REF_NAME} == *-release ]]
-          then
-            TARGET_BRANCH="master"
+          # Find changed Python files
+          CHANGED_FILES=$(git diff --no-commit-id --name-only --no-renames HEAD..origin/master | grep '\.py$' | xargs -I {} sh -c 'if [ -f "{}" ]; then echo "{}"; fi')
+          
+          echo -e "
+          ========================================
+                    ALL CHANGED FILES
+          ========================================
+          \n$CHANGED_FILES\n\n"
+          
+          # Filter out excluded files
+          FILTER="(schema\.py|setup\.py|__init__\.py|ec2_investigations|unit_test\/)"
+          FILTERED_FILES=$(echo "$CHANGED_FILES" | grep -v -E "$FILTER" || echo "")
+          
+          # Run prospector if there are files to check
+          if [ -n "$FILTERED_FILES" ]; then
+            echo -e "
+          ========================================
+                  FILES AFTER FILTERING
+          ========================================
+            \n$FILTERED_FILES\n\n"
+            echo -e "
+          ========================================
+                    RUNNING PROSPECTOR
+          ========================================
+            \n"
+            prospector $FILTERED_FILES --profile prospector.yaml --tool bandit --tool mccabe --tool pylint --tool pyflakes
           else
-            TARGET_BRANCH="develop"
-          fi
-          CHANGED_FILES=()
-          for OUTPUT in $(git diff --no-commit-id --name-only --no-renames HEAD..origin/${TARGET_BRANCH})
-          do
-            if [[ -f ${OUTPUT} ]] && [[ ${OUTPUT} == *.py ]]
-            then
-              CHANGED_FILES+=( ${OUTPUT} )
-            fi
-          done
-
-          echo "All changed files:"
-          echo ${CHANGED_FILES[@]}
-          FILTER="(schema\.py|setup\.py|__init__\.py|ec2_investigations|unit_test\/)" 
-          for index in "${!CHANGED_FILES[@]}" ; do [[ ${CHANGED_FILES[$index]} =~ $FILTER ]] && unset -v 'CHANGED_FILES[$index]' ; done
-          echo "Files after filtering:"
-          echo ${CHANGED_FILES[@]}
-
-          if ! [[ ${#CHANGED_FILES[*]} == 0 ]]
-          then
-            echo "Running Prospector on: "${CHANGED_FILES[*]}
-            prospector --profile prospector.yaml ${CHANGED_FILES[*]} --tool bandit --tool mccabe --tool pylint --tool pyflakes
-          else
-            echo "No python files changed, so prospector was not run. Differences from Master branch found in: "${OUTPUT[*]}
+            echo "No Python files changed, so prospector was not run."
           fi
