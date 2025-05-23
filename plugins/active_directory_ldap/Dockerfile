@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.3.3 AS builder
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.3.4 AS builder
 
 WORKDIR /python/src
 
@@ -11,7 +11,7 @@ ADD . /python/src
 RUN pip install .
 RUN pip uninstall -y setuptools
 
-FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.3.3
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.3.4
 
 LABEL organization=rapid7
 LABEL sdk=python
@@ -21,7 +21,8 @@ WORKDIR /python/src
 COPY --from=builder /python/src /python/src
 COPY --from=builder /plugin.spec.yaml /plugin.spec.yaml
 
-
+# Copy and install the custom ldap3 package
+RUN pip install /python/src/ldap3-2.9.1.dev.tar.gz
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
 ENV PYTHONPATH="/python/src:${PYTHONPATH}"
