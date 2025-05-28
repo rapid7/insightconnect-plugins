@@ -21,8 +21,7 @@ WORKDIR /python/src
 COPY --from=builder /python/src /python/src
 COPY --from=builder /plugin.spec.yaml /plugin.spec.yaml
 
-# Copy and install the custom ldap3 package
-RUN pip install /python/src/ldap3-2.9.1.dev.tar.gz
+
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
 ENV PYTHONPATH="/python/src:${PYTHONPATH}"
