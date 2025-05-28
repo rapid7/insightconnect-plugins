@@ -31,6 +31,8 @@ sdk:
   type: slim
   version: 6.3.4
   user: nobody
+  custom_cmd:
+    - RUN apt-get update && apt-get install git -y
 key_features:
 - Add and remove user accounts to automate provisioning/deprovisioning of users
 - Disable and enable user accounts to contain security risks
