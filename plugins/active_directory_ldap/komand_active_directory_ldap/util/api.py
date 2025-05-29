@@ -1,3 +1,4 @@
+# pylint: disable=too-many-positional-arguments
 import json
 from functools import wraps
 from json import loads
