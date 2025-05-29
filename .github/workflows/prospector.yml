@@ -28,7 +28,7 @@ jobs:
           ========================================
                     ALL CHANGED FILES
           ========================================
-          \n$CHANGED_FILES\n\n"
+          \n$CHANGED_FILES"
           
           # Filter out excluded files
           FILTER="(schema\.py|setup\.py|__init__\.py|ec2_investigations|unit_test\/)"
@@ -40,12 +40,12 @@ jobs:
           ========================================
                   FILES AFTER FILTERING
           ========================================
-            \n$FILTERED_FILES\n\n"
+          \n$FILTERED_FILES"
             echo -e "
           ========================================
                     RUNNING PROSPECTOR
           ========================================
-            \n"
+          "
             prospector $FILTERED_FILES --profile prospector.yaml --tool bandit --tool mccabe --tool pylint --tool pyflakes
           else
             echo "No Python files changed, so prospector was not run."
