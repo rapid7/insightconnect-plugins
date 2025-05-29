@@ -32,7 +32,8 @@ sdk:
   version: 6.3.4
   user: nobody
   custom_cmd:
-    - RUN apt-get update && apt-get install git -y
+    - ENV DEBIAN_FRONTEND noninteractive
+    - RUN apt-get update && apt-get install -y --no-install-recommends gcc git libkrb5-dev krb5-user libffi-dev libssl-dev && rm -rf /var/lib/apt/lists/*
 key_features:
 - Add and remove user accounts to automate provisioning/deprovisioning of users
 - Disable and enable user accounts to contain security risks

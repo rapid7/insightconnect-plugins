@@ -21,7 +21,9 @@ WORKDIR /python/src
 COPY --from=builder /python/src /python/src
 COPY --from=builder /plugin.spec.yaml /plugin.spec.yaml
 
-RUN apt-get update && apt-get install git -y
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get update && apt-get install -y --no-install-recommends gcc git libkrb5-dev krb5-user libffi-dev libssl-dev && rm -rf /var/lib/apt/lists/*
+
 
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
