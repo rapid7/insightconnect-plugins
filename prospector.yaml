@@ -8,6 +8,7 @@ pylint:
     - too-many-locals
     - useless-object-inheritance
     - too-many-arguments
+    - too-many-positional-arguments
     - raise-missing-from
     - no-else-return
     - no-else-raise
