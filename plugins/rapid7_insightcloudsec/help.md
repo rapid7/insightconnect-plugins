@@ -6,11 +6,9 @@ InsightCloudSec by Rapid7 (formerly DivvyCloud) is a Cloud-Native Security Platf
 
 * Create and remove an exemption
 * Detach policy
-* Get account details
 * Get resource details
 * Get resource id
 * List resource tags
-* Run a bot on demand
 * Switch organization
 
 # Requirements
@@ -494,6 +492,7 @@ Example output:
 
 # Version History
 
+* 2.1.2 - Updated SDK to the latest version (v6.3.4) | Updated Documentation
 * 2.1.1 - Updated SDK to the latest version (v6.2.3) | Address vulnerabilities
 * 2.1.0 - Updated SDK to the latest version | Adding a get resource id functionality
 * 2.0.0 - Enable plugin to run in cloud | Remove actions using defective API endpoints
