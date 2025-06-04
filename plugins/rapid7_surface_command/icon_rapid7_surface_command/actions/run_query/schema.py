@@ -8,6 +8,7 @@ class Component:
 
 
 class Input:
+    FORMAT = "format"
     QUERY_ID = "query_id"
 
 
@@ -22,6 +23,16 @@ class RunQueryInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "format": {
+      "type": "string",
+      "title": "Format of the Content",
+      "description": "Format of the Content to Output",
+      "enum": [
+        "json",
+        "csv"
+      ],
+      "order": 2
+    },
     "query_id": {
       "type": "string",
       "title": "ID of Query to Run",
@@ -30,6 +41,7 @@ class RunQueryInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
+    "format",
     "query_id"
   ],
   "definitions": {}

@@ -49,12 +49,17 @@ This action is used to run and execute Surface Command Query
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|format|string|None|True|Format of the Content to Output|["json", "csv"]|None|None|None|
 |query_id|string|None|True|Query ID (UUID) to Run from Surface Command|None|12345678-1234-1234-1234-123456789012|None|None|
   
 Example input:
 
 ```
 {
+  "format": [
+    "json",
+    "csv"
+  ],
   "query_id": "12345678-1234-1234-1234-123456789012"
 }
 ```
