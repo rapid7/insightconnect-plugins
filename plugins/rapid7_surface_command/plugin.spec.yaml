@@ -84,6 +84,14 @@ actions:
         type: string
         required: true
         example: 12345678-1234-1234-1234-123456789012
+      format:
+        title: Format of the Content
+        description: Format of the Content to Output
+        type: string
+        required: true
+        enum:
+          - json
+          - csv
     output:
       items:
         title: Items
