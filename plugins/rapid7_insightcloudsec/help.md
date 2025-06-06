@@ -10,6 +10,7 @@ InsightCloudSec by Rapid7 (formerly DivvyCloud) is a Cloud-Native Security Platf
 * Get resource id
 * List resource tags
 * Switch organization
+* List Clouds
 
 # Requirements
 
@@ -297,6 +298,102 @@ Example output:
 }
 ```
 
+#### List Clouds
+
+This action is used to list available configured clouds
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|advanced_search|boolean|None|False|A toggle on whether you want to use an Advanced Search|None|False|None|None|
+|badge_filter_operator|string|None|False|Operator to filter Badges on?|["OR", "AND"]|AND|None|None|
+|badges|[]badges|None|False|Badges of a cloud account to query by?|None|[{"key": "test", "value": "test"}]|None|None|
+|empty_badges|boolean|None|False|Whether or not to filter on cloud accounts which have zero badges (cloud accounts only)|None|False|None|None|
+|exclusion_badges|[]badges|None|False|Used to filter based on badges you don't want returned|None|[{"key": "test", "value": "test"}]|None|None|
+|filters|[]filters|None|False|Filter Clouds based on `field_name`, `filter_type` and `filter_value`|None|[{"field_name": "account_id", "filter_type": "EXACT", "filter_value": "463792522299"}]|None|None|
+|limit|integer|None|False|The limit on the amount of clouds you wish to received|None|3|None|None|
+|offset|integer|None|False|Offset for cloud results, specifying the starting point for clouds returned|None|1|None|None|
+|order_by|string|None|False|Sort the output based on `field` and `order`. Specified by field name followed by a space then 'ASC' or 'DESC'|None|name ASC|None|None|
+|search_string|string|None|False|Search String?|None|test|None|None|
+  
+Example input:
+
+```
+{
+  "advanced_search": false,
+  "badge_filter_operator": "AND",
+  "badges": [
+    {
+      "key": "test",
+      "value": "test"
+    }
+  ],
+  "empty_badges": false,
+  "exclusion_badges": [
+    {
+      "key": "test",
+      "value": "test"
+    }
+  ],
+  "filters": [
+    {
+      "field_name": "account_id",
+      "filter_type": "EXACT",
+      "filter_value": "463792522299"
+    }
+  ],
+  "limit": 3,
+  "offset": 1,
+  "order_by": "name ASC",
+  "search_string": "test"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|clouds|[]object|True|Clouds retrieved|[{"account_id": "463792522299", "badge_count": 7, "cloud_access": "None", "cloud_organization_domain_name": "o-03nsxuwv", "cloud_organization_id": "o-03nsxuwv", "cloud_organization_nickname": "The Organization Formerly Known As Test", "cloud_type_id": "AWS", "creation_time": "2021-08-13 21:01:11", "disabled_resource_types": "None", "event_driven_harvest_role": "idle", "failed_resource_types": "None", "group_resource_id": "divvyorganizationservice:1", "id": 1, "is_platform_managed": False, "last_refreshed": "2025-06-05 08:15:14", "name": "AWS Marketplace", "resource_count": 33, "resource_id": "divvyorganizationservice:1", "role_arn": "OrganizationAccountReadRole", "scan_error": "None", "status": "ASSUME_ROLE_FAIL", "strategy_id": 1, "tenant_id": "None", "trailblazer_account_in_scope": "None", "trailblazer_cloudtrail_trails": []}]|
+|total_count|integer|True|Total count of clouds retrieved|1|
+  
+Example output:
+
+```
+{
+  "clouds": [
+    {
+      "account_id": "463792522299",
+      "badge_count": 7,
+      "cloud_access": "None",
+      "cloud_organization_domain_name": "o-03nsxuwv",
+      "cloud_organization_id": "o-03nsxuwv",
+      "cloud_organization_nickname": "The Organization Formerly Known As Test",
+      "cloud_type_id": "AWS",
+      "creation_time": "2021-08-13 21:01:11",
+      "disabled_resource_types": "None",
+      "event_driven_harvest_role": "idle",
+      "failed_resource_types": "None",
+      "group_resource_id": "divvyorganizationservice:1",
+      "id": 1,
+      "is_platform_managed": false,
+      "last_refreshed": "2025-06-05 08:15:14",
+      "name": "AWS Marketplace",
+      "resource_count": 33,
+      "resource_id": "divvyorganizationservice:1",
+      "role_arn": "OrganizationAccountReadRole",
+      "scan_error": "None",
+      "status": "ASSUME_ROLE_FAIL",
+      "strategy_id": 1,
+      "tenant_id": "None",
+      "trailblazer_account_in_scope": "None",
+      "trailblazer_cloudtrail_trails": []
+    }
+  ],
+  "total_count": 1
+}
+```
+
 #### List Resource Tags
 
 This action is used to list resource tags based on provided resource ID
@@ -484,6 +581,22 @@ Example output:
 |Provider ID|string|None|False|Provider ID of the resource|*******************|
 |Resource ID|string|None|False|Resource of the resource ID|instance:******:ap-northeast-1:*******************:|
 |Resource Type|string|None|False|Resource type of the resource|instance|
+  
+**filters**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Field Name|string|None|False|Field Name of value to be filtered by|account_id|
+|Filter List Value|array|None|False|Value to filter the list by|None|
+|Filter Type|string|None|False|Filter Type based on Field Name|NOT|
+|Filter Value|string|None|False|Value to filter by|463792522299|
+  
+**badges**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Key|string|None|False|Key for Badge|test|
+|Value|string|None|False|Description for Badge|test|
 
 
 ## Troubleshooting
@@ -492,6 +605,7 @@ Example output:
 
 # Version History
 
+* 2.2.0 - Added 'list_clouds' action
 * 2.1.2 - Updated SDK to the latest version (v6.3.4) | Updated Documentation
 * 2.1.1 - Updated SDK to the latest version (v6.2.3) | Address vulnerabilities
 * 2.1.0 - Updated SDK to the latest version | Adding a get resource id functionality

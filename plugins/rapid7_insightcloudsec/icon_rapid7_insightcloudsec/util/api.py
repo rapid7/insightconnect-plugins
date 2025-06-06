@@ -14,6 +14,7 @@ from icon_rapid7_insightcloudsec.util.endpoints import (
     LIST_RESOURCE_TAGS_ENDPOINT,
     RUN_BOT_ON_DEMAND_ENDPOINT,
     SWITCH_ORGANIZATION_ENDPOINT,
+    LIST_CLOUDS,
 )
 
 
@@ -26,16 +27,6 @@ class InsightCloudSecAPI:
 
     def get_headers(self) -> dict:
         return {"accept": "application/json", "Api-Key": self._api_key}
-
-    def get_account_details(self, account_id: str) -> dict:
-        accounts = self.make_json_request(path=LINKED_CLOUD_ACCOUNTS_ENDPOINT, headers=self.get_headers())
-        for account in accounts:
-            if account.get("account_id", "") == account_id:
-                return dict_keys_to_camel_case(account)
-        raise PluginException(
-            cause=f"Account {account_id} not found.",
-            assistance="Please check that the provided account ID is correct and try again.",
-        )
 
     def list_organizations(self) -> dict:
         return self.make_json_request(path=LIST_ORGANIZATIONS_ENDPOINT, headers=self.get_headers())
@@ -88,11 +79,8 @@ class InsightCloudSecAPI:
             )
         )
 
-    def run_bot_on_demand(self, bot_id: str) -> bool:
-        self.make_json_request(
-            path=RUN_BOT_ON_DEMAND_ENDPOINT.format(bot_id=bot_id), method="POST", headers=self.get_headers()
-        )
-        return True
+    def list_clouds(self, json_data: dict) -> dict:
+        return self.make_json_request(path=LIST_CLOUDS, method="POST", json_data=json_data, headers=self.get_headers())
 
     def make_request(  # noqa: C901
         self,

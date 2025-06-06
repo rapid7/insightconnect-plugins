@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Rapid7 InsightCloudSec"
 Vendor = "rapid7"
-Version = "2.1.2"
+Version = "2.2.0"
 Description = "InsightCloudSec by Rapid7 (formerly DivvyCloud) is a Cloud-Native Security Platform that provides real-time analysis and automated remediation for continuous security and compliance for your multi-cloud environment"
 
 
@@ -47,6 +47,8 @@ def main():
             self.add_action(actions.RemoveExemption())
         
             self.add_action(actions.SwitchOrganization())
+        
+            self.add_action(actions.ListClouds())
         
 
     """Run plugin"""
