@@ -20,25 +20,30 @@ class Output:
 
 
 class MonitorAlertsInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {}
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class MonitorAlertsState(insightconnect_plugin_runtime.State):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {}
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class MonitorAlertsOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "array",
   "title": "Alerts",
@@ -51,7 +56,8 @@ class MonitorAlertsOutput(insightconnect_plugin_runtime.Output):
   ],
   "definitions": {}
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
