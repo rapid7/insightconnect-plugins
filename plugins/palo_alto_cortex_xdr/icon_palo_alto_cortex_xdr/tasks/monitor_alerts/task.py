@@ -60,7 +60,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         try:
             alert_limit = self.get_alert_limit(custom_config=custom_config)
-            now_time = self._get_current_time()
+            now_time = datetime.utcnow()
             query_values = self.calculate_query_values(custom_config, now_time, existing_state, alert_limit)
 
             self.logger.info("Starting to download alerts...")
@@ -203,7 +203,8 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         :param: alert_limit: Maximum results per page
         :return: QueryValues: Get Alerts query input values
         """
-        start_time, end_time, max_lookback_date_time = self.get_query_times(saved_state, now_date_time)
+        default_end_time = now_date_time - timedelta(minutes=15)
+        start_time, end_time, max_lookback_date_time = self.get_query_times(saved_state, now_date_time, default_end_time)
         search_from = saved_state.get(LAST_SEARCH_TO, 0)
         search_to = saved_state.get(LAST_SEARCH_TO, 0) + alert_limit
         if custom_config:
@@ -213,7 +214,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         # Non pagination run
         if not start_time:
             start_time = now_date_time - timedelta(hours=DEFAULT_LOOKBACK_HOURS)
-            end_time = now_date_time
+            end_time = default_end_time
 
         # Check start_time in comparison to max_lookback
         if start_time.replace(tzinfo=timezone.utc) < max_lookback_date_time.replace(tzinfo=timezone.utc):
@@ -232,11 +233,12 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             QUERY_SEARCH_TO=search_to,
         )
 
-    def get_query_times(self, state, now_date_time) -> Tuple[datetime, datetime, datetime]:
+    def get_query_times(self, state, now_date_time, default_end_time) -> Tuple[datetime, datetime, datetime]:
         """
         Get initial query times in unix for get alerts query, and max lookback date time
         :param state:
         :param now_date_time:
+        :param default_end_time:
         :return: start time, end time, max lookback date time
         """
         last_query_start_time = state.get(QUERY_START_TIME)
@@ -251,7 +253,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             end_time = last_query_end_time
         else:
             start_time = last_query_end_time
-            end_time = now_date_time
+            end_time = default_end_time
         return start_time, end_time, max_lookback_date_time
 
     ###########################
@@ -327,10 +329,6 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         if date_time.tzinfo is None:
             date_time = date_time.replace(tzinfo=timezone.utc)
         return int(date_time.timestamp() * 1000)
-
-    def _get_current_time(self) -> datetime:
-        # Gets the last 15 minutes
-        return datetime.utcnow() - timedelta(minutes=15)
 
     def get_alert_limit(self, custom_config: dict) -> int:
         """
