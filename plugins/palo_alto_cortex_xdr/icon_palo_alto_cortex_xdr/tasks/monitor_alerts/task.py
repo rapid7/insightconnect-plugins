@@ -60,7 +60,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         try:
             alert_limit = self.get_alert_limit(custom_config=custom_config)
-            now_time = datetime.utcnow()
+            now_time = datetime.now(timezone.utc)
             query_values = self.calculate_query_values(custom_config, now_time, existing_state, alert_limit)
 
             self.logger.info("Starting to download alerts...")
