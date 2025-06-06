@@ -191,7 +191,11 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         return new_alerts, new_hashes
 
     def calculate_query_values(
-        self, custom_config: dict, now_date_time: datetime, saved_state: dict, alert_limit: int
+        self,
+        custom_config: dict,
+        now_date_time: datetime,
+        saved_state: dict,
+        alert_limit: int,
     ) -> QueryValues:
         """
         Takes custom config from CPS and allows the specification of a new start time for alerts,
@@ -204,7 +208,9 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         :return: QueryValues: Get Alerts query input values
         """
         default_end_time = now_date_time - timedelta(minutes=15)
-        start_time, end_time, max_lookback_date_time = self.get_query_times(saved_state, now_date_time, default_end_time)
+        start_time, end_time, max_lookback_date_time = self.get_query_times(
+            saved_state, now_date_time, default_end_time
+        )
         search_from = saved_state.get(LAST_SEARCH_TO, 0)
         search_to = saved_state.get(LAST_SEARCH_TO, 0) + alert_limit
         if custom_config:
