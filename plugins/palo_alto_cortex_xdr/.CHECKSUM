@@ -33,7 +33,7 @@
 		},
 		{
 			"identifier": "monitor_alerts/schema.py",
-			"hash": "f5a387ec288acddab84c660704adccf7"
+			"hash": "cd820dd29b247aec9843955c80d98999"
 		},
 		{
 			"identifier": "get_alerts/schema.py",
