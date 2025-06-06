@@ -235,10 +235,8 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             end_time = default_end_time
 
         # Check start_time in comparison to max_lookback
-        if (
-            start_time.replace(tzinfo=timezone.utc)
-            < max_lookback_date_time.replace(tzinfo=timezone.utc)
-            and saved_state.get(CURRENT_COUNT, 0) == 0
+        if start_time.replace(tzinfo=timezone.utc) < max_lookback_date_time.replace(
+            tzinfo=timezone.utc
         ):
             self.logger.info(
                 f"Start time of {start_time} exceeds cutoff of {max_lookback_date_time} and we are not paginating"
