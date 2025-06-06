@@ -923,10 +923,10 @@ Example output:
 
 ## Troubleshooting
 
-Isolate Endpoint fails with 500 error - This will happen if an isolation action (Isolate or Unisolate) is in progress on the selected endpoint. Wait a few minutes and try again.
 
 # Version History
 
+* 4.0.7 - Update `MonitorAlerts` to resume alert monitoring from appropriate cutoff value if restarted | Update SDK to 6.3.4
 * 4.0.6 - Update `MonitorAlerts` to resume alert monitoring from the last task run time | Update error handling to log additional data | Update SDK to 6.2.4
 * 4.0.5 - Update `MonitorAlerts` task pagination decision handling | update SDK to 6.2.2
 * 4.0.4 - Raise authentication errors if provided invalid credentials
