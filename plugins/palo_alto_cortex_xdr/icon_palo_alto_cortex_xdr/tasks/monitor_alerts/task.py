@@ -17,6 +17,7 @@ from dataclasses import dataclass
 TIME_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
 MAX_LOOKBACK_DAYS = 7
 DEFAULT_LOOKBACK_HOURS = 24
+HEADROOM_MINUTES = 60
 # This is the max amount of alerts that can be returned by the API in search from -> search_to
 ALERT_LIMIT = 100
 
@@ -217,8 +218,8 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         # Check start_time in comparison to max_lookback
         if start_time.replace(tzinfo=timezone.utc) < max_lookback_date_time.replace(tzinfo=timezone.utc):
             self.logger.info(f"Start time of {start_time} exceeds cutoff of {max_lookback_date_time}")
-            self.logger.info("Adjusting start time to cutoff value")
-            start_time = max_lookback_date_time
+            start_time = max_lookback_date_time + timedelta(minutes=HEADROOM_MINUTES)
+            self.logger.info("Adjusting start time to appropriate cutoff value")
             self.logger.info("Resetting search_from and search_to")
             search_from = 0
             search_to = alert_limit
