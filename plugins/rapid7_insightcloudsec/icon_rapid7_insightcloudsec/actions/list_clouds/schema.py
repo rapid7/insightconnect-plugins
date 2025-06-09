@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "List available configured clouds"
+    DESCRIPTION = "Retrieve a list of available configured clouds. This supports filtering and sorting to refine the results based on specified criteria"
 
 
 class Input:
@@ -35,13 +35,13 @@ class ListCloudsInput(insightconnect_plugin_runtime.Input):
     "advanced_search": {
       "type": "boolean",
       "title": "Advanced Search",
-      "description": "A toggle on whether you want to use an Advanced Search",
+      "description": "Toggle on whether to enable advanced search functionality or not",
       "order": 8
     },
     "badge_filter_operator": {
       "type": "string",
       "title": "Badge Filter Operator",
-      "description": "Operator to filter Badges on?",
+      "description": "Determines whether the output should contain all badges in `badges` (`AND`), or one of the badges in the list (`OR`)",
       "enum": [
         "OR",
         "AND"
@@ -51,7 +51,7 @@ class ListCloudsInput(insightconnect_plugin_runtime.Input):
     "badges": {
       "type": "array",
       "title": "Badges",
-      "description": "Badges of a cloud account to query by?",
+      "description": "Specifies the badges used to filter cloud accounts based on key-value pairs",
       "items": {
         "$ref": "#/definitions/badges"
       },
@@ -66,7 +66,7 @@ class ListCloudsInput(insightconnect_plugin_runtime.Input):
     "exclusion_badges": {
       "type": "array",
       "title": "Exclusion Badges",
-      "description": "Used to filter based on badges you don't want returned",
+      "description": "Specifies the badges to exclude when filtering cloud accounts based on key-value pairs",
       "items": {
         "$ref": "#/definitions/badges"
       },
@@ -75,7 +75,7 @@ class ListCloudsInput(insightconnect_plugin_runtime.Input):
     "filters": {
       "type": "array",
       "title": "Filters",
-      "description": "Filter Clouds based on `field_name`, `filter_type` and `filter_value`",
+      "description": "Filter Clouds based on `field_name`, `filter_type`, `filter_value` and `filter_list_value`",
       "items": {
         "$ref": "#/definitions/filters"
       },
@@ -84,7 +84,7 @@ class ListCloudsInput(insightconnect_plugin_runtime.Input):
     "limit": {
       "type": "integer",
       "title": "Limit",
-      "description": "The limit on the amount of clouds you wish to received",
+      "description": "The limit on the amount of clouds you wish to receive",
       "order": 2
     },
     "offset": {
@@ -102,7 +102,7 @@ class ListCloudsInput(insightconnect_plugin_runtime.Input):
     "search_string": {
       "type": "string",
       "title": "Search String",
-      "description": "Search String?",
+      "description": "Partial or full literal string to search for. f.e. you could search for an instance ID, image ID, or resource name",
       "order": 7
     }
   },
@@ -114,13 +114,13 @@ class ListCloudsInput(insightconnect_plugin_runtime.Input):
         "field_name": {
           "type": "string",
           "title": "Field Name",
-          "description": "Field Name of value to be filtered by",
+          "description": "Specifies the name of the output field used for filtering results",
           "order": 1
         },
         "filter_type": {
           "type": "string",
           "title": "Filter Type",
-          "description": "Filter Type based on Field Name",
+          "description": "Specifies the type of filtering to apply to the selected field",
           "enum": [
             "EXACT",
             "LIKE",
@@ -134,12 +134,12 @@ class ListCloudsInput(insightconnect_plugin_runtime.Input):
         "filter_value": {
           "type": "string",
           "title": "Filter Value",
-          "description": "Value to filter by",
+          "description": "Specifies the value to apply to the filter for the `field_name` field.",
           "order": 3
         },
         "filter_list_value": {
           "title": "Filter List Value",
-          "description": "Value to filter the list by",
+          "description": "Can be used instead of `filter_value` to filter multiple values",
           "order": 4
         }
       }
@@ -151,13 +151,13 @@ class ListCloudsInput(insightconnect_plugin_runtime.Input):
         "key": {
           "type": "string",
           "title": "Key",
-          "description": "Key for Badge",
+          "description": "Key of the Badge",
           "order": 1
         },
         "value": {
           "type": "string",
           "title": "Value",
-          "description": "Description for Badge",
+          "description": "Value of the Badge",
           "order": 2
         }
       }
@@ -181,7 +181,7 @@ class ListCloudsOutput(insightconnect_plugin_runtime.Output):
     "clouds": {
       "type": "array",
       "title": "Clouds",
-      "description": "Clouds retrieved",
+      "description": "The list of clouds retrieved, including details such as account ID, badge count, cloud type, and other information",
       "items": {
         "type": "object"
       },
