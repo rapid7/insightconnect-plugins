@@ -34,7 +34,7 @@ class ListClouds(insightconnect_plugin_runtime.Action):
                         "exclusion_badges",
                     ]
                 )
-                if value not in (None, {})
+                if value not in (None, {}, "")
             }
         )
 
