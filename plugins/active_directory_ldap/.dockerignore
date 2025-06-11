@@ -7,4 +7,3 @@ tests/**/*
 **/*.json
 **/*.tar
 **/*.gz
-!ldap3-2.9.1.dev.tar.gz
