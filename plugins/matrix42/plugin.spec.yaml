@@ -1,0 +1,104 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: matrix42
+title: Matrix42
+description: |
+  [Matrix42](https://www.matrix42.com/) is a platform for IT service and asset management. This plugin allows users to create incidents and service requests within Matrix42.
+
+version: 2.0.4
+connection_version: 1
+supported_versions: [Matrix42 Service Desk]
+vendor: philipp_behmer
+support: community
+status: []
+cloud_ready: false
+fedramp_ready: false
+resources:
+  vendor_url: https://www.matrix42.com/
+  docs_url: https://help.matrix42.com/
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/matrix42
+tags:
+- matrix42
+- incident
+- asset
+- configuration
+hub_tags:
+  use_cases: [remediation_management, asset_inventory]
+  keywords: [ticketing, incidents, cloud_enabled]
+  features: []
+sdk:
+  type: slim
+  version: 6.3.4
+  user: nobody
+key_features:
+- Create new incidents in Matrix42.
+requirements:
+- Matrix42 API URL
+- Matrix42 API key
+links:
+- '[Matrix42](https://www.matrix42.com/)'
+references:
+- '[Matrix42](https://www.matrix42.com/)'
+- '[Matrix42 API Documentation](https://help.matrix42.com/030_ESMP/030_INT/Business_Processes_and_API_Integrations/Public_API_reference_documentation)'
+troubleshooting:
+- This plugin does not contain a troubleshooting.
+version_history:
+- 2.0.4 - Support to create tickets
+- 2.0.0 - Support web server mode
+- 1.0.0 - Initial plugin
+
+connection:
+  api_url:
+    title: Matrix42 API URL
+    description: The base URL for your Matrix42 API (e.g. https://testsrv.imagoverum.com/m42Services/api/)
+    type: string
+    required: true
+    example: https://testsrv.imagoverum.com/m42Services/api/
+  
+  api_key:
+    title: API Key
+    description: Matrix42 API key for authentication
+    type: credential_secret_key
+    required: true
+    example: eyJhbGciOiJodHR...
+
+actions:
+  create_ticket:
+    title: Create Ticket
+    description: Create a new Matrix42 Ticket
+    input:
+      activity_type:
+        title: Activity Type
+        description: Type of the ticket. (Incident or Service Request)
+        type: string
+        enum:
+          - Incident
+          - Service Request
+        required: true
+        example: Service Request
+      subject:
+        title: Title
+        description: Title of the ticket
+        type: string
+        required: true
+        example: Example Ticket Title
+      description_html:
+        title: Description (HTML)
+        description: HTML formatted description
+        type: string
+        required: true
+        example: <h1>New Ticket</h1><p>This is an example ticket description.</p>
+      additional_fields:
+        title: Additional Fields
+        description: JSON object containing additional fields and values to create the ticket
+        type: object
+        required: false
+        example: '{ "Impact": 1, "Subject": Replace Subject, "Urgency": 1 }'
+    output:
+      id:
+        title: Ticket ID
+        description: ID of the new ticket 
+        type: string
+        required: true
+        example: 3cd186d8-3f46-f021-1687-000f2aed481c
