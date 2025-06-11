@@ -32,6 +32,7 @@ class CreateInvestigationInput(insightconnect_plugin_runtime.Input):
       "description": "Investigation's disposition",
       "enum": [
         "",
+        "UNDECIDED",
         "BENIGN",
         "MALICIOUS",
         "NOT_APPLICABLE"

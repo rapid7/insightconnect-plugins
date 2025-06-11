@@ -1,7 +1,7 @@
 {
-	"spec": "d6ce5b02ac6ab11cd4aa9380908a6d58",
-	"manifest": "d2efd7366f383bf6e5ab40ffc9514347",
-	"setup": "63fb00e8d7801ea60db7f292c46581f5",
+	"spec": "e68bff68a02cd2532f878575897d5756",
+	"manifest": "57ce2026adcb77c39e4f2e12591168e2",
+	"setup": "741516d644a85513418276460472c83b",
 	"schemas": [
 		{
 			"identifier": "add_indicators_to_a_threat/schema.py",
@@ -29,7 +29,7 @@
 		},
 		{
 			"identifier": "create_investigation/schema.py",
-			"hash": "a0538409101e9018eec1c3c52e674c0a"
+			"hash": "ed4ab7d62bc66454d976ab7dda67b189"
 		},
 		{
 			"identifier": "create_threat/schema.py",
@@ -69,7 +69,7 @@
 		},
 		{
 			"identifier": "get_alert_information/schema.py",
-			"hash": "48461d148def77b3d963ff81bb14866a"
+			"hash": "b638bc385299b7c8cdbd03b4bb65515c"
 		},
 		{
 			"identifier": "get_all_logs/schema.py",
@@ -125,7 +125,7 @@
 		},
 		{
 			"identifier": "search_alerts/schema.py",
-			"hash": "e557bb0c7ca5ffc74bb4c18155e7a20e"
+			"hash": "32ac097f9bbbfee2346b46eac3c6c8be"
 		},
 		{
 			"identifier": "search_investigations/schema.py",
@@ -145,7 +145,7 @@
 		},
 		{
 			"identifier": "update_alert/schema.py",
-			"hash": "71cbe6b5ef3a9901f4cf821da9343575"
+			"hash": "b85d84292fbe3569542806a6bb9388d4"
 		},
 		{
 			"identifier": "update_investigation/schema.py",
@@ -161,7 +161,7 @@
 		},
 		{
 			"identifier": "get_new_alerts/schema.py",
-			"hash": "2efa90f87eb6b301a972f56f1a554375"
+			"hash": "7c7f3d33a7271231f88ecac04aa93300"
 		},
 		{
 			"identifier": "get_new_investigations/schema.py",

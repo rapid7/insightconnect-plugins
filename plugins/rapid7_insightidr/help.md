@@ -19,7 +19,7 @@ This plugin allows you to add indicators to a threat and see the status of inves
 
 # Supported Product Versions
 
-* Latest release successfully tested on 2024-09-10.
+* Latest release successfully tested on 2025-06-11.
 
 # Documentation
 
@@ -743,7 +743,7 @@ This action is used to allows to create investigation manually
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|disposition|string|None|False|Investigation's disposition|["", "BENIGN", "MALICIOUS", "NOT_APPLICABLE"]|BENIGN|None|None|
+|disposition|string|None|False|Investigation's disposition|["", "UNDECIDED", "BENIGN", "MALICIOUS", "NOT_APPLICABLE"]|BENIGN|None|None|
 |email|string|None|False|A user's email address for investigation to be assigned|None|user@example.com|None|None|
 |priority|string|None|False|Investigation's priority|["", "LOW", "MEDIUM", "HIGH", "CRITICAL"]|LOW|None|None|
 |status|string|None|False|Investigation's status|["", "OPEN", "CLOSED"]|OPEN|None|None|
@@ -2569,7 +2569,7 @@ This action is used to updates information for a single alert
 |alert_rrn|string|None|True|The unique identifier of the alert|None|rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abg|None|None|
 |assignee_id|string|None|False|The new user to assign to the alert|None|8205375a-1234-4652-8098-870d656bc693|None|None|
 |comment|string|None|False|The reason for updating the alert, which is captured in the alert audit log for tracking purposes|None|Updated alert priority by automation through InsightConnect|None|None|
-|disposition|string|None|False|The alert disposition|["", "UNMAPPED", "UNDECIDED", "MALICIOUS", "BENIGN", "UNKNOWN", "NOT_APPLICABLE"]|MALICIOUS|None|None|
+|disposition|string|None|False|The alert disposition|["", "UNMAPPED", "UNDECIDED", "MALICIOUS", "BENIGN", "UNKNOWN", "NOT_APPLICABLE", "SECURITY_TEST", "FALSE_POSITIVE"]|MALICIOUS|None|None|
 |investigation_rrn|string|None|False|The RRN of the investigation to add the alert to|None|rrn:investigation:us:12345678-abcd-cdef-1234-12345abc:investigation:ABCDEFGHI|None|None|
 |priority|string|None|False|The alert priority|["", "UNMAPPED", "INFO", "LOW", "MEDIUM", "HIGH", "CRITICAL"]|INFO|None|None|
 |status|string|None|False|The alert status|["", "UNMAPPED", "OPEN", "INVESTIGATING", "WAITING", "CLOSED"]|OPEN|None|None|
@@ -3428,6 +3428,7 @@ Example output:
 
 # Version History
 
+* 11.0.6 - Updated `disposition` values for `create_investigation` and `update_alert` action | SDK bump to 6.3.5
 * 11.0.5 - Added new disposition of the alert
 * 11.0.4 - Added support for parsing improperly formatted JSON-like strings | SDK bump to 6.3.3
 * 11.0.3 - Added log entry validation using regular expressions | SDK bump to 6.2.6
