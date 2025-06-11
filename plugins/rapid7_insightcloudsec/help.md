@@ -606,7 +606,7 @@ Example output:
 
 # Version History
 
-* 2.2.0 - Added 'list_clouds' action | Unit test added | SDK bump to 6.3.5
+* 2.2.0 - Added 'list_clouds' action | Unit test added | SDK bump to 6.3.6
 * 2.1.2 - Updated SDK to the latest version (v6.3.4) | Updated Documentation 
 * 2.1.1 - Updated SDK to the latest version (v6.2.3) | Address vulnerabilities
 * 2.1.0 - Updated SDK to the latest version | Adding a get resource id functionality
