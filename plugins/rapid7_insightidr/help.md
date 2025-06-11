@@ -3428,7 +3428,7 @@ Example output:
 
 # Version History
 
-* 11.0.6 - Updated `disposition` values for `create_investigation` and `update_alert` action | SDK bump to 6.3.5
+* 11.0.6 - Updated `disposition` values for `create_investigation` and `update_alert` action | SDK bump to 6.3.6
 * 11.0.5 - Added new disposition of the alert
 * 11.0.4 - Added support for parsing improperly formatted JSON-like strings | SDK bump to 6.3.3
 * 11.0.3 - Added log entry validation using regular expressions | SDK bump to 6.2.6
