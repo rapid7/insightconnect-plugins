@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Matrix42"
 Vendor = "philipp_behmer"
-Version = "2.0.4"
+Version = "2.0.5"
 Description = "[Matrix42](https://www.matrix42.com/) is a platform for IT service and asset management. This plugin allows users to create incidents and service requests within Matrix42."
 
 

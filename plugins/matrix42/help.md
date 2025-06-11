@@ -95,7 +95,7 @@ Example output:
 
 # Version History
 
-* 2.0.4 - Support to create tickets
+* 2.0.5 - New action create ticket
 * 2.0.0 - Support web server mode
 * 1.0.0 - Initial plugin
 

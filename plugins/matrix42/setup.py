@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="matrix42-philipp_behmer-plugin",
-    version="2.0.4",
+    version="2.0.5",
     description="[Matrix42](https://www.matrix42.com/) is a platform for IT service and asset management. This plugin allows users to create incidents and service requests within Matrix42.",
     author="philipp_behmer",
     author_email="",
