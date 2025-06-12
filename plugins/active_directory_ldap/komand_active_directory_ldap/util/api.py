@@ -1,3 +1,4 @@
+# pylint: disable=too-many-positional-arguments
 import json
 from functools import wraps
 from json import loads
@@ -85,14 +86,19 @@ class ActiveDirectoryLdapAPI:
 
     def __connect_to_server(self, server, authentication=None) -> ldap3.Connection:
         try:
-            conn = ldap3.Connection(
-                server=server,
-                user=self.user_name,
-                password=self.password,
-                auto_bind=ldap3.AUTO_BIND_TLS_BEFORE_BIND if self.use_channel_binding else True,
-                auto_referrals=self.referrals,
-                authentication=authentication,
-            )
+            connection_params = {
+                "server": server,
+                "user": self.user_name,
+                "password": self.password,
+                "auto_bind": True,
+                "auto_referrals": self.referrals,
+                "authentication": authentication,
+            }
+
+            if self.use_channel_binding and self.use_ssl:
+                connection_params["channel_binding"] = ldap3.TLS_CHANNEL_BINDING
+
+            conn = ldap3.Connection(**connection_params)
         except LDAPBindError as error:
             raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=error)
         except LDAPAuthorizationDeniedResult as error:
