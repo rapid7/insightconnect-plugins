@@ -61,7 +61,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             state=MonitorSiemLogsState(),
         )
 
-    @monitor_task_delay(timestamp_keys=[FURTHEST_QUERY_DATE])
+    @monitor_task_delay(timestamp_keys=[FURTHEST_QUERY_DATE], default_delay_threshold="7d")
     def run(self, params={}, state={}, custom_config={}):  # pylint: disable=unused-argument
         log_level = self.get_log_level(custom_config.get("log_level", "info"))
         self.connection.api.set_log_level(log_level)
