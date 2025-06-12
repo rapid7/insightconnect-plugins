@@ -308,7 +308,7 @@ the results based on specified criteria
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |advanced_search|boolean|None|False|Toggle on whether to enable advanced search functionality or not|None|False|None|None|
-|badge_filter_operator|string|None|False|Determines whether the output should contain all badges in `badges` (`AND`), or one of the badges in the list (`OR`)|["OR", "AND"]|AND|None|None|
+|badge_filter_operator|string|None|False|Determines whether the output should contain all badges in `badges` (`AND`), or one of the badges in the list (`OR`)|["OR", "AND", ""]|AND|None|None|
 |badges|[]badges|None|False|Specifies the badges used to filter cloud accounts based on key-value pairs|None|[{"key": "environment", "value": "production"}]|None|None|
 |empty_badges|boolean|None|False|Whether or not to filter on cloud accounts which have zero badges (cloud accounts only)|None|False|None|None|
 |exclusion_badges|[]badges|None|False|Specifies the badges to exclude when filtering cloud accounts based on key-value pairs|None|[{"key": "region", "value": "us-east-1"}]|None|None|
