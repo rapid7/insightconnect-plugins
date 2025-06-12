@@ -57,7 +57,9 @@ class UpdateAlertInput(insightconnect_plugin_runtime.Input):
         "MALICIOUS",
         "BENIGN",
         "UNKNOWN",
-        "NOT_APPLICABLE"
+        "NOT_APPLICABLE",
+        "SECURITY_TEST",
+        "FALSE_POSITIVE"
       ],
       "order": 3
     },
@@ -285,7 +287,8 @@ class UpdateAlertOutput(insightconnect_plugin_runtime.Output):
             "BENIGN",
             "UNKNOWN",
             "NOT_APPLICABLE",
-            "SECURITY_TEST"
+            "SECURITY_TEST",
+            "FALSE_POSITIVE"
           ],
           "order": 21
         },

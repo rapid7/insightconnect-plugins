@@ -4,9 +4,9 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 11.0.5
+version: 11.0.6
 connection_version: 5
-supported_versions: ["Latest release successfully tested on 2024-09-10."]
+supported_versions: ["Latest release successfully tested on 2025-06-11."]
 vendor: rapid7
 cloud_ready: true
 resources:
@@ -32,9 +32,10 @@ key_features:
   - "Incident Response and Investigations"
 sdk:
   type: full
-  version: 6.3.3
+  version: 6.3.6
   user: nobody
 version_history:
+  - "11.0.6 - Updated `disposition` values for `create_investigation` and `update_alert` action | SDK bump to 6.3.6"
   - "11.0.5 - Added new disposition of the alert"
   - "11.0.4 - Added support for parsing improperly formatted JSON-like strings | SDK bump to 6.3.3"
   - "11.0.3 - Added log entry validation using regular expressions | SDK bump to 6.2.6"
@@ -961,6 +962,7 @@ types:
         - UNKNOWN
         - NOT_APPLICABLE
         - SECURITY_TEST
+        - FALSE_POSITIVE
     investigation_rrn:
       title: Investigation RRN
       description: The RRN of the investigation that the alert is part of.
@@ -1577,6 +1579,7 @@ actions:
         type: string
         enum:
           - ""
+          - UNDECIDED
           - BENIGN
           - MALICIOUS
           - NOT_APPLICABLE
@@ -2834,6 +2837,8 @@ actions:
           - BENIGN
           - UNKNOWN
           - NOT_APPLICABLE
+          - SECURITY_TEST
+          - FALSE_POSITIVE
         required: false
         example: MALICIOUS
       priority:
