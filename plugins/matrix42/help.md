@@ -90,13 +90,11 @@ Example output:
 *This plugin does not contain any custom output types.*
 
 ## Troubleshooting
-
-* This plugin does not contain a troubleshooting.
+  
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
-* 2.0.5 - New action create ticket
-* 2.0.0 - Support web server mode
 * 1.0.0 - Initial plugin
 
 # Links

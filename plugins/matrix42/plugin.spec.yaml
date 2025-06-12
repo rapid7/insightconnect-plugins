@@ -6,14 +6,12 @@ title: Matrix42
 description: |
   [Matrix42](https://www.matrix42.com/) is a platform for IT service and asset management. This plugin allows users to create incidents and service requests within Matrix42.
 
-version: 2.0.5
+version: 1.0.0
 connection_version: 1
 supported_versions: [Matrix42 Service Desk]
-vendor: philipp_behmer
-support: community
+vendor: rapid7
+support: rapid7
 status: []
-cloud_ready: false
-fedramp_ready: false
 resources:
   vendor_url: https://www.matrix42.com/
   docs_url: https://help.matrix42.com/
@@ -29,7 +27,7 @@ hub_tags:
   features: []
 sdk:
   type: slim
-  version: 6.3.4
+  version: 6.3.6
   user: nobody
 key_features:
 - Create new incidents in Matrix42.
@@ -41,11 +39,7 @@ links:
 references:
 - '[Matrix42](https://www.matrix42.com/)'
 - '[Matrix42 API Documentation](https://help.matrix42.com/030_ESMP/030_INT/Business_Processes_and_API_Integrations/Public_API_reference_documentation)'
-troubleshooting:
-- This plugin does not contain a troubleshooting.
 version_history:
-- 2.0.5 - New action create ticket
-- 2.0.0 - Support web server mode
 - 1.0.0 - Initial plugin
 
 connection:

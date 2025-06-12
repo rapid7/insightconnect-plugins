@@ -23,18 +23,17 @@ class CreateTicket(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         activity_type = params.get(Input.ACTIVITY_TYPE)
-        additional_fields = params.get(Input.ADDITIONAL_FIELDS) or {}
+        additional_fields = params.get(Input.ADDITIONAL_FIELDS, {})
         description_html = params.get(Input.DESCRIPTION_HTML)
         subject = params.get(Input.SUBJECT)
         # END INPUT BINDING - DO NOT REMOVE
 
         # Map activity_type string to number
         activity_type_map = {"Incident": 0, "Service Request": 6}
-        activity_type_number = activity_type_map.get(activity_type, activity_type)
+        activity_type_number = activity_type_map.get(activity_type)
 
         # Prepare URL
-        base_url = self.connection.api_url.rstrip("/") + "/"
-        url = f"{base_url}ticket/create?activityType={activity_type_number}"
+        url = f"{self.connection.api_url}ticket/create?activityType={activity_type_number}"
 
         # Prepare headers
         headers = {
