@@ -5,7 +5,7 @@ name: basename
 title: Basename
 description: Basename is used to get the last item of a file path or URL using Python's
   basename utility
-version: 1.1.4
+version: 1.1.5
 connection_version: 1
 vendor: rapid7
 support: community
@@ -21,7 +21,7 @@ tags:
 - utilities
 sdk:
   type: slim
-  version: 6.2.5
+  version: 6.3.6
   user: nobody
 key_features:
 - Obtain Basename of a file path or URL.
@@ -29,6 +29,7 @@ troubleshooting:
 - If the input doesn't contain a slash `/` in the path the result will be the original
   string unmodified.
 version_history:
+- 1.1.5 - Updated SDK to the latest version (6.3.6)
 - 1.1.4 - Updated SDK to the latest version (6.2.5)
 - 1.1.3 - Initial updates for fedramp compliance | Updated SDK to the latest version
 - 1.1.2 - Added `__init__.py` file to `unit_test` folder | Refreshed with new Tooling
