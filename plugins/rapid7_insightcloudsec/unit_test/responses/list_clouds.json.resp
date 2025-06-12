@@ -1,0 +1,22 @@
+{
+  "clouds": [
+    {
+      "account_id": "//container.googleapis.com/projects/divvy-development/zones/us-central1-c/clusters/us-central1-apache-test-937e8eef-gke",
+      "badge_count": 5,
+      "cloud_type_id": "K8S_R7",
+      "creation_time": "2023-03-15 17:10:08",
+      "event_driven_harvest_role": "idle",
+      "group_resource_id": "divvyorganizationservice:172",
+      "id": 172,
+      "is_platform_managed": false,
+      "last_refreshed": "2025-06-06 14:30:55",
+      "name": "us-central1-apache-test-937e8eef-gke",
+      "resource_count": 9,
+      "resource_id": "divvyorganizationservice:172",
+      "role_arn": "cs-training1-sa-ro-b@cs-training1-sa-ro.iam.gserviceaccount.com",
+      "status": "DEFAULT",
+      "trailblazer_cloudtrail_trails": []
+    }
+  ],
+  "total_count": 1
+}

@@ -54,8 +54,6 @@ class Util:
                     )
                 )
 
-        if kwargs.get("url") == "https://example.com/v2/prototype/cloud/linked/list":
-            return MockResponse("get_accounts", 200)
         if kwargs.get("url") == "https://example.com/v2/public/resource/common/search" and kwargs.get("json", {}) == {
             "limit": "some_string",
             "offset": "another_string",
@@ -72,10 +70,6 @@ class Util:
             return MockResponse("empty_response", 200)
         if kwargs.get("json") == {"organization_name": "Invalid Organization"}:
             return MockResponse("not_found", 500)
-        if kwargs.get("url") == "https://example.com/v2/public/botfactory/examplebot:11:1111/ondemand":
-            return MockResponse("empty_response", 200)
-        if kwargs.get("url") == "https://example.com/v2/public/botfactory/invalid_bot/ondemand":
-            return MockResponse("not_found", 404)
         if kwargs.get("url") == "https://example.com/v2/public/resource/serviceuser:1:ABC1234567890:/detail":
             return MockResponse("get_resource_details", 200)
         if kwargs.get("url") == "https://example.com/v2/public/resource/serviceuser:1:invalid:/detail":
@@ -112,4 +106,15 @@ class Util:
             return MockResponse("empty_response", 200)
         if kwargs.get("json") == {"exemption_ids": [333]}:
             return MockResponse("not_found", 404)
+        if kwargs.get("url") == "https://example.com/v2/public/clouds/list" and kwargs.get("json", {}).get(
+            "filters"
+        ) == [
+            {
+                "field_name": "account_id",
+                "filter_type": "NOT",
+                "filter_value": "463792522299",
+                "filter_list_value": ["account_id"],
+            }
+        ]:
+            return MockResponse("list_clouds", 200)
         raise Exception("Not implemented")

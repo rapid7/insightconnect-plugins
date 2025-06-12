@@ -10,6 +10,7 @@ InsightCloudSec by Rapid7 (formerly DivvyCloud) is a Cloud-Native Security Platf
 * Get resource id
 * List resource tags
 * Switch organization
+* List Clouds
 
 # Requirements
 
@@ -297,6 +298,103 @@ Example output:
 }
 ```
 
+#### List Clouds
+
+This action is used to retrieve a list of available configured clouds. This supports filtering and sorting to refine 
+the results based on specified criteria
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|advanced_search|boolean|None|False|Toggle on whether to enable advanced search functionality or not|None|False|None|None|
+|badge_filter_operator|string|None|False|Determines whether the output should contain all badges in `badges` (`AND`), or one of the badges in the list (`OR`)|["OR", "AND"]|AND|None|None|
+|badges|[]badges|None|False|Specifies the badges used to filter cloud accounts based on key-value pairs|None|[{"key": "environment", "value": "production"}]|None|None|
+|empty_badges|boolean|None|False|Whether or not to filter on cloud accounts which have zero badges (cloud accounts only)|None|False|None|None|
+|exclusion_badges|[]badges|None|False|Specifies the badges to exclude when filtering cloud accounts based on key-value pairs|None|[{"key": "region", "value": "us-east-1"}]|None|None|
+|filters|[]filters|None|False|Filter Clouds based on `field_name`, `filter_type`, `filter_value` and `filter_list_value`|None|[{"field_name": "account_id", "filter_type": "EXACT", "filter_value": "463792522299"}]|None|None|
+|limit|integer|None|False|The limit on the amount of clouds you wish to receive|None|3|None|None|
+|offset|integer|None|False|Offset for cloud results, specifying the starting point for clouds returned|None|1|None|None|
+|order_by|string|None|False|Sort the output based on `field` and `order`. Specified by field name followed by a space then 'ASC' or 'DESC'|None|name ASC|None|None|
+|search_string|string|None|False|Partial or full literal string to search for. f.e. you could search for an instance ID, image ID, or resource name|None|resource_id|None|None|
+  
+Example input:
+
+```
+{
+  "advanced_search": false,
+  "badge_filter_operator": "AND",
+  "badges": [
+    {
+      "key": "environment",
+      "value": "production"
+    }
+  ],
+  "empty_badges": false,
+  "exclusion_badges": [
+    {
+      "key": "region",
+      "value": "us-east-1"
+    }
+  ],
+  "filters": [
+    {
+      "field_name": "account_id",
+      "filter_type": "EXACT",
+      "filter_value": "463792522299"
+    }
+  ],
+  "limit": 3,
+  "offset": 1,
+  "order_by": "name ASC",
+  "search_string": "resource_id"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|clouds|[]object|True|The list of clouds retrieved, including details such as account ID, badge count, cloud type, and other information|[{"account_id": "463792522299", "badge_count": 7, "cloud_access": "None", "cloud_organization_domain_name": "o-03nsxuwv", "cloud_organization_id": "o-03nsxuwv", "cloud_organization_nickname": "The Organization Formerly Known As Test", "cloud_type_id": "AWS", "creation_time": "2021-08-13 21:01:11", "disabled_resource_types": "None", "event_driven_harvest_role": "idle", "failed_resource_types": "None", "group_resource_id": "divvyorganizationservice:1", "id": 1, "is_platform_managed": False, "last_refreshed": "2025-06-05 08:15:14", "name": "AWS Marketplace", "resource_count": 33, "resource_id": "divvyorganizationservice:1", "role_arn": "OrganizationAccountReadRole", "scan_error": "None", "status": "ASSUME_ROLE_FAIL", "strategy_id": 1, "tenant_id": "None", "trailblazer_account_in_scope": "None", "trailblazer_cloudtrail_trails": []}]|
+|total_count|integer|True|Total count of clouds retrieved|1|
+  
+Example output:
+
+```
+{
+  "clouds": [
+    {
+      "account_id": "463792522299",
+      "badge_count": 7,
+      "cloud_access": "None",
+      "cloud_organization_domain_name": "o-03nsxuwv",
+      "cloud_organization_id": "o-03nsxuwv",
+      "cloud_organization_nickname": "The Organization Formerly Known As Test",
+      "cloud_type_id": "AWS",
+      "creation_time": "2021-08-13 21:01:11",
+      "disabled_resource_types": "None",
+      "event_driven_harvest_role": "idle",
+      "failed_resource_types": "None",
+      "group_resource_id": "divvyorganizationservice:1",
+      "id": 1,
+      "is_platform_managed": false,
+      "last_refreshed": "2025-06-05 08:15:14",
+      "name": "AWS Marketplace",
+      "resource_count": 33,
+      "resource_id": "divvyorganizationservice:1",
+      "role_arn": "OrganizationAccountReadRole",
+      "scan_error": "None",
+      "status": "ASSUME_ROLE_FAIL",
+      "strategy_id": 1,
+      "tenant_id": "None",
+      "trailblazer_account_in_scope": "None",
+      "trailblazer_cloudtrail_trails": []
+    }
+  ],
+  "total_count": 1
+}
+```
+
 #### List Resource Tags
 
 This action is used to list resource tags based on provided resource ID
@@ -484,6 +582,22 @@ Example output:
 |Provider ID|string|None|False|Provider ID of the resource|*******************|
 |Resource ID|string|None|False|Resource of the resource ID|instance:******:ap-northeast-1:*******************:|
 |Resource Type|string|None|False|Resource type of the resource|instance|
+  
+**filters**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Field Name|string|None|False|Specifies the name of the output field used for filtering results|account_id|
+|Filter List Value|array|None|False|Can be used instead of `filter_value` to filter multiple values|["AWS_GOV", "AWS_CHINA", "AWS"]|
+|Filter Type|string|None|False|Specifies the type of filtering to apply to the selected field|NOT|
+|Filter Value|string|None|False|Specifies the value to apply to the filter for the `field_name` field.|463792522299|
+  
+**badges**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Key|string|None|False|Key of the Badge|environment|
+|Value|string|None|False|Value of the Badge|production|
 
 
 ## Troubleshooting
@@ -492,7 +606,8 @@ Example output:
 
 # Version History
 
-* 2.1.2 - Updated SDK to the latest version (v6.3.4) | Updated Documentation
+* 2.2.0 - Added 'list_clouds' action | Unit test added | SDK bump to 6.3.6
+* 2.1.2 - Updated SDK to the latest version (v6.3.4) | Updated Documentation 
 * 2.1.1 - Updated SDK to the latest version (v6.2.3) | Address vulnerabilities
 * 2.1.0 - Updated SDK to the latest version | Adding a get resource id functionality
 * 2.0.0 - Enable plugin to run in cloud | Remove actions using defective API endpoints
