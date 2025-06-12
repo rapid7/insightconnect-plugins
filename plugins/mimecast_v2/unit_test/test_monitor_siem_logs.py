@@ -138,6 +138,44 @@ STUB_STATE_PAGINATING = {
     },
 }
 
+STUB_STATE_PAGINATING_CUTOFF = {
+    "query_config": {
+        "attachment protect": {"caught_up": False, "next_page": "NDU1NA==", "query_date": "1999-12-30"},
+        "receipt": {"caught_up": False, "next_page": "NDU1NA==", "query_date": "1999-12-30"},
+        "url protect": {"caught_up": False, "next_page": "NDU1NA==", "query_date": "1999-12-30"},
+    },
+}
+
+STUB_STATE_PAGINATING_CUTOFF_EXPECTED = {
+    "query_config": {
+        "attachment protect": {
+            "caught_up": True,
+            "next_page": "NDU1NA==",
+            "query_date": "1999-12-30",
+            "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
+            "saved_file_url": None,
+            "saved_file_position": 0,
+        },
+        "receipt": {
+            "caught_up": True,
+            "next_page": "NDU1NA==",
+            "query_date": "1999-12-30",
+            "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
+            "saved_file_url": None,
+            "saved_file_position": 0,
+        },
+        "url protect": {
+            "caught_up": True,
+            "next_page": "NDU1NA==",
+            "query_date": "1999-12-30",
+            "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
+            "saved_file_url": None,
+            "saved_file_position": 0,
+        },
+    }
+}
+
+
 STUB_STATE_DECODE_ERROR = {
     "query_config": {
         "attachment protect": {"caught_up": False, "next_page": "NDU1NA==", "query_date": "2000-01-06"},
@@ -438,6 +476,16 @@ class TestMonitorLogs(TestCase):
                 {},
                 Util.read_file_to_dict("expected/monitor_siem_logs.json.exp"),
                 STUB_STATE_EXPECTED_DUPLICATES,
+                True,
+                200,
+                None,
+            ],
+            [
+                "paginating_cutoff_headroom",
+                STUB_STATE_PAGINATING_CUTOFF,
+                {},
+                Util.read_file_to_dict("expected/monitor_siem_logs.json.exp"),
+                STUB_STATE_PAGINATING_CUTOFF_EXPECTED,
                 True,
                 200,
                 None,

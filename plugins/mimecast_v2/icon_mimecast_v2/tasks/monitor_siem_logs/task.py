@@ -17,6 +17,7 @@ LOG_TYPES = [RECEIPT, URL_PROTECT, ATTACHMENT_PROTECT]
 DEFAULT_THREAD_COUNT = 10
 DEFAULT_PAGE_SIZE = 100
 MAX_LOOKBACK_DAYS = 7
+HEADROOM_DAYS = 1
 INITIAL_MAX_LOOKBACK_DAYS = 1
 LARGE_LOG_SIZE_LIMIT = 7000
 SMALL_LOG_SIZE_LIMIT = 250
@@ -60,10 +61,10 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             self.logger.info(f"TASK: Run state is {run_condition}")
             state = self.update_state(state)
             page_size, thead_count, log_limit = self.apply_custom_config(state, run_condition, custom_config)
-            max_run_lookback_date = self.get_max_lookback_date(now_date, run_condition, bool(custom_config))
+            furthest_lookback_date = self.get_furthest_lookback_date(state.get(QUERY_CONFIG, {}))
+            max_run_lookback_date = self.get_max_lookback_date(now_date, run_condition, bool(custom_config), furthest_lookback_date)
             query_config = self.prepare_query_params(state.get(QUERY_CONFIG, {}), max_run_lookback_date, now_date)
             logs, query_config = self.get_all_logs(run_condition, query_config, page_size, thead_count, log_limit)
-            self.logger.info(f"TASK: Total logs collected this run {len(logs)}")
             exit_state, has_more_pages = self.prepare_exit_state(state, query_config, now_date)
             return logs, exit_state, has_more_pages, 200, None
         except APIException as error:
@@ -92,6 +93,22 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                 return PAGINATION_RUN
         return SUBSEQUENT_RUN
 
+    def get_furthest_lookback_date(self, query_config: Dict) -> datetime:
+        """
+        Get the furthest lookback date from the query configuration
+        :param query_config:
+        :return: furthest lookback date
+        """
+        furthest_date = None
+        for log_type, config in query_config.items():
+            if config.get(QUERY_DATE):
+                log_date = datetime.strptime(config[QUERY_DATE], DATE_FORMAT).date()
+                if furthest_date and log_date < furthest_date:
+                    furthest_date = log_date
+                elif not furthest_date:
+                    furthest_date = log_date
+        return furthest_date
+
     def update_state(self, state: Dict) -> Dict:
         """
         Initialise state, validate state, apply custom config
@@ -109,24 +126,29 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                     state[QUERY_CONFIG][log_type] = copy.deepcopy(initial_log_type_config)
         return state
 
-    def get_max_lookback_date(self, now_date: datetime, run_condition: str, custom_config: bool) -> datetime:
+    def get_max_lookback_date(self, now_date: datetime, run_condition: str, custom_config: bool, last_query_date: datetime) -> datetime:
         """
         Get max lookback date for run condition
         :param now_date:
         :param run_condition:
         :param custom_config:
+        :param last_query_date:
         :return: max_run_lookback_date
         """
         max_run_lookback_days = MAX_LOOKBACK_DAYS
-        if run_condition in [INITIAL_RUN] and not custom_config:
+        if run_condition == INITIAL_RUN and not custom_config:
             max_run_lookback_days = INITIAL_MAX_LOOKBACK_DAYS
-
         max_run_lookback_date = now_date - timedelta(days=max_run_lookback_days)
+        if last_query_date:
+            if run_condition == PAGINATION_RUN and last_query_date == now_date - timedelta(days=(max_run_lookback_days + HEADROOM_DAYS)):
+                self.logger.info("TASK: Pagination run detected, allow completion of cutoff day logs retrieval.")
+                max_run_lookback_date -= timedelta(days=HEADROOM_DAYS)
         return max_run_lookback_date
 
     def apply_custom_config(self, state: Dict, run_type: str, custom_config: Dict = {}) -> Tuple[int, int]:
         """
         Apply custom configuration for lookback, query date applies to start and end time of query
+        :param state:
         :param current_query_config:
         :param run_type:
         :param custom_config:
