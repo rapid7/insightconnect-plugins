@@ -89,7 +89,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             self.logger.info(f"Error: A Plugin exception has occurred. Cause: {error.cause}  Error data: {error.data}.")
             return [], existing_state, False, 500, error
         except Exception as error:
-            print(f"Error: Unknown exception has occurred. No results returned. Error Data: {error}")
+            self.logger.info(f"Error: Unknown exception has occurred. No results returned. Error Data: {error}")
             return (
                 [],
                 existing_state,

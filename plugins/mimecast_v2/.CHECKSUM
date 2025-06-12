@@ -1,15 +1,15 @@
 {
 	"spec": "2b376feb59fdddf52f595a4d579f785f",
 	"manifest": "750b56946f0a795f22de75fa4513ea3f",
-	"setup": "069af7fa0abb2748adbd46294c358a19",
+	"setup": "2197ac19502ee80d7317f5c3471927ba",
 	"schemas": [
 		{
 			"identifier": "connection/schema.py",
-			"hash": "3253f4b76caee91ee0f0cdc596b64a98"
+			"hash": "2cf8e41c56e1270adc8e930562bbefff"
 		},
 		{
 			"identifier": "monitor_siem_logs/schema.py",
-			"hash": "0a566c7d94e6689de4d0528d24470b94"
+			"hash": "88ad3235753c61b1afc346aea3e7caef"
 		}
 	]
 }
