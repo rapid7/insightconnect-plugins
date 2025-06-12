@@ -487,7 +487,8 @@ class SearchAlertsOutput(insightconnect_plugin_runtime.Output):
             "BENIGN",
             "UNKNOWN",
             "NOT_APPLICABLE",
-            "SECURITY_TEST"
+            "SECURITY_TEST",
+            "FALSE_POSITIVE"
           ],
           "order": 21
         },
