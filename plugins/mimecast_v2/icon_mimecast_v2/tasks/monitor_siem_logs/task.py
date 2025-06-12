@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import APIException, PluginException
 from insightconnect_plugin_runtime.helper import hash_sha1
+from insightconnect_plugin_runtime.telemetry import monitor_task_delay
 from .schema import (
     MonitorSiemLogsInput,
     MonitorSiemLogsOutput,
@@ -43,6 +44,7 @@ CAUGHT_UP = "caught_up"
 NEXT_PAGE = "next_page"
 SAVED_FILE_URL = "saved_file_url"
 SAVED_FILE_POSITION = "saved_file_position"
+FURTHEST_QUERY_DATE = "furthest_query_date"
 # Access keys for custom config
 THREAD_COUNT = "thread_count"
 PAGE_SIZE = "page_size"
@@ -59,6 +61,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             state=MonitorSiemLogsState(),
         )
 
+    @monitor_task_delay(timestamp_keys=[FURTHEST_QUERY_DATE])
     def run(self, params={}, state={}, custom_config={}):  # pylint: disable=unused-argument
         log_level = self.get_log_level(custom_config.get("log_level", "info"))
         self.connection.api.set_log_level(log_level)
@@ -75,7 +78,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             )
             query_config = self.prepare_query_params(state.get(QUERY_CONFIG, {}), max_run_lookback_date, now_date)
             logs, query_config = self.get_all_logs(run_condition, query_config, page_size, thead_count, log_limit)
-            exit_state, has_more_pages = self.prepare_exit_state(state, query_config, now_date)
+            exit_state, has_more_pages = self.prepare_exit_state(state, query_config, now_date, furthest_lookback_date)
             return logs, exit_state, has_more_pages, 200, None
         except APIException as error:
             self.logger.info(
@@ -86,7 +89,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             self.logger.info(f"Error: A Plugin exception has occurred. Cause: {error.cause}  Error data: {error.data}.")
             return [], existing_state, False, 500, error
         except Exception as error:
-            self.logger.info(f"Error: Unknown exception has occurred. No results returned. Error Data: {error}")
+            print(f"Error: Unknown exception has occurred. No results returned. Error Data: {error}")
             return (
                 [],
                 existing_state,
@@ -177,6 +180,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         :param run_type:
         :param custom_config:
         :return: Page size, thread count and log limit
+        :return: Page size, thread count and log limits
         """
         custom_query_config = {}
         if custom_config:
@@ -320,13 +324,15 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                     new_logs_hashes.append(hash_)
         return logs_to_return, new_logs_hashes
 
-    def prepare_exit_state(self, state: dict, query_config: dict, now_date: datetime) -> Tuple[Dict, bool]:
+    def prepare_exit_state(
+        self, state: dict, query_config: dict, now_date: datetime, furthest_query_date: datetime
+    ) -> Tuple[Dict, bool]:
         """
         Prepare state and pagination for task completion. Format date time.
         :param state:
         :param query_config:
         :param now_date:
-        :param log_hashes:
+        :param furthest_query_date:
         :return: state, has_more_pages
         """
         has_more_pages = False
@@ -337,7 +343,12 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             if (not log_type_config.get(CAUGHT_UP)) or query_date < now_date:
                 has_more_pages = True
             log_type_config[QUERY_DATE] = query_date.strftime(DATE_FORMAT)
+        if furthest_query_date:
+            furthest_query_date_str = furthest_query_date.strftime("%Y-%m-%d")
+        else:
+            furthest_query_date_str = None
         state[QUERY_CONFIG] = query_config
+        state[FURTHEST_QUERY_DATE] = furthest_query_date_str
         return state, has_more_pages
 
     def get_log_level(self, log_level: str = "info") -> int:
