@@ -762,6 +762,7 @@ the query results, and then using the variable step $item.dn
 
 # Version History
 
+* 10.0.1 - Fixed issues with channel binding support | Updated SDK to the latest version (6.3.4)
 * 10.0.0 - Support for channel binding | Updated SDK to the latest version (6.3.3)
 * 9.0.4 - Updated SDK to the latest version (6.2.5)
 * 9.0.3 - Initial updates for fedramp compliance | Updated SDK to the latest version
