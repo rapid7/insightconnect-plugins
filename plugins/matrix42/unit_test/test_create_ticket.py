@@ -69,8 +69,8 @@ class TestCreateTicket(TestCase):
 
         # Check the JSON body sent in the request
         expected_body = {
-            "User": "00000000-0000-1337-0000-000000000002",
-            "Category": "00000000-0000-1337-0000-000000000002",
+            "User": "00000000-0000-1337-0000-000000000000",
+            "Category": "00000000-0000-1337-0000-000000000000",
             "Subject": "Unit Test Ticket",
             "DescriptionHTML": "<h1>Unit Test</h1>",
         }
