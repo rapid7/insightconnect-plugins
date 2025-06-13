@@ -573,6 +573,7 @@ actions:
         enum:
           - OR
           - AND
+          - ""
       search_string:
         title: Search String
         description: Partial or full literal string to search for. f.e. you could search for an instance ID, image ID, or resource name
