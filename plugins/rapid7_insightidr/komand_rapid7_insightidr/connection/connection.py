@@ -16,10 +16,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.url = None
         self.session: Optional[requests.Session] = None
+        self.log_values = {}
 
     def connect(self, params={}):
         api_key = params.get(Input.API_KEY).get("secretKey")
-        log_values = get_logging_context()
+        self.log_values = get_logging_context()
         self.region = params.get(Input.REGION)
         self.url = Investigations.connection_api_url(self.region)
 
@@ -29,12 +30,14 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.session = requests.session()
         self.session.headers["X-Api-Key"] = api_key
         self.session.headers["Accept-version"] = "investigations-preview"
-        self.session.headers["R7-Correlation-Id"] = log_values.get("R7-Correlation-Id", str(uuid.uuid4()))
+
+        self.session.headers["R7-Correlation-Id"] = self.log_values.get("R7-Correlation-Id")
         try:
             self.session.headers["User-Agent"] = f"r7:insightconnect-insightidr-plugin/{self.meta.version}"
         except AttributeError:
             self.session.headers["User-Agent"] = "test-version"
-        self.logger.info(f"Connect: Connecting... {log_values}", **get_logging_context())
+        self.logger.info(f"Connect: Connecting...", **self.log_values)
+        self.logger.info(f"Request ID: {self.log_values.get('RR-Correlation-Id')}", **self.log_values)
 
     def test(self):
         response = self.session.get(f"{self.url}validate")
@@ -45,7 +48,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         if response.status_code == 200:
             return response.json()
         else:
-            self.logger.error(response.text, **get_logging_context())
+            self.logger.error(response.text, **self.connection.log_values)
             raise ConnectionTestException(
                 cause=f"An unknown error occurred." f" InsightIDR responded with a {response.status_code} code.",
                 assistance="See log for more details. If the problem persists, please contact support.",

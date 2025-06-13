@@ -54,7 +54,7 @@ class CloseInvestigationsInBulk(insightconnect_plugin_runtime.Action):
         try:
             result = json.loads(response.get("resource", "{}"))
         except json.decoder.JSONDecodeError:
-            self.logger.error(f"InsightIDR response: {response}", **get_logging_context())
+            self.logger.error(f"InsightIDR response: {response}", **self.connection.log_values)
             raise PluginException(
                 cause="The response from InsightIDR was not in the expected format.",
                 assistance="Contact support for help. See log for more details:",
