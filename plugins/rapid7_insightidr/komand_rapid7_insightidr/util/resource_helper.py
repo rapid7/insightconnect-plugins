@@ -11,6 +11,7 @@ from insightconnect_plugin_runtime.helper import clean
 
 from komand_rapid7_insightidr.connection import Connection
 from komand_rapid7_insightidr.util.constants import DEFAULT_ERROR_MESSAGE
+from komand_rapid7_insightidr.util.util import get_logging_context
 
 
 def _get_async_session(headers) -> aiohttp.ClientSession:

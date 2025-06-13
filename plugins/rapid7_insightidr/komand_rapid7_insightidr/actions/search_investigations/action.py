@@ -6,6 +6,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import clean
 from komand_rapid7_insightidr.util.endpoints import Investigations
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
+from komand_rapid7_insightidr.util.util import get_logging_context
 import json
 import datetime
 
@@ -59,7 +60,7 @@ class SearchInvestigations(insightconnect_plugin_runtime.Action):
         try:
             result = json.loads(response.get("resource"))
         except json.decoder.JSONDecodeError:
-            self.logger.error(f"InsightIDR response: {response}")
+            self.logger.error(f"InsightIDR response: {response}", **get_logging_context())
             raise PluginException(
                 cause="The response from InsightIDR was not in the correct format.",
                 assistance="Contact support for help. See log for more details",
@@ -69,7 +70,7 @@ class SearchInvestigations(insightconnect_plugin_runtime.Action):
             metadata = result.get("metadata", {})
             return {Output.INVESTIGATIONS: investigations, Output.METADATA: metadata}
         except KeyError:
-            self.logger.error(result)
+            self.logger.error(result, **get_logging_context())
             raise PluginException(
                 cause="The response from InsightIDR was not in the correct format.",
                 assistance="Contact support for help. See log for more details",
