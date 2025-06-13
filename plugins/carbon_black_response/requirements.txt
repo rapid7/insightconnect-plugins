@@ -4,5 +4,5 @@
 cbapi==1.7.10
 validators==0.21.0
 urllib3==2.2.2
-requests==2.32.2
+requests==2.32.4
 certifi==2024.7.4
