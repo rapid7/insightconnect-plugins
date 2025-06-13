@@ -20,6 +20,6 @@ class GetAssetInformation(insightconnect_plugin_runtime.Action):
         asset_rrn = params.get(Input.ASSET_RRN)
         self.connection.session.headers["Accept-version"] = "strong-force-preview"
         request = ResourceHelper(self.connection.session, self.logger)
-        self.logger.info(f"Getting the asset information for {asset_rrn}...", **self.connection.log_values)
+        self.logger.info(f"Getting the asset information for {asset_rrn}...", **self.connection.cloud_log_values)
         response = request.make_request(Assets.get_asset_information(self.connection.url, asset_rrn), "get")
         return {Output.ASSET: response, Output.SUCCESS: True}

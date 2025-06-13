@@ -19,6 +19,6 @@ class DownloadAttachment(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         attachment_rrn = params.get(Input.ATTACHMENT_RRN)
         request = ResourceHelper(self.connection.session, self.logger)
-        self.logger.info(f"Downloading the {attachment_rrn} attachment...", **self.connection.log_values)
+        self.logger.info(f"Downloading the {attachment_rrn} attachment...", **self.connection.cloud_log_values)
         content = request.download_attachment(Attachments.attachment(self.connection.url, attachment_rrn))
         return {Output.ATTACHMENT_CONTENT: content, Output.SUCCESS: True}

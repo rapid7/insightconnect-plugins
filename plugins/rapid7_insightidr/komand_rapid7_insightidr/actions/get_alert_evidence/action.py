@@ -22,7 +22,7 @@ class GetAlertEvidence(insightconnect_plugin_runtime.Action):
         self.connection.session.headers["Accept-version"] = "strong-force-preview"
         request = ResourceHelper(self.connection.session, self.logger)
         params = {"size": params.get(Input.SIZE), "index": params.get(Input.INDEX)}
-        self.logger.info(f"Getting the alert evidence for {alert_rrn}...", **self.connection.log_values)
+        self.logger.info(f"Getting the alert evidence for {alert_rrn}...", **self.connection.cloud_log_values)
         response = request.make_request(
             Alerts.get_alert_evidence(self.connection.url, alert_rrn), method="get", params=params
         )

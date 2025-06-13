@@ -33,7 +33,7 @@ class AddIndicatorsToAThreat(insightconnect_plugin_runtime.Action):
         try:
             result = json.loads(response["resource"])
         except json.decoder.JSONDecodeError:
-            self.logger.error(f"InsightIDR response: {response}", **self.connection.log_values)
+            self.logger.error(f"InsightIDR response: {response}", **self.connection.cloud_log_values)
             raise PluginException(
                 cause="The response from InsightIDR was not in the correct format.",
                 assistance="Contact support for help. See log for more details",
