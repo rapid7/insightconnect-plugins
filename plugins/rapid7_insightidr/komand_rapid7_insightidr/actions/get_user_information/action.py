@@ -4,6 +4,7 @@ from .schema import GetUserInformationInput, GetUserInformationOutput, Input, Ou
 # Custom imports below
 from komand_rapid7_insightidr.util.endpoints import Users
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
+from komand_rapid7_insightidr.util.util import get_logging_context
 
 
 class GetUserInformation(insightconnect_plugin_runtime.Action):
@@ -19,6 +20,6 @@ class GetUserInformation(insightconnect_plugin_runtime.Action):
         user_rrn = params.get(Input.USER_RRN)
         self.connection.session.headers["Accept-version"] = "strong-force-preview"
         request = ResourceHelper(self.connection.session, self.logger)
-        self.logger.info(f"Getting the user information for {user_rrn}...")
+        self.logger.info(f"Getting the user information for {user_rrn}...", **get_logging_context())
         response = request.make_request(Users.get_user_information(self.connection.url, user_rrn), "get")
         return {Output.USER: response, Output.SUCCESS: True}

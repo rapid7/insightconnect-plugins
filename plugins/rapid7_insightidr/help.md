@@ -3428,6 +3428,7 @@ Example output:
 
 # Version History
 
+* 11.0.7 - Adding request id to the plugin for traceability
 * 11.0.6 - Updated `disposition` values for `create_investigation` and `update_alert` action | SDK bump to 6.3.6
 * 11.0.5 - Added new disposition of the alert
 * 11.0.4 - Added support for parsing improperly formatted JSON-like strings | SDK bump to 6.3.3
