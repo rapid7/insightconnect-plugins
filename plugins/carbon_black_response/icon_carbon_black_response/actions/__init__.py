@@ -31,4 +31,3 @@ from .isolate_sensor.action import IsolateSensor
 from .unisolate_sensor.action import UnisolateSensor
 
 from .uninstall_sensor.action import UninstallSensor
-

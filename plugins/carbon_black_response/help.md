@@ -1092,11 +1092,12 @@ Example output:
 
 
 ## Troubleshooting
-
-This plugin does not contain any troubleshooting information.
+  
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 3.3.1 - SDK Bump to latest version (6.3.6)
 * 3.3.0 - Adding 'validators', 'urllib3', 'requests', 'certifi' and bumping 'cbapi' to '1.7.10' to address snyk vulnerabilities | 'SDK' bump and Plugin refresh
 * 3.2.0 - Add uninstall sensor action | upgrade to insightconnect-plugin-runtime
 * 3.1.11 - Correct spelling in help.md
