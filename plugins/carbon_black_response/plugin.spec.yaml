@@ -8,7 +8,7 @@ support: rapid7
 status: []
 description: '[VMware Carbon Black EDR](https://www.carbonblack.com/products/edr/) is the most complete endpoint detection and response solution available to security teams. The InsightConnect plugin allows you to automate information collection, endpoint isolation and hash blacklisting.
 This plugin utilizes the [VMware Carbon Black EDR REST API](https://developer.carbonblack.com/guide/enterprise-response/)'
-version: 3.3.0
+version: 3.3.1
 supported_versions: ["6.0-6.2x Carbon Black EDR API"]
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/carbon_black_response
@@ -28,6 +28,7 @@ key_features:
 - Uninstall endpoints
 connection_version: 3
 version_history:
+- "3.3.1 - SDK Bump to latest version (6.3.6)"
 - "3.3.0 - Adding 'validators', 'urllib3', 'requests', 'certifi' and bumping 'cbapi' to '1.7.10' to address snyk vulnerabilities | 'SDK' bump and Plugin refresh"
 - "3.2.0 - Add uninstall sensor action | upgrade to insightconnect-plugin-runtime"
 - "3.1.11 - Correct spelling in help.md"
@@ -48,9 +49,8 @@ version_history:
 - "0.1.0 - Initial plugin"
 sdk:
     type: full
-    version: 6.0.1
+    version: 6.3.6
     user: nobody
-troubleshooting: "This plugin does not contain any troubleshooting information."
 requirements:
 - "Requires an API Key from VMware Carbon Black EDR"
 hub_tags:
