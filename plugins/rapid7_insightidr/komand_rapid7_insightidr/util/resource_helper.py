@@ -103,7 +103,7 @@ class ResourceHelper(object):
         """
         try:
             self.logger.info(
-                f"Making request to {endpoint} with request ID: {self.session.get('R7-Correlation-Id', 'N/A')}",
+                f"Making request to {endpoint} with request ID: {self.session.headers.get('R7-Correlation-Id', 'N/A')}",
             )
             request_method = getattr(self.session, method.lower())
             if not params:
@@ -155,7 +155,7 @@ class ResourceHelper(object):
     ):  # noqa: MC0001
         try:
             self.logger.info(
-                f"Making request to {path} with request ID: {self.session.get('R7-Correlation-Id', 'N/A')}",
+                f"Making request to {path} with request ID: {self.session.headers.get('R7-Correlation-Id', 'N/A')}",
             )
             response = self.session.request(
                 method=method.upper(),
