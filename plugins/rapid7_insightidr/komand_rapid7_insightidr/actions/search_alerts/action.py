@@ -75,7 +75,7 @@ class SearchAlerts(insightconnect_plugin_runtime.Action):
             )
             self.logger.info(
                 f"No user supplied time, defaulting to start time of 6 months ago: {start_time}",
-                **get_logging_context(),
+                **self.connection.cloud_log_values,
             )
 
         search = clean(

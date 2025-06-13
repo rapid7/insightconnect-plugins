@@ -20,6 +20,6 @@ class GetUserInformation(insightconnect_plugin_runtime.Action):
         user_rrn = params.get(Input.USER_RRN)
         self.connection.session.headers["Accept-version"] = "strong-force-preview"
         request = ResourceHelper(self.connection.session, self.logger)
-        self.logger.info(f"Getting the user information for {user_rrn}...", **get_logging_context())
+        self.logger.info(f"Getting the user information for {user_rrn}...", **self.connection.cloud_log_values)
         response = request.make_request(Users.get_user_information(self.connection.url, user_rrn), "get")
         return {Output.USER: response, Output.SUCCESS: True}

@@ -102,6 +102,9 @@ class ResourceHelper(object):
         :return: Dict containing the JSON response body
         """
         try:
+            self.logger.info(
+                f"Making request to {endpoint} with request ID: {self.session.headers.get('R7-Correlation-Id', 'N/A')}",
+            )
             request_method = getattr(self.session, method.lower())
             if not params:
                 params = {}
@@ -151,6 +154,9 @@ class ResourceHelper(object):
         self, path: str, method: str = "GET", params: dict = None, json_data: dict = None, files: dict = None
     ):  # noqa: MC0001
         try:
+            self.logger.info(
+                f"Making request to {path} with request ID: {self.session.headers.get('R7-Correlation-Id', 'N/A')}",
+            )
             response = self.session.request(
                 method=method.upper(),
                 url=path,
