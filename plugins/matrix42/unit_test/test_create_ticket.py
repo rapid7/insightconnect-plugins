@@ -15,18 +15,22 @@ from parameterized import parameterized
 class TestCreateTicket(TestCase):
 
     @parameterized.expand(Util.load_parameters("create_service_request_ticket").get("parameters"))
-    def test_create_service_request_ticket_success(self, mock_request, activity_type, subject, description_html, additional_fields):
+    def test_create_service_request_ticket_success(
+        self, mock_request, activity_type, subject, description_html, additional_fields
+    ):
         action = Util.default_connection(CreateTicket())
 
-        result = action.run({
-            Input.ACTIVITY_TYPE: activity_type,
-            Input.SUBJECT: subject,
-            Input.DESCRIPTION_HTML: description_html,
-            Input.ADDITIONAL_FIELDS: additional_fields
-        })
+        result = action.run(
+            {
+                Input.ACTIVITY_TYPE: activity_type,
+                Input.SUBJECT: subject,
+                Input.DESCRIPTION_HTML: description_html,
+                Input.ADDITIONAL_FIELDS: additional_fields,
+            }
+        )
 
         self.assertEqual(result["id"], "3db8e0a1-1d53-f011-1887-000d3aed261c2")
-       
+
         args, kwargs = mock_request.call_args
 
         # Check the URL called

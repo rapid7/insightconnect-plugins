@@ -3,6 +3,7 @@ from icon_matrix42.connection.connection import Connection
 import json
 import os
 
+
 class Util:
     @staticmethod
     def read_file_to_string(filename):
@@ -22,10 +23,10 @@ class Util:
         class MockResponse:
             def __init__(self, filename):
                 self.filename = filename
-    
+
             def raise_for_status(self):
                 return None
-            
+
             def json(self):
                 return json.loads(
                     Util.read_file_to_string(
@@ -34,7 +35,7 @@ class Util:
                         )
                     )
                 )
-            
+
         url = kwargs.get("url")
 
         if url.endswith("ticket/create?activityType=6"):
