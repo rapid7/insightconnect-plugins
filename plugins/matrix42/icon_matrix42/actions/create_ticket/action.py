@@ -56,7 +56,7 @@ class CreateTicket(insightconnect_plugin_runtime.Action):
         # Make the request
         try:
             self.logger.info("Creating ticket ...")
-            response = requests.post(url, headers=headers, json=body)
+            response = requests.post(url=url, headers=headers, json=body)
             response.raise_for_status()
         except requests.RequestException as e:
             raise PluginException(
@@ -66,12 +66,13 @@ class CreateTicket(insightconnect_plugin_runtime.Action):
             )
 
         # Extract the ticket ID from the response
-        ticket_id = response.text.strip('"') if response.text else None
+        response_json = response.json()
+        ticket_id = response_json.strip('"') if response_json else None
         if not ticket_id:
             raise PluginException(
                 cause="Failed to create ticket in Matrix42.",
                 assistance="The response did not contain a ticket ID.",
-                data=response.json(),
+                data=response_json,
             )
         self.logger.info(f"Ticket created successfully with ID: {ticket_id}")
 
