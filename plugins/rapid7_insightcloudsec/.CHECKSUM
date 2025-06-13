@@ -1,5 +1,5 @@
 {
-	"spec": "3b8a778f8fe16b74b7514b64ca95e4da",
+	"spec": "4f774b11d6d23c5cd31b6c3b6bbbd5df",
 	"manifest": "5aa494cd058f981201cb6620f73d4c2d",
 	"setup": "ed79f782d678488b7b1fe1f37d4a296b",
 	"schemas": [
@@ -21,7 +21,7 @@
 		},
 		{
 			"identifier": "list_clouds/schema.py",
-			"hash": "e2954578d2b829644fa8eb563a9157e6"
+			"hash": "a4734b590b90fa01eae066a32dfee99e"
 		},
 		{
 			"identifier": "list_resource_tags/schema.py",

@@ -44,7 +44,8 @@ class ListCloudsInput(insightconnect_plugin_runtime.Input):
       "description": "Determines whether the output should contain all badges in `badges` (`AND`), or one of the badges in the list (`OR`)",
       "enum": [
         "OR",
-        "AND"
+        "AND",
+        ""
       ],
       "order": 6
     },
