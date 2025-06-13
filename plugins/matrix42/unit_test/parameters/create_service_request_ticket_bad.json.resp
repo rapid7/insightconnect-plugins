@@ -1,0 +1,16 @@
+{
+    "parameters": [
+        [
+            "Service Request",
+            1,
+            "<h1>Unit Test</h1>",
+            {
+                "User": "00000000-0000-1337-0000-000000000000",
+                "Category": "00000000-0000-1337-0000-000000000000"
+            },
+            "Failed to create ticket in Matrix42.",
+            "Please check your Matrix42 connection, credentials, and input parameters.",
+            "Mock request failed with status code 400"
+        ]
+    ]
+}

@@ -1,5 +1,6 @@
 from unittest.mock import MagicMock
 from icon_matrix42.connection.connection import Connection
+from insightconnect_plugin_runtime.exceptions import PluginException
 import json
 import os
 
@@ -21,10 +22,17 @@ class Util:
     @staticmethod
     def mocked_requests(*args, **kwargs):
         class MockResponse:
-            def __init__(self, filename):
+            def __init__(self, filename, status_code=200):
                 self.filename = filename
+                self.status_code = status_code
 
             def raise_for_status(self):
+                if self.status_code != 200:
+                    raise PluginException(
+                        cause="Failed to create ticket in Matrix42.",
+                        assistance="Please check your Matrix42 connection, credentials, and input parameters.",
+                        data=f"Mock request failed with status code {self.status_code}",
+                    )
                 return None
 
             def json(self):
@@ -37,6 +45,9 @@ class Util:
                 )
 
         url = kwargs.get("url")
+
+        if kwargs.get("json", {}).get("Subject") == 1:
+            return MockResponse("bad request", 400)
 
         if url.endswith("ticket/create?activityType=6"):
             return MockResponse("create_service_request_ticket")
