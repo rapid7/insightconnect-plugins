@@ -37,7 +37,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         except AttributeError:
             self.session.headers["User-Agent"] = "test-version"
         self.logger.info(f"Connect: Connecting...", **self.log_values)
-        self.logger.info(f"Request ID: {self.log_values.get('RR-Correlation-Id')}", **self.log_values)
+        self.logger.info(f"Request ID: {self.log_values.get('R7-Correlation-Id')}", **self.log_values)
 
     def test(self):
         response = self.session.get(f"{self.url}validate")
