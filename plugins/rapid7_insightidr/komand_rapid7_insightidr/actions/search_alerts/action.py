@@ -6,6 +6,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import clean
 from komand_rapid7_insightidr.util.endpoints import Alerts
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
+from komand_rapid7_insightidr.util.util import get_logging_context
 from dateutil.relativedelta import relativedelta
 import datetime
 import json
@@ -72,7 +73,10 @@ class SearchAlerts(insightconnect_plugin_runtime.Action):
                 .astimezone(datetime.timezone.utc)
                 .strftime("%Y-%m-%dT%H:%M:%SZ")
             )
-            self.logger.info(f"No user supplied time, defaulting to start time of 6 months ago: {start_time}")
+            self.logger.info(
+                f"No user supplied time, defaulting to start time of 6 months ago: {start_time}",
+                **self.connection.cloud_log_values,
+            )
 
         search = clean(
             {

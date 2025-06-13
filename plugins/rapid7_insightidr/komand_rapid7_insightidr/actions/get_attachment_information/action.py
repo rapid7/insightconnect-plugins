@@ -4,6 +4,7 @@ from .schema import GetAttachmentInformationInput, GetAttachmentInformationOutpu
 # Custom imports below
 from komand_rapid7_insightidr.util.endpoints import Attachments
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
+from komand_rapid7_insightidr.util.util import get_logging_context
 
 
 class GetAttachmentInformation(insightconnect_plugin_runtime.Action):
@@ -18,7 +19,7 @@ class GetAttachmentInformation(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         attachment_rrn = params.get(Input.ATTACHMENT_RRN)
         request = ResourceHelper(self.connection.session, self.logger)
-        self.logger.info(f"Getting the attachment information for {attachment_rrn}...")
+        self.logger.info(f"Getting the attachment information for {attachment_rrn}...", **self.connection.cloud_log_values)
         response = request.get_attachment_information(
             Attachments.get_attachment_information(self.connection.url, attachment_rrn)
         )

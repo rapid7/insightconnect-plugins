@@ -4,6 +4,7 @@ from .schema import GetAssetInformationInput, GetAssetInformationOutput, Input, 
 # Custom imports below
 from komand_rapid7_insightidr.util.endpoints import Assets
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
+from komand_rapid7_insightidr.util.util import get_logging_context
 
 
 class GetAssetInformation(insightconnect_plugin_runtime.Action):
@@ -19,6 +20,6 @@ class GetAssetInformation(insightconnect_plugin_runtime.Action):
         asset_rrn = params.get(Input.ASSET_RRN)
         self.connection.session.headers["Accept-version"] = "strong-force-preview"
         request = ResourceHelper(self.connection.session, self.logger)
-        self.logger.info(f"Getting the asset information for {asset_rrn}...")
+        self.logger.info(f"Getting the asset information for {asset_rrn}...", **self.connection.cloud_log_values)
         response = request.make_request(Assets.get_asset_information(self.connection.url, asset_rrn), "get")
         return {Output.ASSET: response, Output.SUCCESS: True}

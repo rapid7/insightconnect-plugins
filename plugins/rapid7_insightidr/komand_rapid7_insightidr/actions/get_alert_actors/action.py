@@ -4,6 +4,7 @@ from .schema import GetAlertActorsInput, GetAlertActorsOutput, Input, Output, Co
 # Custom imports below
 from komand_rapid7_insightidr.util.endpoints import Alerts
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
+from komand_rapid7_insightidr.util.util import get_logging_context
 
 
 class GetAlertActors(insightconnect_plugin_runtime.Action):
@@ -20,7 +21,7 @@ class GetAlertActors(insightconnect_plugin_runtime.Action):
         self.connection.session.headers["Accept-version"] = "strong-force-preview"
         request = ResourceHelper(self.connection.session, self.logger)
         params = {"size": params.get(Input.SIZE), "index": params.get(Input.INDEX)}
-        self.logger.info(f"Getting the alert actors for {alert_rrn}...")
+        self.logger.info(f"Getting the alert actors for {alert_rrn}...", **self.connection.cloud_log_values)
         response = request.make_request(
             Alerts.get_alert_actor(self.connection.url, alert_rrn), method="get", params=params
         )

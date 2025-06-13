@@ -3,6 +3,7 @@ import insightconnect_plugin_runtime
 from .schema import GetASavedQueryInput, GetASavedQueryOutput, Input, Output, Component
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
 from komand_rapid7_insightidr.util.endpoints import Queries
+from komand_rapid7_insightidr.util.util import get_logging_context
 from insightconnect_plugin_runtime.exceptions import PluginException
 from validators import uuid
 import json
@@ -32,7 +33,7 @@ class GetASavedQuery(insightconnect_plugin_runtime.Action):
             result = json.loads(response["resource"])
             saved_query = insightconnect_plugin_runtime.helper.clean(result.get("saved_query"))
         except json.decoder.JSONDecodeError:
-            self.logger.error(f"InsightIDR response: {response}")
+            self.logger.error(f"InsightIDR response: {response}", **self.connection.cloud_log_values)
             raise PluginException(
                 cause="The response from InsightIDR was not in the correct format.",
                 assistance="Contact support for help. See log for more details",

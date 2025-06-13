@@ -11,6 +11,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 # Custom imports below
 from komand_rapid7_insightidr.util.endpoints import Threats
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
+from komand_rapid7_insightidr.util.util import get_logging_context
 import json
 
 
@@ -32,7 +33,7 @@ class AddIndicatorsToAThreat(insightconnect_plugin_runtime.Action):
         try:
             result = json.loads(response["resource"])
         except json.decoder.JSONDecodeError:
-            self.logger.error(f"InsightIDR response: {response}")
+            self.logger.error(f"InsightIDR response: {response}", **self.connection.cloud_log_values)
             raise PluginException(
                 cause="The response from InsightIDR was not in the correct format.",
                 assistance="Contact support for help. See log for more details",

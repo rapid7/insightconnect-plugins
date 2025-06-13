@@ -13,6 +13,7 @@ from insightconnect_plugin_runtime.helper import clean
 from komand_rapid7_insightidr.util.endpoints import Investigations
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
+from komand_rapid7_insightidr.util.util import get_logging_context
 
 
 class AssignUserToInvestigation(insightconnect_plugin_runtime.Action):
@@ -39,7 +40,7 @@ class AssignUserToInvestigation(insightconnect_plugin_runtime.Action):
         try:
             result = json.loads(response.get("resource"))
         except json.decoder.JSONDecodeError:
-            self.logger.error(f"InsightIDR response: {response}")
+            self.logger.error(f"InsightIDR response: {response}", **self.connection.cloud_log_values)
             raise PluginException(
                 cause="The response from InsightIDR was not in the correct format.",
                 assistance="Contact support for help. See log for more details",
@@ -47,7 +48,7 @@ class AssignUserToInvestigation(insightconnect_plugin_runtime.Action):
         try:
             return {Output.SUCCESS: True, Output.INVESTIGATION: clean(result)}
         except KeyError:
-            self.logger.error(result)
+            self.logger.error(result, **self.connection.cloud_log_values)
             raise PluginException(
                 cause="The response from InsightIDR was not in the correct format.",
                 assistance="Contact support for help. See log for more details",
