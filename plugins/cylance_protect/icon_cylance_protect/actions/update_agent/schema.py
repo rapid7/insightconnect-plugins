@@ -4,7 +4,9 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Adds or removes zones and/or updates the policy of a specific Console device resource belonging to a Tenant"
+    DESCRIPTION = (
+        "Adds or removes zones and/or updates the policy of a specific Console device resource belonging to a Tenant"
+    )
 
 
 class Input:
@@ -19,7 +21,8 @@ class Output:
 
 
 class UpdateAgentInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -60,14 +63,16 @@ class UpdateAgentInput(insightconnect_plugin_runtime.Input):
   ],
   "definitions": {}
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class UpdateAgentOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -84,7 +89,8 @@ class UpdateAgentOutput(insightconnect_plugin_runtime.Output):
   ],
   "definitions": {}
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

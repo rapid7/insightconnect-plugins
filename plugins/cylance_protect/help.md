@@ -14,6 +14,15 @@ The [BlackBerry CylancePROTECT](https://www.cylance.com/en-us/platform/products/
 
 * CylancePROTECT configured with an Custom Application
 
+* Setup
+
+You must create a Custom Application by following this procedure from the CylancePROTECT console:
+
+1. Go to the Integrations tab on the Settings page
+2. Click `Add Application`
+3. Provide a name for the integration and choose the permissions related to the actions you want to use
+4. Copy and paste the `Application ID`, `Application Secret`, and `Tenant ID` (from the Integrations tab) into the connection
+
 # Supported Product Versions
 
 * v2
@@ -22,13 +31,6 @@ The [BlackBerry CylancePROTECT](https://www.cylance.com/en-us/platform/products/
 
 ## Setup
 
-You must create a Custom Application by following this procedure from the CylancePROTECT console:
-
-1. Go to the Integrations tab on the Settings page
-2. Click "Add Application"
-3. Provide a name for the integration and choose the permissions related to the actions you want to use
-4. Copy and paste the Application ID, Application Secret, and Tenant ID (from the Integrations tab) into the connection
-  
 The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
@@ -601,6 +603,7 @@ Example output:
 
 # Version History
 
+* 1.5.4 - Resolved Snyk Vulnerability | SDK bump to latest version (6.3.6)
 * 1.5.3 - Bumping requirements.txt | SDK bump to 6.1.4
 * 1.5.2 - Bumped the version of the SDK used | Bumped versions of all pythion packages used | Ran refresh to bring code up to latest standard | Added unit tests for all actions
 * 1.5.1 - Bug fixes in Delete Asset, hostname whitelisting, and IP address inputs

@@ -1,47 +1,47 @@
 {
-	"spec": "42306d5023bce862a7c5306798b2b71e",
-	"manifest": "a4d921084b747f15f93abcf482f4ea3c",
-	"setup": "da0acb740f4328fffea859d619c0c043",
+	"spec": "022f546c7ce2cb6b34a95955f558bae9",
+	"manifest": "b264d2adb2e0c5a8f1b0ef0e68e4400b",
+	"setup": "bb76235a01de646dfa1e37117ac53478",
 	"schemas": [
 		{
 			"identifier": "blacklist/schema.py",
-			"hash": "7954b936be97fec6b84b24ac6541a0fc"
+			"hash": "40fab7679ee6ecdb9b3a7ebeaee934fd"
 		},
 		{
 			"identifier": "delete_asset/schema.py",
-			"hash": "625669d9e52a3fbbfac7ae2f24f92b04"
+			"hash": "48fd7c01e12d596c4f3738324122bfe5"
 		},
 		{
 			"identifier": "get_agent_details/schema.py",
-			"hash": "a837300f1ec9a4bbd65a5e6570fc7f98"
+			"hash": "93dc666ff3c7563457f31544dd100eb4"
 		},
 		{
 			"identifier": "quarantine/schema.py",
-			"hash": "7e941a673a1cf8ed78eb2ff29b6d819b"
+			"hash": "b0473f91c7b8ca2a8f68dc4145f64873"
 		},
 		{
 			"identifier": "search_agents/schema.py",
-			"hash": "691a4f1c114cdc0bb947f74a6d84f8cf"
+			"hash": "0a1e950df80d3ebc6ea031adfc3d072e"
 		},
 		{
 			"identifier": "search_threat_agents/schema.py",
-			"hash": "6edc17d6e955b8ab2290389dda2bdfac"
+			"hash": "302bb0edb84a1088dfec38c6cdff179e"
 		},
 		{
 			"identifier": "search_threats/schema.py",
-			"hash": "e8f1be199163d950020a902b4eb61a71"
+			"hash": "3b405e58facfbfdfb7766569618ac1c9"
 		},
 		{
 			"identifier": "update_agent/schema.py",
-			"hash": "b17040b9852ed8de2ad5fc4fd235d5eb"
+			"hash": "48a498baa6051e58829ce3759c9faa39"
 		},
 		{
 			"identifier": "update_agent_threat/schema.py",
-			"hash": "f02aadf6b6f8790d69a968c5d56442fd"
+			"hash": "75e00504688ee8cac11dc634f95160d9"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "c1c00527e6141f5bb2faffd4124d09e2"
+			"hash": "e27e898d68678ac933a6532be11c56cd"
 		}
 	]
 }
