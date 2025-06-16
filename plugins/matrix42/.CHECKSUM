@@ -1,0 +1,15 @@
+{
+	"spec": "a9a207f71baafb687f9c0212d0f2d9f5",
+	"manifest": "11b559aa00816adcfcef8a1c44f4d88c",
+	"setup": "d0e4556da6940e794c9d65e4eadee3df",
+	"schemas": [
+		{
+			"identifier": "create_ticket/schema.py",
+			"hash": "5e60bb00a9d46bbef5972061debc3feb"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "99aaa16accc504e6cea9fba9467d8bfe"
+		}
+	]
+}
