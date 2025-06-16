@@ -26,8 +26,8 @@ class ListAlertsForInvestigation(insightconnect_plugin_runtime.Action):
         index = params.get(Input.INDEX)
 
         parameters = {"size": size, "index": index}
-        self.connection.session.headers["Accept-version"] = "investigations-preview"
-        request = ResourceHelper(self.connection.session, self.logger)
+        self.connection.headers["Accept-version"] = "investigations-preview"
+        request = ResourceHelper(self.connection.headers, self.logger)
 
         endpoint = Investigations.list_alerts_for_investigation(self.connection.url, identifier)
         response = request.resource_request(endpoint, "get", params=parameters)
@@ -51,7 +51,8 @@ class ListAlertsForInvestigation(insightconnect_plugin_runtime.Action):
                 assistance="Contact support for help. See log for more details",
             )
 
-    def _get_rule_rrn(self, result: Dict[str, Any]) -> None:
+    @staticmethod
+    def _get_rule_rrn(result: Dict[str, Any]) -> None:
         """
         Retrieve rule rrn from all records,
         due to inconsistent API from insightIDR

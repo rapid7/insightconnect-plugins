@@ -29,7 +29,7 @@ class TestGetAllSavedQueries(TestCase):
         self.action = Util.default_connector(GetAllSavedQueries())
         self.connection = self.action.connection
 
-    @patch("requests.Session.get", side_effect=mock_get_request)
+    @patch("requests.Session.send", side_effect=mock_get_request)
     def test_get_all_saved_queries(self, _mock_req):
         actual = self.action.run()
         expected = {

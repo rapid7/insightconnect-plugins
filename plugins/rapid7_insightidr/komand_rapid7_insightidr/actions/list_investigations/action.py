@@ -43,7 +43,7 @@ class ListInvestigations(insightconnect_plugin_runtime.Action):
             rest_params["end_time"] = end_time_parsed.astimezone(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
         rest_params = clean(rest_params)
 
-        request = ResourceHelper(self.connection.session, self.logger)
+        request = ResourceHelper(self.connection.headers, self.logger)
 
         endpoint = Investigations.list_investigations(self.connection.url)
         response = request.make_request(endpoint, "GET", params=rest_params)

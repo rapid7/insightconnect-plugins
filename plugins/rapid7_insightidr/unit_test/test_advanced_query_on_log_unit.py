@@ -17,7 +17,7 @@ from jsonschema import validate
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-@patch("requests.Session.get", side_effect=Util.mocked_requests)
+@patch("requests.Session.send", side_effect=Util.mocked_requests)
 @patch("aiohttp.ClientSession.get", side_effect=Util.mocked_async_requests)
 class TestAdvancedQueryOnLog(TestCase):
     @classmethod

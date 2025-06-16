@@ -11,7 +11,6 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 # Custom imports below
 from komand_rapid7_insightidr.util.endpoints import Threats
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
-from komand_rapid7_insightidr.util.util import get_logging_context
 import json
 
 
@@ -25,8 +24,8 @@ class AddIndicatorsToAThreat(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        self.connection.session.headers["Accept-version"] = "investigations-preview"
-        request = ResourceHelper(self.connection.session, self.logger)
+        self.connection.headers["Accept-version"] = "investigations-preview"
+        request = ResourceHelper(self.connection.headers, self.logger)
         endpoint = Threats.add_indicators_to_a_threat(self.connection.url, params.pop(Input.KEY))
 
         response = request.resource_request(endpoint, "post", params={"format": "json"}, payload=params)

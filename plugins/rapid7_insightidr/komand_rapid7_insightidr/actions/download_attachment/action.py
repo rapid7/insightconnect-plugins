@@ -4,7 +4,6 @@ from .schema import DownloadAttachmentInput, DownloadAttachmentOutput, Input, Ou
 # Custom imports below
 from komand_rapid7_insightidr.util.endpoints import Attachments
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
-from komand_rapid7_insightidr.util.util import get_logging_context
 
 
 class DownloadAttachment(insightconnect_plugin_runtime.Action):
@@ -18,7 +17,7 @@ class DownloadAttachment(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         attachment_rrn = params.get(Input.ATTACHMENT_RRN)
-        request = ResourceHelper(self.connection.session, self.logger)
+        request = ResourceHelper(self.connection.headers, self.logger)
         self.logger.info(f"Downloading the {attachment_rrn} attachment...", **self.connection.cloud_log_values)
         content = request.download_attachment(Attachments.attachment(self.connection.url, attachment_rrn))
         return {Output.ATTACHMENT_CONTENT: content, Output.SUCCESS: True}

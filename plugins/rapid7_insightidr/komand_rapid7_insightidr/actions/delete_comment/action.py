@@ -4,7 +4,6 @@ from .schema import DeleteCommentInput, DeleteCommentOutput, Input, Output, Comp
 # Custom imports below
 from komand_rapid7_insightidr.util.endpoints import Comments
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
-from komand_rapid7_insightidr.util.util import get_logging_context
 
 
 class DeleteComment(insightconnect_plugin_runtime.Action):
@@ -18,7 +17,7 @@ class DeleteComment(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         comment_rrn = params.get(Input.COMMENT_RRN)
-        request = ResourceHelper(self.connection.session, self.logger)
+        request = ResourceHelper(self.connection.headers, self.logger)
         self.logger.info(f"Deleting the {comment_rrn} comment...", **self.connection.cloud_log_values)
         request.delete_comment(Comments.delete_comment(self.connection.url, comment_rrn))
         return {Output.SUCCESS: True}

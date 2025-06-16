@@ -6,7 +6,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 import time
 from komand_rapid7_insightidr.util.parse_dates import parse_dates
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
-from komand_rapid7_insightidr.util.util import get_logging_context
+from komand_rapid7_insightidr.util.util import send_session_request
 from requests import HTTPError
 from typing import Tuple
 
@@ -106,7 +106,7 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
         counter = timeout
 
         while callback_url and counter > 0:
-            response = self.connection.session.get(callback_url)
+            response = send_session_request(req_url=callback_url, req_headers=self.connection.headers)
             self.logger.info(f"IDR Response Status Code: {response.status_code}", **self.connection.cloud_log_values)
 
             try:
@@ -131,7 +131,7 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
                         "Results were not ready. Sleeping 1 second and trying again.", **self.connection.cloud_log_values
                     )
                     self.logger.info(f"Time left: {counter} seconds", **self.connection.cloud_log_values)
-                    response = self.connection.session.get(callback_url)
+                    response = send_session_request(req_url=callback_url, req_headers=self.connection.headers)
                     try:
                         response.raise_for_status()
                         results_object = response.json()
@@ -205,7 +205,7 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
 
         self.logger.info(f"Getting logs from: {endpoint}", **self.connection.cloud_log_values)
         self.logger.info(f"Using parameters: {params}", **self.connection.cloud_log_values)
-        response = self.connection.session.get(endpoint, params=params)
+        response = send_session_request(req_url=endpoint, req_headers=self.connection.headers, req_params=params)
         try:
             response.raise_for_status()
         except Exception:
@@ -220,7 +220,7 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
         if statistical:
             stats_endpoint = f"{self.connection.url}log_search/query/{results_object.get('id', '')}"
             self.logger.info(f"Getting statistical from: {stats_endpoint}", **self.connection.cloud_log_values)
-            stats_response = self.connection.session.get(stats_endpoint, params=params)
+            stats_response = send_session_request(req_url=stats_endpoint, req_headers=self.connection.headers)
             try:
                 stats_response.raise_for_status()
             except HTTPError as error:
@@ -258,7 +258,7 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
         endpoint = f"{self.connection.url}log_search/management/logs"
 
         self.logger.info(f"Getting log entries from: {endpoint}")
-        response = self.connection.session.get(endpoint)
+        response = send_session_request(req_url=endpoint, req_headers=self.connection.headers)
         try:
             response.raise_for_status()
         except Exception:

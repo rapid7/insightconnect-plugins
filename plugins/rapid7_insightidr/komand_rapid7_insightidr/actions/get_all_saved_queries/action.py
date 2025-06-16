@@ -2,7 +2,6 @@ import insightconnect_plugin_runtime
 from .schema import GetAllSavedQueriesInput, GetAllSavedQueriesOutput, Input, Output, Component
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
 from komand_rapid7_insightidr.util.endpoints import Queries
-from komand_rapid7_insightidr.util.util import get_logging_context
 from insightconnect_plugin_runtime.exceptions import PluginException
 import json
 
@@ -17,8 +16,8 @@ class GetAllSavedQueries(insightconnect_plugin_runtime.Action):
         )
 
     def run(self):
-        self.connection.session.headers["Accept-version"] = "investigations-preview"
-        request = ResourceHelper(self.connection.session, self.logger)
+        self.connection.headers["Accept-version"] = "investigations-preview"
+        request = ResourceHelper(self.connection.headers, self.logger)
         response = request.resource_request(Queries.get_all_queries(self.connection.region), "get")
         try:
             result = json.loads(response["resource"])

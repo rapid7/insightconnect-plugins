@@ -19,8 +19,8 @@ class CreateThreat(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        self.connection.session.headers["Accept-version"] = "investigations-preview"
-        request = ResourceHelper(self.connection.session, self.logger)
+        self.connection.headers["Accept-version"] = "investigations-preview"
+        request = ResourceHelper(self.connection.headers, self.logger)
         endpoint = Threats.create_threat(self.connection.url)
 
         indicators = params.get(Input.INDICATORS)

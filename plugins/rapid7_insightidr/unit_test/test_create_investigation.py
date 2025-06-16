@@ -36,7 +36,7 @@ class TestCreateInvestigation(TestCase):
         self.action = Util.default_connector(CreateInvestigation())
         self.connection = self.action.connection
 
-    @patch("requests.Session.post", side_effect=mock_post_request)
+    @patch("requests.Session.send", side_effect=mock_post_request)
     def test_create_investigation(self, _mock_req):
         test_input = {Input.TITLE: "Example Title", Input.EMAIL: STUB_USER_EMAIL}
         validate(test_input, CreateInvestigationInput.schema)

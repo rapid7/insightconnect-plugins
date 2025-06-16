@@ -6,7 +6,6 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import clean
 from komand_rapid7_insightidr.util.endpoints import Investigations
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
-from komand_rapid7_insightidr.util.util import get_logging_context
 import json
 import datetime
 
@@ -51,8 +50,8 @@ class SearchInvestigations(insightconnect_plugin_runtime.Action):
 
         parameters = clean({Input.SIZE: size, Input.INDEX: index})
 
-        self.connection.session.headers["Accept-version"] = "investigations-preview"
-        request = ResourceHelper(self.connection.session, self.logger)
+        self.connection.headers["Accept-version"] = "investigations-preview"
+        request = ResourceHelper(self.connection.headers, self.logger)
 
         endpoint = Investigations.search_investigation(self.connection.url)
         response = request.resource_request(endpoint, "post", payload=data, params=parameters)

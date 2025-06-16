@@ -8,7 +8,6 @@ from insightconnect_plugin_runtime.helper import clean
 from komand_rapid7_insightidr.util.endpoints import Investigations
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
 from komand_rapid7_insightidr.util.constants import TOTAL_SIZE
-from komand_rapid7_insightidr.util.util import get_logging_context
 import json
 import datetime
 
@@ -73,8 +72,8 @@ class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
 
     def make_resource_request(self, data):
         try:
-            self.connection.session.headers["Accept-version"] = "investigations-preview"
-            request = ResourceHelper(self.connection.session, self.logger)
+            self.connection.headers["Accept-version"] = "investigations-preview"
+            request = ResourceHelper(self.connection.headers, self.logger)
             endpoint = Investigations.search_investigation(self.connection.url)
             response = request.resource_request(endpoint, "post", payload=data)
             return self.parse_json_response(response)

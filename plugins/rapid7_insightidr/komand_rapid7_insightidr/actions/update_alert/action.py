@@ -42,8 +42,8 @@ class UpdateAlert(insightconnect_plugin_runtime.Action):
         data = {k: v for k, v in data.items() if v and (isinstance(v, dict) and v["value"] or not isinstance(v, dict))}
 
         # Set the API version header and create a request helper instance
-        self.connection.session.headers["Accept-version"] = "strong-force-preview"
-        request = ResourceHelper(self.connection.session, self.logger)
+        self.connection.headers["Accept-version"] = "strong-force-preview"
+        request = ResourceHelper(self.connection.headers, self.logger)
 
         # Construct the endpoint URL
         endpoint = Alerts.get_alert_information(self.connection.url, alert_rrn)

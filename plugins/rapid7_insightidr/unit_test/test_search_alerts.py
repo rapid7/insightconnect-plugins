@@ -17,7 +17,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from jsonschema import validate
 
 
-@patch("requests.Session.request", side_effect=Util.mocked_requests)
+@patch("requests.Session.send", side_effect=Util.mocked_requests)
 class TestSearchAlerts(TestCase):
     @classmethod
     def setUpClass(cls) -> None:

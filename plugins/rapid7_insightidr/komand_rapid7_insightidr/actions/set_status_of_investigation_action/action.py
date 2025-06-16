@@ -12,7 +12,6 @@ from insightconnect_plugin_runtime.helper import clean
 # Custom imports below
 from komand_rapid7_insightidr.util.endpoints import Investigations
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
-from komand_rapid7_insightidr.util.util import get_logging_context
 import json
 
 
@@ -29,8 +28,8 @@ class SetStatusOfInvestigationAction(insightconnect_plugin_runtime.Action):
         idr_id = params.get(Input.ID)
         status = params.get(Input.STATUS)
 
-        self.connection.session.headers["Accept-version"] = "investigations-preview"
-        request = ResourceHelper(self.connection.session, self.logger)
+        self.connection.headers["Accept-version"] = "investigations-preview"
+        request = ResourceHelper(self.connection.headers, self.logger)
 
         endpoint = Investigations.set_the_status_of_an_investigation(self.connection.url, idr_id, status)
         response = request.resource_request(endpoint, "put")

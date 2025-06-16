@@ -35,7 +35,7 @@ class TestQuery(TestCase):
         self.action = Util.default_connector(Query())
         self.connection = self.action.connection
 
-    @patch("requests.Session.get", side_effect=mock_get_request)
+    @patch("requests.Session.send", side_effect=mock_get_request)
     def test_query(self, _mock_req):
         test_input = {
             Input.ID: self.params.get("id"),
@@ -73,7 +73,7 @@ class TestQuery(TestCase):
         self.assertEqual(actual, expected)
         validate(actual, QueryOutput.schema)
 
-    @patch("requests.Session.get", side_effect=mock_get_request)
+    @patch("requests.Session.send", side_effect=mock_get_request)
     def test_query_true(self, _mock_req):
         test_input = {
             Input.ID: self.params.get("id"),
@@ -110,7 +110,7 @@ class TestQuery(TestCase):
         self.assertEqual(actual, expected)
         validate(actual, QueryOutput.schema)
 
-    @patch("requests.Session.get", side_effect=mock_get_request)
+    @patch("requests.Session.send", side_effect=mock_get_request)
     @patch("time.time", return_value=1682954418)
     def test_query_true_future(self, _mock_req, mock_time):
         test_input = {
@@ -148,7 +148,7 @@ class TestQuery(TestCase):
         self.assertEqual(actual, expected)
         validate(actual, QueryOutput.schema)
 
-    @patch("requests.Session.get", side_effect=mock_get_request)
+    @patch("requests.Session.send", side_effect=mock_get_request)
     def test_query_202(self, _mock_req):
         test_input = {
             Input.ID: self.params.get("id_202"),
@@ -185,7 +185,7 @@ class TestQuery(TestCase):
         self.assertEqual(actual, expected)
         validate(actual, QueryOutput.schema)
 
-    @patch("requests.Session.get", side_effect=mock_get_request)
+    @patch("requests.Session.send", side_effect=mock_get_request)
     def test_query_202_error(self, _mock_req):
         test_input = {
             Input.ID: self.params.get("id_202_error"),
@@ -197,7 +197,7 @@ class TestQuery(TestCase):
         cause = "The response from InsightIDR was not in the correct format."
         self.assertEqual(exception.exception.cause, cause)
 
-    @patch("requests.Session.get", side_effect=mock_get_request)
+    @patch("requests.Session.send", side_effect=mock_get_request)
     def test_query_not_found(self, _mock_req):
         test_input = {
             Input.ID: self.params.get("not_found_id"),
@@ -209,7 +209,7 @@ class TestQuery(TestCase):
         cause = "InsightIDR returned a status code of 404: Not Found"
         self.assertEqual(exception.exception.cause, cause)
 
-    @patch("requests.Session.get", side_effect=mock_get_request)
+    @patch("requests.Session.send", side_effect=mock_get_request)
     def test_query_key_error(self, _mock_req):
         test_input = {
             Input.ID: self.params.get("id_key_error"),

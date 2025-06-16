@@ -6,7 +6,6 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import clean
 from komand_rapid7_insightidr.util.endpoints import Alerts
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
-from komand_rapid7_insightidr.util.util import get_logging_context
 from dateutil.relativedelta import relativedelta
 import datetime
 import json
@@ -100,8 +99,8 @@ class SearchAlerts(insightconnect_plugin_runtime.Action):
             {"rrns_only": params.get(Input.RRNS_ONLY), "size": params.get(Input.SIZE), "index": params.get(Input.INDEX)}
         )
 
-        self.connection.session.headers["Accept-version"] = "strong-force-preview "
-        request = ResourceHelper(self.connection.session, self.logger)
+        self.connection.headers["Accept-version"] = "strong-force-preview "
+        request = ResourceHelper(self.connection.headers, self.logger)
 
         endpoint = Alerts.get_alert_serach(self.connection.url)
         response = request.resource_request(endpoint, "post", payload=data, params=parameters)
