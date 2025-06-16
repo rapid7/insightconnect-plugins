@@ -135,6 +135,7 @@ class Util:
                         os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{self.filename}.json.resp")
                     )
                 )
+
         # TODO: this should be addressed and mocked properly within the test and not needing the conversion below
         # Re-build a fake args list of the urls based on the `ResourceHelper` calls this either pos 0 or pos 1
         # New logic to remove sessions remaining open passes a prepared request object and needs converted for mocking
@@ -153,8 +154,8 @@ class Util:
 
         # Some tests are testing `filenames` so we need to allow for this on the body param
         content_type = kwargs.get("headers", {}).get("Content-Type", "")
-        if kwargs.get('body') and "multipart/form-data" not in content_type:
-            kwargs["json"] = json.loads(kwargs.get('body'))
+        if kwargs.get("body") and "multipart/form-data" not in content_type:
+            kwargs["json"] = json.loads(kwargs.get("body"))
 
         if kwargs.get("params") == {
             "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890",
@@ -366,15 +367,15 @@ class Util:
             return MockResponse("log_id8", 200)
 
         if args[1] == "https://us.api.insight.rapid7.com/idr/at/alerts/ops/search":
-            if kwargs.get("params", {}).get("rrns_only") == 'True':
+            if kwargs.get("params", {}).get("rrns_only") == "True":
                 return MockResponse("test_search_alerts_rrns_true", 200)
             else:
                 return MockResponse("test_search_alerts_rrns_false", 200)
 
         if args[1] == "https://us.api.insight.rapid7.com/idr/v1/accounts/_search":
-            if kwargs.get("params", {}).get("size") == '1':
+            if kwargs.get("params", {}).get("size") == "1":
                 return MockResponse("test_search_accounts_1", 200)
-            elif kwargs.get("params", {}).get("size") == '2':
+            elif kwargs.get("params", {}).get("size") == "2":
                 return MockResponse("test_search_accounts_2", 200)
         if args[1] == "https://us.api.insight.rapid7.com/log_search/management/logs/test_id":
             return MockResponse("get_a_log", 200)

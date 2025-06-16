@@ -91,7 +91,7 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
         counter = timeout
 
         while callback_url and counter > 0:
-            response = send_session_request(req_url=callback_url,req_headers=self.connection.headers)
+            response = send_session_request(req_url=callback_url, req_headers=self.connection.headers)
             self.logger.info(f"IDR Response Status Code: {response.status_code}", **self.connection.cloud_log_values)
 
             try:
@@ -113,7 +113,8 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
                     time.sleep(1)
                     counter -= 1
                     self.logger.info(
-                        "Results were not ready. Sleeping 1 second and trying again.", **self.connection.cloud_log_values
+                        "Results were not ready. Sleeping 1 second and trying again.",
+                        **self.connection.cloud_log_values,
                     )
                     self.logger.info(f"Time left: {counter} seconds", **self.connection.cloud_log_values)
                     response = send_session_request(req_url=callback_url, req_headers=self.connection.headers)
@@ -122,10 +123,13 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
                         results_object = response.json()
                         if "progress" in results_object:
                             self.logger.info(
-                                f"Updated Progress: {results_object.get('progress')}", **self.connection.cloud_log_values
+                                f"Updated Progress: {results_object.get('progress')}",
+                                **self.connection.cloud_log_values,
                             )
                     except Exception as e:
-                        self.logger.error(f"Failed to get logs during progress check: {e}", **self.connection.cloud_log_values)
+                        self.logger.error(
+                            f"Failed to get logs during progress check: {e}", **self.connection.cloud_log_values
+                        )
                         raise PluginException(
                             cause="Failed to get logs during progress check",
                             assistance=f"Could not get logs from: {callback_url}",
@@ -159,7 +163,9 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
                     assistance="Time out for the query results was exceeded. Try simplifying your query or extending the timeout period.",
                 )
 
-        self.logger.info("No valid log entries were fetched within the timeout period.", **self.connection.cloud_log_values)
+        self.logger.info(
+            "No valid log entries were fetched within the timeout period.", **self.connection.cloud_log_values
+        )
         return {}
 
     def maybe_get_log_entries(
@@ -204,7 +210,9 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
         if statistical:
             stats_endpoint = f"{self.connection.url}log_search/query/{results_object.get('id', '')}"
             self.logger.info(f"Getting statistical from: {stats_endpoint}", **self.connection.cloud_log_values)
-            stats_response = send_session_request(req_url=stats_endpoint, req_params=params, req_headers=self.connection.headers)
+            stats_response = send_session_request(
+                req_url=stats_endpoint, req_params=params, req_headers=self.connection.headers
+            )
             try:
                 stats_response.raise_for_status()
             except HTTPError as error:

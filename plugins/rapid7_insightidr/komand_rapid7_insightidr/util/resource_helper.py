@@ -92,7 +92,7 @@ class ResourceHelper(object):
         """
 
         self.logger = logger
-        self.headers = connection_headers   # keep the API key and other headers set from the connection level
+        self.headers = connection_headers  # keep the API key and other headers set from the connection level
 
         # extract the request ID from the request context
         self.logging_context = get_logging_context()
@@ -114,10 +114,7 @@ class ResourceHelper(object):
                 f"Making request to {endpoint} with request ID: {self.headers.get('R7-Correlation-Id', 'N/A')}",
             )
             _request = requests.Request(
-                method=method.upper(),
-                headers=self.headers,
-                url=endpoint,
-                params=params if params else {}
+                method=method.upper(), headers=self.headers, url=endpoint, params=params if params else {}
             )
             if payload:
                 _request.json = payload

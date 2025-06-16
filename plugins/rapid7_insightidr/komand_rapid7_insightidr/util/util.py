@@ -16,7 +16,8 @@ def send_session_request(req_url, req_headers, req_params=None):
     if req_params is None:
         req_params = {}
     with requests.Session() as session:
-        prepared_request = session.prepare_request(request=requests.Request(
-            method="GET", headers=req_headers, url=req_url, params=req_params))
+        prepared_request = session.prepare_request(
+            request=requests.Request(method="GET", headers=req_headers, url=req_url, params=req_params)
+        )
         response = session.send(prepared_request)
     return response

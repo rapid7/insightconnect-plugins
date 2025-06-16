@@ -3428,6 +3428,7 @@ Example output:
 
 # Version History
 
+* 11.0.8 - Remove use of session from the connection object to prevent session timeouts.
 * 11.0.7 - Adding request id to the plugin for traceability
 * 11.0.6 - Updated `disposition` values for `create_investigation` and `update_alert` action | SDK bump to 6.3.6
 * 11.0.5 - Added new disposition of the alert

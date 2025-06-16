@@ -12,7 +12,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.url = None
         self.headers = {}
-        self.cloud_log_values = {}   # todo- this should be removed or populated in request helper properly
+        self.cloud_log_values = {}  # todo- this should be removed or populated in request helper properly
 
     def connect(self, params={}):
         api_key = params.get(Input.API_KEY).get("secretKey")
@@ -26,7 +26,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.headers = {
             "X-Api-Key": api_key,
             "Accept-version": "investigations-preview",
-            "User-Agent": "test-version" if not hasattr(self, "meta.version") else self.meta.version
+            "User-Agent": "test-version" if not hasattr(self, "meta.version") else self.meta.version,
         }
 
         self.logger.info(f"Connect: Connecting...")
