@@ -5,13 +5,13 @@ name: cylance_protect
 title: BlackBerry CylancePROTECT
 description: The [BlackBerry CylancePROTECT](https://www.cylance.com/en-us/platform/products/cylance-protect.html) plugin allows you to automate response operations for CylancePROTECT and CylanceOPTICS
 supported_versions: [v2]
-version: 1.5.3
+version: 1.5.4
 connection_version: 1
 vendor: rapid7
 support: rapid7
 sdk:
   type: slim
-  version: 6.1.4
+  version: 6.3.6
   user: nobody
 status: []
 tags: [cylance, protect, edr, blacklist]
@@ -32,10 +32,12 @@ key_features:
 links:
   - "[BlackBerry CylancePROTECT](https://www.cylance.com)"
 requirements:
-  - CylancePROTECT configured with an Custom Application
+  - "CylancePROTECT configured with an Custom Application\n"
+  - "Setup\n\nYou must create a Custom Application by following this procedure from the CylancePROTECT console:\n\n1. Go to the Integrations tab on the Settings page\n2. Click `Add Application`\n3. Provide a name for the integration and choose the permissions related to the actions you want to use\n4. Copy and paste the `Application ID`, `Application Secret`, and `Tenant ID` (from the Integrations tab) into the connection"
 references:
   - "[BlackBerry CylancePROTECT API](https://docs.blackberry.com/en/unified-endpoint-security/blackberry-ues/Cylance-API-user-guide/Application_Management)"
 version_history:
+  - "1.5.4 - Resolved Snyk Vulnerability | SDK bump to latest version (6.3.6)"
   - "1.5.3 - Bumping requirements.txt | SDK bump to 6.1.4"
   - "1.5.2 - Bumped the version of the SDK used | Bumped versions of all pythion packages used | Ran refresh to bring code up to latest standard | Added unit tests for all actions"
   - "1.5.1 - Bug fixes in Delete Asset, hostname whitelisting, and IP address inputs"

@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "BlackBerry CylancePROTECT"
 Vendor = "rapid7"
-Version = "1.5.3"
+Version = "1.5.4"
 Description = "The [BlackBerry CylancePROTECT](https://www.cylance.com/en-us/platform/products/cylance-protect.html) plugin allows you to automate response operations for CylancePROTECT and CylanceOPTICS"
 
 
