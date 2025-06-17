@@ -23,6 +23,6 @@ class GetAccountInformation(insightconnect_plugin_runtime.Action):
         self.connection.headers["Accept-version"] = "strong-force-preview"
         endpoint = Accounts.get_account(self.connection.url, account_rrn)
         request = ResourceHelper(self.connection.headers, self.logger)
-        self.logger.info(f"Getting the account information for {account_rrn}...", **self.connection.cloud_log_values)
+        self.logger.info(f"Getting the account information for {account_rrn}...", **request.logging_context)
         response = request.make_request(endpoint, "get")
         return {Output.ACCOUNT: response}

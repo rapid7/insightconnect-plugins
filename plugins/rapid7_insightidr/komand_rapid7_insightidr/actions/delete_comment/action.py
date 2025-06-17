@@ -18,6 +18,6 @@ class DeleteComment(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         comment_rrn = params.get(Input.COMMENT_RRN)
         request = ResourceHelper(self.connection.headers, self.logger)
-        self.logger.info(f"Deleting the {comment_rrn} comment...", **self.connection.cloud_log_values)
+        self.logger.info(f"Deleting the {comment_rrn} comment...", **request.logging_context)
         request.delete_comment(Comments.delete_comment(self.connection.url, comment_rrn))
         return {Output.SUCCESS: True}

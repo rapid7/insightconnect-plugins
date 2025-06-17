@@ -24,7 +24,7 @@ class UploadAttachment(insightconnect_plugin_runtime.Action):
         if not mime_type:
             mime_type = "text/plain"
         request = ResourceHelper(self.connection.headers, self.logger)
-        self.logger.info("Uploading an attachment...", **self.connection.cloud_log_values)
+        self.logger.info("Uploading an attachment...", **request.logging_context)
         response = request.upload_attachment(
             Attachments.attachments(self.connection.url), files={"filedata": (filename, file_content, mime_type)}
         )

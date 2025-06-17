@@ -12,7 +12,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.url = None
         self.headers = {}
-        self.cloud_log_values = {}  # todo- this should be removed or populated in request helper properly
+        self.region = ""
 
     def connect(self, params={}):
         api_key = params.get(Input.API_KEY).get("secretKey")

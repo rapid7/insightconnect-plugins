@@ -54,7 +54,7 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
                 self.connection, insightconnect_plugin_runtime.helper.clean(log_entries)
             )
 
-        self.logger.info("Sending results to orchestrator.", **self.connection.cloud_log_values)
+        self.logger.info("Sending results to orchestrator.")
 
         if not statistical:
             return {Output.RESULTS_EVENTS: log_entries, Output.COUNT: len(log_entries)}
@@ -87,18 +87,18 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
         :param statistical: bool - Whether to fetch statistical results or event logs.
         :return: list of log entries or statistical data.
         """
-        self.logger.info(f"Trying to get results from callback URL: {callback_url}", **self.connection.cloud_log_values)
+        self.logger.info(f"Trying to get results from callback URL: {callback_url}")
         counter = timeout
 
         while callback_url and counter > 0:
             response = send_session_request(req_url=callback_url, req_headers=self.connection.headers)
-            self.logger.info(f"IDR Response Status Code: {response.status_code}", **self.connection.cloud_log_values)
+            self.logger.info(f"IDR Response Status Code: {response.status_code}")
 
             try:
                 # IDR seems to return both `raise_for_status` and `status_code` - value is in `status_code` / `raise_for_status` just returns `None`
                 response.raise_for_status()
             except Exception as error:
-                self.logger.error(f"Failed to get logs from InsightIDR: {error}", **self.connection.cloud_log_values)
+                self.logger.error(f"Failed to get logs from InsightIDR: {error}")
                 raise PluginException(
                     cause="Failed to get logs from InsightIDR",
                     assistance=f"Could not get logs from: {callback_url}",
@@ -108,27 +108,25 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
             results_object = response.json()
 
             if "progress" in results_object:
-                self.logger.info(f"Progress: {results_object.get('progress')}", **self.connection.cloud_log_values)
+                self.logger.info(f"Progress: {results_object.get('progress')}")
                 while "progress" in results_object and counter > 0:
                     time.sleep(1)
                     counter -= 1
                     self.logger.info(
-                        "Results were not ready. Sleeping 1 second and trying again.",
-                        **self.connection.cloud_log_values,
+                        "Results were not ready. Sleeping 1 second and trying again."
                     )
-                    self.logger.info(f"Time left: {counter} seconds", **self.connection.cloud_log_values)
+                    self.logger.info(f"Time left: {counter} seconds")
                     response = send_session_request(req_url=callback_url, req_headers=self.connection.headers)
                     try:
                         response.raise_for_status()
                         results_object = response.json()
                         if "progress" in results_object:
                             self.logger.info(
-                                f"Updated Progress: {results_object.get('progress')}",
-                                **self.connection.cloud_log_values,
+                                f"Updated Progress: {results_object.get('progress')}"
                             )
                     except Exception as e:
                         self.logger.error(
-                            f"Failed to get logs during progress check: {e}", **self.connection.cloud_log_values
+                            f"Failed to get logs during progress check: {e}"
                         )
                         raise PluginException(
                             cause="Failed to get logs during progress check",
@@ -146,26 +144,24 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
             next_link = next((link for link in results_object.get("links", []) if link.get("rel") == "Next"), None)
 
             if "progress" not in results_object:
-                self.logger.info("No more results to process. Exiting.", **self.connection.cloud_log_values)
+                self.logger.info("No more results to process. Exiting.")
                 return log_entries
             elif next_link:
                 self.logger.info(
-                    "Over 500 results are available for this query, but only a limited number will be returned. Please use a more specific query to get all results.",
-                    **self.connection.cloud_log_values,
+                    "Over 500 results are available for this query, but only a limited number will be returned. Please use a more specific query to get all results."
                 )
                 callback_url = next_link.get("href")
 
             counter -= 1
             if counter <= 0:
-                self.logger.error("Timeout exceeded while waiting for logs.", **self.connection.cloud_log_values)
+                self.logger.error("Timeout exceeded while waiting for logs.")
                 raise PluginException(
                     cause="Time out exceeded",
                     assistance="Time out for the query results was exceeded. Try simplifying your query or extending the timeout period.",
                 )
 
         self.logger.info(
-            "No valid log entries were fetched within the timeout period.", **self.connection.cloud_log_values
-        )
+            "No valid log entries were fetched within the timeout period.")
         return {}
 
     def maybe_get_log_entries(
@@ -193,8 +189,8 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
         if not statistical:
             params["per_page"] = 500
 
-        self.logger.info(f"Getting logs from: {endpoint}", **self.connection.cloud_log_values)
-        self.logger.info(f"Using parameters: {params}", **self.connection.cloud_log_values)
+        self.logger.info(f"Getting logs from: {endpoint}")
+        self.logger.info(f"Using parameters: {params}")
         response = send_session_request(req_url=endpoint, req_params=params, req_headers=self.connection.headers)
         try:
             response.raise_for_status()
@@ -209,7 +205,7 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
 
         if statistical:
             stats_endpoint = f"{self.connection.url}log_search/query/{results_object.get('id', '')}"
-            self.logger.info(f"Getting statistical from: {stats_endpoint}", **self.connection.cloud_log_values)
+            self.logger.info(f"Getting statistical from: {stats_endpoint}")
             stats_response = send_session_request(
                 req_url=stats_endpoint, req_params=params, req_headers=self.connection.headers
             )
@@ -230,7 +226,7 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
             potential_results = results_object.get("events")
 
         if potential_results:
-            self.logger.info("Got results immediately, returning.", **self.connection.cloud_log_values)
+            self.logger.info("Got results immediately, returning.")
             if results_object.get("links", [{}])[0].get("rel") == "Next":
                 self.logger.info(
                     "Over 500 results are available for this query, but only 500 will be returned, please use a more specific query to get all results"

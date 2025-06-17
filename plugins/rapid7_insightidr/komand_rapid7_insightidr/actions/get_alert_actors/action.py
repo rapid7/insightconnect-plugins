@@ -20,7 +20,7 @@ class GetAlertActors(insightconnect_plugin_runtime.Action):
         self.connection.headers["Accept-version"] = "strong-force-preview"
         request = ResourceHelper(self.connection.headers, self.logger)
         params = {"size": params.get(Input.SIZE), "index": params.get(Input.INDEX)}
-        self.logger.info(f"Getting the alert actors for {alert_rrn}...", **self.connection.cloud_log_values)
+        self.logger.info(f"Getting the alert actors for {alert_rrn}...", **request.logging_context)
         response = request.make_request(
             Alerts.get_alert_actor(self.connection.url, alert_rrn), method="get", params=params
         )

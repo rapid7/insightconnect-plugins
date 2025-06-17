@@ -26,7 +26,7 @@ class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
         search = params.get(Input.SEARCH)
         frequency = params.get(Input.FREQUENCY, 15)
         # END INPUT BINDING - DO NOT REMOVE
-        self.logger.info("Get Investigations: trigger started", **self.connection.cloud_log_values)
+        self.logger.info("Get Investigations: trigger started", **request.logging_context)
 
         # Set initial set for storing initial alert_rrn values
         initial_investigations = set()
@@ -78,7 +78,7 @@ class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
             response = request.resource_request(endpoint, "post", payload=data)
             return self.parse_json_response(response)
         except json.decoder.JSONDecodeError:
-            self.logger.error(f"InsightIDR response: {response}", **self.connection.cloud_log_values)
+            self.logger.error(f"InsightIDR response: {response}", **request.logging_context)
             raise PluginException(
                 cause="The response from InsightIDR was not in the correct format.",
                 assistance="Contact support for help. See log for more details",
@@ -93,5 +93,5 @@ class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
             )
 
     def send_investigation(self, investigation: dict):
-        self.logger.info(f"Investigation found: {investigation.get('rrn')}", **self.connection.cloud_log_values)
+        self.logger.info(f"Investigation found: {investigation.get('rrn')}", **request.logging_context)
         self.send({Output.INVESTIGATION: clean(investigation)})

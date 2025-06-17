@@ -19,6 +19,6 @@ class GetAlertInformation(insightconnect_plugin_runtime.Action):
         alert_rrn = params.get(Input.ALERT_RRN)
         self.connection.headers["Accept-version"] = "strong-force-preview"
         request = ResourceHelper(self.connection.headers, self.logger)
-        self.logger.info(f"Getting the alert information for {alert_rrn}...", **self.connection.cloud_log_values)
+        self.logger.info(f"Getting the alert information for {alert_rrn}...", **request.logging_context)
         response = request.make_request(Alerts.get_alert_information(self.connection.url, alert_rrn), "get")
         return {Output.ALERT: response, Output.SUCCESS: True}

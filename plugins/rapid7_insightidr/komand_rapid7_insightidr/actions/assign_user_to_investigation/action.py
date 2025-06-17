@@ -39,7 +39,7 @@ class AssignUserToInvestigation(insightconnect_plugin_runtime.Action):
         try:
             result = json.loads(response.get("resource"))
         except json.decoder.JSONDecodeError:
-            self.logger.error(f"InsightIDR response: {response}", **self.connection.cloud_log_values)
+            self.logger.error(f"InsightIDR response: {response}", **request.logging_context)
             raise PluginException(
                 cause="The response from InsightIDR was not in the correct format.",
                 assistance="Contact support for help. See log for more details",
@@ -47,7 +47,7 @@ class AssignUserToInvestigation(insightconnect_plugin_runtime.Action):
         try:
             return {Output.SUCCESS: True, Output.INVESTIGATION: clean(result)}
         except KeyError:
-            self.logger.error(result, **self.connection.cloud_log_values)
+            self.logger.error(result, **request.logging_context)
             raise PluginException(
                 cause="The response from InsightIDR was not in the correct format.",
                 assistance="Contact support for help. See log for more details",

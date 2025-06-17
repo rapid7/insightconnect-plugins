@@ -32,7 +32,7 @@ class GetASavedQuery(insightconnect_plugin_runtime.Action):
             result = json.loads(response["resource"])
             saved_query = insightconnect_plugin_runtime.helper.clean(result.get("saved_query"))
         except json.decoder.JSONDecodeError:
-            self.logger.error(f"InsightIDR response: {response}", **self.connection.cloud_log_values)
+            self.logger.error(f"InsightIDR response: {response}", **request.logging_context)
             raise PluginException(
                 cause="The response from InsightIDR was not in the correct format.",
                 assistance="Contact support for help. See log for more details",

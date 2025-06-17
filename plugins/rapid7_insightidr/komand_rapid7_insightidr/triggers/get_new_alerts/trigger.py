@@ -25,7 +25,7 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         input_frequency = params.get(Input.FREQUENCY, 15)
         # END INPUT BINDING - DO NOT REMOVE
-        self.logger.info("Get Alerts: trigger started", **self.connection.cloud_log_values)
+        self.logger.info("Get Alerts: trigger started", **request.logging_context)
 
         # Set initial set for storing initial alert_rrn values
         initial_alerts = set()
@@ -102,5 +102,5 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
             )
 
     def send_alert(self, alert: dict):
-        self.logger.info(f"Alert found: {alert.get('rrn')}", **self.connection.cloud_log_values)
+        self.logger.info(f"Alert found: {alert.get('rrn')}", **request.logging_context)
         self.send({Output.ALERT: clean(alert)})
