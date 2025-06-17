@@ -8,7 +8,6 @@ from insightconnect_plugin_runtime.helper import clean
 from komand_rapid7_insightidr.util.endpoints import Investigations
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
 from komand_rapid7_insightidr.util.constants import TOTAL_SIZE
-from komand_rapid7_insightidr.util.util import get_logging_context
 import json
 import datetime
 
@@ -27,7 +26,7 @@ class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
         search = params.get(Input.SEARCH)
         frequency = params.get(Input.FREQUENCY, 15)
         # END INPUT BINDING - DO NOT REMOVE
-        self.logger.info("Get Investigations: trigger started", **self.connection.cloud_log_values)
+        self.logger.info("Get Investigations: trigger started")
 
         # Set initial set for storing initial alert_rrn values
         initial_investigations = set()
@@ -73,13 +72,13 @@ class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
 
     def make_resource_request(self, data):
         try:
-            self.connection.session.headers["Accept-version"] = "investigations-preview"
-            request = ResourceHelper(self.connection.session, self.logger)
+            self.connection.headers["Accept-version"] = "investigations-preview"
+            request = ResourceHelper(self.connection.headers, self.logger)
             endpoint = Investigations.search_investigation(self.connection.url)
             response = request.resource_request(endpoint, "post", payload=data)
             return self.parse_json_response(response)
         except json.decoder.JSONDecodeError:
-            self.logger.error(f"InsightIDR response: {response}", **self.connection.cloud_log_values)
+            self.logger.error(f"InsightIDR response: {response}")
             raise PluginException(
                 cause="The response from InsightIDR was not in the correct format.",
                 assistance="Contact support for help. See log for more details",
@@ -94,5 +93,5 @@ class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
             )
 
     def send_investigation(self, investigation: dict):
-        self.logger.info(f"Investigation found: {investigation.get('rrn')}", **self.connection.cloud_log_values)
+        self.logger.info(f"Investigation found: {investigation.get('rrn')}")
         self.send({Output.INVESTIGATION: clean(investigation)})

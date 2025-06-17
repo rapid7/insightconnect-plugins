@@ -36,7 +36,7 @@ class TestSetStatusOfInvestigationAction(TestCase):
         self.action = Util.default_connector(SetStatusOfInvestigationAction())
         self.connection = self.action.connection
 
-    @patch("requests.Session.put", side_effect=mock_put_request)
+    @patch("requests.Session.send", side_effect=mock_put_request)
     def test_set_status_of_investigation(self, _mock_req):
         test_input = {Input.ID: STUB_INVESTIGATION_IDENTIFIER, Input.STATUS: STUB_STATUS}
         validate(test_input, SetStatusOfInvestigationActionInput.schema)

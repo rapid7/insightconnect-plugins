@@ -2,6 +2,7 @@ import asyncio
 import base64
 import json
 import re
+import uuid
 from typing import Any, Dict, List
 
 import aiohttp
@@ -82,15 +83,22 @@ class ResourceHelper(object):
         000: "Unknown Status Code",
     }
 
-    def __init__(self, session, logger):
+    def __init__(self, connection_headers, logger):
         """
         Creates a new instance of ResourceHelper
         :param session: Session object available to Komand actions/triggers, usually self.connection.session
         :param logger: Logger object available to Komand actions/triggers, usually self.logger
         :return: ResourceHelper object
         """
+
         self.logger = logger
-        self.session = session
+        self.headers = connection_headers  # keep the API key and other headers set from the connection level
+
+        # extract the request ID from the request context
+        self.logging_context = get_logging_context()
+
+        # add the request ID to the headers or make a new one if we're running on an orchestrator
+        self.headers["R7-Correlation-Id"] = self.logging_context.get("R7-Correlation-Id", str(uuid.uuid4()))
 
     def resource_request(self, endpoint: str, method: str = "get", params: dict = None, payload: dict = None) -> dict:
         """
@@ -103,15 +111,18 @@ class ResourceHelper(object):
         """
         try:
             self.logger.info(
-                f"Making request to {endpoint} with request ID: {self.session.headers.get('R7-Correlation-Id', 'N/A')}",
+                f"Making request to {endpoint} with request ID: {self.headers.get('R7-Correlation-Id', 'N/A')}",
             )
-            request_method = getattr(self.session, method.lower())
-            if not params:
-                params = {}
-            if not payload:
-                response = request_method(url=endpoint, params=params, verify=False)
-            else:
-                response = request_method(url=endpoint, params=params, json=payload, verify=False)
+            _request = requests.Request(
+                method=method.upper(), headers=self.headers, url=endpoint, params=params if params else {}
+            )
+            if payload:
+                _request.json = payload
+
+            with requests.Session() as session:
+                prepared_request = session.prepare_request(request=_request)
+                response = session.send(prepared_request)
+
         except requests.RequestException as error:
             self.logger.error(error)
             raise
@@ -150,20 +161,25 @@ class ResourceHelper(object):
         if response.status_code >= 500:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
 
-    def make_request(
+    def make_request(  # noqa: MC0001
         self, path: str, method: str = "GET", params: dict = None, json_data: dict = None, files: dict = None
-    ):  # noqa: MC0001
+    ):
         try:
             self.logger.info(
-                f"Making request to {path} with request ID: {self.session.headers.get('R7-Correlation-Id', 'N/A')}",
+                f"Making request to {path} with request ID: {self.headers.get('R7-Correlation-Id', 'N/A')}",
             )
-            response = self.session.request(
+            _request = requests.Request(
                 method=method.upper(),
+                headers=self.headers,
                 url=path,
                 json=json_data,
                 params=params,
                 files=files,
             )
+
+            with requests.Session() as session:
+                prepared_request = session.prepare_request(request=_request)
+                response = session.send(prepared_request)
             if response.status_code == 400:
                 raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.text)
             if response.status_code in [401, 403]:
@@ -193,36 +209,36 @@ class ResourceHelper(object):
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     def create_comment(self, endpoint: str, json_data: dict):
-        self.session.headers["Accept-version"] = "comments-preview"
+        self.headers["Accept-version"] = "comments-preview"
         return self.make_request(path=endpoint, method="POST", json_data=json_data)
 
     def delete_comment(self, endpoint: str):
-        self.session.headers["Accept-version"] = "comments-preview"
+        self.headers["Accept-version"] = "comments-preview"
         return self.make_request(path=endpoint, method="DELETE")
 
     def list_comments(self, endpoint: str, parameters: dict):
-        self.session.headers["Accept-version"] = "comments-preview"
+        self.headers["Accept-version"] = "comments-preview"
         return self.make_request(path=endpoint, params=parameters)
 
     def list_attachments(self, endpoint: str, parameters: dict):
-        self.session.headers["Accept-version"] = "comments-preview"
+        self.headers["Accept-version"] = "comments-preview"
         return self.make_request(path=endpoint, params=parameters)
 
     def delete_attachment(self, endpoint: str):
-        self.session.headers["Accept-version"] = "comments-preview"
+        self.headers["Accept-version"] = "comments-preview"
         return self.make_request(path=endpoint, method="DELETE")
 
     def download_attachment(self, endpoint: str):
-        self.session.headers["Accept-version"] = "comments-preview"
+        self.headers["Accept-version"] = "comments-preview"
         content = self.make_request(path=endpoint)
         return str(base64.b64encode(content), "utf-8")
 
     def upload_attachment(self, endpoint: str, files: dict):
-        self.session.headers["Accept-version"] = "comments-preview"
+        self.headers["Accept-version"] = "comments-preview"
         return self.make_request(path=endpoint, method="POST", files=files)
 
     def get_attachment_information(self, endpoint: str):
-        self.session.headers["Accept-version"] = "comments-preview"
+        self.headers["Accept-version"] = "comments-preview"
         return self.make_request(path=endpoint)
 
     @staticmethod
@@ -269,7 +285,7 @@ class ResourceHelper(object):
             for label in log_entry.get("labels", []):
                 label_ids.add(label.get("id"))
 
-        async with _get_async_session(connection.session.headers) as async_session:
+        async with _get_async_session(connection.headers) as async_session:
             tasks: [asyncio.Future] = []
             for label_id in label_ids:
                 tasks.append(

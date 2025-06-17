@@ -16,7 +16,7 @@ class ListComments(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        request = ResourceHelper(self.connection.session, self.logger)
+        request = ResourceHelper(self.connection.headers, self.logger)
         self.logger.info(f"Listing the comments for {params.get(Input.TARGET)}...")
         response = request.list_comments(Comments.comments(self.connection.url), params)
         return {Output.COMMENTS: response.get("data", []), Output.SUCCESS: True}

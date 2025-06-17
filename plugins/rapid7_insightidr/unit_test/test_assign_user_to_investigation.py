@@ -36,7 +36,7 @@ class TestAssignUserToInvestigation(TestCase):
         self.action = Util.default_connector(AssignUserToInvestigation())
         self.connection = self.action.connection
 
-    @patch("requests.Session.put", side_effect=mock_put_request)
+    @patch("requests.Session.send", side_effect=mock_put_request)
     def test_assign_user_to_investigation(self, _mock_req):
         test_input = {Input.ID: STUB_INVESTIGATION_IDENTIFIER, Input.USER_EMAIL_ADDRESS: STUB_USER_EMAIL}
         validate(test_input, AssignUserToInvestigationInput.schema)

@@ -16,7 +16,7 @@ class ListAttachments(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        request = ResourceHelper(self.connection.session, self.logger)
+        request = ResourceHelper(self.connection.headers, self.logger)
         self.logger.info(f"Listing the attachments for {params.get(Input.TARGET)}...")
         response = request.list_attachments(Attachments.attachments(self.connection.url), params)
         return {Output.ATTACHMENTS: response.get("data", []), Output.SUCCESS: True}

@@ -36,7 +36,7 @@ class TestCreateInvestigation(TestCase):
         self.action = Util.default_connector(GetInvestigation())
         self.connection = self.action.connection
 
-    @patch("requests.Session.get", side_effect=mock_get_request)
+    @patch("requests.Session.send", side_effect=mock_get_request)
     def test_get_investigation(self, _mock_req):
         test_input = {Input.ID: STUB_INVESTIGATION_IDENTIFIER}
         validate(test_input, GetInvestigationInput.schema)

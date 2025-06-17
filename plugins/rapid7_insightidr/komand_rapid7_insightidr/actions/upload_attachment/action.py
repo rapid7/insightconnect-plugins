@@ -4,7 +4,6 @@ from .schema import UploadAttachmentInput, UploadAttachmentOutput, Input, Output
 # Custom imports below
 from komand_rapid7_insightidr.util.endpoints import Attachments
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
-from komand_rapid7_insightidr.util.util import get_logging_context
 import base64
 import mimetypes
 
@@ -24,8 +23,8 @@ class UploadAttachment(insightconnect_plugin_runtime.Action):
         mime_type = mimetypes.guess_type(filename)[0]
         if not mime_type:
             mime_type = "text/plain"
-        request = ResourceHelper(self.connection.session, self.logger)
-        self.logger.info("Uploading an attachment...", **self.connection.cloud_log_values)
+        request = ResourceHelper(self.connection.headers, self.logger)
+        self.logger.info("Uploading an attachment...", **request.logging_context)
         response = request.upload_attachment(
             Attachments.attachments(self.connection.url), files={"filedata": (filename, file_content, mime_type)}
         )

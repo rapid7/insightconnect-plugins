@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 11.0.7
+version: 11.0.8
 connection_version: 5
 supported_versions: ["Latest release successfully tested on 2025-06-11."]
 vendor: rapid7
@@ -35,6 +35,7 @@ sdk:
   version: 6.3.6
   user: nobody
 version_history:
+  - "11.0.8 - Remove use of session from the connection object to prevent session timeouts."
   - "11.0.7 - Adding request id to the plugin for traceability"
   - "11.0.6 - Updated `disposition` values for `create_investigation` and `update_alert` action | SDK bump to 6.3.6"
   - "11.0.5 - Added new disposition of the alert"

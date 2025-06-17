@@ -36,7 +36,7 @@ class TestSetDispositionOfInvestigation(TestCase):
         self.action = Util.default_connector(SetDispositionOfInvestigation())
         self.connection = self.action.connection
 
-    @patch("requests.Session.put", side_effect=mock_put_request)
+    @patch("requests.Session.send", side_effect=mock_put_request)
     def test_set_disposition_of_investigation(self, _mock_req):
         test_input = {Input.ID: STUB_INVESTIGATION_IDENTIFIER, Input.DISPOSITION: STUB_DISPOSITION}
         validate(test_input, SetDispositionOfInvestigationInput.schema)

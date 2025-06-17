@@ -4,7 +4,6 @@ from .schema import GetAlertEvidenceInput, GetAlertEvidenceOutput, Input, Output
 # Custom imports below
 from komand_rapid7_insightidr.util.endpoints import Alerts
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
-from komand_rapid7_insightidr.util.util import get_logging_context
 import json
 
 
@@ -19,10 +18,10 @@ class GetAlertEvidence(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         alert_rrn = params.get(Input.ALERT_RRN)
-        self.connection.session.headers["Accept-version"] = "strong-force-preview"
-        request = ResourceHelper(self.connection.session, self.logger)
+        self.connection.headers["Accept-version"] = "strong-force-preview"
+        request = ResourceHelper(self.connection.headers, self.logger)
         params = {"size": params.get(Input.SIZE), "index": params.get(Input.INDEX)}
-        self.logger.info(f"Getting the alert evidence for {alert_rrn}...", **self.connection.cloud_log_values)
+        self.logger.info(f"Getting the alert evidence for {alert_rrn}...", **request.logging_context)
         response = request.make_request(
             Alerts.get_alert_evidence(self.connection.url, alert_rrn), method="get", params=params
         )

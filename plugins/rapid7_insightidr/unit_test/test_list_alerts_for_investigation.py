@@ -52,7 +52,7 @@ class TestCreateInvestigation(TestCase):
             "metadata": {"index": 0, "size": 1, "total_data": 1, "total_pages": 1},
         }
 
-    @patch("requests.Session.get", side_effect=mock_get_request)
+    @patch("requests.Session.send", side_effect=mock_get_request)
     def test_list_alerts_for_investigation(self, _mock_req):
         test_input = {Input.ID: STUB_INVESTIGATION_IDENTIFIER, Input.SIZE: 1, Input.INDEX: 0}
         validate(test_input, ListAlertsForInvestigationInput.schema)
@@ -60,7 +60,7 @@ class TestCreateInvestigation(TestCase):
         self.assertEqual(actual, self.expected_result)
         validate(actual, ListAlertsForInvestigationOutput.schema)
 
-    @patch("requests.Session.get", side_effect=mock_request_for_different_rrn_object)
+    @patch("requests.Session.send", side_effect=mock_request_for_different_rrn_object)
     def test_list_alerts_for_investigation_when_different_rrn_type(self, _mock_req):
         test_input = {Input.ID: STUB_INVESTIGATION_IDENTIFIER, Input.SIZE: 1, Input.INDEX: 0}
         validate(test_input, ListAlertsForInvestigationInput.schema)
