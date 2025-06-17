@@ -36,7 +36,7 @@ class TestCreateInvestigation(TestCase):
         self.action = Util.default_connector(UpdateInvestigation())
         self.connection = self.action.connection
 
-    @patch("requests.Session.patch", side_effect=mock_patch_request)
+    @patch("requests.Session.send", side_effect=mock_patch_request)
     def test_update_investigations(self, _mock_req):
         test_input = {
             Input.TITLE: "Example Title",

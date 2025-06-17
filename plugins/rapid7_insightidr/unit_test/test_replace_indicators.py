@@ -18,7 +18,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from jsonschema import validate
 
 
-@patch("requests.Session.post", side_effect=mock_post_request)
+@patch("requests.Session.send", side_effect=mock_post_request)
 class TestReplaceIndicators(TestCase):
     @classmethod
     def setUpClass(cls) -> None:

@@ -5,7 +5,6 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 # Custom imports below
 from komand_rapid7_insightidr.util.endpoints import Investigations
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
-from komand_rapid7_insightidr.util.util import get_logging_context
 import json
 from datetime import datetime
 from datetime import timedelta
@@ -21,8 +20,8 @@ class CloseInvestigationsInBulk(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        self.connection.session.headers["Accept-version"] = "investigations-preview"
-        request = ResourceHelper(self.connection.session, self.logger)
+        self.connection.headers["Accept-version"] = "investigations-preview"
+        request = ResourceHelper(self.connection.headers, self.logger)
         endpoint = Investigations.close_investigations_in_bulk(self.connection.url)
 
         source = self._get_with_default(params, Input.SOURCE, "MANUAL")
@@ -54,7 +53,7 @@ class CloseInvestigationsInBulk(insightconnect_plugin_runtime.Action):
         try:
             result = json.loads(response.get("resource", "{}"))
         except json.decoder.JSONDecodeError:
-            self.logger.error(f"InsightIDR response: {response}", **self.connection.cloud_log_values)
+            self.logger.error(f"InsightIDR response: {response}", **request.logging_context)
             raise PluginException(
                 cause="The response from InsightIDR was not in the expected format.",
                 assistance="Contact support for help. See log for more details:",

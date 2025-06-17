@@ -17,7 +17,7 @@ class CreateComment(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         attachments = params.get(Input.ATTACHMENTS)
-        request = ResourceHelper(self.connection.session, self.logger)
+        request = ResourceHelper(self.connection.headers, self.logger)
         if attachments:
             for attachment in attachments:
                 request.get_attachment_information(

@@ -33,7 +33,7 @@ class TestGetASavedQuery(TestCase):
         self.action = Util.default_connector(GetASavedQuery())
         self.connection = self.action.connection
 
-    @patch("requests.Session.get", side_effect=mock_get_request)
+    @patch("requests.Session.send", side_effect=mock_get_request)
     def test_get_a_saved_query(self, _mock_req):
         test_input = {Input.QUERY_ID: self.params.get("query_id")}
         validate(test_input, GetASavedQueryInput.schema)
@@ -60,7 +60,7 @@ class TestGetASavedQuery(TestCase):
         cause = "Query ID field did not contain a valid UUID."
         self.assertEqual(exception.exception.cause, cause)
 
-    @patch("requests.Session.get", side_effect=mock_get_request)
+    @patch("requests.Session.send", side_effect=mock_get_request)
     def test_get_a_saved_query_not_found(self, _mock_req):
         test_input = {Input.QUERY_ID: self.params.get("not_found_query_id")}
         validate(test_input, GetASavedQueryInput.schema)

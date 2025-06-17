@@ -18,7 +18,7 @@ from util import Util
 from jsonschema import validate
 
 
-@patch("requests.Session.request", side_effect=Util.mocked_requests)
+@patch("requests.Session.send", side_effect=Util.mocked_requests)
 class TestCreateThreat(TestCase):
     @classmethod
     def setUpClass(cls) -> None:

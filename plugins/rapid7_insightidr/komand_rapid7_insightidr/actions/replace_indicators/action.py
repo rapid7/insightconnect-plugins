@@ -5,7 +5,6 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 # Custom imports below
 from komand_rapid7_insightidr.util.endpoints import Threats
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
-from komand_rapid7_insightidr.util.util import get_logging_context
 import json
 
 
@@ -19,14 +18,14 @@ class ReplaceIndicators(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        request = ResourceHelper(self.connection.session, self.logger)
+        request = ResourceHelper(self.connection.headers, self.logger)
         endpoint = Threats.replace_indicators(self.connection.url, params.pop(Input.KEY))
-        self.connection.session.headers["Accept-version"] = "investigations-preview"
+        self.connection.headers["Accept-version"] = "investigations-preview"
         response = request.resource_request(endpoint, "post", params={"format": "json"}, payload=params)
         try:
             result = json.loads(response.get("resource"))
         except json.decoder.JSONDecodeError:
-            self.logger.error(f"InsightIDR response: {response}", **self.connection.cloud_log_values)
+            self.logger.error(f"InsightIDR response: {response}", **request.logging_context)
             raise PluginException(
                 cause="The response from InsightIDR was not in the correct format.",
                 assistance="Contact support for help. See log for more details",

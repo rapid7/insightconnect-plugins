@@ -36,7 +36,7 @@ class TestSearchInvestigation(TestCase):
         self.action = Util.default_connector(SearchInvestigations())
         self.connection = self.action.connection
 
-    @patch("requests.Session.post", side_effect=mock_post_request)
+    @patch("requests.Session.send", side_effect=mock_post_request)
     def test_search_investigations(self, _mock_req):
         test_input = {
             Input.INDEX: 0,

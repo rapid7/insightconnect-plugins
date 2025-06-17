@@ -28,19 +28,23 @@ STUB_USER_EMAIL = "user@example.com"
 
 # Define and return mock API responses based on request type and endpoint
 def mock_get_request(*args, **_kwarg):
-    return mock_request_selection(_kwarg.get("url"), method=REQUEST_GET)
+    url = args[0].url
+    return mock_request_selection(url, method=REQUEST_GET)
 
 
 def mock_post_request(*args, **_kwarg):
-    return mock_request_selection(_kwarg.get("url"), method=REQUEST_POST)
+    url = args[0].url
+    return mock_request_selection(url, method=REQUEST_POST)
 
 
 def mock_patch_request(*args, **_kwarg):
-    return mock_request_selection(_kwarg.get("url"), method=REQUEST_PATCH)
+    url = args[0].url
+    return mock_request_selection(url, method=REQUEST_PATCH)
 
 
 def mock_put_request(*args, **_kwarg):
-    return mock_request_selection(_kwarg.get("url"), method=REQUEST_PUT)
+    url = args[0].url
+    return mock_request_selection(url, method=REQUEST_PUT)
 
 
 class MockResponse:
@@ -120,6 +124,7 @@ def mock_request_put(url: str) -> MockResponse:
 
 
 def mock_request_selection(url, method="get"):
+    url = url.split("?")[0]
     # Check reqeust type and endpoint. Return appropriate file name to be loaded and response code
     if method == REQUEST_POST:
         return mock_request_post(url)

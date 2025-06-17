@@ -15,8 +15,8 @@ class GetAllLogs(insightconnect_plugin_runtime.Action):
         )
 
     def run(self):
-        self.connection.session.headers["Accept-version"] = "investigations-preview"
-        request = ResourceHelper(self.connection.session, self.logger)
+        self.connection.headers["Accept-version"] = "investigations-preview"
+        request = ResourceHelper(self.connection.headers, self.logger)
         response = request.resource_request(Logs.get_all_logs(self.connection.url), "get")
         try:
             result = json.loads(response["resource"])

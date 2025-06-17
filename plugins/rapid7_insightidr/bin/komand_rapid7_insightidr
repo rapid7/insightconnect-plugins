@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Rapid7 InsightIDR"
 Vendor = "rapid7"
-Version = "11.0.7"
+Version = "11.0.8"
 Description = "This plugin allows you to add indicators to a threat and see the status of investigations"
 
 

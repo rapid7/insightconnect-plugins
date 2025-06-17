@@ -10,7 +10,6 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_rapid7_insightidr.util.endpoints import Alerts
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
 from komand_rapid7_insightidr.util.constants import TOTAL_SIZE
-from komand_rapid7_insightidr.util.util import get_logging_context
 
 
 class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
@@ -26,7 +25,7 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         input_frequency = params.get(Input.FREQUENCY, 15)
         # END INPUT BINDING - DO NOT REMOVE
-        self.logger.info("Get Alerts: trigger started", **self.connection.cloud_log_values)
+        self.logger.info("Get Alerts: trigger started")
 
         # Set initial set for storing initial alert_rrn values
         initial_alerts = set()
@@ -84,8 +83,8 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
 
     def make_resource_request(self, data):
         try:
-            self.connection.session.headers["Accept-version"] = "strong-force-preview"
-            request = ResourceHelper(self.connection.session, self.logger)
+            self.connection.headers["Accept-version"] = "strong-force-preview"
+            request = ResourceHelper(self.connection.headers, self.logger)
             endpoint = Alerts.get_alert_serach(self.connection.url)
             response = request.resource_request(endpoint, "post", payload=data)
             return self.parse_json_response(response)
@@ -103,5 +102,5 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
             )
 
     def send_alert(self, alert: dict):
-        self.logger.info(f"Alert found: {alert.get('rrn')}", **self.connection.cloud_log_values)
+        self.logger.info(f"Alert found: {alert.get('rrn')}")
         self.send({Output.ALERT: clean(alert)})

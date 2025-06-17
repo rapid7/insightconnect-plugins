@@ -16,7 +16,7 @@ from unittest.mock import patch
 from jsonschema import validate
 
 
-@patch("requests.Session.get", side_effect=Util.mocked_requests)
+@patch("requests.Session.send", side_effect=Util.mocked_requests)
 @patch("aiohttp.ClientSession.get", side_effect=Util.mocked_async_requests)
 class TestAdvancedQueryOnLogSet(TestCase):
     @classmethod
