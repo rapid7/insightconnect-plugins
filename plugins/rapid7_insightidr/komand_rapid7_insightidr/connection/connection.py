@@ -23,10 +23,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
         if not self.url.endswith("/"):
             self.url = f"{self.url}/"
 
+        user_agent_version = "test-version" if not hasattr(self, "meta.version") else self.meta.version
+
         self.headers = {
             "X-Api-Key": api_key,
             "Accept-version": "investigations-preview",
-            "User-Agent": "test-version" if not hasattr(self, "meta.version") else self.meta.version,
+            "User-Agent": f"r7:insightconnect-insightidr-plugin/{user_agent_version}",
         }
 
         self.logger.info(f"Connect: Connecting...")
