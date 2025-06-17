@@ -1,4 +1,5 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.telemetry import monitor_task_delay
 from .schema import MonitorAlertsInput, MonitorAlertsOutput, MonitorAlertsState, Component
 
 # Custom imports below
@@ -46,6 +47,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             state=MonitorAlertsState(),
         )
 
+    @monitor_task_delay(timestamp_keys=[LAST_ALERT_TIME, LAST_OBSERVATION_TIME], default_delay_threshold="2d")
     def run(self, params={}, state={}, custom_config={}):  # pylint: disable=unused-argument # noqa: MC0001
         alerts_and_observations, has_more_pages, observations_has_more_pages, alerts_success = [], False, False, False
 
