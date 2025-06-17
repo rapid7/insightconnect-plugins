@@ -440,6 +440,7 @@ Example output:
 
 # Version History
 
+* 2.2.10 - Add support for high volume event support at cutoff time and date | Update SDK to 6.3.6
 * 2.2.9 - Fix error handing for when we don't get results served correctly from observations API
 * 2.2.8 - Fix error handling for HTTP Not Found status code responses from Carbon Black Cloud | Update SDK to 6.2.0
 * 2.2.7 - Restrain the observability window to a configurable amount if data collection falls behind
@@ -447,7 +448,7 @@ Example output:
 * 2.2.5 - To split the PAGE_SIZE limit into ALERT_PAGE_SIZE and OBSERVATION_PAGE_SIZE
 * 2.2.4 - Add new connection tests for tasks | Update SDK to 6.1.0
 * 2.2.3 - Fix incorrect status code handling | Customise max pages returned in `Monitor Alerts and Observations` task | Bump to SDK 6.0.1
-* 2.2.2 - Connection updated to filter whitespace from connection inputs which resulted in unexpected results.
+* 2.2.2 - `Connection updated to filter whitespace from connection inputs which resulted in unexpected results.
 * 2.2.1 - `Monitor Alerts and Observations` surface status code from Carbon Black in task error.
 * 2.2.0 - Implement new task `Monitor Alerts and Observations` and bump to SDK 5.4.8
 * 2.0.1 - Allows user entered hostnames to be case insensitive for `get_agent_details` and `quarantine` actions | Fix bug where error is raised if endpoint was not found in `get_agent` method | To add escaping of special characters in hostnames when performing hostname searches to Carbon Black

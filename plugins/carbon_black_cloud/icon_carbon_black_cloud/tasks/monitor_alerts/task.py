@@ -35,6 +35,7 @@ OBSERVATION_WINDOW = 3
 
 DEFAULT_LOOKBACK = 5  # first look back time in minutes
 MAX_LOOKBACK = 7  # allows saved state to be within 7 days to auto recover from an error
+CUTOFF_HEADROOM_HOURS = 1
 
 
 class MonitorAlerts(insightconnect_plugin_runtime.Task):
@@ -366,10 +367,17 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 default_date_lookback = now - timedelta(days=lookback_days)  # if not passed from CPS create on the fly
                 custom_lookback = custom_config.get(f"max_{cb_type_time}", {})
                 comparison_date = datetime(**custom_lookback) if custom_lookback else default_date_lookback
-                comparison_date = comparison_date.replace(tzinfo=timezone.utc).strftime(TIME_FORMAT)
-                if comparison_date > saved_time:
-                    self.logger.info(f"Saved time ({saved_time}) exceeds cut off, moving to ({comparison_date}).")
-                    state[cb_type_time] = comparison_date
+                comparison_date_string = comparison_date.replace(tzinfo=timezone.utc).strftime(TIME_FORMAT)
+                if comparison_date_string > saved_time:
+                    headroom_date_string = (
+                        (comparison_date + timedelta(hours=CUTOFF_HEADROOM_HOURS))
+                        .replace(tzinfo=timezone.utc)
+                        .strftime(TIME_FORMAT)
+                    )
+                    self.logger.info(
+                        f"Saved time ({saved_time}) exceeds cut off of ({comparison_date_string}), moving to ({headroom_date_string})."
+                    )
+                    state[cb_type_time] = headroom_date_string
                     state.pop(OBSERVATION_JOB_OFFSET, None)
 
         alerts_start = state.get(LAST_ALERT_TIME)
