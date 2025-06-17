@@ -161,9 +161,9 @@ class ResourceHelper(object):
         if response.status_code >= 500:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
 
-    def make_request(
+    def make_request(  # noqa: MC0001
         self, path: str, method: str = "GET", params: dict = None, json_data: dict = None, files: dict = None
-    ):  # noqa: MC0001
+    ):
         try:
             self.logger.info(
                 f"Making request to {path} with request ID: {self.headers.get('R7-Correlation-Id', 'N/A')}",

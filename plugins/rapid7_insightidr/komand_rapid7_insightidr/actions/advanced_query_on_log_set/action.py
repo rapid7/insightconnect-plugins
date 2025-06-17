@@ -78,7 +78,7 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
             if entry in query:
                 return True
 
-    def get_results_from_callback(self, callback_url: str, timeout: int, statistical: bool) -> [object]:  # noqa: C901
+    def get_results_from_callback(self, callback_url: str, timeout: int, statistical: bool) -> [object]:  # noqa: MC0001
         """
         Get log entries from a callback URL.
 
@@ -112,22 +112,16 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
                 while "progress" in results_object and counter > 0:
                     time.sleep(1)
                     counter -= 1
-                    self.logger.info(
-                        "Results were not ready. Sleeping 1 second and trying again."
-                    )
+                    self.logger.info("Results were not ready. Sleeping 1 second and trying again.")
                     self.logger.info(f"Time left: {counter} seconds")
                     response = send_session_request(req_url=callback_url, req_headers=self.connection.headers)
                     try:
                         response.raise_for_status()
                         results_object = response.json()
                         if "progress" in results_object:
-                            self.logger.info(
-                                f"Updated Progress: {results_object.get('progress')}"
-                            )
+                            self.logger.info(f"Updated Progress: {results_object.get('progress')}")
                     except Exception as e:
-                        self.logger.error(
-                            f"Failed to get logs during progress check: {e}"
-                        )
+                        self.logger.error(f"Failed to get logs during progress check: {e}")
                         raise PluginException(
                             cause="Failed to get logs during progress check",
                             assistance=f"Could not get logs from: {callback_url}",
@@ -160,8 +154,7 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
                     assistance="Time out for the query results was exceeded. Try simplifying your query or extending the timeout period.",
                 )
 
-        self.logger.info(
-            "No valid log entries were fetched within the timeout period.")
+        self.logger.info("No valid log entries were fetched within the timeout period.")
         return {}
 
     def maybe_get_log_entries(

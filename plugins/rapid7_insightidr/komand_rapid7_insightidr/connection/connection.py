@@ -31,10 +31,10 @@ class Connection(insightconnect_plugin_runtime.Connection):
             "User-Agent": f"r7:insightconnect-insightidr-plugin/{user_agent_version}",
         }
 
-        self.logger.info(f"Connect: Connecting...")
+        self.logger.info("Connect: Connecting...")
 
     def test(self):
-        response = requests.get(f"{self.url}validate", headers=self.headers)
+        response = requests.get(f"{self.url}validate", headers=self.headers, timeout=60)
         if response.status_code == 401:
             raise ConnectionTestException(preset=ConnectionTestException.Preset.UNAUTHORIZED)
         if response.status_code in range(500, 599):

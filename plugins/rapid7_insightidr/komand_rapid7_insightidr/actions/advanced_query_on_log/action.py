@@ -49,9 +49,7 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
             )
 
         if log_id and log_name:
-            self.logger.info(
-                "Values were provided for both log ID and log name, the value for log id will be used"
-            )
+            self.logger.info("Values were provided for both log ID and log name, the value for log id will be used")
 
         if not log_id:
             log_id = self.get_log_id(log_name)
@@ -92,7 +90,7 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
             if entry in query:
                 return True
 
-    def get_results_from_callback(self, callback_url: str, timeout: int, statistical: bool) -> [object]:  # noqa: C901
+    def get_results_from_callback(self, callback_url: str, timeout: int, statistical: bool) -> [object]:  # noqa: MC0001
         """
         Get log entries from a callback URL.
 
@@ -135,13 +133,9 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
                         response.raise_for_status()
                         results_object = response.json()
                         if "progress" in results_object:
-                            self.logger.info(
-                                f"Updated Progress: {results_object.get('progress')}"
-                            )
+                            self.logger.info(f"Updated Progress: {results_object.get('progress')}")
                     except Exception as e:
-                        self.logger.error(
-                            f"Failed to get logs during progress check: {e}"
-                        )
+                        self.logger.error(f"Failed to get logs during progress check: {e}")
                         raise PluginException(
                             cause="Failed to get logs during progress check",
                             assistance=f"Could not get logs from: {callback_url}",
@@ -175,9 +169,7 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
                     assistance="Time out for the query results was exceeded. Try simplifying your query or extending the timeout period.",
                 )
 
-        self.logger.info(
-            "No valid log entries were fetched within the timeout period."
-        )
+        self.logger.info("No valid log entries were fetched within the timeout period.")
         return {}
 
     def maybe_get_log_entries(

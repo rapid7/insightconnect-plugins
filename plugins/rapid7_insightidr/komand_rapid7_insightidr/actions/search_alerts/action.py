@@ -20,7 +20,7 @@ class SearchAlerts(insightconnect_plugin_runtime.Action):
             output=SearchAlertsOutput(),
         )
 
-    def run(self, params={}):  # noqa MC0001
+    def run(self, params={}):  # noqa: MC0001
         input_start_time = params.get(Input.START_TIME)
         input_end_time = params.get(Input.END_TIME)
 
@@ -72,9 +72,7 @@ class SearchAlerts(insightconnect_plugin_runtime.Action):
                 .astimezone(datetime.timezone.utc)
                 .strftime("%Y-%m-%dT%H:%M:%SZ")
             )
-            self.logger.info(
-                f"No user supplied time, defaulting to start time of 6 months ago: {start_time}"
-            )
+            self.logger.info(f"No user supplied time, defaulting to start time of 6 months ago: {start_time}")
 
         search = clean(
             {

@@ -18,9 +18,7 @@ class GetAttachmentInformation(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         attachment_rrn = params.get(Input.ATTACHMENT_RRN)
         request = ResourceHelper(self.connection.headers, self.logger)
-        self.logger.info(
-            f"Getting the attachment information for {attachment_rrn}...", **request.logging_context
-        )
+        self.logger.info(f"Getting the attachment information for {attachment_rrn}...", **request.logging_context)
         response = request.get_attachment_information(
             Attachments.get_attachment_information(self.connection.url, attachment_rrn)
         )
