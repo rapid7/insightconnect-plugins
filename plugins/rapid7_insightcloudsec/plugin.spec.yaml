@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightcloudsec
 title: Rapid7 InsightCloudSec
 description: InsightCloudSec by Rapid7 (formerly DivvyCloud) is a Cloud-Native Security Platform that provides real-time analysis and automated remediation for continuous security and compliance for your multi-cloud environment 
-version: 2.1.2
+version: 2.2.0
 connection_version: 2
 supported_versions: ["22.10.19"]
 cloud_ready: true
@@ -15,7 +15,7 @@ resources:
   vendor_url: https://www.rapid7.com
 sdk:
   type: "slim"
-  version: 6.3.4
+  version: 6.3.6
   user: nobody
 key_features:
   - "Create and remove an exemption"
@@ -24,12 +24,14 @@ key_features:
   - "Get resource id"
   - "List resource tags"
   - "Switch organization"
+  - "List Clouds"
 requirements:
   - "InsightCloudSec API key"
 troubleshooting:
   - "This plugin does not contain any troubleshooting information"
 version_history:
-  - "2.1.2 - Updated SDK to the latest version (v6.3.4) | Updated Documentation"
+  - "2.2.0 - Added 'list_clouds' action | Unit test added | SDK bump to 6.3.6"
+  - "2.1.2 - Updated SDK to the latest version (v6.3.4) | Updated Documentation "
   - "2.1.1 - Updated SDK to the latest version (v6.2.3) | Address vulnerabilities"
   - "2.1.0 - Updated SDK to the latest version | Adding a get resource id functionality"
   - "2.0.0 - Enable plugin to run in cloud | Remove actions using defective API endpoints"
@@ -274,6 +276,51 @@ types:
       type: string
       required: false
       example: "my-account-name"
+  filters:
+    field_name:
+      title: Field Name
+      description: Specifies the name of the output field used for filtering results
+      type: string
+      required: false
+      example: account_id
+    filter_type:
+      title: Filter Type
+      description: Specifies the type of filtering to apply to the selected field
+      type: string
+      required: false
+      example: NOT
+      enum:
+        - EXACT
+        - LIKE
+        - NOT
+        - IN
+        - NOT_IN
+        - BETWEEN
+    filter_value:
+      title: Filter Value
+      description: Specifies the value to apply to the filter for the `field_name` field.
+      required: false
+      type: string
+      example: 463792522299
+    filter_list_value:
+      title: Filter List Value
+      description: Can be used instead of `filter_value` to filter multiple values
+      required: false
+      type: array
+      example: ["AWS_GOV","AWS_CHINA","AWS"]
+  badges:
+    key:
+      title: Key
+      description: Key of the Badge
+      type: string
+      required: false
+      example: environment
+    value:
+      title: Value
+      description: Value of the Badge
+      type: string
+      required: false
+      example: production
 connection:
   apiKey:
     title: API Key
@@ -483,3 +530,84 @@ actions:
         type: boolean
         required: true
         example: true
+  list_clouds:
+    title: List Clouds
+    description: Retrieve a list of available configured clouds. This supports filtering and sorting to refine the results based on specified criteria
+    input:
+      filters:
+        title: Filters
+        description: Filter Clouds based on `field_name`, `filter_type`, `filter_value` and `filter_list_value`
+        type: "[]filters"
+        required: false
+        example: [{"field_name": "account_id", "filter_type": "EXACT", "filter_value": "463792522299"}]
+      limit:
+        title: Limit
+        description: The limit on the amount of clouds you wish to receive
+        type: integer
+        required: false
+        example: 3
+      offset:
+        title: Offset
+        description: Offset for cloud results, specifying the starting point for clouds returned
+        type: integer
+        required: false
+        example: 1
+      order_by:
+        title: Order By
+        description: Sort the output based on `field` and `order`. Specified by field name followed by a space then 'ASC' or 'DESC'
+        type: string
+        required: false
+        example: "name ASC"
+      badges:
+        title: Badges
+        description: Specifies the badges used to filter cloud accounts based on key-value pairs
+        type: "[]badges"
+        required: false
+        example: [{"key": "environment", "value": "production"}]
+      badge_filter_operator:
+        title: Badge Filter Operator
+        description: Determines whether the output should contain all badges in `badges` (`AND`), or one of the badges in the list (`OR`)
+        type: string
+        required: false
+        example: AND
+        enum:
+          - OR
+          - AND
+          - ""
+      search_string:
+        title: Search String
+        description: Partial or full literal string to search for. f.e. you could search for an instance ID, image ID, or resource name
+        type: string
+        required: false
+        example: resource_id
+      advanced_search:
+        title: Advanced Search
+        description: Toggle on whether to enable advanced search functionality or not
+        type: boolean
+        required: false
+        example: false
+      empty_badges:
+        title: Empty Badges
+        description: Whether or not to filter on cloud accounts which have zero badges (cloud accounts only)
+        type: boolean
+        required: false
+        example: false
+      exclusion_badges:
+        title: Exclusion Badges
+        description: Specifies the badges to exclude when filtering cloud accounts based on key-value pairs
+        type: "[]badges"
+        required: false
+        example: [{"key": "region", "value": "us-east-1"}]
+    output:
+      clouds:
+        title: Clouds
+        description: The list of clouds retrieved, including details such as account ID, badge count, cloud type, and other information
+        required: true
+        type: "[]object"
+        example: [{"account_id": "463792522299", "badge_count": 7, "cloud_access": None, "cloud_organization_domain_name": "o-03nsxuwv", "cloud_organization_id": "o-03nsxuwv", "cloud_organization_nickname": "The Organization Formerly Known As Test", "cloud_type_id": "AWS", "creation_time": "2021-08-13 21:01:11", "disabled_resource_types": None, "event_driven_harvest_role": "idle", "failed_resource_types": None, "group_resource_id": "divvyorganizationservice:1", "id": 1, "is_platform_managed": false, "last_refreshed": "2025-06-05 08:15:14", "name": "AWS Marketplace", "resource_count": 33, "resource_id": "divvyorganizationservice:1", "role_arn": "OrganizationAccountReadRole", "scan_error": None, "status": "ASSUME_ROLE_FAIL", "strategy_id": 1, "tenant_id": None, "trailblazer_account_in_scope": None, "trailblazer_cloudtrail_trails": []}]
+      total_count:
+        title: Total Count
+        description: Total count of clouds retrieved
+        type: integer
+        required: true
+        example: 1
