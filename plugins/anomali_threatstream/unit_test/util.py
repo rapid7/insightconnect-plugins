@@ -113,7 +113,7 @@ class Util:
         if url == "https://example.com/api/v1/submit/new/?username=test&api_key=anomali_api_key":
             return MockResponse(200, "submit_file_success.json.resp")
         # Submit Url
-        if url == "https://example.com/api/v1/submit/new/?username=test&api_key=anomali_api_key":
+        if url == "https://example.com/api/v1/submit/new":
             return MockResponse(200, "submit_url_success.json.resp")
         raise NotImplementedError("Not implemented", kwargs)
 

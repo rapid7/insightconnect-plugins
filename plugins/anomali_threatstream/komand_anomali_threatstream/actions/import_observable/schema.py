@@ -10,6 +10,7 @@ class Component:
 class Input:
     FILE = "file"
     OBSERVABLE_SETTINGS = "observable_settings"
+    TLP = "tlp"
 
 
 class Output:
@@ -17,7 +18,8 @@ class Output:
 
 
 class ImportObservableInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -31,8 +33,21 @@ class ImportObservableInput(insightconnect_plugin_runtime.Input):
     "observable_settings": {
       "$ref": "#/definitions/observable_settings",
       "title": "Observable Settings",
-      "description": "Settings needed for importing an observable that needs approval",
+      "description": "Settings needed for importing an observable that needs approval. If `threat_type` is used alongside other mapping fields, it will overwrite them",
       "order": 2
+    },
+    "tlp": {
+      "type": "string",
+      "title": "TLP",
+      "description": "Protocol to indicate how sensitive information should be shared",
+      "enum": [
+        "red",
+        "amber",
+        "green",
+        "clear",
+        "amber+strict"
+      ],
+      "order": 3
     }
   },
   "required": [
@@ -168,14 +183,16 @@ class ImportObservableInput(insightconnect_plugin_runtime.Input):
     }
   }
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class ImportObservableOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -214,7 +231,8 @@ class ImportObservableOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

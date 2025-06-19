@@ -16,7 +16,8 @@ class Output:
 
 
 class LookupUrlInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -30,14 +31,16 @@ class LookupUrlInput(insightconnect_plugin_runtime.Input):
   },
   "definitions": {}
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class LookupUrlOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -70,7 +73,7 @@ class LookupUrlOutput(insightconnect_plugin_runtime.Output):
           "order": 2
         },
         "confidence": {
-          "type": "string",
+          "type": "integer",
           "title": "Confidence",
           "description": "Confidence level",
           "order": 3
@@ -184,7 +187,7 @@ class LookupUrlOutput(insightconnect_plugin_runtime.Output):
           "order": 21
         },
         "update_id": {
-          "type": "string",
+          "type": "integer",
           "title": "Update ID",
           "description": "Update ID",
           "order": 22
@@ -199,7 +202,8 @@ class LookupUrlOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
