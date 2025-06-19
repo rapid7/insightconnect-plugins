@@ -95,6 +95,9 @@ class Util:
             f"{BASE_URL}siem/v1/batch/events/cg?type=attachment+protect&dateRangeStartsAt=1999-12-31&dateRangeEndsAt=1999-12-31&pageSize=1",
             f"{BASE_URL}siem/v1/batch/events/cg?type=receipt&dateRangeStartsAt=1999-12-31&dateRangeEndsAt=1999-12-31&pageSize=1",
             f"{BASE_URL}siem/v1/batch/events/cg?type=url+protect&dateRangeStartsAt=1999-12-31&dateRangeEndsAt=1999-12-31&pageSize=1",
+            "https://api.services.mimecast.com/siem/v1/batch/events/cg?type=attachment+protect&dateRangeStartsAt=1999-12-30&dateRangeEndsAt=1999-12-30&pageSize=100&nextPage=NDU1NA%3D%3D",
+            "https://api.services.mimecast.com/siem/v1/batch/events/cg?type=receipt&dateRangeStartsAt=1999-12-30&dateRangeEndsAt=1999-12-30&pageSize=100&nextPage=NDU1NA%3D%3D",
+            "https://api.services.mimecast.com/siem/v1/batch/events/cg?type=url+protect&dateRangeStartsAt=1999-12-30&dateRangeEndsAt=1999-12-30&pageSize=100&nextPage=NDU1NA%3D%3D",
         ]:
             return MockResponse(200, "monitor_siem_logs_batch")
         if args[0].url in [
