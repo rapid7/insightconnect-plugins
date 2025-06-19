@@ -124,25 +124,25 @@ class TestMonitorEvents(TestCase):
             [
                 "enforced_during_backfill_config",
                 [{}, {"lookback": {"year": 2023, "month": 3, "day": 4}}],
-                ["Supplied a start_time further than allowed. Moving this to 2023-03-28 08:14:00", ""],
+                ["Supplied a start_time further than allowed. Moving this to 2023-03-28 10:14:00", ""],
             ],
             [
                 "enforced_during_lookback_config_date",
                 [{}, {"cutoff": {"date": {"year": 2023, "month": 3, "day": 4}}}],
-                ["Supplied a custom_api_limit further than allowed. Moving this to 2023-03-28 08:14:00", ""],
+                ["Supplied a custom_api_limit further than allowed. Moving this to 2023-03-28 09:14:00", ""],
             ],
             [
                 "enforced_during_lookback_config_hours",
                 [{}, {"cutoff": {"hours": 24 * 10}}],  # 10 days lookback
-                ["Supplied a custom_api_limit further than allowed. Moving this to 2023-03-28 08:14:00", ""],
+                ["Supplied a custom_api_limit further than allowed. Moving this to 2023-03-28 09:14:00", ""],
             ],
             [
                 "enforced_both_lookback_date_and_cutoff_hours_config",
                 # customer has been paused since 29th March, and have an override cutoff hours to 8
                 [{}, {"lookback": {"year": 2023, "month": 3, "day": 4}, "cutoff": {"hours": 24 * 8}}],
                 [
-                    "Supplied a custom_api_limit further than allowed. Moving this to 2023-03-28 08:14:00",
-                    "Supplied a start_time further than allowed. Moving this to 2023-03-28 08:14:00",
+                    "Supplied a custom_api_limit further than allowed. Moving this to 2023-03-28 09:14:00",
+                    "Supplied a start_time further than allowed. Moving this to 2023-03-28 10:14:00",
                 ],
             ],
         ]

@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Proofpoint TAP"
 Vendor = "rapid7"
-Version = "4.1.12"
+Version = "4.1.13"
 Description = "[Proofpoint Targeted Attack Protection](https://www.proofpoint.com/us/products/ransomware-and-targeted-attack-protection) (TAP) helps you stay ahead of attackers with an innovative approach that detects, analyzes and blocks advanced threats before they reach your inbox. This plugin enables users to parse TAP alerts"
 
 
