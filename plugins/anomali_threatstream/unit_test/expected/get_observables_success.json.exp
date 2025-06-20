@@ -2,7 +2,7 @@
   "results": [
     {
       "classification": "private",
-      "confidence": "17",
+      "confidence": 17,
       "date_first": "2019-10-16T16:12:48",
       "date_last": "2019-10-21T14:01:39",
       "detail": "Delivery",

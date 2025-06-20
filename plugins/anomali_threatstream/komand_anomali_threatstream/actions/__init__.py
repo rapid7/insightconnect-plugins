@@ -15,4 +15,3 @@ from .submit_file.action import SubmitFile
 from .submit_url.action import SubmitUrl
 
 from .get_sandbox_report.action import GetSandboxReport
-

@@ -8,19 +8,13 @@ from logging import Logger
 
 
 class API(object):
-    def __init__(
-        self,
-        url: str,
-        verify: bool,
-        params: Dict,
-        logger: Logger,
-    ):
+    def __init__(self, url: str, verify: bool, logger: Logger, headers: Dict):
         self.session = Session()
         self.request = Request()
         self.logger = logger
         self.request.url = url
         self.request.verify = verify
-        self.request.params = params
+        self.request.headers = headers
 
     def send(self, request) -> Dict[str, Any]:
         try:

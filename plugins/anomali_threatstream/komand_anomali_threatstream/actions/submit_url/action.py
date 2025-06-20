@@ -16,7 +16,7 @@ class SubmitUrl(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         self.request = copy(self.connection.api.request)
-        self.request.url, self.request.method = self.request.url + "/submit/new/", "POST"
+        self.request.url, self.request.method = self.request.url + "/v1/submit/new/", "POST"
 
         platform = params.get(Input.PLATFORM)
         detail = params.get(Input.DETAIL)

@@ -16,7 +16,8 @@ class Output:
 
 
 class GetSandboxReportInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -33,14 +34,16 @@ class GetSandboxReportInput(insightconnect_plugin_runtime.Input):
   ],
   "definitions": {}
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class GetSandboxReportOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -152,22 +155,49 @@ class GetSandboxReportOutput(insightconnect_plugin_runtime.Output):
           "title": "Duration",
           "description": "Duration",
           "order": 8
+        },
+        "package": {
+          "type": "string",
+          "title": "Package",
+          "description": "Package",
+          "order": 9
+        },
+        "machine": {
+          "type": "object",
+          "title": "Machine",
+          "description": "Machine",
+          "order": 10
+        },
+        "custom": {
+          "type": "string",
+          "title": "Custom",
+          "description": "Custom",
+          "order": 11
+        },
+        "id": {
+          "type": "integer",
+          "title": "ID",
+          "description": "ID",
+          "order": 12
+        },
+        "version": {
+          "type": "string",
+          "title": "Version",
+          "description": "Version",
+          "order": 13
         }
       },
       "required": [
         "category",
-        "confidence",
         "duration",
         "ended",
-        "is_malicious",
-        "is_suspicious",
-        "is_unknown",
         "started"
       ]
     }
   }
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

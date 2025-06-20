@@ -6,8 +6,8 @@ from sys import argv
 
 Name = "Anomali ThreatStream"
 Vendor = "rapid7"
-Version = "3.1.2"
-Description = "Anomali ThreatStream operationalizes threat intelligence, automating collection and integration that enables security teams to analyze and respond to threats"
+Version = "4.0.0"
+Description = "[Anomali ThreatStream](https://www.anomali.com/) is an operational threat intelligence stream, automating collection and integration that enables security teams to analyze and respond to threats. The Anomali ThreatStream InsightConnect plugin allows you lookup hashes, IP addresses, URLs, observables. It also allows importing observables"
 
 
 def main():
