@@ -16,20 +16,33 @@ class GetSandboxReport(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        # v1
         self.request = copy(self.connection.api.request)
         report_id = params.get(Input.REPORT_ID)
         self.request.url, self.request.method = (
-            f"{self.request.url}/submit/{report_id}/report/",
+            f"{self.request.url}/v1/submit/{report_id}/report/",
             "GET",
         )
         self.logger.info(f"Submitting URL to {self.request.url}")
         response_data = self.connection.api.send(self.request)
 
+        if not response_data.get("success"):
+            raise PluginException(
+                cause="Invalid ID",
+                assistance="Contact support for help.",
+                data=response_data,
+            )
+
         try:
-            domains_detail = response_data["results"]["network"]["domains"]
-            info = response_data["results"]["info"]
-            signatures = response_data["results"]["signatures"]
-            screenshots = response_data["results"]["screenshots"]
+            domains_detail = response_data.get("results", {}).get("network", {}).get("domains", [])
+            info = response_data.get("results", {}).get("info", {})
+
+            # validation as machine is type object but if it's not present API returns null
+            if info.get("machine") is None:
+                info["machine"] = {}
+
+            signatures = response_data.get("results", {}).get("signatures", [])
+            screenshots = response_data.get("results", {}).get("screenshots", [])
         except KeyError:
             raise PluginException(
                 cause="The output did not contain expected keys.",

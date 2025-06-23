@@ -17,7 +17,7 @@ class LookupHash(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         self.request = copy(self.connection.api.request)
-        self.request.url, self.request.method = self.request.url + "/intelligence", "GET"
+        self.request.url, self.request.method = self.request.url + "/v2/intelligence", "GET"
 
         # Pagination flag and results placeholder
         self.continue_paging, self.results = True, []

@@ -10,7 +10,7 @@
     {
       "asn": null,
       "classification": "private",
-      "confidence": "17",
+      "confidence": 17,
       "country": null,
       "date_first": "2019-10-16T16:12:48",
       "date_last": "2019-10-21T14:01:39",
