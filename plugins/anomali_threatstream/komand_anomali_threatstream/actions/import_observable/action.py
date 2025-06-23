@@ -18,7 +18,7 @@ class ImportObservable(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         self.request = copy(self.connection.api.request)
-        self.request.url, self.request.method = self.request.url + "/intelligence/import/", "POST"
+        self.request.url, self.request.method = self.request.url + "/v2/intelligence/import/", "POST"
 
         file_ = params.get(Input.FILE, None)
         try:
@@ -39,6 +39,12 @@ class ImportObservable(insightconnect_plugin_runtime.Action):
                 value = ",".join(str(val) for val in value)
 
             data[key] = value
+
+        classification = params.get("classification")
+        data["tlp"] = params.get("tlp", None)
+        if classification:
+            data["classification"] = classification
+
         self.request.files = {"file": (file_["filename"], file_bytes)}
         self.request.data = data
         response_data = self.connection.api.send(self.request)
