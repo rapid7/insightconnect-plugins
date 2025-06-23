@@ -52,14 +52,13 @@ class UpdateAlertInput(insightconnect_plugin_runtime.Input):
       "description": "The alert disposition",
       "enum": [
         "",
-        "UNMAPPED",
-        "UNDECIDED",
-        "MALICIOUS",
         "BENIGN",
-        "UNKNOWN",
+        "FALSE_POSITIVE",
+        "MALICIOUS",
         "NOT_APPLICABLE",
         "SECURITY_TEST",
-        "FALSE_POSITIVE"
+        "UNDECIDED",
+        "UNKNOWN"
       ],
       "order": 3
     },
@@ -281,7 +280,6 @@ class UpdateAlertOutput(insightconnect_plugin_runtime.Output):
           "title": "Disposition",
           "description": "The disposition of the alert.",
           "enum": [
-            "UNMAPPED",
             "UNDECIDED",
             "MALICIOUS",
             "BENIGN",

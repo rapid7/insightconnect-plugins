@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 11.0.8
+version: 11.0.9
 connection_version: 5
 supported_versions: ["Latest release successfully tested on 2025-06-11."]
 vendor: rapid7
@@ -35,6 +35,7 @@ sdk:
   version: 6.3.6
   user: nobody
 version_history:
+  - "11.0.9 - Additional `disposition` values added for `Create Investigation`, `Update Investigation` and `Set Disposition of Investigation`"
   - "11.0.8 - Remove use of session from the connection object to prevent session timeouts."
   - "11.0.7 - Adding request id to the plugin for traceability"
   - "11.0.6 - Updated `disposition` values for `create_investigation` and `update_alert` action | SDK bump to 6.3.6"
@@ -191,7 +192,7 @@ types:
       required: false
     disposition:
       title: Disposition
-      description: The disposition of this investigation, where possible values are BENIGN, MALICIOUS, NOT_APPLICABLE, and UNSPECIFIED
+      description: The disposition of this investigation, where possible values are `BENIGN`, `MALICIOUS`, `NOT_APPLICABLE`, `UNKNOWN`, `UNDECIDED`, `SECURITY_TEST`,`FALSE_POSITIVE`
       type: string
       required: false
     first_alert_time:
@@ -957,7 +958,6 @@ types:
       type: string
       required: false
       enum:
-        - UNMAPPED
         - UNDECIDED
         - MALICIOUS
         - BENIGN
@@ -1581,10 +1581,13 @@ actions:
         type: string
         enum:
           - ""
-          - UNDECIDED
           - BENIGN
+          - FALSE_POSITIVE
           - MALICIOUS
           - NOT_APPLICABLE
+          - SECURITY_TEST
+          - UNDECIDED
+          - UNKNOWN
         required: false
         example: BENIGN
       email:
@@ -1702,8 +1705,12 @@ actions:
         enum:
           - ""
           - BENIGN
+          - FALSE_POSITIVE
           - MALICIOUS
           - NOT_APPLICABLE
+          - SECURITY_TEST
+          - UNDECIDED
+          - UNKNOWN
         required: false
         example: BENIGN
       email:
@@ -1780,9 +1787,14 @@ actions:
         description: Investigation's disposition
         type: string
         enum:
+          - ""
           - BENIGN
+          - FALSE_POSITIVE
           - MALICIOUS
           - NOT_APPLICABLE
+          - SECURITY_TEST
+          - UNDECIDED
+          - UNKNOWN
         required: true
         example: BENIGN
     output:
@@ -2833,14 +2845,13 @@ actions:
         type: string
         enum:
           - ""
-          - UNMAPPED
-          - UNDECIDED
-          - MALICIOUS
           - BENIGN
-          - UNKNOWN
+          - FALSE_POSITIVE
+          - MALICIOUS
           - NOT_APPLICABLE
           - SECURITY_TEST
-          - FALSE_POSITIVE
+          - UNDECIDED
+          - UNKNOWN
         required: false
         example: MALICIOUS
       priority:

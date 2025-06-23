@@ -743,7 +743,7 @@ This action is used to allows to create investigation manually
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|disposition|string|None|False|Investigation's disposition|["", "UNDECIDED", "BENIGN", "MALICIOUS", "NOT_APPLICABLE"]|BENIGN|None|None|
+|disposition|string|None|False|Investigation's disposition|["", "BENIGN", "FALSE_POSITIVE", "MALICIOUS", "NOT_APPLICABLE", "SECURITY_TEST", "UNDECIDED", "UNKNOWN"]|BENIGN|None|None|
 |email|string|None|False|A user's email address for investigation to be assigned|None|user@example.com|None|None|
 |priority|string|None|False|Investigation's priority|["", "LOW", "MEDIUM", "HIGH", "CRITICAL"]|LOW|None|None|
 |status|string|None|False|Investigation's status|["", "OPEN", "CLOSED"]|OPEN|None|None|
@@ -2416,7 +2416,7 @@ This action is used to allows to change the disposition of the investigation wit
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|disposition|string|None|True|Investigation's disposition|["BENIGN", "MALICIOUS", "NOT_APPLICABLE"]|BENIGN|None|None|
+|disposition|string|None|True|Investigation's disposition|["", "BENIGN", "FALSE_POSITIVE", "MALICIOUS", "NOT_APPLICABLE", "SECURITY_TEST", "UNDECIDED", "UNKNOWN"]|BENIGN|None|None|
 |id|string|None|True|The ID or RRN of the investigation to change the disposition of|None|rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111|None|None|
   
 Example input:
@@ -2569,7 +2569,7 @@ This action is used to updates information for a single alert
 |alert_rrn|string|None|True|The unique identifier of the alert|None|rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abg|None|None|
 |assignee_id|string|None|False|The new user to assign to the alert|None|8205375a-1234-4652-8098-870d656bc693|None|None|
 |comment|string|None|False|The reason for updating the alert, which is captured in the alert audit log for tracking purposes|None|Updated alert priority by automation through InsightConnect|None|None|
-|disposition|string|None|False|The alert disposition|["", "UNMAPPED", "UNDECIDED", "MALICIOUS", "BENIGN", "UNKNOWN", "NOT_APPLICABLE", "SECURITY_TEST", "FALSE_POSITIVE"]|MALICIOUS|None|None|
+|disposition|string|None|False|The alert disposition|["", "BENIGN", "FALSE_POSITIVE", "MALICIOUS", "NOT_APPLICABLE", "SECURITY_TEST", "UNDECIDED", "UNKNOWN"]|MALICIOUS|None|None|
 |investigation_rrn|string|None|False|The RRN of the investigation to add the alert to|None|rrn:investigation:us:12345678-abcd-cdef-1234-12345abc:investigation:ABCDEFGHI|None|None|
 |priority|string|None|False|The alert priority|["", "UNMAPPED", "INFO", "LOW", "MEDIUM", "HIGH", "CRITICAL"]|INFO|None|None|
 |status|string|None|False|The alert status|["", "UNMAPPED", "OPEN", "INVESTIGATING", "WAITING", "CLOSED"]|OPEN|None|None|
@@ -2688,7 +2688,7 @@ This action is used to allows to update existing investigation by ID or RRN
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|disposition|string|None|False|Investigation's disposition|["", "BENIGN", "MALICIOUS", "NOT_APPLICABLE"]|BENIGN|None|None|
+|disposition|string|None|False|Investigation's disposition|["", "BENIGN", "FALSE_POSITIVE", "MALICIOUS", "NOT_APPLICABLE", "SECURITY_TEST", "UNDECIDED", "UNKNOWN"]|BENIGN|None|None|
 |email|string|None|False|A user's email address for investigation to be assigned|None|user@example.com|None|None|
 |id|string|None|True|The identifier of investigation to be update (ID or RRN)|None|rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111|None|None|
 |priority|string|None|False|Investigation's priority|["", "UNSPECIFIED", "LOW", "MEDIUM", "HIGH", "CRITICAL"]|LOW|None|None|
@@ -3006,7 +3006,7 @@ Example output:
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Assignee|assignee|None|False|The user assigned to this investigation, if any|None|
 |Created Time|string|None|False|The time the investigation was created as an ISO formatted timestamp|None|
-|Disposition|string|None|False|The disposition of this investigation, where possible values are BENIGN, MALICIOUS, NOT_APPLICABLE, and UNSPECIFIED|None|
+|Disposition|string|None|False|The disposition of this investigation, where possible values are `BENIGN`, `MALICIOUS`, `NOT_APPLICABLE`, `UNKNOWN`, `UNDECIDED`, `SECURITY_TEST`,`FALSE_POSITIVE`|None|
 |First Alert Time|string|None|False|The create time of the first alert belonging to this investigation|None|
 |Last Accessed|string|None|False|The time investigation was last viewed or modified|None|
 |Latest Alert Time|string|None|False|The create time of the most recent alert belonging to this investigation|None|
@@ -3428,6 +3428,7 @@ Example output:
 
 # Version History
 
+* 11.0.9 - Additional `disposition` values added for `Create Investigation`, `Update Investigation` and `Set Disposition of Investigation`
 * 11.0.8 - Remove use of session from the connection object to prevent session timeouts.
 * 11.0.7 - Adding request id to the plugin for traceability
 * 11.0.6 - Updated `disposition` values for `create_investigation` and `update_alert` action | SDK bump to 6.3.6
