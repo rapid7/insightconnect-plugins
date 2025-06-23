@@ -366,7 +366,6 @@ class GetNewAlertsOutput(insightconnect_plugin_runtime.Output):
           "title": "Disposition",
           "description": "The disposition of the alert.",
           "enum": [
-            "UNMAPPED",
             "UNDECIDED",
             "MALICIOUS",
             "BENIGN",
