@@ -28,9 +28,14 @@ class SetDispositionOfInvestigationInput(insightconnect_plugin_runtime.Input):
       "title": "Disposition",
       "description": "Investigation's disposition",
       "enum": [
+        "",
         "BENIGN",
+        "FALSE_POSITIVE",
         "MALICIOUS",
-        "NOT_APPLICABLE"
+        "NOT_APPLICABLE",
+        "SECURITY_TEST",
+        "UNDECIDED",
+        "UNKNOWN"
       ],
       "order": 2
     },
@@ -91,7 +96,7 @@ class SetDispositionOfInvestigationOutput(insightconnect_plugin_runtime.Output):
         "disposition": {
           "type": "string",
           "title": "Disposition",
-          "description": "The disposition of this investigation, where possible values are BENIGN, MALICIOUS, NOT_APPLICABLE, and UNSPECIFIED",
+          "description": "The disposition of this investigation, where possible values are `BENIGN`, `MALICIOUS`, `NOT_APPLICABLE`, `UNKNOWN`, `UNDECIDED`, `SECURITY_TEST`,`FALSE_POSITIVE`",
           "order": 3
         },
         "first_alert_time": {
