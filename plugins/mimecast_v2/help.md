@@ -103,6 +103,7 @@ Example output:
 
 # Version History
 
+* 1.0.6 - `Monitor SIEM Logs` Updated SDK to the latest version (6.3.6) | Added support for high volume lookback (up to 7 days)
 * 1.0.5 - `Monitor SIEM Logs` Modified status code returned by task when receiving 'Unauthorized Request' and 'token_verification_failed' fail codes | Updated SDK to the latest version (6.3.3)
 * 1.0.4 - `Monitor SIEM Logs` Fix issue where duplicate batches in a page are processed | SDK update to 6.2.6
 * 1.0.3 - `Monitor SIEM Logs` Fix issue retrieving logs from larger log files

@@ -1,7 +1,16 @@
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import APIException, PluginException
 from insightconnect_plugin_runtime.helper import hash_sha1
-from .schema import MonitorSiemLogsInput, MonitorSiemLogsOutput, MonitorSiemLogsState, Input, Output, Component, State
+from insightconnect_plugin_runtime.telemetry import monitor_task_delay
+from .schema import (
+    MonitorSiemLogsInput,
+    MonitorSiemLogsOutput,
+    MonitorSiemLogsState,
+    Input,
+    Output,
+    Component,
+    State,
+)
 from typing import Dict, List, Tuple
 from logging import getLevelName
 from datetime import datetime, timezone, timedelta
@@ -17,6 +26,7 @@ LOG_TYPES = [RECEIPT, URL_PROTECT, ATTACHMENT_PROTECT]
 DEFAULT_THREAD_COUNT = 10
 DEFAULT_PAGE_SIZE = 100
 MAX_LOOKBACK_DAYS = 7
+HEADROOM_DAYS = 1
 INITIAL_MAX_LOOKBACK_DAYS = 1
 LARGE_LOG_SIZE_LIMIT = 7000
 SMALL_LOG_SIZE_LIMIT = 250
@@ -34,6 +44,7 @@ CAUGHT_UP = "caught_up"
 NEXT_PAGE = "next_page"
 SAVED_FILE_URL = "saved_file_url"
 SAVED_FILE_POSITION = "saved_file_position"
+FURTHEST_QUERY_DATE = "furthest_query_date"
 # Access keys for custom config
 THREAD_COUNT = "thread_count"
 PAGE_SIZE = "page_size"
@@ -50,6 +61,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             state=MonitorSiemLogsState(),
         )
 
+    @monitor_task_delay(timestamp_keys=[FURTHEST_QUERY_DATE], default_delay_threshold="7d")
     def run(self, params={}, state={}, custom_config={}):  # pylint: disable=unused-argument
         log_level = self.get_log_level(custom_config.get("log_level", "info"))
         self.connection.api.set_log_level(log_level)
@@ -60,11 +72,13 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             self.logger.info(f"TASK: Run state is {run_condition}")
             state = self.update_state(state)
             page_size, thead_count, log_limit = self.apply_custom_config(state, run_condition, custom_config)
-            max_run_lookback_date = self.get_max_lookback_date(now_date, run_condition, bool(custom_config))
+            furthest_lookback_date = self.get_furthest_lookback_date(state.get(QUERY_CONFIG, {}))
+            max_run_lookback_date = self.get_max_lookback_date(
+                now_date, run_condition, bool(custom_config), furthest_lookback_date
+            )
             query_config = self.prepare_query_params(state.get(QUERY_CONFIG, {}), max_run_lookback_date, now_date)
             logs, query_config = self.get_all_logs(run_condition, query_config, page_size, thead_count, log_limit)
-            self.logger.info(f"TASK: Total logs collected this run {len(logs)}")
-            exit_state, has_more_pages = self.prepare_exit_state(state, query_config, now_date)
+            exit_state, has_more_pages = self.prepare_exit_state(state, query_config, now_date, furthest_lookback_date)
             return logs, exit_state, has_more_pages, 200, None
         except APIException as error:
             self.logger.info(
@@ -76,7 +90,13 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             return [], existing_state, False, 500, error
         except Exception as error:
             self.logger.info(f"Error: Unknown exception has occurred. No results returned. Error Data: {error}")
-            return [], existing_state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+            return (
+                [],
+                existing_state,
+                False,
+                500,
+                PluginException(preset=PluginException.Preset.UNKNOWN, data=error),
+            )
 
     def detect_run_condition(self, query_config: Dict, now_date: datetime) -> str:
         """
@@ -91,6 +111,22 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             if not log_type_config.get(CAUGHT_UP) or log_type_config.get(QUERY_DATE) not in str(now_date):
                 return PAGINATION_RUN
         return SUBSEQUENT_RUN
+
+    def get_furthest_lookback_date(self, query_config: Dict) -> datetime:
+        """
+        Get the furthest lookback date from the query configuration
+        :param query_config:
+        :return: furthest lookback date
+        """
+        furthest_date = None
+        for config in query_config.values():
+            if config.get(QUERY_DATE):
+                log_date = datetime.strptime(config[QUERY_DATE], DATE_FORMAT).date()
+                if furthest_date and log_date < furthest_date:
+                    furthest_date = log_date
+                elif not furthest_date:
+                    furthest_date = log_date
+        return furthest_date
 
     def update_state(self, state: Dict) -> Dict:
         """
@@ -109,28 +145,42 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                     state[QUERY_CONFIG][log_type] = copy.deepcopy(initial_log_type_config)
         return state
 
-    def get_max_lookback_date(self, now_date: datetime, run_condition: str, custom_config: bool) -> datetime:
+    def get_max_lookback_date(
+        self,
+        now_date: datetime,
+        run_condition: str,
+        custom_config: bool,
+        last_query_date: datetime,
+    ) -> datetime:
         """
         Get max lookback date for run condition
         :param now_date:
         :param run_condition:
         :param custom_config:
+        :param last_query_date:
         :return: max_run_lookback_date
         """
         max_run_lookback_days = MAX_LOOKBACK_DAYS
-        if run_condition in [INITIAL_RUN] and not custom_config:
+        if run_condition == INITIAL_RUN and not custom_config:
             max_run_lookback_days = INITIAL_MAX_LOOKBACK_DAYS
-
         max_run_lookback_date = now_date - timedelta(days=max_run_lookback_days)
+        if last_query_date:
+            if run_condition == PAGINATION_RUN and last_query_date == now_date - timedelta(
+                days=(max_run_lookback_days + HEADROOM_DAYS)
+            ):
+                self.logger.info("TASK: Pagination run detected, allow completion of cutoff day logs retrieval.")
+                max_run_lookback_date -= timedelta(days=HEADROOM_DAYS)
         return max_run_lookback_date
 
     def apply_custom_config(self, state: Dict, run_type: str, custom_config: Dict = {}) -> Tuple[int, int]:
         """
         Apply custom configuration for lookback, query date applies to start and end time of query
+        :param state:
         :param current_query_config:
         :param run_type:
         :param custom_config:
         :return: Page size, thread count and log limit
+        :return: Page size, thread count and log limits
         """
         custom_query_config = {}
         if custom_config:
@@ -156,6 +206,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         :return:
         """
         for log_type, log_type_config in query_config.items():
+            query_date = now_date
             query_date_str = log_type_config.get(QUERY_DATE)
             if query_date_str:
                 query_date = datetime.strptime(query_date_str, DATE_FORMAT).date()
@@ -190,7 +241,12 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         return log_type_config
 
     def get_all_logs(
-        self, run_condition: str, query_config: Dict, page_size: int, thead_count: int, log_limits: Dict = {}
+        self,
+        run_condition: str,
+        query_config: Dict,
+        page_size: int,
+        thead_count: int,
+        log_limits: Dict = {},
     ) -> Tuple[List, Dict]:
         """
         Gets all logs of provided log type. First retrieves batch URLs. Then downloads and reads batches, pooling logs.
@@ -240,7 +296,10 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         return complete_logs, query_config
 
     def compare_and_dedupe_hashes(
-        self, previous_logs_hashes: list, new_logs: list, log_hash_size_limit: int = SMALL_LOG_HASH_SIZE_LIMIT
+        self,
+        previous_logs_hashes: list,
+        new_logs: list,
+        log_hash_size_limit: int = SMALL_LOG_HASH_SIZE_LIMIT,
     ) -> Tuple[list, list]:
         """
         Iterate through two lists of values, hashing each. Compare hash value to a list of existing hash values.
@@ -265,13 +324,15 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                     new_logs_hashes.append(hash_)
         return logs_to_return, new_logs_hashes
 
-    def prepare_exit_state(self, state: dict, query_config: dict, now_date: datetime) -> Tuple[Dict, bool]:
+    def prepare_exit_state(
+        self, state: dict, query_config: dict, now_date: datetime, furthest_query_date: datetime
+    ) -> Tuple[Dict, bool]:
         """
         Prepare state and pagination for task completion. Format date time.
         :param state:
         :param query_config:
         :param now_date:
-        :param log_hashes:
+        :param furthest_query_date:
         :return: state, has_more_pages
         """
         has_more_pages = False
@@ -282,7 +343,12 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             if (not log_type_config.get(CAUGHT_UP)) or query_date < now_date:
                 has_more_pages = True
             log_type_config[QUERY_DATE] = query_date.strftime(DATE_FORMAT)
+        if furthest_query_date:
+            furthest_query_date_str = furthest_query_date.strftime("%Y-%m-%d")
+        else:
+            furthest_query_date_str = None
         state[QUERY_CONFIG] = query_config
+        state[FURTHEST_QUERY_DATE] = furthest_query_date_str
         return state, has_more_pages
 
     def get_log_level(self, log_level: str = "info") -> int:

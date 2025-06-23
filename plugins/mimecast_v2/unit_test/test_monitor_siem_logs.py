@@ -138,6 +138,44 @@ STUB_STATE_PAGINATING = {
     },
 }
 
+STUB_STATE_PAGINATING_CUTOFF = {
+    "query_config": {
+        "attachment protect": {"caught_up": False, "next_page": "NDU1NA==", "query_date": "1999-12-30"},
+        "receipt": {"caught_up": False, "next_page": "NDU1NA==", "query_date": "1999-12-30"},
+        "url protect": {"caught_up": False, "next_page": "NDU1NA==", "query_date": "1999-12-30"},
+    },
+}
+
+STUB_STATE_PAGINATING_CUTOFF_EXPECTED = {
+    "query_config": {
+        "attachment protect": {
+            "caught_up": True,
+            "next_page": "NDU1NA==",
+            "query_date": "1999-12-30",
+            "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
+            "saved_file_url": None,
+            "saved_file_position": 0,
+        },
+        "receipt": {
+            "caught_up": True,
+            "next_page": "NDU1NA==",
+            "query_date": "1999-12-30",
+            "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
+            "saved_file_url": None,
+            "saved_file_position": 0,
+        },
+        "url protect": {
+            "caught_up": True,
+            "next_page": "NDU1NA==",
+            "query_date": "1999-12-30",
+            "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
+            "saved_file_url": None,
+            "saved_file_position": 0,
+        },
+    }
+}
+
+
 STUB_STATE_DECODE_ERROR = {
     "query_config": {
         "attachment protect": {"caught_up": False, "next_page": "NDU1NA==", "query_date": "2000-01-06"},
@@ -356,6 +394,7 @@ class TestMonitorLogs(TestCase):
                 "starting",
                 {},
                 {},
+                None,
                 Util.read_file_to_dict("expected/monitor_siem_logs.json.exp"),
                 STUB_STATE_EXPECTED,
                 True,
@@ -366,6 +405,7 @@ class TestMonitorLogs(TestCase):
                 "paginating",
                 STUB_STATE_PAGINATING,
                 {},
+                "2000-01-06",
                 Util.read_file_to_dict("expected/monitor_siem_logs.json.exp"),
                 STUB_STATE_EXPECTED,
                 True,
@@ -376,6 +416,7 @@ class TestMonitorLogs(TestCase):
                 "paginating_last_page",
                 STUB_STATE_PAGINATING_LAST_PAGE,
                 {},
+                "2000-01-06",
                 Util.read_file_to_dict("expected/monitor_siem_logs.json.exp"),
                 STUB_STATE_SECOND_RUN_EXPECTED,
                 False,
@@ -386,6 +427,7 @@ class TestMonitorLogs(TestCase):
                 "custom_config",
                 {},
                 STUB_CUSTOM_CONFIG,
+                "1999-12-31",
                 Util.read_file_to_dict("expected/monitor_siem_logs.json.exp"),
                 STUB_STATE_EXPECTED_CUSTOM_CONFIG,
                 True,
@@ -396,6 +438,7 @@ class TestMonitorLogs(TestCase):
                 "custom_config_past_cutoff",
                 {},
                 STUB_CUSTOM_CONFIG_EXCEED_DATE,
+                "1999-12-30",
                 Util.read_file_to_dict("expected/monitor_siem_logs.json.exp"),
                 STUB_STATE_EXPECTED_CUSTOM_CONFIG,
                 True,
@@ -406,6 +449,7 @@ class TestMonitorLogs(TestCase):
                 "stop_parsing_file",
                 {},
                 STUB_CUSTOM_CONFIG_LIMIT_LOGS,
+                "1999-12-30",
                 Util.read_file_to_dict("expected/monitor_siem_logs.json.exp"),
                 STUB_STATE_EXPECTED_LOG_LIMIT,
                 True,
@@ -416,6 +460,7 @@ class TestMonitorLogs(TestCase):
                 "continue_parsing_file",
                 STUB_STATE_LIMIT_LOGS,
                 STUB_CUSTOM_CONFIG_LIMIT_LOGS_SECOND_RUN,
+                "1999-12-31",
                 Util.read_file_to_dict("expected/monitor_siem_logs.json.exp"),
                 STUB_STATE_EXPECTED_LOG_LIMIT_SECOND_RUN,
                 True,
@@ -426,6 +471,7 @@ class TestMonitorLogs(TestCase):
                 "json_decode_error",
                 STUB_STATE_DECODE_ERROR,
                 {},
+                "2000-01-05",
                 Util.read_file_to_dict("expected/monitor_siem_logs_invalid_receipt.json.exp"),
                 STUB_STATE_EXPECTED_INVALID_RECEIPT,
                 True,
@@ -436,8 +482,20 @@ class TestMonitorLogs(TestCase):
                 "remove_duplicates",
                 STUB_STATE_BATCH_DUPLICATES,
                 {},
+                "2000-01-02",
                 Util.read_file_to_dict("expected/monitor_siem_logs.json.exp"),
                 STUB_STATE_EXPECTED_DUPLICATES,
+                True,
+                200,
+                None,
+            ],
+            [
+                "paginating_cutoff_headroom",
+                STUB_STATE_PAGINATING_CUTOFF,
+                {},
+                "1999-12-30",
+                Util.read_file_to_dict("expected/monitor_siem_logs.json.exp"),
+                STUB_STATE_PAGINATING_CUTOFF_EXPECTED,
                 True,
                 200,
                 None,
@@ -450,6 +508,7 @@ class TestMonitorLogs(TestCase):
         test_name,
         state,
         custom_config,
+        furthest_query_date,
         expected_output,
         expected_state,
         expected_has_more_pages,
@@ -460,6 +519,7 @@ class TestMonitorLogs(TestCase):
         output, state, has_more_pages, status_code, error = self.task.run(
             params={}, state=state, custom_config=custom_config
         )
+        expected_state["furthest_query_date"] = furthest_query_date
         self.assertEqual(expected_output, output)
         self.assertEqual(expected_state, state)
         self.assertEqual(expected_has_more_pages, has_more_pages)
