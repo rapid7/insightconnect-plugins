@@ -391,7 +391,6 @@ class TestMonitorAlerts(TestCase):
         _, _, _, _, _ = self.task.run(state=saved_state, custom_config=cps_config)  # not concerned about output
 
         # check we called the request with the correct parameters passed from CPS
-        print(mock_req.call_args_list[0].kwargs.get("json").get("time_range"))
         requested_observation_time = mock_req.call_args_list[0].kwargs.get("json").get("time_range").get("start")
         requested_alert_time = mock_req.call_args_list[1].kwargs.get("json").get("time_range").get("start")
         requested_end_time = mock_req.call_args_list[1].kwargs.get("json").get("time_range").get("end")
