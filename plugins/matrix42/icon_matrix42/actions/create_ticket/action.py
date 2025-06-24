@@ -60,7 +60,15 @@ class CreateTicket(insightconnect_plugin_runtime.Action):
             )
 
         # Extract the ticket ID from the response
-        response_json = response.json()
+        try:
+            response_json = response.json()
+        except ValueError as e:
+            raise PluginException(
+                cause="Failed to parse JSON response from Matrix42.",
+                assistance="The response was not valid JSON.",
+                data=response.text,
+            )
+
         ticket_id = response_json.strip('"') if response_json else None
         if not ticket_id:
             raise PluginException(
