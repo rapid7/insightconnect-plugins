@@ -7,7 +7,7 @@ from sys import argv
 Name = "Matrix42"
 Vendor = "rapid7"
 Version = "1.0.0"
-Description = "[Matrix42](https://www.matrix42.com/) is a platform for IT service and asset management. This plugin allows users to create incidents and service requests within Matrix42."
+Description = "[Matrix42](https://www.matrix42.com/) is a platform for IT service and asset management. This plugin allows users to create incidents and service requests within Matrix42"
 
 
 def main():

@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 setup(
     name="matrix42-rapid7-plugin",
     version="1.0.0",
-    description="[Matrix42](https://www.matrix42.com/) is a platform for IT service and asset management. This plugin allows users to create incidents and service requests within Matrix42.",
+    description="[Matrix42](https://www.matrix42.com/) is a platform for IT service and asset management. This plugin allows users to create incidents and service requests within Matrix42",
     author="rapid7",
     author_email="",
     url="",

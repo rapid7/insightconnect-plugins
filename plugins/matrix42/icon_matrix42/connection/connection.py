@@ -28,18 +28,18 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 assistance="Please check your Matrix42 API URL and API key.",
                 data=str(e),
             )
-        
+
         # Extract the access token from the response
         try:
             access_token = response.json().get("RawToken")
-        
+
         except ValueError as e:
             raise ConnectionTestException(
                 cause="Failed to parse the access token from Matrix42.",
                 assistance="Ensure that the API key is valid and the Matrix42 API is reachable.",
                 data=str(e),
             )
-        
+
         return access_token
 
     def connect(self, params):
