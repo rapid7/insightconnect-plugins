@@ -11,4 +11,3 @@ from .get_asset.action import GetAsset
 from .stop_scan.action import StopScan
 
 from .vuln_search.action import VulnSearch
-
