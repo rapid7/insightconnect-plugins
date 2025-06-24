@@ -39,6 +39,13 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         self.access_token = self.get_access_token()
 
+        # Prepare headers
+        self.request_header = {
+            "Authorization": f"Bearer {self.access_token}",
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        }
+
     def test(self):
         """
         Test the connection by attempting to retrieve an access token.

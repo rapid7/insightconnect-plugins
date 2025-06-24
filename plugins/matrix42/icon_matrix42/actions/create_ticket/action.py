@@ -36,11 +36,7 @@ class CreateTicket(insightconnect_plugin_runtime.Action):
         url = f"{self.connection.api_url}ticket/create?activityType={activity_type_number}"
 
         # Prepare headers
-        headers = {
-            "Authorization": f"Bearer {self.connection.access_token}",
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-        }
+        headers = self.connection.request_header
 
         # Prepare body
         body = {
