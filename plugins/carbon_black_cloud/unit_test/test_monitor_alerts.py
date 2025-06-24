@@ -330,14 +330,14 @@ class TestMonitorAlerts(TestCase):
                 # subsequent run with the observation time out of the lookback period - default 7 days
                 {LAST_OBSERVATION_TIME: "2024-04-15T20:45:30.123Z", LAST_ALERT_TIME: "2024-04-25T15:15:35.123Z"},
                 {},  # no special custom config being passed
-                {LAST_OBSERVATION_TIME: "2024-04-18T15:45:00.000000Z", LAST_ALERT_TIME: "2024-04-25T15:15:35.123Z"},
+                {LAST_OBSERVATION_TIME: "2024-04-18T16:45:00.000000Z", LAST_ALERT_TIME: "2024-04-25T15:15:35.123Z"},
             ],
             [
                 # now = 2024-04-25T16:00:00.000000Z but task - 15 minutes -> 2024-04-25T15:45:00.000000Z
                 # subsequent run with the both times out of limit of overridden 3 days and 6 days
-                {LAST_OBSERVATION_TIME: "2024-04-15T20:45:30.123Z", LAST_ALERT_TIME: "2024-04-16T15:15:35.123Z"},
+                {LAST_OBSERVATION_TIME: "2024-04-15T20:45:30.123Z", LAST_ALERT_TIME: "2024-04-16T16:15:35.123Z"},
                 {f"{LAST_OBSERVATION_TIME}_days": 3, f"{LAST_ALERT_TIME}_days": 6},
-                {LAST_OBSERVATION_TIME: "2024-04-22T15:45:00.000000Z", LAST_ALERT_TIME: "2024-04-19T15:45:00.000000Z"},
+                {LAST_OBSERVATION_TIME: "2024-04-22T16:45:00.000000Z", LAST_ALERT_TIME: "2024-04-19T16:45:00.000000Z"},
             ],
             [
                 # now = 2024-04-25T16:00:00.000000Z but task - 15 minutes -> 2024-04-25T15:45:00.000000Z
@@ -361,7 +361,7 @@ class TestMonitorAlerts(TestCase):
                         "second": 55,
                     },
                 },
-                {LAST_OBSERVATION_TIME: "2024-04-25T12:00:35.000000Z", LAST_ALERT_TIME: "2024-04-20T10:45:55.000000Z"},
+                {LAST_OBSERVATION_TIME: "2024-04-25T13:00:35.000000Z", LAST_ALERT_TIME: "2024-04-20T11:45:55.000000Z"},
             ],
             [
                 {LAST_OBSERVATION_TIME: "2024-04-25T10:35:00.000000Z", LAST_ALERT_TIME: "2024-04-25T15:25:00.000000Z"},
@@ -439,8 +439,8 @@ class TestMonitorAlerts(TestCase):
                     "debug": True,
                 },
                 {
-                    LAST_OBSERVATION_TIME: "2024-04-25T12:00:35.000000Z",
-                    LAST_ALERT_TIME: "2024-04-20T10:45:55.000000Z",
+                    LAST_OBSERVATION_TIME: "2024-04-25T13:00:35.000000Z",
+                    LAST_ALERT_TIME: "2024-04-20T11:45:55.000000Z",
                     "alert_page_size": 7000,
                     "observation_page_size": 7000,
                     "debug": True,
