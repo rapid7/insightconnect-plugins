@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.helper import clean
 
 from .schema import AssetSearchInput, AssetSearchOutput, Input, Output, Component
-from icon_rapid7_insightvm_cloud.util.constants import CRITERIA_OPERATOR_MAP
+from icon_rapid7_insightvm_cloud.util.constants import CRITERIA_OPERATOR_MAP, MAX_PAGE_SIZE
 
 
 class AssetSearch(insightconnect_plugin_runtime.Action):
@@ -30,12 +30,17 @@ class AssetSearch(insightconnect_plugin_runtime.Action):
                 "asset": f"{asset_criteria} {CRITERIA_OPERATOR_MAP.get(operator_criteria, '&&')} {vulnerability_query}"
             }
 
-        # Setting up query parameters for request
         query_parameters = {
-            "size": size,
             "currentTime": current_time,
             "comparisonTime": comparison_time,
         }
+
+        # Capped Max Page Size, maximum API supports is 500 (causes timeouts)
+        if size > MAX_PAGE_SIZE:
+            query_parameters["size"] = MAX_PAGE_SIZE
+        else:
+            query_parameters["size"] = size
+
         for key, value in sort_criteria.items():
             query_parameters["sort"] = f"{key},{value}"
 
