@@ -36,10 +36,7 @@ class AssetSearch(insightconnect_plugin_runtime.Action):
         }
 
         # Capped Max Page Size, maximum API supports is 500 (causes timeouts)
-        if size > MAX_PAGE_SIZE:
-            query_parameters["size"] = MAX_PAGE_SIZE
-        else:
-            query_parameters["size"] = size
+        query_parameters["size"] = MAX_PAGE_SIZE if size >= MAX_PAGE_SIZE else size
 
         for key, value in sort_criteria.items():
             query_parameters["sort"] = f"{key},{value}"
