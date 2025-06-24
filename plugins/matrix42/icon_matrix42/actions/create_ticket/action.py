@@ -40,8 +40,6 @@ class CreateTicket(insightconnect_plugin_runtime.Action):
 
         # Prepare body
         body = {
-            "User": "00000000-0000-0000-0000-000000000000",  # Default user ID, can be overridden in additional_fields
-            "Category": "00000000-0000-0000-0000-000000000000",  # Default category ID, can be overridden in additional_fields
             "Subject": subject,
             "DescriptionHTML": description_html,
         }
