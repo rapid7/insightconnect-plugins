@@ -23,7 +23,7 @@ tags:
 - configuration
 hub_tags:
   use_cases: [remediation_management, asset_inventory]
-  keywords: [ticketing, incidents, cloud_enabled]
+  keywords: [ticketing, incidents]
   features: []
 sdk:
   type: slim
