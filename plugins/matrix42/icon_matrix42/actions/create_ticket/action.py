@@ -42,10 +42,8 @@ class CreateTicket(insightconnect_plugin_runtime.Action):
         body = {
             "Subject": subject,
             "DescriptionHTML": description_html,
+            **additional_fields,
         }
-
-        # Merge in any additional fields
-        body.update(additional_fields)
 
         # Make the request
         try:

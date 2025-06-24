@@ -58,6 +58,11 @@ class Util:
         connection.api_url = "https://fake-url/"
         connection.api_key = "fake-key"
         connection.access_token = "mocked-access-token"
+        connection.request_header = {
+            "Authorization": f"Bearer {connection.access_token}",
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        }
         action.connection = connection
         action.logger = MagicMock()
         return action
