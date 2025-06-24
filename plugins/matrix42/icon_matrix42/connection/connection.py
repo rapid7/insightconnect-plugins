@@ -33,8 +33,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def connect(self, params):
         self.logger.info("Connect: Connecting...")
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
-        self.api_key = params.get(Input.API_KEY).get("secretKey")
-        self.api_url = params.get(Input.API_URL).rstrip("/") + "/"
+        self.api_key = params.get(Input.API_KEY).get("secretKey").strip()
+        self.api_url = params.get(Input.API_URL).strip().rstrip("/") + "/"
         # END INPUT BINDING - DO NOT REMOVE
 
         self.access_token = self.get_access_token()
