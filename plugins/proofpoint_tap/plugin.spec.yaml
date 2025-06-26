@@ -6,12 +6,12 @@ title: Proofpoint TAP
 description: "[Proofpoint Targeted Attack Protection](https://www.proofpoint.com/us/products/ransomware-and-targeted-attack-protection)
 (TAP) helps you stay ahead of attackers with an innovative approach that detects, analyzes and blocks advanced
 threats before they reach your inbox. This plugin enables users to parse TAP alerts"
-version: 4.1.12
+version: 4.1.13
 connection_version: 4
 supported_versions: ["Proofpoint TAP API v2", "Tested on 2024-06-04"]
 sdk:
   type: slim
-  version: 6.2.6
+  version: 6.3.6
   user: nobody
 vendor: rapid7
 support: community
@@ -46,6 +46,7 @@ links:
 references:
   - "[Proofpoint TAP](https://www.proofpoint.com/us/products/ransomware-and-targeted-attack-protection)"
 version_history:
+  - "4.1.13 - `Monitor Events`: Updated boundary and split size properties | Updated SDK to latest version (6.3.6)"
   - "4.1.12 - `Monitor Events`: Updated boundary and split size properties | Updated SDK to latest version (6.2.6)"
   - "4.1.11 - SDK Bump to 6.2.3 | `Monitor Events` task updated to handle requests outside of Proofpoint TAP API limits"
   - "4.1.10 - SDK Bump to 6.1.0 | Task Connection test added Update `Parse Tap Alert` to utilise BeautifulSoup resolving vulnerabilities"

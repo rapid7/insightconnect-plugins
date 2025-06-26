@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="proofpoint_tap-rapid7-plugin",
-    version="4.1.12",
+    version="4.1.13",
     description="[Proofpoint Targeted Attack Protection](https://www.proofpoint.com/us/products/ransomware-and-targeted-attack-protection) (TAP) helps you stay ahead of attackers with an innovative approach that detects, analyzes and blocks advanced threats before they reach your inbox. This plugin enables users to parse TAP alerts",
     author="rapid7",
     author_email="",

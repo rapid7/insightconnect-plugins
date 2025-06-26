@@ -15,6 +15,7 @@ SUBSEQUENT_LOOKBACK_HOURS = 24 * 7  # Lookback time in hours for subsequent runs
 API_MAX_LOOKBACK = 24 * 7  # API limits to 7 days ago
 MINUTES_BOUNDARY = 60  # Start time window boundary of 60 minutes from now
 DEFAULT_SPLIT_SIZE = 1000
+HEADROOM_HOURS = 1
 
 
 class MonitorEvents(insightconnect_plugin_runtime.Task):
@@ -209,8 +210,8 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
 
     def _apply_api_limit(self, api_limit, time_to_check, next_page_index, time_name):
         if api_limit >= time_to_check:
-            self.logger.info(f"Supplied a {time_name} further than allowed. Moving this to {api_limit}")
-            time_to_check = api_limit
+            time_to_check = api_limit + timedelta(hours=HEADROOM_HOURS)
+            self.logger.info(f"Supplied a {time_name} further than allowed. Moving this to {time_to_check}")
             if time_to_check == "start_time":
                 next_page_index = 0
         return time_to_check, next_page_index

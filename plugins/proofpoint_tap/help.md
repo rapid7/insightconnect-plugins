@@ -1176,6 +1176,7 @@ Example output:
 
 # Version History
 
+* 4.1.13 - `Monitor Events`: Updated boundary and split size properties | Updated SDK to latest version (6.3.6)
 * 4.1.12 - `Monitor Events`: Updated boundary and split size properties | Updated SDK to latest version (6.2.6)
 * 4.1.11 - SDK Bump to 6.2.3 | `Monitor Events` task updated to handle requests outside of Proofpoint TAP API limits
 * 4.1.10 - SDK Bump to 6.1.0 | Task Connection test added Update `Parse Tap Alert` to utilise BeautifulSoup resolving vulnerabilities
