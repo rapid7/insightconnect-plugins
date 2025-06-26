@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="rapid7_insightvm_cloud-rapid7-plugin",
-    version="8.1.2",
+    version="9.0.0",
     description="InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses the InsightVM Cloud Integrations API to view assets and start scans",
     author="rapid7",
     author_email="",

@@ -9,6 +9,7 @@ class Component:
 
 class Input:
     ASSET_CRITERIA = "asset_criteria"
+    ASSET_VULN_CRITERIA = "asset_vuln_criteria"
     COMPARISON_TIME = "comparison_time"
     CRITERIA_OPERATOR = "criteria_operator"
     CURRENT_TIME = "current_time"
@@ -34,13 +35,19 @@ class AssetSearchInput(insightconnect_plugin_runtime.Input):
       "description": "Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames",
       "order": 3
     },
+    "asset_vuln_criteria": {
+      "type": "string",
+      "title": "Asset Vulnerability Criteria",
+      "description": "Filters for both the combined asset and vulnerability to apply to the asset search. This value will get appended onto the end of the 'Asset Criteria' field",
+      "order": 5
+    },
     "comparison_time": {
       "type": "string",
       "format": "date-time",
       "displayType": "date",
       "title": "Comparison Time",
       "description": "The date and time to compare the asset current state against to detect changes",
-      "order": 7
+      "order": 8
     },
     "criteria_operator": {
       "type": "string",
@@ -51,7 +58,7 @@ class AssetSearchInput(insightconnect_plugin_runtime.Input):
         "AND",
         "OR"
       ],
-      "order": 5
+      "order": 6
     },
     "current_time": {
       "type": "string",
@@ -59,7 +66,7 @@ class AssetSearchInput(insightconnect_plugin_runtime.Input):
       "displayType": "date",
       "title": "Current Time",
       "description": "The current date and time to compare against the asset state to detect changes",
-      "order": 6
+      "order": 7
     },
     "size": {
       "type": "integer",
