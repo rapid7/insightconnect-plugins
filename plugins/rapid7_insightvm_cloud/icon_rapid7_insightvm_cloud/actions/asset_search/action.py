@@ -15,7 +15,6 @@ class AssetSearch(insightconnect_plugin_runtime.Action):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         asset_criteria = params.get(Input.ASSET_CRITERIA, "")
         vulnerability_criteria = params.get(Input.VULN_CRITERIA, "")
-        operator_criteria = params.get(Input.CRITERIA_OPERATOR, "")
         current_time = params.get(Input.CURRENT_TIME, "")
         comparison_time = params.get(Input.COMPARISON_TIME, "")
         sort_criteria = params.get(Input.SORT_CRITERIA, {})
@@ -24,11 +23,6 @@ class AssetSearch(insightconnect_plugin_runtime.Action):
 
         # Setting up the JSON body for request
         json_body = {"asset": asset_criteria, "vulnerability": vulnerability_criteria}
-        if (asset_criteria, vulnerability_criteria):
-            vulnerability_query = vulnerability_criteria.replace("vulnerability.", "asset.vulnerability.")
-            json_body = {
-                "asset": f"{asset_criteria} {CRITERIA_OPERATOR_MAP.get(operator_criteria, '&&')} {vulnerability_query}"
-            }
 
         query_parameters = {
             "currentTime": current_time,

@@ -14,7 +14,7 @@ requirements:
   - "Requires an InsightVM API Key"
   - "InsightVM Scan Engine(s) paired to the Insight Platform"
 version_history:
-  - "9.0.0 - Refined pagination for `Asset Search` action | SDK Bump to 6.3.6"
+  - "9.0.0 - Refined pagination for `Asset Search` action | SDK Bump to 6.3.6 | Resolved issue in 'Asset Search' where 'Vulnerability Criteria' is appended onto 'Asset Criteria'"
   - "8.1.1 - Updated SDK to the latest version (v6.2.3) | Address vulnerabilities"
   - "8.1.0 - Action `Asset Search`: Added optional asset and vulnerability criteria logical operator | Updated action to return more than 500 results"
   - "8.0.0 - Output for `Asset Search` and `Get Asset` to label fields `ID` and `Solution Type` as un-required"
@@ -1157,22 +1157,6 @@ actions:
         type: string
         required: false
         example: "vulnerability.categories IN ['example']"
-      asset_vuln_criteria:
-        title: Asset Vulnerability Criteria
-        description: Filters for both the combined asset and vulnerability to apply to the asset search. This value will get appended onto the end of the 'Asset Criteria' field
-        type: string
-        required: false
-        example: "vulnerability.categories IN ['example']"
-      criteria_operator:
-        title: Criteria Logical Operator
-        description: The logical query operator used to combine asset and/or vulnerability criteria. Only applicable when both asset and vulnerability criteria are entered
-        type: string
-        required: false
-        enum:
-          - ""
-          - AND
-          - OR
-        example: AND
       current_time:
         title: Current Time
         description: The current date and time to compare against the asset state to detect changes
