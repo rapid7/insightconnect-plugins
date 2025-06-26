@@ -1147,7 +1147,7 @@ actions:
         example: '{"risk-score": "asc", "criticality-tag": "desc"}'
       asset_criteria:
         title: Asset Criteria
-        description: Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames
+        description: Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames. Use '||' for OR and '&&' for AND
         type: string
         required: false
         example: "asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'"

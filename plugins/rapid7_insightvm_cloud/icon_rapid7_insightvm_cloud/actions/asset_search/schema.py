@@ -30,7 +30,7 @@ class AssetSearchInput(insightconnect_plugin_runtime.Input):
     "asset_criteria": {
       "type": "string",
       "title": "Asset Criteria",
-      "description": "Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames",
+      "description": "Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames. Use '||' for OR and '&&' for AND",
       "order": 3
     },
     "comparison_time": {
