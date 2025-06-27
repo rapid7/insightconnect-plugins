@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightvm_cloud
 title: Rapid7 InsightVM Cloud
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses the InsightVM Cloud Integrations API to view assets and start scans
-version: 8.1.2
+version: 9.0.0
 connection_version: 6
 key_features:
   - "Perform scan management functionality including starting and checking the status of scans"
@@ -14,7 +14,7 @@ requirements:
   - "Requires an InsightVM API Key"
   - "InsightVM Scan Engine(s) paired to the Insight Platform"
 version_history:
-  - "8.1.2 - Refined pagination for `Asset Search` action | SDK Bump to 6.3.6"
+  - "9.0.0 - Refined pagination for `Asset Search` action | SDK Bump to 6.3.6 | Resolved issue in 'Asset Search' where 'Vulnerability Criteria' is appended onto 'Asset Criteria'"
   - "8.1.1 - Updated SDK to the latest version (v6.2.3) | Address vulnerabilities"
   - "8.1.0 - Action `Asset Search`: Added optional asset and vulnerability criteria logical operator | Updated action to return more than 500 results"
   - "8.0.0 - Output for `Asset Search` and `Get Asset` to label fields `ID` and `Solution Type` as un-required"
@@ -1147,7 +1147,7 @@ actions:
         example: '{"risk-score": "asc", "criticality-tag": "desc"}'
       asset_criteria:
         title: Asset Criteria
-        description: Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames
+        description: Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames. Use '||' for OR and '&&' for AND
         type: string
         required: false
         example: "asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'"
@@ -1157,16 +1157,6 @@ actions:
         type: string
         required: false
         example: "vulnerability.categories IN ['example']"
-      criteria_operator:
-        title: Criteria Logical Operator
-        description: The logical query operator used to combine asset and/or vulnerability criteria. Only applicable when both asset and vulnerability criteria are entered
-        type: string
-        required: false
-        enum:
-          - ""
-          - AND
-          - OR
-        example: AND
       current_time:
         title: Current Time
         description: The current date and time to compare against the asset state to detect changes
