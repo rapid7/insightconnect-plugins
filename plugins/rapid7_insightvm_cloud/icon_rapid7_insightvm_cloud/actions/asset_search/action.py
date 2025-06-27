@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.helper import clean
 
 from .schema import AssetSearchInput, AssetSearchOutput, Input, Output, Component
-from icon_rapid7_insightvm_cloud.util.constants import CRITERIA_OPERATOR_MAP, MAX_PAGE_SIZE
+from icon_rapid7_insightvm_cloud.util.constants import MAX_PAGE_SIZE
 
 
 class AssetSearch(insightconnect_plugin_runtime.Action):
