@@ -32,8 +32,22 @@ class ImportObservable(insightconnect_plugin_runtime.Action):
         data = {}
         observable_settings = params.get(Input.OBSERVABLE_SETTINGS, {})
         # Format observable settings
-        if observable_settings.get("expiration_ts", "").startswith("0001-01-01"):
+
+        # If no timestamp is sent, Anomali will default it to 90 days
+        if (
+            observable_settings.get("expiration_ts", "").startswith("0001-01-01")
+            or observable_settings.get("expiration_ts") == ""
+        ):
             del observable_settings["expiration_ts"]
+
+        if observable_settings.get("confidence"):
+            if not 0 <= observable_settings.get("confidence") <= 100:
+                raise PluginException(
+                    cause="Confidence score is either above the maximum limit or below the minimum limit.",
+                    assistance="Please ensure the confidence score is between 0 and 100.",
+                    data=f"Confidence score: {observable_settings.get('confidence')} is either above or below the limit.",
+                )
+
         for key, value in observable_settings.items():
             if key in ("notes", "trustedcircles"):
                 value = ",".join(str(val) for val in value)

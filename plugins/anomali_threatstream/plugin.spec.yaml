@@ -11,7 +11,7 @@ support: community
 supported_versions: ["Anomali API API 19-06-2025"]
 sdk:
   type: slim
-  version: 6.3.6
+  version: 6.3.7
   user: nobody
 status: []
 resources:
@@ -40,7 +40,7 @@ hub_tags:
   keywords: [anomali, threatstream]
   features: []
 version_history:
-  - 4.0.0 - Updated actions to V2 API (V1 deprecated for various actions) | SDK Bump to 6.3.6 | Additional output fields added for `Get Sandbox Report`
+  - 4.0.0 - Updated actions to V2 API (V1 deprecated for various actions) | SDK Bump to 6.3.7 | Additional output fields added for `Get Sandbox Report`
   - 3.1.2 - Update SDK to newest version
   - 3.1.1 - Mask API key from URLs in log output
   - 3.1.0 - Add new actions Submit File, Submit URL and Get Sandbox Report
@@ -163,6 +163,7 @@ types:
       description: Confidence value assigned to the observable. Confidence score can
         range from 0-100, in increasing order of confidence
       type: integer
+      required: true
     source_confidence_weight:
       title: Source Confidence Weight
       description: Specifies the ratio between the amount of the source confidence
@@ -178,7 +179,7 @@ types:
       - medium
       - high
       - very-high
-      - ''
+      - ""
     classification:
       title: Classification
       description: Classification of the observable
@@ -190,7 +191,7 @@ types:
       required: true
     expiration_ts:
       title: Expiration Time Stamp
-      description: Time stamp of when intelligence will expire on ThreatStream
+      description: Time stamp of when intelligence will expire on ThreatStream. If no date is provided, `Expiration Time Stamp` it will set to 90 days from the current date
       type: date
     notes:
       title: Notes
@@ -235,7 +236,7 @@ types:
       type: '[]integer'
     threat_type:
       title: Threat Type
-      description: Type of threat associated with the imported observables
+      description: Type of threat associated with the imported observables. If used alongside other mapping fields, it will overwrite them
       type: string
       required: false
   import_observable_response:
@@ -450,7 +451,7 @@ actions:
         required: true
       observable_settings:
         title: Observable Settings
-        description: Settings needed for importing an observable that needs approval. If `threat_type` is used alongside other mapping fields, it will overwrite them
+        description: Settings needed for importing an observable that needs approval
         type: observable_settings
         example: {"classification": "public", "confidence": 100, "threat_type": "brute"}
         required: false
@@ -464,6 +465,7 @@ actions:
           - green
           - clear
           - amber+strict
+          - ""
         example: red
         required: false
     output:

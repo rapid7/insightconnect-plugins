@@ -33,7 +33,7 @@ class ImportObservableInput(insightconnect_plugin_runtime.Input):
     "observable_settings": {
       "$ref": "#/definitions/observable_settings",
       "title": "Observable Settings",
-      "description": "Settings needed for importing an observable that needs approval. If `threat_type` is used alongside other mapping fields, it will overwrite them",
+      "description": "Settings needed for importing an observable that needs approval",
       "order": 2
     },
     "tlp": {
@@ -45,7 +45,8 @@ class ImportObservableInput(insightconnect_plugin_runtime.Input):
         "amber",
         "green",
         "clear",
-        "amber+strict"
+        "amber+strict",
+        ""
       ],
       "order": 3
     }
@@ -119,7 +120,7 @@ class ImportObservableInput(insightconnect_plugin_runtime.Input):
           "format": "date-time",
           "displayType": "date",
           "title": "Expiration Time Stamp",
-          "description": "Time stamp of when intelligence will expire on ThreatStream",
+          "description": "Time stamp of when intelligence will expire on ThreatStream. If no date is provided, `Expiration Time Stamp` it will set to 90 days from the current date",
           "order": 5
         },
         "notes": {
@@ -173,12 +174,13 @@ class ImportObservableInput(insightconnect_plugin_runtime.Input):
         "threat_type": {
           "type": "string",
           "title": "Threat Type",
-          "description": "Type of threat associated with the imported observables",
+          "description": "Type of threat associated with the imported observables. If used alongside other mapping fields, it will overwrite them",
           "order": 13
         }
       },
       "required": [
-        "classification"
+        "classification",
+        "confidence"
       ]
     }
   }
