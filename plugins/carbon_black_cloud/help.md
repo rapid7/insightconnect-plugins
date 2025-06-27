@@ -440,6 +440,7 @@ Example output:
 
 # Version History
 
+* 2.2.11 - 'Monitor Alerts': Fix bug related to search window reset for deduplicated alerts
 * 2.2.10 - Add support for high volume event support at cutoff time and date | Update SDK to 6.3.6
 * 2.2.9 - Fix error handing for when we don't get results served correctly from observations API
 * 2.2.8 - Fix error handling for HTTP Not Found status code responses from Carbon Black Cloud | Update SDK to 6.2.0
