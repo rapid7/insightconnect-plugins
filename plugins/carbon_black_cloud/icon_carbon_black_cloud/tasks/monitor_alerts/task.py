@@ -172,7 +172,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 alerts_has_more_pages = True
 
             alerts, state = self._dedupe_and_get_last_time(alerts, state, start_alert_time, observations=False)
-        else:
+        if not alerts:
             self.logger.info("No alerts retrieved for time period searched...")
             state[LAST_ALERT_TIME] = end_alert_time
         self.logger.info(f"{LAST_ALERT_TIME} set to: {state[LAST_ALERT_TIME]}, has_more_pages={alerts_has_more_pages}")
