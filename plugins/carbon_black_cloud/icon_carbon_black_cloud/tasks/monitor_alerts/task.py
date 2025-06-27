@@ -193,7 +193,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             "time_range": {"start": start_time, "end": end_time},
         }
         url = f"{self.connection.base_url}/{endpoint}"
-        self.logger.info("Triggering observation search", time_start=start_time, time_end=end_time, start=index)
+        self.logger.info("Triggering observation search")
         observation_job_id = self.connection.request_api(url, search_params, debug=debug).get("job_id")
 
         state[OBSERVATION_QUERY_END_TIME] = end_time
