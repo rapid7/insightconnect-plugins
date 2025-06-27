@@ -5,6 +5,7 @@ from typing import Any, Dict, Tuple, Union
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import hash_sha1
+from insightconnect_plugin_runtime.telemetry import monitor_task_delay
 
 # Custom imports below
 from komand_duo_admin.util.constants import Assistance
@@ -144,6 +145,14 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             return 200, None
         return status_code, error
 
+    @monitor_task_delay(
+        timestamp_keys=[
+            "admin_logs_last_log_timestamp",
+            "auth_logs_last_log_timestamp",
+            "trust_monitor_last_log_timestamp",
+        ],
+        default_delay_threshold="2d",
+    )
     def run(self, params={}, state={}, custom_config={}):  # noqa: C901
         rate_limit_delay = custom_config.get("rate_limit_delay", RATE_LIMIT_DELAY)
         if rate_limited := self.check_rate_limit(state):
