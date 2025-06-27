@@ -127,13 +127,17 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
             self.logger.info(
                 "HTTP error from Carbon Black",
+                error=http_error.cause,
+                status_code=http_error.status_code,
+                returning_code=status_code,
+                state=state,
             )
 
             return alerts_and_observations, state, has_more_pages, status_code, error
 
         except Exception as error:
             self.logger.error(
-                f"Hit an unexpected error during task execution. State={state}, Error={error}"
+                f"Hit an unexpected error during task execution. State={state}, Error={error}", exc_info=True
             )
             return alerts_and_observations, state, False, 500, error
 
@@ -189,7 +193,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             "time_range": {"start": start_time, "end": end_time},
         }
         url = f"{self.connection.base_url}/{endpoint}"
-        self.logger.info("Triggering observation search")
+        self.logger.info("Triggering observation search", time_start=start_time, time_end=end_time, start=index)
         observation_job_id = self.connection.request_api(url, search_params, debug=debug).get("job_id")
 
         state[OBSERVATION_QUERY_END_TIME] = end_time
