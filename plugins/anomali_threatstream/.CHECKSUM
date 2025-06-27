@@ -1,5 +1,5 @@
 {
-	"spec": "8e7975dc61f8c54edd9e8ff75577b54e",
+	"spec": "4f75801fa474db29456abea03678cd7c",
 	"manifest": "5a978e55740c1c5aae9987a12c39b29f",
 	"setup": "c49eecdac5557c8bcd51655a32a1d0ee",
 	"schemas": [
@@ -13,7 +13,7 @@
 		},
 		{
 			"identifier": "import_observable/schema.py",
-			"hash": "201b675c043d8023bd75ccce342538b5"
+			"hash": "b0cdc1eaea5deab80271daaef3d1c5bd"
 		},
 		{
 			"identifier": "lookup_hash/schema.py",

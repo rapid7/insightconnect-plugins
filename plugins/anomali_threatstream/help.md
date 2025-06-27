@@ -179,8 +179,8 @@ This action is used to import observable(s) into Anomali ThreatStream with appro
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |file|file|None|True|File of data to be imported into Anomali ThreatStream|None|setup.exe|None|None|
-|observable_settings|observable_settings|None|False|Settings needed for importing an observable that needs approval. If `threat_type` is used alongside other mapping fields, it will overwrite them|None|{'classification': 'public', 'confidence': 100, 'threat_type': 'brute'}|None|None|
-|tlp|string|None|False|Protocol to indicate how sensitive information should be shared|["red", "amber", "green", "clear", "amber+strict"]|red|None|None|
+|observable_settings|observable_settings|None|False|Settings needed for importing an observable that needs approval|None|{'classification': 'public', 'confidence': 100, 'threat_type': 'brute'}|None|None|
+|tlp|string|None|False|Protocol to indicate how sensitive information should be shared|["red", "amber", "green", "clear", "amber+strict", ""]|red|None|None|
   
 Example input:
 
@@ -535,16 +535,16 @@ Example output:
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Classification|string|private|True|Classification of the observable|None|
-|Confidence|integer|None|None|Confidence value assigned to the observable. Confidence score can range from 0-100, in increasing order of confidence|None|
+|Confidence|integer|None|True|Confidence value assigned to the observable. Confidence score can range from 0-100, in increasing order of confidence|None|
 |Domain Mapping|string|None|False|Indicator type to assign if a specific type is not associated with an observable|None|
 |Email Mapping|string|None|False|Indicator type to assign if a specific type is not associated with an observable|None|
-|Expiration Time Stamp|date|None|None|Time stamp of when intelligence will expire on ThreatStream|None|
+|Expiration Time Stamp|date|None|None|Time stamp of when intelligence will expire on ThreatStream. If no date is provided, `Expiration Time Stamp` it will set to 90 days from the current date|None|
 |IP Mapping|string|None|False|Indicator type to assign if a specific type is not associated with an observable|None|
 |MD5 Mapping|string|None|False|Indicator type to assign if a specific type is not associated with an observable|None|
 |Notes|[]string|None|None|Additional details for the observable. This information is displayed in the Tags column of the ThreatStream UI e.g ['note1', 'note2', 'note3']|None|
 |Severity|string||None|Severity you want to assign to the observable when it is imported|None|
 |Source Confidence Weight|integer|None|None|Specifies the ratio between the amount of the source confidence of each observable and the ThreatStream confidence|None|
-|Threat Type|string|None|False|Type of threat associated with the imported observables|None|
+|Threat Type|string|None|False|Type of threat associated with the imported observables. If used alongside other mapping fields, it will overwrite them|None|
 |Trusted Circles|[]integer|None|None|ID of the trusted circle to which this threat data should be imported. If you want to import the threat data to multiple trusted circles, enter the list of comma-separated IDs e.g [1,2,3]|None|
 |URL Mapping|string|None|False|Indicator type to assign if a specific type is not associated with an observable|None|
   
@@ -599,7 +599,7 @@ Example output:
 
 # Version History
 
-* 4.0.0 - Updated actions to V2 API (V1 deprecated for various actions) | SDK Bump to 6.3.6 | Additional output fields added for `Get Sandbox Report`
+* 4.0.0 - Updated actions to V2 API (V1 deprecated for various actions) | SDK Bump to 6.3.7 | Additional output fields added for `Get Sandbox Report`
 * 3.1.2 - Update SDK to newest version
 * 3.1.1 - Mask API key from URLs in log output
 * 3.1.0 - Add new actions Submit File, Submit URL and Get Sandbox Report
