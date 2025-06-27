@@ -127,17 +127,13 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
             self.logger.info(
                 "HTTP error from Carbon Black",
-                error=http_error.cause,
-                status_code=http_error.status_code,
-                returning_code=status_code,
-                state=state,
             )
 
             return alerts_and_observations, state, has_more_pages, status_code, error
 
         except Exception as error:
             self.logger.error(
-                f"Hit an unexpected error during task execution. State={state}, Error={error}", exc_info=True
+                f"Hit an unexpected error during task execution. State={state}, Error={error}"
             )
             return alerts_and_observations, state, False, 500, error
 
