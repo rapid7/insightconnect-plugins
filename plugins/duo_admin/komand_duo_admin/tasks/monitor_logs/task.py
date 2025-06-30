@@ -264,7 +264,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             return new_logs, state, has_more_pages, 200, None
 
         except ApiException as error:
-            return self._handle_api_exception(error, state, rate_limit_delay, has_more_pages)
+            return self._handle_api_exception(error, state, rate_limit_delay)
         except Exception as error:
             return self._handle_general_exception(error, state, has_more_pages)
 
@@ -298,24 +298,24 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         )
 
     def _collect_log_type(
-            self,
-            log_type,
-            now,
-            last_log_timestamp,
-            next_page_params,
-            backward_comp_first_run,
-            custom_config,
-            previous_hashes,
-            state,
-            state_last_log_key,
-            state_hashes_key,
-            state_next_page_key,
-            new_logs,
-            has_more_pages,
-            get_logs_func,
-            compare_hashes_func,
-            get_highest_timestamp_func,
-            log_label,
+        self,
+        log_type,
+        now,
+        last_log_timestamp,
+        next_page_params,
+        backward_comp_first_run,
+        custom_config,
+        previous_hashes,
+        state,
+        state_last_log_key,
+        state_hashes_key,
+        state_next_page_key,
+        new_logs,
+        has_more_pages,
+        get_logs_func,
+        compare_hashes_func,
+        get_highest_timestamp_func,
+        log_label,
     ):
         mintime, maxtime, get_next_page = self.get_parameters_for_query(
             log_type,
@@ -342,7 +342,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 state.pop(state_next_page_key)
         return new_logs, state, has_more_pages
 
-    def _handle_api_exception(self, error, state, rate_limit_delay, has_more_pages):
+    def _handle_api_exception(self, error, state, rate_limit_delay):
         self.logger.info(f"An API Exception has been raised. Status code: {error.status_code}. Error: {error}")
         state[self.PREVIOUS_TRUST_MONITOR_EVENT_HASHES] = []
         state[self.PREVIOUS_ADMIN_LOG_HASHES] = []
@@ -356,6 +356,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         state[self.PREVIOUS_ADMIN_LOG_HASHES] = []
         state[self.PREVIOUS_AUTH_LOG_HASHES] = []
         return [], state, has_more_pages, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+
     @staticmethod
     def get_current_time():
         return datetime.now(timezone.utc)
@@ -521,7 +522,6 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 last_log_datetime = datetime.utcfromtimestamp(last_log_timestamp / 1000).replace(tzinfo=timezone.utc)
             else:
                 last_log_datetime = datetime.utcfromtimestamp(last_log_timestamp).replace(tzinfo=timezone.utc)
-            if last_log_datetime > utc_filter_value:
-                utc_filter_value = last_log_datetime
+            utc_filter_value = max(utc_filter_value, last_log_datetime)
         self.logger.info(f"Task execution for {log_type} will be applying a lookback to {utc_filter_value} UTC...")
         return utc_filter_value
