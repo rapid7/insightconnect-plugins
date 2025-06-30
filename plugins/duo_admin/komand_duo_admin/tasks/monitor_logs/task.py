@@ -145,7 +145,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             return 200, None
         return status_code, error
 
-    # pylint: disable=too-many-branches,too-many-statement
+    # pylint: disable=too-many-branches,too-many-statements
     @monitor_task_delay(
         timestamp_keys=[
             "admin_logs_last_log_timestamp",
