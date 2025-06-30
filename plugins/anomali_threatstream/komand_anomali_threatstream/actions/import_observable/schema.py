@@ -10,6 +10,7 @@ class Component:
 class Input:
     FILE = "file"
     OBSERVABLE_SETTINGS = "observable_settings"
+    TLP = "tlp"
 
 
 class Output:
@@ -17,7 +18,8 @@ class Output:
 
 
 class ImportObservableInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -33,6 +35,20 @@ class ImportObservableInput(insightconnect_plugin_runtime.Input):
       "title": "Observable Settings",
       "description": "Settings needed for importing an observable that needs approval",
       "order": 2
+    },
+    "tlp": {
+      "type": "string",
+      "title": "TLP",
+      "description": "Protocol to indicate how sensitive information should be shared",
+      "enum": [
+        "red",
+        "amber",
+        "green",
+        "clear",
+        "amber+strict",
+        ""
+      ],
+      "order": 3
     }
   },
   "required": [
@@ -104,7 +120,7 @@ class ImportObservableInput(insightconnect_plugin_runtime.Input):
           "format": "date-time",
           "displayType": "date",
           "title": "Expiration Time Stamp",
-          "description": "Time stamp of when intelligence will expire on ThreatStream",
+          "description": "Time stamp of when intelligence will expire on ThreatStream. If no date is provided, `Expiration Time Stamp` it will set to 90 days from the current date",
           "order": 5
         },
         "notes": {
@@ -158,24 +174,27 @@ class ImportObservableInput(insightconnect_plugin_runtime.Input):
         "threat_type": {
           "type": "string",
           "title": "Threat Type",
-          "description": "Type of threat associated with the imported observables",
+          "description": "Type of threat associated with the imported observables. If used alongside other mapping fields, it will overwrite them",
           "order": 13
         }
       },
       "required": [
-        "classification"
+        "classification",
+        "confidence"
       ]
     }
   }
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class ImportObservableOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -214,7 +233,8 @@ class ImportObservableOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

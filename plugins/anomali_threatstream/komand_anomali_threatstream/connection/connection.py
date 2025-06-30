@@ -26,20 +26,20 @@ class Connection(insightconnect_plugin_runtime.Connection):
             params["api_key"]["secretKey"],
         )
         self.api = API(
-            url=f"{threatstream_url}/api/v1",
+            url=f"{threatstream_url}/api",
             verify=params.get("ssl_verify"),
-            params={"username": username, "api_key": api_key},
             logger=self.logger,
+            headers={"Authorization": f"apikey {username}:{api_key}"},
         )
         # Set up the base request
 
     def test(self):
         self.api.request = copy(self.api.request)
-        self.api.request.url, self.api.request.method = self.api.request.url + "/intelligence", "GET"
+        self.api.request.url, self.api.request.method = self.api.request.url + "/v2/intelligence", "GET"
 
         response = self.api.session.send(self.api.request.prepare(), verify=self.api.request.verify)
 
         if response.status_code not in range(200, 299):
             raise ConnectionTestException(preset=ConnectionTestException.Preset.INVALID_JSON, data=response.text)
 
-        return {"connection": "successful"}
+        return {"connection": "Successful"}

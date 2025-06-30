@@ -3,22 +3,35 @@ extension: plugin
 products: [insightconnect]
 name: anomali_threatstream
 title: Anomali ThreatStream
-description: Anomali ThreatStream operationalizes threat intelligence, automating collection
-  and integration that enables security teams to analyze and respond to threats
-version: 3.1.2
+description: "[Anomali ThreatStream](https://www.anomali.com/) is an operational threat intelligence stream, automating collection and integration that enables security teams to analyze and respond to threats. The Anomali ThreatStream InsightConnect plugin allows you lookup hashes, IP addresses, URLs, observables. It also allows importing observables"
+version: 4.0.0
 connection_version: 3
 vendor: rapid7
 support: community
-supported_versions: ["Anomali API API 22-02-2022"]
+supported_versions: ["Anomali API API 19-06-2025"]
 sdk:
   type: slim
-  version: 5.4.4
+  version: 6.3.7
   user: nobody
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/anomali_threatstream
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.anomali.com
+key_features:
+  - Lookup hashes, IP addresses, and URLs
+  - Import observables
+  - Get observables
+troubleshooting:
+  - If you're unable to import data without approval, the Anomali user configured in InsightConnect will need to have `approver` permissions.
+requirements:
+  - Anomali ThreatStream username
+  - Anomali ThreatStream instance URL
+  - Anomali ThreatStream API key
+links:
+  - "[Anomali](https://www.anomali.com/)"
+references:
+  - "[Anomali ThreatStream](https://www.ui.threatstream.com/)"
 tags:
 - anomali
 - threatstream
@@ -26,6 +39,17 @@ hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [anomali, threatstream]
   features: []
+version_history:
+  - 4.0.0 - Updated actions to V2 API (V1 deprecated for various actions) | SDK Bump to 6.3.7 | Additional output fields added for `Get Sandbox Report`
+  - 3.1.2 - Update SDK to newest version
+  - 3.1.1 - Mask API key from URLs in log output
+  - 3.1.0 - Add new actions Submit File, Submit URL and Get Sandbox Report
+  - 3.0.2 - New spec and help.md format for the Extension Library
+  - 3.0.1 - Update actions to use SSL Verify from connection settings
+  - 3.0.0 - Add new action Get Observables | Rename action Add Approval Indicator to Import Observable | Add connection test
+  - 2.0.0 - Support optional server SSL/TLS certificate validation
+  - 1.1.0 - New action Add Approval Indicator
+  - 1.0.0 - Initial plugin
 types:
   meta:
     limit:
@@ -52,7 +76,7 @@ types:
     confidence:
       title: Confidence
       description: Confidence level
-      type: string
+      type: integer
     country:
       title: Country
       description: Country
@@ -128,7 +152,7 @@ types:
     update_id:
       title: Update ID
       description: Update ID
-      type: string
+      type: integer
     url:
       title: URL
       description: URL
@@ -139,6 +163,7 @@ types:
       description: Confidence value assigned to the observable. Confidence score can
         range from 0-100, in increasing order of confidence
       type: integer
+      required: true
     source_confidence_weight:
       title: Source Confidence Weight
       description: Specifies the ratio between the amount of the source confidence
@@ -154,7 +179,7 @@ types:
       - medium
       - high
       - very-high
-      - ''
+      - ""
     classification:
       title: Classification
       description: Classification of the observable
@@ -166,7 +191,7 @@ types:
       required: true
     expiration_ts:
       title: Expiration Time Stamp
-      description: Time stamp of when intelligence will expire on ThreatStream
+      description: Time stamp of when intelligence will expire on ThreatStream. If no date is provided, `Expiration Time Stamp` it will set to 90 days from the current date
       type: date
     notes:
       title: Notes
@@ -211,7 +236,7 @@ types:
       type: '[]integer'
     threat_type:
       title: Threat Type
-      description: Type of threat associated with the imported observables
+      description: Type of threat associated with the imported observables. If used alongside other mapping fields, it will overwrite them
       type: string
       required: false
   import_observable_response:
@@ -250,26 +275,27 @@ types:
       description: Category
       type: string
       required: true
+      example: URL
     confidence:
       title: Confidence
       description: Confidence
       type: int
-      required: true
+      required: false
     is_unknown:
       title: Is Unknown
       description: Is unknown
       type: boolean
-      required: true
+      required: false
     is_suspicious:
       title: Is Suspicious
       description: Is suspicious
       type: boolean
-      required: true
+      required: false
     is_malicious:
       title: Is Malicious
       description: Is malicious
       type: boolean
-      required: true
+      required: false
     started:
       title: Started
       description: Started
@@ -285,12 +311,38 @@ types:
       description: Duration
       type: int
       required: true
+    package:
+      title: Package
+      description: Package
+      type: string
+      required: false
+    machine:
+      title: Machine
+      description: Machine
+      type: object
+      required: false
+    custom:
+      title: Custom
+      description: Custom
+      type: string
+      required: false
+    id:
+      title: ID
+      description: ID
+      type: integer
+      required: false
+    version:
+      title: Version
+      description: Version
+      type: string
+      required: false
   sandbox_report:
     screenshots:
       title: Screenshots
       description: Screenshots
       type: '[]string'
       required: true
+      example: ["http://domain.com/userUploads/2019-12-04/20191204_201304_userId-121_tmpsandbox-report-full-PaRfUDscreenshot_00.png", "http://domain.com/userUploads/2019-12-04/20191204_201305_userId-121_tmpsandbox-report-full-PaRfUDscreenshot_01.png", "http://domain.com/userUploads/2019-12-04/20191204_201305_userId-121_tmpsandbox-report-full-PaRfUDscreenshot_02.png"]
     info:
       title: Info
       description: Info
@@ -301,11 +353,13 @@ types:
       description: Signatures
       type: '[]object'
       required: true
+      example: [{"data":[{"operation": "Window detected", "process": "Window Recorder", "value": "More than 3 window changes detected"}], "description": "Found graphical window changes (likely an installer)", "severity": "-2.0" }, { "data": [ { "operation": "File opened", "process": "C:\\Program Files (x86)\\Internet Explorer\\iexplore.exe", "value": "C:\\Program Files (x86)\\Java\\jre1.8.0_191\\bin\\msvcr100.dll" } ], "description": "Uses new MSVCR Dlls", "severity": "-1.0"}]
     domains:
       title: Domains
       description: Domains
       type: '[]string'
       required: true
+      example: ["star-mini.c10r.facebook.com", "pagead46.l.doubleclick.net", "star.c10r.facebook.com", "us-u.openx.net"]
 
 connection:
   username:
@@ -350,6 +404,7 @@ actions:
         description: Results returned
         type: '[]result'
         required: false
+        example: [{"asn": "26496", "classification": "private", "confidence": 100, "country": "US", "date_first": "2018-09-06T23:01:26", "date_last": "2018-09-06T23:01:26", "detail2": "imported by user 1000000012", "id": 1000000181, "itype": "mal_url", "lat": 33.6119, "lon": -111.8906, "org": "GoDaddy.com, LLC", "resource_uri": "/api/v1/intelligence/1000000181/", "severity": "very-high", "source": "Test Name 1", "source_feed_id": 1000000004, "srcip": "107.180.51.15", "state": "active", "update_id": "2075600", "url": "http://aadroid.net/wp-content/plugins/coming-soon/themes/default/images/seedprod-credit.png"}]
   lookup_url:
     title: Lookup URL
     description: Lookup a URL in Anomali ThreatStream
@@ -366,6 +421,7 @@ actions:
         description: Results returned
         type: '[]result'
         required: false
+        example: [{"asn": "26496", "classification": "private", "confidence": "100", "country": "US", "date_first": "2018-09-06T23:01:26", "date_last": "2018-09-06T23:01:26", "detail2": "imported by user 1000000012", "id": 1000000178, "itype": "mal_url", "lat": 33.6119, "lon": -111.8906, "org": "GoDaddy.com, LLC", "resource_uri": "/api/v1/intelligence/1000000178/", "severity": "very-high", "source": "Test Name 1", "source_feed_id": 1000000004, "srcip": "107.180.51.15", "state": "active", "update_id": "2075597", "url": "http://aadroid.net/wp-includes/js/jquery/jquery.js"}]
   lookup_hash:
     title: Lookup Hash
     description: Lookup a file hash in Anomali ThreatStream
@@ -382,6 +438,7 @@ actions:
         description: Results returned
         type: '[]result'
         required: false
+        example: [{ "classification": "private", "confidence": "17", "date_first": "2019-10-16T16:12:48", "date_last": "2019-10-21T14:01:39", "detail": "Delivery", "detail2": "imported by user 121", "domain": "window.google", "id": 112879000, "import_session_id": 205, "itype": "apt_domain", "maltype": "Delivery", "resource_uri": "/api/v1/intelligence/112879000/", "severity": "very-high", "source": "user@example.com", "srcip": "127.0.53.53", "state": "active", "update_id": "272270002"}]
   import_observable:
     title: Import Observable
     description: Import observable(s) into Anomali ThreatStream with approval
@@ -396,7 +453,20 @@ actions:
         title: Observable Settings
         description: Settings needed for importing an observable that needs approval
         type: observable_settings
-        example: none
+        example: {"classification": "public", "confidence": 100, "threat_type": "brute"}
+        required: false
+      tlp:
+        title: TLP
+        description: Protocol to indicate how sensitive information should be shared
+        type: string
+        enum:
+          - red
+          - amber
+          - green
+          - clear
+          - amber+strict
+          - ""
+        example: red
         required: false
     output:
       results:
@@ -404,6 +474,7 @@ actions:
         description: Results from importing observable(s)
         type: import_observable_response
         required: false
+        example: {"import_session_id": "13952", "job_id": "525e18-bf1e-339b-9d0f-6343ba39e88ee", "success": true}
   get_observables:
     title: Get Observables
     description: Get observables
@@ -420,7 +491,7 @@ actions:
         description: Results returned
         type: '[]result'
         required: false
-        example: '[ { "status": "/api/v1/submit/101/", "detail": "/api/v1/submit/101/report/", "id": 101, "platform": "WINDOWS7" }, { "status": "/api/v1/submit/100/", "detail": "/api/v1/submit/100/report/", "id": 100, "platform": "WINDOWSXP" } ]'
+        example: '[{ "status": "/api/v1/submit/101/", "detail": "/api/v1/submit/101/report/", "id": 101, "platform": "WINDOWS7" }, { "status": "/api/v1/submit/100/", "detail": "/api/v1/submit/100/report/", "id": 100, "platform": "WINDOWSXP"}]'
   submit_file:
     title: Submit File
     description: Submit a file to a ThreatStream sandbox
@@ -485,7 +556,7 @@ actions:
         description: Reports containing submission details
         type: "[]report"
         required: false
-        example: '[ { "Details": {}, "ID": 0, "Platform": {}, "Status": "" } ]'
+        example: [{"status": "/api/v1/submit/101/", "detail": "/api/v1/submit/101/report/", "id": 101, "platform": "WINDOWS7" }, { "status": "/api/v1/submit/100/", "detail": "/api/v1/submit/100/report/", "id": 100, "platform": "WINDOWSXP"}]
   submit_url:
     title: Submit URL
     description: Submit a URL to a ThreatStream sandbox
@@ -550,7 +621,7 @@ actions:
         description: Reports containing submission details
         type: "[]report"
         required: false
-        example: '[ { "Details": {}, "ID": 0, "Platform": {}, "Status": "" } ]'
+        example: [{"status": "/api/v1/submit/101/", "detail": "/api/v1/submit/101/report/", "id": 101, "platform": "WINDOWS7" }, { "status": "/api/v1/submit/100/", "detail": "/api/v1/submit/100/report/", "id": 100, "platform": "WINDOWSXP"}]
   get_sandbox_report:
     title: Get Sandbox Report
     description: Get a sandbox report
@@ -567,3 +638,4 @@ actions:
         description: Sandbox report
         type: sandbox_report
         required: true
+        example: {"domains":["star-mini.c10r.facebook.com", "pagead46.l.doubleclick.net", "star.c10r.facebook.com", "us-u.openx.net"], "info": {"category": "URL", "confidence": 0, "duration": 302, "ended": "2019-12-04 21:09:32", "is_malicious": false, "is_suspicious": false, "is_unknown": false, "started": "2019-12-04 21:04:30"}, "screenshots": ["http://domain.com/userUploads/2019-12-04/20191204_201304_userId-121_tmpsandbox-report-full-PaRfUDscreenshot_00.png", "http://domain.com/userUploads/2019-12-04/20191204_201305_userId-121_tmpsandbox-report-full-PaRfUDscreenshot_01.png", "http://domain.com/userUploads/2019-12-04/20191204_201305_userId-121_tmpsandbox-report-full-PaRfUDscreenshot_02.png"], "signatures":[{ "data":[{ "operation": "Window detected", "process": "Window Recorder", "value": "More than 3 window changes detected"}], "description": "Found graphical window changes (likely an installer)", "severity": "-2.0" }, { "data":[{"operation": "File opened", "process": "C:\\Program Files (x86)\\Internet Explorer\\iexplore.exe", "value": "C:\\Program Files (x86)\\Java\\jre1.8.0_191\\bin\\msvcr100.dll" }], "description": "Uses new MSVCR Dlls", "severity": "-1.0" }]}

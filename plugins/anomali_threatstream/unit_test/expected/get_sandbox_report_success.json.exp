@@ -14,6 +14,7 @@
       "is_malicious": false,
       "is_suspicious": false,
       "is_unknown": false,
+      "machine": {},
       "started": "2019-12-04 21:04:30"
     },
     "screenshots": [
