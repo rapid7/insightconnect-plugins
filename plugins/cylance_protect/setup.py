@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="cylance_protect-rapid7-plugin",
-    version="1.5.4",
+    version="1.5.5",
     description="The [BlackBerry CylancePROTECT](https://www.cylance.com/en-us/platform/products/cylance-protect.html) plugin allows you to automate response operations for CylancePROTECT and CylanceOPTICS",
     author="rapid7",
     author_email="",

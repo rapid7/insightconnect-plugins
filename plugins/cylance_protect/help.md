@@ -603,6 +603,7 @@ Example output:
 
 # Version History
 
+* 1.5.5 - Resolved Snyk Vulnerability | SDK bump to latest version (6.3.7)
 * 1.5.4 - Resolved Snyk Vulnerability | SDK bump to latest version (6.3.6)
 * 1.5.3 - Bumping requirements.txt | SDK bump to 6.1.4
 * 1.5.2 - Bumped the version of the SDK used | Bumped versions of all pythion packages used | Ran refresh to bring code up to latest standard | Added unit tests for all actions
