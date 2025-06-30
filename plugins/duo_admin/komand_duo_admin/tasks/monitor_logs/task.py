@@ -153,7 +153,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         ],
         default_delay_threshold="2d",
     )  # noqa: C901
-    def run(self, params={}, state={}, custom_config={}):
+    def run(self, params={}, state={}, custom_config={}):  # noqa: C901
         rate_limit_delay = custom_config.get("rate_limit_delay", RATE_LIMIT_DELAY)
         if rate_limited := self.check_rate_limit(state):
             return [], state, False, 429, rate_limited
