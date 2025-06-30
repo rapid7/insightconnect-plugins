@@ -2,6 +2,5 @@
 # All dependencies must be version-pinned, eg. requests==1.2.0
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 cbapi==1.7.10
-validators==0.21.0
-urllib3==2.2.2
-certifi==2024.7.4
+validators==0.35.0
+certifi==2025.6.15
