@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.helper import clean
 
 from .schema import AssetSearchInput, AssetSearchOutput, Input, Output, Component
-from icon_rapid7_insightvm_cloud.util.constants import CRITERIA_OPERATOR_MAP
+from icon_rapid7_insightvm_cloud.util.constants import MAX_PAGE_SIZE
 
 
 class AssetSearch(insightconnect_plugin_runtime.Action):
@@ -15,7 +15,6 @@ class AssetSearch(insightconnect_plugin_runtime.Action):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         asset_criteria = params.get(Input.ASSET_CRITERIA, "")
         vulnerability_criteria = params.get(Input.VULN_CRITERIA, "")
-        operator_criteria = params.get(Input.CRITERIA_OPERATOR, "")
         current_time = params.get(Input.CURRENT_TIME, "")
         comparison_time = params.get(Input.COMPARISON_TIME, "")
         sort_criteria = params.get(Input.SORT_CRITERIA, {})
@@ -24,18 +23,15 @@ class AssetSearch(insightconnect_plugin_runtime.Action):
 
         # Setting up the JSON body for request
         json_body = {"asset": asset_criteria, "vulnerability": vulnerability_criteria}
-        if all((asset_criteria, vulnerability_criteria)):
-            vulnerability_query = vulnerability_criteria.replace("vulnerability.", "asset.vulnerability.")
-            json_body = {
-                "asset": f"{asset_criteria} {CRITERIA_OPERATOR_MAP.get(operator_criteria, '&&')} {vulnerability_query}"
-            }
 
-        # Setting up query parameters for request
         query_parameters = {
-            "size": size,
             "currentTime": current_time,
             "comparisonTime": comparison_time,
         }
+
+        # Capped Max Page Size, maximum API supports is 500 (causes timeouts)
+        query_parameters["size"] = MAX_PAGE_SIZE if size >= MAX_PAGE_SIZE else size
+
         for key, value in sort_criteria.items():
             query_parameters["sort"] = f"{key},{value}"
 

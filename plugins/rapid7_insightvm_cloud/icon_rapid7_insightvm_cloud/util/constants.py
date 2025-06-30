@@ -1,1 +1,1 @@
-CRITERIA_OPERATOR_MAP = {"AND": "&&", "OR": "||"}
+MAX_PAGE_SIZE = 400

@@ -43,7 +43,6 @@ class TestAssetSearch(TestCase):
                 Input.SIZE: self.params.get("size"),
                 Input.SORT_CRITERIA: self.params.get("sort_criteria"),
                 Input.VULN_CRITERIA: self.params.get("vuln_criteria"),
-                Input.CRITERIA_OPERATOR: "OR",
             }
         )
         expected = Utils.read_file_to_dict("expected_responses/asset_search.json.resp")
@@ -68,7 +67,6 @@ class TestAssetSearch(TestCase):
                     Input.SIZE: self.params.get("size"),
                     Input.SORT_CRITERIA: self.params.get("sort_criteria"),
                     Input.VULN_CRITERIA: self.params.get("vuln_criteria"),
-                    Input.CRITERIA_OPERATOR: "OR",
                 }
             )
         cause = "The server is unable to process the request."
@@ -88,7 +86,6 @@ class TestAssetSearch(TestCase):
                     Input.SIZE: self.params.get("size"),
                     Input.SORT_CRITERIA: self.params.get("sort_criteria"),
                     Input.VULN_CRITERIA: self.params.get("vuln_criteria_invalid"),
-                    Input.CRITERIA_OPERATOR: "OR",
                 }
             )
         cause = "The server is unable to process the request."
