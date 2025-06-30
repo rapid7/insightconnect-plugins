@@ -1,7 +1,7 @@
 {
-	"spec": "022f546c7ce2cb6b34a95955f558bae9",
-	"manifest": "b264d2adb2e0c5a8f1b0ef0e68e4400b",
-	"setup": "bb76235a01de646dfa1e37117ac53478",
+	"spec": "a246f2e4ec0c03acabc502ca4b9fe382",
+	"manifest": "554610d34a18b6426424f3220e470a8b",
+	"setup": "79edfcb448474d413188f6d85122fbce",
 	"schemas": [
 		{
 			"identifier": "blacklist/schema.py",
