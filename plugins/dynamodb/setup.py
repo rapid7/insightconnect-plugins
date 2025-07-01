@@ -2,13 +2,14 @@
 from setuptools import setup, find_packages
 
 
-setup(name="dynamodb-rapid7-plugin",
-      version="3.1.1",
-      description="Dynamo DB is a key/value store powered by Amazon available for members of AWS. Users can manage their data using the DynamoDB plugin for Rapid7 InsightConnect",
-      author="rapid7",
-      author_email="",
-      url="",
-      packages=find_packages(),
-      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_dynamodb']
-      )
+setup(
+    name="dynamodb-rapid7-plugin",
+    version="3.1.2",
+    description="[Dynamo DB](https://aws.amazon.com/dynamodb/) is a key/value store powered by Amazon available for members of AWS. It provides an easy-to-use and scalable system that exposes some basic indexing and querying capabilities, making it a versatile and convenient way to store data. Users can manage their data using the DynamoDB plugin for Rapid7 InsightConnect",
+    author="rapid7",
+    author_email="",
+    url="",
+    packages=find_packages(),
+    install_requires=["insightconnect-plugin-runtime"],  # Add third-party dependencies to requirements.txt, not here!
+    entry_points={"console_scripts": ["komand_dynamodb = bin.komand_dynamodb:main"]},
+)
