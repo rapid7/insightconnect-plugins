@@ -8,7 +8,7 @@ description: '[PowerShell](https://docs.microsoft.com/en-us/powershell/scripting
   system administrators, power-users, and InsightConnect customers rapidly automate
   tasks that manage operating systems and processes. This plugin runs a PowerShell
   script on a remote host or locally on an InsightConnect Orchestrator'
-version: 3.0.9
+version: 3.0.10
 connection_version: 3
 key_features:
 - Run a PowerShell script to manage (remote) computers from the command line
@@ -21,7 +21,7 @@ requirements:
 - The use of round-robin DNS lookups is not supported
 sdk:
   type: slim
-  version: 6.3.6
+  version: 6.3.7
   user: root
   custom_cmd:
   - '# Add any package dependencies here'
@@ -112,6 +112,7 @@ troubleshooting:
   ```"
 - SSL is not configured for port `5985`
 version_history:
+- 3.0.10 - Resolved Snyk Vulnerabilities | SDK bump to latest version (6.3.7)
 - 3.0.9 - Resolved Snyk Vulnerability | SDK bump to latest version (6.3.6)
 - 3.0.8 - Updated clean message | Updated SDK to the latest version (6.2.5) | bumping `cryptography` package
 - 3.0.7 - Updated dependencies | Updated SDK to the latest version

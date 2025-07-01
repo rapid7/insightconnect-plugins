@@ -188,6 +188,7 @@ Invoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw
 
 # Version History
 
+* 3.0.10 - Resolved Snyk Vulnerabilities | SDK bump to latest version (6.3.7)
 * 3.0.9 - Resolved Snyk Vulnerability | SDK bump to latest version (6.3.6)
 * 3.0.8 - Updated clean message | Updated SDK to the latest version (6.2.5) | bumping `cryptography` package
 * 3.0.7 - Updated dependencies | Updated SDK to the latest version
