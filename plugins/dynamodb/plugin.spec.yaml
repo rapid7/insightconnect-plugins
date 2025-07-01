@@ -6,8 +6,11 @@ title: Dynamo DB
 vendor: rapid7
 support: community
 status: []
-description: Dynamo DB is a key/value store powered by Amazon available for members of AWS. Users can manage their data using the DynamoDB plugin for Rapid7 InsightConnect
-version: 3.1.1
+description: "[Dynamo DB](https://aws.amazon.com/dynamodb/) is a key/value store powered by Amazon available for members
+of AWS. It provides an easy-to-use and scalable system that exposes some basic indexing and querying capabilities,
+making it a versatile and convenient way to store data. Users can manage their data using the DynamoDB plugin for
+Rapid7 InsightConnect"
+version: 3.1.2
 connection_version: 3
 supported_versions: ['Amazon DynamoDB 2024-02-27']
 resources:
@@ -16,7 +19,7 @@ resources:
   vendor_url: https://www.amazon.com
 sdk:
   type: slim
-  version: 5.4.4
+  version: 6.3.7
   user: nobody
 tags:
   - dynamodb
@@ -27,7 +30,36 @@ hub_tags:
   use_cases: [application_management, reporting_and_analytics]
   keywords: [dynamodb, aws, amazon, database]
   features: []
+key_features:
+  - Scan data
+  - Store data
+  - Update data
+requirements:
+  - Access key
+  - Secret key
+troubleshooting:
+  - Any situation in which you provide a ConditionExpression and it causes the job to fail, will fail the workflow by default.
+links:
+  - "[Dynamo Developer Resources](https://aws.amazon.com/dynamodb/developer-resources/)"
+references:
+  - "[Dynamo Developer Resources](https://aws.amazon.com/dynamodb/developer-resources/)"
+  - "[Dynamo Condition Expression Guide](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html#ConditionExpressionReferenIce)"
 enable_cache: true
+version_history:
+  - 3.1.2 - Resolved Snyk Vulnerabilities | SDK Bump to 6.3.7
+  - 3.1.1 - Updated to the latest SDK to address memory usage issues | Updated plugin packages
+  - 3.1.0 - Add Get Item action
+  - 3.0.2 - Fix number should be a string for boto3 input bug
+  - 3.0.1 - Validate exclusive_start_key parameter for Scan action
+  - 3.0.0 - Create separate class for communication with AWS | Refactor all actions | Fix incompatible types in output in Scan action | Update Python SDK version
+  - 2.0.0 - Create custom output type for Scan action | Add example inputs and outputs
+  - 1.0.3 - Correct spelling in help.md
+  - 1.0.2 - New spec and help.md format for the Extension Library | Add missing title values for actions in plugin.spec.yaml
+  - 1.0.1 - Set `params` input in Scan action to not required
+  - 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+  - 0.1.2 - Clean up unsatisfactory debugging message
+  - 0.1.1 - SSL bug fix in SDK
+  - 0.1.0 - Initial plugin
 types:
   HTTPHeaders:
     connection:
@@ -107,7 +139,7 @@ connection:
     default: us-east-1
 actions:
   get_item:
-    title: GetItem
+    title: Get Item
     description: Return a set of attributes for the item with the given primary key
     input:
       table_name:
@@ -160,7 +192,7 @@ actions:
         example: '{"ClientID": {"S": "2"}}'
   scan:
     title: Scan
-    description: Scan the provided table using the metrics you give it to look up any matching data
+    description: "Scan the provided table using the metrics you give it to look up any matching data\n\nOptionally, you can provide the name of an index which can be used in lieu of performing a full scan.\nIt will return the list of objects found, and a count of the records"
     input:
       table_name:
         title: Table Name
@@ -279,7 +311,7 @@ actions:
         example: 2
   insert:
     title: Insert
-    description: Add the provided data into the specified table
+    description: "This action is used to add the provided data into the specified table.\n\nOptionally, you can specify a ConditionExpression which can prevent Dynamo from accepting writes if the conditions are met. For example, if you had a primary key of 'myid', you could set this to 'attribute_not_exist(myid)' to reject the insert if a key with the same value as this object already existed. Otherwise, the default behavior of Dynamo is to overwrite the existing record"
     input:
       table_name:
         title: Table Name

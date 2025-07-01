@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Scan the provided table using the metrics you give it to look up any matching data"
+    DESCRIPTION = "Scan the provided table using the metrics you give it to look up any matching dataOptionally, you can provide the name of an index which can be used in lieu of performing a full scan.It will return the list of objects found, and a count of the records"
 
 
 class Input:
@@ -31,7 +31,8 @@ class Output:
 
 
 class ScanInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -134,14 +135,16 @@ class ScanInput(insightconnect_plugin_runtime.Input):
   ],
   "definitions": {}
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class ScanOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -259,7 +262,8 @@ class ScanOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

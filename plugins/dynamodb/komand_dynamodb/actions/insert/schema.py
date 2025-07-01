@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add the provided data into the specified table"
+    DESCRIPTION = "This action is used to add the provided data into the specified table.Optionally, you can specify a ConditionExpression which can prevent Dynamo from accepting writes if the conditions are met. For example, if you had a primary key of 'myid', you could set this to 'attribute_not_exist(myid)' to reject the insert if a key with the same value as this object already existed. Otherwise, the default behavior of Dynamo is to overwrite the existing record"
 
 
 class Input:
@@ -23,7 +23,8 @@ class Output:
 
 
 class InsertInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -89,14 +90,16 @@ class InsertInput(insightconnect_plugin_runtime.Input):
   ],
   "definitions": {}
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class InsertOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -110,7 +113,8 @@ class InsertOutput(insightconnect_plugin_runtime.Output):
   },
   "definitions": {}
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
