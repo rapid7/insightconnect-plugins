@@ -103,12 +103,10 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
                 has_more_pages,
             )
         except ApiException as error:
-            print("HERE!")
             self.logger.info(f"An API Exception has been raised. Status code: {error.status_code}. Error: {error}")
             self.connection.api.unset_token()
             return [], state, False, error.status_code, error
         except Exception as error:
-            print("HERE2!")
             self.logger.info(f"An Exception has been raised. Error: {error}")
             self.connection.api.unset_token()
             return [], state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
