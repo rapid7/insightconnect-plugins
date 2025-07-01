@@ -139,7 +139,7 @@ connection:
     default: us-east-1
 actions:
   get_item:
-    title: GetItem
+    title: Get Item
     description: Return a set of attributes for the item with the given primary key
     input:
       table_name:
