@@ -73,9 +73,7 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
                     state, now, user_update_last_collection, user_login_end_timestamp
                 )
             elif users_next_page_id or user_login_next_page_id or updated_users_next_page_id:
-                get_users, get_user_login_history = self._handle_next_page(
-                    users_next_page_id, user_login_next_page_id
-                )
+                get_users, get_user_login_history = self._handle_next_page(users_next_page_id, user_login_next_page_id)
             else:
                 (
                     get_users,
@@ -90,26 +88,27 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
                     user_login_end_timestamp,
                 )
 
-            try:
-                return self._process_records(
-                    get_users,
-                    get_user_login_history,
-                    users_next_page_id,
-                    user_login_next_page_id,
-                    updated_users_next_page_id,
-                    user_update_start_timestamp,
-                    user_update_last_collection,
-                    user_login_start_timestamp,
-                    user_login_end_timestamp,
-                    remove_duplicates,
-                    state,
-                    has_more_pages,
-                )
-            except ApiException as error:
-                self.logger.info(f"An API Exception has been raised. Status code: {error.status_code}. Error: {error}")
-                self.connection.api.unset_token()
-                return [], state, False, error.status_code, error
+            return self._process_records(
+                get_users,
+                get_user_login_history,
+                users_next_page_id,
+                user_login_next_page_id,
+                updated_users_next_page_id,
+                user_update_start_timestamp,
+                user_update_last_collection,
+                user_login_start_timestamp,
+                user_login_end_timestamp,
+                remove_duplicates,
+                state,
+                has_more_pages,
+            )
+        except ApiException as error:
+            print("HERE!")
+            self.logger.info(f"An API Exception has been raised. Status code: {error.status_code}. Error: {error}")
+            self.connection.api.unset_token()
+            return [], state, False, error.status_code, error
         except Exception as error:
+            print("HERE2!")
             self.logger.info(f"An Exception has been raised. Error: {error}")
             self.connection.api.unset_token()
             return [], state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
@@ -130,17 +129,13 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
         get_user_login_history = bool(user_login_next_page_id)
         return get_users, get_user_login_history
 
-    def _handle_subsequent_run(
-            self, state, cut_off_time, now, user_update_last_collection, user_login_end_timestamp
-    ):
+    def _handle_subsequent_run(self, state, cut_off_time, now, user_update_last_collection, user_login_end_timestamp):
         self.logger.info("Subsequent run")
         valid_state, key = self._make_valid_state(state)
         if not valid_state:
-            self.logger.info(
-                f"Bad request error occurred. Invalid timestamp format for {key}. Got value {state[key]}"
-            )
-            raise PluginException(
-                preset=PluginException.Preset.BAD_REQUEST, data=f"Invalid timestamp format for {key}"
+            self.logger.info(f"Bad request error occurred. Invalid timestamp format for {key}. Got value {state[key]}")
+            raise ApiException(
+                preset=PluginException.Preset.BAD_REQUEST, data=f"Invalid timestamp format for {key}", status_code=400
             )
 
         get_users = False
@@ -153,7 +148,7 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
 
         next_user_collection_timestamp = state.get(self.NEXT_USER_COLLECTION_TIMESTAMP)
         if next_user_collection_timestamp and self.compare_timestamp(
-                now, self.convert_to_datetime(next_user_collection_timestamp)
+            now, self.convert_to_datetime(next_user_collection_timestamp)
         ):
             get_users = True
             state[self.NEXT_USER_COLLECTION_TIMESTAMP] = self.convert_dt_to_string(now + timedelta(hours=24))
@@ -161,7 +156,7 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
         user_login_start_timestamp = None
         next_user_login_collection_timestamp = state.get(self.NEXT_USER_LOGIN_COLLECTION_TIMESTAMP)
         if next_user_login_collection_timestamp and self.compare_timestamp(
-                now, self.convert_to_datetime(next_user_login_collection_timestamp)
+            now, self.convert_to_datetime(next_user_login_collection_timestamp)
         ):
             get_user_login_history = True
             state[self.NEXT_USER_LOGIN_COLLECTION_TIMESTAMP] = self.convert_dt_to_string(now + timedelta(hours=1))
@@ -175,19 +170,19 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
         return get_users, get_user_login_history, user_update_start_timestamp, user_login_start_timestamp
 
     def _process_records(
-            self,
-            get_users,
-            get_user_login_history,
-            users_next_page_id,
-            user_login_next_page_id,
-            updated_users_next_page_id,
-            user_update_start_timestamp,
-            user_update_last_collection,
-            user_login_start_timestamp,
-            user_login_end_timestamp,
-            remove_duplicates,
-            state,
-            has_more_pages,
+        self,
+        get_users,
+        get_user_login_history,
+        users_next_page_id,
+        user_login_next_page_id,
+        updated_users_next_page_id,
+        user_update_start_timestamp,
+        user_update_last_collection,
+        user_login_start_timestamp,
+        user_login_end_timestamp,
+        remove_duplicates,
+        state,
+        has_more_pages,
     ):
         records = []
 
@@ -225,9 +220,7 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
             records.extend(self.add_data_type_field(users, "User"))
 
         if get_user_login_history:
-            msg = (
-                f"Get user login history - start: {user_login_start_timestamp} end: {user_login_end_timestamp}"
-            )
+            msg = f"Get user login history - start: {user_login_start_timestamp} end: {user_login_end_timestamp}"
             if user_login_next_page_id:
                 msg += f", next page ID: {user_login_next_page_id}"
             self.logger.info(msg)
