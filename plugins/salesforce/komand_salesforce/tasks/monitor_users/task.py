@@ -58,158 +58,53 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
 
             cut_off_time, start_time = self._get_timings(now, custom_config, state)
 
-            remove_duplicates = state.pop(self.REMOVE_DUPLICATES, True)  # true as a default
+            remove_duplicates = state.pop(self.REMOVE_DUPLICATES, True)
             users_next_page_id = state.pop(self.USERS_NEXT_PAGE_ID, None)
             user_login_next_page_id = state.pop(self.USER_LOGIN_NEXT_PAGE_ID, None)
             updated_users_next_page_id = state.pop(self.UPDATED_USERS_NEXT_PAGE_ID, None)
 
-            # group of timestamps for retrieving updated users data - we poll this every time the C2C task runs
             user_update_start_timestamp = start_time
             user_update_last_collection = now
-
-            # group of timestamps for retrieving login history data - we only collect these hourly from Salesforce
             user_login_start_timestamp = start_time
             user_login_end_timestamp = now
 
             if not state:
-                self.logger.info("First run")
-
-                # we only check Salesforce for new users every 24 hours / first run
-                get_users = True
-                state[self.NEXT_USER_COLLECTION_TIMESTAMP] = self.convert_dt_to_string(now + timedelta(hours=24))
-
-                # we check for any user profile updates every task execution
-                state[self.LAST_USER_UPDATE_COLLECTION_TIMESTAMP] = self.convert_dt_to_string(
-                    user_update_last_collection
+                get_users, get_user_login_history = self._handle_first_run(
+                    state, now, user_update_last_collection, user_login_end_timestamp
                 )
-
-                # we only check for login data every hour
-                get_user_login_history = True
-                state[self.NEXT_USER_LOGIN_COLLECTION_TIMESTAMP] = self.convert_dt_to_string(now + timedelta(hours=1))
-                state[self.LAST_USER_LOGIN_COLLECTION_TIMESTAMP] = self.convert_dt_to_string(user_login_end_timestamp)
             elif users_next_page_id or user_login_next_page_id or updated_users_next_page_id:
-                self.logger.info("Getting next page of results...")
-                if users_next_page_id:
-                    get_users = True
-                if user_login_next_page_id:
-                    get_user_login_history = True
-
+                get_users, get_user_login_history = self._handle_next_page(
+                    users_next_page_id, user_login_next_page_id
+                )
             else:
-                self.logger.info("Subsequent run")
-
-                valid_state, key = self._make_valid_state(state)
-                if not valid_state:
-                    self.logger.info(
-                        f"Bad request error occurred. Invalid timestamp format for {key}. Got value {state[key]}"
-                    )
-                    return (
-                        [],
-                        state,
-                        False,
-                        400,
-                        PluginException(
-                            preset=PluginException.Preset.BAD_REQUEST, data=f"Invalid timestamp format for {key}"
-                        ),
-                    )
-
-                # check if the stored TS has extended beyond our cut-off (customer may have paused integration)
-                user_update_start_timestamp = self._get_recent_timestamp(
-                    state, cut_off_time, self.LAST_USER_UPDATE_COLLECTION_TIMESTAMP
+                (
+                    get_users,
+                    get_user_login_history,
+                    user_update_start_timestamp,
+                    user_login_start_timestamp,
+                ) = self._handle_subsequent_run(
+                    state,
+                    cut_off_time,
+                    now,
+                    user_update_last_collection,
+                    user_login_end_timestamp,
                 )
-                # move the end time stamp to now
-                state[self.LAST_USER_UPDATE_COLLECTION_TIMESTAMP] = self.convert_dt_to_string(
-                    user_update_last_collection
-                )
-
-                # this allows us to poll for new users every 24 hours
-                next_user_collection_timestamp = state.get(self.NEXT_USER_COLLECTION_TIMESTAMP)
-                if next_user_collection_timestamp and self.compare_timestamp(
-                    now, self.convert_to_datetime(next_user_collection_timestamp)
-                ):
-                    get_users = True
-                    # poll again in 24 hrs
-                    state[self.NEXT_USER_COLLECTION_TIMESTAMP] = self.convert_dt_to_string(now + timedelta(hours=24))
-
-                # this allows us to poll for user login data every hour
-                next_user_login_collection_timestamp = state.get(self.NEXT_USER_LOGIN_COLLECTION_TIMESTAMP)
-                if next_user_login_collection_timestamp and self.compare_timestamp(
-                    now, self.convert_to_datetime(next_user_login_collection_timestamp)
-                ):
-                    get_user_login_history = True
-                    state[self.NEXT_USER_LOGIN_COLLECTION_TIMESTAMP] = self.convert_dt_to_string(
-                        now + timedelta(hours=1)
-                    )  # poll again in 1 hr
-                    user_login_start_timestamp = self._get_recent_timestamp(
-                        state, cut_off_time, self.LAST_USER_LOGIN_COLLECTION_TIMESTAMP
-                    )
-                    state[self.LAST_USER_LOGIN_COLLECTION_TIMESTAMP] = self.convert_dt_to_string(
-                        user_login_end_timestamp
-                    )
 
             try:
-                records = []
-
-                if not users_next_page_id and not user_login_next_page_id or updated_users_next_page_id:
-                    msg = f"Get updated users - start: {user_update_start_timestamp} end: {user_update_last_collection}"
-                    if updated_users_next_page_id:  # log if we're not actually using times and using next page ID
-                        msg += f", next page ID: {updated_users_next_page_id}"
-                    self.logger.info(msg)
-                    response = self.connection.api.query(
-                        self.UPDATED_USERS_QUERY.format(
-                            start_timestamp=user_update_start_timestamp.isoformat(timespec="microseconds"),
-                            end_timestamp=user_update_last_collection.isoformat(timespec="microseconds"),
-                        ),
-                        updated_users_next_page_id,
-                    )
-                    updated_users_next_page_id = response.get("next_page_id")
-                    updated_users = response.get("records")
-                    if updated_users_next_page_id:
-                        state[self.UPDATED_USERS_NEXT_PAGE_ID] = updated_users_next_page_id
-                        has_more_pages = True
-
-                    self.logger.info(f"{len(updated_users)} updated users added to output")
-                    records.extend(self.add_data_type_field(updated_users, "User Update"))
-
-                if get_users:
-                    self.logger.info("Get all internal users")
-                    response = self.connection.api.query(self.USERS_QUERY, users_next_page_id)
-                    users = response.get("records", [])
-                    users_next_page_id = response.get("next_page_id")
-                    if users_next_page_id:
-                        state[self.USERS_NEXT_PAGE_ID] = users_next_page_id
-                        has_more_pages = True
-
-                    self.logger.info(f"{len(users)} internal users added to output")
-                    records.extend(self.add_data_type_field(users, "User"))
-
-                if get_user_login_history:
-                    msg = (
-                        f"Get user login history - start: {user_login_start_timestamp} end: {user_login_end_timestamp}"
-                    )
-                    if user_login_next_page_id:  # log if we're not actually using times and using next page ID
-                        msg += f", next page ID: {user_login_next_page_id}"
-                    self.logger.info(msg)
-                    response = self.connection.api.query(
-                        self.USER_LOGIN_QUERY.format(
-                            start_timestamp=user_login_start_timestamp.isoformat(timespec="microseconds"),
-                            end_timestamp=user_login_end_timestamp.isoformat(timespec="microseconds"),
-                        ),
-                        user_login_next_page_id,
-                    )
-                    users_login = response.get("records", [])
-                    user_login_next_page_id = response.get("next_page_id")
-
-                    if remove_duplicates is True:
-                        users_login = self.remove_duplicates_user_login_history(users_login)
-
-                    if user_login_next_page_id:
-                        state[self.USER_LOGIN_NEXT_PAGE_ID] = user_login_next_page_id
-                        has_more_pages = True
-
-                    self.logger.info(f"{len(users_login)} users login history added to output")
-                    records.extend(self.add_data_type_field(users_login, "User Login"))
-                self.connection.api.unset_token()
-                return records, state, has_more_pages, 200, None
+                return self._process_records(
+                    get_users,
+                    get_user_login_history,
+                    users_next_page_id,
+                    user_login_next_page_id,
+                    updated_users_next_page_id,
+                    user_update_start_timestamp,
+                    user_update_last_collection,
+                    user_login_start_timestamp,
+                    user_login_end_timestamp,
+                    remove_duplicates,
+                    state,
+                    has_more_pages,
+                )
             except ApiException as error:
                 self.logger.info(f"An API Exception has been raised. Status code: {error.status_code}. Error: {error}")
                 self.connection.api.unset_token()
@@ -218,6 +113,145 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
             self.logger.info(f"An Exception has been raised. Error: {error}")
             self.connection.api.unset_token()
             return [], state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+
+    def _handle_first_run(self, state, now, user_update_last_collection, user_login_end_timestamp):
+        self.logger.info("First run")
+        get_users = True
+        get_user_login_history = True
+        state[self.NEXT_USER_COLLECTION_TIMESTAMP] = self.convert_dt_to_string(now + timedelta(hours=24))
+        state[self.LAST_USER_UPDATE_COLLECTION_TIMESTAMP] = self.convert_dt_to_string(user_update_last_collection)
+        state[self.NEXT_USER_LOGIN_COLLECTION_TIMESTAMP] = self.convert_dt_to_string(now + timedelta(hours=1))
+        state[self.LAST_USER_LOGIN_COLLECTION_TIMESTAMP] = self.convert_dt_to_string(user_login_end_timestamp)
+        return get_users, get_user_login_history
+
+    def _handle_next_page(self, users_next_page_id, user_login_next_page_id):
+        self.logger.info("Getting next page of results...")
+        get_users = bool(users_next_page_id)
+        get_user_login_history = bool(user_login_next_page_id)
+        return get_users, get_user_login_history
+
+    def _handle_subsequent_run(
+            self, state, cut_off_time, now, user_update_last_collection, user_login_end_timestamp
+    ):
+        self.logger.info("Subsequent run")
+        valid_state, key = self._make_valid_state(state)
+        if not valid_state:
+            self.logger.info(
+                f"Bad request error occurred. Invalid timestamp format for {key}. Got value {state[key]}"
+            )
+            raise PluginException(
+                preset=PluginException.Preset.BAD_REQUEST, data=f"Invalid timestamp format for {key}"
+            )
+
+        get_users = False
+        get_user_login_history = False
+
+        user_update_start_timestamp = self._get_recent_timestamp(
+            state, cut_off_time, self.LAST_USER_UPDATE_COLLECTION_TIMESTAMP
+        )
+        state[self.LAST_USER_UPDATE_COLLECTION_TIMESTAMP] = self.convert_dt_to_string(user_update_last_collection)
+
+        next_user_collection_timestamp = state.get(self.NEXT_USER_COLLECTION_TIMESTAMP)
+        if next_user_collection_timestamp and self.compare_timestamp(
+                now, self.convert_to_datetime(next_user_collection_timestamp)
+        ):
+            get_users = True
+            state[self.NEXT_USER_COLLECTION_TIMESTAMP] = self.convert_dt_to_string(now + timedelta(hours=24))
+
+        user_login_start_timestamp = None
+        next_user_login_collection_timestamp = state.get(self.NEXT_USER_LOGIN_COLLECTION_TIMESTAMP)
+        if next_user_login_collection_timestamp and self.compare_timestamp(
+                now, self.convert_to_datetime(next_user_login_collection_timestamp)
+        ):
+            get_user_login_history = True
+            state[self.NEXT_USER_LOGIN_COLLECTION_TIMESTAMP] = self.convert_dt_to_string(now + timedelta(hours=1))
+            user_login_start_timestamp = self._get_recent_timestamp(
+                state, cut_off_time, self.LAST_USER_LOGIN_COLLECTION_TIMESTAMP
+            )
+            state[self.LAST_USER_LOGIN_COLLECTION_TIMESTAMP] = self.convert_dt_to_string(user_login_end_timestamp)
+        else:
+            user_login_start_timestamp = None
+
+        return get_users, get_user_login_history, user_update_start_timestamp, user_login_start_timestamp
+
+    def _process_records(
+            self,
+            get_users,
+            get_user_login_history,
+            users_next_page_id,
+            user_login_next_page_id,
+            updated_users_next_page_id,
+            user_update_start_timestamp,
+            user_update_last_collection,
+            user_login_start_timestamp,
+            user_login_end_timestamp,
+            remove_duplicates,
+            state,
+            has_more_pages,
+    ):
+        records = []
+
+        if not users_next_page_id and not user_login_next_page_id or updated_users_next_page_id:
+            msg = f"Get updated users - start: {user_update_start_timestamp} end: {user_update_last_collection}"
+            if updated_users_next_page_id:
+                msg += f", next page ID: {updated_users_next_page_id}"
+            self.logger.info(msg)
+            response = self.connection.api.query(
+                self.UPDATED_USERS_QUERY.format(
+                    start_timestamp=user_update_start_timestamp.isoformat(timespec="microseconds"),
+                    end_timestamp=user_update_last_collection.isoformat(timespec="microseconds"),
+                ),
+                updated_users_next_page_id,
+            )
+            updated_users_next_page_id = response.get("next_page_id")
+            updated_users = response.get("records")
+            if updated_users_next_page_id:
+                state[self.UPDATED_USERS_NEXT_PAGE_ID] = updated_users_next_page_id
+                has_more_pages = True
+
+            self.logger.info(f"{len(updated_users)} updated users added to output")
+            records.extend(self.add_data_type_field(updated_users, "User Update"))
+
+        if get_users:
+            self.logger.info("Get all internal users")
+            response = self.connection.api.query(self.USERS_QUERY, users_next_page_id)
+            users = response.get("records", [])
+            users_next_page_id = response.get("next_page_id")
+            if users_next_page_id:
+                state[self.USERS_NEXT_PAGE_ID] = users_next_page_id
+                has_more_pages = True
+
+            self.logger.info(f"{len(users)} internal users added to output")
+            records.extend(self.add_data_type_field(users, "User"))
+
+        if get_user_login_history:
+            msg = (
+                f"Get user login history - start: {user_login_start_timestamp} end: {user_login_end_timestamp}"
+            )
+            if user_login_next_page_id:
+                msg += f", next page ID: {user_login_next_page_id}"
+            self.logger.info(msg)
+            response = self.connection.api.query(
+                self.USER_LOGIN_QUERY.format(
+                    start_timestamp=user_login_start_timestamp.isoformat(timespec="microseconds"),
+                    end_timestamp=user_login_end_timestamp.isoformat(timespec="microseconds"),
+                ),
+                user_login_next_page_id,
+            )
+            users_login = response.get("records", [])
+            user_login_next_page_id = response.get("next_page_id")
+
+            if remove_duplicates is True:
+                users_login = self.remove_duplicates_user_login_history(users_login)
+
+            if user_login_next_page_id:
+                state[self.USER_LOGIN_NEXT_PAGE_ID] = user_login_next_page_id
+                has_more_pages = True
+
+            self.logger.info(f"{len(users_login)} users login history added to output")
+            records.extend(self.add_data_type_field(users_login, "User Login"))
+        self.connection.api.unset_token()
+        return records, state, has_more_pages, 200, None
 
     def _make_valid_state(self, state: dict) -> Tuple[bool, str]:
         # it looks like we used to store the timestamp in the state with the `T` delimiter and then swapped when we
