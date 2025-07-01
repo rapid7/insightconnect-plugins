@@ -44,7 +44,7 @@ Example input:
 ### Actions
 
 
-#### GetItem
+#### Get Item
 
 This action is used to return a set of attributes for the item with the given primary key
 
