@@ -3,5 +3,4 @@
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 PyJWT==2.9.0
 validators==0.34.0
-urllib3==2.2.3
 parameterized==0.9.0
