@@ -4,7 +4,7 @@ products: [insightconnect]
 name: salesforce
 title: Salesforce
 description: "[Salesforce](https://www.salesforce.com) is a CRM solution that brings together all customer information in a single, integrated platform that enables building a customer-centered business from marketing right through to sales, customer service and business analysis. The Salesforce plugin allows you to search, update, and manage salesforce records. This plugin utilizes the [Salesforce API](https://developer.salesforce.com/docs/atlas.en-us.216.0.api_rest.meta/api_rest/intro_what_is_rest_api.htm)"
-version: 2.1.13
+version: 2.1.14
 connection_version: 2
 vendor: rapid7
 support: community
@@ -13,7 +13,7 @@ status: []
 supported_versions: ["Salesforce API v58 2023-06-30"]
 sdk:
   type: full
-  version: 6.2.4
+  version: 6.3.7
   user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/salesforce
@@ -37,6 +37,7 @@ references:
   - "[Connecting your app to the API](https://developer.salesforce.com/docs/atlas.en-us.216.0.api_rest.meta/api_rest/quickstart.htm)"
   - "[SOQL](https://developer.salesforce.com/docs/atlas.en-us.216.0.soql_sosl.meta/soql_sosl/sforce_api_calls_soql.htm)"
 version_history:
+  - "2.1.14 - Task Monitor Users: Bump SDK to 6.3.7 | Add task delay monitoring"
   - "2.1.13 - Task Monitor Users: improve error response to UI | Bump SDK to 6.2.4"
   - "2.1.12 - Task Monitor Users: ensure datetime includes microseconds | Bump SDK to 6.2.0"
   - "2.1.11 - Task Monitor Users: Return 500 for retry your request error | Bump SDK to 6.1.4"

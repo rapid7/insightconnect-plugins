@@ -5,6 +5,7 @@ from .schema import MonitorUsersInput, MonitorUsersOutput, MonitorUsersState, Co
 
 from datetime import datetime, timedelta, timezone
 from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.telemetry import monitor_task_delay
 from komand_salesforce.util.exceptions import ApiException
 
 DEFAULT_CUTOFF_HOURS = 24 * 7
@@ -40,6 +41,13 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
         )
 
     # pylint: disable=unused-argument
+    @monitor_task_delay(
+        timestamp_keys=[
+            LAST_USER_UPDATE_COLLECTION_TIMESTAMP,
+            LAST_USER_LOGIN_COLLECTION_TIMESTAMP,
+        ],
+        default_delay_threshold="2d",
+    )
     def run(self, params={}, state={}, custom_config={}):  # noqa: C901
         self.connection.api.enable_rate_limiting = False
         has_more_pages = False

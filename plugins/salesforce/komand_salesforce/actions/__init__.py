@@ -15,4 +15,3 @@ from .delete_record.action import DeleteRecord
 from .get_fields.action import GetFields
 
 from .get_blob_data.action import GetBlobData
-
