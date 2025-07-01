@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="carbon_black_response-rapid7-plugin",
-    version="3.3.1",
+    version="3.3.2",
     description="[VMware Carbon Black EDR](https://www.carbonblack.com/products/edr/) is the most complete endpoint detection and response solution available to security teams. The InsightConnect plugin allows you to automate information collection, endpoint isolation and hash blacklisting. This plugin utilizes the [VMware Carbon Black EDR REST API](https://developer.carbonblack.com/guide/enterprise-response/)",
     author="rapid7",
     author_email="",
