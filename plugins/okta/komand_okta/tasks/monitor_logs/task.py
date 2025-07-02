@@ -3,6 +3,7 @@ from .schema import MonitorLogsInput, MonitorLogsOutput, MonitorLogsState, Compo
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.telemetry import monitor_task_delay
 from komand_okta.util.exceptions import ApiException
 from datetime import datetime, timedelta, timezone
 from typing import Dict, Any, Tuple, Union, Optional
@@ -26,6 +27,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             state=MonitorLogsState(),
         )
 
+    @monitor_task_delay(timestamp_keys=[LAST_COLLECTION_TIMESTAMP], default_delay_threshold="2d")
     def run(self, params={}, state={}, custom_config={}):  # pylint: disable=unused-argument
         self.connection.api_client.toggle_rate_limiting = False
         has_more_pages = False
@@ -71,7 +73,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 if next_page_link:
                     state[self.NEXT_PAGE_LINK] = next_page_link
                     has_more_pages = True
-                state[self.LAST_COLLECTION_TIMESTAMP] = self.get_last_collection_timestamp(new_logs, state)
+                state[self.LAST_COLLECTION_TIMESTAMP] = self.get_last_collection_timestamp(new_logs, state, now_iso)
                 return new_logs, state, has_more_pages, 200, None
             except ApiException as error:
                 self.logger.info(f"An API Exception has been raised. Status code: {error.status_code}. Error: {error}")
@@ -182,7 +184,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         self.logger.info(log.format(filtered=len(filtered_logs)))
         return filtered_logs
 
-    def get_last_collection_timestamp(self, new_logs: list, state: dict) -> str:
+    def get_last_collection_timestamp(self, new_logs: list, state: dict, now: str) -> str:
         """
         Mirror the behaviour in collector code to save the TS of the last parsed event as the 'since' time checkpoint.
         If no new events found then we want to keep the current checkpoint the same.
@@ -195,13 +197,10 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             new_ts = new_logs[-1].get("published")
             self.logger.info(f"Saving the last record's published timestamp ({new_ts}) as checkpoint.")
         if not new_ts:
-            state_time = state.get(self.LAST_COLLECTION_TIMESTAMP)
+            new_ts = now
             self.logger.warning(
-                f"No record to use as last timestamp, will not move checkpoint forward. "
-                f"Keeping value of {state_time}"
+                f"No record to use as last timestamp, moving timestamp forward to the current time: {now}"
             )
-            new_ts = state_time
-
         return new_ts
 
     def _get_filter_time(self, state: Dict, custom_config: Dict) -> Tuple[Union[Optional[int], Any], bool]:
