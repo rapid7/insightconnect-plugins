@@ -73,7 +73,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 if next_page_link:
                     state[self.NEXT_PAGE_LINK] = next_page_link
                     has_more_pages = True
-                state[self.LAST_COLLECTION_TIMESTAMP] = self.get_last_collection_timestamp(new_logs, state, now_iso)
+                state[self.LAST_COLLECTION_TIMESTAMP] = self.get_last_collection_timestamp(new_logs, now_iso)
                 return new_logs, state, has_more_pages, 200, None
             except ApiException as error:
                 self.logger.info(f"An API Exception has been raised. Status code: {error.status_code}. Error: {error}")
@@ -184,12 +184,12 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         self.logger.info(log.format(filtered=len(filtered_logs)))
         return filtered_logs
 
-    def get_last_collection_timestamp(self, new_logs: list, state: dict, now: str) -> str:
+    def get_last_collection_timestamp(self, new_logs: list, now: str) -> str:
         """
         Mirror the behaviour in collector code to save the TS of the last parsed event as the 'since' time checkpoint.
         If no new events found then we want to keep the current checkpoint the same.
         :param new_logs: event logs returned from Okta.
-        :param state: access state dictionary to get the current checkpoint in time if no new logs.
+        :param now: string now time in ISO format to use as a fallback if no new logs were returned.
         :return: new time value to save as the checkpoint to query 'since' on the next run.
         """
         new_ts = ""
