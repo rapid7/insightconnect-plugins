@@ -62,7 +62,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         timestamp_keys=[ACTIVITIES_LAST_LOG_TIMESTAMP, EVENTS_LAST_LOG_TIMESTAMP, THREATS_LAST_LOG_TIMESTAMP],
         default_delay_threshold="2d",
     )
-    def run(self, params={}, state={}, custom_config={}):
+    def run(self, params={}, state={}, custom_config={}):  # pylint: disable=unused-argument
         """
         Query activities, device control events, and threats logs between a supplied timeframe and the current time.
         Return all found logs and set last task run time, pagination cursors, and last log timestamps for each log type.
