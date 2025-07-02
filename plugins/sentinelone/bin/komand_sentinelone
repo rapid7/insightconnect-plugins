@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "SentinelOne"
 Vendor = "rapid7"
-Version = "11.1.4"
+Version = "11.1.5"
 Description = "[SentinelOne](https://www.sentinelone.com/) is a next-gen cybersecurity company focused on protecting the enterprise through the endpoint. The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne.This plugin utilizes the SentinelOne API, the documentation is located in the SentinelOne console"
 
 
