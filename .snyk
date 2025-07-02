@@ -2,3 +2,5 @@ version: v1.25.0
 ignore: {}
 patch: {}
 exclude: {}
+language-settings:
+  python: "3.11"
