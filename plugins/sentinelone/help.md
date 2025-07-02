@@ -73,7 +73,7 @@ This action is used to get a list of activities
 |agentIds|[]string|None|False|Return activities related to specified agent IDs|None|["9000000000000000"]|None|None|
 |countOnly|boolean|None|False|If true, only total number of items will be returned, without any of the actual objects|None|False|None|None|
 |createdAtBetween|string|None|False|Return activities created within this range (inclusive), example 1514978764288-1514978999999|None|1514978764288-1514978999999|None|None|
-|createdAtGt|date|None|False|Return activities created after or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z|None|2020-12-18T18:49:26.257525Z|None|None|
+|createdAtGt|date|None|False|Return activities created after or at this date in ISO-8601, example 2020-12-18T18:49:26+00:00|None|2020-12-18T18:49:26+00:00|None|None|
 |createdAtGte|date|None|False|Return activities created after or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z|None|2020-12-20T18:49:26.257525Z|None|None|
 |createdAtLt|date|None|False|Return activities created before this date in ISO-8601|None|2020-12-20T18:49:26.257525Z|None|None|
 |createdAtLte|date|None|False|Return activities created before or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z|None|2020-12-20T18:49:26.257525Z|None|None|
