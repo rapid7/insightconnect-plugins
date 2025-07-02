@@ -59,4 +59,3 @@ from .update_incident_status.action import UpdateIncidentStatus
 from .run_remote_script.action import RunRemoteScript
 
 from .move_between_sites.action import MoveBetweenSites
-
