@@ -2352,6 +2352,7 @@ Example output:
 
 # Version History
 
+* 11.1.5 - Update SDK to the latest version (6.3.7) | Add task delay monitoring
 * 11.1.4 - Updated SDK to the latest version (6.2.5)
 * 11.1.3 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities | Fix issue with URL input validation
 * 11.1.2 - Resolve issue where unexpected timestamps returned from SentinelOne were not parsed in task `Monitor Logs` | Update plugin to be FedRAMP compliant
