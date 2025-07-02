@@ -307,6 +307,7 @@ Example output:
 
 # Version History
 
+* 4.1.17 - Update SDK | Add task delay monitoring to `monitor_sign_in_out_activity` task
 * 4.1.16 - Update SDK | Update error handling
 * 4.1.15 - Error Handling Updated | SDK Bump to 6.1.0
 * 4.1.14 - SDK Bumped to 6.0.1 | Task connection test added

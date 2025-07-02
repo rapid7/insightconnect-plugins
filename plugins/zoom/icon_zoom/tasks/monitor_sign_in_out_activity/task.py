@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.telemetry import monitor_task_delay
 
 from .schema import (
     MonitorSignInOutActivityInput,
@@ -74,6 +75,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         )
 
     # pylint: disable=unused-argument
+    @monitor_task_delay(timestamp_keys=[LATEST_EVENT_TIMESTAMP], default_delay_threshold="2d")
     def run(self, params={}, state={}, custom_config={}):
         try:
             task_output: TaskOutput = self.loop(state=state, custom_config=custom_config)
