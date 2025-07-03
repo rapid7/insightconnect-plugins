@@ -195,6 +195,24 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 del state[self.PARAM_START_DATE]
                 del state[self.PARAM_END_DATE]
 
+            self.prepare_state_timestamp(run_state, state, query_completed, latest_event)
+            state[self.LAST_REQUEST_TIMESTAMP] = now
+            state[self.PREVIOUS_RUN_STATE] = run_state.value
+            self.logger.info(f"Updated state, state is now: {state}")
+            has_more_pages = not query_completed
+            return TaskOutput(output=new_events, state=state, has_more_pages=has_more_pages, status_code=200,
+                              error=None)
+
+    def prepare_state_timestamp(self, run_state: str, state: Dict[str, Any], query_completed: bool,
+                                latest_event: Event):
+        """
+        Prepare the state timestamp based on the run state and latest event.
+        :param run_state: The current run state of the task
+        :param state: The current state dictionary
+        :param query_completed: Boolean indicating if the query has completed
+        :param latest_event: The latest event object containing the time
+        :return: None
+        """
         latest_event_timestamp = state.get(self.LATEST_EVENT_TIMESTAMP, self.ZERO_DATE)
         latest_event_timestamp_latch = state.get(self.LATEST_EVENT_TIMESTAMP_LATCH, latest_event.time)
         if run_state == RunState.paginating:
@@ -202,11 +220,9 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             # it is greater than the saved event time
             if query_completed:
                 # Check if the current latest event time is greater than the latch event time
-                if latest_event.time >= latest_event_timestamp_latch:
-                    latest_event_timestamp_latch = latest_event.time
+                latest_event_timestamp_latch = max(latest_event_timestamp_latch, latest_event.time)
                 # Set the latest event timestamp in state to the new latest event time
-                if latest_event_timestamp_latch > latest_event_timestamp:
-                    latest_event_timestamp = latest_event_timestamp_latch
+                latest_event_timestamp = max(latest_event_timestamp, latest_event_timestamp_latch)
                 state[self.LATEST_EVENT_TIMESTAMP] = latest_event_timestamp
             # If we have more pages, set the latest latch timestamp as the latest_event.time if it is newer
             else:
@@ -216,12 +232,6 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         else:
             if latest_event.time > latest_event_timestamp:
                 state[self.LATEST_EVENT_TIMESTAMP] = latest_event.time
-
-        state[self.LAST_REQUEST_TIMESTAMP] = now
-        state[self.PREVIOUS_RUN_STATE] = run_state.value
-        self.logger.info(f"Updated state, state is now: {state}")
-        has_more_pages = not query_completed
-        return TaskOutput(output=new_events, state=state, has_more_pages=has_more_pages, status_code=200, error=None)
 
     def check_if_previously_queried(self, last_completed_end_time: str, current_query_end_time: str) -> bool:
         """
