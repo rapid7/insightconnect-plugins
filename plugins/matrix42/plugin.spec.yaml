@@ -27,7 +27,7 @@ hub_tags:
   features: []
 sdk:
   type: slim
-  version: 6.3.6
+  version: 6.3.7
   user: nobody
 key_features:
 - Create new incidents in Matrix42.
