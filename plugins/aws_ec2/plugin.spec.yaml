@@ -7,12 +7,38 @@ vendor: rapid7
 support: rapid7
 supported_versions: ["botocore 1.27.96"]
 status: []
-description: Amazon Elastic Compute Cloud (Amazon EC2) provides resizable computing
-  capacity in the Amazon Web Services (AWS) cloud. This plugin allows you to manage your EC2 environment
-version: 1.3.0
+description: "[Amazon EC2](https://aws.amazon.com/documentation/ec2) is a Amazon Elastic Compute Cloud (Amazon EC2) provides resizable computing capacity in the Amazon Web Services (AWS) cloud.\nThis plugin allows security practitioners to perform host containment and implement security group policies in addition to general management of EC2 instances"
+version: 1.3.1
+connection_version: 1
+sdk:
+  type: slim
+  version: 6.3.7
+  user: nobody
 resources:
   vendor_url: https://www.amazon.com
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/aws_ec2
+key_features:
+  - Manage EC2 instances for asset containment
+  - Manage security groups for network containment
+requirements:
+  - An AWS account with admin permissions for EC2
+  - An AWS Access Key ID and Secret Access Key
+links:
+  - "[AWS EC2](https://aws.amazon.com/ec2/)"
+references:
+    - "[Documentation Overview](https://aws.amazon.com/documentation/ec2)"
+    - "[API Reference](http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html)"
+version_history:
+  - 1.3.1 - SDK Bump to 6.3.7 | Resolved Snyk Vulnerabilities
+  - 1.3.0 - Add region input field to all Actions
+  - 1.2.1 - Updated Connection and Actions to use related AWS Client in SDK
+  - 1.2.0 - Updated Connect and Action inputs to include Role ARN and External ID to provide support for AWS Assume Role functionality at both an Action and a Connection level
+  - 1.1.0 - Update plugin runtime to InsightConnect
+  - 1.0.1 - New spec and help.md format for the Extension Library
+  - 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+  - 0.1.2 - SSL bug fix in SDK
+  - 0.1.1 - Fix connection test not passing output validation
+  - 0.1.0 - Initial plugin
 tags:
 - aws
 - ec2
@@ -789,8 +815,8 @@ connection:
 actions:
   authorize_security_group_egress:
     title: Authorize Security Group Egress
-    description: '[EC2-VPC only] Adds one or more egress rules to a security group
-      for use with a VPC'
+    description: 'Add one or more egress rules to a security group
+      for use with a VPC [EC2-VPC only]. See [http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AuthorizeSecurityGroupEgress.html](http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AuthorizeSecurityGroupEgress.html)'
     input:
       dry_run:
         title: Dry Run
@@ -810,14 +836,7 @@ actions:
         type: '[]ip_permission'
         description: One or more sets of IP permissions
         required: false
-        example: ['{
-            "from_port": 8080,
-            "ip_protocol": "tcp",
-            "ip_ranges" : [{
-               "cidr_ip": "10.20.0.0/27",
-               "description": "Blah"
-            }],
-            "to_port": 8090}']
+        example: [ { "from_port": 8080, "ip_protocol": "tcp", "ip_ranges": [ { "cidr_ip": "10.20.0.0/27", "description": "Blah" } ], "to_port": 8090 } ]
       cidr_ip:
         title: CIDR IP
         type: string
@@ -859,16 +878,18 @@ actions:
         description: Parameters that allows to assume IAM role
         type: assume_role_params
         required: false
-        example: "{'role_arn': 'arn:aws:iam::123456781111:role/ExampleRole', 'external_id': 'ExampleExternalID', 'region': 'us-west-2'"
+        example: { "role_arn": "arn:aws:iam::123456781111:role/ExampleRole", "external_id": "ExampleExternalID", "region": "us-west-2" }
     output:
       response_metadata:
         title: Response Metadata
         type: response_metadata
         description: Metadata about the response from AWS
         required: true
+        example: { "HTTP Status Code": 200, "Request ID": "564416517006"
+  }
   authorize_security_group_ingress:
     title: Authorize Security Group Ingress
-    description: Adds one or more ingress rules to a security group
+    description: "Add one or more ingress rules to a security group. See [http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AuthorizeSecurityGroupIngress.html](http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AuthorizeSecurityGroupIngress.html)"
     input:
       cidr_ip:
         title: CIDR IP
@@ -900,14 +921,7 @@ actions:
         type: '[]ip_permission'
         description: One or more sets of IP permissions
         required: false
-        example: ['{
-            "from_port": 8080,
-            "ip_protocol": "tcp",
-            "ip_ranges" : [{
-               "cidr_ip": "10.20.0.0/27",
-               "description": "Blah"
-            }],
-            "to_port": 8090}']
+        example: [ { "from_port": 8080, "ip_protocol": "tcp", "ip_ranges": [ { "cidr_ip": "10.20.0.0/27", "description": "Blah" } ], "to_port": 8090 } ]
       ip_protocol:
         title: IP Protocol
         type: string
@@ -947,23 +961,24 @@ actions:
         description: Parameters that allows to assume IAM role
         type: assume_role_params
         required: false
-        example: "{'role_arn': 'arn:aws:iam::123456781111:role/ExampleRole', 'external_id': 'ExampleExternalID', 'region': 'us-west-2'"
+        example: { "role_arn": "arn:aws:iam::123456781111:role/ExampleRole", "external_id": "ExampleExternalID", "region": "us-west-2" }
     output:
       response_metadata:
         title: Response Metadata
         type: response_metadata
         description: Metadata about the response from AWS
         required: true
+        example: {"HTTP Status Code": 200, "Request ID": "564416517006" }
   describe_instances:
     title: Describe Instances
-    description: Describes one or more of your instances
+    description: "Describe one or more of your instances. See [http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeClassicLinkInstances.html](http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeClassicLinkInstances.html)"
     input:
       filters:
         title: Filters
         type: '[]filter'
         description: One or more filters
         required: false
-        example: "{'name': 'instance-type', 'values': ['t2.micro', 't3.micro']}"
+        example: { "name": "instance-type", "values": [ "t2.micro", "t3.micro" ] }
       instance_ids:
         title: Instance IDs
         type: '[]string'
@@ -982,28 +997,30 @@ actions:
         description: Parameters that allows to assume IAM role
         type: assume_role_params
         required: false
-        example: "{'role_arn': 'arn:aws:iam::123456781111:role/ExampleRole', 'external_id': 'ExampleExternalID', 'region': 'us-west-2'"
+        example: { "role_arn": "arn:aws:iam::123456781111:role/ExampleRole", "external_id": "ExampleExternalID", "region": "us-west-2" }
     output:
       response_metadata:
         title: Response Metadata
         type: response_metadata
         description: Metadata about the response from AWS
         required: true
+        example:  {"http_status_code": 200, "request_id": "a8ace239-fbc0-4253-81c8-0865e93ca081"}
       reservations:
         title: Reservations
         type: '[]reservation'
         description: Zero or more reservations
         required: false
+        example: [ { "groups": [], "instances": [ { "ami_launch_index": 0, "architecture": "x86_64", "block_device_mappings": [ { "device_name": "/dev/xvda", "ebs": { "attach_time": "2025-01-21T17:47:47+00:00", "delete_on_termination": true, "status": "attached", "volume_id": "vol-04f0094363642d765" } } ], "client_token": "fleet-473d853d-b60e-448d-0e98-89aa13f8447d-0", "Ebs Optimized": false, "Ena Support": true, "Hypervisor": "xen", "IAM Instance Profile": { "arn": "arn:aws:iam::444478183327:instance-profile/eks-2ac9d683-48ff-fedb-54be-02db947f90b0", "id": "AIPAWO7HW26P27VYYTD4I" }, "image_id": "ami-094fb6db0f574f0d6", "instance_id": "i-04e80852e9b93033f", "instance_type": "m5.4xlarge", "instance_lifecycle": "spot", "key_name": "integrationalliacestage1", "launch_time": "2025-07-01T10:46:15+00:00", "monitoring": { "state": "disabled" }, "network_interfaces": [ { "attachment": { "attach_time": "2025-07-01T10:46:15+00:00", "attachment_id": "eni-attach-05cc60f70ab8a6ff4", "delete_on_termination": true, "device_index": 0, "network_card_index": 0, "status": "attached" }, "description": "aws-K8S-i-0ad23684d897727a0", "groups": [ { "group_id": "sg-0e7c1c06433e52cea", "group_name": "alliance-stage-1-worker-sg" }, { "group_id": "sg-0d11f2b3f19a1f2f9", "group_name": "alliance-stage-1-worker-for-pd" } ], "ipv6_addresses": [], "mac_address": "0e:e4:77:59:4d:d9", "network_interface_id": "eni-0dc5b31f15e9d42e5", "owner_id": "444478183327", "private_dns_name": "ip-10-0-166-192.ec2.internal", "private_ip_address": "10.0.166.192", "private_ip_addresses": [ { "primary": true, "private_dns_name": "ip-10-0-166-192.ec2.internal", "private_ip_address": "10.0.166.192" } ], "source_dest_check": true, "subnet_id": "subnet-0435e9bc29b1cde05", "vpc_id": "vpc-0be18e98afa1e5b00" } ], "placement": { "availability_zone": "us-east-1b", "group_name": "", "tenancy": "default" }, "private_dns_name": "ip-10-0-190-192.ec2.internal", "private_ip_address": "10.0.190.192", "product_codes": [], "public_dns_name": "", "root_device_name": "/dev/xvda", "root_device_type": "ebs", "security_groups": [ { "group_id": "sg-0e7c1c06433e52cea", "group_name": "alliance-stage-1-worker-sg" }, { "group_id": "sg-0d11f2b3f19a1f2f9", "group_name": "alliance-stage-1-worker-for-pd" } ], "source_dest_check": true, "spot_instance_request_id": "sir-n77764rg", "state": { "code": 16, "name": "running" }, "subnet_id": "subnet-02b2d189058e4cf23", "tags": [ { "key": "aws:ec2launchtemplate:version", "value": "1" }, { "key": "Environment", "value": "Staging" } ], "usage_operation": "RunInstances", "usage_operation_update_time": "2025-07-01T19:00:38+00:00", "virtualization_type": "hvm", "vpc_id": "vpc-0be18e98afa1e5b00" } ], "owner_id": "444478183327", "requester_id": "564416517006", "reservation_id": "r-082d830d6529d632d" } ]
   describe_security_groups:
     title: Describe Security Groups
-    description: Describes one or more of your security groups
+    description: "Describe one or more of your security groups. See [http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html](http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html)"
     input:
       filters:
         title: Filters
         type: '[]filter'
         description: One or more filters
         required: false
-        example: ["{'name': 'ip-permission.from-port', 'values': [80]}"]
+        example: [ { "name": "ip-permission.from-port", "values": [ 80 ] } ]
       group_ids:
         title: Group IDs
         type: '[]string'
@@ -1029,22 +1046,23 @@ actions:
         description: Parameters that allows to assume IAM role
         type: assume_role_params
         required: false
-        example: "{'role_arn': 'arn:aws:iam::123456781111:role/ExampleRole', 'external_id': 'ExampleExternalID', 'region': 'us-west-2'"
+        example: { "role_arn": "arn:aws:iam::123456781111:role/ExampleRole", "external_id": "ExampleExternalID", "region": "us-west-2" }
     output:
       response_metadata:
         title: Response Metadata
         type: response_metadata
         description: Metadata about the response from AWS
         required: true
+        example: {"http_status_code": 200, "request_id": "ad7c7803-e83a-4207-9fd3-42c47a038926"}
       security_groups:
         title: Security Groups
         type: '[]security_group'
         description: Information about one or more security groups
         required: false
+        example: [ { "description": "Microsoft Windows Server 2019 created 2025-02-07T06:34:33.847Z", "group_id": "sg-0b0c45cacf690376a", "group_name": "Microsoft Windows Server 2019 with HyperV-2025", "ip_permissions": [ { "from_port": 80, "ip_protocol": "tcp", "ip_ranges": [ { "cidr_ip": "0.0.0.0/0" } ], "ipv6_ranges": [], "prefix_list_ids": [], "to_port": 80, "user_id_group_pairs": [] } ], "user_id_group_pairs": [], "ip_permissions_egress": [ { "ip_protocol": "-1", "ip_ranges": [ { "cidr_ip": "0.0.0.0/0" } ], "ipv6_ranges": [], "prefix_list_ids": [], "user_id_group_pairs": [] } ], "owner_id": "28926151422", "vpc_id": "vpc-33821512" } ]
   revoke_security_group_egress:
     title: Revoke Security Group Egress
-    description: '[EC2-VPC only] Removes one or more egress rules from a security
-      group for EC2-VPC'
+    description: "Remove one or more egress rules from a security group for EC2-VPC ([EC2-VPC only]). See [http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RevokeSecurityGroupEgress.html](http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RevokeSecurityGroupEgress.html)"
     input:
       dry_run:
         title: Dry Run
@@ -1064,14 +1082,7 @@ actions:
         type: '[]ip_permission'
         description: One or more sets of IP permissions
         required: false
-        example: ['{
-            "from_port": 8080,
-            "ip_protocol": "tcp",
-            "ip_ranges" : [{
-               "cidr_ip": "10.20.0.0/27",
-               "description": "Blah"
-            }],
-            "to_port": 8090}']
+        example: [ { "from_port": 8080, "ip_protocol": "tcp", "ip_ranges": [ { "cidr_ip": "10.20.0.0/27", "description": "Blah" } ], "to_port": 8090 } ]
       cidr_ip:
         title: CIDR IP
         type: string
@@ -1113,16 +1124,17 @@ actions:
         description: Parameters that allows to assume IAM role
         type: assume_role_params
         required: false
-        example: "{'role_arn': 'arn:aws:iam::123456781111:role/ExampleRole', 'external_id': 'ExampleExternalID', 'region': 'us-west-2'"
+        example: { "role_arn": "arn:aws:iam::123456781111:role/ExampleRole", "external_id": "ExampleExternalID", "region": "us-west-2" }
     output:
       response_metadata:
         title: Response Metadata
         type: response_metadata
         description: Metadata about the response from AWS
         required: true
+        example: { "http_status_code": 200, "request_id": "a824e239-fbc110-4553-71c8-0865e433ca08" }
   revoke_security_group_ingress:
     title: Revoke Security Group Ingress
-    description: Removes one or more ingress rules from a security group
+    description: "Remove one or more ingress rules from a security group. See [http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RevokeSecurityGroupIngress.html](http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RevokeSecurityGroupIngress.html)"
     input:
       cidr_ip:
         title: CIDR IP
@@ -1154,14 +1166,7 @@ actions:
         type: '[]ip_permission'
         description: One or more sets of IP permissions
         required: false
-        example: ['{
-            "from_port": 8080,
-            "ip_protocol": "tcp",
-            "ip_ranges" : [{
-               "cidr_ip": "10.20.0.0/27",
-               "description": "Blah"
-            }],
-            "to_port": 8090}']
+        example: [ { "from_port": 8080, "ip_protocol": "tcp", "ip_ranges": [ { "cidr_ip": "10.20.0.0/27", "description": "Blah" } ], "to_port": 8090 } ]
       ip_protocol:
         title: IP Protocol
         type: string
@@ -1174,14 +1179,14 @@ actions:
         type: string
         description: '[EC2-Classic, default VPC] The name of the source security group'
         required: false
-        example: "name"
+        example: "sourcegroup"
       source_security_group_owner_id:
         title: Source Security Group Owner ID
         type: string
         description: '[EC2-Classic] The AWS account ID of the source security group,
           if the source security group is in a different account'
         required: false
-        example: "ownername"
+        example: "ownergroup"
       to_port:
         title: To Port
         type: integer
@@ -1201,17 +1206,17 @@ actions:
         description: Parameters that allows to assume IAM role
         type: assume_role_params
         required: false
-        example: "{'role_arn': 'arn:aws:iam::123456781111:role/ExampleRole', 'external_id': 'ExampleExternalID', 'region': 'us-west-2'"
+        example: { "role_arn": "arn:aws:iam::123456781111:role/ExampleRole", "external_id": "ExampleExternalID", "region": "us-west-2" }
     output:
       response_metadata:
         title: Response Metadata
         type: response_metadata
         description: Metadata about the response from AWS
         required: true
+        example: { "http_status_code": 200, "request_id": "b39sh34r-fbc110-7385-09c8-08hsn3v8g" }
   update_security_group_rule_descriptions_egress:
     title: Update Security Group Rule Descriptions Egress
-    description: '[EC2-VPC only] Updates the description of an egress (outbound) security
-      group rule'
+    description: "Update the description of an egress (outbound) security group rule [EC2-VPC only]. See [http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_UpdateSecurityGroupRuleDescriptionsEgress.html](http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_UpdateSecurityGroupRuleDescriptionsEgress.html)"
     input:
       dry_run:
         title: Dry Run
@@ -1237,34 +1242,29 @@ actions:
         type: '[]ip_permission'
         description: The IP permissions for the security group rule
         required: true
-        example: ['{
-            "from_port": 8080,
-            "ip_protocol": "tcp",
-            "ip_ranges" : [{
-               "cidr_ip": "10.20.0.0/27",
-               "description": "Blah"
-            }],
-            "to_port": 8090}']
+        example: [ { "from_port": 8080, "ip_protocol": "tcp", "ip_ranges": [ { "cidr_ip": "10.20.0.0/27", "description": "Blah" } ], "to_port": 8090 } ]
       assume_role_params:
         title: Assume Role Parameters
         description: Parameters that allows to assume IAM role
         type: assume_role_params
         required: false
-        example: "{'role_arn': 'arn:aws:iam::123456781111:role/ExampleRole', 'external_id': 'ExampleExternalID', 'region': 'us-west-2'"
+        example: { "role_arn": "arn:aws:iam::123456781111:role/ExampleRole", "external_id": "ExampleExternalID", "region": "us-west-2" }
     output:
       response_metadata:
         title: Response Metadata
         type: response_metadata
         description: Metadata about the response from AWS
         required: true
+        example: { "http_status_code": 200, "request_id": "lklwmsv92v-si202-1192-003e-22uabamw" }
       return:
         title: Return
         type: boolean
         description: Returns true if the request succeeds; otherwise, returns an error
         required: false
+        example: true
   update_security_group_rule_descriptions_ingress:
     title: Update Security Group Rule Descriptions Ingress
-    description: Updates the description of an ingress (inbound) security group rule
+    description: "Update the description of an ingress (inbound) security group rule. See [http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_UpdateSecurityGroupRuleDescriptionsIngress.html](http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_UpdateSecurityGroupRuleDescriptionsIngress.html)"
     input:
       dry_run:
         title: Dry Run
@@ -1290,28 +1290,23 @@ actions:
         type: '[]ip_permission'
         description: The IP permissions for the security group rule
         required: true
-        example: ['{
-            "from_port": 8080,
-            "ip_protocol": "tcp",
-            "ip_ranges" : [{
-               "cidr_ip": "10.20.0.0/27",
-               "description": "Blah"
-            }],
-            "to_port": 8090}']
+        example: [ { "from_port": 8080, "ip_protocol": "tcp", "ip_ranges" : [{"cidr_ip": "10.20.0.0/27","description": "Blah"}],"to_port": 8090 } ]
       assume_role_params:
         title: Assume Role Parameters
         description: Parameters that allows to assume IAM role
         type: assume_role_params
         required: false
-        example: "{'role_arn': 'arn:aws:iam::123456781111:role/ExampleRole', 'external_id': 'ExampleExternalID', 'region': 'us-west-2'"
+        example: { "role_arn": "arn:aws:iam::123456781111:role/ExampleRole", "external_id": "ExampleExternalID", "region": "us-west-2" }
     output:
       response_metadata:
         title: Response Metadata
         type: response_metadata
         description: Metadata about the response from AWS
         required: true
+        example: { "http_status_code": 200, "request_id": "dusbw8bgs-339s-1201-2245-33ajka" }
       return:
         title: Return
         type: boolean
         description: Returns true if the request succeeds; otherwise, returns an error
         required: false
+        example: true
