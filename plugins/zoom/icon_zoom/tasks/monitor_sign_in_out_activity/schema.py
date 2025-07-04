@@ -20,32 +20,35 @@ class Output:
 
 
 class MonitorSignInOutActivityInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {}
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class MonitorSignInOutActivityState(insightconnect_plugin_runtime.State):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {}
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class MonitorSignInOutActivityOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "array",
   "title": "Activity Logs",
   "description": "All activity logs within the specified time range",
-  "items": {
-    "$ref": "#/definitions/user_activity"
-  },
+  "items": {},
   "required": [
     "activity_logs"
   ],
@@ -104,7 +107,8 @@ class MonitorSignInOutActivityOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
