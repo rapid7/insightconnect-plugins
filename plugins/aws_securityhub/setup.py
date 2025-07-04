@@ -2,13 +2,14 @@
 from setuptools import setup, find_packages
 
 
-setup(name="aws_securityhub-rapid7-plugin",
-      version="2.0.4",
-      description="This plugin utilizes AWS Security Hub to lists and describes security hub-aggregated findings and retrieve SQS messages",
-      author="rapid7",
-      author_email="",
-      url="",
-      packages=find_packages(),
-      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/icon_aws_securityhub']
-      )
+setup(
+    name="aws_securityhub-rapid7-plugin",
+    version="2.0.5",
+    description="[AWS Security Hub](https://aws.amazon.com/security-hub/) is a comprehensive view of your high-priority security alerts and compliance status across AWS accounts.The AWS Security Hub InsightConnect plugin allows you to list and describe security hub-aggregated findings and retrieve SQS messages.This plugin utilizes the [AWS Security Hub API](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Operations.html) and [Boto3](https://github.com/boto/boto3) Python library",
+    author="rapid7",
+    author_email="",
+    url="",
+    packages=find_packages(),
+    install_requires=["insightconnect-plugin-runtime"],  # Add third-party dependencies to requirements.txt, not here!
+    entry_points={"console_scripts": ["icon_aws_securityhub = bin.icon_aws_securityhub:main"]},
+)
