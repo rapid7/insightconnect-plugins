@@ -1,9 +1,10 @@
 # Description
 
 [AWS Security Hub](https://aws.amazon.com/security-hub/) is a comprehensive view of your high-priority security alerts and compliance status across AWS accounts.
+
 The AWS Security Hub InsightConnect plugin allows you to list and describe security hub-aggregated findings and retrieve SQS messages.
 
-This plugin utilizes the [AWS Security Hub API](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Operations.html) and [Boto3](https://github.com/boto/boto3) Python library.
+This plugin utilizes the [AWS Security Hub API](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Operations.html) and [Boto3](https://github.com/boto/boto3) Python library
 
 # Key Features
 
@@ -25,9 +26,7 @@ This plugin utilizes the [AWS Security Hub API](https://docs.aws.amazon.com/secu
 
 ## Setup
 
-Check out the [plugin guide](https://insightconnect.help.rapid7.com/docs/aws-security-hub) for more details on how to configure this plugin.
-
-The connection configuration accepts the following parameters:
+The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -72,7 +71,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|Findings|[]Findings|False|Security Hub-aggregated findings|None|
+|Findings|[]Findings|False|Security Hub-aggregated findings|[{"SchemaVersion": "2018-10-08", "Id": "arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-0000000000000", "ProductArn": "arn:aws:securityhub:us-east-2::product/aws/securityhub", "GeneratorId": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0/rule/1.2", "AwsAccountId": "000000000000", "Types": ["Software and Configuration Checks/Industry and Regulatory Standards/CIS AWS Foundations Benchmark"], "FirstObservedAt": "2019-05-14T05:20:43.691Z", "LastObservedAt": "2019-05-30T17:32:00.372Z", "CreatedAt": "2019-05-14T05:20:43.691Z", "UpdatedAt": "2019-05-30T17:32:00.372Z", "Severity": {"Product": 2, "Normalized": 20}, "Title": "1.2 Ensure multi-factor authentication (MFA) is enabled for all IAM users that have a console password", "Description": "Multi-Factor Authentication (MFA) adds an extra layer of protection on top of a user name and password. It is recommended that MFA be enabled for all accounts that have a console password.", "Remediation": {"Recommendation": {"Text": "For directions on how to fix this issue, please consult the AWS Security Hub CIS documentation.", "Url": "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html#securityhub-standards-checks-1.2"}}, "ProductFields": {"StandardsGuideArn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0", "StandardsGuideSubscriptionArn": "arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0", "RuleId": "1.2", "RecommendationUrl": "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html#securityhub-standards-checks-1.2", "RelatedAWSResources:0/name": "securityhub-mfa-enabled-for-iam-console-access-000000", "RelatedAWSResources:0/type": "AWS::Config::ConfigRule", "RecordState": "ACTIVE", "aws/securityhub/FindingId": "arn:aws:securityhub:us-east-2::product/aws/securityhub/arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-000000000", "aws/securityhub/SeverityLabel": "LOW", "aws/securityhub/ProductName": "Security Hub", "aws/securityhub/CompanyName": "AWS"}, "Resources": [{"Type": "AwsAccount", "Id": "AWS::::Account:0000000000", "Partition": "aws", "Region": "us-east-2"}], "Compliance": {"Status": "FAILED"}, "WorkflowState": "NEW", "RecordState": "ACTIVE"}]|
   
 Example output:
 
@@ -80,56 +79,56 @@ Example output:
 {
   "Findings": [
     {
-      "SchemaVersion": "2018-10-08",
-      "Id": "arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-0000000000000",
-      "ProductArn": "arn:aws:securityhub:us-east-2::product/aws/securityhub",
-      "GeneratorId": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0/rule/1.2",
       "AwsAccountId": "000000000000",
-      "Types": [
-        "Software and Configuration Checks/Industry and Regulatory Standards/CIS AWS Foundations Benchmark"
-      ],
-      "FirstObservedAt": "2019-05-14T05:20:43.691Z",
-      "LastObservedAt": "2019-05-30T17:32:00.372Z",
-      "CreatedAt": "2019-05-14T05:20:43.691Z",
-      "UpdatedAt": "2019-05-30T17:32:00.372Z",
-      "Severity": {
-        "Product": 2,
-        "Normalized": 20
+      "Compliance": {
+        "Status": "FAILED"
       },
-      "Title": "1.2 Ensure multi-factor authentication (MFA) is enabled for all IAM users that have a console password",
+      "CreatedAt": "2019-05-14T05:20:43.691Z",
       "Description": "Multi-Factor Authentication (MFA) adds an extra layer of protection on top of a user name and password. It is recommended that MFA be enabled for all accounts that have a console password.",
+      "FirstObservedAt": "2019-05-14T05:20:43.691Z",
+      "GeneratorId": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0/rule/1.2",
+      "Id": "arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-0000000000000",
+      "LastObservedAt": "2019-05-30T17:32:00.372Z",
+      "ProductArn": "arn:aws:securityhub:us-east-2::product/aws/securityhub",
+      "ProductFields": {
+        "RecommendationUrl": "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html#securityhub-standards-checks-1.2",
+        "RecordState": "ACTIVE",
+        "RelatedAWSResources:0/name": "securityhub-mfa-enabled-for-iam-console-access-000000",
+        "RelatedAWSResources:0/type": "AWS::Config::ConfigRule",
+        "RuleId": "1.2",
+        "StandardsGuideArn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+        "StandardsGuideSubscriptionArn": "arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0",
+        "aws/securityhub/CompanyName": "AWS",
+        "aws/securityhub/FindingId": "arn:aws:securityhub:us-east-2::product/aws/securityhub/arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-000000000",
+        "aws/securityhub/ProductName": "Security Hub",
+        "aws/securityhub/SeverityLabel": "LOW"
+      },
+      "RecordState": "ACTIVE",
       "Remediation": {
         "Recommendation": {
           "Text": "For directions on how to fix this issue, please consult the AWS Security Hub CIS documentation.",
           "Url": "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html#securityhub-standards-checks-1.2"
         }
       },
-      "ProductFields": {
-        "StandardsGuideArn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
-        "StandardsGuideSubscriptionArn": "arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0",
-        "RuleId": "1.2",
-        "RecommendationUrl": "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html#securityhub-standards-checks-1.2",
-        "RelatedAWSResources:0/name": "securityhub-mfa-enabled-for-iam-console-access-000000",
-        "RelatedAWSResources:0/type": "AWS::Config::ConfigRule",
-        "RecordState": "ACTIVE",
-        "aws/securityhub/FindingId": "arn:aws:securityhub:us-east-2::product/aws/securityhub/arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-000000000",
-        "aws/securityhub/SeverityLabel": "LOW",
-        "aws/securityhub/ProductName": "Security Hub",
-        "aws/securityhub/CompanyName": "AWS"
-      },
       "Resources": [
         {
-          "Type": "AwsAccount",
           "Id": "AWS::::Account:0000000000",
           "Partition": "aws",
-          "Region": "us-east-2"
+          "Region": "us-east-2",
+          "Type": "AwsAccount"
         }
       ],
-      "Compliance": {
-        "Status": "FAILED"
+      "SchemaVersion": "2018-10-08",
+      "Severity": {
+        "Normalized": 20,
+        "Product": 2
       },
-      "WorkflowState": "NEW",
-      "RecordState": "ACTIVE"
+      "Title": "1.2 Ensure multi-factor authentication (MFA) is enabled for all IAM users that have a console password",
+      "Types": [
+        "Software and Configuration Checks/Industry and Regulatory Standards/CIS AWS Foundations Benchmark"
+      ],
+      "UpdatedAt": "2019-05-30T17:32:00.372Z",
+      "WorkflowState": "NEW"
     }
   ]
 }
@@ -139,7 +138,7 @@ Example output:
 
 #### Get SQS Message
 
-This trigger is used to poll from a SQS Queue.
+This trigger is used to poll from an SQS Queue
 
 ##### Input
 
@@ -177,51 +176,114 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|Message|Message|False|Security Hub message|None|
-|ResponseMetadata|ResponseMetadata|False|Security Hub response metadata|None|
-|securityhubevent|securityHubPayload|False|Security Hub event payload|None|
+|Message|Message|False|Security Hub message|{'MessageId': '3bd3134a-379f-4bbc-953b-ea631537bd75', 'ReceiptHandle': 'AQEBRCB5IzduYADYYhtUnV8sJ08nqTGSi1P6KiFoIhXRDIWZC6rjZGM/f5+Mvh0AnO2xJsc5559dQupnHZLJTPcnjFygYN5vbgOVx9G2cfcO4iFE9c53/31jPd8+KpsJRL9DVjRb4cRX6d84G+kstBXmZuDc684zS2I93jsjWFkvId26ReHzbQ6+iRMM7m0h2W5er+KymAkLhhdPCrWYbMreoI35HALUYbSFZV8vd+srwKNPJ59l+DMme3nHAzFGKvQoyJqSWp6uk2ywIvbHISzYWqKk7cBsnnROsIhiF9umsWgBM+T/lm5HHeRIfsa6T4vzEyI4FepeZmrk2Tz8g7z4k+GHJr1wF8AxOxQR+VUfa2ycM3wvpUgKsaAtekDRhO3LJQVuyp/Ll6m9vzf+QAIcKg==', 'MD5OfBody': 'bbdc5fdb8be7251f5c910905db994bab', 'Body': 'Information about current NY Times fiction bestseller for week of 12/11/2016.', 'Attributes': {'SenderId': 'AIDAZTUUAVRPYOR5E7A5W', 'ApproximateFirstReceiveTimestamp': '1559246912467', 'ApproximateReceiveCount': '1', 'SentTimestamp': '1559246899951'}, 'MD5OfMessageAttributes': 'd25a6aea97eb8f585bfa92d314504a92', 'MessageAttributes': {'Author': {'StringValue': 'John Grisham', 'DataType': 'String'}, 'Title': {'StringValue': 'The Whistler', 'DataType': 'String'}, 'WeeksOn': {'StringValue': '6', 'DataType': 'Number'}}}|
+|ResponseMetadata|ResponseMetadata|False|Security Hub response metadata|{'RequestId': 'c52dccd3-9d9c-5f34-9e74-99b9a71cc3e9', 'HTTPStatusCode': 200, 'HTTPHeaders': {'x-amzn-requestid': 'c52dccd3-9d9c-5f34-9e74-99b9a71cc3e9', 'date': 'Thu, 30 May 2019 20:08:32 GMT', 'content-type': 'text/xml', 'content-length': '1737'}, 'RetryAttempts': 0}|
+|securityhubevent|securityHubPayload|False|Security Hub event payload|{'securityhubevent': {'version': '0', 'id': 'abcd1234-5678-90ef-abcd-1234567890ef', 'detail-type': 'Security Hub Findings - Imported', 'source': 'aws.securityhub', 'account': '123456789012', 'time': '2025-07-04T12:34:56Z', 'region': 'us-east-1', 'resources': ['arn:aws:securityhub:us-east-1::product/aws/securityhub'], 'detail': {'findings': [{'SchemaVersion': '2018-10-08', 'Id': 'arn:aws:securityhub:us-east-1:123456789012:finding/abc12345', 'ProductArn': 'arn:aws:securityhub:us-east-1::product/aws/securityhub', 'AwsAccountId': '123456789012', 'Types': ['Software and Configuration Checks/AWS Security Best Practices'], 'FirstObservedAt': '2025-07-04T12:00:00Z', 'LastObservedAt': '2025-07-04T12:34:00Z', 'CreatedAt': '2025-07-04T12:34:56Z', 'UpdatedAt': '2025-07-04T12:35:00Z', 'Severity': {'Product': 8, 'Normalized': 80, 'Label': 'HIGH'}, 'Title': 'IAM user has active access keys not rotated for 90 days', 'Description': "The IAM user 'jane.doe' has access keys that have not been rotated in 90 days.", 'Remediation': {'Recommendation': {'Text': 'Rotate the access keys for the IAM user regularly.', 'Url': 'https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html'}}, 'ProductFields': {'aws/securityhub/FindingId': 'abc12345', 'aws/securityhub/CompanyName': 'AWS', 'aws/securityhub/ProductName': 'Security Hub', 'aws/securityhub/SeverityLabel': 'HIGH'}, 'Resources': [{'Type': 'AwsIamUser', 'Id': 'arn:aws:iam::123456789012:user/jane.doe', 'Partition': 'aws', 'Region': 'us-east-1'}], 'Compliance': {'Status': 'FAILED'}, 'WorkflowState': 'NEW', 'RecordState': 'ACTIVE'}]}}}|
   
 Example output:
 
 ```
 {
   "Message": {
-    "MessageId": "3bd3134a-379f-4bbc-953b-ea631537bd75",
-    "ReceiptHandle": "AQEBRCB5IzduYADYYhtUnV8sJ08nqTGSi1P6KiFoIhXRDIWZC6rjZGM/f5+Mvh0AnO2xJsc5559dQupnHZLJTPcnjFygYN5vbgOVx9G2cfcO4iFE9c53/31jPd8+KpsJRL9DVjRb4cRX6d84G+kstBXmZuDc684zS2I93jsjWFkvId26ReHzbQ6+iRMM7m0h2W5er+KymAkLhhdPCrWYbMreoI35HALUYbSFZV8vd+srwKNPJ59l+DMme3nHAzFGKvQoyJqSWp6uk2ywIvbHISzYWqKk7cBsnnROsIhiF9umsWgBM+T/lm5HHeRIfsa6T4vzEyI4FepeZmrk2Tz8g7z4k+GHJr1wF8AxOxQR+VUfa2ycM3wvpUgKsaAtekDRhO3LJQVuyp/Ll6m9vzf+QAIcKg==",
-    "MD5OfBody": "bbdc5fdb8be7251f5c910905db994bab",
-    "Body": "Information about current NY Times fiction bestseller for week of 12/11/2016.",
     "Attributes": {
-      "SenderId": "AIDAZTUUAVRPYOR5E7A5W",
       "ApproximateFirstReceiveTimestamp": "1559246912467",
       "ApproximateReceiveCount": "1",
+      "SenderId": "AIDAZTUUAVRPYOR5E7A5W",
       "SentTimestamp": "1559246899951"
     },
+    "Body": "Information about current NY Times fiction bestseller for week of 12/11/2016.",
+    "MD5OfBody": "bbdc5fdb8be7251f5c910905db994bab",
     "MD5OfMessageAttributes": "d25a6aea97eb8f585bfa92d314504a92",
     "MessageAttributes": {
       "Author": {
-        "StringValue": "John Grisham",
-        "DataType": "String"
+        "DataType": "String",
+        "StringValue": "John Grisham"
       },
       "Title": {
-        "StringValue": "The Whistler",
-        "DataType": "String"
+        "DataType": "String",
+        "StringValue": "The Whistler"
       },
       "WeeksOn": {
-        "StringValue": "6",
-        "DataType": "Number"
+        "DataType": "Number",
+        "StringValue": "6"
       }
-    }
+    },
+    "MessageId": "3bd3134a-379f-4bbc-953b-ea631537bd75",
+    "ReceiptHandle": "AQEBRCB5IzduYADYYhtUnV8sJ08nqTGSi1P6KiFoIhXRDIWZC6rjZGM/f5+Mvh0AnO2xJsc5559dQupnHZLJTPcnjFygYN5vbgOVx9G2cfcO4iFE9c53/31jPd8+KpsJRL9DVjRb4cRX6d84G+kstBXmZuDc684zS2I93jsjWFkvId26ReHzbQ6+iRMM7m0h2W5er+KymAkLhhdPCrWYbMreoI35HALUYbSFZV8vd+srwKNPJ59l+DMme3nHAzFGKvQoyJqSWp6uk2ywIvbHISzYWqKk7cBsnnROsIhiF9umsWgBM+T/lm5HHeRIfsa6T4vzEyI4FepeZmrk2Tz8g7z4k+GHJr1wF8AxOxQR+VUfa2ycM3wvpUgKsaAtekDRhO3LJQVuyp/Ll6m9vzf+QAIcKg=="
   },
   "ResponseMetadata": {
-    "RequestId": "c52dccd3-9d9c-5f34-9e74-99b9a71cc3e9",
-    "HTTPStatusCode": 200,
     "HTTPHeaders": {
-      "x-amzn-requestid": "c52dccd3-9d9c-5f34-9e74-99b9a71cc3e9",
-      "date": "Thu, 30 May 2019 20:08:32 GMT",
+      "content-length": "1737",
       "content-type": "text/xml",
-      "content-length": "1737"
+      "date": "Thu, 30 May 2019 20:08:32 GMT",
+      "x-amzn-requestid": "c52dccd3-9d9c-5f34-9e74-99b9a71cc3e9"
     },
+    "HTTPStatusCode": 200,
+    "RequestId": "c52dccd3-9d9c-5f34-9e74-99b9a71cc3e9",
     "RetryAttempts": 0
+  },
+  "securityhubevent": {
+    "securityhubevent": {
+      "account": "123456789012",
+      "detail": {
+        "findings": [
+          {
+            "AwsAccountId": "123456789012",
+            "Compliance": {
+              "Status": "FAILED"
+            },
+            "CreatedAt": "2025-07-04T12:34:56Z",
+            "Description": "The IAM user 'jane.doe' has access keys that have not been rotated in 90 days.",
+            "FirstObservedAt": "2025-07-04T12:00:00Z",
+            "Id": "arn:aws:securityhub:us-east-1:123456789012:finding/abc12345",
+            "LastObservedAt": "2025-07-04T12:34:00Z",
+            "ProductArn": "arn:aws:securityhub:us-east-1::product/aws/securityhub",
+            "ProductFields": {
+              "aws/securityhub/CompanyName": "AWS",
+              "aws/securityhub/FindingId": "abc12345",
+              "aws/securityhub/ProductName": "Security Hub",
+              "aws/securityhub/SeverityLabel": "HIGH"
+            },
+            "RecordState": "ACTIVE",
+            "Remediation": {
+              "Recommendation": {
+                "Text": "Rotate the access keys for the IAM user regularly.",
+                "Url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html"
+              }
+            },
+            "Resources": [
+              {
+                "Id": "arn:aws:iam::123456789012:user/jane.doe",
+                "Partition": "aws",
+                "Region": "us-east-1",
+                "Type": "AwsIamUser"
+              }
+            ],
+            "SchemaVersion": "2018-10-08",
+            "Severity": {
+              "Label": "HIGH",
+              "Normalized": 80,
+              "Product": 8
+            },
+            "Title": "IAM user has active access keys not rotated for 90 days",
+            "Types": [
+              "Software and Configuration Checks/AWS Security Best Practices"
+            ],
+            "UpdatedAt": "2025-07-04T12:35:00Z",
+            "WorkflowState": "NEW"
+          }
+        ]
+      },
+      "detail-type": "Security Hub Findings - Imported",
+      "id": "abcd1234-5678-90ef-abcd-1234567890ef",
+      "region": "us-east-1",
+      "resources": [
+        "arn:aws:securityhub:us-east-1::product/aws/securityhub"
+      ],
+      "source": "aws.securityhub",
+      "time": "2025-07-04T12:34:56Z",
+      "version": "0"
+    }
   }
 }
 ```
@@ -571,11 +633,12 @@ Example output:
 
 
 ## Troubleshooting
-  
-*This plugin does not contain a troubleshooting.*
+
+* If you encounter any issues configuring the plugin, check out the [plugin guide](https://insightconnect.help.rapid7.com/docs/aws-security-hub) for more details on how to configure this plugin.
 
 # Version History
 
+* 2.0.5 - Resolved Snyk vulnerabilities | SDK bump to latest version (6.3.7)
 * 2.0.4 - Bumping requirements.txt | SDK bump to 6.1.4
 * 2.0.3 - Update `docs_url` in plugin spec with a new link to [plugin setup guide](https://docs.rapid7.com/insightconnect/aws-security-hub/)
 * 2.0.2 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/aws-security-hub)
