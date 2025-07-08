@@ -78,8 +78,6 @@ class AddAddressObjectToGroup(insightconnect_plugin_runtime.Action):
 
     @staticmethod
     def make_xml(names, group_name):
-        members = ""
-        for name in names:
-            members += f"<member>{name}</member>"
+        members = ''.join(f"<member>{name}</member>" for name in names)
         xml_template = f"<entry name='{group_name}'><static>{members}</static></entry>"
         return xml_template
