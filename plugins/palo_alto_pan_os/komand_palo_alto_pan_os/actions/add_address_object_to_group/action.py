@@ -34,13 +34,7 @@ class AddAddressObjectToGroup(insightconnect_plugin_runtime.Action):
         )
 
         try:
-            address_objects = (
-                response.get("response")
-                .get("result")
-                .get("entry")
-                .get("static")
-                .get("member")
-            )
+            address_objects = response.get("response").get("result").get("entry").get("static").get("member")
         except AttributeError:
             raise PluginException(
                 cause="PAN OS returned an unexpected response.",
@@ -72,9 +66,7 @@ class AddAddressObjectToGroup(insightconnect_plugin_runtime.Action):
             if name not in names:
                 names.append(name)
             else:
-                self.logger.info(
-                    f"Address Object '{name}' was already in group '{group_name}'. Skipping append."
-                )
+                self.logger.info(f"Address Object '{name}' was already in group '{group_name}'. Skipping append.")
 
         # Rebuild the object in the way the API wants and send it back to the API
         self.connection.request.edit_address_group(
