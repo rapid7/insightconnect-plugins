@@ -28,7 +28,9 @@ class AddAddressObjectToGroup(insightconnect_plugin_runtime.Action):
 
         # See if we can get the group the user is looking for:
         response = self.connection.request.get_address_group(
-            device_name=device_name, virtual_system=virtual_system, group_name=group_name
+            device_name=device_name,
+            virtual_system=virtual_system,
+            group_name=group_name,
         )
 
         try:
@@ -43,20 +45,21 @@ class AddAddressObjectToGroup(insightconnect_plugin_runtime.Action):
 
         # We got the group, now pull out all the address object names
         names = []
-        for name in address_objects:
-            if isinstance(name, str):
-                names.append(name)
+
+        try:
+            if isinstance(address_objects, list):
+                for address in address_objects:
+                    names.append(address.get("#text"))
             else:
-                try:
-                    names.append(name.get("#text"))
-                except AttributeError:
-                    raise PluginException(
-                        cause="PAN OS returned an unexpected response.",
-                        assistance=f"Could not get the address object name. Check the group name, virtual system "
-                        f"name, and device name and try again.\nDevice name: {device_name}\nVirtual "
-                        f"system: {virtual_system}\n",
-                        data=name,
-                    )
+                names.append(address_objects.get("#text"))
+        except AttributeError:
+            raise PluginException(
+                cause="PAN OS returned an unexpected response.",
+                assistance=f"Could not get the address object name. Check the group name, virtual system "
+                f"name, and device name and try again.\nDevice name: {device_name}\nVirtual "
+                f"system: {virtual_system}\n",
+                data=address_objects,
+            )
 
         # Append the address_objects
         for name in new_address_objects:
@@ -77,8 +80,6 @@ class AddAddressObjectToGroup(insightconnect_plugin_runtime.Action):
 
     @staticmethod
     def make_xml(names, group_name):
-        members = ""
-        for name in names:
-            members += f"<member>{name}</member>"
+        members = "".join(f"<member>{name}</member>" for name in names)
         xml_template = f"<entry name='{group_name}'><static>{members}</static></entry>"
         return xml_template
