@@ -59,18 +59,21 @@ class SecurityPolicy:
         for _, object_value in output.items():
             if isinstance(object_value, list):
                 if isinstance(object_value[0], dict):
-                    for _, object_value_value in object_value.items():
+                    new_list = []
+                    for object_value_value in object_value:
                         try:
-                            object_value[key] = object_value_value["#text"]
+                            new_list.append(object_value_value["#text"])
                         except KeyError:
                             raise PluginException(
                                 cause="An unknown formatting error occurred when formatting a security subpolicy.",
                                 assistance="Contact support for help.",
-                                data=f"Subpolicy {object_value[0]}",
+                                data=f"Subpolicy {object_value_value}",
                             )
-            if isinstance(object_value, dict):
-                if isinstance(object_value, dict) and "#text" in object_value:
-                    object_value = object_value["#text"]
+                    object_value[:] = new_list
+
+            elif isinstance(object_value, dict):
+                if "#text" in object_value:
+                    output[_] = object_value["#text"]
 
         return output
 
@@ -172,15 +175,15 @@ class SecurityPolicy:
         self.logger.debug(f"Dictionary to convert to XML {element}")
 
         for key, value in element.items():
-            if not value == "action" and isinstance(key, str):
-                temp = key
-                key = {"member": temp}
+            if key != "action":
+                if isinstance(value, str):
+                    element[key] = [value]
 
         element = dicttoxml.dicttoxml(element, attr_type=False, root=False)
         element = element.decode()
         element = element.replace("<item>", "<member>")
         element = element.replace("</item>", "</member>")
-        element = f'<entry name="{rule_name}">{element}</entry>'
+        element = f"<entry name='{rule_name}'>{element}</entry>"
         self.logger.info(f"XML :{element}")
         return element
 
