@@ -43,20 +43,21 @@ class AddAddressObjectToGroup(insightconnect_plugin_runtime.Action):
 
         # We got the group, now pull out all the address object names
         names = []
-        for name in address_objects:
-            if isinstance(name, str):
-                names.append(name)
+
+        try:
+            if isinstance(address_objects, list):
+                for address in address_objects:
+                    names.append(address.get("#text"))
             else:
-                try:
-                    names.append(name.get("#text"))
-                except AttributeError:
-                    raise PluginException(
-                        cause="PAN OS returned an unexpected response.",
-                        assistance=f"Could not get the address object name. Check the group name, virtual system "
-                        f"name, and device name and try again.\nDevice name: {device_name}\nVirtual "
-                        f"system: {virtual_system}\n",
-                        data=name,
-                    )
+                names.append(address_objects.get("#text"))
+        except AttributeError:
+            raise PluginException(
+                cause="PAN OS returned an unexpected response.",
+                assistance=f"Could not get the address object name. Check the group name, virtual system "
+                f"name, and device name and try again.\nDevice name: {device_name}\nVirtual "
+                f"system: {virtual_system}\n",
+                data=address_objects,
+            )
 
         # Append the address_objects
         for name in new_address_objects:

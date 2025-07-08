@@ -39,7 +39,15 @@ class GetAddressesFromGroup(insightconnect_plugin_runtime.Action):
         ipv6_addresses = []
         all_addresses = []
 
-        for name in address_objects:
+        names = []
+
+        if isinstance(address_objects, list):
+            for address in address_objects:
+                names.append(address.get("#text"))
+        else:
+            names.append(address_objects.get("#text"))
+
+        for name in names:
             object_name = self.get_name(name)
             response = self.connection.request.get_address_object(
                 device_name=device_name, virtual_system=virtual_system, object_name=object_name

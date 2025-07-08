@@ -38,15 +38,15 @@ class CheckIfAddressObjectInGroup(insightconnect_plugin_runtime.Action):
             )
 
         # Extract all the address objects from the address group
-        self.logger.info(f"Searching through {len(ip_objects)} address objects.")
+        members = ip_objects.get("member")
+        self.logger.info(f"Searching through {self.count_members(members)} address objects.")
         ip_object_names = []
-        for member in ip_objects.get("member", {}):
-            if isinstance(member, str):
-                ip_object_names.append(member)
-            else:
-                object_name = member.get("#text", "")
-                if object_name:
-                    ip_object_names.append(object_name)
+
+        if isinstance(members, list):
+            for member in members:
+                ip_object_names.append(member.get("#text", ""))
+        else:
+            ip_object_names.append(members.get("#text", ""))
 
         # If enable search is false, we just want to see if the address to check matches an address object
         # If enable search is true, we have to look in each address object for address to check
@@ -54,7 +54,7 @@ class CheckIfAddressObjectInGroup(insightconnect_plugin_runtime.Action):
             for name in ip_object_names:
                 if name == address_to_check:
                     return {Output.FOUND: True, Output.ADDRESS_OBJECTS: [name]}
-        else:  # enable_search is false
+        else:  # enable_search is true
             # This is a helper to check addresses against address objects
             ip_checker = IpCheck()
 
@@ -102,3 +102,17 @@ class CheckIfAddressObjectInGroup(insightconnect_plugin_runtime.Action):
 
         # That was a lot of work for nothing...bail out
         return {Output.FOUND: False, Output.ADDRESS_OBJECTS: []}
+
+    @staticmethod
+    def count_members(member: dict) -> int:
+        try:
+            if isinstance(member, list):
+                return len(member)
+            elif isinstance(member, dict):
+                if "#text" in member:
+                    return 1
+                else:
+                    return 0
+
+        except (KeyError, TypeError):
+            return 0

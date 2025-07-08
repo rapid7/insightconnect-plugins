@@ -19,7 +19,7 @@
 
 # Supported Product Versions
 
-* 9.0.3
+* 10.1
 
 # Documentation
 
@@ -1114,6 +1114,7 @@ Example output:
 
 # Version History
 
+* 6.1.11 - Adjusted existing actions to ensure compatibility with Palo Alto version 10.1 | Updated SDK to latest version (6.3.7)
 * 6.1.10 - Addressed Snyk Vulnerability | Updated SDK to latest version (6.3.10)
 * 6.1.9 - Addressed Snyk Vulnerability | Updated SDK to latest version (6.3.4)
 * 6.1.8 - Updated SDK to the latest version (6.2.6)
