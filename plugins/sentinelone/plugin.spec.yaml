@@ -14,7 +14,7 @@ cloud_ready: true
 fedramp_ready: true
 sdk:
   type: slim
-  version: 6.3.7
+  version: 6.3.8
   user: nobody
 supported_versions: [2.1.0]
 vendor: rapid7
@@ -72,7 +72,7 @@ hub_tags:
   keywords: [sentinelone, endpoint, detection, cloud_enabled]
   features: []
 version_history:
-- 11.1.5 - Update SDK to the latest version (6.3.7) | Add task delay monitoring
+- 11.1.5 - Update SDK to the latest version (6.3.8) | Add task delay monitoring
 - 11.1.4 - Updated SDK to the latest version (6.2.5)
 - 11.1.3 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities |
   Fix issue with URL input validation
