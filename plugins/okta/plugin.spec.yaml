@@ -11,7 +11,7 @@ status: []
 supported_versions: [Okta API 22-05-2023]
 sdk:
   type: slim
-  version: 6.3.7
+  version: 6.3.8
   user: nobody
 description: '[Okta](https://www.okta.com/) is a SSO and account lifecycle management
   provider that allows companies to integrate their central user account system with
@@ -38,7 +38,7 @@ troubleshooting:
   provided by Okta themselves, or constructed by the plugin based on the information
   it has at hand.
 version_history:
-- 4.2.15 - Updated SDK to the latest version (6.3.7) | Add task delay monitoring | Update Monitor Log Search Start Time
+- 4.2.15 - Updated SDK to the latest version (6.3.8) | Add task delay monitoring | Update Monitor Log Search Start Time
 - 4.2.14 - Updated SDK to the latest version (6.3.3)
 - 4.2.13 - Updated SDK to the latest version (6.2.5)
 - 4.2.12 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
