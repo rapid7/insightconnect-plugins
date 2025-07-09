@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Zoom"
 Vendor = "rapid7"
-Version = "4.1.16"
+Version = "4.1.17"
 Description = "[Zoom](https://zoom.us) is a cloud platform for video and audio conferencing, chat, and webinars. The Zoom plugin allows you to add and remove users as part of of workflow, while also providing the ability to trigger workflows on new user sign-in and sign-out activity events. This plugin uses the [Zoom API](https://marketplace.zoom.us/docs/api-reference/introduction) and requires a Pro, Business, or Enterprise plan"
 
 
