@@ -90,8 +90,7 @@ class TestMonitorLogs(TestCase):
         self.assertEqual(error, None)
         if mocked_warn.called:
             log_call = call(
-                "No record to use as last timestamp, will not move checkpoint forward. "
-                f"Keeping value of {expected.get('state').get('last_collection_timestamp')}"
+                f"No record to use as last timestamp, moving timestamp forward to the current time: {expected.get('state').get('last_collection_timestamp')}"
             )
             self.assertIn(log_call, mocked_warn.call_args_list)
 
@@ -141,8 +140,7 @@ class TestMonitorLogs(TestCase):
         # ensure sure that the mocked response contained a single entry that we discarded and logged this happening
         logger_info_call = call("No new events found since last execution.")
         logger_warn_call = call(
-            f"No record to use as last timestamp, will not move checkpoint forward. "
-            f'Keeping value of {current_state.get("last_collection_timestamp")}'
+            f"No record to use as last timestamp, moving timestamp forward to the current time: {current_state.get('last_collection_timestamp')}"
         )
 
         self.assertIn(logger_info_call, mocked_info_log.call_args_list)
