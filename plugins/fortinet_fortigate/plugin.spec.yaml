@@ -3,8 +3,8 @@ extension: plugin
 products: [insightconnect]
 name: fortinet_fortigate
 title: Fortinet FortiGate
-description: FortiGate Next Generation Firewalls (NGFWs) enable security-driven networking and consolidate industry-leading security capabilities such as intrusion prevention system (IPS), web filtering, secure sockets layer (SSL) inspection, and automated threat protection
-version: 6.0.2
+description: "[FortiGate Next Generation Firewalls (NGFWs)](https://www.fortinet.com/) enable security-driven networking and consolidate industry-leading security capabilities such as intrusion prevention system (IPS), web filtering, secure sockets layer (SSL) inspection, and automated threat protection"
+version: 6.0.3
 connection_version: 6
 supported_versions: ["7.2.4"]
 vendor: rapid7
@@ -15,9 +15,11 @@ resources:
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.fortinet.com/products/next-generation-firewall.html
   docs_url: https://docs.rapid7.com/insightconnect/fortinet-fortigate/
+troubleshooting:
+  - "To accomplish this, log into the FortiGate firewall. Go to the System tab -> Administrator subtab and then select and edit the API admin.\nAdd the orchestrator's IP address to the trusted hosts in CIDR form e.g. `198.51.100.100/32`"
 sdk:
   type: slim
-  version: 6.2.0
+  version: 6.3.8
   user: nobody
 links:
   - "[Fortinet FortiGate](https://www.fortinet.com/)"
@@ -30,9 +32,8 @@ key_features:
 requirements:
   - "An admin API key"
   - "The IP of the orchestrator must be set as a trusted host in Settings > Administrator (Edit button) > Trusted Hosts"
-troubleshooting: "To accomplish this, log into the FortiGate firewall. Go to the System tab -> Administrator subtab and then select and edit the API admin.\n
-     Add the orchestrator's IP address to the trusted hosts in CIDR form e.g. `198.51.100.100/32`"
 version_history:
+  - "6.0.3 - Fixed issue within connection test | Bumped SDK to latest version (6.3.8)"
   - "6.0.2 - Bumping requirements.txt | SDK bump to 6.2.0 | Fixing 'cidr' function in unit test"
   - "6.0.1 - Resolve connection test failure with Fortigate version 6.4.1 and above | Fix bug in action 'Check if Address in Group', where the action would fail if the IPV6 Group did not exist"
   - "6.0.0 - Fix the issue where creating address objects for domains does not work in the Create Address Object action | Fix the issue where address objects for IPv4 were created using the wrong endpoint in the Create Address Object action | Correct the payloads for creating address objects for domains and IPv6 in the Create Address Object action | Add support for checking if IPv6 is whitelisted in the Create Address Object action | Fix IPv6 support in all actions | Code refactor | Add default value for SSL verify parameter in connection configuration"
@@ -968,7 +969,7 @@ actions:
         description: Information about the operation that was performed
         type: object
         required: true
-        example: "{}"
+        example: { "http_method": "POST", "revision": "e089319342f23d5e31b70f5edfb5164c", "revision_changed": true, "old_revision": "d04190fe309ea6ce1fbf4be1e5cd3233", "mkey": "192.168.2.1", "status": "success", "http_status": 200, "vdom": "root", "path": "firewall", "name": "address", "serial": "FGVM02TM20001791", "version": "v6.2.3", "build": 1066 }
   delete_address_object:
     title: Delete Address Object
     description: Delete an address object
@@ -991,7 +992,7 @@ actions:
         description: Information about the operation that was performed
         type: object
         required: true
-        example: "{}"
+        example: { "http_method": "DELETE", "revision": "31a57b41b37574780e38a4be9a5cf117", "revision_changed": true, "old_revision": "e089319342f23d5e31b70f5edfb5164c", "mkey": "192.168.3.1/32", "status": "success", "http_status": 200, "vdom": "root", "path": "firewall", "name": "address", "serial": "FGVM02TM20001791", "version": "v6.2.3", "build": 1066 }
   add_address_object_to_address_group:
     title: Add Address Object to Group
     description: Add an address object to an address group
@@ -1026,7 +1027,7 @@ actions:
         description: An object containing the results of the action
         type: object
         required: true
-        example: "{}"
+        example: { "http_method": "PUT", "revision": "ae0c665d9d5ad469c280efc424e00e29", "revision_changed": true, "old_revision": "94d82356a2bc4cb05963807103392ca3", "mkey": "Test Group", "status": "success", "http_status": 200, "vdom": "root", "path": "firewall", "name": "addrgrp", "serial": "FGVM02TM20001791", "version": "v6.2.3", "build": 1066 }
   remove_address_object_from_group:
     title: Remove Address Object from Group
     description: Removes an address object from an address group
@@ -1061,4 +1062,4 @@ actions:
         description: An object containing the results of the action
         type: object
         required: true
-        example: "{}"
+        example: { "http_method": "PUT", "revision": "ae0c665d9d5ad469c280efc424e00e29", "revision_changed": true, "old_revision": "94d82356a2bc4cb05963807103392ca3", "mkey": "Test Group", "status": "success", "http_status": 200, "vdom": "root", "path": "firewall", "name": "addrgrp", "serial": "FGVM02TM20001791", "version": "v6.2.3", "build": 1066 }

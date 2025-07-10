@@ -1,20 +1,19 @@
 # Description
 
-[FortiGate Next Generation Firewalls (NGFWs)](https://www.fortinet.com/) enable security-driven networking and consolidate industry-leading security capabilities such as intrusion prevention system (IPS), web filtering, secure sockets layer (SSL) inspection, and automated threat protection.
+[FortiGate Next Generation Firewalls (NGFWs)](https://www.fortinet.com/) enable security-driven networking and consolidate industry-leading security capabilities such as intrusion prevention system (IPS), web filtering, secure sockets layer (SSL) inspection, and automated threat protection
 
 # Key Features
 
 * Create network address objects
 * Add address object to address groups
 
-The intended way to use this plugin is to have an existing policy in place with a predefined address group in it. 
-As threats are detected, their address can be added to your existing policy through the address group. This allows
-for flexible policy management of large groups of dynamic addresses. 
+* The intended way to use this plugin is to have an existing policy in place with a predefined address group in it.
+As threats are detected, their address can be added to your existing policy through the address group. This allows for flexible policy management of large groups of dynamic addresses
 
 # Requirements
 
 * An admin API key
-* The IP of the orchestrator must be set as a trusted host in Settings > Administrator (Edit button) > Trusted Hosts 
+* The IP of the orchestrator must be set as a trusted host in Settings > Administrator (Edit button) > Trusted Hosts
 
 # Supported Product Versions
 
@@ -73,29 +72,29 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|result_object|object|True|An object containing the results of the action|{}|
+|result_object|object|True|An object containing the results of the action|{'http_method': 'PUT', 'revision': 'ae0c665d9d5ad469c280efc424e00e29', 'revision_changed': True, 'old_revision': '94d82356a2bc4cb05963807103392ca3', 'mkey': 'Test Group', 'status': 'success', 'http_status': 200, 'vdom': 'root', 'path': 'firewall', 'name': 'addrgrp', 'serial': 'FGVM02TM20001791', 'version': 'v6.2.3', 'build': 1066}|
 |success|boolean|True|Was the operation successful|True|
   
 Example output:
 
 ```
 {
-  "success": true,
   "result_object": {
+    "build": 1066,
     "http_method": "PUT",
+    "http_status": 200,
+    "mkey": "Test Group",
+    "name": "addrgrp",
+    "old_revision": "94d82356a2bc4cb05963807103392ca3",
+    "path": "firewall",
     "revision": "ae0c665d9d5ad469c280efc424e00e29",
     "revision_changed": true,
-    "old_revision": "94d82356a2bc4cb05963807103392ca3",
-    "mkey": "Test Group",
-    "status": "success",
-    "http_status": 200,
-    "vdom": "root",
-    "path": "firewall",
-    "name": "addrgrp",
     "serial": "FGVM02TM20001791",
-    "version": "v6.2.3",
-    "build": 1066
-  }
+    "status": "success",
+    "vdom": "root",
+    "version": "v6.2.3"
+  },
+  "success": true
 }
 ```
 
@@ -134,10 +133,10 @@ Example output:
 
 ```
 {
-  "found": true,
   "address_objects": [
     "198.51.100.100/32"
-  ]
+  ],
+  "found": true
 }
 ```
 
@@ -173,29 +172,29 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|response_object|object|True|Information about the operation that was performed|{}|
+|response_object|object|True|Information about the operation that was performed|{'http_method': 'POST', 'revision': 'e089319342f23d5e31b70f5edfb5164c', 'revision_changed': True, 'old_revision': 'd04190fe309ea6ce1fbf4be1e5cd3233', 'mkey': '192.168.2.1', 'status': 'success', 'http_status': 200, 'vdom': 'root', 'path': 'firewall', 'name': 'address', 'serial': 'FGVM02TM20001791', 'version': 'v6.2.3', 'build': 1066}|
 |success|boolean|True|Boolean value indicating the success of the operation|True|
   
 Example output:
 
 ```
 {
-  "success": true,
   "response_object": {
+    "build": 1066,
     "http_method": "POST",
+    "http_status": 200,
+    "mkey": "192.168.2.1",
+    "name": "address",
+    "old_revision": "d04190fe309ea6ce1fbf4be1e5cd3233",
+    "path": "firewall",
     "revision": "e089319342f23d5e31b70f5edfb5164c",
     "revision_changed": true,
-    "old_revision": "d04190fe309ea6ce1fbf4be1e5cd3233",
-    "mkey": "192.168.2.1",
-    "status": "success",
-    "http_status": 200,
-    "vdom": "root",
-    "path": "firewall",
-    "name": "address",
     "serial": "FGVM02TM20001791",
-    "version": "v6.2.3",
-    "build": 1066
-  }
+    "status": "success",
+    "vdom": "root",
+    "version": "v6.2.3"
+  },
+  "success": true
 }
 ```
 
@@ -221,29 +220,29 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|response_object|object|True|Information about the operation that was performed|{}|
+|response_object|object|True|Information about the operation that was performed|{'http_method': 'DELETE', 'revision': '31a57b41b37574780e38a4be9a5cf117', 'revision_changed': True, 'old_revision': 'e089319342f23d5e31b70f5edfb5164c', 'mkey': '192.168.3.1/32', 'status': 'success', 'http_status': 200, 'vdom': 'root', 'path': 'firewall', 'name': 'address', 'serial': 'FGVM02TM20001791', 'version': 'v6.2.3', 'build': 1066}|
 |success|boolean|True|Boolean value indicating the success of the operation|True|
   
 Example output:
 
 ```
 {
-  "success": true,
   "response_object": {
+    "build": 1066,
     "http_method": "DELETE",
+    "http_status": 200,
+    "mkey": "192.168.3.1/32",
+    "name": "address",
+    "old_revision": "e089319342f23d5e31b70f5edfb5164c",
+    "path": "firewall",
     "revision": "31a57b41b37574780e38a4be9a5cf117",
     "revision_changed": true,
-    "old_revision": "e089319342f23d5e31b70f5edfb5164c",
-    "mkey": "192.168.3.1/32",
-    "status": "success",
-    "http_status": 200,
-    "vdom": "root",
-    "path": "firewall",
-    "name": "address",
     "serial": "FGVM02TM20001791",
-    "version": "v6.2.3",
-    "build": 1066
-  }
+    "status": "success",
+    "vdom": "root",
+    "version": "v6.2.3"
+  },
+  "success": true
 }
 ```
 
@@ -284,24 +283,46 @@ Example output:
 {
   "address_objects": [
     {
+      "allow-routing": "disable",
+      "cache-ttl": 0,
+      "clearpass-spt": "unknown",
+      "color": 0,
+      "comment": "IPv4 addresses of Fabric Devices.",
+      "end-mac": "00:00:00:00:00:00",
+      "fsso-group": [],
+      "list": [],
       "name": "FABRIC_DEVICE",
       "q_origin_key": "FABRIC_DEVICE",
-      "uuid": "7773d538-25a0-51ea-fcb2-a2340d71f5d9",
-      "subnet": "0.0.0.0 0.0.0.0",
-      "type": "ipmask",
-      "sub-type": "sdn",
-      "clearpass-spt": "unknown",
-      "start-mac": "00:00:00:00:00:00",
-      "end-mac": "00:00:00:00:00:00",
-      "cache-ttl": 0,
-      "fsso-group": [],
-      "comment": "IPv4 addresses of Fabric Devices.",
-      "visibility": "enable",
-      "color": 0,
       "sdn-addr-type": "private",
-      "list": [],
+      "start-mac": "00:00:00:00:00:00",
+      "sub-type": "sdn",
+      "subnet": "0.0.0.0 0.0.0.0",
       "tagging": [],
-      "allow-routing": "disable"
+      "type": "ipmask",
+      "uuid": "7773d538-25a0-51ea-fcb2-a2340d71f5d9",
+      "visibility": "enable"
+    }
+  ],
+  "ipv6_address_objects": [
+    {
+      "allow-routing": "disable",
+      "cache-ttl": 0,
+      "clearpass-spt": "unknown",
+      "color": 0,
+      "comment": "IPv4 addresses of Fabric Devices.",
+      "end-mac": "00:00:00:00:00:00",
+      "fsso-group": [],
+      "list": [],
+      "name": "FABRIC_DEVICE",
+      "q_origin_key": "FABRIC_DEVICE",
+      "sdn-addr-type": "private",
+      "start-mac": "00:00:00:00:00:00",
+      "sub-type": "sdn",
+      "subnet": "0.0.0.0 0.0.0.0",
+      "tagging": [],
+      "type": "ipmask",
+      "uuid": "7773d538-25a0-51ea-fcb2-a2340d71f5d9",
+      "visibility": "enable"
     }
   ]
 }
@@ -337,135 +358,135 @@ Example output:
 {
   "policies": [
     {
-      "policyid": 1,
-      "q_origin_key": 1,
-      "name": "Test Policy",
-      "uuid": "6193559a-6862-51ea-44ce-e27594b8536a",
-      "srcintf": [
-        {
-          "name": "port1",
-          "q_origin_key": "port1"
-        }
-      ],
-      "dstintf": [
-        {
-          "name": "port1",
-          "q_origin_key": "port1"
-        }
-      ],
-      "srcaddr": [
-        {
-          "name": "Test Group",
-          "q_origin_key": "Test Group"
-        }
-      ],
+      "action": "accept",
+      "anti-replay": "enable",
+      "app-category": [],
+      "app-group": [],
+      "application": [],
+      "auth-path": "disable",
+      "auto-asic-offload": "enable",
+      "block-notification": "disable",
+      "captive-portal-exempt": "disable",
+      "capture-packet": "disable",
+      "custom-log-fields": [],
+      "delay-tcp-npu-session": "disable",
+      "diffserv-forward": "disable",
+      "diffserv-reverse": "disable",
+      "diffservcode-forward": "000000",
+      "diffservcode-rev": "000000",
+      "disclaimer": "disable",
+      "dsri": "disable",
       "dstaddr": [
         {
           "name": "Test Group",
           "q_origin_key": "Test Group"
         }
       ],
+      "dstaddr-negate": "disable",
+      "dstintf": [
+        {
+          "name": "port1",
+          "q_origin_key": "port1"
+        }
+      ],
+      "email-collect": "disable",
+      "firewall-session-dirty": "check-all",
+      "fixedport": "disable",
+      "fsso": "enable",
+      "fsso-groups": [],
+      "geoip-anycast": "disable",
+      "groups": [],
+      "http-policy-redirect": "disable",
+      "inbound": "disable",
+      "inspection-mode": "flow",
       "internet-service": "disable",
-      "internet-service-id": [],
-      "internet-service-group": [],
       "internet-service-custom": [],
       "internet-service-custom-group": [],
+      "internet-service-group": [],
+      "internet-service-id": [],
+      "internet-service-negate": "disable",
       "internet-service-src": "disable",
-      "internet-service-src-id": [],
-      "internet-service-src-group": [],
       "internet-service-src-custom": [],
       "internet-service-src-custom-group": [],
-      "reputation-minimum": 0,
+      "internet-service-src-group": [],
+      "internet-service-src-id": [],
+      "internet-service-src-negate": "disable",
+      "ippool": "disable",
+      "logtraffic": "utm",
+      "logtraffic-start": "disable",
+      "match-vip": "disable",
+      "match-vip-only": "disable",
+      "name": "Test Policy",
+      "nat": "enable",
+      "natinbound": "disable",
+      "natip": "0.0.0.0 0.0.0.0",
+      "natoutbound": "disable",
+      "ntlm": "disable",
+      "ntlm-enabled-browsers": [],
+      "ntlm-guest": "disable",
+      "outbound": "enable",
+      "permit-any-host": "disable",
+      "permit-stun-host": "disable",
+      "policyid": 1,
+      "poolname": [],
+      "profile-protocol-options": "default",
+      "profile-type": "single",
+      "q_origin_key": 1,
+      "radius-mac-auth-bypass": "disable",
       "reputation-direction": "destination",
-      "rtp-nat": "disable",
+      "reputation-minimum": 0,
+      "rsso": "disable",
       "rtp-addr": [],
-      "action": "accept",
-      "send-deny-packet": "disable",
-      "firewall-session-dirty": "check-all",
-      "status": "enable",
+      "rtp-nat": "disable",
       "schedule": "always",
       "schedule-timeout": "disable",
+      "send-deny-packet": "disable",
       "service": [
         {
           "name": "ALL",
           "q_origin_key": "ALL"
         }
       ],
+      "service-negate": "disable",
+      "session-ttl": "0",
+      "srcaddr": [
+        {
+          "name": "Test Group",
+          "q_origin_key": "Test Group"
+        }
+      ],
+      "srcaddr-negate": "disable",
+      "srcintf": [
+        {
+          "name": "port1",
+          "q_origin_key": "port1"
+        }
+      ],
+      "ssh-policy-redirect": "disable",
+      "ssl-mirror": "disable",
+      "ssl-mirror-intf": [],
+      "ssl-ssh-profile": "no-inspection",
+      "status": "enable",
+      "tcp-mss-receiver": 0,
+      "tcp-mss-sender": 0,
+      "tcp-session-without-syn": "disable",
+      "timeout-send-rst": "disable",
       "tos": "0x00",
       "tos-mask": "0x00",
       "tos-negate": "disable",
-      "anti-replay": "enable",
-      "tcp-session-without-syn": "disable",
-      "geoip-anycast": "disable",
+      "url-category": [],
+      "users": [],
       "utm-status": "disable",
-      "inspection-mode": "flow",
-      "http-policy-redirect": "disable",
-      "ssh-policy-redirect": "disable",
-      "profile-type": "single",
-      "profile-protocol-options": "default",
-      "ssl-ssh-profile": "no-inspection",
-      "logtraffic": "utm",
-      "logtraffic-start": "disable",
-      "capture-packet": "disable",
-      "auto-asic-offload": "enable",
+      "uuid": "6193559a-6862-51ea-44ce-e27594b8536a",
+      "vlan-cos-fwd": 255,
+      "vlan-cos-rev": 255,
       "wanopt": "disable",
       "wanopt-detection": "active",
       "wanopt-passive-opt": "default",
+      "wccp": "disable",
       "webcache": "disable",
       "webcache-https": "disable",
-      "application": [],
-      "app-category": [],
-      "url-category": [],
-      "app-group": [],
-      "nat": "enable",
-      "permit-any-host": "disable",
-      "permit-stun-host": "disable",
-      "fixedport": "disable",
-      "ippool": "disable",
-      "poolname": [],
-      "session-ttl": "0",
-      "vlan-cos-fwd": 255,
-      "vlan-cos-rev": 255,
-      "inbound": "disable",
-      "outbound": "enable",
-      "natinbound": "disable",
-      "natoutbound": "disable",
-      "wccp": "disable",
-      "ntlm": "disable",
-      "ntlm-guest": "disable",
-      "ntlm-enabled-browsers": [],
-      "fsso": "enable",
-      "wsso": "enable",
-      "rsso": "disable",
-      "groups": [],
-      "users": [],
-      "fsso-groups": [],
-      "auth-path": "disable",
-      "disclaimer": "disable",
-      "email-collect": "disable",
-      "natip": "0.0.0.0 0.0.0.0",
-      "match-vip": "disable",
-      "match-vip-only": "disable",
-      "diffserv-forward": "disable",
-      "diffserv-reverse": "disable",
-      "diffservcode-forward": "000000",
-      "diffservcode-rev": "000000",
-      "tcp-mss-sender": 0,
-      "tcp-mss-receiver": 0,
-      "block-notification": "disable",
-      "custom-log-fields": [],
-      "srcaddr-negate": "disable",
-      "dstaddr-negate": "disable",
-      "service-negate": "disable",
-      "internet-service-negate": "disable",
-      "internet-service-src-negate": "disable",
-      "timeout-send-rst": "disable",
-      "captive-portal-exempt": "disable",
-      "ssl-mirror": "disable",
-      "ssl-mirror-intf": [],
-      "dsri": "disable",
-      "radius-mac-auth-bypass": "disable",
-      "delay-tcp-npu-session": "disable"
+      "wsso": "enable"
     }
   ]
 }
@@ -497,29 +518,29 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|result_object|object|True|An object containing the results of the action|{}|
+|result_object|object|True|An object containing the results of the action|{'http_method': 'PUT', 'revision': 'ae0c665d9d5ad469c280efc424e00e29', 'revision_changed': True, 'old_revision': '94d82356a2bc4cb05963807103392ca3', 'mkey': 'Test Group', 'status': 'success', 'http_status': 200, 'vdom': 'root', 'path': 'firewall', 'name': 'addrgrp', 'serial': 'FGVM02TM20001791', 'version': 'v6.2.3', 'build': 1066}|
 |success|boolean|True|Was the operation successful|True|
   
 Example output:
 
 ```
 {
-  "success": true,
   "result_object": {
+    "build": 1066,
     "http_method": "PUT",
+    "http_status": 200,
+    "mkey": "Test Group",
+    "name": "addrgrp",
+    "old_revision": "94d82356a2bc4cb05963807103392ca3",
+    "path": "firewall",
     "revision": "ae0c665d9d5ad469c280efc424e00e29",
     "revision_changed": true,
-    "old_revision": "94d82356a2bc4cb05963807103392ca3",
-    "mkey": "Test Group",
-    "status": "success",
-    "http_status": 200,
-    "vdom": "root",
-    "path": "firewall",
-    "name": "addrgrp",
     "serial": "FGVM02TM20001791",
-    "version": "v6.2.3",
-    "build": 1066
-  }
+    "status": "success",
+    "vdom": "root",
+    "version": "v6.2.3"
+  },
+  "success": true
 }
 ```
 ### Triggers
@@ -720,11 +741,12 @@ Example output:
 
 ## Troubleshooting
 
-To accomplish this, log into the FortiGate firewall. Go to the System tab -> Administrator subtab and then select and edit the API admin.
- Add the orchestrator's IP address to the trusted hosts in CIDR form e.g. `198.51.100.100/32`
+* To accomplish this, log into the FortiGate firewall. Go to the System tab -> Administrator subtab and then select and edit the API admin.
+Add the orchestrator's IP address to the trusted hosts in CIDR form e.g. `198.51.100.100/32`
 
 # Version History
 
+* 6.0.3 - Fixed issue within connection test | Bumped SDK to latest version (6.3.8)
 * 6.0.2 - Bumping requirements.txt | SDK bump to 6.2.0 | Fixing 'cidr' function in unit test
 * 6.0.1 - Resolve connection test failure with Fortigate version 6.4.1 and above | Fix bug in action 'Check if Address in Group', where the action would fail if the IPV6 Group did not exist
 * 6.0.0 - Fix the issue where creating address objects for domains does not work in the Create Address Object action | Fix the issue where address objects for IPv4 were created using the wrong endpoint in the Create Address Object action | Correct the payloads for creating address objects for domains and IPv6 in the Create Address Object action | Add support for checking if IPv6 is whitelisted in the Create Address Object action | Fix IPv6 support in all actions | Code refactor | Add default value for SSL verify parameter in connection configuration
