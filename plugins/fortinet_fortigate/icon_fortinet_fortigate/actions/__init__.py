@@ -13,4 +13,3 @@ from .delete_address_object.action import DeleteAddressObject
 from .add_address_object_to_address_group.action import AddAddressObjectToAddressGroup
 
 from .remove_address_object_from_group.action import RemoveAddressObjectFromGroup
-

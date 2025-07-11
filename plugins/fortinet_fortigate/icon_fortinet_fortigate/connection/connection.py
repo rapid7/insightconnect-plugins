@@ -31,9 +31,10 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def test(self):
         try:
-            self.api.call_api(path="firewall.ipmacbinding/setting")
+            self.api.get_policies({})
         except PluginException:
             raise ConnectionTestException(
-                cause="Connection Test Failed.", assistance="Please check that your API key and hostname are correct."
+                cause="Connection Test Failed.",
+                assistance="Verify that your API key and hostname are correct, and ensure the hostname is a trusted host in Fortigate.",
             )
         return {"status": "Success"}
