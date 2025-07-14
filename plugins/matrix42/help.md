@@ -50,7 +50,7 @@ This action is used to create a new Matrix42 Ticket
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |activity_type|string|None|True|Type of the ticket. (Incident or Service Request)|["Incident", "Service Request"]|Service Request|None|None|
-|additional_fields|object|None|False|JSON object containing additional fields and values to create the ticket|None|{ "Impact": 1, "Subject": Replace Subject, "Urgency": 1 }|None|None|
+|additional_fields|object|None|False|JSON object containing additional fields and values to create the ticket|None|{"Impact": 1, "Subject": "Replace Subject", "Urgency": 1}|None|None|
 |description_html|string|None|True|HTML formatted description|None|<h1>New Ticket</h1><p>This is an example ticket description.</p>|None|None|
 |subject|string|None|True|Title of the ticket|None|Example Ticket Title|None|None|
   
@@ -59,7 +59,11 @@ Example input:
 ```
 {
   "activity_type": "Service Request",
-  "additional_fields": "{ \"Impact\": 1, \"Subject\": Replace Subject, \"Urgency\": 1 }",
+  "additional_fields": {
+    "Impact": 1,
+    "Subject": "Replace Subject",
+    "Urgency": 1
+  },
   "description_html": "<h1>New Ticket</h1><p>This is an example ticket description.</p>",
   "subject": "Example Ticket Title"
 }
