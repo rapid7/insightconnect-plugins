@@ -1,5 +1,6 @@
 class Regex:
     Domain = r"(?:(?=[\p{L}\p{N}\p{Lo}\p{So}-]{1,63}\.)[\p{L}\p{N}\p{Lo}\p{So}]+(?:-[\p{L}\p{N}\p{Lo}\p{So}]+)*\.)+[\p{L}]{2,63}(?:@|=|(?:\/|:)[\p{L}\p{N}@:%_\/\-+?=#&.~]*)?"
+    Filename = r"(?<!\b[a-zA-Z0-9_-]+\.)[a-zA-Z0-9_-]+\.(?:dll|exe|txt|log|csv|json|xml|html|htm|py|java|cpp|c|sh|bat|md|pdf|docx|xlsx|pptx|jpg|png|gif|bmp|zip|tar|gz|rar)\b"
     Date = r"\d{1,2}/\d{1,2}/\d{4}"
     FilePath = r"/\S+"
     Email = r"[a-zA-Z0-9_.+-:]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+"
