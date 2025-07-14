@@ -88,7 +88,7 @@ actions:
         description: JSON object containing additional fields and values to create the ticket
         type: object
         required: false
-        example: '{ "Impact": 1, "Subject": Replace Subject, "Urgency": 1 }'
+        example: '{"Impact": 1, "Subject": "Replace Subject", "Urgency": 1}'
     output:
       id:
         title: Ticket ID
