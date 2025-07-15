@@ -19,7 +19,6 @@ class CreateTicket(insightconnect_plugin_runtime.Action):
             output=CreateTicketOutput(),
         )
 
-    @auto_instrument
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         activity_type = params.get(Input.ACTIVITY_TYPE)
