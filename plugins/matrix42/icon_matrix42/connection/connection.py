@@ -8,6 +8,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
+        self.api_key = None
+        self.server_name = None
+        self.api_url = None
+        self.access_token = None
+        self.request_header = None
 
     def get_access_token(self):
         """
