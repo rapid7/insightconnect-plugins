@@ -13,11 +13,13 @@ class Connection(insightconnect_plugin_runtime.Connection):
         """
         Get a temporary access token from Matrix42 using the API key.
         """
+
+        # Prepare the URL for generating an access token
         token_url = self.api_url + "ApiToken/GenerateAccessTokenFromApiToken"
 
+        # Request the access token from Matrix42
         headers = {"Authorization": f"Bearer {self.api_key}", "Accept": "application/json"}
 
-        # Reuqest the access token from Matrix42
         try:
             self.logger.info(f"Requesting access token with API key from {token_url}")
             response = requests.post(token_url, headers=headers)
@@ -46,9 +48,13 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.logger.info("Connect: Connecting...")
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         self.api_key = params.get(Input.API_KEY).get("secretKey").strip()
-        self.api_url = params.get(Input.API_URL).strip().rstrip("/") + "/"
+        self.server_name = params.get(Input.SERVER_NAME).strip()
         # END INPUT BINDING - DO NOT REMOVE
 
+        # Prepare the API URL
+        self.api_url = f"https://{self.server_name}/m42Services/api/"
+
+        # Get the access token
         self.access_token = self.get_access_token()
 
         # Prepare headers

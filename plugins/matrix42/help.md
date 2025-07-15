@@ -25,14 +25,14 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |api_key|credential_secret_key|None|True|Matrix42 API key for authentication|None|eyJhbGciOiJodHR...|None|None|
-|api_url|string|None|True|The base URL for your Matrix42 API (e.g. https://testsrv.imagoverum.com/m42Services/api/)|None|https://testsrv.imagoverum.com/m42Services/api/|None|None|
+|server_name|string|None|True|The server name of your Matrix42 instance (e.g. testsrv.imagoverum.com)|None|testsrv.imagoverum.com|None|None|
 
 Example input:
 
 ```
 {
   "api_key": "eyJhbGciOiJodHR...",
-  "api_url": "https://testsrv.imagoverum.com/m42Services/api/"
+  "server_name": "testsrv.imagoverum.com"
 }
 ```
 

@@ -5,7 +5,7 @@ import json
 
 class Input:
     API_KEY = "api_key"
-    API_URL = "api_url"
+    SERVER_NAME = "server_name"
 
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -21,16 +21,16 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "Matrix42 API key for authentication",
       "order": 2
     },
-    "api_url": {
+    "server_name": {
       "type": "string",
-      "title": "Matrix42 API URL",
-      "description": "The base URL for your Matrix42 API (e.g. https://testsrv.imagoverum.com/m42Services/api/)",
+      "title": "Matrix42 Server Name",
+      "description": "The server name of your Matrix42 instance (e.g. testsrv.imagoverum.com)",
       "order": 1
     }
   },
   "required": [
     "api_key",
-    "api_url"
+    "server_name"
   ],
   "definitions": {
     "credential_secret_key": {

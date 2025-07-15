@@ -43,13 +43,13 @@ version_history:
 - 1.0.0 - Initial plugin
 
 connection:
-  api_url:
-    title: Matrix42 API URL
-    description: The base URL for your Matrix42 API (e.g. https://testsrv.imagoverum.com/m42Services/api/)
+  server_name:
+    title: Matrix42 Server Name
+    description: The server name of your Matrix42 instance (e.g. testsrv.imagoverum.com)
     type: string
     required: true
-    example: https://testsrv.imagoverum.com/m42Services/api/
-  
+    example: testsrv.imagoverum.com
+
   api_key:
     title: API Key
     description: Matrix42 API key for authentication

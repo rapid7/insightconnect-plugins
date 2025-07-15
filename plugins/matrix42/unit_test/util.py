@@ -54,8 +54,10 @@ class Util:
 
     @staticmethod
     def default_connection(action):
+        server_name = "my.fake.url"
         connection = Connection()
-        connection.api_url = "https://fake-url/"
+        connection.server_name = server_name
+        connection.api_url = f"https://{server_name}/m42Services/api/"
         connection.api_key = "fake-key"
         connection.access_token = "mocked-access-token"
         connection.request_header = {

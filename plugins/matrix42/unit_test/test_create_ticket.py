@@ -37,7 +37,7 @@ class TestCreateTicket(TestCase):
         args, kwargs = mock_request.call_args
 
         # Check the URL called
-        self.assertEqual(kwargs["url"], "https://fake-url/ticket/create?activityType=6")
+        self.assertEqual(kwargs["url"], "https://my.fake.url/m42Services/api/ticket/create?activityType=6")
 
         # Check the headers sent in the request
         expected_headers = {

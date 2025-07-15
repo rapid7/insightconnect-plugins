@@ -31,7 +31,7 @@ class CreateTicket(insightconnect_plugin_runtime.Action):
         activity_type_map = {"Incident": 0, "Service Request": 6}
         activity_type_number = activity_type_map.get(activity_type)
 
-        # Prepare URL
+        # Prepare the URL for creating a ticket
         url = f"{self.connection.api_url}ticket/create?activityType={activity_type_number}"
 
         # Prepare headers
