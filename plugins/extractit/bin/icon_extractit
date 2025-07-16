@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "ExtractIt"
 Vendor = "rapid7"
-Version = "3.0.12"
+Version = "3.0.13"
 Description = "The ExtractIt plugin is a collection of data extraction actions. This plugin allows users to extract various pieces of information from blocks of text. The pieces of information this plugin can extract include IPs, URLs, file paths, dates, domains, hashes, MAC addresses, and email addresses"
 
 
