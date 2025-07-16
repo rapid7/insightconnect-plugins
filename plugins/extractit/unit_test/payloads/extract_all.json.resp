@@ -18,11 +18,8 @@
           "vbfmhgsdfhsgfmwww.mem.pl",
           "user.com",
           "usere.com",
-          "test.pl",
-          "google.comgdgfjhmjhdfgb",
-          "fgywegkwehfgb.skbfgkgvc"
+          "test.pl"
         ],
-        "filenames": ["sample.dll"],
         "email_addresses": [
           "dvfngfdsfgghgtest@user.com"
         ],
@@ -86,11 +83,8 @@
           "vbfmhgsdfhsgfmwww.mem.pl",
           "user.com",
           "usere.com",
-          "test.pl",
-          "google.comgdgfjhmjhdfgb",
-          "fgywegkwehfgb.skbfgkgvc"
+          "test.pl"
         ],
-        "filenames": [],
         "email_addresses": [
           "dvfngfdsfgghgtest@user.com"
         ],
@@ -153,11 +147,8 @@
           "vbfmhgsdfhsgfmwww.mem.pl",
           "user.com",
           "usere.com",
-          "test.pl",
-          "google.comgdgfjhmjhdfgb",
-          "fgywegkwehfgb.skbfgkgvc"
+          "test.pl"
         ],
-        "filenames": [],
         "email_addresses": [
           "dvfngfdsfgghgtest@user.com"
         ],
@@ -220,11 +211,8 @@
           "vbfmhgsdfhsgfmwww.mem.pl",
           "user.com",
           "usere.com",
-          "test.pl",
-          "google.comgdgfjhmjhdfgb",
-          "fgywegkwehfgb.skbfgkgvc"
+          "test.pl"
         ],
-        "filenames": [],
         "email_addresses": [
           "dvfngfdsfgghgtest@user.com"
         ],
@@ -278,7 +266,6 @@
         "cves": [],
         "dates": [],
         "domains": [],
-        "filenames": [],
         "email_addresses": [],
         "filepaths": [],
         "hashes": {
@@ -305,7 +292,6 @@
         "cves": [],
         "dates": [],
         "domains": [],
-        "filenames": [],
         "email_addresses": [],
         "filepaths": [],
         "hashes": {
@@ -332,7 +318,6 @@
         "cves": [],
         "dates": [],
         "domains": [],
-        "filenames": [],
         "email_addresses": [],
         "filepaths": [],
         "hashes": {
@@ -386,7 +371,6 @@
           "www.example-domain.com",
           "example1.com"
         ],
-        "filenames": [],
         "email_addresses": [
           "user@example.com",
           "user1@example.com",
@@ -500,7 +484,6 @@
           "www.example-domain.com",
           "example1.com"
         ],
-        "filenames": [],
         "email_addresses": [
           "user@example.com",
           "user1@example.com",
@@ -617,7 +600,6 @@
           "www.example-domain.com",
           "example1.com"
         ],
-        "filenames": [],
         "email_addresses": [
           "user@example.com",
           "user1@example.com",
@@ -731,7 +713,6 @@
           "www.example-domain.com",
           "example1.com"
         ],
-        "filenames": [],
         "email_addresses": [
           "user@example.com",
           "user1@example.com",
@@ -744,7 +725,6 @@
         "filepaths": [
           "/6.4.7.2$Linux_X86_64",
           "/40$Build-2",
-          "/\u003e",
           "/tmp/script"
         ],
         "hashes": {
@@ -849,7 +829,6 @@
           "www.example-domain.com",
           "example1.com"
         ],
-        "filenames": [],
         "email_addresses": [
           "user@example.com",
           "user1@example.com",
@@ -860,7 +839,6 @@
           "example_user-1.test@example.example.example.example.com"
         ],
         "filepaths": [
-          "/\u003e",
           "/tmp/script",
           "/6.4.7.2$Linux_X86_64",
           "/40$Build-2"
@@ -948,7 +926,6 @@
           "example.domain.org",
           "smtpfilter.crystalcomputer.com"
         ],
-        "filenames": ["test.html", "image.png"],
         "email_addresses": [],
         "filepaths": [],
         "hashes": {

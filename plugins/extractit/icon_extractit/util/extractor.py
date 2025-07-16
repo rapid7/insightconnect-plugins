@@ -150,7 +150,9 @@ def extract_filepath(provided_regex: str, provided_string: str, provided_file: s
         matches = regex.findall(provided_regex, new_string)
     elif provided_file:
         try:
-            new_file = base64.b64decode(provided_file.encode(DEFAULT_ENCODING)).decode(DEFAULT_ENCODING)
+            decoded = base64.b64decode(provided_file.encode(DEFAULT_ENCODING)).decode(DEFAULT_ENCODING)
+            # This will prevent \n to be taken as literal
+            new_file = decoded.encode("utf-8").decode("unicode_escape")
         except UnicodeDecodeError:
             new_file = extract_content_from_file(base64.b64decode(provided_file), provided_regex)
         new_file = regex.sub(Regex.URL, "", new_file)
