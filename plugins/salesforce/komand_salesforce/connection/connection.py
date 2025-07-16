@@ -54,6 +54,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.logger.info("Running a connection test to Salesforce")
         return_message = "The connection test to Salesforce was successful \n"
         error_message = ""
+
+        # Validate credentials across all task endpoints
         for endpoint, values in endpoint_mapping.items():
             try:
                 self.logger.info(f"Running test for {endpoint}")

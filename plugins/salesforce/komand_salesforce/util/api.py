@@ -1,4 +1,5 @@
 import time
+import validators
 from functools import wraps
 from json.decoder import JSONDecodeError
 from json import loads
@@ -187,7 +188,13 @@ class SalesforceAPI:
         if self.token and self.instance_url:
             return self.token, self.instance_url
 
+        # Set the default Salesforce URL if no OAuth URL is provided or strip and replace the protocol if it is provided in oauth_url
         salesforce_url = "login.salesforce.com" if not oauth_url else oauth_url.strip("/").replace("https://", "")
+
+        # Validate the OAuth URL to ensure it is a pure domain without paths or query parameters
+        self.validate_oauth_url(salesforce_url)
+
+        # Construct the client URL for the OAuth token request
         client_url = f"https://{salesforce_url}/services/oauth2/token"
 
         self.logger.info(f"SalesforceAPI: Getting API token from {client_url}... ")
@@ -237,7 +244,7 @@ class SalesforceAPI:
                 else:
                     self.logger.error(f"SalesforceAPI: Max retry attempts reached ({self.retry_count}). Exiting...")
                     self.logger.error(
-                        f"SalesforceAPI: Unknown error occured after 2 retry attempts: {decoded_response}"
+                        f"SalesforceAPI: Unknown error occurred after 2 retry attempts: {decoded_response}"
                     )
                     preset_error = "" if cause_error else PluginException.Preset.UNKNOWN
 
@@ -274,7 +281,7 @@ class SalesforceAPI:
 
     @rate_limiting(10)
     @refresh_token(1)
-    def _make_request(self, method: str, url: str, params: dict = {}, json: dict = {}):  # noqa: C901
+    def _make_request(self, method: str, url: str, params: dict = {}, json: dict = {}):  # noqa: C901, MC0001
         access_token, instance_url = self._get_token(
             self._client_id, self._client_secret, self._username, self._password, self._security_token, self._oauth_url
         )
@@ -392,6 +399,37 @@ class SalesforceAPI:
                 )
 
         except JSONDecodeError:
-            pass
+            # Handle case where API response returns pure HTML with "URL No Longer Exists"
+            if "URL No Longer Exists".lower() in response.lower():
+                return (
+                    "Salesforce error: 'URL No Longer Exists'",
+                    PluginException.assistances[PluginException.Preset.NOT_FOUND],
+                    400,
+                )
 
         return "", "", 0
+
+    @staticmethod
+    def validate_oauth_url(oauth_url: str) -> None:
+        """
+        Validate that the OAuth URL is a pure domain without paths or query parameters.
+
+        :param oauth_url: The OAuth URL to validate
+        :type oauth_url: str
+        """
+
+        # If no OAuth URL is provided, we assume the default Salesforce URL
+        if not oauth_url:
+            return
+
+        # Strip any trailing slashes and replace the protocol if it is provided in oauth_url
+        oauth_url = oauth_url.strip("/").replace("https://", "")
+
+        # Check if provided input is domain
+        if not validators.domain(oauth_url):
+            raise ApiException(
+                cause="Invalid Login URL format. URL should be a pure domain without paths or parameters.",
+                assistance="Please provide only the domain (e.g., 'https://login.salesforce.com' or 'login.salesforce.com') without paths, or query parameters.",
+                data=f"Invalid login URL: {oauth_url}",
+                status_code=400,
+            )

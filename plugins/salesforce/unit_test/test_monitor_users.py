@@ -220,7 +220,9 @@ class TestMonitorUsers(TestCase):
         self.action = Util.default_connector(MonitorUsers(), params=params)
         actual, _actual_state, _has_more_pages, status_code, error = self.action.run(state=current_state)
 
-        self.assertEqual(error.cause, "Network error or DNS resolution failed. Please check the domain entered")
+        self.assertEqual(
+            error.cause, "Invalid Login URL format. URL should be a pure domain without paths or parameters."
+        )
         self.assertEqual(status_code, 400)
 
         validate(actual, MonitorUsersOutput.schema)
