@@ -2,6 +2,7 @@ import insightconnect_plugin_runtime
 import requests
 from insightconnect_plugin_runtime.exceptions import HTTPStatusCodes, PluginException
 from insightconnect_plugin_runtime.helper import extract_json, response_handler
+from insightconnect_plugin_runtime.telemetry import monitor_task_delay
 from .schema import (
     MonitorLogsInput,
     MonitorLogsOutput,
@@ -57,7 +58,11 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             state=MonitorLogsState(),
         )
 
-    def run(self, params={}, state={}, custom_config={}):
+    @monitor_task_delay(
+        timestamp_keys=[ACTIVITIES_LAST_LOG_TIMESTAMP, EVENTS_LAST_LOG_TIMESTAMP, THREATS_LAST_LOG_TIMESTAMP],
+        default_delay_threshold="2d",
+    )
+    def run(self, params={}, state={}, custom_config={}):  # pylint: disable=unused-argument
         """
         Query activities, device control events, and threats logs between a supplied timeframe and the current time.
         Return all found logs and set last task run time, pagination cursors, and last log timestamps for each log type.
