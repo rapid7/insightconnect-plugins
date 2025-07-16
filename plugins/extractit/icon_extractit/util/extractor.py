@@ -23,36 +23,6 @@ from icon_extractit.util.util import DateFormatStrings, Regex
 
 DEFAULT_ENCODING = "utf-8"
 DEFAULT_PDF_WRAPPING_TOLERANCE = 5.0
-FILENAME_EXTENSIONS = (
-    ".dll",
-    ".exe",
-    ".txt",
-    ".log",
-    ".csv",
-    ".json",
-    ".xml",
-    ".html",
-    ".htm",
-    ".py",
-    ".java",
-    ".cpp",
-    ".c",
-    ".sh",
-    ".bat",
-    ".md",
-    ".pdf",
-    ".docx",
-    ".xlsx",
-    ".pptx",
-    ".jpg",
-    ".png",
-    ".gif",
-    ".bmp",
-    ".zip",
-    ".tar",
-    ".gz",
-    ".rar",
-)
 
 
 def _get_cell_number_format(cell_number_format: str) -> str:
@@ -189,7 +159,7 @@ def extract_filepath(provided_regex: str, provided_string: str, provided_file: s
     return list(dict.fromkeys(matches))
 
 
-def extract_content_from_file(provided_file: bytes, provided_regex: str = "") -> str:  # noqa: C901
+def extract_content_from_file(provided_file: bytes, provided_regex: str = "") -> str:  # noqa: C901, MC0001
     with io.BytesIO(provided_file) as file_:
         try:
             # extracting content from DOCX, PPTX, XLSX, ODT, ODP, ODF files
@@ -302,31 +272,13 @@ def clear_domains(matches: list) -> list:
         # Here we remove the port number, if present, which could prevent a legitimate domain name match.
         # Ex. ssh.example.com:22 becomes ssh.example.com
         split_match = split_match.split(":")[0]
-        # Check if the match ends with a common file extension
-        if not split_match.endswith(FILENAME_EXTENSIONS):
+        # Check if the match ends with a common file extension. If there is an invalid suffix it will be ''
+        if tldextract.extract(split_match).suffix:
             # Here we eliminate all domains that end with = or @. This avoids extracting two domains from an email address,
             # e.g. user.test@example.com, or extracting field names from an EML file as domains, e.g. two domains would be
             # extracted from "header.from=example.com"
             if not split_match.endswith("@") and not split_match.endswith("="):
                 new_matches.append(split_match.lower())
-    return list(dict.fromkeys(new_matches))
-
-
-def clear_filenames(matches: list) -> list:
-    # The method is designed to extract filenames from the input list. It identifies strings ending with common file
-    # extensions and ensures that only valid filenames are returned.
-    new_matches = []
-    for match in enumerate(matches):
-        # Here we remove the path, this solution allows to prevent the situation where the filenames from the URL will
-        # be extracted incorrectly, e.g. www.example.com/test.html
-        split_match = match[1].split("/")[0]
-        # Here we remove the port number, if present, which could prevent a legitimate filename match.
-        # Ex. file.dll:22 becomes file.dll
-        split_match = split_match.split(":")[0]
-        # Check if the match ends with a common file extension
-        if split_match.endswith(FILENAME_EXTENSIONS):
-            # Here we ensure that the extracted filename is valid and not filtered out unnecessarily.
-            new_matches.append(split_match.lower())
     return list(dict.fromkeys(new_matches))
 
 

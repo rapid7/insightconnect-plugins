@@ -23,7 +23,7 @@ The ExtractIt plugin is a collection of data extraction actions. This plugin all
 
 # Supported Product Versions
 
-* 2024-10-02
+* 2025-07-16
 
 # Documentation
 
@@ -673,7 +673,7 @@ Example output:
 
 # Version History
 
-* 3.0.13 - Resolved issues where domains were incorrectly identified as filenames | Upgraded SDK to version 6.3.8
+* 3.0.13 - Improved range of possible 'filepaths' | Resolved issue where filenames were being populated under 'domain' | Updated SDK to latest version (6.3.8)
 * 3.0.12 - Updated SDK to the latest version (6.3.3)
 * 3.0.11 - Updated tldextract to v5.1.3
 * 3.0.10 - Updated SDK to the latest version (6.2.5)

@@ -11,7 +11,6 @@ from icon_extractit.util.extractor import (
     extract_filepath,
     clear_urls,
     clear_domains,
-    clear_filenames,
     define_date_time_regex,
     extract_all_date_formats,
     parse_time_all_date_formats,
@@ -59,7 +58,6 @@ class ExtractAll(insightconnect_plugin_runtime.Action):
             "urls": clear_urls(extract(Regex.URL, string, file)),
             "uuids": extract(Regex.UUID, string, file),
             "domains": clear_domains(extract(Regex.Domain, string, file)),
-            "filenames": clear_filenames(extract(Regex.Filename, string, file)),
         }
 
         return {Output.INDICATORS: indicators}
