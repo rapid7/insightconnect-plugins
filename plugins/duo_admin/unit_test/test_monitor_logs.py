@@ -112,7 +112,7 @@ class TestMonitorLogs(TestCase):
         future_time_state = {"rate_limit_datetime": time() + 600}
         passed_time_state = {"rate_limit_datetime": time() - 600}
 
-        actual, new_state, has_more_pages, status_code, _ = self.task.run(params={"collectTrustMonitorEvents": True}, state=future_time_state, custom_config={})
+        actual, new_state, has_more_pages, status_code, _ = self.task.run(state=future_time_state, custom_config={})
 
         self.assertEqual(actual, [])
         self.assertEqual(future_time_state, new_state)
