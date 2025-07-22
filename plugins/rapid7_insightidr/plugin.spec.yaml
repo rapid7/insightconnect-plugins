@@ -4,9 +4,9 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 12.0.0
+version: 12.0.1
 connection_version: 5
-supported_versions: ["Latest release successfully tested on 2025-06-11."]
+supported_versions: ["Latest release successfully tested on 2025-07-22."]
 vendor: rapid7
 cloud_ready: true
 resources:
@@ -32,9 +32,10 @@ key_features:
   - "Incident Response and Investigations"
 sdk:
   type: full
-  version: 6.3.6
+  version: 6.3.8
   user: nobody
 version_history:
+  - "12.0.1 - Updated SDK to latest version (6.3.8) | Resolved Snyk Vulnerability"
   - "12.0.0 - Additional `disposition` values added for `Create Investigation`, `Update Investigation` and `Set Disposition of Investigation`"
   - "11.0.8 - Remove use of session from the connection object to prevent session timeouts."
   - "11.0.7 - Adding request id to the plugin for traceability"

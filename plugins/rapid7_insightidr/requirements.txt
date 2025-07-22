@@ -3,5 +3,5 @@
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 python-dateutil==2.9.0
 validators==0.34.0
-aiohttp==3.11.10
+aiohttp==3.12.14
 parameterized==0.8.1
