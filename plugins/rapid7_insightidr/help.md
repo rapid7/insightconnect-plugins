@@ -19,7 +19,7 @@ This plugin allows you to add indicators to a threat and see the status of inves
 
 # Supported Product Versions
 
-* Latest release successfully tested on 2025-06-11.
+* Latest release successfully tested on 2025-07-22.
 
 # Documentation
 
@@ -3428,6 +3428,7 @@ Example output:
 
 # Version History
 
+* 12.0.1 - Updated SDK to latest version (6.3.8) | Resolved Snyk Vulnerability
 * 12.0.0 - Additional `disposition` values added for `Create Investigation`, `Update Investigation` and `Set Disposition of Investigation`
 * 11.0.8 - Remove use of session from the connection object to prevent session timeouts.
 * 11.0.7 - Adding request id to the plugin for traceability
