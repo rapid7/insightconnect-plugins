@@ -21,3 +21,12 @@ def convert_fields_to_string(provided_logs: list) -> list:
                     access_device[field] = str(obtained_field)
             log["accessDevice"] = access_device
     return provided_logs
+
+def convert_string_to_bool(string: str):
+    if isinstance(string, str):
+        string = string.strip().lower()
+        if string == 'true':
+            return True
+        elif string == 'false':
+            return False
+    return string

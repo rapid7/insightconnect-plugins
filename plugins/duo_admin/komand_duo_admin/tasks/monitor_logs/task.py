@@ -11,6 +11,7 @@ from insightconnect_plugin_runtime.telemetry import monitor_task_delay
 from komand_duo_admin.util.constants import Assistance
 from komand_duo_admin.util.exceptions import ApiException
 from komand_duo_admin.util.util import Utils
+from komand_duo_admin.util.helpers import convert_string_to_bool
 
 from .schema import MonitorLogsInput, MonitorLogsOutput, MonitorLogsState, Component, Input
 
@@ -155,6 +156,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         default_delay_threshold="2d",
     )  # noqa: C901
     def run(self, params={}, state={}, custom_config={}):  # noqa: C901
+        print(params)
         rate_limit_delay = custom_config.get("rate_limit_delay", RATE_LIMIT_DELAY)
         if rate_limited := self.check_rate_limit(state):
             return [], state, False, 429, rate_limited
@@ -171,8 +173,8 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             trust_monitor_next_page_params = state.get(self.TRUST_MONITOR_NEXT_PAGE_PARAMS)
             auth_logs_next_page_params = state.get(self.AUTH_LOGS_NEXT_PAGE_PARAMS)
             admin_logs_next_page_params = state.get(self.ADMIN_LOGS_NEXT_PAGE_PARAMS)
-            collect_trust_monitor_events = params.get(Input.COLLECTTRUSTMONITOREVENTS, True)
-            collect_admin_logs = params.get(Input.COLLECTADMINLOGS, True)
+            collect_trust_monitor_events = convert_string_to_bool(params.get(Input.COLLECTTRUSTMONITOREVENTS, True))
+            collect_admin_logs = convert_string_to_bool(params.get(Input.COLLECTADMINLOGS, True))
 
             new_logs = []
 
@@ -329,17 +331,19 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             logs, next_params = get_logs_func(mintime, maxtime, next_page_params)
             new_logs_list, new_hashes = compare_hashes_func(previous_hashes, logs)
             new_logs.extend(new_logs_list)
-            state[state_last_log_key] = get_highest_timestamp_func(
-                last_log_timestamp, new_logs_list, backward_comp_first_run, log_type
-            )
             self.logger.info(f"{len(new_logs_list)} {log_label} retrieved")
             if new_hashes:
                 state[state_hashes_key] = new_hashes
             if next_params:
+                state[state_last_log_key] = get_highest_timestamp_func(
+                    last_log_timestamp, new_logs_list, backward_comp_first_run, log_type
+                )
                 state[state_next_page_key] = next_params
                 has_more_pages = True
             elif state.get(state_next_page_key):
                 state.pop(state_next_page_key)
+            if not next_params:
+                state[state_last_log_key] = maxtime
         return new_logs, state, has_more_pages
 
     def _handle_api_exception(self, error, state, rate_limit_delay):
