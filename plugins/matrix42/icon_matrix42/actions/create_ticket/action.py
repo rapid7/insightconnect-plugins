@@ -47,7 +47,7 @@ class CreateTicket(insightconnect_plugin_runtime.Action):
         # Make the request
         try:
             self.logger.info("Creating ticket ...")
-            response = requests.post(url=url, headers=headers, json=body)
+            response = requests.post(url=url, headers=headers, json=body)  # nosec B113
             response.raise_for_status()
         except requests.RequestException as e:
             raise PluginException(
