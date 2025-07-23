@@ -121,8 +121,8 @@
     "previous_trust_monitor_event_hashes": [
       "985ddf6ee4da694f22141bd45e20e09a4b8c87d0"
     ],
-    "trust_monitor_last_log_timestamp": 1682929966000,
-    "admin_logs_last_log_timestamp": 1682929966,
+    "trust_monitor_last_log_timestamp": 1682930026000,
+    "admin_logs_last_log_timestamp": 1682930026,
     "auth_logs_last_log_timestamp": 1685358458
   },
   "status_code": 200

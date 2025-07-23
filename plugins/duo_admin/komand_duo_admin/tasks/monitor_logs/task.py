@@ -333,16 +333,16 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             self.logger.info(f"{len(new_logs_list)} {log_label} retrieved")
             if new_hashes:
                 state[state_hashes_key] = new_hashes
-            if next_params:
                 state[state_last_log_key] = get_highest_timestamp_func(
                     last_log_timestamp, new_logs_list, backward_comp_first_run, log_type
                 )
+            else:
+                state[state_last_log_key] = maxtime
+            if next_params:
                 state[state_next_page_key] = next_params
                 has_more_pages = True
             elif state.get(state_next_page_key):
                 state.pop(state_next_page_key)
-            if not next_params:
-                state[state_last_log_key] = maxtime
         return new_logs, state, has_more_pages
 
     def _handle_api_exception(self, error, state, rate_limit_delay):
