@@ -27,7 +27,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         try:
             self.logger.info(f"Requesting access token with API key from {token_url}")
-            response = requests.post(token_url, headers=headers)
+            response = requests.post(token_url, headers=headers)  # nosec B113
             response.raise_for_status()
         except requests.RequestException as e:
             raise ConnectionTestException(

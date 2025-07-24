@@ -7,9 +7,9 @@ from unittest import TestCase
 from unittest.mock import patch
 from icon_matrix42.actions.create_ticket import CreateTicket
 from icon_matrix42.actions.create_ticket.schema import Input
-from util import Util
-from parameterized import parameterized
+from unit_test.util import Util
 from insightconnect_plugin_runtime.exceptions import PluginException
+from parameterized import parameterized
 
 
 @patch("requests.post", side_effect=Util.mocked_requests)
