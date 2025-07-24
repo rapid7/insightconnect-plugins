@@ -1,7 +1,7 @@
 {
-	"spec": "020c4c8d73e953c3c846cfdf332b1bd2",
-	"manifest": "ac713b96089215717986aaee8e3f12ca",
-	"setup": "4db5f0771846b34e31217b01b9507735",
+	"spec": "e0b01e172ebb2692632a0c0980b03963",
+	"manifest": "141dcc1df9e87afba2e2a6948703314e",
+	"setup": "429dbd251c0928a45500379989e204c3",
 	"schemas": [
 		{
 			"identifier": "add_indicators_to_a_threat/schema.py",
