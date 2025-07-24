@@ -7,7 +7,7 @@ from unittest import TestCase
 from unittest.mock import patch
 from icon_matrix42.actions.create_ticket import CreateTicket
 from icon_matrix42.actions.create_ticket.schema import Input
-from unit_test.util import Util
+from util import Util
 from insightconnect_plugin_runtime.exceptions import PluginException
 from parameterized import parameterized
 
