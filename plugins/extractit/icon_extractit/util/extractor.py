@@ -150,7 +150,9 @@ def extract_filepath(provided_regex: str, provided_string: str, provided_file: s
         matches = regex.findall(provided_regex, new_string)
     elif provided_file:
         try:
-            new_file = base64.b64decode(provided_file.encode(DEFAULT_ENCODING)).decode(DEFAULT_ENCODING)
+            decoded = base64.b64decode(provided_file.encode(DEFAULT_ENCODING)).decode(DEFAULT_ENCODING)
+            # This will prevent \n to be taken as literal
+            new_file = decoded.encode("utf-8").decode("unicode_escape")
         except UnicodeDecodeError:
             new_file = extract_content_from_file(base64.b64decode(provided_file), provided_regex)
         new_file = regex.sub(Regex.URL, "", new_file)
@@ -159,7 +161,7 @@ def extract_filepath(provided_regex: str, provided_string: str, provided_file: s
     return list(dict.fromkeys(matches))
 
 
-def extract_content_from_file(provided_file: bytes, provided_regex: str = "") -> str:  # noqa: C901
+def extract_content_from_file(provided_file: bytes, provided_regex: str = "") -> str:  # noqa: C901, MC0001
     with io.BytesIO(provided_file) as file_:
         try:
             # extracting content from DOCX, PPTX, XLSX, ODT, ODP, ODF files
@@ -272,11 +274,13 @@ def clear_domains(matches: list) -> list:
         # Here we remove the port number, if present, which could prevent a legitimate domain name match.
         # Ex. ssh.example.com:22 becomes ssh.example.com
         split_match = split_match.split(":")[0]
-        # Here we eliminate all domains that end with = or @. This avoids extracting two domains from an email address,
-        # e.g. user.test@example.com, or extracting field names from an EML file as domains, e.g. two domains would be
-        # extracted from "header.from=example.com"
-        if not split_match.endswith("@") and not split_match.endswith("="):
-            new_matches.append(split_match.lower())
+        # Check if the match ends with a common file extension. If there is an invalid suffix it will be ''
+        if tldextract.extract(split_match).suffix:
+            # Here we eliminate all domains that end with = or @. This avoids extracting two domains from an email address,
+            # e.g. user.test@example.com, or extracting field names from an EML file as domains, e.g. two domains would be
+            # extracted from "header.from=example.com"
+            if not split_match.endswith("@") and not split_match.endswith("="):
+                new_matches.append(split_match.lower())
     return list(dict.fromkeys(new_matches))
 
 
