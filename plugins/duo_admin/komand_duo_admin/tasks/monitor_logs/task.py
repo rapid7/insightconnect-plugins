@@ -500,16 +500,12 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             if format_ == "milliseconds":
                 # Convert to milliseconds if the timestamp is in seconds
                 if epoch_timestamp < 1e10:
-                    self.logger.log(
-                        self.log_level, f"Converting epoch timestamp {epoch_timestamp} from seconds to milliseconds."
-                    )
+                    self.logger.info(f"Converting epoch timestamp {epoch_timestamp} from seconds to milliseconds.")
                     return epoch_timestamp * 1000
             elif format_ == "seconds":
                 # Convert to milliseconds if the timestamp is in seconds
                 if epoch_timestamp >= 1e10:
-                    self.logger.log(
-                        self.log_level, f"Converting epoch timestamp {epoch_timestamp} from milliseconds to seconds."
-                    )
+                    self.logger.info(f"Converting epoch timestamp {epoch_timestamp} from milliseconds to seconds.")
                     return epoch_timestamp // 1000
 
         # If the format is not recognized, just return the epoch timestamp as is
