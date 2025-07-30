@@ -372,6 +372,28 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
     def convert_to_seconds(date_time) -> int:
         return int(date_time.timestamp())
 
+    def convert_epoch_to_datetime(self, epoch_timestamp: int) -> datetime:
+        """
+        Convert an epoch timestamp to a datetime object.
+
+        :param epoch_timestamp: The epoch timestamp to convert (in milliseconds or seconds).
+        :return: A datetime object representing the epoch timestamp.
+        """
+
+        # Ensure the epoch timestamp is an integer. If not, attempt to convert it.
+        if not isinstance(epoch_timestamp, int):
+            self.logger.debug(
+                f"The epoch timestamp is not an integer: {epoch_timestamp} - type ({type(epoch_timestamp)}). Attempting to convert it to an integer."
+            )
+            epoch_timestamp = int(epoch_timestamp)
+
+        try:
+            # Try to convert the epoch timestamp assuming it's in seconds
+            return datetime.utcfromtimestamp(epoch_timestamp).replace(tzinfo=timezone.utc)
+        except ValueError:
+            # If it fails, assume it's in milliseconds and convert accordingly
+            return datetime.utcfromtimestamp(epoch_timestamp / 1000).replace(tzinfo=timezone.utc)
+
     @staticmethod
     def add_log_type_field(logs: list, value: str) -> list:
         for log in logs:
@@ -521,10 +543,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             utc_filter_value = api_cutoff_date
         # Check if last_log_timestamp is within 7 days and if it is then use that as the lookback value
         if last_log_timestamp:
-            if log_type == TRUST_MONITOR_EVENTS_LOG_TYPE:
-                last_log_datetime = datetime.utcfromtimestamp(last_log_timestamp / 1000).replace(tzinfo=timezone.utc)
-            else:
-                last_log_datetime = datetime.utcfromtimestamp(last_log_timestamp).replace(tzinfo=timezone.utc)
+            last_log_datetime = self.convert_epoch_to_datetime(last_log_timestamp)
             utc_filter_value = max(utc_filter_value, last_log_datetime)
         self.logger.info(f"Task execution for {log_type} will be applying a lookback to {utc_filter_value} UTC...")
         return utc_filter_value
