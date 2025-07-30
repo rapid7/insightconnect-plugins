@@ -85,25 +85,24 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 self.logger.info("Backward compatibility - adjust times from last collection timestamp")
                 if log_type != "Admin logs":
                     # Timestamps in milliseconds, original timestamp method held timestamp in milliseconds
-                    mintime = max(last_log_timestamp, cutoff_time_millisecs)
+                    last_log_timestamp_millisecs = self.normalize_timestamp(last_log_timestamp, "milliseconds")
+                    mintime = max(last_log_timestamp_millisecs, cutoff_time_millisecs)
                     maxtime = self.convert_to_milliseconds(last_two_minutes)
                 else:
                     # Use seconds for admin log endpoint
-                    last_log_timestamp_secs = int(last_log_timestamp / 1000)
+                    last_log_timestamp_secs = self.normalize_timestamp(last_log_timestamp, "seconds")
                     mintime = max(last_log_timestamp_secs, cutoff_time_secs)
                     maxtime = self.convert_to_seconds(last_two_minutes)
             else:
                 if log_type == ADMIN_LOGS_LOG_TYPE:
                     # Use seconds for admin log endpoint
-                    mintime = max(last_log_timestamp, cutoff_time_secs)
+                    last_log_timestamp_secs = self.normalize_timestamp(last_log_timestamp, "seconds")
+                    mintime = max(last_log_timestamp_secs, cutoff_time_secs)
                     maxtime = self.convert_to_seconds(last_two_minutes)
                 else:
-                    if log_type == AUTH_LOGS_LOG_TYPE:
-                        # New method holds log time stamps in seconds so convert to milliseconds for auth logs
-                        last_log_timestamp_millisecs = int(last_log_timestamp * 1000)
-                    else:
-                        # Trust monitor events hold timestamps in milliseconds(surface_timestamp is recorded)
-                        last_log_timestamp_millisecs = last_log_timestamp
+                    # New method holds log time stamps in seconds so convert to milliseconds for auth logs
+                    # Trust monitor events hold timestamps in milliseconds(surface_timestamp is recorded)
+                    last_log_timestamp_millisecs = self.normalize_timestamp(last_log_timestamp, "milliseconds")
                     mintime = max(last_log_timestamp_millisecs, cutoff_time_millisecs)
                     maxtime = self.convert_to_milliseconds(last_two_minutes)
 
@@ -364,6 +363,34 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
     @staticmethod
     def convert_to_seconds(date_time) -> int:
         return int(date_time.timestamp())
+
+    def normalize_timestamp(self, epoch_timestamp: int, format_: str = "milliseconds") -> int:
+        """
+        Normalize an epoch timestamp to either milliseconds or seconds.
+
+        :param epoch_timestamp: The epoch timestamp to normalize (in milliseconds or seconds).
+        :param format_: The format to convert to, either "milliseconds" or "seconds".
+
+        :return: An integer representing the normalized epoch timestamp.
+        """
+
+        if format_ == "milliseconds":
+            # Convert to milliseconds if the timestamp is in seconds
+            if epoch_timestamp < 1e10:
+                self.logger.log(
+                    self.log_level, f"Converting epoch timestamp {epoch_timestamp} from seconds to milliseconds."
+                )
+                return epoch_timestamp * 1000
+        elif format_ == "seconds":
+            # Convert to milliseconds if the timestamp is in seconds
+            if epoch_timestamp >= 1e10:
+                self.logger.log(
+                    self.log_level, f"Converting epoch timestamp {epoch_timestamp} from milliseconds to seconds."
+                )
+                return epoch_timestamp // 1000
+
+        # If the format is not recognized, just return the epoch timestamp as is
+        return epoch_timestamp
 
     def convert_epoch_to_datetime(self, epoch_timestamp: int) -> datetime:
         """
