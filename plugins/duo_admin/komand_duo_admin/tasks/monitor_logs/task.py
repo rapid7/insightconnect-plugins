@@ -5,7 +5,6 @@ from typing import Any, Dict, Tuple, Union
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import hash_sha1
-from insightconnect_plugin_runtime.telemetry import monitor_task_delay
 
 # Custom imports below
 from komand_duo_admin.util.constants import Assistance
@@ -46,6 +45,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             output=MonitorLogsOutput(),
             state=MonitorLogsState(),
         )
+        self.log_level = "info"
 
     def get_parameters_for_query(
         self, log_type, now, last_log_timestamp, next_page_params, backward_comp_first_run, custom_config
@@ -147,15 +147,8 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         return status_code, error
 
     # pylint: disable=too-many-branches,too-many-statements
-    @monitor_task_delay(
-        timestamp_keys=[
-            "admin_logs_last_log_timestamp",
-            "auth_logs_last_log_timestamp",
-            "trust_monitor_last_log_timestamp",
-        ],
-        default_delay_threshold="2d",
-    )  # noqa: C901
     def run(self, params={}, state={}, custom_config={}):  # noqa: C901
+        self.log_level = Utils.get_log_level(custom_config.get("log_level", "info"))
         rate_limit_delay = custom_config.get("rate_limit_delay", RATE_LIMIT_DELAY)
         if rate_limited := self.check_rate_limit(state):
             return [], state, False, 429, rate_limited
@@ -354,7 +347,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         return [], state, False, status_code, error
 
     def _handle_general_exception(self, error, state, has_more_pages):
-        self.logger.info(f"An Exception has been raised. Error: {error}")
+        self.logger.info(f"An Exception has been raised. Error: {error}", exc_info=True)
         state[self.PREVIOUS_TRUST_MONITOR_EVENT_HASHES] = []
         state[self.PREVIOUS_ADMIN_LOG_HASHES] = []
         state[self.PREVIOUS_AUTH_LOG_HASHES] = []
@@ -382,16 +375,18 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
 
         # Ensure the epoch timestamp is an integer. If not, attempt to convert it.
         if not isinstance(epoch_timestamp, int):
-            self.logger.debug(
-                f"The epoch timestamp is not an integer: {epoch_timestamp} - type ({type(epoch_timestamp)}). Attempting to convert it to an integer."
+            self.logger.log(
+                self.log_level,
+                f"The epoch timestamp is not an integer: {epoch_timestamp} - type ({type(epoch_timestamp)}). Attempting to convert it to an integer.",
             )
             epoch_timestamp = int(epoch_timestamp)
 
         try:
             # Try to convert the epoch timestamp assuming it's in seconds
             return datetime.utcfromtimestamp(epoch_timestamp).replace(tzinfo=timezone.utc)
-        except ValueError:
+        except ValueError as error:
             # If it fails, assume it's in milliseconds and convert accordingly
+            self.logger.log(self.log_level, f"Failed to convert epoch timestamp to datetime: {error}", exc_info=True)
             return datetime.utcfromtimestamp(epoch_timestamp / 1000).replace(tzinfo=timezone.utc)
 
     @staticmethod
