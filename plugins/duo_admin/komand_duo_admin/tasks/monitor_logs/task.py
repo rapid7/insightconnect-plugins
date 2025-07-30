@@ -5,13 +5,11 @@ from typing import Any, Dict, Tuple, Union
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import hash_sha1
-from insightconnect_plugin_runtime.telemetry import monitor_task_delay
 
 # Custom imports below
 from komand_duo_admin.util.constants import Assistance
 from komand_duo_admin.util.exceptions import ApiException
 from komand_duo_admin.util.util import Utils
-from komand_duo_admin.util.helpers import convert_string_to_bool
 
 from .schema import MonitorLogsInput, MonitorLogsOutput, MonitorLogsState, Component, Input
 
@@ -146,219 +144,171 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             return 200, None
         return status_code, error
 
-    # pylint: disable=too-many-branches,too-many-statements
-    @monitor_task_delay(
-        timestamp_keys=[
-            "admin_logs_last_log_timestamp",
-            "auth_logs_last_log_timestamp",
-            "trust_monitor_last_log_timestamp",
-        ],
-        default_delay_threshold="2d",
-    )  # noqa: C901
     def run(self, params={}, state={}, custom_config={}):  # noqa: C901
         rate_limit_delay = custom_config.get("rate_limit_delay", RATE_LIMIT_DELAY)
         if rate_limited := self.check_rate_limit(state):
             return [], state, False, 429, rate_limited
         self.connection.admin_api.toggle_rate_limiting = False
         has_more_pages = False
+        backward_comp_first_run = False
         try:
             now = self.get_current_time()
-            (
-                trust_monitor_last_log_timestamp,
-                auth_logs_last_log_timestamp,
-                admin_logs_last_log_timestamp,
-                backward_comp_first_run,
-            ) = self._handle_backward_compatibility(state)
+            last_collection_timestamp = state.get(self.LAST_COLLECTION_TIMESTAMP)
             trust_monitor_next_page_params = state.get(self.TRUST_MONITOR_NEXT_PAGE_PARAMS)
             auth_logs_next_page_params = state.get(self.AUTH_LOGS_NEXT_PAGE_PARAMS)
             admin_logs_next_page_params = state.get(self.ADMIN_LOGS_NEXT_PAGE_PARAMS)
-            collect_trust_monitor_events = convert_string_to_bool(params.get(Input.COLLECTTRUSTMONITOREVENTS, True))
-            collect_admin_logs = convert_string_to_bool(params.get(Input.COLLECTADMINLOGS, True))
+            collect_trust_monitor_events = params.get(Input.COLLECTTRUSTMONITOREVENTS, True)
+            collect_admin_logs = params.get(Input.COLLECTADMINLOGS, True)
 
-            new_logs = []
-
-            # Trust monitor events
-            if collect_trust_monitor_events:
-                (
-                    new_logs,
-                    state,
-                    has_more_pages,
-                ) = self._collect_log_type(
-                    log_type=TRUST_MONITOR_EVENTS_LOG_TYPE,
-                    now=now,
-                    last_log_timestamp=trust_monitor_last_log_timestamp,
-                    next_page_params=trust_monitor_next_page_params,
-                    backward_comp_first_run=backward_comp_first_run,
-                    custom_config=custom_config,
-                    previous_hashes=state.get(self.PREVIOUS_TRUST_MONITOR_EVENT_HASHES, []),
-                    state=state,
-                    state_last_log_key=self.TRUST_MONITOR_LAST_LOG_TIMESTAMP,
-                    state_hashes_key=self.PREVIOUS_TRUST_MONITOR_EVENT_HASHES,
-                    state_next_page_key=self.TRUST_MONITOR_NEXT_PAGE_PARAMS,
-                    new_logs=new_logs,
-                    has_more_pages=has_more_pages,
-                    get_logs_func=self.get_trust_monitor_event,
-                    compare_hashes_func=self.compare_hashes,
-                    get_highest_timestamp_func=self.get_highest_timestamp,
-                    log_label="trust monitor events",
-                )
-            else:
+            if last_collection_timestamp:
+                # Previously only one timestamp was held (the end of the collection window)
+                # This has been superceded by a latest timestamp per log type
                 self.logger.info(
-                    f"Collect trust monitor events set to {collect_trust_monitor_events}. Do not attempt to collect trust monitor events"
+                    f"Backwards compatibility - update all timestamps to the last known timestamp {last_collection_timestamp}"
                 )
-
-            # Admin logs
-            if collect_admin_logs:
-                (
-                    new_logs,
-                    state,
-                    has_more_pages,
-                ) = self._collect_log_type(
-                    log_type=ADMIN_LOGS_LOG_TYPE,
-                    now=now,
-                    last_log_timestamp=admin_logs_last_log_timestamp,
-                    next_page_params=admin_logs_next_page_params,
-                    backward_comp_first_run=backward_comp_first_run,
-                    custom_config=custom_config,
-                    previous_hashes=state.get(self.PREVIOUS_ADMIN_LOG_HASHES, []),
-                    state=state,
-                    state_last_log_key=self.ADMIN_LOGS_LAST_LOG_TIMESTAMP,
-                    state_hashes_key=self.PREVIOUS_ADMIN_LOG_HASHES,
-                    state_next_page_key=self.ADMIN_LOGS_NEXT_PAGE_PARAMS,
-                    new_logs=new_logs,
-                    has_more_pages=has_more_pages,
-                    get_logs_func=self.get_admin_logs,
-                    compare_hashes_func=self.compare_hashes,
-                    get_highest_timestamp_func=self.get_highest_timestamp,
-                    log_label="admin logs",
+                trust_monitor_last_log_timestamp = auth_logs_last_log_timestamp = admin_logs_last_log_timestamp = (
+                    last_collection_timestamp
                 )
+                # Update the old last collection timestamp to None so it is not considered in future runs
+                state[self.LAST_COLLECTION_TIMESTAMP] = None
+                backward_comp_first_run = True
             else:
+                trust_monitor_last_log_timestamp = state.get(self.TRUST_MONITOR_LAST_LOG_TIMESTAMP)
+                auth_logs_last_log_timestamp = state.get(self.AUTH_LOGS_LAST_LOG_TIMESTAMP)
+                admin_logs_last_log_timestamp = state.get(self.ADMIN_LOGS_LAST_LOG_TIMESTAMP)
                 self.logger.info(
-                    f"Collect admin logs set to {collect_admin_logs}. Do not attempt to collect admin logs"
+                    f"Previous timestamps retrieved. "
+                    f"Auth {auth_logs_last_log_timestamp}. "
+                    f"Admin: {admin_logs_last_log_timestamp}. "
+                    f"Trust monitor {trust_monitor_last_log_timestamp}."
+                )
+            try:
+                new_logs = []
+                previous_trust_monitor_event_hashes = state.get(self.PREVIOUS_TRUST_MONITOR_EVENT_HASHES, [])
+                previous_admin_log_hashes = state.get(self.PREVIOUS_ADMIN_LOG_HASHES, [])
+                previous_auth_log_hashes = state.get(self.PREVIOUS_AUTH_LOG_HASHES, [])
+                new_trust_monitor_event_hashes, new_admin_log_hashes, new_auth_log_hashes = [], [], []
+
+                if collect_trust_monitor_events:
+                    # Get trust monitor events
+                    mintime, maxtime, get_next_page = self.get_parameters_for_query(
+                        TRUST_MONITOR_EVENTS_LOG_TYPE,
+                        now,
+                        trust_monitor_last_log_timestamp,
+                        trust_monitor_next_page_params,
+                        backward_comp_first_run,
+                        custom_config,
+                    )
+
+                    if (get_next_page and trust_monitor_next_page_params) or not get_next_page:
+                        trust_monitor_events, trust_monitor_next_page_params = self.get_trust_monitor_event(
+                            mintime, maxtime, trust_monitor_next_page_params
+                        )
+                        new_trust_monitor_events, new_trust_monitor_event_hashes = self.compare_hashes(
+                            previous_trust_monitor_event_hashes, trust_monitor_events
+                        )
+                        new_logs.extend(new_trust_monitor_events)
+                        state[self.TRUST_MONITOR_LAST_LOG_TIMESTAMP] = self.get_highest_timestamp(
+                            trust_monitor_last_log_timestamp,
+                            new_trust_monitor_events,
+                            backward_comp_first_run,
+                            TRUST_MONITOR_EVENTS_LOG_TYPE,
+                        )
+                        self.logger.info(f"{len(new_trust_monitor_events)} trust monitor events retrieved")
+                    if new_trust_monitor_event_hashes:
+                        state[self.PREVIOUS_TRUST_MONITOR_EVENT_HASHES] = new_trust_monitor_event_hashes
+
+                    if trust_monitor_next_page_params:
+                        state[self.TRUST_MONITOR_NEXT_PAGE_PARAMS] = trust_monitor_next_page_params
+                        has_more_pages = True
+                    elif state.get(self.TRUST_MONITOR_NEXT_PAGE_PARAMS):
+                        state.pop(self.TRUST_MONITOR_NEXT_PAGE_PARAMS)
+                else:
+                    self.logger.info(
+                        f"Collect trust monitor events set to {collect_trust_monitor_events}. Do not attempt to collect trust monitor events"
+                    )
+
+                if collect_admin_logs:
+                    # Get admin logs
+                    mintime, maxtime, get_next_page = self.get_parameters_for_query(
+                        ADMIN_LOGS_LOG_TYPE,
+                        now,
+                        admin_logs_last_log_timestamp,
+                        admin_logs_next_page_params,
+                        backward_comp_first_run,
+                        custom_config,
+                    )
+
+                    if (get_next_page and admin_logs_next_page_params) or not get_next_page:
+                        admin_logs, admin_logs_next_page_params = self.get_admin_logs(
+                            mintime, maxtime, admin_logs_next_page_params
+                        )
+                        new_admin_logs, new_admin_log_hashes = self.compare_hashes(
+                            previous_admin_log_hashes, admin_logs
+                        )
+                        new_logs.extend(new_admin_logs)
+                        state[self.ADMIN_LOGS_LAST_LOG_TIMESTAMP] = self.get_highest_timestamp(
+                            admin_logs_last_log_timestamp, new_admin_logs, backward_comp_first_run, ADMIN_LOGS_LOG_TYPE
+                        )
+                        self.logger.info(f"{len(new_admin_logs)} admin logs retrieved")
+
+                    if new_admin_log_hashes:
+                        state[self.PREVIOUS_ADMIN_LOG_HASHES] = new_admin_log_hashes
+                    if admin_logs_next_page_params:
+                        state[self.ADMIN_LOGS_NEXT_PAGE_PARAMS] = admin_logs_next_page_params
+                        has_more_pages = True
+                    elif state.get(self.ADMIN_LOGS_NEXT_PAGE_PARAMS):
+                        state.pop(self.ADMIN_LOGS_NEXT_PAGE_PARAMS)
+                else:
+                    self.logger.info(
+                        f"Collect admin logs set to {collect_admin_logs}. Do not attempt to collect admin logs"
+                    )
+
+                # Get auth logs
+                mintime, maxtime, get_next_page = self.get_parameters_for_query(
+                    AUTH_LOGS_LOG_TYPE,
+                    now,
+                    auth_logs_last_log_timestamp,
+                    auth_logs_next_page_params,
+                    backward_comp_first_run,
+                    custom_config,
                 )
 
-            # Auth logs (always collected)
-            (
-                new_logs,
-                state,
-                has_more_pages,
-            ) = self._collect_log_type(
-                log_type=AUTH_LOGS_LOG_TYPE,
-                now=now,
-                last_log_timestamp=auth_logs_last_log_timestamp,
-                next_page_params=auth_logs_next_page_params,
-                backward_comp_first_run=backward_comp_first_run,
-                custom_config=custom_config,
-                previous_hashes=state.get(self.PREVIOUS_AUTH_LOG_HASHES, []),
-                state=state,
-                state_last_log_key=self.AUTH_LOGS_LAST_LOG_TIMESTAMP,
-                state_hashes_key=self.PREVIOUS_AUTH_LOG_HASHES,
-                state_next_page_key=self.AUTH_LOGS_NEXT_PAGE_PARAMS,
-                new_logs=new_logs,
-                has_more_pages=has_more_pages,
-                get_logs_func=self.get_auth_logs,
-                compare_hashes_func=self.compare_hashes,
-                get_highest_timestamp_func=self.get_highest_timestamp,
-                log_label="auth logs",
-            )
+                if (get_next_page and auth_logs_next_page_params) or not get_next_page:
+                    auth_logs, auth_logs_next_page_params = self.get_auth_logs(
+                        mintime, maxtime, auth_logs_next_page_params
+                    )
+                    new_auth_logs, new_auth_log_hashes = self.compare_hashes(previous_auth_log_hashes, auth_logs)
+                    # Grab the most recent timestamp and save it to use as min time for next run
+                    new_logs.extend(new_auth_logs)
+                    state[self.AUTH_LOGS_LAST_LOG_TIMESTAMP] = self.get_highest_timestamp(
+                        auth_logs_last_log_timestamp, new_auth_logs, backward_comp_first_run, AUTH_LOGS_LOG_TYPE
+                    )
+                    self.logger.info(f"{len(new_auth_logs)} auth logs retrieved")
 
-            return new_logs, state, has_more_pages, 200, None
+                if new_auth_log_hashes:
+                    state[self.PREVIOUS_AUTH_LOG_HASHES] = new_auth_log_hashes
 
-        except ApiException as error:
-            return self._handle_api_exception(error, state, rate_limit_delay)
+                if auth_logs_next_page_params:
+                    state[self.AUTH_LOGS_NEXT_PAGE_PARAMS] = auth_logs_next_page_params
+                    has_more_pages = True
+                elif state.get(self.AUTH_LOGS_NEXT_PAGE_PARAMS):
+                    state.pop(self.AUTH_LOGS_NEXT_PAGE_PARAMS)
+
+                return new_logs, state, has_more_pages, 200, None
+            except ApiException as error:
+                self.logger.info(f"An API Exception has been raised. Status code: {error.status_code}. Error: {error}")
+                state[self.PREVIOUS_TRUST_MONITOR_EVENT_HASHES] = []
+                state[self.PREVIOUS_ADMIN_LOG_HASHES] = []
+                state[self.PREVIOUS_AUTH_LOG_HASHES] = []
+                status_code, error = self.check_rate_limit_error(error, error.status_code, state, rate_limit_delay)
+                return [], state, False, status_code, error
         except Exception as error:
-            return self._handle_general_exception(error, state, has_more_pages)
-
-    def _handle_backward_compatibility(self, state):
-        last_collection_timestamp = state.get(self.LAST_COLLECTION_TIMESTAMP)
-        if last_collection_timestamp:
-            self.logger.info(
-                f"Backwards compatibility - update all timestamps to the last known timestamp {last_collection_timestamp}"
-            )
-            trust_monitor_last_log_timestamp = auth_logs_last_log_timestamp = admin_logs_last_log_timestamp = (
-                last_collection_timestamp
-            )
-            state[self.LAST_COLLECTION_TIMESTAMP] = None
-            backward_comp_first_run = True
-        else:
-            trust_monitor_last_log_timestamp = state.get(self.TRUST_MONITOR_LAST_LOG_TIMESTAMP)
-            auth_logs_last_log_timestamp = state.get(self.AUTH_LOGS_LAST_LOG_TIMESTAMP)
-            admin_logs_last_log_timestamp = state.get(self.ADMIN_LOGS_LAST_LOG_TIMESTAMP)
-            self.logger.info(
-                f"Previous timestamps retrieved. "
-                f"Auth {auth_logs_last_log_timestamp}. "
-                f"Admin: {admin_logs_last_log_timestamp}. "
-                f"Trust monitor {trust_monitor_last_log_timestamp}."
-            )
-            backward_comp_first_run = False
-        return (
-            trust_monitor_last_log_timestamp,
-            auth_logs_last_log_timestamp,
-            admin_logs_last_log_timestamp,
-            backward_comp_first_run,
-        )
-
-    def _collect_log_type(
-        self,
-        log_type,
-        now,
-        last_log_timestamp,
-        next_page_params,
-        backward_comp_first_run,
-        custom_config,
-        previous_hashes,
-        state,
-        state_last_log_key,
-        state_hashes_key,
-        state_next_page_key,
-        new_logs,
-        has_more_pages,
-        get_logs_func,
-        compare_hashes_func,
-        get_highest_timestamp_func,
-        log_label,
-    ):
-        mintime, maxtime, get_next_page = self.get_parameters_for_query(
-            log_type,
-            now,
-            last_log_timestamp,
-            next_page_params,
-            backward_comp_first_run,
-            custom_config,
-        )
-        if (get_next_page and next_page_params) or not get_next_page:
-            logs, next_params = get_logs_func(mintime, maxtime, next_page_params)
-            new_logs_list, new_hashes = compare_hashes_func(previous_hashes, logs)
-            new_logs.extend(new_logs_list)
-            self.logger.info(f"{len(new_logs_list)} {log_label} retrieved")
-            if new_hashes:
-                state[state_hashes_key] = new_hashes
-                state[state_last_log_key] = get_highest_timestamp_func(
-                    last_log_timestamp, new_logs_list, backward_comp_first_run, log_type
-                )
-            else:
-                state[state_last_log_key] = maxtime
-            if next_params:
-                state[state_next_page_key] = next_params
-                has_more_pages = True
-            elif state.get(state_next_page_key):
-                state.pop(state_next_page_key)
-        return new_logs, state, has_more_pages
-
-    def _handle_api_exception(self, error, state, rate_limit_delay):
-        self.logger.info(f"An API Exception has been raised. Status code: {error.status_code}. Error: {error}")
-        state[self.PREVIOUS_TRUST_MONITOR_EVENT_HASHES] = []
-        state[self.PREVIOUS_ADMIN_LOG_HASHES] = []
-        state[self.PREVIOUS_AUTH_LOG_HASHES] = []
-        status_code, error = self.check_rate_limit_error(error, error.status_code, state, rate_limit_delay)
-        return [], state, False, status_code, error
-
-    def _handle_general_exception(self, error, state, has_more_pages):
-        self.logger.info(f"An Exception has been raised. Error: {error}")
-        state[self.PREVIOUS_TRUST_MONITOR_EVENT_HASHES] = []
-        state[self.PREVIOUS_ADMIN_LOG_HASHES] = []
-        state[self.PREVIOUS_AUTH_LOG_HASHES] = []
-        return [], state, has_more_pages, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+            self.logger.info(f"An Exception has been raised. Error: {error}")
+            state[self.PREVIOUS_TRUST_MONITOR_EVENT_HASHES] = []
+            state[self.PREVIOUS_ADMIN_LOG_HASHES] = []
+            state[self.PREVIOUS_AUTH_LOG_HASHES] = []
+            return [], state, has_more_pages, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     @staticmethod
     def get_current_time():
@@ -525,6 +475,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 last_log_datetime = datetime.utcfromtimestamp(last_log_timestamp / 1000).replace(tzinfo=timezone.utc)
             else:
                 last_log_datetime = datetime.utcfromtimestamp(last_log_timestamp).replace(tzinfo=timezone.utc)
-            utc_filter_value = max(utc_filter_value, last_log_datetime)
+            if last_log_datetime > utc_filter_value:
+                utc_filter_value = last_log_datetime
         self.logger.info(f"Task execution for {log_type} will be applying a lookback to {utc_filter_value} UTC...")
         return utc_filter_value

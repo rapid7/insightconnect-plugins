@@ -102,9 +102,9 @@ class TestMonitorLogs(TestCase):
         config,
     ):
         actual, actual_state, has_more_pages, status_code, _ = self.task.run(state=current_state, custom_config=config)
-        self.assertEqual(expected.get("logs"), actual)
-        self.assertEqual(expected.get("state"), actual_state)
-        self.assertEqual(expected.get("status_code"), status_code)
+        self.assertEqual(actual, expected.get("logs"))
+        self.assertEqual(actual_state, expected.get("state"))
+        self.assertEqual(status_code, expected.get("status_code"))
 
     def test_monitor_logs_with_rate_limit_whole_flow(
         self, mock_request, mock_request_instance, mock_get_headers, mock_get_time
