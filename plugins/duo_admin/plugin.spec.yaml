@@ -31,7 +31,7 @@ key_features:
 requirements:
 - Two secret keys - `integration key` and `secret key`
 - '`API hostname`'
-version: 5.0.6
+version: 5.0.7
 connection_version: 4
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/duo_admin
@@ -54,6 +54,7 @@ troubleshooting:
   - instead it's a unique identifier e.g. DU9I6T0F7R2S1J4XZHHA. A User ID can be obtained
   by passing a username to the Get User Status action.
 version_history:
+- "5.0.7 - Task `Monitor Logs`: Fixed issue related to mixed epoch timestamp format being parsed"
 - 5.0.6 - Update SDK to the latest version (6.3.8) | Update Task `Monitor Logs` for Task delay logging
 - 5.0.5 - Updated SDK to the latest version (6.3.3)
 - 5.0.4 - Updated SDK to the latest version (6.2.5)

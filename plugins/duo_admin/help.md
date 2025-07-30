@@ -950,6 +950,7 @@ Example output:
 
 # Version History
 
+* 5.0.7 - Task `Monitor Logs`: Fixed issue related to mixed epoch timestamp format being parsed
 * 5.0.6 - Update SDK to the latest version (6.3.8) | Update Task `Monitor Logs` for Task delay logging
 * 5.0.5 - Updated SDK to the latest version (6.3.3)
 * 5.0.4 - Updated SDK to the latest version (6.2.5)
