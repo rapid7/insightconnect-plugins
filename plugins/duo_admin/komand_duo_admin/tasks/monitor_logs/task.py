@@ -173,9 +173,15 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 state[self.LAST_COLLECTION_TIMESTAMP] = None
                 backward_comp_first_run = True
             else:
-                trust_monitor_last_log_timestamp = state.get(self.TRUST_MONITOR_LAST_LOG_TIMESTAMP)
-                auth_logs_last_log_timestamp = state.get(self.AUTH_LOGS_LAST_LOG_TIMESTAMP)
-                admin_logs_last_log_timestamp = state.get(self.ADMIN_LOGS_LAST_LOG_TIMESTAMP)
+                trust_monitor_last_log_timestamp = self.normalize_timestamp(
+                    state.get(self.TRUST_MONITOR_LAST_LOG_TIMESTAMP), "milliseconds"
+                )
+                auth_logs_last_log_timestamp = self.normalize_timestamp(
+                    state.get(self.AUTH_LOGS_LAST_LOG_TIMESTAMP), "seconds"
+                )
+                admin_logs_last_log_timestamp = self.normalize_timestamp(
+                    state.get(self.ADMIN_LOGS_LAST_LOG_TIMESTAMP), "seconds"
+                )
                 self.logger.info(
                     f"Previous timestamps retrieved. "
                     f"Auth {auth_logs_last_log_timestamp}. "
@@ -479,3 +485,32 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 utc_filter_value = last_log_datetime
         self.logger.info(f"Task execution for {log_type} will be applying a lookback to {utc_filter_value} UTC...")
         return utc_filter_value
+
+    def normalize_timestamp(self, epoch_timestamp: int, format_: str = "milliseconds") -> int:
+        """
+        Normalize an epoch timestamp to either milliseconds or seconds.
+
+        :param epoch_timestamp: The epoch timestamp to normalize (in milliseconds or seconds).
+        :param format_: The format to convert to, either "milliseconds" or "seconds".
+
+        :return: An integer representing the normalized epoch timestamp.
+        """
+
+        if epoch_timestamp:
+            if format_ == "milliseconds":
+                # Convert to milliseconds if the timestamp is in seconds
+                if epoch_timestamp < 1e10:
+                    self.logger.log(
+                        self.log_level, f"Converting epoch timestamp {epoch_timestamp} from seconds to milliseconds."
+                    )
+                    return epoch_timestamp * 1000
+            elif format_ == "seconds":
+                # Convert to milliseconds if the timestamp is in seconds
+                if epoch_timestamp >= 1e10:
+                    self.logger.log(
+                        self.log_level, f"Converting epoch timestamp {epoch_timestamp} from milliseconds to seconds."
+                    )
+                    return epoch_timestamp // 1000
+
+        # If the format is not recognized, just return the epoch timestamp as is
+        return epoch_timestamp
