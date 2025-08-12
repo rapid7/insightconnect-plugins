@@ -6,7 +6,7 @@ title: Rapid7 InsightVM Console
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes,
   and remediates vulnerabilities. This plugin uses an orchestrator to get top remediations,
   scan results and start scans
-version: 8.0.12
+version: 8.0.13
 connection_version: 8
 supported_versions: [Rapid7 InsightVM API v3 2022-05-25]
 fedramp_ready: true
@@ -15,7 +15,7 @@ support: rapid7
 status: []
 sdk:
   type: full
-  version: 6.3.4
+  version: 6.3.9
   user: root
   custom_cmd:
     - RUN apk add --no-cache --virtual .build-deps make gcc libc-dev libffi-dev openssl-dev libxml2-dev libxslt-dev
@@ -30,6 +30,7 @@ links:
 references:
 - '[InsightVM API 3](https://help.rapid7.com/insightvm/en-us/api/index.html)'
 version_history:
+- 8.0.13 - Updated 'Tag Assets' action to parse certain 'Tag Source' inputs correctly | Updated SDK to latest version (6.3.9) | Resolved Snyk Vulnerability
 - 8.0.12 - Resolved Snyk Vulnerabilities | Updated SDK to latest version (6.3.4)
 - 8.0.11 - Updated the cache storage path and replaced the external function with internal implementation | Updated SDK to the latest version (6.2.6)
 - 8.0.10 - Updated SDK to the latest version (6.2.5)
@@ -2743,7 +2744,7 @@ actions:
         example: []
   tag_assets:
     title: Tag Assets
-    description: Add a tag to multiple assets in bulk
+    description: Add a tag to multiple assets in bulk. Please note this does not work with 'build-in' tags
     input:
       asset_ids:
         title: Asset IDs
@@ -2767,13 +2768,13 @@ actions:
         title: Tag Type
         description: Type of tag to add to assets
         type: string
-        example: criticality
+        example: owner
         required: true
       tag_source:
         title: Tag Source
         description: Source of tag to add to assets
         type: string
-        example: built-in
+        example: VM
         required: true
     output:
       success:

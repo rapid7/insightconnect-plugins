@@ -20,6 +20,9 @@ class TagAssets(insightconnect_plugin_runtime.Action):
         tag_type = params.get(Input.TAG_TYPE)
         tag_source = params.get(Input.TAG_SOURCE)
 
+        # Allows output from 'Get Tag' to be used (as action requires uppercase and V3 returns lower). Issue with V3 API
+        tag_source = tag_source.upper() if tag_source.lower() != "built-in" else tag_source
+
         tag = {
             "attributes": [{"tag_attribute_name": "SOURCE", "tag_attribute_value": tag_source}],
             "tag_name": tag_name,
