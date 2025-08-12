@@ -2499,7 +2499,7 @@ Example output:
 
 #### Tag Assets
 
-This action is used to add a tag to multiple assets in bulk
+This action is used to add a tag to multiple assets in bulk. Please note this does not work with 'build-in' tags
 
 ##### Input
 
@@ -2508,8 +2508,8 @@ This action is used to add a tag to multiple assets in bulk
 |asset_ids|[]integer|None|True|Asset IDs to tag|None|[1, 2, 3, 4]|None|None|
 |tag_id|integer|None|True|ID of tag to add to assets|None|12345|None|None|
 |tag_name|string|None|True|Name of tag to add to assets|None|Very High|None|None|
-|tag_source|string|None|True|Source of tag to add to assets|None|built-in|None|None|
-|tag_type|string|None|True|Type of tag to add to assets|None|criticality|None|None|
+|tag_source|string|None|True|Source of tag to add to assets|None|VM|None|None|
+|tag_type|string|None|True|Type of tag to add to assets|None|owner|None|None|
   
 Example input:
 
@@ -2523,8 +2523,8 @@ Example input:
   ],
   "tag_id": 12345,
   "tag_name": "Very High",
-  "tag_source": "built-in",
-  "tag_type": "criticality"
+  "tag_source": "VM",
+  "tag_type": "owner"
 }
 ```
 
@@ -4012,6 +4012,7 @@ Example output:
 
 # Version History
 
+* 8.0.13 - Updated 'Tag Assets' action to parse certain 'Tag Source' inputs correctly | Updated SDK to latest version (6.3.9) | Resolved Snyk Vulnerability
 * 8.0.12 - Resolved Snyk Vulnerabilities | Updated SDK to latest version (6.3.4)
 * 8.0.11 - Updated the cache storage path and replaced the external function with internal implementation | Updated SDK to the latest version (6.2.6)
 * 8.0.10 - Updated SDK to the latest version (6.2.5)
