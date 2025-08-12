@@ -2499,7 +2499,7 @@ Example output:
 
 #### Tag Assets
 
-This action is used to add a tag to multiple assets in bulk. Please note this does not work with 'build-in' tags
+This action is used to add a tag to multiple assets in bulk. Please note this does not work with 'built-in' tags
 
 ##### Input
 

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add a tag to multiple assets in bulk. Please note this does not work with 'build-in' tags"
+    DESCRIPTION = "Add a tag to multiple assets in bulk. Please note this does not work with 'built-in' tags"
 
 
 class Input:

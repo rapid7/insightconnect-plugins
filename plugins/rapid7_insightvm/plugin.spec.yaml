@@ -2744,7 +2744,7 @@ actions:
         example: []
   tag_assets:
     title: Tag Assets
-    description: Add a tag to multiple assets in bulk. Please note this does not work with 'build-in' tags
+    description: Add a tag to multiple assets in bulk. Please note this does not work with 'built-in' tags
     input:
       asset_ids:
         title: Asset IDs
