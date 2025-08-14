@@ -4,8 +4,9 @@ products: [insightconnect]
 name: rapid7_surface_command
 title: Rapid7 Surface Command
 description: Surface Command gives you full visibility over your assets and identities across multiple technology platforms
-version: 1.0.0
+version: 2.0.0
 version_history:
+- 2.0.0 - Add new action | Run Adhoc Query
 - 1.0.0 - Initial plugin
 
 supported_versions: [v1]
@@ -75,8 +76,8 @@ connection:
 
 actions:
   run_query:
-    title: Run Surface Command Query
-    description: Run and execute Surface Command Query
+    title: Run a Saved Query
+    description: Run and execute a saved query
     input:
       query_id:
         title: ID of Query to Run
@@ -84,6 +85,23 @@ actions:
         type: string
         required: true
         example: 12345678-1234-1234-1234-123456789012
+    output:
+      items:
+        title: Items
+        description: Array of Items
+        type: "[]object"
+        example: "[]"
+        required: false
+  run_adhoc_query:
+    title: Run an Adhoc Query
+    description: Run and execute an adhoc query
+    input:
+      cypher:
+        title: Cypher Query to Execute
+        description: Cypher query to execute
+        type: string
+        required: true
+        example: "MATCH (m:Machine) RETURN m"
     output:
       items:
         title: Items
