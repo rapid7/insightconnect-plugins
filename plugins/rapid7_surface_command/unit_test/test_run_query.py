@@ -4,7 +4,7 @@ import sys
 from unittest import TestCase
 from unittest.mock import Mock, patch
 
-from icon_rapid7_surface_command.util.surface_command.api_connection import (
+from icon_rapid7_surface_command.util.api_connection import (
     ApiConnection,
 )
 from insightconnect_plugin_runtime.exceptions import PluginException
