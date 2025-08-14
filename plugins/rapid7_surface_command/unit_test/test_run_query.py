@@ -4,18 +4,14 @@ import sys
 from unittest import TestCase
 from unittest.mock import Mock, patch
 
-from icon_rapid7_surface_command.util.api_connection import (
-    ApiConnection,
-)
+sys.path.append(os.path.abspath("../"))
+
+from icon_rapid7_surface_command.util.api_connection import ApiConnection
 from insightconnect_plugin_runtime.exceptions import PluginException
 from requests import Response
 
 
-sys.path.append(os.path.abspath("../"))
-
-
 class MockResponse:
-
     def __init__(self, status_code, json_data=None, text=None, content=None):
         self.status_code = status_code
         self.json_data = json_data
@@ -29,36 +25,39 @@ class TestRunQuery(TestCase):
         self.region = "us"
         self.logger = logging.getLogger("test")
         self.connection = ApiConnection(self.api_key, self.region, self.logger)
-        self.query_id = (
-            "rapid7.insightplatform.compute_machines_without_vulnerability_scan"
-        )
+        self.query_id = "rapid7.insightplatform.compute_machines_without_vulnerability_scan"
 
-    @patch(
-        "icon_rapid7_surface_command.util.surface_command.api_connection.make_request"
-    )
+    @patch("icon_rapid7_surface_command.util.api_connection.make_request")
     def test_run_query_success(self, mock_request):
-        # Setup mock response
+        # Mock a valid CSV response with two rows
         mock_response = Mock()
-        expected_data = {"results": ["test_result_1", "test_result_2"]}
-        mock_response.json.return_value = expected_data
+        mock_response.text = (
+            'Name,Sources,Hostnames,"IP Address(es)"\n'
+            'host-a,"Rapid7IVMAsset, Rapid7InsightVMAsset",a.example.com,"10.1.1.1, 10.1.1.2"\n'
+            "host-b,Rapid7IVMAsset,b.example.com,10.2.2.2\n"
+        )
         mock_request.return_value = mock_response
 
-        # Execute the method
         result = self.connection.run_query(self.query_id)
 
-        # Assert results
-        self.assertEqual(result, expected_data)
+        self.assertIn("items", result)
+        self.assertEqual(len(result["items"]), 2)
+
+        row0 = result["items"][0]
+        self.assertEqual(row0["Name"], "host-a")
+        # If parser infers multi-values, IP Address(es) should be a list
+        self.assertIn("IP Address(es)", row0)
+        self.assertIsInstance(row0["IP Address(es)"], list)
+        self.assertIn("10.1.1.1", row0["IP Address(es)"])
+
         mock_request.assert_called_once()
 
-    @patch(
-        "icon_rapid7_surface_command.util.surface_command.api_connection.make_request"
-    )
+    @patch("icon_rapid7_surface_command.util.api_connection.make_request")
     def test_run_query_api_exception(self, mock_request):
         # Setup mock to raise PluginException
         error_response = Mock(spec=Response)
         error_response.status_code = 401
         error_response.content = b'{"error": "Invalid API key"}'
-        # Mock the text property correctly
         type(error_response).text = Mock(return_value='{"error": "Invalid API key"}')
 
         mock_request.side_effect = PluginException(
@@ -67,32 +66,26 @@ class TestRunQuery(TestCase):
             data=error_response,
         )
 
-        # Execute the method and check for exception
         with self.assertRaises(PluginException) as context:
             self.connection.run_query(self.query_id)
 
-        # Verify the PluginException details
         self.assertEqual(context.exception.cause, "API Authentication Failed")
-        self.assertEqual(
-            context.exception.assistance, "Please verify your API key is correct"
-        )
+        self.assertEqual(context.exception.assistance, "Please verify your API key is correct")
 
-    @patch(
-        "icon_rapid7_surface_command.util.surface_command.api_connection.make_request"
-    )
+    @patch("icon_rapid7_surface_command.util.api_connection.make_request")
     def test_run_query_malformed_response(self, mock_request):
-        # Setup mock response with malformed JSON
+        # Not real CSV; parser should yield zero rows (not raise)
         mock_response = Mock()
-        mock_response.json.side_effect = ValueError("Invalid JSON")
+        mock_response.text = "<html>oops</html>"
         mock_request.return_value = mock_response
 
-        # Execute the method and check for exception
-        with self.assertRaises(ValueError):
-            self.connection.run_query(self.query_id)
+        result = self.connection.run_query(self.query_id)
 
-    @patch(
-        "icon_rapid7_surface_command.util.surface_command.api_connection.make_request"
-    )
+        self.assertIn("items", result)
+        self.assertEqual(result["items"], [])
+        mock_request.assert_called_once()
+
+    @patch("icon_rapid7_surface_command.util.api_connection.make_request")
     def test_run_query_unprocessable_entity(self, mock_request):
         # Setup mock for 422 error
         error_response = MockResponse(
@@ -106,51 +99,37 @@ class TestRunQuery(TestCase):
             data=error_response,
         )
 
-        # Execute the method and check for exception
         with self.assertRaises(PluginException) as context:
             self.connection.run_query(self.query_id)
 
-        # Verify exception details
-        self.assertEqual(
-            context.exception.cause, "Server was unable to process the request"
-        )
+        self.assertEqual(context.exception.cause, "Server was unable to process the request")
         self.assertEqual(
             context.exception.assistance,
             "Please validate the request to Rapid7 Surface Command",
         )
 
-    @patch(
-        "icon_rapid7_surface_command.util.surface_command.api_connection.make_request"
-    )
+    @patch("icon_rapid7_surface_command.util.api_connection.make_request")
     def test_run_query_timeout(self, mock_request):
-        # Setup mock to raise timeout exception
         mock_request.side_effect = PluginException(
             cause="Request timed out",
             assistance="Please check your network connection or try again later",
         )
 
-        # Execute the method and check for exception
         with self.assertRaises(PluginException) as context:
             self.connection.run_query(self.query_id)
 
-        # Verify exception details
         self.assertEqual(context.exception.cause, "Request timed out")
         self.assertEqual(
             context.exception.assistance,
             "Please check your network connection or try again later",
         )
 
-    @patch(
-        "icon_rapid7_surface_command.util.surface_command.api_connection.make_request"
-    )
+    @patch("icon_rapid7_surface_command.util.api_connection.make_request")
     def test_run_query_server_error(self, mock_request):
-        # Setup mock for 500 server error
         error_response = Mock(spec=Response)
         error_response.status_code = 500
         error_response.content = b'{"error": "Internal Server Error"}'
-        type(error_response).text = Mock(
-            return_value='{"error": "Internal Server Error"}'
-        )
+        type(error_response).text = Mock(return_value='{"error": "Internal Server Error"}')
 
         mock_request.side_effect = PluginException(
             cause="Server Error",
@@ -158,31 +137,24 @@ class TestRunQuery(TestCase):
             data=error_response,
         )
 
-        # Execute the method and check for exception
         with self.assertRaises(PluginException) as context:
             self.connection.run_query(self.query_id)
 
-        # Verify exception details
         self.assertEqual(context.exception.cause, "Server Error")
         self.assertEqual(
             context.exception.assistance,
             "An unexpected error occurred on the server. Please try again later or contact support.",
         )
 
-    @patch(
-        "icon_rapid7_surface_command.util.surface_command.api_connection.make_request"
-    )
+    @patch("icon_rapid7_surface_command.util.api_connection.make_request")
     def test_run_query_empty_response(self, mock_request):
-        # Setup mock response with empty results
+        # Header-only CSV -> no data rows
         mock_response = Mock()
-        expected_data = {"results": []}
-        mock_response.json.return_value = expected_data
+        mock_response.text = 'Name,Sources,Hostnames,"IP Address(es)"\n'
         mock_request.return_value = mock_response
 
-        # Execute the method
         result = self.connection.run_query(self.query_id)
 
-        # Assert results
-        self.assertEqual(result, expected_data)
-        self.assertEqual(len(result["results"]), 0)
+        self.assertEqual(result, {"items": []})
+        self.assertEqual(len(result["items"]), 0)
         mock_request.assert_called_once()
