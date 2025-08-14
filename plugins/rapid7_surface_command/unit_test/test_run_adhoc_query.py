@@ -33,6 +33,7 @@ class TestRunAdhocQuery(TestCase):
         )
 
     @patch("icon_rapid7_surface_command.util.api_connection.make_request")
+
     def test_run_query_success(self, mock_request):
         # Setup mock response
         mock_response = Mock()
@@ -48,6 +49,7 @@ class TestRunAdhocQuery(TestCase):
         mock_request.assert_called_once()
 
     @patch("icon_rapid7_surface_command.util.api_connection.make_request")
+
     def test_run_query_api_exception(self, mock_request):
         # Setup mock to raise PluginException
         error_response = Mock(spec=Response)
@@ -73,6 +75,7 @@ class TestRunAdhocQuery(TestCase):
         )
 
     @patch("icon_rapid7_surface_command.util.api_connection.make_request")
+
     def test_run_query_malformed_response(self, mock_request):
         # Setup mock response with malformed JSON
         mock_response = Mock()
@@ -84,6 +87,7 @@ class TestRunAdhocQuery(TestCase):
             self.connection.run_adhoc_query(self.cypher)
 
     @patch("icon_rapid7_surface_command.util.api_connection.make_request")
+
     def test_run_query_unprocessable_entity(self, mock_request):
         # Setup mock for 422 error
         error_response = MockResponse(
@@ -110,7 +114,10 @@ class TestRunAdhocQuery(TestCase):
             "Please validate the request to Rapid7 Surface Command",
         )
 
-    @patch("icon_rapid7_surface_command.util.api_connection.make_request")
+
+    @patch(
+        "icon_rapid7_surface_command.util.surface_command.api_connection.make_request"
+    )
     def test_run_query_timeout(self, mock_request):
         # Setup mock to raise timeout exception
         mock_request.side_effect = PluginException(
@@ -130,6 +137,7 @@ class TestRunAdhocQuery(TestCase):
         )
 
     @patch("icon_rapid7_surface_command.util.api_connection.make_request")
+
     def test_run_query_server_error(self, mock_request):
         # Setup mock for 500 server error
         error_response = Mock(spec=Response)
@@ -157,6 +165,7 @@ class TestRunAdhocQuery(TestCase):
         )
 
     @patch("icon_rapid7_surface_command.util.api_connection.make_request")
+
     def test_run_query_empty_response(self, mock_request):
         # Setup mock response with empty results
         mock_response = Mock()
