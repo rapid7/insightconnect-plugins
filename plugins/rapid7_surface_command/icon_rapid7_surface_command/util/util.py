@@ -3,9 +3,7 @@ import io
 from typing import Dict, Any, List
 
 
-def _csv_text_to_json_rows(
-    csv_text: str, convert_empty_to_none: bool = True
-) -> List[Dict[str, Any]]:
+def _csv_text_to_json_rows(csv_text: str, convert_empty_to_none: bool = True) -> List[Dict[str, Any]]:
     """
     Convert CSV text (with headers) to a list of JSON rows (dicts).
     - Handles quoted fields and commas safely via csv module.
