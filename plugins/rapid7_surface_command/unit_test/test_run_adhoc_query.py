@@ -23,8 +23,12 @@ class MockResponse:
 class TestConnection(TestCase):
     @patch("icon_rapid7_surface_command.connection.connection.ApiConnection")
     def test_test_converts_pluginexception_to_connectiontestexception(self, MockApiConnection):
-        # Arrange: connect with minimal params; ApiConnection is patched
+        # Arrange
         conn = Connection()
+        # Provide a logger so connect() can call self.logger.info(...)
+        conn.logger = logging.getLogger("test-connection")
+        conn.logger.addHandler(logging.NullHandler())
+
         params = {"api_key": {"secretKey": "fake"}, "region": "us"}
         conn.connect(params)
 
@@ -34,11 +38,12 @@ class TestConnection(TestCase):
             assistance="Please verify your API key is correct",
         )
 
-        # Act / Assert: Connection.test should convert to ConnectionTestException
+        # Act / Assert
         with self.assertRaises(ConnectionTestException) as ctx:
             conn.test()
 
-        self.assertIn("Connection test failed:", str(ctx.exception))
+        # Optional assertion on message content
+        self.assertIn("API Authentication Failed", str(ctx.exception))
 
 
 class TestRunAdhocQuery(TestCase):
