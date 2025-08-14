@@ -4,14 +4,13 @@ import sys
 from unittest import TestCase
 from unittest.mock import Mock, patch
 
+sys.path.append(os.path.abspath("../"))
+
 from icon_rapid7_surface_command.util.surface_command.api_connection import (
     ApiConnection,
 )
 from insightconnect_plugin_runtime.exceptions import PluginException
 from requests import Response
-
-
-sys.path.append(os.path.abspath("../"))
 
 
 class MockResponse:
@@ -23,13 +22,13 @@ class MockResponse:
         self.content = content
 
 
-class TestRunQuery(TestCase):
+class TestRunAdhocQuery(TestCase):
     def setUp(self):
         self.api_key = "not_an_api_key"
         self.region = "us"
         self.logger = logging.getLogger("test")
         self.connection = ApiConnection(self.api_key, self.region, self.logger)
-        self.query_id = (
+        self.cypher = (
             "rapid7.insightplatform.compute_machines_without_vulnerability_scan"
         )
 
@@ -44,7 +43,7 @@ class TestRunQuery(TestCase):
         mock_request.return_value = mock_response
 
         # Execute the method
-        result = self.connection.run_query(self.query_id)
+        result = self.connection.run_adhoc_query(self.cypher)
 
         # Assert results
         self.assertEqual(result, expected_data)
@@ -69,7 +68,7 @@ class TestRunQuery(TestCase):
 
         # Execute the method and check for exception
         with self.assertRaises(PluginException) as context:
-            self.connection.run_query(self.query_id)
+            self.connection.run_adhoc_query(self.cypher)
 
         # Verify the PluginException details
         self.assertEqual(context.exception.cause, "API Authentication Failed")
@@ -88,7 +87,7 @@ class TestRunQuery(TestCase):
 
         # Execute the method and check for exception
         with self.assertRaises(ValueError):
-            self.connection.run_query(self.query_id)
+            self.connection.run_adhoc_query(self.cypher)
 
     @patch(
         "icon_rapid7_surface_command.util.surface_command.api_connection.make_request"
@@ -108,7 +107,7 @@ class TestRunQuery(TestCase):
 
         # Execute the method and check for exception
         with self.assertRaises(PluginException) as context:
-            self.connection.run_query(self.query_id)
+            self.connection.run_adhoc_query(self.cypher)
 
         # Verify exception details
         self.assertEqual(
@@ -131,7 +130,7 @@ class TestRunQuery(TestCase):
 
         # Execute the method and check for exception
         with self.assertRaises(PluginException) as context:
-            self.connection.run_query(self.query_id)
+            self.connection.run_adhoc_query(self.cypher)
 
         # Verify exception details
         self.assertEqual(context.exception.cause, "Request timed out")
@@ -160,7 +159,7 @@ class TestRunQuery(TestCase):
 
         # Execute the method and check for exception
         with self.assertRaises(PluginException) as context:
-            self.connection.run_query(self.query_id)
+            self.connection.run_adhoc_query(self.cypher)
 
         # Verify exception details
         self.assertEqual(context.exception.cause, "Server Error")
@@ -180,7 +179,7 @@ class TestRunQuery(TestCase):
         mock_request.return_value = mock_response
 
         # Execute the method
-        result = self.connection.run_query(self.query_id)
+        result = self.connection.run_adhoc_query(self.cypher)
 
         # Assert results
         self.assertEqual(result, expected_data)

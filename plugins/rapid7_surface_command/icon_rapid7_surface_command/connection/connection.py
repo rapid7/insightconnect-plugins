@@ -3,7 +3,7 @@ from .schema import ConnectionSchema, Input
 
 # Custom imports below
 
-from icon_rapid7_surface_command.util.surface_command.api_connection import (
+from icon_rapid7_surface_command.util.api_connection import (
     ApiConnection,
 )
 from insightconnect_plugin_runtime.exceptions import (
@@ -24,13 +24,17 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.region = params.get(Input.REGION)
         # END INPUT BINDING - DO NOT REMOVE
 
-        self.api = ApiConnection(self.api_key.get("secretKey"), self.region, self.logger)
+        self.api = ApiConnection(
+            self.api_key.get("secretKey"), self.region, self.logger
+        )
         self.logger.info("Setup Complete")
         return self
 
     def test(self):
         if not self.api_key or not self.region:
-            raise ConnectionTestException("API Key and Region are required to test the connection.")
+            raise ConnectionTestException(
+                "API Key and Region are required to test the connection."
+            )
         try:
             # This is a usually fast query we can use to test.
             self.api.run_query("rapid7.insightplatform.admin_user_mfa_false_count")
