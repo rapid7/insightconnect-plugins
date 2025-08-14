@@ -69,9 +69,7 @@ class TestRunAdhocQuery(TestCase):
             self.connection.run_adhoc_query(self.cypher)
 
         self.assertEqual(context.exception.cause, "API Authentication Failed")
-        self.assertEqual(
-            context.exception.assistance, "Please verify your API key is correct"
-        )
+        self.assertEqual(context.exception.assistance, "Please verify your API key is correct")
 
     @patch("icon_rapid7_surface_command.util.api_connection.make_request")
     def test_run_query_malformed_response(self, mock_request):
@@ -88,9 +86,7 @@ class TestRunAdhocQuery(TestCase):
 
     @patch("icon_rapid7_surface_command.util.api_connection.make_request")
     def test_run_query_unprocessable_entity(self, mock_request):
-        error_response = MockResponse(
-            status_code=422, content=b'{"error": "Invalid query parameters"}'
-        )
+        error_response = MockResponse(status_code=422, content=b'{"error": "Invalid query parameters"}')
 
         mock_request.side_effect = PluginException(
             cause="Server was unable to process the request",
@@ -101,9 +97,7 @@ class TestRunAdhocQuery(TestCase):
         with self.assertRaises(PluginException) as context:
             self.connection.run_adhoc_query(self.cypher)
 
-        self.assertEqual(
-            context.exception.cause, "Server was unable to process the request"
-        )
+        self.assertEqual(context.exception.cause, "Server was unable to process the request")
         self.assertEqual(
             context.exception.assistance,
             "Please validate the request to Rapid7 Surface Command",
@@ -119,4 +113,43 @@ class TestRunAdhocQuery(TestCase):
         with self.assertRaises(PluginException) as context:
             self.connection.run_adhoc_query(self.cypher)
 
-        self.assertEqual(context.exception.cau
+        self.assertEqual(context.exception.cause, "Request timed out")
+        self.assertEqual(
+            context.exception.assistance,
+            "Please check your network connection or try again later",
+        )
+
+    @patch("icon_rapid7_surface_command.util.api_connection.make_request")
+    def test_run_query_server_error(self, mock_request):
+        error_response = Mock(spec=Response)
+        error_response.status_code = 500
+        error_response.content = b'{"error": "Internal Server Error"}'
+        type(error_response).text = Mock(return_value='{"error": "Internal Server Error"}')
+
+        mock_request.side_effect = PluginException(
+            cause="Server Error",
+            assistance="An unexpected error occurred on the server. Please try again later or contact support.",
+            data=error_response,
+        )
+
+        with self.assertRaises(PluginException) as context:
+            self.connection.run_adhoc_query(self.cypher)
+
+        self.assertEqual(context.exception.cause, "Server Error")
+        self.assertEqual(
+            context.exception.assistance,
+            "An unexpected error occurred on the server. Please try again later or contact support.",
+        )
+
+    @patch("icon_rapid7_surface_command.util.api_connection.make_request")
+    def test_run_query_empty_response(self, mock_request):
+        # Header-only CSV -> no data rows
+        mock_response = Mock()
+        mock_response.text = 'Name,Sources,Hostnames,"IP Address(es)"\n'
+        mock_request.return_value = mock_response
+
+        result = self.connection.run_adhoc_query(self.cypher)
+
+        self.assertEqual(result, {"items": []})
+        self.assertEqual(len(result["items"]), 0)
+        mock_request.assert_called_once()
