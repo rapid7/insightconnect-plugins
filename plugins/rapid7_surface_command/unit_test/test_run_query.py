@@ -7,7 +7,7 @@ from unittest.mock import Mock, patch
 sys.path.append(os.path.abspath("../"))
 
 from icon_rapid7_surface_command.util.api_connection import ApiConnection
-from insightconnect_plugin_runtime.exceptions import PluginException, APIException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from requests import Response
 
 
@@ -48,7 +48,6 @@ class TestRunQuery(TestCase):
 
     @patch("icon_rapid7_surface_command.util.api_connection.make_request")
     def test_run_query_api_exception(self, mock_request):
-        # REAL Response so isinstance(..., Response) is True
         error_response = Response()
         error_response.status_code = 401
         error_response._content = b'{"error": "Invalid API key"}'
@@ -60,7 +59,7 @@ class TestRunQuery(TestCase):
             data=error_response,
         )
 
-        with self.assertRaises(APIException) as ctx:
+        with self.assertRaises(PluginException) as ctx:
             self.connection.run_query(self.query_id)
 
         self.assertEqual(ctx.exception.cause, "API Authentication Failed")
@@ -113,7 +112,6 @@ class TestRunQuery(TestCase):
 
     @patch("icon_rapid7_surface_command.util.api_connection.make_request")
     def test_run_query_server_error(self, mock_request):
-        # REAL Response so isinstance(..., Response) is True
         error_response = Response()
         error_response.status_code = 500
         error_response._content = b'{"error": "Internal Server Error"}'
@@ -125,7 +123,7 @@ class TestRunQuery(TestCase):
             data=error_response,
         )
 
-        with self.assertRaises(APIException) as ctx:
+        with self.assertRaises(PluginException) as ctx:
             self.connection.run_query(self.query_id)
 
         self.assertEqual(ctx.exception.cause, "Server Error")
