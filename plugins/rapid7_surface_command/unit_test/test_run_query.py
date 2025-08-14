@@ -7,7 +7,8 @@ from unittest.mock import Mock, patch
 sys.path.append(os.path.abspath("../"))
 
 from icon_rapid7_surface_command.util.api_connection import ApiConnection
-from insightconnect_plugin_runtime.exceptions import PluginException
+from icon_rapid7_surface_command.connection.connection import Connection
+from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 from requests import Response
 
 
@@ -17,6 +18,27 @@ class MockResponse:
         self.json_data = json_data
         self.text = text
         self.content = content
+
+
+class TestConnection(TestCase):
+    @patch("icon_rapid7_surface_command.connection.connection.ApiConnection")
+    def test_test_converts_pluginexception_to_connectiontestexception(self, MockApiConnection):
+        # Arrange: connect with minimal params; ApiConnection is patched
+        conn = Connection()
+        params = {"api_key": {"secretKey": "fake"}, "region": "us"}
+        conn.connect(params)
+
+        # Make the underlying API call raise PluginException
+        MockApiConnection.return_value.run_query.side_effect = PluginException(
+            cause="API Authentication Failed",
+            assistance="Please verify your API key is correct",
+        )
+
+        # Act / Assert: Connection.test should convert to ConnectionTestException
+        with self.assertRaises(ConnectionTestException) as ctx:
+            conn.test()
+
+        self.assertIn("Connection test failed:", str(ctx.exception))
 
 
 class TestRunQuery(TestCase):
