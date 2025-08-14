@@ -42,17 +42,17 @@ class TestRunQuery(TestCase):
         self.assertIsInstance(result, list)
         self.assertEqual(len(result), 2)
         self.assertEqual(result[0]["Name"], "host-a")
-        self.assertEqual(result[0]['IP Address(es)'], "10.1.1.1, 10.1.1.2")
+        self.assertEqual(result[0]["IP Address(es)"], "10.1.1.1, 10.1.1.2")
 
         mock_request.assert_called_once()
 
     @patch("icon_rapid7_surface_command.util.api_connection.make_request")
     def test_run_query_api_exception(self, mock_request):
-        # With Response in PluginException.data -> APIException raised
-        error_response = Mock(spec=Response)
+        # REAL Response so isinstance(..., Response) is True
+        error_response = Response()
         error_response.status_code = 401
-        error_response.content = b'{"error": "Invalid API key"}'
-        type(error_response).text = Mock(return_value='{"error": "Invalid API key"}')
+        error_response._content = b'{"error": "Invalid API key"}'
+        error_response.encoding = "utf-8"
 
         mock_request.side_effect = PluginException(
             cause="API Authentication Failed",
@@ -113,11 +113,11 @@ class TestRunQuery(TestCase):
 
     @patch("icon_rapid7_surface_command.util.api_connection.make_request")
     def test_run_query_server_error(self, mock_request):
-        # With Response in data -> APIException raised
-        error_response = Mock(spec=Response)
+        # REAL Response so isinstance(..., Response) is True
+        error_response = Response()
         error_response.status_code = 500
-        error_response.content = b'{"error": "Internal Server Error"}'
-        type(error_response).text = Mock(return_value='{"error": "Internal Server Error"}')
+        error_response._content = b'{"error": "Internal Server Error"}'
+        error_response.encoding = "utf-8"
 
         mock_request.side_effect = PluginException(
             cause="Server Error",
