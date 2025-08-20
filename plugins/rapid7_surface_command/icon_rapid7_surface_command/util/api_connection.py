@@ -73,7 +73,7 @@ class ApiConnection:
             raise exception
 
         csv_text = response.text
-        rows = _csv_text_to_json_rows(csv_text, convert_empty_to_none=True)
+        rows = _csv_text_to_json_rows(csv_text)
 
         return rows
 
@@ -112,6 +112,6 @@ class ApiConnection:
             raise exception
 
         csv_text = response.text
-        rows = _csv_text_to_json_rows(csv_text, convert_empty_to_none=True)
+        rows = _csv_text_to_json_rows(csv_text)
 
         return rows
