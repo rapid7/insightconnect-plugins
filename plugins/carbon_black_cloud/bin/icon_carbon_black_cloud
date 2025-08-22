@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "VMware Carbon Black Cloud"
 Vendor = "rapid7"
-Version = "2.2.11"
+Version = "2.2.12"
 Description = "The [VMware Carbon Black Cloud](https://www.carbonblack.com/products/vmware-carbon-black-cloud/) is a cloud-native endpoint protection platform (EPP) that combines the intelligent system hardening and behavioral prevention needed to keep emerging threats at bay, using a single lightweight agent and an easy-to-use console. Manage and contain threats on your Carbon Black endpoints using this plugin"
 
 

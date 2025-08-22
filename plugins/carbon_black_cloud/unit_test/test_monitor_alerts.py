@@ -1,51 +1,44 @@
+import os
+import sys
 from datetime import datetime, timezone
-from parameterized import parameterized
-from requests import ConnectTimeout
+from typing import Any, Dict, Tuple
 from unittest import TestCase
-from unittest.mock import MagicMock, patch, Mock
-from typing import Dict, Tuple, Any
+from unittest.mock import MagicMock, patch
 
 from icon_carbon_black_cloud.tasks import MonitorAlerts
 from icon_carbon_black_cloud.tasks.monitor_alerts.task import (
-    RATE_LIMITED,
+    LAST_ALERT_TIME,
     LAST_OBSERVATION_JOB,
     LAST_OBSERVATION_TIME,
-    LAST_ALERT_TIME,
     OBSERVATION_QUERY_END_TIME,
+    RATE_LIMITED,
 )
 from icon_carbon_black_cloud.util.constants import OBSERVATION_TIME_FIELD
 from icon_carbon_black_cloud.util.exceptions import RateLimitException
+from parameterized import parameterized
+from requests import ConnectTimeout
+from structlog.testing import capture_logs
 
-from util import (
-    Util,
-    mock_request_200,
-    mock_conditions,
-    mock_request_429,
-    mock_request_400,
-    mock_request_404,
-)
 from responses.task_test_data import (
+    no_logs_in_window,
+    no_logs_in_window_back,
+    observation_job_exceeded,
+    observation_job_not_finished,
+    observation_job_not_finished_but_parsed,
+    observation_job_not_finished_no_observations,
+    observations_more_pages,
+    task_401_on_second_request,
+    task_404_on_second_request,
+    task_404_on_third_request,
     task_first_run,
     task_first_run_output,
-    task_first_run_output_within_window,
     task_first_run_output_with_offset,
-    task_subsequent_output,
+    task_first_run_output_within_window,
     task_rate_limit_getting_observations,
+    task_subsequent_output,
     task_subsequent_output_no_observation_job,
-    observations_more_pages,
-    observation_job_not_finished,
-    task_401_on_second_request,
-    task_404_on_third_request,
-    observation_job_exceeded,
-    observation_job_not_finished_but_parsed,
-    task_404_on_second_request,
-    no_logs_in_window_back,
-    no_logs_in_window,
-    observation_job_not_finished_no_observations,
 )
-
-import os
-import sys
+from util import Util, mock_conditions, mock_request_200, mock_request_400, mock_request_404, mock_request_429
 
 sys.path.append(os.path.abspath("../"))
 
@@ -130,24 +123,24 @@ class TestMonitorAlerts(TestCase):
             ],
         ]
     )
-    @patch("logging.Logger.info")
     def test_monitor_alert_happy_paths(
         self,
+        mock_req: MagicMock,
+        _mock_date: MagicMock,
         test: str,
         test_state: Dict[str, str],
         mocked_responses: Tuple[str, str, str],
         state_output: Dict[str, str],
         logs: int,
-        mock_logger: MagicMock,
-        mock_req: MagicMock,
-        _mock_date: MagicMock,
     ):
         mock_req.side_effect = [
             mock_conditions(200, file_name=mocked_responses[0]),
             mock_conditions(200, file_name=mocked_responses[1]),
             mock_conditions(200, file_name=mocked_responses[2]),
         ]
-        response, new_state, has_more_pages, _status_code, _exception = self.task.run(state=test_state)
+
+        with capture_logs() as mock_logger:
+            response, new_state, has_more_pages, _status_code, _exception = self.task.run(state=test_state)
 
         expected_has_more_pages = "has more pages" in test
         self.maxDiff = None
@@ -156,7 +149,8 @@ class TestMonitorAlerts(TestCase):
         self.assertDictEqual(state_output, new_state)
 
         if "job time has exceeded" in test:
-            log_msg = mock_logger.call_args_list[8][0][0]  # 8th logger.info is when we log if job time exceeded
+            # Check if logger was called with job time exceeded message
+            log_msg = mock_logger[8]["event"]  # 8th logger.info is when we log if job time exceeded
             self.assertIn("has exceeded max run time", log_msg)
 
     def test_too_many_requests_adds_rate_limiting(self, mock_req: MagicMock, _mock_date: MagicMock):
@@ -181,20 +175,20 @@ class TestMonitorAlerts(TestCase):
             ["no longer in rate limiting period", {RATE_LIMITED: "2024-04-25T15:55:00.00Z"}, False],
         ]
     )
-    @patch("logging.Logger.info")
     def test_rate_limiting_in_state(
         self,
+        _mock_req: MagicMock,
+        _mock_date: MagicMock,
         logger: str,
         cur_state: Dict[str, str],
         still_rate_limited: bool,
-        mock_logger: MagicMock,
-        _mock_req: MagicMock,
-        _mock_date: MagicMock,
     ):
         """
         When the state passed to the task is within a rate limiting period we should not query CB.
         """
-        response, new_state, has_more_pages, status_code, _ = self.task.run(params={}, state=cur_state)
+
+        with capture_logs() as mock_logger:
+            response, new_state, has_more_pages, status_code, _ = self.task.run(params={}, state=cur_state)
 
         self.assertEqual(status_code, 200)  # this is a still successful task execution even if we don't query.
         self.assertEqual(response, [])
@@ -203,7 +197,9 @@ class TestMonitorAlerts(TestCase):
         rate_limited = RATE_LIMITED in new_state.keys()
 
         self.assertEqual(still_rate_limited, rate_limited)
-        self.assertIn(logger, mock_logger.call_args_list[0][0][0])  # access first logger param
+
+        # Check if logger was called and if so, verify the message
+        self.assertIn(logger, mock_logger[0]["event"])  # access first logger param
         self.assertFalse(has_more_pages)  # we don't want to trigger until next task execution
 
     def test_rate_limiting_on_second_request(self, mock_req: MagicMock, _mock_date: MagicMock):
@@ -448,21 +444,20 @@ class TestMonitorAlerts(TestCase):
             ],
         ],
     )
-    @patch("logging.Logger.info")
     def test_custom_config_flags(
         self,
+        mock_req: MagicMock,
+        _mock_date: MagicMock,
         saved_state: Dict[str, str],
         cps_config: Dict[str, Any],
         exp_values: Dict[str, str],
-        mock_logger: Mock,
-        mock_req: MagicMock,
-        _mock_date: MagicMock,
     ):
         mock_req.side_effect = [
             mock_conditions(200, file_name) for file_name in ["observation_id"] + (["empty_response"] * 2)
         ]
 
-        _, _, _, _, _ = self.task.run(state=saved_state, custom_config=cps_config)  # not concerned about output
+        with capture_logs() as mock_logger:
+            _, _, _, _, _ = self.task.run(state=saved_state, custom_config=cps_config)  # not concerned about output
 
         # check we called the request with the correct parameters passed from CPS
         requested_observation_time = mock_req.call_args_list[0].kwargs.get("json").get("time_range").get("start")
@@ -484,6 +479,7 @@ class TestMonitorAlerts(TestCase):
 
         if cps_config.get("debug", None):
             # check that we have logged request times for each call if debug is enabled
-            self.assertIn("Time elapsed for request", mock_logger.call_args_list[5][0][0])
-            self.assertIn("Time elapsed for request", mock_logger.call_args_list[8][0][0])
-            self.assertIn("Time elapsed for request", mock_logger.call_args_list[12][0][0])
+            # Add safety checks for logger calls
+            self.assertIn("Time elapsed for request", mock_logger[5]["event"])
+            self.assertIn("Time elapsed for request", mock_logger[8]["event"])
+            self.assertIn("Time elapsed for request", mock_logger[12]["event"])
