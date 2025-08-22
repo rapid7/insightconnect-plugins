@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "DNS"
 Vendor = "rapid7"
-Version = "2.0.5"
+Version = "2.0.6"
 Description = "The DNS plugin is used for forward and reverse DNS lookups. This plugin uses [Dig](https://linux.die.net/man/1/dig), or Domain Information Groper, which is a network administration command-line tool for querying Domain Name System (DNS) name servers"
 
 
