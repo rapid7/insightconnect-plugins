@@ -12,6 +12,10 @@ Broadcom Symantec Endpoint Protection delivers the most complete, integrated end
 
 * Credentials with system administrator privileges for a Broadcom Symantec Endpoint Protection server
 
+# Supported Product Versions
+
+* v1 2025/08/21
+
 # Documentation
 
 ## Setup
@@ -20,7 +24,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|credentials|credential_username_password|None|True|Username and password|None|{"username": example, "password": "test"}|None|None|
+|credentials|credential_username_password|None|True|Username and password|None|{'username': 'example', 'password': 'test'}|None|None|
 |domain|string|None|False|The Symantec Endpoint Protection Manager domain to which the username logs on|None|mydomain|None|None|
 |host|string|None|True|Symantec Endpoint Protection Manager host, either IP address or domain|None|sepm-14|None|None|
 |port|integer|8446|True|Symantec Endpoint Protection server port, typically 8446|None|8446|None|None|
@@ -31,8 +35,8 @@ Example input:
 ```
 {
   "credentials": {
-    "username": "example",
-    "password": "test"
+    "password": "test",
+    "username": "example"
   },
   "domain": "mydomain",
   "host": "sepm-14",
@@ -471,16 +475,15 @@ Example output:
 |Worst Infection IDX|string|None|False|Worst infection IDX|None|
 |Write Filters Status|string|None|False|Write filters status|None|
 
+
 ## Troubleshooting
 
-The Broadcom Symantec Endpoint Protection API does not allow for updating blacklists. The plugin will fail if it is told
-to create a blacklist with the name of a blacklist that already exists.
-
-Domain IDs are not the actual domain names - they are individual, unique IDs that come back as part of the 
-'Get Agent Details' action.
+* The Broadcom Symantec Endpoint Protection API does not allow for updating blacklists. The plugin will fail if it is told to create a blacklist with the name of a blacklist that already exists.
+* Domain IDs are not the actual domain names - they are individual, unique IDs that come back as part of the 'Get Agent Details' action.
 
 # Version History
 
+* 2.0.4 - Resolving Snyk Vulnerability | SDK bump to latest version (6.3.9)
 * 2.0.3 - Bumping requirements.txt ('aiohttp' package) | SDK bump to 6.2.2
 * 2.0.2 - Bumping requirements.txt ('aiohttp' package) | SDK bump to 6.2.0
 * 2.0.1 - Bumping requirements.txt | SDK bump to 6.1.4

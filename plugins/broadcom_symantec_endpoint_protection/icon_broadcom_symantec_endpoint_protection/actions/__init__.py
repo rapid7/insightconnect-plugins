@@ -5,4 +5,3 @@ from .get_agent_details.action import GetAgentDetails
 from .blacklist.action import Blacklist
 
 from .quarantine.action import Quarantine
-
