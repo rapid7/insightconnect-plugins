@@ -730,6 +730,7 @@ Example output:
 
 # Version History
 
+* 6.5.3 - Updated SDK to the latest version (6.3.9)
 * 6.5.2 - Updated SDK to the latest version (6.3.3)
 * 6.5.1 - Updated normalizing user object | Updated SDK to the latest version
 * 6.5.0 - Cloud enable the plugin | Bump SDK version to 6.1.0 | Added an error message if trying to connect to Jira on-prem for ICON cloud
