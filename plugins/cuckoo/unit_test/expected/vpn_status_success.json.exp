@@ -1,6 +1,0 @@
-{
- "vpns": [
-    {"name": "vpn1", "status": "Running"},
-    {"name": "vpn2", "status": "Not running"}
- ]
-}
