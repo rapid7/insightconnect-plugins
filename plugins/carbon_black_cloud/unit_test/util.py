@@ -1,14 +1,13 @@
-from icon_carbon_black_cloud.connection.connection import Connection
-from icon_carbon_black_cloud.connection.schema import Input
-
-from typing import Callable, Any, Dict
-from unittest import mock
-
 import json
-import logging
 import os
 import sys
+from typing import Any, Callable, Dict
+from unittest import mock
+
 import requests
+import structlog
+from icon_carbon_black_cloud.connection.connection import Connection
+from icon_carbon_black_cloud.connection.schema import Input
 
 sys.path.append(os.path.abspath("../"))
 
@@ -25,10 +24,10 @@ class Util:
     @staticmethod
     def default_connector(action: Any) -> Any:
         default_connection = Connection()
-        default_connection.logger = logging.getLogger("connection logger")
+        default_connection.logger = structlog.get_logger("connection logger")
         default_connection.connect(STUB_CONNECTION)
         action.connection = default_connection
-        action.logger = logging.getLogger("action logger")
+        action.logger = structlog.get_logger("action logger")
         return action
 
     @staticmethod
