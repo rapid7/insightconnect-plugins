@@ -46,16 +46,17 @@ class TestConnection(TestCase):
         self.assertIn("API Authentication Failed", str(ctx.exception))
 
 
-class TestRunQuery(TestCase):
+class TestRunAdhocQuery(TestCase):
     def setUp(self):
         self.api_key = "not_an_api_key"
         self.region = "us"
         self.logger = logging.getLogger("test")
         self.connection = ApiConnection(self.api_key, self.region, self.logger)
-        self.query_id = "rapid7.insightplatform.compute_machines_without_vulnerability_scan"
+        self.cypher = "rapid7.insightplatform.compute_machines_without_vulnerability_scan"
 
     @patch("icon_rapid7_surface_command.util.api_connection.make_request")
     def test_run_query_success(self, mock_request):
+        # Valid CSV with two data rows
         mock_response = Mock()
         mock_response.text = (
             'Name,Sources,Hostnames,"IP Address(es)"\n'
@@ -64,11 +65,13 @@ class TestRunQuery(TestCase):
         )
         mock_request.return_value = mock_response
 
-        result = self.connection.run_query(self.query_id)
+        result = self.connection.run_adhoc_query(self.cypher)
 
+        # ApiConnection returns a bare list of dicts
         self.assertIsInstance(result, list)
         self.assertEqual(len(result), 2)
         self.assertEqual(result[0]["Name"], "host-a")
+        # No auto-splitting: value remains a string
         self.assertEqual(result[0]["IP Address(es)"], "10.1.1.1, 10.1.1.2")
 
         mock_request.assert_called_once()
@@ -87,18 +90,19 @@ class TestRunQuery(TestCase):
         )
 
         with self.assertRaises(PluginException) as ctx:
-            self.connection.run_query(self.query_id)
+            self.connection.run_adhoc_query(self.cypher)
 
         self.assertEqual(ctx.exception.cause, "API Authentication Failed")
         self.assertEqual(ctx.exception.assistance, "Please verify your API key is correct")
 
     @patch("icon_rapid7_surface_command.util.api_connection.make_request")
     def test_run_query_malformed_response(self, mock_request):
+        # Not real CSV; DictReader will produce zero rows
         mock_response = Mock()
         mock_response.text = "<html>oops</html>"
         mock_request.return_value = mock_response
 
-        result = self.connection.run_query(self.query_id)
+        result = self.connection.run_adhoc_query(self.cypher)
 
         self.assertIsInstance(result, list)
         self.assertEqual(result, [])
@@ -106,7 +110,7 @@ class TestRunQuery(TestCase):
 
     @patch("icon_rapid7_surface_command.util.api_connection.make_request")
     def test_run_query_unprocessable_entity(self, mock_request):
-        # No Response object -> PluginException re-raised
+        # When data is NOT a requests.Response, PluginException is re-raised
         error_response = MockResponse(
             status_code=422,
             content=b'{"error": "Invalid query parameters"}',
@@ -119,7 +123,7 @@ class TestRunQuery(TestCase):
         )
 
         with self.assertRaises(PluginException) as ctx:
-            self.connection.run_query(self.query_id)
+            self.connection.run_adhoc_query(self.cypher)
 
         self.assertEqual(ctx.exception.cause, "Server was unable to process the request")
         self.assertEqual(ctx.exception.assistance, "Please validate the request to Rapid7 Surface Command")
@@ -132,7 +136,7 @@ class TestRunQuery(TestCase):
         )
 
         with self.assertRaises(PluginException) as ctx:
-            self.connection.run_query(self.query_id)
+            self.connection.run_adhoc_query(self.cypher)
 
         self.assertEqual(ctx.exception.cause, "Request timed out")
         self.assertEqual(ctx.exception.assistance, "Please check your network connection or try again later")
@@ -151,7 +155,7 @@ class TestRunQuery(TestCase):
         )
 
         with self.assertRaises(PluginException) as ctx:
-            self.connection.run_query(self.query_id)
+            self.connection.run_adhoc_query(self.cypher)
 
         self.assertEqual(ctx.exception.cause, "Server Error")
         self.assertEqual(
@@ -161,12 +165,12 @@ class TestRunQuery(TestCase):
 
     @patch("icon_rapid7_surface_command.util.api_connection.make_request")
     def test_run_query_empty_response(self, mock_request):
-        # Header-only CSV -> []
+        # Header-only CSV -> no data rows => []
         mock_response = Mock()
         mock_response.text = 'Name,Sources,Hostnames,"IP Address(es)"\n'
         mock_request.return_value = mock_response
 
-        result = self.connection.run_query(self.query_id)
+        result = self.connection.run_adhoc_query(self.cypher)
 
         self.assertIsInstance(result, list)
         self.assertEqual(result, [])
