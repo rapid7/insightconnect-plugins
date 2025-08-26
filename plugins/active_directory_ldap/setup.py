@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="active_directory_ldap-rapid7-plugin",
-    version="10.0.1",
+    version="10.0.2",
     description="[AD LDAP](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/3c5916a9-f1a0-429d-b937-f8fe672d777c) (Active Directory Lightweight Directory Access Protocol) is an application protocol for querying and modifying items in Active Directory. This plugin queries [Microsoft's Active Directory service](https://social.technet.microsoft.com/wiki/contents/articles/5392.active-directory-ldap-syntax-filters.aspx) to programmatically manage and query an Active Directory environment",
     author="rapid7",
     author_email="",

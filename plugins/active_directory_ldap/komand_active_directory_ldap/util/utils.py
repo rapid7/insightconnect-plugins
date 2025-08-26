@@ -1,7 +1,7 @@
 import re
 from typing import List, Optional
 from ldap3.core.exceptions import LDAPInvalidDnError, LDAPOperationsErrorResult
-from ldap3 import MODIFY_REPLACE
+from ldap3 import MODIFY_REPLACE, BASE
 from insightconnect_plugin_runtime.exceptions import PluginException
 from logging import Logger
 
@@ -189,11 +189,12 @@ class ADUtils:
         return ADUtils.escape_brackets_for_query(user_dn)
 
     @staticmethod
-    def check_user_dn_is_valid(conn, user_dn: str, search_base: str) -> bool:
+    def check_user_dn_is_valid(conn, user_dn: str) -> bool:
         try:
             conn.search(
-                search_base=search_base,
-                search_filter=f"(distinguishedName={ADUtils.escape_user_dn(user_dn)})",
+                search_base=user_dn,
+                search_scope=BASE,
+                search_filter="(objectClass=*)",
                 attributes=["userAccountControl"],
             )
         except LDAPInvalidDnError as error:
@@ -201,15 +202,18 @@ class ADUtils:
                 cause="The DN was not found.", assistance=f"The DN {user_dn} was not found.", data=error
             )
         except LDAPOperationsErrorResult as error:
-            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=error)
-        return len([d["dn"] for d in conn.response if "dn" in d]) > 0
+            raise PluginException(
+                preset=PluginException.Preset.SERVER_ERROR,
+                data=error,
+            )
+        return len(conn.response) > 0
 
     @staticmethod
     def change_account_status(conn, dn: str, status: bool, logger: Logger) -> bool:
         dn, search_base = ADUtils.format_dn(dn)
         logger.info(f"Escaped DN {dn}")
 
-        if not ADUtils.check_user_dn_is_valid(conn, dn, search_base):
+        if not ADUtils.check_user_dn_is_valid(conn, dn):
             logger.error(f"The DN {dn} was not found")
             raise PluginException(
                 cause=f"The DN {dn} was not found.", assistance="Please provide a valid DN and try again."

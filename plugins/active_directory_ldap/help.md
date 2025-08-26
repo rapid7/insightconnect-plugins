@@ -762,6 +762,7 @@ the query results, and then using the variable step $item.dn
 
 # Version History
 
+* 10.0.2 - Fixed issue when searching for 'DN' (formatted incorrectly) | Updated SDK to latest version (6.3.10)
 * 10.0.1 - Fixed issues with channel binding support | Updated SDK to the latest version (6.3.6)
 * 10.0.0 - Support for channel binding | Updated SDK to the latest version (6.3.3)
 * 9.0.4 - Updated SDK to the latest version (6.2.5)
