@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 rapid7/insightconnect-python-3-plugin:6.3.9 AS builder
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-plugin:6.3.10 AS builder
 
 WORKDIR /python/src
 
@@ -13,7 +13,7 @@ RUN apk update && apk add --no-cache --virtual bind-tools
 RUN pip install .
 RUN pip uninstall -y setuptools
 
-FROM --platform=linux/amd64 rapid7/insightconnect-python-3-plugin:6.3.9
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-plugin:6.3.10
 
 LABEL organization=rapid7
 LABEL sdk=python
