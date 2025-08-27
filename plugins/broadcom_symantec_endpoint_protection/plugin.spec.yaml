@@ -4,14 +4,14 @@ products: ["insightconnect"]
 name: broadcom_symantec_endpoint_protection
 title: Broadcom Symantec Endpoint Protection
 description: Broadcom Symantec Endpoint Protection delivers the most complete, integrated endpoint security platform on the planet
-version: 2.0.3
+version: 2.0.4
 connection_version: 2
 vendor: rapid7
 sdk:
   type: slim
-  version: 6.2.2
+  version: 6.3.9
 support: rapid7
-supported_versions: ["v1 2024/03/12"]
+supported_versions: ["v1 2025/08/21"]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/broadcom_symantec_endpoint_protection
@@ -21,7 +21,9 @@ key_features:
   - "Get details about an agent"
   - "Blacklist hashes"
   - "Quarantine an agent"
-troubleshooting: "The Broadcom Symantec Endpoint Protection API does not allow for updating blacklists. The plugin will fail if it is told to create a blacklist with the name of a blacklist that already exists.\n\n Domain IDs are not the actual domain names - they are individual, unique IDs that come back as part of the 'Get Agent Details' action."
+troubleshooting:
+  - "The Broadcom Symantec Endpoint Protection API does not allow for updating blacklists. The plugin will fail if it is told to create a blacklist with the name of a blacklist that already exists."
+  - "Domain IDs are not the actual domain names - they are individual, unique IDs that come back as part of the 'Get Agent Details' action."
 requirements:
   - "Credentials with system administrator privileges for a Broadcom Symantec Endpoint Protection server"
 links:
@@ -29,6 +31,7 @@ links:
 references:
   - "[Broadcom Symantec Endpoint Protection](https://www.broadcom.com/products/cyber-security/endpoint/end-user)"
 version_history:
+  - "2.0.4 - Resolving Snyk Vulnerability | SDK bump to latest version (6.3.9)"
   - "2.0.3 - Bumping requirements.txt ('aiohttp' package) | SDK bump to 6.2.2"
   - "2.0.2 - Bumping requirements.txt ('aiohttp' package) | SDK bump to 6.2.0"
   - "2.0.1 - Bumping requirements.txt | SDK bump to 6.1.4"
@@ -44,7 +47,6 @@ hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [symantec, endpoint, edr, antivirus]
   features: []
-
 types:
   domain:
     id:
@@ -57,7 +59,6 @@ types:
       type: string
       description: "Name"
       required: false
-
   group:
     domain:
       title: "Domain"
@@ -814,7 +815,7 @@ connection:
     title: Username and Password
     type: credential_username_password
     description: Username and password
-    example: '{"username": example, "password": "test"}'
+    example: {"username": "example", "password": "test"}
     required: true
   domain:
     title: Domain
@@ -828,7 +829,6 @@ connection:
     description: Whether to enable SSL verification for HTTP requests
     required: true
     example: true
-
 actions:
   get_agent_details:
     title: Get Agent Details
