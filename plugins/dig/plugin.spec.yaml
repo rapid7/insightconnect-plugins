@@ -15,7 +15,7 @@ supported_versions: ['2024-09-10']
 status: []
 sdk:
   type: full
-  version: 6.3.9
+  version: 6.3.10
   user: nobody
   packages:
   - bind-tools
@@ -50,7 +50,7 @@ references:
 - '[Dig](https://linux.die.net/man/1/dig)'
 - '[DNS Status Code](https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml)'
 version_history:
-- 2.0.6 - Updated SDK to the latest version (6.3.9)
+- 2.0.6 - Updated SDK to the latest version (6.3.10)
 - 2.0.5 - Updated SDK to the latest version (6.2.5)
 - 2.0.4 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
 - 2.0.3 - Initial updates for fedramp compliance | Updated SDK to the latest
