@@ -12,7 +12,7 @@ Basename is used to get the last item of a file path or URL using Python's basen
 
 # Supported Product Versions
 
-* Python 3.9
+* Python 3.11
 
 # Documentation
 
@@ -73,6 +73,7 @@ Example output:
 
 # Version History
 
+* 1.1.5 - Updated SDK to the latest version (6.3.10)
 * 1.1.4 - Updated SDK to the latest version (6.2.5)
 * 1.1.3 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 1.1.2 - Added `__init__.py` file to `unit_test` folder | Refreshed with new Tooling
