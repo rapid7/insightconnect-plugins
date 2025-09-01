@@ -154,7 +154,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         ],
         default_delay_threshold="2d",
     )  # noqa: C901
-    def run(self, params={}, state={}, custom_config={}):  # noqa: C901
+    def run(self, params={}, state={}, custom_config={}):  # noqa: C901, MC0001
         rate_limit_delay = custom_config.get("rate_limit_delay", RATE_LIMIT_DELAY)
         if rate_limited := self.check_rate_limit(state):
             return [], state, False, 429, rate_limited
@@ -513,8 +513,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 last_log_datetime = datetime.utcfromtimestamp(last_log_timestamp / 1000).replace(tzinfo=timezone.utc)
             else:
                 last_log_datetime = datetime.utcfromtimestamp(last_log_timestamp).replace(tzinfo=timezone.utc)
-            if last_log_datetime > utc_filter_value:
-                utc_filter_value = last_log_datetime
+            utc_filter_value = max(utc_filter_value, last_log_datetime)
         self.logger.info(f"Task execution for {log_type} will be applying a lookback to {utc_filter_value} UTC...")
         return utc_filter_value
 
