@@ -9,7 +9,7 @@ import string
 import random
 
 
-def _pw_gen(size: int = 16, chars: [str] = string.ascii_letters + string.digits + string.punctuation) -> (str):
+def _pw_gen(size: int = 16, chars: [str] = string.ascii_letters + string.digits + string.punctuation) -> str:
     # pylint: disable=unused-argument
     def gen(size: int = 16) -> str:
         return "".join(random.choice(chars) for _ in range(size))  # noqa: B311
