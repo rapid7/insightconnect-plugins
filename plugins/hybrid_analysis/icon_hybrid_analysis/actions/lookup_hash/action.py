@@ -17,13 +17,12 @@ class LookupHash(insightconnect_plugin_runtime.Action):
         )
 
     def _normalize(self, result):
-        formatted = {Output.FOUND: False, Output.THREATSCORE: 0, Output.REPORTS: []}
-        if result and isinstance(result, list):
+        formatted = {Output.FOUND: False, Output.REPORTS: []}
+        if result and isinstance(result, dict):
             result = insightconnect_plugin_runtime.helper.clean(result)
             return {
                 Output.FOUND: True,
-                Output.REPORTS: result,
-                Output.THREATSCORE: max(node.get("threat_score", 0) for node in result),
+                Output.REPORTS: result.get("reports", []),
             }
         return formatted
 

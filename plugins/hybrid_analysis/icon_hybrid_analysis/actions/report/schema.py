@@ -20,7 +20,8 @@ class Output:
 
 
 class ReportInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -37,14 +38,16 @@ class ReportInput(insightconnect_plugin_runtime.Input):
   ],
   "definitions": {}
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class ReportOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -126,18 +129,13 @@ class ReportOutput(insightconnect_plugin_runtime.Output):
           "title": "State",
           "description": "State in which the analysis is in",
           "order": 6
-        },
-        "verdict": {
-          "type": "string",
-          "title": "Verdict",
-          "description": "Verdict",
-          "order": 7
         }
       }
     }
   }
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
