@@ -1581,6 +1581,7 @@ Example output:
 
 # Version History
 
+* 4.3.0 - Updated SDK to the latest version (6.3.10) | Update Monitor Log Search Start Time parameter after pagination | Add custom config parameter for log limit to Monitor Logs task
 * 4.2.15 - Updated SDK to the latest version (6.3.8) | Add task delay monitoring | Update Monitor Log Search Start Time
 * 4.2.14 - Updated SDK to the latest version (6.3.3)
 * 4.2.13 - Updated SDK to the latest version (6.2.5)
