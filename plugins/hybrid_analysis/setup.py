@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 setup(
     name="hybrid_analysis-rapid7-plugin",
     version="4.0.0",
-    description="[Hybrid Analysis](https://www.hybrid-analysis.com/) is a free malware analysis service powered by Payload Security that detects and analyzes unknown threats using a unique Hybrid Analysis technology. This plugin provides the ability to lookup file hashes to determine whether or not they are malicious.",
+    description="[Hybrid Analysis](https://www.hybrid-analysis.com/) is a free malware analysis service powered by Payload Security that detects and analyzes unknown threats using a unique Hybrid Analysis technology. This plugin provides the ability to lookup file hashes to determine whether or not they are malicious",
     author="rapid7",
     author_email="",
     url="",
