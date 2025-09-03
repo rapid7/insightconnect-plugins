@@ -16,7 +16,7 @@ class HybridAnalysisAPI:
         self.logger = logger
 
     def lookup_by_hash(self, analyzed_hash: str):
-        return self._send_request(method="POST", path="/search/hash", params={"hash": analyzed_hash})
+        return self._send_request(method="GET", path="/search/hash", params={"hash": analyzed_hash})
 
     def lookup_by_terms(self, data: dict):
         return self._send_request(method="POST", path="/search/terms", data=data)
