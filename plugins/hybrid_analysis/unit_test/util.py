@@ -38,12 +38,12 @@ class Util:
 
         if (
             args[1] == "https://www.hybrid-analysis.com/api/v2/search/hash"
-            and kwargs.get("data").get("hash") == "40451f20371329b992fb1b85c754d062"
+            and kwargs.get("params").get("hash") == "4c740b7f0bdc728daf9fca05241e85d921a54a6e17ae47ed1577a2b30792cf5c"
         ):
             return MockResponse("action_lookup_hash", 200)
         elif args[1] == "https://www.hybrid-analysis.com/api/v2/search/hash" and (
-            kwargs.get("data").get("hash") == "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
-            or kwargs.get("data").get("hash") == "44d88612fea8a8f36de82e1278abb02f"
+            kwargs.get("params").get("hash") == "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
+            or kwargs.get("params").get("hash") == "44d88612fea8a8f36de82e1278abb02f"
         ):
             return MockResponse("action_lookup_hash_sha256_sha1", 200)
         elif (

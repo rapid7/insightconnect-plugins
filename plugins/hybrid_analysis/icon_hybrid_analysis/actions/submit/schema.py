@@ -26,7 +26,8 @@ class Output:
 
 
 class SubmitInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -47,13 +48,16 @@ class SubmitInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Environment ID",
       "description": "Environment ID on which the analysis will be performed",
-      "default": "Linux (Ubuntu 16.04, 64 bit)",
+      "default": "Linux (Ubuntu 20.04, 64 bit)",
       "enum": [
-        "Linux (Ubuntu 16.04, 64 bit)",
-        "Android Static Analysis",
-        "Windows 7 64 bit",
+        "Windows 10 64 bit",
+        "Windows 11 64 bit",
+        "Windows 7 32 bit",
         "Windows 7 32 bit (HWP Support)",
-        "Windows 7 32 bit"
+        "Windows 7 64 bit",
+        "Linux (Ubuntu 20.04, 64 bit)",
+        "Mac Catalina 64 bit (x86)",
+        "Android Static Analysis"
       ],
       "order": 5
     },
@@ -116,14 +120,16 @@ class SubmitInput(insightconnect_plugin_runtime.Input):
     }
   }
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class SubmitOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -155,7 +161,8 @@ class SubmitOutput(insightconnect_plugin_runtime.Output):
   },
   "definitions": {}
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

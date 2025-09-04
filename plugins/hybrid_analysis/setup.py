@@ -2,13 +2,14 @@
 from setuptools import setup, find_packages
 
 
-setup(name="hybrid_analysis-rapid7-plugin",
-      version="3.0.1",
-      description="Lookup file hashes to determine if they are malicious",
-      author="rapid7",
-      author_email="",
-      url="",
-      packages=find_packages(),
-      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/icon_hybrid_analysis']
-      )
+setup(
+    name="hybrid_analysis-rapid7-plugin",
+    version="4.0.0",
+    description="[Hybrid Analysis](https://www.hybrid-analysis.com/) is a free malware analysis service powered by Payload Security that detects and analyzes unknown threats using a unique Hybrid Analysis technology. This plugin provides the ability to lookup file hashes to determine whether or not they are malicious",
+    author="rapid7",
+    author_email="",
+    url="",
+    packages=find_packages(),
+    install_requires=["insightconnect-plugin-runtime"],  # Add third-party dependencies to requirements.txt, not here!
+    entry_points={"console_scripts": ["icon_hybrid_analysis = bin.icon_hybrid_analysis:main"]},
+)
