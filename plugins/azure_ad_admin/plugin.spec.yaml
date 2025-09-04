@@ -3,8 +3,8 @@ extension: plugin
 products: [insightconnect]
 name: azure_ad_admin
 title: Azure AD Admin
-description: Perform administrative operations in Azure AD
-version: 4.2.0
+description: "[Azure](https://azure.microsoft.com) AD Admin performs administrative tasks in Azure AD.\n\nIt uses the [User](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0) endpoint in the [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-1.0)"
+version: 5.0.0
 connection_version: 4
 vendor: rapid7
 cloud_ready: true
@@ -13,7 +13,7 @@ supported_versions: ["2022-05-30"]
 status: []
 sdk:
   type: slim
-  version: 6.1.0
+  version: 6.3.10
   user: nobody
 key_features:
   - Add and remove users
@@ -35,6 +35,7 @@ requirements:
   Browse and select your application and click `Add`."
 troubleshooting: "Trigger `risk_detection` needs Application permission to set as `IdentityRiskEvent.Read.All`"
 version_history:
+  - "5.0.0 - Update SDK to the latest version | Update the output type of `risk` for the `risk_detection` trigger to include all fields"
   - "4.2.0 - New action | List Group Members"
   - "4.1.2 - Updated SDK to the latest version | Added additional details in requirements section | `Risk Detection`: Fixed issue where detections were triggered randomly"
   - "4.1.1 - Update requirements in help.md"
@@ -511,7 +512,7 @@ types:
       type: boolean
       description: "Mail enabled"
       required: false
-  geo_coordinates:
+  geoCoordinates:
     altitude:
       title: Altitude
       description: The altitude (height), in feet, above sea level
@@ -527,21 +528,21 @@ types:
       description: The longitude, in decimal
       type: string
       required: false
-  sign_in_location:
+  signInLocation:
     city:
       title: City
       description: City where the sign-in originated. This is calculated using latitude/longitude information from the sign-in activity
       type: string
       required: false
-    country_or_region:
+    countryOrRegion:
       title: Country Or Region
       description: Country code info (2 letter code) where the sign-in originated. This is calculated using latitude/longitude information from the sign-in activity
       type: string
       required: false
-    geo_coordinates:
+    geoCoordinates:
       title: Geo Coordinates
       description: Geo coordinates
-      type: geo_coordinates
+      type: geoCoordinates
       required: false
     state:
       title: State
@@ -554,42 +555,47 @@ types:
       description: Unique ID of the risk detection
       type: string
       required: true
-    request_id:
+    requestId:
       title: Request ID
       description: Request ID of the sign-in associated with the risk detection. This property is null if the risk detection is not associated with a sign-in
       type: string
       required: false
-    correlation_id:
+    correlationId:
       title: Correlation ID
       description: Correlation ID of the sign-in associated with the risk detection. This property is null if the risk detection is not associated with a sign-in
       type: string
       required: false
-    risk_type:
+    riskType:
       title: Risk Type
       description: The type of risk event detected
       type: string
       required: false
-    risk_state:
+    riskState:
       title: Risk State
       description: The state of a detected risky user or sign-in
       type: string
       required: false
-    risk_level:
+    riskLevel:
       title: Risk Level
       description: Level of the detected risk
       type: string
       required: false
-    risk_detail:
+    riskDetail:
       title: Risk Detail
       description: Details of the detected risk. Details for this property are only available for Azure AD Premium P2 customers. P1 customers will be returned hidden
       type: string
       required: false
+    riskEventType:
+        title: Risk Event Type
+        description: The type of risk event detected
+        type: string
+        required: false
     source:
       title: Risk Level
       description: Source of the risk detection. For example, activeDirectory
       type: string
       required: false
-    detection_timing_type:
+    detectionTimingType:
       title: Detection Timimg Type
       description: Timing of the detected risk (real-time/offline). The possible values are notDefined, realtime, nearRealtime, offline, unknownFutureValue
       type: string
@@ -599,12 +605,12 @@ types:
       description: Indicates the activity type the detected risk is linked to. The possible values are signin, user, unknownFutureValue
       type: string
       required: false
-    token_issuer_type:
+    tokenIssuerType:
       title: Token Issuer Type
       description: Indicates the type of token issuer for the detected sign-in risk. The possible values are AzureAD, ADFederationServices, and unknownFutureValue
       type: string
       required: false
-    ip_address:
+    ipAddress:
       title: IP Address
       description: IP address of the client from where the risk occurred
       type: string
@@ -614,37 +620,37 @@ types:
       description: Location of the client from where the risk occurred
       type: sign_in_location
       required: false
-    activity_date_time:
+    activityDateTime:
       title: Activity Date Time
       description: Date and time that the risky activity occurred
       type: string
       required: false
-    detected_date_time:
+    detectedDateTime:
       title: Detected Date Time
       description: Date and time that the risk was detected
       type: string
       required: false
-    last_updated_date_time:
+    lastUpdatedDateTime:
       title: Last Updated Date Time
       description: Date and time that the risk detection was last updated
       type: string
       required: false
-    user_id:
+    userId:
       title: User ID
       description: User ID
       type: string
       required: false
-    user_display_name:
+    userDisplayName:
       title: User Display Name
       description: User display name
       type: string
       required: false
-    user_principal_name:
+    userPrincipalName:
       title: User Principal Name
       description: The user principal name (UPN) of the user
       type: string
       required: false
-    additional_info:
+    additionalInfo:
       title: Additional Information
       description: Additional information associated with the risk detection
       type: string

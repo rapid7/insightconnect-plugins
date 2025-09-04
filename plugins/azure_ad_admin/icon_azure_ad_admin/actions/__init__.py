@@ -35,4 +35,3 @@ from .get_device.action import GetDevice
 from .search_device.action import SearchDevice
 
 from .list_group_members.action import ListGroupMembers
-
