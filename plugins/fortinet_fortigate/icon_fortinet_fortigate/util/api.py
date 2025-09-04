@@ -11,8 +11,8 @@ class FortigateAPI:
         self.logger = logger
         self.ssl_verify = ssl_verify
         self.session = Session()
-        self.session.params = {"access_token": api_key}
         self.helper = Helpers(self.logger)
+        self.headers = {"Authorization": f"Bearer {api_key}", "Content-type": "application/json"}
 
     def call_api(
         self, path: str, method: str = "GET", params: dict = None, json_data: dict = None
@@ -24,6 +24,7 @@ class FortigateAPI:
                 verify=self.ssl_verify,
                 json=json_data,
                 params=params,
+                headers=self.headers,
             )
             self.helper.http_errors(response.text, response.status_code)
             if response.status_code > 500:
