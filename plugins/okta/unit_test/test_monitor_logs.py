@@ -90,7 +90,7 @@ class TestMonitorLogs(TestCase):
         self.assertEqual(error, None)
         if mocked_warn.called:
             log_call = call(
-                f"No record to use as last timestamp, moving timestamp forward to the current time: {expected.get('state').get('last_collection_timestamp')}"
+                f"No record to use as last timestamp, retaining existing timestamp: {expected.get('state').get('last_collection_timestamp')}"
             )
             self.assertIn(log_call, mocked_warn.call_args_list)
 
@@ -140,7 +140,7 @@ class TestMonitorLogs(TestCase):
         # ensure sure that the mocked response contained a single entry that we discarded and logged this happening
         logger_info_call = call("No new events found since last execution.")
         logger_warn_call = call(
-            f"No record to use as last timestamp, moving timestamp forward to the current time: {current_state.get('last_collection_timestamp')}"
+            f"No record to use as last timestamp, retaining existing timestamp: {current_state.get('last_collection_timestamp')}"
         )
 
         self.assertIn(logger_info_call, mocked_info_log.call_args_list)
@@ -181,6 +181,7 @@ class TestMonitorLogs(TestCase):
         # Part one: call a normal next page workflow when we expect the TS to not exist in the response
         current_state = {
             "last_collection_timestamp": first_ts,
+            "last_search_end_timestamp": first_ts,
             "next_page_link": "https://example.okta.com/nextLink?q=next",
         }
         actual, new_state, has_more_pages, _status_code, _error = self.action.run(
