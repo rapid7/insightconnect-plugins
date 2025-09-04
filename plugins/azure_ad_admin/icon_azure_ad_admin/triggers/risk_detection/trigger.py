@@ -115,9 +115,11 @@ class RiskDetection(insightconnect_plugin_runtime.Trigger):
             headers=self.connection.get_headers(self.connection.get_auth_token()),
             params=clean(
                 {
-                    "$filter": f"{DETECTED_RISK_DATE_FIELD} gt {latest_risk_detection_time.isoformat()}Z" + risk_filter
-                    if latest_risk_detection_time
-                    else "",
+                    "$filter": (
+                        f"{DETECTED_RISK_DATE_FIELD} gt {latest_risk_detection_time.isoformat()}Z" + risk_filter
+                        if latest_risk_detection_time
+                        else ""
+                    ),
                     "$top": 500,
                 }
             ),

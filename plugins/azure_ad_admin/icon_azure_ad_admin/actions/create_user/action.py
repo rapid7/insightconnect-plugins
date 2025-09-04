@@ -9,7 +9,7 @@ import string
 import random
 
 
-def _pw_gen(size: int = 16, chars: [str] = string.ascii_letters + string.digits + string.punctuation) -> (str):
+def _pw_gen(size: int = 16, chars: [str] = string.ascii_letters + string.digits + string.punctuation) -> str:
     # pylint: disable=unused-argument
     def gen(size: int = 16) -> str:
         return "".join(random.choice(chars) for _ in range(size))  # noqa: B311
@@ -72,7 +72,7 @@ class CreateUser(insightconnect_plugin_runtime.Action):
 
         headers = self.connection.get_headers(self.connection.get_auth_token())
         endpoint_formatted = f"https://graph.microsoft.com/v1.0/{self.connection.tenant}/users/"
-        result = requests.post(endpoint_formatted, headers=headers, json=user)
+        result = requests.post(endpoint_formatted, headers=headers, json=user, timeout=60)
 
         try:
             result.raise_for_status()
@@ -109,7 +109,7 @@ class CreateUser(insightconnect_plugin_runtime.Action):
         headers = self.connection.get_headers(self.connection.get_auth_token())
         from_user = mailbox_id
         endpoint_formatted = f"https://graph.microsoft.com/v1.0/{self.connection.tenant}/users/{from_user}/sendMail"
-        result = requests.post(endpoint_formatted, headers=headers, data=message)
+        result = requests.post(endpoint_formatted, headers=headers, data=message, timeout=60)
 
         try:
             result.raise_for_status()
