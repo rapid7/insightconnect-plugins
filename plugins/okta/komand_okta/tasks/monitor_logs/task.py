@@ -11,12 +11,15 @@ import re
 
 DEFAULT_CUTOFF_HOURS = 168
 DEFAULT_INITIAL_LOOKBACK = 24
+DEFAULT_EVENTS_LIMIT = 1000
 
 
 class MonitorLogs(insightconnect_plugin_runtime.Task):
     LAST_COLLECTION_TIMESTAMP = "last_collection_timestamp"
+    LAST_SEARCH_END_TIMESTAMP = "last_search_end_timestamp"
     NEXT_PAGE_LINK = "next_page_link"
     STATUS_CODE = "status_code"
+    EVENTS_LIMIT = "events_limit"
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -27,13 +30,14 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             state=MonitorLogsState(),
         )
 
-    @monitor_task_delay(timestamp_keys=[LAST_COLLECTION_TIMESTAMP], default_delay_threshold="2d")
+    @monitor_task_delay(timestamp_keys=[LAST_SEARCH_END_TIMESTAMP], default_delay_threshold="2d")
     def run(self, params={}, state={}, custom_config={}):  # pylint: disable=unused-argument
         self.connection.api_client.toggle_rate_limiting = False
         has_more_pages = False
         parameters = {}
         try:
-            filter_time, is_filter_datetime = self._get_filter_time(state, custom_config)
+            # Prepare the parameters
+            filter_time, is_filter_datetime, events_limit = self._get_filter_parameters(state, custom_config)
             now = self.get_current_time() - timedelta(minutes=1)  # allow for latency of this being triggered
             now_iso = self.get_iso(now)
             # Whether to convert filter_time in hours to datetime
@@ -45,8 +49,9 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             next_page_link = state.get(self.NEXT_PAGE_LINK)
             if not state:
                 self.logger.info("First run")
-                parameters = {"since": filter_hours, "until": now_iso, "limit": 1000}
+                parameters = {"since": filter_hours, "until": now_iso, "limit": events_limit}
                 state[self.LAST_COLLECTION_TIMESTAMP] = filter_hours  # we only change this once we get new events
+                state[self.LAST_SEARCH_END_TIMESTAMP] = now_iso
             else:
                 if next_page_link:
                     state.pop(self.NEXT_PAGE_LINK)
@@ -55,9 +60,12 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                     parameters = {
                         "since": self.get_since(state, filter_hours, filter_time, is_filter_datetime),
                         "until": now_iso,
-                        "limit": 1000,
+                        "limit": events_limit,
                     }
+                    # Used to determine the next run time window start. If paginating, do not update this.
+                    state[self.LAST_SEARCH_END_TIMESTAMP] = now_iso
                     self.logger.info("Subsequent run...")
+            # Call the API
             try:
                 self.logger.info(f"Calling Okta with parameters={parameters} and next_page={next_page_link}")
                 new_logs_resp = (
@@ -73,7 +81,9 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 if next_page_link:
                     state[self.NEXT_PAGE_LINK] = next_page_link
                     has_more_pages = True
-                state[self.LAST_COLLECTION_TIMESTAMP] = self.get_last_collection_timestamp(new_logs, now_iso)
+                state[self.LAST_COLLECTION_TIMESTAMP] = self.get_last_collection_timestamp(
+                    new_logs, state.get(self.LAST_COLLECTION_TIMESTAMP)
+                )
                 return new_logs, state, has_more_pages, 200, None
             except ApiException as error:
                 self.logger.info(f"An API Exception has been raised. Status code: {error.status_code}. Error: {error}")
@@ -120,8 +130,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         :param is_date_time: is filter time datetime or hours
         :return: updated time string to use in the parameters.
         """
-        saved_time = state.get(self.LAST_COLLECTION_TIMESTAMP)
-
+        saved_time = state.get(self.LAST_SEARCH_END_TIMESTAMP, state.get(self.LAST_COLLECTION_TIMESTAMP))
         if saved_time < cut_off:
             if is_date_time:
                 self.logger.info(
@@ -133,9 +142,8 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                     f"Saved state {saved_time} exceeds the cut off ({filter_hours} hours)."
                     f" Reverting to use time: {cut_off}"
                 )
-            state[self.LAST_COLLECTION_TIMESTAMP] = cut_off
-
-        return state[self.LAST_COLLECTION_TIMESTAMP]
+            state[self.LAST_SEARCH_END_TIMESTAMP] = cut_off
+        return state.get(self.LAST_SEARCH_END_TIMESTAMP, state.get(self.LAST_COLLECTION_TIMESTAMP))
 
     @staticmethod
     def get_next_page_link(headers: dict) -> str:
@@ -156,7 +164,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         In the collector code we would iterate over all events and drop any that match the 'since' parameter to make
         sure that we don't double ingest the same event from the previous run (see `get_last_collection_timestamp`).
         :param logs: response json including all returned events from Okta.
-        :param time: 'since' parameter being used to query Okta.
+        :param time: Last log collection timestamp used for splitting the returned logs into duplicates and new logs.
         :param pagination: next_page_link value to determine if we need to filter
         :return: filtered_logs: removed any events that matched the query start time.
         """
@@ -171,25 +179,29 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             return []
 
         log = "Returning {filtered} log event(s) from this iteration."
-        pop_index, filtered_logs = 0, logs
-
+        # Pop index is instantiated as None to allow for 0 index to be used if needed.
+        pop_index, filtered_logs = None, logs
         for index, event in enumerate(logs):
             published = event.get("published")
             if published and published > time:
                 pop_index = index
                 break
-        if pop_index:
+        if pop_index is None:
+            # If we reach here then all returned events are older than the last saved event time.
+            log += f" All {len(logs)} returned event log(s) are older than the last saved event time."
+            filtered_logs = []
+        elif pop_index:
             filtered_logs = logs[pop_index:]
             log += f" Removed {pop_index} event log(s) that should have been returned in previous iteration."
         self.logger.info(log.format(filtered=len(filtered_logs)))
         return filtered_logs
 
-    def get_last_collection_timestamp(self, new_logs: list, now: str) -> str:
+    def get_last_collection_timestamp(self, new_logs: list, existing_timestamp: str) -> str:
         """
         Mirror the behaviour in collector code to save the TS of the last parsed event as the 'since' time checkpoint.
         If no new events found then we want to keep the current checkpoint the same.
         :param new_logs: event logs returned from Okta.
-        :param now: string now time in ISO format to use as a fallback if no new logs were returned.
+        :param existing_timestamp: string now time in ISO format to use as a fallback if no new logs were returned.
         :return: new time value to save as the checkpoint to query 'since' on the next run.
         """
         new_ts = ""
@@ -197,13 +209,13 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             new_ts = new_logs[-1].get("published")
             self.logger.info(f"Saving the last record's published timestamp ({new_ts}) as checkpoint.")
         if not new_ts:
-            new_ts = now
+            new_ts = existing_timestamp
             self.logger.warning(
-                f"No record to use as last timestamp, moving timestamp forward to the current time: {now}"
+                f"No record to use as last timestamp, retaining existing timestamp: {existing_timestamp}"
             )
         return new_ts
 
-    def _get_filter_time(self, state: Dict, custom_config: Dict) -> Tuple[Union[Optional[int], Any], bool]:
+    def _get_filter_parameters(self, state: Dict, custom_config: Dict) -> Tuple[Union[Optional[int], Any], bool, int]:
         """
         Apply custom_config params (if provided) to the task. If a lookback value exists, it should take
         precedence (this can allow a larger filter time), otherwise use the default_cutoff value.
@@ -212,8 +224,10 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         :param custom_config: dictionary passed containing `cutoff` or `lookback` values
         :return: filter_value to be applied in request to Okta
         :return: is_filter_datetime boolean value if filter_value is of type datetime
+        :return: events_limit to be applied in request to Okta, defaults to 1000
         """
         filter_cutoff = custom_config.get("cutoff", {}).get("date")
+        events_limit = custom_config.get(self.EVENTS_LIMIT, DEFAULT_EVENTS_LIMIT)
         if filter_cutoff is None:
             default_cutoff = DEFAULT_CUTOFF_HOURS
             if not state:
@@ -227,4 +241,4 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             self.logger.info(f"Task execution will be applying a lookback to {filter_value}...")
         else:
             self.logger.info(f"Task execution will be applying filter period of {filter_value} hours...")
-        return filter_value, is_filter_datetime
+        return filter_value, is_filter_datetime, events_limit
