@@ -7,4 +7,3 @@ from .lookup_terms.action import LookupTerms
 from .submit.action import Submit
 
 from .report.action import Report
-

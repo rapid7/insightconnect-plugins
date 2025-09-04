@@ -14,11 +14,13 @@ class Submit(insightconnect_plugin_runtime.Action):
             name="submit", description=Component.DESCRIPTION, input=SubmitInput(), output=SubmitOutput()
         )
         self.environment_mapping = {
-            "Linux (Ubuntu 16.04, 64 bit)": 300,
-            "Android Static Analysis": 200,
-            "Windows 7 64 bit": 120,
-            "Windows 7 32 bit (HWP Support)": 110,
+            "Windows 10 64 bit": 160,
+            "Windows 11 64 bit": 140,
             "Windows 7 32 bit": 100,
+            "Windows 7 32 bit (HWP Support)": 110,
+            "Windows 7 64 bit": 120,
+            "Mac Catalina 64 bit (x86)": 400,
+            "Android Static Analysis": 200,
         }
 
     def run(self, params={}):
