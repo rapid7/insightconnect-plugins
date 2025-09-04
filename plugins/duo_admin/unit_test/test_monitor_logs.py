@@ -56,6 +56,17 @@ class TestMonitorLogs(TestCase):
                 },
             ],
             [
+                "with_incorrect_timestamp_in_state",
+                Util.read_file_to_dict("inputs/monitor_logs_incorrect_timestamp_format.json.inp"),
+                Util.read_file_to_dict("expected/monitor_logs_2.json.exp"),
+                {
+                    "filter_cutoff_auth_logs": {"date": "2023-04-30T08:34:46.000Z"},
+                    "filter_cutoff_admin_logs": {"date": "2023-04-30T08:34:46.000Z"},
+                    "filter_cutoff_trust_monitor_events_logs": {"date": "2023-04-30T08:34:46.000Z"},
+                    "lookback": "2023-04-30T08:34:46.000Z",
+                },
+            ],
+            [
                 "next_page",
                 Util.read_file_to_dict("inputs/monitor_logs_next_page.json.inp"),
                 Util.read_file_to_dict("expected/monitor_logs_3.json.exp"),

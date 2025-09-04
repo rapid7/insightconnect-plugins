@@ -5,6 +5,7 @@ from typing import Any, Dict, Tuple, Union
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import hash_sha1
+from insightconnect_plugin_runtime.telemetry import monitor_task_delay
 
 # Custom imports below
 from komand_duo_admin.util.constants import Assistance
@@ -144,7 +145,16 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             return 200, None
         return status_code, error
 
-    def run(self, params={}, state={}, custom_config={}):  # noqa: C901
+    # pylint: disable=too-many-branches,too-many-statements
+    @monitor_task_delay(
+        timestamp_keys=[
+            "admin_logs_last_log_timestamp",
+            "auth_logs_last_log_timestamp",
+            "trust_monitor_last_log_timestamp",
+        ],
+        default_delay_threshold="2d",
+    )  # noqa: C901
+    def run(self, params={}, state={}, custom_config={}):  # noqa: C901, MC0001
         rate_limit_delay = custom_config.get("rate_limit_delay", RATE_LIMIT_DELAY)
         if rate_limited := self.check_rate_limit(state):
             return [], state, False, 429, rate_limited
@@ -219,6 +229,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                             new_trust_monitor_events,
                             backward_comp_first_run,
                             TRUST_MONITOR_EVENTS_LOG_TYPE,
+                            maxtime,
                         )
                         self.logger.info(f"{len(new_trust_monitor_events)} trust monitor events retrieved")
                     if new_trust_monitor_event_hashes:
@@ -254,7 +265,11 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                         )
                         new_logs.extend(new_admin_logs)
                         state[self.ADMIN_LOGS_LAST_LOG_TIMESTAMP] = self.get_highest_timestamp(
-                            admin_logs_last_log_timestamp, new_admin_logs, backward_comp_first_run, ADMIN_LOGS_LOG_TYPE
+                            admin_logs_last_log_timestamp,
+                            new_admin_logs,
+                            backward_comp_first_run,
+                            ADMIN_LOGS_LOG_TYPE,
+                            maxtime,
                         )
                         self.logger.info(f"{len(new_admin_logs)} admin logs retrieved")
 
@@ -288,7 +303,11 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                     # Grab the most recent timestamp and save it to use as min time for next run
                     new_logs.extend(new_auth_logs)
                     state[self.AUTH_LOGS_LAST_LOG_TIMESTAMP] = self.get_highest_timestamp(
-                        auth_logs_last_log_timestamp, new_auth_logs, backward_comp_first_run, AUTH_LOGS_LOG_TYPE
+                        auth_logs_last_log_timestamp,
+                        new_auth_logs,
+                        backward_comp_first_run,
+                        AUTH_LOGS_LOG_TYPE,
+                        maxtime,
                     )
                     self.logger.info(f"{len(new_auth_logs)} auth logs retrieved")
 
@@ -347,7 +366,17 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         )
         return logs_to_return, new_logs_hashes
 
-    def get_highest_timestamp(self, last_recorded_highest_timestamp, logs, backward_comp_first_run, log_type):
+    def get_highest_timestamp(
+        self, last_recorded_highest_timestamp, logs, backward_comp_first_run, log_type, current_time
+    ):
+        """
+        :param last_recorded_highest_timestamp:  The last recorded highest timestamp from the state
+        :param logs: List of logs retrieved from the API
+        :param backward_comp_first_run: Whether this is the first run after moving to the 3 timestamp method
+        :param log_type: The log type to be used to determine which timestamp field to use
+        :param current_time: The current search window end time formatted for each log type
+        :return: The highest timestamp found in the logs or the current time if no logs found
+        """
         if last_recorded_highest_timestamp:
             if backward_comp_first_run:
                 # Convert the previous timestamp (13 digit format) to the new format used
@@ -360,6 +389,9 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         else:
             highest_timestamp = 0
         self.logger.info(f"Previous highest recorded timestamp is {highest_timestamp}")
+        if not logs:
+            self.logger.info(f"No new logs retrieved so highest timestamp updated to current time {current_time}")
+            return current_time
         for log in logs:
             # Event monitor uses surfaced_timestamp but other endpoints use timestamp
             if log_type == TRUST_MONITOR_EVENTS_LOG_TYPE:
@@ -481,8 +513,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 last_log_datetime = datetime.utcfromtimestamp(last_log_timestamp / 1000).replace(tzinfo=timezone.utc)
             else:
                 last_log_datetime = datetime.utcfromtimestamp(last_log_timestamp).replace(tzinfo=timezone.utc)
-            if last_log_datetime > utc_filter_value:
-                utc_filter_value = last_log_datetime
+            utc_filter_value = max(utc_filter_value, last_log_datetime)
         self.logger.info(f"Task execution for {log_type} will be applying a lookback to {utc_filter_value} UTC...")
         return utc_filter_value
 
