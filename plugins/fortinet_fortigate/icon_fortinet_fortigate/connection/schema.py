@@ -5,6 +5,7 @@ import json
 
 class Input:
     API_KEY = "api_key"
+    AUTHENTICATION_TYPE = "authentication_type"
     HOSTNAME = "hostname"
     SSL_VERIFY = "ssl_verify"
 
@@ -22,6 +23,17 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "API key",
       "order": 2
     },
+    "authentication_type": {
+      "type": "string",
+      "title": "Authentication Type",
+      "description": "Type of authentication",
+      "default": "Access Token",
+      "enum": [
+        "Bearer Token",
+        "Access Token"
+      ],
+      "order": 4
+    },
     "hostname": {
       "type": "string",
       "title": "Hostname",
@@ -38,6 +50,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   },
   "required": [
     "api_key",
+    "authentication_type",
     "hostname",
     "ssl_verify"
   ],

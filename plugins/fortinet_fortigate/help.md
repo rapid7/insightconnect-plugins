@@ -28,6 +28,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |api_key|credential_secret_key|None|True|API key|None|2Fty5834tFpBdidePJnt9075MMdkUb|None|None|
+|authentication_type|string|Access Token|True|Type of authentication|["Bearer Token", "Access Token"]|Access Token|None|None|
 |hostname|string|None|True|Hostname or IP of your FortiGate server e.g. myfortigate.internal, 192.168.10.1, 192.168.10.1:8000|None|example.com|None|None|
 |ssl_verify|boolean|False|True|SSL verify|None|False|None|None|
 
@@ -36,6 +37,7 @@ Example input:
 ```
 {
   "api_key": "2Fty5834tFpBdidePJnt9075MMdkUb",
+  "authentication_type": "Access Token",
   "hostname": "example.com",
   "ssl_verify": false
 }
@@ -746,7 +748,7 @@ Add the orchestrator's IP address to the trusted hosts in CIDR form e.g. `198.51
 
 # Version History
 
-* 6.0.4 - Moved authorization from params to headers to enhance security | Bumped SDK to latest version (6.3.10)
+* 6.0.4 - Add new parameter in connection configuration to distinguish authentication type | Bumped SDK to latest version (6.3.10)
 * 6.0.3 - Fixed issue within connection test | Bumped SDK to latest version (6.3.8)
 * 6.0.2 - Bumping requirements.txt | SDK bump to 6.2.0 | Fixing 'cidr' function in unit test
 * 6.0.1 - Resolve connection test failure with Fortigate version 6.4.1 and above | Fix bug in action 'Check if Address in Group', where the action would fail if the IPV6 Group did not exist

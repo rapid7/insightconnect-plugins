@@ -6,13 +6,17 @@ import json
 
 
 class FortigateAPI:
-    def __init__(self, host, api_key, logger, ssl_verify=False):
+    def __init__(self, host, api_key, logger, authentication_type, ssl_verify=False):
         self.host = host
         self.logger = logger
         self.ssl_verify = ssl_verify
         self.session = Session()
         self.helper = Helpers(self.logger)
-        self.headers = {"Authorization": f"Bearer {api_key}", "Content-type": "application/json"}
+        self.headers = {}
+        if authentication_type == "Access Token":
+            self.session.params = {"access_token": api_key}
+        else:
+            self.headers = {"Authorization": f"Bearer {api_key}", "Content-type": "application/json"}
 
     def call_api(
         self, path: str, method: str = "GET", params: dict = None, json_data: dict = None
