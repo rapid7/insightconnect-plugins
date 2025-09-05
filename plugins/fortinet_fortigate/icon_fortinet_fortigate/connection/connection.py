@@ -19,7 +19,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.host = params.get(Input.HOSTNAME)
         self.api_key = params.get(Input.API_KEY).get("secretKey")
         self.ssl_verify = params.get(Input.SSL_VERIFY)
-        self.authentication_type = params.get(Input.AUTHENTICATION_TYPE)
+        self.authentication_type = params.get(Input.AUTHENTICATION_TYPE, "Access Token")
 
         # Strip http:// or https://
         if self.host.startswith("http://"):

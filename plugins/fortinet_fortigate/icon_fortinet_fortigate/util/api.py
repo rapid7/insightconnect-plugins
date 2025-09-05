@@ -1,12 +1,21 @@
-import requests
-from requests import Session
-from insightconnect_plugin_runtime.exceptions import PluginException
-from icon_fortinet_fortigate.util.util import Helpers
 import json
+from logging import Logger
+
+import requests
+from icon_fortinet_fortigate.util.util import Helpers
+from insightconnect_plugin_runtime.exceptions import PluginException
+from requests import Session
 
 
 class FortigateAPI:
-    def __init__(self, host, api_key, logger, authentication_type, ssl_verify=False):
+    def __init__(
+        self,
+        host: str,
+        api_key: str,
+        logger: Logger,
+        authentication_type: str,
+        ssl_verify: bool = False,
+    ):
         self.host = host
         self.logger = logger
         self.ssl_verify = ssl_verify
@@ -16,10 +25,17 @@ class FortigateAPI:
         if authentication_type == "Access Token":
             self.session.params = {"access_token": api_key}
         else:
-            self.headers = {"Authorization": f"Bearer {api_key}", "Content-type": "application/json"}
+            self.headers = {
+                "Authorization": f"Bearer {api_key}",
+                "Content-type": "application/json",
+            }
 
     def call_api(
-        self, path: str, method: str = "GET", params: dict = None, json_data: dict = None
+        self,
+        path: str,
+        method: str = "GET",
+        params: dict = None,
+        json_data: dict = None,
     ) -> requests.Response:
         try:
             response = self.session.request(
@@ -32,12 +48,16 @@ class FortigateAPI:
             )
             self.helper.http_errors(response.text, response.status_code)
             if response.status_code > 500:
-                raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
+                raise PluginException(
+                    preset=PluginException.Preset.SERVER_ERROR, data=response.text
+                )
 
             if 200 <= response.status_code < 300:
                 return response.json()
 
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+            raise PluginException(
+                preset=PluginException.Preset.UNKNOWN, data=response.text
+            )
         except json.decoder.JSONDecodeError as e:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
         except requests.exceptions.HTTPError as e:
@@ -85,11 +105,15 @@ class FortigateAPI:
         # encode '/' characters in address name
         encoded_address_name = self.helper.url_encode(address_name)
         try:
-            response_ipv4 = self.call_api(path=f"firewall/address/{encoded_address_name}")
+            response_ipv4 = self.call_api(
+                path=f"firewall/address/{encoded_address_name}"
+            )
             if response_ipv4.get("http_status") == 200:
                 return response_ipv4
         except PluginException:
-            self.logger.info(f"The specified object {address_name} was not found in domain and IPv4 address objects.")
+            self.logger.info(
+                f"The specified object {address_name} was not found in domain and IPv4 address objects."
+            )
 
         response_ipv6 = self.call_api(path=f"firewall/address6/{encoded_address_name}")
         if response_ipv6.get("http_status") == 200:
