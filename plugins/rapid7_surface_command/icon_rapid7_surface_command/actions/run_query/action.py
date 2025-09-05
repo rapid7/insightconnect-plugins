@@ -2,6 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import RunQueryInput, RunQueryOutput, Input, Output, Component
 
 # Custom imports below
+from insightconnect_plugin_runtime.helper import clean
 
 
 class RunQuery(insightconnect_plugin_runtime.Action):
@@ -19,4 +20,4 @@ class RunQuery(insightconnect_plugin_runtime.Action):
         query_id = params.get(Input.QUERY_ID)
         # END INPUT BINDING - DO NOT REMOVE
 
-        return self.connection.api.run_query(query_id=query_id)
+        return {Output.ITEMS: clean(self.connection.api.run_query(query_id=query_id))}
