@@ -748,7 +748,7 @@ Add the orchestrator's IP address to the trusted hosts in CIDR form e.g. `198.51
 
 # Version History
 
-* 6.0.4 - Add new parameter in connection configuration to distinguish authentication type | Bumped SDK to latest version (6.3.10)
+* 7.0.0 - Add new parameter in connection configuration to distinguish authentication type | Bumped SDK to latest version (6.3.10)
 * 6.0.3 - Fixed issue within connection test | Bumped SDK to latest version (6.3.8)
 * 6.0.2 - Bumping requirements.txt | SDK bump to 6.2.0 | Fixing 'cidr' function in unit test
 * 6.0.1 - Resolve connection test failure with Fortigate version 6.4.1 and above | Fix bug in action 'Check if Address in Group', where the action would fail if the IPV6 Group did not exist
