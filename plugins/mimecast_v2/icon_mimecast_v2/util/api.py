@@ -17,14 +17,32 @@ from collections import OrderedDict
 from requests import Response, Request
 from io import BytesIO
 from icon_mimecast_v2.util.constants import Endpoints
-from typing import Dict, List, Tuple, Iterator
+from typing import Any, Dict, List, Tuple, Iterator, Union, Optional, Literal
 from multiprocessing.dummy import Manager, Pool
 import gzip
 import json
 from urllib.parse import urlparse, urlunparse
+from datetime import datetime, timezone
 
+# Define HTTP methods
 GET = "GET"
 POST = "POST"
+
+# Define TTP log type mapping
+TTP_LOG_MAP = {
+    "ttp_impersonation": {
+        "data": "impersonationLogs",
+        "endpoint": Endpoints.GET_IMPERSONATION_LOGS,
+    },
+    "ttp_attachment": {
+        "data": "attachmentLogs",
+        "endpoint": Endpoints.GET_ATTACHMENT_LOGS,
+    },
+    "ttp_url": {
+        "data": "clickLogs",
+        "endpoint": Endpoints.GET_URL_LOGS,
+    },
+}
 
 
 class API:
@@ -55,23 +73,68 @@ class API:
         self.access_token = response.get("access_token")
         self.logger.info("API: Authenticated")
 
+    def validate_permissions(self, log_types: Optional[Literal["SIEM", "TTP"]] = None) -> List[str]:
+        # Initialize list of log type that passed permission checks
+        permitted_log_types = []
+
+        # If no log types specified, check all
+        if not log_types:
+            log_types = "SIEM,TTP"
+
+        # Start permission validation, define current time for any date-based checks
+        self.logger.info(f"API: Starting permission validation for {log_types}...")
+        now_datetime = datetime.now(tz=timezone.utc)
+
+        # Get SIEM logs permission check
+        if "SIEM" in log_types.upper():
+            try:
+                self.logger.log(self.log_level, "API: Validating permissions for SIEM log access...")
+                self.get_siem_logs(
+                    log_type="receipt", query_date=now_datetime.date(), page_size=1, max_threads=1, next_page=None
+                )
+                permitted_log_types.append("receipt")
+            except APIException:
+                self.logger.log(self.log_level, "API: Permission check failed for SIEM logs. Skipping...")
+
+        # Get TTP logs permission check for each log type (each endpoint has separate permissions)
+        if "TTP" in log_types.upper():
+            for log_type in TTP_LOG_MAP:
+                try:
+                    self.logger.log(
+                        self.log_level, f"API: Validating permissions for TTP log access for log type {log_type}..."
+                    )
+                    self.get_ttp_log(
+                        log_type=log_type,
+                        from_date=now_datetime.replace(microsecond=0).isoformat(),
+                        to_date=now_datetime.replace(microsecond=0).isoformat(),
+                        page_size=1,
+                    )
+                    permitted_log_types.append(log_type)
+                except APIException:
+                    self.logger.log(
+                        self.log_level, f"API: Permission check failed for TTP log type {log_type}. Skipping..."
+                    )
+                    continue
+        self.logger.info("API: Permission validation completed successfully!")
+        return permitted_log_types
+
     def get_siem_logs(
         self,
         log_type: str,
         query_date: str,
-        next_page: str,
+        next_page: Union[str, None],
         page_size: int = 100,
         max_threads: int = 10,
         starting_url: str = None,
         starting_position: int = 0,
         log_size_limit: int = 250,
     ) -> Tuple[List[str], str, bool]:
-        self.logger.info(f"API: Applying page size limit of {page_size} for log type {log_type}")
+        self.logger.info(f"API: (SIEM) Applying page size limit of {page_size} for log type {log_type}")
         batch_download_urls, url_count, result_next_page, caught_up = self.get_siem_batches(
             log_type, query_date, next_page, page_size
         )
         pool_data = self.resume_from_batch(batch_download_urls, starting_url)
-        self.logger.info(f"API: Getting SIEM logs from batches for log type {log_type}...")
+        self.logger.info(f"API: (SIEM) Getting SIEM logs from batches for log type {log_type}...")
         log_count = 0
         manager = Manager()
         saved_file = None
@@ -97,8 +160,10 @@ class API:
                             json_log = json.loads(decoded_line)
                             logs.append(json_log)
                         except (json.JSONDecodeError, UnicodeDecodeError) as error:
-                            self.logger.info(f"API: JSON or decode error in file {stripped_url}. Skipping file...")
-                            self.logger.info(f"API: Error is {error}")
+                            self.logger.info(
+                                f"API: (SIEM) JSON or decode error in file {stripped_url}. Skipping file..."
+                            )
+                            self.logger.info(f"API: (SIEM) Error is {error}")
                             break
                         total_count.value = total_count.value + 1
                         if total_count.value >= log_size_limit:
@@ -110,9 +175,13 @@ class API:
                             saved_file = stripped_url
                             caught_up = False
                             result_next_page = next_page
-                            self.logger.info(f"API: Log limit reached for log type {log_type} at {log_size_limit}")
-                            self.logger.info(f"API: Saving file for next run: {saved_file} at line {saved_position}")
-                            self.logger.info(f"API: File position in page: {printable_index}/{url_count}")
+                            self.logger.info(
+                                f"API: (SIEM) Log limit reached for log type {log_type} at {log_size_limit}"
+                            )
+                            self.logger.info(
+                                f"API: (SIEM) Saving file for next run: {saved_file} at line {saved_position}"
+                            )
+                            self.logger.info(f"API: (SIEM) File position in page: {printable_index}/{url_count}")
                             return (
                                 logs,
                                 result_next_page,
@@ -120,14 +189,14 @@ class API:
                                 saved_file,
                                 saved_position,
                             )
-        self.logger.info(f"API: Discovered {len(logs)} logs for log type {log_type} and page has completed")
+        self.logger.info(f"API: (SIEM) Discovered {len(logs)} logs for log type {log_type} and page has completed")
         return logs, result_next_page, caught_up, saved_file, saved_position
 
     def get_siem_batches(
         self, log_type: str, query_date: str, next_page: str, page_size: int = 100
     ) -> Tuple[List[str], str, bool]:
         self.logger.info(
-            f"API: Getting SIEM batches for log type {log_type} for {query_date} with page token {next_page}..."
+            f"API: (SIEM) Getting SIEM batches for log type {log_type} for {query_date} with page token {next_page}..."
         )
         params = {
             "type": log_type,
@@ -147,14 +216,14 @@ class API:
             stripped_urls = []
             for url in urls:
                 stripped_urls.append(self.strip_query_params(url))
-            self.logger.log(self.log_level, f"API DEBUG: Batch count: {url_count}")
-            self.logger.log(self.log_level, f"API DEBUG: Caught up: {caught_up}")
-            self.logger.log(self.log_level, f"API DEBUG: Next page token: {next_page}")
-            self.logger.log(self.log_level, f"API DEBUG: Batch URLS: {stripped_urls}")
+            self.logger.log(self.log_level, f"API DEBUG: (SIEM) Batch count: {url_count}")
+            self.logger.log(self.log_level, f"API DEBUG: (SIEM) Caught up: {caught_up}")
+            self.logger.log(self.log_level, f"API DEBUG: (SIEM) Next page token: {next_page}")
+            self.logger.log(self.log_level, f"API DEBUG: (SIEM) Batch URLS: {stripped_urls}")
         self.logger.info(
-            f"API: Discovered {url_count} batches for log type {log_type}. Response reporting {caught_up} that logs have caught up to query window"
+            f"API: (SIEM) Discovered {url_count} batches for log type {log_type}. Response reporting {caught_up} that logs have caught up to query window"
         )
-        self.logger.info(f"API: Next page token returned by Mimecast is {next_page_token}")
+        self.logger.info(f"API: (SIEM) Next page token returned by Mimecast is {next_page_token}")
         return urls, url_count, next_page_token, caught_up
 
     def resume_from_batch(self, list_of_batches: List[str], saved_url: str) -> List:
@@ -220,8 +289,7 @@ class API:
 
     def strip_query_params(self, url: str) -> str:
         parsed_url = urlparse(url)
-        stripped_url = urlunparse(parsed_url._replace(query=""))
-        return stripped_url
+        return str(urlunparse(parsed_url._replace(query="")))
 
     @rate_limiting(5)
     def make_api_request(
@@ -234,7 +302,7 @@ class API:
         params: Dict = None,
         return_json: bool = True,
         auth=True,
-    ) -> Response:
+    ) -> Union[Response, Dict[str, Any]]:
         if auth:
             headers["Authorization"] = f"Bearer {self.access_token}"
         request = Request(url=url, method=method, headers=headers, params=params, data=data, json=json)
@@ -274,7 +342,7 @@ class API:
             # Check if we're dealing with `Unauthorized Request` or `token_verification_failed` code in error message
             elif failure_code in ("Unauthorized Request", "token_verification_failed"):
                 self.logger.info(
-                    f"API: Received 'Unauthorized Request' or 'token_verification_failed', setting status code to 500..."
+                    "API: Received 'Unauthorized Request' or 'token_verification_failed', setting status code to 500..."
                 )
                 status_code = HTTPStatusCodes.INTERNAL_SERVER_ERROR
 
@@ -287,3 +355,52 @@ class API:
             json_data = extract_json(response)
             return json_data
         return response
+
+    def get_ttp_log(
+        self, log_type: str, from_date: str, to_date: str, page_token: Union[str, None] = None, page_size: int = 5
+    ) -> Tuple[List[Dict[str, Any]], str]:
+        # Set request body
+        masked_page_token_payload = {}
+        payload = {
+            "meta": {"pagination": {"pageSize": page_size}},
+            "data": [
+                {
+                    "from": from_date,
+                    "to": to_date,
+                    "oldestFirst": True,
+                }
+            ],
+        }
+
+        # Add page token to request body if provided
+        if page_token:
+            self.logger.info(
+                f"TASK: ({log_type.upper()}) The pagination token was found in previous run for `{log_type}` log type. Paginating..."
+            )
+            payload["meta"]["pagination"]["pageToken"] = page_token
+            masked_page_token_payload = {**payload, "meta": {"pagination": {"pageToken": f"{page_token[:8]}..."}}}
+
+        # Make API request
+        self.logger.log(
+            self.log_level,
+            f"TASK: ({log_type.upper()}) The following payload is being sent to Mimecast for `{log_type}` logs: {masked_page_token_payload or payload}",
+        )
+        response = self.make_api_request(
+            TTP_LOG_MAP.get(log_type, {}).get("endpoint"), "POST", json=payload, return_json=True
+        )
+
+        # Extract fail information if present in response and raise exception if so
+        if failed_response := response.get("fail", []):
+            failed_response = failed_response[0].get("errors", [])[0]
+            self.logger.error(f"An exception occurred during retrieval of {log_type} logs. Details: {failed_response}")
+            raise APIException(
+                preset=PluginException.Preset.BAD_REQUEST,
+                data=failed_response,
+                status_code=400,
+            )
+
+        # Depending on log type, return appropriate data, and next page token if available
+        if data := response.get("data", []):
+            data = data[0].get(TTP_LOG_MAP.get(log_type, {}).get("data"), [])
+        next_page_token = response.get("meta", {}).get("pagination", {}).get("next")
+        return data, next_page_token

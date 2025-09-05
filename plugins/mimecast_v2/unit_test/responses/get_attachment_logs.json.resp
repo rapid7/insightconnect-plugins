@@ -1,0 +1,54 @@
+{
+  "meta": {
+    "pagination": {
+      "pageSize": 1,
+      "totalCount": 1
+    },
+    "status": 200
+  },
+  "data": [
+    {
+      "attachmentLogs": [
+        {
+          "userEmailAddress": "user@example.com",
+          "fromUserEmailAddress": "sender@external.com",
+          "fileName": "document.pdf",
+          "fileType": "application/pdf",
+          "fileHash": "abc123def456789",
+          "ttpDefinition": "Default Attachment Protect Definition",
+          "subject": "Important Document",
+          "action": "block",
+          "adminOverride": "N/A",
+          "userOverride": "None",
+          "scanResult": "safe",
+          "category": "Safe file type",
+          "sendingIp": "192.168.1.100",
+          "userAwarenessAction": "N/A",
+          "date": "2025-08-29T14:15:30+0000",
+          "actions": "Block",
+          "route": "inbound",
+          "creationMethod": "User Submission",
+          "emailPartsDescription": [
+            "Attachment"
+          ],
+          "messageId": "67890",
+          "tagMap": {
+            "SafeFileType": {
+              "Status": [
+                "Standard",
+                "VerdictAllow"
+              ],
+              "ContentCheck:SafeMimetypeAttachment": [
+                "application/pdf"
+              ],
+              "ContentCheck:SafeExtAttachment": [
+                "pdf"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "fail": []
+}

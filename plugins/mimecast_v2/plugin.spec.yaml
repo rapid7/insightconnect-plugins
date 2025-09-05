@@ -15,7 +15,7 @@ links:
  - "[Mimecast](http://mimecast.com)"
 references:
  - "[Mimecast API](https://www.mimecast.com/developer/documentation)"
-version: 1.0.6
+version: 1.1.0
 connection_version: 1
 supported_versions: ["Mimecast 2.0 API 2025-01-23"]
 vendor: rapid7
@@ -23,7 +23,7 @@ support: rapid7
 cloud_ready: true
 sdk:
   type: slim
-  version: 6.3.6
+  version: 6.3.10
   user: nobody
 status: []
 resources:
@@ -38,6 +38,7 @@ hub_tags:
   keywords: [mimecast, email, cloud_enabled]
   features: []
 version_history:
+  - "1.1.0 - Task `Monitor SIEM Logs`: Added new log endpoints for impersonation, attachment, and URL protection logs | Updated SDK to the latest version (6.3.10)"
   - "1.0.6 - `Monitor SIEM Logs` Updated SDK to the latest version (6.3.6) | Added support for high volume lookback (up to 7 days)"
   - "1.0.5 - `Monitor SIEM Logs` Modified status code returned by task when receiving 'Unauthorized Request' and 'token_verification_failed' fail codes | Updated SDK to the latest version (6.3.3)"
   - "1.0.4 - `Monitor SIEM Logs` Fix issue where duplicate batches in a page are processed | SDK update to 6.2.6"
@@ -72,4 +73,4 @@ tasks:
         description: List of logs
         type: "[]object"
         required: true
-        example: [{ "processingId": "processingId", "aggregateId": "aggregateId", "spamProcessingDetail": "Spam Processing Detail", "numberAttachments": "1", "subject": "siem_recipient - email subject line", "tlsVersion": "TLSv1.2", "senderEnvelope": "user@example.com", "messageId": "messageId", "senderHeader": "user@example.com", "rejectionType": "rejectionType", "eventType": "receipt", "accountId": "C0A0", "recipients": "user@example.com", "tlsCipher": "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384", "action": "Allow", "subType": "Allow", "spamInfo": null, "senderIp": "123.123.123.123", "timestamp": 1689685338597, "direction": "Inbound", "spamScore": "0", "spamDetectionLevel": "0" }]
+        example: '[{"processingId":"processingId","aggregateId":"aggregateId","spamProcessingDetail":"Spam Processing Detail","numberAttachments":"1","subject":"siem_recipient - email subject line","tlsVersion":"TLSv1.2","senderEnvelope":"user@example.com","messageId":"messageId","senderHeader":"user@example.com","rejectionType":"rejectionType","eventType":"receipt","accountId":"C0A0","recipients":"user@example.com","tlsCipher":"TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384","action":"Allow","subType":"Allow","spamInfo":null,"senderIp":"123.123.123.123","timestamp":1689685338597,"direction":"Inbound","spamScore":"0","spamDetectionLevel":"0"}]'

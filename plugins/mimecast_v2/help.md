@@ -59,7 +59,7 @@ This task is used to monitor and retrieve the latest logs
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|data|[]object|True|List of logs|[{"processingId": "processingId", "aggregateId": "aggregateId", "spamProcessingDetail": "Spam Processing Detail", "numberAttachments": "1", "subject": "siem_recipient - email subject line", "tlsVersion": "TLSv1.2", "senderEnvelope": "user@example.com", "messageId": "messageId", "senderHeader": "user@example.com", "rejectionType": "rejectionType", "eventType": "receipt", "accountId": "C0A0", "recipients": "user@example.com", "tlsCipher": "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384", "action": "Allow", "subType": "Allow", "spamInfo": None, "senderIp": "123.123.123.123", "timestamp": 1689685338597, "direction": "Inbound", "spamScore": "0", "spamDetectionLevel": "0"}]|
+|data|[]object|True|List of logs|[{"processingId":"processingId","aggregateId":"aggregateId","spamProcessingDetail":"Spam Processing Detail","numberAttachments":"1","subject":"siem_recipient - email subject line","tlsVersion":"TLSv1.2","senderEnvelope":"user@example.com","messageId":"messageId","senderHeader":"user@example.com","rejectionType":"rejectionType","eventType":"receipt","accountId":"C0A0","recipients":"user@example.com","tlsCipher":"TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384","action":"Allow","subType":"Allow","spamInfo":null,"senderIp":"123.123.123.123","timestamp":1689685338597,"direction":"Inbound","spamScore":"0","spamDetectionLevel":"0"}]|
   
 Example output:
 
@@ -103,6 +103,7 @@ Example output:
 
 # Version History
 
+* 1.1.0 - Task `Monitor SIEM Logs`: Added new log endpoints for impersonation, attachment, and URL protection logs | Updated SDK to the latest version (6.3.10)
 * 1.0.6 - `Monitor SIEM Logs` Updated SDK to the latest version (6.3.6) | Added support for high volume lookback (up to 7 days)
 * 1.0.5 - `Monitor SIEM Logs` Modified status code returned by task when receiving 'Unauthorized Request' and 'token_verification_failed' fail codes | Updated SDK to the latest version (6.3.3)
 * 1.0.4 - `Monitor SIEM Logs` Fix issue where duplicate batches in a page are processed | SDK update to 6.2.6

@@ -1,47 +1,165 @@
 [
-    {
-        "_offset": 273017,
-        "_partition": 125,
-        "accountId": "PDLW18H03",
-        "aggregateId": "jdWc03xmmwdc903dnsnALm",
-        "fileExtension": "pdf",
-        "fileName": "attach-9fac38ge-8387-57f0-dfd9-d709gb3ce83d.pdf",
-        "md5": "f34f2eya7e54hhr80d3937hd084898fe",
-        "processingId": "JDgeKPUdn2pe8Suxow5oplvfpz37i8M1lWNyGD-OUPE_1738206319",
-        "sha1": "534dbfd55d2f56fd213b3735fa74d2e80ege4127",
-        "sha256": "d473cgeerf4e5g2s133584188cf263131a37c54e33648c203d31309f73aa3b00",
-        "subtype": null,
-        "timestamp": 946684800,
-        "type": "attachment protect"
-    },
-    {
-        "_offset": 273017,
-        "_partition": 125,
-        "accountId": "PDLW18H03",
-        "aggregateId": "jdWc03xmmwdc903dnsnALm",
-        "fileExtension": "pdf",
-        "fileName": "attach-9fac38ge-8387-57f0-dfd9-d709gb3ce83d.pdf",
-        "md5": "f34f2eya7e54hhr80d3937hd084898fe",
-        "processingId": "JDgeKPUdn2pe8Suxow5oplvfpz37i8M1lWNyGD-OUPE_1738206319",
-        "sha1": "534dbfd55d2f56fd213b3735fa74d2e80ege4127",
-        "sha256": "d473cgeerf4e5g2s133584188cf263131a37c54e33648c203d31309f73aa3b00",
-        "subtype": null,
-        "timestamp": 946684800,
-        "type": "attachment protect"
-    },
-    {
-        "_offset": 273017,
-        "_partition": 125,
-        "accountId": "PDLW18H03",
-        "aggregateId": "jdWc03xmmwdc903dnsnALm",
-        "fileExtension": "pdf",
-        "fileName": "attach-9fac38ge-8387-57f0-dfd9-d709gb3ce83d.pdf",
-        "md5": "f34f2eya7e54hhr80d3937hd084898fe",
-        "processingId": "JDgeKPUdn2pe8Suxow5oplvfpz37i8M1lWNyGD-OUPE_1738206319",
-        "sha1": "534dbfd55d2f56fd213b3735fa74d2e80ege4127",
-        "sha256": "d473cgeerf4e5g2s133584188cf263131a37c54e33648c203d31309f73aa3b00",
-        "subtype": null,
-        "timestamp": 946684800,
-        "type": "attachment protect"
+  {
+    "_offset": 273017,
+    "_partition": 125,
+    "accountId": "PDLW18H03",
+    "aggregateId": "jdWc03xmmwdc903dnsnALm",
+    "fileExtension": "pdf",
+    "fileName": "attach-9fac38ge-8387-57f0-dfd9-d709gb3ce83d.pdf",
+    "md5": "f34f2eya7e54hhr80d3937hd084898fe",
+    "processingId": "JDgeKPUdn2pe8Suxow5oplvfpz37i8M1lWNyGD-OUPE_1738206319",
+    "sha1": "534dbfd55d2f56fd213b3735fa74d2e80ege4127",
+    "sha256": "d473cgeerf4e5g2s133584188cf263131a37c54e33648c203d31309f73aa3b00",
+    "subtype": null,
+    "timestamp": 946684800,
+    "type": "attachment protect"
+  },
+  {
+    "_offset": 273017,
+    "_partition": 125,
+    "accountId": "PDLW18H03",
+    "aggregateId": "jdWc03xmmwdc903dnsnALm",
+    "fileExtension": "pdf",
+    "fileName": "attach-9fac38ge-8387-57f0-dfd9-d709gb3ce83d.pdf",
+    "md5": "f34f2eya7e54hhr80d3937hd084898fe",
+    "processingId": "JDgeKPUdn2pe8Suxow5oplvfpz37i8M1lWNyGD-OUPE_1738206319",
+    "sha1": "534dbfd55d2f56fd213b3735fa74d2e80ege4127",
+    "sha256": "d473cgeerf4e5g2s133584188cf263131a37c54e33648c203d31309f73aa3b00",
+    "subtype": null,
+    "timestamp": 946684800,
+    "type": "attachment protect"
+  },
+  {
+    "_offset": 273017,
+    "_partition": 125,
+    "accountId": "PDLW18H03",
+    "aggregateId": "jdWc03xmmwdc903dnsnALm",
+    "fileExtension": "pdf",
+    "fileName": "attach-9fac38ge-8387-57f0-dfd9-d709gb3ce83d.pdf",
+    "md5": "f34f2eya7e54hhr80d3937hd084898fe",
+    "processingId": "JDgeKPUdn2pe8Suxow5oplvfpz37i8M1lWNyGD-OUPE_1738206319",
+    "sha1": "534dbfd55d2f56fd213b3735fa74d2e80ege4127",
+    "sha256": "d473cgeerf4e5g2s133584188cf263131a37c54e33648c203d31309f73aa3b00",
+    "subtype": null,
+    "timestamp": 946684800,
+    "type": "attachment protect"
+  },
+  {
+    "userEmailAddress": "user@example.com",
+    "fromUserEmailAddress": "ceo@fake-company.com",
+    "impersonationResults": [
+      {
+        "checkedAddress": "ceo@example.com",
+        "similarDomain": "fake-company.com",
+        "stringSimilarityScore": 85,
+        "checkType": "Domain Similarity"
+      }
+    ],
+    "ttpDefinition": "Default Impersonation Protect Definition",
+    "subject": "Urgent Wire Transfer Request",
+    "action": "block",
+    "adminOverride": "N/A",
+    "userOverride": "None",
+    "scanResult": "impersonation",
+    "category": "Domain impersonation",
+    "sendingIp": "203.0.113.45",
+    "userAwarenessAction": "N/A",
+    "date": "2025-08-29T16:22:15+0000",
+    "actions": "Block",
+    "route": "inbound",
+    "creationMethod": "Entry Scan",
+    "emailPartsDescription": [
+      "Header",
+      "Body"
+    ],
+    "messageId": "54321",
+    "tagMap": {
+      "ImpersonationProtect": {
+        "Status": [
+          "Standard",
+          "VerdictBlock"
+        ],
+        "ImpersonationCheck:DomainSimilarity": [
+          "fake-company.com"
+        ],
+        "ImpersonationCheck:DisplayNameSimilarity": [
+          "CEO John Smith"
+        ]
+      }
     }
+  },
+  {
+    "userEmailAddress": "user@example.com",
+    "fromUserEmailAddress": "sender@external.com",
+    "fileName": "document.pdf",
+    "fileType": "application/pdf",
+    "fileHash": "abc123def456789",
+    "ttpDefinition": "Default Attachment Protect Definition",
+    "subject": "Important Document",
+    "action": "block",
+    "adminOverride": "N/A",
+    "userOverride": "None",
+    "scanResult": "safe",
+    "category": "Safe file type",
+    "sendingIp": "192.168.1.100",
+    "userAwarenessAction": "N/A",
+    "date": "2025-08-29T14:15:30+0000",
+    "actions": "Block",
+    "route": "inbound",
+    "creationMethod": "User Submission",
+    "emailPartsDescription": [
+      "Attachment"
+    ],
+    "messageId": "67890",
+    "tagMap": {
+      "SafeFileType": {
+        "Status": [
+          "Standard",
+          "VerdictAllow"
+        ],
+        "ContentCheck:SafeMimetypeAttachment": [
+          "application/pdf"
+        ],
+        "ContentCheck:SafeExtAttachment": [
+          "pdf"
+        ]
+      }
+    }
+  },
+  {
+    "userEmailAddress": "user@example.com",
+    "fromUserEmailAddress": "user2@example.com",
+    "url": "https://example.com",
+    "ttpDefinition": "Default Internal URL Protect Definition",
+    "subject": "Test",
+    "action": "warn",
+    "adminOverride": "N/A",
+    "userOverride": "None",
+    "scanResult": "malicious",
+    "category": "Dangerous file extension",
+    "sendingIp": "Internal IP",
+    "userAwarenessAction": "N/A",
+    "date": "2025-08-29T15:38:21+0000",
+    "actions": "None",
+    "route": "internal",
+    "creationMethod": "Entry Scan",
+    "emailPartsDescription": [
+      "Attachment"
+    ],
+    "messageId": "12345",
+    "tagMap": {
+      "DangerousFileExt": {
+        "Status": [
+          "CustomerSpecific",
+          "VerdictBlock"
+        ],
+        "ContentCheck:DangerousMimetypesUrlFileDownload": [
+          "application/x-msdownload"
+        ],
+        "ContentCheck:DangerousExtsUrlFileDownload": [
+          "dll"
+        ]
+      }
+    }
+  }
 ]
