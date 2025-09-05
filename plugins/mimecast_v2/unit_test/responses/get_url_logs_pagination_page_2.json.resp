@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "pagination": {
+      "pageSize": 1,
+      "totalCount": 1
+    },
+    "status": 200
+  },
+  "data": [
+    {
+      "clickLogs": [
+        {
+          "userEmailAddress": "user1@testdomain.com",
+          "fromUserEmailAddress": "sender@externaldomain.org",
+          "url": "https://malicious-site.example/path/to/file.exe",
+          "ttpDefinition": "Test URL Protection Policy",
+          "subject": "Sample Email Subject",
+          "action": "block",
+          "adminOverride": "N/A",
+          "userOverride": "None",
+          "scanResult": "suspicious",
+          "category": "Malware detected",
+          "sendingIp": "10.0.0.1",
+          "userAwarenessAction": "N/A",
+          "date": "2024-01-15T12:30:00+0000",
+          "actions": "Block",
+          "route": "external",
+          "creationMethod": "Real-time Protection",
+          "emailPartsDescription": [
+            "Body Link"
+          ],
+          "messageId": "msg-abc123",
+          "tagMap": {
+            "MalwareDetection": {
+              "Status": [
+                "ThreatFound",
+                "ActionTaken"
+              ],
+              "ContentCheck:SuspiciousFile": [
+                "application/octet-stream"
+              ],
+              "ContentCheck:FileExtension": [
+                "exe"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "fail": []
+}
