@@ -1,3 +1,5 @@
+from logging import Logger
+
 import requests
 from requests import Session
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -6,13 +8,17 @@ import json
 
 
 class FortigateAPI:
-    def __init__(self, host, api_key, logger, ssl_verify=False):
+    def __init__(self, host: str, api_key: str, logger: Logger, authentication_type: str, ssl_verify: bool = False):
         self.host = host
         self.logger = logger
         self.ssl_verify = ssl_verify
         self.session = Session()
-        self.session.params = {"access_token": api_key}
         self.helper = Helpers(self.logger)
+        self.headers = {}
+        if authentication_type == "Access Token":
+            self.session.params = {"access_token": api_key}
+        else:
+            self.headers = {"Authorization": f"Bearer {api_key}", "Content-type": "application/json"}
 
     def call_api(
         self, path: str, method: str = "GET", params: dict = None, json_data: dict = None
@@ -24,6 +30,7 @@ class FortigateAPI:
                 verify=self.ssl_verify,
                 json=json_data,
                 params=params,
+                headers=self.headers,
             )
             self.helper.http_errors(response.text, response.status_code)
             if response.status_code > 500:

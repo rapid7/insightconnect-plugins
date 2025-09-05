@@ -4,8 +4,8 @@ products: [insightconnect]
 name: fortinet_fortigate
 title: Fortinet FortiGate
 description: "[FortiGate Next Generation Firewalls (NGFWs)](https://www.fortinet.com/) enable security-driven networking and consolidate industry-leading security capabilities such as intrusion prevention system (IPS), web filtering, secure sockets layer (SSL) inspection, and automated threat protection"
-version: 6.0.3
-connection_version: 6
+version: 7.0.0
+connection_version: 7
 supported_versions: ["7.2.4"]
 vendor: rapid7
 support: community
@@ -19,7 +19,7 @@ troubleshooting:
   - "To accomplish this, log into the FortiGate firewall. Go to the System tab -> Administrator subtab and then select and edit the API admin.\nAdd the orchestrator's IP address to the trusted hosts in CIDR form e.g. `198.51.100.100/32`"
 sdk:
   type: slim
-  version: 6.3.8
+  version: 6.3.10
   user: nobody
 links:
   - "[Fortinet FortiGate](https://www.fortinet.com/)"
@@ -33,6 +33,7 @@ requirements:
   - "An admin API key"
   - "The IP of the orchestrator must be set as a trusted host in Settings > Administrator (Edit button) > Trusted Hosts"
 version_history:
+  - "7.0.0 - Add new parameter in connection configuration to distinguish authentication type | Bumped SDK to latest version (6.3.10)"
   - "6.0.3 - Fixed issue within connection test | Bumped SDK to latest version (6.3.8)"
   - "6.0.2 - Bumping requirements.txt | SDK bump to 6.2.0 | Fixing 'cidr' function in unit test"
   - "6.0.1 - Resolve connection test failure with Fortigate version 6.4.1 and above | Fix bug in action 'Check if Address in Group', where the action would fail if the IPV6 Group did not exist"
@@ -818,6 +819,16 @@ connection:
     required: true
     default: false
     example: false
+  authentication_type:
+    title: Authentication Type
+    description: Type of authentication
+    type: string
+    required: true
+    enum:
+      - Bearer Token
+      - Access Token
+    default: Access Token
+    example: Access Token
 
 actions:
   check_if_address_in_group:

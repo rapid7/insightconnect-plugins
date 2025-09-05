@@ -13,11 +13,13 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.api_key = None
         self.ssl_verify = None
         self.api = None
+        self.authentication_type = None
 
     def connect(self, params):
         self.host = params.get(Input.HOSTNAME)
         self.api_key = params.get(Input.API_KEY).get("secretKey")
         self.ssl_verify = params.get(Input.SSL_VERIFY)
+        self.authentication_type = params.get(Input.AUTHENTICATION_TYPE, "Access Token")
 
         # Strip http:// or https://
         if self.host.startswith("http://"):
@@ -27,7 +29,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         # Strip out any URL character after /
         self.host = self.host.split("/", 1)[0]
 
-        self.api = FortigateAPI(self.host, self.api_key, self.logger, self.ssl_verify)
+        self.api = FortigateAPI(self.host, self.api_key, self.logger, self.authentication_type, self.ssl_verify)
 
     def test(self):
         try:

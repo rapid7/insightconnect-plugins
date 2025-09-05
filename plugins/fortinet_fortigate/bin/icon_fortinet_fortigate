@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Fortinet FortiGate"
 Vendor = "rapid7"
-Version = "6.0.3"
+Version = "7.0.0"
 Description = "[FortiGate Next Generation Firewalls (NGFWs)](https://www.fortinet.com/) enable security-driven networking and consolidate industry-leading security capabilities such as intrusion prevention system (IPS), web filtering, secure sockets layer (SSL) inspection, and automated threat protection"
 
 
