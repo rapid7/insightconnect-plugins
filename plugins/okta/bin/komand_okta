@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Okta"
 Vendor = "rapid7"
-Version = "4.2.15"
+Version = "4.2.16"
 Description = "[Okta](https://www.okta.com/) is a SSO and account lifecycle management provider that allows companies to integrate their central user account system with a wide variety of other applications and services"
 
 

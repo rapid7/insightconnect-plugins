@@ -74,6 +74,7 @@
   ],
   "state": {
     "last_collection_timestamp": "2023-04-27T09:49:21.777Z",
+    "last_search_end_timestamp": "2023-04-28T08:33:46.123Z",
     "next_page_link": "https://example.okta.com/nextLink?q=next"
   },
   "has_more_pages": true,
