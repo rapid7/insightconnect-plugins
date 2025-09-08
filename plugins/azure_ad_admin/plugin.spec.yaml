@@ -528,7 +528,7 @@ types:
       description: The longitude, in decimal
       type: string
       required: false
-  signInLocation:
+  sign_in_location:
     city:
       title: City
       description: City where the sign-in originated. This is calculated using latitude/longitude information from the sign-in activity

@@ -1001,7 +1001,7 @@ Example output:
 |Latitude|string|None|False|The latitude, in decimal|None|
 |Longitude|string|None|False|The longitude, in decimal|None|
   
-**signInLocation**
+**sign_in_location**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |

@@ -159,6 +159,7 @@ class RiskDetectionOutput(insightconnect_plugin_runtime.Output):
           "order": 13
         },
         "location": {
+          "$ref": "#/definitions/sign_in_location",
           "title": "Location",
           "description": "Location of the client from where the risk occurred",
           "order": 14
@@ -209,6 +210,60 @@ class RiskDetectionOutput(insightconnect_plugin_runtime.Output):
       "required": [
         "id"
       ]
+    },
+    "sign_in_location": {
+      "type": "object",
+      "title": "sign_in_location",
+      "properties": {
+        "city": {
+          "type": "string",
+          "title": "City",
+          "description": "City where the sign-in originated. This is calculated using latitude/longitude information from the sign-in activity",
+          "order": 1
+        },
+        "countryOrRegion": {
+          "type": "string",
+          "title": "Country Or Region",
+          "description": "Country code info (2 letter code) where the sign-in originated. This is calculated using latitude/longitude information from the sign-in activity",
+          "order": 2
+        },
+        "geoCoordinates": {
+          "$ref": "#/definitions/geoCoordinates",
+          "title": "Geo Coordinates",
+          "description": "Geo coordinates",
+          "order": 3
+        },
+        "state": {
+          "type": "string",
+          "title": "State",
+          "description": "State where the sign-in originated. This is calculated using latitude/longitude information from the sign-in activity",
+          "order": 4
+        }
+      }
+    },
+    "geoCoordinates": {
+      "type": "object",
+      "title": "geoCoordinates",
+      "properties": {
+        "altitude": {
+          "type": "string",
+          "title": "Altitude",
+          "description": "The altitude (height), in feet, above sea level",
+          "order": 1
+        },
+        "latitude": {
+          "type": "string",
+          "title": "Latitude",
+          "description": "The latitude, in decimal",
+          "order": 2
+        },
+        "longitude": {
+          "type": "string",
+          "title": "Longitude",
+          "description": "The longitude, in decimal",
+          "order": 3
+        }
+      }
     }
   }
 }
