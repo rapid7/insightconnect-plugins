@@ -1,0 +1,10 @@
+{
+  "previous_admin_log_hashes": [
+    "9044a3c0964c859ae26aee09a0ad031b0546b0b4"
+  ],
+  "previous_auth_log_hashes": [],
+  "previous_trust_monitor_event_hashes": [],
+  "admin_logs_last_log_timestamp": 1682930026000,
+  "auth_logs_last_log_timestamp": 1682930026000,
+  "trust_monitor_last_log_timestamp": 1682930026
+}

@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="duo_admin-rapid7-plugin",
-    version="5.0.7",
+    version="5.0.8",
     description="[Duo](https://duo.com/)'s Trusted Access platform verifies the identity of your users with two-factor authentication and security health of their devices before they connect to the apps they use. Using the Duo plugin for InsightConnect will allow Duo user management within automation workflows",
     author="rapid7",
     author_email="",
