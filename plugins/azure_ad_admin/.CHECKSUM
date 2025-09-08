@@ -1,5 +1,5 @@
 {
-	"spec": "19d32da93f5b94dd686a4098bae3a5d2",
+	"spec": "868d83a70eda9e8cb6c58258e329b8ce",
 	"manifest": "322e006d23f295260034351fa3929c08",
 	"setup": "1088c38ab241a1a171fc60c9d78ecf5a",
 	"schemas": [
@@ -81,7 +81,7 @@
 		},
 		{
 			"identifier": "risk_detection/schema.py",
-			"hash": "634edace9e40a24c1f663a65759c73ab"
+			"hash": "858a032b1c7f95ab6c908324f113c39f"
 		}
 	]
 }
