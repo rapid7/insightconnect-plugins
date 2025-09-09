@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "pagination": {
+      "pageSize": 1,
+      "totalCount": 2,
+      "next": "EXAMPLE_TOKEN"
+    },
+    "status": 200
+  },
+  "data": [
+    {
+      "clickLogs": [
+        {
+          "userEmailAddress": "user@example.com",
+          "fromUserEmailAddress": "user2@example.com",
+          "url": "https://example.com",
+          "ttpDefinition": "Default Internal URL Protect Definition",
+          "subject": "Test",
+          "action": "warn",
+          "adminOverride": "N/A",
+          "userOverride": "None",
+          "scanResult": "malicious",
+          "category": "Dangerous file extension",
+          "sendingIp": "Internal IP",
+          "userAwarenessAction": "N/A",
+          "date": "2025-08-29T15:38:21+0000",
+          "actions": "None",
+          "route": "internal",
+          "creationMethod": "Entry Scan",
+          "emailPartsDescription": [
+            "Attachment"
+          ],
+          "messageId": "12345",
+          "tagMap": {
+            "DangerousFileExt": {
+              "Status": [
+                "CustomerSpecific",
+                "VerdictBlock"
+              ],
+              "ContentCheck:DangerousMimetypesUrlFileDownload": [
+                "application/x-msdownload"
+              ],
+              "ContentCheck:DangerousExtsUrlFileDownload": [
+                "dll"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "fail": []
+}

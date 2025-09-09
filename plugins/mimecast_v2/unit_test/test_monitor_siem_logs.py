@@ -1,18 +1,19 @@
-import sys
 import os
+import sys
+from typing import Any, Dict, Optional
 
 sys.path.append(os.path.abspath("../"))
 
+from unittest import TestCase
+from unittest.mock import patch, MagicMock
+
+from freezegun import freeze_time
 from icon_mimecast_v2.tasks.monitor_siem_logs import MonitorSiemLogs
 from icon_mimecast_v2.tasks.monitor_siem_logs.schema import MonitorSiemLogsOutput
-
-from unittest import TestCase
-from unittest.mock import patch
-from util import Util
-from parameterized import parameterized
 from jsonschema import validate
-from freezegun import freeze_time
+from parameterized import parameterized
 
+from util import Util
 
 STUB_STATE_EXPECTED = {
     "query_config": {
@@ -32,6 +33,15 @@ STUB_STATE_EXPECTED = {
             "saved_file_position": 0,
             "saved_file_url": None,
         },
+        "ttp_attachment": {
+            "caught_up": False,
+            "query_date": "2000-01-07T00:00:00+00:00",
+        },
+        "ttp_impersonation": {
+            "caught_up": False,
+            "query_date": "2000-01-07T00:00:00+00:00",
+        },
+        "ttp_url": {"caught_up": False, "query_date": "2000-01-07T00:00:00+00:00"},
         "url protect": {
             "caught_up": True,
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
@@ -61,6 +71,15 @@ STUB_STATE_EXPECTED_DUPLICATES = {
             "saved_file_position": 0,
             "saved_file_url": None,
         },
+        "ttp_attachment": {
+            "caught_up": False,
+            "query_date": "2000-01-07T00:00:00+00:00",
+        },
+        "ttp_impersonation": {
+            "caught_up": False,
+            "query_date": "2000-01-07T00:00:00+00:00",
+        },
+        "ttp_url": {"caught_up": False, "query_date": "2000-01-07T00:00:00+00:00"},
         "url protect": {
             "caught_up": True,
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
@@ -90,6 +109,15 @@ STUB_STATE_EXPECTED_INVALID_RECEIPT = {
             "saved_file_position": 0,
             "saved_file_url": None,
         },
+        "ttp_attachment": {
+            "caught_up": False,
+            "query_date": "2000-01-07T00:00:00+00:00",
+        },
+        "ttp_impersonation": {
+            "caught_up": False,
+            "query_date": "2000-01-07T00:00:00+00:00",
+        },
+        "ttp_url": {"caught_up": False, "query_date": "2000-01-07T00:00:00+00:00"},
         "url protect": {
             "caught_up": True,
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
@@ -132,17 +160,41 @@ STUB_STATE_BATCH_DUPLICATES = {
 
 STUB_STATE_PAGINATING = {
     "query_config": {
-        "attachment protect": {"caught_up": False, "next_page": "NDU1NA==", "query_date": "2000-01-06"},
-        "receipt": {"caught_up": False, "next_page": "NDU1NA==", "query_date": "2000-01-06"},
-        "url protect": {"caught_up": False, "next_page": "NDU1NA==", "query_date": "2000-01-06"},
+        "attachment protect": {
+            "caught_up": False,
+            "next_page": "NDU1NA==",
+            "query_date": "2000-01-06",
+        },
+        "receipt": {
+            "caught_up": False,
+            "next_page": "NDU1NA==",
+            "query_date": "2000-01-06",
+        },
+        "url protect": {
+            "caught_up": False,
+            "next_page": "NDU1NA==",
+            "query_date": "2000-01-06",
+        },
     },
 }
 
 STUB_STATE_PAGINATING_CUTOFF = {
     "query_config": {
-        "attachment protect": {"caught_up": False, "next_page": "NDU1NA==", "query_date": "1999-12-30"},
-        "receipt": {"caught_up": False, "next_page": "NDU1NA==", "query_date": "1999-12-30"},
-        "url protect": {"caught_up": False, "next_page": "NDU1NA==", "query_date": "1999-12-30"},
+        "attachment protect": {
+            "caught_up": False,
+            "next_page": "NDU1NA==",
+            "query_date": "1999-12-30",
+        },
+        "receipt": {
+            "caught_up": False,
+            "next_page": "NDU1NA==",
+            "query_date": "1999-12-30",
+        },
+        "url protect": {
+            "caught_up": False,
+            "next_page": "NDU1NA==",
+            "query_date": "1999-12-30",
+        },
     },
 }
 
@@ -164,6 +216,15 @@ STUB_STATE_PAGINATING_CUTOFF_EXPECTED = {
             "saved_file_url": None,
             "saved_file_position": 0,
         },
+        "ttp_attachment": {
+            "caught_up": False,
+            "query_date": "2000-01-07T00:00:00+00:00",
+        },
+        "ttp_impersonation": {
+            "caught_up": False,
+            "query_date": "2000-01-07T00:00:00+00:00",
+        },
+        "ttp_url": {"caught_up": False, "query_date": "2000-01-07T00:00:00+00:00"},
         "url protect": {
             "caught_up": True,
             "next_page": "NDU1NA==",
@@ -178,17 +239,50 @@ STUB_STATE_PAGINATING_CUTOFF_EXPECTED = {
 
 STUB_STATE_DECODE_ERROR = {
     "query_config": {
-        "attachment protect": {"caught_up": False, "next_page": "NDU1NA==", "query_date": "2000-01-06"},
-        "receipt": {"caught_up": False, "next_page": "JDU1NA==", "query_date": "2000-01-05"},
-        "url protect": {"caught_up": False, "next_page": "NDU1NA==", "query_date": "2000-01-06"},
+        "attachment protect": {
+            "caught_up": False,
+            "next_page": "NDU1NA==",
+            "query_date": "2000-01-06",
+        },
+        "receipt": {
+            "caught_up": False,
+            "next_page": "JDU1NA==",
+            "query_date": "2000-01-05",
+        },
+        "url protect": {
+            "caught_up": False,
+            "next_page": "NDU1NA==",
+            "query_date": "2000-01-06",
+        },
     },
 }
 
 STUB_STATE_PAGINATING_LAST_PAGE = {
     "query_config": {
-        "attachment protect": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "2000-01-06"},
-        "receipt": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "2000-01-06"},
-        "url protect": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "2000-01-06"},
+        "attachment protect": {
+            "caught_up": True,
+            "next_page": "NDU1NA==",
+            "query_date": "2000-01-06",
+        },
+        "receipt": {
+            "caught_up": True,
+            "next_page": "NDU1NA==",
+            "query_date": "2000-01-06",
+        },
+        "ttp_attachment": {
+            "caught_up": False,
+            "query_date": "2000-01-07T00:00:00+00:00",
+        },
+        "ttp_impersonation": {
+            "caught_up": False,
+            "query_date": "2000-01-07T00:00:00+00:00",
+        },
+        "ttp_url": {"caught_up": False, "query_date": "2000-01-07T00:00:00+00:00"},
+        "url protect": {
+            "caught_up": True,
+            "next_page": "NDU1NA==",
+            "query_date": "2000-01-06",
+        },
     },
 }
 
@@ -239,6 +333,15 @@ STUB_STATE_SECOND_RUN_EXPECTED = {
             "saved_file_position": 0,
             "saved_file_url": None,
         },
+        "ttp_attachment": {
+            "caught_up": False,
+            "query_date": "2000-01-07T00:00:00+00:00",
+        },
+        "ttp_impersonation": {
+            "caught_up": False,
+            "query_date": "2000-01-07T00:00:00+00:00",
+        },
+        "ttp_url": {"caught_up": False, "query_date": "2000-01-07T00:00:00+00:00"},
         "url protect": {
             "caught_up": True,
             "next_page": "NDU1NA==",
@@ -268,6 +371,15 @@ STUB_STATE_EXPECTED_CUSTOM_CONFIG = {
             "saved_file_position": 0,
             "saved_file_url": None,
         },
+        "ttp_attachment": {
+            "caught_up": False,
+            "query_date": "2000-01-07T00:00:00+00:00",
+        },
+        "ttp_impersonation": {
+            "caught_up": False,
+            "query_date": "2000-01-07T00:00:00+00:00",
+        },
+        "ttp_url": {"caught_up": False, "query_date": "2000-01-07T00:00:00+00:00"},
         "url protect": {
             "caught_up": True,
             "next_page": "NDU1NA==",
@@ -297,6 +409,15 @@ STUB_STATE_EXPECTED_LOG_LIMIT = {
             "saved_file_position": 1,
             "saved_file_url": "https://example.com",
         },
+        "ttp_attachment": {
+            "caught_up": False,
+            "query_date": "2000-01-07T00:00:00+00:00",
+        },
+        "ttp_impersonation": {
+            "caught_up": False,
+            "query_date": "2000-01-07T00:00:00+00:00",
+        },
+        "ttp_url": {"caught_up": False, "query_date": "2000-01-07T00:00:00+00:00"},
         "url protect": {
             "caught_up": False,
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
@@ -326,6 +447,15 @@ STUB_STATE_EXPECTED_LOG_LIMIT_SECOND_RUN = {
             "saved_file_position": 0,
             "saved_file_url": None,
         },
+        "ttp_attachment": {
+            "caught_up": False,
+            "query_date": "2000-01-07T00:00:00+00:00",
+        },
+        "ttp_impersonation": {
+            "caught_up": False,
+            "query_date": "2000-01-07T00:00:00+00:00",
+        },
+        "ttp_url": {"caught_up": False, "query_date": "2000-01-07T00:00:00+00:00"},
         "url protect": {
             "caught_up": True,
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
@@ -339,9 +469,21 @@ STUB_STATE_EXPECTED_LOG_LIMIT_SECOND_RUN = {
 
 STUB_CUSTOM_CONFIG = {
     "query_config": {
-        "attachment protect": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "1999-12-31"},
-        "receipt": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "1999-12-31"},
-        "url protect": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "1999-12-31"},
+        "attachment protect": {
+            "caught_up": True,
+            "next_page": "NDU1NA==",
+            "query_date": "1999-12-31",
+        },
+        "receipt": {
+            "caught_up": True,
+            "next_page": "NDU1NA==",
+            "query_date": "1999-12-31",
+        },
+        "url protect": {
+            "caught_up": True,
+            "next_page": "NDU1NA==",
+            "query_date": "1999-12-31",
+        },
     },
     "page_size": 1,
     "thread_count": 1,
@@ -349,9 +491,21 @@ STUB_CUSTOM_CONFIG = {
 
 STUB_CUSTOM_CONFIG_EXCEED_DATE = {
     "query_config": {
-        "attachment protect": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "1999-12-30"},
-        "receipt": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "1999-12-30"},
-        "url protect": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "1999-12-30"},
+        "attachment protect": {
+            "caught_up": True,
+            "next_page": "NDU1NA==",
+            "query_date": "1999-12-30",
+        },
+        "receipt": {
+            "caught_up": True,
+            "next_page": "NDU1NA==",
+            "query_date": "1999-12-30",
+        },
+        "url protect": {
+            "caught_up": True,
+            "next_page": "NDU1NA==",
+            "query_date": "1999-12-30",
+        },
     },
     "page_size": 1,
     "thread_count": 1,
@@ -359,9 +513,21 @@ STUB_CUSTOM_CONFIG_EXCEED_DATE = {
 
 STUB_CUSTOM_CONFIG_LIMIT_LOGS = {
     "query_config": {
-        "attachment protect": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "1999-12-30"},
-        "receipt": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "1999-12-30"},
-        "url protect": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "1999-12-30"},
+        "attachment protect": {
+            "caught_up": True,
+            "next_page": "NDU1NA==",
+            "query_date": "1999-12-30",
+        },
+        "receipt": {
+            "caught_up": True,
+            "next_page": "NDU1NA==",
+            "query_date": "1999-12-30",
+        },
+        "url protect": {
+            "caught_up": True,
+            "next_page": "NDU1NA==",
+            "query_date": "1999-12-30",
+        },
     },
     "page_size": 1,
     "thread_count": 1,
@@ -371,9 +537,21 @@ STUB_CUSTOM_CONFIG_LIMIT_LOGS = {
 
 STUB_CUSTOM_CONFIG_LIMIT_LOGS_SECOND_RUN = {
     "query_config": {
-        "attachment protect": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "1999-12-30"},
-        "receipt": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "1999-12-30"},
-        "url protect": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "1999-12-30"},
+        "attachment protect": {
+            "caught_up": True,
+            "next_page": "NDU1NA==",
+            "query_date": "1999-12-30",
+        },
+        "receipt": {
+            "caught_up": True,
+            "next_page": "NDU1NA==",
+            "query_date": "1999-12-30",
+        },
+        "url protect": {
+            "caught_up": True,
+            "next_page": "NDU1NA==",
+            "query_date": "1999-12-30",
+        },
     },
     "page_size": 1,
     "thread_count": 1,
@@ -505,17 +683,17 @@ class TestMonitorLogs(TestCase):
     @patch("requests.Session.send", side_effect=Util.mocked_request)
     def test_monitor_logs(
         self,
-        test_name,
-        state,
-        custom_config,
-        furthest_query_date,
-        expected_output,
-        expected_state,
-        expected_has_more_pages,
-        expected_status_code,
-        expected_error,
-        mock_request,
-    ):
+        test_name: str,
+        state: Dict[str, Any],
+        custom_config: Dict[str, Any],
+        furthest_query_date: Optional[str],
+        expected_output: Dict[str, Any],
+        expected_state: Dict[str, Any],
+        expected_has_more_pages: bool,
+        expected_status_code: int,
+        expected_error: Optional[Any],
+        mock_request: MagicMock,
+    ) -> None:
         output, state, has_more_pages, status_code, error = self.task.run(
             params={}, state=state, custom_config=custom_config
         )
@@ -529,30 +707,126 @@ class TestMonitorLogs(TestCase):
 
     @parameterized.expand(
         [
+            ["start_ttp_paginating", {}, {}, True, 200, "PAGINATION"],
+            [
+                "second_page_and_finish_pagination",
+                {
+                    **STUB_STATE_EXPECTED,
+                    "query_config": {
+                        **STUB_STATE_EXPECTED["query_config"],
+                        "ttp_url": {
+                            "caught_up": False,
+                            "query_date": "2000-01-06T00:00:00+00:00",
+                            "next_page": "EXAMPLE_TOKEN",
+                        },
+                    },
+                },
+                {},
+                False,
+                200,
+                "PAGINATION",
+            ],
+            [
+                "third_run_to_get_updated_query_date",
+                {
+                    **STUB_STATE_EXPECTED,
+                    "query_config": {
+                        **STUB_STATE_EXPECTED["query_config"],
+                        "ttp_url": {
+                            "caught_up": False,
+                            "query_date": "2000-01-07T00:00:00+00:00",
+                        },
+                    },
+                },
+                {},
+                False,
+                200,
+                "NORMAL",
+            ],
+        ]
+    )
+    @patch("requests.Session.send")
+    def test_monitor_logs_ttp_pagination(
+        self,
+        test_name: str,
+        state: Dict[str, Any],
+        custom_config: Dict[str, Any],
+        expected_has_more_pages: bool,
+        expected_status_code: int,
+        request_type: str,
+        mock_request: MagicMock,
+    ) -> None:
+        # Setup type of request to mock
+        mock_request.side_effect = lambda request, **kwargs: Util.mocked_request(request, type=request_type, **kwargs)
+        output, state, has_more_pages, status_code, error = self.task.run(
+            params={}, state=state, custom_config=custom_config
+        )
+        self.assertEqual(expected_has_more_pages, has_more_pages)
+        self.assertEqual(expected_status_code, status_code)
+
+        # If there are more pages, ensure the next_page token is present in state
+        if expected_has_more_pages:
+            self.assertIn("next_page", state["query_config"]["ttp_url"])
+            self.assertEqual("EXAMPLE_TOKEN", state["query_config"]["ttp_url"]["next_page"])
+
+    @parameterized.expand(
+        [
             [
                 "401",
-                {"query_config": {"receipt": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "2000-01-01"}}},
+                {
+                    "query_config": {
+                        "receipt": {
+                            "caught_up": True,
+                            "next_page": "NDU1NA==",
+                            "query_date": "2000-01-01",
+                        }
+                    }
+                },
                 "Invalid API key provided.",
                 "Verify your API key configured in your connection is correct.",
                 401,
             ],
             [
                 "500",
-                {"query_config": {"receipt": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "2000-01-02"}}},
+                {
+                    "query_config": {
+                        "receipt": {
+                            "caught_up": True,
+                            "next_page": "NDU1NA==",
+                            "query_date": "2000-01-02",
+                        }
+                    }
+                },
                 "Something unexpected occurred.",
                 "Check the logs and if the issue persists please contact support.",
                 500,
             ],
             [
                 "json_decode",
-                {"query_config": {"receipt": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "2000-01-03"}}},
+                {
+                    "query_config": {
+                        "receipt": {
+                            "caught_up": True,
+                            "next_page": "NDU1NA==",
+                            "query_date": "2000-01-03",
+                        }
+                    }
+                },
                 "Received an unexpected response from the server.",
                 "(non-JSON or no response was received).",
                 500,
             ],
             [
                 "unknown",
-                {"query_config": {"receipt": {"caught_up": True, "next_page": "NDU1NA==", "query_date": "2000-01-04"}}},
+                {
+                    "query_config": {
+                        "receipt": {
+                            "caught_up": True,
+                            "next_page": "NDU1NA==",
+                            "query_date": "2000-01-04",
+                        }
+                    }
+                },
                 "Something unexpected occurred.",
                 "Check the logs and if the issue persists please contact support.",
                 500,
@@ -562,13 +836,13 @@ class TestMonitorLogs(TestCase):
     @patch("requests.Session.send", side_effect=Util.mocked_request)
     def test_monitor_logs_errors(
         self,
-        test_name,
-        state,
-        expected_cause,
-        expected_assistance,
-        expected_status_code,
-        mock_request,
-    ):
+        test_name: str,
+        state: Dict[str, Any],
+        expected_cause: str,
+        expected_assistance: str,
+        expected_status_code: int,
+        mock_request: MagicMock,
+    ) -> None:
         output, state, has_more_pages, status_code, error = self.task.run(params={}, state=state)
         self.assertEqual(expected_status_code, status_code)
         self.assertEqual(expected_cause, error.cause)
