@@ -1,16 +1,22 @@
-import sys
-import os
 import json
 import logging
+import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
-from requests.exceptions import HTTPError
+import gzip
+from io import BytesIO
+
 from icon_mimecast_v2.connection.connection import Connection
 from icon_mimecast_v2.connection.schema import Input
 from icon_mimecast_v2.util.constants import BASE_URL
-import gzip
-from io import BytesIO
+from requests.exceptions import HTTPError
+
+STUB_CONNECTION = {
+    Input.CLIENT_ID: {"secretKey": "test"},
+    Input.CLIENT_SECRET: {"secretKey": "test"},
+}
 
 
 class Util:
@@ -18,14 +24,7 @@ class Util:
     def default_connector(action, connect_params: object = None):
         default_connection = Connection()
         default_connection.logger = logging.getLogger("connection logger")
-        if connect_params:
-            params = connect_params
-        else:
-            params = {
-                Input.CLIENT_ID: {"secretKey": "test"},
-                Input.CLIENT_SECRET: {"secretKey": "test"},
-            }
-        default_connection.connect(params)
+        default_connection.connect(connect_params if connect_params else STUB_CONNECTION)
         action.connection = default_connection
         action.logger = logging.getLogger("action logger")
         return action
@@ -33,7 +32,9 @@ class Util:
     @staticmethod
     def read_file_to_string(filename: str) -> str:
         with open(
-            os.path.join(os.path.dirname(os.path.realpath(__file__)), filename), "r", encoding="utf-8"
+            os.path.join(os.path.dirname(os.path.realpath(__file__)), filename),
+            "r",
+            encoding="utf-8",
         ) as file_reader:
             return file_reader.read()
 
@@ -49,7 +50,13 @@ class Util:
     @staticmethod
     def mocked_request(*args, **kwargs):
         class MockResponse:
-            def __init__(self, status_code: int, filename: str = None, url: str = None, gzip=False):
+            def __init__(
+                self,
+                status_code: int,
+                filename: str = None,
+                url: str = None,
+                gzip=False,
+            ):
                 self.filename = filename
                 self.status_code = status_code
                 self.text = "This is some error text"
@@ -80,8 +87,20 @@ class Util:
                     return
                 raise HTTPError("Bad response", response=self)
 
+        # Connection endpoints
         if args[0].url == f"{BASE_URL}oauth/token":
             return MockResponse(200, "authenticate")
+
+        if (
+            args[0].url
+            == f"{BASE_URL}siem/v1/batch/events/cg?type=receipt&dateRangeStartsAt=2000-01-07&dateRangeEndsAt=2000-01-07&pageSize=1"
+        ):
+            return MockResponse(
+                403 if kwargs.get("type") in ("WARNING_ALL",) else 200,
+                "monitor_siem_logs_batch",
+            )
+
+        # SIEM Logs endpoints
         if args[0].url in [
             f"{BASE_URL}siem/v1/batch/events/cg?type=receipt&dateRangeStartsAt=2000-01-06&dateRangeEndsAt=2000-01-06&pageSize=100",
             f"{BASE_URL}siem/v1/batch/events/cg?type=url+protect&dateRangeStartsAt=2000-01-06&dateRangeEndsAt=2000-01-06&pageSize=100",
@@ -138,3 +157,26 @@ class Util:
             return MockResponse(200, "monitor_siem_logs_additional", gzip=True)
         if args[0].url == "https://invalidjson.com/":
             return MockResponse(200, "monitor_siem_logs_json_error", gzip=True)
+
+        # TTP Logs endpoints
+        if args[0].url == f"{BASE_URL}api/ttp/impersonation/get-logs":
+            return MockResponse(
+                (403 if kwargs.get("type") in ("WARNING_ALL", "WARNING_TTP_IMPERSONATION") else 200),
+                "get_impersonation_logs",
+            )
+        elif args[0].url == f"{BASE_URL}api/ttp/attachment/get-logs":
+            return MockResponse(
+                (403 if kwargs.get("type") in ("WARNING_ALL", "WARNING_TTP_ATTACHMENT") else 200),
+                "get_attachment_logs",
+            )
+        elif args[0].url == f"{BASE_URL}api/ttp/url/get-logs":
+            if kwargs.get("type") in ("PAGINATION",):
+                if "EXAMPLE_TOKEN" in args[0].body.decode():
+                    return MockResponse(200, "get_url_logs_pagination_page_2")
+                return MockResponse(200, "get_url_logs_pagination")
+            return MockResponse(
+                (403 if kwargs.get("type") in ("WARNING_ALL", "WARNING_TTP_URL") else 200),
+                "get_url_logs",
+            )
+
+        raise Exception("Not implemented mock response.")
