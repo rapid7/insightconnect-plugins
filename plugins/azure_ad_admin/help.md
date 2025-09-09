@@ -2,8 +2,7 @@
 
 [Azure](https://azure.microsoft.com) AD Admin performs administrative tasks in Azure AD.
 
-It uses the [User](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0) endpoint in
-the [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-1.0).
+It uses the [User](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0) endpoint in the [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-1.0)
 
 # Key Features
 
@@ -994,7 +993,7 @@ Example output:
 |Security Enabled|boolean|None|False|Security enabled|None|
 |Visibility|string|None|False|Visibility|None|
   
-**geo_coordinates**
+**geoCoordinates**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -1008,7 +1007,7 @@ Example output:
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |City|string|None|False|City where the sign-in originated. This is calculated using latitude/longitude information from the sign-in activity|None|
 |Country Or Region|string|None|False|Country code info (2 letter code) where the sign-in originated. This is calculated using latitude/longitude information from the sign-in activity|None|
-|Geo Coordinates|geo_coordinates|None|False|Geo coordinates|None|
+|Geo Coordinates|geoCoordinates|None|False|Geo coordinates|None|
 |State|string|None|False|State where the sign-in originated. This is calculated using latitude/longitude information from the sign-in activity|None|
   
 **risk**
@@ -1027,6 +1026,7 @@ Example output:
 |Location|sign_in_location|None|False|Location of the client from where the risk occurred|None|
 |Request ID|string|None|False|Request ID of the sign-in associated with the risk detection. This property is null if the risk detection is not associated with a sign-in|None|
 |Risk Detail|string|None|False|Details of the detected risk. Details for this property are only available for Azure AD Premium P2 customers. P1 customers will be returned hidden|None|
+|Risk Event Type|string|None|False|The type of risk event detected|None|
 |Risk Level|string|None|False|Level of the detected risk|None|
 |Risk State|string|None|False|The state of a detected risky user or sign-in|None|
 |Risk Type|string|None|False|The type of risk event detected|None|
@@ -1103,10 +1103,10 @@ Example output:
 
 ## Troubleshooting
 
-Trigger `risk_detection` needs Application permission to set as `IdentityRiskEvent.Read.All`
 
 # Version History
 
+* 5.0.0 - Update SDK to the latest version | Update the output type of `risk` for the `risk_detection` trigger to include all fields
 * 4.2.0 - New action | List Group Members
 * 4.1.2 - Updated SDK to the latest version | Added additional details in requirements section | `Risk Detection`: Fixed issue where detections were triggered randomly
 * 4.1.1 - Update requirements in help.md

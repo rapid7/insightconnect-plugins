@@ -4,7 +4,9 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Provides list of both user and sign-in linked risk detections and associated information about the detection"
+    DESCRIPTION = (
+        "Provides list of both user and sign-in linked risk detections and associated information about the detection"
+    )
 
 
 class Input:
@@ -17,7 +19,8 @@ class Output:
 
 
 class RiskDetectionInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -48,14 +51,16 @@ class RiskDetectionInput(insightconnect_plugin_runtime.Input):
   ],
   "definitions": {}
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class RiskDetectionOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -81,119 +86,125 @@ class RiskDetectionOutput(insightconnect_plugin_runtime.Output):
           "description": "Unique ID of the risk detection",
           "order": 1
         },
-        "request_id": {
+        "requestId": {
           "type": "string",
           "title": "Request ID",
           "description": "Request ID of the sign-in associated with the risk detection. This property is null if the risk detection is not associated with a sign-in",
           "order": 2
         },
-        "correlation_id": {
+        "correlationId": {
           "type": "string",
           "title": "Correlation ID",
           "description": "Correlation ID of the sign-in associated with the risk detection. This property is null if the risk detection is not associated with a sign-in",
           "order": 3
         },
-        "risk_type": {
+        "riskType": {
           "type": "string",
           "title": "Risk Type",
           "description": "The type of risk event detected",
           "order": 4
         },
-        "risk_state": {
+        "riskState": {
           "type": "string",
           "title": "Risk State",
           "description": "The state of a detected risky user or sign-in",
           "order": 5
         },
-        "risk_level": {
+        "riskLevel": {
           "type": "string",
           "title": "Risk Level",
           "description": "Level of the detected risk",
           "order": 6
         },
-        "risk_detail": {
+        "riskDetail": {
           "type": "string",
           "title": "Risk Detail",
           "description": "Details of the detected risk. Details for this property are only available for Azure AD Premium P2 customers. P1 customers will be returned hidden",
           "order": 7
         },
+        "riskEventType": {
+          "type": "string",
+          "title": "Risk Event Type",
+          "description": "The type of risk event detected",
+          "order": 8
+        },
         "source": {
           "type": "string",
           "title": "Risk Level",
           "description": "Source of the risk detection. For example, activeDirectory",
-          "order": 8
+          "order": 9
         },
-        "detection_timing_type": {
+        "detectionTimingType": {
           "type": "string",
           "title": "Detection Timimg Type",
           "description": "Timing of the detected risk (real-time/offline). The possible values are notDefined, realtime, nearRealtime, offline, unknownFutureValue",
-          "order": 9
+          "order": 10
         },
         "activity": {
           "type": "string",
           "title": "Activity",
           "description": "Indicates the activity type the detected risk is linked to. The possible values are signin, user, unknownFutureValue",
-          "order": 10
+          "order": 11
         },
-        "token_issuer_type": {
+        "tokenIssuerType": {
           "type": "string",
           "title": "Token Issuer Type",
           "description": "Indicates the type of token issuer for the detected sign-in risk. The possible values are AzureAD, ADFederationServices, and unknownFutureValue",
-          "order": 11
+          "order": 12
         },
-        "ip_address": {
+        "ipAddress": {
           "type": "string",
           "title": "IP Address",
           "description": "IP address of the client from where the risk occurred",
-          "order": 12
+          "order": 13
         },
         "location": {
           "$ref": "#/definitions/sign_in_location",
           "title": "Location",
           "description": "Location of the client from where the risk occurred",
-          "order": 13
+          "order": 14
         },
-        "activity_date_time": {
+        "activityDateTime": {
           "type": "string",
           "title": "Activity Date Time",
           "description": "Date and time that the risky activity occurred",
-          "order": 14
+          "order": 15
         },
-        "detected_date_time": {
+        "detectedDateTime": {
           "type": "string",
           "title": "Detected Date Time",
           "description": "Date and time that the risk was detected",
-          "order": 15
+          "order": 16
         },
-        "last_updated_date_time": {
+        "lastUpdatedDateTime": {
           "type": "string",
           "title": "Last Updated Date Time",
           "description": "Date and time that the risk detection was last updated",
-          "order": 16
+          "order": 17
         },
-        "user_id": {
+        "userId": {
           "type": "string",
           "title": "User ID",
           "description": "User ID",
-          "order": 17
+          "order": 18
         },
-        "user_display_name": {
+        "userDisplayName": {
           "type": "string",
           "title": "User Display Name",
           "description": "User display name",
-          "order": 18
+          "order": 19
         },
-        "user_principal_name": {
+        "userPrincipalName": {
           "type": "string",
           "title": "User Principal Name",
           "description": "The user principal name (UPN) of the user",
-          "order": 19
+          "order": 20
         },
-        "additional_info": {
+        "additionalInfo": {
           "type": "string",
           "title": "Additional Information",
           "description": "Additional information associated with the risk detection",
-          "order": 20
+          "order": 21
         }
       },
       "required": [
@@ -210,14 +221,14 @@ class RiskDetectionOutput(insightconnect_plugin_runtime.Output):
           "description": "City where the sign-in originated. This is calculated using latitude/longitude information from the sign-in activity",
           "order": 1
         },
-        "country_or_region": {
+        "countryOrRegion": {
           "type": "string",
           "title": "Country Or Region",
           "description": "Country code info (2 letter code) where the sign-in originated. This is calculated using latitude/longitude information from the sign-in activity",
           "order": 2
         },
-        "geo_coordinates": {
-          "$ref": "#/definitions/geo_coordinates",
+        "geoCoordinates": {
+          "$ref": "#/definitions/geoCoordinates",
           "title": "Geo Coordinates",
           "description": "Geo coordinates",
           "order": 3
@@ -230,9 +241,9 @@ class RiskDetectionOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "geo_coordinates": {
+    "geoCoordinates": {
       "type": "object",
-      "title": "geo_coordinates",
+      "title": "geoCoordinates",
       "properties": {
         "altitude": {
           "type": "string",
@@ -256,7 +267,8 @@ class RiskDetectionOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
