@@ -534,12 +534,14 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                     f"TASK: ({log_type.upper()}) The next page token for `{log_type}` is present. Saving it in state for next run."
                 )
                 query_config[log_type][NEXT_PAGE] = next_page_token
+                query_config[log_type][CAUGHT_UP] = False
             else:
                 # No next page token, so remove it from state and update query date to now
                 self.logger.info(
                     f"TASK: ({log_type.upper()}) No next page token for `{log_type}`. Removing `next_page` from state."
                 )
                 query_config[log_type].pop(NEXT_PAGE, None)
+                query_config[log_type][CAUGHT_UP] = True
                 query_config[log_type][QUERY_DATE] = now_datetime.replace(
                     microsecond=0
                 ).isoformat()  # This is bumped by 1 seconds from `query_date_to` to set boundary for next run

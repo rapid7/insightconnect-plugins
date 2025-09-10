@@ -34,14 +34,14 @@ STUB_STATE_EXPECTED = {
             "saved_file_url": None,
         },
         "ttp_attachment": {
-            "caught_up": False,
+            "caught_up": True,
             "query_date": "2000-01-07T00:00:00+00:00",
         },
         "ttp_impersonation": {
-            "caught_up": False,
+            "caught_up": True,
             "query_date": "2000-01-07T00:00:00+00:00",
         },
-        "ttp_url": {"caught_up": False, "query_date": "2000-01-07T00:00:00+00:00"},
+        "ttp_url": {"caught_up": True, "query_date": "2000-01-07T00:00:00+00:00"},
         "url protect": {
             "caught_up": True,
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
@@ -72,14 +72,14 @@ STUB_STATE_EXPECTED_DUPLICATES = {
             "saved_file_url": None,
         },
         "ttp_attachment": {
-            "caught_up": False,
+            "caught_up": True,
             "query_date": "2000-01-07T00:00:00+00:00",
         },
         "ttp_impersonation": {
-            "caught_up": False,
+            "caught_up": True,
             "query_date": "2000-01-07T00:00:00+00:00",
         },
-        "ttp_url": {"caught_up": False, "query_date": "2000-01-07T00:00:00+00:00"},
+        "ttp_url": {"caught_up": True, "query_date": "2000-01-07T00:00:00+00:00"},
         "url protect": {
             "caught_up": True,
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
@@ -110,14 +110,14 @@ STUB_STATE_EXPECTED_INVALID_RECEIPT = {
             "saved_file_url": None,
         },
         "ttp_attachment": {
-            "caught_up": False,
+            "caught_up": True,
             "query_date": "2000-01-07T00:00:00+00:00",
         },
         "ttp_impersonation": {
-            "caught_up": False,
+            "caught_up": True,
             "query_date": "2000-01-07T00:00:00+00:00",
         },
-        "ttp_url": {"caught_up": False, "query_date": "2000-01-07T00:00:00+00:00"},
+        "ttp_url": {"caught_up": True, "query_date": "2000-01-07T00:00:00+00:00"},
         "url protect": {
             "caught_up": True,
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
@@ -217,14 +217,14 @@ STUB_STATE_PAGINATING_CUTOFF_EXPECTED = {
             "saved_file_position": 0,
         },
         "ttp_attachment": {
-            "caught_up": False,
+            "caught_up": True,
             "query_date": "2000-01-07T00:00:00+00:00",
         },
         "ttp_impersonation": {
-            "caught_up": False,
+            "caught_up": True,
             "query_date": "2000-01-07T00:00:00+00:00",
         },
-        "ttp_url": {"caught_up": False, "query_date": "2000-01-07T00:00:00+00:00"},
+        "ttp_url": {"caught_up": True, "query_date": "2000-01-07T00:00:00+00:00"},
         "url protect": {
             "caught_up": True,
             "next_page": "NDU1NA==",
@@ -334,14 +334,14 @@ STUB_STATE_SECOND_RUN_EXPECTED = {
             "saved_file_url": None,
         },
         "ttp_attachment": {
-            "caught_up": False,
+            "caught_up": True,
             "query_date": "2000-01-07T00:00:00+00:00",
         },
         "ttp_impersonation": {
-            "caught_up": False,
+            "caught_up": True,
             "query_date": "2000-01-07T00:00:00+00:00",
         },
-        "ttp_url": {"caught_up": False, "query_date": "2000-01-07T00:00:00+00:00"},
+        "ttp_url": {"caught_up": True, "query_date": "2000-01-07T00:00:00+00:00"},
         "url protect": {
             "caught_up": True,
             "next_page": "NDU1NA==",
@@ -372,14 +372,14 @@ STUB_STATE_EXPECTED_CUSTOM_CONFIG = {
             "saved_file_url": None,
         },
         "ttp_attachment": {
-            "caught_up": False,
+            "caught_up": True,
             "query_date": "2000-01-07T00:00:00+00:00",
         },
         "ttp_impersonation": {
-            "caught_up": False,
+            "caught_up": True,
             "query_date": "2000-01-07T00:00:00+00:00",
         },
-        "ttp_url": {"caught_up": False, "query_date": "2000-01-07T00:00:00+00:00"},
+        "ttp_url": {"caught_up": True, "query_date": "2000-01-07T00:00:00+00:00"},
         "url protect": {
             "caught_up": True,
             "next_page": "NDU1NA==",
@@ -410,14 +410,14 @@ STUB_STATE_EXPECTED_LOG_LIMIT = {
             "saved_file_url": "https://example.com",
         },
         "ttp_attachment": {
-            "caught_up": False,
+            "caught_up": True,
             "query_date": "2000-01-07T00:00:00+00:00",
         },
         "ttp_impersonation": {
-            "caught_up": False,
+            "caught_up": True,
             "query_date": "2000-01-07T00:00:00+00:00",
         },
-        "ttp_url": {"caught_up": False, "query_date": "2000-01-07T00:00:00+00:00"},
+        "ttp_url": {"caught_up": True, "query_date": "2000-01-07T00:00:00+00:00"},
         "url protect": {
             "caught_up": False,
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
@@ -448,14 +448,14 @@ STUB_STATE_EXPECTED_LOG_LIMIT_SECOND_RUN = {
             "saved_file_url": None,
         },
         "ttp_attachment": {
-            "caught_up": False,
+            "caught_up": True,
             "query_date": "2000-01-07T00:00:00+00:00",
         },
         "ttp_impersonation": {
-            "caught_up": False,
+            "caught_up": True,
             "query_date": "2000-01-07T00:00:00+00:00",
         },
-        "ttp_url": {"caught_up": False, "query_date": "2000-01-07T00:00:00+00:00"},
+        "ttp_url": {"caught_up": True, "query_date": "2000-01-07T00:00:00+00:00"},
         "url protect": {
             "caught_up": True,
             "log_hashes": ["d98dafb4f13b3bb70539a6c251a8a9b42ea80de1"],
