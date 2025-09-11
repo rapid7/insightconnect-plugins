@@ -496,6 +496,15 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             log_type for log_type in self.connection.api.validate_permissions("TTP") if log_type in TTP_LOG_TYPES
         ]
 
+        # Remove TTP log types from query config if no permission
+        for log_type in TTP_LOG_TYPES:
+            if log_type not in available_ttp_log_types and log_type in query_config:
+                self.logger.log(
+                    self.connection.api.log_level,
+                    f"TASK: (TTP) No permission to access `{log_type}` logs. Removing from query config.",
+                )
+                query_config.pop(log_type, None)
+
         # Initialize list to hold all completed logs
         completed_logs = []
         for log_type in available_ttp_log_types:
