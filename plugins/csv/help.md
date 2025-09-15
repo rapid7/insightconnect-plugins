@@ -240,6 +240,7 @@ Example output:
 
 # Version History
 
+* 2.0.5 - Updated SDK to the latest version (6.3.10)
 * 2.0.4 - Updated SDK to the latest version (6.3.3)
 * 2.0.3 - Updated SDK to the latest version (6.2.5)
 * 2.0.2 - Initial updates for fedramp compliance | Updated SDK to the latest version

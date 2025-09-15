@@ -8,7 +8,7 @@ description: "[Comma Separated Value](https://en.wikipedia.org/wiki/Comma-separa
   \ from CSV strings and files.\n\nUsing the CSV plugin, users can automate conversions\
   \ between JSON and CSV to help enable service interoperability\nas well as filter\
   \ data within a CSV file"
-version: 2.0.4
+version: 2.0.5
 connection_version: 2
 supported_versions: ['2025-02-25']
 vendor: rapid7
@@ -28,12 +28,13 @@ hub_tags:
   features: []
 sdk:
   type: slim
-  version: 6.3.3
+  version: 6.3.10
   user: nobody
 key_features:
 - Convert between JSON and CSV
 - Filter strings
 version_history:
+- 2.0.5 - Updated SDK to the latest version (6.3.10)
 - 2.0.4 - Updated SDK to the latest version (6.3.3)
 - 2.0.3 - Updated SDK to the latest version (6.2.5)
 - 2.0.2 - Initial updates for fedramp compliance | Updated SDK to the latest version
