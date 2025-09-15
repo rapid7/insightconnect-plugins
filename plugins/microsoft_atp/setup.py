@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="microsoft_atp-rapid7-plugin",
-    version="6.0.3",
+    version="6.0.4",
     description="The Microsoft Defender for Endpoint plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files",
     author="rapid7",
     author_email="",
