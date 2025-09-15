@@ -4,7 +4,7 @@ products: [insightconnect]
 name: math
 title: Math
 description: This plugin allows basic arithmetic functions to be performed
-version: 1.2.5
+version: 1.2.6
 connection_version: 1
 vendor: rapid7
 support: community
@@ -26,12 +26,13 @@ hub_tags:
   features: []
 sdk:
   type: slim
-  version: 6.3.3
+  version: 6.3.10
   user: nobody
 key_features:
 - Math operations module and exponents
 - Math Division and multiplication, addition and subtraction
 version_history:
+- 1.2.6 - Updated SDK to the latest version (6.3.10)
 - 1.2.5 - Updated SDK to the latest version (6.3.3)
 - 1.2.4 - Updated SDK to the latest version (6.2.5)
 - 1.2.3 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
