@@ -1,7 +1,7 @@
 {
-	"spec": "7dcd098f41fc13aac4dc4b3477a95ec3",
-	"manifest": "7dac253e8602842f53585430a6ae7be2",
-	"setup": "7a3f6f48492a9009e69b0faaef49b14e",
+	"spec": "379ed7fa92ab6390dd717b2133e84e48",
+	"manifest": "c8ea259808a47480d9b8758cc42b4651",
+	"setup": "66bdd612a487190b4994cbebc4a9e553",
 	"schemas": [
 		{
 			"identifier": "docx/schema.py",
