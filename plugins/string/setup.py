@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="string-rapid7-plugin",
-    version="1.4.4",
+    version="1.4.5",
     description="The String Operations plugin allows easy manipulation of string data. This plugin utilizes the Python 3 String library [set of methods](https://docs.python.org/3/library/stdtypes.html#string-methods)",
     author="rapid7",
     author_email="",
