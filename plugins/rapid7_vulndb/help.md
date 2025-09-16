@@ -150,6 +150,7 @@ Example output:
 
 # Version History
 
+* 2.1.8 - Updated SDK to the latest version (6.3.10)
 * 2.1.7 - Updated SDK to the latest version (6.3.3)
 * 2.1.6 - Updated SDK to the latest version (6.2.5)
 * 2.1.5 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
