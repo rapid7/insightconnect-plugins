@@ -6,7 +6,7 @@ title: Microsoft Defender for Endpoint
 description: The Microsoft Defender for Endpoint plugin allows Rapid7 InsightConnect
   users to quickly take remediation actions across their organization. This plugin
   can isolate machines, run virus scans, and quarantine files
-version: 6.0.3
+version: 6.0.4
 connection_version: 6
 supported_versions: ['2024-05-21']
 vendor: rapid7
@@ -30,7 +30,7 @@ hub_tags:
   features: []
 sdk:
   type: full
-  version: 6.3.3
+  version: 6.3.10
   user: nobody
 troubleshooting:
 - For information on how to setup your Azure application and assign permissions go
@@ -41,6 +41,7 @@ references:
 - '[Windows Defender for Endpoint API Start Page](https://learn.microsoft.com/en-us/defender-endpoint/api/apis-intro)'
 - '[Windows Defender for Endpoint API Endpoints](https://learn.microsoft.com/en-us/defender-endpoint/api/exposed-apis-list)'
 version_history:
+- 6.0.4 - Updated SDK to the latest version (6.3.10)
 - 6.0.3 - Updated SDK to the latest version (6.3.3)
 - 6.0.2 - Updated SDK to the latest version (6.2.5)
 - 6.0.1 - Update to latest SDK (v6.2.2) | Address vulnerabilities | Rebrand to `Microsoft
