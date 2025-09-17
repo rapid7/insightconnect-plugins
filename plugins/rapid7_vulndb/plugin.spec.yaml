@@ -8,7 +8,7 @@ description: Make searching the Rapid7 vulnerability and exploit data fast, easy
   computer software exploits and exploitable vulnerabilities to ensure your security
   operations are always aware of the latest threats that could be used against your
   environment vulnerabilities
-version: 2.1.7
+version: 2.1.8
 connection_version: 2
 supported_versions: [v1]
 vendor: rapid7
@@ -17,7 +17,7 @@ cloud_ready: true
 fedramp_ready: true
 sdk:
   type: slim
-  version: 6.3.3
+  version: 6.3.10
   user: nobody
 key_features:
 - Search Database for vulnerabilities
@@ -41,6 +41,7 @@ references:
 links:
 - '[Rapid7 Vulnerability & Exploit Database API Specification](https://vdb.rapid7.com/swagger_doc)'
 version_history:
+- 2.1.8 - Updated SDK to the latest version (6.3.10)
 - 2.1.7 - Updated SDK to the latest version (6.3.3)
 - 2.1.6 - Updated SDK to the latest version (6.2.5)
 - 2.1.5 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities
