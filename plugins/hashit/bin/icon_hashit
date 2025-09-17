@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "HashIt"
 Vendor = "rapid7"
-Version = "2.0.7"
+Version = "2.0.8"
 Description = "The HashIt plugin will generate common hashes from a file or string. Supported hashes are:* MD5* SHA1* SHA256* SHA512"
 
 
