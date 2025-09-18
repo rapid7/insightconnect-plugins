@@ -1331,6 +1331,7 @@ Example output:
 
 # Version History
 
+* 6.0.4 - Updated SDK to the latest version (6.3.10)
 * 6.0.3 - Updated SDK to the latest version (6.3.3)
 * 6.0.2 - Updated SDK to the latest version (6.2.5)
 * 6.0.1 - Update to latest SDK (v6.2.2) | Address vulnerabilities | Rebrand to `Microsoft Defender for Endpoint`
