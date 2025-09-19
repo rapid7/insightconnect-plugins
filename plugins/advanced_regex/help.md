@@ -59,7 +59,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|matches|[][]string|True|An array of string arrays matching the output of Python re.findall()|[["lorem"]]|
+|matches|[]result|True|An array of string arrays matching the output of Python re.findall()|[["lorem"]]|
   
 Example output:
 
@@ -174,7 +174,18 @@ Example output:
 
 ### Custom Types
   
-*This plugin does not contain any custom output types.*
+**match**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|name|string|None|False|None|None|
+  
+**result**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|matches|[]match|None|False|None|None|
+
 
 ## Troubleshooting
   
@@ -182,6 +193,7 @@ Example output:
 
 # Version History
 
+* 1.0.6 - Data extraction output fix.
 * 1.0.5 - Updated SDK to the latest version (6.2.5)
 * 1.0.4 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 1.0.3 - Update to make replace string non-required
