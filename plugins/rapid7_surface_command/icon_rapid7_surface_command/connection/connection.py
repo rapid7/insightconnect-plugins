@@ -3,7 +3,7 @@ from .schema import ConnectionSchema, Input
 
 # Custom imports below
 
-from icon_rapid7_surface_command.util.surface_command.api_connection import (
+from icon_rapid7_surface_command.util.api_connection import (
     ApiConnection,
 )
 from insightconnect_plugin_runtime.exceptions import (
