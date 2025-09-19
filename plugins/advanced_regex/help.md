@@ -193,7 +193,7 @@ Example output:
 
 # Version History
 
-* 1.0.6 - Data extraction output fix.
+* 2.0.0 - Data extraction output fix.
 * 1.0.5 - Updated SDK to the latest version (6.2.5)
 * 1.0.4 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 1.0.3 - Update to make replace string non-required

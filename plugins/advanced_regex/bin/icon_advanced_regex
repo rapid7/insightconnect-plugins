@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Advanced Regex"
 Vendor = "rapid7"
-Version = "1.0.6"
+Version = "2.0.0"
 Description = "The Advanced Regex plugin is used to extract or manipulate targeted text using regular expressions operations on a string using Python specific regex"
 
 

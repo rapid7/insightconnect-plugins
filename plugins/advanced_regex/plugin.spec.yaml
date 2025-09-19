@@ -5,7 +5,7 @@ name: advanced_regex
 title: Advanced Regex
 description: The Advanced Regex plugin is used to extract or manipulate targeted text
   using regular expressions operations on a string using Python specific regex
-version: 1.0.6
+version: 2.0.0
 connection_version: 1
 support: community
 supported_versions: ['2024-10-01']
@@ -36,14 +36,14 @@ enable_cache: true
 language: python
 sdk:
   type: slim
-  version: 6.2.5
+  version: 6.3.10
   user: nobody
 key_features:
 - Data extraction
 - Search and replace text
 - Split text
 version_history:
-- 1.0.6 - Data extraction output fix.
+- 2.0.0 - Data extraction output fix.
 - 1.0.5 - Updated SDK to the latest version (6.2.5)
 - 1.0.4 - Initial updates for fedramp compliance | Updated SDK to the latest version
 - 1.0.3 - Update to make replace string non-required
