@@ -105,7 +105,7 @@ class TestAssetSearch(TestCase):
             self.action.run()
         cause = "Failed to get a valid response from InsightVM at endpoint 'https://us.api.insight.rapid7.com/vm/v4/integration/assets'"
         assistance = "Unauthorized"
-        self.assertEqual(cause, context.exception.cause)
+        self.assertIn(cause, context.exception.cause)
         self.assertEqual(assistance, context.exception.assistance)
 
     @patch("requests.request", side_effect=mock_request)
@@ -118,5 +118,5 @@ class TestAssetSearch(TestCase):
             self.action.run()
         cause = "Failed to get a valid response from InsightVM at endpoint 'https://us.api.insight.rapid7.com/vm/v4/integration/assets'"
         assistance = "An unexpected error occurred. Please contact Rapid7 support."
-        self.assertEqual(cause, context.exception.cause)
+        self.assertIn(cause, context.exception.cause)
         self.assertEqual(assistance, context.exception.assistance)

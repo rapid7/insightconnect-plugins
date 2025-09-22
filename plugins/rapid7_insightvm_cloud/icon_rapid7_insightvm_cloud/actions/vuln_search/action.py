@@ -13,11 +13,13 @@ class VulnSearch(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         vuln_crit = params.get(Input.VULN_CRITERIA)
         size = params.get(Input.SIZE, AVG_SIZE)
         sort_criteria = params.get(Input.SORT_CRITERIA, {})
-        parameters = []
+        # END INPUT BINDING - DO NOT REMOVE
 
+        parameters = []
         for key, value in sort_criteria.items():
             parameters.append(("sort", f"{key},{value}"))
 
@@ -33,7 +35,4 @@ class VulnSearch(insightconnect_plugin_runtime.Action):
             resources = self.connection.ivm_cloud_api.call_api("vulnerabilities", "POST", parameters, body)
         else:
             resources = self.connection.ivm_cloud_api.call_api("vulnerabilities", "POST", parameters)
-
-        vulns = resources.get("data", [])
-
-        return {Output.VULNERABILITIES: vulns}
+        return {Output.VULNERABILITIES: resources.get("data", [])}

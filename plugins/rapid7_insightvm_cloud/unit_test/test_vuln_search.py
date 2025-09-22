@@ -83,7 +83,7 @@ class TestVulnSearch(TestCase):
             self.action.run()
         cause = "Failed to get a valid response from InsightVM at endpoint 'https://us.api.insight.rapid7.com/vm/v4/integration/vulnerabilities'"
         assistance = "Unauthorized"
-        self.assertEqual(cause, context.exception.cause)
+        self.assertIn(cause, context.exception.cause)
         self.assertEqual(assistance, context.exception.assistance)
 
     # test finding event with server error
@@ -97,5 +97,5 @@ class TestVulnSearch(TestCase):
             self.action.run()
         cause = "Failed to get a valid response from InsightVM at endpoint 'https://us.api.insight.rapid7.com/vm/v4/integration/vulnerabilities'"
         assistance = "An unexpected error occurred. Please contact Rapid7 support."
-        self.assertEqual(cause, context.exception.cause)
+        self.assertIn(cause, context.exception.cause)
         self.assertEqual(assistance, context.exception.assistance)

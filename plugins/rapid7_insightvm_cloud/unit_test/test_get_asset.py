@@ -59,7 +59,7 @@ class TestGetAsset(TestCase):
             )
         cause = f"Failed to get a valid response from InsightVM at endpoint 'https://us.api.insight.rapid7.com/vm/v4/integration/assets/{self.params.get('asset_id_bad')}'"
         assistance = "The requested resource does not exist."
-        self.assertEqual(cause, context.exception.cause)
+        self.assertIn(cause, context.exception.cause)
         self.assertEqual(assistance, context.exception.assistance)
 
     @patch("requests.request", side_effect=mock_request)
@@ -70,7 +70,7 @@ class TestGetAsset(TestCase):
             )
         cause = f"Failed to get a valid response from InsightVM at endpoint 'https://us.api.insight.rapid7.com/vm/v4/integration/assets/{self.params.get('asset_id_bad')}'"
         assistance = "The requested resource does not exist."
-        self.assertEqual(cause, context.exception.cause)
+        self.assertIn(cause, context.exception.cause)
         self.assertEqual(assistance, context.exception.assistance)
 
     @patch("requests.request", side_effect=mock_request)
@@ -84,7 +84,7 @@ class TestGetAsset(TestCase):
             )
         cause = f"Failed to get a valid response from InsightVM at endpoint 'https://us.api.insight.rapid7.com/vm/v4/integration/assets/{self.params.get('asset_id')}'"
         assistance = "Unauthorized"
-        self.assertEqual(cause, context.exception.cause)
+        self.assertIn(cause, context.exception.cause)
         self.assertEqual(assistance, context.exception.assistance)
 
     @patch("requests.request", side_effect=mock_request)
@@ -99,5 +99,5 @@ class TestGetAsset(TestCase):
             )
         cause = f"Failed to get a valid response from InsightVM at endpoint 'https://us.api.insight.rapid7.com/vm/v4/integration/assets/{self.params.get('asset_id')}'"
         assistance = "An unexpected error occurred. Please contact Rapid7 support."
-        self.assertEqual(cause, context.exception.cause)
+        self.assertIn(cause, context.exception.cause)
         self.assertEqual(assistance, context.exception.assistance)

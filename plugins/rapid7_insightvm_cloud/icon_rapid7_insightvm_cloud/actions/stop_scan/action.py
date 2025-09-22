@@ -17,7 +17,10 @@ class StopScan(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         scan_id = params.get(Input.ID)
+        # END INPUT BINDING - DO NOT REMOVE
+
         url = f"scan/{scan_id}/stop"
         self.connection.ivm_cloud_api.call_api(url, "POST")
         time.sleep(5)

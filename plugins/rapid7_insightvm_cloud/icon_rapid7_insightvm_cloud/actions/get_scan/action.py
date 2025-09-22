@@ -15,7 +15,10 @@ class GetScan(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         scan_id = params.get(Input.SCAN_ID)
+        # END INPUT BINDING - DO NOT REMOVE
+
         response = self.connection.ivm_cloud_api.call_api("scan/" + scan_id, "GET")
         response = insightconnect_plugin_runtime.helper.clean(response)
         del response["status_code"]
