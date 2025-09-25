@@ -13,17 +13,20 @@ class StartScan(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        name = params.get(Input.NAME, "")
         asset_ids = params.get(Input.ASSET_IDS)
-        name = params.get(Input.NAME)
-        ips = params.get(Input.IPS)
+        ip_addresses = params.get(Input.IPS)
         hostnames = params.get(Input.HOSTNAMES)
-        if asset_ids is None and ips is None and hostnames is None:
+        # END INPUT BINDING - DO NOT REMOVE
+
+        if asset_ids is None and ip_addresses is None and hostnames is None:
             raise PluginException(
                 cause="Did not enter necessary information of what to scan.",
                 assistance="Please enter asset ID, hostname, or IP address.",
             )
-        if ips or hostnames:
-            body = _format_body(hostnames, ips)
+        if ip_addresses or hostnames:
+            body = _format_body(hostnames, ip_addresses)
             resources = self.connection.ivm_cloud_api.call_api("assets", "POST", params, body)
             extra_ids = resources.get("data", [])
             for extra_id in extra_ids:
