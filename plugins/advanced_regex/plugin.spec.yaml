@@ -3,12 +3,11 @@ extension: plugin
 products: [insightconnect]
 name: advanced_regex
 title: Advanced Regex
-description: The Advanced Regex plugin is used to extract or manipulate targeted text
-  using regular expressions operations on a string using Python specific regex
-version: 1.0.5
+description: The Advanced Regex plugin is used to extract or manipulate targeted text using regular expressions operations on a string using Python specific regex
+version: 2.0.0
 connection_version: 1
 support: community
-supported_versions: ['2024-10-01']
+supported_versions: ['2025-09-25']
 fedramp_ready: true
 vendor: rapid7
 status: []
@@ -17,33 +16,41 @@ resources:
     https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/advanced_regex
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
-- data manipulation
-- utility
+  - data manipulation
+  - utility
 hub_tags:
   use_cases: [data_utility]
   keywords: [data manipulation, utility]
   features: []
-enable_cache: true
+enable_cache: false
 language: python
 sdk:
   type: slim
-  version: 6.2.5
+  version: 6.3.10
   user: nobody
 key_features:
-- Data extraction
-- Search and replace text
-- Split text
+  - Data extraction
+  - Search and replace text
+  - Split text
 version_history:
-- 1.0.5 - Updated SDK to the latest version (6.2.5)
-- 1.0.4 - Initial updates for fedramp compliance | Updated SDK to the latest version
-- 1.0.3 - Update to make replace string non-required
-- 1.0.2 - Update to v4 Python plugin runtime | Add example inputs
-- 1.0.1 - New spec and help.md format for the Extension Library
-- 1.0.0 - Initial plugin
+  - "2.0.0 - Action `Data Extraction`: Updated output schema to be list of objects | Updated SDK to the latest version (6.3.10)"
+  - 1.0.5 - Updated SDK to the latest version (6.2.5)
+  - 1.0.4 - Initial updates for fedramp compliance | Updated SDK to the latest version
+  - 1.0.3 - Update to make replace string non-required
+  - 1.0.2 - Update to v4 Python plugin runtime | Add example inputs
+  - 1.0.1 - New spec and help.md format for the Extension Library
+  - 1.0.0 - Initial plugin
 links:
-- '[Python Regex](https://docs.python.org/library/re.html)'
+  - "[Python Regex](https://docs.python.org/library/re.html)"
 references:
-- '[Python Regex](https://docs.python.org/library/re.html)'
+  - "[Python Regex](https://docs.python.org/library/re.html)"
+types:
+  regex_match:
+    value:
+      title: Value
+      description: Stores the list of strings matched by the regular expression using Python's re.findall()
+      type: "[]string"
+      required: false
 actions:
   data_extraction:
     title: Data Extraction
@@ -54,8 +61,7 @@ actions:
         description: Input string
         type: string
         required: true
-        example: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-          sapien ex, lorems odales
+        example: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sapien ex, lorems odales
       in_regex:
         title: Regex
         description: Regex to use for data extraction
@@ -93,10 +99,10 @@ actions:
     output:
       matches:
         title: Matches
-        description: An array of string arrays matching the output of Python re.findall()
-        type: '[][]string'
+        description: A list of objects, each with a `value` key containing an array of strings matched by the regex using Python's re.findall()
+        type: '[]regex_match'
         required: true
-        example: '[["lorem"]]'
+        example: '[{"value": ["lorem"]}]'
   replace:
     title: Search and Replace
     description: Regex search and replace string
@@ -106,8 +112,7 @@ actions:
         description: Input string
         type: string
         required: true
-        example: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-          sapien ex, lorems odales
+        example: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sapien ex, lorems odales
       replace_string:
         title: New String
         description: The string to replace matches with
@@ -161,8 +166,7 @@ actions:
         description: The result of the replace operation
         type: string
         required: true
-        example: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-          sapien ex, REPLACEDs odales
+        example: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sapien ex, REPLACEDs odales
   split:
     title: Split by Regex
     description: Split a string into array using regex
@@ -172,8 +176,7 @@ actions:
         description: Input string
         type: string
         required: true
-        example: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-          sapien ex, lorems odales sed
+        example: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sapien ex, lorems odales sed
       in_regex:
         title: Regex
         description: Regex to split string on matches
@@ -221,5 +224,4 @@ actions:
         description: An array of the strings returned by the split operation
         type: '[]string'
         required: true
-        example: '["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-          sapien ex, ", "s odales sed"]'
+        example: '["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sapien ex, ", "s odales sed"]'

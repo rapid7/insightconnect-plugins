@@ -7,7 +7,7 @@ from icon_advanced_regex.util import shared
 
 
 class Replace(insightconnect_plugin_runtime.Action):
-    def __init__(self):
+    def __init__(self) -> None:
         super(self.__class__, self).__init__(
             name="replace",
             description=Component.DESCRIPTION,

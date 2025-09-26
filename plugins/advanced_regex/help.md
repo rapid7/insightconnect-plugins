@@ -14,7 +14,7 @@ The Advanced Regex plugin is used to extract or manipulate targeted text using r
 
 # Supported Product Versions
 
-* 2024-10-01
+* 2025-09-25
 
 # Documentation
 
@@ -59,16 +59,18 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|matches|[][]string|True|An array of string arrays matching the output of Python re.findall()|[["lorem"]]|
+|matches|[]regex_match|True|A list of objects, each with a `value` key containing an array of strings matched by the regex using Python's re.findall()|[{"value": ["lorem"]}]|
   
 Example output:
 
 ```
 {
   "matches": [
-    [
-      "lorem"
-    ]
+    {
+      "value": [
+        "lorem"
+      ]
+    }
   ]
 }
 ```
@@ -174,7 +176,12 @@ Example output:
 
 ### Custom Types
   
-*This plugin does not contain any custom output types.*
+**regex_match**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Value|[]string|None|False|Stores the list of strings matched by the regular expression using Python's re.findall()|None|
+
 
 ## Troubleshooting
   
@@ -182,6 +189,7 @@ Example output:
 
 # Version History
 
+* 2.0.0 - Action `Data Extraction`: Updated output schema to be list of objects | Updated SDK to the latest version (6.3.10)
 * 1.0.5 - Updated SDK to the latest version (6.2.5)
 * 1.0.4 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 1.0.3 - Update to make replace string non-required
