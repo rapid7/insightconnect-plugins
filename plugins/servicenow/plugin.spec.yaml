@@ -9,7 +9,7 @@ description: "[ServiceNow](https://www.servicenow.com/) is a tool for managing i
   \ can be monitored and processed for use in a Rapid7 InsightConnect workflow.\n\n\
   Note: This plugin affects only the underlying tables in a ServiceNow instance, not\
   \ its UI. Hence, this plugin will work seamlessly with Virtual Task Boards"
-version: 8.1.1
+version: 8.1.2
 connection_version: 8
 supported_versions: [2023-10-28 Tokyo]
 vendor: rapid7
@@ -31,7 +31,7 @@ hub_tags:
   features: []
 sdk:
   type: slim
-  version: 6.3.3
+  version: 6.3.10
   user: nobody
 key_features:
 - Search, Read, Create, Delete, and Update incidents to accelerate ticketing operations
@@ -65,6 +65,7 @@ references:
 troubleshooting:
 - This plugin does not contain a troubleshooting.
 version_history:
+- 8.1.2 - Updated SDK to the latest version (6.3.10)
 - 8.1.1 - Updated SDK to the latest version (6.3.3)
 - 8.1.0 - Add ability to use OAuth 2.0 flow named client credentials | Updated SDK
   to the latest version (v6.2.5)
