@@ -22,5 +22,5 @@ class DataExtraction(insightconnect_plugin_runtime.Action):
         # END INPUT BINDING - DO NOT REMOVE
 
         findall = re.findall(regex, input_string, flags=shared.construct_flags(params))
-        matches = [{"value": [match] if isinstance(match, str) else list(match)} for match in findall]
+        matches = [item for match in findall for item in ([match] if isinstance(match, str) else match)]
         return {Output.MATCHES: matches}
