@@ -21,14 +21,14 @@ def read_file_content(filename: str) -> str:
         return encode_to_base64(file_.read())
 
 
-def delete_file(file_name):
+def delete_file(file_name: str) -> None:
     try:
         os.remove(file_name)
     except FileNotFoundError:
         pass
-    except Exception as e:
+    except Exception as error:
         log = structlog.getLogger("action logger")
-        log.error("failed to delete file", file_name=file_name, exception=e)
+        log.error("Failed to delete file", file_name=file_name, exception=error)
 
 
 def convert_with_temporary_file(
@@ -50,16 +50,14 @@ def convert_with_temporary_file(
             *args,
             **kwargs,
         )
-        file = read_file_content(file_name)
-    except Exception as e:
+        return read_file_content(file_name)
+    except Exception as error:
         log = structlog.getLogger("action logger")
-        log.error("failed to execute action step", file_name=file_name, exception=e)
+        log.error("Failed to execute action step", file_name=file_name, exception=error)
         raise PluginException(
-            cause="failed to execute step",
+            cause="Failed to execute step",
             assistance="Check the plugin logs. If executing in the cloud, ensure html tags are not linking to resources on the internet.",
-            data=e,
+            data=error,
         )
     finally:
         delete_file(file_name)
-
-    return file
