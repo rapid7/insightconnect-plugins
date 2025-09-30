@@ -28,7 +28,7 @@ class TestDataExtraction(TestCase):
                     Input.IN_STRING: "Lorem ipsum dolor sit amet, consectetur \nadipiscing elit. Aliquam sapien ex, lorems odales",
                     Input.MULTILINE: False,
                 },
-                {Output.MATCHES: [{"value": ["lorem"]}]},
+                {Output.MATCHES: ["lorem"]},
             ),
             # Test 2: Case-insensitive match
             (
@@ -42,9 +42,9 @@ class TestDataExtraction(TestCase):
                 },
                 {
                     Output.MATCHES: [
-                        {"value": ["Lorem"]},
-                        {"value": ["lorem"]},
-                        {"value": ["LOREM"]},
+                        "Lorem",
+                        "lorem",
+                        "LOREM",
                     ]
                 },
             ),
@@ -58,7 +58,7 @@ class TestDataExtraction(TestCase):
                     Input.IN_STRING: "Lorem ipsum\ndolor sit amet",
                     Input.MULTILINE: True,
                 },
-                {Output.MATCHES: [{"value": ["dolor"]}]},
+                {Output.MATCHES: ["dolor"]},
             ),
             # Test 4: Dotall match
             (
@@ -70,7 +70,7 @@ class TestDataExtraction(TestCase):
                     Input.IN_STRING: "ipsum dolor\nsit amet, elit",
                     Input.MULTILINE: False,
                 },
-                {Output.MATCHES: [{"value": ["ipsum dolor\nsit amet, elit"]}]},
+                {Output.MATCHES: ["ipsum dolor\nsit amet, elit"]},
             ),
             # Test 5: ASCII flag match
             (
@@ -84,8 +84,8 @@ class TestDataExtraction(TestCase):
                 },
                 {
                     Output.MATCHES: [
-                        {"value": ["test"]},
-                        {"value": ["me"]},
+                        "test",
+                        "me",
                     ]
                 },
             ),
@@ -101,10 +101,10 @@ class TestDataExtraction(TestCase):
                 },
                 {
                     Output.MATCHES: [
-                        {"value": ["1234"]},
-                        {"value": ["2023"]},
-                        {"value": ["06"]},
-                        {"value": ["01"]},
+                        "1234",
+                        "2023",
+                        "06",
+                        "01",
                     ]
                 },
             ),
@@ -120,8 +120,12 @@ class TestDataExtraction(TestCase):
                 },
                 {
                     Output.MATCHES: [
-                        {"value": ["123-abc", "123", "abc"]},
-                        {"value": ["456-def", "456", "def"]},
+                        "123-abc",
+                        "123",
+                        "abc",
+                        "456-def",
+                        "456",
+                        "def",
                     ]
                 },
             ),

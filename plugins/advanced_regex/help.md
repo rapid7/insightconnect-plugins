@@ -59,18 +59,14 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|matches|[]regex_match|True|A list of objects, each with a `value` key containing an array of strings matched by the regex using Python's re.findall()|[{"value": ["lorem"]}]|
+|matches|[]string|True|A list of objects, each with a `value` key containing an array of strings matched by the regex using Python's re.findall()|["lorem"]|
   
 Example output:
 
 ```
 {
   "matches": [
-    {
-      "value": [
-        "lorem"
-      ]
-    }
+    "lorem"
   ]
 }
 ```
@@ -176,12 +172,7 @@ Example output:
 
 ### Custom Types
   
-**regex_match**
-
-|Name|Type|Default|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- |
-|Value|[]string|None|False|Stores the list of strings matched by the regular expression using Python's re.findall()|None|
-
+*This plugin does not contain any custom output types.*
 
 ## Troubleshooting
   
@@ -189,7 +180,7 @@ Example output:
 
 # Version History
 
-* 2.0.0 - Action `Data Extraction`: Updated output schema to be list of objects | Updated SDK to the latest version (6.3.10)
+* 2.0.0 - Action `Data Extraction`: Updated output schema to be an array of string | Updated SDK to the latest version (6.3.10)
 * 1.0.5 - Updated SDK to the latest version (6.2.5)
 * 1.0.4 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 1.0.3 - Update to make replace string non-required

@@ -93,7 +93,7 @@ class DataExtractionOutput(insightconnect_plugin_runtime.Output):
       "title": "Matches",
       "description": "A list of objects, each with a `value` key containing an array of strings matched by the regex using Python's re.findall()",
       "items": {
-        "$ref": "#/definitions/regex_match"
+        "type": "string"
       },
       "order": 1
     }
@@ -101,23 +101,7 @@ class DataExtractionOutput(insightconnect_plugin_runtime.Output):
   "required": [
     "matches"
   ],
-  "definitions": {
-    "regex_match": {
-      "type": "object",
-      "title": "regex_match",
-      "properties": {
-        "value": {
-          "type": "array",
-          "title": "Value",
-          "description": "Stores the list of strings matched by the regular expression using Python's re.findall()",
-          "items": {
-            "type": "string"
-          },
-          "order": 1
-        }
-      }
-    }
-  }
+  "definitions": {}
 }
     """
     )

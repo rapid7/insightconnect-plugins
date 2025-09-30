@@ -22,7 +22,6 @@ hub_tags:
   use_cases: [data_utility]
   keywords: [data manipulation, utility]
   features: []
-enable_cache: false
 language: python
 sdk:
   type: slim
@@ -33,7 +32,7 @@ key_features:
   - Search and replace text
   - Split text
 version_history:
-  - "2.0.0 - Action `Data Extraction`: Updated output schema to be list of objects | Updated SDK to the latest version (6.3.10)"
+  - "2.0.0 - Action `Data Extraction`: Updated output schema to be an array of string | Updated SDK to the latest version (6.3.10)"
   - 1.0.5 - Updated SDK to the latest version (6.2.5)
   - 1.0.4 - Initial updates for fedramp compliance | Updated SDK to the latest version
   - 1.0.3 - Update to make replace string non-required
@@ -44,13 +43,6 @@ links:
   - "[Python Regex](https://docs.python.org/library/re.html)"
 references:
   - "[Python Regex](https://docs.python.org/library/re.html)"
-types:
-  regex_match:
-    value:
-      title: Value
-      description: Stores the list of strings matched by the regular expression using Python's re.findall()
-      type: "[]string"
-      required: false
 actions:
   data_extraction:
     title: Data Extraction
@@ -100,9 +92,9 @@ actions:
       matches:
         title: Matches
         description: A list of objects, each with a `value` key containing an array of strings matched by the regex using Python's re.findall()
-        type: '[]regex_match'
+        type: '[]string'
         required: true
-        example: '[{"value": ["lorem"]}]'
+        example: '["lorem"]'
   replace:
     title: Search and Replace
     description: Regex search and replace string
