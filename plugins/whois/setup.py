@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="whois-rapid7-plugin",
-    version="3.1.9",
+    version="3.1.10",
     description="[WHOIS](https://en.wikipedia.org/wiki/WHOIS) is a query and response protocol that is widely used for querying databases that store the registered users or assignee's of an Internet resource, such as a domain name, an IP address block, or an autonomous system",
     author="rapid7",
     author_email="",
