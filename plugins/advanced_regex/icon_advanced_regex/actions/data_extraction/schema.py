@@ -91,7 +91,7 @@ class DataExtractionOutput(insightconnect_plugin_runtime.Output):
     "matches": {
       "type": "array",
       "title": "Matches",
-      "description": "A list of objects, each with a `value` key containing an array of strings matched by the regex using Python's re.findall()",
+      "description": "An array of strings matched by the regex output of Python's re.findall()",
       "items": {
         "type": "string"
       },

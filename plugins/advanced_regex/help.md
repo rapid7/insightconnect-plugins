@@ -59,7 +59,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|matches|[]string|True|A list of objects, each with a `value` key containing an array of strings matched by the regex using Python's re.findall()|["lorem"]|
+|matches|[]string|True|An array of strings matched by the regex output of Python's re.findall()|["lorem"]|
   
 Example output:
 
