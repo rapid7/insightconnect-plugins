@@ -1,11 +1,11 @@
 {
-	"spec": "893856837f66ac05c90483da427fe0c0",
+	"spec": "806ba1f3f746de8b182ec48d83a71a15",
 	"manifest": "c1ffbb1ed96dedd25d3c92e00210407f",
 	"setup": "f2807e9dd07afa51b291cc6aaedf5cfd",
 	"schemas": [
 		{
 			"identifier": "data_extraction/schema.py",
-			"hash": "7d1c514142ef6cdce87fa5c7064003ef"
+			"hash": "5efc1a6873a05b5a292b8004c72ebf4e"
 		},
 		{
 			"identifier": "replace/schema.py",
