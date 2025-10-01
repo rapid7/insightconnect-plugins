@@ -21,7 +21,8 @@ class Output:
 
 
 class DataExtractionInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -73,14 +74,16 @@ class DataExtractionInput(insightconnect_plugin_runtime.Input):
   ],
   "definitions": {}
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class DataExtractionOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -88,12 +91,9 @@ class DataExtractionOutput(insightconnect_plugin_runtime.Output):
     "matches": {
       "type": "array",
       "title": "Matches",
-      "description": "An array of string arrays matching the output of Python re.findall()",
+      "description": "An array of strings matched by the regex output of Python's re.findall()",
       "items": {
-        "type": "array",
-        "items": {
-          "type": "string"
-        }
+        "type": "string"
       },
       "order": 1
     }
@@ -103,7 +103,8 @@ class DataExtractionOutput(insightconnect_plugin_runtime.Output):
   ],
   "definitions": {}
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

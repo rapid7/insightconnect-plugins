@@ -18,6 +18,7 @@ class TestDataExtraction(TestCase):
 
     @parameterized.expand(
         [
+            # Test 1: Basic match
             (
                 {
                     Input.ASCII: False,
@@ -27,8 +28,107 @@ class TestDataExtraction(TestCase):
                     Input.IN_STRING: "Lorem ipsum dolor sit amet, consectetur \nadipiscing elit. Aliquam sapien ex, lorems odales",
                     Input.MULTILINE: False,
                 },
-                {Output.MATCHES: [["lorem"]]},
-            )
+                {Output.MATCHES: ["lorem"]},
+            ),
+            # Test 2: Case-insensitive match
+            (
+                {
+                    Input.ASCII: False,
+                    Input.DOTALL: False,
+                    Input.IGNORECASE: True,
+                    Input.IN_REGEX: "LOREM",
+                    Input.IN_STRING: "Lorem ipsum dolor sit amet, lorem LOREM",
+                    Input.MULTILINE: False,
+                },
+                {
+                    Output.MATCHES: [
+                        "Lorem",
+                        "lorem",
+                        "LOREM",
+                    ]
+                },
+            ),
+            # Test 3: Multiline match
+            (
+                {
+                    Input.ASCII: False,
+                    Input.DOTALL: False,
+                    Input.IGNORECASE: False,
+                    Input.IN_REGEX: "^dolor",
+                    Input.IN_STRING: "Lorem ipsum\ndolor sit amet",
+                    Input.MULTILINE: True,
+                },
+                {Output.MATCHES: ["dolor"]},
+            ),
+            # Test 4: Dotall match
+            (
+                {
+                    Input.ASCII: False,
+                    Input.DOTALL: True,
+                    Input.IGNORECASE: False,
+                    Input.IN_REGEX: "ipsum.*elit",
+                    Input.IN_STRING: "ipsum dolor\nsit amet, elit",
+                    Input.MULTILINE: False,
+                },
+                {Output.MATCHES: ["ipsum dolor\nsit amet, elit"]},
+            ),
+            # Test 5: ASCII flag match
+            (
+                {
+                    Input.ASCII: True,
+                    Input.DOTALL: False,
+                    Input.IGNORECASE: False,
+                    Input.IN_REGEX: r"\w+",
+                    Input.IN_STRING: "test me",
+                    Input.MULTILINE: False,
+                },
+                {
+                    Output.MATCHES: [
+                        "test",
+                        "me",
+                    ]
+                },
+            ),
+            # Test 6: Extract digits
+            (
+                {
+                    Input.ASCII: False,
+                    Input.DOTALL: False,
+                    Input.IGNORECASE: False,
+                    Input.IN_REGEX: r"\d+",
+                    Input.IN_STRING: "Example 1234 EXAMPLE TEST 2023-06-01",
+                    Input.MULTILINE: False,
+                },
+                {
+                    Output.MATCHES: [
+                        "1234",
+                        "2023",
+                        "06",
+                        "01",
+                    ]
+                },
+            ),
+            # Test 7: Multiple matches in same group
+            (
+                {
+                    Input.ASCII: False,
+                    Input.DOTALL: False,
+                    Input.IGNORECASE: False,
+                    Input.IN_REGEX: r"(\d+)-(\w+)",
+                    Input.IN_STRING: "123-abc 456-def",
+                    Input.MULTILINE: False,
+                },
+                {
+                    Output.MATCHES: [
+                        "123-abc",
+                        "123",
+                        "abc",
+                        "456-def",
+                        "456",
+                        "def",
+                    ]
+                },
+            ),
         ]
     )
     def test_data_extraction(self, parameters: Dict[str, Any], expected: Dict[str, Any]) -> None:
