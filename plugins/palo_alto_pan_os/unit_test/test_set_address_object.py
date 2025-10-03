@@ -1,19 +1,21 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
+from unittest.mock import patch, MagicMock
+
+from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 from komand_palo_alto_pan_os.actions.set_address_object import SetAddressObject
 from komand_palo_alto_pan_os.actions.set_address_object.schema import (
     Input,
     SetAddressObjectInput,
     SetAddressObjectOutput,
 )
-from util import Util
-from unittest.mock import patch
 from parameterized import parameterized
-from insightconnect_plugin_runtime.exceptions import PluginException
-from jsonschema import validate
+
+from util import Util
 
 
 @patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
@@ -144,8 +146,18 @@ class TestSetAddressObject(TestCase):
         ]
     )
     def test_set_address_object(
-        self, mock_get, mock_post, name, address, address_object, description, tags, skip_rfc1918, whitelist, expected
-    ):
+        self,
+        mock_get: MagicMock,
+        mock_post: MagicMock,
+        name: str,
+        address: str,
+        address_object: str,
+        description: str,
+        tags: str,
+        skip_rfc1918: bool,
+        whitelist: list,
+        expected: dict,
+    ) -> None:
         action = Util.default_connector(SetAddressObject())
         input_data = {
             Input.ADDRESS: address,
@@ -177,18 +189,18 @@ class TestSetAddressObject(TestCase):
     )
     def test_set_address_object_bad(
         self,
-        mock_get,
-        mock_post,
-        name,
-        address,
-        address_object,
-        description,
-        tags,
-        skip_rfc1918,
-        whitelist,
-        cause,
-        assistance,
-    ):
+        mock_get: MagicMock,
+        mock_post: MagicMock,
+        name: str,
+        address: str,
+        address_object: str,
+        description: str,
+        tags: str,
+        skip_rfc1918: bool,
+        whitelist: list,
+        cause: str,
+        assistance: str,
+    ) -> None:
         action = Util.default_connector(SetAddressObject())
         input_data = {
             Input.ADDRESS: address,
@@ -204,7 +216,7 @@ class TestSetAddressObject(TestCase):
         self.assertEqual(e.exception.cause, cause)
         self.assertEqual(e.exception.assistance, assistance)
 
-    def test_in_whitelist(self, mock_get, mock_post):
+    def test_in_whitelist(self, mock_get: MagicMock, mock_post: MagicMock) -> None:
         test_action = SetAddressObject()
 
         self.assertTrue(test_action.match_whitelist("1.1.1.1", ["1.1.1.1/32"], "ip-netmask"))
@@ -222,14 +234,14 @@ class TestSetAddressObject(TestCase):
         self.assertTrue(test_action.match_whitelist("1.1.1.1", ["1.1.1.1"], "ip-range"))
         self.assertFalse(test_action.match_whitelist("1.1.1.1/24", ["1.1.1.1"], "ip-range"))
 
-    def test_cidr_vs_cidr_in_whitelist(self, mock_get, mock_post):
+    def test_cidr_vs_cidr_in_whitelist(self, mock_get: MagicMock, mock_post: MagicMock) -> None:
         test_action = SetAddressObject()
 
         self.assertTrue(test_action.match_whitelist("1.1.1.1/24", ["1.1.1.1", "1.1.1.1/24"], "ip-netmask"))
         self.assertTrue(test_action.match_whitelist("1.1.1.1", ["1.1.1.1/24"], "ip-netmask"))
         self.assertFalse(test_action.match_whitelist("1.1.1.1/24", ["1.1.1.1", "1.1.1.1/32"], "ip-netmask"))
 
-    def test_get_address_type(self, mock_get, mock_post):
+    def test_get_address_type(self, mock_get: MagicMock, mock_post: MagicMock) -> None:
         test_action = SetAddressObject()
 
         self.assertEqual(test_action.determine_address_type("1.1.1.1"), "ip-netmask")
@@ -242,7 +254,7 @@ class TestSetAddressObject(TestCase):
             "ip-netmask",
         )
 
-    def test_check_if_private(self, mock_get, mock_post):
+    def test_check_if_private(self, mock_get: MagicMock, mock_post: MagicMock) -> None:
         test_action = SetAddressObject()
 
         self.assertTrue(test_action.check_if_private("192.168.1.1"))

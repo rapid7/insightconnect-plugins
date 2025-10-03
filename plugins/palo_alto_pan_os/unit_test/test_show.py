@@ -1,15 +1,16 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
+from unittest.mock import patch, MagicMock
+
+from jsonschema import validate
 from komand_palo_alto_pan_os.actions.show import Show
 from komand_palo_alto_pan_os.actions.show.schema import Input, ShowInput, ShowOutput
-from util import Util
-
-from unittest.mock import patch
 from parameterized import parameterized
-from jsonschema import validate
+
+from util import Util
 
 
 @patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
@@ -55,7 +56,13 @@ class TestShow(TestCase):
             ],
         ]
     )
-    def test_show(self, mock_get, name, xpath, expected):
+    def test_show(
+        self,
+        mock_get: MagicMock,
+        name: str,
+        xpath: str,
+        expected: dict,
+    ) -> None:
         action = Util.default_connector(Show())
         input_data = {Input.XPATH: xpath}
         validate(input_data, ShowInput.schema)

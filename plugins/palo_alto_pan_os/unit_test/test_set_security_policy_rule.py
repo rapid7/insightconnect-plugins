@@ -1,18 +1,20 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
+from unittest.mock import patch, MagicMock
+
+from jsonschema import validate
 from komand_palo_alto_pan_os.actions.set_security_policy_rule import SetSecurityPolicyRule
 from komand_palo_alto_pan_os.actions.set_security_policy_rule.schema import (
     Input,
     SetSecurityPolicyRuleInput,
     SetSecurityPolicyRuleOutput,
 )
-from util import Util
-from unittest.mock import patch
 from parameterized import parameterized
-from jsonschema import validate
+
+from util import Util
 
 
 @patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
@@ -64,27 +66,27 @@ class TestSetSecurityPolicyRule(TestCase):
     )
     def test_set_security_policy_rule(
         self,
-        mock_get,
-        mock_post,
-        name,
-        rule_name,
-        source,
-        destination,
-        service,
-        application,
-        policy_action,
-        source_user,
-        disable_server_response_inspection,
-        negate_source,
-        negate_destination,
-        disabled,
-        log_start,
-        log_end,
-        description,
-        src_zone,
-        dst_zone,
-        expected,
-    ):
+        mock_get: MagicMock,
+        mock_post: MagicMock,
+        name: str,
+        rule_name: str,
+        source: str,
+        destination: str,
+        service: str,
+        application: str,
+        policy_action: str,
+        source_user: str,
+        disable_server_response_inspection: bool,
+        negate_source: bool,
+        negate_destination: bool,
+        disabled: bool,
+        log_start: bool,
+        log_end: bool,
+        description: str,
+        src_zone: str,
+        dst_zone: str,
+        expected: dict,
+    ) -> None:
         action = Util.default_connector(SetSecurityPolicyRule())
         input_data = {
             Input.RULE_NAME: rule_name,

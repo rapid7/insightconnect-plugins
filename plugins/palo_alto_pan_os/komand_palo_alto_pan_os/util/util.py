@@ -1,10 +1,11 @@
 import dicttoxml
 from insightconnect_plugin_runtime.exceptions import PluginException
+
 from komand_palo_alto_pan_os.util.log_helper import LogHelper
 
 
 class SecurityPolicy:
-    def __init__(self, logger=None):
+    def __init__(self, logger=None) -> None:
         if logger:
             self.logger = logger
         else:
@@ -186,7 +187,7 @@ class SecurityPolicy:
 
 
 class ExternalList:
-    def __init__(self, logger=None):
+    def __init__(self, logger=None) -> None:
         if logger:
             self.logger = logger
         else:

@@ -8,10 +8,10 @@ description: '[PAN-OS](https://www.paloaltonetworks.com/documentation/80/pan-os)
   utilizes the [PAN-OS API](https://www.paloaltonetworks.com/documentation/80/pan-os/xml-api)
   to provide programmatic management of the Palo Alto Firewall appliance(s). It supports
   managing firewalls individually or centralized via [Panorama](https://www.paloaltonetworks.com/network-security/panorama)'
-version: 6.1.9
+version: 6.1.10
 sdk:
   type: full
-  version: 6.3.4
+  version: 6.3.10
   user: nobody
 supported_versions: [9.0.3]
 connection_version: 6
@@ -42,6 +42,7 @@ requirements: [Access to Palo Alto Next Generation firewall or Palo Alto Panoram
 references: ['[Palo Alto PAN-OS API](https://www.paloaltonetworks.com/documentation/80/pan-os/xml-api)']
 links: ['[Palo Alto PAN-OS](https://www.paloaltonetworks.com/documentation/80/pan-os)']
 version_history:
+- 6.1.10 - Addressed Snyk Vulnerability | Updated SDK to latest version (6.3.10)
 - 6.1.9 - Addressed Snyk Vulnerability | Updated SDK to latest version (6.3.4)
 - 6.1.8 - Updated SDK to the latest version (6.2.6)
 - 6.1.7 - Fix issue in 'add_address_object_to_group' action | SDK bump to 6.2.0 |

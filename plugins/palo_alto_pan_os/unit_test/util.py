@@ -1,6 +1,7 @@
 import logging
-import sys
 import os
+import sys
+
 from komand_palo_alto_pan_os.connection.connection import Connection
 from komand_palo_alto_pan_os.connection.schema import Input
 
@@ -30,7 +31,7 @@ class Util:
     @staticmethod
     def mocked_requests(*args, **kwargs):
         class MockResponse:
-            def __init__(self, filename, status_code):
+            def __init__(self, filename, status_code) -> None:
                 self.filename = filename
                 self.status_code = status_code
                 self.text = self.load_data()
