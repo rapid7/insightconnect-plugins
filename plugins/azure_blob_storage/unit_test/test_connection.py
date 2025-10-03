@@ -1,19 +1,21 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from unittest.mock import patch
-from util import Util
+from unittest.mock import MagicMock, patch
+
 from icon_azure_blob_storage.actions.create_container.action import CreateContainer
 from icon_azure_blob_storage.connection.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
 
+from util import Util
+
 
 @patch("requests.request", side_effect=Util.mock_request)
 class TestConnection(TestCase):
-    def test_connection(self, mock_request) -> None:
+    def test_connection(self, mock_request: MagicMock) -> None:
         action = Util.default_connector(
             CreateContainer(),
             {
@@ -26,7 +28,7 @@ class TestConnection(TestCase):
 
         self.assertEqual("valid_access_token", action.connection.api_client.auth_token)
 
-    def test_connection_wrong_credentials(self, mock_request) -> None:
+    def test_connection_wrong_credentials(self, mock_request: MagicMock) -> None:
         with self.assertRaises(PluginException) as error:
             action = Util.default_connector(
                 CreateContainer(),

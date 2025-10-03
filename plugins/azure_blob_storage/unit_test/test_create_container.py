@@ -1,31 +1,37 @@
-import sys
 import os
+import sys
 from unittest import TestCase
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
-from util import Util
-from parameterized import parameterized
+from typing import Any
+
 from icon_azure_blob_storage.actions.create_container import CreateContainer
-from icon_azure_blob_storage.actions.create_container.schema import Input
-from icon_azure_blob_storage.actions.create_container.schema import Output
+from icon_azure_blob_storage.actions.create_container.schema import Input, Output
+from parameterized import parameterized
+
+from util import Util
 
 
 @patch("requests.request", side_effect=Util.mock_request)
 class TestCreateContainer(TestCase):
     @classmethod
     @patch("requests.request", side_effect=Util.mock_request)
-    def setUpClass(cls, mock_request) -> None:
+    def setUpClass(cls, mock_request: MagicMock) -> None:
         cls.action = Util.default_connector(CreateContainer())
 
-    def test_create_container(self, mock_request):
+    def test_create_container(self, mock_request: MagicMock) -> None:
         input_parameters = {Input.CONTAINER_NAME: "valid-container-name"}
         actual = self.action.run(input_parameters)
         self.assertEqual(
-            actual, {Output.SUCCESS: True, Output.MESSAGE: "Container creation was successfully submitted."}
+            actual,
+            {
+                Output.SUCCESS: True,
+                Output.MESSAGE: "Container creation was successfully submitted.",
+            },
         )
 
     @parameterized.expand(
@@ -46,7 +52,15 @@ class TestCreateContainer(TestCase):
             ],
         ]
     )
-    def test_create_container_raise_exception(self, mock_request, test_name, input_parameters, cause, assistance, data):
+    def test_create_container_raise_exception(
+        self,
+        mock_request: MagicMock,
+        test_name: str,
+        input_parameters: dict[str, Any],
+        cause: str,
+        assistance: str,
+        data: dict[str, Any],
+    ) -> None:
         with self.assertRaises(PluginException) as error:
             self.action.run(input_parameters)
         self.assertEqual(error.exception.cause, cause)

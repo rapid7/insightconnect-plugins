@@ -4,7 +4,7 @@ products: [insightconnect]
 name: azure_blob_storage
 title: Azure Blob Storage
 description: Azure Blob storage is Microsoft's massively scalable and secure object storage for cloud-native workloads, archives, data lakes, high-performance computing, and machine learning. Azure Blob Storage helps you create data lakes for your analytics needs, and provides storage to build powerful cloud-native and mobile apps. Optimize costs with tiered storage for your long-term data, and flexibly scale up for high-performance computing and machine learning workloads
-version: 1.0.1
+version: 1.0.2
 connection_version: 1
 supported_versions: ["Azure Storage 2021-08-06"]
 vendor: rapid7
@@ -16,7 +16,7 @@ resources:
   vendor_url: https://www.microsoft.com/
 sdk:
   type: slim
-  version: 6.1.3
+  version: 6.3.10
   user: nobody
 key_features:
   - "Create, list and delete Azure containers"
@@ -24,8 +24,8 @@ key_features:
 requirements:
   - "Azure credentials - Application ID, Application Secret Key, Tenant ID, Storage Account"
   - "`Storage Blob Data Owner` permission assigned for the `Storage account` used in the connection. This permission can be granted in the Azure -> Storage  Accounts -> {account_name} -> Access Control (IAM) tab by choosing an app  registered previously in the Azure Active Directory."
-troubleshooting: "This plugin does not contain a troubleshooting."
 version_history:
+  - "1.0.2 - Updated packages and SDK to the latest version (6.3.10)"
   - "1.0.1 - Initial updates | Updated SDK to the latest version"
   - "1.0.0 - Initial plugin"
 links:
