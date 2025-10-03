@@ -23,7 +23,7 @@ from icon_azure_blob_storage.util.constants import BlobType, HeaderParam, UrlPar
 
 
 class AzureBlobStorageAPI:
-    def __init__(self, client_id: str, client_secret: str, tenant_id: str, account_name: str, logger: Logger):
+    def __init__(self, client_id: str, client_secret: str, tenant_id: str, account_name: str, logger: Logger) -> None:
         self._tenant_id = tenant_id
         self._client_id = client_id
         self._client_secret = client_secret
@@ -66,7 +66,7 @@ class AzureBlobStorageAPI:
         return self._auth_token
 
     @auth_token.setter
-    def auth_token(self, auth_token):
+    def auth_token(self, auth_token) -> None:
         self._auth_token = auth_token
 
     def _get_headers(self, additional_headers: dict = None) -> dict:
@@ -231,7 +231,7 @@ class AzureBlobStorageAPI:
 
         return response.headers.get(HeaderParam.DELETE_TYPE_PERMANENT)
 
-    def make_request(
+    def make_request(  # noqa: MC0001
         self, method: str, endpoint: str, headers: dict, params: dict = None, data: bytes = ""
     ) -> requests.Response:
         try:

@@ -1,7 +1,7 @@
 import json
 import logging
-import sys
 import os
+import sys
 
 import insightconnect_plugin_runtime
 
@@ -9,11 +9,12 @@ sys.path.append(os.path.abspath("../"))
 
 from icon_azure_blob_storage.connection import Connection
 from icon_azure_blob_storage.connection.schema import Input
+from insightconnect_plugin_runtime import Action
 
 
 class Util:
     @staticmethod
-    def default_connector(action: insightconnect_plugin_runtime.Action, params=None):
+    def default_connector(action: Action, params=None) -> Action:
         if not params:
             params = {
                 Input.ACCOUNT: "valid_account",
@@ -31,7 +32,9 @@ class Util:
     @staticmethod
     def read_file_to_string(filename: str) -> str:
         with open(
-            os.path.join(os.path.dirname(os.path.realpath(__file__)), filename), "r", encoding="utf-8"
+            os.path.join(os.path.dirname(os.path.realpath(__file__)), filename),
+            "r",
+            encoding="utf-8",
         ) as file_reader:
             return file_reader.read()
 
@@ -42,7 +45,7 @@ class Util:
     @staticmethod
     def mock_request(*args, **kwargs):
         class MockResponse:
-            def __init__(self, status_code: int, filename: str = None):
+            def __init__(self, status_code: int, filename: str = None) -> None:
                 self.status_code = status_code
                 self.text = ""
                 if filename:
@@ -81,7 +84,11 @@ class Util:
                 return MockResponse(200, "list_containers_without_prefix.xml.resp")
             if not kwargs.get("params"):
                 return MockResponse(400)
-            if kwargs.get("params", {}).get("include") == ["metadata", "sysxastem", "deleted"]:
+            if kwargs.get("params", {}).get("include") == [
+                "metadata",
+                "sysxastem",
+                "deleted",
+            ]:
                 return MockResponse(400, "list_containers_invalid_include.xml.resp")
         if kwargs.get("url") == "https://valid_account.blob.core.windows.net/delete_container_name?restype=container":
             return MockResponse(202)
@@ -113,7 +120,12 @@ class Util:
                 return MockResponse(200, "list_blobs_without_include.xml.resp")
             if kwargs.get("params", {}).get("delimiter") is None:
                 return MockResponse(200, "list_blobs_without_delimiter.xml.resp")
-            if kwargs.get("params", {}).get("include") == ["taRANDOMgs", "metadata", "copy", "deleted"]:
+            if kwargs.get("params", {}).get("include") == [
+                "taRANDOMgs",
+                "metadata",
+                "copy",
+                "deleted",
+            ]:
                 return MockResponse(400, "list_blobs_invalid_include.xml.resp")
         if (
             kwargs.get("url")
