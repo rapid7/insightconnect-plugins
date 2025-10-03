@@ -1,14 +1,16 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
-from komand_palo_alto_pan_os.actions.get import Get
-from komand_palo_alto_pan_os.actions.get.schema import Input, GetInput, GetOutput
-from util import Util
-from unittest.mock import patch
-from parameterized import parameterized
+from unittest.mock import patch, MagicMock
+
 from jsonschema import validate
+from komand_palo_alto_pan_os.actions.get import Get
+from komand_palo_alto_pan_os.actions.get.schema import GetInput, GetOutput, Input
+from parameterized import parameterized
+
+from util import Util
 
 
 @patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
@@ -207,7 +209,7 @@ class TestGet(TestCase):
             ],
         ]
     )
-    def test_get(self, mock_get, name, xpath, expected):
+    def test_get(self, mock_get: MagicMock, name: str, xpath: str, expected: dict) -> None:
         action = Util.default_connector(Get())
         input_data = {Input.XPATH: xpath}
         validate(input_data, GetInput.schema)

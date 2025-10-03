@@ -1,19 +1,21 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
+from unittest.mock import patch, MagicMock
+
+from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 from komand_palo_alto_pan_os.actions.remove_address_object_from_group import RemoveAddressObjectFromGroup
 from komand_palo_alto_pan_os.actions.remove_address_object_from_group.schema import (
     Input,
     RemoveAddressObjectFromGroupInput,
     RemoveAddressObjectFromGroupOutput,
 )
-from util import Util
-from unittest.mock import patch
 from parameterized import parameterized
-from insightconnect_plugin_runtime.exceptions import PluginException
-from jsonschema import validate
+
+from util import Util
 
 
 @patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
@@ -26,8 +28,16 @@ class TestRemoveAddressObjectFromGroup(TestCase):
         ]
     )
     def test_add_address_object_to_group(
-        self, mock_get, mock_post, name, address_object, group, device_name, virtual_system, expected
-    ):
+        self,
+        mock_get: MagicMock,
+        mock_post: MagicMock,
+        name: str,
+        address_object: str,
+        group: str,
+        device_name: str,
+        virtual_system: str,
+        expected: dict,
+    ) -> None:
         action = Util.default_connector(RemoveAddressObjectFromGroup())
         input_data = {
             Input.ADDRESS_OBJECT: address_object,
@@ -54,8 +64,17 @@ class TestRemoveAddressObjectFromGroup(TestCase):
         ]
     )
     def test_add_address_object_to_group_bad(
-        self, mock_get, mock_post, name, address_object, group, device_name, virtual_system, cause, assistance
-    ):
+        self,
+        mock_get: MagicMock,
+        mock_post: MagicMock,
+        name: str,
+        address_object: str,
+        group: str,
+        device_name: str,
+        virtual_system: str,
+        cause: str,
+        assistance: str,
+    ) -> None:
         action = Util.default_connector(RemoveAddressObjectFromGroup())
         input_data = {
             Input.ADDRESS_OBJECT: address_object,

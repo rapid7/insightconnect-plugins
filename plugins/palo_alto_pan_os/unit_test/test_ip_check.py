@@ -1,9 +1,10 @@
-from komand_palo_alto_pan_os.util.ip_check import IpCheck
 from unittest import TestCase
+
+from komand_palo_alto_pan_os.util.ip_check import IpCheck
 
 
 class TestIpCheck(TestCase):
-    def test_determine_address_type(self):
+    def test_determine_address_type(self) -> None:
         ip_check = IpCheck()
 
         type_ = ip_check.determine_address_type("google.com")
@@ -24,7 +25,7 @@ class TestIpCheck(TestCase):
         type_ = ip_check.determine_address_type("123.com")
         self.assertEqual("fqdn", type_)
 
-    def test_check_ip_in_range(self):
+    def test_check_ip_in_range(self) -> None:
         ip_check = IpCheck()
 
         self.assertTrue(ip_check.check_ip_in_range("1.1.1.1", "1.1.1.0/24"))
@@ -33,7 +34,7 @@ class TestIpCheck(TestCase):
         self.assertFalse(ip_check.check_ip_in_range("5.5.5.5", "1.1.1.1"))
         self.assertFalse(ip_check.check_ip_in_range("5.5.5.5", "1.1.1.1/24"))
 
-    def test_check_address_against_object(self):
+    def test_check_address_against_object(self) -> None:
         ip_check = IpCheck()
 
         self.assertTrue(ip_check.check_address_against_object("1.1.1.0/24", "1.1.1.1"))

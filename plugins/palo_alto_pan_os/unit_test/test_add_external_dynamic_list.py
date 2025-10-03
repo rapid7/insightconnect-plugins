@@ -1,18 +1,20 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
+from unittest.mock import patch, MagicMock
+
+from jsonschema import validate
 from komand_palo_alto_pan_os.actions.add_external_dynamic_list import AddExternalDynamicList
 from komand_palo_alto_pan_os.actions.add_external_dynamic_list.schema import (
-    Input,
     AddExternalDynamicListInput,
     AddExternalDynamicListOutput,
+    Input,
 )
-from util import Util
-from unittest.mock import patch
 from parameterized import parameterized
-from jsonschema import validate
+
+from util import Util
 
 
 @patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
@@ -67,8 +69,19 @@ class TestAddExternalDynamicList(TestCase):
         ]
     )
     def test_add_external_dynamic_list(
-        self, mock_get, mock_post, name, list_name, list_type, description, source, repeat, time, day, expected
-    ):
+        self,
+        mock_get: MagicMock,
+        mock_post: MagicMock,
+        name: str,
+        list_name: str,
+        list_type: str,
+        description: str,
+        source: str,
+        repeat: str,
+        time: str,
+        day: str,
+        expected: dict,
+    ) -> None:
         action = Util.default_connector(AddExternalDynamicList())
         input_data = {
             Input.NAME: list_name,

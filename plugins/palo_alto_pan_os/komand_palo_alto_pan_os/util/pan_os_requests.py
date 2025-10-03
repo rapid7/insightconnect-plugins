@@ -1,15 +1,16 @@
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
-import xmltodict
-import requests
 import json
+
+import requests
+import xmltodict
 from insightconnect_plugin_runtime.connection import Connection
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 from xmltodict import ParsingInterrupted
 
 TIMEOUT = 60
 
 
 class Request(object):
-    def __init__(self, logger, url, session, key, verify_cert):
+    def __init__(self, logger, url, session, key, verify_cert) -> None:
         self.logger = logger
         self.url = url
         self.session = session
