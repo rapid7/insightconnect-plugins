@@ -1,14 +1,16 @@
 import os
 import sys
+
+sys.path.append(os.path.abspath("../"))
+
 from unittest import TestCase
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_paloalto_wildfire.actions import SubmitFileFromUrl
 from komand_paloalto_wildfire.actions.submit_file_from_url.schema import Input, Output
-from unit_test.test_util import Util
 
-sys.path.append(os.path.abspath("../"))
+from test_util import Util
 
 
 class TestSubmitFileFromUrl(TestCase):
@@ -18,7 +20,7 @@ class TestSubmitFileFromUrl(TestCase):
 
     @patch("pyldfire.WildFire.get_verdicts", side_effect=Util.mocked_get_verdict)
     @patch("requests.request", side_effect=Util.mocked_requests)
-    def test_submit_file_from_url(self, mock_get_verdicts, mock_requests):
+    def test_submit_file_from_url(self, mock_get_verdicts: MagicMock, mock_requests: MagicMock) -> None:
         actual = self.action.run({Input.URL: "http://www.pdf995.com/samples/pdf.pdf"})
         expected = {
             Output.SUBMISSION: {
@@ -34,12 +36,12 @@ class TestSubmitFileFromUrl(TestCase):
 
     @patch("pyldfire.WildFire.get_verdicts", side_effect=Util.mocked_get_verdict)
     @patch("requests.request", side_effect=Util.mocked_requests)
-    def test_submit_file_from_url_already_in_db(self, mock_get_verdicts, mock_requests):
+    def test_submit_file_from_url_already_in_db(self, mock_get_verdicts: MagicMock, mock_requests: MagicMock) -> None:
         actual = self.action.run({Input.URL: "http://www.pdf995.com/samples/in_db.pdf"})
         expected = {Output.VERDICT: "Malware"}
         self.assertEqual(actual, expected)
 
-    def test_unsupported_file_type_in_link(self):
+    def test_unsupported_file_type_in_link(self) -> None:
         with self.assertRaises(PluginException) as context:
             self.action.run({Input.URL: "http://www.pdf995.com/samples/EICAR.txt"})
 

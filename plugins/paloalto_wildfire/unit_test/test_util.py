@@ -1,12 +1,13 @@
 import logging
 import os
 import sys
+
+sys.path.append(os.path.abspath("../"))
+
 from collections import OrderedDict
 
 from komand_paloalto_wildfire.connection.connection import Connection
 from komand_paloalto_wildfire.connection.schema import Input
-
-sys.path.append(os.path.abspath("../"))
 
 
 class Util:
@@ -33,7 +34,7 @@ class Util:
     @staticmethod
     def mocked_requests(*args, **kwargs):
         class MockResponse:
-            def __init__(self, filename, status_code):
+            def __init__(self, filename, status_code) -> None:
                 self.status_code = status_code
                 self.text = "error message"
                 self.content = Util.read_file_bytes(f"payloads/{filename}.resp")
@@ -60,7 +61,7 @@ class Util:
             )
 
     @staticmethod
-    def mocked_get_verdict(*args, **kwargs):
+    def mocked_get_verdict(*args, **kwargs) -> str:
         if args[0] == "81a1bb060af110346cf504c7d80e3dc12f75df5a53a558aa75293d8f87156a5b":
             return "malware"
         elif args[0] == "90c943721c01975d0c7b7fda18bf0f7568cc27bd224e06d65cce81ce7cbd15ca":

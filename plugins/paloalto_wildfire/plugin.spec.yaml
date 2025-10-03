@@ -7,17 +7,47 @@ vendor: rapid7
 support: rapid7
 status: []
 description: Perform malware analysis with Palo Alto Wildfire
-version: 2.0.0
+version: 2.0.1
+connection_version: 2
 supported_versions: ["WildFire 8.0"]
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/paloalto_wildfire
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.paloaltonetworks.com/
+sdk:
+  type: slim
+  version: 6.3.10
+  user: nobody
+key_features:
+  - Submit files and URLs for malware analysis to identify unknown threats
+  - Get reports, verdicts, and files to assess a given sample
+  - Query packet capture data for a given hash and platform to search for a sample
+requirements:
+  - Palo Alto Wildfire host IP address or URL
+  - Palo Alto Wildefire API key
+version_history:
+  - 2.0.1 - Addressed snyk vulnerability | Updated SDK to the latest version (6.3.10)
+  - 2.0.0 - Moved communication with API to separate class | Add logic for validation if submitted file is already in API DB | Add validation for submitting only supported by API file types | Refactor unit tests for Submit File action | Add unit test for Submit File From URL action
+  - 1.2.0 - Added connection test
+  - 1.1.2 - Fix bug where output doesn't match schema in Get Verdict action | Add improved error messaging in Submit URL action | Add example inputs
+  - 1.1.1 - New spec and help.md format for the Extension Library
+  - 1.1.0 - Fixed issue where unsupported file types failed | Update to add `supported_file` to filedata type
+  - 1.0.2 - Fixed issue where connection was not passing the API key properly
+  - 1.0.1 - Fix plugin description
+  - 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types | Rename "Submit a File" action to "Submit File" | Rename "Submit File From URL" action to "Submit File from URL" | Rename "Submit a URL" action to "Submit URL"
+  - 0.1.1 - SSL bug fix in SDK
+  - 0.1.0 - Initial plugin
+links:
+  - "[Palo Alto Wildfire](https://www.paloaltonetworks.com/products/secure-the-network/wildfire)"
+references:
+  - "[Palo Alto Wildfire](https://www.paloaltonetworks.com/products/secure-the-network/wildfire)"
+  - "[Wildfire Documentation](https://www.paloaltonetworks.com/documentation/80/wildfire)"
+  - "[pyldfire](https://pypi.python.org/pypi/pyldfire/7.1.3)"
 tags:
-- palo
-- wildfire
-- intel
-- wf
+  - palo
+  - wildfire
+  - intel
+  - wf
 hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [wildfire, intel]
@@ -71,18 +101,18 @@ types:
       required: false
 connection:
   host:
-    type: string
     title: Host
     description: Palo Alto Wildfire host in cloud or on-premise, e.g. wildfire.paloaltonetworks.com
       or 10.3.4.50
+    type: string
     default: wildfire.paloaltonetworks.com
     required: true
     example: wildfire.paloaltonetworks.com
   api_key:
-    type: credential_secret_key
     title: Wildfire API Key
     description: Wildfire API Key, available at https://wildfire.paloaltonetworks.com/wildfire/account
       or on your appliance
+    type: credential_secret_key
     required: true
     example: 5df698b6778e586b704460731b921e52
   proxy:
@@ -93,9 +123,9 @@ connection:
     required: false
     example: '{ "https": "https://proxy.example.com" }'
   verify:
-    type: boolean
     title: SSL Verify
     description: Verify the certificate
+    type: boolean
     default: true
     required: true
     example: true
@@ -123,19 +153,21 @@ actions:
         description: Submission
         type: filedata
         required: false
+        example: '{"filename": "setup.exe","filetype": "exe","md5": "602a171cd840cb0e05cbf2a263aeb708","sha256": "d0fc660de9dbc33c56e2f8cd5a79290290851cded319f953cf78b469dbd6da6d","url": "http://art-archiv.ru/images/animated-number/docum-arhiv.exe"}'
       verdict:
         title: Verdict
         description: "One of the following verdicts: Benign, Malware, Greyware, Pending, Error, or Not found"
         type: string
         required: false
+        example: Malware
   submit_file_from_url:
     title: Submit File from URL
     description: Submit a file for analysis via a URL
     input:
       url:
+        title: URL
         description: URL to submit. The URL must contain the file name, for example
           http://paloaltonetworks.com/folder1/my-file.pdf
-        title: URL
         type: string
         required: true
         example: http://paloaltonetworks.com/folder1/my-file.pdf
@@ -145,11 +177,13 @@ actions:
         description: Submission
         type: filedata
         required: false
+        example: '{"filename": "setup.exe","filetype": "exe","md5": "602a171cd840cb0e05cbf2a263aeb708","sha256": "d0fc660de9dbc33c56e2f8cd5a79290290851cded319f953cf78b469dbd6da6d","url": "http://art-archiv.ru/images/animated-number/docum-arhiv.exe"}'
       verdict:
         title: Verdict
         description: "One of the following verdicts: Benign, Malware, Greyware, Pending, Error, or Not found"
         type: string
         required: false
+        example: Malware
   submit_url:
     title: Submit URL
     description: Submit a URL for analysis
@@ -166,22 +200,23 @@ actions:
         description: Submission
         type: urldata
         required: true
+        example: '{"md5": "602a171cd840cb0e05cbf2a263aeb708","sha256": "d0fc660de9dbc33c56e2f8cd5a79290290851cded319f953cf78b469dbd6da6d","url": "http://art-archiv.ru/images/animated-number/docum-arhiv.exe"}'
   get_report:
     title: Get Report
     description: Query for an XML or PDF report for a particular sample
     input:
       hash:
-        description: The MD5 or SHA-256 hash value of the sample
         title: Hash
+        description: The MD5 or SHA-256 hash value of the sample
         type: string
         required: true
         example: 9de5069c5afe602b2ea0a04b66beb2c0
       format:
-        description: 'Report format: PDF or XML'
         title: Format
+        description: 'Report format: PDF or XML'
         enum:
-        - pdf
-        - xml
+          - pdf
+          - xml
         type: string
         required: true
         example: pdf
@@ -191,6 +226,7 @@ actions:
         description: Report
         type: bytes
         required: true
+        example: "TVqQAAMAAAAEAAAA//8AALgAAAAAAA..."
   get_sample:
     title: Get Sample
     description: Query for a sample file
@@ -207,6 +243,7 @@ actions:
         description: File
         type: bytes
         required: true
+        example: "TVqQAAMAAAAEAAAA//8AALgAAAAAAA..."
   get_pcap:
     title: Get PCAP
     description: Query for a PCAP
@@ -221,13 +258,13 @@ actions:
         title: Platform
         description: Target analysis environment
         enum:
-        - Windows XP, Adobe Reader 9.3.3, Office 2003
-        - Windows XP, Adobe Reader 9.4.0, Flash 10, Office 2007
-        - Windows XP, Adobe Reader 11, Flash 11, Office 2010
-        - Windows 7 32-bit, Adobe Reader 11, Flash 11, Office 2010
-        - Windows 7 64bit, Adobe Reader 11, Flash 11, Office 2010
-        - Android 2.3, API 10, avd2.3.1
-        - Mac OS X Mountain Lion
+          - Windows XP, Adobe Reader 9.3.3, Office 2003
+          - Windows XP, Adobe Reader 9.4.0, Flash 10, Office 2007
+          - Windows XP, Adobe Reader 11, Flash 11, Office 2010
+          - Windows 7 32-bit, Adobe Reader 11, Flash 11, Office 2010
+          - Windows 7 64bit, Adobe Reader 11, Flash 11, Office 2010
+          - Android 2.3, API 10, avd2.3.1
+          - Mac OS X Mountain Lion
         type: string
         required: true
         example: "Windows XP, Adobe Reader 11, Flash 11, Office 2010"
@@ -237,6 +274,7 @@ actions:
         description: File
         type: bytes
         required: true
+        example: "TVqQAAMAAAAEAAAA//8AALgAAAAAAA..."
   get_verdict:
     title: Get Verdict
     description: Query for a files classification
@@ -253,6 +291,7 @@ actions:
         description: "One of the following verdicts: Benign, Malware, Greyware, Pending, Error, or Not found"
         type: string
         required: true
+        example: Malware
   get_malware_test_file:
     title: Get Malware Test File
     description: Gets a unique, benign malware test file that will trigger
@@ -262,3 +301,4 @@ actions:
         type: bytes
         description: Benign malware test file
         required: true
+        example: "TVqQAAMAAAAEAAAA//8AALgAAAAAAA..."
