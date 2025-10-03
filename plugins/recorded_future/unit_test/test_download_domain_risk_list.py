@@ -5,7 +5,7 @@ from unittest.mock import MagicMock, patch
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-sys.path.append(os.path.abspath("../"))
+sys.path.append("../")
 
 from typing import Any, Dict
 
