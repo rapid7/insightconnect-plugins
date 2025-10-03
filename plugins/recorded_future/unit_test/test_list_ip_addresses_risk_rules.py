@@ -10,7 +10,7 @@ sys.path.append(os.path.abspath("../"))
 from typing import Any, Dict
 
 from jsonschema import validate
-from komand_recorded_future.actions.list_IP_addresses_risk_rules import ListIPAddressesRiskRules
+from komand_recorded_future.actions.list_ip_addresses_risk_rules import ListIPAddressesRiskRules
 from komand_recorded_future.connection.schema import Input
 from parameterized import parameterized
 
