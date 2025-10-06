@@ -5,17 +5,36 @@ name: bluecoat_labs
 title: Bluecoat Labs
 vendor: rapid7
 support: community
-status: []
+status: [obsolete]
 description: The Bluecoat Labs plugins enables submissions of suspicous URLs to be reviewed by Bluecoat Labs
-version: 2.0.1
+version: 2.0.2
+connection_version: 2
+supported_versions: ["2025-10-06"]
+sdk:
+  type: slim
+  version: 6.3.10
+  user: nobody
+key_features:
+  - URL Review
+version_history:
+  - 2.0.2 - Deprecated the plugin
+  - 2.0.1 - New spec and help.md format for the Extension Library
+  - 2.0.0 - Fix issue where a change in Bluecoat Labs API was causing the plugin to fail
+  - 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
+  - 0.1.1 - SSL bug fix in SDK
+  - 0.1.0 - Initial plugin
+links:
+  - "[Bluecoat](https://www.bluecoat.com/support-services)"
+references:
+  - "[Bluecoat](https://www.bluecoat.com/support-services)"
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/bluecoat_labs
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.symantec.com
 tags:
-- bluecoat
-- categorize
-- URL
+  - bluecoat
+  - categorize
+  - URL
 hub_tags:
   use_cases: [threat_detection_and_response, data_enrichment]
   keywords: [bluecoat, categorize, URL]
@@ -41,12 +60,14 @@ actions:
     input:
       target_url:
         title: Target URL
-        description: URL to be reviewed e.g komand.com
+        description: URL to be reviewed
         type: string
         required: true
+        example: komand.com
     output:
       site_review_results:
         title: URL Category
         type: '[]url_properties'
         description: URL properties
         required: false
+        example: '[{"url": "http://komand.com/","date_since_last_checked": "> 7","category": "Technology/Internet"}]'

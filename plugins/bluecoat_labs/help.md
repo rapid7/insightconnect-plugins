@@ -1,69 +1,92 @@
 # Description
 
-The Bluecoat Labs plugins enables submissions of suspicous URLs to be reviewed by Bluecoat Labs.
+The Bluecoat Labs plugins enables submissions of suspicous URLs to be reviewed by Bluecoat Labs
 
 # Key Features
 
 * URL Review
 
 # Requirements
+  
+*This plugin does not contain any requirements.*
 
-_This plugin does not contain any requirements._
+# Supported Product Versions
+
+* 2025-10-06
 
 # Documentation
 
 ## Setup
-
-_This plugin does not contain a connection._
+  
+*This plugin does not contain a connection.*
 
 ## Technical Details
 
 ### Actions
 
+
 #### Site Reviewer
 
-This action takes a provided URL and uses Bluecoat's Site Reviewer service to categorize the given URL.
+This action is used to categorizes the given URL
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|target_url|string|None|True|URL to be reviewed|None|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|target_url|string|None|True|URL to be reviewed|None|komand.com|None|None|
+  
+Example input:
+
+```
+{
+  "target_url": "komand.com"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|site_review_results|[]url_properties|False|URL properties|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|site_review_results|[]url_properties|False|URL properties|[{"url": "http://komand.com/","date_since_last_checked": "> 7","category": "Technology/Internet"}]|
+  
 Example output:
 
 ```
 {
   "site_review_results": [
     {
-      "url": "http://komand.com/",
+      "category": "Technology/Internet",
       "date_since_last_checked": "> 7",
-      "category": "Technology/Internet"
+      "url": "http://komand.com/"
     }
   ]
 }
 ```
-
 ### Triggers
+  
+*This plugin does not contain any triggers.*
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-_This plugin does not contain any triggers._
+### Custom Types
+  
+**url_properties**
 
-### Custom Output Types
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Category|string|None|False|None|None|
+|Days Since Last Checked|string|None|False|None|None|
+|URL|string|None|False|None|None|
 
-_This plugin does not contain any custom output types._
 
 ## Troubleshooting
-
-This plugin does not contain any troubleshooting information.
+  
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 2.0.2 - Deprecated the plugin
 * 2.0.1 - New spec and help.md format for the Extension Library
 * 2.0.0 - Fix issue where a change in Bluecoat Labs API was causing the plugin to fail
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
@@ -72,7 +95,8 @@ This plugin does not contain any troubleshooting information.
 
 # Links
 
+* [Bluecoat](https://www.bluecoat.com/support-services)
+
 ## References
 
 * [Bluecoat](https://www.bluecoat.com/support-services)
-
