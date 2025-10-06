@@ -25,7 +25,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "URL",
       "description": "Hybrid Analysis API server URL",
-      "default": "https://www.hybrid-analysis.com",
+      "default": "hybrid-analysis.com",
       "order": 1
     }
   },

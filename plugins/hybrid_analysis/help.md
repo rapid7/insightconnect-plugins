@@ -24,14 +24,14 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |api_key|credential_secret_key|None|True|API key|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
-|url|string|https://www.hybrid-analysis.com|True|Hybrid Analysis API server URL|None|https://www.hybrid-analysis.com|None|None|
+|url|string|hybrid-analysis.com|True|Hybrid Analysis API server URL|None|hybrid-analysis.com|None|None|
 
 Example input:
 
 ```
 {
   "api_key": "9de5069c5afe602b2ea0a04b66beb2c0",
-  "url": "https://www.hybrid-analysis.com"
+  "url": "hybrid-analysis.com"
 }
 ```
 
@@ -124,8 +124,8 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |count|integer|True|Number of results returned|1|
-|result|[]result|False|List of results|None|
-|search_terms|[]search_term|True|List of key value pairs. Where the key is the parameter specified and its value|None|
+|result|[]result|False|List of results|[ { "analysis_start_time": "2021-09-02 18:58:23", "av_detect": "0", "environment_description": "Windows 7 64 bit", "environment_id": 120, "job_id": "61311eca7a48ee7a9e3041d7", "sha256": "82b43762a5bc9c0ab7b5d1f96dc47b34700924b598070a7ccb30c92eb5ee1599", "size": 18944, "submit_name": "ew_usbccgpfilter.sys", "type_short": "64-bit service", "verdict": "whitelisted" } ]|
+|search_terms|[]search_term|True|List of key value pairs. Where the key is the parameter specified and its value|[ { "id": "filename", "value": "setup.exe" }, { "id": "verdict", "value": "1" } ]|
   
 Example output:
 
@@ -184,7 +184,7 @@ Example input:
 |error|string|False|An error that occurred during the analysis|File \"testing.com.txt\" was detected as \"unknown\", this format is not supported on WINDOWS|
 |error_origin|string|False|Error origin|CLIENT|
 |error_type|string|False|Type of error that occurred|FILE_TYPE_BAD_ERROR|
-|related_reports|[]related_reports|False|Related reports which contained analysis information on linked data|None|
+|related_reports|[]related_reports|False|Related reports which contained analysis information on linked data|[ { "job_id": "61dc148b0cad612f7371d2d3", "environment_id": 300, "state": "SUCCESS", "sha256": "275a021bbfb6489e54d411499f7db9d1663fc695ec2fe2a2c4538aabf651fd0f" } ]|
 |state|string|True|State in which the analysis is in|ERROR|
   
 Example output:
@@ -196,10 +196,10 @@ Example output:
   "error_type": "FILE_TYPE_BAD_ERROR",
   "related_reports": [
     {
-      "job_id": "61dc148b0cad612f7371d2d3",
       "environment_id": 300,
-      "state": "SUCCESS",
-      "sha256": "275a021bbfb6489e54d411499f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
+      "job_id": "61dc148b0cad612f7371d2d3",
+      "sha256": "275a021bbfb6489e54d411499f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+      "state": "SUCCESS"
     }
   ],
   "state": "ERROR"
@@ -503,6 +503,7 @@ Example output:
 
 # Version History
 
+* 4.0.1 - Adjusted the way the connection URL is passed to improve compatibility
 * 4.0.0 - Adjusted actions to comply with the 2.35.0 API version | SDK bump to 6.3.10
 * 3.0.1 - Bumping requirements.txt | SDK bump to 6.1.4
 * 3.0.0 - Update to support version 2 API | Created new actions which was moved from plugin **vxstream_sandbox** such as: Submit File, Lookup by Hash, Search Database, Retrieve Report
