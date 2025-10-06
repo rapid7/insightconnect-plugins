@@ -6,8 +6,8 @@ from sys import argv
 
 Name = "Recorded Future"
 Vendor = "rapid7"
-Version = "7.0.0"
-Description = "Recorded Future arms threat analysts, security operators, and incident responders to rapidly connect the dots and reveal unknown threats. Using the Recorded Future plugin for Rapid7 InsightConnect, users can search domain lists, entity lists, and more"
+Version = "7.1.0"
+Description = "[Recorded Future](https://www.recordedfuture.com/) arms threat analysts, security operators, and incident responders to rapidly connect the dots and reveal unknown threats. Using the Recorded Future plugin for Rapid7 InsightConnect, users can search domain lists, entity lists, and more.Use Recorded Future within an automation workflow to quickly assist with threat analysis, incident response, and vulnerability management.Note: When a plugin action that causes a file to be downloaded is invoked, the file data is parsed internally and returned in the [STIX](https://stixproject.github.io/about/) format"
 
 
 def main():
@@ -56,13 +56,13 @@ def main():
         
             self.add_action(actions.LookupHash())
         
-            self.add_action(actions.DownloadIPAddressesRiskList())
+            self.add_action(actions.DownloadIpAddressesRiskList())
         
-            self.add_action(actions.ListIPAddressesRiskRules())
+            self.add_action(actions.ListIpAddressesRiskRules())
         
-            self.add_action(actions.SearchIPAddresses())
+            self.add_action(actions.SearchIpAddresses())
         
-            self.add_action(actions.LookupIPAddress())
+            self.add_action(actions.LookupIpAddress())
         
             self.add_action(actions.SearchMalware())
         

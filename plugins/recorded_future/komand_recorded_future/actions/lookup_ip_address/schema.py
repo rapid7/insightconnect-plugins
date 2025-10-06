@@ -4,182 +4,74 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Query for data related to a specified IP range"
+    DESCRIPTION = "Query for data related to a specific IP address"
 
 
 class Input:
-    DIRECTION = "direction"
-    FROM = "from"
-    IP_RANGE = "ip_range"
-    LIMIT = "limit"
-    ORDERBY = "orderby"
-    RISKRULE = "riskRule"
-    RISKSCORE = "riskScore"
+    COMMENT = "comment"
+    IP_ADDRESS = "IP_address"
 
 
 class Output:
     DATA = "data"
+    RESULT_FOUND = "result_found"
 
 
-class SearchIPAddressesInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(r"""
+class LookupIpAddressInput(insightconnect_plugin_runtime.Input):
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "direction": {
+    "IP_address": {
       "type": "string",
-      "title": "Result Direction",
-      "description": "Sort results ascending/descending",
-      "default": "asc",
-      "enum": [
-        "asc",
-        "desc"
-      ],
-      "order": 4
-    },
-    "from": {
-      "type": "number",
-      "title": "Offset",
-      "description": "Number of initial records to skip",
-      "default": 0,
-      "order": 2
-    },
-    "ip_range": {
-      "type": "string",
-      "title": "IP Range",
-      "description": "IP address range to search",
-      "order": 5
-    },
-    "limit": {
-      "type": "number",
-      "title": "Limit",
-      "description": "Number of results to retrieve, up to 100",
+      "title": "IP Address",
+      "description": "IP address",
       "order": 1
     },
-    "orderby": {
+    "comment": {
       "type": "string",
-      "title": "Order By",
-      "description": "Which property to sort the results by",
-      "enum": [
-        "Created",
-        "Lastseen",
-        "Firstseen",
-        "Modified",
-        "Riskscore",
-        "Rules",
-        "Sevendayshits",
-        "Sixtydayshits",
-        "Totalhits"
-      ],
-      "order": 3
-    },
-    "riskRule": {
-      "type": "string",
-      "title": "Risk Rule",
-      "description": "Filters the results by risk rule",
-      "enum": [
-        "",
-        "Threat Actor Used Infrastructure",
-        "Historically Reported by Insikt Group",
-        "Inside Possible Bogus BGP Route",
-        "Historical Botnet Traffic",
-        "Recently Communicating With C&C Server",
-        "Nameserver for C&C Server",
-        "Historical C&C Server",
-        "Cyber Exploit Signal - Critical",
-        "Cyber Exploit Signal - Important",
-        "Cyber Exploit Signal - Medium",
-        "Recent Host of Many DDNS Names",
-        "Historically Reported as a Defanged IP",
-        "Historically Reported by DHS AIS",
-        "Resolution of Fast Flux DNS Name",
-        "Historically Reported in Threat List",
-        "Historical Honeypot Sighting",
-        "Honeypot Host",
-        "Recently Active C&C Server",
-        "Recent C&C Server",
-        "Historically Linked to Intrusion Method",
-        "Historically Linked to APT",
-        "Historically Linked to Cyber Attack",
-        "Malicious Packet Source",
-        "Malware Delivery",
-        "Historical Multicategory Blacklist",
-        "Historical Open Proxies",
-        "Phishing Host",
-        "Historical Positive Malware Verdict",
-        "Recorded Future Predictive Risk Model",
-        "Actively Communicating C&C Server",
-        "Recently Reported by Insikt Group",
-        "Recent Botnet Traffic",
-        "Current C&C Server",
-        "Recently Reported as a Defanged IP",
-        "Recently Reported by DHS AIS",
-        "Recent Honeypot Sighting",
-        "Recently Linked to Intrusion Method",
-        "Recently Linked to APT",
-        "Recently Linked to Cyber Attack",
-        "Recent Multicategory Blacklist",
-        "Recent Open Proxies",
-        "Recent Positive Malware Verdict",
-        "Recently Referenced by Insikt Group",
-        "Recent Spam Source",
-        "Recent SSH/Dictionary Attacker",
-        "Recent Bad SSL Association",
-        "Recent Threat Researcher",
-        "Recently Defaced Site",
-        "Historically Referenced by Insikt Group",
-        "Trending in Recorded Future Analyst Community",
-        "Historical Spam Source",
-        "Historical SSH/Dictionary Attacker",
-        "Historical Bad SSL Association",
-        "Historical Threat Researcher",
-        "Tor Node",
-        "Unusual IP",
-        "Vulnerable Host"
-      ],
-      "order": 6
-    },
-    "riskScore": {
-      "type": "string",
-      "title": "Risk Score",
-      "description": "Filters the results by risk score",
-      "order": 7
+      "title": "Comment",
+      "description": "Add comment to IP address lookup for Recorded Future",
+      "order": 2
     }
   },
   "required": [
-    "direction",
-    "from",
-    "ip_range",
-    "limit",
-    "orderby"
+    "IP_address"
   ],
   "definitions": {}
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
-class SearchIPAddressesOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(r"""
+class LookupIpAddressOutput(insightconnect_plugin_runtime.Output):
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
     "data": {
-      "type": "array",
+      "$ref": "#/definitions/ip_search_data",
       "title": "Data",
       "description": "Data",
-      "items": {
-        "$ref": "#/definitions/ip_search_data"
-      },
+      "order": 2
+    },
+    "result_found": {
+      "type": "boolean",
+      "title": "Result Found",
+      "description": "Whether the result was found",
       "order": 1
     }
   },
   "required": [
-    "data"
+    "data",
+    "result_found"
   ],
   "definitions": {
     "ip_search_data": {
@@ -880,7 +772,8 @@ class SearchIPAddressesOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

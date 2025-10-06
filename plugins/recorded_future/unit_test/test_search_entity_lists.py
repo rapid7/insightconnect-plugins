@@ -1,11 +1,8 @@
-import os
-import sys
 from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-sys.path.append(os.path.abspath("../"))
 
 from typing import Any, Dict
 
