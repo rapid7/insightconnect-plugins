@@ -1,14 +1,16 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
+from unittest.mock import patch, MagicMock
+
+from jsonschema import validate
 from komand_palo_alto_pan_os.actions.retrieve_logs import RetrieveLogs
 from komand_palo_alto_pan_os.actions.retrieve_logs.schema import Input, RetrieveLogsInput, RetrieveLogsOutput
-from util import Util
-from unittest.mock import patch
 from parameterized import parameterized
-from jsonschema import validate
+
+from util import Util
 
 
 @patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
@@ -167,8 +169,19 @@ class TestRetrieveLogs(TestCase):
         ]
     )
     def test_retrieve_logs(
-        self, mock_get, mock_get2, name, log_type, count, skip, query_filter, interval, max_tries, direction, expected
-    ):
+        self,
+        mock_get: MagicMock,
+        mock_get2: MagicMock,
+        name: str,
+        log_type: str,
+        count: int,
+        skip: int,
+        query_filter: str,
+        interval: float,
+        max_tries: int,
+        direction: str,
+        expected: dict,
+    ) -> None:
         action = Util.default_connector(RetrieveLogs())
         input_data = {
             Input.LOG_TYPE: log_type,

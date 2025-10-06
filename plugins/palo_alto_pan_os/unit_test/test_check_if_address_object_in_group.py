@@ -1,19 +1,21 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
-from komand_palo_alto_pan_os.actions.check_if_address_object_in_group import CheckIfAddressObjectInGroup
-from komand_palo_alto_pan_os.actions.check_if_address_object_in_group.schema import (
-    Input,
-    CheckIfAddressObjectInGroupInput,
-    CheckIfAddressObjectInGroupOutput,
-)
-from util import Util
-from unittest.mock import patch
-from parameterized import parameterized
+from unittest.mock import patch, MagicMock
+
 from insightconnect_plugin_runtime.exceptions import PluginException
 from jsonschema import validate
+from komand_palo_alto_pan_os.actions.check_if_address_object_in_group import CheckIfAddressObjectInGroup
+from komand_palo_alto_pan_os.actions.check_if_address_object_in_group.schema import (
+    CheckIfAddressObjectInGroupInput,
+    CheckIfAddressObjectInGroupOutput,
+    Input,
+)
+from parameterized import parameterized
+
+from util import Util
 
 
 @patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
@@ -95,8 +97,16 @@ class TestCheckIfAddressObjectInGroup(TestCase):
         ]
     )
     def test_check_if_address_object_in_group(
-        self, mock_get, name, address, group, enable_search, device_name, virtual_system, expected
-    ):
+        self,
+        mock_get: MagicMock,
+        name: str,
+        address: str,
+        group: str,
+        enable_search: bool,
+        device_name: str,
+        virtual_system: str,
+        expected: dict,
+    ) -> None:
         action = Util.default_connector(CheckIfAddressObjectInGroup())
         input_data = {
             Input.ADDRESS: address,
@@ -125,8 +135,17 @@ class TestCheckIfAddressObjectInGroup(TestCase):
         ]
     )
     def test_check_if_address_object_in_group_bad(
-        self, mock_get, name, address, group, enable_search, device_name, virtual_system, cause, assistance
-    ):
+        self,
+        mock_get: MagicMock,
+        name: str,
+        address: str,
+        group: str,
+        enable_search: bool,
+        device_name: str,
+        virtual_system: str,
+        cause: str,
+        assistance: str,
+    ) -> None:
         action = Util.default_connector(CheckIfAddressObjectInGroup())
         input_data = {
             Input.ADDRESS: address,

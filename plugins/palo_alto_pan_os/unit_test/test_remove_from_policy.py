@@ -1,19 +1,21 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
+from unittest.mock import patch, MagicMock
+
+from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 from komand_palo_alto_pan_os.actions.remove_from_policy import RemoveFromPolicy
 from komand_palo_alto_pan_os.actions.remove_from_policy.schema import (
     Input,
     RemoveFromPolicyInput,
     RemoveFromPolicyOutput,
 )
-from util import Util
-from unittest.mock import patch
 from parameterized import parameterized
-from insightconnect_plugin_runtime.exceptions import PluginException
-from jsonschema import validate
+
+from util import Util
 
 
 @patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
@@ -57,23 +59,23 @@ class TestRemoveFromPolicy(TestCase):
     )
     def test_remove_from_policy(
         self,
-        mock_get,
-        mock_post,
-        name,
-        rule_name,
-        update_active_or_candidate_configuration,
-        source,
-        destination,
-        service,
-        application,
-        source_user,
-        src_zone,
-        dst_zone,
-        url_category,
-        hip_profiles,
-        new_action,
-        expected,
-    ):
+        mock_get: MagicMock,
+        mock_post: MagicMock,
+        name: str,
+        rule_name: str,
+        update_active_or_candidate_configuration: str,
+        source: str,
+        destination: str,
+        service: str,
+        application: str,
+        source_user: str,
+        src_zone: str,
+        dst_zone: str,
+        url_category: str,
+        hip_profiles: str,
+        new_action: str,
+        expected: dict,
+    ) -> None:
         action = Util.default_connector(RemoveFromPolicy())
         input_data = {
             Input.RULE_NAME: rule_name,
@@ -118,25 +120,25 @@ class TestRemoveFromPolicy(TestCase):
     )
     def test_remove_from_policy_bad(
         self,
-        mock_get,
-        mock_post,
-        name,
-        rule_name,
-        update_active_or_candidate_configuration,
-        source,
-        destination,
-        service,
-        application,
-        source_user,
-        src_zone,
-        dst_zone,
-        url_category,
-        hip_profiles,
-        new_action,
-        cause,
-        assistance,
-        data,
-    ):
+        mock_get: MagicMock,
+        mock_post: MagicMock,
+        name: str,
+        rule_name: str,
+        update_active_or_candidate_configuration: str,
+        source: str,
+        destination: str,
+        service: str,
+        application: str,
+        source_user: str,
+        src_zone: str,
+        dst_zone: str,
+        url_category: str,
+        hip_profiles: str,
+        new_action: str,
+        cause: str,
+        assistance: str,
+        data: str,
+    ) -> None:
         action = Util.default_connector(RemoveFromPolicy())
         input_data = {
             Input.RULE_NAME: rule_name,

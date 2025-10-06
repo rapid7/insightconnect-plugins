@@ -1,19 +1,21 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
-from komand_palo_alto_pan_os.actions.get_addresses_from_group import GetAddressesFromGroup
-from komand_palo_alto_pan_os.actions.get_addresses_from_group.schema import (
-    Input,
-    GetAddressesFromGroupInput,
-    GetAddressesFromGroupOutput,
-)
-from util import Util
-from unittest.mock import patch
-from parameterized import parameterized
+from unittest.mock import patch, MagicMock
+
 from insightconnect_plugin_runtime.exceptions import PluginException
 from jsonschema import validate
+from komand_palo_alto_pan_os.actions.get_addresses_from_group import GetAddressesFromGroup
+from komand_palo_alto_pan_os.actions.get_addresses_from_group.schema import (
+    GetAddressesFromGroupInput,
+    GetAddressesFromGroupOutput,
+    Input,
+)
+from parameterized import parameterized
+
+from util import Util
 
 
 @patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
@@ -35,7 +37,15 @@ class TestGetAddressesFromGroup(TestCase):
             ]
         ]
     )
-    def test_get_addresses_from_group(self, mock_get, name, group, device_name, virtual_system, expected):
+    def test_get_addresses_from_group(
+        self,
+        mock_get: MagicMock,
+        name: str,
+        group: str,
+        device_name: str,
+        virtual_system: str,
+        expected: dict,
+    ) -> None:
         action = Util.default_connector(GetAddressesFromGroup())
         input_data = {Input.GROUP: group, Input.DEVICE_NAME: device_name, Input.VIRTUAL_SYSTEM: virtual_system}
         validate(input_data, GetAddressesFromGroupInput.schema)
@@ -55,7 +65,16 @@ class TestGetAddressesFromGroup(TestCase):
             ]
         ]
     )
-    def test_get_addresses_from_group_bad(self, mock_get, name, group, device_name, virtual_system, cause, assistance):
+    def test_get_addresses_from_group_bad(
+        self,
+        mock_get: MagicMock,
+        name: str,
+        group: str,
+        device_name: str,
+        virtual_system: str,
+        cause: str,
+        assistance: str,
+    ) -> None:
         action = Util.default_connector(GetAddressesFromGroup())
         input_data = {Input.GROUP: group, Input.DEVICE_NAME: device_name, Input.VIRTUAL_SYSTEM: virtual_system}
         validate(input_data, GetAddressesFromGroupInput.schema)

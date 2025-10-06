@@ -1,14 +1,16 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
-from komand_palo_alto_pan_os.actions.commit import Commit
-from komand_palo_alto_pan_os.actions.commit.schema import Input, CommitInput, CommitOutput
-from util import Util
-from unittest.mock import patch
-from parameterized import parameterized
+from unittest.mock import patch, MagicMock
+
 from jsonschema import validate
+from komand_palo_alto_pan_os.actions.commit import Commit
+from komand_palo_alto_pan_os.actions.commit.schema import CommitInput, CommitOutput, Input
+from parameterized import parameterized
+
+from util import Util
 
 
 @patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
@@ -42,7 +44,15 @@ class TestCommit(TestCase):
             ],
         ]
     )
-    def test_commit(self, mock_get, mock_get2, name, commit_action, cmd, expected):
+    def test_commit(
+        self,
+        mock_get: MagicMock,
+        mock_get2: MagicMock,
+        name: str,
+        commit_action: str,
+        cmd: str,
+        expected: dict,
+    ) -> None:
         action = Util.default_connector(Commit())
         input_data = {Input.ACTION: commit_action, Input.CMD: cmd}
         validate(input_data, CommitInput.schema)

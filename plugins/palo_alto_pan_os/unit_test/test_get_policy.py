@@ -1,15 +1,17 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
-from komand_palo_alto_pan_os.actions.get_policy import GetPolicy
-from komand_palo_alto_pan_os.actions.get_policy.schema import Input, GetPolicyInput, GetPolicyOutput
-from util import Util
-from unittest.mock import patch
-from parameterized import parameterized
+from unittest.mock import patch, MagicMock
+
 from insightconnect_plugin_runtime.exceptions import PluginException
 from jsonschema import validate
+from komand_palo_alto_pan_os.actions.get_policy import GetPolicy
+from komand_palo_alto_pan_os.actions.get_policy.schema import GetPolicyInput, GetPolicyOutput, Input
+from parameterized import parameterized
+
+from util import Util
 
 
 @patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
@@ -36,7 +38,15 @@ class TestGetPolicy(TestCase):
             ]
         ]
     )
-    def test_get_policy(self, mock_get, name, policy_name, device_name, virtual_system, expected):
+    def test_get_policy(
+        self,
+        mock_get: MagicMock,
+        name: str,
+        policy_name: str,
+        device_name: str,
+        virtual_system: str,
+        expected: dict,
+    ) -> None:
         action = Util.default_connector(GetPolicy())
         input_data = {
             Input.POLICY_NAME: policy_name,
@@ -59,7 +69,16 @@ class TestGetPolicy(TestCase):
             ]
         ]
     )
-    def test_get_policy_bad(self, mock_get, name, policy_name, device_name, virtual_system, cause, assistance):
+    def test_get_policy_bad(
+        self,
+        mock_get: MagicMock,
+        name: str,
+        policy_name: str,
+        device_name: str,
+        virtual_system: str,
+        cause: str,
+        assistance: str,
+    ) -> None:
         action = Util.default_connector(GetPolicy())
         input_data = {
             Input.POLICY_NAME: policy_name,
