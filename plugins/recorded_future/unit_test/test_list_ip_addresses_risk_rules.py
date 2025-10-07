@@ -1,16 +1,10 @@
-import os
-import sys
+from typing import Any, Dict
 from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
 from insightconnect_plugin_runtime.exceptions import PluginException
-
-sys.path.append(os.path.abspath("../"))
-
-from typing import Any, Dict
-
 from jsonschema import validate
-from komand_recorded_future.actions.list_IP_addresses_risk_rules import ListIPAddressesRiskRules
+from komand_recorded_future.actions.list_ip_addresses_risk_rules import ListIpAddressesRiskRules
 from komand_recorded_future.connection.schema import Input
 from parameterized import parameterized
 
@@ -21,7 +15,7 @@ from util import Util
 class TestListIpAddressesRiskRules(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.action = Util.default_connector(ListIPAddressesRiskRules())
+        cls.action = Util.default_connector(ListIpAddressesRiskRules())
 
     @parameterized.expand(
         [
@@ -66,7 +60,7 @@ class TestListIpAddressesRiskRules(TestCase):
     def test_list_ip_addresses_risk_rules_raise_exception(
         self, mock_request: MagicMock, token: str, input_parameters: Dict[str, Any], cause: str, assistance: str
     ) -> None:
-        action = Util.default_connector(ListIPAddressesRiskRules(), {Input.API_KEY: {"secretKey": token}})
+        action = Util.default_connector(ListIpAddressesRiskRules(), {Input.API_KEY: {"secretKey": token}})
         with self.assertRaises(PluginException) as error:
             action.run(input_parameters)
         self.assertEqual(error.exception.cause, cause)

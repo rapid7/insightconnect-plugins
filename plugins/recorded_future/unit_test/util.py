@@ -1,13 +1,10 @@
 import json
 import logging
 import os
-import sys
 from unittest import mock
-import insightconnect_plugin_runtime
 from unittest.mock import MagicMock
 
-sys.path.append(os.path.abspath("../"))
-
+import insightconnect_plugin_runtime
 from komand_recorded_future.connection import Connection
 from komand_recorded_future.connection.schema import Input
 
@@ -45,7 +42,7 @@ class Util:
     @staticmethod
     def mock_request(*args, **kwargs):
         class MockResponse:
-            def __init__(self, status_code: int, filename: str = None, contains_content: bool = False):
+            def __init__(self, status_code: int, filename: str = None, contains_content: bool = False) -> None:
                 self.status_code = status_code
                 if filename:
                     self.text = Util.read_file_to_string(
@@ -149,4 +146,6 @@ class Util:
             return MockResponse(200, "search_urls")
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/entitylist/report:Oe5eg5":
             return MockResponse(200, "lookup_entity_list")
+        if kwargs.get("url") == "https://api.recordedfuture.com/v2/alert/search":
+            return MockResponse(200, "get_new_alerts")
         raise NotImplementedError("Not implemented", kwargs)

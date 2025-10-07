@@ -1,16 +1,10 @@
-import os
-import sys
+from typing import Any, Dict
 from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
 from insightconnect_plugin_runtime.exceptions import PluginException
-
-sys.path.append(os.path.abspath("../"))
-
-from typing import Any, Dict
-
 from jsonschema import validate
-from komand_recorded_future.actions.lookup_IP_address import LookupIPAddress
+from komand_recorded_future.actions.lookup_ip_address import LookupIpAddress
 from komand_recorded_future.connection.schema import Input
 from parameterized import parameterized
 
@@ -21,7 +15,7 @@ from util import Util
 class TestLookupIpAddress(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.action = Util.default_connector(LookupIPAddress())
+        cls.action = Util.default_connector(LookupIpAddress())
 
     @parameterized.expand(
         [
@@ -83,7 +77,7 @@ class TestLookupIpAddress(TestCase):
     def test_lookup_ip_raise_exception(
         self, mock_request: MagicMock, token: str, input_parameters: Dict[str, Any], cause: str, assistance: str
     ) -> None:
-        action = Util.default_connector(LookupIPAddress(), {Input.API_KEY: {"secretKey": token}})
+        action = Util.default_connector(LookupIpAddress(), {Input.API_KEY: {"secretKey": token}})
         with self.assertRaises(PluginException) as error:
             action.run(input_parameters)
         self.assertEqual(error.exception.cause, cause)
