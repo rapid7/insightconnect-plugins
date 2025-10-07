@@ -1,11 +1,8 @@
+from typing import Any, Dict
 from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
 from insightconnect_plugin_runtime.exceptions import PluginException
-
-
-from typing import Any, Dict
-
 from jsonschema import validate
 from komand_recorded_future.actions.search_hashes import SearchHashes
 from komand_recorded_future.connection.schema import Input
