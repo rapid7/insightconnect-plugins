@@ -1,0 +1,21 @@
+{
+  "data": {
+    "results": [
+      {
+        "review": {
+          "status": "no-action"
+        },
+        "url": "https://app.recordedfuture.com/live/sc/notification/?id=fnbTO7",
+        "rule": {
+          "url": "https://app.recordedfuture.com/live/sc/ViewIdkobra_view_report_item_alert_editor?view_opts=%7B%22reportId%22%3A%22feScJA%22%2C%22bTitle%22%3Atrue%2C%22title%22%3A%22Global+Vulnerability+Risk%2C+Vulnerabilities%2C+New+Exploit+Chatter%22%7D&state.bNavbar=false",
+          "name": "GlobalVulnerabilityRisk,Vulnerabilities,NewExploitChatter",
+          "id": "deXcBA"
+        },
+        "triggered": "2020-10-09T16:08:21.948Z",
+        "id": "deZcB9",
+        "title": "GlobalVulnerabilityRisk,Vulnerabilities,NewExploitChatter-...isn...",
+        "type": "ENTITY"
+      }
+    ]
+  }
+}

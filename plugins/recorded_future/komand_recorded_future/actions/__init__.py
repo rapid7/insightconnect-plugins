@@ -20,13 +20,13 @@ from .search_hashes.action import SearchHashes
 
 from .lookup_hash.action import LookupHash
 
-from .download_IP_addresses_risk_list.action import DownloadIPAddressesRiskList
+from .download_ip_addresses_risk_list.action import DownloadIpAddressesRiskList
 
-from .list_IP_addresses_risk_rules.action import ListIPAddressesRiskRules
+from .list_ip_addresses_risk_rules.action import ListIpAddressesRiskRules
 
-from .search_IP_addresses import SearchIPAddresses
+from .search_ip_addresses.action import SearchIpAddresses
 
-from .lookup_IP_address.action import LookupIPAddress
+from .lookup_ip_address.action import LookupIpAddress
 
 from .search_malware.action import SearchMalware
 
@@ -49,4 +49,3 @@ from .list_url_risk_rules.action import ListUrlRiskRules
 from .search_urls.action import SearchUrls
 
 from .download_url_risk_list.action import DownloadUrlRiskList
-

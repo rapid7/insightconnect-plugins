@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import SearchIPAddressesInput, SearchIPAddressesOutput, Input, Output, Component
+from .schema import SearchIpAddressesInput, SearchIpAddressesOutput, Input, Output, Component
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -7,13 +7,13 @@ from komand_recorded_future.util.util import AvailableInputs
 from komand_recorded_future.util.api import Endpoint
 
 
-class SearchIPAddresses(insightconnect_plugin_runtime.Action):
+class SearchIpAddresses(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="search_IP_addresses",
+            name="search_ip_addresses",
             description=Component.DESCRIPTION,
-            input=SearchIPAddressesInput(),
-            output=SearchIPAddressesOutput(),
+            input=SearchIpAddressesInput(),
+            output=SearchIpAddressesOutput(),
         )
 
     def run(self, params={}):

@@ -1,14 +1,8 @@
-import os
-import sys
+from typing import Any, Dict
 from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
 from insightconnect_plugin_runtime.exceptions import PluginException
-
-sys.path.append(os.path.abspath("../"))
-
-from typing import Any, Dict
-
 from jsonschema import validate
 from komand_recorded_future.actions.list_url_risk_rules import ListUrlRiskRules
 from komand_recorded_future.connection.schema import Input
