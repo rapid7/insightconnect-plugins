@@ -13,7 +13,7 @@ class Util:
         default_connection = Connection()
         default_connection.logger = logging.getLogger("connection logger")
         params = {
-            Input.URL: "https://www.hybrid-analysis.com",
+            Input.URL: "hybrid-analysis.com",
             Input.API_KEY: {"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"},
         }
         default_connection.connect(params)
@@ -37,11 +37,11 @@ class Util:
                 return Util.load_json(f"payloads/{self.filename}.json.resp")
 
         if (
-            args[1] == "https://www.hybrid-analysis.com/api/v2/search/hash"
+            args[1] == "https://hybrid-analysis.com/api/v2/search/hash"
             and kwargs.get("params").get("hash") == "4c740b7f0bdc728daf9fca05241e85d921a54a6e17ae47ed1577a2b30792cf5c"
         ):
             return MockResponse("action_lookup_hash", 200)
-        elif args[1] == "https://www.hybrid-analysis.com/api/v2/search/hash" and (
+        elif args[1] == "https://hybrid-analysis.com/api/v2/search/hash" and (
             kwargs.get("params").get("hash") == "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
             or kwargs.get("params").get("hash") == "44d88612fea8a8f36de82e1278abb02f"
         ):
@@ -51,9 +51,9 @@ class Util:
             == "https://www.hybrid-analysis.com/api/v2/report/30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050/state"
         ):
             return MockResponse("action_report", 200)
-        elif args[1] == "https://www.hybrid-analysis.com/api/v2/submit/file":
+        elif args[1] == "https://hybrid-analysis.com/api/v2/submit/file":
             return MockResponse("action_submit", 200)
-        elif args[1] == "https://www.hybrid-analysis.com/api/v2/search/terms":
+        elif args[1] == "https://hybrid-analysis.com/api/v2/search/terms":
             request_data = kwargs.get("data")
             if request_data.get(Input_terms.FILENAME) == "test" and request_data.get(Input_terms.VERDICT) == 1:
                 return MockResponse("action_lookup_terms_filename", 200)
