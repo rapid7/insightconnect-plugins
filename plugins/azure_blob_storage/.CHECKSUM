@@ -1,39 +1,39 @@
 {
-	"spec": "715f4dc98f0974cff787416363d189f7",
-	"manifest": "1eeaec41ab9fa369b828163e9bed88f8",
-	"setup": "faaf4fab5856c8c5d4e72e0dacd8e34b",
+	"spec": "7db390bafd303958814d130821b9a552",
+	"manifest": "fec55ae1b08b69827b291a34b95c61f7",
+	"setup": "024013379ed03df6a481a8019a641365",
 	"schemas": [
 		{
 			"identifier": "create_container/schema.py",
-			"hash": "b94972c7328bc739c25edaaf655bd9b6"
+			"hash": "0b5dfc66bca6376dd3c0472ef30d9314"
 		},
 		{
 			"identifier": "delete_blob/schema.py",
-			"hash": "e7770ca31dc4998fa1df1880d8efb792"
+			"hash": "21f8b3b730b9ba51064a586af7c2dbf6"
 		},
 		{
 			"identifier": "delete_container/schema.py",
-			"hash": "ac9e84d52e4096749bf9a9e6f871c723"
+			"hash": "d67a76e8bcd43b803740c30d40224cf4"
 		},
 		{
 			"identifier": "get_blob/schema.py",
-			"hash": "7db81394b02315a556af2a4bfa7a4b7d"
+			"hash": "c310ceb638dbe20a44cfeb740d1cee0a"
 		},
 		{
 			"identifier": "list_blobs/schema.py",
-			"hash": "2e90c3402e2e15a1202ee90e69fad485"
+			"hash": "9568177ab13557b08a88a6288df91b49"
 		},
 		{
 			"identifier": "list_containers/schema.py",
-			"hash": "a5595705cfd87681ba810abbcf6709d9"
+			"hash": "108f67499207f2f51f31cbf7574697d2"
 		},
 		{
 			"identifier": "put_blob/schema.py",
-			"hash": "b11306f0a57ed71eca2b1101e5de8fc5"
+			"hash": "3e3e3f2c9a8dbcb725411d6fa32a9dff"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "e298b386ffdb29bea83ab1f1acfae65c"
+			"hash": "8470269cff684674d21d78b2ff2d5cae"
 		}
 	]
 }

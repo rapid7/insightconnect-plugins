@@ -519,11 +519,12 @@ Example output:
 
 
 ## Troubleshooting
-
-This plugin does not contain a troubleshooting.
+  
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 1.0.2 - Updated packages and SDK to the latest version (6.3.10)
 * 1.0.1 - Initial updates | Updated SDK to the latest version
 * 1.0.0 - Initial plugin
 
