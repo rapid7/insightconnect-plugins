@@ -67,7 +67,6 @@ class HybridAnalysisAPI:
             elif response.status_code >= 500:
                 raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
             else:
-                self.logger.info(response.text)
                 raise PluginException(
                     cause=response.json().get("message", "Unknown"),
                     assistance=f"validation_errors: {response.json().get('validation_errors')}",
