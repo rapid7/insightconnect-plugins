@@ -1114,6 +1114,7 @@ Example output:
 
 # Version History
 
+* 6.1.10 - Addressed Snyk Vulnerability | Updated SDK to latest version (6.3.10)
 * 6.1.9 - Addressed Snyk Vulnerability | Updated SDK to latest version (6.3.4)
 * 6.1.8 - Updated SDK to the latest version (6.2.6)
 * 6.1.7 - Fix issue in 'add_address_object_to_group' action | SDK bump to 6.2.0 | Bumping requirements.txt
