@@ -10,7 +10,7 @@ description: "[Hybrid Analysis](https://www.hybrid-analysis.com/)\
   \ is a free malware analysis service powered by Payload Security\
   \ that detects and analyzes unknown threats using a unique Hybrid Analysis technology.\
   \ This plugin provides the ability to lookup file hashes to determine whether or not they are malicious"
-version: 4.0.1
+version: 4.0.2
 connection_version: 3
 supported_versions:
   - Hybrid Analysis API v2
@@ -36,6 +36,7 @@ key_features:
 requirements:
   - "A HybridAnalysis API key and token"
 version_history:
+  - "4.0.2 - Corrected environment configuration for the Submit File action"
   - "4.0.1 - Adjusted the way the connection URL is passed to improve compatibility"
   - "4.0.0 - Adjusted actions to comply with the 2.35.0 API version | SDK bump to 6.3.10"
   - "3.0.1 - Bumping requirements.txt | SDK bump to 6.1.4"

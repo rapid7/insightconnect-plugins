@@ -503,6 +503,7 @@ Example output:
 
 # Version History
 
+* 4.0.2 - Corrected environment configuration for the Submit File action
 * 4.0.1 - Adjusted the way the connection URL is passed to improve compatibility
 * 4.0.0 - Adjusted actions to comply with the 2.35.0 API version | SDK bump to 6.3.10
 * 3.0.1 - Bumping requirements.txt | SDK bump to 6.1.4
