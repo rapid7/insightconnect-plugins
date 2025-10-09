@@ -1,0 +1,61 @@
+{
+  "meta": {
+    "pagination": {
+      "pageSize": 1,
+      "totalCount": 1
+    },
+    "status": 200
+  },
+  "data": [
+    {
+      "impersonationLogs": [
+        {
+          "userEmailAddress": "user@example.com",
+          "fromUserEmailAddress": "ceo@fake-company.com",
+          "impersonationResults": [
+            {
+              "checkedAddress": "ceo@example.com",
+              "similarDomain": "fake-company.com",
+              "stringSimilarityScore": 85,
+              "checkType": "Domain Similarity"
+            }
+          ],
+          "ttpDefinition": "Default Impersonation Protect Definition",
+          "subject": "Urgent Wire Transfer Request",
+          "action": "block",
+          "adminOverride": "N/A",
+          "userOverride": "None",
+          "scanResult": "impersonation",
+          "category": "Domain impersonation",
+          "sendingIp": "203.0.113.45",
+          "userAwarenessAction": "N/A",
+          "date": "2025-08-29T16:22:15+0000",
+          "actions": "Block",
+          "route": "inbound",
+          "creationMethod": "Entry Scan",
+          "emailPartsDescription": [
+            "Header",
+            "Body"
+          ],
+          "messageId": "54321",
+          "tagMap": {
+            "ImpersonationProtect": {
+              "Status": [
+                "Standard",
+                "VerdictBlock"
+              ],
+              "ImpersonationCheck:DomainSimilarity": [
+                "fake-company.com"
+              ],
+              "ImpersonationCheck:DisplayNameSimilarity": [
+                "CEO John Smith"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "fail": []
+}
+
