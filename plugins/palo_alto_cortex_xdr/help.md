@@ -926,6 +926,7 @@ Example output:
 
 # Version History
 
+* 4.0.8 - Update `MonitorAlerts` to resume alert monitoring from appropriate cutoff value if restarted
 * 4.0.7 - Updated SDK to the latest version (6.3.10)
 * 4.0.6 - Update `MonitorAlerts` to resume alert monitoring from the last task run time | Update error handling to log additional data | Update SDK to 6.2.4
 * 4.0.5 - Update `MonitorAlerts` task pagination decision handling | update SDK to 6.2.2
