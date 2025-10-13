@@ -5,7 +5,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class PaloAltoWildfireAPI:
-    def __init__(self, host: str, api_key: str, proxy: str, verify: bool):
+    def __init__(self, host: str, api_key: str, proxy: str, verify: bool) -> None:
         self.host = host
         self.api_key = api_key
         self.verify = verify
