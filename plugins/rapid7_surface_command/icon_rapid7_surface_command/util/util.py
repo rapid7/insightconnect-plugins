@@ -9,15 +9,15 @@ def _csv_text_to_json_rows(csv_text: str) -> List[Dict[str, Any]]:
     - Always converts empty/whitespace-only strings to None.
     """
 
-    def _norm(v: Any) -> Any:
-        if v is None:
+    def _normalize(value: str) -> str:
+        if value is None:
             return None
-        v = v.strip()
-        return v if v != "" else None
+        value = value.strip()
+        return value if value != "" else None
 
     csv_text = csv_text.lstrip("\ufeff")  # drop UTF-8 BOM if present
     reader = csv.DictReader(io.StringIO(csv_text, newline=""))
     rows: List[Dict[str, Any]] = []
     for row in reader:
-        rows.append({k: _norm(v) for k, v in row.items()})
+        rows.append({k: _normalize(v) for k, v in row.items()})
     return rows

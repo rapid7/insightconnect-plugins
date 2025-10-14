@@ -6,7 +6,7 @@ title: Rapid7 Surface Command
 description: Surface Command gives you full visibility over your assets and identities across multiple technology platforms
 version: 2.0.0
 version_history:
-- 2.0.0 - Add new action | Run Adhoc Query
+- 1.1.0 - Add new action | Run Adhoc Query
 - 1.0.0 - Initial plugin
 
 supported_versions: [v1]
