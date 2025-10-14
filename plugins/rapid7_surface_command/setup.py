@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="rapid7_surface_command-rapid7-plugin",
-    version="2.0.0",
+    version="1.1.0",
     description="Surface Command gives you full visibility over your assets and identities across multiple technology platforms",
     author="rapid7",
     author_email="",
