@@ -120,7 +120,7 @@ Example output:
 
 # Version History
 
-* 1.1.0 - Add new action | Run Adhoc Query
+* 2.0.0 - Update action title | Add new action | Run Adhoc Query
 * 1.0.0 - Initial plugin
 
 # Links
