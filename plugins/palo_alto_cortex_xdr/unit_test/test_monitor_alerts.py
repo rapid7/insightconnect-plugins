@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 
@@ -393,7 +394,18 @@ class TestMonitorAlerts(TestCase):
         mock_req.return_value = mock_conditions(200, file_name=response_file)
 
         output, state, has_more_pages, status_code, _ = self.task.run(state=input_state, custom_config=custom_config)
-        print(state)
+        prepared_request = mock_req.call_args[0][0]
+        body = prepared_request.body  # This is a bytes object
+        data = json.loads(body.decode())
+        sent_end_query_time = next(
+            (
+                f["value"]
+                for f in data["request_data"]["filters"]
+                if f.get("field") == "creation_time" and f.get("operator") == "lte"
+            ),
+            None,
+        )
+        self.assertEqual(sent_end_query_time, 1706539560000)
         self.assertEqual(output, expected_output)
         self.assertEqual(status_code, expected_status_code)
         self.assertEqual(STUB_STATE_EXCEED_LOOKBACK_NO_RESULTS, state)
