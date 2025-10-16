@@ -315,6 +315,43 @@ Example output:
 }
 ```
 
+#### Expire Password
+
+This action is used to this action expires the password for Okta user and transitions user status to PASSWORD_EXPIRED, 
+so that the user is required to change their password at their next login
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|tempPassword|boolean|False|False|If set to true, sets the user's password to a temporary password and returns it|None|True|None|None|
+|userId|string|None|True|User ID whose password will be expired|None|00ub0oNGTSWTBKOLGLNR|None|None|
+  
+Example input:
+
+```
+{
+  "tempPassword": false,
+  "userId": "00ub0oNGTSWTBKOLGLNR"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|True|Whether the expiry was successful|True|
+|tempPassword|string|False|The temporary password of the Okta user, if true was set in Temporary Password input|kYC452u2|
+  
+Example output:
+
+```
+{
+  "success": true,
+  "tempPassword": "kYC452u2"
+}
+```
+
 #### Get Okta User Factors
 
 This action is used to return an object containing all of a user's factors for MFA
@@ -735,21 +772,23 @@ Example output:
 
 #### Reset Password
 
-This action is used to this action resets password for Okta user and transitions user status to PASSWORD_EXPIRED, so 
-that the user is required to change their password at their next login
+This action is used to this action resets the password for an Okta user using a one-time token (OTT), transitions the 
+user status to RECOVERY, and optionally clears all sessions except the one initiating the request
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|tempPassword|boolean|False|False|If set to true, sets the user's password to a temporary password and returns it|None|True|None|None|
+|revokeSessions|boolean|False|False|If set to true, revokes all of the user's existing sessions except for the current one|None|False|None|None|
+|sendEmail|boolean|False|False|If set to true, sends an email to the user with the OTT and instructions to reset their password|None|False|None|None|
 |userId|string|None|True|User ID whose password will be reset|None|00ub0oNGTSWTBKOLGLNR|None|None|
   
 Example input:
 
 ```
 {
-  "tempPassword": false,
+  "revokeSessions": false,
+  "sendEmail": false,
   "userId": "00ub0oNGTSWTBKOLGLNR"
 }
 ```
@@ -758,15 +797,15 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
+|resetPasswordUrl|string|False|The URL containing the one-time token (OTT) for password reset, if sendEmail is false|https://example.okta.com/reset_password/XE6wE17zmphl3KqAPFxO|
 |success|boolean|True|Whether the reset was successful|True|
-|tempPassword|string|False|The temporary password of the Okta user, if true was set in Temporary Password input|kYC452u2|
   
 Example output:
 
 ```
 {
-  "success": true,
-  "tempPassword": "kYC452u2"
+  "resetPasswordUrl": "https://example.okta.com/reset_password/XE6wE17zmphl3KqAPFxO",
+  "success": true
 }
 ```
 
@@ -1581,6 +1620,7 @@ Example output:
 
 # Version History
 
+* 5.0.0 - Updated password management actions: replaced old Reset Password with Expire Password, and added a new Reset Password action
 * 4.2.16 - Updated SDK to the latest version (6.3.10) | Update Monitor Log Search Start Time parameter after pagination | Add custom config parameter for log limit to Monitor Logs task
 * 4.2.15 - Updated SDK to the latest version (6.3.8) | Add task delay monitoring | Update Monitor Log Search Start Time
 * 4.2.14 - Updated SDK to the latest version (6.3.3)

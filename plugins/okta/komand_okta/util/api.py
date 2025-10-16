@@ -12,6 +12,7 @@ from komand_okta.util.endpoints import (
     ADD_USER_TO_GROUP_ENDPOINT,
     ASSIGN_USER_TO_APP_SSO_ENDPOINT,
     DEACTIVATE_USER_ENDPOINT,
+    EXPIRE_PASSWORD_ENDPOINT,
     GET_FACTORS_ENDPOINT,
     GET_USER_BY_LOGIN_ENDPOINT,
     GET_USER_GROUPS_ENDPOINT,
@@ -154,6 +155,11 @@ class OktaAPI:
     def reset_factors(self, user_id: str) -> bool:
         self.make_json_request(method="POST", url=RESET_FACTORS_ENDPOINT.format(user_id=user_id))
         return True
+
+    def expire_password(self, user_id: str, parameters: dict) -> dict:
+        return self.make_json_request(
+            method="POST", url=EXPIRE_PASSWORD_ENDPOINT.format(user_id=user_id), params=parameters
+        )
 
     def reset_password(self, user_id: str, parameters: dict) -> dict:
         return self.make_json_request(
