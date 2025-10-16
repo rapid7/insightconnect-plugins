@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 
@@ -59,6 +60,15 @@ STUB_STATE_DEDUPE = {
 
 STUB_STATE_EXCEED_LOOKBACK = {
     "query_end_time": 1706539560000,
+    "last_alert_hash": ["a502a9c50798186882ad8dc91ac2b38eb185c404"],
+}
+
+STUB_STATE_EXCEED_LOOKBACK_PAGINATING = {
+    "current_count": 100,
+    "last_search_to": 100,
+    "last_search_from": 0,
+    "query_start_time": 1705439560000,
+    "query_end_time": 1705539560000,
     "last_alert_hash": ["a502a9c50798186882ad8dc91ac2b38eb185c404"],
 }
 
@@ -331,6 +341,25 @@ class TestMonitorAlerts(TestCase):
                 },
             ],
             [
+                "custom_config_comparison_time_exceeds_saved_time_paginating",
+                STUB_STATE_EXCEED_LOOKBACK_PAGINATING,
+                TaskUtil.load_expected("monitor_alerts_empty"),
+                "monitor_alerts",
+                200,
+                {
+                    "max_lookback_date_time": {
+                        "year": 2024,
+                        "month": 10,
+                        "day": 2,
+                        "hour": 3,
+                        "minute": 4,
+                        "second": 5,
+                        "microsecond": 0,
+                    },
+                    "alert_limit": 10,
+                },
+            ],
+            [
                 "custom_config_alert_limit_exceeds_100",
                 STUB_STATE_EXCEED_LOOKBACK,
                 TaskUtil.load_expected("monitor_alerts_empty"),
@@ -365,7 +394,18 @@ class TestMonitorAlerts(TestCase):
         mock_req.return_value = mock_conditions(200, file_name=response_file)
 
         output, state, has_more_pages, status_code, _ = self.task.run(state=input_state, custom_config=custom_config)
-
+        prepared_request = mock_req.call_args[0][0]
+        body = prepared_request.body  # This is a bytes object
+        data = json.loads(body.decode())
+        sent_end_query_time = next(
+            (
+                f["value"]
+                for f in data["request_data"]["filters"]
+                if f.get("field") == "creation_time" and f.get("operator") == "lte"
+            ),
+            None,
+        )
+        self.assertEqual(sent_end_query_time, 1706539560000)
         self.assertEqual(output, expected_output)
         self.assertEqual(status_code, expected_status_code)
         self.assertEqual(STUB_STATE_EXCEED_LOOKBACK_NO_RESULTS, state)
