@@ -89,10 +89,19 @@ class Util:
             return MockResponse(200, "reset_factors.json.resp")
         if url == "https://example.okta.com/api/v1/users/12345/lifecycle/expire_password":
             if params == {"tempPassword": False}:
-                return MockResponse(200, "reset_password.json.resp")
+                return MockResponse(200, "expire_password.json.resp")
             if params == {"tempPassword": True}:
-                return MockResponse(200, "reset_password_with_temp_password.json.resp")
+                return MockResponse(200, "expire_password_with_temp_password.json.resp")
+        if url == "https://example.okta.com/api/v1/users/12345/lifecycle/reset_password":
+            if params == {"sendEmail": False, "revokeSessions": False}:
+                return MockResponse(200, "reset_password.json.resp")
+            if params == {"sendEmail": True, "revokeSessions": False}:
+                return MockResponse(200, "reset_password_with_send_email.json.resp")
+            if params == {"sendEmail": False, "revokeSessions": True}:
+                return MockResponse(200, "reset_password_with_revoke_sessions.json.resp")
         if url == "https://example.okta.com/api/v1/users/invalid_user/lifecycle/expire_password":
+            return MockResponse(404)
+        if url == "https://example.okta.com/api/v1/users/invalid_user/lifecycle/reset_password":
             return MockResponse(404)
         if url == "https://example.okta.com/api/v1/zones":
             return MockResponse(200, "get_zones.json.resp")

@@ -26,6 +26,8 @@ from .create_user.action import CreateUser
 
 from .reset_factors.action import ResetFactors
 
+from .expire_password.action import ExpirePassword
+
 from .reset_password.action import ResetPassword
 
 from .update_blacklist_zones.action import UpdateBlacklistZones
