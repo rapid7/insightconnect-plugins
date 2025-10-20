@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "This action resets the password for an Okta user using a one-time token (OTT), transitions the user status to RECOVERY, and optionally clears all sessions except the one initiating the request"
+    DESCRIPTION = "This action is used to resets the password for an Okta user using a one-time token (OTT), transitions the user status to RECOVERY, and optionally clears all sessions except the one initiating the request"
 
 
 class Input:

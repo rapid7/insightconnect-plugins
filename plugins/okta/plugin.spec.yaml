@@ -1860,9 +1860,8 @@ actions:
         example: 00g1m22m1230eZXxe5r8
   expire_password:
     title: Expire Password
-    description: This action expires the password for Okta user and transitions user status
-      to PASSWORD_EXPIRED, so that the user is required to change their password at
-      their next login
+    description: This action is used to expire the password for Okta user and transitions user status to PASSWORD_EXPIRED, 
+      so that the user is required to change their password at their next login
     input:
       userId:
         title: Okta User ID
@@ -1894,9 +1893,8 @@ actions:
         example: kYC452u2
   reset_password:
     title: Reset Password
-    description: This action resets the password for an Okta user using a one-time token (OTT), 
-      transitions the user status to RECOVERY, and optionally clears all sessions except
-      the one initiating the request
+    description: This action is used to resets the password for an Okta user using a one-time token (OTT), 
+      transitions the user status to RECOVERY, and optionally clears all sessions except the one initiating the request
     input:
       userId:
         title: Okta User ID

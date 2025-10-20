@@ -316,9 +316,9 @@ Example output:
 ```
 
 #### Expire Password
-
-This action is used to this action expires the password for Okta user and transitions user status to PASSWORD_EXPIRED, 
-so that the user is required to change their password at their next login
+  
+This action is used to expire the password for Okta user and transitions user status to PASSWORD_EXPIRED, so that the 
+user is required to change their password at their next login
 
 ##### Input
 
@@ -771,9 +771,9 @@ Example output:
 ```
 
 #### Reset Password
-
-This action is used to this action resets the password for an Okta user using a one-time token (OTT), transitions the 
-user status to RECOVERY, and optionally clears all sessions except the one initiating the request
+  
+This action is used to resets the password for an Okta user using a one-time token (OTT), transitions the user status to
+ RECOVERY, and optionally clears all sessions except the one initiating the request
 
 ##### Input
 

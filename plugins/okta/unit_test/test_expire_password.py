@@ -42,19 +42,11 @@ class TestExpirePassword(TestCase):
         validate(actual, self.action.output.schema)
         self.assertEqual(actual, expected)
 
-    @parameterized.expand(
-        [
-            [
-                "invalid_user_id",
-                Util.read_file_to_dict("inputs/expire_password_invalid_user_id.json.inp"),
-                "Invalid or unreachable endpoint provided.",
-                "Verify your input is correct and not malformed and try again. If the issue persists, please contact support.",
-            ]
-        ]
-    )
-    def test_expire_password_bad(
-        self, mock_request: MagicMock, test_name: str, input_parameters: Dict[str, Any], cause: str, assistance: str
-    ) -> None:
+    def test_expire_password_with_invalid_user_id(self, mock_request: MagicMock) -> None:
+        input_parameters = Util.read_file_to_dict("inputs/expire_password_invalid_user_id.json.inp")
+        cause = "Invalid or unreachable endpoint provided."
+        assistance = "Verify your input is correct and not malformed and try again. If the issue persists, please contact support."
+
         with self.assertRaises(ApiException) as error:
             self.action.run(input_parameters)
         self.assertEqual(error.exception.cause, cause)

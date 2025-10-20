@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "This action expires the password for Okta user and transitions user status to PASSWORD_EXPIRED, so that the user is required to change their password at their next login"
+    DESCRIPTION = "This action is used to expire the password for Okta user and transitions user status to PASSWORD_EXPIRED, so that the user is required to change their password at their next login"
 
 
 class Input:

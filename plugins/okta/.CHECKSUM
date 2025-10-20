@@ -1,5 +1,5 @@
 {
-	"spec": "82736a36fd97238a3f6d5f5e8528cf67",
+	"spec": "08cbf133386720e5f8c61892f753d74f",
 	"manifest": "f0e7b4a77317e36da6ca8a9ba987d1d7",
 	"setup": "22201c97b88ea320c4f61b6e21e7faac",
 	"schemas": [
@@ -25,7 +25,7 @@
 		},
 		{
 			"identifier": "expire_password/schema.py",
-			"hash": "a4d41f20f58452c485144a7cd57868f5"
+			"hash": "ea9eed372bf1588d2b3c2807ae2c6e75"
 		},
 		{
 			"identifier": "get_factors/schema.py",
@@ -53,7 +53,7 @@
 		},
 		{
 			"identifier": "reset_password/schema.py",
-			"hash": "6d87ebf9df56c06029aabc670968790e"
+			"hash": "47efe9a22d25d2643d63ab883ca928e1"
 		},
 		{
 			"identifier": "send_push/schema.py",
