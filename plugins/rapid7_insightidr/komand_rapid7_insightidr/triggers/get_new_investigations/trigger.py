@@ -51,7 +51,7 @@ class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
             try:
                 investigations = self.get_investigations(search, last_poll_time, current_time)
             except Exception as error:
-                self.logger.error(f"Get Investigations: An error occurred while fetching investigations")
+                self.logger.error("Get Investigations: An error occurred while fetching investigations")
                 self.logger.error(error)
                 self.logger.info(f"The request will be retried after {frequency} seconds...")
                 time.sleep(frequency)
