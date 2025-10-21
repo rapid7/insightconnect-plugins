@@ -13,8 +13,8 @@ from typing import Dict, Any, List
 
 
 DEFAULT_FREQUENCY_SECONDS = 15
-INITIAL_LOOKBACK_MINUTES = 5
-DATETIME_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
+INITIAL_LOOKBACK_MINUTES = 1
+MAX_NUMBER_OF_RETRIES = 20
 
 
 class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
@@ -34,16 +34,17 @@ class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
         # END INPUT BINDING - DO NOT REMOVE
 
         # Initialize the trigger starting point
+        retry_attempts_counter = 0
         last_poll_time = datetime.now(UTC) - timedelta(minutes=INITIAL_LOOKBACK_MINUTES)
         self.logger.info("Get Investigations: trigger started")
         self.logger.info(f"Investigations search criteria: {search}")
-        self.logger.info(f"Initial poll time set to: '{last_poll_time.strftime(DATETIME_FORMAT)}'")
+        self.logger.info(f"Initial poll time set to: '{last_poll_time.isoformat()}'")
 
         while True:
-            # Calculate current time for this iteration (delay by 1 second to avoid overlap) and log search details
-            current_time = datetime.now(UTC) - timedelta(seconds=1)
+            # Calculate current time for this iteration (delay by 5 second to avoid overlap) and log search details
+            current_time = datetime.now(UTC) - timedelta(seconds=5)
             self.logger.info(
-                f"Searching for new investigations from '{last_poll_time.strftime(DATETIME_FORMAT)}' to '{current_time.strftime(DATETIME_FORMAT)}'"
+                f"Searching for new investigations from '{last_poll_time.isoformat()}' to '{current_time.isoformat()}'"
             )
 
             # Get all investigations since last poll time
@@ -51,9 +52,17 @@ class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
             try:
                 investigations = self.get_investigations(search, last_poll_time, current_time)
             except Exception as error:
+                # If max retries reached, raise the error
+                if retry_attempts_counter >= MAX_NUMBER_OF_RETRIES:
+                    raise error
+
+                # Otherwise, log the error and retry after waiting
+                retry_attempts_counter += 1
                 self.logger.error("Get Investigations: An error occurred while fetching investigations")
                 self.logger.error(error)
-                self.logger.info(f"The request will be retried after {frequency} seconds...")
+                self.logger.info(
+                    f"The request will be retried after {frequency} seconds... ({retry_attempts_counter}/{MAX_NUMBER_OF_RETRIES})"
+                )
                 time.sleep(frequency)
                 continue
 
@@ -66,8 +75,11 @@ class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
             else:
                 self.logger.info("No new investigations found.")
 
-            # Update last poll time for next iteration
+            # Update last poll time and reset retry counter for next iteration
+            # Overlap by 1 second to handle IDR API's open time boundaries (exclusive start_time/end_time)
+            # This ensures investigations created at exact boundary timestamps are included in the next poll
             last_poll_time = current_time
+            retry_attempts_counter = 0
 
             # Back off before next iteration
             self.logger.info(f"Sleeping for {frequency} seconds...")
@@ -84,8 +96,8 @@ class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
         payload = clean(
             {
                 "search": search_query,
-                "start_time": start_time.strftime(DATETIME_FORMAT),
-                "end_time": end_time.strftime(DATETIME_FORMAT),
+                "start_time": start_time.isoformat(),
+                "end_time": end_time.isoformat(),
             }
         )
 
