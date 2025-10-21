@@ -3428,6 +3428,7 @@ Example output:
 
 # Version History
 
+* 12.0.2 - Triggers: `Get New Investigations` - Improved error handling | Updated SDK to the latest version (6.3.10)
 * 12.0.1 - Updated SDK to latest version (6.3.8) | Resolved Snyk Vulnerability
 * 12.0.0 - Additional `disposition` values added for `Create Investigation`, `Update Investigation` and `Set Disposition of Investigation`
 * 11.0.8 - Remove use of session from the connection object to prevent session timeouts.
