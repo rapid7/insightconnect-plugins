@@ -16,6 +16,7 @@ class ResetPassword(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         response = self.connection.api_client.reset_password(
-            params.get(Input.USERID), clean({"tempPassword": params.get(Input.TEMPPASSWORD)})
+            params.get(Input.USERID),
+            clean({"sendEmail": params.get(Input.SENDEMAIL), "revokeSessions": params.get(Input.REVOKESESSIONS)}),
         )
-        return clean({Output.SUCCESS: True, Output.TEMPPASSWORD: response.get("tempPassword")})
+        return clean({Output.SUCCESS: True, Output.RESETPASSWORDURL: response.get("resetPasswordUrl")})

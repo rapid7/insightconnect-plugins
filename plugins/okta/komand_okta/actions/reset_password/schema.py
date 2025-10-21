@@ -4,17 +4,18 @@ import json
 
 
 class Component:
-    DESCRIPTION = "This action resets password for Okta user and transitions user status to PASSWORD_EXPIRED, so that the user is required to change their password at their next login"
+    DESCRIPTION = "This action is used to resets the password for an Okta user using a one-time token (OTT), transitions the user status to RECOVERY, and optionally clears all sessions except the one initiating the request"
 
 
 class Input:
-    TEMPPASSWORD = "tempPassword"
+    REVOKESESSIONS = "revokeSessions"
+    SENDEMAIL = "sendEmail"
     USERID = "userId"
 
 
 class Output:
+    RESETPASSWORDURL = "resetPasswordUrl"
     SUCCESS = "success"
-    TEMPPASSWORD = "tempPassword"
 
 
 class ResetPasswordInput(insightconnect_plugin_runtime.Input):
@@ -24,10 +25,17 @@ class ResetPasswordInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "tempPassword": {
+    "revokeSessions": {
       "type": "boolean",
-      "title": "Okta User Temporary Password",
-      "description": "If set to true, sets the user's password to a temporary password and returns it",
+      "title": "Revoke Sessions",
+      "description": "If set to true, revokes all of the user's existing sessions except for the current one",
+      "default": false,
+      "order": 3
+    },
+    "sendEmail": {
+      "type": "boolean",
+      "title": "Send Email",
+      "description": "If set to true, sends an email to the user with the OTT and instructions to reset their password",
       "default": false,
       "order": 2
     },
@@ -57,17 +65,17 @@ class ResetPasswordOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "resetPasswordUrl": {
+      "type": "string",
+      "title": "Reset Password URL",
+      "description": "The URL containing the one-time token (OTT) for password reset, if sendEmail is false",
+      "order": 2
+    },
     "success": {
       "type": "boolean",
       "title": "Success",
       "description": "Whether the reset was successful",
       "order": 1
-    },
-    "tempPassword": {
-      "type": "string",
-      "title": "Okta User Temporary Password",
-      "description": "The temporary password of the Okta user, if true was set in Temporary Password input",
-      "order": 2
     }
   },
   "required": [

@@ -1,7 +1,7 @@
 {
-	"spec": "af0c26fa0a96f4753b4277f17ce12a58",
-	"manifest": "4aa27c20787da753d513fd5152a2a143",
-	"setup": "85092c9d5421d0d5b47820a8f3f952d1",
+	"spec": "08cbf133386720e5f8c61892f753d74f",
+	"manifest": "f0e7b4a77317e36da6ca8a9ba987d1d7",
+	"setup": "22201c97b88ea320c4f61b6e21e7faac",
 	"schemas": [
 		{
 			"identifier": "add_user_to_group/schema.py",
@@ -22,6 +22,10 @@
 		{
 			"identifier": "delete_user/schema.py",
 			"hash": "ecc959d5de78d6af20451ee7b1b97792"
+		},
+		{
+			"identifier": "expire_password/schema.py",
+			"hash": "ea9eed372bf1588d2b3c2807ae2c6e75"
 		},
 		{
 			"identifier": "get_factors/schema.py",
@@ -49,7 +53,7 @@
 		},
 		{
 			"identifier": "reset_password/schema.py",
-			"hash": "544fdde8c40730ff932302e5aad3e09d"
+			"hash": "47efe9a22d25d2643d63ab883ca928e1"
 		},
 		{
 			"identifier": "send_push/schema.py",
