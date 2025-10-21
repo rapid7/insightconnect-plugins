@@ -41,9 +41,41 @@ Example input:
 ### Actions
 
 
-#### Run Surface Command Query
+#### Run an Adhoc Query
 
-This action is used to run and execute Surface Command Query
+This action is used to run and execute an adhoc query
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|cypher|string|None|True|Cypher query to execute|None|MATCH (m:Machine) RETURN m|None|None|
+  
+Example input:
+
+```
+{
+  "cypher": "MATCH (m:Machine) RETURN m"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|items|[]object|False|Array of Items|[]|
+  
+Example output:
+
+```
+{
+  "items": []
+}
+```
+
+#### Run a Saved Query
+
+This action is used to run and execute a saved query
 
 ##### Input
 
@@ -88,6 +120,7 @@ Example output:
 
 # Version History
 
+* 1.1.0 - Update action title | Add new action | Run Adhoc Query
 * 1.0.0 - Initial plugin
 
 # Links

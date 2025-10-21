@@ -4,33 +4,33 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Run and execute a saved query"
+    DESCRIPTION = "Run and execute an adhoc query"
 
 
 class Input:
-    QUERY_ID = "query_id"
+    CYPHER = "cypher"
 
 
 class Output:
     ITEMS = "items"
 
 
-class RunQueryInput(insightconnect_plugin_runtime.Input):
+class RunAdhocQueryInput(insightconnect_plugin_runtime.Input):
     schema = json.loads(
         r"""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "query_id": {
+    "cypher": {
       "type": "string",
-      "title": "ID of Query to Run",
-      "description": "Query ID (UUID) to Run from Surface Command",
+      "title": "Cypher Query to Execute",
+      "description": "Cypher query to execute",
       "order": 1
     }
   },
   "required": [
-    "query_id"
+    "cypher"
   ],
   "definitions": {}
 }
@@ -41,7 +41,7 @@ class RunQueryInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class RunQueryOutput(insightconnect_plugin_runtime.Output):
+class RunAdhocQueryOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads(
         r"""
    {
