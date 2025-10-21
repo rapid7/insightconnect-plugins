@@ -1,7 +1,7 @@
 {
-	"spec": "44e636dad1d6b69cff61226e0ac059d4",
-	"manifest": "8ca748744681603f04134968333a8731",
-	"setup": "6bfaad2c9d8039e933c37f6c58c00ce3",
+	"spec": "4a46e3fd9972781029d49bd983a7f244",
+	"manifest": "7a8aaa2a3d432cad4c7aa53d0d1d11fa",
+	"setup": "cf68cc77b19b410a923a848487aab3e5",
 	"schemas": [
 		{
 			"identifier": "download_domain_risk_list/schema.py",
