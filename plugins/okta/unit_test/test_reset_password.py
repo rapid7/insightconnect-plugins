@@ -29,9 +29,14 @@ class TestResetPassword(TestCase):
                 Util.read_file_to_dict("expected/reset_password.json.exp"),
             ],
             [
-                "success_with_temp_password",
-                Util.read_file_to_dict("inputs/reset_password_with_temp_password.json.inp"),
-                Util.read_file_to_dict("expected/reset_password_with_temp_password.json.exp"),
+                "success_with_send_email",
+                Util.read_file_to_dict("inputs/reset_password_with_send_email.json.inp"),
+                Util.read_file_to_dict("expected/reset_password_with_send_email.json.exp"),
+            ],
+            [
+                "success_with_revoke_sessions",
+                Util.read_file_to_dict("inputs/reset_password_with_revoke_sessions.json.inp"),
+                Util.read_file_to_dict("expected/reset_password_with_revoke_sessions.json.exp"),
             ],
         ]
     )

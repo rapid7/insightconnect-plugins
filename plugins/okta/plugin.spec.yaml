@@ -16,7 +16,7 @@ sdk:
 description: '[Okta](https://www.okta.com/) is a SSO and account lifecycle management
   provider that allows companies to integrate their central user account system with
   a wide variety of other applications and services'
-version: 4.2.16
+version: 5.0.0
 connection_version: 4
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/okta
@@ -38,6 +38,7 @@ troubleshooting:
   provided by Okta themselves, or constructed by the plugin based on the information
   it has at hand.
 version_history:
+- 5.0.0 - Updated password management actions - replaced old Reset Password with Expire Password, and added a new Reset Password action
 - 4.2.16 - Updated SDK to the latest version (6.3.10) | Update Monitor Log Search Start Time parameter after pagination | Add custom config parameter for log limit to Monitor Logs task
 - 4.2.15 - Updated SDK to the latest version (6.3.8) | Add task delay monitoring | Update Monitor Log Search Start Time
 - 4.2.14 - Updated SDK to the latest version (6.3.3)
@@ -1857,15 +1858,14 @@ actions:
         type: string
         required: false
         example: 00g1m22m1230eZXxe5r8
-  reset_password:
-    title: Reset Password
-    description: This action resets password for Okta user and transitions user status
-      to PASSWORD_EXPIRED, so that the user is required to change their password at
-      their next login
+  expire_password:
+    title: Expire Password
+    description: This action is used to expire the password for Okta user and transitions user status to PASSWORD_EXPIRED, 
+      so that the user is required to change their password at their next login
     input:
       userId:
         title: Okta User ID
-        description: User ID whose password will be reset
+        description: User ID whose password will be expired
         type: string
         required: true
         example: 00ub0oNGTSWTBKOLGLNR
@@ -1880,7 +1880,7 @@ actions:
     output:
       success:
         title: Success
-        description: Whether the reset was successful
+        description: Whether the expiry was successful
         type: boolean
         required: true
         example: true
@@ -1891,6 +1891,45 @@ actions:
         type: string
         required: false
         example: kYC452u2
+  reset_password:
+    title: Reset Password
+    description: This action is used to resets the password for an Okta user using a one-time token (OTT), 
+      transitions the user status to RECOVERY, and optionally clears all sessions except the one initiating the request
+    input:
+      userId:
+        title: Okta User ID
+        description: User ID whose password will be reset
+        type: string
+        required: true
+        example: 00ub0oNGTSWTBKOLGLNR
+      sendEmail:
+        title: Send Email
+        description: If set to true, sends an email to the user with the OTT and instructions
+          to reset their password
+        type: boolean
+        required: false
+        default: false
+        example: false
+      revokeSessions:
+        title: Revoke Sessions
+        description: If set to true, revokes all of the user's existing sessions except for the current one
+        type: boolean
+        required: false
+        default: false
+        example: false
+    output:
+      success:
+        title: Success
+        description: Whether the reset was successful
+        type: boolean
+        required: true
+        example: true
+      resetPasswordUrl:
+        title: Reset Password URL
+        description: The URL containing the one-time token (OTT) for password reset, if sendEmail is false
+        type: string
+        required: false
+        example: https://example.okta.com/reset_password/XE6wE17zmphl3KqAPFxO
   update_blacklist_zones:
     title: Update Blacklist Zones
     description: Block or unblock address or network by adding or removing from a
