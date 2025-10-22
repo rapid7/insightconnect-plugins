@@ -6,14 +6,62 @@ title: Recorded Future
 vendor: rapid7
 support: rapid7
 status: []
-description: Recorded Future arms threat analysts, security operators, and incident responders to rapidly connect the dots and reveal unknown threats. Using the Recorded Future plugin for Rapid7 InsightConnect, users can search domain lists, entity lists, and more
-version: 7.0.0
+description: "[Recorded Future](https://www.recordedfuture.com/) arms threat analysts, security operators, and incident responders to rapidly connect the dots and reveal unknown threats. Using the Recorded Future plugin for Rapid7 InsightConnect, users can search domain lists, entity lists, and more.\n\nUse Recorded Future within an automation workflow to quickly assist with threat analysis, incident response, and vulnerability management.\n\nNote: When a plugin action that causes a file to be downloaded is invoked, the file data is parsed internally and returned in the [STIX](https://stixproject.github.io/about/) format"
+version: 7.0.1
 connection_version: 7
 supported_versions: ["Recorded Future API 2024-05-08"]
 sdk:
   type: slim
-  version: 5.4.9
+  version: 6.3.10
   user: nobody
+key_features:
+  - Search domain, hash, malware, vulnerability, entity, URL and IP lists
+  - Download risk lists
+  - Lookup alert, domain, hash, malware, vulnerability, entity, URL and IP
+requirements:
+  - Recorded Future API key
+troubleshooting:
+  - Risk List actions may return a risk list that is too large to process. In this case only the original Gzip will be returned which contains XML data. It can then be decompressed and read separately.
+version_history:
+  - 7.0.1 - Addressed Snyk Vulnerability | Updated SDK to the latest version (6.3.10)
+  - 7.0.0 - Fixed schemas | Updated the SDK to latest version | Refreshed with latest plugin tooling | Added Memory Error and Timeout Error handling for Risk Lists | Added `Risk List GZip` output to Risk List actions
+  - 6.0.1 - Update Pyyaml to version 6.0.0
+  - 6.0.0 - Handle 404 Not Found Error | Create unit_tests | Update example outputs in help.md | Update keywords | Update key features
+  - 5.0.1 - Update error handling around a domain that is not found in Lookup Domain
+  - 5.0.0 - Rewrite all API calls and move them to api.py | Improve error handling | Add more user-friendly cause and assistance messaging using PluginException | Add missing Input, Output, and Component imports and use them in actions | Add the `riskRuleMap` parameter for the Download Risk List actions | Move the `fields` and `riskRuleMap` parameters from actions to util.py | Remove unused `risklist` parameter from the List Risk Rules actions | Remove private variables from the Search actions | Update the available values for the `list` parameter for the Download Risk List actions in plugin.spec.yaml | Add missing titles for input and output parameters for actions in plugin.spec.yaml | Remove blank input from the List Risk Rules actions in plugin.spec.yaml | Add missing titles and descriptions for parameters in custom types | Update custom types for action outputs | Remove unnecessary quotes and new lines from plugin.spec.yaml | Update Python version in Dockerfile | Add USER nobody in Dockerfile | Update xmltodict in requirements.txt | Remove rfapi from requirements.txt | Add output example for the Download Domain Risk List and Download Hash Risk List actions | Add custom types in help.md
+  - 4.0.4 - Fix issue where Lookup Domain could corrupt non-common domain name extensions
+  - 4.0.3 - Update Lookup Domain action to accept HTTP and HTTPS URLs as input
+  - 4.0.2 - Return full `analystNotes` and `threatLists` data outputs in Lookup Domain action
+  - 4.0.1 - Improve connection error messaging
+  - 4.0.0 - Remove `fields` input in Lookup Domain, Lookup Hash, Lookup IP Address and Lookup URL actions - all fields will now be returned
+  - 3.1.2 - Update to request headers to add plugin information
+  - 3.1.1 - Fix issue where Lookup Alert was returning a generic object
+  - 3.1.0 - New trigger Get New Alerts
+  - 3.0.0 - Add input `fields` to Search Domains, Search Hashes, Search IP Addresses, Search Vulnerabilities, Search Malware and Lookup Malware actions | Add `riskRule` and `riskScore` filter criteria to Search Domains, Search Hashes, Search IP Addresses and Search Vulnerabilities actions | Add `list` and `firstSeen` filter criteria to Search Malware action | Update description for `list` parameter in Download IP Addresses Risk List, Download Vulnerability Risk List, Download Domain Risk List and Download Hash Risk List actions
+  - 2.2.0 - New actions Search URLs, Download URL Risk List and List URL Risk Rules | Update Recorded Future logo | Allow both upper and lowercase CVE in Lookup Vulnerability action
+  - 2.1.0 - New action Lookup Alert
+  - 2.0.1 - Add CPE, Analyst Notes, and Related Entities to Lookup Vulnerability action output
+  - 2.0.0 - Add risk output to Lookup Vulnerability
+  - 1.5.5 - Fix NoneType has no len() | Fix enums in search hashes
+  - 1.5.4 - Add example inputs | Fix schema bug where `criticality` output was improperly defined as an integer in List Domain Risk Rules, List Hash Risk Rules, List IP Addresses Risk Rules and List Vulnerability Risk Rules actions
+  - 1.5.3 - New spec and help.md format for the Extension Library
+  - 1.5.2 - Fix issue where timestamp for evidenceDetails was set to integer, timestamp is now expected as datetime from RecordedFuture
+  - 1.5.1 - Fix issue where parameter timestamp in evidenceDetails was set as a string in Lookup IP Address action, timestamp is now an integer
+  - 1.5.0 - Add support for handling IP addresses not found for action Lookup IP Address | Add found parameter to  action Lookup IP Address
+  - 1.4.1 - Add missing output and remove extra output for actions Lookup Hash, Lookup Domain, Lookup IP Address and Lookup URL
+  - 1.4.0 - New action Lookup URL | Add input comment to actions Lookup Hash and Lookup Domain
+  - 1.3.0 - Add additional output for action Lookup IP Address | Add input fields to action Lookup IP Address
+  - 1.2.0 - Add additional output for action Lookup Domain | Add input fields to action Lookup Domain
+  - 1.1.0 - Add additional output for action Lookup Hash | Add input fields to action Lookup Hash
+  - 1.0.2 - Fix typo in plugin spec
+  - 1.0.1 - Support web server mode | Use new credential types
+  - 1.0.0 - Update to v2 Python plugin architecture
+  - 0.1.1 - SSL bug fix in SDK
+  - 0.1.0 - Initial plugin
+links:
+  - "[Recorded Future](https://recordedfuture.com)"
+references:
+  - "[Recorded Future API](https://api.recordedfuture.com/v2)"
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/recorded_future
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
