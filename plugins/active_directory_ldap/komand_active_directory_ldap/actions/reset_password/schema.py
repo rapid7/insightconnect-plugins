@@ -30,7 +30,7 @@ class ResetPasswordInput(insightconnect_plugin_runtime.Input):
       "order": 1
     },
     "new_password": {
-      "$ref": "#/definitions/password",
+      "type": "string",
       "title": "New Password",
       "description": "The new password",
       "order": 2
@@ -40,13 +40,7 @@ class ResetPasswordInput(insightconnect_plugin_runtime.Input):
     "distinguished_name",
     "new_password"
   ],
-  "definitions": {
-    "password": {
-      "type": "string",
-      "format": "password",
-      "displayType": "password"
-    }
-  }
+  "definitions": {}
 }
     """
     )

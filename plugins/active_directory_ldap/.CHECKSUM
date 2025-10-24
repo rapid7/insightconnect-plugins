@@ -1,7 +1,7 @@
 {
-	"spec": "2836ff7df12bf4b7fb4957bf3ccef260",
-	"manifest": "4f5f63f57d268f85c198c466fea9da20",
-	"setup": "ae267e740990a735803e8d24fa103d1d",
+	"spec": "034671bf6e23200a157f46f80f4fbce4",
+	"manifest": "a6680392014589ebbea4b73f90f882fc",
+	"setup": "fc06951f0adaf43618d14483d65e7d11",
 	"schemas": [
 		{
 			"identifier": "add_user/schema.py",
@@ -53,7 +53,7 @@
 		},
 		{
 			"identifier": "reset_password/schema.py",
-			"hash": "d602e4c83eadfac6ac15530d4417119e"
+			"hash": "3244112cf2d338e9e355c18306ef6ba8"
 		},
 		{
 			"identifier": "unlock_user/schema.py",

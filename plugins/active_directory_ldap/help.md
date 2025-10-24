@@ -613,7 +613,7 @@ This action is used to reset a users password
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |distinguished_name|string|None|True|The distinguished name of the user whose membership will be modified|None|CN=user,OU=domain_users,DC=example,DC=com|None|None|
-|new_password|password|None|True|The new password|None|mypassword|None|None|
+|new_password|string|None|True|The new password|None|mypassword|None|None|
   
 Example input:
 
@@ -762,6 +762,7 @@ the query results, and then using the variable step $item.dn
 
 # Version History
 
+* 11.0.0 - Added support for passing a variable in New Password field of Reset Password action | Updated SDK to the latest version (6.3.10)
 * 10.0.1 - Fixed issues with channel binding support | Updated SDK to the latest version (6.3.6)
 * 10.0.0 - Support for channel binding | Updated SDK to the latest version (6.3.3)
 * 9.0.4 - Updated SDK to the latest version (6.2.5)
