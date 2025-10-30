@@ -1,3 +1,5 @@
+# plugins/csv/unit_test/test_json_to_csv_bytes.py
+
 import os
 import sys
 
@@ -21,8 +23,9 @@ class TestJsonToCsvBytes(TestCase):
                 ],
             }
         )
+        # Expect unwrapped base64 (single line, no trailing newline)
         expected = {
-            Output.CSV_BYTES: "Y29sdW1uMSxjb2x1bW4yLGNvbHVtbjMNCnZhbHVlMSx2YWx1ZTIsdmFsdWUzDQp2YWx1ZTQsdmFs\ndWU1LHZhbHVlNg0KdmFsdWU3LHZhbHVlOCx2YWx1ZTkNCg==\n"
+            Output.CSV_BYTES: "Y29sdW1uMSxjb2x1bW4yLGNvbHVtbjMNCnZhbHVlMSx2YWx1ZTIsdmFsdWUzDQp2YWx1ZTQsdmFsdWU1LHZhbHVlNg0KdmFsdWU3LHZhbHVlOCx2YWx1ZTkNCg=="
         }
         self.assertEqual(actual, expected)
 
@@ -46,8 +49,9 @@ class TestJsonToCsvBytes(TestCase):
                 ],
             }
         )
+        # Arrays of scalars are joined with "|" now
         expected = {
-            Output.CSV_BYTES: "Y29sdW1uMSxjb2x1bW4yLGNvbHVtbjMNCnZhbHVlMSx2YWx1ZTIsdmFsdWUzDQp2YWx1ZTQsIlsn\ndmFsdWUnLCAndmFsdWUnXSIsdmFsdWU2DQo=\n"
+            Output.CSV_BYTES: "Y29sdW1uMSxjb2x1bW4yLGNvbHVtbjMNCnZhbHVlMSx2YWx1ZTIsdmFsdWUzDQp2YWx1ZTQsdmFsdWV8dmFsdWUsdmFsdWU2DQo="
         }
         self.assertEqual(actual, expected)
 
@@ -61,8 +65,9 @@ class TestJsonToCsvBytes(TestCase):
                 ],
             }
         )
+        # Objects are expanded into additional columns
         expected = {
-            Output.CSV_BYTES: "Y29sdW1uMSxjb2x1bW4yLGNvbHVtbjMNCnZhbHVlMSx2YWx1ZTIsdmFsdWUzDQp2YWx1ZTQsInsn\nY29sdW1uMl8xJzogJ3ZhbHVlJywgJ2NvbHVtbic6ICd2YWx1ZSd9Iix2YWx1ZTYNCg==\n"
+            Output.CSV_BYTES: "Y29sdW1uMSxjb2x1bW4yLGNvbHVtbjMsY29sdW1uMi5jb2x1bW4yXzEsY29sdW1uMi5jb2x1bW4NCnZhbHVlMSx2YWx1ZTIsdmFsdWUzLCwNCnZhbHVlNCwsdmFsdWU2LHZhbHVlLHZhbHVlDQo="
         }
         self.assertEqual(actual, expected)
 
@@ -78,7 +83,7 @@ class TestJsonToCsvBytes(TestCase):
             }
         )
         expected = {
-            Output.CSV_BYTES: "Y29sdW1uMSxjb2x1bW4yLGNvbHVtbjMNCnZhbHVlMSx2YWx1ZTIsdmFsdWUzDQp2YWx1ZTQsdmFs\ndWU1LHZhbHVlNg0KLCwNCg==\n"
+            Output.CSV_BYTES: "Y29sdW1uMSxjb2x1bW4yLGNvbHVtbjMNCnZhbHVlMSx2YWx1ZTIsdmFsdWUzDQp2YWx1ZTQsdmFsdWU1LHZhbHVlNg0KLCwNCg=="
         }
         self.assertEqual(actual, expected)
 
@@ -94,7 +99,7 @@ class TestJsonToCsvBytes(TestCase):
             }
         )
         expected = {
-            Output.CSV_BYTES: "Y29sdW1uMSxjb2x1bW4yLGNvbHVtbjMNCnZhbHVlMSwsdmFsdWUzDQosdmFsdWU1LHZhbHVlNg0K\ndmFsdWU3LHZhbHVlOCwNCg==\n"
+            Output.CSV_BYTES: "Y29sdW1uMSxjb2x1bW4yLGNvbHVtbjMNCnZhbHVlMSwsdmFsdWUzDQosdmFsdWU1LHZhbHVlNg0KdmFsdWU3LHZhbHVlOCwNCg=="
         }
         self.assertEqual(actual, expected)
 
@@ -109,7 +114,7 @@ class TestJsonToCsvBytes(TestCase):
             }
         )
         expected = {
-            Output.CSV_BYTES: "Y29sdW1uMSxjb2x1bW4yLGNvbHVtbjMNCsSFYcSHY2XEmSx2YWx1ZTIsdmFsdWUzDQp2YWx1ZTQs\ncHl0aMO2w7bDtm4sdmFsdWU2DQo=\n"
+            Output.CSV_BYTES: "Y29sdW1uMSxjb2x1bW4yLGNvbHVtbjMNCsSFYcSHY2XEmSx2YWx1ZTIsdmFsdWUzDQp2YWx1ZTQscHl0aMO2w7bDtm4sdmFsdWU2DQo="
         }
         self.assertEqual(actual, expected)
 
@@ -125,6 +130,6 @@ class TestJsonToCsvBytes(TestCase):
             }
         )
         expected = {
-            Output.CSV_BYTES: "Y29sdW1uMSxjb2x1bW4yLGNvbHVtbjMsY29sdW1uNA0KdmFsdWUxLHZhbHVlMix2YWx1ZTMsDQp2\nYWx1ZTQsdmFsdWU1LCwNCnZhbHVlNyx2YWx1ZTgsdmFsdWU5LHZhbHVlMTANCg==\n"
+            Output.CSV_BYTES: "Y29sdW1uMSxjb2x1bW4yLGNvbHVtbjMsY29sdW1uNA0KdmFsdWUxLHZhbHVlMix2YWx1ZTMsDQp2YWx1ZTQsdmFsdWU1LCwNCnZhbHVlNyx2YWx1ZTgsdmFsdWU5LHZhbHVlMTANCg=="
         }
         self.assertEqual(actual, expected)

@@ -1,3 +1,5 @@
+# plugins/csv/unit_test/test_json_to_csv_string.py
+
 import os
 import sys
 
@@ -46,8 +48,9 @@ class TestJsonToCsvString(TestCase):
                 ],
             }
         )
+        # Arrays of scalars are joined with "|" now
         expected = {
-            Output.CSV_STRING: "column1,column2,column3\r\nvalue1,value2,value3\r\nvalue4,\"['value', 'value']\",value6\r\n"
+            Output.CSV_STRING: "column1,column2,column3\r\nvalue1,value2,value3\r\nvalue4,value|value,value6\r\n"
         }
         self.assertEqual(actual, expected)
 
@@ -61,8 +64,9 @@ class TestJsonToCsvString(TestCase):
                 ],
             }
         )
+        # Objects are expanded into additional columns
         expected = {
-            Output.CSV_STRING: "column1,column2,column3\r\nvalue1,value2,value3\r\nvalue4,\"{'column2_1': 'value', 'column': 'value'}\",value6\r\n"
+            Output.CSV_STRING: "column1,column2,column3,column2.column2_1,column2.column\r\nvalue1,value2,value3,,\r\nvalue4,,value6,value,value\r\n"
         }
         self.assertEqual(actual, expected)
 
