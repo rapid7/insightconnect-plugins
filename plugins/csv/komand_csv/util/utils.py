@@ -307,7 +307,6 @@ def json_to_csv(
     key_sep: str = ".",
     list_joiner: str = "|",
     list_expand_limit: int = 3,
-    strip_html: bool = True,  # kept for backward compatibility; ignored (HTML stripping is always ON)
 ) -> str:
     """
     Convert JSON (object or list of objects) into a flattened CSV string.
