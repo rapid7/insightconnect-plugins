@@ -20,6 +20,7 @@ class JsonToCsvBytes(insightconnect_plugin_runtime.Action):
         json_object = params.get(Input.JSON, {})
         # END INPUT BINDING - DO NOT REMOVE
 
-        encoded_string = json_to_csv(json_object).encode()
-        encoded_bytes = base64.encodebytes(encoded_string)
-        return {Output.CSV_BYTES: encoded_bytes.decode()}
+        csv_string = json_to_csv(json_object)  # str
+        csv_bytes = csv_string.encode("utf-8")  # explicit UTF-8
+        csv_b64 = base64.b64encode(csv_bytes).decode("ascii")  # NO line wraps
+        return {Output.CSV_BYTES: csv_b64}
