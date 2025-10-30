@@ -143,162 +143,164 @@ def csv_to_dict(string_csv: str, action: insightconnect_plugin_runtime.Action) -
 
 Scalar = Union[str, int, float, bool, None]
 JSONVal = Union[Scalar, Dict[str, Any], List[Any]]
-_TAG_RE = re.compile(r"<[^>]+>")
+TAG_RE = re.compile(r"<[^>]+>")
 
 
-def _strip_html(s: str) -> str:
-    if s is None:
+def strip_html(text: str) -> str:
+    """Remove HTML tags and return plain text."""
+    if text is None:
         return ""
-    # Remove tags; leave text content
-    return _TAG_RE.sub("", str(s))
+    return TAG_RE.sub("", str(text))
 
 
-def _join_scalars(values: List[Scalar], joiner: str) -> str:
-    return joiner.join("" if v is None else str(v) for v in values)
+def join_scalars(values: List[Scalar], joiner: str) -> str:
+    """Join a list of scalar values into a string using the provided delimiter."""
+    return joiner.join("" if value is None else str(value) for value in values)
 
 
-def _emit_scalar(items: Dict[str, str], key: str, val: Scalar) -> None:
-    # ALWAYS strip HTML per requested behavior
-    s = "" if val is None else str(val)
-    items[key] = _strip_html(s)
+def emit_scalar(items_dict: Dict[str, str], key: str, value: Scalar) -> None:
+    """Emit a single scalar cell value with HTML stripping always enabled."""
+    as_string = "" if value is None else str(value)
+    items_dict[key] = strip_html(as_string)
 
 
-def _flatten_mapping(
-    m: Dict[str, Any],
+def flatten_mapping(
+    mapping: Dict[str, Any],
     *,
-    items: Dict[str, str],
-    base: str,
-    sep: str,
+    items_dict: Dict[str, str],
+    base_key: str,
+    key_separator: str,
     list_joiner: str,
     list_expand_limit: int,
     list_overflow_suffix: str,
 ) -> None:
-    if not m:
-        if base:
-            items[base] = ""
+    """Flatten a nested mapping into items_dict using dot-notation for keys."""
+    if not mapping:
+        if base_key:
+            items_dict[base_key] = ""
         return
-    for k, v in m.items():
-        new_key = f"{base}{sep}{k}" if base else str(k)
-        _flatten_value(
-            v,
+
+    for sub_key, sub_value in mapping.items():
+        new_key = f"{base_key}{key_separator}{sub_key}" if base_key else str(sub_key)
+        flatten_value(
+            sub_value,
             key=new_key,
-            items=items,
-            sep=sep,
+            items_dict=items_dict,
+            key_separator=key_separator,
             list_joiner=list_joiner,
             list_expand_limit=list_expand_limit,
             list_overflow_suffix=list_overflow_suffix,
         )
 
 
-def _flatten_sequence(
-    seq: List[Any],
+def flatten_sequence(
+    sequence: List[Any],
     *,
-    items: Dict[str, str],
+    items_dict: Dict[str, str],
     key: str,
-    sep: str,
+    key_separator: str,
     list_joiner: str,
     list_expand_limit: int,
     list_overflow_suffix: str,
 ) -> None:
-    if not seq:
-        items[key] = ""
+    """Flatten a list: join scalars, expand dicts up to limit, overflow as compact JSON."""
+    if not sequence:
+        items_dict[key] = ""
         return
 
-    none_are_dicts = all(not isinstance(v, dict) for v in seq)
-    all_are_dicts = all(isinstance(v, dict) for v in seq)
+    contains_no_dicts = all(not isinstance(element, dict) for element in sequence)
+    contains_only_dicts = all(isinstance(element, dict) for element in sequence)
 
-    if none_are_dicts:
-        # list of scalars → join
-        items[key] = _strip_html(_join_scalars(seq, list_joiner))
+    if contains_no_dicts:
+        items_dict[key] = strip_html(join_scalars(sequence, list_joiner))
         return
 
-    if all_are_dicts:
-        # list of objects → expand up to limit; remainder → *_rest
+    if contains_only_dicts:
         limit = max(0, int(list_expand_limit))
-        to_expand = seq[:limit]
-        for i, element in enumerate(to_expand):
-            _flatten_mapping(
+        elements_to_expand = sequence[:limit]
+        for element_index, element in enumerate(elements_to_expand):
+            flatten_mapping(
                 element,
-                items=items,
-                base=f"{key}[{i}]",
-                sep=sep,
+                items_dict=items_dict,
+                base_key=f"{key}[{element_index}]",
+                key_separator=key_separator,
                 list_joiner=list_joiner,
                 list_expand_limit=list_expand_limit,
                 list_overflow_suffix=list_overflow_suffix,
             )
-        if len(seq) > limit:
-            items[f"{key}{list_overflow_suffix}"] = json.dumps(seq[limit:], separators=(",", ":"))
+        if len(sequence) > limit:
+            items_dict[f"{key}{list_overflow_suffix}"] = json.dumps(sequence[limit:], separators=(",", ":"))
         return
 
-    # mixed list (dicts + scalars) → keep intact in *_rest compact JSON
-    items[f"{key}{list_overflow_suffix}"] = json.dumps(seq, separators=(",", ":"))
+    # Mixed list: keep intact in *_rest as compact JSON
+    items_dict[f"{key}{list_overflow_suffix}"] = json.dumps(sequence, separators=(",", ":"))
 
 
-def _flatten_value(
+def flatten_value(
     value: Any,
     *,
     key: str,
-    items: Dict[str, str],
-    sep: str,
+    items_dict: Dict[str, str],
+    key_separator: str,
     list_joiner: str,
     list_expand_limit: int,
     list_overflow_suffix: str,
 ) -> None:
+    """Dispatch flatten logic based on value type."""
     if isinstance(value, dict):
-        _flatten_mapping(
+        flatten_mapping(
             value,
-            items=items,
-            base=key,
-            sep=sep,
+            items_dict=items_dict,
+            base_key=key,
+            key_separator=key_separator,
             list_joiner=list_joiner,
             list_expand_limit=list_expand_limit,
             list_overflow_suffix=list_overflow_suffix,
         )
     elif isinstance(value, list):
-        _flatten_sequence(
+        flatten_sequence(
             value,
-            items=items,
+            items_dict=items_dict,
             key=key,
-            sep=sep,
+            key_separator=key_separator,
             list_joiner=list_joiner,
             list_expand_limit=list_expand_limit,
             list_overflow_suffix=list_overflow_suffix,
         )
     else:
-        _emit_scalar(items, key, value)
+        emit_scalar(items_dict, key, value)
 
 
-def _flatten_dict(
+def flatten_dict(
     data: Dict[str, JSONVal],
     *,
     parent_key: str = "",
-    sep: str = ".",
+    key_separator: str = ".",
     list_joiner: str = "|",
     list_expand_limit: int = 3,
     list_overflow_suffix: str = "_rest",
 ) -> Dict[str, str]:
     """
-    Flattens a nested dict into a flat dict of strings (CSV-friendly).
-
-    - Objects: dot.notation
-    - Lists of scalars: joined with list_joiner (ALWAYS HTML-stripped)
-    - Lists of objects: expanded as key[i].subkey up to list_expand_limit; remainder compacted as JSON in key{list_overflow_suffix}
-    - Mixed lists: compact JSON in key{list_overflow_suffix}
-    - All leaf values are converted to strings and HTML tags are ALWAYS stripped.
+    Flatten a nested dict into a single-level dict for CSV:
+      - objects: dot keys
+      - list of scalars: joined with delimiter (HTML stripped)
+      - list of objects: expand key[i].subkey up to limit; remainder in key_rest
+      - mixed lists: key_rest as compact JSON
+      - all leaf values are HTML stripped
     """
-    items: Dict[str, str] = {}
-    for k, v in (data or {}).items():
-        full_key = f"{parent_key}{sep}{k}" if parent_key else str(k)
-        _flatten_value(
-            v,
+    items_dict: Dict[str, str] = {}
+    for sub_key, sub_value in (data or {}).items():
+        full_key = f"{parent_key}{key_separator}{sub_key}" if parent_key else str(sub_key)
+        flatten_value(
+            sub_value,
             key=full_key,
-            items=items,
-            sep=sep,
+            items_dict=items_dict,
+            key_separator=key_separator,
             list_joiner=list_joiner,
             list_expand_limit=list_expand_limit,
             list_overflow_suffix=list_overflow_suffix,
         )
-    return items
+    return items_dict
 
 
 def json_to_csv(
@@ -310,14 +312,8 @@ def json_to_csv(
 ) -> str:
     """
     Convert JSON (object or list of objects) into a flattened CSV string.
-
-    Parameters:
-      - key_sep:            separator for nested object keys (default ".")
-      - list_joiner:        delimiter for lists of scalars (default "|")
-      - list_expand_limit:  max expanded elements for lists of objects (default 3)
-      - strip_html:         (ignored) HTML is ALWAYS stripped from all leaf values
+    HTML is always stripped from all leaf values.
     """
-    # Normalize to list of dicts
     if isinstance(input_json, dict):
         records = [input_json]
     elif isinstance(input_json, list):
@@ -327,39 +323,35 @@ def json_to_csv(
             cause="Invalid JSON input.", assistance="Provide a JSON object or a JSON array of objects."
         )
 
-    output = StringIO()
-    csv_writer = csv.writer(output)
+    output_buffer = StringIO()
+    csv_writer = csv.writer(output_buffer)
 
-    # 1) Flatten each record and collect all keys (preserve order)
     flat_rows: List[Dict[str, str]] = []
     header_keys: List[str] = []
 
-    for entry in records or []:
-        if not isinstance(entry, dict):
-            # Defensive: non-dict entries become a scalar column "value"
-            flat = {"value": _strip_html("" if entry is None else str(entry))}
+    for record in records or []:
+        if not isinstance(record, dict):
+            flat_row = {"value": strip_html("" if record is None else str(record))}
         else:
-            flat = _flatten_dict(
-                entry,
-                sep=key_sep,
+            flat_row = flatten_dict(
+                record,
+                key_separator=key_sep,
                 list_joiner=list_joiner,
                 list_expand_limit=list_expand_limit,
             )
-        flat_rows.append(flat)
-        header_keys.extend(flat.keys())
+        flat_rows.append(flat_row)
+        header_keys.extend(flat_row.keys())
 
-    # 2) De-duplicate keys while preserving order
     seen = set()
     ordered_keys: List[str] = []
-    for k in header_keys:
-        if k not in seen:
-            seen.add(k)
-            ordered_keys.append(k)
+    for key in header_keys:
+        if key not in seen:
+            seen.add(key)
+            ordered_keys.append(key)
 
-    # 3) Write CSV with empty string for missing values
     if ordered_keys:
         csv_writer.writerow(ordered_keys)
         for row in flat_rows:
-            csv_writer.writerow([row.get(k, "") for k in ordered_keys])
+            csv_writer.writerow([row.get(key, "") for key in ordered_keys])
 
-    return output.getvalue()
+    return output_buffer.getvalue()
