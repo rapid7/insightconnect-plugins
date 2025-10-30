@@ -114,6 +114,7 @@ def keep_fields(line, fields):
         result.append(line[field - 1])
     return result
 
+
 def csv_to_dict(string_csv: str, action: insightconnect_plugin_runtime.Action) -> list:
     csv_list = string_csv.split("\n")
 
@@ -139,9 +140,11 @@ def csv_to_dict(string_csv: str, action: insightconnect_plugin_runtime.Action) -
 
     return [json.loads(json.dumps(row)) for row in csv_data]
 
+
 Scalar = Union[str, int, float, bool, None]
 JSONVal = Union[Scalar, Dict[str, Any], List[Any]]
 _TAG_RE = re.compile(r"<[^>]+>")
+
 
 def _strip_html(s: str) -> str:
     if s is None:
