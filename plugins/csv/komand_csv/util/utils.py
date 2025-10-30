@@ -38,7 +38,7 @@ def fields_syntax_good(fields: str) -> bool:
 # Ex. 'f2' -> 2
 #
 # @param field String of field
-# @return integer representation of fiele
+# @return integer representation of field
 ##
 def field_to_number(field):
     if field.startswith("f"):
@@ -157,6 +157,117 @@ def _join_scalars(values: List[Scalar], joiner: str) -> str:
     return joiner.join("" if v is None else str(v) for v in values)
 
 
+def _emit_scalar(items: Dict[str, str], key: str, val: Scalar) -> None:
+    # ALWAYS strip HTML per requested behavior
+    s = "" if val is None else str(val)
+    items[key] = _strip_html(s)
+
+
+def _flatten_mapping(
+    m: Dict[str, Any],
+    *,
+    items: Dict[str, str],
+    base: str,
+    sep: str,
+    list_joiner: str,
+    list_expand_limit: int,
+    list_overflow_suffix: str,
+) -> None:
+    if not m:
+        if base:
+            items[base] = ""
+        return
+    for k, v in m.items():
+        new_key = f"{base}{sep}{k}" if base else str(k)
+        _flatten_value(
+            v,
+            key=new_key,
+            items=items,
+            sep=sep,
+            list_joiner=list_joiner,
+            list_expand_limit=list_expand_limit,
+            list_overflow_suffix=list_overflow_suffix,
+        )
+
+
+def _flatten_sequence(
+    seq: List[Any],
+    *,
+    items: Dict[str, str],
+    key: str,
+    sep: str,
+    list_joiner: str,
+    list_expand_limit: int,
+    list_overflow_suffix: str,
+) -> None:
+    if not seq:
+        items[key] = ""
+        return
+
+    none_are_dicts = all(not isinstance(v, dict) for v in seq)
+    all_are_dicts = all(isinstance(v, dict) for v in seq)
+
+    if none_are_dicts:
+        # list of scalars → join
+        items[key] = _strip_html(_join_scalars(seq, list_joiner))
+        return
+
+    if all_are_dicts:
+        # list of objects → expand up to limit; remainder → *_rest
+        limit = max(0, int(list_expand_limit))
+        to_expand = seq[:limit]
+        for i, element in enumerate(to_expand):
+            _flatten_mapping(
+                element,
+                items=items,
+                base=f"{key}[{i}]",
+                sep=sep,
+                list_joiner=list_joiner,
+                list_expand_limit=list_expand_limit,
+                list_overflow_suffix=list_overflow_suffix,
+            )
+        if len(seq) > limit:
+            items[f"{key}{list_overflow_suffix}"] = json.dumps(seq[limit:], separators=(",", ":"))
+        return
+
+    # mixed list (dicts + scalars) → keep intact in *_rest compact JSON
+    items[f"{key}{list_overflow_suffix}"] = json.dumps(seq, separators=(",", ":"))
+
+
+def _flatten_value(
+    value: Any,
+    *,
+    key: str,
+    items: Dict[str, str],
+    sep: str,
+    list_joiner: str,
+    list_expand_limit: int,
+    list_overflow_suffix: str,
+) -> None:
+    if isinstance(value, dict):
+        _flatten_mapping(
+            value,
+            items=items,
+            base=key,
+            sep=sep,
+            list_joiner=list_joiner,
+            list_expand_limit=list_expand_limit,
+            list_overflow_suffix=list_overflow_suffix,
+        )
+    elif isinstance(value, list):
+        _flatten_sequence(
+            value,
+            items=items,
+            key=key,
+            sep=sep,
+            list_joiner=list_joiner,
+            list_expand_limit=list_expand_limit,
+            list_overflow_suffix=list_overflow_suffix,
+        )
+    else:
+        _emit_scalar(items, key, value)
+
+
 def _flatten_dict(
     data: Dict[str, JSONVal],
     *,
@@ -165,70 +276,28 @@ def _flatten_dict(
     list_joiner: str = "|",
     list_expand_limit: int = 3,
     list_overflow_suffix: str = "_rest",
-    strip_html: bool = True,
 ) -> Dict[str, str]:
     """
-    Flatten nested dicts and lists into a flat dict of strings suitable for CSV:
-      - Objects: dot keys (a.b.c)
-      - Lists of scalars: joined with list_joiner (e.g., 'a|b|c')
-      - Lists of objects: expand to key[i].subkey up to list_expand_limit;
-        overflow goes in key_rest as compact JSON.
-      - All leaves converted to strings; optional HTML stripping for text-y fields.
+    Flattens a nested dict into a flat dict of strings (CSV-friendly).
+
+    - Objects: dot.notation
+    - Lists of scalars: joined with list_joiner (ALWAYS HTML-stripped)
+    - Lists of objects: expanded as key[i].subkey up to list_expand_limit; remainder compacted as JSON in key{list_overflow_suffix}
+    - Mixed lists: compact JSON in key{list_overflow_suffix}
+    - All leaf values are converted to strings and HTML tags are ALWAYS stripped.
     """
     items: Dict[str, str] = {}
-
-    def _emit_scalar(k: str, v: Scalar):
-        s = "" if v is None else str(v)
-        if strip_html:
-            s = _strip_html(s)
-        items[k] = s
-
-    def _flatten(value: JSONVal, current_key: str):
-        # Scalar
-        if not isinstance(value, (dict, list)):
-            _emit_scalar(current_key, value)
-            return
-
-        # Dict
-        if isinstance(value, dict):
-            if not value:
-                items[current_key] = ""
-                return
-            for k, v in value.items():
-                new_key = f"{current_key}{sep}{k}" if current_key else str(k)
-                _flatten(v, new_key)
-            return
-
-        # List
-        if isinstance(value, list):
-            if not value:
-                items[current_key] = ""
-                return
-
-            # List of non-dicts -> join
-            if all(not isinstance(v, dict) for v in value):
-                joined = _join_scalars(value, list_joiner)
-                _emit_scalar(current_key, joined)
-                return
-
-            # Contains dicts -> expand up to limit; remainder -> *_rest
-            expanded = 0
-            for i, element in enumerate(value):
-                if isinstance(element, dict) and expanded < list_expand_limit:
-                    _flatten(element, f"{current_key}[{i}]")
-                    expanded += 1
-                else:
-                    # remainder (mixed types or beyond limit)
-                    remainder_key = f"{current_key}{list_overflow_suffix}"
-                    try:
-                        items[remainder_key] = json.dumps(value[i:], separators=(",", ":"))
-                    except Exception:
-                        items[remainder_key] = str(value[i:])
-                    break
-
     for k, v in (data or {}).items():
-        _flatten(v, k if not parent_key else f"{parent_key}{sep}{k}")
-
+        full_key = f"{parent_key}{sep}{k}" if parent_key else str(k)
+        _flatten_value(
+            v,
+            key=full_key,
+            items=items,
+            sep=sep,
+            list_joiner=list_joiner,
+            list_expand_limit=list_expand_limit,
+            list_overflow_suffix=list_overflow_suffix,
+        )
     return items
 
 
@@ -238,16 +307,16 @@ def json_to_csv(
     key_sep: str = ".",
     list_joiner: str = "|",
     list_expand_limit: int = 3,
-    strip_html: bool = True,
+    strip_html: bool = True,  # kept for backward compatibility; ignored (HTML stripping is always ON)
 ) -> str:
     """
     Convert JSON (object or list of objects) into a flattened CSV string.
 
-    Parameters (all optional):
-      - key_sep:       separator for nested object keys (default ".")
-      - list_joiner:   delimiter for lists of scalars (default "|")
-      - list_expand_limit: max expanded elements for lists of objects (default 3)
-      - strip_html:    remove HTML tags from text values (default False)
+    Parameters:
+      - key_sep:            separator for nested object keys (default ".")
+      - list_joiner:        delimiter for lists of scalars (default "|")
+      - list_expand_limit:  max expanded elements for lists of objects (default 3)
+      - strip_html:         (ignored) HTML is ALWAYS stripped from all leaf values
     """
     # Normalize to list of dicts
     if isinstance(input_json, dict):
@@ -269,14 +338,13 @@ def json_to_csv(
     for entry in records or []:
         if not isinstance(entry, dict):
             # Defensive: non-dict entries become a scalar column "value"
-            flat = {"value": "" if entry is None else str(entry)}
+            flat = {"value": _strip_html("" if entry is None else str(entry))}
         else:
             flat = _flatten_dict(
                 entry,
                 sep=key_sep,
                 list_joiner=list_joiner,
                 list_expand_limit=list_expand_limit,
-                strip_html=strip_html,
             )
         flat_rows.append(flat)
         header_keys.extend(flat.keys())
