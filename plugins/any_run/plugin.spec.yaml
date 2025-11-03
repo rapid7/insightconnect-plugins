@@ -6,6 +6,11 @@ title: "Any.Run"
 description: Analyze suspicious and malicious activities using the cloud-based malware analysis service
 version: 1.1.2
 supported_versions: ["Any.Run API 2022-05-17"]
+connection_version: 1
+sdk:
+  type: slim
+  version: 6.3.4
+  user: nobody
 vendor: rapid7
 support: community
 status: []
