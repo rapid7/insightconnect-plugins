@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Any.Run"
 Vendor = "rapid7"
-Version = "1.1.2"
+Version = "1.1.3"
 Description = "Analyze suspicious and malicious activities using the cloud-based malware analysis service"
 
 
