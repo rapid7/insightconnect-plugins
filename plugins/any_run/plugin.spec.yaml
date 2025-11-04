@@ -9,7 +9,7 @@ supported_versions: ["Any.Run API 2022-05-17"]
 connection_version: 1
 sdk:
   type: slim
-  version: 6.3.4
+  version: 6.2.5
   user: nobody
 vendor: rapid7
 support: community
