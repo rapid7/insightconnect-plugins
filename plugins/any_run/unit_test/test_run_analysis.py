@@ -1,15 +1,19 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
+from typing import Any, Dict
 from unittest import TestCase
+from unittest.mock import MagicMock, patch
+
 from icon_any_run.actions.run_analysis import RunAnalysis
 from icon_any_run.actions.run_analysis.schema import Input
-from unit_test.util import Util
-from unittest.mock import patch
-from parameterized import parameterized
 from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
+from parameterized import parameterized
+
+from util import Util
 
 
 @patch("requests.request", side_effect=Util.mocked_requests)
@@ -21,32 +25,32 @@ class TestRunAnalysis(TestCase):
     @parameterized.expand(Util.load_parameters("run_analysis").get("parameters"))
     def test_run_analysis(
         self,
-        mock_request,
-        name,
-        file,
-        obj_type,
-        obj_url,
-        obj_ext_cmd,
-        obj_ext_browser,
-        obj_ext_useragent,
-        obj_ext_elevateprompt,
-        obj_ext_extension,
-        obj_ext_startfolder,
-        env_os,
-        env_bitness,
-        env_version,
-        env_type,
-        opt_privacy_hidesource,
-        opt_network_connect,
-        opt_network_fakenet,
-        opt_network_tor,
-        opt_network_mitm,
-        opt_network_geo,
-        opt_kernel_heavyevasion,
-        opt_privacy_type,
-        opt_timeout,
-        expected,
-    ):
+        mock_request: MagicMock,
+        name: str,
+        file: Dict[str, Any],
+        obj_type: str,
+        obj_url: str,
+        obj_ext_cmd: str,
+        obj_ext_browser: str,
+        obj_ext_useragent: str,
+        obj_ext_elevateprompt: bool,
+        obj_ext_extension: str,
+        obj_ext_startfolder: str,
+        env_os: str,
+        env_bitness: str,
+        env_version: str,
+        env_type: str,
+        opt_privacy_hidesource: bool,
+        opt_network_connect: bool,
+        opt_network_fakenet: bool,
+        opt_network_tor: bool,
+        opt_network_mitm: bool,
+        opt_network_geo: str,
+        opt_kernel_heavyevasion: bool,
+        opt_privacy_type: str,
+        opt_timeout: int,
+        expected: Dict[str, Any],
+    ) -> None:
         actual = self.action.run(
             {
                 Input.FILE: file,
@@ -73,39 +77,40 @@ class TestRunAnalysis(TestCase):
                 Input.OPT_TIMEOUT: opt_timeout,
             }
         )
+        validate(actual, self.action.output.schema)
         self.assertEqual(actual, expected)
 
     @parameterized.expand(Util.load_parameters("run_analysis_bad").get("parameters"))
     def test_run_analysis_bad(
         self,
-        mock_request,
-        name,
-        file,
-        obj_type,
-        obj_url,
-        obj_ext_cmd,
-        obj_ext_browser,
-        obj_ext_useragent,
-        obj_ext_elevateprompt,
-        obj_ext_extension,
-        obj_ext_startfolder,
-        env_os,
-        env_bitness,
-        env_version,
-        env_type,
-        opt_privacy_hidesource,
-        opt_network_connect,
-        opt_network_fakenet,
-        opt_network_tor,
-        opt_network_mitm,
-        opt_network_geo,
-        opt_kernel_heavyevasion,
-        opt_privacy_type,
-        opt_timeout,
-        cause,
-        assistance,
-    ):
-        with self.assertRaises(PluginException) as e:
+        mock_request: MagicMock,
+        name: str,
+        file: Dict[str, Any],
+        obj_type: str,
+        obj_url: str,
+        obj_ext_cmd: str,
+        obj_ext_browser: str,
+        obj_ext_useragent: str,
+        obj_ext_elevateprompt: bool,
+        obj_ext_extension: str,
+        obj_ext_startfolder: str,
+        env_os: str,
+        env_bitness: str,
+        env_version: str,
+        env_type: str,
+        opt_privacy_hidesource: bool,
+        opt_network_connect: bool,
+        opt_network_fakenet: bool,
+        opt_network_tor: bool,
+        opt_network_mitm: bool,
+        opt_network_geo: str,
+        opt_kernel_heavyevasion: bool,
+        opt_privacy_type: str,
+        opt_timeout: int,
+        cause: str,
+        assistance: str,
+    ) -> None:
+        with self.assertRaises(PluginException) as error:
             self.action.run(
                 {
                     Input.FILE: file,
@@ -132,5 +137,5 @@ class TestRunAnalysis(TestCase):
                     Input.OPT_TIMEOUT: opt_timeout,
                 }
             )
-        self.assertEqual(e.exception.cause, cause)
-        self.assertEqual(e.exception.assistance, assistance)
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)

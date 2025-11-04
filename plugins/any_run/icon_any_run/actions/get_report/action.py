@@ -14,5 +14,9 @@ class GetReport(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        report = self.connection.any_run_api.get_report(params.get(Input.TASK, False))
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        task = params.get(Input.TASK, False)
+        # END INPUT BINDING - DO NOT REMOVE
+
+        report = self.connection.any_run_api.get_report(task)
         return {Output.REPORTS: insightconnect_plugin_runtime.helper.clean(report.get("data", {}))}

@@ -16,10 +16,13 @@ class RunAnalysis(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        object_type = params.get(Input.OBJ_TYPE, "file")
+        provided_file = params.get(Input.FILE, {})
+        provided_url = params.get(Input.OBJ_URL, "")
+        # END INPUT BINDING - DO NOT REMOVE
+
         files = None
-        object_type = params.get(Input.OBJ_TYPE)
-        provided_file = params.get(Input.FILE)
-        provided_url = params.get(Input.OBJ_URL)
         filename = None
         file_content = None
 
@@ -70,14 +73,10 @@ class RunAnalysis(insightconnect_plugin_runtime.Action):
                 )
             }
 
-        new_params = params.copy()
-
-        for key, value in params.items():
-            if value == "":
-                new_params.pop(key)
+        new_params = {key: value for key, value in params.items() if value != ""}
 
         if provided_file:
-            new_params.pop(Input.FILE)
+            new_params.pop(Input.FILE, None)
 
         task_result = self.connection.any_run_api.run_analysis(json_data=new_params, files=files)
         return {Output.UUID: task_result.get("data", {}).get("taskid", None)}

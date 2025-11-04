@@ -1,21 +1,23 @@
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 import json
+from logging import Logger
+from typing import Dict, Any
 
 
 class AnyRunAPI:
-    def __init__(self, authentication_header, logger):
-        self.url = "https://api.any.run/v1/analysis/"
+    def __init__(self, authentication_header: Dict[str, Any], logger: Logger) -> None:
+        self.url = "https://api.any.run/v1/analysis"
         self.authentication_header = authentication_header
         self.logger = logger
 
-    def get_history(self, team, skip, limit):
+    def get_history(self, team: str, skip: int, limit: int) -> Dict[str, Any]:
         return self._call_api("GET", self.url, params={"team": team, "skip": skip, "limit": limit})
 
-    def get_report(self, task_id):
-        return self._call_api("GET", self.url + task_id)
+    def get_report(self, task_id: int) -> Dict[str, Any]:
+        return self._call_api("GET", f"{self.url}/{task_id}")
 
-    def run_analysis(self, json_data, files):
+    def run_analysis(self, json_data: Dict[str, Any], files: Dict[str, Any]) -> Dict[str, Any]:
         return self._call_api("POST", self.url, files=files, data=json_data)
 
     def _call_api(self, method, url, params=None, json_data=None, data=None, files=None):
@@ -51,9 +53,9 @@ class AnyRunAPI:
                 return response.json()
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
-        except json.decoder.JSONDecodeError as e:
-            self.logger.info(f"Invalid json: {e}")
+        except json.decoder.JSONDecodeError as error:
+            self.logger.info(f"Invalid json: {error}")
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
-        except requests.exceptions.HTTPError as e:
-            self.logger.info(f"Call to Any Run failed: {e}")
+        except requests.exceptions.HTTPError as error:
+            self.logger.info(f"Call to Any Run failed: {error}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
