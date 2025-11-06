@@ -4,7 +4,7 @@ products: [insightconnect]
 name: zendesk
 title: Zendesk
 description: Regulate customer communications by managing tickets and users in Zendesk data
-version: 4.0.2
+version: 4.0.3
 connection_version: 4
 supported_versions: ["2024-07-11"]
 vendor: rapid7
@@ -12,7 +12,7 @@ support: community
 status: []
 sdk:
   type: slim
-  version: 5.6.1
+  version: 6.3.10
   user: nobody
 key_features:
   - "Create, manage, and delete issues and epics"
@@ -21,6 +21,7 @@ requirements:
   - "A Zendesk API key"
   - "Information about your Zendesk instance"
 version_history:
+  - "4.0.3 - Update dependency version | Updated SDK to the latest version"
   - "4.0.2 - Updated SDK to the latest version | `Search`: Fixed issue where only one search result was returned"
   - "4.0.1 - Updated the exceptions for all the actions | Show Organization Memberships: Added types to the actions output"
   - "4.0.0 - Change ID parameter types into integer | Update dependency version"

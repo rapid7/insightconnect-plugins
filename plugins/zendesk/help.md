@@ -1,8 +1,6 @@
 # Description
 
-The [Zendesk](https://www.zendesk.com) plugin helps manage communication with customers. This plugin allows you to manage tickets and users in Zendesk. Customer Resource Management tool to manage tickets of user complaints and support issues.
-
-This plugin utilizes the [Zendesk Python SDK](https://github.com/facetoe/zenpy).
+Regulate customer communications by managing tickets and users in Zendesk data
 
 # Key Features
 
@@ -279,6 +277,57 @@ Example output:
 
 ```
 {
+  "organizations": [
+    {
+      "Created At": "",
+      "Details": "",
+      "External ID": {},
+      "Group ID": 0,
+      "ID": {},
+      "Name": {},
+      "Notes": {},
+      "Shared Comments": "true",
+      "Shared Tickets": {},
+      "Tags": [
+        {}
+      ],
+      "URL": {},
+      "Updated At": {}
+    }
+  ],
+  "tickets": [
+    {
+      "Assignee ID": 0,
+      "Attachment": {
+        "content": "bytes",
+        "filename": "string"
+      },
+      "Collaborator IDs": [
+        {}
+      ],
+      "Comment": {
+        "Author ID": {},
+        "Body": "",
+        "HTML Body": {},
+        "Public": "true"
+      },
+      "Description": {},
+      "Due At": "",
+      "External ID": {},
+      "Group ID": {},
+      "ID": {},
+      "Priority": {},
+      "Problem ID": {},
+      "Recipient ID": {},
+      "Requester ID": {},
+      "Status": {},
+      "Subject": {},
+      "Tags": [
+        {}
+      ],
+      "Type": {}
+    }
+  ],
   "users": [
     {
       "active": true,
@@ -701,6 +750,7 @@ Example output:
 
 # Version History
 
+* 4.0.3 - Update dependency version | Updated SDK to the latest version
 * 4.0.2 - Updated SDK to the latest version | `Search`: Fixed issue where only one search result was returned
 * 4.0.1 - Updated the exceptions for all the actions | Show Organization Memberships: Added types to the actions output
 * 4.0.0 - Change ID parameter types into integer | Update dependency version
