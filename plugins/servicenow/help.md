@@ -1687,6 +1687,7 @@ Example output:
 
 # Version History
 
+* 8.1.3 - Addressed snyk vulnerability
 * 8.1.2 - Updated SDK to the latest version (6.3.10)
 * 8.1.1 - Updated SDK to the latest version (6.3.3)
 * 8.1.0 - Add ability to use OAuth 2.0 flow named client credentials | Updated SDK to the latest version (v6.2.5)
