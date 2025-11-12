@@ -3,5 +3,5 @@
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 pytz~=2025.1
 datetime~=5.5
-xmltodict==0.14.2
+xmltodict==1.0.2
 parameterized==0.9.0
