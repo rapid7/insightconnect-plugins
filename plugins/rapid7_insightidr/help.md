@@ -3097,7 +3097,7 @@ Example output:
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |LEQL|object|None|False|The LEQL 'WHERE' clause to match against|None|
-|Logs|array|None|False|Holds the Log ID of the matching log entry|None|
+|Logs|[]string|None|False|Holds the Log ID of the matching log entry|None|
 |Search Stats|object|None|False|Holds data regarding the query execution|None|
 |statistics|statistics|None|False|Holds the overall statistical results|None|
   
@@ -3428,6 +3428,7 @@ Example output:
 
 # Version History
 
+* 12.0.3 - Actions: `Advanced Query on Log` and `Advanced Query on Log Set` - Updated schema
 * 12.0.2 - Triggers: `Get New Investigations` - Improved error handling | Updated SDK to the latest version (6.3.10)
 * 12.0.1 - Updated SDK to latest version (6.3.8) | Resolved Snyk Vulnerability
 * 12.0.0 - Additional `disposition` values added for `Create Investigation`, `Update Investigation` and `Set Disposition of Investigation`

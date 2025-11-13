@@ -508,8 +508,12 @@ class AdvancedQueryOnLogSetOutput(insightconnect_plugin_runtime.Output):
           "order": 2
         },
         "logs": {
+          "type": "array",
           "title": "Logs",
           "description": "Holds the Log ID of the matching log entry",
+          "items": {
+            "type": "string"
+          },
           "order": 3
         },
         "search_stats": {

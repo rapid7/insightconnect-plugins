@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 12.0.2
+version: 12.0.3
 connection_version: 5
 supported_versions: ["Latest release successfully tested on 2025-07-22."]
 vendor: rapid7
@@ -35,6 +35,7 @@ sdk:
   version: 6.3.10
   user: nobody
 version_history:
+  - "12.0.3 - Actions: `Advanced Query on Log` and `Advanced Query on Log Set` - Updated schema"
   - "12.0.2 - Triggers: `Get New Investigations` - Improved error handling | Updated SDK to the latest version (6.3.10)"
   - "12.0.1 - Updated SDK to latest version (6.3.8) | Resolved Snyk Vulnerability"
   - "12.0.0 - Additional `disposition` values added for `Create Investigation`, `Update Investigation` and `Set Disposition of Investigation`"
@@ -486,7 +487,7 @@ types:
     logs:
       title: Logs
       description: Holds the Log ID of the matching log entry
-      type: array
+      type: "[]string"
       required: false
     search_stats:
       title: Search Stats
