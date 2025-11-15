@@ -1,18 +1,15 @@
-from typing import Any, Dict, List, Tuple, Union
-from logging import Logger
 from json import JSONDecodeError
+from logging import Logger
+from typing import Any, Dict, List
 
 import requests
-from requests import Response
 from insightconnect_plugin_runtime.exceptions import PluginException
-from insightconnect_plugin_runtime.helper import clean
+from requests import Response
 
-TIMEOUT = 60.0
-LUMINAR_BASE_URL = "https://demo.cyberluminar.com/"
-HEADERS = {
-    "Content-Type": "application/x-www-form-urlencoded",
-    "accept": "application/json",
-}
+from icon_luminar.util.constants import HEADERS, RETRY_STATUS_CODES, TIMEOUT
+from icon_luminar.util.utils import build_base_url
+
+
 class LuminarManager:
     """
     Class to manage Luminar API interactions.
@@ -23,10 +20,10 @@ class LuminarManager:
         cognyte_client_id: str,
         cognyte_client_secret: str,
         cognyte_account_id: str,
+        cognyte_base_url: str,
         logger: Logger,
-        cognyte_base_url: str = LUMINAR_BASE_URL
     ) -> None:
-        self.base_url = cognyte_base_url
+        self.base_url = build_base_url(cognyte_base_url)
         self.account_id = cognyte_account_id
         self.client_id = cognyte_client_id
         self.client_secret = cognyte_client_secret
@@ -41,28 +38,38 @@ class LuminarManager:
 
     def _response_handler(self, response: Response, url: str) -> None:
         """
-        Raise the correct PluginException based upon the response status code
-        :param response: The response object to be reviewed
-        :param url: The endpoint URL to be logged out in result of an error
-        :return: None
+        Raise the correct PluginException based on the response status code.
         """
-        if response.status_code == 401:
+        status = response.status_code
+
+        if status == 200:
+            return
+        if status == 401:
             raise PluginException(preset=PluginException.Preset.API_KEY)
-        if response.status_code == 403:
+        if status == 403:
             raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
-        if response.status_code == 404:
+        if status == 404:
             raise PluginException(
-                cause="No results found.\n",
-                assistance="Please provide valid inputs or verify the inputs configured in your plugin.\n",
-                data=f"{response.text}\nurl: {url}",
+                cause="No results found.",
+                assistance="Please provide valid inputs or verify the plugin configuration.",
+                data=f"{response.text}\nURL: {url}",
             )
-        if 400 <= response.status_code < 500:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
-        if response.status_code >= 500:
-            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
-    
-  
-    def access_token(self) -> Tuple[Union[bool, str], str]:
+        if 400 <= status < 500:
+            raise PluginException(
+                preset=PluginException.Preset.UNKNOWN, data=response.text
+            )
+        if status >= 500:
+            raise PluginException(
+                preset=PluginException.Preset.SERVER_ERROR, data=response.text
+            )
+        # Catch unexpected edge cases
+        raise PluginException(
+            cause="Unexpected response received.",
+            assistance="Please contact support.",
+            data=f"Status code: {status}\nBody: {response.text}\nURL: {url}",
+        )
+
+    def access_token(self) -> str:
         """
         Make a request to the Luminar API.
 
@@ -73,107 +80,116 @@ class LuminarManager:
         """
         req_url = f"{self.base_url}/externalApi/v2/realm/{self.account_id}/token"
         response = requests.post(
-                req_url, headers=self.req_headers, data=self.payload, timeout=TIMEOUT
-            )
+            req_url, headers=self.req_headers, data=self.payload, timeout=TIMEOUT
+        )
         self._response_handler(response, req_url)
         try:
             return response.json().get("access_token")
         except JSONDecodeError:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
-
+            raise PluginException(
+                preset=PluginException.Preset.INVALID_JSON, data=response.text
+            )
 
     def get_taxi_collections(self) -> Dict[str, str]:
         """
-        Fetches TAXII collections from the Cognyte Luminar API and maps collection
-         aliases to their IDs.
+        Fetch TAXII collections from Luminar API and map aliases to IDs.
 
         Returns:
-            Dict[str, str]: A dictionary mapping collection aliases to their IDs.
+            Dict[str, str]: Mapping of collection alias → ID.
         """
-        taxii_collection_ids = {}
-        # try:
         access_token = self.access_token()
         headers = {"Authorization": f"Bearer {access_token}"}
         req_url = f"{self.base_url}/externalApi/taxii/collections/"
         resp = requests.get(req_url, headers=headers, timeout=TIMEOUT)
         self._response_handler(resp, req_url)
+
         try:
             collections_data = resp.json().get("collections", [])
         except JSONDecodeError:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=resp.text)
-        
-        
-        # resp.raise_for_status()
-        collections_data = resp.json().get("collections", [])
+            raise PluginException(
+                preset=PluginException.Preset.INVALID_JSON, data=resp.text
+            )
 
-        # self.logger.info("Cognyte Luminar collections: %s", collections_data)
-
-        # Store collection alias and id mapping
-        for collection in collections_data:
-            taxii_collection_ids[collection.get("alias")] = collection.get("id")
-        # except Exception as e:
-        #     self.logger.error("Error fetching collections: %s", e)
-
-        return taxii_collection_ids
+        return {
+            c.get("alias"): c.get("id")
+            for c in collections_data
+            if c.get("alias") and c.get("id")
+        }
 
     def get_collection_objects(
         self, collection: str, params: Dict[str, Any]
     ) -> List[Dict[str, Any]]:
         """
-        Fetches objects from a TAXII collection, handling pagination and token expiration.
+        Fetch objects from a TAXII collection, handling pagination and retries.
 
         Args:
-            # headers (Dict[str, str]): HTTP headers, including authentication tokens.
             collection (str): The TAXII collection ID.
-            params (Dict[str, Any]): Query parameters for filtering results.
+            params (Dict[str, Any]): Query params.
 
         Returns:
-            List[Dict[str, Any]]: A list of objects retrieved from the collection.
+            List[Dict[str, Any]]: Objects retrieved from the collection.
         """
-
-        parameters = params.copy()
-        collection_objects = []
+        collection_objects: List[Dict[str, Any]] = []
         access_token = self.access_token()
         headers = {"Authorization": f"Bearer {access_token}"}
+        retries, max_retries = 0, 3
 
-        while True:
-            # Send a request to fetch objects from the collection
-            resp = requests.get(
-                f"{self.base_url}/externalApi/taxii/collections/{collection}/objects/",
-                params=parameters,
-                headers=headers,
-                timeout=TIMEOUT,
+        while retries < max_retries:
+            req_url = (
+                f"{self.base_url}/externalApi/taxii/collections/{collection}/objects/"
             )
-            if resp.status_code == 401:
-                self.logger.info(
+            resp = requests.get(
+                req_url, params=params, headers=headers, timeout=TIMEOUT
+            )
+
+            if resp.status_code == 401:  # Token expired, refresh and retry
+                self.logger.warning(
                     "Access token has expired, status_code=%s and response=%s,"
                     " Regenerating token...",
                     resp.status_code,
                     resp.text,
                 )
-
                 access_token = self.access_token()
-                headers = {"Authorization": f"Bearer {access_token}"}
+                headers["Authorization"] = f"Bearer {access_token}"
                 continue
-                
-            self._response_handler(resp, f"{self.base_url}/externalApi/taxii/collections/{collection}/objects/")
-            try:
-                response_json = resp.json()
-            except JSONDecodeError:
-                raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=resp.text)
-            
-            all_objects = response_json.get("objects", [])
-            collection_objects.extend(all_objects)
-            self.logger.info(
-                "Fetched objects from collection: %s", len(collection_objects)
-            )
 
-            # Check if there is a "next" page of objects and update the params
-            if "next" in response_json:
-                parameters["next"] = response_json["next"]
+            if resp.status_code == 200:
+                try:
+                    response_json = resp.json()
+                except JSONDecodeError:
+                    raise PluginException(
+                        preset=PluginException.Preset.INVALID_JSON, data=resp.text
+                    )
+
+                objects = response_json.get("objects", [])
+                collection_objects.extend(objects)
+                self.logger.info(
+                    "Fetched %d objects so far from collection %s",
+                    len(collection_objects),
+                    collection,
+                )
+
+                if "next" in response_json:
+                    params["next"] = response_json["next"]
+                else:
+                    break
+
+            elif resp.status_code in RETRY_STATUS_CODES:
+                retries += 1
+                self.logger.warning(
+                    "Request failed with status %s. Retrying %d/%d...",
+                    resp.status_code,
+                    retries,
+                    max_retries,
+                )
+                continue
+
             else:
-                break
-       
-        self.logger.info("Fetched all objects from collection: %s", collection)
+                self._response_handler(resp, req_url)
 
+        self.logger.info(
+            "Completed fetching %d objects from collection %s",
+            len(collection_objects),
+            collection,
+        )
         return collection_objects

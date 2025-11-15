@@ -1,18 +1,36 @@
-import insightconnect_plugin_runtime
 import time
-from .schema import FetchIocFeedsInput, FetchIocFeedsOutput, Input, Output, Component
+
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 # Custom imports below
+from icon_luminar.util.utils import (
+    get_last_run,
+    is_valid_date,
+    next_checkpoint,
+    pull_feeds,
+    save_last_run,
+)
 
-from .util.util import get_ioc_from_pattern, filtered_records
+from .schema import (
+    Component,
+    FetchCyberfeedFeedsInput,
+    FetchCyberfeedFeedsOutput,
+    Input,
+    Output,
+)
 
-class FetchIocFeeds(insightconnect_plugin_runtime.Trigger):
+
+class FetchCyberfeedFeeds(insightconnect_plugin_runtime.Trigger):
+    _CACHE_FILE_NAME = "cyberfeeds"
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name="fetch_ioc_feeds",
-                description=Component.DESCRIPTION,
-                input=FetchIocFeedsInput(),
-                output=FetchIocFeedsOutput())
+            name="fetch_cyberfeed_feeds",
+            description=Component.DESCRIPTION,
+            input=FetchCyberfeedFeedsInput(),
+            output=FetchCyberfeedFeedsOutput(),
+        )
 
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
@@ -20,31 +38,31 @@ class FetchIocFeeds(insightconnect_plugin_runtime.Trigger):
         initial_fetch_date = params.get(Input.INITIAL_FETCH_DATE)
         # END INPUT BINDING - DO NOT REMOVE
 
-        while True:
-            initial_fetch_date = initial_fetch_date + "T00:00:00.000000Z"
-            params = {"limit": 9999}
-            params["added_after"] = initial_fetch_date
-            self.logger.info(f"Using initial fetch date: {initial_fetch_date}")
-            ioc_collection_id = self.connection.client.get_taxi_collections().get("cyberfeeds")
-            if ioc_collection_id:
-                self.logger.info(f"Fetching cyberfeeds from Luminar....")
-                ioc_records = self.connection.client.get_collection_objects(ioc_collection_id, params)
-                if ioc_records:
-                    self.logger.info(f"Fetched cyberfeeds records.")
-                    #filter ioc records based on created date
-                    filter_records = filtered_records(ioc_records, initial_fetch_date)
-                    if filter_records:
-                        for x in filter_records:
-                            if x.get('type') == "indicator" and x.get('pattern'):
-                                x['ioc'] = get_ioc_from_pattern(self.logger, x.get('pattern'))
+        if not is_valid_date(initial_fetch_date):
+            self.logger.error("Invalid initial fetch date. Format should be YYYY-MM-DD")
+            return
 
-                        self.send({
-                            Output.RESULTS: filter_records,
-                        })
-                    else:
-                        self.logger.info("No new cyberfeeds records found.")
-                else:
-                    self.logger.info("No cyberfeeds records found.")
-            else:
-                self.logger.info("No cyberfeeds collection found.")
-            time.sleep(frequency)
+        # Normalize date once
+        initial_fetch_date = f"{initial_fetch_date}T00:00:00.000000Z"
+
+        while True:
+            try:
+                from_date = (
+                    get_last_run(self._CACHE_FILE_NAME, self.logger)
+                    or initial_fetch_date
+                )
+                next_run = next_checkpoint()
+
+                records = pull_feeds(
+                    self.connection.client, "cyberfeeds", from_date, self.logger
+                )
+                self.send({Output.RESULTS: records})
+
+                save_last_run(self._CACHE_FILE_NAME, next_run, self.logger)
+                self.logger.info(f"Sleeping for {frequency}")
+                time.sleep(frequency)
+            except Exception as error:
+                raise PluginException(
+                    cause=f"Plugin exception occurred: {error}",
+                    assistance="Please check the input and try again.",
+                )
