@@ -1,5 +1,8 @@
 import sys
 import os
+
+sys.path.append(os.path.abspath("../"))
+
 from unittest import TestCase
 from unittest.mock import patch
 from parameterized import parameterized
@@ -9,8 +12,6 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from unit_test.util import Util
 from icon_zscaler.actions.create_user import CreateUser
 from icon_zscaler.util.constants import Assistance, Cause
-
-sys.path.append(os.path.abspath("../"))
 
 
 @patch("requests.request", side_effect=Util.mock_request)

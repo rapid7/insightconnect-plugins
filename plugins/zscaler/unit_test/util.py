@@ -1,14 +1,14 @@
+import os
+import sys
+
+sys.path.append(os.path.abspath("../"))
+
 import json
 import logging
-import sys
-import os
-
 import insightconnect_plugin_runtime
 
 from icon_zscaler.connection import Connection
 from icon_zscaler.connection.schema import Input
-
-sys.path.append(os.path.abspath("../"))
 
 
 class Util:
