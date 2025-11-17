@@ -9,7 +9,7 @@ from parameterized import parameterized
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from unit_test.util import Util
+from util import Util
 from icon_zscaler.actions.create_user import CreateUser
 from icon_zscaler.util.constants import Assistance, Cause
 

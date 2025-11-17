@@ -8,7 +8,7 @@ from unittest.mock import patch
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from unit_test.util import Util
+from util import Util
 from parameterized import parameterized
 from icon_zscaler.actions.get_url_category_by_name import GetUrlCategoryByName
 from icon_zscaler.util.constants import Cause, Assistance
