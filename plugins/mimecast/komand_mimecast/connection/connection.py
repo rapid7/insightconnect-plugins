@@ -25,7 +25,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def test(self):
         # pylint: disable=protected-access
-        response = self.client._handle_rest_call("POST", f"{API}/account/get-account")
+        response = self.client._handle_rest_call("POST", f"{API}/api/account/get-account")
         if response.get(META_FIELD, {}).get(STATUS_FIELD) != 200 or response.get(FAIL_FIELD) != []:
             self.logger.error(response)
             raise ConnectionTestException(

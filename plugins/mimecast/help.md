@@ -14,7 +14,7 @@
 
 # Supported Product Versions
 
-* Mimecast API 2.0 2025-06-18
+* Mimecast API 2.0 2025-11-17
 
 # Documentation
 
@@ -974,6 +974,7 @@ Example output:
 
 # Version History
 
+* 6.0.2 - Alter request structure for compatibility with Mimecast API 2.0
 * 6.0.1 - Addressed Snyk Vulnerability | SDK bump to latest version (6.3.4)
 * 6.0.0 - Update to actions and triggers to utilize Mimecast API 2.0 | Update connection requirements to Mimecast API 2.0 requirements | Remove task `monitor_siem_logs` | Update third party documentation links for Mimecast API 2.0
 * 5.3.21 - Update Task `monitor_siem_logs` to use new logging and status management | Update SDK to version 6.3.3

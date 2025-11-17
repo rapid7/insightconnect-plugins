@@ -1,7 +1,6 @@
 import json
 import uuid
 from typing import Dict
-from urllib.request import Request
 from logging import Logger
 
 import requests
@@ -40,6 +39,7 @@ class MimecastAPI:
             f"{API}/oauth/token",
             header_fields={"Content-Type": "application/x-www-form-urlencoded"},
             data=data,
+            auth_request=True,
         )
         self.access_token = response.get("access_token")
         self.logger.info("Authenticated")
@@ -214,20 +214,30 @@ class MimecastAPI:
         params: dict = None,
         meta_data: dict = None,
         header_fields: dict = {},
+        auth_request: bool = False,
     ) -> dict:
         payload = data
         if meta_data is not None:
             payload[META_FIELD] = meta_data
-        if not self.access_token:
-            payload = str({DATA_FIELD: ([data] if data is not None else [])})
         try:
-            request = requests.request(
-                method=method.upper(),
-                url=uri,
-                headers=self._prepare_header(header_fields, self.access_token),
-                data=payload,
-                params=params,
-            )
+            if auth_request:
+                request = requests.request(
+                    method=method.upper(),
+                    url=uri,
+                    headers=self._prepare_header(header_fields, self.access_token),
+                    data=payload,
+                    params=params,
+                )
+            else:
+                if payload:
+                    payload = {"data": [payload]}
+                request = requests.request(
+                    method=method.upper(),
+                    url=uri,
+                    headers=self._prepare_header(header_fields, self.access_token),
+                    json=payload,
+                    params=params,
+                )
         except requests.exceptions.RequestException as e:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=e)
 
@@ -238,7 +248,7 @@ class MimecastAPI:
         except json.decoder.JSONDecodeError as error:
             raise PluginException(
                 cause="Unknown error.",
-                assistance="The Mimecast server did not respond correctly. Response not in JSON format. Response in logs.",
+                assistance=f"The Mimecast server did not respond correctly. Response not in JSON format. Response was: {error}",
                 data=error,
             )
 
