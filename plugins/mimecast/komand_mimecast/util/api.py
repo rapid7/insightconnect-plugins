@@ -216,28 +216,22 @@ class MimecastAPI:
         header_fields: dict = {},
         auth_request: bool = False,
     ) -> dict:
-        payload = data
+        payload = data or {}
         if meta_data is not None:
             payload[META_FIELD] = meta_data
+
         try:
             if auth_request:
-                request = requests.request(
-                    method=method.upper(),
-                    url=uri,
-                    headers=self._prepare_header(header_fields, self.access_token),
-                    data=payload,
-                    params=params,
-                )
+                req_args = {"data": payload}
             else:
-                if payload:
-                    payload = {"data": [payload]}
-                request = requests.request(
-                    method=method.upper(),
-                    url=uri,
-                    headers=self._prepare_header(header_fields, self.access_token),
-                    json=payload,
-                    params=params,
-                )
+                req_args = {"json": {"data": [payload]} if payload else None}
+            request = requests.request(
+                method=method.upper(),
+                url=uri,
+                headers=self._prepare_header(header_fields, self.access_token),
+                params=params,
+                **req_args,
+            )
         except requests.exceptions.RequestException as e:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=e)
 
@@ -253,7 +247,7 @@ class MimecastAPI:
             )
 
         if response.get(FAIL_FIELD):
-            if response.get(FAIL_FIELD, [{}])[0].get("code", "") == "token_expired":
+            if response[FAIL_FIELD][0].get("code") == "token_expired":
                 self.logger.info("Token has expired, attempting re-authentication...")
                 self.access_token = None
                 self.authenticate()
@@ -265,8 +259,7 @@ class MimecastAPI:
                     data=request.body,
                     params=request.params,
                 )
-            else:
-                self._handle_error_response(response)
+            self._handle_error_response(response)
 
         status_code = response.get(META_FIELD, {}).get(STATUS_FIELD)
         if not status_code or 200 <= status_code <= 299:
