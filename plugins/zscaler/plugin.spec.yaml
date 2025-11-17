@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: zscaler
 title: Zscaler
-version: 1.5.1
+version: 1.5.2
 connection_version: 1
 supported_versions: ["Zscaler API 2023-02-20"]
 description: Zscaler is a SaaS security platform that provides fast, secure connections between client applications, regardless of device, location, or network
@@ -12,7 +12,7 @@ support: rapid7
 status: []
 sdk:
   type: slim
-  version: 6.1.4
+  version: 6.3.10
   user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/zscaler
@@ -42,7 +42,15 @@ requirements:
   - "[Requires a Zscaler organization API Key](https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey)"
   - "Requires a Zscaler username and password"
   - "[Requires a Zscaler base URI](https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey), such as: https://admin.zscalerbeta.net"
+troubleshooting:
+  - "To locate your base URI and key:\
+    \ 1. Log in to the ZIA Admin Portal using your admin credentials.\
+    \ 2. Go to **Administration > API Key Management**.\
+    \ In order to view the API Key Management page, the admin must be assigned an admin role that includes the Authentication Configuration functional scope.\
+    \ In the **Organization API Key** tab, the base URI and key details are displayed within the table.\
+    \ For more information see the [Zscaler getting started guide](https://help.zscaler.com/zia/api-getting-started) on obtaining the API key and base URL."
 version_history:
+  - "1.5.2 - SDK Bump to 6.3.10 | Update connection test"
   - "1.5.1 - Requirements.txt bumped | SDK Bump to 6.1.4"
   - "1.5.0 - Add Actions: `Create User`, `Delete User`, `Get Users`, `Get URL Category by Name`, `Update URLs of URL Category`"
   - "1.4.0 - Add Activate Configuration input in Blacklist URL action"
@@ -532,9 +540,9 @@ connection:
   url:
     title: URL
     type: string
-    description: Base URL, ex. 'https://admin.zscalerbeta.net'. See https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey for details
+    description: Base URL, ex. 'https://zsapi.zscalerbeta.net'. See https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey for details
     required: true
-    example: https://admin.zscalerbeta.net
+    example: https://zsapi.zscalerbeta.net
   api_key:
     title: API Key
     type: credential_secret_key
@@ -564,9 +572,10 @@ actions:
         description: Information about given URLs
         type: "[]url_categorization"
         required: true
+        example: [{"url":"example.com","urlClassifications":["REFERENCE_SITES","INTERNET_SERVICES"],"urlClassificationsWithSecurityAlert":[]},{"url":"rapid7.com","urlClassifications":["CORPORATE_MARKETING","PROFESSIONAL_SERVICES"],"urlClassificationsWithSecurityAlert":[]}]
   blacklist_url:
     title: Blacklist URL
-    description: Blacklist or unblacklist URLs
+    description: Add or remove URLs from a blacklist. These URLs will appear in the 'Blocked Malicious URLs' section on the Advanced Threats Policy page
     input:
       urls:
         title: URLs
@@ -617,6 +626,7 @@ actions:
         description: Full report of an analyzed MD5 hash
         type: full_report
         required: true
+        example: {"Full Details":{"Summary":{"Status":"COMPLETED","Category":"EXECS","FileType":"EXE","StartTime":1520333667,"Duration":520797},"Classification":{"Type":"MALICIOUS","Category":"ADWARE","Score":76,"DetectedMalware":"Adware.Generic.48627"},"FileProperties":{"FileType":"EXE","FileSize":23323,"MD5":"afcb861561f7416c5e852001d31f8921","SHA1":"1dce4aacf1e17418ebc05d6d2e9034a8271185f9","Sha256":"fc9003461e52006be0188e1fc1b7656c81e930ec78a93eb7ab21fdff3e566314","Issuer":"","DigitalCerificate":"","SSDeep":"384:YcBdTF8O3Fnp7JWmbiV2SBsJmnnB76RF/ewf4XXI9volVL9EFlfnvY1NvJml7Wc:lZF8OXJWmbLW0mnnp6X6rfLC3Osl6c","RootCA":""},"SystemSummary":[{"Risk":"LOW","Signature":"Binary contains paths to debug symbols","SignatureSources":["Not_a_virus.pdb source: 5A9E736319EE0000_5A9E736E00000000.exe"]}],"SecurityBypass":[{"Risk":"LOW","Signature":"Entrypoint lies outside standard sections","SignatureSources":["section where entry point is pointing to: .Stone"]}],"Persistence":[{"Risk":"LOW","Signature":"PE file contains sections with non-standard names","SignatureSources":["","section name: .Stone"]}]}}
   get_blacklist_url:
     title: Get Blacklist URL
     description: Get blacklisted URLs
@@ -626,6 +636,7 @@ actions:
         description: URLs added to the blacklist
         type: "[]string"
         required: false
+        example: ["domain.com","example.com","example1.com","example2.com","example3.com","example4.com","example5.com"]
   get_users:
     title: Get Users
     description: Gets a list of all users and allows user filtering by name, department, or group. The name search parameter performs a partial match. The dept and group parameters perform a 'starts with' match
@@ -666,7 +677,7 @@ actions:
         description: List of organization users
         type: "[]user"
         required: false
-        example: [ ]
+        example: [{"id":123456789,"name":"Sample user","email":"user@example.com","groups":[{"id":123456789,"name":"Test Group"}],"department":{"id":123456789,"name":"Test Department"},"adminUser":false,"isNonEditable":false,"deleted":false}]
   delete_user:
     title: Delete User
     description: Deletes the user for the specified ID
@@ -736,10 +747,10 @@ actions:
         description: An organization user
         type: user
         required: false
-        example: { }
+        example: {"id":123456789,"name":"Sample user","email":"user@example.com","groups":[{"id":123456789,"name":"Test Group","idpId":123456789,"comments":"Sample comment"}],"department":{"id":123456789,"name":"Test Department","idpId":123456789,"comments":"Sample comment","deleted":false},"comments":"Sample comment","tempAuthEmail":"user@example.com","adminUser":false}
   get_url_category_by_name:
     title: Get URL Category by Name
-    description: Gets the URL category information for the specified name
+    description: Get the URL category information for the specified name
     input:
       urlCategoryName:
         title: URL Category Name
@@ -866,7 +877,7 @@ actions:
         description: Information about the given URL category
         type: urlCategory
         required: false
-        example: { }
+        example: {"id":"CUSTOM_01","configuredName":"Custom Category Example","superCategory":"USER_DEFINED","keywords":["key1"],"keywordsRetainingParentCategory":["test1"],"urls":["example.com"],"dbCategorizedUrls":[],"customCategory":true,"scopes":[{"type":"ORGANIZATION"},{"type":"DEPARTMENT","scopeEntities":[{"id":12345678,"name":"Test Department"}]},{"type":"LOCATION","scopeEntities":[{"id":12345678,"name":"Location Example"}]},{"scopeGroupMemberEntities":[],"type":"LOCATION","scopeEntities":[{"id":12345678,"name":"Location Group Example"}]}],"editable":true,"description":"Example Description","type":"URL_CATEGORY","val":123,"customUrlsCount":1,"urlsRetainingParentCategoryCount":0,"customIpRangesCount":0,"ipRangesRetainingParentCategoryCount":0}
   update_urls_of_url_category:
     title: Update URLs of URL Category
     description: Adds or removes URLs for the specified URL category
@@ -1011,4 +1022,4 @@ actions:
         description: Information about the updated URL category
         type: urlCategory
         required: false
-        example: { }
+        example: {"id":"CUSTOM_01","configuredName":"Custom Category Example","superCategory":"USER_DEFINED","keywords":["key1"],"keywordsRetainingParentCategory":["test1"],"urls":["example.com"],"dbCategorizedUrls":[],"customCategory":true,"scopes":[{"type":"ORGANIZATION"},{"type":"DEPARTMENT","scopeEntities":[{"id":12345678,"name":"Test Department"}]},{"type":"LOCATION","scopeEntities":[{"id":12345678,"name":"Location Example"}]},{"scopeGroupMemberEntities":[],"type":"LOCATION_GROUP","scopeEntities":[{"id":12345678,"name":"Location Group Example"}]}],"editable":true,"description":"Example Description","type":"URL_CATEGORY","val":123,"customUrlsCount":1,"urlsRetainingParentCategoryCount":0,"customIpRangesCount":0,"ipRangesRetainingParentCategoryCount":0}
