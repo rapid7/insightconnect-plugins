@@ -30,9 +30,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
         try:
             get_status_resp = self.client.get_status()
 
-            if not get_status_resp.content:
-                self._raise_invalid_response("Empty response from Zscaler API")
-
             try:
                 status = get_status_resp.json().get("status")
                 if status is None:
