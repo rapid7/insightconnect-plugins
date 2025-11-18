@@ -1,14 +1,20 @@
+import os
+import sys
+
+sys.path.append(os.path.abspath("../"))
+
 import json
 import logging
-import sys
-import os
-
 import insightconnect_plugin_runtime
 
 from icon_zscaler.connection import Connection
 from icon_zscaler.connection.schema import Input
 
-sys.path.append(os.path.abspath("../"))
+STUB_CONNECTION = {
+    Input.API_KEY: {"secretKey": "my-secret-key"},
+    Input.CREDENTIALS: {"password": "password123", "username": "user@zscalerbeta.net"},
+    Input.URL: "https://sample.com",
+}
 
 
 class Util:
@@ -16,12 +22,7 @@ class Util:
     def default_connector(action: insightconnect_plugin_runtime.Action):
         default_connection = Connection()
         default_connection.logger = logging.getLogger("connection logger")
-        params = {
-            Input.API_KEY: {"secretKey": "my-secret-key"},
-            Input.CREDENTIALS: {"password": "password123", "username": "user@zscalerbeta.net"},
-            Input.URL: "https://sample.com",
-        }
-        default_connection.connect(params)
+        default_connection.connect(STUB_CONNECTION)
         action.connection = default_connection
         action.logger = logging.getLogger("action logger")
         return action
@@ -62,6 +63,9 @@ class Util:
             return MockResponse(204)
         if method == "DELETE" and url.endswith("users/99999"):
             return MockResponse(404, "")
+
+        if method == "GET" and url.endswith("/v1/status"):
+            return MockResponse(200, "get_status.json.resp")
 
         if method == "GET" and url.endswith("users"):
             if params.get("name") == "Not exist":

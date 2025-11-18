@@ -1,13 +1,14 @@
 import sys
 import os
+
+sys.path.append(os.path.abspath("../"))
+
 from unittest import TestCase
 from unittest.mock import patch
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-sys.path.append(os.path.abspath("../"))
-
-from unit_test.util import Util
+from util import Util
 from parameterized import parameterized
 from icon_zscaler.actions.update_urls_of_url_category import UpdateUrlsOfUrlCategory
 from icon_zscaler.util.constants import Cause, Assistance

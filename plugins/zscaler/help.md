@@ -1,6 +1,6 @@
 # Description
 
-[Zscaler](https://www.zscaler.com/) is a SaaS security platform that provides fast, secure connections between client applications, regardless of device, location, or network.
+Zscaler is a SaaS security platform that provides fast, secure connections between client applications, regardless of device, location, or network
 
 # Key Features
 
@@ -26,24 +26,13 @@
 
 ## Setup
 
-To locate your base URI and key:
-
-1. Log in to the ZIA Admin Portal using your admin credentials.
-2. Go to **Administration > API Key Management**.
-
-In order to view the API Key Management page, the admin must be assigned an admin role that includes the Authentication Configuration functional scope.
-
-In the **Organization API Key** tab, the base URI and key details are displayed within the table.
-
-For more information see the [Zscaler getting started guide](https://help.zscaler.com/zia/api-getting-started) on obtaining the API key and base URL.
-
-The connection configuration accepts the following parameters:
+The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |api_key|credential_secret_key|None|True|Enter organization API key|None|14M2d25A7c12|None|None|
 |credentials|credential_username_password|None|True|Username and password to access Zscaler|None|{"username":"user@example.com", "password":"mypassword"}|None|None|
-|url|string|None|True|Base URL, ex. 'https://admin.zscalerbeta.net'. See https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey for details|None|https://admin.zscalerbeta.net|None|None|
+|url|string|None|True|Base URL, ex. 'https://zsapi.zscalerbeta.net'. See https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey for details|None|https://zsapi.zscalerbeta.net|None|None|
 
 Example input:
 
@@ -54,7 +43,7 @@ Example input:
     "password": "mypassword",
     "username": "user@example.com"
   },
-  "url": "https://admin.zscalerbeta.net"
+  "url": "https://zsapi.zscalerbeta.net"
 }
 ```
 
@@ -65,7 +54,8 @@ Example input:
 
 #### Blacklist URL
 
-This action is used to add or remove URLs from a blacklist. These URLs will appear in the "Blocked Malicious URLs" section on the Advanced Threats Policy page.
+This action is used to add or remove URLs from a blacklist. These URLs will appear in the 'Blocked Malicious URLs' 
+section on the Advanced Threats Policy page
 
 ##### Input
 
@@ -140,34 +130,34 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|user|user|False|An organization user|{}|
+|user|user|False|An organization user|{'id': 123456789, 'name': 'Sample user', 'email': 'user@example.com', 'groups': [{'id': 123456789, 'name': 'Test Group', 'idpId': 123456789, 'comments': 'Sample comment'}], 'department': {'id': 123456789, 'name': 'Test Department', 'idpId': 123456789, 'comments': 'Sample comment', 'deleted': False}, 'comments': 'Sample comment', 'tempAuthEmail': 'user@example.com', 'adminUser': False}|
   
 Example output:
 
 ```
 {
   "user": {
-    "id": 123456789,
-    "name": "Sample user",
+    "adminUser": false,
+    "comments": "Sample comment",
+    "department": {
+      "comments": "Sample comment",
+      "deleted": false,
+      "id": 123456789,
+      "idpId": 123456789,
+      "name": "Test Department"
+    },
     "email": "user@example.com",
     "groups": [
       {
+        "comments": "Sample comment",
         "id": 123456789,
-        "name": "Test Group",
         "idpId": 123456789,
-        "comments": "Sample comment"
+        "name": "Test Group"
       }
     ],
-    "department": {
-      "id": 123456789,
-      "name": "Test Department",
-      "idpId": 123456789,
-      "comments": "Sample comment",
-      "deleted": false
-    },
-    "comments": "Sample comment",
-    "tempAuthEmail": "user@example.com",
-    "adminUser": false
+    "id": 123456789,
+    "name": "Sample user",
+    "tempAuthEmail": "user@example.com"
   }
 }
 ```
@@ -216,7 +206,7 @@ This action is used to get blacklisted URLs
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|blacklisted_urls|[]string|False|URLs added to the blacklist|None|
+|blacklisted_urls|[]string|False|URLs added to the blacklist|["domain.com", "example.com", "example1.com", "example2.com", "example3.com", "example4.com", "example5.com"]|
   
 Example output:
 
@@ -256,7 +246,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|full_report|full_report|True|Full report of an analyzed MD5 hash|None|
+|full_report|full_report|True|Full report of an analyzed MD5 hash|{'Full Details': {'Summary': {'Status': 'COMPLETED', 'Category': 'EXECS', 'FileType': 'EXE', 'StartTime': 1520333667, 'Duration': 520797}, 'Classification': {'Type': 'MALICIOUS', 'Category': 'ADWARE', 'Score': 76, 'DetectedMalware': 'Adware.Generic.48627'}, 'FileProperties': {'FileType': 'EXE', 'FileSize': 23323, 'MD5': 'afcb861561f7416c5e852001d31f8921', 'SHA1': '1dce4aacf1e17418ebc05d6d2e9034a8271185f9', 'Sha256': 'fc9003461e52006be0188e1fc1b7656c81e930ec78a93eb7ab21fdff3e566314', 'Issuer': '', 'DigitalCerificate': '', 'SSDeep': '384:YcBdTF8O3Fnp7JWmbiV2SBsJmnnB76RF/ewf4XXI9volVL9EFlfnvY1NvJml7Wc:lZF8OXJWmbLW0mnnp6X6rfLC3Osl6c', 'RootCA': ''}, 'SystemSummary': [{'Risk': 'LOW', 'Signature': 'Binary contains paths to debug symbols', 'SignatureSources': ['Not_a_virus.pdb source: 5A9E736319EE0000_5A9E736E00000000.exe']}], 'SecurityBypass': [{'Risk': 'LOW', 'Signature': 'Entrypoint lies outside standard sections', 'SignatureSources': ['section where entry point is pointing to: .Stone']}], 'Persistence': [{'Risk': 'LOW', 'Signature': 'PE file contains sections with non-standard names', 'SignatureSources': ['', 'section name: .Stone']}]}}|
   
 Example output:
 
@@ -264,36 +254,30 @@ Example output:
 {
   "full_report": {
     "Full Details": {
-      "Summary": {
-        "Status": "COMPLETED",
-        "Category": "EXECS",
-        "FileType": "EXE",
-        "StartTime": 1520333667,
-        "Duration": 520797
-      },
       "Classification": {
-        "Type": "MALICIOUS",
         "Category": "ADWARE",
+        "DetectedMalware": "Adware.Generic.48627",
         "Score": 76,
-        "DetectedMalware": "Adware.Generic.48627"
+        "Type": "MALICIOUS"
       },
       "FileProperties": {
-        "FileType": "EXE",
-        "FileSize": 23323,
-        "MD5": "afcb861561f7416c5e852001d31f8921",
-        "SHA1": "1dce4aacf1e17418ebc05d6d2e9034a8271185f9",
-        "Sha256": "fc9003461e52006be0188e1fc1b7656c81e930ec78a93eb7ab21fdff3e566314",
-        "Issuer": "",
         "DigitalCerificate": "",
+        "FileSize": 23323,
+        "FileType": "EXE",
+        "Issuer": "",
+        "MD5": "afcb861561f7416c5e852001d31f8921",
+        "RootCA": "",
+        "SHA1": "1dce4aacf1e17418ebc05d6d2e9034a8271185f9",
         "SSDeep": "384:YcBdTF8O3Fnp7JWmbiV2SBsJmnnB76RF/ewf4XXI9volVL9EFlfnvY1NvJml7Wc:lZF8OXJWmbLW0mnnp6X6rfLC3Osl6c",
-        "RootCA": ""
+        "Sha256": "fc9003461e52006be0188e1fc1b7656c81e930ec78a93eb7ab21fdff3e566314"
       },
-      "SystemSummary": [
+      "Persistence": [
         {
           "Risk": "LOW",
-          "Signature": "Binary contains paths to debug symbols",
+          "Signature": "PE file contains sections with non-standard names",
           "SignatureSources": [
-            "c:\\Work\\w32_not_a_virus\\Not_a_virus\\Not_a_virus\\Release\\Not_a_virus.pdb source: 5A9E736319EE0000_5A9E736E00000000.exe"
+            "",
+            "section name: .Stone"
           ]
         }
       ],
@@ -306,13 +290,19 @@ Example output:
           ]
         }
       ],
-      "Persistence": [
+      "Summary": {
+        "Category": "EXECS",
+        "Duration": 520797,
+        "FileType": "EXE",
+        "StartTime": 1520333667,
+        "Status": "COMPLETED"
+      },
+      "SystemSummary": [
         {
           "Risk": "LOW",
-          "Signature": "PE file contains sections with non-standard names",
+          "Signature": "Binary contains paths to debug symbols",
           "SignatureSources": [
-            "",
-            "section name: .Stone"
+            "Not_a_virus.pdb source: 5A9E736319EE0000_5A9E736E00000000.exe"
           ]
         }
       ]
@@ -323,7 +313,7 @@ Example output:
 
 #### Get URL Category by Name
 
-This action gets the URL category information for the specified name.
+This action is used to get the URL category information for the specified name
 
 ##### Input
 
@@ -337,7 +327,7 @@ Example input:
 ```
 {
   "customUrlCategoryName": "Custom Category Example",
-  "urlCategoryName": "Travel"
+  "urlCategoryName": "Adult Sex Education"
 }
 ```
 
@@ -345,68 +335,68 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|urlCategory|urlCategory|False|Information about the given URL category|{}|
+|urlCategory|urlCategory|False|Information about the given URL category|{'id': 'CUSTOM_01', 'configuredName': 'Custom Category Example', 'superCategory': 'USER_DEFINED', 'keywords': ['key1'], 'keywordsRetainingParentCategory': ['test1'], 'urls': ['example.com'], 'dbCategorizedUrls': [], 'customCategory': True, 'scopes': [{'type': 'ORGANIZATION'}, {'type': 'DEPARTMENT', 'scopeEntities': [{'id': 12345678, 'name': 'Test Department'}]}, {'type': 'LOCATION', 'scopeEntities': [{'id': 12345678, 'name': 'Location Example'}]}, {'scopeGroupMemberEntities': [], 'type': 'LOCATION', 'scopeEntities': [{'id': 12345678, 'name': 'Location Group Example'}]}], 'editable': True, 'description': 'Example Description', 'type': 'URL_CATEGORY', 'val': 123, 'customUrlsCount': 1, 'urlsRetainingParentCategoryCount': 0, 'customIpRangesCount': 0, 'ipRangesRetainingParentCategoryCount': 0}|
   
 Example output:
 
 ```
 {
   "urlCategory": {
-    "id": "CUSTOM_01",
     "configuredName": "Custom Category Example",
-    "superCategory": "USER_DEFINED",
+    "customCategory": true,
+    "customIpRangesCount": 0,
+    "customUrlsCount": 1,
+    "dbCategorizedUrls": [],
+    "description": "Example Description",
+    "editable": true,
+    "id": "CUSTOM_01",
+    "ipRangesRetainingParentCategoryCount": 0,
     "keywords": [
       "key1"
     ],
     "keywordsRetainingParentCategory": [
       "test1"
     ],
-    "urls": [
-      "example.com"
-    ],
-    "dbCategorizedUrls": [],
-    "customCategory": true,
     "scopes": [
       {
         "type": "ORGANIZATION"
       },
       {
-        "type": "DEPARTMENT",
         "scopeEntities": [
           {
             "id": 12345678,
             "name": "Test Department"
           }
-        ]
+        ],
+        "type": "DEPARTMENT"
       },
       {
-        "type": "LOCATION",
         "scopeEntities": [
           {
             "id": 12345678,
             "name": "Location Example"
           }
-        ]
+        ],
+        "type": "LOCATION"
       },
       {
-        "scopeGroupMemberEntities": [],
-        "type": "LOCATION",
         "scopeEntities": [
           {
             "id": 12345678,
             "name": "Location Group Example"
           }
-        ]
+        ],
+        "scopeGroupMemberEntities": [],
+        "type": "LOCATION"
       }
     ],
-    "editable": true,
-    "description": "Example Description",
+    "superCategory": "USER_DEFINED",
     "type": "URL_CATEGORY",
-    "val": 123,
-    "customUrlsCount": 1,
+    "urls": [
+      "example.com"
+    ],
     "urlsRetainingParentCategoryCount": 0,
-    "customIpRangesCount": 0,
-    "ipRangesRetainingParentCategoryCount": 0
+    "val": 123
   }
 }
 ```
@@ -442,7 +432,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|users|[]user|False|List of organization users|[]|
+|users|[]user|False|List of organization users|[{"id": 123456789, "name": "Sample user", "email": "user@example.com", "groups": [{"id": 123456789, "name": "Test Group"}], "department": {"id": 123456789, "name": "Test Department"}, "adminUser": False, "isNonEditable": False, "deleted": False}]|
   
 Example output:
 
@@ -450,8 +440,12 @@ Example output:
 {
   "users": [
     {
-      "id": 123456789,
-      "name": "Sample user",
+      "adminUser": false,
+      "deleted": false,
+      "department": {
+        "id": 123456789,
+        "name": "Test Department"
+      },
       "email": "user@example.com",
       "groups": [
         {
@@ -459,13 +453,9 @@ Example output:
           "name": "Test Group"
         }
       ],
-      "department": {
-        "id": 123456789,
-        "name": "Test Department"
-      },
-      "adminUser": false,
+      "id": 123456789,
       "isNonEditable": false,
-      "deleted": false
+      "name": "Sample user"
     }
   ]
 }
@@ -496,7 +486,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|url_categorization|[]url_categorization|True|Information about given URLs|None|
+|url_categorization|[]url_categorization|True|Information about given URLs|[{"url": "example.com", "urlClassifications": ["REFERENCE_SITES", "INTERNET_SERVICES"], "urlClassificationsWithSecurityAlert": []}, {"url": "rapid7.com", "urlClassifications": ["CORPORATE_MARKETING", "PROFESSIONAL_SERVICES"], "urlClassificationsWithSecurityAlert": []}]|
   
 Example output:
 
@@ -525,7 +515,7 @@ Example output:
 
 #### Update URLs of URL Category
 
-This action adds or removes URLs for the specified URL category.
+This action is used to adds or removes URLs for the specified URL category
 
 ##### Input
 
@@ -542,7 +532,7 @@ Example input:
 {
   "action": "Add to the list",
   "customUrlCategoryName": "Custom Category Example",
-  "urlCategoryName": "Travel",
+  "urlCategoryName": "Adult Sex Education",
   "urlList": [
     "example.com",
     "example1.com"
@@ -554,68 +544,68 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|urlCategory|urlCategory|False|Information about the updated URL category|{}|
+|urlCategory|urlCategory|False|Information about the updated URL category|{'id': 'CUSTOM_01', 'configuredName': 'Custom Category Example', 'superCategory': 'USER_DEFINED', 'keywords': ['key1'], 'keywordsRetainingParentCategory': ['test1'], 'urls': ['example.com'], 'dbCategorizedUrls': [], 'customCategory': True, 'scopes': [{'type': 'ORGANIZATION'}, {'type': 'DEPARTMENT', 'scopeEntities': [{'id': 12345678, 'name': 'Test Department'}]}, {'type': 'LOCATION', 'scopeEntities': [{'id': 12345678, 'name': 'Location Example'}]}, {'scopeGroupMemberEntities': [], 'type': 'LOCATION_GROUP', 'scopeEntities': [{'id': 12345678, 'name': 'Location Group Example'}]}], 'editable': True, 'description': 'Example Description', 'type': 'URL_CATEGORY', 'val': 123, 'customUrlsCount': 1, 'urlsRetainingParentCategoryCount': 0, 'customIpRangesCount': 0, 'ipRangesRetainingParentCategoryCount': 0}|
   
 Example output:
 
 ```
 {
   "urlCategory": {
-    "id": "CUSTOM_01",
     "configuredName": "Custom Category Example",
-    "superCategory": "USER_DEFINED",
+    "customCategory": true,
+    "customIpRangesCount": 0,
+    "customUrlsCount": 1,
+    "dbCategorizedUrls": [],
+    "description": "Example Description",
+    "editable": true,
+    "id": "CUSTOM_01",
+    "ipRangesRetainingParentCategoryCount": 0,
     "keywords": [
       "key1"
     ],
     "keywordsRetainingParentCategory": [
       "test1"
     ],
-    "urls": [
-      "example.com"
-    ],
-    "dbCategorizedUrls": [],
-    "customCategory": true,
     "scopes": [
       {
         "type": "ORGANIZATION"
       },
       {
-        "type": "DEPARTMENT",
         "scopeEntities": [
           {
             "id": 12345678,
             "name": "Test Department"
           }
-        ]
+        ],
+        "type": "DEPARTMENT"
       },
       {
-        "type": "LOCATION",
         "scopeEntities": [
           {
             "id": 12345678,
             "name": "Location Example"
           }
-        ]
+        ],
+        "type": "LOCATION"
       },
       {
-        "scopeGroupMemberEntities": [],
-        "type": "LOCATION_GROUP",
         "scopeEntities": [
           {
             "id": 12345678,
             "name": "Location Group Example"
           }
-        ]
+        ],
+        "scopeGroupMemberEntities": [],
+        "type": "LOCATION_GROUP"
       }
     ],
-    "editable": true,
-    "description": "Example Description",
+    "superCategory": "USER_DEFINED",
     "type": "URL_CATEGORY",
-    "val": 123,
-    "customUrlsCount": 1,
+    "urls": [
+      "example.com"
+    ],
     "urlsRetainingParentCategoryCount": 0,
-    "customIpRangesCount": 0,
-    "ipRangesRetainingParentCategoryCount": 0
+    "val": 123
   }
 }
 ```
@@ -782,11 +772,15 @@ Example output:
 
 
 ## Troubleshooting
-  
-*This plugin does not contain a troubleshooting.*
+
+* To locate your base URI and key:
+ 1. Log in to the ZIA Admin Portal using your admin credentials.
+ 2. Go to **Administration > API Key Management**.
+* In order to view the API Key Management page, the admin must be assigned an admin role that includes the Authentication Configuration functional scope. In the **Organization API Key** tab, the base URI and key details are displayed within the table. For more information see the [Zscaler getting started guide](https://help.zscaler.com/zia/api-getting-started) on obtaining the API key and base URL.
 
 # Version History
 
+* 1.5.2 - SDK Bump to 6.3.10 | Update connection test
 * 1.5.1 - Requirements.txt bumped | SDK Bump to 6.1.4
 * 1.5.0 - Add Actions: `Create User`, `Delete User`, `Get Users`, `Get URL Category by Name`, `Update URLs of URL Category`
 * 1.4.0 - Add Activate Configuration input in Blacklist URL action

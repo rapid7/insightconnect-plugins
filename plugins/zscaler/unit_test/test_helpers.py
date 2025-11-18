@@ -1,11 +1,13 @@
 import sys
 import os
+
+sys.path.append(os.path.abspath("../"))
+
 from unittest import TestCase
-from unittest.mock import patch
 from parameterized import parameterized
 
 from insightconnect_plugin_runtime.exceptions import PluginException
-from unit_test.util import Util
+from util import Util
 from icon_zscaler.util.constants import Assistance, Cause
 from icon_zscaler.util.helpers import (
     clean_dict,
@@ -18,8 +20,6 @@ from icon_zscaler.util.helpers import (
     find_custom_url_category_by_name,
     find_url_category_by_id,
 )
-
-sys.path.append(os.path.abspath("../"))
 
 
 class TestHelpers(TestCase):
