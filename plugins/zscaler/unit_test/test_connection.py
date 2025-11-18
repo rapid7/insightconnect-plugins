@@ -51,9 +51,16 @@ class TestConnection(TestCase):
     def test_connection_unauthorized(self, _mock_get: Mock) -> None:
         with self.assertRaises(ConnectionTestException) as error:
             self.connection.client.get_status = Mock(
-                side_effect=PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data="{\"code\":\"AUTHENTICATION_FAILED\",\"message\":\"400 - incorrect_user_or_password\"}")
+                side_effect=PluginException(
+                    preset=PluginException.Preset.USERNAME_PASSWORD,
+                    data='{"code":"AUTHENTICATION_FAILED","message":"400 - incorrect_user_or_password"}',
+                )
             )
             self.connection.test()
         self.assertEqual(error.exception.cause, PluginException.causes[PluginException.Preset.USERNAME_PASSWORD])
-        self.assertEqual(error.exception.assistance, PluginException.assistances[PluginException.Preset.USERNAME_PASSWORD])
-        self.assertEqual(error.exception.data, "{\"code\":\"AUTHENTICATION_FAILED\",\"message\":\"400 - incorrect_user_or_password\"}")
+        self.assertEqual(
+            error.exception.assistance, PluginException.assistances[PluginException.Preset.USERNAME_PASSWORD]
+        )
+        self.assertEqual(
+            error.exception.data, '{"code":"AUTHENTICATION_FAILED","message":"400 - incorrect_user_or_password"}'
+        )
