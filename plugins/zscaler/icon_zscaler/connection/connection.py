@@ -34,13 +34,13 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 self._raise_invalid_response("Empty response from Zscaler API")
 
             try:
-                status_data = get_status_resp.json()
-                if status_data.get("status") is None:
+                status = get_status_resp.json().get("status")
+                if status is None:
                     self._raise_invalid_response("Missing 'status' field in Zscaler API response")
             except ValueError:
                 self._raise_invalid_response("Invalid JSON response from Zscaler API")
 
-            return {"success": get_status_resp.status_code == 200}
+            return {"success": True}
         except PluginException as e:
             raise ConnectionTestException(cause=e.cause, assistance=e.assistance, data=e.data)
 

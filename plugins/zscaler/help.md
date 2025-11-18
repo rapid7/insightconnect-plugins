@@ -773,7 +773,10 @@ Example output:
 
 ## Troubleshooting
 
-* To locate your base URI and key: 1. Log in to the ZIA Admin Portal using your admin credentials. 2. Go to **Administration > API Key Management**. In order to view the API Key Management page, the admin must be assigned an admin role that includes the Authentication Configuration functional scope. In the **Organization API Key** tab, the base URI and key details are displayed within the table. For more information see the [Zscaler getting started guide](https://help.zscaler.com/zia/api-getting-started) on obtaining the API key and base URL.
+* To locate your base URI and key:
+ 1. Log in to the ZIA Admin Portal using your admin credentials.
+ 2. Go to **Administration > API Key Management**.
+* In order to view the API Key Management page, the admin must be assigned an admin role that includes the Authentication Configuration functional scope. In the **Organization API Key** tab, the base URI and key details are displayed within the table. For more information see the [Zscaler getting started guide](https://help.zscaler.com/zia/api-getting-started) on obtaining the API key and base URL.
 
 # Version History
 
