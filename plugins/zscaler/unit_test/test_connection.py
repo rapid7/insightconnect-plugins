@@ -1,6 +1,7 @@
+import os
 import sys
 
-sys.path.append("../")
+sys.path.append(os.path.abspath("../"))
 
 import logging
 from unittest import TestCase
