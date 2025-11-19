@@ -92,63 +92,63 @@ class Util:
         if kwargs.get("url") == f"{API}/oauth/token":
             return MockResponse(200, "authenticate.json.resp")
         if kwargs.get("url") == f"{API}/api/directory/add-group-member":
-            if "test4@rapid7.com" in kwargs.get(DATA_FIELD):
+            if "test4@rapid7.com" in json.dumps(kwargs.get("json")):
                 return MockResponse("add_group_member.json.resp")
-            elif "bad@rapid7.com" in kwargs.get(DATA_FIELD):
+            elif "bad@rapid7.com" in json.dumps(kwargs.get("json")):
                 return MockResponse("add_group_member_bad.json.resp")
         elif kwargs.get("url") == f"{API}/api/policy/blockedsenders/create-policy":
-            if "some test policy" in kwargs.get(DATA_FIELD):
+            if "some test policy" in json.dumps(kwargs.get("json")):
                 return MockResponse("create_blocked_sender_policy.json.resp")
         elif kwargs.get("url") == f"{API}/api/policy/blockedsenders/delete-policy":
-            if "1234" in kwargs.get(DATA_FIELD):
+            if "1234" in json.dumps(kwargs.get("json")):
                 return MockResponse("delete_blocked_sender_policy.json.resp")
             else:
                 return MockResponse("delete_blocked_sender_policy_bad.json.resp")
         elif kwargs.get("url") == f"{API}/api/message-finder/search":
             return MockResponse("search_message_tracking.json.resp")
         elif kwargs.get("url") == f"{API}/api/ttp/url/create-managed-url":
-            if "https://www.test.net/" in kwargs.get(DATA_FIELD):
+            if "https://www.test.net/" in json.dumps(kwargs.get("json")):
                 return MockResponse("create_managed_url.json.resp")
-            if "https://www.bad.net/" in kwargs.get(DATA_FIELD):
+            if "https://www.bad.net/" in json.dumps(kwargs.get("json")):
                 return MockResponse("create_managed_url_bad.json.resp")
         elif kwargs.get("url") == f"{API}/api/ttp/url/decode-url":
-            if "https://protect-xx.mimecast.com/" in kwargs.get(DATA_FIELD):
+            if "https://protect-xx.mimecast.com/" in json.dumps(kwargs.get("json")):
                 return MockResponse("decode_url.json.resp")
         elif kwargs.get("url") == f"{API}/api/directory/remove-group-member":
-            if "test4@rapid7.com" in kwargs.get(DATA_FIELD):
+            if "test4@rapid7.com" in json.dumps(kwargs.get("json")):
                 return MockResponse("delete_group_member.json.resp")
-            elif "bad@rapid7.com" in kwargs.get(DATA_FIELD):
+            elif "bad@rapid7.com" in json.dumps(kwargs.get("json")):
                 return MockResponse("delete_group_member_bad.json.resp")
         elif kwargs.get("url") == f"{API}/api/ttp/url/delete-managed-url":
-            if "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3I" in kwargs.get(DATA_FIELD):
+            if "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3I" in json.dumps(kwargs.get("json")):
                 return MockResponse("delete_managed_url.json.resp")
-            elif "bad_id" in kwargs.get(DATA_FIELD):
+            elif "bad_id" in json.dumps(kwargs.get("json")):
                 return MockResponse("delete_managed_url_bad.json.resp")
         elif kwargs.get("url") == f"{API}/api/directory/find-groups":
-            if "test_query" in kwargs.get(DATA_FIELD):
+            if "test_query" in json.dumps(kwargs.get("json")):
                 return MockResponse("find_groups_empty_groups.json.resp")
-            elif "500" in kwargs.get(DATA_FIELD):
+            elif "500" in json.dumps(kwargs.get("json")):
                 return MockResponse("find_groups_500.json.resp")
-            elif "403" in kwargs.get(DATA_FIELD):
+            elif "403" in json.dumps(kwargs.get("json")):
                 return MockResponse("find_groups_403.json.resp")
-            elif "404" in kwargs.get(DATA_FIELD):
+            elif "404" in json.dumps(kwargs.get("json")):
                 return MockResponse("find_groups_404.json.resp")
             else:
                 return MockResponse("find_groups.json.resp")
         elif kwargs.get("url") == f"{API}/api/audit/get-audit-events":
             return MockResponse("get_audit_events.json.resp")
         elif kwargs.get("url") == f"{API}/api/ttp/url/get-all-managed-urls":
-            if "test_domain" in kwargs.get(DATA_FIELD):
+            if "test_domain" in json.dumps(kwargs.get("json")):
                 return MockResponse("get_managed_url_empty_response.json.resp")
             else:
                 return MockResponse("get_managed_url.json.resp")
         elif kwargs.get("url") == f"{API}/api/ttp/url/get-logs":
             return MockResponse("get_ttp_url_logs.json.resp")
         elif kwargs.get("url") == f"{API}/api/managedsender/permit-or-block-sender":
-            if "permit" in kwargs.get(DATA_FIELD):
+            if "permit" in json.dumps(kwargs.get("json")):
                 return MockResponse("permit_or_block_sender.json.resp")
-            elif "block" in kwargs.get(DATA_FIELD):
-                if "bad_email" in kwargs.get(DATA_FIELD):
+            elif "block" in json.dumps(kwargs.get("json")):
+                if "bad_email" in json.dumps(kwargs.get("json")):
                     return MockResponse("permit_or_block_sender_bad.json.resp")
                 else:
                     return MockResponse("block_sender.json.resp")
