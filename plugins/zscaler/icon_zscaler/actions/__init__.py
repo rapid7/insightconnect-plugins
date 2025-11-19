@@ -17,4 +17,3 @@ from .create_user.action import CreateUser
 from .get_url_category_by_name.action import GetUrlCategoryByName
 
 from .update_urls_of_url_category.action import UpdateUrlsOfUrlCategory
-
