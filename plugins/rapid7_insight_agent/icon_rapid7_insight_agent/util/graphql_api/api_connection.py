@@ -225,11 +225,11 @@ class ApiConnection:
             with requests.Session() as session:
                 prepared_request = session.prepare_request(request=_request)
                 result = session.send(prepared_request)
-        except Exception:
+        except Exception as e:
             raise PluginException(
                 cause="Error connecting to the Insight Agent API.",
                 assistance="Please check your Region and API key.\n",
-                data=result.text,
+                data=str(e),
             )
 
         results_object = result.json()
