@@ -185,9 +185,6 @@ class ApiConnection:
         """
         self.endpoint = self._setup_endpoint(region_string)
 
-        self.session = requests.Session()
-        self.session.headers = self._get_headers()
-
         self.org_key = self._get_org_key()
         self.logger.info(f"Received org key: ********-****-****-****-*******{self.org_key[-5:]}")
 
@@ -223,9 +220,11 @@ class ApiConnection:
         :param payload: dict
         :return: dict
         """
-        result = self.session.post(self.endpoint, json=payload)
+        _request = requests.Request(method="POST", headers=self._get_headers(), url=self.endpoint, json=payload)
         try:
-            result.raise_for_status()
+            with requests.Session() as session:
+                prepared_request = session.prepare_request(request=_request)
+                result = session.send(prepared_request)
         except Exception:
             raise PluginException(
                 cause="Error connecting to the Insight Agent API.",
