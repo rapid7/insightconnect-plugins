@@ -17,7 +17,7 @@ from icon_rapid7_insight_agent.actions.get_agent_details import GetAgentDetails
 from icon_rapid7_insight_agent.actions.get_agent_details.schema import Input
 
 
-@patch("requests.sessions.Session.post", side_effect=Util.mocked_request)
+@patch("requests.sessions.Session.send", side_effect=Util.mocked_request)
 class TestGetAgentDetails(TestCase):
     @parameterized.expand(Util.load_json("parameters/get_agents_details.json.resp").get("parameters"))
     def test_get_agent_details(self, mock_request: MagicMock, name: str, agent: str, expect: Dict[str, Any]) -> None:
