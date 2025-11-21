@@ -28,7 +28,8 @@ class Util:
     @staticmethod
     def load_json(filename):
         with open(
-            (os.path.join(os.path.dirname(os.path.realpath(__file__)), filename)), encoding=DEFAULT_ENCODING
+            (os.path.join(os.path.dirname(os.path.realpath(__file__)), filename)),
+            encoding=DEFAULT_ENCODING,
         ) as file:
             return json.loads(file.read())
 
@@ -59,7 +60,8 @@ class Util:
         elif variables.get("orgId") == "9de5069c5afe602b2ea0a04b66beb2c0":
             return MockResponse("get_agent_details.resp")
         elif (
-            query == "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress location { city region countryName countryCode continent } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }"
+            query
+            == "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress location { city region countryName countryCode continent } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }"
         ):
             return MockResponse("get_all_agents_by_ip.resp")
         elif variables.get("agentID") == "goodID":
@@ -69,17 +71,22 @@ class Util:
         elif variables.get("agentID", {}) == "goodIDQuarantine":
             return MockResponse("quarantine.resp")
         elif (
-            variables.get("agentID") == "a1cfb273EQWE12312EDSAXZc8e7d46a9e2a0e2dae01a0ce" and
-            query == "query( $orgID: String! $agentID: String! ) { assets( orgId: $orgID ids: [$agentID] ){ agent { id quarantineState{ currentState } agentStatus } } }"
+            variables.get("agentID")
+            == "a1cfb273EQWE12312EDSAXZc8e7d46a9e2a0e2dae01a0ce"
+            and query
+            == "query( $orgID: String! $agentID: String! ) { assets( orgId: $orgID ids: [$agentID] ){ agent { id quarantineState{ currentState } agentStatus } } }"
         ):
             return MockResponse("unquarantine_check.resp")
         elif (
-            variables.get("agentID") == "a1cfb273EQWE12312EDSAXZc8e7d46a9e2a0e2dae01a0ce" and
-            query == "mutation( $orgID:String! $agentID:String!) { unquarantineAssets( orgId:$orgID assetIds: [$agentID] ) { results { assetId failed } } }"
+            variables.get("agentID")
+            == "a1cfb273EQWE12312EDSAXZc8e7d46a9e2a0e2dae01a0ce"
+            and query
+            == "mutation( $orgID:String! $agentID:String!) { unquarantineAssets( orgId:$orgID assetIds: [$agentID] ) { results { assetId failed } } }"
         ):
             return MockResponse("unquarantine.resp")
         elif (
-            variables.get("agentID") == "a1cfb273EQWE12312EDSAXZc8e7d46a9e2a0e2dae01a0ce"
+            variables.get("agentID")
+            == "a1cfb273EQWE12312EDSAXZc8e7d46a9e2a0e2dae01a0ce"
         ):
             return MockResponse("quarantine.resp")
         elif variables.get("agentID") == "badIDQuarantine":
