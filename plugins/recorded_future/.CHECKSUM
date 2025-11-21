@@ -1,7 +1,7 @@
 {
-	"spec": "e5474a410eb1f9ce5b1c021cc0f917ee",
-	"manifest": "1bc88ec7dbee922bf73279fc9a7a4ecb",
-	"setup": "fd6a4482efb7661b61ce92fb21fa1b5f",
+	"spec": "c3eff595a9fa35f67cf5f5319a6275aa",
+	"manifest": "62586869bb0c6ab2bcf2e1ceba00effa",
+	"setup": "27bd2c0d835abefcf863fb496440c26c",
 	"schemas": [
 		{
 			"identifier": "download_IP_addresses_risk_list/schema.py",
