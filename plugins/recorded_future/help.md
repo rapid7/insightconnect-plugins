@@ -1,10 +1,10 @@
 # Description
 
-[Recorded Future](https://www.recordedfuture.com/) arms threat analysts, security operators, and incident responders to rapidly connect the dots and reveal unknown threats. Using the Recorded Future plugin for Rapid7 InsightConnect, users can search domain lists, entity lists, and more.
+[Recorded Future](https://www.recordedfuture.com/) arms threat analysts, security operators, and incident responders to rapidly connect the dots and reveal unknown threats. Using the plugin, users can search domain lists, entity lists, and more.
 
-Use Recorded Future within an automation workflow to quickly assist with threat analysis, incident response, and vulnerability management.
+The plugin enables searching domain lists, entity lists, and more to assist with threat analysis, incident response, and vulnerability management.
 
-Note: When a plugin action that causes a file to be downloaded is invoked, the file data is parsed internally and returned in the [STIX](https://stixproject.github.io/about/) format
+Note: Downloaded files are returned in [STIX](https://stixproject.github.io/about/) format.
 
 # Key Features
 
@@ -2576,7 +2576,7 @@ Example output:
 
 # Version History
 
-* 7.0.1 - Addressed Snyk Vulnerability | Updated SDK to the latest version (6.3.10)
+* 7.0.1 - Updated dependencies | Updated SDK to the latest version (6.3.10)
 * 7.0.0 - Fixed schemas | Updated the SDK to latest version | Refreshed with latest plugin tooling | Added Memory Error and Timeout Error handling for Risk Lists | Added `Risk List GZip` output to Risk List actions
 * 6.0.1 - Update Pyyaml to version 6.0.0
 * 6.0.0 - Handle 404 Not Found Error | Create unit_tests | Update example outputs in help.md | Update keywords | Update key features
