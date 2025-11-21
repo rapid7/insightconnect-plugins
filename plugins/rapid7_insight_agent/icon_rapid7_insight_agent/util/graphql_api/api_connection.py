@@ -461,6 +461,44 @@ class ApiConnection:
 
         return has_next_page, next_cursor, next_agents
 
+    def _is_ip_match(self, agent: dict, agent_input: str) -> bool:
+        """
+        Check if the agent's primary IP address matches the input.
+
+        :param agent: Agent dictionary
+        :param agent_input: IP address to match
+        :return: True if IP matches, False otherwise
+        """
+        return agent_input == agent.get("host", {}).get("primaryAddress", {}).get("ip")
+
+    def _is_hostname_match(self, agent: dict, agent_input: str) -> bool:
+        """
+        Check if the agent's ID or any of its hostnames match the input.
+
+        :param agent: Agent dictionary
+        :param agent_input: Hostname or ID to match
+        :return: True if hostname or ID matches, False otherwise
+        """
+        if agent_input == agent.get("host", {}).get("id"):
+            return True
+        for host_name in agent.get("host", {}).get("hostNames", []):
+            if agent_input.lower() == host_name.get("name", "").lower():
+                return True
+        return False
+
+    def _is_mac_match(self, agent: dict, agent_input: str) -> bool:
+        """
+        Check if the agent's MAC address matches the input, ignoring separators.
+
+        :param agent: Agent dictionary
+        :param agent_input: MAC address to match
+        :return: True if MAC matches, False otherwise
+        """
+        stripped_input_mac = agent_input.replace("-", "").replace(":", "")
+        stripped_target_mac = agent.get("host", {}).get("primaryAddress", {}).get("mac", "").replace("-", "").replace(
+            ":", "")
+        return stripped_input_mac == stripped_target_mac
+
     def _find_agent_in_agents(self, agents: [dict], agent_input: str, agent_type: str) -> Optional[dict]:  # noqa: C901
         """
         Given a list of agent objects, find the agent that matches our input.
@@ -479,22 +517,15 @@ class ApiConnection:
         for agent in agents:
             if agent and len(agent) and agent.get("host"):  # Some hosts come back None...need to check for that
                 if agent_type == agent_typer.IP_ADDRESS:
-                    if agent_input == agent.get("host", {}).get("primaryAddress", {}).get("ip"):
+                    if self._is_ip_match(agent, agent_input):
                         return agent
                 elif agent_type == agent_typer.HOSTNAME:
                     # In this case, we have an alpha/numeric value. This could be the ID or the Hostname. Need to check both
-                    if agent_input == agent.get("host", {}).get("id"):
+                    if self._is_hostname_match(agent, agent_input):
                         return agent
-                    for host_name in agent.get("host", {}).get("hostNames"):
-                        if agent_input.lower() == host_name.get("name", "").lower():
-                            return agent
                 elif agent_type == agent_typer.MAC_ADDRESS:
                     # MAC addresses can come in with : or - as a separator, remove all of it and compare
-                    stripped_input_mac = agent_input.replace("-", "").replace(":", "")
-                    stripped_target_mac = (
-                        agent.get("host", {}).get("primaryAddress", {}).get("mac", "").replace("-", "").replace(":", "")
-                    )
-                    if stripped_input_mac == stripped_target_mac:
+                    if self._is_mac_match(agent, agent_input):
                         return agent
                 else:
                     raise PluginException(
