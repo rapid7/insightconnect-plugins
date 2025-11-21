@@ -71,23 +71,18 @@ class Util:
         elif variables.get("agentID", {}) == "goodIDQuarantine":
             return MockResponse("quarantine.resp")
         elif (
-            variables.get("agentID")
-            == "a1cfb273EQWE12312EDSAXZc8e7d46a9e2a0e2dae01a0ce"
+            variables.get("agentID") == "a1cfb273EQWE12312EDSAXZc8e7d46a9e2a0e2dae01a0ce"
             and query
             == "query( $orgID: String! $agentID: String! ) { assets( orgId: $orgID ids: [$agentID] ){ agent { id quarantineState{ currentState } agentStatus } } }"
         ):
             return MockResponse("unquarantine_check.resp")
         elif (
-            variables.get("agentID")
-            == "a1cfb273EQWE12312EDSAXZc8e7d46a9e2a0e2dae01a0ce"
+            variables.get("agentID") == "a1cfb273EQWE12312EDSAXZc8e7d46a9e2a0e2dae01a0ce"
             and query
             == "mutation( $orgID:String! $agentID:String!) { unquarantineAssets( orgId:$orgID assetIds: [$agentID] ) { results { assetId failed } } }"
         ):
             return MockResponse("unquarantine.resp")
-        elif (
-            variables.get("agentID")
-            == "a1cfb273EQWE12312EDSAXZc8e7d46a9e2a0e2dae01a0ce"
-        ):
+        elif variables.get("agentID") == "a1cfb273EQWE12312EDSAXZc8e7d46a9e2a0e2dae01a0ce":
             return MockResponse("quarantine.resp")
         elif variables.get("agentID") == "badIDQuarantine":
             return MockResponse("quarantine_bad.resp")
