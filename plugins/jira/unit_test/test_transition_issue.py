@@ -14,7 +14,7 @@ from komand_jira.connection import Connection
 
 
 class MockIssue:
-    def __init__(self, id):
+    def __init__(self, id) -> None:
         fields_dict = {
             "resolution": namedtuple("AnObject", ["name"])(["new years"]),
             "reporter": namedtuple("AnObject", ["displayName"])(["Bob Smith"]),
@@ -33,12 +33,12 @@ class MockIssue:
         self.key = "12345"
         self.fields = namedtuple("ObjectName", fields_dict.keys())(*fields_dict.values())
 
-    def permalink(self):
+    def permalink(self) -> str:
         return "https://example-demo.atlassian.net/browse/ISSUE-ID-1234"
 
 
 class MockClient:
-    def __init__(self):
+    def __init__(self) -> None:
         self.client = "some fake thing"
 
     def issue(self, id):
@@ -47,14 +47,14 @@ class MockClient:
         else:
             return None
 
-    def transition_issue(self, issue, transition, comment, fields):
+    def transition_issue(self, issue, transition, comment, fields) -> str:
         if issue.id == "12345":
             return "Success"
         raise JIRAError("Key error")
 
 
 class TestTransitionIssue(TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         self.test_conn = Connection()
         self.test_action = TransitionIssue()
 
@@ -62,7 +62,7 @@ class TestTransitionIssue(TestCase):
         self.test_conn.logger = test_logger
         self.test_action.logger = test_logger
 
-    def test_transition_issue(self):
+    def test_transition_issue(self) -> None:
         action_params = {
             "id": "12345",
             "transition": "something",
@@ -77,7 +77,7 @@ class TestTransitionIssue(TestCase):
 
         self.assertTrue(result.get("success"))
 
-    def test_transition_issue_id_not_found(self):
+    def test_transition_issue_id_not_found(self) -> None:
         action_params = {
             "id": "NOT 12345",
         }
@@ -88,7 +88,7 @@ class TestTransitionIssue(TestCase):
         with self.assertRaises(PluginException):
             self.test_action.run(action_params)
 
-    def test_transition_issue_id_throws_key_error(self):
+    def test_transition_issue_id_throws_key_error(self) -> None:
         action_params = {
             "id": "10000",
             "transition": "something",

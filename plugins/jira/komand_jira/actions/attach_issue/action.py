@@ -15,18 +15,17 @@ class AttachIssue(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        """Add attachment to issue"""
-        id_ = params[Input.ID]
-        issue = self.connection.client.issue(id=id_)
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        id_ = params.get(Input.ID)
+        attachment_filename = params.get(Input.ATTACHMENT_FILENAME, "")
+        attachment_bytes = params.get(Input.ATTACHMENT_BYTES, "")
+        # END INPUT BINDING - DO NOT REMOVE
 
+        issue = self.connection.client.issue(id=id_)
         if not issue:
             raise PluginException(
                 cause=f"No issue found with ID: {id_}.",
                 assistance="Please provide a valid issue ID.",
             )
 
-        return {
-            Output.ID: self.connection.rest_client.add_attachment(
-                issue.key, params.get(Input.ATTACHMENT_FILENAME), params.get(Input.ATTACHMENT_BYTES)
-            )
-        }
+        return {Output.ID: self.connection.rest_client.add_attachment(issue.key, attachment_filename, attachment_bytes)}

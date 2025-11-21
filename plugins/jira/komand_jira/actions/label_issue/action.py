@@ -15,24 +15,30 @@ class LabelIssue(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        """Add label to issue"""
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        issue_id = params.get(Input.ID, "")
+        labels = params.get(Input.LABEL, "").split(",")
+        # END INPUT BINDING - DO NOT REMOVE
 
-        issue = self.connection.client.issue(id=params[Input.ID])
+        # Retrieve issues from Jira, depending on whether it's Cloud or Server
+        if not self.connection.is_cloud:
+            issue = self.connection.client.issue(id=issue_id)
+        else:
+            issue = self.connection.rest_client.get_issue(issue_id=issue_id)
 
         if not issue:
             raise PluginException(
-                cause=f"No issue found with ID: {params[Input.ID]}.",
+                cause=f"No issue found with ID: {issue_id}.",
                 assistance="Please provide a valid issue ID.",
             )
 
-        labels = params[Input.LABEL].split(",")
-
-        for label in labels:
-            if label not in issue.fields.labels:
-                issue.fields.labels.append(label)
-
-        self.logger.info("Adding labels to issue %s: %s", params[Input.ID], issue.fields.labels)
-
-        issue.update(fields={"labels": issue.fields.labels})
-
+        # Add labels to the issue
+        self.logger.info(f"Adding labels to issue {issue_id}: {labels}")
+        if not self.connection.is_cloud:
+            for label in labels:
+                if label not in issue.fields.labels:
+                    issue.fields.labels.append(label)
+            issue.update(fields={"labels": issue.fields.labels})
+        else:
+            self.connection.rest_client.edit_issue(issue_id=issue_id, issue_fields={"labels": labels}, notify=False)
         return {Output.SUCCESS: True}
