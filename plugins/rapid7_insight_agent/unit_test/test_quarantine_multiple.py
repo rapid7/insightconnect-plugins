@@ -16,7 +16,7 @@ from icon_rapid7_insight_agent.actions.quarantine_multiple.action import Quarant
 from icon_rapid7_insight_agent.actions.quarantine_multiple.schema import Input
 
 
-@patch("requests.sessions.Session.post", side_effect=Util.mocked_request)
+@patch("requests.sessions.Session.send", side_effect=Util.mocked_request)
 class TestQuarantineMultiple(TestCase):
     @parameterized.expand(Util.load_json("parameters/quarantine_multiple_success.json.resp").get("parameters"))
     def test_quarantine_multiple_success(
