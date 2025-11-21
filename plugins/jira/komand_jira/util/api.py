@@ -2,79 +2,199 @@ import base64
 import json
 from insightconnect_plugin_runtime.exceptions import PluginException
 from jira.resources import User
+from logging import Logger
+import requests
+from requests.auth import HTTPBasicAuth
+from typing import Any, Union
+
+from komand_jira.util.constants import REQUESTS_TIMEOUT, DEFAULT_JIRA_API_VERSION
+from komand_jira.util.util import load_text_as_adf
 
 
 class JiraApi:
-    def __init__(self, jira_client, is_cloud, logger):
-        self.jira_client = jira_client
-        self.is_cloud = is_cloud
+    def __init__(
+        self,
+        base_url: str,
+        authorization: Union[dict[str, Any], HTTPBasicAuth],
+        logger: Logger,
+        api_version: str = DEFAULT_JIRA_API_VERSION,
+    ) -> None:
+        self.base_url = base_url
+        self.api_version = api_version
+        self.authorization = authorization
         self.logger = logger
-        self.session = jira_client._session
-        self.base_url = jira_client._options["server"]
 
-    def add_user(self, params):
+    def get_issue(self, issue_id: str) -> dict[str, Any]:
+        return self.call_api("GET", f"issue/{issue_id}")
 
-        url = f"{self.base_url}/rest/api/latest/user/"
+    def get_user(self, username: str) -> list[dict[str, Any]]:
+        return self.call_api("GET", "user/search", params={"query": username, "maxResults": 1})
 
-        headers = {"Accept": "application/json", "Content-Type": "application/json"}
+    def assign_issue(self, issue_id: str, username: str) -> bool:
+        # Get user accountId by username
+        user = self.get_user(username)
 
-        payload = json.dumps(params)
-
-        response = self.session.post(url, data=payload, headers=headers)
-
-        if 200 <= response.status_code <= 299:
-            return True
-        else:
-            self.logger.error(response.status_code)
-            return False
-
-    def delete_user(self, account_id):
-        url = f"{self.base_url}/rest/api/latest/user/?accountId={account_id}"
-        r = self.session.delete(url)
-
-        if 200 <= r.status_code <= 299:
-            return True
-        else:
-            self.logger.error(r.status_code)
-            return False
-
-    def find_users(self, query, max_results=10):
-        # pylint: disable=protected-access
-        return self.jira_client._fetch_pages(User, None, "user/search", 0, max_results, {"query": query})
-
-    def add_attachment(self, issue, filename, file_bytes):
-        try:
-            data = base64.b64decode(file_bytes)
-        except Exception as e:
+        # In case no user is found, raise an exception
+        if not user:
             raise PluginException(
-                cause="Unable to decode attachment bytes.",
-                assistance=f"Please provide a valid attachment bytes. Error: {str(e)}",
+                cause=f"No user found with username: {username}.",
+                assistance="Please provide a valid username.",
             )
 
+        # In case multiple users are found, raise an exception
+        if len(user) > 1:
+            raise PluginException(
+                cause=f"Multiple users found with username: {username}.",
+                assistance="Please provide a more specific username.",
+            )
+        self.call_api(
+            "PUT",
+            f"issue/{issue_id}/assignee",
+            payload={"accountId": user[0].get("accountId", "")},
+            return_json=False,
+        )
+        return True
+
+    def add_attachment(self, issue_id: str, filename: str, file_bytes: str) -> int:
+        try:
+            data = base64.b64decode(file_bytes)
+        except Exception as error:
+            raise PluginException(
+                cause="Unable to decode attachment bytes.",
+                assistance=f"Please provide a valid attachment bytes. Error: {str(error)}",
+            )
         return self.call_api(
             "POST",
-            f"/rest/api/latest/issue/{issue}/attachments",
+            f"/issue/{issue_id}/attachments",
             files={"file": (filename, data, "application/octet-stream")},
             headers={"content-type": None, "X-Atlassian-Token": "nocheck"},
         )[0].get("id")
 
-    def call_api(
+    def get_attachment_content(self, attachment_id: str) -> str:
+        return self.call_api("GET", f"attachment/content/{attachment_id}", return_json=False)
+
+    def add_comment_to_issue(self, issue_id: int, comment: str) -> dict[str, Any]:
+        return self.call_api(
+            "POST",
+            f"issue/{issue_id}/comment",
+            payload={"body": load_text_as_adf(comment)},
+        )
+
+    def get_all_issue_types(self) -> dict[str, Any]:
+        return self.call_api("GET", "issuetype")
+
+    def get_project(self, project_name: str) -> dict[str, Any]:
+        return self.call_api("GET", "project/search", params={"query": project_name})
+
+    def create_issue(self, issue_fields: dict[str, Any]) -> dict[str, Any]:
+        return self.call_api("POST", "issue", payload={"fields": issue_fields})
+
+    def edit_issue(self, issue_id: str, issue_fields: dict[str, Any], notify: bool) -> None:
+        self.call_api(
+            "PUT",
+            f"issue/{issue_id}",
+            params={"notifyUsers": notify},
+            payload={"fields": issue_fields},
+            return_json=False,
+        )
+
+    def get_issue_fields(self) -> dict[str, Any]:
+        return self.call_api("GET", "field")
+
+    def search_issues(self, jql: str, max_results: int) -> dict[str, Any]:
+        return self.call_api("GET", "search/jql", params={"jql": jql, "maxResults": max_results, "fields": "*all"})
+
+    def get_transitions(self, issue_id: str) -> dict[str, Any]:
+        return self.call_api("GET", f"issue/{issue_id}/transitions")
+
+    def transition_issue(
+        self, issue_id: str, transition_name: str, comment: str, fields: dict[str, Any]
+    ) -> dict[str, Any]:
+        # Get the transition ID from the name if necessary
+        transition_id = None
+        if not transition_name.isdigit():
+            for transition in self.get_transitions(issue_id).get("transitions", []):
+                if transition.get("name", "").lower() == transition_name.lower():
+                    transition_id = transition.get("id", "")
+                    break
+            if not transition_id:
+                raise PluginException(
+                    cause=f"No transition found with name: {transition_name}.",
+                    assistance="Please provide a valid transition name or ID.",
+                )
+
+        # Initialize request payload data
+        payload = {"transition": {"id": transition_id or transition_name}}
+
+        # If a comment is provided, add it to the payload
+        if comment:
+            payload["update"] = {"comment": [{"add": {"body": {"content": [load_text_as_adf(comment)]}}}]}
+
+        # If fields are provided, add them to the payload
+        if fields:
+            payload["fields"] = fields
+        return self.call_api("POST", f"issue/{issue_id}/transitions", payload=payload, return_json=False)
+
+    def add_user(self, username: str, email: str, password: str, products: list[str], notify: bool) -> bool:
+        try:
+            self.call_api(
+                "POST",
+                "user",
+                payload={
+                    "displayName": username,
+                    "emailAddress": email,
+                    "password": password,
+                    "notification": notify,
+                    "name": username,
+                    "products": products,
+                },
+            )
+            return True
+        except Exception as error:
+            self.logger.error(error)
+            return False
+
+    def delete_user(self, account_id: str) -> bool:
+        try:
+            self.call_api("DELETE", "user", params={"accountId": account_id})
+            return True
+        except Exception as error:
+            self.logger.error(error)
+            return False
+
+    def find_users(self, query: str, max_results: int = 10) -> list[dict[str, Any]]:
+        return self.call_api("GET", "user/search", params={"query": query, "maxResults": max_results})
+
+    def call_api(  # noqa: MC0001
         self,
         method: str,
         path: str,
-        files: dict = None,
-        headers: dict = None,
-        params: dict = None,
-        payload: dict = None,
-    ) -> dict:
+        files: dict[str, Any] = None,
+        headers: dict[str, Any] = None,
+        params: dict[str, Any] = None,
+        payload: dict[str, Any] = None,
+        timeout: int = REQUESTS_TIMEOUT,
+        return_json: bool = True,
+    ) -> Union[list[dict[str, Any]], dict[str, Any], str]:
         try:
-            response = self.session.request(
+            # Check if authorization is HTTPBasicAuth or dict headers
+            authorization = None
+            if isinstance(self.authorization, HTTPBasicAuth):
+                authorization = self.authorization
+            else:
+                if headers is None:
+                    headers = {"Accept": "application/json"}
+                headers.update(self.authorization)
+
+            response = requests.request(
                 method.upper(),
-                self.base_url + path,
+                f"{self.base_url}/rest/api/{self.api_version}/{path}",
                 params=params,
                 json=payload,
                 headers=headers,
                 files=files,
+                auth=authorization,
+                timeout=timeout,
             )
 
             if response.status_code == 401:
@@ -90,10 +210,10 @@ class JiraApi:
                 )
             if response.status_code >= 500:
                 raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
-
             if 200 <= response.status_code < 300:
-                return response.json()
-
+                if return_json:
+                    return response.json()
+                return response.content
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
-        except json.decoder.JSONDecodeError as e:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
+        except json.decoder.JSONDecodeError as error:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)

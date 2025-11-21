@@ -1,12 +1,15 @@
 import logging
 from collections import namedtuple
+from typing import Any, Dict, List, Union
 from unittest import TestCase
 
+from insightconnect_plugin_runtime.action import Action
+from insightconnect_plugin_runtime.trigger import Trigger
 from komand_jira.connection import Connection
 
 
 class MockIssue:
-    def __init__(self):
+    def __init__(self) -> None:
         fields_dict = {
             "resolution": namedtuple("AnObject", ["name"])(["new years"]),
             "reporter": namedtuple("AnObject", ["displayName"])(["Bob Smith"]),
@@ -26,12 +29,12 @@ class MockIssue:
         self.fields = namedtuple("ObjectName", fields_dict.keys())(*fields_dict.values())
 
     @staticmethod
-    def permalink():
+    def permalink() -> str:
         return "https://example-demo.atlassian.net/browse/ISSUE-ID-1234"
 
 
 class MockClient:
-    def __init__(self):
+    def __init__(self) -> None:
         self.client = "some fake thing"
         project = {
             "raw": {},
@@ -46,37 +49,51 @@ class MockClient:
         }
         self.project_object = [namedtuple("ObjectName", project.keys())(*project.values())]
 
-    def projects(self):
+    def projects(self) -> List[Any]:
         return self.project_object
 
     @staticmethod
-    def search_issues(jql, startAt, maxResults, fields):
+    def search_issues(jql: str, startAt: int, maxResults: int, fields: str) -> List[MockIssue]:
         return [MockIssue()]
+
+    @staticmethod
+    def issue(id: str) -> MockIssue:
+        return MockIssue()
 
 
 class MockConnection:
-    def __init__(self):
+    def __init__(self, is_cloud: bool = False) -> None:
+        from komand_jira.util.api import JiraApi
+
         self.client = MockClient()
+        # Use real JiraApi - requests.request will be mocked in tests
+        self.rest_client = JiraApi(
+            base_url="https://your-domain.atlassian.net",
+            authorization={"Authorization": "Bearer fake_token"},
+            logger=logging.getLogger("test"),
+        )
+        self.is_cloud = is_cloud
 
 
 class MockTrigger:
     actual = None
 
     @staticmethod
-    def send(params):
+    def send(params: Dict[str, Any]) -> None:
         MockTrigger.actual = params
 
 
 class Util:
     @staticmethod
-    def default_connector(action):
+    def default_connector(action: Union[Action, Trigger]) -> Union[Action, Trigger]:
         default_connection = Connection()
         default_connection.logger = logging.getLogger("connection logger")
         action.connection = MockConnection()
         action.logger = logging.getLogger("action logger")
         return action
 
-    def check_error():
+    @staticmethod
+    def check_error() -> bool:
         expected = {
             "issue": {
                 "attachments": [],
@@ -99,8 +116,10 @@ class Util:
             return True
 
         TestCase.assertDictEqual(TestCase(), MockTrigger.actual, expected)
+        return False
 
-    def check_error_with_fields():
+    @staticmethod
+    def check_error_with_fields() -> bool:
         expected = {
             "issue": {
                 "attachments": [],
@@ -124,3 +143,4 @@ class Util:
             return True
 
         TestCase.assertDictEqual(TestCase(), MockTrigger.actual, expected)
+        return False

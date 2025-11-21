@@ -15,20 +15,25 @@ class DeleteUser(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        if self.connection.is_cloud and not params.get(Input.ACCOUNT_ID):
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        account_id = params.get(Input.ACCOUNT_ID, "")
+        username = params.get(Input.USERNAME, "")
+        # END INPUT BINDING - DO NOT REMOVE
+
+        if self.connection.is_cloud and not account_id:
             raise PluginException(
                 cause="Account ID not provided",
                 assistance="Jira cloud server needs account ID to be set",
             )
 
-        if not self.connection.is_cloud and not params.get(Input.USERNAME):
+        if not self.connection.is_cloud and not username:
             raise PluginException(
                 cause="Username not provided",
                 assistance="Jira server needs username to be set",
             )
 
-        if self.connection.is_cloud:
-            success = self.connection.rest_client.delete_user(params.get(Input.ACCOUNT_ID))
+        if not self.connection.is_cloud:
+            success = self.connection.client.delete_user(username)
         else:
-            success = self.connection.client.delete_user(params.get(Input.USERNAME))
+            success = self.connection.rest_client.delete_user(account_id)
         return {Output.SUCCESS: success}
