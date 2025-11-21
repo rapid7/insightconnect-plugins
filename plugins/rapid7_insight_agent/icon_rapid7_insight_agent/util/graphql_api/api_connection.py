@@ -495,8 +495,9 @@ class ApiConnection:
         :return: True if MAC matches, False otherwise
         """
         stripped_input_mac = agent_input.replace("-", "").replace(":", "")
-        stripped_target_mac = agent.get("host", {}).get("primaryAddress", {}).get("mac", "").replace("-", "").replace(
-            ":", "")
+        stripped_target_mac = (
+            agent.get("host", {}).get("primaryAddress", {}).get("mac", "").replace("-", "").replace(":", "")
+        )
         return stripped_input_mac == stripped_target_mac
 
     def _find_agent_in_agents(self, agents: [dict], agent_input: str, agent_type: str) -> Optional[dict]:  # noqa: C901
