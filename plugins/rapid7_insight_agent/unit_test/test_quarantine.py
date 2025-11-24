@@ -15,7 +15,7 @@ from icon_rapid7_insight_agent.actions.quarantine.action import Quarantine
 from icon_rapid7_insight_agent.actions.quarantine.schema import Input
 
 
-@patch("requests.sessions.Session.post", side_effect=Util.mocked_request)
+@patch("requests.sessions.Session.send", side_effect=Util.mocked_request)
 class TestQuarantine(TestCase):
     @parameterized.expand(Util.load_json("parameters/quarantine.json.resp").get("parameters"))
     def test_add_address_to_group(
