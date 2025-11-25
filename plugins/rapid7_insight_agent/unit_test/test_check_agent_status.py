@@ -13,7 +13,7 @@ from icon_rapid7_insight_agent.actions.check_agent_status.action import CheckAge
 from icon_rapid7_insight_agent.actions.check_agent_status.schema import Input
 
 
-@patch("requests.sessions.Session.post", side_effect=Util.mocked_request)
+@patch("requests.sessions.Session.send", side_effect=Util.mocked_request)
 class TestCheckAgentStatus(TestCase):
     def test_check_agent_status(self, mock_request: MagicMock) -> None:
         action = Util.default_connector(CheckAgentStatus())

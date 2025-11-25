@@ -461,6 +461,7 @@ Example output:
 
 # Version History
 
+* 3.0.6 - Remove use of session from the connection object to prevent session timeouts
 * 3.0.5 - Updated SDK to the latest version (6.3.10)
 * 3.0.4 - Updated SDK to the latest version (6.3.3)
 * 3.0.3 - Updated SDK to the latest version (6.2.5)
