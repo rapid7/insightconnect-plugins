@@ -14,7 +14,12 @@ class GetHistory(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        history = self.connection.any_run_api.get_history(
-            params.get(Input.TEAM, False), params.get(Input.SKIP, 0), params.get(Input.LIMIT, 25)
-        )
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        team = params.get(Input.TEAM, False)
+        skip = params.get(Input.SKIP, 0)
+        limit = params.get(Input.LIMIT, 25)
+        # END INPUT BINDING - DO NOT REMOVE
+
+        # Get history from API and return
+        history = self.connection.any_run_api.get_history(team, skip, limit)
         return {Output.TASKS: history.get("data", {}).get("tasks", [])}
