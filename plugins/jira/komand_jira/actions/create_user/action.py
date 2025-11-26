@@ -14,29 +14,22 @@ class CreateUser(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        """Run action"""
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        email = params.get(Input.EMAIL, "")
+        username = params.get(Input.USERNAME, "")
+        password = params.get(Input.PASSWORD, "")
+        notify = params.get(Input.NOTIFY, False)
+        products = params.get(Input.PRODUCTS, [])
+        # END INPUT BINDING - DO NOT REMOVE
 
-        username = ""
         if not self.connection.is_cloud:
-            username = params[Input.USERNAME]
-
             success = self.connection.client.add_user(
-                fullname=params[Input.USERNAME],
-                email=params[Input.EMAIL],
-                password=params.get(Input.PASSWORD, None),
-                notify=params.get(Input.NOTIFY, False),
+                fullname=username,
+                email=email,
+                password=password,
+                notify=notify,
                 username=username,
             )
-
         else:
-            params = {
-                "displayName": params[Input.USERNAME],
-                "emailAddress": params[Input.EMAIL],
-                "password": params.get(Input.PASSWORD, None),
-                "notification": params.get(Input.NOTIFY, False),
-                "name": username,
-                "products": params.get(Input.PRODUCTS, []),
-            }
-            success = self.connection.rest_client.add_user(params)
-
+            success = self.connection.rest_client.add_user(username, email, password, products, notify)
         return {Output.SUCCESS: success}

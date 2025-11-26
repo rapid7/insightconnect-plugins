@@ -11,7 +11,7 @@ from komand_jira.connection.connection import Connection
 
 
 class User:
-    def __init__(self, account_id="", name=""):
+    def __init__(self, account_id="", name="") -> None:
         self.displayName = "test_display_name"
         self.active = True
         self.emailAddress = "test@example.com"
@@ -19,9 +19,13 @@ class User:
         self.name = name
         self.raw = self.__dict__
 
+    def get(self, key, default=None):
+        """Support dictionary-like .get() method for cloud API compatibility"""
+        return getattr(self, key, default)
+
 
 class MockClient:
-    def __init__(self):
+    def __init__(self) -> None:
         self.client = "some fake thing"
 
     def search_users(self, user: str = "", maxResults: int = 10):
@@ -35,7 +39,7 @@ class MockClient:
 
 
 class MockRestClient:
-    def __init__(self):
+    def __init__(self) -> None:
         self.client = "some fake thing"
 
     def find_users(self, query: str = "", max_results: int = 10):
@@ -62,7 +66,7 @@ class TestFindUsers(TestCase):
         self.test_conn.rest_client = MockRestClient()
         self.test_action.connection = self.test_conn
 
-    def test_find_user_cloud_true_valid_1(self):
+    def test_find_user_cloud_true_valid_1(self) -> None:
         action_params = {"query": "test_user", "max": 1}
 
         self.test_conn.is_cloud = True
@@ -70,12 +74,17 @@ class TestFindUsers(TestCase):
         result = self.test_action.run(action_params)
 
         expected_users = [
-            {"display_name": "test_display_name", "active": True, "email_address": "test@example.com", "account_id": 1}
+            {
+                "display_name": "test_display_name",
+                "active": True,
+                "email_address": "test@example.com",
+                "account_id": 1,
+            }
         ]
 
         self.assertDictEqual(result, {"users": expected_users})
 
-    def test_find_user_cloud_true_valid_3(self):
+    def test_find_user_cloud_true_valid_3(self) -> None:
         action_params = {"query": "test_user", "max": 3}
 
         self.test_conn.is_cloud = True
@@ -83,14 +92,29 @@ class TestFindUsers(TestCase):
         result = self.test_action.run(action_params)
 
         expected_users = [
-            {"display_name": "test_display_name", "active": True, "email_address": "test@example.com", "account_id": 1},
-            {"display_name": "test_display_name", "active": True, "email_address": "test@example.com", "account_id": 2},
-            {"display_name": "test_display_name", "active": True, "email_address": "test@example.com", "account_id": 3},
+            {
+                "display_name": "test_display_name",
+                "active": True,
+                "email_address": "test@example.com",
+                "account_id": 1,
+            },
+            {
+                "display_name": "test_display_name",
+                "active": True,
+                "email_address": "test@example.com",
+                "account_id": 2,
+            },
+            {
+                "display_name": "test_display_name",
+                "active": True,
+                "email_address": "test@example.com",
+                "account_id": 3,
+            },
         ]
 
         self.assertDictEqual(result, {"users": expected_users})
 
-    def test_find_user_cloud_false_valid_1(self):
+    def test_find_user_cloud_false_valid_1(self) -> None:
         action_params = {"query": "test_user", "max": 1}
 
         self.test_conn.is_cloud = False
@@ -98,12 +122,17 @@ class TestFindUsers(TestCase):
         result = self.test_action.run(action_params)
 
         expected_users = [
-            {"display_name": "test_display_name", "active": True, "email_address": "test@example.com", "name": "one"}
+            {
+                "display_name": "test_display_name",
+                "active": True,
+                "email_address": "test@example.com",
+                "name": "one",
+            }
         ]
 
         self.assertDictEqual(result, {"users": expected_users})
 
-    def test_find_user_cloud_false_valid_3(self):
+    def test_find_user_cloud_false_valid_3(self) -> None:
         action_params = {"query": "test_user", "max": 3}
 
         self.test_conn.is_cloud = False
@@ -111,9 +140,24 @@ class TestFindUsers(TestCase):
         result = self.test_action.run(action_params)
 
         expected_users = [
-            {"display_name": "test_display_name", "active": True, "email_address": "test@example.com", "name": "one"},
-            {"display_name": "test_display_name", "active": True, "email_address": "test@example.com", "name": "two"},
-            {"display_name": "test_display_name", "active": True, "email_address": "test@example.com", "name": "three"},
+            {
+                "display_name": "test_display_name",
+                "active": True,
+                "email_address": "test@example.com",
+                "name": "one",
+            },
+            {
+                "display_name": "test_display_name",
+                "active": True,
+                "email_address": "test@example.com",
+                "name": "two",
+            },
+            {
+                "display_name": "test_display_name",
+                "active": True,
+                "email_address": "test@example.com",
+                "name": "three",
+            },
         ]
 
         self.assertDictEqual(result, {"users": expected_users})
