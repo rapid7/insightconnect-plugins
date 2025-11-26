@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 setup(
     name="recorded_future-rapid7-plugin",
     version="7.0.1",
-    description="[Recorded Future](https://www.recordedfuture.com/) arms threat analysts, security operators, and incident responders to rapidly connect the dots and reveal unknown threats. Using the plugin, users can search domain lists, entity lists, and more.The plugin enables searching domain lists, entity lists, and more to assist with threat analysis, incident response, and vulnerability management.Note: Downloaded files are returned in [STIX](https://stixproject.github.io/about/) format.",
+    description="[Recorded Future](https://www.recordedfuture.com/) arms threat analysts, security operators, and incident responders to rapidly connect the dots and reveal unknown threats. Using the plugin, users can search domain lists, entity lists, and more.The plugin enables searching domain lists, entity lists, and more to assist with threat analysis, incident response, and vulnerability management.Note: Downloaded files are returned in [STIX](https://stixproject.github.io/about/) format",
     author="rapid7",
     author_email="",
     url="",
