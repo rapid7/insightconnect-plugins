@@ -1,0 +1,17 @@
+[
+  {
+    "accountId": "5b10a2844c20165700ede21g",
+    "accountType": "atlassian",
+    "active": true,
+    "avatarUrls": {
+      "16x16": "https://avatar-management--avatars.server-location.prod.public.atl-paas.net/initials/MK-5.png?size=16&s=16",
+      "24x24": "https://avatar-management--avatars.server-location.prod.public.atl-paas.net/initials/MK-5.png?size=24&s=24",
+      "32x32": "https://avatar-management--avatars.server-location.prod.public.atl-paas.net/initials/MK-5.png?size=32&s=32",
+      "48x48": "https://avatar-management--avatars.server-location.prod.public.atl-paas.net/initials/MK-5.png?size=48&s=48"
+    },
+    "displayName": "Test User",
+    "emailAddress": "testuser@example.com",
+    "self": "https://your-domain.atlassian.net/rest/api/3/user?accountId=5b10a2844c20165700ede21g"
+  }
+]
+
