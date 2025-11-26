@@ -1,21 +1,23 @@
+import base64
 import gzip
 import os
-from typing import Dict, ByteString, Tuple, Any
-from insightconnect_plugin_runtime.exceptions import PluginException
-from json import JSONDecodeError
-import requests
-from requests import Response
-import xmltodict
 from binascii import Error as B64EncodingError
-import base64
+from json import JSONDecodeError
 from tempfile import NamedTemporaryFile
-from timeout_decorator import timeout, TimeoutError as DecoratorTimeoutError
+from typing import Any, Dict, Tuple
+
+import requests
+import xmltodict
+from insightconnect_plugin_runtime.exceptions import PluginException
+from requests import Response
+from timeout_decorator import TimeoutError as DecoratorTimeoutError
+from timeout_decorator import timeout
 
 TIMEOUT_SECONDS = 60 * 5
 
 
 class RecordedFutureApi:
-    def __init__(self, logger, meta, token: str):
+    def __init__(self, logger, meta, token: str) -> None:
         self.base_url = "https://api.recordedfuture.com/v2/"
         self.token = token
         self.logger = logger
@@ -59,8 +61,7 @@ class RecordedFutureApi:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
 
     @staticmethod
-    @timeout(seconds=TIMEOUT_SECONDS, use_signals=False)
-    def decompress_gzip_to_dict(compressed_data: ByteString) -> Dict:
+    def decompress_gzip_to_dict(compressed_data: bytes) -> Dict:
         """
         Decompresses and parses a Gzip file in bytes containing XML, returning a JSON representation
         :param compressed_data: The compressed data bytestring
@@ -80,7 +81,11 @@ class RecordedFutureApi:
             with gzip.open(filename, "rb") as file:
                 compressed_data = file.read()
                 try:
-                    parsed_data = RecordedFutureApi.decompress_gzip_to_dict(compressed_data)
+                    # Apply timeout decorator at call time to avoid pickle issues in unittests
+                    timed_decompress = timeout(seconds=TIMEOUT_SECONDS, use_signals=False)(
+                        RecordedFutureApi.decompress_gzip_to_dict
+                    )
+                    parsed_data = timed_decompress(compressed_data)
                 except (MemoryError, DecoratorTimeoutError):
                     file_size_bytes = os.path.getsize(filename)
                     file_size_mb = file_size_bytes / (1024 * 1024)
