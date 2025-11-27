@@ -1620,6 +1620,7 @@ Example output:
 
 # Version History
 
+* 5.0.1 - Prevent `Monitor Logs` task run during rate limiting period
 * 5.0.0 - Updated password management actions - replaced old Reset Password with Expire Password, and added a new Reset Password action
 * 4.2.16 - Updated SDK to the latest version (6.3.10) | Update Monitor Log Search Start Time parameter after pagination | Add custom config parameter for log limit to Monitor Logs task
 * 4.2.15 - Updated SDK to the latest version (6.3.8) | Add task delay monitoring | Update Monitor Log Search Start Time

@@ -8,6 +8,7 @@ from unittest.mock import MagicMock, call, patch
 from komand_okta.tasks.monitor_logs.task import MonitorLogs
 from parameterized import parameterized
 
+from komand_okta.util.exceptions import ApiException
 from util import Util
 
 sys.path.append(os.path.abspath("../"))
@@ -202,3 +203,51 @@ class TestMonitorLogs(TestCase):
         self.assertEqual(1, len(new_logs))
         self.assertEqual(new_state_2["last_collection_timestamp"], new_logs[0]["published"])
         self.assertIn(logger, mocked_info_log.call_args_list)
+
+    @parameterized.expand(
+        [
+            [
+                "429_response",
+                Util.read_file_to_dict("inputs/monitor_logs_engage_rate_limit.json.inp"),
+                Util.read_file_to_dict("expected/monitor_logs_engage_rate_limit.json.exp"),
+                """"x_rate_limit_reset": 1609459200""",
+                429,
+            ],
+            [
+                "during_rate_limit",
+                Util.read_file_to_dict("inputs/monitor_logs_while_rate_limited.json.inp"),
+                Util.read_file_to_dict("expected/monitor_logs_during_rate_limit.json.exp"),
+                "Previous rate limit in effect until 2023-04-28 08:34:47+00:00. Skipping execution until rate limit reset time has passed.",
+                429,
+            ],
+            [
+                "exit_rate_limit",
+                Util.read_file_to_dict("inputs/monitor_users_exit_rate_limiting.json.inp"),
+                Util.read_file_to_dict("expected/get_logs.json.exp"),
+                "",
+                200,
+            ],
+        ]
+    )
+    def test_monitor_logs_rate_limit(
+        self,
+        mocked_warn: MagicMock,
+        mock_request: MagicMock,
+        _mock_get_time: MagicMock,
+        test_name: str,
+        current_state: Dict[str, Any],
+        expected: Dict[str, Any],
+        expected_error_text: str,
+        expected_status_code: int,
+    ) -> None:
+
+        if test_name in ["next_page_no_results", "without_state_no_results"]:
+            mock_request.side_effect = Util.mock_empty_response
+
+        actual, actual_state, has_more_pages, status_code, error = self.action.run(state=current_state)
+        self.assertEqual(expected.get("logs"), actual)
+        self.assertEqual(expected.get("state"), actual_state)
+        self.assertEqual(expected.get("has_more_pages"), has_more_pages)
+        if expected_error_text:
+            self.assertIn(expected_error_text, error.data)
+            self.assertEqual(expected_status_code, status_code)
