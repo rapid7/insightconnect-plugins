@@ -36,80 +36,84 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
     @monitor_task_delay(timestamp_keys=[LAST_SEARCH_END_TIMESTAMP], default_delay_threshold="2d")
     def run(self, params={}, state={}, custom_config={}):  # pylint: disable=unused-argument
         self.connection.api_client.toggle_rate_limiting = False
-        has_more_pages = False
-        parameters = {}
         try:
-            # Prepare the parameters
             filter_time, is_filter_datetime, events_limit = self._get_filter_parameters(state, custom_config)
             unadjusted_now = self.get_current_time()  # get current time before any adjustments
             now = unadjusted_now - timedelta(minutes=1)  # allow for latency of this being triggered
             rate_limited = self._check_rate_limit_reset(unadjusted_now, state)
             if rate_limited:
-                return (
-                    [],
-                    state,
-                    False,
-                    429,
-                    PluginException(
-                        preset=PluginException.Preset.RATE_LIMIT,
-                        data=f"Previous rate limit in effect until {datetime.fromtimestamp(state.get(self.RATE_LIMIT_RESET_EPOCH), timezone.utc)}. Skipping execution until rate limit reset time has passed.",
-                    ),
-                )
-
-            now_iso = self.get_iso(now)
-            # Whether to convert filter_time in hours to datetime
-            if is_filter_datetime:
-                filter_hours = filter_time
-            else:
-                # If false, we assume filter_time is an integer or string representing hours and get datetime
-                filter_hours = self.get_iso(now - timedelta(hours=int(filter_time)))  # cutoff point, never query beyond
-            next_page_link = state.get(self.NEXT_PAGE_LINK)
-            if not state:
-                self.logger.info("First run")
-                parameters = {"since": filter_hours, "until": now_iso, "limit": events_limit}
-                state[self.LAST_COLLECTION_TIMESTAMP] = filter_hours  # we only change this once we get new events
-                state[self.LAST_SEARCH_END_TIMESTAMP] = now_iso
-            else:
-                if next_page_link:
-                    state.pop(self.NEXT_PAGE_LINK)
-                    self.logger.info("Getting the next page of results...")
-                else:
-                    parameters = {
-                        "since": self.get_since(state, filter_hours, filter_time, is_filter_datetime),
-                        "until": now_iso,
-                        "limit": events_limit,
-                    }
-                    # Used to determine the next run time window start. If paginating, do not update this.
-                    state[self.LAST_SEARCH_END_TIMESTAMP] = now_iso
-                    self.logger.info("Subsequent run...")
-            # Call the API
-            try:
-                self.logger.info(f"Calling Okta with parameters={parameters} and next_page={next_page_link}")
-                new_logs_resp = (
-                    self.connection.api_client.list_events(parameters)
-                    if not next_page_link
-                    else self.connection.api_client.get_next_page(next_page_link)
-                )
-                new_logs = self.get_events(
-                    new_logs_resp.json(), state.get(self.LAST_COLLECTION_TIMESTAMP), next_page_link
-                )
-                next_page_link = self.get_next_page_link(new_logs_resp.headers)
-
-                if next_page_link:
-                    state[self.NEXT_PAGE_LINK] = next_page_link
-                    has_more_pages = True
-                state[self.LAST_COLLECTION_TIMESTAMP] = self.get_last_collection_timestamp(
-                    new_logs, state.get(self.LAST_COLLECTION_TIMESTAMP)
-                )
-                return new_logs, state, has_more_pages, 200, None
-            except ApiException as error:
-                self.logger.info(f"An API Exception has been raised. Status code: {error.status_code}. Error: {error}")
-                if error.status_code == 429:
-                    state[self.RATE_LIMIT_RESET_EPOCH] = json.loads(error.data).get("x_rate_limit_reset", 0)
-                return [], state, False, error.status_code, error
+                return self._handle_rate_limit(state)
+            return self._prepare_query(state, filter_time, is_filter_datetime, events_limit, now)
         except Exception as error:
             self.logger.info(f"An Exception has been raised. Error: {error}")
             return [], state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+
+    def _handle_rate_limit(self, state):
+        return (
+            [],
+            state,
+            False,
+            429,
+            PluginException(
+                preset=PluginException.Preset.RATE_LIMIT,
+                data=f"Previous rate limit in effect until {datetime.fromtimestamp(state.get(self.RATE_LIMIT_RESET_EPOCH), timezone.utc)}. Skipping execution until rate limit reset time has passed.",
+            ),
+        )
+
+    def _prepare_query(self, state, filter_time, is_filter_datetime, events_limit, now):
+        has_more_pages = False
+        parameters = {}
+        now_iso = self.get_iso(now)
+        # Whether to convert filter_time in hours to datetime
+        if is_filter_datetime:
+            filter_hours = filter_time
+        else:
+            # If false, we assume filter_time is an integer or string representing hours and get datetime
+            filter_hours = self.get_iso(now - timedelta(hours=int(filter_time)))  # cutoff point, never query beyond
+        next_page_link = state.get(self.NEXT_PAGE_LINK)
+        if not state:
+            self.logger.info("First run")
+            parameters = {"since": filter_hours, "until": now_iso, "limit": events_limit}
+            state[self.LAST_COLLECTION_TIMESTAMP] = filter_hours  # we only change this once we get new events
+            state[self.LAST_SEARCH_END_TIMESTAMP] = now_iso
+        else:
+            if next_page_link:
+                state.pop(self.NEXT_PAGE_LINK)
+                self.logger.info("Getting the next page of results...")
+            else:
+                parameters = {
+                    "since": self.get_since(state, filter_hours, filter_time, is_filter_datetime),
+                    "until": now_iso,
+                    "limit": events_limit,
+                }
+                # Used to determine the next run time window start. If paginating, do not update this.
+                state[self.LAST_SEARCH_END_TIMESTAMP] = now_iso
+                self.logger.info("Subsequent run...")
+        return self._call_api(parameters, next_page_link, state, has_more_pages)
+
+    def _call_api(self, parameters, next_page_link, state, has_more_pages):
+        try:
+            self.logger.info(f"Calling Okta with parameters={parameters} and next_page={next_page_link}")
+            new_logs_resp = (
+                self.connection.api_client.list_events(parameters)
+                if not next_page_link
+                else self.connection.api_client.get_next_page(next_page_link)
+            )
+            new_logs = self.get_events(new_logs_resp.json(), state.get(self.LAST_COLLECTION_TIMESTAMP), next_page_link)
+            next_page_link = self.get_next_page_link(new_logs_resp.headers)
+
+            if next_page_link:
+                state[self.NEXT_PAGE_LINK] = next_page_link
+                has_more_pages = True
+            state[self.LAST_COLLECTION_TIMESTAMP] = self.get_last_collection_timestamp(
+                new_logs, state.get(self.LAST_COLLECTION_TIMESTAMP)
+            )
+            return new_logs, state, has_more_pages, 200, None
+        except ApiException as error:
+            self.logger.info(f"An API Exception has been raised. Status code: {error.status_code}. Error: {error}")
+            if error.status_code == 429:
+                state[self.RATE_LIMIT_RESET_EPOCH] = json.loads(error.data).get("x_rate_limit_reset", 0)
+            return [], state, False, error.status_code, error
 
     @staticmethod
     def get_current_time():
