@@ -54,15 +54,26 @@ class Util:
         params = kwargs.get("params")
         json_data = kwargs.get("json")
         global first_request
-
         if url == "https://example.okta.com/api/v1/logs":
             resp_args = {
                 "status_code": 200,
                 "filename": "get_logs.json.resp",
-                "headers": {"link": '<https://example.okta.com/nextLink?q=next> rel="next"'},
+                "headers": {
+                    "link": '<https://example.okta.com/nextLink?q=next> rel="next"',
+                    "x-rate-limit-reset": 1609459200,
+                },
             }
             if params.get("since") == "2023-04-27T07:49:21.777Z":
-                resp_args["filename"], resp_args["headers"] = "get_logs_single_event.json.resp", {"link": ""}
+                resp_args["filename"], resp_args["headers"] = "get_logs_single_event.json.resp", {
+                    "link": "",
+                    "x-rate-limit-reset": 1609459200,
+                }
+            if params.get("since") == "2023-04-27T07:49:21.888Z":  # Engage rate limit
+                resp_args["filename"], resp_args["headers"], resp_args["status_code"] = (
+                    "get_logs_empty_response.resp",
+                    {"x-rate-limit-limit": 60, "x-rate-limit-reset": 1609459200},
+                    429,
+                )
             return MockResponse(**resp_args)
         if url == "https://example.okta.com/nextLink?q=next":
             return MockResponse(
