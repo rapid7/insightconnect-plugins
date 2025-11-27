@@ -1,0 +1,9 @@
+{
+    "logs": [],
+    "state": {
+        "last_collection_timestamp": "2023-04-27T07:49:21.888Z",
+        "last_search_end_timestamp": "2023-04-28T08:33:46.123Z",
+        "rate_limit_reset_epoch": 1609459200
+    },
+    "has_more_pages": false
+}
