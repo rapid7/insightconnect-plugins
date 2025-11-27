@@ -13,36 +13,37 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.authentication_header = None
         self.any_run_api = None
 
-    def connect(self, params):
+    def connect(self, params={}):
         self.logger.info("Connect: Connecting...")
-        api_key = params.get(Input.API_KEY)
-        credentials = params.get(Input.CREDENTIALS)
+        api_key = params.get(Input.API_KEY, {}).get("secretKey", "")
+        username = params.get(Input.CREDENTIALS, {}).get("username", "")
+        password = params.get(Input.CREDENTIALS, {}).get("password", "")
 
-        if not api_key and not credentials:
+        # In case no authentication method is provided, raise an exception
+        if not api_key and not username and not password:
             raise ConnectionTestException(
                 cause="No authentication credentials provided in the connection.",
                 assistance="Configure the connection with either an API key or username and password and try again.",
             )
 
-        if api_key and api_key.get("secretKey") and credentials and credentials.get("username"):
+        # In case multiple authentication methods are provided, raise an exception
+        if api_key and username and password:
             raise ConnectionTestException(
                 cause="Multiple authentication methods provided.",
                 assistance="Use a single credential method in the connnection, set either API key or username and password and try again.",
             )
 
-        if api_key and api_key.get("secretKey"):
-            authorization = f'API-Key {api_key.get("secretKey")}'
+        # Prepare the authorization header based on the provided authentication method
+        if api_key:
+            authorization = f"API-Key {api_key}"
         else:
-            authorization = "Basic " + base64.encodebytes(
-                (credentials.get("username") + ":" + credentials.get("password")).encode()
-            ).decode("utf-8")
+            authorization = f"Basic {base64.b64encode(f'{username}:{password}'.encode()).decode('utf-8')}"
 
         self.any_run_api = AnyRunAPI({"Authorization": authorization.rstrip()}, self.logger)
 
     def test(self):
         try:
             self.any_run_api.get_history(False, 0, 1)
-        except PluginException as e:
-            raise ConnectionTestException(cause=e.cause, assistance=e.assistance, data=e)
-
-        return {}
+            return {"success": True}
+        except PluginException as error:
+            raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=error)

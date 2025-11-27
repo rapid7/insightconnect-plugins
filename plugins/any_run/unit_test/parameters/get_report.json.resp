@@ -6,365 +6,364 @@
       {
         "reports": {
           "analysis": {
-            "uuid": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
-            "permanentUrl": "https://app.any.run/tasks/44d88612-fea8-a8f3-6de8-2e1278abb02f",
+            "uuid": "123e4567-e89b-12d3-a456-426614174000",
+            "permanentUrl": "https://example.com",
+            "duration": 0,
+            "creation": 1,
+            "creationText": "2025-11-03T12:40:45.160Z",
+            "stopExec": 1,
+            "stopExecText": "2025-11-03T12:40:45.160Z",
             "reports": {
-              "IOC": "https://api.any.run/report/44d88612-fea8-a8f3-6de8-2e1278abb02f/ioc/json",
-              "MISP": "https://api.any.run/report/44d88612-fea8-a8f3-6de8-2e1278abb02f/summary/misp",
-              "HTML": "https://api.any.run/report/44d88612-fea8-a8f3-6de8-2e1278abb02f/summary/html",
-              "graph": "https://content.any.run/tasks/44d88612-fea8-a8f3-6de8-2e1278abb02f/graph"
+              "HTML": "https://example.com",
+              "IOC": "https://example.com",
+              "STIX": "https://example.com",
+              "MISP": "https://example.com",
+              "graph": "https://example.com"
             },
+            "tags": [
+              "string"
+            ],
             "sandbox": {
-              "name": "ANY.RUN - Interactive Sandbox",
+              "name": "string",
               "plan": {
-                "name": "Free"
+                "name": "string"
               }
             },
-            "duration": 42,
-            "creation": 1634306245967,
-            "creationText": "2021-10-15T13:57:25.967Z",
-            "tags": [],
             "options": {
-              "timeout": 60,
+              "timeout": 0,
               "additionalTime": 0,
-              "fakeNet": false,
-              "heavyEvasion": false,
-              "mitm": false,
-              "tor": {
-                "used": false
-              },
-              "presentation": false,
-              "video": false,
-              "hideSource": false,
+              "fakeNet": true,
+              "heavyEvasion": true,
+              "mitm": true,
+              "presentation": true,
+              "video": true,
+              "hideSource": true,
               "network": true,
-              "privacy": "public",
-              "privateSample": false,
-              "automatization": {
-                "uac": true
-              }
+              "privacy": "string",
+              "...": "[Additional Properties Truncated]"
             },
             "scores": {
               "verdict": {
-                "score": 37,
-                "threatLevel": 0,
-                "threatLevelText": "No threats detected"
+                "score": 1,
+                "threatLevel": 1,
+                "threatLevelText": "string"
               },
               "specs": {
-                "injects": false,
-                "autostart": false,
-                "cpuOverrun": false,
-                "crashedApps": false,
-                "crashedTask": false,
-                "debugOutput": false,
-                "executableDropped": false,
-                "exploitable": false,
-                "lowAccess": false,
-                "memOverrun": false,
-                "multiprocessing": true,
-                "networkLoader": false,
-                "networkThreats": false,
-                "rebooted": false,
-                "serviceLauncher": false,
-                "spam": false,
-                "staticDetections": false,
-                "stealing": false,
-                "suspStruct": false,
-                "torUsed": false,
-                "privEscalation": false,
-                "notStarted": false
+                "autoStart": true,
+                "cpuOverrun": true,
+                "crashedApps": true,
+                "crashedTask": true,
+                "debugOutput": true,
+                "executableDropped": true,
+                "exploitable": true,
+                "injects": true,
+                "knownThreat": true,
+                "lowAccess": true,
+                "...": "[Additional Properties Truncated]"
               }
             },
             "content": {
               "mainObject": {
-                "type": "file",
-                "permanentUrl": "https://content.any.run/tasks/44d88612-fea8-a8f3-6de8-2e1278abb02f/download/files/44d88612-fea8-a8f3-6de8-2e1278abb02f",
-                "filename": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
-                "basename": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+                "type": "string",
+                "permanentUrl": "https://example.com",
+                "filename": "string",
+                "basename": "string",
+                "url": "../folder",
                 "hashes": {
-                  "md5": "44d88612fea8a8f36de82e1278abb02f",
-                  "sha1": "3395856ce81f2b7382dee72602f798b642f14140",
-                  "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
-                  "ssdeep": "49152:F6VwASOwGtlqOhIU6i5H7teZtsDFc9HSgm7inT9p53PPhk+y94faa57HarYhu+nF:mW+k3E7iZXbteQDm9yOuLns"
+                  "md5": "string",
+                  "sha1": "string",
+                  "sha256": "string",
+                  "ssdeep": "string"
                 },
                 "info": {
-                  "ext": "dll",
-                  "file": "PE32+ executable (DLL) (GUI) x86-64, for MS Windows",
-                  "mime": "application/x-dosexec",
+                  "ext": "string",
+                  "file": "string",
+                  "mime": "string",
                   "exif": {
-                    "EXE": {
-                      "Subsystem": "Windows GUI",
-                      "SubsystemVersion": 6,
-                      "ImageVersion": 0,
-                      "OSVersion": 6,
-                      "EntryPoint": "0x76cdc4",
-                      "UninitializedDataSize": 0,
-                      "InitializedDataSize": 798208,
-                      "CodeSize": 7920640,
-                      "LinkerVersion": 14,
-                      "PEType": "PE32+",
-                      "TimeStamp": "2021:06:10 14:30:40+02:00",
-                      "MachineType": "AMD AMD64"
+                    "propertyName*": {
+                      "propertyName*": "string"
                     }
                   },
                   "trid": [
                     {
-                      "filetype": "Generic Win/DOS Executable",
-                      "extension": ".exe",
-                      "procent": 50
-                    },
-                    {
-                      "filetype": "DOS Executable Generic",
-                      "extension": ".exe",
-                      "procent": 49.9
-                    }
-                  ],
-                  "pe": [
-                    {
-                      "value": [
-                        {
-                          "value": "IMAGE_FILE_MACHINE_AMD64",
-                          "key": "Architecture"
-                        },
-                        {
-                          "value": "IMAGE_SUBSYSTEM_WINDOWS_GUI",
-                          "key": "Subsystem"
-                        },
-                        {
-                          "value": "10-Jun-2021 12:30:40",
-                          "key": "Compilation Date"
-                        },
-                        {
-                          "value": [
-                            "English - United States"
-                          ],
-                          "key": "Detected languages"
-                        }
-                      ],
-                      "key": "Summary"
+                      "procent": 1,
+                      "extension": "string",
+                      "filetype": "string"
                     }
                   ]
                 }
               },
               "video": {
-                "present": false
+                "present": true,
+                "permanentUrl": "https://example.com"
               },
               "pcap": {
                 "present": true,
-                "permanentUrl": "https://content.any.run/tasks/824b58ce-d7dd-4755-936c-a39d92d63d82/download/pcap"
+                "permanentUrl": "https://example.com"
               },
               "sslkeys": {
-                "present": false
+                "present": true,
+                "permanentUrl": "https://example.com"
               },
               "screenshots": [
                 {
-                  "uuid": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
-                  "time": 17169,
-                  "permanentUrl": "https://content.any.run/tasks/44d88612-fea8-a8f3-6de8-2e1278abb02f/download/screens/44d88612-fea8-a8f3-6de8-2e1278abb02f/image.jpeg",
-                  "thumbnailUrl": "https://content.any.run/tasks/44d88612-fea8-a8f3-6de8-2e1278abb02f/download/thumbnails/44d88612-fea8-a8f3-6de8-2e1278abb02f/image.jpeg"
+                  "uuid": "123e4567-e89b-12d3-a456-426614174000",
+                  "time": 1,
+                  "permanentUrl": "https://example.com",
+                  "thumbnailUrl": "https://example.com"
+                }
+              ],
+              "dumps": [
+                {
+                  "taskUUID": "123e4567-e89b-12d3-a456-426614174000",
+                  "fileNumber": 1,
+                  "permanentUrl": "https://example.com",
+                  "timestamp": 1,
+                  "processName": "string",
+                  "pid": 0,
+                  "address": "string",
+                  "size": 0
                 }
               ]
             }
           },
           "environments": {
             "os": {
-              "title": "Windows 7 Professional Service Pack 1 (build: 7601, 32 bit)",
-              "build": 7601,
-              "product": "Windows",
-              "variant": "Professional",
-              "productType": "Client",
-              "major": "7",
-              "servicePack": "1",
-              "softSet": "complete",
-              "bitness": 32
+              "title": "string",
+              "build": 1,
+              "product": "string",
+              "variant": "string",
+              "productType": "string",
+              "bitness": 1,
+              "major": "string",
+              "servicePack": "string",
+              "softSet": "string"
             },
             "internetExplorer": {
-              "version": "11.0.9600.19596",
-              "kbnum": "KB4534251"
+              "version": "string",
+              "kbnum": "string"
             },
             "software": [
               {
-                "title": "Microsoft Visual C++ 2013 x86 Additional Runtime - 12.0.21005",
-                "version": "12.0.21005"
-              },
-              {
-                "title": "Microsoft Visual C++ 2013 Redistributable (x86) - 12.0.30501",
-                "version": "12.0.30501.0"
-              },
-              {
-                "title": "Microsoft Visual C++ 2010  x86 Redistributable - 10.0.40219",
-                "version": "10.0.40219"
-              },
-              {
-                "title": "Google Chrome",
-                "version": "86.0.4240.198"
-              },
-              {
-                "title": "Adobe Acrobat Reader DC",
-                "version": "20.013.20064"
-              },
-              {
-                "title": "Adobe Refresh Manager",
-                "version": "1.8.0"
-              },
-              {
-                "title": "Microsoft Visual C++ 2008 Redistributable - x86 9.0.30729.6161",
-                "version": "9.0.30729.6161"
-              },
-              {
-                "title": "Microsoft .NET Framework 4.5.2",
-                "version": "4.5.51209"
-              },
-              {
-                "title": "Microsoft Office Access Setup Metadata MUI (English) 2010",
-                "version": "14.0.6029.1000"
-              },
-              {
-                "title": "Microsoft Office Shared Setup Metadata MUI (English) 2010",
-                "version": "14.0.6029.1000"
-              },
-              {
-                "title": "Microsoft Office Shared MUI (English) 2010",
-                "version": "14.0.6029.1000"
-              },
-              {
-                "title": "Microsoft Office Single Image 2010",
-                "version": "14.0.6029.1000"
-              },
-              {
-                "title": "Google Update Helper",
-                "version": "1.3.36.31"
-              },
-              {
-                "title": "Java Auto Updater",
-                "version": "2.8.271.9"
-              },
-              {
-                "title": "Microsoft Visual C++ 2015-2019 Redistributable (x86) - 14.21.27702",
-                "version": "14.21.27702.2"
-              },
-              {
-                "title": "Java 8 Update 271",
-                "version": "8.0.2710.9"
-              },
-              {
-                "title": "QGA",
-                "version": "2.14.33"
-              },
-              {
-                "title": "Microsoft Visual C++ 2019 X86 Additional Runtime - 14.21.27702",
-                "version": "14.21.27702"
-              },
-              {
-                "title": "Microsoft Visual C++ 2019 X86 Minimum Runtime - 14.21.27702",
-                "version": "14.21.27702"
-              },
-              {
-                "title": "Microsoft Visual C++ 2013 x86 Minimum Runtime - 12.0.21005",
-                "version": "12.0.21005"
-              },
-              {
-                "title": "WinRAR 5.91 (32-bit)",
-                "version": "5.91.0"
-              },
-              {
-                "title": "VLC media player",
-                "version": "3.0.11"
-              },
-              {
-                "title": "Skype version 8.29",
-                "version": "8.29"
-              },
-              {
-                "title": "Opera 12.15",
-                "version": "12.15.1748"
-              },
-              {
-                "title": "Microsoft Office Professional 2010",
-                "version": "14.0.6029.1000"
-              },
-              {
-                "title": "Notepad++ (32-bit x86)",
-                "version": "7.9.1"
-              },
-              {
-                "title": "Mozilla Maintenance Service",
-                "version": "83.0.0.7621"
-              },
-              {
-                "title": "Mozilla Firefox 83.0 (x86 en-US)",
-                "version": "83.0"
-              },
-              {
-                "title": "FileZilla Client 3.51.0",
-                "version": "3.51.0"
-              },
-              {
-                "title": "CCleaner",
-                "version": "5.74"
-              },
-              {
-                "title": "Adobe Flash Player 32 PPAPI",
-                "version": "32.0.0.453"
-              },
-              {
-                "title": "Adobe Flash Player 32 NPAPI",
-                "version": "32.0.0.453"
-              },
-              {
-                "title": "Adobe Flash Player 32 ActiveX",
-                "version": "32.0.0.453"
+                "title": "string",
+                "version": "string"
               }
             ],
             "hotfixes": [
               {
-                "title": "WUClient SelfUpdate Core TopLevel"
+                "title": "string"
               }
             ]
           },
           "counters": {
             "processes": {
-              "total": 48,
-              "monitored": 15,
+              "total": 1,
+              "monitored": 0,
               "suspicious": 0,
               "malicious": 0
             },
             "network": {
-              "http": 2,
-              "connections": 18,
-              "dns": 12,
+              "http": 0,
+              "connections": 0,
+              "dns": 0,
               "threats": 0
             },
             "files": {
-              "unknown": 8,
-              "text": 189,
-              "suspicious": 42,
+              "unknown": 0,
+              "text": 0,
+              "suspicious": 0,
               "malicious": 0
             },
             "registry": {
-              "total": 10020,
+              "total": 0,
               "read": 0,
-              "write": 56,
-              "delete": 1
+              "write": 0,
+              "delete": 0
             },
             "synchronization": {
-              "total": 130,
+              "total": 0,
               "operation": {
-                "open": 57,
-                "create": 73
+                "open": 0,
+                "create": 0
               },
               "type": {
-                "mutex": 72,
-                "event": 58
+                "mutex": 0,
+                "event": 0
               }
             }
           },
-          "processes": [],
-          "network": {},
-          "modified": {},
-          "incidents": [],
-          "debugStrings": [],
-          "mitre": [],
-          "status": "done"
+          "processes": [
+            {
+              "pid": 0,
+              "ppid": 0,
+              "uuid": "123e4567-e89b-12d3-a456-426614174000",
+              "parentUUID": "123e4567-e89b-12d3-a456-426614174000",
+              "important": true,
+              "image": "string",
+              "commandLine": "string",
+              "fileName": "string",
+              "fileType": "string",
+              "mainProcess": true,
+              "...": "[Additional Properties Truncated]"
+            }
+          ],
+          "network": {
+            "dnsRequests": [
+              {
+                "time": 1,
+                "domain": "string",
+                "ips": [
+                  1
+                ],
+                "reputation": "string",
+                "reputationNumber": 1
+              }
+            ],
+            "httpRequests": [
+              {
+                "time": 1,
+                "method": "string",
+                "host": "string",
+                "url": "https://example.com",
+                "ip": "string",
+                "port": 0,
+                "proxyDetected": true,
+                "user-agent": "string",
+                "status": "string",
+                "httpCode": 1,
+                "...": "[Additional Properties Truncated]"
+              }
+            ],
+            "connections": [
+              {
+                "ip": "string",
+                "port": 0,
+                "protocol": "string",
+                "country": "string",
+                "asn": "string",
+                "time": "2025-11-03T12:40:45.160Z",
+                "process": "string",
+                "tlsFingerprint": {
+                  "ja3": "string",
+                  "ja3Fullstring": "string",
+                  "ja3S": "string",
+                  "ja3SFullstring": "string",
+                  "jarm": "string"
+                },
+                "reputation": "string"
+              }
+            ],
+            "threats": [
+              {
+                "time": "string",
+                "dstip": "string",
+                "srcip": "string",
+                "dstport": 0,
+                "srcport": 0,
+                "sid": 1,
+                "class": "string",
+                "msg": "string",
+                "pro": 1,
+                "priority": 1,
+                "...": "[Additional Properties Truncated]"
+              }
+            ]
+          },
+          "modified": {
+            "files": [
+              {
+                "time": 1,
+                "filename": "string",
+                "size": 0,
+                "type": "string",
+                "threatLevel": "string",
+                "process": "string",
+                "permanentUrl": "https://example.com",
+                "info": {
+                  "file": "string",
+                  "mime": "string"
+                },
+                "hashes": {
+                  "md5": "string",
+                  "sha1": "string",
+                  "sha256": "string",
+                  "ssdeep": "string"
+                }
+              }
+            ],
+            "registry": [
+              {
+                "key": "string",
+                "name": "string",
+                "value": "string",
+                "operation": "string",
+                "process": "string",
+                "time": 1
+              }
+            ]
+          },
+          "incidents": [
+            {
+              "threatLevel": 1,
+              "title": "string",
+              "desc": "string",
+              "source": "string",
+              "firstSeen": 1,
+              "count": 1,
+              "process": "string",
+              "mitre": [
+                {
+                  "tid": "1",
+                  "sid": "1",
+                  "v": "1"
+                }
+              ],
+              "events": [
+                {
+                  "_id": "string",
+                  "time": "2025-11-03T12:40:45.160Z",
+                  "image": "string",
+                  "cmdline": "string"
+                }
+              ]
+            }
+          ],
+          "mitre": [
+            {
+              "id": "string",
+              "name": "string",
+              "phases": [
+                "string"
+              ]
+            }
+          ],
+          "malconf": [
+            {
+              "config": {
+                "C2": "string",
+                "Keys": {
+                  "propertyName*": "anything"
+                },
+                "Options": {
+                  "propertyName*": "anything"
+                },
+                "Strings": [
+                  "string"
+                ]
+              },
+              "family": "string",
+              "processPID": 1,
+              "processTime": 1
+            }
+          ],
+          "debugStrings": [
+            {
+              "time": 1,
+              "message": "string",
+              "process": "string"
+            }
+          ],
+          "status": "string"
         }
       }
     ]
