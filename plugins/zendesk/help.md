@@ -701,6 +701,7 @@ Example output:
 
 # Version History
 
+* 4.0.3 - Update dependency version | Updated SDK to the latest version
 * 4.0.2 - Updated SDK to the latest version | `Search`: Fixed issue where only one search result was returned
 * 4.0.1 - Updated the exceptions for all the actions | Show Organization Memberships: Added types to the actions output
 * 4.0.0 - Change ID parameter types into integer | Update dependency version

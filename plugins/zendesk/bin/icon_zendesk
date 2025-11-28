@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Zendesk"
 Vendor = "rapid7"
-Version = "4.0.2"
+Version = "4.0.3"
 Description = "Regulate customer communications by managing tickets and users in Zendesk data"
 
 

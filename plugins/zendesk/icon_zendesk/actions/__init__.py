@@ -17,4 +17,3 @@ from .delete_ticket.action import DeleteTicket
 from .create_ticket.action import CreateTicket
 
 from .update_ticket.action import UpdateTicket
-
