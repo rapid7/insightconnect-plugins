@@ -1,6 +1,8 @@
 # Description
 
-Regulate customer communications by managing tickets and users in Zendesk data
+The [Zendesk](https://www.zendesk.com) plugin helps manage communication with customers. This plugin allows you to manage tickets and users in Zendesk. Customer Resource Management tool to manage tickets of user complaints and support issues.
+
+This plugin utilizes the [Zendesk Python SDK](https://github.com/facetoe/zenpy).
 
 # Key Features
 
@@ -277,57 +279,6 @@ Example output:
 
 ```
 {
-  "organizations": [
-    {
-      "Created At": "",
-      "Details": "",
-      "External ID": {},
-      "Group ID": 0,
-      "ID": {},
-      "Name": {},
-      "Notes": {},
-      "Shared Comments": "true",
-      "Shared Tickets": {},
-      "Tags": [
-        {}
-      ],
-      "URL": {},
-      "Updated At": {}
-    }
-  ],
-  "tickets": [
-    {
-      "Assignee ID": 0,
-      "Attachment": {
-        "content": "bytes",
-        "filename": "string"
-      },
-      "Collaborator IDs": [
-        {}
-      ],
-      "Comment": {
-        "Author ID": {},
-        "Body": "",
-        "HTML Body": {},
-        "Public": "true"
-      },
-      "Description": {},
-      "Due At": "",
-      "External ID": {},
-      "Group ID": {},
-      "ID": {},
-      "Priority": {},
-      "Problem ID": {},
-      "Recipient ID": {},
-      "Requester ID": {},
-      "Status": {},
-      "Subject": {},
-      "Tags": [
-        {}
-      ],
-      "Type": {}
-    }
-  ],
   "users": [
     {
       "active": true,
