@@ -12,7 +12,7 @@ support: community
 status: []
 sdk:
   type: slim
-  version: 6.4.0
+  version: 6.3.10
   user: nobody
 key_features:
   - "Create, manage, and delete issues and epics"
