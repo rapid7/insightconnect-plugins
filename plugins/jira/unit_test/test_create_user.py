@@ -11,7 +11,7 @@ from komand_jira.connection.connection import Connection
 
 
 class MockClient:
-    def __init__(self, is_cloud):
+    def __init__(self, is_cloud) -> None:
         self.client = "some fake thing"
         self.is_cloud = is_cloud
 
@@ -31,11 +31,15 @@ class MockClient:
 
 
 class MockRestClient:
-    def __init__(self):
+    def __init__(self) -> None:
         self.client = "some fake thing"
 
-    def add_user(self, params: dict = {}):
-        self.params = params
+    def add_user(self, username: str, email: str, password: str, products: list, notify: bool) -> bool:
+        self.username = username
+        self.email = email
+        self.password = password
+        self.products = products
+        self.notify = notify
         return True
 
 
@@ -49,7 +53,7 @@ class TestCreateUser(TestCase):
         self.test_conn.logger = test_logger
         self.test_action.logger = test_logger
 
-    def test_create_user_cloud_true(self):
+    def test_create_user_cloud_true(self) -> None:
         action_params = {
             "email": "user@example.com",
             "notify": True,
@@ -66,7 +70,7 @@ class TestCreateUser(TestCase):
 
         self.assertTrue(result.get("success"))
 
-    def test_create_user_cloud_false(self):
+    def test_create_user_cloud_false(self) -> None:
         action_params = {
             "email": "user@example.com",
             "notify": True,

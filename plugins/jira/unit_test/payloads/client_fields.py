@@ -63,7 +63,11 @@ client_fields = [
         "navigable": True,
         "searchable": True,
         "clauseNames": ["cf[10032]", "Satisfaction"],
-        "schema": {"type": "sd-feedback", "custom": "com.atlassian.servicedesk:sd-request-feedback", "customId": 10032},
+        "schema": {
+            "type": "sd-feedback",
+            "custom": "com.atlassian.servicedesk:sd-request-feedback",
+            "customId": 10032,
+        },
     },
     {
         "id": "fixVersions",
@@ -186,7 +190,11 @@ client_fields = [
         "navigable": True,
         "searchable": True,
         "clauseNames": ["cf[10028]", "Story point estimate"],
-        "schema": {"type": "number", "custom": "com.pyxis.greenhopper.jira:jsw-story-points", "customId": 10028},
+        "schema": {
+            "type": "number",
+            "custom": "com.pyxis.greenhopper.jira:jsw-story-points",
+            "customId": 10028,
+        },
     },
     {
         "id": "customfield_10029",
@@ -198,7 +206,11 @@ client_fields = [
         "navigable": True,
         "searchable": True,
         "clauseNames": ["cf[10029]", "Issue color"],
-        "schema": {"type": "string", "custom": "com.pyxis.greenhopper.jira:jsw-issue-color", "customId": 10029},
+        "schema": {
+            "type": "string",
+            "custom": "com.pyxis.greenhopper.jira:jsw-issue-color",
+            "customId": 10029,
+        },
     },
     {
         "id": "resolutiondate",
@@ -494,7 +506,11 @@ client_fields = [
         "navigable": True,
         "searchable": True,
         "clauseNames": ["cf[10011]", "Rank"],
-        "schema": {"type": "any", "custom": "com.pyxis.greenhopper.jira:gh-lexo-rank", "customId": 10011},
+        "schema": {
+            "type": "any",
+            "custom": "com.pyxis.greenhopper.jira:gh-lexo-rank",
+            "customId": 10011,
+        },
     },
     {
         "id": "customfield_10012",
@@ -525,8 +541,16 @@ client_fields = [
         "orderable": True,
         "navigable": True,
         "searchable": True,
-        "clauseNames": ["[CHART] Time in Status", "[CHART] Time in Status[Time in Status]", "cf[10013]"],
-        "schema": {"type": "any", "custom": "com.atlassian.jira.ext.charting:timeinstatus", "customId": 10013},
+        "clauseNames": [
+            "[CHART] Time in Status",
+            "[CHART] Time in Status[Time in Status]",
+            "cf[10013]",
+        ],
+        "schema": {
+            "type": "any",
+            "custom": "com.atlassian.jira.ext.charting:timeinstatus",
+            "customId": 10013,
+        },
     },
     {
         "id": "customfield_10014",
@@ -565,7 +589,11 @@ client_fields = [
         "navigable": True,
         "searchable": True,
         "clauseNames": ["cf[10005]", "Epic Name"],
-        "schema": {"type": "string", "custom": "com.pyxis.greenhopper.jira:gh-epic-label", "customId": 10005},
+        "schema": {
+            "type": "string",
+            "custom": "com.pyxis.greenhopper.jira:gh-epic-label",
+            "customId": 10005,
+        },
     },
     {
         "id": "customfield_10006",
@@ -577,7 +605,11 @@ client_fields = [
         "navigable": True,
         "searchable": True,
         "clauseNames": ["cf[10006]", "Epic Status"],
-        "schema": {"type": "option", "custom": "com.pyxis.greenhopper.jira:gh-epic-status", "customId": 10006},
+        "schema": {
+            "type": "option",
+            "custom": "com.pyxis.greenhopper.jira:gh-epic-status",
+            "customId": 10006,
+        },
     },
     {
         "id": "security",
@@ -600,7 +632,11 @@ client_fields = [
         "navigable": True,
         "searchable": True,
         "clauseNames": ["cf[10007]", "Epic Colour"],
-        "schema": {"type": "string", "custom": "com.pyxis.greenhopper.jira:gh-epic-color", "customId": 10007},
+        "schema": {
+            "type": "string",
+            "custom": "com.pyxis.greenhopper.jira:gh-epic-color",
+            "customId": 10007,
+        },
     },
     {
         "id": "customfield_10008",
@@ -612,7 +648,11 @@ client_fields = [
         "navigable": True,
         "searchable": True,
         "clauseNames": ["cf[10008]", "Epic Link"],
-        "schema": {"type": "any", "custom": "com.pyxis.greenhopper.jira:gh-epic-link", "customId": 10008},
+        "schema": {
+            "type": "any",
+            "custom": "com.pyxis.greenhopper.jira:gh-epic-link",
+            "customId": 10008,
+        },
     },
     {
         "id": "attachment",
@@ -646,7 +686,11 @@ client_fields = [
         "navigable": True,
         "searchable": True,
         "clauseNames": ["cf[10009]", "Parent Link"],
-        "schema": {"type": "any", "custom": "com.atlassian.jpo:jpo-custom-field-parent", "customId": 10009},
+        "schema": {
+            "type": "any",
+            "custom": "com.atlassian.jpo:jpo-custom-field-parent",
+            "customId": 10009,
+        },
     },
     {
         "id": "summary",
@@ -729,7 +773,11 @@ client_fields = [
         "navigable": True,
         "searchable": True,
         "clauseNames": ["cf[10001]", "Team", "Team[Team]"],
-        "schema": {"type": "any", "custom": "com.atlassian.teams:rm-teams-custom-field-team", "customId": 10001},
+        "schema": {
+            "type": "any",
+            "custom": "com.atlassian.teams:rm-teams-custom-field-team",
+            "customId": 10001,
+        },
     },
     {
         "id": "customfield_10004",
@@ -758,7 +806,11 @@ client_fields = [
         "navigable": True,
         "searchable": True,
         "clauseNames": ["cf[10038]", "Target start"],
-        "schema": {"type": "date", "custom": "com.atlassian.jpo:jpo-custom-field-baseline-start", "customId": 10038},
+        "schema": {
+            "type": "date",
+            "custom": "com.atlassian.jpo:jpo-custom-field-baseline-start",
+            "customId": 10038,
+        },
     },
     {
         "id": "customfield_10039",
@@ -770,7 +822,11 @@ client_fields = [
         "navigable": True,
         "searchable": True,
         "clauseNames": ["cf[10039]", "Target end"],
-        "schema": {"type": "date", "custom": "com.atlassian.jpo:jpo-custom-field-baseline-end", "customId": 10039},
+        "schema": {
+            "type": "date",
+            "custom": "com.atlassian.jpo:jpo-custom-field-baseline-end",
+            "customId": 10039,
+        },
     },
     {
         "id": "environment",
