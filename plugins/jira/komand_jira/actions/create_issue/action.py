@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import CreateIssueInput, CreateIssueOutput, Input, Output, Component
 
 # Custom imports below
-from komand_jira.util.util import look_up_project, normalize_issue
+from komand_jira.util.util import look_up_project, normalize_issue, load_text_as_adf
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
@@ -15,16 +15,22 @@ class CreateIssue(insightconnect_plugin_runtime.Action):
             output=CreateIssueOutput(),
         )
 
-    def check_issue_type_exists(self, issue_type: str):
+    def check_issue_type_exists(self, issue_type: str) -> None:
         try:
-            issue_types = self.connection.client.issue_types()
+            issue_types = (
+                self.connection.client.issue_types()
+                if not self.connection.is_cloud
+                else self.connection.rest_client.get_all_issue_types()
+            )
             issue_type_exists = False
             for retrieved_issue_type in issue_types:
-                if retrieved_issue_type.raw.get("name") == issue_type:
+                if not self.connection.is_cloud:
+                    retrieved_issue_type = retrieved_issue_type.raw
+                if retrieved_issue_type.get("name") == issue_type:
                     issue_type_exists = True
                     break
-            if issue_type_exists is False:
-                raise Exception
+            if not issue_type_exists:
+                raise PluginException
         except Exception as exception:
             raise PluginException(
                 cause="Issue type not known or user doesn't have permissions.",
@@ -34,7 +40,9 @@ class CreateIssue(insightconnect_plugin_runtime.Action):
             )
 
     def check_project_is_valid(self, project: str):
-        valid_project = look_up_project(project, self.connection.client)
+        valid_project = look_up_project(
+            project, self.connection.client, self.connection.rest_client, is_cloud=self.connection.is_cloud
+        )
         if not valid_project:
             raise PluginException(
                 cause=f"Project {project} does not exist or user don't have permission to access the project.",
@@ -42,49 +50,63 @@ class CreateIssue(insightconnect_plugin_runtime.Action):
             )
 
     def run(self, params={}):
-        """Run action"""
-        project = params.get(Input.PROJECT)
-
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        project = params.get(Input.PROJECT, "")
         issue_type = params.get(Input.TYPE)
         summary = params.get(Input.SUMMARY, " ").replace("\n", " ")
         description = params.get(Input.DESCRIPTION, " ")
+        attachment_filename = params.get(Input.ATTACHMENT_FILENAME, "")
+        attachment_bytes = params.get(Input.ATTACHMENT_BYTES, "")
         fields = params.get(Input.FIELDS, {})
+        # END INPUT BINDING - DO NOT REMOVE
 
+        # Checks for valid project and issue type
         self.check_project_is_valid(project)
         self.check_issue_type_exists(issue_type)
 
-        self.logger.debug("Create issue with: %s", params)
-
-        fields["project"] = project
+        # Append required fields for issue creation
+        fields["project"] = project if not self.connection.is_cloud else {"key": project}
         fields["summary"] = summary
-        fields["description"] = description
+        fields["description"] = description if not self.connection.is_cloud else load_text_as_adf(description)
         fields["issuetype"] = {"name": issue_type}
 
-        for client_field in self.connection.client.fields():
+        # Map field names to IDs
+        fields_function = (
+            self.connection.client.fields
+            if not self.connection.is_cloud
+            else self.connection.rest_client.get_issue_fields
+        )
+        for client_field in fields_function():
             if client_field["name"] in fields:
                 field_value = fields.pop(client_field["name"])
                 fields[client_field["id"]] = {"value": field_value}
 
-        issue = self.connection.client.create_issue(fields=fields)
-        output = normalize_issue(issue, logger=self.logger)
+        # Create the issue
+        if not self.connection.is_cloud:
+            issue = self.connection.client.create_issue(fields=fields)
+            issue_key = issue.key
+        else:
+            issue_key = self.connection.rest_client.create_issue(issue_fields=fields).get("key", "")
+            issue = self.connection.rest_client.get_issue(issue_key)
 
-        if params.get(Input.ATTACHMENT_BYTES) and not params.get(Input.ATTACHMENT_FILENAME):
+        # Normalize the issue for output
+        output = normalize_issue(issue, logger=self.logger, is_cloud=self.connection.is_cloud)
+
+        # Handle issue attachment if provided
+        if attachment_bytes and not attachment_filename:
             raise PluginException(
                 cause="Attachment contents provided but no attachment filename.",
                 assistance="Please provide attachment filename.",
             )
-
-        if params.get(Input.ATTACHMENT_FILENAME) and not params.get(Input.ATTACHMENT_BYTES):
+        elif attachment_filename and not attachment_bytes:
             raise PluginException(
                 cause="Attachment filename provided but no attachment contents.",
                 assistance="Please provide attachment contents.",
             )
-
-        if params.get(Input.ATTACHMENT_BYTES) and params.get(Input.ATTACHMENT_FILENAME):
+        elif attachment_bytes and attachment_filename:
             self.connection.rest_client.add_attachment(
-                issue.key,
-                params.get(Input.ATTACHMENT_FILENAME),
-                params.get(Input.ATTACHMENT_BYTES),
+                issue_key,
+                attachment_filename,
+                attachment_bytes,
             )
-
         return {Output.ISSUE: output}

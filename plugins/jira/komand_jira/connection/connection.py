@@ -21,10 +21,10 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.rest_client = None
 
     def _validate_params(self, params={}):
-        self.url = params.get(Input.URL, "")
-        self.username = params.get(Input.USER)
-        self.password = params.get(Input.API_KEY, {}).get("secretKey", "")
-        self.pat = params.get(Input.PAT, {}).get("secretKey", "")
+        self.url = params.get(Input.URL, "").strip()
+        self.username = params.get(Input.USER, "").strip()
+        self.password = params.get(Input.API_KEY, {}).get("secretKey", "").strip()
+        self.pat = params.get(Input.PAT, {}).get("secretKey", "").strip()
 
         if (self.username and self.pat) or (self.password and self.pat):
             raise PluginException(
@@ -39,7 +39,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
             raise PluginException(cause="No credentials provided at all.", assistance="Please provide some credentials")
 
     def connect(self, params={}):
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         self._validate_params(params)
+        # END INPUT BINDING - DO NOT REMOVE
 
         if ".atlassian.net" in self.url or ".jira.com" in self.url:
             self.is_cloud = True
@@ -53,13 +55,15 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         if self.pat:
             client = JIRA(options={"server": self.url}, token_auth=self.pat)
+            rest_client = JiraApi(self.url, {"Authorization": f"Bearer {self.pat}"}, self.logger)
         elif self.test():
             client = JIRA(options={"server": self.url}, basic_auth=(self.username, self.password))
+            rest_client = JiraApi(self.url, HTTPBasicAuth(username=self.username, password=self.password), self.logger)
         else:
             raise PluginException(cause="Please provide basic_auth or PAT.")
 
         self.client = client
-        self.rest_client = JiraApi(self.client, self.is_cloud, self.logger)
+        self.rest_client = rest_client
 
     def test_pat(self):
         headers = {"Authorization": f"Bearer {self.pat}", "Content-Type": "application/json"}

@@ -4,6 +4,7 @@ import sys
 sys.path.append(os.path.abspath("../"))
 
 import logging
+from typing import Any
 from unittest import TestCase
 
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -25,10 +26,15 @@ class TestConnection(TestCase):
                     "url": "http://jira-123456.eastus.cloudapp.azure.com",
                 }
             ),
-            param({"pat": {"secretKey": "1234567"}, "url": "http://jira-123456.eastus.cloudapp.azure.com"}),
+            param(
+                {
+                    "pat": {"secretKey": "1234567"},
+                    "url": "http://jira-123456.eastus.cloudapp.azure.com",
+                }
+            ),
         ]
     )
-    def test__validate_params_ok(self, params):
+    def test__validate_params_ok(self, params: dict[str, Any]) -> None:
         self.connection._validate_params(params)
 
     @parameterized.expand(
@@ -58,7 +64,7 @@ class TestConnection(TestCase):
             ),
         ]
     )
-    def test__validate_params_raise(self, params, cause):
+    def test__validate_params_raise(self, params: dict[str, Any], cause: str) -> None:
         with self.assertRaises(PluginException) as exception_ctx:
             self.connection._validate_params(params)
         self.assertEqual(exception_ctx.exception.cause, cause)

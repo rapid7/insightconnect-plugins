@@ -15,14 +15,25 @@ class FindIssues(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        """Search for issues"""
-        max_results = params.get(Input.MAX)
-        get_attachments = params.get(Input.GET_ATTACHMENTS, False)
-        issues = self.connection.client.search_issues(jql_str=params[Input.JQL], maxResults=max_results)
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        jql_str = params.pop(Input.JQL, "")
+        max_results = params.pop(Input.MAX)
+        get_attachments = params.pop(Input.GET_ATTACHMENTS, False)
+        # END INPUT BINDING - DO NOT REMOVE
 
+        # Retrieve issues from Jira, depending on whether it's Cloud or Server
+        if not self.connection.is_cloud:
+            issues = self.connection.client.search_issues(jql_str=jql_str, maxResults=max_results)
+        else:
+            issues = self.connection.rest_client.search_issues(jql=jql_str, max_results=max_results).get("issues", [])
+
+        # Normalize issues and return
         results = list(
-            map(lambda issue: normalize_issue(issue, get_attachments=get_attachments, logger=self.logger), issues)
+            map(
+                lambda issue: normalize_issue(
+                    issue, get_attachments=get_attachments, logger=self.logger, is_cloud=self.connection.is_cloud
+                ),
+                issues,
+            )
         )
-        results = insightconnect_plugin_runtime.helper.clean(results)
-
-        return {Output.ISSUES: results}
+        return {Output.ISSUES: insightconnect_plugin_runtime.helper.clean(results)}
