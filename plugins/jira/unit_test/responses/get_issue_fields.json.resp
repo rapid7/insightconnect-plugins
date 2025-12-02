@@ -1,0 +1,33 @@
+[
+  {
+    "clauseNames": [
+      "description"
+    ],
+    "custom": false,
+    "id": "description",
+    "name": "Description",
+    "navigable": true,
+    "orderable": true,
+    "schema": {
+      "system": "description",
+      "type": "string"
+    },
+    "searchable": true
+  },
+  {
+    "clauseNames": [
+      "summary"
+    ],
+    "custom": false,
+    "id": "summary",
+    "key": "summary",
+    "name": "Summary",
+    "navigable": true,
+    "orderable": true,
+    "schema": {
+      "system": "summary",
+      "type": "string"
+    },
+    "searchable": true
+  }
+]
