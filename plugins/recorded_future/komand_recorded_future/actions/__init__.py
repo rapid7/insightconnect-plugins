@@ -49,4 +49,3 @@ from .list_url_risk_rules.action import ListUrlRiskRules
 from .search_urls.action import SearchUrls
 
 from .download_url_risk_list.action import DownloadUrlRiskList
-

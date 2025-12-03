@@ -6,8 +6,8 @@ from sys import argv
 
 Name = "Recorded Future"
 Vendor = "rapid7"
-Version = "7.0.0"
-Description = "Recorded Future arms threat analysts, security operators, and incident responders to rapidly connect the dots and reveal unknown threats. Using the Recorded Future plugin for Rapid7 InsightConnect, users can search domain lists, entity lists, and more"
+Version = "7.0.1"
+Description = "[Recorded Future](https://www.recordedfuture.com/) arms threat analysts, security operators, and incident responders to rapidly connect the dots and reveal unknown threats. Using the plugin, users can search domain lists, entity lists, and more.The plugin enables searching domain lists, entity lists, and more to assist with threat analysis, incident response, and vulnerability management.Note: Downloaded files are returned in [STIX](https://stixproject.github.io/about/) format"
 
 
 def main():
