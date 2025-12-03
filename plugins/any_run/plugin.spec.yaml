@@ -4,8 +4,9 @@ products: [insightconnect]
 name: any_run
 title: "Any.Run"
 description: Analyze suspicious and malicious activities using the cloud-based malware analysis service
-version: 1.1.2
-supported_versions: ["Any.Run API 2022-05-17"]
+version: 2.0.0
+connection_version: 2
+supported_versions: ["Any.Run API 2025-11-05"]
 vendor: rapid7
 support: community
 status: []
@@ -14,13 +15,36 @@ resources:
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://any.run
 tags:
-- any run
-- malware
-- threat intelligence
+  - any run
+  - malware
+  - threat intelligence
 hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [malware_analysis, threat_intelligence]
   features: []
+sdk:
+  type: slim
+  version: 6.4.0
+  user: nobody
+key_features:
+  - Submit files for analysis
+  - Obtain analysis reports
+  - Search task history
+requirements:
+  - Requires an API Key or username and password combination
+troubleshooting:
+  - When configuring the connection, only one authentication method can be supplied. Enter an API key or the username and password combination
+version_history:
+  - "2.0.0 - Actions: `Get Report` - Updated output schema types | Updated SDK to the latest version (6.4.0)"
+  - "1.1.2 - Fix issue with file defaulting to Windows 7 32-Bit"
+  - "1.1.1 - Fix issue with invalid inputs in Run Analysis action | Fix issue where Run Analysis action fails if optional inputs are provided as empty strings | Fix issue where Get Report action fails when fields in output contain `None` value | Improve error handling"
+  - "1.1.0 - Allow user agent input when using URL type in Run Analysis action"
+  - "1.0.0 - Initial plugin"
+links:
+  - "[Any Run](https://any.run/)"
+references:
+  - "[Any Run](https://any.run/)"
+  - "[Any Run documentation](https://any.run/api-documentation/)"
 types:
   hashes:
     ssdeep:
@@ -108,1228 +132,1249 @@ types:
       description: Task hashes
       type: hashes
       required: true
+    uuid:
+      title: UUID
+      description: Task UUID
+      type: string
+      required: false
   EXE:
     CharacterSet:
-      title: "Characterset"
+      title: Characterset
+      description: Characterset
       type: string
-      description: "Characterset"
       required: false
     CodeSize:
-      title: "Codesize"
+      title: Codesize
+      description: Codesize
       type: integer
-      description: "Codesize"
       required: false
     CompanyName:
-      title: "Companyname"
+      title: Companyname
+      description: Companyname
       type: string
-      description: "Companyname"
       required: false
     EntryPoint:
-      title: "Entrypoint"
+      title: Entrypoint
+      description: Entrypoint
       type: string
-      description: "Entrypoint"
       required: false
     FileDescription:
-      title: "Filedescription"
+      title: Filedescription
+      description: Filedescription
       type: string
-      description: "Filedescription"
       required: false
     FileFlags:
-      title: "Fileflags"
+      title: Fileflags
+      description: Fileflags
       type: string
-      description: "Fileflags"
       required: false
     FileFlagsMask:
-      title: "Fileflagsmask"
+      title: Fileflagsmask
+      description: Fileflagsmask
       type: string
-      description: "Fileflagsmask"
       required: false
     FileOS:
-      title: "Fileos"
+      title: Fileos
+      description: Fileos
       type: string
-      description: "Fileos"
       required: false
     FileSubtype:
-      title: "Filesubtype"
+      title: Filesubtype
+      description: Filesubtype
       type: integer
-      description: "Filesubtype"
       required: false
     FileVersion:
-      title: "Fileversion"
+      title: Fileversion
+      description: Fileversion
       type: float
-      description: "Fileversion"
       required: false
     FileVersionNumber:
-      title: "Fileversionnumber"
+      title: Fileversionnumber
+      description: Fileversionnumber
       type: string
-      description: "Fileversionnumber"
       required: false
     ImageVersion:
-      title: "Imageversion"
+      title: Imageversion
+      description: Imageversion
       type: integer
-      description: "Imageversion"
       required: false
     InitializedDataSize:
-      title: "Initializeddatasize"
+      title: Initializeddatasize
+      description: Initializeddatasize
       type: integer
-      description: "Initializeddatasize"
       required: false
     InternalName:
-      title: "Internalname"
+      title: Internalname
+      description: Internalname
       type: string
-      description: "Internalname"
       required: false
     LanguageCode:
-      title: "Languagecode"
+      title: Languagecode
+      description: Languagecode
       type: string
-      description: "Languagecode"
       required: false
     LegalCopyright:
-      title: "Legalcopyright"
+      title: Legalcopyright
+      description: Legalcopyright
       type: string
-      description: "Legalcopyright"
       required: false
     LinkerVersion:
-      title: "Linkerversion"
+      title: Linkerversion
+      description: Linkerversion
       type: integer
-      description: "Linkerversion"
       required: false
     MachineType:
-      title: "Machinetype"
+      title: Machinetype
+      description: Machinetype
       type: string
-      description: "Machinetype"
       required: false
     OSVersion:
-      title: "Osversion"
+      title: Osversion
+      description: Osversion
       type: integer
-      description: "Osversion"
       required: false
     ObjectFileType:
-      title: "Objectfiletype"
+      title: Objectfiletype
+      description: Objectfiletype
       type: string
-      description: "Objectfiletype"
       required: false
     OriginalFileName:
-      title: "Originalfilename"
+      title: Originalfilename
+      description: Originalfilename
       type: string
-      description: "Originalfilename"
       required: false
     PEType:
-      title: "Petype"
+      title: Petype
+      description: Petype
       type: string
-      description: "Petype"
       required: false
     ProductName:
-      title: "Productname"
+      title: Productname
+      description: Productname
       type: string
-      description: "Productname"
       required: false
     ProductVersion:
-      title: "Productversion"
+      title: Productversion
+      description: Productversion
       type: float
-      description: "Productversion"
       required: false
     ProductVersionNumber:
-      title: "Productversionnumber"
+      title: Productversionnumber
+      description: Productversionnumber
       type: string
-      description: "Productversionnumber"
       required: false
     Subsystem:
-      title: "Subsystem"
+      title: Subsystem
+      description: Subsystem
       type: string
-      description: "Subsystem"
       required: false
     SubsystemVersion:
-      title: "Subsystemversion"
+      title: Subsystemversion
+      description: Subsystemversion
       type: integer
-      description: "Subsystemversion"
       required: false
     TimeStamp:
-      title: "Timestamp"
+      title: Timestamp
+      description: Timestamp
       type: string
-      description: "Timestamp"
       required: false
     UninitializedDataSize:
-      title: "Uninitializeddatasize"
+      title: Uninitializeddatasize
+      description: Uninitializeddatasize
       type: integer
-      description: "Uninitializeddatasize"
       required: false
   exif:
     EXE:
-      title: "Exe"
+      title: Exe
+      description: Exe
       type: EXE
-      description: "Exe"
       required: false
   pe:
     key:
-      title: "Key"
+      title: Key
+      description: Key
       type: string
-      description: "Key"
       required: false
     value:
-      title: "Value"
+      title: Value
+      description: Value
       type: "[]object"
-      description: "Value"
       required: false
   trid:
     extension:
-      title: "Extension"
+      title: Extension
+      description: Extension
       type: string
-      description: "Extension"
       required: false
     filetype:
-      title: "Filetype"
+      title: Filetype
+      description: Filetype
       type: string
-      description: "Filetype"
       required: false
     procent:
-      title: "Procent"
+      title: Procent
+      description: Procent
       type: float
-      description: "Procent"
       required: false
   info:
     exif:
-      title: "Exif"
+      title: Exif
+      description: Exif
       type: exif
-      description: "Exif"
       required: false
     ext:
-      title: "Ext"
+      title: Ext
+      description: Ext
       type: string
-      description: "Ext"
       required: false
     file:
-      title: "File"
+      title: File
+      description: File
       type: string
-      description: "File"
       required: false
     mime:
-      title: "MIME"
+      title: MIME
+      description: MIME
       type: string
-      description: "MIME"
       required: false
     pe:
-      title: "Pe"
+      title: Pe
+      description: Pe
       type: "[]pe"
-      description: "Pe"
       required: false
     trid:
-      title: "Trid"
+      title: Trid
+      description: Trid
       type: "[]trid"
-      description: "Trid"
       required: false
   mainObject:
     filename:
-      title: "Filename"
+      title: Filename
+      description: Filename
       type: string
-      description: "Filename"
       required: false
     hashes:
-      title: "Hashes"
+      title: Hashes
+      description: Hashes
       type: hashes
-      description: "Hashes"
       required: false
     info:
-      title: "Info"
+      title: Info
+      description: Info
       type: info
-      description: "Info"
       required: false
     permanentUrl:
-      title: "Permanenturl"
+      title: Permanenturl
+      description: Permanenturl
       type: string
-      description: "Permanenturl"
       required: false
     type:
-      title: "Type"
+      title: Type
+      description: Type
       type: string
-      description: "Type"
       required: false
   pcap:
     permanentUrl:
-      title: "Permanenturl"
+      title: Permanenturl
+      description: Permanenturl
       type: string
-      description: "Permanenturl"
       required: false
     present:
-      title: "Present"
+      title: Present
+      description: Present
       type: boolean
-      description: "Present"
       required: false
   screenshots:
     permanentUrl:
-      title: "Permanenturl"
+      title: Permanenturl
+      description: Permanenturl
       type: string
-      description: "Permanenturl"
       required: false
     thumbnailUrl:
-      title: "Thumbnailurl"
+      title: Thumbnailurl
+      description: Thumbnailurl
       type: string
-      description: "Thumbnailurl"
       required: false
     time:
-      title: "Time"
+      title: Time
+      description: Time
       type: integer
-      description: "Time"
       required: false
     uuid:
-      title: "UUID"
+      title: UUID
+      description: UUID
       type: string
-      description: "UUID"
       required: false
   automatization:
     uac:
-      title: "Uac"
+      title: Uac
+      description: Uac
       type: boolean
-      description: "Uac"
       required: false
   tor:
     geo:
-      title: "Geo"
+      title: Geo
+      description: Geo
       type: string
-      description: "Geo"
       required: false
     used:
-      title: "Used"
+      title: Used
+      description: Used
       type: boolean
-      description: "Used"
       required: false
   options:
     additionalTime:
-      title: "Additionaltime"
+      title: Additionaltime
+      description: Additionaltime
       type: integer
-      description: "Additionaltime"
       required: false
     automatization:
-      title: "Automatization"
+      title: Automatization
+      description: Automatization
       type: automatization
-      description: "Automatization"
       required: false
     fakeNet:
-      title: "Fakenet"
+      title: Fakenet
+      description: Fakenet
       type: boolean
-      description: "Fakenet"
       required: false
     heavyEvasion:
-      title: "Heavyevasion"
+      title: Heavyevasion
+      description: Heavyevasion
       type: boolean
-      description: "Heavyevasion"
       required: false
     hideSource:
-      title: "Hidesource"
+      title: Hidesource
+      description: Hidesource
       type: boolean
-      description: "Hidesource"
       required: false
     mitm:
-      title: "Mitm"
+      title: Mitm
+      description: Mitm
       type: boolean
-      description: "Mitm"
       required: false
     network:
-      title: "Network"
+      title: Network
+      description: Network
       type: boolean
-      description: "Network"
       required: false
     presentation:
-      title: "Presentation"
+      title: Presentation
+      description: Presentation
       type: boolean
-      description: "Presentation"
       required: false
     privacy:
-      title: "Privacy"
+      title: Privacy
+      description: Privacy
       type: string
-      description: "Privacy"
       required: false
     privateSample:
-      title: "Privatesample"
+      title: Privatesample
+      description: Privatesample
       type: boolean
-      description: "Privatesample"
       required: false
     timeout:
-      title: "Timeout"
+      title: Timeout
+      description: Timeout
       type: integer
-      description: "Timeout"
       required: false
     tor:
-      title: "Tor"
+      title: Tor
+      description: Tor
       type: tor
-      description: "Tor"
       required: false
     video:
-      title: "Video"
+      title: Video
+      description: Video
       type: boolean
-      description: "Video"
       required: false
   content:
     mainObject:
-      title: "Mainobject"
+      title: Mainobject
+      description: Mainobject
       type: mainObject
-      description: "Mainobject"
       required: false
     pcap:
-      title: "PCAP"
+      title: PCAP
+      description: PCAP
       type: pcap
-      description: "PCAP"
       required: false
     screenshots:
-      title: "Screenshots"
+      title: Screenshots
+      description: Screenshots
       type: "[]screenshots"
-      description: "Screenshots"
       required: false
     video:
-      title: "Video"
+      title: Video
+      description: Video
       type: pcap
-      description: "Video"
       required: false
   plan:
     name:
-      title: "Name"
+      title: Name
+      description: Name
       type: string
-      description: "Name"
       required: false
   sandbox:
     name:
-      title: "Name"
+      title: Name
+      description: Name
       type: string
-      description: "Name"
       required: false
     plan:
-      title: "Plan"
+      title: Plan
+      description: Plan
       type: plan
-      description: "Plan"
       required: false
   specs:
     autostart:
-      title: "Autostart"
+      title: Autostart
+      description: Autostart
       type: boolean
-      description: "Autostart"
       required: false
     cpuOverrun:
-      title: "Cpuoverrun"
+      title: Cpuoverrun
+      description: Cpuoverrun
       type: boolean
-      description: "Cpuoverrun"
       required: false
     crashedApps:
-      title: "Crashedapps"
+      title: Crashedapps
+      description: Crashedapps
       type: boolean
-      description: "Crashedapps"
       required: false
     crashedTask:
-      title: "Crashedtask"
+      title: Crashedtask
+      description: Crashedtask
       type: boolean
-      description: "Crashedtask"
       required: false
     debugOutput:
-      title: "Debugoutput"
+      title: Debugoutput
+      description: Debugoutput
       type: boolean
-      description: "Debugoutput"
       required: false
     executableDropped:
-      title: "Executabledropped"
+      title: Executabledropped
+      description: Executabledropped
       type: boolean
-      description: "Executabledropped"
       required: false
     exploitable:
-      title: "Exploitable"
+      title: Exploitable
+      description: Exploitable
       type: boolean
-      description: "Exploitable"
       required: false
     injects:
-      title: "Injects"
+      title: Injects
+      description: Injects
       type: boolean
-      description: "Injects"
       required: false
     lowAccess:
-      title: "Lowaccess"
+      title: Lowaccess
+      description: Lowaccess
       type: boolean
-      description: "Lowaccess"
       required: false
     memOverrun:
-      title: "Memoverrun"
+      title: Memoverrun
+      description: Memoverrun
       type: boolean
-      description: "Memoverrun"
       required: false
     multiprocessing:
-      title: "Multiprocessing"
+      title: Multiprocessing
+      description: Multiprocessing
       type: boolean
-      description: "Multiprocessing"
       required: false
     networkLoader:
-      title: "Networkloader"
+      title: Networkloader
+      description: Networkloader
       type: boolean
-      description: "Networkloader"
       required: false
     networkThreats:
-      title: "Networkthreats"
+      title: Networkthreats
+      description: Networkthreats
       type: boolean
-      description: "Networkthreats"
       required: false
     notStarted:
-      title: "Notstarted"
+      title: Notstarted
+      description: Notstarted
       type: boolean
-      description: "Notstarted"
       required: false
     privEscalation:
-      title: "Privescalation"
+      title: Privescalation
+      description: Privescalation
       type: boolean
-      description: "Privescalation"
       required: false
     rebooted:
-      title: "Rebooted"
+      title: Rebooted
+      description: Rebooted
       type: boolean
-      description: "Rebooted"
       required: false
     serviceLauncher:
-      title: "Servicelauncher"
+      title: Servicelauncher
+      description: Servicelauncher
       type: boolean
-      description: "Servicelauncher"
       required: false
     spam:
-      title: "Spam"
+      title: Spam
+      description: Spam
       type: boolean
-      description: "Spam"
       required: false
     staticDetections:
-      title: "Staticdetections"
+      title: Staticdetections
+      description: Staticdetections
       type: boolean
-      description: "Staticdetections"
       required: false
     stealing:
-      title: "Stealing"
+      title: Stealing
+      description: Stealing
       type: boolean
-      description: "Stealing"
       required: false
     suspStruct:
-      title: "Suspstruct"
+      title: Suspstruct
+      description: Suspstruct
       type: boolean
-      description: "Suspstruct"
       required: false
     torUsed:
-      title: "Torused"
+      title: Torused
+      description: Torused
       type: boolean
-      description: "Torused"
       required: false
   verdict:
     score:
-      title: "Score"
+      title: Score
+      description: Score
       type: integer
-      description: "Score"
       required: false
     threatLevel:
-      title: "Threatlevel"
+      title: Threatlevel
+      description: Threatlevel
       type: integer
-      description: "Threatlevel"
       required: false
     threatLevelText:
-      title: "Threatleveltext"
+      title: Threatleveltext
+      description: Threatleveltext
       type: string
-      description: "Threatleveltext"
       required: false
   scores:
     specs:
-      title: "Specs"
+      title: Specs
+      description: Specs
       type: specs
-      description: "Specs"
       required: false
     verdict:
-      title: "Verdict"
+      title: Verdict
+      description: Verdict
       type: verdict
-      description: "Verdict"
       required: false
   files:
     malicious:
-      title: "Malicious"
+      title: Malicious
+      description: Malicious
       type: integer
-      description: "Malicious"
       required: false
     suspicious:
-      title: "Suspicious"
+      title: Suspicious
+      description: Suspicious
       type: integer
-      description: "Suspicious"
       required: false
     text:
-      title: "Text"
+      title: Text
+      description: Text
       type: integer
-      description: "Text"
       required: false
     unknown:
-      title: "Unknown"
+      title: Unknown
+      description: Unknown
       type: integer
-      description: "Unknown"
       required: false
   network:
     connections:
-      title: "Connections"
+      title: Connections
+      description: Connections
       type: integer
-      description: "Connections"
       required: false
     dns:
-      title: "DNS"
+      title: DNS
+      description: DNS
       type: integer
-      description: "DNS"
       required: false
     http:
-      title: "HTTP"
+      title: HTTP
+      description: HTTP
       type: integer
-      description: "HTTP"
       required: false
     threats:
-      title: "Threats"
+      title: Threats
+      description: Threats
       type: integer
-      description: "Threats"
       required: false
   processes:
     malicious:
-      title: "Malicious"
+      title: Malicious
+      description: Malicious
       type: integer
-      description: "Malicious"
       required: false
     monitored:
-      title: "Monitored"
+      title: Monitored
+      description: Monitored
       type: integer
-      description: "Monitored"
       required: false
     suspicious:
-      title: "Suspicious"
+      title: Suspicious
+      description: Suspicious
       type: integer
-      description: "Suspicious"
       required: false
     total:
-      title: "Total"
+      title: Total
+      description: Total
       type: integer
-      description: "Total"
       required: false
   registry:
     delete:
-      title: "Delete"
+      title: Delete
+      description: Delete
       type: integer
-      description: "Delete"
       required: false
     read:
-      title: "Read"
+      title: Read
+      description: Read
       type: integer
-      description: "Read"
       required: false
     total:
-      title: "Total"
+      title: Total
+      description: Total
       type: integer
-      description: "Total"
       required: false
     write:
-      title: "Write"
+      title: Write
+      description: Write
       type: integer
-      description: "Write"
       required: false
   counters:
     files:
-      title: "Files"
+      title: Files
+      description: Files
       type: files
-      description: "Files"
       required: false
     network:
-      title: "Network"
+      title: Network
+      description: Network
       type: network
-      description: "Network"
       required: false
     processes:
-      title: "Processes"
+      title: Processes
+      description: Processes
       type: processes
-      description: "Processes"
       required: false
     registry:
-      title: "Registry"
+      title: Registry
+      description: Registry
       type: registry
-      description: "Registry"
       required: false
   hotfixes:
     title:
-      title: "Title"
+      title: Title
+      description: Title
       type: string
-      description: "Title"
       required: false
   internetExplorer:
     kbnum:
-      title: "Kbnum"
+      title: Kbnum
+      description: Kbnum
       type: string
-      description: "Kbnum"
       required: false
     version:
-      title: "Version"
+      title: Version
+      description: Version
       type: string
-      description: "Version"
       required: false
   os:
     bitness:
-      title: "Bitness"
+      title: Bitness
+      description: Bitness
       type: integer
-      description: "Bitness"
       required: false
     build:
-      title: "Build"
+      title: Build
+      description: Build
       type: integer
-      description: "Build"
       required: false
     major:
-      title: "Major"
+      title: Major
+      description: Major
       type: string
-      description: "Major"
       required: false
     product:
-      title: "Product"
+      title: Product
+      description: Product
       type: string
-      description: "Product"
       required: false
     productType:
-      title: "Producttype"
+      title: Producttype
+      description: Producttype
       type: string
-      description: "Producttype"
       required: false
     servicePack:
-      title: "Servicepack"
+      title: Servicepack
+      description: Servicepack
       type: string
-      description: "Servicepack"
       required: false
     softSet:
-      title: "Softset"
+      title: Softset
+      description: Softset
       type: string
-      description: "Softset"
       required: false
     title:
-      title: "Title"
+      title: Title
+      description: Title
       type: string
-      description: "Title"
       required: false
     variant:
-      title: "Variant"
+      title: Variant
+      description: Variant
       type: string
-      description: "Variant"
       required: false
   software:
     title:
-      title: "Title"
+      title: Title
+      description: Title
       type: string
-      description: "Title"
       required: false
     version:
-      title: "Version"
+      title: Version
+      description: Version
       type: string
-      description: "Version"
       required: false
   environments:
     hotfixes:
-      title: "Hotfixes"
+      title: Hotfixes
+      description: Hotfixes
       type: "[]hotfixes"
-      description: "Hotfixes"
       required: false
     internetExplorer:
-      title: "Internetexplorer"
+      title: Internetexplorer
+      description: Internetexplorer
       type: internetExplorer
-      description: "Internetexplorer"
       required: false
     os:
-      title: "Os"
+      title: Os
+      description: Os
       type: os
-      description: "Os"
       required: false
     software:
-      title: "Software"
+      title: Software
+      description: Software
       type: "[]software"
-      description: "Software"
+      required: false
+  incidents_mitre:
+    tid:
+      title: Tid
+      description: The technique ID of the MITRE ATT&CK technique associated with the incident
+      type: string
+      required: false
+    sid:
+      title: Sid
+      description: The signature ID used in detection
+      type: string
+      required: false
+    v:
+      title: V
+      description: The version of the technique
+      type: string
       required: false
   incidents:
     count:
-      title: "Count"
+      title: Count
+      description: Count
       type: integer
-      description: "Count"
       required: false
     desc:
-      title: "Desc"
+      title: Desc
+      description: Desc
       type: string
-      description: "Desc"
       required: false
     events:
-      title: "Events"
+      title: Events
+      description: Events
       type: "[]object"
-      description: "Events"
       required: false
     firstSeen:
-      title: "Firstseen"
+      title: Firstseen
+      description: Firstseen
       type: integer
-      description: "Firstseen"
       required: false
     mitre:
-      title: "Mitre"
-      type: "[]string"
-      description: "Mitre"
+      title: Mitre
+      description: Mitre
+      type: "[]incidents_mitre"
       required: false
     process:
-      title: "Process"
+      title: Process
+      description: Process
       type: string
-      description: "Process"
       required: false
     source:
-      title: "Source"
+      title: Source
+      description: Source
       type: string
-      description: "Source"
       required: false
     threatLevel:
-      title: "Threatlevel"
+      title: Threatlevel
+      description: Threatlevel
       type: integer
-      description: "Threatlevel"
       required: false
     title:
-      title: "Title"
+      title: Title
+      description: Title
       type: string
-      description: "Title"
       required: false
   mitre:
     id:
-      title: "Id"
+      title: Id
+      description: Id
       type: string
-      description: "Id"
       required: false
     name:
-      title: "Name"
+      title: Name
+      description: Name
       type: string
-      description: "Name"
       required: false
     phases:
-      title: "Phases"
+      title: Phases
+      description: Phases
       type: "[]string"
-      description: "Phases"
       required: false
   hashes_0:
     head_hash:
-      title: "Head Hash"
+      title: Head Hash
+      description: Head hash
       type: string
-      description: "Head hash"
       required: false
     md5:
-      title: "MD5"
+      title: MD5
+      description: MD5
       type: string
-      description: "MD5"
       required: false
     sha1:
-      title: "SHA1"
+      title: SHA1
+      description: SHA1
       type: string
-      description: "SHA1"
       required: false
     sha256:
-      title: "SHA256"
+      title: SHA256
+      description: SHA256
       type: string
-      description: "SHA256"
       required: false
     ssdeep:
-      title: "Ssdeep"
+      title: Ssdeep
+      description: Ssdeep
       type: string
-      description: "Ssdeep"
       required: false
   info_0:
     file:
-      title: "File"
+      title: File
+      description: File
       type: string
-      description: "File"
       required: false
   files_0:
     filename:
-      title: "Filename"
+      title: Filename
+      description: Filename
       type: string
-      description: "Filename"
       required: false
     hashes:
-      title: "Hashes"
+      title: Hashes
+      description: Hashes
       type: hashes_0
-      description: "Hashes"
       required: false
     info:
-      title: "Info"
+      title: Info
+      description: Info
       type: info_0
-      description: "Info"
       required: false
     permanentUrl:
-      title: "Permanenturl"
+      title: Permanenturl
+      description: Permanenturl
       type: string
-      description: "Permanenturl"
       required: false
     process:
-      title: "Process"
+      title: Process
+      description: Process
       type: string
-      description: "Process"
       required: false
     size:
-      title: "Size"
+      title: Size
+      description: Size
       type: integer
-      description: "Size"
       required: false
     threatLevel:
-      title: "Threatlevel"
+      title: Threatlevel
+      description: Threatlevel
       type: string
-      description: "Threatlevel"
       required: false
     time:
-      title: "Time"
+      title: Time
+      description: Time
       type: integer
-      description: "Time"
       required: false
     type:
-      title: "Type"
+      title: Type
+      description: Type
       type: string
-      description: "Type"
       required: false
   modified:
     files:
-      title: "Files"
+      title: Files
+      description: Files
       type: "[]files_0"
-      description: "Files"
       required: false
     registry:
-      title: "Registry"
+      title: Registry
+      description: Registry
       type: "[]object"
-      description: "Registry"
       required: false
   network_0:
     connections:
-      title: "Connections"
+      title: Connections
+      description: Connections
       type: "[]object"
-      description: "Connections"
       required: false
     dnsRequests:
-      title: "DNS Requests"
+      title: DNS Requests
+      description: DNS requests
       type: "[]object"
-      description: "DNS requests"
       required: false
     httpRequests:
-      title: "HTTP Requests"
+      title: HTTP Requests
+      description: HTTP requests
       type: "[]object"
-      description: "HTTP requests"
       required: false
     threats:
-      title: "Threats"
+      title: Threats
+      description: Threats
       type: "[]object"
-      description: "Threats"
       required: false
   context:
     integrityLevel:
-      title: "Integritylevel"
+      title: Integritylevel
+      description: Integritylevel
       type: string
-      description: "Integritylevel"
       required: false
     rebootNumber:
-      title: "Rebootnumber"
+      title: Rebootnumber
+      description: Rebootnumber
       type: integer
-      description: "Rebootnumber"
       required: false
     userName:
-      title: "Username"
+      title: Username
+      description: Username
       type: string
-      description: "Username"
       required: false
   modules:
     image:
-      title: "Image"
+      title: Image
+      description: Image
       type: string
-      description: "Image"
       required: false
     time:
-      title: "Time"
+      title: Time
+      description: Time
       type: integer
-      description: "Time"
       required: false
   specs_0:
     autoStart:
-      title: "Autostart"
+      title: Autostart
+      description: Autostart
       type: boolean
-      description: "Autostart"
       required: false
     crashedApps:
-      title: "Crashedapps"
+      title: Crashedapps
+      description: Crashedapps
       type: boolean
-      description: "Crashedapps"
       required: false
     debugOutput:
-      title: "Debugoutput"
+      title: Debugoutput
+      description: Debugoutput
       type: boolean
-      description: "Debugoutput"
       required: false
     executableDropped:
-      title: "Executabledropped"
+      title: Executabledropped
+      description: Executabledropped
       type: boolean
-      description: "Executabledropped"
       required: false
     exploitable:
-      title: "Exploitable"
+      title: Exploitable
+      description: Exploitable
       type: boolean
-      description: "Exploitable"
       required: false
     injects:
-      title: "Injects"
+      title: Injects
+      description: Injects
       type: boolean
-      description: "Injects"
       required: false
     knownThreat:
-      title: "Knownthreat"
+      title: Knownthreat
+      description: Knownthreat
       type: boolean
-      description: "Knownthreat"
       required: false
     lowAccess:
-      title: "Lowaccess"
+      title: Lowaccess
+      description: Lowaccess
       type: boolean
-      description: "Lowaccess"
       required: false
     network:
-      title: "Network"
+      title: Network
+      description: Network
       type: boolean
-      description: "Network"
       required: false
     networkLoader:
-      title: "Networkloader"
+      title: Networkloader
+      description: Networkloader
       type: boolean
-      description: "Networkloader"
       required: false
     privEscalation:
-      title: "Privescalation"
+      title: Privescalation
+      description: Privescalation
       type: boolean
-      description: "Privescalation"
       required: false
     stealing:
-      title: "Stealing"
+      title: Stealing
+      description: Stealing
       type: boolean
-      description: "Stealing"
       required: false
   scores_0:
     dropped:
-      title: "Dropped"
+      title: Dropped
+      description: Dropped
       type: boolean
-      description: "Dropped"
       required: false
     injected:
-      title: "Injected"
+      title: Injected
+      description: Injected
       type: boolean
-      description: "Injected"
       required: false
     loadsSusp:
-      title: "Loadssusp"
+      title: Loadssusp
+      description: Loadssusp
       type: boolean
-      description: "Loadssusp"
       required: false
     monitoringReason:
-      title: "Monitoringreason"
+      title: Monitoringreason
+      description: Monitoringreason
       type: string
-      description: "Monitoringreason"
       required: false
     specs:
-      title: "Specs"
+      title: Specs
+      description: Specs
       type: specs_0
-      description: "Specs"
       required: false
     verdict:
-      title: "Verdict"
+      title: Verdict
+      description: Verdict
       type: verdict
-      description: "Verdict"
       required: false
   times:
     monitoringSince:
-      title: "Monitoringsince"
+      title: Monitoringsince
+      description: Monitoringsince
       type: integer
-      description: "Monitoringsince"
       required: false
     start:
-      title: "Start"
+      title: Start
+      description: Start
       type: integer
-      description: "Start"
       required: false
   versionInfo:
     company:
-      title: "Company"
+      title: Company
+      description: Company
       type: string
-      description: "Company"
       required: false
     description:
-      title: "Description"
+      title: Description
+      description: Description
       type: string
-      description: "Description"
       required: false
     version:
-      title: "Version"
+      title: Version
+      description: Version
       type: string
-      description: "Version"
       required: false
   processes_0:
     commandLine:
-      title: "Commandline"
+      title: Commandline
+      description: Commandline
       type: string
-      description: "Commandline"
       required: false
     context:
-      title: "Context"
+      title: Context
+      description: Context
       type: context
-      description: "Context"
       required: false
     fileName:
-      title: "Filename"
+      title: Filename
+      description: Filename
       type: string
-      description: "Filename"
       required: false
     fileType:
-      title: "Filetype"
+      title: Filetype
+      description: Filetype
       type: string
-      description: "Filetype"
       required: false
     image:
-      title: "Image"
+      title: Image
+      description: Image
       type: string
-      description: "Image"
       required: false
     mainProcess:
-      title: "Mainprocess"
+      title: Mainprocess
+      description: Mainprocess
       type: boolean
-      description: "Mainprocess"
       required: false
     modules:
-      title: "Modules"
+      title: Modules
+      description: Modules
       type: "[]modules"
-      description: "Modules"
       required: false
     pid:
-      title: "PID"
+      title: PID
+      description: PID
       type: integer
-      description: "PID"
       required: false
     ppid:
-      title: "Ppid"
+      title: Ppid
+      description: Ppid
       type: integer
-      description: "Ppid"
       required: false
     scores:
-      title: "Scores"
+      title: Scores
+      description: Scores
       type: scores_0
-      description: "Scores"
       required: false
     status:
-      title: "Status"
+      title: Status
+      description: Status
       type: string
-      description: "Status"
       required: false
     times:
-      title: "Times"
+      title: Times
+      description: Times
       type: times
-      description: "Times"
       required: false
     uuid:
-      title: "UUID"
+      title: UUID
+      description: UUID
       type: string
-      description: "UUID"
       required: false
     versionInfo:
-      title: "Versioninfo"
+      title: Versioninfo
+      description: Versioninfo
       type: versionInfo
-      description: "Versioninfo"
       required: false
   analysis:
     content:
-      title: "Content"
+      title: Content
+      description: Content
       type: content
-      description: "Content"
       required: false
     creation:
-      title: "Creation"
+      title: Creation
+      description: Creation
       type: integer
-      description: "Creation"
       required: false
     creationText:
-      title: "Creationtext"
+      title: Creationtext
+      description: Creationtext
       type: string
-      description: "Creationtext"
       required: false
     duration:
-      title: "Duration"
+      title: Duration
+      description: Duration
       type: integer
-      description: "Duration"
       required: false
     options:
-      title: "Options"
+      title: Options
+      description: Options
       type: options
-      description: "Options"
       required: false
     permanentUrl:
-      title: "Permanenturl"
+      title: Permanenturl
+      description: Permanenturl
       type: string
-      description: "Permanenturl"
       required: false
     reports:
-      title: "Reports"
+      title: Reports
+      description: Reports
       type: object
-      description: "Reports"
       required: false
     sandbox:
-      title: "Sandbox"
+      title: Sandbox
+      description: Sandbox
       type: sandbox
-      description: "Sandbox"
       required: false
     scores:
-      title: "Scores"
+      title: Scores
+      description: Scores
       type: scores
-      description: "Scores"
       required: false
     tags:
-      title: "Tags"
-      type: "[]object"
-      description: "Tags"
+      title: Tags
+      description: Tags
+      type: "[]string"
       required: false
     uuid:
-      title: "UUID"
+      title: UUID
+      description: UUID
       type: string
-      description: "UUID"
       required: false
   reports:
     analysis:
-      title: "Analysis"
+      title: Analysis
+      description: Analysis
       type: analysis
-      description: "Analysis"
       required: false
     counters:
-      title: "Counters"
+      title: Counters
+      description: Counters
       type: counters
-      description: "Counters"
       required: false
     debugStrings:
-      title: "Debugstrings"
+      title: Debugstrings
+      description: Debugstrings
       type: "[]object"
-      description: "Debugstrings"
       required: false
     environments:
-      title: "Environments"
+      title: Environments
+      description: Environments
       type: environments
-      description: "Environments"
       required: false
     incidents:
-      title: "Incidents"
+      title: Incidents
+      description: Incidents
       type: "[]incidents"
-      description: "Incidents"
       required: false
     mitre:
-      title: "Mitre"
+      title: Mitre
+      description: Mitre
       type: "[]mitre"
-      description: "Mitre"
       required: false
     modified:
-      title: "Modified"
+      title: Modified
+      description: Modified
       type: modified
-      description: "Modified"
       required: false
     network:
-      title: "Network"
+      title: Network
+      description: Network
       type: network_0
-      description: "Network"
       required: false
     processes:
-      title: "Processes"
+      title: Processes
+      description: Processes
       type: "[]processes_0"
-      description: "Processes"
       required: false
     status:
-      title: "Status"
+      title: Status
+      description: Status
       type: string
-      description: "Status"
       required: false
 connection:
   api_key:
@@ -1376,6 +1421,7 @@ actions:
         description: Task history
         required: false
         type: '[]task'
+        example: '[{"related":"https://app.any.run/tasks/82ab98a6-b406-4ba5-8deb-...","json":"https://api.any.run/report/82ab98a6-b406-4ba5-8deb...","file":"https://content.any.run/tasks/82ab98a6-b406-4ba5-8...","hashes":{"head_hash":"0145ad575b213b1703cb94c6c3568a2e","md5":"926e6146fdb288e932a1846029ad07db","sha1":"fc73d7c62e324cad4240fbaf7a6d53716ecc4de7","sha256":"f6df99db2023558798d234f9c118497db8ec83da37682f8868...","ssdeep":"768:s+QiSf3rhTePO38fXbEmJS2Iro2wFW0kEeu:svXj5ePO3C..."},"misp":"https://api.any.run/report/82ab98a6-b406-4ba5-8deb...","name":"http://pastebin.com/raw/xGXyTALF","pcap":"https://content.any.run/tasks/82ab98a6-b406-4ba5-8...","tags":[],"verdict":"No threats detected","date":"2020-04-23T21:00:13.890Z"},{"date":"2020-04-20T02:14:11.452Z","file":"https://content.any.run/tasks/923fa62b-2689-4e6a-b...","hashes":{"sha256":"71f34b8bda00b54713e92cb8aee8c04a11ea5dea650b07f4b1...","ssdeep":"3:N1KdJMP2:CO2","head_hash":"780024dc16cb4331cdf98d18eb111bb4","md5":"780024dc16cb4331cdf98d18eb111bb4","sha1":"dfc3414b0e62c18787631322ae7a8c7489e845c9"},"json":"https://api.any.run/report/923fa62b-2689-4e6a-be76...","pcap":"https://content.any.run/tasks/923fa62b-2689-4e6a-b...","tags":[],"misp":"https://api.any.run/report/923fa62b-2689-4e6a-be76...","name":"http://clicnews.com","related":"https://app.any.run/tasks/923fa62b-2689-4e6a-be76-...","verdict":"Malicious activity"}]'
   get_report:
     title: Get Report
     description: Get task report
@@ -1388,10 +1434,11 @@ actions:
         example: '0cf223f2-530e-4a50-b68f-563045268648'
     output:
       reports:
-          title: "Reports"
+          title: Reports
+          description: Reports
           type: reports
-          description: "Reports"
           required: false
+          example: '{"analysis":{"content":{"mainObject":{"filename":"setup.exe","hashes":{"md5":"c4ab8765314fc770e3ee8ca0693df8f9","sha1":"0194f8c5364d1dad03a1fe6eaa0fd98a10accd9e","sha256":"9ed4502b2eb64dd0a4394e593cb3666e621e751c26d06f3dbb953808bf83536e","ssdeep":"6144:0mvr9RLcN0BvxoLjGRU4UUU3UUUD9rOAerhj4Dy6ZTab8QCuzkLyS0RliUFh:0mr9RUsJGjqU4UUU3UUUZa7NjP6pbhOp"},"info":{"exif":{"EXE":{"CharacterSet":"Unicode","CodeSize":65536,"CompanyName":"Mozilla","EntryPoint":"0x34310","FileDescription":"Firefox","FileFlags":"(none)","FileFlagsMask":"0x003f","FileOS":"Windows NT 32-bit","FileSubtype":0,"FileVersion":18.05,"FileVersionNumber":"18.5.0.0","ImageVersion":0,"InitializedDataSize":65536,"InternalName":"7zS.sfx","LanguageCode":"English (U.S.)","LegalCopyright":"Mozilla","LinkerVersion":6,"MachineType":"Intel 386 or later, and compatibles","OSVersion":4,"ObjectFileType":"Executable application","OriginalFileName":"7zS.sfx.exe","PEType":"PE32","ProductName":"Firefox","ProductVersion":18.05,"ProductVersionNumber":"18.5.0.0","Subsystem":"Windows GUI","SubsystemVersion":4,"TimeStamp":"2018:08:31 00:18:33+02:00","UninitializedDataSize":147456}},"ext":"exe","file":"PE32 executable (GUI) Intel 80386, for MS Windows, UPX compressed","mime":"application/x-dosexec","pe":[{"key":"Summary","value":[{"key":"Architecture","value":"IMAGE_FILE_MACHINE_I386"},{"key":"Subsystem","value":"IMAGE_SUBSYSTEM_WINDOWS_GUI"}]},{"key":"DOS Header","value":[{"key":"Magic number","value":"MZ"},{"key":"Bytes on last page of file","value":"0x0090"}]},{"key":"PE Header","value":[{"key":"Signature","value":"PE"},{"key":"Machine","value":"IMAGE_FILE_MACHINE_I386"},{"key":"Characteristics","value":["IMAGE_FILE_32BIT_MACHINE","IMAGE_FILE_EXECUTABLE_IMAGE","IMAGE_FILE_LINE_NUMS_STRIPPED","IMAGE_FILE_LOCAL_SYMS_STRIPPED","IMAGE_FILE_RELOCS_STRIPPED"]}]},{"key":"Image Optional Header","value":[{"key":"Magic","value":"PE32"},{"key":"LinkerVersion","value":"6.0"}]},{"key":"Sections","value":[{"key":"UPX0","value":{"Characteristics":["IMAGE_SCN_CNT_UNINITIALIZED_DATA","IMAGE_SCN_MEM_EXECUTE","IMAGE_SCN_MEM_READ","IMAGE_SCN_MEM_WRITE"],"Entropy":"0","NumberOfLineNumbers":"0","NumberOfRelocations":"0","PointerToLineNumbers":"0x00000000","PointerToRawData":"0x00000400","PointerToRelocations":"0x00000000","SizeOfRawData":"0x00000000","VirtualAddress":"0x00001000","VirtualSize":"0x00024000"}},{"key":"UPX1","value":{"Characteristics":["IMAGE_SCN_CNT_INITIALIZED_DATA","IMAGE_SCN_MEM_EXECUTE","IMAGE_SCN_MEM_READ","IMAGE_SCN_MEM_WRITE"],"Entropy":"7.89699","NumberOfLineNumbers":"0","NumberOfRelocations":"0","PointerToLineNumbers":"0x00000000","PointerToRawData":"0x00000400","PointerToRelocations":"0x00000000","SizeOfRawData":"0x0000F600","VirtualAddress":"0x00025000","VirtualSize":"0x00010000"}},{"key":".rsrc","value":{"Characteristics":["IMAGE_SCN_CNT_INITIALIZED_DATA","IMAGE_SCN_MEM_READ","IMAGE_SCN_MEM_WRITE"],"Entropy":"7.39743","NumberOfLineNumbers":"0","NumberOfRelocations":"0","PointerToLineNumbers":"0x00000000","PointerToRawData":"0x0000FA00","PointerToRelocations":"0x00000000","SizeOfRawData":"0x0000F200","VirtualAddress":"0x00035000","VirtualSize":"0x00010000"}}]},{"key":"Imports","value":[{"key":"KERNEL32.DLL","value":["LoadLibraryA","ExitProcess","GetProcAddress","VirtualProtect"]},{"key":"MSVCRT.dll","value":["free"]}]},{"key":"Resources","value":[{"key":"1","value":{"Codepage":"UNKNOWN","Entropy":"5.38843","Language":"UNKNOWN","Size":"1365","Type":"RT_MANIFEST"}},{"key":"2","value":{"Codepage":"UNKNOWN","Entropy":"5.28933","Language":"English - United States","Size":"5160","Type":"RT_ICON"}}]},{"key":"Version Info","value":[{"key":"Resource LangID","value":"English - United States"},{"key":"VS_VERSION_INFO","value":{"CompanyName":"Mozilla","FileDescription":"Firefox","FileFlags":[],"FileOs":["VOS_DOS_WINDOWS32","VOS_NT","VOS_NT_WINDOWS32","VOS_WINCE","VOS__WINDOWS32"],"FileType":"VFT_APP","FileVersion":"18.05","InternalName":"7zS.sfx","Language":"English - United States","LegalCopyright":"Mozilla","OriginalFilename":"7zS.sfx.exe","ProductName":"Firefox","ProductVersion":"18.05","Signature":"0xFEEF04BD","StructVersion":"0x00010000"}}]}],"trid":[{"extension":".exe","filetype":"UPX compressed Win32 Executable","procent":64.2},{"extension":".dll","filetype":"Win32 Dynamic Link Library (generic)","procent":15.6}]},"permanentUrl":"https://content.any.run/tasks/4649c7fc-5780-476a-86b0-b89e424339bc/download/files/39dc46f5-c516-4f1e-966c-b03a56c01caf","type":"file"},"pcap":{"permanentUrl":"https://content.any.run/tasks/4649c7fc-5780-476a-86b0-b89e424339bc/download/pcap","present":true},"screenshots":[{"permanentUrl":"https://content.any.run/tasks/4649c7fc-5780-476a-86b0-b89e424339bc/download/screens/2def6256-a961-48b7-ba39-044cf5fefec9/image.jpeg","thumbnailUrl":"https://content.any.run/tasks/4649c7fc-5780-476a-86b0-b89e424339bc/download/thumbnails/2def6256-a961-48b7-ba39-044cf5fefec9/image.jpeg","time":17633,"uuid":"2def6256-a961-48b7-ba39-044cf5fefec9"}],"video":{"permanentUrl":"https://content.any.run/tasks/4649c7fc-5780-476a-86b0-b89e424339bc/download/mp4","present":true}},"creation":1587156254891,"creationText":"2020-04-17T20:44:14.891Z","duration":60,"options":{"additionalTime":0,"automatization":{"uac":false},"fakeNet":false,"heavyEvasion":false,"hideSource":false,"mitm":false,"network":true,"presentation":false,"privacy":"bylink","privateSample":false,"timeout":60,"tor":{"geo":"fastest","used":false},"video":true},"permanentUrl":"https://app.any.run/tasks/4649c7fc-5780-476a-86b0-b89e424339bc","reports":{"HTML":"https://api.any.run/report/4649c7fc-5780-476a-86b0-b89e424339bc/summary/html","IOC":"https://api.any.run/report/4649c7fc-5780-476a-86b0-b89e424339bc/ioc/json","MISP":"https://api.any.run/report/4649c7fc-5780-476a-86b0-b89e424339bc/summary/misp","graph":"https://content.any.run/tasks/4649c7fc-5780-476a-86b0-b89e424339bc/graph"},"sandbox":{"name":"ANY.RUN - Interactive Sandbox","plan":{"name":"Tester"}},"scores":{"specs":{"autostart":false,"cpuOverrun":false,"crashedApps":false,"crashedTask":false,"debugOutput":false,"executableDropped":true,"exploitable":false,"injects":false,"lowAccess":false,"memOverrun":false,"multiprocessing":true,"networkLoader":false,"networkThreats":false,"notStarted":false,"privEscalation":false,"rebooted":false,"serviceLauncher":false,"spam":false,"staticDetections":false,"stealing":false,"suspStruct":true,"torUsed":false},"verdict":{"score":100,"threatLevel":2,"threatLevelText":"Malicious activity"}},"tags":[],"uuid":"4649c7fc-5780-476a-86b0-b89e424339bc"},"counters":{"files":{"malicious":3,"suspicious":0,"text":0,"unknown":0},"network":{"connections":0,"dns":0,"http":0,"threats":0},"processes":{"malicious":2,"monitored":2,"suspicious":0,"total":38},"registry":{"delete":0,"read":333,"total":333,"write":0}},"debugStrings":[],"environments":{"hotfixes":[{"title":"KB976902"},{"title":"KB4019990"}],"internetExplorer":{"kbnum":"KB3058515","version":"11.0.9600.17843"},"os":{"bitness":32,"build":7601,"major":"7","product":"Windows","productType":"Client","servicePack":"1","softSet":"complete","title":"Windows 7 Professional Service Pack 1 (build: 7601, 32 bit)","variant":"Professional"},"software":[{"title":"Microsoft Visual C++ 2013 x86 Additional Runtime - 12.0.21005","version":"12.0.21005"},{"title":"Microsoft Visual C++ 2013 Redistributable (x86) - 12.0.30501","version":"12.0.30501.0"}]},"incidents":[{"count":1,"desc":"Dropped","events":[],"firstSeen":1587156271952,"mitre":[],"process":"bc166dfd-6e6d-478a-82fc-8b04f5dd501d","source":"drops","threatLevel":2,"title":"Application was dropped or rewritten from another process"},{"count":17,"desc":"Dropped","events":[],"firstSeen":1587156271930,"mitre":["T1129"],"process":"bc166dfd-6e6d-478a-82fc-8b04f5dd501d","source":"drops","threatLevel":2,"title":"Loads dropped or rewritten executable"},{"count":1,"desc":"Installation","events":[{"filename":"C:\\Users\\admin\\AppData\\Local\\Temp\\7zS48B57DC6\\setup-stub.exe","md5":"00e2a6420dc88f8e72de0a5876a22b7e","size":426488,"time":1587156270839}],"firstSeen":1587156270839,"mitre":[],"process":"0dcddb87-b2f9-43eb-bbd3-0fbeaf78f9a7","source":"drops","threatLevel":1,"title":"Executable content was dropped or overwritten"},{"count":2,"desc":"Installation","events":[{"filename":"C:\\Users\\admin\\AppData\\Local\\Temp\\nsgE1FD.tmp\\UAC.dll","md5":"113c5f02686d865bc9e8332350274fd1","size":18432,"time":1587156271183},{"filename":"C:\\Users\\admin\\AppData\\Local\\Temp\\nsgE1FD.tmp\\System.dll","md5":"17ed1c86bd67e78ade4712be48a7d2bd","size":11776,"time":1587156271167}],"firstSeen":1587156271183,"mitre":[],"process":"bc166dfd-6e6d-478a-82fc-8b04f5dd501d","source":"drops","threatLevel":1,"title":"Executable content was dropped or overwritten"}],"mitre":[{"id":"T1129","name":"Execution through Module Load","phases":["execution"]}],"modified":{"files":[{"filename":"C:\\Users\\admin\\AppData\\Local\\Temp\\nsgE1FD.tmp\\UAC.dll","hashes":{"head_hash":"af8e997d1695590cf0c51e860c0ce700","md5":"113c5f02686d865bc9e8332350274fd1","sha1":"4fa4414666f8091e327adb4d81a98a0d6e2e254a","sha256":"0d21041a1b5cd9f9968fc1d457c78a802c9c5a23f375327e833501b65bcd095d","ssdeep":"192:5cdcpry0igQ1Ii1rzn6U4gbfW6irWP+vOg7XRSEi+OPLjte86jugnincl0Nr90Og:WqVibvTh4qnFP+OPEzinclP+"},"info":{"file":"application/x-dosexec"},"permanentUrl":"https://content.any.run/tasks/4649c7fc-5780-476a-86b0-b89e424339bc/download/files/da5e5597-61bb-434d-8049-2eeceb49c7aa","process":"bc166dfd-6e6d-478a-82fc-8b04f5dd501d","size":18432,"threatLevel":"HIGH","time":1587156271183,"type":"executable"},{"filename":"C:\\Users\\admin\\AppData\\Local\\Temp\\nsgE1FD.tmp\\System.dll","hashes":{"head_hash":"17ed1c86bd67e78ade4712be48a7d2bd","md5":"17ed1c86bd67e78ade4712be48a7d2bd","sha1":"1cc9fe86d6d6030b4dae45ecddce5907991c01a0","sha256":"bd046e6497b304e4ea4ab102cab2b1f94ce09bde0eebba4c59942a732679e4eb","ssdeep":"192:eY24sihno00Wfl97nH6T2enXwWobpWBTU4VtHT7dmN35Ol+Sl:E8QIl975eXqlWBrz7YLOl+"},"info":{"file":"application/x-dosexec"},"permanentUrl":"https://content.any.run/tasks/4649c7fc-5780-476a-86b0-b89e424339bc/download/files/5a26df0a-9f58-4707-9549-83eaad71773c","process":"bc166dfd-6e6d-478a-82fc-8b04f5dd501d","size":11776,"threatLevel":"HIGH","time":1587156271167,"type":"executable"},{"filename":"C:\\Users\\admin\\AppData\\Local\\Temp\\7zS48B57DC6\\setup-stub.exe","hashes":{"head_hash":"665f7cd5c6d976951b9296bd1721703c","md5":"00e2a6420dc88f8e72de0a5876a22b7e","sha1":"26dca592dc00c741e404cc86efd740c38862363a","sha256":"a7d0b746d12c58a51986ed8cf1c64d97fa80c106c9004b7bf92e104a89cffda4","ssdeep":"6144:OspNjlsl/dj7qZXBs1P7iqv9AEGRLq9mRX51h134jG4YO6T:Oc6IwP7igCEd98pl4i4Yj"},"info":{"file":"application/x-dosexec"},"permanentUrl":"https://content.any.run/tasks/4649c7fc-5780-476a-86b0-b89e424339bc/download/files/e33f9a2a-1b69-49bf-9fd1-a01378271a8b","process":"0dcddb87-b2f9-43eb-bbd3-0fbeaf78f9a7","size":426488,"threatLevel":"HIGH","time":1587156270839,"type":"executable"},{"filename":"C:\\Users\\admin\\AppData\\Local\\Temp\\7zS48B57DC6\\postSigningData","process":"0dcddb87-b2f9-43eb-bbd3-0fbeaf78f9a7","size":0,"time":1587156270855}],"registry":[]},"network":{"connections":[],"dnsRequests":[],"httpRequests":[],"threats":[]},"processes":[{"commandLine":"\"C:\\Users\\admin\\AppData\\Local\\Temp\\setup.exe\" ","context":{"integrityLevel":"MEDIUM","rebootNumber":0,"userName":"admin"},"fileName":"setup.exe","fileType":"DROPPED","image":"C:\\Users\\admin\\AppData\\Local\\Temp\\setup.exe","mainProcess":true,"modules":[{"image":"c:\\windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7601.17514_none_41e6975e2bd6f2b2\\comctl32.dll","time":1587156270824},{"image":"c:\\windows\\system32\\oleaut32.dll","time":1587156270839}],"pid":2948,"ppid":372,"scores":{"dropped":false,"injected":false,"loadsSusp":false,"monitoringReason":"Main process","specs":{"autoStart":false,"crashedApps":false,"debugOutput":false,"executableDropped":true,"exploitable":false,"injects":false,"knownThreat":false,"lowAccess":false,"network":false,"networkLoader":false,"privEscalation":false,"stealing":false},"verdict":{"score":100,"threatLevel":2,"threatLevelText":"Malicious activity"}},"status":"STILL RUNNING","times":{"monitoringSince":1587156270699,"start":1587156270699},"uuid":"0dcddb87-b2f9-43eb-bbd3-0fbeaf78f9a7","versionInfo":{"company":"Mozilla","description":"Firefox","version":"18.05"}},{"commandLine":".\\setup-stub.exe","context":{"integrityLevel":"MEDIUM","rebootNumber":0,"userName":"admin"},"droppedBy":["0dcddb87-b2f9-43eb-bbd3-0fbeaf78f9a7"],"fileName":"setup-stub.exe","fileType":"DROPPED","image":"C:\\Users\\admin\\AppData\\Local\\Temp\\7zS48B57DC6\\setup-stub.exe","mainProcess":false,"modules":[{"image":"c:\\windows\\system32\\imm32.dll","time":1587156270917},{"image":"c:\\windows\\system32\\userenv.dll","time":1587156270917}],"parentUUID":"0dcddb87-b2f9-43eb-bbd3-0fbeaf78f9a7","pid":3532,"ppid":2948,"scores":{"dropped":false,"injected":false,"loadsSusp":false,"monitoringReason":"Child process","specs":{"autoStart":false,"crashedApps":false,"debugOutput":false,"executableDropped":true,"exploitable":false,"injects":false,"knownThreat":false,"lowAccess":false,"network":false,"networkLoader":false,"privEscalation":false,"stealing":false},"verdict":{"score":100,"threatLevel":2,"threatLevelText":"Malicious activity"}},"status":"STILL RUNNING","times":{"monitoringSince":1587156270855,"start":1587156270855},"uuid":"bc166dfd-6e6d-478a-82fc-8b04f5dd501d","versionInfo":{"company":"Mozilla Corporation","description":"Firefox Installer","version":"63.0.3"}}],"status":"done"}'
   run_analysis:
     title: Run Analysis
     description: Run new analysis
@@ -1590,5 +1637,6 @@ actions:
       uuid:
         title: Task UUID
         description: Response task UUID
+        type: string
         required: false
-        type: 'string'
+        example: '0ec0a4cc-72a4-41b9-8a13-9f283b3b4e15'

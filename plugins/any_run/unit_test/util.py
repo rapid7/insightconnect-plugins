@@ -1,12 +1,13 @@
 import logging
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
+import json
+
 from icon_any_run.connection.connection import Connection
 from icon_any_run.connection.schema import Input
-import json
 
 
 class Util:
@@ -38,7 +39,7 @@ class Util:
     @staticmethod
     def mocked_requests(*args, **kwargs):
         class MockResponse:
-            def __init__(self, filename, status_code):
+            def __init__(self, filename, status_code) -> None:
                 self.filename = filename
                 self.status_code = status_code
                 self.text = ""
