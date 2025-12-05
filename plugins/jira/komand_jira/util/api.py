@@ -128,7 +128,7 @@ class JiraApi:
 
         # If a comment is provided, add it to the payload
         if comment:
-            payload["update"] = {"comment": [{"add": {"body": {"content": [load_text_as_adf(comment)]}}}]}
+            payload["update"] = {"comment": [{"add": {"body": load_text_as_adf(comment)}}]}
 
         # If fields are provided, add them to the payload
         if fields:
