@@ -4,7 +4,7 @@
 tldextract==5.1.3
 regex==2023.8.8
 validators==0.34.0
-pdfplumber==0.11.4
+pdfplumber==0.11.8
 openpyxl==3.1.5
 parameterized==0.8.1
 publicsuffix2==2.20191221

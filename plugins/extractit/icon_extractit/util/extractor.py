@@ -5,7 +5,7 @@ import urllib.parse
 import zipfile
 from datetime import datetime
 from difflib import get_close_matches
-from typing import Any, Dict, List, Union
+from typing import Any, List, Union
 
 import openpyxl
 import pdfplumber
@@ -15,7 +15,7 @@ import validators
 from insightconnect_plugin_runtime.exceptions import PluginException
 from odf.opendocument import load
 from openpyxl.workbook.workbook import Worksheet
-from pdfminer.pdfparser import PDFSyntaxError
+from pdfplumber.utils.exceptions import PdfminerException
 from pdfplumber.page import Page
 from publicsuffix2 import PublicSuffixList
 
@@ -199,7 +199,7 @@ def extract_content_from_file(provided_file: bytes, provided_regex: str = "") ->
                             page_content = page_content.replace(word, word.replace("\n", ""))
                         pdf_content += page_content
                 return pdf_content
-            except PDFSyntaxError:
+            except PdfminerException:
                 raise PluginException(
                     cause="The type of the provided file is not supported.",
                     assistance="Supported file types are text/binary, such as: PDF, DOCX, PPTX, XLSX, ODT, ODP, ODF, TXT, ZIP",
