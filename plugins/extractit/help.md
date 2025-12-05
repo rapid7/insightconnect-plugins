@@ -673,6 +673,7 @@ Example output:
 
 # Version History
 
+* 3.0.14 - Addressed snyk vulnerability | Updated SDK to the latest version (6.3.10)
 * 3.0.13 - Improved range of possible 'filepaths' | Resolved issue where filenames were being populated under 'domain' | Updated SDK to latest version (6.3.8)
 * 3.0.12 - Updated SDK to the latest version (6.3.3)
 * 3.0.11 - Updated tldextract to v5.1.3

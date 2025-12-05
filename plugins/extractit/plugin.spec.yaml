@@ -7,7 +7,7 @@ description: The ExtractIt plugin is a collection of data extraction actions. Th
   plugin allows users to extract various pieces of information from blocks of text.
   The pieces of information this plugin can extract include IPs, URLs, file paths,
   dates, domains, hashes, MAC addresses, and email addresses
-version: 3.0.13
+version: 3.0.14
 connection_version: 3
 vendor: rapid7
 support: rapid7
@@ -28,7 +28,7 @@ hub_tags:
   features: []
 sdk:
   type: slim
-  version: 6.3.8
+  version: 6.3.10
   user: nobody
 key_features:
 - Extract dates from a string or file for use in subsequent workflow actions
@@ -46,6 +46,7 @@ key_features:
 - Extract CVEs from a string or file for use in subsequent workflow actions
 - Extract all indicators from a string or file for use in subsequent workflow actions
 version_history:
+- 3.0.14 - Addressed snyk vulnerability | Updated SDK to the latest version (6.3.10)
 - 3.0.13 - Improved range of possible 'filepaths' | Resolved issue where filenames were being populated under 'domain' | Updated SDK to latest version (6.3.8)
 - 3.0.12 - Updated SDK to the latest version (6.3.3)
 - 3.0.11 - Updated tldextract to v5.1.3
