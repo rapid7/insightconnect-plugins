@@ -1,8 +1,14 @@
+import os
+import sys
 from unittest import TestCase
+
+from insightconnect_plugin_runtime.exceptions import PluginException
+from parameterized import parameterized
+
+sys.path.append(os.path.abspath("../"))
+
 from komand_pdf_reader.actions.extract_text import ExtractText
 from komand_pdf_reader.actions.extract_text.schema import Input, Output
-from parameterized import parameterized
-from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class TestExtractText(TestCase):

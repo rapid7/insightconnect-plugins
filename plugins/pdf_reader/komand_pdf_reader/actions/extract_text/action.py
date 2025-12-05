@@ -4,7 +4,7 @@ from .schema import ExtractTextInput, ExtractTextOutput, Input, Output, Componen
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
 import pdfplumber
-from pdfminer.pdfparser import PDFSyntaxError
+from pdfplumber.utils.exceptions import PdfminerException
 import base64
 import io
 
@@ -29,7 +29,7 @@ class ExtractText(insightconnect_plugin_runtime.Action):
                         pdf_text += page[1].extract_text().replace("\n", " ")
                 finally:
                     pdf_file.close()
-        except PDFSyntaxError:
+        except PdfminerException:
             raise PluginException(
                 cause="The provided content is not in PDF file format.",
                 assistance="Please check that the input is correct and try again.",

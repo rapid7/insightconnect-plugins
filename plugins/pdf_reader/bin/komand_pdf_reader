@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "PDF Reader"
 Vendor = "rapid7"
-Version = "1.0.4"
+Version = "1.0.5"
 Description = "PDF Reader is a plugin for extracting text from a PDF file. This plugin utilizes a Python package called [pdfplumber](https://pypi.org/project/pdfplumber/)"
 
 

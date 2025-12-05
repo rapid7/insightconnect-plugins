@@ -2,13 +2,14 @@
 from setuptools import setup, find_packages
 
 
-setup(name="pdf_reader-rapid7-plugin",
-      version="1.0.4",
-      description="PDF Reader is a plugin for extracting text from a PDF file. This plugin utilizes a Python package called [pdfplumber](https://pypi.org/project/pdfplumber/)",
-      author="rapid7",
-      author_email="",
-      url="",
-      packages=find_packages(),
-      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_pdf_reader']
-      )
+setup(
+    name="pdf_reader-rapid7-plugin",
+    version="1.0.5",
+    description="PDF Reader is a plugin for extracting text from a PDF file. This plugin utilizes a Python package called [pdfplumber](https://pypi.org/project/pdfplumber/)",
+    author="rapid7",
+    author_email="",
+    url="",
+    packages=find_packages(),
+    install_requires=["insightconnect-plugin-runtime"],  # Add third-party dependencies to requirements.txt, not here!
+    entry_points={"console_scripts": ["komand_pdf_reader = bin.komand_pdf_reader:main"]},
+)
