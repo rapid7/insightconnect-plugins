@@ -1,6 +1,6 @@
 # List third-party dependencies here, separated by newlines. 
 # All dependencies must be version-pinned, eg. requests==1.2.0
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
-pdfplumber==0.5.28
+pdfplumber==0.11.8
 parameterized==0.8.1
 Pillow==10.3.0

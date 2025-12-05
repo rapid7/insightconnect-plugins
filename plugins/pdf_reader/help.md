@@ -1,8 +1,6 @@
 # Description
 
-PDF Reader is a plugin for extracting text from a PDF file. 
-
-This plugin utilizes a Python package called [pdfplumber](https://pypi.org/project/pdfplumber/)
+PDF Reader is a plugin for extracting text from a PDF file. This plugin utilizes a Python package called [pdfplumber](https://pypi.org/project/pdfplumber/)
 
 # Key Features
 
@@ -75,6 +73,7 @@ Example output:
 
 # Version History
 
+* 1.0.5 - Addressed snyk vulnerability | Updated SDK to the latest version (6.3.10)
 * 1.0.4 - Bumping requirements.txt | SDK Bump
 * 1.0.3 - Updated version of Pillow used. Updated to use latest SDK and refreshed with latest tooling.
 * 1.0.2 - Fix extracting text from PDF in Extract Text action | Update to use the `insightconnect-python-3-38-plugin:4` Docker image | Code refactor | Add input example in plugin spec and help.md
