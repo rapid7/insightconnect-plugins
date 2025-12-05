@@ -3,4 +3,3 @@
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 pdfplumber==0.11.8
 parameterized==0.8.1
-Pillow==10.3.0
