@@ -11,7 +11,7 @@ status: []
 supported_versions: [Okta API 22-05-2023]
 sdk:
   type: slim
-  version: 6.4.0
+  version: 6.4.1
   user: nobody
 description: '[Okta](https://www.okta.com/) is a SSO and account lifecycle management
   provider that allows companies to integrate their central user account system with
