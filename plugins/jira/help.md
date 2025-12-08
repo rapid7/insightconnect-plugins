@@ -730,6 +730,7 @@ Example output:
 
 # Version History
 
+* 6.6.0 - Updated plugin to use Jira Cloud API v3 endpoints for cloud instances | Updated SDK to the latest version (6.4.1)
 * 6.5.3 - Updated SDK to the latest version (6.3.10)
 * 6.5.2 - Updated SDK to the latest version (6.3.3)
 * 6.5.1 - Updated normalizing user object | Updated SDK to the latest version

@@ -24,22 +24,32 @@ class MonitorIssues(insightconnect_plugin_runtime.Trigger):
         self.include_fields = False
 
     def poll(self):
-        new_issues = self.connection.client.search_issues(self.jql, startAt=0, maxResults=False, fields="*all")
+        # Depending on if it's running in the cloud or server
+        if not self.connection.is_cloud:
+            new_issues = self.connection.client.search_issues(self.jql, startAt=0, maxResults=False, fields="*all")
+        else:
+            new_issues = self.connection.rest_client.search_issues(self.jql, max_results=5000).get("issues", [])
+
+        # Loop through issues and send new ones
         for issue in new_issues:
-            if issue.id and issue.id not in self.issues:
+            issue_id = issue.id if not self.connection.is_cloud else issue.get("id", "")
+            if issue_id and issue_id not in self.issues:
                 output = normalize_issue(
                     issue,
                     get_attachments=self.get_attachments,
                     include_raw_fields=self.include_fields,
                     logger=self.logger,
+                    is_cloud=self.connection.is_cloud,
                 )
-                self.issues[issue.id] = datetime.datetime.now()
+                self.issues[issue_id] = datetime.datetime.now()
                 self.logger.debug(f"Found: {output}")
                 self.send({Output.ISSUE: output})
 
     def validate_projects(self, projects):
         for project in projects:
-            valid_project = look_up_project(project, self.connection.client)
+            valid_project = look_up_project(
+                project, self.connection.client, self.connection.rest_client, is_cloud=self.connection.is_cloud
+            )
             if not valid_project:
                 raise PluginException(
                     cause=f"Project '{project}' does not exist or the user does not have permission to access the "

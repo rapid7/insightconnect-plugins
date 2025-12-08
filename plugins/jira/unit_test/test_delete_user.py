@@ -12,7 +12,7 @@ from komand_jira.connection.connection import Connection
 
 
 class MockClient:
-    def __init__(self):
+    def __init__(self) -> None:
         self.client = "some fake thing"
 
     def delete_user(
@@ -25,7 +25,7 @@ class MockClient:
 
 
 class MockRestClient:
-    def __init__(self):
+    def __init__(self) -> None:
         self.client = "some fake thing"
 
     def delete_user(self, account_id: str = ""):
@@ -44,7 +44,7 @@ class TestDeleteUser(TestCase):
         self.test_conn.logger = test_logger
         self.test_action.logger = test_logger
 
-    def test_delete_user_cloud_true_valid(self):
+    def test_delete_user_cloud_true_valid(self) -> None:
         action_params = {"account_id": "5ec00968833be70b7e50df20"}
 
         self.test_conn.is_cloud = True
@@ -56,7 +56,7 @@ class TestDeleteUser(TestCase):
 
         self.assertTrue(result.get("success"))
 
-    def test_delete_user_cloud_false_valid(self):
+    def test_delete_user_cloud_false_valid(self) -> None:
         action_params = {"username": "user1"}
 
         self.test_conn.is_cloud = False
@@ -68,7 +68,7 @@ class TestDeleteUser(TestCase):
 
         self.assertTrue(result.get("success"))
 
-    def test_delete_user_cloud_true_invalid(self):
+    def test_delete_user_cloud_true_invalid(self) -> None:
         action_params = {"username": "user1"}
 
         self.test_conn.is_cloud = True
@@ -81,7 +81,7 @@ class TestDeleteUser(TestCase):
 
         self.assertIn("Account ID not provided", plg_err.exception.cause)
 
-    def test_delete_user_cloud_false_invalid(self):
+    def test_delete_user_cloud_false_invalid(self) -> None:
         action_params = {"account_id": "5ec00968833be70b7e50df20"}
 
         self.test_conn.is_cloud = False

@@ -15,15 +15,27 @@ class AssignIssue(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        """Run action"""
-        id_ = params[Input.ID]
-        issue = self.connection.client.issue(id=id_)
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        issue_id = params.get(Input.ID, "")
+        assignee = params.get(Input.ASSIGNEE, "")
+        # END INPUT BINDING - DO NOT REMOVE
 
+        # Check if issue exists
+        if not self.connection.is_cloud:
+            issue = self.connection.client.issue(id=issue_id)
+        else:
+            issue = self.connection.rest_client.get_issue(issue_id=issue_id)
+
+        # If no issue is found, raise an exception
         if not issue:
             raise PluginException(
-                cause=f"No issue found with ID: {id_}.",
+                cause=f"No issue found with ID: {issue_id}.",
                 assistance="Please provide a valid issue ID.",
             )
 
-        result = self.connection.client.assign_issue(issue=issue, assignee=params[Input.ASSIGNEE])
+        # Assign to the issue
+        if not self.connection.is_cloud:
+            result = self.connection.client.assign_issue(issue=issue, assignee=assignee)
+        else:
+            result = self.connection.rest_client.assign_issue(issue_id=issue_id, username=assignee)
         return {Output.SUCCESS: result}
