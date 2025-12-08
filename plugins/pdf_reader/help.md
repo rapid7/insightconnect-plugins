@@ -73,7 +73,7 @@ Example output:
 
 # Version History
 
-* 1.0.5 - Updated dependencies | Updated SDK to the latest version (6.3.10)
+* 1.0.5 - Updated dependencies | Updated SDK to the latest version (6.4.1)
 * 1.0.4 - Bumping requirements.txt | SDK Bump
 * 1.0.3 - Updated version of Pillow used. Updated to use latest SDK and refreshed with latest tooling.
 * 1.0.2 - Fix extracting text from PDF in Extract Text action | Update to use the `insightconnect-python-3-38-plugin:4` Docker image | Code refactor | Add input example in plugin spec and help.md
