@@ -43,7 +43,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             rate_limited = self._check_rate_limit_reset(unadjusted_now, state)
             if rate_limited:
                 return self._handle_rate_limit(state)
-            return self._prepare_query(state, filter_time, is_filter_datetime, events_limit, now)
+            return self._prepare_and_query(state, filter_time, is_filter_datetime, events_limit, now)
         except Exception as error:
             self.logger.info(f"An Exception has been raised. Error: {error}")
             return [], state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
@@ -60,7 +60,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             ),
         )
 
-    def _prepare_query(self, state, filter_time, is_filter_datetime, events_limit, now):
+    def _prepare_and_query(self, state, filter_time, is_filter_datetime, events_limit, now):
         has_more_pages = False
         parameters = {}
         now_iso = self.get_iso(now)
@@ -113,6 +113,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             self.logger.info(f"An API Exception has been raised. Status code: {error.status_code}. Error: {error}")
             if error.status_code == 429:
                 state[self.RATE_LIMIT_RESET_EPOCH] = json.loads(error.data).get("x_rate_limit_reset", 0)
+                return [], state, True, 200, None
             return [], state, False, error.status_code, error
 
     @staticmethod

@@ -210,8 +210,8 @@ class TestMonitorLogs(TestCase):
                 "429_response",
                 Util.read_file_to_dict("inputs/monitor_logs_engage_rate_limit.json.inp"),
                 Util.read_file_to_dict("expected/monitor_logs_engage_rate_limit.json.exp"),
-                """"x_rate_limit_reset": 1609459200""",
-                429,
+                None,
+                None,
             ],
             [
                 "during_rate_limit",
