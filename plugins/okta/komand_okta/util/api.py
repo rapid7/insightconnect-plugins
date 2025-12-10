@@ -246,10 +246,13 @@ class OktaAPI:
                 data=response.text,
             )
         if response.status_code == 429:
+            reset_epoch = int(response.headers.get("x-rate-limit-reset", 0))
+            self.logger.info(f"Rate limit of  {response.headers.get('x-rate-limit-limit', '<undefined>')} exceeded.")
+            self.logger.info(f"Rate limit reset time: {reset_epoch}.")
             raise ApiException(
                 preset=PluginException.Preset.RATE_LIMIT,
                 status_code=response.status_code,
-                data=response.text,
+                data=json.dumps({"x_rate_limit_reset": reset_epoch, "text": response.text}),
             )
         if 400 < response.status_code < 500:
             raise ApiException(
