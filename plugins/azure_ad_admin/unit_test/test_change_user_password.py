@@ -1,15 +1,17 @@
 import logging
-import sys
 import os
+import sys
 from unittest import TestCase, mock
+from unittest.mock import MagicMock
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
-from mock import MockRequest
-from icon_azure_ad_admin.connection.connection import Connection
 from icon_azure_ad_admin.actions.change_user_password import ChangeUserPassword
+from icon_azure_ad_admin.connection.connection import Connection
+
+from mocks import MockRequest
 
 
 class TestChangeUserPassword(TestCase):
@@ -30,13 +32,13 @@ class TestChangeUserPassword(TestCase):
         }
 
     @mock.patch("requests.patch", return_value=MockRequest(204))
-    def test_change_user_password(self, mock_request):
+    def test_change_user_password(self, mock_request: MagicMock) -> None:
         change_user_password = self.action.run(self.params)
 
         expected_result = {"success": True}
         self.assertEqual(change_user_password, expected_result)
 
     @mock.patch("requests.patch", return_value=MockRequest(400))
-    def test_change_user_password_failed(self, mock_request):
+    def test_change_user_password_failed(self, mock_request: MagicMock) -> None:
         with self.assertRaises(PluginException):
             self.action.run(self.params)
