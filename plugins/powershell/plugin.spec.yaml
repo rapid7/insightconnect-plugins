@@ -30,32 +30,23 @@ sdk:
   - RUN apt-get update && apt-get install -y \
   - '    apt-transport-https \'
   - '    curl \'
-  - '    gcc python-dev libkrb5-dev \'
+  - '    gcc python-dev-is-python3 libkrb5-dev \'
   - '    git \'
   - '    gnupg \'
   - '    krb5-user \'
-  - '    libssl1.1 \'
-  - '    ntp adcli sssd \'
+  - '    libssl3 \'
+  - '    ntpsec adcli sssd \'
   - '    samba-common \'
-  - '    software-properties-common \'
   - '    sudo \'
   - '    realmd \'
   - '    wget'
   - ''
   - '# Local PowerShell dependencies'
-  - RUN echo "deb http://security.ubuntu.com/ubuntu bionic-security main" | sudo tee
-    -a /etc/apt/sources.list.d/bionic.list && \
-  - '    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
-    && sudo apt-get update && apt-cache policy libssl1.0-dev && \'
-  - '    sudo apt-get install -y libssl1.0-dev && \'
-  - '    wget http://mirrors.kernel.org/ubuntu/pool/main/i/icu/libicu52_52.1-3ubuntu0.8_amd64.deb
-    && \'
-  - '    sudo apt install -y ./libicu52_52.1-3ubuntu0.8_amd64.deb && \'
-  - '    rm ./libicu52_52.1-3ubuntu0.8_amd64.deb && \'
-  - '    wget https://github.com/PowerShell/PowerShell/releases/download/v7.4.6/powershell_7.4.6-1.deb_amd64.deb
-    && \'
-  - '    sudo apt install -y ./powershell_7.4.6-1.deb_amd64.deb && \'
-  - '    rm ./powershell_7.4.6-1.deb_amd64.deb'
+  - RUN wget https://github.com/PowerShell/PowerShell/releases/download/v7.5.4/powershell-7.5.4-linux-x64.tar.gz \
+  - '    && mkdir /opt/powershell \'
+  - '    && tar -xzf powershell-7.5.4-linux-x64.tar.gz -C /opt/powershell \'
+  - '    && ln -s /opt/powershell/pwsh /usr/bin/pwsh \'
+  - '    && rm powershell-7.5.4-linux-x64.tar.gz'
 links:
 - '[InsightConnect Powershell Plugin Guide](https://docs.rapid7.com/insightconnect/mass-delete-with-PowerShell/)'
 references:
