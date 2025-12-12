@@ -1,23 +1,25 @@
 import json
 import logging
+import os
 import re
 import string
 import sys
-import os
 from unittest import TestCase, mock
+from unittest.mock import MagicMock
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
-from mock import MockRequest
+from icon_azure_ad_admin.actions.create_user import CreateUser
 from icon_azure_ad_admin.actions.create_user.action import _pw_gen
 from icon_azure_ad_admin.connection.connection import Connection
-from icon_azure_ad_admin.actions.create_user import CreateUser
+
+from mocks import MockRequest
 
 
 class TestGeneratePassword(TestCase):
-    def test_generate_password(self):
+    def test_generate_password(self) -> None:
         generate_password = _pw_gen()
         has_lowercase = re.search(r"[a-z]", generate_password)
         has_uppercase = re.search(r"[A-Z]", generate_password)
@@ -56,12 +58,12 @@ class TestCreateUser(TestCase):
         self.mailbox = "mailbox_id"
 
     @mock.patch("requests.post", return_value=MockRequest(201))
-    def test_create_user_status_ok(self, mock_request):
+    def test_create_user_status_ok(self, mock_request: MagicMock) -> None:
         create_user = self.action._create_user(self.params, self.password)
         self.assertEqual(create_user, True)
 
     @mock.patch("requests.post", return_value=MockRequest(400))
-    def test_create_user_status_bad(self, mock_request):
+    def test_create_user_status_bad(self, mock_request: MagicMock) -> None:
         with self.assertRaises(PluginException) as context:
             self.action._create_user(self.params, self.password)
         self.assertEqual(
@@ -69,7 +71,7 @@ class TestCreateUser(TestCase):
             PluginException.causes["unknown"],
         )
 
-    def test_compose_email(self):
+    def test_compose_email(self) -> None:
         compose_email = self.action._compose_email(self.params, self.password)
         expected_result = {
             "message": {
@@ -86,12 +88,12 @@ class TestCreateUser(TestCase):
         self.assertEqual(compose_email, json.dumps(expected_result))
 
     @mock.patch("requests.post", return_value=MockRequest(202))
-    def test_send_message_status_ok(self, mock_request):
+    def test_send_message_status_ok(self, mock_request: MagicMock) -> None:
         send_message = self.action.send_message(self.message, self.mailbox)
         self.assertEqual(send_message, True)
 
     @mock.patch("requests.post", return_value=MockRequest(400))
-    def test_send_message_status_bad(self, mock_request):
+    def test_send_message_status_bad(self, mock_request: MagicMock) -> None:
         with self.assertRaises(PluginException) as context:
             self.action.send_message(self.message, self.mailbox)
         self.assertEqual(
@@ -102,5 +104,5 @@ class TestCreateUser(TestCase):
     @mock.patch("icon_azure_ad_admin.actions.create_user.action.CreateUser._create_user", return_value=True)
     @mock.patch("icon_azure_ad_admin.actions.create_user.action.CreateUser._compose_email", return_value={})
     @mock.patch("icon_azure_ad_admin.actions.create_user.action.CreateUser.send_message", return_value=True)
-    def test_run_action(self, create_user, compose_email, send_message):
+    def test_run_action(self, create_user: MagicMock, compose_email: MagicMock, send_message: MagicMock) -> None:
         self.assertEqual(self.action.run(), {"success": True})

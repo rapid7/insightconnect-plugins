@@ -4,7 +4,7 @@ products: [insightconnect]
 name: azure_ad_admin
 title: Azure AD Admin
 description: "[Azure](https://azure.microsoft.com) AD Admin performs administrative tasks in Azure AD.\n\nIt uses the [User](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0) endpoint in the [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-1.0)"
-version: 5.0.0
+version: 5.0.1
 connection_version: 4
 vendor: rapid7
 cloud_ready: true
@@ -13,7 +13,7 @@ supported_versions: ["2022-05-30"]
 status: []
 sdk:
   type: slim
-  version: 6.3.10
+  version: 6.4.1
   user: nobody
 key_features:
   - Add and remove users
@@ -35,6 +35,7 @@ requirements:
   Browse and select your application and click `Add`."
 troubleshooting: "Trigger `risk_detection` needs Application permission to set as `IdentityRiskEvent.Read.All`"
 version_history:
+  - "5.0.1 - `Search Devices`: Fixed issue where devices output was limited | Updated SDK to the latest version (6.4.1)"
   - "5.0.0 - Update SDK to the latest version | Update the output type of `risk` for the `risk_detection` trigger to include all fields"
   - "4.2.0 - New action | List Group Members"
   - "4.1.2 - Updated SDK to the latest version | Added additional details in requirements section | `Risk Detection`: Fixed issue where detections were triggered randomly"
