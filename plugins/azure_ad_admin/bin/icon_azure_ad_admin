@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Azure AD Admin"
 Vendor = "rapid7"
-Version = "5.0.0"
+Version = "5.0.1"
 Description = "[Azure](https://azure.microsoft.com) AD Admin performs administrative tasks in Azure AD.It uses the [User](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0) endpoint in the [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-1.0)"
 
 

@@ -39,7 +39,7 @@ class Util:
     @staticmethod
     def mocked_requests(*args, **kwargs):
         class MockResponse:
-            def __init__(self, status_code: int, filename: str = None):
+            def __init__(self, status_code: int, filename: str = None) -> None:
                 self.status_code = status_code
                 self.text = ""
                 if filename:
