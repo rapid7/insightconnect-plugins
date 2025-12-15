@@ -140,7 +140,11 @@ class ApiConnection:
                 quarantine_state = agent.get("quarantineState", {}).get("currentState")
                 agent_status = agent.get("agentStatus")
             else:
-                raise Exception("No agents found")
+                raise PluginException(
+                    cause="No agents found",
+                    assistance="Please verify the agent ID is correct.",
+                    data=str(results_object),
+                )
         except (Exception, IndexError):
             raise PluginException(
                 cause="Received an unexpected response from the server.",
