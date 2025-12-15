@@ -461,6 +461,7 @@ Example output:
 
 # Version History
 
+* 3.0.7 - Added response checks to actions to improve error handling | Updated SDK to latest version (6.4.1)
 * 3.0.6 - Remove use of session from the connection object to prevent session timeouts
 * 3.0.5 - Updated SDK to the latest version (6.3.10)
 * 3.0.4 - Updated SDK to the latest version (6.3.3)
