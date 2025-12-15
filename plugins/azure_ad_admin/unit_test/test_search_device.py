@@ -33,6 +33,21 @@ class TestSearchDevice(TestCase):
                 Util.read_file_to_dict("inputs/search_device_all_parameters.json.inp"),
                 Util.read_file_to_dict("expected/search_device_all_parameters.json.exp"),
             ],
+            [
+                "pagination_two_pages",
+                Util.read_file_to_dict("inputs/search_device_pagination.json.inp"),
+                Util.read_file_to_dict("expected/search_device_pagination.json.exp"),
+            ],
+            [
+                "pagination_single_page",
+                Util.read_file_to_dict("inputs/search_device_pagination_single_page.json.inp"),
+                Util.read_file_to_dict("expected/search_device_pagination_single_page.json.exp"),
+            ],
+            [
+                "pagination_multiple_pages",
+                Util.read_file_to_dict("inputs/search_device_pagination_multiple_pages.json.inp"),
+                Util.read_file_to_dict("expected/search_device_pagination_multiple_pages.json.exp"),
+            ],
         ]
     )
     def test_search_device(
@@ -58,3 +73,25 @@ class TestSearchDevice(TestCase):
             self.action.run(input_params)
         self.assertEqual(error.exception.cause, cause)
         self.assertEqual(error.exception.assistance, assistance)
+
+    def test_search_device_pagination_loop_limit(self, mock_request: MagicMock) -> None:
+        input_params = Util.read_file_to_dict("inputs/search_device_pagination_loop_limit.json.inp")
+        actual = self.action.run(input_params)
+
+        # Should return 1000 devices (1 device per page * 1000 iterations)
+        # Even though the API keeps returning nextLink
+        self.assertEqual(len(actual["devices"]), 1000)
+
+        # All devices should have the same structure
+        for device in actual["devices"]:
+            self.assertEqual(device["displayName"], "DummyLoopLimitDevice")
+            self.assertEqual(device["id"], "00000000-0000-0000-0000-000000000999")
+
+    def test_search_device_pagination_stops_at_last_page(self, mock_request: MagicMock) -> None:
+        input_params = Util.read_file_to_dict("inputs/search_device_pagination_single_page.json.inp")
+        actual = self.action.run(input_params)
+
+        # Should have exactly 1 device since there's only one page
+        self.assertEqual(len(actual["devices"]), 1)
+        self.assertEqual(actual["devices"][0]["id"], "00000000-0000-0000-0000-000000000001")
+        self.assertEqual(actual["devices"][0]["displayName"], "DummySinglePageDevice")

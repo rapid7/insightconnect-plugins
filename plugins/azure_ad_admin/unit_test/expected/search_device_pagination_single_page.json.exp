@@ -8,16 +8,12 @@
       "createdDateTime": "2020-01-01T00:00:00Z",
       "deviceId": "11111111-1111-1111-1111-111111111111",
       "deviceVersion": 2,
-      "displayName": "DummyDevice-1",
+      "displayName": "DummySinglePageDevice",
       "exchangeActiveSyncIds": [],
       "operatingSystem": "Windows",
       "operatingSystemVersion": "10.0.0.0",
       "physicalIds": [
-        "[AzureResourceId]:/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/DummyResourceGroup/providers/Microsoft.Compute/virtualMachines/DummyDevice-1",
-        "[USER-GID]:00000000-0000-0000-0000-000000000001:0000000001",
-        "[GID]:g:0000000001",
-        "[USER-HWID]:00000000-0000-0000-0000-000000000001:0000000001",
-        "[HWID]:h:0000000001"
+        "[AzureResourceId]:/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/DummyResourceGroup/providers/Microsoft.Compute/virtualMachines/DummySinglePageDevice"
       ],
       "profileType": "SecureVM",
       "registrationDateTime": "2020-01-01T00:00:00Z",
@@ -27,9 +23,10 @@
       "alternativeSecurityIds": [
         {
           "type": 2,
-          "key": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          "key": "DDDDDDDDDD1111111111111111111111111111DD"
         }
       ]
     }
   ]
 }
+
