@@ -1,0 +1,47 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#devices",
+  "@odata.count": 5,
+  "@odata.nextLink": "https://graph.microsoft.com/v1.0/azure_tenant/devices?$skiptoken=multipage2",
+  "value": [
+    {
+      "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#devices/$entity",
+      "id": "00000000-0000-0000-0000-000000000101",
+      "accountEnabled": true,
+      "approximateLastSignInDateTime": "2020-01-01T00:00:00Z",
+      "createdDateTime": "2020-01-01T00:00:00Z",
+      "deviceId": "10000000-0000-0000-0000-000000000001",
+      "deviceVersion": 2,
+      "displayName": "DummyMultiPage1Device1",
+      "exchangeActiveSyncIds": [],
+      "operatingSystem": "Windows",
+      "operatingSystemVersion": "10.0.0.0",
+      "physicalIds": [],
+      "profileType": "SecureVM",
+      "registrationDateTime": "2020-01-01T00:00:00Z",
+      "systemLabels": [],
+      "trustType": "AzureAd",
+      "extensionAttributes": {},
+      "alternativeSecurityIds": []
+    },
+    {
+      "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#devices/$entity",
+      "id": "00000000-0000-0000-0000-000000000102",
+      "accountEnabled": true,
+      "approximateLastSignInDateTime": "2020-01-01T00:00:00Z",
+      "createdDateTime": "2020-01-01T00:00:00Z",
+      "deviceId": "10000000-0000-0000-0000-000000000002",
+      "deviceVersion": 2,
+      "displayName": "DummyMultiPage1Device2",
+      "exchangeActiveSyncIds": [],
+      "operatingSystem": "Windows",
+      "operatingSystemVersion": "10.0.0.0",
+      "physicalIds": [],
+      "profileType": "SecureVM",
+      "registrationDateTime": "2020-01-01T00:00:00Z",
+      "systemLabels": [],
+      "trustType": "AzureAd",
+      "extensionAttributes": {},
+      "alternativeSecurityIds": []
+    }
+  ]
+}
