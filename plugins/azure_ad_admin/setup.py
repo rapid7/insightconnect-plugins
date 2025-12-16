@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="azure_ad_admin-rapid7-plugin",
-    version="5.0.0",
+    version="5.0.1",
     description="[Azure](https://azure.microsoft.com) AD Admin performs administrative tasks in Azure AD.It uses the [User](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0) endpoint in the [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-1.0)",
     author="rapid7",
     author_email="",

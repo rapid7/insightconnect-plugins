@@ -1,13 +1,16 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
+from typing import Any, Dict
 from unittest import TestCase
+from unittest.mock import MagicMock, patch
+
 from icon_azure_ad_admin.actions.delete_device import DeleteDevice
-from unittest.mock import patch
-from parameterized import parameterized
 from insightconnect_plugin_runtime.exceptions import PluginException
+from parameterized import parameterized
+
 from util import Util
 
 
@@ -15,7 +18,7 @@ from util import Util
 class TestDeleteDevice(TestCase):
     @classmethod
     @patch("requests.post", side_effect=Util.mocked_requests)
-    def setUpClass(cls, mock_post) -> None:
+    def setUpClass(cls, mock_post: MagicMock) -> None:
         cls.action = Util.default_connector(DeleteDevice())
 
     @parameterized.expand(
@@ -27,7 +30,9 @@ class TestDeleteDevice(TestCase):
             ]
         ]
     )
-    def test_delete_device(self, mock_request, test_name, input_params, expected):
+    def test_delete_device(
+        self, mock_request: MagicMock, test_name: str, input_params: Dict[str, Any], expected: Dict[str, Any]
+    ) -> None:
         actual = self.action.run(input_params)
         self.assertEqual(actual, expected)
 
@@ -41,7 +46,9 @@ class TestDeleteDevice(TestCase):
             ]
         ]
     )
-    def test_delete_device_raise_exception(self, mock_request, test_name, input_params, cause, assistance):
+    def test_delete_device_raise_exception(
+        self, mock_request: MagicMock, test_name: str, input_params: Dict[str, Any], cause: str, assistance: str
+    ) -> None:
         with self.assertRaises(PluginException) as error:
             self.action.run(input_params)
         self.assertEqual(error.exception.cause, cause)

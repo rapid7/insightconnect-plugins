@@ -39,7 +39,7 @@ class Util:
     @staticmethod
     def mocked_requests(*args, **kwargs):
         class MockResponse:
-            def __init__(self, status_code: int, filename: str = None):
+            def __init__(self, status_code: int, filename: str = None) -> None:
                 self.status_code = status_code
                 self.text = ""
                 if filename:
@@ -74,8 +74,25 @@ class Util:
         if url == "https://graph.microsoft.com/v1.0/azure_tenant/devices":
             if params.get("$search") == '"displayName:Win-123_3123"':
                 return MockResponse(200, "search_device_all_parameters.json.resp")
+            if params.get("$search") == '"displayName:Win"':
+                return MockResponse(200, "search_device_pagination_page1.json.resp")
+            if params.get("$search") == '"displayName:SinglePage"':
+                return MockResponse(200, "search_device_pagination_single_page.json.resp")
+            if params.get("$search") == '"displayName:LoopLimit"':
+                return MockResponse(200, "search_device_pagination_loop_limit.json.resp")
+            if params.get("$search") == '"displayName:MultiPage"':
+                return MockResponse(200, "search_device_pagination_multipage1.json.resp")
             if params.get("$orderBy") == "invalidParameter":
                 return MockResponse(400, "")
             return MockResponse(200, "search_device_no_parameters.json.resp")
-
+        # Handle pagination nextLink URLs
+        if url == "https://graph.microsoft.com/v1.0/azure_tenant/devices?$skiptoken=page2":
+            return MockResponse(200, "search_device_pagination_page2.json.resp")
+        if url == "https://graph.microsoft.com/v1.0/azure_tenant/devices?$skiptoken=looplimit_next":
+            # Always return the same response with nextLink to test loop limit
+            return MockResponse(200, "search_device_pagination_loop_limit.json.resp")
+        if url == "https://graph.microsoft.com/v1.0/azure_tenant/devices?$skiptoken=multipage2":
+            return MockResponse(200, "search_device_pagination_multipage2.json.resp")
+        if url == "https://graph.microsoft.com/v1.0/azure_tenant/devices?$skiptoken=multipage3":
+            return MockResponse(200, "search_device_pagination_multipage3.json.resp")
         raise Exception(f"Not implemented: {kwargs}")

@@ -1,0 +1,60 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#devices",
+  "@odata.count": 3,
+  "value": [
+    {
+      "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#devices/$entity",
+      "id": "00000000-0000-0000-0000-000000000021",
+      "accountEnabled": true,
+      "approximateLastSignInDateTime": "2020-01-02T00:00:00Z",
+      "createdDateTime": "2020-01-02T00:00:00Z",
+      "deviceId": "22000000-0000-0000-0000-000000000001",
+      "deviceVersion": 2,
+      "displayName": "DummyPage2Device1",
+      "exchangeActiveSyncIds": [],
+      "operatingSystem": "Windows",
+      "operatingSystemVersion": "10.0.0.0",
+      "physicalIds": [
+        "[AzureResourceId]:/subscriptions/00000000-0000-0000-0000-000000000021/resourceGroups/DummyResourceGroup/providers/Microsoft.Compute/virtualMachines/DummyPage2Device1"
+      ],
+      "profileType": "SecureVM",
+      "registrationDateTime": "2020-01-02T00:00:00Z",
+      "systemLabels": [],
+      "trustType": "AzureAd",
+      "extensionAttributes": {},
+      "alternativeSecurityIds": [
+        {
+          "type": 2,
+          "key": "BBBBBBBBBB2222222222222222222222222222BB"
+        }
+      ]
+    },
+    {
+      "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#devices/$entity",
+      "id": "00000000-0000-0000-0000-000000000022",
+      "accountEnabled": true,
+      "approximateLastSignInDateTime": "2020-01-03T00:00:00Z",
+      "createdDateTime": "2020-01-03T00:00:00Z",
+      "deviceId": "33000000-0000-0000-0000-000000000001",
+      "deviceVersion": 2,
+      "displayName": "DummyPage2Device2",
+      "exchangeActiveSyncIds": [],
+      "operatingSystem": "Windows",
+      "operatingSystemVersion": "10.0.0.0",
+      "physicalIds": [
+        "[AzureResourceId]:/subscriptions/00000000-0000-0000-0000-000000000022/resourceGroups/DummyResourceGroup/providers/Microsoft.Compute/virtualMachines/DummyPage2Device2"
+      ],
+      "profileType": "SecureVM",
+      "registrationDateTime": "2020-01-03T00:00:00Z",
+      "systemLabels": [],
+      "trustType": "AzureAd",
+      "extensionAttributes": {},
+      "alternativeSecurityIds": [
+        {
+          "type": 2,
+          "key": "CCCCCCCCCC3333333333333333333333333333CC"
+        }
+      ]
+    }
+  ]
+}
