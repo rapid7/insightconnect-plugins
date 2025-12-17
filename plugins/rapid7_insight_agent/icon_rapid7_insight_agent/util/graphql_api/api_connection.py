@@ -85,7 +85,7 @@ class ApiConnection:
         }
 
         results_object = self._post_payload(unquarantine_payload)
-        failed = results_object.get("data").get("unquarantineAssets").get("results")[0].get("failed")
+        failed = results_object.get("data", {}).get("unquarantineAssets", {}).get("results", [])[0].get("failed")
         return not failed
 
     def quarantine_list(
@@ -134,9 +134,17 @@ class ApiConnection:
 
         results_object = self._post_payload(payload)
         try:
-            agent = results_object.get("data").get("assets")[0].get("agent")
-            quarantine_state = agent.get("quarantineState").get("currentState")
-            agent_status = agent.get("agentStatus")
+            assets = results_object.get("data", {}).get("assets", [])
+            if assets and assets[0]:
+                agent = assets[0].get("agent", {})
+                quarantine_state = agent.get("quarantineState", {}).get("currentState")
+                agent_status = agent.get("agentStatus")
+            else:
+                raise PluginException(
+                    cause="No agents found",
+                    assistance="Please verify the agent ID is correct.",
+                    data=str(results_object),
+                )
         except (Exception, IndexError):
             raise PluginException(
                 cause="Received an unexpected response from the server.",
@@ -198,7 +206,7 @@ class ApiConnection:
         payload = {"query": "{ organizations(first: 1) { edges { node { id name } } } }"}
         result_object = self._post_payload(payload)
         self.logger.info("Organization ID query complete.")
-        return result_object.get("data").get("organizations").get("edges")[0].get("node").get("id")
+        return result_object.get("data", {}).get("organizations", {}).get("edges", [])[0].get("node", {}).get("id")
 
     def _get_headers(self) -> dict:
         """
@@ -399,7 +407,13 @@ class ApiConnection:
         self.logger.info("Getting all agents...")
         results_object = self._post_payload(payload)
 
-        has_next_page = results_object.get("data").get("organization").get("assets").get("pageInfo").get("hasNextPage")
+        has_next_page = (
+            results_object.get("data", {})
+            .get("organization", {})
+            .get("assets", {})
+            .get("pageInfo", {})
+            .get("hasNextPage")
+        )
         next_cursor = (
             results_object.get("data", {})
             .get("organization", {})
@@ -545,7 +559,7 @@ class ApiConnection:
         agent_list = []
 
         try:
-            edges = results_object.get("data").get("organization").get("assets").get("edges")
+            edges = results_object.get("data", {}).get("organization", {}).get("assets", {}).get("edges")
             for edge in edges:
                 agent = edge.get("node")
                 agent_list.append(agent)
