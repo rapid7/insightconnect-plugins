@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import GetSamplesInput, GetSamplesOutput, Output
+from .schema import GetSamplesInput, GetSamplesOutput, Output, Input
 
 # Custom imports below
 
@@ -14,14 +14,14 @@ class GetSamples(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        sample_type, sample, optional_params = (
-            params.get("sample_type"),
-            params.get("sample"),
-            params.get("optional_params"),
-        )
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        sample_type = params.get(Input.SAMPLE_TYPE, "all")
+        sample = params.get(Input.SAMPLE, "")
+        optional_params = params.get(Input.OPTIONAL_PARAMS, {})
+        # END INPUT BINDING - DO NOT REMOVE
 
-        resp = self.connection.api.get_samples(sample_type, sample, optional_params)
-        clean_data = insightconnect_plugin_runtime.helper.clean(resp.get("data", []))
+        response = self.connection.api.get_samples(sample_type, sample, optional_params)
+        clean_data = insightconnect_plugin_runtime.helper.clean(response.get("data", []))
         if isinstance(clean_data, dict):
             clean_data = [clean_data]
         return {Output.RESULTS: clean_data}

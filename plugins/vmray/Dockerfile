@@ -1,27 +1,36 @@
-FROM rapid7/insightconnect-python-3-38-slim-plugin:5
-# The three supported python parent images are:
-# - komand/python-2-plugin
-# - komand/python-3-plugin
-# - komand/python-pypy3-plugin
-#
-LABEL organization=komand
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.4.1 AS builder
 
-# Add any custom package dependencies here
-# NOTE: Add pip packages to requirements.txt
-
-# End package dependencies
-# Add source code
 WORKDIR /python/src
+
 ADD ./plugin.spec.yaml /plugin.spec.yaml
+ADD ./requirements.txt /python/src/requirements.txt
 ADD . /python/src
 
-# Install pip dependencies
+
+
+RUN pip install .
+RUN pip uninstall -y setuptools
+
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.4.1
+
+LABEL organization=rapid7
+LABEL sdk=python
+
+WORKDIR /python/src
+
+COPY --from=builder /python/src /python/src
+COPY --from=builder /plugin.spec.yaml /plugin.spec.yaml
+
+RUN apt-get update && apt-get install libmagic1 -y
+
+
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-# Install plugin
-RUN python setup.py build && python setup.py install
+ENV PYTHONPATH="/python/src:${PYTHONPATH}"
 
-# needed for SSL Verify
+RUN rm -rf /root/.cache;
+
+# User to run plugin code. The two supported users are: root, nobody
 USER nobody
 
-ENTRYPOINT ["/usr/local/bin/komand_vmray"]
+ENTRYPOINT ["python", "/python/src/bin/komand_vmray"]
