@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import GetAnalysisInput, GetAnalysisOutput, Output
+from .schema import GetAnalysisInput, GetAnalysisOutput, Output, Input
 
 # Custom imports below
 
@@ -14,11 +14,14 @@ class GetAnalysis(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        id_type = params.get("id_type")
-        analysis_id = params.get("id")
-        optional_params = params.get("optional_params")
-        resp = self.connection.api.get_analysis(analysis_id, id_type, optional_params)
-        clean_results = insightconnect_plugin_runtime.helper.clean(resp.get("data", []))
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        analysis_id = params.get(Input.ID, "")
+        id_type = params.get(Input.ID_TYPE, "all")
+        optional_params = params.get(Input.OPTIONAL_PARAMS, {})
+        # END INPUT BINDING - DO NOT REMOVE
+
+        response = self.connection.api.get_analysis(analysis_id, id_type, optional_params)
+        clean_results = insightconnect_plugin_runtime.helper.clean(response.get("data", []))
         if isinstance(clean_results, dict):
             clean_results = [clean_results]
         return {Output.RESULTS: clean_results}
