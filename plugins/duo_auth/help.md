@@ -121,6 +121,7 @@ Example output:
 
 # Version History
 
+* 1.0.5 - Updated dependencies and SDK to the latest version (6.4.1)
 * 1.0.4 - Updated dependencies and SDK to the latest version
 * 1.0.3 - Upgraded `duo_client` in requirements.txt to version `4.0.0` | Upgraded `duo_client` in vendor folder to version `4.0.0` | Use input and output constants |  Change docker image from `komand/python-3-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size
 * 1.0.2 - New spec and help.md format for the Extension Library

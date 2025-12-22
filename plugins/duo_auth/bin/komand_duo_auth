@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Duo Auth API"
 Vendor = "rapid7"
-Version = "1.0.4"
+Version = "1.0.5"
 Description = "[Duo](https://duo.com/)'s Trusted Access platform verifies the identity of your users with two-factor authentication and security health of their devices before they connect to the apps they use. The Duo Auth InsightConnect plugin enables users to create and send push notifications from within automation workflows"
 
 
