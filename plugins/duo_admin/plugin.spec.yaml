@@ -11,7 +11,7 @@ status: []
 supported_versions: [Duo Admin API 2024-09-17]
 sdk:
   type: full
-  version: 6.3.10
+  version: 6.4.1
   user: nobody
 description: "[Duo](https://duo.com/)'s Trusted Access platform verifies the identity\
   \ of your users with two-factor authentication and security health of their devices\
@@ -31,15 +31,15 @@ key_features:
 requirements:
 - Two secret keys - `integration key` and `secret key`
 - '`API hostname`'
-version: 5.0.8
+version: 5.0.9
 connection_version: 4
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/duo_admin
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://duo.com/
 tags:
-- duo
-- admin
+  - duo
+  - admin
 hub_tags:
   use_cases: [user_management, application_management]
   keywords: [duo, admin, cloud_enabled]
@@ -54,6 +54,7 @@ troubleshooting:
   - instead it's a unique identifier e.g. DU9I6T0F7R2S1J4XZHHA. A User ID can be obtained
   by passing a username to the Get User Status action.
 version_history:
+- 5.0.9 - Updated SDK to the latest version (6.4.1)
 - 5.0.8 - Update SDK | Update Task `Monitor Logs` timestamp handling
 - 5.0.7 - Update Task `Monitor Logs` timestamp handling
 - 5.0.6 - Update SDK to the latest version (6.3.8) | Update Task `Monitor Logs` for Task delay logging
