@@ -1,8 +1,6 @@
 # Description
 
-The [Zendesk](https://www.zendesk.com) plugin helps manage communication with customers. This plugin allows you to manage tickets and users in Zendesk. Customer Resource Management tool to manage tickets of user complaints and support issues.
-
-This plugin utilizes the [Zendesk Python SDK](https://github.com/facetoe/zenpy).
+The [Zendesk](https://www.zendesk.com) plugin helps manage communication with customers. This plugin allows you to manage tickets and users in Zendesk. Customer Resource Management tool to manage tickets of user complaints and support issues. This plugin utilizes the [Zendesk Python SDK](https://github.com/facetoe/zenpy).
 
 # Key Features
 
@@ -26,19 +24,16 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|api_key|credential_secret_key|None|False|Zendesk API key|None|A6yLhgioJiF2wOP1omP9sTa5yWSTvucx2U7yg67u|None|None|
-|credentials|credential_username_password|None|True|Email and password|None|{"username": "user@example.com", "password": "password"}|None|None|
+|api_token|string|None|True|Zendesk API Token|None|A6yLhgioJiF2wOP1omP9sTa5yWSTvucx2U7yg67u|None|None|
+|email|string|None|True|Email|None|user@example.com|None|None|
 |subdomain|string|None|True|Zendesk subdomain|None|example-subdomain|None|None|
 
 Example input:
 
 ```
 {
-  "api_key": "A6yLhgioJiF2wOP1omP9sTa5yWSTvucx2U7yg67u",
-  "credentials": {
-    "password": "password",
-    "username": "user@example.com"
-  },
+  "api_token": "A6yLhgioJiF2wOP1omP9sTa5yWSTvucx2U7yg67u",
+  "email": "user@example.com",
   "subdomain": "example-subdomain"
 }
 ```
@@ -701,6 +696,7 @@ Example output:
 
 # Version History
 
+* 5.0.0 - Adjusted authentication methods | Updated SDK to the latest version (6.4.1)
 * 4.0.3 - Update dependency version | Updated SDK to the latest version
 * 4.0.2 - Updated SDK to the latest version | `Search`: Fixed issue where only one search result was returned
 * 4.0.1 - Updated the exceptions for all the actions | Show Organization Memberships: Added types to the actions output

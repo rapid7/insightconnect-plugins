@@ -20,9 +20,9 @@ class Util:
             params = connect_params
         else:
             params = {
-                Input.API_KEY: "API_KEY",
+                Input.API_TOKEN: "API_TOKEN",
                 Input.SUBDOMAIN: "testdomain",
-                Input.CREDENTIALS: {"username": "user", "password": "pass"},
+                Input.EMAIL: "test@test.com",
             }
         default_connection.connect(params)
         action.connection = default_connection

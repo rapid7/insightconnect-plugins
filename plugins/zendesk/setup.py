@@ -4,8 +4,8 @@ from setuptools import setup, find_packages
 
 setup(
     name="zendesk-rapid7-plugin",
-    version="4.0.3",
-    description="Regulate customer communications by managing tickets and users in Zendesk data",
+    version="5.0.0",
+    description="The [Zendesk](https://www.zendesk.com) plugin helps manage communication with customers. This plugin allows you to manage tickets and users in Zendesk. Customer Resource Management tool to manage tickets of user complaints and support issues. This plugin utilizes the [Zendesk Python SDK](https://github.com/facetoe/zenpy).",
     author="rapid7",
     author_email="",
     url="",
