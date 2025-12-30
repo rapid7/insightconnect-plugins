@@ -5,7 +5,7 @@ name: zendesk
 title: Zendesk
 description: The [Zendesk](https://www.zendesk.com) plugin helps manage communication with customers. 
   This plugin allows you to manage tickets and users in Zendesk. Customer Resource Management tool to manage tickets of user complaints and support issues. 
-  This plugin utilizes the [Zendesk Python SDK](https://github.com/facetoe/zenpy).
+  This plugin utilizes the [Zendesk Python SDK](https://github.com/facetoe/zenpy)
 version: 5.0.0
 connection_version: 5
 supported_versions: ["2024-07-11"]

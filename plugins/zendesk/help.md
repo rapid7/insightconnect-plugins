@@ -1,6 +1,6 @@
 # Description
 
-The [Zendesk](https://www.zendesk.com) plugin helps manage communication with customers. This plugin allows you to manage tickets and users in Zendesk. Customer Resource Management tool to manage tickets of user complaints and support issues. This plugin utilizes the [Zendesk Python SDK](https://github.com/facetoe/zenpy).
+The [Zendesk](https://www.zendesk.com) plugin helps manage communication with customers. This plugin allows you to manage tickets and users in Zendesk. Customer Resource Management tool to manage tickets of user complaints and support issues. This plugin utilizes the [Zendesk Python SDK](https://github.com/facetoe/zenpy)
 
 # Key Features
 

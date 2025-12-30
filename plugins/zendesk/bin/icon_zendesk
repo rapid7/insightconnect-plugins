@@ -7,7 +7,7 @@ from sys import argv
 Name = "Zendesk"
 Vendor = "rapid7"
 Version = "5.0.0"
-Description = "The [Zendesk](https://www.zendesk.com) plugin helps manage communication with customers. This plugin allows you to manage tickets and users in Zendesk. Customer Resource Management tool to manage tickets of user complaints and support issues. This plugin utilizes the [Zendesk Python SDK](https://github.com/facetoe/zenpy)."
+Description = "The [Zendesk](https://www.zendesk.com) plugin helps manage communication with customers. This plugin allows you to manage tickets and users in Zendesk. Customer Resource Management tool to manage tickets of user complaints and support issues. This plugin utilizes the [Zendesk Python SDK](https://github.com/facetoe/zenpy)"
 
 
 def main():
