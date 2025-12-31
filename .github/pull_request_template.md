@@ -1,60 +1,71 @@
-## Proposed Changes
+## 📝 Description
 
-### Description
+<!-- Briefly describe your changes, why they're needed, and any relevant context -->
+*Provide a short description of the changes made in this pull request.*
 
-Describe the proposed changes:
+## 🧪 Testing
 
-  -
+<!-- Describe how you verified the changes work as intended -->
+*Describe the testing process, including any unit tests or manual testing steps taken.*
 
-## PR Requirements
+### ✅ Checklist
+- [ ] Unit tests added/updated ([generation guide](https://docs.rapid7.com/insightconnect/unit-test-generation) | [writing guide](https://docs.rapid7.com/insightconnect/unit-test-primer))
+- [ ] Manually tested in InsightConnect (if applicable)
 
-Developers, verify you have completed the following items by checking them off:
+### 🔍 Plugin Validation
 
-### Testing
+Please run the following commands and provide the output. **For action/trigger tests and runs, include outputs for all actions/triggers that were created or modified in this PR.**
 
-#### Unit Tests
+<details>
+<summary>Plugin Validation Output (<code>insight-plugin validate</code>)</summary>
 
-Review our documentation on [generating](https://docs.rapid7.com/insightconnect/unit-test-generation) and [writing](https://docs.rapid7.com/insightconnect/unit-test-primer) plugin unit tests
+```
+# Paste output here
+```
 
-- [ ] Unit tests written for any new or updated code
+</details>
 
-#### In-Product Tests
+<details>
+<summary>Connection Test Results (<code>insight-plugin run -T tests/example.json --debug --jq</code>)</summary>
 
-If you are an InsightConnect customer or have access to an InsightConnect instance, the following in-product tests should be done:
+```
+# Paste output here for the connection test of the plugin
+# It doesn't matter which action/trigger you use, as long as -T flag is specified
+```
 
+</details>
+
+<details>
+<summary>Action/Trigger Test Results (<code>insight-plugin run -R tests/example.json --debug --jq</code>)</summary>
+
+```
+# Paste output here for all created/modified actions/triggers
+```
+
+</details>
+
+### 🖼️ In-Product Verification (if applicable)
+
+If you have access to an InsightConnect instance, please provide:
 - [ ] Screenshot of job output with the plugin changes
 - [ ] Screenshot of the changed connection, actions, or triggers input within the InsightConnect workflow builder
 
-### Style
+## ✅ Code Quality Checklist
 
-Review the [style guide](https://docs.rapid7.com/insightconnect/style-guide/)
+Please review our [style guide](https://docs.rapid7.com/insightconnect/style-guide/) and check all that apply:
+- [ ] Dependencies pinned in `Dockerfile` ([OS packages](https://docs.rapid7.com/insightconnect/style-guide/#dockerfile)) and `requirements.txt` ([Python packages](https://docs.rapid7.com/insightconnect/style-guide/#requirements.txt))
+- [ ] `USER nobody` set in `Dockerfile` for least privileged account
+- [ ] Uses [slim SDK images](https://docs.rapid7.com/insightconnect/sdk-guide/#sdk-guide) when possible (e.g., `rapid7/insightconnect-python-3-38-slim-plugin:{sdk-version-num}`)
+- [ ] Uses [PluginException](https://docs.rapid7.com/insightconnect/error-handling-in-integrations/#plugin-exceptions) / [ConnectionTestException](https://docs.rapid7.com/insightconnect/error-handling-in-integrations#connection-exceptions) for errors
+- [ ] Uses `self.logger` for [logging](https://docs.rapid7.com/insightconnect/sdk-guide/#logging)
+- [ ] Changelog updated ([style guide](https://docs.rapid7.com/insightconnect/style-guide/#changelog))
+- [ ] Work fully completed and functional
 
-- [ ] For dependencies, pin [OS package](https://docs.rapid7.com/insightconnect/style-guide/#dockerfile) and [Python package](https://docs.rapid7.com/insightconnect/style-guide/#requirements.txt) versions
-- [ ] For security, set least privileged account with ``USER nobody`` in the ``Dockerfile`` when possible
-- [ ] For size, use the [slim SDK images](https://docs.rapid7.com/insightconnect/sdk-guide/#sdk-guide) when possible: ``rapid7/insightconnect-python-3-38-slim-plugin:{sdk-version-num}`` and ``rapid7/insightconnect-python-3-38-plugin:{sdk-version-num}``
-- [ ] For error handling, use of [PluginException](https://docs.rapid7.com/insightconnect/error-handling-in-integrations/#plugin-exceptions) and [ConnectionTestException](https://docs.rapid7.com/insightconnect/error-handling-in-integrations#connection-exceptions)
-- [ ] For logging, use [self.logger](https://docs.rapid7.com/insightconnect/sdk-guide/#logging)
-- [ ] For docs, use [changelog style](https://docs.rapid7.com/insightconnect/style-guide/#changelog)
-- [ ] For docs, validate markdown with ``insight-plugin validate`` which calls ``icon_validate`` to lint ``help.md``
+## 💬 Additional Notes
 
-### Functional Checklist
-- [ ] Work fully completed
-- [ ] Functional
-  - [ ] Any new actions/triggers include JSON [test files](https://docs.rapid7.com/insightconnect/style-guide/#tests) in the `tests/` directory created with `insight-plugin samples`
-  - [ ] Tests should all pass unless it's a negative test. Negative tests have a naming convention of `tests/$action_bad.json`
-  - [ ] Unsuccessful tests should fail by raising an exception causing the plugin to die and an object should be returned on successful test
-  - [ ] Add functioning test results to PR, sanitize any output if necessary
-    * Single action/trigger `insight-plugin run -T tests/example.json --debug --jq`
-    * All actions/triggers shortcut `insight-plugin run -T all --debug --jq` (use PR format at end)
-  - [ ] Add functioning run results to PR, sanitize any output if necessary
-    * Single action/trigger `insight-plugin run -R tests/example.json --debug --jq`
-    * All actions/triggers shortcut `insight-plugin run --debug --jq` (use PR format at end)
+<!-- Screenshots, breaking changes, migration notes, or anything else reviewers should know -->
+*Add any additional context or information about the pull request here.*
 
-### Assessment
+---
 
-You must validate your work to reviewers:
-
-1. Run `insight-plugin validate` and make sure everything passes
-2. Run the assessment tool: `insight-plugin run -A`. For single action validation: `insight-plugin run tests/{file}.json -A`
-3. Copy (`insight-plugin ... | pbcopy`) and paste the output in **a new post** on this PR
-4. Add required screenshots from the In-Product Tests section
+**Thanks for contributing! 🎉**
