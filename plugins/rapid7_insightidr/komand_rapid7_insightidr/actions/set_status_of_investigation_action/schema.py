@@ -36,6 +36,8 @@ class SetStatusOfInvestigationActionInput(insightconnect_plugin_runtime.Input):
       "default": "CLOSED",
       "enum": [
         "OPEN",
+        "INVESTIGATING",
+        "WAITING",
         "CLOSED"
       ],
       "order": 2
