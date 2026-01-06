@@ -77,6 +77,7 @@ class UpdateInvestigationInput(insightconnect_plugin_runtime.Input):
         "",
         "OPEN",
         "INVESTIGATING",
+        "WAITING",
         "CLOSED"
       ],
       "order": 3

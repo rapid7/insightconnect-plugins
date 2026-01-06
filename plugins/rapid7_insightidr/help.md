@@ -746,7 +746,7 @@ This action is used to allows to create investigation manually
 |disposition|string|None|False|Investigation's disposition|["", "BENIGN", "FALSE_POSITIVE", "MALICIOUS", "NOT_APPLICABLE", "SECURITY_TEST", "UNDECIDED", "UNKNOWN"]|BENIGN|None|None|
 |email|string|None|False|A user's email address for investigation to be assigned|None|user@example.com|None|None|
 |priority|string|None|False|Investigation's priority|["", "LOW", "MEDIUM", "HIGH", "CRITICAL"]|LOW|None|None|
-|status|string|None|False|Investigation's status|["", "OPEN", "CLOSED"]|OPEN|None|None|
+|status|string|None|False|Investigation's status|["", "OPEN", "INVESTIGATING", "WAITING", "CLOSED"]|OPEN|None|None|
 |title|string|None|True|Investigation's title|None|Example Title|None|None|
   
 Example input:
@@ -2517,7 +2517,7 @@ This action is used to set the status of the investigation with the given ID
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|string|None|True|The ID of the investigation to change the status of|None|174e4f99-2ac7-4481-9301-4d24c34baf06|None|None|
-|status|string|CLOSED|True|The new status for the investigation|["OPEN", "CLOSED"]|CLOSED|None|None|
+|status|string|CLOSED|True|The new status for the investigation|["OPEN", "INVESTIGATING", "WAITING", "CLOSED"]|CLOSED|None|None|
   
 Example input:
 
@@ -2692,7 +2692,7 @@ This action is used to allows to update existing investigation by ID or RRN
 |email|string|None|False|A user's email address for investigation to be assigned|None|user@example.com|None|None|
 |id|string|None|True|The identifier of investigation to be update (ID or RRN)|None|rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111|None|None|
 |priority|string|None|False|Investigation's priority|["", "UNSPECIFIED", "LOW", "MEDIUM", "HIGH", "CRITICAL"]|LOW|None|None|
-|status|string|None|False|Investigation's status|["", "OPEN", "INVESTIGATING", "CLOSED"]|OPEN|None|None|
+|status|string|None|False|Investigation's status|["", "OPEN", "INVESTIGATING", "WAITING", "CLOSED"]|OPEN|None|None|
 |title|string|None|False|Investigation's title|None|Example Title|None|None|
   
 Example input:
@@ -3428,6 +3428,7 @@ Example output:
 
 # Version History
 
+* 12.0.4 - Update Investigation status values to include `WAITING` and `INVESTIGATING` | SDK bump to 6.4.1
 * 12.0.3 - Actions: `Advanced Query on Log` and `Advanced Query on Log Set` - Updated schema
 * 12.0.2 - Triggers: `Get New Investigations` - Improved error handling | Updated SDK to the latest version (6.3.10)
 * 12.0.1 - Updated SDK to latest version (6.3.8) | Resolved Snyk Vulnerability

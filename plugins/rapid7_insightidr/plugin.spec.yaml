@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 12.0.3
+version: 12.0.4
 connection_version: 5
 supported_versions: ["Latest release successfully tested on 2025-07-22."]
 vendor: rapid7
@@ -32,9 +32,10 @@ key_features:
   - "Incident Response and Investigations"
 sdk:
   type: full
-  version: 6.3.10
+  version: 6.4.1
   user: nobody
 version_history:
+  - "12.0.4 - Update Investigation status values to include `WAITING` and `INVESTIGATING` | SDK bump to 6.4.1"
   - "12.0.3 - Actions: `Advanced Query on Log` and `Advanced Query on Log Set` - Updated schema"
   - "12.0.2 - Triggers: `Get New Investigations` - Improved error handling | Updated SDK to the latest version (6.3.10)"
   - "12.0.1 - Updated SDK to latest version (6.3.8) | Resolved Snyk Vulnerability"
@@ -1563,6 +1564,8 @@ actions:
         enum:
           - ""
           - OPEN
+          - INVESTIGATING
+          - WAITING
           - CLOSED
         required: false
         example: OPEN
@@ -1685,6 +1688,7 @@ actions:
           - ""
           - OPEN
           - INVESTIGATING
+          - WAITING
           - CLOSED
         required: false
         example: OPEN
@@ -1826,6 +1830,8 @@ actions:
         example: CLOSED
         enum:
         - OPEN
+        - INVESTIGATING
+        - WAITING
         - CLOSED
     output:
       investigation:
