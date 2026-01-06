@@ -21,12 +21,10 @@ class Connection(insightconnect_plugin_runtime.Connection):
             if input_key == Input.TOKEN:
                 value = value.get("secretKey") if isinstance(value, dict) else ""
 
-            value = value.strip() if isinstance(value, str) else ""
-
             if not value:
                 missing_fields.append(input_key)
             else:
-                creds[input_key] = value
+                creds[input_key] = value.strip()
 
         if missing_fields:
             fields_str = ", ".join(missing_fields)
