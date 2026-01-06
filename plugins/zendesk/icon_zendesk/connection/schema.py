@@ -4,9 +4,9 @@ import json
 
 
 class Input:
-    API_TOKEN = "api_token"
     EMAIL = "email"
     SUBDOMAIN = "subdomain"
+    TOKEN = "token"
 
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -16,12 +16,6 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "api_token": {
-      "type": "string",
-      "title": "API Token",
-      "description": "Zendesk API Token",
-      "order": 2
-    },
     "email": {
       "type": "string",
       "title": "Email",
@@ -33,14 +27,39 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "title": "Subdomain",
       "description": "Zendesk subdomain",
       "order": 3
+    },
+    "token": {
+      "$ref": "#/definitions/credential_secret_key",
+      "title": "API Token",
+      "description": "Zendesk API Token",
+      "order": 2
     }
   },
   "required": [
-    "api_token",
     "email",
-    "subdomain"
+    "subdomain",
+    "token"
   ],
-  "definitions": {}
+  "definitions": {
+    "credential_secret_key": {
+      "id": "credential_secret_key",
+      "type": "object",
+      "title": "Credential: Secret Key",
+      "description": "A shared secret key",
+      "required": [
+        "secretKey"
+      ],
+      "properties": {
+        "secretKey": {
+          "type": "string",
+          "title": "Secret Key",
+          "description": "The shared secret key",
+          "format": "password",
+          "displayType": "password"
+        }
+      }
+    }
+  }
 }
     """
     )

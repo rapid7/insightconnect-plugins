@@ -12,29 +12,26 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.client = None
 
     def connect(self, params):
-        email = params.get(Input.EMAIL, "").strip()
-        subdomain = params.get(Input.SUBDOMAIN, "").strip()
-        api_token = params.get(Input.API_TOKEN, "").strip()
-
+        creds = {}
         missing_fields = []
 
-        if not email:
-            missing_fields.append(Input.EMAIL)
-        if not subdomain:
-            missing_fields.append(Input.SUBDOMAIN)
-        if not api_token:
-            missing_fields.append(Input.API_TOKEN)
+        for input_key in [Input.EMAIL, Input.SUBDOMAIN, Input.TOKEN]:
+            value = params.get(input_key, "")
+
+            if input_key == Input.TOKEN:
+                value = value.get("secretKey") if isinstance(value, dict) else ""
+
+            value = value.strip() if isinstance(value, str) else ""
+
+            if not value:
+                missing_fields.append(input_key)
+            else:
+                creds[input_key] = value
 
         if missing_fields:
             fields_str = ", ".join(missing_fields)
             assistance_message = f"Please provide the following required field(s): {fields_str}."
             raise PluginException(cause="Could not authenticate to Zendesk.", assistance=assistance_message)
-
-        creds = {
-            "email": email,
-            "subdomain": subdomain,
-            "token": api_token,
-        }
 
         self.client = zenpy.Zenpy(**creds)
         self.logger.info("Connect: Connecting...")

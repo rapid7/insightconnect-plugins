@@ -421,8 +421,8 @@ connection:
     type: string
     example: user@example.com
     required: true
-  api_token:
-    type: string
+  token:
+    type: credential_secret_key
     title: API Token
     description: Zendesk API Token
     example: A6yLhgioJiF2wOP1omP9sTa5yWSTvucx2U7yg67u

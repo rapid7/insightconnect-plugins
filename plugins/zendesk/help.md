@@ -24,17 +24,17 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|api_token|string|None|True|Zendesk API Token|None|A6yLhgioJiF2wOP1omP9sTa5yWSTvucx2U7yg67u|None|None|
 |email|string|None|True|Email|None|user@example.com|None|None|
 |subdomain|string|None|True|Zendesk subdomain|None|example-subdomain|None|None|
+|token|credential_secret_key|None|True|Zendesk API Token|None|A6yLhgioJiF2wOP1omP9sTa5yWSTvucx2U7yg67u|None|None|
 
 Example input:
 
 ```
 {
-  "api_token": "A6yLhgioJiF2wOP1omP9sTa5yWSTvucx2U7yg67u",
   "email": "user@example.com",
-  "subdomain": "example-subdomain"
+  "subdomain": "example-subdomain",
+  "token": "A6yLhgioJiF2wOP1omP9sTa5yWSTvucx2U7yg67u"
 }
 ```
 

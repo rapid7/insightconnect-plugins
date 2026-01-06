@@ -20,7 +20,7 @@ class Util:
             params = connect_params
         else:
             params = {
-                Input.API_TOKEN: "API_TOKEN",
+                Input.TOKEN: {"secretKey": "TOKEN"},
                 Input.SUBDOMAIN: "testdomain",
                 Input.EMAIL: "test@test.com",
             }
