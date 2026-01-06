@@ -3,16 +3,18 @@ extension: plugin
 products: [insightconnect]
 name: zendesk
 title: Zendesk
-description: Regulate customer communications by managing tickets and users in Zendesk data
-version: 4.0.3
-connection_version: 4
+description: The [Zendesk](https://www.zendesk.com) plugin helps manage communication with customers. 
+  This plugin allows you to manage tickets and users in Zendesk. Customer Resource Management tool to manage tickets of user complaints and support issues. 
+  This plugin utilizes the [Zendesk Python SDK](https://github.com/facetoe/zenpy)
+version: 5.0.0
+connection_version: 5
 supported_versions: ["2024-07-11"]
 vendor: rapid7
 support: community
 status: []
 sdk:
   type: slim
-  version: 6.3.10
+  version: 6.4.1
   user: nobody
 key_features:
   - "Create, manage, and delete issues and epics"
@@ -21,6 +23,7 @@ requirements:
   - "A Zendesk API key"
   - "Information about your Zendesk instance"
 version_history:
+  - "5.0.0 - Deprecating username:password authentication method | Updated SDK to the latest version (6.4.1)"
   - "4.0.3 - Update dependency version | Updated SDK to the latest version"
   - "4.0.2 - Updated SDK to the latest version | `Search`: Fixed issue where only one search result was returned"
   - "4.0.1 - Updated the exceptions for all the actions | Show Organization Memberships: Added types to the actions output"
@@ -412,18 +415,18 @@ types:
       type: date
       required: false
 connection:
-  credentials:
-    title: Email and Password
-    description: Email and password
-    type: credential_username_password
-    example: '{"username": "user@example.com", "password": "password"}'
+  email:
+    title: Email
+    description: Email
+    type: string
+    example: user@example.com
     required: true
-  api_key:
+  token:
     type: credential_secret_key
-    title: API Key
-    description: Zendesk API key
+    title: API Token
+    description: Zendesk API Token
     example: A6yLhgioJiF2wOP1omP9sTa5yWSTvucx2U7yg67u
-    required: false
+    required: true
   subdomain:
     type: string
     title: Subdomain
