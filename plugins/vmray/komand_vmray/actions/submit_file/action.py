@@ -2,7 +2,7 @@ import binascii
 
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
-from .schema import SubmitFileInput, SubmitFileOutput, Output
+from .schema import SubmitFileInput, SubmitFileOutput, Output, Input
 
 # Custom imports below
 
@@ -19,10 +19,13 @@ class SubmitFile(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        file_ = params.get("file", None)
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        file_ = params.get(Input.FILE, {})
+        optional_params = params.get(Input.OPTIONAL_PARAMS, {})
+        analyzer_mode = params.get(Input.ANALYZER_MODE, "default")
+        # END INPUT BINDING - DO NOT REMOVE
+
         file_name = file_.get("filename")
-        optional_params = params.get("optional_params", {})
-        analyzer_mode = params.get("analyzer_mode")
         if analyzer_mode != "default":
             optional_params["analyzer_mode"] = analyzer_mode
 

@@ -1,9 +1,12 @@
 import insightconnect_plugin_runtime
+import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
-from requests import Session, Request, RequestException
+from requests import RequestException
 from json import JSONDecodeError
 import mimetypes
 import magic
+from logging import Logger
+from typing import Optional, Dict, Any, Tuple, List
 
 
 class VMRay:
@@ -82,79 +85,80 @@ class VMRay:
         ".ps1",
     ]
 
-    def __init__(self, url, api_key, logger):
+    def __init__(self, url: str, api_key: str, logger: Logger) -> None:
         self.url = url
         self.api_key = api_key
         self.logger = logger
-        self.s = Session()
 
-    def test_call(self):
-        return self._call_api("GET", "/rest/system_info")
+    def test_call(self) -> Dict[str, Any]:
+        return self._call_api("GET", "system_info")
 
-    def _call_api(self, method, endpoint_url, files=None, params=None, data=None, json=None, action_name=None):
-        url = self.url + endpoint_url
-        headers = {"Authorization": f"api_key {self.api_key}"}
-        req = Request(
-            url=url,
-            method=method,
-            params=params,
-            data=data,
-            json=json,
-            files=files,
-            headers=headers,
-        )
-
+    def _call_api(
+        self,
+        method: str,
+        endpoint_url: str,
+        files: Optional[Dict[str, Any]] = None,
+        params: Optional[Dict[str, Any]] = None,
+        data: Optional[Dict[str, Any]] = None,
+        json: Optional[Dict[str, Any]] = None,
+        action_name: Optional[str] = None,
+    ) -> Dict[str, Any]:
         try:
-            req = req.prepare()
-            resp = self.s.send(req)
-            if resp.status_code == 405:
+            response = requests.request(
+                method,
+                f"{self.url}/rest/{endpoint_url}",
+                params=params,
+                data=data,
+                json=json,
+                files=files,
+                headers={"Authorization": f"api_key {self.api_key}"},
+            )
+            if response.status_code == 405:
                 raise PluginException(
                     cause=f"An error was received when running {action_name}.",
-                    assistance=f"Request status code of {resp.status_code} was returned."
+                    assistance=f"Request status code of {response.status_code} was returned."
                     "Please make sure connections have been configured correctly",
-                    data=resp.text,
+                    data=response.text,
                 )
-            elif resp.status_code != 200:
+            elif response.status_code != 200:
                 raise PluginException(
                     cause=f"An error was received when running {action_name}.",
-                    assistance=f"Request status code of {resp.status_code} was returned."
+                    assistance=f"Request status code of {response.status_code} was returned."
                     " Please make sure connections have been configured correctly "
                     "as well as the correct input for the action.",
-                    data=resp.text,
+                    data=response.text,
                 )
-
         except RequestException as exception:
             self.logger.error(f"An error has occurred: {exception}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=str(exception))
 
         try:
-            results = resp.json()
-            return results
+            return response.json()
         except JSONDecodeError:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=resp.text)
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 
-    def get_analysis(self, analysis_id, id_type, optional_params):
+    def get_analysis(self, analysis_id: str, id_type: str, optional_params: Optional[Dict[str, Any]]) -> Dict[str, Any]:
         if id_type not in ["all", "analysis_id"]:
-            endpoint_url = f"/rest/analysis/{id_type}/{analysis_id}"
+            endpoint_url = f"analysis/{id_type}/{analysis_id}"
         elif id_type == "analysis_id":
-            endpoint_url = f"/rest/analysis/{analysis_id}"
+            endpoint_url = f"analysis/{analysis_id}"
         else:
-            endpoint_url = "/rest/analysis"
+            endpoint_url = "analysis"
         return self._call_api("GET", endpoint_url=endpoint_url, params=optional_params, action_name="Get Analysis")
 
-    def get_samples(self, sample_type, sample, optional_params):
+    def get_samples(self, sample_type: str, sample: str, optional_params: Optional[Dict[str, Any]]) -> Dict[str, Any]:
         if sample_type not in ["all", "sample_id"]:
-            endpoint_url = f"/rest/sample/{sample_type}/{sample}"
+            endpoint_url = f"sample/{sample_type}/{sample}"
         elif sample_type == "sample_id":
-            endpoint_url = f"/rest/sample/{sample}"
+            endpoint_url = f"sample/{sample}"
         else:
-            endpoint_url = "/rest/sample"
+            endpoint_url = "sample"
 
         return self._call_api("GET", endpoint_url=endpoint_url, params=optional_params, action_name="Get Samples")
 
-    def submit_file(self, name, file_bytes, optional_params):
+    def submit_file(self, name: str, file_bytes: bytes, optional_params: Optional[Dict[str, Any]]) -> Dict[str, Any]:
         files = {"sample_file": (f"{name}", file_bytes)}
-        endpoint_url = "/rest/sample/submit"
+        endpoint_url = "sample/submit"
 
         return self._call_api(
             "POST",
@@ -164,25 +168,22 @@ class VMRay:
             action_name="Submit File",
         )
 
-    def submit_url(self, url, optional_params):
+    def submit_url(self, url: str, optional_params: Optional[Dict[str, Any]]) -> Dict[str, Any]:
         optional_params.update({"sample_url": url})
-        endpoint_url = "/rest/sample/submit"
+        return self._call_api("POST", endpoint_url="sample/submit", params=optional_params, action_name="Submit URL")
 
-        return self._call_api("POST", endpoint_url=endpoint_url, params=optional_params, action_name="Submit URL")
-
-    def check_filetype(self, content):
+    def check_filetype(self, content: bytes) -> Tuple[List[str], bool]:
         """
         :param content: contents of file
-        :param filename: name of file being passed in
         :return: mime type that matches or a list of all mime extensions that
         """
+
         api_magic = magic.Magic(mime=True)
         content_mime_type = api_magic.from_buffer(content)
         all_extensions = mimetypes.guess_all_extensions(content_mime_type)
         for mime_type in all_extensions:
             if mime_type in self.SUPPORTED_FILETYPES:
                 return all_extensions, True
-
         return all_extensions, False
 
         # for filetype in self.SUPPORTED_FILETYPES:
