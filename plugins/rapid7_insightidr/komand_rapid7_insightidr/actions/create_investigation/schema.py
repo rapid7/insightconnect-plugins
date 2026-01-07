@@ -68,6 +68,8 @@ class CreateInvestigationInput(insightconnect_plugin_runtime.Input):
       "enum": [
         "",
         "OPEN",
+        "INVESTIGATING",
+        "WAITING",
         "CLOSED"
       ],
       "order": 2
