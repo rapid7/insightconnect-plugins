@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import ConnectionSchema
+from .schema import ConnectionSchema, Input
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
@@ -12,19 +12,24 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.client = None
 
     def connect(self, params):
-        creds = {
-            "email": params.get("credentials").get("username"),
-            "subdomain": params.get("subdomain"),
-        }
+        creds = {}
+        missing_fields = []
 
-        if params.get("credentials").get("password"):
-            creds["password"] = params.get("credentials").get("password")
-        elif params.get("api_key").get("secretKey"):
-            creds["token"] = params.get("api_key").get("secretKey")
-        else:
-            raise PluginException(
-                cause="Could not authenticate to Zendesk.", assistance="Please provide a password or API key."
-            )
+        for input_key in [Input.EMAIL, Input.SUBDOMAIN, Input.TOKEN]:
+            value = params.get(input_key, "")
+
+            if input_key == Input.TOKEN:
+                value = value.get("secretKey") if isinstance(value, dict) else ""
+
+            if not value:
+                missing_fields.append(input_key)
+            else:
+                creds[input_key] = value.strip()
+
+        if missing_fields:
+            fields_str = ", ".join(missing_fields)
+            assistance_message = f"Please provide the following required field(s): {fields_str}."
+            raise PluginException(cause="Could not authenticate to Zendesk.", assistance=assistance_message)
 
         self.client = zenpy.Zenpy(**creds)
         self.logger.info("Connect: Connecting...")
