@@ -950,6 +950,7 @@ Example output:
 
 # Version History
 
+* 5.0.10 - `Monitor Logs` task: Updated pagination handling
 * 5.0.9 - Updated SDK to the latest version (6.4.1)
 * 5.0.8 - Update SDK | Update Task `Monitor Logs` timestamp handling
 * 5.0.7 - Update Task `Monitor Logs` timestamp handling

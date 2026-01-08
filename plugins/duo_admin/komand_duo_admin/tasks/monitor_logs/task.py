@@ -430,7 +430,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         response = self.connection.admin_api.get_admin_logs(parameters).get("response", [])
         last_item = response[-1] if response and isinstance(response, list) else None
 
-        if last_item and len(response) == 1000:
+        if last_item and len(response) >= 1000:
             parameters = {"mintime": str(last_item.get("timestamp")), "maxtime": maxtime}
         else:
             parameters = {}
