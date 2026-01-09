@@ -33,6 +33,24 @@ it into production.  If you do not care to follow these rules, your contribution
 - **Don't** leave your pull request description blank.
 - **Don't** abandon your pull request. Being responsive helps us land your code faster.
 
+#### Using the Contributor PR Template (External Contributors)
+
+**If you're contributing from a fork**, please use our specialized contributor template that includes additional validation sections. Here's how:
+
+1. When you click "Compare & Pull request" on GitHub after pushing your changes, you'll see a URL like:
+   ```
+   https://github.com/rapid7/insightconnect-plugins/compare/master...your-username:your-branch
+   ```
+
+2. Before clicking "Create pull request", add `?template=contrib.md` to the end of the URL:
+   ```
+   https://github.com/rapid7/insightconnect-plugins/compare/master...your-username:your-branch?template=contrib.md
+   ```
+
+3. Press Enter to reload the page with the contributor template pre-filled.
+
+This template includes sections for plugin validation outputs, connection tests, and code quality checklists that help us review external contributions more efficiently.
+
 #### New Features
 
 - **Do** install validator dependencies necessary to run `make validate` to find and fix any errors or warnings that come up.
