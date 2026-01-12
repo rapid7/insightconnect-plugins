@@ -75,7 +75,7 @@ If you have access to an InsightConnect instance, please provide:
 Please review our [style guide](https://docs.rapid7.com/insightconnect/style-guide/) and check all that apply:
 - [ ] Dependencies pinned in `Dockerfile` ([OS packages](https://docs.rapid7.com/insightconnect/style-guide/#dockerfile)) and `requirements.txt` ([Python packages](https://docs.rapid7.com/insightconnect/style-guide/#requirements.txt))
 - [ ] `USER nobody` set in `Dockerfile` for least privileged account
-- [ ] Uses [slim SDK images](https://docs.rapid7.com/insightconnect/sdk-guide/#sdk-guide) when possible (e.g., `rapid7/insightconnect-python-3-38-slim-plugin:{sdk-version-num}`)
+- [ ] Uses [slim SDK images](https://docs.rapid7.com/insightconnect/sdk-guide/#sdk-guide) when possible (e.g., `rapid7/insightconnect-python-3-slim-plugin:{sdk-version-num}`)
 - [ ] Uses [PluginException](https://docs.rapid7.com/insightconnect/error-handling-in-integrations/#plugin-exceptions) / [ConnectionTestException](https://docs.rapid7.com/insightconnect/error-handling-in-integrations#connection-exceptions) for errors
 - [ ] Uses `self.logger` for [logging](https://docs.rapid7.com/insightconnect/sdk-guide/#logging)
 - [ ] Changelog updated ([style guide](https://docs.rapid7.com/insightconnect/style-guide/#changelog))
