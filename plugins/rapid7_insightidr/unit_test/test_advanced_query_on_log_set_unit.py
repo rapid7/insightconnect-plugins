@@ -1,19 +1,21 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
+from unittest.mock import patch
+
+from jsonschema import validate
 from komand_rapid7_insightidr.actions.advanced_query_on_log_set import AdvancedQueryOnLogSet
 from komand_rapid7_insightidr.actions.advanced_query_on_log_set.schema import (
-    Input,
-    Output,
     AdvancedQueryOnLogSetInput,
     AdvancedQueryOnLogSetOutput,
+    Input,
+    Output,
 )
+
 from util import Util
-from unittest.mock import patch
-from jsonschema import validate
 
 
 @patch("requests.Session.send", side_effect=Util.mocked_requests)
@@ -23,7 +25,7 @@ class TestAdvancedQueryOnLogSet(TestCase):
     def setUpClass(cls) -> None:
         cls.action = Util.default_connector(AdvancedQueryOnLogSet())
 
-    def test_advanced_query_on_log_set_one_label(self, mock_get, mock_async_get):
+    def test_advanced_query_on_log_set_one_label(self, mock_get, mock_async_get) -> None:
         test_input = {
             Input.QUERY: "",
             Input.LOG_SET: "Advanced Malware Alert",
@@ -42,7 +44,7 @@ class TestAdvancedQueryOnLogSet(TestCase):
 
         validate(actual, AdvancedQueryOnLogSetOutput.schema)
 
-    def test_advanced_query_on_log_set_two_label(self, mock_get, mock_async_get):
+    def test_advanced_query_on_log_set_two_label(self, mock_get, mock_async_get) -> None:
         test_input = {
             Input.QUERY: "",
             Input.LOG_SET: "Active Directory Admin Activity",
@@ -61,7 +63,7 @@ class TestAdvancedQueryOnLogSet(TestCase):
 
         validate(actual, AdvancedQueryOnLogSetOutput.schema)
 
-    def test_advanced_query_on_log_set_without_label(self, mock_get, mock_async_get):
+    def test_advanced_query_on_log_set_without_label(self, mock_get, mock_async_get) -> None:
         test_input = {
             Input.QUERY: "",
             Input.LOG_SET: "Asset Authentication",
@@ -79,7 +81,7 @@ class TestAdvancedQueryOnLogSet(TestCase):
 
         validate(actual, AdvancedQueryOnLogSetOutput.schema)
 
-    def test_advanced_query_on_log_set_wrong_label(self, mock_get, mock_async_get):
+    def test_advanced_query_on_log_set_wrong_label(self, mock_get, mock_async_get) -> None:
         test_input = {
             Input.QUERY: "",
             Input.LOG_SET: "Cloud Service Admin Activity",
@@ -97,7 +99,7 @@ class TestAdvancedQueryOnLogSet(TestCase):
 
         validate(actual, AdvancedQueryOnLogSetOutput.schema)
 
-    def test_advanced_query_on_log_statistical_result_calculate(self, mock_get, mock_async_get):
+    def test_advanced_query_on_log_statistical_result_calculate(self, mock_get, mock_async_get) -> None:
         test_input = {
             Input.QUERY: "where(hostname='WindowsX64') calculate(count)",
             Input.LOG_SET: "Cloud Service Activity",
@@ -159,7 +161,7 @@ class TestAdvancedQueryOnLogSet(TestCase):
         self.assertEqual(actual, expected)
         validate(actual, AdvancedQueryOnLogSetOutput.schema)
 
-    def test_advanced_query_on_log_statistical_result_groupby(self, mock_get, mock_async_get):
+    def test_advanced_query_on_log_statistical_result_groupby(self, mock_get, mock_async_get) -> None:
         test_input = {
             Input.QUERY: "groupby(r7_context.asset.name)",
             Input.LOG_SET: "DNS Query",

@@ -1,7 +1,6 @@
 # List third-party dependencies here, separated by newlines.
 # All dependencies must be version-pinned, eg. requests==1.2.0
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
-python-dateutil==2.9.0
 validators==0.35.0
 aiohttp==3.13.3
-parameterized==0.8.1
+parameterized==0.9.0

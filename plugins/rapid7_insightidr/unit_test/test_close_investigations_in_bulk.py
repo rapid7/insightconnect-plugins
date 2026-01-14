@@ -6,16 +6,16 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import patch
 
+from jsonschema import validate
 from komand_rapid7_insightidr.actions.close_investigations_in_bulk import CloseInvestigationsInBulk
 from komand_rapid7_insightidr.actions.close_investigations_in_bulk.schema import (
-    Input,
     CloseInvestigationsInBulkInput,
     CloseInvestigationsInBulkOutput,
+    Input,
 )
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 
 from util import Util
-from jsonschema import validate
 
 
 @patch("requests.Session.send", side_effect=Util.mocked_requests)
@@ -38,7 +38,7 @@ class TestCloseInvestigationsInBulk(TestCase):
         self.action = Util.default_connector(CloseInvestigationsInBulk())
         self.connection = self.action.connection
 
-    def test_close_investigations_in_bulk(self, _mock_req):
+    def test_close_investigations_in_bulk(self, _mock_req) -> None:
         validate(self.params, CloseInvestigationsInBulkInput.schema)
         actual = self.action.run(self.params)
         expected = {"ids": ["6c7db8d1-abc5-b9da-dd71-1a3ffffe8a16"], "num_closed": 10}

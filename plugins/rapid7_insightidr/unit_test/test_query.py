@@ -1,17 +1,19 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from unittest.mock import patch
+
+from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 from komand_rapid7_insightidr.actions.query.action import Query
 from komand_rapid7_insightidr.actions.query.schema import Input, QueryInput, QueryOutput
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
-from insightconnect_plugin_runtime.exceptions import PluginException
+
+from mock_utils import mock_get_request
 from util import Util
-from mock import mock_get_request
-from jsonschema import validate
 
 
 class TestQuery(TestCase):
@@ -36,7 +38,7 @@ class TestQuery(TestCase):
         self.connection = self.action.connection
 
     @patch("requests.Session.send", side_effect=mock_get_request)
-    def test_query(self, _mock_req):
+    def test_query(self, _mock_req) -> None:
         test_input = {
             Input.ID: self.params.get("id"),
             Input.MOST_RECENT_FIRST: self.params.get("most_recent_first_false"),
@@ -74,7 +76,7 @@ class TestQuery(TestCase):
         validate(actual, QueryOutput.schema)
 
     @patch("requests.Session.send", side_effect=mock_get_request)
-    def test_query_true(self, _mock_req):
+    def test_query_true(self, _mock_req) -> None:
         test_input = {
             Input.ID: self.params.get("id"),
             Input.MOST_RECENT_FIRST: self.params.get("most_recent_first_true"),
@@ -112,7 +114,7 @@ class TestQuery(TestCase):
 
     @patch("requests.Session.send", side_effect=mock_get_request)
     @patch("time.time", return_value=1682954418)
-    def test_query_true_future(self, _mock_req, mock_time):
+    def test_query_true_future(self, _mock_req, mock_time) -> None:
         test_input = {
             Input.ID: self.params.get("id"),
             Input.MOST_RECENT_FIRST: self.params.get("most_recent_first_true"),
@@ -149,7 +151,7 @@ class TestQuery(TestCase):
         validate(actual, QueryOutput.schema)
 
     @patch("requests.Session.send", side_effect=mock_get_request)
-    def test_query_202(self, _mock_req):
+    def test_query_202(self, _mock_req) -> None:
         test_input = {
             Input.ID: self.params.get("id_202"),
             Input.MOST_RECENT_FIRST: self.params.get("most_recent_first_true"),
@@ -186,7 +188,7 @@ class TestQuery(TestCase):
         validate(actual, QueryOutput.schema)
 
     @patch("requests.Session.send", side_effect=mock_get_request)
-    def test_query_202_error(self, _mock_req):
+    def test_query_202_error(self, _mock_req) -> None:
         test_input = {
             Input.ID: self.params.get("id_202_error"),
             Input.MOST_RECENT_FIRST: self.params.get("most_recent_first_false"),
@@ -198,7 +200,7 @@ class TestQuery(TestCase):
         self.assertEqual(exception.exception.cause, cause)
 
     @patch("requests.Session.send", side_effect=mock_get_request)
-    def test_query_not_found(self, _mock_req):
+    def test_query_not_found(self, _mock_req) -> None:
         test_input = {
             Input.ID: self.params.get("not_found_id"),
             Input.MOST_RECENT_FIRST: self.params.get("most_recent_first_false"),
@@ -210,7 +212,7 @@ class TestQuery(TestCase):
         self.assertEqual(exception.exception.cause, cause)
 
     @patch("requests.Session.send", side_effect=mock_get_request)
-    def test_query_key_error(self, _mock_req):
+    def test_query_key_error(self, _mock_req) -> None:
         test_input = {
             Input.ID: self.params.get("id_key_error"),
             Input.MOST_RECENT_FIRST: self.params.get("most_recent_first_false"),
