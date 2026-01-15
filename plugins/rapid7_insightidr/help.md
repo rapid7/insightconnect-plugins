@@ -30,7 +30,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |api_key|credential_secret_key|None|True|InsightIDR API key|None|4472f2g7-991z-4w70-li11-7552w8qm0266|None|None|
-|region|string|United States 1|True|The region for InsightIDR|["United States 1", "United States 2", "United States 3", "Europe", "Canada", "Australia", "Japan"]|United States 1|None|None|
+|region|string|None|True|The region for InsightIDR|["United States 1", "United States 2", "United States 3", "Europe", "Canada", "Australia", "Japan"]|United States 1|None|None|
 
 Example input:
 
@@ -3428,7 +3428,7 @@ Example output:
 
 # Version History
 
-* 12.0.5 - Actions: `Advanced Query on Log Set` - Fixed issue with fetching logs with statistical queries
+* 12.0.5 - Removed default region in connection | Actions: `Advanced Query on Log Set` - Fixed issue with fetching logs with statistical queries | Updated SDK to latest version (6.4.2)
 * 12.0.4 - Update Investigation status values to include `WAITING` and `INVESTIGATING` | SDK bump to 6.4.1
 * 12.0.3 - Actions: `Advanced Query on Log` and `Advanced Query on Log Set` - Updated schema
 * 12.0.2 - Triggers: `Get New Investigations` - Improved error handling | Updated SDK to the latest version (6.3.10)
