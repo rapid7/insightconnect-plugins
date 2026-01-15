@@ -1,20 +1,22 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
+from unittest.mock import patch
+
+from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 from komand_rapid7_insightidr.actions.advanced_query_on_log import AdvancedQueryOnLog
 from komand_rapid7_insightidr.actions.advanced_query_on_log.schema import (
-    Input,
-    Output,
     AdvancedQueryOnLogInput,
     AdvancedQueryOnLogOutput,
+    Input,
+    Output,
 )
+
 from util import Util
-from unittest.mock import patch
-from jsonschema import validate
-from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 @patch("requests.Session.send", side_effect=Util.mocked_requests)
@@ -24,7 +26,7 @@ class TestAdvancedQueryOnLog(TestCase):
     def setUpClass(cls) -> None:
         cls.action = Util.default_connector(AdvancedQueryOnLog())
 
-    def test_advanced_query_on_log_one_label(self, mock_get, mock_async_get):
+    def test_advanced_query_on_log_one_label(self, mock_get, mock_async_get) -> None:
         test_input = {
             Input.QUERY: "",
             Input.LOG: "example_log1",
@@ -44,7 +46,7 @@ class TestAdvancedQueryOnLog(TestCase):
 
         validate(actual, AdvancedQueryOnLogOutput.schema)
 
-    def test_advanced_query_on_log_two_labels(self, mock_get, mock_async_get):
+    def test_advanced_query_on_log_two_labels(self, mock_get, mock_async_get) -> None:
         test_input = {
             Input.QUERY: "",
             Input.LOG: "example_log2",
@@ -62,7 +64,7 @@ class TestAdvancedQueryOnLog(TestCase):
 
         validate(actual, AdvancedQueryOnLogOutput.schema)
 
-    def test_advanced_query_on_log_without_label(self, mock_get, mock_async_get):
+    def test_advanced_query_on_log_without_label(self, mock_get, mock_async_get) -> None:
         test_input = {
             Input.QUERY: "",
             Input.LOG: "example_log3",
@@ -80,7 +82,7 @@ class TestAdvancedQueryOnLog(TestCase):
 
         validate(actual, AdvancedQueryOnLogOutput.schema)
 
-    def test_advanced_query_on_log_wrong_label(self, mock_get, mock_async_get):
+    def test_advanced_query_on_log_wrong_label(self, mock_get, mock_async_get) -> None:
         test_input = {
             Input.QUERY: "",
             Input.LOG: "example_log4",
@@ -98,7 +100,7 @@ class TestAdvancedQueryOnLog(TestCase):
 
         validate(actual, AdvancedQueryOnLogOutput.schema)
 
-    def test_advanced_query_on_log_statistical_result_calculate(self, mock_get, mock_async_get):
+    def test_advanced_query_on_log_statistical_result_calculate(self, mock_get, mock_async_get) -> None:
         test_input = {
             Input.QUERY: "where(hostname='WindowsX64') calculate(count)",
             Input.LOG: "example_log5",
@@ -160,7 +162,7 @@ class TestAdvancedQueryOnLog(TestCase):
         self.assertEqual(actual, expected)
         validate(actual, AdvancedQueryOnLogOutput.schema)
 
-    def test_advanced_query_on_log_statistical_result_groupby(self, mock_get, mock_async_get):
+    def test_advanced_query_on_log_statistical_result_groupby(self, mock_get, mock_async_get) -> None:
         test_input = {
             Input.QUERY: "groupby(r7_context.asset.name)",
             Input.LOG: "example_log7",
@@ -245,7 +247,7 @@ class TestAdvancedQueryOnLog(TestCase):
         self.assertEqual(actual, expected)
         validate(actual, AdvancedQueryOnLogOutput.schema)
 
-    def test_advanced_query_on_log_using_log_id(self, mock_get, mock_async_get):
+    def test_advanced_query_on_log_using_log_id(self, mock_get, mock_async_get) -> None:
         test_input = {
             Input.QUERY: "",
             Input.LOG_ID: "123456-abcd-1234-abcd-123456abc",
@@ -257,7 +259,7 @@ class TestAdvancedQueryOnLog(TestCase):
         self.assertEqual(actual.get(Output.COUNT), 1)
         validate(actual, AdvancedQueryOnLogOutput.schema)
 
-    def test_advanced_query_on_log_both_name_and_id(self, mock_get, mock_async_get):
+    def test_advanced_query_on_log_both_name_and_id(self, mock_get, mock_async_get) -> None:
         test_input = {
             Input.QUERY: "",
             Input.LOG_ID: "123456-abcd-1234-abcd-123456abc",
@@ -270,7 +272,7 @@ class TestAdvancedQueryOnLog(TestCase):
         self.assertEqual(actual.get(Output.COUNT), 1)
         validate(actual, AdvancedQueryOnLogOutput.schema)
 
-    def test_advanced_query_on_log_no_name_and_id(self, mock_get, mock_async_get):
+    def test_advanced_query_on_log_no_name_and_id(self, mock_get, mock_async_get) -> None:
         test_input = {
             Input.QUERY: "",
             Input.TIMEOUT: 60,

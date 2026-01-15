@@ -1,19 +1,19 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from unittest.mock import patch
-from komand_rapid7_insightidr.actions.get_a_saved_query.action import GetASavedQuery
-from komand_rapid7_insightidr.actions.get_a_saved_query.schema import Input, GetASavedQueryInput, GetASavedQueryOutput
-from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
+
 from insightconnect_plugin_runtime.exceptions import PluginException
-from util import Util
-from mock import (
-    mock_get_request,
-)
 from jsonschema import validate
+from komand_rapid7_insightidr.actions.get_a_saved_query.action import GetASavedQuery
+from komand_rapid7_insightidr.actions.get_a_saved_query.schema import GetASavedQueryInput, GetASavedQueryOutput, Input
+from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
+
+from mock_utils import mock_get_request
+from util import Util
 
 
 class TestGetASavedQuery(TestCase):
@@ -34,7 +34,7 @@ class TestGetASavedQuery(TestCase):
         self.connection = self.action.connection
 
     @patch("requests.Session.send", side_effect=mock_get_request)
-    def test_get_a_saved_query(self, _mock_req):
+    def test_get_a_saved_query(self, _mock_req) -> None:
         test_input = {Input.QUERY_ID: self.params.get("query_id")}
         validate(test_input, GetASavedQueryInput.schema)
         actual = self.action.run(test_input)
@@ -52,7 +52,7 @@ class TestGetASavedQuery(TestCase):
         self.assertEqual(actual, expected)
         validate(actual, GetASavedQueryOutput.schema)
 
-    def test_get_a_saved_query_invalid_query_id(self):
+    def test_get_a_saved_query_invalid_query_id(self) -> None:
         test_input = {Input.QUERY_ID: self.params.get("invalid_query_id")}
         validate(test_input, GetASavedQueryInput.schema)
         with self.assertRaises(PluginException) as exception:
@@ -61,7 +61,7 @@ class TestGetASavedQuery(TestCase):
         self.assertEqual(exception.exception.cause, cause)
 
     @patch("requests.Session.send", side_effect=mock_get_request)
-    def test_get_a_saved_query_not_found(self, _mock_req):
+    def test_get_a_saved_query_not_found(self, _mock_req) -> None:
         test_input = {Input.QUERY_ID: self.params.get("not_found_query_id")}
         validate(test_input, GetASavedQueryInput.schema)
         with self.assertRaises(PluginException) as exception:

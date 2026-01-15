@@ -6,16 +6,12 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import patch
 
+from jsonschema import validate
 from komand_rapid7_insightidr.actions.create_threat import CreateThreat
-from komand_rapid7_insightidr.actions.create_threat.schema import (
-    Input,
-    CreateThreatInput,
-    CreateThreatOutput,
-)
+from komand_rapid7_insightidr.actions.create_threat.schema import CreateThreatInput, CreateThreatOutput, Input
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 
 from util import Util
-from jsonschema import validate
 
 
 @patch("requests.Session.send", side_effect=Util.mocked_requests)
@@ -36,7 +32,7 @@ class TestCreateThreat(TestCase):
         self.action = Util.default_connector(CreateThreat())
         self.connection = self.action.connection
 
-    def test_create_a_threat(self, _mock_req):
+    def test_create_a_threat(self, _mock_req) -> None:
         validate(self.params, CreateThreatInput.schema)
         actual = self.action.run(self.params)
         expected = {

@@ -6,6 +6,7 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import patch
 
+from jsonschema import validate
 from komand_rapid7_insightidr.actions.update_investigation import UpdateInvestigation
 from komand_rapid7_insightidr.actions.update_investigation.schema import (
     Input,
@@ -14,9 +15,8 @@ from komand_rapid7_insightidr.actions.update_investigation.schema import (
 )
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 
-from mock import mock_patch_request, STUB_INVESTIGATION_IDENTIFIER, STUB_USER_EMAIL
+from mock_utils import STUB_INVESTIGATION_IDENTIFIER, STUB_USER_EMAIL, mock_patch_request
 from util import Util
-from jsonschema import validate
 
 
 class TestCreateInvestigation(TestCase):
@@ -37,7 +37,7 @@ class TestCreateInvestigation(TestCase):
         self.connection = self.action.connection
 
     @patch("requests.Session.send", side_effect=mock_patch_request)
-    def test_update_investigations(self, _mock_req):
+    def test_update_investigations(self, _mock_req) -> None:
         test_input = {
             Input.TITLE: "Example Title",
             Input.ID: STUB_INVESTIGATION_IDENTIFIER,

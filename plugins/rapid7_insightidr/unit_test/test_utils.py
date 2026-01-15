@@ -1,13 +1,12 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 
+from komand_rapid7_insightidr.util.resource_helper import convert_list_to_string, get_sort_param
 from parameterized import parameterized
-
-from komand_rapid7_insightidr.util.resource_helper import get_sort_param, convert_list_to_string
 
 
 class TestUtils(TestCase):
@@ -27,11 +26,11 @@ class TestUtils(TestCase):
             ("Alerts most recent detection created time Descending", "alerts_most_recent_detection_created_time,DESC"),
         ]
     )
-    def test_get_sort_param(self, input_sort_str, expected_result):
+    def test_get_sort_param(self, input_sort_str, expected_result) -> None:
         result = get_sort_param(input_sort_str)
         self.assertEqual(expected_result, result)
 
     @parameterized.expand([(["LOW"], "LOW"), (["LOW", "MEDIUM", "HIGH"], "LOW,MEDIUM,HIGH")])
-    def test_convert_list_to_string(self, input_list_of_str, expected_result):
+    def test_convert_list_to_string(self, input_list_of_str, expected_result) -> None:
         result = convert_list_to_string(input_list_of_str)
         self.assertEqual(expected_result, result)

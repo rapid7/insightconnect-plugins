@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 12.0.4
+version: 12.0.5
 connection_version: 5
 supported_versions: ["Latest release successfully tested on 2025-07-22."]
 vendor: rapid7
@@ -32,9 +32,10 @@ key_features:
   - "Incident Response and Investigations"
 sdk:
   type: full
-  version: 6.4.1
+  version: 6.4.2
   user: nobody
 version_history:
+  - "12.0.5 - Removed default region in connection | Actions: `Advanced Query on Log Set` - Fixed issue with fetching logs with statistical queries | Updated SDK to latest version (6.4.2)"
   - "12.0.4 - Update Investigation status values to include `WAITING` and `INVESTIGATING` | SDK bump to 6.4.1"
   - "12.0.3 - Actions: `Advanced Query on Log` and `Advanced Query on Log Set` - Updated schema"
   - "12.0.2 - Triggers: `Get New Investigations` - Improved error handling | Updated SDK to the latest version (6.3.10)"
@@ -1410,7 +1411,6 @@ connection:
       - Australia
       - Japan
     required: true
-    default: United States 1
     example: United States 1
 actions:
   replace_indicators:

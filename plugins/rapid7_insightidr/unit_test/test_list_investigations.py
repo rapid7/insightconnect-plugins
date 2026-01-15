@@ -8,6 +8,7 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import patch
 
+from jsonschema import validate
 from komand_rapid7_insightidr.actions.list_investigations import ListInvestigations
 from komand_rapid7_insightidr.actions.list_investigations.schema import (
     Input,
@@ -16,9 +17,7 @@ from komand_rapid7_insightidr.actions.list_investigations.schema import (
 )
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 
-from mock import mock_get_request
 from util import Util
-from jsonschema import validate
 
 
 @patch("requests.Session.send", side_effect=Util.mocked_requests)
@@ -39,7 +38,7 @@ class TestListInvestigations(TestCase):
         self.action = Util.default_connector(ListInvestigations())
         self.connection = self.action.connection
 
-    def test_list_investigations(self, _mock_req):
+    def test_list_investigations(self, _mock_req) -> None:
         test_input = {
             Input.INDEX: 0,
             Input.SIZE: 1,
@@ -72,7 +71,7 @@ class TestListInvestigations(TestCase):
         self.assertEqual(actual, expected)
         validate(actual, ListInvestigationsOutput.schema)
 
-    def test_list_attachments_bad(self, _mock_req):
+    def test_list_attachments_bad(self, _mock_req) -> None:
         test_input = {Input.INDEX: 0, Input.SIZE: 1, Input.STATUSES: ["OPEN"], Input.SOURCES: ["INVALID_SOURCE"]}
         validate(test_input, ListInvestigationsInput.schema)
         with self.assertRaises(PluginException) as error:

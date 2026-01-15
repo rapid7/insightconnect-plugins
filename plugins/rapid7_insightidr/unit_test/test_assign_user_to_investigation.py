@@ -1,22 +1,22 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from unittest.mock import patch
 
+from jsonschema import validate
 from komand_rapid7_insightidr.actions.assign_user_to_investigation import AssignUserToInvestigation
 from komand_rapid7_insightidr.actions.assign_user_to_investigation.schema import (
-    Input,
     AssignUserToInvestigationInput,
     AssignUserToInvestigationOutput,
+    Input,
 )
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 
-from mock import mock_put_request, STUB_INVESTIGATION_IDENTIFIER, STUB_USER_EMAIL
+from mock_utils import STUB_INVESTIGATION_IDENTIFIER, STUB_USER_EMAIL, mock_put_request
 from util import Util
-from jsonschema import validate
 
 
 class TestAssignUserToInvestigation(TestCase):
@@ -37,7 +37,7 @@ class TestAssignUserToInvestigation(TestCase):
         self.connection = self.action.connection
 
     @patch("requests.Session.send", side_effect=mock_put_request)
-    def test_assign_user_to_investigation(self, _mock_req):
+    def test_assign_user_to_investigation(self, _mock_req) -> None:
         test_input = {Input.ID: STUB_INVESTIGATION_IDENTIFIER, Input.USER_EMAIL_ADDRESS: STUB_USER_EMAIL}
         validate(test_input, AssignUserToInvestigationInput.schema)
         actual = self.action.run(test_input)

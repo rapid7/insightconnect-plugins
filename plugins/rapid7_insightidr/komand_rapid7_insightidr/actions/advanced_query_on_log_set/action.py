@@ -199,9 +199,7 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
         if statistical:
             stats_endpoint = f"{self.connection.url}log_search/query/{results_object.get('id', '')}"
             self.logger.info(f"Getting statistical from: {stats_endpoint}")
-            stats_response = send_session_request(
-                req_url=stats_endpoint, req_params=params, req_headers=self.connection.headers
-            )
+            stats_response = send_session_request(req_url=stats_endpoint, req_headers=self.connection.headers)
             try:
                 stats_response.raise_for_status()
             except HTTPError as error:

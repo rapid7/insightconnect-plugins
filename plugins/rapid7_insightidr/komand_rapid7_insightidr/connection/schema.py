@@ -25,7 +25,6 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Region",
       "description": "The region for InsightIDR",
-      "default": "United States 1",
       "enum": [
         "United States 1",
         "United States 2",

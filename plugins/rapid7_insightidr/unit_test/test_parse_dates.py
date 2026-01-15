@@ -1,11 +1,12 @@
-from unittest import TestCase
-from komand_rapid7_insightidr.util.parse_dates import parse_dates
-from insightconnect_plugin_runtime.exceptions import PluginException
 import time
+from unittest import TestCase
+
+from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_rapid7_insightidr.util.parse_dates import parse_dates
 
 
 class TestParseDates(TestCase):
-    def test_parse_dates(self):
+    def test_parse_dates(self) -> None:
         time_test_rel = "Absolute Time To"
 
         time_test1 = "2005/10/31T17:11:09"
@@ -37,7 +38,7 @@ class TestParseDates(TestCase):
         with self.assertRaises(PluginException):
             parse_dates("AAA", None, time_test_rel)
 
-    def test_parse_dates_relative_time(self):
+    def test_parse_dates_relative_time(self) -> None:
         time_test1 = "2005/10/31T17:11:09"
         time_rel = "Absolute Time To"
 
@@ -56,7 +57,7 @@ class TestParseDates(TestCase):
         actual = res1
         self.assertTrue(expected - 1000 < actual < expected + 1000)
 
-    def test_parse_dates_relative_time_no_to_date_specified(self):
+    def test_parse_dates_relative_time_no_to_date_specified(self) -> None:
         time_from = "1/1/2000"
 
         # This shouldn't happen, but wanted to make sure there wasn't a crash.
