@@ -1,14 +1,12 @@
 import os
 import sys
-from unittest import TestCase
-
-from insightconnect_plugin_runtime.exceptions import PluginException
-from parameterized import parameterized
-
-from unit_test.util import Util
 
 sys.path.append(os.path.abspath("../"))
 
+from unittest import TestCase
+from insightconnect_plugin_runtime.exceptions import PluginException
+from parameterized import parameterized
+from util import Util
 from icon_connectwise.util.helpers import clean_dict, iso8601_to_utc_date, rename_keys
 
 
