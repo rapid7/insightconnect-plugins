@@ -6,8 +6,9 @@ import time
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_rapid7_insightidr.util.parse_dates import parse_dates
-from komand_rapid7_insightidr.util.util import send_session_request
+from komand_rapid7_insightidr.util.util import send_session_request, get_logging_context
 from requests import HTTPError
+from uuid import uuid4
 from typing import Tuple
 
 
@@ -31,6 +32,10 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
 
         statistical = self.parse_query_for_statistical(query)
 
+        # Get request ID for logging context
+        request_id = get_logging_context().get("R7-Correlation-Id", str(uuid4()))
+        self.logger.info(f"Executing Advanced Query on Log Set action with Request ID: {request_id}")
+
         # Time To is optional, if not specified, time to is set to now
         time_from, time_to = parse_dates(time_from_string, time_to_string, relative_time_from)
 
@@ -41,14 +46,16 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
                 data=f"\nTime From: {time_from}\nTime To:{time_to}",
             )
 
-        log_set_id = self.get_log_set_id(log_set_name)
+        log_set_id = self.get_log_set_id(log_set_name, request_id)
 
         # The IDR API will SOMETIMES return results immediately.
         # It will return results if it gets them. If not, we'll get a call back URL to work on
-        callback_url, log_entries = self.maybe_get_log_entries(log_set_id, query, time_from, time_to, statistical)
+        callback_url, log_entries = self.maybe_get_log_entries(
+            log_set_id, query, time_from, time_to, statistical, request_id
+        )
 
         if callback_url and not log_entries:
-            log_entries = self.get_results_from_callback(callback_url, timeout, statistical)
+            log_entries = self.get_results_from_callback(callback_url, timeout, statistical, request_id)
         if log_entries and not statistical:
             log_entries = ResourceHelper.get_log_entries_with_new_labels(
                 self.connection, insightconnect_plugin_runtime.helper.clean(log_entries)
@@ -78,20 +85,25 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
             if entry in query:
                 return True
 
-    def get_results_from_callback(self, callback_url: str, timeout: int, statistical: bool) -> [object]:  # noqa: MC0001
+    def get_results_from_callback(
+        self, callback_url: str, timeout: int, statistical: bool, request_id: str
+    ) -> [object]:  # noqa: MC0001
         """
         Get log entries from a callback URL.
 
         :param callback_url: str - The URL to fetch logs from.
         :param timeout: int - How long to wait for results before timing out.
         :param statistical: bool - Whether to fetch statistical results or event logs.
+        :param request_id: str - The request ID for logging context.
         :return: list of log entries or statistical data.
         """
         self.logger.info(f"Trying to get results from callback URL: {callback_url}")
         counter = timeout
 
         while callback_url and counter > 0:
-            response = send_session_request(req_url=callback_url, req_headers=self.connection.headers)
+            response = send_session_request(
+                request_url=callback_url, request_headers=self.connection.headers, request_id=request_id
+            )
             self.logger.info(f"IDR Response Status Code: {response.status_code}")
 
             try:
@@ -114,7 +126,9 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
                     counter -= 1
                     self.logger.info("Results were not ready. Sleeping 1 second and trying again.")
                     self.logger.info(f"Time left: {counter} seconds")
-                    response = send_session_request(req_url=callback_url, req_headers=self.connection.headers)
+                    response = send_session_request(
+                        request_url=callback_url, request_headers=self.connection.headers, request_id=request_id
+                    )
                     try:
                         response.raise_for_status()
                         results_object = response.json()
@@ -158,7 +172,7 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
         return {}
 
     def maybe_get_log_entries(
-        self, log_id: str, query: str, time_from: int, time_to: int, statistical: bool
+        self, log_id: str, query: str, time_from: int, time_to: int, statistical: bool, request_id: str
     ) -> Tuple[str, object]:
         """
         Make a call to the API and ask politely for log results.
@@ -174,6 +188,7 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
         @param time_from: int
         @param time_to: int
         @param statistical: bool
+        @param request_id: str
         @return: (callback url, list of log entries)
         """
         endpoint = f"{self.connection.url}log_search/query/logsets/{log_id}"
@@ -184,7 +199,9 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
 
         self.logger.info(f"Getting logs from: {endpoint}")
         self.logger.info(f"Using parameters: {params}")
-        response = send_session_request(req_url=endpoint, req_params=params, req_headers=self.connection.headers)
+        response = send_session_request(
+            request_url=endpoint, request_params=params, request_headers=self.connection.headers, request_id=request_id
+        )
         try:
             response.raise_for_status()
         except Exception:
@@ -199,7 +216,9 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
         if statistical:
             stats_endpoint = f"{self.connection.url}log_search/query/{results_object.get('id', '')}"
             self.logger.info(f"Getting statistical from: {stats_endpoint}")
-            stats_response = send_session_request(req_url=stats_endpoint, req_headers=self.connection.headers)
+            stats_response = send_session_request(
+                request_url=stats_endpoint, request_headers=self.connection.headers, request_id=request_id
+            )
             try:
                 stats_response.raise_for_status()
             except HTTPError as error:
@@ -227,17 +246,20 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
             self.logger.info("Got a callback url. Polling results...")
             return results_object.get("links", [{}])[0].get("href"), []
 
-    def get_log_set_id(self, log_name: str) -> str:
+    def get_log_set_id(self, log_name: str, request_id: str) -> str:
         """
         Gets a log ID for a given log name
 
         @param log_name: str
+        @param request_id: str
         @return: str
         """
         endpoint = f"{self.connection.url}log_search/management/logsets"
 
         self.logger.info(f"Getting log entries from: {endpoint}")
-        response = send_session_request(req_url=endpoint, req_headers=self.connection.headers)
+        response = send_session_request(
+            request_url=endpoint, request_headers=self.connection.headers, request_id=request_id
+        )
         try:
             response.raise_for_status()
         except Exception:
