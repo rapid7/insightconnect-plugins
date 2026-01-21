@@ -1,7 +1,0 @@
-{
-    "message": "Error parsing \"body\" from query string",
-    "translation_key": "threathunter_search_parsing_error",
-    "translation_format_values": [
-        "body"
-    ]
-}
