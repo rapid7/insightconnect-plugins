@@ -5,7 +5,7 @@ name: connectwise
 title: ConnectWise
 description: Use the ConnectWise Manage help desk software to effectively oversee your service tickets and resolve client issues with ease
 version: 1.0.1
-connection_version: 2
+connection_version: 1
 supported_versions: ["ConnectWise Manage API v4.6"]
 vendor: rapid7
 support: rapid7
