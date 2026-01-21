@@ -1,11 +1,12 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from unittest.mock import patch
 
+from jsonschema import validate
 from komand_rapid7_insightidr.actions.set_status_of_investigation_action import SetStatusOfInvestigationAction
 from komand_rapid7_insightidr.actions.set_status_of_investigation_action.schema import (
     Input,
@@ -14,9 +15,8 @@ from komand_rapid7_insightidr.actions.set_status_of_investigation_action.schema 
 )
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 
-from mock import mock_put_request, STUB_INVESTIGATION_IDENTIFIER, STUB_STATUS
+from mock_utils import STUB_INVESTIGATION_IDENTIFIER, STUB_STATUS, mock_put_request
 from util import Util
-from jsonschema import validate
 
 
 class TestSetStatusOfInvestigationAction(TestCase):
@@ -37,7 +37,7 @@ class TestSetStatusOfInvestigationAction(TestCase):
         self.connection = self.action.connection
 
     @patch("requests.Session.send", side_effect=mock_put_request)
-    def test_set_status_of_investigation(self, _mock_req):
+    def test_set_status_of_investigation(self, _mock_req) -> None:
         test_input = {Input.ID: STUB_INVESTIGATION_IDENTIFIER, Input.STATUS: STUB_STATUS}
         validate(test_input, SetStatusOfInvestigationActionInput.schema)
         actual = self.action.run(test_input)

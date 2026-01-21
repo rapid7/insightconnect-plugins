@@ -1,20 +1,18 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from unittest.mock import patch
-from komand_rapid7_insightidr.actions.get_all_saved_queries.action import GetAllSavedQueries
-from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
-from komand_rapid7_insightidr.actions.get_all_saved_queries.schema import GetAllSavedQueriesOutput
-from insightconnect_plugin_runtime.exceptions import PluginException
-from util import Util
-from mock import (
-    mock_get_request,
-)
-import logging
+
 from jsonschema import validate
+from komand_rapid7_insightidr.actions.get_all_saved_queries.action import GetAllSavedQueries
+from komand_rapid7_insightidr.actions.get_all_saved_queries.schema import GetAllSavedQueriesOutput
+from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
+
+from mock_utils import mock_get_request
+from util import Util
 
 
 class TestGetAllSavedQueries(TestCase):
@@ -30,7 +28,7 @@ class TestGetAllSavedQueries(TestCase):
         self.connection = self.action.connection
 
     @patch("requests.Session.send", side_effect=mock_get_request)
-    def test_get_all_saved_queries(self, _mock_req):
+    def test_get_all_saved_queries(self, _mock_req) -> None:
         actual = self.action.run()
         expected = {
             "saved_queries": [

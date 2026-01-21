@@ -6,6 +6,7 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import patch
 
+from jsonschema import validate
 from komand_rapid7_insightidr.actions.set_priority_of_investigation import SetPriorityOfInvestigation
 from komand_rapid7_insightidr.actions.set_priority_of_investigation.schema import (
     Input,
@@ -14,9 +15,8 @@ from komand_rapid7_insightidr.actions.set_priority_of_investigation.schema impor
 )
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 
-from mock import mock_put_request, STUB_INVESTIGATION_IDENTIFIER, STUB_PRIORITY
+from mock_utils import STUB_INVESTIGATION_IDENTIFIER, STUB_PRIORITY, mock_put_request
 from util import Util
-from jsonschema import validate
 
 
 class TestSetPriorityOfInvestigation(TestCase):
@@ -37,7 +37,7 @@ class TestSetPriorityOfInvestigation(TestCase):
         self.connection = self.action.connection
 
     @patch("requests.Session.send", side_effect=mock_put_request)
-    def test_set_priority_of_investigation(self, _mock_req):
+    def test_set_priority_of_investigation(self, _mock_req) -> None:
         test_input = {Input.ID: STUB_INVESTIGATION_IDENTIFIER, Input.PRIORITY: STUB_PRIORITY}
         validate(test_input, SetPriorityOfInvestigationInput.schema)
         actual = self.action.run(test_input)

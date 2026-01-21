@@ -5,12 +5,12 @@ import sys
 
 sys.path.append(os.path.abspath("../"))
 
+from urllib.parse import parse_qs, urlparse
+
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_rapid7_insightidr.connection import Connection
 from komand_rapid7_insightidr.connection.schema import Input
 from requests.models import HTTPError
-
-from urllib.parse import urlparse, parse_qs
 
 
 class Meta:
@@ -52,7 +52,7 @@ class Util:
     @staticmethod
     async def mocked_async_requests(*args, **kwargs):
         class MockResponse:
-            def __init__(self, filename, status_code):
+            def __init__(self, filename, status_code) -> None:
                 self.filename = filename
                 self.status = status_code
                 self.text = "This is some error text"
@@ -93,7 +93,7 @@ class Util:
     @staticmethod
     def mocked_requests(*args, **kwargs):
         class MockResponse:
-            def __init__(self, filename, status_code):
+            def __init__(self, filename, status_code) -> None:
                 self.filename = filename
                 self.status_code = status_code
                 self.text = "This is some error text"

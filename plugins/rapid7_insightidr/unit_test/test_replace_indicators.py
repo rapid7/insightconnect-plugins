@@ -1,21 +1,23 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
+from unittest.mock import patch
+
+from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 from komand_rapid7_insightidr.actions.replace_indicators import ReplaceIndicators
 from komand_rapid7_insightidr.actions.replace_indicators.schema import (
     Input,
     ReplaceIndicatorsInput,
     ReplaceIndicatorsOutput,
 )
-from util import Util
-from unittest.mock import patch
 from parameterized import parameterized
-from mock import mock_post_request
-from insightconnect_plugin_runtime.exceptions import PluginException
-from jsonschema import validate
+
+from mock_utils import mock_post_request
+from util import Util
 
 
 @patch("requests.Session.send", side_effect=mock_post_request)
@@ -32,7 +34,7 @@ class TestReplaceIndicators(TestCase):
             ["dcdba462-fcf5-4021-8707-98b14232239b", [], [], [], ["https://example.com"]],
         ]
     )
-    def test_replace_indicators(self, mock_request, key, domain_names, hashes, ips, urls):
+    def test_replace_indicators(self, mock_request, key, domain_names, hashes, ips, urls) -> None:
         test_input = {
             Input.KEY: key,
             Input.DOMAIN_NAMES: domain_names,
@@ -67,7 +69,9 @@ class TestReplaceIndicators(TestCase):
             ],
         ]
     )
-    def test_replace_indicators_invalid(self, mock_request, key, domain_names, hashes, ips, urls, cause, assistance):
+    def test_replace_indicators_invalid(
+        self, mock_request, key, domain_names, hashes, ips, urls, cause, assistance
+    ) -> None:
         test_input = {
             Input.KEY: key,
             Input.DOMAIN_NAMES: domain_names,
