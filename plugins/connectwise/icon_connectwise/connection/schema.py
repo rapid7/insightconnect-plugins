@@ -59,8 +59,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "client_id",
     "company",
     "private_key",
-    "public_key",
-    "region"
+    "public_key"
   ],
   "definitions": {
     "credential_secret_key": {

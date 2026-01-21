@@ -32,7 +32,7 @@ The connection configuration accepts the following parameters:
 |company|string|None|True|Name of the company|None|example_cs1|None|None|
 |private_key|credential_secret_key|None|True|API private key|None|ExAmPl3PriVat3kEy|None|None|
 |public_key|string|None|True|API public key|None|ExAmPl3PubLiCkEy3|None|None|
-|region|string|na|True|The region of your ConnectWise Manage instance|["na", "eu", "au"]|na|None|None|
+|region|string|na|False|The region of your ConnectWise Manage instance|["na", "eu", "au"]|na|None|None|
 
 Example input:
 
@@ -1927,7 +1927,7 @@ Example output:
 
 # Version History
 
-* 2.0.0 - Adding regions support for connection | Updated SDK to the latest version (6.4.2)
+* 1.0.1 - Adding regions support for connection | Updated SDK to the latest version (6.4.2)
 * 1.0.0 - Initial plugin
 
 # Links

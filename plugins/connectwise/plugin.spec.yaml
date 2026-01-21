@@ -4,7 +4,7 @@ products: [insightconnect]
 name: connectwise
 title: ConnectWise
 description: Use the ConnectWise Manage help desk software to effectively oversee your service tickets and resolve client issues with ease
-version: 2.0.0
+version: 1.0.1
 connection_version: 2
 supported_versions: ["ConnectWise Manage API v4.6"]
 vendor: rapid7
@@ -29,7 +29,7 @@ resources:
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.connectwise.com/
 version_history:
-  - "2.0.0 - Adding regions support for connection | Updated SDK to the latest version (6.4.2)"
+  - "1.0.1 - Adding regions support for connection | Updated SDK to the latest version (6.4.2)"
   - "1.0.0 - Initial plugin"
 links:
   - "[Connectwise](https://www.connectwise.com/)"
@@ -1100,7 +1100,7 @@ connection:
     title: Region
     description: The region of your ConnectWise Manage instance
     type: string
-    required: true
+    required: false
     default: "na"
     example: "na"
     enum:
