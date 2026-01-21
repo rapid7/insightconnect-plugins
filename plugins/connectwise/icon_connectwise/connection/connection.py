@@ -19,6 +19,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             private_key=params.get(Input.PRIVATE_KEY).get("secretKey"),
             company=params.get(Input.COMPANY),
             client_id=params.get(Input.CLIENT_ID).get("secretKey"),
+            region=params.get(Input.REGION, "na"),
             logger=self.logger,
         )
 

@@ -1,26 +1,34 @@
-FROM rapid7/insightconnect-python-3-38-plugin:4
-# Refer to the following documentation for available SDK parent images: https://komand.github.io/python/sdk.html#version
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.4.2 AS builder
+
+WORKDIR /python/src
+
+ADD ./plugin.spec.yaml /plugin.spec.yaml
+ADD ./requirements.txt /python/src/requirements.txt
+ADD . /python/src
+
+
+
+RUN pip install .
+RUN pip uninstall -y setuptools
+
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.4.2
 
 LABEL organization=rapid7
 LABEL sdk=python
 
-# Add any custom package dependencies here
-# NOTE: Add pip packages to requirements.txt
-
-# End package dependencies
-
-# Add source code
 WORKDIR /python/src
-ADD ./plugin.spec.yaml /plugin.spec.yaml
-ADD . /python/src
 
-# Install pip dependencies
+COPY --from=builder /python/src /python/src
+COPY --from=builder /plugin.spec.yaml /plugin.spec.yaml
+
+
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-# Install plugin
-RUN python setup.py build && python setup.py install
+ENV PYTHONPATH="/python/src:${PYTHONPATH}"
+
+RUN rm -rf /root/.cache;
 
 # User to run plugin code. The two supported users are: root, nobody
 USER nobody
 
-ENTRYPOINT ["/usr/local/bin/icon_connectwise"]
+ENTRYPOINT ["python", "/python/src/bin/icon_connectwise"]

@@ -8,6 +8,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from icon_connectwise.util.constants import SearchParameters, Ticket
 from icon_connectwise.util.helpers import clean_dict, rename_keys
 from icon_connectwise.util.endpoints import (
+    BASE_URL,
     SERVICE_TICKETS_ENDPOINT,
     SERVICE_TICKET_ENDPOINT,
     SERVICE_NOTES_ENDPOINT,
@@ -17,12 +18,14 @@ from icon_connectwise.util.endpoints import (
 
 
 class ConnectWiseAPI:
-    def __init__(self, public_key: str, private_key: str, client_id: str, company: str, logger: Logger):
+    def __init__(self, public_key: str, private_key: str, client_id: str, company: str, region: str, logger: Logger):
         self._public_key = public_key
         self._private_key = private_key
         self._client_id = client_id
         self._company = company
+        self._region = region
         self._logger = logger
+        self._base_url = BASE_URL.format(region=self._region)
 
     def _get_headers(self) -> dict:
         auth_header = f"{self._company}+{self._public_key}:{self._private_key}"
@@ -32,7 +35,7 @@ class ConnectWiseAPI:
     def get_tickets(self, page_size: int = None, page: int = None, conditions: str = None) -> dict:
         return self.make_json_request(
             method="GET",
-            url=SERVICE_TICKETS_ENDPOINT,
+            url=f"{self._base_url}{SERVICE_TICKETS_ENDPOINT}",
             headers=self._get_headers(),
             params=clean_dict(
                 {
@@ -46,14 +49,14 @@ class ConnectWiseAPI:
     def get_ticket_by_id(self, ticket_id: int) -> dict:
         return self.make_json_request(
             method="GET",
-            url=SERVICE_TICKET_ENDPOINT.format(ticket_id=ticket_id),
+            url=f"{self._base_url}{SERVICE_TICKET_ENDPOINT.format(ticket_id=ticket_id)}",
             headers=self._get_headers(),
         )
 
     def get_ticket_notes(self, ticket_id: int, page_size: int = None, page: int = None, conditions: str = None) -> dict:
         return self.make_json_request(
             method="GET",
-            url=SERVICE_NOTES_ENDPOINT.format(ticket_id=ticket_id),
+            url=f"{self._base_url}{SERVICE_NOTES_ENDPOINT.format(ticket_id=ticket_id)}",
             headers=self._get_headers(),
             params=clean_dict(
                 {
@@ -67,7 +70,7 @@ class ConnectWiseAPI:
     def create_ticket(self, ticket_parameters: dict) -> dict:
         return self.make_json_request(
             method="POST",
-            url=SERVICE_TICKETS_ENDPOINT,
+            url=f"{self._base_url}{SERVICE_TICKETS_ENDPOINT}",
             headers=self._get_headers(),
             json_data=clean_dict(ticket_parameters),
         )
@@ -86,7 +89,7 @@ class ConnectWiseAPI:
             )
         return self.make_json_request(
             method="PUT",
-            url=SERVICE_TICKET_ENDPOINT.format(ticket_id=ticket_id),
+            url=f"{self._base_url}{SERVICE_TICKET_ENDPOINT.format(ticket_id=ticket_id)}",
             headers=self._get_headers(),
             json_data=clean_dict(clean_ticket_parameters),
         )
@@ -94,7 +97,9 @@ class ConnectWiseAPI:
     def delete_ticket(self, ticket_id: int) -> bool:
         return (
             self.make_request(
-                method="DELETE", url=SERVICE_TICKET_ENDPOINT.format(ticket_id=ticket_id), headers=self._get_headers()
+                method="DELETE",
+                url=f"{self._base_url}{SERVICE_TICKET_ENDPOINT.format(ticket_id=ticket_id)}",
+                headers=self._get_headers(),
             ).status_code
             == 204
         )
@@ -102,7 +107,7 @@ class ConnectWiseAPI:
     def create_ticket_note(self, ticket_id: int, note_parameters: dict) -> dict:
         return self.make_json_request(
             method="POST",
-            url=SERVICE_NOTES_ENDPOINT.format(ticket_id=ticket_id),
+            url=f"{self._base_url}{SERVICE_NOTES_ENDPOINT.format(ticket_id=ticket_id)}",
             headers=self._get_headers(),
             json_data=note_parameters,
         )
@@ -115,7 +120,7 @@ class ConnectWiseAPI:
             )
         return self.make_json_request(
             method="PUT",
-            url=SERVICE_NOTE_ENDPOINT.format(ticket_id=ticket_id, note_id=note_id),
+            url=f"{self._base_url}{SERVICE_NOTE_ENDPOINT.format(ticket_id=ticket_id, note_id=note_id)}",
             headers=self._get_headers(),
             json_data=note_parameters,
         )
@@ -124,7 +129,7 @@ class ConnectWiseAPI:
         return (
             self.make_request(
                 method="DELETE",
-                url=SERVICE_NOTE_ENDPOINT.format(ticket_id=ticket_id, note_id=note_id),
+                url=f"{self._base_url}{SERVICE_NOTE_ENDPOINT.format(ticket_id=ticket_id, note_id=note_id)}",
                 headers=self._get_headers(),
             ).status_code
             == 204
@@ -132,7 +137,9 @@ class ConnectWiseAPI:
 
     def get_company(self, company_id: int) -> dict:
         return self.make_json_request(
-            method="GET", url=COMPANIES_ENDPOINT.format(company_id=company_id), headers=self._get_headers()
+            method="GET",
+            url=f"{self._base_url}{COMPANIES_ENDPOINT.format(company_id=company_id)}",
+            headers=self._get_headers(),
         )
 
     def make_request(
