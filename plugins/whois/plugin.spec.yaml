@@ -7,7 +7,7 @@ description: "[WHOIS](https://en.wikipedia.org/wiki/WHOIS) is a query and respon
   \ protocol that is widely used for querying databases that store the registered\
   \ users or assignee's of an Internet resource, such as a domain name, an IP address\
   \ block, or an autonomous system"
-version: 3.1.10
+version: 3.1.11
 connection_version: 3
 vendor: rapid7
 support: community
@@ -15,10 +15,10 @@ supported_versions: ['2024-09-09']
 status: []
 sdk:
   type: slim
-  version: 6.3.10
+  version: 6.4.2
   user: nobody
   custom_cmd:
-    - RUN apt-get update && apt-get install whois git -y
+  - RUN apt-get update && apt-get install whois git -y
 
 cloud_ready: true
 fedramp_ready: true
@@ -40,6 +40,7 @@ troubleshooting:
 - Multiple records can be returned by the server, this plugin currently only returns
   the first unique records found.
 version_history:
+- 3.1.11 - Updated SDK to the latest version (6.4.2)
 - 3.1.10 - Updated SDK to the latest version (6.3.10)
 - 3.1.9 - Updated SDK to the latest version (6.3.3)
 - 3.1.8 - Updated SDK to the latest version (6.2.5)
