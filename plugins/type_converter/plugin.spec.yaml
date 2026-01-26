@@ -6,7 +6,7 @@ title: Type Converter
 description: Type Converter is a utility plugin for converting data types within a
   Rapid7 InsightConnect workflow. This is useful for enabling input interoperability
   between certain plugins
-version: 1.8.6
+version: 1.8.7
 connection_version: 1
 vendor: rapid7
 support: rapid7
@@ -27,12 +27,13 @@ hub_tags:
   features: []
 sdk:
   type: slim
-  version: 6.3.10
+  version: 6.4.2
   user: nobody
 key_features:
 - Convert arrays, booleans, integers, numbers, objects, and strings from one type
   to another to easily retype any variable
 version_history:
+- 1.8.7 - Updated SDK to the latest version (6.4.2)
 - 1.8.6 - Updated SDK to the latest version (6.3.10)
 - 1.8.5 - Updated SDK to the latest version (6.3.3)
 - 1.8.4 - Updated SDK to the latest version (6.2.5)
