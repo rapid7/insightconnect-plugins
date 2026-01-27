@@ -42,25 +42,25 @@ class Util:
             def json(self):
                 return json.loads(self.text)
 
-        if kwargs.get("url") == "https://rdap.org/domain/example.com":
+        if kwargs.get("url") == "https://rdap.net/domain/example.com":
             return MockResponse(200, "domain_lookup_found_domain.json.resp")
-        if kwargs.get("url") == "https://rdap.org/domain/example":
+        if kwargs.get("url") == "https://rdap.net/domain/example":
             return MockResponse(404, "")
-        if kwargs.get("url") == "https://rdap.org/domain/examplefail.com":
+        if kwargs.get("url") == "https://rdap.net/domain/examplefail.com":
             return MockResponse(404, "")
 
-        if kwargs.get("url").startswith("https://rdap.org/autnum/12345"):
+        if kwargs.get("url").startswith("https://rdap.net/autnum/12345"):
             return MockResponse(200, "asn_lookup.json.resp")
-        if kwargs.get("url").startswith("https://rdap.org/autnum/99999"):
+        if kwargs.get("url").startswith("https://rdap.net/autnum/99999"):
             return MockResponse(404, "")
 
-        if kwargs.get("url") == "https://rdap.org/ip/2.2.2.2":
+        if kwargs.get("url") == "https://rdap.net/ip/2.2.2.2":
             return MockResponse(200, "ip_lookup_with_asn.json.resp")
-        if kwargs.get("url") == "https://rdap.org/ip/1.1.1.1":
+        if kwargs.get("url") == "https://rdap.net/ip/1.1.1.1":
             return MockResponse(200, "ip_lookup.json.resp")
-        if kwargs.get("url") == "https://rdap.org/ip/invalid_ip":
+        if kwargs.get("url") == "https://rdap.net/ip/invalid_ip":
             return MockResponse(400, "")
-        if kwargs.get("url") == "https://rdap.org/ip/255.255.11.135":
+        if kwargs.get("url") == "https://rdap.net/ip/255.255.11.135":
             return MockResponse(404, "")
 
         raise NotImplementedError("Not implemented", kwargs)
