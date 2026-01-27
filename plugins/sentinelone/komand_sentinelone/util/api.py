@@ -48,6 +48,7 @@ from komand_sentinelone.util.endpoints import (
     THREAT_ANALYST_VERDICT_ENDPOINT,
     THREAT_INCIDENT_ENDPOINT,
     THREAT_SUMMARY_ENDPOINT,
+    VIEWER_AUTH_CHECK,
 )
 
 
@@ -403,6 +404,9 @@ class SentineloneAPI:
 
     def create_ioc_threat(self, json_data: dict) -> dict:
         return self._call_api("POST", CREATE_IOC_THREAT_ENDPOINT, json=json_data)
+
+    def viewer_auth_check(self) -> dict:
+        return self._call_api("GET", VIEWER_AUTH_CHECK)
 
     @staticmethod
     def raise_for_status(response: requests.Response):
