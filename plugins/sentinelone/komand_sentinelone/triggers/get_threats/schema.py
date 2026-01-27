@@ -65,6 +65,9 @@ class GetThreatsInput(insightconnect_plugin_runtime.Input):
       "order": 1
     }
   },
+  "required": [
+    "agentIsActive"
+  ],
   "definitions": {}
 }
     """

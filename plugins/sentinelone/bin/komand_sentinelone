@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "SentinelOne"
 Vendor = "rapid7"
-Version = "11.1.5"
+Version = "12.0.0"
 Description = "[SentinelOne](https://www.sentinelone.com/) is a next-gen cybersecurity company focused on protecting the enterprise through the endpoint. The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne.This plugin utilizes the SentinelOne API, the documentation is located in the SentinelOne console"
 
 
@@ -95,8 +95,6 @@ def main():
             self.add_action(actions.RunRemoteScript())
         
             self.add_action(actions.MoveBetweenSites())
-        
-            self.add_task(tasks.MonitorLogs())
         
 
     """Run plugin"""

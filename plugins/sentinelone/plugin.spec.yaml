@@ -8,13 +8,13 @@ description: "[SentinelOne](https://www.sentinelone.com/) is a next-gen cybersec
   \ plugin allows you to manage and mitigate all your security operations through\
   \ SentinelOne.\n\nThis plugin utilizes the SentinelOne API, the documentation is\
   \ located in the SentinelOne console"
-version: 11.1.5
+version: 12.0.0
 connection_version: 10
 cloud_ready: true
 fedramp_ready: true
 sdk:
   type: slim
-  version: 6.3.8
+  version: 6.4.2
   user: nobody
 supported_versions: [2.1.0]
 vendor: rapid7
@@ -72,6 +72,7 @@ hub_tags:
   keywords: [sentinelone, endpoint, detection, cloud_enabled]
   features: []
 version_history:
+- 12.0.0 - Update SDK to the latest version (6.4.2) | Fix connection test | Update optional input for agentIsActive | Remove task `Monitor Logs`
 - 11.1.5 - Update SDK to the latest version (6.3.8) | Add task delay monitoring
 - 11.1.4 - Updated SDK to the latest version (6.2.5)
 - 11.1.3 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities |
@@ -3385,7 +3386,7 @@ triggers:
         description: Include agents currently connected to the management console
         type: boolean
         default: true
-        required: false
+        required: true
         example: true
       engines:
         title: Engines
@@ -3423,82 +3424,3 @@ triggers:
               status: success}}, mitigationStatus: mitigated, rank: 7, resolved: false,
           siteId: '1000000000000000000', siteName: Example Site, threatAgentVersion: 3.0.1.3,
           updatedAt: '2019-02-13T15:05:22.274291Z', whiteningOptions: [hash]}
-
-tasks:
-  monitor_logs:
-    title: Monitor Logs
-    description: Monitor for new activities, device control events, and threats
-    output:
-      logs:
-        title: Logs
-        description: List of activity, device control event, and threat logs within
-          the specified time range
-        type: '[]object'
-        required: false
-        example: [{id: '225494730938493804', userId: '225494730938493804', data: {
-              computer_name: COMP_1234, username: my_user}, secondaryDescription: string,
-            threatId: '225494730938493804', siteName: string, accountName: string,
-            accountId: '225494730938493804', updatedAt: '2018-02-27T04:49:26.257525Z',
-            agentUpdatedVersion: 2.5.1.1320, groupId: '225494730938493804', hash: string,
-            description: string, activityUuid: string, comments: string, activityType: 0,
-            agentId: '225494730938493804', osFamily: windows, siteId: '225494730938493804',
-            primaryDescription: string, groupName: string, createdAt: '2018-02-27T04:49:26.257525Z'},
-          {eventType: string, accessPermission: Read-Only, deviceClass: 02h, deviceName: string,
-            id: '225494730938493804', updatedAt: '2018-02-27T04:49:26.257525Z', ruleId: '225494730938493804',
-            computerName: JOHN-WIN-4125, profileUuids: string, lastLoggedInUserName: janedoe3,
-            deviceId: '02', eventTime: '2018-02-27T04:49:26.257525Z', serviceClass: '02',
-            interface: USB, agentId: '225494730938493804', vendorId: '02', uId: '02',
-            lmpVersion: string, eventId: string, createdAt: '2018-02-27T04:49:26.257525Z',
-            productId: '02', minorClass: string}, {mitigationStatus: [{groupNotFound: false,
-                latestReport: string, mitigationStartedAt: '2018-02-27T04:49:26.257525Z',
-                action: kill, mitigationEndedAt: '2018-02-27T04:49:26.257525Z', actionsCounters: {
-                  total: 0, success: 0, notFound: 0, failed: 0, pendingReboot: 0},
-                status: success, agentSupportsReport: false, lastUpdate: '2018-02-27T04:49:26.257525Z',
-                reportId: '225494730938493804'}], ecsInfo: {taskAvailabilityZone: string,
-              serviceArn: string, taskDefinitionArn: string, clusterName: string,
-              taskDefinitionFamily: string, serviceName: string, version: string,
-              taskDefinitionRevision: string, type: string, taskArn: string}, agentDetectionInfo: {
-              agentIpV6: string, agentMitigationMode: detect, agentOsRevision: string,
-              agentIpV4: string, agentLastLoggedInUpn: string, agentRegisteredAt: '2018-02-27T04:49:26.257525Z',
-              agentLastLoggedInUserName: janedoe3, accountId: '225494730938493804',
-              siteId: '225494730938493804', agentLastLoggedInUserMail: string, groupName: string,
-              agentOsName: string, siteName: string, agentVersion: 3.6.1.14, agentDetectionState: string,
-              groupId: '225494730938493804', agentUuid: string, externalIp: string,
-              accountName: string, cloudProviders: {}, agentDomain: mybusiness.net},
-            id: '225494730938493804', agentRealtimeInfo: {agentOsRevision: string,
-              agentVersion: 3.6.1.14, agentId: '225494730938493804', agentMitigationMode: detect,
-              siteName: string, accountName: string, accountId: '225494730938493804',
-              agentInfected: false, agentDomain: string, agentNetworkStatus: connected,
-              networkInterfaces: [{name: string, id: '225494730938493804', physical: 00:25:96:FF:FE:12:34:56,
-                  inet: [type: string], inet6: [type: string]}], groupId: '225494730938493804',
-              agentComputerName: string, scanStartedAt: '2018-02-27T04:49:26.257525Z',
-              scanStatus: none, agentUuid: string, operationalState: string, scanFinishedAt: '2018-02-27T04:49:26.257525Z',
-              activeThreats: 0, scanAbortedAt: '2018-02-27T04:49:26.257525Z', agentDecommissionedAt: false,
-              agentOsName: string, rebootRequired: false, agentIsActive: false, siteId: '225494730938493804',
-              groupName: string, agentIsDecommissioned: false, storageName: string,
-              storageType: string, agentMachineType: unknown, userActionsNeeded: [
-                {type: string, example: none, enum: [none, user_action_needed, reboot_needed,
-                    upgrade_needed, incompatible_os, unprotected, rebootless_without_dynamic_detection,
-                    extended_exclusions_partially_accepted, reboot_required, pending_deprecation,
-                    ne_not_running, ne_cf_not_active]}], agentOsType: windows}, containerInfo: {
-              image: string, name: string, id: string, labels: [type: string], isContainerQuarantine: false},
-            threatInfo: {mitigationStatus: not_mitigated, maliciousProcessArguments: string,
-              initiatedByDescription: {readOnly: true, description: Initiated by description},
-              analystVerdictDescription: {readOnly: true, description: Analyst verdict
-                  description}, storyline: a00637fa-e18d-9b80-e803-f370524f8085, pendingActions: false,
-              engines: [reputation, pre_execution], threatId: '225494730938493804',
-              state: running, pendingActionsCounter: 0, mitigationMode: prevent, automaticDetection: true,
-              storylineParentId: '225494730938493804', threatLevel: '0', targetOfDetection: process,
-              evidenceUuid: '225494730938493804', hidden: false, siteName: string,
-              initiatedBy: string, analystVerdict: string, organizationId: '225494730938493804',
-              evidenceId: '225494730938493804', tags: [string], detectorId: '225494730938493804',
-              pendingActionsType: none, threatName: string, fileInfo: {fileMaliciousContent: string,
-                fileType: string, fileCreatedAt: '2018-02-27T04:49:26.257525Z', filePath: string,
-                fileMd5: string, fileSize: '0', fileSha1: string, fileSha256: string,
-                fileMagic: string, fileIsExecutable: false, fileExtension: string,
-                fileMaliciousClassification: string}, resolvedBy: string, organizationName: string,
-              processInfo: {parentCommandLine: string, parentPid: '0', commandLine: string,
-                parentProcessGroup: string, username: string, pid: '0', command: string,
-                processGroup: string, md5: string, sha1: string, sha256: string},
-              reportedAt: '2018-02-27T04:49:26.257525Z', secondaryDescription: string,
-              siteId: '225494730938493804', primaryDescription: string}}]
