@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Basename"
 Vendor = "rapid7"
-Version = "1.1.5"
+Version = "1.1.6"
 Description = "Basename is used to get the last item of a file path or URL using Python's basename utility"
 
 
