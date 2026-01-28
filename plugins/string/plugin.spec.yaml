@@ -5,7 +5,7 @@ name: string
 title: String Operations
 description: "The String Operations plugin allows easy manipulation of string data.\n\
   \ \nThis plugin utilizes the Python 3 String library [set of methods](https://docs.python.org/3/library/stdtypes.html#string-methods)"
-version: 1.4.5
+version: 1.4.6
 connection_version: 1
 vendor: rapid7
 support: community
@@ -26,7 +26,7 @@ hub_tags:
   features: []
 sdk:
   type: slim
-  version: 6.3.10
+  version: 6.4.2
   user: nobody
 key_features:
 - Split a string to a list of elements
@@ -34,6 +34,7 @@ key_features:
 - Upper case, lower case, and trim a string
 - Replace parts of a string
 version_history:
+- 1.4.6 - Updated SDK to the latest version (6.4.2)
 - 1.4.5 - Updated SDK to the latest version (6.3.10)
 - 1.4.4 - Updated SDK to the latest version (6.3.3)
 - 1.4.3 - Updated SDK to the latest version (6.2.5)
