@@ -29,7 +29,7 @@ class GetThreatsInput(insightconnect_plugin_runtime.Input):
     "agentIsActive": {
       "type": "boolean",
       "title": "Agent is Active",
-      "description": "Include agents currently connected to the management console",
+      "description": "Set True to include agents currently connected to the management console, set False to only search inactive agents",
       "default": true,
       "order": 3
     },

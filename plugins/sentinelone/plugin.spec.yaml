@@ -3383,7 +3383,7 @@ triggers:
         example: [classification]
       agentIsActive:
         title: Agent is Active
-        description: Include agents currently connected to the management console
+        description: Set True to include agents currently connected to the management console, set False to only search inactive agents
         type: boolean
         default: true
         required: true

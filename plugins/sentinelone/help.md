@@ -1622,7 +1622,7 @@ This trigger is used to get threats
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|agentIsActive|boolean|True|True|Include agents currently connected to the management console|None|True|None|None|
+|agentIsActive|boolean|True|True|Set True to include agents currently connected to the management console, set False to only search inactive agents|None|True|None|None|
 |classifications|[]string|None|False|List of classifications to search|None|["classification"]|None|None|
 |engines|[]string|None|False|Included engines|None|["engine"]|None|None|
 |frequency|integer|5|False|Poll frequency in seconds|None|5|None|None|
