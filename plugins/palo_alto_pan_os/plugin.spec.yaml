@@ -8,12 +8,12 @@ description: '[PAN-OS](https://www.paloaltonetworks.com/documentation/80/pan-os)
   utilizes the [PAN-OS API](https://www.paloaltonetworks.com/documentation/80/pan-os/xml-api)
   to provide programmatic management of the Palo Alto Firewall appliance(s). It supports
   managing firewalls individually or centralized via [Panorama](https://www.paloaltonetworks.com/network-security/panorama)'
-version: 6.1.10
+version: 6.1.11
 sdk:
   type: full
-  version: 6.3.10
+  version: 6.4.2
   user: nobody
-supported_versions: [10.1]
+supported_versions: [11.X]
 connection_version: 6
 vendor: rapid7
 support: rapid7
@@ -42,7 +42,7 @@ requirements: [Access to Palo Alto Next Generation firewall or Palo Alto Panoram
 references: ['[Palo Alto PAN-OS API](https://www.paloaltonetworks.com/documentation/80/pan-os/xml-api)']
 links: ['[Palo Alto PAN-OS](https://www.paloaltonetworks.com/documentation/80/pan-os)']
 version_history:
-- 6.1.11 - Adjusted existing actions to ensure compatibility with Palo Alto version 10.1 | Updated SDK to latest version (6.3.7)
+- 6.1.11 - Update for compatibility with Palo Alto version 11.X | Updated SDK to latest version (6.4.2)
 - 6.1.10 - Addressed Snyk Vulnerability | Updated SDK to latest version (6.3.10)
 - 6.1.9 - Addressed Snyk Vulnerability | Updated SDK to latest version (6.3.4)
 - 6.1.8 - Updated SDK to the latest version (6.2.6)

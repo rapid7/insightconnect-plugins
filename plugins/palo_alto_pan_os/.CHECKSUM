@@ -1,7 +1,7 @@
 {
-	"spec": "1ee80f9fc9ccc99d8574115f05cc72a9",
-	"manifest": "a01418b01c795875566e03d4bf863e12",
-	"setup": "530bdd16960976a9417f24abb29ff665",
+	"spec": "fc8dbd2680c1630efeaf1dee53b83971",
+	"manifest": "0159cbe50cf5b396e8f008e4a18c62f6",
+	"setup": "75ec0622786f6df7d210d5a64ec7ba44",
 	"schemas": [
 		{
 			"identifier": "add_address_object_to_group/schema.py",
