@@ -8,7 +8,7 @@ description: "[SentinelOne](https://www.sentinelone.com/) is a next-gen cybersec
   \ plugin allows you to manage and mitigate all your security operations through\
   \ SentinelOne.\n\nThis plugin utilizes the SentinelOne API, the documentation is\
   \ located in the SentinelOne console"
-version: 12.0.0
+version: 11.1.6
 connection_version: 10
 cloud_ready: true
 fedramp_ready: true
@@ -72,7 +72,7 @@ hub_tags:
   keywords: [sentinelone, endpoint, detection, cloud_enabled]
   features: []
 version_history:
-- 12.0.0 - Update SDK to the latest version (6.4.2) | Fix connection test | Update optional input for agentIsActive | Remove task `Monitor Logs`
+- 11.1.6 - Update SDK to the latest version (6.4.2) | Fix connection test | Update optional input for agentIsActive | Remove task `Monitor Logs`
 - 11.1.5 - Update SDK to the latest version (6.3.8) | Add task delay monitoring
 - 11.1.4 - Updated SDK to the latest version (6.2.5)
 - 11.1.3 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities |

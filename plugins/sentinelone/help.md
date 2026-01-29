@@ -2069,7 +2069,7 @@ Example output:
 
 # Version History
 
-* 12.0.0 - Update SDK to the latest version (6.4.2) | Fix connection test | Update optional input for agentIsActive | Remove task `Monitor Logs`
+* 11.1.6 - Update SDK to the latest version (6.4.2) | Fix connection test | Update optional input for agentIsActive | Remove task `Monitor Logs`
 * 11.1.5 - Update SDK to the latest version (6.3.8) | Add task delay monitoring
 * 11.1.4 - Updated SDK to the latest version (6.2.5)
 * 11.1.3 - Updated SDK to the latest version (v6.2.2) | Address vulnerabilities | Fix issue with URL input validation
