@@ -26,7 +26,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def test(self):
         try:
-            self.client.get_activity_types()
+            self.client.viewer_auth_check()
             return {"success": True}
         except PluginException as error:
             raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=error.data)
