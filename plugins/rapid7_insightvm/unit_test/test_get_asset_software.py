@@ -41,7 +41,7 @@ class TestGetAssetSoftware(TestCase):
             ]
         ]
     )
-    def test_get_asset_software(self, mock_get, name, asset_id, expected):
+    def test_get_asset_software(self, mock_get, name, asset_id, expected) -> None:
         actual = self.action.run({Input.ASSET_ID: asset_id})
         self.assertEqual(actual, expected)
 
@@ -56,7 +56,7 @@ class TestGetAssetSoftware(TestCase):
             ]
         ]
     )
-    def test_get_asset_software_bad(self, mock_get, name, asset_id, cause, assistance, data):
+    def test_get_asset_software_bad(self, mock_get, name, asset_id, cause, assistance, data) -> None:
         with self.assertRaises(PluginException) as error:
             self.action.run({Input.ASSET_ID: asset_id})
         self.assertEqual(error.exception.cause, cause)

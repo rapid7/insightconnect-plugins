@@ -4012,6 +4012,7 @@ Example output:
 
 # Version History
 
+* 8.0.14 - Updated dependencies | Updated SDK to latest version (6.4.3)
 * 8.0.13 - Resolved Snyk Vulnerability | Updated SDK to latest version (6.3.10)
 * 8.0.12 - Resolved Snyk Vulnerabilities | Updated SDK to latest version (6.3.4)
 * 8.0.11 - Updated the cache storage path and replaced the external function with internal implementation | Updated SDK to the latest version (6.2.6)

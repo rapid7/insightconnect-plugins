@@ -76,7 +76,9 @@ class TestGetAssetVulnerabilities(TestCase):
             ],
         ]
     )
-    def test_get_asset_vulnerabilities(self, mock_get, mock_async_get, name, asset_id, get_risk_score, expected):
+    def test_get_asset_vulnerabilities(
+        self, mock_get, mock_async_get, name, asset_id, get_risk_score, expected
+    ) -> None:
         actual = self.action.run({Input.ASSET_ID: asset_id, Input.GET_RISK_SCORE: get_risk_score})
         self.assertEqual(actual, expected)
 
@@ -91,7 +93,9 @@ class TestGetAssetVulnerabilities(TestCase):
             ]
         ]
     )
-    def test_get_asset_vulnerabilities_bad(self, mock_get, mock_async_get, name, asset_id, cause, assistance, data):
+    def test_get_asset_vulnerabilities_bad(
+        self, mock_get, mock_async_get, name, asset_id, cause, assistance, data
+    ) -> None:
         with self.assertRaises(PluginException) as e:
             self.action.run({Input.ASSET_ID: asset_id})
         self.assertEqual(e.exception.cause, cause)
