@@ -1927,7 +1927,7 @@ Example output:
 
 # Version History
 
-* 1.0.1 - Adding regions support for connection | Updated SDK to the latest version (6.4.2)
+* 1.0.1 - Adding regions support for connection | Updated SDK to the latest version (6.4.3)
 * 1.0.0 - Initial plugin
 
 # Links

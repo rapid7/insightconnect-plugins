@@ -11,7 +11,7 @@ vendor: rapid7
 support: rapid7
 sdk:
   type: slim
-  version: 6.4.2
+  version: 6.4.3
   user: nobody
 key_features:
   - "Create, update and delete a service ticket"
@@ -29,7 +29,7 @@ resources:
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.connectwise.com/
 version_history:
-  - "1.0.1 - Adding regions support for connection | Updated SDK to the latest version (6.4.2)"
+  - "1.0.1 - Adding regions support for connection | Updated SDK to the latest version (6.4.3)"
   - "1.0.0 - Initial plugin"
 links:
   - "[Connectwise](https://www.connectwise.com/)"
