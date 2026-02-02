@@ -27,12 +27,12 @@ class TestTagAssets(TestCase):
             "tag_name": "Example Tag",
         }
 
-    def test_tag_asset(self, mock_put):
+    def test_tag_asset(self, mock_put) -> None:
         expected = {"success": True}
         actual = self.action.run(self.params)
         self.assertEqual(actual, expected)
 
-    def test_tag_asset_bad_id(self, mock_put):
+    def test_tag_asset_bad_id(self, mock_put) -> None:
         self.params["tag_id"] = 2
         cause = "Malformed JSON received along with a status code of Not Found"
         assistance = (
@@ -46,7 +46,7 @@ class TestTagAssets(TestCase):
         self.assertEqual(assistance, error.exception.assistance)
         self.assertEqual(data, error.exception.data)
 
-    def test_tag_asset_bad_asset_ids(self, mock_put):
+    def test_tag_asset_bad_asset_ids(self, mock_put) -> None:
         self.params["asset_ids"] = [4, 5, 6]
         cause = "Malformed JSON received along with a status code of Internal Server Error"
         assistance = (
@@ -60,7 +60,7 @@ class TestTagAssets(TestCase):
         self.assertEqual(assistance, error.exception.assistance)
         self.assertEqual(data, error.exception.data)
 
-    def test_tag_asset_bad_tag_source(self, mock_put):
+    def test_tag_asset_bad_tag_source(self, mock_put) -> None:
         self.params["tag_source"] = "VM"
         cause = "Malformed JSON received along with a status code of Conflict"
         assistance = (
@@ -75,7 +75,7 @@ class TestTagAssets(TestCase):
         self.assertEqual(assistance, error.exception.assistance)
         self.assertEqual(data, error.exception.data)
 
-    def test_tag_asset_bad_tag_type(self, mock_put):
+    def test_tag_asset_bad_tag_type(self, mock_put) -> None:
         self.params["tag_type"] = "Criticality"
         cause = "Malformed JSON received along with a status code of Method Not Allowed"
         assistance = (

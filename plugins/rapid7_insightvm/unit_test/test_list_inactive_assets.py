@@ -59,6 +59,6 @@ class TestListInactiveAssets(TestCase):
             ["not_found", 10, {"assets": []}],
         ]
     )
-    def test_get_asset(self, mock_get, name, days_ago, expected):
+    def test_get_asset(self, mock_get, name, days_ago, expected) -> None:
         actual = self.action.run({Input.DAYS_AGO: days_ago})
         self.assertEqual(actual, expected)

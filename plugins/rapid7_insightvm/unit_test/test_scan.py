@@ -38,7 +38,7 @@ class TestScan(TestCase):
             ],
         ]
     )
-    def test_scan(self, mock_post, test_name, input_params, expected):
+    def test_scan(self, mock_post, test_name, input_params, expected) -> None:
         actual = self.action.run(input_params)
         self.assertEqual(actual, expected)
 
@@ -53,7 +53,7 @@ class TestScan(TestCase):
             ]
         ]
     )
-    def test_scan_bad(self, mock_post, test_name, input_params, cause, assistance, data):
+    def test_scan_bad(self, mock_post, test_name, input_params, cause, assistance, data) -> None:
         with self.assertRaises(PluginException) as error:
             self.action.run(input_params)
         self.assertEqual(error.exception.cause, cause)

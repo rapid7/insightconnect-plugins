@@ -21,7 +21,7 @@ class TestDeleteAsset(TestCase):
         cls.action = Util.default_connector(DeleteAsset())
 
     @parameterized.expand([["found", 3, {"success": True}]])
-    def test_delete_asset(self, mock_delete, name, asset_id, expected):
+    def test_delete_asset(self, mock_delete, name, asset_id, expected) -> None:
         actual = self.action.run({Input.ID: asset_id})
         self.assertEqual(actual, expected)
 
@@ -36,7 +36,7 @@ class TestDeleteAsset(TestCase):
             ]
         ]
     )
-    def test_delete_asset_bad(self, mock_delete, name, asset_id, cause, assistance, data):
+    def test_delete_asset_bad(self, mock_delete, name, asset_id, cause, assistance, data) -> None:
         with self.assertRaises(PluginException) as e:
             self.action.run({Input.ID: asset_id})
         self.assertEqual(e.exception.cause, cause)

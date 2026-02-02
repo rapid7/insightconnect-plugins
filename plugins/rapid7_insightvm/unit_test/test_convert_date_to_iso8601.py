@@ -25,7 +25,7 @@ class TestCreateException(TestCase):
             ["02-05-2022 12:34:56", "02-05-2022 12:34:56", "2022-02-05T12:34:56.000000Z"],
         ]
     )
-    def test_convert_date_to_iso8601(self, name, date, expected):
+    def test_convert_date_to_iso8601(self, name, date, expected) -> None:
         actual = convert_date_to_iso8601(date)
         self.assertEqual(actual, expected)
 
@@ -45,7 +45,7 @@ class TestCreateException(TestCase):
             ],
         ]
     )
-    def test_convert_date_to_iso8601_bad(self, name, date, cause, assistance):
+    def test_convert_date_to_iso8601_bad(self, name, date, cause, assistance) -> None:
         with self.assertRaises(PluginException) as e:
             convert_date_to_iso8601(date)
         self.assertEqual(e.exception.cause, cause)

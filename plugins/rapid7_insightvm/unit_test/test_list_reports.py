@@ -31,6 +31,6 @@ class TestGetExpiringVulnerabilityExceptions(TestCase):
             ],
         ]
     )
-    def test_list_reports(self, mock_get, name, report_name, sort, expected):
+    def test_list_reports(self, mock_get, name, report_name, sort, expected) -> None:
         actual = self.action.run({Input.NAME: report_name, Input.SORT: sort})
         self.assertEqual(actual, expected)

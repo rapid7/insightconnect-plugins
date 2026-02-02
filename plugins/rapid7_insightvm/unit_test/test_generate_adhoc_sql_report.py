@@ -59,7 +59,7 @@ class TestGenerateAdhocSqlReport(TestCase):
     @patch("requests.sessions.Session.post", side_effect=Util.mocked_requests)
     @patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
     @patch("requests.sessions.Session.delete", side_effect=Util.mocked_requests)
-    def test_generate_report(self, mock_post, mock_get, mock_delete):
+    def test_generate_report(self, mock_post, mock_get, mock_delete) -> None:
         actual = self.action.run(self.query)
         expected = {"report": {"content": "InN0cmluZyI=", "filename": "adhoc_sql_report.csv"}}
         self.assertEqual(expected, actual)
@@ -137,7 +137,7 @@ class TestGenerateAdhocSqlReport(TestCase):
     @patch("requests.sessions.Session.post")
     def test_generate_report_bad(
         self, name, post_response, get_response, delete_response, cause, assistance, mock_post, mock_get, mock_delete
-    ):
+    ) -> None:
         with self.assertRaises(PluginException) as e:
             mock_post.side_effect = post_response
             mock_get.side_effect = get_response
