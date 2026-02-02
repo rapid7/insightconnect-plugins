@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="vmray-rapid7-plugin",
-    version="6.0.1",
+    version="6.0.2",
     description="Analyze and detect malware before it lands, protecting internal infrastructure",
     author="rapid7",
     author_email="",
