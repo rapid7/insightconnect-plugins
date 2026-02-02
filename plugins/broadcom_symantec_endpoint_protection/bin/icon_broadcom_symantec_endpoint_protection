@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Broadcom Symantec Endpoint Protection"
 Vendor = "rapid7"
-Version = "2.0.4"
+Version = "2.0.5"
 Description = "Broadcom Symantec Endpoint Protection delivers the most complete, integrated endpoint security platform on the planet"
 
 
