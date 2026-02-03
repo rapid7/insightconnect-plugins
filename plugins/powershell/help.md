@@ -15,7 +15,7 @@
 
 # Supported Product Versions
 
-* PowerShell 7.4.6
+* PowerShell 7.5.4
 
 # Documentation
 
@@ -188,6 +188,7 @@ Invoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw
 
 # Version History
 
+* 3.0.12 - Updated dependencies | Updated SDK to the latest version (6.4.3)
 * 3.0.11 - Updated dependencies | Updated SDK to the latest version (6.4.1)
 * 3.0.10 - Resolved Snyk Vulnerabilities | SDK bump to latest version (6.3.7)
 * 3.0.9 - Resolved Snyk Vulnerability | SDK bump to latest version (6.3.6)
