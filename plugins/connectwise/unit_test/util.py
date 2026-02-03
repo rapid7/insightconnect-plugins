@@ -3,10 +3,9 @@ import logging
 import sys
 import os
 
-import insightconnect_plugin_runtime
-
 sys.path.append(os.path.abspath("../"))
 
+import insightconnect_plugin_runtime
 from icon_connectwise.connection import Connection
 from icon_connectwise.connection.schema import Input
 
@@ -19,6 +18,7 @@ class Util:
             Input.COMPANY: "companyname",
             Input.PRIVATE_KEY: {"secretKey": "fakeprivatekey"},
             Input.PUBLIC_KEY: "fakepublickey",
+            Input.REGION: "na",
         }
         action.connection = Connection()
         action.connection.meta = "{}"
