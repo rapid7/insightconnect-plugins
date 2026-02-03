@@ -88,7 +88,7 @@ class TestCreateException(TestCase):
     )
     def test_create_exception(
         self, mock_post, name, exception_type, vulnerability, scope, expiration, comment, reason, key, port, expected
-    ):
+    ) -> None:
         actual = self.action.run(
             {
                 Input.TYPE: exception_type,

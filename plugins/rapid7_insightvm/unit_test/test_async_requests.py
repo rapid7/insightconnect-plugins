@@ -11,10 +11,10 @@ from komand_rapid7_insightvm.util import async_requests
 
 
 class MockResponse:
-    def __init__(self):
+    def __init__(self) -> None:
         self.status = 200
 
-    async def text(self):
+    async def text(self) -> str:
         return '{"test_key": "test_value"}'
 
     async def json(self):
@@ -27,7 +27,7 @@ class MockSession:
 
 
 class TestAsyncRequests(TestCase):
-    def test_async_request(self):
+    def test_async_request(self) -> None:
         loop = asyncio.new_event_loop()
 
         asyc_obj = async_requests.AsyncRequests("user", "pass", False)

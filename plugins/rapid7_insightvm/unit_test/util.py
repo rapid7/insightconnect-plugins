@@ -36,7 +36,7 @@ class Util:
     @staticmethod
     def mocked_requests(*args, **kwargs):
         class MockResponse:
-            def __init__(self, filename, status_code):
+            def __init__(self, filename, status_code) -> None:
                 self.filename = filename
                 self.status_code = status_code
                 self.text = self.load_data()
@@ -160,7 +160,7 @@ class Util:
     @staticmethod
     async def mocked_async_requests(*args, **kwargs):
         class MockAsyncResponse:
-            def __init__(self, filename, status_code):
+            def __init__(self, filename, status_code) -> None:
                 self.filename = filename
                 self.status = status_code
                 self.response_text = ""

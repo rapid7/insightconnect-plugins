@@ -1,10 +1,9 @@
 # List third-party dependencies here, separated by newlines.
 # All dependencies must be version-pinned, eg. requests==1.2.0
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
-aiohttp==3.12.14
+aiohttp==3.13.3
 defusedxml==0.7.1
 datetime==5.5
-python-dateutil==2.9.0
 parameterized==0.9.0
-pytest==8.3.4
-freezegun==1.5.1
+pytest==9.0.2
+freezegun==1.5.5

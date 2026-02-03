@@ -75,7 +75,7 @@ class TestUpdateSiteExcludedTargets(TestCase):
     )
     def test_update_site_excluded_targets(
         self, mock_get, mock_put, name, site_id, excluded_targets, overwrite, expected
-    ):
+    ) -> None:
         actual = self.action.run(
             {Input.ID: site_id, Input.EXCLUDED_TARGETS: excluded_targets, Input.OVERWRITE: overwrite}
         )

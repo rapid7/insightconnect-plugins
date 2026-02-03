@@ -587,7 +587,7 @@ class TestUpdateSharedCredential(TestCase):
         site_assignment,
         sites,
         expected,
-    ):
+    ) -> None:
         actual = self.action.run(
             {
                 Input.ACCOUNT: account,
@@ -657,7 +657,7 @@ class TestUpdateSharedCredential(TestCase):
         site_assignment,
         sites,
         expected,
-    ):
+    ) -> None:
         with self.assertRaises(PluginException) as context:
             self.action.run(
                 {
