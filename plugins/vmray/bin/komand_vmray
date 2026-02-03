@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "VMRay Sandbox"
 Vendor = "rapid7"
-Version = "6.0.1"
+Version = "6.0.2"
 Description = "Analyze and detect malware before it lands, protecting internal infrastructure"
 
 

@@ -4,7 +4,7 @@ products: [insightconnect]
 name: vmray
 title: VMRay Sandbox
 description: Analyze and detect malware before it lands, protecting internal infrastructure
-version: 6.0.1
+version: 6.0.2
 connection_version: 6
 vendor: rapid7
 support: community
@@ -16,7 +16,7 @@ resources:
   vendor_url: https://www.vmray.com
 sdk:
   type: slim
-  version: 6.4.1
+  version: 6.4.3
   user: nobody
   custom_cmd:
     - RUN apt-get update && apt-get install libmagic1 -y
@@ -26,6 +26,7 @@ key_features:
 requirements:
   - VMRay API key
 version_history:
+  - 6.0.2 - Updated SDK to the latest version (6.4.3)
   - 6.0.1 - Fixed issue with connection test | Updated SDK to the latest version (6.4.1)
   - 6.0.0 - Change type of Analysis VTI Built in Rules Version from `number` to `string`
   - 5.0.1 - Add example inputs

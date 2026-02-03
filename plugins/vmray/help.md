@@ -955,6 +955,7 @@ Example output:
 
 # Version History
 
+* 6.0.2 - Updated SDK to the latest version (6.4.3)
 * 6.0.1 - Fixed issue with connection test | Updated SDK to the latest version (6.4.1)
 * 6.0.0 - Change type of Analysis VTI Built in Rules Version from `number` to `string`
 * 5.0.1 - Add example inputs
