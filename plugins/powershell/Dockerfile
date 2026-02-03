@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.4.1 AS builder
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.4.3 AS builder
 
 WORKDIR /python/src
 
@@ -11,7 +11,7 @@ ADD . /python/src
 RUN pip install .
 RUN pip uninstall -y setuptools
 
-FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.4.1
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.4.3
 
 LABEL organization=rapid7
 LABEL sdk=python
@@ -42,6 +42,7 @@ RUN apt-get update && apt-get install -y \
 RUN wget https://github.com/PowerShell/PowerShell/releases/download/v7.5.4/powershell-7.5.4-linux-x64.tar.gz \
     && mkdir /opt/powershell \
     && tar -xzf powershell-7.5.4-linux-x64.tar.gz -C /opt/powershell \
+    && chmod 500 /opt/powershell/pwsh \
     && ln -s /opt/powershell/pwsh /usr/bin/pwsh \
     && rm powershell-7.5.4-linux-x64.tar.gz
 
