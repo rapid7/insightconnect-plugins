@@ -56,7 +56,7 @@ class Util:
                 filename: str = None,
                 url: str = None,
                 gzip=False,
-            ):
+            ) -> None:
                 self.filename = filename
                 self.status_code = status_code
                 self.text = "This is some error text"

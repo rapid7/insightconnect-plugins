@@ -4,8 +4,9 @@ from typing import Any, Dict, Optional
 
 sys.path.append(os.path.abspath("../"))
 
+from datetime import date
 from unittest import TestCase
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
 
 from freezegun import freeze_time
 from icon_mimecast_v2.tasks.monitor_siem_logs import MonitorSiemLogs
@@ -848,3 +849,54 @@ class TestMonitorLogs(TestCase):
         self.assertEqual(expected_cause, error.cause)
         self.assertEqual(expected_assistance, error.assistance)
         validate(output, MonitorSiemLogsOutput.schema)
+
+    def test_rfc_1123_date_format_parsing(self) -> None:
+        # Test query_config with mixed datetime formats
+        query_config = {
+            "ttp_url": {"query_date": "Thu, 06 Jan 2000 00:00:00 GMT"},
+            "ttp_attachment": {"query_date": "Fri, 07 Jan 2000 00:00:00 GMT"},
+            "receipt": {"query_date": "2000-01-05"},
+        }
+
+        # Call the method to get the furthest lookback date
+        result = MonitorSiemLogs.get_furthest_lookback_date(query_config)
+
+        # Should return the earliest date (2000-01-05 from receipt)
+        self.assertIsNotNone(result)
+        self.assertEqual("2000-01-05", result.strftime("%Y-%m-%d"))
+
+    def test_prepare_exit_state_normalizes_ttp_dates_to_iso(self) -> None:
+        # Create state with RFC 1123 format in TTP URL date
+        state = {
+            "query_config": {
+                "ttp_url": {
+                    "caught_up": True,
+                    "query_date": "Thu, 06 Jan 2000 00:00:00 GMT",  # RFC 1123 format
+                },
+                "ttp_attachment": {
+                    "caught_up": True,
+                    "query_date": "2000-01-06T00:00:00+00:00",  # Already ISO format
+                },
+                "receipt": {
+                    "caught_up": True,
+                    "query_date": "2000-01-06",  # Standard date format
+                },
+            }
+        }
+
+        query_config = state["query_config"]
+        now_date = date(2000, 1, 7)
+        furthest_query_date = date(2000, 1, 6)
+
+        # Call prepare_exit_state method
+        exit_state, has_more_pages = self.task.prepare_exit_state(state, query_config, now_date, furthest_query_date)
+
+        # Verify TTP dates are normalized to ISO format
+        ttp_url_date = exit_state["query_config"]["ttp_url"]["query_date"]
+        ttp_attachment_date = exit_state["query_config"]["ttp_attachment"]["query_date"]
+        self.assertEqual("2000-01-06T00:00:00+00:00", ttp_url_date)
+        self.assertEqual("2000-01-06T00:00:00+00:00", ttp_attachment_date)
+
+        # SIEM log should remain in standard date format
+        receipt_date = exit_state["query_config"]["receipt"]["query_date"]
+        self.assertEqual("2000-01-06", receipt_date)

@@ -185,7 +185,11 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             if config.get(QUERY_DATE):
                 # Convert query date string to date object depending on log type
                 if log_type in TTP_LOG_TYPES:
-                    log_date = datetime.fromisoformat(config[QUERY_DATE]).date()
+                    try:
+                        log_date = datetime.fromisoformat(config[QUERY_DATE]).date()
+                    except (ValueError, TypeError):
+                        # Fallback for RFC 1123 format
+                        log_date = datetime.strptime(config[QUERY_DATE], "%a, %d %b %Y %H:%M:%S %Z").date()
                 else:
                     log_date = datetime.strptime(config[QUERY_DATE], DATE_FORMAT).date()
                 if furthest_date and log_date < furthest_date:
@@ -370,9 +374,15 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         # Convert query date string to date object depending on log type
         if isinstance(query_date, str):
             try:
+                # Try standard date format first (YYYY-MM-DD)
                 query_date = datetime.strptime(query_date, DATE_FORMAT).date()
             except (ValueError, TypeError):
-                query_date = datetime.fromisoformat(query_date).date()
+                try:
+                    # Try ISO format with timezone (for TTP logs)
+                    query_date = datetime.fromisoformat(query_date).date()
+                except (ValueError, TypeError):
+                    # Try RFC 1123 date format
+                    query_date = datetime.strptime(query_date, "%a, %d %b %Y %H:%M:%S %Z").date()
 
         # Ensure query date is a date object
         if isinstance(query_date, datetime):
@@ -496,15 +506,6 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             log_type for log_type in self.connection.api.validate_permissions("TTP") if log_type in TTP_LOG_TYPES
         ]
 
-        # Remove TTP log types from query config if no permission
-        for log_type in TTP_LOG_TYPES:
-            if log_type not in available_ttp_log_types and log_type in query_config:
-                self.logger.log(
-                    self.connection.api.log_level,
-                    f"TASK: (TTP) No permission to access `{log_type}` logs. Removing from query config.",
-                )
-                query_config.pop(log_type, None)
-
         # Initialize list to hold all completed logs
         completed_logs = []
         for log_type in available_ttp_log_types:
@@ -594,7 +595,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                     new_logs_hashes.append(hash_)
         return logs_to_return, new_logs_hashes
 
-    def prepare_exit_state(
+    def prepare_exit_state(  # noqa: MC0001
         self, state: dict, query_config: dict, now_date: datetime, furthest_query_date: datetime
     ) -> Tuple[Dict, bool]:
         """
@@ -636,6 +637,30 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             if log_type in TTP_LOG_TYPES:
                 if NEXT_PAGE in log_type_config:
                     has_more_pages = True
+
+                # Normalize TTP log date to ISO format for consistent storage
+                query_date = log_type_config.get(QUERY_DATE)
+                if query_date:
+                    if isinstance(query_date, str):
+                        # Parse string to datetime if needed
+                        try:
+                            # Try ISO format first
+                            query_date = datetime.fromisoformat(query_date)
+                        except (ValueError, TypeError):
+                            try:
+                                # Try RFC 1123 format
+                                query_date = datetime.strptime(query_date, "%a, %d %b %Y %H:%M:%S %Z").replace(
+                                    tzinfo=timezone.utc
+                                )
+                            except (ValueError, TypeError):
+                                # If parsing fails, keep original string
+                                self.logger.warning(
+                                    f"TASK: (TTP) Unable to parse query date for {log_type}: {query_date}"
+                                )
+
+                    # Convert datetime to ISO format string
+                    if isinstance(query_date, datetime):
+                        log_type_config[QUERY_DATE] = query_date.replace(microsecond=0).isoformat()
 
         # If furthest query date exists format it to string, otherwise set to None
         if furthest_query_date:
