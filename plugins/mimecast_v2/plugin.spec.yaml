@@ -15,7 +15,7 @@ links:
  - "[Mimecast](http://mimecast.com)"
 references:
  - "[Mimecast API](https://www.mimecast.com/developer/documentation)"
-version: 1.1.0
+version: 1.1.1
 connection_version: 1
 supported_versions: ["Mimecast 2.0 API 2025-01-23"]
 vendor: rapid7
@@ -23,7 +23,7 @@ support: rapid7
 cloud_ready: true
 sdk:
   type: slim
-  version: 6.3.10
+  version: 6.4.3
   user: nobody
 status: []
 resources:
@@ -38,6 +38,7 @@ hub_tags:
   keywords: [mimecast, email, cloud_enabled]
   features: []
 version_history:
+  - "1.1.1 - Task `Monitor SIEM Logs`: Updated the task logic so that it no longer removes the TTP log set from the state when permissions are not set | Updated SDK to the latest version (6.4.3)"
   - "1.1.0 - Task `Monitor SIEM Logs`: Added new log endpoints for impersonation, attachment, and URL protection logs | Updated SDK to the latest version (6.3.10)"
   - "1.0.6 - `Monitor SIEM Logs` Updated SDK to the latest version (6.3.6) | Added support for high volume lookback (up to 7 days)"
   - "1.0.5 - `Monitor SIEM Logs` Modified status code returned by task when receiving 'Unauthorized Request' and 'token_verification_failed' fail codes | Updated SDK to the latest version (6.3.3)"
