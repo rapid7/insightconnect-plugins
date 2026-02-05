@@ -15,6 +15,7 @@ import copy
 
 # Date format for conversion
 DATE_FORMAT = "%Y-%m-%d"
+RFC_1123_FORMAT = "%a, %d %b %Y %H:%M:%S %Z"
 
 # SIEM log types
 RECEIPT = "receipt"
@@ -168,8 +169,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
 
         return SUBSEQUENT_RUN
 
-    @staticmethod
-    def get_furthest_lookback_date(query_config: Dict) -> datetime:
+    def get_furthest_lookback_date(self, query_config: Dict) -> datetime:
         """
         Get the furthest lookback date from the query configuration
 
@@ -180,22 +180,23 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         :rtype: datetime
         """
 
+        # Initialize `furthest_date` as None
         furthest_date = None
-        for log_type, config in query_config.items():
-            if config.get(QUERY_DATE):
-                # Convert query date string to date object depending on log type
-                if log_type in TTP_LOG_TYPES:
-                    try:
-                        log_date = datetime.fromisoformat(config[QUERY_DATE]).date()
-                    except (ValueError, TypeError):
-                        # Fallback for RFC 1123 format
-                        log_date = datetime.strptime(config[QUERY_DATE], "%a, %d %b %Y %H:%M:%S %Z").date()
-                else:
-                    log_date = datetime.strptime(config[QUERY_DATE], DATE_FORMAT).date()
-                if furthest_date and log_date < furthest_date:
-                    furthest_date = log_date
-                elif not furthest_date:
-                    furthest_date = log_date
+
+        # For each log type in query config, convert query date to date object and compare to find the furthest date
+        for config in query_config.values():
+            # If `query_date` string does not exist in config, skip it
+            if not (query_date_str := config.get(QUERY_DATE)):
+                continue
+
+            # If `query_date_str` cannot be converted to date object, skip it
+            if (log_date := self.convert_to_date_object(query_date_str)) is None:
+                continue
+
+            # If `furthest_date` is None or `log_date` is before `furthest_date`, update `furthest_date` to `log_date`
+            if furthest_date is None or log_date < furthest_date:
+                furthest_date = log_date
+
         return furthest_date
 
     def update_state(self, state: Dict[str, Any]) -> Dict:
@@ -346,9 +347,8 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             )
         return query_config
 
-    @staticmethod
     def validate_config_lookback(
-        log_type: str, log_type_config: Dict, max_lookback_date: datetime, now_date: date
+        self, log_type: str, log_type_config: Dict, max_lookback_date: datetime, now_date: date
     ) -> Dict:
         """
         Ensures provided query date in scope of request time window
@@ -369,50 +369,45 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         :rtype: Dict
         """
 
-        query_date = log_type_config.get(QUERY_DATE)
-
-        # Convert query date string to date object depending on log type
-        if isinstance(query_date, str):
-            try:
-                # Try standard date format first (YYYY-MM-DD)
-                query_date = datetime.strptime(query_date, DATE_FORMAT).date()
-            except (ValueError, TypeError):
-                try:
-                    # Try ISO format with timezone (for TTP logs)
-                    query_date = datetime.fromisoformat(query_date).date()
-                except (ValueError, TypeError):
-                    # Try RFC 1123 date format
-                    query_date = datetime.strptime(query_date, "%a, %d %b %Y %H:%M:%S %Z").date()
-
-        # Ensure query date is a date object
-        if isinstance(query_date, datetime):
-            query_date = query_date.date()
+        # Convert query date to date object for comparison. If fails, return log_type_config as is
+        if (query_date := self.convert_to_date_object(log_type_config.get(QUERY_DATE))) is None:
+            return log_type_config
 
         # Validate query date is within scope of max lookback date and now date
         if query_date < max_lookback_date:
-            if log_type in TTP_LOG_TYPES:
-                return {
-                    QUERY_DATE: datetime.combine(max_lookback_date, datetime.min.time()).replace(tzinfo=timezone.utc)
-                }
-            return {QUERY_DATE: max_lookback_date}
+            return {QUERY_DATE: self._format_date_for_log_type(log_type, max_lookback_date)}
 
         # If query date is after now date, set to now date
         if query_date > now_date:
-            log_type_config[QUERY_DATE] = (
-                now_date
-                if log_type in LOG_TYPES
-                else datetime.combine(now_date, datetime.min.time()).replace(tzinfo=timezone.utc)
-            )
+            log_type_config[QUERY_DATE] = self._format_date_for_log_type(log_type, now_date)
 
-        # Update query date in log type config
+        # Return updated log type config
         return log_type_config
+
+    @staticmethod
+    def _format_date_for_log_type(log_type: str, target_date: date) -> Union[date, datetime]:
+        """
+        Format date appropriately for log type (date for SIEM, datetime for TTP).
+
+        :param log_type: The type of log
+        :type log_type: str
+
+        :param target_date: The date to format
+        :type target_date: date
+
+        :return: Formatted date or datetime
+        """
+
+        if log_type in TTP_LOG_TYPES:
+            return datetime.combine(target_date, datetime.min.time()).replace(tzinfo=timezone.utc)
+        return target_date
 
     def get_all_siem_logs(
         self,
         run_condition: str,
         query_config: Dict,
         page_size: int,
-        thead_count: int,
+        thread_count: int,
         log_limits: Dict = {},
     ) -> List[Any]:
         """
@@ -427,8 +422,8 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         :param page_size: Number of records to retrieve per page
         :type page_size: int
 
-        :param thead_count: Number of threads to use for parallel processing
-        :type thead_count: int
+        :param thread_count: Number of threads to use for parallel processing
+        :type thread_count: int
 
         :param log_limits: Optional limits for log retrieval per log type
         :type log_limits: Dict
@@ -451,7 +446,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                         query_date=log_type_config.get(QUERY_DATE),
                         next_page=log_type_config.get(NEXT_PAGE),
                         page_size=page_size,
-                        max_threads=thead_count,
+                        max_threads=thread_count,
                         starting_url=log_type_config.get(SAVED_FILE_URL),
                         starting_position=log_type_config.get(SAVED_FILE_POSITION, 0),
                         log_size_limit=log_size_limit,
@@ -595,7 +590,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                     new_logs_hashes.append(hash_)
         return logs_to_return, new_logs_hashes
 
-    def prepare_exit_state(  # noqa: MC0001
+    def prepare_exit_state(
         self, state: dict, query_config: dict, now_date: datetime, furthest_query_date: datetime
     ) -> Tuple[Dict, bool]:
         """
@@ -617,61 +612,98 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         :rtype: Tuple[Dict, bool]
         """
 
-        # Determine if pagination is required
-        has_more_pages = False
-        for log_type, log_type_config in query_config.items():
-            # For SIEM logs
-            if log_type in LOG_TYPES:
-                query_date = log_type_config.get(QUERY_DATE)
-                if isinstance(query_date, str):
-                    query_date = datetime.strptime(query_date, DATE_FORMAT).date()
+        # Check if pagination is required for any log type
+        has_more_pages = self._check_pagination_required(query_config, now_date)
 
-                # If log type not caught up or query date is before now date set `has_more_pages` to True
-                if (not log_type_config.get(CAUGHT_UP)) or self._is_query_date_behind(query_date, now_date):
-                    has_more_pages = True
-
-                # Format query date to string for store in state
-                log_type_config[QUERY_DATE] = query_date.strftime(DATE_FORMAT)
-
-            # For TTP logs
-            if log_type in TTP_LOG_TYPES:
-                if NEXT_PAGE in log_type_config:
-                    has_more_pages = True
-
-                # Normalize TTP log date to ISO format for consistent storage
-                query_date = log_type_config.get(QUERY_DATE)
-                if query_date:
-                    if isinstance(query_date, str):
-                        # Parse string to datetime if needed
-                        try:
-                            # Try ISO format first
-                            query_date = datetime.fromisoformat(query_date)
-                        except (ValueError, TypeError):
-                            try:
-                                # Try RFC 1123 format
-                                query_date = datetime.strptime(query_date, "%a, %d %b %Y %H:%M:%S %Z").replace(
-                                    tzinfo=timezone.utc
-                                )
-                            except (ValueError, TypeError):
-                                # If parsing fails, keep original string
-                                self.logger.warning(
-                                    f"TASK: (TTP) Unable to parse query date for {log_type}: {query_date}"
-                                )
-
-                    # Convert datetime to ISO format string
-                    if isinstance(query_date, datetime):
-                        log_type_config[QUERY_DATE] = query_date.replace(microsecond=0).isoformat()
-
-        # If furthest query date exists format it to string, otherwise set to None
-        if furthest_query_date:
-            furthest_query_date_str = furthest_query_date.strftime("%Y-%m-%d")
-        else:
-            furthest_query_date_str = None
+        # Format furthest query date
+        furthest_query_date_str = furthest_query_date.strftime(DATE_FORMAT) if furthest_query_date else None
 
         # Update state fields for next run and return
         state[QUERY_CONFIG] = query_config
         state[FURTHEST_QUERY_DATE] = furthest_query_date_str
         return state, has_more_pages
+
+    def _check_pagination_required(self, query_config: dict, now_date: date) -> bool:
+        """
+        Check if pagination is required for any log type and format dates for storage.
+
+        :param query_config: Dictionary containing query configuration for each log type
+        :type query_config: dict
+
+        :param now_date: The current date for comparison
+        :type now_date: date
+
+        :return: True if more pages exist
+        :rtype: bool
+        """
+
+        # Initialize `has_more_pages` as False
+        has_more_pages = False
+
+        # Iterate through log types and check if pagination is required
+        for log_type, log_type_config in query_config.items():
+            if log_type in LOG_TYPES:
+                has_more_pages = self._process_siem_log_pagination(log_type_config, now_date) or has_more_pages
+            elif log_type in TTP_LOG_TYPES:
+                has_more_pages = self._process_ttp_log_pagination(log_type, log_type_config) or has_more_pages
+        return has_more_pages
+
+    def _process_siem_log_pagination(self, log_type_config: dict, now_date: date) -> bool:
+        """
+        Process SIEM log configuration for pagination and normalize date format.
+
+        :param log_type_config: Configuration for the SIEM log type
+        :type log_type_config: dict
+
+        :param now_date: Current date for comparison
+        :type now_date: date
+
+        :return: True if this log type requires more pages
+        :rtype: bool
+        """
+
+        # Convert query date to date object for comparison. If fails, return False.
+        query_date = self.convert_to_date_object(log_type_config.get(QUERY_DATE))
+        if query_date is None:
+            return False
+
+        # Check if more pages needed
+        needs_more_pages = (not log_type_config.get(CAUGHT_UP)) or self._is_query_date_behind(query_date, now_date)
+
+        # Format query date to string for storage
+        log_type_config[QUERY_DATE] = query_date.strftime(DATE_FORMAT)
+        return needs_more_pages
+
+    def _process_ttp_log_pagination(self, log_type: str, log_type_config: dict) -> bool:
+        """
+        Process TTP log configuration for pagination and normalize date format.
+
+        :param log_type: The TTP log type
+        :type log_type: str
+
+        :param log_type_config: Configuration for the TTP log type
+        :type log_type_config: dict
+
+        :return: True if this log type requires more pages
+        :rtype: bool
+        """
+
+        # If `next_page` token exists in state, we know there are more pages to retrieve for this log type
+        needs_more_pages = NEXT_PAGE in log_type_config
+
+        # Normalize TTP log date to ISO format
+        if query_date_value := log_type_config.get(QUERY_DATE):
+            query_date = self.convert_to_datetime_object(query_date_value)
+            if query_date is None:
+                self.logger.warning(f"TASK: (TTP) Unable to parse query date for `{log_type}`: {query_date_value}")
+            elif isinstance(query_date, datetime):
+                log_type_config[QUERY_DATE] = query_date.replace(microsecond=0).isoformat()
+            elif isinstance(query_date, date):
+                # Convert date to datetime with timezone
+                datetime_obj = datetime.combine(query_date, datetime.min.time()).replace(tzinfo=timezone.utc)
+                log_type_config[QUERY_DATE] = datetime_obj.replace(microsecond=0).isoformat()
+
+        return needs_more_pages
 
     @staticmethod
     def _is_query_date_behind(query_date: Union[datetime, date], now_date: date) -> bool:
@@ -682,11 +714,73 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         :param now_date: The current date for comparison
 
         :return: True if query date is behind current date
+        :rtype: bool
         """
 
         if isinstance(query_date, datetime):
             return query_date.date() < now_date
         return query_date < now_date
+
+    def convert_to_datetime_object(self, date_value: Union[str, datetime, date]) -> Union[datetime, date, None]:
+        """
+        Convert various date formats to datetime or date object.
+
+        This method handles conversions from different date string formats that may be returned
+        by the Mimecast API (ISO format, standard date format, RFC 1123 format).
+
+        :param date_value: Date value to convert (can be string, datetime, or date object)
+        :type date_value: Union[str, datetime, date]
+
+        :return: Converted datetime or date object, or None if conversion fails
+        :rtype: Union[datetime, date, None]
+        """
+
+        # In case `date_value` is None or empty string, return None
+        if not date_value:
+            return None
+
+        # Already a datetime or date object
+        if isinstance(date_value, (datetime, date)):
+            return date_value
+
+        # Define expected formats in order of likelihood
+        expected_formats = [
+            (datetime.fromisoformat, "ISO format"),
+            (lambda datetime_string: datetime.strptime(datetime_string, DATE_FORMAT).date(), "Standard date format"),
+            (
+                lambda datetime_string: datetime.strptime(datetime_string, RFC_1123_FORMAT).replace(
+                    tzinfo=timezone.utc
+                ),
+                "RFC 1123 format",
+            ),
+        ]
+
+        # Try each format until one succeeds
+        for parser, format_name in expected_formats:
+            try:
+                return parser(date_value)
+            except (ValueError, TypeError) as error:
+                self.logger.debug(f"TASK: Couldn't parse date `{date_value}` using `{format_name}`. Error: {error}")
+                continue
+
+        # If all conversions fail, return None
+        return None
+
+    def convert_to_date_object(self, date_value: Union[str, datetime, date]) -> Union[date, None]:
+        """
+        Convert various date formats to date object (not datetime).
+
+        :param date_value: Date value to convert
+        :type date_value: Union[str, datetime, date]
+
+        :return: Converted date object, or None if conversion fails
+        :rtype: Union[date, None]
+        """
+
+        converted = self.convert_to_datetime_object(date_value)
+        if converted is None:
+            return None
+        return converted.date() if isinstance(converted, datetime) else converted
 
     @staticmethod
     def get_log_level(log_level: str = "info") -> int:

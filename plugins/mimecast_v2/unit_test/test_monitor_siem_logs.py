@@ -4,7 +4,7 @@ from typing import Any, Dict, Optional
 
 sys.path.append(os.path.abspath("../"))
 
-from datetime import date
+from datetime import date, datetime, timezone
 from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
@@ -859,7 +859,7 @@ class TestMonitorLogs(TestCase):
         }
 
         # Call the method to get the furthest lookback date
-        result = MonitorSiemLogs.get_furthest_lookback_date(query_config)
+        result = self.task.get_furthest_lookback_date(query_config)
 
         # Should return the earliest date (2000-01-05 from receipt)
         self.assertIsNotNone(result)
@@ -889,7 +889,7 @@ class TestMonitorLogs(TestCase):
         furthest_query_date = date(2000, 1, 6)
 
         # Call prepare_exit_state method
-        exit_state, has_more_pages = self.task.prepare_exit_state(state, query_config, now_date, furthest_query_date)
+        exit_state, _ = self.task.prepare_exit_state(state, query_config, now_date, furthest_query_date)
 
         # Verify TTP dates are normalized to ISO format
         ttp_url_date = exit_state["query_config"]["ttp_url"]["query_date"]
@@ -900,3 +900,89 @@ class TestMonitorLogs(TestCase):
         # SIEM log should remain in standard date format
         receipt_date = exit_state["query_config"]["receipt"]["query_date"]
         self.assertEqual("2000-01-06", receipt_date)
+
+    @parameterized.expand(
+        [
+            # Test ISO format datetime string
+            ["iso_format_datetime", "2000-01-06T12:30:45+00:00", "2000-01-06"],
+            # Test standard date format string
+            ["standard_date_format", "2000-01-06", "2000-01-06"],
+            # Test RFC 1123 format
+            ["rfc_1123_format", "Thu, 06 Jan 2000 00:00:00 GMT", "2000-01-06"],
+            # Other cases
+            ["datetime_object", datetime(2000, 1, 6, 12, 30, 45, tzinfo=timezone.utc), "2000-01-06"],
+            ["none_value", None, None],
+            ["empty_string", "", None],
+            ["invalid_format", "not-a-date", None],
+        ]
+    )
+    def test_convert_to_date_object(self, test_name: str, input_value: Any, expected_output: Optional[str]) -> None:
+        result = self.task.convert_to_date_object(input_value)
+
+        # Verify result
+        if expected_output is None:
+            self.assertIsNone(result)
+        else:
+            self.assertIsNotNone(result)
+            self.assertIsInstance(result, date)
+            self.assertEqual(expected_output, result.strftime("%Y-%m-%d"))
+
+    @parameterized.expand(
+        [
+            # Test ISO format datetime string
+            ["iso_format_datetime", "2000-01-06T12:30:45+00:00", "datetime", "2000-01-06T12:30:45+00:00"],
+            # Test standard date format string
+            ["standard_date_format", "2000-01-06", "date", "2000-01-06"],
+            # Test RFC 1123 format
+            ["rfc_1123_format", "Thu, 06 Jan 2000 14:30:00 GMT", "datetime", "2000-01-06T14:30:00+00:00"],
+            # Other cases
+            [
+                "datetime_object",
+                datetime(2000, 1, 6, 12, 30, 45, tzinfo=timezone.utc),
+                "datetime",
+                "2000-01-06T12:30:45+00:00",
+            ],
+            ["none_value", None, None, None],
+            ["empty_string", "", None, None],
+            ["invalid_format", "not-a-valid-date", None, None],
+        ]
+    )
+    def test_convert_to_datetime_object(
+        self, test_name: str, input_value: Any, expected_type: Optional[str], expected_output: Optional[str]
+    ) -> None:
+        result = self.task.convert_to_datetime_object(input_value)
+
+        # Verify result
+        if expected_type is None:
+            self.assertIsNone(result)
+        elif expected_type == "datetime":
+            self.assertIsInstance(result, datetime)
+            self.assertEqual(expected_output, result.isoformat())
+        elif expected_type == "date":
+            self.assertIsInstance(result, date)
+            self.assertEqual(expected_output, result.strftime("%Y-%m-%d"))
+
+    @parameterized.expand(
+        [
+            # SIEM logs
+            ["receipt", date(2000, 1, 6), "date", "2000-01-06"],
+            ["url protect", date(2000, 1, 6), "date", "2000-01-06"],
+            ["attachment protect", date(2000, 1, 6), "date", "2000-01-06"],
+            # TTP logs
+            ["ttp_url", date(2000, 1, 6), "datetime", "2000-01-06T00:00:00+00:00"],
+            ["ttp_attachment", date(2000, 1, 6), "datetime", "2000-01-06T00:00:00+00:00"],
+            ["ttp_impersonation", date(2000, 1, 6), "datetime", "2000-01-06T00:00:00+00:00"],
+        ]
+    )
+    def test_format_date_for_log_type(
+        self, log_type: str, target_date: date, expected_type: str, expected_output: str
+    ) -> None:
+        result = self.task._format_date_for_log_type(log_type, target_date)
+
+        # Verify result type and value
+        if expected_type == "datetime":
+            self.assertIsInstance(result, datetime)
+            self.assertEqual(expected_output, result.isoformat())
+        elif expected_type == "date":
+            self.assertIsInstance(result, date)
+            self.assertEqual(expected_output, result.strftime("%Y-%m-%d"))
