@@ -1,6 +1,6 @@
 import os
 import sys
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Union
 
 sys.path.append(os.path.abspath("../"))
 
@@ -850,139 +850,56 @@ class TestMonitorLogs(TestCase):
         self.assertEqual(expected_assistance, error.assistance)
         validate(output, MonitorSiemLogsOutput.schema)
 
-    def test_rfc_1123_date_format_parsing(self) -> None:
-        # Test query_config with mixed datetime formats
-        query_config = {
-            "ttp_url": {"query_date": "Thu, 06 Jan 2000 00:00:00 GMT"},
-            "ttp_attachment": {"query_date": "Fri, 07 Jan 2000 00:00:00 GMT"},
-            "receipt": {"query_date": "2000-01-05"},
-        }
 
-        # Call the method to get the furthest lookback date
-        result = self.task.get_furthest_lookback_date(query_config)
-
-        # Should return the earliest date (2000-01-05 from receipt)
-        self.assertIsNotNone(result)
-        self.assertEqual("2000-01-05", result.strftime("%Y-%m-%d"))
-
-    def test_prepare_exit_state_normalizes_ttp_dates_to_iso(self) -> None:
-        # Create state with RFC 1123 format in TTP URL date
-        state = {
-            "query_config": {
-                "ttp_url": {
-                    "caught_up": True,
-                    "query_date": "Thu, 06 Jan 2000 00:00:00 GMT",  # RFC 1123 format
-                },
-                "ttp_attachment": {
-                    "caught_up": True,
-                    "query_date": "2000-01-06T00:00:00+00:00",  # Already ISO format
-                },
-                "receipt": {
-                    "caught_up": True,
-                    "query_date": "2000-01-06",  # Standard date format
-                },
-            }
-        }
-
-        query_config = state["query_config"]
-        now_date = date(2000, 1, 7)
-        furthest_query_date = date(2000, 1, 6)
-
-        # Call prepare_exit_state method
-        exit_state, _ = self.task.prepare_exit_state(state, query_config, now_date, furthest_query_date)
-
-        # Verify TTP dates are normalized to ISO format
-        ttp_url_date = exit_state["query_config"]["ttp_url"]["query_date"]
-        ttp_attachment_date = exit_state["query_config"]["ttp_attachment"]["query_date"]
-        self.assertEqual("2000-01-06T00:00:00+00:00", ttp_url_date)
-        self.assertEqual("2000-01-06T00:00:00+00:00", ttp_attachment_date)
-
-        # SIEM log should remain in standard date format
-        receipt_date = exit_state["query_config"]["receipt"]["query_date"]
-        self.assertEqual("2000-01-06", receipt_date)
+@freeze_time("2000-01-07T00:00:00.000000Z")
+class TestMonitorLogsSerializationDeserialization(TestCase):
+    @classmethod
+    @patch("requests.Session.send", side_effect=Util.mocked_request)
+    def setUpClass(cls, mocked_request) -> None:
+        cls.task = Util.default_connector(MonitorSiemLogs())
 
     @parameterized.expand(
         [
-            # Test ISO format datetime string
-            ["iso_format_datetime", "2000-01-06T12:30:45+00:00", "2000-01-06"],
-            # Test standard date format string
-            ["standard_date_format", "2000-01-06", "2000-01-06"],
-            # Test RFC 1123 format
-            ["rfc_1123_format", "Thu, 06 Jan 2000 00:00:00 GMT", "2000-01-06"],
-            # Other cases
-            ["datetime_object", datetime(2000, 1, 6, 12, 30, 45, tzinfo=timezone.utc), "2000-01-06"],
-            ["none_value", None, None],
-            ["empty_string", "", None],
-            ["invalid_format", "not-a-date", None],
-        ]
-    )
-    def test_convert_to_date_object(self, test_name: str, input_value: Any, expected_output: Optional[str]) -> None:
-        result = self.task.convert_to_date_object(input_value)
-
-        # Verify result
-        if expected_output is None:
-            self.assertIsNone(result)
-        else:
-            self.assertIsNotNone(result)
-            self.assertIsInstance(result, date)
-            self.assertEqual(expected_output, result.strftime("%Y-%m-%d"))
-
-    @parameterized.expand(
-        [
-            # Test ISO format datetime string
-            ["iso_format_datetime", "2000-01-06T12:30:45+00:00", "datetime", "2000-01-06T12:30:45+00:00"],
-            # Test standard date format string
-            ["standard_date_format", "2000-01-06", "date", "2000-01-06"],
-            # Test RFC 1123 format
-            ["rfc_1123_format", "Thu, 06 Jan 2000 14:30:00 GMT", "datetime", "2000-01-06T14:30:00+00:00"],
-            # Other cases
+            ["siem_receipt", "receipt", "2000-01-05", date(2000, 1, 5)],
+            ["siem_url_protect", "url protect", "1999-12-31", date(1999, 12, 31)],
             [
-                "datetime_object",
-                datetime(2000, 1, 6, 12, 30, 45, tzinfo=timezone.utc),
-                "datetime",
-                "2000-01-06T12:30:45+00:00",
+                "ttp_impersonation",
+                "ttp_impersonation",
+                "2000-01-07T12:30:45+00:00",
+                datetime(2000, 1, 7, 12, 30, 45, tzinfo=timezone.utc),
             ],
-            ["none_value", None, None, None],
-            ["empty_string", "", None, None],
-            ["invalid_format", "not-a-valid-date", None, None],
+            ["ttp_url", "ttp_url", "2000-01-01T00:00:00+00:00", datetime(2000, 1, 1, 0, 0, 0, tzinfo=timezone.utc)],
+            ["ttp_attachment", "ttp_attachment", "2000-02-03", datetime(2000, 2, 3, 0, 0, 0, tzinfo=timezone.utc)],
         ]
     )
-    def test_convert_to_datetime_object(
-        self, test_name: str, input_value: Any, expected_type: Optional[str], expected_output: Optional[str]
+    def test_deserialize_query_date(
+        self, test_name: str, log_type: str, query_date_string: str, expected: Union[datetime, date]
     ) -> None:
-        result = self.task.convert_to_datetime_object(input_value)
-
-        # Verify result
-        if expected_type is None:
-            self.assertIsNone(result)
-        elif expected_type == "datetime":
-            self.assertIsInstance(result, datetime)
-            self.assertEqual(expected_output, result.isoformat())
-        elif expected_type == "date":
-            self.assertIsInstance(result, date)
-            self.assertEqual(expected_output, result.strftime("%Y-%m-%d"))
+        result = self.task._deserialize_query_date_from_state(log_type, query_date_string)
+        self.assertEqual(expected, result)
 
     @parameterized.expand(
         [
-            # SIEM logs
-            ["receipt", date(2000, 1, 6), "date", "2000-01-06"],
-            ["url protect", date(2000, 1, 6), "date", "2000-01-06"],
-            ["attachment protect", date(2000, 1, 6), "date", "2000-01-06"],
-            # TTP logs
-            ["ttp_url", date(2000, 1, 6), "datetime", "2000-01-06T00:00:00+00:00"],
-            ["ttp_attachment", date(2000, 1, 6), "datetime", "2000-01-06T00:00:00+00:00"],
-            ["ttp_impersonation", date(2000, 1, 6), "datetime", "2000-01-06T00:00:00+00:00"],
+            ["siem_invalid_format", "receipt", "2000-01-05T12:00:00"],
+            ["siem_invalid_date", "url protect", "invalid-date"],
+            ["ttp_invalid_iso", "ttp_url", "not-a-valid-iso"],
         ]
     )
-    def test_format_date_for_log_type(
-        self, log_type: str, target_date: date, expected_type: str, expected_output: str
-    ) -> None:
-        result = self.task._format_date_for_log_type(log_type, target_date)
+    def test_deserialize_errors(self, test_name: str, log_type: str, query_date_string: str) -> None:
+        with self.assertRaises(ValueError):
+            self.task._deserialize_query_date_from_state(log_type, query_date_string)
 
-        # Verify result type and value
-        if expected_type == "datetime":
-            self.assertIsInstance(result, datetime)
-            self.assertEqual(expected_output, result.isoformat())
-        elif expected_type == "date":
-            self.assertIsInstance(result, date)
-            self.assertEqual(expected_output, result.strftime("%Y-%m-%d"))
+    def test_serialize_siem_logs(self) -> None:
+        config = {"receipt": {"query_date": date(2000, 1, 5)}, "url protect": {"query_date": date(1999, 12, 31)}}
+        result = self.task._serialize_query_dates_for_state(config)
+        self.assertEqual("2000-01-05", result["receipt"]["query_date"])
+        self.assertEqual("1999-12-31", result["url protect"]["query_date"])
+
+    def test_serialize_ttp_logs(self) -> None:
+        config = {
+            "ttp_impersonation": {"query_date": datetime(2000, 1, 7, 12, 30, 45, tzinfo=timezone.utc)},
+            "ttp_url": {"query_date": datetime(2000, 1, 1, 0, 0, 0, tzinfo=timezone.utc)},
+        }
+        result = self.task._serialize_query_dates_for_state(config)
+        self.assertEqual("2000-01-07T12:30:45+00:00", result["ttp_impersonation"]["query_date"])
+        self.assertEqual("2000-01-01T00:00:00+00:00", result["ttp_url"]["query_date"])
