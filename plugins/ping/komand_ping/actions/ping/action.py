@@ -1,13 +1,15 @@
-import komand
-from .schema import PingInput, PingOutput
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 
-# Custom imports below
 import subprocess  # noqa: B404
 import re
-from komand.exceptions import PluginException
+import ipaddress
+import unicodedata
+
+from .schema import PingInput, PingOutput
 
 
-class Ping(komand.Action):
+class Ping(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="ping",
@@ -16,8 +18,9 @@ class Ping(komand.Action):
             output=PingOutput(),
         )
 
+    # pylint: disable=too-many-branches,too-many-statements
     def run(self, params={}):  # noqa: MC0001
-        host = params.get("host")
+        host = self._validate_host(params.get("host"))
         count = params.get("count")
         resolve_hostname = params.get("resolve_hostname")
 
@@ -25,20 +28,29 @@ class Ping(komand.Action):
             count = 4
         count = str(count)
 
-        if resolve_hostname:
-            response = subprocess.Popen(
-                ["ping -c " + count + " " + host], stdout=subprocess.PIPE, shell=True  # noqa: B602
-            )
-            (output, err) = response.communicate()
-        else:
-            response = subprocess.Popen(
-                ["ping -n -c " + count + " " + host], stdout=subprocess.PIPE, shell=True  # noqa: B602
-            )
-            (output, err) = response.communicate()
+        # build command with appropriate options
+        cmd = ["ping", "-c", count]
+        if not resolve_hostname:
+            cmd.append("-n")
+        cmd.append(host)
 
-        output = output.decode("utf-8")
+        try:
+            result = subprocess.run(  # nosec B603 - cmd is an argv list (shell=False) and `host` is validated in _validate_host()
+                cmd,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+                timeout=60,
+                check=False,
+            )
+            output, err = result.stdout, result.stderr
+        except subprocess.TimeoutExpired:
+            raise PluginException(cause="Ping timed out.", assistance="Check network connectivity.")
+        except Exception as error:
+            self.logger.error(f"Ping execution failed: {error}")
+            raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
-        if response.returncode == 0:
+        if result.returncode == 0:
             try:
                 temp = re.search(r"\d* packets t", output)
                 sub = temp.group()
@@ -49,13 +61,13 @@ class Ping(komand.Action):
                 self.logger.error("Standard Output: %s", output)
                 raise PluginException(cause="An AttributeError occurred.", assistance="Please see log for details.")
             except ValueError:
-                self.logger.error("The transmitted packets value is not valid. The value was %s" % transmitted)
-                self.logger.error("Standard Output: %s" % output)
+                self.logger.error(f"The transmitted packets value is not valid. The value was {transmitted}")
+                self.logger.error(f"Standard Output: {output}")
                 raise PluginException(cause="A ValueError occurred.", assistance="Please see log for details.")
             except:
-                self.logger.error("Standard Output: %s", output)
-                self.logger.error("Return form regex %s" % temp)
-                self.logger.error("Substring built by regex %s" % sub)
+                self.logger.error(f"Standard Output: {output}")
+                self.logger.error(f"Return form regex {temp}")
+                self.logger.error(f"Substring built by regex {sub}")
                 raise PluginException(preset=PluginException.Preset.UNKNOWN, assistance="Please see log for details.")
 
             try:
@@ -82,6 +94,7 @@ class Ping(komand.Action):
                 self.logger.error("Substring built by regex %s", sub)
                 raise PluginException(preset=PluginException.Preset.UNKNOWN, assistance="Please see log for details.")
 
+            packet_loss = None
             try:
                 temp = re.search(r"received.* packet loss", output)
                 sub = temp.group()
@@ -121,7 +134,7 @@ class Ping(komand.Action):
                     maximum_latency = values[2] + "ms"
                     standard_deviation = values[3] + "ms"
                 except IndexError:
-                    self.logger.error("Failed to find min avg max and mdev %s" % sub)
+                    self.logger.error(f"Failed to find min avg max and mdev {sub}")
 
             except AttributeError:
                 self.logger.error("The regular expression search for average latency failed")
@@ -144,21 +157,71 @@ class Ping(komand.Action):
                 "maximum_latency": maximum_latency,
                 "standard_deviation": standard_deviation,
             }
-        elif response.returncode < 3:
-
+        elif result.returncode < 3:
             return {"reply": False, "response": output}
         else:
             self.logger.error("Standard Output: %s", output)
             self.logger.error("Standard Error: %s", err)
             raise PluginException(preset=PluginException.Preset.UNKNOWN, assistance="Please see log for details.")
 
-    def test(self):
-        response = subprocess.Popen(["ping -c 4 127.0.0.1"], stdout=subprocess.PIPE, shell=True)  # noqa: B607,B602
-        (output, err) = response.communicate()
+    @staticmethod
+    def _validate_host(host: str) -> str:  # noqa: MC0001
+        """
+        Validate user-supplied host. Allow FQDN hostnames and IP addresses, but disallow:
+        - empty values
+        - any whitespace/control characters
+        - values starting with '-' (could be interpreted as ping options)
 
-        output = output.decode("utf-8")
+        Returns the stripped host.
+        """
+        if host is None:
+            raise PluginException(cause="Host is required.", assistance="Provide a hostname or IP address.")
 
-        if response.returncode == 0:
-            return {"reply": True, "response": output}
+        host = str(host).strip()
+        if not host:
+            raise PluginException(cause="Host is required.", assistance="Provide a hostname or IP address.")
 
-        return {"reply": False, "response": output}
+        if host.startswith("-"):
+            raise PluginException(
+                cause="Invalid host value.",
+                assistance="Host must not start with '-' (it can be interpreted as a command-line option).",
+            )
+
+        # Disallow any whitespace/control characters
+        for ch in host:
+            if ch.isspace() or unicodedata.category(ch)[0] == "C":
+                raise PluginException(
+                    cause="Invalid host value.",
+                    assistance="Host must not contain whitespace or control characters.",
+                )
+
+        # If it's an IP address, ensure that it is valid
+        try:
+            ipaddress.ip_address(host)
+            return host
+        except ValueError:
+            pass
+
+        # Validate hostname: must be 1-253 chars, consist of letters, digits, hyphens, and dots
+        if not re.fullmatch(r"[A-Za-z0-9._-]{1,253}", host):
+            raise PluginException(
+                cause="Invalid host value.",
+                assistance="Host must be a valid hostname or IP address.",
+            )
+
+        # Validate each label: must not start/end with hyphen, and must be 1-63 chars.
+        for label in host.split("."):
+            if not label:
+                continue  # Allow trailing dot (FQDN)
+            if len(label) > 63:
+                raise PluginException(
+                    cause="Invalid host value.",
+                    assistance="Hostname labels must be 63 characters or less.",
+                )
+            if label.startswith("-") or label.endswith("-"):
+                raise PluginException(
+                    cause="Invalid host value.",
+                    assistance="Hostname labels must not start or end with a hyphen.",
+                )
+
+        return host
