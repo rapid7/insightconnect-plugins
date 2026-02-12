@@ -1,22 +1,39 @@
-FROM komand/python-3-37-plugin:3
-LABEL organization=komand
-LABEL sdk=python
-LABEL type=plugin
-
-RUN apt-get update && apt install -y iputils-ping
-
-ENV SSL_CERT_FILE /etc/ssl/certs/ca-certificates.crt
-ENV SSL_CERT_DIR /etc/ssl/certs
-ENV REQUESTS_CA_BUNDLE  /etc/ssl/certs/ca-certificates.crt
-
-ADD ./plugin.spec.yaml /plugin.spec.yaml
-ADD . /python/src
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.4.3 AS builder
 
 WORKDIR /python/src
+
+ADD ./plugin.spec.yaml /plugin.spec.yaml
+ADD ./requirements.txt /python/src/requirements.txt
+ADD . /python/src
+
+
+
+RUN pip install .
+RUN pip uninstall -y setuptools
+
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.4.3
+
+LABEL organization=rapid7
+LABEL sdk=python
+
+WORKDIR /python/src
+
+COPY --from=builder /python/src /python/src
+COPY --from=builder /plugin.spec.yaml /plugin.spec.yaml
+
 # Add any package dependencies here
+ENV DEBIAN_FRONTEND noninteractive
+# Ping dependency
+RUN apt-get update && apt-get install -y iputils-ping
 
-# End package dependencies
+
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-RUN python setup.py build && python setup.py install
 
-ENTRYPOINT ["/usr/local/bin/komand_ping"]
+ENV PYTHONPATH="/python/src:${PYTHONPATH}"
+
+RUN rm -rf /root/.cache;
+
+# User to run plugin code. The two supported users are: root, nobody
+USER nobody
+
+ENTRYPOINT ["python", "/python/src/bin/komand_ping"]
