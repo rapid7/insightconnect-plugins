@@ -1,11 +1,12 @@
 import os
 import sys
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Union
 
 sys.path.append(os.path.abspath("../"))
 
+from datetime import date, datetime, timezone
 from unittest import TestCase
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
 
 from freezegun import freeze_time
 from icon_mimecast_v2.tasks.monitor_siem_logs import MonitorSiemLogs
@@ -848,3 +849,57 @@ class TestMonitorLogs(TestCase):
         self.assertEqual(expected_cause, error.cause)
         self.assertEqual(expected_assistance, error.assistance)
         validate(output, MonitorSiemLogsOutput.schema)
+
+
+@freeze_time("2000-01-07T00:00:00.000000Z")
+class TestMonitorLogsSerializationDeserialization(TestCase):
+    @classmethod
+    @patch("requests.Session.send", side_effect=Util.mocked_request)
+    def setUpClass(cls, mocked_request) -> None:
+        cls.task = Util.default_connector(MonitorSiemLogs())
+
+    @parameterized.expand(
+        [
+            ["siem_receipt", "receipt", "2000-01-05", date(2000, 1, 5)],
+            ["siem_url_protect", "url protect", "1999-12-31", date(1999, 12, 31)],
+            [
+                "ttp_impersonation",
+                "ttp_impersonation",
+                "2000-01-07T12:30:45+00:00",
+                datetime(2000, 1, 7, 12, 30, 45, tzinfo=timezone.utc),
+            ],
+            ["ttp_url", "ttp_url", "2000-01-01T00:00:00+00:00", datetime(2000, 1, 1, 0, 0, 0, tzinfo=timezone.utc)],
+            ["ttp_attachment", "ttp_attachment", "2000-02-03", datetime(2000, 2, 3, 0, 0, 0, tzinfo=timezone.utc)],
+        ]
+    )
+    def test_deserialize_query_date(
+        self, test_name: str, log_type: str, query_date_string: str, expected: Union[datetime, date]
+    ) -> None:
+        result = self.task._deserialize_query_date_from_state(log_type, query_date_string)
+        self.assertEqual(expected, result)
+
+    @parameterized.expand(
+        [
+            ["siem_invalid_format", "receipt", "2000-01-05T12:00:00"],
+            ["siem_invalid_date", "url protect", "invalid-date"],
+            ["ttp_invalid_iso", "ttp_url", "not-a-valid-iso"],
+        ]
+    )
+    def test_deserialize_errors(self, test_name: str, log_type: str, query_date_string: str) -> None:
+        with self.assertRaises(ValueError):
+            self.task._deserialize_query_date_from_state(log_type, query_date_string)
+
+    def test_serialize_siem_logs(self) -> None:
+        config = {"receipt": {"query_date": date(2000, 1, 5)}, "url protect": {"query_date": date(1999, 12, 31)}}
+        result = self.task._serialize_query_dates_for_state(config)
+        self.assertEqual("2000-01-05", result["receipt"]["query_date"])
+        self.assertEqual("1999-12-31", result["url protect"]["query_date"])
+
+    def test_serialize_ttp_logs(self) -> None:
+        config = {
+            "ttp_impersonation": {"query_date": datetime(2000, 1, 7, 12, 30, 45, tzinfo=timezone.utc)},
+            "ttp_url": {"query_date": datetime(2000, 1, 1, 0, 0, 0, tzinfo=timezone.utc)},
+        }
+        result = self.task._serialize_query_dates_for_state(config)
+        self.assertEqual("2000-01-07T12:30:45+00:00", result["ttp_impersonation"]["query_date"])
+        self.assertEqual("2000-01-01T00:00:00+00:00", result["ttp_url"]["query_date"])
