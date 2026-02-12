@@ -8,7 +8,7 @@ from icon_markdown.actions.markdown_to_pdf import MarkdownToPdf
 from icon_markdown.actions.markdown_to_pdf.schema import Input, Output
 from insightconnect_plugin_runtime.exceptions import PluginException
 from unittest import mock
-from mock import mock_request_markdown_to_pdf, mocked_request
+from mock_helpers import mock_request_markdown_to_pdf, mocked_request
 
 
 class TestMarkdownToPdf(TestCase):
@@ -25,11 +25,17 @@ class TestMarkdownToPdf(TestCase):
 
     @parameterized.expand(
         [
-            ({Input.MARKDOWN: "IyBSYXBpZDcK", Input.MARKDOWN_STRING: ""}, expected_result),
+            (
+                {Input.MARKDOWN: "IyBSYXBpZDcK", Input.MARKDOWN_STRING: ""},
+                expected_result,
+            ),
             ({Input.MARKDOWN: "", Input.MARKDOWN_STRING: "# Rapid7"}, expected_result),
         ]
     )
-    @mock.patch("icon_markdown.actions.markdown_to_pdf.action.make_pdf_bytes", side_effect=mock_request_markdown_to_pdf)
+    @mock.patch(
+        "icon_markdown.actions.markdown_to_pdf.action.make_pdf_bytes",
+        side_effect=mock_request_markdown_to_pdf,
+    )
     def test_markdown_to_pdf_valid(self, markdown_input, expected, mocked_values):
         mocked_request(mocked_values)
         response = self.action.run(markdown_input)
@@ -38,7 +44,10 @@ class TestMarkdownToPdf(TestCase):
     @parameterized.expand(
         [
             (
-                {Input.MARKDOWN: "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=", Input.MARKDOWN_STRING: "# Rapid7 InsightConnect"},
+                {
+                    Input.MARKDOWN: "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=",
+                    Input.MARKDOWN_STRING: "# Rapid7 InsightConnect",
+                },
                 expected_error,
             ),
             ({Input.MARKDOWN: "", Input.MARKDOWN_STRING: ""}, expected_error),

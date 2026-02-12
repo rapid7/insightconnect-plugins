@@ -34,7 +34,10 @@ class TestMarkdownToHtml(TestCase):
     @parameterized.expand(
         [
             (
-                {Input.MARKDOWN: "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=", Input.MARKDOWN_STRING: "# Rapid7 InsightConnect"},
+                {
+                    Input.MARKDOWN: "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=",
+                    Input.MARKDOWN_STRING: "# Rapid7 InsightConnect",
+                },
                 expected_error,
             ),
             ({Input.MARKDOWN: "", Input.MARKDOWN_STRING: ""}, expected_error),

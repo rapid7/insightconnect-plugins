@@ -11,7 +11,10 @@ from jsonschema import validate
 
 
 class TestMarkdownToTxt(TestCase):
-    expected_result = {Output.TXT_STRING: "Rapid7 InsightConnect\n", Output.TXT: "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}
+    expected_result = {
+        Output.TXT_STRING: "Rapid7 InsightConnect\n",
+        Output.TXT: "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==",
+    }
     expected_error = "Input Error"
 
     def setUp(self) -> None:
@@ -20,7 +23,10 @@ class TestMarkdownToTxt(TestCase):
     @parameterized.expand(
         [
             ({Input.MARKDOWN: "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q="}, expected_result),
-            ({Input.MARKDOWN_STRING: "# Rapid7 InsightConnect", "markdown": ""}, expected_result),
+            (
+                {Input.MARKDOWN_STRING: "# Rapid7 InsightConnect", "markdown": ""},
+                expected_result,
+            ),
         ]
     )
     def test_markdown_to_txt_valid(self, input_params, expected):
@@ -31,7 +37,10 @@ class TestMarkdownToTxt(TestCase):
     @parameterized.expand(
         [
             (
-                {Input.MARKDOWN: "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=", Input.MARKDOWN_STRING: "# Rapid7 InsightConnect"},
+                {
+                    Input.MARKDOWN: "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=",
+                    Input.MARKDOWN_STRING: "# Rapid7 InsightConnect",
+                },
                 expected_error,
             ),
             ({Input.MARKDOWN: "", Input.MARKDOWN_STRING: ""}, expected_error),
