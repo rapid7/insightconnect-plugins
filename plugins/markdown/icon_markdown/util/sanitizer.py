@@ -54,12 +54,8 @@ def sanitize_html(html_content: str) -> str:
             logger.warning("Sanitizing HTML: encoded <%s> tag", tag.name)
             tag.replace_with(_encode_tag(tag))
         elif any(attr.lower() in DENIED_ATTRIBUTES for attr in tag.attrs):
-            event_handlers = [
-                attr for attr in tag.attrs if attr.lower() in DENIED_ATTRIBUTES
-            ]
-            logger.warning(
-                "Sanitizing HTML: encoded <%s> tag with attributes %s", tag.name, event_handlers
-            )
+            event_handlers = [attr for attr in tag.attrs if attr.lower() in DENIED_ATTRIBUTES]
+            logger.warning("Sanitizing HTML: encoded <%s> tag with attributes %s", tag.name, event_handlers)
             tag.replace_with(_encode_tag(tag))
 
     return soup.decode(formatter=None)

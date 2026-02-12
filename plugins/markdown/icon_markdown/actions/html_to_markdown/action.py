@@ -16,9 +16,7 @@ class HtmlToMarkdown(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         inbytes = params.get(Input.HTML)
         instr = params.get(Input.HTML_STRING)
-        if not (
-            ((instr is None) ^ (inbytes is None)) or ((instr == "") ^ (inbytes == ""))
-        ):
+        if not (((instr is None) ^ (inbytes is None)) or ((instr == "") ^ (inbytes == ""))):
             raise PluginException(
                 cause="Input error",
                 assistance=(

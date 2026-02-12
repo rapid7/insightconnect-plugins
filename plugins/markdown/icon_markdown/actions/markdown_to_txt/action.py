@@ -22,9 +22,7 @@ class MarkdownToTxt(insightconnect_plugin_runtime.Action):
         inbytes = params.get(Input.MARKDOWN)
         instr = params.get(Input.MARKDOWN_STRING)
 
-        if not (
-            ((instr is None) ^ (inbytes is None)) or ((instr == "") ^ (inbytes == ""))
-        ):
+        if not (((instr is None) ^ (inbytes is None)) or ((instr == "") ^ (inbytes == ""))):
             raise PluginException(
                 cause="Input Error",
                 assistance=(
@@ -43,9 +41,7 @@ class MarkdownToTxt(insightconnect_plugin_runtime.Action):
         else:
             markdown = instr
 
-        soup = BeautifulSoup(
-            utils.convert(markdown, "md", "html"), features="html.parser"
-        )
+        soup = BeautifulSoup(utils.convert(markdown, "md", "html"), features="html.parser")
         for script in soup(["script", "style"]):
             script.extract()
         txt_string = soup.get_text()
