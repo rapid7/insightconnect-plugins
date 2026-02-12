@@ -3,14 +3,36 @@ extension: plugin
 products: [insightconnect]
 name: traceroute
 title: Traceroute
-description: Trace a network route to a host
-version: 1.0.2
+description: This plugin uses [tcptraceroute](https://linux.die.net/man/1/tcptraceroute), an 
+  implementation of Traceroute that uses TCP rather than ICMP. Tcptraceroute can bypass some firewalls that 
+  block ICMP and UDP
+version: 1.0.3
+connection_version: 1
+supported_versions: ["tcptraceroute 1.5beta7"]
 vendor: rapid7
 support: community
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/traceroute
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+links:
+  - '[Man Page for tcptraceroute](https://linux.die.net/man/1/tcptraceroute)'
+references:
+  - '[Git Repository](https://github.com/mct/tcptraceroute)'
+sdk:
+  type: slim
+  version: 6.4.3
+  user: nobody
+  custom_cmd:
+    - ENV DEBIAN_FRONTEND noninteractive
+    - RUN apt-get update -y && apt-get install -y tcptraceroute
+key_features:
+  - Trace a route to a host
+version_history:
+  - 1.0.3 - Updated SDK version to 6.4.3
+  - 1.0.2 - New spec and help.md format for the Extension Library
+  - 1.0.1 - Support web server mode
+  - 1.0.0 - Initial plugin
 tags:
 - traceroute
 - network_diagnostics
@@ -28,12 +50,14 @@ actions:
         description: The domain name or IP of the the host to find a route to
         type: string
         required: true
+        example: "example.com"
       count:
         title: Count
         description: The number of probes to be sent to each hop. The default is 3
         type: integer
         required: true
         default: 3
+        example: 3
       max_ttl:
         title: Max TTL
         description: Set the maximum TTL used in outgoing packets. The default is
@@ -41,6 +65,7 @@ actions:
         type: integer
         required: true
         default: 30
+        example: 30
       time_out:
         title: Time Out
         description: Set the timeout, in seconds, to wait for a response for each
@@ -48,13 +73,14 @@ actions:
         type: integer
         required: true
         default: 3
+        example: 3
       port:
         title: Port
-        description: Set the port that traceroute will try to reach e.g. set it to
-          port 443 for a host running an HTTPS server. The default is 80
+        description: Set the port that traceroute will try to reach. The default is 80
         type: integer
         required: true
         default: 80
+        example: 80
       set_ack:
         title: Set Ack
         description: If true set the TCP ACK flag in outgoing packets. By doing so,
@@ -63,6 +89,7 @@ actions:
         type: boolean
         required: true
         default: false
+        example: true
       resolve_hostname:
         title: Resolve Hostname
         description: If true traceroute will attempt to return a DNS name rather than
@@ -70,24 +97,29 @@ actions:
         type: boolean
         required: true
         default: true
+        example: true
     output:
       reply:
         title: Reply
         description: Whether a route was found to the host
         type: boolean
         required: true
+        example: true
       response:
         title: Response
         description: The full raw response from traceroute
         type: string
         required: true
+        example: "1  1.1.1.1  2.218 ms  0.128 ms  0.068 ms\n 2  example.example.net (0.0.0.0) [open]  189.590 ms  196.722 ms  194.262 ms\n"
       path:
         title: Path
         description: The path used to get to the host including response times
         type: '[]string'
         required: true
+        example: ["1  1.1.1.1  2.218 ms  0.128 ms  0.068 ms", "2  example.example.net (0.0.0.0) [open]  189.590 ms  196.722 ms  194.262 ms"]
       ip:
         title: IP
         description: IP addresses
         type: '[]string'
         required: true
+        example: ["1.1.1.1", "0.0.0.0"]
