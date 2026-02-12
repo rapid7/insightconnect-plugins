@@ -1,27 +1,27 @@
 {
-	"spec": "a2517380bd9b97e9af2577ec5428c411",
-	"manifest": "3e46fd3c2cd4be6ec35bfd72dbfbe2c9",
-	"setup": "8b6fc4abb4f9c23ba3a5748a767e07c2",
+	"spec": "0373991377b6694b0133fa5fc53184ea",
+	"manifest": "29bcb1256673e61b534bdfd64639ee26",
+	"setup": "2e02a5e8279f6c5ba755fb39d628caf4",
 	"schemas": [
 		{
 			"identifier": "html_to_markdown/schema.py",
-			"hash": "d4d62f38f4e3394f9c70fb0168f29697"
+			"hash": "371b099589d78cd0724ebf61b41098c6"
 		},
 		{
 			"identifier": "markdown_to_html/schema.py",
-			"hash": "949efcbf8200f022f5464a11ed81d956"
+			"hash": "93aaa5eec5c80ab07e442fc518ab22a4"
 		},
 		{
 			"identifier": "markdown_to_pdf/schema.py",
-			"hash": "6aca357fcfb577fae9a8fa2978e6f51e"
+			"hash": "bae56bf78d61b2ce6ef2d7a7222945c6"
 		},
 		{
 			"identifier": "markdown_to_txt/schema.py",
-			"hash": "f3596e528a8ffaa90e25569f6162645c"
+			"hash": "bcf15af4ead4aec717c63f8105fce195"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "bd524b567f9638ba1c6f7e0c9e45ff2e"
+			"hash": "2a983a9b7aa5dd290ed28e0eb7e0c9c6"
 		}
 	]
 }
