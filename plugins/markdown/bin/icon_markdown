@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Markdown"
 Vendor = "rapid7"
-Version = "3.1.4"
+Version = "4.0.0"
 Description = "[Markdown](https://en.wikipedia.org/wiki/Markdown) is a lightweight markup language with plain text formatting syntax. This plugin utilizes [pandoc](https://pandoc.org/) via [pypandoc](https://pypi.python.org/pypi/pypandoc/) to manipulate Markdown content"
 
 
