@@ -1,11 +1,13 @@
-import komand
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import ProcessStringInput, ProcessStringOutput, Input, Output
 
 # Custom imports below
 from komand_awk.util import utils
+from komand_awk.util.constants import DEFAULT_ENCODING
 
 
-class ProcessString(komand.Action):
+class ProcessString(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="process_string",
@@ -15,12 +17,16 @@ class ProcessString(komand.Action):
         )
 
     def run(self, params={}):
-        expression = utils.preprocess_expression(params.get(Input.EXPRESSION))
-        out = utils.process_lines(self.logger, params.get(Input.TEXT), expression)
-        return {Output.OUT: out.decode("utf-8")}
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        expression = params.get(Input.EXPRESSION, "")
+        text = params.get(Input.TEXT, "")
+        # END INPUT BINDING - DO NOT REMOVE
 
-    def test(self):
-        text = "hello world"
-        expression = utils.preprocess_expression("'{print $2}'")
-        processed_lines = utils.process_lines(self.logger, text, expression).decode("utf-8")
-        return {Output.OUT: processed_lines == "world\n"}
+        # Preprocess and validate expression
+        expression = utils.preprocess_expression(expression)
+
+        # Process with AWK (validation happens inside process_lines)
+        out = utils.process_lines(self.logger, text, expression)
+
+        # Decode output
+        return {Output.OUT: out.decode(DEFAULT_ENCODING, errors="ignore")}
