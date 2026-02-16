@@ -37,9 +37,9 @@ def validate_options(options: str) -> list:  # noqa: MC0001
     # Validate each option against whitelist
     validated_options = []
     for option in parsed_options:
-        # Extract the option flag (e.g., '-v' from '-v' or '-c' from '-c 100')
         if option.startswith("-"):
-            option_flag = option.split("=")[0]  # Handle -option=value format
+            # Extract the option flag (e.g., '-v' from '-v' or '-c' from '-c=value')
+            option_flag = option.split("=")[0]
 
             # Check if it's a valid option
             if option_flag not in ALLOWED_TCPDUMP_OPTIONS:
@@ -47,16 +47,15 @@ def validate_options(options: str) -> list:  # noqa: MC0001
                     cause="Invalid tcpdump option. ", assistance=f"Option '{option_flag}' is not in the allowed list"
                 )
 
-            # Additional validation for specific options that take arguments
+            # Additional validation for options with = separator
             if "=" in option:
-                # For options with = separator, validate the value doesn't contain injection attempts
                 if re.search(DANGEROUS_CHARS_PATTERN, option.split("=", 1)[1]):
                     raise PluginException(
                         cause="Invalid option value. ",
-                        assistance=f"Option value contains dangerous characters: {options}",
+                        assistance=f"Option value contains dangerous characters: {option}",
                     )
         else:
-            # This is an argument to the previous option (e.g., count in '-c 100')
+            # This is an argument to the previous option (e.g., '10' in '-c 10')
             # Validate it doesn't contain dangerous characters
             if re.search(DANGEROUS_CHARS_PATTERN, option):
                 raise PluginException(

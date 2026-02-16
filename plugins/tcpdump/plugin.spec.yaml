@@ -4,7 +4,7 @@ products: [insightconnect]
 name: tcpdump
 title: Tcpdump
 description: The Tcpdump plugin is used to read contents of a PCAP
-version: 1.1.1
+version: 2.0.0
 connection_version: 1
 vendor: rapid7
 support: community
@@ -27,6 +27,7 @@ sdk:
 key_features:
   - Parse and return the contents of a PCAP file
 version_history:
+  - "2.0.0 - BREAKING CHANGE: Options must now be space-separated (e.g., use `-n -r -c 10` instead of `-nrc10`) | Security: Removed write/capture-related flags from whitelist (-w, -i, -C, -G, -W, -I, -D, -K, -p, -U, -Z) as plugin only supports reading PCAP files"
   - "1.1.1 - Refreshed the plugin | Updated SDK to the latest version (6.4.3)"
   - "1.1.0 - Updated spec and help.md format for the Extension Library, spec description changes"
   - "1.0.2 - New spec and help.md format for the Extension Library"
@@ -58,10 +59,10 @@ actions:
         example: "UENBUCoAAE0AAAAABAAAAA=="
       options:
         title: Options
-        description: Tcpdump Flags and Options
+        description: Tcpdump Flags and Options (must be space-separated)
         type: string
         required: false
-        example: "-n -c 10 -s 96"
+        example: "-n -r -c 10 -s 96"
       filter:
         title: BPF
         description: Berkeley Packet Filter

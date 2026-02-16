@@ -34,7 +34,7 @@ This action is used to read contents from a PCAP file
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |filter|string|None|False|Berkeley Packet Filter|None|TCP and port 22|None|None|
-|options|string|None|False|Tcpdump Flags and Options|None|-n -c 10 -s 96|None|None|
+|options|string|None|False|Tcpdump Flags and Options (must be space-separated)|None|-n -r -c 10 -s 96|None|None|
 |pcap|bytes|None|True|Base64 encoded PCAP file|None|UENBUCoAAE0AAAAABAAAAA==|None|None|
   
 Example input:
@@ -42,7 +42,7 @@ Example input:
 ```
 {
   "filter": "TCP and port 22",
-  "options": "-n -c 10 -s 96",
+  "options": "-n -r -c 10 -s 96",
   "pcap": "UENBUCoAAE0AAAAABAAAAA=="
 }
 ```
@@ -84,6 +84,7 @@ Example output:
 
 # Version History
 
+* 2.0.0 - BREAKING CHANGE: Options must now be space-separated (e.g., use `-n -r -c 10` instead of `-nrc10`) | Security: Removed write/capture-related flags from whitelist (-w, -i, -C, -G, -W, -I, -D, -K, -p, -U, -Z) as plugin only supports reading PCAP files
 * 1.1.1 - Refreshed the plugin | Updated SDK to the latest version (6.4.3)
 * 1.1.0 - Updated spec and help.md format for the Extension Library, spec description changes
 * 1.0.2 - New spec and help.md format for the Extension Library

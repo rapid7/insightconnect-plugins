@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Tcpdump"
 Vendor = "rapid7"
-Version = "1.1.1"
+Version = "2.0.0"
 Description = "The Tcpdump plugin is used to read contents of a PCAP"
 
 

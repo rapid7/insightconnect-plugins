@@ -35,7 +35,7 @@ class ReadInput(insightconnect_plugin_runtime.Input):
     "options": {
       "type": "string",
       "title": "Options",
-      "description": "Tcpdump Flags and Options",
+      "description": "Tcpdump Flags and Options (must be space-separated)",
       "order": 2
     },
     "pcap": {

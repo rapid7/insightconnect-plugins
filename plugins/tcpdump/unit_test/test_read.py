@@ -127,6 +127,9 @@ class TestRead(TestCase):
             ("options_too_long", {Input.OPTIONS: "a" * 501}, "Options string too long. "),
             ("filter_too_long", {Input.FILTER: "tcp and " * 200}, "Filter expression too long. "),
             ("dangerous_filter", {Input.FILTER: "tcp && echo malicious"}, "Invalid filter expression. "),
+            ("write_flag_not_allowed", {Input.OPTIONS: "-w output.pcap"}, "Invalid tcpdump option. "),
+            ("interface_flag_not_allowed", {Input.OPTIONS: "-i eth0"}, "Invalid tcpdump option. "),
+            ("bundled_flags_not_supported", {Input.OPTIONS: "-nrc10"}, "Invalid tcpdump option. "),
         ]
     )
     def test_read_validation_errors(self, name: str, extra_params: Dict[str, str], expected_cause: str) -> None:
