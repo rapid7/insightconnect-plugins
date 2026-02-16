@@ -2,10 +2,10 @@ import shlex
 
 import insightconnect_plugin_runtime
 
-from .schema import ReplaceInput, ReplaceOutput
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 from komand_tr.util.utils import exec_command
+from komand_tr.actions.replace.schema import Input, ReplaceInput, ReplaceOutput
 
 # DoS protection
 MAX_TEXT_LENGTH = 10000
@@ -22,8 +22,8 @@ class Replace(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        text = params.get("text")
-        expression = params.get("expression")
+        text = params.get(Input.TEXT)
+        expression = params.get(Input.EXPRESSION)
 
         if len(text) > MAX_TEXT_LENGTH:
             raise PluginException(
@@ -82,6 +82,3 @@ class Replace(insightconnect_plugin_runtime.Action):
                 cause=f"Text processing failed:\n{proc['stderr'].decode('utf-8')}",
                 assistance="Please see log for details.",
             )
-
-    def test(self):
-        return self.run(params={"text": "Long    spaces    here", "expression": "-s [:space:] " ""})

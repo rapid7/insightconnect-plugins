@@ -1,16 +1,15 @@
 import logging
 import subprocess  # nosec B404
 
-from typing import List, Dict
+from typing import List, Dict, Any
+
+from komand_tr.util.exceptions import ExecCommandError
 
 logger = logging.getLogger()
+DEFAULT_ENCODING = "utf-8"
 
 
-class ExecCommandError(RuntimeError):
-    """Raised when subprocess execution fails."""
-
-
-def exec_command(command: List[str], text: str) -> Dict[str, bytes | int]:
+def exec_command(command: List[str], text: str) -> Dict[str, Any]:
     """Return dict with keys stdout, stderr, and return code of executed subprocess command."""
 
     try:
@@ -21,11 +20,11 @@ def exec_command(command: List[str], text: str) -> Dict[str, bytes | int]:
             stderr=subprocess.PIPE,
             close_fds=True,
             shell=False,
-        ) as p:
-            stdout, stderr = p.communicate(input=text.encode("utf-8"))
-            rcode = p.returncode
+        ) as process:
+            stdout, stderr = process.communicate(input=text.encode(DEFAULT_ENCODING))
+            rcode = process.returncode
 
             return {"stdout": stdout, "stderr": stderr, "rcode": rcode}
-    except OSError as e:
-        logger.error("SubprocessError: %s %s: %s", str(e.filename), str(e.strerror), str(e.errno))
+    except OSError as error:
+        logger.error("SubprocessError: %s %s: %s", str(error.filename), str(error.strerror), str(error.errno))
         raise ExecCommandError("Failed to execute subprocess")
