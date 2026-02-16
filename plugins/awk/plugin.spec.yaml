@@ -3,19 +3,59 @@ extension: plugin
 products: [insightconnect]
 name: awk
 title: Awk
-description: This plugin manipulates an input string or file with the GNU awk programming language
-version: 1.2.1
+description:
+  |
+    The Awk InsightConnect plugin manipulates input data using GNU [Awk](https://www.gnu.org/software/gawk/manual/gawk.html)
+    which is a pattern scanning and processing language.
+  
+    For example, here's a simple example of Awk from the command line:
+  
+    ```
+    $ awk '{ print \"Second column contents:\",$2 }' 3columns.txt
+    Second column contents: dog
+    Second column contents: cat
+    Second column contents: horse
+    Second column contents: birds
+    ```
+version: 1.2.2
+connection_version: 1
 vendor: rapid7
 support: community
+supported_versions: ["GNU AWK 5.3.2"]
 status: []
+sdk:
+  type: slim
+  version: 6.4.3
+  user: nobody
+  custom_cmd:
+    - "RUN apt-get update && apt-get install -y gawk && rm -rf /var/lib/apt/lists/*"
+key_features:
+  - "Search and replace a string"
+  - "Search and replace text in a file"
+troubleshooting:
+  - |
+    By default, Awk returns a newline for each record. A common use case is to print a field from a body of text without
+    the ending newline so that it may be passed to other plugins in an InsightConnect workflow. There's at least two ways to achieve this
+    by setting the ORS (Output Record Separator) variable to nothing e.g. `-v ORS= '{ print $1 }'` or `'BEGIN { ORS="" } { print $1 }'`
+version_history:
+  - "1.2.2 - Refreshed the plugin | Updated SDK to the latest version (6.4.3)"
+  - "1.2.1 - New spec and help.md format for the Extension Library | Change docker image from `komand/python-pypy3-plugin:2` to `komand/python-3-37-plugin` | Removed duplicated code | Changed string action to use bare string instead temporary file | Changed bare strings in params.get and output to static fields from schema | Repair coding style"
+  - "1.2.0 - Support web server mode"
+  - "1.1.2 - Update to v2 Python plugin architecture"
+  - "1.1.1 - SSL bug fix in SDK"
+  - "0.1.0 - Initial plugin"
+links:
+  - "[Awk](https://www.gnu.org/software/gawk/manual/gawk.html)"
+references:
+  - "[Awk](https://www.gnu.org/software/gawk/manual/gawk.html)"
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/awk
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.gnu.org
 tags:
-- awk
-- regex
-- utilities
+  - awk
+  - regex
+  - utilities
 hub_tags:
   use_cases: [data_utility]
   keywords: [awk, regex, utilities]
@@ -26,32 +66,44 @@ actions:
     description: Process string with Awk
     input:
       expression:
-        type: string
+        title: Expression
         description: Awk expression e.g. [pattern] { action }
-        required: true
-      text:
         type: string
-        description: String to process
         required: true
+        example: "awk '{ gsub(/text/, 'test'); print }'"
+      text:
+        title: Text
+        description: String to process
+        type: string
+        required: true
+        example: "Example text to process with awk"
     output:
       out:
-        type: string
+        title: Out
         description: Processed string
+        type: string
         required: false
+        example: "Example test to process with awk"
   process_file:
     title: Process File
     description: Process file with Awk
     input:
       expression:
-        type: string
+        title: Expression
         description: Awk expression e.g. [pattern] { action }
+        type: string
         required: true
+        example: "awk '{ print $1, $3 }'"
       data:
-        type: bytes
+        title: Data
         description: File to process
+        type: bytes
         required: true
+        example: "VXNlciBEYXRhIEFnZQpKb2huIDI1IDMwCkphbmUgMzAgMzUK"
     output:
       out:
-        type: string
+        title: Out
         description: Processed string
+        type: string
         required: false
+        example: "User Age\nJohn 30\nJane 35"
