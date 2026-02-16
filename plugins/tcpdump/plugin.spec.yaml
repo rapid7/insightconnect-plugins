@@ -27,8 +27,7 @@ sdk:
 key_features:
   - Parse and return the contents of a PCAP file
 version_history:
-  - "2.0.0 - BREAKING CHANGE: Options must now be space-separated (e.g., use `-n -r -c 10` instead of `-nrc10`) | Security: Removed write/capture-related flags from whitelist (-w, -i, -C, -G, -W, -I, -D, -K, -p, -U, -Z) as plugin only supports reading PCAP files"
-  - "1.1.1 - Refreshed the plugin | Updated SDK to the latest version (6.4.3)"
+  - "2.0.0 - Action `Read PCAP`: Options must now be space-separated | Refreshed the plugin | Updated SDK to the latest version (6.4.3)"
   - "1.1.0 - Updated spec and help.md format for the Extension Library, spec description changes"
   - "1.0.2 - New spec and help.md format for the Extension Library"
   - "1.0.1 - Update to use the `komand/python-3-slim-plugin:2` Docker image to reduce plugin size"
