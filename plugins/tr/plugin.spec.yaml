@@ -3,10 +3,23 @@ extension: plugin
 products: [insightconnect]
 name: tr
 title: Translate
-description: Translate or replace characters from text using the tr command line utility
-version: 2.0.2
+description: The Translate plugin uses the `tr` command in UNIX which is a command line utility for translating or deleting characters. It supports a range of transformations including uppercase to lowercase, squeezing repeating characters, deleting specific characters and basic find and replace. `tr` stands for Translate.
+version: 2.0.3
+connection_version: 2
+sdk:
+  type: slim
+  version: 6.4.3
+  user: nobody
 vendor: rapid7
 support: community
+supported_versions: ['tr (GNU coreutils) 9.7']
+references:
+  - '[tr manual](https://www.gnu.org/software/coreutils/manual/html_node/tr-invocation.html)'
+key_features:
+  - Replace characters in a string
+  - Delete characters in a string
+links:
+  - '[tr examples](https://www.geeksforgeeks.org/tr-command-unixlinux-examples/)'
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/tr
@@ -20,6 +33,9 @@ hub_tags:
   use_cases: [data_utility]
   keywords: [tr, translate, text, utilities]
   features: []
+version_history:
+  - 2.0.3 - Updated SDK version to 6.4.3
+  - 1.0.0 - Initial plugin
 actions:
   replace:
     title: Replace
@@ -30,14 +46,17 @@ actions:
         title: Text
         description: Text to process
         required: true
+        example: Hello World
       expression:
         type: string
         title: Expression
         description: Correct tr expression (e.g. -s [:space:] ' ')
         required: true
+        example: a-z A-Z
     output:
       result:
         type: string
         title: Result
         description: Processed text
         required: true
+        example: HELLO WORLD
