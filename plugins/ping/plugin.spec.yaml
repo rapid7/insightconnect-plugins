@@ -3,14 +3,37 @@ extension: plugin
 products: [insightconnect]
 name: ping
 title: Ping
-description: Check network connectivity and response times
-version: 1.0.3
+description: The Ping plugin is used to check network connectivity and response times
+version: 1.0.4
+connection_version: 1
 vendor: rapid7
 support: community
+supported_versions: ["2026-02-11"]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/ping
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+links:
+  - '[iputils-ping](https://packages.debian.org/sid/iputils-ping)'
+references:
+  - '[iputils-ping](https://packages.debian.org/sid/iputils-ping)'
+sdk:
+  type: slim
+  version: 6.4.3
+  user: nobody
+  custom_cmd:
+    - '# Add any package dependencies here'
+    - ENV DEBIAN_FRONTEND noninteractive
+    - '# Ping dependency'
+    - RUN apt-get update && apt-get install -y iputils-ping
+key_features:
+  - Ping a host to check for connectivity
+version_history:
+  - 1.0.4 - Updated SDK version to 6.4.3
+  - 1.0.3 - New spec and help.md format for the Extension Library
+  - 1.0.2 - Bug fix to correct regex's search pattern
+  - 1.0.1 - Support web server mode
+  - 1.0.0 - Initial plugin
 tags:
 - ping
 - network diagnostics
@@ -28,60 +51,72 @@ actions:
         description: The domain name or IP of the host to check
         type: string
         required: true
+        example: "rapid7.com"
       count:
         title: Count
         description: The number of requests that will be sent, the default is 4
         type: integer
         required: true
         default: 4
+        example: 4
       resolve_hostname:
         title: Resolve Hostname
         description: Whether to resolve a domain name to an IP address first
         type: boolean
         required: true
+        example: false
     output:
       reply:
         title: Reply
         description: Whether the host is responding to our echo
         type: boolean
         required: true
+        example: true
       response:
         title: Response
         description: The response to the request
         type: string
         required: true
+        example: "PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.\\n64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=0.044 ms\\n64 bytes from 127.0.0.1: icmp_seq=2 ttl=64 time=0.069 ms\\n64 bytes from 127.0.0.1: icmp_seq=3 ttl=64 time=0.066 ms\\n64 bytes from 127.0.0.1: icmp_seq=4 ttl=64 time=0.059 ms\\n\\n--- 127.0.0.1 ping statistics ---\\n4 packets transmitted, 4 received, 0% packet loss, time 3131ms\\nrtt min/avg/max/mdev = 0.044/0.059/0.069/0.012 ms\\n"
       packets_transmitted:
         title: Packets Transmitted
         description: The number of packets that were sent to the host
         type: integer
         required: false
+        example: 4
       packets_received:
         title: Packets Received
         description: The number of packets that the host sent back
         type: integer
         required: false
+        example: 4
       packets_percent_lost:
         title: Percent Packet Lost
         description: The percentage of packets that were lost
         type: float
         required: false
+        example: 0
       average_latency:
         title: Average Latency
         description: Average latency
         type: string
         required: false
+        example: "0.059ms"
       minimum_latency:
         title: Minimum Latency
         description: Minimum latency
         type: string
         required: false
+        example: "0.044ms"
       maximum_latency:
         title: Maximum Latency
         description: Maximum latency
         type: string
         required: false
+        example: "0.069ms"
       standard_deviation:
         title: Standard Deviation
         description: Standard deviation
         type: string
         required: false
+        example: "0.012ms"
