@@ -10,7 +10,9 @@ class TestFinger(unittest.TestCase):
     def setUp(self):
         self.action = Finger()
 
-    def test_run_success(self):
+    @patch("insightconnect_plugin_runtime.helper.exec_command")
+    def test_run_success(self, mock_exec):
+        mock_exec.return_value = {"stdout": b"success", "stderr": b"n/a", "code": 0}
         params = {Input.USER: "user", Input.HOST: "host"}
         output = self.action.run(params)
         expected_output = {"found": True, "status": "Success"}
@@ -21,9 +23,9 @@ class TestFinger(unittest.TestCase):
             params = {Input.USER: "invalid/user", Input.HOST: "invalid/host"}
             self.action.run(params)
 
-    @patch("insightconnect_plugin_runtime.helper")
-    def test_run_exec_error(self, mock):
-        mock.exec_command.side_effect = Exception("exec error")
+    @patch("insightconnect_plugin_runtime.helper.exec_command")
+    def test_run_exec_error(self, mock_exec):
+        mock_exec.side_effect = Exception("exec error")
         with self.assertRaises(PluginException):
             params = {Input.USER: "user", Input.HOST: "host"}
             self.action.run(params)
