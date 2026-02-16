@@ -7,7 +7,7 @@ from sys import argv
 Name = "Translate"
 Vendor = "rapid7"
 Version = "2.0.3"
-Description = "The Translate plugin uses the `tr` command in UNIX which is a command line utility for translating or deleting characters. It supports a range of transformations including uppercase to lowercase, squeezing repeating characters, deleting specific characters and basic find and replace. `tr` stands for Translate."
+Description = "The Translate plugin uses the `tr` command in UNIX which is a command line utility for translating or deleting characters. It supports a range of transformations including uppercase to lowercase, squeezing repeating characters, deleting specific characters and basic find and replace. `tr` stands for Translate"
 
 
 def main():

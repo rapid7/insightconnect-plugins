@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 setup(
     name="tr-rapid7-plugin",
     version="2.0.3",
-    description="The Translate plugin uses the `tr` command in UNIX which is a command line utility for translating or deleting characters. It supports a range of transformations including uppercase to lowercase, squeezing repeating characters, deleting specific characters and basic find and replace. `tr` stands for Translate.",
+    description="The Translate plugin uses the `tr` command in UNIX which is a command line utility for translating or deleting characters. It supports a range of transformations including uppercase to lowercase, squeezing repeating characters, deleting specific characters and basic find and replace. `tr` stands for Translate",
     author="rapid7",
     author_email="",
     url="",

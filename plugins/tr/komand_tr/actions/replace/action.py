@@ -75,9 +75,8 @@ class Replace(insightconnect_plugin_runtime.Action):
             return {"result": result}
         else:
             self.logger.error(
-                "InsightConnectPluginRuntimeHelper: ExecCommand: Failed to execute: {}\n{}".format(
-                    command, proc["stderr"].decode("utf-8")
-                )
+                f"InsightConnectPluginRuntimeHelper: ExecCommand: Failed to execute: "
+                f"{command}\n{proc['stderr'].decode('utf-8')}"
             )
             raise PluginException(
                 cause=f"Text processing failed:\n{proc['stderr'].decode('utf-8')}",
