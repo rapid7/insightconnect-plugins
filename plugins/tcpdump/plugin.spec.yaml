@@ -4,18 +4,43 @@ products: [insightconnect]
 name: tcpdump
 title: Tcpdump
 description: The Tcpdump plugin is used to read contents of a PCAP
-version: 1.1.0
+version: 2.0.0
+connection_version: 1
 vendor: rapid7
 support: community
 status: []
+supported_versions: ["Tcpdump 4.99.5"]
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/tcpdump
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: http://www.tcpdump.org/
 tags:
-- tcpdump
-- nsm
-- pcap
+  - tcpdump
+  - nsm
+  - pcap
+sdk:
+  type: full
+  version: 6.4.3
+  user: nobody
+  custom_cmd:
+    - "RUN apk add --no-cache tcpdump"
+key_features:
+  - Parse and return the contents of a PCAP file
+version_history:
+  - "2.0.0 - BREAKING CHANGE: Options must now be space-separated (e.g., use `-n -r -c 10` instead of `-nrc10`) | Security: Removed write/capture-related flags from whitelist (-w, -i, -C, -G, -W, -I, -D, -K, -p, -U, -Z) as plugin only supports reading PCAP files"
+  - "1.1.1 - Refreshed the plugin | Updated SDK to the latest version (6.4.3)"
+  - "1.1.0 - Updated spec and help.md format for the Extension Library, spec description changes"
+  - "1.0.2 - New spec and help.md format for the Extension Library"
+  - "1.0.1 - Update to use the `komand/python-3-slim-plugin:2` Docker image to reduce plugin size"
+  - "1.0.0 - Update to v2 Python plugin architecture | Support web server mode"
+  - "0.1.1 - SSL bug fix in SDK"
+  - "0.1.0 - Initial plugin"
+links:
+  - "[Tcpdump](http://www.tcpdump.org)"
+  - "[Tcpdump manual](http://www.tcpdump.org/tcpdump_man.html)"
+references:
+  - "[Tcpdump](http://www.tcpdump.org)"
+  - "[Tcpdump manual](http://www.tcpdump.org/tcpdump_man.html)"
 hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [tcpdump, nsm, pcap]
@@ -31,29 +56,35 @@ actions:
         description: Base64 encoded PCAP file
         type: bytes
         required: true
+        example: "UENBUCoAAE0AAAAABAAAAA=="
       options:
         title: Options
-        description: Tcpdump Flags and Options E.g. -n -c 10 -s 96. -r is implied
+        description: Tcpdump Flags and Options (must be space-separated)
         type: string
         required: false
+        example: "-n -r -c 10 -s 96"
       filter:
         title: BPF
-        description: Berkeley Packet Filter E.g. TCP and port 22
+        description: Berkeley Packet Filter
         type: string
         required: false
+        example: "TCP and port 22"
     output:
       dump_contents:
         title: Dump Contents
         description: Traffic Dump as Array
         type: '[]string'
         required: false
+        example: ["12:34:56.789012 IP 192.168.1.1.22 > 192.168.1.2.54321: S", "12:34:56.790123 IP 192.168.1.2.54321 > 192.168.1.1.22: S."]
       dump_file:
         title: Dump File
         description: Traffic Dump as File
         type: bytes
         required: false
+        example: "UENBUCoAAE0AAAAABAAAAA=="
       stderr:
         title: Standard Error
         description: Tcpdump Standard Error
         type: string
         required: false
+        example: "tcpdump: listening on eth0, link-type EN10MB (Ethernet), snapshot length 65535 bytes"

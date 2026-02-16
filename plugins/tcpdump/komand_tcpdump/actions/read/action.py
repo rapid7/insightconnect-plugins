@@ -1,11 +1,18 @@
-import komand
-from .schema import ReadInput, ReadOutput
+import insightconnect_plugin_runtime
+from .schema import ReadInput, ReadOutput, Input, Output
 
 # Custom imports below
 import base64
+import subprocess  # nosec
+from uuid import uuid4
+from pathlib import Path
+from insightconnect_plugin_runtime.exceptions import PluginException
+
+from komand_tcpdump.util.constants import DEFAULT_TIMEOUT
+from komand_tcpdump.util.sanitizer import validate_options, validate_filter
 
 
-class Read(komand.Action):
+class Read(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="read",
@@ -15,18 +22,54 @@ class Read(komand.Action):
         )
 
     def run(self, params={}):
-        pcap = base64.b64decode(params.get("pcap"))
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        pcap = params.get(Input.PCAP)
+        options = params.get(Input.OPTIONS, "")
+        filter_ = params.get(Input.FILTER, "")
+        # END INPUT BINDING - DO NOT REMOVE
+
+        # Generate a secure filename using UUID
+        filename = f"/tmp/input-{uuid4()}.pcap"  # nosec
         try:
-            f = open("input.pcap", "wb")
-            f.write(pcap)
+            # Decode the base64-encoded PCAP data
+            try:
+                pcap_decoded = base64.b64decode(pcap)
+            except Exception as error:
+                raise PluginException(
+                    cause="Invalid PCAP data provided. ", assistance="Failed to decode PCAP data", data=error
+                )
+
+            # Write PCAP data to file
+            with open(filename, "wb") as file_:
+                file_.write(pcap_decoded)
+
+            # Build command as a list for subprocess to prevent shell injection
+            command = ["tcpdump", "-r", filename]
+
+            # Validate and add options if provided
+            if options:
+                command.extend(validate_options(options))
+
+            # Validate and add filter if provided
+            if filter_:
+                command.append(validate_filter(filter_))
+
+            # Execute command without shell=True to prevent injection
+            self.logger.info(f"Executing tcpdump with command: {' '.join(command)}")
+            response = subprocess.run(command, capture_output=True, check=False, timeout=DEFAULT_TIMEOUT)  # nosec
+            stderr = response.stderr.decode()
+
+            # If response is not successful, log error and raise exception
+            if response.returncode != 0:
+                self.logger.error(f"{stderr}")
+                raise PluginException(cause="Tcpdump execution failed", assistance=f"Tcpdump returned error: {stderr}")
+
+            # Encode the output as base64 to safely return binary data
+            dump_file = base64.b64encode(response.stdout)
+            stdout_list = insightconnect_plugin_runtime.helper.clean(response.stdout.decode().split("\n"))
+            return {Output.DUMP_CONTENTS: stdout_list, Output.DUMP_FILE: dump_file.decode(), Output.STDERR: stderr}
         finally:
-            f.close()
-        cmd = "tcpdump -r input.pcap %s %s" % (params.get("options", ""), params.get("filter", ""))
-        r = komand.helper.exec_command(cmd)
-        stderr = r["stderr"].decode()
-        if r["rcode"] != 0:
-            self.logger.error("%s", stderr)
-            raise Exception("Tcpdump Failed")
-        dump_file = base64.b64encode(r["stdout"])
-        stdout_list = komand.helper.clean_list(r["stdout"].decode().split("\n"))
-        return {"dump_contents": stdout_list, "dump_file": dump_file.decode(), "stderr": stderr}
+            # Clean up temporary file
+            file_path = Path(filename)
+            if file_path.is_file():
+                file_path.unlink()
