@@ -4,9 +4,24 @@ products: [insightconnect]
 name: finger
 title: Finger
 description: Query the Finger Service
-version: 1.0.2
+version: 1.0.3
+connection_version: 1
 vendor: rapid7
 support: community
+supported_versions: ["2026-02-13"]
+key_features:
+  - Query the Finger Service for user information
+version_history:
+  - 1.0.3 - Updated SDK version to 6.4.3
+  - 1.0.2 - Change docker image from `komand/python-2-plugin` to `komand/python-3-37-plugin:3` to use python 3 | Use input and output constants | Changed variables names to more readable | Changed descriptions | Added "f" strings | Removed method test from action
+  - 1.0.1 - New spec and help.md format for the Extension Library
+  - 1.0.0 - Support web server mode
+  - 0.1.1 - SSL bug fix in SDK
+   -0.1.0 - Initial plugin
+sdk:
+  type: slim
+  version: 6.4.3
+  user: nobody
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/finger
@@ -18,6 +33,10 @@ hub_tags:
   use_cases: [user_management, threat_detection_and_response]
   keywords: [finger, users]
   features: []
+links:
+- '[Finger](https://www.ibm.com/docs/en/aix/7.2.0?topic=f-finger-command)'
+references:
+- '[Finger](https://www.ibm.com/docs/en/aix/7.2.0?topic=f-finger-command)'
 actions:
   finger:
     title: Finger
@@ -27,88 +46,106 @@ actions:
         type: string
         description: User
         required: true
+        example: "John Smith"
       host:
         type: string
         description: Finger server host
         required: true
+        example: "example.com"
     output:
       found:
         title: Found Status
         description: Whether user exists on the system
         type: boolean
         required: false
+        example: true
       login:
         title: Login Name
         description: User's login name
         type: string
         required: false
+        example: "user@example.com"
       loginstatus:
         title: Login Status
         description: When the user logged in
         type: string
         required: false
+        example: "2024-01-01 12:00:00"
       loginfrom:
         title: Login from
         description: User's last login source address
         type: string
         required: false
+        example: "0.0.0.0"
       fullname:
         title: Real Name
         description: User's full name
         type: string
         required: false
+        example: "John Smith"
       home:
         title: Home Directory
         description: Path to user's home directory
         type: string
         required: false
+        example: "/home/jsmith"
       homephone:
         title: Home Phone
         description: User home phone
         type: string
         required: false
+        example: "555-555-5555"
       shell:
         title: Shell
         description: The user's default shell
         type: string
         required: false
+        example: "/bin/bash"
       mail:
         title: Mail Forward Address
         description: Mail forward address if it exists
         type: string
         required: false
+        example: "johnsmith@email.com"
       mailstatus:
         title: Mail Status
         description: Status on unread mail
         type: string
         required: false
+        example: "Mail last read"
       pubkey:
         title: Public Key File
         description: The contents of user's public key if it exists
         type: string
         required: false
+        example: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC..."
       plan:
         title: Plan
         description: The contents of the plan file if it exists
         type: string
         required: false
+        example: "Plan A"
       project:
         title: Project
         description: The contents of the project file if it exists
         type: string
         required: false
+        example: "Project X"
       room:
         title: Room
         description: User room
         type: string
         required: false
+        example: "Room 101"
       workphone:
         title: Work Phone
         description: User work phone
         type: string
         required: false
+        example: "555-555-5555"
       status:
         title: Plugin Status
         description: Success or any error messages
         type: string
         required: false
+        example: "Success"
