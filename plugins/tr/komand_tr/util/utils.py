@@ -1,5 +1,5 @@
 import logging
-import subprocess
+import subprocess  # nosec B404
 
 from typing import List, Dict
 
@@ -14,6 +14,7 @@ def exec_command(command: List[str], text: str) -> Dict[str, bytes | int]:
     """Return dict with keys stdout, stderr, and return code of executed subprocess command."""
 
     try:
+        # nosec B603 - We are not using shell=True, so this is not vulnerable to command injection.
         with subprocess.Popen(
             command,
             stdin=subprocess.PIPE,
