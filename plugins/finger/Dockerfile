@@ -24,6 +24,8 @@ COPY --from=builder /plugin.spec.yaml /plugin.spec.yaml
 
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
+RUN apt-get update && apt-get install -y finger
+
 ENV PYTHONPATH="/python/src:${PYTHONPATH}"
 
 RUN rm -rf /root/.cache;

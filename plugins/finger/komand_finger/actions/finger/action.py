@@ -31,7 +31,6 @@ class Finger(insightconnect_plugin_runtime.Action):
     def validate_input(self, input_string: str):
         return re.match(r"^[\w\.\-]+$", input_string) is not None
 
-    @auto_instrument
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         host = params.get(Input.HOST, "")
