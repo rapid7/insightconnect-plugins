@@ -3,22 +3,59 @@ extension: plugin
 products: [insightconnect]
 name: sed
 title: Sed
-description: The Sed plugin allows you to run the GNU stream editor on strings and files
-version: 2.0.3
+description: |
+  [Sed](https://www.gnu.org/software/sed/manual/sed.html) is a powerful stream editor. This plugin uses GNU Sed 4.2.2 to manipulate input data.
+  For example, from the command line, an example of the stream editor becomes clear:
+
+  ```
+  $ printf 'Cats are enjoyable animals\n' | sed 's/Cats/Dogs/'
+  Dogs are enjoyable animals
+  ```
+version: 2.0.4
+connection_version: 2
 vendor: rapid7
 support: community
 status: []
+supported_versions: [""]
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/sed
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
-- sed
-- edit
-- utilities
+  - sed
+  - edit
+  - utilities
 hub_tags:
   use_cases: [data_utility]
   keywords: [sed, edit, utilities]
   features: []
+sdk:
+  type: slim
+  version: 6.4.3
+  user: nobody
+key_features:
+  - Manipulate input streams and strings
+troubleshooting:
+  - |
+    Careful attention to the use of double-quotes should be used, the expression will not work if it's surrounded by double-quotes.
+    If a literal double-quote is required it must be escaped by a backslash `\`. For example:
+
+    * `s/\"//g` - A stream editor expression to remove all double-quotes from a string.
+    * `'s/\"/\'/g'` - A stream editor expression to replace all double-quotes with single-quotes.
+version_history:
+  - "2.0.4 - Refreshed the plugin | Updated SDK to the latest version (6.4.3)"
+  - "2.0.3 - Add action input and output examples to the documentation"
+  - "2.0.2 - New spec and help.md format for the Extension Library | Refactor duplicate code | Remove returning dummy output in connection test | Refactor Exception to PluginException | Changed type in help to be the same as in plugin spec"
+  - "2.0.1 - Fix issue with both actions not returning all results"
+  - "2.0.0 - Update action inputs to allow for multiple expressions"
+  - "1.0.1 - Add `utilities` plugin tag for Marketplace searchability"
+  - '1.0.0 - Support web server mode | Rename action to "Process String"'
+  - "0.1.2 - Update to v2 Python plugin architecture"
+  - "0.1.1 - SSL bug fix in SDK"
+  - "0.1.0 - Initial plugin"
+links:
+  - "[Sed](https://www.gnu.org/software/sed/manual/sed.html)"
+references:
+  - "[Sed](https://www.gnu.org/software/sed/manual/sed.html)"
 actions:
   process_string:
     title: Process String
@@ -26,53 +63,55 @@ actions:
     input:
       string:
         title: String
-        type: string
         description: String to Process
-        example: one two three four five one two
+        type: string
         required: true
+        example: one two three four five one two
       expression:
         title: Expression
-        type: '[]string'
         description: Sed Expression
+        type: '[]string'
         example: ["s/one/ONE/", "s/two/2/g"]
         required: true
       options:
         title: Options
-        type: string
         description: Sed Options
-        example: -r
+        type: string
         required: false
+        example: -r
     output:
       output:
         title: Processed String
-        type: string
         description: Processed String
+        type: string
         required: false
+        example: ONE 2 three four five ONE 2
   process_bytes:
     title: Process Bytes
     description: Process bytes of base64 encoded string
     input:
       bytes:
         title: Bytes
-        type: bytes
         description: File/bytes to Process
-        example: b25lIHR3byB0aHJlZSBmb3VyIGZpdmUgb25lIHR3bw==
+        type: bytes
         required: true
+        example: b25lIHR3byB0aHJlZSBmb3VyIGZpdmUgb25lIHR3bw==
       expression:
         title: Expression
-        type: '[]string'
         description: Sed Expression
-        example: ["s/one/ONE/", "s/two/2/g"]
+        type: '[]string'
         required: true
+        example: ["s/one/ONE/", "s/two/2/g"]
       options:
         title: Options
-        type: string
         description: Sed Options
-        example: -r
+        type: string
         required: false
+        example: -r
     output:
       output:
         title: Output
-        type: string
         description: Processed String
+        type: string
         required: false
+        example: ONE 2 three four five ONE 2
