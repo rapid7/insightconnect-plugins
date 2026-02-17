@@ -7,6 +7,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import FingerInput, FingerOutput, Input, Output, Component
 
 # Custom imports below
+DEFAULT_ENCODING = "utf-8"
 
 
 class Finger(insightconnect_plugin_runtime.Action):
@@ -79,9 +80,9 @@ class Finger(insightconnect_plugin_runtime.Action):
             ]
 
             # Did finger succeed in finding a user?
-            stdout = result.get("stdout", "").decode("utf-8")
+            stdout = result.get("stdout", "").decode(DEFAULT_ENCODING)
             output["Found"], output["Plugin Status"] = self.found(
-                stdout, result.get("stderr", "").decode("utf-8"), errors
+                stdout, result.get("stderr", "").decode(DEFAULT_ENCODING), errors
             )
 
             for key in keys:
