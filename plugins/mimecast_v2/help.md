@@ -103,6 +103,7 @@ Example output:
 
 # Version History
 
+* 1.1.1 - Task `Monitor SIEM Logs`: Updated the task logic so that it no longer removes the TTP log set from the state when permissions are not set | Updated SDK to the latest version (6.4.3)
 * 1.1.0 - Task `Monitor SIEM Logs`: Added new log endpoints for impersonation, attachment, and URL protection logs | Updated SDK to the latest version (6.3.10)
 * 1.0.6 - `Monitor SIEM Logs` Updated SDK to the latest version (6.3.6) | Added support for high volume lookback (up to 7 days)
 * 1.0.5 - `Monitor SIEM Logs` Modified status code returned by task when receiving 'Unauthorized Request' and 'token_verification_failed' fail codes | Updated SDK to the latest version (6.3.3)

@@ -7,12 +7,12 @@ from typing import Any, Dict
 from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException
+from freezegun import freeze_time
 from icon_mimecast_v2.connection.connection import Connection
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 from parameterized import parameterized
 
 from util import STUB_CONNECTION, Util
-from freezegun import freeze_time
 
 
 @freeze_time("2000-01-07T00:00:00.000000Z")
