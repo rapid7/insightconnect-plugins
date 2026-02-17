@@ -10,9 +10,7 @@ class TestFinger(unittest.TestCase):
     def setUp(self):
         self.action = Finger()
 
-    @patch("insightconnect_plugin_runtime.helper.exec_command")
-    def test_run_success(self, mock_exec):
-        mock_exec.return_value = {"stdout": b"success", "stderr": b"n/a", "code": 0}
+    def test_run_success(self):
         params = {Input.USER: "user", Input.HOST: "host"}
         output = self.action.run(params)
         expected_output = {"found": True, "status": "Success"}
