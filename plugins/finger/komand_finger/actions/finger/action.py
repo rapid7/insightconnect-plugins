@@ -26,7 +26,7 @@ class Finger(insightconnect_plugin_runtime.Action):
                 return False, msg
         return True, "Success"
 
-    # Validate input to prevent injection. Only allow alphanumeric characters, dots, dashes, and underscores.
+    # Validate input to prevent injection. Only allow alphanumeric characters, dots, dashes, and underscores
     def validate_input(self, input_string: str):
         return re.match(r"^[\w\.\-]+$", input_string) is not None
 

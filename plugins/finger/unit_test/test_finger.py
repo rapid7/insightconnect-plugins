@@ -32,7 +32,7 @@ class TestFinger(unittest.TestCase):
 
     def test_validate_input(self):
         self.assertTrue(self.action.validate_input("valid_user-1.2"))
-        self.assertFalse(self.action.validate_input("invalid user!"))
+        self.assertFalse(self.action.validate_input("invalid user/"))
 
     def test_found_error(self):
         result, msg = self.action.found("error in stdout", "error in stderr", ["error"])
@@ -40,7 +40,7 @@ class TestFinger(unittest.TestCase):
         self.assertEqual(msg, "error")
 
     def test_found_success(self):
-        result, msg = self.action.found("all good", "no error", ["notfound"])
+        result, msg = self.action.found("success", "no error", ["notfound"])
         self.assertTrue(result)
         self.assertEqual(msg, "Success")
 
