@@ -1,15 +1,14 @@
-import logging
+from logging import Logger
 import subprocess  # nosec B404
 
 from typing import List, Dict, Any
 
 from komand_tr.util.exceptions import ExecCommandError
 
-logger = logging.getLogger()
 DEFAULT_ENCODING = "utf-8"
 
 
-def exec_command(command: List[str], text: str) -> Dict[str, Any]:
+def exec_command(command: List[str], text: str, logger: Logger) -> Dict[str, Any]:
     """Return dict with keys stdout, stderr, and return code of executed subprocess command."""
 
     try:

@@ -67,7 +67,7 @@ class Replace(insightconnect_plugin_runtime.Action):
 
         command = ["tr"] + args
         self.logger.info(f"Replace: Executing command: {' '.join(command)}")
-        proc = exec_command(command, text)
+        proc = exec_command(command, text, self.logger)
 
         if proc["rcode"] == 0:
             result = proc["stdout"].decode("utf-8")
