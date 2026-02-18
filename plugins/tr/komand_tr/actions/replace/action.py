@@ -4,6 +4,7 @@ import insightconnect_plugin_runtime
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
+from komand_tr.util.exceptions import ExecCommandError
 from komand_tr.util.utils import exec_command
 from komand_tr.actions.replace.schema import Input, ReplaceInput, ReplaceOutput
 
@@ -67,7 +68,15 @@ class Replace(insightconnect_plugin_runtime.Action):
 
         command = ["tr"] + args
         self.logger.info(f"Replace: Executing command: {' '.join(command)}")
-        proc = exec_command(command, text, self.logger)
+
+        try:
+            proc = exec_command(command, text, self.logger)
+        except ExecCommandError as error:
+            self.logger.error(f"Replace: Subprocess execution failed: {str(error)}")
+            raise PluginException(
+                cause="Failed to execute text processing command.",
+                assistance="Ensure the 'tr' utility is available in the system.",
+            )
 
         if proc["rcode"] == 0:
             result = proc["stdout"].decode("utf-8")
