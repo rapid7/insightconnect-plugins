@@ -26,6 +26,29 @@ class Replace(insightconnect_plugin_runtime.Action):
         text = params.get(Input.TEXT)
         expression = params.get(Input.EXPRESSION)
 
+        self._validate_lengths(text, expression)
+        args = self._parse_and_validate_expression(expression)
+
+        command = ["tr"] + args
+        self.logger.info(f"Replace: Executing command: {' '.join(command)}")
+
+        proc = self._execute_tr(command, text)
+
+        if proc["rcode"] == 0:
+            result = proc["stdout"].decode("utf-8")
+            result = result.rstrip()
+            return {"result": result}
+        else:
+            self.logger.error(
+                f"InsightConnectPluginRuntimeHelper: ExecCommand: Failed to execute: "
+                f"{command}\n{proc['stderr'].decode('utf-8')}"
+            )
+            raise PluginException(
+                cause=f"Text processing failed:\n{proc['stderr'].decode('utf-8')}",
+                assistance="Please see log for details.",
+            )
+
+    def _validate_lengths(self, text: str, expression: str):
         if len(text) > MAX_TEXT_LENGTH:
             raise PluginException(
                 cause="Input text exceeds allowed length.",
@@ -40,6 +63,7 @@ class Replace(insightconnect_plugin_runtime.Action):
                 data={"max_length": MAX_EXPR_LENGTH},
             )
 
+    def _parse_and_validate_expression(self, expression: str):
         try:
             args = shlex.split(expression)
         except ValueError:
@@ -66,28 +90,14 @@ class Replace(insightconnect_plugin_runtime.Action):
                 data={},
             )
 
-        command = ["tr"] + args
-        self.logger.info(f"Replace: Executing command: {' '.join(command)}")
+        return args
 
+    def _execute_tr(self, command, text):
         try:
-            proc = exec_command(command, text, self.logger)
+            return exec_command(command, text, self.logger)
         except ExecCommandError as error:
             self.logger.error(f"Replace: Subprocess execution failed: {str(error)}")
             raise PluginException(
                 cause="Failed to execute text processing command.",
                 assistance="Ensure the 'tr' utility is available in the system.",
-            )
-
-        if proc["rcode"] == 0:
-            result = proc["stdout"].decode("utf-8")
-            result = result.rstrip()
-            return {"result": result}
-        else:
-            self.logger.error(
-                f"InsightConnectPluginRuntimeHelper: ExecCommand: Failed to execute: "
-                f"{command}\n{proc['stderr'].decode('utf-8')}"
-            )
-            raise PluginException(
-                cause=f"Text processing failed:\n{proc['stderr'].decode('utf-8')}",
-                assistance="Please see log for details.",
             )
