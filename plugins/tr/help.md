@@ -71,12 +71,15 @@ Example output:
 *This plugin does not contain any custom output types.*
 
 ## Troubleshooting
-  
-*This plugin does not contain a troubleshooting.*
+
+* In case an error is raised, make sure that the given expression can be correctly handled by the `tr` program
 
 # Version History
 
 * 2.0.3 - Updated SDK version to 6.4.3
+* 2.0.2 - New spec and help.md format for the Extension Library
+* 2.0.1 - Add utilities plugin tag for Marketplace searchability
+* 2.0.0 - Rename "Tr" plugin title to "Translate"
 * 1.0.0 - Initial plugin
 
 # Links
