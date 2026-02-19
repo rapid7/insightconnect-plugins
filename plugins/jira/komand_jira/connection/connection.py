@@ -1,4 +1,5 @@
 import insightconnect_plugin_runtime
+
 from .schema import ConnectionSchema, Input
 
 # Custom imports below
@@ -8,6 +9,7 @@ import os
 from requests.auth import HTTPBasicAuth
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 from komand_jira.util.api import JiraApi
+from komand_jira.util.constants import REQUESTS_TIMEOUT
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -65,31 +67,34 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.client = client
         self.rest_client = rest_client
 
-    def test_pat(self):
-        headers = {"Authorization": f"Bearer {self.pat}", "Content-Type": "application/json"}
-        response = requests.get(self.url, headers=headers, timeout=60)
-        return response
+    def test_pat(self) -> tuple[str, int]:
+        with requests.Session() as session, session.get(
+            self.url,
+            headers={"Authorization": f"Bearer {self.pat}", "Content-Type": "application/json"},
+            timeout=REQUESTS_TIMEOUT,
+        ) as response:
+            return response.content, response.status_code
 
-    def test_basic_auth(self):
-        auth = HTTPBasicAuth(username=self.username, password=self.password)
-        response = requests.get(self.url, auth=auth, timeout=60)
-        return response
+    def test_basic_auth(self) -> tuple[str, int]:
+        with requests.Session() as session, session.get(
+            self.url, auth=HTTPBasicAuth(username=self.username, password=self.password), timeout=REQUESTS_TIMEOUT
+        ) as response:
+            return response.content, response.status_code
 
-    def test(self):
-        if self.pat:
-            response = self.test_pat()
-        else:
-            response = self.test_basic_auth()
+    def test(self) -> dict[str, bool]:
+        # If a PAT is provided, use it to test the connection. Otherwise, fall back to basic auth testing.
+        test_method = self.test_pat if self.pat else self.test_basic_auth
+        content, status_code = test_method()
 
         # https://developer.atlassian.com/cloud/jira/platform/rest/v2/?utm_source=%2Fcloud%2Fjira%2Fplatform%2Frest%2F&utm_medium=302#error-responses
-        if response.status_code == 200:
+        if status_code == 200:
             return {"success": True}
-        elif response.status_code == 401:
+        elif status_code == 401:
             raise ConnectionTestException(preset=ConnectionTestException.Preset.USERNAME_PASSWORD)
-        elif response.status_code == 404:
+        elif status_code == 404:
             raise ConnectionTestException(
                 cause=f"Unable to reach Jira instance at: {self.url}.",
                 assistance="Verify the Jira server at the URL configured in your plugin " "connection is correct.",
             )
         else:
-            raise ConnectionTestException(cause="Unhandled error occurred.", assistance=response.content)
+            raise ConnectionTestException(cause="Unhandled error occurred.", assistance=content)

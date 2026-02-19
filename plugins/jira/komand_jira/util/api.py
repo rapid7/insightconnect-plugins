@@ -1,7 +1,6 @@
 import base64
 import json
 from insightconnect_plugin_runtime.exceptions import PluginException
-from jira.resources import User
 from logging import Logger
 import requests
 from requests.auth import HTTPBasicAuth
@@ -186,34 +185,37 @@ class JiraApi:
                     headers = {"Accept": "application/json"}
                 headers.update(self.authorization)
 
-            response = requests.request(
-                method.upper(),
-                f"{self.base_url}/rest/api/{self.api_version}/{path}",
-                params=params,
-                json=payload,
-                headers=headers,
-                files=files,
-                auth=authorization,
-                timeout=timeout,
-            )
-
-            if response.status_code == 401:
-                raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
-            if response.status_code == 403:
-                raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
-            if response.status_code == 404:
-                raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
-            if 400 <= response.status_code < 500:
-                raise PluginException(
-                    preset=PluginException.Preset.UNKNOWN,
-                    data=response.text,
-                )
-            if response.status_code >= 500:
-                raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
-            if 200 <= response.status_code < 300:
-                if return_json:
-                    return response.json()
-                return response.content
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+            # Use context manager chaining for both session and response to ensure proper cleanup
+            # Configure HTTPAdapter with connection pooling limits to prevent socket exhaustion
+            with requests.Session() as session:
+                # Make request and ensure response is properly closed
+                with session.request(
+                    method.upper(),
+                    f"{self.base_url}/rest/api/{self.api_version}/{path}",
+                    params=params,
+                    json=payload,
+                    headers=headers,
+                    files=files,
+                    auth=authorization,
+                    timeout=timeout,
+                ) as response:
+                    if response.status_code == 401:
+                        raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
+                    if response.status_code == 403:
+                        raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
+                    if response.status_code == 404:
+                        raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
+                    if 400 <= response.status_code < 500:
+                        raise PluginException(
+                            preset=PluginException.Preset.UNKNOWN,
+                            data=response.text,
+                        )
+                    if response.status_code >= 500:
+                        raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
+                    if 200 <= response.status_code < 300:
+                        if return_json:
+                            return response.json()
+                        return response.content
+                    raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
         except json.decoder.JSONDecodeError as error:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)
