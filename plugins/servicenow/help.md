@@ -1687,6 +1687,7 @@ Example output:
 
 # Version History
 
+* 8.1.4 - Fix error handling in create_security_incident action | Updated SDK to the latest version (6.4.3)
 * 8.1.3 - Updated dependency
 * 8.1.2 - Updated SDK to the latest version (6.3.10)
 * 8.1.1 - Updated SDK to the latest version (6.3.3)
