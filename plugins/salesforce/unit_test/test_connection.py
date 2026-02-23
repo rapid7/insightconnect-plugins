@@ -82,7 +82,7 @@ class TestConnection(TestCase):
                 "invalid_login_url",
                 Util.read_file_to_dict("inputs/connection_invalid_login_url.json.inp"),
                 "External Client App Selected. The client credentials grant type requires your org's My Domain URL",
-                "(e.g. 'https://yourcompany.my.salesforce.com'), not 'https://https://login.salesforce.com'. Please update the Login URL or review the App Type in your connection settings.",
+                "(e.g. 'https://yourcompany.my.salesforce.com'), not 'https://login.salesforce.com'. Please update the Login URL or review the App Type in your connection settings.",
             ],
         ]
     )

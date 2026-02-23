@@ -82,6 +82,8 @@ class Util:
             if data.get("client_id") == "unsupported-grant-type":
                 return MockResponse(400, "unsupported_grant_type")
             return MockResponse(200, "get_token")
+        if url == "https://example.com/services/oauth2/token":
+            return MockResponse(200, "get_token")
         if url == "https://example.com/services/data/":
             return MockResponse(200, "get_version")
 

@@ -170,7 +170,6 @@ class SalesforceAPI:
         ).content
 
     def _check_url_for_client_credential_flow(self, oauth_url: str) -> bool:
-        self.logger.info(oauth_url)
         if oauth_url in (
             "login.salesforce.com",
             "test.salesforce.com",
