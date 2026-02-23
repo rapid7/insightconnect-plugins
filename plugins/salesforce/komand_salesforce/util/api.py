@@ -22,7 +22,7 @@ from requests.exceptions import ConnectionError as DNSError
 
 EXTERNAL_CLIENT_APP = "External Client App"
 CLIENT_CREDENTIALS_GRANT_TYPE = "client_credentials"
-PASSWORD_GRANT_TYPE = "password"
+PASSWORD_GRANT_TYPE = "password"  # nosec B105
 
 
 def rate_limiting(max_tries: int):
@@ -172,8 +172,8 @@ class SalesforceAPI:
     def _check_url_for_client_credential_flow(self, oauth_url: str) -> bool:
         self.logger.info(oauth_url)
         if oauth_url in (
-            "https://login.salesforce.com",
-            "https://test.salesforce.com",
+            "login.salesforce.com",
+            "test.salesforce.com",
         ):
             raise PluginException(
                 cause=(
@@ -203,7 +203,7 @@ class SalesforceAPI:
         self.validate_oauth_url(salesforce_url)
 
         if app_type == EXTERNAL_CLIENT_APP:
-            self._check_url_for_client_credential_flow(oauth_url)
+            self._check_url_for_client_credential_flow(salesforce_url)
             data = {
                 "grant_type": CLIENT_CREDENTIALS_GRANT_TYPE,
                 "client_id": client_id,
