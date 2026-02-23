@@ -9,5 +9,6 @@
   },
   "securityToken": {
     "secretKey": "example-secret-key"
-  }
+  },
+  "appType": "Connected App"
 }

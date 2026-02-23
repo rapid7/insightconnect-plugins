@@ -20,17 +20,23 @@ class TestConnection(TestCase):
     @parameterized.expand(
         [
             [
-                "valid_credentials",
+                "valid_connected_app_credentials",
                 Util.read_file_to_dict("inputs/connection_valid.json.inp"),
                 Util.read_file_to_string("expected/connection_valid.txt.exp"),
-            ]
+            ],
+            [
+                "valid_external_app_credentials",
+                Util.read_file_to_dict("inputs/connection_external_app_valid.json.inp"),
+                Util.read_file_to_string("expected/connection_valid.txt.exp"),
+            ],
         ]
     )
-    def test_connection(
+    def test_connected_app_connection(
         self, mock_request: MagicMock, test_name: str, input_params: Dict[str, Any], expected: str
     ) -> None:
         self.action = Util.default_connector(SimpleSearch(), input_params)
         token, url = self.action.connection.api._get_token(
+            self.action.connection.api._app_type,
             self.action.connection.api._client_id,
             self.action.connection.api._client_secret,
             self.action.connection.api._username,
@@ -72,14 +78,21 @@ class TestConnection(TestCase):
                 "Salesforce error: 'Grant type not supported, Please ensure correct login URL is provided'",
                 PluginException.assistances[PluginException.Preset.INVALID_CREDENTIALS],
             ],
+            [
+                "invalid_login_url",
+                Util.read_file_to_dict("inputs/connection_invalid_login_url.json.inp"),
+                "External Client App Selected. The client credentials grant type requires your org's My Domain URL",
+                "(e.g. 'https://yourcompany.my.salesforce.com'), not 'https://https://login.salesforce.com'. Please update the Login URL or review the App Type in your connection settings.",
+            ],
         ]
     )
-    def test_connection_raise_exception(
+    def test_connected_app_connection_raise_exception(
         self, mock_request: MagicMock, test_name: str, input_params: Dict[str, Any], cause: str, assistance: str
     ) -> None:
         with self.assertRaises(PluginException) as error:
             self.action = Util.default_connector(SimpleSearch(), input_params)
             self.action.connection.api._get_token(
+                self.action.connection.api._app_type,
                 self.action.connection.api._client_id,
                 self.action.connection.api._client_secret,
                 self.action.connection.api._username,

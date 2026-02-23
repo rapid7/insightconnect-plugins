@@ -16,10 +16,13 @@ from komand_salesforce.util.endpoints import (
     SOBJECT_RECORD_ENDPOINT,
     SOBJECT_RECORD_EXTERNAL_ID_ENDPOINT,
     SOBJECT_RECORD_FIELD_ENDPOINT,
-    SOBJECT_UPDATED_USERS,
 )
 from komand_salesforce.util.exceptions import ApiException
 from requests.exceptions import ConnectionError as DNSError
+
+EXTERNAL_CLIENT_APP = "External Client App"
+CLIENT_CREDENTIALS_GRANT_TYPE = "client_credentials"
+PASSWORD_GRANT_TYPE = "password"
 
 
 def rate_limiting(max_tries: int):
@@ -87,6 +90,7 @@ class SalesforceAPI:
 
     def __init__(
         self,
+        app_type: str,
         client_id: str,
         client_secret: str,
         oauth_url: str,
@@ -96,6 +100,7 @@ class SalesforceAPI:
         logger: Logger,
     ):
         self.logger = logger
+        self._app_type = app_type
         self._client_id = client_id
         self._client_secret = client_secret
         self._oauth_url = oauth_url
@@ -131,23 +136,6 @@ class SalesforceAPI:
 
         return records
 
-    def query(self, query: str, next_page_id: str = None) -> dict:
-        if next_page_id:
-            response = self._make_json_request("GET", QUERY_NEXT_PAGE_ENDPOINT.format(next_query_id=next_page_id))
-        else:
-            response = self._make_json_request("GET", QUERY_ENDPOINT, params={"q": query})
-
-        next_records_url = response.get("nextRecordsUrl")
-        return {
-            "records": response.get("records", []),
-            "next_page_id": (
-                next_records_url[next_records_url.index("query") + len("query") :] if next_records_url else None
-            ),
-        }
-
-    def get_updated_users(self, parameters: dict) -> dict:
-        return self._make_json_request("GET", SOBJECT_UPDATED_USERS, params=parameters)
-
     def create_record(self, object_name: dict, object_data: dict) -> dict:
         return self._make_json_request("POST", SOBJECT_ENDPOINT.format(object=object_name), json=object_data)
 
@@ -181,8 +169,28 @@ class SalesforceAPI:
             "GET", SOBJECT_RECORD_FIELD_ENDPOINT.format(object=object_name, record=record_id, field=field_name)
         ).content
 
+    def _check_url_for_client_credential_flow(self, oauth_url: str) -> bool:
+        self.logger.info(oauth_url)
+        if oauth_url in (
+            "https://login.salesforce.com",
+            "https://test.salesforce.com",
+        ):
+            raise PluginException(
+                cause=(
+                    "External Client App Selected. The client credentials grant type requires your org's My Domain URL"
+                ),
+                assistance=f"(e.g. 'https://yourcompany.my.salesforce.com'), not 'https://{oauth_url}'. Please update the Login URL or review the App Type in your connection settings.",
+            )
+
     def _get_token(
-        self, client_id: str, client_secret: str, username: str, password: str, security_token: str, oauth_url: str
+        self,
+        app_type: str,
+        client_id: str,
+        client_secret: str,
+        username: str,
+        password: str,
+        security_token: str,
+        oauth_url: str,
     ):
         # A single task run makes multiple API calls to Salesforce, we can keep the token for one task execution
         if self.token and self.instance_url:
@@ -194,6 +202,22 @@ class SalesforceAPI:
         # Validate the OAuth URL to ensure it is a pure domain without paths or query parameters
         self.validate_oauth_url(salesforce_url)
 
+        if app_type == EXTERNAL_CLIENT_APP:
+            self._check_url_for_client_credential_flow(oauth_url)
+            data = {
+                "grant_type": CLIENT_CREDENTIALS_GRANT_TYPE,
+                "client_id": client_id,
+                "client_secret": client_secret,
+            }
+        else:
+            data = {
+                "grant_type": PASSWORD_GRANT_TYPE,
+                "client_id": client_id,
+                "client_secret": client_secret,
+                "username": username,
+                "password": password + security_token,
+            }
+
         # Construct the client URL for the OAuth token request
         client_url = f"https://{salesforce_url}/services/oauth2/token"
 
@@ -203,13 +227,7 @@ class SalesforceAPI:
             response = requests.request(
                 method="POST",
                 url=client_url,
-                data={
-                    "grant_type": "password",
-                    "client_id": client_id,
-                    "client_secret": client_secret,
-                    "username": username,
-                    "password": password + security_token,
-                },
+                data=data,
             )
         except DNSError as error_message:
             self.logger.info(f"Network error or DNS resolution failed: {error_message}")
@@ -240,7 +258,9 @@ class SalesforceAPI:
                     )
                     time.sleep(retry_sleep)
                     self.retry_count += 1
-                    return self._get_token(client_id, client_secret, username, password, security_token, oauth_url)
+                    return self._get_token(
+                        app_type, client_id, client_secret, username, password, security_token, oauth_url
+                    )
                 else:
                     self.logger.error(f"SalesforceAPI: Max retry attempts reached ({self.retry_count}). Exiting...")
                     self.logger.error(
@@ -283,7 +303,13 @@ class SalesforceAPI:
     @refresh_token(1)
     def _make_request(self, method: str, url: str, params: dict = {}, json: dict = {}):  # noqa: C901, MC0001
         access_token, instance_url = self._get_token(
-            self._client_id, self._client_secret, self._username, self._password, self._security_token, self._oauth_url
+            self._app_type,
+            self._client_id,
+            self._client_secret,
+            self._username,
+            self._password,
+            self._security_token,
+            self._oauth_url,
         )
         instance_url = self._get_version(instance_url)
         headers = {"Authorization": f"Bearer {access_token}"}
