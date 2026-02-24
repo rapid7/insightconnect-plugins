@@ -1,6 +1,7 @@
 import json
 import os
-from typing import Any, Callable
+from types import TracebackType
+from typing import Any, Callable, Optional, Type
 from unittest import mock
 
 import requests
@@ -21,6 +22,17 @@ class MockResponse:
             )
         ) as file:
             return json.load(file)
+
+    def __enter__(self):
+        return self
+
+    def __exit__(
+        self,
+        exception_type: Optional[Type[BaseException]],
+        exception_value: Optional[BaseException],
+        exception_traceback: Optional[TracebackType],
+    ) -> bool:
+        return False
 
 
 def mocked_request(side_effect: Callable) -> None:
