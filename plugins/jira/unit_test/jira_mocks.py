@@ -1,10 +1,10 @@
 import json
 import os
-from typing import Optional, Type, Any, Callable
+from types import TracebackType
+from typing import Any, Callable, Optional, Type
 from unittest import mock
 
 import requests
-from types import TracebackType
 
 
 class MockResponse:
