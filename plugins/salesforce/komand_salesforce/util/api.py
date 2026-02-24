@@ -209,6 +209,11 @@ class SalesforceAPI:
                 "client_secret": client_secret,
             }
         else:
+            if not all([username, password, security_token]):
+                raise PluginException(
+                    cause="Invalid credentials. Username, password, and security token are required for a Connected App integration.",
+                    assistance="Username, password, and security token must be provided for Password Grant Type authentication.",
+                )
             data = {
                 "grant_type": PASSWORD_GRANT_TYPE,
                 "client_id": client_id,

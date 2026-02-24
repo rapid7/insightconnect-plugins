@@ -84,6 +84,12 @@ class TestConnection(TestCase):
                 "External Client App Selected. The client credentials grant type requires your org's My Domain URL",
                 "(e.g. 'https://yourcompany.my.salesforce.com'), not 'https://login.salesforce.com'. Please update the Login URL or review the App Type in your connection settings.",
             ],
+            [
+                "missing_credentials",
+                Util.read_file_to_dict("inputs/connection_missing_credentials.json.inp"),
+                "Invalid credentials. Username, password, and security token are required for a Connected App integration.",
+                "Username, password, and security token must be provided for Password Grant Type authentication.",
+            ]
         ]
     )
     def test_connected_app_connection_raise_exception(
