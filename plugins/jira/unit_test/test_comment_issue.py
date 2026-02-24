@@ -84,8 +84,9 @@ class TestCommentIssue(TestCase):
         self.test_conn.logger = test_logger
         self.test_action.logger = test_logger
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_comment_issue(self, mock_request: mock.Mock) -> None:
+    def test_comment_issue(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "comment": "This is a test comment",
@@ -98,8 +99,9 @@ class TestCommentIssue(TestCase):
         self.assertIn("comment_id", result)
         self.assertIsNotNone(result["comment_id"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_comment_issue_with_long_comment(self, mock_request: mock.Mock) -> None:
+    def test_comment_issue_with_long_comment(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         long_comment = "This is a very long comment. " * 50
         action_params = {
             "id": "ED-24",
@@ -112,8 +114,11 @@ class TestCommentIssue(TestCase):
         self.assertIsNotNone(result)
         self.assertIn("comment_id", result)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_comment_issue_with_special_characters(self, mock_request: mock.Mock) -> None:
+    def test_comment_issue_with_special_characters(
+        self, mock_session_request: mock.Mock, mock_request: mock.Mock
+    ) -> None:
         action_params = {
             "id": "10002",
             "comment": "Comment with special chars: @#$%^&*()!",
@@ -125,8 +130,9 @@ class TestCommentIssue(TestCase):
         self.assertIsNotNone(result)
         self.assertIn("comment_id", result)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_comment_issue_with_multiline(self, mock_request: mock.Mock) -> None:
+    def test_comment_issue_with_multiline(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         multiline_comment = """This is a multiline comment.
 Line 2 of the comment.
 Line 3 of the comment."""
@@ -168,8 +174,9 @@ class TestCommentIssueCloud(TestCase):
         self.test_conn.logger = test_logger
         self.test_action.logger = test_logger
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_comment_issue_cloud(self, mock_request: mock.Mock) -> None:
+    def test_comment_issue_cloud(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "comment": "This is a test comment",
@@ -182,8 +189,9 @@ class TestCommentIssueCloud(TestCase):
         self.assertIn("comment_id", result)
         self.assertEqual(result["comment_id"], "10000")
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_comment_issue_cloud_with_issue_key(self, mock_request: mock.Mock) -> None:
+    def test_comment_issue_cloud_with_issue_key(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "PROJ-123",
             "comment": "Test comment with issue key",
@@ -195,8 +203,9 @@ class TestCommentIssueCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertIn("comment_id", result)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_comment_issue_cloud_with_mentions(self, mock_request: mock.Mock) -> None:
+    def test_comment_issue_cloud_with_mentions(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "comment": "Hey @testuser, please review this issue",
@@ -208,8 +217,11 @@ class TestCommentIssueCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertIn("comment_id", result)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_comment_issue_cloud_with_markdown_style(self, mock_request: mock.Mock) -> None:
+    def test_comment_issue_cloud_with_markdown_style(
+        self, mock_session_request: mock.Mock, mock_request: mock.Mock
+    ) -> None:
         action_params = {
             "id": "10002",
             "comment": "# Header\n**bold text** and *italic text*\n- bullet point",
@@ -221,8 +233,11 @@ class TestCommentIssueCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertIn("comment_id", result)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_comment_issue_cloud_with_code_block(self, mock_request: mock.Mock) -> None:
+    def test_comment_issue_cloud_with_code_block(
+        self, mock_session_request: mock.Mock, mock_request: mock.Mock
+    ) -> None:
         action_params = {
             "id": "10002",
             "comment": "Here is some code:\n```python\nprint('Hello World')\n```",
@@ -234,8 +249,9 @@ class TestCommentIssueCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertIn("comment_id", result)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_comment_issue_cloud_with_emoji(self, mock_request: mock.Mock) -> None:
+    def test_comment_issue_cloud_with_emoji(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "comment": "Great work! 👍 🎉",
@@ -247,8 +263,9 @@ class TestCommentIssueCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertIn("comment_id", result)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_comment_issue_cloud_with_url(self, mock_request: mock.Mock) -> None:
+    def test_comment_issue_cloud_with_url(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "comment": "Check this out: https://example.com",
@@ -271,8 +288,9 @@ class TestCommentIssueCloud(TestCase):
         with self.assertRaises(PluginException):
             self.test_action.run(action_params)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_comment_issue_cloud_empty_comment(self, mock_request: mock.Mock) -> None:
+    def test_comment_issue_cloud_empty_comment(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "comment": "",
@@ -284,8 +302,11 @@ class TestCommentIssueCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertIn("comment_id", result)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_comment_issue_cloud_very_long_comment(self, mock_request: mock.Mock) -> None:
+    def test_comment_issue_cloud_very_long_comment(
+        self, mock_session_request: mock.Mock, mock_request: mock.Mock
+    ) -> None:
         very_long_comment = "A" * 10000
         action_params = {
             "id": "10002",
@@ -298,8 +319,9 @@ class TestCommentIssueCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertIn("comment_id", result)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_comment_issue_cloud_with_unicode(self, mock_request: mock.Mock) -> None:
+    def test_comment_issue_cloud_with_unicode(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "comment": "Unicode characters: 你好 مرحبا שלום",
