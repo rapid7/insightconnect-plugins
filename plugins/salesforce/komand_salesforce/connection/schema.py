@@ -4,6 +4,7 @@ import json
 
 
 class Input:
+    APPTYPE = "appType"
     CLIENTID = "clientId"
     CLIENTSECRET = "clientSecret"
     LOGINURL = "loginURL"
@@ -18,6 +19,17 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "appType": {
+      "type": "string",
+      "title": "App Type",
+      "description": "The SalesForce App Type. External Client apps utilise the client credentials flow while Connect Apps utilise the Password authentication flow.",
+      "default": "External Client App",
+      "enum": [
+        "External Client App",
+        "Connected App"
+      ],
+      "order": 6
+    },
     "clientId": {
       "type": "string",
       "title": "Client ID",
@@ -40,21 +52,20 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "salesforceAccountUsernameAndPassword": {
       "$ref": "#/definitions/credential_username_password",
       "title": "Salesforce Account Username and Password",
-      "description": "Name and password of the Salesforce user",
+      "description": "Name and password of the Salesforce user (only required if App Type is Connected App)",
       "order": 4
     },
     "securityToken": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "Security Token",
-      "description": "Security token of the Salesforce user",
+      "description": "Security token of the Salesforce user (only required if App Type is Connected App)",
       "order": 5
     }
   },
   "required": [
+    "appType",
     "clientId",
-    "clientSecret",
-    "salesforceAccountUsernameAndPassword",
-    "securityToken"
+    "clientSecret"
   ],
   "definitions": {
     "credential_secret_key": {

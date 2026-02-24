@@ -15,6 +15,7 @@ class Util:
     def default_connector(action: insightconnect_plugin_runtime.Action, params: dict = None):
         default_connection = Connection()
         default_connection.logger = logging.getLogger("connection logger")
+        print(params)
         if not params:
             params = {
                 Input.CLIENTID: "example-client-id",
@@ -81,6 +82,8 @@ class Util:
             if data.get("client_id") == "unsupported-grant-type":
                 return MockResponse(400, "unsupported_grant_type")
             return MockResponse(200, "get_token")
+        if url == "https://example.com/services/oauth2/token":
+            return MockResponse(200, "get_token")
         if url == "https://example.com/services/data/":
             return MockResponse(200, "get_version")
 
@@ -115,15 +118,6 @@ class Util:
                 return MockResponse(404)
 
         if method == "GET":
-            if url == "https://example.com/services/data/v58.0/sobjects/User/updated":
-                # all of these query until now - just check the start parameter to determine the mocked resp
-                params_start = params.get("start")
-                if params_start == "2023-07-20T16:10:15.340+00:00":
-                    return MockResponse(200, "get_updated_users_empty")
-                elif params_start == "invalid":
-                    return MockResponse(400)
-                else:
-                    return MockResponse(200, "get_updated_users")
             if url == "https://example.com/services/data/v58.0/sobjects/Document/invalid/body":
                 return MockResponse(404)
             if url == "https://example.com/services/data/v58.0/sobjects/Invalid/015Hn000002ge67890/body":
