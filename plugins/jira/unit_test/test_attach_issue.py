@@ -62,8 +62,9 @@ class TestAttachIssue(TestCase):
         # Sample test file content (base64 encoded "Hello, World!")
         self.sample_file_content = base64.b64encode(b"Hello, World!").decode("utf-8")
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_attach_issue(self, mock_request: mock.Mock) -> None:
+    def test_attach_issue(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "attachment_filename": "test.txt",
@@ -79,8 +80,9 @@ class TestAttachIssue(TestCase):
         self.assertIn("id", result)
         self.assertIsNotNone(result["id"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_attach_issue_with_image(self, mock_request: mock.Mock) -> None:
+    def test_attach_issue_with_image(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         # Create a simple base64 encoded image-like content
         image_content = base64.b64encode(b"\x89PNG\r\n\x1a\n test image content").decode("utf-8")
         action_params = {
@@ -97,8 +99,11 @@ class TestAttachIssue(TestCase):
         self.assertIsNotNone(result)
         self.assertIn("id", result)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_attach_issue_with_different_extension(self, mock_request: mock.Mock) -> None:
+    def test_attach_issue_with_different_extension(
+        self, mock_session_request: mock.Mock, mock_request: mock.Mock
+    ) -> None:
         action_params = {
             "id": "10002",
             "attachment_filename": "logfile.log",
@@ -128,8 +133,9 @@ class TestAttachIssue(TestCase):
 
         self.assertIn("No issue found", str(context.exception))
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_attach_issue_invalid_base64(self, mock_request: mock.Mock) -> None:
+    def test_attach_issue_invalid_base64(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "attachment_filename": "test.txt",
@@ -162,8 +168,9 @@ class TestAttachIssueCloud(TestCase):
         # Sample test file content (base64 encoded "Hello, World!")
         self.sample_file_content = base64.b64encode(b"Hello, World!").decode("utf-8")
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_attach_issue_cloud(self, mock_request: mock.Mock) -> None:
+    def test_attach_issue_cloud(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "attachment_filename": "test.txt",
@@ -177,8 +184,9 @@ class TestAttachIssueCloud(TestCase):
         self.assertIn("id", result)
         self.assertIsNotNone(result["id"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_attach_issue_cloud_with_pdf(self, mock_request: mock.Mock) -> None:
+    def test_attach_issue_cloud_with_pdf(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         pdf_content = base64.b64encode(b"%PDF-1.4 test pdf content").decode("utf-8")
         action_params = {
             "id": "PROJ-123",
@@ -192,8 +200,9 @@ class TestAttachIssueCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertIn("id", result)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_attach_issue_cloud_with_issue_key(self, mock_request: mock.Mock) -> None:
+    def test_attach_issue_cloud_with_issue_key(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "PROJ-456",
             "attachment_filename": "report.xlsx",
@@ -218,8 +227,11 @@ class TestAttachIssueCloud(TestCase):
         with self.assertRaises(PluginException):
             self.test_action.run(action_params)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_attach_issue_cloud_filename_with_special_chars(self, mock_request: mock.Mock) -> None:
+    def test_attach_issue_cloud_filename_with_special_chars(
+        self, mock_session_request: mock.Mock, mock_request: mock.Mock
+    ) -> None:
         action_params = {
             "id": "10002",
             "attachment_filename": "my-test_file (1).txt",
@@ -232,8 +244,9 @@ class TestAttachIssueCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertIn("id", result)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_attach_issue_cloud_large_filename(self, mock_request: mock.Mock) -> None:
+    def test_attach_issue_cloud_large_filename(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         long_filename = "a" * 200 + ".txt"
         action_params = {
             "id": "10002",
@@ -247,8 +260,9 @@ class TestAttachIssueCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertIn("id", result)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_attach_issue_cloud_invalid_base64(self, mock_request: mock.Mock) -> None:
+    def test_attach_issue_cloud_invalid_base64(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "attachment_filename": "test.txt",
@@ -261,8 +275,9 @@ class TestAttachIssueCloud(TestCase):
 
         self.assertIn("Unable to decode attachment bytes", str(context.exception))
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_attach_issue_cloud_empty_file(self, mock_request: mock.Mock) -> None:
+    def test_attach_issue_cloud_empty_file(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         empty_content = base64.b64encode(b"").decode("utf-8")
         action_params = {
             "id": "10002",

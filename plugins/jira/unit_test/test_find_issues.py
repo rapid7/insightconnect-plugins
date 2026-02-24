@@ -87,8 +87,9 @@ class TestFindIssues(TestCase):
         self.test_conn.logger = test_logger
         self.test_action.logger = test_logger
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_find_issues(self, mock_request: mock.Mock) -> None:
+    def test_find_issues(self, mock_request: mock.Mock, mock_session_request: mock.Mock) -> None:
         action_params = {
             "jql": "project = TEST",
             "max": 50,
@@ -101,8 +102,9 @@ class TestFindIssues(TestCase):
         self.assertIn("issues", result)
         self.assertIsInstance(result["issues"], list)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_find_issues_with_max_results(self, mock_request: mock.Mock) -> None:
+    def test_find_issues_with_max_results(self, mock_request: mock.Mock, mock_session_request: mock.Mock) -> None:
         action_params = {
             "jql": "assignee = currentUser()",
             "max": 10,
@@ -114,8 +116,9 @@ class TestFindIssues(TestCase):
         self.assertIsNotNone(result)
         self.assertIn("issues", result)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_find_issues_with_attachments(self, mock_request: mock.Mock) -> None:
+    def test_find_issues_with_attachments(self, mock_request: mock.Mock, mock_session_request: mock.Mock) -> None:
         action_params = {
             "jql": "project = TEST",
             "max": 50,
@@ -128,8 +131,9 @@ class TestFindIssues(TestCase):
         self.assertIsNotNone(result)
         self.assertIn("issues", result)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_find_issues_complex_jql(self, mock_request: mock.Mock) -> None:
+    def test_find_issues_complex_jql(self, mock_request: mock.Mock, mock_session_request: mock.Mock) -> None:
         action_params = {
             "jql": 'project = TEST AND status = "In Progress" AND assignee = currentUser()',
             "max": 100,
@@ -156,8 +160,9 @@ class TestFindIssuesCloud(TestCase):
         self.test_conn.logger = test_logger
         self.test_action.logger = test_logger
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_find_issues_cloud(self, mock_request: mock.Mock) -> None:
+    def test_find_issues_cloud(self, mock_request: mock.Mock, mock_session_request: mock.Mock) -> None:
         action_params = {
             "jql": "project = TEST",
             "max": 50,
@@ -170,8 +175,9 @@ class TestFindIssuesCloud(TestCase):
         self.assertIn("issues", result)
         self.assertIsInstance(result["issues"], list)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_find_issues_cloud_with_status(self, mock_request: mock.Mock) -> None:
+    def test_find_issues_cloud_with_status(self, mock_request: mock.Mock, mock_session_request: mock.Mock) -> None:
         action_params = {
             "jql": "status = Open",
             "max": 50,
@@ -183,8 +189,9 @@ class TestFindIssuesCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertIn("issues", result)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_find_issues_cloud_with_assignee(self, mock_request: mock.Mock) -> None:
+    def test_find_issues_cloud_with_assignee(self, mock_request: mock.Mock, mock_session_request: mock.Mock) -> None:
         action_params = {
             "jql": "assignee = currentUser()",
             "max": 50,
@@ -196,8 +203,9 @@ class TestFindIssuesCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertIn("issues", result)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_find_issues_cloud_with_attachments(self, mock_request: mock.Mock) -> None:
+    def test_find_issues_cloud_with_attachments(self, mock_request: mock.Mock, mock_session_request: mock.Mock) -> None:
         action_params = {
             "jql": "project = TEST",
             "max": 50,
@@ -210,8 +218,11 @@ class TestFindIssuesCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertIn("issues", result)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_find_issues_cloud_max_results_limit(self, mock_request: mock.Mock) -> None:
+    def test_find_issues_cloud_max_results_limit(
+        self, mock_request: mock.Mock, mock_session_request: mock.Mock
+    ) -> None:
         action_params = {
             "jql": "project = TEST",
             "max": 1,
@@ -223,8 +234,9 @@ class TestFindIssuesCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertIn("issues", result)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_find_issues_cloud_complex_jql(self, mock_request: mock.Mock) -> None:
+    def test_find_issues_cloud_complex_jql(self, mock_request: mock.Mock, mock_session_request: mock.Mock) -> None:
         action_params = {
             "jql": 'project = TEST AND status IN ("Open", "In Progress") ORDER BY created DESC',
             "max": 100,
@@ -236,8 +248,9 @@ class TestFindIssuesCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertIn("issues", result)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_400)
     @mock.patch("requests.request", side_effect=mock_request_400)
-    def test_find_issues_cloud_invalid_jql(self, mock_request: mock.Mock) -> None:
+    def test_find_issues_cloud_invalid_jql(self, mock_request: mock.Mock, mock_session_request: mock.Mock) -> None:
         action_params = {
             "jql": "invalid jql syntax here",
             "max": 50,
@@ -251,8 +264,9 @@ class TestFindIssuesCloud(TestCase):
         with self.assertRaises(PluginException):
             self.test_action.run(action_params)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_find_issues_cloud_with_labels(self, mock_request: mock.Mock) -> None:
+    def test_find_issues_cloud_with_labels(self, mock_request: mock.Mock, mock_session_request: mock.Mock) -> None:
         action_params = {
             "jql": "labels = bug",
             "max": 50,

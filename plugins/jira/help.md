@@ -29,6 +29,8 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |api_key|credential_secret_key|None|False|Jira API key when connecting to Jira Cloud or Jira user password when connecting to on-prem Jira server|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
+|client_id|string|None|False|Jira OAuth 2.0 Client ID, only works with Jira Cloud|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
+|client_secret|credential_secret_key|None|False|Jira OAuth 2.0 Client Secret, only works with Jira Cloud|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
 |pat|credential_secret_key|None|False|Jira Personal Access Token, only works with the on-prem Jira Server|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
 |url|string|https://example.atlassian.net|False|Jira URL|None|https://example.atlassian.net|None|None|
 |user|string|None|False|Jira user email when connecting to Jira Cloud or Jira username when connecting to on-prem Jira server|None|user@example.com|None|None|
@@ -38,6 +40,8 @@ Example input:
 ```
 {
   "api_key": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "client_id": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "client_secret": "9de5069c5afe602b2ea0a04b66beb2c0",
   "pat": "9de5069c5afe602b2ea0a04b66beb2c0",
   "url": "https://example.atlassian.net",
   "user": "user@example.com"
@@ -730,6 +734,7 @@ Example output:
 
 # Version History
 
+* 6.7.0 - Added OAuth 2.0 (client credentials) authentication | Action `Edit Issue`: Fixed issue related to the custom field option | Updated SDK to the latest version (6.4.3)
 * 6.6.1 - Updated SDK to the latest version (6.4.2)
 * 6.6.0 - Updated plugin to use Jira Cloud API v3 endpoints for cloud instances | Updated SDK to the latest version (6.4.1)
 * 6.5.3 - Updated SDK to the latest version (6.3.10)

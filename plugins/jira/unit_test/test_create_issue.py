@@ -264,8 +264,9 @@ class TestCreateIssue(TestCase):
         # Just verifying no exceptions are raised
         self.assertIsNotNone(result)
 
-    @mock.patch("requests.request")
-    def test_create_issue_with_attachment(self, mock_request: mock.MagicMock) -> None:
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
+    @mock.patch("requests.request", side_effect=mock_request_200)
+    def test_create_issue_with_attachment(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         mock_request.side_effect = mock_request_200
 
         action_params = {
@@ -356,8 +357,9 @@ class TestCreateIssueCloud(TestCase):
         self.test_conn.logger = test_logger
         self.test_action.logger = test_logger
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_create_issue_cloud(self, mock_request: mock.MagicMock) -> None:
+    def test_create_issue_cloud(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "attachment_bytes": "",
             "attachment_filename": "",
@@ -377,8 +379,9 @@ class TestCreateIssueCloud(TestCase):
         self.assertEqual(result["issue"]["id"], "10002")
         self.assertEqual(result["issue"]["summary"], "Test issue summary")
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_create_issue_cloud_with_attachment(self, mock_request: mock.MagicMock) -> None:
+    def test_create_issue_cloud_with_attachment(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "attachment_bytes": "VGhpcyBpcyBhIHRlc3QK",
             "attachment_filename": "test.txt",
@@ -395,8 +398,9 @@ class TestCreateIssueCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertIn("issue", result)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_create_issue_cloud_no_description(self, mock_request: mock.MagicMock) -> None:
+    def test_create_issue_cloud_no_description(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "attachment_bytes": "",
             "attachment_filename": "",
@@ -413,8 +417,11 @@ class TestCreateIssueCloud(TestCase):
         # Just verifying no exceptions are raised
         self.assertIsNotNone(result)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_create_issue_cloud_description_is_none(self, mock_request: mock.MagicMock) -> None:
+    def test_create_issue_cloud_description_is_none(
+        self, mock_session_request: mock.Mock, mock_request: mock.Mock
+    ) -> None:
         action_params = {
             "attachment_bytes": "",
             "attachment_filename": "",
@@ -431,8 +438,9 @@ class TestCreateIssueCloud(TestCase):
         # Just verifying no exceptions are raised
         self.assertIsNotNone(result)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_create_issue_cloud_with_unicode(self, mock_request: mock.MagicMock) -> None:
+    def test_create_issue_cloud_with_unicode(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "attachment_bytes": "",
             "attachment_filename": "",
@@ -449,8 +457,11 @@ class TestCreateIssueCloud(TestCase):
         # Just verifying no exceptions are raised
         self.assertIsNotNone(result)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_create_issue_cloud_with_attachment_no_filename(self, mock_request: mock.MagicMock) -> None:
+    def test_create_issue_cloud_with_attachment_no_filename(
+        self, mock_session_request: mock.Mock, mock_request: mock.Mock
+    ) -> None:
         action_params = {
             "attachment_bytes": "VGhpcyBpcyBhIHRlc3QK",
             "attachment_filename": "",
@@ -465,8 +476,11 @@ class TestCreateIssueCloud(TestCase):
         with self.assertRaises(PluginException):
             self.test_action.run(action_params)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_create_issue_cloud_with_attachment_no_bytes(self, mock_request: mock.MagicMock) -> None:
+    def test_create_issue_cloud_with_attachment_no_bytes(
+        self, mock_session_request: mock.Mock, mock_request: mock.Mock
+    ) -> None:
         action_params = {
             "attachment_bytes": "",
             "attachment_filename": "test.txt",

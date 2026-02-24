@@ -12,7 +12,7 @@ description: '[Jira](https://www.atlassian.com/software/jira) is an issue tracki
   to programmatically manage and create issues and users. The Jira plugin supports
   cloud (only with InsightConnect cloud connections) and on-premise versions of Jira
   Software, Jira Server, and Jira ServiceDesk products from Atlassian'
-version: 6.6.1
+version: 6.7.0
 connection_version: 6
 supported_versions: [Jira Server 6.0, Jira (Cloud), Jira ServiceDesk (Cloud)]
 cloud_ready: true
@@ -31,7 +31,7 @@ hub_tags:
   features: []
 sdk:
   type: slim
-  version: 6.4.2
+  version: 6.4.3
   user: nobody
   custom_cmd:
   - ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
@@ -49,6 +49,7 @@ troubleshooting:
 - Please note only Jira cloud is supported with InsightConnect cloud. For JIRA OnPrem,
   please use an orchestrator for connecting.
 version_history:
+- "6.7.0 - Added OAuth 2.0 (client credentials) authentication | Action `Edit Issue`: Fixed issue related to the custom field option | Updated SDK to the latest version (6.4.3)"
 - 6.6.1 - Updated SDK to the latest version (6.4.2)
 - 6.6.0 - Updated plugin to use Jira Cloud API v3 endpoints for cloud instances |
   Updated SDK to the latest version (6.4.1)
@@ -253,6 +254,18 @@ connection:
     title: Personal Access Token
     type: credential_secret_key
     description: Jira Personal Access Token, only works with the on-prem Jira Server
+    required: false
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
+  client_id:
+    title: Client ID
+    type: string
+    description: Jira OAuth 2.0 Client ID, only works with Jira Cloud
+    required: false
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
+  client_secret:
+    title: Client Secret
+    type: credential_secret_key
+    description: Jira OAuth 2.0 Client Secret, only works with Jira Cloud
     required: false
     example: 9de5069c5afe602b2ea0a04b66beb2c0
 actions:

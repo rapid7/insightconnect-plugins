@@ -27,7 +27,7 @@ class EditIssue(insightconnect_plugin_runtime.Action):
             if value:
                 clean_params[key] = value
 
-        self.logger.info(clean_params)
+        self.logger.info(f"Editing issue (ID: {issue_id}, notify: {notify}) and parameters: {clean_params}")
         try:
             if not self.connection.is_cloud:
                 # https://github.com/pycontribs/jira/blob/master/jira/resources.py#L506
@@ -35,8 +35,14 @@ class EditIssue(insightconnect_plugin_runtime.Action):
                 issue.update(notify=notify, **clean_params)
             else:
                 # If description provided as plain text, convert to ADF format
-                if "description" in clean_params:
-                    clean_params["description"] = load_text_as_adf(clean_params["description"])
+                if Input.DESCRIPTION in clean_params:
+                    clean_params[Input.DESCRIPTION] = load_text_as_adf(clean_params[Input.DESCRIPTION])
+
+                # If additional fields are provided, ęxtract from 'fields' input and merge with clean_params
+                if Input.FIELDS in clean_params:
+                    clean_params.update(clean_params.pop(Input.FIELDS, {}))
+
+                # Send request to Jira API to edit the issue
                 self.connection.rest_client.edit_issue(issue_id, issue_fields=clean_params, notify=notify)
         except Exception as error:
             raise PluginException(cause="An unknown error occurred.", data=error)
