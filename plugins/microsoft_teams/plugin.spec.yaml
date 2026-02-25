@@ -14,7 +14,7 @@ key_features:
 requirements:
 - Username and Password
 - Secret Key, similar to API Key
-version: 7.0.4
+version: 7.0.5
 connection_version: 7
 supported_versions: [Microsoft Graph API v1.0 2024-09-13]
 vendor: rapid7
@@ -52,6 +52,7 @@ references:
 - '[Adaptive Cards Actions](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/cards/cards-actions#adaptive-cards-actions)'
 - '[Python Regular Expression Library (Re)](https://docs.python.org/3.7/library/re.html)'
 version_history:
+- 7.0.5 - Added chat trigger feature and allow send_html_message to send to chat
 - 7.0.4 - Updated SDK to the latest version (6.4.2)
 - 7.0.3 - Updated SDK to the latest version (6.3.10)
 - 7.0.2 - Updated SDK to the latest version (6.3.3)
@@ -648,7 +649,55 @@ triggers:
         type: string
         required: false
         example: example_team
-
+  new_chat_message_received:
+    title: New Chat Message Received
+    description: Poll a chat for new messages
+    input:
+      chat_id:
+        title: ChatID
+        description: Chat ID
+        type: string
+        required: true
+        order: 1
+        example: 19:abcdef1234567890@thread.v2
+      message_content:
+        title: Message Content
+        description: Regex to match new messages against
+        type: string
+        required: false
+        order: 2
+        example: '[Tt]est'
+    output:
+      message:
+        title: Message
+        description: The message object that was created
+        type: message
+        required: false
+        example: {body: {contentType: text, content: tests_v1}, channelIdentity: {
+            teamId: 9e538ff5-dcb2-46a9-9a28-f93b8250deb0, channelId: 11:examplechannel.name},
+          First Word: test, from: {user: {id: 3395856c-e81f-2b73-82de-e72602f798b6,
+              displayName: Example User, userIdentityType: aadUser, tenantId: 9e538ff5-dcb2-46a9-9a28-f93b8250deb0}},
+          ID: '1234567891', messageType: message, importance: normal, locale: en-us,
+          webUrl: https://teams.microsoft.com/l/message/11:examplechannel.name/1234567890groupId=example-team-id&tenantId=1&createdTime=1692623381&parentMessageId=1234567891,
+          Words: [{}]}
+      indicators:
+        title: Indicators
+        description: The indicators object that was extracted from message
+        type: indicators
+        required: false
+        example: {CVEs: [CVE-2024-1234], Domains: [test.com], Email Addresses: [user@example.com],
+          Hashes: {MD5 Hashes: [938c2cc0dcc05f2b68c4287040cfcf71], SHA1 Hashes: [
+              2aae6c35c94fcfb415dbe95f408b9ce91ee846ed], SHA256 Hashes: [ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad]},
+          IP Addressses: {IPv4 Addressses: [1.1.1.1], IPv6 Addressses: [1111:1111:1111:1111:1111:1111:1111:1111]},
+          MAC Addresses: [00-00-00-00-00-00], URLs: [https://www.user@example.com],
+          UUIDs: ['123456789']}
+      chat_id:
+        title: Chat ID
+        description: The ChatID where the message was posted
+        type: string
+        required: false
+        example: example_name
+        
 actions:
   get_teams:
     title: Get Teams
@@ -800,14 +849,14 @@ actions:
         title: Team Name
         description: Team name
         type: string
-        required: true
+        required: false
         order: 1
         example: InsightConnect Team
       channel_name:
         title: Channel Name
         description: Channel name
         type: string
-        required: true
+        required: false
         order: 2
         example: InsightConnect Channel
       thread_id:
@@ -817,12 +866,19 @@ actions:
         required: false
         order: 3
         example: 1595889908700
+      chat_id:
+        title: Chat ID
+        description: The ID of the chat
+        type: string
+        required: false
+        order: 4
+        example: 19:1234b0c1d234a12345abc1ab123456_thread.v2             
       message_content:
         title: Message Content
         description: HTML content to send
         type: string
         required: true
-        order: 4
+        order: 5
         example: <b>Hello!</b>
     output:
       message:
