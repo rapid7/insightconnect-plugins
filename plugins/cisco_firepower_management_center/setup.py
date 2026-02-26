@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 setup(
     name="cisco_firepower_management_center-rapid7-plugin",
     version="2.1.5",
-    description="[Cisco Firepower Management Center](https://www.cisco.com/c/en/us/products/security/firepower-management-center/index.html) is your administrative nerve center for managing critical Cisco network security solutions.The Cisco Firepower Management Center InsightConnect plugin allows you to block URLs and hosts. Firewall best practices for blocking and unblocking hosts is to add and remove address objects from a group attached to an existing firewall policy such as a deny-all rule.In this example, adding an address object to a group attached to a deny-all rule will block the host, and removing the address object from the same group would unblock the host. Automating firewall blocking can be accomplished using the address object management actions in this plugin",
+    description="[Cisco Firepower Management Center](https://www.cisco.com/c/en/us/products/security/firepower-management-center/index.html) centralizes management of Cisco security solutions. The InsightConnect plugin can block URLs/hosts by adding address objects to a group tied to an existing deny-all rule; removing the object from that group unblocks. This plugin automates blocking via address object management actions.",
     author="rapid7",
     author_email="",
     url="",
