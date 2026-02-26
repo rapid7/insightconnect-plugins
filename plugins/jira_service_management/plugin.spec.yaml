@@ -1,0 +1,153 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: jira_service_management
+title: Jira Service Management
+description: Notify the right people, reduce response time, and avoid alert fatigue with Jira Service Management
+version: 1.0.0
+supported_versions: ["2026-02-25"]
+vendor: rapid7
+support: rapid7
+status: []
+tags:
+  - atlassian
+  - jira_service_management
+  - alerts
+  - notifications
+sdk:
+  type: slim
+  version: 6.4.3
+  user: nobody
+hub_tags:
+  use_cases: [alerting_and_notifications]
+  keywords: [atlassian]
+  features: []
+version_history:
+  - 1.0.0 - Initial plugin
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/jira_service_management
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.atlassian.com/software/jira/service-management
+links:
+- '[Jira Service Management](https://www.atlassian.com/software/jira/service-management)'
+enable_cache: false
+
+types:
+  person:
+    first_name:
+      title: First Name
+      type: string
+    last_name:
+      title: Last Name
+      type: string
+
+connection:
+  hostname:
+    title: Host
+    description: Enter the hostname
+    type: string
+    required: true
+    example: https://www.google.com/
+  port:
+    title: Port
+    description: Enter the port
+    type: integer
+    default: 80
+    required: true
+    example: 8080
+  username:
+    title: Username
+    description: Enter the username
+    type: string
+    required: true
+    example: UserName
+
+triggers:
+  emit_greeting:
+    title: Trigger a New Greeting
+    description: Triggers a greeting every interval
+    input:
+      interval:
+        title: Interval
+        description: How frequently (in seconds) to trigger a greeting
+        type: integer
+        default: 15
+        required: true
+        example: 20
+    output:
+      greeting:
+        title: Greeting
+        description: The user generated greeting message
+        type: person
+        required: true
+        example: Hello World!
+
+actions:
+  create_alert:
+    title: Create Alert
+    description: Creates an alert for Jira Service Management
+    input:
+      name:
+        title: Name
+        description: Name to say goodbye to
+        type: string
+        required: true
+        example: Rapid7Name
+    output:
+      message:
+        title: Message
+        description: User generated message
+        type: string
+        required: true
+        example: Hello World!
+  get_alert:
+    title: Get Alert
+    description: Retrieve alert from Jira Service Management
+    input:
+      name:
+        title: Name
+        description: Name to say goodbye to
+        type: string
+        required: true
+        example: Rapid7Name
+    output:
+      message:
+        title: Message
+        description: User generated message
+        type: string
+        required: true
+        example: Hello World!
+  close_alert:
+    title: Close Alert
+    description: Close an existing alert from Jira Service Management
+    input:
+      name:
+        title: Name
+        description: Name to say goodbye to
+        type: string
+        required: true
+        example: Rapid7Name
+    output:
+      message:
+        title: Message
+        description: User generated message
+        type: string
+        required: true
+        example: Hello World!
+  get_on_calls:
+    title: Get On-Calls
+    description: Get current on-call participants
+    input:
+      name:
+        title: Name
+        description: Name to say goodbye to
+        type: string
+        required: true
+        example: Rapid7Name
+    output:
+      message:
+        title: Message
+        description: User generated message
+        type: string
+        required: true
+        example: Hello World!
