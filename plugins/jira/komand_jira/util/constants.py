@@ -1,4 +1,4 @@
-REQUESTS_TIMEOUT = 30
+REQUESTS_TIMEOUT = 20
 DEFAULT_JIRA_API_VERSION = "3"
 
 # OAuth2 endpoints for Atlassian Cloud
