@@ -15,4 +15,3 @@ from .remove_address_from_group.action import RemoveAddressFromGroup
 from .add_scan_result.action import AddScanResult
 
 from .bulk_add_scan_result.action import BulkAddScanResult
-
