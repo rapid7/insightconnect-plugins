@@ -98,7 +98,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         # Initialize the appropriate client based on the provided authentication method
         if self.pat:
-            client = JIRA(options={"server": self.url}, token_auth=self.pat)
+            client = JIRA(options={"server": self.url}, token_auth=self.pat) if not self.is_cloud else None
             rest_client = JiraApi(self.url, {"Authorization": f"Bearer {self.pat}"}, self.logger)
         elif self.client_id and self.client_secret:
             # Jira library doesn't support OAuth2
@@ -107,7 +107,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 self.url, {"client_id": self.client_id, "client_secret": self.client_secret}, self.logger
             )
         else:
-            client = JIRA(options={"server": self.url}, basic_auth=(self.username, self.password))
+            client = (
+                JIRA(options={"server": self.url}, basic_auth=(self.username, self.password))
+                if not self.is_cloud
+                else None
+            )
             rest_client = JiraApi(self.url, HTTPBasicAuth(username=self.username, password=self.password), self.logger)
 
         self.client = client
