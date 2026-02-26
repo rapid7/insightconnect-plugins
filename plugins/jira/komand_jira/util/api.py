@@ -235,7 +235,7 @@ class JiraApi:
             return self.authorization, headers
 
         # OAuth2
-        if all(key in self.authorization for key in ("client_id", "client_secret")):
+        if self._is_oauth2_credentials():
             self.logger.info("Authentication type: OAuth2 Client Credentials.")
             access_token = self._get_access_token(**self.authorization)
             headers["Authorization"] = f"Bearer {access_token}"
