@@ -5,6 +5,6 @@ pywinrm[kerberos]==0.5.0
 requests-kerberos==0.15.0
 requests-credssp==2.0.0
 parameterized==0.9.0
-cryptography==46.0.4
+cryptography==46.0.5
 idna==3.11
 xmltodict==1.0.2
