@@ -40,8 +40,10 @@ class MockSession:
                 temp["page"]["number"] += 1
                 mock_response.text = json.dumps(temp)
             self.counter += 1
-
         return mock_response
+
+    def close(self) -> None:
+        return
 
 
 class TestResourceRequests(TestCase):

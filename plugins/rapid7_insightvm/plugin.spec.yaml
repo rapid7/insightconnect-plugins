@@ -6,7 +6,7 @@ title: Rapid7 InsightVM Console
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes,
   and remediates vulnerabilities. This plugin uses an orchestrator to get top remediations,
   scan results and start scans
-version: 8.0.14
+version: 8.0.15
 connection_version: 8
 supported_versions: [Rapid7 InsightVM API v3 2022-05-25]
 fedramp_ready: true
@@ -30,6 +30,7 @@ links:
 references:
 - '[InsightVM API 3](https://help.rapid7.com/insightvm/en-us/api/index.html)'
 version_history:
+- 8.0.15 - Addressed issue with sessions
 - 8.0.14 - Updated dependencies | Updated SDK to latest version (6.4.3)
 - 8.0.13 - Resolved Snyk Vulnerability | Updated SDK to latest version (6.3.10)
 - 8.0.12 - Resolved Snyk Vulnerabilities | Updated SDK to latest version (6.3.4)
