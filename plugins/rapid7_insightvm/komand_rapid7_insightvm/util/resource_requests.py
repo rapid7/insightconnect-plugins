@@ -120,6 +120,8 @@ class ResourceRequests(object):
         else:
             resource = {"raw": response.text}
 
+        # Close session
+        self.session.close()
         return resource
 
     def paged_resource_request(
@@ -211,4 +213,7 @@ class ResourceRequests(object):
             total_pages=response_json["page"]["totalPages"],
             resources=response_json["resources"],
         )
+
+        # Close session
+        self.session.close()
         return result
