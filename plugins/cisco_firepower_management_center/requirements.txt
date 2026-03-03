@@ -3,4 +3,4 @@
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 validators==0.22.0
 parameterized==0.9.0
-cryptography==44.0.1
+cryptography==46.0.5

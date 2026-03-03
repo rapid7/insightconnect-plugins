@@ -4,8 +4,8 @@ products: [insightconnect]
 name: salesforce
 title: Salesforce
 description: "[Salesforce](https://www.salesforce.com) is a CRM solution that brings together all customer information in a single, integrated platform that enables building a customer-centered business from marketing right through to sales, customer service and business analysis. The Salesforce plugin allows you to search, update, and manage salesforce records. This plugin utilizes the [Salesforce API](https://developer.salesforce.com/docs/atlas.en-us.216.0.api_rest.meta/api_rest/intro_what_is_rest_api.htm)"
-version: 2.1.14
-connection_version: 2
+version: 3.0.0
+connection_version: 3
 vendor: rapid7
 support: community
 cloud_ready: true
@@ -13,7 +13,7 @@ status: []
 supported_versions: ["Salesforce API v58 2023-06-30"]
 sdk:
   type: full
-  version: 6.3.8
+  version: 6.4.3
   user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/salesforce
@@ -28,8 +28,11 @@ key_features:
   - Get record fields
   - Get blob data for a given record
 requirements:
-  - Salesforce username, password and security token
-  - Consumer Key and Secret of the connected app
+  - Consumer Key and Secret of the external app or connected app
+  - Salesforce username, password and security token (Connected App Only)
+troubleshooting:
+  - "If using an external app for authentication, ensure that the custom domain is supplied within the connection. Additionally ensure that `Enable Client Credentials Flow` is selected under `OAuth Flows and External Client App Enhancements` for the external app and populated with an appropriate user with the necessary permissions. Finally, ensure that the `Callback URL` in the app's `OAuth Settings` is set to `https://localhost/callback` and select the options to `Enable Client Credentials Flow` and `Enable Authorization Code and Credentials Flow`."
+  - "If using a connected app for authentication, ensure that both username and password are supplied within the connection, along with the security token. Enable `OAuth Settings` and use one of these options as your `Callback URL`: `https://login.salesforce.com/services/oauth/success` or `https://{{your-instance}}.salesforce.com/services/oauth/success`. Finally, select the options to `Enable Client Credentials Flow` and `Enable Authorization Code and Credentials Flow`."
 links:
   - "[Salesforce](https://salesforce.com)"
 references:
@@ -37,6 +40,7 @@ references:
   - "[Connecting your app to the API](https://developer.salesforce.com/docs/atlas.en-us.216.0.api_rest.meta/api_rest/quickstart.htm)"
   - "[SOQL](https://developer.salesforce.com/docs/atlas.en-us.216.0.soql_sosl.meta/soql_sosl/sforce_api_calls_soql.htm)"
 version_history:
+  - "3.0.0 - Update connection to accept App Type input which allows for more flexible authentication flows and support of SalesForce External Apps | Bump SDK to 6.4.3 | Remove Task Monitor Users as it has been migrated to a separate source"
   - "2.1.14 - Task Monitor Users: Added validation input URL | Add task delay monitoring | Updated SDK to the latest version (6.3.8)"
   - "2.1.13 - Task Monitor Users: improve error response to UI | Bump SDK to 6.2.4"
   - "2.1.12 - Task Monitor Users: ensure datetime includes microseconds | Bump SDK to 6.2.0"
@@ -204,16 +208,26 @@ connection:
     example: 1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF
   salesforceAccountUsernameAndPassword:
     title: Salesforce Account Username and Password
-    description: Name and password of the Salesforce user
+    description: Name and password of the Salesforce user (only required if App Type is Connected App)
     type: credential_username_password
-    required: true
+    required: false
     example: '{"username": "user@example.com", "password": "password"}'
   securityToken:
     title: Security Token
-    description: Security token of the Salesforce user
+    description: Security token of the Salesforce user (only required if App Type is Connected App)
     type: credential_secret_key
-    required: true
+    required: false
     example: Ier6YY78KxJwKtHy7HeK0oPc
+  appType:
+    title: App Type
+    description: The SalesForce App Type. External Client apps utilise the client credentials flow while Connect Apps utilise the Password authentication flow.
+    type: string
+    required: true
+    example: password
+    enum:
+      - "External Client App"
+      - "Connected App"
+    default: "External Client App"
 actions:
   simple_search:
     title: Simple Search
@@ -417,14 +431,3 @@ actions:
         type: bytes
         required: false
         example: dGVzdA==
-tasks:
-  monitor_users:
-    title: Monitor Users
-    description: Get information about users, their login history and which users have been updated
-    output:
-      users:
-        title: Users
-        description: Information about users, their login history and which users have been updated
-        type: "[]object"
-        required: true
-        example: '[{"attributes":{"type":"User","url":"/services/data/v58.0/sobjects/User/005Hn00000HVWwxIAH"},"id":"005Hn00000HVWwxIAH","firstName":"Security","lastName":"User","email":"user@example.com","alias":"sec","isActive":true,"dataType":"User Update"},{"attributes":{"type":"User","url":"/services/data/v58.0/sobjects/User/005Hn00000H35JtIAJ"},"id":"005Hn00000H35JtIAJ","firstName":"Example","lastName":"User","email":"user2@example.com","alias":"exam","isActive":true,"dataType":"User"},{"attributes":{"type":"User","url":"/services/data/v58.0/sobjects/User/005Hn00000HVWwxIAH"},"id":"005Hn00000HVWwxIAH","firstName":"Security","lastName":"User","email":"user@example.com","alias":"sec","isActive":true,"dataType":"User"},{"attributes":{"type":"LoginHistory","url":"/services/data/v58.0/sobjects/LoginHistory/0YaHn0000EUyGdHKQV"},"loginTime":"2023-07-23T16:18:23.000+0000","userId":"005Hn00000H35JtIAJ","loginType":"Remote Access 2.0","loginUrl":"login.salesforce.com","sourceIp":"198.51.100.1","status":"Success","application":"New Connected App","browser":"Unknown","dataType":"User Login"},{"attributes":{"type":"LoginHistory","url":"/services/data/v58.0/sobjects/LoginHistory/0YaHn0000EUyGkcKQF"},"loginTime":"2023-07-23T16:20:13.000+0000","userId":"005Hn00000H35JtIAJ","loginType":"Application","loginUrl":"example.salesforce.com","sourceIp":"198.51.100.1","status":"Success","application":"Browser","browser":"Chrome 115","dataType":"User Login"}]'

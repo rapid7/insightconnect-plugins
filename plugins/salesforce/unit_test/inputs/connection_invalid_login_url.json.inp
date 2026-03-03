@@ -1,0 +1,8 @@
+{
+  "clientId": "example-client-id",
+  "clientSecret": {
+    "secretKey": "example-secret-key"
+  },
+  "loginURL": "https://login.salesforce.com",
+  "appType": "External Client App"
+}

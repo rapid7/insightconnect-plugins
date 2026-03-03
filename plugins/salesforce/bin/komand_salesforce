@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Salesforce"
 Vendor = "rapid7"
-Version = "2.1.14"
+Version = "3.0.0"
 Description = "[Salesforce](https://www.salesforce.com) is a CRM solution that brings together all customer information in a single, integrated platform that enables building a customer-centered business from marketing right through to sales, customer service and business analysis. The Salesforce plugin allows you to search, update, and manage salesforce records. This plugin utilizes the [Salesforce API](https://developer.salesforce.com/docs/atlas.en-us.216.0.api_rest.meta/api_rest/intro_what_is_rest_api.htm)"
 
 
@@ -49,8 +49,6 @@ def main():
             self.add_action(actions.GetFields())
         
             self.add_action(actions.GetBlobData())
-        
-            self.add_task(tasks.MonitorUsers())
         
 
     """Run plugin"""

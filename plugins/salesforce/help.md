@@ -14,8 +14,8 @@
 
 # Requirements
 
-* Salesforce username, password and security token
-* Consumer Key and Secret of the connected app
+* Consumer Key and Secret of the external app or connected app
+* Salesforce username, password and security token (Connected App Only)
 
 # Supported Product Versions
 
@@ -29,16 +29,18 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|appType|string|External Client App|True|The SalesForce App Type. External Client apps utilise the client credentials flow while Connect Apps utilise the Password authentication flow.|["External Client App", "Connected App"]|password|None|None|
 |clientId|string|None|True|Consumer Key of the connected app|None|1234567890aBcdEFRoeRxDE1234567890abCDef6Etz7VLwwLQZn19jyW3U_1234567890AbcdEF4VkuMS4ze|None|None|
 |clientSecret|credential_secret_key|None|True|Consumer Secret of the connected app|None|1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF|None|None|
 |loginURL|string|https://login.salesforce.com|False|Salesforce login URL|None|https://login.salesforce.com|None|None|
-|salesforceAccountUsernameAndPassword|credential_username_password|None|True|Name and password of the Salesforce user|None|{"username": "user@example.com", "password": "password"}|None|None|
-|securityToken|credential_secret_key|None|True|Security token of the Salesforce user|None|Ier6YY78KxJwKtHy7HeK0oPc|None|None|
+|salesforceAccountUsernameAndPassword|credential_username_password|None|False|Name and password of the Salesforce user (only required if App Type is Connected App)|None|{"username": "user@example.com", "password": "password"}|None|None|
+|securityToken|credential_secret_key|None|False|Security token of the Salesforce user (only required if App Type is Connected App)|None|Ier6YY78KxJwKtHy7HeK0oPc|None|None|
 
 Example input:
 
 ```
 {
+  "appType": "External Client App",
   "clientId": "1234567890aBcdEFRoeRxDE1234567890abCDef6Etz7VLwwLQZn19jyW3U_1234567890AbcdEF4VkuMS4ze",
   "clientSecret": "1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF",
   "loginURL": "https://login.salesforce.com",
@@ -401,99 +403,8 @@ Example output:
   
 *This plugin does not contain any triggers.*
 ### Tasks
-
-
-#### Monitor Users
-
-This task is used to get information about users, their login history and which users have been updated
-
-##### Input
   
-*This task does not contain any inputs.*
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- |
-|users|[]object|True|Information about users, their login history and which users have been updated|[{"attributes":{"type":"User","url":"/services/data/v58.0/sobjects/User/005Hn00000HVWwxIAH"},"id":"005Hn00000HVWwxIAH","firstName":"Security","lastName":"User","email":"user@example.com","alias":"sec","isActive":true,"dataType":"User Update"},{"attributes":{"type":"User","url":"/services/data/v58.0/sobjects/User/005Hn00000H35JtIAJ"},"id":"005Hn00000H35JtIAJ","firstName":"Example","lastName":"User","email":"user2@example.com","alias":"exam","isActive":true,"dataType":"User"},{"attributes":{"type":"User","url":"/services/data/v58.0/sobjects/User/005Hn00000HVWwxIAH"},"id":"005Hn00000HVWwxIAH","firstName":"Security","lastName":"User","email":"user@example.com","alias":"sec","isActive":true,"dataType":"User"},{"attributes":{"type":"LoginHistory","url":"/services/data/v58.0/sobjects/LoginHistory/0YaHn0000EUyGdHKQV"},"loginTime":"2023-07-23T16:18:23.000+0000","userId":"005Hn00000H35JtIAJ","loginType":"Remote Access 2.0","loginUrl":"login.salesforce.com","sourceIp":"198.51.100.1","status":"Success","application":"New Connected App","browser":"Unknown","dataType":"User Login"},{"attributes":{"type":"LoginHistory","url":"/services/data/v58.0/sobjects/LoginHistory/0YaHn0000EUyGkcKQF"},"loginTime":"2023-07-23T16:20:13.000+0000","userId":"005Hn00000H35JtIAJ","loginType":"Application","loginUrl":"example.salesforce.com","sourceIp":"198.51.100.1","status":"Success","application":"Browser","browser":"Chrome 115","dataType":"User Login"}]|
-  
-Example output:
-
-```
-{
-  "users": [
-    {
-      "alias": "sec",
-      "attributes": {
-        "type": "User",
-        "url": "/services/data/v58.0/sobjects/User/005Hn00000HVWwxIAH"
-      },
-      "dataType": "User Update",
-      "email": "user@example.com",
-      "firstName": "Security",
-      "id": "005Hn00000HVWwxIAH",
-      "isActive": true,
-      "lastName": "User"
-    },
-    {
-      "alias": "exam",
-      "attributes": {
-        "type": "User",
-        "url": "/services/data/v58.0/sobjects/User/005Hn00000H35JtIAJ"
-      },
-      "dataType": "User",
-      "email": "user2@example.com",
-      "firstName": "Example",
-      "id": "005Hn00000H35JtIAJ",
-      "isActive": true,
-      "lastName": "User"
-    },
-    {
-      "alias": "sec",
-      "attributes": {
-        "type": "User",
-        "url": "/services/data/v58.0/sobjects/User/005Hn00000HVWwxIAH"
-      },
-      "dataType": "User",
-      "email": "user@example.com",
-      "firstName": "Security",
-      "id": "005Hn00000HVWwxIAH",
-      "isActive": true,
-      "lastName": "User"
-    },
-    {
-      "application": "New Connected App",
-      "attributes": {
-        "type": "LoginHistory",
-        "url": "/services/data/v58.0/sobjects/LoginHistory/0YaHn0000EUyGdHKQV"
-      },
-      "browser": "Unknown",
-      "dataType": "User Login",
-      "loginTime": "2023-07-23T16:18:23.000+0000",
-      "loginType": "Remote Access 2.0",
-      "loginUrl": "login.salesforce.com",
-      "sourceIp": "198.51.100.1",
-      "status": "Success",
-      "userId": "005Hn00000H35JtIAJ"
-    },
-    {
-      "application": "Browser",
-      "attributes": {
-        "type": "LoginHistory",
-        "url": "/services/data/v58.0/sobjects/LoginHistory/0YaHn0000EUyGkcKQF"
-      },
-      "browser": "Chrome 115",
-      "dataType": "User Login",
-      "loginTime": "2023-07-23T16:20:13.000+0000",
-      "loginType": "Application",
-      "loginUrl": "example.salesforce.com",
-      "sourceIp": "198.51.100.1",
-      "status": "Success",
-      "userId": "005Hn00000H35JtIAJ"
-    }
-  ]
-}
-```
+*This plugin does not contain any tasks.*
 
 ### Custom Types
   
@@ -528,11 +439,13 @@ Example output:
 
 
 ## Troubleshooting
-  
-*This plugin does not contain a troubleshooting.*
+
+* If using an external app for authentication, ensure that the custom domain is supplied within the connection. Additionally ensure that `Enable Client Credentials Flow` is selected under `OAuth Flows and External Client App Enhancements` for the external app and populated with an appropriate user with the necessary permissions. Finally, ensure that the `Callback URL` in the app's `OAuth Settings` is set to `https://localhost/callback` and select the options to `Enable Client Credentials Flow` and `Enable Authorization Code and Credentials Flow`.
+* If using a connected app for authentication, ensure that both username and password are supplied within the connection, along with the security token. Enable `OAuth Settings` and use one of these options as your `Callback URL`: `https://login.salesforce.com/services/oauth/success` or `https://{{your-instance}}.salesforce.com/services/oauth/success`. Finally, select the options to `Enable Client Credentials Flow` and `Enable Authorization Code and Credentials Flow`.
 
 # Version History
 
+* 3.0.0 - Update connection to accept App Type input which allows for more flexible authentication flows and support of SalesForce External Apps | Bump SDK to 6.4.3 | Remove Task Monitor Users as it has been migrated to a separate source
 * 2.1.14 - Task Monitor Users: Added validation input URL | Add task delay monitoring | Updated SDK to the latest version (6.3.8)
 * 2.1.13 - Task Monitor Users: improve error response to UI | Bump SDK to 6.2.4
 * 2.1.12 - Task Monitor Users: ensure datetime includes microseconds | Bump SDK to 6.2.0
