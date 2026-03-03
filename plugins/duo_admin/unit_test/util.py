@@ -1,12 +1,11 @@
 import json
 import logging
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 import insightconnect_plugin_runtime
-
 from komand_duo_admin.connection import Connection
 from komand_duo_admin.connection.schema import Input
 
@@ -40,7 +39,7 @@ class Util:
     @staticmethod
     def mock_request(*args, **kwargs):
         class MockResponse:
-            def __init__(self, status_code: int, filename: str = None, headers: dict = {}):
+            def __init__(self, status_code: int, filename: str = None, headers: dict = {}) -> None:
                 self.status_code = status_code
                 self.text = ""
                 self.headers = headers
