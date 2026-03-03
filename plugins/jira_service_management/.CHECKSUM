@@ -22,10 +22,6 @@
 		{
 			"identifier": "connection/schema.py",
 			"hash": "ed79f4aeb85a24a61302d8ed0c96a206"
-		},
-		{
-			"identifier": "emit_greeting/schema.py",
-			"hash": "1206448a5e9f08fc32a02870cd189216"
 		}
 	]
 }
