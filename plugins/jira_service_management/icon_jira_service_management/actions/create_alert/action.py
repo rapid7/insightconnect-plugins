@@ -17,7 +17,6 @@ class CreateAlert(insightconnect_plugin_runtime.Action):
     @auto_instrument
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
-        name = params.get(Input.NAME)
         # END INPUT BINDING - DO NOT REMOVE
 
         return {

@@ -46,7 +46,7 @@ class JiraServiceManagementApi:
             assistance="Please provide a valid instance name.",
         )
 
-    def make_request(
+    def make_request(  # noqa: MC0001
         self,
         method: str,
         url: str,
@@ -71,7 +71,7 @@ class JiraServiceManagementApi:
                 timeout=timeout,
             )
 
-            if response.status_code == 401 or response.status_code == 403:
+            if response.status_code in (401, 403):
                 raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=response.text)
             if response.status_code == 404:
                 raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
