@@ -8,11 +8,17 @@ class Component:
 
 
 class Input:
-    NAME = "name"
+    IDENTIFIER = "identifier"
+    IDENTIFIERTYPE = "identifierType"
+    NOTE = "note"
+    SOURCE = "source"
+    USER = "user"
 
 
 class Output:
-    MESSAGE = "message"
+    ELAPSED_TIME = "elapsed_time"
+    REQUESTID = "requestId"
+    RESULT = "result"
 
 
 class CloseAlertInput(insightconnect_plugin_runtime.Input):
@@ -22,15 +28,46 @@ class CloseAlertInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "name": {
+    "identifier": {
       "type": "string",
-      "title": "Name",
-      "description": "Name to say goodbye to",
+      "title": "Alert ID, Tiny ID or Alias",
+      "description": "Identifier of the alert",
       "order": 1
+    },
+    "identifierType": {
+      "type": "string",
+      "title": "Identifier Type",
+      "description": "Type of the identifier that is provided as an in-line parameter. Possible values are ID, tiny ID and alias. Default value is ID",
+      "default": "ID",
+      "enum": [
+        "",
+        "ID",
+        "tiny",
+        "alias"
+      ],
+      "order": 2
+    },
+    "note": {
+      "type": "string",
+      "title": "Note",
+      "description": "Additional alert note to add",
+      "order": 5
+    },
+    "source": {
+      "type": "string",
+      "title": "Source",
+      "description": "Display name of the request source",
+      "order": 4
+    },
+    "user": {
+      "type": "string",
+      "title": "User",
+      "description": "Display name of the request owner",
+      "order": 3
     }
   },
   "required": [
-    "name"
+    "identifier"
   ],
   "definitions": {}
 }
@@ -48,15 +85,29 @@ class CloseAlertOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "message": {
+    "elapsed_time": {
+      "type": "number",
+      "title": "Elapsed Time",
+      "description": "Time taken to execute",
+      "order": 2
+    },
+    "requestId": {
       "type": "string",
-      "title": "Message",
-      "description": "User generated message",
+      "title": "Request ID",
+      "description": "ID of a executed API request",
+      "order": 3
+    },
+    "result": {
+      "type": "string",
+      "title": "Result",
+      "description": "Result message from API",
       "order": 1
     }
   },
   "required": [
-    "message"
+    "elapsed_time",
+    "requestId",
+    "result"
   ],
   "definitions": {}
 }

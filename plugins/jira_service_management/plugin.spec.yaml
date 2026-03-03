@@ -32,122 +32,284 @@ links:
 - '[Jira Service Management](https://www.atlassian.com/software/jira/service-management)'
 enable_cache: false
 
-types:
-  person:
-    first_name:
-      title: First Name
-      type: string
-    last_name:
-      title: Last Name
-      type: string
-
 connection:
-  hostname:
-    title: Host
-    description: Enter the hostname
+  client_id:
+    title: Client ID
+    description: Jira Service Management Client ID
+    type: credential_secret_key
+    required: true
+    example: a1b2c3d4e5f6g7h8i9j0klmnopqrstuv
+  client_secret:
+    title: Client Secret
+    description: Jira Service Management Client Secret
+    type: credential_secret_key
+    required: true
+    example: ABCD1234efgh5678IJKLmnopqrstUVWXyz9876543210
+  instance:
+    title: Jira Service Management Instance
+    description: The instance of Jira Service Management from the URL, e.g. https://{instance}.atlassian.net/
     type: string
     required: true
-    example: https://www.google.com/
-  port:
-    title: Port
-    description: Enter the port
-    type: integer
-    default: 80
-    required: true
-    example: 8080
-  username:
-    title: Username
-    description: Enter the username
-    type: string
-    required: true
-    example: UserName
-
-triggers:
-  emit_greeting:
-    title: Trigger a New Greeting
-    description: Triggers a greeting every interval
-    input:
-      interval:
-        title: Interval
-        description: How frequently (in seconds) to trigger a greeting
-        type: integer
-        default: 15
-        required: true
-        example: 20
-    output:
-      greeting:
-        title: Greeting
-        description: The user generated greeting message
-        type: person
-        required: true
-        example: Hello World!
+    example: instance
 
 actions:
   create_alert:
     title: Create Alert
     description: Creates an alert for Jira Service Management
     input:
-      name:
-        title: Name
-        description: Name to say goodbye to
-        type: string
-        required: true
-        example: Rapid7Name
-    output:
       message:
         title: Message
-        description: User generated message
+        description: Message of the alert
         type: string
         required: true
-        example: Hello World!
+        example: An example alert message
+      alias:
+        title: Alias
+        description: Client-defined identifier of the alert, that is also the key element of Alert deduplication
+        type: string
+        required: false
+        example: An example alias
+      description:
+        title: Description
+        description: Alert description
+        type: string
+        required: false
+        example: An example description
+      responders:
+        title: Responders
+        description: 'Teams, users, escalations and schedules that the alert will be routed to send notifications. "id/name": Either id or name of each responder should be provided. "type": team, user, escalation, schedule. Format: [{"id/name":"value", "type":"team/user/escalation/schedule"}]'
+        type: "[]object"
+        required: false
+        example: '[{"id":"4513b7ea-3b91-438f-b7e4-e3e54af9147c", "type":"team"},{"name":"NOC","type":"team"}]'
+      visibleTo:
+        title: VisibleTo
+        description: 'Teams and users that the alert will become visible to without sending any notification. Type field is mandatory for each item, where possible values are team and user. In addition to the type field, either ID or name should be given for teams and either ID or username should be given for users. Please note that alert will be visible to the teams that are specified within responders field by default, so there is no need to re-specify them within visibleTo field. "id/name": Either id or name of each responder should be provided. "type": team, user, escalation, schedule. Format: [{"id/name":"value", "type":"team/user/escalation/schedule"}]'
+        type: "[]object"
+        required: false
+        example: '[{"id":"4513b7ea-3b91-438f-b7e4-e3e54af9147c","type":"team"},{"name":"example_name","type":"team"}]'
+      actions:
+        title: Actions
+        description: Custom actions that will be available for the alert
+        type: "[]string"
+        required: false
+        example: '["Restart", "AnExampleAction"]'
+      tags:
+        title: Tags
+        description: Tags of the alert
+        type: "[]string"
+        required: false
+        example: '["OverwriteQuietHours","Critical"]'
+      details:
+        title: Details
+        description: JSON object of key-value pairs to use as custom properties of the alert
+        type: object
+        required: false
+        example: '{"key1":"value1","key2":"value2"}'
+      entity:
+        title: Entity
+        description: Entity field of the alert that is generally used to specify which domain an alert is related to
+        type: string
+        required: false
+        example: An example entity
+      source:
+        title: Source
+        description: Source field of the alert. Default value is IP address of the incoming request
+        type: string
+        required: false
+        example: "192.168.0.1"
+      priority:
+        title: Priority
+        description: Priority level of the alert. Possible values are P1, P2, P3, P4 and P5. Default value is P3
+        type: string
+        enum:
+          - ""
+          - P2
+          - P1
+          - P3
+          - P4
+          - P5
+        default: P3
+        required: false
+        example: P1
+      user:
+        title: User
+        description: Display name of the request owner
+        type: string
+        required: false
+        example: ExampleName
+      note:
+        title: Note
+        description: Additional note that will be added when creating the alert
+        type: string
+        required: false
+        example: Example additional note
+    output:
+      result:
+        title: Result
+        description: Result message from API
+        type: string
+        required: true
+        example: Request will be processed
+      elapsed_time:
+        title: Elapsed Time
+        description: Time taken to execute
+        type: float
+        required: true
+        example: 0.195
+      requestId:
+        title: Request ID
+        description: ID of a executed API request
+        type: string
+        required: true
+        example: d383c6e9-b1e7-4b59-9c35-72f1a2187777
   get_alert:
     title: Get Alert
     description: Retrieve alert from Jira Service Management
     input:
-      name:
-        title: Name
-        description: Name to say goodbye to
+      identifier:
+        title: Alert ID, Tiny ID or Alias
+        description: Identifier of the alert
         type: string
         required: true
-        example: Rapid7Name
+        example: 8418d193-2dab-4490-b331-8c02cdd196b7
+      identifierType:
+        title: Identifier Type
+        description: Type of the identifier that is provided as an in-line parameter. Possible values are ID, tiny ID and alias. Default value is ID
+        type: string
+        enum:
+          - ""
+          - ID
+          - tiny
+          - alias
+        default: ID
+        required: false
+        example: ID
     output:
-      message:
-        title: Message
-        description: User generated message
+      data:
+        title: Data
+        description: Data that contains JSON response
+        type: object
+        required: true
+      requestId:
+        title: Request ID
+        description: ID of an request
         type: string
         required: true
-        example: Hello World!
+        example: e0caa0ce-d52f-4500-81b9-d592d06970b6
+      elapsed_time:
+        title: Elapsed Time
+        description: Time taken to execute
+        type: float
+        required: true
+        example: 0.195
   close_alert:
     title: Close Alert
     description: Close an existing alert from Jira Service Management
     input:
-      name:
-        title: Name
-        description: Name to say goodbye to
+      identifier:
+        title: Alert ID, Tiny ID or Alias
+        description: Identifier of the alert
         type: string
         required: true
-        example: Rapid7Name
+        example: 8418d193-2dab-4490-b331-8c02cdd196b7
+      identifierType:
+        title: Identifier Type
+        description: Type of the identifier that is provided as an in-line parameter. Possible values are ID, tiny ID and alias. Default value is ID
+        type: string
+        enum:
+          - ""
+          - ID
+          - tiny
+          - alias
+        default: ID
+        required: false
+        example: ID
+      user:
+        title: User
+        description: Display name of the request owner
+        type: string
+        required: false
+        example: Monitoring Script
+      source:
+        title: Source
+        description: Display name of the request source
+        type: string
+        required: false
+        example: AWS Lambda
+      note:
+        title: Note
+        description: Additional alert note to add
+        type: string
+        required: false
+        example: Action executed via InsightConnect
     output:
-      message:
-        title: Message
-        description: User generated message
+      result:
+        title: Result
+        description: Result message from API
         type: string
         required: true
-        example: Hello World!
+        example: Request will be processed
+      elapsed_time:
+        title: Elapsed Time
+        description: Time taken to execute
+        type: float
+        required: true
+        example: 0.195
+      requestId:
+        title: Request ID
+        description: ID of a executed API request
+        type: string
+        required: true
+        example: d383c6e9-b1e7-4b59-9c35-72f1a2187777
   get_on_calls:
     title: Get On-Calls
     description: Get current on-call participants
     input:
-      name:
-        title: Name
-        description: Name to say goodbye to
+      scheduleIdentifier:
+        title: Schedule Identifier
+        description: Identifier of the schedule
         type: string
         required: true
-        example: Rapid7Name
+        example: ScheduleName
+      scheduleIdentifierType:
+        title: Schedule Identifier Type
+        description: Type of the schedule identifier. Possible values are ID and name. Default value is ID
+        type: string
+        enum:
+          - ""
+          - ID
+          - name
+        default: ID
+        required: false
+        example: "name"
+      flat:
+        title: Retrieve All Participants
+        description: When enabled, retrieves user names of all on-call participants. Default value is false
+        type: boolean
+        required: false
+        example: false
+      date:
+        title: Date
+        description: Starting date of the timeline that will be provided in format as (yyyy-MM-dd'T'HH:mm:ssZ) (e.g. 2017-01-15T08:00:00+02:00). Default date is the moment of the time that request is received
+        type: date
+        required: false
+        example: "2017-01-15T08:00:00+02:00"
     output:
-      message:
-        title: Message
-        description: User generated message
+      data:
+        title: Data
+        description: Response data from Jira Service Management
+        type: object
+        required: true
+        example: '{"scheduleId":"12345","scheduleName":"ScheduleName","participants":[{"userId":"abc123","displayName":"John Doe","startDate":"2017-01-15T08:00:00+02:00","endDate":"2017-01-15T16:00:00+02:00"}]}'
+      elapsed_time:
+        title: Elapsed Time
+        description: Time taken to execute
+        type: float
+        required: true
+        example: 0.195
+      requestId:
+        title: Request ID
+        description: ID of a executed API request
         type: string
         required: true
-        example: Hello World!
+        example: d383c6e9-b1e7-4b59-9c35-72f1a2187777

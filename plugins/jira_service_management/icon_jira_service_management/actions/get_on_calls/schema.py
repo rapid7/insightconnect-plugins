@@ -8,11 +8,16 @@ class Component:
 
 
 class Input:
-    NAME = "name"
+    DATE = "date"
+    FLAT = "flat"
+    SCHEDULEIDENTIFIER = "scheduleIdentifier"
+    SCHEDULEIDENTIFIERTYPE = "scheduleIdentifierType"
 
 
 class Output:
-    MESSAGE = "message"
+    DATA = "data"
+    ELAPSED_TIME = "elapsed_time"
+    REQUESTID = "requestId"
 
 
 class GetOnCallsInput(insightconnect_plugin_runtime.Input):
@@ -22,15 +27,41 @@ class GetOnCallsInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "name": {
+    "date": {
       "type": "string",
-      "title": "Name",
-      "description": "Name to say goodbye to",
+      "format": "date-time",
+      "displayType": "date",
+      "title": "Date",
+      "description": "Starting date of the timeline that will be provided in format as (yyyy-MM-dd'T'HH:mm:ssZ) (e.g. 2017-01-15T08:00:00+02:00). Default date is the moment of the time that request is received",
+      "order": 4
+    },
+    "flat": {
+      "type": "boolean",
+      "title": "Retrieve All Participants",
+      "description": "When enabled, retrieves user names of all on-call participants. Default value is false",
+      "order": 3
+    },
+    "scheduleIdentifier": {
+      "type": "string",
+      "title": "Schedule Identifier",
+      "description": "Identifier of the schedule",
       "order": 1
+    },
+    "scheduleIdentifierType": {
+      "type": "string",
+      "title": "Schedule Identifier Type",
+      "description": "Type of the schedule identifier. Possible values are ID and name. Default value is ID",
+      "default": "ID",
+      "enum": [
+        "",
+        "ID",
+        "name"
+      ],
+      "order": 2
     }
   },
   "required": [
-    "name"
+    "scheduleIdentifier"
   ],
   "definitions": {}
 }
@@ -48,15 +79,29 @@ class GetOnCallsOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "message": {
-      "type": "string",
-      "title": "Message",
-      "description": "User generated message",
+    "data": {
+      "type": "object",
+      "title": "Data",
+      "description": "Response data from Jira Service Management",
       "order": 1
+    },
+    "elapsed_time": {
+      "type": "number",
+      "title": "Elapsed Time",
+      "description": "Time taken to execute",
+      "order": 2
+    },
+    "requestId": {
+      "type": "string",
+      "title": "Request ID",
+      "description": "ID of a executed API request",
+      "order": 3
     }
   },
   "required": [
-    "message"
+    "data",
+    "elapsed_time",
+    "requestId"
   ],
   "definitions": {}
 }

@@ -4,9 +4,9 @@ import json
 
 
 class Input:
-    HOSTNAME = "hostname"
-    PORT = "port"
-    USERNAME = "username"
+    CLIENT_ID = "client_id"
+    CLIENT_SECRET = "client_secret"
+    INSTANCE = "instance"
 
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -16,32 +16,50 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "hostname": {
-      "type": "string",
-      "title": "Host",
-      "description": "Enter the hostname",
+    "client_id": {
+      "$ref": "#/definitions/credential_secret_key",
+      "title": "Client ID",
+      "description": "Jira Service Management Client ID",
       "order": 1
     },
-    "port": {
-      "type": "integer",
-      "title": "Port",
-      "description": "Enter the port",
-      "default": 80,
+    "client_secret": {
+      "$ref": "#/definitions/credential_secret_key",
+      "title": "Client Secret",
+      "description": "Jira Service Management Client Secret",
       "order": 2
     },
-    "username": {
+    "instance": {
       "type": "string",
-      "title": "Username",
-      "description": "Enter the username",
+      "title": "Jira Service Management Instance",
+      "description": "The instance of Jira Service Management from the URL, e.g. https://{instance}.atlassian.net/",
       "order": 3
     }
   },
   "required": [
-    "hostname",
-    "port",
-    "username"
+    "client_id",
+    "client_secret",
+    "instance"
   ],
-  "definitions": {}
+  "definitions": {
+    "credential_secret_key": {
+      "id": "credential_secret_key",
+      "type": "object",
+      "title": "Credential: Secret Key",
+      "description": "A shared secret key",
+      "required": [
+        "secretKey"
+      ],
+      "properties": {
+        "secretKey": {
+          "type": "string",
+          "title": "Secret Key",
+          "description": "The shared secret key",
+          "format": "password",
+          "displayType": "password"
+        }
+      }
+    }
+  }
 }
     """
     )
