@@ -46,7 +46,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "url": {
       "type": "string",
       "title": "URL",
-      "description": "Jira URL",
+      "description": "Jira instance URL. Use https://example.atlassian.net for Jira Cloud, https://api.atlassian.com for OAuth 2.0 with Cloud ID (https://api.atlassian.com/ex/jira/{cloudId}), or your organization's URL for on-prem Jira Server",
       "default": "https://example.atlassian.net",
       "order": 1
     },

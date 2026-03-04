@@ -32,7 +32,7 @@ The connection configuration accepts the following parameters:
 |client_id|string|None|False|Jira OAuth 2.0 Client ID, only works with Jira Cloud|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
 |client_secret|credential_secret_key|None|False|Jira OAuth 2.0 Client Secret, only works with Jira Cloud|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
 |pat|credential_secret_key|None|False|Jira Personal Access Token, only works with the on-prem Jira Server|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
-|url|string|https://example.atlassian.net|False|Jira URL|None|https://example.atlassian.net|None|None|
+|url|string|https://example.atlassian.net|False|Jira instance URL. Use https://example.atlassian.net for Jira Cloud, https://api.atlassian.com for OAuth 2.0 with Cloud ID (https://api.atlassian.com/ex/jira/{cloudId}), or your organization's URL for on-prem Jira Server|None|https://example.atlassian.net|None|None|
 |user|string|None|False|Jira user email when connecting to Jira Cloud or Jira username when connecting to on-prem Jira server|None|user@example.com|None|None|
 
 Example input:
