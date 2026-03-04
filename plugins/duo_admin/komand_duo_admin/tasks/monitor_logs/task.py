@@ -433,29 +433,28 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
 
         # Use >= instead of == to handle cases where API returns more than documented 1000 limit
         if last_item and len(response) >= ADMIN_LOGS_LIMIT:
+            first_timestamp = response[0].get("timestamp")
             last_timestamp = last_item.get("timestamp")
-            previous_timestamp = next_page_params.get("previous_timestamp") if next_page_params else None
 
-            # Detect infinite loop - two scenarios:
-            # 1. Pagination active: `previous_timestamp` equals current last_timestamp
-            # 2. No pagination: `last_timestamp` equals the `mintime` we queried with (stuck at same timestamp)
-            if previous_timestamp == last_timestamp or (not next_page_params and last_timestamp == mintime):
+            # Detect infinite loop
+            # All items on this page have the same timestamp as our query mintime
+            # This means we're stuck at a single timestamp that has >= ADMIN_LOGS_LIMIT events
+            if first_timestamp == last_timestamp == int(mintime):
                 # Loop detected
                 # Log this and move the `mintime` forward by 1 second to skip past this timestamp
                 self.logger.error(
-                    f"Admin logs pagination loop detected at timestamp '{last_timestamp}' (mintime: '{mintime}.). "
+                    f"Admin logs pagination loop detected at timestamp '{last_timestamp}' (mintime: '{mintime}'). "
                     f"Number of events: {len(response)} (limit: {ADMIN_LOGS_LIMIT}). "
                     "Moving time forward by 1 second to avoid infinite loop."
                 )
                 parameters = {
                     "mintime": str(last_timestamp + 1),
                     "maxtime": maxtime,
-                    "previous_timestamp": last_timestamp,
                 }
             else:
                 # Normal pagination
                 # Set `mintime` to last timestamp and track it for loop detection
-                parameters = {"mintime": str(last_timestamp), "maxtime": maxtime, "previous_timestamp": last_timestamp}
+                parameters = {"mintime": str(last_timestamp), "maxtime": maxtime}
         else:
             parameters = {}
 

@@ -181,7 +181,6 @@ class TestMonitorLogs(TestCase):
         # Verify the pagination parameters and new state
         self.assertIn("admin_logs_next_page_params", new_state)
         self.assertEqual(pagination_params["mintime"], str(admin_timestamp))
-        self.assertEqual(pagination_params["previous_timestamp"], admin_timestamp)
         self.assertTrue(has_more_pages)
         self.assertEqual(status_code, 200)
 
@@ -214,7 +213,7 @@ class TestMonitorLogs(TestCase):
 
         # Set initial state with a timestamp that will trigger pagination and infinite loop detection
         state = {
-            "admin_logs_last_log_timestamp": 1682836494,
+            "admin_logs_last_log_timestamp": 1682836495,
             "auth_logs_last_log_timestamp": 1682843686,
             "trust_monitor_last_log_timestamp": 1682843686000,
             "admin_logs_next_page_params": {"mintime": "1682836495", "previous_timestamp": 1682836495},
@@ -373,9 +372,6 @@ class TestMonitorLogs(TestCase):
         # Should set `mintime` to last timestamp (not increment by 1)
         self.assertEqual(
             new_state["admin_logs_next_page_params"]["mintime"], str(base_timestamp + ADMIN_LOGS_LIMIT - 1)
-        )
-        self.assertEqual(
-            new_state["admin_logs_next_page_params"]["previous_timestamp"], base_timestamp + ADMIN_LOGS_LIMIT - 1
         )
         self.assertTrue(has_more_pages)
         self.assertEqual(status_code, 200)
