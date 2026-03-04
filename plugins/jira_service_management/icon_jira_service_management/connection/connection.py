@@ -19,9 +19,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def connect(self, params):
         self.logger.info("Connect: Connecting...")
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
-        self.client_id = params.get(Input.CLIENT_ID).get("secretKey")
-        self.client_secret = params.get(Input.CLIENT_SECRET).get("secretKey")
-        self.instance = params.get(Input.INSTANCE)
+        self.client_id = params.get(Input.CLIENT_ID, {}).get("secretKey", "").strip()
+        self.client_secret = params.get(Input.CLIENT_SECRET, {}).get("secretKey", "").strip()
+        self.instance = params.get(Input.INSTANCE, "").strip()
         # END INPUT BINDING - DO NOT REMOVE
 
         self.api = JiraServiceManagementApi(
@@ -30,9 +30,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
             instance=self.instance,
             logger=self.logger,
         )
-
-        self.logger.info(f"{self.api.cloud_id} - {self.api.instance} - Connection established successfully.")
-        self.logger.info(f"{self.api.authorization} - {self.api.instance} - Connection established successfully.")
 
     def test(self):
         # TODO: Implement connection test

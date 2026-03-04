@@ -15,8 +15,6 @@ class JiraServiceManagementApi:
         self.client_secret = client_secret
         self.instance = instance
         self.logger = logger
-        self.authorization = {"Authorization": f"Bearer {self._get_token()}"}
-        self.cloud_id = self._get_cloud_id()
 
     def _get_token(self) -> str:
         return self.make_request(
@@ -28,14 +26,16 @@ class JiraServiceManagementApi:
                 "client_secret": self.client_secret,
                 "audience": "api.atlassian.com",
             },
-            headers={"Content-Type": "application/json"},
         ).get("access_token")
 
-    def _get_cloud_id(self) -> str:
+    def _get_cloud_id(self, authorization: str) -> str:
         resources = self.make_request(
             method="GET",
             url="https://api.atlassian.com/oauth/token/accessible-resources",
-            headers=self.authorization,
+            headers={
+                "Accept": "application/json",
+                "Authorization": f"Bearer {authorization}",
+            },
         )
 
         for resource in resources:
@@ -62,30 +62,29 @@ class JiraServiceManagementApi:
             if hasattr(self, "authorization") and self.authorization:
                 headers.update(self.authorization)
 
-            response = requests.request(
+            with requests.request(
                 method.upper(),
                 url,
                 params=params,
                 json=payload,
                 headers=headers,
                 timeout=timeout,
-            )
-
-            if response.status_code in (401, 403):
-                raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=response.text)
-            if response.status_code == 404:
-                raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
-            if response.status_code == 422:
-                raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.text)
-            if 400 <= response.status_code < 500:
-                raise PluginException(
-                    preset=PluginException.Preset.UNKNOWN,
-                    data=response.text,
-                )
-            if response.status_code >= 500:
-                raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
-            if 200 <= response.status_code < 300:
-                return response.json()
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+            ) as response:
+                if response.status_code in (401, 403):
+                    raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=response.text)
+                if response.status_code == 404:
+                    raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
+                if response.status_code == 422:
+                    raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.text)
+                if 400 <= response.status_code < 500:
+                    raise PluginException(
+                        preset=PluginException.Preset.UNKNOWN,
+                        data=response.text,
+                    )
+                if response.status_code >= 500:
+                    raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
+                if 200 <= response.status_code < 300:
+                    return response.json()
+                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
         except json.decoder.JSONDecodeError as error:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)
