@@ -1,0 +1,131 @@
+{
+  "parameters": [
+    [
+      "channel",
+      "Example Team",
+      "Example Channel",
+      null,
+      null,
+      "test message",
+      {
+        "message": {
+          "@odata.context": "https://graph.microsoft.com/beta/",
+          "attachments": [],
+          "body": {
+            "content": "test",
+            "contentType": "text"
+          },
+          "channelIdentity": {
+            "channelId": "56789",
+            "teamId": "12345"
+          },
+          "createdDateTime": "2021-11-08T14:12:08.055Z",
+          "etag": "163633458055",
+          "first_word": "test",
+          "from": {
+            "user": {
+              "displayName": "Example User",
+              "id": "0",
+              "userIdentityType": "aadUser"
+            }
+          },
+          "id": "163633458055",
+          "importance": "normal",
+          "lastModifiedDateTime": "2021-11-08T14:12:08.055Z",
+          "locale": "en-us",
+          "mentions": [],
+          "messageType": "message",
+          "reactions": [],
+          "webUrl": "https://teams.microsoft.com/l/message",
+          "words": [
+            "test"
+          ]
+        }
+      }
+    ],
+    [
+      "thread",
+      "Example Team",
+      "Example Channel",
+      "1636037542013",
+      null,
+      "test message",
+      {
+        "message": {
+          "@odata.context": "https://graph.microsoft.com/beta",
+          "attachments": [],
+          "body": {
+            "content": "test response",
+            "contentType": "text"
+          },
+          "channelIdentity": {
+            "channelId": "56789",
+            "teamId": "12345"
+          },
+          "createdDateTime": "2021-11-08T14:12:14.086Z",
+          "etag": "1636389034086",
+          "first_word": "test",
+          "from": {
+            "user": {
+              "displayName": "Example User 1",
+              "id": "1",
+              "userIdentityType": "aadUser"
+            }
+          },
+          "id": "1636389034086",
+          "importance": "normal",
+          "lastModifiedDateTime": "2021-11-08T14:12:14.086Z",
+          "locale": "en-us",
+          "mentions": [],
+          "messageType": "message",
+          "reactions": [],
+          "replyToId": "1636037542013",
+          "webUrl": "https://teams.microsoft.com/l/message",
+          "words": [
+            "test",
+            "response"
+          ]
+        }
+      }
+    ],
+    [
+      "chat",
+      null,
+      null,
+      null,
+      "19:10000_20000@unq.gbl.spaces",
+      "test message",
+      {
+        "message": {
+          "@odata.context": "https://graph.microsoft.com/beta/$metadata#chats('19%!A(MISSING)10000_20000%!u(MISSING)nq.gbl.spaces')/messages/$entity",
+          "attachments": [],
+          "body": {
+            "content": "test",
+            "contentType": "text"
+          },
+          "chatId": "19:10000_20000@unq.gbl.spaces",
+          "createdDateTime": "2021-11-08T14:11:54.572Z",
+          "etag": "1688920714572",
+          "first_word": "test",
+          "from": {
+            "user": {
+              "displayName": "Example User",
+              "id": "0",
+              "userIdentityType": "aadUser"
+            }
+          },
+          "id": "1688920714572",
+          "importance": "normal",
+          "lastModifiedDateTime": "2021-11-08T14:11:54.572Z",
+          "locale": "en-us",
+          "mentions": [],
+          "messageType": "message",
+          "reactions": [],
+          "words": [
+            "test"
+          ]
+        }
+      }
+    ]
+  ]
+}
