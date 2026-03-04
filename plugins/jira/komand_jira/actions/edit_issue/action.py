@@ -42,8 +42,13 @@ class EditIssue(insightconnect_plugin_runtime.Action):
                 if Input.FIELDS in clean_params:
                     clean_params.update(clean_params.pop(Input.FIELDS, {}))
 
+                # Extract update fields if provided
+                issue_update = clean_params.pop(Input.UPDATE, {})
+
                 # Send request to Jira API to edit the issue
-                self.connection.rest_client.edit_issue(issue_id, issue_fields=clean_params, notify=notify)
+                self.connection.rest_client.edit_issue(
+                    issue_id, issue_fields=clean_params, issue_update=issue_update, notify=notify
+                )
         except Exception as error:
             raise PluginException(cause="An unknown error occurred.", data=error)
         return {Output.SUCCESS: True}
