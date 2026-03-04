@@ -232,9 +232,9 @@ connection:
   url:
     title: URL
     type: string
-    description: Jira URL
-    default: https://example.atlassian.net
+    description: Jira instance URL. Use https://example.atlassian.net for Jira Cloud, https://api.atlassian.com for OAuth 2.0 with Cloud ID (https://api.atlassian.com/ex/jira/{cloudId}), or your organization's URL for on-prem Jira Server
     required: false
+    default: https://example.atlassian.net
     example: https://example.atlassian.net
   user:
     title: User

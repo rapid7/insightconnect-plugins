@@ -205,10 +205,11 @@ class JiraApi:
             return
 
         # Only update base URL if it matches the generic pattern and doesn't already contain a cloud ID
-        if not self.base_url.startswith(f"https://{ATLASSIAN_API_DOMAIN}") or "/ex/jira/" in self.base_url:
+        if self.base_url.startswith(f"https://{ATLASSIAN_API_DOMAIN}") and "/ex/jira/" in self.base_url:
             return
 
         # Fetch cloud ID from accessible resources
+        # Also, set cloud ID as first resource ID by default in case instance matching fails
         self.logger.info("Noticed OAuth2 credentials with generic base URL. Attempting to determine Jira cloud ID...")
         resources = self._get_oauth2_accessible_resources()
         if not resources or not (cloud_id := resources[0].get("id")):
@@ -216,6 +217,12 @@ class JiraApi:
                 cause="Unable to determine Jira cloud ID for OAuth2.",
                 assistance="Verify your client credentials have access to at least one Jira site.",
             )
+
+        # Iterate through resources to find matching instance
+        for resource in resources:
+            if (resource_name := resource.get("name", "")) and resource_name in self.base_url:
+                cloud_id = resource.get("id") or cloud_id
+                break
 
         self.base_url = f"https://{ATLASSIAN_API_DOMAIN}/ex/jira/{cloud_id}"
         self.logger.info(f"Updated base URL to: {self.base_url}")
