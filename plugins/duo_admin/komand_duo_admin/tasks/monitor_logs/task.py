@@ -433,15 +433,18 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
 
         # Use >= instead of == to handle cases where API returns more than documented 1000 limit
         if last_item and len(response) >= ADMIN_LOGS_LIMIT:
-            first_timestamp = response[0].get("timestamp")
-            last_timestamp = last_item.get("timestamp")
+            # Convert timestamps to integers for comparison
+            # Defaults to mintime in case `timestamp` field is missing to avoid potential infinite loop
+            # If API does not return expected fields
+            first_timestamp = int(response[0].get("timestamp", mintime))
+            last_timestamp = int(last_item.get("timestamp", mintime))
 
             # Detect infinite loop
             # All items on this page have the same timestamp as our query mintime
             # This means we're stuck at a single timestamp that has >= ADMIN_LOGS_LIMIT events
             if first_timestamp == last_timestamp == int(mintime):
                 # Loop detected
-                # Log this and move the `mintime` forward by 1 second to skip past this timestamp
+                # Log this and move the `mintime` forward by 1 second to skip this timestamp
                 self.logger.error(
                     f"Admin logs pagination loop detected at timestamp '{last_timestamp}' (mintime: '{mintime}'). "
                     f"Number of events: {len(response)} (limit: {ADMIN_LOGS_LIMIT}). "

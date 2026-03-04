@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 from unittest import TestCase
 from unittest.mock import patch, MagicMock
 
-from komand_duo_admin.tasks.monitor_logs.task import MonitorLogs
+from komand_duo_admin.tasks.monitor_logs.task import MonitorLogs, ADMIN_LOGS_LIMIT
 from parameterized import parameterized
 
 from util import Util
@@ -138,7 +138,6 @@ class TestMonitorLogs(TestCase):
         self.assertTrue(new_state_2)
         self.assertEqual(status_code_2, 200)
 
-    @patch("komand_duo_admin.tasks.monitor_logs.task.ADMIN_LOGS_LIMIT", 10)
     @patch("komand_duo_admin.util.api.DuoAdminAPI.get_trust_monitor_events")
     @patch("komand_duo_admin.util.api.DuoAdminAPI.get_auth_logs")
     @patch("komand_duo_admin.util.api.DuoAdminAPI.get_admin_logs")
@@ -152,9 +151,6 @@ class TestMonitorLogs(TestCase):
         mock_get_headers: MagicMock,
         mock_get_time: MagicMock,
     ) -> None:
-        # Reimport
-        from komand_duo_admin.tasks.monitor_logs.task import ADMIN_LOGS_LIMIT
-
         # Create a list of admin logs with the same timestamp to trigger pagination
         admin_timestamp = 1682836490
         admin_logs = [
@@ -216,7 +212,7 @@ class TestMonitorLogs(TestCase):
             "admin_logs_last_log_timestamp": 1682836495,
             "auth_logs_last_log_timestamp": 1682843686,
             "trust_monitor_last_log_timestamp": 1682843686000,
-            "admin_logs_next_page_params": {"mintime": "1682836495", "previous_timestamp": 1682836495},
+            "admin_logs_next_page_params": {"mintime": "1682836495"},
         }
 
         # Execute task run and get the new state and pagination info
@@ -227,7 +223,6 @@ class TestMonitorLogs(TestCase):
         self.assertEqual(new_state["admin_logs_next_page_params"]["mintime"], "1682836496")
         self.assertEqual(status_code, 200)
 
-    @patch("komand_duo_admin.tasks.monitor_logs.task.ADMIN_LOGS_LIMIT", 10)
     @patch("komand_duo_admin.util.api.DuoAdminAPI.get_trust_monitor_events")
     @patch("komand_duo_admin.util.api.DuoAdminAPI.get_auth_logs")
     @patch("komand_duo_admin.util.api.DuoAdminAPI.get_admin_logs")
@@ -241,13 +236,10 @@ class TestMonitorLogs(TestCase):
         mock_get_headers: MagicMock,
         mock_get_time: MagicMock,
     ) -> None:
-        # Reimport
-        from komand_duo_admin.tasks.monitor_logs.task import ADMIN_LOGS_LIMIT
-
         # Create a list of admin logs with the same timestamp
         # But less than the pagination limit to ensure no pagination occurs
         response = {"response": []}
-        for _ in range(ADMIN_LOGS_LIMIT - 5):
+        for _ in range(ADMIN_LOGS_LIMIT - ADMIN_LOGS_LIMIT // 20):
             response["response"].append(
                 {"action": "user_create", "description": {}, "timestamp": 1682836400, "username": "API"}
             )
@@ -270,7 +262,6 @@ class TestMonitorLogs(TestCase):
         self.assertFalse(has_more_pages)
         self.assertEqual(status_code, 200)
 
-    @patch("komand_duo_admin.tasks.monitor_logs.task.ADMIN_LOGS_LIMIT", 10)
     @patch("komand_duo_admin.util.api.DuoAdminAPI.get_trust_monitor_events")
     @patch("komand_duo_admin.util.api.DuoAdminAPI.get_auth_logs")
     @patch("komand_duo_admin.util.api.DuoAdminAPI.get_admin_logs")
@@ -284,9 +275,6 @@ class TestMonitorLogs(TestCase):
         mock_get_headers: MagicMock,
         mock_get_time: MagicMock,
     ) -> None:
-        # Reimport
-        from komand_duo_admin.tasks.monitor_logs.task import ADMIN_LOGS_LIMIT
-
         # Setup mocks to return empty responses for auth logs and trust monitor events
         mock_auth.return_value = {"response": {"authlogs": [], "metadata": {}}}
         mock_trust.return_value = {"response": {"events": [], "metadata": {}}}
@@ -325,7 +313,6 @@ class TestMonitorLogs(TestCase):
         self.assertTrue(has_more_pages)
         self.assertEqual(status_code, 200)
 
-    @patch("komand_duo_admin.tasks.monitor_logs.task.ADMIN_LOGS_LIMIT", 10)
     @patch("komand_duo_admin.util.api.DuoAdminAPI.get_trust_monitor_events")
     @patch("komand_duo_admin.util.api.DuoAdminAPI.get_auth_logs")
     @patch("komand_duo_admin.util.api.DuoAdminAPI.get_admin_logs")
@@ -339,9 +326,6 @@ class TestMonitorLogs(TestCase):
         mock_get_headers: MagicMock,
         mock_get_time: MagicMock,
     ) -> None:
-        # Reimport
-        from komand_duo_admin.tasks.monitor_logs.task import ADMIN_LOGS_LIMIT
-
         # Setup mocks to return empty responses for auth logs and trust monitor events
         mock_auth.return_value = {"response": {"authlogs": [], "metadata": {}}}
         mock_trust.return_value = {"response": {"events": [], "metadata": {}}}
@@ -360,7 +344,7 @@ class TestMonitorLogs(TestCase):
             "admin_logs_last_log_timestamp": 1682836395,
             "auth_logs_last_log_timestamp": 1682843686,
             "trust_monitor_last_log_timestamp": 1682843686000,
-            "admin_logs_next_page_params": {"mintime": "1682836400", "previous_timestamp": 1682836395},
+            "admin_logs_next_page_params": {"mintime": "1682836400"},
         }
 
         # Execute task run and get the new state and pagination info
