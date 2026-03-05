@@ -1,16 +1,18 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from komand_duo_admin.actions.modify_user import ModifyUser
-from util import Util
 from unittest.mock import patch
-from parameterized import parameterized
+
 from insightconnect_plugin_runtime.exceptions import PluginException
-from komand_duo_admin.util.exceptions import ApiException
+from komand_duo_admin.actions.modify_user import ModifyUser
 from komand_duo_admin.util.constants import Assistance, Cause
+from komand_duo_admin.util.exceptions import ApiException
+from parameterized import parameterized
+
+from util import Util
 
 
 @patch("requests.request", side_effect=Util.mock_request)
@@ -29,7 +31,7 @@ class TestModifyUser(TestCase):
             ],
         ]
     )
-    def test_modify_user(self, mock_request, mock_request_instance, test_name, input_params, expected):
+    def test_modify_user(self, mock_request, mock_request_instance, test_name, input_params, expected) -> None:
         actual = self.action.run(input_params)
         self.assertDictEqual(actual, expected)
 
@@ -57,7 +59,7 @@ class TestModifyUser(TestCase):
     )
     def test_modify_user_api_raise_exception(
         self, mock_request, mock_request_instance, test_name, input_parameters, cause, assistance
-    ):
+    ) -> None:
         with self.assertRaises(ApiException) as error:
             self.action.run(input_parameters)
         self.assertEqual(error.exception.cause, cause)

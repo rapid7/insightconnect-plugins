@@ -1,13 +1,15 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from komand_duo_admin.actions.get_users import GetUsers
-from util import Util
 from unittest.mock import patch
+
+from komand_duo_admin.actions.get_users import GetUsers
 from parameterized import parameterized
+
+from util import Util
 
 
 @patch("requests.request", side_effect=Util.mock_request)
@@ -25,6 +27,6 @@ class TestGetUsers(TestCase):
             ],
         ]
     )
-    def test_get_users(self, mock_request, mock_request_instance, test_name, expected):
+    def test_get_users(self, mock_request, mock_request_instance, test_name, expected) -> None:
         actual = self.action.run()
         self.assertEqual(actual, expected)

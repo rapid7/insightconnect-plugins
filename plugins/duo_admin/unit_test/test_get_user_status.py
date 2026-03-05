@@ -1,15 +1,17 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from komand_duo_admin.actions.get_user_status import GetUserStatus
-from util import Util
 from unittest.mock import patch
-from parameterized import parameterized
+
 from insightconnect_plugin_runtime.exceptions import PluginException
-from komand_duo_admin.util.constants import Cause, Assistance
+from komand_duo_admin.actions.get_user_status import GetUserStatus
+from komand_duo_admin.util.constants import Assistance, Cause
+from parameterized import parameterized
+
+from util import Util
 
 
 @patch("requests.request", side_effect=Util.mock_request)
@@ -28,7 +30,7 @@ class TestGetUserStatus(TestCase):
             ],
         ]
     )
-    def test_get_user_status(self, mock_request, mock_request_instance, test_name, input_params, expected):
+    def test_get_user_status(self, mock_request, mock_request_instance, test_name, input_params, expected) -> None:
         actual = self.action.run(input_params)
         self.assertDictEqual(actual, expected)
 
@@ -44,7 +46,7 @@ class TestGetUserStatus(TestCase):
     )
     def test_get_user_status_raise_plugin_exception(
         self, mock_request, mock_request_instance, test_name, input_parameters, cause, assistance
-    ):
+    ) -> None:
         with self.assertRaises(PluginException) as error:
             self.action.run(input_parameters)
         self.assertEqual(error.exception.cause, cause)
