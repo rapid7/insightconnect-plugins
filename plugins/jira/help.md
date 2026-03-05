@@ -734,7 +734,7 @@ Example output:
 
 # Version History
 
-* 6.7.0 - Added OAuth 2.0 (client credentials) authentication | Action `Edit Issue`: Fixed issue related to the custom field option | Updated SDK to the latest version (6.4.3)
+* 6.7.0 - Added OAuth 2.0 (client credentials) authentication | Actions `Edit Issue`, `Label Issue`, `Find Issues`: Fixed issues related to the custom field option, attachments | Updated SDK to the latest version (6.4.3)
 * 6.6.1 - Updated SDK to the latest version (6.4.2)
 * 6.6.0 - Updated plugin to use Jira Cloud API v3 endpoints for cloud instances | Updated SDK to the latest version (6.4.1)
 * 6.5.3 - Updated SDK to the latest version (6.3.10)

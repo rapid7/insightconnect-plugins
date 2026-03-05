@@ -1,9 +1,10 @@
 import base64
 import json
 from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.helper import clean
 from logging import Logger
 import requests
-from requests.auth import HTTPBasicAuth, AuthBase
+from requests.auth import HTTPBasicAuth
 from typing import Any, Union
 
 from komand_jira.util.constants import (
@@ -95,12 +96,14 @@ class JiraApi:
     def create_issue(self, issue_fields: dict[str, Any]) -> dict[str, Any]:
         return self._call_api("POST", "issue", payload={"fields": issue_fields})
 
-    def edit_issue(self, issue_id: str, issue_fields: dict[str, Any], notify: bool) -> None:
+    def edit_issue(
+        self, issue_id: str, issue_fields: dict[str, Any], issue_update: dict[str, Any], notify: bool
+    ) -> None:
         self._call_api(
             "PUT",
             f"issue/{issue_id}",
             params={"notifyUsers": notify},
-            payload={"fields": issue_fields},
+            payload=clean({"fields": issue_fields, "update": issue_update}),
             return_json=False,
         )
 

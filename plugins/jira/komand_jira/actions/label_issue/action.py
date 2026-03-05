@@ -40,5 +40,10 @@ class LabelIssue(insightconnect_plugin_runtime.Action):
                     issue.fields.labels.append(label)
             issue.update(fields={"labels": issue.fields.labels})
         else:
-            self.connection.rest_client.edit_issue(issue_id=issue_id, issue_fields={"labels": labels}, notify=False)
+            self.connection.rest_client.edit_issue(
+                issue_id=issue_id,
+                issue_fields={},
+                issue_update={"labels": [{"add": label} for label in labels]},
+                notify=False,
+            )
         return {Output.SUCCESS: True}

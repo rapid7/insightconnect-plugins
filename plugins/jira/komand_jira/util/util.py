@@ -112,10 +112,6 @@ def normalize_issue(  # pylint: disable=too-many-statements
         # Labels
         labels = fields.get("labels", [])
 
-        # Fields - raw
-        if not include_raw_fields:
-            fields = {}
-
         # Attachments
         attachment = []
         if get_attachments and rest_client:
@@ -130,6 +126,10 @@ def normalize_issue(  # pylint: disable=too-many-statements
                         ).decode(),
                     }
                     attachment.append(single_attachment)
+
+        # Fields - raw
+        if not include_raw_fields:
+            fields = {}
 
     logger.debug(f"Source issue: {issue.raw if not is_cloud else issue}")
 

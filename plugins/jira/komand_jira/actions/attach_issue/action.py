@@ -16,16 +16,24 @@ class AttachIssue(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
-        id_ = params.get(Input.ID)
+        issue_id = params.get(Input.ID, "")
         attachment_filename = params.get(Input.ATTACHMENT_FILENAME, "")
         attachment_bytes = params.get(Input.ATTACHMENT_BYTES, "")
         # END INPUT BINDING - DO NOT REMOVE
 
-        issue = self.connection.client.issue(id=id_)
+        # Retrieve issues from Jira, depending on whether it's Cloud or Server
+        if not self.connection.is_cloud:
+            issue = self.connection.client.issue(id=issue_id)
+            issue_key = getattr(issue, "key", None)
+        else:
+            issue = self.connection.rest_client.get_issue(issue_id=issue_id)
+            issue_key = issue.get("key")
+
+        # Check if the issue exists before attempting to add an attachment
         if not issue:
             raise PluginException(
-                cause=f"No issue found with ID: {id_}.",
+                cause=f"No issue found with ID: {issue_id}.",
                 assistance="Please provide a valid issue ID.",
             )
 
-        return {Output.ID: self.connection.rest_client.add_attachment(issue.key, attachment_filename, attachment_bytes)}
+        return {Output.ID: self.connection.rest_client.add_attachment(issue_key, attachment_filename, attachment_bytes)}
