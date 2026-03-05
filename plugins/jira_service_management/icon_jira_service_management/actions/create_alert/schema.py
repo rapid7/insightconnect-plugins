@@ -108,7 +108,8 @@ class CreateAlertInput(insightconnect_plugin_runtime.Input):
     "source": {
       "type": "string",
       "title": "Source",
-      "description": "Source field of the alert. Default value is IP address of the incoming request",
+      "description": "Source field of the alert. Default value is Rapid7 Automation",
+      "default": "Rapid7 Automation",
       "order": 10
     },
     "tags": {

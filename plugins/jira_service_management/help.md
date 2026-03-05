@@ -102,7 +102,7 @@ This action is used to creates an alert for Jira Service Management
 |note|string|None|False|Additional note that will be added when creating the alert|None|Example additional note|None|None|
 |priority|string|P3|False|Priority level of the alert. Possible values are P1, P2, P3, P4 and P5. Default value is P3|["", "P2", "P1", "P3", "P4", "P5"]|P1|None|None|
 |responders|[]object|None|False|Teams, users, escalations and schedules that the alert will be routed to send notifications. "id/name": Either id or name of each responder should be provided. "type": team, user, escalation, schedule. Format: [{"id/name":"value", "type":"team/user/escalation/schedule"}]|None|[{"id":"4513b7ea-3b91-438f-b7e4-e3e54af9147c", "type":"team"},{"name":"NOC","type":"team"}]|None|None|
-|source|string|None|False|Source field of the alert. Default value is IP address of the incoming request|None|192.168.0.1|None|None|
+|source|string|Rapid7 Automation|False|Source field of the alert. Default value is Rapid7 Automation|None|Rapid7 Automation|None|None|
 |tags|[]string|None|False|Tags of the alert|None|["OverwriteQuietHours","Critical"]|None|None|
 |user|string|None|False|Display name of the request owner|None|ExampleName|None|None|
 |visibleTo|[]object|None|False|Teams and users that the alert will become visible to without sending any notification. Type field is mandatory for each item, where possible values are team and user. In addition to the type field, either ID or name should be given for teams and either ID or username should be given for users. Please note that alert will be visible to the teams that are specified within responders field by default, so there is no need to re-specify them within visibleTo field. "id/name": Either id or name of each responder should be provided. "type": team, user, escalation, schedule. Format: [{"id/name":"value", "type":"team/user/escalation/schedule"}]|None|[{"id":"4513b7ea-3b91-438f-b7e4-e3e54af9147c","type":"team"},{"name":"example_name","type":"team"}]|None|None|
@@ -135,7 +135,7 @@ Example input:
       "type": "team"
     }
   ],
-  "source": "192.168.0.1",
+  "source": "Rapid7 Automation",
   "tags": [
     "OverwriteQuietHours",
     "Critical"

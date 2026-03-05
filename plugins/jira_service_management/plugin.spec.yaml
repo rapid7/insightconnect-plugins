@@ -113,10 +113,11 @@ actions:
         example: An example entity
       source:
         title: Source
-        description: Source field of the alert. Default value is IP address of the incoming request
+        description: Source field of the alert. Default value is Rapid7 Automation
         type: string
         required: false
-        example: "192.168.0.1"
+        example: "Rapid7 Automation"
+        default: "Rapid7 Automation"
       priority:
         title: Priority
         description: Priority level of the alert. Possible values are P1, P2, P3, P4 and P5. Default value is P3
