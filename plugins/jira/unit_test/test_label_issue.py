@@ -79,8 +79,9 @@ class TestLabelIssue(TestCase):
         self.test_conn.logger = test_logger
         self.test_action.logger = test_logger
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_label_issue_single_label(self, mock_request: mock.Mock) -> None:
+    def test_label_issue_single_label(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "label": "bug",
@@ -93,8 +94,9 @@ class TestLabelIssue(TestCase):
         self.assertIn("success", result)
         self.assertTrue(result["success"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_label_issue_multiple_labels(self, mock_request: mock.Mock) -> None:
+    def test_label_issue_multiple_labels(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "label": "bug,urgent,security",
@@ -106,8 +108,9 @@ class TestLabelIssue(TestCase):
         self.assertIsNotNone(result)
         self.assertTrue(result["success"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_label_issue_with_issue_key(self, mock_request: mock.Mock) -> None:
+    def test_label_issue_with_issue_key(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "ED-24",
             "label": "enhancement",
@@ -147,8 +150,9 @@ class TestLabelIssueCloud(TestCase):
         self.test_conn.logger = test_logger
         self.test_action.logger = test_logger
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_label_issue_cloud_single_label(self, mock_request: mock.Mock) -> None:
+    def test_label_issue_cloud_single_label(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "label": "bug",
@@ -161,8 +165,9 @@ class TestLabelIssueCloud(TestCase):
         self.assertIn("success", result)
         self.assertTrue(result["success"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_label_issue_cloud_multiple_labels(self, mock_request: mock.Mock) -> None:
+    def test_label_issue_cloud_multiple_labels(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "label": "bug,urgent,security",
@@ -174,8 +179,9 @@ class TestLabelIssueCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertTrue(result["success"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_label_issue_cloud_with_issue_key(self, mock_request: mock.Mock) -> None:
+    def test_label_issue_cloud_with_issue_key(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "PROJ-123",
             "label": "enhancement",
@@ -198,8 +204,9 @@ class TestLabelIssueCloud(TestCase):
         with self.assertRaises(PluginException):
             self.test_action.run(action_params)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_label_issue_cloud_with_hyphens(self, mock_request: mock.Mock) -> None:
+    def test_label_issue_cloud_with_hyphens(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "label": "needs-review,high-priority",
@@ -211,8 +218,9 @@ class TestLabelIssueCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertTrue(result["success"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_label_issue_cloud_with_underscores(self, mock_request: mock.Mock) -> None:
+    def test_label_issue_cloud_with_underscores(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "label": "tech_debt,code_review",
@@ -224,8 +232,9 @@ class TestLabelIssueCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertTrue(result["success"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_label_issue_cloud_many_labels(self, mock_request: mock.Mock) -> None:
+    def test_label_issue_cloud_many_labels(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "label": "label1,label2,label3,label4,label5",
@@ -237,8 +246,9 @@ class TestLabelIssueCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertTrue(result["success"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_label_issue_cloud_numeric_label(self, mock_request: mock.Mock) -> None:
+    def test_label_issue_cloud_numeric_label(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "label": "v1.0,release-2024",

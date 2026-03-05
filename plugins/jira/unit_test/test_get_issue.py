@@ -86,8 +86,9 @@ class TestGetIssue(TestCase):
         self.test_conn.logger = test_logger
         self.test_action.logger = test_logger
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_get_issue(self, mock_request: mock.Mock) -> None:
+    def test_get_issue(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
         }
@@ -100,8 +101,9 @@ class TestGetIssue(TestCase):
         self.assertIn("issue", result)
         self.assertTrue(result["found"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_get_issue_with_issue_key(self, mock_request: mock.Mock) -> None:
+    def test_get_issue_with_issue_key(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "ED-24",
         }
@@ -113,8 +115,9 @@ class TestGetIssue(TestCase):
         self.assertTrue(result["found"])
         self.assertIsNotNone(result["issue"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_get_issue_with_attachments(self, mock_request: mock.Mock) -> None:
+    def test_get_issue_with_attachments(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "get_attachments": True,
@@ -152,8 +155,9 @@ class TestGetIssueCloud(TestCase):
         self.test_conn.logger = test_logger
         self.test_action.logger = test_logger
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_get_issue_cloud(self, mock_request: mock.Mock) -> None:
+    def test_get_issue_cloud(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
         }
@@ -166,8 +170,9 @@ class TestGetIssueCloud(TestCase):
         self.assertIn("issue", result)
         self.assertTrue(result["found"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_get_issue_cloud_with_issue_key(self, mock_request: mock.Mock) -> None:
+    def test_get_issue_cloud_with_issue_key(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "PROJ-123",
         }
@@ -178,8 +183,9 @@ class TestGetIssueCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertTrue(result["found"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_get_issue_cloud_with_attachments(self, mock_request: mock.Mock) -> None:
+    def test_get_issue_cloud_with_attachments(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "get_attachments": True,
@@ -201,8 +207,9 @@ class TestGetIssueCloud(TestCase):
         with self.assertRaises(PluginException):
             self.test_action.run(action_params)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_get_issue_cloud_verify_structure(self, mock_request: mock.Mock) -> None:
+    def test_get_issue_cloud_verify_structure(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
         }
@@ -216,8 +223,9 @@ class TestGetIssueCloud(TestCase):
         self.assertTrue(result["found"])
         self.assertIsNotNone(result["issue"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_get_issue_cloud_numeric_id(self, mock_request: mock.Mock) -> None:
+    def test_get_issue_cloud_numeric_id(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10005",
         }
@@ -228,8 +236,11 @@ class TestGetIssueCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertTrue(result["found"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_get_issue_cloud_without_attachments(self, mock_request: mock.Mock) -> None:
+    def test_get_issue_cloud_without_attachments(
+        self, mock_session_request: mock.Mock, mock_request: mock.Mock
+    ) -> None:
         action_params = {
             "id": "10002",
             "get_attachments": False,

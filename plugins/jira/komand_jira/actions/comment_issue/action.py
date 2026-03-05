@@ -27,7 +27,7 @@ class CommentIssue(insightconnect_plugin_runtime.Action):
         else:
             issue = self.connection.rest_client.get_issue(issue_id=id_)
 
-        # If no issue is found, raise an exception
+        # If no issue is found, raise
         if not issue:
             raise PluginException(
                 cause=f"No issue found with ID: {id_}.",

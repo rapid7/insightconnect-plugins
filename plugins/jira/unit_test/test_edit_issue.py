@@ -76,8 +76,9 @@ class TestEditIssue(TestCase):
         self.test_conn.logger = test_logger
         self.test_action.logger = test_logger
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_edit_issue_summary(self, mock_request: mock.Mock) -> None:
+    def test_edit_issue_summary(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "summary": "Updated summary",
@@ -90,8 +91,9 @@ class TestEditIssue(TestCase):
         self.assertIn("success", result)
         self.assertTrue(result["success"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_edit_issue_description(self, mock_request: mock.Mock) -> None:
+    def test_edit_issue_description(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "ED-24",
             "description": "Updated description",
@@ -103,8 +105,9 @@ class TestEditIssue(TestCase):
         self.assertIsNotNone(result)
         self.assertTrue(result["success"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_edit_issue_multiple_fields(self, mock_request: mock.Mock) -> None:
+    def test_edit_issue_multiple_fields(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "summary": "New summary",
@@ -117,8 +120,9 @@ class TestEditIssue(TestCase):
         self.assertIsNotNone(result)
         self.assertTrue(result["success"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_edit_issue_notify_false(self, mock_request: mock.Mock) -> None:
+    def test_edit_issue_notify_false(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "summary": "Updated summary",
@@ -146,8 +150,9 @@ class TestEditIssueCloud(TestCase):
         self.test_conn.logger = test_logger
         self.test_action.logger = test_logger
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_edit_issue_cloud(self, mock_request: mock.Mock) -> None:
+    def test_edit_issue_cloud(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "summary": "Updated summary",
@@ -160,8 +165,9 @@ class TestEditIssueCloud(TestCase):
         self.assertIn("success", result)
         self.assertTrue(result["success"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_edit_issue_cloud_with_description(self, mock_request: mock.Mock) -> None:
+    def test_edit_issue_cloud_with_description(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "PROJ-123",
             "description": "Updated description with ADF conversion",
@@ -173,8 +179,9 @@ class TestEditIssueCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertTrue(result["success"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_edit_issue_cloud_multiple_fields(self, mock_request: mock.Mock) -> None:
+    def test_edit_issue_cloud_multiple_fields(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "summary": "New summary",
@@ -187,8 +194,9 @@ class TestEditIssueCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertTrue(result["success"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_edit_issue_cloud_notify_false(self, mock_request: mock.Mock) -> None:
+    def test_edit_issue_cloud_notify_false(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "summary": "Updated summary",
@@ -201,8 +209,9 @@ class TestEditIssueCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertTrue(result["success"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_edit_issue_cloud_with_priority(self, mock_request: mock.Mock) -> None:
+    def test_edit_issue_cloud_with_priority(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "priority": {"name": "High"},
@@ -214,8 +223,9 @@ class TestEditIssueCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertTrue(result["success"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_edit_issue_cloud_with_labels(self, mock_request: mock.Mock) -> None:
+    def test_edit_issue_cloud_with_labels(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "labels": ["bug", "urgent", "security"],
@@ -227,8 +237,9 @@ class TestEditIssueCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertTrue(result["success"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_edit_issue_cloud_empty_fields(self, mock_request: mock.Mock) -> None:
+    def test_edit_issue_cloud_empty_fields(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "summary": "",

@@ -62,8 +62,9 @@ class TestAssignIssue(TestCase):
         self.test_conn.logger = test_logger
         self.test_action.logger = test_logger
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_assign_issue(self, mock_request: mock.Mock) -> None:
+    def test_assign_issue(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "assignee": "testuser",
@@ -78,8 +79,9 @@ class TestAssignIssue(TestCase):
         self.assertIn("success", result)
         self.assertTrue(result["success"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_assign_issue_with_different_user(self, mock_request: mock.Mock) -> None:
+    def test_assign_issue_with_different_user(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "ED-24",
             "assignee": "anotheruser",
@@ -122,8 +124,9 @@ class TestAssignIssueCloud(TestCase):
         self.test_conn.logger = test_logger
         self.test_action.logger = test_logger
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_assign_issue_cloud(self, mock_request: mock.Mock) -> None:
+    def test_assign_issue_cloud(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "assignee": "testuser",
@@ -136,8 +139,9 @@ class TestAssignIssueCloud(TestCase):
         self.assertIn("success", result)
         self.assertTrue(result["success"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_assign_issue_cloud_different_user(self, mock_request: mock.Mock) -> None:
+    def test_assign_issue_cloud_different_user(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "ED-24",
             "assignee": "anotheruser",
@@ -149,8 +153,9 @@ class TestAssignIssueCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertTrue(result["success"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_assign_issue_cloud_with_issue_key(self, mock_request: mock.Mock) -> None:
+    def test_assign_issue_cloud_with_issue_key(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "PROJ-123",
             "assignee": "testuser",
@@ -162,8 +167,9 @@ class TestAssignIssueCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertTrue(result["success"])
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_404)
     @mock.patch("requests.request", side_effect=mock_request_404)
-    def test_assign_issue_cloud_invalid_issue(self, mock_request: mock.Mock) -> None:
+    def test_assign_issue_cloud_invalid_issue(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "INVALID-999",
             "assignee": "testuser",
@@ -173,8 +179,9 @@ class TestAssignIssueCloud(TestCase):
         with self.assertRaises(PluginException):
             self.test_action.run(action_params)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_404)
     @mock.patch("requests.request", side_effect=mock_request_404)
-    def test_assign_issue_cloud_invalid_user(self, mock_request: mock.Mock) -> None:
+    def test_assign_issue_cloud_invalid_user(self, mock_session_request: mock.Mock, mock_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
             "assignee": "nonexistentuser",
@@ -184,8 +191,11 @@ class TestAssignIssueCloud(TestCase):
         with self.assertRaises(PluginException):
             self.test_action.run(action_params)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_assign_issue_cloud_username_with_special_chars(self, mock_request: mock.Mock) -> None:
+    def test_assign_issue_cloud_username_with_special_chars(
+        self, mock_session_request: mock.Mock, mock_request: mock.Mock
+    ) -> None:
         action_params = {
             "id": "10002",
             "assignee": "test.user@example.com",

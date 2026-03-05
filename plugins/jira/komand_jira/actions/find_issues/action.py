@@ -31,7 +31,11 @@ class FindIssues(insightconnect_plugin_runtime.Action):
         results = list(
             map(
                 lambda issue: normalize_issue(
-                    issue, get_attachments=get_attachments, logger=self.logger, is_cloud=self.connection.is_cloud
+                    issue,
+                    get_attachments=get_attachments,
+                    logger=self.logger,
+                    is_cloud=self.connection.is_cloud,
+                    rest_client=self.connection.rest_client,
                 ),
                 issues,
             )

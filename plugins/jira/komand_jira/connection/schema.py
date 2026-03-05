@@ -5,6 +5,8 @@ import json
 
 class Input:
     API_KEY = "api_key"
+    CLIENT_ID = "client_id"
+    CLIENT_SECRET = "client_secret"
     PAT = "pat"
     URL = "url"
     USER = "user"
@@ -23,6 +25,18 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "Jira API key when connecting to Jira Cloud or Jira user password when connecting to on-prem Jira server",
       "order": 3
     },
+    "client_id": {
+      "type": "string",
+      "title": "Client ID",
+      "description": "Jira OAuth 2.0 Client ID, only works with Jira Cloud",
+      "order": 5
+    },
+    "client_secret": {
+      "$ref": "#/definitions/credential_secret_key",
+      "title": "Client Secret",
+      "description": "Jira OAuth 2.0 Client Secret, only works with Jira Cloud",
+      "order": 6
+    },
     "pat": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "Personal Access Token",
@@ -32,7 +46,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "url": {
       "type": "string",
       "title": "URL",
-      "description": "Jira URL",
+      "description": "Jira instance URL. Use https://example.atlassian.net for Jira Cloud, https://api.atlassian.com for OAuth 2.0 with Cloud ID (https://api.atlassian.com/ex/jira/{cloudId}), or your organization's URL for on-prem Jira Server",
       "default": "https://example.atlassian.net",
       "order": 1
     },

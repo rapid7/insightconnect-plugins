@@ -100,8 +100,9 @@ class TestGetComments(TestCase):
         self.test_conn.logger = test_logger
         self.test_action.logger = test_logger
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_get_comments(self, mock_request: mock.Mock) -> None:
+    def test_get_comments(self, mock_request: mock.Mock, mock_session_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
         }
@@ -114,8 +115,9 @@ class TestGetComments(TestCase):
         self.assertIn("count", result)
         self.assertIsInstance(result["comments"], list)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_get_comments_with_issue_key(self, mock_request: mock.Mock) -> None:
+    def test_get_comments_with_issue_key(self, mock_request: mock.Mock, mock_session_request: mock.Mock) -> None:
         action_params = {
             "id": "ED-24",
         }
@@ -153,8 +155,9 @@ class TestGetCommentsCloud(TestCase):
         self.test_conn.logger = test_logger
         self.test_action.logger = test_logger
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_get_comments_cloud(self, mock_request: mock.Mock) -> None:
+    def test_get_comments_cloud(self, mock_request: mock.Mock, mock_session_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
         }
@@ -167,8 +170,9 @@ class TestGetCommentsCloud(TestCase):
         self.assertIn("count", result)
         self.assertIsInstance(result["comments"], list)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_get_comments_cloud_with_issue_key(self, mock_request: mock.Mock) -> None:
+    def test_get_comments_cloud_with_issue_key(self, mock_request: mock.Mock, mock_session_request: mock.Mock) -> None:
         action_params = {
             "id": "PROJ-123",
         }
@@ -180,8 +184,9 @@ class TestGetCommentsCloud(TestCase):
         self.assertIn("comments", result)
         self.assertIn("count", result)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_404)
     @mock.patch("requests.request", side_effect=mock_request_404)
-    def test_get_comments_cloud_invalid_issue(self, mock_request: mock.Mock) -> None:
+    def test_get_comments_cloud_invalid_issue(self, mock_request: mock.Mock, mock_session_request: mock.Mock) -> None:
         action_params = {
             "id": "INVALID-999",
         }
@@ -190,8 +195,9 @@ class TestGetCommentsCloud(TestCase):
         with self.assertRaises(PluginException):
             self.test_action.run(action_params)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_get_comments_cloud_verify_count(self, mock_request: mock.Mock) -> None:
+    def test_get_comments_cloud_verify_count(self, mock_request: mock.Mock, mock_session_request: mock.Mock) -> None:
         action_params = {
             "id": "10002",
         }
@@ -203,8 +209,11 @@ class TestGetCommentsCloud(TestCase):
         self.assertIn("count", result)
         self.assertGreaterEqual(result["count"], 0)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_get_comments_cloud_different_issue_id(self, mock_request: mock.Mock) -> None:
+    def test_get_comments_cloud_different_issue_id(
+        self, mock_request: mock.Mock, mock_session_request: mock.Mock
+    ) -> None:
         action_params = {
             "id": "10010",
         }
@@ -215,8 +224,11 @@ class TestGetCommentsCloud(TestCase):
         self.assertIsNotNone(result)
         self.assertIn("comments", result)
 
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_get_comments_cloud_verify_structure(self, mock_request: mock.Mock) -> None:
+    def test_get_comments_cloud_verify_structure(
+        self, mock_request: mock.Mock, mock_session_request: mock.Mock
+    ) -> None:
         action_params = {
             "id": "10002",
         }
