@@ -38,7 +38,7 @@ class JiraServiceManagementApi:
             )
         except Exception:
             raise PluginException(
-                cause=f"Failed to obtain access token for provided client id and client secret.",
+                cause="Failed to obtain access token for provided client id and client secret.",
                 assistance="Please check your credentials and try again.",
             )
 
