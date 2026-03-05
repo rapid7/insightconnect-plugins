@@ -1,6 +1,4 @@
-import json
 from logging import Logger
-from typing import Any
 
 import requests
 
