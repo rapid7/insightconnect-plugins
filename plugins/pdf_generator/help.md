@@ -12,7 +12,7 @@ The PDF Generator plugin creates a PDF from user provided data
 
 # Supported Product Versions
 
-* Pillow 10.2.0
+* Pillow 12.1.1
 
 # Documentation
 
@@ -73,6 +73,7 @@ Example output:
 
 # Version History
 
+* 1.0.7 - Updated dependencies | Updated SDK to the latest version (6.4.3)
 * 1.0.6 - Bumping requirements.txt | SDK Bump
 * 1.0.5 - Pin additional version dependency
 * 1.0.4 - Update SDK | Update vulnerable libraries
