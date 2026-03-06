@@ -12,7 +12,7 @@ sys.path.append(os.path.abspath("../"))
 
 
 class TestDocx(TestCase):
-    def test_docx(self):
+    def test_docx(self) -> None:
         params = {
             "doc": "<!DOCTYPE html><html><body><h1>Rapid7 InsightConnect</h1><p>Convert HTML to DOCX</p></body></html>"
         }
@@ -22,7 +22,7 @@ class TestDocx(TestCase):
 
         self.assertEqual(result["docx"][:10], "UEsDBBQAAg")
 
-    def test_action_empty_string(self):
+    def test_action_empty_string(self) -> None:
         params = {"doc": " "}
 
         test_action = Docx()
@@ -30,7 +30,7 @@ class TestDocx(TestCase):
         with self.assertRaises(PluginException):
             test_action.run(params)
 
-    def test_bad_input(self):
+    def test_bad_input(self) -> None:
         params = {"doc": "docx bad input"}
 
         test_action = Docx()
