@@ -1,28 +1,36 @@
-FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:5.4.4
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.4.3 AS builder
+
+WORKDIR /python/src
+
+ADD ./plugin.spec.yaml /plugin.spec.yaml
+ADD ./requirements.txt /python/src/requirements.txt
+ADD . /python/src
+
+
+
+RUN pip install .
+RUN pip uninstall -y setuptools
+
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.4.3
 
 LABEL organization=rapid7
 LABEL sdk=python
 
-ENV SSL_CERT_FILE /etc/ssl/certs/ca-certificates.crt
-ENV SSL_CERT_DIR /etc/ssl/certs
-ENV REQUESTS_CA_BUNDLE  /etc/ssl/certs/ca-certificates.crt
-
-ADD ./plugin.spec.yaml /plugin.spec.yaml
-ADD . /python/src
-
 WORKDIR /python/src
-# Add any package dependencies here
-RUN apt-get update && apt-get install -y pandoc curl --no-install-recommends
-# Curling the wkhtmltopdf package to fix corrupted lib5QtCore.5.so file that appeared
-# when running on the front-end. Installing it this way resolves the issue.
-RUN apt-get clean
-RUN curl -L -o wkhtmltox_0.12.6.1-2.bullseye_amd64.deb 'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.bullseye_amd64.deb'
-RUN apt --fix-broken install
-RUN apt install ./wkhtmltox_0.12.6.1-2.bullseye_amd64.deb -y
-# End package dependencies
-RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-RUN python setup.py build && python setup.py install
 
+COPY --from=builder /python/src /python/src
+COPY --from=builder /plugin.spec.yaml /plugin.spec.yaml
+
+RUN apt-get update && apt-get install -y --no-install-recommends pandoc curl && curl -L -o /tmp/wkhtmltox.deb https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.bookworm_amd64.deb && apt-get install -y --no-install-recommends /tmp/wkhtmltox.deb && apt-get purge -y curl && apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/wkhtmltox.deb
+
+
+RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+ENV PYTHONPATH="/python/src:${PYTHONPATH}"
+
+RUN rm -rf /root/.cache;
+
+# User to run plugin code. The two supported users are: root, nobody
 USER nobody
 
-ENTRYPOINT ["/usr/local/bin/icon_markdown"]
+ENTRYPOINT ["python", "/python/src/bin/icon_markdown"]

@@ -32,10 +32,10 @@ This action is used to convert HTML to Markdown
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|html|bytes|None|False|HTML data as bytes|None|PGgxPlJhcGlkNzwvaDE+|
-|html_string|string|None|False|HTML data as string|None|<h1>Rapid7</h1>|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|html|bytes|None|False|HTML data as bytes|None|PGgxPlJhcGlkNzwvaDE+|None|None|
+|html_string|string|None|False|HTML data as string|None|<h1>Rapid7</h1>|None|None|
   
 Example input:
 
@@ -68,10 +68,10 @@ This action is used to convert Markdown to HTML
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|markdown|bytes|None|False|Markdown content represented in base64|None|IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=|
-|markdown_string|string|None|False|Markdown content as a string|None|# Rapid7 InsightConnect|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|markdown|bytes|None|False|Markdown content represented in base64|None|IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=|None|None|
+|markdown_string|string|None|False|Markdown content as a string|None|# Rapid7 InsightConnect|None|None|
   
 Example input:
 
@@ -104,10 +104,10 @@ This action is used to convert Markdown to PDF
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|markdown|bytes|None|False|Markdown content represented in base64|None|IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=|
-|markdown_string|string|None|False|Markdown content as a string|None|# Rapid7 InsightConnect|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|markdown|bytes|None|False|Markdown content represented in base64|None|IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=|None|None|
+|markdown_string|string|None|False|Markdown content as a string|None|# Rapid7 InsightConnect|None|None|
   
 Example input:
 
@@ -140,10 +140,10 @@ This action is used to convert Markdown to TXT
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|markdown|bytes|None|False|Markdown content represented in base64|None|IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=|
-|markdown_string|string|None|False|Markdown content as a string|None|# Rapid7 InsightConnect|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|markdown|bytes|None|False|Markdown content represented in base64|None|IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=|None|None|
+|markdown_string|string|None|False|Markdown content as a string|None|# Rapid7 InsightConnect|None|None|
   
 Example input:
 
@@ -182,10 +182,11 @@ Example output:
 
 ## Troubleshooting
   
-*There is no troubleshooting for this plugin.*
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 4.0.0 - Update SDK to version 6.4.3
 * 3.1.4 - `Markdown to PDF` - Fix issue which produced blank PDF files
 * 3.1.3 - Update PyPandoc dependency | Update SDK
 * 3.1.2 - Added additional error messaging | Refactored code | Fixed bug in Markdown to TXT action which resulted in an incorrect output

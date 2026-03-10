@@ -7,4 +7,3 @@ from .markdown_to_html.action import MarkdownToHtml
 from .markdown_to_pdf.action import MarkdownToPdf
 
 from .markdown_to_txt.action import MarkdownToTxt
-

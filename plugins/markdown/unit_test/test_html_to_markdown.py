@@ -11,7 +11,10 @@ from jsonschema import validate
 
 
 class TestHtmlToMarkdown(TestCase):
-    expected_result_header = {Output.MARKDOWN_STRING: "# Rapid7\n", Output.MARKDOWN: "IyBSYXBpZDcK"}
+    expected_result_header = {
+        Output.MARKDOWN_STRING: "# Rapid7\n",
+        Output.MARKDOWN: "IyBSYXBpZDcK",
+    }
     expected_result_bold = {Output.MARKDOWN_STRING: "", Output.MARKDOWN: ""}
     expected_error = "Input error"
 
@@ -31,7 +34,13 @@ class TestHtmlToMarkdown(TestCase):
 
     @parameterized.expand(
         [
-            ({Input.HTML: "PGgxPlJhcGlkNzwvaDE+", Input.HTML_STRING: "<h1>Rapid7</h1>"}, expected_error),
+            (
+                {
+                    Input.HTML: "PGgxPlJhcGlkNzwvaDE+",
+                    Input.HTML_STRING: "<h1>Rapid7</h1>",
+                },
+                expected_error,
+            ),
             ({Input.HTML: "", Input.HTML_STRING: ""}, expected_error),
         ]
     )

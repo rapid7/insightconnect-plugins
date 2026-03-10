@@ -36,12 +36,13 @@ def convert(content, from_format, to_format, use_file=False):
         filename = make_file(to_format)
     else:
         filename = None
-    # The extra args will cause unit tests to fail on macos but work on ubuntu-bullseye (jenkins).
-    # ubuntu-bullseye = --atx-headers
-    # macos = --markdown-headings=atx
-    # (This is due to apt not being able to provide the latest version of pandoc)
+    # Use --markdown-headings=atx for pandoc >= 2.11.2
     output = pypandoc.convert_text(
-        content, to_format, format=from_format, outputfile=filename, extra_args=["--atx-headers"]
+        content,
+        to_format,
+        format=from_format,
+        outputfile=filename,
+        extra_args=["--markdown-headings=atx"],
     )
     if use_file:
         content = read_file(filename)
