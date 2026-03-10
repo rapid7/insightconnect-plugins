@@ -44,7 +44,7 @@ connection:
     description: Email address of the user that is used to create API token. It should be the email address of an active user in the Jira Service Management instance
     type: string
     required: true
-    example: example@domain.com
+    example: user@example.com
   cloud_id:
     title: Jira Service Management Cloud ID
     description: Cloud ID of the Jira Service Management instance. It can be found in the https://yoursite.atlassian.net/_edge/tenant_info API response or by contacting Atlassian support
