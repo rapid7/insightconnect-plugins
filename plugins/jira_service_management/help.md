@@ -24,7 +24,7 @@ The connection configuration accepts the following parameters:
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |api_token|credential_secret_key|None|True|Jira Service Management API Token generated here https://id.atlassian.com/manage-profile/security/api-tokens|None|ABCD1234efgh5678IJKLmnopqrstUVWXyz9876543210|None|None|
 |cloud_id|string|None|True|Cloud ID of the Jira Service Management instance. It can be found in the https://yoursite.atlassian.net/_edge/tenant_info API response or by contacting Atlassian support|None|example@yoursite.com|None|None|
-|email|string|None|True|Email address of the user that is used to create API token. It should be the email address of an active user in the Jira Service Management instance|None|example@domain.com|None|None|
+|email|string|None|True|Email address of the user that is used to create API token. It should be the email address of an active user in the Jira Service Management instance|None|user@example.com|None|None|
 
 Example input:
 
@@ -32,7 +32,7 @@ Example input:
 {
   "api_token": "ABCD1234efgh5678IJKLmnopqrstUVWXyz9876543210",
   "cloud_id": "example@yoursite.com",
-  "email": "example@domain.com"
+  "email": "user@example.com"
 }
 ```
 
