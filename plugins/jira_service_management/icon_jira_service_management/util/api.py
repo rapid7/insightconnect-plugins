@@ -1,5 +1,6 @@
 import base64
 import time
+from functools import wraps
 from logging import Logger
 from typing import Callable
 
@@ -33,6 +34,7 @@ class JiraServiceManagementApi:
 
     def _rate_limiting(max_tries: int = 5):
         def decorator(func: Callable):
+            @wraps(func)
             def wrapper(self, *args, **kwargs):
                 attempts, delay = 0, 0
                 while attempts < max_tries:
