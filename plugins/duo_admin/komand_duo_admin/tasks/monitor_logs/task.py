@@ -21,6 +21,7 @@ INITIAL_CUTOFF_HOURS = 24
 MAX_CUTOFF_HOURS = 168
 API_CUTOFF_HOURS = 4320
 RATE_LIMIT_DELAY = 600
+ADMIN_LOGS_LIMIT = 1000
 
 
 class MonitorLogs(insightconnect_plugin_runtime.Task):
@@ -430,8 +431,33 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         response = self.connection.admin_api.get_admin_logs(parameters).get("response", [])
         last_item = response[-1] if response and isinstance(response, list) else None
 
-        if last_item and len(response) == 1000:
-            parameters = {"mintime": str(last_item.get("timestamp")), "maxtime": maxtime}
+        # Use >= instead of == to handle cases where API returns more than documented 1000 limit
+        if last_item and len(response) >= ADMIN_LOGS_LIMIT:
+            # Convert timestamps to integers for comparison
+            # Defaults to mintime in case `timestamp` field is missing to avoid potential infinite loop
+            # If API does not return expected fields
+            first_timestamp = int(response[0].get("timestamp", mintime))
+            last_timestamp = int(last_item.get("timestamp", mintime))
+
+            # Detect infinite loop
+            # All items on this page have the same timestamp as our query mintime
+            # This means we're stuck at a single timestamp that has >= ADMIN_LOGS_LIMIT events
+            if first_timestamp == last_timestamp == int(mintime):
+                # Loop detected
+                # Log this and move the `mintime` forward by 1 second to skip this timestamp
+                self.logger.error(
+                    f"Admin logs pagination loop detected at timestamp '{last_timestamp}' (mintime: '{mintime}'). "
+                    f"Number of events: {len(response)} (limit: {ADMIN_LOGS_LIMIT}). "
+                    "Moving time forward by 1 second to avoid infinite loop."
+                )
+                parameters = {
+                    "mintime": str(last_timestamp + 1),
+                    "maxtime": maxtime,
+                }
+            else:
+                # Normal pagination
+                # Set `mintime` to last timestamp and track it for loop detection
+                parameters = {"mintime": str(last_timestamp), "maxtime": maxtime}
         else:
             parameters = {}
 

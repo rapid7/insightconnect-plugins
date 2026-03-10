@@ -1,15 +1,17 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from komand_duo_admin.actions.get_user_by_id import GetUserById
-from util import Util
 from unittest.mock import patch
-from parameterized import parameterized
-from komand_duo_admin.util.exceptions import ApiException
+
+from komand_duo_admin.actions.get_user_by_id import GetUserById
 from komand_duo_admin.util.constants import Assistance, Cause
+from komand_duo_admin.util.exceptions import ApiException
+from parameterized import parameterized
+
+from util import Util
 
 
 @patch("requests.request", side_effect=Util.mock_request)
@@ -28,7 +30,7 @@ class TestGetUserById(TestCase):
             ],
         ]
     )
-    def test_get_user_by_id(self, mock_request, mock_request_instance, test_name, input_params, expected):
+    def test_get_user_by_id(self, mock_request, mock_request_instance, test_name, input_params, expected) -> None:
         actual = self.action.run(input_params)
         self.assertDictEqual(actual, expected)
 
@@ -44,7 +46,7 @@ class TestGetUserById(TestCase):
     )
     def test_get_user_by_id_raise_api_exception(
         self, mock_request, mock_request_instance, test_name, input_parameters, cause, assistance
-    ):
+    ) -> None:
         with self.assertRaises(ApiException) as error:
             self.action.run(input_parameters)
         self.assertEqual(error.exception.cause, cause)

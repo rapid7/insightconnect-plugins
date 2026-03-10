@@ -1,15 +1,17 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from komand_duo_admin.actions.get_logs import GetLogs
-from util import Util
 from unittest.mock import patch
-from parameterized import parameterized
+
 from insightconnect_plugin_runtime.exceptions import PluginException
-from komand_duo_admin.util.constants import Cause, Assistance, PossibleInputs
+from komand_duo_admin.actions.get_logs import GetLogs
+from komand_duo_admin.util.constants import Assistance, Cause, PossibleInputs
+from parameterized import parameterized
+
+from util import Util
 
 
 @patch("requests.request", side_effect=Util.mock_request)
@@ -39,7 +41,9 @@ class TestGetLogs(TestCase):
             ],
         ]
     )
-    def test_get_logs(self, mock_request, mock_request_instance, mock_get_headers, test_name, input_params, expected):
+    def test_get_logs(
+        self, mock_request, mock_request_instance, mock_get_headers, test_name, input_params, expected
+    ) -> None:
         actual = self.action.run(input_params)
         self.assertDictEqual(actual, expected)
 
@@ -55,7 +59,7 @@ class TestGetLogs(TestCase):
     )
     def test_get_logs_raise_plugin_exception(
         self, mock_request, mock_request_instance, mock_get_headers, test_name, input_parameters, cause, assistance
-    ):
+    ) -> None:
         with self.assertRaises(PluginException) as error:
             self.action.run(input_parameters)
         self.assertEqual(error.exception.cause, cause)
