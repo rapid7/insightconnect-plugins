@@ -33,12 +33,8 @@ class CreateAlert(insightconnect_plugin_runtime.Action):
             "note": params.get(Input.NOTE),
         }
         # END INPUT BINDING - DO NOT REMOVE
-        token = self.connection.api.encode_basic_auth()
 
-        response = self.connection.api.create_alert(
-            token=token,
-            data=data,
-        )
+        response = self.connection.api.create_alert(data=data)
 
         return {
             Output.RESULT: response.get("result"),

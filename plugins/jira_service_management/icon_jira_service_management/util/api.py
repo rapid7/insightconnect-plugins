@@ -55,9 +55,10 @@ class JiraServiceManagementApi:
 
         return decorator
 
-    def create_alert(self, token: str, data: dict) -> dict:
+    def create_alert(self, data: dict) -> dict:
         url = f"https://api.atlassian.com/jsm/ops/api/{self.cloud_id}/v1/alerts"
         self.validator.validate(data)
+        token = self.encode_basic_auth()
 
         create_alert_response = self._call_api(
             method="POST",
