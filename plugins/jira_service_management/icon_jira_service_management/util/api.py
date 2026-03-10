@@ -32,6 +32,7 @@ class JiraServiceManagementApi:
         credentials = f"{self.email}:{self.api_token}"
         return base64.b64encode(credentials.encode()).decode()
 
+    @staticmethod
     def _rate_limiting(max_tries: int = 5):
         def decorator(func: Callable):
             @wraps(func)
