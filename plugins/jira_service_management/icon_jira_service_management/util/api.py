@@ -32,6 +32,12 @@ class JiraServiceManagementApi:
         credentials = f"{self.email}:{self.api_token}"
         return base64.b64encode(credentials.encode()).decode()
 
+    def get_headers(self):
+        return {
+            "Accept": "application/json",
+            "Authorization": f"Basic {self.encode_basic_auth()}",
+        }
+
     @staticmethod
     def _rate_limiting(max_tries: int = 5):
         def decorator(func: Callable):
@@ -61,72 +67,37 @@ class JiraServiceManagementApi:
     def create_alert(self, data: dict) -> dict:
         url = f"https://api.atlassian.com/jsm/ops/api/{self.cloud_id}/v1/alerts"
         self.validator.validate(data)
-        token = self.encode_basic_auth()
 
         create_alert_response = self._call_api(
             method="POST",
             url=url,
-            token=token,
             json_data=data,
         )
-        request_alert_id = self._retry_request(
-            token=token,
-            request_id=create_alert_response.get("requestId"),
-            max_tries=MAX_REQUEST_TRIES,
-        )
+        alert_id = self._get_request_status(identifier=create_alert_response.get("requestId")).get("alertId")
 
-        return {**create_alert_response, "alertId": request_alert_id}
+        return {**create_alert_response, "alertId": alert_id}
 
     @_rate_limiting(max_tries=MAX_REQUEST_TRIES)
-    def _call_api(self, method: str, url: str, token: str, json_data: dict = None, params: dict = None) -> dict:
+    def _call_api(self, method: str, url: str, json_data: dict = None, params: dict = None) -> dict:
         return make_request(
             _request=requests.Request(
                 method=method,
                 url=url,
                 json=json_data,
-                headers={
-                    "Accept": "application/json",
-                    "Authorization": f"Basic {token}",
-                },
+                headers=self.get_headers(),
                 params=params,
             ),
             timeout=REQUESTS_TIMEOUT,
         ).json()
 
-    def _retry_request(self, token: str, request_id: str, max_tries: int) -> str:
-        request_response = {}
-        attempts_counter, delay = -1, 0
-        while not request_response.get("alertId", "") and attempts_counter < max_tries:
-            time.sleep(delay)
-            try:
-                request_response = self._get_request_status(
-                    token=token,
-                    identifier=request_id,
-                )
-            except PluginException:
-                attempts_counter += 1
-                delay = 2 ** (attempts_counter * 0.6)
-                self.logger.info(
-                    GET_REQUEST_ID_RETRY_MESSAGE.format(
-                        delay=delay, attempts_counter=attempts_counter, max_tries=max_tries
-                    )
-                )
-        alert_id = request_response.get("alertId")
-        if alert_id:
-            return alert_id
-        raise PluginException(preset=PluginException.Preset.NOT_FOUND)
-
-    def _get_request_status(self, token: str, identifier: str) -> dict:
+    def _get_request_status(self, identifier: str) -> dict:
         url = f"https://api.atlassian.com/jsm/ops/api/{self.cloud_id}/v1/alerts/requests/{identifier}"
 
         return make_request(
             _request=requests.Request(
                 method="GET",
                 url=url,
-                headers={
-                    "Accept": "application/json",
-                    "Authorization": f"Basic {token}",
-                },
+                headers=self.get_headers(),
             ),
             timeout=REQUESTS_TIMEOUT,
         ).json()
@@ -136,10 +107,7 @@ class JiraServiceManagementApi:
             _request=requests.Request(
                 method="GET",
                 url=f"https://api.atlassian.com/jsm/ops/api/{self.cloud_id}/v1/alerts",
-                headers={
-                    "Accept": "application/json",
-                    "Authorization": f"Basic {self.encode_basic_auth()}",
-                },
+                headers=self.get_headers(),
             ),
             timeout=REQUESTS_TIMEOUT,
         ).status_code
