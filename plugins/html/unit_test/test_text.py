@@ -9,7 +9,7 @@ from icon_html.actions.text import Text
 
 
 class TestText(TestCase):
-    def test_run(self):
+    def test_run(self) -> None:
         params = {"doc": "<i>This is some text</i>"}
 
         test_action = Text()
@@ -17,7 +17,7 @@ class TestText(TestCase):
 
         self.assertEqual(result, {"text": "This is some text"})
 
-    def test_run_no_text(self):
+    def test_run_no_text(self) -> None:
         params = {"doc": ""}
 
         test_action = Text()
@@ -25,7 +25,7 @@ class TestText(TestCase):
 
         self.assertEqual(result, {"text": ""})
 
-    def test_difficult_html(self):
+    def test_difficult_html(self) -> None:
         test_text = """
 <html><head><title>The Dormouse's story</title></head>
 <body>
@@ -50,7 +50,7 @@ and they lived at the bottom of a well.</p>
 
         self.assertEqual(result, expected)
 
-    def test_run_bad_html(self):
+    def test_run_bad_html(self) -> None:
         params = {"doc": "<a>This is fubar.<b></c> Moar fubar"}
 
         test_action = Text()

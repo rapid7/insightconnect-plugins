@@ -13,7 +13,7 @@ from util import STUB_VALID_INPUT, Util
 
 class TestValidate(TestCase):
     @mock.patch("requests.post", side_effect=Util.mocked_requests)
-    def test_validate(self, mocked_requests):
+    def test_validate(self, mocked_requests) -> None:
         test_validate = Validate()
         input_params = {Input.HTML_CONTENTS: STUB_VALID_INPUT}
         results = test_validate.run(input_params)
@@ -21,7 +21,7 @@ class TestValidate(TestCase):
         self.assertEqual(results, expected_response)
 
     @mock.patch("requests.post", side_effect=Util.mocked_requests)
-    def test_validate_false(self, mocked_requests):
+    def test_validate_false(self, mocked_requests) -> None:
         test_validate = Validate()
         input_params = {Input.HTML_CONTENTS: "bad input, expecting false validation"}
         results = test_validate.run(input_params)
@@ -29,7 +29,7 @@ class TestValidate(TestCase):
         self.assertEqual(results, expected_response)
 
     @mock.patch("requests.post")
-    def validate_exception(self, post_mock):
+    def validate_exception(self, post_mock) -> None:
         post_mock.side_effect = requests.exceptions.RequestException()
         test_validate = Validate()
         input_val = {Input.HTML_CONTENTS: " "}

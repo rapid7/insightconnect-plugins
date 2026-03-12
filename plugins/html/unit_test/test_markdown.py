@@ -12,7 +12,7 @@ sys.path.append(os.path.abspath("../"))
 
 
 class TestMarkdown(TestCase):
-    def test_markdown(self):
+    def test_markdown(self) -> None:
         params = {
             "doc": "<!DOCTYPE html><html><body>Rapid7 InsightConnect<p>Convert HTML to Markdown</p></body></html>"
         }
@@ -28,7 +28,7 @@ class TestMarkdown(TestCase):
             },
         )
 
-    def test_html_with_header_tags(self):
+    def test_html_with_header_tags(self) -> None:
         params = {
             "doc": "<!DOCTYPE html><html><body><h1>Rapid7 InsightConnect</h1><p>Convert HTML to Markdown</p></body></html>"
         }
@@ -47,7 +47,7 @@ class TestMarkdown(TestCase):
             "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cj09PT09PT09PT09PT09PT09PT09PQoKQ29udmVydCBIVE1MIHRvIE1hcmtkb3duCg==",
         )
 
-    def test_markdown_cloud(self):
+    def test_markdown_cloud(self) -> None:
         params = {"doc": '<!DOCTYPE html><html><iframe src="https://www.google.com"></iframe></html>'}
 
         os.environ["PLUGIN_RUNTIME_ENVIRONMENT"] = "cloud"
@@ -59,7 +59,7 @@ class TestMarkdown(TestCase):
         self.assertEqual(result["markdown_contents"], "\n")
 
 
-def test_action_empty_string(self):
+def test_action_empty_string(self) -> None:
     params = {"doc": " "}
 
     test_action = Markdown()

@@ -26,7 +26,7 @@ class Util:
     @staticmethod
     def mocked_requests(*args, **kwargs):
         class MockResponse:
-            def __init__(self, filename, status_code):
+            def __init__(self, filename, status_code) -> None:
                 self.filename = filename
                 self.status_code = status_code
                 self.headers = Util.load_data(self.filename).get("headers", {})
@@ -35,7 +35,7 @@ class Util:
             def json(self):
                 return Util.load_data(self.filename).get("json", {})
 
-            def raise_for_status(self):
+            def raise_for_status(self) -> None:
                 return
 
         data = kwargs.get("data")

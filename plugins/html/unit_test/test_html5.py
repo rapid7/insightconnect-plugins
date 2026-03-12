@@ -10,7 +10,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class TestHtml5(TestCase):
-    def test_run(self):
+    def test_run(self) -> None:
         params = {"doc": "<p>That's a failure</p>"}
 
         test_action = Html5()
@@ -24,7 +24,7 @@ class TestHtml5(TestCase):
             },
         )
 
-    def test_action_empty_string(self):
+    def test_action_empty_string(self) -> None:
         params = {"doc": " "}
 
         test_action = Html5()
