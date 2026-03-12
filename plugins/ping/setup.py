@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="ping-rapid7-plugin",
-    version="1.0.4",
+    version="2.0.0",
     description="The Ping plugin is used to check network connectivity and response times",
     author="rapid7",
     author_email="",

@@ -93,6 +93,7 @@ Example output:
 
 # Version History
 
+* 2.0.0 - Testing release pipeline
 * 1.0.4 - Updated SDK version to 6.4.3
 * 1.0.3 - New spec and help.md format for the Extension Library
 * 1.0.2 - Bug fix to correct regex's search pattern
