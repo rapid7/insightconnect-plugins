@@ -345,6 +345,7 @@ Example output:
 
 # Version History
 
+* 1.4.7 - Test fedramp release milestone tagging
 * 1.4.6 - Updated SDK to the latest version (6.4.2)
 * 1.4.5 - Updated SDK to the latest version (6.3.10)
 * 1.4.4 - Updated SDK to the latest version (6.3.3)
