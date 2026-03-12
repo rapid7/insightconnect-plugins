@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Ping"
 Vendor = "rapid7"
-Version = "2.0.0"
+Version = "2.0.1"
 Description = "The Ping plugin is used to check network connectivity and response times"
 
 
