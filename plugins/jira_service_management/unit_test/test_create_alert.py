@@ -39,14 +39,14 @@ class TestCreateAlert(TestCase):
             "source": "Rapid7 Automation",
             "priority": "P3",
             "user": "",
-            "note": ""
+            "note": "",
         }
 
         expected = {
             "alertId": "f111ea16-9999-4ec2-8067-acde6abc040-1111123123",
             "elapsed_time": 0.009,
             "requestId": "12345678-d325-4xx9-1234-8ee2c35e4606",
-            "result": "Request will be processed"
+            "result": "Request will be processed",
         }
 
         actual = self.action.run(input_params)

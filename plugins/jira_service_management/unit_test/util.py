@@ -38,11 +38,7 @@ class Util:
 
     @staticmethod
     def read_file_to_dict(filename: str) -> Dict[str, Any]:
-        return json.loads(
-            Util.read_file_to_string(
-                os.path.join(os.path.dirname(os.path.realpath(__file__)), filename)
-            )
-        )
+        return json.loads(Util.read_file_to_string(os.path.join(os.path.dirname(os.path.realpath(__file__)), filename)))
 
     class MockResponse:
         def __init__(self, filename: str = None, status_code: int = 200, headers: Dict[str, Any] = None):
