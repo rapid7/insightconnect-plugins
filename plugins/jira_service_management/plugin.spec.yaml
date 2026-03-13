@@ -168,6 +168,7 @@ actions:
         description: ID of an created alert
         type: string
         required: true
+        example: 8418d193-2dab-4490-b331-8c02cdd196b7
   get_alert:
     title: Get Alert
     description: Retrieve alert from Jira Service Management

@@ -158,7 +158,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|alertId|string|True|ID of an created alert|None|
+|alertId|string|True|ID of an created alert|8418d193-2dab-4490-b331-8c02cdd196b7|
 |elapsed_time|float|True|Time taken to execute|0.195|
 |requestId|string|True|ID of a executed API request|d383c6e9-b1e7-4b59-9c35-72f1a2187777|
 |result|string|True|Result message from API|Request will be processed|
@@ -167,7 +167,7 @@ Example output:
 
 ```
 {
-  "alertId": "",
+  "alertId": "8418d193-2dab-4490-b331-8c02cdd196b7",
   "elapsed_time": 0.195,
   "requestId": "d383c6e9-b1e7-4b59-9c35-72f1a2187777",
   "result": "Request will be processed"
