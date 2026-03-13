@@ -1,11 +1,8 @@
 import base64
 
-from logging import Logger
-
 import requests
 
 from icon_jira_service_management.util.constants import REQUESTS_TIMEOUT
-from icon_jira_service_management.util.validators import InputDataValidator
 from icon_jira_service_management.util.retry import rate_limiting
 from insightconnect_plugin_runtime.helper import make_request
 
@@ -14,12 +11,10 @@ MAX_REQUEST_TRIES = 10
 
 class JiraServiceManagementApi:
 
-    def __init__(self, api_token: str, cloud_id: str, email: str, logger: Logger) -> None:
+    def __init__(self, api_token: str, cloud_id: str, email: str) -> None:
         self.api_token = api_token
         self.cloud_id = cloud_id
         self.email = email
-        self.logger = logger
-        self.validator = InputDataValidator()
 
     def encode_basic_auth(self):
         credentials = f"{self.email}:{self.api_token}"
@@ -33,7 +28,6 @@ class JiraServiceManagementApi:
 
     def create_alert(self, data: dict) -> dict:
         url = f"https://api.atlassian.com/jsm/ops/api/{self.cloud_id}/v1/alerts"
-        self.validator.validate(data)
 
         create_alert_response = self._call_api(
             method="POST",

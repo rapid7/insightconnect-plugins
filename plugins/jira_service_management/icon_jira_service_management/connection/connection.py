@@ -30,7 +30,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
             api_token=self.api_token,
             cloud_id=self.cloud_id,
             email=self.email,
-            logger=self.logger,
         )
 
     def test(self):
