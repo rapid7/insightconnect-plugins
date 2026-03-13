@@ -1,130 +1,36 @@
-import insightconnect_plugin_runtime
-from .schema import ScanInput, ScanOutput
+import subprocess
 
-# Custom imports below
-import requests
-import time
-import json
+import insightconnect_plugin_runtime
+from .schema import ScanInput, ScanOutput, Input, Component, Output
+from insightconnect_plugin_runtime.exceptions import PluginException
+from icon_sqlmap.util.constants import SQL_MAP_LOGS_FILENAME, DEFAULT_ENCODING
+from uuid import uuid4
+from io import StringIO
 
 
 class Scan(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="scan",
-            description="Performs a SQLMap scan on target",
+            description=Component.DESCRIPTION,
             input=ScanInput(),
             output=ScanOutput(),
         )
 
-        self.scan_url = ""
-        self.api_host = ""
-        self.api_port = ""
-        self.headers = ""
-        self.taskid = ""
-        self.data = {}
-        self.status = ""
-        self.url = {}
-        self.cleaned_options = {}
-        self.sql_url = ""
+    def run(self, params=None):
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        url = params.get(Input.URL, "")
+        headers = params.get(Input.HEADERS, {})
+        # END INPUT BINDING - DO NOT REMOVE
 
-    def run(self, params={}):
         try:
-            return self.orchestrator(params)
+            scan_data = self.connection.sqlmap_client.run_scan(url, headers, params)
+            return {Output.RESULT: {"log": scan_data}}
         except Exception as error:
-            self.logger.error(error)
-            self.connection.f.close()
-            with open("sqlmap_logs.txt", encoding="UTF-8") as r:
-                for line in r.readlines():
-                    self.logger.info("*" + line)
-            raise error
-
-    def orchestrator(self, params={}):
-        self.api_host = self.connection.api_host
-        self.api_port = self.connection.api_port
-        self.url = params.get("url").encode("utf-8", "ignore")
-        self.new_task()
-        self.headers = params.get("headers")
-        params["url"] = self.url
-        params["taskid"] = self.taskid
-        params["id"] = self.taskid
-        params["headers"] = self.headers
-        self.set_options()
-        self.start_scan()
-
-        while True:
-            time.sleep(10)
-            self.get_status_code()
-            if self.status == "not running":
-                time.sleep(10)
-                self.logger.info("Not Running")
-            elif self.status == "running":
-                time.sleep(5)
-                self.logger.info("Running")
-                time.sleep(10)
-            elif self.status == "terminated":
-                self.logger.info("Terminated")
-                break
-            else:
-                break
-        self.get_data()
-        if self.data:
-            self.delete_task()
-            return {"log": self.data}
-
-    def new_task(self):
-        time.sleep(5)
-        self.taskid = json.loads(requests.get(f"http://{self.api_host}:{self.api_port}/task/new", timeout=10).text)[
-            "taskid"
-        ]
-
-    def set_options(self, params={}):
-        if not self.headers:
-            self.headers = {"Content-Type": "application/json"}
-        self.headers = {str(key): str(value) for key, value in self.headers.items()}
-        params = {str(key): str(value) for key, value in params.items()}
-        set_options = requests.post(  # pylint: disable=unused-variable  # noqa: F841
-            f"http://{self.api_host}:{self.api_port}/option/{self.taskid}/set",
-            data=json.dumps(params),
-            headers=self.headers,
-            timeout=10,
-        )
-
-    def start_scan(self):
-        payload = {"url": self.url}
-        payload = {str(key): str(value) for key, value in payload.items()}
-        self.sql_url = f"http://{self.api_host}:{self.api_port}/scan/{self.taskid}/start"
-        start_scan = json.loads(  # pylint: disable=unused-variable  # noqa: F841
-            requests.post(self.sql_url, data=json.dumps(payload), headers=self.headers, timeout=10).text
-        )
-
-    def get_data(self):
-        self.data = json.loads(
-            requests.get(f"http://{self.api_host}:{self.api_port}/scan/{self.taskid}/log", timeout=10).text
-        )["log"]
-
-    def get_status_code(self):
-        self.status = json.loads(
-            requests.get(f"http://{self.api_host}:{self.api_port}/scan/{self.taskid}/status", timeout=10).text
-        )["status"]
-
-    def delete_task(self):
-        if json.loads(
-            requests.get(f"http://{self.api_host}:{self.api_port}/task/{self.taskid}/delete", timeout=10).text
-        )["success"]:
-            return True
-        return False
-
-    def test(self):
-        self.api_host = self.connection.api_host
-        self.api_port = self.connection.api_port
-        time.sleep(5)
-        req_check = json.loads(requests.get(f"http://{self.api_host}:{self.api_port}/task/new", timeout=10).text)
-        taskid = req_check["taskid"]
-        failed = {"result": "failed"}
-        if taskid:
-            delete_task = json.loads(  # pylint: disable=unused-variable  # noqa: F841
-                requests.get(f"http://{self.api_host}:{self.api_port}/task/{taskid}/delete", timeout=10).text
+            self.logger.error(f"SQLMap scan failed: {error}")
+            self.connection.sqlmap_client.get_logs(cleanup=True)
+            raise PluginException(
+                cause="SQLMap scan failed.",
+                assistance="Please check the URL and SQLMap API connectivity.",
+                data=error,
             )
-            return req_check
-        else:
-            return failed

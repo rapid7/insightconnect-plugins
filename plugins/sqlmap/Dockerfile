@@ -1,24 +1,36 @@
-FROM rapid7/insightconnect-python-3-38-plugin:5
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.4.3 AS builder
+
+WORKDIR /python/src
+
+ADD ./plugin.spec.yaml /plugin.spec.yaml
+ADD ./requirements.txt /python/src/requirements.txt
+ADD . /python/src
+
+
+
+RUN pip install .
+RUN pip uninstall -y setuptools
+
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.4.3
 
 LABEL organization=rapid7
 LABEL sdk=python
 
-RUN apt-get update && \
-    apt-get -y install wget
-
-ENV SQLMAP_VERSION master
-
 WORKDIR /python/src
-ADD ./plugin.spec.yaml /plugin.spec.yaml
-ADD . /python/src
 
-RUN wget https://github.com/sqlmapproject/sqlmap/archive/$SQLMAP_VERSION.tar.gz && \
-    tar -xf master.tar.gz
+COPY --from=builder /python/src /python/src
+COPY --from=builder /plugin.spec.yaml /plugin.spec.yaml
+
+RUN apt-get update && apt-get install -y wget && wget https://github.com/sqlmapproject/sqlmap/archive/master.tar.gz && tar -xf master.tar.gz
+
 
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-RUN	python setup.py build && python setup.py install
+ENV PYTHONPATH="/python/src:${PYTHONPATH}"
+
+RUN rm -rf /root/.cache;
 
 # User to run plugin code. The two supported users are: root, nobody
+USER nobody
 
-ENTRYPOINT ["/usr/local/bin/icon_sqlmap"]
+ENTRYPOINT ["python", "/python/src/bin/icon_sqlmap"]

@@ -3,21 +3,49 @@ extension: plugin
 products: [insightconnect]
 name: sqlmap
 title: SQLMap
-description: The SQLMap plugin allows you to scan targets and analyze the results
-version: 2.0.0
-supported_versions: ["SQLMAP 2023-05-16"]
+description: '[SQLMap](http://sqlmap.org/) is an open source penetration testing tool that automates the process of detecting and exploiting SQL injection flaws and taking over of database servers. It comes with a powerful detection engine, many niche features for the ultimate penetration tester and a broad range of switches lasting from database fingerprinting, over data fetching from the database, to accessing the underlying file system and executing commands on the operating system via out-of-band connections. The SQLMap plugin allows you to scan targets and analyze the results'
+version: 2.0.1
+connection_version: 2
+supported_versions: ["SQLMAP 2026-03-13"]
 vendor: rapid7
 support: community
 status: []
+sdk:
+  type: slim
+  version: 6.4.3
+  user: nobody
+  custom_cmd:
+    - RUN apt-get update && apt-get install -y wget && wget https://github.com/sqlmapproject/sqlmap/archive/master.tar.gz && tar -xf master.tar.gz
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/sqlmap
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+key_features:
+  - Scan a target for SQL injection vulnerabilities
+  - Automate detection and exploitation of SQL injection flaws
+  - Database fingerprinting and data extraction
+  - Access underlying file system and execute OS commands
+requirements:
+  - Host and port of a target machine
+troubleshooting:
+  - To troubleshoot SQLmap, look at the INFO logs that are printed to see where the plugin failed
+version_history:
+  - 2.0.1 - Updated SDK to the latest version (6.4.3)
+  - 2.0.0 - Changed SDK from Komand to ICON | Updated requests version to 2.20.0 | Added examples and required defaults
+  - 1.1.1 - New spec and help.md format for the Extension Library
+  - 1.1.0 - Support web server mode
+  - 1.0.0 - Initial plugin
+links:
+  - '[SQLMap](http://sqlmap.org/)'
+references:
+  - '[SQLmap GitHub](https://github.com/sqlmapproject/sqlmap)'
+  - '[Unofficial SQLmap API Documentation](http://volatile-minds.blogspot.com/2013/04/unofficial-sqlmap-restful-api.html)'
+  - '[DVWA](http://www.dvwa.co.uk/)'
 tags:
-- vulnerability
-- exploit
-- sqlmap
-- injection
-- database
+  - vulnerability
+  - exploit
+  - sqlmap
+  - injection
+  - database
 hub_tags:
   use_cases: [threat_detection_and_response, vulnerability_management, devops]
   keywords: [vulnerability, exploit, sqlmap, injection, database]
@@ -51,16 +79,16 @@ actions:
         default: 1
         example: 1
         enum:
-        - 1
-        - 2
-        - 3
-        - 4
-        - 5
-        - 6
-        - 7
-        - 8
-        - 9
-        - 10
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
       getUsers:
         title: Get Users
         description: Enumerate DBMS users
@@ -177,9 +205,9 @@ actions:
         default: 1
         example: 1
         enum:
-        - 1
-        - 2
-        - 3
+          - 1
+          - 2
+          - 3
       sqlFile:
         title: SQL File
         description: Execute SQL statements from given file(s)
@@ -498,12 +526,12 @@ actions:
         default: 1
         example: 1
         enum:
-        - 1
-        - 2
-        - 3
-        - 4
-        - 5
-        - 6
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
       aCert:
         title: Authentication File
         description: HTTP authentication PEM cert/private key file
@@ -690,7 +718,7 @@ actions:
         description: Extra headers as a JSON object
         type: object
         required: false
-        example: '{ "Accept-Language": "fr", "ETag": 123 }'
+        example: '{"Accept-Language": "fr","ETag": 123}'
       flushSession:
         title: Flush Session
         description: Flush session files for current target
@@ -860,9 +888,9 @@ actions:
         default: CSV
         example: CSV
         enum:
-        - CSV
-        - HTML
-        - SQLITE
+          - CSV
+          - HTML
+          - SQLITE
       alert:
         title: Alert
         description: Run host OS command(s) when SQL injection is found
