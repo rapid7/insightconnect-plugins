@@ -49,10 +49,10 @@ class JiraServiceManagementApi:
                         time.sleep(delay)
                     try:
                         return func(self, *args, **kwargs)
-                    except PluginException as e:
+                    except PluginException as error:
                         attempts += 1
                         delay = 2 ** (attempts * 0.6)
-                        if e.cause == PluginException.causes[PluginException.Preset.RATE_LIMIT]:
+                        if error.cause == PluginException.causes[PluginException.Preset.RATE_LIMIT]:
                             self.logger.info(
                                 RETRY_MESSAGE.format(delay=delay, attempts_counter=attempts, max_tries=max_tries)
                             )
@@ -110,4 +110,4 @@ class JiraServiceManagementApi:
                 headers=self.get_headers(),
             ),
             timeout=REQUESTS_TIMEOUT,
-        ).status_code
+        )
