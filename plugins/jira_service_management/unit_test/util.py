@@ -63,7 +63,10 @@ class Util:
 
         if url == "https://api.atlassian.com/jsm/ops/api/123456789/v1/alerts":
             return MockResponse("create_alert_request.json", 200)
-        elif url == "https://api.atlassian.com/jsm/ops/api/123456789/v1/alerts/requests/12345678-d325-4xx9-1234-8ee2c35e4606":
+        elif (
+            url
+            == "https://api.atlassian.com/jsm/ops/api/123456789/v1/alerts/requests/12345678-d325-4xx9-1234-8ee2c35e4606"
+        ):
             return MockResponse("get_request_status_request.json", 200)
 
         raise Exception("Not implemented")
