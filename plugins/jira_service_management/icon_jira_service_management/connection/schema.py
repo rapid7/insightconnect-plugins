@@ -4,9 +4,9 @@ import json
 
 
 class Input:
-    CLIENT_ID = "client_id"
-    CLIENT_SECRET = "client_secret"
-    INSTANCE = "instance"
+    API_TOKEN = "api_token"
+    CLOUD_ID = "cloud_id"
+    EMAIL = "email"
 
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -16,29 +16,29 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "client_id": {
+    "api_token": {
       "$ref": "#/definitions/credential_secret_key",
-      "title": "Client ID",
-      "description": "Jira Service Management Client ID",
+      "title": "API Token",
+      "description": "Jira Service Management API Token generated here https://id.atlassian.com/manage-profile/security/api-tokens",
       "order": 1
     },
-    "client_secret": {
-      "$ref": "#/definitions/credential_secret_key",
-      "title": "Client Secret",
-      "description": "Jira Service Management Client Secret",
-      "order": 2
-    },
-    "instance": {
+    "cloud_id": {
       "type": "string",
-      "title": "Jira Service Management Instance",
-      "description": "The instance of Jira Service Management from the URL, e.g. https://{instance}.atlassian.net/",
+      "title": "Jira Service Management Cloud ID",
+      "description": "Cloud ID of the Jira Service Management instance. It can be found in the https://yoursite.atlassian.net/_edge/tenant_info API response or by contacting Atlassian support",
       "order": 3
+    },
+    "email": {
+      "type": "string",
+      "title": "Email",
+      "description": "Email address of the user that is used to create API token. It should be the email address of an active user in the Jira Service Management instance",
+      "order": 2
     }
   },
   "required": [
-    "client_id",
-    "client_secret",
-    "instance"
+    "api_token",
+    "cloud_id",
+    "email"
   ],
   "definitions": {
     "credential_secret_key": {
