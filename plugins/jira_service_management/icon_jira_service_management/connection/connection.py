@@ -38,5 +38,5 @@ class Connection(insightconnect_plugin_runtime.Connection):
         try:
             self.api.test_api()
             return {"success": True}
-        except PluginException as e:
-            raise ConnectionTestException(cause=e.cause, assistance=e.assistance, data=e.data)
+        except PluginException as error:
+            raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=error.data)

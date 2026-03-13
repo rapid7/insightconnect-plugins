@@ -1,0 +1,15 @@
+{
+    "message": "Test",
+    "alias": "",
+    "description": "",
+    "responders": [],
+    "visibleTo": [],
+    "actions": [],
+    "tags": [],
+    "details": {},
+    "entity": "",
+    "source": "Rapid7 Automation",
+    "priority": "P3",
+    "user": "",
+    "note": ""
+}
