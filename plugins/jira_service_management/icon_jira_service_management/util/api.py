@@ -1,61 +1,88 @@
+import base64
 from logging import Logger
 
 import requests
 
 from icon_jira_service_management.util.constants import REQUESTS_TIMEOUT
+from icon_jira_service_management.util.retry import rate_limiting
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import make_request
+
+MAX_REQUEST_TRIES = 10
 
 
 class JiraServiceManagementApi:
 
-    def __init__(self, client_id: str, client_secret: str, instance: str, logger: Logger) -> None:
-        self.client_id = client_id
-        self.client_secret = client_secret
-        self.instance = instance
+    def __init__(self, api_token: str, cloud_id: str, email: str, logger: Logger) -> None:
+        self.api_token = api_token
+        self.cloud_id = cloud_id
+        self.email = email
         self.logger = logger
 
-    def _get_token(self) -> str:
+    def encode_basic_auth(self):
+        credentials = f"{self.email}:{self.api_token}"
+        return base64.b64encode(credentials.encode()).decode()
+
+    def get_headers(self):
+        return {
+            "Accept": "application/json",
+            "Authorization": f"Basic {self.encode_basic_auth()}",
+        }
+
+    def create_alert(self, data: dict) -> dict:
+        url = f"https://api.atlassian.com/jsm/ops/api/{self.cloud_id}/v1/alerts"
+
         try:
-            return (
-                make_request(
-                    _request=requests.Request(
-                        method="POST",
-                        url="https://auth.atlassian.com/oauth/token",
-                        json={
-                            "grant_type": "client_credentials",
-                            "client_id": self.client_id,
-                            "client_secret": self.client_secret,
-                            "audience": "api.atlassian.com",
-                        },
-                    ),
-                    timeout=REQUESTS_TIMEOUT,
-                )
-                .json()
-                .get("access_token", "")
-            )
-        except Exception:
-            raise PluginException(
-                cause="Failed to obtain access token for provided client id and client secret.",
-                assistance="Please check your credentials and try again.",
+            self.logger.info("Creating alert in Jira Service Management Ops API.")
+
+            create_alert_response = self._call_api(
+                method="POST",
+                url=url,
+                json_data=data,
             )
 
-    def _get_cloud_id(self, authorization: str) -> str:
-        resources = make_request(
+            request_id = create_alert_response.get("requestId")
+            self.logger.info(f"Alert creation request sent. Request ID: {request_id}")
+
+            alert_id = self._get_request_status(identifier=create_alert_response.get("requestId")).get("alertId")
+            self.logger.info(f"Alert created successfully. Alert ID: {alert_id}")
+
+            return {**create_alert_response, "alertId": alert_id}
+        except PluginException as error:
+            self.logger.error(f"Failed to create alert: {error}")
+            raise
+
+    @rate_limiting(max_tries=MAX_REQUEST_TRIES)
+    def _call_api(self, method: str, url: str, json_data: dict = None, params: dict = None) -> dict:
+        return make_request(
             _request=requests.Request(
-                method="GET",
-                url="https://api.atlassian.com/oauth/token/accessible-resources",
-                headers={
-                    "Accept": "application/json",
-                    "Authorization": f"Bearer {authorization}",
-                },
-            )
+                method=method,
+                url=url,
+                json=json_data,
+                headers=self.get_headers(),
+                params=params,
+            ),
+            timeout=REQUESTS_TIMEOUT,
         ).json()
 
-        for resource in resources:
-            if resource.get("name", "") == self.instance:
-                return resource.get("id", "")
-        raise PluginException(
-            cause=f"No accessible resource found for instance: {self.instance}.",
-            assistance="Please provide a valid instance name.",
+    def _get_request_status(self, identifier: str) -> dict:
+        url = f"https://api.atlassian.com/jsm/ops/api/{self.cloud_id}/v1/alerts/requests/{identifier}"
+
+        return make_request(
+            _request=requests.Request(
+                method="GET",
+                url=url,
+                headers=self.get_headers(),
+            ),
+            timeout=REQUESTS_TIMEOUT,
+        ).json()
+
+    def test_api(self) -> dict:
+        return make_request(
+            _request=requests.Request(
+                method="GET",
+                url=f"https://api.atlassian.com/jsm/ops/api/{self.cloud_id}/v1/alerts",
+                headers=self.get_headers(),
+            ),
+            timeout=REQUESTS_TIMEOUT,
         )
