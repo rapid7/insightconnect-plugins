@@ -22,17 +22,17 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|client_id|credential_secret_key|None|True|Jira Service Management Client ID|None|a1b2c3d4e5f6g7h8i9j0klmnopqrstuv|None|None|
-|client_secret|credential_secret_key|None|True|Jira Service Management Client Secret|None|ABCD1234efgh5678IJKLmnopqrstUVWXyz9876543210|None|None|
-|instance|string|None|True|The instance of Jira Service Management from the URL, e.g. https://{instance}.atlassian.net/|None|instance|None|None|
+|api_token|credential_secret_key|None|True|Jira Service Management API Token generated here https://id.atlassian.com/manage-profile/security/api-tokens|None|ABCD1234efgh5678IJKLmnopqrstUVWXyz9876543210|None|None|
+|cloud_id|string|None|True|Cloud ID of the Jira Service Management instance. It can be found in the https://yoursite.atlassian.net/_edge/tenant_info API response or by contacting Atlassian support|None|example@yoursite.com|None|None|
+|email|string|None|True|Email address of the user that is used to create API token. It should be the email address of an active user in the Jira Service Management instance|None|user@example.com|None|None|
 
 Example input:
 
 ```
 {
-  "client_id": "a1b2c3d4e5f6g7h8i9j0klmnopqrstuv",
-  "client_secret": "ABCD1234efgh5678IJKLmnopqrstUVWXyz9876543210",
-  "instance": "instance"
+  "api_token": "ABCD1234efgh5678IJKLmnopqrstUVWXyz9876543210",
+  "cloud_id": "example@yoursite.com",
+  "email": "user@example.com"
 }
 ```
 
@@ -158,6 +158,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
+|alertId|string|True|ID of an created alert|8418d193-2dab-4490-b331-8c02cdd196b7|
 |elapsed_time|float|True|Time taken to execute|0.195|
 |requestId|string|True|ID of a executed API request|d383c6e9-b1e7-4b59-9c35-72f1a2187777|
 |result|string|True|Result message from API|Request will be processed|
@@ -166,6 +167,7 @@ Example output:
 
 ```
 {
+  "alertId": "8418d193-2dab-4490-b331-8c02cdd196b7",
   "elapsed_time": 0.195,
   "requestId": "d383c6e9-b1e7-4b59-9c35-72f1a2187777",
   "result": "Request will be processed"
