@@ -219,36 +219,6 @@ actions:
         type: string
         required: true
         example: 8418d193-2dab-4490-b331-8c02cdd196b7
-      identifierType:
-        title: Identifier Type
-        description: Type of the identifier that is provided as an in-line parameter. Possible values are ID, tiny ID and alias. Default value is ID
-        type: string
-        enum:
-          - ""
-          - ID
-          - tiny
-          - alias
-        default: ID
-        required: false
-        example: ID
-      user:
-        title: User
-        description: Display name of the request owner
-        type: string
-        required: false
-        example: Monitoring Script
-      source:
-        title: Source
-        description: Display name of the request source
-        type: string
-        required: false
-        example: AWS Lambda
-      note:
-        title: Note
-        description: Additional alert note to add
-        type: string
-        required: false
-        example: Action executed via InsightConnect
     output:
       result:
         title: Result
