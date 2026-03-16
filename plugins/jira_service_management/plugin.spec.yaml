@@ -33,24 +33,24 @@ links:
 enable_cache: false
 
 connection:
-  client_id:
-    title: Client ID
-    description: Jira Service Management Client ID
-    type: credential_secret_key
-    required: true
-    example: a1b2c3d4e5f6g7h8i9j0klmnopqrstuv
-  client_secret:
-    title: Client Secret
-    description: Jira Service Management Client Secret
+  api_token:
+    title: API Token
+    description: Jira Service Management API Token generated here https://id.atlassian.com/manage-profile/security/api-tokens
     type: credential_secret_key
     required: true
     example: ABCD1234efgh5678IJKLmnopqrstUVWXyz9876543210
-  instance:
-    title: Jira Service Management Instance
-    description: The instance of Jira Service Management from the URL, e.g. https://{instance}.atlassian.net/
+  email:
+    title: Email
+    description: Email address of the user that is used to create API token. It should be the email address of an active user in the Jira Service Management instance
     type: string
     required: true
-    example: instance
+    example: user@example.com
+  cloud_id:
+    title: Jira Service Management Cloud ID
+    description: Cloud ID of the Jira Service Management instance. It can be found in the https://yoursite.atlassian.net/_edge/tenant_info API response or by contacting Atlassian support
+    type: string
+    required: true
+    example: example@yoursite.com
 
 actions:
   create_alert:
@@ -163,6 +163,12 @@ actions:
         type: string
         required: true
         example: d383c6e9-b1e7-4b59-9c35-72f1a2187777
+      alertId:
+        title: Alert ID
+        description: ID of an created alert
+        type: string
+        required: true
+        example: 8418d193-2dab-4490-b331-8c02cdd196b7
   get_alert:
     title: Get Alert
     description: Retrieve alert from Jira Service Management
