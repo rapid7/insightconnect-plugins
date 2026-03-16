@@ -71,7 +71,7 @@ class JiraServiceManagementApi:
 
     @rate_limiting(max_tries=MAX_REQUEST_TRIES)
     def _call_api(self, method: str, url: str, json_data: dict = None, params: dict = None) -> dict:
-        resp = make_request(
+        return make_request(
             _request=requests.Request(
                 method=method,
                 url=url,
@@ -80,9 +80,7 @@ class JiraServiceManagementApi:
                 params=params,
             ),
             timeout=REQUESTS_TIMEOUT,
-        )
-        self.logger.info(f"API call to {url} completed with status code {resp.status_code}.")
-        return resp.json()
+        ).json()
 
     def _get_request_status(self, identifier: str) -> dict:
         url = f"https://api.atlassian.com/jsm/ops/api/{self.cloud_id}/v1/alerts/requests/{identifier}"
