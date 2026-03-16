@@ -1,9 +1,11 @@
 import base64
+from logging import Logger
 
 import requests
 
 from icon_jira_service_management.util.constants import REQUESTS_TIMEOUT
 from icon_jira_service_management.util.retry import rate_limiting
+from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import make_request
 
 MAX_REQUEST_TRIES = 10
@@ -11,10 +13,11 @@ MAX_REQUEST_TRIES = 10
 
 class JiraServiceManagementApi:
 
-    def __init__(self, api_token: str, cloud_id: str, email: str) -> None:
+    def __init__(self, api_token: str, cloud_id: str, email: str, logger: Logger) -> None:
         self.api_token = api_token
         self.cloud_id = cloud_id
         self.email = email
+        self.logger = logger
 
     def encode_basic_auth(self):
         credentials = f"{self.email}:{self.api_token}"
@@ -29,14 +32,25 @@ class JiraServiceManagementApi:
     def create_alert(self, data: dict) -> dict:
         url = f"https://api.atlassian.com/jsm/ops/api/{self.cloud_id}/v1/alerts"
 
-        create_alert_response = self._call_api(
-            method="POST",
-            url=url,
-            json_data=data,
-        )
-        alert_id = self._get_request_status(identifier=create_alert_response.get("requestId")).get("alertId")
+        try:
+            self.logger.info("Creating alert in Jira Service Management Ops API.")
 
-        return {**create_alert_response, "alertId": alert_id}
+            create_alert_response = self._call_api(
+                method="POST",
+                url=url,
+                json_data=data,
+            )
+
+            request_id = create_alert_response.get("requestId")
+            self.logger.info(f"Alert creation request sent. Request ID: {request_id}")
+
+            alert_id = self._get_request_status(identifier=create_alert_response.get("requestId")).get("alertId")
+            self.logger.info(f"Alert created successfully. Alert ID: {alert_id}")
+
+            return {**create_alert_response, "alertId": alert_id}
+        except PluginException as error:
+            self.logger.error(f"Failed to create alert: {error}")
+            raise
 
     @rate_limiting(max_tries=MAX_REQUEST_TRIES)
     def _call_api(self, method: str, url: str, json_data: dict = None, params: dict = None) -> dict:
