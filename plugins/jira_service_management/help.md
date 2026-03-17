@@ -175,14 +175,12 @@ This action is used to retrieve alert from Jira Service Management
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |identifier|string|None|True|Identifier of the alert|None|8418d193-2dab-4490-b331-8c02cdd196b7|None|None|
-|identifierType|string|ID|False|Type of the identifier that is provided as an in-line parameter. Possible values are ID, tiny ID and alias. Default value is ID|["", "ID", "tiny", "alias"]|ID|None|None|
   
 Example input:
 
 ```
 {
-  "identifier": "8418d193-2dab-4490-b331-8c02cdd196b7",
-  "identifierType": "ID"
+  "identifier": "8418d193-2dab-4490-b331-8c02cdd196b7"
 }
 ```
 
@@ -191,16 +189,12 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |data|object|True|Data that contains JSON response|None|
-|elapsed_time|float|True|Time taken to execute|0.195|
-|requestId|string|True|ID of an request|e0caa0ce-d52f-4500-81b9-d592d06970b6|
   
 Example output:
 
 ```
 {
-  "data": {},
-  "elapsed_time": 0.195,
-  "requestId": "e0caa0ce-d52f-4500-81b9-d592d06970b6"
+  "data": {}
 }
 ```
 

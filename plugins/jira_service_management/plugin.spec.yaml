@@ -174,47 +174,23 @@ actions:
     description: Retrieve alert from Jira Service Management
     input:
       identifier:
-        title: Alert ID, Tiny ID or Alias
+        title: Alert ID or Alias
         description: Identifier of the alert
         type: string
         required: true
         example: 8418d193-2dab-4490-b331-8c02cdd196b7
-      identifierType:
-        title: Identifier Type
-        description: Type of the identifier that is provided as an in-line parameter. Possible values are ID, tiny ID and alias. Default value is ID
-        type: string
-        enum:
-          - ""
-          - ID
-          - tiny
-          - alias
-        default: ID
-        required: false
-        example: ID
     output:
       data:
         title: Data
         description: Data that contains JSON response
         type: object
         required: true
-      requestId:
-        title: Request ID
-        description: ID of an request
-        type: string
-        required: true
-        example: e0caa0ce-d52f-4500-81b9-d592d06970b6
-      elapsed_time:
-        title: Elapsed Time
-        description: Time taken to execute
-        type: float
-        required: true
-        example: 0.195
   close_alert:
     title: Close Alert
     description: Close an existing alert from Jira Service Management
     input:
       identifier:
-        title: Alert ID, Tiny ID or Alias
+        title: Alert ID or Alias
         description: Identifier of the alert
         type: string
         required: true

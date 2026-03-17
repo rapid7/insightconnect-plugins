@@ -9,13 +9,10 @@ class Component:
 
 class Input:
     IDENTIFIER = "identifier"
-    IDENTIFIERTYPE = "identifierType"
 
 
 class Output:
     DATA = "data"
-    ELAPSED_TIME = "elapsed_time"
-    REQUESTID = "requestId"
 
 
 class GetAlertInput(insightconnect_plugin_runtime.Input):
@@ -27,22 +24,9 @@ class GetAlertInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "identifier": {
       "type": "string",
-      "title": "Alert ID, Tiny ID or Alias",
+      "title": "Alert ID or Alias",
       "description": "Identifier of the alert",
       "order": 1
-    },
-    "identifierType": {
-      "type": "string",
-      "title": "Identifier Type",
-      "description": "Type of the identifier that is provided as an in-line parameter. Possible values are ID, tiny ID and alias. Default value is ID",
-      "default": "ID",
-      "enum": [
-        "",
-        "ID",
-        "tiny",
-        "alias"
-      ],
-      "order": 2
     }
   },
   "required": [
@@ -69,24 +53,10 @@ class GetAlertOutput(insightconnect_plugin_runtime.Output):
       "title": "Data",
       "description": "Data that contains JSON response",
       "order": 1
-    },
-    "elapsed_time": {
-      "type": "number",
-      "title": "Elapsed Time",
-      "description": "Time taken to execute",
-      "order": 3
-    },
-    "requestId": {
-      "type": "string",
-      "title": "Request ID",
-      "description": "ID of an request",
-      "order": 2
     }
   },
   "required": [
-    "data",
-    "elapsed_time",
-    "requestId"
+    "data"
   ],
   "definitions": {}
 }
