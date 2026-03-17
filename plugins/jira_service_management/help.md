@@ -50,20 +50,12 @@ This action is used to close an existing alert from Jira Service Management
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |identifier|string|None|True|Identifier of the alert|None|8418d193-2dab-4490-b331-8c02cdd196b7|None|None|
-|identifierType|string|ID|False|Type of the identifier that is provided as an in-line parameter. Possible values are ID, tiny ID and alias. Default value is ID|["", "ID", "tiny", "alias"]|ID|None|None|
-|note|string|None|False|Additional alert note to add|None|Action executed via InsightConnect|None|None|
-|source|string|None|False|Display name of the request source|None|AWS Lambda|None|None|
-|user|string|None|False|Display name of the request owner|None|Monitoring Script|None|None|
   
 Example input:
 
 ```
 {
-  "identifier": "8418d193-2dab-4490-b331-8c02cdd196b7",
-  "identifierType": "ID",
-  "note": "Action executed via InsightConnect",
-  "source": "AWS Lambda",
-  "user": "Monitoring Script"
+  "identifier": "8418d193-2dab-4490-b331-8c02cdd196b7"
 }
 ```
 
