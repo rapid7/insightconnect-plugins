@@ -9,10 +9,6 @@ class Component:
 
 class Input:
     IDENTIFIER = "identifier"
-    IDENTIFIERTYPE = "identifierType"
-    NOTE = "note"
-    SOURCE = "source"
-    USER = "user"
 
 
 class Output:
@@ -33,37 +29,6 @@ class CloseAlertInput(insightconnect_plugin_runtime.Input):
       "title": "Alert ID, Tiny ID or Alias",
       "description": "Identifier of the alert",
       "order": 1
-    },
-    "identifierType": {
-      "type": "string",
-      "title": "Identifier Type",
-      "description": "Type of the identifier that is provided as an in-line parameter. Possible values are ID, tiny ID and alias. Default value is ID",
-      "default": "ID",
-      "enum": [
-        "",
-        "ID",
-        "tiny",
-        "alias"
-      ],
-      "order": 2
-    },
-    "note": {
-      "type": "string",
-      "title": "Note",
-      "description": "Additional alert note to add",
-      "order": 5
-    },
-    "source": {
-      "type": "string",
-      "title": "Source",
-      "description": "Display name of the request source",
-      "order": 4
-    },
-    "user": {
-      "type": "string",
-      "title": "User",
-      "description": "Display name of the request owner",
-      "order": 3
     }
   },
   "required": [

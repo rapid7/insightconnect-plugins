@@ -17,9 +17,11 @@ class CloseAlert(insightconnect_plugin_runtime.Action):
     @auto_instrument
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
-
+        identifier = params.get(Input.IDENTIFIER, "")
         # END INPUT BINDING - DO NOT REMOVE
-
+        response = self.connection.api.close_alert(identifier=identifier)
         return {
-            Output.MESSAGE: None,
+            Output.RESULT: response.get("result"),
+            Output.REQUESTID: response.get("requestId"),
+            Output.ELAPSED_TIME: response.get("took"),
         }
