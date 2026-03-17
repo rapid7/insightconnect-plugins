@@ -1,0 +1,9 @@
+{
+  "url": "http://example.com/vulnerable?id=1",
+  "headers": {},
+  "crawlDepth": 1,
+  "level": 1,
+  "risk": 1,
+  "batch": true,
+  "verbose": 1
+}

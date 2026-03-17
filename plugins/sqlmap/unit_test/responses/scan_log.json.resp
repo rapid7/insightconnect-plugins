@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "log": [
+    {
+      "message": "testing connection to the target URL",
+      "level": "INFO",
+      "time": "12:00:00"
+    }
+  ]
+}
