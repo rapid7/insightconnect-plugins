@@ -4,16 +4,46 @@ products: [insightconnect]
 name: rpm
 title: RPM
 description: The RPM plugin allows you to download and analyze an RPM package
-version: 1.0.1
+version: 1.0.2
+sdk:
+  type: slim
+  version: 6.4.3
+  user: root
+  custom_cmd:
+    - "RUN apt-get update && apt-get upgrade -y && apt-get install -y wget rpm dnf dnf-plugins-core && mkdir -p /etc/yum.repos.d"
+    - "COPY --from=builder /python/src/repos /opt/rpm-plugin/repos"
+connection_version: 1
 vendor: rapid7
 support: community
+supported_versions: ["2026-03-18"]
 status: []
+key_features:
+  - Query RPM package metadata from CentOS and Fedora repositories
+  - Download and inspect RPM packages for name, version, architecture, license, and signature details
+  - Add custom repositories and GPG keys for package resolution
+  - Cache package information locally to speed up repeated lookups
+requirements:
+  - Network access to the target RPM repositories
+  - No credentials required
+troubleshooting:
+  - "CentOS 7 repositories only support x86_64 architecture"
+  - "Ensure the repository URL returns a valid .repo file"
+  - "GPG key URLs must be accessible and return a valid RPM-GPG key"
+version_history:
+  - "1.0.2 - Modernize plugin to use insightconnect-plugin-runtime and slim base image"
+  - "1.0.1 - New spec and calculation for help.md generation"
+  - "1.0.0 - Initial plugin"
+links:
+  - "[Extension Library](https://extensions.rapid7.com)"
+references:
+  - "[RPM Documentation](https://rpm.org/documentation.html)"
+  - "[DNF Documentation](https://dnf.readthedocs.io/)"
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rpm
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
-- rpm
-- package
+  - rpm
+  - package
 hub_tags:
   use_cases: [remediation_management, devops]
   keywords: [rpm, package]
@@ -85,144 +115,170 @@ actions:
     input:
       name:
         title: Name
-        type: string
         description: Canonical package name
+        type: string
         required: true
+        example: curl
       epoch:
         title: Epoch
         description: Epoch
         type: string
         required: false
+        example: "0"
       version:
         title: Version
-        type: string
         description: Package version
+        type: string
         required: false
+        example: 7.29.0
       release:
         title: Release
-        type: string
         description: Release version
+        type: string
         required: false
+        example: 54.el7_6.3
       arch:
         title: Architecture
-        type: string
         description: System architecture
+        type: string
         enum:
-        - x86_64
-        - i686
-        - i386
-        - noarch
+          - x86_64
+          - i686
+          - i386
+          - noarch
         required: true
+        example: x86_64
       repo:
         title: Repository
-        type: string
         description: Repository URL
+        type: string
         required: false
+        example: https://mirror.centos.org/centos/7/os/x86_64/
       key:
         title: Key
-        type: string
         description: GPG key URL
+        type: string
         required: false
+        example: https://www.redhat.com/security/data/fd431d51.txt
       distro:
         title: Distribution
-        type: string
         description: Distribution
+        type: string
         enum:
-        - CentOS 6
-        - CentOS 7
-        - Fedora 23
-        - Fedora 24
-        - Fedora 25
-        - Fedora 26
+          - CentOS 6
+          - CentOS 7
+          - Fedora 23
+          - Fedora 24
+          - Fedora 25
+          - Fedora 26
         required: true
+        example: CentOS 7
     output:
       name:
         title: Name
-        type: string
         description: Package name
+        type: string
         required: false
+        example: curl
       found:
         title: Found
-        type: boolean
         description: Package found
+        type: boolean
         required: false
+        example: true
       version:
         title: Version
-        type: string
         description: Package version
+        type: string
         required: false
+        example: 7.29.0
       release:
         title: Release
-        type: string
         description: Distro release
+        type: string
         required: false
+        example: 54.el7_6.3
       architecture:
         title: Architecture
-        type: string
         description: System architecture
+        type: string
         required: false
+        example: x86_64
       license:
         title: License
-        type: string
         description: License
+        type: string
         required: false
+        example: MIT
       signature:
         title: Signature
-        type: signature
         description: Signature
+        type: signature
         required: false
+        example: {"scheme": "RSA/SHA256", "time": "2019-04-01T12:00:00Z", "key": "f4a80eb5"}
       source_rpm:
         title: Source RPM
-        type: string
         description: Source RPM
+        type: string
         required: false
+        example: curl-7.29.0-54.el7_6.3.src.rpm
       build_date:
         title: Build Date
-        type: date
         description: Build date
+        type: date
         required: false
+        example: 2019-04-01T12:00:00Z
       build_host:
         title: Build Host
-        type: string
         description: Build host
+        type: string
         required: false
+        example: x86-01.bsys.centos.org
       relocations:
         title: Relocations
-        type: string
         description: Relocations
+        type: string
         required: false
+        example: (not relocatable)
       size:
         title: Size
-        type: integer
         description: Package size
+        type: integer
         required: false
+        example: 533840
       vendor:
         title: Vendor
-        type: string
         description: Package vendor
+        type: string
         required: false
+        example: CentOS
       packager:
         title: Packager
-        type: string
         description: Packager
+        type: string
         required: false
+        example: CentOS BuildSystem
       summary:
         title: Summary
-        type: string
         description: Package summary
+        type: string
         required: false
+        example: A utility for getting files from remote servers
       description:
         title: Description
-        type: string
         description: Package description
+        type: string
         required: false
+        example: curl is a command line tool for transferring data with URL syntax
       url:
         title: URL
-        type: string
         description: Package download URL
+        type: string
         required: false
+        example: https://curl.haxx.se/
       files:
         title: Files
-        type: '[]file'
         description: Package files
+        type: "[]file"
         required: false
+        example: [{"path": "/usr/bin/curl", "size": 156000, "mtime": "2019-04-01T12:00:00Z", "hash": "d41d8cd98f00b204e9800998ecf8427e", "mode": "0755", "owner": "root", "group": "root", "isconfig": 0, "isdoc": 0, "rdev": 0, "symlink": ""}]

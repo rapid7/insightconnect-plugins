@@ -1,103 +1,182 @@
 # Description
 
-The [RPM](http://rpm.org/) plugin replicates the `info` (`-i`) capabilities of RPM while utilizing yum to help resolve packages correctly and download them for inspection.
+The RPM plugin allows you to download and analyze an RPM package
 
 # Key Features
 
-* Download and analyze an RPM package
+* Query RPM package metadata from CentOS and Fedora repositories
+* Download and inspect RPM packages for name, version, architecture, license, and signature details
+* Add custom repositories and GPG keys for package resolution
+* Cache package information locally to speed up repeated lookups
 
 # Requirements
 
-_This plugin does not contain any requirements._
+* Network access to the target RPM repositories
+* No credentials required
+
+# Supported Product Versions
+
+* 2026-03-18
 
 # Documentation
 
 ## Setup
-
-_This plugin does not contain a connection._
+  
+*This plugin does not contain a connection.*
 
 ## Technical Details
 
 ### Actions
 
+
 #### Info
 
-This action is used to get information about a package.
+This action is used to get information about a package
 
 ##### Input
 
-As input, the plugin takes the expected parts of a complete RPM package label: name<epoch:>-version-release.arch.
-For better accuracy in identifying the users intended package, the user is also asked to specify their distro and architecture.
-Note that a label must match exactly to find a specific package, and label sections must be specified from left to right.
-Thus, release info without the version is ignored when searching. A custom repository URL may also be specified, which will disable all other repos.
-If a custom key URL is also given (note: URL), then the key is used to do a checksig on the package downloaded before it is examined by RPM.
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|arch|string|None|True|System architecture|["x86_64", "i686", "i386", "noarch"]|x86_64|None|None|
+|distro|string|None|True|Distribution|["CentOS 6", "CentOS 7", "Fedora 23", "Fedora 24", "Fedora 25", "Fedora 26"]|CentOS 7|None|None|
+|epoch|string|None|False|Epoch|None|0|None|None|
+|key|string|None|False|GPG key URL|None|https://www.redhat.com/security/data/fd431d51.txt|None|None|
+|name|string|None|True|Canonical package name|None|curl|None|None|
+|release|string|None|False|Release version|None|54.el7_6.3|None|None|
+|repo|string|None|False|Repository URL|None|https://mirror.centos.org/centos/7/os/x86_64/|None|None|
+|version|string|None|False|Package version|None|7.29.0|None|None|
+  
+Example input:
 
-Briefly, when given a package, the plugin checks to see if the cache already holds the results of am `rpm -qi --dump`.
-If it does not, yumdownloader downloads the package and automatically performs a checksig before inspecting it and caching the result.
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|name|string|None|True|Canonical package name|None|
-|repo|string|None|False|Repository URL|None|
-|epoch|string|None|False|None|None|
-|version|string|None|False|Package version|None|
-|key|string|None|False|GPG key URL|None|
-|release|string|None|False|Release version)|None|
-|arch|string|None|True|System architecture|['x86_64', 'i686', 'i386', 'noarch']|
-|distro|string|None|True|Distribution|['CentOS 6', 'CentOS 7', 'Fedora 23', 'Fedora 24', 'Fedora 25', 'Fedora 26']|
+```
+{
+  "arch": "x86_64",
+  "distro": "CentOS 7",
+  "epoch": 0,
+  "key": "https://www.redhat.com/security/data/fd431d51.txt",
+  "name": "curl",
+  "release": "54.el7_6.3",
+  "repo": "https://mirror.centos.org/centos/7/os/x86_64/",
+  "version": "7.29.0"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|files|[]file|False|Package Files|
-|vendor|string|False|Package Vendor|
-|description|string|False|Package Description|
-|build_host|string|False|Build Host|
-|relocations|string|False|Relocations|
-|source_rpm|string|False|Source RPM|
-|packager|string|False|Packager|
-|size|integer|False|Package Size|
-|build_date|date|False|Build Date|
-|name|string|False|Package Name|
-|license|string|False|License|
-|url|string|False|Package Download URL|
-|summary|string|False|Package Summary|
-|version|string|False|Package Version|
-|architecture|string|False|System Architecture|
-|signature|signature|False|Signature|
-|release|string|False|Distro Release|
-|found|boolean|False|Package Found|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|architecture|string|False|System architecture|x86_64|
+|build_date|date|False|Build date|2019-04-01 12:00:00+00:00|
+|build_host|string|False|Build host|x86-01.bsys.centos.org|
+|description|string|False|Package description|curl is a command line tool for transferring data with URL syntax|
+|files|[]file|False|Package files|[{"path": "/usr/bin/curl", "size": 156000, "mtime": "2019-04-01T12:00:00Z", "hash": "d41d8cd98f00b204e9800998ecf8427e", "mode": "0755", "owner": "root", "group": "root", "isconfig": 0, "isdoc": 0, "rdev": 0, "symlink": ""}]|
+|found|boolean|False|Package found|True|
+|license|string|False|License|MIT|
+|name|string|False|Package name|curl|
+|packager|string|False|Packager|CentOS BuildSystem|
+|release|string|False|Distro release|54.el7_6.3|
+|relocations|string|False|Relocations|(not relocatable)|
+|signature|signature|False|Signature|{'scheme': 'RSA/SHA256', 'time': '2019-04-01T12:00:00Z', 'key': 'f4a80eb5'}|
+|size|integer|False|Package size|533840|
+|source_rpm|string|False|Source RPM|curl-7.29.0-54.el7_6.3.src.rpm|
+|summary|string|False|Package summary|A utility for getting files from remote servers|
+|url|string|False|Package download URL|https://curl.haxx.se/|
+|vendor|string|False|Package vendor|CentOS|
+|version|string|False|Package version|7.29.0|
+  
+Example output:
 
+```
+{
+  "architecture": "x86_64",
+  "build_date": "2019-04-01 12:00:00+00:00",
+  "build_host": "x86-01.bsys.centos.org",
+  "description": "curl is a command line tool for transferring data with URL syntax",
+  "files": [
+    {
+      "group": "root",
+      "hash": "d41d8cd98f00b204e9800998ecf8427e",
+      "isconfig": 0,
+      "isdoc": 0,
+      "mode": "0755",
+      "mtime": "2019-04-01T12:00:00Z",
+      "owner": "root",
+      "path": "/usr/bin/curl",
+      "rdev": 0,
+      "size": 156000,
+      "symlink": ""
+    }
+  ],
+  "found": true,
+  "license": "MIT",
+  "name": "curl",
+  "packager": "CentOS BuildSystem",
+  "release": "54.el7_6.3",
+  "relocations": "(not relocatable)",
+  "signature": {
+    "key": "f4a80eb5",
+    "scheme": "RSA/SHA256",
+    "time": "2019-04-01T12:00:00Z"
+  },
+  "size": 533840,
+  "source_rpm": "curl-7.29.0-54.el7_6.3.src.rpm",
+  "summary": "A utility for getting files from remote servers",
+  "url": "https://curl.haxx.se/",
+  "vendor": "CentOS",
+  "version": "7.29.0"
+}
+```
 ### Triggers
+  
+*This plugin does not contain any triggers.*
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-_This plugin does not contain any triggers._
+### Custom Types
+  
+**file**
 
-### Custom Output Types
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Group|string|None|True|None|None|
+|MD5 Sum|string|None|True|None|None|
+|Config File Flag|integer|None|True|None|None|
+|Document File Flag|integer|None|True|None|None|
+|Mode|string|None|True|None|None|
+|Last Modified|date|None|True|None|None|
+|Owner|string|None|True|None|None|
+|Path|string|None|True|None|None|
+|Rdev|integer|None|True|None|None|
+|Size|integer|None|True|None|None|
+|Symlink|string|None|True|None|None|
+  
+**signature**
 
-_This plugin does not contain any custom output types._
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Hash|string|None|True|None|None|
+|Scheme|string|None|True|None|None|
+|Datetime of Last Hash|date|None|True|None|None|
+
 
 ## Troubleshooting
 
-The choice was made to use yum instead of building a custom repo search tool because:
-
-1. Repos organize packages differently (ex: Fedora uses alphabetized directories and CentOS has all of them in one place), and there is no guaranteed labeling scheme for packages (only what is expected). For instance, some packages have different common names than what is in their labels. Thus, a custom tool would have to read repo markdown to match package labels with that which a client is looking for.
-2. I would have to make decisions about how to deal with updates to repositories and how to handle caching. Yum keeps a cached record of what packages are available remotely and rolling this manually would be overkill.
-3. Instead of asking clients to provide the root directory URL of custom repos, they can provide a .repo file and a remote key file and yum will take care of the rest.
-
-That being said, I was unable to find a library to assist in querying remote repos which would been a major help. In addition, yum will soon be deprecated in favor of DNF, and I have some code written for dnf if we ever have a docker container that runs CentOS or Fedora.
-The complexity of this plugin overwhelmingly involves hacking around with yum, which does some strange things. For example, changing the order of architectures specified with --archlist and putting 'noarch' first leads to no results in all cases. In addition, repofiles must be modified in order for yum to work correctly.
+* CentOS 7 repositories only support x86_64 architecture
+* Ensure the repository URL returns a valid .repo file
+* GPG key URLs must be accessible and return a valid RPM-GPG key
 
 # Version History
 
-* 1.0.1 - New spec and help.md format for the Extension Library
-* 1.0.0 - Support web server mode | Update to v2 Python plugin architecture
-* 0.1.1 - SSL bug fix in SDK
-* 0.1.0 - Initial plugin
+* 1.0.2 - Modernize plugin to use insightconnect-plugin-runtime and slim base image
+* 1.0.1 - New spec and calculation for help.md generation
+* 1.0.0 - Initial plugin
 
 # Links
 
+* [Extension Library](https://extensions.rapid7.com)
+
 ## References
 
-* [RPM](http://rpm.org/)
-
+* [RPM Documentation](https://rpm.org/documentation.html)
+* [DNF Documentation](https://dnf.readthedocs.io/)
