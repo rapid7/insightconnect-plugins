@@ -26,7 +26,7 @@ class CloseAlertInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "identifier": {
       "type": "string",
-      "title": "Alert ID, Tiny ID or Alias",
+      "title": "Alert ID or Alias",
       "description": "Identifier of the alert",
       "order": 1
     }

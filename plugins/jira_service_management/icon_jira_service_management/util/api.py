@@ -69,6 +69,22 @@ class JiraServiceManagementApi:
             self.logger.error(f"Failed to close alert: {error}")
             raise
 
+    def get_alert(self, identifier: str) -> dict:
+        url = f"https://api.atlassian.com/jsm/ops/api/{self.cloud_id}/v1/alerts/{identifier}"
+
+        try:
+            self.logger.info(f"Retrieving alert with identifier: {identifier}")
+
+            get_alert_response = self._call_api(
+                method="GET",
+                url=url,
+            )
+
+            return get_alert_response
+        except PluginException as error:
+            self.logger.error(f"Failed to retrieve alert: {error}")
+            raise
+
     @rate_limiting(max_tries=MAX_REQUEST_TRIES)
     def _call_api(self, method: str, url: str, json_data: dict = None, params: dict = None) -> dict:
         return make_request(
