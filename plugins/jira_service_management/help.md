@@ -188,13 +188,55 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|data|object|True|Data that contains JSON response|None|
+|data|object|True|Data that contains JSON response|{'acknowledged': False, 'actions': [], 'alias': 'alert-123e4567-e89b-12d3-a456-426614174000', 'count': 2, 'createdAt': '2026-01-10T08:15:30.000Z', 'description': 'Example alert', 'entity': 'example-service', 'extraProperties': {'environment': 'staging', 'region': 'eu-central-1'}, 'id': 'alert-123e4567-e89b-12d3-a456-426614174000', 'integrationName': 'example-monitoring', 'integrationType': 'webhook', 'lastOccuredAt': '2026-01-10T08:20:00.000Z', 'message': 'High CPU usage detected on instance i-abc123example', 'owner': 'on-call-team', 'priority': 'P2', 'responders': [{'name': 'example-user', 'type': 'team'}], 'seen': True, 'services': [{'name': 'example-api', 'status': 'degraded'}], 'snoozed': False, 'source': 'example-monitoring-system', 'status': 'open', 'tags': ['cpu', 'performance', 'demo'], 'tinyId': '42', 'updatedAt': '2026-01-10T08:21:10.000Z'}|
   
 Example output:
 
 ```
 {
-  "data": {}
+  "data": {
+    "acknowledged": false,
+    "actions": [],
+    "alias": "alert-123e4567-e89b-12d3-a456-426614174000",
+    "count": 2,
+    "createdAt": "2026-01-10T08:15:30.000Z",
+    "description": "Example alert",
+    "entity": "example-service",
+    "extraProperties": {
+      "environment": "staging",
+      "region": "eu-central-1"
+    },
+    "id": "alert-123e4567-e89b-12d3-a456-426614174000",
+    "integrationName": "example-monitoring",
+    "integrationType": "webhook",
+    "lastOccuredAt": "2026-01-10T08:20:00.000Z",
+    "message": "High CPU usage detected on instance i-abc123example",
+    "owner": "on-call-team",
+    "priority": "P2",
+    "responders": [
+      {
+        "name": "example-user",
+        "type": "team"
+      }
+    ],
+    "seen": true,
+    "services": [
+      {
+        "name": "example-api",
+        "status": "degraded"
+      }
+    ],
+    "snoozed": false,
+    "source": "example-monitoring-system",
+    "status": "open",
+    "tags": [
+      "cpu",
+      "performance",
+      "demo"
+    ],
+    "tinyId": "42",
+    "updatedAt": "2026-01-10T08:21:10.000Z"
+  }
 }
 ```
 
