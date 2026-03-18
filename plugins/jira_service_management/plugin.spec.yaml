@@ -174,47 +174,24 @@ actions:
     description: Retrieve alert from Jira Service Management
     input:
       identifier:
-        title: Alert ID, Tiny ID or Alias
+        title: Alert ID or Alias
         description: Identifier of the alert
         type: string
         required: true
         example: 8418d193-2dab-4490-b331-8c02cdd196b7
-      identifierType:
-        title: Identifier Type
-        description: Type of the identifier that is provided as an in-line parameter. Possible values are ID, tiny ID and alias. Default value is ID
-        type: string
-        enum:
-          - ""
-          - ID
-          - tiny
-          - alias
-        default: ID
-        required: false
-        example: ID
     output:
       data:
         title: Data
         description: Data that contains JSON response
         type: object
         required: true
-      requestId:
-        title: Request ID
-        description: ID of an request
-        type: string
-        required: true
-        example: e0caa0ce-d52f-4500-81b9-d592d06970b6
-      elapsed_time:
-        title: Elapsed Time
-        description: Time taken to execute
-        type: float
-        required: true
-        example: 0.195
+        example: { "acknowledged": false, "actions": [], "alias": "alert-123e4567-e89b-12d3-a456-426614174000", "count": 2, "createdAt": "2026-01-10T08:15:30.000Z", "description": "Example alert", "entity": "example-service", "extraProperties": { "environment": "staging", "region": "eu-central-1" }, "id": "alert-123e4567-e89b-12d3-a456-426614174000", "integrationName": "example-monitoring", "integrationType": "webhook", "lastOccuredAt": "2026-01-10T08:20:00.000Z", "message": "High CPU usage detected on instance i-abc123example", "owner": "on-call-team", "priority": "P2", "responders": [ { "name": "example-user", "type": "team" } ], "seen": true, "services": [ { "name": "example-api", "status": "degraded" } ], "snoozed": false, "source": "example-monitoring-system", "status": "open", "tags": ["cpu", "performance", "demo"], "tinyId": "42", "updatedAt": "2026-01-10T08:21:10.000Z" }
   close_alert:
     title: Close Alert
     description: Close an existing alert from Jira Service Management
     input:
       identifier:
-        title: Alert ID, Tiny ID or Alias
+        title: Alert ID or Alias
         description: Identifier of the alert
         type: string
         required: true
