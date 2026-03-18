@@ -11,13 +11,10 @@ class Input:
     DATE = "date"
     FLAT = "flat"
     SCHEDULEIDENTIFIER = "scheduleIdentifier"
-    SCHEDULEIDENTIFIERTYPE = "scheduleIdentifierType"
 
 
 class Output:
     DATA = "data"
-    ELAPSED_TIME = "elapsed_time"
-    REQUESTID = "requestId"
 
 
 class GetOnCallsInput(insightconnect_plugin_runtime.Input):
@@ -33,31 +30,19 @@ class GetOnCallsInput(insightconnect_plugin_runtime.Input):
       "displayType": "date",
       "title": "Date",
       "description": "Starting date of the timeline that will be provided in format as (yyyy-MM-dd'T'HH:mm:ssZ) (e.g. 2017-01-15T08:00:00+02:00). Default date is the moment of the time that request is received",
-      "order": 4
+      "order": 3
     },
     "flat": {
       "type": "boolean",
       "title": "Retrieve All Participants",
       "description": "When enabled, retrieves user names of all on-call participants. Default value is false",
-      "order": 3
+      "order": 2
     },
     "scheduleIdentifier": {
       "type": "string",
       "title": "Schedule Identifier",
       "description": "Identifier of the schedule",
       "order": 1
-    },
-    "scheduleIdentifierType": {
-      "type": "string",
-      "title": "Schedule Identifier Type",
-      "description": "Type of the schedule identifier. Possible values are ID and name. Default value is ID",
-      "default": "ID",
-      "enum": [
-        "",
-        "ID",
-        "name"
-      ],
-      "order": 2
     }
   },
   "required": [
@@ -84,24 +69,10 @@ class GetOnCallsOutput(insightconnect_plugin_runtime.Output):
       "title": "Data",
       "description": "Response data from Jira Service Management",
       "order": 1
-    },
-    "elapsed_time": {
-      "type": "number",
-      "title": "Elapsed Time",
-      "description": "Time taken to execute",
-      "order": 2
-    },
-    "requestId": {
-      "type": "string",
-      "title": "Request ID",
-      "description": "ID of a executed API request",
-      "order": 3
     }
   },
   "required": [
-    "data",
-    "elapsed_time",
-    "requestId"
+    "data"
   ],
   "definitions": {}
 }

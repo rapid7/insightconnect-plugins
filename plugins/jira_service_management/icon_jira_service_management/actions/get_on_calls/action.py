@@ -17,8 +17,16 @@ class GetOnCalls(insightconnect_plugin_runtime.Action):
     @auto_instrument
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        schedule_identifier = params.get(Input.SCHEDULEIDENTIFIER)
+        flat = params.get(Input.FLAT)
+        date = params.get(Input.DATE)
         # END INPUT BINDING - DO NOT REMOVE
+        response = self.connection.api.get_on_calls(
+            schedule_identifier,
+            flat,
+            date,
+        )
 
         return {
-            Output.MESSAGE: None,
+            Output.DATA: response,
         }

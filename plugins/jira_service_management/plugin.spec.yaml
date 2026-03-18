@@ -225,17 +225,6 @@ actions:
         type: string
         required: true
         example: ScheduleName
-      scheduleIdentifierType:
-        title: Schedule Identifier Type
-        description: Type of the schedule identifier. Possible values are ID and name. Default value is ID
-        type: string
-        enum:
-          - ""
-          - ID
-          - name
-        default: ID
-        required: false
-        example: "name"
       flat:
         title: Retrieve All Participants
         description: When enabled, retrieves user names of all on-call participants. Default value is false
@@ -254,16 +243,4 @@ actions:
         description: Response data from Jira Service Management
         type: object
         required: true
-        example: '{"scheduleId":"12345","scheduleName":"ScheduleName","participants":[{"userId":"abc123","displayName":"John Doe","startDate":"2017-01-15T08:00:00+02:00","endDate":"2017-01-15T16:00:00+02:00"}]}'
-      elapsed_time:
-        title: Elapsed Time
-        description: Time taken to execute
-        type: float
-        required: true
-        example: 0.195
-      requestId:
-        title: Request ID
-        description: ID of a executed API request
-        type: string
-        required: true
-        example: d383c6e9-b1e7-4b59-9c35-72f1a2187777
+        example: '{"onCallParticipants":[{"id":"bc667897-cb21-496f-a46e-7c05ff0419dd","type":"team"},{"id":"5b2b0e011b3a756623f4e25e","type":"user"},{"id":"7a24e9d7-7a4f-4f86-a1df-21ca9c3112ac","type":"escalation","onCallParticipants":[{"id":"5b2b0e011b3a756623f4e25e","type":"user","forwardedFrom":{"id":"c5646941-3f05-404d-8594-825fa73af99f","type":"user"}}]}]}'

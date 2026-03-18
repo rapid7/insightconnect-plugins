@@ -251,7 +251,6 @@ This action is used to get current on-call participants
 |date|date|None|False|Starting date of the timeline that will be provided in format as (yyyy-MM-dd'T'HH:mm:ssZ) (e.g. 2017-01-15T08:00:00+02:00). Default date is the moment of the time that request is received|None|2017-01-15T08:00:00+02:00|None|None|
 |flat|boolean|None|False|When enabled, retrieves user names of all on-call participants. Default value is false|None|False|None|None|
 |scheduleIdentifier|string|None|True|Identifier of the schedule|None|ScheduleName|None|None|
-|scheduleIdentifierType|string|ID|False|Type of the schedule identifier. Possible values are ID and name. Default value is ID|["", "ID", "name"]|name|None|None|
   
 Example input:
 
@@ -259,8 +258,7 @@ Example input:
 {
   "date": "2017-01-15T08:00:00+02:00",
   "flat": false,
-  "scheduleIdentifier": "ScheduleName",
-  "scheduleIdentifierType": "ID"
+  "scheduleIdentifier": "ScheduleName"
 }
 ```
 
@@ -268,28 +266,38 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|data|object|True|Response data from Jira Service Management|{"scheduleId":"12345","scheduleName":"ScheduleName","participants":[{"userId":"abc123","displayName":"John Doe","startDate":"2017-01-15T08:00:00+02:00","endDate":"2017-01-15T16:00:00+02:00"}]}|
-|elapsed_time|float|True|Time taken to execute|0.195|
-|requestId|string|True|ID of a executed API request|d383c6e9-b1e7-4b59-9c35-72f1a2187777|
+|data|object|True|Response data from Jira Service Management|{"onCallParticipants":[{"id":"bc667897-cb21-496f-a46e-7c05ff0419dd","type":"team"},{"id":"5b2b0e011b3a756623f4e25e","type":"user"},{"id":"7a24e9d7-7a4f-4f86-a1df-21ca9c3112ac","type":"escalation","onCallParticipants":[{"id":"5b2b0e011b3a756623f4e25e","type":"user","forwardedFrom":{"id":"c5646941-3f05-404d-8594-825fa73af99f","type":"user"}}]}]}|
   
 Example output:
 
 ```
 {
   "data": {
-    "participants": [
+    "onCallParticipants": [
       {
-        "displayName": "John Doe",
-        "endDate": "2017-01-15T16:00:00+02:00",
-        "startDate": "2017-01-15T08:00:00+02:00",
-        "userId": "abc123"
+        "id": "bc667897-cb21-496f-a46e-7c05ff0419dd",
+        "type": "team"
+      },
+      {
+        "id": "5b2b0e011b3a756623f4e25e",
+        "type": "user"
+      },
+      {
+        "id": "7a24e9d7-7a4f-4f86-a1df-21ca9c3112ac",
+        "onCallParticipants": [
+          {
+            "forwardedFrom": {
+              "id": "c5646941-3f05-404d-8594-825fa73af99f",
+              "type": "user"
+            },
+            "id": "5b2b0e011b3a756623f4e25e",
+            "type": "user"
+          }
+        ],
+        "type": "escalation"
       }
-    ],
-    "scheduleId": "12345",
-    "scheduleName": "ScheduleName"
-  },
-  "elapsed_time": 0.195,
-  "requestId": "d383c6e9-b1e7-4b59-9c35-72f1a2187777"
+    ]
+  }
 }
 ```
 ### Triggers
