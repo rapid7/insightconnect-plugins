@@ -1,4 +1,4 @@
-class Algorithm(object):
+class Algorithm:
     GZIP = "gzip"
     BZIP = "bzip"
     LZ = "lz"

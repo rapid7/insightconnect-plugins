@@ -1,35 +1,26 @@
-import komand
-from .schema import CompressBytesInput, CompressBytesOutput
+import insightconnect_plugin_runtime
 
-# Custom imports below
-from ...util import utils, compressor
+from .schema import CompressBytesInput, CompressBytesOutput, Component, Input, Output
+from komand_compression.util import compressor
+from komand_compression.util.constants import UTF_8
+from base64 import b64encode, b64decode
 
 
-class CompressBytes(komand.Action):
+class CompressBytes(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="compress_bytes",
-            description="Compress bytes",
+            description=Component.DESCRIPTION,
             input=CompressBytesInput(),
             output=CompressBytesOutput(),
         )
 
-    def run(self, params={}):
-        algorithm = params.get("algorithm")
-        file_bytes_b64 = params.get("bytes")  # Base64 encoded file as string
-        self.logger.info("Run: Will compress %s with %s", file_bytes_b64, algorithm)
+    def run(self, params: dict = {}) -> dict:
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        algorithm = params.get(Input.ALGORITHM, "")
+        file_bytes_b64 = params.get(Input.BYTES, "")
+        # END INPUT BINDING - DO NOT REMOVE
 
-        file_bytes = utils.base64_decode(file_bytes_b64)  # Decode base64 so we can manipulate the file
-
+        file_bytes = b64decode(file_bytes_b64)
         compressed = compressor.dispatch_compress(algorithm=algorithm, file_bytes=file_bytes)
-        self.logger.info("Run: Compressed file is: %s", compressed)
-        # Now re-encode the bytes in base64 so other plugins can use it
-        compressed_b64 = utils.base64_encode(compressed)
-        compressed_b64_string = compressed_b64.decode("utf-8")
-        self.logger.info("Run: Compressed file in base64 string is: %s", compressed_b64_string)
-
-        return {"compressed": compressed_b64_string}
-
-    def test(self):
-        """TODO: Test action"""
-        return {}
+        return {Output.COMPRESSED: b64encode(compressed).decode(UTF_8)}
