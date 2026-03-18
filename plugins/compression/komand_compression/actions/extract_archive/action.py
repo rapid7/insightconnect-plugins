@@ -40,6 +40,7 @@ class ExtractArchive(insightconnect_plugin_runtime.Action):
                 try:
                     safe_name = sanitize_filename(file_path)
                 except PluginException:
+                    self.logger.info(f"Invalid filename: {file_path}. Skipping file.")
                     continue
 
                 # Check if content is already base64 encoded, if not encode

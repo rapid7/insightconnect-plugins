@@ -94,10 +94,12 @@ def lz_decompress(file_bytes: bytes) -> bytes:
 
 
 def zip_decompress(file_bytes: bytes, logger: Logger) -> dict[str, bytes] | bytes:
+    # Initialize variables to track total size and entry count
     files = {}
     total_uncompressed_size = 0
     compressed_size = len(file_bytes)
 
+    #  Process each entry in the zip file
     with ZipFile(io.BytesIO(file_bytes), "r") as zip_object:
         entries = zip_object.infolist()
         _validate_entry_count(len(entries))
@@ -107,7 +109,7 @@ def zip_decompress(file_bytes: bytes, logger: Logger) -> dict[str, bytes] | byte
             if entry.is_dir():
                 continue
 
-            # Validate cumulative uncompressed size before reading
+            # Validate uncompressed size before reading
             total_uncompressed_size += entry.file_size
             _validate_total_size(total_uncompressed_size)
             _validate_compression_ratio(compressed_size, total_uncompressed_size)
@@ -123,7 +125,12 @@ def zip_decompress(file_bytes: bytes, logger: Logger) -> dict[str, bytes] | byte
             if safe_name.startswith("."):
                 continue
 
-            # Add the file to the dictionary — no recursive decompression of nested archives
+            # If ".gz" in filename, decompress file
+            if safe_name.endswith(".gz"):
+                files[safe_name] = gzip_decompress(zip_object.read(entry.filename))
+                continue
+
+            # Add the file to the dictionary
             files[safe_name] = zip_object.read(entry.filename)
 
     # If there is only one file, return it directly
@@ -132,11 +139,13 @@ def zip_decompress(file_bytes: bytes, logger: Logger) -> dict[str, bytes] | byte
 
 
 def tarball_decompress(file_bytes: bytes) -> dict[str, bytes] | bytes:
+    #  Initialize variables to track total size, entry count
     files = {}
     total_uncompressed_size = 0
     compressed_size = len(file_bytes)
     entry_count = 0
 
+    # Process each entry in the tar file
     with tarfile.open(fileobj=io.BytesIO(file_bytes), mode="r:*") as tar:
         for member in tar.getmembers():
             # If not a regular file, skip it
@@ -159,6 +168,11 @@ def tarball_decompress(file_bytes: bytes) -> dict[str, bytes] | bytes:
 
             # Skip hidden files
             if safe_name.startswith("."):
+                continue
+
+            # If ".gz" in filename, decompress file
+            if safe_name.endswith(".gz"):
+                files[safe_name] = gzip_decompress(tar.extractfile(member).read())
                 continue
 
             # Add the file to the dictionary
