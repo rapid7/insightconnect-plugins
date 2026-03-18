@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 setup(
     name="sqlmap-rapid7-plugin",
     version="2.0.1",
-    description="[SQLMap](http://sqlmap.org/) is an open source penetration testing tool that automates the process of detecting and exploiting SQL injection flaws and taking over of database servers. It comes with a powerful detection engine, many niche features for the ultimate penetration tester and a broad range of switches lasting from database fingerprinting, over data fetching from the database, to accessing the underlying file system and executing commands on the operating system via out-of-band connections. The SQLMap plugin allows you to scan targets and analyze the results",
+    description="[SQLMap](http://sqlmap.org/) is an open-source penetration testing tool that automates detecting and exploiting SQL injection flaws and taking over database servers. It features a powerful detection engine, supports database fingerprinting, data extraction, filesystem access, and OS command execution via out-of-band connections. The SQLMap plugin enables target scanning and result analysis",
     author="rapid7",
     author_email="",
     url="",
