@@ -1,3 +1,5 @@
+from xmlrpc.client import DateTime
+
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.telemetry import monitor_task_delay
@@ -10,7 +12,7 @@ from .schema import (
 )
 
 # Custom imports below
-from datetime import datetime, timedelta, timezone, date
+from datetime import datetime, timedelta, timezone, date, time
 from typing import Optional, Tuple, List
 
 from icon_zoom.tasks.enums import RunState
@@ -283,10 +285,11 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         if last_completed_end_time is None:
             return False
         # The API uses year, month, and day as it's lowest level of granularity
-        last_completed_end_date = self.get_date_from_datetime(last_completed_end_time)
-        current_query_end_date = self.get_date_from_datetime(current_query_end_time)
-        if current_query_end_date == last_completed_end_date:
-            self.logger.info(f"Timerange to {current_query_end_date} previously queried...")
+        if (
+            datetime.strptime(last_completed_end_time, self.ZOOM_TIME_FORMAT).date()
+            == datetime.strptime(current_query_end_time, self.ZOOM_TIME_FORMAT).date()
+        ):
+            self.logger.info(f"Timerange to {current_query_end_time} previously queried...")
             return True
         return False
 
@@ -303,33 +306,22 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         :return: Tuple of the new start and end time for the query
         """
         # If the last completed query end time is approaching midnight, we adjust it to be 00:00 of the next day
-        start_date = self.get_date_from_datetime(last_request_timestamp)
-        end_date = self.get_date_from_datetime(query_end_time)
-        if "T23:59:59Z" in previous_completed_query_date:
-            query_start_time = end_date + "T00:00:00Z"
+        start_date = datetime.strptime(last_request_timestamp, self.ZOOM_TIME_FORMAT)
+        end_date = datetime.strptime(query_end_time, self.ZOOM_TIME_FORMAT)
+        previous_completed_date = datetime.strptime(previous_completed_query_date, self.ZOOM_TIME_FORMAT)
+        if previous_completed_date.time() == time(23, 59, 59):
+            query_start_time = datetime.strftime(end_date.replace(hour=0, minute=0, second=0), self.ZOOM_TIME_FORMAT)
             return query_start_time, now
-        if start_date != end_date:
+        if start_date.date() != end_date.date():
             # If the start and end time are not on the same day, we adjust the end time to be 1 second before midnight of that day
-            adjusted_end_time = start_date + "T23:59:59Z"
+            adjusted_end_time = datetime.strftime(
+                start_date.replace(hour=23, minute=59, second=59), self.ZOOM_TIME_FORMAT
+            )
             self.logger.info(
                 f"Adjusted query end time from {query_end_time} to {adjusted_end_time} to query end of day"
             )
             return last_request_timestamp, adjusted_end_time
         return last_request_timestamp, query_end_time
-
-    def get_date_from_datetime(self, datetime_str: str) -> str:
-        """
-        Retrieve date from datetime string
-        :param datetime_str: The datetime string to extract the date from
-        :return: The date in string format
-        """
-
-        try:
-            dt = datetime.strptime(datetime_str, self.ZOOM_TIME_FORMAT)
-            return dt.strftime("%Y-%m-%d")
-        except ValueError as error:
-            self.logger.error(f"Error parsing datetime string: {error}")
-            raise PluginException(cause="Error parsing datetime value", data=datetime_str)
 
     def get_start_time(self, lookback: dict, cutoff_date: dict, cutoff_hours: str, run_state: RunState) -> str:
         """
