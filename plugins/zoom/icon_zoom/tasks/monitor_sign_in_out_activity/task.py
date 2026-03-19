@@ -185,7 +185,9 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         has_more_pages = not query_completed
         return TaskOutput(output=new_events, state=state, has_more_pages=has_more_pages, status_code=200, error=None)
 
-    def prepare_dedupe_events(self, state: Dict[str, Any], new_events: List[Event], range_previously_queried: bool = False) -> List[Event]:
+    def prepare_dedupe_events(
+        self, state: Dict[str, Any], new_events: List[Event], range_previously_queried: bool = False
+    ) -> List[Event]:
         # Dedupe if the date range has been previously queried to completion as no new events earlier than the latest
         # event timestamp will be added on subsequent requests
         if range_previously_queried:
@@ -288,18 +290,18 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             return True
         return False
 
-    """
-    Adjust the start and end time of the query if a query originally spans midnight. 
-    This is due to the fact that the API only uses date granularity. A spanning query results in two full days being
-    queried and duplicates being returned for the previous day's events.spanning midnight
-    :param last_request_timestamp: The last request timestamp to be used as the new start time if the query is not spanning midnight
-    :param previous_completed_query_date: The time of the last completed query to be used to determine if the query is spanning midnight
-    :param query_end_time: The original end time of the query to be used to determine if the query is spanning midnight
-    :return: Tuple of the new start and end time for the query
-    """
     def adjust_midnight_query_time(
         self, last_request_timestamp: str, previous_completed_query_date: str, query_end_time: str, now: str
     ) -> Tuple[str, str]:
+        """
+        Adjust the start and end time of the query if a query originally spans midnight.
+        This is due to the fact that the API only uses date granularity. A spanning query results in two full days being
+        queried and duplicates being returned for the previous day's events.spanning midnight
+        :param last_request_timestamp: The last request timestamp to be used as the new start time if the query is not spanning midnight
+        :param previous_completed_query_date: The time of the last completed query to be used to determine if the query is spanning midnight
+        :param query_end_time: The original end time of the query to be used to determine if the query is spanning midnight
+        :return: Tuple of the new start and end time for the query
+        """
         # If the last completed query end time is approaching midnight, we adjust it to be 00:00 of the next day
         start_date = self.get_date_from_datetime(last_request_timestamp)
         end_date = self.get_date_from_datetime(query_end_time)
@@ -315,12 +317,13 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             return last_request_timestamp, adjusted_end_time
         return last_request_timestamp, query_end_time
 
-    """
-    Retrieve date from datetime string
-    :param datetime_str: The datetime string to extract the date from
-    :return: The date in string format
-    """
     def get_date_from_datetime(self, datetime_str: str) -> str:
+        """
+        Retrieve date from datetime string
+        :param datetime_str: The datetime string to extract the date from
+        :return: The date in string format
+        """
+
         try:
             dt = datetime.strptime(datetime_str, self.ZOOM_TIME_FORMAT)
             return dt.strftime("%Y-%m-%d")
