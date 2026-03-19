@@ -38,10 +38,10 @@ STUB_INFO2DIC_RESULT = {
     "license": "MIT",
     "signature": {
         "scheme": "RSA/SHA256",
-        "time": "Mon 01 Apr 2019 12:00:00 PM UTC",
+        "time": "2019-04-01T12:00:00Z",
         "key": "Key ID 24c6a8a7f4a80eb5",
     },
-    "source": "curl-7.29.0-54.el7_6.3.src.rpm",
+    "source_rpm": "curl-7.29.0-54.el7_6.3.src.rpm",
     "build_date": "Mon 01 Apr 2019 12:00:00 PM UTC",
     "build_host": "x86-01.bsys.centos.org",
     "relocations": "(not relocatable)",
@@ -55,7 +55,7 @@ STUB_INFO2DIC_RESULT = {
         {
             "path": "/usr/bin/curl",
             "size": 156000,
-            "mtime": "1554120000",
+            "mtime": "2019-04-01T12:00:00Z",
             "hash": "d41d8cd98f00b204e9800998ecf8427e",
             "mode": "0100755",
             "owner": "root",

@@ -5,6 +5,7 @@ import secrets
 import shutil
 import subprocess  # noqa: B404
 import tempfile
+from datetime import datetime, timezone
 from logging import Logger
 from pathlib import Path
 from typing import Dict, List, Optional, Union
@@ -88,112 +89,64 @@ class RPMHelper:
         # Download RPM package to temp directory, return path
         if not package_list:
             package_list = self.list_package(label, arch, distro, repo_ids)
-        for package in package_list:
-            package_path = TEMP_DIR / package
-            if package_path.is_file():
-                return str(package_path)
+
+        existing = self._find_package_in_temp(package_list)
+        if existing:
+            return existing
 
         self.logger.info(f"DownloadPackage: Downloading package with label {label}")
-
-        parameters = self._build_params(arch, distro, repo_ids)
-        command = ["dnf", "download", "--destdir", str(TEMP_DIR)] + parameters + [label]
+        parameters = self._build_parameters(arch, distro, repo_ids)
         self._run_subprocess(
-            command,
+            ["dnf", "download", "--destdir", str(TEMP_DIR)] + parameters + [label],
             error_context=f"Failed to download package {label}",
         )
 
-        # Check destdir for the downloaded RPM rather than parsing dnf output
-        for package in package_list:
-            package_path = TEMP_DIR / package
-            if package_path.is_file():
-                self.logger.info(f"DownloadPackage: Found {package_path}")
-                return str(package_path)
+        downloaded = self._find_package_in_temp(package_list)
+        if downloaded:
+            self.logger.info(f"DownloadPackage: Found {downloaded}")
+            return downloaded
 
         raise PluginException(
             cause=f"Failed to download package {label}",
             assistance="Verify the package exists in the configured repositories.",
         )
 
-    def info2dic(self, info: Dict[str, str]) -> Dict:  # noqa: MC0001
+    def info2dic(self, info: Dict[str, str]) -> Dict:
         # Parse rpm query output into structured package dict
-        package_info_dict: dict = {"found": True}
-        package_lines = info.get("package", "").splitlines()[:17]
-        package_description = (
-            info.get("package", "").splitlines()[18] if len(info.get("package", "").splitlines()) > 18 else ""
-        )
-        file_lines = info.get("files", "").splitlines()
+        raw_package = info.get("package", "")
+        all_lines = raw_package.splitlines()
+        package_lines = all_lines[:17]
+        description = all_lines[18] if len(all_lines) > 18 else ""
 
-        files = []
-        for file_line in file_lines:
-            fields = file_line.split()
-            if len(fields) < RPM_DUMP_FIELD_COUNT:
-                self.logger.warning(f"Info2Dic: Skipping malformed file-dump line: {file_line}")
-                continue
-            files.append(
-                {
-                    "path": fields[0],
-                    "size": int(fields[1]),
-                    "mtime": fields[2],
-                    "hash": fields[3],
-                    "mode": fields[4],
-                    "owner": fields[5],
-                    "group": fields[6],
-                    "isconfig": int(fields[7]),
-                    "isdoc": int(fields[8]),
-                    "rdev": int(fields[9]),
-                    "symlink": fields[10],
-                }
-            )
-
-        for line in package_lines:
-            title, _, content = line.partition(":")
-            title, content = title.strip(), content.strip()
-            if title == "Size":
-                package_info_dict["size"] = int(content)
-            elif title == "Signature":
-                signature_parts = content.split(",")
-                package_info_dict["signature"] = {
-                    "scheme": signature_parts[0].strip(),
-                    "time": signature_parts[1].strip(),
-                    "key": signature_parts[2].strip(),
-                }
-            elif title in FIELD_MAP:
-                package_info_dict[FIELD_MAP[title]] = content
-
-        package_info_dict["description"] = "".join(package_description)
-        package_info_dict["files"] = files
-        return package_info_dict
+        result: dict = {"found": True}
+        result["files"] = self._parse_file_dump(info.get("files", ""))
+        self._parse_package_fields(package_lines, result)
+        result["description"] = description
+        return result
 
     def list_package(self, label: str, arch: str, distro: str, repo_ids: Optional[List[str]] = None) -> List[str]:
         # Query repo for packages matching label
-        parameters = self._build_params(arch, distro, repo_ids)
+        parameters = self._build_parameters(arch, distro, repo_ids)
         command = ["dnf", "repoquery", "-q"] + parameters + [label]
-        result = self._run_subprocess(
+        output = self._run_subprocess(
             command,
             error_context=f"Package not found with label {label}",
         )
-        if not result.stdout.strip():
-            self.logger.error(f"ListPackage: {result.stdout}{result.stderr}")
+        if not output.stdout.strip():
+            self.logger.error(f"ListPackage: {output.stdout}{output.stderr}")
             raise PluginException(
                 cause=f"Package not found with label {label}",
                 assistance="Verify the package name, version, architecture, and distribution are correct.",
             )
-        return self._add_rpm_exts(self._trim_epochs(result.stdout.splitlines()))
+        return self._add_rpm_extensions(self._trim_epochs(output.stdout.splitlines()))
 
     def make_label(self, name: str, epoch: str, version: str, release: str) -> str:
-        # Build package label from name, epoch, version, release
-        label = name
-        if epoch and epoch != "0":
-            label += f"-{epoch}:"
-        else:
-            label += "-"
-
-        if version and release:
-            return f"{label}{version}-{release}"
-        elif version:
-            return f"{label}{version}"
-        else:
+        # Build package label: name-[epoch:]version[-release]
+        if not version:
             return name
+        epoch_prefix = f"{epoch}:" if epoch and epoch != "0" else ""
+        release_suffix = f"-{release}" if release else ""
+        return f"{name}-{epoch_prefix}{version}{release_suffix}"
 
     def package_info(self, path: str) -> Dict[str, str]:
         # Query RPM package info and file dump
@@ -206,10 +159,7 @@ class RPMHelper:
             ["rpm", "-qp", "--dump", path],
             error_context=f"Failed to query package file dump at {path}",
         )
-        return {
-            "package": info_result.stdout,
-            "files": dump_result.stdout,
-        }
+        return {"package": info_result.stdout, "files": dump_result.stdout}
 
     def sanitize_cache_label(self, label: str) -> str:
         # Remove unsafe characters from cache label
@@ -239,35 +189,35 @@ class RPMHelper:
                 assistance="Only http:// and https:// URLs are supported.",
             )
 
-    def _add_rpm_ext(self, package: str) -> str:
-        # Add .rpm extension if not present
-        return package if package.endswith(".rpm") else f"{package}.rpm"
-
-    def _add_rpm_exts(self, packages: List[str]) -> List[str]:
+    def _add_rpm_extensions(self, packages: List[str]) -> List[str]:
         # Add .rpm extension to packages if not present
-        return [package if package.endswith(".rpm") else f"{package}.rpm" for package in packages]
+        return [pkg if pkg.endswith(".rpm") else f"{pkg}.rpm" for pkg in packages]
 
-    def _build_params(self, arch: str, distro: str, repo_ids: Optional[List[str]] = None) -> List[str]:
+    def _build_parameters(self, arch: str, distro: str, repo_ids: Optional[List[str]] = None) -> List[str]:
         # Build dnf command parameters for architecture, distro, and repos
-        parameters: List[str] = ["--disableplugin=system_upgrade"]
-        if arch and arch != "noarch":
-            if arch == "i686":
-                parameters.append("--archlist=i386,i686,noarch")
-            else:
-                parameters.append(f"--archlist={arch},noarch")
+        if arch == "i686":
+            archlist = "i386,i686,noarch"
+        elif arch and arch != "noarch":
+            archlist = f"{arch},noarch"
         else:
-            parameters.append("--archlist=noarch")
+            archlist = "noarch"
 
-        parameters.append(f"--releasever={distro.split()[1]}")
-        parameters.append("--disablerepo=*")
-        repos_to_enable = repo_ids if repo_ids else REPOS.get(distro, [])
-        for repo in repos_to_enable:
-            parameters.append(f"--enablerepo={repo}")
-        return parameters
+        repos_to_enable = repo_ids or REPOS.get(distro, [])
+        return [
+            "--disableplugin=system_upgrade",
+            f"--archlist={archlist}",
+            f"--releasever={distro.split()[1]}",
+            "--disablerepo=*",
+            *[f"--enablerepo={repo}" for repo in repos_to_enable],
+        ]
 
-    def _format_repofile(self, repo_name: str) -> str:
-        # Add .repo extension if not present
-        return repo_name if repo_name.endswith(".repo") else f"{repo_name}.repo"
+    def _find_package_in_temp(self, package_list: List[str]) -> Optional[str]:
+        # Return path of first package found in TEMP_DIR, or None
+        for package in package_list:
+            package_path = TEMP_DIR / package
+            if package_path.is_file():
+                return str(package_path)
+        return None
 
     def _install_builtin_repos(self) -> None:
         # Copy bundled .repo files into dnf repo directory
@@ -310,6 +260,61 @@ class RPMHelper:
         self.logger.info(f"ModifyRepofile: Repofile modified at {path}")
         return repo_ids
 
+    def _parse_file_dump(self, raw_files: str) -> List[Dict]:
+        # Parse rpm --dump output into list of file info dicts
+        files = []
+        for line in raw_files.splitlines():
+            fields = line.split()
+            if len(fields) < RPM_DUMP_FIELD_COUNT:
+                self.logger.warning(f"Info2Dic: Skipping malformed file-dump line: {line}")
+                continue
+            try:
+                mtime = datetime.fromtimestamp(int(fields[2]), tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+            except (ValueError, OSError):
+                mtime = fields[2]
+            files.append(
+                {
+                    "path": fields[0],
+                    "size": int(fields[1]),
+                    "mtime": mtime,
+                    "hash": fields[3],
+                    "mode": fields[4],
+                    "owner": fields[5],
+                    "group": fields[6],
+                    "isconfig": int(fields[7]),
+                    "isdoc": int(fields[8]),
+                    "rdev": int(fields[9]),
+                    "symlink": fields[10],
+                }
+            )
+        return files
+
+    def _parse_package_fields(self, package_lines: List[str], result: dict) -> None:
+        # Extract structured fields from rpm -qi header lines into result dict
+        for line in package_lines:
+            title, _, content = line.partition(":")
+            title, content = title.strip(), content.strip()
+            if title == "Size":
+                result["size"] = int(content)
+            elif title == "Signature":
+                result["signature"] = self._parse_signature(content)
+            elif title in FIELD_MAP:
+                result[FIELD_MAP[title]] = content
+
+    def _parse_signature(self, content: str) -> Dict[str, str]:
+        # Parse RPM signature line into structured dict
+        parts = content.split(",")
+        if len(parts) >= 3:
+            raw_time = parts[1].strip()
+            try:
+                parsed = datetime.strptime(raw_time, "%a %d %b %Y %I:%M:%S %p %Z")
+                normalized_time = parsed.strftime("%Y-%m-%dT%H:%M:%SZ")
+            except ValueError:
+                normalized_time = raw_time
+            return {"scheme": parts[0].strip(), "time": normalized_time, "key": parts[2].strip()}
+        self.logger.warning(f"Info2Dic: Unexpected Signature format: {content}")
+        return {"scheme": content.strip(), "time": "", "key": ""}
+
     def _run_subprocess(
         self,
         command: Union[List[str], str],
@@ -319,20 +324,31 @@ class RPMHelper:
         text: bool = True,
         timeout: int = SUBPROCESS_TIMEOUT,
     ) -> subprocess.CompletedProcess:
-        # Execute subprocess and raise PluginException on non-zero exit
-        result = subprocess.run(
-            command, shell=shell, capture_output=True, text=text, timeout=timeout, check=False  # noqa: B602
-        )
-        if result.returncode != 0:
-            stderr_output = result.stderr if isinstance(result.stderr, str) else result.stderr.decode("utf-8")
-            raise PluginException(
-                cause=error_context,
-                assistance=f"stderr: {stderr_output}",
+        # Execute subprocess and raise PluginException on non-zero exit or timeout
+        try:
+            result = subprocess.run(
+                command, shell=shell, capture_output=True, text=text, timeout=timeout, check=False  # noqa: B602
             )
-        return result
+            if result.returncode != 0:
+                stderr_output = result.stderr if isinstance(result.stderr, str) else result.stderr.decode("utf-8")
+                raise PluginException(
+                    cause=error_context,
+                    assistance=f"stderr: {stderr_output}",
+                )
+            return result
+        except subprocess.TimeoutExpired:
+            raise PluginException(
+                cause=f"{error_context}: command timed out after {timeout} seconds",
+                assistance="Consider increasing the timeout or verifying network/repository availability.",
+            )
+        except OSError as error:
+            raise PluginException(
+                cause=f"{error_context}: OS error executing command",
+                assistance=str(error),
+            )
 
     def _trim_epoch(self, package_label: str) -> str:
-        # Remove epoch prefix (0:) from package label
+        # Remove epoch prefix from package label for cache filename
         return re.sub(r"(-)(0:)", r"\1", package_label)
 
     def _trim_epochs(self, packages: List[str]) -> List[str]:

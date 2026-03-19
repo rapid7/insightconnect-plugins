@@ -14,7 +14,7 @@ FIELD_MAP = {
     "Release": "release",
     "Architecture": "architecture",
     "License": "license",
-    "Source RPM": "source",
+    "Source RPM": "source_rpm",
     "Build Date": "build_date",
     "Build Host": "build_host",
     "Relocations": "relocations",
@@ -40,7 +40,7 @@ SUBPROCESS_TIMEOUT = 120
 
 # Substitution map for _modify_repofile
 REPO_SUBSTITUTIONS = {
-    r"enabled=1": "0",
+    r"enabled=1": "enabled=0",
     r"\$basearch": "$arch",
     r"gpgcheck=1": "gpgcheck=0",
 }

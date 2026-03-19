@@ -5,24 +5,24 @@
 
 [base6]
 name=CentOS-6 - Base
-baseurl=http://vault.centos.org/6.10/os/$basearch/
+baseurl=https://vault.centos.org/6.10/os/$basearch/
 enabled=1
 gpgcheck=0
 
 [updates6]
 name=CentOS-6 - Updates
-baseurl=http://vault.centos.org/6.10/updates/$basearch/
+baseurl=https://vault.centos.org/6.10/updates/$basearch/
 enabled=1
 gpgcheck=0
 
 [extras6]
 name=CentOS-6 - Extras
-baseurl=http://vault.centos.org/6.10/extras/$basearch/
+baseurl=https://vault.centos.org/6.10/extras/$basearch/
 enabled=1
 gpgcheck=0
 
 [centosplus6]
 name=CentOS-6 - Plus
-baseurl=http://vault.centos.org/6.10/centosplus/$basearch/
+baseurl=https://vault.centos.org/6.10/centosplus/$basearch/
 enabled=1
 gpgcheck=0

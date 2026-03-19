@@ -5,24 +5,24 @@
 
 [base7]
 name=CentOS-7 - Base
-baseurl=http://vault.centos.org/7.9.2009/os/$basearch/
+baseurl=https://vault.centos.org/7.9.2009/os/$basearch/
 enabled=1
 gpgcheck=0
 
 [updates7]
 name=CentOS-7 - Updates
-baseurl=http://vault.centos.org/7.9.2009/updates/$basearch/
+baseurl=https://vault.centos.org/7.9.2009/updates/$basearch/
 enabled=1
 gpgcheck=0
 
 [extras7]
 name=CentOS-7 - Extras
-baseurl=http://vault.centos.org/7.9.2009/extras/$basearch/
+baseurl=https://vault.centos.org/7.9.2009/extras/$basearch/
 enabled=1
 gpgcheck=0
 
 [centosplus7]
 name=CentOS-7 - Plus
-baseurl=http://vault.centos.org/7.9.2009/centosplus/$basearch/
+baseurl=https://vault.centos.org/7.9.2009/centosplus/$basearch/
 enabled=1
 gpgcheck=0
