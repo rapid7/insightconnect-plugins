@@ -11,7 +11,7 @@ from .schema import (
 
 # Custom imports below
 from datetime import datetime, timedelta, timezone, date
-from typing import Optional
+from typing import Optional, Tuple
 
 from icon_zoom.tasks.enums import RunState
 from icon_zoom.tasks.dataclasses import TaskOutput
@@ -116,6 +116,18 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
 
         param_request_start_date = start_date_params[run_state]
         param_request_end_date = end_date_params[run_state]
+
+        if run_state == RunState.continuing:
+            param_request_start_date, param_request_end_date = self.adjust_midnight_query_time(
+                last_request_timestamp=self._get_last_valid_timestamp(
+                    start_time, state.get(self.LAST_REQUEST_TIMESTAMP)
+                ),
+                previous_completed_query_date=state.get(
+                    self.PREVIOUS_COMPLETED_QUERY_DATE, state.get(self.LAST_REQUEST_TIMESTAMP)
+                ),
+                query_end_time=param_request_end_date,
+                now=now,
+            )
 
         range_previously_queried = self.check_if_previously_queried(
             state.get(self.PREVIOUS_COMPLETED_QUERY_DATE), param_request_end_date
@@ -264,14 +276,54 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         if last_completed_end_time is None:
             return False
         # The API uses year, month, and day as it's lowest level of granularity
-        last_completed_end_time = datetime.strptime(last_completed_end_time, self.ZOOM_TIME_FORMAT)
-        current_query_end_time = datetime.strptime(current_query_end_time, self.ZOOM_TIME_FORMAT)
-        last_completed_end_date = last_completed_end_time.strftime("%Y-%m-%d")
-        current_query_end_date = current_query_end_time.strftime("%Y-%m-%d")
+        last_completed_end_date = self.get_date_from_datetime(last_completed_end_time)
+        current_query_end_date = self.get_date_from_datetime(current_query_end_time)
         if current_query_end_date == last_completed_end_date:
             self.logger.info(f"Timerange to {current_query_end_date} previously queried...")
             return True
         return False
+
+    """
+    Adjust the start and end time of the query if a query originally spans midnight. 
+    This is due to the fact that the API only uses date granularity. A spanning query results in two full days being
+    queried and duplicates being returned for the previous day's events.spanning midnight
+    :param last_request_timestamp: The last request timestamp to be used as the new start time if the query is not spanning midnight
+    :param previous_completed_query_date: The time of the last completed query to be used to determine if the query is spanning midnight
+    :param query_end_time: The original end time of the query to be used to determine if the query is spanning midnight
+    :return: Tuple of the new start and end time for the query
+    """
+
+    def adjust_midnight_query_time(
+        self, last_request_timestamp: str, previous_completed_query_date: str, query_end_time: str, now: str
+    ) -> Tuple[str, str]:
+        # If the last completed query end time is approaching midnight, we adjust it to be 00:00 of the next day
+        start_date = self.get_date_from_datetime(last_request_timestamp)
+        end_date = self.get_date_from_datetime(query_end_time)
+        if "T23:59:59Z" in previous_completed_query_date:
+            query_start_time = end_date + "T00:00:00Z"
+            return query_start_time, now
+        if start_date != end_date:
+            # If the start and end time are not on the same day, we adjust the end time to be 1 second before midnight of that day
+            adjusted_end_time = start_date + "T23:59:59Z"
+            self.logger.info(
+                f"Adjusted query end time from {query_end_time} to {adjusted_end_time} to query end of day"
+            )
+            return last_request_timestamp, adjusted_end_time
+        return last_request_timestamp, query_end_time
+
+    """
+    Retrieve date from datetime string
+    :param datetime_str: The datetime string to extract the date from
+    :return: The date in string format
+    """
+
+    def get_date_from_datetime(self, datetime_str: str) -> str:
+        try:
+            dt = datetime.strptime(datetime_str, self.ZOOM_TIME_FORMAT)
+            return dt.strftime("%Y-%m-%d")
+        except ValueError as error:
+            self.logger.error(f"Error parsing datetime string: {error}")
+            raise PluginException(cause="Error parsing datetime value", data=datetime_str)
 
     def get_start_time(self, lookback: dict, cutoff_date: dict, cutoff_hours: str, run_state: RunState) -> str:
         """
