@@ -11,7 +11,7 @@ from .schema import (
 
 # Custom imports below
 from datetime import datetime, timedelta, timezone, date
-from typing import Optional, Tuple
+from typing import Optional, Tuple, List
 
 from icon_zoom.tasks.enums import RunState
 from icon_zoom.tasks.dataclasses import TaskOutput
@@ -173,6 +173,19 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             self.logger.info("Unable to get latest event time, no new events found!")
             return self.handle_no_new_events_found(now=now, query_end_date=param_request_end_date)
 
+        new_events = self.prepare_dedupe_events(state, new_events, range_previously_queried)
+
+        query_completed = self.determine_next_run_params(
+            pagination_token, state, param_request_start_date, param_request_end_date, run_state
+        )
+        self.prepare_state_timestamp(run_state, state, query_completed, latest_event)
+        state[self.LAST_REQUEST_TIMESTAMP] = now
+        state[self.PREVIOUS_RUN_STATE] = run_state.value
+        self.logger.info(f"Updated state, state is now: {state}")
+        has_more_pages = not query_completed
+        return TaskOutput(output=new_events, state=state, has_more_pages=has_more_pages, status_code=200, error=None)
+
+    def prepare_dedupe_events(self, state: Dict[str, Any], new_events: List[Event], range_previously_queried: bool = False) -> List[Event]:
         # Dedupe if the date range has been previously queried to completion as no new events earlier than the latest
         # event timestamp will be added on subsequent requests
         if range_previously_queried:
@@ -185,17 +198,9 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 latest_event_timestamp=dedupe_timestamp,
             )
             self.logger.info(f"After de-duping, total event count is {len(deduped_events)}")
-            new_events = deduped_events
-
-        query_completed = self.determine_next_run_params(
-            pagination_token, state, param_request_start_date, param_request_end_date, run_state
-        )
-        self.prepare_state_timestamp(run_state, state, query_completed, latest_event)
-        state[self.LAST_REQUEST_TIMESTAMP] = now
-        state[self.PREVIOUS_RUN_STATE] = run_state.value
-        self.logger.info(f"Updated state, state is now: {state}")
-        has_more_pages = not query_completed
-        return TaskOutput(output=new_events, state=state, has_more_pages=has_more_pages, status_code=200, error=None)
+            return deduped_events
+        else:
+            return new_events
 
     def determine_next_run_params(
         self,
@@ -292,7 +297,6 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
     :param query_end_time: The original end time of the query to be used to determine if the query is spanning midnight
     :return: Tuple of the new start and end time for the query
     """
-
     def adjust_midnight_query_time(
         self, last_request_timestamp: str, previous_completed_query_date: str, query_end_time: str, now: str
     ) -> Tuple[str, str]:
@@ -316,7 +320,6 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
     :param datetime_str: The datetime string to extract the date from
     :return: The date in string format
     """
-
     def get_date_from_datetime(self, datetime_str: str) -> str:
         try:
             dt = datetime.strptime(datetime_str, self.ZOOM_TIME_FORMAT)
