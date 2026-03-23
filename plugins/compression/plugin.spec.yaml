@@ -3,102 +3,161 @@ extension: plugin
 products: [insightconnect]
 name: compression
 title: Compression
-description: "The Compression plugin for Rapid7 InsightConnect allows users to compress/decompress files using different
-Compression algorithms"
-version: 2.0.2
+description: "The Compression plugin for Rapid7 InsightConnect allows users to compress/decompress files using different compression algorithms"
+version: 2.0.3
+connection_version: 2
 vendor: rapid7
 support: community
+supported_versions: ["2026-03-16"]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/compression
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
-- compress
-- decompress
-- base64
-- file
-- gzip
-- bzip
-- lz
-- xz
-- bytes
-- zip
+  - compress
+  - decompress
+  - base64
+  - file
+  - gzip
+  - bzip
+  - lz
+  - xz
+  - bytes
+  - zip
 hub_tags:
   use_cases: [data_utility]
   keywords: [compress, decompress, base64, file, gzip, bzip, lz, xz, bytes, zip]
   features: []
+sdk:
+  type: slim
+  version: 6.4.3
+  user: nobody
+  custom_cmd:
+    - "RUN apt-get update && apt-get upgrade -y && apt-get install -y libmagic-dev"
 enable_cache: false
+key_features:
+  - "File compression using gzip, bzip, lz, xz, and ZIP algorithms"
+  - "File decompression with automatic algorithm detection"
+version_history:
+  - "2.0.3 - Updated dependency | Updated SDK to the latest version (6.4.3)"
+  - "2.0.2 - Correct spelling in help.md"
+  - "2.0.1 - New spec and help.md format for the Extension Library"
+  - "2.0.0 - Rename \"Create archive\" action to \"Create Archive\" | Rename \"Decompress bytes\" action to \"Decompress Bytes\" | Rename \"Compress bytes\" action to \"Compress Bytes\" | Rename \"Extract Archive\" to \"Exctract archive\""
+  - "1.1.0 - Port to Python v2 architecture | Support web server mode"
+  - "1.0.3 - Extract archive single file bug fix"
+  - "1.0.2 - Decompress gz files within ZIP file"
+  - "1.0.1 - New structure and compress multi file support"
+  - "1.0.0 - Multiple files support for ZIP files | Update to v2 Python plugin architecture"
+  - "0.2.1 - SSL bug fix in SDK"
+  - "0.2.0 - Add ZIP file support"
+  - "0.1.0 - Initial plugin"
+troubleshooting: 
+  - "On decompression, be sure that the inputted file has been compressed using one of the supported algorithms."
+links:
+  - "[bz2 python library](https://docs.python.org/3/library/bz2.html)"
+  - "[gzip python library](https://docs.python.org/3/library/gzip.html)"
+  - "[lz python library](https://docs.python.org/3/library/lzma.html)"
+  - "[xz python library](https://docs.python.org/3/library/lzma.html)"
+  - "[zipfile python library](https://docs.python.org/3/library/zipfile.html)"
+references:
+  - "[bz2 python library](https://docs.python.org/3/library/bz2.html)"
+  - "[gzip python library](https://docs.python.org/3/library/gzip.html)"
+  - "[lz python library](https://docs.python.org/3/library/lzma.html)"
+  - "[xz python library](https://docs.python.org/3/library/lzma.html)"
+  - "[zipfile python library](https://docs.python.org/3/library/zipfile.html)"
 actions:
   create_archive:
     title: Create Archive
-    description: Compress a files into archive
+    description: Compress files into an archive
     input:
       files:
-        type: '[]file'
+        title: Files
         description: Files to be compressed
+        type: '[]file'
         required: true
+        example: '[{"filename": "test.txt", "content": "sample content"}]'
       algorithm:
-        type: string
+        title: Algorithm
         description: Compression algorithm
-        enum:
-        - tarball
-        - zip
-        required: true
-      filename:
         type: string
-        description: Name of file archive
+        enum:
+          - tarball
+          - zip
         required: true
+        example: zip
+      filename:
+        title: Filename
+        description: Name of file archive
+        type: string
+        required: true
+        example: archive.zip
     output:
       archive:
+        title: Archive
+        description: Compressed archive file
         type: file
-        description: Archive
         required: false
+        example: '{"filename": "archive.zip", "content": "UEsDBBQAAAAIAA=="}'
   decompress_bytes:
     title: Decompress Bytes
-    description: Decompress bytes
+    description: Decompress a file by automatically determining the compression algorithm used and returning the decompressed file. Supported algorithms are gzip, bzip, lz, xz, and ZIP
     input:
       bytes:
-        type: bytes
+        title: Bytes
         description: Compressed Base64-encoded bytes
+        type: bytes
         required: true
+        example: H4sIAAAAAAAAA0tMTAYAVMUbFQQAAAA=
     output:
       decompressed:
+        title: Decompressed
+        description: Decompressed file as Base64-encoded bytes
         type: bytes
-        description: Decompressed
         required: false
+        example: SGVsbG8gV29ybGQ=
   compress_bytes:
     title: Compress Bytes
-    description: Compress bytes
+    description: Compress a file using a choice of one of the following compression algorithms gzip, bzip, lz, xz, or ZIP
     input:
       bytes:
-        type: bytes
+        title: Bytes
         description: Base64-encoded file/bytes
+        type: bytes
         required: true
+        example: SGVsbG8gV29ybGQ=
       algorithm:
-        type: string
+        title: Algorithm
         description: Compression algorithm
+        type: string
         enum:
-        - gzip
-        - bzip
-        - lz
-        - xz
-        - zip
+          - gzip
+          - bzip
+          - lz
+          - xz
+          - zip
         required: true
+        example: gzip
     output:
       compressed:
+        title: Compressed
+        description: Compressed file as Base64-encoded bytes
         type: bytes
-        description: Compressed
         required: false
+        example: H4sIAAAAAAAAA0tMTAYAVMUbFQQAAAA=
   extract_archive:
     title: Extract Archive
-    description: Exctract file archive
+    description: Extract file archive
     input:
       archive:
-        type: file
+        title: Archive
         description: Base64-encoded archive file
+        type: file
         required: true
+        example: '{"filename": "archive.zip", "content": "UEsDBBQAAAAIAA=="}'
     output:
       files:
+        title: Files
+        description: Extracted files from the archive
         type: '[]file'
-        description: Files
         required: false
+        example: '[{"filename": "test.txt", "content": "c2FtcGxlIGNvbnRlbnQ="}]'
