@@ -139,14 +139,6 @@ STUB_EXPECTED_CONTINUING_STATE_TO_MIDNIGHT = {
     "previous_completed_query_date": "2023-03-02T23:59:59Z",
 }
 
-{
-    "last_request_timestamp": "2023-02-23T00:10:00Z",
-    "previous_completed_query_date": "2023-03-02T23:59:59Z",
-    "latest_event_timestamp": "2023-02-22T21:44:44Z",
-    "previous_run_state": "continuing",
-}
-
-
 STUB_EXPECTED_CONTINUING_STATE_FROM_MIDNIGHT = {
     "last_request_timestamp": "2023-03-03T00:10:00Z",
     "previous_completed_query_date": "2023-03-03T00:10:00Z",
@@ -541,12 +533,14 @@ class TestGetUserActivityEvents(unittest.TestCase):
                 STUB_INPUT_CONTINUING_STATE_TO_MIDNIGHT,
                 STUB_EXPECTED_CONTINUING_STATE_TO_MIDNIGHT,
                 STUB_DATETIME_AFTER_MIDNIGHT,
+                {"start_date": "2023-03-02T23:59:00Z", "end_date": "2023-03-02T23:59:59Z"},
             ],
             [
                 "subsequent_after_midnight",
                 STUB_EXPECTED_CONTINUING_STATE_TO_MIDNIGHT,
                 STUB_EXPECTED_CONTINUING_STATE_FROM_MIDNIGHT,
                 STUB_DATETIME_AFTER_MIDNIGHT_SUBSEQUENT,
+                {"start_date": "2023-03-03T00:00:00Z", "end_date": "2023-03-03T00:10:00Z"},
             ],
         ]
     )
@@ -562,15 +556,17 @@ class TestGetUserActivityEvents(unittest.TestCase):
         input_state: dict,
         expected_state: dict,
         now_time: str,
+        expected_call_args: dict,
         mock_call: MagicMock,
         mock_datetime_now: MagicMock,
         mock_datetime_last_x: MagicMock,
     ) -> None:
         mock_datetime_now.side_effect = [now_time]
         output, state, has_more_pages, status_code, error = self.task.run(state=input_state)
+        call_args = mock_call.call_args.kwargs
+        self.assertEqual(call_args.get("start_date"), expected_call_args.get("start_date"))
+        self.assertEqual(call_args.get("end_date"), expected_call_args.get("end_date"))
         expected_output, expected_has_more_pages, expected_status_code, expected_error = [], False, 200, None
-        print(input_state)
-        print(state)
         self.assertListEqual(output, expected_output)
         self.assertDictEqual(state, expected_state)
         self.assertFalse(output, expected_has_more_pages)

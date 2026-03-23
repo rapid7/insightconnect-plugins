@@ -119,9 +119,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
 
         if run_state == RunState.continuing:
             param_request_start_date, param_request_end_date = self.adjust_midnight_query_time(
-                last_request_timestamp=self._get_last_valid_timestamp(
-                    start_time, state.get(self.LAST_REQUEST_TIMESTAMP)
-                ),
+                param_request_start_date,
                 previous_completed_query_date=state.get(
                     self.PREVIOUS_COMPLETED_QUERY_DATE, state.get(self.LAST_REQUEST_TIMESTAMP)
                 ),
@@ -309,6 +307,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         previous_completed_date = datetime.strptime(previous_completed_query_date, self.ZOOM_TIME_FORMAT)
         if previous_completed_date.time() == time(23, 59, 59):
             query_start_time = datetime.strftime(end_date.replace(hour=0, minute=0, second=0), self.ZOOM_TIME_FORMAT)
+            self.logger.info(f"Date range completed for {previous_completed_date.date()}, adjusting query start time to be 00:00:00 of the next day")
             return query_start_time, now
         if start_date.date() != end_date.date():
             # If the start and end time are not on the same day, we adjust the end time to be 1 second before midnight of that day
