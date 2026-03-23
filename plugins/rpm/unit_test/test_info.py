@@ -9,6 +9,7 @@ from unittest.mock import MagicMock, patch
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_rpm.actions.info import Info
 from komand_rpm.actions.info.schema import Input
+from komand_rpm.util.rpm_helpers import RPMHelper
 from parameterized import parameterized
 
 from util import STUB_CACHED_RESULT, STUB_INFO2DIC_RESULT, Util
@@ -130,8 +131,8 @@ class TestInfo(TestCase):
     def test_info_validation_error(self, _name: str, params: dict, mock_helper_cls: MagicMock) -> None:
         # Setup mock for helper
         helper = mock_helper_cls.return_value
-        helper.validate_input.side_effect = Util.mock_validate_input
-        helper.validate_url.side_effect = Util.mock_validate_url
+        helper.validate_input.side_effect = lambda v, f: RPMHelper.validate_input(helper, v, f)
+        helper.validate_url.side_effect = lambda u: RPMHelper.validate_url(helper, u)
 
         # Run the action and check that a PluginException is raised
         with self.assertRaises(PluginException):
@@ -368,8 +369,8 @@ class TestInfo(TestCase):
     def test_info_per_field_metachar_validation(self, _name: str, params: dict, mock_helper_cls: MagicMock) -> None:
         # Setup mock for helper
         helper = mock_helper_cls.return_value
-        helper.validate_input.side_effect = Util.mock_validate_input
-        helper.validate_url.side_effect = Util.mock_validate_url
+        helper.validate_input.side_effect = lambda v, f: RPMHelper.validate_input(helper, v, f)
+        helper.validate_url.side_effect = lambda u: RPMHelper.validate_url(helper, u)
 
         # Run the action and check that a PluginException is raised
         with self.assertRaises(PluginException):

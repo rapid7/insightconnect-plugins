@@ -168,9 +168,11 @@ Example output:
 
 # Version History
 
-* 1.0.2 - Modernize plugin to use insightconnect-plugin-runtime and slim base image
-* 1.0.1 - New spec and calculation for help.md generation
-* 1.0.0 - Initial plugin
+* 1.0.2 - Refresh the plugin | Updated SDK to the latest version (6.4.3)
+* 1.0.1 - New spec and help.md format for the Extension Library
+* 1.0.0 - Support web server mode | Update to v2 Python plugin architecture
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
 
 # Links
 

@@ -2,8 +2,8 @@ import logging
 from unittest.mock import MagicMock
 
 from insightconnect_plugin_runtime.action import Action
-from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_rpm.connection.connection import Connection
+from komand_rpm.util.rpm_helpers import RPMHelper
 
 STUB_PACKAGE_INFO_OUTPUT = (
     "Name        : curl\n"
@@ -26,9 +26,7 @@ STUB_PACKAGE_INFO_OUTPUT = (
     "             \n"
     "curl is a command line tool for transferring data with URL syntax"
 )
-
 STUB_DUMP_OUTPUT = "/usr/bin/curl 156000 1554120000 d41d8cd98f00b204e9800998ecf8427e" " 0100755 root root 0 0 0 (none)"
-
 STUB_INFO2DIC_RESULT = {
     "found": True,
     "name": "curl",
@@ -67,14 +65,11 @@ STUB_INFO2DIC_RESULT = {
         }
     ],
 }
-
 STUB_CACHED_RESULT = {
     "found": True,
     "name": "cached-pkg",
     "version": "1.0.0",
 }
-
-SHELL_METACHARACTERS = ";|&<>`\n\r"
 
 
 class Util:
@@ -95,21 +90,10 @@ class Util:
         helper.add_repo.return_value = {"path": "/tmp/custom.repo", "ids": ["custom-repo"]}
         helper.download_package.return_value = f"/tmp/{package_name}.rpm"
         helper.package_info.return_value = {"package": STUB_PACKAGE_INFO_OUTPUT, "files": STUB_DUMP_OUTPUT}
-        helper.info2dic.return_value = STUB_INFO2DIC_RESULT
+        helper.info2dic.side_effect = lambda info: RPMHelper.info2dic(helper, info)
+        helper._parse_file_dump.side_effect = lambda raw: RPMHelper._parse_file_dump(helper, raw)
+        helper._parse_package_fields.side_effect = lambda lines, result: RPMHelper._parse_package_fields(
+            helper, lines, result
+        )
+        helper._parse_signature.side_effect = lambda content: RPMHelper._parse_signature(helper, content)
         return helper
-
-    @staticmethod
-    def mock_validate_input(value: str, field: str) -> None:
-        if any(char in value for char in SHELL_METACHARACTERS):
-            raise PluginException(
-                cause=f"Invalid characters in {field}",
-                assistance=f"The {field} field contains shell metacharacters which are not allowed.",
-            )
-
-    @staticmethod
-    def mock_validate_url(url: str) -> None:
-        if not url.startswith(("http://", "https://")):
-            raise PluginException(
-                cause=f"Invalid URL scheme: {url}",
-                assistance="Only http:// and https:// URLs are supported.",
-            )

@@ -144,7 +144,9 @@ class RPMHelper:
         # Build package label: name-[epoch:]version[-release]
         if not version:
             return name
-        epoch_prefix = f"{epoch}:" if epoch and epoch != "0" else ""
+
+        # Create label with epoch, version, and release components
+        epoch_prefix = f"{epoch}:" if epoch else ""
         release_suffix = f"-{release}" if release else ""
         return f"{name}-{epoch_prefix}{version}{release_suffix}"
 

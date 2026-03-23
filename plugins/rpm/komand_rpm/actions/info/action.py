@@ -27,6 +27,7 @@ class Info(insightconnect_plugin_runtime.Action):
         key = params.get(Input.KEY, "")
         # END INPUT BINDING - DO NOT REMOVE
 
+        # Initialise RPM helper
         helper = RPMHelper(logger=self.logger)
 
         # Validate user-supplied inputs
@@ -41,28 +42,29 @@ class Info(insightconnect_plugin_runtime.Action):
             if value:
                 helper.validate_input(value, field)
 
+        # Validate and add repository if entered
+        repo_info, repo_ids = None, None
         if repo:
             helper.validate_url(repo)
+            repo_info = helper.add_repo(repo)
+            repo_ids = repo_info.get("ids")
+
+        # Validate and add key if entered
         if key:
             helper.validate_url(key)
+            helper.add_key(key)
 
+        # Check if epoch is not `0`. If so, set it to empty string
         epoch = "" if epoch == "0" else epoch
-
         if distro == "CentOS 7" and arch != "x86_64":
             self.logger.error("CentOS 7 only supports x86_64 — this will likely fail")
 
         label = helper.make_label(name, epoch, version, release)
         self.logger.info(f"Run: Resolving package '{label}' [{arch}] on {distro}")
-
-        repo_info = helper.add_repo(repo) if repo else None
-        if key:
-            helper.add_key(key)
-
-        repo_ids = repo_info.get("ids") if repo_info else None
         package_list = helper.list_package(label, arch, distro, repo_ids)
 
-        cached = helper.check_rpm_cache(package_list)
-        if cached:
+        # Check if package is cached
+        if cached := helper.check_rpm_cache(package_list):
             self.logger.info("Run: Cache hit")
             return cached
 
