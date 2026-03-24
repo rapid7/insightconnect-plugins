@@ -1,5 +1,6 @@
 import json
 import sys
+import time as time_module
 from typing import Any, Dict, List, Tuple, Optional, Union
 import urllib.parse
 
@@ -10,33 +11,33 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from .endpoints import Endpoint
 from .tools import request_execution_time
 
+# Token refresh buffer in seconds — refresh 5 minutes before expiry
+TOKEN_EXPIRY_BUFFER = 300
+
 
 class AzureClient:
     def __init__(self, logger: Any, tenant_id: str, client_id: str, client_secret: str):
         self.O365_AUTH_ENDPOINT = "https://login.microsoftonline.com/{}/oauth2/token"
         self.SCOPE = "https://management.azure.com"
         self._auth_token = ""  # nosec
+        self._token_expiry = 0  # epoch timestamp when token expires
         self.tenant_id = tenant_id
         self.client_id = client_id
         self.client_secret = client_secret
         self.logger = logger
 
-    @property
-    def auth_token(self):
-        tenant_id = self.tenant_id
-        client_id = self.client_id
-        client_secret = self.client_secret
-
+    def _refresh_token(self):
+        """Fetch a new OAuth token from Azure AD."""
         self.logger.info("Updating auth token...")
 
         data = {
             "grant_type": "client_credentials",
-            "client_id": client_id,
+            "client_id": self.client_id,
             "resource": self.SCOPE,
-            "client_secret": client_secret,
+            "client_secret": self.client_secret,
         }
 
-        formatted_endpoint = self.O365_AUTH_ENDPOINT.format(tenant_id)
+        formatted_endpoint = self.O365_AUTH_ENDPOINT.format(self.tenant_id)
         self.logger.info("Getting token from: " + formatted_endpoint)
 
         request = requests.request("POST", formatted_endpoint, data=data)
@@ -51,16 +52,32 @@ class AzureClient:
                 "Azure administrator.",
                 data=request.text,
             )
-        token = request.json().get("access_token")
-        self._auth_token = token
+        token_response = request.json()
+        self._auth_token = token_response.get("access_token")
+        # Azure tokens include expires_in (seconds). Default to 3600 if missing.
+        expires_in = int(token_response.get("expires_in", 3600))
+        self._token_expiry = time_module.time() + expires_in
         self.logger.info(f"Authentication Token: ****************{self._auth_token[-5:]}")
-        return token
+        self.logger.info(f"Token expires in {expires_in} seconds")
+
+    @property
+    def auth_token(self):
+        """Return a valid token, refreshing if expired or about to expire."""
+        if not self._auth_token or time_module.time() >= (self._token_expiry - TOKEN_EXPIRY_BUFFER):
+            self._refresh_token()
+        return self._auth_token
 
 
 class AzureSentinelClient(AzureClient):
     def __init__(self, logger: Any, tenant_id: str, client_id: str, client_secret: str):
         super(AzureSentinelClient, self).__init__(logger, tenant_id, client_id, client_secret)  # noqa
-        self.headers = {"Content-Type": "application/json", "Authorization": f"Bearer {self.auth_token}"}
+        # Fetch initial token to validate credentials at connection time
+        self._refresh_token()
+
+    @property
+    def headers(self):
+        """Generate headers dynamically so the token is always fresh."""
+        return {"Content-Type": "application/json", "Authorization": f"Bearer {self.auth_token}"}
 
     def _call_api(
         self, method: str, url: str, headers: dict, payload: Optional[dict] = None, params: Optional[dict] = None
