@@ -131,7 +131,7 @@ STUB_EXPECTED_PAGINATION_ERROR_STATE_OUTPUT = {
 
 STUB_INPUT_CONTINUING_STATE_TO_MIDNIGHT = {
     "last_request_timestamp": "2023-03-02T23:59:00Z",
-    "previous_completed_query_date": "2023-03-02T23:55:00Z",
+    "previous_completed_query_date": "2023-03-02T23:59:00Z",
 }
 
 STUB_EXPECTED_CONTINUING_STATE_TO_MIDNIGHT = {
