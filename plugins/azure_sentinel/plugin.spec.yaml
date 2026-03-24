@@ -8,7 +8,7 @@ support: community
 supported_versions: [2021-04-01]
 status: []
 description: Microsoft Azure Sentinel is a cloud-native SIEM that provides intelligent security analytics for your entire enterprise, powered by AI
-version: 2.1.0
+version: 2.2.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/azure_sentinel
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -1400,6 +1400,24 @@ actions:
         required: false
         type: integer
         example: 1867
+      status:
+        title: Status
+        description: Filter incidents by status. Use 'All' or leave empty to return all statuses
+        required: false
+        type: string
+        default: All
+        enum:
+          - All
+          - Active
+          - Closed
+          - New
+        example: New
+      created_from:
+        title: Created From
+        description: Filter incidents created after this ISO 8601 datetime
+        required: false
+        type: date
+        example: "2024-01-01T00:00:00Z"
     output:
       incidents:
         title: Incidents
