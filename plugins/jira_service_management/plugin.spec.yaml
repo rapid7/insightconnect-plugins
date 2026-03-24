@@ -220,8 +220,8 @@ actions:
     description: Get current on-call participants
     input:
       scheduleIdentifier:
-        title: Schedule Identifier
-        description: Identifier of the schedule
+        title: Schedule ID
+        description: ID of the schedule
         type: string
         required: true
         example: d383c6e9-b1e7-4b59-9c35-72f1a2187777

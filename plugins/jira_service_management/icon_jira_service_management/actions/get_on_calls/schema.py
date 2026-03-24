@@ -40,8 +40,8 @@ class GetOnCallsInput(insightconnect_plugin_runtime.Input):
     },
     "scheduleIdentifier": {
       "type": "string",
-      "title": "Schedule Identifier",
-      "description": "Identifier of the schedule",
+      "title": "Schedule ID",
+      "description": "ID of the schedule",
       "order": 1
     }
   },
