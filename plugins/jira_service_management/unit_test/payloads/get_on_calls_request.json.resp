@@ -1,0 +1,26 @@
+{
+    "onCallParticipants": [
+        {
+            "id": "bc667897-cb21-496f-a46e-7c05ff0419dd",
+            "type": "team"
+        },
+        {
+            "id": "5b2b0e011b3a756623f4e25e",
+            "type": "user"
+        },
+        {
+            "id": "7a24e9d7-7a4f-4f86-a1df-21ca9c3112ac",
+            "type": "escalation",
+            "onCallParticipants": [
+                {
+                    "id": "5b2b0e011b3a756623f4e25e",
+                    "type": "user",
+                    "forwardedFrom": {
+                        "id": "c5646941-3f05-404d-8594-825fa73af99f",
+                        "type": "user"
+                    }
+                }
+            ]
+        }
+    ]
+}

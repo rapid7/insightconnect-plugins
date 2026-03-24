@@ -6,7 +6,7 @@ import requests
 from icon_jira_service_management.util.constants import REQUESTS_TIMEOUT
 from icon_jira_service_management.util.retry import rate_limiting
 from insightconnect_plugin_runtime.exceptions import PluginException
-from insightconnect_plugin_runtime.helper import make_request
+from insightconnect_plugin_runtime.helper import make_request, clean
 
 MAX_REQUEST_TRIES = 10
 
@@ -83,6 +83,23 @@ class JiraServiceManagementApi:
             return get_alert_response
         except PluginException as error:
             self.logger.error(f"Failed to retrieve alert: {error}")
+            raise
+
+    def get_on_calls(self, schedule_id: str, flat: bool = False, date: str = None) -> dict:
+        url = f"https://api.atlassian.com/jsm/ops/api/{self.cloud_id}/v1/schedules/{schedule_id}/on-calls"
+        try:
+            self.logger.info(f"Retrieving on-calls for schedule with ID: {schedule_id}")
+            params = clean({"flat": flat if flat else None, "date": date})
+
+            get_on_calls_response = self._call_api(
+                method="GET",
+                url=url,
+                params=params,
+            )
+
+            return get_on_calls_response
+        except PluginException as error:
+            self.logger.error(f"Failed to retrieve on-calls: {error}")
             raise
 
     @rate_limiting(max_tries=MAX_REQUEST_TRIES)
