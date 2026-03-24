@@ -26,7 +26,7 @@ class TestGetOnCalls(TestCase):
         ]
 
         input_params = {
-            "identifier": "111111-9999-4ec2-8067-acde6abc040-1111123123",
+            "scheduleIdentifier": "111111-9999-4ec2-8067-acde6abc040-1111123123",
         }
 
         expected = {

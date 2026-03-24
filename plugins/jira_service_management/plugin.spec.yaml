@@ -224,7 +224,7 @@ actions:
         description: Identifier of the schedule
         type: string
         required: true
-        example: ScheduleName
+        example: d383c6e9-b1e7-4b59-9c35-72f1a2187777
       flat:
         title: Retrieve All Participants
         description: When enabled, retrieves user names of all on-call participants. Default value is false

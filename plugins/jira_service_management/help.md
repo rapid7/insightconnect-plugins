@@ -250,7 +250,7 @@ This action is used to get current on-call participants
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |date|date|None|False|Starting date of the timeline that will be provided in format as (yyyy-MM-dd'T'HH:mm:ssZ) (e.g. 2017-01-15T08:00:00+02:00). Default date is the moment of the time that request is received|None|2017-01-15T08:00:00+02:00|None|None|
 |flat|boolean|None|False|When enabled, retrieves user names of all on-call participants. Default value is false|None|False|None|None|
-|scheduleIdentifier|string|None|True|Identifier of the schedule|None|ScheduleName|None|None|
+|scheduleIdentifier|string|None|True|Identifier of the schedule|None|d383c6e9-b1e7-4b59-9c35-72f1a2187777|None|None|
   
 Example input:
 
@@ -258,7 +258,7 @@ Example input:
 {
   "date": "2017-01-15T08:00:00+02:00",
   "flat": false,
-  "scheduleIdentifier": "ScheduleName"
+  "scheduleIdentifier": "d383c6e9-b1e7-4b59-9c35-72f1a2187777"
 }
 ```
 
