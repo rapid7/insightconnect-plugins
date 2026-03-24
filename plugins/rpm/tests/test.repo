@@ -1,7 +1,0 @@
-[base]
-name=CentOS-$releasever - Base
-mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$earch&repo=os
-#baseurl=http://mirror.centos.org/centos/$releasever/os/$basearch/
-gpgcheck=1
-gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-centos4
-
