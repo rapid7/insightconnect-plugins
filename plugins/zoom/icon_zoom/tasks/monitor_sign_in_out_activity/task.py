@@ -10,8 +10,8 @@ from .schema import (
 )
 
 # Custom imports below
-from datetime import datetime, timedelta, timezone, date
-from typing import Optional
+from datetime import datetime, timedelta, timezone, date, time
+from typing import Optional, Tuple, List
 
 from icon_zoom.tasks.enums import RunState
 from icon_zoom.tasks.dataclasses import TaskOutput
@@ -117,6 +117,16 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         param_request_start_date = start_date_params[run_state]
         param_request_end_date = end_date_params[run_state]
 
+        if run_state == RunState.continuing:
+            param_request_start_date, param_request_end_date = self.adjust_midnight_query_time(
+                param_request_start_date,
+                previous_completed_query_date=state.get(
+                    self.PREVIOUS_COMPLETED_QUERY_DATE, state.get(self.LAST_REQUEST_TIMESTAMP)
+                ),
+                query_end_time=param_request_end_date,
+                now=now,
+            )
+
         range_previously_queried = self.check_if_previously_queried(
             state.get(self.PREVIOUS_COMPLETED_QUERY_DATE), param_request_end_date
         )
@@ -161,6 +171,21 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             self.logger.info("Unable to get latest event time, no new events found!")
             return self.handle_no_new_events_found(now=now, query_end_date=param_request_end_date)
 
+        new_events = self.prepare_dedupe_events(state, new_events, range_previously_queried)
+
+        query_completed = self.determine_next_run_params(
+            pagination_token, state, param_request_start_date, param_request_end_date, run_state
+        )
+        self.prepare_state_timestamp(run_state, state, query_completed, latest_event)
+        state[self.LAST_REQUEST_TIMESTAMP] = now
+        state[self.PREVIOUS_RUN_STATE] = run_state.value
+        self.logger.info(f"Updated state, state is now: {state}")
+        has_more_pages = not query_completed
+        return TaskOutput(output=new_events, state=state, has_more_pages=has_more_pages, status_code=200, error=None)
+
+    def prepare_dedupe_events(
+        self, state: Dict[str, Any], new_events: List[Event], range_previously_queried: bool = False
+    ) -> List[Event]:
         # Dedupe if the date range has been previously queried to completion as no new events earlier than the latest
         # event timestamp will be added on subsequent requests
         if range_previously_queried:
@@ -173,17 +198,9 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 latest_event_timestamp=dedupe_timestamp,
             )
             self.logger.info(f"After de-duping, total event count is {len(deduped_events)}")
-            new_events = deduped_events
-
-        query_completed = self.determine_next_run_params(
-            pagination_token, state, param_request_start_date, param_request_end_date, run_state
-        )
-        self.prepare_state_timestamp(run_state, state, query_completed, latest_event)
-        state[self.LAST_REQUEST_TIMESTAMP] = now
-        state[self.PREVIOUS_RUN_STATE] = run_state.value
-        self.logger.info(f"Updated state, state is now: {state}")
-        has_more_pages = not query_completed
-        return TaskOutput(output=new_events, state=state, has_more_pages=has_more_pages, status_code=200, error=None)
+            return deduped_events
+        else:
+            return new_events
 
     def determine_next_run_params(
         self,
@@ -264,14 +281,46 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         if last_completed_end_time is None:
             return False
         # The API uses year, month, and day as it's lowest level of granularity
-        last_completed_end_time = datetime.strptime(last_completed_end_time, self.ZOOM_TIME_FORMAT)
-        current_query_end_time = datetime.strptime(current_query_end_time, self.ZOOM_TIME_FORMAT)
-        last_completed_end_date = last_completed_end_time.strftime("%Y-%m-%d")
-        current_query_end_date = current_query_end_time.strftime("%Y-%m-%d")
-        if current_query_end_date == last_completed_end_date:
-            self.logger.info(f"Timerange to {current_query_end_date} previously queried...")
+        if (
+            datetime.strptime(last_completed_end_time, self.ZOOM_TIME_FORMAT).date()
+            == datetime.strptime(current_query_end_time, self.ZOOM_TIME_FORMAT).date()
+        ):
+            self.logger.info(f"Timerange to {current_query_end_time} previously queried...")
             return True
         return False
+
+    def adjust_midnight_query_time(
+        self, last_request_timestamp: str, previous_completed_query_date: str, query_end_time: str, now: str
+    ) -> Tuple[str, str]:
+        """
+        Adjust the start and end time of the query if a query originally spans midnight.
+        This is due to the fact that the API only uses date granularity. A spanning query results in two full days being
+        queried and duplicates being returned for the previous day's events.spanning midnight
+        :param last_request_timestamp: The last request timestamp to be used as the new start time if the query is not spanning midnight
+        :param previous_completed_query_date: The time of the last completed query to be used to determine if the query is spanning midnight
+        :param query_end_time: The original end time of the query to be used to determine if the query is spanning midnight
+        :return: Tuple of the new start and end time for the query
+        """
+        # If the last completed query end time is approaching midnight, we adjust it to be 00:00 of the next day
+        start_date = datetime.strptime(last_request_timestamp, self.ZOOM_TIME_FORMAT)
+        end_date = datetime.strptime(query_end_time, self.ZOOM_TIME_FORMAT)
+        previous_completed_date = datetime.strptime(previous_completed_query_date, self.ZOOM_TIME_FORMAT)
+        if previous_completed_date.time() == time(23, 59, 59):
+            query_start_time = datetime.strftime(end_date.replace(hour=0, minute=0, second=0), self.ZOOM_TIME_FORMAT)
+            self.logger.info(
+                f"Date range completed for {previous_completed_date.date()}, adjusting query start time to be 00:00:00 of the next day"
+            )
+            return query_start_time, now
+        if start_date.date() != end_date.date():
+            # If the start and end time are not on the same day, we adjust the end time to be 1 second before midnight of that day
+            adjusted_end_time = datetime.strftime(
+                start_date.replace(hour=23, minute=59, second=59), self.ZOOM_TIME_FORMAT
+            )
+            self.logger.info(
+                f"Adjusted query end time from {query_end_time} to {adjusted_end_time} to query end of day"
+            )
+            return last_request_timestamp, adjusted_end_time
+        return last_request_timestamp, query_end_time
 
     def get_start_time(self, lookback: dict, cutoff_date: dict, cutoff_hours: str, run_state: RunState) -> str:
         """

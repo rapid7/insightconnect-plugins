@@ -66,6 +66,8 @@ STUB_EVENTS = [Event(**sample) for sample in STUB_SAMPLES]
 
 STUB_DATETIME_LAST_24_HOURS = datetime.datetime(2023, 2, 22, 22, 0, 0)
 STUB_DATETIME_NOW = datetime.datetime(2023, 2, 23, 22, 0, 0)
+STUB_DATETIME_AFTER_MIDNIGHT = datetime.datetime(2023, 3, 3, 0, 5, 0)
+STUB_DATETIME_AFTER_MIDNIGHT_SUBSEQUENT = datetime.datetime(2023, 3, 3, 0, 10, 0)
 STUB_DATETIME_FUTURE = datetime.datetime(2024, 2, 23, 22, 0, 0)
 DEFAULT_TIMEDELTA = 5
 
@@ -125,6 +127,21 @@ STUB_EXPECTED_PAGINATION_ERROR_STATE_OUTPUT = {
     "latest_event_timestamp": "2023-02-22T21:44:44Z",
     "latest_event_timestamp_latch": None,
     "previous_run_state": "paginating",
+}
+
+STUB_INPUT_CONTINUING_STATE_TO_MIDNIGHT = {
+    "last_request_timestamp": "2023-03-02T23:59:00Z",
+    "previous_completed_query_date": "2023-03-02T23:59:00Z",
+}
+
+STUB_EXPECTED_CONTINUING_STATE_TO_MIDNIGHT = {
+    "last_request_timestamp": "2023-03-03T00:05:00Z",
+    "previous_completed_query_date": "2023-03-02T23:59:59Z",
+}
+
+STUB_EXPECTED_CONTINUING_STATE_FROM_MIDNIGHT = {
+    "last_request_timestamp": "2023-03-03T00:10:00Z",
+    "previous_completed_query_date": "2023-03-03T00:10:00Z",
 }
 
 CUSTOM_LOOKBACK = {"year": 2023, "month": 1, "day": 23, "hour": 22, "minute": 0, "second": 0}
@@ -508,3 +525,53 @@ class TestGetUserActivityEvents(unittest.TestCase):
             page_size=expected_api_call_params.get("page_size"),
             next_page_token=expected_api_call_params.get("next_page_token"),
         )
+
+    @parameterized.expand(
+        [
+            [
+                "after_midnight",
+                STUB_INPUT_CONTINUING_STATE_TO_MIDNIGHT,
+                STUB_EXPECTED_CONTINUING_STATE_TO_MIDNIGHT,
+                STUB_DATETIME_AFTER_MIDNIGHT,
+                {"start_date": "2023-03-02T23:59:00Z", "end_date": "2023-03-02T23:59:59Z"},
+            ],
+            [
+                "subsequent_after_midnight",
+                STUB_EXPECTED_CONTINUING_STATE_TO_MIDNIGHT,
+                STUB_EXPECTED_CONTINUING_STATE_FROM_MIDNIGHT,
+                STUB_DATETIME_AFTER_MIDNIGHT_SUBSEQUENT,
+                {"start_date": "2023-03-03T00:00:00Z", "end_date": "2023-03-03T00:10:00Z"},
+            ],
+        ]
+    )
+    @patch(GET_DATETIME_LAST_X_HOURS_PATH, side_effect=[STUB_DATETIME_LAST_24_HOURS])
+    @patch(
+        GET_DATETIME_NOW_PATH,
+        side_effect=[STUB_DATETIME_AFTER_MIDNIGHT + datetime.timedelta(minutes=DEFAULT_TIMEDELTA)],
+    )
+    @patch(GET_USER_ACTIVITY_EVENTS_PATH, return_value=([], ""))
+    def test_midnight_run(
+        self,
+        name: str,
+        input_state: dict,
+        expected_state: dict,
+        now_time: str,
+        expected_call_args: dict,
+        mock_call: MagicMock,
+        mock_datetime_now: MagicMock,
+        mock_datetime_last_x: MagicMock,
+    ) -> None:
+        mock_datetime_now.side_effect = [now_time]
+        output, state, has_more_pages, status_code, error = self.task.run(state=input_state)
+        call_args = mock_call.call_args.kwargs
+        self.assertEqual(call_args.get("start_date"), expected_call_args.get("start_date"))
+        self.assertEqual(call_args.get("end_date"), expected_call_args.get("end_date"))
+        expected_output, expected_has_more_pages, expected_status_code, expected_error = [], False, 200, None
+        self.assertListEqual(output, expected_output)
+        self.assertDictEqual(state, expected_state)
+        self.assertFalse(output, expected_has_more_pages)
+        self.assertEqual(status_code, expected_status_code)
+        self.assertEqual(error, expected_error)
+
+        validate(output, MonitorSignInOutActivityOutput.schema)
+        validate(state, MonitorSignInOutActivityState.schema)
