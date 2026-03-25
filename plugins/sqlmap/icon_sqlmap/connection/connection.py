@@ -1,9 +1,13 @@
+from time import sleep
+
 import insightconnect_plugin_runtime
-from .schema import ConnectionSchema
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 
 # Custom imports below
-import subprocess  # noqa: B404
-import logging
+from icon_sqlmap.util.api import SqlmapApi
+from icon_sqlmap.util.constants import CONNECTION_TEST_SLEEP_TIME, DEFAULT_API_HOST, DEFAULT_API_PORT
+
+from .schema import ConnectionSchema, Input
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -11,26 +15,25 @@ class Connection(insightconnect_plugin_runtime.Connection):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.api_host = None
         self.api_port = None
-        self.f = None
+        self.sqlmap_client = None
 
     def connect(self, params={}):
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        self.api_host = params.get(Input.API_HOST, "").strip() or DEFAULT_API_HOST
+        self.api_port = params.get(Input.API_PORT, "").strip() or DEFAULT_API_PORT
+        # END INPUT BINDING - DO NOT REMOVE
+
         self.logger.info("Connect: Connecting...")
-        self.api_host = params.get("api_host")
-        self.api_port = params.get("api_port")
-        with open("sqlmap_logs.txt", "w", encoding="UTF-8") as self.f:
-            if not self.api_host and not self.api_port:
-                subprocess.Popen(  # noqa: B607
-                    ["python /python/src/sqlmap-master/sqlmapapi.py -s"],
-                    stdout=self.f,
-                    stderr=self.f,
-                    shell=True,  # noqa: B602
-                )
-                self.api_host = "127.0.0.1"
-                self.api_port = "8775"
-            if self.api_host and self.api_port:
-                subprocess.Popen(  # noqa: B607
-                    [f"python /python/src/sqlmap-master/sqlmapapi.py -s --host={self.api_host} --port={self.api_port}"],
-                    stdout=self.f,
-                    stderr=self.f,
-                    shell=True,  # noqa: B602
-                )
+        self.sqlmap_client = SqlmapApi(self.api_host, self.api_port, self.logger)
+
+    def test(self) -> dict[str, bool]:
+        try:
+            sleep(CONNECTION_TEST_SLEEP_TIME)
+            self.sqlmap_client.check_server_availability()
+            return {"success": True}
+        except PluginException as error:
+            raise ConnectionTestException(
+                cause="There was a problem with running the SQLMap server.",
+                assistance="Please verify the SQLMap REST API server is running and accessible.",
+                data=error,
+            )
