@@ -1,11 +1,13 @@
+from time import sleep
+
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 
-from .schema import ConnectionSchema, Input
-
 # Custom imports below
 from icon_sqlmap.util.api import SqlmapApi
-from icon_sqlmap.util.constants import DEFAULT_API_HOST, DEFAULT_API_PORT
+from icon_sqlmap.util.constants import CONNECTION_TEST_SLEEP_TIME, DEFAULT_API_HOST, DEFAULT_API_PORT
+
+from .schema import ConnectionSchema, Input
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -26,6 +28,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def test(self) -> dict[str, bool]:
         try:
+            sleep(CONNECTION_TEST_SLEEP_TIME)
             self.sqlmap_client.check_server_availability()
             return {"success": True}
         except PluginException as error:
