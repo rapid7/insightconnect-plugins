@@ -5,6 +5,7 @@ name: jira_service_management
 title: Jira Service Management
 description: Notify the right people, reduce response time, and avoid alert fatigue with Jira Service Management
 version: 1.0.0
+connection_version: 1
 supported_versions: ["2026-02-25"]
 vendor: rapid7
 support: rapid7
