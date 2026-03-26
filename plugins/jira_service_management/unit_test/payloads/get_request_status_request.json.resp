@@ -1,0 +1,10 @@
+{
+    "success": true,
+    "action": "Create",
+    "processedAt": "2026-03-11T14:05:00.924Z",
+    "integrationId": "",
+    "isSuccess": true,
+    "status": "Create alert",
+    "alertId": "f111ea16-9999-4ec2-8067-acde6abc040-1111123123",
+    "alias": "f111ea16-9999-4ec2-8067-acde6abc040-1111123123"
+}
