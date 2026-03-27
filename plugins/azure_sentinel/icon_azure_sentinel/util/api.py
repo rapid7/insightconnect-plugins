@@ -1,6 +1,6 @@
 import json
 import sys
-import time as time_module
+import time
 from typing import Any, Dict, List, Tuple, Optional, Union
 import urllib.parse
 
@@ -27,16 +27,13 @@ class AzureClient:
         self.logger = logger
 
     def _refresh_token(self):
-        """Fetch a new OAuth token from Azure AD."""
         self.logger.info("Updating auth token...")
-
         data = {
             "grant_type": "client_credentials",
             "client_id": self.client_id,
             "resource": self.SCOPE,
             "client_secret": self.client_secret,
         }
-
         formatted_endpoint = self.O365_AUTH_ENDPOINT.format(self.tenant_id)
         self.logger.info("Getting token from: " + formatted_endpoint)
 
@@ -56,14 +53,15 @@ class AzureClient:
         self._auth_token = token_response.get("access_token")
         # Azure tokens include expires_in (seconds). Default to 3600 if missing.
         expires_in = int(token_response.get("expires_in", 3600))
-        self._token_expiry = time_module.time() + expires_in
+        self._token_expiry = time.time() + expires_in
         self.logger.info(f"Authentication Token: ****************{self._auth_token[-5:]}")
         self.logger.info(f"Token expires in {expires_in} seconds")
 
     @property
     def auth_token(self):
         """Return a valid token, refreshing if expired or about to expire."""
-        if not self._auth_token or time_module.time() >= (self._token_expiry - TOKEN_EXPIRY_BUFFER):
+        if not self._auth_token or time.time() >= (self._token_expiry - TOKEN_EXPIRY_BUFFER):
+            self.logger.info("Auth token expired or about to expire, refreshing...")
             self._refresh_token()
         return self._auth_token
 
@@ -76,10 +74,9 @@ class AzureSentinelClient(AzureClient):
 
     @property
     def headers(self):
-        """Generate headers dynamically so the token is always fresh."""
         return {"Content-Type": "application/json", "Authorization": f"Bearer {self.auth_token}"}
 
-    def _call_api(
+    def _call_api(  # noqa: MC0001
         self, method: str, url: str, headers: dict, payload: Optional[dict] = None, params: Optional[dict] = None
     ) -> Tuple[int, Dict]:
         """_call_api. Send a http call to a given endpoint.

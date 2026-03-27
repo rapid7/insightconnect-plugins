@@ -35,7 +35,7 @@ class TestCreateWatchlist(TestCase):
             },
         }
 
-    def test_create_watchlist_ok(self):
+    def test_create_watchlist_ok(self) -> None:
         self.action.run(self.params)
         self.action.connection.api_client.create_update_watchlist.assert_called_once_with(
             "integrationLab", "sentinel", "testAlias", "abcde", properties=self.params.get("properties")

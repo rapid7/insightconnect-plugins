@@ -1,14 +1,19 @@
-import datetime
 import time
 
 import insightconnect_plugin_runtime
 
 # Custom imports below
+import json
+from datetime import datetime, timedelta, timezone
 
 from icon_azure_sentinel.util.tools import generate_query_params
 from .schema import Component, GetNewIncidentsInput, GetNewIncidentsOutput, Input, Output
+from pathlib import Path
 
-STATE_LAST_INCIDENT_TIME = "last_incident_time"
+CACHE_FILE = "get_new_incidents_cache.json"
+LAST_EXECUTION_KEY = "last_execution"
+SLIDING_WINDOW_DELAY = 5  # seconds
+FIRST_RUN_TIME_LOOKBACK = 12  # hours
 
 
 class GetNewIncidents(insightconnect_plugin_runtime.Trigger):
@@ -19,61 +24,75 @@ class GetNewIncidents(insightconnect_plugin_runtime.Trigger):
             input=GetNewIncidentsInput(),
             output=GetNewIncidentsOutput(),
         )
-
-    def _get_last_incident_time(self, interval: int) -> datetime.datetime:
-        """Retrieve the last processed incident time from persistent state, or fall back to now - interval."""
-        saved_time = self.state.get(STATE_LAST_INCIDENT_TIME)
-        if saved_time:
-            try:
-                return datetime.datetime.fromisoformat(saved_time)
-            except (ValueError, TypeError):
-                self.logger.warning(f"Invalid saved state for {STATE_LAST_INCIDENT_TIME}, falling back to default")
-        return datetime.datetime.now() - datetime.timedelta(seconds=interval)
-
-    def _update_last_incident_time(self, incidents: list):
-        """Update persistent state with the latest incident's createdTimeUtc."""
-        latest_time = None
-        for incident in incidents:
-            props = incident.get("properties", {})
-            created_str = props.get("createdTimeUtc")
-            if created_str:
-                try:
-                    created = datetime.datetime.fromisoformat(created_str.replace("Z", ""))
-                    if latest_time is None or created > latest_time:
-                        latest_time = created
-                except (ValueError, TypeError):
-                    continue
-        if latest_time:
-            self.state[STATE_LAST_INCIDENT_TIME] = latest_time.isoformat()
-            self.logger.info(f"Updated checkpoint to {latest_time.isoformat()}")
+        self.cache_path = Path("/tmp") / CACHE_FILE  # nosec
 
     def run(self, params={}):
-        subscription_id = params.get(Input.SUBSCRIPTIONID)
-        resource_group_name = params.get(Input.RESOURCEGROUPNAME)
-        workspace_name = params.get(Input.WORKSPACENAME)
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        subscription_id = params.get(Input.SUBSCRIPTIONID, "")
+        resource_group_name = params.get(Input.RESOURCEGROUPNAME, "")
+        workspace_name = params.get(Input.WORKSPACENAME, "")
         interval = abs(params.get(Input.INTERVAL))
-
-        status = params.get(Input.STATUS)
+        status = params.get(Input.STATUS, "")
         last_update_time = (
-            datetime.datetime.fromisoformat(params.get(Input.LAST_UPDATE_TIME)).replace(tzinfo=None)
-            if params.get(Input.LAST_UPDATE_TIME)
+            datetime.fromisoformat(params.get(Input.LAST_UPDATE_TIME, "")).replace(tzinfo=None)
+            if params.get(Input.LAST_UPDATE_TIME, "")
             else None
         )
+        assigned_to = params.get(Input.ASSIGNED_TO, "")
+        # END INPUT BINDING - DO NOT REMOVE
 
-        assigned_to = params.get(Input.ASSIGNED_TO)
-
+        # Initial lookback time for requests
+        last_execution_time = self._calculate_next_execution()
         while True:
-            checkpoint_time = self._get_last_incident_time(interval)
-            self.logger.info(f"Polling incidents from checkpoint: {checkpoint_time.isoformat()}")
+            # Generate filter parameters for request
+            self.logger.info(f"Checking for new incidents from {last_execution_time.isoformat()}")
+            filters = generate_query_params(status, last_execution_time, last_update_time, assigned_to)
 
-            filters = generate_query_params(status, checkpoint_time, last_update_time, assigned_to)
+            # Fetch new incidents
             incidents, _ = self.connection.api_client.list_incident(
                 resource_group_name, workspace_name, filters, subscription_id
             )
+
+            # If incidents were found, return
             if incidents:
+                self.logger.info(f"Found {len(incidents)} new incident(s). Sending to orchestrator.")
                 self.send({Output.INCIDENTS: incidents})
-                self._update_last_incident_time(incidents)
             else:
-                self.logger.info("No new incidents have been found!")
-            self.logger.info(f"Sleeping for {interval} seconds...\n")
+                self.logger.info("No new incidents have been found.")
+
+            # Persist cursor after successful poll and advance for next cycle
+            self._save_last_execution(last_execution_time)
+            self.logger.info(f"Saved last execution time to cache: {last_execution_time.isoformat()}")
+            last_execution_time = self._calculate_next_execution()
+
+            self.logger.info(f"Sleeping for {interval} seconds...")
             time.sleep(interval)
+
+    def _load_last_execution(self):
+        try:
+            if self.cache_path.exists():
+                with self.cache_path.open("r") as file_:
+                    if last_execution := json.loads(file_.read()).get(LAST_EXECUTION_KEY):
+                        return datetime.fromisoformat(last_execution)
+        except Exception as error:
+            self.logger.error(f"Failed to load cache: {error}")
+
+    def _save_last_execution(self, execution_time: datetime) -> None:
+        try:
+            with self.cache_path.open("w") as file_:
+                json.dump({LAST_EXECUTION_KEY: execution_time.isoformat()}, file_)
+        except Exception as error:
+            self.logger.error(f"Failed to save cache: {error}")
+
+    def _calculate_next_execution(self) -> datetime:
+        # Calculate now time with sliding window delay
+        now_delayed = datetime.now(timezone.utc).replace(tzinfo=None) - timedelta(seconds=SLIDING_WINDOW_DELAY)
+
+        # If there's a cached last execution, resume from there
+        if last_execution := self._load_last_execution():
+            self.logger.info(f"Resuming from cached last execution: {last_execution.isoformat()}")
+            return last_execution
+
+        # In case there's no last execution recorded, set requests time to lookback time
+        self.logger.info(f"First run detected. Initialising trigger with lookback for {FIRST_RUN_TIME_LOOKBACK} hours.")
+        return now_delayed - timedelta(hours=FIRST_RUN_TIME_LOOKBACK)

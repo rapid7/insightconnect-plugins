@@ -26,7 +26,7 @@ class TestGetComment(TestCase):
             "incidentCommentId": "comment_id",
         }
 
-    def test_get_incident_ok(self):
+    def test_get_incident_ok(self) -> None:
         self.action.run(self.params)
         self.action.connection.api_client.get_comment.assert_called_once_with(
             "14071867", "comment_id", "integrationLab", "sentinel", "abcde"

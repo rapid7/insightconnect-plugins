@@ -1,6 +1,6 @@
 import datetime
 
-from typing import Any, Dict, List, Union, Callable, Tuple
+from typing import Any, Dict, List, Union, Callable
 
 
 def return_non_empty(input_dict: Dict[str, Any]) -> Dict[Any, Any]:

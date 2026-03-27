@@ -26,7 +26,7 @@ class TestGetWatchlist(TestCase):
             "watchlistAlias": "testAlias",
         }
 
-    def test_get_incident_ok(self):
+    def test_get_incident_ok(self) -> None:
         self.action.run(self.params)
         self.action.connection.api_client.get_watchlist.assert_called_once_with(
             "integrationLab", "sentinel", "testAlias", "abcde"

@@ -29,7 +29,7 @@ class TestCreateUpdateWatchlistItems(TestCase):
         }
         self.action.connection.api_client = mock.create_autospec(AzureSentinelClient)
 
-    def test_create_update_watchlist_item_ok(self):
+    def test_create_update_watchlist_item_ok(self) -> None:
         self.action.run(self.params)
         self.action.connection.api_client.create_update_watchlist_items.assert_called_once_with(
             "integrationLab",

@@ -1,54 +1,54 @@
 import os
 import sys
+from typing import Callable, Tuple
+from unittest import TestCase, mock
+from unittest.mock import Mock, PropertyMock
 
 from icon_azure_sentinel.util.endpoints import Endpoint
 
 sys.path.append(os.path.abspath("../"))
-from unittest import TestCase, mock
+import logging
 
+from icon_azure_sentinel.util.api import AzureSentinelClient
 from insightconnect_plugin_runtime.exceptions import PluginException
 from parameterized import parameterized
 
-import logging
-from icon_azure_sentinel.util.api import AzureClient, AzureSentinelClient
-from unit_test.mock import mock_request_200, mock_request_408, mock_request_500
+from mock_util import mock_request_200, mock_request_408, mock_request_500
 
 FAKE_AZURE_URL = "https://fake.azure.com"
+FAKE_HEADERS = {"content-type": "application/json; charset=utf-8"}
 
 logger = logging.getLogger(__name__)
 
 
+@mock.patch.object(AzureSentinelClient, "headers", new_callable=mock.PropertyMock, return_value=FAKE_HEADERS)
 @mock.patch.object(AzureSentinelClient, "__init__", lambda x, y, z, w, v: None)
 class TestClient(TestCase):
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test__call_api_ok(self, mock_get):
+    def test__call_api_ok(self, mock_get: Mock, _mock_headers: PropertyMock) -> None:
         self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
-        self.client.headers = {"content-type": "application/json; charset=utf-8"}
         url = "https://fake.azure.com"
         payload = {"fake": "data"}
-        response = self.client._call_api("POST", url, headers=self.client.headers, payload=payload)
+        response = self.client._call_api("POST", url, headers=FAKE_HEADERS, payload=payload)
         self.assertEqual(response[1]["fake_data"], "1234")
 
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test__list_all_ok(self, side_effect=mock_request_200):
+    def test__list_all_ok(self, _mock_get: Mock, _mock_headers: PropertyMock) -> None:
         self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
-        self.client.headers = {"content-type": "application/json; charset=utf-8"}
         url = "https://fake.azure.list.all.com"
         response = self.client._list_all("GET", url, filters={"top": 2})
         self.assertEqual(response, [1, 2])
 
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test__list_all_ok_no_top(self, side_effect=mock_request_200):
+    def test__list_all_ok_no_top(self, _mock_get: Mock, _mock_headers: PropertyMock) -> None:
         self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
-        self.client.headers = {"content-type": "application/json; charset=utf-8"}
         url = "https://fake.azure.list.all.com"
         response = self.client._list_all("GET", url)
         self.assertEqual(response, [1, 2, 3, 4, 5, 6])
 
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test__list_all_ok_link(self, side_effect=mock_request_200):
+    def test__list_all_ok_link(self, _mock_get: Mock, _mock_headers: PropertyMock) -> None:
         self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
-        self.client.headers = {"content-type": "application/json; charset=utf-8"}
         url = "https://test__list_all_ok_link.com"
         response = self.client._list_all("GET", url)
         self.assertEqual(response, [1, 2, 3, 4, 1, 2, 3, 4, 5, 6])
@@ -60,21 +60,22 @@ class TestClient(TestCase):
             (mock_request_200, PluginException.Preset.INVALID_JSON, FAKE_AZURE_URL + "/invalid"),
         ],
     )
-    def test__call_api_raises(self, mock_request, exception, url):
+    def test__call_api_raises(
+        self, _mock_headers: PropertyMock, mock_request: Callable, exception: Exception, url: str
+    ) -> None:
         payload = {"fake": "payload"}
         with mock.patch.object(AzureSentinelClient, "__init__", lambda x, y, z, w, v: None):
             with self.assertRaises(PluginException) as ctx:
                 with mock.patch("requests.request", mock_request):
                     self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
-                    self.client.headers = {"content-type": "application/json; charset=utf-8"}
-                    self.client._call_api("POST", url, headers=self.client.headers, payload=payload)
+                    self.client._call_api("POST", url, headers=FAKE_HEADERS, payload=payload)
                     self.assertEqual(
                         ctx.exception.cause,
                         exception.cause,
                     )
 
     @mock.patch(__name__ + ".AzureSentinelClient._call_api")
-    def test_create_incident(self, mock_get):
+    def test_create_incident(self, mock_get: Mock, _mock_headers: PropertyMock) -> None:
         payload = {
             "properties": {
                 "lastActivityTimeUtc": "2019-01-01T13:05:30Z",
@@ -95,14 +96,13 @@ class TestClient(TestCase):
         api_version = "2021-04-01"
         mock_get.return_value = (200, {})
         self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
-        self.client.headers = {"content-type": "application/json; charset=utf-8"}
         self.client.create_incident(incident_id, group, workspace, subscription_id, **payload)
         result_url = Endpoint.CREATEINCIDENT.format(subscription_id, group, workspace, incident_id, api_version)
 
-        mock_get.assert_called_once_with("PUT", result_url, self.client.headers, payload=payload)
+        mock_get.assert_called_once_with("PUT", result_url, FAKE_HEADERS, payload=payload)
 
     @mock.patch(__name__ + ".AzureSentinelClient._call_api")
-    def test_get_incident(self, mock_get):
+    def test_get_incident(self, mock_get: Mock, _mock_headers: PropertyMock) -> None:
         incident_id = "incident1"
         group = "group1"
         workspace = "workspace1"
@@ -110,7 +110,6 @@ class TestClient(TestCase):
         mock_get.return_value = (200, {})
         api_version = "2021-04-01"
         self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
-        self.client.headers = {"content-type": "application/json; charset=utf-8"}
         self.client.get_incident(incident_id, group, workspace, subscription_id)
         result_url = Endpoint.GETINCIDENT.format(
             subscription_id,
@@ -119,10 +118,10 @@ class TestClient(TestCase):
             incident_id,
             api_version,
         )
-        mock_get.assert_called_once_with("GET", result_url, self.client.headers)
+        mock_get.assert_called_once_with("GET", result_url, FAKE_HEADERS)
 
     @mock.patch(__name__ + ".AzureSentinelClient._call_api")
-    def test_delete_incident(self, mock_get):
+    def test_delete_incident(self, mock_get: Mock, _mock_headers: PropertyMock) -> None:
         incident_id = "incident1"
         group = "group1"
         workspace = "workspace1"
@@ -130,7 +129,6 @@ class TestClient(TestCase):
         api_version = "2021-04-01"
         mock_get.return_value = (204, {})
         self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
-        self.client.headers = {"content-type": "application/json; charset=utf-8"}
         self.client.delete_incident(incident_id, group, workspace, subscription_id)
         result_url = Endpoint.DELETEINCIDENT.format(
             subscription_id,
@@ -140,10 +138,10 @@ class TestClient(TestCase):
             api_version,
         )
 
-        mock_get.assert_called_once_with("DELETE", result_url, self.client.headers)
+        mock_get.assert_called_once_with("DELETE", result_url, FAKE_HEADERS)
 
     @mock.patch(__name__ + ".AzureSentinelClient._call_api")
-    def test_list_incident(self, mock_get):
+    def test_list_incident(self, mock_get: Mock, _mock_headers: PropertyMock) -> None:
         mock_get.side_effect = [(200, {})]
         group = "group1"
         workspace = "workspace1"
@@ -151,18 +149,17 @@ class TestClient(TestCase):
         api_version = "2021-04-01"
         self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
         self.client.logger = logger
-        self.client.headers = {"content-type": "application/json; charset=utf-8"}
         self.client.list_incident(group, workspace, {}, subscription_id)
         result_url = Endpoint.LISTINCIDENTS.format(subscription_id, group, workspace, api_version)
 
         mock_get.assert_has_calls(
             [
-                mock.call("GET", result_url, self.client.headers, params={}),
+                mock.call("GET", result_url, FAKE_HEADERS, params={}),
             ]
         )
 
     @mock.patch(__name__ + ".AzureSentinelClient._call_api")
-    def test_list_bookmarks(self, mock_get):
+    def test_list_bookmarks(self, mock_get: Mock, _mock_headers: PropertyMock) -> None:
         group = "group1"
         incident_id = "incident1"
         workspace = "workspace1"
@@ -170,7 +167,6 @@ class TestClient(TestCase):
         mock_get.return_value = (204, {})
         api_version = "2021-04-01"
         self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
-        self.client.headers = {"content-type": "application/json; charset=utf-8"}
         self.client.logger = logger
         self.client.list_bookmarks(incident_id, group, workspace, subscription_id)
         result_url = Endpoint.LISTBOOKMARKS.format(
@@ -182,12 +178,12 @@ class TestClient(TestCase):
         )
         mock_get.assert_has_calls(
             [
-                mock.call("POST", result_url, self.client.headers, params={}),
+                mock.call("POST", result_url, FAKE_HEADERS, params={}),
             ]
         )
 
     @mock.patch(__name__ + ".AzureSentinelClient._call_api")
-    def test_list_alerts(self, mock_get):
+    def test_list_alerts(self, mock_get: Mock, _mock_headers: PropertyMock) -> None:
         group = "group1"
         incident_id = "incident1"
         workspace = "workspace1"
@@ -196,7 +192,6 @@ class TestClient(TestCase):
         api_version = "2021-04-01"
         self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
         self.client.logger = logger
-        self.client.headers = {"content-type": "application/json; charset=utf-8"}
         self.client.list_alerts(incident_id, group, workspace, subscription_id)
         result_url = Endpoint.LISTALERTS.format(
             subscription_id,
@@ -208,12 +203,12 @@ class TestClient(TestCase):
 
         mock_get.assert_has_calls(
             [
-                mock.call("POST", result_url, self.client.headers, params={}),
+                mock.call("POST", result_url, FAKE_HEADERS, params={}),
             ]
         )
 
     @mock.patch(__name__ + ".AzureSentinelClient._call_api")
-    def test_list_entities(self, mock_get):
+    def test_list_entities(self, mock_get: Mock, _mock_headers: PropertyMock) -> None:
         mock_get.return_value = {}
         group = "group1"
         incident_id = "incident1"
@@ -222,7 +217,6 @@ class TestClient(TestCase):
         mock_get.return_value = (204, {})
         api_version = "2021-04-01"
         self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
-        self.client.headers = {"content-type": "application/json; charset=utf-8"}
         self.client.logger = logger
         self.client.list_entities(incident_id, group, workspace, subscription_id)
         result_url = Endpoint.LISTENTITIES.format(
@@ -235,12 +229,12 @@ class TestClient(TestCase):
 
         mock_get.assert_has_calls(
             [
-                mock.call("POST", result_url, self.client.headers, params={}),
+                mock.call("POST", result_url, FAKE_HEADERS, params={}),
             ]
         )
 
     @mock.patch(__name__ + ".AzureSentinelClient._call_api")
-    def test_get_comment(self, mock_get):
+    def test_get_comment(self, mock_get: Mock, _mock_headers: PropertyMock) -> None:
         incident_comment_id = "comment1"
         incident_id = "incident1"
         group = "group1"
@@ -249,7 +243,6 @@ class TestClient(TestCase):
         mock_get.return_value = (200, {})
         api_version = "2021-04-01"
         self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
-        self.client.headers = {"content-type": "application/json; charset=utf-8"}
         self.client.get_comment(incident_id, incident_comment_id, group, workspace, subscription_id)
         result_url = Endpoint.GETCOMMENT.format(
             subscription_id,
@@ -259,10 +252,10 @@ class TestClient(TestCase):
             incident_comment_id,
             api_version,
         )
-        mock_get.assert_called_once_with("GET", result_url, self.client.headers)
+        mock_get.assert_called_once_with("GET", result_url, FAKE_HEADERS)
 
     @mock.patch(__name__ + ".AzureSentinelClient._call_api")
-    def test_list_entities(self, mock_get):
+    def test_list_comments(self, mock_get: Mock, _mock_headers: PropertyMock) -> None:
         mock_get.return_value = {}
         group = "group1"
         incident_id = "incident1"
@@ -271,7 +264,6 @@ class TestClient(TestCase):
         mock_get.return_value = (204, {})
         api_version = "2021-04-01"
         self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
-        self.client.headers = {"content-type": "application/json; charset=utf-8"}
         self.client.logger = logger
         self.client.list_comments(incident_id, group, workspace, subscription_id)
         result_url = Endpoint.LISTCOMMENTS.format(
@@ -284,12 +276,12 @@ class TestClient(TestCase):
 
         mock_get.assert_has_calls(
             [
-                mock.call("GET", result_url, self.client.headers, params={}),
+                mock.call("GET", result_url, FAKE_HEADERS, params={}),
             ]
         )
 
     @mock.patch(__name__ + ".AzureSentinelClient._call_api")
-    def test_create_update_incident(self, mock_get):
+    def test_create_update_incident(self, mock_get: Mock, _mock_headers: PropertyMock) -> None:
         payload = {
             "properties": {
                 "message": "Gallia est omnis divisa in partes tres, quarum unam incolunt Belgae, aliam Aquitani, tertiam qui ipsorum lingua Celtae, nostra Galli appellantur."
@@ -303,7 +295,6 @@ class TestClient(TestCase):
         api_version = "2021-04-01"
         mock_get.return_value = (200, {})
         self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
-        self.client.headers = {"content-type": "application/json; charset=utf-8"}
         self.client.create_update_comment(
             incident_id, incident_comment_id, group, workspace, subscription_id, **payload
         )
@@ -311,10 +302,10 @@ class TestClient(TestCase):
             subscription_id, group, workspace, incident_id, incident_comment_id, api_version
         )
 
-        mock_get.assert_called_once_with("PUT", result_url, headers=self.client.headers, payload=payload)
+        mock_get.assert_called_once_with("PUT", result_url, headers=FAKE_HEADERS, payload=payload)
 
     @mock.patch(__name__ + ".AzureSentinelClient._call_api")
-    def test_delete_comment(self, mock_get):
+    def test_delete_comment(self, mock_get: Mock, _mock_headers: PropertyMock) -> None:
         incident_comment_id = "comment1"
         incident_id = "incident1"
         group = "group1"
@@ -323,7 +314,6 @@ class TestClient(TestCase):
         mock_get.return_value = (200, {})
         api_version = "2021-04-01"
         self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
-        self.client.headers = {"content-type": "application/json; charset=utf-8"}
         self.client.delete_comment(incident_id, incident_comment_id, group, workspace, subscription_id)
         result_url = Endpoint.DELETECOMMENT.format(
             subscription_id,
@@ -333,10 +323,10 @@ class TestClient(TestCase):
             incident_comment_id,
             api_version,
         )
-        mock_get.assert_called_once_with("DELETE", result_url, self.client.headers)
+        mock_get.assert_called_once_with("DELETE", result_url, FAKE_HEADERS)
 
     @mock.patch(__name__ + ".AzureSentinelClient._call_api")
-    def test_create_indicator(self, mock_get):
+    def test_create_indicator(self, mock_get: Mock, _mock_headers: PropertyMock) -> None:
         payload = {
             "properties": {
                 "confidence": 100,
@@ -351,15 +341,14 @@ class TestClient(TestCase):
         api_version, resource_group_name, subscription_id, workspace_name = self._get_indicator_url_data()
         mock_get.return_value = (200, {})
         self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
-        self.client.headers = {"content-type": "application/json; charset=utf-8"}
         self.client.create_indicator(resource_group_name, workspace_name, subscription_id, **payload)
         result_url = Endpoint.CREATEINDICATOR.format(subscription_id, resource_group_name, workspace_name, api_version)
 
-        mock_get.assert_called_once_with("POST", result_url, headers=self.client.headers, payload=payload)
+        mock_get.assert_called_once_with("POST", result_url, headers=FAKE_HEADERS, payload=payload)
 
     @mock.patch(__name__ + ".AzureSentinelClient.get_indicator")
     @mock.patch(__name__ + ".AzureSentinelClient._call_api")
-    def test_update_indicator(self, mock_get, mock_get_indicator):
+    def test_update_indicator(self, mock_get: Mock, mock_get_indicator: Mock, _mock_headers: PropertyMock) -> None:
         payload = {
             "etag": "example-tag",
             "kind": "example-kind",
@@ -392,58 +381,54 @@ class TestClient(TestCase):
         mock_get.return_value = (200, {})
 
         self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
-        self.client.headers = {"content-type": "application/json; charset=utf-8"}
         self.client.update_indicator(resource_group_name, workspace_name, subscription_id, indicator_name, **payload)
         result_url = Endpoint.UPDATEINDICATOR.format(
             subscription_id, resource_group_name, workspace_name, indicator_name, api_version
         )
 
-        mock_get.assert_called_once_with("PUT", result_url, headers=self.client.headers, payload=payload)
+        mock_get.assert_called_once_with("PUT", result_url, headers=FAKE_HEADERS, payload=payload)
 
     @mock.patch(__name__ + ".AzureSentinelClient._call_api")
-    def test_get_indicator(self, mock_get):
+    def test_get_indicator(self, mock_get: Mock, _mock_headers: PropertyMock) -> None:
         api_version, resource_group_name, subscription_id, workspace_name = self._get_indicator_url_data()
         indicator_name = "4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014"
         mock_get.return_value = (200, {})
         self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
-        self.client.headers = {"content-type": "application/json; charset=utf-8"}
         self.client.get_indicator(resource_group_name, workspace_name, subscription_id, indicator_name)
         result_url = Endpoint.GETINDICATOR.format(
             subscription_id, resource_group_name, workspace_name, indicator_name, api_version
         )
 
-        mock_get.assert_called_once_with("GET", result_url, headers=self.client.headers)
+        mock_get.assert_called_once_with("GET", result_url, headers=FAKE_HEADERS)
 
     @mock.patch(__name__ + ".AzureSentinelClient._call_api")
-    def test_delete_indicator(self, mock_get):
+    def test_delete_indicator(self, mock_get: Mock, _mock_headers: PropertyMock) -> None:
         api_version, resource_group_name, subscription_id, workspace_name = self._get_indicator_url_data()
         indicator_name = "4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014"
         mock_get.return_value = (200, {})
         self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
-        self.client.headers = {"content-type": "application/json; charset=utf-8"}
         self.client.delete_indicator(resource_group_name, workspace_name, subscription_id, indicator_name)
         result_url = Endpoint.DELETEINDICATOR.format(
             subscription_id, resource_group_name, workspace_name, indicator_name, api_version
         )
 
-        mock_get.assert_called_once_with("DELETE", result_url, headers=self.client.headers)
+        mock_get.assert_called_once_with("DELETE", result_url, headers=FAKE_HEADERS)
 
     @mock.patch(__name__ + ".AzureSentinelClient._call_api")
-    def test_query_indicator(self, mock_get):
+    def test_query_indicator(self, mock_get: Mock, _mock_headers: PropertyMock) -> None:
         payload = {
             "keywords": "test",
         }
         api_version, resource_group_name, subscription_id, workspace_name = self._get_indicator_url_data()
         mock_get.return_value = (200, {})
         self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
-        self.client.headers = {"content-type": "application/json; charset=utf-8"}
         self.client.query_indicator(resource_group_name, workspace_name, subscription_id, **payload)
         result_url = Endpoint.QUERYINDICATORS.format(subscription_id, resource_group_name, workspace_name, api_version)
 
-        mock_get.assert_called_once_with("POST", result_url, headers=self.client.headers, payload=payload)
+        mock_get.assert_called_once_with("POST", result_url, headers=FAKE_HEADERS, payload=payload)
 
     @mock.patch(__name__ + ".AzureSentinelClient._call_api")
-    def test_append_tags(self, mock_get):
+    def test_append_tags(self, mock_get: Mock, _mock_headers: PropertyMock) -> None:
         payload = {
             "threatIntelligenceTags": "test tag",
         }
@@ -451,16 +436,15 @@ class TestClient(TestCase):
         indicator_name = "4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014"
         mock_get.return_value = (200, {})
         self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
-        self.client.headers = {"content-type": "application/json; charset=utf-8"}
         self.client.append_tags(resource_group_name, workspace_name, subscription_id, indicator_name, **payload)
         result_url = Endpoint.APPENDTAGS.format(
             subscription_id, resource_group_name, workspace_name, indicator_name, api_version
         )
 
-        mock_get.assert_called_once_with("POST", result_url, headers=self.client.headers, payload=payload)
+        mock_get.assert_called_once_with("POST", result_url, headers=FAKE_HEADERS, payload=payload)
 
     @mock.patch(__name__ + ".AzureSentinelClient._call_api")
-    def test_replace_tags(self, mock_get):
+    def test_replace_tags(self, mock_get: Mock, _mock_headers: PropertyMock) -> None:
         payload = {
             "properties": {
                 "threatIntelligenceTags": "new test tag",
@@ -470,16 +454,15 @@ class TestClient(TestCase):
         indicator_name = "4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014"
         mock_get.return_value = (200, {})
         self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
-        self.client.headers = {"content-type": "application/json; charset=utf-8"}
         self.client.replace_tags(resource_group_name, workspace_name, subscription_id, indicator_name, **payload)
         result_url = Endpoint.REPLACETAGS.format(
             subscription_id, resource_group_name, workspace_name, indicator_name, api_version
         )
 
-        mock_get.assert_called_once_with("POST", result_url, headers=self.client.headers, payload=payload)
+        mock_get.assert_called_once_with("POST", result_url, headers=FAKE_HEADERS, payload=payload)
 
     @mock.patch(__name__ + ".AzureSentinelClient._call_api")
-    def test_create_update_watchlist(self, mock_get):
+    def test_create_update_watchlist(self, mock_get: Mock, _mock_headers: PropertyMock) -> None:
         payload = {"properties": {"name": "Od nendzy do piniendzy"}}
         group = "group1"
         workspace = "workspace1"
@@ -488,13 +471,12 @@ class TestClient(TestCase):
         alias = "testalias"
         mock_get.return_value = (200, {})
         self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
-        self.client.headers = {"content-type": "application/json; charset=utf-8"}
         self.client.create_update_watchlist(group, workspace, alias, subscription_id, api_version, **payload)
         result_url = Endpoint.CREATEUPDATEWATCHLIST.format(subscription_id, group, workspace, alias, api_version)
-        mock_get.assert_called_once_with("PUT", result_url, self.client.headers, payload=payload)
+        mock_get.assert_called_once_with("PUT", result_url, FAKE_HEADERS, payload=payload)
 
     @mock.patch(__name__ + ".AzureSentinelClient._call_api")
-    def test_delete_watchlist(self, mock_get):
+    def test_delete_watchlist(self, mock_get: Mock, _mock_headers: PropertyMock) -> None:
         group = "group1"
         workspace = "workspace1"
         subscription_id = "123-123-123"
@@ -506,7 +488,6 @@ class TestClient(TestCase):
         mock_get.return_value = (200, {})
         api_version = "2021-04-01"
         self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
-        self.client.headers = {"content-type": "application/json; charset=utf-8"}
         self.client.delete_watchlist(group, workspace, alias, subscription_id, api_version)
         result_url = Endpoint.DELETEWATCHLIST.format(
             subscription_id,
@@ -515,10 +496,10 @@ class TestClient(TestCase):
             alias,
             api_version,
         )
-        mock_get.assert_called_once_with("DELETE", result_url, self.client.headers)
+        mock_get.assert_called_once_with("DELETE", result_url, FAKE_HEADERS)
 
     @mock.patch(__name__ + ".AzureSentinelClient._call_api")
-    def test_get_watchlist(self, mock_get):
+    def test_get_watchlist(self, mock_get: Mock, _mock_headers: PropertyMock) -> None:
         group = "group1"
         workspace = "workspace1"
         subscription_id = "123-123-123"
@@ -530,7 +511,6 @@ class TestClient(TestCase):
         mock_get.return_value = (200, {})
         api_version = "2021-04-01"
         self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
-        self.client.headers = {"content-type": "application/json; charset=utf-8"}
         self.client.get_watchlist(group, workspace, alias, subscription_id, api_version)
         result_url = Endpoint.GETWATCHLIST.format(
             subscription_id,
@@ -539,10 +519,10 @@ class TestClient(TestCase):
             alias,
             api_version,
         )
-        mock_get.assert_called_once_with("GET", result_url, self.client.headers)
+        mock_get.assert_called_once_with("GET", result_url, FAKE_HEADERS)
 
     @mock.patch(__name__ + ".AzureSentinelClient._call_api")
-    def test_list_watchlist(self, mock_get):
+    def test_list_watchlist(self, mock_get: Mock, _mock_headers: PropertyMock) -> None:
         group = "group1"
         workspace = "workspace1"
         subscription_id = "123-123-123"
@@ -553,7 +533,6 @@ class TestClient(TestCase):
         mock_get.return_value = (200, {})
         api_version = "2021-04-01"
         self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
-        self.client.headers = {"content-type": "application/json; charset=utf-8"}
         self.client.list_watchlists(group, workspace, subscription_id, api_version)
         result_url = Endpoint.LISTWATCHLISTS.format(
             subscription_id,
@@ -561,9 +540,9 @@ class TestClient(TestCase):
             workspace,
             api_version,
         )
-        mock_get.assert_called_once_with("GET", result_url, self.client.headers, params={})
+        mock_get.assert_called_once_with("GET", result_url, FAKE_HEADERS, params={})
 
-    def _get_indicator_url_data(self):
+    def _get_indicator_url_data(self) -> Tuple[str, str, str, str]:
         resource_group_name = "group1"
         subscription_id = "123-123-123"
         workspace_name = "workspace1"

@@ -26,7 +26,7 @@ class TestDeleteComment(TestCase):
             "incidentCommentId": "comment_id",
         }
 
-    def test_delete_incident_ok(self):
+    def test_delete_incident_ok(self) -> None:
         self.action.run(self.params)
         self.action.connection.api_client.delete_comment.assert_called_once_with(
             "14071867", "comment_id", "integrationLab", "sentinel", "abcde"

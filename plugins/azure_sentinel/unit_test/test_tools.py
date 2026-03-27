@@ -1,9 +1,11 @@
+import datetime
 import sys
 from pathlib import Path
+from typing import Any, Dict
 from unittest import TestCase
-import datetime
+
+from icon_azure_sentinel.util.tools import generate_query_params, return_non_empty
 from parameterized import parameterized
-from icon_azure_sentinel.util.tools import return_non_empty, generate_query_params
 
 sys.path.append(str(Path("../").absolute()))
 
@@ -12,15 +14,15 @@ STUB_TEST_MAIL = "user@example.com"
 
 
 class TestTools(TestCase):
-    def test_return_non_empty_ok(self):
+    def test_return_non_empty_ok(self) -> None:
         input_dict = {"1": {"2": None, "3": {}}, "4": {"5": "6"}}
         self.assertEqual(return_non_empty(input_dict), {"4": {"5": "6"}})
 
-    def test_return_non_empty_with_empty_list_ok(self):
+    def test_return_non_empty_with_empty_list_ok(self) -> None:
         input_dict = {"1": {"2": None, "3": {}}, "4": {"5": "6"}, "7": []}
         self.assertEqual(return_non_empty(input_dict), {"4": {"5": "6"}})
 
-    def test_return_non_empty_with_list_ok(self):
+    def test_return_non_empty_with_list_ok(self) -> None:
         input_dict = {"1": {"2": None, "3": {}}, "4": {"5": "6"}, "7": ["8", "9"]}
         self.assertEqual(return_non_empty(input_dict), {"4": {"5": "6"}, "7": ["8", "9"]})
 
@@ -30,7 +32,7 @@ class TestTools(TestCase):
             ({"test": [{"test5": ""}, {"test2": [], "test3": "Test", "test4": {}}]}, {"test": [{"test3": "Test"}]}),
         ]
     )
-    def test_return_non_empty(self, input_dict, output_dict):
+    def test_return_non_empty(self, input_dict: Dict[str, Any], output_dict: Dict[str, Any]) -> None:
         self.assertEqual(return_non_empty(input_dict), output_dict)
 
     @parameterized.expand(
@@ -92,5 +94,7 @@ class TestTools(TestCase):
             ),
         ]
     )
-    def test_generate_query_params(self, status, created_time, last_updated_time, assigned_to, output):
+    def test_generate_query_params(
+        self, status: Any, created_time: Any, last_updated_time: Any, assigned_to: Any, output: Any
+    ) -> None:
         self.assertEqual(generate_query_params(status, created_time, last_updated_time, assigned_to), output)

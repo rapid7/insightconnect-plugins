@@ -12,9 +12,13 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.logger = None
 
     def connect(self, params):
-        tenant_id = params.get(Input.TENANT_ID)
-        client_id = params.get(Input.CLIENT_ID)
-        client_secret = params.get(Input.CLIENT_SECRET).get("secretKey")
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        tenant_id = params.get(Input.TENANT_ID, "").strip()
+        client_id = params.get(Input.CLIENT_ID, "").strip()
+        client_secret = params.get(Input.CLIENT_SECRET, {}).get("secretKey", "").strip()
+        # END INPUT BINDING - DO NOT REMOVE
+
+        # Create API client instance
         self.api_client = AzureSentinelClient(self.logger, tenant_id, client_id, client_secret)
 
     def test(self):
@@ -30,3 +34,4 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 "Please check your connection information, and contact "
                 "your Azure administrator if you need more assistance.",
             )
+        return {"success": True}

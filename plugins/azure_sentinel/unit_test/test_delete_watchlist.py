@@ -27,7 +27,7 @@ class TestDeleteWatchlist(TestCase):
             "watchlistAlias": "testAlias",
         }
 
-    def test_delete_watchlist_ok(self):
+    def test_delete_watchlist_ok(self) -> None:
         self.action.run(self.params)
         self.action.connection.api_client.delete_watchlist.assert_called_once_with(
             "integrationLab", "sentinel", "testAlias", "abcde"

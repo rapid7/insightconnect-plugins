@@ -1,10 +1,10 @@
 import logging
-import sys
 import os
+import sys
 from unittest import TestCase, mock
 
-from icon_azure_sentinel.connection import Connection
 from icon_azure_sentinel.actions.replace_tags import ReplaceTags
+from icon_azure_sentinel.connection import Connection
 from icon_azure_sentinel.util.api import AzureSentinelClient
 
 sys.path.append(os.path.abspath("../"))
@@ -28,7 +28,7 @@ class TestReplaceTags(TestCase):
         }
         self.action.connection.api_client = mock.create_autospec(AzureSentinelClient)
 
-    def test_replace_tags(self):
+    def test_replace_tags(self) -> None:
         self.action.run(self.params)
         self.action.connection.api_client.replace_tags.assert_called_once_with(
             "integrationLab",
