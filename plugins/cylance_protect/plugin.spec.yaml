@@ -5,13 +5,13 @@ name: cylance_protect
 title: BlackBerry CylancePROTECT
 description: The [BlackBerry CylancePROTECT](https://www.cylance.com/en-us/platform/products/cylance-protect.html) plugin allows you to automate response operations for CylancePROTECT and CylanceOPTICS
 supported_versions: [v2]
-version: 1.5.5
+version: 1.5.6
 connection_version: 1
 vendor: rapid7
 support: rapid7
 sdk:
   type: slim
-  version: 6.3.7
+  version: 6.4.3
   user: nobody
 status: []
 tags: [cylance, protect, edr, blacklist]
@@ -37,6 +37,7 @@ requirements:
 references:
   - "[BlackBerry CylancePROTECT API](https://docs.blackberry.com/en/unified-endpoint-security/blackberry-ues/Cylance-API-user-guide/Application_Management)"
 version_history:
+  - "1.5.6 - Update dependencies | SDK bump to latest version (6.4.3)"
   - "1.5.5 - Resolved Snyk Vulnerability | SDK bump to latest version (6.3.7)"
   - "1.5.4 - Resolved Snyk Vulnerability | SDK bump to latest version (6.3.6)"
   - "1.5.3 - Bumping requirements.txt | SDK bump to 6.1.4"
