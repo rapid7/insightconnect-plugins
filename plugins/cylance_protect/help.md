@@ -603,6 +603,7 @@ Example output:
 
 # Version History
 
+* 1.5.6 - Update dependencies | SDK bump to latest version (6.4.3)
 * 1.5.5 - Resolved Snyk Vulnerability | SDK bump to latest version (6.3.7)
 * 1.5.4 - Resolved Snyk Vulnerability | SDK bump to latest version (6.3.6)
 * 1.5.3 - Bumping requirements.txt | SDK bump to 6.1.4
