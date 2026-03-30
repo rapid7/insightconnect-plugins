@@ -4,7 +4,7 @@ products: [insightconnect]
 name: math
 title: Math
 description: This plugin allows basic arithmetic functions to be performed
-version: 1.2.7
+version: 1.2.8
 connection_version: 1
 vendor: rapid7
 support: community
