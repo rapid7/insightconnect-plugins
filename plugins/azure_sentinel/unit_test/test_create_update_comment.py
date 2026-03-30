@@ -27,7 +27,7 @@ class TestCreateUpdateIncident(TestCase):
         }
         self.action.connection.api_client = mock.create_autospec(AzureSentinelClient)
 
-    def test_create_update_incident_ok(self):
+    def test_create_update_incident_ok(self) -> None:
         self.action.run(self.params)
         self.action.connection.api_client.create_update_comment.assert_called_once_with(
             "14071867",

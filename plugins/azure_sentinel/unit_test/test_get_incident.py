@@ -26,7 +26,7 @@ class TestGetIncident(TestCase):
             "workspaceName": "sentinel",
         }
 
-    def test_get_incident_ok(self):
+    def test_get_incident_ok(self) -> None:
         self.action.run(self.params)
         self.action.connection.api_client.get_incident.assert_called_once_with(
             "14071867", "integrationLab", "sentinel", "abcde"

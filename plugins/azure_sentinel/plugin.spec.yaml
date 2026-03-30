@@ -5,10 +5,11 @@ name: azure_sentinel
 title: Azure Sentinel Plugin
 vendor: rapid7
 support: community
-supported_versions: [2021-04-01]
+supported_versions: [2026-03-27]
 status: []
 description: Microsoft Azure Sentinel is a cloud-native SIEM that provides intelligent security analytics for your entire enterprise, powered by AI
-version: 2.1.0
+version: 2.2.0
+connection_version: 2
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/azure_sentinel
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -22,6 +23,51 @@ hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [azure, incidents, microsoft]
   features: [create incident, delete incident, get incident, list incidents, list alerts, list bookmarks, list entities, get comment, list comments, delete comment, create or update comment, create indicator, get indicator, update indicator, delete indicator, query indicator, append tags, replace tags, create or update watchlist, get watchlist, delete watchlist, list watchlist, create or update watchlist items, get watchlist item, delete watchlist item, list watchlist items]
+sdk:
+  type: slim
+  version: 6.4.3
+  user: nobody
+key_features:
+  - Creating and updating incidents
+  - Deleting incidents
+  - Retrieving incident details
+  - Listing incidents for a given workspace
+  - Listing bookmarks for a given incident
+  - Listing alerts for a given incident
+  - Creating and updating incident comments
+  - Deleting incident comments
+  - Listing incident comments
+  - Creating indicators
+  - Retrieving indicators
+  - Updating indicators
+  - Deleting indicators
+  - Querying indicators
+  - Appending tags to indicators
+  - Replacing tags on indicators
+  - Creating and updating watchlists
+  - Retrieving watchlists
+  - Deleting watchlists
+  - Listing watchlists for a given workspace
+  - Creating and updating watchlist items
+  - Retrieving watchlist items
+  - Deleting watchlist items
+  - Listing watchlist items
+requirements:
+  - Set of Azure credentials with necessary permissions to monitor and modify Sentinel incidents
+troubleshooting:
+  - "This plugin does not contain any troubleshooting information"
+links:
+  - "[Microsoft Sentinel](https://docs.microsoft.com/en-us/rest/api/securityinsights/)"
+references:
+  - "[Microsoft Sentinel](https://docs.microsoft.com/en-us/rest/api/securityinsights/)"
+  - "[Incidents](https://docs.microsoft.com/en-us/azure/sentinel/investigate-cases)"
+  - "[Incidents REST API](https://docs.microsoft.com/pl-pl/rest/api/securityinsights/stable/incidents)"
+version_history:
+  - "2.2.0 - Triggers `Get New Incidents`: Fixed issue related to missing incidents | Added optional First Run Lookback Time input | Updated SDK to the latest version (6.4.3)"
+  - "2.1.0 - Triggers: Get New Incidents | Add top argument to the List Incidents action"
+  - "2.0.1 - Fixed Create Update Comment input validation bug"
+  - "2.0.0 - Changed CreatedByType field for enum types | New actions: Create or Update Comment, Delete Comment, List Comments, Get Comment, Create Indicator, Get Indicator, Update Indicator, Delete Indicator, Query Indicator, Append Tags, Replace Tags, Create or Update Watchlist, Delete Watchlist, List Watchlists, Get Watchlist, Create Or Update Watchlist Items, Get Watchlist Item, Delete Watchlist Item, List Watchlist Items"
+  - "1.0.0 - Initial plugin (Actions: Create or Update Incident, Delete Incident, List Incidents, Get Incident, List Alerts, List Bookmarks, List Entities)"
 types:
   # Common types
   CreatedByType:
@@ -1167,6 +1213,7 @@ actions:
         description: Requested comment
         type: IncidentComment
         required: true
+        example: '{"id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/incidents/73e01a99-5cd7-4139-a149-9f2736ff2ab5/comments/4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014", "name": "4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014", "type": "Microsoft.SecurityInsights/incidents/comments", "etag": "190057d0-0000-0d00-0000-5c6f5adb0000", "properties": {"message": "Some message", "createdTimeUtc": "2019-01-01T13:15:30Z", "lastModifiedTimeUtc": "2019-01-03T11:10:30Z", "author": {"objectId": "2046feea-040d-4a46-9e2b-91c2941bfa70", "email": "user@example.com", "userPrincipalName": "user@example.com", "name": "john doe"}}}'
   list_comments:
     title: List Comments
     description: List all the comment of the requested incident
@@ -1200,19 +1247,20 @@ actions:
         required: false
         description: Filters the results, based on a Boolean condition
         type: string
-        example: properties/author
+        example: properties/author/email eq 'user@example.com'
       orderBy:
         title: Order By
         required: false
         description: Sorts the results
         type: string
-        example: properties/createdTimeUtc
+        example: properties/createdTimeUtc desc
     output:
       comments:
         title: Comments
         description: List of comment objects
         type: "[]IncidentComment"
         required: true
+        example: '[{"id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/incidents/73e01a99-5cd7-4139-a149-9f2736ff2ab5/comments/4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014", "name": "4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014", "type": "Microsoft.SecurityInsights/incidents/comments", "etag": "190057d0-0000-0d00-0000-5c6f5adb0000", "properties": {"message": "Some message"}}]'
   create_update_comment:
     title: Create Update Comment
     description: Creates or updates a comment for a given incident
@@ -1265,6 +1313,7 @@ actions:
         description: Newly created incident comment
         type: IncidentComment
         required: true
+        example: '{"id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/incidents/73e01a99-5cd7-4139-a149-9f2736ff2ab5/comments/4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014", "name": "4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014", "type": "Microsoft.SecurityInsights/incidents/comments", "etag": "190057d0-0000-0d00-0000-5c6f5adb0000", "properties": {"message": "Some message", "createdTimeUtc": "2019-01-01T13:15:30Z", "lastModifiedTimeUtc": "2019-01-03T11:10:30Z", "author": {"objectId": "2046feea-040d-4a46-9e2b-91c2941bfa70", "email": "user@example.com", "userPrincipalName": "user@example.com", "name": "john doe"}}}'
   delete_comment:
     title: Delete Comment
     description: Deletes a comment for a given incident
@@ -1346,26 +1395,31 @@ actions:
         description: Full incident ID
         type: string
         required: false
+        example: /subscriptions/aaaef455-a780-44ca-9e51-aaafffeeea3a/resourceGroups/integrationLab/providers/Microsoft.OperationalInsights/workspaces/sentinel/providers/Microsoft.SecurityInsights/Incidents/14071867
       name:
         title: Name
         description: Incident name - short ID
         type: string
         required: false
+        example: "14071867"
       type:
         title: Type
         description: Type
         type: string
         required: false
+        example: Microsoft.SecurityInsights/Incidents
       etag:
         title: Etag
         type: string
         description: Etag
         required: false
+        example: '"8f04f1b4-0000-0100-0000-62275ef30000"'
       properties:
         title: Properties 
         description: Incident properties object
         type: IncidentProperties
         required: false
+        example: '{"title": "Incident At Work", "severity": "High", "status": "Closed"}'
   list_incidents:
     title: List Incidents 
     description: List all the incidents matching specified criteria 
@@ -1399,13 +1453,14 @@ actions:
         description: Return top N elements from the collection 
         required: false
         type: integer
-        example: 1867
+        example: 10
     output:
       incidents:
         title: Incidents
         description: List of incidents objects 
         type: "[]Incident"
         required: false
+        example: '[{"id": "/subscriptions/eeee-aaaa-aaa-eeee-eeeeee/resourceGroups/integrationLab/providers/Microsoft.OperationalInsights/workspaces/sentinel/providers/Microsoft.SecurityInsights/Incidents/1407186457", "name": "1407186457", "etag": "\"8701a4d2-0000-0100-0000-621666620000\"", "type": "Microsoft.SecurityInsights/Incidents", "properties": {"title": "Test incident", "severity": "Low", "status": "Closed"}}]'
   get_incident:
     title: Get Incident
     description: This action is used to get details for one specific incident
@@ -1440,26 +1495,31 @@ actions:
         description: Full incident ID
         required: false
         type: string
+        example: /subscriptions/aaaef455-a780-44ca-9e51-aaafffeeea3a/resourceGroups/integrationLab/providers/Microsoft.OperationalInsights/workspaces/sentinel/providers/Microsoft.SecurityInsights/Incidents/14071867
       name:
         title: Incident ID
         description: Incident name - short ID
         required: false
         type: string
+        example: "14071867"
       type:
         title: Type
         description: Type of the incident
         required: false
         type: string
+        example: Microsoft.SecurityInsights/Incidents
       jtag:
         title: Etag
         description: Etag of the incident
         required: false
         type: string
+        example: '"8f04f1b4-0000-0100-0000-62275ef30000"'
       properties:
         title: Properties
         description: Incident properties object
         required: false
         type: IncidentProperties
+        example: '{"title": "Incident At Work", "severity": "High", "status": "Closed"}'
   delete_incident:
     title: Delete Incident
     description: Delete an incident from the system
@@ -1494,6 +1554,7 @@ actions:
         description: Deletion status, 200 - ok, 204 - no content
         type: integer
         required: false
+        example: 204
   list_alerts:
     title: List Alerts
     description: This action is used to get all alerts for a given incident
@@ -1528,6 +1589,7 @@ actions:
         description: All the alerts assigned to the given incident
         type: "[]Alert"
         required: false
+        example: '[{"properties": {"systemAlertId": "baa8a239-6fde-4ab7-a093-d09f7b75c58c", "alertDisplayName": "myAlert", "severity": "Low", "status": "New"}}]'
   list_bookmarks:
     title: List Bookmarks
     description: This action is used to get all bookmarks for a given incident
@@ -1562,6 +1624,7 @@ actions:
         description: All the bookmarks assigned to the given incident
         type: "[]HuntingBookmark"
         required: false
+        example: '[{"id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/bookmarks/afbd324f-6c48-459c-8710-8d1e1cd03812", "name": "afbd324f-6c48-459c-8710-8d1e1cd03812", "kind": "Bookmark", "properties": {"displayName": "SecurityEvent - 868f40f4698d"}}]'
   list_entities:
     title: List Entities
     description: List all entities from a given incident
@@ -1596,6 +1659,7 @@ actions:
         description: All the entities assigned to the given incident
         type: "[]Entity"
         required: false
+        example: '[{"id": "/subscriptions/eeee-aaaa-aaa-eeee-eeeeee/resourceGroups/integrationLab/providers/Microsoft.OperationalInsights/workspaces/sentinel/providers/Microsoft.SecurityInsights/Incidents/1407186457", "name": "1407186457", "kind": "Account", "properties": {"friendlyName": "administrator", "accountName": "administrator"}}]'
   create_indicator:
     title: Create Indicator
     description: Create a new threat intelligence indicator
@@ -1645,31 +1709,37 @@ actions:
         description: Identifier created indicator
         type: string
         required: true
+        example: /subscriptions/bd794837-4d29-4647-9105-6339bfdb4e6a/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/ThreatIntelligence/180105c7-a28d-b1a2-4a78-234f6ec80fd6
       etag:
         title: Etag
         description: Etag of the azure resource
         type: string
         required: true
+        example: 0000322c-0000-0800-0000-5e976c960000
       kind:
         title: Kind
         description: The kind of the entity
         type: string
         required: true
+        example: indicator
       name:
         title: Name
         description: Name of the entity
         type: string
         required: true
+        example: 180105c7-a28d-b1a2-4a78-234f6ec80fd6
       type:
         title: Type
         description: Type of the entity
         type: string
         required: true
+        example: Microsoft.SecurityInsights/ThreatIntelligence
       properties:
         title: Properties
         description: Object containing all the necessary properties to conclude a query
         type: ThreatIntelligenceIndicatorProperties
         required: true
+        example: '{"displayName": "new schema", "source": "Azure Sentinel", "patternType": "url"}'
   get_indicator:
     title: Get Indicator
     description: Get existing threat intelligence indicator
@@ -1704,31 +1774,37 @@ actions:
         description: Identifier created indicator
         type: string
         required: true
+        example: /subscriptions/bd794837-4d29-4647-9105-6339bfdb4e6a/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/ThreatIntelligence/e16ef847-962e-d7b6-9c8b-a33e4bd30e47
       etag:
         title: Etag
         description: Etag of the azure resource
         type: string
         required: true
+        example: '"00002a2c-0000-0800-0000-5e97683b0000"'
       kind:
         title: Kind
         description: The kind of the entity
         type: string
         required: true
+        example: indicator
       name:
         title: Name
         description: Name of the entity
         type: string
         required: true
+        example: e16ef847-962e-d7b6-9c8b-a33e4bd30e47
       type:
         title: Type
         description: Type of the entity
         type: string
         required: true
+        example: Microsoft.SecurityInsights/ThreatIntelligence
       properties:
         title: Properties
         description: Object containing all the necessary properties to conclude a query
         type: ThreatIntelligenceIndicatorProperties
         required: true
+        example: '{"displayName": "updated indicator", "source": "Azure Sentinel", "patternType": "url"}'
   update_indicator:
     title: Update Indicator
     description: Update existing threat intelligence indicator
@@ -1778,31 +1854,37 @@ actions:
         description: Identifier created indicator
         type: string
         required: true
+        example: /subscriptions/bd794837-4d29-4647-9105-6339bfdb4e6a/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/ThreatIntelligence/180105c7-a28d-b1a2-4a78-234f6ec80fd6
       etag:
         title: Etag
         description: Etag of the azure resource
         type: string
         required: true
+        example: 0000322c-0000-0800-0000-5e976c960000
       kind:
         title: Kind
         description: The kind of the entity
         type: string
         required: true
+        example: indicator
       name:
         title: Name
         description: Name of the entity
         type: string
         required: true
+        example: 180105c7-a28d-b1a2-4a78-234f6ec80fd6
       type:
         title: Type
         description: Type of the entity
         type: string
         required: true
+        example: Microsoft.SecurityInsights/ThreatIntelligence
       properties:
         title: Properties
         description: Object containing all the necessary properties to conclude a query
         type: ThreatIntelligenceIndicatorProperties
         required: true
+        example: '{"displayName": "new schema", "source": "Azure Sentinel", "patternType": "url"}'
   delete_indicator:
     title: Delete Indicator
     description: Delete existing threat intelligence indicator
@@ -1837,6 +1919,7 @@ actions:
         description: Response message
         type: string
         required: true
+        example: "Indicator name: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014 deleted"
   query_indicator:
     title: Query Threat Indicator
     description: Query threat intelligence indicators as per filtering criteria
@@ -1864,84 +1947,80 @@ actions:
         description: Names of threat intelligence indicators
         type: "[]string"
         required: false
-        example: "['4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014']"
+        example: '["4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014"]'
       includeDisabled:
         title: Include Disabled Indicators
         description: Parameter to include/exclude disabled indicators
         type: boolean
         required: false
-        example: true
+        example: false
       keywords:
         title: Keywords
         description: Keywords for searching threat intelligence indicators
         type: string
         required: false
-        example: new schema
+        example: malware
       maxConfidence:
         title: Maximum Confidence
         description: Filter by maximum confidence
         type: integer
         required: false
-        example: 75
+        example: 100
       minConfidence:
         title: Minimum Confidence
         description: Filter by minimum confidence
         type: integer
         required: false
-        example: 0
+        example: 50
       maxValidUntil:
         title: End Time
         description: End time for ValidUntil filter
         type: date
         required: false
-        example: "2021-04-05T17:44:00.114052Z"
+        example: "2025-12-31T23:59:59Z"
       minValidUntil:
         title: Start Time
         description: Start time for ValidUntil filter
         type: date
         required: false
-        example: "2021-04-06T17:44:00.114052Z"
+        example: "2024-01-01T00:00:00Z"
       pageSize:
         title: Page Size
         description: The number of items on the page
         type: integer
         required: false
-        example: 100
+        example: 50
       patternTypes:
         title: Pattern Types
         description: Filter by pattern types
         type: "[]string"
         required: false
-        example: url
+        example: '["url", "ipv4-addr"]'
       sortBy:
         title: Sort By
         description: Columns to sort by and sorting order
         type: "[]ThreatIntelligenceSortingCriteria"
         required: false
-        example: "[
-          {
-            'itemKey': 'created',
-            'sortOrder': 'descending'
-          }
-        ]"
+        example: '[{"itemKey": "created", "sortOrder": "descending"}]'
       sources:
         title: Sources
         description: Sources of threat intelligence indicators
         type: "[]string"
         required: false
-        example: "['Azure Sentinel']"
+        example: '["Azure Sentinel"]'
       threatTypes:
         title: Threat Types
         description: Threat Types of Threat Inteligence Indicators
         type: "[]string"
         required: false
-        example: "['compromised']"
+        example: '["malicious-activity"]'
     output:
       indicators:
         title: Threat Intelligence Indicators
         description: Filtred threat intelligence indicators
         type: "[]ThreatIntelligenceIndicators"
         required: true
+        example: '[{"id": "/subscriptions/bd794837-4d29-4647-9105-6339bfdb4e6a/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/ThreatIntelligence/27d963e6-e6e4-e0f9-e9d7-c53985b3bbe8", "name": "27d963e6-e6e4-e0f9-e9d7-c53985b3bbe8", "etag": "00002f2c-0000-0800-0000-5e976a8e0000", "type": "Microsoft.SecurityInsights/ThreatIntelligence", "kind": "indicator"}]'
   append_tags:
     title: Append Tags
     description: Append tags to a threat intelligence indicator
@@ -1982,31 +2061,37 @@ actions:
         description: Identifier created indicator
         type: string
         required: true
+        example: /subscriptions/bd794837-4d29-4647-9105-6339bfdb4e6a/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/ThreatIntelligence/e16ef847-962e-d7b6-9c8b-a33e4bd30e47
       etag:
         title: Etag
         description: Etag of the azure resource
         type: string
         required: true
+        example: '"00002a2c-0000-0800-0000-5e97683b0000"'
       kind:
         title: Kind
         description: The kind of the entity
         type: string
         required: true
+        example: indicator
       name:
         title: Name
         description: Name of the entity
         type: string
         required: true
+        example: e16ef847-962e-d7b6-9c8b-a33e4bd30e47
       type:
         title: Type
         description: Type of the entity
         type: string
         required: true
+        example: Microsoft.SecurityInsights/ThreatIntelligence
       properties:
         title: Properties
         description: Object containing all the necessary properties to conclude a query
         type: ThreatIntelligenceIndicatorProperties
         required: true
+        example: '{"displayName": "updated indicator", "source": "Azure Sentinel", "patternType": "url"}'
   replace_tags:
     title: Replace Tags
     description: Replace tags to a threat intelligence indicator
@@ -2047,31 +2132,37 @@ actions:
         description: Identifier created indicator
         type: string
         required: true
+        example: /subscriptions/bd794837-4d29-4647-9105-6339bfdb4e6a/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/ThreatIntelligence/e16ef847-962e-d7b6-9c8b-a33e4bd30e47
       etag:
         title: Etag
         description: Etag of the azure resource
         type: string
         required: true
+        example: '"00002a2c-0000-0800-0000-5e97683b0000"'
       kind:
         title: Kind
         description: The kind of the entity
         type: string
         required: true
+        example: indicator
       name:
         title: Name
         description: Name of the entity
         type: string
         required: true
+        example: e16ef847-962e-d7b6-9c8b-a33e4bd30e47
       type:
         title: Type
         description: Type of the entity
         type: string
         required: true
+        example: Microsoft.SecurityInsights/ThreatIntelligence
       properties:
         title: Properties
         description: Object containing all the necessary properties to conclude a query
         type: ThreatIntelligenceIndicatorProperties
         required: true
+        example: '{"displayName": "updated indicator", "source": "Azure Sentinel", "patternType": "url"}'
   create_update_watchlist:
     title: Create or Update Watchlist
     description: Create or update a Watchlist and its Watchlist Items
@@ -2112,6 +2203,7 @@ actions:
         description: Output watchlist
         type: Watchlist
         required: false
+        example: '{"id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/Watchlists/highValueAsset", "name": "highValueAsset", "type": "Microsoft.SecurityInsights/Watchlists", "properties": {"displayName": "High Value Assets Watchlist"}}'
   get_watchlist:
     title: Get Watchlist
     description: Get requested watchlist
@@ -2146,6 +2238,7 @@ actions:
         description: Requested watchlist
         type: Watchlist
         required: False
+        example: '{"id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/Watchlists/highValueAsset", "name": "highValueAsset", "type": "Microsoft.SecurityInsights/Watchlists", "properties": {"displayName": "High Value Assets Watchlist", "provider": "Microsoft", "source": "Local file", "itemsSearchKey": "header1"}}'
   delete_watchlist:
     title: Delete Watchlist
     description: Delete requested watchlist
@@ -2180,6 +2273,7 @@ actions:
         description: Deletion status, 200 - ok, 204 - no content
         type: integer
         required: false
+        example: 200
   list_watchlists:
     title: List Watchlists
     description: List watchlists
@@ -2208,6 +2302,7 @@ actions:
         description: List of watchlists
         type: "[]Watchlist"
         required: False
+        example: '[{"id": "/subscriptions/0cea5e5b-a751-42ca-9151-dg965e27aefe/resourceGroups/integrationLab/providers/Microsoft.OperationalInsights/workspaces/sentinel/providers/Microsoft.SecurityInsights/Watchlists/myWatchlist", "name": "myWatchlist", "type": "Microsoft.SecurityInsights/Watchlists", "properties": {"displayName": "High Value Assets Watchlist", "provider": "Microsoft", "source": "Local File", "itemsSearchKey": "header1"}}]'
   create_update_watchlist_items:
     title: Create or Update Watchlist Item
     description: Creates a new watchlist item or updates an existing watchlist item
@@ -2262,26 +2357,31 @@ actions:
         description: Etag of the azure resource
         type: string
         required: true
+        example: 0300bf09-0000-0000-0000-5c37296e0000
       id:
         title: ID
         description: Identifier created indicator
         type: string
         required: true
+        example: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/Watchlists/highValueAsset/WatchlistItems/82ba292c-dc97-4dfc-969d-d4dd9e666842
       name:
         title: Name
         description: Name of the entity
         type: string
         required: true
+        example: 82ba292c-dc97-4dfc-969d-d4dd9e666842
       type:
         title: Type
         description: Type of the entity
         type: string
         required: true
+        example: Microsoft.SecurityInsights/Watchlists/WatchlistItems
       properties:
         title: Properties
         description: Object containing all the necessary properties to conclude a query
         type: WatchlistItemProperties
         required: true
+        example: '{"watchlistItemType": "watchlist-item", "watchlistItemId": "82ba292c-dc97-4dfc-969d-d4dd9e666842"}'
       systemData:
         title: System Data
         description: Azure Resource Manager metadata containing createdBy and modifiedBy information
@@ -2327,26 +2427,31 @@ actions:
         description: Etag of the azure resource
         type: string
         required: true
+        example: '"f2089bfa-0000-0d00-0000-601c58b42021"'
       id:
         title: ID
         description: Identifier created indicator
         type: string
         required: true
+        example: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/Watchlists/highValueAsset/WatchlistItems/fd37d325-7090-47fe-851a-5b5a00c3f576
       name:
         title: Name
         description: Name of the entity
         type: string
         required: true
+        example: fd37d325-7090-47fe-851a-5b5a00c3f576
       type:
         title: Type
         description: Type of the entity
         type: string
         required: true
+        example: Microsoft.SecurityInsights/Watchlists/WatchlistItems
       properties:
         title: Properties
         description: Object containing all the necessary properties to conclude a query
         type: WatchlistItemProperties
         required: true
+        example: '{"watchlistItemType": "watchlist-item", "watchlistItemId": "fd37d325-7090-47fe-851a-5b5a00c3f576"}'
       systemData:
         title: System Data
         description: Azure Resource Manager metadata containing createdBy and modifiedBy information
@@ -2392,6 +2497,7 @@ actions:
         description: Response message
         type: string
         required: true
+        example: "Watchlist item name: fd37d325-7090-47fe-851a-5b5a00c3f576 deleted"
   list_watchlist_items:
     title: List Watchlist Items
     description: List existing Watchlist Items
@@ -2426,6 +2532,7 @@ actions:
         description: Gets all watchlist Items
         type: "[]WatchListItems"
         required: true
+        example: '[{"id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/Watchlists/highValueAsset/WatchlistItems/fd37d325-7090-47fe-851a-5b5a00c3f576", "name": "fd37d325-7090-47fe-851a-5b5a00c3f576", "etag": "\"f2089bfa-0000-0d00-0000-601c58b42021\"", "type": "Microsoft.SecurityInsights/Watchlists/WatchlistItems"}]'
 triggers:
   get_new_incidents:
     title: Get New Incidents
@@ -2472,16 +2579,24 @@ triggers:
         description: Minimum time the incident was updated in ISO format
         type: date
         required: false
-        example: 2022-05-06T12:20:18.364306
+        example: "2024-01-01T00:00:00Z"
       assigned_to:
         title: Assigned To
         description: Filters incidents by who they were assigned to
         type: string
         required: false
-        example: user@example.com
+        example: analyst@company.com
+      first_run_lookback_time:
+        title: First Run Lookback Time
+        description: Number of minutes to look back on the first run to retrieve past incidents
+        type: integer
+        required: false
+        example: 720
+        default: 720
     output:
       incidents:
         title: Incidents
         description: List of all found incidents
         type: "[]Incident"
         required: true
+        example: '[{"id": "/subscriptions/eeee-aaaa-aaa-eeee-eeeeee/resourceGroups/integrationLab/providers/Microsoft.OperationalInsights/workspaces/sentinel/providers/Microsoft.SecurityInsights/Incidents/1407186457", "name": "1407186457", "type": "Microsoft.SecurityInsights/Incidents", "properties": {"title": "Test incident", "severity": "Low", "status": "Active"}}]'

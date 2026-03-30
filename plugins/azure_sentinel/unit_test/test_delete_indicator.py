@@ -1,10 +1,10 @@
 import logging
-import sys
 import os
+import sys
 from unittest import TestCase, mock
 
-from icon_azure_sentinel.connection import Connection
 from icon_azure_sentinel.actions.delete_indicator import DeleteIndicator
+from icon_azure_sentinel.connection import Connection
 from icon_azure_sentinel.util.api import AzureSentinelClient
 
 sys.path.append(os.path.abspath("../"))
@@ -25,7 +25,7 @@ class TestDeleteIndicator(TestCase):
         }
         self.action.connection.api_client = mock.create_autospec(AzureSentinelClient)
 
-    def test_delete_indicator(self):
+    def test_delete_indicator(self) -> None:
         self.action.run(self.params)
         self.action.connection.api_client.delete_indicator.assert_called_once_with(
             "integrationLab",

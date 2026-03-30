@@ -1,15 +1,16 @@
 import os
 import sys
+from unittest import TestCase, mock
+from unittest.mock import Mock
 
 sys.path.append(os.path.abspath("../"))
 import logging
-from unittest import TestCase, mock
-
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
 from icon_azure_sentinel.connection.connection import Connection
 from icon_azure_sentinel.connection.schema import Input
-from unit_test.mock import mock_request_200, mock_request_500
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException
+
+from mock_util import mock_request_200, mock_request_500
 
 
 class TestConnection(TestCase):
@@ -18,7 +19,7 @@ class TestConnection(TestCase):
         self.connection.logger = logging.getLogger("connection logger")
 
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_connection_ok(self, mock_get):
+    def test_connection_ok(self, mock_get: Mock) -> None:
         self.connection.connect(
             {
                 Input.CLIENT_ID: "123456",
@@ -27,11 +28,11 @@ class TestConnection(TestCase):
             }
         )
         response = self.connection.test()
-        expected_response = None
+        expected_response = {"success": True}
         self.assertEqual(response, expected_response)
 
     @mock.patch("requests.request", side_effect=mock_request_500)
-    def test_connection_exception(self, exception):
+    def test_connection_exception(self, exception: Mock) -> None:
         with self.assertRaises(ConnectionTestException) as context:
             self.connection.connect(
                 {
@@ -45,7 +46,7 @@ class TestConnection(TestCase):
                 "Unable to authorize against Microsoft graph API.",
             )
 
-    def test_test_raises(self):
+    def test_test_raises(self) -> None:
         with self.assertRaises(ConnectionTestException) as context:
             self.connection.test()
             self.assertEqual(

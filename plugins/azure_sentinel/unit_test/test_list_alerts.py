@@ -23,7 +23,7 @@ class TestListAlerts(TestCase):
         }
         self.action.connection.api_client = mock.create_autospec(AzureSentinelClient)
 
-    def test_list_alerts_ok(self):
+    def test_list_alerts_ok(self) -> None:
         self.action.run(self.params)
         self.action.connection.api_client.list_alerts.assert_called_once_with(
             "abcde", "integrationLab", "sentinel", "abcde"

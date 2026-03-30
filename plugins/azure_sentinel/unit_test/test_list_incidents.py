@@ -31,7 +31,7 @@ class TestListIncidents(TestCase):
         self.action.connection.api_client = mock.create_autospec(AzureSentinelClient)
         self.action.connection.api_client.list_incident.return_value = ([TEST_INCIDENT], 3)
 
-    def test_list_incidents_ok(self):
+    def test_list_incidents_ok(self) -> None:
         self.action.run(self.params)
         self.action.connection.api_client.list_incident.assert_called_once_with(
             "integrationLab", "sentinel", {"orderBy": None, "top": None}, "abcde"
