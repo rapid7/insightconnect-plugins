@@ -51,6 +51,12 @@ class AzureClient:
             )
         token_response = request.json()
         self._auth_token = token_response.get("access_token")
+        if not self._auth_token:
+            raise PluginException(
+                cause="Authentication response did not contain an access token.",
+                assistance="The Microsoft Graph API returned a successful status but no access_token. "
+                "Please verify your client credentials and application permissions in Azure AD.",
+            )
         # Azure tokens include expires_in (seconds). Default to 3600 if missing.
         expires_in = int(token_response.get("expires_in", 3600))
         self._token_expiry = time.time() + expires_in

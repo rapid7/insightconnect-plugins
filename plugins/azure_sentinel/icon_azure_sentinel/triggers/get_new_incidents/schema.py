@@ -9,6 +9,7 @@ class Component:
 
 class Input:
     ASSIGNED_TO = "assigned_to"
+    FIRST_RUN_LOOKBACK_TIME = "first_run_lookback_time"
     INTERVAL = "interval"
     LAST_UPDATE_TIME = "last_update_time"
     RESOURCEGROUPNAME = "resourceGroupName"
@@ -33,6 +34,13 @@ class GetNewIncidentsInput(insightconnect_plugin_runtime.Input):
       "title": "Assigned To",
       "description": "Filters incidents by who they were assigned to",
       "order": 7
+    },
+    "first_run_lookback_time": {
+      "type": "integer",
+      "title": "First Run Lookback Time",
+      "description": "Number of minutes to look back on the first run to retrieve past incidents",
+      "default": 720,
+      "order": 8
     },
     "interval": {
       "type": "integer",

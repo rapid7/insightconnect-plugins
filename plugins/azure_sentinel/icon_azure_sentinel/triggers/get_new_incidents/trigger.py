@@ -9,11 +9,12 @@ from datetime import datetime, timedelta, timezone
 from icon_azure_sentinel.util.tools import generate_query_params
 from .schema import Component, GetNewIncidentsInput, GetNewIncidentsOutput, Input, Output
 from pathlib import Path
+from tempfile import gettempdir
 
 CACHE_FILE = "get_new_incidents_cache.json"
 LAST_EXECUTION_KEY = "last_execution"
 SLIDING_WINDOW_DELAY = 5  # seconds
-FIRST_RUN_TIME_LOOKBACK = 12  # hours
+FIRST_RUN_LOOKBACK_TIME = 12 * 60  # 12 hours in minutes
 
 
 class GetNewIncidents(insightconnect_plugin_runtime.Trigger):
@@ -24,7 +25,7 @@ class GetNewIncidents(insightconnect_plugin_runtime.Trigger):
             input=GetNewIncidentsInput(),
             output=GetNewIncidentsOutput(),
         )
-        self.cache_path = Path("/tmp") / CACHE_FILE  # nosec
+        self.cache_path = Path(gettempdir()) / CACHE_FILE  # nosec
 
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
@@ -39,10 +40,13 @@ class GetNewIncidents(insightconnect_plugin_runtime.Trigger):
             else None
         )
         assigned_to = params.get(Input.ASSIGNED_TO, "")
+        first_run_lookback_time = (
+            abs(params.get(Input.FIRST_RUN_LOOKBACK_TIME, FIRST_RUN_LOOKBACK_TIME)) or FIRST_RUN_LOOKBACK_TIME
+        )
         # END INPUT BINDING - DO NOT REMOVE
 
         # Initial lookback time for requests
-        last_execution_time = self._calculate_next_execution()
+        last_execution_time = self._calculate_next_execution(first_run_lookback_time=first_run_lookback_time)
         while True:
             # Generate filter parameters for request
             self.logger.info(f"Checking for new incidents from {last_execution_time.isoformat()}")
@@ -61,9 +65,11 @@ class GetNewIncidents(insightconnect_plugin_runtime.Trigger):
                 self.logger.info("No new incidents have been found.")
 
             # Persist cursor after successful poll and advance for next cycle
-            self._save_last_execution(last_execution_time)
+            self._save_last_execution(self._get_now_delayed())
             self.logger.info(f"Saved last execution time to cache: {last_execution_time.isoformat()}")
-            last_execution_time = self._calculate_next_execution()
+            last_execution_time = self._calculate_next_execution(
+                first_run_lookback_time=first_run_lookback_time, fallback=last_execution_time
+            )
 
             self.logger.info(f"Sleeping for {interval} seconds...")
             time.sleep(interval)
@@ -84,15 +90,23 @@ class GetNewIncidents(insightconnect_plugin_runtime.Trigger):
         except Exception as error:
             self.logger.error(f"Failed to save cache: {error}")
 
-    def _calculate_next_execution(self) -> datetime:
-        # Calculate now time with sliding window delay
-        now_delayed = datetime.now(timezone.utc).replace(tzinfo=None) - timedelta(seconds=SLIDING_WINDOW_DELAY)
+    @staticmethod
+    def _get_now_delayed() -> datetime:
+        return datetime.now(timezone.utc).replace(tzinfo=None) - timedelta(seconds=SLIDING_WINDOW_DELAY)
 
+    def _calculate_next_execution(self, first_run_lookback_time: int, fallback: datetime | None = None) -> datetime:
         # If there's a cached last execution, resume from there
         if last_execution := self._load_last_execution():
             self.logger.info(f"Resuming from cached last execution: {last_execution.isoformat()}")
             return last_execution
 
-        # In case there's no last execution recorded, set requests time to lookback time
-        self.logger.info(f"First run detected. Initialising trigger with lookback for {FIRST_RUN_TIME_LOOKBACK} hours.")
-        return now_delayed - timedelta(hours=FIRST_RUN_TIME_LOOKBACK)
+        # If cache is unavailable but we have an in-memory fallback, use it
+        if fallback is not None:
+            self.logger.info(f"Cache unavailable, using in-memory fallback: {fallback.isoformat()}")
+            return fallback
+
+        # No cache and no fallback — first run, apply lookback window
+        self.logger.info(
+            f"First run detected. Initialising trigger with lookback for {first_run_lookback_time} minutes."
+        )
+        return self._get_now_delayed() - timedelta(minutes=first_run_lookback_time)

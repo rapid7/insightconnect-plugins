@@ -8,7 +8,7 @@ support: community
 supported_versions: [2026-03-27]
 status: []
 description: Microsoft Azure Sentinel is a cloud-native SIEM that provides intelligent security analytics for your entire enterprise, powered by AI
-version: 2.1.1
+version: 2.2.0
 connection_version: 2
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/azure_sentinel
@@ -63,7 +63,7 @@ references:
   - "[Incidents](https://docs.microsoft.com/en-us/azure/sentinel/investigate-cases)"
   - "[Incidents REST API](https://docs.microsoft.com/pl-pl/rest/api/securityinsights/stable/incidents)"
 version_history:
-  - "2.1.1 - Triggers `Get New Incidents`: Fixed issue related to missing incidents | Updated SDK to the latest version (6.4.3)"
+  - "2.2.0 - Triggers `Get New Incidents`: Fixed issue related to missing incidents | Added optional First Run Lookback Time input | Updated SDK to the latest version (6.4.3)"
   - "2.1.0 - Triggers: Get New Incidents | Add top argument to the List Incidents action"
   - "2.0.1 - Fixed Create Update Comment input validation bug"
   - "2.0.0 - Changed CreatedByType field for enum types | New actions: Create or Update Comment, Delete Comment, List Comments, Get Comment, Create Indicator, Get Indicator, Update Indicator, Delete Indicator, Query Indicator, Append Tags, Replace Tags, Create or Update Watchlist, Delete Watchlist, List Watchlists, Get Watchlist, Create Or Update Watchlist Items, Get Watchlist Item, Delete Watchlist Item, List Watchlist Items"
@@ -2586,6 +2586,13 @@ triggers:
         type: string
         required: false
         example: analyst@company.com
+      first_run_lookback_time:
+        title: First Run Lookback Time
+        description: Number of minutes to look back on the first run to retrieve past incidents
+        type: integer
+        required: false
+        example: 720
+        default: 720
     output:
       incidents:
         title: Incidents

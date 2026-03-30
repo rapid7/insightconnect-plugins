@@ -1397,6 +1397,7 @@ This trigger is used to retrieves all new incidents with specific status within 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |assigned_to|string|None|False|Filters incidents by who they were assigned to|None|analyst@company.com|None|None|
+|first_run_lookback_time|integer|720|False|Number of minutes to look back on the first run to retrieve past incidents|None|720|None|None|
 |interval|integer|900|True|Integer value that represents interval time in seconds|None|900|None|None|
 |last_update_time|date|None|False|Minimum time the incident was updated in ISO format|None|2024-01-01T00:00:00Z|None|None|
 |resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegroup1|None|None|
@@ -1409,6 +1410,7 @@ Example input:
 ```
 {
   "assigned_to": "analyst@company.com",
+  "first_run_lookback_time": 720,
   "interval": 900,
   "last_update_time": "2024-01-01T00:00:00Z",
   "resourceGroupName": "resourcegroup1",
@@ -1838,7 +1840,7 @@ Example output:
 
 # Version History
 
-* 2.1.1 - Triggers `Get New Incidents`: Fixed issue related to missing incidents | Updated SDK to the latest version (6.4.3)
+* 2.2.0 - Triggers `Get New Incidents`: Fixed issue related to missing incidents | Added optional First Run Lookback Time input | Updated SDK to the latest version (6.4.3)
 * 2.1.0 - Triggers: Get New Incidents | Add top argument to the List Incidents action
 * 2.0.1 - Fixed Create Update Comment input validation bug
 * 2.0.0 - Changed CreatedByType field for enum types | New actions: Create or Update Comment, Delete Comment, List Comments, Get Comment, Create Indicator, Get Indicator, Update Indicator, Delete Indicator, Query Indicator, Append Tags, Replace Tags, Create or Update Watchlist, Delete Watchlist, List Watchlists, Get Watchlist, Create Or Update Watchlist Items, Get Watchlist Item, Delete Watchlist Item, List Watchlist Items
