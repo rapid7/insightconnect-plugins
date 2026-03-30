@@ -16,7 +16,7 @@ jobs:
           python-version: '3.13'
       - name: Install dependencies
         run: |
-          pip install black==24.10.0
+          pip install black==26.3.1
       - name: Lint
         run: |
           CHANGED_FILES=()
