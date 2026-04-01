@@ -2,20 +2,20 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: any_run
-title: "Any.Run"
-description: Analyze suspicious and malicious activities using the cloud-based malware analysis service
-version: 2.0.0
+title: "ANY.RUN"
+description: ANY.RUN Sandbox is an online interactive sandbox for malware analysis, a tool for detection, monitoring, and research of cyber threats in real time
+version: 3.0.0
 connection_version: 2
-supported_versions: ["Any.Run API 2025-11-05"]
+supported_versions: ["Any.Run API 2026-03-20"]
 vendor: rapid7
-support: community
+support: partner
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/any_run
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://any.run
 tags:
-  - any run
+  - anyrun
   - malware
   - threat intelligence
 hub_tags:
@@ -27,24 +27,33 @@ sdk:
   version: 6.4.0
   user: nobody
 key_features:
-  - Submit files for analysis
-  - Obtain analysis reports
-  - Search task history
+  - Submit a file or URL to ANY.RUN for analysis using the following OS - Windows, Linux, Android
+  - Retrieve report details for a given analysis ID in various formats - HTML, STIX, JSON
+  - Retrieve malicious or suspicious IOCs for a given analysis ID.
+  - View history of analysis tasks.
+  - View analysis verdict.
+  - Download analysis network traffic dumps.
+  - Perform deep searches, look up threats online, and enrich your security solutions using ANY.RUN TI Lookup.
+  - Retrieve IP, Domain, URL, MD5, SHA256, SHA1 reputation.
 requirements:
-  - Requires an API Key or username and password combination
+  - Requires an ANY.RUN Sandbox or ANY.RUN TI Lookup API key without a prefix
+  - ANY.RUN "Enterprise Suite" plan (API access required)
 troubleshooting:
-  - When configuring the connection, only one authentication method can be supplied. Enter an API key or the username and password combination
+  - Configure the connection with either an API key without a prefix. If you need help, contact us - techsupport@any.run.
 version_history:
+  - "3.0.0 - Migrate to the ANY.RUN SDK | Update existing actions | Add new actions"
   - "2.0.0 - Actions: `Get Report` - Updated output schema types | Updated SDK to the latest version (6.4.0)"
   - "1.1.2 - Fix issue with file defaulting to Windows 7 32-Bit"
   - "1.1.1 - Fix issue with invalid inputs in Run Analysis action | Fix issue where Run Analysis action fails if optional inputs are provided as empty strings | Fix issue where Get Report action fails when fields in output contain `None` value | Improve error handling"
   - "1.1.0 - Allow user agent input when using URL type in Run Analysis action"
   - "1.0.0 - Initial plugin"
 links:
-  - "[Any Run](https://any.run/)"
+  - "[ANY.RUN](https://any.run/)"
 references:
-  - "[Any Run](https://any.run/)"
-  - "[Any Run documentation](https://any.run/api-documentation/)"
+  - "[ANY.RUN](https://any.run/)"
+  - "[ANY.RUN API documentation](https://any.run/api-documentation/)"
+  - "[ANY.RUN Integrations](https://any.run/integrations/)"
+  - "[ANY.RUN SDK](https://github.com/anyrun/anyrun-sdk)"
 types:
   hashes:
     ssdeep:
@@ -72,1327 +81,88 @@ types:
       description: MD5 hash
       type: string
       required: false
-  task:
+  analysis:
     verdict:
       title: Verdict
-      description: Task verdict
+      description: Analysis verdict
       type: string
       required: true
       example: Malicious activity
     name:
       title: Name
-      description: Task name
+      description: Analysis name
       type: string
       required: true
       example: 'setup.exe'
     related:
       title: Related
-      description: Task related URL
+      description: Analysis related URL
       type: string
       required: true
       example: 'https://app.any.run/tasks/0cb5990e-7858-4455-a5f8-8d704051901b'
     pcap:
       title: PCAP
-      description: Task PCAP URL
+      description: Analysis PCAP URL
       type: string
       required: true
       example: 'https://content.any.run/tasks/0cb5990e-7858-4455-a5f8-8d704051901b/download/pcap'
     file:
       title: File
-      description: Task file URL
+      description: Analysis file URL
       type: string
       required: true
       example: 'https://content.any.run/tasks/0cb5990e-7858-4455-a5f8-8d704051901b/download/files/005d7277-b4c1-4b96-bcd9-ac02b799eec9'
     json:
       title: JSON
-      description: Task JSON URL
+      description: Analysis JSON URL
       type: string
       required: true
       example: 'https://api.any.run/report/0cb5990e-7858-4455-a5f8-8d704051901b/summary/json'
     misp:
       title: MISP
-      description: Task MISP URL
+      description: Analysis MISP URL
       type: string
       required: true
       example: 'https://api.any.run/report/0cb5990e-7858-4455-a5f8-8d704051901b/summary/misp'
     tags:
       title: Tags
-      description: Task tags
+      description: Analysis tags
       type: '[]string'
       required: true
       example: '["suspicious"]'
     date:
       title: Date
-      description: Task date
+      description: Analysis date
       type: string
       required: true
       example: 2020-04-17T18:44:37.483Z
     hashes:
-      title: Hashe
-      description: Task hashes
+      title: Hashes
+      description: Analysis hashes
       type: hashes
       required: true
     uuid:
       title: UUID
-      description: Task UUID
-      type: string
-      required: false
-  EXE:
-    CharacterSet:
-      title: Characterset
-      description: Characterset
-      type: string
-      required: false
-    CodeSize:
-      title: Codesize
-      description: Codesize
-      type: integer
-      required: false
-    CompanyName:
-      title: Companyname
-      description: Companyname
-      type: string
-      required: false
-    EntryPoint:
-      title: Entrypoint
-      description: Entrypoint
-      type: string
-      required: false
-    FileDescription:
-      title: Filedescription
-      description: Filedescription
-      type: string
-      required: false
-    FileFlags:
-      title: Fileflags
-      description: Fileflags
-      type: string
-      required: false
-    FileFlagsMask:
-      title: Fileflagsmask
-      description: Fileflagsmask
-      type: string
-      required: false
-    FileOS:
-      title: Fileos
-      description: Fileos
-      type: string
-      required: false
-    FileSubtype:
-      title: Filesubtype
-      description: Filesubtype
-      type: integer
-      required: false
-    FileVersion:
-      title: Fileversion
-      description: Fileversion
-      type: float
-      required: false
-    FileVersionNumber:
-      title: Fileversionnumber
-      description: Fileversionnumber
-      type: string
-      required: false
-    ImageVersion:
-      title: Imageversion
-      description: Imageversion
-      type: integer
-      required: false
-    InitializedDataSize:
-      title: Initializeddatasize
-      description: Initializeddatasize
-      type: integer
-      required: false
-    InternalName:
-      title: Internalname
-      description: Internalname
-      type: string
-      required: false
-    LanguageCode:
-      title: Languagecode
-      description: Languagecode
-      type: string
-      required: false
-    LegalCopyright:
-      title: Legalcopyright
-      description: Legalcopyright
-      type: string
-      required: false
-    LinkerVersion:
-      title: Linkerversion
-      description: Linkerversion
-      type: integer
-      required: false
-    MachineType:
-      title: Machinetype
-      description: Machinetype
-      type: string
-      required: false
-    OSVersion:
-      title: Osversion
-      description: Osversion
-      type: integer
-      required: false
-    ObjectFileType:
-      title: Objectfiletype
-      description: Objectfiletype
-      type: string
-      required: false
-    OriginalFileName:
-      title: Originalfilename
-      description: Originalfilename
-      type: string
-      required: false
-    PEType:
-      title: Petype
-      description: Petype
-      type: string
-      required: false
-    ProductName:
-      title: Productname
-      description: Productname
-      type: string
-      required: false
-    ProductVersion:
-      title: Productversion
-      description: Productversion
-      type: float
-      required: false
-    ProductVersionNumber:
-      title: Productversionnumber
-      description: Productversionnumber
-      type: string
-      required: false
-    Subsystem:
-      title: Subsystem
-      description: Subsystem
-      type: string
-      required: false
-    SubsystemVersion:
-      title: Subsystemversion
-      description: Subsystemversion
-      type: integer
-      required: false
-    TimeStamp:
-      title: Timestamp
-      description: Timestamp
-      type: string
-      required: false
-    UninitializedDataSize:
-      title: Uninitializeddatasize
-      description: Uninitializeddatasize
-      type: integer
-      required: false
-  exif:
-    EXE:
-      title: Exe
-      description: Exe
-      type: EXE
-      required: false
-  pe:
-    key:
-      title: Key
-      description: Key
-      type: string
-      required: false
-    value:
-      title: Value
-      description: Value
-      type: "[]object"
-      required: false
-  trid:
-    extension:
-      title: Extension
-      description: Extension
-      type: string
-      required: false
-    filetype:
-      title: Filetype
-      description: Filetype
-      type: string
-      required: false
-    procent:
-      title: Procent
-      description: Procent
-      type: float
-      required: false
-  info:
-    exif:
-      title: Exif
-      description: Exif
-      type: exif
-      required: false
-    ext:
-      title: Ext
-      description: Ext
-      type: string
-      required: false
-    file:
-      title: File
-      description: File
-      type: string
-      required: false
-    mime:
-      title: MIME
-      description: MIME
-      type: string
-      required: false
-    pe:
-      title: Pe
-      description: Pe
-      type: "[]pe"
-      required: false
-    trid:
-      title: Trid
-      description: Trid
-      type: "[]trid"
-      required: false
-  mainObject:
-    filename:
-      title: Filename
-      description: Filename
-      type: string
-      required: false
-    hashes:
-      title: Hashes
-      description: Hashes
-      type: hashes
-      required: false
-    info:
-      title: Info
-      description: Info
-      type: info
-      required: false
-    permanentUrl:
-      title: Permanenturl
-      description: Permanenturl
-      type: string
-      required: false
-    type:
-      title: Type
-      description: Type
-      type: string
-      required: false
-  pcap:
-    permanentUrl:
-      title: Permanenturl
-      description: Permanenturl
-      type: string
-      required: false
-    present:
-      title: Present
-      description: Present
-      type: boolean
-      required: false
-  screenshots:
-    permanentUrl:
-      title: Permanenturl
-      description: Permanenturl
-      type: string
-      required: false
-    thumbnailUrl:
-      title: Thumbnailurl
-      description: Thumbnailurl
-      type: string
-      required: false
-    time:
-      title: Time
-      description: Time
-      type: integer
-      required: false
-    uuid:
-      title: UUID
-      description: UUID
-      type: string
-      required: false
-  automatization:
-    uac:
-      title: Uac
-      description: Uac
-      type: boolean
-      required: false
-  tor:
-    geo:
-      title: Geo
-      description: Geo
-      type: string
-      required: false
-    used:
-      title: Used
-      description: Used
-      type: boolean
-      required: false
-  options:
-    additionalTime:
-      title: Additionaltime
-      description: Additionaltime
-      type: integer
-      required: false
-    automatization:
-      title: Automatization
-      description: Automatization
-      type: automatization
-      required: false
-    fakeNet:
-      title: Fakenet
-      description: Fakenet
-      type: boolean
-      required: false
-    heavyEvasion:
-      title: Heavyevasion
-      description: Heavyevasion
-      type: boolean
-      required: false
-    hideSource:
-      title: Hidesource
-      description: Hidesource
-      type: boolean
-      required: false
-    mitm:
-      title: Mitm
-      description: Mitm
-      type: boolean
-      required: false
-    network:
-      title: Network
-      description: Network
-      type: boolean
-      required: false
-    presentation:
-      title: Presentation
-      description: Presentation
-      type: boolean
-      required: false
-    privacy:
-      title: Privacy
-      description: Privacy
-      type: string
-      required: false
-    privateSample:
-      title: Privatesample
-      description: Privatesample
-      type: boolean
-      required: false
-    timeout:
-      title: Timeout
-      description: Timeout
-      type: integer
-      required: false
-    tor:
-      title: Tor
-      description: Tor
-      type: tor
-      required: false
-    video:
-      title: Video
-      description: Video
-      type: boolean
-      required: false
-  content:
-    mainObject:
-      title: Mainobject
-      description: Mainobject
-      type: mainObject
-      required: false
-    pcap:
-      title: PCAP
-      description: PCAP
-      type: pcap
-      required: false
-    screenshots:
-      title: Screenshots
-      description: Screenshots
-      type: "[]screenshots"
-      required: false
-    video:
-      title: Video
-      description: Video
-      type: pcap
-      required: false
-  plan:
-    name:
-      title: Name
-      description: Name
-      type: string
-      required: false
-  sandbox:
-    name:
-      title: Name
-      description: Name
-      type: string
-      required: false
-    plan:
-      title: Plan
-      description: Plan
-      type: plan
-      required: false
-  specs:
-    autostart:
-      title: Autostart
-      description: Autostart
-      type: boolean
-      required: false
-    cpuOverrun:
-      title: Cpuoverrun
-      description: Cpuoverrun
-      type: boolean
-      required: false
-    crashedApps:
-      title: Crashedapps
-      description: Crashedapps
-      type: boolean
-      required: false
-    crashedTask:
-      title: Crashedtask
-      description: Crashedtask
-      type: boolean
-      required: false
-    debugOutput:
-      title: Debugoutput
-      description: Debugoutput
-      type: boolean
-      required: false
-    executableDropped:
-      title: Executabledropped
-      description: Executabledropped
-      type: boolean
-      required: false
-    exploitable:
-      title: Exploitable
-      description: Exploitable
-      type: boolean
-      required: false
-    injects:
-      title: Injects
-      description: Injects
-      type: boolean
-      required: false
-    lowAccess:
-      title: Lowaccess
-      description: Lowaccess
-      type: boolean
-      required: false
-    memOverrun:
-      title: Memoverrun
-      description: Memoverrun
-      type: boolean
-      required: false
-    multiprocessing:
-      title: Multiprocessing
-      description: Multiprocessing
-      type: boolean
-      required: false
-    networkLoader:
-      title: Networkloader
-      description: Networkloader
-      type: boolean
-      required: false
-    networkThreats:
-      title: Networkthreats
-      description: Networkthreats
-      type: boolean
-      required: false
-    notStarted:
-      title: Notstarted
-      description: Notstarted
-      type: boolean
-      required: false
-    privEscalation:
-      title: Privescalation
-      description: Privescalation
-      type: boolean
-      required: false
-    rebooted:
-      title: Rebooted
-      description: Rebooted
-      type: boolean
-      required: false
-    serviceLauncher:
-      title: Servicelauncher
-      description: Servicelauncher
-      type: boolean
-      required: false
-    spam:
-      title: Spam
-      description: Spam
-      type: boolean
-      required: false
-    staticDetections:
-      title: Staticdetections
-      description: Staticdetections
-      type: boolean
-      required: false
-    stealing:
-      title: Stealing
-      description: Stealing
-      type: boolean
-      required: false
-    suspStruct:
-      title: Suspstruct
-      description: Suspstruct
-      type: boolean
-      required: false
-    torUsed:
-      title: Torused
-      description: Torused
-      type: boolean
-      required: false
-  verdict:
-    score:
-      title: Score
-      description: Score
-      type: integer
-      required: false
-    threatLevel:
-      title: Threatlevel
-      description: Threatlevel
-      type: integer
-      required: false
-    threatLevelText:
-      title: Threatleveltext
-      description: Threatleveltext
-      type: string
-      required: false
-  scores:
-    specs:
-      title: Specs
-      description: Specs
-      type: specs
-      required: false
-    verdict:
-      title: Verdict
-      description: Verdict
-      type: verdict
-      required: false
-  files:
-    malicious:
-      title: Malicious
-      description: Malicious
-      type: integer
-      required: false
-    suspicious:
-      title: Suspicious
-      description: Suspicious
-      type: integer
-      required: false
-    text:
-      title: Text
-      description: Text
-      type: integer
-      required: false
-    unknown:
-      title: Unknown
-      description: Unknown
-      type: integer
-      required: false
-  network:
-    connections:
-      title: Connections
-      description: Connections
-      type: integer
-      required: false
-    dns:
-      title: DNS
-      description: DNS
-      type: integer
-      required: false
-    http:
-      title: HTTP
-      description: HTTP
-      type: integer
-      required: false
-    threats:
-      title: Threats
-      description: Threats
-      type: integer
-      required: false
-  processes:
-    malicious:
-      title: Malicious
-      description: Malicious
-      type: integer
-      required: false
-    monitored:
-      title: Monitored
-      description: Monitored
-      type: integer
-      required: false
-    suspicious:
-      title: Suspicious
-      description: Suspicious
-      type: integer
-      required: false
-    total:
-      title: Total
-      description: Total
-      type: integer
-      required: false
-  registry:
-    delete:
-      title: Delete
-      description: Delete
-      type: integer
-      required: false
-    read:
-      title: Read
-      description: Read
-      type: integer
-      required: false
-    total:
-      title: Total
-      description: Total
-      type: integer
-      required: false
-    write:
-      title: Write
-      description: Write
-      type: integer
-      required: false
-  counters:
-    files:
-      title: Files
-      description: Files
-      type: files
-      required: false
-    network:
-      title: Network
-      description: Network
-      type: network
-      required: false
-    processes:
-      title: Processes
-      description: Processes
-      type: processes
-      required: false
-    registry:
-      title: Registry
-      description: Registry
-      type: registry
-      required: false
-  hotfixes:
-    title:
-      title: Title
-      description: Title
-      type: string
-      required: false
-  internetExplorer:
-    kbnum:
-      title: Kbnum
-      description: Kbnum
-      type: string
-      required: false
-    version:
-      title: Version
-      description: Version
-      type: string
-      required: false
-  os:
-    bitness:
-      title: Bitness
-      description: Bitness
-      type: integer
-      required: false
-    build:
-      title: Build
-      description: Build
-      type: integer
-      required: false
-    major:
-      title: Major
-      description: Major
-      type: string
-      required: false
-    product:
-      title: Product
-      description: Product
-      type: string
-      required: false
-    productType:
-      title: Producttype
-      description: Producttype
-      type: string
-      required: false
-    servicePack:
-      title: Servicepack
-      description: Servicepack
-      type: string
-      required: false
-    softSet:
-      title: Softset
-      description: Softset
-      type: string
-      required: false
-    title:
-      title: Title
-      description: Title
-      type: string
-      required: false
-    variant:
-      title: Variant
-      description: Variant
-      type: string
-      required: false
-  software:
-    title:
-      title: Title
-      description: Title
-      type: string
-      required: false
-    version:
-      title: Version
-      description: Version
-      type: string
-      required: false
-  environments:
-    hotfixes:
-      title: Hotfixes
-      description: Hotfixes
-      type: "[]hotfixes"
-      required: false
-    internetExplorer:
-      title: Internetexplorer
-      description: Internetexplorer
-      type: internetExplorer
-      required: false
-    os:
-      title: Os
-      description: Os
-      type: os
-      required: false
-    software:
-      title: Software
-      description: Software
-      type: "[]software"
-      required: false
-  incidents_mitre:
-    tid:
-      title: Tid
-      description: The technique ID of the MITRE ATT&CK technique associated with the incident
-      type: string
-      required: false
-    sid:
-      title: Sid
-      description: The signature ID used in detection
-      type: string
-      required: false
-    v:
-      title: V
-      description: The version of the technique
-      type: string
-      required: false
-  incidents:
-    count:
-      title: Count
-      description: Count
-      type: integer
-      required: false
-    desc:
-      title: Desc
-      description: Desc
-      type: string
-      required: false
-    events:
-      title: Events
-      description: Events
-      type: "[]object"
-      required: false
-    firstSeen:
-      title: Firstseen
-      description: Firstseen
-      type: integer
-      required: false
-    mitre:
-      title: Mitre
-      description: Mitre
-      type: "[]incidents_mitre"
-      required: false
-    process:
-      title: Process
-      description: Process
-      type: string
-      required: false
-    source:
-      title: Source
-      description: Source
-      type: string
-      required: false
-    threatLevel:
-      title: Threatlevel
-      description: Threatlevel
-      type: integer
-      required: false
-    title:
-      title: Title
-      description: Title
-      type: string
-      required: false
-  mitre:
-    id:
-      title: Id
-      description: Id
-      type: string
-      required: false
-    name:
-      title: Name
-      description: Name
-      type: string
-      required: false
-    phases:
-      title: Phases
-      description: Phases
-      type: "[]string"
-      required: false
-  hashes_0:
-    head_hash:
-      title: Head Hash
-      description: Head hash
-      type: string
-      required: false
-    md5:
-      title: MD5
-      description: MD5
-      type: string
-      required: false
-    sha1:
-      title: SHA1
-      description: SHA1
-      type: string
-      required: false
-    sha256:
-      title: SHA256
-      description: SHA256
-      type: string
-      required: false
-    ssdeep:
-      title: Ssdeep
-      description: Ssdeep
-      type: string
-      required: false
-  info_0:
-    file:
-      title: File
-      description: File
-      type: string
-      required: false
-  files_0:
-    filename:
-      title: Filename
-      description: Filename
-      type: string
-      required: false
-    hashes:
-      title: Hashes
-      description: Hashes
-      type: hashes_0
-      required: false
-    info:
-      title: Info
-      description: Info
-      type: info_0
-      required: false
-    permanentUrl:
-      title: Permanenturl
-      description: Permanenturl
-      type: string
-      required: false
-    process:
-      title: Process
-      description: Process
-      type: string
-      required: false
-    size:
-      title: Size
-      description: Size
-      type: integer
-      required: false
-    threatLevel:
-      title: Threatlevel
-      description: Threatlevel
-      type: string
-      required: false
-    time:
-      title: Time
-      description: Time
-      type: integer
-      required: false
-    type:
-      title: Type
-      description: Type
-      type: string
-      required: false
-  modified:
-    files:
-      title: Files
-      description: Files
-      type: "[]files_0"
-      required: false
-    registry:
-      title: Registry
-      description: Registry
-      type: "[]object"
-      required: false
-  network_0:
-    connections:
-      title: Connections
-      description: Connections
-      type: "[]object"
-      required: false
-    dnsRequests:
-      title: DNS Requests
-      description: DNS requests
-      type: "[]object"
-      required: false
-    httpRequests:
-      title: HTTP Requests
-      description: HTTP requests
-      type: "[]object"
-      required: false
-    threats:
-      title: Threats
-      description: Threats
-      type: "[]object"
-      required: false
-  context:
-    integrityLevel:
-      title: Integritylevel
-      description: Integritylevel
-      type: string
-      required: false
-    rebootNumber:
-      title: Rebootnumber
-      description: Rebootnumber
-      type: integer
-      required: false
-    userName:
-      title: Username
-      description: Username
-      type: string
-      required: false
-  modules:
-    image:
-      title: Image
-      description: Image
-      type: string
-      required: false
-    time:
-      title: Time
-      description: Time
-      type: integer
-      required: false
-  specs_0:
-    autoStart:
-      title: Autostart
-      description: Autostart
-      type: boolean
-      required: false
-    crashedApps:
-      title: Crashedapps
-      description: Crashedapps
-      type: boolean
-      required: false
-    debugOutput:
-      title: Debugoutput
-      description: Debugoutput
-      type: boolean
-      required: false
-    executableDropped:
-      title: Executabledropped
-      description: Executabledropped
-      type: boolean
-      required: false
-    exploitable:
-      title: Exploitable
-      description: Exploitable
-      type: boolean
-      required: false
-    injects:
-      title: Injects
-      description: Injects
-      type: boolean
-      required: false
-    knownThreat:
-      title: Knownthreat
-      description: Knownthreat
-      type: boolean
-      required: false
-    lowAccess:
-      title: Lowaccess
-      description: Lowaccess
-      type: boolean
-      required: false
-    network:
-      title: Network
-      description: Network
-      type: boolean
-      required: false
-    networkLoader:
-      title: Networkloader
-      description: Networkloader
-      type: boolean
-      required: false
-    privEscalation:
-      title: Privescalation
-      description: Privescalation
-      type: boolean
-      required: false
-    stealing:
-      title: Stealing
-      description: Stealing
-      type: boolean
-      required: false
-  scores_0:
-    dropped:
-      title: Dropped
-      description: Dropped
-      type: boolean
-      required: false
-    injected:
-      title: Injected
-      description: Injected
-      type: boolean
-      required: false
-    loadsSusp:
-      title: Loadssusp
-      description: Loadssusp
-      type: boolean
-      required: false
-    monitoringReason:
-      title: Monitoringreason
-      description: Monitoringreason
-      type: string
-      required: false
-    specs:
-      title: Specs
-      description: Specs
-      type: specs_0
-      required: false
-    verdict:
-      title: Verdict
-      description: Verdict
-      type: verdict
-      required: false
-  times:
-    monitoringSince:
-      title: Monitoringsince
-      description: Monitoringsince
-      type: integer
-      required: false
-    start:
-      title: Start
-      description: Start
-      type: integer
-      required: false
-  versionInfo:
-    company:
-      title: Company
-      description: Company
-      type: string
-      required: false
-    description:
-      title: Description
-      description: Description
-      type: string
-      required: false
-    version:
-      title: Version
-      description: Version
-      type: string
-      required: false
-  processes_0:
-    commandLine:
-      title: Commandline
-      description: Commandline
-      type: string
-      required: false
-    context:
-      title: Context
-      description: Context
-      type: context
-      required: false
-    fileName:
-      title: Filename
-      description: Filename
-      type: string
-      required: false
-    fileType:
-      title: Filetype
-      description: Filetype
-      type: string
-      required: false
-    image:
-      title: Image
-      description: Image
-      type: string
-      required: false
-    mainProcess:
-      title: Mainprocess
-      description: Mainprocess
-      type: boolean
-      required: false
-    modules:
-      title: Modules
-      description: Modules
-      type: "[]modules"
-      required: false
-    pid:
-      title: PID
-      description: PID
-      type: integer
-      required: false
-    ppid:
-      title: Ppid
-      description: Ppid
-      type: integer
-      required: false
-    scores:
-      title: Scores
-      description: Scores
-      type: scores_0
-      required: false
-    status:
-      title: Status
-      description: Status
-      type: string
-      required: false
-    times:
-      title: Times
-      description: Times
-      type: times
-      required: false
-    uuid:
-      title: UUID
-      description: UUID
-      type: string
-      required: false
-    versionInfo:
-      title: Versioninfo
-      description: Versioninfo
-      type: versionInfo
-      required: false
-  analysis:
-    content:
-      title: Content
-      description: Content
-      type: content
-      required: false
-    creation:
-      title: Creation
-      description: Creation
-      type: integer
-      required: false
-    creationText:
-      title: Creationtext
-      description: Creationtext
-      type: string
-      required: false
-    duration:
-      title: Duration
-      description: Duration
-      type: integer
-      required: false
-    options:
-      title: Options
-      description: Options
-      type: options
-      required: false
-    permanentUrl:
-      title: Permanenturl
-      description: Permanenturl
-      type: string
-      required: false
-    reports:
-      title: Reports
-      description: Reports
-      type: object
-      required: false
-    sandbox:
-      title: Sandbox
-      description: Sandbox
-      type: sandbox
-      required: false
-    scores:
-      title: Scores
-      description: Scores
-      type: scores
-      required: false
-    tags:
-      title: Tags
-      description: Tags
-      type: "[]string"
-      required: false
-    uuid:
-      title: UUID
-      description: UUID
-      type: string
-      required: false
-  reports:
-    analysis:
-      title: Analysis
-      description: Analysis
-      type: analysis
-      required: false
-    counters:
-      title: Counters
-      description: Counters
-      type: counters
-      required: false
-    debugStrings:
-      title: Debugstrings
-      description: Debugstrings
-      type: "[]object"
-      required: false
-    environments:
-      title: Environments
-      description: Environments
-      type: environments
-      required: false
-    incidents:
-      title: Incidents
-      description: Incidents
-      type: "[]incidents"
-      required: false
-    mitre:
-      title: Mitre
-      description: Mitre
-      type: "[]mitre"
-      required: false
-    modified:
-      title: Modified
-      description: Modified
-      type: modified
-      required: false
-    network:
-      title: Network
-      description: Network
-      type: network_0
-      required: false
-    processes:
-      title: Processes
-      description: Processes
-      type: "[]processes_0"
-      required: false
-    status:
-      title: Status
-      description: Status
+      description: Analysis UUID
       type: string
       required: false
 connection:
-  api_key:
+  sandbox_api_key:
     title: API Key
-    description: API key for Any.Run
+    description: API key for ANY.RUN Sandbox
     type: credential_secret_key
     required: false
     example: WbTbwa4KFk77eQNffMJynWXm49jLwGjwPMKM9Xc4
-  credentials:
-    title: Credentials
-    description: Username and password
-    type: credential_username_password
+  ti_lookup_api_key:
+    title: API Key
+    description: API key for ANY.RUN TI Lookup
+    type: credential_secret_key
     required: false
-    example: '{"username": "user@example.com", "password": "mypassword"}'
+    example: WbTbwa4KFk77eQNffMJynWXm49jLwGjwPMKM9Xc4
 actions:
-  get_history:
-    title: Get Task History
-    description: Get task history
+  get_analysis_history:
+    title: Get Analysis History
+    description: Get last analyses from the user's history and their basic information
     input:
       team:
         title: Team
@@ -1403,228 +173,665 @@ actions:
         example: false
       skip:
         title: Skip
-        description: Skip records
+        description: Skip the specified number of analyses
         type: integer
         required: false
         default: 0
         example: 25
       limit:
         title: Limit
-        description: Limits number of records, Size range 1-100
+        description: Specify the number of analyses in the result set (not more than 100)
         type: integer
         required: false
-        default: 25
+        default: 0
         example: 25
     output:
-      tasks:
-        title: Tasks
-        description: Task history
+      analyses:
+        title: Analyses
+        description: Analyses history
         required: false
-        type: '[]task'
+        type: '[]analysis'
         example: '[{"related":"https://app.any.run/tasks/82ab98a6-b406-4ba5-8deb-...","json":"https://api.any.run/report/82ab98a6-b406-4ba5-8deb...","file":"https://content.any.run/tasks/82ab98a6-b406-4ba5-8...","hashes":{"head_hash":"0145ad575b213b1703cb94c6c3568a2e","md5":"926e6146fdb288e932a1846029ad07db","sha1":"fc73d7c62e324cad4240fbaf7a6d53716ecc4de7","sha256":"f6df99db2023558798d234f9c118497db8ec83da37682f8868...","ssdeep":"768:s+QiSf3rhTePO38fXbEmJS2Iro2wFW0kEeu:svXj5ePO3C..."},"misp":"https://api.any.run/report/82ab98a6-b406-4ba5-8deb...","name":"http://pastebin.com/raw/xGXyTALF","pcap":"https://content.any.run/tasks/82ab98a6-b406-4ba5-8...","tags":[],"verdict":"No threats detected","date":"2020-04-23T21:00:13.890Z"},{"date":"2020-04-20T02:14:11.452Z","file":"https://content.any.run/tasks/923fa62b-2689-4e6a-b...","hashes":{"sha256":"71f34b8bda00b54713e92cb8aee8c04a11ea5dea650b07f4b1...","ssdeep":"3:N1KdJMP2:CO2","head_hash":"780024dc16cb4331cdf98d18eb111bb4","md5":"780024dc16cb4331cdf98d18eb111bb4","sha1":"dfc3414b0e62c18787631322ae7a8c7489e845c9"},"json":"https://api.any.run/report/923fa62b-2689-4e6a-be76...","pcap":"https://content.any.run/tasks/923fa62b-2689-4e6a-b...","tags":[],"misp":"https://api.any.run/report/923fa62b-2689-4e6a-be76...","name":"http://clicnews.com","related":"https://app.any.run/tasks/923fa62b-2689-4e6a-be76-...","verdict":"Malicious activity"}]'
-  get_report:
-    title: Get Report
-    description: Get task report
+  get_analysis_report:
+    title: Get Analysis Report
+    description: Get detailed JSON, HTML or STIX report for analysis
     input:
-      task:
-        title: UUID
-        description: Task UUID
+      analysis_uuid:
+        title: Analysis UUID
+        description: Analysis UUID
+        type: string
+        required: true
+        example: '0cf223f2-530e-4a50-b68f-563045268648'
+      format:
+        title: Report format
+        description: Report file in JSON, HTML or STIX format
+        type: string
+        required: false
+        default: 'html'
+        enum:
+          - 'html'
+          - 'json'
+          - 'stix'
+    output:
+      report:
+        title: Analysis Report
+        description: Report file
+        type: file
+        required: false
+        example: file
+      analysis_uuid:
+        title: Analysis UUID
+        description: Analysis UUID
+        type: string
+        required: false
+        example: '0cf223f2-530e-4a50-b68f-563045268648'
+      analysis_url:
+        title: Analysis URL
+        description: Link to the interactive analysis
+        type: string
+        required: false
+        example: '0cf223f2-530e-4a50-b68f-563045268648'
+  get_analysis_verdict:
+    title: Get Analysis Verdict
+    description: Get the verdict of a specific analysis
+    input:
+      analysis_uuid:
+        title: Analysis UUID
+        description: Analysis UUID
         type: string
         required: true
         example: '0cf223f2-530e-4a50-b68f-563045268648'
     output:
-      reports:
-          title: Reports
-          description: Reports
-          type: reports
-          required: false
-          example: '{"analysis":{"content":{"mainObject":{"filename":"setup.exe","hashes":{"md5":"c4ab8765314fc770e3ee8ca0693df8f9","sha1":"0194f8c5364d1dad03a1fe6eaa0fd98a10accd9e","sha256":"9ed4502b2eb64dd0a4394e593cb3666e621e751c26d06f3dbb953808bf83536e","ssdeep":"6144:0mvr9RLcN0BvxoLjGRU4UUU3UUUD9rOAerhj4Dy6ZTab8QCuzkLyS0RliUFh:0mr9RUsJGjqU4UUU3UUUZa7NjP6pbhOp"},"info":{"exif":{"EXE":{"CharacterSet":"Unicode","CodeSize":65536,"CompanyName":"Mozilla","EntryPoint":"0x34310","FileDescription":"Firefox","FileFlags":"(none)","FileFlagsMask":"0x003f","FileOS":"Windows NT 32-bit","FileSubtype":0,"FileVersion":18.05,"FileVersionNumber":"18.5.0.0","ImageVersion":0,"InitializedDataSize":65536,"InternalName":"7zS.sfx","LanguageCode":"English (U.S.)","LegalCopyright":"Mozilla","LinkerVersion":6,"MachineType":"Intel 386 or later, and compatibles","OSVersion":4,"ObjectFileType":"Executable application","OriginalFileName":"7zS.sfx.exe","PEType":"PE32","ProductName":"Firefox","ProductVersion":18.05,"ProductVersionNumber":"18.5.0.0","Subsystem":"Windows GUI","SubsystemVersion":4,"TimeStamp":"2018:08:31 00:18:33+02:00","UninitializedDataSize":147456}},"ext":"exe","file":"PE32 executable (GUI) Intel 80386, for MS Windows, UPX compressed","mime":"application/x-dosexec","pe":[{"key":"Summary","value":[{"key":"Architecture","value":"IMAGE_FILE_MACHINE_I386"},{"key":"Subsystem","value":"IMAGE_SUBSYSTEM_WINDOWS_GUI"}]},{"key":"DOS Header","value":[{"key":"Magic number","value":"MZ"},{"key":"Bytes on last page of file","value":"0x0090"}]},{"key":"PE Header","value":[{"key":"Signature","value":"PE"},{"key":"Machine","value":"IMAGE_FILE_MACHINE_I386"},{"key":"Characteristics","value":["IMAGE_FILE_32BIT_MACHINE","IMAGE_FILE_EXECUTABLE_IMAGE","IMAGE_FILE_LINE_NUMS_STRIPPED","IMAGE_FILE_LOCAL_SYMS_STRIPPED","IMAGE_FILE_RELOCS_STRIPPED"]}]},{"key":"Image Optional Header","value":[{"key":"Magic","value":"PE32"},{"key":"LinkerVersion","value":"6.0"}]},{"key":"Sections","value":[{"key":"UPX0","value":{"Characteristics":["IMAGE_SCN_CNT_UNINITIALIZED_DATA","IMAGE_SCN_MEM_EXECUTE","IMAGE_SCN_MEM_READ","IMAGE_SCN_MEM_WRITE"],"Entropy":"0","NumberOfLineNumbers":"0","NumberOfRelocations":"0","PointerToLineNumbers":"0x00000000","PointerToRawData":"0x00000400","PointerToRelocations":"0x00000000","SizeOfRawData":"0x00000000","VirtualAddress":"0x00001000","VirtualSize":"0x00024000"}},{"key":"UPX1","value":{"Characteristics":["IMAGE_SCN_CNT_INITIALIZED_DATA","IMAGE_SCN_MEM_EXECUTE","IMAGE_SCN_MEM_READ","IMAGE_SCN_MEM_WRITE"],"Entropy":"7.89699","NumberOfLineNumbers":"0","NumberOfRelocations":"0","PointerToLineNumbers":"0x00000000","PointerToRawData":"0x00000400","PointerToRelocations":"0x00000000","SizeOfRawData":"0x0000F600","VirtualAddress":"0x00025000","VirtualSize":"0x00010000"}},{"key":".rsrc","value":{"Characteristics":["IMAGE_SCN_CNT_INITIALIZED_DATA","IMAGE_SCN_MEM_READ","IMAGE_SCN_MEM_WRITE"],"Entropy":"7.39743","NumberOfLineNumbers":"0","NumberOfRelocations":"0","PointerToLineNumbers":"0x00000000","PointerToRawData":"0x0000FA00","PointerToRelocations":"0x00000000","SizeOfRawData":"0x0000F200","VirtualAddress":"0x00035000","VirtualSize":"0x00010000"}}]},{"key":"Imports","value":[{"key":"KERNEL32.DLL","value":["LoadLibraryA","ExitProcess","GetProcAddress","VirtualProtect"]},{"key":"MSVCRT.dll","value":["free"]}]},{"key":"Resources","value":[{"key":"1","value":{"Codepage":"UNKNOWN","Entropy":"5.38843","Language":"UNKNOWN","Size":"1365","Type":"RT_MANIFEST"}},{"key":"2","value":{"Codepage":"UNKNOWN","Entropy":"5.28933","Language":"English - United States","Size":"5160","Type":"RT_ICON"}}]},{"key":"Version Info","value":[{"key":"Resource LangID","value":"English - United States"},{"key":"VS_VERSION_INFO","value":{"CompanyName":"Mozilla","FileDescription":"Firefox","FileFlags":[],"FileOs":["VOS_DOS_WINDOWS32","VOS_NT","VOS_NT_WINDOWS32","VOS_WINCE","VOS__WINDOWS32"],"FileType":"VFT_APP","FileVersion":"18.05","InternalName":"7zS.sfx","Language":"English - United States","LegalCopyright":"Mozilla","OriginalFilename":"7zS.sfx.exe","ProductName":"Firefox","ProductVersion":"18.05","Signature":"0xFEEF04BD","StructVersion":"0x00010000"}}]}],"trid":[{"extension":".exe","filetype":"UPX compressed Win32 Executable","procent":64.2},{"extension":".dll","filetype":"Win32 Dynamic Link Library (generic)","procent":15.6}]},"permanentUrl":"https://content.any.run/tasks/4649c7fc-5780-476a-86b0-b89e424339bc/download/files/39dc46f5-c516-4f1e-966c-b03a56c01caf","type":"file"},"pcap":{"permanentUrl":"https://content.any.run/tasks/4649c7fc-5780-476a-86b0-b89e424339bc/download/pcap","present":true},"screenshots":[{"permanentUrl":"https://content.any.run/tasks/4649c7fc-5780-476a-86b0-b89e424339bc/download/screens/2def6256-a961-48b7-ba39-044cf5fefec9/image.jpeg","thumbnailUrl":"https://content.any.run/tasks/4649c7fc-5780-476a-86b0-b89e424339bc/download/thumbnails/2def6256-a961-48b7-ba39-044cf5fefec9/image.jpeg","time":17633,"uuid":"2def6256-a961-48b7-ba39-044cf5fefec9"}],"video":{"permanentUrl":"https://content.any.run/tasks/4649c7fc-5780-476a-86b0-b89e424339bc/download/mp4","present":true}},"creation":1587156254891,"creationText":"2020-04-17T20:44:14.891Z","duration":60,"options":{"additionalTime":0,"automatization":{"uac":false},"fakeNet":false,"heavyEvasion":false,"hideSource":false,"mitm":false,"network":true,"presentation":false,"privacy":"bylink","privateSample":false,"timeout":60,"tor":{"geo":"fastest","used":false},"video":true},"permanentUrl":"https://app.any.run/tasks/4649c7fc-5780-476a-86b0-b89e424339bc","reports":{"HTML":"https://api.any.run/report/4649c7fc-5780-476a-86b0-b89e424339bc/summary/html","IOC":"https://api.any.run/report/4649c7fc-5780-476a-86b0-b89e424339bc/ioc/json","MISP":"https://api.any.run/report/4649c7fc-5780-476a-86b0-b89e424339bc/summary/misp","graph":"https://content.any.run/tasks/4649c7fc-5780-476a-86b0-b89e424339bc/graph"},"sandbox":{"name":"ANY.RUN - Interactive Sandbox","plan":{"name":"Tester"}},"scores":{"specs":{"autostart":false,"cpuOverrun":false,"crashedApps":false,"crashedTask":false,"debugOutput":false,"executableDropped":true,"exploitable":false,"injects":false,"lowAccess":false,"memOverrun":false,"multiprocessing":true,"networkLoader":false,"networkThreats":false,"notStarted":false,"privEscalation":false,"rebooted":false,"serviceLauncher":false,"spam":false,"staticDetections":false,"stealing":false,"suspStruct":true,"torUsed":false},"verdict":{"score":100,"threatLevel":2,"threatLevelText":"Malicious activity"}},"tags":[],"uuid":"4649c7fc-5780-476a-86b0-b89e424339bc"},"counters":{"files":{"malicious":3,"suspicious":0,"text":0,"unknown":0},"network":{"connections":0,"dns":0,"http":0,"threats":0},"processes":{"malicious":2,"monitored":2,"suspicious":0,"total":38},"registry":{"delete":0,"read":333,"total":333,"write":0}},"debugStrings":[],"environments":{"hotfixes":[{"title":"KB976902"},{"title":"KB4019990"}],"internetExplorer":{"kbnum":"KB3058515","version":"11.0.9600.17843"},"os":{"bitness":32,"build":7601,"major":"7","product":"Windows","productType":"Client","servicePack":"1","softSet":"complete","title":"Windows 7 Professional Service Pack 1 (build: 7601, 32 bit)","variant":"Professional"},"software":[{"title":"Microsoft Visual C++ 2013 x86 Additional Runtime - 12.0.21005","version":"12.0.21005"},{"title":"Microsoft Visual C++ 2013 Redistributable (x86) - 12.0.30501","version":"12.0.30501.0"}]},"incidents":[{"count":1,"desc":"Dropped","events":[],"firstSeen":1587156271952,"mitre":[],"process":"bc166dfd-6e6d-478a-82fc-8b04f5dd501d","source":"drops","threatLevel":2,"title":"Application was dropped or rewritten from another process"},{"count":17,"desc":"Dropped","events":[],"firstSeen":1587156271930,"mitre":["T1129"],"process":"bc166dfd-6e6d-478a-82fc-8b04f5dd501d","source":"drops","threatLevel":2,"title":"Loads dropped or rewritten executable"},{"count":1,"desc":"Installation","events":[{"filename":"C:\\Users\\admin\\AppData\\Local\\Temp\\7zS48B57DC6\\setup-stub.exe","md5":"00e2a6420dc88f8e72de0a5876a22b7e","size":426488,"time":1587156270839}],"firstSeen":1587156270839,"mitre":[],"process":"0dcddb87-b2f9-43eb-bbd3-0fbeaf78f9a7","source":"drops","threatLevel":1,"title":"Executable content was dropped or overwritten"},{"count":2,"desc":"Installation","events":[{"filename":"C:\\Users\\admin\\AppData\\Local\\Temp\\nsgE1FD.tmp\\UAC.dll","md5":"113c5f02686d865bc9e8332350274fd1","size":18432,"time":1587156271183},{"filename":"C:\\Users\\admin\\AppData\\Local\\Temp\\nsgE1FD.tmp\\System.dll","md5":"17ed1c86bd67e78ade4712be48a7d2bd","size":11776,"time":1587156271167}],"firstSeen":1587156271183,"mitre":[],"process":"bc166dfd-6e6d-478a-82fc-8b04f5dd501d","source":"drops","threatLevel":1,"title":"Executable content was dropped or overwritten"}],"mitre":[{"id":"T1129","name":"Execution through Module Load","phases":["execution"]}],"modified":{"files":[{"filename":"C:\\Users\\admin\\AppData\\Local\\Temp\\nsgE1FD.tmp\\UAC.dll","hashes":{"head_hash":"af8e997d1695590cf0c51e860c0ce700","md5":"113c5f02686d865bc9e8332350274fd1","sha1":"4fa4414666f8091e327adb4d81a98a0d6e2e254a","sha256":"0d21041a1b5cd9f9968fc1d457c78a802c9c5a23f375327e833501b65bcd095d","ssdeep":"192:5cdcpry0igQ1Ii1rzn6U4gbfW6irWP+vOg7XRSEi+OPLjte86jugnincl0Nr90Og:WqVibvTh4qnFP+OPEzinclP+"},"info":{"file":"application/x-dosexec"},"permanentUrl":"https://content.any.run/tasks/4649c7fc-5780-476a-86b0-b89e424339bc/download/files/da5e5597-61bb-434d-8049-2eeceb49c7aa","process":"bc166dfd-6e6d-478a-82fc-8b04f5dd501d","size":18432,"threatLevel":"HIGH","time":1587156271183,"type":"executable"},{"filename":"C:\\Users\\admin\\AppData\\Local\\Temp\\nsgE1FD.tmp\\System.dll","hashes":{"head_hash":"17ed1c86bd67e78ade4712be48a7d2bd","md5":"17ed1c86bd67e78ade4712be48a7d2bd","sha1":"1cc9fe86d6d6030b4dae45ecddce5907991c01a0","sha256":"bd046e6497b304e4ea4ab102cab2b1f94ce09bde0eebba4c59942a732679e4eb","ssdeep":"192:eY24sihno00Wfl97nH6T2enXwWobpWBTU4VtHT7dmN35Ol+Sl:E8QIl975eXqlWBrz7YLOl+"},"info":{"file":"application/x-dosexec"},"permanentUrl":"https://content.any.run/tasks/4649c7fc-5780-476a-86b0-b89e424339bc/download/files/5a26df0a-9f58-4707-9549-83eaad71773c","process":"bc166dfd-6e6d-478a-82fc-8b04f5dd501d","size":11776,"threatLevel":"HIGH","time":1587156271167,"type":"executable"},{"filename":"C:\\Users\\admin\\AppData\\Local\\Temp\\7zS48B57DC6\\setup-stub.exe","hashes":{"head_hash":"665f7cd5c6d976951b9296bd1721703c","md5":"00e2a6420dc88f8e72de0a5876a22b7e","sha1":"26dca592dc00c741e404cc86efd740c38862363a","sha256":"a7d0b746d12c58a51986ed8cf1c64d97fa80c106c9004b7bf92e104a89cffda4","ssdeep":"6144:OspNjlsl/dj7qZXBs1P7iqv9AEGRLq9mRX51h134jG4YO6T:Oc6IwP7igCEd98pl4i4Yj"},"info":{"file":"application/x-dosexec"},"permanentUrl":"https://content.any.run/tasks/4649c7fc-5780-476a-86b0-b89e424339bc/download/files/e33f9a2a-1b69-49bf-9fd1-a01378271a8b","process":"0dcddb87-b2f9-43eb-bbd3-0fbeaf78f9a7","size":426488,"threatLevel":"HIGH","time":1587156270839,"type":"executable"},{"filename":"C:\\Users\\admin\\AppData\\Local\\Temp\\7zS48B57DC6\\postSigningData","process":"0dcddb87-b2f9-43eb-bbd3-0fbeaf78f9a7","size":0,"time":1587156270855}],"registry":[]},"network":{"connections":[],"dnsRequests":[],"httpRequests":[],"threats":[]},"processes":[{"commandLine":"\"C:\\Users\\admin\\AppData\\Local\\Temp\\setup.exe\" ","context":{"integrityLevel":"MEDIUM","rebootNumber":0,"userName":"admin"},"fileName":"setup.exe","fileType":"DROPPED","image":"C:\\Users\\admin\\AppData\\Local\\Temp\\setup.exe","mainProcess":true,"modules":[{"image":"c:\\windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7601.17514_none_41e6975e2bd6f2b2\\comctl32.dll","time":1587156270824},{"image":"c:\\windows\\system32\\oleaut32.dll","time":1587156270839}],"pid":2948,"ppid":372,"scores":{"dropped":false,"injected":false,"loadsSusp":false,"monitoringReason":"Main process","specs":{"autoStart":false,"crashedApps":false,"debugOutput":false,"executableDropped":true,"exploitable":false,"injects":false,"knownThreat":false,"lowAccess":false,"network":false,"networkLoader":false,"privEscalation":false,"stealing":false},"verdict":{"score":100,"threatLevel":2,"threatLevelText":"Malicious activity"}},"status":"STILL RUNNING","times":{"monitoringSince":1587156270699,"start":1587156270699},"uuid":"0dcddb87-b2f9-43eb-bbd3-0fbeaf78f9a7","versionInfo":{"company":"Mozilla","description":"Firefox","version":"18.05"}},{"commandLine":".\\setup-stub.exe","context":{"integrityLevel":"MEDIUM","rebootNumber":0,"userName":"admin"},"droppedBy":["0dcddb87-b2f9-43eb-bbd3-0fbeaf78f9a7"],"fileName":"setup-stub.exe","fileType":"DROPPED","image":"C:\\Users\\admin\\AppData\\Local\\Temp\\7zS48B57DC6\\setup-stub.exe","mainProcess":false,"modules":[{"image":"c:\\windows\\system32\\imm32.dll","time":1587156270917},{"image":"c:\\windows\\system32\\userenv.dll","time":1587156270917}],"parentUUID":"0dcddb87-b2f9-43eb-bbd3-0fbeaf78f9a7","pid":3532,"ppid":2948,"scores":{"dropped":false,"injected":false,"loadsSusp":false,"monitoringReason":"Child process","specs":{"autoStart":false,"crashedApps":false,"debugOutput":false,"executableDropped":true,"exploitable":false,"injects":false,"knownThreat":false,"lowAccess":false,"network":false,"networkLoader":false,"privEscalation":false,"stealing":false},"verdict":{"score":100,"threatLevel":2,"threatLevelText":"Malicious activity"}},"status":"STILL RUNNING","times":{"monitoringSince":1587156270855,"start":1587156270855},"uuid":"bc166dfd-6e6d-478a-82fc-8b04f5dd501d","versionInfo":{"company":"Mozilla Corporation","description":"Firefox Installer","version":"63.0.3"}}],"status":"done"}'
-  run_analysis:
-    title: Run Analysis
-    description: Run new analysis
+      verdict:
+        title: Analysis verdict
+        description: Analysis verdict. Can be 'Malicious', 'Suspicious' or 'No threads detected'
+        type: string
+        required: false
+        example: 'Malicious'
+  get_ioc:
+    title: Get IOC
+    description: Get malicious and suspicious IOCs in csv format from the analysis if available
     input:
-      file:
-        title: File
-        description: Malware file
+      analysis_uuid:
+        title: Analysis UUID
+        description: Analysis UUID
+        type: string
+        required: true
+        example: '0cf223f2-530e-4a50-b68f-563045268648'
+    output:
+      report:
+        title: Analysis IOCs
+        description: Suspicious and Malicious IOCs csv
         type: file
         required: false
-        example: '{"filename": "file.txt", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==" }'
-      obj_type:
-        title: Type
-        description: Type of new task
-        type: string
-        default: file
-        required: true
-        enum:
-          - "file"
-          - "url"
-          - "download"
         example: file
-      obj_url:
-        title: URL
-        description: URL, used only if "obj_type" is "url" or "download"
-        type: string
-        required: false
-        example: 'http://example.org'
-      obj_ext_cmd:
-        title: Command
-        description: Optional command line that the VM will run. E.g. you can use 'RunDll32.EXE %FILENAME%,<func> <param>' to call a function by its name with a parameter in the uploaded sample. '%FILENAME%' is a built-in that will be automatically replaced with the file location in the environment
-        type: string
-        required: false
-        example: 'RunDll32.EXE %FILENAME%, func32 -r'
-      obj_ext_browser:
-        title: Browser
-        description: Browser name, used only for "url" type. E.g. Internet Explorer, Google Chrome, Mozilla Firefox, Opera
-        type: string
-        required: false
-        example: Google Chrome
-      obj_ext_useragent:
-        title: User Agent
-        description: User agent, used only for "download" and "url" types
-        type: string
-        required: false
-        example: 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0'
-      obj_ext_elevateprompt:
-        title: Elevate Prompt
-        description: Auto-accept UAC option
-        type: boolean
-        required: false
-        default: true
-        example: true
-      obj_ext_extension:
-        title: Extension
-        description: Change extension to valid
-        type: boolean
-        required: false
-        default: true
-        example: true
-      opt_privacy_hidesource:
-        title: Privacy Hidesource
-        description: Option for hiding of source URL, used only for "download" type
-        type: boolean
-        required: false
-        default: false
-        example: false
-      env_os:
-        title: OS
-        description: Operation system
-        type: string
-        required: false
-        default: 'windows'
-        example: 'windows'
-        enum:
-          - 'windows'
-      env_bitness:
-        title: Bitness
-        description: Bitness of operating system
+      count:
+        title: IOCs Count
+        description: The number of found IOCs
         type: int
         required: false
-        default: 32
-        example: 32
+  download_pcap:
+    title: Download PCAP
+    description: Download a pcap file
+    input:
+      analysis_uuid:
+        title: Analysis UUID
+        description: Analysis UUID
+        type: string
+        required: true
+        example: '0cf223f2-530e-4a50-b68f-563045268648'
+    output:
+      pcap:
+        title: Analysis PCAP
+        description: SAnalysis PCAP
+        type: file
+        required: false
+        example: file
+  windows_url_analysis:
+    title: Windows URL Analysis
+    description: Run URL analysis using Windows VM
+    input:
+      obj_url:
+        title: URL
+        description: Target URL. Size range 5-512. Example -> (http/https)://(your-link)
+        type: string
+        required: true
+        example: 'https://example.org'
+      env_version:
+        title: Version
+        description: Version of OS. Supports 7, 10, 11, server 2025
+        type: string
+        required: false
+        default: '10'
+        enum:
+          - '7'
+          - '10'
+          - '11'
+          - 'server 2025'
+      env_bitness:
+        title: Bitness
+        description: Bitness of Operation System. Supports 32, 64 for Windows. 64 for Windows Server 2025
+        type: int
+        required: false
+        default: 64
         enum:
           - 32
           - 64
-      env_version:
-        title: Version
-        description: Version of OS
-        type: string
-        required: false
-        default: '7'
-        example: '7'
-        enum:
-          - 'vista'
-          - '7'
-          - '8.1'
-          - '10'
       env_type:
         title: Type
-        description: Environment preset type
+        description: Environment preset type. You can select **development** env for OS Windows 10 x64. For all other cases, **complete** env is required
         type: string
         required: false
         default: 'complete'
-        example: 'complete'
         enum:
-          - 'clean'
-          - 'office'
           - 'complete'
+          - 'development'
+      env_locale:
+        title: Locale
+        description: Operation system's language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive
+        type: string
+        required: false
+        default: "en-US"
       opt_network_connect:
         title: Network Connect
         description: Network connection state
         type: boolean
         required: false
         default: true
-        example: true
       opt_network_fakenet:
         title: Network Fakenet
         description: FakeNet feature status
         type: boolean
         required: false
         default: false
-        example: false
       opt_network_tor:
         title: Network TOR
         description: TOR using
         type: boolean
         required: false
         default: false
-        example: false
+      opt_network_geo:
+        title: Network Geo
+        description: TOR geo location option
+        type: string
+        required: false
+        default: 'fastest'
+        example: 'US'
       opt_network_mitm:
         title: Network MITM
         description: HTTPS MITM proxy option
         type: boolean
         required: false
         default: false
-        example: false
-      opt_network_geo:
-        title: Network Geo
-        description: Geo location option
-        type: string
-        required: false
-        example: 'fastest'
-        enum:
-          - 'fastest'
-          - 'AU'
-          - 'BR'
-          - 'DE'
-          - 'CH'
-          - 'FR'
-          - 'KR'
-          - 'US'
-          - 'RU'
-          - 'GB'
-          - 'IT'
-      opt_kernel_heavyevasion:
-        title: Kernel Heavy Evasion
-        description: Heavy evasion option
+      opt_network_residential_proxy:
+        title: Residential proxy
+        description: Residential proxy option
         type: boolean
         required: false
         default: false
-        example: false
+      opt_network_residential_proxy_geo:
+        title: Residential proxy geo
+        description: Residential proxy geo option
+        type: string
+        required: false
+        default: 'fastest'
+        example: 'US'
       opt_privacy_type:
         title: Privacy Type
         description: Privacy settings
         type: string
         required: false
         default: 'bylink'
-        example: 'bylink'
         enum:
           - 'public'
           - 'bylink'
           - 'owner'
+          - 'byteam'
       opt_timeout:
         title: Timeout
         description: Timeout option, size range 10-660
         type: integer
         required: false
-        default: 60
-        example: 60
+        default: 120
+      opt_auto_delete_after:
+        title: Auto delete after
+        description: Specify after what period of time this report should be deleted
+        type: string
+        required: false
+        default: 'month'
+        enum:
+          - 'day'
+          - 'week'
+          - '2 weeks'
+          - 'month'
+      obj_ext_browser:
+        title: Browser
+        description: Browser name. Supports Google Chrome, Mozilla Firefox, Internet Explorer, Microsoft Edge for Windows 7, 10, 11. Microsoft Edge for Windows Server 2025
+        type: string
+        required: false
+        default: 'Microsoft Edge'
+        enum:
+          - 'Microsoft Edge'
+          - 'Google Chrome'
+          - 'Mozilla Firefox'
+          - 'Internet Explorer'
+      obj_ext_extension:
+        title: Extension
+        description: Change extension to valid
+        type: boolean
+        required: false
+        default: true
+      user_tags:
+        title: User tags
+        description: Append user tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8
+        type: string
+        required: false
+        default: 'insight-connect'
+    output:
+      analysis_uuid:
+        title: Analysis UUID
+        description: Analysis UUID
+        type: string
+        required: false
+        example: '0ec0a4cc-72a4-41b9-8a13-9f283b3b4e15'
+      analysis_url:
+        title: Analysis URL
+        description: Link to the interactive analysis
+        type: string
+        required: false
+        example: '0cf223f2-530e-4a50-b68f-563045268648'
+  linux_url_analysis:
+    title: Linux URL Analysis
+    description: Run URL analysis using Linux VM
+    input:
+      obj_url:
+        title: URL
+        description: Target URL. Size range 5-512. Example -> (http/https)://(your-link)
+        type: string
+        required: true
+        example: 'https://example.org'
+      env_os:
+        title: OS
+        description: Operation system. Supports ubuntu, debian
+        type: string
+        required: false
+        default: 'ubuntu'
+        enum:
+          - 'ubuntu'
+          - 'debian'
+      env_locale:
+        title: Locale
+        description: Operation system's language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive
+        type: string
+        required: false
+        default: "en-US"
+      opt_network_connect:
+        title: Network Connect
+        description: Network connection state
+        type: boolean
+        required: false
+        default: true
+      opt_network_fakenet:
+        title: Network Fakenet
+        description: FakeNet feature status
+        type: boolean
+        required: false
+        default: false
+      opt_network_tor:
+        title: Network TOR
+        description: TOR using
+        type: boolean
+        required: false
+        default: false
+      opt_network_geo:
+        title: Network Geo
+        description: TOR geo location option
+        type: string
+        required: false
+        default: 'fastest'
+        example: 'US'
+      opt_network_mitm:
+        title: Network MITM
+        description: HTTPS MITM proxy option
+        type: boolean
+        required: false
+        default: false
+      opt_network_residential_proxy:
+        title: Residential proxy
+        description: Residential proxy option
+        type: boolean
+        required: false
+        default: false
+      opt_network_residential_proxy_geo:
+        title: Residential proxy geo
+        description: Residential proxy geo option
+        type: string
+        required: false
+        default: 'fastest'
+        example: 'US'
+      opt_privacy_type:
+        title: Privacy Type
+        description: Privacy settings
+        type: string
+        required: false
+        default: 'bylink'
+        enum:
+          - 'public'
+          - 'bylink'
+          - 'owner'
+          - 'byteam'
+      opt_timeout:
+        title: Timeout
+        description: Timeout option, size range 10-660
+        type: integer
+        required: false
+        default: 120
+      opt_auto_delete_after:
+        title: Auto delete after
+        description: Specify after what period of time this report should be deleted
+        type: string
+        required: false
+        default: 'month'
+        enum:
+          - 'day'
+          - 'week'
+          - '2 weeks'
+          - 'month'
+      obj_ext_browser:
+        title: Browser
+        description: Browser name. Supports Google Chrome, Mozilla Firefox
+        type: string
+        required: false
+        default: 'Google Chrome'
+        enum:
+          - 'Google Chrome'
+          - 'Mozilla Firefox'
+      obj_ext_extension:
+        title: Extension
+        description: Change extension to valid
+        type: boolean
+        required: false
+        default: true
+      user_tags:
+        title: User tags
+        description: Append user tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8
+        type: string
+        required: false
+        default: 'insight-connect'
+    output:
+      analysis_uuid:
+        title: Analysis UUID
+        description: Analysis UUID
+        type: string
+        required: false
+        example: '0ec0a4cc-72a4-41b9-8a13-9f283b3b4e15'
+      analysis_url:
+        title: Analysis URL
+        description: Link to the interactive analysis
+        type: string
+        required: false
+        example: '0cf223f2-530e-4a50-b68f-563045268648'
+  android_url_analysis:
+    title: Android URL Analysis
+    description: Run URL analysis using Android VM
+    input:
+      obj_url:
+        title: URL
+        description: Target URL. Size range 5-512. Example -> (http/https)://(your-link)
+        type: string
+        required: true
+        example: 'https://example.org'
+      env_locale:
+        title: Locale
+        description: Operation system's language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive
+        type: string
+        required: false
+        default: "en-US"
+      opt_network_connect:
+        title: Network Connect
+        description: Network connection state
+        type: boolean
+        required: false
+        default: true
+      opt_network_fakenet:
+        title: Network Fakenet
+        description: FakeNet feature status
+        type: boolean
+        required: false
+        default: false
+      opt_network_tor:
+        title: Network TOR
+        description: TOR using
+        type: boolean
+        required: false
+        default: false
+      opt_network_geo:
+        title: Network Geo
+        description: TOR geo location option
+        type: string
+        required: false
+        default: 'fastest'
+        example: 'US'
+      opt_network_mitm:
+        title: Network MITM
+        description: HTTPS MITM proxy option
+        type: boolean
+        required: false
+        default: false
+      opt_network_residential_proxy:
+        title: Residential proxy
+        description: Residential proxy option
+        type: boolean
+        required: false
+        default: false
+      opt_network_residential_proxy_geo:
+        title: Residential proxy geo
+        description: Residential proxy geo option
+        type: string
+        required: false
+        default: 'fastest'
+        example: 'US'
+      opt_privacy_type:
+        title: Privacy Type
+        description: Privacy settings
+        type: string
+        required: false
+        default: 'bylink'
+        enum:
+          - 'public'
+          - 'bylink'
+          - 'owner'
+          - 'byteam'
+      opt_timeout:
+        title: Timeout
+        description: Timeout option, size range 10-660
+        type: integer
+        required: false
+        default: 120
+      opt_auto_delete_after:
+        title: Auto delete after
+        description: Specify after what period of time this report should be deleted
+        type: string
+        required: false
+        default: 'month'
+        enum:
+          - 'day'
+          - 'week'
+          - '2 weeks'
+          - 'month'
+      obj_ext_browser:
+        title: Browser
+        description: Browser name. Supports Google Chrome, Mozilla Firefox
+        type: string
+        required: false
+        default: 'Google Chrome'
+        enum:
+          - 'Google Chrome'
+          - 'Mozilla Firefox'
+      obj_ext_extension:
+        title: Extension
+        description: Change extension to valid
+        type: boolean
+        required: false
+        default: true
+      user_tags:
+        title: User tags
+        description: Append user tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8
+        type: string
+        required: false
+        default: 'insight-connect'
+    output:
+      analysis_uuid:
+        title: Analysis UUID
+        description: Analysis UUID
+        type: string
+        required: false
+        example: '0ec0a4cc-72a4-41b9-8a13-9f283b3b4e15'
+      analysis_url:
+        title: Analysis URL
+        description: Link to the interactive analysis
+        type: string
+        required: false
+        example: '0cf223f2-530e-4a50-b68f-563045268648'
+  windows_file_analysis:
+    title: Windows File Analysis
+    description: Run File analysis using Windows VM
+    input:
+      filename:
+        title: Filename
+        description: Filename
+        type: string
+        required: true
+        example: 'malware.zip'
+      file_content:
+        title: File content
+        description: File bytes
+        type: bytes
+        required: true
+      env_version:
+        title: Version
+        description: Version of OS. Supports 7, 10, 11, server 2025
+        type: string
+        required: false
+        default: '10'
+        enum:
+          - '7'
+          - '10'
+          - '11'
+          - 'server 2025'
+      env_bitness:
+        title: Bitness
+        description: Bitness of Operation System. Supports 32, 64 for Windows. 64 for Windows Server 2025
+        type: int
+        required: false
+        default: 64
+        enum:
+          - 32
+          - 64
+      env_type:
+        title: Type
+        description: Environment preset type. You can select **development** env for OS Windows 10 x64. For all other cases, **complete** env is required
+        type: string
+        required: false
+        default: 'complete'
+        enum:
+          - 'complete'
+          - 'development'
+      env_locale:
+        title: Locale
+        description: Operation system's language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive
+        type: string
+        required: false
+        default: "en-US"
+      opt_network_connect:
+        title: Network Connect
+        description: Network connection state
+        type: boolean
+        required: false
+        default: true
+      opt_network_fakenet:
+        title: Network Fakenet
+        description: FakeNet feature status
+        type: boolean
+        required: false
+        default: false
+      opt_network_tor:
+        title: Network TOR
+        description: TOR using
+        type: boolean
+        required: false
+        default: false
+      opt_network_geo:
+        title: Network Geo
+        description: TOR geo location option
+        type: string
+        required: false
+        default: 'fastest'
+        example: 'US'
+      opt_network_mitm:
+        title: Network MITM
+        description: HTTPS MITM proxy option
+        type: boolean
+        required: false
+        default: false
+      opt_network_residential_proxy:
+        title: Residential proxy
+        description: Residential proxy option
+        type: boolean
+        required: false
+        default: false
+      opt_network_residential_proxy_geo:
+        title: Residential proxy geo
+        description: Residential proxy geo option
+        type: string
+        required: false
+        default: 'fastest'
+        example: 'US'
+      opt_privacy_type:
+        title: Privacy Type
+        description: Privacy settings
+        type: string
+        required: false
+        default: 'bylink'
+        enum:
+          - 'public'
+          - 'bylink'
+          - 'owner'
+          - 'byteam'
+      opt_timeout:
+        title: Timeout
+        description: Timeout option, size range 10-660
+        type: integer
+        required: false
+        default: 120
+      opt_auto_delete_after:
+        title: Auto Delete After
+        description: Specify after what period of time this report should be deleted
+        type: string
+        required: false
+        default: 'month'
+        enum:
+          - 'day'
+          - 'week'
+          - '2 weeks'
+          - 'month'
+      obj_ext_extension:
+        title: Extension
+        description: Change extension to valid
+        type: boolean
+        required: false
+        default: true
+      obj_ext_cmd:
+        title: Command Line
+        description: Optional command line
+        type: string
+        required: false
       obj_ext_startfolder:
         title: Start Folder
         description: Start object from
         type: string
         required: false
         default: 'temp'
-        example: 'temp'
         enum:
           - 'desktop'
           - 'home'
@@ -1633,10 +840,437 @@ actions:
           - 'temp'
           - 'windows'
           - 'root'
+      obj_force_elevation:
+        title: Force Elevation
+        description: Forces the file to execute with elevated privileges and an elevated token (for PE32, PE32+, PE64 files only)
+        type: boolean
+        required: false
+        default: true
+      auto_confirm_uac:
+        title: Auto Confirm UAC
+        description: Auto confirm Windows UAC requests
+        type: boolean
+        required: false
+        default: true
+      user_tags:
+        title: User Tags
+        description: Append user tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8
+        type: string
+        required: false
+        default: 'insight-connect'
     output:
-      uuid:
-        title: Task UUID
-        description: Response task UUID
+      analysis_uuid:
+        title: Analysis UUID
+        description: Analysis UUID
         type: string
         required: false
         example: '0ec0a4cc-72a4-41b9-8a13-9f283b3b4e15'
+      analysis_url:
+        title: Analysis URL
+        description: Link to the interactive analysis
+        type: string
+        required: false
+        example: '0cf223f2-530e-4a50-b68f-563045268648'
+  linux_file_analysis:
+    title: Linux File Analysis
+    description: Run File analysis using Linux VM
+    input:
+      filename:
+        title: Filename
+        description: Filename
+        type: string
+        required: true
+        example: 'malware.zip'
+      file_content:
+        title: File content
+        description: File bytes
+        type: bytes
+        required: true
+      env_os:
+        title: OS
+        description: Operation system. Supports ubuntu, debian
+        type: string
+        required: false
+        default: 'ubuntu'
+        enum:
+          - 'ubuntu'
+          - 'debian'
+      env_locale:
+        title: Locale
+        description: Operation system's language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive
+        type: string
+        required: false
+        default: "en-US"
+      opt_network_connect:
+        title: Network Connect
+        description: Network connection state
+        type: boolean
+        required: false
+        default: true
+      opt_network_fakenet:
+        title: Network Fakenet
+        description: FakeNet feature status
+        type: boolean
+        required: false
+        default: false
+      opt_network_tor:
+        title: Network TOR
+        description: TOR using
+        type: boolean
+        required: false
+        default: false
+      opt_network_geo:
+        title: Network Geo
+        description: TOR geo location option
+        type: string
+        required: false
+        default: 'fastest'
+        example: 'US'
+      opt_network_mitm:
+        title: Network MITM
+        description: HTTPS MITM proxy option
+        type: boolean
+        required: false
+        default: false
+      opt_network_residential_proxy:
+        title: Residential proxy
+        description: Residential proxy option
+        type: boolean
+        required: false
+        default: false
+      opt_network_residential_proxy_geo:
+        title: Residential proxy geo
+        description: Residential proxy geo option
+        type: string
+        required: false
+        default: 'fastest'
+        example: 'US'
+      opt_privacy_type:
+        title: Privacy Type
+        description: Privacy settings
+        type: string
+        required: false
+        default: 'bylink'
+        enum:
+          - 'public'
+          - 'bylink'
+          - 'owner'
+          - 'byteam'
+      opt_timeout:
+        title: Timeout
+        description: Timeout option, size range 10-660
+        type: integer
+        required: false
+        default: 120
+      opt_auto_delete_after:
+        title: Auto Delete After
+        description: Specify after what period of time this report should be deleted
+        type: string
+        required: false
+        default: 'month'
+        enum:
+          - 'day'
+          - 'week'
+          - '2 weeks'
+          - 'month'
+      obj_ext_extension:
+        title: Extension
+        description: Change extension to valid
+        type: boolean
+        required: false
+        default: true
+      obj_ext_cmd:
+        title: Command Line
+        description: Optional command line
+        type: string
+        required: false
+      obj_ext_startfolder:
+        title: Start Folder
+        description: Start object from
+        type: string
+        required: false
+        default: 'temp'
+        enum:
+          - 'desktop'
+          - 'home'
+          - 'downloads'
+          - 'temp'
+      run_as_root:
+        title: Run As Root
+        description: Run file with superuser privileges
+        type: boolean
+        required: false
+        default: true
+      user_tags:
+        title: User Tags
+        description: Append user tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8
+        type: string
+        required: false
+        default: 'insight-connect'
+    output:
+      analysis_uuid:
+        title: Analysis UUID
+        description: Analysis UUID
+        type: string
+        required: false
+        example: '0ec0a4cc-72a4-41b9-8a13-9f283b3b4e15'
+      analysis_url:
+        title: Analysis URL
+        description: Link to the interactive analysis
+        type: string
+        required: false
+        example: '0cf223f2-530e-4a50-b68f-563045268648'
+  android_file_analysis:
+    title: Android File Analysis
+    description: Run File analysis using Android VM
+    input:
+      filename:
+        title: Filename
+        description: Filename
+        type: string
+        required: true
+        example: 'malware.zip'
+      file_content:
+        title: File content
+        description: File bytes
+        type: bytes
+        required: true
+      env_locale:
+        title: Locale
+        description: Operation system's language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive
+        type: string
+        required: false
+        default: "en-US"
+      opt_network_connect:
+        title: Network Connect
+        description: Network connection state
+        type: boolean
+        required: false
+        default: true
+      opt_network_fakenet:
+        title: Network Fakenet
+        description: FakeNet feature status
+        type: boolean
+        required: false
+        default: false
+      opt_network_tor:
+        title: Network TOR
+        description: TOR using
+        type: boolean
+        required: false
+        default: false
+      opt_network_geo:
+        title: Network Geo
+        description: TOR geo location option
+        type: string
+        required: false
+        default: 'fastest'
+        example: 'US'
+      opt_network_mitm:
+        title: Network MITM
+        description: HTTPS MITM proxy option
+        type: boolean
+        required: false
+        default: false
+      opt_network_residential_proxy:
+        title: Residential proxy
+        description: Residential proxy option
+        type: boolean
+        required: false
+        default: false
+      opt_network_residential_proxy_geo:
+        title: Residential proxy geo
+        description: Residential proxy geo option
+        type: string
+        required: false
+        default: 'fastest'
+        example: 'US'
+      opt_privacy_type:
+        title: Privacy Type
+        description: Privacy settings
+        type: string
+        required: false
+        default: 'bylink'
+        enum:
+          - 'public'
+          - 'bylink'
+          - 'owner'
+          - 'byteam'
+      opt_timeout:
+        title: Timeout
+        description: Timeout option, size range 10-660
+        type: integer
+        required: false
+        default: 120
+      opt_auto_delete_after:
+        title: Auto Delete After
+        description: Specify after what period of time this report should be deleted
+        type: string
+        required: false
+        default: 'month'
+        enum:
+          - 'day'
+          - 'week'
+          - '2 weeks'
+          - 'month'
+      user_tags:
+        title: User Tags
+        description: Append user tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8
+        type: string
+        required: false
+        default: 'insight-connect'
+    output:
+      analysis_uuid:
+        title: Analysis UUID
+        description: Analysis UUID
+        type: string
+        required: false
+        example: '0ec0a4cc-72a4-41b9-8a13-9f283b3b4e15'
+      analysis_url:
+        title: Analysis URL
+        description: Link to the interactive analysis
+        type: string
+        required: false
+        example: '0cf223f2-530e-4a50-b68f-563045268648'
+  get_intelligence:
+    title: Get Intelligence
+    description: Make a query to the ANY.RUN Threat Intelligence database using flexible searches for Indicators of Compromise (IOCs), Indicators of Attack(IOAs), and Indicators of Behavior (IOBs) to investigate and gather extensive and in-depth information on cyber threats
+    input:
+      query:
+        title: Query
+        description: Raw query with necessary filters. Supports condition concatenation with AND, OR, NOT and Parentheses ()
+        type: string
+        required: true
+        example: 'domainName:"\rvonline.hu" OR url:"*\rvonline.hu*"'
+      lookup_depth:
+        title: Lookup Depth
+        description: Specify the number of days from the current date for which you want to lookup
+        type: int
+        required: false
+        default: 180
+    output:
+      report:
+        title: Lookup Summary
+        description: Lookup Summary JSON
+        type: file
+        required: false
+        example: file
+      lookup_url:
+        title: Lookup URL
+        description: Link to the TI Lookup Query
+        type: string
+        required: false
+  get_reputation:
+    title: Get Reputation
+    description: Check URL/IP/Domain/File reputation
+    input:
+      entity_type:
+        title: Entity Type
+        description: Entity type to search in database
+        type: string
+        required: true
+        default: 'url'
+        enum:
+          - 'url'
+          - 'hash'
+          - 'destination_ip'
+          - 'domain_name'
+      entity_value:
+        title: Entity Value
+        description: URL (Size range 2-256) or Hash (sha256, sha1, md5) or Domain or IP
+        type: string
+        required: true
+      lookup_depth:
+        title: Lookup Depth
+        description: Specify the number of days from the current date for which you want to lookup
+        type: int
+        required: false
+        default: 180
+    output:
+      verdict:
+        title: Analysis verdict
+        description: Analysis verdict. Can be 'Malicious', 'Suspicious' or 'No threads detected'
+        type: string
+        required: false
+        example: 'Malicious'
+      tags:
+        title: Tags
+        description: A comma-separated list of IOC-related tags
+        type: string
+        required: false
+        example: 'asyncrat,stealer,botnet'
+      industries:
+        title: Industries
+        description: A comma-separated list of IOC-related industries
+        type: string
+        required: false
+        example: 'health,banking,finance'
+      last_modified:
+        title: Last modified
+        description: Last analysis date
+        type: string
+        required: false
+        example: '2026-03-27 06:31:44'
+      last_analyses:
+        title: Last analyses
+        description: A comma-separated list of IOC-related analyses
+        type: string
+        required: false
+        example: 'https://app.any.run/tasks/f3ebe6be-3089-42ab-8c16-2477250b30bc,https://app.any.run/tasks/f3ebe6be-3089-42ab-8c16-2912250b30bc'
+      asowner:
+        title: ASOwner
+        description: IOC-related autonomous system owner
+        type: string
+        required: false
+        example: 'cloudflarenet'
+      geo:
+        title: Geo
+        description: IOC-related geo country code
+        type: string
+        required: false
+        example: 'us'
+      port:
+        title: Port
+        description: IOC-related port number
+        type: string
+        required: false
+      filename:
+        title: Filename
+        description: IOC-related filename
+        type: string
+        required: false
+      filepath:
+        title: Filepath
+        description: IOC-related filepath
+        type: string
+        required: false
+      file_extension:
+        title: File Extension
+        description: IOC-related file extension
+        type: string
+        required: false
+      md5:
+        title: MD5
+        description: IOC-related md5 hash
+        type: string
+        required: false
+      sha256:
+        title: SHA256
+        description: IOC-related sha256 hash
+        type: string
+        required: false
+      sha1:
+        title: SHA1
+        description: IOC-related sha1 hash
+        type: string
+        required: false
+      ssdeep:
+        title: SSDeep
+        description: IOC-related ssdeep
+        type: string
+        required: false
+      lookup_url:
+        title: Lookup URL
+        description: Link to the TI Lookup Query
+        type: string
+        required: false

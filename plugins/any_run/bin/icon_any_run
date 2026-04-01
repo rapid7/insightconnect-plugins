@@ -4,10 +4,10 @@ import os
 import json
 from sys import argv
 
-Name = "Any.Run"
+Name = "ANY.RUN"
 Vendor = "rapid7"
-Version = "2.0.0"
-Description = "Analyze suspicious and malicious activities using the cloud-based malware analysis service"
+Version = "3.0.0"
+Description = "ANY.RUN Sandbox is an online interactive sandbox for malware analysis, a tool for detection, monitoring, and research of cyber threats in real time"
 
 
 def main():
@@ -34,11 +34,31 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
-            self.add_action(actions.GetHistory())
+            self.add_action(actions.GetAnalysisHistory())
         
-            self.add_action(actions.GetReport())
+            self.add_action(actions.GetAnalysisReport())
         
-            self.add_action(actions.RunAnalysis())
+            self.add_action(actions.GetAnalysisVerdict())
+        
+            self.add_action(actions.GetIoc())
+        
+            self.add_action(actions.DownloadPcap())
+        
+            self.add_action(actions.WindowsUrlAnalysis())
+        
+            self.add_action(actions.LinuxUrlAnalysis())
+        
+            self.add_action(actions.AndroidUrlAnalysis())
+        
+            self.add_action(actions.WindowsFileAnalysis())
+        
+            self.add_action(actions.LinuxFileAnalysis())
+        
+            self.add_action(actions.AndroidFileAnalysis())
+        
+            self.add_action(actions.GetIntelligence())
+        
+            self.add_action(actions.GetReputation())
         
 
     """Run plugin"""

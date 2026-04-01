@@ -1,23 +1,63 @@
 {
-	"spec": "8ea8caaf0fd7c5413cd84406949435b9",
-	"manifest": "5e83ea9b7d68778c20892ac7d39c04ff",
-	"setup": "5bcc34618d825dc09f47dbdc7f15c533",
+	"spec": "6bab3f87db30a42b5d638a89d8c67457",
+	"manifest": "e6a2fc190fba39a758cdd28c503dcd25",
+	"setup": "400f251f66f4fc01b6663d2b25c8c733",
 	"schemas": [
 		{
-			"identifier": "get_history/schema.py",
-			"hash": "d5077de8b7427a66adacd3e8cb55342a"
+			"identifier": "android_file_analysis/schema.py",
+			"hash": "4ef6bf5194ec406b1ed8edfbdfde6551"
 		},
 		{
-			"identifier": "get_report/schema.py",
-			"hash": "9758f56bb01826d049f9b2614587d59a"
+			"identifier": "android_url_analysis/schema.py",
+			"hash": "4f2b69234ce3cb6c335fe8c5afb96439"
 		},
 		{
-			"identifier": "run_analysis/schema.py",
-			"hash": "b039163bac8e57c77f14acd152136f6c"
+			"identifier": "download_pcap/schema.py",
+			"hash": "8653d803ff6fa0531902e857b7a3b284"
+		},
+		{
+			"identifier": "get_analysis_history/schema.py",
+			"hash": "c18b4e2c4496b99b6e5c3f7b3d8a5ab9"
+		},
+		{
+			"identifier": "get_analysis_report/schema.py",
+			"hash": "ff6de6f8175a3f57d969a7484337ef33"
+		},
+		{
+			"identifier": "get_analysis_verdict/schema.py",
+			"hash": "b1fe805dd1f7676de8c99948fb9ff039"
+		},
+		{
+			"identifier": "get_intelligence/schema.py",
+			"hash": "39e28b1cb96d46eb70cd8533f294e0aa"
+		},
+		{
+			"identifier": "get_ioc/schema.py",
+			"hash": "caad01945a2bb265033915516ae10af8"
+		},
+		{
+			"identifier": "get_reputation/schema.py",
+			"hash": "1ae97153d22e49e724e8a002f1bb7968"
+		},
+		{
+			"identifier": "linux_file_analysis/schema.py",
+			"hash": "ed6e4ba0f01c3beb80429b48628674dd"
+		},
+		{
+			"identifier": "linux_url_analysis/schema.py",
+			"hash": "0884396557eacabaae600510dcf7469d"
+		},
+		{
+			"identifier": "windows_file_analysis/schema.py",
+			"hash": "dcbc52e02d827f2314f8f8e51f4452b5"
+		},
+		{
+			"identifier": "windows_url_analysis/schema.py",
+			"hash": "8ab855443b96a2addc23f597a2105af3"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "957268e952eb54e16d4f633fae959173"
+			"hash": "595e63b7df1ceb49d09a7fe00253d7f4"
 		}
 	]
 }
