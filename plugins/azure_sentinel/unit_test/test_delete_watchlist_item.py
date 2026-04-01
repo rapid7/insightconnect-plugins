@@ -26,7 +26,7 @@ class TestDeleteWatchlistItem(TestCase):
         }
         self.action.connection.api_client = mock.create_autospec(AzureSentinelClient)
 
-    def test_delete_watchlist_item_ok(self):
+    def test_delete_watchlist_item_ok(self) -> None:
         self.action.run(self.params)
         self.action.connection.api_client.delete_watchlist_items.assert_called_once_with(
             "integrationLab",
