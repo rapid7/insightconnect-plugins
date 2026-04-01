@@ -33,7 +33,7 @@ class GetAnalysisReportInput(insightconnect_plugin_runtime.Input):
     },
     "format": {
       "type": "string",
-      "title": "Report format",
+      "title": "Report Format",
       "description": "Report file in JSON, HTML or STIX format",
       "default": "html",
       "enum": [

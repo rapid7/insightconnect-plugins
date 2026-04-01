@@ -41,14 +41,14 @@ class LinuxUrlAnalysisInput(insightconnect_plugin_runtime.Input):
     "env_locale": {
       "type": "string",
       "title": "Locale",
-      "description": "Operation system's language. Use locale identifier or country name Example - ( \"en-US\" or \"Brazil\"). Case insensitive",
+      "description": "Operation System language. Use locale identifier or country name Example - ( \"en-US\" or \"Brazil\"). Case insensitive",
       "default": "en-US",
       "order": 3
     },
     "env_os": {
       "type": "string",
       "title": "OS",
-      "description": "Operation system. Supports ubuntu, debian",
+      "description": "Operation System. Supports ubuntu, debian",
       "default": "ubuntu",
       "enum": [
         "ubuntu",
@@ -82,7 +82,7 @@ class LinuxUrlAnalysisInput(insightconnect_plugin_runtime.Input):
     },
     "opt_auto_delete_after": {
       "type": "string",
-      "title": "Auto delete after",
+      "title": "Auto Delete after",
       "description": "Specify after what period of time this report should be deleted",
       "default": "month",
       "enum": [
@@ -123,15 +123,15 @@ class LinuxUrlAnalysisInput(insightconnect_plugin_runtime.Input):
     },
     "opt_network_residential_proxy": {
       "type": "boolean",
-      "title": "Residential proxy",
-      "description": "Residential proxy option",
+      "title": "Residential Proxy",
+      "description": "Residential Proxy option",
       "default": false,
       "order": 9
     },
     "opt_network_residential_proxy_geo": {
       "type": "string",
-      "title": "Residential proxy geo",
-      "description": "Residential proxy geo option",
+      "title": "Residential Proxy Geo",
+      "description": "Residential Proxy Geo option",
       "default": "fastest",
       "order": 10
     },
@@ -164,8 +164,8 @@ class LinuxUrlAnalysisInput(insightconnect_plugin_runtime.Input):
     },
     "user_tags": {
       "type": "string",
-      "title": "User tags",
-      "description": "Append user tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8",
+      "title": "User Tags",
+      "description": "Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8",
       "default": "insight-connect",
       "order": 16
     }

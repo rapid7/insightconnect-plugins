@@ -55,7 +55,7 @@ class GetReputationInput(insightconnect_plugin_runtime.Input):
     "entity_value": {
       "type": "string",
       "title": "Entity Value",
-      "description": "URL (Size range 2-256) or Hash (sha256, sha1, md5) or Domain or IP",
+      "description": "URL (Size range 2-256) or Hash (SHA256, SAH1, MD5) or Domain or IP",
       "order": 2
     },
     "lookup_depth": {
@@ -124,13 +124,13 @@ class GetReputationOutput(insightconnect_plugin_runtime.Output):
     },
     "last_analyses": {
       "type": "string",
-      "title": "Last analyses",
+      "title": "Last Analyses",
       "description": "A comma-separated list of IOC-related analyses",
       "order": 5
     },
     "last_modified": {
       "type": "string",
-      "title": "Last modified",
+      "title": "Last Modified",
       "description": "Last analysis date",
       "order": 4
     },
@@ -143,7 +143,7 @@ class GetReputationOutput(insightconnect_plugin_runtime.Output):
     "md5": {
       "type": "string",
       "title": "MD5",
-      "description": "IOC-related md5 hash",
+      "description": "IOC-related MD5 hash",
       "order": 12
     },
     "port": {
@@ -155,13 +155,13 @@ class GetReputationOutput(insightconnect_plugin_runtime.Output):
     "sha1": {
       "type": "string",
       "title": "SHA1",
-      "description": "IOC-related sha1 hash",
+      "description": "IOC-related SHA1 hash",
       "order": 14
     },
     "sha256": {
       "type": "string",
       "title": "SHA256",
-      "description": "IOC-related sha256 hash",
+      "description": "IOC-related SHA256 hash",
       "order": 13
     },
     "ssdeep": {
@@ -178,7 +178,7 @@ class GetReputationOutput(insightconnect_plugin_runtime.Output):
     },
     "verdict": {
       "type": "string",
-      "title": "Analysis verdict",
+      "title": "Analysis Verdict",
       "description": "Analysis verdict. Can be 'Malicious', 'Suspicious' or 'No threads detected'",
       "order": 1
     }

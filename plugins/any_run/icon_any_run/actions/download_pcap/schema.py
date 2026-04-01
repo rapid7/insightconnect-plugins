@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Download a pcap file"
+    DESCRIPTION = "Download a PCAP file"
 
 
 class Input:

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get malicious and suspicious IOCs in csv format from the analysis if available"
+    DESCRIPTION = "Get malicious and suspicious IOCs in CSV format from the analysis if available"
 
 
 class Input:
@@ -58,7 +58,7 @@ class GetIocOutput(insightconnect_plugin_runtime.Output):
     "report": {
       "$ref": "#/definitions/file",
       "title": "Analysis IOCs",
-      "description": "Suspicious and Malicious IOCs csv",
+      "description": "Suspicious and Malicious IOCs CSV",
       "order": 1
     }
   },

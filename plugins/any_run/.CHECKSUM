@@ -1,19 +1,19 @@
 {
-	"spec": "6bab3f87db30a42b5d638a89d8c67457",
+	"spec": "463bbac0179457a4b672c9ce5c756b87",
 	"manifest": "e6a2fc190fba39a758cdd28c503dcd25",
 	"setup": "400f251f66f4fc01b6663d2b25c8c733",
 	"schemas": [
 		{
 			"identifier": "android_file_analysis/schema.py",
-			"hash": "4ef6bf5194ec406b1ed8edfbdfde6551"
+			"hash": "06bd17ab37163bdb8f9d39bd3a523ba5"
 		},
 		{
 			"identifier": "android_url_analysis/schema.py",
-			"hash": "4f2b69234ce3cb6c335fe8c5afb96439"
+			"hash": "f2d8a2ab3a54b08ad4942c42b610d064"
 		},
 		{
 			"identifier": "download_pcap/schema.py",
-			"hash": "8653d803ff6fa0531902e857b7a3b284"
+			"hash": "9e965a204e6506ba14a32c537031f992"
 		},
 		{
 			"identifier": "get_analysis_history/schema.py",
@@ -21,11 +21,11 @@
 		},
 		{
 			"identifier": "get_analysis_report/schema.py",
-			"hash": "ff6de6f8175a3f57d969a7484337ef33"
+			"hash": "741cdd5fb810fef535e6b389feb00452"
 		},
 		{
 			"identifier": "get_analysis_verdict/schema.py",
-			"hash": "b1fe805dd1f7676de8c99948fb9ff039"
+			"hash": "cdfd7dab8cc3687f4bf8f29fed77d9c5"
 		},
 		{
 			"identifier": "get_intelligence/schema.py",
@@ -33,27 +33,27 @@
 		},
 		{
 			"identifier": "get_ioc/schema.py",
-			"hash": "caad01945a2bb265033915516ae10af8"
+			"hash": "2d81f8e726da3edd89eb1a5d9129acb4"
 		},
 		{
 			"identifier": "get_reputation/schema.py",
-			"hash": "1ae97153d22e49e724e8a002f1bb7968"
+			"hash": "97c64bae0ad1a2f58aca0c2c6775f467"
 		},
 		{
 			"identifier": "linux_file_analysis/schema.py",
-			"hash": "ed6e4ba0f01c3beb80429b48628674dd"
+			"hash": "affc829a21edc4c972441c016f83b604"
 		},
 		{
 			"identifier": "linux_url_analysis/schema.py",
-			"hash": "0884396557eacabaae600510dcf7469d"
+			"hash": "8f2970ea0f72266c72a81b49ed4948a6"
 		},
 		{
 			"identifier": "windows_file_analysis/schema.py",
-			"hash": "dcbc52e02d827f2314f8f8e51f4452b5"
+			"hash": "f6a5c12b68a859aff67b4248639bf548"
 		},
 		{
 			"identifier": "windows_url_analysis/schema.py",
-			"hash": "8ab855443b96a2addc23f597a2105af3"
+			"hash": "ae5c0189b98307761ac0f37caa185334"
 		},
 		{
 			"identifier": "connection/schema.py",

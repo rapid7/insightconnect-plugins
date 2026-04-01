@@ -39,7 +39,7 @@ class AndroidFileAnalysisInput(insightconnect_plugin_runtime.Input):
     "env_locale": {
       "type": "string",
       "title": "Locale",
-      "description": "Operation system's language. Use locale identifier or country name Example - ( \"en-US\" or \"Brazil\"). Case insensitive",
+      "description": "Operation System language. Use locale identifier or country name Example - ( \"en-US\" or \"Brazil\"). Case insensitive",
       "default": "en-US",
       "order": 3
     },
@@ -47,7 +47,7 @@ class AndroidFileAnalysisInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "format": "bytes",
       "displayType": "bytes",
-      "title": "File content",
+      "title": "File Content",
       "description": "File bytes",
       "order": 2
     },
@@ -59,7 +59,7 @@ class AndroidFileAnalysisInput(insightconnect_plugin_runtime.Input):
     },
     "opt_auto_delete_after": {
       "type": "string",
-      "title": "Auto Delete After",
+      "title": "Auto Delete after",
       "description": "Specify after what period of time this report should be deleted",
       "default": "month",
       "enum": [
@@ -100,15 +100,15 @@ class AndroidFileAnalysisInput(insightconnect_plugin_runtime.Input):
     },
     "opt_network_residential_proxy": {
       "type": "boolean",
-      "title": "Residential proxy",
-      "description": "Residential proxy option",
+      "title": "Residential Proxy",
+      "description": "Residential Proxy option",
       "default": false,
       "order": 9
     },
     "opt_network_residential_proxy_geo": {
       "type": "string",
-      "title": "Residential proxy geo",
-      "description": "Residential proxy geo option",
+      "title": "Residential Proxy Geo",
+      "description": "Residential Proxy Geo option",
       "default": "fastest",
       "order": 10
     },
@@ -136,13 +136,13 @@ class AndroidFileAnalysisInput(insightconnect_plugin_runtime.Input):
       "type": "integer",
       "title": "Timeout",
       "description": "Timeout option, size range 10-660",
-      "default": 120,
+      "default": 240,
       "order": 12
     },
     "user_tags": {
       "type": "string",
       "title": "User Tags",
-      "description": "Append user tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8",
+      "description": "Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8",
       "default": "insight-connect",
       "order": 14
     }

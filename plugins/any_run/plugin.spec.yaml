@@ -5,8 +5,8 @@ name: any_run
 title: "ANY.RUN"
 description: ANY.RUN Sandbox is an online interactive sandbox for malware analysis, a tool for detection, monitoring, and research of cyber threats in real time
 version: 3.0.0
-connection_version: 2
-supported_versions: ["Any.Run API 2026-03-20"]
+connection_version: 3
+supported_versions: ["ANY.RUN API 2026-03-20"]
 vendor: rapid7
 support: partner
 status: []
@@ -24,7 +24,7 @@ hub_tags:
   features: []
 sdk:
   type: slim
-  version: 6.4.0
+  version: 6.4.3
   user: nobody
 key_features:
   - Submit a file or URL to ANY.RUN for analysis using the following OS - Windows, Linux, Android
@@ -39,7 +39,7 @@ requirements:
   - Requires an ANY.RUN Sandbox or ANY.RUN TI Lookup API key without a prefix
   - ANY.RUN "Enterprise Suite" plan (API access required)
 troubleshooting:
-  - Configure the connection with either an API key without a prefix. If you need help, contact us - techsupport@any.run.
+  - Configure the connection with either an API key without a prefix.
 version_history:
   - "3.0.0 - Migrate to the ANY.RUN SDK | Update existing actions | Add new actions"
   - "2.0.0 - Actions: `Get Report` - Updated output schema types | Updated SDK to the latest version (6.4.0)"
@@ -203,7 +203,7 @@ actions:
         required: true
         example: '0cf223f2-530e-4a50-b68f-563045268648'
       format:
-        title: Report format
+        title: Report Format
         description: Report file in JSON, HTML or STIX format
         type: string
         required: false
@@ -212,6 +212,7 @@ actions:
           - 'html'
           - 'json'
           - 'stix'
+        example: 'json'
     output:
       report:
         title: Analysis Report
@@ -243,14 +244,14 @@ actions:
         example: '0cf223f2-530e-4a50-b68f-563045268648'
     output:
       verdict:
-        title: Analysis verdict
+        title: Analysis Verdict
         description: Analysis verdict. Can be 'Malicious', 'Suspicious' or 'No threads detected'
         type: string
         required: false
         example: 'Malicious'
   get_ioc:
     title: Get IOC
-    description: Get malicious and suspicious IOCs in csv format from the analysis if available
+    description: Get malicious and suspicious IOCs in CSV format from the analysis if available
     input:
       analysis_uuid:
         title: Analysis UUID
@@ -261,7 +262,7 @@ actions:
     output:
       report:
         title: Analysis IOCs
-        description: Suspicious and Malicious IOCs csv
+        description: Suspicious and Malicious IOCs CSV
         type: file
         required: false
         example: file
@@ -272,7 +273,7 @@ actions:
         required: false
   download_pcap:
     title: Download PCAP
-    description: Download a pcap file
+    description: Download a PCAP file
     input:
       analysis_uuid:
         title: Analysis UUID
@@ -308,6 +309,7 @@ actions:
           - '10'
           - '11'
           - 'server 2025'
+        example: '10'
       env_bitness:
         title: Bitness
         description: Bitness of Operation System. Supports 32, 64 for Windows. 64 for Windows Server 2025
@@ -317,6 +319,7 @@ actions:
         enum:
           - 32
           - 64
+        example: 64
       env_type:
         title: Type
         description: Environment preset type. You can select **development** env for OS Windows 10 x64. For all other cases, **complete** env is required
@@ -326,30 +329,35 @@ actions:
         enum:
           - 'complete'
           - 'development'
+        example: 'complete'
       env_locale:
         title: Locale
-        description: Operation system's language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive
+        description: Operation System language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive
         type: string
         required: false
         default: "en-US"
+        example: "en-US"
       opt_network_connect:
         title: Network Connect
         description: Network connection state
         type: boolean
         required: false
         default: true
+        example: true
       opt_network_fakenet:
         title: Network Fakenet
         description: FakeNet feature status
         type: boolean
         required: false
         default: false
+        example: false
       opt_network_tor:
         title: Network TOR
         description: TOR using
         type: boolean
         required: false
         default: false
+        example: false
       opt_network_geo:
         title: Network Geo
         description: TOR geo location option
@@ -363,15 +371,17 @@ actions:
         type: boolean
         required: false
         default: false
+        example: false
       opt_network_residential_proxy:
-        title: Residential proxy
-        description: Residential proxy option
+        title: Residential Proxy
+        description: Residential Proxy option
         type: boolean
         required: false
         default: false
+        example: false
       opt_network_residential_proxy_geo:
-        title: Residential proxy geo
-        description: Residential proxy geo option
+        title: Residential Proxy Geo
+        description: Residential Proxy Geo option
         type: string
         required: false
         default: 'fastest'
@@ -387,14 +397,16 @@ actions:
           - 'bylink'
           - 'owner'
           - 'byteam'
+        example: 'bylink'
       opt_timeout:
         title: Timeout
         description: Timeout option, size range 10-660
         type: integer
         required: false
         default: 120
+        example: 120
       opt_auto_delete_after:
-        title: Auto delete after
+        title: Auto Delete after
         description: Specify after what period of time this report should be deleted
         type: string
         required: false
@@ -404,6 +416,7 @@ actions:
           - 'week'
           - '2 weeks'
           - 'month'
+        example: 'month'
       obj_ext_browser:
         title: Browser
         description: Browser name. Supports Google Chrome, Mozilla Firefox, Internet Explorer, Microsoft Edge for Windows 7, 10, 11. Microsoft Edge for Windows Server 2025
@@ -415,18 +428,21 @@ actions:
           - 'Google Chrome'
           - 'Mozilla Firefox'
           - 'Internet Explorer'
+        example: 'Microsoft Edge'
       obj_ext_extension:
         title: Extension
         description: Change extension to valid
         type: boolean
         required: false
         default: true
+        example: true
       user_tags:
-        title: User tags
-        description: Append user tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8
+        title: User Tags
+        description: Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8
         type: string
         required: false
         default: 'insight-connect'
+        example: 'insight-connect'
     output:
       analysis_uuid:
         title: Analysis UUID
@@ -452,37 +468,42 @@ actions:
         example: 'https://example.org'
       env_os:
         title: OS
-        description: Operation system. Supports ubuntu, debian
+        description: Operation System. Supports ubuntu, debian
         type: string
         required: false
         default: 'ubuntu'
         enum:
           - 'ubuntu'
           - 'debian'
+        example: 'ubuntu'
       env_locale:
         title: Locale
-        description: Operation system's language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive
+        description: Operation System language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive
         type: string
         required: false
         default: "en-US"
+        example: "en-US"
       opt_network_connect:
         title: Network Connect
         description: Network connection state
         type: boolean
         required: false
         default: true
+        example: true
       opt_network_fakenet:
         title: Network Fakenet
         description: FakeNet feature status
         type: boolean
         required: false
         default: false
+        example: false
       opt_network_tor:
         title: Network TOR
         description: TOR using
         type: boolean
         required: false
         default: false
+        example: false
       opt_network_geo:
         title: Network Geo
         description: TOR geo location option
@@ -496,15 +517,17 @@ actions:
         type: boolean
         required: false
         default: false
+        example: false
       opt_network_residential_proxy:
-        title: Residential proxy
-        description: Residential proxy option
+        title: Residential Proxy
+        description: Residential Proxy option
         type: boolean
         required: false
         default: false
+        example: false
       opt_network_residential_proxy_geo:
-        title: Residential proxy geo
-        description: Residential proxy geo option
+        title: Residential Proxy Geo
+        description: Residential Proxy Geo option
         type: string
         required: false
         default: 'fastest'
@@ -520,14 +543,16 @@ actions:
           - 'bylink'
           - 'owner'
           - 'byteam'
+        example: 'bylink'
       opt_timeout:
         title: Timeout
         description: Timeout option, size range 10-660
         type: integer
         required: false
         default: 120
+        example: 120
       opt_auto_delete_after:
-        title: Auto delete after
+        title: Auto Delete after
         description: Specify after what period of time this report should be deleted
         type: string
         required: false
@@ -537,6 +562,7 @@ actions:
           - 'week'
           - '2 weeks'
           - 'month'
+        example: 'month'
       obj_ext_browser:
         title: Browser
         description: Browser name. Supports Google Chrome, Mozilla Firefox
@@ -546,18 +572,21 @@ actions:
         enum:
           - 'Google Chrome'
           - 'Mozilla Firefox'
+        example: 'Google Chrome'
       obj_ext_extension:
         title: Extension
         description: Change extension to valid
         type: boolean
         required: false
         default: true
+        example: true
       user_tags:
-        title: User tags
-        description: Append user tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8
+        title: User Tags
+        description: Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8
         type: string
         required: false
         default: 'insight-connect'
+        example: 'insight-connect'
     output:
       analysis_uuid:
         title: Analysis UUID
@@ -583,28 +612,32 @@ actions:
         example: 'https://example.org'
       env_locale:
         title: Locale
-        description: Operation system's language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive
+        description: Operation System language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive
         type: string
         required: false
         default: "en-US"
+        example: "en-US"
       opt_network_connect:
         title: Network Connect
         description: Network connection state
         type: boolean
         required: false
         default: true
+        example: true
       opt_network_fakenet:
         title: Network Fakenet
         description: FakeNet feature status
         type: boolean
         required: false
         default: false
+        example: false
       opt_network_tor:
         title: Network TOR
         description: TOR using
         type: boolean
         required: false
         default: false
+        example: false
       opt_network_geo:
         title: Network Geo
         description: TOR geo location option
@@ -618,15 +651,17 @@ actions:
         type: boolean
         required: false
         default: false
+        example: false
       opt_network_residential_proxy:
-        title: Residential proxy
-        description: Residential proxy option
+        title: Residential Proxy
+        description: Residential Proxy option
         type: boolean
         required: false
         default: false
+        example: false
       opt_network_residential_proxy_geo:
-        title: Residential proxy geo
-        description: Residential proxy geo option
+        title: Residential Proxy Geo
+        description: Residential Proxy Geo option
         type: string
         required: false
         default: 'fastest'
@@ -642,14 +677,16 @@ actions:
           - 'bylink'
           - 'owner'
           - 'byteam'
+        example: 'bylink'
       opt_timeout:
         title: Timeout
         description: Timeout option, size range 10-660
         type: integer
         required: false
         default: 120
+        example: 120
       opt_auto_delete_after:
-        title: Auto delete after
+        title: Auto Delete after
         description: Specify after what period of time this report should be deleted
         type: string
         required: false
@@ -659,6 +696,7 @@ actions:
           - 'week'
           - '2 weeks'
           - 'month'
+        example: 'month'
       obj_ext_browser:
         title: Browser
         description: Browser name. Supports Google Chrome, Mozilla Firefox
@@ -668,18 +706,21 @@ actions:
         enum:
           - 'Google Chrome'
           - 'Mozilla Firefox'
+        example: 'Google Chrome'
       obj_ext_extension:
         title: Extension
         description: Change extension to valid
         type: boolean
         required: false
         default: true
+        example: true
       user_tags:
-        title: User tags
-        description: Append user tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8
+        title: User Tags
+        description: Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8
         type: string
         required: false
         default: 'insight-connect'
+        example: 'insight-connect'
     output:
       analysis_uuid:
         title: Analysis UUID
@@ -704,10 +745,11 @@ actions:
         required: true
         example: 'malware.zip'
       file_content:
-        title: File content
+        title: File Content
         description: File bytes
         type: bytes
         required: true
+        example: bytes
       env_version:
         title: Version
         description: Version of OS. Supports 7, 10, 11, server 2025
@@ -719,6 +761,7 @@ actions:
           - '10'
           - '11'
           - 'server 2025'
+        example: '10'
       env_bitness:
         title: Bitness
         description: Bitness of Operation System. Supports 32, 64 for Windows. 64 for Windows Server 2025
@@ -728,6 +771,7 @@ actions:
         enum:
           - 32
           - 64
+        example: 64
       env_type:
         title: Type
         description: Environment preset type. You can select **development** env for OS Windows 10 x64. For all other cases, **complete** env is required
@@ -737,30 +781,35 @@ actions:
         enum:
           - 'complete'
           - 'development'
+        example: 'complete'
       env_locale:
         title: Locale
-        description: Operation system's language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive
+        description: Operation System language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive
         type: string
         required: false
         default: "en-US"
+        example: "en-US"
       opt_network_connect:
         title: Network Connect
         description: Network connection state
         type: boolean
         required: false
         default: true
+        example: true
       opt_network_fakenet:
         title: Network Fakenet
         description: FakeNet feature status
         type: boolean
         required: false
         default: false
+        example: false
       opt_network_tor:
         title: Network TOR
         description: TOR using
         type: boolean
         required: false
         default: false
+        example: false
       opt_network_geo:
         title: Network Geo
         description: TOR geo location option
@@ -774,15 +823,17 @@ actions:
         type: boolean
         required: false
         default: false
+        example: false
       opt_network_residential_proxy:
-        title: Residential proxy
-        description: Residential proxy option
+        title: Residential Proxy
+        description: Residential Proxy option
         type: boolean
         required: false
         default: false
+        example: false
       opt_network_residential_proxy_geo:
-        title: Residential proxy geo
-        description: Residential proxy geo option
+        title: Residential Proxy Geo
+        description: Residential Proxy Geo option
         type: string
         required: false
         default: 'fastest'
@@ -798,14 +849,16 @@ actions:
           - 'bylink'
           - 'owner'
           - 'byteam'
+        example: 'bylink'
       opt_timeout:
         title: Timeout
         description: Timeout option, size range 10-660
         type: integer
         required: false
-        default: 120
+        default: 240
+        example: 240
       opt_auto_delete_after:
-        title: Auto Delete After
+        title: Auto Delete after
         description: Specify after what period of time this report should be deleted
         type: string
         required: false
@@ -815,17 +868,20 @@ actions:
           - 'week'
           - '2 weeks'
           - 'month'
+        example: 'month'
       obj_ext_extension:
         title: Extension
         description: Change extension to valid
         type: boolean
         required: false
         default: true
+        example: true
       obj_ext_cmd:
         title: Command Line
         description: Optional command line
         type: string
         required: false
+        example: cmd
       obj_ext_startfolder:
         title: Start Folder
         description: Start object from
@@ -840,24 +896,28 @@ actions:
           - 'temp'
           - 'windows'
           - 'root'
+        example: 'temp'
       obj_force_elevation:
         title: Force Elevation
         description: Forces the file to execute with elevated privileges and an elevated token (for PE32, PE32+, PE64 files only)
         type: boolean
         required: false
         default: true
+        example: true
       auto_confirm_uac:
         title: Auto Confirm UAC
         description: Auto confirm Windows UAC requests
         type: boolean
         required: false
         default: true
+        example: true
       user_tags:
         title: User Tags
-        description: Append user tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8
+        description: Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8
         type: string
         required: false
         default: 'insight-connect'
+        example: 'insight-connect'
     output:
       analysis_uuid:
         title: Analysis UUID
@@ -882,43 +942,49 @@ actions:
         required: true
         example: 'malware.zip'
       file_content:
-        title: File content
+        title: File Content
         description: File bytes
         type: bytes
         required: true
+        example: bytes
       env_os:
         title: OS
-        description: Operation system. Supports ubuntu, debian
+        description: Operation System. Supports ubuntu, debian
         type: string
         required: false
         default: 'ubuntu'
         enum:
           - 'ubuntu'
           - 'debian'
+        example: 'ubuntu'
       env_locale:
         title: Locale
-        description: Operation system's language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive
+        description: Operation System language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive
         type: string
         required: false
         default: "en-US"
+        example: "en-US"
       opt_network_connect:
         title: Network Connect
         description: Network connection state
         type: boolean
         required: false
         default: true
+        example: true
       opt_network_fakenet:
         title: Network Fakenet
         description: FakeNet feature status
         type: boolean
         required: false
         default: false
+        example: false
       opt_network_tor:
         title: Network TOR
         description: TOR using
         type: boolean
         required: false
         default: false
+        example: false
       opt_network_geo:
         title: Network Geo
         description: TOR geo location option
@@ -932,15 +998,17 @@ actions:
         type: boolean
         required: false
         default: false
+        example: false
       opt_network_residential_proxy:
-        title: Residential proxy
-        description: Residential proxy option
+        title: Residential Proxy
+        description: Residential Proxy option
         type: boolean
         required: false
         default: false
+        example: false
       opt_network_residential_proxy_geo:
-        title: Residential proxy geo
-        description: Residential proxy geo option
+        title: Residential Proxy Geo
+        description: Residential Proxy Geo option
         type: string
         required: false
         default: 'fastest'
@@ -956,14 +1024,16 @@ actions:
           - 'bylink'
           - 'owner'
           - 'byteam'
+        example: 'bylink'
       opt_timeout:
         title: Timeout
         description: Timeout option, size range 10-660
         type: integer
         required: false
-        default: 120
+        default: 240
+        example: 240
       opt_auto_delete_after:
-        title: Auto Delete After
+        title: Auto Delete after
         description: Specify after what period of time this report should be deleted
         type: string
         required: false
@@ -973,17 +1043,20 @@ actions:
           - 'week'
           - '2 weeks'
           - 'month'
+        example: 'month'
       obj_ext_extension:
         title: Extension
         description: Change extension to valid
         type: boolean
         required: false
         default: true
+        example: true
       obj_ext_cmd:
         title: Command Line
         description: Optional command line
         type: string
         required: false
+        example: cmd
       obj_ext_startfolder:
         title: Start Folder
         description: Start object from
@@ -995,18 +1068,21 @@ actions:
           - 'home'
           - 'downloads'
           - 'temp'
+        example: 'temp'
       run_as_root:
-        title: Run As Root
+        title: Run as Root
         description: Run file with superuser privileges
         type: boolean
         required: false
         default: true
+        example: true
       user_tags:
         title: User Tags
-        description: Append user tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8
+        description: Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8
         type: string
         required: false
         default: 'insight-connect'
+        example: 'insight-connect'
     output:
       analysis_uuid:
         title: Analysis UUID
@@ -1031,34 +1107,39 @@ actions:
         required: true
         example: 'malware.zip'
       file_content:
-        title: File content
+        title: File Content
         description: File bytes
         type: bytes
         required: true
+        example: bytes
       env_locale:
         title: Locale
-        description: Operation system's language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive
+        description: Operation System language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive
         type: string
         required: false
         default: "en-US"
+        example: "en-US"
       opt_network_connect:
         title: Network Connect
         description: Network connection state
         type: boolean
         required: false
         default: true
+        example: true
       opt_network_fakenet:
         title: Network Fakenet
         description: FakeNet feature status
         type: boolean
         required: false
         default: false
+        example: false
       opt_network_tor:
         title: Network TOR
         description: TOR using
         type: boolean
         required: false
         default: false
+        example: false
       opt_network_geo:
         title: Network Geo
         description: TOR geo location option
@@ -1072,15 +1153,17 @@ actions:
         type: boolean
         required: false
         default: false
+        example: false
       opt_network_residential_proxy:
-        title: Residential proxy
-        description: Residential proxy option
+        title: Residential Proxy
+        description: Residential Proxy option
         type: boolean
         required: false
         default: false
+        example: false
       opt_network_residential_proxy_geo:
-        title: Residential proxy geo
-        description: Residential proxy geo option
+        title: Residential Proxy Geo
+        description: Residential Proxy Geo option
         type: string
         required: false
         default: 'fastest'
@@ -1096,14 +1179,16 @@ actions:
           - 'bylink'
           - 'owner'
           - 'byteam'
+        example: 'bylink'
       opt_timeout:
         title: Timeout
         description: Timeout option, size range 10-660
         type: integer
         required: false
-        default: 120
+        default: 240
+        example: 240
       opt_auto_delete_after:
-        title: Auto Delete After
+        title: Auto Delete after
         description: Specify after what period of time this report should be deleted
         type: string
         required: false
@@ -1113,12 +1198,14 @@ actions:
           - 'week'
           - '2 weeks'
           - 'month'
+        example: 'month'
       user_tags:
         title: User Tags
-        description: Append user tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8
+        description: Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8
         type: string
         required: false
         default: 'insight-connect'
+        example: 'insight-connect'
     output:
       analysis_uuid:
         title: Analysis UUID
@@ -1148,6 +1235,7 @@ actions:
         type: int
         required: false
         default: 180
+        example: 180
     output:
       report:
         title: Lookup Summary
@@ -1160,6 +1248,7 @@ actions:
         description: Link to the TI Lookup Query
         type: string
         required: false
+        example: 'https://intelligence.any.run/analysis/lookup#{%22query%22:%22http://171.22.28.221/5c06c05b7b34e8e6.php%22,%22dateRange%22:180}'
   get_reputation:
     title: Get Reputation
     description: Check URL/IP/Domain/File reputation
@@ -1175,20 +1264,23 @@ actions:
           - 'hash'
           - 'destination_ip'
           - 'domain_name'
+        example: 'url'
       entity_value:
         title: Entity Value
-        description: URL (Size range 2-256) or Hash (sha256, sha1, md5) or Domain or IP
+        description: URL (Size range 2-256) or Hash (SHA256, SAH1, MD5) or Domain or IP
         type: string
         required: true
+        example: 'https://suspicious.url'
       lookup_depth:
         title: Lookup Depth
         description: Specify the number of days from the current date for which you want to lookup
         type: int
         required: false
         default: 180
+        example: 180
     output:
       verdict:
-        title: Analysis verdict
+        title: Analysis Verdict
         description: Analysis verdict. Can be 'Malicious', 'Suspicious' or 'No threads detected'
         type: string
         required: false
@@ -1206,13 +1298,13 @@ actions:
         required: false
         example: 'health,banking,finance'
       last_modified:
-        title: Last modified
+        title: Last Modified
         description: Last analysis date
         type: string
         required: false
         example: '2026-03-27 06:31:44'
       last_analyses:
-        title: Last analyses
+        title: Last Analyses
         description: A comma-separated list of IOC-related analyses
         type: string
         required: false
@@ -1234,43 +1326,52 @@ actions:
         description: IOC-related port number
         type: string
         required: false
+        example: '90'
       filename:
         title: Filename
         description: IOC-related filename
         type: string
         required: false
+        example: 'passwords'
       filepath:
         title: Filepath
         description: IOC-related filepath
         type: string
         required: false
+        example: '/home/username/documents/project.docx'
       file_extension:
         title: File Extension
         description: IOC-related file extension
         type: string
         required: false
+        example: 'exe'
       md5:
         title: MD5
-        description: IOC-related md5 hash
+        description: IOC-related MD5 hash
         type: string
         required: false
+        example: '1f3870be274f6c49b3e31a0c6728957f'
       sha256:
         title: SHA256
-        description: IOC-related sha256 hash
+        description: IOC-related SHA256 hash
         type: string
         required: false
+        example: 'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad'
       sha1:
         title: SHA1
-        description: IOC-related sha1 hash
+        description: IOC-related SHA1 hash
         type: string
         required: false
+        example: 'a9993e364706816aba3e25717850c26c9cd0d89d'
       ssdeep:
         title: SSDeep
         description: IOC-related ssdeep
         type: string
         required: false
+        example: '3072:aB...y:ab...y'
       lookup_url:
         title: Lookup URL
         description: Link to the TI Lookup Query
         type: string
         required: false
+        example: 'https://intelligence.any.run/analysis/lookup#{%22query%22:%22http://171.22.28.221/5c06c05b7b34e8e6.php%22,%22dateRange%22:180}'

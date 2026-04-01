@@ -50,7 +50,7 @@ class GetAnalysisVerdictOutput(insightconnect_plugin_runtime.Output):
   "properties": {
     "verdict": {
       "type": "string",
-      "title": "Analysis verdict",
+      "title": "Analysis Verdict",
       "description": "Analysis verdict. Can be 'Malicious', 'Suspicious' or 'No threads detected'",
       "order": 1
     }
