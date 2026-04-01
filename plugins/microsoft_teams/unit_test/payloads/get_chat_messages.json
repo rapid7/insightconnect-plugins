@@ -1,0 +1,22 @@
+{
+  "value": [
+    {
+      "body": {
+        "content": "This is very old"
+      },
+      "createdDateTime": 0
+    },
+    {
+      "body": {
+        "content": "This should be first"
+      },
+      "createdDateTime": 11
+    },
+    {
+      "body": {
+        "content": "<div>\n<div itemprop=\"copy-paste-block\">!enrich-indicator <span style=\"font-size:11.0pt\"><span style=\"font-family:&quot;Calibri&quot;,sans-serif\"><u><a href=\"http://example.com/s/?domain=test\" rel=\"noreferrer noopener\" target=\"_blank\" title=\"https://example.com?domain=test\" style=\"color:#6888c9\">https://example.com</a></u></span></span></div>\n</div>",
+        "contentType": "html"
+      }
+    }
+  ]
+}
