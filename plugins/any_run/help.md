@@ -116,7 +116,6 @@ This action is used to run URL analysis using Android VM
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |env_locale|string|en-US|False|Operation System language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive|None|en-US|None|None|
-|obj_ext_browser|string|Google Chrome|False|Browser name. Supports Google Chrome, Mozilla Firefox|["Google Chrome", "Mozilla Firefox"]|Google Chrome|None|None|
 |obj_ext_extension|boolean|True|False|Change extension to valid|None|True|None|None|
 |obj_url|string|None|True|Target URL. Size range 5-512. Example -> (http/https)://(your-link)|None|https://example.org|None|None|
 |opt_auto_delete_after|string|month|False|Specify after what period of time this report should be deleted|["day", "week", "2 weeks", "month"]|month|None|None|
@@ -136,7 +135,6 @@ Example input:
 ```
 {
   "env_locale": "en-US",
-  "obj_ext_browser": "Google Chrome",
   "obj_ext_extension": true,
   "obj_url": "https://example.org",
   "opt_auto_delete_after": "month",

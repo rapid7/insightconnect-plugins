@@ -1,5 +1,5 @@
 {
-	"spec": "463bbac0179457a4b672c9ce5c756b87",
+	"spec": "bcb208799de961302d8f166990ede960",
 	"manifest": "e6a2fc190fba39a758cdd28c503dcd25",
 	"setup": "400f251f66f4fc01b6663d2b25c8c733",
 	"schemas": [
@@ -9,7 +9,7 @@
 		},
 		{
 			"identifier": "android_url_analysis/schema.py",
-			"hash": "f2d8a2ab3a54b08ad4942c42b610d064"
+			"hash": "2ce2a4270f5d5c0e20a97440f633bc7c"
 		},
 		{
 			"identifier": "download_pcap/schema.py",

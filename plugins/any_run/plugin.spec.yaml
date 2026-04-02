@@ -697,16 +697,6 @@ actions:
           - '2 weeks'
           - 'month'
         example: 'month'
-      obj_ext_browser:
-        title: Browser
-        description: Browser name. Supports Google Chrome, Mozilla Firefox
-        type: string
-        required: false
-        default: 'Google Chrome'
-        enum:
-          - 'Google Chrome'
-          - 'Mozilla Firefox'
-        example: 'Google Chrome'
       obj_ext_extension:
         title: Extension
         description: Change extension to valid
