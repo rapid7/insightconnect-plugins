@@ -5,13 +5,14 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from unittest.mock import patch
-from parameterized import parameterized
-from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_microsoft_teams.actions.send_message import SendMessage
 from icon_microsoft_teams.actions.send_message.schema import Input, SendMessageInput, SendMessageOutput
-from util import Util
+from insightconnect_plugin_runtime.exceptions import PluginException
 from jsonschema import validate
+from parameterized import parameterized
+
+from util import Util
 
 
 @patch("requests.get", side_effect=Util.mocked_requests)
@@ -22,7 +23,9 @@ class TestSendMessage(TestCase):
         cls.action = Util.default_connector(SendMessage())
 
     @parameterized.expand(Util.load_data("send_message_parameters").get("parameters"))
-    def test_send_message(self, mocked_get, mocked_post, name, team, channel, thread_id, chat_id, message, expected):
+    def test_send_message(
+        self, mocked_get, mocked_post, name, team, channel, thread_id, chat_id, message, expected
+    ) -> None:
         test_input = {Input.MESSAGE: message}
         if team:
             test_input[Input.TEAM_NAME] = team
@@ -87,7 +90,7 @@ class TestSendMessage(TestCase):
     )
     def test_send_message_bad(
         self, mocked_get, mocked_post, name, team, channel, thread_id, chat_id, message, cause, assistance
-    ):
+    ) -> None:
         test_input = {Input.MESSAGE: message}
         if team:
             test_input[Input.TEAM_NAME] = team

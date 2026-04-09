@@ -41,7 +41,7 @@ class MockConnection:
 # This method will be used by the mock to replace requests.get
 def mocked_requests_get(*args, **kwargs):
     class MockResponse:
-        def __init__(self, data, status_code):
+        def __init__(self, data, status_code) -> None:
             self.status_code = status_code
             self.text = data
 
@@ -68,7 +68,7 @@ class TestNewMessageReceived(TestCase):
         self.nmr.logger = self.log
         self.nmr.connection = MockConnection()
 
-    def test_sort_messages_from_request(self):
+    def test_sort_messages_from_request(self) -> None:
         with open(os.path.join(os.path.dirname(__file__), "./payloads/get_messages.json")) as file:
             text = file.read()
             json_payload = json.loads(text)
@@ -76,14 +76,14 @@ class TestNewMessageReceived(TestCase):
         self.assertEqual(result[0].get("body").get("content"), "This should be first")
         self.assertEqual(result[1].get("body").get("content"), "This is very old")
 
-    def test_compile_message_content(self):
+    def test_compile_message_content(self) -> None:
         regex = self.nmr.compile_message_content(".")
         self.assertTrue(regex.search("stuff"))
         with self.assertRaises(PluginException):
             self.nmr.compile_message_content("[")
 
     @mock.patch("requests.get", side_effect=mocked_requests_get)
-    def test_get_sorted_messages(self, mockGet):
+    def test_get_sorted_messages(self, mockGet) -> None:
         messages = self.nmr.get_sorted_messages("http://somefakeendpoint.com")
         self.assertIsNotNone(messages)
         self.assertEqual(messages[0].get("body").get("content"), "This should be first")
@@ -110,12 +110,12 @@ class TestNewMessageReceived(TestCase):
         ]
     )
     @mock.patch("requests.get", side_effect=mocked_requests_get)
-    def test_indicators(self, message_number, expected_result, mockGet):
+    def test_indicators(self, message_number, expected_result, mockGet) -> None:
         messages = self.nmr.get_sorted_messages("http://somefakeendpoint.com")
         indicators = [self.nmr.get_indicators(message.get("body", {}).get("content")) for message in messages]
         self.assertEqual(indicators[message_number], expected_result)
 
-    def test_setup_endpoint(self):
+    def test_setup_endpoint(self) -> None:
         # This was a mess to figure out...because I'm importing with from I have to refer to the class it's being
         #  called from and not the actual function that's being imported
         with mock.patch(
