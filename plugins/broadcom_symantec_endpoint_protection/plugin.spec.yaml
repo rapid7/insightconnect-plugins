@@ -4,7 +4,7 @@ products: ["insightconnect"]
 name: broadcom_symantec_endpoint_protection
 title: Broadcom Symantec Endpoint Protection
 description: Broadcom Symantec Endpoint Protection delivers the most complete, integrated endpoint security platform on the planet
-version: 2.0.5
+version: 2.0.6
 connection_version: 2
 vendor: rapid7
 sdk:
@@ -31,6 +31,7 @@ links:
 references:
   - "[Broadcom Symantec Endpoint Protection](https://www.broadcom.com/products/cyber-security/endpoint/end-user)"
 version_history:
+  - "2.0.6 - Updated dependencies"
   - "2.0.5 - Updated dependencies | Updated SDK to the latest version (6.4.3)"
   - "2.0.4 - Resolving Snyk Vulnerability | SDK bump to latest version (6.3.9)"
   - "2.0.3 - Bumping requirements.txt ('aiohttp' package) | SDK bump to 6.2.2"
@@ -42,8 +43,8 @@ version_history:
   - "1.0.1 - Workflow usability fixes"
   - "1.0.0 - Initial plugin"
 tags:
-- symantec
-- sepm
+  - symantec
+  - sepm
 hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [symantec, endpoint, edr, antivirus]

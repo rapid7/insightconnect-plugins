@@ -1,13 +1,16 @@
-import sys
 import os
+import sys
+from typing import Any
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
+from unittest.mock import MagicMock, patch
+
 from icon_broadcom_symantec_endpoint_protection.actions.blacklist import Blacklist
-from util import Util
-from unittest.mock import patch
 from parameterized import parameterized
+
+from util import Util
 
 
 class TestBlacklist(TestCase):
@@ -15,7 +18,7 @@ class TestBlacklist(TestCase):
     @patch("requests.post", side_effect=Util.mock_request)
     def setUpClass(
         cls,
-        mock_request,
+        mock_request: MagicMock,
     ) -> None:
         cls.action = Util.default_connector(Blacklist())
 
@@ -29,7 +32,9 @@ class TestBlacklist(TestCase):
         ]
     )
     @patch("aiohttp.ClientSession.post", side_effect=Util.async_mock_request)
-    def test_blacklist(self, test_name, input_params, expected, mock_request):
+    def test_blacklist(
+        self, test_name: str, input_params: dict[str, Any], expected: dict[str, Any], mock_request: MagicMock
+    ) -> None:
         actual = self.action.run(input_params)
         print(actual)
         self.assertEqual(expected, actual)
