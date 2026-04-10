@@ -8,13 +8,14 @@ from unittest.mock import Mock
 
 from icon_microsoft_teams.actions.get_message_in_channel import GetMessageInChannel
 from icon_microsoft_teams.actions.get_message_in_channel.schema import (
-    Input,
     GetMessageInChannelInput,
     GetMessageInChannelOutput,
+    Input,
 )
-from util import Util
 from icon_microsoft_teams.util.komand_clean_with_nulls import remove_null_and_clean
 from jsonschema import validate
+
+from util import Util
 
 
 class TestGetMessageInChannel(TestCase):
@@ -28,7 +29,7 @@ class TestGetMessageInChannel(TestCase):
         }
 
     @mock.patch("requests.get", side_effect=Util.mocked_requests)
-    def test_get_message_in_channel(self, mock: Mock):
+    def test_get_message_in_channel(self, mock: Mock) -> None:
         validate(self.payload, GetMessageInChannelInput.schema)
         response = self.action.run(self.payload)
         expected_response = remove_null_and_clean(Util.load_data("get_message_in_channel"))

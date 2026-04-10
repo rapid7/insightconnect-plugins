@@ -6,8 +6,7 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase, mock
 
 from icon_microsoft_teams.actions.add_group_owner.action import AddGroupOwner
-from icon_microsoft_teams.actions.add_group_owner.schema import Input, AddGroupOwnerInput, AddGroupOwnerOutput
-from insightconnect_plugin_runtime.exceptions import PluginException
+from icon_microsoft_teams.actions.add_group_owner.schema import AddGroupOwnerInput, AddGroupOwnerOutput, Input
 from jsonschema import validate
 
 from util import Util

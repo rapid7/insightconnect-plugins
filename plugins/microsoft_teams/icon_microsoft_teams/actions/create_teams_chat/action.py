@@ -1,7 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import CreateTeamsChatInput, CreateTeamsChatOutput, Input, Output, Component
 
-
 # Custom imports below
 from icon_microsoft_teams.util.komand_clean_with_nulls import remove_null_and_clean
 from icon_microsoft_teams.util.teams_utils import create_chat

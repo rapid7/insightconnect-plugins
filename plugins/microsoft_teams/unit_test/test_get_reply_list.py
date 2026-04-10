@@ -6,11 +6,12 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase, mock
 from unittest.mock import Mock
 
-from util import Util
 from icon_microsoft_teams.actions.get_reply_list import GetReplyList
-from icon_microsoft_teams.actions.get_reply_list.schema import Input, GetReplyListInput, GetReplyListOutput
+from icon_microsoft_teams.actions.get_reply_list.schema import GetReplyListInput, GetReplyListOutput, Input
 from icon_microsoft_teams.util.komand_clean_with_nulls import remove_null_and_clean
 from jsonschema import validate
+
+from util import Util
 
 
 class TestGetReplyList(TestCase):
@@ -23,7 +24,7 @@ class TestGetReplyList(TestCase):
         }
 
     @mock.patch("requests.get", side_effect=Util.mocked_requests)
-    def test_get_reply_list(self, mock: Mock):
+    def test_get_reply_list(self, mock: Mock) -> None:
         validate(self.payload, GetReplyListInput.schema)
         response = self.action.run(self.payload)
         expected_response = remove_null_and_clean(Util.load_data("get_reply_list"))
