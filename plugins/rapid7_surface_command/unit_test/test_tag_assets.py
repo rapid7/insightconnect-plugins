@@ -82,9 +82,7 @@ class TestTagAssets(TestCase):
 
     @patch("icon_rapid7_surface_command.util.api_connection.make_request")
     def test_tag_assets_all_fail(self, mock_request):
-        mock_request.side_effect = PluginException(
-            cause="Unauthorized", assistance="Check API key"
-        )
+        mock_request.side_effect = PluginException(cause="Unauthorized", assistance="Check API key")
 
         result = self.connection.tag_assets(OBJECT_IDS, TAGS, "add")
 
@@ -100,9 +98,7 @@ class TestTagAssets(TestCase):
         """Non-PluginException errors are caught and recorded per-asset."""
         mock_request.side_effect = RuntimeError("connection reset")
 
-        result = self.connection.tag_assets(
-            ["33333333-3333-3333-3333-333333333333"], TAGS, "add"
-        )
+        result = self.connection.tag_assets(["33333333-3333-3333-3333-333333333333"], TAGS, "add")
 
         self.assertEqual(result["success_count"], 0)
         self.assertEqual(result["failure_count"], 1)
@@ -139,9 +135,7 @@ class TestTagAssets(TestCase):
         """Tags list must be sent as the request JSON body."""
         mock_request.return_value = Mock(status_code=204)
 
-        self.connection.tag_assets(
-            ["55555555-5555-5555-5555-555555555555"], TAGS, "add"
-        )
+        self.connection.tag_assets(["55555555-5555-5555-5555-555555555555"], TAGS, "add")
 
         call_args = mock_request.call_args
         request_obj = call_args[1]["_request"]

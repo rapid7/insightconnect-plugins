@@ -24,9 +24,7 @@ class TagAssets(insightconnect_plugin_runtime.Action):
         operation = params.get(Input.OPERATION)
         # END INPUT BINDING - DO NOT REMOVE
 
-        result = self.connection.api.tag_assets(
-            object_ids=object_ids, tags=tags, operation=operation
-        )
+        result = self.connection.api.tag_assets(object_ids=object_ids, tags=tags, operation=operation)
         return {
             Output.SUCCESS_COUNT: result["success_count"],
             Output.FAILURE_COUNT: result["failure_count"],

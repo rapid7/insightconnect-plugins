@@ -117,9 +117,7 @@ class ApiConnection:
 
         return rows
 
-    def tag_assets(
-        self, object_ids: List[str], tags: List[str], operation: str
-    ) -> Dict[str, Any]:
+    def tag_assets(self, object_ids: List[str], tags: List[str], operation: str) -> Dict[str, Any]:
         """
         Add, set, or remove tags on multiple assets in bulk.
 
@@ -156,14 +154,10 @@ class ApiConnection:
                 )
                 success_count += 1
             except PluginException as exception:
-                self.logger.warning(
-                    f"Failed to tag asset {object_id}: {exception.cause}"
-                )
+                self.logger.warning(f"Failed to tag asset {object_id}: {exception.cause}")
                 failures.append({"object_id": object_id, "error": exception.cause})
             except Exception as exception:
-                self.logger.warning(
-                    f"Unexpected error tagging asset {object_id}: {exception}"
-                )
+                self.logger.warning(f"Unexpected error tagging asset {object_id}: {exception}")
                 failures.append({"object_id": object_id, "error": str(exception)})
 
         return {
