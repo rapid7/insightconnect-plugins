@@ -11,7 +11,6 @@ import json
 from datetime import datetime, UTC, timedelta
 from typing import Dict, Any, List
 
-
 DEFAULT_FREQUENCY_SECONDS = 15
 INITIAL_LOOKBACK_MINUTES = 1
 MAX_NUMBER_OF_RETRIES = 20
