@@ -3428,6 +3428,7 @@ Example output:
 
 # Version History
 
+* 12.0.6 - Updated dependencies | SDK bump to 6.4.3
 * 12.0.5 - Removed default region in connection | Actions: `Advanced Query on Log Set` - Fixed issue with fetching logs with statistical queries | Updated SDK to latest version (6.4.2)
 * 12.0.4 - Update Investigation status values to include `WAITING` and `INVESTIGATING` | SDK bump to 6.4.1
 * 12.0.3 - Actions: `Advanced Query on Log` and `Advanced Query on Log Set` - Updated schema
