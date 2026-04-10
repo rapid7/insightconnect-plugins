@@ -8,7 +8,10 @@ sys.path.append(os.path.abspath("../"))
 
 from icon_rapid7_surface_command.util.api_connection import ApiConnection
 from icon_rapid7_surface_command.connection.connection import Connection
-from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import (
+    PluginException,
+    ConnectionTestException,
+)
 from requests import Response
 
 
@@ -22,7 +25,9 @@ class MockResponse:
 
 class TestConnection(TestCase):
     @patch("icon_rapid7_surface_command.connection.connection.ApiConnection")
-    def test_test_converts_pluginexception_to_connectiontestexception(self, MockApiConnection):
+    def test_test_converts_pluginexception_to_connectiontestexception(
+        self, MockApiConnection
+    ):
         # Arrange
         conn = Connection()
         # Provide a logger so connect() can call self.logger.info(...)
@@ -52,7 +57,9 @@ class TestRunAdhocQuery(TestCase):
         self.region = "us"
         self.logger = logging.getLogger("test")
         self.connection = ApiConnection(self.api_key, self.region, self.logger)
-        self.cypher = "rapid7.insightplatform.compute_machines_without_vulnerability_scan"
+        self.cypher = (
+            "rapid7.insightplatform.compute_machines_without_vulnerability_scan"
+        )
 
     @patch("icon_rapid7_surface_command.util.api_connection.make_request")
     def test_run_query_success(self, mock_request):
@@ -93,7 +100,9 @@ class TestRunAdhocQuery(TestCase):
             self.connection.run_adhoc_query(self.cypher)
 
         self.assertEqual(ctx.exception.cause, "API Authentication Failed")
-        self.assertEqual(ctx.exception.assistance, "Please verify your API key is correct")
+        self.assertEqual(
+            ctx.exception.assistance, "Please verify your API key is correct"
+        )
 
     @patch("icon_rapid7_surface_command.util.api_connection.make_request")
     def test_run_query_malformed_response(self, mock_request):
@@ -125,8 +134,13 @@ class TestRunAdhocQuery(TestCase):
         with self.assertRaises(PluginException) as ctx:
             self.connection.run_adhoc_query(self.cypher)
 
-        self.assertEqual(ctx.exception.cause, "Server was unable to process the request")
-        self.assertEqual(ctx.exception.assistance, "Please validate the request to Rapid7 Surface Command")
+        self.assertEqual(
+            ctx.exception.cause, "Server was unable to process the request"
+        )
+        self.assertEqual(
+            ctx.exception.assistance,
+            "Please validate the request to Rapid7 Surface Command",
+        )
 
     @patch("icon_rapid7_surface_command.util.api_connection.make_request")
     def test_run_query_timeout(self, mock_request):
@@ -139,7 +153,10 @@ class TestRunAdhocQuery(TestCase):
             self.connection.run_adhoc_query(self.cypher)
 
         self.assertEqual(ctx.exception.cause, "Request timed out")
-        self.assertEqual(ctx.exception.assistance, "Please check your network connection or try again later")
+        self.assertEqual(
+            ctx.exception.assistance,
+            "Please check your network connection or try again later",
+        )
 
     @patch("icon_rapid7_surface_command.util.api_connection.make_request")
     def test_run_query_server_error(self, mock_request):
