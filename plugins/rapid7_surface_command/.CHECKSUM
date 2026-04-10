@@ -1,23 +1,23 @@
 {
 	"spec": "4c946752feac850160a7ed4aa70190dc",
 	"manifest": "0363fb657f564cdacb107ec986c3fc54",
-	"setup": "50ccb038d65f0b2e0386cdafff7863ff",
+	"setup": "c090202d467841c6922e783900bb61f2",
 	"schemas": [
 		{
 			"identifier": "run_adhoc_query/schema.py",
-			"hash": "2e774e4dd9a30390b34a2612056bbca4"
+			"hash": "57fcd778aebf7dba8206d779ae5ee8af"
 		},
 		{
 			"identifier": "run_query/schema.py",
-			"hash": "9643c1c8719fa371dec05b0cd0ef75c7"
+			"hash": "bc5401958caf6a18318b9374604ede25"
 		},
 		{
 			"identifier": "tag_assets/schema.py",
-			"hash": "3973f81a294f38c42b03384ee0788860"
+			"hash": "994bda11e0fe0b600ef9cb1b4472eab5"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "b9f6e2e9f113d4f91ebf027d03978ca4"
+			"hash": "1abf3190d494884739b830d01290a736"
 		}
 	]
 }

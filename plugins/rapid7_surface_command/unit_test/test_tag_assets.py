@@ -9,7 +9,6 @@ sys.path.append(os.path.abspath("../"))
 from icon_rapid7_surface_command.util.api_connection import ApiConnection
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-
 OBJECT_IDS = [
     "11111111-1111-1111-1111-111111111111",
     "22222222-2222-2222-2222-222222222222",
