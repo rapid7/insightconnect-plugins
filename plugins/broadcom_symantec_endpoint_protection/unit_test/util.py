@@ -1,12 +1,11 @@
 import json
 import logging
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 import insightconnect_plugin_runtime
-
 from icon_broadcom_symantec_endpoint_protection.connection import Connection
 from icon_broadcom_symantec_endpoint_protection.connection.schema import Input
 
@@ -30,9 +29,7 @@ class Util:
 
     @staticmethod
     def read_file_to_string(filename: str) -> str:
-        with open(
-            os.path.join(os.path.dirname(os.path.realpath(__file__)), filename), "r", encoding="utf-8"
-        ) as file_reader:
+        with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), filename), encoding="utf-8") as file_reader:
             return file_reader.read()
 
     @staticmethod
@@ -71,7 +68,7 @@ class Util:
 
 
 class MockResponse:
-    def __init__(self, status_code: int, filename: str = None, headers: dict = {}):
+    def __init__(self, status_code: int, filename: str = None, headers: dict = {}) -> None:
         self.status_code = status_code
         self.text = ""
         self.headers = headers
@@ -83,7 +80,7 @@ class MockResponse:
 
 
 class AsyncMockResponse:
-    def __init__(self, status_code: int, filename: str = None, headers: dict = {}):
+    def __init__(self, status_code: int, filename: str = None, headers: dict = {}) -> None:
         self.status = status_code
         self.text = ""
         self.headers = headers
