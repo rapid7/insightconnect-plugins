@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Rapid7 Surface Command"
 Vendor = "rapid7"
-Version = "1.1.0"
+Version = "1.2.0"
 Description = "Surface Command gives you full visibility over your assets and identities across multiple technology platforms"
 
 
@@ -37,6 +37,8 @@ def main():
             self.add_action(actions.RunQuery())
         
             self.add_action(actions.RunAdhocQuery())
+        
+            self.add_action(actions.TagAssets())
         
 
     """Run plugin"""

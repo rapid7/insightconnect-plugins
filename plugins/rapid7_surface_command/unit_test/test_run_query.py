@@ -8,7 +8,10 @@ sys.path.append(os.path.abspath("../"))
 
 from icon_rapid7_surface_command.util.api_connection import ApiConnection
 from icon_rapid7_surface_command.connection.connection import Connection
-from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import (
+    PluginException,
+    ConnectionTestException,
+)
 from requests import Response
 
 
@@ -122,7 +125,10 @@ class TestRunQuery(TestCase):
             self.connection.run_query(self.query_id)
 
         self.assertEqual(ctx.exception.cause, "Server was unable to process the request")
-        self.assertEqual(ctx.exception.assistance, "Please validate the request to Rapid7 Surface Command")
+        self.assertEqual(
+            ctx.exception.assistance,
+            "Please validate the request to Rapid7 Surface Command",
+        )
 
     @patch("icon_rapid7_surface_command.util.api_connection.make_request")
     def test_run_query_timeout(self, mock_request):
@@ -135,7 +141,10 @@ class TestRunQuery(TestCase):
             self.connection.run_query(self.query_id)
 
         self.assertEqual(ctx.exception.cause, "Request timed out")
-        self.assertEqual(ctx.exception.assistance, "Please check your network connection or try again later")
+        self.assertEqual(
+            ctx.exception.assistance,
+            "Please check your network connection or try again later",
+        )
 
     @patch("icon_rapid7_surface_command.util.api_connection.make_request")
     def test_run_query_server_error(self, mock_request):
