@@ -112,7 +112,7 @@ actions:
         required: false
   tag_assets:
     title: Tag Assets in Bulk
-    description: Add, set, or remove tags on multiple assets in bulk using the Surface Command Graph API
+    description: Add, set, or remove tags on multiple assets in bulk
     input:
       object_ids:
         title: Object IDs
