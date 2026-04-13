@@ -104,6 +104,52 @@ Example output:
   "items": []
 }
 ```
+
+#### Tag Assets in Bulk
+
+This action is used to add, set, or remove tags on multiple assets in bulk using the Surface Command Graph API
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|object_ids|[]string|None|True|List of asset object IDs (UUIDs) to tag|None|["11111111-1111-1111-1111-111111111111", "22222222-2222-2222-2222-222222222222"]|None|None|
+|operation|string|None|True|Tag operation to perform: add (append tags), set (replace all tags), or remove (delete tags)|["add", "set", "remove"]|add|None|None|
+|tags|[]string|None|True|List of tag values to apply|None|["env:prod", "team:security"]|None|None|
+  
+Example input:
+
+```
+{
+  "object_ids": [
+    "11111111-1111-1111-1111-111111111111",
+    "22222222-2222-2222-2222-222222222222"
+  ],
+  "operation": "add",
+  "tags": [
+    "env:prod",
+    "team:security"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|failure_count|integer|True|Number of assets that could not be tagged|0|
+|failures|[]object|False|Details of any tagging failures, including the object ID and error message|[]|
+|success_count|integer|True|Number of assets successfully tagged|2|
+  
+Example output:
+
+```
+{
+  "failure_count": 0,
+  "failures": [],
+  "success_count": 2
+}
+```
 ### Triggers
   
 *This plugin does not contain any triggers.*
@@ -120,6 +166,7 @@ Example output:
 
 # Version History
 
+* 1.2.0 - Add new action | Tag Assets in Bulk
 * 1.1.0 - Update action title | Add new action | Run Adhoc Query
 * 1.0.0 - Initial plugin
 
