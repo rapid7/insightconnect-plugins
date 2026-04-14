@@ -2,10 +2,12 @@ import logging
 import os
 import sys
 from unittest import TestCase
-from unittest.mock import Mock, patch
+from unittest.mock import MagicMock, Mock, patch
 
 sys.path.append(os.path.abspath("../"))
 
+from icon_rapid7_surface_command.actions.tag_assets.action import TagAssets
+from icon_rapid7_surface_command.actions.tag_assets.schema import Input, Output
 from icon_rapid7_surface_command.util.api_connection import (
     ApiConnection,
     NON_RETRYABLE_STATUS_CODES,
@@ -128,6 +130,21 @@ class TestTagAssets(TestCase):
         self.assertEqual(result["failure_count"], 1)
         self.assertIn("connection reset", result["failures"][0]["error"])
 
+    @patch("icon_rapid7_surface_command.util.api_connection.time")
+    @patch("icon_rapid7_surface_command.util.api_connection.make_request")
+    def test_tag_assets_retries_unexpected_exception_then_succeeds(self, mock_request, mock_time):
+        """A generic exception is retried with backoff; success on the second attempt is recorded."""
+        mock_request.side_effect = [RuntimeError("connection reset"), Mock(status_code=204)]
+
+        result = self.connection.tag_assets(
+            ["33333333-3333-3333-3333-333333333333"], TAGS, "add", max_retries=1
+        )
+
+        self.assertEqual(result["success_count"], 1)
+        self.assertEqual(result["failure_count"], 0)
+        self.assertEqual(mock_request.call_count, 2)
+        mock_time.sleep.assert_called_once_with(1.0)  # 2**0 = 1s for attempt 0
+
     # ------------------------------------------------------------------
     # Retry behaviour
     # ------------------------------------------------------------------
@@ -242,3 +259,55 @@ class TestTagAssets(TestCase):
         call_args = mock_request.call_args
         request_obj = call_args[1]["_request"]
         self.assertIn("eu.api.insight.rapid7.com", request_obj.url)
+
+
+class TestTagAssetsAction(TestCase):
+    """Tests for the TagAssets action class (action.py), covering the run() entry point."""
+
+    def setUp(self):
+        self.action = TagAssets()
+        self.action.connection = MagicMock()
+
+    def test_run_returns_counts_and_failures_from_api(self):
+        """run() delegates to the API client and maps the result to output keys."""
+        self.action.connection.api.tag_assets.return_value = {
+            "success_count": 2,
+            "failure_count": 1,
+            "failures": [{"object_id": "abc-123", "error": "Not found"}],
+        }
+        params = {
+            Input.OBJECT_IDS: ["id-1", "id-2", "id-3"],
+            Input.TAGS: ["env:prod"],
+            Input.OPERATION: "add",
+        }
+
+        result = self.action.run(params)
+
+        self.assertEqual(result[Output.SUCCESS_COUNT], 2)
+        self.assertEqual(result[Output.FAILURE_COUNT], 1)
+        self.assertEqual(len(result[Output.FAILURES]), 1)
+        self.assertEqual(result[Output.FAILURES][0]["object_id"], "abc-123")
+        self.action.connection.api.tag_assets.assert_called_once_with(
+            object_ids=params[Input.OBJECT_IDS],
+            tags=params[Input.TAGS],
+            operation=params[Input.OPERATION],
+        )
+
+    def test_run_all_success_returns_empty_failures(self):
+        """run() with no failures returns an empty failures list."""
+        self.action.connection.api.tag_assets.return_value = {
+            "success_count": 3,
+            "failure_count": 0,
+            "failures": [],
+        }
+        params = {
+            Input.OBJECT_IDS: ["id-1", "id-2", "id-3"],
+            Input.TAGS: ["team:security"],
+            Input.OPERATION: "set",
+        }
+
+        result = self.action.run(params)
+
+        self.assertEqual(result[Output.SUCCESS_COUNT], 3)
+        self.assertEqual(result[Output.FAILURE_COUNT], 0)
+        self.assertEqual(result[Output.FAILURES], [])
