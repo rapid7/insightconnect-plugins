@@ -82,6 +82,7 @@ class ManageEngineServiceDeskAPI:
                     "refresh_token": self._refresh_token,
                 },
                 verify=True,
+                timeout=30,
             )
             response.raise_for_status()
             token_data = response.json()

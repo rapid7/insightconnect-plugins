@@ -6,7 +6,7 @@ from unittest.mock import MagicMock, patch
 
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
-sys.path.append(os.path.abspath("../"))
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 
 from icon_manage_engine_service_desk.connection.connection import Connection
 from icon_manage_engine_service_desk.connection.schema import Input
