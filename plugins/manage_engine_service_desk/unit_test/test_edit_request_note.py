@@ -47,6 +47,13 @@ class TestEditRequestNote(TestCase):
                 "Please verify inputs and if the issue persists, contact support.",
                 Util.read_file_to_dict("expected/note_not_found.json.exp"),
             ],
+            [
+                "not_enough_parameters",
+                Util.read_file_to_dict("inputs/edit_request_note_not_enough_parameters.json.inp"),
+                "Not enough input parameters were provided.",
+                "Please provide at least one input parameter except ids and try again. If the issue persists, please contact support.",
+                "",
+            ],
         ]
     )
     def test_edit_request_note_raise_exception(

@@ -26,6 +26,11 @@ class TestGetListRequest(TestCase):
                 Util.read_file_to_dict("expected/get_list_request.json.exp"),
             ],
             ["no_parameters", {}, Util.read_file_to_dict("expected/get_list_request.json.exp")],
+            [
+                "sort_order_none",
+                Util.read_file_to_dict("inputs/get_list_request_sort_order_none.json.inp"),
+                Util.read_file_to_dict("expected/get_list_request.json.exp"),
+            ],
         ]
     )
     def test_get_list_request(self, mock_request, test_name, input_params, expected):

@@ -44,7 +44,14 @@ class TestAddRequest(TestCase):
                 PluginException.causes[PluginException.Preset.BAD_REQUEST],
                 PluginException.assistances[PluginException.Preset.BAD_REQUEST],
                 Util.read_file_to_dict("expected/add_request_incorrect_level.json.exp"),
-            ]
+            ],
+            [
+                "missing_requester",
+                Util.read_file_to_dict("inputs/add_request_missing_requester.json.inp"),
+                "Requester parameter not provided.",
+                "Please provide a Requester parameter and try again. If the issue persists, please contact support.",
+                "",
+            ],
         ]
     )
     def test_add_request_raise_exception(self, mock_request, test_name, input_parameters, cause, assistance, data):

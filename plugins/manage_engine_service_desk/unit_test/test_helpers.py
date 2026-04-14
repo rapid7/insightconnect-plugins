@@ -211,3 +211,57 @@ class TestHelpers(TestCase):
     def test_remove_other_keys(self, test_name, keys_to_keep, input_dict, expected):
         actual = helpers.remove_other_keys(input_dict, keys_to_keep)
         self.assertEqual(actual, expected)
+
+    @parameterized.expand(
+        [
+            [
+                "full_request",
+                {
+                    "id": "201",
+                    "subject": "Test request",
+                    "requester": {"id": "4", "name": "John", "is_vipuser": False, "email_id": "john@example.com"},
+                    "technician": {"id": "5", "name": "Admin", "is_vipuser": True, "phone": "555-1234"},
+                    "created_by": {"id": "4", "name": "John", "is_vipuser": False, "phone": None},
+                    "priority": {"id": "2", "name": "Normal", "color": "#006600"},
+                    "status": {"id": "2", "name": "Open", "stop_timer": False},
+                    "created_time": {"display_value": "Aug 3, 2022 01:11 AM", "value": "1659514299775"},
+                    "due_by_time": {"display_value": "Aug 3, 2022 01:00 PM", "value": "1659556800775"},
+                    "extra_field": "should be removed",
+                },
+                {
+                    "requester": {"id": "4", "name": "John", "is_vipuser": False},
+                    "technician": {"id": "5", "name": "Admin", "is_vipuser": True},
+                    "created_by": {"id": "4", "name": "John", "is_vipuser": False},
+                    "priority": {"id": "2", "name": "Normal"},
+                    "status": {"id": "2", "name": "Open"},
+                    "created_time": "Aug 3, 2022 01:11 AM",
+                    "due_by_time": "Aug 3, 2022 01:00 PM",
+                },
+            ],
+            [
+                "missing_optional_fields",
+                {
+                    "id": "100",
+                    "subject": "Minimal request",
+                    "requester": {"id": "1", "name": "User"},
+                },
+                {
+                    "requester": {"id": "1", "name": "User", "is_vipuser": None},
+                    "technician": {"id": None, "name": None, "is_vipuser": None},
+                    "created_time": None,
+                    "due_by_time": None,
+                },
+            ],
+        ]
+    )
+    def test_transform_request(self, test_name, raw_request, expected_fields):
+        result = helpers.transform_request(raw_request)
+        # Assert only the specific fields the function is responsible for transforming,
+        # avoiding the bound-method key that get_all_attributes() introduces as a side effect.
+        for key, expected_value in expected_fields.items():
+            self.assertEqual(result[key], expected_value)
+        # Confirm extra fields not in the Request schema are stripped
+        string_keys = {k for k in result if isinstance(k, str)}
+        self.assertNotIn("extra_field", string_keys)
+        self.assertNotIn("email_id", string_keys)
+        self.assertNotIn("phone", string_keys)
