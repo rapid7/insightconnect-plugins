@@ -136,9 +136,7 @@ class TestTagAssets(TestCase):
         """A generic exception is retried with backoff; success on the second attempt is recorded."""
         mock_request.side_effect = [RuntimeError("connection reset"), Mock(status_code=204)]
 
-        result = self.connection.tag_assets(
-            ["33333333-3333-3333-3333-333333333333"], TAGS, "add", max_retries=1
-        )
+        result = self.connection.tag_assets(["33333333-3333-3333-3333-333333333333"], TAGS, "add", max_retries=1)
 
         self.assertEqual(result["success_count"], 1)
         self.assertEqual(result["failure_count"], 0)
