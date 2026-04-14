@@ -210,6 +210,72 @@ class TestTagAssets(TestCase):
         mock_time.sleep.assert_called_once_with(30.0)
 
     # ------------------------------------------------------------------
+    # Retry behaviour
+    # ------------------------------------------------------------------
+
+    @patch("icon_rapid7_surface_command.util.api_connection.time")
+    @patch("icon_rapid7_surface_command.util.api_connection.make_request")
+    def test_tag_assets_retries_on_transient_error(self, mock_request, mock_time):
+        """A transient 503 is retried; success on the second attempt is recorded."""
+        transient_exc = _plugin_exception_with_status(503, cause="Service unavailable")
+        mock_request.side_effect = [transient_exc, Mock(status_code=204)]
+
+        result = self.connection.tag_assets(["44444444-4444-4444-4444-444444444444"], TAGS, "add", max_retries=1)
+
+        self.assertEqual(result["success_count"], 1)
+        self.assertEqual(result["failure_count"], 0)
+        self.assertEqual(mock_request.call_count, 2)
+        mock_time.sleep.assert_called_once()
+
+    @patch("icon_rapid7_surface_command.util.api_connection.time")
+    @patch("icon_rapid7_surface_command.util.api_connection.make_request")
+    def test_tag_assets_no_retry_on_non_retryable_status(self, mock_request, mock_time):
+        """A 401 fails immediately without consuming any retry budget."""
+        mock_request.side_effect = _plugin_exception_with_status(401, cause="Unauthorized")
+
+        result = self.connection.tag_assets(["55555555-5555-5555-5555-555555555555"], TAGS, "add", max_retries=3)
+
+        self.assertEqual(result["success_count"], 0)
+        self.assertEqual(result["failure_count"], 1)
+        # Only one request made — no retries
+        self.assertEqual(mock_request.call_count, 1)
+        mock_time.sleep.assert_not_called()
+        self.assertIn("401", result["failures"][0]["error"])
+
+    @patch("icon_rapid7_surface_command.util.api_connection.time")
+    @patch("icon_rapid7_surface_command.util.api_connection.make_request")
+    def test_tag_assets_exhausted_retries_records_failure(self, mock_request, mock_time):
+        """If all retry attempts fail the asset is recorded as a failure."""
+        mock_request.side_effect = _plugin_exception_with_status(503, cause="Service unavailable")
+
+        result = self.connection.tag_assets(["66666666-6666-6666-6666-666666666666"], TAGS, "add", max_retries=2)
+
+        self.assertEqual(result["success_count"], 0)
+        self.assertEqual(result["failure_count"], 1)
+        # 1 initial attempt + 2 retries = 3 total calls
+        self.assertEqual(mock_request.call_count, 3)
+        self.assertEqual(mock_time.sleep.call_count, 2)
+
+    @patch("icon_rapid7_surface_command.util.api_connection.time")
+    @patch("icon_rapid7_surface_command.util.api_connection.make_request")
+    def test_tag_assets_respects_retry_after_header(self, mock_request, mock_time):
+        """A 429 response with a Retry-After header uses that value for the sleep delay."""
+        from requests import Response as RequestsResponse
+
+        mock_response = Mock(spec=RequestsResponse)
+        mock_response.status_code = 429
+        mock_response.headers = {"Retry-After": "30"}
+        rate_limit_exc = PluginException(cause="Rate limited", assistance="Wait and retry")
+        rate_limit_exc.data = mock_response
+
+        mock_request.side_effect = [rate_limit_exc, Mock(status_code=204)]
+
+        result = self.connection.tag_assets(["77777777-7777-7777-7777-777777777777"], TAGS, "add", max_retries=1)
+
+        self.assertEqual(result["success_count"], 1)
+        mock_time.sleep.assert_called_once_with(30.0)
+
+    # ------------------------------------------------------------------
     # Edge cases
     # ------------------------------------------------------------------
 
