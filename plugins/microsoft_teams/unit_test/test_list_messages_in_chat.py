@@ -1,16 +1,18 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase, mock
 from unittest.mock import Mock
+
 from icon_microsoft_teams.actions.list_messages_in_chat import ListMessagesInChat
 from icon_microsoft_teams.actions.list_messages_in_chat.schema import ListMessagesInChatInput, ListMessagesInChatOutput
-from parameterized import parameterized
-from util import Util
 from insightconnect_plugin_runtime.exceptions import PluginException
 from jsonschema import validate
+from parameterized import parameterized
+
+from util import Util
 
 
 @mock.patch("requests.get", side_effect=Util.mocked_requests)
@@ -30,7 +32,7 @@ class TestListMessagesInChat(TestCase):
     )
     def test_list_messages_in_chat_valid(
         self, _mock_request: Mock, _test_name: str, input_params: dict, expected: dict
-    ):
+    ) -> None:
         validate(input_params, ListMessagesInChatInput.schema)
         actual = self.action.run(input_params)
         self.assertEqual(actual, expected)
@@ -54,7 +56,7 @@ class TestListMessagesInChat(TestCase):
     )
     def test_list_messages_in_chat_invalid(
         self, _mock_request: Mock, _test_name: str, input_params: dict, cause: str, assistance: str
-    ):
+    ) -> None:
         validate(input_params, ListMessagesInChatInput.schema)
         with self.assertRaises(PluginException) as error:
             self.action.run(input_params)

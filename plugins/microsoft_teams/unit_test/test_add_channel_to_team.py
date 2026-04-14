@@ -7,10 +7,9 @@ from unittest import TestCase, mock
 from unittest.mock import Mock
 
 from icon_microsoft_teams.actions.add_channel_to_team.action import AddChannelToTeam
-from icon_microsoft_teams.actions.add_channel_to_team.schema import Input, AddChannelToTeamInput, AddChannelToTeamOutput
-from insightconnect_plugin_runtime.exceptions import PluginException
-from parameterized import parameterized
+from icon_microsoft_teams.actions.add_channel_to_team.schema import AddChannelToTeamInput, AddChannelToTeamOutput, Input
 from jsonschema import validate
+from parameterized import parameterized
 
 from util import Util
 

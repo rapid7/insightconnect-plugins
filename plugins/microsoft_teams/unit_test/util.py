@@ -2,17 +2,18 @@ import json
 import logging
 import os
 import sys
+
 import requests
 
 sys.path.append(os.path.abspath("../"))
 
 
 class MockConnection:
-    def __init__(self):
+    def __init__(self) -> None:
         self.tenant_id = "1"
         self.resource_endpoint = "https://graph.microsoft.com"
 
-    def get_headers(self):
+    def get_headers(self) -> None:
         return
 
 
@@ -41,7 +42,7 @@ class Util:
     @staticmethod
     def mocked_requests(*args, **kwargs):
         class MockResponse:
-            def __init__(self, filename, status_code):
+            def __init__(self, filename, status_code) -> None:
                 self.filename = filename
                 self.status_code = status_code
                 if self.filename == "not_found":

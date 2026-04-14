@@ -20,8 +20,7 @@ class Output:
 
 
 class SendMessageInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        r"""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -62,16 +61,14 @@ class SendMessageInput(insightconnect_plugin_runtime.Input):
   ],
   "definitions": {}
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class SendMessageOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(
-        r"""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -227,8 +224,7 @@ class SendMessageOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
