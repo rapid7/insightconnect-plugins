@@ -18,6 +18,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         connection_type = params.get(Input.CONNECTION_TYPE)
 
         if connection_type == ConnectionType.ON_PREM:
+            self._validate_on_prem_params(params)
             self.api_client = ManageEngineServiceDeskAPI(
                 connection_type=connection_type,
                 logger=self.logger,
@@ -26,6 +27,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 ssl_verify=params.get(Input.SSL_VERIFY, True),
             )
         else:
+            self._validate_cloud_params(params)
             self.api_client = ManageEngineServiceDeskAPI(
                 connection_type=connection_type,
                 logger=self.logger,
@@ -45,3 +47,35 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 assistance="Please verify your connection settings and try again.",
             )
         return {"status": "Success"}
+
+    @staticmethod
+    def _validate_on_prem_params(params: dict) -> None:
+        missing = []
+        if not params.get(Input.SDP_BASE_URL):
+            missing.append("Service Desk Plus Base URL")
+        if not params.get(Input.API_KEY, {}).get("secretKey"):
+            missing.append("API Key")
+        if missing:
+            raise ConnectionTestException(
+                cause=f"On-Prem connection is missing required fields: {', '.join(missing)}.",
+                assistance="Please provide the Service Desk Plus Base URL and API Key for On-Prem connections.",
+            )
+
+    @staticmethod
+    def _validate_cloud_params(params: dict) -> None:
+        missing = []
+        if not params.get(Input.CLIENT_ID):
+            missing.append("Client ID")
+        if not params.get(Input.CLIENT_SECRET, {}).get("secretKey"):
+            missing.append("Client Secret")
+        if not params.get(Input.REFRESH_TOKEN, {}).get("secretKey"):
+            missing.append("Refresh Token")
+        if not params.get(Input.PORTAL_NAME):
+            missing.append("Portal Name")
+        if not params.get(Input.DATA_CENTER):
+            missing.append("Data Center")
+        if missing:
+            raise ConnectionTestException(
+                cause=f"Cloud connection is missing required fields: {', '.join(missing)}.",
+                assistance="Please provide the Client ID, Client Secret, Refresh Token, Portal Name, and Data Center for Cloud connections.",
+            )

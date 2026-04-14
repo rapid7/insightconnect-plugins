@@ -13,10 +13,10 @@ class EditRequest(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params: dict = None) -> dict:
-        request_parameters = params.copy()
-        request_parameters.pop(Input.REQUEST_ID)
+        request_id = params.get(Input.REQUEST_ID)
+        request_parameters = {k: v for k, v in params.items() if k != Input.REQUEST_ID}
         response_json = self.connection.api_client.edit_request(
-            request_id=params.get(Input.REQUEST_ID), request_parameters=request_parameters
+            request_id=request_id, request_parameters=request_parameters
         )
 
         return {
