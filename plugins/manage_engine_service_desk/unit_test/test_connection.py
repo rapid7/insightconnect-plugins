@@ -74,9 +74,7 @@ class TestConnection(TestCase):
 
     def test_validate_cloud_missing_partial_fields(self):
         with self.assertRaises(ConnectionTestException) as ctx:
-            Connection._validate_cloud_params(
-                {Input.CLIENT_ID: "client_id", Input.PORTAL_NAME: "mycompany"}
-            )
+            Connection._validate_cloud_params({Input.CLIENT_ID: "client_id", Input.PORTAL_NAME: "mycompany"})
         cause = ctx.exception.cause
         self.assertNotIn("Client ID", cause)
         self.assertNotIn("Portal Name", cause)
