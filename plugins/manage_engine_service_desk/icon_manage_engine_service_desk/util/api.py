@@ -1,33 +1,114 @@
 import json
+import time
 from logging import Logger
+from typing import Optional
 
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_manage_engine_service_desk.util import helpers
-from icon_manage_engine_service_desk.util.constants import Request
+from icon_manage_engine_service_desk.util.constants import (
+    CLOUD_API_BASE_URLS,
+    ZOHO_OAUTH_BASE_URLS,
+    ConnectionType,
+    Request,
+)
 from icon_manage_engine_service_desk.util.endpoints import (
-    REQUESTS_ENDPOINT,
-    REQUEST_ENDPOINT,
-    DELETE_REQUEST_ENDPOINT,
-    CLOSE_REQUEST_ENDPOINT,
     ASSIGN_REQUEST_ENDPOINT,
+    CLOSE_REQUEST_ENDPOINT,
+    DELETE_REQUEST_ENDPOINT,
     PICKUP_REQUEST_ENDPOINT,
-    REQUEST_RESOLUTIONS_ENDPOINT,
-    REQUEST_NOTES_ENDPOINT,
+    REQUEST_ENDPOINT,
     REQUEST_NOTE_ENDPOINT,
+    REQUEST_NOTES_ENDPOINT,
+    REQUEST_RESOLUTIONS_ENDPOINT,
+    REQUESTS_ENDPOINT,
 )
 
 
 class ManageEngineServiceDeskAPI:
-    def __init__(self, api_key: str, sdp_base_url: str, ssl_verify: bool, logger: Logger):
-        self._api_key = api_key
-        self._sdp_base_url = sdp_base_url if not sdp_base_url.endswith("/") else sdp_base_url[:-1]
-        self.ssl_verify = ssl_verify
+    def __init__(
+        self,
+        connection_type: str,
+        logger: Logger,
+        # On-Prem fields
+        api_key: Optional[str] = None,
+        sdp_base_url: Optional[str] = None,
+        ssl_verify: bool = True,
+        # Cloud fields
+        client_id: Optional[str] = None,
+        client_secret: Optional[str] = None,
+        refresh_token: Optional[str] = None,
+        portal_name: Optional[str] = None,
+        data_center: Optional[str] = None,
+    ):
+        self._connection_type = connection_type
         self._logger = logger
+        self.ssl_verify = ssl_verify
+
+        if connection_type == ConnectionType.ON_PREM:
+            self._api_key = api_key
+            self._api_base = f"{sdp_base_url.rstrip('/')}/api/v3"
+            self._zoho_oauth_base = None
+            self._client_id = None
+            self._client_secret = None
+            self._refresh_token = None
+        else:
+            cloud_base = CLOUD_API_BASE_URLS[data_center]
+            self._api_base = f"{cloud_base}/app/{portal_name}/api/v3"
+            self._zoho_oauth_base = ZOHO_OAUTH_BASE_URLS[data_center]
+            self._client_id = client_id
+            self._client_secret = client_secret
+            self._refresh_token = refresh_token
+            self._api_key = None
+            # Cache for the short-lived access token
+            self._access_token: Optional[str] = None
+            self._access_token_expiry: float = 0.0
+
+    def _get_access_token(self) -> str:
+        """Fetch a new Zoho OAuth access token using the stored refresh token.
+        Caches the result and only re-fetches when the token has expired."""
+        if self._access_token and time.time() < self._access_token_expiry:
+            return self._access_token
+
+        self._logger.info("Fetching new Zoho OAuth access token...")
+        try:
+            response = requests.post(
+                url=f"{self._zoho_oauth_base}/oauth/v2/token",
+                params={
+                    "grant_type": "refresh_token",
+                    "client_id": self._client_id,
+                    "client_secret": self._client_secret,
+                    "refresh_token": self._refresh_token,
+                },
+                verify=True,
+            )
+            response.raise_for_status()
+            token_data = response.json()
+        except requests.exceptions.RequestException as e:
+            raise PluginException(
+                cause="Failed to obtain Zoho OAuth access token.",
+                assistance="Verify that the Client ID, Client Secret, Refresh Token, and Data Center are correct.",
+                data=str(e),
+            )
+
+        if "access_token" not in token_data:
+            raise PluginException(
+                cause="Zoho OAuth token response did not contain an access token.",
+                assistance="Verify that the Client ID, Client Secret, and Refresh Token are correct.",
+                data=token_data,
+            )
+
+        self._access_token = token_data["access_token"]
+        # Zoho tokens typically expire in 3600 seconds; subtract a 60-second buffer
+        expires_in = token_data.get("expires_in", 3600)
+        self._access_token_expiry = time.time() + expires_in - 60
+        return self._access_token
 
     def _get_headers(self) -> dict:
-        return {"authtoken": f"{self._api_key}"}
+        if self._connection_type == ConnectionType.ON_PREM:
+            return {"authtoken": self._api_key}
+        return {"Authorization": f"Zoho-oauthtoken {self._get_access_token()}"}
 
     def get_requests_list(
         self,
@@ -49,7 +130,7 @@ class ManageEngineServiceDeskAPI:
         )
         return self.make_json_request(
             method="GET",
-            url=REQUESTS_ENDPOINT.format(sdp_base_url=self._sdp_base_url),
+            url=REQUESTS_ENDPOINT.format(api_base=self._api_base),
             headers=self._get_headers(),
             params=helpers.prepare_input_data({"list_info": list_parameters}),
         )
@@ -58,7 +139,7 @@ class ManageEngineServiceDeskAPI:
         self._logger.info(f"Getting a request with {request_id} id...")
         return self.make_json_request(
             method="GET",
-            url=REQUEST_ENDPOINT.format(sdp_base_url=self._sdp_base_url, request_id=request_id),
+            url=REQUEST_ENDPOINT.format(api_base=self._api_base, request_id=request_id),
             headers=self._get_headers(),
         )
 
@@ -72,7 +153,7 @@ class ManageEngineServiceDeskAPI:
             )
         return self.make_json_request(
             method="POST",
-            url=REQUESTS_ENDPOINT.format(sdp_base_url=self._sdp_base_url),
+            url=REQUESTS_ENDPOINT.format(api_base=self._api_base),
             headers=self._get_headers(),
             data=helpers.prepare_input_data({"request": cleaned_request_parameters}),
         )
@@ -87,7 +168,7 @@ class ManageEngineServiceDeskAPI:
             )
         return self.make_json_request(
             method="PUT",
-            url=REQUEST_ENDPOINT.format(request_id=request_id, sdp_base_url=self._sdp_base_url),
+            url=REQUEST_ENDPOINT.format(api_base=self._api_base, request_id=request_id),
             headers=self._get_headers(),
             data=helpers.prepare_input_data({"request": cleaned_request_parameters}),
         )
@@ -96,7 +177,7 @@ class ManageEngineServiceDeskAPI:
         self._logger.info(f"Deleting a request with {request_id} id...")
         return self.make_json_request(
             method="DELETE",
-            url=DELETE_REQUEST_ENDPOINT.format(request_id=request_id, sdp_base_url=self._sdp_base_url),
+            url=DELETE_REQUEST_ENDPOINT.format(api_base=self._api_base, request_id=request_id),
             headers=self._get_headers(),
         )
 
@@ -104,7 +185,7 @@ class ManageEngineServiceDeskAPI:
         self._logger.info(f"Closing a request with {request_id} id...")
         return self.make_json_request(
             method="PUT",
-            url=CLOSE_REQUEST_ENDPOINT.format(request_id=request_id, sdp_base_url=self._sdp_base_url),
+            url=CLOSE_REQUEST_ENDPOINT.format(api_base=self._api_base, request_id=request_id),
             headers=self._get_headers(),
             data=helpers.prepare_input_data({"request": {"closure_info": helpers.clean_dict(closure_parameters)}}),
         )
@@ -120,7 +201,7 @@ class ManageEngineServiceDeskAPI:
 
         return self.make_json_request(
             method="PUT",
-            url=ASSIGN_REQUEST_ENDPOINT.format(request_id=request_id, sdp_base_url=self._sdp_base_url),
+            url=ASSIGN_REQUEST_ENDPOINT.format(api_base=self._api_base, request_id=request_id),
             headers=self._get_headers(),
             data=helpers.prepare_input_data({"request": assign_params}),
         )
@@ -129,7 +210,7 @@ class ManageEngineServiceDeskAPI:
         self._logger.info(f"Picking up a request with {request_id} id...")
         return self.make_json_request(
             method="PUT",
-            url=PICKUP_REQUEST_ENDPOINT.format(request_id=request_id, sdp_base_url=self._sdp_base_url),
+            url=PICKUP_REQUEST_ENDPOINT.format(api_base=self._api_base, request_id=request_id),
             headers=self._get_headers(),
         )
 
@@ -139,7 +220,7 @@ class ManageEngineServiceDeskAPI:
         self._logger.info(f"Adding resolution to the request with {request_id} id...")
         return self.make_json_request(
             method="POST",
-            url=REQUEST_RESOLUTIONS_ENDPOINT.format(request_id=request_id, sdp_base_url=self._sdp_base_url),
+            url=REQUEST_RESOLUTIONS_ENDPOINT.format(api_base=self._api_base, request_id=request_id),
             headers=self._get_headers(),
             data=helpers.prepare_input_data(
                 {"resolution": {"content": content, "add_to_linked_requests": add_to_linked_requests}}
@@ -150,7 +231,7 @@ class ManageEngineServiceDeskAPI:
         self._logger.info(f"Getting resolution added to the request with {request_id} id...")
         return self.make_json_request(
             method="GET",
-            url=REQUEST_RESOLUTIONS_ENDPOINT.format(request_id=request_id, sdp_base_url=self._sdp_base_url),
+            url=REQUEST_RESOLUTIONS_ENDPOINT.format(api_base=self._api_base, request_id=request_id),
             headers=self._get_headers(),
         )
 
@@ -166,7 +247,7 @@ class ManageEngineServiceDeskAPI:
         self._logger.info(f"Adding note to the request with {request_id} id...")
         return self.make_json_request(
             method="POST",
-            url=REQUEST_NOTES_ENDPOINT.format(request_id=request_id, sdp_base_url=self._sdp_base_url),
+            url=REQUEST_NOTES_ENDPOINT.format(api_base=self._api_base, request_id=request_id),
             headers=self._get_headers(),
             data=helpers.prepare_input_data(
                 {
@@ -211,7 +292,7 @@ class ManageEngineServiceDeskAPI:
         return self.make_json_request(
             method="PUT",
             url=REQUEST_NOTE_ENDPOINT.format(
-                request_id=request_id, request_note_id=request_note_id, sdp_base_url=self._sdp_base_url
+                api_base=self._api_base, request_id=request_id, request_note_id=request_note_id
             ),
             headers=self._get_headers(),
             data=helpers.prepare_input_data({"note": note_params}),
@@ -222,7 +303,7 @@ class ManageEngineServiceDeskAPI:
         return self.make_json_request(
             method="DELETE",
             url=REQUEST_NOTE_ENDPOINT.format(
-                request_id=request_id, request_note_id=request_note_id, sdp_base_url=self._sdp_base_url
+                api_base=self._api_base, request_id=request_id, request_note_id=request_note_id
             ),
             headers=self._get_headers(),
         )
@@ -231,7 +312,7 @@ class ManageEngineServiceDeskAPI:
         self._logger.info(f"Getting a list of notes added to the request with {request_id} id…")
         return self.make_json_request(
             method="GET",
-            url=REQUEST_NOTES_ENDPOINT.format(request_id=request_id, sdp_base_url=self._sdp_base_url),
+            url=REQUEST_NOTES_ENDPOINT.format(api_base=self._api_base, request_id=request_id),
             headers=self._get_headers(),
         )
 
