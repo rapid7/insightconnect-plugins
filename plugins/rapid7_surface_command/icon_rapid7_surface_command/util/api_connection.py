@@ -226,14 +226,7 @@ class ApiConnection:
                 for oid in object_ids
             }
             for future in as_completed(futures):
-                try:
-                    oid, error = future.result()
-                except Exception as exc:
-                    # Should not happen — _tag_single_asset_with_retry never raises.
-                    oid = futures[future]
-                    self.logger.warning(f"Unexpected executor error for asset {oid}: {exc}")
-                    failures.append({"object_id": oid, "error": str(exc)})
-                    continue
+                oid, error = future.result()
 
                 if error is None:
                     success_count += 1
