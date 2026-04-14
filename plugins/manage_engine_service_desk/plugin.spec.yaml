@@ -358,7 +358,7 @@ types:
       description: Array of asset objects associated with this request
       type: "[]asset"
       required: false
-      example: ['{"name": "Software", "id": 4541563, "barcode": "test-barcode"}']
+      example: [{"name": "Software", "id": 4541563, "barcode": "test-barcode"}]
     site:
       title: Site
       description: Denotes the site to which this request belongs
@@ -641,7 +641,7 @@ actions:
         description: List of requests
         type: "[]request_output"
         required: false
-        example: ['{"subject": "Install xyz", "requester": {"name": "Mike"}}']
+        example: [{"subject": "Install xyz", "requester": {"name": "Mike"}}]
       status:
          title: Status
          description: Status of the request
@@ -700,7 +700,7 @@ actions:
         description: Array of asset objects associated with this request
         type: "[]asset"
         required: false
-        example: ['{"name": "Software", "barcode": "test-barcode"}']
+        example: [{"name": "Software", "barcode": "test-barcode"}]
         order: 3
       email_ids_to_notify:
         title: Email IDs to Notify
@@ -856,7 +856,7 @@ actions:
         description: Array of asset objects associated with this request
         type: "[]asset"
         required: false
-        example: ['{"name": "Software", "barcode": "test-barcode"}']
+        example: [{"name": "Software", "barcode": "test-barcode"}]
         order: 4
       email_ids_to_notify:
         title: Email IDs to Notify
@@ -1401,7 +1401,7 @@ actions:
         description:  Notes assigned to the request
         type: "[]note"
         required: false
-        example: ['{"note_id": "312", "added_time": "Jul 8, 2022 02:02 AM", "added_by": {"name": "John"}']
+        example: [{"note_id": "312", "added_time": "Jul 8, 2022 02:02 AM", "added_by": {"name": "John"}}]
       status:
         title: Status
         description: Status of the request

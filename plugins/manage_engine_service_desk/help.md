@@ -68,7 +68,7 @@ parameter containing `ID` and `Name` fields please provide at least one of them
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|assets|[]asset|None|False|Array of asset objects associated with this request|None|["{\"name\": \"Software\", \"barcode\": \"test-barcode\"}"]|None|None|
+|assets|[]asset|None|False|Array of asset objects associated with this request|None|[{"name": "Software", "barcode": "test-barcode"}]|None|None|
 |category|category|None|False|Category to which this request belongs|None|{"name": "Operating System"}|None|None|
 |description|string|None|False|Description of this request|None|Example description|None|None|
 |email_ids_to_notify|[]string|None|False|Array of Email ids, which needs to be notified about the happenings of this request|None|["user@example.com"]|None|None|
@@ -94,7 +94,10 @@ Example input:
 ```
 {
   "assets": [
-    "{\"name\": \"Software\", \"barcode\": \"test-barcode\"}"
+    {
+      "barcode": "test-barcode",
+      "name": "Software"
+    }
   ],
   "category": {
     "name": "Operating System"
@@ -428,7 +431,7 @@ parameter containing `ID` and `Name` fields please provide only one or the other
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|assets|[]asset|None|False|Array of asset objects associated with this request|None|["{\"name\": \"Software\", \"barcode\": \"test-barcode\"}"]|None|None|
+|assets|[]asset|None|False|Array of asset objects associated with this request|None|[{"name": "Software", "barcode": "test-barcode"}]|None|None|
 |category|category|None|False|Category to which this request belongs|None|{"name": "Operating System"}|None|None|
 |description|string|None|False|Description of this request|None|Example description|None|None|
 |email_ids_to_notify|[]string|None|False|Array of Email ids, which needs to be notified about the happenings of this request|None|["user@example.com"]|None|None|
@@ -455,7 +458,10 @@ Example input:
 ```
 {
   "assets": [
-    "{\"name\": \"Software\", \"barcode\": \"test-barcode\"}"
+    {
+      "barcode": "test-barcode",
+      "name": "Software"
+    }
   ],
   "category": {
     "name": "Operating System"
@@ -610,7 +616,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|requests|[]request_output|False|List of requests|["{\"subject\": \"Install xyz\", \"requester\": {\"name\": \"Mike\"}}"]|
+|requests|[]request_output|False|List of requests|[{"subject": "Install xyz", "requester": {"name": "Mike"}}]|
 |status|string|True|Status of the request|success|
   
 Example output:
@@ -618,7 +624,12 @@ Example output:
 ```
 {
   "requests": [
-    "{\"subject\": \"Install xyz\", \"requester\": {\"name\": \"Mike\"}}"
+    {
+      "requester": {
+        "name": "Mike"
+      },
+      "subject": "Install xyz"
+    }
   ],
   "status": "success"
 }
@@ -646,7 +657,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|notes|[]note|False|Notes assigned to the request|["{\"note_id\": \"312\", \"added_time\": \"Jul 8, 2022 02:02 AM\", \"added_by\": {\"name\": \"John\"}"]|
+|notes|[]note|False|Notes assigned to the request|[{"note_id": "312", "added_time": "Jul 8, 2022 02:02 AM", "added_by": {"name": "John"}}]|
 |request_id|integer|True|The id of the request|55|
 |status|string|True|Status of the request|success|
 |status_code|integer|False|Status code of the request|2000|
@@ -656,7 +667,13 @@ Example output:
 ```
 {
   "notes": [
-    "{\"note_id\": \"312\", \"added_time\": \"Jul 8, 2022 02:02 AM\", \"added_by\": {\"name\": \"John\"}"
+    {
+      "added_by": {
+        "name": "John"
+      },
+      "added_time": "Jul 8, 2022 02:02 AM",
+      "note_id": "312"
+    }
   ],
   "request_id": 55,
   "status": "success",
@@ -912,7 +929,7 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Assets|[]asset|None|False|Array of asset objects associated with this request|["{\"name\": \"Software\", \"id\": 4541563, \"barcode\": \"test-barcode\"}"]|
+|Assets|[]asset|None|False|Array of asset objects associated with this request|[{"name": "Software", "id": 4541563, "barcode": "test-barcode"}]|
 |Category|category|None|False|Category to which this request belongs|{"name": "Operating System", "id": 8}|
 |Created By|user_output|None|False|Creator of the request|{"name": "John", "id": 71}|
 |Created Time|date|None|False|Time the request was created|Jul 9, 2022 04:02 AM|
