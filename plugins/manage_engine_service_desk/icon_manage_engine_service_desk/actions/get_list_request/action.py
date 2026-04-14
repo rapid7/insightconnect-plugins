@@ -13,7 +13,6 @@ from icon_manage_engine_service_desk.util.constants import (
 from icon_manage_engine_service_desk.util.helpers import remove_other_keys
 from .schema import GetListRequestInput, GetListRequestOutput, Input, Output, Component
 
-
 # Custom imports below
 
 

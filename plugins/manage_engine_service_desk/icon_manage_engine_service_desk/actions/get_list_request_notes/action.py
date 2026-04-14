@@ -5,7 +5,6 @@ from icon_manage_engine_service_desk.util.constants import Response, Note, Respo
 from icon_manage_engine_service_desk.util.helpers import remove_other_keys
 from .schema import GetListRequestNotesInput, GetListRequestNotesOutput, Input, Output, Component
 
-
 # Custom imports below
 
 

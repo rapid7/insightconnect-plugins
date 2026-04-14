@@ -5,7 +5,6 @@ from icon_manage_engine_service_desk.util.api import ManageEngineServiceDeskAPI
 from icon_manage_engine_service_desk.util.constants import ConnectionType
 from .schema import ConnectionSchema, Input
 
-
 # Custom imports below
 
 
