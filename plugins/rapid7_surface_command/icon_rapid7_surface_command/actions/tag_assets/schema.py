@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add, set, or remove tags on multiple assets in bulk using the Surface Command Graph API"
+    DESCRIPTION = "Add, set, or remove tags on multiple assets in bulk"
 
 
 class Input:

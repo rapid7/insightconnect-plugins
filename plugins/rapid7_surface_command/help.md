@@ -107,7 +107,7 @@ Example output:
 
 #### Tag Assets in Bulk
 
-This action is used to add, set, or remove tags on multiple assets in bulk using the Surface Command Graph API
+This action is used to add, set, or remove tags on multiple assets in bulk
 
 ##### Input
 
