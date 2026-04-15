@@ -4,8 +4,9 @@ products: [insightconnect]
 name: rapid7_surface_command
 title: Rapid7 Surface Command
 description: Surface Command gives you full visibility over your assets and identities across multiple technology platforms
-version: 1.1.0
+version: 1.2.0
 version_history:
+- 1.2.0 - Add new action | Tag Assets in Bulk
 - 1.1.0 - Update action title | Add new action | Run Adhoc Query
 - 1.0.0 - Initial plugin
 
@@ -39,7 +40,7 @@ enable_cache: false
 
 sdk:
   type: slim
-  version: latest
+  version: 6.4.3
   user: nobody
 
 links:
@@ -106,6 +107,51 @@ actions:
       items:
         title: Items
         description: Array of Items
+        type: "[]object"
+        example: "[]"
+        required: false
+  tag_assets:
+    title: Tag Assets in Bulk
+    description: Add, set, or remove tags on multiple assets in bulk
+    input:
+      object_ids:
+        title: Object IDs
+        description: List of asset object IDs (UUIDs) to tag
+        type: "[]string"
+        required: true
+        example: '["11111111-1111-1111-1111-111111111111", "22222222-2222-2222-2222-222222222222"]'
+      tags:
+        title: Tags
+        description: List of tag values to apply
+        type: "[]string"
+        required: true
+        example: '["env:prod", "team:security"]'
+      operation:
+        title: Operation
+        description: "Tag operation to perform: add (append tags), set (replace all tags), or remove (delete tags)"
+        type: string
+        required: true
+        example: add
+        enum:
+          - add
+          - set
+          - remove
+    output:
+      success_count:
+        title: Success Count
+        description: Number of assets successfully tagged
+        type: integer
+        example: 2
+        required: true
+      failure_count:
+        title: Failure Count
+        description: Number of assets that could not be tagged
+        type: integer
+        example: 0
+        required: true
+      failures:
+        title: Failures
+        description: Details of any tagging failures, including the object ID and error message
         type: "[]object"
         example: "[]"
         required: false
