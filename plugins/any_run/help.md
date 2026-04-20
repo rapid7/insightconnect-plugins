@@ -16,7 +16,7 @@ ANY.RUN Sandbox is an online interactive sandbox for malware analysis, a tool fo
 # Requirements
 
 * Requires an ANY.RUN Sandbox or ANY.RUN TI Lookup API key without a prefix
-* ANY.RUN "Enterprise Suite" plan (API access required)
+* Available on ANY.RUN plans with API access, including trial
 
 # Supported Product Versions
 
@@ -55,39 +55,39 @@ This action is used to run File analysis using Android VM
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|env_locale|string|en-US|False|Operation System language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive|None|en-US|None|None|
+|env_locale|string||False|Operation System language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive|None|en-US|None|None|
 |file_content|bytes|None|True|File bytes|None|bytes|None|None|
 |filename|string|None|True|Filename|None|malware.zip|None|None|
-|opt_auto_delete_after|string|month|False|Specify after what period of time this report should be deleted|["day", "week", "2 weeks", "month"]|month|None|None|
+|opt_auto_delete_after|string||False|Specify after what period of time this report should be deleted|["", "day", "week", "2 weeks", "month"]|month|None|None|
 |opt_network_connect|boolean|True|False|Network connection state|None|True|None|None|
 |opt_network_fakenet|boolean|False|False|FakeNet feature status|None|False|None|None|
-|opt_network_geo|string|fastest|False|TOR geo location option|None|US|None|None|
+|opt_network_geo|string||False|TOR geo location option|None|fastest|None|None|
 |opt_network_mitm|boolean|False|False|HTTPS MITM proxy option|None|False|None|None|
 |opt_network_residential_proxy|boolean|False|False|Residential Proxy option|None|False|None|None|
-|opt_network_residential_proxy_geo|string|fastest|False|Residential Proxy Geo option|None|US|None|None|
+|opt_network_residential_proxy_geo|string||False|Residential Proxy Geo option|None|fastest|None|None|
 |opt_network_tor|boolean|False|False|TOR using|None|False|None|None|
-|opt_privacy_type|string|bylink|False|Privacy settings|["public", "bylink", "owner", "byteam"]|bylink|None|None|
+|opt_privacy_type|string|bylink|False|Privacy settings|["", "public", "bylink", "owner", "byteam"]|bylink|None|None|
 |opt_timeout|integer|240|False|Timeout option, size range 10-660|None|240|None|None|
-|user_tags|string|insight-connect|False|Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8|None|insight-connect|None|None|
+|user_tags|string||False|Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8|None|insight-connect|None|None|
   
 Example input:
 
 ```
 {
-  "env_locale": "en-US",
+  "env_locale": "",
   "file_content": "bytes",
   "filename": "malware.zip",
-  "opt_auto_delete_after": "month",
+  "opt_auto_delete_after": "",
   "opt_network_connect": true,
   "opt_network_fakenet": false,
-  "opt_network_geo": "fastest",
+  "opt_network_geo": "",
   "opt_network_mitm": false,
   "opt_network_residential_proxy": false,
-  "opt_network_residential_proxy_geo": "fastest",
+  "opt_network_residential_proxy_geo": "",
   "opt_network_tor": false,
   "opt_privacy_type": "bylink",
   "opt_timeout": 240,
-  "user_tags": "insight-connect"
+  "user_tags": ""
 }
 ```
 
@@ -115,39 +115,39 @@ This action is used to run URL analysis using Android VM
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|env_locale|string|en-US|False|Operation System language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive|None|en-US|None|None|
+|env_locale|string||False|Operation System language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive|None|en-US|None|None|
 |obj_ext_extension|boolean|True|False|Change extension to valid|None|True|None|None|
 |obj_url|string|None|True|Target URL. Size range 5-512. Example -> (http/https)://(your-link)|None|https://example.org|None|None|
-|opt_auto_delete_after|string|month|False|Specify after what period of time this report should be deleted|["day", "week", "2 weeks", "month"]|month|None|None|
+|opt_auto_delete_after|string||False|Specify after what period of time this report should be deleted|["", "day", "week", "2 weeks", "month"]|month|None|None|
 |opt_network_connect|boolean|True|False|Network connection state|None|True|None|None|
 |opt_network_fakenet|boolean|False|False|FakeNet feature status|None|False|None|None|
-|opt_network_geo|string|fastest|False|TOR geo location option|None|US|None|None|
+|opt_network_geo|string||False|TOR geo location option|None|fastest|None|None|
 |opt_network_mitm|boolean|False|False|HTTPS MITM proxy option|None|False|None|None|
 |opt_network_residential_proxy|boolean|False|False|Residential Proxy option|None|False|None|None|
-|opt_network_residential_proxy_geo|string|fastest|False|Residential Proxy Geo option|None|US|None|None|
+|opt_network_residential_proxy_geo|string||False|Residential Proxy Geo option|None|fastest|None|None|
 |opt_network_tor|boolean|False|False|TOR using|None|False|None|None|
-|opt_privacy_type|string|bylink|False|Privacy settings|["public", "bylink", "owner", "byteam"]|bylink|None|None|
+|opt_privacy_type|string|bylink|False|Privacy settings|["", "public", "bylink", "owner", "byteam"]|bylink|None|None|
 |opt_timeout|integer|120|False|Timeout option, size range 10-660|None|120|None|None|
-|user_tags|string|insight-connect|False|Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8|None|insight-connect|None|None|
+|user_tags|string||False|Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8|None|insight-connect|None|None|
   
 Example input:
 
 ```
 {
-  "env_locale": "en-US",
+  "env_locale": "",
   "obj_ext_extension": true,
   "obj_url": "https://example.org",
-  "opt_auto_delete_after": "month",
+  "opt_auto_delete_after": "",
   "opt_network_connect": true,
   "opt_network_fakenet": false,
-  "opt_network_geo": "fastest",
+  "opt_network_geo": "",
   "opt_network_mitm": false,
   "opt_network_residential_proxy": false,
-  "opt_network_residential_proxy_geo": "fastest",
+  "opt_network_residential_proxy_geo": "",
   "opt_network_tor": false,
   "opt_privacy_type": "bylink",
   "opt_timeout": 120,
-  "user_tags": "insight-connect"
+  "user_tags": ""
 }
 ```
 
@@ -281,7 +281,7 @@ This action is used to get detailed JSON, HTML or STIX report for analysis
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |analysis_uuid|string|None|True|Analysis UUID|None|0cf223f2-530e-4a50-b68f-563045268648|None|None|
-|format|string|html|False|Report file in JSON, HTML or STIX format|["html", "json", "stix"]|json|None|None|
+|format|string|html|True|Report file in JSON, HTML or STIX format|["html", "json", "stix"]|html|None|None|
   
 Example input:
 
@@ -352,7 +352,7 @@ and in-depth information on cyber threats
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|lookup_depth|int|180|False|Specify the number of days from the current date for which you want to lookup|None|180|None|None|
+|lookup_depth|int|180|True|Specify the number of days from the current date for which you want to lookup|None|180|None|None|
 |query|string|None|True|Raw query with necessary filters. Supports condition concatenation with AND, OR, NOT and Parentheses ()|None|domainName:"\rvonline.hu" OR url:"*\rvonline.hu*"|None|None|
   
 Example input:
@@ -423,8 +423,8 @@ This action is used to check URL/IP/Domain/File reputation
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |entity_type|string|url|True|Entity type to search in database|["url", "hash", "destination_ip", "domain_name"]|url|None|None|
-|entity_value|string|None|True|URL (Size range 2-256) or Hash (SHA256, SAH1, MD5) or Domain or IP|None|https://suspicious.url|None|None|
-|lookup_depth|int|180|False|Specify the number of days from the current date for which you want to lookup|None|180|None|None|
+|entity_value|string|None|True|URL (Size range 2-256) or Hash (SHA256, SHA1, MD5) or Domain or IP|None|https://suspicious.url|None|None|
+|lookup_depth|int|180|True|Specify the number of days from the current date for which you want to lookup|None|180|None|None|
   
 Example input:
 
@@ -488,49 +488,49 @@ This action is used to run File analysis using Linux VM
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|env_locale|string|en-US|False|Operation System language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive|None|en-US|None|None|
-|env_os|string|ubuntu|False|Operation System. Supports ubuntu, debian|["ubuntu", "debian"]|ubuntu|None|None|
+|env_locale|string||False|Operation System language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive|None|en-US|None|None|
+|env_os|string|ubuntu|True|Operation System. Supports ubuntu, debian|["ubuntu", "debian"]|ubuntu|None|None|
 |file_content|bytes|None|True|File bytes|None|bytes|None|None|
 |filename|string|None|True|Filename|None|malware.zip|None|None|
 |obj_ext_cmd|string|None|False|Optional command line|None|cmd|None|None|
 |obj_ext_extension|boolean|True|False|Change extension to valid|None|True|None|None|
-|obj_ext_startfolder|string|temp|False|Start object from|["desktop", "home", "downloads", "temp"]|temp|None|None|
-|opt_auto_delete_after|string|month|False|Specify after what period of time this report should be deleted|["day", "week", "2 weeks", "month"]|month|None|None|
+|obj_ext_startfolder|string|temp|False|Start object from|["", "desktop", "home", "downloads", "temp"]|temp|None|None|
+|opt_auto_delete_after|string||False|Specify after what period of time this report should be deleted|["", "day", "week", "2 weeks", "month"]|month|None|None|
 |opt_network_connect|boolean|True|False|Network connection state|None|True|None|None|
 |opt_network_fakenet|boolean|False|False|FakeNet feature status|None|False|None|None|
-|opt_network_geo|string|fastest|False|TOR geo location option|None|US|None|None|
+|opt_network_geo|string||False|TOR geo location option|None|fastest|None|None|
 |opt_network_mitm|boolean|False|False|HTTPS MITM proxy option|None|False|None|None|
 |opt_network_residential_proxy|boolean|False|False|Residential Proxy option|None|False|None|None|
-|opt_network_residential_proxy_geo|string|fastest|False|Residential Proxy Geo option|None|US|None|None|
+|opt_network_residential_proxy_geo|string||False|Residential Proxy Geo option|None|fastest|None|None|
 |opt_network_tor|boolean|False|False|TOR using|None|False|None|None|
-|opt_privacy_type|string|bylink|False|Privacy settings|["public", "bylink", "owner", "byteam"]|bylink|None|None|
+|opt_privacy_type|string|bylink|False|Privacy settings|["", "public", "bylink", "owner", "byteam"]|bylink|None|None|
 |opt_timeout|integer|240|False|Timeout option, size range 10-660|None|240|None|None|
 |run_as_root|boolean|True|False|Run file with superuser privileges|None|True|None|None|
-|user_tags|string|insight-connect|False|Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8|None|insight-connect|None|None|
+|user_tags|string||False|Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8|None|insight-connect|None|None|
   
 Example input:
 
 ```
 {
-  "env_locale": "en-US",
+  "env_locale": "",
   "env_os": "ubuntu",
   "file_content": "bytes",
   "filename": "malware.zip",
   "obj_ext_cmd": "cmd",
   "obj_ext_extension": true,
   "obj_ext_startfolder": "temp",
-  "opt_auto_delete_after": "month",
+  "opt_auto_delete_after": "",
   "opt_network_connect": true,
   "opt_network_fakenet": false,
-  "opt_network_geo": "fastest",
+  "opt_network_geo": "",
   "opt_network_mitm": false,
   "opt_network_residential_proxy": false,
-  "opt_network_residential_proxy_geo": "fastest",
+  "opt_network_residential_proxy_geo": "",
   "opt_network_tor": false,
   "opt_privacy_type": "bylink",
   "opt_timeout": 240,
   "run_as_root": true,
-  "user_tags": "insight-connect"
+  "user_tags": ""
 }
 ```
 
@@ -558,43 +558,43 @@ This action is used to run URL analysis using Linux VM
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|env_locale|string|en-US|False|Operation System language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive|None|en-US|None|None|
-|env_os|string|ubuntu|False|Operation System. Supports ubuntu, debian|["ubuntu", "debian"]|ubuntu|None|None|
-|obj_ext_browser|string|Google Chrome|False|Browser name. Supports Google Chrome, Mozilla Firefox|["Google Chrome", "Mozilla Firefox"]|Google Chrome|None|None|
+|env_locale|string||False|Operation System language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive|None|en-US|None|None|
+|env_os|string|ubuntu|True|Operation System. Supports ubuntu, debian|["ubuntu", "debian"]|ubuntu|None|None|
+|obj_ext_browser|string|Google Chrome|False|Browser name. Supports Google Chrome, Mozilla Firefox|["", "Google Chrome", "Mozilla Firefox"]|Google Chrome|None|None|
 |obj_ext_extension|boolean|True|False|Change extension to valid|None|True|None|None|
 |obj_url|string|None|True|Target URL. Size range 5-512. Example -> (http/https)://(your-link)|None|https://example.org|None|None|
-|opt_auto_delete_after|string|month|False|Specify after what period of time this report should be deleted|["day", "week", "2 weeks", "month"]|month|None|None|
+|opt_auto_delete_after|string||False|Specify after what period of time this report should be deleted|["", "day", "week", "2 weeks", "month"]|month|None|None|
 |opt_network_connect|boolean|True|False|Network connection state|None|True|None|None|
 |opt_network_fakenet|boolean|False|False|FakeNet feature status|None|False|None|None|
-|opt_network_geo|string|fastest|False|TOR geo location option|None|US|None|None|
+|opt_network_geo|string||False|TOR geo location option|None|fastest|None|None|
 |opt_network_mitm|boolean|False|False|HTTPS MITM proxy option|None|False|None|None|
 |opt_network_residential_proxy|boolean|False|False|Residential Proxy option|None|False|None|None|
-|opt_network_residential_proxy_geo|string|fastest|False|Residential Proxy Geo option|None|US|None|None|
+|opt_network_residential_proxy_geo|string||False|Residential Proxy Geo option|None|fastest|None|None|
 |opt_network_tor|boolean|False|False|TOR using|None|False|None|None|
-|opt_privacy_type|string|bylink|False|Privacy settings|["public", "bylink", "owner", "byteam"]|bylink|None|None|
+|opt_privacy_type|string|bylink|False|Privacy settings|["", "public", "bylink", "owner", "byteam"]|bylink|None|None|
 |opt_timeout|integer|120|False|Timeout option, size range 10-660|None|120|None|None|
-|user_tags|string|insight-connect|False|Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8|None|insight-connect|None|None|
+|user_tags|string||False|Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8|None|insight-connect|None|None|
   
 Example input:
 
 ```
 {
-  "env_locale": "en-US",
+  "env_locale": "",
   "env_os": "ubuntu",
   "obj_ext_browser": "Google Chrome",
   "obj_ext_extension": true,
   "obj_url": "https://example.org",
-  "opt_auto_delete_after": "month",
+  "opt_auto_delete_after": "",
   "opt_network_connect": true,
   "opt_network_fakenet": false,
-  "opt_network_geo": "fastest",
+  "opt_network_geo": "",
   "opt_network_mitm": false,
   "opt_network_residential_proxy": false,
-  "opt_network_residential_proxy_geo": "fastest",
+  "opt_network_residential_proxy_geo": "",
   "opt_network_tor": false,
   "opt_privacy_type": "bylink",
   "opt_timeout": 120,
-  "user_tags": "insight-connect"
+  "user_tags": ""
 }
 ```
 
@@ -623,27 +623,27 @@ This action is used to run File analysis using Windows VM
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |auto_confirm_uac|boolean|True|False|Auto confirm Windows UAC requests|None|True|None|None|
-|env_bitness|int|64|False|Bitness of Operation System. Supports 32, 64 for Windows. 64 for Windows Server 2025|[32, 64]|64|None|None|
-|env_locale|string|en-US|False|Operation System language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive|None|en-US|None|None|
-|env_type|string|complete|False|Environment preset type. You can select **development** env for OS Windows 10 x64. For all other cases, **complete** env is required|["complete", "development"]|complete|None|None|
-|env_version|string|10|False|Version of OS. Supports 7, 10, 11, server 2025|["7", "10", "11", "server 2025"]|10|None|None|
+|env_bitness|int|64|True|Bitness of Operation System. Supports 32, 64 for Windows. 64 for Windows Server 2025|[32, 64]|64|None|None|
+|env_locale|string||False|Operation System language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive|None|en-US|None|None|
+|env_type|string|complete|True|Environment preset type. You can select **development** env for OS Windows 10 x64. For all other cases, **complete** env is required|["complete", "development"]|complete|None|None|
+|env_version|string|10|True|Version of OS. Supports 7, 10, 11, server 2025|["7", "10", "11", "server 2025"]|10|None|None|
 |file_content|bytes|None|True|File bytes|None|bytes|None|None|
 |filename|string|None|True|Filename|None|malware.zip|None|None|
 |obj_ext_cmd|string|None|False|Optional command line|None|cmd|None|None|
 |obj_ext_extension|boolean|True|False|Change extension to valid|None|True|None|None|
-|obj_ext_startfolder|string|temp|False|Start object from|["desktop", "home", "downloads", "appdata", "temp", "windows", "root"]|temp|None|None|
+|obj_ext_startfolder|string|temp|False|Start object from|["", "desktop", "home", "downloads", "appdata", "temp", "windows", "root"]|temp|None|None|
 |obj_force_elevation|boolean|True|False|Forces the file to execute with elevated privileges and an elevated token (for PE32, PE32+, PE64 files only)|None|True|None|None|
-|opt_auto_delete_after|string|month|False|Specify after what period of time this report should be deleted|["day", "week", "2 weeks", "month"]|month|None|None|
+|opt_auto_delete_after|string||False|Specify after what period of time this report should be deleted|["", "day", "week", "2 weeks", "month"]|month|None|None|
 |opt_network_connect|boolean|True|False|Network connection state|None|True|None|None|
 |opt_network_fakenet|boolean|False|False|FakeNet feature status|None|False|None|None|
-|opt_network_geo|string|fastest|False|TOR geo location option|None|US|None|None|
+|opt_network_geo|string||False|TOR geo location option|None|fastest|None|None|
 |opt_network_mitm|boolean|False|False|HTTPS MITM proxy option|None|False|None|None|
 |opt_network_residential_proxy|boolean|False|False|Residential Proxy option|None|False|None|None|
-|opt_network_residential_proxy_geo|string|fastest|False|Residential Proxy Geo option|None|US|None|None|
+|opt_network_residential_proxy_geo|string||False|Residential Proxy Geo option|None|fastest|None|None|
 |opt_network_tor|boolean|False|False|TOR using|None|False|None|None|
-|opt_privacy_type|string|bylink|False|Privacy settings|["public", "bylink", "owner", "byteam"]|bylink|None|None|
+|opt_privacy_type|string|bylink|False|Privacy settings|["", "public", "bylink", "owner", "byteam"]|bylink|None|None|
 |opt_timeout|integer|240|False|Timeout option, size range 10-660|None|240|None|None|
-|user_tags|string|insight-connect|False|Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8|None|insight-connect|None|None|
+|user_tags|string||False|Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8|None|insight-connect|None|None|
   
 Example input:
 
@@ -651,7 +651,7 @@ Example input:
 {
   "auto_confirm_uac": true,
   "env_bitness": 64,
-  "env_locale": "en-US",
+  "env_locale": "",
   "env_type": "complete",
   "env_version": 10,
   "file_content": "bytes",
@@ -660,17 +660,17 @@ Example input:
   "obj_ext_extension": true,
   "obj_ext_startfolder": "temp",
   "obj_force_elevation": true,
-  "opt_auto_delete_after": "month",
+  "opt_auto_delete_after": "",
   "opt_network_connect": true,
   "opt_network_fakenet": false,
-  "opt_network_geo": "fastest",
+  "opt_network_geo": "",
   "opt_network_mitm": false,
   "opt_network_residential_proxy": false,
-  "opt_network_residential_proxy_geo": "fastest",
+  "opt_network_residential_proxy_geo": "",
   "opt_network_tor": false,
   "opt_privacy_type": "bylink",
   "opt_timeout": 240,
-  "user_tags": "insight-connect"
+  "user_tags": ""
 }
 ```
 
@@ -698,47 +698,47 @@ This action is used to run URL analysis using Windows VM
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|env_bitness|int|64|False|Bitness of Operation System. Supports 32, 64 for Windows. 64 for Windows Server 2025|[32, 64]|64|None|None|
-|env_locale|string|en-US|False|Operation System language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive|None|en-US|None|None|
-|env_type|string|complete|False|Environment preset type. You can select **development** env for OS Windows 10 x64. For all other cases, **complete** env is required|["complete", "development"]|complete|None|None|
-|env_version|string|10|False|Version of OS. Supports 7, 10, 11, server 2025|["7", "10", "11", "server 2025"]|10|None|None|
-|obj_ext_browser|string|Microsoft Edge|False|Browser name. Supports Google Chrome, Mozilla Firefox, Internet Explorer, Microsoft Edge for Windows 7, 10, 11. Microsoft Edge for Windows Server 2025|["Microsoft Edge", "Google Chrome", "Mozilla Firefox", "Internet Explorer"]|Microsoft Edge|None|None|
+|env_bitness|int|64|True|Bitness of Operation System. Supports 32, 64 for Windows. 64 for Windows Server 2025|[32, 64]|64|None|None|
+|env_locale|string||False|Operation System language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive|None|en-US|None|None|
+|env_type|string|complete|True|Environment preset type. You can select **development** env for OS Windows 10 x64. For all other cases, **complete** env is required|["complete", "development"]|complete|None|None|
+|env_version|string|10|True|Version of OS. Supports 7, 10, 11, server 2025|["7", "10", "11", "server 2025"]|10|None|None|
+|obj_ext_browser|string|Microsoft Edge|False|Browser name. Supports Google Chrome, Mozilla Firefox, Internet Explorer, Microsoft Edge for Windows 7, 10, 11. Microsoft Edge for Windows Server 2025|["", "Microsoft Edge", "Google Chrome", "Mozilla Firefox", "Internet Explorer"]|Microsoft Edge|None|None|
 |obj_ext_extension|boolean|True|False|Change extension to valid|None|True|None|None|
 |obj_url|string|None|True|Target URL. Size range 5-512. Example -> (http/https)://(your-link)|None|https://example.org|None|None|
-|opt_auto_delete_after|string|month|False|Specify after what period of time this report should be deleted|["day", "week", "2 weeks", "month"]|month|None|None|
+|opt_auto_delete_after|string||False|Specify after what period of time this report should be deleted|["", "day", "week", "2 weeks", "month"]|month|None|None|
 |opt_network_connect|boolean|True|False|Network connection state|None|True|None|None|
 |opt_network_fakenet|boolean|False|False|FakeNet feature status|None|False|None|None|
-|opt_network_geo|string|fastest|False|TOR geo location option|None|US|None|None|
+|opt_network_geo|string||False|TOR geo location option|None|fastest|None|None|
 |opt_network_mitm|boolean|False|False|HTTPS MITM proxy option|None|False|None|None|
 |opt_network_residential_proxy|boolean|False|False|Residential Proxy option|None|False|None|None|
-|opt_network_residential_proxy_geo|string|fastest|False|Residential Proxy Geo option|None|US|None|None|
+|opt_network_residential_proxy_geo|string||False|Residential Proxy Geo option|None|fastest|None|None|
 |opt_network_tor|boolean|False|False|TOR using|None|False|None|None|
-|opt_privacy_type|string|bylink|False|Privacy settings|["public", "bylink", "owner", "byteam"]|bylink|None|None|
+|opt_privacy_type|string|bylink|False|Privacy settings|["", "public", "bylink", "owner", "byteam"]|bylink|None|None|
 |opt_timeout|integer|120|False|Timeout option, size range 10-660|None|120|None|None|
-|user_tags|string|insight-connect|False|Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8|None|insight-connect|None|None|
+|user_tags|string||False|Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8|None|insight-connect|None|None|
   
 Example input:
 
 ```
 {
   "env_bitness": 64,
-  "env_locale": "en-US",
+  "env_locale": "",
   "env_type": "complete",
   "env_version": 10,
   "obj_ext_browser": "Microsoft Edge",
   "obj_ext_extension": true,
   "obj_url": "https://example.org",
-  "opt_auto_delete_after": "month",
+  "opt_auto_delete_after": "",
   "opt_network_connect": true,
   "opt_network_fakenet": false,
-  "opt_network_geo": "fastest",
+  "opt_network_geo": "",
   "opt_network_mitm": false,
   "opt_network_residential_proxy": false,
-  "opt_network_residential_proxy_geo": "fastest",
+  "opt_network_residential_proxy_geo": "",
   "opt_network_tor": false,
   "opt_privacy_type": "bylink",
   "opt_timeout": 120,
-  "user_tags": "insight-connect"
+  "user_tags": ""
 }
 ```
 

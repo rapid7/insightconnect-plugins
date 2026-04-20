@@ -1,15 +1,15 @@
 {
-	"spec": "bcb208799de961302d8f166990ede960",
+	"spec": "f8014fea1a04b7882622aa47fa7c6dc9",
 	"manifest": "e6a2fc190fba39a758cdd28c503dcd25",
 	"setup": "400f251f66f4fc01b6663d2b25c8c733",
 	"schemas": [
 		{
 			"identifier": "android_file_analysis/schema.py",
-			"hash": "06bd17ab37163bdb8f9d39bd3a523ba5"
+			"hash": "32d077896d3d179177765d74249bfcde"
 		},
 		{
 			"identifier": "android_url_analysis/schema.py",
-			"hash": "2ce2a4270f5d5c0e20a97440f633bc7c"
+			"hash": "38cab252a85df8b43c512cca9a7677cf"
 		},
 		{
 			"identifier": "download_pcap/schema.py",
@@ -21,7 +21,7 @@
 		},
 		{
 			"identifier": "get_analysis_report/schema.py",
-			"hash": "741cdd5fb810fef535e6b389feb00452"
+			"hash": "60107c07c1abe567609e8210a521475d"
 		},
 		{
 			"identifier": "get_analysis_verdict/schema.py",
@@ -29,7 +29,7 @@
 		},
 		{
 			"identifier": "get_intelligence/schema.py",
-			"hash": "39e28b1cb96d46eb70cd8533f294e0aa"
+			"hash": "707933b63a860bff064280fa818b8559"
 		},
 		{
 			"identifier": "get_ioc/schema.py",
@@ -37,23 +37,23 @@
 		},
 		{
 			"identifier": "get_reputation/schema.py",
-			"hash": "97c64bae0ad1a2f58aca0c2c6775f467"
+			"hash": "e3ba153c9270acb1878727cfdc31935c"
 		},
 		{
 			"identifier": "linux_file_analysis/schema.py",
-			"hash": "affc829a21edc4c972441c016f83b604"
+			"hash": "022a48966cf5ff84d418cba064a8311f"
 		},
 		{
 			"identifier": "linux_url_analysis/schema.py",
-			"hash": "8f2970ea0f72266c72a81b49ed4948a6"
+			"hash": "fd181d73115da1c5bc87523e112468ec"
 		},
 		{
 			"identifier": "windows_file_analysis/schema.py",
-			"hash": "f6a5c12b68a859aff67b4248639bf548"
+			"hash": "e5a235ca18a11bf178ef0736ad197753"
 		},
 		{
 			"identifier": "windows_url_analysis/schema.py",
-			"hash": "ae5c0189b98307761ac0f37caa185334"
+			"hash": "6cb3b430207423badf2db076d48e098c"
 		},
 		{
 			"identifier": "connection/schema.py",

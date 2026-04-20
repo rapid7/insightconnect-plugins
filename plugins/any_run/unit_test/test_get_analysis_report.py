@@ -7,6 +7,8 @@ from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
 from jsonschema import validate
+from anyrun import RunTimeException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_any_run.actions.get_analysis_report import GetAnalysisReport
 from icon_any_run.actions.get_analysis_report.schema import Input, Output
@@ -69,3 +71,20 @@ class TestGetAnalysisReport(TestCase):
         expected_report = prepare_file_payload(ANALYSIS_UUID, "html", html)
         self.assertEqual(actual[Output.REPORT]["filename"], expected_report["filename"])
         self.assertEqual(actual[Output.REPORT]["content"], expected_report["content"])
+
+    def test_get_analysis_report_raises_plugin_exception(
+        self, mock_connector_cls: MagicMock, mock_datetime: MagicMock
+    ) -> None:
+        self._freeze_time(mock_datetime)
+        mock_cm = MagicMock()
+        mock_connector_cls.return_value.__enter__.return_value = mock_cm
+        mock_connector_cls.return_value.__exit__.return_value = None
+        mock_cm.get_task_status.return_value = []
+        mock_cm.get_analysis_report.side_effect = RunTimeException("report error", 404)
+
+        with self.assertRaises(PluginException) as error:
+            self.action.run({Input.ANALYSIS_UUID: ANALYSIS_UUID, Input.FORMAT: "json"})
+
+        self.assertEqual(error.exception.cause, "Failed to download analysis report.")
+        self.assertEqual(error.exception.assistance, "report error")
+        self.assertEqual(error.exception.data, "{'description': 'report error', 'code': 404}")

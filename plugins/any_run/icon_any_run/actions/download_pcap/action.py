@@ -27,7 +27,7 @@ class DownloadPcap(insightconnect_plugin_runtime.Action):
     @auto_instrument
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
-        analysis_uuid = params.get(Input.ANALYSIS_UUID)
+        analysis_uuid = params.get(Input.ANALYSIS_UUID, "")
         # END INPUT BINDING - DO NOT REMOVE
         try:
             with BaseSandboxConnector(self.connection.sandbox_api_key, integration=Config.VERSION) as connector:

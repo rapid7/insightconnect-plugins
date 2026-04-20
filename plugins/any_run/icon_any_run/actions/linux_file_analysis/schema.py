@@ -45,7 +45,7 @@ class LinuxFileAnalysisInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Locale",
       "description": "Operation System language. Use locale identifier or country name Example - ( \"en-US\" or \"Brazil\"). Case insensitive",
-      "default": "en-US",
+      "default": "",
       "order": 4
     },
     "env_os": {
@@ -92,6 +92,7 @@ class LinuxFileAnalysisInput(insightconnect_plugin_runtime.Input):
       "description": "Start object from",
       "default": "temp",
       "enum": [
+        "",
         "desktop",
         "home",
         "downloads",
@@ -103,8 +104,9 @@ class LinuxFileAnalysisInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Auto Delete after",
       "description": "Specify after what period of time this report should be deleted",
-      "default": "month",
+      "default": "",
       "enum": [
+        "",
         "day",
         "week",
         "2 weeks",
@@ -130,7 +132,7 @@ class LinuxFileAnalysisInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Network Geo",
       "description": "TOR geo location option",
-      "default": "fastest",
+      "default": "",
       "order": 8
     },
     "opt_network_mitm": {
@@ -151,7 +153,7 @@ class LinuxFileAnalysisInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Residential Proxy Geo",
       "description": "Residential Proxy Geo option",
-      "default": "fastest",
+      "default": "",
       "order": 11
     },
     "opt_network_tor": {
@@ -167,6 +169,7 @@ class LinuxFileAnalysisInput(insightconnect_plugin_runtime.Input):
       "description": "Privacy settings",
       "default": "bylink",
       "enum": [
+        "",
         "public",
         "bylink",
         "owner",
@@ -192,11 +195,12 @@ class LinuxFileAnalysisInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "User Tags",
       "description": "Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8",
-      "default": "insight-connect",
+      "default": "",
       "order": 19
     }
   },
   "required": [
+    "env_os",
     "file_content",
     "filename"
   ],

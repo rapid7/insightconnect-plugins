@@ -39,6 +39,7 @@ class GetIntelligenceInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
+    "lookup_depth",
     "query"
   ],
   "definitions": {}

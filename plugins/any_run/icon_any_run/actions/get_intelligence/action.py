@@ -8,6 +8,7 @@ from .schema import GetIntelligenceInput, GetIntelligenceOutput, Input, Output, 
 # Custom imports below
 import base64
 import json
+from urllib.parse import quote
 
 from anyrun import RunTimeException
 from anyrun.connectors import LookupConnector
@@ -29,21 +30,16 @@ class GetIntelligence(insightconnect_plugin_runtime.Action):
     @auto_instrument
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
-        lookup_depth = params.get(Input.LOOKUP_DEPTH)
-        query = params.get(Input.QUERY)
+        lookup_depth = params.get(Input.LOOKUP_DEPTH, 180)
+        query = params.get(Input.QUERY, "")
         # END INPUT BINDING - DO NOT REMOVE
+        params = {"query": query, "dateRange": lookup_depth}
         try:
             with LookupConnector(self.connection.lookup_api_key, integration=Config.VERSION) as connector:
                 report = connector.get_intelligence(query=query, lookup_depth=lookup_depth)
 
-            lookup_url = (
-                "https://intelligence.any.run/analysis/lookup#{%22query%22:%22"
-                + query.replace('"', "%5C%22").replace(" ", "%20")
-                + "%22,%22dateRange%22:180}"
-            )
-
             return {
-                Output.LOOKUP_URL: lookup_url,
+                Output.LOOKUP_URL: f"https://intelligence.any.run/analysis/lookup#{quote(json.dumps(params))}",
                 Output.REPORT: {
                     "filename": get_report_name("TI_LOOKUP", "json"),
                     "content": base64.b64encode(json.dumps(report).encode()).decode(),

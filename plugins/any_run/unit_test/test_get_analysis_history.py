@@ -7,6 +7,8 @@ from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
 from jsonschema import validate
+from anyrun import RunTimeException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_any_run.actions.get_analysis_history import GetAnalysisHistory
 from icon_any_run.actions.get_analysis_history.schema import Input, Output
@@ -55,3 +57,16 @@ class TestGetAnalysisHistory(TestCase):
         validate(actual, self.action.output.schema)
         self.assertEqual(actual, {Output.ANALYSES: SAMPLE_ANALYSES})
         mock_cm.get_analysis_history.assert_called_once_with(**params)
+
+    def test_get_analysis_history_raises_plugin_exception(self, mock_connector_cls: MagicMock) -> None:
+        mock_cm = MagicMock()
+        mock_connector_cls.return_value.__enter__.return_value = mock_cm
+        mock_connector_cls.return_value.__exit__.return_value = None
+        mock_cm.get_analysis_history.side_effect = RunTimeException("history error", 400)
+
+        with self.assertRaises(PluginException) as error:
+            self.action.run({Input.TEAM: False, Input.SKIP: 0, Input.LIMIT: 25})
+
+        self.assertEqual(error.exception.cause, "Failed to fetch analysis history.")
+        self.assertEqual(error.exception.assistance, "history error")
+        self.assertEqual(error.exception.data, "{'description': 'history error', 'code': 400}")

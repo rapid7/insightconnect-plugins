@@ -45,7 +45,8 @@ class GetAnalysisReportInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "analysis_uuid"
+    "analysis_uuid",
+    "format"
   ],
   "definitions": {}
 }

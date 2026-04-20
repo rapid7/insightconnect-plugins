@@ -55,7 +55,7 @@ class GetReputationInput(insightconnect_plugin_runtime.Input):
     "entity_value": {
       "type": "string",
       "title": "Entity Value",
-      "description": "URL (Size range 2-256) or Hash (SHA256, SAH1, MD5) or Domain or IP",
+      "description": "URL (Size range 2-256) or Hash (SHA256, SHA1, MD5) or Domain or IP",
       "order": 2
     },
     "lookup_depth": {
@@ -68,7 +68,8 @@ class GetReputationInput(insightconnect_plugin_runtime.Input):
   },
   "required": [
     "entity_type",
-    "entity_value"
+    "entity_value",
+    "lookup_depth"
   ],
   "definitions": {}
 }

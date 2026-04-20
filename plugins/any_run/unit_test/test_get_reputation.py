@@ -7,6 +7,8 @@ from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
 from jsonschema import validate
+from anyrun import RunTimeException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_any_run.actions.get_reputation import GetReputation
 from icon_any_run.actions.get_reputation.schema import Input, Output
@@ -89,3 +91,18 @@ class TestGetReputation(TestCase):
         validate(actual, self.action.output.schema)
         mock_cm.get_intelligence.assert_called_once_with(sha256=sha256, lookup_depth=30, parse_response=True)
         self.assertEqual(actual[Output.VERDICT], "No threats detected")
+
+    def test_get_reputation_raises_plugin_exception(self, mock_lookup_cls: MagicMock) -> None:
+        mock_cm = MagicMock()
+        mock_lookup_cls.return_value.__enter__.return_value = mock_cm
+        mock_lookup_cls.return_value.__exit__.return_value = None
+        mock_cm.get_intelligence.side_effect = RunTimeException("reputation error", 401)
+
+        with self.assertRaises(PluginException) as error:
+            self.action.run(
+                {Input.ENTITY_TYPE: "url", Input.ENTITY_VALUE: "https://example.com", Input.LOOKUP_DEPTH: 1}
+            )
+
+        self.assertEqual(error.exception.cause, "Failed to get reputation.")
+        self.assertEqual(error.exception.assistance, "reputation error")
+        self.assertEqual(error.exception.data, "{'description': 'reputation error', 'code': 401}")

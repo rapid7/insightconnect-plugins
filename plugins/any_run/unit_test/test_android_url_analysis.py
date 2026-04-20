@@ -7,6 +7,8 @@ from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
 from jsonschema import validate
+from anyrun import RunTimeException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_any_run.actions.android_url_analysis import AndroidUrlAnalysis
 from icon_any_run.actions.android_url_analysis.schema import Input, Output
@@ -38,4 +40,17 @@ class TestAndroidUrlAnalysis(TestCase):
                 Output.ANALYSIS_URL: f"https://app.any.run/tasks/{analysis_uuid}",
             },
         )
-        mock_connector.run_url_analysis.assert_called_once_with(**params)
+        mock_connector.run_url_analysis.assert_called_once()
+
+    def test_android_url_analysis_raises_plugin_exception(self, mock_android: MagicMock) -> None:
+        mock_connector = MagicMock()
+        mock_android.return_value.__enter__.return_value = mock_connector
+        mock_android.return_value.__exit__.return_value = None
+        mock_connector.run_url_analysis.side_effect = RunTimeException("analysis start error", 400)
+
+        with self.assertRaises(PluginException) as error:
+            self.action.run({Input.OBJ_URL: "https://example.com/android-target"})
+
+        self.assertEqual(error.exception.cause, "Failed to start analysis.")
+        self.assertEqual(error.exception.assistance, "analysis start error")
+        self.assertEqual(error.exception.data, "{'description': 'analysis start error', 'code': 400}")

@@ -24,7 +24,7 @@ hub_tags:
   features: []
 sdk:
   type: slim
-  version: 6.4.3
+  version: 6.4.4
   user: nobody
 key_features:
   - Submit a file or URL to ANY.RUN for analysis using the following OS - Windows, Linux, Android
@@ -37,7 +37,7 @@ key_features:
   - Retrieve IP, Domain, URL, MD5, SHA256, SHA1 reputation.
 requirements:
   - Requires an ANY.RUN Sandbox or ANY.RUN TI Lookup API key without a prefix
-  - ANY.RUN "Enterprise Suite" plan (API access required)
+  - Available on ANY.RUN plans with API access, including trial
 troubleshooting:
   - Configure the connection with either an API key without a prefix.
 version_history:
@@ -206,13 +206,13 @@ actions:
         title: Report Format
         description: Report file in JSON, HTML or STIX format
         type: string
-        required: false
+        required: true
         default: 'html'
         enum:
           - 'html'
           - 'json'
           - 'stix'
-        example: 'json'
+        example: 'html'
     output:
       report:
         title: Analysis Report
@@ -302,7 +302,7 @@ actions:
         title: Version
         description: Version of OS. Supports 7, 10, 11, server 2025
         type: string
-        required: false
+        required: true
         default: '10'
         enum:
           - '7'
@@ -314,7 +314,7 @@ actions:
         title: Bitness
         description: Bitness of Operation System. Supports 32, 64 for Windows. 64 for Windows Server 2025
         type: int
-        required: false
+        required: true
         default: 64
         enum:
           - 32
@@ -324,7 +324,7 @@ actions:
         title: Type
         description: Environment preset type. You can select **development** env for OS Windows 10 x64. For all other cases, **complete** env is required
         type: string
-        required: false
+        required: true
         default: 'complete'
         enum:
           - 'complete'
@@ -335,8 +335,8 @@ actions:
         description: Operation System language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive
         type: string
         required: false
-        default: "en-US"
-        example: "en-US"
+        default: ''
+        example: 'en-US'
       opt_network_connect:
         title: Network Connect
         description: Network connection state
@@ -363,8 +363,8 @@ actions:
         description: TOR geo location option
         type: string
         required: false
-        default: 'fastest'
-        example: 'US'
+        default: ''
+        example: 'fastest'
       opt_network_mitm:
         title: Network MITM
         description: HTTPS MITM proxy option
@@ -384,8 +384,8 @@ actions:
         description: Residential Proxy Geo option
         type: string
         required: false
-        default: 'fastest'
-        example: 'US'
+        default: ''
+        example: 'fastest'
       opt_privacy_type:
         title: Privacy Type
         description: Privacy settings
@@ -393,6 +393,7 @@ actions:
         required: false
         default: 'bylink'
         enum:
+          - ''
           - 'public'
           - 'bylink'
           - 'owner'
@@ -410,8 +411,9 @@ actions:
         description: Specify after what period of time this report should be deleted
         type: string
         required: false
-        default: 'month'
+        default: ''
         enum:
+          - ''
           - 'day'
           - 'week'
           - '2 weeks'
@@ -424,6 +426,7 @@ actions:
         required: false
         default: 'Microsoft Edge'
         enum:
+          - ''
           - 'Microsoft Edge'
           - 'Google Chrome'
           - 'Mozilla Firefox'
@@ -441,7 +444,7 @@ actions:
         description: Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8
         type: string
         required: false
-        default: 'insight-connect'
+        default: ''
         example: 'insight-connect'
     output:
       analysis_uuid:
@@ -470,7 +473,7 @@ actions:
         title: OS
         description: Operation System. Supports ubuntu, debian
         type: string
-        required: false
+        required: true
         default: 'ubuntu'
         enum:
           - 'ubuntu'
@@ -481,7 +484,7 @@ actions:
         description: Operation System language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive
         type: string
         required: false
-        default: "en-US"
+        default: ''
         example: "en-US"
       opt_network_connect:
         title: Network Connect
@@ -509,8 +512,8 @@ actions:
         description: TOR geo location option
         type: string
         required: false
-        default: 'fastest'
-        example: 'US'
+        default: ''
+        example: 'fastest'
       opt_network_mitm:
         title: Network MITM
         description: HTTPS MITM proxy option
@@ -530,8 +533,8 @@ actions:
         description: Residential Proxy Geo option
         type: string
         required: false
-        default: 'fastest'
-        example: 'US'
+        default: ''
+        example: 'fastest'
       opt_privacy_type:
         title: Privacy Type
         description: Privacy settings
@@ -539,6 +542,7 @@ actions:
         required: false
         default: 'bylink'
         enum:
+          - ''
           - 'public'
           - 'bylink'
           - 'owner'
@@ -556,8 +560,9 @@ actions:
         description: Specify after what period of time this report should be deleted
         type: string
         required: false
-        default: 'month'
+        default: ''
         enum:
+          - ''
           - 'day'
           - 'week'
           - '2 weeks'
@@ -570,6 +575,7 @@ actions:
         required: false
         default: 'Google Chrome'
         enum:
+          - ''
           - 'Google Chrome'
           - 'Mozilla Firefox'
         example: 'Google Chrome'
@@ -585,7 +591,7 @@ actions:
         description: Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8
         type: string
         required: false
-        default: 'insight-connect'
+        default: ''
         example: 'insight-connect'
     output:
       analysis_uuid:
@@ -615,8 +621,8 @@ actions:
         description: Operation System language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive
         type: string
         required: false
-        default: "en-US"
-        example: "en-US"
+        default: ''
+        example: 'en-US'
       opt_network_connect:
         title: Network Connect
         description: Network connection state
@@ -643,8 +649,8 @@ actions:
         description: TOR geo location option
         type: string
         required: false
-        default: 'fastest'
-        example: 'US'
+        default: ''
+        example: 'fastest'
       opt_network_mitm:
         title: Network MITM
         description: HTTPS MITM proxy option
@@ -664,8 +670,8 @@ actions:
         description: Residential Proxy Geo option
         type: string
         required: false
-        default: 'fastest'
-        example: 'US'
+        default: ''
+        example: 'fastest'
       opt_privacy_type:
         title: Privacy Type
         description: Privacy settings
@@ -673,6 +679,7 @@ actions:
         required: false
         default: 'bylink'
         enum:
+          - ''
           - 'public'
           - 'bylink'
           - 'owner'
@@ -690,8 +697,9 @@ actions:
         description: Specify after what period of time this report should be deleted
         type: string
         required: false
-        default: 'month'
+        default: ''
         enum:
+          - ''
           - 'day'
           - 'week'
           - '2 weeks'
@@ -709,7 +717,7 @@ actions:
         description: Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8
         type: string
         required: false
-        default: 'insight-connect'
+        default: ''
         example: 'insight-connect'
     output:
       analysis_uuid:
@@ -744,7 +752,7 @@ actions:
         title: Version
         description: Version of OS. Supports 7, 10, 11, server 2025
         type: string
-        required: false
+        required: true
         default: '10'
         enum:
           - '7'
@@ -756,7 +764,7 @@ actions:
         title: Bitness
         description: Bitness of Operation System. Supports 32, 64 for Windows. 64 for Windows Server 2025
         type: int
-        required: false
+        required: true
         default: 64
         enum:
           - 32
@@ -766,7 +774,7 @@ actions:
         title: Type
         description: Environment preset type. You can select **development** env for OS Windows 10 x64. For all other cases, **complete** env is required
         type: string
-        required: false
+        required: true
         default: 'complete'
         enum:
           - 'complete'
@@ -777,8 +785,8 @@ actions:
         description: Operation System language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive
         type: string
         required: false
-        default: "en-US"
-        example: "en-US"
+        default: ''
+        example: 'en-US'
       opt_network_connect:
         title: Network Connect
         description: Network connection state
@@ -805,8 +813,8 @@ actions:
         description: TOR geo location option
         type: string
         required: false
-        default: 'fastest'
-        example: 'US'
+        default: ''
+        example: 'fastest'
       opt_network_mitm:
         title: Network MITM
         description: HTTPS MITM proxy option
@@ -826,8 +834,8 @@ actions:
         description: Residential Proxy Geo option
         type: string
         required: false
-        default: 'fastest'
-        example: 'US'
+        default: ''
+        example: 'fastest'
       opt_privacy_type:
         title: Privacy Type
         description: Privacy settings
@@ -835,6 +843,7 @@ actions:
         required: false
         default: 'bylink'
         enum:
+          - ''
           - 'public'
           - 'bylink'
           - 'owner'
@@ -852,8 +861,9 @@ actions:
         description: Specify after what period of time this report should be deleted
         type: string
         required: false
-        default: 'month'
+        default: ''
         enum:
+          - ''
           - 'day'
           - 'week'
           - '2 weeks'
@@ -879,6 +889,7 @@ actions:
         required: false
         default: 'temp'
         enum:
+          - ''
           - 'desktop'
           - 'home'
           - 'downloads'
@@ -906,7 +917,7 @@ actions:
         description: Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8
         type: string
         required: false
-        default: 'insight-connect'
+        default: ''
         example: 'insight-connect'
     output:
       analysis_uuid:
@@ -941,7 +952,7 @@ actions:
         title: OS
         description: Operation System. Supports ubuntu, debian
         type: string
-        required: false
+        required: true
         default: 'ubuntu'
         enum:
           - 'ubuntu'
@@ -952,8 +963,8 @@ actions:
         description: Operation System language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive
         type: string
         required: false
-        default: "en-US"
-        example: "en-US"
+        default: ''
+        example: 'en-US'
       opt_network_connect:
         title: Network Connect
         description: Network connection state
@@ -980,8 +991,8 @@ actions:
         description: TOR geo location option
         type: string
         required: false
-        default: 'fastest'
-        example: 'US'
+        default: ''
+        example: 'fastest'
       opt_network_mitm:
         title: Network MITM
         description: HTTPS MITM proxy option
@@ -1001,8 +1012,8 @@ actions:
         description: Residential Proxy Geo option
         type: string
         required: false
-        default: 'fastest'
-        example: 'US'
+        default: ''
+        example: 'fastest'
       opt_privacy_type:
         title: Privacy Type
         description: Privacy settings
@@ -1010,6 +1021,7 @@ actions:
         required: false
         default: 'bylink'
         enum:
+          - ''
           - 'public'
           - 'bylink'
           - 'owner'
@@ -1027,8 +1039,9 @@ actions:
         description: Specify after what period of time this report should be deleted
         type: string
         required: false
-        default: 'month'
+        default: ''
         enum:
+          - ''
           - 'day'
           - 'week'
           - '2 weeks'
@@ -1054,6 +1067,7 @@ actions:
         required: false
         default: 'temp'
         enum:
+          - ''
           - 'desktop'
           - 'home'
           - 'downloads'
@@ -1071,7 +1085,7 @@ actions:
         description: Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8
         type: string
         required: false
-        default: 'insight-connect'
+        default: ''
         example: 'insight-connect'
     output:
       analysis_uuid:
@@ -1107,8 +1121,8 @@ actions:
         description: Operation System language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive
         type: string
         required: false
-        default: "en-US"
-        example: "en-US"
+        default: ''
+        example: 'en-US'
       opt_network_connect:
         title: Network Connect
         description: Network connection state
@@ -1135,8 +1149,8 @@ actions:
         description: TOR geo location option
         type: string
         required: false
-        default: 'fastest'
-        example: 'US'
+        default: ''
+        example: 'fastest'
       opt_network_mitm:
         title: Network MITM
         description: HTTPS MITM proxy option
@@ -1156,8 +1170,8 @@ actions:
         description: Residential Proxy Geo option
         type: string
         required: false
-        default: 'fastest'
-        example: 'US'
+        default: ''
+        example: 'fastest'
       opt_privacy_type:
         title: Privacy Type
         description: Privacy settings
@@ -1165,6 +1179,7 @@ actions:
         required: false
         default: 'bylink'
         enum:
+          - ''
           - 'public'
           - 'bylink'
           - 'owner'
@@ -1182,8 +1197,9 @@ actions:
         description: Specify after what period of time this report should be deleted
         type: string
         required: false
-        default: 'month'
+        default: ''
         enum:
+          - ''
           - 'day'
           - 'week'
           - '2 weeks'
@@ -1194,7 +1210,7 @@ actions:
         description: Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8
         type: string
         required: false
-        default: 'insight-connect'
+        default: ''
         example: 'insight-connect'
     output:
       analysis_uuid:
@@ -1223,7 +1239,7 @@ actions:
         title: Lookup Depth
         description: Specify the number of days from the current date for which you want to lookup
         type: int
-        required: false
+        required: true
         default: 180
         example: 180
     output:
@@ -1257,7 +1273,7 @@ actions:
         example: 'url'
       entity_value:
         title: Entity Value
-        description: URL (Size range 2-256) or Hash (SHA256, SAH1, MD5) or Domain or IP
+        description: URL (Size range 2-256) or Hash (SHA256, SHA1, MD5) or Domain or IP
         type: string
         required: true
         example: 'https://suspicious.url'
@@ -1265,7 +1281,7 @@ actions:
         title: Lookup Depth
         description: Specify the number of days from the current date for which you want to lookup
         type: int
-        required: false
+        required: true
         default: 180
         example: 180
     output:
