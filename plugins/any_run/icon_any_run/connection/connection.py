@@ -2,48 +2,51 @@ import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
 
 # Custom imports below
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
-import base64
-from icon_any_run.util.api import AnyRunAPI
+from typing import Optional
+
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException
+from anyrun import RunTimeException
+from anyrun.connectors import LookupConnector
+from anyrun.connectors.sandbox.base_connector import BaseSandboxConnector
+
+from icon_any_run.util.config import Config
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
-        self.authentication_header = None
-        self.any_run_api = None
+        self.sandbox_api_key: Optional[str] = None
+        self.lookup_api_key: Optional[str] = None
 
     def connect(self, params={}):
         self.logger.info("Connect: Connecting...")
-        api_key = params.get(Input.API_KEY, {}).get("secretKey", "")
-        username = params.get(Input.CREDENTIALS, {}).get("username", "")
-        password = params.get(Input.CREDENTIALS, {}).get("password", "")
+        self.sandbox_api_key = params.get(Input.SANDBOX_API_KEY, {}).get("secretKey", "")
+        self.lookup_api_key = params.get(Input.SANDBOX_API_KEY, {}).get("secretKey", "")
 
         # In case no authentication method is provided, raise an exception
-        if not api_key and not username and not password:
+        if not self.sandbox_api_key and not self.lookup_api_key:
             raise ConnectionTestException(
                 cause="No authentication credentials provided in the connection.",
-                assistance="Configure the connection with either an API key or username and password and try again.",
+                assistance="Configure the connection with either an API key without a prefix.",
             )
-
-        # In case multiple authentication methods are provided, raise an exception
-        if api_key and username and password:
-            raise ConnectionTestException(
-                cause="Multiple authentication methods provided.",
-                assistance="Use a single credential method in the connnection, set either API key or username and password and try again.",
-            )
-
-        # Prepare the authorization header based on the provided authentication method
-        if api_key:
-            authorization = f"API-Key {api_key}"
-        else:
-            authorization = f"Basic {base64.b64encode(f'{username}:{password}'.encode()).decode('utf-8')}"
-
-        self.any_run_api = AnyRunAPI({"Authorization": authorization.rstrip()}, self.logger)
 
     def test(self):
+        platform = None
         try:
-            self.any_run_api.get_history(False, 0, 1)
+            if self.sandbox_api_key:
+                with BaseSandboxConnector(self.sandbox_api_key, integration=Config.VERSION) as connector:
+                    platform = "ANY.RUN Sandbox"
+                    connector.check_authorization()
+
+            if self.lookup_api_key:
+                with LookupConnector(self.lookup_api_key, integration=Config.VERSION) as connector:
+                    platform = "ANY.RUN TI Lookup"
+                    connector.check_authorization()
+
             return {"success": True}
-        except PluginException as error:
-            raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=error)
+        except RunTimeException as error:
+            raise ConnectionTestException(
+                cause="The provided authorization is incorrect.",
+                assistance=f"Please check your {platform} API key. If you need help, contact us: techsupport@any.run.",
+                data=error.json,
+            )
