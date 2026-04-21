@@ -4,8 +4,8 @@ from setuptools import setup, find_packages
 
 setup(
     name="any_run-rapid7-plugin",
-    version="2.0.0",
-    description="Analyze suspicious and malicious activities using the cloud-based malware analysis service",
+    version="3.0.0",
+    description="ANY.RUN Sandbox is an online interactive sandbox for malware analysis, a tool for detection, monitoring, and research of cyber threats in real time",
     author="rapid7",
     author_email="",
     url="",

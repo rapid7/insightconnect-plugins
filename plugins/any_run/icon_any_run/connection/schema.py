@@ -4,8 +4,8 @@ import json
 
 
 class Input:
-    API_KEY = "api_key"
-    CREDENTIALS = "credentials"
+    SANDBOX_API_KEY = "sandbox_api_key"
+    TI_LOOKUP_API_KEY = "ti_lookup_api_key"
 
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -15,16 +15,16 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "api_key": {
+    "sandbox_api_key": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "API Key",
-      "description": "API key for Any.Run",
+      "description": "API key for ANY.RUN Sandbox",
       "order": 1
     },
-    "credentials": {
-      "$ref": "#/definitions/credential_username_password",
-      "title": "Credentials",
-      "description": "Username and password",
+    "ti_lookup_api_key": {
+      "$ref": "#/definitions/credential_secret_key",
+      "title": "API Key",
+      "description": "API key for ANY.RUN TI Lookup",
       "order": 2
     }
   },
@@ -46,32 +46,6 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
           "displayType": "password"
         }
       }
-    },
-    "credential_username_password": {
-      "id": "credential_username_password",
-      "title": "Credential: Username and Password",
-      "description": "A username and password combination",
-      "type": "object",
-      "properties": {
-        "username": {
-          "type": "string",
-          "title": "Username",
-          "description": "The username to log in with",
-          "order": 1
-        },
-        "password": {
-          "type": "string",
-          "title": "Password",
-          "description": "The password",
-          "format": "password",
-          "displayType": "password",
-          "order": 2
-        }
-      },
-      "required": [
-        "username",
-        "password"
-      ]
     }
   }
 }

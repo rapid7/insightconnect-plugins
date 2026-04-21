@@ -16,7 +16,8 @@ class Util:
         default_connection = Connection()
         default_connection.logger = logging.getLogger("connection logger")
         params = {
-            Input.CREDENTIALS: {"username": "user", "password": "password"},
+            Input.SANDBOX_API_KEY: {"secretKey": "test-sandbox-api-key"},
+            Input.TI_LOOKUP_API_KEY: {"secretKey": "test-ti-lookup-api-key"},
         }
         default_connection.connect(params)
         action.connection = default_connection
