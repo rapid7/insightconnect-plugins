@@ -22,6 +22,8 @@ from util import (
 from icon_automox.actions.submit_third_party_remediation import SubmitThirdPartyRemediation
 from icon_automox.actions.submit_third_party_remediation.schema import Input, Output
 
+ORG_ID = 1234
+
 
 class TestSubmitThirdPartyRemediation(TestCase):
     def setUp(self) -> None:
@@ -30,6 +32,7 @@ class TestSubmitThirdPartyRemediation(TestCase):
             {"id": "ext-1", "mac_address": "00:1c:42:e9:10:ab", "cves": ["CVE-2019-9894"]},
         ]
         self.params = {
+            Input.ORG_ID: ORG_ID,
             Input.ACTION_TYPE: "match",
             Input.DEVICES_JSON: json.dumps(self.single_device),
         }

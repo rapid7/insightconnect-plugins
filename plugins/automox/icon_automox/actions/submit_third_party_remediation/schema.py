@@ -10,6 +10,7 @@ class Component:
 class Input:
     ACTION_TYPE = "action_type"
     DEVICES_JSON = "devices_json"
+    ORG_ID = "org_id"
 
 
 class Output:
@@ -25,6 +26,12 @@ class SubmitThirdPartyRemediationInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "org_id": {
+      "type": "integer",
+      "title": "Organization ID",
+      "description": "Identifier of organization",
+      "order": 1
+    },
     "action_type": {
       "type": "string",
       "title": "Action Type",
@@ -33,16 +40,17 @@ class SubmitThirdPartyRemediationInput(insightconnect_plugin_runtime.Input):
         "remediate",
         "match"
       ],
-      "order": 1
+      "order": 2
     },
     "devices_json": {
       "type": "string",
       "title": "Devices JSON",
       "description": "JSON string or file path containing an array of device objects with id and cves fields",
-      "order": 2
+      "order": 3
     }
   },
   "required": [
+    "org_id",
     "action_type",
     "devices_json"
   ],

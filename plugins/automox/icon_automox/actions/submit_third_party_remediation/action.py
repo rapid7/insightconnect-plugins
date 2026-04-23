@@ -18,10 +18,12 @@ class SubmitThirdPartyRemediation(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        org_id = params.get(Input.ORG_ID)
         action_type = params.get(Input.ACTION_TYPE)
         devices_json = params.get(Input.DEVICES_JSON)
 
         result = self.connection.automox_api.submit_third_party_remediation(
+            org_id=org_id,
             action_type=action_type,
             devices_input=devices_json,
         )

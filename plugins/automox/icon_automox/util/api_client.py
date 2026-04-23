@@ -436,10 +436,11 @@ class ApiClient:
         return self.remove_null_values(self._call_api("GET", f"{self.endpoint}/events", params))
 
     # Third-Party Remediations
-    def submit_third_party_remediation(self, action_type: str, devices_input: str) -> Dict:
+    def submit_third_party_remediation(self, org_id: int, action_type: str, devices_input: str) -> Dict:
         """
         Submit third-party device and CVE data for remediation or matching.
         Automatically chunks large payloads into batches of 100 devices.
+        :param org_id: Organization ID
         :param action_type: 'remediate' or 'match'
         :param devices_input: JSON string or file path containing an array of device objects
         :return: Dict with batch_uuid, total_devices, chunks_sent, and collected responses
@@ -497,7 +498,7 @@ class ApiClient:
                 "devices": chunk,
             }
             self.logger.info(f"Submitting third-party remediation chunk {idx + 1}/{len(chunks)} ({len(chunk)} devices)")
-            resp = self._call_api("POST", f"{self.endpoint}/remediations/third-party", json_data=payload)
+            resp = self._call_api("POST", f"{self.endpoint}/organizations/{org_id}/vuln-sync/remediate", json_data=payload)
             responses.append(resp)
 
         return {
