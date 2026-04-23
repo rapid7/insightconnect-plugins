@@ -11,7 +11,7 @@ from anyrun.connectors import LookupConnector
 from insightconnect_plugin_runtime.helper import clean
 
 from icon_any_run.util.config import Config
-from icon_any_run.util.tools import get_report_name, check_hash_type
+from icon_any_run.util.tools import check_hash_type
 
 
 class GetReputation(insightconnect_plugin_runtime.Action):
@@ -31,8 +31,8 @@ class GetReputation(insightconnect_plugin_runtime.Action):
         entity_value = params.get(Input.ENTITY_VALUE, "")
         lookup_depth = params.get(Input.LOOKUP_DEPTH, 180)
         # END INPUT BINDING - DO NOT REMOVE
-        final_report = dict()
 
+        final_report = {}
         try:
             if entity_type == "hash":
                 hash_type = check_hash_type(entity_value)

@@ -1,63 +1,63 @@
 {
-	"spec": "f8014fea1a04b7882622aa47fa7c6dc9",
+	"spec": "3d021134ff5657d6b144db6c1475b760",
 	"manifest": "e6a2fc190fba39a758cdd28c503dcd25",
-	"setup": "400f251f66f4fc01b6663d2b25c8c733",
+	"setup": "96343040f8d6b7e42b1403159c102f67",
 	"schemas": [
 		{
 			"identifier": "android_file_analysis/schema.py",
-			"hash": "32d077896d3d179177765d74249bfcde"
+			"hash": "5b3f83100be8d12b6eab49dfbc76130d"
 		},
 		{
 			"identifier": "android_url_analysis/schema.py",
-			"hash": "38cab252a85df8b43c512cca9a7677cf"
+			"hash": "0f30077b51a5f07a69397c5a85f9da83"
 		},
 		{
 			"identifier": "download_pcap/schema.py",
-			"hash": "9e965a204e6506ba14a32c537031f992"
+			"hash": "bec860276807e7a013d6d1e09ca528e0"
 		},
 		{
 			"identifier": "get_analysis_history/schema.py",
-			"hash": "c18b4e2c4496b99b6e5c3f7b3d8a5ab9"
+			"hash": "3c9f2ba9178f85cfa5c9bd806520c68e"
 		},
 		{
 			"identifier": "get_analysis_report/schema.py",
-			"hash": "60107c07c1abe567609e8210a521475d"
+			"hash": "b6b5c01997a65cf2a0624a729e2518e5"
 		},
 		{
 			"identifier": "get_analysis_verdict/schema.py",
-			"hash": "cdfd7dab8cc3687f4bf8f29fed77d9c5"
+			"hash": "8f454ed8173263fb1e68c3779afb4179"
 		},
 		{
 			"identifier": "get_intelligence/schema.py",
-			"hash": "707933b63a860bff064280fa818b8559"
+			"hash": "1c02e75ea3447b036d90b194b14b5e5c"
 		},
 		{
 			"identifier": "get_ioc/schema.py",
-			"hash": "2d81f8e726da3edd89eb1a5d9129acb4"
+			"hash": "bbc874953e6b3173e2ec0c100495da28"
 		},
 		{
 			"identifier": "get_reputation/schema.py",
-			"hash": "e3ba153c9270acb1878727cfdc31935c"
+			"hash": "8e9ab1a16c96373ce215fe2a7ebf0912"
 		},
 		{
 			"identifier": "linux_file_analysis/schema.py",
-			"hash": "022a48966cf5ff84d418cba064a8311f"
+			"hash": "a644a0f480390fdbe961ecf7ee11ad47"
 		},
 		{
 			"identifier": "linux_url_analysis/schema.py",
-			"hash": "fd181d73115da1c5bc87523e112468ec"
+			"hash": "c28aec30e636d4003306fa697a9da225"
 		},
 		{
 			"identifier": "windows_file_analysis/schema.py",
-			"hash": "e5a235ca18a11bf178ef0736ad197753"
+			"hash": "e557b1b7fbd321aa03374c77df204670"
 		},
 		{
 			"identifier": "windows_url_analysis/schema.py",
-			"hash": "6cb3b430207423badf2db076d48e098c"
+			"hash": "087f0919d08abc81fdf453356bf0c5f0"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "595e63b7df1ceb49d09a7fe00253d7f4"
+			"hash": "aa5a09d24e5ed5bca12ed392cd9a6fb1"
 		}
 	]
 }

@@ -7,13 +7,12 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
-from jsonschema import validate
 from anyrun import RunTimeException
-from insightconnect_plugin_runtime.exceptions import PluginException
-
 from icon_any_run.actions.download_pcap import DownloadPcap
 from icon_any_run.actions.download_pcap.schema import Input, Output
 from icon_any_run.util.tools import get_report_name
+from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 
 from util import Util
 

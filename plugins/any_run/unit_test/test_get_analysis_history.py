@@ -6,15 +6,13 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
-from jsonschema import validate
 from anyrun import RunTimeException
-from insightconnect_plugin_runtime.exceptions import PluginException
-
 from icon_any_run.actions.get_analysis_history import GetAnalysisHistory
 from icon_any_run.actions.get_analysis_history.schema import Input, Output
+from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 
 from util import Util
-
 
 SAMPLE_ANALYSES = [
     {

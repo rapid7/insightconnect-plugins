@@ -6,12 +6,11 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
-from jsonschema import validate
 from anyrun import RunTimeException
-from insightconnect_plugin_runtime.exceptions import PluginException
-
 from icon_any_run.actions.android_url_analysis import AndroidUrlAnalysis
 from icon_any_run.actions.android_url_analysis.schema import Input, Output
+from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 
 from util import Util
 

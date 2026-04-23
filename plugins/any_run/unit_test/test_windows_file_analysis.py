@@ -7,12 +7,11 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
-from jsonschema import validate
 from anyrun import RunTimeException
-from insightconnect_plugin_runtime.exceptions import PluginException
-
 from icon_any_run.actions.windows_file_analysis import WindowsFileAnalysis
 from icon_any_run.actions.windows_file_analysis.schema import Input, Output
+from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 
 from util import Util
 
@@ -43,9 +42,9 @@ class TestWindowsFileAnalysis(TestCase):
             },
         )
         mock_connector.run_file_analysis.assert_called_once()
-        call_args = mock_connector.run_file_analysis.call_args
-        self.assertEqual(call_args[0][0], file_b64)
-        self.assertEqual(call_args[0][1], "sample.exe")
+        call_kwargs = mock_connector.run_file_analysis.call_args[1]
+        self.assertEqual(call_kwargs["file_content"], file_b64)
+        self.assertEqual(call_kwargs["filename"], "sample.exe")
 
     def test_windows_file_analysis_raises_plugin_exception(self, mock_windows: MagicMock) -> None:
         mock_connector = MagicMock()

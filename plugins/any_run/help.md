@@ -799,7 +799,7 @@ Example output:
 
 # Version History
 
-* 3.0.0 - Migrate to the ANY.RUN SDK | Update existing actions | Add new actions
+* 3.0.0 - Migrate to the ANY.RUN SDK | Update existing actions | Add new actions | Updated SDK to the latest version (6.5.0)
 * 2.0.0 - Actions: `Get Report` - Updated output schema types | Updated SDK to the latest version (6.4.0)
 * 1.1.2 - Fix issue with file defaulting to Windows 7 32-Bit
 * 1.1.1 - Fix issue with invalid inputs in Run Analysis action | Fix issue where Run Analysis action fails if optional inputs are provided as empty strings | Fix issue where Get Report action fails when fields in output contain `None` value | Improve error handling
