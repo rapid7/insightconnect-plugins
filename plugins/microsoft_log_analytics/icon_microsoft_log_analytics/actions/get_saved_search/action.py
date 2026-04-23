@@ -14,10 +14,13 @@ class GetSavedSearch(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        subscription_id = params.get(Input.SUBSCRIPTION_ID)
-        resource_group_name = params.get(Input.RESOURCE_GROUP_NAME)
-        workspace_name = params.get(Input.WORKSPACE_NAME)
-        saved_search_name = params.get(Input.SAVED_SEARCH_NAME)
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        subscription_id = params.get(Input.SUBSCRIPTION_ID, "")
+        resource_group_name = params.get(Input.RESOURCE_GROUP_NAME, "")
+        workspace_name = params.get(Input.WORKSPACE_NAME, "")
+        saved_search_name = params.get(Input.SAVED_SEARCH_NAME, "")
+        # END INPUT BINDING - DO NOT REMOVE
+
         return self.connection.client.get_saved_search(
             subscription_id, resource_group_name, workspace_name, saved_search_name
         )

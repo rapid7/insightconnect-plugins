@@ -3,16 +3,18 @@ import sys
 
 sys.path.append(os.path.abspath("../"))
 import logging
-from unittest import TestCase, mock
-
-from insightconnect_plugin_runtime.exceptions import PluginException
-from parameterized import parameterized
+from typing import Any, Dict
+from unittest import TestCase
+from unittest.mock import MagicMock, patch
 
 from icon_microsoft_log_analytics.actions.send_log_data import SendLogData
 from icon_microsoft_log_analytics.actions.send_log_data.schema import Input, Output
 from icon_microsoft_log_analytics.connection.connection import Connection
 from icon_microsoft_log_analytics.util.tools import Message
-from unit_test.mock import (
+from insightconnect_plugin_runtime.exceptions import PluginException
+from parameterized import parameterized
+
+from mock_utils import (
     STUB_CONNECTION,
     STUB_SHARED_KEY,
     STUB_WORKSPACE_ID,
@@ -32,8 +34,8 @@ STUB_JSON_BODY = [{"key1": "key1"}]
 
 
 class TestSendLogData(TestCase):
-    @mock.patch("icon_microsoft_log_analytics.util.api.AzureLogAnalyticsClientAPI._connection")
-    def setUp(self, mock_connection):
+    @patch("icon_microsoft_log_analytics.util.api.AzureLogAnalyticsClientAPI._connection")
+    def setUp(self, mock_connection: MagicMock) -> None:
         self.connection = Connection()
         self.connection.logger = logging.getLogger("connection logger")
         self.connection.connect(STUB_CONNECTION)
@@ -42,7 +44,7 @@ class TestSendLogData(TestCase):
         self.action.connection = self.connection
         self.action.logger = logging.getLogger("action logger")
 
-        self.payload = {
+        self.payload: Dict[str, Any] = {
             Input.LOG_TYPE: "Test",
             Input.LOG_DATA: [{"key1": "test"}],
             Input.RESOURCE_GROUP_NAME: "exampleresourcegroupname",
@@ -50,23 +52,23 @@ class TestSendLogData(TestCase):
             Input.WORKSPACE_NAME: "ExampleWorkspace",
         }
 
-    def test_send_log_data_ok(self):
+    def test_send_log_data_ok(self) -> None:
         mocked_request(mock_request_200)
-        response = self.action.run(self.payload)
-        expected_response = {
+        response: Dict[str, Any] = self.action.run(self.payload)
+        expected_response: Dict[str, Any] = {
             Output.MESSAGE: "Log data has been added",
             Output.LOG_DATA: self.payload.get(Input.LOG_DATA),
         }
         self.assertEqual(expected_response, response)
 
-    def test_send_log_data_generate_signature(self):
-        response = self.connection.client._generate_signature(
+    def test_send_log_data_generate_signature(self) -> None:
+        response: str = self.connection.client._generate_signature(
             STUB_WORKSPACE_ID, STUB_SHARED_KEY, STUB_RFC1123_DATE, STUB_JSON_BODY, "POST", "application/json"
         )
-        expected_response = "SharedKey 12345:MnKflSkz0C1VUMYJtenLGX7Ila2gHVRxLTubiK058bI="
+        expected_response: str = "SharedKey 12345:MnKflSkz0C1VUMYJtenLGX7Ila2gHVRxLTubiK058bI="
         self.assertEqual(expected_response, response)
 
-    def test_send_log_data_generate_signature_wrong_json_input(self):
+    def test_send_log_data_generate_signature_wrong_json_input(self) -> None:
         with self.assertRaises(PluginException) as context:
             self.connection.client._generate_signature(
                 STUB_WORKSPACE_ID, STUB_SHARED_KEY, STUB_RFC1123_DATE, {"WRONG JSON BODY"}, "POST", "application/json"
@@ -83,9 +85,11 @@ class TestSendLogData(TestCase):
             (mock_request_505, PluginException.causes[PluginException.Preset.UNKNOWN]),
         ],
     )
-    @mock.patch("icon_microsoft_log_analytics.util.tools.backoff_function", return_value=0)
-    @mock.patch("icon_microsoft_log_analytics.util.api.AzureLogAnalyticsClientAPI._connection")
-    def test_send_log_data_exception(self, mock_request, exception, mock_backoff_function, mock_connection):
+    @patch("icon_microsoft_log_analytics.util.tools.backoff_function", return_value=0)
+    @patch("icon_microsoft_log_analytics.util.api.AzureLogAnalyticsClientAPI._connection")
+    def test_send_log_data_exception(
+        self, mock_request: MagicMock, exception: str, mock_backoff_function: MagicMock, mock_connection: MagicMock
+    ) -> None:
         mocked_request(mock_request)
         with self.assertRaises(PluginException) as context:
             self.action.run(self.payload)

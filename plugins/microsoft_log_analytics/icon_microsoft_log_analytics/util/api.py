@@ -20,7 +20,6 @@ from .tools import (
     return_non_empty,
 )
 
-
 MAX_TRIES = 10
 
 
@@ -39,10 +38,17 @@ class AzureClient:
         resource_group_name: str,
         workspace_name: str,
         resource: str,
+        require_shared_key: bool = False,
     ) -> None:
+        # Authenticate first
         self._get_auth_token(tenant_id, client_id, client_secret, resource)
-        self._get_shared_key(subscription_id, resource_group_name, workspace_name)
+
+        # Resolve the workspace ID
         self._get_workspace_id(subscription_id, resource_group_name, workspace_name)
+
+        # Shared key is optional, only needed for data ingestion
+        if require_shared_key:
+            self._get_shared_key(subscription_id, resource_group_name, workspace_name)
 
     def _generate_signature(
         self, workspace_id: str, shared_key: str, date: str, json_body: List[dict], method: str, content_type: str
@@ -60,7 +66,7 @@ class AzureClient:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON)
 
     def _get_workspace_id(self, subscription_id: str, resource_group_name: str, workspace_name: str) -> None:
-        api_version = "2021-12-01-preview"
+        api_version = "2025-07-01"
         get_workspace_id_url = Endpoint.GET_WORKSPACE_ID.format(
             subscription_id, resource_group_name, workspace_name, api_version
         )
@@ -71,7 +77,7 @@ class AzureClient:
         self.logger.info(f"Workspace ID: ****************{self.workspace_id[-5:]}")
 
     def _get_shared_key(self, subscription_id: str, resource_group_name: str, workspace_name: str) -> None:
-        api_version = "2020-08-01"
+        api_version = "2025-07-01"
         get_shared_key_url = Endpoint.GET_SHARED_KEY.format(
             subscription_id, resource_group_name, workspace_name, api_version
         )
@@ -214,6 +220,7 @@ class AzureLogAnalyticsClientAPI(AzureClient):
             resource_group_name,
             workspace_name,
             Endpoint.RESOURCE_MANAGEMENT,
+            require_shared_key=True,
         )
         api_version = "2016-04-01"
         send_log_data_url = Endpoint.SEND_LOG_DATA.format(self.workspace_id, api_version)
