@@ -1,6 +1,8 @@
 from insightconnect_plugin_runtime.exceptions import PluginException
 import io
 import json
+import os
+import uuid
 import requests
 from typing import Dict, List, Optional, Collection, Any
 
@@ -9,6 +11,7 @@ class ApiClient:
     INTEGRATION_NAME = "rapid7-insightconnect-plugin"
     VERSION = "3.0.0"
     PAGE_SIZE = 500
+    THIRD_PARTY_REMEDIATION_CHUNK_SIZE = 100
 
     OUTCOME_FAIL = "failure"
     OUTCOME_SUCCESS = "success"
@@ -431,6 +434,78 @@ class ApiClient:
         params = self._org_param(org_id)
         params.update({"eventName": event_type, "page": page, "limit": self.PAGE_SIZE})
         return self.remove_null_values(self._call_api("GET", f"{self.endpoint}/events", params))
+
+    # Third-Party Remediations
+    def submit_third_party_remediation(self, action_type: str, devices_input: str) -> Dict:
+        """
+        Submit third-party device and CVE data for remediation or matching.
+        Automatically chunks large payloads into batches of 100 devices.
+        :param action_type: 'remediate' or 'match'
+        :param devices_input: JSON string or file path containing an array of device objects
+        :return: Dict with batch_uuid, total_devices, chunks_sent, and collected responses
+        """
+        if action_type not in ("remediate", "match"):
+            raise PluginException(
+                cause="Invalid action_type",
+                assistance="action_type must be 'remediate' or 'match'.",
+            )
+
+        # Parse devices from JSON string or file path
+        devices = None
+        try:
+            devices = json.loads(devices_input)
+        except (json.JSONDecodeError, TypeError):
+            pass
+
+        if devices is None:
+            try:
+                with open(devices_input) as f:
+                    devices = json.load(f)
+            except (OSError, json.JSONDecodeError, TypeError):
+                raise PluginException(
+                    preset=PluginException.Preset.INVALID_JSON,
+                    assistance="devices_input must be a valid JSON string or a path to a JSON file.",
+                )
+
+        if not isinstance(devices, list) or len(devices) == 0:
+            raise PluginException(
+                cause="Invalid input",
+                assistance="devices_input must be a non-empty JSON array of device objects.",
+            )
+
+        for i, device in enumerate(devices):
+            if not isinstance(device.get("id"), str):
+                raise PluginException(
+                    cause="Invalid input",
+                    assistance=f"Device at index {i} is missing required string field 'id'.",
+                )
+            if not isinstance(device.get("cves"), list) or len(device["cves"]) == 0:
+                raise PluginException(
+                    cause="Invalid input",
+                    assistance=f"Device at index {i} is missing required non-empty array field 'cves'.",
+                )
+
+        batch_uuid = str(uuid.uuid4())
+        chunk_size = self.THIRD_PARTY_REMEDIATION_CHUNK_SIZE
+        chunks = [devices[i : i + chunk_size] for i in range(0, len(devices), chunk_size)]
+
+        responses = []
+        for idx, chunk in enumerate(chunks):
+            payload = {
+                "action_type": action_type,
+                "batch_uuid": batch_uuid,
+                "devices": chunk,
+            }
+            self.logger.info(f"Submitting third-party remediation chunk {idx + 1}/{len(chunks)} ({len(chunk)} devices)")
+            resp = self._call_api("POST", f"{self.endpoint}/remediations/third-party", json_data=payload)
+            responses.append(resp)
+
+        return {
+            "batch_uuid": batch_uuid,
+            "total_devices": len(devices),
+            "chunks_sent": len(chunks),
+            "responses": responses,
+        }
 
     # Instrumentation for usage/adoption
     def report_api_outcome(self, outcome: str, function: str, elapsed_time: int, fail_reason: str = ""):

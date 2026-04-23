@@ -107,6 +107,8 @@ def mock_conditions(method: str, url: str, status_code: int, **kwargs: Dict[str,
             return MockResponse("test_request_success", status_code)
         elif url == f"{BASE_URL}/api/servers/{DEVICE_ID}/queues":
             return MockResponse("test_request_success", status_code)
+        elif url == f"{BASE_URL}/api/remediations/third-party":
+            return MockResponse("test_submit_third_party_remediation", status_code)
         elif url == f"{BASE_URL}/api/orgs/{ORG_ID}/remediations/action-sets/upload":
             return MockResponse("test_upload_vulnerability_sync_file", status_code)
     elif method == "PUT":

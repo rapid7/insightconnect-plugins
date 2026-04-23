@@ -1,0 +1,111 @@
+import sys
+import os
+import json
+import tempfile
+
+sys.path.append(os.path.abspath("../"))
+
+from parameterized import parameterized
+from unittest.mock import patch, Mock
+from unittest import TestCase
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
+
+from util import (
+    Util,
+    mock_request_200,
+    mock_request_403,
+    mock_request_404,
+    mocked_request,
+    mock_request_200_invalid_json,
+)
+
+from icon_automox.actions.submit_third_party_remediation import SubmitThirdPartyRemediation
+from icon_automox.actions.submit_third_party_remediation.schema import Input, Output
+
+
+class TestSubmitThirdPartyRemediation(TestCase):
+    def setUp(self) -> None:
+        self.action = Util.default_connector(SubmitThirdPartyRemediation())
+        self.single_device = [
+            {"id": "ext-1", "mac_address": "00:1c:42:e9:10:ab", "cves": ["CVE-2019-9894"]},
+        ]
+        self.params = {
+            Input.ACTION_TYPE: "match",
+            Input.DEVICES_JSON: json.dumps(self.single_device),
+        }
+
+    @patch("requests.Session.request", side_effect=mock_request_200)
+    def test_single_chunk_ok(self, mock: Mock) -> None:
+        response = self.action.run(self.params)
+        self.assertEqual(response[Output.TOTAL_DEVICES], 1)
+        self.assertEqual(response[Output.CHUNKS_SENT], 1)
+        self.assertIsInstance(response[Output.BATCH_UUID], str)
+        self.assertEqual(len(response[Output.RESPONSES]), 1)
+
+    @patch("requests.Session.request", side_effect=mock_request_200)
+    def test_multi_chunk(self, mock: Mock) -> None:
+        devices = [{"id": f"ext-{i}", "cves": ["CVE-2019-9894"]} for i in range(250)]
+        self.params[Input.DEVICES_JSON] = json.dumps(devices)
+        response = self.action.run(self.params)
+        self.assertEqual(response[Output.TOTAL_DEVICES], 250)
+        self.assertEqual(response[Output.CHUNKS_SENT], 3)
+        self.assertEqual(len(response[Output.RESPONSES]), 3)
+        # Verify 3 POST calls were made
+        self.assertEqual(mock.call_count, 3)
+
+    @patch("requests.Session.request", side_effect=mock_request_200)
+    def test_exactly_100_devices(self, mock: Mock) -> None:
+        devices = [{"id": f"ext-{i}", "cves": ["CVE-2019-9894"]} for i in range(100)]
+        self.params[Input.DEVICES_JSON] = json.dumps(devices)
+        response = self.action.run(self.params)
+        self.assertEqual(response[Output.CHUNKS_SENT], 1)
+        self.assertEqual(mock.call_count, 1)
+
+    @patch("requests.Session.request", side_effect=mock_request_200)
+    def test_file_path_input(self, mock: Mock) -> None:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as f:
+            json.dump(self.single_device, f)
+            f.flush()
+            self.params[Input.DEVICES_JSON] = f.name
+        try:
+            response = self.action.run(self.params)
+            self.assertEqual(response[Output.TOTAL_DEVICES], 1)
+            self.assertEqual(response[Output.CHUNKS_SENT], 1)
+        finally:
+            os.unlink(f.name)
+
+    def test_invalid_json_string(self) -> None:
+        self.params[Input.DEVICES_JSON] = "not valid json"
+        with self.assertRaises(PluginException) as context:
+            self.action.run(self.params)
+        self.assertEqual(context.exception.preset, PluginException.Preset.INVALID_JSON)
+
+    def test_empty_device_list(self) -> None:
+        self.params[Input.DEVICES_JSON] = "[]"
+        with self.assertRaises(PluginException) as context:
+            self.action.run(self.params)
+        self.assertEqual(context.exception.cause, "Invalid input")
+
+    def test_missing_cves(self) -> None:
+        self.params[Input.DEVICES_JSON] = json.dumps([{"id": "ext-1"}])
+        with self.assertRaises(PluginException) as context:
+            self.action.run(self.params)
+        self.assertEqual(context.exception.cause, "Invalid input")
+
+    def test_invalid_action_type(self) -> None:
+        self.params[Input.ACTION_TYPE] = "invalid"
+        with self.assertRaises(PluginException) as context:
+            self.action.run(self.params)
+        self.assertEqual(context.exception.cause, "Invalid action_type")
+
+    @parameterized.expand(
+        [
+            (mock_request_403, PluginException.causes[PluginException.Preset.API_KEY]),
+            (mock_request_404, PluginException.causes[PluginException.Preset.NOT_FOUND]),
+        ],
+    )
+    def test_api_error_propagation(self, mock_request: Mock, exception: str) -> None:
+        mocked_request(mock_request)
+        with self.assertRaises(ConnectionTestException) as context:
+            self.action.run(self.params)
+        self.assertEqual(context.exception.cause, exception)
