@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Submit third-party device and CVE data for remediation or matching. Automatically chunks large payloads into batches of 100 devices."
+    DESCRIPTION = "Submit device and CVE data for remediation or matching. Automatically chunks large payloads into batches of 100 devices."
 
 
 class Input:
@@ -20,7 +20,7 @@ class Output:
     TOTAL_DEVICES = "total_devices"
 
 
-class SubmitThirdPartyRemediationInput(insightconnect_plugin_runtime.Input):
+class SubmitRemediationInput(insightconnect_plugin_runtime.Input):
     schema = json.loads(r"""
    {
   "type": "object",
@@ -62,7 +62,7 @@ class SubmitThirdPartyRemediationInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class SubmitThirdPartyRemediationOutput(insightconnect_plugin_runtime.Output):
+class SubmitRemediationOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads(r"""
    {
   "type": "object",

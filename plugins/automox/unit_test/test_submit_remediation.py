@@ -19,15 +19,15 @@ from util import (
     mock_request_200_invalid_json,
 )
 
-from icon_automox.actions.submit_third_party_remediation import SubmitThirdPartyRemediation
-from icon_automox.actions.submit_third_party_remediation.schema import Input, Output
+from icon_automox.actions.submit_remediation import SubmitRemediation
+from icon_automox.actions.submit_remediation.schema import Input, Output
 
 ORG_ID = 1234
 
 
-class TestSubmitThirdPartyRemediation(TestCase):
+class TestSubmitRemediation(TestCase):
     def setUp(self) -> None:
-        self.action = Util.default_connector(SubmitThirdPartyRemediation())
+        self.action = Util.default_connector(SubmitRemediation())
         self.single_device = [
             {"id": "ext-1", "mac_address": "00:1c:42:e9:10:ab", "cves": ["CVE-2019-9894"]},
         ]

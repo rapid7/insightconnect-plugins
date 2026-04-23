@@ -11,7 +11,7 @@ class ApiClient:
     INTEGRATION_NAME = "rapid7-insightconnect-plugin"
     VERSION = "3.0.0"
     PAGE_SIZE = 500
-    THIRD_PARTY_REMEDIATION_CHUNK_SIZE = 100
+    REMEDIATION_CHUNK_SIZE = 100
 
     OUTCOME_FAIL = "failure"
     OUTCOME_SUCCESS = "success"
@@ -435,10 +435,10 @@ class ApiClient:
         params.update({"eventName": event_type, "page": page, "limit": self.PAGE_SIZE})
         return self.remove_null_values(self._call_api("GET", f"{self.endpoint}/events", params))
 
-    # Third-Party Remediations
-    def submit_third_party_remediation(self, org_id: int, action_type: str, devices_input: str) -> Dict:
+    # Remediations
+    def submit_remediation(self, org_id: int, action_type: str, devices_input: str) -> Dict:
         """
-        Submit third-party device and CVE data for remediation or matching.
+        Submit device and CVE data for remediation or matching.
         Automatically chunks large payloads into batches of 100 devices.
         :param org_id: Organization ID
         :param action_type: 'remediate' or 'match'
@@ -487,7 +487,7 @@ class ApiClient:
                 )
 
         batch_uuid = str(uuid.uuid4())
-        chunk_size = self.THIRD_PARTY_REMEDIATION_CHUNK_SIZE
+        chunk_size = self.REMEDIATION_CHUNK_SIZE
         chunks = [devices[i : i + chunk_size] for i in range(0, len(devices), chunk_size)]
 
         responses = []
@@ -497,7 +497,7 @@ class ApiClient:
                 "batch_uuid": batch_uuid,
                 "devices": chunk,
             }
-            self.logger.info(f"Submitting third-party remediation chunk {idx + 1}/{len(chunks)} ({len(chunk)} devices)")
+            self.logger.info(f"Submitting remediation chunk {idx + 1}/{len(chunks)} ({len(chunk)} devices)")
             resp = self._call_api("POST", f"{self.endpoint}/organizations/{org_id}/vuln-sync/remediate", json_data=payload)
             responses.append(resp)
 

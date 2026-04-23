@@ -1,20 +1,20 @@
 import insightconnect_plugin_runtime
 from .schema import (
-    SubmitThirdPartyRemediationInput,
-    SubmitThirdPartyRemediationOutput,
+    SubmitRemediationInput,
+    SubmitRemediationOutput,
     Input,
     Output,
     Component,
 )
 
 
-class SubmitThirdPartyRemediation(insightconnect_plugin_runtime.Action):
+class SubmitRemediation(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="submit_third_party_remediation",
+            name="submit_remediation",
             description=Component.DESCRIPTION,
-            input=SubmitThirdPartyRemediationInput(),
-            output=SubmitThirdPartyRemediationOutput(),
+            input=SubmitRemediationInput(),
+            output=SubmitRemediationOutput(),
         )
 
     def run(self, params={}):
@@ -22,7 +22,7 @@ class SubmitThirdPartyRemediation(insightconnect_plugin_runtime.Action):
         action_type = params.get(Input.ACTION_TYPE)
         devices_json = params.get(Input.DEVICES_JSON)
 
-        result = self.connection.automox_api.submit_third_party_remediation(
+        result = self.connection.automox_api.submit_remediation(
             org_id=org_id,
             action_type=action_type,
             devices_input=devices_json,
