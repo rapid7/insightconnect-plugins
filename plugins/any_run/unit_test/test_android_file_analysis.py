@@ -7,12 +7,11 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
-from jsonschema import validate
 from anyrun import RunTimeException
-from insightconnect_plugin_runtime.exceptions import PluginException
-
 from icon_any_run.actions.android_file_analysis import AndroidFileAnalysis
 from icon_any_run.actions.android_file_analysis.schema import Input, Output
+from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 
 from util import Util
 
@@ -42,7 +41,7 @@ class TestAndroidFileAnalysis(TestCase):
                 Output.ANALYSIS_URL: f"https://app.any.run/tasks/{analysis_uuid}",
             },
         )
-        mock_connector.run_file_analysis.assert_called_once_with(file_b64, "sample.apk")
+        mock_connector.run_file_analysis.assert_called_once_with(file_content=file_b64, filename="sample.apk")
 
     def test_android_file_analysis_raises_plugin_exception(self, mock_android: MagicMock) -> None:
         mock_connector = MagicMock()
