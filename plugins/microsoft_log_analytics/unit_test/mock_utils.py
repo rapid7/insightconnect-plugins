@@ -4,7 +4,6 @@ from typing import Callable
 from unittest import mock
 
 import requests
-
 from icon_microsoft_log_analytics.util.endpoints import Endpoint
 
 STUB_SHARED_KEY = "123456=="
@@ -45,14 +44,14 @@ def mock_conditions(url: str, status_code: int) -> MockResponse:
         STUB_SUBSCRIPTION_ID,
         STUB_RESOURCE_GROUP_NAME,
         STUB_WORKSPACE_NAME,
-        "2020-08-01",
+        "2025-07-01",
     ):
         return MockResponse("test_get_shared_key", status_code)
     if url == Endpoint.GET_WORKSPACE_ID.format(
         STUB_SUBSCRIPTION_ID,
         STUB_RESOURCE_GROUP_NAME,
         STUB_WORKSPACE_NAME,
-        "2021-12-01-preview",
+        "2025-07-01",
     ):
         return MockResponse("test_get_workspace_id", status_code)
     if url == Endpoint.GET_LOG_DATA.format("v1", STUB_WORKSPACE_ID):
@@ -63,11 +62,11 @@ def mock_conditions(url: str, status_code: int) -> MockResponse:
     ):
         return MockResponse("test_send_log_data_ok", status_code)
     if url == Endpoint.LIST_ALL_SEARCHES.format(
-        STUB_SUBSCRIPTION_ID, STUB_RESOURCE_GROUP_NAME, STUB_WORKSPACE_NAME, "2020-08-01"
+        STUB_SUBSCRIPTION_ID, STUB_RESOURCE_GROUP_NAME, STUB_WORKSPACE_NAME, "2025-07-01"
     ):
         return MockResponse("test_list_all_searches_ok", status_code)
     if url == Endpoint.GET_SAVED_SEARCH.format(
-        STUB_SUBSCRIPTION_ID, STUB_RESOURCE_GROUP_NAME, STUB_WORKSPACE_NAME, STUB_SAVED_SEARCH_NAME, "2020-08-01"
+        STUB_SUBSCRIPTION_ID, STUB_RESOURCE_GROUP_NAME, STUB_WORKSPACE_NAME, STUB_SAVED_SEARCH_NAME, "2025-07-01"
     ):
         return MockResponse("test_get_saved_search_ok", status_code)
 

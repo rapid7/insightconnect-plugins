@@ -14,8 +14,11 @@ class ListAllSearches(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        subscription_id = params.get(Input.SUBSCRIPTION_ID)
-        resource_group_name = params.get(Input.RESOURCE_GROUP_NAME)
-        workspace_name = params.get(Input.WORKSPACE_NAME)
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        subscription_id = params.get(Input.SUBSCRIPTION_ID, "")
+        resource_group_name = params.get(Input.RESOURCE_GROUP_NAME, "")
+        workspace_name = params.get(Input.WORKSPACE_NAME, "")
+        # END INPUT BINDING - DO NOT REMOVE
+
         response = self.connection.client.list_all_searches(subscription_id, resource_group_name, workspace_name)
         return {Output.SAVED_SEARCHES: response}
