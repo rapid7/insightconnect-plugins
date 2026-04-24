@@ -18,7 +18,7 @@ Edit, run log queries with data in Azure Monitor Logs
 
 # Supported Product Versions
 
-* 2026-04-22
+* 2025-07-01
 
 # Documentation
 

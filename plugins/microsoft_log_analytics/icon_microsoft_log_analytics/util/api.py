@@ -66,9 +66,8 @@ class AzureClient:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON)
 
     def _get_workspace_id(self, subscription_id: str, resource_group_name: str, workspace_name: str) -> None:
-        api_version = "2025-07-01"
         get_workspace_id_url = Endpoint.GET_WORKSPACE_ID.format(
-            subscription_id, resource_group_name, workspace_name, api_version
+            subscription_id, resource_group_name, workspace_name, Endpoint.API_VERSION_SAVED_SEARCH
         )
 
         self.logger.info("Getting workspace ID...")
@@ -77,9 +76,8 @@ class AzureClient:
         self.logger.info(f"Workspace ID: ****************{self.workspace_id[-5:]}")
 
     def _get_shared_key(self, subscription_id: str, resource_group_name: str, workspace_name: str) -> None:
-        api_version = "2025-07-01"
         get_shared_key_url = Endpoint.GET_SHARED_KEY.format(
-            subscription_id, resource_group_name, workspace_name, api_version
+            subscription_id, resource_group_name, workspace_name, Endpoint.API_VERSION_SAVED_SEARCH
         )
 
         self.logger.info("Getting shared key...")
