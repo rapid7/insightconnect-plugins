@@ -167,6 +167,14 @@ class ApiClient:
         """
         return self.remove_null_values(self._page_results(f"{self.endpoint}/orgs"))
 
+    def get_org(self, org_id: int) -> Dict:
+        """
+        Retrieve a single Automox organization by integer ID.
+        :param org_id: Organization ID
+        :return: Dict of organization details (includes 'uuid')
+        """
+        return self.remove_null_values(self._call_api("GET", f"{self.endpoint}/orgs/{org_id}"))
+
     def get_org_users(self, org_id: int) -> List[Dict]:
         """
         Retrieve Automox organization users
@@ -486,6 +494,15 @@ class ApiClient:
                     assistance=f"Device at index {i} is missing required non-empty array field 'cves'.",
                 )
 
+        # Resolve integer org ID to org UUID for the remediate endpoint
+        org = self.get_org(org_id)
+        org_uuid = org.get("uuid")
+        if not org_uuid:
+            raise PluginException(
+                cause="Missing organization UUID",
+                assistance=f"GET /api/orgs/{org_id} did not return a 'uuid' field.",
+            )
+
         batch_uuid = str(uuid.uuid4())
         chunk_size = self.REMEDIATION_CHUNK_SIZE
         chunks = [devices[i : i + chunk_size] for i in range(0, len(devices), chunk_size)]
@@ -498,7 +515,7 @@ class ApiClient:
                 "devices": chunk,
             }
             self.logger.info(f"Submitting remediation chunk {idx + 1}/{len(chunks)} ({len(chunk)} devices)")
-            resp = self._call_api("POST", f"{self.endpoint}/organizations/{org_id}/vuln-sync/remediate", json_data=payload)
+            resp = self._call_api("POST", f"{self.endpoint}/organizations/{org_uuid}/vuln-sync/remediate", json_data=payload)
             responses.append(resp)
 
         return {

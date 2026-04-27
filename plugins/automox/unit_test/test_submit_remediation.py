@@ -53,8 +53,8 @@ class TestSubmitRemediation(TestCase):
         self.assertEqual(response[Output.TOTAL_DEVICES], 250)
         self.assertEqual(response[Output.CHUNKS_SENT], 3)
         self.assertEqual(len(response[Output.RESPONSES]), 3)
-        # Verify 3 POST calls were made
-        self.assertEqual(mock.call_count, 3)
+        # Verify 1 GET org + 3 POST calls were made
+        self.assertEqual(mock.call_count, 4)
 
     @patch("requests.Session.request", side_effect=mock_request_200)
     def test_exactly_100_devices(self, mock: Mock) -> None:
@@ -62,7 +62,8 @@ class TestSubmitRemediation(TestCase):
         self.params[Input.DEVICES_JSON] = json.dumps(devices)
         response = self.action.run(self.params)
         self.assertEqual(response[Output.CHUNKS_SENT], 1)
-        self.assertEqual(mock.call_count, 1)
+        # 1 GET org + 1 POST remediate
+        self.assertEqual(mock.call_count, 2)
 
     @patch("requests.Session.request", side_effect=mock_request_200)
     def test_file_path_input(self, mock: Mock) -> None:
