@@ -26,8 +26,6 @@ class Lower(insightconnect_plugin_runtime.Action):
             )
 
         try:
-            import time
-            time.sleep(120) # TODO : Remove this line after testing is complete. This is to test the timeout functionality of the plugin.
             return {Output.LOWER: input_string.lower()}
         except Exception as error:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
