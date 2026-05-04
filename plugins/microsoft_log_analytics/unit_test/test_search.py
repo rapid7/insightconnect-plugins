@@ -6,15 +6,17 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 sys.path.append(os.path.abspath("../"))
 
 import logging
-from unittest import TestCase, mock
-
-from parameterized import parameterized
+from typing import Any, Dict
+from unittest import TestCase
+from unittest.mock import MagicMock, patch
 
 from icon_microsoft_log_analytics.connection.connection import Connection
 from icon_microsoft_log_analytics.triggers.search import Search
 from icon_microsoft_log_analytics.triggers.search.schema import Input
 from icon_microsoft_log_analytics.util.tools import Message, return_non_empty_query_output
-from unit_test.mock import (
+from parameterized import parameterized
+
+from mock_utils import (
     STUB_CONNECTION,
     mock_request_201_invalid_json,
     mock_request_400,
@@ -64,8 +66,8 @@ STUB_EXAMPLE_API_RESPONSE = {
 
 
 class TestSearch(TestCase):
-    @mock.patch("icon_microsoft_log_analytics.util.api.AzureLogAnalyticsClientAPI._connection", return_value=None)
-    def setUp(self, mock_connection) -> None:
+    @patch("icon_microsoft_log_analytics.util.api.AzureLogAnalyticsClientAPI._connection", return_value=None)
+    def setUp(self, mock_connection: MagicMock) -> None:
         self.connection = Connection()
         self.connection.logger = logging.getLogger("connection logger")
         self.connection.connect(STUB_CONNECTION)
@@ -74,7 +76,7 @@ class TestSearch(TestCase):
         self.trigger.connection = self.connection
         self.trigger.logger = logging.getLogger("trigger logger")
 
-        self.payload = {
+        self.payload: Dict[str, Any] = {
             Input.QUERY: "TestQuery",
             Input.INTERVAL: 10,
             Input.RESOURCE_GROUP_NAME: "exampleresourcegroupname",
@@ -82,8 +84,8 @@ class TestSearch(TestCase):
             Input.WORKSPACE_NAME: "ExampleWorkspace",
         }
 
-    def test_return_non_empty_query_output(self):
-        response = return_non_empty_query_output(STUB_EXAMPLE_API_RESPONSE)
+    def test_return_non_empty_query_output(self) -> None:
+        response: Dict[str, Any] = return_non_empty_query_output(STUB_EXAMPLE_API_RESPONSE)
         self.assertEqual(STUB_EXAMPLE_FUNCTION_RESPONSE, response)
 
     @parameterized.expand(
@@ -98,8 +100,8 @@ class TestSearch(TestCase):
             (mock_request_505, PluginException.causes[PluginException.Preset.UNKNOWN]),
         ],
     )
-    @mock.patch("icon_microsoft_log_analytics.util.tools.backoff_function", return_value=0)
-    def test_search_exception(self, mock_request, exception, mock_backoff_function):
+    @patch("icon_microsoft_log_analytics.util.tools.backoff_function", return_value=0)
+    def test_search_exception(self, mock_request: MagicMock, exception: str, mock_backoff_function: MagicMock) -> None:
         mocked_request(mock_request)
         with self.assertRaises(PluginException) as context:
             self.trigger.run(self.payload)

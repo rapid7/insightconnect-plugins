@@ -6,15 +6,17 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 sys.path.append(os.path.abspath("../"))
 
 import logging
-from unittest import TestCase, mock
-
-from parameterized import parameterized
+from typing import Any, Dict
+from unittest import TestCase
+from unittest.mock import MagicMock, patch
 
 from icon_microsoft_log_analytics.actions.get_log_data import GetLogData
 from icon_microsoft_log_analytics.actions.get_log_data.schema import Input
 from icon_microsoft_log_analytics.connection.connection import Connection
 from icon_microsoft_log_analytics.util.tools import Message, clean_query_output
-from unit_test.mock import (
+from parameterized import parameterized
+
+from mock_utils import (
     STUB_CONNECTION,
     STUB_RESOURCE_GROUP_NAME,
     STUB_SUBSCRIPTION_ID,
@@ -58,8 +60,8 @@ STUB_EXAMPLE_API_RESPONSE = {
 
 
 class TestGetLogData(TestCase):
-    @mock.patch("icon_microsoft_log_analytics.util.api.AzureLogAnalyticsClientAPI._connection", return_value=None)
-    def setUp(self, mock_connection) -> None:
+    @patch("icon_microsoft_log_analytics.util.api.AzureLogAnalyticsClientAPI._connection", return_value=None)
+    def setUp(self, mock_connection: MagicMock) -> None:
         self.connection = Connection()
         self.connection.logger = logging.getLogger("connection logger")
         self.connection.connect(STUB_CONNECTION)
@@ -68,21 +70,21 @@ class TestGetLogData(TestCase):
         self.action.connection = self.connection
         self.action.logger = logging.getLogger("action logger")
 
-        self.payload = {
+        self.payload: Dict[str, Any] = {
             Input.QUERY: "TestQuery",
             Input.RESOURCE_GROUP_NAME: STUB_RESOURCE_GROUP_NAME,
             Input.SUBSCRIPTION_ID: STUB_SUBSCRIPTION_ID,
             Input.WORKSPACE_NAME: STUB_WORKSPACE_NAME,
         }
 
-    def test_get_log_data(self):
+    def test_get_log_data(self) -> None:
         mocked_request(mock_request_200)
-        response = self.action.run(self.payload)
-        expected_response = STUB_EXAMPLE_ACTION_RESPONSE
+        response: Dict[str, Any] = self.action.run(self.payload)
+        expected_response: Dict[str, Any] = STUB_EXAMPLE_ACTION_RESPONSE
         self.assertEqual(expected_response, response)
 
-    def test_clean_query_output(self):
-        response = clean_query_output(STUB_EXAMPLE_API_RESPONSE)
+    def test_clean_query_output(self) -> None:
+        response: Dict[str, Any] = clean_query_output(STUB_EXAMPLE_API_RESPONSE)
         self.assertEqual(STUB_EXAMPLE_ACTION_RESPONSE, response)
 
     @parameterized.expand(
@@ -97,8 +99,10 @@ class TestGetLogData(TestCase):
             (mock_request_505, PluginException.causes[PluginException.Preset.UNKNOWN]),
         ],
     )
-    @mock.patch("icon_microsoft_log_analytics.util.tools.backoff_function", return_value=0)
-    def test_get_log_data_exception(self, mock_request, exception, mock_backoff_function):
+    @patch("icon_microsoft_log_analytics.util.tools.backoff_function", return_value=0)
+    def test_get_log_data_exception(
+        self, mock_request: MagicMock, exception: str, mock_backoff_function: MagicMock
+    ) -> None:
         mocked_request(mock_request)
         with self.assertRaises(PluginException) as context:
             self.action.run()
