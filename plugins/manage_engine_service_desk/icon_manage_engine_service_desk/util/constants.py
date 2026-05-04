@@ -109,3 +109,9 @@ class Status(Item):
 
 class Resolution:
     CONTENT = "content"
+
+
+# OAuth / HTTP constants
+OAUTH_REQUEST_TIMEOUT_SECONDS = 30
+DEFAULT_TOKEN_EXPIRY_SECONDS = 3600
+TOKEN_EXPIRY_BUFFER_SECONDS = 300

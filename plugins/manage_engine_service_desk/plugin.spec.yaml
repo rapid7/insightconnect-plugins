@@ -23,7 +23,7 @@ key_features:
   - "Manage request notes - add, edit, delete, get list of notes"
 sdk:
   type: full
-  version: 6.4.3
+  version: 6.5.0
   user: nobody
 links:
   - "[Manage Engine Service Desk](https://manageengine.com/products/service-desk)"
@@ -585,6 +585,7 @@ connection:
     type: string
     required: false
     enum:
+      - ""
       - United States
       - Europe
       - India

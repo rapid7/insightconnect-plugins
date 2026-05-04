@@ -9,6 +9,9 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from icon_manage_engine_service_desk.util import helpers
 from icon_manage_engine_service_desk.util.constants import (
     CLOUD_API_BASE_URLS,
+    DEFAULT_TOKEN_EXPIRY_SECONDS,
+    OAUTH_REQUEST_TIMEOUT_SECONDS,
+    TOKEN_EXPIRY_BUFFER_SECONDS,
     ZOHO_OAUTH_BASE_URLS,
     ConnectionType,
     Request,
@@ -82,15 +85,15 @@ class ManageEngineServiceDeskAPI:
                     "refresh_token": self._refresh_token,
                 },
                 verify=True,
-                timeout=30,
+                timeout=OAUTH_REQUEST_TIMEOUT_SECONDS,
             )
             response.raise_for_status()
             token_data = response.json()
-        except requests.exceptions.RequestException as e:
+        except requests.exceptions.RequestException as error:
             raise PluginException(
                 cause="Failed to obtain Zoho OAuth access token.",
                 assistance="Verify that the Client ID, Client Secret, Refresh Token, and Data Center are correct.",
-                data=str(e),
+                data=error,
             )
 
         if "access_token" not in token_data:
@@ -101,15 +104,19 @@ class ManageEngineServiceDeskAPI:
             )
 
         self._access_token = token_data["access_token"]
-        # Zoho tokens typically expire in 3600 seconds; subtract a 60-second buffer
-        expires_in = token_data.get("expires_in", 3600)
-        self._access_token_expiry = time.time() + expires_in - 60
+        # Zoho tokens typically expire in 3600 seconds; subtract a 5-minute buffer
+        expires_in = token_data.get("expires_in", DEFAULT_TOKEN_EXPIRY_SECONDS)
+        self._access_token_expiry = time.time() + expires_in - TOKEN_EXPIRY_BUFFER_SECONDS
         return self._access_token
 
     def _get_headers(self) -> dict:
         if self._connection_type == ConnectionType.ON_PREM:
             return {"authtoken": self._api_key}
-        return {"Authorization": f"Zoho-oauthtoken {self._get_access_token()}"}
+        return {
+            "Authorization": f"Zoho-oauthtoken {self._get_access_token()}",
+            "Accept": "application/vnd.manageengine.sdp.v3+json",
+            "Content-Type": "application/x-www-form-urlencoded",
+        }
 
     def get_requests_list(
         self,
@@ -129,11 +136,12 @@ class ManageEngineServiceDeskAPI:
                 "sort_field": sort_field,
             }
         )
+        input_data = helpers.prepare_input_data({"list_info": list_parameters}) if list_parameters else None
         return self.make_json_request(
             method="GET",
             url=REQUESTS_ENDPOINT.format(api_base=self._api_base),
             headers=self._get_headers(),
-            params=helpers.prepare_input_data({"list_info": list_parameters}),
+            data=input_data,
         )
 
     def get_request(self, request_id: int) -> dict:
@@ -236,6 +244,11 @@ class ManageEngineServiceDeskAPI:
             headers=self._get_headers(),
         )
 
+    @property
+    def _note_key(self) -> str:
+        """Cloud API uses 'request_note' while On-Prem uses 'note' as the entity key."""
+        return "request_note" if self._connection_type != ConnectionType.ON_PREM else "note"
+
     def add_request_note(
         self,
         request_id: int,
@@ -246,13 +259,13 @@ class ManageEngineServiceDeskAPI:
         add_to_linked_requests: bool = False,
     ) -> dict:
         self._logger.info(f"Adding note to the request with {request_id} id...")
-        return self.make_json_request(
+        response = self.make_json_request(
             method="POST",
             url=REQUEST_NOTES_ENDPOINT.format(api_base=self._api_base, request_id=request_id),
             headers=self._get_headers(),
             data=helpers.prepare_input_data(
                 {
-                    "note": {
+                    self._note_key: {
                         "description": description,
                         "show_to_requester": show_to_requester,
                         "notify_technician": notify_technician,
@@ -262,6 +275,7 @@ class ManageEngineServiceDeskAPI:
                 }
             ),
         )
+        return helpers.normalize_note_response(response)
 
     def edit_request_note(
         self,
@@ -296,7 +310,7 @@ class ManageEngineServiceDeskAPI:
                 api_base=self._api_base, request_id=request_id, request_note_id=request_note_id
             ),
             headers=self._get_headers(),
-            data=helpers.prepare_input_data({"note": note_params}),
+            data=helpers.prepare_input_data({self._note_key: note_params}),
         )
 
     def delete_request_note(self, request_id: int, request_note_id: int) -> dict:

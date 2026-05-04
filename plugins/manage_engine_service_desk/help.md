@@ -32,7 +32,7 @@ The connection configuration accepts the following parameters:
 |client_id|string|None|False|Zoho OAuth 2.0 client ID for cloud authentication. Required when Connection Type is Cloud|None|1000.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|None|None|
 |client_secret|credential_secret_key|None|False|Zoho OAuth 2.0 client secret for cloud authentication. Required when Connection Type is Cloud|None|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|None|None|
 |connection_type|string|None|True|Whether to connect to an on-premises or cloud instance of ManageEngine ServiceDesk Plus|["On-Prem", "Cloud"]|Cloud|None|None|
-|data_center|string|None|False|Zoho data center region for the cloud instance. Required when Connection Type is Cloud|["United States", "Europe", "India", "Australia", "China", "Japan"]|United States|None|None|
+|data_center|string|None|False|Zoho data center region for the cloud instance. Required when Connection Type is Cloud|["", "United States", "Europe", "India", "Australia", "China", "Japan"]|United States|None|None|
 |portal_name|string|None|False|ManageEngine cloud portal name used in the API path. Required when Connection Type is Cloud|None|mycompany|None|None|
 |refresh_token|credential_secret_key|None|False|Zoho OAuth 2.0 refresh token for cloud authentication. Required when Connection Type is Cloud|None|1000.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|None|None|
 |sdp_base_url|string|None|False|Base URL for the on-premises ServiceDesk Plus instance, e.g. http://me-sdeskplus.dev.example.com:8080. Required when Connection Type is On-Prem|None|http://me-sdeskplus.dev.example.com:8080|None|None|

@@ -261,7 +261,7 @@ class TestHelpers(TestCase):
         for key, expected_value in expected_fields.items():
             self.assertEqual(result[key], expected_value)
         # Confirm extra fields not in the Request schema are stripped
-        string_keys = {k for k in result if isinstance(k, str)}
+        string_keys = {key for key in result if isinstance(key, str)}
         self.assertNotIn("extra_field", string_keys)
         self.assertNotIn("email_id", string_keys)
         self.assertNotIn("phone", string_keys)

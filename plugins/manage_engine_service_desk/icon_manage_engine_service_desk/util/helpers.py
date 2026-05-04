@@ -51,6 +51,9 @@ def clean_dict(dictionary: dict) -> dict:
             cleaned_dict[key] = clean_dict(value)
             if cleaned_dict[key] == {}:
                 del cleaned_dict[key]
+        elif isinstance(value, bool):
+            if not value:
+                del cleaned_dict[key]
         elif value in [None, "", 0, [], {}]:
             del cleaned_dict[key]
     return cleaned_dict
@@ -62,6 +65,13 @@ def remove_other_keys(input_dict: dict, keys_to_keep: list) -> dict:
     return {key: input_dict.get(key) for key in keys_to_keep}
 
 
+def normalize_note_response(response: dict) -> dict:
+    """Normalize Cloud API 'request_note' key to 'note' so actions can use a consistent key."""
+    if "request_note" in response and "note" not in response:
+        response["note"] = response.pop("request_note")
+    return response
+
+
 def transform_request(request: dict) -> dict:
     """Normalize a raw API request object to the plugin's output schema.
 
@@ -69,10 +79,10 @@ def transform_request(request: dict) -> dict:
     the output schema, and extracts the display_value string from timestamp fields.
     """
     for user_field in [Request.TECHNICIAN, Request.CREATED_BY, Request.REQUESTER]:
-        request[user_field] = remove_other_keys(request.get(user_field, {}), [User.ID, User.NAME, User.IS_VIPUSER])
+        request[user_field] = remove_other_keys(request.get(user_field) or {}, [User.ID, User.NAME, User.IS_VIPUSER])
 
-    request[Request.PRIORITY] = remove_other_keys(request.get(Request.PRIORITY, {}), [Priority.NAME, Priority.ID])
-    request[Request.STATUS] = remove_other_keys(request.get(Request.STATUS, {}), [Status.NAME, Status.ID])
-    request[Request.CREATED_TIME] = request.get(Request.CREATED_TIME, {}).get(Time.DISPLAY_VALUE)
-    request[Request.DUE_BY_TIME] = request.get(Request.DUE_BY_TIME, {}).get(Time.DISPLAY_VALUE)
+    request[Request.PRIORITY] = remove_other_keys(request.get(Request.PRIORITY) or {}, [Priority.NAME, Priority.ID])
+    request[Request.STATUS] = remove_other_keys(request.get(Request.STATUS) or {}, [Status.NAME, Status.ID])
+    request[Request.CREATED_TIME] = (request.get(Request.CREATED_TIME) or {}).get(Time.DISPLAY_VALUE)
+    request[Request.DUE_BY_TIME] = (request.get(Request.DUE_BY_TIME) or {}).get(Time.DISPLAY_VALUE)
     return remove_other_keys(request, Request().get_all_attributes())

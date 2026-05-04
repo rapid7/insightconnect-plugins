@@ -54,6 +54,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "title": "Data Center",
       "description": "Zoho data center region for the cloud instance. Required when Connection Type is Cloud",
       "enum": [
+        "",
         "United States",
         "Europe",
         "India",
