@@ -3,7 +3,7 @@ from unittest.mock import patch
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from unit_test.util import Util
+from util import Util
 from parameterized import parameterized
 from icon_manage_engine_service_desk.actions.close_request import CloseRequest
 
