@@ -1,11 +1,8 @@
 import json
 import logging
-import sys
 import os
 
 import insightconnect_plugin_runtime
-
-sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 
 from icon_manage_engine_service_desk.connection import Connection
 from icon_manage_engine_service_desk.connection.schema import Input

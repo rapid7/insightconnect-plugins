@@ -1,15 +1,9 @@
-import sys
-import os
 from unittest import TestCase
 from unittest.mock import patch
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-_this_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, _this_dir)
-sys.path.insert(0, os.path.join(_this_dir, ".."))
-
-from util import Util
+from unit_test.util import Util
 from parameterized import parameterized
 from icon_manage_engine_service_desk.actions.add_resolution import AddResolution
 

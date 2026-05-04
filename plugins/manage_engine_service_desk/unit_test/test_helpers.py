@@ -1,14 +1,9 @@
-import sys
-import os
 from unittest import TestCase
 from unittest.mock import patch
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_manage_engine_service_desk.util.constants import ResponseStatus, Response
-
-sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
-
 from parameterized import parameterized
 from icon_manage_engine_service_desk.util import helpers
 
