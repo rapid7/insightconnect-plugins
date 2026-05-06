@@ -774,7 +774,7 @@ This action is used to search for machines using an OData filter query
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|filter|string|None|True|OData filter query to search for machines|None|osPlatform eq 'Windows10'|None|None|
+|filter|string|None|True|OData filter query to search for machines|None|osPlatform eq 'Windows10'|osPlatform eq 'Windows10'|Enter an OData $filter expression. See https://learn.microsoft.com/en-us/defender-endpoint/api/exposed-apis-odata-samples for available filter properties and operators.|
 |limit|integer|None|False|Maximum number of results to return|None|100|None|None|
   
 Example input:

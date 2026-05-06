@@ -1652,6 +1652,8 @@ actions:
         description: OData filter query to search for machines
         type: string
         example: "osPlatform eq 'Windows10'"
+        placeholder: "osPlatform eq 'Windows10'"
+        tooltip: "Enter an OData $filter expression. See https://learn.microsoft.com/en-us/defender-endpoint/api/exposed-apis-odata-samples for available filter properties and operators."
         required: true
       limit:
         title: Limit

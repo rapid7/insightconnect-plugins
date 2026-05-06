@@ -26,6 +26,8 @@ class SearchMachinesInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Filter",
       "description": "OData filter query to search for machines",
+      "placeholder": "osPlatform eq 'Windows10'",
+      "tooltip": "Enter an OData $filter expression. See https://learn.microsoft.com/en-us/defender-endpoint/api/exposed-apis-odata-samples for available filter properties and operators.",
       "order": 1
     },
     "limit": {
