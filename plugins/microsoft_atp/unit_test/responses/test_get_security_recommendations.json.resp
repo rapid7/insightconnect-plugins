@@ -1,0 +1,27 @@
+{
+  "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#Recommendations",
+  "value": [
+    {
+      "id": "rec-123",
+      "productName": "Example Software",
+      "recommendationName": "Update Example Software",
+      "weaknesses": 2,
+      "vendor": "ExampleVendor",
+      "recommendedVersion": "2.0.0",
+      "recommendationCategory": "Application",
+      "subCategory": "Update",
+      "severityScore": 7.5,
+      "publicExploit": false,
+      "activeAlert": false,
+      "associatedThreats": [],
+      "remediationType": "Update",
+      "status": "Active",
+      "configScoreImpact": 5.0,
+      "exposureImpact": 3.0,
+      "totalMachineCount": 10,
+      "exposedMachinesCount": 5,
+      "nonProductivityImpactedAssets": 0,
+      "relatedComponent": "ExampleComponent"
+    }
+  ]
+}

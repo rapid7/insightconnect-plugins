@@ -1,0 +1,15 @@
+{
+  "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#Software",
+  "value": [
+    {
+      "id": "microsoft-_-windows_10",
+      "name": "windows_10",
+      "vendor": "microsoft",
+      "weaknesses": 100,
+      "publicExploit": true,
+      "activeAlert": false,
+      "exposedMachines": 5,
+      "impactScore": 9.5
+    }
+  ]
+}

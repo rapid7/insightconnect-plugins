@@ -8,7 +8,6 @@ from typing import Any, Dict, List, Union
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-
 # we do not have an instance to test [gcc, gcc high, dod], but endpoint taken from link below
 # https://learn.microsoft.com/en-us/defender-endpoint/gov#api
 
@@ -160,6 +159,10 @@ class WindwosDefenderATP_API:
     def get_machines(self, odata_queries: dict = None) -> dict:
         return self._make_request("GET", "machines", params=odata_queries)
 
+    def search_machines(self, odata_filter: str, top: int = 100) -> dict:
+        params = {"$filter": odata_filter, "$top": top}
+        return self._make_request("GET", "machines", params=params)
+
     def get_machine_information(self, machine_id: str) -> dict:
         return self._make_request("GET", f"machines/{machine_id}")
 
@@ -254,7 +257,27 @@ class WindwosDefenderATP_API:
             params=params,
         )
 
-    def _call_api(  # noqa: C901
+    def _handle_response(self, response, allow_empty: bool = False) -> dict:
+        if response.status_code == 401:
+            raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
+        if response.status_code == 403:
+            raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
+        if response.status_code == 404 and allow_empty:
+            return {}
+        if response.status_code == 404:
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
+        if response.status_code == 400 and '"message":"Action is already in progress"' in response.text:
+            self.logger.info("Action is already in progress")
+            return {"status": "InProgress"}
+        if response.status_code >= 400:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+        if 200 <= response.status_code < 300:
+            if response.text:
+                return response.json()
+            return {}
+        raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+
+    def _call_api(
         self,
         method: str,
         url: str,
@@ -267,26 +290,7 @@ class WindwosDefenderATP_API:
         response = {"text": ""}
         try:
             response = requests.request(method, url, json=json_data, params=params, data=data, headers=headers)
-
-            if response.status_code == 401:
-                raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
-            if response.status_code == 403:
-                raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
-            if response.status_code == 404 and allow_empty:
-                return {}
-            if response.status_code == 404:
-                raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
-            if response.status_code == 400 and '"message":"Action is already in progress"' in response.text:
-                self.logger.info("Action is already in progress")
-                return {"status": "InProgress"}
-            if response.status_code >= 400:
-                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
-            if 200 <= response.status_code < 300:
-                if response.text:
-                    return response.json()
-                return {}
-
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+            return self._handle_response(response, allow_empty)
         except json.decoder.JSONDecodeError:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
         except requests.exceptions.HTTPError:

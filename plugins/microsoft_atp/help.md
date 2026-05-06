@@ -766,6 +766,40 @@ Example output:
 }
 ```
 
+#### Search Machines
+
+This action is used to search for machines using an OData filter query
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|filter|string|None|True|OData filter query to search for machines|None|osPlatform eq 'Windows10'|None|None|
+|limit|integer|None|False|Maximum number of results to return|None|100|None|None|
+  
+Example input:
+
+```
+{
+  "filter": "osPlatform eq 'Windows10'",
+  "limit": 100
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|machines|[]machine|True|List of machines matching the filter|[]|
+  
+Example output:
+
+```
+{
+  "machines": []
+}
+```
+
 #### Stop and Quarantine File
 
 This action is used to stop the execution of a file on a machine and delete it
@@ -1331,6 +1365,7 @@ Example output:
 
 # Version History
 
+* 6.1.0 - Add new action Search Machines
 * 6.0.5 - Updated dependencies | Updated SDK to the latest version (6.4.3)
 * 6.0.4 - Updated SDK to the latest version (6.3.10)
 * 6.0.3 - Updated SDK to the latest version (6.3.3)
