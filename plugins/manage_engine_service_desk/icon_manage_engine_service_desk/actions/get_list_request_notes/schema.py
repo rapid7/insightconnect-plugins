@@ -25,7 +25,7 @@ class GetListRequestNotesInput(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "request_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Request ID",
       "description": "The id of the request",
       "order": 1
@@ -58,7 +58,7 @@ class GetListRequestNotesOutput(insightconnect_plugin_runtime.Output):
       "order": 2
     },
     "request_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Request ID",
       "description": "The id of the request",
       "order": 1
@@ -86,7 +86,7 @@ class GetListRequestNotesOutput(insightconnect_plugin_runtime.Output):
       "title": "note",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "Note ID",
           "order": 1
@@ -132,7 +132,7 @@ class GetListRequestNotesOutput(insightconnect_plugin_runtime.Output):
       "title": "last_updated_by",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "Id of the last editor",
           "order": 1
@@ -150,7 +150,7 @@ class GetListRequestNotesOutput(insightconnect_plugin_runtime.Output):
       "title": "added_by",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "Id of the creator",
           "order": 1

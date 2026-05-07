@@ -40,7 +40,7 @@ class CloseRequestInput(insightconnect_plugin_runtime.Input):
       "order": 2
     },
     "request_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Request ID",
       "description": "The request id that should be closed",
       "order": 1
@@ -67,7 +67,7 @@ class CloseRequestInput(insightconnect_plugin_runtime.Input):
       "title": "closure_code",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "Closure Code ID",
           "order": 1
@@ -95,7 +95,7 @@ class CloseRequestOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "request_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Request ID",
       "description": "The id of the closed request",
       "order": 1

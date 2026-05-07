@@ -1,5 +1,5 @@
 {
-  "request_id": 200,
+  "request_id": "200",
   "request_parameters": {
     "subject": "Edit request",
     "requester": {

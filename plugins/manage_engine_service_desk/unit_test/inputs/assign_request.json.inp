@@ -2,7 +2,7 @@
   "group": {
     "id": 2
   },
-  "request_id": 200,
+  "request_id": "200",
   "technician": {
     "id": 10,
     "name": "Assign request"

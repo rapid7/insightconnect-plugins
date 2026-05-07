@@ -38,7 +38,7 @@ class AddResolutionInput(insightconnect_plugin_runtime.Input):
       "order": 2
     },
     "request_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Request ID",
       "description": "The id of the request",
       "order": 1
@@ -64,7 +64,7 @@ class AddResolutionOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "request_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Request ID",
       "description": "The id of the request",
       "order": 1

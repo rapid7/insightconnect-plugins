@@ -32,7 +32,7 @@ class AssignRequestInput(insightconnect_plugin_runtime.Input):
       "order": 2
     },
     "request_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Request ID",
       "description": "The request id that should be assigned",
       "order": 1
@@ -53,7 +53,7 @@ class AssignRequestInput(insightconnect_plugin_runtime.Input):
       "title": "group",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "Group's id",
           "order": 1
@@ -71,7 +71,7 @@ class AssignRequestInput(insightconnect_plugin_runtime.Input):
       "title": "technician",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "Technician ID",
           "order": 1
@@ -99,7 +99,7 @@ class AssignRequestOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "request_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Request ID",
       "description": "The id of the assigned request",
       "order": 1

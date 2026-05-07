@@ -22,7 +22,7 @@ class GetResolution(insightconnect_plugin_runtime.Action):
 
         return clean(
             {
-                Output.REQUEST_ID: request_id,
+                Output.REQUEST_ID: str(request_id),
                 Output.CONTENT: response_json.get(Response.RESOLUTION, {}).get(Resolution.CONTENT),
                 Output.STATUS: response_json.get(Response.RESPONSE_STATUS, {}).get(ResponseStatus.STATUS),
                 Output.STATUS_CODE: response_json.get(Response.RESPONSE_STATUS, {}).get(ResponseStatus.STATUS_CODE),
