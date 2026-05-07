@@ -1,3 +1,36 @@
+class ConnectionType:
+    ON_PREM = "On-Prem"
+    CLOUD = "Cloud"
+
+
+class DataCenter:
+    UNITED_STATES = "United States"
+    EUROPE = "Europe"
+    INDIA = "India"
+    AUSTRALIA = "Australia"
+    CHINA = "China"
+    JAPAN = "Japan"
+
+
+CLOUD_API_BASE_URLS = {
+    DataCenter.UNITED_STATES: "https://sdpondemand.manageengine.com",
+    DataCenter.EUROPE: "https://sdpondemand.manageengine.eu",
+    DataCenter.INDIA: "https://sdpondemand.manageengine.in",
+    DataCenter.AUSTRALIA: "https://sdpondemand.manageengine.com.au",
+    DataCenter.CHINA: "https://sdpondemand.manageengine.cn",
+    DataCenter.JAPAN: "https://sdpondemand.manageengine.jp",
+}
+
+ZOHO_OAUTH_BASE_URLS = {
+    DataCenter.UNITED_STATES: "https://accounts.zoho.com",
+    DataCenter.EUROPE: "https://accounts.zoho.eu",
+    DataCenter.INDIA: "https://accounts.zoho.in",
+    DataCenter.AUSTRALIA: "https://accounts.zoho.com.au",
+    DataCenter.CHINA: "https://accounts.zoho.com.cn",
+    DataCenter.JAPAN: "https://accounts.zoho.jp",
+}
+
+
 class Item:
     ID = "id"
 
@@ -76,3 +109,9 @@ class Status(Item):
 
 class Resolution:
     CONTENT = "content"
+
+
+# OAuth / HTTP constants
+OAUTH_REQUEST_TIMEOUT_SECONDS = 30
+DEFAULT_TOKEN_EXPIRY_SECONDS = 3600
+TOKEN_EXPIRY_BUFFER_SECONDS = 300

@@ -27,4 +27,3 @@ from .edit_request_note.action import EditRequestNote
 from .delete_request_note.action import DeleteRequestNote
 
 from .get_list_request_notes.action import GetListRequestNotes
-

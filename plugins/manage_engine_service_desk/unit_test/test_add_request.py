@@ -1,13 +1,9 @@
-import sys
-import os
 from unittest import TestCase
 from unittest.mock import patch
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-sys.path.append(os.path.abspath("../"))
-
-from unit_test.util import Util
+from util import Util
 from parameterized import parameterized
 from icon_manage_engine_service_desk.actions.add_request import AddRequest
 
@@ -44,7 +40,14 @@ class TestAddRequest(TestCase):
                 PluginException.causes[PluginException.Preset.BAD_REQUEST],
                 PluginException.assistances[PluginException.Preset.BAD_REQUEST],
                 Util.read_file_to_dict("expected/add_request_incorrect_level.json.exp"),
-            ]
+            ],
+            [
+                "missing_requester",
+                Util.read_file_to_dict("inputs/add_request_missing_requester.json.inp"),
+                "Requester parameter not provided.",
+                "Please provide a Requester parameter and try again. If the issue persists, please contact support.",
+                "",
+            ],
         ]
     )
     def test_add_request_raise_exception(self, mock_request, test_name, input_parameters, cause, assistance, data):

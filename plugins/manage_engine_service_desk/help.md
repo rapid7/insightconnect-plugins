@@ -9,14 +9,16 @@ ManageEngine's Service Desk has the ability to centralize and capture reported i
 
 # Requirements
 
-The authentication between ServiceDesk Plus and an Insight Connect application is through an API key. A unique key is generated for a technician with login permission in the ServiceDesk Plus application.
-* To generate the API Key, click Admin -> Technicians under User block.
-* If you want to generate the API key for an existing technician, then click the edit icon beside the technician.
-* If you want to generate the API key for a new technician, click Add New Technician link, enter the technician details and provide login permission.
+* On-Prem: The authentication between ServiceDesk Plus and an InsightConnect application is through an API key. A unique key is generated for a technician with login permission in the ServiceDesk Plus application.
+* On-Prem: To generate the API Key, click Admin -> Technicians under User block. If you want to generate the API key for an existing technician, then click the edit icon beside the technician.
+* On-Prem: Click Generate link under the API key details block. You can select a time frame for the key to expire using the calendar icon or simply retain the same key indefinitely.
+* Cloud: Requires a Zoho OAuth 2.0 client ID, client secret, and refresh token. Create a self-client application in the Zoho API Console (https://api-console.zoho.com/) with the SDPOnDemand.requests.ALL scope.
+* Cloud: The portal name is the unique identifier for your ManageEngine ServiceDesk Plus cloud instance (visible in your cloud URL, e.g. https://sdpondemand.manageengine.com/app/{portal_name}).
 
 # Supported Product Versions
 
-* ServiceDesk Plus 13008
+* ServiceDesk Plus 13008 (On-Prem)
+* ServiceDesk Plus Cloud
 
 # Documentation
 
@@ -26,15 +28,27 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|api_key|credential_secret_key|None|True|Manage Engine Service Desk Technican's API key|None|EXAMPLE1-API2-KEY3-HDFS-48GS24WSA6GE|None|None|
-|sdp_base_url|string|None|True|Service Desk Plus Base URL|None|http://me-sdeskplus.dev.example.com:8080|None|None|
-|ssl_verify|boolean|True|True|SSL verify|None|True|None|None|
+|api_key|credential_secret_key|None|False|Technician API key for on-premises ServiceDesk Plus authentication. Required when Connection Type is On-Prem|None|EXAMPLE1-API2-KEY3-HDFS-48GS24WSA6GE|None|None|
+|client_id|string|None|False|Zoho OAuth 2.0 client ID for cloud authentication. Required when Connection Type is Cloud|None|1000.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|None|None|
+|client_secret|credential_secret_key|None|False|Zoho OAuth 2.0 client secret for cloud authentication. Required when Connection Type is Cloud|None|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|None|None|
+|connection_type|string|None|True|Whether to connect to an on-premises or cloud instance of ManageEngine ServiceDesk Plus|["On-Prem", "Cloud"]|Cloud|None|None|
+|data_center|string|None|False|Zoho data center region for the cloud instance. Required when Connection Type is Cloud|["", "United States", "Europe", "India", "Australia", "China", "Japan"]|United States|None|None|
+|portal_name|string|None|False|ManageEngine cloud portal name used in the API path. Required when Connection Type is Cloud|None|mycompany|None|None|
+|refresh_token|credential_secret_key|None|False|Zoho OAuth 2.0 refresh token for cloud authentication. Required when Connection Type is Cloud|None|1000.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|None|None|
+|sdp_base_url|string|None|False|Base URL for the on-premises ServiceDesk Plus instance, e.g. http://me-sdeskplus.dev.example.com:8080. Required when Connection Type is On-Prem|None|http://me-sdeskplus.dev.example.com:8080|None|None|
+|ssl_verify|boolean|True|False|Enable SSL certificate verification. Applies to On-Prem connections only|None|True|None|None|
 
 Example input:
 
 ```
 {
   "api_key": "EXAMPLE1-API2-KEY3-HDFS-48GS24WSA6GE",
+  "client_id": "1000.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+  "client_secret": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+  "connection_type": "Cloud",
+  "data_center": "United States",
+  "portal_name": "mycompany",
+  "refresh_token": "1000.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
   "sdp_base_url": "http://me-sdeskplus.dev.example.com:8080",
   "ssl_verify": true
 }
@@ -54,7 +68,7 @@ parameter containing `ID` and `Name` fields please provide at least one of them
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|assets|[]asset|None|False|Array of asset objects associated with this request|None|["{"name": "Software", "barcode": "test-barcode"}"]|None|None|
+|assets|[]asset|None|False|Array of asset objects associated with this request|None|[{"name": "Software", "barcode": "test-barcode"}]|None|None|
 |category|category|None|False|Category to which this request belongs|None|{"name": "Operating System"}|None|None|
 |description|string|None|False|Description of this request|None|Example description|None|None|
 |email_ids_to_notify|[]string|None|False|Array of Email ids, which needs to be notified about the happenings of this request|None|["user@example.com"]|None|None|
@@ -79,9 +93,60 @@ Example input:
 
 ```
 {
-  "subject": "Install xyz",
+  "assets": [
+    {
+      "barcode": "test-barcode",
+      "name": "Software"
+    }
+  ],
+  "category": {
+    "name": "Operating System"
+  },
+  "description": "Example description",
+  "email_ids_to_notify": [
+    "user@example.com"
+  ],
+  "group": {
+    "name": "Network"
+  },
+  "impact": {
+    "name": "High"
+  },
+  "is_fcr": true,
+  "item": {
+    "name": "Install"
+  },
+  "level": {
+    "name": "Tier 4"
+  },
+  "mode": {
+    "name": "Web Form"
+  },
+  "priority": {
+    "name": "High"
+  },
+  "request_type": "{\"name\" \"Incident\"}",
   "requester": {
-    "name": "Mike"
+    "name": "John"
+  },
+  "service_category": {
+    "name": "User Management"
+  },
+  "site": {
+    "name": "Custom Site"
+  },
+  "status": {
+    "name": "Open"
+  },
+  "subcategory": {
+    "name": "Mac OS X"
+  },
+  "subject": "Need a Monitor",
+  "technician": {
+    "name": "John"
+  },
+  "urgency": {
+    "name": "Low"
   }
 }
 ```
@@ -154,7 +219,7 @@ Example output:
 
 #### Add Resolution
 
-Add or update the resolution of a request
+This action is used to add or update the resolution of a request
 
 ##### Input
 
@@ -194,7 +259,8 @@ Example output:
 
 #### Assign Request
 
-Assign a request to a technician or group. Request ID is required, as well as at least one of Group or Technician. In every parameter containing `ID` and `Name` fields please provide only one or the other
+This action is used to assign a request to a technician or group. Request ID is required, as well as at least one of 
+Group or Technician. In every parameter containing `ID` and `Name` fields please provide only one or the other
 
 ##### Input
 
@@ -238,7 +304,7 @@ Example output:
 
 #### Close Request
 
-Close the given request
+This action is used to close the given request
 
 ##### Input
 
@@ -284,7 +350,7 @@ Example output:
 
 #### Delete Request
 
-Delete the given request (move it to the trash)
+This action is used to delete the given request (move it to the trash)
 
 ##### Input
 
@@ -320,7 +386,7 @@ Example output:
 
 #### Delete Request Note
 
-Delete a given request note on a specific request
+This action is used to delete a given request note on a specific request
 
 ##### Input
 
@@ -358,13 +424,14 @@ Example output:
 
 #### Edit Request
 
-Update the given request. At least one parameter other than Request ID is required. In every parameter containing `ID` and `Name` fields please provide only one or the other
+This action is used to update the given request. At least one parameter other than Request ID is required. In every 
+parameter containing `ID` and `Name` fields please provide only one or the other
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|assets|[]asset|None|False|Array of asset objects associated with this request|None|["{"name": "Software", "barcode": "test-barcode"}"]|None|None|
+|assets|[]asset|None|False|Array of asset objects associated with this request|None|[{"name": "Software", "barcode": "test-barcode"}]|None|None|
 |category|category|None|False|Category to which this request belongs|None|{"name": "Operating System"}|None|None|
 |description|string|None|False|Description of this request|None|Example description|None|None|
 |email_ids_to_notify|[]string|None|False|Array of Email ids, which needs to be notified about the happenings of this request|None|["user@example.com"]|None|None|
@@ -390,10 +457,61 @@ Example input:
 
 ```
 {
+  "assets": [
+    {
+      "barcode": "test-barcode",
+      "name": "Software"
+    }
+  ],
+  "category": {
+    "name": "Operating System"
+  },
+  "description": "Example description",
+  "email_ids_to_notify": [
+    "user@example.com"
+  ],
+  "group": {
+    "name": "Network"
+  },
+  "impact": {
+    "name": "High"
+  },
+  "is_fcr": true,
+  "item": {
+    "name": "Install"
+  },
+  "level": {
+    "name": "Tier 4"
+  },
+  "mode": {
+    "name": "Web Form"
+  },
+  "priority": {
+    "name": "High"
+  },
   "request_id": 54,
-  "subject": "Install xyz",
+  "request_type": "{\"name\" \"Incident\"}",
   "requester": {
-    "name": "Mike"
+    "name": "John"
+  },
+  "service_category": {
+    "name": "User Management"
+  },
+  "site": {
+    "name": "Custom Site"
+  },
+  "status": {
+    "name": "Open"
+  },
+  "subcategory": {
+    "name": "Mac OS X"
+  },
+  "subject": "Need a Monitor",
+  "technician": {
+    "name": "John"
+  },
+  "urgency": {
+    "name": "Low"
   }
 }
 ```
@@ -418,7 +536,8 @@ Example output:
 
 #### Edit Request Note
 
-Update a note on the given request. At least one parameter other than Request ID and Note ID is required
+This action is used to update a note on the given request. At least one parameter other than Request ID and Note ID is 
+required
 
 ##### Input
 
@@ -466,7 +585,7 @@ Example output:
 
 #### Get List Request
 
-View the details of a list of requests matching a search
+This action is used to view the details of a list of requests matching a search
 
 ##### Input
 
@@ -482,10 +601,10 @@ Example input:
 
 ```
 {
-  "page_size": 15,
+  "page_size": 10,
   "search_fields": {
-    "subject": "test",
-    "priority.name": "Low"
+    "priority.name": "Low",
+    "subject": "test"
   },
   "sort_field": "subject",
   "sort_order": "asc",
@@ -497,7 +616,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|requests|[]request_output|False|List of requests|["{"subject": "Install xyz", "requester": {"name": "Mike"}}"]|
+|requests|[]request_output|False|List of requests|[{"subject": "Install xyz", "requester": {"name": "Mike"}}]|
 |status|string|True|Status of the request|success|
   
 Example output:
@@ -506,144 +625,10 @@ Example output:
 {
   "requests": [
     {
-      "created_by": {
-        "id": 4,
-        "name": "administrator",
-        "is_vipuser": false
-      },
-      "created_time": "Aug 9, 2022 06:06 AM",
-      "due_by_time": "Aug 9, 2022 05:00 PM",
-      "id": 71,
-      "is_overdue": true,
-      "is_service_request": false,
-      "priority": {
-        "name": "Low",
-        "id": 1
-      },
       "requester": {
-        "id": 4,
-        "name": "administrator",
-        "is_vipuser": false
+        "name": "Mike"
       },
-      "site": {
-        "name": "Test Site",
-        "id": 301
-      },
-      "status": {
-        "name": "Open",
-        "id": 2
-      },
-      "subject": "Plugin action test add request 2",
-      "technician": {
-        "id": 4,
-        "name": "administrator",
-        "is_vipuser": false
-      }
-    },
-    {
-      "created_by": {
-        "id": 4,
-        "name": "administrator",
-        "is_vipuser": false
-      },
-      "created_time": "Aug 8, 2022 04:54 AM",
-      "due_by_time": "Aug 8, 2022 05:00 PM",
-      "id": 61,
-      "is_overdue": true,
-      "is_service_request": false,
-      "priority": {
-        "name": "Low",
-        "id": 1
-      },
-      "requester": {
-        "id": 4,
-        "name": "administrator",
-        "is_vipuser": false
-      },
-      "site": {
-        "name": "Test Site",
-        "id": 301
-      },
-      "status": {
-        "name": "Open",
-        "id": 2
-      },
-      "subject": "Plugin action test add request 2",
-      "technician": {
-        "id": 4,
-        "name": "administrator",
-        "is_vipuser": false
-      }
-    },
-    {
-      "created_by": {
-        "id": 4,
-        "name": "administrator",
-        "is_vipuser": false
-      },
-      "created_time": "Aug 8, 2022 04:41 AM",
-      "due_by_time": "Aug 8, 2022 05:00 PM",
-      "id": 60,
-      "is_overdue": true,
-      "is_service_request": false,
-      "priority": {
-        "name": "Low",
-        "id": 1
-      },
-      "requester": {
-        "id": 4,
-        "name": "administrator",
-        "is_vipuser": false
-      },
-      "site": {
-        "name": "Test Site",
-        "id": 301
-      },
-      "status": {
-        "name": "Open",
-        "id": 2
-      },
-      "subject": "Plugin action test add request 2",
-      "technician": {
-        "id": 4,
-        "name": "administrator",
-        "is_vipuser": false
-      }
-    },
-    {
-      "created_by": {
-        "id": 4,
-        "name": "administrator",
-        "is_vipuser": false
-      },
-      "created_time": "Jul 13, 2022 01:20 AM",
-      "due_by_time": "Jul 15, 2022 05:00 PM",
-      "id": 27,
-      "is_overdue": true,
-      "is_service_request": false,
-      "priority": {
-        "name": "Low",
-        "id": 1
-      },
-      "requester": {
-        "id": 4,
-        "name": "administrator",
-        "is_vipuser": false
-      },
-      "site": {
-        "name": "Test Site",
-        "id": 301
-      },
-      "status": {
-        "name": "Open",
-        "id": 2
-      },
-      "subject": "Plugin action test add request 2",
-      "technician": {
-        "id": 4,
-        "name": "administrator",
-        "is_vipuser": false
-      }
+      "subject": "Install xyz"
     }
   ],
   "status": "success"
@@ -652,7 +637,7 @@ Example output:
 
 #### Get List Request Notes
 
-Get the list of all notes associated with the given request
+This action is used to get the list of all notes associated with the given request
 
 ##### Input
 
@@ -672,41 +657,25 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|notes|[]note|False|Notes assigned to the request|["{"note_id": "312", "added_time": "Jul 8, 2022 02:02 AM", "added_by": {"name": "John"}"]|
-|request_id|integer|True|The id of the request|55|', '|status|string|True|Status of the request|success|', '|status_code|integer|False|Status code of the request|2000|
+|notes|[]note|False|Notes assigned to the request|[{"note_id": "312", "added_time": "Jul 8, 2022 02:02 AM", "added_by": {"name": "John"}}]|
+|request_id|integer|True|The id of the request|55|
+|status|string|True|Status of the request|success|
+|status_code|integer|False|Status code of the request|2000|
+  
 Example output:
 
 ```
 {
-  "request_id": 55,
   "notes": [
     {
-      "last_updated_by": {
-        "name": "administrator",
-        "id": 4
-      },
-      "added_time": "Aug 3, 2022 12:55 AM",
-      "last_updated_time": "Aug 3, 2022 12:55 AM",
       "added_by": {
-        "name": "administrator",
-        "id": 4
+        "name": "John"
       },
-      "show_to_requester": true
-    },
-    {
-      "last_updated_by": {
-        "name": "administrator",
-        "id": 4
-      },
-      "added_time": "Aug 3, 2022 12:55 AM",
-      "last_updated_time": "Aug 3, 2022 12:55 AM",
-      "added_by": {
-        "name": "administrator",
-        "id": 4
-      },
-      "show_to_requester": true
+      "added_time": "Jul 8, 2022 02:02 AM",
+      "note_id": "312"
     }
   ],
+  "request_id": 55,
   "status": "success",
   "status_code": 2000
 }
@@ -714,7 +683,7 @@ Example output:
 
 #### Get Request
 
-View the details of a request given the request ID
+This action is used to view the details of a request given the request ID
 
 ##### Input
 
@@ -743,91 +712,19 @@ Example output:
 ```
 {
   "request": {
-    "subject": "Plugin action test add request 2",
     "requester": {
-      "id": 4,
-      "name": "administrator",
-      "is_vipuser": false
+      "name": "Mike"
     },
-    "description": "dessssc",
-    "request_type": {
-      "name": "Incident",
-      "id": 1
-    },
-    "impact": {
-      "name": "Medium",
-      "id": 2
-    },
-    "status": {
-      "name": "Open",
-      "id": 2
-    },
-    "mode": {
-      "name": "Web Form",
-      "id": 2
-    },
-    "level": {
-      "name": "Tier 4",
-      "id": 4
-    },
-    "urgency": {
-      "name": "Urgent",
-      "id": 1
-    },
-    "priority": {
-      "name": "Normal",
-      "id": 2
-    },
-    "service_category": {
-      "name": "User Management",
-      "id": 8
-    },
-    "id": 54,
-    "assets": [
-      {
-        "name": "keyboardMC",
-        "id": 301
-      }
-    ],
-    "site": {
-      "name": "Test Site",
-      "id": 301
-    },
-    "technician": {
-      "id": 4,
-      "name": "administrator",
-      "is_vipuser": false
-    },
-    "category": {
-      "name": "Software",
-      "id": 3
-    },
-    "subcategory": {
-      "name": "MS Office",
-      "id": 5
-    },
-    "email_ids_to_notify": [
-      "user@example.com"
-    ],
-    "udf_fields": {},
-    "created_time": "Aug 3, 2022 01:11 AM",
-    "due_by_time": "Aug 3, 2022 01:00 PM",
-    "created_by": {
-      "id": 4,
-      "name": "administrator",
-      "is_vipuser": false
-    },
-    "is_service_request": false,
-    "has_notes": false,
-    "is_overdue": true
+    "subject": "Install xyz"
   },
-  "status": "success"
+  "status": "success",
+  "status_code": 2000
 }
 ```
 
 #### Get Resolution
 
-Get the resolution of the given request
+This action is used to get the resolution of the given request
 
 ##### Input
 
@@ -856,8 +753,8 @@ Example output:
 
 ```
 {
+  "content": "Sample resolution",
   "request_id": 27,
-  "content": "asd",
   "status": "success",
   "status_code": 2000
 }
@@ -865,7 +762,7 @@ Example output:
 
 #### Pickup Request
 
-Pick up (assign) a given request in your name as a technician
+This action is used to pick up (assign) a given request in your name as a technician
 
 ##### Input
 
@@ -1032,7 +929,7 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Assets|[]asset|None|False|Array of asset objects associated with this request|["{\"name\": \"Software\", \"id\": 4541563, \"barcode\": \"test-barcode\"}"]|
+|Assets|[]asset|None|False|Array of asset objects associated with this request|[{"name": "Software", "id": 4541563, "barcode": "test-barcode"}]|
 |Category|category|None|False|Category to which this request belongs|{"name": "Operating System", "id": 8}|
 |Created By|user_output|None|False|Creator of the request|{"name": "John", "id": 71}|
 |Created Time|date|None|False|Time the request was created|Jul 9, 2022 04:02 AM|
@@ -1100,6 +997,7 @@ Example output:
 
 # Version History
 
+* 2.0.0 - Add cloud connection support using Zoho OAuth 2.0 | Connection now requires connection_type field (On-Prem or Cloud) | Cloud connections require client_id, client_secret, refresh_token, portal_name, and data_center fields | On-Prem connection fields sdp_base_url and api_key are now optional (required only when connection_type is On-Prem)
 * 1.0.2 - Bumping requirements.txt | SDK bump to 6.1.4
 * 1.0.1 - Fix `int` conversion issue in `Get List Request` and `Get Request` actions
 * 1.0.0 - Initial plugin - Create actions: `Add Request`, `Add Request Note`, `Add Resolution`, `Assign Request`, `Close Request`, `Delete Request`, `Delete Request Note`, `Edit Request`, `Edit Request Note`, `Get List Request`, `Get List Request Notes`, `Get Request`, `Get Resolution`, `Pickup Request`

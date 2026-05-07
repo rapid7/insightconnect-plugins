@@ -3,7 +3,6 @@ import insightconnect_plugin_runtime
 from icon_manage_engine_service_desk.util.constants import Response, Note, ResponseStatus
 from .schema import AddRequestNoteInput, AddRequestNoteOutput, Input, Output, Component
 
-
 # Custom imports below
 
 
