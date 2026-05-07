@@ -40,7 +40,7 @@ hub_tags:
   keywords: [management]
   features: []
 version_history:
-  - "2.0.0 - Add cloud connection support using Zoho OAuth 2.0 | Connection now requires connection_type field (On-Prem or Cloud) | Cloud connections require client_id, client_secret, refresh_token, portal_name, and data_center fields | On-Prem connection fields sdp_base_url and api_key are now optional (required only when connection_type is On-Prem)"
+  - "2.0.0 - Add cloud connection support using Zoho OAuth 2.0 | All ID fields changed from integer to string to prevent precision loss with large Cloud IDs | Connection now requires connection_type field (On-Prem or Cloud) | Cloud connections require client_id, client_secret, refresh_token, portal_name, and data_center fields | On-Prem connection fields sdp_base_url and api_key are now optional (required only when connection_type is On-Prem)"
   - "1.0.2 - Bumping requirements.txt | SDK bump to 6.1.4"
   - "1.0.1 - Fix `int` conversion issue in `Get List Request` and `Get Request` actions"
   - "1.0.0 - Initial plugin - Create actions: `Add Request`, `Add Request Note`, `Add Resolution`, `Assign Request`, `Close Request`, `Delete Request`, `Delete Request Note`, `Edit Request`, `Edit Request Note`, `Get List Request`, `Get List Request Notes`, `Get Request`, `Get Resolution`, `Pickup Request`"
@@ -49,9 +49,9 @@ types:
     id:
       title: ID
       description: ID of the request type
-      type: integer
+      type: string
       required: false
-      example: 1
+      example: "1"
     name:
       title: Name
       description: Name of the request type
@@ -62,9 +62,9 @@ types:
     id:
       title: ID
       description: ID of the impact
-      type: integer
+      type: string
       required: false
-      example: 1
+      example: "1"
     name:
       title: Name
       description: Name impact
@@ -75,9 +75,9 @@ types:
     id:
       title: ID
       description: ID of the current status
-      type: integer
+      type: string
       required: false
-      example: 2
+      example: "2"
     name:
       title: Name
       description: Name of the current status
@@ -88,9 +88,9 @@ types:
     id:
       title: ID
       description: Id of the mode
-      type: integer
+      type: string
       required: false
-      example: 2
+      example: "2"
     name:
       title: Name
       description: Name of the mode
@@ -101,9 +101,9 @@ types:
     id:
       title: ID
       description: Id of the level
-      type: integer
+      type: string
       required: false
-      example: 4
+      example: "4"
     name:
       title: Name
       description: Name of the level
@@ -114,9 +114,9 @@ types:
     id:
       title: ID
       description: Id of the urgency
-      type: integer
+      type: string
       required: false
-      example: 2
+      example: "2"
     name:
       title: Name
       description: Name of the urgency
@@ -127,9 +127,9 @@ types:
     id:
       title: ID
       description: ID of the priority
-      type: integer
+      type: string
       required: false
-      example: 4
+      example: "4"
     name:
       title: Name
       description: Name of the priority
@@ -140,9 +140,9 @@ types:
     id:
       title: ID
       description: ID of the service category
-      type: integer
+      type: string
       required: false
-      example: 8
+      example: "8"
     name:
       title: Name
       description: Name of the service category
@@ -153,9 +153,9 @@ types:
     id:
       title: ID
       description: User ID
-      type: integer
+      type: string
       required: false
-      example: 71
+      example: "71"
     name:
       title: Name
       description: User name
@@ -172,9 +172,9 @@ types:
     id:
       title: ID
       description: User ID
-      type: integer
+      type: string
       required: false
-      example: 71
+      example: "71"
     name:
       title: Name
       description: User name
@@ -185,9 +185,9 @@ types:
     id:
       title: ID
       description: Id of the asset
-      type: integer
+      type: string
       required: false
-      example: 4541563
+      example: "4541563"
     name:
       title: Name
       description: Name of the asset
@@ -204,9 +204,9 @@ types:
     id:
       title: ID
       description: Site's id
-      type: integer
+      type: string
       required: false
-      example: 2235435
+      example: "2235435"
     name:
       title: Name
       description: Site's name
@@ -217,9 +217,9 @@ types:
     id:
       title: ID
       description: Group's id
-      type: integer
+      type: string
       required: false
-      example: 2
+      example: "2"
     name:
       title: Name
       description: Group's name
@@ -230,9 +230,9 @@ types:
     id:
       title: ID
       description: Technician ID
-      type: integer
+      type: string
       required: false
-      example: 3
+      example: "3"
     name:
       title: Name
       description: Technician Name
@@ -243,9 +243,9 @@ types:
     id:
       title: ID
       description: ID of the category
-      type: integer
+      type: string
       required: false
-      example: 8
+      example: "8"
     name:
       title: Name
       description: Name of the category
@@ -256,9 +256,9 @@ types:
     id:
       title: ID
       description: ID of the subcategory
-      type: integer
+      type: string
       required: false
-      example: 24
+      example: "24"
     name:
       title: Name
       description: Name of the subcategory
@@ -269,9 +269,9 @@ types:
     id:
       title: ID
       description: ID of the item
-      type: integer
+      type: string
       required: false
-      example: 1
+      example: "1"
     name:
       title: Name
       description: Name of the item
@@ -282,9 +282,9 @@ types:
     id:
       title: ID
       description: Id of the request
-      type: integer
+      type: string
       required: false
-      example: 92
+      example: "92"
     subject:
       title: Subject
       description: Subject of this request
@@ -297,7 +297,7 @@ types:
       description: The requester of the request
       type: user_output
       required: false
-      example: '{"name": "John", "id": 7, "is_vipuser": true}'
+      example: '{"name": "John", "id": "7", "is_vipuser": true}'
       order: 2
     description:
       title: Description
@@ -310,91 +310,91 @@ types:
       description: Type of this request
       type: request_type
       required: false
-      example: '{"id": 1, "name" "Incident"}'
+      example: '{"id": "1", "name" "Incident"}'
     impact:
       title: Impact
       description: Impact of this request
       type: impact
       required: false
-      example: '{"id": 1, "name": "High"}'
+      example: '{"id": "1", "name": "High"}'
     status:
       title: Status
       description: Indicates the current status of this request
       type: status
       required: false
-      example: '{"name": "Open", "id": 2}'
+      example: '{"name": "Open", "id": "2"}'
     mode:
       title: Mode
       description: The mode in which this request is created
       type: mode
       required: false
-      example: '{"name": "Web Form", "id": 4}'
+      example: '{"name": "Web Form", "id": "4"}'
     level:
       title: Level
       description: Level of the request
       type: level
       required: false
-      example: '{"name": "Tier 4", "id": 4}'
+      example: '{"name": "Tier 4", "id": "4"}'
     urgency:
       title: Urgency
       description: Urgency of the request
       type: urgency
       required: false
-      example: '{"name": "Low", "id": 1}'
+      example: '{"name": "Low", "id": "1"}'
     priority:
       title: Priority
       description: Priority of the request
       type: priority
       required: false
-      example: '{"name": "High", "id": 4}'
+      example: '{"name": "High", "id": "4"}'
     service_category:
       title: Service Category
       description: Service category to which this request belongs
       type: service_category
       required: false
-      example: '{"name": "User Management", "id": 8}'
+      example: '{"name": "User Management", "id": "8"}'
     assets:
       title: Assets
       description: Array of asset objects associated with this request
       type: "[]asset"
       required: false
-      example: [{"name": "Software", "id": 4541563, "barcode": "test-barcode"}]
+      example: [{"name": "Software", "id": "4541563", "barcode": "test-barcode"}]
     site:
       title: Site
       description: Denotes the site to which this request belongs
       type: site
       required: false
-      example: '{"name": "Custom Site", "id": 71}'
+      example: '{"name": "Custom Site", "id": "71"}'
     group:
       title: Group
       description: The group to which the request belongs
       type: group
       required: false
-      example: '{"name": "Network", "id": 2}'
+      example: '{"name": "Network", "id": "2"}'
     technician:
       title: Technician
       description: The technician that was assigned to the request
       type: technician
       required: false
-      example: '{"name": "John", "id": 71}'
+      example: '{"name": "John", "id": "71"}'
     category:
       title: Category
       description: Category to which this request belongs
       type: category
       required: false
-      example: '{"name": "Operating System", "id": 8}'
+      example: '{"name": "Operating System", "id": "8"}'
     subcategory:
       title: Subcategory
       description: Subcategory to which this request belongs
       type: subcategory
       required: false
-      example: '{"name": "Mac OS X", "id": 24}'
+      example: '{"name": "Mac OS X", "id": "24"}'
     item:
       title: Item
       description: Item of this request
       type: item
       required: false
-      example: '{"name": "Install", "id": 1}'
+      example: '{"name": "Install", "id": "1"}'
     email_ids_to_notify:
       title: Email IDs to Notify
       description: Array of Email ids, which needs to be notified about the happenings of this request
@@ -442,7 +442,7 @@ types:
       description: Creator of the request
       type: user_output
       required: false
-      example: '{"name": "John", "id": 71}'
+      example: '{"name": "John", "id": "71"}'
     due_by_time:
       title: Due By Time
       description: The due date of the request
@@ -453,9 +453,9 @@ types:
     id:
       title: ID
       description: Closure Code ID
-      type: integer
+      type: string
       required: false
-      example: 1
+      example: "1"
     name:
       title: Name
       description: Closure Code name
@@ -466,9 +466,9 @@ types:
     id:
       title: ID
       description: Id of the last editor
-      type: integer
+      type: string
       required: false
-      example: 3
+      example: "3"
     name:
       title: Name
       description: Name of the last editor
@@ -479,9 +479,9 @@ types:
     id:
       title: ID
       description: Id of the creator
-      type: integer
+      type: string
       required: false
-      example: 3
+      example: "3"
     name:
       title: Name
       description: Name of the creator
@@ -492,9 +492,9 @@ types:
     id:
       title: ID
       description: Note ID
-      type: integer
+      type: string
       required: false
-      example: 543
+      example: "543"
     show_to_requester:
       title: Show to Requester
       description: Whether to show the note to requester or not
@@ -518,13 +518,13 @@ types:
       description: Last updated by details
       type: last_updated_by
       required: false
-      example: '{"name": "John", "id": 71}'
+      example: '{"name": "John", "id": "71"}'
     added_by:
       title: Added By
       description: Added by details
       type: added_by
       required: false
-      example: '{"name": "John", "id": 71}'
+      example: '{"name": "John", "id": "71"}'
 
 connection:
   connection_type:
@@ -656,9 +656,9 @@ actions:
       request_id:
         title: Request ID
         description: The request id that should be returned
-        type: integer
+        type: string
         required: true
-        example: 54
+        example: "54"
     output:
       request:
         title: Request
@@ -812,9 +812,9 @@ actions:
       request_id:
         title: Request ID
         description:  The id of newly created request
-        type: integer
+        type: string
         required: false
-        example: 55
+        example: "55"
       status:
         title: Status
         description: Status of the request
@@ -834,9 +834,9 @@ actions:
       request_id:
         title: Request ID
         description: The ID of a request to edit
-        type: integer
+        type: string
         required: true
-        example: 54
+        example: "54"
         order: 1
       subject:
         title: Subject
@@ -968,9 +968,9 @@ actions:
       request_id:
         title: Request ID
         description: The id of edited request
-        type: integer
+        type: string
         required: false
-        example: 54
+        example: "54"
       status:
         title: Status
         description: Status of the request
@@ -990,16 +990,16 @@ actions:
      request_id:
        title: Request ID
        description: The ID of a request to delete
-       type: integer
+       type: string
        required: true
-       example: 54
+       example: "54"
     output:
       request_id:
         title: Request ID
         description: The id of deleted request
-        type: integer
+        type: string
         required: false
-        example: 54
+        example: "54"
       status:
         title: Status
         description: Status of the request
@@ -1019,9 +1019,9 @@ actions:
       request_id:
         title: Request ID
         description: The request id that should be closed
-        type: integer
+        type: string
         required: true
-        example: 54
+        example: "54"
         order: 1
       closure_comments:
         title: Closure Comments
@@ -1054,9 +1054,9 @@ actions:
       request_id:
         title: Request ID
         description: The id of the closed request
-        type: integer
+        type: string
         required: false
-        example: 54
+        example: "54"
       status:
         title: Status
         description: Status of the request
@@ -1076,9 +1076,9 @@ actions:
       request_id:
         title: Request ID
         description: The request id that should be assigned
-        type: integer
+        type: string
         required: true
-        example: 27
+        example: "27"
       group:
         title: Group
         description: The group to which the request belongs
@@ -1095,9 +1095,9 @@ actions:
       request_id:
         title: Request ID
         description: The id of the assigned request
-        type: integer
+        type: string
         required: false
-        example: 27
+        example: "27"
       status:
         title: Status
         description: Status of the request
@@ -1117,16 +1117,16 @@ actions:
       request_id:
         title: Request ID
         description: The request id that should be assigned
-        type: integer
+        type: string
         required: true
-        example: 27
+        example: "27"
     output:
       request_id:
         title: Request ID
         description: The id of the picked up request
-        type: integer
+        type: string
         required: false
-        example: 27
+        example: "27"
       status:
         title: Status
         description: Status of the request
@@ -1146,9 +1146,9 @@ actions:
       request_id:
         title: Request ID
         description: The id of the request
-        type: integer
+        type: string
         required: true
-        example: 27
+        example: "27"
       content:
         title: Content
         description: Resolution content
@@ -1165,9 +1165,9 @@ actions:
       request_id:
         title: Request ID
         description: The id of the request
-        type: integer
+        type: string
         required: false
-        example: 27
+        example: "27"
       status:
         title: Status
         description: Status of the request
@@ -1187,16 +1187,16 @@ actions:
       request_id:
         title: Request ID
         description: The id of the request
-        type: integer
+        type: string
         required: true
-        example: 27
+        example: "27"
     output:
       request_id:
         title: Request ID
         description: The id of the request
-        type: integer
+        type: string
         required: false
-        example: 27
+        example: "27"
       content:
         title: Content
         description: Resolution content
@@ -1222,9 +1222,9 @@ actions:
       request_id:
         title: Request ID
         description: The id of the request
-        type: integer
+        type: string
         required: true
-        example: 55
+        example: "55"
       description:
         title: Description
         description: Note description (the content of the note) in HTML format
@@ -1259,15 +1259,15 @@ actions:
       request_id:
         title: Request ID
         description: The id of the request
-        type: integer
+        type: string
         required: false
-        example: 55
+        example: "55"
       request_note_id:
         title: Request Note ID
         description: The id of the request note
-        type: integer
+        type: string
         required: false
-        example: 209
+        example: "209"
       status:
         title: Status
         description: Status of the request
@@ -1287,15 +1287,15 @@ actions:
       request_id:
         title: Request ID
         description: The id of the request
-        type: integer
+        type: string
         required: true
-        example: 55
+        example: "55"
       request_note_id:
         title: Request Note ID
         description: The id of the request note
-        type: integer
+        type: string
         required: true
-        example: 209
+        example: "209"
       description:
         title: Description
         description: Note description in HTML format
@@ -1330,9 +1330,9 @@ actions:
       request_id:
         title: Request ID
         description: The id of the request
-        type: integer
+        type: string
         required: false
-        example: 55
+        example: "55"
       status:
         title: Status
         description: Status of the request
@@ -1352,22 +1352,22 @@ actions:
       request_id:
         title: Request ID
         description: The id of the request
-        type: integer
+        type: string
         required: true
-        example: 55
+        example: "55"
       request_note_id:
         title: Request Note ID
         description: The id of the request note to delete
-        type: integer
+        type: string
         required: true
-        example: 208
+        example: "208"
     output:
       request_id:
         title: Request ID
         description: The id of the request
-        type: integer
+        type: string
         required: false
-        example: 55
+        example: "55"
       status:
         title: Status
         description: Status of the request
@@ -1387,16 +1387,16 @@ actions:
       request_id:
         title: Request ID
         description: The id of the request
-        type: integer
+        type: string
         required: true
-        example: 55
+        example: "55"
     output:
       request_id:
         title: Request ID
         description: The id of the request
-        type: integer
+        type: string
         required: true
-        example: 55
+        example: "55"
       notes:
         title: Notes
         description:  Notes assigned to the request

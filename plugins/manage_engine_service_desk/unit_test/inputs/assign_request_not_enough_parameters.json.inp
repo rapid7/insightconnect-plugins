@@ -1,7 +1,5 @@
 {
-  "group": {
-  },
-  "request_id": 400,
-  "technician": {
-  }
+  "group": {},
+  "request_id": "400",
+  "technician": {}
 }

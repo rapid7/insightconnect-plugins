@@ -376,7 +376,6 @@ class ManageEngineServiceDeskAPI:
         try:
             response = self.make_request(method=method, url=url, params=params, data=data, headers=headers)
             response_json = response.json()
-            response_json = helpers.map_ids_to_integer(response_json)
             return response_json
         except json.decoder.JSONDecodeError as e:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)

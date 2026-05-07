@@ -155,7 +155,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|request_id|integer|False|The id of newly created request|55|
+|request_id|string|False|The id of newly created request|55|
 |status|string|True|Status of the request|success|
 |status_code|integer|False|Status code of the request|2000|
   
@@ -181,7 +181,7 @@ This action is used to add a note to an existing request
 |description|string|None|True|Note description (the content of the note) in HTML format|None|Additional information required...|None|None|
 |mark_first_response|boolean|None|False|Whether to set the responded date of the request/ticket|None|True|None|None|
 |notify_technician|boolean|None|False|Whether to notify the technician or not|None|True|None|None|
-|request_id|integer|None|True|The id of the request|None|55|None|None|
+|request_id|string|None|True|The id of the request|None|55|None|None|
 |show_to_requester|boolean|None|False|Whether to show the note to requester or not|None|False|None|None|
   
 Example input:
@@ -201,8 +201,8 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|request_id|integer|False|The id of the request|55|
-|request_note_id|integer|False|The id of the request note|209|
+|request_id|string|False|The id of the request|55|
+|request_note_id|string|False|The id of the request note|209|
 |status|string|True|Status of the request|success|
 |status_code|integer|False|Status code of the request|2000|
   
@@ -227,7 +227,7 @@ This action is used to add or update the resolution of a request
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |add_to_linked_requests|boolean|None|True|Whether the resolution should be added to linked requests|None|True|None|None|
 |content|string|None|True|Resolution content|None|Sample resolution|None|None|
-|request_id|integer|None|True|The id of the request|None|27|None|None|
+|request_id|string|None|True|The id of the request|None|27|None|None|
   
 Example input:
 
@@ -243,7 +243,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|request_id|integer|False|The id of the request|27|
+|request_id|string|False|The id of the request|27|
 |status|string|True|Status of the request|success|
 |status_code|integer|False|Status code of the request|2000|
   
@@ -267,7 +267,7 @@ Group or Technician. In every parameter containing `ID` and `Name` fields please
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |group|group|None|False|The group to which the request belongs|None|{"name": "Network"}|None|None|
-|request_id|integer|None|True|The request id that should be assigned|None|27|None|None|
+|request_id|string|None|True|The request id that should be assigned|None|27|None|None|
 |technician|technician|None|False|The technician that was assigned to the request|None|{"name": "John"}|None|None|
   
 Example input:
@@ -288,7 +288,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|request_id|integer|False|The id of the assigned request|27|
+|request_id|string|False|The id of the assigned request|27|
 |status|string|True|Status of the request|success|
 |status_code|integer|False|Status code of the request|2000|
   
@@ -312,7 +312,7 @@ This action is used to close the given request
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |closure_code|closure_code|None|False|Closure code to add to the request|None|{"name": "Success"}|None|None|
 |closure_comments|string|None|False|The comments that should be added when closing the request|None|Reset the password solved the issue|None|None|
-|request_id|integer|None|True|The request id that should be closed|None|54|None|None|
+|request_id|string|None|True|The request id that should be closed|None|54|None|None|
 |requester_ack_comments|string|None|False|The requester comments|None|Mail fetching is up and running now|None|None|
 |requester_ack_resolution|boolean|None|False|The requester resolution|None|True|None|None|
   
@@ -334,7 +334,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|request_id|integer|False|The id of the closed request|54|
+|request_id|string|False|The id of the closed request|54|
 |status|string|True|Status of the request|success|
 |status_code|integer|False|Status code of the request|2000|
   
@@ -356,7 +356,7 @@ This action is used to delete the given request (move it to the trash)
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|request_id|integer|None|True|The ID of a request to delete|None|54|None|None|
+|request_id|string|None|True|The ID of a request to delete|None|54|None|None|
   
 Example input:
 
@@ -370,7 +370,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|request_id|integer|False|The id of deleted request|54|
+|request_id|string|False|The id of deleted request|54|
 |status|string|True|Status of the request|success|
 |status_code|integer|False|Status code of the request|2000|
   
@@ -392,8 +392,8 @@ This action is used to delete a given request note on a specific request
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|request_id|integer|None|True|The id of the request|None|55|None|None|
-|request_note_id|integer|None|True|The id of the request note to delete|None|208|None|None|
+|request_id|string|None|True|The id of the request|None|55|None|None|
+|request_note_id|string|None|True|The id of the request note to delete|None|208|None|None|
   
 Example input:
 
@@ -408,7 +408,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|request_id|integer|False|The id of the request|55|
+|request_id|string|False|The id of the request|55|
 |status|string|True|Status of the request|success|
 |status_code|integer|False|Status code of the request|2000|
   
@@ -442,7 +442,7 @@ parameter containing `ID` and `Name` fields please provide only one or the other
 |level|level|None|False|Level of the request|None|{"name": "Tier 4"}|None|None|
 |mode|mode|None|False|The mode in which this request is created|None|{"name": "Web Form"}|None|None|
 |priority|priority|None|False|Priority of the request|None|{"name": "High"}|None|None|
-|request_id|integer|None|True|The ID of a request to edit|None|54|None|None|
+|request_id|string|None|True|The ID of a request to edit|None|54|None|None|
 |request_type|request_type|None|False|Type of this request|None|{"name" "Incident"}|None|None|
 |requester|user_input|None|False|The requester of the request|None|{"name": "John"}|None|None|
 |service_category|service_category|None|False|Service category to which this request belongs|None|{"name": "User Management"}|None|None|
@@ -520,7 +520,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|request_id|integer|False|The id of edited request|54|
+|request_id|string|False|The id of edited request|54|
 |status|string|True|Status of the request|success|
 |status_code|integer|False|Status code of the request|2000|
   
@@ -547,8 +547,8 @@ required
 |description|string|None|False|Note description in HTML format|None|Need help|None|None|
 |mark_first_response|boolean|None|False|Whether to set the responded date of the request/ticket|None|True|None|None|
 |notify_technician|boolean|None|False|Whether to notify the technician or not|None|True|None|None|
-|request_id|integer|None|True|The id of the request|None|55|None|None|
-|request_note_id|integer|None|True|The id of the request note|None|209|None|None|
+|request_id|string|None|True|The id of the request|None|55|None|None|
+|request_note_id|string|None|True|The id of the request note|None|209|None|None|
 |show_to_requester|boolean|None|False|Whether to show the note to requester or not|None|False|None|None|
   
 Example input:
@@ -569,7 +569,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|request_id|integer|False|The id of the request|55|
+|request_id|string|False|The id of the request|55|
 |status|string|True|Status of the request|success|
 |status_code|integer|False|Status code of the request|2000|
   
@@ -643,7 +643,7 @@ This action is used to get the list of all notes associated with the given reque
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|request_id|integer|None|True|The id of the request|None|55|None|None|
+|request_id|string|None|True|The id of the request|None|55|None|None|
   
 Example input:
 
@@ -658,7 +658,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |notes|[]note|False|Notes assigned to the request|[{"note_id": "312", "added_time": "Jul 8, 2022 02:02 AM", "added_by": {"name": "John"}}]|
-|request_id|integer|True|The id of the request|55|
+|request_id|string|True|The id of the request|55|
 |status|string|True|Status of the request|success|
 |status_code|integer|False|Status code of the request|2000|
   
@@ -689,7 +689,7 @@ This action is used to view the details of a request given the request ID
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|request_id|integer|None|True|The request id that should be returned|None|54|None|None|
+|request_id|string|None|True|The request id that should be returned|None|54|None|None|
   
 Example input:
 
@@ -730,7 +730,7 @@ This action is used to get the resolution of the given request
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|request_id|integer|None|True|The id of the request|None|27|None|None|
+|request_id|string|None|True|The id of the request|None|27|None|None|
   
 Example input:
 
@@ -745,7 +745,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |content|string|False|Resolution content|Sample resolution|
-|request_id|integer|False|The id of the request|27|
+|request_id|string|False|The id of the request|27|
 |status|string|True|Status of the request|success|
 |status_code|integer|False|Status code of the request|2000|
   
@@ -768,7 +768,7 @@ This action is used to pick up (assign) a given request in your name as a techni
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|request_id|integer|None|True|The request id that should be assigned|None|27|None|None|
+|request_id|string|None|True|The request id that should be assigned|None|27|None|None|
   
 Example input:
 
@@ -782,7 +782,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|request_id|integer|False|The id of the picked up request|27|
+|request_id|string|False|The id of the picked up request|27|
 |status|string|True|Status of the request|success|
 |status_code|integer|False|Status code of the request|2000|
   
@@ -808,63 +808,63 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|ID|integer|None|False|ID of the request type|1|
+|ID|string|None|False|ID of the request type|1|
 |Name|string|None|False|Name of the request type|Incident|
   
 **impact**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|ID|integer|None|False|ID of the impact|1|
+|ID|string|None|False|ID of the impact|1|
 |Name|string|None|False|Name impact|High|
   
 **status**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|ID|integer|None|False|ID of the current status|2|
+|ID|string|None|False|ID of the current status|2|
 |Name|string|None|False|Name of the current status|Open|
   
 **mode**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|ID|integer|None|False|Id of the mode|2|
+|ID|string|None|False|Id of the mode|2|
 |Name|string|None|False|Name of the mode|Web Form|
   
 **level**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|ID|integer|None|False|Id of the level|4|
+|ID|string|None|False|Id of the level|4|
 |Name|string|None|False|Name of the level|Tier 4|
   
 **urgency**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|ID|integer|None|False|Id of the urgency|2|
+|ID|string|None|False|Id of the urgency|2|
 |Name|string|None|False|Name of the urgency|High|
   
 **priority**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|ID|integer|None|False|ID of the priority|4|
+|ID|string|None|False|ID of the priority|4|
 |Name|string|None|False|Name of the priority|High|
   
 **service_category**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|ID|integer|None|False|ID of the service category|8|
+|ID|string|None|False|ID of the service category|8|
 |Name|string|None|False|Name of the service category|User Management|
   
 **user_output**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|ID|integer|None|False|User ID|71|
+|ID|string|None|False|User ID|71|
 |Is Vipuser|boolean|None|False|Whether the user is a vip user or not|False|
 |Name|string|None|False|User name|John|
   
@@ -872,7 +872,7 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|ID|integer|None|False|User ID|71|
+|ID|string|None|False|User ID|71|
 |Name|string|None|False|User name|John|
   
 **asset**
@@ -880,113 +880,113 @@ Example output:
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Barcode|string|None|False|Barcode of the asset|test-barcode|
-|ID|integer|None|False|Id of the asset|4541563|
+|ID|string|None|False|Id of the asset|4541563|
 |Name|string|None|False|Name of the asset|Software|
   
 **site**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|ID|integer|None|False|Site's id|2235435|
+|ID|string|None|False|Site's id|2235435|
 |Name|string|None|False|Site's name|Custom Site|
   
 **group**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|ID|integer|None|False|Group's id|2|
+|ID|string|None|False|Group's id|2|
 |Name|string|None|False|Group's name|Network|
   
 **technician**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|ID|integer|None|False|Technician ID|3|
+|ID|string|None|False|Technician ID|3|
 |Name|string|None|False|Technician Name|Samuel|
   
 **category**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|ID|integer|None|False|ID of the category|8|
+|ID|string|None|False|ID of the category|8|
 |Name|string|None|False|Name of the category|Operating System|
   
 **subcategory**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|ID|integer|None|False|ID of the subcategory|24|
+|ID|string|None|False|ID of the subcategory|24|
 |Name|string|None|False|Name of the subcategory|Mac OS X|
   
 **item**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|ID|integer|None|False|ID of the item|1|
+|ID|string|None|False|ID of the item|1|
 |Name|string|None|False|Name of the item|Install|
   
 **request_output**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Assets|[]asset|None|False|Array of asset objects associated with this request|[{"name": "Software", "id": 4541563, "barcode": "test-barcode"}]|
-|Category|category|None|False|Category to which this request belongs|{"name": "Operating System", "id": 8}|
-|Created By|user_output|None|False|Creator of the request|{"name": "John", "id": 71}|
+|Assets|[]asset|None|False|Array of asset objects associated with this request|[{"name": "Software", "id": "4541563", "barcode": "test-barcode"}]|
+|Category|category|None|False|Category to which this request belongs|{"name": "Operating System", "id": "8"}|
+|Created By|user_output|None|False|Creator of the request|{"name": "John", "id": "71"}|
 |Created Time|date|None|False|Time the request was created|Jul 9, 2022 04:02 AM|
 |Description|string|None|False|Description of this request|Example description|
 |Due By Time|date|None|False|The due date of the request|Jul 13, 2022 04:02 AM|
 |Email IDs to Notify|[]string|None|False|Array of Email ids, which needs to be notified about the happenings of this request|["user@example.com"]|
-|Group|group|None|False|The group to which the request belongs|{"name": "Network", "id": 2}|
+|Group|group|None|False|The group to which the request belongs|{"name": "Network", "id": "2"}|
 |Has Notes|boolean|None|False|Indicates whether the request has notes|True|
-|ID|integer|None|False|Id of the request|92|
-|Impact|impact|None|False|Impact of this request|{"id": 1, "name": "High"}|
+|ID|string|None|False|Id of the request|92|
+|Impact|impact|None|False|Impact of this request|{"id": "1", "name": "High"}|
 |Is Fcr|boolean|None|False|Boolean value indicating if the request has been marked as First Call Resolution|True|
 |Is Overdue|boolean|None|False|Indicates if the request is overdue|True|
 |Is Service Request|boolean|None|False|Indicates whether the request is a service request or not|True|
-|Item|item|None|False|Item of this request|{"name": "Install", "id": 1}|
-|Level|level|None|False|Level of the request|{"name": "Tier 4", "id": 4}|
-|Mode|mode|None|False|The mode in which this request is created|{"name": "Web Form", "id": 4}|
-|Priority|priority|None|False|Priority of the request|{"name": "High", "id": 4}|
-|Request Type|request_type|None|False|Type of this request|{"id": 1, "name" "Incident"}|
-|Requester|user_output|None|False|The requester of the request|{"name": "John", "id": 7, "is_vipuser": true}|
-|Service Category|service_category|None|False|Service category to which this request belongs|{"name": "User Management", "id": 8}|
-|Site|site|None|False|Denotes the site to which this request belongs|{"name": "Custom Site", "id": 71}|
-|Status|status|None|False|Indicates the current status of this request|{"name": "Open", "id": 2}|
-|Subcategory|subcategory|None|False|Subcategory to which this request belongs|{"name": "Mac OS X", "id": 24}|
+|Item|item|None|False|Item of this request|{"name": "Install", "id": "1"}|
+|Level|level|None|False|Level of the request|{"name": "Tier 4", "id": "4"}|
+|Mode|mode|None|False|The mode in which this request is created|{"name": "Web Form", "id": "4"}|
+|Priority|priority|None|False|Priority of the request|{"name": "High", "id": "4"}|
+|Request Type|request_type|None|False|Type of this request|{"id": "1", "name" "Incident"}|
+|Requester|user_output|None|False|The requester of the request|{"name": "John", "id": "7", "is_vipuser": true}|
+|Service Category|service_category|None|False|Service category to which this request belongs|{"name": "User Management", "id": "8"}|
+|Site|site|None|False|Denotes the site to which this request belongs|{"name": "Custom Site", "id": "71"}|
+|Status|status|None|False|Indicates the current status of this request|{"name": "Open", "id": "2"}|
+|Subcategory|subcategory|None|False|Subcategory to which this request belongs|{"name": "Mac OS X", "id": "24"}|
 |Subject|string|None|False|Subject of this request|Need a Monitor|
-|Technician|technician|None|False|The technician that was assigned to the request|{"name": "John", "id": 71}|
+|Technician|technician|None|False|The technician that was assigned to the request|{"name": "John", "id": "71"}|
 |Udf Fields|object|None|False|Holds udf fields values associated with the request|{"udf_sline_51":"abc test.com","udf_pick_52":"Tony Stark"}|
-|Urgency|urgency|None|False|Urgency of the request|{"name": "Low", "id": 1}|
+|Urgency|urgency|None|False|Urgency of the request|{"name": "Low", "id": "1"}|
   
 **closure_code**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|ID|integer|None|False|Closure Code ID|1|
+|ID|string|None|False|Closure Code ID|1|
 |Name|string|None|False|Closure Code name|Success|
   
 **last_updated_by**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|ID|integer|None|False|Id of the last editor|3|
+|ID|string|None|False|Id of the last editor|3|
 |Name|string|None|False|Name of the last editor|Samuel|
   
 **added_by**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|ID|integer|None|False|Id of the creator|3|
+|ID|string|None|False|Id of the creator|3|
 |Name|string|None|False|Name of the creator|Samuel|
   
 **note**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Added By|added_by|None|False|Added by details|{"name": "John", "id": 71}|
+|Added By|added_by|None|False|Added by details|{"name": "John", "id": "71"}|
 |Added Time|date|None|False|The time the request note was added|Jul 8, 2022 02:01 AM|
-|ID|integer|None|False|Note ID|543|
-|Last Updated By|last_updated_by|None|False|Last updated by details|{"name": "John", "id": 71}|
+|ID|string|None|False|Note ID|543|
+|Last Updated By|last_updated_by|None|False|Last updated by details|{"name": "John", "id": "71"}|
 |Last Updated Time|date|None|False|The time the request note was updated|Jul 9, 2022 04:02 AM|
 |Show to Requester|boolean|None|False|Whether to show the note to requester or not|False|
 
@@ -997,7 +997,7 @@ Example output:
 
 # Version History
 
-* 2.0.0 - Add cloud connection support using Zoho OAuth 2.0 | Connection now requires connection_type field (On-Prem or Cloud) | Cloud connections require client_id, client_secret, refresh_token, portal_name, and data_center fields | On-Prem connection fields sdp_base_url and api_key are now optional (required only when connection_type is On-Prem)
+* 2.0.0 - Add cloud connection support using Zoho OAuth 2.0 | All ID fields changed from integer to string to prevent precision loss with large Cloud IDs | Connection now requires connection_type field (On-Prem or Cloud) | Cloud connections require client_id, client_secret, refresh_token, portal_name, and data_center fields | On-Prem connection fields sdp_base_url and api_key are now optional (required only when connection_type is On-Prem)
 * 1.0.2 - Bumping requirements.txt | SDK bump to 6.1.4
 * 1.0.1 - Fix `int` conversion issue in `Get List Request` and `Get Request` actions
 * 1.0.0 - Initial plugin - Create actions: `Add Request`, `Add Request Note`, `Add Resolution`, `Assign Request`, `Close Request`, `Delete Request`, `Delete Request Note`, `Edit Request`, `Edit Request Note`, `Get List Request`, `Get List Request Notes`, `Get Request`, `Get Resolution`, `Pickup Request`

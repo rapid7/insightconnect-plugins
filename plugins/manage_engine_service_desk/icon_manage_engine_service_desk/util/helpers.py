@@ -27,23 +27,6 @@ def replace_status_code(response: dict) -> dict:
         return response
 
 
-def map_ids_to_integer(response: dict) -> dict:
-    if not isinstance(response, dict):
-        return response
-    mapped_response = response.copy()
-    for key, value in response.items():
-        if isinstance(value, dict):
-            mapped_response[key] = map_ids_to_integer(value)
-        elif isinstance(value, list):
-            mapped_response[key] = [map_ids_to_integer(element) for element in value]
-        elif key.endswith("id") and isinstance(value, str):
-            try:
-                mapped_response[key] = int(value)
-            except ValueError:
-                continue
-    return mapped_response
-
-
 def clean_dict(dictionary: dict) -> dict:
     cleaned_dict = dictionary.copy()
     for key, value in dictionary.items():
