@@ -1,13 +1,9 @@
-import sys
-import os
 from unittest import TestCase
 from unittest.mock import patch
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-sys.path.append(os.path.abspath("../"))
-
-from unit_test.util import Util
+from util import Util
 from parameterized import parameterized
 from icon_manage_engine_service_desk.actions.edit_request_note import EditRequestNote
 
@@ -46,6 +42,13 @@ class TestEditRequestNote(TestCase):
                 "Resource not found.",
                 "Please verify inputs and if the issue persists, contact support.",
                 Util.read_file_to_dict("expected/note_not_found.json.exp"),
+            ],
+            [
+                "not_enough_parameters",
+                Util.read_file_to_dict("inputs/edit_request_note_not_enough_parameters.json.inp"),
+                "Not enough input parameters were provided.",
+                "Please provide at least one input parameter except ids and try again. If the issue persists, please contact support.",
+                "",
             ],
         ]
     )

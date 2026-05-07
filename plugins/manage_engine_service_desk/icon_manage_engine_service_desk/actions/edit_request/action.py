@@ -3,7 +3,6 @@ import insightconnect_plugin_runtime
 from icon_manage_engine_service_desk.util.constants import Response, ResponseStatus, Request
 from .schema import EditRequestInput, EditRequestOutput, Input, Output, Component
 
-
 # Custom imports below
 
 
@@ -14,10 +13,12 @@ class EditRequest(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params: dict = None) -> dict:
-        request_parameters = params.copy()
-        request_parameters.pop(Input.REQUEST_ID)
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        request_id = params.get(Input.REQUEST_ID, "")
+        # END INPUT BINDING - DO NOT REMOVE
+        request_parameters = {key: value for key, value in params.items() if key != Input.REQUEST_ID}
         response_json = self.connection.api_client.edit_request(
-            request_id=params.get(Input.REQUEST_ID), request_parameters=request_parameters
+            request_id=request_id, request_parameters=request_parameters
         )
 
         return {
