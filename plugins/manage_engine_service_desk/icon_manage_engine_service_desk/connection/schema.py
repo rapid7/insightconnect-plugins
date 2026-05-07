@@ -5,6 +5,12 @@ import json
 
 class Input:
     API_KEY = "api_key"
+    CLIENT_ID = "client_id"
+    CLIENT_SECRET = "client_secret"
+    CONNECTION_TYPE = "connection_type"
+    DATA_CENTER = "data_center"
+    PORTAL_NAME = "portal_name"
+    REFRESH_TOKEN = "refresh_token"
     SDP_BASE_URL = "sdp_base_url"
     SSL_VERIFY = "ssl_verify"
 
@@ -18,27 +24,74 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "api_key": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "API Key",
-      "description": "Manage Engine Service Desk Technican's API key",
-      "order": 2
+      "description": "Technician API key for on-premises ServiceDesk Plus authentication. Required when Connection Type is On-Prem",
+      "order": 3
+    },
+    "client_id": {
+      "type": "string",
+      "title": "Client ID",
+      "description": "Zoho OAuth 2.0 client ID for cloud authentication. Required when Connection Type is Cloud",
+      "order": 5
+    },
+    "client_secret": {
+      "$ref": "#/definitions/credential_secret_key",
+      "title": "Client Secret",
+      "description": "Zoho OAuth 2.0 client secret for cloud authentication. Required when Connection Type is Cloud",
+      "order": 6
+    },
+    "connection_type": {
+      "type": "string",
+      "title": "Connection Type",
+      "description": "Whether to connect to an on-premises or cloud instance of ManageEngine ServiceDesk Plus",
+      "enum": [
+        "On-Prem",
+        "Cloud"
+      ],
+      "order": 1
+    },
+    "data_center": {
+      "type": "string",
+      "title": "Data Center",
+      "description": "Zoho data center region for the cloud instance. Required when Connection Type is Cloud",
+      "enum": [
+        "",
+        "United States",
+        "Europe",
+        "India",
+        "Australia",
+        "China",
+        "Japan"
+      ],
+      "order": 9
+    },
+    "portal_name": {
+      "type": "string",
+      "title": "Portal Name",
+      "description": "ManageEngine cloud portal name used in the API path. Required when Connection Type is Cloud",
+      "order": 8
+    },
+    "refresh_token": {
+      "$ref": "#/definitions/credential_secret_key",
+      "title": "Refresh Token",
+      "description": "Zoho OAuth 2.0 refresh token for cloud authentication. Required when Connection Type is Cloud",
+      "order": 7
     },
     "sdp_base_url": {
       "type": "string",
-      "title": "Sdp Base URL",
-      "description": "Service Desk Plus Base URL",
-      "order": 1
+      "title": "Service Desk Plus Base URL",
+      "description": "Base URL for the on-premises ServiceDesk Plus instance, e.g. http://me-sdeskplus.dev.example.com:8080. Required when Connection Type is On-Prem",
+      "order": 2
     },
     "ssl_verify": {
       "type": "boolean",
       "title": "SSL Verify",
-      "description": "SSL verify",
+      "description": "Enable SSL certificate verification. Applies to On-Prem connections only",
       "default": true,
-      "order": 3
+      "order": 4
     }
   },
   "required": [
-    "api_key",
-    "sdp_base_url",
-    "ssl_verify"
+    "connection_type"
   ],
   "definitions": {
     "credential_secret_key": {
