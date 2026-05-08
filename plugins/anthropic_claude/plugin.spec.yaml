@@ -1,0 +1,226 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: anthropic_claude
+title: Anthropic Claude
+description: Leverage Anthropic's Claude AI models to assist with security analysis, incident summarization, IOC analysis, and natural language processing tasks in SOC workflows
+version: 1.0.0
+connection_version: 1
+supported_versions: ["2025-05-07 Claude API v1"]
+vendor: rapid7_ew
+support: rapid7
+status: []
+cloud_ready: true
+sdk:
+  type: full
+  version: 6.5.0
+  user: nobody
+key_features:
+  - "Send prompts to Claude for security analysis and investigation assistance"
+  - "Analyze indicators of compromise with AI-powered context"
+  - "Summarize lengthy security alerts, logs, and reports"
+  - "Count tokens to manage API usage and costs"
+requirements:
+  - "Anthropic API key from https://console.anthropic.com"
+version_history:
+  - 1.0.0 - Initial plugin release
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/anthropic_claude
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.anthropic.com
+links:
+  - "[Anthropic](https://www.anthropic.com)"
+references:
+  - "[Claude API Docs](https://platform.claude.com/docs/en/home)"
+tags: [ai, analysis, summarization]
+hub_tags:
+  use_cases: [threat_detection_and_response, reporting_and_analytics]
+  keywords: [ai, claude, analysis, summarization, llm]
+  features: []
+
+connection:
+  api_key:
+    title: API Key
+    description: Anthropic API key
+    type: credential_secret_key
+    required: true
+    example: sk-ant-api03-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  model:
+    title: Model
+    description: Claude model to use for requests. If the specified model is unavailable or invalid, the plugin will fall back to the latest available Sonnet model
+    type: string
+    required: true
+    default: claude-sonnet-4-6
+    example: claude-sonnet-4-6
+    placeholder: "claude-sonnet-4-6"
+    tooltip: "Enter any valid Claude model ID from https://docs.anthropic.com/en/docs/about-claude/models. The plugin will fall back to claude-sonnet-4-6 if the specified model is unavailable."
+
+actions:
+  send_prompt:
+    title: Send Prompt
+    description: Send a message to Claude and receive a response. Use this for freeform security analysis, investigation assistance, or any natural language task
+    input:
+      prompt:
+        title: Prompt
+        description: The message to send to Claude
+        type: string
+        required: true
+        example: "Analyze this suspicious email header and identify potential indicators of phishing"
+        placeholder: "Enter your prompt for Claude..."
+      system_prompt:
+        title: System Prompt
+        description: Optional system prompt to set context for Claude's response
+        type: string
+        required: false
+        example: "You are a senior SOC analyst specializing in phishing detection"
+        placeholder: "You are a security analyst..."
+        tooltip: "Sets the persona and context for Claude. Use this to focus responses on security analysis"
+      max_tokens:
+        title: Max Tokens
+        description: Maximum number of tokens to generate in the response
+        type: integer
+        required: false
+        default: 4096
+        example: 4096
+    output:
+      response:
+        title: Response
+        description: Claude's response text
+        type: string
+        required: true
+        example: "Based on the email headers provided, I've identified several indicators of phishing."
+      model:
+        title: Model
+        description: The model used for the response
+        type: string
+        required: true
+        example: "claude-sonnet-4-6"
+      usage:
+        title: Usage
+        description: Token usage information
+        type: object
+        required: false
+        example: {"input_tokens": 42, "output_tokens": 87}
+
+  analyze_iocs:
+    title: Analyze IOCs
+    description: Submit indicators of compromise to Claude for AI-powered analysis including context, risk assessment, and recommended actions
+    input:
+      indicators:
+        title: Indicators
+        description: List of indicators of compromise to analyze (IPs, domains, hashes, URLs, email addresses)
+        type: "[]string"
+        required: true
+        example: ["192.168.1.100", "evil-domain.com", "44d88612fea8a8f36de82e1278abb02f"]
+      context:
+        title: Context
+        description: Additional context about where these IOCs were observed
+        type: string
+        required: false
+        example: "Found in email attachment from unknown sender targeting finance department"
+        placeholder: "Describe where these IOCs were found..."
+        tooltip: "Providing context helps Claude give more relevant analysis"
+      max_tokens:
+        title: Max Tokens
+        description: Maximum number of tokens to generate in the response
+        type: integer
+        required: false
+        default: 4096
+        example: 4096
+    output:
+      analysis:
+        title: Analysis
+        description: Claude's analysis of the provided IOCs
+        type: string
+        required: true
+        example: "IOC Analysis: 192.168.1.100 is a private IP address. evil-domain.com is suspicious."
+      model:
+        title: Model
+        description: The model used for the analysis
+        type: string
+        required: true
+        example: "claude-sonnet-4-6"
+      usage:
+        title: Usage
+        description: Token usage information
+        type: object
+        required: false
+        example: {"input_tokens": 156, "output_tokens": 203}
+
+  summarize_text:
+    title: Summarize Text
+    description: Summarize lengthy security content such as alerts, incident reports, threat intelligence, or log data into concise actionable summaries
+    input:
+      text:
+        title: Text
+        description: The text content to summarize
+        type: string
+        required: true
+        example: "Multiple failed login attempts detected from IP 10.0.0.5 targeting user accounts..."
+        placeholder: "Paste the text to summarize..."
+      focus:
+        title: Focus
+        description: What aspect to focus the summary on
+        type: string
+        required: false
+        example: "key findings and recommended actions"
+        placeholder: "e.g., key findings, timeline, affected systems..."
+        tooltip: "Guides Claude to emphasize specific aspects in the summary"
+        enum:
+          - key findings and recommended actions
+          - timeline of events
+          - affected systems and users
+          - indicators of compromise
+          - executive summary
+          - ""
+      max_tokens:
+        title: Max Tokens
+        description: Maximum number of tokens to generate in the response
+        type: integer
+        required: false
+        default: 2048
+        example: 2048
+    output:
+      summary:
+        title: Summary
+        description: The summarized text
+        type: string
+        required: true
+        example: "Key Findings: Multiple failed login attempts from IP 10.0.0.5 targeting 15 user accounts."
+      model:
+        title: Model
+        description: The model used for the summary
+        type: string
+        required: true
+        example: "claude-sonnet-4-6"
+      usage:
+        title: Usage
+        description: Token usage information
+        type: object
+        required: false
+        example: {"input_tokens": 89, "output_tokens": 112}
+
+  count_tokens:
+    title: Count Tokens
+    description: Count the number of tokens in a message before sending it to Claude. Useful for managing API costs and ensuring messages fit within model limits
+    input:
+      prompt:
+        title: Prompt
+        description: The message content to count tokens for
+        type: string
+        required: true
+        example: "Analyze this log file for suspicious activity..."
+        placeholder: "Enter the text to count tokens for..."
+      system_prompt:
+        title: System Prompt
+        description: Optional system prompt to include in the token count
+        type: string
+        required: false
+        example: "You are a security analyst"
+    output:
+      input_tokens:
+        title: Input Tokens
+        description: The number of input tokens in the message
+        type: integer
+        required: true
+        example: 18
