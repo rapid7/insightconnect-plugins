@@ -54,7 +54,7 @@ class AddRequestNoteInput(insightconnect_plugin_runtime.Input):
       "order": 4
     },
     "request_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Request ID",
       "description": "The id of the request",
       "order": 1
@@ -85,13 +85,13 @@ class AddRequestNoteOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "request_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Request ID",
       "description": "The id of the request",
       "order": 1
     },
     "request_note_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Request Note ID",
       "description": "The id of the request note",
       "order": 2

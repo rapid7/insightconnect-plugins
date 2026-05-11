@@ -30,7 +30,7 @@ class GetListRequestNotes(insightconnect_plugin_runtime.Action):
             updated_notes.append(clean_note)
         return clean(
             {
-                Output.REQUEST_ID: request_id,
+                Output.REQUEST_ID: str(request_id),
                 Output.NOTES: updated_notes,
                 Output.STATUS: response_json.get(Response.RESPONSE_STATUS, [{}])[0].get(ResponseStatus.STATUS),
                 Output.STATUS_CODE: response_json.get(Response.RESPONSE_STATUS, [{}])[0].get(

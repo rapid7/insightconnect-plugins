@@ -25,13 +25,13 @@ class DeleteRequestNoteInput(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "request_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Request ID",
       "description": "The id of the request",
       "order": 1
     },
     "request_note_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Request Note ID",
       "description": "The id of the request note to delete",
       "order": 2
@@ -56,7 +56,7 @@ class DeleteRequestNoteOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "request_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Request ID",
       "description": "The id of the request",
       "order": 1
