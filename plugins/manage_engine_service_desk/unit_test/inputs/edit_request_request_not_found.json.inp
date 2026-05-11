@@ -1,5 +1,5 @@
 {
-  "request_id": 404,
+  "request_id": "404",
   "request_parameters": {
     "subject": "Edit request",
     "requester": {

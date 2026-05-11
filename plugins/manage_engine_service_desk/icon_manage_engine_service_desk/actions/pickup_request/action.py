@@ -19,7 +19,7 @@ class PickupRequest(insightconnect_plugin_runtime.Action):
         request_id = params.get(Input.REQUEST_ID)
         response_json = self.connection.api_client.pickup_request(request_id=request_id)
         return {
-            Output.REQUEST_ID: request_id,
+            Output.REQUEST_ID: str(request_id),
             Output.STATUS: response_json.get(Response.RESPONSE_STATUS, {}).get(ResponseStatus.STATUS),
             Output.STATUS_CODE: response_json.get(Response.RESPONSE_STATUS, {}).get(ResponseStatus.STATUS_CODE),
         }

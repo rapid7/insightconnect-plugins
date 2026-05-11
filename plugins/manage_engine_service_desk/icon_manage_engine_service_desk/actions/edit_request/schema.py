@@ -116,7 +116,7 @@ class EditRequestInput(insightconnect_plugin_runtime.Input):
       "order": 14
     },
     "request_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Request ID",
       "description": "The ID of a request to edit",
       "order": 1
@@ -185,7 +185,7 @@ class EditRequestInput(insightconnect_plugin_runtime.Input):
       "title": "asset",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "Id of the asset",
           "order": 1
@@ -209,7 +209,7 @@ class EditRequestInput(insightconnect_plugin_runtime.Input):
       "title": "user_input",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "User ID",
           "order": 1
@@ -227,7 +227,7 @@ class EditRequestInput(insightconnect_plugin_runtime.Input):
       "title": "request_type",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "ID of the request type",
           "order": 1
@@ -245,7 +245,7 @@ class EditRequestInput(insightconnect_plugin_runtime.Input):
       "title": "impact",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "ID of the impact",
           "order": 1
@@ -263,7 +263,7 @@ class EditRequestInput(insightconnect_plugin_runtime.Input):
       "title": "status",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "ID of the current status",
           "order": 1
@@ -281,7 +281,7 @@ class EditRequestInput(insightconnect_plugin_runtime.Input):
       "title": "mode",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "Id of the mode",
           "order": 1
@@ -299,7 +299,7 @@ class EditRequestInput(insightconnect_plugin_runtime.Input):
       "title": "level",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "Id of the level",
           "order": 1
@@ -317,7 +317,7 @@ class EditRequestInput(insightconnect_plugin_runtime.Input):
       "title": "urgency",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "Id of the urgency",
           "order": 1
@@ -335,7 +335,7 @@ class EditRequestInput(insightconnect_plugin_runtime.Input):
       "title": "priority",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "ID of the priority",
           "order": 1
@@ -353,7 +353,7 @@ class EditRequestInput(insightconnect_plugin_runtime.Input):
       "title": "service_category",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "ID of the service category",
           "order": 1
@@ -371,7 +371,7 @@ class EditRequestInput(insightconnect_plugin_runtime.Input):
       "title": "site",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "Site's id",
           "order": 1
@@ -389,7 +389,7 @@ class EditRequestInput(insightconnect_plugin_runtime.Input):
       "title": "group",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "Group's id",
           "order": 1
@@ -407,7 +407,7 @@ class EditRequestInput(insightconnect_plugin_runtime.Input):
       "title": "technician",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "Technician ID",
           "order": 1
@@ -425,7 +425,7 @@ class EditRequestInput(insightconnect_plugin_runtime.Input):
       "title": "category",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "ID of the category",
           "order": 1
@@ -443,7 +443,7 @@ class EditRequestInput(insightconnect_plugin_runtime.Input):
       "title": "subcategory",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "ID of the subcategory",
           "order": 1
@@ -461,7 +461,7 @@ class EditRequestInput(insightconnect_plugin_runtime.Input):
       "title": "item",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "ID of the item",
           "order": 1
@@ -489,7 +489,7 @@ class EditRequestOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "request_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Request ID",
       "description": "The id of edited request",
       "order": 1

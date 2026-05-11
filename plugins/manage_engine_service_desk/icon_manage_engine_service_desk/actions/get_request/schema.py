@@ -24,7 +24,7 @@ class GetRequestInput(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "request_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Request ID",
       "description": "The request id that should be returned",
       "order": 1
@@ -75,7 +75,7 @@ class GetRequestOutput(insightconnect_plugin_runtime.Output):
       "title": "request_output",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "Id of the request",
           "order": 1
@@ -259,7 +259,7 @@ class GetRequestOutput(insightconnect_plugin_runtime.Output):
       "title": "user_output",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "User ID",
           "order": 1
@@ -283,7 +283,7 @@ class GetRequestOutput(insightconnect_plugin_runtime.Output):
       "title": "request_type",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "ID of the request type",
           "order": 1
@@ -301,7 +301,7 @@ class GetRequestOutput(insightconnect_plugin_runtime.Output):
       "title": "impact",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "ID of the impact",
           "order": 1
@@ -319,7 +319,7 @@ class GetRequestOutput(insightconnect_plugin_runtime.Output):
       "title": "status",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "ID of the current status",
           "order": 1
@@ -337,7 +337,7 @@ class GetRequestOutput(insightconnect_plugin_runtime.Output):
       "title": "mode",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "Id of the mode",
           "order": 1
@@ -355,7 +355,7 @@ class GetRequestOutput(insightconnect_plugin_runtime.Output):
       "title": "level",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "Id of the level",
           "order": 1
@@ -373,7 +373,7 @@ class GetRequestOutput(insightconnect_plugin_runtime.Output):
       "title": "urgency",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "Id of the urgency",
           "order": 1
@@ -391,7 +391,7 @@ class GetRequestOutput(insightconnect_plugin_runtime.Output):
       "title": "priority",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "ID of the priority",
           "order": 1
@@ -409,7 +409,7 @@ class GetRequestOutput(insightconnect_plugin_runtime.Output):
       "title": "service_category",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "ID of the service category",
           "order": 1
@@ -427,7 +427,7 @@ class GetRequestOutput(insightconnect_plugin_runtime.Output):
       "title": "asset",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "Id of the asset",
           "order": 1
@@ -451,7 +451,7 @@ class GetRequestOutput(insightconnect_plugin_runtime.Output):
       "title": "site",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "Site's id",
           "order": 1
@@ -469,7 +469,7 @@ class GetRequestOutput(insightconnect_plugin_runtime.Output):
       "title": "group",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "Group's id",
           "order": 1
@@ -487,7 +487,7 @@ class GetRequestOutput(insightconnect_plugin_runtime.Output):
       "title": "technician",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "Technician ID",
           "order": 1
@@ -505,7 +505,7 @@ class GetRequestOutput(insightconnect_plugin_runtime.Output):
       "title": "category",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "ID of the category",
           "order": 1
@@ -523,7 +523,7 @@ class GetRequestOutput(insightconnect_plugin_runtime.Output):
       "title": "subcategory",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "ID of the subcategory",
           "order": 1
@@ -541,7 +541,7 @@ class GetRequestOutput(insightconnect_plugin_runtime.Output):
       "title": "item",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "ID of the item",
           "order": 1

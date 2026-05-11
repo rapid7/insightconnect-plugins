@@ -25,7 +25,7 @@ class GetResolutionInput(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "request_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Request ID",
       "description": "The id of the request",
       "order": 1
@@ -55,7 +55,7 @@ class GetResolutionOutput(insightconnect_plugin_runtime.Output):
       "order": 2
     },
     "request_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Request ID",
       "description": "The id of the request",
       "order": 1
