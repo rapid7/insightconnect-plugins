@@ -8,10 +8,14 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_manage_engine_service_desk.util import helpers
 from icon_manage_engine_service_desk.util.constants import (
+    API_REQUEST_INITIAL_BACKOFF_SECONDS,
+    API_REQUEST_MAX_RETRIES,
     CLOUD_API_BASE_URLS,
     DEFAULT_TOKEN_EXPIRY_SECONDS,
     OAUTH_REQUEST_TIMEOUT_SECONDS,
     TOKEN_EXPIRY_BUFFER_SECONDS,
+    TOKEN_FETCH_INITIAL_BACKOFF_SECONDS,
+    TOKEN_FETCH_MAX_RETRIES,
     ZOHO_OAUTH_BASE_URLS,
     ConnectionType,
     Request,
@@ -70,44 +74,63 @@ class ManageEngineServiceDeskAPI:
 
     def _get_access_token(self) -> str:
         """Fetch a new Zoho OAuth access token using the stored refresh token.
-        Caches the result and only re-fetches when the token has expired."""
+        Caches the result and only re-fetches when the token has expired.
+        Retries with exponential backoff on transient failures."""
         if self._access_token and time.time() < self._access_token_expiry:
             return self._access_token
 
         self._logger.info("Fetching new Zoho OAuth access token...")
-        try:
-            response = requests.post(
-                url=f"{self._zoho_oauth_base}/oauth/v2/token",
-                params={
-                    "grant_type": "refresh_token",
-                    "client_id": self._client_id,
-                    "client_secret": self._client_secret,
-                    "refresh_token": self._refresh_token,
-                },
-                verify=True,
-                timeout=OAUTH_REQUEST_TIMEOUT_SECONDS,
-            )
-            response.raise_for_status()
-            token_data = response.json()
-        except requests.exceptions.RequestException as error:
-            raise PluginException(
-                cause="Failed to obtain Zoho OAuth access token.",
-                assistance="Verify that the Client ID, Client Secret, Refresh Token, and Data Center are correct.",
-                data=error,
-            )
+        last_error = None
 
-        if "access_token" not in token_data:
-            raise PluginException(
-                cause="Zoho OAuth token response did not contain an access token.",
-                assistance="Verify that the Client ID, Client Secret, and Refresh Token are correct.",
-                data=token_data,
-            )
+        for attempt in range(TOKEN_FETCH_MAX_RETRIES):
+            try:
+                response = requests.post(
+                    url=f"{self._zoho_oauth_base}/oauth/v2/token",
+                    params={
+                        "grant_type": "refresh_token",
+                        "client_id": self._client_id,
+                        "client_secret": self._client_secret,
+                        "refresh_token": self._refresh_token,
+                    },
+                    verify=True,
+                    timeout=OAUTH_REQUEST_TIMEOUT_SECONDS,
+                )
+                response.raise_for_status()
+                token_data = response.json()
+            except requests.exceptions.RequestException as error:
+                last_error = error
+                if attempt < TOKEN_FETCH_MAX_RETRIES - 1:
+                    backoff = TOKEN_FETCH_INITIAL_BACKOFF_SECONDS * (2**attempt)
+                    self._logger.info(
+                        f"Token fetch attempt {attempt + 1} failed: {error}. Retrying in {backoff}s..."
+                    )
+                    time.sleep(backoff)
+                    continue
+                raise PluginException(
+                    cause="Failed to obtain Zoho OAuth access token.",
+                    assistance="Verify that the Client ID, Client Secret, Refresh Token, and Data Center are correct.",
+                    data=last_error,
+                )
 
-        self._access_token = token_data["access_token"]
-        # Zoho tokens typically expire in 3600 seconds; subtract a 5-minute buffer
-        expires_in = token_data.get("expires_in", DEFAULT_TOKEN_EXPIRY_SECONDS)
-        self._access_token_expiry = time.time() + expires_in - TOKEN_EXPIRY_BUFFER_SECONDS
-        return self._access_token
+            if "access_token" not in token_data:
+                raise PluginException(
+                    cause="Zoho OAuth token response did not contain an access token.",
+                    assistance="Verify that the Client ID, Client Secret, and Refresh Token are correct.",
+                    data=token_data,
+                )
+
+            self._access_token = token_data["access_token"]
+            # Zoho tokens typically expire in 3600 seconds; subtract a 5-minute buffer
+            expires_in = token_data.get("expires_in", DEFAULT_TOKEN_EXPIRY_SECONDS)
+            self._access_token_expiry = time.time() + expires_in - TOKEN_EXPIRY_BUFFER_SECONDS
+            return self._access_token
+
+        # Should not reach here, but safety net
+        raise PluginException(
+            cause="Failed to obtain Zoho OAuth access token after retries.",
+            assistance="Verify that the Client ID, Client Secret, Refresh Token, and Data Center are correct.",
+            data=last_error,
+        )
 
     def _get_headers(self) -> dict:
         if self._connection_type == ConnectionType.ON_PREM:
@@ -343,6 +366,12 @@ class ManageEngineServiceDeskAPI:
                 raise PluginException(
                     preset=PluginException.Preset.BAD_REQUEST, data=helpers.replace_status_code(response.json())
                 )
+            if response.status_code == 401:
+                raise PluginException(
+                    cause="Authentication failed.",
+                    assistance="The access token may have expired or been revoked. Please try again.",
+                    data=response.text,
+                )
             if response.status_code == 403:
                 raise PluginException(
                     cause="Operation is not allowed.",
@@ -354,6 +383,12 @@ class ManageEngineServiceDeskAPI:
                     cause="Resource not found.",
                     assistance="Please verify inputs and if the issue persists, contact support.",
                     data=helpers.replace_status_code(response.json()),
+                )
+            if response.status_code == 429:
+                raise PluginException(
+                    cause="API rate limit reached.",
+                    assistance="Too many requests. Please wait and try again.",
+                    data=response.text,
                 )
             if 400 <= response.status_code < 500:
                 raise PluginException(
@@ -367,15 +402,50 @@ class ManageEngineServiceDeskAPI:
                 return response
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
-        except requests.exceptions.HTTPError as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
+        except requests.exceptions.HTTPError as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     def make_json_request(
         self, method: str, url: str, headers: dict = None, params: dict = None, data: dict = None
     ) -> dict:
-        try:
-            response = self.make_request(method=method, url=url, params=params, data=data, headers=headers)
-            response_json = response.json()
-            return response_json
-        except json.decoder.JSONDecodeError as e:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
+        """Make an API request with retry logic for rate limits, server errors, and token expiry."""
+        last_error = None
+
+        for attempt in range(API_REQUEST_MAX_RETRIES):
+            try:
+                response = self.make_request(method=method, url=url, params=params, data=data, headers=headers)
+                return response.json()
+            except PluginException as error:
+                last_error = error
+                is_retryable = (
+                    "API rate limit reached" in str(error.cause)
+                    or error.preset == PluginException.Preset.SERVER_ERROR
+                )
+                is_auth_failure = "Authentication failed" in str(error.cause)
+
+                if is_auth_failure and self._connection_type != ConnectionType.ON_PREM:
+                    # Token may have been revoked — clear cache and retry once
+                    if attempt < 1:
+                        self._logger.info("Received 401, refreshing access token and retrying...")
+                        self._access_token = None
+                        self._access_token_expiry = 0.0
+                        headers = self._get_headers()
+                        continue
+                    raise
+
+                if is_retryable and attempt < API_REQUEST_MAX_RETRIES - 1:
+                    backoff = API_REQUEST_INITIAL_BACKOFF_SECONDS * (2**attempt)
+                    self._logger.info(
+                        f"Request attempt {attempt + 1} failed: {error.cause}. Retrying in {backoff}s..."
+                    )
+                    time.sleep(backoff)
+                    # Refresh headers in case token expired during backoff
+                    if self._connection_type != ConnectionType.ON_PREM:
+                        headers = self._get_headers()
+                    continue
+
+                raise
+            except json.decoder.JSONDecodeError as error:
+                raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)
+
+        raise last_error
