@@ -101,9 +101,7 @@ class ManageEngineServiceDeskAPI:
                 last_error = error
                 if attempt < TOKEN_FETCH_MAX_RETRIES - 1:
                     backoff = TOKEN_FETCH_INITIAL_BACKOFF_SECONDS * (2**attempt)
-                    self._logger.info(
-                        f"Token fetch attempt {attempt + 1} failed: {error}. Retrying in {backoff}s..."
-                    )
+                    self._logger.info(f"Token fetch attempt {attempt + 1} failed: {error}. Retrying in {backoff}s...")
                     time.sleep(backoff)
                     continue
                 raise PluginException(
@@ -354,6 +352,45 @@ class ManageEngineServiceDeskAPI:
             headers=self._get_headers(),
         )
 
+    def _handle_error_response(self, response: requests.Response) -> None:
+        """Raise appropriate PluginException based on HTTP status code."""
+        status = response.status_code
+        if status == 400:
+            raise PluginException(
+                preset=PluginException.Preset.BAD_REQUEST, data=helpers.replace_status_code(response.json())
+            )
+        if status == 401:
+            raise PluginException(
+                cause="Authentication failed.",
+                assistance="The access token may have expired or been revoked. Please try again.",
+                data=response.text,
+            )
+        if status == 403:
+            raise PluginException(
+                cause="Operation is not allowed.",
+                assistance="Please verify inputs and if the issue persists, contact support.",
+                data=helpers.replace_status_code(response.json()),
+            )
+        if status == 404:
+            raise PluginException(
+                cause="Resource not found.",
+                assistance="Please verify inputs and if the issue persists, contact support.",
+                data=helpers.replace_status_code(response.json()),
+            )
+        if status == 429:
+            raise PluginException(
+                cause="API rate limit reached.",
+                assistance="Too many requests. Please wait and try again.",
+                data=response.text,
+            )
+        if 400 <= status < 500:
+            raise PluginException(
+                preset=PluginException.Preset.UNKNOWN,
+                data=helpers.replace_status_code(response.json()),
+            )
+        if status >= 500:
+            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
+
     def make_request(
         self, method: str, url: str, headers: dict, params: dict = None, data: dict = None
     ) -> requests.Response:
@@ -362,45 +399,10 @@ class ManageEngineServiceDeskAPI:
                 method=method, url=url, verify=self.ssl_verify, headers=headers, params=params, data=data
             )
 
-            if response.status_code == 400:
-                raise PluginException(
-                    preset=PluginException.Preset.BAD_REQUEST, data=helpers.replace_status_code(response.json())
-                )
-            if response.status_code == 401:
-                raise PluginException(
-                    cause="Authentication failed.",
-                    assistance="The access token may have expired or been revoked. Please try again.",
-                    data=response.text,
-                )
-            if response.status_code == 403:
-                raise PluginException(
-                    cause="Operation is not allowed.",
-                    assistance="Please verify inputs and if the issue persists, contact support.",
-                    data=helpers.replace_status_code(response.json()),
-                )
-            if response.status_code == 404:
-                raise PluginException(
-                    cause="Resource not found.",
-                    assistance="Please verify inputs and if the issue persists, contact support.",
-                    data=helpers.replace_status_code(response.json()),
-                )
-            if response.status_code == 429:
-                raise PluginException(
-                    cause="API rate limit reached.",
-                    assistance="Too many requests. Please wait and try again.",
-                    data=response.text,
-                )
-            if 400 <= response.status_code < 500:
-                raise PluginException(
-                    preset=PluginException.Preset.UNKNOWN,
-                    data=helpers.replace_status_code(response.json()),
-                )
-            if response.status_code >= 500:
-                raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
-
             if 200 <= response.status_code < 300:
                 return response
 
+            self._handle_error_response(response)
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
         except requests.exceptions.HTTPError as error:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
@@ -418,8 +420,7 @@ class ManageEngineServiceDeskAPI:
             except PluginException as error:
                 last_error = error
                 is_retryable = (
-                    "API rate limit reached" in str(error.cause)
-                    or error.preset == PluginException.Preset.SERVER_ERROR
+                    "API rate limit reached" in str(error.cause) or error.preset == PluginException.Preset.SERVER_ERROR
                 )
                 is_auth_failure = "Authentication failed" in str(error.cause)
 
@@ -435,9 +436,7 @@ class ManageEngineServiceDeskAPI:
 
                 if is_retryable and attempt < API_REQUEST_MAX_RETRIES - 1:
                     backoff = API_REQUEST_INITIAL_BACKOFF_SECONDS * (2**attempt)
-                    self._logger.info(
-                        f"Request attempt {attempt + 1} failed: {error.cause}. Retrying in {backoff}s..."
-                    )
+                    self._logger.info(f"Request attempt {attempt + 1} failed: {error.cause}. Retrying in {backoff}s...")
                     time.sleep(backoff)
                     # Refresh headers in case token expired during backoff
                     if self._connection_type != ConnectionType.ON_PREM:
