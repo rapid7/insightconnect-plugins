@@ -35,4 +35,4 @@ class VulnSearch(insightconnect_plugin_runtime.Action):
             resources = self.connection.ivm_cloud_api.call_api("vulnerabilities", "POST", parameters, body)
         else:
             resources = self.connection.ivm_cloud_api.call_api("vulnerabilities", "POST", parameters)
-        return {Output.VULNERABILITIES: resources.get("data", [])}
+        return {Output.VULNERABILITIES: insightconnect_plugin_runtime.helper.clean(resources.get("data", []))}

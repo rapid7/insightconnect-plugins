@@ -1,34 +1,34 @@
-FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.3.10 AS builder
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.5.0 AS builder
 
-WORKDIR /python/src
+WORKDIR /workspace
 
 ADD ./plugin.spec.yaml /plugin.spec.yaml
-ADD ./requirements.txt /python/src/requirements.txt
-ADD . /python/src
+ADD ./requirements.txt /workspace/requirements.txt
+ADD . /workspace
 
 
 
 RUN pip install .
 RUN pip uninstall -y setuptools
 
-FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.3.10
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.5.0
 
 LABEL organization=rapid7
 LABEL sdk=python
 
-WORKDIR /python/src
+WORKDIR /workspace
 
-COPY --from=builder /python/src /python/src
+COPY --from=builder /workspace /workspace
 COPY --from=builder /plugin.spec.yaml /plugin.spec.yaml
 
 
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-ENV PYTHONPATH="/python/src:${PYTHONPATH}"
+ENV PYTHONPATH="/workspace:${PYTHONPATH}"
 
 RUN rm -rf /root/.cache;
 
 # User to run plugin code. The two supported users are: root, nobody
 USER nobody
 
-ENTRYPOINT ["python", "/python/src/bin/icon_rapid7_insightvm_cloud"]
+ENTRYPOINT ["python", "/workspace/bin/icon_rapid7_insightvm_cloud"]

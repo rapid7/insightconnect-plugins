@@ -890,6 +890,7 @@ Example output:
 
 # Version History
 
+* 9.0.2 - Action `Vulnerability Search`: Fixed an issue where actions could fail due to JSON schema validation errors | Updated SDK to the latest version (6.5.0)
 * 9.0.1 - Added user-agent and correlation ID headers to all requests | Updated SDK to the latest version (6.3.10)
 * 9.0.0 - Refined pagination for `Asset Search` action | SDK Bump to 6.3.6 | Resolved issue in 'Asset Search' where 'Vulnerability Criteria' is appended onto 'Asset Criteria'
 * 8.1.1 - Updated SDK to the latest version (v6.2.3) | Address vulnerabilities
