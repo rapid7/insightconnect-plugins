@@ -1,19 +1,8 @@
+import re
+
 DEFAULT_ENCODING = "utf-8"
 SUBPROCESS_TIMEOUT = 60
 
-DANGEROUS_PATTERNS = [
-    r"[;&|`$]",
-    r"\$\(",
-    r"`.*`",
-    r"\|\|",
-    r"&&",
-    r">\s*/",
-    r"<\s*/",
-    r"\.\.",
-    r"/etc/",
-    r"/bin/",
-    r"/usr/bin/",
-    r"rm\s+-",
-    r"chmod\s+",
-    r"chown\s+",
-]
+ALLOWED_OPTIONS = frozenset({"-n", "-r", "-E", "--regexp-extended"})
+SAFE_COMMANDS = "pdq=!nNgGhHlx"
+SUBSTITUTION_FLAGS_RE = re.compile(r"^[giImMp0-9]*$")

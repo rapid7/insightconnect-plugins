@@ -29,6 +29,9 @@ class TestProcessBytes(TestCase):
             ("binary_content", "test\x00data", ["s/test/modified/"], "", "modified\x00data"),
             ("empty_bytes", "", ["s/test/replaced/"], "", ""),
             ("no_match", "hello world", ["s/notfound/replacement/"], "", "hello world"),
+            ("alternate_delimiter", "hello world", ["s|world|universe|"], "", "hello universe"),
+            ("transliteration", "hello", ["y/helo/HELO/"], "", "HELLO"),
+            ("address_delete", "line1\nline2\nline3", ["2d"], "", "line1\nline3"),
         ]
     )
     def test_process_bytes(
@@ -48,31 +51,17 @@ class TestProcessBytes(TestCase):
 
     @parameterized.expand(
         [
-            ("invalid_expression_with_semicolon", "test", ["s/test/replaced/; ls"], "", "Invalid input detected"),
-            (
-                "invalid_expression_with_pipe",
-                "test",
-                ["s/test/replaced/ | cat /etc/passwd"],
-                "",
-                "Invalid input detected",
-            ),
-            ("invalid_expression_with_backticks", "test", ["`whoami`"], "", "Invalid input detected"),
-            (
-                "invalid_options_with_dangerous_pattern",
-                "test",
-                ["s/test/replaced/"],
-                "rm -rf",
-                "Invalid input detected",
-            ),
-            ("invalid_expression_with_command_substitution", "test", ["$(ls)"], "", "Invalid input detected"),
-            (
-                "invalid_expression_with_etc_path",
-                "test",
-                ["s/test/replaced/; cat /etc/passwd"],
-                "",
-                "Invalid input detected",
-            ),
-            ("invalid_options_with_chmod", "test", ["s/test/replaced/"], "chmod +x", "Invalid input detected"),
+            ("e_flag_rejection", "test", ["s/foo/bar/e"], "", "Invalid expression detected"),
+            ("w_command_rejection", "test", ["w /tmp/file"], "", "Invalid expression detected"),
+            ("r_command_rejection", "test", ["1r /etc/passwd"], "", "Invalid expression detected"),
+            ("R_command_rejection", "test", ["R /tmp/file"], "", "Invalid expression detected"),
+            ("W_command_rejection", "test", ["W /tmp/file"], "", "Invalid expression detected"),
+            ("F_command_rejection", "test", ["F"], "", "Invalid expression detected"),
+            ("Q_command_rejection", "test", ["Q"], "", "Invalid expression detected"),
+            ("e_command_rejection", "test", ["e"], "", "Invalid expression detected"),
+            ("semicolon_rejection", "test", ["s/foo/bar/;s/baz/qux/"], "", "Invalid expression detected"),
+            ("disallowed_options_file_flag", "test", ["s/foo/bar/"], "--file=script.sed", "Invalid options detected"),
+            ("disallowed_options_i_flag", "test", ["s/foo/bar/"], "-i", "Invalid options detected"),
         ]
     )
     def test_process_bytes_invalid_input(
@@ -85,4 +74,4 @@ class TestProcessBytes(TestCase):
     def test_process_bytes_invalid_sed_syntax(self) -> None:
         with self.assertRaises(PluginException) as context:
             self.action.run({Input.BYTES: "test", Input.EXPRESSION: ["s/unclosed"], Input.OPTIONS: ""})
-        self.assertIn("Sed command execution failed", str(context.exception))
+        self.assertIn("Invalid expression detected", str(context.exception))
