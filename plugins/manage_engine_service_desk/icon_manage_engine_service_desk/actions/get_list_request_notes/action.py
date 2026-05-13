@@ -25,8 +25,8 @@ class GetListRequestNotes(insightconnect_plugin_runtime.Action):
             clean_note = remove_other_keys(note, Note().get_all_attributes())
             clean_note[Note.LAST_UPDATED_BY] = remove_other_keys(note.get(Note.LAST_UPDATED_BY), [User.NAME, User.ID])
             clean_note[Note.ADDED_BY] = remove_other_keys(note.get(Note.ADDED_BY), [User.NAME, User.ID])
-            clean_note[Note.LAST_UPDATED_TIME] = clean_note.get(Note.LAST_UPDATED_TIME, {}).get(Time.DISPLAY_VALUE)
-            clean_note[Note.ADDED_TIME] = clean_note.get(Note.ADDED_TIME, {}).get(Time.DISPLAY_VALUE)
+            clean_note[Note.LAST_UPDATED_TIME] = (clean_note.get(Note.LAST_UPDATED_TIME) or {}).get(Time.DISPLAY_VALUE)
+            clean_note[Note.ADDED_TIME] = (clean_note.get(Note.ADDED_TIME) or {}).get(Time.DISPLAY_VALUE)
             updated_notes.append(clean_note)
         return clean(
             {
