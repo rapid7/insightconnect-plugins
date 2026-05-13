@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.helper import clean
 
 from icon_manage_engine_service_desk.util.constants import Response, ResponseStatus
-from icon_manage_engine_service_desk.util.helpers import transform_request
+from icon_manage_engine_service_desk.util.helpers import transform_request, safe_get
 from .schema import GetListRequestInput, GetListRequestOutput, Input, Output, Component
 
 # Custom imports below
@@ -27,11 +27,11 @@ class GetListRequest(insightconnect_plugin_runtime.Action):
             sort_field=params.get(Input.SORT_FIELD),
         )
 
-        requests = [transform_request(request) for request in clean(response_json.get(Response.REQUESTS))]
+        requests = [transform_request(request) for request in response_json.get(Response.REQUESTS) or []]
 
         return clean(
             {
                 Output.REQUESTS: requests,
-                Output.STATUS: response_json.get(Response.RESPONSE_STATUS, [{}])[0].get(ResponseStatus.STATUS),
+                Output.STATUS: safe_get(response_json, Response.RESPONSE_STATUS, 0, ResponseStatus.STATUS),
             }
         )

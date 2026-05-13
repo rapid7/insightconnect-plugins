@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.helper import clean
 
 from icon_manage_engine_service_desk.util.constants import Response, ResponseStatus
-from icon_manage_engine_service_desk.util.helpers import transform_request
+from icon_manage_engine_service_desk.util.helpers import transform_request, safe_get
 from .schema import GetRequestInput, GetRequestOutput, Input, Output, Component
 
 # Custom imports below
@@ -21,6 +21,6 @@ class GetRequest(insightconnect_plugin_runtime.Action):
         return clean(
             {
                 Output.REQUEST: request,
-                Output.STATUS: response_json.get(Response.RESPONSE_STATUS, {}).get(ResponseStatus.STATUS),
+                Output.STATUS: safe_get(response_json, Response.RESPONSE_STATUS, ResponseStatus.STATUS),
             }
         )
