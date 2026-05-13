@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.helper import clean
 
 from icon_manage_engine_service_desk.util.constants import Response, Note, ResponseStatus, Time, User
-from icon_manage_engine_service_desk.util.helpers import remove_other_keys
+from icon_manage_engine_service_desk.util.helpers import remove_other_keys, safe_get
 from .schema import GetListRequestNotesInput, GetListRequestNotesOutput, Input, Output, Component
 
 # Custom imports below
@@ -25,16 +25,14 @@ class GetListRequestNotes(insightconnect_plugin_runtime.Action):
             clean_note = remove_other_keys(note, Note().get_all_attributes())
             clean_note[Note.LAST_UPDATED_BY] = remove_other_keys(note.get(Note.LAST_UPDATED_BY), [User.NAME, User.ID])
             clean_note[Note.ADDED_BY] = remove_other_keys(note.get(Note.ADDED_BY), [User.NAME, User.ID])
-            clean_note[Note.LAST_UPDATED_TIME] = (clean_note.get(Note.LAST_UPDATED_TIME) or {}).get(Time.DISPLAY_VALUE)
-            clean_note[Note.ADDED_TIME] = (clean_note.get(Note.ADDED_TIME) or {}).get(Time.DISPLAY_VALUE)
+            clean_note[Note.LAST_UPDATED_TIME] = safe_get(note, Note.LAST_UPDATED_TIME, Time.DISPLAY_VALUE)
+            clean_note[Note.ADDED_TIME] = safe_get(note, Note.ADDED_TIME, Time.DISPLAY_VALUE)
             updated_notes.append(clean_note)
         return clean(
             {
                 Output.REQUEST_ID: str(request_id),
                 Output.NOTES: updated_notes,
-                Output.STATUS: response_json.get(Response.RESPONSE_STATUS, [{}])[0].get(ResponseStatus.STATUS),
-                Output.STATUS_CODE: response_json.get(Response.RESPONSE_STATUS, [{}])[0].get(
-                    ResponseStatus.STATUS_CODE
-                ),
+                Output.STATUS: safe_get(response_json, Response.RESPONSE_STATUS, 0, ResponseStatus.STATUS),
+                Output.STATUS_CODE: safe_get(response_json, Response.RESPONSE_STATUS, 0, ResponseStatus.STATUS_CODE),
             }
         )

@@ -48,6 +48,26 @@ def remove_other_keys(input_dict: dict, keys_to_keep: list) -> dict:
     return {key: input_dict.get(key) for key in keys_to_keep}
 
 
+def safe_get(data, *keys, default=None):
+    """Safely traverse nested dicts/lists that may contain None values.
+
+    Examples:
+        safe_get(response, "request", "id") -> response["request"]["id"] or default
+        safe_get(response, "response_status", "status") -> handles None at any level
+        safe_get(response, "created_time", "display_value") -> handles null timestamps
+    """
+    for key in keys:
+        if isinstance(data, dict):
+            data = data.get(key)
+        elif isinstance(data, list) and isinstance(key, int) and key < len(data):
+            data = data[key]
+        else:
+            return default
+        if data is None:
+            return default
+    return data
+
+
 def normalize_note_response(response: dict) -> dict:
     """Normalize Cloud API 'request_note' key to 'note' so actions can use a consistent key."""
     if "request_note" in response and "note" not in response:
@@ -66,6 +86,6 @@ def transform_request(request: dict) -> dict:
 
     request[Request.PRIORITY] = remove_other_keys(request.get(Request.PRIORITY) or {}, [Priority.NAME, Priority.ID])
     request[Request.STATUS] = remove_other_keys(request.get(Request.STATUS) or {}, [Status.NAME, Status.ID])
-    request[Request.CREATED_TIME] = (request.get(Request.CREATED_TIME) or {}).get(Time.DISPLAY_VALUE)
-    request[Request.DUE_BY_TIME] = (request.get(Request.DUE_BY_TIME) or {}).get(Time.DISPLAY_VALUE)
+    request[Request.CREATED_TIME] = safe_get(request, Request.CREATED_TIME, Time.DISPLAY_VALUE)
+    request[Request.DUE_BY_TIME] = safe_get(request, Request.DUE_BY_TIME, Time.DISPLAY_VALUE)
     return remove_other_keys(request, Request().get_all_attributes())
