@@ -14,18 +14,18 @@ from komand_sed.util.constants import (
 # Matches optional address (number, $, /regex/, or range) followed by s or y + delimiter
 SUBSTITUTION_RE = re.compile(
     r"^(?:\d+|\$|/(?:[^/\\]|\\.)*/)?"  # optional single address
-    r"(?:,(?:\d+|\$|/(?:[^/\\]|\\.)*/))?s"  # optional range end + 's'
+    r"(?:,(?:\d+|\$|/(?:[^/\\]|\\.)*/))?!?s"  # optional range end + optional '!' + 's'
     r"([^\w\\])"  # delimiter
 )
 TRANSLITERATION_RE = re.compile(
     r"^(?:\d+|\$|/(?:[^/\\]|\\.)*/)?"
-    r"(?:,(?:\d+|\$|/(?:[^/\\]|\\.)*/))?y"
+    r"(?:,(?:\d+|\$|/(?:[^/\\]|\\.)*/))?!?y"
     r"([^\w\\])"  # pylint: disable=implicit-str-concat
 )
 
-# Matches optional address followed by exactly one safe command character
+# Matches optional address followed by optional '!' and exactly one safe command character
 ADDRESS_COMMAND_RE = re.compile(
-    r"^(?:\d+|\$|/(?:[^/\\]|\\.)*/)?" r"(?:,(?:\d+|\$|/(?:[^/\\]|\\.)*/))?[" + re.escape(SAFE_COMMANDS) + r"]$"
+    r"^(?:\d+|\$|/(?:[^/\\]|\\.)*/)?" r"(?:,(?:\d+|\$|/(?:[^/\\]|\\.)*/))?!?[" + re.escape(SAFE_COMMANDS) + r"]$"
 )
 
 
@@ -102,16 +102,14 @@ class Helper:
         # Strip the expression string
         expression = expression.strip()
 
-        # Reject empty expressions or those containing semicolons
-        if not expression or ";" in expression:
+        # Reject empty expressions
+        if not expression:
             raise PluginException(
                 cause="Invalid expression detected. ",
-                assistance=f"The expression '{expression}' is not permitted. "
-                "Only substitution (s/…/…/flags), transliteration (y/…/…/), "
-                "and address+safe command forms are allowed.",
+                assistance="Empty expressions are not permitted.",
             )
 
-        # Address single safe command
+        # Address single safe command (regex anchors ensure no trailing content like ';')
         if ADDRESS_COMMAND_RE.match(expression):
             return
 
@@ -119,9 +117,8 @@ class Helper:
         if sub_match := SUBSTITUTION_RE.match(expression):
             delimiter = sub_match.group(1)
             flags = _extract_flags_after_last_delimiter(expression, sub_match.end() - 1, delimiter)
-            if flags is not None and SUBSTITUTION_FLAGS_RE.match(flags):
-                if "e" not in flags:
-                    return
+            if flags is not None and SUBSTITUTION_FLAGS_RE.match(flags) and "e" not in flags:
+                return
 
         # No flags allowed
         if trans_match := TRANSLITERATION_RE.match(expression):
