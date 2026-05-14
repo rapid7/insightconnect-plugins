@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Sed"
 Vendor = "rapid7"
-Version = "2.0.4"
+Version = "2.0.5"
 Description = "[Sed](https://www.gnu.org/software/sed/manual/sed.html) is a powerful stream editor. This plugin uses GNU Sed 4.2.2 to manipulate input data.For example, from the command line, an example of the stream editor becomes clear:```$ printf 'Cats are enjoyable animals\n' | sed 's/Cats/Dogs/'Dogs are enjoyable animals```"
 
 
