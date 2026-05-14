@@ -163,7 +163,7 @@ class Helper:
                 raise PluginException(
                     cause="Invalid options detected. ",
                     assistance=f"The option '{token}' is not permitted. "
-                    "Allowed options are: -n, -r, -E, --regexp-extended",
+                    f"Allowed options are: {', '.join(ALLOWED_OPTIONS)}",
                 )
 
 
