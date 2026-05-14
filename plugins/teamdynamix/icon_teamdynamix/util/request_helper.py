@@ -17,7 +17,7 @@ from icon_teamdynamix.util.constants import (
 class TeamDynamixClient:
     """Handles authentication and HTTP requests to the TeamDynamix Web API."""
 
-    def __init__(
+    def __init__(  # noqa: B107
         self,
         base_url: str,
         auth_type: str,
@@ -25,7 +25,7 @@ class TeamDynamixClient:
         beid: str = "",
         web_services_key: str = "",
         username: str = "",
-        password: str = "",
+        password: str = "",  # nosec B107
         logger=None,
     ):
         self.base_url = base_url.rstrip("/")
@@ -124,27 +124,13 @@ class TeamDynamixClient:
 
         raise PluginException(cause=cause, assistance=assistance, data=response_text)
 
-    def make_request(self, method: str, endpoint: str, payload: dict = None, params: dict = None) -> Union[dict, list]:
-        """Make an authenticated request to the TeamDynamix API.
+    def _execute_request(self, method: str, url: str, payload: dict = None, params: dict = None) -> requests.Response:
+        """Execute an HTTP request with timeout and connection error handling.
 
-        Args:
-            method: HTTP method ('get', 'post', 'patch', 'put', 'delete')
-            endpoint: API endpoint path, e.g. '/TDWebApi/api/42/tickets'
-            payload: JSON body dict (for POST/PATCH/PUT)
-            params: Query parameters dict
-
-        Returns:
-            Parsed JSON response (dict or list), or empty dict for 204 responses.
-
-        Raises:
-            PluginException on HTTP errors, timeouts, or connection failures.
+        Returns the Response object. Raises PluginException on network errors.
         """
-        url = f"{self.base_url}{endpoint}"
-        if self.logger:
-            self.logger.info(f"TeamDynamixClient: {method.upper()} {url}")
-
         try:
-            resp = self._session.request(
+            return self._session.request(
                 method=method.upper(),
                 url=url,
                 headers=self._headers(),
@@ -165,32 +151,33 @@ class TeamDynamixClient:
                 data=str(error),
             )
 
+    def make_request(self, method: str, endpoint: str, payload: dict = None, params: dict = None) -> Union[dict, list]:
+        """Make an authenticated request to the TeamDynamix API.
+
+        Args:
+            method: HTTP method ('get', 'post', 'patch', 'put', 'delete')
+            endpoint: API endpoint path, e.g. '/TDWebApi/api/42/tickets'
+            payload: JSON body dict (for POST/PATCH/PUT)
+            params: Query parameters dict
+
+        Returns:
+            Parsed JSON response (dict or list), or empty dict for 204 responses.
+
+        Raises:
+            PluginException on HTTP errors, timeouts, or connection failures.
+        """
+        url = f"{self.base_url}{endpoint}"
+        if self.logger:
+            self.logger.info(f"TeamDynamixClient: {method.upper()} {url}")
+
+        resp = self._execute_request(method, url, payload, params)
+
         # Handle token expiry with one retry
         if resp.status_code == 401:
             if self.logger:
                 self.logger.info("TeamDynamixClient: Token expired, re-authenticating...")
             self._token = self._authenticate()
-            try:
-                resp = self._session.request(
-                    method=method.upper(),
-                    url=url,
-                    headers=self._headers(),
-                    json=payload,
-                    params=params,
-                    timeout=TIMEOUT,
-                )
-            except requests.exceptions.Timeout as error:
-                raise PluginException(
-                    cause="Request to TeamDynamix timed out after re-authentication",
-                    assistance="The API did not respond within the timeout period. Retry the request.",
-                    data=str(error),
-                )
-            except requests.exceptions.ConnectionError as error:
-                raise PluginException(
-                    cause="Unable to connect to TeamDynamix after re-authentication",
-                    assistance=f"Verify network connectivity: {self.base_url}",
-                    data=str(error),
-                )
+            resp = self._execute_request(method, url, payload, params)
 
         if resp.status_code == 204:
             return {}
