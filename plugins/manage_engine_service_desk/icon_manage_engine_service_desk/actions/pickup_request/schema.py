@@ -24,7 +24,7 @@ class PickupRequestInput(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "request_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Request ID",
       "description": "The request id that should be assigned",
       "order": 1
@@ -48,7 +48,7 @@ class PickupRequestOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "request_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Request ID",
       "description": "The id of the picked up request",
       "order": 1

@@ -1,13 +1,9 @@
-import sys
-import os
 from unittest import TestCase
 from unittest.mock import patch
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-sys.path.append(os.path.abspath("../"))
-
-from unit_test.util import Util
+from util import Util
 from parameterized import parameterized
 from icon_manage_engine_service_desk.actions.get_list_request import GetListRequest
 
@@ -26,6 +22,11 @@ class TestGetListRequest(TestCase):
                 Util.read_file_to_dict("expected/get_list_request.json.exp"),
             ],
             ["no_parameters", {}, Util.read_file_to_dict("expected/get_list_request.json.exp")],
+            [
+                "sort_order_none",
+                Util.read_file_to_dict("inputs/get_list_request_sort_order_none.json.inp"),
+                Util.read_file_to_dict("expected/get_list_request.json.exp"),
+            ],
         ]
     )
     def test_get_list_request(self, mock_request, test_name, input_params, expected):

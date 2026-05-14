@@ -1,18 +1,9 @@
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.helper import clean
 
-from icon_manage_engine_service_desk.util.constants import (
-    Response,
-    ResponseStatus,
-    Request,
-    Priority,
-    Status,
-    User,
-    Time,
-)
-from icon_manage_engine_service_desk.util.helpers import remove_other_keys
+from icon_manage_engine_service_desk.util.constants import Response, ResponseStatus
+from icon_manage_engine_service_desk.util.helpers import transform_request, safe_get
 from .schema import GetListRequestInput, GetListRequestOutput, Input, Output, Component
-
 
 # Custom imports below
 
@@ -36,25 +27,11 @@ class GetListRequest(insightconnect_plugin_runtime.Action):
             sort_field=params.get(Input.SORT_FIELD),
         )
 
-        requests = []
-        for request in clean(response_json.get(Response.REQUESTS)):
-            for user_type in [Request.TECHNICIAN, Request.CREATED_BY, Request.REQUESTER]:
-                request[user_type] = remove_other_keys(
-                    request.get(user_type, {}), [User.ID, User.NAME, User.IS_VIPUSER]
-                )
-
-            request[Request.PRIORITY] = remove_other_keys(
-                request.get(Request.PRIORITY, {}), [Priority.NAME, Priority.ID]
-            )
-            request[Request.STATUS] = remove_other_keys(request.get(Request.STATUS, {}), [Status.NAME, Status.ID])
-            request[Request.CREATED_TIME] = request.get(Request.CREATED_TIME, {}).get(Time.DISPLAY_VALUE)
-            request[Request.DUE_BY_TIME] = request.get(Request.DUE_BY_TIME, {}).get(Time.DISPLAY_VALUE)
-            request = remove_other_keys(request, Request().get_all_attributes())
-            requests.append(request)
+        requests = [transform_request(request) for request in response_json.get(Response.REQUESTS) or []]
 
         return clean(
             {
                 Output.REQUESTS: requests,
-                Output.STATUS: response_json.get(Response.RESPONSE_STATUS, [{}])[0].get(ResponseStatus.STATUS),
+                Output.STATUS: safe_get(response_json, Response.RESPONSE_STATUS, 0, ResponseStatus.STATUS),
             }
         )

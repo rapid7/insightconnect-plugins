@@ -3,7 +3,6 @@ import insightconnect_plugin_runtime
 from icon_manage_engine_service_desk.util.constants import Response, ResponseStatus
 from .schema import AddResolutionInput, AddResolutionOutput, Input, Output, Component
 
-
 # Custom imports below
 
 
@@ -25,7 +24,7 @@ class AddResolution(insightconnect_plugin_runtime.Action):
         )
 
         return {
-            Output.REQUEST_ID: request_id,
+            Output.REQUEST_ID: str(request_id),
             Output.STATUS: response_json.get(Response.RESPONSE_STATUS, {}).get(ResponseStatus.STATUS),
             Output.STATUS_CODE: response_json.get(Response.RESPONSE_STATUS, {}).get(ResponseStatus.STATUS_CODE),
         }

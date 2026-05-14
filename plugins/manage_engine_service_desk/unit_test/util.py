@@ -1,11 +1,8 @@
 import json
 import logging
-import sys
 import os
 
 import insightconnect_plugin_runtime
-
-sys.path.append(os.path.abspath("../"))
 
 from icon_manage_engine_service_desk.connection import Connection
 from icon_manage_engine_service_desk.connection.schema import Input
@@ -15,6 +12,7 @@ class Util:
     @staticmethod
     def default_connector(action: insightconnect_plugin_runtime.Action, params=None):
         params = {
+            Input.CONNECTION_TYPE: "On-Prem",
             Input.API_KEY: {"secretKey": "valid_api_key"},
             Input.SDP_BASE_URL: "http://me-sdeskplus.example.com:8080",
             Input.SSL_VERIFY: True,
@@ -73,8 +71,9 @@ class Util:
             if '"subject": "Edit request",' in data.get("input_data"):
                 return MockResponse(200, "edit_request.json.resp")
 
-        if kwargs.get("url") == "http://me-sdeskplus.example.com:8080/api/v3/requests" and kwargs.get("params"):
-            if "not_existing_sort_field" in kwargs.get("params", {}).get("input_data"):
+        if kwargs.get("url") == "http://me-sdeskplus.example.com:8080/api/v3/requests":
+            input_data = (kwargs.get("data") or kwargs.get("params") or {}).get("input_data", "")
+            if "not_existing_sort_field" in input_data:
                 return MockResponse(400, "get_list_request_invalid_sort_field.json.resp")
             return MockResponse(200, "get_list_request.json.resp")
 

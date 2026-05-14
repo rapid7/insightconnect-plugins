@@ -4,9 +4,9 @@ products: [insightconnect]
 name: manage_engine_service_desk
 title: Manage Engine Service Desk
 description: ManageEngine's Service Desk has the ability to centralize and capture reported issues, allowing security and IT administrators to track and manage all incidents in an easy manner. The numerous help desk tickets raised are organized and tracked in the Requests module. The Requests module enables you to handle tickets promptly, assign tickets to technicians, merge similar requests, and so on
-version: 1.0.2
-connection_version: 1
-supported_versions: ["ServiceDesk Plus 13008"]
+version: 2.0.0
+connection_version: 2
+supported_versions: ["ServiceDesk Plus 13008 (On-Prem)", "ServiceDesk Plus Cloud"]
 vendor: rapid7
 support: rapid7
 status: []
@@ -23,24 +23,24 @@ key_features:
   - "Manage request notes - add, edit, delete, get list of notes"
 sdk:
   type: full
-  version: 6.1.4
+  version: 6.5.0
   user: nobody
 links:
   - "[Manage Engine Service Desk](https://manageengine.com/products/service-desk)"
 references:
   - "[Manage Engine Service Desk API Docs](https://www.manageengine.com/products/service-desk/sdpod-v3-api)"
 requirements:
-  - "The authentication between ServiceDesk Plus and an Insight Connect application is through an API key. A unique key is generated for a technician with login permission in the ServiceDesk Plus application."
-  - "To generate the API Key, click Admin -> Technicians under User block."
-  - "If you want to generate the API key for an existing technician, then click the edit icon beside the technician."
-  - "If you want to generate the API key for a new technician, click Add New Technician link, enter the technician details and provide login permission."
-  - "Click Generate link under the API key details block. You can select a time frame for the key to expire using the calendar icon or simply retain the same key indefinitely."
-  - "If a key is already generated for the technician, a Re-generate link appears."
+  - "On-Prem: The authentication between ServiceDesk Plus and an InsightConnect application is through an API key. A unique key is generated for a technician with login permission in the ServiceDesk Plus application."
+  - "On-Prem: To generate the API Key, click Admin -> Technicians under User block. If you want to generate the API key for an existing technician, then click the edit icon beside the technician."
+  - "On-Prem: Click Generate link under the API key details block. You can select a time frame for the key to expire using the calendar icon or simply retain the same key indefinitely."
+  - "Cloud: Requires a Zoho OAuth 2.0 client ID, client secret, and refresh token. Create a self-client application in the Zoho API Console (https://api-console.zoho.com/) with the SDPOnDemand.requests.ALL scope."
+  - "Cloud: The portal name is the unique identifier for your ManageEngine ServiceDesk Plus cloud instance (visible in your cloud URL, e.g. https://sdpondemand.manageengine.com/app/{portal_name})."
 hub_tags:
   use_cases: [user_management]
   keywords: [management]
   features: []
 version_history:
+  - "2.0.0 - Add cloud connection support using Zoho OAuth 2.0 | All ID fields changed from integer to string to prevent precision loss with large Cloud IDs | Connection now requires connection_type field (On-Prem or Cloud) | Cloud connections require client_id, client_secret, refresh_token, portal_name, and data_center fields | On-Prem connection fields sdp_base_url and api_key are now optional (required only when connection_type is On-Prem)"
   - "1.0.2 - Bumping requirements.txt | SDK bump to 6.1.4"
   - "1.0.1 - Fix `int` conversion issue in `Get List Request` and `Get Request` actions"
   - "1.0.0 - Initial plugin - Create actions: `Add Request`, `Add Request Note`, `Add Resolution`, `Assign Request`, `Close Request`, `Delete Request`, `Delete Request Note`, `Edit Request`, `Edit Request Note`, `Get List Request`, `Get List Request Notes`, `Get Request`, `Get Resolution`, `Pickup Request`"
@@ -49,9 +49,9 @@ types:
     id:
       title: ID
       description: ID of the request type
-      type: integer
+      type: string
       required: false
-      example: 1
+      example: "1"
     name:
       title: Name
       description: Name of the request type
@@ -62,9 +62,9 @@ types:
     id:
       title: ID
       description: ID of the impact
-      type: integer
+      type: string
       required: false
-      example: 1
+      example: "1"
     name:
       title: Name
       description: Name impact
@@ -75,9 +75,9 @@ types:
     id:
       title: ID
       description: ID of the current status
-      type: integer
+      type: string
       required: false
-      example: 2
+      example: "2"
     name:
       title: Name
       description: Name of the current status
@@ -88,9 +88,9 @@ types:
     id:
       title: ID
       description: Id of the mode
-      type: integer
+      type: string
       required: false
-      example: 2
+      example: "2"
     name:
       title: Name
       description: Name of the mode
@@ -101,9 +101,9 @@ types:
     id:
       title: ID
       description: Id of the level
-      type: integer
+      type: string
       required: false
-      example: 4
+      example: "4"
     name:
       title: Name
       description: Name of the level
@@ -114,9 +114,9 @@ types:
     id:
       title: ID
       description: Id of the urgency
-      type: integer
+      type: string
       required: false
-      example: 2
+      example: "2"
     name:
       title: Name
       description: Name of the urgency
@@ -127,9 +127,9 @@ types:
     id:
       title: ID
       description: ID of the priority
-      type: integer
+      type: string
       required: false
-      example: 4
+      example: "4"
     name:
       title: Name
       description: Name of the priority
@@ -140,9 +140,9 @@ types:
     id:
       title: ID
       description: ID of the service category
-      type: integer
+      type: string
       required: false
-      example: 8
+      example: "8"
     name:
       title: Name
       description: Name of the service category
@@ -153,9 +153,9 @@ types:
     id:
       title: ID
       description: User ID
-      type: integer
+      type: string
       required: false
-      example: 71
+      example: "71"
     name:
       title: Name
       description: User name
@@ -172,9 +172,9 @@ types:
     id:
       title: ID
       description: User ID
-      type: integer
+      type: string
       required: false
-      example: 71
+      example: "71"
     name:
       title: Name
       description: User name
@@ -185,9 +185,9 @@ types:
     id:
       title: ID
       description: Id of the asset
-      type: integer
+      type: string
       required: false
-      example: 4541563
+      example: "4541563"
     name:
       title: Name
       description: Name of the asset
@@ -204,9 +204,9 @@ types:
     id:
       title: ID
       description: Site's id
-      type: integer
+      type: string
       required: false
-      example: 2235435
+      example: "2235435"
     name:
       title: Name
       description: Site's name
@@ -217,9 +217,9 @@ types:
     id:
       title: ID
       description: Group's id
-      type: integer
+      type: string
       required: false
-      example: 2
+      example: "2"
     name:
       title: Name
       description: Group's name
@@ -230,9 +230,9 @@ types:
     id:
       title: ID
       description: Technician ID
-      type: integer
+      type: string
       required: false
-      example: 3
+      example: "3"
     name:
       title: Name
       description: Technician Name
@@ -243,9 +243,9 @@ types:
     id:
       title: ID
       description: ID of the category
-      type: integer
+      type: string
       required: false
-      example: 8
+      example: "8"
     name:
       title: Name
       description: Name of the category
@@ -256,9 +256,9 @@ types:
     id:
       title: ID
       description: ID of the subcategory
-      type: integer
+      type: string
       required: false
-      example: 24
+      example: "24"
     name:
       title: Name
       description: Name of the subcategory
@@ -269,9 +269,9 @@ types:
     id:
       title: ID
       description: ID of the item
-      type: integer
+      type: string
       required: false
-      example: 1
+      example: "1"
     name:
       title: Name
       description: Name of the item
@@ -282,9 +282,9 @@ types:
     id:
       title: ID
       description: Id of the request
-      type: integer
+      type: string
       required: false
-      example: 92
+      example: "92"
     subject:
       title: Subject
       description: Subject of this request
@@ -297,7 +297,7 @@ types:
       description: The requester of the request
       type: user_output
       required: false
-      example: '{"name": "John", "id": 7, "is_vipuser": true}'
+      example: '{"name": "John", "id": "7", "is_vipuser": true}'
       order: 2
     description:
       title: Description
@@ -310,91 +310,91 @@ types:
       description: Type of this request
       type: request_type
       required: false
-      example: '{"id": 1, "name" "Incident"}'
+      example: '{"id": "1", "name" "Incident"}'
     impact:
       title: Impact
       description: Impact of this request
       type: impact
       required: false
-      example: '{"id": 1, "name": "High"}'
+      example: '{"id": "1", "name": "High"}'
     status:
       title: Status
       description: Indicates the current status of this request
       type: status
       required: false
-      example: '{"name": "Open", "id": 2}'
+      example: '{"name": "Open", "id": "2"}'
     mode:
       title: Mode
       description: The mode in which this request is created
       type: mode
       required: false
-      example: '{"name": "Web Form", "id": 4}'
+      example: '{"name": "Web Form", "id": "4"}'
     level:
       title: Level
       description: Level of the request
       type: level
       required: false
-      example: '{"name": "Tier 4", "id": 4}'
+      example: '{"name": "Tier 4", "id": "4"}'
     urgency:
       title: Urgency
       description: Urgency of the request
       type: urgency
       required: false
-      example: '{"name": "Low", "id": 1}'
+      example: '{"name": "Low", "id": "1"}'
     priority:
       title: Priority
       description: Priority of the request
       type: priority
       required: false
-      example: '{"name": "High", "id": 4}'
+      example: '{"name": "High", "id": "4"}'
     service_category:
       title: Service Category
       description: Service category to which this request belongs
       type: service_category
       required: false
-      example: '{"name": "User Management", "id": 8}'
+      example: '{"name": "User Management", "id": "8"}'
     assets:
       title: Assets
       description: Array of asset objects associated with this request
       type: "[]asset"
       required: false
-      example: ['{"name": "Software", "id": 4541563, "barcode": "test-barcode"}']
+      example: [{"name": "Software", "id": "4541563", "barcode": "test-barcode"}]
     site:
       title: Site
       description: Denotes the site to which this request belongs
       type: site
       required: false
-      example: '{"name": "Custom Site", "id": 71}'
+      example: '{"name": "Custom Site", "id": "71"}'
     group:
       title: Group
       description: The group to which the request belongs
       type: group
       required: false
-      example: '{"name": "Network", "id": 2}'
+      example: '{"name": "Network", "id": "2"}'
     technician:
       title: Technician
       description: The technician that was assigned to the request
       type: technician
       required: false
-      example: '{"name": "John", "id": 71}'
+      example: '{"name": "John", "id": "71"}'
     category:
       title: Category
       description: Category to which this request belongs
       type: category
       required: false
-      example: '{"name": "Operating System", "id": 8}'
+      example: '{"name": "Operating System", "id": "8"}'
     subcategory:
       title: Subcategory
       description: Subcategory to which this request belongs
       type: subcategory
       required: false
-      example: '{"name": "Mac OS X", "id": 24}'
+      example: '{"name": "Mac OS X", "id": "24"}'
     item:
       title: Item
       description: Item of this request
       type: item
       required: false
-      example: '{"name": "Install", "id": 1}'
+      example: '{"name": "Install", "id": "1"}'
     email_ids_to_notify:
       title: Email IDs to Notify
       description: Array of Email ids, which needs to be notified about the happenings of this request
@@ -442,7 +442,7 @@ types:
       description: Creator of the request
       type: user_output
       required: false
-      example: '{"name": "John", "id": 71}'
+      example: '{"name": "John", "id": "71"}'
     due_by_time:
       title: Due By Time
       description: The due date of the request
@@ -453,9 +453,9 @@ types:
     id:
       title: ID
       description: Closure Code ID
-      type: integer
+      type: string
       required: false
-      example: 1
+      example: "1"
     name:
       title: Name
       description: Closure Code name
@@ -466,9 +466,9 @@ types:
     id:
       title: ID
       description: Id of the last editor
-      type: integer
+      type: string
       required: false
-      example: 3
+      example: "3"
     name:
       title: Name
       description: Name of the last editor
@@ -479,9 +479,9 @@ types:
     id:
       title: ID
       description: Id of the creator
-      type: integer
+      type: string
       required: false
-      example: 3
+      example: "3"
     name:
       title: Name
       description: Name of the creator
@@ -492,9 +492,9 @@ types:
     id:
       title: ID
       description: Note ID
-      type: integer
+      type: string
       required: false
-      example: 543
+      example: "543"
     show_to_requester:
       title: Show to Requester
       description: Whether to show the note to requester or not
@@ -518,34 +518,81 @@ types:
       description: Last updated by details
       type: last_updated_by
       required: false
-      example: '{"name": "John", "id": 71}'
+      example: '{"name": "John", "id": "71"}'
     added_by:
       title: Added By
       description: Added by details
       type: added_by
       required: false
-      example: '{"name": "John", "id": 71}'
+      example: '{"name": "John", "id": "71"}'
 
 connection:
-  sdp_base_url:
-    title: Sdp Base URL
-    description: Service Desk Plus Base URL
+  connection_type:
+    title: Connection Type
+    description: Whether to connect to an on-premises or cloud instance of ManageEngine ServiceDesk Plus
     type: string
     required: true
+    enum:
+      - On-Prem
+      - Cloud
+    example: Cloud
+  sdp_base_url:
+    title: Service Desk Plus Base URL
+    description: Base URL for the on-premises ServiceDesk Plus instance, e.g. http://me-sdeskplus.dev.example.com:8080. Required when Connection Type is On-Prem
+    type: string
+    required: false
     example: http://me-sdeskplus.dev.example.com:8080
   api_key:
     title: API Key
-    description: Manage Engine Service Desk Technican's API key
+    description: Technician API key for on-premises ServiceDesk Plus authentication. Required when Connection Type is On-Prem
     type: credential_secret_key
-    required: true
+    required: false
     example: EXAMPLE1-API2-KEY3-HDFS-48GS24WSA6GE
   ssl_verify:
     title: SSL Verify
-    description: SSL verify
+    description: Enable SSL certificate verification. Applies to On-Prem connections only
     type: boolean
-    required: true
+    required: false
     default: true
     example: true
+  client_id:
+    title: Client ID
+    description: Zoho OAuth 2.0 client ID for cloud authentication. Required when Connection Type is Cloud
+    type: string
+    required: false
+    example: 1000.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  client_secret:
+    title: Client Secret
+    description: Zoho OAuth 2.0 client secret for cloud authentication. Required when Connection Type is Cloud
+    type: credential_secret_key
+    required: false
+    example: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  refresh_token:
+    title: Refresh Token
+    description: Zoho OAuth 2.0 refresh token for cloud authentication. Required when Connection Type is Cloud
+    type: credential_secret_key
+    required: false
+    example: 1000.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  portal_name:
+    title: Portal Name
+    description: ManageEngine cloud portal name used in the API path. Required when Connection Type is Cloud
+    type: string
+    required: false
+    example: mycompany
+  data_center:
+    title: Data Center
+    description: Zoho data center region for the cloud instance. Required when Connection Type is Cloud
+    type: string
+    required: false
+    enum:
+      - ""
+      - United States
+      - Europe
+      - India
+      - Australia
+      - China
+      - Japan
+    example: United States
 
 actions:
   get_list_request:
@@ -595,7 +642,7 @@ actions:
         description: List of requests
         type: "[]request_output"
         required: false
-        example: ['{"subject": "Install xyz", "requester": {"name": "Mike"}}']
+        example: [{"subject": "Install xyz", "requester": {"name": "Mike"}}]
       status:
          title: Status
          description: Status of the request
@@ -609,9 +656,9 @@ actions:
       request_id:
         title: Request ID
         description: The request id that should be returned
-        type: integer
+        type: string
         required: true
-        example: 54
+        example: "54"
     output:
       request:
         title: Request
@@ -654,7 +701,7 @@ actions:
         description: Array of asset objects associated with this request
         type: "[]asset"
         required: false
-        example: ['{"name": "Software", "barcode": "test-barcode"}']
+        example: [{"name": "Software", "barcode": "test-barcode"}]
         order: 3
       email_ids_to_notify:
         title: Email IDs to Notify
@@ -765,9 +812,9 @@ actions:
       request_id:
         title: Request ID
         description:  The id of newly created request
-        type: integer
+        type: string
         required: false
-        example: 55
+        example: "55"
       status:
         title: Status
         description: Status of the request
@@ -787,9 +834,9 @@ actions:
       request_id:
         title: Request ID
         description: The ID of a request to edit
-        type: integer
+        type: string
         required: true
-        example: 54
+        example: "54"
         order: 1
       subject:
         title: Subject
@@ -810,7 +857,7 @@ actions:
         description: Array of asset objects associated with this request
         type: "[]asset"
         required: false
-        example: ['{"name": "Software", "barcode": "test-barcode"}']
+        example: [{"name": "Software", "barcode": "test-barcode"}]
         order: 4
       email_ids_to_notify:
         title: Email IDs to Notify
@@ -921,9 +968,9 @@ actions:
       request_id:
         title: Request ID
         description: The id of edited request
-        type: integer
+        type: string
         required: false
-        example: 54
+        example: "54"
       status:
         title: Status
         description: Status of the request
@@ -943,16 +990,16 @@ actions:
      request_id:
        title: Request ID
        description: The ID of a request to delete
-       type: integer
+       type: string
        required: true
-       example: 54
+       example: "54"
     output:
       request_id:
         title: Request ID
         description: The id of deleted request
-        type: integer
+        type: string
         required: false
-        example: 54
+        example: "54"
       status:
         title: Status
         description: Status of the request
@@ -972,9 +1019,9 @@ actions:
       request_id:
         title: Request ID
         description: The request id that should be closed
-        type: integer
+        type: string
         required: true
-        example: 54
+        example: "54"
         order: 1
       closure_comments:
         title: Closure Comments
@@ -1007,9 +1054,9 @@ actions:
       request_id:
         title: Request ID
         description: The id of the closed request
-        type: integer
+        type: string
         required: false
-        example: 54
+        example: "54"
       status:
         title: Status
         description: Status of the request
@@ -1029,9 +1076,9 @@ actions:
       request_id:
         title: Request ID
         description: The request id that should be assigned
-        type: integer
+        type: string
         required: true
-        example: 27
+        example: "27"
       group:
         title: Group
         description: The group to which the request belongs
@@ -1048,9 +1095,9 @@ actions:
       request_id:
         title: Request ID
         description: The id of the assigned request
-        type: integer
+        type: string
         required: false
-        example: 27
+        example: "27"
       status:
         title: Status
         description: Status of the request
@@ -1070,16 +1117,16 @@ actions:
       request_id:
         title: Request ID
         description: The request id that should be assigned
-        type: integer
+        type: string
         required: true
-        example: 27
+        example: "27"
     output:
       request_id:
         title: Request ID
         description: The id of the picked up request
-        type: integer
+        type: string
         required: false
-        example: 27
+        example: "27"
       status:
         title: Status
         description: Status of the request
@@ -1099,9 +1146,9 @@ actions:
       request_id:
         title: Request ID
         description: The id of the request
-        type: integer
+        type: string
         required: true
-        example: 27
+        example: "27"
       content:
         title: Content
         description: Resolution content
@@ -1118,9 +1165,9 @@ actions:
       request_id:
         title: Request ID
         description: The id of the request
-        type: integer
+        type: string
         required: false
-        example: 27
+        example: "27"
       status:
         title: Status
         description: Status of the request
@@ -1140,16 +1187,16 @@ actions:
       request_id:
         title: Request ID
         description: The id of the request
-        type: integer
+        type: string
         required: true
-        example: 27
+        example: "27"
     output:
       request_id:
         title: Request ID
         description: The id of the request
-        type: integer
+        type: string
         required: false
-        example: 27
+        example: "27"
       content:
         title: Content
         description: Resolution content
@@ -1175,9 +1222,9 @@ actions:
       request_id:
         title: Request ID
         description: The id of the request
-        type: integer
+        type: string
         required: true
-        example: 55
+        example: "55"
       description:
         title: Description
         description: Note description (the content of the note) in HTML format
@@ -1212,15 +1259,15 @@ actions:
       request_id:
         title: Request ID
         description: The id of the request
-        type: integer
+        type: string
         required: false
-        example: 55
+        example: "55"
       request_note_id:
         title: Request Note ID
         description: The id of the request note
-        type: integer
+        type: string
         required: false
-        example: 209
+        example: "209"
       status:
         title: Status
         description: Status of the request
@@ -1240,15 +1287,15 @@ actions:
       request_id:
         title: Request ID
         description: The id of the request
-        type: integer
+        type: string
         required: true
-        example: 55
+        example: "55"
       request_note_id:
         title: Request Note ID
         description: The id of the request note
-        type: integer
+        type: string
         required: true
-        example: 209
+        example: "209"
       description:
         title: Description
         description: Note description in HTML format
@@ -1283,9 +1330,9 @@ actions:
       request_id:
         title: Request ID
         description: The id of the request
-        type: integer
+        type: string
         required: false
-        example: 55
+        example: "55"
       status:
         title: Status
         description: Status of the request
@@ -1305,22 +1352,22 @@ actions:
       request_id:
         title: Request ID
         description: The id of the request
-        type: integer
+        type: string
         required: true
-        example: 55
+        example: "55"
       request_note_id:
         title: Request Note ID
         description: The id of the request note to delete
-        type: integer
+        type: string
         required: true
-        example: 208
+        example: "208"
     output:
       request_id:
         title: Request ID
         description: The id of the request
-        type: integer
+        type: string
         required: false
-        example: 55
+        example: "55"
       status:
         title: Status
         description: Status of the request
@@ -1340,22 +1387,22 @@ actions:
       request_id:
         title: Request ID
         description: The id of the request
-        type: integer
+        type: string
         required: true
-        example: 55
+        example: "55"
     output:
       request_id:
         title: Request ID
         description: The id of the request
-        type: integer
+        type: string
         required: true
-        example: 55
+        example: "55"
       notes:
         title: Notes
         description:  Notes assigned to the request
         type: "[]note"
         required: false
-        example: ['{"note_id": "312", "added_time": "Jul 8, 2022 02:02 AM", "added_by": {"name": "John"}']
+        example: [{"note_id": "312", "added_time": "Jul 8, 2022 02:02 AM", "added_by": {"name": "John"}}]
       status:
         title: Status
         description: Status of the request

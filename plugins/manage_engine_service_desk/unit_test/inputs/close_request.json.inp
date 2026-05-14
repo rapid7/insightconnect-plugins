@@ -4,7 +4,7 @@
     "name": "failure"
   },
   "closure_comments": "Closing",
-  "request_id": 200,
+  "request_id": "200",
   "requester_ack_comments": "Close request",
   "requester_ack_resolution": true
 }

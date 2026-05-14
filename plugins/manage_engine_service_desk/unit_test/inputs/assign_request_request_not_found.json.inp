@@ -2,7 +2,7 @@
   "group": {
     "id": 2
   },
-  "request_id": 404,
+  "request_id": "404",
   "technician": {
     "id": 10,
     "name": "John"

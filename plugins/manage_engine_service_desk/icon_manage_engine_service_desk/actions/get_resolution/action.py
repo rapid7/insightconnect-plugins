@@ -4,6 +4,7 @@ import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.helper import clean
 
 from icon_manage_engine_service_desk.util.constants import Response, ResponseStatus, Resolution
+from icon_manage_engine_service_desk.util.helpers import safe_get
 from .schema import GetResolutionInput, GetResolutionOutput, Input, Output, Component
 
 
@@ -22,9 +23,9 @@ class GetResolution(insightconnect_plugin_runtime.Action):
 
         return clean(
             {
-                Output.REQUEST_ID: request_id,
-                Output.CONTENT: response_json.get(Response.RESOLUTION, {}).get(Resolution.CONTENT),
-                Output.STATUS: response_json.get(Response.RESPONSE_STATUS, {}).get(ResponseStatus.STATUS),
-                Output.STATUS_CODE: response_json.get(Response.RESPONSE_STATUS, {}).get(ResponseStatus.STATUS_CODE),
+                Output.REQUEST_ID: str(request_id),
+                Output.CONTENT: safe_get(response_json, Response.RESOLUTION, Resolution.CONTENT),
+                Output.STATUS: safe_get(response_json, Response.RESPONSE_STATUS, ResponseStatus.STATUS),
+                Output.STATUS_CODE: safe_get(response_json, Response.RESPONSE_STATUS, ResponseStatus.STATUS_CODE),
             }
         )
