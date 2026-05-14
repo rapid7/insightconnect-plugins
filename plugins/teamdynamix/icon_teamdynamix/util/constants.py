@@ -6,7 +6,8 @@ DEFAULT_MAX_RESULTS = 25
 
 # API path prefix
 API_BASE_PATH = "/TDWebApi/api"
-AUTH_ENDPOINT = "/TDWebApi/api/auth/loginadmin"
+AUTH_ADMIN_ENDPOINT = "/TDWebApi/api/auth/loginadmin"
+AUTH_USER_ENDPOINT = "/TDWebApi/api/auth/login"
 
 # HTTP error map — maps status codes to user-friendly cause/assistance pairs
 HTTP_ERROR_MAP = {

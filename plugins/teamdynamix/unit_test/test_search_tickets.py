@@ -41,9 +41,7 @@ class TestSearchTickets(TestCase):
 
         self.assertEqual(result[Output.COUNT], 2)
         self.assertEqual(len(result[Output.TICKETS]), 2)
-        self.mock_client.search_tickets.assert_called_once_with(
-            {"MaxResults": 10, "SearchText": "CVE-2024"}
-        )
+        self.mock_client.search_tickets.assert_called_once_with({"MaxResults": 10, "SearchText": "CVE-2024"})
 
     def test_search_tickets_empty_results(self):
         self.mock_client.search_tickets.return_value = []

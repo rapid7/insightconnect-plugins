@@ -13,8 +13,9 @@ TeamDynamix is an IT Service Management (ITSM) and Project Portfolio Management 
 # Requirements
 
 * TeamDynamix instance base URL (e.g., https://yourorg.teamdynamix.com)
-* TeamDynamix Web API BEID and Web Services Key for authentication
-* Application ID for the target TeamDynamix application
+* For Admin authentication - BEID and Web Services Key, found in TDAdmin under the organization detail page (requires the Add BE Administrators permission)
+* For User authentication - Username and password for a TeamDynamix service account with a security role that has ticket create/edit permissions and access to the target ticketing application
+* Application ID for the target TeamDynamix ticketing application, found in TDAdmin under Applications
 
 # Supported Product Versions
 
@@ -28,18 +29,25 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|app_id|integer|None|True|The numeric Application ID for the TeamDynamix ticketing application|None|42|None|None|
+|app_id|integer|None|True|Numeric Application ID for the target ticketing application, found in TDAdmin under Applications|None|42|None|None|
+|auth_type|string|Admin|True|Admin uses BEID and Web Services Key (broad access), User uses username and password for a service account (scoped permissions)|["Admin", "User"]|Admin|None|None|
 |base_url|string|None|True|The base URL of your TeamDynamix instance (e.g., https://yourorg.teamdynamix.com)|None|https://yourorg.teamdynamix.com|None|None|
-|beid|string|None|True|The BEID (Back End Identifier) from TeamDynamix Admin|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|None|None|
-|web_services_key|credential_secret_key|None|True|The Web Services Key from TeamDynamix Admin|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|None|None|
+|beid|string|None|False|Back End Identifier found in TDAdmin on the organization detail page, required for Admin authentication|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|None|None|
+|credentials|credential_username_password|None|False|Username and password for a TeamDynamix service account created in TDAdmin under Users and Roles, required for User authentication|None|{"username": "svc_insightconnect", "password": "password"}|None|None|
+|web_services_key|credential_secret_key|None|False|Web Services Key found in TDAdmin on the organization detail page, required for Admin authentication|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|None|None|
 
 Example input:
 
 ```
 {
   "app_id": 42,
+  "auth_type": "Admin",
   "base_url": "https://yourorg.teamdynamix.com",
   "beid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "credentials": {
+    "password": "password",
+    "username": "svc_insightconnect"
+  },
   "web_services_key": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 }
 ```
@@ -246,9 +254,11 @@ Example output:
 
 ## Troubleshooting
 
-* Ensure your BEID and Web Services Key are correct and have not expired.
-* Verify the Application ID matches the target TeamDynamix application.
-* The base URL should not include a trailing slash.
+* Admin authentication: The BEID and Web Services Key are found in TDAdmin on the organization detail page. An administrator with the Add BE Administrators permission can view these. The admin service account must be set to Active.
+* User authentication: Create a service account in TDAdmin under Users & Roles > Users > Create > Create Service Account. Assign a security role with the following minimum permissions - All: View All Accts/Depts, Tickets: Create/Edit Tickets. Then grant the service account access to the target ticketing application under Applications > [App] > Users & Roles.
+* Application ID: Found in TDAdmin under Applications. Select the ticketing application and note the numeric ID in the URL or application details.
+* The base URL should not include a trailing slash
+* Verify the Application ID matches the target TeamDynamix ticketing application
 
 # Version History
 
@@ -258,7 +268,9 @@ Example output:
 
 * [TeamDynamix](https://www.teamdynamix.com/)
 * [TeamDynamix Web API](https://solutions.teamdynamix.com/TDWebApi/)
+* [TeamDynamix Web API Authentication](https://solutions.teamdynamix.com/TDWebApi/Home/section/Auth)
 
 ## References
 
 * [TeamDynamix Web API Documentation](https://solutions.teamdynamix.com/TDWebApi/)
+* [TeamDynamix Web API Authentication](https://solutions.teamdynamix.com/TDWebApi/Home/section/Auth)

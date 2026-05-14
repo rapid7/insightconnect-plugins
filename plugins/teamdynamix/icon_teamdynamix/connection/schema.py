@@ -5,8 +5,10 @@ import json
 
 class Input:
     APP_ID = "app_id"
+    AUTH_TYPE = "auth_type"
     BASE_URL = "base_url"
     BEID = "beid"
+    CREDENTIALS = "credentials"
     WEB_SERVICES_KEY = "web_services_key"
 
 
@@ -19,8 +21,19 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "app_id": {
       "type": "integer",
       "title": "Application ID",
-      "description": "The numeric Application ID for the TeamDynamix ticketing application",
-      "order": 4
+      "description": "Numeric Application ID for the target ticketing application, found in TDAdmin under Applications",
+      "order": 6
+    },
+    "auth_type": {
+      "type": "string",
+      "title": "Authentication Type",
+      "description": "Admin uses BEID and Web Services Key (broad access), User uses username and password for a service account (scoped permissions)",
+      "default": "Admin",
+      "enum": [
+        "Admin",
+        "User"
+      ],
+      "order": 2
     },
     "base_url": {
       "type": "string",
@@ -31,21 +44,26 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "beid": {
       "type": "string",
       "title": "BEID",
-      "description": "The BEID (Back End Identifier) from TeamDynamix Admin",
-      "order": 2
+      "description": "Back End Identifier found in TDAdmin on the organization detail page, required for Admin authentication",
+      "order": 3
+    },
+    "credentials": {
+      "$ref": "#/definitions/credential_username_password",
+      "title": "Credentials",
+      "description": "Username and password for a TeamDynamix service account created in TDAdmin under Users and Roles, required for User authentication",
+      "order": 5
     },
     "web_services_key": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "Web Services Key",
-      "description": "The Web Services Key from TeamDynamix Admin",
-      "order": 3
+      "description": "Web Services Key found in TDAdmin on the organization detail page, required for Admin authentication",
+      "order": 4
     }
   },
   "required": [
     "app_id",
-    "base_url",
-    "beid",
-    "web_services_key"
+    "auth_type",
+    "base_url"
   ],
   "definitions": {
     "credential_secret_key": {
@@ -65,6 +83,32 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
           "displayType": "password"
         }
       }
+    },
+    "credential_username_password": {
+      "id": "credential_username_password",
+      "title": "Credential: Username and Password",
+      "description": "A username and password combination",
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "title": "Username",
+          "description": "The username to log in with",
+          "order": 1
+        },
+        "password": {
+          "type": "string",
+          "title": "Password",
+          "description": "The password",
+          "format": "password",
+          "displayType": "password",
+          "order": 2
+        }
+      },
+      "required": [
+        "username",
+        "password"
+      ]
     }
   }
 }

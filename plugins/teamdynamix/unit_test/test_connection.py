@@ -8,17 +8,20 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import patch, MagicMock
 from icon_teamdynamix.util.request_helper import TeamDynamixClient
-from icon_teamdynamix.util.constants import TIMEOUT, AUTH_ENDPOINT, HTTP_ERROR_MAP
+from icon_teamdynamix.util.constants import TIMEOUT, AUTH_ADMIN_ENDPOINT, AUTH_USER_ENDPOINT
 from insightconnect_plugin_runtime.exceptions import PluginException
 import requests
 import logging
 
 
-class TestTeamDynamixClient(TestCase):
+class TestTeamDynamixClientAdmin(TestCase):
+    """Tests for Admin (BEID + Web Services Key) authentication."""
+
     def setUp(self):
         self.logger = logging.getLogger("test")
         self.client = TeamDynamixClient(
             base_url="https://example.teamdynamix.com",
+            auth_type="admin",
             beid="test-beid",
             web_services_key="test-key",
             app_id=42,
@@ -26,7 +29,7 @@ class TestTeamDynamixClient(TestCase):
         )
 
     @patch("icon_teamdynamix.util.request_helper.requests.Session")
-    def test_authenticate_success(self, mock_session_class):
+    def test_admin_authenticate_success(self, mock_session_class):
         mock_session = MagicMock()
         mock_response = MagicMock()
         mock_response.status_code = 200
@@ -38,13 +41,13 @@ class TestTeamDynamixClient(TestCase):
 
         self.assertEqual(token, "some-bearer-token")
         mock_session.post.assert_called_once_with(
-            f"https://example.teamdynamix.com{AUTH_ENDPOINT}",
+            f"https://example.teamdynamix.com{AUTH_ADMIN_ENDPOINT}",
             json={"BEID": "test-beid", "WebServicesKey": "test-key"},
             timeout=TIMEOUT,
         )
 
     @patch("icon_teamdynamix.util.request_helper.requests.Session")
-    def test_authenticate_failure(self, mock_session_class):
+    def test_admin_authenticate_failure(self, mock_session_class):
         mock_session = MagicMock()
         mock_response = MagicMock()
         mock_response.status_code = 401
@@ -52,11 +55,58 @@ class TestTeamDynamixClient(TestCase):
         mock_session.post.return_value = mock_response
         self.client._session = mock_session
 
-        with self.assertRaises(PluginException):
+        with self.assertRaises(PluginException) as context:
             self.client._authenticate()
+        self.assertIn("BEID", context.exception.assistance)
+
+
+class TestTeamDynamixClientUser(TestCase):
+    """Tests for User (username + password) authentication."""
+
+    def setUp(self):
+        self.logger = logging.getLogger("test")
+        self.client = TeamDynamixClient(
+            base_url="https://example.teamdynamix.com",
+            auth_type="user",
+            username="svc_account",
+            password="secret123",
+            app_id=42,
+            logger=self.logger,
+        )
 
     @patch("icon_teamdynamix.util.request_helper.requests.Session")
-    def test_authenticate_empty_token(self, mock_session_class):
+    def test_user_authenticate_success(self, mock_session_class):
+        mock_session = MagicMock()
+        mock_response = MagicMock()
+        mock_response.status_code = 200
+        mock_response.text = '"user-bearer-token"'
+        mock_session.post.return_value = mock_response
+        self.client._session = mock_session
+
+        token = self.client._authenticate()
+
+        self.assertEqual(token, "user-bearer-token")
+        mock_session.post.assert_called_once_with(
+            f"https://example.teamdynamix.com{AUTH_USER_ENDPOINT}",
+            json={"UserName": "svc_account", "Password": "secret123"},
+            timeout=TIMEOUT,
+        )
+
+    @patch("icon_teamdynamix.util.request_helper.requests.Session")
+    def test_user_authenticate_failure(self, mock_session_class):
+        mock_session = MagicMock()
+        mock_response = MagicMock()
+        mock_response.status_code = 401
+        mock_response.text = "Invalid credentials"
+        mock_session.post.return_value = mock_response
+        self.client._session = mock_session
+
+        with self.assertRaises(PluginException) as context:
+            self.client._authenticate()
+        self.assertIn("username", context.exception.assistance)
+
+    @patch("icon_teamdynamix.util.request_helper.requests.Session")
+    def test_user_authenticate_empty_token(self, mock_session_class):
         mock_session = MagicMock()
         mock_response = MagicMock()
         mock_response.status_code = 200
@@ -66,6 +116,21 @@ class TestTeamDynamixClient(TestCase):
 
         with self.assertRaises(PluginException):
             self.client._authenticate()
+
+
+class TestTeamDynamixClientRequests(TestCase):
+    """Tests for HTTP request handling (shared across auth types)."""
+
+    def setUp(self):
+        self.logger = logging.getLogger("test")
+        self.client = TeamDynamixClient(
+            base_url="https://example.teamdynamix.com",
+            auth_type="admin",
+            beid="test-beid",
+            web_services_key="test-key",
+            app_id=42,
+            logger=self.logger,
+        )
 
     @patch("icon_teamdynamix.util.request_helper.requests.Session")
     def test_authenticate_timeout(self, mock_session_class):
@@ -225,6 +290,7 @@ class TestTeamDynamixClient(TestCase):
     def test_base_url_trailing_slash_stripped(self):
         client = TeamDynamixClient(
             base_url="https://example.teamdynamix.com/",
+            auth_type="admin",
             beid="test",
             web_services_key="test",
             app_id=42,

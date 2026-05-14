@@ -5,17 +5,36 @@ from typing import Union
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from icon_teamdynamix.util.constants import API_BASE_PATH, AUTH_ENDPOINT, HTTP_ERROR_MAP, TIMEOUT
+from icon_teamdynamix.util.constants import (
+    API_BASE_PATH,
+    AUTH_ADMIN_ENDPOINT,
+    AUTH_USER_ENDPOINT,
+    HTTP_ERROR_MAP,
+    TIMEOUT,
+)
 
 
 class TeamDynamixClient:
     """Handles authentication and HTTP requests to the TeamDynamix Web API."""
 
-    def __init__(self, base_url: str, beid: str, web_services_key: str, app_id: int, logger=None):
+    def __init__(
+        self,
+        base_url: str,
+        auth_type: str,
+        app_id: int,
+        beid: str = "",
+        web_services_key: str = "",
+        username: str = "",
+        password: str = "",
+        logger=None,
+    ):
         self.base_url = base_url.rstrip("/")
+        self.auth_type = auth_type
+        self.app_id = app_id
         self.beid = beid
         self.web_services_key = web_services_key
-        self.app_id = app_id
+        self.username = username
+        self.password = password
         self.logger = logger
         self._token = None
         self._session = requests.Session()
@@ -27,41 +46,57 @@ class TeamDynamixClient:
         return f"{API_BASE_PATH}/{self.app_id}/tickets"
 
     def _authenticate(self) -> str:
-        """Authenticate with TeamDynamix API using BEID and Web Services Key.
-        Returns a bearer token string."""
-        url = f"{self.base_url}{AUTH_ENDPOINT}"
-        payload = {"BEID": self.beid, "WebServicesKey": self.web_services_key}
+        """Authenticate with TeamDynamix API.
+
+        Uses either Admin (BEID + Web Services Key) or User (username + password)
+        authentication depending on the configured auth_type.
+
+        Returns a bearer token string.
+        """
+        if self.auth_type == "admin":
+            url = f"{self.base_url}{AUTH_ADMIN_ENDPOINT}"
+            payload = {"BEID": self.beid, "WebServicesKey": self.web_services_key}
+        else:
+            url = f"{self.base_url}{AUTH_USER_ENDPOINT}"
+            payload = {"UserName": self.username, "Password": self.password}
 
         if self.logger:
-            self.logger.info(f"TeamDynamixClient: Authenticating at {url}")
+            self.logger.info(f"TeamDynamixClient: Authenticating at {url} ({self.auth_type} mode)")
 
         try:
             resp = self._session.post(url, json=payload, timeout=TIMEOUT)
         except requests.exceptions.Timeout as error:
             raise PluginException(
-                cause="Authentication request to TeamDynamix timed out.",
+                cause="Authentication request to TeamDynamix timed out",
                 assistance=f"Verify the base URL is correct and the instance is reachable: {self.base_url}",
                 data=str(error),
             )
         except requests.exceptions.ConnectionError as error:
             raise PluginException(
-                cause="Unable to connect to TeamDynamix.",
+                cause="Unable to connect to TeamDynamix",
                 assistance=f"Verify the base URL is correct and network connectivity exists: {self.base_url}",
                 data=str(error),
             )
 
         if resp.status_code != 200:
+            if self.auth_type == "admin":
+                assistance = "Verify BEID and Web Services Key are correct and the admin service account is active"
+            else:
+                assistance = (
+                    "Verify the username and password are correct, the service account is active, "
+                    "and has been granted access to the ticketing application"
+                )
             raise PluginException(
-                cause=f"TeamDynamix authentication failed with status {resp.status_code}.",
-                assistance="Verify BEID and Web Services Key are correct and the admin service account is active.",
+                cause=f"TeamDynamix authentication failed with status {resp.status_code}",
+                assistance=assistance,
                 data=resp.text,
             )
 
         token = resp.text.strip().strip('"')
         if not token:
             raise PluginException(
-                cause="TeamDynamix returned an empty authentication token.",
-                assistance="Check BEID and Web Services Key in your connection settings.",
+                cause="TeamDynamix returned an empty authentication token",
+                assistance="Check your credentials in the connection settings",
             )
 
         return token
@@ -84,14 +119,12 @@ class TeamDynamixClient:
             return
 
         error_info = HTTP_ERROR_MAP.get(status_code, {})
-        cause = error_info.get("cause", f"TeamDynamix API returned status {status_code}.")
-        assistance = error_info.get("assistance", "Review the response for details.")
+        cause = error_info.get("cause", f"TeamDynamix API returned status {status_code}")
+        assistance = error_info.get("assistance", "Review the response for details")
 
         raise PluginException(cause=cause, assistance=assistance, data=response_text)
 
-    def make_request(
-        self, method: str, endpoint: str, payload: dict = None, params: dict = None
-    ) -> Union[dict, list]:
+    def make_request(self, method: str, endpoint: str, payload: dict = None, params: dict = None) -> Union[dict, list]:
         """Make an authenticated request to the TeamDynamix API.
 
         Args:
@@ -121,13 +154,13 @@ class TeamDynamixClient:
             )
         except requests.exceptions.Timeout as error:
             raise PluginException(
-                cause="Request to TeamDynamix timed out.",
+                cause="Request to TeamDynamix timed out",
                 assistance="The API did not respond within the timeout period. Retry the request.",
                 data=str(error),
             )
         except requests.exceptions.ConnectionError as error:
             raise PluginException(
-                cause="Unable to connect to TeamDynamix.",
+                cause="Unable to connect to TeamDynamix",
                 assistance=f"Verify network connectivity and that the instance is reachable: {self.base_url}",
                 data=str(error),
             )
@@ -148,13 +181,13 @@ class TeamDynamixClient:
                 )
             except requests.exceptions.Timeout as error:
                 raise PluginException(
-                    cause="Request to TeamDynamix timed out after re-authentication.",
+                    cause="Request to TeamDynamix timed out after re-authentication",
                     assistance="The API did not respond within the timeout period. Retry the request.",
                     data=str(error),
                 )
             except requests.exceptions.ConnectionError as error:
                 raise PluginException(
-                    cause="Unable to connect to TeamDynamix after re-authentication.",
+                    cause="Unable to connect to TeamDynamix after re-authentication",
                     assistance=f"Verify network connectivity: {self.base_url}",
                     data=str(error),
                 )
@@ -168,8 +201,8 @@ class TeamDynamixClient:
             return resp.json()
         except ValueError:
             raise PluginException(
-                cause="TeamDynamix API returned non-JSON response.",
-                assistance="The API returned an unexpected response format.",
+                cause="TeamDynamix API returned non-JSON response",
+                assistance="The API returned an unexpected response format",
                 data=resp.text,
             )
 
