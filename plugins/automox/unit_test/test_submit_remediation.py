@@ -78,23 +78,18 @@ class TestSubmitRemediation(TestCase):
         finally:
             os.unlink(f.name)
 
-    def test_invalid_json_string(self) -> None:
-        self.params[Input.DEVICES_JSON] = "not valid json"
+    @parameterized.expand(
+        [
+            ("invalid_json_string", "not valid json", "preset", PluginException.Preset.INVALID_JSON),
+            ("empty_device_list", "[]", "cause", "Invalid input"),
+            ("missing_cves", json.dumps([{"id": "ext-1"}]), "cause", "Invalid input"),
+        ],
+    )
+    def test_invalid_devices_input(self, _name: str, devices_json: str, attr: str, expected: object) -> None:
+        self.params[Input.DEVICES_JSON] = devices_json
         with self.assertRaises(PluginException) as context:
             self.action.run(self.params)
-        self.assertEqual(context.exception.preset, PluginException.Preset.INVALID_JSON)
-
-    def test_empty_device_list(self) -> None:
-        self.params[Input.DEVICES_JSON] = "[]"
-        with self.assertRaises(PluginException) as context:
-            self.action.run(self.params)
-        self.assertEqual(context.exception.cause, "Invalid input")
-
-    def test_missing_cves(self) -> None:
-        self.params[Input.DEVICES_JSON] = json.dumps([{"id": "ext-1"}])
-        with self.assertRaises(PluginException) as context:
-            self.action.run(self.params)
-        self.assertEqual(context.exception.cause, "Invalid input")
+        self.assertEqual(getattr(context.exception, attr), expected)
 
     def test_invalid_action_type(self) -> None:
         self.params[Input.ACTION_TYPE] = "invalid"

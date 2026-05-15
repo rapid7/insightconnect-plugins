@@ -444,6 +444,19 @@ class ApiClient:
         return self.remove_null_values(self._call_api("GET", f"{self.endpoint}/events", params))
 
     # Remediations
+    @staticmethod
+    def _validate_remediation_device(index: int, device: Dict) -> None:
+        if not isinstance(device.get("id"), str):
+            raise PluginException(
+                cause="Invalid input",
+                assistance=f"Device at index {index} is missing required string field 'id'.",
+            )
+        if not isinstance(device.get("cves"), list) or len(device["cves"]) == 0:
+            raise PluginException(
+                cause="Invalid input",
+                assistance=f"Device at index {index} is missing required non-empty array field 'cves'.",
+            )
+
     def submit_remediation(self, org_id: int, action_type: str, devices_input: str) -> Dict:
         """
         Submit device and CVE data for remediation or matching.
@@ -483,16 +496,7 @@ class ApiClient:
             )
 
         for i, device in enumerate(devices):
-            if not isinstance(device.get("id"), str):
-                raise PluginException(
-                    cause="Invalid input",
-                    assistance=f"Device at index {i} is missing required string field 'id'.",
-                )
-            if not isinstance(device.get("cves"), list) or len(device["cves"]) == 0:
-                raise PluginException(
-                    cause="Invalid input",
-                    assistance=f"Device at index {i} is missing required non-empty array field 'cves'.",
-                )
+            self._validate_remediation_device(i, device)
 
         # Resolve integer org ID to org UUID for the remediate endpoint
         org = self.get_org(org_id)
