@@ -463,7 +463,7 @@ class ApiClient:
         Automatically chunks large payloads into batches of 100 devices.
         :param org_id: Organization ID
         :param action_type: 'remediate' or 'match'
-        :param devices_input: JSON string or file path containing an array of device objects
+        :param devices_input: JSON string containing an array of device objects
         :return: Dict with batch_uuid, total_devices, chunks_sent, and collected responses
         """
         if action_type not in ("remediate", "match"):
@@ -472,22 +472,13 @@ class ApiClient:
                 assistance="action_type must be 'remediate' or 'match'.",
             )
 
-        # Parse devices from JSON string or file path
-        devices = None
         try:
             devices = json.loads(devices_input)
         except (json.JSONDecodeError, TypeError):
-            pass
-
-        if devices is None:
-            try:
-                with open(devices_input) as f:
-                    devices = json.load(f)
-            except (OSError, json.JSONDecodeError, TypeError):
-                raise PluginException(
-                    preset=PluginException.Preset.INVALID_JSON,
-                    assistance="devices_input must be a valid JSON string or a path to a JSON file.",
-                )
+            raise PluginException(
+                preset=PluginException.Preset.INVALID_JSON,
+                assistance="devices_input must be a valid JSON string.",
+            )
 
         if not isinstance(devices, list) or len(devices) == 0:
             raise PluginException(

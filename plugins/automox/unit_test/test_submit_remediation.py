@@ -1,7 +1,6 @@
 import sys
 import os
 import json
-import tempfile
 
 sys.path.append(os.path.abspath("../"))
 
@@ -64,19 +63,6 @@ class TestSubmitRemediation(TestCase):
         self.assertEqual(response[Output.CHUNKS_SENT], 1)
         # 1 GET org + 1 POST remediate
         self.assertEqual(mock.call_count, 2)
-
-    @patch("requests.Session.request", side_effect=mock_request_200)
-    def test_file_path_input(self, mock: Mock) -> None:
-        with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as f:
-            json.dump(self.single_device, f)
-            f.flush()
-            self.params[Input.DEVICES_JSON] = f.name
-        try:
-            response = self.action.run(self.params)
-            self.assertEqual(response[Output.TOTAL_DEVICES], 1)
-            self.assertEqual(response[Output.CHUNKS_SENT], 1)
-        finally:
-            os.unlink(f.name)
 
     @parameterized.expand(
         [

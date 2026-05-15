@@ -45,7 +45,7 @@ class SubmitRemediationInput(insightconnect_plugin_runtime.Input):
     "devices_json": {
       "type": "string",
       "title": "Devices JSON",
-      "description": "JSON string or file path containing an array of device objects with id and cves fields",
+      "description": "JSON string containing an array of device objects with id and cves fields",
       "order": 3
     }
   },
