@@ -4,6 +4,7 @@ from .schema import SendHtmlMessageInput, SendHtmlMessageOutput, Input, Output, 
 # Custom imports below
 from icon_microsoft_teams.util.komand_clean_with_nulls import remove_null_and_clean
 from icon_microsoft_teams.util.words_utils import add_words_values_to_message
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class SendHtmlMessage(insightconnect_plugin_runtime.Action):
@@ -22,8 +23,19 @@ class SendHtmlMessage(insightconnect_plugin_runtime.Action):
         thread_id = params.get(Input.THREAD_ID)
 
         teams = self.connection.client.get_teams(team_name)
+        if not teams:
+            raise PluginException(
+                cause="Team not found.",
+                assistance=f"Please verify '{team_name}' is a valid team name.",
+            )
         team_id = teams[0].get("id")
+
         channels = self.connection.client.get_channels(team_id, channel_name)
+        if not channels:
+            raise PluginException(
+                cause="Channel not found.",
+                assistance=f"Please verify '{channel_name}' is a valid channel name.",
+            )
         channel_id = channels[0].get("id")
 
         result = self.connection.bot.send_channel_message(

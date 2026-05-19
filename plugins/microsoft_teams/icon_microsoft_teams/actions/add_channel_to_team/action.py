@@ -1,6 +1,9 @@
 import insightconnect_plugin_runtime
 from .schema import AddChannelToTeamInput, AddChannelToTeamOutput, Input, Output, Component
 
+# Custom imports below
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 
 class AddChannelToTeam(insightconnect_plugin_runtime.Action):
     def __init__(self):
@@ -18,6 +21,11 @@ class AddChannelToTeam(insightconnect_plugin_runtime.Action):
         channel_type = params.get(Input.CHANNEL_TYPE)
 
         teams = self.connection.client.get_teams(team_name)
+        if not teams:
+            raise PluginException(
+                cause="Team not found.",
+                assistance=f"Please verify '{team_name}' is a valid team name.",
+            )
         team_id = teams[0].get("id")
 
         success = self.connection.client.create_channel(team_id, channel_name, channel_description, channel_type)

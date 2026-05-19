@@ -1,109 +1,57 @@
-import requests
+import re
+import urllib.parse
 from logging import Logger
-from typing import Union
 from time import sleep
+from typing import Union
+
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import clean
 
-from icon_microsoft_teams.util.constants import TIMEOUT, HTTP_ERROR_MAP
+from icon_microsoft_teams.util.base_client import BaseClient
+from icon_microsoft_teams.util.constants import GRAPH_SCOPE_DEFAULT, AUTH_URL
 from icon_microsoft_teams.util.komand_clean_with_nulls import remove_null_and_clean
 
-import re
-import urllib.parse
 
-
-class GraphApiClient:
+class GraphApiClient(BaseClient):
     """Microsoft Graph API client using application-only (client_credentials) authentication."""
 
-    def __init__(self, base_url: str, logger: Logger, get_headers_func):
+    def __init__(  # pylint: disable=too-many-arguments,too-many-positional-arguments
+        self, app_id: str, app_secret: str, tenant_id: str, base_url: str, endpoint: str, logger: Logger
+    ):
         """
         Initialize the Graph API client.
 
-        :param base_url: The Graph API base URL (e.g., https://graph.microsoft.com)
+        :param app_id: Azure App Registration client ID
+        :param app_secret: Azure App Registration client secret
+        :param tenant_id: Azure AD tenant ID
+        :param base_url: Graph API base URL (e.g., https://graph.microsoft.com)
+        :param endpoint: Endpoint type (Normal, GCC, etc.) for auth URL resolution
         :param logger: Logger instance
-        :param get_headers_func: Callable that returns auth headers dict
         """
+        super().__init__(
+            app_id=app_id,
+            app_secret=app_secret,
+            tenant_id=tenant_id,
+            auth_url=AUTH_URL.get(endpoint, "https://login.microsoftonline.com"),
+            scope=GRAPH_SCOPE_DEFAULT,
+            logger=logger,
+        )
         self._base_url = base_url
-        self._logger = logger
-        self._get_headers = get_headers_func
-        self._session = requests.Session()
 
     def _make_request(self, method: str, endpoint: str, **kwargs) -> Union[dict, list]:
         """
-        Central request method with error handling.
+        Make a Graph API request with authentication.
 
-        :param method: HTTP method (GET, POST, PUT, DELETE, PATCH)
+        :param method: HTTP method
         :param endpoint: API endpoint path (e.g., /v1.0/groups)
-        :param kwargs: Additional arguments passed to requests
+        :param kwargs: Additional arguments (json, params, etc.)
         :return: Parsed JSON response
         """
         url = f"{self._base_url}{endpoint}"
-        headers = self._get_headers()
-
+        headers = self._get_auth_headers()
         self._logger.info(f"Making {method} request to: {url}")
-
-        try:
-            response = self._session.request(
-                method=method,
-                url=url,
-                headers=headers,
-                timeout=TIMEOUT,
-                **kwargs,
-            )
-        except requests.exceptions.Timeout as error:
-            raise PluginException(
-                cause="Request timed out",
-                assistance=f"The request to {url} timed out after {TIMEOUT} seconds. "
-                "Please verify network connectivity and try again.",
-                data=str(error),
-            ) from error
-        except requests.exceptions.ConnectionError as error:
-            raise PluginException(
-                cause="Unable to connect",
-                assistance=f"Could not connect to {self._base_url}. "
-                "Please verify network connectivity and that the endpoint is correct.",
-                data=str(error),
-            ) from error
-
-        return self._handle_response(response)
-
-    def _handle_response(self, response: requests.Response) -> Union[dict, list, None]:
-        """Handle the API response, raising appropriate exceptions for error codes."""
-        if response.status_code == 204:
-            return None
-
-        if response.status_code >= 400:
-            self._handle_error_status(response)
-
-        if not response.content:
-            return None
-
-        try:
-            return response.json()
-        except ValueError as error:
-            raise PluginException(
-                cause="Non-JSON response received",
-                assistance="The server returned a response that could not be parsed as JSON.",
-                data=response.text[:500],
-            ) from error
-
-    def _handle_error_status(self, response: requests.Response):
-        """Map HTTP error codes to PluginExceptions."""
-        status_code = response.status_code
-        error_info = HTTP_ERROR_MAP.get(status_code)
-
-        if error_info:
-            raise PluginException(
-                cause=error_info["cause"],
-                assistance=error_info["assistance"],
-                data=response.text[:1000],
-            )
-
-        raise PluginException(
-            cause=f"Unexpected HTTP error: {status_code}",
-            assistance="An unexpected error occurred. Please contact support if this persists.",
-            data=response.text[:1000],
-        )
+        response = self._call_api(method, url, headers=headers, **kwargs)
+        return self._handle_json_response(response)
 
     # ─── Teams / Groups ───────────────────────────────────────────────────────────
 
@@ -138,10 +86,10 @@ class GraphApiClient:
     def _paginate_results(self, items: list, next_link: str) -> list:
         """Follow pagination links and collect all results."""
         while next_link:
-            next_result = self._session.get(next_link, headers=self._get_headers(), timeout=TIMEOUT)
+            response = self._call_api("GET", next_link, headers=self._get_auth_headers())
             try:
-                next_result.raise_for_status()
-                next_json = next_result.json()
+                response.raise_for_status()
+                next_json = response.json()
             except Exception as error:
                 raise PluginException(
                     cause="Attempt to get paginated results failed.",
@@ -227,18 +175,13 @@ class GraphApiClient:
         }
 
         self._logger.info(f"Creating {channel_type} channel: {channel_name}")
-        response = self._session.request(
-            method="POST",
-            url=f"{self._base_url}{endpoint}",
-            headers=self._get_headers(),
-            json=payload,
-            timeout=TIMEOUT,
-        )
+        url = f"{self._base_url}{endpoint}"
+        response = self._call_api("POST", url, headers=self._get_auth_headers(), json=payload)
 
         if response.status_code == 201:
             return True
 
-        self._handle_error_status(response)
+        self._raise_for_status(response)
         return False
 
     def delete_channel(self, team_id: str, channel_id: str) -> bool:
@@ -246,17 +189,13 @@ class GraphApiClient:
         endpoint = f"/v1.0/teams/{team_id}/channels/{channel_id}"
 
         self._logger.info(f"Deleting channel: {channel_id}")
-        response = self._session.request(
-            method="DELETE",
-            url=f"{self._base_url}{endpoint}",
-            headers=self._get_headers(),
-            timeout=TIMEOUT,
-        )
+        url = f"{self._base_url}{endpoint}"
+        response = self._call_api("DELETE", url, headers=self._get_auth_headers())
 
         if response.status_code == 204:
             return True
 
-        self._handle_error_status(response)
+        self._raise_for_status(response)
         return False
 
     # ─── Messages (Read) ──────────────────────────────────────────────────────────
@@ -322,18 +261,13 @@ class GraphApiClient:
         payload = {"@odata.id": f"{self._base_url}/v1.0/directoryObjects/{user_id}"}
 
         self._logger.info(f"Adding user {user_id} to group {group_id}")
-        response = self._session.request(
-            method="POST",
-            url=f"{self._base_url}{endpoint}",
-            headers=self._get_headers(),
-            json=payload,
-            timeout=TIMEOUT,
-        )
+        url = f"{self._base_url}{endpoint}"
+        response = self._call_api("POST", url, headers=self._get_auth_headers(), json=payload)
 
         if response.status_code == 204:
             return True
 
-        self._handle_error_status(response)
+        self._raise_for_status(response)
         return False
 
     def remove_member_from_group(self, group_id: str, user_id: str) -> bool:
@@ -341,17 +275,13 @@ class GraphApiClient:
         endpoint = f"/v1.0/groups/{group_id}/members/{user_id}/$ref"
 
         self._logger.info(f"Removing user {user_id} from group {group_id}")
-        response = self._session.request(
-            method="DELETE",
-            url=f"{self._base_url}{endpoint}",
-            headers=self._get_headers(),
-            timeout=TIMEOUT,
-        )
+        url = f"{self._base_url}{endpoint}"
+        response = self._call_api("DELETE", url, headers=self._get_auth_headers())
 
         if response.status_code == 204:
             return True
 
-        self._handle_error_status(response)
+        self._raise_for_status(response)
         return False
 
     def add_group_owner(self, group_id: str, user_id: str) -> bool:
@@ -360,13 +290,8 @@ class GraphApiClient:
         payload = {"@odata.id": f"{self._base_url}/v1.0/directoryObjects/{user_id}"}
 
         self._logger.info(f"Adding user {user_id} as owner of group {group_id}")
-        response = self._session.request(
-            method="POST",
-            url=f"{self._base_url}{endpoint}",
-            headers=self._get_headers(),
-            json=payload,
-            timeout=TIMEOUT,
-        )
+        url = f"{self._base_url}{endpoint}"
+        response = self._call_api("POST", url, headers=self._get_auth_headers(), json=payload)
 
         if response.status_code == 204:
             self._logger.info("User was added as owner successfully.")
@@ -375,7 +300,7 @@ class GraphApiClient:
             self._logger.info("User is already an owner of this group.")
             return True
 
-        self._handle_error_status(response)
+        self._raise_for_status(response)
         return False
 
     def add_member_to_channel(self, team_id: str, channel_id: str, user_id: str, role: str) -> bool:
@@ -388,13 +313,8 @@ class GraphApiClient:
         }
 
         self._logger.info(f"Adding user {user_id} to channel {channel_id}")
-        response = self._session.request(
-            method="POST",
-            url=f"{self._base_url}{endpoint}",
-            headers=self._get_headers(),
-            json=payload,
-            timeout=TIMEOUT,
-        )
+        url = f"{self._base_url}{endpoint}"
+        response = self._call_api("POST", url, headers=self._get_auth_headers(), json=payload)
 
         if response.status_code == 201:
             self._logger.info("User was added to channel successfully.")
@@ -403,7 +323,7 @@ class GraphApiClient:
             self._logger.info("User has already been added to the channel.")
             return True
 
-        self._handle_error_status(response)
+        self._raise_for_status(response)
         return False
 
     def create_group(  # pylint: disable=too-many-arguments,too-many-positional-arguments
@@ -427,20 +347,13 @@ class GraphApiClient:
         }
 
         if owners:
-            owners_payload = self._build_user_references(owners)
-            payload["owners@odata.bind"] = owners_payload
+            payload["owners@odata.bind"] = self._build_user_references(owners)
         if members:
-            members_payload = self._build_user_references(members)
-            payload["members@odata.bind"] = members_payload
+            payload["members@odata.bind"] = self._build_user_references(members)
 
         self._logger.info(f"Creating group: {group_name}")
-        response = self._session.request(
-            method="POST",
-            url=f"{self._base_url}{endpoint}",
-            headers=self._get_headers(),
-            json=payload,
-            timeout=TIMEOUT,
-        )
+        url = f"{self._base_url}{endpoint}"
+        response = self._call_api("POST", url, headers=self._get_auth_headers(), json=payload)
 
         if response.status_code == 201:
             try:
@@ -452,7 +365,7 @@ class GraphApiClient:
                     data=str(error),
                 ) from error
 
-        self._handle_error_status(response)
+        self._raise_for_status(response)
         return {}
 
     def delete_group(self, group_id: str) -> bool:
@@ -460,17 +373,13 @@ class GraphApiClient:
         endpoint = f"/v1.0/groups/{group_id}"
 
         self._logger.info(f"Deleting group: {group_id}")
-        response = self._session.request(
-            method="DELETE",
-            url=f"{self._base_url}{endpoint}",
-            headers=self._get_headers(),
-            timeout=TIMEOUT,
-        )
+        url = f"{self._base_url}{endpoint}"
+        response = self._call_api("DELETE", url, headers=self._get_auth_headers())
 
         if response.status_code == 204:
             return True
 
-        self._handle_error_status(response)
+        self._raise_for_status(response)
         return False
 
     def get_group_id_from_name(self, group_name: str) -> str:
@@ -492,6 +401,7 @@ class GraphApiClient:
     def enable_teams_for_group(self, group_id: str) -> bool:
         """Enable Microsoft Teams for a group."""
         endpoint = f"/v1.0/groups/{group_id}/team"
+        url = f"{self._base_url}{endpoint}"
         payload = {
             "memberSettings": {
                 "allowCreateUpdateChannels": True,
@@ -519,13 +429,7 @@ class GraphApiClient:
         self._logger.info(f"Enabling Teams for group: {group_id}")
 
         for attempt in range(1, 6):
-            response = self._session.request(
-                method="PUT",
-                url=f"{self._base_url}{endpoint}",
-                headers=self._get_headers(),
-                json=payload,
-                timeout=TIMEOUT,
-            )
+            response = self._call_api("PUT", url, headers=self._get_auth_headers(), json=payload)
 
             if response.status_code == 201:
                 self._logger.info("Team was enabled successfully.")
@@ -574,13 +478,8 @@ class GraphApiClient:
         payload["members"] = list_members
 
         self._logger.info(f"Creating chat with {len(list_members)} members")
-        response = self._session.request(
-            method="POST",
-            url=f"{self._base_url}{endpoint}",
-            headers=self._get_headers(),
-            json=payload,
-            timeout=TIMEOUT,
-        )
+        url = f"{self._base_url}{endpoint}"
+        response = self._call_api("POST", url, headers=self._get_auth_headers(), json=payload)
 
         if response.status_code == 201:
             try:
@@ -592,7 +491,7 @@ class GraphApiClient:
                     data=str(error),
                 ) from error
 
-        self._handle_error_status(response)
+        self._raise_for_status(response)
         return {}
 
     # ─── Helpers ──────────────────────────────────────────────────────────────────

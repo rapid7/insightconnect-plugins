@@ -3,6 +3,7 @@ from .schema import GetChannelsForTeamInput, GetChannelsForTeamOutput, Input, Ou
 
 # Custom imports below
 from icon_microsoft_teams.util.komand_clean_with_nulls import remove_null_and_clean
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class GetChannelsForTeam(insightconnect_plugin_runtime.Action):
@@ -19,6 +20,11 @@ class GetChannelsForTeam(insightconnect_plugin_runtime.Action):
         channel_name = params.get(Input.CHANNEL_NAME)
 
         teams = self.connection.client.get_teams(team_name)
+        if not teams:
+            raise PluginException(
+                cause="Team not found.",
+                assistance=f"Please verify '{team_name}' is a valid team name.",
+            )
         team_id = teams[0].get("id")
 
         channels = self.connection.client.get_channels(team_id, channel_name)
