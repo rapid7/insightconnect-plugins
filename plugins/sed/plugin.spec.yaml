@@ -11,7 +11,7 @@ description: |
   $ printf 'Cats are enjoyable animals\n' | sed 's/Cats/Dogs/'
   Dogs are enjoyable animals
   ```
-version: 2.0.4
+version: 2.0.5
 connection_version: 2
 vendor: rapid7
 support: community
@@ -30,7 +30,7 @@ hub_tags:
   features: []
 sdk:
   type: slim
-  version: 6.4.3
+  version: 6.5.1
   user: nobody
 key_features:
   - Manipulate input streams and strings
@@ -42,6 +42,7 @@ troubleshooting:
     * `s/\"//g` - A stream editor expression to remove all double-quotes from a string.
     * `'s/\"/\'/g'` - A stream editor expression to replace all double-quotes with single-quotes.
 version_history:
+  - "2.0.5 - Updated SDK to the latest version (6.5.1)"
   - "2.0.4 - Refreshed the plugin | Updated SDK to the latest version (6.4.3)"
   - "2.0.3 - Add action input and output examples to the documentation"
   - "2.0.2 - New spec and help.md format for the Extension Library | Refactor duplicate code | Remove returning dummy output in connection test | Refactor Exception to PluginException | Changed type in help to be the same as in plugin spec"

@@ -131,6 +131,7 @@ If a literal double-quote is required it must be escaped by a backslash `\`. For
 
 # Version History
 
+* 2.0.5 - Updated SDK to the latest version (6.5.1)
 * 2.0.4 - Refreshed the plugin | Updated SDK to the latest version (6.4.3)
 * 2.0.3 - Add action input and output examples to the documentation
 * 2.0.2 - New spec and help.md format for the Extension Library | Refactor duplicate code | Remove returning dummy output in connection test | Refactor Exception to PluginException | Changed type in help to be the same as in plugin spec
