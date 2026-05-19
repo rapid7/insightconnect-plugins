@@ -16,7 +16,9 @@ class TestSendHtmlMessage(TestCase):
     def setUp(self) -> None:
         self.action = Util.default_connector(SendHtmlMessage())
         self.action.connection.client.get_teams.return_value = [{"id": "team-123", "displayName": "Example Team"}]
-        self.action.connection.client.get_channels.return_value = [{"id": "channel-456", "displayName": "Example Channel"}]
+        self.action.connection.client.get_channels.return_value = [
+            {"id": "channel-456", "displayName": "Example Channel"}
+        ]
         self.action.connection.bot.send_channel_message.return_value = {"id": "msg-001"}
 
     def test_send_html_message(self) -> None:

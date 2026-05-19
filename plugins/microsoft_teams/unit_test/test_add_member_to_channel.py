@@ -15,7 +15,9 @@ class TestAddMemberToChannel(TestCase):
     def setUp(self) -> None:
         self.action = Util.default_connector(AddMemberToChannel())
         self.action.connection.client.get_group_id_from_name.return_value = "group-123"
-        self.action.connection.client.get_channels.return_value = [{"id": "channel-456", "displayName": "Example Channel"}]
+        self.action.connection.client.get_channels.return_value = [
+            {"id": "channel-456", "displayName": "Example Channel"}
+        ]
         self.action.connection.client.get_user_info.return_value = {"id": "user-789", "displayName": "Test User"}
         self.action.connection.client.add_member_to_channel.return_value = True
 
@@ -31,4 +33,6 @@ class TestAddMemberToChannel(TestCase):
         self.action.connection.client.get_group_id_from_name.assert_called_with("test")
         self.action.connection.client.get_channels.assert_called_with("group-123", "Example Channel")
         self.action.connection.client.get_user_info.assert_called_with("test@example.com")
-        self.action.connection.client.add_member_to_channel.assert_called_with("group-123", "channel-456", "user-789", "owner")
+        self.action.connection.client.add_member_to_channel.assert_called_with(
+            "group-123", "channel-456", "user-789", "owner"
+        )
