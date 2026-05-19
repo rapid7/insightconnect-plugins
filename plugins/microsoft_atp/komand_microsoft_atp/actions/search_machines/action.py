@@ -20,7 +20,7 @@ class SearchMachines(insightconnect_plugin_runtime.Action):
     @auto_instrument
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
-        odata_filter = params.get(Input.FILTER)
+        odata_filter = params.get(Input.FILTER, "")
         limit = params.get(Input.LIMIT, 100)
         # END INPUT BINDING - DO NOT REMOVE
 
