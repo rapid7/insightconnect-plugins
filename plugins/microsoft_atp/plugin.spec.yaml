@@ -30,7 +30,7 @@ hub_tags:
   features: []
 sdk:
   type: full
-  version: 6.5.0
+  version: 6.5.1
   user: nobody
 troubleshooting:
 - For information on how to setup your Azure application and assign permissions go
