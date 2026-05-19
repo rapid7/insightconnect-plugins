@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Submit device and CVE data for remediation or matching. Automatically chunks large payloads into batches of 100 devices."
+    DESCRIPTION = "Submit device and CVE data for remediation or matching. Automatically chunks large payloads into batches of 100 devices"
 
 
 class Input:
@@ -26,12 +26,6 @@ class SubmitRemediationInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "org_id": {
-      "type": "integer",
-      "title": "Organization ID",
-      "description": "Identifier of organization",
-      "order": 1
-    },
     "action_type": {
       "type": "string",
       "title": "Action Type",
@@ -47,12 +41,18 @@ class SubmitRemediationInput(insightconnect_plugin_runtime.Input):
       "title": "Devices JSON",
       "description": "JSON string containing an array of device objects with id and cves fields",
       "order": 3
+    },
+    "org_id": {
+      "type": "integer",
+      "title": "Organization ID",
+      "description": "Identifier of organization",
+      "order": 1
     }
   },
   "required": [
-    "org_id",
     "action_type",
-    "devices_json"
+    "devices_json",
+    "org_id"
   ],
   "definitions": {}
 }
@@ -74,12 +74,6 @@ class SubmitRemediationOutput(insightconnect_plugin_runtime.Output):
       "description": "The UUID assigned to this batch of requests",
       "order": 1
     },
-    "total_devices": {
-      "type": "integer",
-      "title": "Total Devices",
-      "description": "Total number of devices submitted",
-      "order": 2
-    },
     "chunks_sent": {
       "type": "integer",
       "title": "Chunks Sent",
@@ -94,13 +88,19 @@ class SubmitRemediationOutput(insightconnect_plugin_runtime.Output):
         "type": "object"
       },
       "order": 4
+    },
+    "total_devices": {
+      "type": "integer",
+      "title": "Total Devices",
+      "description": "Total number of devices submitted",
+      "order": 2
     }
   },
   "required": [
     "batch_uuid",
-    "total_devices",
     "chunks_sent",
-    "responses"
+    "responses",
+    "total_devices"
   ],
   "definitions": {}
 }

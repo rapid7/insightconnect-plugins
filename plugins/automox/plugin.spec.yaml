@@ -1642,6 +1642,58 @@ actions:
         type: boolean
         required: true
         example: true
+  submit_remediation:
+    title: Submit Remediation
+    description: Submit device and CVE data for remediation or matching. Automatically
+      chunks large payloads into batches of 100 devices
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: true
+        example: 1234
+      action_type:
+        title: Action Type
+        description: The type of remediation action
+        type: string
+        required: true
+        enum:
+          - remediate
+          - match
+        example: remediate
+      devices_json:
+        title: Devices JSON
+        description: JSON string containing an array of device objects with id and
+          cves fields
+        type: string
+        required: true
+        example: '[{"id":"00000000-0000-0000-0000-000000000000","cves":["CVE-2021-24111"]}]'
+    output:
+      batch_uuid:
+        title: Batch UUID
+        description: The UUID assigned to this batch of requests
+        type: string
+        required: true
+        example: 00000000-0000-0000-0000-000000000000
+      total_devices:
+        title: Total Devices
+        description: Total number of devices submitted
+        type: integer
+        required: true
+        example: 150
+      chunks_sent:
+        title: Chunks Sent
+        description: Number of API requests made
+        type: integer
+        required: true
+        example: 2
+      responses:
+        title: Responses
+        description: Collected response bodies from each chunked POST
+        type: '[]object'
+        required: true
+        example: '[{"status":"accepted"}]'
 
 triggers:
   get_events:

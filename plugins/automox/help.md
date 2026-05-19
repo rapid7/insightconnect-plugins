@@ -1361,6 +1361,60 @@ Example output:
 }
 ```
 
+#### Submit Remediation
+
+This action is used to submit device and CVE data for remediation or matching. Automatically chunks large payloads into
+ batches of 100 devices
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|action_type|string|None|True|The type of remediation action|["remediate", "match"]|remediate|None|None|
+|devices_json|string|None|True|JSON string containing an array of device objects with id and cves fields|None|[{"id":"00000000-0000-0000-0000-000000000000","cves":["CVE-2021-24111"]}]|None|None|
+|org_id|integer|None|True|Identifier of organization|None|1234|None|None|
+  
+Example input:
+
+```
+{
+  "action_type": "remediate",
+  "devices_json": [
+    {
+      "cves": [
+        "CVE-2021-24111"
+      ],
+      "id": "00000000-0000-0000-0000-000000000000"
+    }
+  ],
+  "org_id": 1234
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|batch_uuid|string|True|The UUID assigned to this batch of requests|00000000-0000-0000-0000-000000000000|
+|chunks_sent|integer|True|Number of API requests made|2|
+|responses|[]object|True|Collected response bodies from each chunked POST|[{"status":"accepted"}]|
+|total_devices|integer|True|Total number of devices submitted|150|
+  
+Example output:
+
+```
+{
+  "batch_uuid": "00000000-0000-0000-0000-000000000000",
+  "chunks_sent": 2,
+  "responses": [
+    {
+      "status": "accepted"
+    }
+  ],
+  "total_devices": 150
+}
+```
+
 #### Update Device
 
 This action is used to update Automox device

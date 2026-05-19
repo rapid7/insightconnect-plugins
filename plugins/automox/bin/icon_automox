@@ -78,6 +78,8 @@ def main():
         
             self.add_action(actions.DeleteVulnerabilitySyncActionSet())
         
+            self.add_action(actions.SubmitRemediation())
+        
 
     """Run plugin"""
     cli = insightconnect_plugin_runtime.CLI(ICONAutomox())
