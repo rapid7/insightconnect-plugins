@@ -11,12 +11,15 @@ description: '[Microsoft Teams](https://products.office.com/en-us/microsoft-team
   to interact with Microsoft Teams'
 key_features:
 - Communication Management for all microsoft products
+- App-only authentication (no user account required)
+- Bot Framework integration for sending messages
 requirements:
-- Username and Password
-- Secret Key, similar to API Key
-version: 7.0.6
-connection_version: 7
-supported_versions: [Microsoft Graph API v1.0 2024-09-13]
+- Azure App Registration with Application ID and Secret
+- Microsoft Graph application permissions with admin consent
+- Azure Bot registration (for sending messages)
+version: 8.0.0
+connection_version: 8
+supported_versions: [Microsoft Graph API v1.0 2025-05-18]
 vendor: rapid7
 support: community
 status: []
@@ -52,6 +55,7 @@ references:
 - '[Adaptive Cards Actions](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/cards/cards-actions#adaptive-cards-actions)'
 - '[Python Regular Expression Library (Re)](https://docs.python.org/3.7/library/re.html)'
 version_history:
+- 8.0.0 - Major refactor to eliminate user account requirement | Switched to client_credentials (app-only) OAuth2 flow | Added Bot Framework for sending messages | Migrated all endpoints from /beta to /v1.0 | Removed username_password from connection | Removed username input from get_message_in_chat (now uses app permissions) | Updated SDK to 6.5.1
 - 7.0.6 - Updated SDK to the latest version (6.5.1)
 - 7.0.5 - Updated SDK to the latest version (6.4.3)
 - 7.0.4 - Updated SDK to the latest version (6.4.2)
@@ -569,16 +573,9 @@ connection:
     type: credential_secret_key
     required: true
     example: aMeCAEYdOLlK+qRcD9AjdyxLkCaqZH1UPm7adjJQ5Og=
-  username_password:
-    type: credential_username_password
-    title: Credentials
-    description: Username and password
-    required: true
-    example: '{ "username": "user", "password": "mypassword" }'
   endpoint:
     title: Endpoint
-    description: 'The type of endpoint to connect to: normal service, GCC (government),
-      GCC High (government), DoD (military)'
+    description: 'The type of endpoint to connect to: normal service, GCC (government), GCC High (government), DoD (military)'
     type: string
     required: true
     example: Normal
@@ -1137,12 +1134,6 @@ actions:
     title: Get Message in Chat
     description: Retrieve a single message or a message reply in a chat
     input:
-      username:
-        title: Username
-        description: The ID of user or his email
-        type: string
-        required: true
-        example: user@example.com
       chat_id:
         title: Chat ID
         description: The ID of chat

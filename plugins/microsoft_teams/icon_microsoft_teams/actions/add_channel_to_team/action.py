@@ -1,9 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import AddChannelToTeamInput, AddChannelToTeamOutput, Input, Output, Component
 
-# Custom imports below
-from icon_microsoft_teams.util.teams_utils import get_teams_from_microsoft, create_channel
-
 
 class AddChannelToTeam(insightconnect_plugin_runtime.Action):
     def __init__(self):
@@ -20,9 +17,9 @@ class AddChannelToTeam(insightconnect_plugin_runtime.Action):
         channel_description = params.get(Input.CHANNEL_DESCRIPTION)
         channel_type = params.get(Input.CHANNEL_TYPE)
 
-        teams = get_teams_from_microsoft(self.logger, self.connection, team_name)
+        teams = self.connection.client.get_teams(team_name)
         team_id = teams[0].get("id")
 
-        success = create_channel(self.logger, self.connection, team_id, channel_name, channel_description, channel_type)
+        success = self.connection.client.create_channel(team_id, channel_name, channel_description, channel_type)
 
         return {Output.SUCCESS: success}

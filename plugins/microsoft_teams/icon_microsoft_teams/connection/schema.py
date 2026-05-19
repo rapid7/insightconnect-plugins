@@ -8,7 +8,6 @@ class Input:
     APPLICATION_SECRET = "application_secret"
     DIRECTORY_ID = "directory_id"
     ENDPOINT = "endpoint"
-    USERNAME_PASSWORD = "username_password"
 
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -45,12 +44,6 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
         "GCC High",
         "DoD"
       ],
-      "order": 5
-    },
-    "username_password": {
-      "$ref": "#/definitions/credential_username_password",
-      "title": "Credentials",
-      "description": "Username and password",
       "order": 4
     }
   },
@@ -58,8 +51,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "application_id",
     "application_secret",
     "directory_id",
-    "endpoint",
-    "username_password"
+    "endpoint"
   ],
   "definitions": {
     "credential_secret_key": {
@@ -79,32 +71,6 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
           "displayType": "password"
         }
       }
-    },
-    "credential_username_password": {
-      "id": "credential_username_password",
-      "title": "Credential: Username and Password",
-      "description": "A username and password combination",
-      "type": "object",
-      "properties": {
-        "username": {
-          "type": "string",
-          "title": "Username",
-          "description": "The username to log in with",
-          "order": 1
-        },
-        "password": {
-          "type": "string",
-          "title": "Password",
-          "description": "The password",
-          "format": "password",
-          "displayType": "password",
-          "order": 2
-        }
-      },
-      "required": [
-        "username",
-        "password"
-      ]
     }
   }
 }
