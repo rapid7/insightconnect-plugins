@@ -22,11 +22,22 @@ class GraphApiClient(BaseClient):
         Initialize the Graph API client.
 
         :param app_id: Azure App Registration client ID
+        :type app_id: str
+
         :param app_secret: Azure App Registration client secret
+        :type app_secret: str
+
         :param tenant_id: Azure AD tenant ID
+        :type tenant_id: str
+
         :param base_url: Graph API base URL (e.g., https://graph.microsoft.com)
+        :type base_url: str
+
         :param endpoint: Endpoint type (Normal, GCC, etc.) for auth URL resolution
+        :type endpoint: str
+
         :param logger: Logger instance
+        :type logger: Logger
         """
         super().__init__(
             app_id=app_id,
@@ -38,14 +49,29 @@ class GraphApiClient(BaseClient):
         )
         self._base_url = base_url
 
+    def test(self):
+        """
+        Test Graph API connectivity by authenticating and calling the organization endpoint.
+
+        :raises PluginException: If authentication or API call fails
+        """
+        self._authenticate()
+        self._make_request("GET", "/v1.0/organization")
+
     def _make_request(self, method: str, endpoint: str, **kwargs) -> Union[dict, list]:
         """
         Make a Graph API request with authentication.
 
         :param method: HTTP method
+        :type method: str
+
         :param endpoint: API endpoint path (e.g., /v1.0/groups)
+        :type endpoint: str
+
         :param kwargs: Additional arguments (json, params, etc.)
+
         :return: Parsed JSON response
+        :rtype: Union[dict, list]
         """
         url = f"{self._base_url}{endpoint}"
         headers = self._get_auth_headers()
@@ -497,10 +523,15 @@ class GraphApiClient(BaseClient):
     # ─── Helpers ──────────────────────────────────────────────────────────────────
 
     def _build_user_references(self, user_logins: list) -> list:
-        """Build odata user reference list from user login names."""
-        user_refs = []
-        for user_login in user_logins:
-            user = self.get_user_info(user_login)
-            user_id = user.get("id")
-            user_refs.append(f"{self._base_url}/v1.0/directoryObjects/{user_id}")
-        return user_refs
+        """
+        Build odata user reference list from user login names.
+
+        :param user_logins: List of user principal names
+        :type user_logins: list
+
+        :return: List of odata directory object references
+        :rtype: list
+        """
+        return [
+            f"{self._base_url}/v1.0/directoryObjects/{self.get_user_info(login).get('id')}" for login in user_logins
+        ]

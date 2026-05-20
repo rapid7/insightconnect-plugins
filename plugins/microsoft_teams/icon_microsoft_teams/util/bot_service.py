@@ -38,6 +38,10 @@ class BotService(BaseClient):
         )
         self._service_url = BOT_SERVICE_URL
 
+    def test(self):
+        """Test Bot Service connectivity by authenticating."""
+        self._authenticate()
+
     def send_channel_message(  # pylint: disable=too-many-arguments,too-many-positional-arguments
         self,
         team_id: str,

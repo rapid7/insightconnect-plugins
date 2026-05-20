@@ -49,22 +49,21 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def test(self):
         try:
-            self.client.authenticate()
+            self.client.test()
         except PluginException as error:
             raise ConnectionTestException(
-                cause="Unable to get authentication token.",
+                cause="Graph API connection test failed.",
                 assistance="Please verify your Application ID, Directory ID, and Application Secret. "
                 "Ensure the app registration has Microsoft Graph application permissions with admin consent.",
             ) from error
 
-        # Verify we can actually call the Graph API
         try:
-            self.client._make_request("GET", "/v1.0/organization")  # pylint: disable=protected-access
+            self.bot.test()
         except PluginException as error:
             raise ConnectionTestException(
-                cause="Authentication succeeded but API call failed.",
-                assistance="The token was obtained but could not access Microsoft Graph. "
-                "Verify the app has Organization.Read.All or similar permissions.",
+                cause="Bot Service connection test failed.",
+                assistance="Please verify your Application ID and Application Secret are correct for the Bot Service. "
+                "Ensure the bot app registration has the Bot Framework API permissions.",
             ) from error
 
         return {"success": True}

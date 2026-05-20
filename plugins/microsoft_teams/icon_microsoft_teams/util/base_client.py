@@ -7,6 +7,8 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_microsoft_teams.util.constants import TIMEOUT, HTTP_ERROR_MAP
 
+DEFAULT_TOKEN_LIFETIME = 3500
+
 
 class BaseClient:
     """
@@ -44,9 +46,9 @@ class BaseClient:
         self._auth_url = auth_url
         self._scope = scope
         self._logger = logger
-        self._session = requests.Session()
         self._token = None
         self._token_acquired_at = 0
+        self._token_lifetime = DEFAULT_TOKEN_LIFETIME
 
     def _authenticate(self):
         """Acquire an OAuth2 access token using client_credentials flow."""
@@ -62,7 +64,28 @@ class BaseClient:
         self._logger.info(f"Authenticating via: {token_url}")
 
         try:
-            response = self._session.post(token_url, data=body, timeout=TIMEOUT)
+            response = requests.post(token_url, data=body, timeout=TIMEOUT)
+
+            if response.status_code != 200:
+                raise PluginException(
+                    cause="Authentication failed",
+                    assistance="Please verify your Application ID, Directory ID, and Application Secret are correct. "
+                    "Ensure the app registration has the required permissions with admin consent granted.",
+                    data=response.text,
+                )
+
+            result_json = response.json()
+            self._token = result_json.get("access_token")
+
+            # Use expires_in from token response if available, with a 60-second buffer
+            expires_in = result_json.get("expires_in")
+            if expires_in:
+                self._token_lifetime = int(expires_in) - 60
+            else:
+                self._token_lifetime = DEFAULT_TOKEN_LIFETIME
+
+        except PluginException:
+            raise
         except requests.exceptions.Timeout as error:
             raise PluginException(
                 cause="Authentication request timed out",
@@ -75,18 +98,6 @@ class BaseClient:
                 assistance=f"Could not connect to {token_url}. Please verify network connectivity.",
                 data=str(error),
             ) from error
-
-        if response.status_code != 200:
-            raise PluginException(
-                cause="Authentication failed",
-                assistance="Please verify your Application ID, Directory ID, and Application Secret are correct. "
-                "Ensure the app registration has the required permissions with admin consent granted.",
-                data=response.text,
-            )
-
-        try:
-            result_json = response.json()
-            self._token = result_json.get("access_token")
         except (ValueError, KeyError) as error:
             raise PluginException(
                 cause="Failed to parse authentication response",
@@ -98,9 +109,9 @@ class BaseClient:
         self._logger.info(f"Authentication successful, token: ******************{self._token[-5:]}")
 
     def _get_token(self, force_refresh: bool = False) -> str:
-        """Get a valid access token, refreshing if expired (tokens last ~1 hour)."""
+        """Get a valid access token, refreshing if expired."""
         elapsed = time.time() - self._token_acquired_at
-        if not self._token or elapsed > 3500 or force_refresh:
+        if not self._token or elapsed > self._token_lifetime or force_refresh:
             self._authenticate()
         return self._token
 
@@ -130,7 +141,7 @@ class BaseClient:
         :return: Response object
         """
         try:
-            return self._session.request(method=method, url=url, timeout=TIMEOUT, **kwargs)
+            return requests.request(method=method, url=url, timeout=TIMEOUT, **kwargs)
         except requests.exceptions.Timeout as error:
             raise PluginException(
                 cause="Request timed out",
