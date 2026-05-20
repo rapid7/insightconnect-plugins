@@ -1,7 +1,7 @@
 {
-	"spec": "e69ff4732fdc7ffdb99e06e5d75f6795",
-	"manifest": "20bb277fcd9af3928e8a89c050d505cf",
-	"setup": "0603e574a2c9c6238cf1d81cec3ecc95",
+	"spec": "c87aa826d41e28f2ebe9120a4ccab287",
+	"manifest": "c376208d64633137f547b92880b838f6",
+	"setup": "f246a63062dbf247668f97551fba7f67",
 	"schemas": [
 		{
 			"identifier": "blacklist/schema.py",
@@ -58,6 +58,10 @@
 		{
 			"identifier": "run_antivirus_scan/schema.py",
 			"hash": "a6c46611bc6781b58f7523d13bf4a3dc"
+		},
+		{
+			"identifier": "search_machines/schema.py",
+			"hash": "b62dbee825fae8b3f14e6d3b70231bfb"
 		},
 		{
 			"identifier": "stop_and_quarantine_file/schema.py",

@@ -1,0 +1,14 @@
+{
+  "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#MachineActions/$entity",
+  "id": "action-unisolate-123",
+  "type": "Unisolate",
+  "title": null,
+  "requestor": "user@example.com",
+  "requestorComment": "Unisolate machine",
+  "status": "Pending",
+  "machineId": "1234",
+  "computerDnsName": "my-hostname",
+  "creationDateTimeUtc": "2021-01-01T00:00:00Z",
+  "lastUpdateDateTimeUtc": "2021-01-01T00:00:00Z",
+  "relatedFileInfo": null
+}

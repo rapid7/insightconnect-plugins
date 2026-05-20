@@ -1,0 +1,17 @@
+{
+  "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#MachineReferences",
+  "value": [
+    {
+      "id": "abc123",
+      "computerDnsName": "desktop-01",
+      "osPlatform": "Windows10",
+      "rbacGroupName": "GroupA"
+    },
+    {
+      "id": "def456",
+      "computerDnsName": "desktop-02",
+      "osPlatform": "Windows10",
+      "rbacGroupName": "GroupB"
+    }
+  ]
+}

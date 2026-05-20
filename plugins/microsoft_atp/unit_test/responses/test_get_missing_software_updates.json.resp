@@ -1,0 +1,14 @@
+{
+  "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#MissingKbs",
+  "value": [
+    {
+      "id": "KB5001234",
+      "name": "KB5001234",
+      "osBuild": 19041,
+      "productsNames": ["Windows 10"],
+      "url": "https://example.com/kb5001234",
+      "machineMissedOn": 5,
+      "cveAddressed": 3
+    }
+  ]
+}

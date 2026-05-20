@@ -1,0 +1,14 @@
+{
+  "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#MachineActions/$entity",
+  "id": "action-collect-123",
+  "type": "CollectInvestigationPackage",
+  "title": null,
+  "requestor": "user@example.com",
+  "requestorComment": "Investigation package collected via InsightConnect",
+  "status": "Pending",
+  "machineId": "1234",
+  "computerDnsName": "my-hostname",
+  "creationDateTimeUtc": "2021-01-01T00:00:00Z",
+  "lastUpdateDateTimeUtc": "2021-01-01T00:00:00Z",
+  "relatedFileInfo": null
+}

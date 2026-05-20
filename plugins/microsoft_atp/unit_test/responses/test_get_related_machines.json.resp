@@ -1,0 +1,19 @@
+{
+  "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#Machines",
+  "value": [
+    {
+      "id": "related-machine-1",
+      "computerDnsName": "related-host-1",
+      "osPlatform": "Windows10",
+      "lastIpAddress": "10.0.0.1",
+      "healthStatus": "Active"
+    },
+    {
+      "id": "related-machine-2",
+      "computerDnsName": "related-host-2",
+      "osPlatform": "Windows10",
+      "lastIpAddress": "10.0.0.2",
+      "healthStatus": "Active"
+    }
+  ]
+}

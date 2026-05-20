@@ -1,0 +1,41 @@
+{
+  "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#Machines",
+  "value": [
+    {
+      "id": "abc123def456",
+      "computerDnsName": "desktop-win10",
+      "firstSeen": "2023-01-15T10:30:00.0000000Z",
+      "lastSeen": "2024-05-20T14:22:00.0000000Z",
+      "osPlatform": "Windows10",
+      "version": "21H2",
+      "osProcessor": "x64",
+      "lastIpAddress": "10.0.0.50",
+      "lastExternalIpAddress": "203.0.113.10",
+      "osBuild": 19044,
+      "healthStatus": "Active",
+      "rbacGroupId": 75,
+      "riskScore": "Medium",
+      "exposureLevel": "Low",
+      "isAadJoined": true,
+      "machineTags": ["Production", "Windows10"]
+    },
+    {
+      "id": "def789ghi012",
+      "computerDnsName": "laptop-win10",
+      "firstSeen": "2023-03-20T08:15:00.0000000Z",
+      "lastSeen": "2024-05-21T09:45:00.0000000Z",
+      "osPlatform": "Windows10",
+      "version": "22H2",
+      "osProcessor": "x64",
+      "lastIpAddress": "10.0.0.75",
+      "lastExternalIpAddress": "203.0.113.20",
+      "osBuild": 19045,
+      "healthStatus": "Active",
+      "rbacGroupId": 75,
+      "riskScore": "Low",
+      "exposureLevel": "Low",
+      "isAadJoined": true,
+      "machineTags": ["Production", "Windows10"]
+    }
+  ]
+}

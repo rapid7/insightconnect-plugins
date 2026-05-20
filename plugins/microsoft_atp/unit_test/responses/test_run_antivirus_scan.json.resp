@@ -1,0 +1,14 @@
+{
+  "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#MachineActions/$entity",
+  "id": "action-scan-123",
+  "type": "RunAntiVirusScan",
+  "title": null,
+  "requestor": "user@example.com",
+  "requestorComment": "Scan for malware",
+  "status": "Pending",
+  "machineId": "1234",
+  "computerDnsName": "my-hostname",
+  "creationDateTimeUtc": "2021-01-01T00:00:00Z",
+  "lastUpdateDateTimeUtc": "2021-01-01T00:00:00Z",
+  "relatedFileInfo": null
+}
