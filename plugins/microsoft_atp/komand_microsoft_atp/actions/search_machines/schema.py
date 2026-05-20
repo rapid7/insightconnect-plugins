@@ -33,7 +33,7 @@ class SearchMachinesInput(insightconnect_plugin_runtime.Input):
     "limit": {
       "type": "integer",
       "title": "Limit",
-      "description": "Maximum number of results to return",
+      "description": "Maximum number of results to return (API maximum is 10000, results are not paginated)",
       "order": 2
     }
   },

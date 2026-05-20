@@ -775,7 +775,7 @@ This action is used to search for machines using an OData filter query
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |filter|string|None|True|OData filter query to search for machines|None|osPlatform eq 'Windows10'|osPlatform eq 'Windows10'|Enter an OData $filter expression. See https://learn.microsoft.com/en-us/defender-endpoint/api/exposed-apis-odata-samples for available filter properties and operators.|
-|limit|integer|None|False|Maximum number of results to return|None|100|None|None|
+|limit|integer|None|False|Maximum number of results to return (API maximum is 10000, results are not paginated)|None|100|None|None|
   
 Example input:
 
@@ -790,13 +790,33 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|machines|[]machine|True|List of machines matching the filter|[]|
+|machines|[]machine|True|List of machines matching the filter|[{"id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73", "computerDnsName": "desktop-win10", "firstSeen": "2023-01-15T10:30:00.0000000Z", "lastSeen": "2024-05-20T14:22:00.0000000Z", "osPlatform": "Windows10", "version": "21H2", "osProcessor": "x64", "lastIpAddress": "10.0.0.50", "lastExternalIpAddress": "203.0.113.10", "osBuild": 19044, "healthStatus": "Active", "rbacGroupId": 75, "riskScore": "Medium", "exposureLevel": "Low", "machineTags": ["Production"]}]|
   
 Example output:
 
 ```
 {
-  "machines": []
+  "machines": [
+    {
+      "computerDnsName": "desktop-win10",
+      "exposureLevel": "Low",
+      "firstSeen": "2023-01-15T10:30:00.0000000Z",
+      "healthStatus": "Active",
+      "id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73",
+      "lastExternalIpAddress": "203.0.113.10",
+      "lastIpAddress": "10.0.0.50",
+      "lastSeen": "2024-05-20T14:22:00.0000000Z",
+      "machineTags": [
+        "Production"
+      ],
+      "osBuild": 19044,
+      "osPlatform": "Windows10",
+      "osProcessor": "x64",
+      "rbacGroupId": 75,
+      "riskScore": "Medium",
+      "version": "21H2"
+    }
+  ]
 }
 ```
 
@@ -1365,7 +1385,7 @@ Example output:
 
 # Version History
 
-* 6.1.0 - Add new action Search Machines
+* 6.1.0 - Add new action Search Machines | Updated SDK to the latest version (6.5.1)
 * 6.0.5 - Updated dependencies | Updated SDK to the latest version (6.4.3)
 * 6.0.4 - Updated SDK to the latest version (6.3.10)
 * 6.0.3 - Updated SDK to the latest version (6.3.3)

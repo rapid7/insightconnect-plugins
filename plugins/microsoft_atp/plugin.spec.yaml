@@ -41,7 +41,7 @@ references:
 - '[Windows Defender for Endpoint API Start Page](https://learn.microsoft.com/en-us/defender-endpoint/api/apis-intro)'
 - '[Windows Defender for Endpoint API Endpoints](https://learn.microsoft.com/en-us/defender-endpoint/api/exposed-apis-list)'
 version_history:
-- 6.1.0 - Add new action Search Machines
+- 6.1.0 - Add new action Search Machines | Updated SDK to the latest version (6.5.1)
 - 6.0.5 - Updated dependencies | Updated SDK to the latest version (6.4.3)
 - 6.0.4 - Updated SDK to the latest version (6.3.10)
 - 6.0.3 - Updated SDK to the latest version (6.3.3)
@@ -1657,7 +1657,7 @@ actions:
         required: true
       limit:
         title: Limit
-        description: Maximum number of results to return
+        description: Maximum number of results to return (API maximum is 10000, results are not paginated)
         type: integer
         example: 100
         required: false
@@ -1667,7 +1667,11 @@ actions:
         description: List of machines matching the filter
         type: '[]machine'
         required: true
-        example: []
+        example: [{id: 2df36d707c1ee5084cef77f3dbfc95db65bc4a73, computerDnsName: desktop-win10,
+          firstSeen: '2023-01-15T10:30:00.0000000Z', lastSeen: '2024-05-20T14:22:00.0000000Z',
+          osPlatform: Windows10, version: 21H2, osProcessor: x64, lastIpAddress: 10.0.0.50,
+          lastExternalIpAddress: 203.0.113.10, osBuild: 19044, healthStatus: Active,
+          rbacGroupId: 75, riskScore: Medium, exposureLevel: Low, machineTags: [Production]}]
 triggers:
   get_alert_matching_key:
     title: Get Alerts Matching Key
