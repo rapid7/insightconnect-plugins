@@ -7,7 +7,7 @@ description: The DNS plugin is used for forward and reverse DNS lookups. This pl
   uses [Dig](https://linux.die.net/man/1/dig), or Domain Information Groper, which
   is a network administration command-line tool for querying Domain Name System (DNS)
   name servers
-version: 2.0.7
+version: 2.0.8
 connection_version: 2
 vendor: rapid7
 support: community
@@ -15,10 +15,10 @@ supported_versions: ['2024-09-10']
 status: []
 sdk:
   type: full
-  version: 6.4.3
+  version: 6.5.1
   user: nobody
-  packages:
-  - bind-tools
+  custom_cmd:
+    - "RUN apk update && apk add --no-cache bind-tools"
 cloud_ready: true
 fedramp_ready: true
 resources:
@@ -50,6 +50,7 @@ references:
 - '[Dig](https://linux.die.net/man/1/dig)'
 - '[DNS Status Code](https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml)'
 version_history:
+- 2.0.8 - Updated SDK to the latest version (6.5.1)
 - 2.0.7 - Updated SDK to the latest version (6.4.3)
 - 2.0.6 - Updated SDK to the latest version (6.3.10)
 - 2.0.5 - Updated SDK to the latest version (6.2.5)
