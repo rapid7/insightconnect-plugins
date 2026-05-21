@@ -1,7 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import EnrollUserInput, EnrollUserOutput, Input, Output, Component
 
-
 # Custom imports below
 from komand_duo_admin.util.helpers import clean
 
