@@ -90,19 +90,19 @@ class BaseClient:
             raise PluginException(
                 cause="Authentication request timed out",
                 assistance="Please verify network connectivity and try again.",
-                data=str(error),
+                data=error,
             ) from error
         except requests.exceptions.ConnectionError as error:
             raise PluginException(
                 cause="Unable to connect to authentication endpoint",
                 assistance=f"Could not connect to {token_url}. Please verify network connectivity.",
-                data=str(error),
+                data=error,
             ) from error
         except (ValueError, KeyError) as error:
             raise PluginException(
                 cause="Failed to parse authentication response",
                 assistance="Unexpected response from the token endpoint.",
-                data=str(error),
+                data=error,
             ) from error
 
         self._token_acquired_at = time.time()
@@ -147,14 +147,14 @@ class BaseClient:
                 cause="Request timed out",
                 assistance=f"The request to {url} timed out after {TIMEOUT} seconds. "
                 "Please verify network connectivity and try again.",
-                data=str(error),
+                data=error,
             ) from error
         except requests.exceptions.ConnectionError as error:
             raise PluginException(
                 cause="Unable to connect",
                 assistance=f"Could not connect to {url}. "
                 "Please verify network connectivity and that the endpoint is correct.",
-                data=str(error),
+                data=error,
             ) from error
 
     def _handle_json_response(self, response: requests.Response) -> Union[dict, list, None]:

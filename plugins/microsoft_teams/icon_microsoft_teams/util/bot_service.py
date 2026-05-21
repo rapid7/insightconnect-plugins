@@ -39,8 +39,22 @@ class BotService(BaseClient):
         self._service_url = BOT_SERVICE_URL
 
     def test(self):
-        """Test Bot Service connectivity by authenticating."""
-        self._authenticate()
+        """
+        Test Bot Service connectivity by authenticating.
+
+        :raises PluginException: If authentication fails
+        """
+        try:
+            self._authenticate()
+        except PluginException:
+            raise
+        except Exception as error:
+            raise PluginException(
+                cause="Bot Service connection test failed.",
+                assistance="Please verify your Application ID and Application Secret are correct for the Bot Service. "
+                "Ensure the bot app registration has the Bot Framework API permissions.",
+                data=error,
+            ) from error
 
     def send_channel_message(  # pylint: disable=too-many-arguments,too-many-positional-arguments
         self,

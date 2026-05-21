@@ -50,20 +50,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def test(self):
         try:
             self.client.test()
-        except PluginException as error:
-            raise ConnectionTestException(
-                cause="Graph API connection test failed.",
-                assistance="Please verify your Application ID, Directory ID, and Application Secret. "
-                "Ensure the app registration has Microsoft Graph application permissions with admin consent.",
-            ) from error
-
-        try:
             self.bot.test()
         except PluginException as error:
             raise ConnectionTestException(
-                cause="Bot Service connection test failed.",
-                assistance="Please verify your Application ID and Application Secret are correct for the Bot Service. "
-                "Ensure the bot app registration has the Bot Framework API permissions.",
+                cause=error.cause,
+                assistance=error.assistance,
+                data=error.data,
             ) from error
 
         return {"success": True}

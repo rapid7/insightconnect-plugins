@@ -55,8 +55,18 @@ class GraphApiClient(BaseClient):
 
         :raises PluginException: If authentication or API call fails
         """
-        self._authenticate()
-        self._make_request("GET", "/v1.0/organization")
+        try:
+            self._authenticate()
+            self._make_request("GET", "/v1.0/organization")
+        except PluginException:
+            raise
+        except Exception as error:
+            raise PluginException(
+                cause="Graph API connection test failed.",
+                assistance="Please verify your Application ID, Directory ID, and Application Secret. "
+                "Ensure the app registration has Microsoft Graph application permissions with admin consent.",
+                data=error,
+            ) from error
 
     def _make_request(self, method: str, endpoint: str, **kwargs) -> Union[dict, list]:
         """
