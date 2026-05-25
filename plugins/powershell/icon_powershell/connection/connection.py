@@ -1,4 +1,5 @@
 import insightconnect_plugin_runtime
+
 from .schema import ConnectionSchema, Input
 
 
@@ -21,8 +22,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.domain = params.get(Input.KERBEROS, {}).get("domain_name")
         self.kdc = params.get(Input.KERBEROS, {}).get("kdc")
         self.script_credentials = {
-            "username": params.get(Input.SCRIPT_USERNAME_AND_PASSWORD, {}).get("username"),
-            "password": params.get(Input.SCRIPT_USERNAME_AND_PASSWORD, {}).get("password"),
+            "username": params.get(Input.SCRIPT_USERNAME_AND_PASSWORD, {}).get(
+                "username"
+            ),
+            "password": params.get(Input.SCRIPT_USERNAME_AND_PASSWORD, {}).get(
+                "password"
+            ),
             "secret_key": params.get(Input.SCRIPT_SECRET_KEY, {}).get("secretKey"),
         }
         self.logger.info("Connect: Connecting..")

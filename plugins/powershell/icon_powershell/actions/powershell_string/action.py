@@ -1,8 +1,10 @@
 import insightconnect_plugin_runtime
-from .schema import PowershellStringInput, PowershellStringOutput, Input, Component
 
 # Custom imports below
 from icon_powershell.util import util
+
+from .schema import (Component, Input, PowershellStringInput,
+                     PowershellStringOutput)
 
 
 class PowershellString(insightconnect_plugin_runtime.Action):
@@ -19,7 +21,9 @@ class PowershellString(insightconnect_plugin_runtime.Action):
         powershell_script = params.get(Input.SCRIPT)
         host_name = params.get(Input.HOST_NAME)
 
-        powershell_script = util.add_credentials_to_script(powershell_script, self.connection.script_credentials)
+        powershell_script = util.add_credentials_to_script(
+            powershell_script, self.connection.script_credentials
+        )
 
         return util.run_powershell_script(
             auth=self.connection.auth_type,

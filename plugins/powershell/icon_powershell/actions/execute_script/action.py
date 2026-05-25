@@ -1,10 +1,11 @@
 import base64
 
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+
+from icon_powershell.util import util
 
 from .schema import Component, ExecuteScriptInput, ExecuteScriptOutput, Input
-from icon_powershell.util import util
-from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class ExecuteScript(insightconnect_plugin_runtime.Action):
@@ -22,7 +23,9 @@ class ExecuteScript(insightconnect_plugin_runtime.Action):
         host_name = params.get(Input.HOST_NAME)
 
         powershell_script = self.decode_b64_script(encoded_powershell_script)
-        powershell_script = util.add_credentials_to_script(powershell_script, self.connection.script_credentials)
+        powershell_script = util.add_credentials_to_script(
+            powershell_script, self.connection.script_credentials
+        )
 
         return util.run_powershell_script(
             auth=self.connection.auth_type,
@@ -42,7 +45,10 @@ class ExecuteScript(insightconnect_plugin_runtime.Action):
             powershell_script = base64.b64decode(encoded_powershell_script)
         except base64.binascii.Error as e:
             self.logger.error("Base64 input" + encoded_powershell_script)
-            raise PluginException(cause="While decoding the base64 into bytes the following error occurred", data=e)
+            raise PluginException(
+                cause="While decoding the base64 into bytes the following error occurred",
+                data=e,
+            )
         except Exception as e:
             self.logger.error("Base64 input " + encoded_powershell_script)
             raise PluginException(

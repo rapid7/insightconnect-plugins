@@ -1,11 +1,10 @@
 import json
 import logging
 import os
-
 from unittest.mock import Mock
 
-from icon_powershell.connection import Connection
 from icon_powershell.actions.execute_script.schema import Output
+from icon_powershell.connection import Connection
 
 
 class Util:
@@ -20,19 +19,25 @@ class Util:
         return action
 
     @staticmethod
-    def read_file_to_string(filename, directory_path=os.path.dirname(os.path.realpath(__file__))):
+    def read_file_to_string(
+        filename, directory_path=os.path.dirname(os.path.realpath(__file__))
+    ):
         with open(os.path.join(directory_path, filename)) as my_file:
             return my_file.read()
 
     @staticmethod
-    def read_file_to_dict(filename, directory_path=os.path.dirname(os.path.realpath(__file__))):
+    def read_file_to_dict(
+        filename, directory_path=os.path.dirname(os.path.realpath(__file__))
+    ):
         return json.loads(Util.read_file_to_string(filename, directory_path))
 
     @staticmethod
     def mock_powershell(*args, **kwargs):
         class MockProcess:
             def __init__(self, filename):
-                self.response_text = Util.read_file_to_string(f"payloads/{filename}.json.resp")
+                self.response_text = Util.read_file_to_string(
+                    f"payloads/{filename}.json.resp"
+                )
 
             def __enter__(self, *args, **kwargs):
                 return self
@@ -42,7 +47,9 @@ class Util:
 
             def communicate(self):
                 response_dict = json.loads(self.response_text)
-                return response_dict.get(Output.STDOUT), response_dict.get(Output.STDERR)
+                return response_dict.get(Output.STDOUT), response_dict.get(
+                    Output.STDERR
+                )
 
             def run_ps(self, *args, **kwargs):
                 response_dict = json.loads(self.response_text)

@@ -1,9 +1,10 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
+
 from parameterized import parameterized
 
 from icon_powershell.util.util import add_credentials_to_script
@@ -22,9 +23,15 @@ class TestUtil(TestCase):
             ),
         ]
     )
-    def test_add_credentials_to_script(self, name, username, password, secret_key, expected):
+    def test_add_credentials_to_script(
+        self, name, username, password, secret_key, expected
+    ):
         actual = add_credentials_to_script(
             powershell_script="first line\nsecond line",
-            credentials={"username": username, "password": password, "secret_key": secret_key},
+            credentials={
+                "username": username,
+                "password": password,
+                "secret_key": secret_key,
+            },
         )
         self.assertEqual(actual, expected)
