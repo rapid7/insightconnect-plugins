@@ -23,9 +23,7 @@ class TestUtil(TestCase):
             ),
         ]
     )
-    def test_add_credentials_to_script(
-        self, name, username, password, secret_key, expected
-    ):
+    def test_add_credentials_to_script(self, name, username, password, secret_key, expected):
         actual = add_credentials_to_script(
             powershell_script="first line\nsecond line",
             credentials={

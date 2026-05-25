@@ -23,9 +23,7 @@ class ExecuteScript(insightconnect_plugin_runtime.Action):
         host_name = params.get(Input.HOST_NAME)
 
         powershell_script = self.decode_b64_script(encoded_powershell_script)
-        powershell_script = util.add_credentials_to_script(
-            powershell_script, self.connection.script_credentials
-        )
+        powershell_script = util.add_credentials_to_script(powershell_script, self.connection.script_credentials)
 
         return util.run_powershell_script(
             auth=self.connection.auth_type,
