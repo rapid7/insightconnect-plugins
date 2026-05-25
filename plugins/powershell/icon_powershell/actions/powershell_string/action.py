@@ -3,8 +3,7 @@ import insightconnect_plugin_runtime
 # Custom imports below
 from icon_powershell.util import util
 
-from .schema import (Component, Input, PowershellStringInput,
-                     PowershellStringOutput)
+from .schema import Component, Input, PowershellStringInput, PowershellStringOutput
 
 
 class PowershellString(insightconnect_plugin_runtime.Action):
