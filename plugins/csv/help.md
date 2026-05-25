@@ -240,6 +240,7 @@ Example output:
 
 # Version History
 
+* 2.0.8 - Updated SDK to the latest version (6.5.1)
 * 2.0.7 - Updated SDK to the latest version (6.4.3)
 * 2.0.6 - Updated SDK to the latest version (6.4.2)
 * 2.0.5 - Updated SDK to the latest version (6.3.10)
