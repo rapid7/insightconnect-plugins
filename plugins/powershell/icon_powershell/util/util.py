@@ -252,8 +252,8 @@ def configure_machine_for_kerberos_connection(
     # Creates a Kerberos ticket
     kinit = f"""echo '{password}' | kinit {username}@{domain.upper()}"""
     with subprocess.Popen(
-        kinit, shell="true", stdout=subprocess.PIPE, stderr=subprocess.PIPE
-    ) as response:  # noqa: B602
+        kinit, shell="true", stdout=subprocess.PIPE, stderr=subprocess.PIPE  # noqa: B602
+    ) as response:
         stdout, stderr = response.communicate()
     stdout = stdout.decode(DECODING_TYPE)
     stderr = stderr.decode(DECODING_TYPE)
@@ -264,8 +264,8 @@ def configure_machine_for_kerberos_connection(
         f.write(dns)
     realm = f"""echo '{password}' | realm --install=/ join --user={username} {domain}"""
     with subprocess.Popen(
-        realm, shell="true", stdout=subprocess.PIPE, stderr=subprocess.PIPE
-    ) as response:  # noqa: B602
+        realm, shell="true", stdout=subprocess.PIPE, stderr=subprocess.PIPE  # noqa: B602
+    ) as response:
         stdout, stderr = response.communicate()
     stdout = stdout.decode(DECODING_TYPE)
     stderr = stderr.decode(DECODING_TYPE)
