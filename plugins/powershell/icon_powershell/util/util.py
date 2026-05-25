@@ -251,7 +251,7 @@ def configure_machine_for_kerberos_connection(
     # Creates a Kerberos ticket
     kinit = f"""echo '{password}' | kinit {username}@{domain.upper()}"""
     response = subprocess.Popen(kinit, shell="true", stdout=subprocess.PIPE, stderr=subprocess.PIPE)  # noqa: B602
-    (stdout, stderr) = response.communicate()
+    stdout, stderr = response.communicate()
     stdout = stdout.decode(DECODING_TYPE)
     stderr = stderr.decode(DECODING_TYPE)
     action.logger.info("Attempt to make Kerberos ticket stdout: " + stdout)
@@ -261,7 +261,7 @@ def configure_machine_for_kerberos_connection(
         f.write(dns)
     realm = f"""echo '{password}' | realm --install=/ join --user={username} {domain}"""
     response = subprocess.Popen(realm, shell="true", stdout=subprocess.PIPE, stderr=subprocess.PIPE)  # noqa: B602
-    (stdout, stderr) = response.communicate()
+    stdout, stderr = response.communicate()
     stdout = stdout.decode(DECODING_TYPE)
     stderr = stderr.decode(DECODING_TYPE)
     action.logger.info("Attempt to join domain stdout: " + stdout)
