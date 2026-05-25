@@ -9,7 +9,9 @@ DECODING_TYPE = "utf-8"
 
 
 class FixWinrmSession(winrm.Session):
-    def run_ps(self, script: str) -> winrm.Response:  # Fixes string bug in python 3 for NTLM connection
+    def run_ps(
+        self, script: str
+    ) -> winrm.Response:  # Fixes string bug in python 3 for NTLM connection
         encoded_ps = base64.b64encode(script.encode("utf_16_le")).decode("ascii")
         rs = self.run_cmd(f"powershell -encodedcommand {encoded_ps}")
         if len(rs.std_err):
@@ -86,7 +88,9 @@ def run_powershell_script(
     return {"stdout": stdout, "stderr": stderr}
 
 
-def run_script_locally(action: insightconnect_plugin_runtime.Action, powershell_script: str) -> dict:
+def run_script_locally(
+    action: insightconnect_plugin_runtime.Action, powershell_script: str
+) -> dict:
     action.logger.info("Running on local VM")
     action.logger.debug("PowerShell script: " + powershell_script)
     with subprocess.Popen(
@@ -123,7 +127,9 @@ def run_script_using_ntlm(
     host_connection = f"{prefix}://{host_ip}:{port}/wsman"
     action.logger.debug("Host Connection: " + host_connection)
     action.logger.debug("PowerShell script: " + powershell_script)
-    powershell_session = FixWinrmSession(host_connection, auth=(username, password), transport="ntlm")
+    powershell_session = FixWinrmSession(
+        host_connection, auth=(username, password), transport="ntlm"
+    )
 
     # Forces the Protocol to not fail with self signed certs
     powershell_session.protocol = winrm.Protocol(
@@ -135,7 +141,9 @@ def run_script_using_ntlm(
         message_encryption="auto",
     )
 
-    error_value, stdout = run_powershell_session(action, powershell_script, powershell_session)
+    error_value, stdout = run_powershell_session(
+        action, powershell_script, powershell_session
+    )
 
     return {"stdout": stdout, "stderr": error_value}
 
@@ -155,7 +163,9 @@ def run_script_using_credssp(
     action.logger.debug("Host Connection: " + host_connection)
     action.logger.debug("PowerShell script: " + powershell_script)
 
-    powershell_session = FixWinrmSession(host_connection, auth=(username, password), transport="credssp")
+    powershell_session = FixWinrmSession(
+        host_connection, auth=(username, password), transport="credssp"
+    )
 
     # Forces the Protocol to not fail with self signed certs
     powershell_session.protocol = winrm.Protocol(
@@ -167,7 +177,9 @@ def run_script_using_credssp(
         message_encryption="auto",
     )
 
-    error_value, stdout = run_powershell_session(action, powershell_script, powershell_session)
+    error_value, stdout = run_powershell_session(
+        action, powershell_script, powershell_session
+    )
 
     return {"stdout": stdout, "stderr": error_value}
 
@@ -192,7 +204,9 @@ def run_script_using_kerberos(
     )
 
     # Runs the script on the host
-    powershell_session = FixWinrmSession(host_address, auth=(username, password), transport="kerberos")
+    powershell_session = FixWinrmSession(
+        host_address, auth=(username, password), transport="kerberos"
+    )
 
     # Forces the protocol to not fail with self signed certs
     powershell_session.protocol = winrm.Protocol(
@@ -202,7 +216,9 @@ def run_script_using_kerberos(
         password=password,
         server_cert_validation="ignore",
     )
-    error_value, stdout = run_powershell_session(action, powershell_script, powershell_session)
+    error_value, stdout = run_powershell_session(
+        action, powershell_script, powershell_session
+    )
 
     return {"stdout": stdout, "stderr": error_value}
 
@@ -251,7 +267,9 @@ def configure_machine_for_kerberos_connection(
 
     # Creates a Kerberos ticket
     kinit = f"""echo '{password}' | kinit {username}@{domain.upper()}"""
-    with subprocess.Popen(kinit, shell="true", stdout=subprocess.PIPE, stderr=subprocess.PIPE) as response:  # noqa: B602
+    with subprocess.Popen(
+        kinit, shell="true", stdout=subprocess.PIPE, stderr=subprocess.PIPE
+    ) as response:  # noqa: B602
         stdout, stderr = response.communicate()
     stdout = stdout.decode(DECODING_TYPE)
     stderr = stderr.decode(DECODING_TYPE)
@@ -261,7 +279,9 @@ def configure_machine_for_kerberos_connection(
     with open("/etc/resolv.conf", "w", encoding="utf-8") as f:
         f.write(dns)
     realm = f"""echo '{password}' | realm --install=/ join --user={username} {domain}"""
-    with subprocess.Popen(realm, shell="true", stdout=subprocess.PIPE, stderr=subprocess.PIPE) as response:  # noqa: B602
+    with subprocess.Popen(
+        realm, shell="true", stdout=subprocess.PIPE, stderr=subprocess.PIPE
+    ) as response:  # noqa: B602
         stdout, stderr = response.communicate()
     stdout = stdout.decode(DECODING_TYPE)
     stderr = stderr.decode(DECODING_TYPE)
@@ -304,7 +324,9 @@ def add_credentials_to_script(powershell_script: str, credentials: dict) -> str:
     if username:
         credentials_definition += f"$username = '{username}'\n"
     if password:
-        credentials_definition += f"$password = '{password}' | ConvertTo-SecureString -asPlainText -Force\n"
+        credentials_definition += (
+            f"$password = '{password}' | ConvertTo-SecureString -asPlainText -Force\n"
+        )
     if secret_key:
         credentials_definition += f"$secret_key = '{secret_key}'\n"
 
