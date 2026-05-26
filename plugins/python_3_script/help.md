@@ -77,7 +77,7 @@ This action is used to run a Python 3 function
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|function|python|def run(params={}):\n    return {}|True|Function definition. Must be named `run`. Accepts the `input` object as params. Returns the dict as output. In this action you can use `username`, `password`, `secret_key` variables if defined in connection|None|def run(params={}):\n\tprint(params.get('some_input'))\n\tprint(username, password)\n\treturn {}|None|None|
+|function|python|def run(params={}):\n    return {}|True|Function definition. Must be named `run`. Accepts the `input` object as params. Returns the dict as output. In this action you can use `username`, `password`, `secret_key` variables if defined in connection|None|def run(params={}):\n    print(params.get('some_input'))\n    print(username, password)\n    return {}|None|None|
 |input|object|None|False|Input object to be passed as `params={}` to the `run` function|None|{"some_input": "example input"}|None|None|
 |timeout|integer|30|False|Timeout (in minutes) for function execution. If this value is null it will default to 30 minutes|None|30|None|None|
   
@@ -85,7 +85,7 @@ Example input:
 
 ```
 {
-  "function": "def run(params={}):\\n    return {}",
+  "function": "def run(params={}):\n    return {}",
   "input": {
     "some_input": "example input"
   },
@@ -125,6 +125,7 @@ Example output:
 
 # Version History
 
+* 5.2.3 - Action: `Run`: Updated default function value | Updated SDK to the latest version (6.5.1)
 * 5.2.2 - Updated dependencies | Updated SDK to the latest version (6.5.0)
 * 5.2.1 - Addressed Snyk Vulnerability | SDK bump to latest version (6.3.4)
 * 5.2.0 - Added 3 additional `Secret Credential Fields` as optional connection inputs
