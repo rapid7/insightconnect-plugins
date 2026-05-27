@@ -1331,6 +1331,7 @@ Example output:
 
 # Version History
 
+* 6.0.6 - Updated SDK to the latest version (6.5.1)
 * 6.0.5 - Updated dependencies | Updated SDK to the latest version (6.4.3)
 * 6.0.4 - Updated SDK to the latest version (6.3.10)
 * 6.0.3 - Updated SDK to the latest version (6.3.3)
