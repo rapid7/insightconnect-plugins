@@ -9,7 +9,6 @@ class Component:
 
 class Input:
     ENV_LOCALE = "env_locale"
-    OBJ_EXT_EXTENSION = "obj_ext_extension"
     OBJ_URL = "obj_url"
     OPT_AUTO_DELETE_AFTER = "opt_auto_delete_after"
     OPT_NETWORK_CONNECT = "opt_network_connect"
@@ -41,13 +40,6 @@ class AndroidUrlAnalysisInput(insightconnect_plugin_runtime.Input):
       "description": "Operation System language. Use locale identifier or country name Example - ( \"en-US\" or \"Brazil\"). Case insensitive",
       "default": "",
       "order": 2
-    },
-    "obj_ext_extension": {
-      "type": "boolean",
-      "title": "Extension",
-      "description": "Change extension to valid",
-      "default": true,
-      "order": 13
     },
     "obj_url": {
       "type": "string",
@@ -144,7 +136,7 @@ class AndroidUrlAnalysisInput(insightconnect_plugin_runtime.Input):
       "title": "User Tags",
       "description": "Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8",
       "default": "",
-      "order": 14
+      "order": 13
     }
   },
   "required": [
