@@ -33,7 +33,8 @@ class Output:
 
 
 class GetReputationInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -72,14 +73,16 @@ class GetReputationInput(insightconnect_plugin_runtime.Input):
   ],
   "definitions": {}
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class GetReputationOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(r"""
+    schema = json.loads(
+        r"""
    {
   "type": "object",
   "title": "Variables",
@@ -183,7 +186,8 @@ class GetReputationOutput(insightconnect_plugin_runtime.Output):
   },
   "definitions": {}
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
