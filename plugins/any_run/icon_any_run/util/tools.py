@@ -29,12 +29,14 @@ def prepare_file_payload(
     elif report_format == "html":
         filename = get_report_name(analysis_uuid, "html")
         content = base64.b64encode(payload.encode()).decode()
+    else:
+        raise PluginException(f"Unsupported report format: {report_format}. Allowed: json, stix, html")
 
     return {"filename": filename, "content": content}
 
 
 def prepare_csv_payload(analysis_uuid: str, iocs: list[dict]) -> dict[str, bytes]:
-    iocs_csv = list()
+    iocs_csv = []
     iocs_csv.append(["category", "type", "name", "ioc", "reputation", "discoveringEntryId"])
 
     for ioc in iocs:
@@ -62,7 +64,7 @@ def prepare_csv_payload(analysis_uuid: str, iocs: list[dict]) -> dict[str, bytes
 
 
 def get_report_name(analysis_uuid: str, extension: str) -> str:
-    return f"ANYRUN_REPORT_{analysis_uuid}_{datetime.now().strftime(f'%Y-%m-%d_%H-%M-%S')}" + f".{extension}"
+    return f"ANYRUN_REPORT_{analysis_uuid}_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.{extension}"
 
 
 def check_hash_type(entity_value: str) -> str:
