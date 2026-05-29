@@ -1,7 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import RunCommandInput, RunCommandOutput, Input, Output, Component
 
-
 # Custom imports below
 
 

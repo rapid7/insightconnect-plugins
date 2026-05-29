@@ -1,7 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import DeleteGroupInput, DeleteGroupOutput, Input, Output, Component
 
-
 # Custom imports below
 
 

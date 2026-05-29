@@ -1,10 +1,11 @@
-from insightconnect_plugin_runtime.exceptions import PluginException
 import io
 import json
-import os
 import uuid
+from logging import Logger
+from typing import Any, Collection, Dict, List, Optional
+
 import requests
-from typing import Dict, List, Optional, Collection, Any
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class ApiClient:
@@ -16,7 +17,7 @@ class ApiClient:
     OUTCOME_FAIL = "failure"
     OUTCOME_SUCCESS = "success"
 
-    def __init__(self, logger, api_key, endpoint="https://console.automox.com/api"):
+    def __init__(self, logger: Logger, api_key: str, endpoint: str = "https://console.automox.com/api") -> None:
         self.endpoint = endpoint
         self.api_key = api_key
         self.session = requests.session()
@@ -34,7 +35,9 @@ class ApiClient:
             "content-type": "application/json",
         }
 
-    def _call_api(self, method: str, url: str, params=None, json_data: object = None) -> Optional[Dict]:
+    def _call_api(
+        self, method: str, url: str, params: Optional[Dict] = None, json_data: Optional[object] = None
+    ) -> Optional[Dict]:
         if params is None:
             params = {}
         try:
@@ -67,7 +70,7 @@ class ApiClient:
             self.logger.info(f"Call to Automox Console API failed: {error}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
-    def _page_results(self, url: str, params=None, sanitize: bool = True) -> List[Dict]:
+    def _page_results(self, url: str, params: Optional[Dict] = None, sanitize: bool = True) -> List[Dict]:
         if params is None:
             params = {}
         params = self.first_page(params)
@@ -90,7 +93,7 @@ class ApiClient:
 
         return page_resp
 
-    def _page_results_data(self, url: str, params=None) -> List[Dict]:
+    def _page_results_data(self, url: str, params: Optional[Dict] = None) -> List[Dict]:
         if params is None:
             params = {}
         params = self.first_page(params)
@@ -113,7 +116,7 @@ class ApiClient:
         return page_resp
 
     # Remove Null from response to avoid type issues
-    def remove_null_values(self, item: Collection):
+    def remove_null_values(self, item: Collection) -> Collection:
         if isinstance(item, dict):
             return dict(
                 (key, self.remove_null_values(value))
@@ -149,7 +152,7 @@ class ApiClient:
         return {"o": org_id}
 
     @staticmethod
-    def first_page(params=None) -> Dict:
+    def first_page(params: Optional[Dict] = None) -> Dict:
         if params is None:
             params = {}
         params.update({"limit": ApiClient.PAGE_SIZE, "page": 0})
@@ -337,7 +340,9 @@ class ApiClient:
         return resp is not None
 
     # Vulnerability Sync
-    def upload_vulnerability_sync_file(self, org_id: int, file_content, filename, report_source) -> Dict:
+    def upload_vulnerability_sync_file(
+        self, org_id: int, file_content: bytes, filename: str, report_source: str
+    ) -> Dict:
         with io.BytesIO(file_content) as file:
             files = [("file", (filename, file, "text/csv"))]
 
@@ -383,7 +388,7 @@ class ApiClient:
                     f"Content: {response.text}, Error: {str(error)}",
                 )
 
-    def list_vulnerability_sync_action_sets(self, org_id: int, params=None) -> List[Dict]:
+    def list_vulnerability_sync_action_sets(self, org_id: int, params: Optional[Dict] = None) -> List[Dict]:
         if params is None:
             params = {}
         params.update(self._org_param(org_id))
@@ -391,7 +396,9 @@ class ApiClient:
             self._page_results_data(f"{self.endpoint}/orgs/{org_id}/remediations/action-sets", params=params)
         )
 
-    def list_vulnerability_sync_action_set_issues(self, org_id: int, action_set_id: int, params=None) -> List[Dict]:
+    def list_vulnerability_sync_action_set_issues(
+        self, org_id: int, action_set_id: int, params: Optional[Dict] = None
+    ) -> List[Dict]:
         if params is None:
             params = {}
         params.update(self._org_param(org_id))
@@ -401,7 +408,9 @@ class ApiClient:
             )
         )
 
-    def list_vulnerability_sync_action_set_solutions(self, org_id: int, action_set_id: int, params=None) -> List[Dict]:
+    def list_vulnerability_sync_action_set_solutions(
+        self, org_id: int, action_set_id: int, params: Optional[Dict] = None
+    ) -> List[Dict]:
         if params is None:
             params = {}
         params.update(self._org_param(org_id))
@@ -510,7 +519,9 @@ class ApiClient:
                 "devices": chunk,
             }
             self.logger.info(f"Submitting remediation chunk {idx + 1}/{len(chunks)} ({len(chunk)} devices)")
-            resp = self._call_api("POST", f"{self.endpoint}/organizations/{org_uuid}/vuln-sync/remediate", json_data=payload)
+            resp = self._call_api(
+                "POST", f"{self.endpoint}/organizations/{org_uuid}/vuln-sync/remediate", json_data=payload
+            )
             responses.append(resp)
 
         return {
@@ -521,7 +532,7 @@ class ApiClient:
         }
 
     # Instrumentation for usage/adoption
-    def report_api_outcome(self, outcome: str, function: str, elapsed_time: int, fail_reason: str = ""):
+    def report_api_outcome(self, outcome: str, function: str, elapsed_time: int, fail_reason: str = "") -> None:
         """
         Record API Outcome to Automox
         :param outcome: Success/failure
@@ -542,6 +553,6 @@ class ApiClient:
 
         try:
             self._call_api("POST", f"{self.endpoint}/integration-health", json_data=payload)
-        except Exception:
+        except Exception:  # noqa: B110
             # Do nothing, we don't care if it fails
-            return
+            pass

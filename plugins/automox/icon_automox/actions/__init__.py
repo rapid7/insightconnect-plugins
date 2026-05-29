@@ -43,4 +43,3 @@ from .execute_vulnerability_sync_actions.action import ExecuteVulnerabilitySyncA
 from .delete_vulnerability_sync_action_set.action import DeleteVulnerabilitySyncActionSet
 
 from .submit_remediation.action import SubmitRemediation
-
