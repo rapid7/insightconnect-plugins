@@ -3,27 +3,28 @@
 Automox is modernizing IT operations with continuous visibility, insight, and agility for your entire IT environment
 
 # Key Features
-  
-* Device Management  
+
+* Device Management
 * Patch Management
 
 # Requirements
 
 
+
 # Supported Product Versions
-  
+
 * All as of 12/29/2023
 
 # Documentation
 
 ## Setup
-  
+
 The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|api_key|credential_secret_key|None|True|Organization API key|None|abc12345-abc1-2345-abc1-abc123456789|
-  
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|api_key|credential_secret_key|None|True|Organization API key|None|abc12345-abc1-2345-abc1-abc123456789|None|None|
+
 Example input:
 
 ```
@@ -38,20 +39,20 @@ Example input:
 
 
 #### Create Group
-  
+
 This action is used to create an Automox group
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|color|string|None|False|Automox console highlight color for the group. Value should be a valid Hex color code|None|#059F1D|
-|name|string|None|True|Name of the group|None|Group1|
-|notes|string|None|False|Define notes for the group|None|Example notes go here|
-|org_id|integer|None|False|Identifier of organization|None|1234|
-|parent_server_group_id|integer|None|False|Name of the parent group. Defaults to Default Group ID if this is omitted|None|1234|
-|policies|[]integer|None|False|List of policy IDs to assign to group|None|[1, 2, 3]|
-|refresh_interval|integer|1440|True|Frequency of device refreshes in minutes|None|1440|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|color|string|None|False|Automox console highlight color for the group. Value should be a valid Hex color code|None|#059F1D|None|None|
+|name|string|None|True|Name of the group|None|Group1|None|None|
+|notes|string|None|False|Define notes for the group|None|Example notes go here|None|None|
+|org_id|integer|None|False|Identifier of organization|None|1234|None|None|
+|parent_server_group_id|integer|None|False|Name of the parent group. Defaults to Default Group ID if this is omitted|None|1234|None|None|
+|policies|[]integer|None|False|List of policy IDs to assign to group|None|[1, 2, 3]|None|None|
+|refresh_interval|integer|1440|True|Frequency of device refreshes in minutes|None|1440|None|None|
   
 Example input:
 
@@ -62,7 +63,11 @@ Example input:
   "notes": "Example notes go here",
   "org_id": 1234,
   "parent_server_group_id": 1234,
-  "policies": 1,
+  "policies": [
+    1,
+    2,
+    3
+  ],
   "refresh_interval": 1440
 }
 ```
@@ -102,15 +107,15 @@ Example output:
 ```
 
 #### Delete Device
-  
+
 This action is used to delete an Automox device
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|device_id|integer|None|True|Identifier of device|None|1234|
-|org_id|integer|None|False|Identifier of organization|None|1234|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|device_id|integer|None|True|Identifier of device|None|1234|None|None|
+|org_id|integer|None|False|Identifier of organization|None|1234|None|None|
   
 Example input:
 
@@ -136,15 +141,15 @@ Example output:
 ```
 
 #### Delete Group
-  
+
 This action is used to delete an Automox group
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|group_id|integer|None|True|Identifier of the Automox group|None|1234|
-|org_id|integer|None|False|Identifier of organization|None|1234|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|group_id|integer|None|True|Identifier of the Automox group|None|1234|None|None|
+|org_id|integer|None|False|Identifier of organization|None|1234|None|None|
   
 Example input:
 
@@ -170,15 +175,15 @@ Example output:
 ```
 
 #### Delete Vulnerability Sync Action Set
-  
+
 This action is used to delete a vulnerability sync action set and all associated data
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|action_set_id|integer|None|True|Identifier of the action set|None|1234|
-|org_id|integer|None|True|Identifier of organization|None|1234|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|action_set_id|integer|None|True|Identifier of the action set|None|1234|None|None|
+|org_id|integer|None|True|Identifier of organization|None|1234|None|None|
   
 Example input:
 
@@ -204,16 +209,16 @@ Example output:
 ```
 
 #### Execute Vulnerability Sync Actions
-  
+
 This action is used to launch remediation for patch and worklet remediations
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|action_set_id|integer|None|True|Identifier of the action set|None|1234|
-|actions|[]action_set_action|None|True|List of remediations to execute|None|[{"action":"patch-now","solution_id":1234,"device_ids":[1234,5678]},{"action":"patch-with-worklet","solution_id":1234,"worklet_id":1234,"device_ids":[1234,5678]}]|
-|org_id|integer|None|True|Identifier of organization|None|1234|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|action_set_id|integer|None|True|Identifier of the action set|None|1234|None|None|
+|actions|[]action_set_action|None|True|List of remediations to execute|None|[{"action":"patch-now","solution_id":1234,"device_ids":[1234,5678]},{"action":"patch-with-worklet","solution_id":1234,"worklet_id":1234,"device_ids":[1234,5678]}]|None|None|
+|org_id|integer|None|True|Identifier of organization|None|1234|None|None|
   
 Example input:
 
@@ -258,15 +263,15 @@ Example output:
 ```
 
 #### Get Device by Hostname
-  
+
 This action is used to find an Automox device by hostname
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|hostname|string|None|True|Hostname of device|None|hostname-1|
-|org_id|integer|None|False|Identifier of organization to restrict results|None|1234|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|hostname|string|None|True|Hostname of device|None|hostname-1|None|None|
+|org_id|integer|None|False|Identifier of organization to restrict results|None|1234|None|None|
   
 Example input:
 
@@ -391,15 +396,15 @@ Example output:
 ```
 
 #### Get Device by IP Address
-  
+
 This action is used to find an Automox device by IP address
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|ip_address|string|None|True|IP address of device|None|192.168.0.1|
-|org_id|integer|None|False|Identifier of organization to restrict results|None|1234|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|ip_address|string|None|True|IP address of device|None|192.168.0.1|None|None|
+|org_id|integer|None|False|Identifier of organization to restrict results|None|1234|None|None|
   
 Example input:
 
@@ -524,15 +529,15 @@ Example output:
 ```
 
 #### Get Device Software
-  
+
 This action is used to retrieve a list of software installed on a device
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|device_id|integer|None|True|Identifier of device|None|1234|
-|org_id|integer|None|False|Identifier of organization|None|1234|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|device_id|integer|None|True|Identifier of device|None|1234|None|None|
+|org_id|integer|None|False|Identifier of organization|None|1234|None|None|
   
 Example input:
 
@@ -593,15 +598,15 @@ Example output:
 ```
 
 #### Get Vulnerability Sync Action Set
-  
+
 This action is used to retrieve details for a specified vulnerability sync action set
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|action_set_id|integer|None|True|Identifier of the action set|None|1234|
-|org_id|integer|None|True|Identifier of organization|None|1234|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|action_set_id|integer|None|True|Identifier of the action set|None|1234|None|None|
+|org_id|integer|None|True|Identifier of organization|None|1234|None|None|
   
 Example input:
 
@@ -668,15 +673,15 @@ Example output:
 ```
 
 #### List Devices
-  
+
 This action is used to retrieve Automox managed devices
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|group_id|integer|None|False|Identifier of server group|None|1234|
-|org_id|integer|None|False|Identifier of organization to restrict results|None|1234|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|group_id|integer|None|False|Identifier of server group|None|1234|None|None|
+|org_id|integer|None|False|Identifier of organization to restrict results|None|1234|None|None|
   
 Example input:
 
@@ -795,14 +800,14 @@ Example output:
 ```
 
 #### List Groups
-  
+
 This action is used to list Automox groups
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|org_id|integer|None|False|Identifier of organization to restrict results|None|1234|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|org_id|integer|None|False|Identifier of organization to restrict results|None|1234|None|None|
   
 Example input:
 
@@ -865,14 +870,14 @@ Example output:
 ```
 
 #### List Organization Users
-  
+
 This action is used to retrieve users of the Automox organization
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|org_id|integer|None|True|Identifier of organization|None|1234|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|org_id|integer|None|True|Identifier of organization|None|1234|None|None|
   
 Example input:
 
@@ -944,7 +949,7 @@ Example output:
 ```
 
 #### List Organizations
-  
+
 This action is used to retrieve Automox organizations
 
 ##### Input
@@ -992,14 +997,14 @@ Example output:
 ```
 
 #### List Policies
-  
+
 This action is used to retrieve Automox policies
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|org_id|integer|None|False|Identifier of organization to restrict results|None|1234|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|org_id|integer|None|False|Identifier of organization to restrict results|None|1234|None|None|
   
 Example input:
 
@@ -1054,23 +1059,25 @@ Example output:
 ```
 
 #### List Vulnerability Sync Action Set Issues
-  
+
 This action is used to retrieve the issues identified for a specified vulnerability sync action set
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|action_set_id|integer|None|True|Identifier of the action set|None|1234|
-|org_id|integer|None|True|Identifier of organization|None|1234|
-|issue_type_in|[]string|None|False|Filter by issue type|None|["unknown-host"]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|action_set_id|integer|None|True|Identifier of the action set|None|1234|None|None|
+|issue_type_in|[]string|None|False|Filter by issue type|None|["unknown-host"]|None|None|
+|org_id|integer|None|True|Identifier of organization|None|1234|None|None|
   
 Example input:
 
 ```
 {
   "action_set_id": 1234,
-  "issue_type_in": "unknown-host",
+  "issue_type_in": [
+    "unknown-host"
+  ],
   "org_id": 1234
 }
 ```
@@ -1105,18 +1112,18 @@ Example output:
 ```
 
 #### List Vulnerability Sync Action Set Solutions
-  
+
 This action is used to retrieve a list of vulnerability sync remediations
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|action_set_id|integer|None|True|Filter by action set identifier|None|1234|
-|org_id|integer|None|True|Identifier of organization|None|1234|
-|severity_in|[]string|None|False|Filter by severity|None|["critical", "high", "medium", "low", "unknown"]|
-|vulnerability_in|[]string|None|False|Filter by vulnerability|None|["CVE-2020-1234", "CVE-2020-5678"]|
-|remediation_type_in|[]string|None|False|Filter by remediation type|None|["patch-now", "patch-with-worklet"]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|action_set_id|integer|None|True|Filter by action set identifier|None|1234|None|None|
+|org_id|integer|None|True|Identifier of organization|None|1234|None|None|
+|remediation_type_in|[]string|None|False|Filter by remediation type|None|["patch-now", "patch-with-worklet"]|None|None|
+|severity_in|[]string|None|False|Filter by severity|None|["critical", "high", "medium", "low", "unknown"]|None|None|
+|vulnerability_in|[]string|None|False|Filter by vulnerability|None|["CVE-2020-1234", "CVE-2020-5678"]|None|None|
   
 Example input:
 
@@ -1124,9 +1131,21 @@ Example input:
 {
   "action_set_id": 1234,
   "org_id": 1234,
-  "remediation_type_in": "patch-now",
-  "severity_in": "critical",
-  "vulnerability_in": "CVE-2020-1234"
+  "remediation_type_in": [
+    "patch-now",
+    "patch-with-worklet"
+  ],
+  "severity_in": [
+    "critical",
+    "high",
+    "medium",
+    "low",
+    "unknown"
+  ],
+  "vulnerability_in": [
+    "CVE-2020-1234",
+    "CVE-2020-5678"
+  ]
 }
 ```
 
@@ -1196,22 +1215,22 @@ Example output:
 ```
 
 #### List Vulnerability Sync Action Sets
-  
+
 This action is used to retrieve list of vulnerability sync batches
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|configuration_id_equals|string|None|False|Filter by configuration ID|None|00000000-0000-0000-0000-000000000000|
-|configuration_id_is_set|boolean|None|False|Filter based on whether the configuration ID is set|None|True|
-|group_sort|string|None|False|Sort results by field|['asc', 'desc', 'latest_updated_at:asc', 'latest_updated_at:desc', 'source:asc', 'source:desc', '']|latest_updated_at:desc|
-|include_all_runs_equals|boolean|None|False|Whether to include all runs in the response|None|True|
-|org_id|integer|None|True|Identifier of organization|None|1234|
-|sort|string|None|False|Sort results by field|['created_at', 'updated_at', 'status', 'source_type', 'source_name', 'configuration_id', '']|created_at|
-|source_type_in|[]string|None|False|Filter by source type|None|["Generic Report", "CrowdStrike", "Rapid7", "TenableIO", "Qualys"]|
-|status_in|[]string|None|False|Filter by status|None|["building", "ready", "error"]|
-|status_not_in|[]string|None|False|Filter by status|None|["building", "ready", "error"]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|configuration_id_equals|string|None|False|Filter by configuration ID|None|00000000-0000-0000-0000-000000000000|None|None|
+|configuration_id_is_set|boolean|None|False|Filter based on whether the configuration ID is set|None|True|None|None|
+|group_sort|string|None|False|Sort results by field|["asc", "desc", "latest_updated_at:asc", "latest_updated_at:desc", "source:asc", "source:desc", ""]|latest_updated_at:desc|None|None|
+|include_all_runs_equals|boolean|None|False|Whether to include all runs in the response|None|True|None|None|
+|org_id|integer|None|True|Identifier of organization|None|1234|None|None|
+|sort|string|None|False|Sort results by field|["created_at", "updated_at", "status", "source_type", "source_name", "configuration_id", ""]|created_at|None|None|
+|source_type_in|[]string|None|False|Filter by source type|None|["Generic Report", "CrowdStrike", "Rapid7", "TenableIO", "Qualys"]|None|None|
+|status_in|[]string|None|False|Filter by status|None|["building", "ready", "error"]|None|None|
+|status_not_in|[]string|None|False|Filter by status|None|["building", "ready", "error"]|None|None|
   
 Example input:
 
@@ -1223,9 +1242,23 @@ Example input:
   "include_all_runs_equals": true,
   "org_id": 1234,
   "sort": "created_at",
-  "source_type_in": "Generic Report",
-  "status_in": "building",
-  "status_not_in": "building"
+  "source_type_in": [
+    "Generic Report",
+    "CrowdStrike",
+    "Rapid7",
+    "TenableIO",
+    "Qualys"
+  ],
+  "status_in": [
+    "building",
+    "ready",
+    "error"
+  ],
+  "status_not_in": [
+    "building",
+    "ready",
+    "error"
+  ]
 }
 ```
 
@@ -1287,18 +1320,18 @@ Example output:
 ```
 
 #### Run Device Command
-  
+
 This action is used to run a command on a device
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|command|string|None|True|Command to run on device|['GetOS', 'InstallUpdate', 'InstallAllUpdates', 'PolicyTest', 'PolicyRemediate', 'Reboot']|GetOS|
-|device_id|integer|None|True|Identifier of device|None|1234|
-|org_id|integer|None|False|Identifier of organization|None|1234|
-|patches|[]string|None|False|List of patches to be installed by name (Note: this only works with the InstallUpdate command)|None|["Security Update (KB4549947)"]|
-|policy_id|integer|None|False|Identifier of policy|None|1234|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|command|string|None|True|Command to run on device|["GetOS", "InstallUpdate", "InstallAllUpdates", "PolicyTest", "PolicyRemediate", "Reboot"]|GetOS|None|None|
+|device_id|integer|None|True|Identifier of device|None|1234|None|None|
+|org_id|integer|None|False|Identifier of organization|None|1234|None|None|
+|patches|[]string|None|False|List of patches to be installed by name (Note: this only works with the InstallUpdate command)|None|["Security Update (KB4549947)"]|None|None|
+|policy_id|integer|None|False|Identifier of policy|None|1234|None|None|
   
 Example input:
 
@@ -1307,7 +1340,9 @@ Example input:
   "command": "GetOS",
   "device_id": 1234,
   "org_id": 1234,
-  "patches": "Security Update (KB4549947)",
+  "patches": [
+    "Security Update (KB4549947)"
+  ],
   "policy_id": 1234
 }
 ```
@@ -1326,20 +1361,74 @@ Example output:
 }
 ```
 
-#### Update Device
+#### Submit Remediation
+
+This action is used to submit device and CVE data for remediation or matching. Automatically chunks large payloads into
+ batches of 100 devices
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|action_type|string|None|True|The type of remediation action|["remediate", "match"]|remediate|None|None|
+|devices_json|string|None|True|JSON string containing an array of device objects with id and cves fields|None|[{"id":"00000000-0000-0000-0000-000000000000","cves":["CVE-2021-24111"]}]|None|None|
+|org_id|integer|None|True|Identifier of organization|None|1234|None|None|
   
+Example input:
+
+```
+{
+  "action_type": "remediate",
+  "devices_json": [
+    {
+      "cves": [
+        "CVE-2021-24111"
+      ],
+      "id": "00000000-0000-0000-0000-000000000000"
+    }
+  ],
+  "org_id": 1234
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|batch_uuid|string|True|The UUID assigned to this batch of requests|00000000-0000-0000-0000-000000000000|
+|chunks_sent|integer|True|Number of API requests made|2|
+|responses|[]object|True|Collected response bodies from each chunked POST|[{"status":"accepted"}]|
+|total_devices|integer|True|Total number of devices submitted|150|
+  
+Example output:
+
+```
+{
+  "batch_uuid": "00000000-0000-0000-0000-000000000000",
+  "chunks_sent": 2,
+  "responses": [
+    {
+      "status": "accepted"
+    }
+  ],
+  "total_devices": 150
+}
+```
+
+#### Update Device
+
 This action is used to update Automox device
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|custom_name|string|None|False|Custom name to set on device|None|custom-name|
-|device_id|integer|None|True|Identifier of device|None|1234|
-|exception|boolean|False|True|Exclude the device from reports and statistics|None|False|
-|org_id|integer|None|False|Identifier of organization|None|1234|
-|server_group_id|integer|None|False|Identifier of server group|None|1234|
-|tags|[]string|None|False|List of tags|None|["tag1", "tag2"]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|custom_name|string|None|False|Custom name to set on device|None|custom-name|None|None|
+|device_id|integer|None|True|Identifier of device|None|1234|None|None|
+|exception|boolean|False|True|Exclude the device from reports and statistics|None|False|None|None|
+|org_id|integer|None|False|Identifier of organization|None|1234|None|None|
+|server_group_id|integer|None|False|Identifier of server group|None|1234|None|None|
+|tags|[]string|None|False|List of tags|None|["tag1", "tag2"]|None|None|
   
 Example input:
 
@@ -1350,7 +1439,10 @@ Example input:
   "exception": false,
   "org_id": 1234,
   "server_group_id": 1234,
-  "tags": "tag1"
+  "tags": [
+    "tag1",
+    "tag2"
+  ]
 }
 ```
 
@@ -1369,21 +1461,21 @@ Example output:
 ```
 
 #### Update Group
-  
+
 This action is used to update an Automox group
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|color|string|None|False|Automox console highlight color for the group. Value should be a valid Hex color code|None|#059F1D|
-|group_id|integer|None|True|Identifier of the Automox group|None|1234|
-|name|string|None|True|Name of the group|None|Group1|
-|notes|string|None|False|Define notes for the group|None|Example notes go here|
-|org_id|integer|None|False|Identifier of organization|None|1234|
-|parent_server_group_id|integer|None|False|Name of the parent group. Defaults to Default Group ID if omitted|None|1234|
-|policies|[]integer|None|False|List of policy IDs to assign to group|None|[1, 2, 3]|
-|refresh_interval|integer|1440|True|Frequency of device refreshes in minutes|None|1440|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|color|string|None|False|Automox console highlight color for the group. Value should be a valid Hex color code|None|#059F1D|None|None|
+|group_id|integer|None|True|Identifier of the Automox group|None|1234|None|None|
+|name|string|None|True|Name of the group|None|Group1|None|None|
+|notes|string|None|False|Define notes for the group|None|Example notes go here|None|None|
+|org_id|integer|None|False|Identifier of organization|None|1234|None|None|
+|parent_server_group_id|integer|None|False|Name of the parent group. Defaults to Default Group ID if omitted|None|1234|None|None|
+|policies|[]integer|None|False|List of policy IDs to assign to group|None|[1, 2, 3]|None|None|
+|refresh_interval|integer|1440|True|Frequency of device refreshes in minutes|None|1440|None|None|
   
 Example input:
 
@@ -1395,7 +1487,11 @@ Example input:
   "notes": "Example notes go here",
   "org_id": 1234,
   "parent_server_group_id": 1234,
-  "policies": 1,
+  "policies": [
+    1,
+    2,
+    3
+  ],
   "refresh_interval": 1440
 }
 ```
@@ -1415,17 +1511,17 @@ Example output:
 ```
 
 #### Upload Vulnerability Sync File
-  
+
 This action is used to upload a CSV file to vulnerability sync for processing
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|csv_file|bytes|None|True|Base64 encoded CSV data from which to create the vulnerability sync batch|None|PGgxPlJhcGlkNzwvaDE+|
-|csv_file_name|string|insightconnect-uploaded-report.csv|False|Name for CSV file uploaded and shown within Automox|None|insightconnect-uploaded-report.csv|
-|org_id|integer|None|True|Identifier of organization|None|1234|
-|report_source|string|generic|False|The third-party source of the vulnerability report|['generic', 'crowd-strike', 'rapid7', 'tenable', 'qualys']|rapid7|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|csv_file|bytes|None|True|Base64 encoded CSV data from which to create the vulnerability sync batch|None|PGgxPlJhcGlkNzwvaDE+|None|None|
+|csv_file_name|string|insightconnect-uploaded-report.csv|False|Name for CSV file uploaded and shown within Automox|None|insightconnect-uploaded-report.csv|None|None|
+|org_id|integer|None|True|Identifier of organization|None|1234|None|None|
+|report_source|string|generic|False|The third-party source of the vulnerability report|["generic", "crowd-strike", "rapid7", "tenable", "qualys"]|rapid7|None|None|
   
 Example input:
 
@@ -1457,15 +1553,15 @@ Example output:
 
 
 #### Get Automox Events
-  
-This action is used to retrieve Automox events to trigger workflows
+
+This trigger is used to retrieve Automox events to trigger workflows
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|event_type|string|None|True|Name of event type to be retrieved (list of event types found at https://developer.automox.com/openapi/axconsole/operation/getEvents/#!in=query&path=eventName&t=request)|None|user.login|
-|org_id|integer|None|False|Identifier of organization to restrict results|None|1234|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|event_type|string|None|True|Name of event type to be retrieved (list of event types found at https://developer.automox.com/openapi/axconsole/operation/getEvents/#!in=query&path=eventName&t=request)|None|user.login|None|None|
+|org_id|integer|None|False|Identifier of organization to restrict results|None|1234|None|None|
   
 Example input:
 
@@ -1813,24 +1909,17 @@ Example output:
 
 ## Troubleshooting
   
-*There is no troubleshooting for this plugin.*
+*This plugin does not contain a troubleshooting.*
 
 # Version History
-  
-* 3.0.0 - `Action`: Fixed -  Get Vulnerability Sync Action Set | `Action`: Fixed - List Vulnerability Sync Action Sets |
- `Action`: Updated - List Organization Users  
-* 2.0.0 - Fix Vulnerability Sync API Actions | `Action`: Added - Delete Vulnerability Sync Action Set | `Action`: Added 
-- Execute Vulnerability Sync Actions | `Action`: Added - List Vulnerability Sync Action Set Issues | `Action`: Added - 
-List Vulnerability Sync Action Set Solutions | `Action`: Added - List Vulnerability Sync Action Sets | `Action`: Added -
- Get Vulnerability Sync Action Set | `Action`: Updated - Upload Vulnerability Sync File | `Action`: Updated - Get 
-Devices | `Action`: Deleted - Action on Vulnerability Sync Batch | `Action`: Deleted - Vulnerability Sync Task | 
-`Action`: Deleted - Get Vulnerability Sync Batch | `Action`: Deleted - List Vulnerability Sync Batches | `Action`: 
-Deleted - List Vulnerability Sync Tasks  
-* 1.2.0 - Get device by IP and Get device by hostname: fix validation issue when IP or hostname not found | Add unit 
-tests  
-* 1.1.1 - Fix undefined org ID passed to actions when not required | Record outcome of connection tests  
-* 1.1.0 - Add `report source` as optional input parameter to Upload Vulnerability Sync File action | Add report source 
-to batch type  
+
+* 3.1.0 - Action: Adds action for Automox Remediate API
+* 3.0.0 - Action: Fixed - Get Vulnerability Sync Action Set | Action: Fixed - List Vulnerability Sync Action Sets | Action: Updated - List Organization Users
+* 2.0.0 - Fix Vulnerability Sync API Actions | Action: Added - Delete Vulnerability Sync Action Set | Action: Added
+* Execute Vulnerability Sync Actions | Action: Added - List Vulnerability Sync Action Set Issues | Action: Added - List Vulnerability Sync Action Set Solutions | Action: Added - List Vulnerability Sync Action Sets | Action: Added - Get Vulnerability Sync Action Set | Action: Updated - Upload Vulnerability Sync File | Action: Updated - Get Devices | Action: Deleted - Action on Vulnerability Sync Batch | Action: Deleted - Vulnerability Sync Task | Action: Deleted - Get Vulnerability Sync Batch | Action: Deleted - List Vulnerability Sync Batches | Action: Deleted - List Vulnerability Sync Tasks
+* 1.2.0 - Get device by IP and Get device by hostname: fix validation issue when IP or hostname not found | Add unit tests
+* 1.1.1 - Fix undefined org ID passed to actions when not required | Record outcome of connection tests
+* 1.1.0 - Add report source as optional input parameter to Upload Vulnerability Sync File action | Add report source to batch type
 * 1.0.0 - Initial plugin
 
 # Links
@@ -1838,6 +1927,6 @@ to batch type
 * [Automox](https://www.automox.com/)
 
 ## References
-  
-* [Automox Developer Portal](https://developer.automox.com/developer-portal/)  
+
+* [Automox Developer Portal](https://developer.automox.com/developer-portal/)
 * [Managing Automox API Keys](https://help.automox.com/hc/en-us/articles/5385455262484-Managing-Keys)

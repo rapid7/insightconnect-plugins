@@ -1,6 +1,8 @@
 from insightconnect_plugin_runtime.exceptions import PluginException
 import io
 import json
+import os
+import uuid
 import requests
 from typing import Dict, List, Optional, Collection, Any
 
@@ -9,6 +11,7 @@ class ApiClient:
     INTEGRATION_NAME = "rapid7-insightconnect-plugin"
     VERSION = "3.0.0"
     PAGE_SIZE = 500
+    REMEDIATION_CHUNK_SIZE = 100
 
     OUTCOME_FAIL = "failure"
     OUTCOME_SUCCESS = "success"
@@ -163,6 +166,14 @@ class ApiClient:
         :return: Dict of organizations
         """
         return self.remove_null_values(self._page_results(f"{self.endpoint}/orgs"))
+
+    def get_org(self, org_id: int) -> Dict:
+        """
+        Retrieve a single Automox organization by integer ID.
+        :param org_id: Organization ID
+        :return: Dict of organization details (includes 'uuid')
+        """
+        return self.remove_null_values(self._call_api("GET", f"{self.endpoint}/orgs/{org_id}"))
 
     def get_org_users(self, org_id: int) -> List[Dict]:
         """
@@ -431,6 +442,83 @@ class ApiClient:
         params = self._org_param(org_id)
         params.update({"eventName": event_type, "page": page, "limit": self.PAGE_SIZE})
         return self.remove_null_values(self._call_api("GET", f"{self.endpoint}/events", params))
+
+    # Remediations
+    @staticmethod
+    def _validate_remediation_device(index: int, device: Dict) -> None:
+        if not isinstance(device.get("id"), str):
+            raise PluginException(
+                cause="Invalid input",
+                assistance=f"Device at index {index} is missing required string field 'id'.",
+            )
+        if not isinstance(device.get("cves"), list) or len(device["cves"]) == 0:
+            raise PluginException(
+                cause="Invalid input",
+                assistance=f"Device at index {index} is missing required non-empty array field 'cves'.",
+            )
+
+    def submit_remediation(self, org_id: int, action_type: str, devices_input: str) -> Dict:
+        """
+        Submit device and CVE data for remediation or matching.
+        Automatically chunks large payloads into batches of 100 devices.
+        :param org_id: Organization ID
+        :param action_type: 'remediate' or 'match'
+        :param devices_input: JSON string containing an array of device objects
+        :return: Dict with batch_uuid, total_devices, chunks_sent, and collected responses
+        """
+        if action_type not in ("remediate", "match"):
+            raise PluginException(
+                cause="Invalid action_type",
+                assistance="action_type must be 'remediate' or 'match'.",
+            )
+
+        try:
+            devices = json.loads(devices_input)
+        except (json.JSONDecodeError, TypeError):
+            raise PluginException(
+                preset=PluginException.Preset.INVALID_JSON,
+                assistance="devices_input must be a valid JSON string.",
+            )
+
+        if not isinstance(devices, list) or len(devices) == 0:
+            raise PluginException(
+                cause="Invalid input",
+                assistance="devices_input must be a non-empty JSON array of device objects.",
+            )
+
+        for i, device in enumerate(devices):
+            self._validate_remediation_device(i, device)
+
+        # Resolve integer org ID to org UUID for the remediate endpoint
+        org = self.get_org(org_id)
+        org_uuid = org.get("uuid")
+        if not org_uuid:
+            raise PluginException(
+                cause="Missing organization UUID",
+                assistance=f"GET /api/orgs/{org_id} did not return a 'uuid' field.",
+            )
+
+        batch_uuid = str(uuid.uuid4())
+        chunk_size = self.REMEDIATION_CHUNK_SIZE
+        chunks = [devices[i : i + chunk_size] for i in range(0, len(devices), chunk_size)]
+
+        responses = []
+        for idx, chunk in enumerate(chunks):
+            payload = {
+                "action_type": action_type,
+                "batch_uuid": batch_uuid,
+                "devices": chunk,
+            }
+            self.logger.info(f"Submitting remediation chunk {idx + 1}/{len(chunks)} ({len(chunk)} devices)")
+            resp = self._call_api("POST", f"{self.endpoint}/organizations/{org_uuid}/vuln-sync/remediate", json_data=payload)
+            responses.append(resp)
+
+        return {
+            "batch_uuid": batch_uuid,
+            "total_devices": len(devices),
+            "chunks_sent": len(chunks),
+            "responses": responses,
+        }
 
     # Instrumentation for usage/adoption
     def report_api_outcome(self, outcome: str, function: str, elapsed_time: int, fail_reason: str = ""):

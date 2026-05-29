@@ -6,12 +6,25 @@ name: automox
 title: Automox
 description: Automox is modernizing IT operations with continuous visibility, insight,
   and agility for your entire IT environment
-version: 3.0.0
+version: 3.1.0
 connection_version: 3
 supported_versions: [All as of 12/29/2023]
 support: partner
 status: []
 requirements: []
+sdk:
+  type: slim
+  version: 6.5.1
+  user: nobody
+version_history:
+  - '3.1.0 - Action: Adds action for Automox Remediate API'
+  - '3.0.0 - Action: Fixed - Get Vulnerability Sync Action Set | Action: Fixed - List Vulnerability Sync Action Sets | Action: Updated - List Organization Users'
+  - '2.0.0 - Fix Vulnerability Sync API Actions | Action: Added - Delete Vulnerability Sync Action Set | Action: Added'
+  - 'Execute Vulnerability Sync Actions | Action: Added - List Vulnerability Sync Action Set Issues | Action: Added - List Vulnerability Sync Action Set Solutions | Action: Added - List Vulnerability Sync Action Sets | Action: Added - Get Vulnerability Sync Action Set | Action: Updated - Upload Vulnerability Sync File | Action: Updated - Get Devices | Action: Deleted - Action on Vulnerability Sync Batch | Action: Deleted - Vulnerability Sync Task | Action: Deleted - Get Vulnerability Sync Batch | Action: Deleted - List Vulnerability Sync Batches | Action: Deleted - List Vulnerability Sync Tasks'
+  - '1.2.0 - Get device by IP and Get device by hostname: fix validation issue when IP or hostname not found | Add unit tests'
+  - '1.1.1 - Fix undefined org ID passed to actions when not required | Record outcome of connection tests'
+  - '1.1.0 - Add report source as optional input parameter to Upload Vulnerability Sync File action | Add report source to batch type'
+  - '1.0.0 - Initial plugin'
 key_features:
   - Device Management
   - Patch Management
@@ -30,10 +43,6 @@ resources:
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.automox.com/
 enable_cache: false
-sdk:
-  type: slim
-  version: 5
-  user: nobody
 types:
   organization:
     id:
@@ -113,10 +122,10 @@ types:
       type: integer
       required: false
     access_key:
-        title: Access Key
-        description: The access key of the organization
-        type: string
-        required: false
+      title: Access Key
+      description: The access key of the organization
+      type: string
+      required: false
   user_rbac_role:
     id:
       title: Role ID
@@ -1633,6 +1642,58 @@ actions:
         type: boolean
         required: true
         example: true
+  submit_remediation:
+    title: Submit Remediation
+    description: Submit device and CVE data for remediation or matching. Automatically
+      chunks large payloads into batches of 100 devices
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: true
+        example: 1234
+      action_type:
+        title: Action Type
+        description: The type of remediation action
+        type: string
+        required: true
+        enum:
+          - remediate
+          - match
+        example: remediate
+      devices_json:
+        title: Devices JSON
+        description: JSON string containing an array of device objects with id and
+          cves fields
+        type: string
+        required: true
+        example: '[{"id":"00000000-0000-0000-0000-000000000000","cves":["CVE-2021-24111"]}]'
+    output:
+      batch_uuid:
+        title: Batch UUID
+        description: The UUID assigned to this batch of requests
+        type: string
+        required: true
+        example: 00000000-0000-0000-0000-000000000000
+      total_devices:
+        title: Total Devices
+        description: Total number of devices submitted
+        type: integer
+        required: true
+        example: 150
+      chunks_sent:
+        title: Chunks Sent
+        description: Number of API requests made
+        type: integer
+        required: true
+        example: 2
+      responses:
+        title: Responses
+        description: Collected response bodies from each chunked POST
+        type: '[]object'
+        required: true
+        example: '[{"status":"accepted"}]'
 
 triggers:
   get_events:
