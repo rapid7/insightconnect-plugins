@@ -8,7 +8,6 @@ from typing import Any, Dict, List, Union
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-
 # we do not have an instance to test [gcc, gcc high, dod], but endpoint taken from link below
 # https://learn.microsoft.com/en-us/defender-endpoint/gov#api
 
