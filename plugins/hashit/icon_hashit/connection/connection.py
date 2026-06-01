@@ -5,7 +5,6 @@ import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 from .schema import ConnectionSchema
 
-
 # Custom imports below
 
 
