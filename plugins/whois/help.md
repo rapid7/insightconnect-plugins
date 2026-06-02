@@ -181,6 +181,7 @@ Example output:
 
 # Version History
 
+* 3.1.13 - Updated SDK to the latest version (6.5.1)
 * 3.1.12 - Updated SDK to the latest version (6.4.3)
 * 3.1.11 - Updated SDK to the latest version (6.4.2)
 * 3.1.10 - Updated SDK to the latest version (6.3.10)
