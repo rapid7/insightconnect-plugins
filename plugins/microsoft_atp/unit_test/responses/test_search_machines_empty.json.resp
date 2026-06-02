@@ -1,0 +1,4 @@
+{
+  "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#Machines",
+  "value": []
+}

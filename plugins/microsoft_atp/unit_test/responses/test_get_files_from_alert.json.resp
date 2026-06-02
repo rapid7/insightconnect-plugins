@@ -1,0 +1,19 @@
+{
+  "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#Files",
+  "value": [
+    {
+      "sha1": "abc123sha1",
+      "sha256": "abc123sha256",
+      "md5": "abc123md5",
+      "globalPrevalence": 100,
+      "globalFirstObserved": "2020-01-01T00:00:00Z",
+      "globalLastObserved": "2024-01-01T00:00:00Z",
+      "size": 12345,
+      "isPeFile": true,
+      "signerHash": "signer123",
+      "isValidCertificate": true,
+      "determinationType": "Unknown",
+      "determinationValue": ""
+    }
+  ]
+}

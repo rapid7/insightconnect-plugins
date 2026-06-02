@@ -1,0 +1,21 @@
+{
+  "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#Indicators",
+  "value": [
+    {
+      "id": "indicator-123",
+      "indicatorValue": "220e7d15b011d7fac48f2bd61114db1022197f7f",
+      "indicatorType": "FileSha1",
+      "action": "AlertAndBlock",
+      "application": null,
+      "title": "220e7d15b011d7fac48f2bd61114db1022197f7f",
+      "description": "Indicator Blacklisted from InsightConnect",
+      "expirationTime": "2025-01-01T00:00:00Z",
+      "severity": "High",
+      "recommendedActions": null,
+      "rbacGroupNames": [],
+      "generateAlert": false,
+      "createdBy": "user@example.com",
+      "creationTimeDateTimeUtc": "2021-01-01T00:00:00Z"
+    }
+  ]
+}
