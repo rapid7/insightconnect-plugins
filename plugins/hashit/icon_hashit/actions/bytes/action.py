@@ -3,7 +3,6 @@ import base64
 import hashlib
 from .schema import BytesInput, BytesOutput, Input, Output, Component
 
-
 # Custom imports below
 
 

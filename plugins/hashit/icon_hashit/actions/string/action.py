@@ -3,7 +3,6 @@ import hashlib
 import insightconnect_plugin_runtime
 from .schema import StringInput, StringOutput, Input, Output, Component
 
-
 # Custom imports below
 DEFAULT_ENCODING = "utf-8"
 
