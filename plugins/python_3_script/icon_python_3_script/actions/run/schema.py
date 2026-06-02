@@ -27,7 +27,7 @@ class RunInput(insightconnect_plugin_runtime.Input):
     "function": {
       "$ref": "#/definitions/python",
       "description": "Function definition. Must be named `run`. Accepts the `input` object as params. Returns the dict as output. In this action you can use `username`, `password`, `secret_key` variables if defined in connection",
-      "default": "def run(params={}):\\n    return {}",
+      "default": "def run(params={}):\n    return {}",
       "order": 1
     },
     "input": {
