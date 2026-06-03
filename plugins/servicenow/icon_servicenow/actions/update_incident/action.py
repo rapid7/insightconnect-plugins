@@ -2,7 +2,6 @@ import insightconnect_plugin_runtime
 
 from .schema import UpdateIncidentInput, UpdateIncidentOutput, Input, Output, Component
 
-
 # Custom imports below
 
 
@@ -42,14 +41,8 @@ class UpdateIncident(insightconnect_plugin_runtime.Action):
 
         # Additional fields are an optional dictionary of key/value pairs and may include fields not specified above
         data.update(params.get(Input.ADDITIONAL_FIELDS))
-
         response = self.connection.request.make_request(
             endpoint=f"{self.connection.incident_url}/{params.get(Input.SYSTEM_ID)}", method="put", payload=data
         )
-
-        if response.get("status", 0) in range(200, 299):
-            success = True
-        else:
-            success = False
-
+        success = response.get("status", 0) in range(200, 299)
         return {Output.SUCCESS: success}
