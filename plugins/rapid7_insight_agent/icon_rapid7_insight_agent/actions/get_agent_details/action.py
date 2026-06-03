@@ -3,7 +3,6 @@ from .schema import GetAgentDetailsInput, GetAgentDetailsOutput, Input, Output, 
 
 from insightconnect_plugin_runtime.helper import clean
 
-
 # Custom imports below
 
 
