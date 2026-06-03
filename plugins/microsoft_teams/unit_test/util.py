@@ -2,19 +2,53 @@ import json
 import logging
 import os
 import sys
-
-import requests
+from unittest.mock import MagicMock
 
 sys.path.append(os.path.abspath("../"))
 
 
+class MockGraphApiClient:
+    """Mock Graph API client for unit tests."""
+
+    def __init__(self):
+        self.get_teams = MagicMock()
+        self.get_channels = MagicMock()
+        self.create_channel = MagicMock()
+        self.delete_channel = MagicMock()
+        self.get_channel_messages = MagicMock()
+        self.get_channel_message = MagicMock()
+        self.get_chat_message = MagicMock()
+        self.list_chat_messages = MagicMock()
+        self.get_message_replies = MagicMock()
+        self.get_user_info = MagicMock()
+        self.add_member_to_group = MagicMock()
+        self.remove_member_from_group = MagicMock()
+        self.add_group_owner = MagicMock()
+        self.add_member_to_channel = MagicMock()
+        self.create_group = MagicMock()
+        self.delete_group = MagicMock()
+        self.get_group_id_from_name = MagicMock()
+        self.enable_teams_for_group = MagicMock()
+        self.create_chat = MagicMock()
+
+
+class MockBotService:
+    """Mock Bot Framework service for unit tests."""
+
+    def __init__(self):
+        self.send_channel_message = MagicMock()
+        self.send_chat_message = MagicMock()
+
+
 class MockConnection:
-    def __init__(self) -> None:
+    def __init__(self):
         self.tenant_id = "1"
         self.resource_endpoint = "https://graph.microsoft.com"
+        self.client = MockGraphApiClient()
+        self.bot = MockBotService()
 
-    def get_headers(self) -> None:
-        return
+    def get_headers(self, force_refresh=False):
+        return {"Authorization": "Bearer mock_token", "Content-Type": "application/json"}
 
 
 class Util:
@@ -38,83 +72,3 @@ class Util:
                 os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{filename}.json.resp")
             )
         )
-
-    @staticmethod
-    def mocked_requests(*args, **kwargs):
-        class MockResponse:
-            def __init__(self, filename, status_code) -> None:
-                self.filename = filename
-                self.status_code = status_code
-                if self.filename == "not_found":
-                    self.text = 'Response was: {"message": "Not Found"}'
-                elif self.filename == "already_exists":
-                    self.text = 'Response was: {"message": "Already Exists"}'
-                else:
-                    self.text = "Error message"
-
-            def json(self):
-                return Util.load_data(self.filename)
-
-            def raise_for_status(self):
-                if self.filename in [
-                    "response_invalid_group_create_teams_chat",
-                    "response_invalid_list_messages_in_chat_bad_json",
-                ]:
-                    raise ValueError("error")
-                if self.filename in ["response_invalid_list_messages_in_chat"]:
-                    raise requests.HTTPError()
-                else:
-                    return
-
-        if (
-            args[0]
-            == "https://graph.microsoft.com/beta/groups?$filter=resourceProvisioningOptions/Any(x:x eq 'Team') and displayName eq 'Example%20Team'"
-        ):
-            return MockResponse("get_teams", 200)
-        if args[0] == "https://graph.microsoft.com/beta/1/teams/12345/channels":
-            return MockResponse("get_channels", 200)
-        if args[0] == "https://graph.microsoft.com/beta/teams/12345/channels":
-            return MockResponse("add_channel_to_team", 201)
-        if args[0] == "https://graph.microsoft.com/beta/teams/12345/channels/56789/messages":
-            return MockResponse("send_message_channel", 200)
-        if args[0] == "https://graph.microsoft.com/beta/teams/12345/channels/56789/members/":
-            return MockResponse("get_members", 201)
-        if args[0] == "https://graph.microsoft.com/beta/teams/12345/channels/56789/messages/1636037542013/replies":
-            return MockResponse("send_message_thread", 200)
-        if args[0] == "https://graph.microsoft.com/beta/chats/19:10000_20000@unq.gbl.spaces/messages":
-            return MockResponse("send_message_chat", 200)
-        if args[0] == "https://graph.microsoft.com/v1.0/1/users?$filter=userPrincipalName eq 'test'":
-            return MockResponse("get_user_info", 200)
-        if args[0] == "https://graph.microsoft.com/v1.0/1/groups?$filter=displayName eq 'test'":
-            return MockResponse("get_group_id_from_name", 200)
-        if args[0] == "https://graph.microsoft.com/beta/groups/12345/owners/$ref":
-            return MockResponse("no_content", 204)
-        if (
-            args[0]
-            == "https://graph.microsoft.com/beta/1/teams/example-team-id/channels/11:examplechannel.name/messages/1234567890/replies/1234567891"
-        ):
-            return MockResponse("get_message_in_channel", 200)
-        if (
-            args[0]
-            == "https://graph.microsoft.com/beta/1/users/user@example.com/chats/11:examplechat.name/messages/1234567890"
-        ):
-            return MockResponse("get_message_in_chat", 200)
-        if args[0] == "https://graph.microsoft.com/beta/1/teams/12345/channels/56789/messages/1234567890/replies":
-            return MockResponse("get_reply_list", 200)
-        if args[0] == "https://graph.microsoft.com/beta/1/chats/valid_chat_id/messages/":
-            return MockResponse("response_valid_list_messages_in_chat", 200)
-        if args[0] == "https://graph.microsoft.com/beta/1/chats/invalid_chat_id_bad_rquest/messages/":
-            return MockResponse("response_invalid_list_messages_in_chat", 400)
-        if args[0] == "https://graph.microsoft.com/beta/1/chats/invalid_chat_id_empty_json/messages/":
-            return MockResponse("response_invalid_list_messages_in_chat_bad_json", 200)
-
-        if args[0] == "https://graph.microsoft.com/beta/chats/":
-            if kwargs.get("json", {}).get("chatType", "") == "oneOnOne":
-                return MockResponse("response_valid_oneonone_create_teams_chat", 201)
-            elif kwargs.get("json", {}).get("chatType", "") == "group":
-                if "500" in kwargs.get("json", {}).get("members", [])[0].get("user@odata.bind", ""):
-                    return MockResponse("response_invalid_group_create_teams_chat", 500)
-                else:
-                    return MockResponse("response_valid_group_create_teams_chat", 201)
-
-        raise Exception("Not implemented")
