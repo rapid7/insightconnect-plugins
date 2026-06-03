@@ -17,7 +17,8 @@ class CreateTeamsChat(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         members = params.get(Input.MEMBERS)
         topic = params.get(Input.TOPIC)
+        installed_apps = params.get(Input.INSTALLED_APPS, [])
 
-        group_result = self.connection.client.create_chat(members, topic)
+        group_result = self.connection.client.create_chat(members, topic, installed_apps=installed_apps)
 
         return {Output.CHAT: remove_null_and_clean(group_result)}

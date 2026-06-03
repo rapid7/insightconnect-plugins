@@ -485,8 +485,8 @@ class GraphApiClient(BaseClient):
 
     # ─── Chats ────────────────────────────────────────────────────────────────────
 
-    def create_chat(self, members: list, topic: str = None) -> dict:
-        """Create a new chat."""
+    def create_chat(self, members: list, topic: str = None, installed_apps: list = None) -> dict:
+        """Create a new chat, optionally installing apps (e.g. bots) into the chat."""
         endpoint = "/v1.0/chats"
         payload = {}
 
@@ -513,7 +513,17 @@ class GraphApiClient(BaseClient):
 
         payload["members"] = list_members
 
+        # Add installed apps (bots) to the chat at creation time
+        if installed_apps:
+            payload["installedApps"] = [
+                {"teamsApp@odata.bind": f"{self._base_url}/v1.0/appCatalogs/teamsApps/{app_id}"}
+                for app_id in installed_apps
+            ]
+
         self._logger.info(f"Creating chat with {len(list_members)} members")
+        if installed_apps:
+            self._logger.info(f"Installing {len(installed_apps)} app(s) into chat")
+
         url = f"{self._base_url}{endpoint}"
         response = self._call_api("POST", url, headers=self._get_auth_headers(), json=payload)
 
@@ -527,8 +537,129 @@ class GraphApiClient(BaseClient):
                     data=str(error),
                 ) from error
 
+        # When installedApps is included, the API returns 202 Accepted with an async operation
+        if response.status_code == 202:
+            return self._handle_async_chat_creation(response)
+
         self._raise_for_status(response)
         return {}
+
+    def _handle_async_chat_creation(self, response, max_attempts: int = 10, poll_interval: int = 3) -> dict:
+        """
+        Handle the 202 Accepted response from chat creation with installed apps.
+
+        The Location header contains the operation URL. We extract the chat ID
+        and attempt to fetch the chat directly. If not ready yet, we poll the
+        operation endpoint until it succeeds.
+        """
+        location = response.headers.get("Location", "")
+        self._logger.info(f"Chat creation is async (202 Accepted). Location: {location}")
+
+        # Extract the chat ID from the location path: /chats('<chat_id>')/operations(...)
+        chat_id = self._extract_chat_id_from_location(location)
+        self._logger.info(f"Extracted chat ID: {chat_id}")
+
+        if not chat_id and not location:
+            raise PluginException(
+                cause="Chat creation returned 202 but no Location header",
+                assistance="The chat may have been created but we cannot confirm. Check Teams manually.",
+            )
+
+        # Try fetching the chat directly first — it's often available immediately
+        if chat_id:
+            sleep(2)  # Brief pause to let provisioning complete
+            try:
+                chat_result = self._make_request("GET", f"/v1.0/chats/{chat_id}")
+                if chat_result and chat_result.get("id"):
+                    self._logger.info("Chat fetched successfully on first attempt")
+                    return chat_result
+            except PluginException:
+                self._logger.info("Chat not ready yet, falling back to polling operation")
+
+        # Fall back to polling the operation endpoint
+        if location:
+            # The Location header may or may not include /v1.0 — normalize it
+            if location.startswith("/chats("):
+                operation_url = f"{self._base_url}/v1.0{location}"
+            else:
+                operation_url = f"{self._base_url}{location}"
+
+            self._logger.info(f"Polling operation URL: {operation_url}")
+
+            for attempt in range(max_attempts):
+                sleep(poll_interval)
+                self._logger.info(f"Polling chat creation operation (attempt {attempt + 1}/{max_attempts})")
+                poll_response = self._call_api("GET", operation_url, headers=self._get_auth_headers())
+
+                if poll_response.status_code == 200:
+                    try:
+                        result = poll_response.json()
+                    except ValueError:
+                        continue
+
+                    status = result.get("status", "").lower()
+                    self._logger.info(f"Operation status: {status}")
+
+                    if status in ("succeeded", "completed"):
+                        self._logger.info("Chat creation operation succeeded")
+                        if chat_id:
+                            return self._make_request("GET", f"/v1.0/chats/{chat_id}")
+                        return result
+                    elif status == "failed":
+                        raise PluginException(
+                            cause="Chat creation operation failed",
+                            assistance="The async chat creation operation reported a failure.",
+                            data=str(result),
+                        )
+                    # Otherwise still in progress — continue polling
+                elif poll_response.status_code == 404:
+                    # Operation endpoint gone — try fetching chat directly
+                    self._logger.info("Operation endpoint returned 404, attempting direct chat fetch")
+                    if chat_id:
+                        try:
+                            return self._make_request("GET", f"/v1.0/chats/{chat_id}")
+                        except PluginException:
+                            continue
+
+        # Exhausted retries — try one final direct fetch
+        if chat_id:
+            try:
+                chat_result = self._make_request("GET", f"/v1.0/chats/{chat_id}")
+                if chat_result and chat_result.get("id"):
+                    self._logger.info("Chat fetched successfully after polling exhausted")
+                    return chat_result
+            except PluginException:
+                pass
+            # Return partial result with the ID so the user still has something to work with
+            self._logger.warning("Chat creation polling exhausted — returning partial result with chat ID")
+            return {"id": chat_id, "chatType": "unknown", "status": "provisioning"}
+
+        raise PluginException(
+            cause="Chat creation timed out",
+            assistance="The chat creation operation did not complete within the expected time. "
+            "The chat may still be provisioning. Please check Teams.",
+        )
+        raise PluginException(
+            cause="Chat creation timed out",
+            assistance="The chat creation operation did not complete within the expected time. "
+            "The chat may still be provisioning. Please check Teams.",
+        )
+
+    @staticmethod
+    def _extract_chat_id_from_location(location: str) -> str:
+        """
+        Extract chat ID from the Location header path.
+
+        Expected format: /chats('19:xxx@unq.gbl.spaces')/operations('...')
+        """
+        if not location:
+            return ""
+        import re
+
+        match = re.search(r"/chats\('([^']+)'\)", location)
+        if match:
+            return match.group(1)
+        return ""
 
     # ─── Helpers ──────────────────────────────────────────────────────────────────
 

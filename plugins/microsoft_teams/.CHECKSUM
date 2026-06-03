@@ -1,5 +1,5 @@
 {
-	"spec": "172b81e6039491d8e6bf88b1581925cb",
+	"spec": "d88b5f4e9c0d13f7ea66848b5b150460",
 	"manifest": "1a2dc7e814ace4c7fccb8b8c9e1eed51",
 	"setup": "4faaaed8301154a2f0927e17639cd58a",
 	"schemas": [
@@ -21,7 +21,7 @@
 		},
 		{
 			"identifier": "create_teams_chat/schema.py",
-			"hash": "624f57b6ee026fa69e74e6ba2ebf732b"
+			"hash": "197025ce5426cd74cb35167427294849"
 		},
 		{
 			"identifier": "create_teams_enabled_group/schema.py",

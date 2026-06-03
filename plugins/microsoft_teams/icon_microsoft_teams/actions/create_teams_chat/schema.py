@@ -8,6 +8,7 @@ class Component:
 
 
 class Input:
+    INSTALLED_APPS = "installed_apps"
     MEMBERS = "members"
     TOPIC = "topic"
 
@@ -22,6 +23,15 @@ class CreateTeamsChatInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "installed_apps": {
+      "type": "array",
+      "title": "Installed Apps",
+      "description": "A list of Teams App Catalog IDs to install in the chat (e.g. a bot app). This allows bots to participate and send messages in the chat",
+      "items": {
+        "type": "string"
+      },
+      "order": 3
+    },
     "members": {
       "type": "array",
       "title": "Members",
