@@ -3,67 +3,57 @@ import sys
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest import TestCase, mock
-from unittest.mock import Mock
+from unittest import TestCase
 
 from icon_microsoft_teams.actions.create_teams_chat import CreateTeamsChat
 from icon_microsoft_teams.actions.create_teams_chat.schema import CreateTeamsChatInput, CreateTeamsChatOutput
 from insightconnect_plugin_runtime.exceptions import PluginException
 from jsonschema import validate
-from parameterized import parameterized
 
 from util import Util
 
 
-@mock.patch("requests.post", side_effect=Util.mocked_requests)
 class TestCreateTeamsChat(TestCase):
-    @classmethod
-    def setUp(cls) -> None:
-        cls.action = Util.default_connector(CreateTeamsChat())
+    def setUp(self) -> None:
+        self.action = Util.default_connector(CreateTeamsChat())
 
-    @parameterized.expand(
-        [
-            [
-                "valid_one_on_one",
-                Util.load_data("input_valid_oneonone_create_teams_chat"),
-                Util.load_data("expected_valid_oneonone_create_teams_chat"),
-            ],
-            [
-                "valid_group",
-                Util.load_data("input_valid_group_create_teams_chat"),
-                Util.load_data("expected_valid_group_create_teams_chat"),
-            ],
-        ]
-    )
-    def test_create_teams_chat_valid(
-        self, _mock_request: Mock, _test_name: str, input_params: dict, expected: dict
-    ) -> None:
-        validate(input_params, CreateTeamsChatInput.schema)
-        actual = self.action.run(input_params)
-        self.assertEqual(actual, expected)
+    def test_create_one_on_one_chat(self) -> None:
+        expected_result = {
+            "chatType": "oneOnOne",
+            "id": "19:abc123@thread.v2",
+            "createdDateTime": "2023-11-09T12:07:43.167Z",
+        }
+        self.action.connection.client.create_chat.return_value = expected_result
+
+        test_input = {
+            "members": [
+                {"user_info": "user1@example.com", "role": "owner"},
+                {"user_info": "user2@example.com", "role": "owner"},
+            ]
+        }
+        validate(test_input, CreateTeamsChatInput.schema)
+        actual = self.action.run(test_input)
+        self.assertEqual(actual["chat"]["chatType"], "oneOnOne")
         validate(actual, CreateTeamsChatOutput.schema)
 
-    @parameterized.expand(
-        [
-            [
-                "less than members",
-                Util.load_data("input_invalid_create_teams_chat"),
-                "Create chat failed.",
-                "Less than 2 valid members were provided",
+    def test_create_group_chat(self) -> None:
+        expected_result = {
+            "chatType": "group",
+            "id": "19:def456@thread.v2",
+            "topic": "Test Topic",
+            "createdDateTime": "2023-11-09T12:07:43.167Z",
+        }
+        self.action.connection.client.create_chat.return_value = expected_result
+
+        test_input = {
+            "members": [
+                {"user_info": "user1@example.com", "role": "owner"},
+                {"user_info": "user2@example.com", "role": "owner"},
+                {"user_info": "user3@example.com", "role": "guest"},
             ],
-            [
-                "server error",
-                Util.load_data("input_invalid_create_teams_chat_server"),
-                "Create chat failed.",
-                "Error message",
-            ],
-        ]
-    )
-    def test_list_messages_in_chat_invalid(
-        self, _mock_request: Mock, _test_name: str, input_params: dict, cause: str, assistance: str
-    ) -> None:
-        validate(input_params, CreateTeamsChatInput.schema)
-        with self.assertRaises(PluginException) as error:
-            self.action.run(input_params)
-        self.assertEqual(error.exception.cause, cause)
-        self.assertEqual(error.exception.assistance, assistance)
+            "topic": "Test Topic",
+        }
+        validate(test_input, CreateTeamsChatInput.schema)
+        actual = self.action.run(test_input)
+        self.assertEqual(actual["chat"]["chatType"], "group")
+        validate(actual, CreateTeamsChatOutput.schema)

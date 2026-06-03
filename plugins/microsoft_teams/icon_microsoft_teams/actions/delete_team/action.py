@@ -1,9 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import DeleteTeamInput, DeleteTeamOutput, Input, Output, Component
 
-# Custom imports below
-from icon_microsoft_teams.util.azure_ad_utils import delete_group
-
 
 class DeleteTeam(insightconnect_plugin_runtime.Action):
     def __init__(self):
@@ -16,5 +13,8 @@ class DeleteTeam(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         team_name = params.get(Input.TEAM_NAME)
-        success = delete_group(self.logger, self.connection, team_name)
+
+        group_id = self.connection.client.get_group_id_from_name(team_name)
+        success = self.connection.client.delete_group(group_id)
+
         return {Output.SUCCESS: success}

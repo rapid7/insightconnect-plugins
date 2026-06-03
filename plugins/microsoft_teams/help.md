@@ -5,15 +5,18 @@
 # Key Features
 
 * Communication Management for all microsoft products
+* App-only authentication (no user account required)
+* Bot Framework integration for sending messages
 
 # Requirements
 
-* Username and Password
-* Secret Key, similar to API Key
+* Azure App Registration with Application ID and Secret
+* Microsoft Graph application permissions with admin consent
+* Azure Bot registration (for sending messages)
 
 # Supported Product Versions
 
-* Microsoft Graph API v1.0 2024-09-13
+* Microsoft Graph API v1.0 2025-05-18
 
 # Documentation
 
@@ -27,7 +30,6 @@ The connection configuration accepts the following parameters:
 |application_secret|credential_secret_key|None|True|Application secret|None|aMeCAEYdOLlK+qRcD9AjdyxLkCaqZH1UPm7adjJQ5Og=|None|None|
 |directory_id|string|None|True|Directory (tenant) ID|None|9e538ff5-dcb2-46a9-9a28-f93b8250deb0|None|None|
 |endpoint|string|None|True|The type of endpoint to connect to: normal service, GCC (government), GCC High (government), DoD (military)|["Normal", "GCC", "GCC High", "DoD"]|Normal|None|None|
-|username_password|credential_username_password|None|True|Username and password|None|{ "username": "user", "password": "mypassword" }|None|None|
 
 Example input:
 
@@ -36,11 +38,7 @@ Example input:
   "application_id": "63a0cad6-ac64-435c-a221-5d37c97b763e",
   "application_secret": "aMeCAEYdOLlK+qRcD9AjdyxLkCaqZH1UPm7adjJQ5Og=",
   "directory_id": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0",
-  "endpoint": "Normal",
-  "username_password": {
-    "password": "mypassword",
-    "username": "user"
-  }
+  "endpoint": "Normal"
 }
 ```
 
@@ -448,15 +446,13 @@ This action is used to retrieve a single message or a message reply in a chat
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |chat_id|string|None|True|The ID of chat|None|11:examplechat.name|None|None|
 |message_id|string|None|True|The ID of message|None|1234567890|None|None|
-|username|string|None|True|The ID of user or his email|None|user@example.com|None|None|
   
 Example input:
 
 ```
 {
   "chat_id": "11:examplechat.name",
-  "message_id": 1234567890,
-  "username": "user@example.com"
+  "message_id": 1234567890
 }
 ```
 
@@ -1210,6 +1206,7 @@ Example output:
 
 # Version History
 
+* 8.0.0 - Major refactor to eliminate user account requirement | Switched to client_credentials (app-only) OAuth2 flow | Added Bot Framework for sending messages | Migrated all endpoints from /beta to /v1.0 | Removed username_password from connection | Removed username input from get_message_in_chat (now uses app permissions)
 * 7.0.6 - Updated SDK to the latest version (6.5.1)
 * 7.0.5 - Updated SDK to the latest version (6.4.3)
 * 7.0.4 - Updated SDK to the latest version (6.4.2)
