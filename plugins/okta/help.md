@@ -1620,6 +1620,7 @@ Example output:
 
 # Version History
 
+* 5.0.3 - Updated SDK to the latest version (6.5.1)
 * 5.0.2 - Updated dependencies | Updated SDK to the latest version (6.4.3)
 * 5.0.1 - Prevent `Monitor Logs` task run during rate limiting period | Update SDK version
 * 5.0.0 - Updated password management actions - replaced old Reset Password with Expire Password, and added a new Reset Password action
