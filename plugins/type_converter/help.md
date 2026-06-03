@@ -630,6 +630,7 @@ Example output:
 
 # Version History
 
+* 1.8.9 - Updated SDK to the latest version (6.4.3)
 * 1.8.8 - Updated SDK to the latest version (6.4.3)
 * 1.8.7 - Updated SDK to the latest version (6.4.2)
 * 1.8.6 - Updated SDK to the latest version (6.3.10)
