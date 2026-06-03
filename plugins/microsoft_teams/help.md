@@ -199,6 +199,7 @@ This action is used to create a chat in Microsoft Teams
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|installed_apps|[]string|None|False|A list of Teams App Catalog IDs to install in the chat (e.g. a bot app). This allows bots to participate and send messages in the chat|None|["05F59CEC-A742-4A50-A62E-202A57E478A4"]|None|None|
 |members|[]itemMember|None|True|A list of usernames to set as members|None|[{"user_info": "user@example.com", "role": "owner"}, {"user_info": "ab123bcd-123a-412a3-abc1-a123456b789c", "role": "owner"}]|None|None|
 |topic|string|None|False|Topic of chat to be added (only available for group chats)|None|example_topic|None|None|
   
@@ -206,6 +207,9 @@ Example input:
 
 ```
 {
+  "installed_apps": [
+    "05F59CEC-A742-4A50-A62E-202A57E478A4"
+  ],
   "members": [
     {
       "role": "owner",

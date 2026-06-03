@@ -1234,6 +1234,12 @@ actions:
         required: true
         example: [{user_info: user@example.com, role: owner}, {user_info: ab123bcd-123a-412a3-abc1-a123456b789c,
             role: owner}]
+      installed_apps:
+        title: Installed Apps
+        description: A list of Teams App Catalog IDs to install in the chat (e.g. a bot app). This allows bots to participate and send messages in the chat
+        type: '[]string'
+        required: false
+        example: ["05F59CEC-A742-4A50-A62E-202A57E478A4"]
     output:
       chat:
         title: Chat
