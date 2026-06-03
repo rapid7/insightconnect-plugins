@@ -2069,6 +2069,7 @@ Example output:
 
 # Version History
 
+* 11.1.7 - Updated dependencies | Updated SDK to the latest version (6.5.1)
 * 11.1.6 - Update SDK to the latest version (6.4.2) | Fix connection test | Update optional input for agentIsActive | Remove task `Monitor Logs`
 * 11.1.5 - Update SDK to the latest version (6.3.8) | Add task delay monitoring
 * 11.1.4 - Updated SDK to the latest version (6.2.5)
