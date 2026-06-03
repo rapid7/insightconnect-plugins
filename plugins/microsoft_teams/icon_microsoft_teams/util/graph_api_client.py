@@ -682,6 +682,48 @@ class GraphApiClient(BaseClient):
             return match.group(1)
         return ""
 
+    # ─── App Installation ─────────────────────────────────────────────────────────
+
+    def install_app_in_team(self, team_id: str, app_id: str) -> None:
+        """
+        Install a Teams app into a team.
+
+        :param team_id: The team (group) ID
+        :param app_id: The Teams App Catalog ID
+        """
+        endpoint = f"/v1.0/teams/{team_id}/installedApps"
+        payload = {"teamsApp@odata.bind": f"{self._base_url}/v1.0/appCatalogs/teamsApps/{app_id}"}
+
+        self._logger.info(f"Installing app {app_id} in team {team_id}")
+        url = f"{self._base_url}{endpoint}"
+        response = self._call_api("POST", url, headers=self._get_auth_headers(), json=payload)
+
+        if response.status_code in (200, 201):
+            self._logger.info("App installed successfully in team")
+            return
+
+        self._raise_for_status(response)
+
+    def install_app_in_chat(self, chat_id: str, app_id: str) -> None:
+        """
+        Install a Teams app into a chat.
+
+        :param chat_id: The chat ID
+        :param app_id: The Teams App Catalog ID
+        """
+        endpoint = f"/v1.0/chats/{chat_id}/installedApps"
+        payload = {"teamsApp@odata.bind": f"{self._base_url}/v1.0/appCatalogs/teamsApps/{app_id}"}
+
+        self._logger.info(f"Installing app {app_id} in chat {chat_id}")
+        url = f"{self._base_url}{endpoint}"
+        response = self._call_api("POST", url, headers=self._get_auth_headers(), json=payload)
+
+        if response.status_code in (200, 201):
+            self._logger.info("App installed successfully in chat")
+            return
+
+        self._raise_for_status(response)
+
     # ─── Helpers ──────────────────────────────────────────────────────────────────
 
     def _build_user_references(self, user_logins: list) -> list:

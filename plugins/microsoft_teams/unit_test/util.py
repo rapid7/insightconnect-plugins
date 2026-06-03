@@ -30,6 +30,8 @@ class MockGraphApiClient:
         self.get_group_id_from_name = MagicMock()
         self.enable_teams_for_group = MagicMock()
         self.create_chat = MagicMock()
+        self.install_app_in_team = MagicMock()
+        self.install_app_in_chat = MagicMock()
 
 
 class MockBotService:

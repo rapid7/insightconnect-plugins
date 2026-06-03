@@ -606,6 +606,42 @@ Example output:
 }
 ```
 
+#### Install App
+
+This action is used to install a Teams app (such as a bot) into a team or chat
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|app_id|string|None|True|The Teams App Catalog ID of the app to install|None|05F59CEC-A742-4A50-A62E-202A57E478A4|None|None|
+|chat_id|string|None|False|The ID of the chat to install the app into (mutually exclusive with team_id)|None|19:ea28e88c00e94c7786b065394a61f296@thread.v2|None|None|
+|team_id|string|None|False|The ID of the team to install the app into (mutually exclusive with chat_id)|None|ee0f5ae2-8bc6-4ae5-8466-7daeebbfa062|None|None|
+  
+Example input:
+
+```
+{
+  "app_id": "05F59CEC-A742-4A50-A62E-202A57E478A4",
+  "chat_id": "19:ea28e88c00e94c7786b065394a61f296@thread.v2",
+  "team_id": "ee0f5ae2-8bc6-4ae5-8466-7daeebbfa062"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|True|Boolean indicating if the app installation was successful|True|
+  
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
 #### List Messages from a Chat
 
 This action is used to retrieve up to the last 50 messages in a chat

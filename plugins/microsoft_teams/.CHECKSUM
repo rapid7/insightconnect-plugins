@@ -1,6 +1,6 @@
 {
-	"spec": "d88b5f4e9c0d13f7ea66848b5b150460",
-	"manifest": "1a2dc7e814ace4c7fccb8b8c9e1eed51",
+	"spec": "d19fba126b624dfed1d21e89026b7e5c",
+	"manifest": "67f515b9fd9519accb2830e95067eaee",
 	"setup": "4faaaed8301154a2f0927e17639cd58a",
 	"schemas": [
 		{
@@ -50,6 +50,10 @@
 		{
 			"identifier": "get_teams/schema.py",
 			"hash": "d4167388ba5726a8f13639844294cee5"
+		},
+		{
+			"identifier": "install_app/schema.py",
+			"hash": "2eee86441f464973ea25814c09647b6f"
 		},
 		{
 			"identifier": "list_messages_in_chat/schema.py",
