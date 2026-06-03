@@ -1,8 +1,5 @@
 import insightconnect_plugin_runtime
 from .schema import ListMessagesInChatInput, ListMessagesInChatOutput, Input, Output, Component
-from icon_microsoft_teams.util.teams_utils import list_messages_from_chat
-
-# Custom imports below
 
 
 class ListMessagesInChat(insightconnect_plugin_runtime.Action):
@@ -17,6 +14,6 @@ class ListMessagesInChat(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         chat_id = params.get(Input.CHAT_ID, "")
 
-        messages = list_messages_from_chat(self.connection, chat_id)
+        messages = self.connection.client.list_chat_messages(chat_id)
 
         return {Output.MESSAGES: messages}
