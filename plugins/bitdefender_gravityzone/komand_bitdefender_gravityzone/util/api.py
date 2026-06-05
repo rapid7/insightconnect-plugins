@@ -45,8 +45,25 @@ class BitdefenderGravityZoneAPI:
 
         self.logger.info(f"Calling {method} on {service}")
 
+        response = self._send_request(url, payload)
+        self._check_status_code(response)
+        response_json = self._parse_response(response)
+
+        if "error" in response_json:
+            error_obj = response_json.get("error", {})
+            raise PluginException(
+                cause=f"Bitdefender API error: {error_obj.get('message', 'Unknown error')} "
+                f"(code: {error_obj.get('code', 'N/A')})",
+                assistance="Please verify your input parameters and API key permissions.",
+                data=str(error_obj),
+            )
+
+        return response_json.get("result", {})
+
+    def _send_request(self, url: str, payload: dict) -> requests.Response:
+        """Send the HTTP request, raising PluginException on transport errors."""
         try:
-            response = self.session.post(url, json=payload, verify=True, timeout=30)
+            return self.session.post(url, json=payload, verify=True, timeout=30)
         except requests.exceptions.ConnectionError as error:
             raise PluginException(
                 cause="Unable to connect to the Bitdefender GravityZone API.",
@@ -66,6 +83,9 @@ class BitdefenderGravityZoneAPI:
                 data=str(error),
             )
 
+    @staticmethod
+    def _check_status_code(response: requests.Response) -> None:
+        """Validate the HTTP status code, raising PluginException on errors."""
         if response.status_code == 401:
             raise PluginException(
                 cause="Authentication failed.",
@@ -76,7 +96,6 @@ class BitdefenderGravityZoneAPI:
                 cause="Authorization failed.",
                 assistance="The API key does not have the required permissions for this operation.",
             )
-
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as error:
@@ -86,26 +105,17 @@ class BitdefenderGravityZoneAPI:
                 data=str(error),
             )
 
+    @staticmethod
+    def _parse_response(response: requests.Response) -> dict:
+        """Parse the JSON body from the response."""
         try:
-            response_json = response.json()
+            return response.json()
         except ValueError as error:
             raise PluginException(
                 cause="The GravityZone API returned a non-JSON response.",
                 assistance="This may indicate a configuration issue with the Access URL.",
                 data=str(error),
             )
-
-        # Handle JSON-RPC error envelope
-        if "error" in response_json:
-            error_obj = response_json.get("error", {})
-            raise PluginException(
-                cause=f"Bitdefender API error: {error_obj.get('message', 'Unknown error')} "
-                f"(code: {error_obj.get('code', 'N/A')})",
-                assistance="Please verify your input parameters and API key permissions.",
-                data=str(error_obj),
-            )
-
-        return response_json.get("result", {})
 
     def test_connection(self) -> dict:
         """Validate credentials with a lightweight API call."""
