@@ -3,7 +3,7 @@ from .schema import ConnectionSchema, Input
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
 # Custom imports below
-from komand_bitdefender_gravityzone_comprehensive.util.api import BitdefenderGravityZoneAPI
+from komand_bitdefender_gravityzone.util.api import BitdefenderGravityZoneAPI
 
 
 class Connection(insightconnect_plugin_runtime.Connection):

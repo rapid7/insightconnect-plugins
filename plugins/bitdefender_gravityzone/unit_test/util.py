@@ -2,8 +2,8 @@ import json
 import logging
 import os
 
-from komand_bitdefender_gravityzone_comprehensive.connection.connection import Connection
-from komand_bitdefender_gravityzone_comprehensive.connection.schema import Input
+from komand_bitdefender_gravityzone.connection.connection import Connection
+from komand_bitdefender_gravityzone.connection.schema import Input
 
 
 class Util:

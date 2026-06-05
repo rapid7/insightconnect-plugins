@@ -23,9 +23,9 @@ def main():
             monkey.patch_all()
 
     import insightconnect_plugin_runtime
-    from komand_bitdefender_gravityzone_comprehensive import connection, actions, triggers, tasks
+    from komand_bitdefender_gravityzone import connection, actions, triggers, tasks
 
-    class ICONBitdefenderGravityzoneComprehensive(insightconnect_plugin_runtime.Plugin):
+    class ICONBitdefenderGravityzone(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -40,7 +40,7 @@ def main():
         
 
     """Run plugin"""
-    cli = insightconnect_plugin_runtime.CLI(ICONBitdefenderGravityzoneComprehensive())
+    cli = insightconnect_plugin_runtime.CLI(ICONBitdefenderGravityzone())
     cli.run()
 
 

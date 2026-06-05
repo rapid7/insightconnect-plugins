@@ -7,8 +7,8 @@ from unittest import TestCase
 from unittest.mock import patch
 
 from insightconnect_plugin_runtime.exceptions import PluginException
-from komand_bitdefender_gravityzone_comprehensive.actions.isolate_endpoint import IsolateEndpoint
-from komand_bitdefender_gravityzone_comprehensive.actions.isolate_endpoint.schema import Input
+from komand_bitdefender_gravityzone.actions.isolate_endpoint import IsolateEndpoint
+from komand_bitdefender_gravityzone.actions.isolate_endpoint.schema import Input
 from util import Util
 
 

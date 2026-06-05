@@ -6,8 +6,8 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import patch
 
-from komand_bitdefender_gravityzone_comprehensive.actions.get_endpoints_list import GetEndpointsList
-from komand_bitdefender_gravityzone_comprehensive.actions.get_endpoints_list.schema import Input
+from komand_bitdefender_gravityzone.actions.get_endpoints_list import GetEndpointsList
+from komand_bitdefender_gravityzone.actions.get_endpoints_list.schema import Input
 from util import Util
 
 

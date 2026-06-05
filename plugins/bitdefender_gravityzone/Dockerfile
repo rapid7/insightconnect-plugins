@@ -31,4 +31,4 @@ RUN rm -rf /root/.cache;
 # User to run plugin code. The two supported users are: root, nobody
 USER nobody
 
-ENTRYPOINT ["python", "/workspace/bin/komand_bitdefender_gravityzone_comprehensive"]
+ENTRYPOINT ["python", "/workspace/bin/komand_bitdefender_gravityzone"]

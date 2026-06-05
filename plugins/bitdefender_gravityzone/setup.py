@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="bitdefender_gravityzone_comprehensive-rapid7-plugin",
+    name="bitdefender_gravityzone-rapid7-plugin",
     version="1.0.0",
     description="Interact with Bitdefender GravityZone to manage endpoints, including listing managed devices and isolating compromised hosts",
     author="rapid7",
@@ -10,9 +10,5 @@ setup(
     url="",
     packages=find_packages(),
     install_requires=["insightconnect-plugin-runtime"],  # Add third-party dependencies to requirements.txt, not here!
-    entry_points={
-        "console_scripts": [
-            "komand_bitdefender_gravityzone_comprehensive = bin.komand_bitdefender_gravityzone_comprehensive:main"
-        ]
-    },
+    entry_points={"console_scripts": ["komand_bitdefender_gravityzone = bin.komand_bitdefender_gravityzone:main"]},
 )

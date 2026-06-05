@@ -7,8 +7,8 @@ from unittest import TestCase
 from unittest.mock import patch
 
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
-from komand_bitdefender_gravityzone_comprehensive.connection.connection import Connection
-from komand_bitdefender_gravityzone_comprehensive.connection.schema import Input
+from komand_bitdefender_gravityzone.connection.connection import Connection
+from komand_bitdefender_gravityzone.connection.schema import Input
 from util import Util
 
 import logging
