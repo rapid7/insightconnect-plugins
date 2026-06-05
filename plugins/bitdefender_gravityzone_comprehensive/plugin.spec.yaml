@@ -1,152 +1,201 @@
 plugin_spec_version: v2
 extension: plugin
-products: [ insightconnect ]
+products: [insightconnect]
 name: bitdefender_gravityzone_comprehensive
-title: Bitdefender GravityZone Comprehensive
-vendor: nleech
+title: Bitdefender GravityZone
+vendor: rapid7
 support: community
 status: []
-supported_versions: [ "GravityZone Cloud" ]
-description: "Comprehensive integration exposing documented Bitdefender GravityZone Public API endpoints, including asset listing and endpoint isolation capabilities."
-version: 2.0.0
-
+supported_versions: ["GravityZone Cloud API v1.0"]
+description: Interact with Bitdefender GravityZone to manage endpoints, including listing managed devices and isolating compromised hosts
+version: 1.0.0
+connection_version: 1
+sdk:
+  type: slim
+  version: 6.5.1
+  user: nobody
 resources:
-  source_url: https://github.com/nleech/insightconnect-plugins/tree/master/plugins/bitdefender_gravityzone_comprehensive
-  license_url: https://github.com/nleech/insightconnect-plugins/blob/master/LICENSE
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/bitdefender_gravityzone_comprehensive
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.bitdefender.com
-
+key_features:
+  - List endpoints managed by Bitdefender GravityZone
+  - Isolate compromised endpoints from the network
+requirements:
+  - Bitdefender GravityZone API key with appropriate permissions
+  - Access to the GravityZone Control Center
+links:
+  - "[Bitdefender GravityZone](https://www.bitdefender.com/business/products/gravityzone-business-security.html)"
+references:
+  - "[GravityZone API Documentation](https://www.bitdefender.com/business/support/en/77209-128490-public-api.html)"
+tags:
+  - bitdefender
+  - gravityzone
+  - endpoint
+  - isolation
 hub_tags:
-  use_cases: [ endpoint_security ]
-  keywords: [ bitdefender, gravityzone ]
+  use_cases: [threat_detection_and_response]
+  keywords: [bitdefender, gravityzone, endpoint]
   features: []
+version_history:
+  - "1.0.0 - Initial plugin with Get Endpoints List and Isolate Endpoint actions"
+enable_cache: false
 
-# This matches the rigid types framework of the cortex layout
 types:
   endpoint_item:
     id:
       title: Endpoint ID
+      description: The unique identifier of the endpoint
       type: string
       required: true
     name:
-      title: Endpoint Name
+      title: Name
+      description: The hostname of the endpoint
       type: string
-      required: false
+      required: true
     label:
       title: Label
+      description: Custom label assigned to the endpoint
       type: string
       required: false
     fqdn:
       title: FQDN
+      description: Fully qualified domain name of the endpoint
+      type: string
+      required: false
+    group_id:
+      title: Group ID
+      description: The ID of the group the endpoint belongs to
+      type: string
+      required: false
+    is_managed:
+      title: Is Managed
+      description: Whether the endpoint has an active management agent
+      type: boolean
+      required: false
+    machine_type:
+      title: Machine Type
+      description: "Type of machine: 1=Computer, 2=Virtual Machine, 3=EC2 Instance, 0=Other"
+      type: integer
+      required: false
+    operating_system_version:
+      title: Operating System Version
+      description: The OS name and version
       type: string
       required: false
     ip:
       title: IP Address
+      description: Primary IP address of the endpoint
       type: string
       required: false
     macs:
       title: MAC Addresses
-      type: '[]string'
+      description: List of MAC addresses for the endpoint
+      type: "[]string"
       required: false
-    groupName:
-      title: Group Name
-      type: string
-      required: false
-    isIsolated:
-      title: Is Isolated
+    managed_with_best:
+      title: Managed With BEST
+      description: Whether Bitdefender Endpoint Security Tools is active
       type: boolean
       required: false
-
-  task_result:
-    taskId:
-      title: Task ID
-      type: string
-      required: true
-    success:
-      title: Success Status
-      type: boolean
-      required: true
 
 connection:
   url:
-    type: string
     title: Access URL
-    description: The base GravityZone Control Center Access URL
-    example: "https://cloud.gravityzone.bitdefender.com"
+    description: The base GravityZone Control Center URL
+    type: string
     required: true
+    example: https://cloud.gravityzone.bitdefender.com
   api_key:
-    type: credential_secret_key
     title: API Key
-    description: GravityZone API key with required service rights
-    example: "9de5069c5afe602b2ea0a04b66beb2c0"
+    description: GravityZone API key with required service permissions
+    type: credential_secret_key
     required: true
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
 
 actions:
   get_endpoints_list:
     title: Get Endpoints List
-    description: "Returns a list of endpoints managed by Bitdefender GravityZone based on filter criteria"
+    description: Returns a paginated list of endpoints managed by Bitdefender GravityZone
     input:
-      service_group:
-        title: Service Group
+      parent_id:
+        title: Parent ID
+        description: The ID of the target company or group. If omitted, returns endpoints associated with the API key
         type: string
-        description: The targeted API endpoint route
-        default: "network"
-        example: "network"
-        required: true
-      api_version:
-        title: API Version
-        type: string
-        description: Version pathway context
-        default: "v1.0"
-        example: "v1.0"
-        required: true
+        required: false
+        example: 5a4f2c3b6e9d1a0012345678
+      is_managed:
+        title: Is Managed
+        description: Filter by management state. True returns only managed endpoints, False returns unmanaged
+        type: boolean
+        required: false
+        example: true
       page:
-        title: Page Number
+        title: Page
+        description: The page number to return
         type: integer
-        description: Page number to return
+        required: false
         default: 1
         example: 1
-        required: false
-      perPage:
-        title: Items Per Page
+      per_page:
+        title: Per Page
+        description: Number of items per page (1-100)
         type: integer
-        description: Number of items per page
+        required: false
         default: 30
         example: 30
+      name_filter:
+        title: Name Filter
+        description: Partial match filter for endpoint names (minimum 3 characters)
+        type: string
         required: false
+        example: "workstation*"
     output:
       endpoints:
-        title: Endpoints List
-        type: '[]endpoint_item'
-        description: List of matching endpoints found
+        title: Endpoints
+        description: List of endpoint objects matching the filter criteria
+        type: "[]endpoint_item"
         required: true
+        example: [{"id": "5a4f2c3b6e9d1a0012345678", "name": "WORKSTATION-001"}]
+      total:
+        title: Total
+        description: Total number of endpoints matching the criteria
+        type: integer
+        required: true
+        example: 25
+      pages_count:
+        title: Pages Count
+        description: Total number of available pages
+        type: integer
+        required: false
+        example: 5
+      page:
+        title: Page
+        description: The current page number returned
+        type: integer
+        required: true
+        example: 1
+      per_page:
+        title: Per Page
+        description: The number of items per page
+        type: integer
+        required: true
+        example: 30
 
-  create_isolate_endpoint_task:
-    title: Create Isolate Endpoint Task
-    description: "Isolates a target managed endpoint cleanly from network communications"
+  isolate_endpoint:
+    title: Isolate Endpoint
+    description: Isolates a managed endpoint from the network to contain a potential threat
     input:
-      service_group:
-        title: Service Group
-        type: string
-        description: The targeted API endpoint route
-        default: "network"
-        example: "network"
-        required: true
-      api_version:
-        title: API Version
-        type: string
-        description: Version pathway context
-        default: "v1.0"
-        example: "v1.0"
-        required: true
       endpoint_id:
         title: Endpoint ID
+        description: The unique 24-character hex ID of the endpoint to isolate
         type: string
-        description: The target device string unique identifier
-        example: "602beea0a04b66b12a6ed3c9"
         required: true
+        example: 5a4f2c3b6e9d1a0012345678
     output:
-      task:
-        title: Task Result
-        type: task_result
-        description: Isolation task details
+      success:
+        title: Success
+        description: Whether the isolation task was successfully created
+        type: boolean
         required: true
+        example: true

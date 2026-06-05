@@ -1,0 +1,8 @@
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "apiKeyId": "abc123",
+    "companyId": "def456"
+  },
+  "id": "insightconnect-connection-test"
+}

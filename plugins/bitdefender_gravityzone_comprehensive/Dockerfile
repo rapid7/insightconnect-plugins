@@ -1,22 +1,34 @@
-FROM python:3.10-slim-buster
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.5.1 AS builder
 
-# Requirements for the Rapid7 plugin runtime
-LABEL organization=nleech
-LABEL program=bitdefender_gravityzone_comprehensive
-LABEL version=2.0.0
-LABEL vendor=nleech
+WORKDIR /workspace
 
-ENV INST_PKG=bitdefender_gravityzone_comprehensive
-ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+ADD ./plugin.spec.yaml /plugin.spec.yaml
+ADD ./requirements.txt /workspace/requirements.txt
+ADD . /workspace
 
-WORKDIR /python/src
-ADD ./setup.py /python/src/setup.py
-ADD ./requirements.txt /python/src/requirements.txt
 
-RUN pip install --no-cache-dir -r requirements.txt && python setup.py install
 
-ADD ./plugin.spec.yaml /python/src/plugin.spec.yaml
-ADD ./bitdefender_gravityzone_comprehensive /python/src/bitdefender_gravityzone_comprehensive
+RUN pip install .
+RUN pip uninstall -y setuptools
 
-# Run the plugin via the default engine module entry point
-ENTRYPOINT ["python", "-m", "bitdefender_gravityzone_comprehensive"]
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.5.1
+
+LABEL organization=rapid7
+LABEL sdk=python
+
+WORKDIR /workspace
+
+COPY --from=builder /workspace /workspace
+COPY --from=builder /plugin.spec.yaml /plugin.spec.yaml
+
+
+RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+ENV PYTHONPATH="/workspace:${PYTHONPATH}"
+
+RUN rm -rf /root/.cache;
+
+# User to run plugin code. The two supported users are: root, nobody
+USER nobody
+
+ENTRYPOINT ["python", "/workspace/bin/komand_bitdefender_gravityzone_comprehensive"]

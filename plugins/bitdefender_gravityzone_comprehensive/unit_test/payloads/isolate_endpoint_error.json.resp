@@ -1,0 +1,9 @@
+{
+  "jsonrpc": "2.0",
+  "error": {
+    "code": -32003,
+    "message": "Endpoint not found",
+    "data": {}
+  },
+  "id": "insightconnect-isolate-endpoint"
+}

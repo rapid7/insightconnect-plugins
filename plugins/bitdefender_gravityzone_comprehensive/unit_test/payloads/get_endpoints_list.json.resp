@@ -1,0 +1,38 @@
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "items": [
+      {
+        "id": "5a4f2c3b6e9d1a0012345678",
+        "name": "WORKSTATION-001",
+        "label": "Engineering Lab",
+        "fqdn": "workstation-001.corp.example.com",
+        "groupId": "abcdef1234567890abcdef12",
+        "isManaged": true,
+        "machineType": 1,
+        "operatingSystemVersion": "Windows 10 Pro 21H2",
+        "ip": "192.168.1.100",
+        "macs": ["AA:BB:CC:DD:EE:01"],
+        "managedWithBest": true
+      },
+      {
+        "id": "6b5e3d4c7f0e2b1123456789",
+        "name": "SERVER-DB-01",
+        "label": "",
+        "fqdn": "server-db-01.corp.example.com",
+        "groupId": "abcdef1234567890abcdef12",
+        "isManaged": true,
+        "machineType": 2,
+        "operatingSystemVersion": "Ubuntu 22.04 LTS",
+        "ip": "192.168.1.50",
+        "macs": ["AA:BB:CC:DD:EE:02", "AA:BB:CC:DD:EE:03"],
+        "managedWithBest": true
+      }
+    ],
+    "total": 2,
+    "page": 1,
+    "pagesCount": 1,
+    "perPage": 30
+  },
+  "id": "insightconnect-get-endpoints"
+}

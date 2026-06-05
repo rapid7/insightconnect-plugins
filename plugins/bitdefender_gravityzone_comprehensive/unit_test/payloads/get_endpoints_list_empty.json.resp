@@ -1,0 +1,11 @@
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "items": [],
+    "total": 0,
+    "page": 1,
+    "pagesCount": 0,
+    "perPage": 30
+  },
+  "id": "insightconnect-get-endpoints"
+}
