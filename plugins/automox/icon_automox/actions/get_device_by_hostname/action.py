@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import GetDeviceByHostnameInput, GetDeviceByHostnameOutput, Input, Output, Component
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 
@@ -14,7 +15,14 @@ class GetDeviceByHostname(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        device = self.connection.automox_api.find_device_by_attribute(
-            params.get(Input.ORG_ID), ["name"], params.get(Input.HOSTNAME)
-        )
+        # START INPUT BINDING - DO NOT REMOVE
+        org_id = params.get(Input.ORG_ID, 0)
+        hostname = params.get(Input.HOSTNAME, "")
+        # END INPUT BINDING - DO NOT REMOVE
+
+        # Validation
+        if org_id and org_id <= 0:
+            raise PluginException(cause="Invalid input", assistance="Organization ID must be a positive integer")
+
+        device = self.connection.automox_api.find_device_by_attribute(org_id, ["name"], hostname)
         return {Output.DEVICE: device}

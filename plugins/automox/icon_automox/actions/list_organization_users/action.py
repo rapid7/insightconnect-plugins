@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import ListOrganizationUsersInput, ListOrganizationUsersOutput, Input, Output, Component
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 
@@ -14,7 +15,15 @@ class ListOrganizationUsers(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        users = self.connection.automox_api.get_org_users(params.get(Input.ORG_ID))
+        # START INPUT BINDING - DO NOT REMOVE
+        org_id = params.get(Input.ORG_ID, 0)
+        # END INPUT BINDING - DO NOT REMOVE
+
+        # Validation
+        if org_id and org_id <= 0:
+            raise PluginException(cause="Invalid input", assistance="Organization ID must be a positive integer")
+
+        users = self.connection.automox_api.get_org_users(org_id)
         self.logger.info(f"Returned {len(users)} users")
 
         return {Output.USERS: users}

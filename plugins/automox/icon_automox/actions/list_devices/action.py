@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import ListDevicesInput, ListDevicesOutput, Input, Output, Component
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 
@@ -11,12 +12,18 @@ class ListDevices(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        # Don't define optional inputs to avoid zero value
-        group_id = None
-        if params.get(Input.GROUP_ID):
-            group_id = params.get(Input.GROUP_ID)
+        # START INPUT BINDING - DO NOT REMOVE
+        org_id = params.get(Input.ORG_ID, 0)
+        group_id = params.get(Input.GROUP_ID, 0)
+        # END INPUT BINDING - DO NOT REMOVE
 
-        devices = self.connection.automox_api.get_devices(params.get(Input.ORG_ID), group_id)
+        # Validation
+        if org_id and org_id <= 0:
+            raise PluginException(cause="Invalid input", assistance="Organization ID must be a positive integer")
+
+        group_id = None if group_id == 0 else group_id
+
+        devices = self.connection.automox_api.get_devices(org_id, group_id)
         self.logger.info(f"Returned {len(devices)} devices")
 
         return {Output.DEVICES: devices}

@@ -16,5 +16,4 @@ class ListOrganizations(insightconnect_plugin_runtime.Action):
     def run(self):
         organizations = self.connection.automox_api.get_orgs()
         self.logger.info(f"Returned {len(organizations)} organizations")
-
         return {Output.ORGANIZATIONS: organizations}
