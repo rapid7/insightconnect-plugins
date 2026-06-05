@@ -6,6 +6,7 @@ from .schema import (
     Output,
     Component,
 )
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class SubmitRemediation(insightconnect_plugin_runtime.Action):
@@ -18,9 +19,15 @@ class SubmitRemediation(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        org_id = params.get(Input.ORG_ID)
-        action_type = params.get(Input.ACTION_TYPE)
-        devices_json = params.get(Input.DEVICES_JSON)
+        # START INPUT BINDING - DO NOT REMOVE
+        org_id = params.get(Input.ORG_ID, 0)
+        action_type = params.get(Input.ACTION_TYPE, "")
+        devices_json = params.get(Input.DEVICES_JSON, {})
+        # END INPUT BINDING - DO NOT REMOVE
+
+        # Validation
+        if org_id and org_id <= 0:
+            raise PluginException(cause="Invalid input", assistance="Organization ID must be a positive integer")
 
         result = self.connection.automox_api.submit_remediation(
             org_id=org_id,

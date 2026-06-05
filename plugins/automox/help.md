@@ -1913,7 +1913,7 @@ Example output:
 
 # Version History
 
-* 3.1.0 - Action: Adds action for Automox Remediate API
+* 3.1.0 - Action: Adds action for Automox Remediate API | Cloud Enabled | Updated SDK to the latest version (6.5.1)
 * 3.0.0 - Action: Fixed - Get Vulnerability Sync Action Set | Action: Fixed - List Vulnerability Sync Action Sets | Action: Updated - List Organization Users
 * 2.0.0 - Fix Vulnerability Sync API Actions | Action: Added - Delete Vulnerability Sync Action Set | Action: Added - Execute Vulnerability Sync Actions | Action: Added - List Vulnerability Sync Action Set Issues | Action: Added - List Vulnerability Sync Action Set Solutions | Action: Added - List Vulnerability Sync Action Sets | Action: Added - Get Vulnerability Sync Action Set | Action: Updated - Upload Vulnerability Sync File | Action: Updated - Get Devices | Action: Deleted - Action on Vulnerability Sync Batch | Action: Deleted - Vulnerability Sync Task | Action: Deleted - Get Vulnerability Sync Batch | Action: Deleted - List Vulnerability Sync Batches | Action: Deleted - List Vulnerability Sync Tasks
 * 1.2.0 - Get device by IP and Get device by hostname: fix validation issue when IP or hostname not found | Add unit tests
