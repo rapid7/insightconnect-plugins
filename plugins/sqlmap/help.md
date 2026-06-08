@@ -377,7 +377,8 @@ Example output:
 
 # Version History
 
-* 2.0.1 - Updated SDK to the latest version (6.4.3)
+* 2.0.2 - Updated SDK to the latest version (6.5.1)
+* 2.0.1 - Resolved an input validation issue that could allow OS command injection via the api_host and api_port connection parameters (CVE-2026-8659) | Updated SDK to the latest version (6.4.3)
 * 2.0.0 - Changed SDK from Komand to ICON | Updated requests version to 2.20.0 | Added examples and required defaults
 * 1.1.1 - New spec and help.md format for the Extension Library
 * 1.1.0 - Support web server mode

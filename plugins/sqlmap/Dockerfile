@@ -1,24 +1,24 @@
-FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.4.3 AS builder
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.5.1 AS builder
 
-WORKDIR /python/src
+WORKDIR /workspace
 
 ADD ./plugin.spec.yaml /plugin.spec.yaml
-ADD ./requirements.txt /python/src/requirements.txt
-ADD . /python/src
+ADD ./requirements.txt /workspace/requirements.txt
+ADD . /workspace
 
 
 
 RUN pip install .
 RUN pip uninstall -y setuptools
 
-FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.4.3
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.5.1
 
 LABEL organization=rapid7
 LABEL sdk=python
 
-WORKDIR /python/src
+WORKDIR /workspace
 
-COPY --from=builder /python/src /python/src
+COPY --from=builder /workspace /workspace
 COPY --from=builder /plugin.spec.yaml /plugin.spec.yaml
 
 RUN apt-get update && apt-get install -y wget && wget https://github.com/sqlmapproject/sqlmap/archive/master.tar.gz && tar -xf master.tar.gz
@@ -26,11 +26,12 @@ RUN apt-get update && apt-get install -y wget && wget https://github.com/sqlmapp
 
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-ENV PYTHONPATH="/python/src:${PYTHONPATH}"
+ENV PYTHONPATH="/workspace:${PYTHONPATH}"
 
 RUN rm -rf /root/.cache;
+RUN mkdir -p /workspace/cache && chown -R nobody /workspace/cache
 
 # User to run plugin code. The two supported users are: root, nobody
 USER nobody
 
-ENTRYPOINT ["python", "/python/src/bin/icon_sqlmap"]
+ENTRYPOINT ["python", "/workspace/bin/icon_sqlmap"]
