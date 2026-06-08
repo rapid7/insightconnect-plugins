@@ -1,7 +1,8 @@
-import winrm
 import base64
 import subprocess  # noqa: B404
+
 import insightconnect_plugin_runtime
+import winrm
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 DECODING_TYPE = "utf-8"
@@ -250,8 +251,10 @@ def configure_machine_for_kerberos_connection(
 
     # Creates a Kerberos ticket
     kinit = f"""echo '{password}' | kinit {username}@{domain.upper()}"""
-    response = subprocess.Popen(kinit, shell="true", stdout=subprocess.PIPE, stderr=subprocess.PIPE)  # noqa: B602
-    (stdout, stderr) = response.communicate()
+    with subprocess.Popen(
+        kinit, shell="true", stdout=subprocess.PIPE, stderr=subprocess.PIPE  # noqa: B602
+    ) as response:
+        stdout, stderr = response.communicate()
     stdout = stdout.decode(DECODING_TYPE)
     stderr = stderr.decode(DECODING_TYPE)
     action.logger.info("Attempt to make Kerberos ticket stdout: " + stdout)
@@ -260,8 +263,10 @@ def configure_machine_for_kerberos_connection(
     with open("/etc/resolv.conf", "w", encoding="utf-8") as f:
         f.write(dns)
     realm = f"""echo '{password}' | realm --install=/ join --user={username} {domain}"""
-    response = subprocess.Popen(realm, shell="true", stdout=subprocess.PIPE, stderr=subprocess.PIPE)  # noqa: B602
-    (stdout, stderr) = response.communicate()
+    with subprocess.Popen(
+        realm, shell="true", stdout=subprocess.PIPE, stderr=subprocess.PIPE  # noqa: B602
+    ) as response:
+        stdout, stderr = response.communicate()
     stdout = stdout.decode(DECODING_TYPE)
     stderr = stderr.decode(DECODING_TYPE)
     action.logger.info("Attempt to join domain stdout: " + stdout)
@@ -272,7 +277,9 @@ def configure_machine_for_kerberos_connection(
 
 
 def run_powershell_session(
-    action: insightconnect_plugin_runtime.Action, powershell_script: str, powershell_session: winrm.Session
+    action: insightconnect_plugin_runtime.Action,
+    powershell_script: str,
+    powershell_session: winrm.Session,
 ) -> tuple:
     run_script = powershell_session.run_ps(powershell_script)
     exit_code = run_script.status_code
@@ -286,7 +293,8 @@ def run_powershell_session(
     if exit_code != 0:
         action.logger.error(error_value)
         raise PluginException(
-            cause="An error occurred in the PowerShell script.", assistance="See logging for more info."
+            cause="An error occurred in the PowerShell script.",
+            assistance="See logging for more info.",
         )
     return error_value, output
 

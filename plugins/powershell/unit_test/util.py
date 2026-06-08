@@ -1,11 +1,10 @@
 import json
 import logging
 import os
-
 from unittest.mock import Mock
 
-from icon_powershell.connection import Connection
 from icon_powershell.actions.execute_script.schema import Output
+from icon_powershell.connection import Connection
 
 
 class Util:
