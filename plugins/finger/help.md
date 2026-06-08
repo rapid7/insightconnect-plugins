@@ -105,7 +105,8 @@ Example output:
 
 # Version History
 
-* 1.0.3 - Updated SDK version to 6.4.3
+* 1.0.4 - Updated SDK version to 6.5.1
+* 1.0.3 - Resolved an input validation issue that could allow OS command injection via the user and host parameters (CVE-2026-8664) | Updated SDK version to 6.4.3
 * 1.0.2 - Change docker image from `komand/python-2-plugin` to `komand/python-3-37-plugin:3` to use python 3 | Use input and output constants | Changed variables names to more readable | Changed descriptions | Added "f" strings | Removed method test from action
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Support web server mode
