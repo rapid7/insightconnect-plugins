@@ -76,7 +76,8 @@ Example output:
 
 # Version History
 
-* 2.0.3 - Updated SDK version to 6.4.3
+* 2.0.4 - Updated SDK version to 6.5.1
+* 2.0.3 - Resolved an input validation issue in the text replace action that could allow OS command injection via the text and expression parameters (CVE-2026-8665) | Updated SDK version to 6.4.3
 * 2.0.2 - New spec and help.md format for the Extension Library
 * 2.0.1 - Add utilities plugin tag for Marketplace searchability
 * 2.0.0 - Rename "Tr" plugin title to "Translate"
