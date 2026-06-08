@@ -4,7 +4,7 @@ products: [insightconnect]
 name: tcpdump
 title: Tcpdump
 description: The Tcpdump plugin is used to read contents of a PCAP
-version: 2.0.0
+version: 2.0.1
 connection_version: 1
 vendor: rapid7
 support: community
@@ -20,14 +20,15 @@ tags:
   - pcap
 sdk:
   type: full
-  version: 6.4.3
+  version: 6.5.1
   user: nobody
   custom_cmd:
     - "RUN apk add --no-cache tcpdump"
 key_features:
   - Parse and return the contents of a PCAP file
 version_history:
-  - "2.0.0 - Action `Read PCAP`: Options must now be space-separated | Refreshed the plugin | Updated SDK to the latest version (6.4.3)"
+  - "2.0.1 - Updated SDK to the latest version (6.5.1)"
+  - "2.0.0 - Resolved an input validation issue that could allow OS command injection via the options and filter parameters (CVE-2026-8658) | Action `Read PCAP`: Options must now be space-separated | Refreshed the plugin | Updated SDK to the latest version (6.4.3)"
   - "1.1.0 - Updated spec and help.md format for the Extension Library, spec description changes"
   - "1.0.2 - New spec and help.md format for the Extension Library"
   - "1.0.1 - Update to use the `komand/python-3-slim-plugin:2` Docker image to reduce plugin size"
