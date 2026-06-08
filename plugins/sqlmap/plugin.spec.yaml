@@ -4,7 +4,7 @@ products: [insightconnect]
 name: sqlmap
 title: SQLMap
 description: "[SQLMap](http://sqlmap.org/) is an open-source penetration testing tool that automates detecting and exploiting SQL injection flaws and taking over database servers. It features a powerful detection engine, supports database fingerprinting, data extraction, filesystem access, and OS command execution via out-of-band connections. The SQLMap plugin enables target scanning and result analysis"
-version: 2.0.1
+version: 2.0.2
 connection_version: 2
 supported_versions: ["SQLMAP 2026-03-13"]
 vendor: rapid7
@@ -12,7 +12,7 @@ support: community
 status: []
 sdk:
   type: slim
-  version: 6.4.3
+  version: 6.5.1
   user: nobody
   custom_cmd:
     - RUN apt-get update && apt-get install -y wget && wget https://github.com/sqlmapproject/sqlmap/archive/master.tar.gz && tar -xf master.tar.gz
@@ -29,7 +29,8 @@ requirements:
 troubleshooting:
   - To troubleshoot SQLmap, look at the INFO logs that are printed to see where the plugin failed
 version_history:
-  - 2.0.1 - Updated SDK to the latest version (6.4.3)
+  - 2.0.2 - Updated SDK to the latest version (6.5.1)
+  - 2.0.1 - Resolved an input validation issue that could allow OS command injection via the api_host and api_port connection parameters (CVE-2026-8659) | Updated SDK to the latest version (6.4.3)
   - 2.0.0 - Changed SDK from Komand to ICON | Updated requests version to 2.20.0 | Added examples and required defaults
   - 1.1.1 - New spec and help.md format for the Extension Library
   - 1.1.0 - Support web server mode
