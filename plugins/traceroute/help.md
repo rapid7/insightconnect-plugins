@@ -62,9 +62,7 @@ Example input:
 |ip|[]string|True|IP addresses|["1.1.1.1", "0.0.0.0"]|
 |path|[]string|True|The path used to get to the host including response times|["1  1.1.1.1  2.218 ms  0.128 ms  0.068 ms", "2  example.example.net (0.0.0.0) [open]  189.590 ms  196.722 ms  194.262 ms"]|
 |reply|boolean|True|Whether a route was found to the host|True|
-|response|string|True|The full raw response from traceroute|1  1.1.1.1  2.218 ms  0.128 ms  0.068 ms
- 2  example.example.net (0.0.0.0) [open]  189.590 ms  196.722 ms  194.262 ms
-|
+|response|string|True|The full raw response from traceroute|1  1.1.1.1  2.218 ms  0.128 ms  0.068 ms\n 2  example.example.net (0.0.0.0) [open]  189.590 ms  196.722 ms  194.262 ms\n|
   
 Example output:
 
@@ -79,7 +77,7 @@ Example output:
     "2  example.example.net (0.0.0.0) [open]  189.590 ms  196.722 ms  194.262 ms"
   ],
   "reply": true,
-  "response": "1  1.1.1.1  2.218 ms  0.128 ms  0.068 ms\n 2  example.example.net (0.0.0.0) [open]  189.590 ms  196.722 ms  194.262 ms\n"
+  "response": "1  1.1.1.1  2.218 ms  0.128 ms  0.068 ms\\n 2  example.example.net (0.0.0.0) [open]  189.590 ms  196.722 ms  194.262 ms\\n"
 }
 ```
 ### Triggers
@@ -99,7 +97,8 @@ Example output:
 
 # Version History
 
-* 1.0.3 - Updated SDK version to 6.4.3
+* 1.0.4 - Updated SDK version to 6.5.1
+* 1.0.3 - Resolved an input validation issue in the traceroute action that could allow OS command injection via request parameters (CVE-2026-8666) | Updated SDK version to 6.4.3
 * 1.0.2 - New spec and help.md format for the Extension Library
 * 1.0.1 - Support web server mode
 * 1.0.0 - Initial plugin

@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Traceroute"
 Vendor = "rapid7"
-Version = "1.0.3"
+Version = "1.0.4"
 Description = "This plugin uses [tcptraceroute](https://linux.die.net/man/1/tcptraceroute), an implementation of Traceroute that uses TCP rather than ICMP. Tcptraceroute can bypass some firewalls that block ICMP and UDP"
 
 

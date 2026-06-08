@@ -6,7 +6,7 @@ title: Traceroute
 description: This plugin uses [tcptraceroute](https://linux.die.net/man/1/tcptraceroute), an 
   implementation of Traceroute that uses TCP rather than ICMP. Tcptraceroute can bypass some firewalls that 
   block ICMP and UDP
-version: 1.0.3
+version: 1.0.4
 connection_version: 1
 supported_versions: ["tcptraceroute 1.5beta7"]
 vendor: rapid7
@@ -21,7 +21,7 @@ references:
   - '[Git Repository](https://github.com/mct/tcptraceroute)'
 sdk:
   type: slim
-  version: 6.4.3
+  version: 6.5.1
   user: nobody
   custom_cmd:
     - ENV DEBIAN_FRONTEND noninteractive
@@ -29,7 +29,8 @@ sdk:
 key_features:
   - Trace a route to a host
 version_history:
-  - 1.0.3 - Updated SDK version to 6.4.3
+  - 1.0.4 - Updated SDK version to 6.5.1
+  - 1.0.3 - Resolved an input validation issue in the traceroute action that could allow OS command injection via request parameters (CVE-2026-8666) | Updated SDK version to 6.4.3
   - 1.0.2 - New spec and help.md format for the Extension Library
   - 1.0.1 - Support web server mode
   - 1.0.0 - Initial plugin
@@ -110,7 +111,7 @@ actions:
         description: The full raw response from traceroute
         type: string
         required: true
-        example: "1  1.1.1.1  2.218 ms  0.128 ms  0.068 ms\n 2  example.example.net (0.0.0.0) [open]  189.590 ms  196.722 ms  194.262 ms\n"
+        example: "1  1.1.1.1  2.218 ms  0.128 ms  0.068 ms\\n 2  example.example.net (0.0.0.0) [open]  189.590 ms  196.722 ms  194.262 ms\\n"
       path:
         title: Path
         description: The path used to get to the host including response times
