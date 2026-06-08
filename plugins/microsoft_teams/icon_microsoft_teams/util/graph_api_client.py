@@ -485,13 +485,11 @@ class GraphApiClient(BaseClient):
 
     # ─── Chats ────────────────────────────────────────────────────────────────────
 
-    def create_chat(self, members: list, topic: str = None, installed_apps: list = None) -> dict:
-        """Create a new chat, optionally installing apps (e.g. bots) into the chat."""
-        payload = self._build_chat_payload(members, topic, installed_apps)
+    def create_chat(self, members: list, topic: str = None) -> dict:
+        """Create a new chat."""
+        payload = self._build_chat_payload(members, topic)
 
         self._logger.info(f"Creating chat with {len(members)} members")
-        if installed_apps:
-            self._logger.info(f"Installing {len(installed_apps)} app(s) into chat")
 
         url = f"{self._base_url}/v1.0/chats"
         response = self._call_api("POST", url, headers=self._get_auth_headers(), json=payload)
@@ -506,14 +504,10 @@ class GraphApiClient(BaseClient):
                     data=str(error),
                 ) from error
 
-        # When installedApps is included, the API returns 202 Accepted with an async operation
-        if response.status_code == 202:
-            return self._handle_async_chat_creation(response)
-
         self._raise_for_status(response)
         return {}
 
-    def _build_chat_payload(self, members: list, topic: str = None, installed_apps: list = None) -> dict:
+    def _build_chat_payload(self, members: list, topic: str = None) -> dict:
         """Build the request payload for chat creation."""
         payload = {}
 
@@ -539,170 +533,9 @@ class GraphApiClient(BaseClient):
             )
 
         payload["members"] = list_members
-
-        if installed_apps:
-            payload["installedApps"] = [
-                {"teamsApp@odata.bind": f"{self._base_url}/v1.0/appCatalogs/teamsApps/{app_id}"}
-                for app_id in installed_apps
-            ]
-
         return payload
 
-    def _handle_async_chat_creation(self, response, max_attempts: int = 10, poll_interval: int = 3) -> dict:
-        """
-        Handle the 202 Accepted response from chat creation with installed apps.
-
-        The Location header contains the operation URL. We extract the chat ID
-        and attempt to fetch the chat directly. If not ready yet, we poll the
-        operation endpoint until it succeeds.
-        """
-        location = response.headers.get("Location", "")
-        self._logger.info(f"Chat creation is async (202 Accepted). Location: {location}")
-
-        chat_id = self._extract_chat_id_from_location(location)
-        self._logger.info(f"Extracted chat ID: {chat_id}")
-
-        if not chat_id and not location:
-            raise PluginException(
-                cause="Chat creation returned 202 but no Location header",
-                assistance="The chat may have been created but we cannot confirm. Check Teams manually.",
-            )
-
-        # Try fetching the chat directly first — it's often available immediately
-        direct_result = self._try_direct_chat_fetch(chat_id)
-        if direct_result:
-            return direct_result
-
-        # Fall back to polling the operation endpoint
-        if location:
-            poll_result = self._poll_chat_operation(location, chat_id, max_attempts, poll_interval)
-            if poll_result:
-                return poll_result
-
-        # Exhausted retries — try one final direct fetch
-        return self._final_chat_fetch_or_partial(chat_id)
-
-    def _try_direct_chat_fetch(self, chat_id: str) -> dict:
-        """Attempt to fetch a chat directly by ID. Returns the chat dict or empty dict on failure."""
-        if not chat_id:
-            return {}
-        sleep(2)
-        try:
-            chat_result = self._make_request("GET", f"/v1.0/chats/{chat_id}")
-            if chat_result and chat_result.get("id"):
-                self._logger.info("Chat fetched successfully on first attempt")
-                return chat_result
-        except PluginException:
-            self._logger.info("Chat not ready yet, falling back to polling operation")
-        return {}
-
-    def _poll_chat_operation(self, location: str, chat_id: str, max_attempts: int, poll_interval: int) -> dict:
-        """Poll the async operation endpoint until the chat creation completes."""
-        if location.startswith("/chats("):
-            operation_url = f"{self._base_url}/v1.0{location}"
-        else:
-            operation_url = f"{self._base_url}{location}"
-
-        self._logger.info(f"Polling operation URL: {operation_url}")
-
-        for attempt in range(max_attempts):
-            sleep(poll_interval)
-            self._logger.info(f"Polling chat creation operation (attempt {attempt + 1}/{max_attempts})")
-            poll_response = self._call_api("GET", operation_url, headers=self._get_auth_headers())
-
-            result = self._process_poll_response(poll_response, chat_id)
-            if result:
-                return result
-
-        return {}
-
-    def _process_poll_response(self, poll_response, chat_id: str) -> dict:
-        """Process a single poll response. Returns chat dict if done, empty dict to continue."""
-        if poll_response.status_code == 404 and chat_id:
-            self._logger.info("Operation endpoint returned 404, attempting direct chat fetch")
-            try:
-                return self._make_request("GET", f"/v1.0/chats/{chat_id}")
-            except PluginException:
-                return {}
-
-        if poll_response.status_code != 200:
-            return {}
-
-        try:
-            result = poll_response.json()
-        except ValueError:
-            return {}
-
-        status = result.get("status", "").lower()
-        self._logger.info(f"Operation status: {status}")
-
-        if status in ("succeeded", "completed"):
-            self._logger.info("Chat creation operation succeeded")
-            return self._make_request("GET", f"/v1.0/chats/{chat_id}") if chat_id else result
-
-        if status == "failed":
-            raise PluginException(
-                cause="Chat creation operation failed",
-                assistance="The async chat creation operation reported a failure.",
-                data=str(result),
-            )
-
-        return {}
-
-    def _final_chat_fetch_or_partial(self, chat_id: str) -> dict:
-        """Final attempt to fetch chat, or return partial result / raise."""
-        if chat_id:
-            try:
-                chat_result = self._make_request("GET", f"/v1.0/chats/{chat_id}")
-                if chat_result and chat_result.get("id"):
-                    self._logger.info("Chat fetched successfully after polling exhausted")
-                    return chat_result
-            except PluginException:
-                pass
-            self._logger.warning("Chat creation polling exhausted — returning partial result with chat ID")
-            return {"id": chat_id, "chatType": "unknown", "status": "provisioning"}
-
-        raise PluginException(
-            cause="Chat creation timed out",
-            assistance="The chat creation operation did not complete within the expected time. "
-            "The chat may still be provisioning. Please check Teams.",
-        )
-
-    @staticmethod
-    def _extract_chat_id_from_location(location: str) -> str:
-        """
-        Extract chat ID from the Location header path.
-
-        Expected format: /chats('19:xxx@unq.gbl.spaces')/operations('...')
-        """
-        if not location:
-            return ""
-        match = re.search(r"/chats\('([^']+)'\)", location)
-        if match:
-            return match.group(1)
-        return ""
-
     # ─── App Installation ─────────────────────────────────────────────────────────
-
-    def install_app_in_team(self, team_id: str, app_id: str) -> None:
-        """
-        Install a Teams app into a team.
-
-        :param team_id: The team (group) ID
-        :param app_id: The Teams App Catalog ID
-        """
-        endpoint = f"/v1.0/teams/{team_id}/installedApps"
-        payload = {"teamsApp@odata.bind": f"{self._base_url}/v1.0/appCatalogs/teamsApps/{app_id}"}
-
-        self._logger.info(f"Installing app {app_id} in team {team_id}")
-        url = f"{self._base_url}{endpoint}"
-        response = self._call_api("POST", url, headers=self._get_auth_headers(), json=payload)
-
-        if response.status_code in (200, 201):
-            self._logger.info("App installed successfully in team")
-            return
-
-        self._raise_for_status(response)
 
     def install_app_in_chat(self, chat_id: str, app_id: str) -> None:
         """

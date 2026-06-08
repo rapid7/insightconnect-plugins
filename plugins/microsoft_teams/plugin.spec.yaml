@@ -584,6 +584,12 @@ connection:
     - GCC
     - GCC High
     - DoD
+  app_catalog_id:
+    title: App Catalog ID
+    description: The Teams App Catalog ID of the bot. When set, the plugin will automatically install the bot into chats before sending messages. Find this in the Teams Admin Center under Manage Apps.
+    type: string
+    required: false
+    example: 05F59CEC-A742-4A50-A62E-202A57E478A4
 
 triggers:
   new_message_received:
@@ -1234,12 +1240,6 @@ actions:
         required: true
         example: [{user_info: user@example.com, role: owner}, {user_info: ab123bcd-123a-412a3-abc1-a123456b789c,
             role: owner}]
-      installed_apps:
-        title: Installed Apps
-        description: A list of Teams App Catalog IDs to install in the chat (e.g. a bot app). This allows bots to participate and send messages in the chat
-        type: '[]string'
-        required: false
-        example: ["05F59CEC-A742-4A50-A62E-202A57E478A4"]
     output:
       chat:
         title: Chat
@@ -1250,35 +1250,3 @@ actions:
           chatType: group, createdDateTime: '2023-11-09T12:07:43.167Z', id: 12:a12345bc678d901e12345f67890g1234_thread.v2,
           lastUpdatedDateTime: '2023-11-09T12:07:43.167Z', tenantId: 1a234567-bc8d-9e01-23fg-4h567i8j9k01,
           webUrl: https://teams.microsoft.com/l/chat/12%3AA12345BC678D901E12345F67890G1234%40thread.v2/0tenantId=1a234567-bc8d-9e01-23fg-4h567i8j9k01}
-  install_app:
-    title: Install App
-    description: Install a Teams app (such as a bot) into a team or chat
-    input:
-      team_id:
-        title: Team ID
-        description: The ID of the team to install the app into (mutually exclusive with chat_id)
-        type: string
-        required: false
-        order: 1
-        example: ee0f5ae2-8bc6-4ae5-8466-7daeebbfa062
-      chat_id:
-        title: Chat ID
-        description: The ID of the chat to install the app into (mutually exclusive with team_id)
-        type: string
-        required: false
-        order: 2
-        example: 19:ea28e88c00e94c7786b065394a61f296@thread.v2
-      app_id:
-        title: App Catalog ID
-        description: The Teams App Catalog ID of the app to install
-        type: string
-        required: true
-        order: 3
-        example: 05F59CEC-A742-4A50-A62E-202A57E478A4
-    output:
-      success:
-        title: Success
-        description: Boolean indicating if the app installation was successful
-        type: boolean
-        required: true
-        example: true

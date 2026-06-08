@@ -4,6 +4,7 @@ import json
 
 
 class Input:
+    APP_CATALOG_ID = "app_catalog_id"
     APPLICATION_ID = "application_id"
     APPLICATION_SECRET = "application_secret"
     DIRECTORY_ID = "directory_id"
@@ -16,6 +17,12 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "app_catalog_id": {
+      "type": "string",
+      "title": "App Catalog ID",
+      "description": "The Teams App Catalog ID of the bot. When set, the plugin will automatically install the bot into chats before sending messages. Find this in the Teams Admin Center under Manage Apps.",
+      "order": 5
+    },
     "application_id": {
       "type": "string",
       "title": "Application ID",

@@ -26,6 +26,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|app_catalog_id|string|None|False|The Teams App Catalog ID of the bot. When set, the plugin will automatically install the bot into chats before sending messages. Find this in the Teams Admin Center under Manage Apps.|None|05F59CEC-A742-4A50-A62E-202A57E478A4|None|None|
 |application_id|string|None|True|Application (client) ID|None|63a0cad6-ac64-435c-a221-5d37c97b763e|None|None|
 |application_secret|credential_secret_key|None|True|Application secret|None|aMeCAEYdOLlK+qRcD9AjdyxLkCaqZH1UPm7adjJQ5Og=|None|None|
 |directory_id|string|None|True|Directory (tenant) ID|None|9e538ff5-dcb2-46a9-9a28-f93b8250deb0|None|None|
@@ -35,6 +36,7 @@ Example input:
 
 ```
 {
+  "app_catalog_id": "05F59CEC-A742-4A50-A62E-202A57E478A4",
   "application_id": "63a0cad6-ac64-435c-a221-5d37c97b763e",
   "application_secret": "aMeCAEYdOLlK+qRcD9AjdyxLkCaqZH1UPm7adjJQ5Og=",
   "directory_id": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0",
@@ -199,7 +201,6 @@ This action is used to create a chat in Microsoft Teams
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|installed_apps|[]string|None|False|A list of Teams App Catalog IDs to install in the chat (e.g. a bot app). This allows bots to participate and send messages in the chat|None|["05F59CEC-A742-4A50-A62E-202A57E478A4"]|None|None|
 |members|[]itemMember|None|True|A list of usernames to set as members|None|[{"user_info": "user@example.com", "role": "owner"}, {"user_info": "ab123bcd-123a-412a3-abc1-a123456b789c", "role": "owner"}]|None|None|
 |topic|string|None|False|Topic of chat to be added (only available for group chats)|None|example_topic|None|None|
   
@@ -207,9 +208,6 @@ Example input:
 
 ```
 {
-  "installed_apps": [
-    "05F59CEC-A742-4A50-A62E-202A57E478A4"
-  ],
   "members": [
     {
       "role": "owner",
@@ -603,42 +601,6 @@ Example output:
       "ID": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0"
     }
   ]
-}
-```
-
-#### Install App
-
-This action is used to install a Teams app (such as a bot) into a team or chat
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|app_id|string|None|True|The Teams App Catalog ID of the app to install|None|05F59CEC-A742-4A50-A62E-202A57E478A4|None|None|
-|chat_id|string|None|False|The ID of the chat to install the app into (mutually exclusive with team_id)|None|19:ea28e88c00e94c7786b065394a61f296@thread.v2|None|None|
-|team_id|string|None|False|The ID of the team to install the app into (mutually exclusive with chat_id)|None|ee0f5ae2-8bc6-4ae5-8466-7daeebbfa062|None|None|
-  
-Example input:
-
-```
-{
-  "app_id": "05F59CEC-A742-4A50-A62E-202A57E478A4",
-  "chat_id": "19:ea28e88c00e94c7786b065394a61f296@thread.v2",
-  "team_id": "ee0f5ae2-8bc6-4ae5-8466-7daeebbfa062"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- |
-|success|boolean|True|Boolean indicating if the app installation was successful|True|
-  
-Example output:
-
-```
-{
-  "success": true
 }
 ```
 
