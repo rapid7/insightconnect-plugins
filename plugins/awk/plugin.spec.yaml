@@ -17,7 +17,7 @@ description:
     Second column contents: horse
     Second column contents: birds
     ```
-version: 1.2.2
+version: 1.2.3
 connection_version: 1
 vendor: rapid7
 support: community
@@ -25,7 +25,7 @@ supported_versions: ["GNU AWK 5.3.2"]
 status: []
 sdk:
   type: slim
-  version: 6.4.3
+  version: 6.5.1
   user: nobody
   custom_cmd:
     - "RUN apt-get update && apt-get install -y gawk && rm -rf /var/lib/apt/lists/*"
@@ -38,7 +38,8 @@ troubleshooting:
     the ending newline so that it may be passed to other plugins in an InsightConnect workflow. There's at least two ways to achieve this
     by setting the ORS (Output Record Separator) variable to nothing e.g. `-v ORS= '{ print $1 }'` or `'BEGIN { ORS="" } { print $1 }'`
 version_history:
-  - "1.2.2 - Refreshed the plugin | Updated SDK to the latest version (6.4.3)"
+  - "1.2.3 - Updated SDK to the latest version (6.5.1)"
+  - "1.2.2 - Resolved an input validation issue in the process_string action that could allow OS command injection via the text and expression parameters (CVE-2026-8592) | Refreshed the plugin | Updated SDK to the latest version (6.4.3)"
   - "1.2.1 - New spec and help.md format for the Extension Library | Change docker image from `komand/python-pypy3-plugin:2` to `komand/python-3-37-plugin` | Removed duplicated code | Changed string action to use bare string instead temporary file | Changed bare strings in params.get and output to static fields from schema | Repair coding style"
   - "1.2.0 - Support web server mode"
   - "1.1.2 - Update to v2 Python plugin architecture"
