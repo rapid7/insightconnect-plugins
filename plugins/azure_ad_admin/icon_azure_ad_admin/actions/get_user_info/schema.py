@@ -8,6 +8,7 @@ class Component:
 
 
 class Input:
+    SELECT = "select"
     USER_ID = "user_id"
 
 
@@ -21,6 +22,15 @@ class GetUserInfoInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "select": {
+      "type": "array",
+      "title": "Select Properties",
+      "description": "Optional list of additional properties to return beyond the default set. The default properties (displayName, mail, id, etc.) are always included. Use this to request extra fields like signInActivity, city, department, or employeeId",
+      "items": {
+        "type": "string"
+      },
+      "order": 2
+    },
     "user_id": {
       "type": "string",
       "title": "User ID",

@@ -18,45 +18,53 @@ class GetUserInfo(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         user_id = params.get(Input.USER_ID)
+        select = params.get(Input.SELECT, [])
+        # END INPUT BINDING - DO NOT REMOVE
 
         self.logger.info(f"Getting info for user: {user_id}")
-        result = get_user_info(self.connection, user_id, self.logger)
+        result = get_user_info(self.connection, user_id, self.logger, select=select)
 
         headers = self.connection.get_headers(self.connection.get_auth_token())
-        endpoint_for_account_enabled = (
-            f"https://graph.microsoft.com/v1.0/{self.connection.tenant}/users/{user_id}?$select=accountEnabled"
-        )
 
-        result_enabled = None
-        try:
-            result_enabled = requests.get(endpoint_for_account_enabled, headers=headers)
-        except Exception:
-            for counter in range(1, 6):
-                self.logger.info(f"Get user enabled failed, trying again, attempt {counter}.")
-                self.logger.info("Sleeping for 5 seconds...")
-                time.sleep(5)
-                try:
-                    self.logger.info("Attempting to get user info.")
-                    result_enabled = requests.get(endpoint_for_account_enabled, headers=headers)
-                    break  # We didn't get an exception, so break the loop
-                except Exception:
-                    self.logger.info("Get user info failed.")
-
-        if not result_enabled or not result_enabled.status_code == 200:
-            raise PluginException(
-                cause="Get User Info failed.",
-                assistance="Unexpected response from server.",
-                data=str(result),
+        # If select was provided and includes accountEnabled, skip the second call
+        if select and "accountEnabled" in select:
+            full_result = result.json()
+        else:
+            endpoint_for_account_enabled = (
+                f"https://graph.microsoft.com/v1.0/{self.connection.tenant}/users/{user_id}?$select=accountEnabled"
             )
 
-        try:
-            account_enabled = result_enabled.json().get("accountEnabled")
-        except Exception as e:
-            raise PluginException(PluginException.Preset.INVALID_JSON) from e
+            result_enabled = None
+            try:
+                result_enabled = requests.get(endpoint_for_account_enabled, headers=headers)
+            except Exception:
+                for counter in range(1, 6):
+                    self.logger.info(f"Get user enabled failed, trying again, attempt {counter}.")
+                    self.logger.info("Sleeping for 5 seconds...")
+                    time.sleep(5)
+                    try:
+                        self.logger.info("Attempting to get user info.")
+                        result_enabled = requests.get(endpoint_for_account_enabled, headers=headers)
+                        break  # We didn't get an exception, so break the loop
+                    except Exception:
+                        self.logger.info("Get user info failed.")
 
-        full_result = result.json()
-        full_result["accountEnabled"] = account_enabled
+            if not result_enabled or not result_enabled.status_code == 200:
+                raise PluginException(
+                    cause="Get User Info failed.",
+                    assistance="Unexpected response from server.",
+                    data=str(result),
+                )
+
+            try:
+                account_enabled = result_enabled.json().get("accountEnabled")
+            except Exception as e:
+                raise PluginException(PluginException.Preset.INVALID_JSON) from e
+
+            full_result = result.json()
+            full_result["accountEnabled"] = account_enabled
 
         full_result = self._clean_empty_values(full_result)
 

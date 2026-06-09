@@ -1,5 +1,5 @@
 {
-	"spec": "b227e5c6e7c61dbc2d710dfc90a93d69",
+	"spec": "fb63ae8fc21118adf470fff6ae58d7cf",
 	"manifest": "f297c279803cb808658960d3a40b8075",
 	"setup": "8564b216e970f18f4086cb3228ed723b",
 	"schemas": [
@@ -53,7 +53,7 @@
 		},
 		{
 			"identifier": "get_user_info/schema.py",
-			"hash": "fb4351ffb0004c75e9eaaed4c10000d3"
+			"hash": "85a5371807307777d774d4db0b692ba9"
 		},
 		{
 			"identifier": "get_user_memberships/schema.py",

@@ -541,12 +541,19 @@ This action is used to get user information
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|select|[]string|None|False|Optional list of additional properties to return beyond the default set. The default properties (displayName, mail, id, etc.) are always included. Use this to request extra fields like signInActivity, city, department, or employeeId|None|["accountEnabled", "city", "department", "signInActivity"]|None|None|
 |user_id|string|None|True|Retrieve information about specific User ID|None|user@example.com|None|None|
   
 Example input:
 
 ```
 {
+  "select": [
+    "accountEnabled",
+    "city",
+    "department",
+    "signInActivity"
+  ],
   "user_id": "user@example.com"
 }
 ```
@@ -1154,7 +1161,7 @@ Example output:
 
 # Version History
 
-* 5.1.0 - Renamed plugin to Microsoft Entra ID Admin | New action Get User Memberships. | Updated SDK to the latest version (6.5.1)
+* 5.1.0 - Renamed plugin to Microsoft Entra ID Admin | New action Get User Memberships | `Get User Info`: Added optional Select Properties input to retrieve additional user properties beyond the default set | Updated SDK to the latest version (6.5.1)
 * 5.0.1 - `Search Devices`: Fixed issue where devices output was limited | Updated SDK to the latest version (6.4.1)
 * 5.0.0 - Update SDK to the latest version | Update the output type of `risk` for the `risk_detection` trigger to include all fields
 * 4.2.0 - New action | List Group Members
