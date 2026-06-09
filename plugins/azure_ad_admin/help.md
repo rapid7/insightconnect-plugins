@@ -581,18 +581,22 @@ Example output:
 
 #### Get User Memberships
 
-This action is used to get the groups and directory roles that a user is a direct member of
+This action is used to get the groups and directory roles that a user is a direct member of. Returns up to 100 
+memberships per page by default. If more results are available, the next_link output will contain a pagination URL that 
+can be passed back as input in a loop step to retrieve additional pages
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|next_link|string|None|False|Pagination link returned from a previous run. If provided, the action will fetch the next page of results instead of starting from the beginning|None|https://graph.microsoft.com/v1.0/users/user@example.com/memberOf?$skiptoken=abc123|None|None|
 |user_id|string|None|True|User ID or user principal name to retrieve memberships for|None|user@example.com|None|None|
   
 Example input:
 
 ```
 {
+  "next_link": "https://graph.microsoft.com/v1.0/users/user@example.com/memberOf?$skiptoken=abc123",
   "user_id": "user@example.com"
 }
 ```
@@ -601,8 +605,9 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|count|integer|False|Number of memberships found|3|
+|count|integer|False|Number of memberships found in this page|3|
 |memberships|[]object|False|List of groups and directory roles the user is a member of|[{"@odata.type":"#microsoft.graph.group","id":"bb4d41d4-eb13-4a33-99b5-7d7290df22e9","displayName":"Test Group","groupTypes":["Unified"],"securityEnabled":true}]|
+|next_link|string|False|Pagination link for the next page of results. Empty if there are no more pages|https://graph.microsoft.com/v1.0/users/user@example.com/memberOf?$skiptoken=abc123|
   
 Example output:
 
@@ -619,7 +624,8 @@ Example output:
       "id": "bb4d41d4-eb13-4a33-99b5-7d7290df22e9",
       "securityEnabled": true
     }
-  ]
+  ],
+  "next_link": "https://graph.microsoft.com/v1.0/users/user@example.com/memberOf?$skiptoken=abc123"
 }
 ```
 

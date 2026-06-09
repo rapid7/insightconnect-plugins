@@ -4,16 +4,18 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get the groups and directory roles that a user is a direct member of"
+    DESCRIPTION = "Get the groups and directory roles that a user is a direct member of. Returns up to 100 memberships per page by default. If more results are available, the next_link output will contain a pagination URL that can be passed back as input in a loop step to retrieve additional pages"
 
 
 class Input:
+    NEXT_LINK = "next_link"
     USER_ID = "user_id"
 
 
 class Output:
     COUNT = "count"
     MEMBERSHIPS = "memberships"
+    NEXT_LINK = "next_link"
 
 
 class GetUserMembershipsInput(insightconnect_plugin_runtime.Input):
@@ -22,6 +24,12 @@ class GetUserMembershipsInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "next_link": {
+      "type": "string",
+      "title": "Next Link",
+      "description": "Pagination link returned from a previous run. If provided, the action will fetch the next page of results instead of starting from the beginning",
+      "order": 2
+    },
     "user_id": {
       "type": "string",
       "title": "User ID",
@@ -49,7 +57,7 @@ class GetUserMembershipsOutput(insightconnect_plugin_runtime.Output):
     "count": {
       "type": "integer",
       "title": "Count",
-      "description": "Number of memberships found",
+      "description": "Number of memberships found in this page",
       "order": 2
     },
     "memberships": {
@@ -60,6 +68,12 @@ class GetUserMembershipsOutput(insightconnect_plugin_runtime.Output):
         "type": "object"
       },
       "order": 1
+    },
+    "next_link": {
+      "type": "string",
+      "title": "Next Link",
+      "description": "Pagination link for the next page of results. Empty if there are no more pages",
+      "order": 3
     }
   },
   "definitions": {}

@@ -22,35 +22,41 @@ class GetUserMemberships(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         user_id = params.get(Input.USER_ID)
+        next_link = params.get(Input.NEXT_LINK, "")
         # END INPUT BINDING - DO NOT REMOVE
 
         headers = self.connection.get_headers(self.connection.get_auth_token())
         headers["ConsistencyLevel"] = "eventual"
 
-        url = Endpoint.USER_MEMBER_OF.format(self.connection.tenant, user_id=user_id)
+        # Use next_link if provided, otherwise start from the beginning
+        if next_link:
+            url = next_link
+        else:
+            url = Endpoint.USER_MEMBER_OF.format(self.connection.tenant, user_id=user_id)
 
-        memberships = []
-        for _ in range(1_000):
-            response = requests.request(
-                method="GET",
-                url=url,
-                headers=headers,
-            )
-            raise_for_status(response)
+        response = requests.request(
+            method="GET",
+            url=url,
+            headers=headers,
+        )
+        raise_for_status(response)
 
-            try:
-                result = response.json()
-            except ValueError:
-                raise PluginException(preset=PluginException.Preset.INVALID_JSON)
+        try:
+            result = response.json()
+        except ValueError:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON)
 
-            memberships.extend(result.get("value", []))
-
-            # Check for next page
-            if not (url := result.get("@odata.nextLink")):
-                self.logger.info("No more pages found. Ending pagination.")
-                break
+        memberships = result.get("value", [])
+        output_next_link = result.get("@odata.nextLink", "")
 
         member_count = len(memberships)
         self.logger.info(f"Found {member_count} memberships for user {user_id}.")
 
-        return {Output.MEMBERSHIPS: clean(memberships), Output.COUNT: member_count}
+        if output_next_link:
+            self.logger.info("Additional pages available via next_link.")
+
+        return {
+            Output.MEMBERSHIPS: clean(memberships),
+            Output.COUNT: member_count,
+            Output.NEXT_LINK: output_next_link,
+        }

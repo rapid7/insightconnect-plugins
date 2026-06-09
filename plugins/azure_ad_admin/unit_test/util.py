@@ -98,6 +98,8 @@ class Util:
         # User memberOf endpoints
         if url == "https://graph.microsoft.com/v1.0/azure_tenant/users/user@example.com/memberOf?$count=true":
             return MockResponse(200, "get_user_memberships.json.resp")
+        if url == "https://graph.microsoft.com/v1.0/azure_tenant/users/user@example.com/memberOf?$skiptoken=page2":
+            return MockResponse(200, "get_user_memberships_page2.json.resp")
         if url == "https://graph.microsoft.com/v1.0/azure_tenant/users/invalid-user/memberOf?$count=true":
             return MockResponse(404)
         raise Exception(f"Not implemented: {kwargs}")

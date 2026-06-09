@@ -9,7 +9,6 @@ from unittest.mock import MagicMock, patch
 
 from icon_azure_ad_admin.actions.get_user_memberships import GetUserMemberships
 from insightconnect_plugin_runtime.exceptions import PluginException
-from parameterized import parameterized
 
 from util import Util
 
@@ -21,35 +20,24 @@ class TestGetUserMemberships(TestCase):
     def setUpClass(cls, mock_request: MagicMock) -> None:
         cls.action = Util.default_connector(GetUserMemberships())
 
-    @parameterized.expand(
-        [
-            [
-                "valid_user",
-                Util.read_file_to_dict("inputs/get_user_memberships.json.inp"),
-                Util.read_file_to_dict("expected/get_user_memberships.json.exp"),
-            ],
-        ]
-    )
-    def test_get_user_memberships(
-        self, mock_request: MagicMock, test_name: str, input_params: Dict[str, Any], expected: Dict[str, Any]
-    ) -> None:
-        actual = self.action.run(input_params)
+    def test_get_user_memberships(self, mock_request: MagicMock) -> None:
+        actual = self.action.run({"user_id": "user@example.com"})
+        expected = Util.read_file_to_dict("expected/get_user_memberships.json.exp")
         self.assertEqual(actual, expected)
 
-    @parameterized.expand(
-        [
-            [
-                "invalid_user",
-                Util.read_file_to_dict("inputs/get_user_memberships_invalid_user.json.inp"),
-                "Resource not found.",
-                "Please provide valid inputs and try again.",
-            ],
-        ]
-    )
-    def test_get_user_memberships_raise_exception(
-        self, mock_request: MagicMock, test_name: str, input_params: Dict[str, Any], cause: str, assistance: str
-    ) -> None:
+    def test_get_user_memberships_with_next_link(self, mock_request: MagicMock) -> None:
+        actual = self.action.run(
+            {
+                "user_id": "user@example.com",
+                "next_link": "https://graph.microsoft.com/v1.0/azure_tenant/users/user@example.com/memberOf?$skiptoken=page2",
+            }
+        )
+        self.assertEqual(actual["count"], 1)
+        self.assertEqual(actual["memberships"][0]["displayName"], "Another Group")
+        self.assertEqual(actual["next_link"], "")
+
+    def test_get_user_memberships_invalid_user(self, mock_request: MagicMock) -> None:
         with self.assertRaises(PluginException) as error:
-            self.action.run(input_params)
-        self.assertEqual(error.exception.cause, cause)
-        self.assertEqual(error.exception.assistance, assistance)
+            self.action.run({"user_id": "invalid-user"})
+        self.assertEqual(error.exception.cause, "Resource not found.")
+        self.assertEqual(error.exception.assistance, "Please provide valid inputs and try again.")

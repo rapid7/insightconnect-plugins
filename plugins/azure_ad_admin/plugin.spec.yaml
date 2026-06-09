@@ -1406,7 +1406,7 @@ actions:
         example: 5
   get_user_memberships:
     title: Get User Memberships
-    description: Get the groups and directory roles that a user is a direct member of
+    description: Get the groups and directory roles that a user is a direct member of. Returns up to 100 memberships per page by default. If more results are available, the next_link output will contain a pagination URL that can be passed back as input in a loop step to retrieve additional pages
     input:
       user_id:
         title: User ID
@@ -1414,6 +1414,12 @@ actions:
         type: string
         required: true
         example: user@example.com
+      next_link:
+        title: Next Link
+        description: Pagination link returned from a previous run. If provided, the action will fetch the next page of results instead of starting from the beginning
+        type: string
+        required: false
+        example: https://graph.microsoft.com/v1.0/users/user@example.com/memberOf?$skiptoken=abc123
     output:
       memberships:
         title: Memberships
@@ -1423,10 +1429,16 @@ actions:
         example: '[{"@odata.type":"#microsoft.graph.group","id":"bb4d41d4-eb13-4a33-99b5-7d7290df22e9","displayName":"Test Group","groupTypes":["Unified"],"securityEnabled":true}]'
       count:
         title: Count
-        description: Number of memberships found
+        description: Number of memberships found in this page
         type: integer
         required: false
         example: 3
+      next_link:
+        title: Next Link
+        description: Pagination link for the next page of results. Empty if there are no more pages
+        type: string
+        required: false
+        example: https://graph.microsoft.com/v1.0/users/user@example.com/memberOf?$skiptoken=abc123
 triggers:
   risk_detection:
     title: Risk Detection
