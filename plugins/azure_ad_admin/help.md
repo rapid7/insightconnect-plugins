@@ -1,6 +1,6 @@
 # Description
 
-[Azure](https://azure.microsoft.com) AD Admin performs administrative tasks in Azure AD.
+Microsoft Entra ID Admin performs administrative tasks in Microsoft Entra ID (formerly Azure AD).
 
 It uses the [User](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0) endpoint in the [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-1.0)
 
@@ -10,6 +10,7 @@ It uses the [User](https://docs.microsoft.com/en-us/graph/api/resources/user?vie
 * Disable and enable users
 * Force users to change their password
 * Enable, disable, get, search and delete devices
+* Get user group and role memberships
 
 # Requirements
 
@@ -575,6 +576,50 @@ Example output:
 }
 ```
 
+#### Get User Memberships
+
+This action is used to get the groups and directory roles that a user is a direct member of
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|user_id|string|None|True|User ID or user principal name to retrieve memberships for|None|user@example.com|None|None|
+  
+Example input:
+
+```
+{
+  "user_id": "user@example.com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|count|integer|False|Number of memberships found|3|
+|memberships|[]object|False|List of groups and directory roles the user is a member of|[{"@odata.type":"#microsoft.graph.group","id":"bb4d41d4-eb13-4a33-99b5-7d7290df22e9","displayName":"Test Group","groupTypes":["Unified"],"securityEnabled":true}]|
+  
+Example output:
+
+```
+{
+  "count": 3,
+  "memberships": [
+    {
+      "@odata.type": "#microsoft.graph.group",
+      "displayName": "Test Group",
+      "groupTypes": [
+        "Unified"
+      ],
+      "id": "bb4d41d4-eb13-4a33-99b5-7d7290df22e9",
+      "securityEnabled": true
+    }
+  ]
+}
+```
+
 #### List Group Members
 
 This action is used to get a list of the group's direct members. A group can have users, organizational contacts, 
@@ -1106,6 +1151,7 @@ Example output:
 
 # Version History
 
+* 5.1.0 - Renamed plugin to Microsoft Entra ID Admin | New action Get User Memberships. | Updated SDK to the latest version (6.5.1)
 * 5.0.1 - `Search Devices`: Fixed issue where devices output was limited | Updated SDK to the latest version (6.4.1)
 * 5.0.0 - Update SDK to the latest version | Update the output type of `risk` for the `risk_detection` trigger to include all fields
 * 4.2.0 - New action | List Group Members
@@ -1135,7 +1181,7 @@ Example output:
 
 # Links
 
-* [Azure AD Admin](https://azure.microsoft.com)
+* [Microsoft Entra ID](https://entra.microsoft.com)
 
 ## References
 

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Enable a user account"
+    DESCRIPTION = "Get the groups and directory roles that a user is a direct member of"
 
 
 class Input:
@@ -12,10 +12,11 @@ class Input:
 
 
 class Output:
-    SUCCESS = "success"
+    COUNT = "count"
+    MEMBERSHIPS = "memberships"
 
 
-class EnableUserAccountInput(insightconnect_plugin_runtime.Input):
+class GetUserMembershipsInput(insightconnect_plugin_runtime.Input):
     schema = json.loads(r"""
    {
   "type": "object",
@@ -24,7 +25,7 @@ class EnableUserAccountInput(insightconnect_plugin_runtime.Input):
     "user_id": {
       "type": "string",
       "title": "User ID",
-      "description": "User ID to enable",
+      "description": "User ID or user principal name to retrieve memberships for",
       "order": 1
     }
   },
@@ -39,22 +40,28 @@ class EnableUserAccountInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class EnableUserAccountOutput(insightconnect_plugin_runtime.Output):
+class GetUserMembershipsOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "success": {
-      "type": "boolean",
-      "title": "Success",
-      "description": "Was operation successful",
+    "count": {
+      "type": "integer",
+      "title": "Count",
+      "description": "Number of memberships found",
+      "order": 2
+    },
+    "memberships": {
+      "type": "array",
+      "title": "Memberships",
+      "description": "List of groups and directory roles the user is a member of",
+      "items": {
+        "type": "object"
+      },
       "order": 1
     }
   },
-  "required": [
-    "success"
-  ],
   "definitions": {}
 }
     """)

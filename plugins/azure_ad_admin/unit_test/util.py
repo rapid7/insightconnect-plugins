@@ -95,4 +95,9 @@ class Util:
             return MockResponse(200, "search_device_pagination_multipage2.json.resp")
         if url == "https://graph.microsoft.com/v1.0/azure_tenant/devices?$skiptoken=multipage3":
             return MockResponse(200, "search_device_pagination_multipage3.json.resp")
+        # User memberOf endpoints
+        if url == "https://graph.microsoft.com/v1.0/azure_tenant/users/user@example.com/memberOf?$count=true":
+            return MockResponse(200, "get_user_memberships.json.resp")
+        if url == "https://graph.microsoft.com/v1.0/azure_tenant/users/invalid-user/memberOf?$count=true":
+            return MockResponse(404)
         raise Exception(f"Not implemented: {kwargs}")

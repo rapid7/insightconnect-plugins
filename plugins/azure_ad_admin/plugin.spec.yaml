@@ -2,9 +2,9 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: azure_ad_admin
-title: Azure AD Admin
-description: "[Azure](https://azure.microsoft.com) AD Admin performs administrative tasks in Azure AD.\n\nIt uses the [User](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0) endpoint in the [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-1.0)"
-version: 5.0.1
+title: Microsoft Entra ID Admin
+description: "Microsoft Entra ID Admin performs administrative tasks in Microsoft Entra ID (formerly Azure AD).\n\nIt uses the [User](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0) endpoint in the [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-1.0)"
+version: 5.1.0
 connection_version: 4
 vendor: rapid7
 cloud_ready: true
@@ -13,13 +13,14 @@ supported_versions: ["2022-05-30"]
 status: []
 sdk:
   type: slim
-  version: 6.4.1
+  version: 6.5.1
   user: nobody
 key_features:
   - Add and remove users
   - Disable and enable users
   - Force users to change their password
   - Enable, disable, get, search and delete devices
+  - Get user group and role memberships
 requirements:
   - "The application this plugin connects to needs the following permissions:
       \n\t* Directory.AccessAsUser.All
@@ -35,6 +36,7 @@ requirements:
   Browse and select your application and click `Add`."
 troubleshooting: "Trigger `risk_detection` needs Application permission to set as `IdentityRiskEvent.Read.All`"
 version_history:
+  - "5.1.0 - Renamed plugin to Microsoft Entra ID Admin | New action Get User Memberships. | Updated SDK to the latest version (6.5.1)"
   - "5.0.1 - `Search Devices`: Fixed issue where devices output was limited | Updated SDK to the latest version (6.4.1)"
   - "5.0.0 - Update SDK to the latest version | Update the output type of `risk` for the `risk_detection` trigger to include all fields"
   - "4.2.0 - New action | List Group Members"
@@ -62,7 +64,7 @@ version_history:
   - "1.1.0 - New action Force User to Change Password"
   - "1.0.0 - Initial plugin"
 links:
-  - "[Azure AD Admin](https://azure.microsoft.com)"
+  - "[Microsoft Entra ID](https://entra.microsoft.com)"
 references:
   - "[User API](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0)"
   - "[Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-1.0)"
@@ -72,12 +74,12 @@ resources:
   vendor_url: https://www.microsoft.com/
 tags:
   - Microsoft
-  - Azure
+  - Entra ID
   - Active Directory
   - Administration
 hub_tags:
   use_cases: [threat_detection_and_response, user_management]
-  keywords: [azure, microsoft, active directory, administration, cloud_enabled]
+  keywords: [azure, microsoft, entra id, active directory, administration, cloud_enabled]
   features: []
 types:
   manager:
@@ -1401,6 +1403,29 @@ actions:
         type: integer
         required: false
         example: 5
+  get_user_memberships:
+    title: Get User Memberships
+    description: Get the groups and directory roles that a user is a direct member of
+    input:
+      user_id:
+        title: User ID
+        description: User ID or user principal name to retrieve memberships for
+        type: string
+        required: true
+        example: user@example.com
+    output:
+      memberships:
+        title: Memberships
+        description: List of groups and directory roles the user is a member of
+        type: "[]object"
+        required: false
+        example: '[{"@odata.type":"#microsoft.graph.group","id":"bb4d41d4-eb13-4a33-99b5-7d7290df22e9","displayName":"Test Group","groupTypes":["Unified"],"securityEnabled":true}]'
+      count:
+        title: Count
+        description: Number of memberships found
+        type: integer
+        required: false
+        example: 3
 triggers:
   risk_detection:
     title: Risk Detection
