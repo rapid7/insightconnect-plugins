@@ -14,20 +14,23 @@ It uses the [User](https://docs.microsoft.com/en-us/graph/api/resources/user?vie
 
 # Requirements
 
-* The application this plugin connects to needs the following permissions: 
-	* Directory.AccessAsUser.All 
+* The application this plugin connects to needs the following Application permissions in Microsoft Graph: 
 	* Directory.ReadWrite.All 
 	* User.ReadWrite.All 
-	* IdentityRiskEvent.Read.All (Types: Delegated, Application) 
 	* Device.ReadWrite.All 
+	* IdentityRiskEvent.Read.All 
 
-All those permissions can be set in Azure Portal. Under `App registrations` -> `<SELECT_YOUR_AZURE_AD_ADMIN_APP>` -> `API permissions`.
+All permissions can be set in the Azure Portal under `App registrations` -> `<YOUR_APP>` -> `API permissions` -> `Add a permission` -> `Microsoft Graph` -> `Application permissions`. Admin consent must be granted after adding permissions.
 
-* The application will need to be added to the `Global Administrator` role. This can be done in `Roles and administrators` in Microsoft Entra ID (Azure Active Directory) via the Azure Portal. 
+* The application will need a directory role assigned to perform write operations on users and devices. Choose the least-privileged role for your use case: 
+	* **User Administrator** - manage non-admin users (disable, enable, create, delete, password reset) 
+	* **Cloud Device Administrator** - manage devices (enable, disable, delete) 
+	* **Privileged Authentication Administrator** - manage all users including admins (except Global Admins) 
+	* **Global Administrator** - only required if managing other Global Admin accounts 
 
-To set this up, go to `Microsoft Entra ID` -> `Application Registrations`. Select the application to which you want to add the role and open the `Roles and Administrators` tab. Above the `Roles` table you will see a note saying `[...] this resource and can only be assigned here at directory level`. Click on this `here` link. 
+Recommended minimum: assign `User Administrator` and `Cloud Device Administrator`. Only escalate to Global Administrator if you need to disable/enable accounts that hold admin roles. 
 
-This should open the `All Roles' tab. Locate `Global Administrator` and click on it. To add your application to the role, you'll need to click the `Add assignments` button. Browse and select your application and click `Add`.
+To assign a role, go to `Microsoft Entra ID` -> `Roles and administrators`. Select the desired role, click `Add assignments`, search for your application, and click `Add`.
 
 # Supported Product Versions
 

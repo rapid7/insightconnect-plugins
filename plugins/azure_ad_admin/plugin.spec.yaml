@@ -22,18 +22,19 @@ key_features:
   - Enable, disable, get, search and delete devices
   - Get user group and role memberships
 requirements:
-  - "The application this plugin connects to needs the following permissions:
-      \n\t* Directory.AccessAsUser.All
+  - "The application this plugin connects to needs the following Application permissions in Microsoft Graph:
       \n\t* Directory.ReadWrite.All
       \n\t* User.ReadWrite.All
-      \n\t* IdentityRiskEvent.Read.All (Types: Delegated, Application)
       \n\t* Device.ReadWrite.All
-      \n\nAll those permissions can be set in Azure Portal. Under `App registrations` -> `<SELECT_YOUR_AZURE_AD_ADMIN_APP>` -> `API permissions`.\n"
-  - "The application will need to be added to the `Global Administrator` role. This can be done in `Roles and administrators` in Microsoft Entra ID (Azure Active Directory) via the Azure Portal.
-  \n\nTo set this up, go to `Microsoft Entra ID` -> `Application Registrations`. Select the application to which you want to add the role and open the `Roles and Administrators` tab.
-  Above the `Roles` table you will see a note saying `[...] this resource and can only be assigned here at directory level`. Click on this `here` link.
-  \n\nThis should open the `All Roles' tab. Locate `Global Administrator` and click on it. To add your application to the role, you'll need to click the `Add assignments` button.
-  Browse and select your application and click `Add`."
+      \n\t* IdentityRiskEvent.Read.All
+      \n\nAll permissions can be set in the Azure Portal under `App registrations` -> `<YOUR_APP>` -> `API permissions` -> `Add a permission` -> `Microsoft Graph` -> `Application permissions`. Admin consent must be granted after adding permissions.\n"
+  - "The application will need a directory role assigned to perform write operations on users and devices. Choose the least-privileged role for your use case:
+  \n\t* **User Administrator** - manage non-admin users (disable, enable, create, delete, password reset)
+  \n\t* **Cloud Device Administrator** - manage devices (enable, disable, delete)
+  \n\t* **Privileged Authentication Administrator** - manage all users including admins (except Global Admins)
+  \n\t* **Global Administrator** - only required if managing other Global Admin accounts
+  \n\nRecommended minimum: assign `User Administrator` and `Cloud Device Administrator`. Only escalate to Global Administrator if you need to disable/enable accounts that hold admin roles.
+  \n\nTo assign a role, go to `Microsoft Entra ID` -> `Roles and administrators`. Select the desired role, click `Add assignments`, search for your application, and click `Add`."
 troubleshooting: "Trigger `risk_detection` needs Application permission to set as `IdentityRiskEvent.Read.All`"
 version_history:
   - "5.1.0 - Renamed plugin to Microsoft Entra ID Admin | New action Get User Memberships. | Updated SDK to the latest version (6.5.1)"
