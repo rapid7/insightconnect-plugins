@@ -77,6 +77,7 @@ This action is used to create a new ticket in your service desk
 |tags|[]string|None|False|Tags that have been associated with the ticket|None|["tag1", "tag2"]|None|None|
 |type|string|None|False|Type of the ticket|None|Incident|None|None|
 |urgency|integer|1|False|Urgency|None|2|None|None|
+|workspaceId|integer|None|False|ID of the workspace in which the ticket will be created. Only applicable for accounts with the Workspaces feature enabled. If not provided, the ticket will be created in the primary workspace|None|3|None|None|
   
 Example input:
 
@@ -120,7 +121,8 @@ Example input:
     "tag2"
   ],
   "type": "Incident",
-  "urgency": 1
+  "urgency": 1,
+  "workspaceId": 3
 }
 ```
 
@@ -455,6 +457,7 @@ This action is used to list all tickets for the given filters
 |requesterId|integer|None|False|Filter tickets by requester ID|None|123456789|None|None|
 |type|string|All|False|Filter tickets by type|["Incident", "Service Request", "All"]|All|None|None|
 |updatedSince|date|None|False|Filter tickets by update date|None|2022-11-14 00:00:00+00:00|None|None|
+|workspaceId|integer|None|False|ID of the workspace from which to list tickets. Only applicable for accounts with the Workspaces feature enabled. If not provided, tickets from the primary workspace will be returned|None|3|None|None|
   
 Example input:
 
@@ -467,7 +470,8 @@ Example input:
   "perPage": 20,
   "requesterId": 123456789,
   "type": "All",
-  "updatedSince": "2022-11-14 00:00:00+00:00"
+  "updatedSince": "2022-11-14 00:00:00+00:00",
+  "workspaceId": 3
 }
 ```
 
@@ -551,6 +555,7 @@ This action is used to update an existing ticket in your service desk
 |ticketId|integer|None|True|ID of the ticket which will be updated|None|10|None|None|
 |type|string|None|False|Type of the ticket|None|Incident|None|None|
 |urgency|integer|1|False|Urgency|None|2|None|None|
+|workspaceId|integer|None|False|ID of the workspace to which the ticket belongs. Only applicable for accounts with the Workspaces feature enabled|None|3|None|None|
   
 Example input:
 
@@ -592,7 +597,8 @@ Example input:
   ],
   "ticketId": 10,
   "type": "Incident",
-  "urgency": 1
+  "urgency": 1,
+  "workspaceId": 3
 }
 ```
 
@@ -917,6 +923,7 @@ Example output:
 |Type|string|None|False|Type of the ticket|None|
 |Updated At|string|None|False|Ticket updated timestamp|None|
 |Urgency|integer|None|False|Ticket urgency|None|
+|Workspace ID|integer|None|False|ID of the workspace to which this ticket belongs|None|
 
 
 ## Troubleshooting
@@ -925,6 +932,7 @@ Example output:
 
 # Version History
 
+* 1.1.0 - Added `workspace_id` input to Create Ticket, Update Ticket, and List Tickets actions to support multi-workspace environments | Updated SDK to the latest version (6.5.1)
 * 1.0.2 - Updated SDK to the latest version (6.3.3)
 * 1.0.1 - Updated the connection test | Added information about the roles and permissions necessary to run actions | `List All Agents`: Fixed issue related to the departament IDs field
 * 1.0.0 - Initial plugin | Add Create Ticket, Update Ticket, Delete Ticket, List Tickets, Create Ticket Task, Update Ticket Task, Delete Ticket Task, List Groups and List Agents actions

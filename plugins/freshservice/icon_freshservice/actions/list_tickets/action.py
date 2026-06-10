@@ -20,6 +20,7 @@ class ListTickets(insightconnect_plugin_runtime.Action):
         order_type = params.get(Input.ORDERTYPE)
         page = params.get(Input.PAGE)
         per_page = params.get(Input.PERPAGE)
+        workspace_id = params.get(Input.WORKSPACEID)
         parameters = {
             "filter": predefined_filter if predefined_filter else None,
             "requester_id": requester_id if requester_id else None,
@@ -29,5 +30,6 @@ class ListTickets(insightconnect_plugin_runtime.Action):
             "order_type": order_type,
             "page": page if page else None,
             "per_page": per_page if 0 < per_page <= 100 else 100,
+            "workspace_id": workspace_id if workspace_id else None,
         }
         return {Output.TICKETS: process_list(self.connection.api.list_tickets(parameters).get("tickets", []))}

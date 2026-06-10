@@ -16,6 +16,7 @@ class Input:
     REQUESTERID = "requesterId"
     TYPE = "type"
     UPDATEDSINCE = "updatedSince"
+    WORKSPACEID = "workspaceId"
 
 
 class Output:
@@ -23,8 +24,7 @@ class Output:
 
 
 class ListTicketsInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        r"""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -90,20 +90,24 @@ class ListTicketsInput(insightconnect_plugin_runtime.Input):
       "title": "Update Since",
       "description": "Filter tickets by update date",
       "order": 4
+    },
+    "workspaceId": {
+      "type": "integer",
+      "title": "Workspace ID",
+      "description": "ID of the workspace from which to list tickets. Only applicable for accounts with the Workspaces feature enabled. If not provided, tickets from the primary workspace will be returned",
+      "order": 9
     }
   },
   "definitions": {}
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class ListTicketsOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(
-        r"""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -365,6 +369,12 @@ class ListTicketsOutput(insightconnect_plugin_runtime.Output):
           "title": "Impact",
           "description": "Impact",
           "order": 37
+        },
+        "workspaceId": {
+          "type": "integer",
+          "title": "Workspace ID",
+          "description": "ID of the workspace to which this ticket belongs",
+          "order": 38
         }
       }
     },
@@ -502,8 +512,7 @@ class ListTicketsOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

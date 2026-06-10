@@ -154,6 +154,7 @@ class Util:
             "order_type": "asc",
             "page": 1,
             "per_page": 20,
+            "workspace_id": None,
         }:
             return MockResponse("list_tickets2", 200)
         if kwargs.get("url") == "https://example.freshservice.com/api/v2/tickets" and kwargs.get("params") == {
@@ -165,6 +166,7 @@ class Util:
             "order_type": "desc",
             "page": None,
             "per_page": 100,
+            "workspace_id": None,
         }:
             return MockResponse("list_tickets3", 200)
         if kwargs.get("url") == "https://example.freshservice.com/api/v2/tickets" and kwargs.get("params") == {
@@ -176,6 +178,7 @@ class Util:
             "order_type": None,
             "page": 1,
             "per_page": 100,
+            "workspace_id": None,
         }:
             return MockResponse("list_tickets_empty", 200)
         if kwargs.get("url") == "https://example.freshservice.com/api/v2/tickets":

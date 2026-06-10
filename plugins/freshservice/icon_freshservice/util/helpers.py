@@ -1,3 +1,14 @@
+import re
+
+
+def camel_to_snake_case(name: str) -> str:
+    return re.sub(r"(?<=[a-z0-9])([A-Z])", r"_\1", name).lower()
+
+
+def dict_keys_to_snake_case(dictionary: dict) -> dict:
+    return {camel_to_snake_case(key): value for key, value in dictionary.items()}
+
+
 def process_list(list_to_process: list) -> list:
     new_list = []
     for item in list_to_process:

@@ -7,7 +7,7 @@ description: Freshservice is a cloud-based IT Service Management solution that w
   designed using ITIL best practices. Freshservice helps IT organizations streamline
   their service delivery processes with a strong focus on user experience and employee
   happiness
-version: 1.0.2
+version: 1.1.0
 connection_version: 1
 supported_versions: [FreshService API v2 2025-04-14]
 vendor: rapid7
@@ -37,6 +37,9 @@ requirements:
 - Permissions to view/create/edit/delete tickets and ticket tasks
 - Permissions to view agents and agent groups.
 version_history:
+- 1.1.0 - Added `workspace_id` input to Create Ticket, Update Ticket, and List Tickets
+  actions to support multi-workspace environments | Updated SDK to the latest version
+  (6.5.1)
 - 1.0.2 - Updated SDK to the latest version (6.3.3)
 - '1.0.1 - Updated the connection test | Added information about the roles and permissions
   necessary to run actions | `List All Agents`: Fixed issue related to the departament
@@ -46,7 +49,7 @@ version_history:
   Agents actions
 sdk:
   type: full
-  version: 6.3.3
+  version: 6.5.1
   user: nobody
 types:
   role:
@@ -735,6 +738,11 @@ types:
       description: Impact
       type: integer
       required: false
+    workspaceId:
+      title: Workspace ID
+      description: ID of the workspace to which this ticket belongs
+      type: integer
+      required: false
 connection:
   apiKey:
     title: API Key
@@ -913,6 +921,14 @@ actions:
         type: object
         required: false
         example: '{"key": "value"}'
+      workspaceId:
+        title: Workspace ID
+        description: ID of the workspace in which the ticket will be created. Only
+          applicable for accounts with the Workspaces feature enabled. If not provided,
+          the ticket will be created in the primary workspace
+        type: integer
+        required: false
+        example: 3
     output:
       ticket:
         title: Ticket
@@ -1085,6 +1101,13 @@ actions:
         type: object
         required: false
         example: '{"key": "value"}'
+      workspaceId:
+        title: Workspace ID
+        description: ID of the workspace to which the ticket belongs. Only applicable
+          for accounts with the Workspaces feature enabled
+        type: integer
+        required: false
+        example: 3
     output:
       ticket:
         title: Ticket
@@ -1158,6 +1181,14 @@ actions:
         required: false
         example: 20
         default: 20
+      workspaceId:
+        title: Workspace ID
+        description: ID of the workspace from which to list tickets. Only applicable
+          for accounts with the Workspaces feature enabled. If not provided, tickets
+          from the primary workspace will be returned
+        type: integer
+        required: false
+        example: 3
     output:
       tickets:
         title: Tickets

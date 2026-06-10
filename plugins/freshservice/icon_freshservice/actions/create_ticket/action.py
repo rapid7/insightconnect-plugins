@@ -3,8 +3,7 @@ from .schema import CreateTicketInput, CreateTicketOutput, Input, Output, Compon
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
-from icon_freshservice.util.helpers import clean_dict
-from icon_freshservice.util.helpers import dict_keys_to_camel_case
+from icon_freshservice.util.helpers import clean_dict, dict_keys_to_camel_case, dict_keys_to_snake_case
 
 
 class CreateTicket(insightconnect_plugin_runtime.Action):
@@ -26,33 +25,11 @@ class CreateTicket(insightconnect_plugin_runtime.Action):
                 cause="The requester has not been provided.",
                 assistance="Please provide phone, ID or email of the requester.",
             )
-        json_data = {
-            "name": params.get(Input.NAME),
-            "requester_id": requester_id if requester_id else None,
-            "email": email if email else None,
-            "phone": phone if phone else None,
-            "subject": params.get(Input.SUBJECT),
-            "description": params.get(Input.DESCRIPTION),
-            "status": params.get(Input.STATUS),
-            "priority": params.get(Input.PRIORITY),
-            "impact": params.get(Input.IMPACT),
-            "urgency": params.get(Input.URGENCY),
-            "type": params.get(Input.TYPE),
-            "responder_id": params.get(Input.RESPONDERID),
-            "cc_emails": params.get(Input.CCEMAILS),
-            "due_by": params.get(Input.DUEBY),
-            "fr_due_by": params.get(Input.FRDUEBY),
-            "source": params.get(Input.SOURCE),
-            "custom_fields": params.get(Input.CUSTOMFIELDS),
-            "tags": params.get(Input.TAGS),
-            "group_id": params.get(Input.GROUPID),
-            "department_id": params.get(Input.DEPARTMENTID),
-            "category": params.get(Input.CATEGORY),
-            "sub_category": params.get(Input.SUBCATEGORY),
-            "item_category": params.get(Input.ITEMCATEGORY),
-            "assets": params.get(Input.ASSETS),
-        }
-        response = self.connection.api.create_ticket(clean_dict(json_data)).get("ticket", {})
+
+        json_data = clean_dict(dict_keys_to_snake_case(params))
+        json_data.pop("attachments", None)
+
+        response = self.connection.api.create_ticket(json_data).get("ticket", {})
         if attachments:
             response = self.connection.api.update_ticket(response.get("id"), attachments=attachments).get("ticket", {})
         return {Output.TICKET: dict_keys_to_camel_case(response)}

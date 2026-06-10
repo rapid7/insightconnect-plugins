@@ -33,6 +33,7 @@ class Input:
     TAGS = "tags"
     TYPE = "type"
     URGENCY = "urgency"
+    WORKSPACEID = "workspaceId"
 
 
 class Output:
@@ -40,8 +41,7 @@ class Output:
 
 
 class CreateTicketInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        r"""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -214,6 +214,12 @@ class CreateTicketInput(insightconnect_plugin_runtime.Input):
       "description": "Urgency",
       "default": 1,
       "order": 10
+    },
+    "workspaceId": {
+      "type": "integer",
+      "title": "Workspace ID",
+      "description": "ID of the workspace in which the ticket will be created. Only applicable for accounts with the Workspaces feature enabled. If not provided, the ticket will be created in the primary workspace",
+      "order": 26
     }
   },
   "required": [
@@ -257,16 +263,14 @@ class CreateTicketInput(insightconnect_plugin_runtime.Input):
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class CreateTicketOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(
-        r"""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -525,6 +529,12 @@ class CreateTicketOutput(insightconnect_plugin_runtime.Output):
           "title": "Impact",
           "description": "Impact",
           "order": 37
+        },
+        "workspaceId": {
+          "type": "integer",
+          "title": "Workspace ID",
+          "description": "ID of the workspace to which this ticket belongs",
+          "order": 38
         }
       }
     },
@@ -662,8 +672,7 @@ class CreateTicketOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
