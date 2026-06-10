@@ -28,8 +28,8 @@ class GetUserMemberships(insightconnect_plugin_runtime.Action):
         headers = self.connection.get_headers(self.connection.get_auth_token())
         headers["ConsistencyLevel"] = "eventual"
 
-        # Use next_link if provided, otherwise start from the beginning
         if next_link:
+            self.logger.info(f"Using provided next_link for pagination: {next_link}")
             url = next_link
         else:
             url = Endpoint.USER_MEMBER_OF.format(self.connection.tenant, user_id=user_id)
@@ -46,17 +46,21 @@ class GetUserMemberships(insightconnect_plugin_runtime.Action):
         except ValueError:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON)
 
-        memberships = result.get("value", [])
-        output_next_link = result.get("@odata.nextLink", "")
+        total_count = result.get("@odata.count")
+        if total_count:
+            self.logger.info(f"Total memberships reported by API: {total_count}")
 
-        member_count = len(memberships)
-        self.logger.info(f"Found {member_count} memberships for user {user_id}.")
+        memberships = result.get("value")
+        member_count = len(memberships) if memberships else 0
+        self.logger.info(f"Found {member_count} memberships for user {user_id} in this page.")
 
-        if output_next_link:
+        if output_next_link := result.get("@odata.nextLink"):
             self.logger.info("Additional pages available via next_link.")
 
-        return {
-            Output.MEMBERSHIPS: clean(memberships),
-            Output.COUNT: member_count,
-            Output.NEXT_LINK: output_next_link,
-        }
+        return clean(
+            {
+                Output.MEMBERSHIPS: memberships,
+                Output.COUNT: member_count,
+                Output.NEXT_LINK: output_next_link,
+            }
+        )

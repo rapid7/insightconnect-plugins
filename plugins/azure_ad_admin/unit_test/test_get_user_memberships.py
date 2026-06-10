@@ -34,7 +34,7 @@ class TestGetUserMemberships(TestCase):
         )
         self.assertEqual(actual["count"], 1)
         self.assertEqual(actual["memberships"][0]["displayName"], "Another Group")
-        self.assertEqual(actual["next_link"], "")
+        self.assertNotIn("next_link", actual)
 
     def test_get_user_memberships_invalid_user(self, mock_request: MagicMock) -> None:
         with self.assertRaises(PluginException) as error:
