@@ -1668,7 +1668,7 @@ actions:
           cves fields
         type: string
         required: true
-        example: '[{"id":"00000000-0000-0000-0000-000000000000","cves":["CVE-2021-24111"]}]'
+        example: '[{"id":"18e6ea46-f608-4439-bb35-9a5638ebeb1c-default-asset-502","name":"SRV-IN-AD01.fake.lab","cves":["CVE-2011-3389"]},{"id":"18e6ea46-f608-4439-bb35-9a5638ebeb1c-default-asset-50207","name":"ws-in-rando.fake.lab","cves":[ "CVE-2011-3389"]}]'
     output:
       batch_uuid:
         title: Batch UUID
