@@ -13,6 +13,7 @@ class ApiClient:
     VERSION = "3.0.0"
     PAGE_SIZE = 500
     REMEDIATION_CHUNK_SIZE = 100
+    REMEDIATION_MAX_CVES_PER_DEVICE = 500
 
     OUTCOME_FAIL = "failure"
     OUTCOME_SUCCESS = "success"
@@ -466,15 +467,8 @@ class ApiClient:
                 assistance=f"Device at index {index} is missing required non-empty array field 'cves'.",
             )
 
-    def submit_remediation(self, org_id: int, action_type: str, devices_input: str) -> Dict:
-        """
-        Submit device and CVE data for remediation or matching.
-        Automatically chunks large payloads into batches of 100 devices.
-        :param org_id: Organization ID
-        :param action_type: 'remediate' or 'match'
-        :param devices_input: JSON string containing an array of device objects
-        :return: Dict with batch_uuid, total_devices, chunks_sent, and collected responses
-        """
+    def _parse_and_validate_devices(self, action_type: str, devices_input: str) -> List[Dict]:
+        """Parse devices JSON, validate action_type, and validate each device entry."""
         if action_type not in ("remediate", "match"):
             raise PluginException(
                 cause="Invalid action_type",
@@ -497,6 +491,38 @@ class ApiClient:
 
         for i, device in enumerate(devices):
             self._validate_remediation_device(i, device)
+
+        return devices
+
+    def _expand_devices_by_cve_limit(self, devices: List[Dict]) -> List[Dict]:
+        """Split devices with more than REMEDIATION_MAX_CVES_PER_DEVICE CVEs into multiple entries."""
+        expanded_devices = []
+        max_cves = self.REMEDIATION_MAX_CVES_PER_DEVICE
+        for device in devices:
+            cves = device["cves"]
+            if len(cves) <= max_cves:
+                expanded_devices.append(device)
+            else:
+                self.logger.info(
+                    f"Device '{device.get('id')}' has {len(cves)} CVEs, splitting into "
+                    f"{(len(cves) + max_cves - 1) // max_cves} sub-entries"
+                )
+                for j in range(0, len(cves), max_cves):
+                    expanded_devices.append({**device, "cves": cves[j : j + max_cves]})
+        return expanded_devices
+
+    def submit_remediation(self, org_id: int, action_type: str, devices_input: str) -> Dict:
+        """
+        Submit device and CVE data for remediation or matching.
+        Automatically chunks large payloads into batches of 100 devices.
+        :param org_id: Organization ID
+        :param action_type: 'remediate' or 'match'
+        :param devices_input: JSON string containing an array of device objects
+        :return: Dict with batch_uuid, total_devices, chunks_sent, and collected responses
+        """
+        devices = self._parse_and_validate_devices(action_type, devices_input)
+        original_device_count = len(devices)
+        devices = self._expand_devices_by_cve_limit(devices)
 
         # Resolve integer org ID to org UUID for the remediate endpoint
         org = self.get_org(org_id)
@@ -526,7 +552,7 @@ class ApiClient:
 
         return {
             "batch_uuid": batch_uuid,
-            "total_devices": len(devices),
+            "total_devices": original_device_count,
             "chunks_sent": len(chunks),
             "responses": responses,
         }
