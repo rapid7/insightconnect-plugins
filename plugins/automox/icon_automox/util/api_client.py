@@ -13,6 +13,7 @@ class ApiClient:
     VERSION = "3.0.0"
     PAGE_SIZE = 500
     REMEDIATION_CHUNK_SIZE = 100
+    REMEDIATION_MAX_CVES_PER_DEVICE = 500
 
     OUTCOME_FAIL = "failure"
     OUTCOME_SUCCESS = "success"
@@ -498,6 +499,23 @@ class ApiClient:
         for i, device in enumerate(devices):
             self._validate_remediation_device(i, device)
 
+        # Split devices with >500 CVEs into multiple entries
+        expanded_devices = []
+        max_cves = self.REMEDIATION_MAX_CVES_PER_DEVICE
+        original_device_count = len(devices)
+        for device in devices:
+            cves = device["cves"]
+            if len(cves) <= max_cves:
+                expanded_devices.append(device)
+            else:
+                self.logger.info(
+                    f"Device '{device.get('id')}' has {len(cves)} CVEs, splitting into "
+                    f"{(len(cves) + max_cves - 1) // max_cves} sub-entries"
+                )
+                for j in range(0, len(cves), max_cves):
+                    expanded_devices.append({**device, "cves": cves[j : j + max_cves]})
+        devices = expanded_devices
+
         # Resolve integer org ID to org UUID for the remediate endpoint
         org = self.get_org(org_id)
         org_uuid = org.get("uuid")
@@ -526,7 +544,7 @@ class ApiClient:
 
         return {
             "batch_uuid": batch_uuid,
-            "total_devices": len(devices),
+            "total_devices": original_device_count,
             "chunks_sent": len(chunks),
             "responses": responses,
         }
