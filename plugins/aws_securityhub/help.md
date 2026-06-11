@@ -57,16 +57,16 @@ This action is used to updates Security Hub-aggregated findings based on attribu
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|confidence|Confidence|None|False|The updated value for the finding confidence.|None|100|None|None|
-|criticality|Criticality|None|False|The updated value for the level of importance assigned to the resources associated with the findings.|None|100|None|None|
+|confidence|Confidence|None|False|The updated value for the finding confidence|None|100|None|None|
+|criticality|Criticality|None|False|The updated value for the level of importance assigned to the resources associated with the findings|None|100|None|None|
 |finding_identifiers|[]object|None|True|An object of finding identifiers|None|[{"Id": "arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-0000000000000\"", "ProductArn": "arn:aws:securityhub:us-east-2::product/aws/securityhub"}]|None|None|
-|note|Note|None|False|The updated note.|None|{'Text': 'Closed by Rapid7', 'UpdatedBy': 'Rapid7'}|None|None|
-|related_findings|RelatedFindings|None|False|A list of findings that are related to the updated findings.|None|{'Id': 'arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-0000000000000"', 'ProductArn': 'arn:aws:securityhub:us-east-2::product/aws/securityhub'}|None|None|
-|severity|Severity|None|False|Used to update the finding severity.|None|{'Normalized': 50, 'Product': 8, 'Label': 'HIGH'}|None|None|
-|types|Types|None|False|One or more finding types in the format of namespace/category/classifier that classify a finding.|None|["TTPs/Command and Control/CryptoCurrency:EC2-BitcoinTool.B!DNS"]|None|None|
-|user_defined_fields|UserDefinedFields|None|False|A list of name/value string pairs associated with the finding. These are custom, user-defined fields added to a finding.|None|{'key': 'value'}|None|None|
-|verification_state|VerificationState|None|False|Indicates the veracity of a finding.|None|FALSE_POSITIVE|None|None|
-|workflow|WorkflowState|None|False|Used to update the workflow status of a finding.|None|{'Status': 'NEW'}|None|None|
+|note|Note|None|False|The updated note|None|{'Text': 'Closed by Rapid7', 'UpdatedBy': 'Rapid7'}|None|None|
+|related_findings|RelatedFindings|None|False|A list of findings that are related to the updated findings|None|{'Id': 'arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-0000000000000"', 'ProductArn': 'arn:aws:securityhub:us-east-2::product/aws/securityhub'}|None|None|
+|severity|Severity|None|False|Used to update the finding severity|None|{'Normalized': 50, 'Product': 8, 'Label': 'HIGH'}|None|None|
+|types|Types|None|False|One or more finding types in the format of namespace/category/classifier that classify a finding|None|["TTPs/Command and Control/CryptoCurrency:EC2-BitcoinTool.B!DNS"]|None|None|
+|user_defined_fields|UserDefinedFields|None|False|A list of name/value string pairs associated with the finding. These are custom, user-defined fields added to a finding|None|{'key': 'value'}|None|None|
+|verification_state|VerificationState|None|False|Indicates the veracity of a finding|None|FALSE_POSITIVE|None|None|
+|workflow|WorkflowState|None|False|Used to update the workflow status of a finding|None|{'Status': 'NEW'}|None|None|
   
 Example input:
 

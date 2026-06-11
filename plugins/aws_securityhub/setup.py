@@ -10,6 +10,10 @@ setup(
     author_email="",
     url="",
     packages=find_packages(),
-    install_requires=["insightconnect-plugin-runtime"],  # Add third-party dependencies to requirements.txt, not here!
-    entry_points={"console_scripts": ["icon_aws_securityhub = bin.icon_aws_securityhub:main"]},
+    install_requires=[
+        "insightconnect-plugin-runtime"
+    ],  # Add third-party dependencies to requirements.txt, not here!
+    entry_points={
+        "console_scripts": ["icon_aws_securityhub = bin.icon_aws_securityhub:main"]
+    },
 )

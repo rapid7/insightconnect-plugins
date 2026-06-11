@@ -34,12 +34,12 @@ class BatchUpdateFindingsInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "confidence": {
       "title": "Confidence",
-      "description": "The updated value for the finding confidence.",
+      "description": "The updated value for the finding confidence",
       "order": 5
     },
     "criticality": {
       "title": "Criticality",
-      "description": "The updated value for the level of importance assigned to the resources associated with the findings.",
+      "description": "The updated value for the level of importance assigned to the resources associated with the findings",
       "order": 6
     },
     "finding_identifiers": {
@@ -54,39 +54,39 @@ class BatchUpdateFindingsInput(insightconnect_plugin_runtime.Input):
     "note": {
       "$ref": "#/definitions/Note",
       "title": "Note",
-      "description": "The updated note.",
+      "description": "The updated note",
       "order": 2
     },
     "related_findings": {
       "$ref": "#/definitions/RelatedFindings",
       "title": "Related Findings",
-      "description": "A list of findings that are related to the updated findings.",
+      "description": "A list of findings that are related to the updated findings",
       "order": 10
     },
     "severity": {
       "$ref": "#/definitions/Severity",
       "title": "Severity",
-      "description": "Used to update the finding severity.",
+      "description": "Used to update the finding severity",
       "order": 3
     },
     "types": {
       "title": "Types",
-      "description": "One or more finding types in the format of namespace/category/classifier that classify a finding.",
+      "description": "One or more finding types in the format of namespace/category/classifier that classify a finding",
       "order": 7
     },
     "user_defined_fields": {
       "title": "User Defined Fields",
-      "description": "A list of name/value string pairs associated with the finding. These are custom, user-defined fields added to a finding.",
+      "description": "A list of name/value string pairs associated with the finding. These are custom, user-defined fields added to a finding",
       "order": 8
     },
     "verification_state": {
       "title": "Verification State",
-      "description": "Indicates the veracity of a finding.",
+      "description": "Indicates the veracity of a finding",
       "order": 4
     },
     "workflow": {
       "title": "Workflow",
-      "description": "Used to update the workflow status of a finding.",
+      "description": "Used to update the workflow status of a finding",
       "order": 9
     }
   },
