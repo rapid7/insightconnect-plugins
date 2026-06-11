@@ -67,6 +67,23 @@ Example input:
 }
 ```
 
+#### Update Batch Findings
+
+Updates Security Hub-aggregated findings based on attributes
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|filters|object|None|False|An object of filters|None|{}|None|None|
+  
+Example input:
+
+```
+{
+  "filters": {}
+}
+```
 ##### Output
 
 |Name|Type|Required|Description|Example|
