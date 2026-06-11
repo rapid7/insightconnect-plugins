@@ -728,6 +728,12 @@ class GetFindingsOutput(insightconnect_plugin_runtime.Output):
           "title": "Product",
           "description": "Product",
           "order": 2
+        },
+        "Label": {
+          "type": "string",
+          "title": "Product",
+          "description": "Label",
+          "order": 3
         }
       }
     },

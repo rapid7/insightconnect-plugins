@@ -2,14 +2,13 @@
 
 [AWS Security Hub](https://aws.amazon.com/security-hub/) is a comprehensive view of your high-priority security alerts and compliance status across AWS accounts.
 
-The AWS Security Hub InsightConnect plugin allows you to list, describe, and update security hub-aggregated findings and retrieve SQS messages.
+The AWS Security Hub InsightConnect plugin allows you to list and describe security hub-aggregated findings and retrieve SQS messages.
 
 This plugin utilizes the [AWS Security Hub API](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Operations.html) and [Boto3](https://github.com/boto/boto3) Python library
 
 # Key Features
 
 * Lists and describes Security Hub-aggregated findings
-* Batch update Security Hub-aggregated findings
 * Get SQS messages
 
 # Requirements
@@ -68,23 +67,6 @@ Example input:
 }
 ```
 
-#### Batch Update Findings
-
-This action is used to update Security Hub-aggregated findings that are specified by identifiers
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|filters|object|None|False|An object of filters|None|{}|None|None|
-  
-Example input:
-
-```
-{
-  "filters": {}
-}
-```
 ##### Output
 
 |Name|Type|Required|Description|Example|
@@ -450,6 +432,7 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
+|Product|string|None|False|Label|None|
 |Normalized|integer|None|False|Normalized|None|
 |Product|integer|None|False|Product|None|
   
@@ -655,6 +638,7 @@ Example output:
 * If you encounter any issues configuring the plugin, check out the [plugin guide](https://insightconnect.help.rapid7.com/docs/aws-security-hub) for more details on how to configure this plugin.
 
 # Version History
+
 * 2.1.0 - Added functionality for batch updating findings in Security Hub
 * 2.0.5 - Resolved Snyk vulnerabilities | SDK bump to latest version (6.3.7)
 * 2.0.4 - Bumping requirements.txt | SDK bump to 6.1.4
