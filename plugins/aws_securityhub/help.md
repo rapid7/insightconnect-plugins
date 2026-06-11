@@ -59,10 +59,10 @@ This action is used to updates Security Hub-aggregated findings based on attribu
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |confidence|Confidence|None|False|The updated value for the finding confidence|None|100|None|None|
 |criticality|Criticality|None|False|The updated value for the level of importance assigned to the resources associated with the findings|None|100|None|None|
-|finding_identifiers|[]object|None|True|An object of finding identifiers|None|[{"Id": "arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-0000000000000\"", "ProductArn": "arn:aws:securityhub:us-east-2::product/aws/securityhub"}]|None|None|
-|note|Note|None|False|The updated note|None|{'Text': 'Closed by Rapid7', 'UpdatedBy': 'Rapid7'}|None|None|
-|related_findings|RelatedFindings|None|False|A list of findings that are related to the updated findings|None|{'Id': 'arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-0000000000000"', 'ProductArn': 'arn:aws:securityhub:us-east-2::product/aws/securityhub'}|None|None|
-|severity|Severity|None|False|Used to update the finding severity|None|{'Normalized': 50, 'Product': 8, 'Label': 'HIGH'}|None|None|
+|finding_identifiers|[]FindingIdentifiers|None|True|An object of finding identifiers|None|[{"Id": "arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-0000000000000\"", "ProductArn": "arn:aws:securityhub:us-east-2::product/aws/securityhub"}]|None|None|
+|note|NotePartial|None|False|The updated note|None|{'Text': 'Closed by Rapid7', 'UpdatedBy': 'Rapid7'}|None|None|
+|related_findings|object|None|False|A list of findings that are related to the updated findings|None|{'Id': 'arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-0000000000000"', 'ProductArn': 'arn:aws:securityhub:us-east-2::product/aws/securityhub'}|None|None|
+|severity|object|None|False|Used to update the finding severity|None|{'Normalized': 50, 'Product': 8, 'Label': 'HIGH'}|None|None|
 |types|Types|None|False|One or more finding types in the format of namespace/category/classifier that classify a finding|None|["TTPs/Command and Control/CryptoCurrency:EC2-BitcoinTool.B!DNS"]|None|None|
 |user_defined_fields|UserDefinedFields|None|False|A list of name/value string pairs associated with the finding. These are custom, user-defined fields added to a finding|None|{'key': 'value'}|None|None|
 |verification_state|VerificationState|None|False|Indicates the veracity of a finding|None|FALSE_POSITIVE|None|None|
@@ -472,6 +472,13 @@ Example output:
 
 ### Custom Types
   
+**NotePartial**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Text|string|None|False|Text|Closed by Rapid7|
+|Updated By|string|None|False|Updated By|Rapid7|
+  
 **Compliance**
 
 |Name|Type|Default|Required|Description|Example|
@@ -486,6 +493,13 @@ Example output:
 |Path|string|None|False|Path|None|
 |State|string|None|False|State|None|
 |Type|string|None|False|Type|None|
+  
+**FindingIdentifiers**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|string|None|True|Finding ID|None|
+|ProductArn|string|None|True|Product ARN|None|
   
 **Network**
 

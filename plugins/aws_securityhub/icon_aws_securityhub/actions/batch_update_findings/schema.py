@@ -47,24 +47,24 @@ class BatchUpdateFindingsInput(insightconnect_plugin_runtime.Input):
       "title": "Finding Identifiers",
       "description": "An object of finding identifiers",
       "items": {
-        "type": "object"
+        "$ref": "#/definitions/FindingIdentifiers"
       },
       "order": 1
     },
     "note": {
-      "$ref": "#/definitions/Note",
+      "$ref": "#/definitions/NotePartial",
       "title": "Note",
       "description": "The updated note",
       "order": 2
     },
     "related_findings": {
-      "$ref": "#/definitions/RelatedFindings",
+      "type": "object",
       "title": "Related Findings",
       "description": "A list of findings that are related to the updated findings",
       "order": 10
     },
     "severity": {
-      "$ref": "#/definitions/Severity",
+      "type": "object",
       "title": "Severity",
       "description": "Used to update the finding severity",
       "order": 3
@@ -94,9 +94,31 @@ class BatchUpdateFindingsInput(insightconnect_plugin_runtime.Input):
     "finding_identifiers"
   ],
   "definitions": {
-    "Note": {
+    "FindingIdentifiers": {
       "type": "object",
-      "title": "Note",
+      "title": "FindingIdentifiers",
+      "properties": {
+        "Id": {
+          "type": "string",
+          "title": "ID",
+          "description": "Finding ID",
+          "order": 1
+        },
+        "ProductArn": {
+          "type": "string",
+          "title": "ProductArn",
+          "description": "Product ARN",
+          "order": 2
+        }
+      },
+      "required": [
+        "Id",
+        "ProductArn"
+      ]
+    },
+    "NotePartial": {
+      "type": "object",
+      "title": "NotePartial",
       "properties": {
         "Text": {
           "type": "string",
@@ -104,58 +126,10 @@ class BatchUpdateFindingsInput(insightconnect_plugin_runtime.Input):
           "description": "Text",
           "order": 1
         },
-        "UpdatedAt": {
-          "type": "string",
-          "title": "Updated At",
-          "description": "Updated At",
-          "order": 2
-        },
         "UpdatedBy": {
           "type": "string",
           "title": "Updated By",
-          "description": "Updated by",
-          "order": 3
-        }
-      }
-    },
-    "Severity": {
-      "type": "object",
-      "title": "Severity",
-      "properties": {
-        "Normalized": {
-          "type": "integer",
-          "title": "Normalized",
-          "description": "Normalized",
-          "order": 1
-        },
-        "Product": {
-          "type": "integer",
-          "title": "Product",
-          "description": "Product",
-          "order": 2
-        },
-        "Label": {
-          "type": "string",
-          "title": "Product",
-          "description": "Label",
-          "order": 3
-        }
-      }
-    },
-    "RelatedFindings": {
-      "type": "object",
-      "title": "RelatedFindings",
-      "properties": {
-        "Id": {
-          "type": "string",
-          "title": "ID",
-          "description": "ID",
-          "order": 1
-        },
-        "ProductArn": {
-          "type": "string",
-          "title": "Product ARN",
-          "description": "Product ARN",
+          "description": "Updated By",
           "order": 2
         }
       }

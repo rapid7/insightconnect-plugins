@@ -13,7 +13,7 @@ RUN pip uninstall -y setuptools
 
 FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.3.7
 
-LABEL organization=rapid7
+LABEL organization=ripeNCC
 LABEL sdk=python
 
 WORKDIR /python/src

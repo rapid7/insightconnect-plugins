@@ -54,6 +54,19 @@ version_history:
   - "2.0.0 - New spec and help.md format for the Extension Library | Variable names updated as acronyms"
   - "1.0.0 - Initial plugin"
 types:
+  NotePartial:
+    Text:
+        title: Text
+        description: Text
+        type: string
+        required: false
+        example: "Closed by Rapid7"
+    UpdatedBy:
+        title: Updated By
+        description: Updated By
+        type: string
+        required: false
+        example: "Rapid7"
   Compliance:
     Status:
       title: Status
@@ -81,6 +94,17 @@ types:
       type: string
       description: Type
       required: false
+  FindingIdentifiers:
+    Id:
+      title: ID
+      type: string
+      description: Finding ID
+      required: true
+    ProductArn:
+      title: ProductArn
+      type: string
+      description: Product ARN
+      required: true
   Network:
     DestinationDomain:
       title: Destination Domain
@@ -1022,19 +1046,19 @@ actions:
       finding_identifiers:
         title: Finding Identifiers
         description: An object of finding identifiers
-        type: "[]object"
+        type: "[]FindingIdentifiers"
         required: true
         example: [{"Id":arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-0000000000000", "ProductArn": "arn:aws:securityhub:us-east-2::product/aws/securityhub"}]
       note:
           title: Note
           description: The updated note
-          type: Note
+          type: NotePartial
           required: false
           example: {"Text": "Closed by Rapid7", "UpdatedBy": "Rapid7"}
       severity:
           title: Severity
           description: Used to update the finding severity
-          type: Severity
+          type: object
           required: false
           example: {"Normalized": 50, "Product": 8, "Label": "HIGH"}
       verification_state:
@@ -1076,7 +1100,7 @@ actions:
       related_findings:
           title: Related Findings
           description: A list of findings that are related to the updated findings
-          type: RelatedFindings
+          type: object
           required: false
           example: {"Id":arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-0000000000000", "ProductArn": "arn:aws:securityhub:us-east-2::product/aws/securityhub"}
     output:
