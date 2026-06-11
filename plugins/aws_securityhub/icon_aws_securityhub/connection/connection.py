@@ -16,9 +16,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         region = params.get("region", None)
         kwargs = {
             "aws_access_key_id": params.get(Input.AWS_ACCESS_KEY_ID).get("secretKey"),
-            "aws_secret_access_key": params.get(Input.AWS_SECRET_ACCESS_KEY).get(
-                "secretKey"
-            ),
+            "aws_secret_access_key": params.get(Input.AWS_SECRET_ACCESS_KEY).get("secretKey"),
         }
         if region:
             kwargs["region_name"] = region

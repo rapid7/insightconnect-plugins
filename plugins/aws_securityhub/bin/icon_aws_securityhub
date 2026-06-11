@@ -38,6 +38,8 @@ def main():
         
             self.add_action(actions.GetFindings())
         
+            self.add_action(actions.BatchUpdateFindings())
+        
 
     """Run plugin"""
     cli = insightconnect_plugin_runtime.CLI(ICONAwsSecurityhub())

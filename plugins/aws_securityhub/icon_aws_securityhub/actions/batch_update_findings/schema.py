@@ -4,20 +4,20 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Used by Security Hub customers to update information about one or more findings"
+    DESCRIPTION = "Updates Security Hub-aggregated findings based on attributes"
 
 
 class Input:
-    FINDING_IDENTIFIERS = "finding_identifiers"
-    NOTE = "note"
-    SEVERITY = "severity"
-    VERIFICATION_STATE = "verification_state"
     CONFIDENCE = "confidence"
     CRITICALITY = "criticality"
+    FINDING_IDENTIFIERS = "finding_identifiers"
+    NOTE = "note"
+    RELATED_FINDINGS = "related_findings"
+    SEVERITY = "severity"
     TYPES = "types"
     USER_DEFINED_FIELDS = "user_defined_fields"
+    VERIFICATION_STATE = "verification_state"
     WORKFLOW = "workflow"
-    RELATED_FINDINGS = "related_findings"
 
 
 class Output:
@@ -28,181 +28,141 @@ class Output:
 class BatchUpdateFindingsInput(insightconnect_plugin_runtime.Input):
     schema = json.loads(
         r"""
-        {
-            "type": "object",
-            "title": "Variables",
-            "properties": {
-                "finding_identifiers": {
-                    "type": "array",
-                    "title": "Finding Identifiers",
-                    "description": "The list of findings to update. BatchUpdateFindings can be used to update up to 100 findings at a time",
-                    "items": {
-                        "$ref": "#/definitions/FindingIdentifier"
-                    },
-                    "order": 1
-                },
-                "note": {
-                    "$ref": "#/definitions/NoteUpdate",
-                    "title": "Note",
-                    "description": "The updated note",
-                    "order": 2
-                },
-                "severity": {
-                    "$ref": "#/definitions/SeverityUpdate",
-                    "title": "Severity",
-                    "description": "Used to update the finding severity",
-                    "order": 3
-                },
-                "verification_state": {
-                    "type": "string",
-                    "title": "Verification State",
-                    "description": "Indicates the veracity of a finding",
-                    "enum": ["UNKNOWN", "TRUE_POSITIVE", "FALSE_POSITIVE", "BENIGN_POSITIVE"],
-                    "order": 4
-                },
-                "confidence": {
-                    "type": "integer",
-                    "title": "Confidence",
-                    "description": "The updated value for the finding confidence scored on a 0-100 basis",
-                    "order": 5
-                },
-                "criticality": {
-                    "type": "integer",
-                    "title": "Criticality",
-                    "description": "The updated value for the level of importance assigned to the resources associated with the findings, scored 0-100",
-                    "order": 6
-                },
-                "types": {
-                    "type": "array",
-                    "title": "Types",
-                    "description": "One or more finding types in the format of namespace/category/classifier that classify a finding",
-                    "items": {
-                        "type": "string"
-                    },
-                    "order": 7
-                },
-                "user_defined_fields": {
-                    "type": "object",
-                    "title": "User Defined Fields",
-                    "description": "A list of name/value string pairs associated with the finding. These are custom, user-defined fields added to a finding",
-                    "order": 8
-                },
-                "workflow": {
-                    "$ref": "#/definitions/WorkflowUpdate",
-                    "title": "Workflow",
-                    "description": "Used to update the workflow status of a finding",
-                    "order": 9
-                },
-                "related_findings": {
-                    "type": "array",
-                    "title": "Related Findings",
-                    "description": "A list of findings that are related to the updated findings",
-                    "items": {
-                        "$ref": "#/definitions/RelatedFinding"
-                    },
-                    "order": 10
-                }
-            },
-            "required": ["finding_identifiers"],
-            "definitions": {
-                "FindingIdentifier": {
-                    "type": "object",
-                    "title": "FindingIdentifier",
-                    "properties": {
-                        "Id": {
-                            "type": "string",
-                            "title": "ID",
-                            "description": "The identifier of the finding that was specified by the finding provider",
-                            "order": 1
-                        },
-                        "ProductArn": {
-                            "type": "string",
-                            "title": "Product ARN",
-                            "description": "The ARN generated by Security Hub that uniquely identifies a product that generates findings",
-                            "order": 2
-                        }
-                    },
-                    "required": ["Id", "ProductArn"]
-                },
-                "NoteUpdate": {
-                    "type": "object",
-                    "title": "NoteUpdate",
-                    "properties": {
-                        "Text": {
-                            "type": "string",
-                            "title": "Text",
-                            "description": "The updated note text",
-                            "order": 1
-                        },
-                        "UpdatedBy": {
-                            "type": "string",
-                            "title": "Updated By",
-                            "description": "The principal that updated the note",
-                            "order": 2
-                        }
-                    },
-                    "required": ["Text", "UpdatedBy"]
-                },
-                "SeverityUpdate": {
-                    "type": "object",
-                    "title": "SeverityUpdate",
-                    "properties": {
-                        "Normalized": {
-                            "type": "integer",
-                            "title": "Normalized",
-                            "description": "The normalized severity for the finding (0-100). Deprecated in favor of Label",
-                            "order": 1
-                        },
-                        "Product": {
-                            "type": "number",
-                            "title": "Product",
-                            "description": "The native severity as defined by the AWS service or integrated partner product that generated the finding",
-                            "order": 2
-                        },
-                        "Label": {
-                            "type": "string",
-                            "title": "Label",
-                            "description": "The severity value of the finding",
-                            "enum": ["INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL"],
-                            "order": 3
-                        }
-                    }
-                },
-                "WorkflowUpdate": {
-                    "type": "object",
-                    "title": "WorkflowUpdate",
-                    "properties": {
-                        "Status": {
-                            "type": "string",
-                            "title": "Status",
-                            "description": "The status of the investigation into the finding",
-                            "enum": ["NEW", "NOTIFIED", "RESOLVED", "SUPPRESSED"],
-                            "order": 1
-                        }
-                    }
-                },
-                "RelatedFinding": {
-                    "type": "object",
-                    "title": "RelatedFinding",
-                    "properties": {
-                        "ProductArn": {
-                            "type": "string",
-                            "title": "Product ARN",
-                            "description": "The ARN of the product that generated a related finding",
-                            "order": 1
-                        },
-                        "Id": {
-                            "type": "string",
-                            "title": "ID",
-                            "description": "The product-generated identifier for a related finding",
-                            "order": 2
-                        }
-                    },
-                    "required": ["ProductArn", "Id"]
-                }
-            }
+   {
+  "type": "object",
+  "title": "Variables",
+  "properties": {
+    "confidence": {
+      "title": "Confidence",
+      "description": "The updated value for the finding confidence.",
+      "order": 5
+    },
+    "criticality": {
+      "title": "Criticality",
+      "description": "The updated value for the level of importance assigned to the resources associated with the findings.",
+      "order": 6
+    },
+    "finding_identifiers": {
+      "type": "array",
+      "title": "Finding Identifiers",
+      "description": "An object of finding identifiers",
+      "items": {
+        "type": "object"
+      },
+      "order": 1
+    },
+    "note": {
+      "$ref": "#/definitions/Note",
+      "title": "Note",
+      "description": "The updated note.",
+      "order": 2
+    },
+    "related_findings": {
+      "$ref": "#/definitions/RelatedFindings",
+      "title": "Related Findings",
+      "description": "A list of findings that are related to the updated findings.",
+      "order": 10
+    },
+    "severity": {
+      "$ref": "#/definitions/Severity",
+      "title": "Severity",
+      "description": "Used to update the finding severity.",
+      "order": 3
+    },
+    "types": {
+      "title": "Types",
+      "description": "One or more finding types in the format of namespace/category/classifier that classify a finding.",
+      "order": 7
+    },
+    "user_defined_fields": {
+      "title": "User Defined Fields",
+      "description": "A list of name/value string pairs associated with the finding. These are custom, user-defined fields added to a finding.",
+      "order": 8
+    },
+    "verification_state": {
+      "title": "Verification State",
+      "description": "Indicates the veracity of a finding.",
+      "order": 4
+    },
+    "workflow": {
+      "title": "Workflow",
+      "description": "Used to update the workflow status of a finding.",
+      "order": 9
+    }
+  },
+  "required": [
+    "finding_identifiers"
+  ],
+  "definitions": {
+    "Note": {
+      "type": "object",
+      "title": "Note",
+      "properties": {
+        "Text": {
+          "type": "string",
+          "title": "Text",
+          "description": "Text",
+          "order": 1
+        },
+        "UpdatedAt": {
+          "type": "string",
+          "title": "Updated At",
+          "description": "Updated At",
+          "order": 2
+        },
+        "UpdatedBy": {
+          "type": "string",
+          "title": "Updated By",
+          "description": "Updated by",
+          "order": 3
         }
-        """
+      }
+    },
+    "Severity": {
+      "type": "object",
+      "title": "Severity",
+      "properties": {
+        "Normalized": {
+          "type": "integer",
+          "title": "Normalized",
+          "description": "Normalized",
+          "order": 1
+        },
+        "Product": {
+          "type": "integer",
+          "title": "Product",
+          "description": "Product",
+          "order": 2
+        },
+        "Label": {
+          "type": "string",
+          "title": "Product",
+          "description": "Label",
+          "order": 3
+        }
+      }
+    },
+    "RelatedFindings": {
+      "type": "object",
+      "title": "RelatedFindings",
+      "properties": {
+        "Id": {
+          "type": "string",
+          "title": "ID",
+          "description": "ID",
+          "order": 1
+        },
+        "ProductArn": {
+          "type": "string",
+          "title": "Product ARN",
+          "description": "Product ARN",
+          "order": 2
+        }
+      }
+    }
+  }
+}
+    """
     )
 
     def __init__(self):
@@ -212,75 +172,756 @@ class BatchUpdateFindingsInput(insightconnect_plugin_runtime.Input):
 class BatchUpdateFindingsOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads(
         r"""
-        {
-            "type": "object",
-            "title": "Variables",
-            "properties": {
-                "ProcessedFindings": {
-                    "type": "array",
-                    "title": "Processed Findings",
-                    "description": "The list of findings that were updated successfully",
-                    "items": {
-                        "$ref": "#/definitions/FindingIdentifier"
-                    },
-                    "order": 1
-                },
-                "UnprocessedFindings": {
-                    "type": "array",
-                    "title": "Unprocessed Findings",
-                    "description": "The list of findings that were not updated",
-                    "items": {
-                        "$ref": "#/definitions/UnprocessedFinding"
-                    },
-                    "order": 2
-                }
-            },
-            "definitions": {
-                "FindingIdentifier": {
-                    "type": "object",
-                    "title": "FindingIdentifier",
-                    "properties": {
-                        "Id": {
-                            "type": "string",
-                            "title": "ID",
-                            "description": "The identifier of the finding that was specified by the finding provider",
-                            "order": 1
-                        },
-                        "ProductArn": {
-                            "type": "string",
-                            "title": "Product ARN",
-                            "description": "The ARN generated by Security Hub that uniquely identifies a product that generates findings",
-                            "order": 2
-                        }
-                    }
-                },
-                "UnprocessedFinding": {
-                    "type": "object",
-                    "title": "UnprocessedFinding",
-                    "properties": {
-                        "FindingIdentifier": {
-                            "$ref": "#/definitions/FindingIdentifier",
-                            "title": "Finding Identifier",
-                            "description": "The identifier of the finding that was not updated",
-                            "order": 1
-                        },
-                        "ErrorCode": {
-                            "type": "string",
-                            "title": "Error Code",
-                            "description": "The code associated with the error",
-                            "order": 2
-                        },
-                        "ErrorMessage": {
-                            "type": "string",
-                            "title": "Error Message",
-                            "description": "The message associated with the error",
-                            "order": 3
-                        }
-                    }
-                }
-            }
+   {
+  "type": "object",
+  "title": "Variables",
+  "properties": {
+    "processed_findings": {
+      "type": "array",
+      "title": "Processed Findings",
+      "description": "Security Hub processed changes",
+      "items": {
+        "$ref": "#/definitions/Findings"
+      },
+      "order": 1
+    },
+    "unprocessed_findings": {
+      "type": "array",
+      "title": "Unprocessed Findings",
+      "description": "Security Hub unprocessed changes",
+      "items": {
+        "$ref": "#/definitions/Findings"
+      },
+      "order": 2
+    }
+  },
+  "definitions": {
+    "Findings": {
+      "type": "object",
+      "title": "Findings",
+      "properties": {
+        "AwsAccountId": {
+          "type": "string",
+          "title": "AWS account ID",
+          "description": "AWS account ID",
+          "order": 1
+        },
+        "Compliance": {
+          "$ref": "#/definitions/Compliance",
+          "title": "Compliance",
+          "description": "Compliance",
+          "order": 2
+        },
+        "Confidence": {
+          "type": "integer",
+          "title": "Confidence",
+          "description": "Confidence",
+          "order": 3
+        },
+        "CreatedAt": {
+          "type": "string",
+          "title": "Created At",
+          "description": "Created at",
+          "order": 4
+        },
+        "Criticality": {
+          "type": "integer",
+          "title": "Criticality",
+          "description": "Criticality",
+          "order": 5
+        },
+        "Description": {
+          "type": "string",
+          "title": "Description",
+          "description": "Description",
+          "order": 6
+        },
+        "FirstObservedAt": {
+          "type": "string",
+          "title": "First Observed At",
+          "description": "First observed at",
+          "order": 7
+        },
+        "GeneratorId": {
+          "type": "string",
+          "title": "Generator ID",
+          "description": "Generator ID",
+          "order": 8
+        },
+        "Id": {
+          "type": "string",
+          "title": "ID",
+          "description": "ID",
+          "order": 9
+        },
+        "LastObservedAt": {
+          "type": "string",
+          "title": "Last Observed At",
+          "description": "Last observed at",
+          "order": 10
+        },
+        "Malware": {
+          "type": "array",
+          "title": "Malware",
+          "description": "Malware",
+          "items": {
+            "$ref": "#/definitions/Malware"
+          },
+          "order": 11
+        },
+        "Network": {
+          "$ref": "#/definitions/Network",
+          "title": "Network",
+          "description": "Network",
+          "order": 12
+        },
+        "Note": {
+          "$ref": "#/definitions/Note",
+          "title": "Note",
+          "description": "Note",
+          "order": 13
+        },
+        "Process": {
+          "$ref": "#/definitions/Process",
+          "title": "Process",
+          "description": "Process",
+          "order": 14
+        },
+        "ProductArn": {
+          "type": "string",
+          "title": "Product ARN",
+          "description": "Product ARN",
+          "order": 15
+        },
+        "ProductFields": {
+          "$ref": "#/definitions/ProductFields",
+          "title": "Product Fields",
+          "description": "Product fields",
+          "order": 16
+        },
+        "RecordState": {
+          "type": "string",
+          "title": "Record State",
+          "description": "Record state",
+          "order": 17
+        },
+        "RelatedFindings": {
+          "type": "array",
+          "title": "Related Findings",
+          "description": "Related findings",
+          "items": {
+            "$ref": "#/definitions/RelatedFindings"
+          },
+          "order": 18
+        },
+        "Remediation": {
+          "$ref": "#/definitions/Remediation",
+          "title": "Remediation",
+          "description": "Remediation",
+          "order": 19
+        },
+        "Resources": {
+          "type": "array",
+          "title": "Resources",
+          "description": "Resources",
+          "items": {
+            "$ref": "#/definitions/Resources"
+          },
+          "order": 20
+        },
+        "SchemaVersion": {
+          "type": "string",
+          "title": "Schema Version",
+          "description": "Schema version",
+          "order": 21
+        },
+        "Severity": {
+          "$ref": "#/definitions/Severity",
+          "title": "Severity",
+          "description": "Severity",
+          "order": 22
+        },
+        "SourceUrl": {
+          "type": "string",
+          "title": "Source URL",
+          "description": "Source URL",
+          "order": 23
+        },
+        "ThreatIntelIndicators": {
+          "type": "array",
+          "title": "Threat Intel Indicators",
+          "description": "Threat intel indicators",
+          "items": {
+            "$ref": "#/definitions/ThreatIntelIndicators"
+          },
+          "order": 24
+        },
+        "Title": {
+          "type": "string",
+          "title": "Title",
+          "description": "Title",
+          "order": 25
+        },
+        "Types": {
+          "type": "array",
+          "title": "Types",
+          "description": "Types",
+          "items": {
+            "type": "string"
+          },
+          "order": 26
+        },
+        "UpdatedAt": {
+          "type": "string",
+          "title": "Updated At",
+          "description": "Updated at",
+          "order": 27
+        },
+        "UserDefinedFields": {
+          "$ref": "#/definitions/ProductFields",
+          "title": "User-defined Fields",
+          "description": "User-defined fields",
+          "order": 28
+        },
+        "VerificationState": {
+          "type": "string",
+          "title": "Verification State",
+          "description": "Verification state",
+          "order": 29
+        },
+        "WorkflowState": {
+          "type": "string",
+          "title": "Workflow State",
+          "description": "Workflow state",
+          "order": 30
         }
-        """
+      }
+    },
+    "Compliance": {
+      "type": "object",
+      "title": "Compliance",
+      "properties": {
+        "Status": {
+          "type": "string",
+          "title": "Status",
+          "description": "Status",
+          "order": 1
+        }
+      }
+    },
+    "Malware": {
+      "type": "object",
+      "title": "Malware",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Name",
+          "order": 1
+        },
+        "Path": {
+          "type": "string",
+          "title": "Path",
+          "description": "Path",
+          "order": 2
+        },
+        "State": {
+          "type": "string",
+          "title": "State",
+          "description": "State",
+          "order": 3
+        },
+        "Type": {
+          "type": "string",
+          "title": "Type",
+          "description": "Type",
+          "order": 4
+        }
+      }
+    },
+    "Network": {
+      "type": "object",
+      "title": "Network",
+      "properties": {
+        "DestinationDomain": {
+          "type": "string",
+          "title": "Destination Domain",
+          "description": "Destination domain",
+          "order": 1
+        },
+        "DestinationIpV4": {
+          "type": "string",
+          "title": "Destination IPv4",
+          "description": "Destination IPv4",
+          "order": 2
+        },
+        "DestinationIpV6": {
+          "type": "string",
+          "title": "Destination IPv6",
+          "description": "Destination IPv6",
+          "order": 3
+        },
+        "DestinationPort": {
+          "type": "integer",
+          "title": "Destination Port",
+          "description": "Destination port",
+          "order": 4
+        },
+        "Direction": {
+          "type": "string",
+          "title": "Direction",
+          "description": "Direction",
+          "order": 5
+        },
+        "Protocol": {
+          "type": "string",
+          "title": "Protocol",
+          "description": "Protocol",
+          "order": 6
+        },
+        "SourceDomain": {
+          "type": "string",
+          "title": "Source Domain",
+          "description": "Source domain",
+          "order": 7
+        },
+        "SourceIpV4": {
+          "type": "string",
+          "title": "Source IPv4",
+          "description": "Source IPv4",
+          "order": 8
+        },
+        "SourceIpV6": {
+          "type": "string",
+          "title": "Source IPv6",
+          "description": "Source IPv6",
+          "order": 9
+        },
+        "SourceMac": {
+          "type": "string",
+          "title": "Source MAC",
+          "description": "Source MAC",
+          "order": 10
+        },
+        "SourcePort": {
+          "type": "integer",
+          "title": "Source Port",
+          "description": "Source port",
+          "order": 11
+        }
+      }
+    },
+    "Note": {
+      "type": "object",
+      "title": "Note",
+      "properties": {
+        "Text": {
+          "type": "string",
+          "title": "Text",
+          "description": "Text",
+          "order": 1
+        },
+        "UpdatedAt": {
+          "type": "string",
+          "title": "Updated At",
+          "description": "Updated At",
+          "order": 2
+        },
+        "UpdatedBy": {
+          "type": "string",
+          "title": "Updated By",
+          "description": "Updated by",
+          "order": 3
+        }
+      }
+    },
+    "Process": {
+      "type": "object",
+      "title": "Process",
+      "properties": {
+        "LaunchedAt": {
+          "type": "string",
+          "title": "Launched At",
+          "description": "Launched at",
+          "order": 1
+        },
+        "Name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Name",
+          "order": 2
+        },
+        "ParentPid": {
+          "type": "integer",
+          "title": "Parent PID",
+          "description": "Parent PID",
+          "order": 3
+        },
+        "Path": {
+          "type": "string",
+          "title": "Path",
+          "description": "Path",
+          "order": 4
+        },
+        "Pid": {
+          "type": "integer",
+          "title": "PID",
+          "description": "PID",
+          "order": 5
+        },
+        "TerminatedAt": {
+          "type": "string",
+          "title": "Terminated At",
+          "description": "Terminated at",
+          "order": 6
+        }
+      }
+    },
+    "ProductFields": {
+      "type": "object",
+      "title": "ProductFields",
+      "properties": {
+        "string": {
+          "type": "string",
+          "title": "String",
+          "description": "String",
+          "order": 1
+        }
+      }
+    },
+    "RelatedFindings": {
+      "type": "object",
+      "title": "RelatedFindings",
+      "properties": {
+        "Id": {
+          "type": "string",
+          "title": "ID",
+          "description": "ID",
+          "order": 1
+        },
+        "ProductArn": {
+          "type": "string",
+          "title": "Product ARN",
+          "description": "Product ARN",
+          "order": 2
+        }
+      }
+    },
+    "Remediation": {
+      "type": "object",
+      "title": "Remediation",
+      "properties": {
+        "Recommendation": {
+          "$ref": "#/definitions/Recommendation",
+          "title": "Recommendation",
+          "description": "Recommendation",
+          "order": 1
+        }
+      }
+    },
+    "Recommendation": {
+      "type": "object",
+      "title": "Recommendation",
+      "properties": {
+        "Text": {
+          "type": "string",
+          "title": "Text",
+          "description": "Text",
+          "order": 1
+        },
+        "Url": {
+          "type": "string",
+          "title": "URL",
+          "description": "URL",
+          "order": 2
+        }
+      }
+    },
+    "Resources": {
+      "type": "object",
+      "title": "Resources",
+      "properties": {
+        "Details": {
+          "$ref": "#/definitions/Details",
+          "title": "Details",
+          "description": "Details",
+          "order": 1
+        },
+        "Id": {
+          "type": "string",
+          "title": "ID",
+          "description": "ID",
+          "order": 2
+        },
+        "Partition": {
+          "type": "string",
+          "title": "Partition",
+          "description": "Partition",
+          "order": 3
+        },
+        "Region": {
+          "type": "string",
+          "title": "Region",
+          "description": "Region",
+          "order": 4
+        },
+        "Tags": {
+          "$ref": "#/definitions/ProductFields",
+          "title": "Tags",
+          "description": "Tags",
+          "order": 5
+        },
+        "Type": {
+          "type": "string",
+          "title": "Type",
+          "description": "Type",
+          "order": 6
+        }
+      }
+    },
+    "Details": {
+      "type": "object",
+      "title": "Details",
+      "properties": {
+        "AwsEc2Instance": {
+          "$ref": "#/definitions/AwsEc2Instance",
+          "title": "AWS EC2 Instance",
+          "description": "AWS EC2 instance",
+          "order": 1
+        },
+        "AwsIamAccessKey": {
+          "$ref": "#/definitions/AwsIamAccessKey",
+          "title": "AWS IAM Access Key",
+          "description": "AWS IAM access key",
+          "order": 2
+        },
+        "AwsS3Bucket": {
+          "$ref": "#/definitions/AwsS3Bucket",
+          "title": "AWS S3 Bucket",
+          "description": "AWS S3 bucket",
+          "order": 3
+        },
+        "Container": {
+          "$ref": "#/definitions/Container",
+          "title": "Container",
+          "description": "Container",
+          "order": 4
+        },
+        "Other": {
+          "$ref": "#/definitions/ProductFields",
+          "title": "Other",
+          "description": "Other",
+          "order": 5
+        }
+      }
+    },
+    "AwsEc2Instance": {
+      "type": "object",
+      "title": "AwsEc2Instance",
+      "properties": {
+        "IamInstanceProfileArn": {
+          "type": "string",
+          "title": "IAM Instance Profile ARN",
+          "description": "IAM instance profile ARN",
+          "order": 1
+        },
+        "ImageId": {
+          "type": "string",
+          "title": "Image ID",
+          "description": "Image ID",
+          "order": 2
+        },
+        "IpV4Addresses": {
+          "type": "array",
+          "title": "IPv4 Addresses",
+          "description": "IPv4 addresses",
+          "items": {
+            "type": "string"
+          },
+          "order": 3
+        },
+        "IpV6Addresses": {
+          "type": "array",
+          "title": "IPv6 Addresses",
+          "description": "IPv6 addresses",
+          "items": {
+            "type": "string"
+          },
+          "order": 4
+        },
+        "KeyName": {
+          "type": "string",
+          "title": "Keyname",
+          "description": "Keyname",
+          "order": 5
+        },
+        "LaunchedAt": {
+          "type": "string",
+          "title": "Launched At",
+          "description": "Launched at",
+          "order": 6
+        },
+        "SubnetId": {
+          "type": "string",
+          "title": "Subnet ID",
+          "description": "Subnet ID",
+          "order": 7
+        },
+        "Type": {
+          "type": "string",
+          "title": "Type",
+          "description": "Type",
+          "order": 8
+        },
+        "VpcId": {
+          "type": "string",
+          "title": "VPC ID",
+          "description": "VPC ID",
+          "order": 9
+        }
+      }
+    },
+    "AwsIamAccessKey": {
+      "type": "object",
+      "title": "AwsIamAccessKey",
+      "properties": {
+        "CreatedAt": {
+          "type": "string",
+          "title": "Created At",
+          "description": "Created at",
+          "order": 1
+        },
+        "Status": {
+          "type": "string",
+          "title": "Status",
+          "description": "Status",
+          "order": 2
+        },
+        "UserName": {
+          "type": "string",
+          "title": "Username",
+          "description": "Username",
+          "order": 3
+        }
+      }
+    },
+    "AwsS3Bucket": {
+      "type": "object",
+      "title": "AwsS3Bucket",
+      "properties": {
+        "OwnerId": {
+          "type": "string",
+          "title": "Owner ID",
+          "description": "Owner ID",
+          "order": 1
+        },
+        "OwnerName": {
+          "type": "string",
+          "title": "Owner Name",
+          "description": "Owner name",
+          "order": 2
+        }
+      }
+    },
+    "Container": {
+      "type": "object",
+      "title": "Container",
+      "properties": {
+        "ImageId": {
+          "type": "string",
+          "title": "Image ID",
+          "description": "Image ID",
+          "order": 1
+        },
+        "ImageName": {
+          "type": "string",
+          "title": "Image Name",
+          "description": "Image name",
+          "order": 2
+        },
+        "LaunchedAt": {
+          "type": "string",
+          "title": "Launched At",
+          "description": "Launched at",
+          "order": 3
+        },
+        "Name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Name",
+          "order": 4
+        }
+      }
+    },
+    "Severity": {
+      "type": "object",
+      "title": "Severity",
+      "properties": {
+        "Normalized": {
+          "type": "integer",
+          "title": "Normalized",
+          "description": "Normalized",
+          "order": 1
+        },
+        "Product": {
+          "type": "integer",
+          "title": "Product",
+          "description": "Product",
+          "order": 2
+        },
+        "Label": {
+          "type": "string",
+          "title": "Product",
+          "description": "Label",
+          "order": 3
+        }
+      }
+    },
+    "ThreatIntelIndicators": {
+      "type": "object",
+      "title": "ThreatIntelIndicators",
+      "properties": {
+        "Category": {
+          "type": "string",
+          "title": "Category",
+          "description": "Category",
+          "order": 1
+        },
+        "LastObservedAt": {
+          "type": "string",
+          "title": "Last Observed At",
+          "description": "Last observed at",
+          "order": 2
+        },
+        "Source": {
+          "type": "string",
+          "title": "Source",
+          "description": "Source",
+          "order": 3
+        },
+        "SourceUrl": {
+          "type": "string",
+          "title": "Source URL",
+          "description": "Source URL",
+          "order": 4
+        },
+        "Type": {
+          "type": "string",
+          "title": "Type",
+          "description": "Type",
+          "order": 5
+        },
+        "Value": {
+          "type": "string",
+          "title": "Value",
+          "description": "Value",
+          "order": 6
+        }
+      }
+    }
+  }
+}
+    """
     )
 
     def __init__(self):

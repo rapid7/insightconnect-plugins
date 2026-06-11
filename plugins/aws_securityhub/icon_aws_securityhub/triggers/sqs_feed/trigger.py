@@ -89,8 +89,6 @@ class SqsFeed(insightconnect_plugin_runtime.Trigger):
                         }
                     )
                     receipt_handle = message["ReceiptHandle"]
-                    client.delete_message(
-                        QueueUrl=sqs_url, ReceiptHandle=receipt_handle
-                    )
+                    client.delete_message(QueueUrl=sqs_url, ReceiptHandle=receipt_handle)
 
             time.sleep(params.get("interval", 5))
