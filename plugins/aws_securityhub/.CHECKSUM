@@ -1,7 +1,7 @@
 {
-	"spec": "1f9ca9f5bc42b98211e18ce9fc889f62",
-	"manifest": "1675e1322f6b25b19c0471927907757a",
-	"setup": "1086ba9c3ae8520e5cc866fd985c6c30",
+	"spec": "bd217f06df3b2caaf3ffd22a26aa84bc",
+	"manifest": "d8bfdfc34866cb6b293c48a7f714bbdd",
+	"setup": "35f7c41f3575dcb20a237fc733f42cb6",
 	"schemas": [
 		{
 			"identifier": "batch_update_findings/schema.py",
