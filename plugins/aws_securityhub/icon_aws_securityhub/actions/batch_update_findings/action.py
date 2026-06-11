@@ -1,10 +1,17 @@
 import insightconnect_plugin_runtime
-from .schema import BatchUpdateFindingsInput, BatchUpdateFindingsOutput, Input, Output, Component
+from .schema import (
+    BatchUpdateFindingsInput,
+    BatchUpdateFindingsOutput,
+    Input,
+    Output,
+    Component,
+)
 
 # Custom imports below
 import logging
 
 logging.getLogger("botocore").setLevel(logging.CRITICAL)
+
 
 class BatchUpdateFindings(insightconnect_plugin_runtime.Action):
     def __init__(self):
@@ -56,4 +63,7 @@ class BatchUpdateFindings(insightconnect_plugin_runtime.Action):
             for finding in results["ProcessedFindings"]:
                 processed_findings.append(finding)
 
-        return {Output.PROCESSED_FINDINGS: processed_findings, Output.UNPROCESSED_FINDINGS: unprocessed_findings}
+        return {
+            Output.PROCESSED_FINDINGS: processed_findings,
+            Output.UNPROCESSED_FINDINGS: unprocessed_findings,
+        }

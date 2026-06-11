@@ -655,7 +655,7 @@ Example output:
 * If you encounter any issues configuring the plugin, check out the [plugin guide](https://insightconnect.help.rapid7.com/docs/aws-security-hub) for more details on how to configure this plugin.
 
 # Version History
-
+* 2.1.0 - Added functionality for batch updating findings in Security Hub
 * 2.0.5 - Resolved Snyk vulnerabilities | SDK bump to latest version (6.3.7)
 * 2.0.4 - Bumping requirements.txt | SDK bump to 6.1.4
 * 2.0.3 - Update `docs_url` in plugin spec with a new link to [plugin setup guide](https://docs.rapid7.com/insightconnect/aws-security-hub/)
