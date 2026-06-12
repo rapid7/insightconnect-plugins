@@ -4,32 +4,137 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Lists and describes Security Hub-aggregated findings that are specified by filter attributes"
+    DESCRIPTION = "Updates Security Hub-aggregated findings based on attributes"
 
 
 class Input:
-    FILTERS = "filters"
+    CONFIDENCE = "confidence"
+    CRITICALITY = "criticality"
+    FINDING_IDENTIFIERS = "finding_identifiers"
+    NOTE = "note"
+    RELATED_FINDINGS = "related_findings"
+    SEVERITY = "severity"
+    TYPES = "types"
+    USER_DEFINED_FIELDS = "user_defined_fields"
+    VERIFICATION_STATE = "verification_state"
+    WORKFLOW = "workflow"
 
 
 class Output:
-    FINDINGS = "Findings"
+    PROCESSED_FINDINGS = "processed_findings"
+    UNPROCESSED_FINDINGS = "unprocessed_findings"
 
 
-class GetFindingsInput(insightconnect_plugin_runtime.Input):
+class BatchUpdateFindingsInput(insightconnect_plugin_runtime.Input):
     schema = json.loads(
         r"""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "filters": {
-      "type": "object",
-      "title": "Filters",
-      "description": "An object of filters",
+    "confidence": {
+      "title": "Confidence",
+      "description": "The updated value for the finding confidence",
+      "order": 5
+    },
+    "criticality": {
+      "title": "Criticality",
+      "description": "The updated value for the level of importance assigned to the resources associated with the findings",
+      "order": 6
+    },
+    "finding_identifiers": {
+      "type": "array",
+      "title": "Finding Identifiers",
+      "description": "An object of finding identifiers",
+      "items": {
+        "$ref": "#/definitions/FindingIdentifiers"
+      },
       "order": 1
+    },
+    "note": {
+      "$ref": "#/definitions/NotePartial",
+      "title": "Note",
+      "description": "The updated note",
+      "order": 2
+    },
+    "related_findings": {
+      "type": "object",
+      "title": "Related Findings",
+      "description": "A list of findings that are related to the updated findings",
+      "order": 10
+    },
+    "severity": {
+      "type": "object",
+      "title": "Severity",
+      "description": "Used to update the finding severity",
+      "order": 3
+    },
+    "types": {
+      "title": "Types",
+      "description": "One or more finding types in the format of namespace/category/classifier that classify a finding",
+      "order": 7
+    },
+    "user_defined_fields": {
+      "title": "User Defined Fields",
+      "description": "A list of name/value string pairs associated with the finding. These are custom, user-defined fields added to a finding",
+      "order": 8
+    },
+    "verification_state": {
+      "title": "Verification State",
+      "description": "Indicates the veracity of a finding",
+      "order": 4
+    },
+    "workflow": {
+      "title": "Workflow",
+      "description": "Used to update the workflow status of a finding",
+      "order": 9
     }
   },
-  "definitions": {}
+  "required": [
+    "finding_identifiers"
+  ],
+  "definitions": {
+    "FindingIdentifiers": {
+      "type": "object",
+      "title": "FindingIdentifiers",
+      "properties": {
+        "Id": {
+          "type": "string",
+          "title": "ID",
+          "description": "Finding ID",
+          "order": 1
+        },
+        "ProductArn": {
+          "type": "string",
+          "title": "ProductArn",
+          "description": "Product ARN",
+          "order": 2
+        }
+      },
+      "required": [
+        "Id",
+        "ProductArn"
+      ]
+    },
+    "NotePartial": {
+      "type": "object",
+      "title": "NotePartial",
+      "properties": {
+        "Text": {
+          "type": "string",
+          "title": "Text",
+          "description": "Text",
+          "order": 1
+        },
+        "UpdatedBy": {
+          "type": "string",
+          "title": "Updated By",
+          "description": "Updated By",
+          "order": 2
+        }
+      }
+    }
+  }
 }
     """
     )
@@ -38,21 +143,30 @@ class GetFindingsInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class GetFindingsOutput(insightconnect_plugin_runtime.Output):
+class BatchUpdateFindingsOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads(
         r"""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "Findings": {
+    "processed_findings": {
       "type": "array",
-      "title": "Findings",
-      "description": "Security Hub-aggregated findings",
+      "title": "Processed Findings",
+      "description": "Security Hub processed changes",
       "items": {
         "$ref": "#/definitions/Findings"
       },
       "order": 1
+    },
+    "unprocessed_findings": {
+      "type": "array",
+      "title": "Unprocessed Findings",
+      "description": "Security Hub unprocessed changes",
+      "items": {
+        "$ref": "#/definitions/Findings"
+      },
+      "order": 2
     }
   },
   "definitions": {
