@@ -14,6 +14,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         super().__init__(input=ConnectionSchema())
         self.client = None
         self.bot = None
+        self.app_catalog_id = ""
         self.resource_endpoint = None
 
     def connect(self, params):  # pylint: disable=signature-differs
@@ -21,6 +22,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         tenant_id = params.get(Input.DIRECTORY_ID, "").strip()
         endpoint = params.get(Input.ENDPOINT, "Normal")
         app_secret = params.get(Input.APPLICATION_SECRET, {}).get("secretKey", "").strip()
+        self.app_catalog_id = params.get(Input.APP_CATALOG_ID, "").strip()
 
         self.resource_endpoint = RESOURCE_URL.get(endpoint)
 

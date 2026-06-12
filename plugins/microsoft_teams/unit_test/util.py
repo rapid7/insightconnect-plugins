@@ -30,6 +30,7 @@ class MockGraphApiClient:
         self.get_group_id_from_name = MagicMock()
         self.enable_teams_for_group = MagicMock()
         self.create_chat = MagicMock()
+        self.install_app_in_chat = MagicMock()
 
 
 class MockBotService:
@@ -44,6 +45,7 @@ class MockConnection:
     def __init__(self):
         self.tenant_id = "1"
         self.resource_endpoint = "https://graph.microsoft.com"
+        self.app_catalog_id = ""
         self.client = MockGraphApiClient()
         self.bot = MockBotService()
 
