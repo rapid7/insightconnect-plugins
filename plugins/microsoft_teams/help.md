@@ -1208,7 +1208,7 @@ Example output:
 
 # Version History
 
-* 8.0.0 - Major refactor to eliminate user account requirement | Switched to client_credentials (app-only) OAuth2 flow | Added Bot Framework for sending messages | Migrated all endpoints from /beta to /v1.0 | Removed username_password from connection | Removed username input from get_message_in_chat (now uses app permissions)
+* 8.0.0 - Major refactor to eliminate user account requirement | Switched to client_credentials (app-only) OAuth2 flow | Added Bot Framework for sending messages | Migrated all endpoints from /beta to /v1.0 | Removed username_password from connection | Removed username input from get_message_in_chat (now uses app permissions) | Add App Catalog ID to connection
 * 7.0.6 - Updated SDK to the latest version (6.5.1)
 * 7.0.5 - Updated SDK to the latest version (6.4.3)
 * 7.0.4 - Updated SDK to the latest version (6.4.2)
