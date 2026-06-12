@@ -17,14 +17,7 @@ class BotService(BaseClient):
     """
 
     def __init__(  # pylint: disable=too-many-arguments,too-many-positional-arguments
-        self,
-        app_id: str,
-        app_secret: str,
-        tenant_id: str,
-        endpoint: str,
-        logger: Logger,
-        graph_client=None,
-        app_catalog_id: str = "",
+        self, app_id: str, app_secret: str, tenant_id: str, endpoint: str, logger: Logger
     ):
         """
         Initialize the Bot Service.
@@ -34,8 +27,6 @@ class BotService(BaseClient):
         :param tenant_id: Azure AD tenant ID (used for single-tenant bot auth)
         :param endpoint: Endpoint type (Normal, GCC, etc.) for auth URL resolution
         :param logger: Logger instance
-        :param graph_client: GraphApiClient instance for auto-installing bot in chats
-        :param app_catalog_id: Teams App Catalog ID for auto-install (optional)
         """
         super().__init__(
             app_id=app_id,
@@ -46,8 +37,6 @@ class BotService(BaseClient):
             logger=logger,
         )
         self._service_url = BOT_SERVICE_URL
-        self._graph_client = graph_client
-        self._app_catalog_id = app_catalog_id
 
     def test(self):
         """
@@ -112,8 +101,7 @@ class BotService(BaseClient):
         """
         Send a message to a Teams chat via Bot Framework.
 
-        If the bot is not a participant in the chat and app_catalog_id is configured,
-        the bot will be automatically installed into the chat and the send retried.
+        The bot must be a participant in the chat for this to work.
 
         :param chat_id: The chat ID
         :param message: Message content
@@ -128,29 +116,13 @@ class BotService(BaseClient):
             "textFormat": "plain" if content_type == "text" else "xml",
         }
 
-        response = self._send_activity_raw(endpoint, activity)
-
-        if response.status_code == 403 and self._app_catalog_id and self._graph_client:
-            self._logger.info("Bot not in chat — auto-installing via App Catalog ID and retrying...")
-            self._graph_client.install_app_in_chat(chat_id, self._app_catalog_id)
-            response = self._send_activity_raw(endpoint, activity)
-
-        return self._handle_activity_response(response)
+        return self._send_activity(endpoint, activity)
 
     def _send_activity(self, endpoint: str, activity: dict) -> dict:
         """
         Send an activity to the Bot Framework.
 
         Includes a single retry on 401 (token expiry).
-        """
-        response = self._send_activity_raw(endpoint, activity)
-        return self._handle_activity_response(response)
-
-    def _send_activity_raw(self, endpoint: str, activity: dict):
-        """
-        Send an activity and return the raw response (with 401 retry).
-
-        Used when callers need to inspect the status code before handling.
         """
         headers = self._get_auth_headers()
         self._logger.info(f"Sending bot activity to: {endpoint}")
@@ -163,7 +135,7 @@ class BotService(BaseClient):
             headers = self._get_auth_headers(force_refresh=True)
             response = self._post_activity(endpoint, activity, headers)
 
-        return response
+        return self._handle_activity_response(response)
 
     def _post_activity(self, endpoint: str, activity: dict, headers: dict) -> requests.Response:
         """Post an activity to the Bot Framework endpoint."""
@@ -181,7 +153,8 @@ class BotService(BaseClient):
             raise PluginException(
                 cause="Bot is not authorized to send messages to this conversation",
                 assistance="Ensure the bot app is installed in the target team or added to the chat. "
-                "Go to the Teams channel > Manage channel > Apps and add your bot.",
+                "If you have configured the App Catalog ID in the connection, the bot will "
+                "attempt to auto-install itself on retry.",
                 data=response.text,
             )
 
