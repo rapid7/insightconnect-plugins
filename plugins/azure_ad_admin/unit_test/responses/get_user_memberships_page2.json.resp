@@ -1,0 +1,15 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#directoryObjects",
+  "value": [
+    {
+      "@odata.type": "#microsoft.graph.group",
+      "id": "cc5e52e5-fc24-5b44-ab66-8e8901234567",
+      "displayName": "Another Group",
+      "description": "Second page group",
+      "groupTypes": ["Unified"],
+      "mailEnabled": true,
+      "mailNickname": "AnotherGroup",
+      "securityEnabled": false
+    }
+  ]
+}
