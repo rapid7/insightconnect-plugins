@@ -1,0 +1,243 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: sentinelone_active_response
+title: SentinelOne Active Response
+description: Orchestrate endpoint response operations against SentinelOne-managed endpoints with a single autonomous action that resolves, executes, monitors, and reports
+version: 1.0.0
+connection_version: 1
+supported_versions: ["SentinelOne API v2.1"]
+vendor: rapid7
+support: rapid7
+cloud_ready: false
+status: []
+sdk:
+  type: slim
+  version: 6.5.1
+  user: nobody
+tags: [endpoint, containment, response]
+hub_tags:
+  use_cases: [threat_detection_and_response]
+  keywords: [sentinelone, endpoint, containment, orchestration]
+  features: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/sentinelone_active_response
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.sentinelone.com/
+key_features:
+  - "Autonomously contain or uncontain endpoints with a single action"
+  - "Automatically resolve endpoint identifiers (hostname, IP, MAC, agent ID) to SentinelOne agents"
+  - "Monitor containment operations and confirm state transitions with configurable timeout"
+  - "Return comprehensive structured reports suitable for incident documentation"
+requirements:
+  - "SentinelOne API token with permissions to query agents and perform network actions"
+  - "SentinelOne management console instance URL"
+version_history:
+  - "1.0.0 - Initial plugin with execute_response orchestrator action"
+references:
+  - "[SentinelOne API Documentation](https://usea1-partners.sentinelone.net/api-doc/overview)"
+links:
+  - "[SentinelOne](https://www.sentinelone.com/)"
+types:
+  agent_details:
+    agent_id:
+      title: Agent ID
+      description: SentinelOne agent identifier
+      type: string
+      required: true
+      example: "1234567890123456789"
+    hostname:
+      title: Hostname
+      description: Agent computer name
+      type: string
+      required: false
+      example: "WORKSTATION-01"
+    ip_address:
+      title: IP Address
+      description: Agent primary IP address
+      type: string
+      required: false
+      example: "192.168.1.100"
+    mac_address:
+      title: MAC Address
+      description: Agent primary MAC address
+      type: string
+      required: false
+      example: "00:1A:2B:3C:4D:5E"
+    operating_system:
+      title: Operating System
+      description: Agent OS name
+      type: string
+      required: false
+      example: "Windows 10 Pro"
+    network_status:
+      title: Network Status
+      description: Current network connectivity status
+      type: string
+      required: false
+      example: "connected"
+    site_name:
+      title: Site Name
+      description: SentinelOne site name
+      type: string
+      required: false
+      example: "Default Site"
+    group_name:
+      title: Group Name
+      description: SentinelOne group name
+      type: string
+      required: false
+      example: "Default Group"
+    active_threats:
+      title: Active Threats
+      description: Number of active threats on the agent
+      type: integer
+      required: false
+      example: 0
+    agent_version:
+      title: Agent Version
+      description: SentinelOne agent software version
+      type: string
+      required: false
+      example: "23.1.2.400"
+  resolution_metadata:
+    resolution_method:
+      title: Resolution Method
+      description: How the agent was resolved (direct, fallback, scored, error)
+      type: string
+      required: true
+      example: "direct"
+    successful_strategy:
+      title: Successful Strategy
+      description: The query parameter that yielded the final match
+      type: string
+      required: true
+      example: "computerName"
+    fallback_chain_attempted:
+      title: Fallback Chain Attempted
+      description: Ordered list of all query strategies attempted
+      type: "[]string"
+      required: true
+      example: '["uuid", "computerName"]'
+    confidence_score:
+      title: Confidence Score
+      description: Winning agent similarity score (null if scoring was not used)
+      type: float
+      required: false
+      example: 0.85
+  response_report:
+    agent:
+      title: Agent
+      description: Resolved agent details
+      type: agent_details
+      required: false
+    action_performed:
+      title: Action Performed
+      description: The intent that was executed
+      type: string
+      required: true
+      example: "contain"
+    result_status:
+      title: Result Status
+      description: Outcome of the operation (success, already_actioned, timeout, error)
+      type: string
+      required: true
+      example: "success"
+    network_status:
+      title: Network Status
+      description: Agent network status at report time
+      type: string
+      required: false
+      example: "disconnected"
+    summary:
+      title: Summary
+      description: Human-readable summary of the operation result
+      type: string
+      required: true
+      example: "Successfully contained endpoint WORKSTATION-01 (disconnected confirmed in 15s)"
+    error_cause:
+      title: Error Cause
+      description: Cause of the error if operation failed
+      type: string
+      required: false
+      example: ""
+    error_remediation:
+      title: Error Remediation
+      description: Suggested remediation if operation failed
+      type: string
+      required: false
+      example: ""
+    elapsed_time:
+      title: Elapsed Time
+      description: Time in seconds spent in the monitoring phase
+      type: float
+      required: false
+      example: 15.2
+    timestamp:
+      title: Timestamp
+      description: ISO 8601 timestamp when the report was generated
+      type: string
+      required: true
+      example: "2024-01-15T10:30:00Z"
+    resolution_metadata:
+      title: Resolution Metadata
+      description: Metadata about how the endpoint identifier was resolved
+      type: resolution_metadata
+      required: true
+      example: '{"resolution_method": "direct", "successful_strategy": "computerName", "fallback_chain_attempted": ["computerName"], "confidence_score": null}'
+connection:
+  instance:
+    title: Instance
+    description: SentinelOne instance subdomain (e.g. usea1-partners)
+    type: string
+    required: true
+    example: usea1-partners
+  api_key:
+    title: API Key
+    description: SentinelOne API token
+    type: credential_secret_key
+    required: true
+    example: '{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}'
+actions:
+  execute_response:
+    title: Execute Response
+    description: Autonomously resolve an endpoint, execute the requested response operation, monitor for confirmation, and return a comprehensive report
+    input:
+      endpoint_identifier:
+        title: Endpoint Identifier
+        description: Hostname, IP address, MAC address, or SentinelOne agent ID of the target endpoint
+        type: string
+        required: true
+        example: "WORKSTATION-01"
+      intent:
+        title: Intent
+        description: Desired response operation to perform
+        type: string
+        required: true
+        enum:
+          - contain
+          - uncontain
+          - status
+          - info
+        example: contain
+      timeout:
+        title: Timeout
+        description: Maximum seconds to wait during the monitoring phase
+        type: integer
+        required: false
+        default: 120
+        example: 120
+      polling_interval:
+        title: Polling Interval
+        description: Seconds between status checks during the monitoring phase
+        type: integer
+        required: false
+        default: 10
+        example: 10
+    output:
+      report:
+        title: Report
+        description: Comprehensive structured report of the operation result
+        type: response_report
+        required: true
+        example: '{"action_performed": "contain", "result_status": "success", "network_status": "disconnected", "summary": "Successfully contained endpoint WORKSTATION-01 (disconnected confirmed in 15s)", "timestamp": "2024-01-15T10:30:00Z", "elapsed_time": 15.2, "agent": {"agent_id": "1234567890123456789", "hostname": "WORKSTATION-01", "ip_address": "192.168.1.100", "mac_address": "00:1A:2B:3C:4D:5E", "operating_system": "Windows 10 Pro", "network_status": "disconnected", "site_name": "Default Site", "group_name": "Default Group", "active_threats": 0, "agent_version": "23.1.2.400"}}'
