@@ -1,6 +1,6 @@
 # Description
 
-[Azure](https://azure.microsoft.com) AD Admin performs administrative tasks in Azure AD.
+Microsoft Entra ID Admin performs administrative tasks in Microsoft Entra ID (formerly Azure AD).
 
 It uses the [User](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0) endpoint in the [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-1.0)
 
@@ -10,23 +10,27 @@ It uses the [User](https://docs.microsoft.com/en-us/graph/api/resources/user?vie
 * Disable and enable users
 * Force users to change their password
 * Enable, disable, get, search and delete devices
+* Get user group and role memberships
 
 # Requirements
 
-* The application this plugin connects to needs the following permissions: 
-	* Directory.AccessAsUser.All 
+* The application this plugin connects to needs the following Application permissions in Microsoft Graph: 
 	* Directory.ReadWrite.All 
 	* User.ReadWrite.All 
-	* IdentityRiskEvent.Read.All (Types: Delegated, Application) 
 	* Device.ReadWrite.All 
+	* IdentityRiskEvent.Read.All 
 
-All those permissions can be set in Azure Portal. Under `App registrations` -> `<SELECT_YOUR_AZURE_AD_ADMIN_APP>` -> `API permissions`.
+All permissions can be set in the Azure Portal under `App registrations` -> `<YOUR_APP>` -> `API permissions` -> `Add a permission` -> `Microsoft Graph` -> `Application permissions`. Admin consent must be granted after adding permissions.
 
-* The application will need to be added to the `Global Administrator` role. This can be done in `Roles and administrators` in Microsoft Entra ID (Azure Active Directory) via the Azure Portal. 
+* The application will need a directory role assigned to perform write operations on users and devices. Choose the least-privileged role for your use case: 
+	* **User Administrator** - manage non-admin users (disable, enable, create, delete, password reset) 
+	* **Cloud Device Administrator** - manage devices (enable, disable, delete) 
+	* **Privileged Authentication Administrator** - manage all users including admins (except Global Admins) 
+	* **Global Administrator** - only required if managing other Global Admin accounts 
 
-To set this up, go to `Microsoft Entra ID` -> `Application Registrations`. Select the application to which you want to add the role and open the `Roles and Administrators` tab. Above the `Roles` table you will see a note saying `[...] this resource and can only be assigned here at directory level`. Click on this `here` link. 
+Recommended minimum: assign `User Administrator` and `Cloud Device Administrator`. Only escalate to Global Administrator if you need to disable/enable accounts that hold admin roles. 
 
-This should open the `All Roles' tab. Locate `Global Administrator` and click on it. To add your application to the role, you'll need to click the `Add assignments` button. Browse and select your application and click `Add`.
+To assign a role, go to `Microsoft Entra ID` -> `Roles and administrators`. Select the desired role, click `Add assignments`, search for your application, and click `Add`.
 
 # Supported Product Versions
 
@@ -575,6 +579,56 @@ Example output:
 }
 ```
 
+#### Get User Memberships
+
+This action is used to get the groups and directory roles that a user is a direct member of. Returns up to 100 
+memberships per page by default. If more results are available, the next_link output will contain a pagination URL that 
+can be passed back as input in a loop step to retrieve additional pages
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|next_link|string|None|False|Pagination link returned from a previous run. If provided, the action will fetch the next page of results instead of starting from the beginning|None|https://graph.microsoft.com/v1.0/users/user@example.com/memberOf?$skiptoken=abc123|None|None|
+|user_id|string|None|True|User ID or user principal name to retrieve memberships for|None|user@example.com|None|None|
+  
+Example input:
+
+```
+{
+  "next_link": "https://graph.microsoft.com/v1.0/users/user@example.com/memberOf?$skiptoken=abc123",
+  "user_id": "user@example.com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|count|integer|False|Number of memberships found in this page|3|
+|memberships|[]object|False|List of groups and directory roles the user is a member of|[{"@odata.type":"#microsoft.graph.group","id":"bb4d41d4-eb13-4a33-99b5-7d7290df22e9","displayName":"Test Group","groupTypes":["Unified"],"securityEnabled":true}]|
+|next_link|string|False|Pagination link for the next page of results. Empty if there are no more pages|https://graph.microsoft.com/v1.0/users/user@example.com/memberOf?$skiptoken=abc123|
+  
+Example output:
+
+```
+{
+  "count": 3,
+  "memberships": [
+    {
+      "@odata.type": "#microsoft.graph.group",
+      "displayName": "Test Group",
+      "groupTypes": [
+        "Unified"
+      ],
+      "id": "bb4d41d4-eb13-4a33-99b5-7d7290df22e9",
+      "securityEnabled": true
+    }
+  ],
+  "next_link": "https://graph.microsoft.com/v1.0/users/user@example.com/memberOf?$skiptoken=abc123"
+}
+```
+
 #### List Group Members
 
 This action is used to get a list of the group's direct members. A group can have users, organizational contacts, 
@@ -1106,6 +1160,7 @@ Example output:
 
 # Version History
 
+* 5.1.0 - Renamed plugin to Microsoft Entra ID Admin | New action Get User Memberships. | Updated SDK to the latest version (6.5.1)
 * 5.0.1 - `Search Devices`: Fixed issue where devices output was limited | Updated SDK to the latest version (6.4.1)
 * 5.0.0 - Update SDK to the latest version | Update the output type of `risk` for the `risk_detection` trigger to include all fields
 * 4.2.0 - New action | List Group Members
@@ -1135,7 +1190,7 @@ Example output:
 
 # Links
 
-* [Azure AD Admin](https://azure.microsoft.com)
+* [Microsoft Entra ID](https://entra.microsoft.com)
 
 ## References
 
