@@ -1,0 +1,7 @@
+.dockerignore
+.gitignore
+**/__pycache__
+*.pyc
+*.tar.gz
+unit_test/
+tests/
