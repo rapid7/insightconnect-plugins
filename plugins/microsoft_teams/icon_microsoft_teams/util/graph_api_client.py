@@ -16,7 +16,14 @@ class GraphApiClient(BaseClient):
     """Microsoft Graph API client using application-only (client_credentials) authentication."""
 
     def __init__(  # pylint: disable=too-many-arguments,too-many-positional-arguments
-        self, app_id: str, app_secret: str, tenant_id: str, base_url: str, endpoint: str, logger: Logger
+        self,
+        app_id: str,
+        app_secret: str,
+        tenant_id: str,
+        base_url: str,
+        endpoint: str,
+        logger: Logger,
+        app_catalog_id: str = "",
     ):
         """
         Initialize the Graph API client.
@@ -38,6 +45,9 @@ class GraphApiClient(BaseClient):
 
         :param logger: Logger instance
         :type logger: Logger
+
+        :param app_catalog_id: Teams App Catalog ID for auto-installing bot in chats (optional)
+        :type app_catalog_id: str
         """
         super().__init__(
             app_id=app_id,
@@ -48,6 +58,7 @@ class GraphApiClient(BaseClient):
             logger=logger,
         )
         self._base_url = base_url
+        self.app_catalog_id = app_catalog_id
 
     def test(self):
         """
@@ -487,34 +498,11 @@ class GraphApiClient(BaseClient):
 
     def create_chat(self, members: list, topic: str = None) -> dict:
         """Create a new chat."""
-        endpoint = "/v1.0/chats"
-        payload = {}
+        payload = self._build_chat_payload(members, topic)
 
-        list_members = []
-        for member in members:
-            formatted_member = {
-                "@odata.type": "#microsoft.graph.aadUserConversationMember",
-                "roles": [member.get("role", "owner")],
-                "user@odata.bind": f"{self._base_url}/v1.0/users('{member.get('user_info')}')",
-            }
-            list_members.append(formatted_member)
+        self._logger.info(f"Creating chat with {len(members)} members")
 
-        if len(list_members) == 2:
-            payload["chatType"] = "oneOnOne"
-        elif len(list_members) > 2:
-            payload["chatType"] = "group"
-            if topic:
-                payload["topic"] = topic
-        else:
-            raise PluginException(
-                cause="Create chat failed.",
-                assistance="At least 2 members are required to create a chat.",
-            )
-
-        payload["members"] = list_members
-
-        self._logger.info(f"Creating chat with {len(list_members)} members")
-        url = f"{self._base_url}{endpoint}"
+        url = f"{self._base_url}/v1.0/chats"
         response = self._call_api("POST", url, headers=self._get_auth_headers(), json=payload)
 
         if response.status_code == 201:
@@ -529,6 +517,55 @@ class GraphApiClient(BaseClient):
 
         self._raise_for_status(response)
         return {}
+
+    def _build_chat_payload(self, members: list, topic: str = None) -> dict:
+        """Build the request payload for chat creation."""
+        payload = {}
+
+        list_members = [
+            {
+                "@odata.type": "#microsoft.graph.aadUserConversationMember",
+                "roles": [member.get("role", "owner")],
+                "user@odata.bind": f"{self._base_url}/v1.0/users('{member.get('user_info')}')",
+            }
+            for member in members
+        ]
+
+        if len(list_members) == 2:
+            payload["chatType"] = "oneOnOne"
+        elif len(list_members) > 2:
+            payload["chatType"] = "group"
+            if topic:
+                payload["topic"] = topic
+        else:
+            raise PluginException(
+                cause="Create chat failed.",
+                assistance="At least 2 members are required to create a chat.",
+            )
+
+        payload["members"] = list_members
+        return payload
+
+    # ─── App Installation ─────────────────────────────────────────────────────────
+
+    def install_app_in_chat(self, chat_id: str) -> None:
+        """
+        Install the configured Teams app (bot) into a chat.
+
+        :param chat_id: The chat ID
+        """
+        endpoint = f"/v1.0/chats/{chat_id}/installedApps"
+        payload = {"teamsApp@odata.bind": f"{self._base_url}/v1.0/appCatalogs/teamsApps/{self.app_catalog_id}"}
+
+        self._logger.info(f"Installing app {self.app_catalog_id} in chat {chat_id}")
+        url = f"{self._base_url}{endpoint}"
+        response = self._call_api("POST", url, headers=self._get_auth_headers(), json=payload)
+
+        if response.status_code in (200, 201):
+            self._logger.info("App installed successfully in chat")
+            return
+
+        self._raise_for_status(response)
 
     # ─── Helpers ──────────────────────────────────────────────────────────────────
 

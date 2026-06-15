@@ -55,7 +55,7 @@ references:
 - '[Adaptive Cards Actions](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/cards/cards-actions#adaptive-cards-actions)'
 - '[Python Regular Expression Library (Re)](https://docs.python.org/3.7/library/re.html)'
 version_history:
-- 8.0.0 - Major refactor to eliminate user account requirement | Switched to client_credentials (app-only) OAuth2 flow | Added Bot Framework for sending messages | Migrated all endpoints from /beta to /v1.0 | Removed username_password from connection | Removed username input from get_message_in_chat (now uses app permissions)
+- 8.0.0 - Major refactor to eliminate user account requirement | Switched to client_credentials (app-only) OAuth2 flow | Added Bot Framework for sending messages | Migrated all endpoints from /beta to /v1.0 | Removed username_password from connection | Removed username input from get_message_in_chat (now uses app permissions) | Add App Catalog ID to connection
 - 7.0.6 - Updated SDK to the latest version (6.5.1)
 - 7.0.5 - Updated SDK to the latest version (6.4.3)
 - 7.0.4 - Updated SDK to the latest version (6.4.2)
@@ -584,6 +584,12 @@ connection:
     - GCC
     - GCC High
     - DoD
+  app_catalog_id:
+    title: App Catalog ID
+    description: The Teams App Catalog ID of the bot. When set, the plugin will automatically install the bot into chats before sending messages. Find this in the Teams Admin Center under Manage Apps.
+    type: string
+    required: false
+    example: 05F59CEC-A742-4A50-A62E-202A57E478A4
 
 triggers:
   new_message_received:

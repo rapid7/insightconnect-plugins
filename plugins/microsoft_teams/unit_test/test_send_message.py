@@ -4,6 +4,7 @@ import sys
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
+from unittest.mock import MagicMock
 
 from icon_microsoft_teams.actions.send_message import SendMessage
 from icon_microsoft_teams.actions.send_message.schema import Input, SendMessageInput, SendMessageOutput
@@ -18,6 +19,12 @@ class TestSendMessage(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.action = Util.default_connector(SendMessage())
+
+    def setUp(self) -> None:
+        # Reset mocks between tests
+        self.action.connection.bot.send_chat_message.reset_mock()
+        self.action.connection.bot.send_channel_message.reset_mock()
+        self.action.connection.client.install_app_in_chat.reset_mock()
 
     def test_send_message_to_channel(self) -> None:
         self.action.connection.client.get_teams.return_value = [{"id": "12345", "displayName": "Example Team"}]
@@ -56,6 +63,55 @@ class TestSendMessage(TestCase):
         self.action.connection.bot.send_chat_message.assert_called_once_with("19:abc123@thread.v2", "Chat message")
         self.assertEqual(actual["message"]["body"]["content"], "Chat message")
         validate(actual, SendMessageOutput.schema)
+
+    def test_send_message_to_chat_auto_install_on_403(self) -> None:
+        """On 403 with app_catalog_id configured, installs bot and retries."""
+        self.action.connection.client.app_catalog_id = "APP-CATALOG-123"
+        self.action.connection.bot.send_chat_message.side_effect = [
+            PluginException(
+                cause="Bot is not authorized to send messages to this conversation",
+                assistance="",
+                data="",
+            ),
+            {"id": "msg-after-install"},
+        ]
+
+        test_input = {
+            Input.MESSAGE: "Auto install test",
+            Input.CHAT_ID: "19:chat-id@thread.v2",
+        }
+        validate(test_input, SendMessageInput.schema)
+        actual = self.action.run(test_input)
+
+        self.action.connection.client.install_app_in_chat.assert_called_once_with("19:chat-id@thread.v2")
+        self.assertEqual(actual["message"]["id"], "msg-after-install")
+        validate(actual, SendMessageOutput.schema)
+
+        # Reset for other tests
+        self.action.connection.client.app_catalog_id = ""
+        self.action.connection.bot.send_chat_message.side_effect = None
+
+    def test_send_message_to_chat_403_no_app_catalog_raises(self) -> None:
+        """On 403 without app_catalog_id, raises PluginException."""
+        self.action.connection.client.app_catalog_id = ""
+        self.action.connection.bot.send_chat_message.side_effect = PluginException(
+            cause="Bot is not authorized to send messages to this conversation",
+            assistance="",
+            data="",
+        )
+
+        test_input = {
+            Input.MESSAGE: "Should fail",
+            Input.CHAT_ID: "19:chat-id@thread.v2",
+        }
+        validate(test_input, SendMessageInput.schema)
+        with self.assertRaises(PluginException) as context:
+            self.action.run(test_input)
+        self.assertIn("not authorized", context.exception.cause)
+        self.action.connection.client.install_app_in_chat.assert_not_called()
+
+        # Reset
+        self.action.connection.bot.send_chat_message.side_effect = None
 
     def test_send_message_to_thread(self) -> None:
         self.action.connection.client.get_teams.return_value = [{"id": "12345", "displayName": "Example Team"}]
