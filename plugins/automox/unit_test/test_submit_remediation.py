@@ -77,12 +77,6 @@ class TestSubmitRemediation(TestCase):
             self.action.run(self.params)
         self.assertEqual(getattr(context.exception, attr), expected)
 
-    def test_invalid_action_type(self) -> None:
-        self.params[Input.ACTION_TYPE] = "invalid"
-        with self.assertRaises(PluginException) as context:
-            self.action.run(self.params)
-        self.assertEqual(context.exception.cause, "Invalid action_type")
-
     @parameterized.expand(
         [
             (mock_request_403, PluginException.causes[PluginException.Preset.API_KEY]),

@@ -454,8 +454,8 @@ class ApiClient:
         return self.remove_null_values(self._call_api("GET", f"{self.endpoint}/events", params))
 
     # Remediations
-    @staticmethod
-    def _validate_remediation_device(index: int, device: Dict) -> None:
+    def _validate_and_expand_device(self, index: int, device: Dict) -> List[Dict]:
+        """Validate a device entry and split into multiple entries if CVEs exceed the API limit."""
         if not isinstance(device.get("id"), str):
             raise PluginException(
                 cause="Invalid input",
@@ -467,14 +467,19 @@ class ApiClient:
                 assistance=f"Device at index {index} is missing required non-empty array field 'cves'.",
             )
 
-    def _parse_and_validate_devices(self, action_type: str, devices_input: str) -> List[Dict]:
-        """Parse devices JSON, validate action_type, and validate each device entry."""
-        if action_type not in ("remediate", "match"):
-            raise PluginException(
-                cause="Invalid action_type",
-                assistance="action_type must be 'remediate' or 'match'.",
-            )
+        cves = device["cves"]
+        max_cves = self.REMEDIATION_MAX_CVES_PER_DEVICE
+        if len(cves) <= max_cves:
+            return [device]
 
+        self.logger.info(
+            f"Device '{device.get('id')}' has {len(cves)} CVEs, splitting into "
+            f"{(len(cves) + max_cves - 1) // max_cves} sub-entries"
+        )
+        return [{**device, "cves": cves[j : j + max_cves]} for j in range(0, len(cves), max_cves)]
+
+    def _parse_and_expand_devices(self, devices_input: str) -> tuple:
+        """Parse devices JSON, validate each device, and expand any with >500 CVEs."""
         try:
             devices = json.loads(devices_input)
         except (json.JSONDecodeError, TypeError):
@@ -489,27 +494,12 @@ class ApiClient:
                 assistance="devices_input must be a non-empty JSON array of device objects.",
             )
 
-        for i, device in enumerate(devices):
-            self._validate_remediation_device(i, device)
-
-        return devices
-
-    def _expand_devices_by_cve_limit(self, devices: List[Dict]) -> List[Dict]:
-        """Split devices with more than REMEDIATION_MAX_CVES_PER_DEVICE CVEs into multiple entries."""
+        original_device_count = len(devices)
         expanded_devices = []
-        max_cves = self.REMEDIATION_MAX_CVES_PER_DEVICE
-        for device in devices:
-            cves = device["cves"]
-            if len(cves) <= max_cves:
-                expanded_devices.append(device)
-            else:
-                self.logger.info(
-                    f"Device '{device.get('id')}' has {len(cves)} CVEs, splitting into "
-                    f"{(len(cves) + max_cves - 1) // max_cves} sub-entries"
-                )
-                for j in range(0, len(cves), max_cves):
-                    expanded_devices.append({**device, "cves": cves[j : j + max_cves]})
-        return expanded_devices
+        for i, device in enumerate(devices):
+            expanded_devices.extend(self._validate_and_expand_device(i, device))
+
+        return expanded_devices, original_device_count
 
     def submit_remediation(self, org_id: int, action_type: str, devices_input: str) -> Dict:
         """
@@ -520,9 +510,7 @@ class ApiClient:
         :param devices_input: JSON string containing an array of device objects
         :return: Dict with batch_uuid, total_devices, chunks_sent, and collected responses
         """
-        devices = self._parse_and_validate_devices(action_type, devices_input)
-        original_device_count = len(devices)
-        devices = self._expand_devices_by_cve_limit(devices)
+        devices, original_device_count = self._parse_and_expand_devices(devices_input)
 
         # Resolve integer org ID to org UUID for the remediate endpoint
         org = self.get_org(org_id)
