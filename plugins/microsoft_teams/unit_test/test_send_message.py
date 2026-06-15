@@ -66,7 +66,7 @@ class TestSendMessage(TestCase):
 
     def test_send_message_to_chat_auto_install_on_403(self) -> None:
         """On 403 with app_catalog_id configured, installs bot and retries."""
-        self.action.connection.app_catalog_id = "APP-CATALOG-123"
+        self.action.connection.client.app_catalog_id = "APP-CATALOG-123"
         self.action.connection.bot.send_chat_message.side_effect = [
             PluginException(
                 cause="Bot is not authorized to send messages to this conversation",
@@ -83,19 +83,17 @@ class TestSendMessage(TestCase):
         validate(test_input, SendMessageInput.schema)
         actual = self.action.run(test_input)
 
-        self.action.connection.client.install_app_in_chat.assert_called_once_with(
-            "19:chat-id@thread.v2", "APP-CATALOG-123"
-        )
+        self.action.connection.client.install_app_in_chat.assert_called_once_with("19:chat-id@thread.v2")
         self.assertEqual(actual["message"]["id"], "msg-after-install")
         validate(actual, SendMessageOutput.schema)
 
         # Reset for other tests
-        self.action.connection.app_catalog_id = ""
+        self.action.connection.client.app_catalog_id = ""
         self.action.connection.bot.send_chat_message.side_effect = None
 
     def test_send_message_to_chat_403_no_app_catalog_raises(self) -> None:
         """On 403 without app_catalog_id, raises PluginException."""
-        self.action.connection.app_catalog_id = ""
+        self.action.connection.client.app_catalog_id = ""
         self.action.connection.bot.send_chat_message.side_effect = PluginException(
             cause="Bot is not authorized to send messages to this conversation",
             assistance="",

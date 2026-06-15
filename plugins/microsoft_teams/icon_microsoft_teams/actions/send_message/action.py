@@ -65,7 +65,7 @@ class SendMessage(insightconnect_plugin_runtime.Action):
     def _send_chat_message_with_auto_install(self, chat_id: str, message: str) -> dict:
         """
         Send a chat message, auto-installing the bot if it gets a 403 and
-        app_catalog_id is configured on the connection.
+        app_catalog_id is configured on the graph client.
         """
         try:
             return self.connection.bot.send_chat_message(chat_id, message)
@@ -73,10 +73,9 @@ class SendMessage(insightconnect_plugin_runtime.Action):
             if "not authorized" not in error.cause:
                 raise
 
-            app_catalog_id = self.connection.app_catalog_id
-            if not app_catalog_id:
+            if not self.connection.client.app_catalog_id:
                 raise
 
             self.logger.info("Bot not in chat — installing app and retrying...")
-            self.connection.client.install_app_in_chat(chat_id, app_catalog_id)
+            self.connection.client.install_app_in_chat(chat_id)
             return self.connection.bot.send_chat_message(chat_id, message)

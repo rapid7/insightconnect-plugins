@@ -11,6 +11,7 @@ class MockGraphApiClient:
     """Mock Graph API client for unit tests."""
 
     def __init__(self):
+        self.app_catalog_id = ""
         self.get_teams = MagicMock()
         self.get_channels = MagicMock()
         self.create_channel = MagicMock()
@@ -45,7 +46,6 @@ class MockConnection:
     def __init__(self):
         self.tenant_id = "1"
         self.resource_endpoint = "https://graph.microsoft.com"
-        self.app_catalog_id = ""
         self.client = MockGraphApiClient()
         self.bot = MockBotService()
 

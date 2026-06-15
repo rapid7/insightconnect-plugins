@@ -16,7 +16,14 @@ class GraphApiClient(BaseClient):
     """Microsoft Graph API client using application-only (client_credentials) authentication."""
 
     def __init__(  # pylint: disable=too-many-arguments,too-many-positional-arguments
-        self, app_id: str, app_secret: str, tenant_id: str, base_url: str, endpoint: str, logger: Logger
+        self,
+        app_id: str,
+        app_secret: str,
+        tenant_id: str,
+        base_url: str,
+        endpoint: str,
+        logger: Logger,
+        app_catalog_id: str = "",
     ):
         """
         Initialize the Graph API client.
@@ -38,6 +45,9 @@ class GraphApiClient(BaseClient):
 
         :param logger: Logger instance
         :type logger: Logger
+
+        :param app_catalog_id: Teams App Catalog ID for auto-installing bot in chats (optional)
+        :type app_catalog_id: str
         """
         super().__init__(
             app_id=app_id,
@@ -48,6 +58,7 @@ class GraphApiClient(BaseClient):
             logger=logger,
         )
         self._base_url = base_url
+        self.app_catalog_id = app_catalog_id
 
     def test(self):
         """
@@ -537,17 +548,16 @@ class GraphApiClient(BaseClient):
 
     # ─── App Installation ─────────────────────────────────────────────────────────
 
-    def install_app_in_chat(self, chat_id: str, app_id: str) -> None:
+    def install_app_in_chat(self, chat_id: str) -> None:
         """
-        Install a Teams app into a chat.
+        Install the configured Teams app (bot) into a chat.
 
         :param chat_id: The chat ID
-        :param app_id: The Teams App Catalog ID
         """
         endpoint = f"/v1.0/chats/{chat_id}/installedApps"
-        payload = {"teamsApp@odata.bind": f"{self._base_url}/v1.0/appCatalogs/teamsApps/{app_id}"}
+        payload = {"teamsApp@odata.bind": f"{self._base_url}/v1.0/appCatalogs/teamsApps/{self.app_catalog_id}"}
 
-        self._logger.info(f"Installing app {app_id} in chat {chat_id}")
+        self._logger.info(f"Installing app {self.app_catalog_id} in chat {chat_id}")
         url = f"{self._base_url}{endpoint}"
         response = self._call_api("POST", url, headers=self._get_auth_headers(), json=payload)
 
