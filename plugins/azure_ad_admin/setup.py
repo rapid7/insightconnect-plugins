@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="azure_ad_admin-rapid7-plugin",
-    version="5.1.1",
+    version="6.0.0",
     description="Microsoft Entra ID Admin performs administrative tasks in Microsoft Entra ID (formerly Azure AD).It uses the [User](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0) endpoint in the [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-1.0)",
     author="rapid7",
     author_email="",

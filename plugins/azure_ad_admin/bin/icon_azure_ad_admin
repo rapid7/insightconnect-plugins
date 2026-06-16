@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Microsoft Entra ID Admin"
 Vendor = "rapid7"
-Version = "5.1.1"
+Version = "6.0.0"
 Description = "Microsoft Entra ID Admin performs administrative tasks in Microsoft Entra ID (formerly Azure AD).It uses the [User](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0) endpoint in the [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-1.0)"
 
 
