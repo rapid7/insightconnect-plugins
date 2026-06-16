@@ -63,6 +63,6 @@ class BatchUpdateFindings(insightconnect_plugin_runtime.Action):
             )
 
         return {
-            Output.PROCESSED_FINDINGS: results.get("ProcessedFindings", []),
-            Output.UNPROCESSED_FINDINGS: results.get("UnprocessedFindings", []),
+            Output.PROCESSEDFINDINGS: results.get("ProcessedFindings", []),
+            Output.UNPROCESSEDFINDINGS: results.get("UnprocessedFindings", []),
         }
