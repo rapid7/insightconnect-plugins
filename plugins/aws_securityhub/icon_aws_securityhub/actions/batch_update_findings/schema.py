@@ -21,8 +21,8 @@ class Input:
 
 
 class Output:
-    PROCESSED_FINDINGS = "processed_findings"
-    UNPROCESSED_FINDINGS = "unprocessed_findings"
+    PROCESSEDFINDINGS = "ProcessedFindings"
+    UNPROCESSEDFINDINGS = "UnprocessedFindings"
 
 
 class BatchUpdateFindingsInput(insightconnect_plugin_runtime.Input):
@@ -33,11 +33,13 @@ class BatchUpdateFindingsInput(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "confidence": {
+      "type": "integer",
       "title": "Confidence",
       "description": "The updated value for the finding confidence",
       "order": 5
     },
     "criticality": {
+      "type": "integer",
       "title": "Criticality",
       "description": "The updated value for the level of importance assigned to the resources associated with the findings",
       "order": 6
@@ -58,9 +60,12 @@ class BatchUpdateFindingsInput(insightconnect_plugin_runtime.Input):
       "order": 2
     },
     "related_findings": {
-      "type": "object",
+      "type": "array",
       "title": "Related Findings",
       "description": "A list of findings that are related to the updated findings",
+      "items": {
+        "$ref": "#/definitions/RelatedFindings"
+      },
       "order": 10
     },
     "severity": {
@@ -70,11 +75,16 @@ class BatchUpdateFindingsInput(insightconnect_plugin_runtime.Input):
       "order": 3
     },
     "types": {
+      "type": "array",
       "title": "Types",
       "description": "One or more finding types in the format of namespace/category/classifier that classify a finding",
+      "items": {
+        "type": "string"
+      },
       "order": 7
     },
     "user_defined_fields": {
+      "type": "object",
       "title": "User Defined Fields",
       "description": "A list of name/value string pairs associated with the finding. These are custom, user-defined fields added to a finding",
       "order": 8
@@ -85,6 +95,7 @@ class BatchUpdateFindingsInput(insightconnect_plugin_runtime.Input):
       "order": 4
     },
     "workflow": {
+      "$ref": "#/definitions/Workflow",
       "title": "Workflow",
       "description": "Used to update the workflow status of a finding",
       "order": 9
@@ -133,6 +144,45 @@ class BatchUpdateFindingsInput(insightconnect_plugin_runtime.Input):
           "order": 2
         }
       }
+    },
+    "Workflow": {
+      "type": "object",
+      "title": "Workflow",
+      "properties": {
+        "Status": {
+          "type": "string",
+          "title": "Status",
+          "description": "Workflow status",
+          "enum": [
+            "NEW",
+            "NOTIFIED",
+            "RESOLVED",
+            "SUPPRESSED"
+          ],
+          "order": 1
+        }
+      },
+      "required": [
+        "Status"
+      ]
+    },
+    "RelatedFindings": {
+      "type": "object",
+      "title": "RelatedFindings",
+      "properties": {
+        "Id": {
+          "type": "string",
+          "title": "ID",
+          "description": "ID",
+          "order": 1
+        },
+        "ProductArn": {
+          "type": "string",
+          "title": "Product ARN",
+          "description": "Product ARN",
+          "order": 2
+        }
+      }
     }
   }
 }
@@ -150,7 +200,7 @@ class BatchUpdateFindingsOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "processed_findings": {
+    "ProcessedFindings": {
       "type": "array",
       "title": "Processed Findings",
       "description": "Security Hub processed changes",
@@ -159,7 +209,7 @@ class BatchUpdateFindingsOutput(insightconnect_plugin_runtime.Output):
       },
       "order": 1
     },
-    "unprocessed_findings": {
+    "UnprocessedFindings": {
       "type": "array",
       "title": "Unprocessed Findings",
       "description": "Security Hub unprocessed changes",

@@ -53,8 +53,6 @@ class BatchUpdateFindings(insightconnect_plugin_runtime.Action):
         filtered_params = {param: value for param, value in update_params.items() if value is not None}
         client = self.connection.aws.client("securityhub")
 
-        results = client.batch_update_findings(**filtered_params)
-
         try:
             results = client.batch_update_findings(**filtered_params)
         except ClientError as error:
