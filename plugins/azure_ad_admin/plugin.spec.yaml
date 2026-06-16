@@ -4,7 +4,7 @@ products: [insightconnect]
 name: azure_ad_admin
 title: Microsoft Entra ID Admin
 description: "Microsoft Entra ID Admin performs administrative tasks in Microsoft Entra ID (formerly Azure AD).\n\nIt uses the [User](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0) endpoint in the [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-1.0)"
-version: 5.1.0
+version: 5.1.1
 connection_version: 4
 vendor: rapid7
 cloud_ready: true
@@ -37,6 +37,7 @@ requirements:
   \n\nTo assign a role, go to `Microsoft Entra ID` -> `Roles and administrators`. Select the desired role, click `Add assignments`, search for your application, and click `Add`."
 troubleshooting: "Trigger `risk_detection` needs Application permission to set as `IdentityRiskEvent.Read.All`"
 version_history:
+  - "5.1.1 - `Get User Info`: Fixed output validation error when manager has `employeeOrgData` populated with `costCenter` or `division`"
   - "5.1.0 - Renamed plugin to Microsoft Entra ID Admin | New action Get User Memberships. | Updated SDK to the latest version (6.5.1)"
   - "5.0.1 - `Search Devices`: Fixed issue where devices output was limited | Updated SDK to the latest version (6.4.1)"
   - "5.0.0 - Update SDK to the latest version | Update the output type of `risk` for the `risk_detection` trigger to include all fields"
@@ -83,6 +84,17 @@ hub_tags:
   keywords: [azure, microsoft, entra id, active directory, administration, cloud_enabled]
   features: []
 types:
+  employeeOrgData:
+    costCenter:
+      title: Cost Center
+      type: string
+      description: The cost center associated with the user
+      required: false
+    division:
+      title: Division
+      type: string
+      description: The name of the division in which the user works
+      required: false
   manager:
     "@odata.context":
       title: "@odata.type"
@@ -341,7 +353,7 @@ types:
       required: false
     employeeOrgData:
       title: Employee Org Data
-      type: string
+      type: employeeOrgData
       description: Employee Org Data
       required: false
     assignedLicenses:
