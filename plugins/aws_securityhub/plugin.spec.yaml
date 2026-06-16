@@ -73,6 +73,17 @@ types:
       type: string
       description: Status
       required: false
+  Workflow:
+    Status:
+      title: Status
+      type: string
+      description: Workflow status
+      required: true
+      enum:
+        - NEW
+        - NOTIFIED
+        - RESOLVED
+        - SUPPRESSED
   Malware:
     Name:
       title: Name
@@ -1098,7 +1109,7 @@ actions:
       workflow:
         title: Workflow
         description: Used to update the workflow status of a finding
-        type: WorkflowState
+        type: Workflow
         required: false
         example: {"Status": "NEW"}
       related_findings:
