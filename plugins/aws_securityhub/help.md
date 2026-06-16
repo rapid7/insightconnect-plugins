@@ -49,6 +49,185 @@ Example input:
 ### Actions
 
 
+#### Batch Update Findings
+
+This action is used to updates Security Hub-aggregated findings based on attributes
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|confidence|integer|None|False|The updated value for the finding confidence|None|100|None|None|
+|criticality|integer|None|False|The updated value for the level of importance assigned to the resources associated with the findings|None|100|None|None|
+|finding_identifiers|[]FindingIdentifiers|None|True|An object of finding identifiers|None|[{"Id": "arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-0000000000000", "ProductArn": "arn:aws:securityhub:us-east-2::product/aws/securityhub"}]|None|None|
+|note|NotePartial|None|False|The updated note|None|{'Text': 'Closed by Rapid7', 'UpdatedBy': 'Rapid7'}|None|None|
+|related_findings|[]RelatedFindings|None|False|A list of findings that are related to the updated findings|None|{'Id': 'arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-0000000000000"', 'ProductArn': 'arn:aws:securityhub:us-east-2::product/aws/securityhub'}|None|None|
+|severity|object|None|False|Used to update the finding severity|None|{'Normalized': 50, 'Product': 8, 'Label': 'HIGH'}|None|None|
+|types|[]string|None|False|One or more finding types in the format of namespace/category/classifier that classify a finding|None|["TTPs/Command and Control/CryptoCurrency:EC2-BitcoinTool.B!DNS"]|None|None|
+|user_defined_fields|object|None|False|A list of name/value string pairs associated with the finding. These are custom, user-defined fields added to a finding|None|{'key': 'value'}|None|None|
+|verification_state|VerificationState|None|False|Indicates the veracity of a finding|None|FALSE_POSITIVE|None|None|
+|workflow|Workflow|None|False|Used to update the workflow status of a finding|None|{'Status': 'NEW'}|None|None|
+  
+Example input:
+
+```
+{
+  "confidence": 100,
+  "criticality": 100,
+  "finding_identifiers": [
+    {
+      "Id": "arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-0000000000000",
+      "ProductArn": "arn:aws:securityhub:us-east-2::product/aws/securityhub"
+    }
+  ],
+  "note": {
+    "Text": "Closed by Rapid7",
+    "UpdatedBy": "Rapid7"
+  },
+  "related_findings": {
+    "Id": "arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-0000000000000\"",
+    "ProductArn": "arn:aws:securityhub:us-east-2::product/aws/securityhub"
+  },
+  "severity": {
+    "Label": "HIGH",
+    "Normalized": 50,
+    "Product": 8
+  },
+  "types": [
+    "TTPs/Command and Control/CryptoCurrency:EC2-BitcoinTool.B!DNS"
+  ],
+  "user_defined_fields": {
+    "key": "value"
+  },
+  "verification_state": "FALSE_POSITIVE",
+  "workflow": {
+    "Status": "NEW"
+  }
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|ProcessedFindings|[]Findings|False|Security Hub processed changes|[{"SchemaVersion": "2018-10-08", "Id": "arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-0000000000000", "ProductArn": "arn:aws:securityhub:us-east-2::product/aws/securityhub", "GeneratorId": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0/rule/1.2", "AwsAccountId": "000000000000", "Types": ["Software and Configuration Checks/Industry and Regulatory Standards/CIS AWS Foundations Benchmark"], "FirstObservedAt": "2019-05-14T05:20:43.691Z", "LastObservedAt": "2019-05-30T17:32:00.372Z", "CreatedAt": "2019-05-14T05:20:43.691Z", "UpdatedAt": "2019-05-30T17:32:00.372Z", "Severity": {"Product": 2, "Normalized": 20}, "Title": "1.2 Ensure multi-factor authentication (MFA) is enabled for all IAM users that have a console password", "Description": "Multi-Factor Authentication (MFA) adds an extra layer of protection on top of a user name and password. It is recommended that MFA be enabled for all accounts that have a console password.", "Remediation": {"Recommendation": {"Text": "For directions on how to fix this issue, please consult the AWS Security Hub CIS documentation.", "Url": "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html#securityhub-standards-checks-1.2"}}, "ProductFields": {"StandardsGuideArn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0", "StandardsGuideSubscriptionArn": "arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0", "RuleId": "1.2", "RecommendationUrl": "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html#securityhub-standards-checks-1.2", "RelatedAWSResources:0/name": "securityhub-mfa-enabled-for-iam-console-access-000000", "RelatedAWSResources:0/type": "AWS::Config::ConfigRule", "RecordState": "ACTIVE", "aws/securityhub/FindingId": "arn:aws:securityhub:us-east-2::product/aws/securityhub/arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-000000000", "aws/securityhub/SeverityLabel": "LOW", "aws/securityhub/ProductName": "Security Hub", "aws/securityhub/CompanyName": "AWS"}, "Resources": [{"Type": "AwsAccount", "Id": "AWS::::Account:0000000000", "Partition": "aws", "Region": "us-east-2"}], "Compliance": {"Status": "FAILED"}, "WorkflowState": "NEW", "RecordState": "ACTIVE"}]|
+|UnprocessedFindings|[]Findings|False|Security Hub unprocessed changes|[{"SchemaVersion": "2018-10-08", "Id": "arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-0000000000000", "ProductArn": "arn:aws:securityhub:us-east-2::product/aws/securityhub", "GeneratorId": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0/rule/1.2", "AwsAccountId": "000000000000", "Types": ["Software and Configuration Checks/Industry and Regulatory Standards/CIS AWS Foundations Benchmark"], "FirstObservedAt": "2019-05-14T05:20:43.691Z", "LastObservedAt": "2019-05-30T17:32:00.372Z", "CreatedAt": "2019-05-14T05:20:43.691Z", "UpdatedAt": "2019-05-30T17:32:00.372Z", "Severity": {"Product": 2, "Normalized": 20}, "Title": "1.2 Ensure multi-factor authentication (MFA) is enabled for all IAM users that have a console password", "Description": "Multi-Factor Authentication (MFA) adds an extra layer of protection on top of a user name and password. It is recommended that MFA be enabled for all accounts that have a console password.", "Remediation": {"Recommendation": {"Text": "For directions on how to fix this issue, please consult the AWS Security Hub CIS documentation.", "Url": "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html#securityhub-standards-checks-1.2"}}, "ProductFields": {"StandardsGuideArn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0", "StandardsGuideSubscriptionArn": "arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0", "RuleId": "1.2", "RecommendationUrl": "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html#securityhub-standards-checks-1.2", "RelatedAWSResources:0/name": "securityhub-mfa-enabled-for-iam-console-access-000000", "RelatedAWSResources:0/type": "AWS::Config::ConfigRule", "RecordState": "ACTIVE", "aws/securityhub/FindingId": "arn:aws:securityhub:us-east-2::product/aws/securityhub/arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-000000000", "aws/securityhub/SeverityLabel": "LOW", "aws/securityhub/ProductName": "Security Hub", "aws/securityhub/CompanyName": "AWS"}, "Resources": [{"Type": "AwsAccount", "Id": "AWS::::Account:0000000000", "Partition": "aws", "Region": "us-east-2"}], "Compliance": {"Status": "FAILED"}, "WorkflowState": "NEW", "RecordState": "ACTIVE"}]|
+  
+Example output:
+
+```
+{
+  "ProcessedFindings": [
+    {
+      "AwsAccountId": "000000000000",
+      "Compliance": {
+        "Status": "FAILED"
+      },
+      "CreatedAt": "2019-05-14T05:20:43.691Z",
+      "Description": "Multi-Factor Authentication (MFA) adds an extra layer of protection on top of a user name and password. It is recommended that MFA be enabled for all accounts that have a console password.",
+      "FirstObservedAt": "2019-05-14T05:20:43.691Z",
+      "GeneratorId": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0/rule/1.2",
+      "Id": "arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-0000000000000",
+      "LastObservedAt": "2019-05-30T17:32:00.372Z",
+      "ProductArn": "arn:aws:securityhub:us-east-2::product/aws/securityhub",
+      "ProductFields": {
+        "RecommendationUrl": "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html#securityhub-standards-checks-1.2",
+        "RecordState": "ACTIVE",
+        "RelatedAWSResources:0/name": "securityhub-mfa-enabled-for-iam-console-access-000000",
+        "RelatedAWSResources:0/type": "AWS::Config::ConfigRule",
+        "RuleId": "1.2",
+        "StandardsGuideArn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+        "StandardsGuideSubscriptionArn": "arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0",
+        "aws/securityhub/CompanyName": "AWS",
+        "aws/securityhub/FindingId": "arn:aws:securityhub:us-east-2::product/aws/securityhub/arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-000000000",
+        "aws/securityhub/ProductName": "Security Hub",
+        "aws/securityhub/SeverityLabel": "LOW"
+      },
+      "RecordState": "ACTIVE",
+      "Remediation": {
+        "Recommendation": {
+          "Text": "For directions on how to fix this issue, please consult the AWS Security Hub CIS documentation.",
+          "Url": "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html#securityhub-standards-checks-1.2"
+        }
+      },
+      "Resources": [
+        {
+          "Id": "AWS::::Account:0000000000",
+          "Partition": "aws",
+          "Region": "us-east-2",
+          "Type": "AwsAccount"
+        }
+      ],
+      "SchemaVersion": "2018-10-08",
+      "Severity": {
+        "Normalized": 20,
+        "Product": 2
+      },
+      "Title": "1.2 Ensure multi-factor authentication (MFA) is enabled for all IAM users that have a console password",
+      "Types": [
+        "Software and Configuration Checks/Industry and Regulatory Standards/CIS AWS Foundations Benchmark"
+      ],
+      "UpdatedAt": "2019-05-30T17:32:00.372Z",
+      "WorkflowState": "NEW"
+    }
+  ],
+  "UnprocessedFindings": [
+    {
+      "AwsAccountId": "000000000000",
+      "Compliance": {
+        "Status": "FAILED"
+      },
+      "CreatedAt": "2019-05-14T05:20:43.691Z",
+      "Description": "Multi-Factor Authentication (MFA) adds an extra layer of protection on top of a user name and password. It is recommended that MFA be enabled for all accounts that have a console password.",
+      "FirstObservedAt": "2019-05-14T05:20:43.691Z",
+      "GeneratorId": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0/rule/1.2",
+      "Id": "arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-0000000000000",
+      "LastObservedAt": "2019-05-30T17:32:00.372Z",
+      "ProductArn": "arn:aws:securityhub:us-east-2::product/aws/securityhub",
+      "ProductFields": {
+        "RecommendationUrl": "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html#securityhub-standards-checks-1.2",
+        "RecordState": "ACTIVE",
+        "RelatedAWSResources:0/name": "securityhub-mfa-enabled-for-iam-console-access-000000",
+        "RelatedAWSResources:0/type": "AWS::Config::ConfigRule",
+        "RuleId": "1.2",
+        "StandardsGuideArn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+        "StandardsGuideSubscriptionArn": "arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0",
+        "aws/securityhub/CompanyName": "AWS",
+        "aws/securityhub/FindingId": "arn:aws:securityhub:us-east-2::product/aws/securityhub/arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-000000000",
+        "aws/securityhub/ProductName": "Security Hub",
+        "aws/securityhub/SeverityLabel": "LOW"
+      },
+      "RecordState": "ACTIVE",
+      "Remediation": {
+        "Recommendation": {
+          "Text": "For directions on how to fix this issue, please consult the AWS Security Hub CIS documentation.",
+          "Url": "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html#securityhub-standards-checks-1.2"
+        }
+      },
+      "Resources": [
+        {
+          "Id": "AWS::::Account:0000000000",
+          "Partition": "aws",
+          "Region": "us-east-2",
+          "Type": "AwsAccount"
+        }
+      ],
+      "SchemaVersion": "2018-10-08",
+      "Severity": {
+        "Normalized": 20,
+        "Product": 2
+      },
+      "Title": "1.2 Ensure multi-factor authentication (MFA) is enabled for all IAM users that have a console password",
+      "Types": [
+        "Software and Configuration Checks/Industry and Regulatory Standards/CIS AWS Foundations Benchmark"
+      ],
+      "UpdatedAt": "2019-05-30T17:32:00.372Z",
+      "WorkflowState": "NEW"
+    }
+  ]
+}
+```
+
 #### Get Findings
 
 This action is used to lists and describes Security Hub-aggregated findings that are specified by filter attributes
@@ -293,11 +472,24 @@ Example output:
 
 ### Custom Types
   
+**NotePartial**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Text|string|None|False|Text|Closed by Rapid7|
+|Updated By|string|None|False|Updated By|Rapid7|
+  
 **Compliance**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Status|string|None|False|Status|None|
+  
+**Workflow**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Status|string|None|True|Workflow status|None|
   
 **Malware**
 
@@ -307,6 +499,13 @@ Example output:
 |Path|string|None|False|Path|None|
 |State|string|None|False|State|None|
 |Type|string|None|False|Type|None|
+  
+**FindingIdentifiers**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|string|None|True|Finding ID|None|
+|ProductArn|string|None|True|Product ARN|None|
   
 **Network**
 
@@ -432,6 +631,7 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
+|Product|string|None|False|Label|None|
 |Normalized|integer|None|False|Normalized|None|
 |Product|integer|None|False|Product|None|
   
@@ -638,6 +838,7 @@ Example output:
 
 # Version History
 
+* 2.1.0 - Added functionality for batch updating findings in Security Hub
 * 2.0.5 - Resolved Snyk vulnerabilities | SDK bump to latest version (6.3.7)
 * 2.0.4 - Bumping requirements.txt | SDK bump to 6.1.4
 * 2.0.3 - Update `docs_url` in plugin spec with a new link to [plugin setup guide](https://docs.rapid7.com/insightconnect/aws-security-hub/)

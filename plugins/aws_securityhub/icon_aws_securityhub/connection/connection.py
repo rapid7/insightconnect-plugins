@@ -3,6 +3,7 @@ from .schema import ConnectionSchema, Input
 
 # Custom imports below
 import boto3
+import logging
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -12,6 +13,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def connect(self, params):
         self.logger.info("Connecting")
+        self.logger.setLevel(logging.CRITICAL)
 
         region = params.get("region", None)
         kwargs = {
