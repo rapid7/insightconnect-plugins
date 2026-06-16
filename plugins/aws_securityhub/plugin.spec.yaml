@@ -405,6 +405,10 @@ types:
       description: Product
       required: false
     Label:
+      title: Label
+      type: string
+      description: Label
+      required: false
       title: Product
       type: string
       description: Label
