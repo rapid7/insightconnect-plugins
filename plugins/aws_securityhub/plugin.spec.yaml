@@ -1104,7 +1104,7 @@ actions:
       related_findings:
         title: Related Findings
         description: A list of findings that are related to the updated findings
-        type: object
+        type: "[]RelatedFindings"
         required: false
         example: {"Id":arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-0000000000000", "ProductArn": "arn:aws:securityhub:us-east-2::product/aws/securityhub"}
     output:
