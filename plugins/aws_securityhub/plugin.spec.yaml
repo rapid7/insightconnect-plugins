@@ -1054,59 +1054,59 @@ actions:
         required: true
         example: [{"Id":arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-0000000000000", "ProductArn": "arn:aws:securityhub:us-east-2::product/aws/securityhub"}]
       note:
-          title: Note
-          description: The updated note
-          type: NotePartial
-          required: false
-          example: {"Text": "Closed by Rapid7", "UpdatedBy": "Rapid7"}
+        title: Note
+        description: The updated note
+        type: NotePartial
+        required: false
+        example: {"Text": "Closed by Rapid7", "UpdatedBy": "Rapid7"}
       severity:
-          title: Severity
-          description: Used to update the finding severity
-          type: object
-          required: false
-          example: {"Normalized": 50, "Product": 8, "Label": "HIGH"}
+        title: Severity
+        description: Used to update the finding severity
+        type: object
+        required: false
+        example: {"Normalized": 50, "Product": 8, "Label": "HIGH"}
       verification_state:
-          title: Verification State
-          description: Indicates the veracity of a finding
-          type: VerificationState
-          required: false
-          example: "FALSE_POSITIVE"
+        title: Verification State
+        description: Indicates the veracity of a finding
+        type: VerificationState
+        required: false
+        example: "FALSE_POSITIVE"
       confidence:
-          title: Confidence
-          description: The updated value for the finding confidence
-          type: Confidence
-          required: false
-          example: 100
+        title: Confidence
+        description: The updated value for the finding confidence
+        type: Confidence
+        required: false
+        example: 100
       criticality:
-          title: Criticality
-          description: The updated value for the level of importance assigned to the resources associated with the findings
-          type: Criticality
-          required: false
-          example: 100
+        title: Criticality
+        description: The updated value for the level of importance assigned to the resources associated with the findings
+        type: Criticality
+        required: false
+        example: 100
       types:
-          title: Types
-          description: One or more finding types in the format of namespace/category/classifier that classify a finding
-          type: Types
-          required: false
-          example: ["TTPs/Command and Control/CryptoCurrency:EC2-BitcoinTool.B!DNS"]
+        title: Types
+        description: One or more finding types in the format of namespace/category/classifier that classify a finding
+        type: Types
+        required: false
+        example: ["TTPs/Command and Control/CryptoCurrency:EC2-BitcoinTool.B!DNS"]
       user_defined_fields:
-          title: User Defined Fields
-          description: A list of name/value string pairs associated with the finding. These are custom, user-defined fields added to a finding
-          type: UserDefinedFields
-          required: false
-          example: {"key": "value"}
+        title: User Defined Fields
+        description: A list of name/value string pairs associated with the finding. These are custom, user-defined fields added to a finding
+        type: object
+        required: false
+        example: {"key": "value"}
       workflow:
-          title: Workflow
-          description: Used to update the workflow status of a finding
-          type: WorkflowState
-          required: false
-          example: {"Status": "NEW"}
+        title: Workflow
+        description: Used to update the workflow status of a finding
+        type: WorkflowState
+        required: false
+        example: {"Status": "NEW"}
       related_findings:
-          title: Related Findings
-          description: A list of findings that are related to the updated findings
-          type: object
-          required: false
-          example: {"Id":arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-0000000000000", "ProductArn": "arn:aws:securityhub:us-east-2::product/aws/securityhub"}
+        title: Related Findings
+        description: A list of findings that are related to the updated findings
+        type: object
+        required: false
+        example: {"Id":arn:aws:securityhub:us-east-2:000000000000:subscription/cis-aws-foundations-benchmark/v/1.2.0/1.2/finding/0000000-0000-0000-0000-0000000000000", "ProductArn": "arn:aws:securityhub:us-east-2::product/aws/securityhub"}
     output:
       processed_findings:
         title: Processed Findings
