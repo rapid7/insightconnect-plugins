@@ -10,7 +10,7 @@ from .schema import (
 # Custom imports below
 import logging
 
-logging.getLogger("botocore").setLevel(logging.CRITICAL)
+logging.getLogger("botocore")
 
 
 class BatchUpdateFindings(insightconnect_plugin_runtime.Action):

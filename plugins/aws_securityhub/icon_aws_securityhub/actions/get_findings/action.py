@@ -4,7 +4,7 @@ from .schema import GetFindingsInput, GetFindingsOutput, Input, Output, Componen
 # Custom imports below
 import logging
 
-logging.getLogger("botocore").setLevel(logging.CRITICAL)
+logging.getLogger("botocore")
 
 
 class GetFindings(insightconnect_plugin_runtime.Action):
