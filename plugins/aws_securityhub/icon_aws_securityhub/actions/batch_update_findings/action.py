@@ -1,4 +1,6 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 from .schema import (
     BatchUpdateFindingsInput,
     BatchUpdateFindingsOutput,
@@ -6,6 +8,7 @@ from .schema import (
     Output,
     Component,
 )
+from botocore.exceptions import ClientError
 
 # Custom imports below
 import logging
@@ -23,9 +26,6 @@ class BatchUpdateFindings(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        processed_findings = []
-        unprocessed_findings = []
-
         finding_identifiers = params.get(Input.FINDING_IDENTIFIERS)
         note = params.get(Input.NOTE, None)
         severity = params.get(Input.SEVERITY, None)
@@ -55,15 +55,16 @@ class BatchUpdateFindings(insightconnect_plugin_runtime.Action):
 
         results = client.batch_update_findings(**filtered_params)
 
-        if results.get("UnprocessedFindings"):
-            for finding in results["UnprocessedFindings"]:
-                unprocessed_findings.append(finding)
-
-        if results.get("ProcessedFindings"):
-            for finding in results["ProcessedFindings"]:
-                processed_findings.append(finding)
+        try:
+            results = client.batch_update_findings(**filtered_params)
+        except ClientError as error:
+            raise PluginException(
+                cause="AWS Security Hub API call failed.",
+                assistance=f"Verify your credentials and finding identifiers. Error: {error.response['Error']['Message']}",
+                data=error,
+            )
 
         return {
-            Output.PROCESSED_FINDINGS: processed_findings,
-            Output.UNPROCESSED_FINDINGS: unprocessed_findings,
+            Output.PROCESSED_FINDINGS: results.get("ProcessedFindings", []),
+            Output.UNPROCESSED_FINDINGS: results.get("UnprocessedFindings", []),
         }
