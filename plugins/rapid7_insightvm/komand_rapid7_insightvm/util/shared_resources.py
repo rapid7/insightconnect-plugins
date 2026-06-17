@@ -76,7 +76,10 @@ def resource_request_status_code_check(response_text: str, status_code: str) -> 
     )
 
     if status_code not in [200, 201]:  # 200 is documented, 201 is undocumented
-        status_code_message = _ERRORS.get(status_code, _ERRORS[000])
+        if status_code in _ERRORS:
+            status_code_message = _ERRORS[status_code]
+        else:
+            status_code_message = f"{_ERRORS[000]} ({status_code})"
         assistance = _ASSISTANCE.get(status_code, _ASSISTANCE[000])
         try:
             response_json = json.loads(response_text)
