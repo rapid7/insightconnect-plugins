@@ -4012,6 +4012,7 @@ Example output:
 
 # Version History
 
+* 8.0.17 - `Scan Completion`: Fixed an issue where scans completed between polling intervals were dropped | `Scan Completion`: Fixed report download failing with HTTP 406 against IVM 8.x consoles | Added retry on transient connection errors during long-running report polling | `Scan Completion`: Skip Insight Agent scans which cannot be scoped for SQL reports | Updated SDK to latest version (6.5.1)
 * 8.0.16 - Updated dependencies
 * 8.0.15 - Addressed issue with sessions
 * 8.0.14 - Updated dependencies | Updated SDK to latest version (6.4.3)
