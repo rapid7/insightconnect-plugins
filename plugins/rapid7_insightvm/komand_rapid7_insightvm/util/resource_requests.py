@@ -80,6 +80,7 @@ class ResourceRequests(object):
         params: Collection = None,
         payload: dict = None,
         json_response: bool = True,
+        headers: dict = None,
     ) -> dict:
         """
         Sends a request to APIv3 with the provided endpoint and optional method/payload
@@ -88,6 +89,7 @@ class ResourceRequests(object):
         :param params: URL parameters to append to the request
         :param payload: JSON body for the API request if required
         :param json_response: Boolean to return raw response
+        :param headers: Per-request headers that override session defaults (e.g. Accept)
         :return: Dict containing the JSON response body
         """
 
@@ -104,6 +106,8 @@ class ResourceRequests(object):
             payload = payload["rawbody"]
 
         extras = {"json": payload, "params": parameters.params}
+        if headers:
+            extras["headers"] = headers
         try:
             response = request_method(url=endpoint, verify=self.ssl_verify, **extras)
         except requests.RequestException as error:
