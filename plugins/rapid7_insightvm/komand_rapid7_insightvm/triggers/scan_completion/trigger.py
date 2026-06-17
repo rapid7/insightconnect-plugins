@@ -7,6 +7,7 @@ import uuid
 from komand_rapid7_insightvm.util import util
 import csv
 import io
+from typing import List
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 from komand_rapid7_insightvm.util import endpoints
@@ -22,32 +23,23 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         )
 
     def run(self, params={}):
-        # Write scan_id to cache
         self.logger.info("Getting latest scan...")
 
         site_id = params.get(Input.SITE_ID)
-        first_latest_scan_id = self.find_latest_completed_scan(site_id, cached=False)
+        last_seen_scan_id = self.find_latest_completed_scan(site_id)
 
         while True:
-            # Open cache
-            starting_point = first_latest_scan_id
+            new_scan_ids = self.find_new_completed_scans(site_id, last_seen_scan_id)
 
-            latest_scan_id = self.find_latest_completed_scan(site_id, cached=True)
+            if not new_scan_ids:
+                self.logger.info("No new scans, sleeping.")
+            else:
+                self.logger.info(f"Found {len(new_scan_ids)} new completed scan(s) to process: {new_scan_ids}")
+                for scan_id in new_scan_ids:
+                    results = self.get_results_from_latest_scan(scan_id=int(scan_id))
+                    self.send({Output.SCAN_ID: scan_id, Output.SCAN_COMPLETED_OUTPUT: results})
+                    last_seen_scan_id = scan_id
 
-            # Check if latest is in cache
-            if latest_scan_id == starting_point:
-                self.logger.info("No new scans, sleeping 1 minute.")
-                time.sleep(60)
-                continue
-
-            results = self.get_results_from_latest_scan(scan_id=int(latest_scan_id))
-
-            # Submit scan for trigger
-            self.send({Output.SCAN_ID: latest_scan_id, Output.SCAN_COMPLETED_OUTPUT: results})
-
-            first_latest_scan_id = latest_scan_id
-
-            # Sleep configured in minutes
             time.sleep(params.get(Input.INTERVAL, 5) * 60)
 
     def get_results_from_latest_scan(self, scan_id: int):
@@ -126,14 +118,14 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
 
         return row
 
-    def find_latest_completed_scan(self, site_id: str, cached: bool) -> int:
+    def find_latest_completed_scan(self, site_id: str) -> int:
         """
-        Use API calls to get the latest scan ID.
-        Two different endpoints depending on whether Site ID is provided as an input or not.
+        Get the most recent reportable finished scan ID, used as the initial high-water
+        mark when the trigger starts. Two different endpoints depending on whether Site
+        ID is provided as an input or not.
 
         :param site_id: Optional site id input
-        :param cached: Boolean to indicate whether to only scan most recent 10
-        :return: ID of the latest 'finished' scan
+        :return: ID of the latest 'finished' scan, or None if no reportable scan exists
         """
 
         resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
@@ -142,22 +134,79 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         else:
             endpoint = endpoints.Scan.scans(self.connection.console_url)
 
-        if not cached:
-            response = resource_helper.paged_resource_request(
-                endpoint=endpoint, method="get", params={"sort": "id,desc"}
+        response = resource_helper.paged_resource_request(
+            endpoint=endpoint, method="get", params={"sort": "id,desc", "size": 500, "page": 0}
+        )
+
+        for scan in response:
+            if self._is_reportable_finished_scan(scan):
+                self.logger.info(f"Latest finished scan ID: {scan.get('id')}")
+                return scan.get("id")
+
+    def find_new_completed_scans(self, site_id: str, last_seen_scan_id: int) -> List[int]:
+        """
+        Return all 'finished' scan IDs greater than the last seen scan ID, ordered ascending
+        so they can be processed in chronological order. Since the API returns scans sorted
+        by ID descending, pagination stops once a scan ID at or below the high-water mark
+        is encountered.
+
+        :param site_id: Optional site id input
+        :param last_seen_scan_id: High-water mark; scans with this ID or lower are skipped
+        :return: List of new finished scan IDs in ascending order
+        """
+
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
+        if site_id:
+            endpoint = endpoints.Scan.site_scans(self.connection.console_url, site_id)
+        else:
+            endpoint = endpoints.Scan.scans(self.connection.console_url)
+
+        new_scan_ids = []
+        page = 0
+
+        while True:
+            response = resource_helper.resource_request(
+                endpoint=endpoint, method="get", params={"sort": "id,desc", "size": 500, "page": page}
             )
 
-            for scan in response:
-                if scan.get("status") == "finished":
-                    self.logger.info(f"Latest finished scan ID: {scan.get('id')}")
-                    return scan.get("id")
-        else:
-            response = resource_helper.resource_request(endpoint=endpoint, method="get", params={"sort": "id,desc"})
+            resources = response.get("resources") or []
+            if not resources:
+                break
 
-            for scan in response.get("resources"):
-                if scan.get("status") == "finished":
-                    self.logger.info(f"Latest finished scan ID: {scan.get('id')}")
-                    return scan.get("id")
+            reached_known_scan = False
+            for scan in resources:
+                scan_id = scan.get("id")
+                if scan_id is None:
+                    continue
+                if last_seen_scan_id is not None and scan_id <= last_seen_scan_id:
+                    reached_known_scan = True
+                    break
+                if self._is_reportable_finished_scan(scan):
+                    new_scan_ids.append(scan_id)
+
+            page_info = response.get("page") or {}
+            total_pages = page_info.get("totalPages", 0)
+            if reached_known_scan or (page + 1) >= total_pages:
+                break
+
+            page += 1
+
+        # Process oldest-first to preserve event ordering
+        new_scan_ids.sort()
+        return new_scan_ids
+
+    @staticmethod
+    def _is_reportable_finished_scan(scan: dict) -> bool:
+        """
+        Determine whether a scan is finished and eligible for SQL reporting.
+        InsightVM rejects SQL reports scoped to a single scan when that scan is an
+        Insight Agent scan ("When the scope of the report is a scan, agent scans
+        may not be specified."), so those must be skipped.
+
+        :param scan: Scan resource as returned by the InsightVM scans API
+        :return: True if the scan is finished and not an Agent scan
+        """
+        return scan.get("status") == "finished" and scan.get("scanType") != "Agent"
 
 
 class ScanQueries:
