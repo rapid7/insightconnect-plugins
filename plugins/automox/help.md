@@ -1371,7 +1371,7 @@ This action is used to submit device and CVE data for remediation or matching. A
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |action_type|string|None|True|The type of remediation action|["remediate", "match"]|remediate|None|None|
-|devices_json|string|None|True|JSON string containing an array of device objects with id and cves fields|None|[{"id":"00000000-0000-0000-0000-000000000000","cves":["CVE-2021-24111"]}]|None|None|
+|devices_json|string|None|True|JSON string containing an array of device objects with id and cves fields|None|[{"id":"18e6ea46-f608-4439-bb35-9a5638ebeb1c-default-asset-502","name":"SRV-IN-AD01.fake.lab","cves":["CVE-2011-3389"]},{"id":"18e6ea46-f608-4439-bb35-9a5638ebeb1c-default-asset-50207","name":"ws-in-rando.fake.lab","cves":[ "CVE-2011-3389"]}]|None|None|
 |org_id|integer|None|True|Identifier of organization|None|1234|None|None|
   
 Example input:
@@ -1382,9 +1382,17 @@ Example input:
   "devices_json": [
     {
       "cves": [
-        "CVE-2021-24111"
+        "CVE-2011-3389"
       ],
-      "id": "00000000-0000-0000-0000-000000000000"
+      "id": "18e6ea46-f608-4439-bb35-9a5638ebeb1c-default-asset-502",
+      "name": "SRV-IN-AD01.fake.lab"
+    },
+    {
+      "cves": [
+        "CVE-2011-3389"
+      ],
+      "id": "18e6ea46-f608-4439-bb35-9a5638ebeb1c-default-asset-50207",
+      "name": "ws-in-rando.fake.lab"
     }
   ],
   "org_id": 1234
