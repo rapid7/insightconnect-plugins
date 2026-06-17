@@ -1,6 +1,7 @@
 from .shared_resources import RequestParams
 from .shared_resources import resource_request_status_code_check
 import json
+import time
 import requests
 import urllib3
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -61,6 +62,12 @@ class ResourceRequests(object):
     # For request exceptions not in REQUEST_EXCEPTIONS
     _UNHANDLED_EXCEPTION = "Contact support for assistance"
 
+    # Long-running report polling holds a connection open for many minutes; intermediaries
+    # (HAProxy/IVM) sometimes drop idle TCP and we get RemoteDisconnected on the next poll.
+    # Retry only the transient transport errors — never HTTPError, which is a real API response.
+    _TRANSIENT_EXCEPTIONS = (requests.ConnectionError, requests.Timeout)
+    _RETRY_BACKOFF_SECONDS = (5, 15, 30)
+
     def __init__(self, session: Session, logger: Logger, ssl_verify: bool) -> None:
         """
         Creates a new instance of ResourceHelper
@@ -72,6 +79,36 @@ class ResourceRequests(object):
         self.session = session
         self.session.headers.update(self._HEADERS)
         self.ssl_verify = ssl_verify
+
+    def _send_with_retry(self, request_method, url: str, **extras):
+        """
+        Invokes the bound session method (get/post/put/delete) and retries on transient
+        transport errors only (ConnectionError, Timeout). HTTPError and other
+        RequestException subclasses are raised immediately as a PluginException.
+
+        :param request_method: Bound session method, e.g. self.session.get
+        :param url: Endpoint URL to request
+        :param extras: Keyword arguments forwarded to the session method
+        :return: requests.Response object on success
+        """
+        last_error = None
+        for attempt, backoff in enumerate((0,) + self._RETRY_BACKOFF_SECONDS):
+            if backoff:
+                self.logger.info(
+                    f"Transient connection error against {url}; retry {attempt}/"
+                    f"{len(self._RETRY_BACKOFF_SECONDS)} after {backoff}s sleep..."
+                )
+                time.sleep(backoff)
+            try:
+                return request_method(url=url, verify=self.ssl_verify, **extras)
+            except self._TRANSIENT_EXCEPTIONS as error:
+                last_error = error
+            except requests.RequestException as error:
+                assistance = self._REQUEST_EXCEPTIONS.get(type(error), self._UNHANDLED_EXCEPTION)
+                raise PluginException(cause=str(error), assistance=assistance)
+
+        assistance = self._REQUEST_EXCEPTIONS.get(type(last_error), self._UNHANDLED_EXCEPTION)
+        raise PluginException(cause=str(last_error), assistance=assistance)
 
     def resource_request(
         self,
@@ -108,11 +145,7 @@ class ResourceRequests(object):
         extras = {"json": payload, "params": parameters.params}
         if headers:
             extras["headers"] = headers
-        try:
-            response = request_method(url=endpoint, verify=self.ssl_verify, **extras)
-        except requests.RequestException as error:
-            assistance = self._REQUEST_EXCEPTIONS.get(type(error), self._UNHANDLED_EXCEPTION)
-            raise PluginException(cause=error, assistance=assistance)
+        response = self._send_with_retry(request_method, endpoint, **extras)
 
         resource_request_status_code_check(response.text, response.status_code)
 
@@ -200,11 +233,7 @@ class ResourceRequests(object):
         request_method = getattr(self.session, method.lower())
 
         extras = {"json": payload, "params": params.params}
-        try:
-            response = request_method(url=endpoint, verify=self.ssl_verify, **extras)
-        except requests.RequestException as error:
-            assistance = self._REQUEST_EXCEPTIONS.get(type(error), self._UNHANDLED_EXCEPTION)
-            raise PluginException(cause=error, assistance=assistance)
+        response = self._send_with_retry(request_method, endpoint, **extras)
 
         resource_request_status_code_check(response.text, response.status_code)
         try:
