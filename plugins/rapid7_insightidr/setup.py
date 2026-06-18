@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="rapid7_insightidr-rapid7-plugin",
-    version="12.0.6",
+    version="12.0.7",
     description="This plugin allows you to add indicators to a threat and see the status of investigations",
     author="rapid7",
     author_email="",
