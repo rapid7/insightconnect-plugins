@@ -80,7 +80,7 @@ class ResourceRequests(object):
         self.session.headers.update(self._HEADERS)
         self.ssl_verify = ssl_verify
 
-    def _send_with_retry(self, request_method, url: str, **extras):
+    def _send_with_retry(self, request_method, url: str, **extras) -> requests.Response:
         """
         Invokes the bound session method (get/post/put/delete) and retries on transient
         transport errors only (ConnectionError, Timeout). HTTPError and other

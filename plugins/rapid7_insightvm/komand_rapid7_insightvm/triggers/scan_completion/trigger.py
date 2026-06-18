@@ -14,6 +14,12 @@ from komand_rapid7_insightvm.util import endpoints
 
 
 class ScanCompletion(insightconnect_plugin_runtime.Trigger):
+    # Safety bound on the per-poll pagination loop in find_new_completed_scans. At size=500
+    # this caps a single poll at 50k scans — well above any realistic burst — and prevents
+    # an infinite loop if the API keeps returning fresh pages without ever reaching the
+    # high-water mark.
+    _MAX_PAGES_PER_POLL = 100
+
     def __init__(self):
         super(self.__class__, self).__init__(
             name="scan_completion",
@@ -162,9 +168,8 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             endpoint = endpoints.Scan.scans(self.connection.console_url)
 
         new_scan_ids = []
-        page = 0
 
-        while True:
+        for page in range(self._MAX_PAGES_PER_POLL):
             response = resource_helper.resource_request(
                 endpoint=endpoint, method="get", params={"sort": "id,desc", "size": 500, "page": page}
             )
@@ -188,8 +193,11 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             total_pages = page_info.get("totalPages", 0)
             if reached_known_scan or (page + 1) >= total_pages:
                 break
-
-            page += 1
+        else:
+            self.logger.warning(
+                f"Reached page cap ({self._MAX_PAGES_PER_POLL}) before exhausting scan history; "
+                "some completed scans may be missed this poll"
+            )
 
         # Process oldest-first to preserve event ordering
         new_scan_ids.sort()
@@ -206,7 +214,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         :param scan: Scan resource as returned by the InsightVM scans API
         :return: True if the scan is finished and not an Agent scan
         """
-        return scan.get("status") == "finished" and scan.get("scanType") != "Agent"
+        return scan.get("status", "").lower() == "finished" and scan.get("scanType", "").lower() != "agent"
 
 
 class ScanQueries:
