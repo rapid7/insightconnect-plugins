@@ -33,8 +33,18 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
 
         site_id = params.get(Input.SITE_ID)
         last_seen_scan_id = self.find_latest_completed_scan(site_id)
+        interval_seconds = params.get(Input.INTERVAL, 5) * 60
 
         while True:
+            # Without a high-water mark we'd paginate the entire scan history every poll, so
+            # defer scanning until a baseline is established (e.g. console has no finished
+            # scans yet, or only Agent scans which we skip).
+            if last_seen_scan_id is None:
+                last_seen_scan_id = self.find_latest_completed_scan(site_id)
+                if last_seen_scan_id is None:
+                    time.sleep(interval_seconds)
+                    continue
+
             new_scan_ids = self.find_new_completed_scans(site_id, last_seen_scan_id)
 
             if not new_scan_ids:
@@ -46,7 +56,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
                     self.send({Output.SCAN_ID: scan_id, Output.SCAN_COMPLETED_OUTPUT: results})
                     last_seen_scan_id = scan_id
 
-            time.sleep(params.get(Input.INTERVAL, 5) * 60)
+            time.sleep(interval_seconds)
 
     def get_results_from_latest_scan(self, scan_id: int):
         """
@@ -148,6 +158,9 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             if self._is_reportable_finished_scan(scan):
                 self.logger.info(f"Latest finished scan ID: {scan.get('id')}")
                 return scan.get("id")
+
+        self.logger.info("No reportable finished scan found yet; will retry on next poll.")
+        return None
 
     def find_new_completed_scans(self, site_id: str, last_seen_scan_id: int) -> List[int]:
         """
