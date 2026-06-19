@@ -80,6 +80,18 @@ class ResourceRequests(object):
         self.session.headers.update(self._HEADERS)
         self.ssl_verify = ssl_verify
 
+    def _recreate_session(self) -> None:
+        # Try to close the session
+        if isinstance(self.session, requests.Session):
+            try:
+                self.session.close()
+            except Exception as error:
+                self.logger.error(f"An exception occurred during session closing on recreation: {error}")
+
+        # Recreate the session
+        self.session = requests.Session()
+        self.session.headers.update(self._HEADERS)
+
     def _send_with_retry(self, request_method, url: str, **extras) -> requests.Response:
         """
         Invokes the bound session method (get/post/put/delete) and retries on transient
@@ -91,6 +103,7 @@ class ResourceRequests(object):
         :param extras: Keyword arguments forwarded to the session method
         :return: requests.Response object on success
         """
+
         last_error = None
         for attempt, backoff in enumerate((0,) + self._RETRY_BACKOFF_SECONDS):
             if backoff:
@@ -99,6 +112,7 @@ class ResourceRequests(object):
                     f"{len(self._RETRY_BACKOFF_SECONDS)} after {backoff}s sleep..."
                 )
                 time.sleep(backoff)
+                self._recreate_session()
             try:
                 return request_method(url=url, verify=self.ssl_verify, **extras)
             except self._TRANSIENT_EXCEPTIONS as error:

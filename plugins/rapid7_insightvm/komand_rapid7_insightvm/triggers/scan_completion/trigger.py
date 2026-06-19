@@ -7,7 +7,7 @@ import uuid
 from komand_rapid7_insightvm.util import util
 import csv
 import io
-from typing import List
+from typing import List, Union
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 from komand_rapid7_insightvm.util import endpoints
@@ -32,20 +32,22 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         self.logger.info("Getting latest scan...")
 
         site_id = params.get(Input.SITE_ID)
-        last_seen_scan_id = self.find_latest_completed_scan(site_id)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         interval_seconds = params.get(Input.INTERVAL, 5) * 60
+
+        last_seen_scan_id = self.find_latest_completed_scan(site_id, resource_helper)
 
         while True:
             # Without a high-water mark we'd paginate the entire scan history every poll, so
             # defer scanning until a baseline is established (e.g. console has no finished
             # scans yet, or only Agent scans which we skip).
             if last_seen_scan_id is None:
-                last_seen_scan_id = self.find_latest_completed_scan(site_id)
+                last_seen_scan_id = self.find_latest_completed_scan(site_id, resource_helper)
                 if last_seen_scan_id is None:
                     time.sleep(interval_seconds)
                     continue
 
-            new_scan_ids = self.find_new_completed_scans(site_id, last_seen_scan_id)
+            new_scan_ids = self.find_new_completed_scans(site_id, last_seen_scan_id, resource_helper)
 
             if not new_scan_ids:
                 self.logger.info("No new scans, sleeping.")
@@ -134,17 +136,16 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
 
         return row
 
-    def find_latest_completed_scan(self, site_id: str) -> int:
+    def find_latest_completed_scan(self, site_id: str, resource_helper: ResourceRequests) -> Union[int, None]:
         """
         Get the most recent reportable finished scan ID, used as the initial high-water
         mark when the trigger starts. Two different endpoints depending on whether Site
         ID is provided as an input or not.
 
         :param site_id: Optional site id input
+        :param resource_helper: ResourceRequests instance for API calls
         :return: ID of the latest 'finished' scan, or None if no reportable scan exists
         """
-
-        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         if site_id:
             endpoint = endpoints.Scan.site_scans(self.connection.console_url, site_id)
         else:
@@ -162,7 +163,9 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         self.logger.info("No reportable finished scan found yet; will retry on next poll.")
         return None
 
-    def find_new_completed_scans(self, site_id: str, last_seen_scan_id: int) -> List[int]:
+    def find_new_completed_scans(
+        self, site_id: str, last_seen_scan_id: int, resource_helper: ResourceRequests
+    ) -> List[int]:
         """
         Return all 'finished' scan IDs greater than the last seen scan ID, ordered ascending
         so they can be processed in chronological order. Since the API returns scans sorted
@@ -171,10 +174,9 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
 
         :param site_id: Optional site id input
         :param last_seen_scan_id: High-water mark; scans with this ID or lower are skipped
+        :param resource_helper: ResourceRequests instance for API calls
         :return: List of new finished scan IDs in ascending order
         """
-
-        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         if site_id:
             endpoint = endpoints.Scan.site_scans(self.connection.console_url, site_id)
         else:
@@ -189,6 +191,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
 
             resources = response.get("resources") or []
             if not resources:
+                self.logger.info("No more resources on this page, stopping pagination")
                 break
 
             reached_known_scan = False
@@ -196,11 +199,16 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
                 scan_id = scan.get("id")
                 if scan_id is None:
                     continue
-                if last_seen_scan_id is not None and scan_id <= last_seen_scan_id:
-                    reached_known_scan = True
-                    break
                 if self._is_reportable_finished_scan(scan):
                     new_scan_ids.append(scan_id)
+
+                # Stop when reaching the last known scan. If last_seen_scan_id is None (first run)
+                # this will paginate through all historical scans up to the page cap
+                # This could be optimized in future to only fetch recent scans on initial setup
+                if last_seen_scan_id is not None and scan_id <= last_seen_scan_id:
+                    reached_known_scan = True
+                    self.logger.info(f"Reached known scan ID {last_seen_scan_id}, stopping pagination")
+                    break
 
             page_info = response.get("page") or {}
             total_pages = page_info.get("totalPages", 0)

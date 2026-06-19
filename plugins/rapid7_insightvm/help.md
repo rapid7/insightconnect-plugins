@@ -14,7 +14,7 @@ InsightVM is a powerful vulnerability management tool which finds, prioritizes, 
 
 # Supported Product Versions
 
-* Rapid7 InsightVM API v3 2022-05-25
+* Rapid7 InsightVM API v3 2026-06-19
 
 # Documentation
 

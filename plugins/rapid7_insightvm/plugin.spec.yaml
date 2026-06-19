@@ -8,7 +8,7 @@ description: InsightVM is a powerful vulnerability management tool which finds, 
   scan results and start scans
 version: 8.0.17
 connection_version: 8
-supported_versions: [Rapid7 InsightVM API v3 2022-05-25]
+supported_versions: [Rapid7 InsightVM API v3 2026-06-19]
 fedramp_ready: true
 vendor: rapid7
 support: rapid7
