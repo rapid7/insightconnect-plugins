@@ -35,8 +35,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         interval_seconds = params.get(Input.INTERVAL, 5) * 60
 
-        last_seen_scan_id = self.find_latest_completed_scan(site_id, resource_helper)
-
+        last_seen_scan_id = None
         while True:
             # Without a high-water mark we'd paginate the entire scan history every poll, so
             # defer scanning until a baseline is established (e.g. console has no finished
