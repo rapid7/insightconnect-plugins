@@ -29,24 +29,33 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         )
 
     def run(self, params={}):
-        self.logger.info("Getting latest scan...")
-
-        site_id = params.get(Input.SITE_ID)
-        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        site_id = params.get(Input.SITE_ID, "")
         interval_seconds = params.get(Input.INTERVAL, 5) * 60
+        # END INPUT BINDING - DO NOT REMOVE
 
+        # Determine endpoint based on site_id
+        if site_id:
+            endpoint = endpoints.Scan.site_scans(self.connection.console_url, site_id)
+        else:
+            endpoint = endpoints.Scan.scans(self.connection.console_url)
+
+        # Initialize resource helper and last seen scan ID tracker
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         last_seen_scan_id = None
+
+        self.logger.info("Getting latest scan...")
         while True:
             # Without a high-water mark we'd paginate the entire scan history every poll, so
             # defer scanning until a baseline is established (e.g. console has no finished
             # scans yet, or only Agent scans which we skip).
             if last_seen_scan_id is None:
-                last_seen_scan_id = self.find_latest_completed_scan(site_id, resource_helper)
+                last_seen_scan_id = self.find_latest_completed_scan(endpoint, resource_helper)
                 if last_seen_scan_id is None:
                     time.sleep(interval_seconds)
                     continue
 
-            new_scan_ids = self.find_new_completed_scans(site_id, last_seen_scan_id, resource_helper)
+            new_scan_ids = self.find_new_completed_scans(endpoint, last_seen_scan_id, resource_helper)
 
             if not new_scan_ids:
                 self.logger.info("No new scans, sleeping.")
@@ -135,20 +144,15 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
 
         return row
 
-    def find_latest_completed_scan(self, site_id: str, resource_helper: ResourceRequests) -> Union[int, None]:
+    def find_latest_completed_scan(self, endpoint: str, resource_helper: ResourceRequests) -> Union[int, None]:
         """
-        Get the most recent reportable finished scan ID, used as the initial high-water
-        mark when the trigger starts. Two different endpoints depending on whether Site
-        ID is provided as an input or not.
+        Get the most recent reportable finished scan ID, used as the initial baseline
+        when the trigger starts.
 
-        :param site_id: Optional site id input
+        :param endpoint: The API endpoint for scans
         :param resource_helper: ResourceRequests instance for API calls
         :return: ID of the latest 'finished' scan, or None if no reportable scan exists
         """
-        if site_id:
-            endpoint = endpoints.Scan.site_scans(self.connection.console_url, site_id)
-        else:
-            endpoint = endpoints.Scan.scans(self.connection.console_url)
 
         response = resource_helper.paged_resource_request(
             endpoint=endpoint, method="get", params={"sort": "id,desc", "size": 500, "page": 0}
@@ -163,26 +167,21 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         return None
 
     def find_new_completed_scans(
-        self, site_id: str, last_seen_scan_id: int, resource_helper: ResourceRequests
+        self, endpoint: str, last_seen_scan_id: int, resource_helper: ResourceRequests
     ) -> List[int]:
         """
         Return all 'finished' scan IDs greater than the last seen scan ID, ordered ascending
         so they can be processed in chronological order. Since the API returns scans sorted
-        by ID descending, pagination stops once a scan ID at or below the high-water mark
+        by ID descending, pagination stops once a scan ID at or below the last seen ID
         is encountered.
 
-        :param site_id: Optional site id input
-        :param last_seen_scan_id: High-water mark; scans with this ID or lower are skipped
+        :param endpoint: The API endpoint for scans
+        :param last_seen_scan_id: Baseline; scans with this ID or lower are skipped
         :param resource_helper: ResourceRequests instance for API calls
         :return: List of new finished scan IDs in ascending order
         """
-        if site_id:
-            endpoint = endpoints.Scan.site_scans(self.connection.console_url, site_id)
-        else:
-            endpoint = endpoints.Scan.scans(self.connection.console_url)
 
         new_scan_ids = []
-
         for page in range(self._MAX_PAGES_PER_POLL):
             response = resource_helper.resource_request(
                 endpoint=endpoint, method="get", params={"sort": "id,desc", "size": 500, "page": page}
@@ -195,11 +194,10 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
 
             reached_known_scan = False
             for scan in resources:
+                # Get the scan ID and if not present skip
                 scan_id = scan.get("id")
                 if scan_id is None:
                     continue
-                if self._is_reportable_finished_scan(scan):
-                    new_scan_ids.append(scan_id)
 
                 # Stop when reaching the last known scan. If last_seen_scan_id is None (first run)
                 # this will paginate through all historical scans up to the page cap
@@ -208,6 +206,10 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
                     reached_known_scan = True
                     self.logger.info(f"Reached known scan ID {last_seen_scan_id}, stopping pagination")
                     break
+
+                # If scan is reportable, add to list
+                if self._is_reportable_finished_scan(scan):
+                    new_scan_ids.append(scan_id)
 
             page_info = response.get("page") or {}
             total_pages = page_info.get("totalPages", 0)

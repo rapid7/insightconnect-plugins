@@ -81,8 +81,12 @@ class ResourceRequests(object):
         self.ssl_verify = ssl_verify
 
     def _recreate_session(self) -> None:
-        # Try to close the session
+        authentication = None
         if isinstance(self.session, requests.Session):
+            # Preserve auth before closing
+            authentication = self.session.auth
+
+            # Close the session to clear the connection pool
             try:
                 self.session.close()
             except Exception as error:
@@ -91,6 +95,10 @@ class ResourceRequests(object):
         # Recreate the session
         self.session = requests.Session()
         self.session.headers.update(self._HEADERS)
+
+        # If auth was preserved, restore it
+        if authentication:
+            self.session.auth = authentication
 
     def _send_with_retry(self, request_method, url: str, **extras) -> requests.Response:
         """
