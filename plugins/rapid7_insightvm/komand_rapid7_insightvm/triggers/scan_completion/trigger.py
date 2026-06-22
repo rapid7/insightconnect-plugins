@@ -62,7 +62,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             else:
                 self.logger.info(f"Found {len(new_scan_ids)} new completed scan(s) to process: {new_scan_ids}")
                 for scan_id in new_scan_ids:
-                    results = self.get_results_from_latest_scan(scan_id=int(scan_id))
+                    results = self.get_results_from_latest_scan(scan_id=scan_id)
                     self.send({Output.SCAN_ID: scan_id, Output.SCAN_COMPLETED_OUTPUT: results})
                     last_seen_scan_id = scan_id
 
