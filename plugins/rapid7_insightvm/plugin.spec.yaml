@@ -15,7 +15,7 @@ support: rapid7
 status: []
 sdk:
   type: full
-  version: 6.5.1
+  version: 6.6.0
   user: root
   custom_cmd:
     - RUN apk add --no-cache --virtual .build-deps make gcc libc-dev libffi-dev openssl-dev libxml2-dev libxslt-dev
@@ -34,7 +34,7 @@ version_history:
   intervals were dropped | `Scan Completion`: Fixed report download failing with HTTP
   406 against IVM 8.x consoles | Added retry on transient connection errors during
   long-running report polling | `Scan Completion`: Skip Insight Agent scans which
-  cannot be scoped for SQL reports | Updated SDK to latest version (6.5.1)'
+  cannot be scoped for SQL reports | `Download Reports`: Updated API headers to match latest API version | Updated SDK to latest version (6.6.0)'
 - 8.0.16 - Updated dependencies
 - 8.0.15 - Addressed issue with sessions
 - 8.0.14 - Updated dependencies | Updated SDK to latest version (6.4.3)

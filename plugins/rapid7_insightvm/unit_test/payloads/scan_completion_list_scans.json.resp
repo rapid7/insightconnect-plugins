@@ -1,0 +1,15 @@
+{
+  "page": {
+    "number": 0,
+    "size": 500,
+    "totalPages": 1
+  },
+  "resources": [
+    {
+      "id": 123,
+      "name": "Test Scan",
+      "scanType": "regular",
+      "status": "finished"
+    }
+  ]
+}

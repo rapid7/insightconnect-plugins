@@ -1,0 +1,33 @@
+{
+  "page": {
+    "number": 0,
+    "size": 500,
+    "totalPages": 1
+  },
+  "resources": [
+    {
+      "id": 124,
+      "name": "Scan 124",
+      "startTime": "2024-01-15T07:00:00Z",
+      "endTime": "2024-01-15T08:00:00Z",
+      "status": "finished",
+      "scanType": "regular"
+    },
+    {
+      "id": 123,
+      "name": "Scan 123",
+      "startTime": "2024-01-15T06:00:00Z",
+      "endTime": "2024-01-15T07:00:00Z",
+      "status": "finished",
+      "scanType": "regular"
+    },
+    {
+      "id": 122,
+      "name": "Scan 122",
+      "startTime": "2024-01-15T05:00:00Z",
+      "endTime": "2024-01-15T06:00:00Z",
+      "status": "finished",
+      "scanType": "regular"
+    }
+  ]
+}
