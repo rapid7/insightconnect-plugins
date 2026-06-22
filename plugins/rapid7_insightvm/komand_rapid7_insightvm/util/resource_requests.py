@@ -7,6 +7,7 @@ import urllib3
 from insightconnect_plugin_runtime.exceptions import PluginException
 from typing import NamedTuple, Collection
 from requests import Session
+from requests.auth import HTTPBasicAuth
 from logging import Logger
 
 # Suppress insecure request messages
@@ -79,34 +80,30 @@ class ResourceRequests(object):
         self.session = session
         self.session.headers.update(self._HEADERS)
         self.ssl_verify = ssl_verify
+        self._username = session.auth.username if session.auth else None
+        self._password = session.auth.password if session.auth else None
 
     def _recreate_session(self) -> None:
-        authentication = None
+        # Close the existing session to clear out stale connections
         if isinstance(self.session, requests.Session):
-            # Preserve auth before closing
-            authentication = self.session.auth
-
-            # Close the session to clear the connection pool
             try:
                 self.session.close()
             except Exception as error:
                 self.logger.error(f"An exception occurred during session closing on recreation: {error}")
 
-        # Recreate the session
+        # Recreate the session with stored credentials
         self.session = requests.Session()
         self.session.headers.update(self._HEADERS)
+        if self._username and self._password:
+            self.session.auth = HTTPBasicAuth(self._username, self._password)
 
-        # If auth was preserved, restore it
-        if authentication:
-            self.session.auth = authentication
-
-    def _send_with_retry(self, request_method, url: str, **extras) -> requests.Response:
+    def _send_with_retry(self, method: str, url: str, **extras) -> requests.Response:
         """
-        Invokes the bound session method (get/post/put/delete) and retries on transient
+        Invokes the session method (get/post/put/delete) and retries on transient
         transport errors only (ConnectionError, Timeout). HTTPError and other
         RequestException subclasses are raised immediately as a PluginException.
 
-        :param request_method: Bound session method, e.g. self.session.get
+        :param method: HTTP method name, e.g. "get", "post"
         :param url: Endpoint URL to request
         :param extras: Keyword arguments forwarded to the session method
         :return: requests.Response object on success
@@ -122,6 +119,7 @@ class ResourceRequests(object):
                 time.sleep(backoff)
                 self._recreate_session()
             try:
+                request_method = getattr(self.session, method)
                 return request_method(url=url, verify=self.ssl_verify, **extras)
             except self._TRANSIENT_EXCEPTIONS as error:
                 last_error = error
@@ -152,7 +150,7 @@ class ResourceRequests(object):
         :return: Dict containing the JSON response body
         """
 
-        request_method = getattr(self.session, method.lower())
+        request_method = method.lower()
         if not payload:
             payload = {}
         if not params:
@@ -252,10 +250,9 @@ class ResourceRequests(object):
         # Get size and page from list of dict param type
 
         self.logger.info(f'Fetching up to {params["size"]} resources from endpoint page {params["page"]} ...')
-        request_method = getattr(self.session, method.lower())
 
         extras = {"json": payload, "params": params.params}
-        response = self._send_with_retry(request_method, endpoint, **extras)
+        response = self._send_with_retry(method.lower(), endpoint, **extras)
 
         resource_request_status_code_check(response.text, response.status_code)
         try:
