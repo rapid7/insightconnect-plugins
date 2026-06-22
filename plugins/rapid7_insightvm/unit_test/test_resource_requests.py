@@ -25,6 +25,7 @@ class MockSession:
     def __init__(self) -> None:
         self.counter = 0
         self.headers = dict()
+        self.auth = None
 
     def get(self, url, verify, **kwargs):
         mock_response = MockResponse()
