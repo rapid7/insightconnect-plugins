@@ -54,6 +54,7 @@ def resource_request_status_code_check(response_text: str, status_code: str) -> 
         401: "Unauthorized",
         404: "Not Found",
         405: "Method Not Allowed",
+        406: "Not Acceptable",
         409: "Conflict",
         500: "Internal Server Error",
         503: "Service Unavailable",
@@ -65,6 +66,7 @@ def resource_request_status_code_check(response_text: str, status_code: str) -> 
         401: "Ensure that the user name and password are correct.",
         404: "Ensure that the requested resource exists.",
         405: "Ensure that the requested action is permitted.",
+        406: "Ensure that the requested content type is compatible with the resource. Verify the Accept header or report format is supported.",
         409: "Ensure that the requested action does not cause a conflict with the current state of the target "
         "resource.",
         500: _CONTACT_SUPPORT,
@@ -76,7 +78,7 @@ def resource_request_status_code_check(response_text: str, status_code: str) -> 
     )
 
     if status_code not in [200, 201]:  # 200 is documented, 201 is undocumented
-        status_code_message = _ERRORS.get(status_code, _ERRORS[000])
+        status_code_message = _ERRORS.get(status_code, f"{_ERRORS[000]} ({status_code})")
         assistance = _ASSISTANCE.get(status_code, _ASSISTANCE[000])
         try:
             response_json = json.loads(response_text)
