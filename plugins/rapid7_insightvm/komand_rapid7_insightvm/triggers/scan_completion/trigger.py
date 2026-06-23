@@ -210,6 +210,11 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
                 # If scan is reportable, add to list
                 if self._is_reportable_finished_scan(scan):
                     new_scan_ids.append(scan_id)
+                else:
+                    # Log skipped scans with their status and type for debugging
+                    scan_status = scan.get("status", "unknown")
+                    scan_type = scan.get("scanType", "unknown")
+                    self.logger.info(f"Skipping scan ID {scan_id} (status: {scan_status}, type: {scan_type})")
 
             page_info = response.get("page") or {}
             total_pages = page_info.get("totalPages", 0)
