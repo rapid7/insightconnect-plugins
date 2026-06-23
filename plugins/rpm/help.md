@@ -168,7 +168,7 @@ Example output:
 
 # Version History
 
-* 1.0.3 - Updated SDK to the latest version (6.5.1)
+* 1.0.3 - Updated SDK to the latest version (6.6.0)
 * 1.0.2 - Resolved an input validation issue that could allow OS command injection via the repo, key, and name parameters (CVE-2026-8663) | Refresh the plugin | Updated SDK to the latest version (6.4.3)
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Support web server mode | Update to v2 Python plugin architecture
