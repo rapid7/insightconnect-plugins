@@ -72,6 +72,18 @@ class ActiveDirectoryLdapAPI:
             "(e.g., example.com) or ensure the host contains the full FQDN.",
         )
 
+    def _write_config_file(self, filepath: str, content: str, description: str):
+        """Write configuration content to a system file."""
+        try:
+            with open(filepath, "w", encoding="utf-8") as config_file:
+                config_file.write(content)
+        except OSError as error:
+            raise PluginException(
+                cause=f"Failed to write {description}.",
+                assistance=f"Ensure the plugin container has write access to {filepath}.",
+                data=error,
+            ) from error
+
     def _write_krb5_config(self, upper_domain: str, kdc: str, domain: str):
         """Write /etc/krb5.conf with the Kerberos realm configuration."""
         krb5_config = (
@@ -93,27 +105,11 @@ class ActiveDirectoryLdapAPI:
             f".{domain} = {upper_domain}\n"
             f"{domain} = {upper_domain}\n"
         )
-        try:
-            with open("/etc/krb5.conf", "w", encoding="utf-8") as krb5_file:
-                krb5_file.write(krb5_config)
-        except OSError as error:
-            raise PluginException(
-                cause="Failed to write Kerberos configuration.",
-                assistance="Ensure the plugin container has write access to /etc/krb5.conf.",
-                data=error,
-            ) from error
+        self._write_config_file("/etc/krb5.conf", krb5_config, "Kerberos configuration")
 
     def _write_network_config(self, kdc: str, domain: str):
         """Write DNS and hosts configuration for Kerberos network resolution."""
-        try:
-            with open("/etc/resolv.conf", "w", encoding="utf-8") as resolv_file:
-                resolv_file.write(f"search {domain}\nnameserver {kdc}\n")
-        except OSError as error:
-            raise PluginException(
-                cause="Failed to write DNS configuration.",
-                assistance="Ensure the plugin container has write access to /etc/resolv.conf.",
-                data=error,
-            ) from error
+        self._write_config_file("/etc/resolv.conf", f"search {domain}\nnameserver {kdc}\n", "DNS configuration")
 
         try:
             with open("/etc/hosts", "a", encoding="utf-8") as hosts_file:

@@ -3,6 +3,7 @@ from unittest import TestCase, mock
 from unittest.mock import MagicMock, mock_open, patch, call
 
 import ldap3
+from ldap3.core.exceptions import LDAPBindError, LDAPSocketOpenError, LDAPException
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_active_directory_ldap.util.api import ActiveDirectoryLdapAPI
 
@@ -244,3 +245,66 @@ class TestKerberosUsernameHandling(TestCase):
 
         kinit_command = mock_popen.call_args[0][0]
         self.assertIn("kinit admin_user@EXAMPLE.COM", kinit_command)
+
+
+class TestKerberosErrorHandling(TestCase):
+    """Tests for error handling in Kerberos configuration and connection."""
+
+    def setUp(self):
+        self.logger = logging.getLogger("test_kerberos_errors")
+
+    @patch("subprocess.Popen")
+    @patch("builtins.open", side_effect=OSError("Permission denied"))
+    def test_krb5_conf_write_failure_raises_plugin_exception(self, mock_file, mock_popen):
+        """Verify OSError writing krb5.conf raises PluginException."""
+        api = create_api(self.logger)
+
+        with self.assertRaises(PluginException) as context:
+            api._write_krb5_config("EXAMPLE.COM", DEFAULT_KDC, DEFAULT_DOMAIN)
+
+        self.assertIn("Failed to write Kerberos configuration", context.exception.cause)
+
+    @patch("builtins.open", side_effect=OSError("Permission denied"))
+    def test_resolv_conf_write_failure_raises_plugin_exception(self, mock_file):
+        """Verify OSError writing resolv.conf raises PluginException."""
+        api = create_api(self.logger)
+
+        with self.assertRaises(PluginException) as context:
+            api._write_network_config(DEFAULT_KDC, DEFAULT_DOMAIN)
+
+        self.assertIn("Failed to write DNS configuration", context.exception.cause)
+
+    @patch.object(ActiveDirectoryLdapAPI, "_configure_kerberos")
+    @patch("ldap3.Connection", side_effect=LDAPBindError("Kerberos bind failed"))
+    @patch("ldap3.Server")
+    def test_kerberos_bind_error_raises_plugin_exception(self, mock_server, mock_conn, mock_configure):
+        """Verify LDAPBindError during Kerberos connection raises PluginException."""
+        api = create_api(self.logger, host="ldaps://dc01.example.com")
+
+        with self.assertRaises(PluginException) as context:
+            api._connect_with_kerberos(mock_server.return_value)
+
+        self.assertIn("Kerberos LDAP bind failed", context.exception.cause)
+
+    @patch.object(ActiveDirectoryLdapAPI, "_configure_kerberos")
+    @patch("ldap3.Connection", side_effect=LDAPSocketOpenError("Connection refused"))
+    @patch("ldap3.Server")
+    def test_kerberos_socket_error_raises_service_unavailable(self, mock_server, mock_conn, mock_configure):
+        """Verify LDAPSocketOpenError during Kerberos connection raises SERVICE_UNAVAILABLE."""
+        api = create_api(self.logger, host="ldaps://dc01.example.com")
+
+        with self.assertRaises(PluginException) as context:
+            api._connect_with_kerberos(mock_server.return_value)
+
+        self.assertIn("unavailable", context.exception.cause.lower())
+
+    @patch.object(ActiveDirectoryLdapAPI, "_ActiveDirectoryLdapAPI__connect_to_server")
+    @patch("ldap3.Server")
+    def test_ntlm_fallback_to_basic_auth(self, mock_server, mock_connect):
+        """Verify NTLM mode falls back to basic auth when NTLM fails."""
+        mock_connect.side_effect = [LDAPException("NTLM not supported"), MagicMock()]
+        api = create_api(self.logger, host="ldaps://dc01.example.com", auth_type="NTLM")
+
+        api.establish_connection()
+
+        self.assertEqual(mock_connect.call_count, 2)
