@@ -194,7 +194,7 @@ Example output:
 
 # Version History
 
-* 2.0.4 - Updated SDK to the latest version (6.5.1)
+* 2.0.4 - Updated SDK to the latest version (6.6.0)
 * 2.0.3 - Resolved a path traversal issue in the create_archive function where the filename parameter was not properly validated (CVE-2026-8662) | Updated dependency | Updated SDK to the latest version (6.4.3)
 * 2.0.2 - Correct spelling in help.md
 * 2.0.1 - New spec and help.md format for the Extension Library
