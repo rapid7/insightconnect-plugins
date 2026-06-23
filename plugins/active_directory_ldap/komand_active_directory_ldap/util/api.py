@@ -60,28 +60,20 @@ class ActiveDirectoryLdapAPI:
         set_library_log_detail_level(ERROR)
         set_library_log_hide_sensitive_data(True)
 
-    def _configure_kerberos(self):
-        """
-        Configure the container for Kerberos authentication at runtime.
-        Writes /etc/krb5.conf, /etc/resolv.conf, and acquires a TGT via kinit.
-        All configuration is derived from user-provided connection inputs.
-        """
-        domain = self.domain_name
-        if not domain:
-            # Attempt to derive domain from the host if not explicitly provided
-            if "." in self.host:
-                domain = self.host.split(".", 1)[1]
-            else:
-                raise PluginException(
-                    cause="Kerberos domain name is required.",
-                    assistance="Provide the domain name in the Kerberos connection settings "
-                    "(e.g., example.com) or ensure the host contains the full FQDN.",
-                )
+    def _resolve_kerberos_domain(self) -> str:
+        """Resolve the Kerberos domain from connection settings or host FQDN."""
+        if self.domain_name:
+            return self.domain_name
+        if "." in self.host:
+            return self.host.split(".", 1)[1]
+        raise PluginException(
+            cause="Kerberos domain name is required.",
+            assistance="Provide the domain name in the Kerberos connection settings "
+            "(e.g., example.com) or ensure the host contains the full FQDN.",
+        )
 
-        kdc = self.kdc if self.kdc else self.host
-        upper_domain = domain.upper()
-
-        # Write /etc/krb5.conf
+    def _write_krb5_config(self, upper_domain: str, kdc: str, domain: str):
+        """Write /etc/krb5.conf with the Kerberos realm configuration."""
         krb5_config = (
             f"[libdefaults]\n"
             f"default_realm = {upper_domain}\n"
@@ -101,9 +93,6 @@ class ActiveDirectoryLdapAPI:
             f".{domain} = {upper_domain}\n"
             f"{domain} = {upper_domain}\n"
         )
-
-        self.logger.info(f"Configuring Kerberos: realm={upper_domain}, kdc={kdc}")
-
         try:
             with open("/etc/krb5.conf", "w", encoding="utf-8") as krb5_file:
                 krb5_file.write(krb5_config)
@@ -114,7 +103,8 @@ class ActiveDirectoryLdapAPI:
                 data=error,
             ) from error
 
-        # Write /etc/resolv.conf so DNS can resolve the domain
+    def _write_network_config(self, kdc: str, domain: str):
+        """Write DNS and hosts configuration for Kerberos network resolution."""
         try:
             with open("/etc/resolv.conf", "w", encoding="utf-8") as resolv_file:
                 resolv_file.write(f"search {domain}\nnameserver {kdc}\n")
@@ -125,16 +115,15 @@ class ActiveDirectoryLdapAPI:
                 data=error,
             ) from error
 
-        # Update /etc/hosts with KDC entry for reliable resolution
         try:
             with open("/etc/hosts", "a", encoding="utf-8") as hosts_file:
                 hosts_file.write(f"\n{kdc} {self.host}\n")
         except OSError as error:
             self.logger.warning(f"Could not update /etc/hosts: {error}")
 
-        # Acquire Kerberos ticket via kinit using the provided credentials
+    def _acquire_kerberos_ticket(self, upper_domain: str, kdc: str, domain: str):
+        """Acquire a Kerberos TGT via kinit using the provided credentials."""
         username = self.user_name
-        # Strip DOMAIN\ prefix if present — kinit expects username@REALM format
         if "\\" in username:
             username = username.split("\\", 1)[1]
 
@@ -155,6 +144,22 @@ class ActiveDirectoryLdapAPI:
                 f"Ensure the username does not include the domain prefix for Kerberos auth.",
                 data=stderr.decode("utf-8"),
             )
+
+    def _configure_kerberos(self):
+        """
+        Configure the container for Kerberos authentication at runtime.
+        Writes /etc/krb5.conf, /etc/resolv.conf, and acquires a TGT via kinit.
+        All configuration is derived from user-provided connection inputs.
+        """
+        domain = self._resolve_kerberos_domain()
+        kdc = self.kdc if self.kdc else self.host
+        upper_domain = domain.upper()
+
+        self.logger.info(f"Configuring Kerberos: realm={upper_domain}, kdc={kdc}")
+
+        self._write_krb5_config(upper_domain, kdc, domain)
+        self._write_network_config(kdc, domain)
+        self._acquire_kerberos_ticket(upper_domain, kdc, domain)
 
         self.logger.info("Kerberos ticket acquired successfully")
 
@@ -205,29 +210,32 @@ class ActiveDirectoryLdapAPI:
         if self.auth_type == "Kerberos":
             conn = self._connect_with_kerberos(server)
         elif self.auth_type == "NTLM":
-            try:
-                conn = self.__connect_to_server(server, ldap3.NTLM)
-            except LDAPException:
-                self.logger.info("Failed to connect with NTLM, attempting basic auth")
-                conn = self.__connect_to_server(server)
+            conn = self._connect_with_ntlm_fallback(server)
         else:
-            # Auto mode: try Kerberos first if kerberos config is provided, then fall back to NTLM
-            if self.domain_name or self.kdc:
-                try:
-                    conn = self._connect_with_kerberos(server)
-                    self.logger.info("Connected using Kerberos authentication")
-                    return conn
-                except (PluginException, LDAPException) as error:
-                    self.logger.info(f"Kerberos authentication failed, falling back to NTLM: {error}")
-
-            try:
-                conn = self.__connect_to_server(server, ldap3.NTLM)
-            except LDAPException:
-                self.logger.info("Failed to connect with NTLM, attempting basic auth")
-                conn = self.__connect_to_server(server)
+            conn = self._connect_with_auto(server)
 
         self.logger.info("Connected!")
         return conn
+
+    def _connect_with_ntlm_fallback(self, server) -> ldap3.Connection:
+        """Attempt NTLM authentication, falling back to basic auth on failure."""
+        try:
+            return self.__connect_to_server(server, ldap3.NTLM)
+        except LDAPException:
+            self.logger.info("Failed to connect with NTLM, attempting basic auth")
+            return self.__connect_to_server(server)
+
+    def _connect_with_auto(self, server) -> ldap3.Connection:
+        """Auto mode: try Kerberos first if configured, then fall back to NTLM."""
+        if self.domain_name or self.kdc:
+            try:
+                conn = self._connect_with_kerberos(server)
+                self.logger.info("Connected using Kerberos authentication")
+                return conn
+            except (PluginException, LDAPException) as error:
+                self.logger.info(f"Kerberos authentication failed, falling back to NTLM: {error}")
+
+        return self._connect_with_ntlm_fallback(server)
 
     def __connect_to_server(self, server, authentication=None) -> ldap3.Connection:
         try:

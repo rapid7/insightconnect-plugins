@@ -14,44 +14,36 @@ class TestActionDisableUsers(TestCase):
             (
                 {Input.DISTINGUISHED_NAMES: ["CN=empty_search,DC=example,DC=com"]},
                 {
+                    Output.COMPLETED: [],
                     Output.FAILED: [
                         {
                             "dn": "CN=empty_search,DC=example,DC=com",
-                            "error": "An error occurred during plugin "
-                            "execution!\n"
-                            "\n"
-                            "The DN "
-                            "CN=empty_search,DC=example,DC=com was "
-                            "not found. Please provide a valid DN "
-                            "and try again.",
+                            "error": "An error occurred during plugin execution! "
+                            "The DN CN=empty_search,DC=example,DC=com was not found. "
+                            "Please provide a valid DN and try again.",
                         }
                     ],
-                    Output.COMPLETED: [],
                 },
             ),
             (
                 {Input.DISTINGUISHED_NAMES: ["CN=empty_search,DC=example,DC=com", "CN=Users,DC=example," "DC=com"]},
                 {
+                    Output.COMPLETED: ["CN=Users,DC=example,DC=com"],
                     Output.FAILED: [
                         {
                             "dn": "CN=empty_search,DC=example,DC=com",
-                            "error": "An error occurred during plugin "
-                            "execution!\n"
-                            "\n"
-                            "The DN "
-                            "CN=empty_search,DC=example,DC=com was "
-                            "not found. Please provide a valid DN "
-                            "and try again.",
+                            "error": "An error occurred during plugin execution! "
+                            "The DN CN=empty_search,DC=example,DC=com was not found. "
+                            "Please provide a valid DN and try again.",
                         }
                     ],
-                    Output.COMPLETED: ["CN=Users,DC=example,DC=com"],
                 },
             ),
             (
                 {Input.DISTINGUISHED_NAMES: ["CN=Users,DC=example,DC=com"]},
                 {
-                    Output.FAILED: [],
                     Output.COMPLETED: ["CN=Users,DC=example,DC=com"],
+                    Output.FAILED: [],
                 },
             ),
         ]
