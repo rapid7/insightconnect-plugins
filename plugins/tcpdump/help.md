@@ -84,7 +84,7 @@ Example output:
 
 # Version History
 
-* 2.0.1 - Updated SDK to the latest version (6.5.1)
+* 2.0.1 - Updated SDK to the latest version (6.6.0)
 * 2.0.0 - Resolved an input validation issue that could allow OS command injection via the options and filter parameters (CVE-2026-8658) | Action `Read PCAP`: Options must now be space-separated | Refreshed the plugin | Updated SDK to the latest version (6.4.3)
 * 1.1.0 - Updated spec and help.md format for the Extension Library, spec description changes
 * 1.0.2 - New spec and help.md format for the Extension Library
