@@ -131,7 +131,7 @@ If a literal double-quote is required it must be escaped by a backslash `\`. For
 
 # Version History
 
-* 2.0.6 - Added keyword to the plugin
+* 2.0.6 - Added keyword to the plugin | Updated SDK to the latest version (6.6.0)
 * 2.0.5 - Resolved input validation vulnerabilities within the expression parameter | (CVE-2026-9155): Fixed an OS command injection flaw | (CVE-2026-9153): Fixed an arbitrary file read vulnerability | (CVE-2026-9154): Fixed an arbitrary file write vulnerability | Updated SDK to the latest version (6.5.1)
 * 2.0.4 - Refreshed the plugin | Updated SDK to the latest version (6.4.3)
 * 2.0.3 - Add action input and output examples to the documentation
