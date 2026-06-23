@@ -112,19 +112,18 @@ class ActiveDirectoryLdapAPI:
                 cause="Failed to write Kerberos configuration.",
                 assistance="Ensure the plugin container has write access to /etc/krb5.conf.",
                 data=error,
-            )
+            ) from error
 
         # Write /etc/resolv.conf so DNS can resolve the domain
-        dns_config = f"search {domain}\nnameserver {kdc}\n"
         try:
             with open("/etc/resolv.conf", "w", encoding="utf-8") as resolv_file:
-                resolv_file.write(dns_config)
+                resolv_file.write(f"search {domain}\nnameserver {kdc}\n")
         except OSError as error:
             raise PluginException(
                 cause="Failed to write DNS configuration.",
                 assistance="Ensure the plugin container has write access to /etc/resolv.conf.",
                 data=error,
-            )
+            ) from error
 
         # Update /etc/hosts with KDC entry for reliable resolution
         try:
@@ -148,16 +147,13 @@ class ActiveDirectoryLdapAPI:
         ) as process:
             stdout, stderr = process.communicate()
 
-        stdout_decoded = stdout.decode("utf-8")
-        stderr_decoded = stderr.decode("utf-8")
-
         if process.returncode != 0:
-            self.logger.error(f"kinit failed - stdout: {stdout_decoded}, stderr: {stderr_decoded}")
+            self.logger.error(f"kinit failed - stdout: {stdout.decode('utf-8')}, stderr: {stderr.decode('utf-8')}")
             raise PluginException(
                 cause="Failed to acquire Kerberos ticket.",
                 assistance=f"Verify the KDC ({kdc}) is reachable and credentials are valid for domain {domain}. "
                 f"Ensure the username does not include the domain prefix for Kerberos auth.",
-                data=stderr_decoded,
+                data=stderr.decode("utf-8"),
             )
 
         self.logger.info("Kerberos ticket acquired successfully")
@@ -180,9 +176,9 @@ class ActiveDirectoryLdapAPI:
                 cause="Kerberos LDAP bind failed.",
                 assistance="Verify your Kerberos credentials and that the KDC is reachable.",
                 data=error,
-            )
+            ) from error
         except LDAPSocketOpenError as error:
-            raise PluginException(preset=PluginException.Preset.SERVICE_UNAVAILABLE, data=error)
+            raise PluginException(preset=PluginException.Preset.SERVICE_UNAVAILABLE, data=error) from error
         return conn
 
     def establish_connection(self) -> ldap3.Connection:
