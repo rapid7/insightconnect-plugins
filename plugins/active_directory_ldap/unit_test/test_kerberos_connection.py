@@ -8,58 +8,66 @@ from komand_active_directory_ldap.util.api import ActiveDirectoryLdapAPI
 
 from common import MockConnection, MockServer
 
+DEFAULT_KDC = "10.0.1.11"
+DEFAULT_DOMAIN = "example.com"
+DEFAULT_HOST = "dc01.example.com"
+
+
+def create_api(logger, **overrides):
+    """Create an ActiveDirectoryLdapAPI instance with sensible defaults for Kerberos tests."""
+    defaults = {
+        "use_ssl": True,
+        "host": DEFAULT_HOST,
+        "port": 636,
+        "referrals": True,
+        "user_name": "EXAMPLE\\svc_account",
+        "password": "SecureP@ss123",
+        "use_channel_binding": False,
+        "auth_type": "Kerberos",
+        "kdc": DEFAULT_KDC,
+        "domain_name": DEFAULT_DOMAIN,
+    }
+    defaults.update(overrides)
+    return ActiveDirectoryLdapAPI(logger=logger, **defaults)
+
+
+def mock_successful_kinit():
+    """Return a mock Popen that simulates successful kinit execution."""
+    mock_process = MagicMock()
+    mock_process.communicate.return_value = (b"", b"")
+    mock_process.returncode = 0
+    mock_process.__enter__ = MagicMock(return_value=mock_process)
+    mock_process.__exit__ = MagicMock(return_value=False)
+    return mock_process
+
 
 class TestKerberosConfiguration(TestCase):
     """Tests for Kerberos authentication configuration in the AD LDAP plugin."""
 
     def setUp(self):
         self.logger = logging.getLogger("test_kerberos")
-        self.api = ActiveDirectoryLdapAPI(
-            logger=self.logger,
-            use_ssl=True,
-            host="dc01.example.com",
-            port=636,
-            referrals=True,
-            user_name="EXAMPLE\\svc_account",
-            password="SecureP@ss123",
-            use_channel_binding=False,
-            auth_type="Kerberos",
-            kdc="10.0.1.11",
-            domain_name="example.com",
-        )
+        self.api = create_api(self.logger)
 
     @patch("subprocess.Popen")
     @patch("builtins.open", new_callable=mock_open)
     def test_configure_kerberos_writes_krb5_conf(self, mock_file, mock_popen):
         """Verify that _configure_kerberos writes a valid /etc/krb5.conf."""
-        mock_process = MagicMock()
-        mock_process.communicate.return_value = (b"", b"")
-        mock_process.returncode = 0
-        mock_process.__enter__ = MagicMock(return_value=mock_process)
-        mock_process.__exit__ = MagicMock(return_value=False)
-        mock_popen.return_value = mock_process
+        mock_popen.return_value = mock_successful_kinit()
 
         self.api._configure_kerberos()
 
-        # Check that /etc/krb5.conf was opened for writing
         krb5_call = call("/etc/krb5.conf", "w", encoding="utf-8")
         self.assertIn(krb5_call, mock_file.call_args_list)
 
-        # Verify content written contains the realm and KDC
         written_content = "".join(call_args[0][0] for call_args in mock_file().write.call_args_list if call_args[0])
         self.assertIn("EXAMPLE.COM", written_content)
-        self.assertIn("10.0.1.11", written_content)
+        self.assertIn(DEFAULT_KDC, written_content)
 
     @patch("subprocess.Popen")
     @patch("builtins.open", new_callable=mock_open)
     def test_configure_kerberos_writes_resolv_conf(self, mock_file, mock_popen):
         """Verify that _configure_kerberos writes DNS config pointing to the KDC."""
-        mock_process = MagicMock()
-        mock_process.communicate.return_value = (b"", b"")
-        mock_process.returncode = 0
-        mock_process.__enter__ = MagicMock(return_value=mock_process)
-        mock_process.__exit__ = MagicMock(return_value=False)
-        mock_popen.return_value = mock_process
+        mock_popen.return_value = mock_successful_kinit()
 
         self.api._configure_kerberos()
 
@@ -70,18 +78,11 @@ class TestKerberosConfiguration(TestCase):
     @patch("builtins.open", new_callable=mock_open)
     def test_configure_kerberos_runs_kinit_with_correct_principal(self, mock_file, mock_popen):
         """Verify kinit is called with the correct username@REALM format, stripping DOMAIN\\ prefix."""
-        mock_process = MagicMock()
-        mock_process.communicate.return_value = (b"", b"")
-        mock_process.returncode = 0
-        mock_process.__enter__ = MagicMock(return_value=mock_process)
-        mock_process.__exit__ = MagicMock(return_value=False)
-        mock_popen.return_value = mock_process
+        mock_popen.return_value = mock_successful_kinit()
 
         self.api._configure_kerberos()
 
-        # Verify kinit was called with the username (without DOMAIN\ prefix) and the realm
-        kinit_call = mock_popen.call_args
-        kinit_command = kinit_call[0][0]
+        kinit_command = mock_popen.call_args[0][0]
         self.assertIn("kinit svc_account@EXAMPLE.COM", kinit_command)
 
     @patch("subprocess.Popen")
@@ -99,23 +100,11 @@ class TestKerberosConfiguration(TestCase):
             self.api._configure_kerberos()
 
         self.assertIn("Failed to acquire Kerberos ticket", context.exception.cause)
-        self.assertIn("10.0.1.11", context.exception.assistance)
+        self.assertIn(DEFAULT_KDC, context.exception.assistance)
 
     def test_configure_kerberos_missing_domain_raises_exception(self):
         """Verify that missing domain and non-FQDN host raises a clear error."""
-        api_no_domain = ActiveDirectoryLdapAPI(
-            logger=self.logger,
-            use_ssl=True,
-            host="dc01",
-            port=636,
-            referrals=True,
-            user_name="svc_account",
-            password="SecureP@ss123",
-            use_channel_binding=False,
-            auth_type="Kerberos",
-            kdc="10.0.1.11",
-            domain_name="",
-        )
+        api_no_domain = create_api(self.logger, host="dc01", domain_name="")
 
         with self.assertRaises(PluginException) as context:
             api_no_domain._configure_kerberos()
@@ -126,64 +115,25 @@ class TestKerberosConfiguration(TestCase):
     @patch("builtins.open", new_callable=mock_open)
     def test_configure_kerberos_derives_domain_from_host(self, mock_file, mock_popen):
         """When domain_name is empty but host is FQDN, domain should be derived from host."""
-        mock_process = MagicMock()
-        mock_process.communicate.return_value = (b"", b"")
-        mock_process.returncode = 0
-        mock_process.__enter__ = MagicMock(return_value=mock_process)
-        mock_process.__exit__ = MagicMock(return_value=False)
-        mock_popen.return_value = mock_process
+        mock_popen.return_value = mock_successful_kinit()
 
-        api_derived_domain = ActiveDirectoryLdapAPI(
-            logger=self.logger,
-            use_ssl=True,
-            host="dc01.corp.example.com",
-            port=636,
-            referrals=True,
-            user_name="svc_account",
-            password="SecureP@ss123",
-            use_channel_binding=False,
-            auth_type="Kerberos",
-            kdc="10.0.1.11",
-            domain_name="",
-        )
+        api_derived = create_api(self.logger, host="dc01.corp.example.com", domain_name="", user_name="svc_account")
+        api_derived._configure_kerberos()
 
-        api_derived_domain._configure_kerberos()
-
-        # Verify kinit uses the derived domain from the FQDN host
-        kinit_call = mock_popen.call_args
-        kinit_command = kinit_call[0][0]
+        kinit_command = mock_popen.call_args[0][0]
         self.assertIn("kinit svc_account@CORP.EXAMPLE.COM", kinit_command)
 
     @patch("subprocess.Popen")
     @patch("builtins.open", new_callable=mock_open)
     def test_configure_kerberos_uses_host_as_kdc_when_kdc_not_provided(self, mock_file, mock_popen):
         """When KDC is not provided, the host should be used as the KDC."""
-        mock_process = MagicMock()
-        mock_process.communicate.return_value = (b"", b"")
-        mock_process.returncode = 0
-        mock_process.__enter__ = MagicMock(return_value=mock_process)
-        mock_process.__exit__ = MagicMock(return_value=False)
-        mock_popen.return_value = mock_process
+        mock_popen.return_value = mock_successful_kinit()
 
-        api_no_kdc = ActiveDirectoryLdapAPI(
-            logger=self.logger,
-            use_ssl=True,
-            host="dc01.example.com",
-            port=636,
-            referrals=True,
-            user_name="svc_account",
-            password="SecureP@ss123",
-            use_channel_binding=False,
-            auth_type="Kerberos",
-            kdc="",
-            domain_name="example.com",
-        )
-
+        api_no_kdc = create_api(self.logger, kdc="", user_name="svc_account")
         api_no_kdc._configure_kerberos()
 
-        # Verify the host was used as the KDC in the krb5.conf
         written_content = "".join(call_args[0][0] for call_args in mock_file().write.call_args_list if call_args[0])
-        self.assertIn("dc01.example.com", written_content)
+        self.assertIn(DEFAULT_HOST, written_content)
 
 
 class TestKerberosEstablishConnection(TestCase):
@@ -197,24 +147,10 @@ class TestKerberosEstablishConnection(TestCase):
     @patch("ldap3.Server")
     def test_kerberos_auth_type_uses_sasl_gssapi(self, mock_server, mock_connection, mock_configure):
         """Verify that Kerberos auth type creates a SASL/GSSAPI connection."""
-        mock_conn_instance = MagicMock()
-        mock_connection.return_value = mock_conn_instance
+        mock_connection.return_value = MagicMock()
+        api = create_api(self.logger, host="ldaps://dc01.example.com")
 
-        api = ActiveDirectoryLdapAPI(
-            logger=self.logger,
-            use_ssl=True,
-            host="ldaps://dc01.example.com",
-            port=636,
-            referrals=True,
-            user_name="EXAMPLE\\svc_account",
-            password="SecureP@ss123",
-            use_channel_binding=False,
-            auth_type="Kerberos",
-            kdc="10.0.1.11",
-            domain_name="example.com",
-        )
-
-        conn = api.establish_connection()
+        api.establish_connection()
 
         mock_configure.assert_called_once()
         mock_connection.assert_called_once_with(
@@ -230,24 +166,10 @@ class TestKerberosEstablishConnection(TestCase):
     @patch("ldap3.Server")
     def test_ntlm_auth_type_does_not_configure_kerberos(self, mock_server, mock_connection, mock_configure):
         """Verify that NTLM auth type does not call Kerberos configuration."""
-        mock_conn_instance = MagicMock()
-        mock_connection.return_value = mock_conn_instance
+        mock_connection.return_value = MagicMock()
+        api = create_api(self.logger, host="ldaps://dc01.example.com", auth_type="NTLM")
 
-        api = ActiveDirectoryLdapAPI(
-            logger=self.logger,
-            use_ssl=True,
-            host="ldaps://dc01.example.com",
-            port=636,
-            referrals=True,
-            user_name="EXAMPLE\\svc_account",
-            password="SecureP@ss123",
-            use_channel_binding=False,
-            auth_type="NTLM",
-            kdc="10.0.1.11",
-            domain_name="example.com",
-        )
-
-        conn = api.establish_connection()
+        api.establish_connection()
 
         mock_configure.assert_not_called()
 
@@ -257,22 +179,9 @@ class TestKerberosEstablishConnection(TestCase):
     def test_auto_auth_tries_kerberos_first_when_config_provided(self, mock_server, mock_ntlm_connect, mock_kerb):
         """Verify Auto mode attempts Kerberos first when kerberos config is present."""
         mock_kerb.return_value = MagicMock()
+        api = create_api(self.logger, host="ldaps://dc01.example.com", auth_type="Auto")
 
-        api = ActiveDirectoryLdapAPI(
-            logger=self.logger,
-            use_ssl=True,
-            host="ldaps://dc01.example.com",
-            port=636,
-            referrals=True,
-            user_name="EXAMPLE\\svc_account",
-            password="SecureP@ss123",
-            use_channel_binding=False,
-            auth_type="Auto",
-            kdc="10.0.1.11",
-            domain_name="example.com",
-        )
-
-        conn = api.establish_connection()
+        api.establish_connection()
 
         mock_kerb.assert_called_once()
         mock_ntlm_connect.assert_not_called()
@@ -282,30 +191,13 @@ class TestKerberosEstablishConnection(TestCase):
     @patch("ldap3.Server")
     def test_auto_auth_falls_back_to_ntlm_on_kerberos_failure(self, mock_server, mock_ntlm_connect, mock_kerb):
         """Verify Auto mode falls back to NTLM when Kerberos fails."""
-        mock_kerb.side_effect = PluginException(
-            cause="Failed to acquire Kerberos ticket.",
-            assistance="KDC unreachable.",
-        )
+        mock_kerb.side_effect = PluginException(cause="Failed to acquire Kerberos ticket.", assistance="KDC unreachable.")
         mock_ntlm_connect.return_value = MagicMock()
+        api = create_api(self.logger, host="ldaps://dc01.example.com", auth_type="Auto")
 
-        api = ActiveDirectoryLdapAPI(
-            logger=self.logger,
-            use_ssl=True,
-            host="ldaps://dc01.example.com",
-            port=636,
-            referrals=True,
-            user_name="EXAMPLE\\svc_account",
-            password="SecureP@ss123",
-            use_channel_binding=False,
-            auth_type="Auto",
-            kdc="10.0.1.11",
-            domain_name="example.com",
-        )
-
-        conn = api.establish_connection()
+        api.establish_connection()
 
         mock_kerb.assert_called_once()
-        # NTLM should have been called as fallback
         self.assertTrue(mock_ntlm_connect.called)
 
     @patch.object(ActiveDirectoryLdapAPI, "_ActiveDirectoryLdapAPI__connect_to_server")
@@ -313,24 +205,10 @@ class TestKerberosEstablishConnection(TestCase):
     def test_auto_auth_skips_kerberos_when_no_config(self, mock_server, mock_ntlm_connect):
         """Verify Auto mode skips Kerberos and goes straight to NTLM when no kerberos config."""
         mock_ntlm_connect.return_value = MagicMock()
+        api = create_api(self.logger, host="ldaps://dc01.example.com", auth_type="Auto", kdc="", domain_name="")
 
-        api = ActiveDirectoryLdapAPI(
-            logger=self.logger,
-            use_ssl=True,
-            host="ldaps://dc01.example.com",
-            port=636,
-            referrals=True,
-            user_name="EXAMPLE\\svc_account",
-            password="SecureP@ss123",
-            use_channel_binding=False,
-            auth_type="Auto",
-            kdc="",
-            domain_name="",
-        )
+        api.establish_connection()
 
-        conn = api.establish_connection()
-
-        # Should go directly to NTLM without Kerberos attempt
         mock_ntlm_connect.assert_called()
 
 
@@ -344,26 +222,8 @@ class TestKerberosUsernameHandling(TestCase):
     @patch("builtins.open", new_callable=mock_open)
     def test_domain_backslash_prefix_stripped(self, mock_file, mock_popen):
         """Verify DOMAIN\\username format has the DOMAIN\\ stripped for kinit."""
-        mock_process = MagicMock()
-        mock_process.communicate.return_value = (b"", b"")
-        mock_process.returncode = 0
-        mock_process.__enter__ = MagicMock(return_value=mock_process)
-        mock_process.__exit__ = MagicMock(return_value=False)
-        mock_popen.return_value = mock_process
-
-        api = ActiveDirectoryLdapAPI(
-            logger=self.logger,
-            use_ssl=True,
-            host="dc01.example.com",
-            port=636,
-            referrals=True,
-            user_name="EXAMPLE\\admin_user",
-            password="password123",
-            use_channel_binding=False,
-            auth_type="Kerberos",
-            kdc="10.0.1.11",
-            domain_name="example.com",
-        )
+        mock_popen.return_value = mock_successful_kinit()
+        api = create_api(self.logger, user_name="EXAMPLE\\admin_user", password="password123")
 
         api._configure_kerberos()
 
@@ -375,26 +235,8 @@ class TestKerberosUsernameHandling(TestCase):
     @patch("builtins.open", new_callable=mock_open)
     def test_plain_username_used_as_is(self, mock_file, mock_popen):
         """Verify plain username (no DOMAIN\\ prefix) is used directly."""
-        mock_process = MagicMock()
-        mock_process.communicate.return_value = (b"", b"")
-        mock_process.returncode = 0
-        mock_process.__enter__ = MagicMock(return_value=mock_process)
-        mock_process.__exit__ = MagicMock(return_value=False)
-        mock_popen.return_value = mock_process
-
-        api = ActiveDirectoryLdapAPI(
-            logger=self.logger,
-            use_ssl=True,
-            host="dc01.example.com",
-            port=636,
-            referrals=True,
-            user_name="admin_user",
-            password="password123",
-            use_channel_binding=False,
-            auth_type="Kerberos",
-            kdc="10.0.1.11",
-            domain_name="example.com",
-        )
+        mock_popen.return_value = mock_successful_kinit()
+        api = create_api(self.logger, user_name="admin_user", password="password123")
 
         api._configure_kerberos()
 
