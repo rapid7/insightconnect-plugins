@@ -191,7 +191,9 @@ class TestKerberosEstablishConnection(TestCase):
     @patch("ldap3.Server")
     def test_auto_auth_falls_back_to_ntlm_on_kerberos_failure(self, mock_server, mock_ntlm_connect, mock_kerb):
         """Verify Auto mode falls back to NTLM when Kerberos fails."""
-        mock_kerb.side_effect = PluginException(cause="Failed to acquire Kerberos ticket.", assistance="KDC unreachable.")
+        mock_kerb.side_effect = PluginException(
+            cause="Failed to acquire Kerberos ticket.", assistance="KDC unreachable."
+        )
         mock_ntlm_connect.return_value = MagicMock()
         api = create_api(self.logger, host="ldaps://dc01.example.com", auth_type="Auto")
 
