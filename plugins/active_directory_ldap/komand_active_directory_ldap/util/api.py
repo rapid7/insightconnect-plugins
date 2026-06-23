@@ -1,8 +1,10 @@
 # pylint: disable=too-many-positional-arguments
 import json
+import subprocess  # noqa: B404
 from functools import wraps
 from json import loads
 from typing import List
+
 import ldap3
 from ldap3 import MODIFY_REPLACE, ALL_ATTRIBUTES, ALL_OPERATIONAL_ATTRIBUTES
 from ldap3 import extend
@@ -39,6 +41,9 @@ class ActiveDirectoryLdapAPI:
         user_name=None,
         password=None,
         use_channel_binding=None,
+        auth_type=None,
+        kdc=None,
+        domain_name=None,
     ):
         self.logger = logger
         self.use_ssl = use_ssl
@@ -48,13 +53,138 @@ class ActiveDirectoryLdapAPI:
         self.user_name = user_name
         self.password = password
         self.use_channel_binding = use_channel_binding
+        self.auth_type = auth_type or "Auto"
+        self.kdc = kdc or ""
+        self.domain_name = domain_name or ""
 
         set_library_log_detail_level(ERROR)
         set_library_log_hide_sensitive_data(True)
 
+    def _resolve_kerberos_domain(self) -> str:
+        """Resolve the Kerberos domain from connection settings or host FQDN."""
+        if self.domain_name:
+            return self.domain_name
+        if "." in self.host:
+            return self.host.split(".", 1)[1]
+        raise PluginException(
+            cause="Kerberos domain name is required.",
+            assistance="Provide the domain name in the Kerberos connection settings "
+            "(e.g., example.com) or ensure the host contains the full FQDN.",
+        )
+
+    def _write_config_file(self, filepath: str, content: str, description: str):
+        """Write configuration content to a system file."""
+        try:
+            with open(filepath, "w", encoding="utf-8") as config_file:
+                config_file.write(content)
+        except OSError as error:
+            raise PluginException(
+                cause=f"Failed to write {description}.",
+                assistance=f"Ensure the plugin container has write access to {filepath}.",
+                data=error,
+            ) from error
+
+    def _write_krb5_config(self, upper_domain: str, kdc: str, domain: str):
+        """Write /etc/krb5.conf with the Kerberos realm configuration."""
+        krb5_config = (
+            f"[libdefaults]\n"
+            f"default_realm = {upper_domain}\n"
+            f"forwardable = true\n"
+            f"proxiable = true\n"
+            f"dns_lookup_realm = false\n"
+            f"dns_lookup_kdc = false\n"
+            f"\n"
+            f"[realms]\n"
+            f"{upper_domain} = {{\n"
+            f"kdc = {kdc}\n"
+            f"admin_server = {kdc}\n"
+            f"default_domain = {upper_domain}\n"
+            f"}}\n"
+            f"\n"
+            f"[domain_realm]\n"
+            f".{domain} = {upper_domain}\n"
+            f"{domain} = {upper_domain}\n"
+        )
+        self._write_config_file("/etc/krb5.conf", krb5_config, "Kerberos configuration")
+
+    def _write_network_config(self, kdc: str, domain: str):
+        """Write DNS and hosts configuration for Kerberos network resolution."""
+        self._write_config_file("/etc/resolv.conf", f"search {domain}\nnameserver {kdc}\n", "DNS configuration")
+
+        try:
+            with open("/etc/hosts", "a", encoding="utf-8") as hosts_file:
+                hosts_file.write(f"\n{kdc} {self.host}\n")
+        except OSError as error:
+            self.logger.warning(f"Could not update /etc/hosts: {error}")
+
+    def _acquire_kerberos_ticket(self, upper_domain: str, kdc: str, domain: str):
+        """Acquire a Kerberos TGT via kinit using the provided credentials."""
+        username = self.user_name
+        if "\\" in username:
+            username = username.split("\\", 1)[1]
+
+        kinit_command = f"echo '{self.password}' | kinit {username}@{upper_domain}"
+        with subprocess.Popen(
+            kinit_command,
+            shell=True,  # noqa: B602
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        ) as process:
+            stdout, stderr = process.communicate()
+
+        if process.returncode != 0:
+            self.logger.error(f"kinit failed - stdout: {stdout.decode('utf-8')}, stderr: {stderr.decode('utf-8')}")
+            raise PluginException(
+                cause="Failed to acquire Kerberos ticket.",
+                assistance=f"Verify the KDC ({kdc}) is reachable and credentials are valid for domain {domain}. "
+                f"Ensure the username does not include the domain prefix for Kerberos auth.",
+                data=stderr.decode("utf-8"),
+            )
+
+    def _configure_kerberos(self):
+        """
+        Configure the container for Kerberos authentication at runtime.
+        Writes /etc/krb5.conf, /etc/resolv.conf, and acquires a TGT via kinit.
+        All configuration is derived from user-provided connection inputs.
+        """
+        domain = self._resolve_kerberos_domain()
+        kdc = self.kdc if self.kdc else self.host
+        upper_domain = domain.upper()
+
+        self.logger.info(f"Configuring Kerberos: realm={upper_domain}, kdc={kdc}")
+
+        self._write_krb5_config(upper_domain, kdc, domain)
+        self._write_network_config(kdc, domain)
+        self._acquire_kerberos_ticket(upper_domain, kdc, domain)
+
+        self.logger.info("Kerberos ticket acquired successfully")
+
+    def _connect_with_kerberos(self, server) -> ldap3.Connection:
+        """
+        Establish an LDAP connection using Kerberos (SASL GSSAPI) authentication.
+        """
+        self._configure_kerberos()
+        try:
+            conn = ldap3.Connection(
+                server=server,
+                authentication=ldap3.SASL,
+                sasl_mechanism=ldap3.KERBEROS,
+                auto_bind=True,
+                auto_referrals=self.referrals,
+            )
+        except LDAPBindError as error:
+            raise PluginException(
+                cause="Kerberos LDAP bind failed.",
+                assistance="Verify your Kerberos credentials and that the KDC is reachable.",
+                data=error,
+            ) from error
+        except LDAPSocketOpenError as error:
+            raise PluginException(preset=PluginException.Preset.SERVICE_UNAVAILABLE, data=error) from error
+        return conn
+
     def establish_connection(self) -> ldap3.Connection:
         """
-        Connect to LDAP
+        Connect to LDAP using the configured authentication method.
         """
         if not self.host.startswith("ldap://") and not self.host.startswith("ldaps://"):
             if self.use_ssl:
@@ -73,16 +203,35 @@ class ActiveDirectoryLdapAPI:
             get_info=ldap3.ALL,
         )
 
-        try:
-            conn = self.__connect_to_server(server, ldap3.NTLM)
-        except LDAPException:
-            # An exception here is likely caused because the ldap server dose use NTLM
-            # A basic auth connection will be tried instead
-            self.logger.info("Failed to connect to the server with NTLM, attempting to connect with basic auth")
-            conn = self.__connect_to_server(server)
+        if self.auth_type == "Kerberos":
+            conn = self._connect_with_kerberos(server)
+        elif self.auth_type == "NTLM":
+            conn = self._connect_with_ntlm_fallback(server)
+        else:
+            conn = self._connect_with_auto(server)
 
         self.logger.info("Connected!")
         return conn
+
+    def _connect_with_ntlm_fallback(self, server) -> ldap3.Connection:
+        """Attempt NTLM authentication, falling back to basic auth on failure."""
+        try:
+            return self.__connect_to_server(server, ldap3.NTLM)
+        except LDAPException:
+            self.logger.info("Failed to connect with NTLM, attempting basic auth")
+            return self.__connect_to_server(server)
+
+    def _connect_with_auto(self, server) -> ldap3.Connection:
+        """Auto mode: try Kerberos first if configured, then fall back to NTLM."""
+        if self.domain_name or self.kdc:
+            try:
+                conn = self._connect_with_kerberos(server)
+                self.logger.info("Connected using Kerberos authentication")
+                return conn
+            except (PluginException, LDAPException) as error:
+                self.logger.info(f"Kerberos authentication failed, falling back to NTLM: {error}")
+
+        return self._connect_with_ntlm_fallback(server)
 
     def __connect_to_server(self, server, authentication=None) -> ldap3.Connection:
         try:

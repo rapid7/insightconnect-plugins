@@ -4,8 +4,10 @@ import json
 
 
 class Input:
+    AUTH_TYPE = "auth_type"
     CHASE_REFERRALS = "chase_referrals"
     HOST = "host"
+    KERBEROS = "kerberos"
     PORT = "port"
     USE_CHANNEL_BINDING = "use_channel_binding"
     USE_SSL = "use_ssl"
@@ -13,24 +15,41 @@ class Input:
 
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        r"""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
+    "auth_type": {
+      "type": "string",
+      "title": "Authentication Type",
+      "description": "Authentication type to use. NTLM uses DOMAIN\\\\username and password. Kerberos uses ticket-based authentication via the provided credentials and KDC. Auto will attempt Kerberos first, then fall back to NTLM",
+      "default": "Auto",
+      "enum": [
+        "NTLM",
+        "Kerberos",
+        "Auto"
+      ],
+      "order": 5
+    },
     "chase_referrals": {
       "type": "boolean",
       "title": "Chase Referrals",
       "description": "Allows the plugin to follow referrals from the specified Active Directory server to other Active Directory servers",
       "default": true,
-      "order": 6
+      "order": 8
     },
     "host": {
       "type": "string",
       "title": "Host",
       "description": "Server Host, e.g. example.com",
       "order": 1
+    },
+    "kerberos": {
+      "$ref": "#/definitions/kerberos",
+      "title": "Kerberos",
+      "description": "Connection details required for Kerberos authentication. Provide the domain name and KDC address",
+      "order": 7
     },
     "port": {
       "type": "integer",
@@ -56,10 +75,11 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "$ref": "#/definitions/credential_username_password",
       "title": "Username and Password",
       "description": "Username and password",
-      "order": 5
+      "order": 6
     }
   },
   "required": [
+    "auth_type",
     "chase_referrals",
     "host",
     "port",
@@ -92,11 +112,28 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
         "username",
         "password"
       ]
+    },
+    "kerberos": {
+      "type": "object",
+      "title": "kerberos",
+      "properties": {
+        "kdc": {
+          "type": "string",
+          "title": "KDC",
+          "description": "IP address of the Active Directory domain controller (Key Distribution Center). If not provided, the Host value is used",
+          "order": 1
+        },
+        "domain_name": {
+          "type": "string",
+          "title": "Domain Name",
+          "description": "The fully qualified domain name of the Active Directory domain, e.g. example.com",
+          "order": 2
+        }
+      }
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
