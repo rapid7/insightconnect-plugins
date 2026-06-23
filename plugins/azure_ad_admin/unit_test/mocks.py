@@ -13,6 +13,7 @@ class MockRequest:
                 "@odata.type": "#microsoft.graph.user",
                 "city": None,
                 "companyName": None,
+                "employeeOrgData": {"costCenter": "111111111", "division": "Engineering"},
             },
         }
 

@@ -946,6 +946,13 @@ Example output:
 
 ### Custom Types
   
+**employeeOrgData**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Cost Center|string|None|False|The cost center associated with the user|None|
+|Division|string|None|False|The name of the division in which the user works|None|
+  
 **manager**
 
 |Name|Type|Default|Required|Description|Example|
@@ -967,7 +974,7 @@ Example output:
 |Display Name|string|None|False|Display Name|None|
 |Employee Hire Date|date|None|False|Employee Hire Date|None|
 |Employee ID|string|None|False|Employee ID|None|
-|Employee Org Data|string|None|False|Employee Org Data|None|
+|Employee Org Data|employeeOrgData|None|False|Employee Org Data|None|
 |Employee Type|string|None|False|Employee Type|None|
 |External User State|string|None|False|External User State|None|
 |External User State Change Date Time|string|None|False|External User State Change Date Time|None|
@@ -1160,6 +1167,7 @@ Example output:
 
 # Version History
 
+* 6.0.0 - `Get User Info`: Fixed output validation error when manager has `employeeOrgData` populated with `costCenter` or `division`
 * 5.1.0 - Renamed plugin to Microsoft Entra ID Admin | New action Get User Memberships. | Updated SDK to the latest version (6.5.1)
 * 5.0.1 - `Search Devices`: Fixed issue where devices output was limited | Updated SDK to the latest version (6.4.1)
 * 5.0.0 - Update SDK to the latest version | Update the output type of `risk` for the `risk_detection` trigger to include all fields
