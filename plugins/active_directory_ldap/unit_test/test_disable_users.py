@@ -6,48 +6,11 @@ from komand_active_directory_ldap.actions.disable_users.schema import Input, Out
 from parameterized import parameterized
 
 from common import MockConnection, MockServer, default_connector
+from test_manage_users_common import MANAGE_USERS_TEST_CASES
 
 
 class TestActionDisableUsers(TestCase):
-    @parameterized.expand(
-        [
-            (
-                {Input.DISTINGUISHED_NAMES: ["CN=empty_search,DC=example,DC=com"]},
-                {
-                    Output.COMPLETED: [],
-                    Output.FAILED: [
-                        {
-                            "dn": "CN=empty_search,DC=example,DC=com",
-                            "error": "An error occurred during plugin execution! "
-                            "The DN CN=empty_search,DC=example,DC=com was not found. "
-                            "Please provide a valid DN and try again.",
-                        }
-                    ],
-                },
-            ),
-            (
-                {Input.DISTINGUISHED_NAMES: ["CN=empty_search,DC=example,DC=com", "CN=Users,DC=example," "DC=com"]},
-                {
-                    Output.COMPLETED: ["CN=Users,DC=example,DC=com"],
-                    Output.FAILED: [
-                        {
-                            "dn": "CN=empty_search,DC=example,DC=com",
-                            "error": "An error occurred during plugin execution! "
-                            "The DN CN=empty_search,DC=example,DC=com was not found. "
-                            "Please provide a valid DN and try again.",
-                        }
-                    ],
-                },
-            ),
-            (
-                {Input.DISTINGUISHED_NAMES: ["CN=Users,DC=example,DC=com"]},
-                {
-                    Output.COMPLETED: ["CN=Users,DC=example,DC=com"],
-                    Output.FAILED: [],
-                },
-            ),
-        ]
-    )
+    @parameterized.expand(MANAGE_USERS_TEST_CASES)
     @mock.patch("ldap3.Server", mock.MagicMock(return_value=MockServer))
     @mock.patch("ldap3.Connection", mock.MagicMock(return_value=MockConnection()))
     @default_connector(action=DisableUsers())
