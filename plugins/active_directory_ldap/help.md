@@ -14,8 +14,9 @@
 
 * Host name and port number (the default TCP/UDP port for LDAP is 389, and 636 for LDAP over SSL)
 * Administrative credentials
-* To connect, you must have NTLM credentials.
-* Please make sure you enter your credentials with the DOMAIN\username format.
+* To connect, you must have NTLM or Kerberos credentials.
+* For NTLM, please make sure you enter your credentials with the DOMAIN\username format.
+* For Kerberos, provide the domain name and KDC address. The plugin will handle ticket acquisition automatically using the provided credentials.
 
 # Supported Product Versions
 
@@ -29,8 +30,10 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|auth_type|string|Auto|True|Authentication type to use. NTLM uses DOMAIN\\username and password. Kerberos uses ticket-based authentication via the provided credentials and KDC. Auto will attempt Kerberos first, then fall back to NTLM|["NTLM", "Kerberos", "Auto"]|Auto|None|None|
 |chase_referrals|boolean|True|True|Allows the plugin to follow referrals from the specified Active Directory server to other Active Directory servers|None|True|None|None|
 |host|string|None|True|Server Host, e.g. example.com|None|example.com|None|None|
+|kerberos|kerberos|None|False|Connection details required for Kerberos authentication. Provide the domain name and KDC address|None|{"kdc": "10.0.1.11", "domain_name": "example.com"}|None|None|
 |port|integer|389|True|Port, e.g. 389|None|389|None|None|
 |use_channel_binding|boolean|False|False|Enable this option to require a secure TLS channel before binding, as needed for LDAP connections that enforce channel binding|None|False|None|None|
 |use_ssl|boolean|None|True|Use SSL?|None|True|None|None|
@@ -40,8 +43,13 @@ Example input:
 
 ```
 {
+  "auth_type": "Auto",
   "chase_referrals": true,
   "host": "example.com",
+  "kerberos": {
+    "domain_name": "example.com",
+    "kdc": "10.0.1.11"
+  },
   "port": 389,
   "use_channel_binding": false,
   "use_ssl": true,
@@ -678,6 +686,13 @@ Example output:
 
 ### Custom Types
   
+**kerberos**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Domain Name|string|None|False|The fully qualified domain name of the Active Directory domain, e.g. example.com|None|
+|KDC|string|None|False|IP address of the Active Directory domain controller (Key Distribution Center). If not provided, the Host value is used|None|
+  
 **attributes**
 
 |Name|Type|Default|Required|Description|Example|
@@ -762,6 +777,7 @@ the query results, and then using the variable step $item.dn
 
 # Version History
 
+* 11.0.0 - Add Kerberos (SASL GSSAPI) authentication support | Changed user to root for Kerberos credential management | Updated SDK to the latest version (6.6.0)
 * 10.0.1 - Fixed issues with channel binding support | Updated SDK to the latest version (6.3.6)
 * 10.0.0 - Support for channel binding | Updated SDK to the latest version (6.3.3)
 * 9.0.4 - Updated SDK to the latest version (6.2.5)
