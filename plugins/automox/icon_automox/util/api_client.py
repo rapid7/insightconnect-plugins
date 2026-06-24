@@ -1,19 +1,24 @@
-from insightconnect_plugin_runtime.exceptions import PluginException
 import io
 import json
+import uuid
+from logging import Logger
+from typing import Any, Collection, Dict, List, Optional
+
 import requests
-from typing import Dict, List, Optional, Collection, Any
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class ApiClient:
     INTEGRATION_NAME = "rapid7-insightconnect-plugin"
     VERSION = "3.0.0"
     PAGE_SIZE = 500
+    REMEDIATION_CHUNK_SIZE = 100
+    REMEDIATION_MAX_CVES_PER_DEVICE = 500
 
     OUTCOME_FAIL = "failure"
     OUTCOME_SUCCESS = "success"
 
-    def __init__(self, logger, api_key, endpoint="https://console.automox.com/api"):
+    def __init__(self, logger: Logger, api_key: str, endpoint: str = "https://console.automox.com/api") -> None:
         self.endpoint = endpoint
         self.api_key = api_key
         self.session = requests.session()
@@ -31,7 +36,9 @@ class ApiClient:
             "content-type": "application/json",
         }
 
-    def _call_api(self, method: str, url: str, params=None, json_data: object = None) -> Optional[Dict]:
+    def _call_api(
+        self, method: str, url: str, params: Optional[Dict] = None, json_data: Optional[object] = None
+    ) -> Optional[Dict]:
         if params is None:
             params = {}
         try:
@@ -64,7 +71,7 @@ class ApiClient:
             self.logger.info(f"Call to Automox Console API failed: {error}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
-    def _page_results(self, url: str, params=None, sanitize: bool = True) -> List[Dict]:
+    def _page_results(self, url: str, params: Optional[Dict] = None, sanitize: bool = True) -> List[Dict]:
         if params is None:
             params = {}
         params = self.first_page(params)
@@ -87,7 +94,7 @@ class ApiClient:
 
         return page_resp
 
-    def _page_results_data(self, url: str, params=None) -> List[Dict]:
+    def _page_results_data(self, url: str, params: Optional[Dict] = None) -> List[Dict]:
         if params is None:
             params = {}
         params = self.first_page(params)
@@ -110,7 +117,7 @@ class ApiClient:
         return page_resp
 
     # Remove Null from response to avoid type issues
-    def remove_null_values(self, item: Collection):
+    def remove_null_values(self, item: Collection) -> Collection:
         if isinstance(item, dict):
             return dict(
                 (key, self.remove_null_values(value))
@@ -146,7 +153,7 @@ class ApiClient:
         return {"o": org_id}
 
     @staticmethod
-    def first_page(params=None) -> Dict:
+    def first_page(params: Optional[Dict] = None) -> Dict:
         if params is None:
             params = {}
         params.update({"limit": ApiClient.PAGE_SIZE, "page": 0})
@@ -163,6 +170,14 @@ class ApiClient:
         :return: Dict of organizations
         """
         return self.remove_null_values(self._page_results(f"{self.endpoint}/orgs"))
+
+    def get_org(self, org_id: int) -> Dict:
+        """
+        Retrieve a single Automox organization by integer ID.
+        :param org_id: Organization ID
+        :return: Dict of organization details (includes 'uuid')
+        """
+        return self.remove_null_values(self._call_api("GET", f"{self.endpoint}/orgs/{org_id}"))
 
     def get_org_users(self, org_id: int) -> List[Dict]:
         """
@@ -326,7 +341,9 @@ class ApiClient:
         return resp is not None
 
     # Vulnerability Sync
-    def upload_vulnerability_sync_file(self, org_id: int, file_content, filename, report_source) -> Dict:
+    def upload_vulnerability_sync_file(
+        self, org_id: int, file_content: bytes, filename: str, report_source: str
+    ) -> Dict:
         with io.BytesIO(file_content) as file:
             files = [("file", (filename, file, "text/csv"))]
 
@@ -372,7 +389,7 @@ class ApiClient:
                     f"Content: {response.text}, Error: {str(error)}",
                 )
 
-    def list_vulnerability_sync_action_sets(self, org_id: int, params=None) -> List[Dict]:
+    def list_vulnerability_sync_action_sets(self, org_id: int, params: Optional[Dict] = None) -> List[Dict]:
         if params is None:
             params = {}
         params.update(self._org_param(org_id))
@@ -380,7 +397,9 @@ class ApiClient:
             self._page_results_data(f"{self.endpoint}/orgs/{org_id}/remediations/action-sets", params=params)
         )
 
-    def list_vulnerability_sync_action_set_issues(self, org_id: int, action_set_id: int, params=None) -> List[Dict]:
+    def list_vulnerability_sync_action_set_issues(
+        self, org_id: int, action_set_id: int, params: Optional[Dict] = None
+    ) -> List[Dict]:
         if params is None:
             params = {}
         params.update(self._org_param(org_id))
@@ -390,7 +409,9 @@ class ApiClient:
             )
         )
 
-    def list_vulnerability_sync_action_set_solutions(self, org_id: int, action_set_id: int, params=None) -> List[Dict]:
+    def list_vulnerability_sync_action_set_solutions(
+        self, org_id: int, action_set_id: int, params: Optional[Dict] = None
+    ) -> List[Dict]:
         if params is None:
             params = {}
         params.update(self._org_param(org_id))
@@ -432,8 +453,100 @@ class ApiClient:
         params.update({"eventName": event_type, "page": page, "limit": self.PAGE_SIZE})
         return self.remove_null_values(self._call_api("GET", f"{self.endpoint}/events", params))
 
+    # Remediations
+    def _validate_and_expand_device(self, index: int, device: Dict) -> List[Dict]:
+        """Validate a device entry and split into multiple entries if CVEs exceed the API limit."""
+        if not isinstance(device.get("id"), str):
+            raise PluginException(
+                cause="Invalid input",
+                assistance=f"Device at index {index} is missing required string field 'id'.",
+            )
+        if not isinstance(device.get("cves"), list) or len(device["cves"]) == 0:
+            raise PluginException(
+                cause="Invalid input",
+                assistance=f"Device at index {index} is missing required non-empty array field 'cves'.",
+            )
+
+        cves = device["cves"]
+        max_cves = self.REMEDIATION_MAX_CVES_PER_DEVICE
+        if len(cves) <= max_cves:
+            return [device]
+
+        self.logger.info(
+            f"Device '{device.get('id')}' has {len(cves)} CVEs, splitting into "
+            f"{(len(cves) + max_cves - 1) // max_cves} sub-entries"
+        )
+        return [{**device, "cves": cves[j : j + max_cves]} for j in range(0, len(cves), max_cves)]
+
+    def _parse_and_expand_devices(self, devices_input: str) -> tuple:
+        """Parse devices JSON, validate each device, and expand any with >500 CVEs."""
+        try:
+            devices = json.loads(devices_input)
+        except (json.JSONDecodeError, TypeError):
+            raise PluginException(
+                preset=PluginException.Preset.INVALID_JSON,
+                assistance="devices_input must be a valid JSON string.",
+            )
+
+        if not isinstance(devices, list) or len(devices) == 0:
+            raise PluginException(
+                cause="Invalid input",
+                assistance="devices_input must be a non-empty JSON array of device objects.",
+            )
+
+        original_device_count = len(devices)
+        expanded_devices = []
+        for i, device in enumerate(devices):
+            expanded_devices.extend(self._validate_and_expand_device(i, device))
+
+        return expanded_devices, original_device_count
+
+    def submit_remediation(self, org_id: int, action_type: str, devices_input: str) -> Dict:
+        """
+        Submit device and CVE data for remediation or matching.
+        Automatically chunks large payloads into batches of 100 devices.
+        :param org_id: Organization ID
+        :param action_type: 'remediate' or 'match'
+        :param devices_input: JSON string containing an array of device objects
+        :return: Dict with batch_uuid, total_devices, chunks_sent, and collected responses
+        """
+        devices, original_device_count = self._parse_and_expand_devices(devices_input)
+
+        # Resolve integer org ID to org UUID for the remediate endpoint
+        org = self.get_org(org_id)
+        org_uuid = org.get("uuid")
+        if not org_uuid:
+            raise PluginException(
+                cause="Missing organization UUID",
+                assistance=f"GET /api/orgs/{org_id} did not return a 'uuid' field.",
+            )
+
+        batch_uuid = str(uuid.uuid4())
+        chunk_size = self.REMEDIATION_CHUNK_SIZE
+        chunks = [devices[i : i + chunk_size] for i in range(0, len(devices), chunk_size)]
+
+        responses = []
+        for idx, chunk in enumerate(chunks):
+            payload = {
+                "action_type": action_type,
+                "batch_uuid": batch_uuid,
+                "devices": chunk,
+            }
+            self.logger.info(f"Submitting remediation chunk {idx + 1}/{len(chunks)} ({len(chunk)} devices)")
+            resp = self._call_api(
+                "POST", f"{self.endpoint}/organizations/{org_uuid}/vuln-sync/remediate", json_data=payload
+            )
+            responses.append(resp)
+
+        return {
+            "batch_uuid": batch_uuid,
+            "total_devices": original_device_count,
+            "chunks_sent": len(chunks),
+            "responses": responses,
+        }
+
     # Instrumentation for usage/adoption
-    def report_api_outcome(self, outcome: str, function: str, elapsed_time: int, fail_reason: str = ""):
+    def report_api_outcome(self, outcome: str, function: str, elapsed_time: int, fail_reason: str = "") -> None:
         """
         Record API Outcome to Automox
         :param outcome: Success/failure
@@ -454,6 +567,6 @@ class ApiClient:
 
         try:
             self._call_api("POST", f"{self.endpoint}/integration-health", json_data=payload)
-        except Exception:
+        except Exception:  # noqa: B110
             # Do nothing, we don't care if it fails
-            return
+            pass

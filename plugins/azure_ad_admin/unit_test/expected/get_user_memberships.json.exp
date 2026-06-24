@@ -1,0 +1,23 @@
+{
+  "memberships": [
+    {
+      "@odata.type": "#microsoft.graph.group",
+      "id": "bb4d41d4-eb13-4a33-99b5-7d7290df22e9",
+      "displayName": "Test Security Group",
+      "description": "A test security group",
+      "groupTypes": [],
+      "mailEnabled": false,
+      "mailNickname": "TestSecurityGroup",
+      "securityEnabled": true
+    },
+    {
+      "@odata.type": "#microsoft.graph.directoryRole",
+      "id": "12345678-abcd-efgh-ijkl-123456789012",
+      "displayName": "Global Reader",
+      "description": "Can read everything that a Global Administrator can, but not update anything.",
+      "roleTemplateId": "f2ef992c-3afb-46b9-b7cf-a126ee74c451"
+    }
+  ],
+  "count": 2,
+  "next_link": "https://graph.microsoft.com/v1.0/azure_tenant/users/user@example.com/memberOf?$skiptoken=page2"
+}
