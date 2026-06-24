@@ -38,6 +38,7 @@ class TestGetUserInfo(TestCase):
                 "accountEnabled": True,
                 "manager": {
                     "@odata.type": "#microsoft.graph.user",
+                    "employeeOrgData": {"costCenter": "111111111", "division": "Engineering"},
                 },
             }
         }
