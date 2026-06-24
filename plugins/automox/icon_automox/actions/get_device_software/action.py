@@ -1,6 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import GetDeviceSoftwareInput, GetDeviceSoftwareOutput, Input, Output, Component
-
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 
@@ -15,7 +15,14 @@ class GetDeviceSoftware(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        device_software = self.connection.automox_api.get_device_software(
-            params.get(Input.ORG_ID), params.get(Input.DEVICE_ID)
-        )
+        # START INPUT BINDING - DO NOT REMOVE
+        org_id = params.get(Input.ORG_ID, 0)
+        device_id = params.get(Input.DEVICE_ID, 0)
+        # END INPUT BINDING - DO NOT REMOVE
+
+        # Validation
+        if org_id and org_id <= 0:
+            raise PluginException(cause="Invalid input", assistance="Organization ID must be a positive integer")
+
+        device_software = self.connection.automox_api.get_device_software(org_id, device_id)
         return {Output.SOFTWARE: device_software}
