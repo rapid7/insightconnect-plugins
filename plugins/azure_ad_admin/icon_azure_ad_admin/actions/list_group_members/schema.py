@@ -491,7 +491,7 @@ class ListGroupMembersOutput(insightconnect_plugin_runtime.Output):
           "order": 51
         },
         "employeeOrgData": {
-          "type": "string",
+          "$ref": "#/definitions/employeeOrgData",
           "title": "Employee Org Data",
           "description": "Employee Org Data",
           "order": 52
@@ -552,6 +552,24 @@ class ListGroupMembersOutput(insightconnect_plugin_runtime.Output):
             "type": "object"
           },
           "order": 59
+        }
+      }
+    },
+    "employeeOrgData": {
+      "type": "object",
+      "title": "employeeOrgData",
+      "properties": {
+        "costCenter": {
+          "type": "string",
+          "title": "Cost Center",
+          "description": "The cost center associated with the user",
+          "order": 1
+        },
+        "division": {
+          "type": "string",
+          "title": "Division",
+          "description": "The name of the division in which the user works",
+          "order": 2
         }
       }
     }
