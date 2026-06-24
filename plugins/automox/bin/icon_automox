@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Automox"
 Vendor = "automox"
-Version = "3.0.0"
+Version = "3.1.0"
 Description = "Automox is modernizing IT operations with continuous visibility, insight, and agility for your entire IT environment"
 
 
@@ -77,6 +77,8 @@ def main():
             self.add_action(actions.ExecuteVulnerabilitySyncActions())
         
             self.add_action(actions.DeleteVulnerabilitySyncActionSet())
+        
+            self.add_action(actions.SubmitRemediation())
         
 
     """Run plugin"""
