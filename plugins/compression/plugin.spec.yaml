@@ -30,7 +30,7 @@ hub_tags:
   features: []
 sdk:
   type: slim
-  version: 6.5.1
+  version: 6.6.0
   user: nobody
   custom_cmd:
     - "RUN apt-get update && apt-get upgrade -y && apt-get install -y libmagic-dev"
@@ -39,7 +39,7 @@ key_features:
   - "File compression using gzip, bzip, lz, xz, and ZIP algorithms"
   - "File decompression with automatic algorithm detection"
 version_history:
-  - "2.0.4 - Updated SDK to the latest version (6.5.1)"
+  - "2.0.4 - Updated SDK to the latest version (6.6.0)"
   - "2.0.3 - Resolved a path traversal issue in the create_archive function where the filename parameter was not properly validated (CVE-2026-8662) | Updated dependency | Updated SDK to the latest version (6.4.3)"
   - "2.0.2 - Correct spelling in help.md"
   - "2.0.1 - New spec and help.md format for the Extension Library"
