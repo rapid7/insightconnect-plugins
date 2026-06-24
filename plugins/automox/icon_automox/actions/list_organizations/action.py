@@ -1,7 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import ListOrganizationsInput, ListOrganizationsOutput, Input, Output, Component
 
-
 # Custom imports below
 
 
@@ -17,5 +16,4 @@ class ListOrganizations(insightconnect_plugin_runtime.Action):
     def run(self):
         organizations = self.connection.automox_api.get_orgs()
         self.logger.info(f"Returned {len(organizations)} organizations")
-
         return {Output.ORGANIZATIONS: organizations}
