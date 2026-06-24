@@ -16,8 +16,7 @@ class Output:
 
 
 class GetUserInfoInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        r"""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -34,16 +33,14 @@ class GetUserInfoInput(insightconnect_plugin_runtime.Input):
   ],
   "definitions": {}
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class GetUserInfoOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(
-        r"""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -487,7 +484,7 @@ class GetUserInfoOutput(insightconnect_plugin_runtime.Output):
           "order": 51
         },
         "employeeOrgData": {
-          "type": "string",
+          "$ref": "#/definitions/employeeOrgData",
           "title": "Employee Org Data",
           "description": "Employee Org Data",
           "order": 52
@@ -550,11 +547,28 @@ class GetUserInfoOutput(insightconnect_plugin_runtime.Output):
           "order": 59
         }
       }
+    },
+    "employeeOrgData": {
+      "type": "object",
+      "title": "employeeOrgData",
+      "properties": {
+        "costCenter": {
+          "type": "string",
+          "title": "Cost Center",
+          "description": "The cost center associated with the user",
+          "order": 1
+        },
+        "division": {
+          "type": "string",
+          "title": "Division",
+          "description": "The name of the division in which the user works",
+          "order": 2
+        }
+      }
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
