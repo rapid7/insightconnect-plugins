@@ -27,7 +27,7 @@ class Traceroute(insightconnect_plugin_runtime.Action):
             cmd.insert(1, "-n")
 
         with subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE) as response:  # nosec B603
-            (output, err) = response.communicate()
+            output, err = response.communicate()
             output = output.decode("utf-8")
             err = err.decode("utf-8")
             resp_code = response.returncode
