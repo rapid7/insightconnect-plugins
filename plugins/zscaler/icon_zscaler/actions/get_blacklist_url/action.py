@@ -13,5 +13,5 @@ class GetBlacklistUrl(insightconnect_plugin_runtime.Action):
             output=GetBlacklistUrlOutput(),
         )
 
-    def run(self, params={}):
+    def run(self, params={}):  # noqa: W0613
         return {Output.BLACKLISTED_URLS: self.connection.zia_client.get_blacklist_url().get("blacklistUrls")}

@@ -116,7 +116,7 @@ class Cause:
     DEPARTMENT_NOT_FOUND = "Department not found."
     CATEGORY_NOT_FOUND = "URL Category not found."
     URL_LIST_NOT_PROVIDED = "URL list not provided."
-    TOKEN_EXPIRED = "OAuth 2.0 bearer token has expired or is invalid."
+    TOKEN_EXPIRED = "OAuth 2.0 bearer token has expired or is invalid."  # noqa: B105
     RATE_LIMITED = "API rate limit exceeded."
     INSUFFICIENT_PERMISSIONS = "Insufficient permissions to perform this action."
     SERVER_ERROR = "Zscaler API encountered an internal server error."

@@ -197,4 +197,3 @@ class BaseClient(ABC):
     @abstractmethod
     def test(self) -> dict:
         """Test connectivity to the Zscaler API. Implemented by subclasses."""
-        ...
