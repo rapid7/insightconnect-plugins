@@ -3,12 +3,12 @@ extension: plugin
 products: [insightconnect]
 name: vmray
 title: VMRay Sandbox
-description: Analyze and detect malware before it lands, protecting internal infrastructure
-version: 6.0.2
+description: "The [VMRay](https://www.vmray.com) plugin allows the user to submit files or URLs for malware analysis with VMRay on-premise or VMRay Cloud. This plugin utilizes the VMRay API. The API is gated and can be found on-premise at `http://vmrayhost/static_doc/html/api/User_API_Reference.html` or in the [VMRay Cloud API documentation](https://cloud.vmray.com/static_doc/html/api/User_API_Reference.html)"
+version: 7.0.0
 connection_version: 6
 vendor: rapid7
 support: community
-supported_versions: ["2025-12-18"]
+supported_versions: ["2026-06-25"]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/vmray
@@ -16,7 +16,7 @@ resources:
   vendor_url: https://www.vmray.com
 sdk:
   type: slim
-  version: 6.4.3
+  version: 6.6.0
   user: nobody
   custom_cmd:
     - RUN apt-get update && apt-get install libmagic1 -y
@@ -26,6 +26,7 @@ key_features:
 requirements:
   - VMRay API key
 version_history:
+  - 7.0.0 - Fix issue with submission_tags schema validation failure | Updated SDK to the latest version (6.6.0)
   - 6.0.2 - Updated SDK to the latest version (6.4.3)
   - 6.0.1 - Fixed issue with connection test | Updated SDK to the latest version (6.4.1)
   - 6.0.0 - Change type of Analysis VTI Built in Rules Version from `number` to `string`
@@ -795,7 +796,7 @@ types:
     submission_tags:
       description: Submission tags
       title: Submission Tags
-      type: '[]object'
+      type: '[]string'
     submission_type:
       description: Submission type
       title: Submission Type
@@ -957,7 +958,7 @@ types:
     submission_tags:
       description: Submission tags
       title: Submission Tags
-      type: '[]object'
+      type: '[]string'
     submission_type:
       description: Submission type
       title: Submission Type
@@ -1121,10 +1122,10 @@ actions:
       optional_params:
         title: Optional Parameters
         description: 'Parameters that allow finer tuning of the Submit File action,
-          e.g {"analysis_id": 12345}'
+          e.g {"tags": ["test_tag"]}'
         type: object
         required: false
-        example: '{"analysis_id": 12345}'
+        example: '{"tags": ["another_test_tag"]}'
     output:
       results:
         title: Results
@@ -1157,10 +1158,10 @@ actions:
         example: default
       optional_params:
         title: Optional Parameters
-        description: 'Parameters that allow finer tuning of the Submit URL action, e.g {"analysis_id": 12345}'
+        description: 'Parameters that allow finer tuning of the Submit URL action, e.g {"tags": ["value"]}'
         type: object
         required: false
-        example: '{"analysis_id": 12345}'
+        example: '{"tags": ["test,another_test,third_test,fourth_test"]}'
     output:
       results:
         title: Results
