@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: vmray
 title: VMRay Sandbox
-description: "The VMRay plugin allows the user to submit files or URLs for malware analysis with VMRay on-premise or VMRay Cloud. [VMRay](https://www.vmray.com) delivers advanced threat analysis and detection that combines a unique agent-less hypervisor-based network sandbox with a real-time reputation engine. The combination provides both fast, high volume file classification and in-depth malware analysis. The VMRay Analyzer is platform independent and can be scaled, the result of a decade of R&D by some of the world's leading experts on dynamic malware analysis. By monitoring at the hypervisor level, it is undetectable by malware running in the target operating system. VMRay serves leading enterprises around the world. This plugin utilizes the VMRay API. The API is gated and can be found on-premise at `http://vmrayhost/static_doc/html/api/User_API_Reference.html` or in the [VMRay Cloud API documentation](https://cloud.vmray.com/static_doc/html/api/User_API_Reference.html)"
+description: "The [VMRay](https://www.vmray.com) plugin allows the user to submit files or URLs for malware analysis with VMRay on-premise or VMRay Cloud. This plugin utilizes the VMRay API. The API is gated and can be found on-premise at `http://vmrayhost/static_doc/html/api/User_API_Reference.html` or in the [VMRay Cloud API documentation](https://cloud.vmray.com/static_doc/html/api/User_API_Reference.html)"
 version: 7.0.0
 connection_version: 6
 vendor: rapid7
