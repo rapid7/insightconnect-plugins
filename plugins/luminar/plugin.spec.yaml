@@ -1,0 +1,118 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: luminar
+title: Luminar Threat Intelligence
+description: Fetch feeds from Luminar Taxii server
+version: 1.0.0
+supported_versions: ["2025-09-10"]
+vendor: cognyte
+status: []
+tags: [luminar, threat_intelligence]
+hub_tags:
+  use_cases: [threat_detection_and_response]
+  keywords: [luminar, threat_intelligence]
+  features: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/luminar
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.cognyte.com
+enable_cache: true
+
+connection:
+  base_url:
+    title: Luminar Base URL
+    description: Enter the Luminar Base URL
+    type: string
+    default: www.cyberluminar.com
+    required: true
+  account_id:
+    title: Luminar Account ID
+    description: Enter the account ID
+    type: string
+    required: true
+  client_id:
+    title: Client ID
+    description: Enter the client ID
+    type: string
+    required: true
+  client_secret:
+    title: Client Secret
+    description: Enter the client secret
+    type: credential_secret_key
+    required: true
+ 
+triggers:
+  fetch_ioc_feeds:
+    title: Get IOC feeds
+    description: Trigger workflows to get IOC feeds from Luminar
+    input:
+      frequency:
+        title: Frequency
+        type: integer
+        description: Poll frequency in seconds
+        default: 86400
+        example: 300
+        required: false
+      initial_fetch_date:
+        title: Initial Fetch Date
+        type: string
+        description: The date from which the initial fetch will start. eg YYYY-MM-DD
+        example: 2025-01-01
+        required: true
+    output:
+      results:
+        type: "[]object"
+        title: Results
+        description: IOC feed results
+        required: true
+
+  fetch_leaked_records_feeds:
+    title: Get Leaked Records feeds
+    description: Trigger workflows to get leaked records feeds from Luminar
+    input:
+      frequency:
+        title: Frequency
+        type: integer
+        description: Poll frequency in seconds
+        default: 86400
+        example: 300
+        required: false
+      initial_fetch_date:
+        title: Initial Fetch Date
+        type: string
+        description: The date from which the initial fetch will start. eg YYYY-MM-DD
+        example: 2025-01-01
+        required: true
+    output:
+      results:
+        type: "[]object"
+        title: Results
+        description: leaked records feed results
+        required: true
+  
+  fetch_cyberfeed_feeds:
+    title: Get Cyberfeed feeds
+    description: Trigger workflows to get cyberfeeds from Luminar
+    input:
+      frequency:
+        title: Frequency
+        type: integer
+        description: Poll frequency in seconds
+        default: 86400
+        example: 300
+        required: false
+      initial_fetch_date:
+        title: Initial Fetch Date
+        type: string
+        description: The date from which the initial fetch will start. eg YYYY-MM-DD
+        example: 2025-01-01
+        required: true
+    output:
+      results:
+        type: "[]object"
+        title: Results
+        description: cyber feed results
+        required: true
+
+
