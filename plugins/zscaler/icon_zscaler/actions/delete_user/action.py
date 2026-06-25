@@ -13,4 +13,4 @@ class DeleteUser(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         user_id = params.get(Input.USERID)
         self.logger.info(f"Deleting user ID: {user_id}.\n")
-        return {Output.SUCCESS: self.connection.client.delete_user(user_id)}
+        return {Output.SUCCESS: self.connection.zia_client.delete_user(user_id)}

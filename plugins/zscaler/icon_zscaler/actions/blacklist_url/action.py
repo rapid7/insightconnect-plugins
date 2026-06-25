@@ -29,8 +29,8 @@ class BlacklistUrl(insightconnect_plugin_runtime.Action):
                 self.logger.info(f"URL did not begin with protocol, prefixing with 'http://' ...")
             normalized_urls.append(urlparse(url).hostname)
 
-        response = self.connection.client.blacklist_url(blacklist_step, normalized_urls)
+        response = self.connection.zia_client.blacklist_url(blacklist_step, normalized_urls)
         if params.get(Input.ACTIVATE_CONFIGURATION):
-            self.connection.client.activate_configuration()
+            self.connection.zia_client.activate_configuration()
 
-        return {Output.SUCCESS: response, Output.STATUS: self.connection.client.get_status().json().get("status")}
+        return {Output.SUCCESS: response, Output.STATUS: self.connection.zia_client.get_status().json().get("status")}

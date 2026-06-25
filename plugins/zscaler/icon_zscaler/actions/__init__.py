@@ -17,3 +17,27 @@ from .create_user.action import CreateUser
 from .get_url_category_by_name.action import GetUrlCategoryByName
 
 from .update_urls_of_url_category.action import UpdateUrlsOfUrlCategory
+
+from .get_dlp_incidents.action import GetDlpIncidents
+
+from .list_firewall_rules.action import ListFirewallRules
+
+from .get_firewall_rule.action import GetFirewallRule
+
+from .create_firewall_rule.action import CreateFirewallRule
+
+from .update_firewall_rule.action import UpdateFirewallRule
+
+from .get_web_logs.action import GetWebLogs
+
+from .get_firewall_logs.action import GetFirewallLogs
+
+from .submit_threat_feed.action import SubmitThreatFeed
+
+from .list_application_segments.action import ListApplicationSegments
+
+from .get_application_segment.action import GetApplicationSegment
+
+from .list_server_groups.action import ListServerGroups
+
+from .get_server_group.action import GetServerGroup

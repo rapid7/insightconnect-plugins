@@ -30,4 +30,4 @@ class LookupUrl(insightconnect_plugin_runtime.Action):
                 "The results will be presented for the first hundred URLs."
             )
 
-        return {Output.URL_CATEGORIZATION: self.connection.client.url_lookup(lookup_urls[:100])}
+        return {Output.URL_CATEGORIZATION: self.connection.zia_client.url_lookup(lookup_urls[:100])}

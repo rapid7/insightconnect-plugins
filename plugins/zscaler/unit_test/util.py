@@ -11,9 +11,12 @@ from icon_zscaler.connection import Connection
 from icon_zscaler.connection.schema import Input
 
 STUB_CONNECTION = {
-    Input.API_KEY: {"secretKey": "my-secret-key"},
-    Input.CREDENTIALS: {"password": "password123", "username": "user@zscalerbeta.net"},
-    Input.URL: "https://sample.com",
+    Input.CLIENT_ID: "test-client-id",
+    Input.PRIVATE_KEY: {
+        "privateKey": "-----BEGIN RSA PRIVATE KEY-----\nMIIBogIBAAJBALRiMLAHudeSA/x3hB2f+2NRkJLA2jBImmA2RsjFOW5EP0FF\n-----END RSA PRIVATE KEY-----"
+    },
+    Input.VANITY_DOMAIN: "testcompany",
+    Input.CLOUD: "zsapi.net",
 }
 
 
@@ -23,6 +26,11 @@ class Util:
         default_connection = Connection()
         default_connection.logger = logging.getLogger("connection logger")
         default_connection.connect(STUB_CONNECTION)
+        # Bypass real JWT signing by pre-setting a mock token on both clients
+        default_connection.zia_client._token = "mock-access-token-12345"
+        default_connection.zia_client._token_expiry = 9999999999
+        default_connection.zpa_client._token = "mock-access-token-12345"
+        default_connection.zpa_client._token_expiry = 9999999999
         action.connection = default_connection
         action.logger = logging.getLogger("action logger")
         return action
@@ -56,15 +64,22 @@ class Util:
         params = kwargs.get("params", {})
         data = kwargs.get("data", {})
 
-        if url.endswith("authenticatedSession"):
-            return MockResponse(200)
+        # Handle OAuth token requests
+        if "oauth2/v1/token" in url:
+            return MockResponse(200, "oauth_token.json.resp")
+
+        # Handle ZPA endpoints
+        if "/zpa/api/v1/application" in url and method == "GET":
+            return MockResponse(200, "zpa_application.json.resp")
+        if "/zpa/api/v1/serverGroup" in url and method == "GET":
+            return MockResponse(200, "zpa_server_group.json.resp")
 
         if method == "DELETE" and url.endswith("users/12345"):
             return MockResponse(204)
         if method == "DELETE" and url.endswith("users/99999"):
             return MockResponse(404, "")
 
-        if method == "GET" and url.endswith("/v1/status"):
+        if method == "GET" and url.endswith("/status"):
             return MockResponse(200, "get_status.json.resp")
 
         if method == "GET" and url.endswith("users"):

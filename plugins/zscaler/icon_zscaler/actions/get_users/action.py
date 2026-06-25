@@ -22,4 +22,4 @@ class GetUsers(insightconnect_plugin_runtime.Action):
             "pageSize": params.get(Input.PAGESIZE),
         }
 
-        return {Output.USERS: self.connection.client.get_users(clean_dict(parameters))}
+        return {Output.USERS: self.connection.zia_client.get_users(clean_dict(parameters))}

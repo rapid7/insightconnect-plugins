@@ -18,17 +18,18 @@ class GetUrlCategoryByName(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         url_category_name = params.get(Input.URLCATEGORYNAME)
-        custom_url_category_name = params.get(Input.CUSTOMURLCATEGORYNAME)
 
-        if custom_url_category_name:
+        # Try predefined category lookup first
+        url_category_id = URL_CATEGORORIES_NAMES.get(url_category_name)
+
+        if not url_category_id:
+            # Not a predefined category — search custom categories by name
             url_category_id = find_custom_url_category_by_name(
-                custom_url_category_name, self.connection.client.list_url_categories(custom_only=True)
+                url_category_name, self.connection.zia_client.list_url_categories(custom_only=True)
             ).get("id")
-        else:
-            url_category_id = URL_CATEGORORIES_NAMES.get(url_category_name)
 
         return {
             Output.URLCATEGORY: convert_dict_keys_to_camel_case(
-                self.connection.client.get_url_category_by_id(url_category_id)
+                self.connection.zia_client.get_url_category_by_id(url_category_id)
             )
         }

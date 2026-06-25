@@ -18,6 +18,11 @@ class TestConnection(TestCase):
         self.connection = Connection()
         self.connection.logger = logging.getLogger("connection logger")
         self.connection.connect(STUB_CONNECTION)
+        # Bypass JWT signing by pre-setting mock tokens
+        self.connection.zia_client._token = "mock-access-token-12345"
+        self.connection.zia_client._token_expiry = 9999999999
+        self.connection.zpa_client._token = "mock-access-token-12345"
+        self.connection.zpa_client._token_expiry = 9999999999
 
     @patch("requests.request", side_effect=Util.mock_request)
     def test_connection_ok(self, _mock_get: Mock) -> None:
@@ -26,41 +31,35 @@ class TestConnection(TestCase):
         self.assertEqual(response, expected_response)
 
     @patch("requests.request", side_effect=Util.mock_request)
-    def test_connection_bad_json(self, _mock_get: Mock) -> None:
+    def test_connection_zia_failure(self, _mock_get: Mock) -> None:
         with self.assertRaises(ConnectionTestException) as error:
-            mock_response = Mock()
-            mock_response.json.side_effect = ValueError("Invalid JSON")
-            self.connection.client.get_status = Mock(return_value=mock_response)
-            self.connection.test()
-        self.assertEqual(error.exception.cause, PluginException.causes[PluginException.Preset.INVALID_JSON])
-        self.assertEqual(error.exception.assistance, PluginException.assistances[PluginException.Preset.SERVER_ERROR])
-        self.assertEqual(error.exception.data, "Invalid JSON response from Zscaler API")
-
-    @patch("requests.request", side_effect=Util.mock_request)
-    def test_connection_missing_status_field(self, _mock_get: Mock) -> None:
-        with self.assertRaises(ConnectionTestException) as error:
-            mock_response = Mock()
-            mock_response.json.return_value = {}
-            self.connection.client.get_status = Mock(return_value=mock_response)
-            self.connection.test()
-        self.assertEqual(error.exception.cause, PluginException.causes[PluginException.Preset.INVALID_JSON])
-        self.assertEqual(error.exception.assistance, PluginException.assistances[PluginException.Preset.SERVER_ERROR])
-        self.assertEqual(error.exception.data, "Missing 'status' field in Zscaler API response")
-
-    @patch("requests.request", side_effect=Util.mock_request)
-    def test_connection_unauthorized(self, _mock_get: Mock) -> None:
-        with self.assertRaises(ConnectionTestException) as error:
-            self.connection.client.get_status = Mock(
+            self.connection.zia_client.test = Mock(
                 side_effect=PluginException(
-                    preset=PluginException.Preset.USERNAME_PASSWORD,
-                    data='{"code":"AUTHENTICATION_FAILED","message":"400 - incorrect_user_or_password"}',
+                    cause="Failed to obtain OAuth 2.0 access token.",
+                    assistance="Verify that client_id, private_key, vanity_domain, and cloud are correct.",
+                    data="Authentication failed",
                 )
             )
             self.connection.test()
-        self.assertEqual(error.exception.cause, PluginException.causes[PluginException.Preset.USERNAME_PASSWORD])
+        self.assertEqual(error.exception.cause, "Failed to obtain OAuth 2.0 access token.")
         self.assertEqual(
-            error.exception.assistance, PluginException.assistances[PluginException.Preset.USERNAME_PASSWORD]
+            error.exception.assistance, "Verify that client_id, private_key, vanity_domain, and cloud are correct."
         )
+        self.assertEqual(error.exception.data, "Authentication failed")
+
+    @patch("requests.request", side_effect=Util.mock_request)
+    def test_connection_zpa_failure(self, _mock_get: Mock) -> None:
+        with self.assertRaises(ConnectionTestException) as error:
+            self.connection.zpa_client.test = Mock(
+                side_effect=PluginException(
+                    cause="Failed to obtain OAuth 2.0 access token.",
+                    assistance="Verify that client_id, private_key, vanity_domain, and cloud are correct.",
+                    data="ZPA authentication failed",
+                )
+            )
+            self.connection.test()
+        self.assertEqual(error.exception.cause, "Failed to obtain OAuth 2.0 access token.")
         self.assertEqual(
-            error.exception.data, '{"code":"AUTHENTICATION_FAILED","message":"400 - incorrect_user_or_password"}'
+            error.exception.assistance, "Verify that client_id, private_key, vanity_domain, and cloud are correct."
         )
+        self.assertEqual(error.exception.data, "ZPA authentication failed")

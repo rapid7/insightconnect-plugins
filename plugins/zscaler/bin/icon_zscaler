@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Zscaler"
 Vendor = "rapid7"
-Version = "1.5.2"
+Version = "2.0.0"
 Description = "Zscaler is a SaaS security platform that provides fast, secure connections between client applications, regardless of device, location, or network"
 
 
@@ -51,6 +51,30 @@ def main():
             self.add_action(actions.GetUrlCategoryByName())
         
             self.add_action(actions.UpdateUrlsOfUrlCategory())
+        
+            self.add_action(actions.GetDlpIncidents())
+        
+            self.add_action(actions.ListFirewallRules())
+        
+            self.add_action(actions.GetFirewallRule())
+        
+            self.add_action(actions.CreateFirewallRule())
+        
+            self.add_action(actions.UpdateFirewallRule())
+        
+            self.add_action(actions.GetWebLogs())
+        
+            self.add_action(actions.GetFirewallLogs())
+        
+            self.add_action(actions.SubmitThreatFeed())
+        
+            self.add_action(actions.ListApplicationSegments())
+        
+            self.add_action(actions.GetApplicationSegment())
+        
+            self.add_action(actions.ListServerGroups())
+        
+            self.add_action(actions.GetServerGroup())
         
 
     """Run plugin"""

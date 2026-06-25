@@ -11,16 +11,21 @@ Zscaler is a SaaS security platform that provides fast, secure connections betwe
 * Get users
 * Get URL category by name
 * Update URLs of URL category
+* Manage DLP incidents
+* Manage firewall rules
+* Retrieve web and firewall logs
+* Submit threat feed IoCs
+* Manage ZPA application segments and server groups
 
 # Requirements
 
-* [Requires a Zscaler organization API Key](https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey)
-* Requires a Zscaler username and password
-* [Requires a Zscaler base URI](https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey), such as: https://admin.zscalerbeta.net
+* Requires a Zscaler OneAPI OAuth 2.0 Client ID from ZIdentity
+* Requires a PEM private key for JWT signing (RS256)
+* Requires the customer vanity domain (e.g., mycompany)
 
 # Supported Product Versions
 
-* Zscaler API 2023-02-20
+* Zscaler OneAPI 2024
 
 # Documentation
 
@@ -30,20 +35,21 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|api_key|credential_secret_key|None|True|Enter organization API key|None|14M2d25A7c12|None|None|
-|credentials|credential_username_password|None|True|Username and password to access Zscaler|None|{"username":"user@example.com", "password":"mypassword"}|None|None|
-|url|string|None|True|Base URL, ex. 'https://zsapi.zscalerbeta.net'. See https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey for details|None|https://zsapi.zscalerbeta.net|None|None|
+|client_id|string|None|True|OAuth Client ID from ZIdentity|None|abc123-client-id|None|None|
+|cloud|string|zsapi.net|False|Zscaler cloud domain|None|zsapi.net|None|None|
+|private_key|credential_asymmetric_key|None|True|PEM private key for JWT signing (RS256)|None|{"privateKey": "-----BEGIN RSA PRIVATE KEY-----..."}|None|None|
+|vanity_domain|string|None|True|Customer vanity domain (e.g., mycompany)|None|mycompany|None|None|
 
 Example input:
 
 ```
 {
-  "api_key": "14M2d25A7c12",
-  "credentials": {
-    "password": "mypassword",
-    "username": "user@example.com"
+  "client_id": "abc123-client-id",
+  "cloud": "zsapi.net",
+  "private_key": {
+    "privateKey": "-----BEGIN RSA PRIVATE KEY-----..."
   },
-  "url": "https://zsapi.zscalerbeta.net"
+  "vanity_domain": "mycompany"
 }
 ```
 
@@ -91,6 +97,49 @@ Example output:
 {
   "status": "ACTIVE",
   "success": true
+}
+```
+
+#### Create Firewall Rule
+
+This action is used to create a new firewall filtering rule
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|rule_data|object|None|True|The firewall rule configuration object containing rule properties such as name, state, action, and conditions|None|{'name': 'Block Malware', 'state': 'ENABLED', 'action': 'BLOCK_RESET', 'order': 1}|None|None|
+  
+Example input:
+
+```
+{
+  "rule_data": {
+    "action": "BLOCK_RESET",
+    "name": "Block Malware",
+    "order": 1,
+    "state": "ENABLED"
+  }
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|rule|firewallRule|False|The created firewall filtering rule|{'id': 12345, 'name': 'Block Malware', 'state': 'ENABLED', 'action': 'BLOCK_RESET', 'order': 1}|
+  
+Example output:
+
+```
+{
+  "rule": {
+    "action": "BLOCK_RESET",
+    "id": 12345,
+    "name": "Block Malware",
+    "order": 1,
+    "state": "ENABLED"
+  }
 }
 ```
 
@@ -194,6 +243,50 @@ Example output:
 }
 ```
 
+#### Get Application Segment
+
+This action is used to get a specific ZPA application segment by its ID
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|segment_id|string|None|True|The unique identifier of the ZPA application segment to retrieve|None|123456|None|None|
+  
+Example input:
+
+```
+{
+  "segment_id": 123456
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|segment|applicationSegment|False|The ZPA application segment details|{'id': '123456', 'name': 'Internal App', 'enabled': True, 'domainNames': ['app.internal.com'], 'serverGroups': [{'id': '789'}]}|
+  
+Example output:
+
+```
+{
+  "segment": {
+    "domainNames": [
+      "app.internal.com"
+    ],
+    "enabled": true,
+    "id": "123456",
+    "name": "Internal App",
+    "serverGroups": [
+      {
+        "id": "789"
+      }
+    ]
+  }
+}
+```
+
 #### Get Blacklist URL
 
 This action is used to get blacklisted URLs
@@ -221,6 +314,135 @@ Example output:
     "example4.com",
     "example5.com"
   ]
+}
+```
+
+#### Get DLP Incidents
+
+This action is used to retrieve DLP incident data from Zscaler OneAPI with time range filtering and pagination support
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|end_time|string|None|True|The end time for the DLP incidents query in ISO 8601 format (e.g., 2024-01-02T00:00:00+00:00)|None|2024-01-02T00:00:00+00:00|None|None|
+|next_link|string|None|False|Pagination token from a previous response to retrieve the next page of results|None|eyJwYWdlIjogMn0=|None|None|
+|start_time|string|None|True|The start time for the DLP incidents query in ISO 8601 format (e.g., 2024-01-01T00:00:00+00:00)|None|2024-01-01T00:00:00+00:00|None|None|
+  
+Example input:
+
+```
+{
+  "end_time": "2024-01-02T00:00:00+00:00",
+  "next_link": "eyJwYWdlIjogMn0=",
+  "start_time": "2024-01-01T00:00:00+00:00"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|incidents|[]dlpIncident|False|List of DLP incidents matching the query|[{"id": 1, "eventTime": "2024-01-01T12:00:00+00:00", "dlpPolicy": "PCI", "severity": "HIGH"}]|
+|next_link|string|False|Pagination token to retrieve the next page of results. Empty if no more pages|eyJwYWdlIjogMn0=|
+  
+Example output:
+
+```
+{
+  "incidents": [
+    {
+      "dlpPolicy": "PCI",
+      "eventTime": "2024-01-01T12:00:00+00:00",
+      "id": 1,
+      "severity": "HIGH"
+    }
+  ],
+  "next_link": "eyJwYWdlIjogMn0="
+}
+```
+
+#### Get Firewall Logs
+
+This action is used to retrieve firewall logs from Zscaler with time range filtering and pagination support
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|end_time|string|None|True|The end time for the log query in ISO 8601 format (e.g., 2024-01-02T00:00:00+00:00)|None|2024-01-02T00:00:00+00:00|None|None|
+|next_link|string|None|False|Pagination token from a previous response to retrieve the next page of results|None|eyJwYWdlIjogMn0=|None|None|
+|start_time|string|None|True|The start time for the log query in ISO 8601 format (e.g., 2024-01-01T00:00:00+00:00)|None|2024-01-01T00:00:00+00:00|None|None|
+  
+Example input:
+
+```
+{
+  "end_time": "2024-01-02T00:00:00+00:00",
+  "next_link": "eyJwYWdlIjogMn0=",
+  "start_time": "2024-01-01T00:00:00+00:00"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|logs|[]firewallLogEntry|False|List of firewall log entries|[{"datetime": "2024-01-01T12:00:00+00:00", "sourceIP": "192.168.1.1", "destIP": "10.0.0.1", "action": "BLOCKED", "rule": "Block Malware"}]|
+|next_link|string|False|Pagination token to retrieve the next page of results. Empty if no more pages|eyJwYWdlIjogMn0=|
+  
+Example output:
+
+```
+{
+  "logs": [
+    {
+      "action": "BLOCKED",
+      "datetime": "2024-01-01T12:00:00+00:00",
+      "destIP": "10.0.0.1",
+      "rule": "Block Malware",
+      "sourceIP": "192.168.1.1"
+    }
+  ],
+  "next_link": "eyJwYWdlIjogMn0="
+}
+```
+
+#### Get Firewall Rule
+
+This action is used to get a specific firewall filtering rule by its ID
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|rule_id|integer|None|True|The unique identifier of the firewall rule to retrieve|None|12345|None|None|
+  
+Example input:
+
+```
+{
+  "rule_id": 12345
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|rule|firewallRule|False|The firewall filtering rule details|{'id': 12345, 'name': 'Block Malware', 'state': 'ENABLED', 'action': 'BLOCK_RESET', 'order': 1}|
+  
+Example output:
+
+```
+{
+  "rule": {
+    "action": "BLOCK_RESET",
+    "id": 12345,
+    "name": "Block Malware",
+    "order": 1,
+    "state": "ENABLED"
+  }
 }
 ```
 
@@ -311,23 +533,68 @@ Example output:
 }
 ```
 
-#### Get URL Category by Name
+#### Get Server Group
 
-This action is used to get the URL category information for the specified name
+This action is used to get a specific ZPA server group by its ID
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|customUrlCategoryName|string|None|False|Name of the custom URL category to be returned. If this field is filled then the 'URL Category Name' input will be ignored|None|Custom Category Example|None|None|
-|urlCategoryName|string|Adult Sex Education|False|Name of the URL category to be returned. This field will be ignored if the 'Custom URL Category Name' input is filled|["Adult Sex Education", "Adult Themes", "Advertising", "Alcohol/Tobacco", "Alt/New Age", "Anonymizer", "Art/Culture", "Blogs", "Body Art", "CDN", "Classifieds", "Computer Hacking", "Continuing Education/Colleges", "Copyright Infringement", "Corporate Marketing", "Cult", "Custom Encrypted Content", "DNS Over HTTPS Services", "Dining/Restaurant", "Discussion Forum", "Dynamic DNS Host", "Entertainment", "Family Issues", "FileHost", "Finance", "Gambling", "Government", "Health", "History", "Hobbies/Leisure", "Image Host", "Internet Services", "Job/Employment Search", "K-12", "K-12 Sex Education", "Lifestyle", "Lingerie/Bikini", "Marijuana", "Mature Humor", "Militancy/Hate and Extremism", "Military", "Miscellaneous or Unknown", "Music and Audio Streaming", "Newly Registered and Observed Domains", "Newly Revived Domains", "News and Media", "Non Categorizable", "Nudity", "Online Auctions", "Online Chat", "Online Shopping", "Online Trading, Brokerage, Insurance", "Online and Other Games", "Operating System and Software Updates", "Other Adult Material", "Other Business and Economy", "Other Drugs", "Other Education", "Other Entertainment/Recreation", "Other Government and Politics", "Other Illegal or Questionable", "Other Information Technology", "Other Internet Communication", "Other Miscellaneous", "Other Religion", "Other Security", "Other Shopping and Auctions", "Other Social and Family Issues", "Other Society and Lifestyle", "Peer-to-Peer Site", "Politics", "Pornography", "Portals", "Profanity", "Professional Services", "Questionable", "Radio", "Real Estate", "Reference Sites", "Remote Access Tools", "Safe Search Engine", "Science/Tech", "Shareware Download", "Social Issues", "Social Networking", "Social Networking Adult", "Social Networking Games", "Special Interests/Social Organizations", "Sports", "Spyware/Adware", "Tasteless", "Television/Movies", "Traditional Religion", "Translators", "Travel", "User-Defined", "Vehicles", "Video Streaming", "Violence", "Weapons/Bomb", "Web Conferencing", "Web Host", "Web Search", "Webmail", "Zscaler Proxy IPs"]|Travel|None|None|
+|group_id|string|None|True|The unique identifier of the ZPA server group to retrieve|None|789|None|None|
   
 Example input:
 
 ```
 {
-  "customUrlCategoryName": "Custom Category Example",
-  "urlCategoryName": "Adult Sex Education"
+  "group_id": 789
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|group|serverGroup|False|The ZPA server group details|{'id': '789', 'name': 'App Server Group', 'enabled': True, 'servers': [{'address': '10.0.0.1'}], 'applications': [{'id': '123456'}]}|
+  
+Example output:
+
+```
+{
+  "group": {
+    "applications": [
+      {
+        "id": "123456"
+      }
+    ],
+    "enabled": true,
+    "id": "789",
+    "name": "App Server Group",
+    "servers": [
+      {
+        "address": "10.0.0.1"
+      }
+    ]
+  }
+}
+```
+
+#### Get URL Category by Name
+
+This action is used to get the URL category information for the specified name. Supports both predefined Zscaler 
+categories and custom categories
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|urlCategoryName|string|None|True|Name of the URL category to retrieve. Can be a predefined Zscaler category name or a custom category name|None|News and Media|None|None|
+  
+Example input:
+
+```
+{
+  "urlCategoryName": "News and Media"
 }
 ```
 
@@ -461,6 +728,182 @@ Example output:
 }
 ```
 
+#### Get Web Logs
+
+This action is used to retrieve web transaction logs from Zscaler with time range filtering and pagination support
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|end_time|string|None|True|The end time for the log query in ISO 8601 format (e.g., 2024-01-02T00:00:00+00:00)|None|2024-01-02T00:00:00+00:00|None|None|
+|next_link|string|None|False|Pagination token from a previous response to retrieve the next page of results|None|eyJwYWdlIjogMn0=|None|None|
+|start_time|string|None|True|The start time for the log query in ISO 8601 format (e.g., 2024-01-01T00:00:00+00:00)|None|2024-01-01T00:00:00+00:00|None|None|
+  
+Example input:
+
+```
+{
+  "end_time": "2024-01-02T00:00:00+00:00",
+  "next_link": "eyJwYWdlIjogMn0=",
+  "start_time": "2024-01-01T00:00:00+00:00"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|logs|[]webLogEntry|False|List of web transaction log entries|[{"datetime": "2024-01-01T12:00:00+00:00", "user": "user@example.com", "url": "https://example.com", "action": "ALLOWED"}]|
+|next_link|string|False|Pagination token to retrieve the next page of results. Empty if no more pages|eyJwYWdlIjogMn0=|
+  
+Example output:
+
+```
+{
+  "logs": [
+    {
+      "action": "ALLOWED",
+      "datetime": "2024-01-01T12:00:00+00:00",
+      "url": "https://example.com",
+      "user": "user@example.com"
+    }
+  ],
+  "next_link": "eyJwYWdlIjogMn0="
+}
+```
+
+#### List Application Segments
+
+This action is used to list ZPA application segments with pagination support
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|next_link|string|None|False|Pagination token from a previous response to retrieve the next page of results|None|eyJwYWdlIjogMn0=|None|None|
+  
+Example input:
+
+```
+{
+  "next_link": "eyJwYWdlIjogMn0="
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|next_link|string|False|Pagination token to retrieve the next page of results. Empty if no more pages|eyJwYWdlIjogMn0=|
+|segments|[]applicationSegment|False|List of ZPA application segments|[{"id": "123456", "name": "Internal App", "enabled": True, "domainNames": ["app.internal.com"]}]|
+  
+Example output:
+
+```
+{
+  "next_link": "eyJwYWdlIjogMn0=",
+  "segments": [
+    {
+      "domainNames": [
+        "app.internal.com"
+      ],
+      "enabled": true,
+      "id": "123456",
+      "name": "Internal App"
+    }
+  ]
+}
+```
+
+#### List Firewall Rules
+
+This action is used to list all firewall filtering rules with pagination support
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|next_link|string|None|False|Pagination token from a previous response to retrieve the next page of results|None|eyJwYWdlIjogMn0=|None|None|
+|search|string|None|False|Filter rules by name (case-insensitive partial match). If provided, only rules whose name contains this string will be returned|None|Block|None|None|
+  
+Example input:
+
+```
+{
+  "next_link": "eyJwYWdlIjogMn0=",
+  "search": "Block"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|next_link|string|False|Pagination token to retrieve the next page of results. Empty if no more pages|eyJwYWdlIjogMn0=|
+|rules|[]firewallRule|False|List of firewall filtering rules|[{"id": 1, "name": "Block Malware", "state": "ENABLED", "action": "BLOCK_RESET"}]|
+  
+Example output:
+
+```
+{
+  "next_link": "eyJwYWdlIjogMn0=",
+  "rules": [
+    {
+      "action": "BLOCK_RESET",
+      "id": 1,
+      "name": "Block Malware",
+      "state": "ENABLED"
+    }
+  ]
+}
+```
+
+#### List Server Groups
+
+This action is used to list ZPA server groups with pagination support
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|next_link|string|None|False|Pagination token from a previous response to retrieve the next page of results|None|eyJwYWdlIjogMn0=|None|None|
+  
+Example input:
+
+```
+{
+  "next_link": "eyJwYWdlIjogMn0="
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|groups|[]serverGroup|False|List of ZPA server groups|[{"id": "789", "name": "App Server Group", "enabled": True, "servers": [{"address": "10.0.0.1"}]}]|
+|next_link|string|False|Pagination token to retrieve the next page of results. Empty if no more pages|eyJwYWdlIjogMn0=|
+  
+Example output:
+
+```
+{
+  "groups": [
+    {
+      "enabled": true,
+      "id": "789",
+      "name": "App Server Group",
+      "servers": [
+        {
+          "address": "10.0.0.1"
+        }
+      ]
+    }
+  ],
+  "next_link": "eyJwYWdlIjogMn0="
+}
+```
+
 #### Lookup URL
 
 This action is used to look up the categorization of a given set of URLs
@@ -513,17 +956,103 @@ Example output:
 }
 ```
 
+#### Submit Threat Feed
+
+This action is used to submit custom threat indicators (IoCs) to a Zscaler threat feed
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|description|string|None|False|Optional description for the submitted threat indicators|None|Malicious IPs from incident response|None|None|
+|feed_type|string|None|True|The type of threat indicators to submit|["IP", "DOMAIN", "URL"]|IP|None|None|
+|indicators|[]string|None|True|List of threat indicators to submit to the feed|None|["192.168.1.100", "10.0.0.50"]|None|None|
+  
+Example input:
+
+```
+{
+  "description": "Malicious IPs from incident response",
+  "feed_type": "IP",
+  "indicators": [
+    "192.168.1.100",
+    "10.0.0.50"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|submitted_count|integer|True|The number of indicators successfully submitted|2|
+|success|boolean|True|Whether the threat feed submission was successful|True|
+  
+Example output:
+
+```
+{
+  "submitted_count": 2,
+  "success": true
+}
+```
+
+#### Update Firewall Rule
+
+This action is used to update an existing firewall filtering rule
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|rule_data|object|None|True|The updated firewall rule configuration object containing rule properties to modify|None|{'name': 'Block Malware Updated', 'state': 'ENABLED', 'action': 'BLOCK_RESET', 'order': 1}|None|None|
+|rule_id|integer|None|True|The unique identifier of the firewall rule to update|None|12345|None|None|
+  
+Example input:
+
+```
+{
+  "rule_data": {
+    "action": "BLOCK_RESET",
+    "name": "Block Malware Updated",
+    "order": 1,
+    "state": "ENABLED"
+  },
+  "rule_id": 12345
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|rule|firewallRule|False|The updated firewall filtering rule|{'id': 12345, 'name': 'Block Malware Updated', 'state': 'ENABLED', 'action': 'BLOCK_RESET', 'order': 1}|
+  
+Example output:
+
+```
+{
+  "rule": {
+    "action": "BLOCK_RESET",
+    "id": 12345,
+    "name": "Block Malware Updated",
+    "order": 1,
+    "state": "ENABLED"
+  }
+}
+```
+
 #### Update URLs of URL Category
 
-This action is used to adds or removes URLs for the specified URL category
+This action is used to adds or removes URLs for the specified URL category. Supports both predefined Zscaler categories
+ and custom categories
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |action|string|None|True|The action applied to the URLs|["Add to the list", "Remove from the list"]|Add to the list|None|None|
-|customUrlCategoryName|string|None|False|Name of the custom URL category to be returned. If this field is filled then the 'URL Category Name' input will be ignored|None|Custom Category Example|None|None|
-|urlCategoryName|string|Adult Sex Education|False|Name of the URL category to be returned. This field will be ignored if the 'Custom URL Category Name' input is filled|["Adult Sex Education", "Adult Themes", "Advertising", "Alcohol/Tobacco", "Alt/New Age", "Anonymizer", "Art/Culture", "Blogs", "Body Art", "CDN", "Classifieds", "Computer Hacking", "Continuing Education/Colleges", "Copyright Infringement", "Corporate Marketing", "Cult", "Custom Encrypted Content", "DNS Over HTTPS Services", "Dining/Restaurant", "Discussion Forum", "Dynamic DNS Host", "Entertainment", "Family Issues", "FileHost", "Finance", "Gambling", "Government", "Health", "History", "Hobbies/Leisure", "Image Host", "Internet Services", "Job/Employment Search", "K-12", "K-12 Sex Education", "Lifestyle", "Lingerie/Bikini", "Marijuana", "Mature Humor", "Militancy/Hate and Extremism", "Military", "Miscellaneous or Unknown", "Music and Audio Streaming", "Newly Registered and Observed Domains", "Newly Revived Domains", "News and Media", "Non Categorizable", "Nudity", "Online Auctions", "Online Chat", "Online Shopping", "Online Trading, Brokerage, Insurance", "Online and Other Games", "Operating System and Software Updates", "Other Adult Material", "Other Business and Economy", "Other Drugs", "Other Education", "Other Entertainment/Recreation", "Other Government and Politics", "Other Illegal or Questionable", "Other Information Technology", "Other Internet Communication", "Other Miscellaneous", "Other Religion", "Other Security", "Other Shopping and Auctions", "Other Social and Family Issues", "Other Society and Lifestyle", "Peer-to-Peer Site", "Politics", "Pornography", "Portals", "Profanity", "Professional Services", "Questionable", "Radio", "Real Estate", "Reference Sites", "Remote Access Tools", "Safe Search Engine", "Science/Tech", "Shareware Download", "Social Issues", "Social Networking", "Social Networking Adult", "Social Networking Games", "Special Interests/Social Organizations", "Sports", "Spyware/Adware", "Tasteless", "Television/Movies", "Traditional Religion", "Translators", "Travel", "User-Defined", "Vehicles", "Video Streaming", "Violence", "Weapons/Bomb", "Web Conferencing", "Web Host", "Web Search", "Webmail", "Zscaler Proxy IPs"]|Travel|None|None|
+|urlCategoryName|string|None|True|Name of the URL category to update. Can be a predefined Zscaler category name or a custom category name|None|News and Media|None|None|
 |urlList|[]string|None|True|List of the URLs to be updated|None|["example.com", "example1.com"]|None|None|
   
 Example input:
@@ -531,8 +1060,7 @@ Example input:
 ```
 {
   "action": "Add to the list",
-  "customUrlCategoryName": "Custom Category Example",
-  "urlCategoryName": "Adult Sex Education",
+  "urlCategoryName": "News and Media",
   "urlList": [
     "example.com",
     "example1.com"
@@ -769,17 +1297,99 @@ Example output:
 |URL Keyword Counts|urlKeywordCounts|None|False|URL and keyword counts for the URL category|{}|
 |URLs|[]string|None|False|Custom URLs to add to a URL category. Up to 25,000 custom URLs can be added per organization across all categories (including bandwidth classes)|[]|
 |URLs Retaining Parent Category Count|integer|None|False|The number of custom URLs associated to the URL category, that also need to be retained under the original parent category|0|
+  
+**idNameReference**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|integer|None|False|Unique identifier|12345|
+|Name|string|None|False|Name of the resource|Example Name|
+  
+**firewallRule**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Action|string|None|False|Action taken when packets match the rule|BLOCK_RESET|
+|Default Rule|boolean|None|False|Whether this is the default rule|False|
+|Departments|[]idNameReference|None|False|Departments to which the rule applies|[]|
+|Description|string|None|False|Additional information about the rule|Block known malware destinations|
+|Destination Addresses|[]string|None|False|Destination IP addresses for which the rule is applicable|[]|
+|Groups|[]idNameReference|None|False|Groups to which the rule applies|[]|
+|ID|integer|None|False|Unique identifier for the firewall rule|12345|
+|Locations|[]idNameReference|None|False|Locations to which the rule applies|[]|
+|Name|string|None|False|Name of the firewall filtering rule|Block Malware|
+|Network Applications|[]string|None|False|Network service applications on which the rule is applied|[]|
+|Order|integer|None|False|Rule order number|1|
+|Predefined|boolean|None|False|Whether this is a predefined rule|False|
+|Rank|integer|None|False|Admin rank of the rule|7|
+|Source IPs|[]string|None|False|Source IP addresses for which the rule is applicable|[]|
+|State|string|None|False|Whether the rule is enabled or disabled|ENABLED|
+|Users|[]idNameReference|None|False|Users to which the rule applies|[]|
+  
+**dlpIncident**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Department|string|None|False|Department of the user|Engineering|
+|DLP Policy|string|None|False|Name of the DLP policy that triggered the incident|PCI Data Protection|
+|Event Time|string|None|False|Time the DLP incident occurred|2024-01-01T12:00:00Z|
+|ID|integer|None|False|Unique identifier for the DLP incident|12345|
+|Severity|string|None|False|Severity level of the incident|HIGH|
+|User|string|None|False|User associated with the incident|user@example.com|
+  
+**webLogEntry**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Action|string|None|False|Action taken on the request|ALLOWED|
+|Date Time|string|None|False|Timestamp of the web transaction|2024-01-01T12:00:00Z|
+|Department|string|None|False|Department of the user|Engineering|
+|Location|string|None|False|Location of the user|Headquarters|
+|URL|string|None|False|Requested URL|https://example.com/path|
+|User|string|None|False|User who made the request|user@example.com|
+  
+**firewallLogEntry**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Action|string|None|False|Action taken by the firewall|BLOCKED|
+|Date Time|string|None|False|Timestamp of the firewall event|2024-01-01T12:00:00Z|
+|Destination IP|string|None|False|Destination IP address|10.0.0.1|
+|Destination Port|integer|None|False|Destination port|443|
+|Rule|string|None|False|Firewall rule that was matched|Block Malware|
+|Source IP|string|None|False|Source IP address|192.168.1.100|
+  
+**applicationSegment**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Description|string|None|False|Description of the application segment|Internal application|
+|Domain Names|[]string|None|False|Domain names associated with the segment|["app.internal.com"]|
+|Enabled|boolean|None|False|Whether the application segment is enabled|True|
+|ID|string|None|False|Unique identifier for the application segment|123456|
+|Name|string|None|False|Name of the application segment|Internal App|
+  
+**serverGroup**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Description|string|None|False|Description of the server group|Production server pool|
+|Enabled|boolean|None|False|Whether the server group is enabled|True|
+|ID|string|None|False|Unique identifier for the server group|654321|
+|Name|string|None|False|Name of the server group|Production Servers|
 
 
 ## Troubleshooting
 
-* To locate your base URI and key:
- 1. Log in to the ZIA Admin Portal using your admin credentials.
- 2. Go to **Administration > API Key Management**.
-* In order to view the API Key Management page, the admin must be assigned an admin role that includes the Authentication Configuration functional scope. In the **Organization API Key** tab, the base URI and key details are displayed within the table. For more information see the [Zscaler getting started guide](https://help.zscaler.com/zia/api-getting-started) on obtaining the API key and base URL.
+* To configure OneAPI access:
+ 1. Log in to ZIdentity at https://{vanity_domain}.zsapi.net.
+ 2. Navigate to **Administration > API Clients** and create a new OAuth client.
+ 3. Generate an RSA private key and upload the corresponding public key to the API client.
+* Ensure the OAuth client has the required scopes for the actions you intend to use (ZIA, ZPA). For more information see the [Zscaler OneAPI documentation](https://help.zscaler.com/oneapi/understanding-oneapi).
 
 # Version History
 
+* 2.0.0 - Major version bump: migrate to Zscaler OneAPI with OAuth 2.0 Private Key authentication | Add DLP, firewall, logs, threat feed, and ZPA actions | SDK bump to 6.6.0
 * 1.5.2 - SDK Bump to 6.3.10 | Update connection test
 * 1.5.1 - Requirements.txt bumped | SDK Bump to 6.1.4
 * 1.5.0 - Add Actions: `Create User`, `Delete User`, `Get Users`, `Get URL Category by Name`, `Update URLs of URL Category`

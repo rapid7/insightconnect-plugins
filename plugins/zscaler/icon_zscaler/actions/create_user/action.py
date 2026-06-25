@@ -22,9 +22,9 @@ class CreateUser(insightconnect_plugin_runtime.Action):
         parameters = {
             "name": params.get(Input.NAME),
             "email": params.get(Input.EMAIL),
-            "groups": prepare_groups(self.connection.client.search_groups(), params.get(Input.GROUPNAMES)),
+            "groups": prepare_groups(self.connection.zia_client.search_groups(), params.get(Input.GROUPNAMES)),
             "department": prepare_department(
-                self.connection.client.search_department(params.get(Input.DEPARTMENTNAME)),
+                self.connection.zia_client.search_department(params.get(Input.DEPARTMENTNAME)),
                 params.get(Input.DEPARTMENTNAME),
             ),
             "comments": params.get(Input.COMMENTS),
@@ -32,4 +32,6 @@ class CreateUser(insightconnect_plugin_runtime.Action):
             "password": params.get(Input.PASSWORD),
         }
 
-        return {Output.USER: remove_password_from_result(self.connection.client.create_user(clean_dict(parameters)))}
+        return {
+            Output.USER: remove_password_from_result(self.connection.zia_client.create_user(clean_dict(parameters)))
+        }

@@ -4,11 +4,10 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get the URL category information for the specified name"
+    DESCRIPTION = "Get the URL category information for the specified name. Supports both predefined Zscaler categories and custom categories"
 
 
 class Input:
-    CUSTOMURLCATEGORYNAME = "customUrlCategoryName"
     URLCATEGORYNAME = "urlCategoryName"
 
 
@@ -17,145 +16,31 @@ class Output:
 
 
 class GetUrlCategoryByNameInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        r"""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "customUrlCategoryName": {
-      "type": "string",
-      "title": "Custom URL Category Name",
-      "description": "Name of the custom URL category to be returned. If this field is filled then the 'URL Category Name' input will be ignored",
-      "order": 2
-    },
     "urlCategoryName": {
       "type": "string",
       "title": "URL Category Name",
-      "description": "Name of the URL category to be returned. This field will be ignored if the 'Custom URL Category Name' input is filled",
-      "default": "Adult Sex Education",
-      "enum": [
-        "Adult Sex Education",
-        "Adult Themes",
-        "Advertising",
-        "Alcohol/Tobacco",
-        "Alt/New Age",
-        "Anonymizer",
-        "Art/Culture",
-        "Blogs",
-        "Body Art",
-        "CDN",
-        "Classifieds",
-        "Computer Hacking",
-        "Continuing Education/Colleges",
-        "Copyright Infringement",
-        "Corporate Marketing",
-        "Cult",
-        "Custom Encrypted Content",
-        "DNS Over HTTPS Services",
-        "Dining/Restaurant",
-        "Discussion Forum",
-        "Dynamic DNS Host",
-        "Entertainment",
-        "Family Issues",
-        "FileHost",
-        "Finance",
-        "Gambling",
-        "Government",
-        "Health",
-        "History",
-        "Hobbies/Leisure",
-        "Image Host",
-        "Internet Services",
-        "Job/Employment Search",
-        "K-12",
-        "K-12 Sex Education",
-        "Lifestyle",
-        "Lingerie/Bikini",
-        "Marijuana",
-        "Mature Humor",
-        "Militancy/Hate and Extremism",
-        "Military",
-        "Miscellaneous or Unknown",
-        "Music and Audio Streaming",
-        "Newly Registered and Observed Domains",
-        "Newly Revived Domains",
-        "News and Media",
-        "Non Categorizable",
-        "Nudity",
-        "Online Auctions",
-        "Online Chat",
-        "Online Shopping",
-        "Online Trading, Brokerage, Insurance",
-        "Online and Other Games",
-        "Operating System and Software Updates",
-        "Other Adult Material",
-        "Other Business and Economy",
-        "Other Drugs",
-        "Other Education",
-        "Other Entertainment/Recreation",
-        "Other Government and Politics",
-        "Other Illegal or Questionable",
-        "Other Information Technology",
-        "Other Internet Communication",
-        "Other Miscellaneous",
-        "Other Religion",
-        "Other Security",
-        "Other Shopping and Auctions",
-        "Other Social and Family Issues",
-        "Other Society and Lifestyle",
-        "Peer-to-Peer Site",
-        "Politics",
-        "Pornography",
-        "Portals",
-        "Profanity",
-        "Professional Services",
-        "Questionable",
-        "Radio",
-        "Real Estate",
-        "Reference Sites",
-        "Remote Access Tools",
-        "Safe Search Engine",
-        "Science/Tech",
-        "Shareware Download",
-        "Social Issues",
-        "Social Networking",
-        "Social Networking Adult",
-        "Social Networking Games",
-        "Special Interests/Social Organizations",
-        "Sports",
-        "Spyware/Adware",
-        "Tasteless",
-        "Television/Movies",
-        "Traditional Religion",
-        "Translators",
-        "Travel",
-        "User-Defined",
-        "Vehicles",
-        "Video Streaming",
-        "Violence",
-        "Weapons/Bomb",
-        "Web Conferencing",
-        "Web Host",
-        "Web Search",
-        "Webmail",
-        "Zscaler Proxy IPs"
-      ],
+      "description": "Name of the URL category to retrieve. Can be a predefined Zscaler category name or a custom category name",
       "order": 1
     }
   },
+  "required": [
+    "urlCategoryName"
+  ],
   "definitions": {}
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class GetUrlCategoryByNameOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(
-        r"""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -395,8 +280,7 @@ class GetUrlCategoryByNameOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

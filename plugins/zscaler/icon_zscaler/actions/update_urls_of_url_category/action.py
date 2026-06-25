@@ -23,7 +23,6 @@ class UpdateUrlsOfUrlCategory(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         url_category_name = params.get(Input.URLCATEGORYNAME)
-        custom_url_category_name = params.get(Input.CUSTOMURLCATEGORYNAME)
         url_list = [url for url in params.get(Input.URLLIST) if url]
         action = params.get(Input.ACTION)
 
@@ -33,26 +32,29 @@ class UpdateUrlsOfUrlCategory(insightconnect_plugin_runtime.Action):
                 assistance=Assistance.VERIFY_INPUT,
             )
 
-        if custom_url_category_name:
+        # Try predefined category first
+        predefined_id = URL_CATEGORORIES_NAMES.get(url_category_name)
+
+        if predefined_id:
+            # Predefined category — look up by ID from the full list
+            url_category = find_url_category_by_id(predefined_id, self.connection.zia_client.list_url_categories())
+            url_category_id = url_category.get("id")
+            url_category_data_to_send = filter_dict_keys(url_category, ["keywordsRetainingParentCategory"])
+        else:
+            # Custom category — search by name
             custom_url_category = find_custom_url_category_by_name(
-                custom_url_category_name, self.connection.client.list_url_categories(custom_only=True)
+                url_category_name, self.connection.zia_client.list_url_categories(custom_only=True)
             )
             url_category_id = custom_url_category.get("id")
             url_category_data_to_send = filter_dict_keys(
                 custom_url_category, ["configuredName", "description", "scopes", "keywordsRetainingParentCategory"]
             )
-        else:
-            url_category = find_url_category_by_id(
-                URL_CATEGORORIES_NAMES.get(url_category_name), self.connection.client.list_url_categories()
-            )
-            url_category_id = url_category.get("id")
-            url_category_data_to_send = filter_dict_keys(url_category, ["keywordsRetainingParentCategory"])
 
         url_category_data_to_send.update({"urls": url_list})
 
         return {
             Output.URLCATEGORY: convert_dict_keys_to_camel_case(
-                self.connection.client.update_urls_in_url_category(
+                self.connection.zia_client.update_urls_in_url_category(
                     url_category_id, URL_CATEGORY_UPDATE_ACTIONS.get(action), url_category_data_to_send
                 )
             )

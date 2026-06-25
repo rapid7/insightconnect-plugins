@@ -4,91 +4,71 @@ import json
 
 
 class Input:
-    API_KEY = "api_key"
-    CREDENTIALS = "credentials"
-    URL = "url"
+    CLIENT_ID = "client_id"
+    CLOUD = "cloud"
+    PRIVATE_KEY = "private_key"
+    VANITY_DOMAIN = "vanity_domain"
 
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        r"""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "api_key": {
-      "$ref": "#/definitions/credential_secret_key",
-      "title": "API Key",
-      "description": "Enter organization API key",
+    "client_id": {
+      "type": "string",
+      "title": "Client ID",
+      "description": "OAuth Client ID from ZIdentity",
+      "order": 1
+    },
+    "cloud": {
+      "type": "string",
+      "title": "Cloud",
+      "description": "Zscaler cloud domain",
+      "default": "zsapi.net",
+      "order": 4
+    },
+    "private_key": {
+      "$ref": "#/definitions/credential_asymmetric_key",
+      "title": "Private Key",
+      "description": "PEM private key for JWT signing (RS256)",
       "order": 2
     },
-    "credentials": {
-      "$ref": "#/definitions/credential_username_password",
-      "title": "Username and Password",
-      "description": "Username and password to access Zscaler",
-      "order": 3
-    },
-    "url": {
+    "vanity_domain": {
       "type": "string",
-      "title": "URL",
-      "description": "Base URL, ex. 'https://zsapi.zscalerbeta.net'. See https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey for details",
-      "order": 1
+      "title": "Vanity Domain",
+      "description": "Customer vanity domain (e.g., mycompany)",
+      "order": 3
     }
   },
   "required": [
-    "api_key",
-    "credentials",
-    "url"
+    "client_id",
+    "private_key",
+    "vanity_domain"
   ],
   "definitions": {
-    "credential_secret_key": {
-      "id": "credential_secret_key",
+    "credential_asymmetric_key": {
+      "id": "credential_asymmetric_key",
       "type": "object",
-      "title": "Credential: Secret Key",
-      "description": "A shared secret key",
+      "title": "Credential: Asymmetric key",
+      "description": "A shared key",
       "required": [
-        "secretKey"
+        "privateKey"
       ],
       "properties": {
-        "secretKey": {
+        "privateKey": {
           "type": "string",
-          "title": "Secret Key",
-          "description": "The shared secret key",
+          "title": "Private Key",
+          "description": "The private key",
           "format": "password",
           "displayType": "password"
         }
       }
-    },
-    "credential_username_password": {
-      "id": "credential_username_password",
-      "title": "Credential: Username and Password",
-      "description": "A username and password combination",
-      "type": "object",
-      "properties": {
-        "username": {
-          "type": "string",
-          "title": "Username",
-          "description": "The username to log in with",
-          "order": 1
-        },
-        "password": {
-          "type": "string",
-          "title": "Password",
-          "description": "The password",
-          "format": "password",
-          "displayType": "password",
-          "order": 2
-        }
-      },
-      "required": [
-        "username",
-        "password"
-      ]
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

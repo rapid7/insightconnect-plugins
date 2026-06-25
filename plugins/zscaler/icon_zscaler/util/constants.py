@@ -116,9 +116,44 @@ class Cause:
     DEPARTMENT_NOT_FOUND = "Department not found."
     CATEGORY_NOT_FOUND = "URL Category not found."
     URL_LIST_NOT_PROVIDED = "URL list not provided."
+    TOKEN_EXPIRED = "OAuth 2.0 bearer token has expired or is invalid."
+    RATE_LIMITED = "API rate limit exceeded."
+    INSUFFICIENT_PERMISSIONS = "Insufficient permissions to perform this action."
+    SERVER_ERROR = "Zscaler API encountered an internal server error."
+    SERVICE_UNAVAILABLE = "Zscaler API service is temporarily unavailable."
 
 
 class Assistance:
     VERIFY_INPUT = (
         "Verify your input is correct and not malformed and try again. If the issue persists, please contact support."
     )
+    REAUTHENTICATE = (
+        "The OAuth 2.0 token has expired. The plugin will attempt to re-authenticate automatically. "
+        "If the issue persists, verify that the client_id and private_key are correct and not revoked."
+    )
+    RATE_LIMIT_WAIT = (
+        "The API rate limit has been exceeded. Wait for the rate limit window to reset before retrying. "
+        "Check the Retry-After header for timing guidance."
+    )
+    CHECK_PERMISSIONS = (
+        "Verify that the API client has the required permissions for this operation in the ZIdentity portal. "
+        "Ensure the correct scopes are assigned to the client credentials."
+    )
+    CONTACT_SUPPORT = (
+        "An internal server error occurred on the Zscaler side. If the issue persists, contact Zscaler support."
+    )
+    RETRY_LATER = (
+        "The Zscaler API service is temporarily unavailable. Retry the request after a short delay. "
+        "If the issue persists, check the Zscaler status page or contact support."
+    )
+
+
+HTTP_ERROR_MAP = {
+    400: {"cause": Cause.INVALID_DETAILS, "assistance": Assistance.VERIFY_INPUT},
+    401: {"cause": Cause.TOKEN_EXPIRED, "assistance": Assistance.REAUTHENTICATE},
+    403: {"cause": Cause.INSUFFICIENT_PERMISSIONS, "assistance": Assistance.CHECK_PERMISSIONS},
+    404: {"cause": Cause.RESOURCE_NOT_FOUND, "assistance": Assistance.VERIFY_INPUT},
+    429: {"cause": Cause.RATE_LIMITED, "assistance": Assistance.RATE_LIMIT_WAIT},
+    500: {"cause": Cause.SERVER_ERROR, "assistance": Assistance.CONTACT_SUPPORT},
+    503: {"cause": Cause.SERVICE_UNAVAILABLE, "assistance": Assistance.RETRY_LATER},
+}

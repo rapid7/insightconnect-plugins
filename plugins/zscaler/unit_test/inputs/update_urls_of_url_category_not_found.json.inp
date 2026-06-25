@@ -1,6 +1,5 @@
 {
   "action": "Add to the list",
-  "customUrlCategoryName": "Test Category Not Found",
-  "urlCategoryName": "Travel",
+  "urlCategoryName": "Test Category Not Found",
   "urlList": ["example11.com", "example22.com"]
 }

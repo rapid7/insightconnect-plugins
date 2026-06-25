@@ -1,6 +1,5 @@
 {
   "action": "Add to the list",
-  "customUrlCategoryName": "Test Category",
-  "urlCategoryName": "Travel",
+  "urlCategoryName": "Test Category",
   "urlList": ["example11.com", "example22.com"]
 }

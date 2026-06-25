@@ -1,47 +1,95 @@
 {
-	"spec": "dd12520d2b7677cdf7d1cddc6e32d88a",
-	"manifest": "c3d5d76d9fad4e53340069e139e753ec",
-	"setup": "ab4f559e10529ce026fc1ec109420025",
+	"spec": "2a22076219c8ad9b3a9c1a8f35d5cb21",
+	"manifest": "963e2144f154041405c0726ec06724b4",
+	"setup": "885c6d61e71db06591b6140bec7ea0ce",
 	"schemas": [
 		{
 			"identifier": "blacklist_url/schema.py",
-			"hash": "ab36db3d0e8f850796aba401743045de"
+			"hash": "b1fae5d28ff6e9d4da17673704a58b97"
+		},
+		{
+			"identifier": "create_firewall_rule/schema.py",
+			"hash": "a114015f9d6437aeb830cecb1e12306a"
 		},
 		{
 			"identifier": "create_user/schema.py",
-			"hash": "0cd9eb055975e8483456ca18f6e33834"
+			"hash": "d3694fce2aee823eca6f6c8e2f7a69b0"
 		},
 		{
 			"identifier": "delete_user/schema.py",
-			"hash": "127df6eb293aec5fca9fc09c9d7f6d2f"
+			"hash": "b81f18a99be7daba65d7f63a47261c27"
+		},
+		{
+			"identifier": "get_application_segment/schema.py",
+			"hash": "7ff168362447e7328a11917ad7eb877f"
 		},
 		{
 			"identifier": "get_blacklist_url/schema.py",
-			"hash": "041eaf13575b69576c7cd57d2bd7ff87"
+			"hash": "8e2260794d16f0399b85d921dd301d5d"
+		},
+		{
+			"identifier": "get_dlp_incidents/schema.py",
+			"hash": "75bbbc152d2193d8d8b7483b82c7ee6a"
+		},
+		{
+			"identifier": "get_firewall_logs/schema.py",
+			"hash": "f3c0c8a576ce90478d3496284652d895"
+		},
+		{
+			"identifier": "get_firewall_rule/schema.py",
+			"hash": "0d7a1aa9dea5c5ccbc6ce2879635812c"
 		},
 		{
 			"identifier": "get_sandbox_report_for_hash/schema.py",
-			"hash": "b9d7526549cf0189d7b1579af0c73708"
+			"hash": "7a14034b1308bcea53daccacd39eed41"
+		},
+		{
+			"identifier": "get_server_group/schema.py",
+			"hash": "f5450b361c67fcabb8c3945f73c7661f"
 		},
 		{
 			"identifier": "get_url_category_by_name/schema.py",
-			"hash": "833f1e45651ba563da8ca382da62589a"
+			"hash": "3c37872eb1c759a3326166da8b3eccda"
 		},
 		{
 			"identifier": "get_users/schema.py",
-			"hash": "cbe52bc92e36edc2c3e2aea6db15c467"
+			"hash": "3e1d439affff4f95092130039f2ad582"
+		},
+		{
+			"identifier": "get_web_logs/schema.py",
+			"hash": "0daafc34a6a46c0f4446dac4e54b2c5d"
+		},
+		{
+			"identifier": "list_application_segments/schema.py",
+			"hash": "6301745622ed6a1d79e6328e21774fcc"
+		},
+		{
+			"identifier": "list_firewall_rules/schema.py",
+			"hash": "78b8d7d5aa8137009e5e723f02077fcd"
+		},
+		{
+			"identifier": "list_server_groups/schema.py",
+			"hash": "e2ce63b0fd82fd6d34d8bd855c92981b"
 		},
 		{
 			"identifier": "lookup_url/schema.py",
-			"hash": "b624f0c4f5e38b11d157a28b675845ff"
+			"hash": "230e9f76def965d870945b64244a77f3"
+		},
+		{
+			"identifier": "submit_threat_feed/schema.py",
+			"hash": "ab76463f5718dbe9be740fd2638752f3"
+		},
+		{
+			"identifier": "update_firewall_rule/schema.py",
+			"hash": "15b01b891a0234611f847836b566dc91"
 		},
 		{
 			"identifier": "update_urls_of_url_category/schema.py",
-			"hash": "4a69ad6788b95b0adf66467aae935746"
+			"hash": "5c1b5b4303307323505236b1616822fa"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "3fae93023608733e29e49d89af24d3ff"
+			"hash": "03dbd6f68e95c7008cc4fb3070f38ee7"
 		}
 	]
 }
