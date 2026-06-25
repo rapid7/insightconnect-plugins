@@ -7,12 +7,19 @@ import uuid
 from komand_rapid7_insightvm.util import util
 import csv
 import io
+from typing import List, Union
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 from komand_rapid7_insightvm.util import endpoints
 
 
 class ScanCompletion(insightconnect_plugin_runtime.Trigger):
+    # Safety bound on the per-poll pagination loop in find_new_completed_scans. At size=500
+    # this caps a single poll at 50k scans — well above any realistic burst — and prevents
+    # an infinite loop if the API keeps returning fresh pages without ever reaching the
+    # high-water mark.
+    _MAX_PAGES_PER_POLL = 100
+
     def __init__(self):
         super(self.__class__, self).__init__(
             name="scan_completion",
@@ -22,33 +29,44 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         )
 
     def run(self, params={}):
-        # Write scan_id to cache
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        site_id = params.get(Input.SITE_ID, "")
+        interval_seconds = params.get(Input.INTERVAL, 5) * 60
+        # END INPUT BINDING - DO NOT REMOVE
+
+        # Determine endpoint based on site_id
+        if site_id:
+            endpoint = endpoints.Scan.site_scans(self.connection.console_url, site_id)
+        else:
+            endpoint = endpoints.Scan.scans(self.connection.console_url)
+
+        # Initialize resource helper and last seen scan ID tracker
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
+        last_seen_scan_id = None
+
         self.logger.info("Getting latest scan...")
-
-        site_id = params.get(Input.SITE_ID)
-        first_latest_scan_id = self.find_latest_completed_scan(site_id, cached=False)
-
         while True:
-            # Open cache
-            starting_point = first_latest_scan_id
+            # Without a high-water mark we'd paginate the entire scan history every poll, so
+            # defer scanning until a baseline is established (e.g. console has no finished
+            # scans yet, or only Agent scans which we skip).
+            if last_seen_scan_id is None:
+                last_seen_scan_id = self.find_latest_completed_scan(endpoint, resource_helper)
+                if last_seen_scan_id is None:
+                    time.sleep(interval_seconds)
+                    continue
 
-            latest_scan_id = self.find_latest_completed_scan(site_id, cached=True)
+            new_scan_ids = self.find_new_completed_scans(endpoint, last_seen_scan_id, resource_helper)
 
-            # Check if latest is in cache
-            if latest_scan_id == starting_point:
-                self.logger.info("No new scans, sleeping 1 minute.")
-                time.sleep(60)
-                continue
+            if not new_scan_ids:
+                self.logger.info("No new scans, sleeping.")
+            else:
+                self.logger.info(f"Found {len(new_scan_ids)} new completed scan(s) to process: {new_scan_ids}")
+                for scan_id in new_scan_ids:
+                    results = self.get_results_from_latest_scan(scan_id=scan_id)
+                    self.send({Output.SCAN_ID: scan_id, Output.SCAN_COMPLETED_OUTPUT: results})
+                    last_seen_scan_id = scan_id
 
-            results = self.get_results_from_latest_scan(scan_id=int(latest_scan_id))
-
-            # Submit scan for trigger
-            self.send({Output.SCAN_ID: latest_scan_id, Output.SCAN_COMPLETED_OUTPUT: results})
-
-            first_latest_scan_id = latest_scan_id
-
-            # Sleep configured in minutes
-            time.sleep(params.get(Input.INTERVAL, 5) * 60)
+            time.sleep(interval_seconds)
 
     def get_results_from_latest_scan(self, scan_id: int):
         """
@@ -126,38 +144,104 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
 
         return row
 
-    def find_latest_completed_scan(self, site_id: str, cached: bool) -> int:
+    def find_latest_completed_scan(self, endpoint: str, resource_helper: ResourceRequests) -> Union[int, None]:
         """
-        Use API calls to get the latest scan ID.
-        Two different endpoints depending on whether Site ID is provided as an input or not.
+        Get the most recent reportable finished scan ID, used as the initial baseline
+        when the trigger starts.
 
-        :param site_id: Optional site id input
-        :param cached: Boolean to indicate whether to only scan most recent 10
-        :return: ID of the latest 'finished' scan
+        :param endpoint: The API endpoint for scans
+        :param resource_helper: ResourceRequests instance for API calls
+        :return: ID of the latest 'finished' scan, or None if no reportable scan exists
         """
 
-        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
-        if site_id:
-            endpoint = endpoints.Scan.site_scans(self.connection.console_url, site_id)
-        else:
-            endpoint = endpoints.Scan.scans(self.connection.console_url)
+        response = resource_helper.paged_resource_request(
+            endpoint=endpoint, method="get", params={"sort": "id,desc", "size": 500, "page": 0}
+        )
 
-        if not cached:
-            response = resource_helper.paged_resource_request(
-                endpoint=endpoint, method="get", params={"sort": "id,desc"}
+        for scan in response:
+            if self._is_reportable_finished_scan(scan):
+                self.logger.info(f"Latest finished scan ID: {scan.get('id')}")
+                return scan.get("id")
+
+        self.logger.info("No reportable finished scan found yet; will retry on next poll.")
+        return None
+
+    def find_new_completed_scans(
+        self, endpoint: str, last_seen_scan_id: int, resource_helper: ResourceRequests
+    ) -> List[int]:
+        """
+        Return all 'finished' scan IDs greater than the last seen scan ID, ordered ascending
+        so they can be processed in chronological order. Since the API returns scans sorted
+        by ID descending, pagination stops once a scan ID at or below the last seen ID
+        is encountered.
+
+        :param endpoint: The API endpoint for scans
+        :param last_seen_scan_id: Baseline; scans with this ID or lower are skipped
+        :param resource_helper: ResourceRequests instance for API calls
+        :return: List of new finished scan IDs in ascending order
+        """
+
+        new_scan_ids = []
+        for page in range(self._MAX_PAGES_PER_POLL):
+            response = resource_helper.resource_request(
+                endpoint=endpoint, method="get", params={"sort": "id,desc", "size": 500, "page": page}
             )
 
-            for scan in response:
-                if scan.get("status") == "finished":
-                    self.logger.info(f"Latest finished scan ID: {scan.get('id')}")
-                    return scan.get("id")
-        else:
-            response = resource_helper.resource_request(endpoint=endpoint, method="get", params={"sort": "id,desc"})
+            resources = response.get("resources") or []
+            if not resources:
+                self.logger.info("No more resources on this page, stopping pagination")
+                break
 
-            for scan in response.get("resources"):
-                if scan.get("status") == "finished":
-                    self.logger.info(f"Latest finished scan ID: {scan.get('id')}")
-                    return scan.get("id")
+            reached_known_scan = False
+            for scan in resources:
+                # Get the scan ID and if not present skip
+                scan_id = scan.get("id")
+                if scan_id is None:
+                    continue
+
+                # Stop when reaching the last known scan. If last_seen_scan_id is None (first run)
+                # this will paginate through all historical scans up to the page cap
+                # This could be optimized in future to only fetch recent scans on initial setup
+                if last_seen_scan_id is not None and scan_id <= last_seen_scan_id:
+                    reached_known_scan = True
+                    self.logger.info(f"Reached known scan ID {last_seen_scan_id}, stopping pagination")
+                    break
+
+                # If scan is reportable, add to list
+                if self._is_reportable_finished_scan(scan):
+                    new_scan_ids.append(scan_id)
+                else:
+                    # Log skipped scans with their status and type for debugging
+                    scan_status = scan.get("status", "unknown")
+                    scan_type = scan.get("scanType", "unknown")
+                    self.logger.info(f"Skipping scan ID {scan_id} (status: {scan_status}, type: {scan_type})")
+
+            page_info = response.get("page") or {}
+            total_pages = page_info.get("totalPages", 0)
+            if reached_known_scan or (page + 1) >= total_pages:
+                break
+        else:
+            self.logger.warning(
+                f"Reached page cap ({self._MAX_PAGES_PER_POLL}) before exhausting scan history; "
+                "some completed scans may be missed this poll"
+            )
+
+        # Process oldest-first to preserve event ordering
+        new_scan_ids.sort()
+        return new_scan_ids
+
+    @staticmethod
+    def _is_reportable_finished_scan(scan: dict) -> bool:
+        """
+        Determine whether a scan is finished and eligible for SQL reporting.
+        InsightVM rejects SQL reports scoped to a single scan when that scan is an
+        Insight Agent scan ("When the scope of the report is a scan, agent scans
+        may not be specified."), so those must be skipped.
+
+        :param scan: Scan resource as returned by the InsightVM scans API
+        :return: True if the scan is finished and not an Agent scan
+        """
+        return scan.get("status", "").lower() == "finished" and scan.get("scanType", "").lower() != "agent"
 
 
 class ScanQueries:

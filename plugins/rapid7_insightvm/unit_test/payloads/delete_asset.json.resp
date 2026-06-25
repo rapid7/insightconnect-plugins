@@ -1,5 +1,5 @@
 {
-  "links": [ 
+  "links": [
     {
       "href": "https://example.com/api/3/assets/3",
       "rel": "self"

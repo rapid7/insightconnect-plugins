@@ -7,7 +7,6 @@ import json
 import logging
 from unittest import TestCase
 
-import pytest
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_rapid7_insightvm.util import resource_requests
@@ -26,6 +25,7 @@ class MockSession:
     def __init__(self) -> None:
         self.counter = 0
         self.headers = dict()
+        self.auth = None
 
     def get(self, url, verify, **kwargs):
         mock_response = MockResponse()
@@ -34,6 +34,9 @@ class MockSession:
 
         if url == "bad password":
             mock_response.status_code = 401
+        if url == "not_acceptable":
+            mock_response.status_code = 406
+            mock_response.text = '{"message": "Not Acceptable"}'
         if url == "paged_request":
             if self.counter > 0:
                 temp = json.loads(mock_response.text)
@@ -67,15 +70,24 @@ class TestResourceRequests(TestCase):
         logger = logging.getLogger("logger")
         session = MockSession()
         test_object = resource_requests.ResourceRequests(logger=logger, session=session, ssl_verify=False)
-        with pytest.raises(PluginException):
+        with self.assertRaises(PluginException):
             test_object.resource_request("exception.com")
 
     def test_resource_request_401(self) -> None:
         logger = logging.getLogger("logger")
         session = MockSession()
         test_object = resource_requests.ResourceRequests(logger=logger, session=session, ssl_verify=False)
-        with pytest.raises(PluginException, match="InsightVM returned an error message. Unauthorized"):
+        with self.assertRaises(PluginException) as context:
             test_object.resource_request("bad password")
+        self.assertIn("Unauthorized", context.exception.cause)
+
+    def test_resource_request_406(self) -> None:
+        logger = logging.getLogger("logger")
+        session = MockSession()
+        test_object = resource_requests.ResourceRequests(logger=logger, session=session, ssl_verify=False)
+        with self.assertRaises(PluginException) as context:
+            test_object.resource_request("not_acceptable")
+        self.assertIn("Not Acceptable", context.exception.cause)
 
 
 class TestPagedResourceRequest(TestCase):
