@@ -6,8 +6,8 @@ from sys import argv
 
 Name = "VMRay Sandbox"
 Vendor = "rapid7"
-Version = "6.0.2"
-Description = "Analyze and detect malware before it lands, protecting internal infrastructure"
+Version = "7.0.0"
+Description = "The [VMRay](https://www.vmray.com) plugin allows the user to submit files or URLs for malware analysis with VMRay on-premise or VMRay Cloud. This plugin utilizes the VMRay API. The API is gated and can be found on-premise at `http://vmrayhost/static_doc/html/api/User_API_Reference.html` or in the [VMRay Cloud API documentation](https://cloud.vmray.com/static_doc/html/api/User_API_Reference.html)"
 
 
 def main():

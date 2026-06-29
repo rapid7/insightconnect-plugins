@@ -1,14 +1,6 @@
 # Description
 
-The VMRay plugin allows the user to submit files or URLs for malware analysis with VMRay on-premise or VMRay Cloud.
-
-[VMRay](https://www.vmray.com) delivers advanced threat analysis and detection that combines a unique agent-less hypervisor-based network sandbox with a real-time reputation engine.
-The combination provides both fast, high volume file classification and in-depth malware analysis.
-The VMRay Analyzer is platform independent and can be scaled, the result of a decade of R&D by some of the world's leading experts on dynamic malware analysis.
-By monitoring at the hypervisor level, it is undetectable by malware running in the target operating system.
-VMRay serves leading enterprises around the world.
-
-This plugin utilizes the VMRay API. The API is gated and can be found on-premise at `http://vmrayhost/static_doc/html/api/User_API_Reference.html` or in the [VMRay Cloud API documentation](https://cloud.vmray.com/static_doc/html/api/User_API_Reference.html).
+The [VMRay](https://www.vmray.com) plugin allows the user to submit files or URLs for malware analysis with VMRay on-premise or VMRay Cloud. This plugin utilizes the VMRay API. The API is gated and can be found on-premise at `http://vmrayhost/static_doc/html/api/User_API_Reference.html` or in the [VMRay Cloud API documentation](https://cloud.vmray.com/static_doc/html/api/User_API_Reference.html)
 
 # Key Features
 
@@ -21,7 +13,7 @@ This plugin utilizes the VMRay API. The API is gated and can be found on-premise
 
 # Supported Product Versions
 
-* 2025-12-18
+* 2026-06-25
 
 # Documentation
 
@@ -246,7 +238,7 @@ This action is used to submit file for analysis
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |analyzer_mode|string|default|False|Specify what analyzer mode to use|["default", "reputation", "reputation_static", "reputation_static_dynamic", "static_dynamic", "static"]|default|None|None|
 |file|file|None|True|File and filename for analysis|None|{"filename": "setup.exe", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}|None|None|
-|optional_params|object|None|False|Parameters that allow finer tuning of the Submit File action, e.g {"analysis_id": 12345}|None|{"analysis_id": 12345}|None|None|
+|optional_params|object|None|False|Parameters that allow finer tuning of the Submit File action, e.g {"tags": ["test_tag"]}|None|{"tags": ["another_test_tag"]}|None|None|
   
 Example input:
 
@@ -258,7 +250,9 @@ Example input:
     "filename": "setup.exe"
   },
   "optional_params": {
-    "analysis_id": 12345
+    "tags": [
+      "another_test_tag"
+    ]
   }
 }
 ```
@@ -365,7 +359,7 @@ This action is used to submits a URL for analysis
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |analyzer_mode|string|default|False|Specify what analyzer mode to use|["default", "reputation", "reputation_static", "reputation_static_dynamic", "static_dynamic", "static"]|default|None|None|
-|optional_params|object|None|False|Parameters that allow finer tuning of the Submit URL action, e.g {"analysis_id": 12345}|None|{"analysis_id": 12345}|None|None|
+|optional_params|object|None|False|Parameters that allow finer tuning of the Submit URL action, e.g {"tags": ["value"]}|None|{"tags": ["test,another_test,third_test,fourth_test"]}|None|None|
 |url|string|None|True|URL to be submitted for analysis|None|https://example.com|None|None|
   
 Example input:
@@ -374,7 +368,9 @@ Example input:
 {
   "analyzer_mode": "default",
   "optional_params": {
-    "analysis_id": 12345
+    "tags": [
+      "test,another_test,third_test,fourth_test"
+    ]
   },
   "url": "https://example.com"
 }
@@ -856,7 +852,7 @@ Example output:
 |Submission Sample SHA256|string|None|None|Submission sample SHA256|None|
 |Submission Sample ssdeep|string|None|None|Submission sample ssdeep|None|
 |Submission Shareable|boolean|None|None|Submission shareable|None|
-|Submission Tags|[]object|None|None|Submission tags|None|
+|Submission Tags|[]string|None|None|Submission tags|None|
 |Submission Type|string|None|None|Submission type|None|
 |Submission User Account ID|integer|None|None|Submission user account ID|None|
 |Submission User Account Name|string|None|None|Submission user account name|None|
@@ -906,7 +902,7 @@ Example output:
 |Submission Sample: SHA256|string|None|None|Submission sample SHA256|None|
 |Submission Sample: ssdeep|string|None|None|Submission sample ssdeep|None|
 |Submission Shareable|boolean|None|None|Submission shareable|None|
-|Submission Tags|[]object|None|None|Submission tags|None|
+|Submission Tags|[]string|None|None|Submission tags|None|
 |Submission Type|string|None|None|Submission type|None|
 |Submission User Account ID|integer|None|None|Submission user account ID|None|
 |Submission User Account Name|string|None|None|Submission user account name|None|
@@ -955,6 +951,7 @@ Example output:
 
 # Version History
 
+* 7.0.0 - Fix issue with submission_tags schema validation failure | Updated SDK to the latest version (6.6.0)
 * 6.0.2 - Updated SDK to the latest version (6.4.3)
 * 6.0.1 - Fixed issue with connection test | Updated SDK to the latest version (6.4.1)
 * 6.0.0 - Change type of Analysis VTI Built in Rules Version from `number` to `string`

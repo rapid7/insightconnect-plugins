@@ -5,7 +5,6 @@ from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 from .schema import ConnectionSchema, Input
 from ..util.api import ActiveDirectoryLdapAPI
 
-
 # Custom imports below
 
 

@@ -17,13 +17,9 @@ class TestActionDisableUsers(TestCase):
                     Output.FAILED: [
                         {
                             "dn": "CN=empty_search,DC=example,DC=com",
-                            "error": "An error occurred during plugin "
-                            "execution!\n"
-                            "\n"
-                            "The DN "
-                            "CN=empty_search,DC=example,DC=com was "
-                            "not found. Please provide a valid DN "
-                            "and try again.",
+                            "error": "An error occurred during plugin execution! "
+                            "The DN CN=empty_search,DC=example,DC=com was "
+                            "not found. Please provide a valid DN and try again.",
                         }
                     ],
                     Output.COMPLETED: [],
@@ -35,13 +31,9 @@ class TestActionDisableUsers(TestCase):
                     Output.FAILED: [
                         {
                             "dn": "CN=empty_search,DC=example,DC=com",
-                            "error": "An error occurred during plugin "
-                            "execution!\n"
-                            "\n"
-                            "The DN "
-                            "CN=empty_search,DC=example,DC=com was "
-                            "not found. Please provide a valid DN "
-                            "and try again.",
+                            "error": "An error occurred during plugin execution! "
+                            "The DN CN=empty_search,DC=example,DC=com was "
+                            "not found. Please provide a valid DN and try again.",
                         }
                     ],
                     Output.COMPLETED: ["CN=Users,DC=example,DC=com"],
