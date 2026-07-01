@@ -1,6 +1,6 @@
 {
-	"spec": "8ebfc759ea844c5966d65c7e0615ebd0",
-	"manifest": "8d04e30756cd3fa6d0a16115569ff919",
+	"spec": "839f80b1e625a18cd313bda67fbd9c6f",
+	"manifest": "227f926f1e8fc22d9cb6db478fb00733",
 	"setup": "ea2ef3ef7ac4bd4521c2eec5a6031b2b",
 	"schemas": [
 		{
@@ -60,8 +60,8 @@
 			"hash": "588e252479e8a13bafdfeb55df96f412"
 		},
 		{
-			"identifier": "anyrun_ti_feeds_enrichment/schema.py",
-			"hash": "543f3fbff9df263ebccc62ba9161008a"
+			"identifier": "get_ti_feeds/schema.py",
+			"hash": "1aa312f10206ce55818e0963f1a29a94"
 		}
 	]
 }

@@ -20,7 +20,7 @@ class Output:
     THREAT_FEED_ACCESS_KEY = "threat_feed_access_key"
 
 
-class AnyrunTiFeedsEnrichmentInput(insightconnect_plugin_runtime.Input):
+class GetTiFeedsInput(insightconnect_plugin_runtime.Input):
     schema = json.loads(
         r"""
    {
@@ -62,7 +62,7 @@ class AnyrunTiFeedsEnrichmentInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class AnyrunTiFeedsEnrichmentOutput(insightconnect_plugin_runtime.Output):
+class GetTiFeedsOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads(
         r"""
    {

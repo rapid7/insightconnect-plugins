@@ -34,7 +34,7 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
-            self.add_trigger(triggers.AnyrunTiFeedsEnrichment())
+            self.add_trigger(triggers.GetTiFeeds())
         
             self.add_action(actions.GetAnalysisHistory())
         
