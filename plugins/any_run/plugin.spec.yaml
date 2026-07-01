@@ -4,7 +4,7 @@ products: [insightconnect]
 name: any_run
 title: "ANY.RUN"
 description: ANY.RUN Sandbox is an online interactive sandbox for malware analysis, a tool for detection, monitoring, and research of cyber threats in real time
-version: 3.0.0
+version: 4.0.0
 connection_version: 3
 supported_versions: ["ANY.RUN API 2026-03-20"]
 vendor: rapid7
@@ -24,7 +24,7 @@ hub_tags:
   features: []
 sdk:
   type: slim
-  version: 6.5.0
+  version: 6.5.1
   user: nobody
 key_features:
   - Submit a file or URL to ANY.RUN for analysis using the following OS - Windows, Linux, Android
@@ -35,12 +35,14 @@ key_features:
   - Download analysis network traffic dumps.
   - Perform deep searches, look up threats online, and enrich your security solutions using ANY.RUN TI Lookup.
   - Retrieve IP, Domain, URL, MD5, SHA256, SHA1 reputation.
+  - Load fresh IPv4, URL, and Domain-Name indicators.
 requirements:
   - Requires an ANY.RUN Sandbox or ANY.RUN TI Lookup API key without a prefix
   - Available on ANY.RUN plans with API access, including trial
 troubleshooting:
   - Configure the connection with either an API key without a prefix.
 version_history:
+  - "4.0.0 - Added new trigger: Get TI Feeds | Updated SDK to the latest version (6.5.1)"
   - "3.0.0 - Migrate to the ANY.RUN SDK | Update existing actions | Add new actions | Updated SDK to the latest version (6.5.0)"
   - "2.0.0 - Actions: `Get Report` - Updated output schema types | Updated SDK to the latest version (6.4.0)"
   - "1.1.2 - Fix issue with file defaulting to Windows 7 32-Bit"
@@ -159,6 +161,62 @@ connection:
     type: credential_secret_key
     required: false
     example: WbTbwa4KFk77eQNffMJynWXm49jLwGjwPMKM9Xc4
+  ti_feeds_api_key:
+    title: API Key
+    description: API key for ANY.RUN TI Feeds
+    type: credential_secret_key
+    required: false
+    example: WbTbwa4KFk77eQNffMJynWXm49jLwGjwPMKM9Xc4
+triggers:
+  get_ti_feeds:
+    title: Get TI Feeds
+    description: Loads IPv4, URL, and Domain-Name indicators
+    input:
+      feed_fetch_interval:
+        title: Feed Fetch Interval
+        type: integer
+        description: Specify feed fetch interval in minutes
+        required: true
+        default: 120
+        example: 120
+      feed_fetch_depth:
+        title: Feed Fetch Depth
+        type: integer
+        description:  Specify feed fetch depth in days
+        required: true
+        default: 90
+        example: 90
+      threat_feed_access_key:
+        title: Threat Feed Access Key
+        description: Threat Feed Access Key
+        type: string
+        required: true
+        example: 3b682134-c0f3-404d-84ba-34430df3e832
+    output:
+      anyrun_feed_ips:
+        title: TI Feeds IP
+        description: IPv4 IOCs
+        type: '[]string'
+        required: false
+        example: '["172.217.6.14"]'
+      anyrun_feed_domains:
+        title: TI Feeds Domain
+        description: Domain-Name IOCs
+        type: '[]string'
+        required: false
+        example: '["proxusert.com"]'
+      anyrun_feed_urls:
+        title: TI Feeds URL
+        description: URL IOCs
+        type: '[]string'
+        required: false
+        example: '["https://seatefitters.com/"]'
+      threat_feed_access_key:
+        title: Threat Feed Access Key
+        description: Threat Feed Access Key
+        type: string
+        required: true
+        example: 3b682134-c0f3-404d-84ba-34430df3e832
 actions:
   get_analysis_history:
     title: Get Analysis History
@@ -705,13 +763,6 @@ actions:
           - '2 weeks'
           - 'month'
         example: 'month'
-      obj_ext_extension:
-        title: Extension
-        description: Change extension to valid
-        type: boolean
-        required: false
-        default: true
-        example: true
       user_tags:
         title: User Tags
         description: Append User Tags to new analysis. Only characters a-z, A-Z, 0-9, hyphen (-), and comma (,) are allowed. Max tag length - 16 characters. Max unique tags per analysis - 8

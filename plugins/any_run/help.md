@@ -12,6 +12,7 @@ ANY.RUN Sandbox is an online interactive sandbox for malware analysis, a tool fo
 * Download analysis network traffic dumps.
 * Perform deep searches, look up threats online, and enrich your security solutions using ANY.RUN TI Lookup.
 * Retrieve IP, Domain, URL, MD5, SHA256, SHA1 reputation.
+* Load fresh IPv4, URL, and Domain-Name indicators.
 
 # Requirements
 
@@ -31,6 +32,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |sandbox_api_key|credential_secret_key|None|False|API key for ANY.RUN Sandbox|None|WbTbwa4KFk77eQNffMJynWXm49jLwGjwPMKM9Xc4|None|None|
+|ti_feeds_api_key|credential_secret_key|None|False|API key for ANY.RUN TI Feeds|None|WbTbwa4KFk77eQNffMJynWXm49jLwGjwPMKM9Xc4|None|None|
 |ti_lookup_api_key|credential_secret_key|None|False|API key for ANY.RUN TI Lookup|None|WbTbwa4KFk77eQNffMJynWXm49jLwGjwPMKM9Xc4|None|None|
 
 Example input:
@@ -38,6 +40,7 @@ Example input:
 ```
 {
   "sandbox_api_key": "WbTbwa4KFk77eQNffMJynWXm49jLwGjwPMKM9Xc4",
+  "ti_feeds_api_key": "WbTbwa4KFk77eQNffMJynWXm49jLwGjwPMKM9Xc4",
   "ti_lookup_api_key": "WbTbwa4KFk77eQNffMJynWXm49jLwGjwPMKM9Xc4"
 }
 ```
@@ -116,7 +119,6 @@ This action is used to run URL analysis using Android VM
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |env_locale|string||False|Operation System language. Use locale identifier or country name Example - ( "en-US" or "Brazil"). Case insensitive|None|en-US|None|None|
-|obj_ext_extension|boolean|True|False|Change extension to valid|None|True|None|None|
 |obj_url|string|None|True|Target URL. Size range 5-512. Example -> (http/https)://(your-link)|None|https://example.org|None|None|
 |opt_auto_delete_after|string||False|Specify after what period of time this report should be deleted|["", "day", "week", "2 weeks", "month"]|month|None|None|
 |opt_network_connect|boolean|True|False|Network connection state|None|True|None|None|
@@ -135,7 +137,6 @@ Example input:
 ```
 {
   "env_locale": "",
-  "obj_ext_extension": true,
   "obj_url": "https://example.org",
   "opt_auto_delete_after": "",
   "opt_network_connect": true,
@@ -758,8 +759,55 @@ Example output:
 }
 ```
 ### Triggers
+
+
+#### Get TI Feeds
+
+This trigger is used to loads IPv4, URL, and Domain-Name indicators
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|feed_fetch_depth|integer|90|True|Specify feed fetch depth in days|None|90|None|None|
+|feed_fetch_interval|integer|120|True|Specify feed fetch interval in minutes|None|120|None|None|
+|threat_feed_access_key|string|None|True|Threat Feed Access Key|None|3b682134-c0f3-404d-84ba-34430df3e832|None|None|
   
-*This plugin does not contain any triggers.*
+Example input:
+
+```
+{
+  "feed_fetch_depth": 90,
+  "feed_fetch_interval": 120,
+  "threat_feed_access_key": "3b682134-c0f3-404d-84ba-34430df3e832"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|anyrun_feed_domains|[]string|False|Domain-Name IOCs|["proxusert.com"]|
+|anyrun_feed_ips|[]string|False|IPv4 IOCs|["172.217.6.14"]|
+|anyrun_feed_urls|[]string|False|URL IOCs|["https://seatefitters.com/"]|
+|threat_feed_access_key|string|True|Threat Feed Access Key|3b682134-c0f3-404d-84ba-34430df3e832|
+  
+Example output:
+
+```
+{
+  "anyrun_feed_domains": [
+    "proxusert.com"
+  ],
+  "anyrun_feed_ips": [
+    "172.217.6.14"
+  ],
+  "anyrun_feed_urls": [
+    "https://seatefitters.com/"
+  ],
+  "threat_feed_access_key": "3b682134-c0f3-404d-84ba-34430df3e832"
+}
+```
 ### Tasks
   
 *This plugin does not contain any tasks.*
@@ -799,6 +847,7 @@ Example output:
 
 # Version History
 
+* 4.0.0 - Added new trigger: Get TI Feeds | Updated SDK to the latest version (6.5.1)
 * 3.0.0 - Migrate to the ANY.RUN SDK | Update existing actions | Add new actions | Updated SDK to the latest version (6.5.0)
 * 2.0.0 - Actions: `Get Report` - Updated output schema types | Updated SDK to the latest version (6.4.0)
 * 1.1.2 - Fix issue with file defaulting to Windows 7 32-Bit
