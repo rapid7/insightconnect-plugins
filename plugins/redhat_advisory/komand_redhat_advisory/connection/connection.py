@@ -12,6 +12,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.client = None
 
     def connect(self, params: dict = {}) -> None:
+        # pylint: disable=unused-argument
         self.client = RedHatSecurityDataAPI()
 
     def test(self) -> dict:
