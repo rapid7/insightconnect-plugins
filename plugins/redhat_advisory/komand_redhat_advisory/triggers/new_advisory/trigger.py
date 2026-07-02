@@ -45,6 +45,10 @@ class NewAdvisory(insightconnect_plugin_runtime.Trigger):
         )
 
         while self.run_trigger:
+            # Snapshot the UTC day BEFORE the request so a midnight rollover mid-batch
+            # cannot zero out `seen` while we still hold advisories from the previous day.
+            day_at_poll = self._utc_today()
+
             try:
                 advisories = self.connection.client.list_advisories(after=cursor_day)
             except PluginException as error:
@@ -67,11 +71,10 @@ class NewAdvisory(insightconnect_plugin_runtime.Trigger):
                 self.send(clean(advisory))
                 seen.add(rhsa)
 
-            today = self._utc_today()
-            if today != cursor_day:
-                self.logger.info(f"UTC day rolled from {cursor_day} to {today}; resetting seen-set")
+            if day_at_poll != cursor_day:
+                self.logger.info(f"UTC day rolled from {cursor_day} to {day_at_poll}; resetting seen-set")
                 seen = set()
-                cursor_day = today
+                cursor_day = day_at_poll
 
             self._persist_state(seen=seen, cursor_day=cursor_day)
             time.sleep(POLL_INTERVAL_SECONDS)
