@@ -56,6 +56,10 @@ class NewAdvisory(insightconnect_plugin_runtime.Trigger):
                 time.sleep(POLL_INTERVAL_SECONDS)
                 continue
 
+            released_day_by_rhsa = {
+                raw.get("RHSA"): str(raw.get("released_on") or "")[:10] for raw in advisories if raw.get("RHSA")
+            }
+
             for raw_advisory in advisories:
                 rhsa = raw_advisory.get("RHSA")
                 if not rhsa:
@@ -66,14 +70,24 @@ class NewAdvisory(insightconnect_plugin_runtime.Trigger):
                 try:
                     advisory = self._process_advisory(raw_advisory, include_source=include_source)
                 except Exception as error:
-                    self.logger.error(f"Failed to process advisory {rhsa}: {error}")
+                    # Quarantine the record so we don't retry a poison advisory every poll cycle.
+                    # KeyboardInterrupt / SystemExit still propagate because they derive from BaseException.
+                    self.logger.error(f"Failed to process advisory {rhsa}: {error}", exc_info=True)
+                    seen.add(rhsa)
                     continue
                 self.send(clean(advisory))
                 seen.add(rhsa)
 
             if day_at_poll != cursor_day:
-                self.logger.info(f"UTC day rolled from {cursor_day} to {day_at_poll}; resetting seen-set")
-                seen = set()
+                # Drop only RHSAs we can prove were released before the new day. Anything else
+                # (unknown release day, missing from this batch, or released on/after day_at_poll)
+                # stays in the seen-set — safer to skip a resend than to re-emit duplicates.
+                self.logger.info(f"UTC day rolled from {cursor_day} to {day_at_poll}; pruning stale seen-set entries")
+                seen = {
+                    rhsa
+                    for rhsa in seen
+                    if not (released_day_by_rhsa.get(rhsa) and released_day_by_rhsa[rhsa] < day_at_poll)
+                }
                 cursor_day = day_at_poll
 
             self._persist_state(seen=seen, cursor_day=cursor_day)
