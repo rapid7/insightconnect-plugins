@@ -2,12 +2,18 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: redhat_advisory
-title: Redhat Security Advisories
+title: Red Hat Security Advisories
 vendor: rapid7
 support: community
 status: []
-description: This plugin will trigger workflows on new Red Hat Security Advisories
-version: 1.0.2
+description: "The [Red Hat Security Advisories](https://access.redhat.com/security/updates/advisory)\
+  \ plugin triggers workflows on any new security advisories. Red Hat Security Advisories\
+  \ provide information about security flaws that affect Red Hat products and services.\
+  \ This plugin consumes the [Red Hat Security Data API](https://access.redhat.com/security/data)\
+  \ using the CSAF 2.0 format"
+version: 2.0.0
+connection_version: 1
+supported_versions: ["Red Hat Security Data API CSAF 2.0"]
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/redhat_advisory
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -19,35 +25,72 @@ tags:
 - cve
 hub_tags:
   use_cases: [alerting_and_notifications, threat_detection_and_response, vulnerability_management]
-  keywords: [redhat, vulnerability management, security advisories, feeds, cve]
+  keywords: [security_advisories, security_response, cve, feeds]
   features: []
+sdk:
+  type: slim
+  version: 6.6.0
+  user: nobody
+key_features:
+- Trigger a workflow when Red Hat publishes a new security advisory
+troubleshooting: |
+  The legacy `/labs/securitydataapi/` endpoint has been retired by Red Hat. This plugin
+  now consumes the current [Red Hat Security Data API](https://access.redhat.com/security/data)
+  using the CSAF 2.0 format.
+version_history:
+- 2.0.0 - Migrate from the retired Red Hat Security Data API (`/labs/securitydataapi/`,
+  CVRF) to the current endpoint (`/hydra/rest/securitydata/`, CSAF 2.0) | Rename `include_cvrf`
+  input to `include_source` | Change shape of `source`, `publisher` and `references`
+  outputs to CSAF 2.0 format | Change `type` output to a human-readable label (e.g.
+  `Security Advisory`) mapped from CSAF `document.category` | Remove `oval` output
+  (not available in CSAF endpoint) | Persist emitted advisories across polls to prevent
+  duplicate events | Fix plugin title from `Redhat` to `Red Hat` | Update SDK to the
+  latest version (6.6.0)
+- 1.0.2 - New spec and help.md format for the Extension Library | Add missing title
+  values for actions in plugin.spec.yaml
+- 1.0.1 - Support web server mode
+- 1.0.0 - Update to v2 Python plugin architecture
+- 0.1.1 - SSL bug fix in SDK
+- 0.1.0 - Initial plugin
+links:
+- '[Red Hat Security Advisories](https://access.redhat.com/security/updates/advisory)'
+- '[Red Hat Security Data API](https://access.redhat.com/security/data)'
+references:
+- '[Red Hat Security Data API](https://access.redhat.com/security/data)'
+- '[CSAF 2.0 standard](https://docs.oasis-open.org/csaf/csaf/v2.0/csaf-v2.0.html)'
 types:
   reference:
     description:
       description: Reference Description
       type: string
       required: false
+      example: "Vulnerability details"
     url:
       description: URL
       type: string
       required: false
+      example: "https://access.redhat.com/security/cve/CVE-2026-48962"
     type:
       description: Ref Type (e.g. Self)
       type: string
       required: false
+      example: "self"
   publisher:
     issuing_authority:
       description: Issuer
       type: string
       required: false
+      example: "Red Hat Product Security"
     type:
       description: Type of Publisher
       type: string
       required: false
+      example: "vendor"
     contact_details:
       description: Who to contact
       type: string
       required: false
+      example: "user@example.com"
 triggers:
   new_advisory:
     title: New Advisory
@@ -55,74 +98,86 @@ triggers:
     input:
       after:
         type: string
-        description: Look for new advisories after provided date. Default is when
-          trigger starts
+        description: Look for new advisories after the provided ISO-8601 date (YYYY-MM-DD).
+          Defaults to the trigger start time in UTC
         required: false
-      include_cvrf:
+        example: "2026-01-01"
+      include_source:
         type: boolean
         default: false
-        description: Include the full source CVRF
+        description: Include the full source advisory document (CSAF 2.0)
         required: false
+        example: false
     output:
       rhsa:
         type: string
         description: Red Hat Security Advisory ID
         required: false
+        example: "RHSA-2026:30858"
       title:
         type: string
         description: Title of Advisory
         required: false
+        example: "Red Hat Security Advisory: perl-IO-Compress security update"
       url:
         description: URL to advisory
         type: string
         required: false
+        example: "https://access.redhat.com/errata/RHSA-2026:30858"
       notes:
         type: string
         description: Notes
         required: false
+        example: "An update for perl-IO-Compress is now available for Red Hat Enterprise Linux 8."
       type:
         type: string
         description: Type, e.g. 'Security Advisory'
         required: false
+        example: "Security Advisory"
       publisher:
         description: Publisher
         type: publisher
         required: false
+        example: {"issuing_authority": "Red Hat Product Security", "contact_details": "user@example.com", "type": "vendor"}
       references:
         description: URL references
         type: '[]reference'
         required: false
+        example: [{"description": "Advisory link", "url": "https://access.redhat.com/errata/RHSA-2026:30858", "type": "self"}]
       severity:
         type: string
         description: Severity
         required: false
+        example: "important"
       released_on:
         type: date
         description: Release Date
         required: false
+        example: "2026-06-29T02:38:12Z"
       cves:
         title: CVEs
         type: '[]string'
         description: CVE IDs
         required: false
+        example: ["CVE-2026-48962"]
       bugzillas:
         title: Bugzilla IDs
         type: '[]string'
         description: Bugzilla IDs
         required: false
+        example: ["2481767"]
       released_packages:
         type: '[]string'
         description: Released Packages
         required: false
-      oval:
-        description: OVAL
-        type: object
-        required: false
+        example: ["perl-IO-Compress-0:2.081-2.el8_10"]
       resource_url:
         description: Resource JSON URL
         type: string
         required: false
+        example: "https://access.redhat.com/hydra/rest/securitydata/csaf/RHSA-2026:30858.json"
       source:
-        description: Original Source CVRF doc
+        description: Original source advisory document (CSAF 2.0)
         type: object
         required: false
+        example: {}

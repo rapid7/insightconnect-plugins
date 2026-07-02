@@ -1,116 +1,170 @@
-import komand
-import time
-from .schema import NewAdvisoryInput, NewAdvisoryOutput
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
+from insightconnect_plugin_runtime.helper import clean
+from .schema import Component, Input, NewAdvisoryInput, NewAdvisoryOutput, Output
 
 # Custom imports below
-import requests
-import datetime
+import time
+from datetime import datetime, timezone
+
+POLL_INTERVAL_SECONDS = 30
+STATE_SEEN_RHSA = "seen_rhsa"
+STATE_CURSOR_DAY = "cursor_day"
+
+CSAF_CATEGORY_TO_TYPE = {"csaf_security_advisory": "Security Advisory"}
+CSAF_CATEGORY_DEFAULT_TYPE = "Security Advisory"
+
+NOTE_CATEGORIES_ALLOWED = {"summary", "general", "description"}
+
+REFERENCE_DESCRIPTION_BY_CATEGORY = {
+    "self": "Advisory link",
+    "external": "External reference",
+}
 
 
-_API_HOST = "https://access.redhat.com/labs/securitydataapi"
-
-
-class NewAdvisory(komand.Trigger):
+class NewAdvisory(insightconnect_plugin_runtime.Trigger):
     def __init__(self):
-        super(self.__class__, self).__init__(
+        super().__init__(
             name="new_advisory",
-            description="Trigger on new advisory",
+            description=Component.DESCRIPTION,
             input=NewAdvisoryInput(),
             output=NewAdvisoryOutput(),
         )
 
-        self.after = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        self.include_cvrf = False
+    def run(self, params: dict = {}) -> None:
+        include_source = params.get(Input.INCLUDE_SOURCE, False)
+        starting_after = params.get(Input.AFTER) or self._utc_today()
 
-    def get_cvrf(self, id_):
-        if not id_:
+        self.load_state()
+        cursor_day = self.state.get(STATE_CURSOR_DAY) or starting_after
+        seen: set = set(self.state.get(STATE_SEEN_RHSA, []))
+
+        self.logger.info(
+            f"Polling Red Hat Security Data API from {cursor_day} "
+            f"({len(seen)} advisories already emitted for this day)"
+        )
+
+        while self.run_trigger:
+            try:
+                advisories = self.connection.client.list_advisories(after=cursor_day)
+            except PluginException as error:
+                self.logger.error(f"Failed to list advisories: {error}")
+                time.sleep(POLL_INTERVAL_SECONDS)
+                continue
+
+            for raw_advisory in advisories:
+                rhsa = raw_advisory.get("RHSA")
+                if not rhsa:
+                    self.logger.warning(f"Advisory without RHSA ID; skipping: {raw_advisory}")
+                    continue
+                if rhsa in seen:
+                    continue
+                try:
+                    advisory = self._process_advisory(raw_advisory, include_source=include_source)
+                except Exception as error:
+                    self.logger.error(f"Failed to process advisory {rhsa}: {error}")
+                    continue
+                self.send(clean(advisory))
+                seen.add(rhsa)
+
+            today = self._utc_today()
+            if today != cursor_day:
+                self.logger.info(f"UTC day rolled from {cursor_day} to {today}; resetting seen-set")
+                seen = set()
+                cursor_day = today
+
+            self._persist_state(seen=seen, cursor_day=cursor_day)
+            time.sleep(POLL_INTERVAL_SECONDS)
+
+    def _persist_state(self, seen: set, cursor_day: str) -> None:
+        self.state[STATE_SEEN_RHSA] = sorted(seen)
+        self.state[STATE_CURSOR_DAY] = cursor_day
+        if not self.state_file:
             return
-        query = "%s/cvrf/%s.json" % (_API_HOST, id_)
-        r = requests.get(query)
+        try:
+            self._save_state()
+        except PluginException as error:
+            self.logger.warning(f"Could not persist trigger state: {error}")
 
-        if r.status_code == 200:
-            results = r.json()
-            if results:
-                self.logger.info("got cvrf: %s", results)
-                return results.get("cvrfdoc")
+    def _process_advisory(self, raw: dict, include_source: bool) -> dict:
+        advisory = {
+            Output.RHSA: raw.get("RHSA", ""),
+            Output.CVES: raw.get("CVEs", []),
+            Output.BUGZILLAS: list(dict.fromkeys(raw.get("bugzillas", []))),
+            Output.SEVERITY: raw.get("severity"),
+            Output.RELEASED_ON: raw.get("released_on"),
+            Output.RELEASED_PACKAGES: raw.get("released_packages", []),
+            Output.RESOURCE_URL: raw.get("resource_url"),
+        }
 
-    def list_advisories(self, start=""):
-        query = "%s/cvrf.json" % (_API_HOST)
+        if not include_source:
+            return advisory
 
-        r = requests.get(query, {"after": start})
+        try:
+            source = self.connection.client.get_advisory_document(advisory[Output.RHSA]) or {}
+        except PluginException as error:
+            self.logger.error(f"Failed to fetch advisory document for {advisory[Output.RHSA]}: {error}")
+            return advisory
 
-        if r.status_code != 200:
-            self.logger.error(
-                "ERROR: Invalid request; returned {} for the following " "query:\n{}".format(r.status_code, query)
+        document = source.get("document", {}) if isinstance(source, dict) else {}
+        if document:
+            advisory[Output.TITLE] = document.get("title")
+            advisory[Output.TYPE] = CSAF_CATEGORY_TO_TYPE.get(document.get("category"), CSAF_CATEGORY_DEFAULT_TYPE)
+
+            notes = [
+                note.get("text", "")
+                for note in document.get("notes") or []
+                if note.get("category") in NOTE_CATEGORIES_ALLOWED and note.get("text")
+            ]
+            if notes:
+                advisory[Output.NOTES] = "\n".join(notes)
+
+            references = document.get("references") or []
+            if references:
+                advisory[Output.REFERENCES] = [self._render_reference(ref) for ref in references]
+                advisory[Output.URL] = self._pick_advisory_url(references)
+
+            publisher = document.get("publisher") or {}
+            if publisher:
+                advisory[Output.PUBLISHER] = {
+                    "issuing_authority": publisher.get("issuing_authority"),
+                    "contact_details": publisher.get("contact_details"),
+                    "type": publisher.get("category"),
+                }
+
+        advisory[Output.SOURCE] = source
+        return advisory
+
+    @staticmethod
+    def _render_reference(ref: dict) -> dict:
+        url = ref.get("url")
+        summary = ref.get("summary")
+        category = ref.get("category")
+        # Red Hat frequently sets `summary` to the URL itself or a bare Bugzilla ID —
+        # substitute a category-based label so `description` carries real information.
+        if not summary or summary == url:
+            description = REFERENCE_DESCRIPTION_BY_CATEGORY.get(category, "Reference")
+        else:
+            description = summary
+        return {"description": description, "url": url, "type": category}
+
+    @staticmethod
+    def _pick_advisory_url(references: list) -> str:
+        self_urls = [ref.get("url", "") for ref in references if ref.get("category") == "self"]
+        errata_url = next((url for url in self_urls if "/errata/" in url), "")
+        return errata_url or (self_urls[0] if self_urls else "")
+
+    @staticmethod
+    def _utc_today() -> str:
+        return datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+    def test(self) -> dict:
+        try:
+            self.connection.client.test_connection()
+            return {"success": True}
+        except PluginException as error:
+            raise ConnectionTestException(
+                cause=error.cause,
+                assistance=error.assistance,
+                data=error.data,
             )
-            return []
-
-        results = r.json()
-        return results or []
-
-    def find_source_reference(self, refs):
-        refs = refs or []
-        for r in refs:
-            if r.get("type") == "Self":
-                return r["url"]
-
-        return ""
-
-    def process_advisory(self, a):
-        """
-        Normalize some of the incoming data
-        """
-        self.logger.debug("got event %s", a)
-
-        a["rhsa"] = a.pop("RHSA") or ""
-        a["cves"] = a.pop("CVEs") or []
-        source = self.get_cvrf(a.get("rhsa")) or {}
-
-        if source.get("document_title"):
-            a["title"] = source["document_title"]
-        if source.get("document_type"):
-            a["type"] = source["document_type"]
-        if source.get("document_publisher"):
-            a["publisher"] = source["document_publisher"]
-
-        if source.get("document_notes") and source["document_notes"].get("note"):
-            a["notes"] = source["document_notes"]["note"] or []
-            a["notes"] = "\n".join(a["notes"])
-
-        if source.get("document_references") and source["document_references"].get("reference"):
-            a["references"] = source["document_references"]["reference"]
-            a["url"] = self.find_source_reference(source["document_references"]["reference"])
-
-        if self.include_cvrf:
-            a["source"] = source
-
-        return a
-
-    def process(self):
-        self.logger.info("processing from: %s", self.after)
-        advisories = self.list_advisories(self.after)
-        self.after = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
-        for a in advisories:
-            a = self.process_advisory(a)
-            self.send(a)
-
-    def run(self, params={}):
-        """Run the trigger"""
-
-        self.after = params.get("after") or datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        self.include_cvrf = params.get("include_cvrf")
-
-        # send a test event
-        while True:
-            self.process()
-            time.sleep(30)
-
-    def test(self):
-        """Test the trigger by returning an advisory"""
-        advisories = self.list_advisories("2016-10-1")
-        self.after = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        self.include_cvrf = True
-
-        for a in advisories:
-            return self.process_advisory(a)
