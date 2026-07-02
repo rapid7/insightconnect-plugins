@@ -4,7 +4,9 @@ from .schema import AnyrunTiFeedsEnrichmentInput, AnyrunTiFeedsEnrichmentOutput,
 
 # Custom imports below
 from anyrun.connectors import FeedsConnector
+from anyrun import RunTimeException
 from datetime import datetime, timedelta
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_any_run.util.config import Config
 from icon_any_run.util.tools import get_indicators
@@ -26,33 +28,41 @@ class GetTiFeeds(insightconnect_plugin_runtime.Trigger):
 
         while True:
             self.logger.info(f"[ANY.RUN] Initialized TI Feeds enrichment.")
-            with FeedsConnector(self.connection.feeds_api_key, integration=Config.VERSION) as connector:
-                connector.check_authorization()
-                self.logger.info(f"[ANY.RUN] Authentication is passed.")
+            try:
+                with FeedsConnector(self.connection.feeds_api_key, integration=Config.VERSION) as connector:
+                    self.logger.info(f"[ANY.RUN] Authentication is passed.")
 
-                domains = get_indicators(connector, "domain", feed_fetch_depth)
-                ips = get_indicators(connector, "ip", feed_fetch_depth)
-                urls = get_indicators(connector, "url", feed_fetch_depth)
+                    domains = get_indicators(connector, "domain", feed_fetch_depth)
+                    ips = get_indicators(connector, "ip", feed_fetch_depth)
+                    urls = get_indicators(connector, "url", feed_fetch_depth)
+
+                    self.logger.info(
+                        f"[ANY.RUN] TI Feeds are fetched.\nReceived:"
+                        f" {len(domains)} domains,"
+                        f" {len(ips)} ips,"
+                        f" {len(urls)} urls."
+                    )
+
+                if domains or ips or urls:
+                    self.send(
+                        {
+                            Output.ANYRUN_FEED_DOMAINS: domains,
+                            Output.ANYRUN_FEED_IPS: ips,
+                            Output.ANYRUN_FEED_URLS: urls,
+                            Output.THREAT_FEED_ACCESS_KEY: threat_feed_access_key,
+                        }
+                    )
+
                 self.logger.info(
-                    f"[ANY.RUN] TI Feeds are fetched.\nReceived:"
-                    f" {len(domains) if domains else 0} domains,"
-                    f" {len(ips) if ips else 0} ips,"
-                    f" {len(urls) if urls else 0} urls."
+                    f"[ANY.RUN] Trigger executed successfully. "
+                    f"Next run at: {datetime.now() + timedelta(seconds=feed_fetch_interval * 60)}."
                 )
 
-            if domains or ips or urls:
-                self.send(
-                    {
-                        Output.ANYRUN_FEED_DOMAINS: domains,
-                        Output.ANYRUN_FEED_IPS: ips,
-                        Output.ANYRUN_FEED_URLS: urls,
-                        Output.THREAT_FEED_ACCESS_KEY: threat_feed_access_key,
-                    }
+                time.sleep(feed_fetch_interval * 60)
+
+            except RunTimeException as error:
+                raise PluginException(
+                    cause="Failed to start analysis.",
+                    assistance=error.description,
+                    data=error.json,
                 )
-
-            self.logger.info(
-                f"[ANY.RUN] Trigger executed successfully. "
-                f"Next run at: {datetime.now() + timedelta(seconds=feed_fetch_interval * 60)}."
-            )
-
-            time.sleep(feed_fetch_interval * 60)

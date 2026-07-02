@@ -847,7 +847,7 @@ Example output:
 
 # Version History
 
-* 4.0.0 - Added new trigger: Get TI Feeds | Updated SDK to the latest version (6.5.1)
+* 4.0.0 - Added new trigger: Get TI Feeds | Updated SDK to the latest version (6.6.0)
 * 3.0.0 - Migrate to the ANY.RUN SDK | Update existing actions | Add new actions | Updated SDK to the latest version (6.5.0)
 * 2.0.0 - Actions: `Get Report` - Updated output schema types | Updated SDK to the latest version (6.4.0)
 * 1.1.2 - Fix issue with file defaulting to Windows 7 32-Bit
