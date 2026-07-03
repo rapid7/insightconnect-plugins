@@ -4,7 +4,7 @@ import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import extract_json, make_request
 
-from komand_redhat_advisory.util.constants import PAGE_SIZE, REQUEST_TIMEOUT
+from komand_redhat_advisory.util.constants import LIST_ADVISORIES_MAX_PAGES, PAGE_SIZE, REQUEST_TIMEOUT
 from komand_redhat_advisory.util.endpoints import API_HOST, CSAF_DOC_ENDPOINT, CSAF_LIST_ENDPOINT
 
 
@@ -17,8 +17,7 @@ class RedHatSecurityDataAPI:
     def list_advisories(self, after: str) -> List[dict]:
         """Return advisories released on or after the given UTC date (paginated)."""
         advisories: List[dict] = []
-        page = 1
-        while True:
+        for page in range(1, LIST_ADVISORIES_MAX_PAGES + 1):
             batch = self._call_api(
                 "GET",
                 CSAF_LIST_ENDPOINT,
@@ -32,9 +31,12 @@ class RedHatSecurityDataAPI:
                 )
             advisories.extend(batch)
             if len(batch) < PAGE_SIZE:
-                break
-            page += 1
-        return advisories
+                return advisories
+        raise PluginException(
+            cause=f"Red Hat Security Data API returned more than {LIST_ADVISORIES_MAX_PAGES} pages "
+            f"({LIST_ADVISORIES_MAX_PAGES * PAGE_SIZE} advisories) for after={after}.",
+            assistance="This is unexpected for a normal poll window. Report this to Rapid7 support.",
+        )
 
     def get_advisory_document(self, rhsa_id: str) -> dict:
         """Return the full CSAF 2.0 document for the given advisory ID."""

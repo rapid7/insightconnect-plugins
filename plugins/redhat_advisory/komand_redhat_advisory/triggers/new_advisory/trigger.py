@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import clean
 from .schema import Component, Input, NewAdvisoryInput, NewAdvisoryOutput, Output
 
@@ -61,8 +61,7 @@ class NewAdvisory(insightconnect_plugin_runtime.Trigger):
             }
 
             for raw_advisory in advisories:
-                rhsa = raw_advisory.get("RHSA")
-                if not rhsa:
+                if not (rhsa := raw_advisory.get("RHSA")):
                     self.logger.warning(f"Advisory without RHSA ID; skipping: {raw_advisory}")
                     continue
                 if rhsa in seen:
@@ -96,8 +95,6 @@ class NewAdvisory(insightconnect_plugin_runtime.Trigger):
     def _persist_state(self, seen: set, cursor_day: str) -> None:
         self.state[STATE_SEEN_RHSA] = sorted(seen)
         self.state[STATE_CURSOR_DAY] = cursor_day
-        if not self.state_file:
-            return
         try:
             self._save_state()
         except PluginException as error:
@@ -123,14 +120,14 @@ class NewAdvisory(insightconnect_plugin_runtime.Trigger):
             self.logger.error(f"Failed to fetch advisory document for {advisory[Output.RHSA]}: {error}")
             return advisory
 
-        document = source.get("document", {}) if isinstance(source, dict) else {}
+        document = source.get("document", {})
         if document:
-            advisory[Output.TITLE] = document.get("title")
-            advisory[Output.TYPE] = CSAF_CATEGORY_TO_TYPE.get(document.get("category"), CSAF_CATEGORY_DEFAULT_TYPE)
+            advisory[Output.TITLE] = document.get("title", "")
+            advisory[Output.TYPE] = CSAF_CATEGORY_TO_TYPE.get(document.get("category", ""), CSAF_CATEGORY_DEFAULT_TYPE)
 
             notes = [
                 note.get("text", "")
-                for note in document.get("notes") or []
+                for note in document.get("notes", [])
                 if note.get("category") in NOTE_CATEGORIES_ALLOWED and note.get("text")
             ]
             if notes:
@@ -141,7 +138,7 @@ class NewAdvisory(insightconnect_plugin_runtime.Trigger):
                 advisory[Output.REFERENCES] = [self._render_reference(ref) for ref in references]
                 advisory[Output.URL] = self._pick_advisory_url(references)
 
-            publisher = document.get("publisher") or {}
+            publisher = document.get("publisher", {})
             if publisher:
                 advisory[Output.PUBLISHER] = {
                     "issuing_authority": publisher.get("issuing_authority"),
@@ -155,14 +152,12 @@ class NewAdvisory(insightconnect_plugin_runtime.Trigger):
     @staticmethod
     def _render_reference(ref: dict) -> dict:
         url = ref.get("url")
-        summary = ref.get("summary")
+        description = ref.get("summary")
         category = ref.get("category")
         # Red Hat frequently sets `summary` to the URL itself or a bare Bugzilla ID —
         # substitute a category-based label so `description` carries real information.
-        if not summary or summary == url:
+        if not description or description == url:
             description = REFERENCE_DESCRIPTION_BY_CATEGORY.get(category, "Reference")
-        else:
-            description = summary
         return {"description": description, "url": url, "type": category}
 
     @staticmethod
@@ -174,14 +169,3 @@ class NewAdvisory(insightconnect_plugin_runtime.Trigger):
     @staticmethod
     def _utc_today() -> str:
         return datetime.now(timezone.utc).strftime("%Y-%m-%d")
-
-    def test(self) -> dict:
-        try:
-            self.connection.client.test_connection()
-            return {"success": True}
-        except PluginException as error:
-            raise ConnectionTestException(
-                cause=error.cause,
-                assistance=error.assistance,
-                data=error.data,
-            )
