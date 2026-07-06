@@ -31,6 +31,8 @@ sdk:
   type: slim
   version: 6.6.0
   user: nobody
+  custom_cmd:
+    - RUN mkdir -p /workspace/cache && chown -R nobody /workspace/cache
 key_features:
 - Trigger a workflow when Red Hat publishes a new security advisory
 troubleshooting: |

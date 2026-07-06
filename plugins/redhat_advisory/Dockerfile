@@ -21,6 +21,8 @@ WORKDIR /workspace
 COPY --from=builder /workspace /workspace
 COPY --from=builder /plugin.spec.yaml /plugin.spec.yaml
 
+RUN mkdir -p /workspace/cache && chown -R nobody /workspace/cache
+
 
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
