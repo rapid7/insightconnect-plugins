@@ -1,20 +1,39 @@
-FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:5.6.1
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.6.0 AS builder
+
+WORKDIR /workspace
+
+ADD ./plugin.spec.yaml /plugin.spec.yaml
+ADD ./requirements.txt /workspace/requirements.txt
+ADD . /workspace
+
+
+
+RUN pip install .
+RUN pip uninstall -y setuptools
+
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.6.0
 
 LABEL organization=trendmicro
 LABEL sdk=python
 
-WORKDIR /python/src
+WORKDIR /workspace
 
-ADD ./plugin.spec.yaml /plugin.spec.yaml
-ADD ./requirements.txt /python/src/requirements.txt
+COPY --from=builder /workspace /workspace
+COPY --from=builder /plugin.spec.yaml /plugin.spec.yaml
 
-RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-ADD . /python/src
+RUN if [ -f requirements.txt ]; then pip install -r requirements.txt --ignore-installed; fi
 
-RUN python setup.py build && python setup.py install
+# Force requests to a specific version with security fixes, overriding pytmv1's pin (requests~=2.32.3)
+RUN pip install requests==2.34.2
+
+ENV PYTHONPATH="/workspace:${PYTHONPATH}"
+
+RUN rm -rf /root/.cache;
+RUN mkdir -p /workspace/cache && chown -R nobody /workspace/cache
+RUN mkdir -p /workspace/tmp && chown -R nobody /workspace/tmp
 
 # User to run plugin code. The two supported users are: root, nobody
 USER nobody
 
-ENTRYPOINT ["/usr/local/bin/icon_trendmicro_visionone"]
+ENTRYPOINT ["python", "/workspace/bin/icon_trendmicro_visionone"]
