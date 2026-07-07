@@ -93,7 +93,7 @@ Example input:
 
 
 #### Add Alert Note
-  
+
 This action is used to attaches a note to a workbench alert
 
 **API key role permissions required:**
@@ -354,9 +354,9 @@ Example output:
 ```
 
 #### Collect File
-  
-This action is used to collects a file from one or more endpoints and then sends the files to Trend Micro Vision One in 
-a password-protected archive Note- You can specify either the computer name- endpointName or the GUID of the installed 
+
+This action is used to collects a file from one or more endpoints and then sends the files to Trend Vision One in a 
+password-protected archive Note- You can specify either the computer name- endpointName or the GUID of the installed 
 agent program- agentGuid
 
 **API key role permissions required:**
@@ -407,7 +407,7 @@ Example output:
 ```
 
 #### Create API Keys
-  
+
 This action is used to generates API keys that allow third-party applications to access the Trend Vision One APIs
 
 **API key role permissions required:**
@@ -461,7 +461,7 @@ Example output:
 ```
 
 #### Delete API Keys
-  
+
 This action is used to deletes the specified API keys
 
 **API key role permissions required:**
@@ -503,7 +503,7 @@ Example output:
 ```
 
 #### Delete Custom Script
-  
+
 This action is used to deletes custom script
 
 **API key role permissions required:**
@@ -543,7 +543,7 @@ Example output:
 ```
 
 #### Delete Email Message
-  
+
 This action is used to deletes a message from a mailbox
 
 **API key role permissions required:**
@@ -643,7 +643,7 @@ Example output:
 ```
 
 #### Download Custom Script
-  
+
 This action is used to downloads custom script
 
 **API key role permissions required:**
@@ -733,7 +733,7 @@ Example output:
 ```
 
 #### Download Sandbox Investigation Package
-  
+
 This action is used to downloads the investigation package based on submission ID
 
 **API key role permissions required:**
@@ -779,7 +779,7 @@ Example output:
 ```
 
 #### Edit Alert Status
-  
+
 This action is used to updates the status of a workbench alert
 
 **API key role permissions required:**
@@ -957,7 +957,7 @@ Example output:
 ```
 
 #### Get API Key
-  
+
 This action is used to displays information of the specified API key
 
 **API key role permissions required:**
@@ -1061,7 +1061,7 @@ Example output:
 ```
 
 #### Get Email Activity Data
-  
+
 This action is used to displays search results from the Email Activity Data source in a paginated list
 
 **API key role permissions required:**
@@ -1142,7 +1142,7 @@ Example output:
 ```
 
 #### Get Email Activity Data Count
-  
+
 This action is used to displays count of search results from the Email Activity Data source in a paginated list
 
 **API key role permissions required:**
@@ -1195,7 +1195,7 @@ Example output:
 ```
 
 #### Get Endpoint Activity Data
-  
+
 This action is used to displays results from the Endpoint Activity Data source in a paginated list
 
 **API key role permissions required:**
@@ -1306,7 +1306,7 @@ Example output:
 ```
 
 #### Get Endpoint Activity Data Count
-  
+
 This action is used to displays count of search results from the Endpoint Activity Data source in a paginated list
 
 **API key role permissions required:**
@@ -1359,7 +1359,7 @@ Example output:
 ```
 
 #### Get Endpoint Data
-  
+
 This action is used to retrieves information about a specific endpoint
 
 **API key role permissions required:**
@@ -1587,7 +1587,7 @@ Example output:
 ```
 
 #### Get Sandbox Submission Status
-  
+
 This action is used to retrieves the status of a sandbox analysis submission
 
 **API key role permissions required:**
@@ -1706,9 +1706,9 @@ Example output:
 ```
 
 #### Get Suspicious List
-  
-This action is used to retrieves information about domains, file SHA-1, file SHA-256, IP addresses, email addresses, or 
-URLs in the Suspicious Object List and displays the information in a paginated list
+
+This action is used to retrieves information about domains, file SHA-1, file SHA-256, IP addresses, email addresses, or
+ URLs in the Suspicious Object List and displays the information in a paginated list
 
 **API key role permissions required:**
 
@@ -1746,7 +1746,7 @@ Example output:
 ```
 
 #### Get Task Result
-  
+
 This action is used to retrieves an object containing the results of a response task in JSON format
 
 **API key role permissions required:**
@@ -1843,9 +1843,9 @@ Example output:
 ```
 
 #### Isolate Endpoint
-  
-This action is used to disconnects an endpoint from the network (but allows communication with the managing Trend Micro 
-product)
+
+This action is used to disconnects an endpoint from the network (but allows communication with the managing Trend Micro
+ product)
 
 **API key role permissions required:**
 
@@ -1894,7 +1894,7 @@ Example output:
 ```
 
 #### List API Keys
-  
+
 This action is used to displays a list of all your API keys in a list
 
 **API key role permissions required:**
@@ -1950,7 +1950,7 @@ Example output:
 ```
 
 #### Quarantine Email Message
-  
+
 This action is used to moves a message from a mailbox to the quarantine folder
 
 **API key role permissions required:**
@@ -2060,7 +2060,7 @@ Example output:
 ```
 
 #### Remove from Exception List
-  
+
 This action is used to removes domains, file SHA-1 values, IP addresses, or URLs from the Exception List
 
 **API key role permissions required:**
@@ -2109,7 +2109,7 @@ Example output:
 ```
 
 #### Remove from Suspicious List
-  
+
 This action is used to removes domains, file SHA-1 values, IP addresses, or URLs from the Suspicious Object List
 
 **API key role permissions required:**
@@ -2158,9 +2158,9 @@ Example output:
 ```
 
 #### Reset Password Account
-  
-This action is used to signs the user out of all active application and browser sessions, and forces the user to create 
-a new password during the next sign-in attempt. Supported IAM systems - Azure AD and Active Directory (on-premises)
+
+This action is used to signs the user out of all active application and browser sessions, and forces the user to create
+ a new password during the next sign-in attempt. Supported IAM systems - Azure AD and Active Directory (on-premises)
 
 **API key role permissions required:**
 
@@ -2208,7 +2208,7 @@ Example output:
 ```
 
 #### Restore Email Message
-  
+
 This action is used to restores a quarantined email message
 
 **API key role permissions required:**
@@ -2258,7 +2258,7 @@ Example output:
 ```
 
 #### Restore Endpoint
-  
+
 This action is used to restores network connectivity to an endpoint that applied the isolate endpoint action
 
 **API key role permissions required:**
@@ -2308,7 +2308,7 @@ Example output:
 ```
 
 #### Run Custom Script
-  
+
 This action is used to run custom script
 
 **API key role permissions required:**
@@ -2361,9 +2361,9 @@ Example output:
 ```
 
 #### Sign out Account
-  
-This action is used to signs the user out of all active application and browser sessions. Supported IAM systems - Azure 
-AD
+
+This action is used to signs the user out of all active application and browser sessions. Supported IAM systems - Azure
+ AD
 
 **API key role permissions required:**
 
@@ -2411,7 +2411,7 @@ Example output:
 ```
 
 #### Submit File to Sandbox
-  
+
 This action is used to submits a file to the sandbox for analysis (Note. For more information about the supported file 
 types, see the Trend Micro Vision One Online Help. Submissions require credits. Does not require credits in regions 
 where Sandbox Analysis has not been officially released.)
@@ -2469,7 +2469,7 @@ Example output:
 ```
 
 #### Submit URLs to Sandbox
-  
+
 This action is used to submits URLs to the sandbox for analysis. You can submit a maximum of 10 URLs per request
 
 **API key role permissions required:**
@@ -2523,7 +2523,7 @@ Example output:
 ```
 
 #### Terminate Process
-  
+
 This action is used to terminates a process that is running on an endpoint
 
 **API key role permissions required:**
@@ -2573,7 +2573,7 @@ Example output:
 ```
 
 #### Update API Key
-  
+
 This action is used to updates the specified API key
 
 **API key role permissions required:**
@@ -2674,7 +2674,7 @@ Example output:
 
 
 #### Poll Alert List
-  
+
 This trigger is used to polls information about workbench alerts that match the specified criteria in a paginated list
 
 **API key role permissions required:**
@@ -3110,10 +3110,11 @@ Example output:
 
 ## Troubleshooting
 
-For additional info about actions see https://automation.trendmicro.com/xdr/api-v3#
+* For additional info about actions see https://automation.trendmicro.com/xdr/api-v3#
 
 # Version History
 
+* 5.0.1 - Updated dependencies | Updated SDK to the latest version (6.6.0)
 * 5.0.0 - Removed app name from connection
 * 4.1.0 - Added OAT list action and trigger, limit query size
 * 4.0.0 - Added API Keys related actions
