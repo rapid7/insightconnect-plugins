@@ -4,13 +4,13 @@ products: [insightconnect]
 name: trendmicro_visionone
 title: Trend Vision One
 description: Trend Vision One is an enhanced threat defense platform, surpassing standard XDR solutions. It offers comprehensive detection and response across various security layers and automates data correlation for rapid response, effectively preventing most attacks
-version: 5.0.0
+version: 5.0.1
 connection_version: 5
 supported_versions: [Trend Vision One API v3]
 vendor: trendmicro
 sdk:
   type: slim
-  version: 5.6.1
+  version: 6.6.0
   user: nobody
 support: community
 troubleshooting: For additional info about actions see https://automation.trendmicro.com/xdr/api-v3#
@@ -47,6 +47,7 @@ key_features:
 - Get Endpoint Activity Data Count
 - Get Endpoint Data
 - Get Exception List
+- Get OAT List
 - Get Sandbox Analysis Result
 - Get Sandbox Submission Status
 - Get Sandbox Suspicious List
@@ -55,6 +56,7 @@ key_features:
 - Isolate Endpoint
 - List API Keys
 - Poll Alert List
+- Poll OAT List
 - Poll Sandbox Suspicious List
 - Quarantine Email Message
 - Remove from Block List
@@ -73,11 +75,14 @@ key_features:
 requirements:
 - Requires a Trend Vision One API Key
 - API must be enabled on the Settings page in the product's user interface
+troubleshooting:
+- "For additional info about actions see https://automation.trendmicro.com/xdr/api-v3#"
 links:
 - '[TrendMicro](https://www.trendmicro.com/en_us/business.html)'
 references:
 - '[Trend Vision One](https://docs.trendmicro.com/en-us/enterprise/trend-micro-xdr-help/home)'
 version_history:
+- 5.0.1 - Updated dependencies | Updated SDK to the latest version (6.6.0)
 - 5.0.0 - Removed app name from connection
 - 4.1.0 - Added OAT list action and trigger, limit query size
 - 4.0.0 - Added API Keys related actions
