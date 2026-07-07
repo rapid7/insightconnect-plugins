@@ -1,0 +1,20 @@
+[
+  {
+    "RHSA": "RHSA-2026:30858",
+    "severity": "important",
+    "released_on": "2026-06-30T02:38:12Z",
+    "CVEs": ["CVE-2026-48962"],
+    "bugzillas": ["2481767"],
+    "released_packages": ["perl-IO-Compress-0:2.081-2.el8_10"],
+    "resource_url": "https://access.redhat.com/hydra/rest/securitydata/csaf/RHSA-2026:30858.json"
+  },
+  {
+    "RHSA": "RHSA-2026:30859",
+    "severity": "moderate",
+    "released_on": "2026-06-30T05:12:00Z",
+    "CVEs": ["CVE-2026-49001"],
+    "bugzillas": ["2481800"],
+    "released_packages": ["kernel-0:4.18.0-100.el8.x86_64"],
+    "resource_url": "https://access.redhat.com/hydra/rest/securitydata/csaf/RHSA-2026:30859.json"
+  }
+]
