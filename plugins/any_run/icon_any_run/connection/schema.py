@@ -5,6 +5,7 @@ import json
 
 class Input:
     SANDBOX_API_KEY = "sandbox_api_key"
+    TI_FEEDS_API_KEY = "ti_feeds_api_key"
     TI_LOOKUP_API_KEY = "ti_lookup_api_key"
 
 
@@ -19,6 +20,12 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "title": "API Key",
       "description": "API key for ANY.RUN Sandbox",
       "order": 1
+    },
+    "ti_feeds_api_key": {
+      "$ref": "#/definitions/credential_secret_key",
+      "title": "API Key",
+      "description": "API key for ANY.RUN TI Feeds",
+      "order": 3
     },
     "ti_lookup_api_key": {
       "$ref": "#/definitions/credential_secret_key",

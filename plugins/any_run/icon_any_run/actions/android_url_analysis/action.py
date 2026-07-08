@@ -29,7 +29,6 @@ class AndroidUrlAnalysis(insightconnect_plugin_runtime.Action):
         payload = {
             "obj_url": params.pop(Input.OBJ_URL, ""),
             "env_locale": params.get(Input.ENV_LOCALE, ""),
-            "obj_ext_extension": params.get(Input.OBJ_EXT_EXTENSION, ""),
             "opt_auto_delete_after": params.get(Input.OPT_AUTO_DELETE_AFTER, ""),
             "opt_network_connect": params.get(Input.OPT_NETWORK_CONNECT, ""),
             "opt_network_fakenet": params.get(Input.OPT_NETWORK_FAKENET, ""),

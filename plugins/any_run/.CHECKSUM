@@ -1,7 +1,7 @@
 {
-	"spec": "3d021134ff5657d6b144db6c1475b760",
-	"manifest": "e6a2fc190fba39a758cdd28c503dcd25",
-	"setup": "96343040f8d6b7e42b1403159c102f67",
+	"spec": "14fa5b41d8777337bfdb17e24300e792",
+	"manifest": "227f926f1e8fc22d9cb6db478fb00733",
+	"setup": "2fb3063e67dc5c135cd5ec213afff5b0",
 	"schemas": [
 		{
 			"identifier": "android_file_analysis/schema.py",
@@ -9,7 +9,7 @@
 		},
 		{
 			"identifier": "android_url_analysis/schema.py",
-			"hash": "0f30077b51a5f07a69397c5a85f9da83"
+			"hash": "4f23202d8e6a5ed869c454110afccca9"
 		},
 		{
 			"identifier": "download_pcap/schema.py",
@@ -57,7 +57,11 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "aa5a09d24e5ed5bca12ed392cd9a6fb1"
+			"hash": "305cc77d9be52abbcf4607d409c997bc"
+		},
+		{
+			"identifier": "get_ti_feeds/schema.py",
+			"hash": "cf2e217a68e3c002f1e9ef8303d1da9c"
 		}
 	]
 }

@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "ANY.RUN"
 Vendor = "rapid7"
-Version = "3.0.0"
+Version = "4.0.0"
 Description = "ANY.RUN Sandbox is an online interactive sandbox for malware analysis, a tool for detection, monitoring, and research of cyber threats in real time"
 
 
@@ -34,6 +34,8 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
+            self.add_trigger(triggers.GetTiFeeds())
+        
             self.add_action(actions.GetAnalysisHistory())
         
             self.add_action(actions.GetAnalysisReport())
