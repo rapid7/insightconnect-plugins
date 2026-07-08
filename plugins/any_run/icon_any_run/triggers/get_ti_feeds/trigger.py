@@ -1,6 +1,6 @@
 import insightconnect_plugin_runtime
 import time
-from .schema import AnyrunTiFeedsEnrichmentInput, AnyrunTiFeedsEnrichmentOutput, Input, Output, Component
+from .schema import GetTiFeedsInput, GetTiFeedsOutput, Input, Output, Component
 
 # Custom imports below
 from anyrun.connectors import FeedsConnector
@@ -27,10 +27,10 @@ class GetTiFeeds(insightconnect_plugin_runtime.Trigger):
         # END INPUT BINDING - DO NOT REMOVE
 
         while True:
-            self.logger.info(f"[ANY.RUN] Initialized TI Feeds enrichment.")
+            self.logger.info("[ANY.RUN] Initialized TI Feeds enrichment.")
             try:
                 with FeedsConnector(self.connection.feeds_api_key, integration=Config.VERSION) as connector:
-                    self.logger.info(f"[ANY.RUN] Authentication is passed.")
+                    self.logger.info("[ANY.RUN] Authentication is passed.")
 
                     domains = get_indicators(connector, "domain", feed_fetch_depth)
                     ips = get_indicators(connector, "ip", feed_fetch_depth)
