@@ -7,12 +7,12 @@ vendor: rapid7
 support: community
 status: []
 description: "[Cisco Firepower Management Center](https://www.cisco.com/c/en/us/products/security/firepower-management-center/index.html) centralizes management of Cisco security solutions. The InsightConnect plugin can block URLs/hosts by adding address objects to a group tied to an existing deny-all rule; removing the object from that group unblocks. This plugin automates blocking via address object management actions"
-version: 2.1.5
+version: 2.1.6
 connection_version: 2
 supported_versions: ["6.6.0"]
 sdk:
   type: slim
-  version: 6.4.3
+  version: 6.6.0
   user: root
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/cisco_firepower_management_center
@@ -36,6 +36,7 @@ links:
 references:
 - "[Cisco Firepower Management Center](https://www.cisco.com/c/en/us/products/security/firepower-management-center/index.html)"
 version_history:
+- "2.1.6 - Bumped `cryptography` to the latest version | Updated SDK to the latest version (6.6.0)"
 - "2.1.5 - SDK Bump to 6.4.3 | Bumped 'cryptography' package to latest version"
 - "2.1.4 - Bumped 'cryptography' package to latest version | SDK Bump to 6.2.4"
 - "2.1.3 - Bumped 'cryptography' | SDK Bump to 6.1.2"
