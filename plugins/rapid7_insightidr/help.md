@@ -3428,6 +3428,7 @@ Example output:
 
 # Version History
 
+* 12.0.8 - Enabled cache to configure the appropriate permissions in the Dockerfile
 * 12.0.7 - Updated dependencies | SDK bump to 6.6.0
 * 12.0.6 - Updated dependencies | SDK bump to 6.4.3
 * 12.0.5 - Removed default region in connection | Actions: `Advanced Query on Log Set` - Fixed issue with fetching logs with statistical queries | Updated SDK to latest version (6.4.2)
