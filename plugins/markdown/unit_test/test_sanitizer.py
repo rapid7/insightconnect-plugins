@@ -42,10 +42,10 @@ class TestSanitizer(TestCase):
                 '<style>body{background:url("javascript:alert(1)")}</style><p>Text</p>',
                 '&lt;style&gt;body{background:url("javascript:alert(1)")}&lt;/style&gt;<p>Text</p>',
             ),
-            # Test event handler encoding - onclick (not in deny list, so preserved)
+            # Test event handler encoding - onclick (now in deny list)
             (
                 "<p onclick=\"alert('xss')\">Click me</p>",
-                "<p onclick=\"alert('xss')\">Click me</p>",
+                "&lt;p onclick=\"alert('xss')\"&gt;Click me&lt;/p&gt;",
             ),
             # Test event handler encoding - onerror
             (
@@ -67,10 +67,55 @@ class TestSanitizer(TestCase):
                 '<a href="https://example.com" title="Example">Link</a>',
                 '<a href="https://example.com" title="Example">Link</a>',
             ),
-            # Test that images are preserved with safe attributes
+            # Test that images with relative URLs are preserved
             (
                 '<img src="image.png" alt="Description">',
                 '<img alt="Description" src="image.png"/>',
+            ),
+            # Test that images with data: URI are preserved (inline base64)
+            (
+                '<img src="data:image/png;base64,iVBOR"/>',
+                '<img src="data:image/png;base64,iVBOR"/>',
+            ),
+            # SSRF regression: img with external http URL is encoded
+            (
+                '<p><img src="http://attacker.com/beacon.png"/></p>',
+                '<p>&lt;img src="http://attacker.com/beacon.png"/&gt;</p>',
+            ),
+            # SSRF regression: img targeting cloud metadata endpoint is encoded
+            (
+                '<img src="http://169.254.169.254/latest/meta-data/">',
+                '&lt;img src="http://169.254.169.254/latest/meta-data/"/&gt;',
+            ),
+            # LFI regression: file:// scheme is encoded
+            (
+                '<img src="file:///etc/passwd"/>',
+                '&lt;img src="file:///etc/passwd"/&gt;',
+            ),
+            # XSS regression: javascript: scheme is encoded
+            (
+                '<img src="javascript:alert(1)"/>',
+                '&lt;img src="javascript:alert(1)"/&gt;',
+            ),
+            # mailto: link is preserved
+            (
+                '<a href="mailto:user@example.com">contact</a>',
+                '<a href="mailto:user@example.com">contact</a>',
+            ),
+            # SSRF regression: inline style with url() is encoded (style is in DENIED_ATTRIBUTES)
+            (
+                '<div style="background:url(http://attacker/)">x</div>',
+                '&lt;div style="background:url(http://attacker/)"&gt;x&lt;/div&gt;',
+            ),
+            # SSRF regression: video with external src is encoded
+            (
+                '<video src="http://internal/"></video>',
+                '&lt;video src="http://internal/"&gt;&lt;/video&gt;',
+            ),
+            # SSRF regression: meta refresh redirect is encoded
+            (
+                '<meta http-equiv="refresh" content="0;url=http://internal/">',
+                '&lt;meta content="0;url=http://internal/" http-equiv="refresh"/&gt;',
             ),
             # Test table tags are preserved
             (
@@ -147,10 +192,32 @@ class TestSanitizer(TestCase):
         self.assertIn("onload", result)
         self.assertIn("Content", result)
 
-    def test_form_elements_preserved(self):
-        """Test that form elements are preserved (not in denylist)."""
-        html = '<form action="/submit"><input type="text" name="field"><button>Submit</button></form>'
+    def test_form_elements_denied(self):
+        """Test that form elements are encoded (SSRF vector via action=)."""
+        html = '<form action="http://attacker/steal"><button>Submit</button></form>'
         result = sanitize_html(html)
-        self.assertIn("<form", result)
-        self.assertIn("<input", result)
-        self.assertIn("<button>", result)
+        self.assertNotIn("<form", result)
+        self.assertIn("&lt;form", result)
+        self.assertIn("&lt;/form&gt;", result)
+
+    def test_image_with_disallowed_scheme_is_encoded(self):
+        """Regression test for SSRF via img src with attacker-controlled URL."""
+        html = '<p>Report</p><img src="http://169.254.169.254/latest/meta-data/">'
+        result = sanitize_html(html)
+        self.assertNotIn('<img src="http://169.254', result)
+        self.assertIn("&lt;img", result)
+        self.assertIn("<p>Report</p>", result)
+
+    def test_image_with_data_uri_is_preserved(self):
+        """Inline base64 images (data: URI) remain functional after the SSRF fix."""
+        html = '<img src="data:image/png;base64,iVBORw0KGgoAAAA" alt="inline">'
+        result = sanitize_html(html)
+        self.assertIn("data:image/png;base64", result)
+        self.assertNotIn("&lt;img", result)
+
+    def test_style_attribute_is_encoded(self):
+        """Inline style attribute is encoded to prevent CSS-based SSRF via url()."""
+        html = '<div style="background:url(http://attacker/beacon)">x</div>'
+        result = sanitize_html(html)
+        self.assertIn("&lt;div", result)
+        self.assertIn("style", result)
