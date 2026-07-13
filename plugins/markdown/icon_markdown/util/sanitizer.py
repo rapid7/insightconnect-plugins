@@ -134,16 +134,16 @@ def sanitize_html(html_content: str) -> str:
 
     for tag in reversed(soup.find_all(True)):
         if tag.name in DENIED_TAGS:
-            logger.warning(f"Sanitizing HTML: encoded <{tag.name}> tag")
+            logger.warning("Sanitizing HTML: encoded <%s> tag", tag.name)
             tag.replace_with(_encode_tag(tag))
             continue
         denied_attrs = [attr for attr in tag.attrs if attr.lower() in DENIED_ATTRIBUTES]
         if denied_attrs:
-            logger.warning(f"Sanitizing HTML: encoded <{tag.name}> tag with attributes {denied_attrs}")
+            logger.warning("Sanitizing HTML: encoded <%s> tag with attributes %s", tag.name, denied_attrs)
             tag.replace_with(_encode_tag(tag))
             continue
         if _has_unsafe_url_attribute(tag):
-            logger.warning(f"Sanitizing HTML: encoded <{tag.name}> tag with disallowed URL scheme")
+            logger.warning("Sanitizing HTML: encoded <%s> tag with disallowed URL scheme", tag.name)
             tag.replace_with(_encode_tag(tag))
 
     return soup.decode(formatter=None)
