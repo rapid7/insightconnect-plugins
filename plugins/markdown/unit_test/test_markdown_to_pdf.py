@@ -5,6 +5,7 @@ sys.path.append(os.path.abspath("../"))
 from parameterized import parameterized
 from unittest import TestCase
 from icon_markdown.actions.markdown_to_pdf import MarkdownToPdf
+from icon_markdown.actions.markdown_to_pdf.action import PDF_OPTIONS
 from icon_markdown.actions.markdown_to_pdf.schema import Input, Output
 from insightconnect_plugin_runtime.exceptions import PluginException
 from unittest import mock
@@ -57,3 +58,10 @@ class TestMarkdownToPdf(TestCase):
         with self.assertRaises(PluginException) as context:
             self.action.run(input_params)
         self.assertEqual(context.exception.cause, exception)
+
+    def test_pdf_options_contain_ssrf_mitigations(self):
+        """Ensure defense-in-depth wkhtmltopdf flags are set on every render."""
+        self.assertIn("disable-javascript", PDF_OPTIONS)
+        self.assertIn("disable-local-file-access", PDF_OPTIONS)
+        self.assertEqual(PDF_OPTIONS.get("load-error-handling"), "ignore")
+        self.assertEqual(PDF_OPTIONS.get("load-media-error-handling"), "ignore")

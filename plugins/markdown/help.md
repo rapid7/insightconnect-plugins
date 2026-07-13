@@ -186,6 +186,7 @@ Example output:
 
 # Version History
 
+* 4.0.2 - Resolved a server-side request forgery issue in the markdown_to_pdf action that could allow SSRF via crafted Markdown input (CVE-2026-8661)
 * 4.0.1 - Update SDK to version 6.6.0
 * 4.0.0 - Resolved an issue in the markdown_to_pdf action where the PDF rendering engine did not restrict script execution, which could allow server-side request forgery via crafted Markdown input (CVE-2026-8661) | Update SDK to version 6.4.3
 * 3.1.4 - `Markdown to PDF` - Fix issue which produced blank PDF files
