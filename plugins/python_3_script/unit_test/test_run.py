@@ -77,3 +77,29 @@ class TestRun(TestCase):
         action = Util.default_connector(Run())
         response = action._check_indentation_character(function_)
         self.assertEqual(response, expected)
+
+    @patch.object(Run, "_execute_function_as_process")
+    def test_ensure_dependencies_called_with_dependencies(
+        self, mock_exec_python_function: MagicMock, mock_execute_function: MagicMock
+    ) -> None:
+        mock_execute_function.return_value = {"result": "success"}
+        connection_params = {"modules": ["requests"], "timeout": 60}
+        action_params = Util.read_file_to_dict(f"inputs/run_no_credentials.json.inp")
+
+        action = Util.default_connector(Run(), connection_params)
+        with patch.object(action.connection, "ensure_dependencies") as mock_ensure_deps:
+            action.run(params=action_params)
+            mock_ensure_deps.assert_called_once()
+
+    @patch.object(Run, "_execute_function_as_process")
+    def test_ensure_dependencies_not_called_without_dependencies(
+        self, mock_exec_python_function: MagicMock, mock_execute_function: MagicMock
+    ) -> None:
+        mock_execute_function.return_value = {"result": "success"}
+        connection_params = {"modules": [], "timeout": 60}
+        action_params = Util.read_file_to_dict(f"inputs/run_no_credentials.json.inp")
+
+        action = Util.default_connector(Run(), connection_params)
+        with patch.object(action.connection, "ensure_dependencies") as mock_ensure_deps:
+            action.run(params=action_params)
+            mock_ensure_deps.assert_not_called()

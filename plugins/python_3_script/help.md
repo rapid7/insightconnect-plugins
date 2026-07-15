@@ -18,7 +18,7 @@ It supports loading custom modules and passing credentials (`username`, `passwor
 
 # Supported Product Versions
 
-* Python 3.12.8
+* Python 3.13.13
 
 # Documentation
 
@@ -77,7 +77,11 @@ This action is used to run a Python 3 function
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|function|python|def run(params={}):\n    return {}|True|Function definition. Must be named `run`. Accepts the `input` object as params. Returns the dict as output. In this action you can use `username`, `password`, `secret_key` variables if defined in connection|None|def run(params={}):\n    print(params.get('some_input'))\n    print(username, password)\n    return {}|None|None|
+|function|python|def run(params={}):
+    return {}|True|Function definition. Must be named `run`. Accepts the `input` object as params. Returns the dict as output. In this action you can use `username`, `password`, `secret_key` variables if defined in connection|None|def run(params={}):
+    print(params.get('some_input'))
+    print(username, password)
+    return {}|None|None|
 |input|object|None|False|Input object to be passed as `params={}` to the `run` function|None|{"some_input": "example input"}|None|None|
 |timeout|integer|30|False|Timeout (in minutes) for function execution. If this value is null it will default to 30 minutes|None|30|None|None|
   

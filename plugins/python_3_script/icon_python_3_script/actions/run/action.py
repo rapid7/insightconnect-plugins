@@ -18,7 +18,7 @@ from icon_python_3_script.util.util import extract_output_from_stdout
 
 from .schema import Component, Input, RunInput, RunOutput
 
-sys.path.append("/var/cache/python_dependencies/lib/python3.9/site-packages")
+sys.path.append("/var/cache/python_dependencies/lib/python3.13/site-packages")
 
 
 class Run(insightconnect_plugin_runtime.Action):
@@ -39,6 +39,10 @@ class Run(insightconnect_plugin_runtime.Action):
                 cause="Invalid timeout value specified.",
                 assistance="Please make sure the timeout value is greater than 0 and try again.",
             )
+
+        # Check if dependencies need to be installed
+        if self.connection.dependencies:
+            self.connection.ensure_dependencies()
 
         self.logger.info(f"Input: (below)\n\n{input_parameters}\n")
         self.logger.info(f"Function: (below)\n\n{function_}\n")

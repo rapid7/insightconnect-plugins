@@ -1,9 +1,10 @@
 import sys
 import os
+import importlib.util
 from subprocess import CalledProcessError, TimeoutExpired, check_output, run  # noqa: B404
 
 import insightconnect_plugin_runtime
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 
 from .schema import ConnectionSchema, Input
 from typing import Dict, Any
@@ -45,8 +46,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def _set_python_userbase() -> None:
         os.environ.update({"PYTHONUSERBASE": "/var/cache/python_dependencies"})
 
-    def install_dependencies(self) -> None:
-        self._set_python_userbase()
+    def _run_pip_install(self) -> None:
         try:
             run(  # noqa: B603
                 args=[sys.executable, "-m", "pip", "install"] + self.dependencies,
@@ -55,10 +55,45 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 check=True,
             )
         except TimeoutExpired:
-            raise ConnectionTestException(
-                cause="Error: Installing Python dependencies exceeded timeout", assistance="Consider increasing timeout"
-            )
+            raise RuntimeError("Installing Python dependencies exceeded timeout. Consider increasing timeout.")
         except CalledProcessError as error:
-            raise ConnectionTestException(
-                cause=f"Error: Non-zero exit code returned. Message: {error.output.decode('utf-8')}"
+            stderr_output = error.stderr.decode("utf-8") if error.stderr else ""
+            raise RuntimeError(f"Non-zero exit code returned. Message: {stderr_output}")
+
+    def install_dependencies(self) -> None:
+        self._set_python_userbase()
+        try:
+            self._run_pip_install()
+        except RuntimeError as error:
+            raise ConnectionTestException(cause=f"Error: {str(error)}")
+
+    def ensure_dependencies(self) -> None:
+        # Ensure dependencies are installed before running any action
+        if not self.dependencies:
+            return
+
+        # Ensure PYTHONUSERBASE is set
+        self._set_python_userbase()
+
+        # Check if all dependencies are already importable
+        missing_packages = []
+        for package in self.dependencies:
+            if importlib.util.find_spec(package) is None:
+                missing_packages.append(package)
+
+        # If all packages are present, no need to install
+        if not missing_packages:
+            return
+
+        # Install missing packages
+        self.logger.info("[*] Missing dependencies detected. Installing...")
+        self.logger.info(f"[*] Installing missing dependencies: {missing_packages}...")
+        try:
+            self._run_pip_install()
+            self.logger.info("[*] Dependencies installed successfully!")
+        except RuntimeError as error:
+            raise PluginException(
+                cause="Error: Failed to install Python dependencies",
+                assistance="Check the error details and ensure all package names are correct.",
+                data=str(error),
             )
