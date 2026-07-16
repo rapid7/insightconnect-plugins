@@ -1,11 +1,13 @@
 from .shared_resources import RequestParams
 from .shared_resources import resource_request_status_code_check
 import json
+import time
 import requests
 import urllib3
 from insightconnect_plugin_runtime.exceptions import PluginException
 from typing import NamedTuple, Collection
 from requests import Session
+from requests.auth import HTTPBasicAuth
 from logging import Logger
 
 # Suppress insecure request messages
@@ -61,6 +63,12 @@ class ResourceRequests(object):
     # For request exceptions not in REQUEST_EXCEPTIONS
     _UNHANDLED_EXCEPTION = "Contact support for assistance"
 
+    # Long-running report polling holds a connection open for many minutes; intermediaries
+    # (HAProxy/IVM) sometimes drop idle TCP and we get RemoteDisconnected on the next poll.
+    # Retry only the transient transport errors — never HTTPError, which is a real API response.
+    _TRANSIENT_EXCEPTIONS = (requests.ConnectionError, requests.Timeout)
+    _RETRY_BACKOFF_SECONDS = (5, 15, 30)
+
     def __init__(self, session: Session, logger: Logger, ssl_verify: bool) -> None:
         """
         Creates a new instance of ResourceHelper
@@ -72,6 +80,55 @@ class ResourceRequests(object):
         self.session = session
         self.session.headers.update(self._HEADERS)
         self.ssl_verify = ssl_verify
+        self._username = session.auth.username if session.auth else None
+        self._password = session.auth.password if session.auth else None
+
+    def _recreate_session(self) -> None:
+        # Close the existing session to clear out stale connections
+        if isinstance(self.session, requests.Session):
+            try:
+                self.session.close()
+            except Exception as error:
+                self.logger.error(f"An exception occurred during session closing on recreation: {error}")
+
+        # Recreate the session with stored credentials
+        self.session = requests.Session()
+        self.session.headers.update(self._HEADERS)
+        if self._username and self._password:
+            self.session.auth = HTTPBasicAuth(self._username, self._password)
+
+    def _send_with_retry(self, method: str, url: str, **extras) -> requests.Response:
+        """
+        Invokes the session method (get/post/put/delete) and retries on transient
+        transport errors only (ConnectionError, Timeout). HTTPError and other
+        RequestException subclasses are raised immediately as a PluginException.
+
+        :param method: HTTP method name, e.g. "get", "post"
+        :param url: Endpoint URL to request
+        :param extras: Keyword arguments forwarded to the session method
+        :return: requests.Response object on success
+        """
+
+        last_error = None
+        for attempt, backoff in enumerate((0,) + self._RETRY_BACKOFF_SECONDS):
+            if backoff:
+                self.logger.info(
+                    f"Transient connection error against {url}; retry {attempt}/"
+                    f"{len(self._RETRY_BACKOFF_SECONDS)} after {backoff}s sleep..."
+                )
+                time.sleep(backoff)
+                self._recreate_session()
+            try:
+                request_method = getattr(self.session, method)
+                return request_method(url=url, verify=self.ssl_verify, **extras)
+            except self._TRANSIENT_EXCEPTIONS as error:
+                last_error = error
+            except requests.RequestException as error:
+                assistance = self._REQUEST_EXCEPTIONS.get(type(error), self._UNHANDLED_EXCEPTION)
+                raise PluginException(cause=str(error), assistance=assistance)
+
+        assistance = self._REQUEST_EXCEPTIONS.get(type(last_error), self._UNHANDLED_EXCEPTION)
+        raise PluginException(cause=str(last_error), assistance=assistance)
 
     def resource_request(
         self,
@@ -80,6 +137,7 @@ class ResourceRequests(object):
         params: Collection = None,
         payload: dict = None,
         json_response: bool = True,
+        headers: dict = None,
     ) -> dict:
         """
         Sends a request to APIv3 with the provided endpoint and optional method/payload
@@ -88,10 +146,11 @@ class ResourceRequests(object):
         :param params: URL parameters to append to the request
         :param payload: JSON body for the API request if required
         :param json_response: Boolean to return raw response
+        :param headers: Per-request headers that override session defaults (e.g. Accept)
         :return: Dict containing the JSON response body
         """
 
-        request_method = getattr(self.session, method.lower())
+        request_method = method.lower()
         if not payload:
             payload = {}
         if not params:
@@ -104,11 +163,9 @@ class ResourceRequests(object):
             payload = payload["rawbody"]
 
         extras = {"json": payload, "params": parameters.params}
-        try:
-            response = request_method(url=endpoint, verify=self.ssl_verify, **extras)
-        except requests.RequestException as error:
-            assistance = self._REQUEST_EXCEPTIONS.get(type(error), self._UNHANDLED_EXCEPTION)
-            raise PluginException(cause=error, assistance=assistance)
+        if headers:
+            extras["headers"] = headers
+        response = self._send_with_retry(request_method, endpoint, **extras)
 
         resource_request_status_code_check(response.text, response.status_code)
 
@@ -193,14 +250,9 @@ class ResourceRequests(object):
         # Get size and page from list of dict param type
 
         self.logger.info(f'Fetching up to {params["size"]} resources from endpoint page {params["page"]} ...')
-        request_method = getattr(self.session, method.lower())
 
         extras = {"json": payload, "params": params.params}
-        try:
-            response = request_method(url=endpoint, verify=self.ssl_verify, **extras)
-        except requests.RequestException as error:
-            assistance = self._REQUEST_EXCEPTIONS.get(type(error), self._UNHANDLED_EXCEPTION)
-            raise PluginException(cause=error, assistance=assistance)
+        response = self._send_with_retry(method.lower(), endpoint, **extras)
 
         resource_request_status_code_check(response.text, response.status_code)
         try:

@@ -3,7 +3,6 @@ from .schema import MarkdownToTxtInput, MarkdownToTxtOutput, Input, Output, Comp
 from icon_markdown.util import utils
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-
 # Custom imports below
 from bs4 import BeautifulSoup
 import binascii

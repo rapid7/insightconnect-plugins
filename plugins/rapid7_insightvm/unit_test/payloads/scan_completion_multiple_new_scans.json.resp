@@ -1,0 +1,41 @@
+{
+  "page": {
+    "number": 0,
+    "size": 500,
+    "totalPages": 1
+  },
+  "resources": [
+    {
+      "id": 127,
+      "name": "Scan 127",
+      "startTime": "2024-01-15T10:00:00Z",
+      "endTime": "2024-01-15T11:00:00Z",
+      "status": "finished",
+      "scanType": "regular"
+    },
+    {
+      "id": 126,
+      "name": "Scan 126",
+      "startTime": "2024-01-15T09:00:00Z",
+      "endTime": "2024-01-15T10:00:00Z",
+      "status": "finished",
+      "scanType": "regular"
+    },
+    {
+      "id": 125,
+      "name": "Scan 125",
+      "startTime": "2024-01-15T08:00:00Z",
+      "endTime": "2024-01-15T09:00:00Z",
+      "status": "finished",
+      "scanType": "regular"
+    },
+    {
+      "id": 124,
+      "name": "Scan 124",
+      "startTime": "2024-01-15T07:00:00Z",
+      "endTime": "2024-01-15T08:00:00Z",
+      "status": "finished",
+      "scanType": "regular"
+    }
+  ]
+}

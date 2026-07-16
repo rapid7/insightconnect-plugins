@@ -32,8 +32,9 @@ sdk:
   version: 6.6.0
   user: root
   custom_cmd:
-    - ENV DEBIAN_FRONTEND noninteractive
-    - RUN apt-get update && apt-get install -y --no-install-recommends gcc git libkrb5-dev krb5-user libffi-dev libssl-dev && rm -rf /var/lib/apt/lists/*
+  - ENV DEBIAN_FRONTEND noninteractive
+  - RUN apt-get update && apt-get install -y --no-install-recommends gcc git libkrb5-dev
+    krb5-user libffi-dev libssl-dev && rm -rf /var/lib/apt/lists/*
 key_features:
 - Add and remove user accounts to automate provisioning/deprovisioning of users
 - Disable and enable user accounts to contain security risks
@@ -69,6 +70,7 @@ troubleshooting:
   \ and then using the variable step $item.dn"
 version_history:
 - 11.0.0 - Add Kerberos (SASL GSSAPI) authentication support | Changed user to root for Kerberos credential management | Updated SDK to the latest version (6.6.0)
+- 10.0.2 - Updated SDK to the latest version (6.6.0)
 - 10.0.1 - Fixed issues with channel binding support | Updated SDK to the latest version (6.3.6)
 - 10.0.0 - Support for channel binding | Updated SDK to the latest version (6.3.3)
 - 9.0.4 - Updated SDK to the latest version (6.2.5)
@@ -368,7 +370,8 @@ connection:
   use_channel_binding:
     title: Use Channel Bind
     type: boolean
-    description: Enable this option to require a secure TLS channel before binding, as needed for LDAP connections that enforce channel binding
+    description: Enable this option to require a secure TLS channel before binding,
+      as needed for LDAP connections that enforce channel binding
     required: false
     default: false
     example: false

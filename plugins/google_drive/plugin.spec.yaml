@@ -3,9 +3,13 @@ extension: plugin
 products: [insightconnect]
 name: google_drive
 title: Google Drive
-description: Upload and retrieve files from Google Drive
-version: 3.0.0
+description: "[Google Drive](https://www.google.com/drive/) is an online file storage and management system. This plugin allows you to upload and retrieve files from Google drive.\n\nThis plugin utilizes the [Google Drive API](https://developers.google.com/drive/v3/web/about-sdk)"
+version: 3.0.1
 connection_version: 3
+sdk:
+  type: full
+  version: 6.6.0
+  user: nobody
 supported_versions: ["Google Drive API v3 2021-09-27"]
 vendor: rapid7
 support: community
@@ -20,7 +24,12 @@ key_features:
 requirements:
 - A JWT With Google Drive Permissions
 - The Google Drive API must be enabled
+troubleshooting:
+- It is very important to use the full filename including the file extension e.g. example.docx. Google Drive uses the file extension to determine how to format the file. Not using a file extension will result in a error and using the wrong file extension may result in file corruption
+- When using file overwrite, Google can not change formats. I.E. If the original file is a Google sheets file, then the new file will also be a Google sheets file.
+- When using file overwrite, the MIME Type should be set to the correct type to avoid data formatting issues.
 version_history:
+- 3.0.1 - Updated dependencies | Bump SDK to the latest (6.6.0)
 - 3.0.0 - Implement shared drive support | Add Copy file action | Code refactor
 - 2.2.0 - Add Create Folder, Create File in Folder and Move File actions | Add missing input and output examples | Code refactor
 - 2.1.3 - Correct spelling in help.md
@@ -32,6 +41,8 @@ version_history:
 - 1.2.0 - Add the ability to rename and force a MIME type on the overwrite action
 - 1.1.0 - Add overwrite file action and search file action
 - 1.0.0 - Initial plugin
+links:
+- https://developers.google.com/drive/api/guides/about-sdk
 references:
 - oauth2client - https://github.com/google/oauth2client
 - httplib2 - https://github.com/httplib2/httplib2

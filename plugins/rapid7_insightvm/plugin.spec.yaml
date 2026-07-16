@@ -6,16 +6,16 @@ title: Rapid7 InsightVM Console
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes,
   and remediates vulnerabilities. This plugin uses an orchestrator to get top remediations,
   scan results and start scans
-version: 8.0.16
+version: 8.0.17
 connection_version: 8
-supported_versions: [Rapid7 InsightVM API v3 2022-05-25]
+supported_versions: [Rapid7 InsightVM API v3 2026-06-19]
 fedramp_ready: true
 vendor: rapid7
 support: rapid7
 status: []
 sdk:
   type: full
-  version: 6.4.3
+  version: 6.6.0
   user: root
   custom_cmd:
     - RUN apk add --no-cache --virtual .build-deps make gcc libc-dev libffi-dev openssl-dev libxml2-dev libxslt-dev
@@ -30,6 +30,11 @@ links:
 references:
 - '[InsightVM API 3](https://help.rapid7.com/insightvm/en-us/api/index.html)'
 version_history:
+- '8.0.17 - `Scan Completion`: Fixed an issue where scans completed between polling
+  intervals were dropped | `Scan Completion`: Fixed report download failing with HTTP
+  406 against IVM 8.x consoles | Added retry on transient connection errors during
+  long-running report polling | `Scan Completion`: Skip Insight Agent scans which
+  cannot be scoped for SQL reports | `Download Reports`: Updated API headers to match latest API version | Updated SDK to latest version (6.6.0)'
 - 8.0.16 - Updated dependencies
 - 8.0.15 - Addressed issue with sessions
 - 8.0.14 - Updated dependencies | Updated SDK to latest version (6.4.3)

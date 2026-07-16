@@ -13,6 +13,7 @@ class DownloadReport(insightconnect_plugin_runtime.Action):
     _ERRORS = {
         401: "Unauthorized",
         404: "Not Found",
+        406: "Not Acceptable",
         500: "Internal Server Error",
         503: "Service Unavailable",
         000: "Unknown Status Code",
@@ -34,9 +35,7 @@ class DownloadReport(insightconnect_plugin_runtime.Action):
         self.logger.info(f"Using {endpoint}")
 
         try:
-            response = self.connection.session.get(
-                url=endpoint, verify=self.connection.ssl_verify, headers={"Accept": "application/pdf"}
-            )
+            response = self.connection.session.get(url=endpoint, verify=self.connection.ssl_verify)
         except requests.RequestException as error:
             self.logger.error(error)
             raise
@@ -44,8 +43,12 @@ class DownloadReport(insightconnect_plugin_runtime.Action):
         else:
             if response.status_code in [200, 201]:  # 200 is documented, 201 is undocumented
                 report = base64.b64encode(response.content).decode()
-
                 return {Output.REPORT: report}
+            elif response.status_code == 406:
+                raise PluginException(
+                    cause="The InsightVM server returned 406 Not Acceptable for the report download",
+                    assistance="This may indicate the report format/content issue. Verify the report exists and is in a valid format.",
+                )
             else:
                 reason = ""
                 try:
@@ -53,7 +56,7 @@ class DownloadReport(insightconnect_plugin_runtime.Action):
                 except KeyError:
                     reason = "Unknown error occurred. Please contact support or try again later."
                 except json.decoder.JSONDecodeError:
-                    raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=reason.text)
+                    raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 
                 status_code_message = self._ERRORS.get(response.status_code, self._ERRORS[000])
                 self.logger.error(f"{status_code_message} ({response.status_code}): {reason}")

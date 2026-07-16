@@ -84,8 +84,15 @@ class Util:
             return MockResponse("get_samples_id", 200)
         if url == "https://www.example.com/rest/sample":
             return MockResponse("get_samples_all", 200)
+        if (
+            url
+            == "https://www.example.com/rest/sample/submit?tags=automation_test&sample_url=https%3A%2F%2Fwww.example.com"
+        ):
+            return MockResponse("submit_url_with_tags", 200)
         if url == "https://www.example.com/rest/sample/submit?sample_url=https%3A%2F%2Fwww.example.com":
             return MockResponse("submit_url", 200)
+        if url == "https://www.example.com/rest/sample/submit?tags=automation_test":
+            return MockResponse("submit_file_with_tags", 200)
         if url == "https://www.example.com/rest/sample/submit":
             return MockResponse("submit_file", 200)
         raise Exception("Not implemented")

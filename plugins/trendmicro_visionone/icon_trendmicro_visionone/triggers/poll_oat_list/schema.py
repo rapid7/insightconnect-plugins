@@ -4,7 +4,9 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Polls information about Observed Attack Techniques (OATs) events that match the specified criteria in a list"
+    DESCRIPTION = (
+        "Polls information about Observed Attack Techniques (OATs) events that match the specified criteria in a list"
+    )
 
 
 class Input:

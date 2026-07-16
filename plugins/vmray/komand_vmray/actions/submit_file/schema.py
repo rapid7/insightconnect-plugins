@@ -18,8 +18,7 @@ class Output:
 
 
 class SubmitFileInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        r"""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -47,7 +46,7 @@ class SubmitFileInput(insightconnect_plugin_runtime.Input):
     "optional_params": {
       "type": "object",
       "title": "Optional Parameters",
-      "description": "Parameters that allow finer tuning of the Submit File action, e.g {\"analysis_id\": 12345}",
+      "description": "Parameters that allow finer tuning of the Submit File action, e.g {\"tags\": [\"test_tag\"]}",
       "order": 3
     }
   },
@@ -76,16 +75,14 @@ class SubmitFileInput(insightconnect_plugin_runtime.Input):
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class SubmitFileOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(
-        r"""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -494,7 +491,7 @@ class SubmitFileOutput(insightconnect_plugin_runtime.Output):
           "title": "Submission Tags",
           "description": "Submission tags",
           "items": {
-            "type": "object"
+            "type": "string"
           },
           "order": 23
         },
@@ -550,8 +547,7 @@ class SubmitFileOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

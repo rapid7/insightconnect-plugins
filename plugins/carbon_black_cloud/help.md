@@ -304,6 +304,7 @@ Example output:
 
 # Version History
 
+* 2.2.14 - Updated SDK to the latest version (6.6.0)
 * 2.2.13 - Updated SDK to the latest version (6.4.3) | Removed migrated event source code
 * 2.2.12 - Updated SDK to the latest version (6.3.10)
 * 2.2.11 - 'Monitor Alerts': Fix bug related to search window reset for deduplicated alerts

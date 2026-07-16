@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Awk"
 Vendor = "rapid7"
-Version = "1.2.2"
+Version = "1.2.3"
 Description = "The Awk InsightConnect plugin manipulates input data using GNU [Awk](https://www.gnu.org/software/gawk/manual/gawk.html)which is a pattern scanning and processing language.For example, here's a simple example of Awk from the command line:```$ awk '{ print \"Second column contents:\",$2 }' 3columns.txtSecond column contents: dogSecond column contents: catSecond column contents: horseSecond column contents: birds```"
 
 

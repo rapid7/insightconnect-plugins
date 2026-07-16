@@ -4,7 +4,9 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Retrieves information about the available custom scripts and displays the information in a paginated list"
+    DESCRIPTION = (
+        "Retrieves information about the available custom scripts and displays the information in a paginated list"
+    )
 
 
 class Input:

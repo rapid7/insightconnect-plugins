@@ -1,0 +1,29 @@
+{
+  "resources": [
+    {
+      "id": 127,
+      "status": "finished",
+      "scanType": "regular"
+    },
+    {
+      "id": 126,
+      "status": "running",
+      "scanType": "regular"
+    },
+    {
+      "id": 125,
+      "status": "finished",
+      "scanType": "agent"
+    },
+    {
+      "id": 124,
+      "status": "finished",
+      "scanType": "regular"
+    }
+  ],
+  "page": {
+    "number": 0,
+    "size": 500,
+    "totalPages": 1
+  }
+}

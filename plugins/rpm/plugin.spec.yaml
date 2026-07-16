@@ -4,14 +4,14 @@ products: [insightconnect]
 name: rpm
 title: RPM
 description: The RPM plugin allows you to download and analyze an RPM package
-version: 1.0.2
+version: 1.0.3
 sdk:
   type: slim
-  version: 6.4.3
+  version: 6.6.0
   user: root
   custom_cmd:
     - "RUN apt-get update && apt-get upgrade -y && apt-get install -y wget rpm dnf dnf-plugins-core && mkdir -p /etc/yum.repos.d"
-    - "COPY --from=builder /python/src/repos /opt/rpm-plugin/repos"
+    - "COPY --from=builder /workspace/repos /opt/rpm-plugin/repos"
 connection_version: 1
 vendor: rapid7
 support: community
@@ -30,7 +30,8 @@ troubleshooting:
   - "Ensure the repository URL returns a valid .repo file"
   - "GPG key URLs must be accessible and return a valid RPM-GPG key"
 version_history:
-  - "1.0.2 - Refresh the plugin | Updated SDK to the latest version (6.4.3)"
+  - "1.0.3 - Updated SDK to the latest version (6.6.0)"
+  - "1.0.2 - Resolved an input validation issue that could allow OS command injection via the repo, key, and name parameters (CVE-2026-8663) | Refresh the plugin | Updated SDK to the latest version (6.4.3)"
   - "1.0.1 - New spec and help.md format for the Extension Library"
   - "1.0.0 - Support web server mode | Update to v2 Python plugin architecture"
   - "0.1.1 - SSL bug fix in SDK"

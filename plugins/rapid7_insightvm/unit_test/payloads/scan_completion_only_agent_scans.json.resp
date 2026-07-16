@@ -1,0 +1,21 @@
+{
+  "page": {
+    "number": 0,
+    "size": 500,
+    "totalPages": 1
+  },
+  "resources": [
+    {
+      "id": 130,
+      "name": "Agent Scan",
+      "scanType": "agent",
+      "status": "finished"
+    },
+    {
+      "id": 129,
+      "name": "Another Agent Scan",
+      "scanType": "agent",
+      "status": "finished"
+    }
+  ]
+}

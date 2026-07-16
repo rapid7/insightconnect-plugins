@@ -22,6 +22,11 @@ class MockResponses:
             "json": lambda: {"status": "aborted"},
         },
         "complete": {"status_code": 200, "json": lambda: {"status": "complete"}},
+        "406": {
+            "status_code": 406,
+            "json": lambda: {"message": "Not Acceptable"},
+            "text": '{"message": "Not Acceptable"}',
+        },
         "404": {
             "status_code": 404,
             "json": lambda: {"message:": "An error has occurred."},
@@ -113,6 +118,14 @@ class TestGenerateAdhocSqlReport(TestCase):
                 [Mock(**MockResponses.mock_responses["complete"]), Mock(**MockResponses.mock_responses["503"])],
                 "InsightVM returned an error message. Service Unavailable",
                 "If this issue persists contact support for assistance.",
+            ],
+            [
+                "download_failed_406",
+                Util.mocked_requests,
+                Util.mocked_requests,
+                [Mock(**MockResponses.mock_responses["complete"]), Mock(**MockResponses.mock_responses["406"])],
+                "InsightVM returned an error message. Not Acceptable",
+                "Ensure that the requested content type is compatible with the resource. Verify the Accept header or report format is supported.",
             ],
             [
                 "delete_failed",

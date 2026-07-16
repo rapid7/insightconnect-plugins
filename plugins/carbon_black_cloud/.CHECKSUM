@@ -1,19 +1,19 @@
 {
-	"spec": "c6f09f84fc71fc4ba4c1435dcc729912",
-	"manifest": "48dc69319b230682a58e9489118240ce",
-	"setup": "61733d66374152a9f5255fae4b9cdb58",
+	"spec": "407eb6aaf4446b9387dd5052b7cfecc2",
+	"manifest": "3bff57bca749a85615d537e665dbf63f",
+	"setup": "96fdaa019513a68653cd46679f0364aa",
 	"schemas": [
 		{
 			"identifier": "get_agent_details/schema.py",
-			"hash": "da3bb3867e13caa9ad3190226fc0e199"
+			"hash": "f1410f52d0401ebf574b44d24fb534ff"
 		},
 		{
 			"identifier": "quarantine/schema.py",
-			"hash": "1ea76c55008319b826e9f72333ef34d8"
+			"hash": "e595e1f63ac67839d1cc429af097a0c6"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "fa08a5e2926cf9156d451b717f7130bb"
+			"hash": "caa98e14796bcb46d0a6366804d7f282"
 		}
 	]
 }

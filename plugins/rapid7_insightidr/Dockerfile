@@ -27,6 +27,7 @@ RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 ENV PYTHONPATH="/workspace:${PYTHONPATH}"
 
 RUN rm -rf /root/.cache;
+RUN mkdir -p /workspace/cache && chown -R nobody /workspace/cache
 RUN mkdir -p /workspace/tmp && chown -R nobody /workspace/tmp
 
 # User to run plugin code. The two supported users are: root, nobody

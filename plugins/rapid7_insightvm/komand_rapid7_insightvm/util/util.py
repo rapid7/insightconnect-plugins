@@ -76,7 +76,11 @@ def adhoc_sql_report(connection, logger, report_payload: dict):
     # Download report
     endpoint = endpoints.Report.download(connection.console_url, report_id, report_instance_id)
     logger.info("Downloading SQL report contents")
-    report_contents = resource_helper.resource_request(endpoint=endpoint, json_response=False)
+    # SQL-query report bodies are CSV; the session default of `Accept: application/json`
+    # makes IVM 8.x reject the download with HTTP 406, so override per request.
+    report_contents = resource_helper.resource_request(
+        endpoint=endpoint, json_response=False, headers={"Accept": "text/csv"}
+    )
 
     # Cleanup report
     endpoint = endpoints.Report.delete(connection.console_url, report_id)

@@ -3,8 +3,7 @@
     {
       "id": "certificate-common-name-mismatch",
       "instances": 1,
-      "links": [
-      ],
+      "links": [],
       "results": [
         {
           "port": 443,
