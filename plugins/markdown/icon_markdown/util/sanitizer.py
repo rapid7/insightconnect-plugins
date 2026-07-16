@@ -177,30 +177,35 @@ def _is_detached(tag, soup) -> bool:
     return True
 
 
+def _is_safe_style(tag_name: str, attr_value) -> bool:
+    """Style is only allowed on table-layout tags and only for alignment/width declarations."""
+    if tag_name not in STYLE_ALLOWED_TAGS:
+        return False
+    style_value = " ".join(str(value) for value in _iter_values(attr_value))
+    return bool(SAFE_STYLE.match(style_value))
+
+
+def _is_allowed_attribute(tag_name: str, attr: str, attr_value) -> bool:
+    """Return True if a single attribute (and its value) is allowed on the given tag."""
+    if attr not in (GLOBAL_ATTRS | TAG_ATTRS.get(tag_name, set())):
+        return False
+    if attr in LINK_ATTRS:
+        return all(_is_safe_link(value) for value in _iter_values(attr_value))
+    if attr in RESOURCE_ATTRS:
+        return all(_is_safe_resource(value) for value in _iter_values(attr_value))
+    if attr == "style":
+        return _is_safe_style(tag_name, attr_value)
+    return True
+
+
 def _is_allowed_tag(tag) -> bool:
     """Return True if the tag and every one of its attributes/values passes the allowlist."""
     name = tag.name.lower()
     if name not in ALLOWED_TAGS:
         return False
-
-    allowed_attrs = GLOBAL_ATTRS | TAG_ATTRS.get(name, set())
-    for attr_name, attr_value in tag.attrs.items():
-        attr = attr_name.lower()
-        if attr not in allowed_attrs:
-            return False
-        if attr in LINK_ATTRS:
-            if not all(_is_safe_link(value) for value in _iter_values(attr_value)):
-                return False
-        elif attr in RESOURCE_ATTRS:
-            if not all(_is_safe_resource(value) for value in _iter_values(attr_value)):
-                return False
-        elif attr == "style":
-            if name not in STYLE_ALLOWED_TAGS:
-                return False
-            style_value = " ".join(str(value) for value in _iter_values(attr_value))
-            if not SAFE_STYLE.match(style_value):
-                return False
-    return True
+    return all(
+        _is_allowed_attribute(name, attr_name.lower(), attr_value) for attr_name, attr_value in tag.attrs.items()
+    )
 
 
 def sanitize_html(html_content: str) -> str:
