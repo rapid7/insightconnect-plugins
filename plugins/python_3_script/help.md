@@ -126,9 +126,11 @@ Example output:
 ## Troubleshooting
 
 * Some third-party modules defined in the Modules connection input (such as pandas) can take a long time to install. If installation fails, try increasing the Timeout connection input to 900 (15 minutes)
+* Each unique set of modules runs in its own isolated virtual environment. Connections with the same modules share one environment automatically. Conflicting packages across connections are fully supported
 
 # Version History
 
+* 5.2.4 - Action `Run`: Added per connection dependency isolation | Fixed issue related to `ModuleNotFound` when plugin was updated | Updated SDK to the latest version (6.6.0)
 * 5.2.3 - Action: `Run`: Updated default function value | Updated SDK to the latest version (6.5.1)
 * 5.2.2 - Updated dependencies | Updated SDK to the latest version (6.5.0)
 * 5.2.1 - Addressed Snyk Vulnerability | SDK bump to latest version (6.3.4)
