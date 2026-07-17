@@ -101,7 +101,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
             # The Path.rename is atomic on POSIX within the same filesystem
             # If another worker already placed a complete environment just reuse it
             if not final_directory.exists():
-                temporary_directory.rename(final_directory)
+                try:
+                    temporary_directory.rename(final_directory)
+                except OSError:
+                    if not final_directory.exists():
+                        raise RuntimeError(f"Failed to finalize the Python environment at {final_directory}.")
 
     def install_dependencies(self) -> None:
         try:
