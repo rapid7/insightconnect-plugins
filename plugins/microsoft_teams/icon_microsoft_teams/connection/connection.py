@@ -21,6 +21,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         tenant_id = params.get(Input.DIRECTORY_ID, "").strip()
         endpoint = params.get(Input.ENDPOINT, "Normal")
         app_secret = params.get(Input.APPLICATION_SECRET, {}).get("secretKey", "").strip()
+        app_catalog_id = params.get(Input.APP_CATALOG_ID, "").strip()
 
         self.resource_endpoint = RESOURCE_URL.get(endpoint)
 
@@ -32,6 +33,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             base_url=self.resource_endpoint,
             endpoint=endpoint,
             logger=self.logger,
+            app_catalog_id=app_catalog_id,
         )
 
         # Initialize the Bot Framework service (handles its own authentication)
