@@ -153,7 +153,8 @@ class BotService(BaseClient):
             raise PluginException(
                 cause="Bot is not authorized to send messages to this conversation",
                 assistance="Ensure the bot app is installed in the target team or added to the chat. "
-                "Go to the Teams channel > Manage channel > Apps and add your bot.",
+                "If you have configured the App Catalog ID in the connection, the bot will "
+                "attempt to auto-install itself on retry.",
                 data=response.text,
             )
 

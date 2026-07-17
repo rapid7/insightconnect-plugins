@@ -26,6 +26,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|app_catalog_id|string|None|False|The Teams App Catalog ID of the bot. When set, the plugin will automatically install the bot into chats before sending messages. Find this in the Teams Admin Center under Manage Apps.|None|05F59CEC-A742-4A50-A62E-202A57E478A4|None|None|
 |application_id|string|None|True|Application (client) ID|None|63a0cad6-ac64-435c-a221-5d37c97b763e|None|None|
 |application_secret|credential_secret_key|None|True|Application secret|None|aMeCAEYdOLlK+qRcD9AjdyxLkCaqZH1UPm7adjJQ5Og=|None|None|
 |directory_id|string|None|True|Directory (tenant) ID|None|9e538ff5-dcb2-46a9-9a28-f93b8250deb0|None|None|
@@ -35,6 +36,7 @@ Example input:
 
 ```
 {
+  "app_catalog_id": "05F59CEC-A742-4A50-A62E-202A57E478A4",
   "application_id": "63a0cad6-ac64-435c-a221-5d37c97b763e",
   "application_secret": "aMeCAEYdOLlK+qRcD9AjdyxLkCaqZH1UPm7adjJQ5Og=",
   "directory_id": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0",
@@ -1206,7 +1208,7 @@ Example output:
 
 # Version History
 
-* 8.0.0 - Major refactor to eliminate user account requirement | Switched to client_credentials (app-only) OAuth2 flow | Added Bot Framework for sending messages | Migrated all endpoints from /beta to /v1.0 | Removed username_password from connection | Removed username input from get_message_in_chat (now uses app permissions)
+* 8.0.0 - Major refactor to eliminate user account requirement | Switched to client_credentials (app-only) OAuth2 flow | Added Bot Framework for sending messages | Migrated all endpoints from /beta to /v1.0 | Removed username_password from connection | Removed username input from get_message_in_chat (now uses app permissions) | Add App Catalog ID to connection
 * 7.0.6 - Updated SDK to the latest version (6.5.1)
 * 7.0.5 - Updated SDK to the latest version (6.4.3)
 * 7.0.4 - Updated SDK to the latest version (6.4.2)
