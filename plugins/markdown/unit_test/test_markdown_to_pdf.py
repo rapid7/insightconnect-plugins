@@ -5,9 +5,13 @@ sys.path.append(os.path.abspath("../"))
 from parameterized import parameterized
 from unittest import TestCase
 from icon_markdown.actions.markdown_to_pdf import MarkdownToPdf
+from icon_markdown.actions.markdown_to_pdf.action import PDF_OPTIONS
 from icon_markdown.actions.markdown_to_pdf.schema import Input, Output
+from icon_markdown.util import utils
+from icon_markdown.util.sanitizer import sanitize_html
 from insightconnect_plugin_runtime.exceptions import PluginException
 from unittest import mock
+from bs4 import BeautifulSoup
 from mock_helpers import mock_request_markdown_to_pdf, mocked_request
 
 
@@ -57,3 +61,41 @@ class TestMarkdownToPdf(TestCase):
         with self.assertRaises(PluginException) as context:
             self.action.run(input_params)
         self.assertEqual(context.exception.cause, exception)
+
+    def test_pdf_options_contain_ssrf_mitigations(self):
+        """Ensure defense-in-depth wkhtmltopdf flags are set on every render."""
+        self.assertIn("disable-javascript", PDF_OPTIONS)
+        self.assertIn("disable-local-file-access", PDF_OPTIONS)
+        self.assertEqual(PDF_OPTIONS.get("load-error-handling"), "ignore")
+        self.assertEqual(PDF_OPTIONS.get("load-media-error-handling"), "ignore")
+
+    @parameterized.expand(
+        [
+            # Markdown code span carrying raw HTML — pandoc entity-escapes it; the sanitizer must
+            # not let it become a live resource-loading tag on output.
+            ('`<img src="http://169.254.169.254/latest/meta-data/">`',),
+            ("`<style>@import url(http://evil.example/x.css);</style>`",),
+            ('`<link rel="stylesheet" href="http://evil.example/x.css">`',),
+            # Native Markdown image with a protocol-relative / external target.
+            ("![x](//evil.example/beacon.png)",),
+            ("![x](http://evil.example/beacon.png)",),
+        ]
+    )
+    def test_sanitized_markdown_has_no_live_remote_resource(self, markdown):
+        """Regression: attacker Markdown must not yield a live http(s) resource tag after sanitizing.
+
+        This mirrors the exact pipeline in action.run: utils.convert(md -> html) then sanitize_html.
+        A live <img src="http...">, <style>, or <link> would be fetched by wkhtmltopdf at render
+        time (SSRF), so the parsed output must contain no such live element. Encoded (escaped) text
+        is fine — it renders as inert characters and is never dereferenced.
+        """
+        sanitized = sanitize_html(utils.convert(markdown, "md", "html"))
+        soup = BeautifulSoup(sanitized, "html.parser")
+        # No live style/link elements at all.
+        self.assertEqual(soup.find_all(["style", "link"]), [])
+        # No live img pointing at a remote (http/https) or protocol-relative resource.
+        for img in soup.find_all("img"):
+            src = (img.get("src") or "").strip().lower()
+            self.assertFalse(src.startswith(("http://", "https://", "//")), f"live remote img: {src}")
+        # Escaping must happen exactly once (no resurrection, no double-encoding).
+        self.assertNotIn("&amp;lt;", sanitized)

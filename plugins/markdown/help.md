@@ -186,8 +186,9 @@ Example output:
 
 # Version History
 
+* 4.0.2 - Resolved a server-side request forgery issue in the markdown_to_pdf action by sanitizing HTML with an allowlist of tags, attributes, and URL schemes, and fixed rendering of task lists and table column alignment (CVE-2026-8661)
 * 4.0.1 - Update SDK to version 6.6.0
-* 4.0.0 - Resolved an issue in the markdown_to_pdf action where the PDF rendering engine did not restrict script execution, which could allow server-side request forgery via crafted Markdown input (CVE-2026-8661) | Update SDK to version 6.4.3
+* 4.0.0 - Restricted script execution in the markdown_to_pdf PDF rendering engine to address a server-side scripting vector (partial fix for CVE-2026-8661) | Update SDK to version 6.4.3
 * 3.1.4 - `Markdown to PDF` - Fix issue which produced blank PDF files
 * 3.1.3 - Update PyPandoc dependency | Update SDK
 * 3.1.2 - Added additional error messaging | Refactored code | Fixed bug in Markdown to TXT action which resulted in an incorrect output
