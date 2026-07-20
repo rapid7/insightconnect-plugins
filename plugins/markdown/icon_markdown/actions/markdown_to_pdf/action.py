@@ -8,9 +8,14 @@ from .schema import MarkdownToPdfInput, MarkdownToPdfOutput, Output, Input, Comp
 from insightconnect_plugin_runtime.exceptions import PluginException
 from typing import Dict
 
-# --disable-javascript eliminates XSS and script execution attack vectors
+# Defense-in-depth flags for wkhtmltopdf: --disable-javascript blocks script execution,
+# --disable-local-file-access blocks file:// SSRF, load-error-handling ignores fetches
+# blocked by the sanitizer so a stripped resource does not abort the render.
 PDF_OPTIONS = {
-    "disable-javascript": None,  # Disable JavaScript execution in wkhtmltopdf
+    "disable-javascript": None,
+    "disable-local-file-access": None,
+    "load-error-handling": "ignore",
+    "load-media-error-handling": "ignore",
 }
 
 
