@@ -32,6 +32,6 @@ ENV PYTHONPATH="/workspace:${PYTHONPATH}"
 RUN rm -rf /root/.cache;
 
 # User to run plugin code. The two supported users are: root, nobody
-USER root
+USER nobody
 
 ENTRYPOINT ["python", "/workspace/bin/komand_active_directory_ldap"]

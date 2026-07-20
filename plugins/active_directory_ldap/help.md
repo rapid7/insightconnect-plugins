@@ -777,7 +777,7 @@ the query results, and then using the variable step $item.dn
 
 # Version History
 
-* 11.0.0 - Add Kerberos (SASL GSSAPI) authentication support | Changed user to root for Kerberos credential management | Updated SDK to the latest version (6.6.0)
+* 11.0.0 - Add Kerberos (SASL GSSAPI) authentication support | Updated SDK to the latest version (6.6.0)
 * 10.0.2 - Updated SDK to the latest version (6.6.0)
 * 10.0.1 - Fixed issues with channel binding support | Updated SDK to the latest version (6.3.6)
 * 10.0.0 - Support for channel binding | Updated SDK to the latest version (6.3.3)

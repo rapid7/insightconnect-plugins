@@ -1,10 +1,14 @@
 # pylint: disable=too-many-positional-arguments
+import ipaddress
 import json
-import subprocess  # noqa: B404
+import os
+import tempfile
 from functools import wraps
 from json import loads
 from typing import List
 
+import gssapi
+from gssapi.raw import acquire_cred_with_password
 import ldap3
 from ldap3 import MODIFY_REPLACE, ALL_ATTRIBUTES, ALL_OPERATIONAL_ATTRIBUTES
 from ldap3 import extend
@@ -60,10 +64,23 @@ class ActiveDirectoryLdapAPI:
         set_library_log_detail_level(ERROR)
         set_library_log_hide_sensitive_data(True)
 
+    @staticmethod
+    def _is_ip_address(host: str) -> bool:
+        try:
+            ipaddress.ip_address(host)
+            return True
+        except ValueError:
+            return False
+
     def _resolve_kerberos_domain(self) -> str:
         """Resolve the Kerberos domain from connection settings or host FQDN."""
         if self.domain_name:
             return self.domain_name
+        if self._is_ip_address(self.host):
+            raise PluginException(
+                cause="Kerberos domain name is required when Host is an IP address.",
+                assistance="Provide the domain name in the Kerberos connection settings (e.g., example.com).",
+            )
         if "." in self.host:
             return self.host.split(".", 1)[1]
         raise PluginException(
@@ -72,20 +89,8 @@ class ActiveDirectoryLdapAPI:
             "(e.g., example.com) or ensure the host contains the full FQDN.",
         )
 
-    def _write_config_file(self, filepath: str, content: str, description: str):
-        """Write configuration content to a system file."""
-        try:
-            with open(filepath, "w", encoding="utf-8") as config_file:
-                config_file.write(content)
-        except OSError as error:
-            raise PluginException(
-                cause=f"Failed to write {description}.",
-                assistance=f"Ensure the plugin container has write access to {filepath}.",
-                data=error,
-            ) from error
-
-    def _write_krb5_config(self, upper_domain: str, kdc: str, domain: str):
-        """Write /etc/krb5.conf with the Kerberos realm configuration."""
+    def _write_krb5_config(self, upper_domain: str, kdc: str, domain: str) -> str:
+        """Write krb5.conf to a temp file and set KRB5_CONFIG."""
         krb5_config = (
             f"[libdefaults]\n"
             f"default_realm = {upper_domain}\n"
@@ -105,48 +110,32 @@ class ActiveDirectoryLdapAPI:
             f".{domain} = {upper_domain}\n"
             f"{domain} = {upper_domain}\n"
         )
-        self._write_config_file("/etc/krb5.conf", krb5_config, "Kerberos configuration")
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".conf", delete=False, encoding="utf-8") as krb5_file:
+            krb5_file.write(krb5_config)
+            krb5_path = krb5_file.name
+        os.environ["KRB5_CONFIG"] = krb5_path
+        return krb5_path
 
-    def _write_network_config(self, kdc: str, domain: str):
-        """Write DNS and hosts configuration for Kerberos network resolution."""
-        self._write_config_file("/etc/resolv.conf", f"search {domain}\nnameserver {kdc}\n", "DNS configuration")
-
-        try:
-            with open("/etc/hosts", "a", encoding="utf-8") as hosts_file:
-                hosts_file.write(f"\n{kdc} {self.host}\n")
-        except OSError as error:
-            self.logger.warning(f"Could not update /etc/hosts: {error}")
-
-    def _acquire_kerberos_ticket(self, upper_domain: str, kdc: str, domain: str):
-        """Acquire a Kerberos TGT via kinit using the provided credentials."""
+    def _acquire_kerberos_credentials(self, upper_domain: str):
+        """Acquire a Kerberos TGT via gssapi using the connection credentials."""
         username = self.user_name
         if "\\" in username:
             username = username.split("\\", 1)[1]
 
-        kinit_command = f"echo '{self.password}' | kinit {username}@{upper_domain}"
-        with subprocess.Popen(
-            kinit_command,
-            shell=True,  # noqa: B602
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-        ) as process:
-            stdout, stderr = process.communicate()
-
-        if process.returncode != 0:
-            self.logger.error(f"kinit failed - stdout: {stdout.decode('utf-8')}, stderr: {stderr.decode('utf-8')}")
+        principal = f"{username}@{upper_domain}"
+        try:
+            name = gssapi.Name(principal, gssapi.NameType.user)
+            acquire_cred_with_password(name, self.password.encode("utf-8"))
+        except gssapi.exceptions.GSSError as error:
             raise PluginException(
-                cause="Failed to acquire Kerberos ticket.",
-                assistance=f"Verify the KDC ({kdc}) is reachable and credentials are valid for domain {domain}. "
-                f"Ensure the username does not include the domain prefix for Kerberos auth.",
-                data=stderr.decode("utf-8"),
-            )
+                cause="Failed to acquire Kerberos credentials.",
+                assistance=f"Verify the KDC is reachable and credentials are valid for principal '{principal}'. "
+                f"Check that the domain name and KDC address are correct.",
+                data=str(error),
+            ) from error
 
     def _configure_kerberos(self):
-        """
-        Configure the container for Kerberos authentication at runtime.
-        Writes /etc/krb5.conf, /etc/resolv.conf, and acquires a TGT via kinit.
-        All configuration is derived from user-provided connection inputs.
-        """
+        """Set up Kerberos realm config and acquire credentials for SASL/GSSAPI bind."""
         domain = self._resolve_kerberos_domain()
         kdc = self.kdc if self.kdc else self.host
         upper_domain = domain.upper()
@@ -154,15 +143,10 @@ class ActiveDirectoryLdapAPI:
         self.logger.info(f"Configuring Kerberos: realm={upper_domain}, kdc={kdc}")
 
         self._write_krb5_config(upper_domain, kdc, domain)
-        self._write_network_config(kdc, domain)
-        self._acquire_kerberos_ticket(upper_domain, kdc, domain)
-
-        self.logger.info("Kerberos ticket acquired successfully")
+        self._acquire_kerberos_credentials(upper_domain)
 
     def _connect_with_kerberos(self, server) -> ldap3.Connection:
-        """
-        Establish an LDAP connection using Kerberos (SASL GSSAPI) authentication.
-        """
+        """Establish an LDAP connection using Kerberos (SASL GSSAPI) authentication."""
         self._configure_kerberos()
         try:
             conn = ldap3.Connection(
@@ -183,9 +167,7 @@ class ActiveDirectoryLdapAPI:
         return conn
 
     def establish_connection(self) -> ldap3.Connection:
-        """
-        Connect to LDAP using the configured authentication method.
-        """
+        """Connect to LDAP using the configured authentication method."""
         if not self.host.startswith("ldap://") and not self.host.startswith("ldaps://"):
             if self.use_ssl:
                 self.host = f"ldaps://{self.host}"
@@ -225,9 +207,7 @@ class ActiveDirectoryLdapAPI:
         """Auto mode: try Kerberos first if configured, then fall back to NTLM."""
         if self.domain_name or self.kdc:
             try:
-                conn = self._connect_with_kerberos(server)
-                self.logger.info("Connected using Kerberos authentication")
-                return conn
+                return self._connect_with_kerberos(server)
             except (PluginException, LDAPException) as error:
                 self.logger.info(f"Kerberos authentication failed, falling back to NTLM: {error}")
 
