@@ -16,6 +16,7 @@ from ldap3.core.exceptions import LDAPBindError, LDAPAuthorizationDeniedResult, 
 from ldap3.utils.log import set_library_log_detail_level, set_library_log_hide_sensitive_data, ERROR
 
 from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_active_directory_ldap.util.constants import ENCODING, KRB5_CONFIG_TEMPLATE
 from komand_active_directory_ldap.util.utils import ADUtils
 
 
@@ -91,26 +92,8 @@ class ActiveDirectoryLdapAPI:
 
     def _write_krb5_config(self, upper_domain: str, kdc: str, domain: str) -> str:
         """Write krb5.conf to a temp file and set KRB5_CONFIG."""
-        krb5_config = (
-            f"[libdefaults]\n"
-            f"default_realm = {upper_domain}\n"
-            f"forwardable = true\n"
-            f"proxiable = true\n"
-            f"dns_lookup_realm = false\n"
-            f"dns_lookup_kdc = false\n"
-            f"\n"
-            f"[realms]\n"
-            f"{upper_domain} = {{\n"
-            f"kdc = {kdc}\n"
-            f"admin_server = {kdc}\n"
-            f"default_domain = {upper_domain}\n"
-            f"}}\n"
-            f"\n"
-            f"[domain_realm]\n"
-            f".{domain} = {upper_domain}\n"
-            f"{domain} = {upper_domain}\n"
-        )
-        with tempfile.NamedTemporaryFile(mode="w", suffix=".conf", delete=False, encoding="utf-8") as krb5_file:
+        krb5_config = KRB5_CONFIG_TEMPLATE.format(realm=upper_domain, kdc=kdc, domain=domain)
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".conf", delete=False, encoding=ENCODING) as krb5_file:
             krb5_file.write(krb5_config)
             krb5_path = krb5_file.name
         os.environ["KRB5_CONFIG"] = krb5_path
@@ -125,7 +108,7 @@ class ActiveDirectoryLdapAPI:
         principal = f"{username}@{upper_domain}"
         try:
             name = gssapi.Name(principal, gssapi.NameType.user)
-            acquire_cred_with_password(name, self.password.encode("utf-8"))
+            acquire_cred_with_password(name, self.password.encode(ENCODING))
         except gssapi.exceptions.GSSError as error:
             raise PluginException(
                 cause="Failed to acquire Kerberos credentials.",
