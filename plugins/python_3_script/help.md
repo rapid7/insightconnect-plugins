@@ -18,7 +18,7 @@ It supports loading custom modules and passing credentials (`username`, `passwor
 
 # Supported Product Versions
 
-* Python 3.12.8
+* Python 3.13.13
 
 # Documentation
 
@@ -77,7 +77,11 @@ This action is used to run a Python 3 function
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|function|python|def run(params={}):\n    return {}|True|Function definition. Must be named `run`. Accepts the `input` object as params. Returns the dict as output. In this action you can use `username`, `password`, `secret_key` variables if defined in connection|None|def run(params={}):\n    print(params.get('some_input'))\n    print(username, password)\n    return {}|None|None|
+|function|python|def run(params={}):
+    return {}|True|Function definition. Must be named `run`. Accepts the `input` object as params. Returns the dict as output. In this action you can use `username`, `password`, `secret_key` variables if defined in connection|None|def run(params={}):
+    print(params.get('some_input'))
+    print(username, password)
+    return {}|None|None|
 |input|object|None|False|Input object to be passed as `params={}` to the `run` function|None|{"some_input": "example input"}|None|None|
 |timeout|integer|30|False|Timeout (in minutes) for function execution. If this value is null it will default to 30 minutes|None|30|None|None|
   
@@ -122,9 +126,11 @@ Example output:
 ## Troubleshooting
 
 * Some third-party modules defined in the Modules connection input (such as pandas) can take a long time to install. If installation fails, try increasing the Timeout connection input to 900 (15 minutes)
+* Each unique set of modules runs in its own isolated virtual environment. Connections with the same modules share one environment automatically. Conflicting packages across connections are fully supported
 
 # Version History
 
+* 5.2.4 - Action `Run`: Added per connection dependency isolation | Fixed issue related to `ModuleNotFound` when plugin was updated | Updated SDK to the latest version (6.6.0)
 * 5.2.3 - Action: `Run`: Updated default function value | Updated SDK to the latest version (6.5.1)
 * 5.2.2 - Updated dependencies | Updated SDK to the latest version (6.5.0)
 * 5.2.1 - Addressed Snyk Vulnerability | SDK bump to latest version (6.3.4)
