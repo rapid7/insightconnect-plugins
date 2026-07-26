@@ -1,0 +1,27 @@
+{
+	"spec": "cc7af8c3642638c088cf968b404af80b",
+	"manifest": "7e35bb19310ec95abad581e8573e0347",
+	"setup": "8bd3a51df74d2c946566a31971962e57",
+	"schemas": [
+		{
+			"identifier": "check_breach/schema.py",
+			"hash": "a6724193d2b4f6bc5ced22a8fcb45917"
+		},
+		{
+			"identifier": "check_crypto_intel/schema.py",
+			"hash": "cefbb1e639d1f1c37df038045dafe46f"
+		},
+		{
+			"identifier": "check_domain/schema.py",
+			"hash": "eab4fa1a208dc0d6b7e513f0dee767de"
+		},
+		{
+			"identifier": "check_sim_swap/schema.py",
+			"hash": "148e93d81e520dade8ad488e638f0fd8"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "d7555cb4e4f5275f396d007c34153991"
+		}
+	]
+}
