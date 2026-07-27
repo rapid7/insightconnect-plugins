@@ -16,12 +16,15 @@ DEFAULT_ERROR_MESSAGE = "Unknown error occurred. Please contact support or try a
 # gaps) resolves the vast majority of these.
 RETRY_MAX_ATTEMPTS = 3
 RETRY_BACKOFF_SECONDS = [2, 3]
+# Additive jitter (0 to N seconds) on top of each backoff so concurrent jobs that hit a
+# 5xx at the same moment don't retry in lockstep. Kept additive (never subtractive) so a
+# retry can't fire before the ~1-2s indexing window the backoff is sized to cover.
+RETRY_JITTER_SECONDS = 1
 RETRYABLE_STATUS_CODES = {500, 502, 503, 504}
-# Only retry requests that are safe to repeat. Idempotent methods can be re-sent
-# without side effects; POST is excluded (a committed-then-5xx create must not be
-# duplicated) EXCEPT for read-only search endpoints, which are the primary source
-# of the transient 5xx (e.g. investigations/_search after a just-created record).
-IDEMPOTENT_METHODS = {"GET", "HEAD", "OPTIONS", "PUT", "DELETE"}
+# Only retry requests that are safe to repeat. POST is excluded (a committed-then-5xx
+# create must not be duplicated) EXCEPT for read-only search endpoints, which are the
+# primary source of the transient 5xx (e.g. investigations/_search after a just-created
+# record). All other methods the plugin issues (GET, DELETE) are idempotent.
 RETRYABLE_POST_ENDPOINT_SUFFIXES = ("_search", "/search")
 
 # Constants for Get New Alerts trigger.py

@@ -1,6 +1,7 @@
 import asyncio
 import base64
 import json
+import random
 import re
 import time
 import uuid
@@ -14,8 +15,8 @@ from insightconnect_plugin_runtime.helper import clean
 from komand_rapid7_insightidr.connection import Connection
 from komand_rapid7_insightidr.util.constants import (
     DEFAULT_ERROR_MESSAGE,
-    IDEMPOTENT_METHODS,
     RETRY_BACKOFF_SECONDS,
+    RETRY_JITTER_SECONDS,
     RETRY_MAX_ATTEMPTS,
     RETRYABLE_POST_ENDPOINT_SUFFIXES,
     RETRYABLE_STATUS_CODES,
@@ -113,22 +114,20 @@ class ResourceHelper(object):
         """
         Decides whether a request is safe to retry on a transient 5xx.
 
-        Idempotent methods can be re-sent without side effects. POST is excluded so a
-        create that commits server-side before returning a 5xx is never duplicated — the
-        one exception is read-only search POSTs (e.g. investigations/_search), which are
-        the primary source of the transient indexing-lag 5xx and carry no write side effect.
+        POST is the only method we guard: a create that commits server-side before
+        returning a 5xx must never be duplicated by a retry. The one exception is
+        read-only search POSTs (e.g. investigations/_search), which are the primary
+        source of the transient indexing-lag 5xx and carry no write side effect. Every
+        other method the plugin issues (GET, DELETE) is idempotent and safe to re-send.
 
         :param method: HTTP method for the request
         :param endpoint: The request URL (path is inspected for search endpoints)
         :return: True if the request may be retried
         """
-        method = method.upper()
-        if method in IDEMPOTENT_METHODS:
-            return True
-        if method == "POST":
+        if method.upper() == "POST":
             path = endpoint.split("?", 1)[0]
             return path.endswith(RETRYABLE_POST_ENDPOINT_SUFFIXES)
-        return False
+        return True
 
     def _send_with_retry(self, request: requests.Request) -> requests.Response:
         """
@@ -156,9 +155,10 @@ class ResourceHelper(object):
                 if response.status_code not in RETRYABLE_STATUS_CODES:
                     return response
                 backoff = RETRY_BACKOFF_SECONDS[min(attempt - 1, len(RETRY_BACKOFF_SECONDS) - 1)]
+                backoff += random.uniform(0, RETRY_JITTER_SECONDS)
                 self.logger.warning(
                     f"InsightIDR returned a transient status code of {response.status_code} "
-                    f"(request ID: {correlation_id}). Retrying in {backoff}s "
+                    f"(request ID: {correlation_id}). Retrying in {backoff:.1f}s "
                     f"(attempt {attempt + 1} of {RETRY_MAX_ATTEMPTS})."
                 )
                 time.sleep(backoff)
