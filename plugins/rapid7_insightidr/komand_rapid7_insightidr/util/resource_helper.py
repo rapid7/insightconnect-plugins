@@ -2,6 +2,7 @@ import asyncio
 import base64
 import json
 import re
+import time
 import uuid
 from typing import Any, Dict, List
 
@@ -11,7 +12,14 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import clean
 
 from komand_rapid7_insightidr.connection import Connection
-from komand_rapid7_insightidr.util.constants import DEFAULT_ERROR_MESSAGE
+from komand_rapid7_insightidr.util.constants import (
+    DEFAULT_ERROR_MESSAGE,
+    IDEMPOTENT_METHODS,
+    RETRY_BACKOFF_SECONDS,
+    RETRY_MAX_ATTEMPTS,
+    RETRYABLE_POST_ENDPOINT_SUFFIXES,
+    RETRYABLE_STATUS_CODES,
+)
 from komand_rapid7_insightidr.util.util import get_logging_context
 
 
@@ -100,6 +108,63 @@ class ResourceHelper(object):
         # add the request ID to the headers or make a new one if we're running on an orchestrator
         self.headers["R7-Correlation-Id"] = self.logging_context.get("R7-Correlation-Id", str(uuid.uuid4()))
 
+    @staticmethod
+    def _is_retryable_request(method: str, endpoint: str) -> bool:
+        """
+        Decides whether a request is safe to retry on a transient 5xx.
+
+        Idempotent methods can be re-sent without side effects. POST is excluded so a
+        create that commits server-side before returning a 5xx is never duplicated — the
+        one exception is read-only search POSTs (e.g. investigations/_search), which are
+        the primary source of the transient indexing-lag 5xx and carry no write side effect.
+
+        :param method: HTTP method for the request
+        :param endpoint: The request URL (path is inspected for search endpoints)
+        :return: True if the request may be retried
+        """
+        method = method.upper()
+        if method in IDEMPOTENT_METHODS:
+            return True
+        if method == "POST":
+            path = endpoint.split("?", 1)[0]
+            return path.endswith(RETRYABLE_POST_ENDPOINT_SUFFIXES)
+        return False
+
+    def _send_with_retry(self, request: requests.Request) -> requests.Response:
+        """
+        Sends a request, retrying on transient 5xx responses with backoff.
+
+        A newly created record can take a short time to become searchable (~1-2s indexing
+        lag), so a follow-up request can transiently return a 5xx. Retrying over a short
+        window resolves the vast majority of these. Retries are
+        restricted to requests that are safe to repeat (see `_is_retryable_request`) so
+        non-idempotent writes are never duplicated. Non-5xx responses (including 4xx) are
+        returned immediately and handled by the caller; the final 5xx response after all
+        attempts is returned so the caller raises as before.
+
+        :param request: The (unprepared) request to send
+        :return: The requests.Response from the last attempt
+        """
+        correlation_id = self.headers.get("R7-Correlation-Id", "N/A")
+        retryable = self._is_retryable_request(request.method, request.url)
+        with requests.Session() as session:
+            prepared_request = session.prepare_request(request)
+            response = session.send(prepared_request)
+            if not retryable:
+                return response
+            for attempt in range(1, RETRY_MAX_ATTEMPTS):
+                if response.status_code not in RETRYABLE_STATUS_CODES:
+                    return response
+                backoff = RETRY_BACKOFF_SECONDS[min(attempt - 1, len(RETRY_BACKOFF_SECONDS) - 1)]
+                self.logger.warning(
+                    f"InsightIDR returned a transient status code of {response.status_code} "
+                    f"(request ID: {correlation_id}). Retrying in {backoff}s "
+                    f"(attempt {attempt + 1} of {RETRY_MAX_ATTEMPTS})."
+                )
+                time.sleep(backoff)
+                response = session.send(prepared_request)
+        return response
+
     def resource_request(self, endpoint: str, method: str = "get", params: dict = None, payload: dict = None) -> dict:
         """
         Sends a request to API with the provided endpoint and optional method/payload
@@ -119,9 +184,7 @@ class ResourceHelper(object):
             if payload:
                 _request.json = payload
 
-            with requests.Session() as session:
-                prepared_request = session.prepare_request(request=_request)
-                response = session.send(prepared_request)
+            response = self._send_with_retry(_request)
 
         except requests.RequestException as error:
             self.logger.error(error)
@@ -177,9 +240,7 @@ class ResourceHelper(object):
                 files=files,
             )
 
-            with requests.Session() as session:
-                prepared_request = session.prepare_request(request=_request)
-                response = session.send(prepared_request)
+            response = self._send_with_retry(_request)
             if response.status_code == 400:
                 raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.text)
             if response.status_code in [401, 403]:

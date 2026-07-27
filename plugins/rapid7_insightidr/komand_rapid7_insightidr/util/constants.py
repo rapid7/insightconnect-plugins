@@ -10,5 +10,19 @@ THREE_MONTHS_SECONDS = 7776000
 # Constants for resource_helper.py
 DEFAULT_ERROR_MESSAGE = "Unknown error occurred. Please contact support or try again later."
 
+# Retry/backoff for transient 5xx responses from InsightIDR. A newly created record can
+# take a short time to become searchable (~1-2s indexing lag), so a follow-up request can
+# transiently return a 5xx. Retrying with backoff over a ~5s window (2s + 3s across the
+# gaps) resolves the vast majority of these.
+RETRY_MAX_ATTEMPTS = 3
+RETRY_BACKOFF_SECONDS = [2, 3]
+RETRYABLE_STATUS_CODES = {500, 502, 503, 504}
+# Only retry requests that are safe to repeat. Idempotent methods can be re-sent
+# without side effects; POST is excluded (a committed-then-5xx create must not be
+# duplicated) EXCEPT for read-only search endpoints, which are the primary source
+# of the transient 5xx (e.g. investigations/_search after a just-created record).
+IDEMPOTENT_METHODS = {"GET", "HEAD", "OPTIONS", "PUT", "DELETE"}
+RETRYABLE_POST_ENDPOINT_SUFFIXES = ("_search", "/search")
+
 # Constants for Get New Alerts trigger.py
 TOTAL_SIZE = 100
