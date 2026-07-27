@@ -5,7 +5,7 @@ sys.path.append(os.path.abspath("../"))
 
 import logging
 from unittest import TestCase
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -25,85 +25,71 @@ class TestResourceHelperRetry(TestCase):
         self.helper = ResourceHelper({}, logging.getLogger("test"))
         self.endpoint = "https://us.api.insight.rapid7.com/idr/v2/investigations/_search"
 
-    @patch("time.sleep", return_value=None)
-    @patch("requests.Session.send")
-    def test_resource_request_retries_5xx_then_succeeds(self, mock_send: MagicMock, mock_sleep: MagicMock) -> None:
-        mock_send.side_effect = [_make_response(500), _make_response(200, '{"data": "ok"}')]
+        self.mock_sleep = patch("time.sleep", return_value=None).start()
+        self.mock_send = patch("requests.Session.send").start()
+        self.addCleanup(patch.stopall)
+
+    def test_resource_request_retries_5xx_then_succeeds(self) -> None:
+        self.mock_send.side_effect = [_make_response(500), _make_response(200, '{"data": "ok"}')]
 
         result = self.helper.resource_request(self.endpoint, method="post")
 
         self.assertEqual(result["status"], 200)
-        self.assertEqual(mock_send.call_count, 2)
-        mock_sleep.assert_called_once()
+        self.assertEqual(self.mock_send.call_count, 2)
+        self.mock_sleep.assert_called_once()
 
-    @patch("time.sleep", return_value=None)
-    @patch("requests.Session.send")
-    def test_resource_request_persistent_5xx_raises_after_max_attempts(
-        self, mock_send: MagicMock, mock_sleep: MagicMock
-    ) -> None:
-        mock_send.return_value = _make_response(500, '{"message": "boom"}')
+    def test_resource_request_persistent_5xx_raises_after_max_attempts(self) -> None:
+        self.mock_send.return_value = _make_response(500, '{"message": "boom"}')
 
         with self.assertRaises(PluginException):
             self.helper.resource_request(self.endpoint, method="post")
 
-        self.assertEqual(mock_send.call_count, RETRY_MAX_ATTEMPTS)
-        self.assertEqual(mock_sleep.call_count, RETRY_MAX_ATTEMPTS - 1)
+        self.assertEqual(self.mock_send.call_count, RETRY_MAX_ATTEMPTS)
+        self.assertEqual(self.mock_sleep.call_count, RETRY_MAX_ATTEMPTS - 1)
 
-    @patch("time.sleep", return_value=None)
-    @patch("requests.Session.send")
-    def test_resource_request_4xx_not_retried(self, mock_send: MagicMock, mock_sleep: MagicMock) -> None:
-        mock_send.return_value = _make_response(404, '{"message": "nope"}')
+    def test_resource_request_4xx_not_retried(self) -> None:
+        self.mock_send.return_value = _make_response(404, '{"message": "nope"}')
 
         with self.assertRaises(PluginException):
             self.helper.resource_request(self.endpoint, method="get")
 
-        self.assertEqual(mock_send.call_count, 1)
-        mock_sleep.assert_not_called()
+        self.assertEqual(self.mock_send.call_count, 1)
+        self.mock_sleep.assert_not_called()
 
-    @patch("time.sleep", return_value=None)
-    @patch("requests.Session.send")
-    def test_make_request_retries_5xx_then_succeeds(self, mock_send: MagicMock, mock_sleep: MagicMock) -> None:
-        mock_send.side_effect = [_make_response(503), _make_response(200, '{"data": "ok"}')]
+    def test_make_request_retries_5xx_then_succeeds(self) -> None:
+        self.mock_send.side_effect = [_make_response(503), _make_response(200, '{"data": "ok"}')]
 
         result = self.helper.make_request(self.endpoint, method="POST")
 
         self.assertEqual(result, {"data": "ok"})
-        self.assertEqual(mock_send.call_count, 2)
-        mock_sleep.assert_called_once()
+        self.assertEqual(self.mock_send.call_count, 2)
+        self.mock_sleep.assert_called_once()
 
-    @patch("time.sleep", return_value=None)
-    @patch("requests.Session.send")
-    def test_make_request_persistent_5xx_raises_after_max_attempts(
-        self, mock_send: MagicMock, mock_sleep: MagicMock
-    ) -> None:
-        mock_send.return_value = _make_response(502, "gateway error")
+    def test_make_request_persistent_5xx_raises_after_max_attempts(self) -> None:
+        self.mock_send.return_value = _make_response(502, "gateway error")
 
         with self.assertRaises(PluginException):
             self.helper.make_request(self.endpoint, method="POST")
 
-        self.assertEqual(mock_send.call_count, RETRY_MAX_ATTEMPTS)
-        self.assertEqual(mock_sleep.call_count, RETRY_MAX_ATTEMPTS - 1)
+        self.assertEqual(self.mock_send.call_count, RETRY_MAX_ATTEMPTS)
+        self.assertEqual(self.mock_sleep.call_count, RETRY_MAX_ATTEMPTS - 1)
 
-    @patch("time.sleep", return_value=None)
-    @patch("requests.Session.send")
-    def test_make_request_4xx_not_retried(self, mock_send: MagicMock, mock_sleep: MagicMock) -> None:
-        mock_send.return_value = _make_response(400, "bad request")
+    def test_make_request_4xx_not_retried(self) -> None:
+        self.mock_send.return_value = _make_response(400, "bad request")
 
         with self.assertRaises(PluginException):
             self.helper.make_request(self.endpoint, method="POST")
 
-        self.assertEqual(mock_send.call_count, 1)
-        mock_sleep.assert_not_called()
+        self.assertEqual(self.mock_send.call_count, 1)
+        self.mock_sleep.assert_not_called()
 
-    @patch("time.sleep", return_value=None)
-    @patch("requests.Session.send")
-    def test_non_idempotent_post_5xx_not_retried(self, mock_send: MagicMock, mock_sleep: MagicMock) -> None:
+    def test_non_idempotent_post_5xx_not_retried(self) -> None:
         # A create POST (not a search) must not be retried on 5xx to avoid duplicate writes.
         create_endpoint = "https://us.api.insight.rapid7.com/idr/v2/investigations"
-        mock_send.return_value = _make_response(500, '{"message": "boom"}')
+        self.mock_send.return_value = _make_response(500, '{"message": "boom"}')
 
         with self.assertRaises(PluginException):
             self.helper.make_request(create_endpoint, method="POST")
 
-        self.assertEqual(mock_send.call_count, 1)
-        mock_sleep.assert_not_called()
+        self.assertEqual(self.mock_send.call_count, 1)
+        self.mock_sleep.assert_not_called()

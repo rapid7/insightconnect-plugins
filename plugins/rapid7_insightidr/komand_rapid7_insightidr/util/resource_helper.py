@@ -121,12 +121,11 @@ class ResourceHelper(object):
         other method the plugin issues (GET, DELETE) is idempotent and safe to re-send.
 
         :param method: HTTP method for the request
-        :param endpoint: The request URL (path is inspected for search endpoints)
+        :param endpoint: The request URL (inspected for search endpoints)
         :return: True if the request may be retried
         """
         if method.upper() == "POST":
-            path = endpoint.split("?", 1)[0]
-            return path.endswith(RETRYABLE_POST_ENDPOINT_SUFFIXES)
+            return endpoint.endswith(RETRYABLE_POST_ENDPOINT_SUFFIXES)
         return True
 
     def _send_with_retry(self, request: requests.Request) -> requests.Response:
