@@ -20,6 +20,8 @@ RETRY_BACKOFF_SECONDS = [2, 3]
 # 5xx at the same moment don't retry in lockstep. Kept additive (never subtractive) so a
 # retry can't fire before the ~1-2s indexing window the backoff is sized to cover.
 RETRY_JITTER_SECONDS = 1
+# Transient/gateway 5xx worth retrying. Permanent 5xx (e.g. 501, 505) are excluded since
+# retrying cannot help.
 RETRYABLE_STATUS_CODES = {500, 502, 503, 504}
 # Only retry requests that are safe to repeat. POST is excluded (a committed-then-5xx
 # create must not be duplicated) EXCEPT for read-only search endpoints, which are the

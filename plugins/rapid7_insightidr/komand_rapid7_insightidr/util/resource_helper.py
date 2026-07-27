@@ -155,7 +155,7 @@ class ResourceHelper(object):
                 if response.status_code not in RETRYABLE_STATUS_CODES:
                     return response
                 backoff = RETRY_BACKOFF_SECONDS[min(attempt - 1, len(RETRY_BACKOFF_SECONDS) - 1)]
-                backoff += random.uniform(0, RETRY_JITTER_SECONDS)
+                backoff += random.uniform(0, RETRY_JITTER_SECONDS)  # nosec B311 - jitter timing, not security-sensitive
                 self.logger.warning(
                     f"InsightIDR returned a transient status code of {response.status_code} "
                     f"(request ID: {correlation_id}). Retrying in {backoff:.1f}s "
