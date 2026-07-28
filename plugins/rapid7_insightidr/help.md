@@ -3428,6 +3428,7 @@ Example output:
 
 # Version History
 
+* 12.0.9 - Retry requests with backoff on transient InsightIDR 5xx responses to resolve intermittent 500 errors
 * 12.0.8 - Enabled cache to configure the appropriate permissions in the Dockerfile
 * 12.0.7 - Updated dependencies | SDK bump to 6.6.0
 * 12.0.6 - Updated dependencies | SDK bump to 6.4.3
