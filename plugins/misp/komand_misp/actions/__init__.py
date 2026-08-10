@@ -25,4 +25,3 @@ from .add_attribute.action import AddAttribute
 from .search_events.action import SearchEvents
 
 from .publish.action import Publish
-

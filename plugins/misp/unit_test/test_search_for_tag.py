@@ -29,17 +29,13 @@ class TestSearchForTag(unittest.TestCase):
         }
 
     @patch("time.sleep", side_effect=StopLoop)
-    def test_search_for_tag_calls_search_index_with_tags(self, _mock_sleep: MagicMock) -> None:
-        # search_index returns a bare list of event dicts (no "response" wrapper),
-        # matching PyMISP 2.4.194 and the working search_events action.
+    def test_search_for_tag_calls_search_index_with_tags(self, mock_sleep):
         self.mock_client.search_index.return_value = [{"id": "1"}, {"id": "2"}]
 
         validate(self.params, SearchForTagInput.schema)
         with self.assertRaises(StopLoop):
             self.trigger.run(self.params)
 
-        # Regression guard for SI-35006: the trigger must use `tags=` (plural),
-        # not `tag=`, otherwise PyMISP raises TypeError.
         self.mock_client.search_index.assert_called_once_with(tags="test-tag")
 
         output = {"events": ["1", "2"]}
@@ -47,7 +43,7 @@ class TestSearchForTag(unittest.TestCase):
         validate(output, SearchForTagOutput.schema)
 
     @patch("time.sleep", side_effect=StopLoop)
-    def test_search_for_tag_no_events_does_not_send(self, _mock_sleep: MagicMock) -> None:
+    def test_search_for_tag_no_events_does_not_send(self, mock_sleep):
         self.mock_client.search_index.return_value = []
 
         validate(self.params, SearchForTagInput.schema)
@@ -58,9 +54,7 @@ class TestSearchForTag(unittest.TestCase):
         self.trigger.send.assert_not_called()
 
     @patch("time.sleep", side_effect=StopLoop)
-    def test_search_for_tag_event_missing_id_raises(self, _mock_sleep: MagicMock) -> None:
-        # An event without an "id" key must surface as a KeyError, not be silently
-        # dropped, so the failure is visible in the trigger logs.
+    def test_search_for_tag_event_missing_id_raises(self, mock_sleep):
         self.mock_client.search_index.return_value = [{"uuid": "no-id-here"}]
 
         validate(self.params, SearchForTagInput.schema)
@@ -70,7 +64,3 @@ class TestSearchForTag(unittest.TestCase):
         self.mock_client.search_index.assert_called_once_with(tags="test-tag")
         self.trigger.logger.error.assert_called_once()
         self.trigger.send.assert_not_called()
-
-
-if __name__ == "__main__":
-    unittest.main()

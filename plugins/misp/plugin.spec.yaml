@@ -8,7 +8,7 @@ version: 6.0.1
 connection_version: 5
 sdk:
   type: slim
-  version: 6.1.0
+  version: 6.6.0
   user: nobody
 vendor: rapid7
 support: community
@@ -27,7 +27,7 @@ references:
   - "[MISP API](https://circl.lu/doc/misp/automation/index.html)"
   - "[pymisp](https://github.com/MISP/PyMISP)"
 version_history:
-  - "6.0.1 - Fix `Search for Tag` trigger failing due to incorrect `search_index` parameter"
+  - "6.0.1 - Fix `Search for Tag` trigger failing due to incorrect `search_index` parameter | Update SDK to the latest (6.6.0)"
   - "6.0.0 - Removed deprecated actions and updated API calls for several actions"
   - "5.0.3 - SSL configuration for all actions"
   - "5.0.2 - Update to latest SDK | Bumping `pymisp` version"
