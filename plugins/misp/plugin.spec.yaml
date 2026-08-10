@@ -4,7 +4,7 @@ products: [insightconnect]
 name: misp
 title: MISP
 description: "[MISP](http://www.misp-project.org/) is an open source threat sharing platform. Gather, store and then find correlations of indicators of compromise. Quality of data is determined by the open source community. This plugin utilizes the [MISP API](https://circl.lu/doc/misp/automation/index.html) and leverages the [pymisp](https://github.com/CIRCL/PyMISP) library"
-version: 6.0.0
+version: 6.0.1
 connection_version: 5
 sdk:
   type: slim
@@ -27,6 +27,7 @@ references:
   - "[MISP API](https://circl.lu/doc/misp/automation/index.html)"
   - "[pymisp](https://github.com/MISP/PyMISP)"
 version_history:
+  - "6.0.1 - Fix `Search for Tag` trigger failing due to incorrect `search_index` parameter"
   - "6.0.0 - Removed deprecated actions and updated API calls for several actions"
   - "5.0.3 - SSL configuration for all actions"
   - "5.0.2 - Update to latest SDK | Bumping `pymisp` version"

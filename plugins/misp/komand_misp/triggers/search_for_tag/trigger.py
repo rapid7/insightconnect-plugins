@@ -22,12 +22,7 @@ class SearchForTag(insightconnect_plugin_runtime.Trigger):
 
             client = self.connection.client
             event_id = []
-            events = client.search_index(tag=tag)
-            try:
-                events = events["response"]
-            except KeyError:
-                self.logger.error("Unexpected search return, %s")
-                raise
+            events = client.search_index(tags=tag)
             for event in events:
                 try:
                     event_id.append(event["id"])

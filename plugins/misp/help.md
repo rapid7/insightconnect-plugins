@@ -919,6 +919,7 @@ Example output:
 
 # Version History
 
+* 6.0.1 - Fix `Search for Tag` trigger failing due to incorrect `search_index` parameter
 * 6.0.0 - Removed deprecated actions and updated API calls for several actions
 * 5.0.3 - SSL configuration for all actions
 * 5.0.2 - Update to latest SDK | Bumping `pymisp` version
