@@ -27,7 +27,7 @@ class SearchForTag(insightconnect_plugin_runtime.Trigger):
                 try:
                     event_id.append(event["id"])
                 except KeyError:
-                    self.logger.error("No id found, %s")
+                    self.logger.error("No id found in event: %s", event)
                     raise
             if remove:
                 for event in event_id:
