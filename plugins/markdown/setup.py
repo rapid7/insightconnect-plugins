@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="markdown-rapid7-plugin",
-    version="4.0.2",
+    version="4.0.3",
     description="[Markdown](https://en.wikipedia.org/wiki/Markdown) is a lightweight markup language with plain text formatting syntax. This plugin utilizes [pandoc](https://pandoc.org/) via [pypandoc](https://pypi.python.org/pypi/pypandoc/) to manipulate Markdown content",
     author="rapid7",
     author_email="",
