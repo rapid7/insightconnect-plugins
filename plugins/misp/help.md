@@ -265,12 +265,12 @@ This action is used to export all attributes in CSV format
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |category|string|None|False|Attribute category|None|Example attribute category|None|None|
 |event_id|[]string|None|False|Array of events to download|None|["1"]|None|None|
-|from|string|None|False|From date E.g. 2015-02-15|None|2015-02-15|None|None|
+|from|string|None|False|From date E.g. 2015-02-15T00:00:00|None|2015-02-15T00:00:00|None|None|
 |include|boolean|True|True|Include attributes not marked as to_ids|None|True|None|None|
 |include_context|boolean|True|True|Include event data with each attribute|None|True|None|None|
 |last|string|None|False|Events within x amount of time E.g. 5d|None|5d|None|None|
 |tags|[]string|None|False|Array of tags to include in results|None|["tag"]|None|None|
-|to|string|None|False|To date E.g. 2015-02-17|None|2015-02-17|None|None|
+|to|string|None|False|To date E.g. 2015-02-17T00:00:00|None|2015-02-17T00:00:00|None|None|
 |type|string|None|False|Attribute type e.g. URL, SHA256|None|URL|None|None|
   
 Example input:
@@ -281,14 +281,14 @@ Example input:
   "event_id": [
     "1"
   ],
-  "from": "2015-02-15",
+  "from": "2015-02-15T00:00:00",
   "include": true,
   "include_context": true,
   "last": "5d",
   "tags": [
     "tag"
   ],
-  "to": "2015-02-17",
+  "to": "2015-02-17T00:00:00",
   "type": "URL"
 }
 ```
@@ -317,10 +317,10 @@ This action is used to export all events in XML format
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |encode_attachments|boolean|True|True|Encode attachments in export|None|True|None|None|
 |event_id|string|None|False|Specify single event to export|None|1099|None|None|
-|from|string|None|False|From date E.g. 2015-02-15|None|2015-02-15|None|None|
+|from|string|None|False|From date E.g. 2015-02-15T00:00:00|None|2015-02-15T00:00:00|None|None|
 |last|string|None|False|Events within x amount of time E.g. 5d|None|5d|None|None|
 |tags|[]string|None|False|Array of tags to include in results|None|["tag"]|None|None|
-|to|string|None|False|To date E.g. 2015-02-17|None|2015-02-17|None|None|
+|to|string|None|False|To date E.g. 2015-02-17T00:00:00|None|2015-02-17T00:00:00|None|None|
   
 Example input:
 
@@ -328,12 +328,12 @@ Example input:
 {
   "encode_attachments": true,
   "event_id": 1099,
-  "from": "2015-02-15",
+  "from": "2015-02-15T00:00:00",
   "last": "5d",
   "tags": [
     "tag"
   ],
-  "to": "2015-02-17"
+  "to": "2015-02-17T00:00:00"
 }
 ```
 
@@ -360,20 +360,20 @@ This action is used to export RPZ zone files
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |event_id|string|None|False|Specify single event to export|None|1099|None|None|
-|from_date|string|None|False|From date E.g. 2015-02-15|None|2015-02-15|None|None|
+|from_date|string|None|False|From date E.g. 2015-02-15T00:00:00|None|2015-02-15T00:00:00|None|None|
 |tags|[]string|None|False|Array of tags to include in results|None|["example tag"]|None|None|
-|to_date|string|None|False|To date E.g. 2015-02-17|None|2015-02-17|None|None|
+|to_date|string|None|False|To date E.g. 2015-02-17T00:00:00|None|2015-02-17T00:00:00|None|None|
   
 Example input:
 
 ```
 {
   "event_id": 1099,
-  "from_date": "2015-02-15",
+  "from_date": "2015-02-15T00:00:00",
   "tags": [
     "example tag"
   ],
-  "to_date": "2015-02-17"
+  "to_date": "2015-02-17T00:00:00"
 }
 ```
 
@@ -402,10 +402,10 @@ This action is used to export Snort or Suricata rules
 |event_id|string|None|False|Narrow results to a single event|None|1099|None|None|
 |format|string|None|True|Export format as either Suricata or Snort|["suricata", "snort"]|suricata|None|None|
 |frame|boolean|True|True|Commented out explanation framing the data|None|True|None|None|
-|from|string|None|False|From date E.g. 2015-02-15|None|2015-02-15|None|None|
+|from|string|None|False|From date E.g. 2015-02-15T00:00:00|None|2015-02-15T00:00:00|None|None|
 |last|string|None|False|Events within x amount of time E.g. 5d|None|5d|None|None|
 |tags|[]string|None|False|Array of tags to include in results|None|["example tag"]|None|None|
-|to|string|None|False|To date E.g. 2015-02-17|None|2015-02-17|None|None|
+|to|string|None|False|To date E.g. 2015-02-17T00:00:00|None|2015-02-17T00:00:00|None|None|
   
 Example input:
 
@@ -414,12 +414,12 @@ Example input:
   "event_id": 1099,
   "format": "suricata",
   "frame": true,
-  "from": "2015-02-15",
+  "from": "2015-02-15T00:00:00",
   "last": "5d",
   "tags": [
     "example tag"
   ],
-  "to": "2015-02-17"
+  "to": "2015-02-17T00:00:00"
 }
 ```
 
@@ -447,10 +447,10 @@ This action is used to export events in STIX format
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |encode_attachments|boolean|True|True|Encode attachments in export|None|True|None|None|
 |event_id|string|None|False|Specify single event to export|None|1099|None|None|
-|from|string|None|False|From date E.g. 2015-02-15|None|2015-02-15|None|None|
+|from|string|None|False|From date E.g. 2015-02-15T00:00:00|None|2015-02-15T00:00:00|None|None|
 |last|string|None|False|Events within x amount of time E.g. 5d|None|5d|None|None|
 |tags|[]string|None|False|Array of tags to include in results|None|["example tag"]|None|None|
-|to|string|None|False|To date E.g. 2015-02-17|None|2015-02-17|None|None|
+|to|string|None|False|To date E.g. 2015-02-17T00:00:00|None|2015-02-17T00:00:00|None|None|
   
 Example input:
 
@@ -458,12 +458,12 @@ Example input:
 {
   "encode_attachments": true,
   "event_id": 1099,
-  "from": "2015-02-15",
+  "from": "2015-02-15T00:00:00",
   "last": "5d",
   "tags": [
     "example tag"
   ],
-  "to": "2015-02-17"
+  "to": "2015-02-17T00:00:00"
 }
 ```
 
@@ -675,8 +675,8 @@ This action is used to search for events
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |analysis|string|Do not search on|False|Search by analysis level|["Do not search on", "Initial", "Ongoing", "Completed"]|Do not search on|None|None|
 |category|string|None|False|Search by attribute category|None|Person|None|None|
-|date_from|string|None|False|Search after this date e.g. 2018-03-22|None|2018-03-22|None|None|
-|date_until|string|None|False|Search before this date e.g. 2018-03-22|None|2018-03-22|None|None|
+|date_from|string|None|False|Search after this date e.g. 2018-03-22T00:00:00|None|2018-03-22T00:00:00|None|None|
+|date_until|string|None|False|Search before this date e.g. 2018-03-22T00:00:00|None|2018-03-22T00:00:00|None|None|
 |event|string|None|False|Search by event ID|None|1099|None|None|
 |organization|string|None|False|Search by organization|None|Organization name|None|None|
 |published|string|Do not search on|False|Search by if published|["Do not search on", "True", "False"]|Do not search on|None|None|
@@ -691,8 +691,8 @@ Example input:
 {
   "analysis": "Do not search on",
   "category": "Person",
-  "date_from": "2018-03-22",
-  "date_until": "2018-03-22",
+  "date_from": "2018-03-22T00:00:00",
+  "date_until": "2018-03-22T00:00:00",
   "event": 1099,
   "organization": "Organization name",
   "published": "Do not search on",
@@ -919,7 +919,7 @@ Example output:
 
 # Version History
 
-* 6.0.1 - Fix `Search for Tag` trigger failing due to incorrect `search_index` parameter | Update SDK to the latest (6.6.0)
+* 6.0.1 - Fix `Search for Tag` trigger failing due to incorrect `search_index` parameter | Grant `nobody` write access to the trigger state cache directory | Update SDK to the latest (6.6.0)
 * 6.0.0 - Removed deprecated actions and updated API calls for several actions
 * 5.0.3 - SSL configuration for all actions
 * 5.0.2 - Update to latest SDK | Bumping `pymisp` version

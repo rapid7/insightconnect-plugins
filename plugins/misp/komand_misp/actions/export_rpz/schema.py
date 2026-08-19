@@ -33,7 +33,7 @@ class ExportRpzInput(insightconnect_plugin_runtime.Input):
     "from_date": {
       "type": "string",
       "title": "From Date",
-      "description": "From date E.g. 2015-02-15",
+      "description": "From date E.g. 2015-02-15T00:00:00",
       "order": 3
     },
     "tags": {
@@ -48,7 +48,7 @@ class ExportRpzInput(insightconnect_plugin_runtime.Input):
     "to_date": {
       "type": "string",
       "title": "To Date",
-      "description": "To date E.g. 2015-02-17",
+      "description": "To date E.g. 2015-02-17T00:00:00",
       "order": 4
     }
   },

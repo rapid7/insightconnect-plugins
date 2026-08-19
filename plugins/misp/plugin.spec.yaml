@@ -10,6 +10,7 @@ sdk:
   type: slim
   version: 6.6.0
   user: nobody
+enable_cache: true
 vendor: rapid7
 support: community
 supported_versions: ["2.4.194"]
@@ -27,7 +28,7 @@ references:
   - "[MISP API](https://circl.lu/doc/misp/automation/index.html)"
   - "[pymisp](https://github.com/MISP/PyMISP)"
 version_history:
-  - "6.0.1 - Fix `Search for Tag` trigger failing due to incorrect `search_index` parameter | Update SDK to the latest (6.6.0)"
+  - "6.0.1 - Fix `Search for Tag` trigger failing due to incorrect `search_index` parameter | Grant `nobody` write access to the trigger state cache directory | Update SDK to the latest (6.6.0)"
   - "6.0.0 - Removed deprecated actions and updated API calls for several actions"
   - "5.0.3 - SSL configuration for all actions"
   - "5.0.2 - Update to latest SDK | Bumping `pymisp` version"
@@ -734,14 +735,14 @@ actions:
         required: false
       from:
         title: From Date
-        description: From date E.g. 2015-02-15
-        example: "2015-02-15"
+        description: From date E.g. 2015-02-15T00:00:00
+        example: "2015-02-15T00:00:00"
         type: string
         required: false
       to:
         title: To Date
-        description: To date E.g. 2015-02-17
-        example: "2015-02-17"
+        description: To date E.g. 2015-02-17T00:00:00
+        example: "2015-02-17T00:00:00"
         type: string
         required: false
       last:
@@ -801,14 +802,14 @@ actions:
         required: true
       from:
         title: From Date
-        description: From date E.g. 2015-02-15
-        example: "2015-02-15"
+        description: From date E.g. 2015-02-15T00:00:00
+        example: "2015-02-15T00:00:00"
         type: string
         required: false
       to:
         title: To Date
-        description: To date E.g. 2015-02-17
-        example: "2015-02-17"
+        description: To date E.g. 2015-02-17T00:00:00
+        example: "2015-02-17T00:00:00"
         type: string
         required: false
       last:
@@ -858,14 +859,14 @@ actions:
         required: false
       from:
         title: From Date
-        description: From date E.g. 2015-02-15
-        example: "2015-02-15"
+        description: From date E.g. 2015-02-15T00:00:00
+        example: "2015-02-15T00:00:00"
         type: string
         required: false
       to:
         title: To Date
-        description: To date E.g. 2015-02-17
-        example: "2015-02-17"
+        description: To date E.g. 2015-02-17T00:00:00
+        example: "2015-02-17T00:00:00"
         type: string
         required: false
       last:
@@ -906,14 +907,14 @@ actions:
         required: false
       from:
         title: From Date
-        description: From date E.g. 2015-02-15
-        example: "2015-02-15"
+        description: From date E.g. 2015-02-15T00:00:00
+        example: "2015-02-15T00:00:00"
         type: string
         required: false
       to:
         title: To Date
-        description: To date E.g. 2015-02-17
-        example: "2015-02-17"
+        description: To date E.g. 2015-02-17T00:00:00
+        example: "2015-02-17T00:00:00"
         type: string
         required: false
       last:
@@ -947,14 +948,14 @@ actions:
         required: false
       from_date:
         title: From Date
-        description: From date E.g. 2015-02-15
-        example: "2015-02-15"
+        description: From date E.g. 2015-02-15T00:00:00
+        example: "2015-02-15T00:00:00"
         type: string
         required: false
       to_date:
         title: To Date
-        description: To date E.g. 2015-02-17
-        example: "2015-02-17"
+        description: To date E.g. 2015-02-17T00:00:00
+        example: "2015-02-17T00:00:00"
         type: string
         required: false
     output:
@@ -1075,14 +1076,14 @@ actions:
         required: false
       date_from:
         title: Date
-        description: Search after this date e.g. 2018-03-22
-        example: "2018-03-22"
+        description: Search after this date e.g. 2018-03-22T00:00:00
+        example: "2018-03-22T00:00:00"
         type: string
         required: false
       date_until:
         title: Date Until
-        description: Search before this date e.g. 2018-03-22
-        example: "2018-03-22"
+        description: Search before this date e.g. 2018-03-22T00:00:00
+        example: "2018-03-22T00:00:00"
         type: string
         required: false
       threat_level:

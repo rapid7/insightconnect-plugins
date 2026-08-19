@@ -53,7 +53,7 @@ class ExportRulesInput(insightconnect_plugin_runtime.Input):
     "from": {
       "type": "string",
       "title": "From Date",
-      "description": "From date E.g. 2015-02-15",
+      "description": "From date E.g. 2015-02-15T00:00:00",
       "order": 5
     },
     "last": {
@@ -74,7 +74,7 @@ class ExportRulesInput(insightconnect_plugin_runtime.Input):
     "to": {
       "type": "string",
       "title": "To Date",
-      "description": "To date E.g. 2015-02-17",
+      "description": "To date E.g. 2015-02-17T00:00:00",
       "order": 6
     }
   },
