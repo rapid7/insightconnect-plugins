@@ -3,7 +3,6 @@ import json
 import insightconnect_plugin_runtime
 from .schema import SearchEventsInput, SearchEventsOutput, Input, Output, Component
 
-
 # Custom imports below
 
 

@@ -1,0 +1,83 @@
+import os
+import sys
+import unittest
+from unittest.mock import call, patch, MagicMock
+
+sys.path.append(os.path.abspath("../"))
+from komand_misp.triggers.search_for_tag.trigger import SearchForTag
+from komand_misp.triggers.search_for_tag.schema import SearchForTagInput, SearchForTagOutput
+from jsonschema import validate
+
+
+class StopLoop(Exception):
+    """Raised from a mocked time.sleep to break the trigger's `while True` loop after one iteration."""
+
+
+class TestSearchForTag(unittest.TestCase):
+    def setUp(self):
+        self.trigger = SearchForTag()
+        self.trigger.connection = MagicMock()
+        self.trigger.logger = MagicMock()
+        self.trigger.send = MagicMock()
+        self.mock_client = MagicMock()
+        self.trigger.connection.client = self.mock_client
+
+        self.params = {
+            "interval": 5,
+            "tag": "test-tag",
+            "remove": False,
+        }
+
+    @patch("time.sleep", side_effect=StopLoop)
+    def test_search_for_tag_calls_search_index_with_tags(self, mock_sleep):
+        self.mock_client.search_index.return_value = [{"id": "1"}, {"id": "2"}]
+
+        validate(self.params, SearchForTagInput.schema)
+        with self.assertRaises(StopLoop):
+            self.trigger.run(self.params)
+
+        self.mock_client.search_index.assert_called_once_with(tags="test-tag")
+
+        output = {"events": ["1", "2"]}
+        self.trigger.send.assert_called_once_with(output)
+        validate(output, SearchForTagOutput.schema)
+
+    @patch("time.sleep", side_effect=StopLoop)
+    def test_search_for_tag_no_events_does_not_send(self, mock_sleep):
+        self.mock_client.search_index.return_value = []
+
+        validate(self.params, SearchForTagInput.schema)
+        with self.assertRaises(StopLoop):
+            self.trigger.run(self.params)
+
+        self.mock_client.search_index.assert_called_once_with(tags="test-tag")
+        self.trigger.send.assert_not_called()
+
+    @patch("time.sleep", side_effect=StopLoop)
+    def test_search_for_tag_event_missing_id_raises(self, mock_sleep):
+        self.mock_client.search_index.return_value = [{"uuid": "no-id-here"}]
+
+        validate(self.params, SearchForTagInput.schema)
+        with self.assertRaises(KeyError):
+            self.trigger.run(self.params)
+
+        self.mock_client.search_index.assert_called_once_with(tags="test-tag")
+        self.trigger.logger.error.assert_called_once_with("No id found in event: %s", {"uuid": "no-id-here"})
+        self.trigger.send.assert_not_called()
+
+    @patch("time.sleep", side_effect=StopLoop)
+    def test_search_for_tag_remove_untags_events(self, mock_sleep):
+        params = {**self.params, "remove": True}
+        self.mock_client.search_index.return_value = [{"id": "1"}, {"id": "2"}]
+        self.mock_client.get_event.side_effect = lambda event: {"Event": {"uuid": f"uuid-{event}"}}
+
+        validate(params, SearchForTagInput.schema)
+        with self.assertRaises(StopLoop):
+            self.trigger.run(params)
+
+        self.mock_client.search_index.assert_called_once_with(tags="test-tag")
+        self.assertEqual(
+            self.mock_client.untag.call_args_list,
+            [call("uuid-1", tag="test-tag"), call("uuid-2", tag="test-tag")],
+        )
+        self.trigger.send.assert_called_once_with({"events": ["1", "2"]})

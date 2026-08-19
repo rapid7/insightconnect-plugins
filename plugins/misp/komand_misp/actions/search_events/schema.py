@@ -53,13 +53,13 @@ class SearchEventsInput(insightconnect_plugin_runtime.Input):
     "date_from": {
       "type": "string",
       "title": "Date",
-      "description": "Search after this date e.g. 2018-03-22",
+      "description": "Search after this date e.g. 2018-03-22T00:00:00",
       "order": 3
     },
     "date_until": {
       "type": "string",
       "title": "Date Until",
-      "description": "Search before this date e.g. 2018-03-22",
+      "description": "Search before this date e.g. 2018-03-22T00:00:00",
       "order": 4
     },
     "event": {

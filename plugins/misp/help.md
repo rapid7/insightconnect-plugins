@@ -281,14 +281,14 @@ Example input:
   "event_id": [
     "1"
   ],
-  "from": "2015-02-15",
+  "from": "2015-02-15T00:00:00",
   "include": true,
   "include_context": true,
   "last": "5d",
   "tags": [
     "tag"
   ],
-  "to": "2015-02-17",
+  "to": "2015-02-17T00:00:00",
   "type": "URL"
 }
 ```
@@ -328,12 +328,12 @@ Example input:
 {
   "encode_attachments": true,
   "event_id": 1099,
-  "from": "2015-02-15",
+  "from": "2015-02-15T00:00:00",
   "last": "5d",
   "tags": [
     "tag"
   ],
-  "to": "2015-02-17"
+  "to": "2015-02-17T00:00:00"
 }
 ```
 
@@ -369,11 +369,11 @@ Example input:
 ```
 {
   "event_id": 1099,
-  "from_date": "2015-02-15",
+  "from_date": "2015-02-15T00:00:00",
   "tags": [
     "example tag"
   ],
-  "to_date": "2015-02-17"
+  "to_date": "2015-02-17T00:00:00"
 }
 ```
 
@@ -414,12 +414,12 @@ Example input:
   "event_id": 1099,
   "format": "suricata",
   "frame": true,
-  "from": "2015-02-15",
+  "from": "2015-02-15T00:00:00",
   "last": "5d",
   "tags": [
     "example tag"
   ],
-  "to": "2015-02-17"
+  "to": "2015-02-17T00:00:00"
 }
 ```
 
@@ -458,12 +458,12 @@ Example input:
 {
   "encode_attachments": true,
   "event_id": 1099,
-  "from": "2015-02-15",
+  "from": "2015-02-15T00:00:00",
   "last": "5d",
   "tags": [
     "example tag"
   ],
-  "to": "2015-02-17"
+  "to": "2015-02-17T00:00:00"
 }
 ```
 
@@ -691,8 +691,8 @@ Example input:
 {
   "analysis": "Do not search on",
   "category": "Person",
-  "date_from": "2018-03-22",
-  "date_until": "2018-03-22",
+  "date_from": "2018-03-22T00:00:00",
+  "date_until": "2018-03-22T00:00:00",
   "event": 1099,
   "organization": "Organization name",
   "published": "Do not search on",
@@ -919,6 +919,7 @@ Example output:
 
 # Version History
 
+* 6.0.1 - Fix `Search for Tag` trigger failing due to incorrect `search_index` parameter | Grant `nobody` write access to the trigger state cache directory | Update SDK to the latest (6.6.0)
 * 6.0.0 - Removed deprecated actions and updated API calls for several actions
 * 5.0.3 - SSL configuration for all actions
 * 5.0.2 - Update to latest SDK | Bumping `pymisp` version

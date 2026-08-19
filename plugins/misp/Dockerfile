@@ -1,20 +1,36 @@
-FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.1.0
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.6.0 AS builder
+
+WORKDIR /workspace
+
+ADD ./plugin.spec.yaml /plugin.spec.yaml
+ADD ./requirements.txt /workspace/requirements.txt
+ADD . /workspace
+
+
+
+RUN pip install .
+RUN pip uninstall -y setuptools
+
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.6.0
 
 LABEL organization=rapid7
 LABEL sdk=python
 
-WORKDIR /python/src
+WORKDIR /workspace
 
-ADD ./plugin.spec.yaml /plugin.spec.yaml
-ADD ./requirements.txt /python/src/requirements.txt
+COPY --from=builder /workspace /workspace
+COPY --from=builder /plugin.spec.yaml /plugin.spec.yaml
+
 
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-ADD . /python/src
+ENV PYTHONPATH="/workspace:${PYTHONPATH}"
 
-RUN python setup.py build && python setup.py install
+RUN rm -rf /root/.cache;
+RUN mkdir -p /workspace/cache && chown -R nobody /workspace/cache
+RUN mkdir -p /workspace/tmp && chown -R nobody /workspace/tmp
 
 # User to run plugin code. The two supported users are: root, nobody
 USER nobody
 
-ENTRYPOINT ["/usr/local/bin/komand_misp"]
+ENTRYPOINT ["python", "/workspace/bin/komand_misp"]
