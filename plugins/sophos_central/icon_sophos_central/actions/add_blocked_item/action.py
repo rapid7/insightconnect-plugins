@@ -15,16 +15,25 @@ class AddBlockedItem(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        type_ = params.get(Input.TYPE)
+        properties_file_name = params.get(Input.PROPERTIESFILENAME)
+        properties_path = params.get(Input.PROPERTIESPATH)
+        properties_sha256 = params.get(Input.PROPERTIESSHA256)
+        properties_certificate_signer = params.get(Input.PROPERTIESCERTIFICATESIGNER)
+        comment = params.get(Input.COMMENT)
+        # END INPUT BINDING - DO NOT REMOVE
+
         self.logger.info("Blocking new item...")
         item_data = {
-            "type": params.get(Input.TYPE),
+            "type": type_,
             "properties": {
-                "fileName": params.get(Input.PROPERTIESFILENAME),
-                "path": params.get(Input.PROPERTIESPATH),
-                "sha256": params.get(Input.PROPERTIESSHA256),
-                "certificateSigner": params.get(Input.PROPERTIESCERTIFICATESIGNER),
+                "fileName": properties_file_name,
+                "path": properties_path,
+                "sha256": properties_sha256,
+                "certificateSigner": properties_certificate_signer,
             },
-            "comment": params.get(Input.COMMENT),
+            "comment": comment,
         }
 
         return {Output.BLOCKEDITEM: self.connection.client.add_blocked_item(clean(item_data))}

@@ -16,17 +16,28 @@ class AddAllowedItem(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        type_ = params.get(Input.TYPE)
+        properties_file_name = params.get(Input.PROPERTIESFILENAME)
+        properties_path = params.get(Input.PROPERTIESPATH)
+        properties_sha256 = params.get(Input.PROPERTIESSHA256)
+        properties_certificate_signer = params.get(Input.PROPERTIESCERTIFICATESIGNER)
+        comment = params.get(Input.COMMENT)
+        origin_person_id = params.get(Input.ORIGINPERSONID)
+        origin_endpoint_id = params.get(Input.ORIGINENDPOINTID)
+        # END INPUT BINDING - DO NOT REMOVE
+
         json_data = {
-            "type": params.get(Input.TYPE),
+            "type": type_,
             "properties": {
-                "fileName": params.get(Input.PROPERTIESFILENAME),
-                "path": params.get(Input.PROPERTIESPATH),
-                "sha256": params.get(Input.PROPERTIESSHA256),
-                "certificateSigner": params.get(Input.PROPERTIESCERTIFICATESIGNER),
+                "fileName": properties_file_name,
+                "path": properties_path,
+                "sha256": properties_sha256,
+                "certificateSigner": properties_certificate_signer,
             },
-            "comment": params.get(Input.COMMENT),
-            "originPersonId": params.get(Input.ORIGINPERSONID),
-            "originEndpointId": params.get(Input.ORIGINENDPOINTID),
+            "comment": comment,
+            "originPersonId": origin_person_id,
+            "originEndpointId": origin_endpoint_id,
         }
 
         return {Output.ALLOWEDITEM: self.connection.client.add_allowed_item(clean(json_data))}

@@ -14,6 +14,9 @@ class RemoveBlockedItem(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         item_id = params.get(Input.BLOCKEDITEMID)
+        # END INPUT BINDING - DO NOT REMOVE
+
         self.logger.info(f"Removing blocked item with ID: {item_id}.")
         return {Output.SUCCESS: self.connection.client.remove_blocked_item(item_id)}

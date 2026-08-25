@@ -4,7 +4,7 @@ products: [insightconnect]
 name: sophos_central
 title: Sophos Central
 description: Sophos Central is a unified console for managing Sophos products. Using the Sophos Central plugin for Rapid7 InsightConnect, users can get alerts, endpoints, and SIEM events
-version: 4.4.1
+version: 4.4.2
 connection_version: 4
 supported_versions: ["Sophos Central API 2023-03-10"]
 vendor: rapid7
@@ -12,7 +12,7 @@ support: rapid7
 status: []
 sdk:
   type: slim
-  version: 6.2.0
+  version: 6.6.0
   user: nobody
 key_features:
   - "Get endpoints"
@@ -50,6 +50,7 @@ hub_tags:
   keywords: [sophos, firewall]
   features: []
 version_history:
+  - "4.4.2 - Fix issue where `Get Agent Details` could fail to find agents beyond the first page of results | SDK bump to 6.6.0"
   - "4.4.1 - Bumping requirements.txt | SDK bump to 6.2.0"
   - "4.4.0 - Add new actions: `Isolate Endpoint`, `Get Endpoint Groups`, `Add Endpoint Group`, `Get Endpoint Group`, `Add Endpoint to Group`, `Remove Endpoint from Group`, `Get Allowed Items`, `Add Allowed Item`, `Remove Allowed Item`, `Get Blocked Items`, `Add Blocked Item`, `Remove Blocked Item`, `Get Endpoints in Group` | `Check Tamper Protection Status`, `Antivirus Scan`: fix issue with handling pagination in retrieving endpoint id"
   - "4.3.1 - Add custom User-Agent string to API calls to identify API request"
@@ -1331,7 +1332,7 @@ actions:
         description: Tamper status for provided agent
         type: check_tamper_protection_status
         required: true
-        example: {}
+        example: {"enabled": true}
   get_blocked_items:
     title: Get Blocked Items
     description: Get a list of blocked items

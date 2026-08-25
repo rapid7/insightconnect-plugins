@@ -15,12 +15,18 @@ class GetBlockedItems(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        page = params.get(Input.PAGE)
+        page_size = params.get(Input.PAGESIZE)
+        page_total = params.get(Input.PAGETOTAL)
+        # END INPUT BINDING - DO NOT REMOVE
+
         self.logger.info("Getting list of blocked items...")
 
         parameters = {
-            "page": params.get(Input.PAGE),
-            "pageSize": params.get(Input.PAGESIZE),
-            "pageTotal": params.get(Input.PAGETOTAL),
+            "page": page,
+            "pageSize": page_size,
+            "pageTotal": page_total,
         }
 
         result = self.connection.client.get_blocked_items(clean(parameters))
