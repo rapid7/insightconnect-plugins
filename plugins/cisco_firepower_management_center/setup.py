@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="cisco_firepower_management_center-rapid7-plugin",
-    version="2.1.6",
+    version="2.1.7",
     description="[Cisco Firepower Management Center](https://www.cisco.com/c/en/us/products/security/firepower-management-center/index.html) centralizes management of Cisco security solutions. The InsightConnect plugin can block URLs/hosts by adding address objects to a group tied to an existing deny-all rule; removing the object from that group unblocks. This plugin automates blocking via address object management actions",
     author="rapid7",
     author_email="",
