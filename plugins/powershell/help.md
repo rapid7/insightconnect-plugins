@@ -188,8 +188,9 @@ Invoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw
 
 # Version History
 
+* 3.0.16 - Updated dependencies
 * 3.0.15 - Updated dependencies | Updated SDK to the latest version (6.6.0)
-* 3.0.14 - Updated dependencies | | Updated SDK to the latest version (6.5.1)
+* 3.0.14 - Updated dependencies | Updated SDK to the latest version (6.5.1)
 * 3.0.13 - Updated dependencies
 * 3.0.12 - Updated dependencies | Updated SDK to the latest version (6.4.3)
 * 3.0.11 - Updated dependencies | Updated SDK to the latest version (6.4.1)
