@@ -7,7 +7,7 @@ from sys import argv
 Name = "Sophos Central"
 Vendor = "rapid7"
 Version = "4.4.2"
-Description = "Sophos Central is a unified console for managing Sophos products. Using the Sophos Central plugin for Rapid7 InsightConnect, users can get alerts, endpoints, and SIEM events"
+Description = "[Sophos Central](https://www.sophos.com) is a unified console for managing Sophos products. Using the Sophos Central plugin for Rapid7 InsightConnect, users can get alerts, endpoints, and SIEM events"
 
 
 def main():

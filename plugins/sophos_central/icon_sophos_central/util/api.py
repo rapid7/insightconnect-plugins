@@ -83,19 +83,14 @@ class SophosCentralAPI:
 
         raise PluginException(preset=PluginException.Preset.NOT_FOUND)
 
+    def _collect_items(self, fetch_page: Callable[[Optional[str]], dict]) -> List[dict]:
+        return [item for page in self._paginate_by_key(fetch_page) for item in page.get("items", [])]
+
     def get_all_endpoints(self, since: str = None) -> List[dict]:
-        return [
-            item
-            for page in self._paginate_by_key(lambda page_key: self.get_endpoints(since=since, page_key=page_key))
-            for item in page.get("items", [])
-        ]
+        return self._collect_items(lambda page_key: self.get_endpoints(since=since, page_key=page_key))
 
     def get_all_alerts(self, since: str = None) -> List[dict]:
-        return [
-            item
-            for page in self._paginate_by_key(lambda page_key: self.get_alerts(since=since, key=page_key))
-            for item in page.get("items", [])
-        ]
+        return self._collect_items(lambda page_key: self.get_alerts(since=since, key=page_key))
 
     def iter_blacklist_items(self) -> Iterator[dict]:
         for page in self._paginate_by_page_number(self.get_blacklists):

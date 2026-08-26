@@ -86,6 +86,11 @@ class Util:
             if method == "POST":
                 if json_data.get("properties").get("sha256") == "050c194cbbb":
                     return MockResponse(201, "add_blocked_item.json.resp")
+                if (
+                    json_data.get("properties").get("sha256")
+                    == "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+                ):
+                    return MockResponse(201, "add_blocked_item.json.resp")
                 if json_data.get("properties").get("sha256") == "duplicatedSha":
                     return MockResponse(409, "")
 
@@ -217,6 +222,11 @@ class Util:
             == "https://api-us03.central.sophos.com/endpoint/v1/endpoint-groups/9de5069c-5afe-602b-2ea0-a04b66beb2c0/endpoints"
         ):
             return MockResponse(200, "get_endpoints_in_group.json.resp")
+
+        if url == "https://api-us03.central.sophos.com/common/v1/alerts":
+            if params.get("pageFromKey") == "alertsKey":
+                return MockResponse(200, "get_alerts_page_2.json.resp")
+            return MockResponse(200, "get_alerts_page_1.json.resp")
 
         if url == "https://api-us03.central.sophos.com/endpoint/v1/endpoints":
             if params.get("pageFromKey") == "exampleKey":

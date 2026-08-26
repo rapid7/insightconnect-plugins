@@ -1,6 +1,6 @@
 # Description
 
-Sophos Central is a unified console for managing Sophos products. Using the Sophos Central plugin for Rapid7 InsightConnect, users can get alerts, endpoints, and SIEM events
+[Sophos Central](https://www.sophos.com) is a unified console for managing Sophos products. Using the Sophos Central plugin for Rapid7 InsightConnect, users can get alerts, endpoints, and SIEM events
 
 # Key Features
 
@@ -369,13 +369,13 @@ This action is used to get alerts for a customer based on the parameters provide
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|from_date|string|None|False|The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Must be within last 24 hours|None|2019-09-23 12:02:01.700000+00:00|None|None|
+|from_date|string|None|False|The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Must be within last 24 hours|None|2019-09-23T12:02:01+00:00|None|None|
   
 Example input:
 
 ```
 {
-  "from_date": "2019-09-23 12:02:01.700000+00:00"
+  "from_date": "2019-09-23T12:02:01+00:00"
 }
 ```
 
@@ -574,13 +574,13 @@ This action is used to get endpoints for a customer based on the last seen after
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|since|string|None|False|Last seen after date and time (UTC) or duration inclusive, eg. 2019-09-23T12:02:01.700Z, -P1D, PT20M, PT4H500S|None|2019-09-23 12:02:01.700000+00:00|None|None|
+|since|string|None|False|Last seen after date and time (UTC) or duration inclusive, eg. 2019-09-23T12:02:01+00:00, -P1D, PT20M, PT4H500S|None|2019-09-23T12:02:01+00:00|None|None|
   
 Example input:
 
 ```
 {
-  "since": "2019-09-23 12:02:01.700000+00:00"
+  "since": "2019-09-23T12:02:01+00:00"
 }
 ```
 
@@ -1302,7 +1302,7 @@ Example output:
 
 # Version History
 
-* 4.4.2 - Fix issue where `Get Agent Details` could fail to find agents beyond the first page of results | SDK bump to 6.6.0
+* 4.4.2 - Fix issue where `Get Agent Details` could fail to find agents beyond the first page of results | Fix issue where `Get Endpoints` and `Get Alerts` returned only the first page of results | Fix issue where `Blacklist` could fail to unblacklist a hash found beyond the first page of blocked items | SDK bump to 6.6.0
 * 4.4.1 - Bumping requirements.txt | SDK bump to 6.2.0
 * 4.4.0 - Add new actions: `Isolate Endpoint`, `Get Endpoint Groups`, `Add Endpoint Group`, `Get Endpoint Group`, `Add Endpoint to Group`, `Remove Endpoint from Group`, `Get Allowed Items`, `Add Allowed Item`, `Remove Allowed Item`, `Get Blocked Items`, `Add Blocked Item`, `Remove Blocked Item`, `Get Endpoints in Group` | `Check Tamper Protection Status`, `Antivirus Scan`: fix issue with handling pagination in retrieving endpoint id
 * 4.3.1 - Add custom User-Agent string to API calls to identify API request
