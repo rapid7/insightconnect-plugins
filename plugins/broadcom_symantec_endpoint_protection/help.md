@@ -483,6 +483,7 @@ Example output:
 
 # Version History
 
+* 2.0.8 - Updated dependencies
 * 2.0.7 - Updated dependencies | Updated SDK to the latest version (6.6.0)
 * 2.0.6 - Updated dependencies
 * 2.0.5 - Updated dependencies | Updated SDK to the latest version (6.4.3)
