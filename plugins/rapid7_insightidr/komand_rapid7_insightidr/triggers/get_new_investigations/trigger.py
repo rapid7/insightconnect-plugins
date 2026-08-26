@@ -12,8 +12,12 @@ from datetime import datetime, UTC, timedelta
 from typing import Dict, Any, List
 
 DEFAULT_FREQUENCY_SECONDS = 15
-INITIAL_LOOKBACK_MINUTES = 1
+INITIAL_LOOKBACK_MINUTES = 10
+# set this to be half of the INITIAL_LOOKBACK_MINUTES so the second run doesn't expand the window beyond lookback
+API_LATENCY_OVERLAP_MINUTES = 5
 MAX_NUMBER_OF_RETRIES = 20
+
+STATE_KEY = "RRNs"
 
 
 class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
@@ -26,22 +30,27 @@ class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
             output=GetNewInvestigationsOutput(),
         )
 
+    @staticmethod
+    def get_current_time() -> datetime:
+        """Returns current UTC time - extracted for test mocking without adding freezegun dependency to the plugin"""
+        return datetime.now(UTC)
+
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         search = params.get(Input.SEARCH)
         frequency = params.get(Input.FREQUENCY, DEFAULT_FREQUENCY_SECONDS)
         # END INPUT BINDING - DO NOT REMOVE
 
-        # Initialize the trigger starting point
-        retry_attempts_counter = 0
-        last_poll_time = datetime.now(UTC) - timedelta(minutes=INITIAL_LOOKBACK_MINUTES)
+        # Initialize the trigger starting point & set to dedupe investigations RRNs
+        retry_attempts_counter, prev_investigations = 0, set(self.state.get(STATE_KEY, []))
+        last_poll_time = self.get_current_time() - timedelta(minutes=INITIAL_LOOKBACK_MINUTES)
         self.logger.info("Get Investigations: trigger started")
         self.logger.info(f"Investigations search criteria: {search}")
         self.logger.info(f"Initial poll time set to: '{last_poll_time.isoformat()}'")
 
         while True:
-            # Calculate current time for this iteration (delay by 5 second to avoid overlap) and log search details
-            current_time = datetime.now(UTC) - timedelta(seconds=5)
+            # Calculate current time for this iteration (delay 5s to ensure time is safely in past before API indexes)
+            current_time = self.get_current_time() - timedelta(seconds=5)
             self.logger.info(
                 f"Searching for new investigations from '{last_poll_time.isoformat()}' to '{current_time.isoformat()}'"
             )
@@ -68,17 +77,20 @@ class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
             # If investigations were found, log total and send them one by one
             # Otherwise, log that no new investigations were found
             if investigations:
-                self.logger.info(f"Found total of {len(investigations)} new investigations.")
-                for investigation in investigations:
-                    self.send_investigation(investigation)
+                self.logger.info(f"Retrieved total of {len(investigations)} investigations.")
+                prev_investigations = self.dedupe_and_send_investigations(investigations, prev_investigations)
             else:
                 self.logger.info("No new investigations found.")
 
             # Update last poll time and reset retry counter for next iteration
-            # Overlap by 1 second to handle IDR API's open time boundaries (exclusive start_time/end_time)
-            # This ensures investigations created at exact boundary timestamps are included in the next poll
-            last_poll_time = current_time
+            # Overlap window by 5 min to catch late-indexed investigations (IDR indexing is often slow)
+            last_poll_time = current_time - timedelta(minutes=API_LATENCY_OVERLAP_MINUTES)
+            self.logger.info(f"Checkpoint for next iteration {last_poll_time.isoformat()} to allow for API latency")
             retry_attempts_counter = 0
+
+            # save the state for fallback in case of plugin restart
+            self.state[STATE_KEY] = list(prev_investigations)
+            self._save_state()
 
             # Back off before next iteration
             self.logger.info(f"Sleeping for {frequency} seconds...")
@@ -119,8 +131,26 @@ class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
                 investigations.extend(response.get("data", []))
         return investigations
 
-    def send_investigation(self, investigation: Dict[str, Any]) -> None:
-        self.logger.info(f"Investigation found: {investigation.get('rrn', 'N/A')}")
+    def dedupe_and_send_investigations(self, investigations: List[Dict[str, Any]], previous_investigations: set) -> set:
+        latest_investigations = set()
+        for investigation in investigations:
+            rrn = investigation.get("rrn", "N/A")
+            # Track all RRNs from current poll for state management (enables deduplication across restarts)
+            latest_investigations.add(rrn)
+            if rrn not in previous_investigations:
+                self.send_investigation(investigation, rrn)
+            else:
+                self.logger.info(f"Duplicate investigation found and skipped: {rrn}")
+        # make sure we don't return an empty set if no new investigations were found, so we don't lose the previous state
+        if latest_investigations:
+            self.logger.info("Saving investigations RRNs retrieved during this execution.")
+            previous_investigations = latest_investigations
+        else:
+            self.logger.info("No new investigations were sent. Retaining existing state for next iteration.")
+        return previous_investigations
+
+    def send_investigation(self, investigation: Dict[str, Any], rrn: str) -> None:
+        self.logger.info(f"Investigation found: {rrn}")
         self.send({Output.INVESTIGATION: clean(investigation)})
 
     @staticmethod
