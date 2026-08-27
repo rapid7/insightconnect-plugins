@@ -14,4 +14,8 @@ class GetEndpointGroup(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {Output.ENDPOINTGROUP: self.connection.client.get_endpoint_group(params.get(Input.GROUPID))}
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        group_id = params.get(Input.GROUPID)
+        # END INPUT BINDING - DO NOT REMOVE
+
+        return {Output.ENDPOINTGROUP: self.connection.client.get_endpoint_group(group_id)}

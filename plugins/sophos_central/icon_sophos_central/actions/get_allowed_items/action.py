@@ -15,12 +15,18 @@ class GetAllowedItems(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        params = {
-            "page": params.get(Input.PAGE),
-            "pageSize": params.get(Input.PAGESIZE),
-            "pageTotal": params.get(Input.PAGETOTAL),
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        page = params.get(Input.PAGE)
+        page_size = params.get(Input.PAGESIZE)
+        page_total = params.get(Input.PAGETOTAL)
+        # END INPUT BINDING - DO NOT REMOVE
+
+        query_params = {
+            "page": page,
+            "pageSize": page_size,
+            "pageTotal": page_total,
         }
 
-        output = self.connection.client.get_allowed_items(params=clean(params))
+        output = self.connection.client.get_allowed_items(params=clean(query_params))
 
         return clean({Output.ITEMS: output.get("items", []), Output.PAGES: output.get("pages", {})})

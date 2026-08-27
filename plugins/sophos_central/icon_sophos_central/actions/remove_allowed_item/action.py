@@ -14,6 +14,8 @@ class RemoveAllowedItem(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {
-            Output.SUCCESS: self.connection.client.remove_allowed_item(params.get(Input.ALLOWEDITEMID)).get("deleted")
-        }
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        allowed_item_id = params.get(Input.ALLOWEDITEMID)
+        # END INPUT BINDING - DO NOT REMOVE
+
+        return {Output.SUCCESS: self.connection.client.remove_allowed_item(allowed_item_id).get("deleted")}
