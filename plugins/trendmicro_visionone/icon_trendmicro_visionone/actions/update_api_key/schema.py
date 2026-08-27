@@ -4,7 +4,9 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Updates the specified API key"
+    DESCRIPTION = (
+        "Updates the specified API key**API key role permissions required:****API Keys**- View- Configure Settings"
+    )
 
 
 class Input:

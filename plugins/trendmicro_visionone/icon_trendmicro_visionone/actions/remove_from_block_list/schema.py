@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Removes an email address, file SHA-1, domain, IP address, or URL that was added to the Suspicious Object List using the Add to block list action"
+    DESCRIPTION = "Removes an email address, file SHA-1, domain, IP address, or URL that was added to the Suspicious Object List using the Add to block list action**API key role permissions required:****Response Management**- View, filter, and search (Task List tab)- Add to block list**Suspicious Object Management**- View, filter, and search- Manage lists and configure settings"
 
 
 class Input:

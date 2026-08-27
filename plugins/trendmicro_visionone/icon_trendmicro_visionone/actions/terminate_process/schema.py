@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Terminates a process that is running on an endpoint"
+    DESCRIPTION = "Terminates a process that is running on an endpoint**API key role permissions required:****Response Management**- View, filter, and search (Task List tab)- Terminate process"
 
 
 class Input:

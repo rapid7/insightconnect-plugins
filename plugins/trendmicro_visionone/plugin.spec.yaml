@@ -1197,7 +1197,14 @@ triggers:
         example: '[{"analysis_completion_date_time":"2023-01-11T22:40:52Z","expired_date_time":"2023-02-10T22:40:52Z","risk_level":"high","root_sha1":"ccc8c28226224755091a3462ff7704e350f2114b","type":"fileSha1","value":"0d8b8f0baf22e65a80148bcebaef082ef08932d2"}]'
   poll_alert_list:
     title: Poll Alert List
-    description: Polls information about workbench alerts that match the specified criteria in a paginated list
+    description: |-
+      Polls information about workbench alerts that match the specified criteria in a paginated list
+      
+      **API key role permissions required:**
+
+      **Workbench**
+
+      - View, filter, and search
     input:
       start_date_time:
         title: Start Date Time
@@ -1227,7 +1234,14 @@ triggers:
         example: '["<<referenced:bigdata>>"]'
   poll_oat_list:
     title: Poll OAT List
-    description: Polls information about Observed Attack Techniques (OATs) events that match the specified criteria in a list
+    description: |-
+      Polls information about Observed Attack Techniques (OATs) events that match the specified criteria in a list
+      
+      **API key role permissions required:**
+
+      **Observed Attack Techniques**
+
+      - View, filter, and search
     input:
       detected_start_date_time:
         title: Detected Start Date Time
@@ -1281,7 +1295,15 @@ triggers:
 actions:
   enable_account:
     title: Enable Account
-    description: Allows the user to sign in to new application and browser sessions. Supported IAM systems - Azure AD and Active Directory (on-premises)
+    description: |-
+      Allows the user to sign in to new application and browser sessions. Supported IAM systems - Azure AD and Active Directory (on-premises)
+      
+      **API key role permissions required:**
+
+      **Response Management**
+
+      - View, filter, and search (Task List tab)
+      - Enable/Disable user account, force sign out, force password reset
     input:
       account_identifiers:
         title: Account Identifiers
@@ -1299,7 +1321,15 @@ actions:
         example: '[{"status":202,"task_id":"00002148"}]'
   disable_account:
     title: Disable Account
-    description: Signs the user out of all active application and browser sessions, and prevents the user from signing in any new session. Supported IAM systems - Azure AD and Active Directory (on-premises)
+    description: |-
+      Signs the user out of all active application and browser sessions, and prevents the user from signing in any new session. Supported IAM systems - Azure AD and Active Directory (on-premises)
+      
+      **API key role permissions required:**
+
+      **Response Management**
+
+      - View, filter, and search (Task List tab)
+      - Enable/Disable user account, force sign out, force password reset
     input:
       account_identifiers:
         title: Account Identifiers
@@ -1317,7 +1347,15 @@ actions:
         example: '[{"status":202,"task_id":"00002129"}]'
   sign_out_account:
     title: Sign out Account
-    description: Signs the user out of all active application and browser sessions. Supported IAM systems - Azure AD
+    description: |-
+      Signs the user out of all active application and browser sessions. Supported IAM systems - Azure AD
+      
+      **API key role permissions required:**
+
+      **Response Management**
+
+      - View, filter, and search (Task List tab)
+      - Enable/Disable user account, force sign out, force password reset
     input:
       account_identifiers:
         title: Account Identifiers
@@ -1335,7 +1373,15 @@ actions:
         example: '[{"status":202,"task_id":"00002130"}]'
   reset_password_account:
     title: Reset Password Account
-    description: Signs the user out of all active application and browser sessions, and forces the user to create a new password during the next sign-in attempt. Supported IAM systems - Azure AD and Active Directory (on-premises)
+    description: |-
+      Signs the user out of all active application and browser sessions, and forces the user to create a new password during the next sign-in attempt. Supported IAM systems - Azure AD and Active Directory (on-premises)
+      
+      **API key role permissions required:**
+
+      **Response Management**
+
+      - View, filter, and search (Task List tab)
+      - Enable/Disable user account, force sign out, force password reset
     input:
       account_identifiers:
         title: Account Identifiers
@@ -1353,7 +1399,15 @@ actions:
         example: '[{"status":202,"task_id":"00002131"}]'
   quarantine_email_message:
     title: Quarantine Email Message
-    description: Moves a message from a mailbox to the quarantine folder
+    description: |-
+      Moves a message from a mailbox to the quarantine folder
+      
+      **API key role permissions required:**
+
+      **Response Management**
+
+      - View, filter, and search (Task List tab)
+      - Quarantine/Restore messages
     input:
       email_identifiers:
         title: Email Identifiers
@@ -1370,7 +1424,15 @@ actions:
         example: '[{"status":202,"task_id":"00002153"}]'
   delete_email_message:
     title: Delete Email Message
-    description: Deletes a message from a mailbox
+    description: |-
+      Deletes a message from a mailbox
+      
+      **API key role permissions required:**
+
+      **Response Management**
+
+      - View, filter, and search (Task List tab)
+      - Delete messages
     input:
       email_identifiers:
         title: Email Identifiers
@@ -1387,7 +1449,15 @@ actions:
         example: '[{"status":202,"task_id":"00002127"}]'
   restore_email_message:
     title: Restore Email Message
-    description: Restores a quarantined email message
+    description: |-
+      Restores a quarantined email message
+      
+      **API key role permissions required:**
+
+      **Response Management**
+
+      - View, filter, and search (Task List tab)
+      - Quarantine/Restore messages
     input:
       email_identifiers:
         title: Email Identifiers
@@ -1404,7 +1474,15 @@ actions:
         example: '[{"status":202,"task_id":"00002154"}]'
   isolate_endpoint:
     title: Isolate Endpoint
-    description: Disconnects an endpoint from the network (but allows communication with the managing Trend Micro product)
+    description: |-
+      Disconnects an endpoint from the network (but allows communication with the managing Trend Micro product)
+      
+      **API key role permissions required:**
+
+      **Response Management**
+
+      - View, filter, and search (Task List tab)
+      - Isolate endpoint
     input:
       endpoint_identifiers:
         title: Endpoint Identifiers
@@ -1421,7 +1499,15 @@ actions:
         example: '[{"status":202,"task_id":"00002126"}]'
   restore_endpoint:
     title: Restore Endpoint
-    description: Restores network connectivity to an endpoint that applied the isolate endpoint action
+    description: |-
+      Restores network connectivity to an endpoint that applied the isolate endpoint action
+      
+      **API key role permissions required:**
+
+      **Response Management**
+
+      - View, filter, and search (Task List tab)
+      - Isolate endpoint
     input:
       endpoint_identifiers:
         title: Endpoint Identifiers
@@ -1438,7 +1524,15 @@ actions:
         example: '[{"status":202,"task_id":"00002132"}]'
   add_to_exception_list:
     title: Add to Exception List
-    description: Adds domains, file SHA-1 values, IP addresses, or URLs to the Exception List and prevents these objects from being added to the Suspicious Object List
+    description: |-
+      Adds domains, file SHA-1 values, IP addresses, or URLs to the Exception List and prevents these objects from being added to the Suspicious Object List
+      
+      **API key role permissions required:**
+
+      **Suspicious Object Management**
+
+      - View, filter, and search
+      - Manage lists and configure settings
     input:
       block_objects:
         title: Block Objects
@@ -1455,7 +1549,15 @@ actions:
         example: '[{"status":201,"task_id":"None"},{"status":201,"task_id":"None"}]'
   remove_from_exception_list:
     title: Remove from Exception List
-    description: Removes domains, file SHA-1 values, IP addresses, or URLs from the Exception List
+    description: |-
+      Removes domains, file SHA-1 values, IP addresses, or URLs from the Exception List
+      
+      **API key role permissions required:**
+
+      **Suspicious Object Management**
+
+      - View, filter, and search
+      - Manage lists and configure settings
     input:
       block_objects:
         title: Block Objects
@@ -1472,7 +1574,20 @@ actions:
         example: '[{"status":204,"task_id":"None"}]'
   remove_from_block_list:
     title: Remove from Block List
-    description: Removes an email address, file SHA-1, domain, IP address, or URL that was added to the Suspicious Object List using the Add to block list action
+    description: |-
+      Removes an email address, file SHA-1, domain, IP address, or URL that was added to the Suspicious Object List using the Add to block list action
+      
+      **API key role permissions required:**
+
+      **Response Management**
+
+      - View, filter, and search (Task List tab)
+      - Add to block list
+
+      **Suspicious Object Management**
+
+      - View, filter, and search
+      - Manage lists and configure settings
     input:
       block_objects:
         title: Block Objects
@@ -1489,7 +1604,15 @@ actions:
         example: '[{"status":202,"task_id":"00002141"},{"status":202,"task_id":"00002142"}]'
   add_to_suspicious_list:
     title: Add to Suspicious List
-    description: Adds domains, file SHA-1/SHA-256 values, IP addresses, senderMailAddress, or URLs to the Block Object List
+    description: |-
+      Adds domains, file SHA-1/SHA-256 values, IP addresses, senderMailAddress, or URLs to the Block Object List
+      
+      **API key role permissions required:**
+
+      **Suspicious Object Management**
+
+      - View, filter, and search
+      - Manage lists and configure settings
     input:
       suspicious_block_objects:
         title: Suspicious Block Objects
@@ -1506,7 +1629,15 @@ actions:
         example: '[{"status":201,"task_id":"None"},{"status":201,"task_id":"None"}]'
   remove_from_suspicious_list:
     title: Remove from Suspicious List
-    description: Removes domains, file SHA-1 values, IP addresses, or URLs from the Suspicious Object List
+    description: |-
+      Removes domains, file SHA-1 values, IP addresses, or URLs from the Suspicious Object List
+      
+      **API key role permissions required:**
+
+      **Suspicious Object Management**
+
+      - View, filter, and search
+      - Manage lists and configure settings
     input:
       block_objects:
         title: Block Objects
@@ -1523,7 +1654,14 @@ actions:
         example: '[{"status":204,"task_id":"None"}]'
   get_endpoint_data:
     title: Get Endpoint Data
-    description: Retrieves information about a specific endpoint
+    description: |-
+      Retrieves information about a specific endpoint
+      
+      **API key role permissions required:**
+
+      **Endpoint Inventory**
+
+      - View
     input:
       fields:
         title: Fields
@@ -1551,7 +1689,15 @@ actions:
           10 Enterprise Evaluation (64 bit) build 17763","product_code":"sao","installed_product_codes":["xes"]}]'
   terminate_process:
     title: Terminate Process
-    description: Terminates a process that is running on an endpoint
+    description: |-
+      Terminates a process that is running on an endpoint
+      
+      **API key role permissions required:**
+
+      **Response Management**
+
+      - View, filter, and search (Task List tab)
+      - Terminate process
     input:
       process_identifiers:
         title: Process Identifiers
@@ -1568,7 +1714,15 @@ actions:
         example: '[{"status":202,"task_id":"00002133"}]'
   get_sandbox_submission_status:
     title: Get Sandbox Submission Status
-    description: Retrieves the status of a sandbox analysis submission
+    description: |-
+      Retrieves the status of a sandbox analysis submission
+      
+      **API key role permissions required:**
+
+      **Sandbox Analysis**
+
+      - View, filter, and search
+      - Submit objects
     input:
       task_id:
         title: Task ID
@@ -1733,7 +1887,15 @@ actions:
         example: .exe
   collect_file:
     title: Collect File
-    description: Collects a file from one or more endpoints and then sends the files to Trend Vision One in a password-protected archive Note- You can specify either the computer name- endpointName or the GUID of the installed agent program- agentGuid
+    description: |-
+      Collects a file from one or more endpoints and then sends the files to Trend Vision One in a password-protected archive Note- You can specify either the computer name- endpointName or the GUID of the installed agent program- agentGuid
+      
+      **API key role permissions required:**
+
+      **Response Management**
+
+      - View, filter, and search (Task List tab)
+      - Collect file
     input:
       collect_files:
         title: Collect Files
@@ -1751,7 +1913,15 @@ actions:
         example: '[{"status":202,"task_id":"00002195"}]'
   get_task_result:
     title: Get Task Result
-    description: Retrieves an object containing the results of a response task in JSON format
+    description: |-
+      Retrieves an object containing the results of a response task in JSON format
+      
+      **API key role permissions required:**
+
+      **Response Management**
+
+      - View, filter, and search (Task List tab)
+      - Download task result
     input:
       task_id:
         title: Task ID
@@ -1935,7 +2105,15 @@ actions:
         example: temp/images/image.png
   download_sandbox_investigation_package:
     title: Download Sandbox Investigation Package
-    description: Downloads the investigation package based on submission ID
+    description: |-
+      Downloads the investigation package based on submission ID
+      
+      **API key role permissions required:**
+
+      **Sandbox Analysis**
+
+      - View, filter, and search
+      - Submit objects
     input:
       id:
         title: ID
@@ -1966,7 +2144,15 @@ actions:
         example: '{"content":"dGVzdA==","filename":"r7-test11.zip"}'
   get_sandbox_suspicious_list:
     title: Get Sandbox Suspicious List
-    description: Downloads the suspicious object list associated to the specified object. Note ~ Suspicious Object Lists are only available for objects with a high risk level
+    description: |-
+      Downloads the suspicious object list associated to the specified object. Note ~ Suspicious Object Lists are only available for objects with a high risk level
+      
+      **API key role permissions required:**
+
+      **Sandbox Analysis**
+
+      - View, filter, and search
+      - Submit objects
     input:
       id:
         title: ID
@@ -1997,7 +2183,15 @@ actions:
         example: '[{"analysis_completion_date_time":"2023-01-11T22:40:52Z","expired_date_time":"2023-02-10T22:40:52Z","risk_level":"high","root_sha1":"ccc8c28226224755091a3462ff7704e350f2114b","type":"fileSha1","value":"0d8b8f0baf22e65a80148bcebaef082ef08932d2"}]'
   download_sandbox_analysis_result:
     title: Download Sandbox Analysis Result
-    description: Downloads the analysis result for an object submitted to sandbox for analysis based on the submission ID
+    description: |-
+      Downloads the analysis result for an object submitted to sandbox for analysis based on the submission ID
+      
+      **API key role permissions required:**
+
+      **Sandbox Analysis**
+
+      - View, filter, and search
+      - Submit objects
     input:
       id:
         title: ID
@@ -2028,7 +2222,15 @@ actions:
         example: '{"content":"dGVzdA==","filename":"r7-test11.pdf"}'
   submit_file_to_sandbox:
     title: Submit File to Sandbox
-    description: Submits a file to the sandbox for analysis (Note. For more information about the supported file types, see the Trend Vision One Online Help. Submissions require credits. Does not require credits in regions where Sandbox Analysis has not been officially released.)
+    description: |-
+      Submits a file to the sandbox for analysis (Note. For more information about the supported file types, see the Trend Vision One Online Help. Submissions require credits. Does not require credits in regions where Sandbox Analysis has not been officially released.)
+      
+      **API key role permissions required:**
+
+      **Sandbox Analysis**
+
+      - View, filter, and search
+      - Submit objects
     input:
       file:
         title: File
@@ -2075,7 +2277,14 @@ actions:
         example: QWxhZGRpbjpvcGVuIHNlc2FtZQ==
   add_alert_note:
     title: Add Alert Note
-    description: Attaches a note to a workbench alert
+    description: |-
+      Attaches a note to a workbench alert
+      
+      **API key role permissions required:**
+
+      **Workbench**
+
+      - Modify alert details
     input:
       alert_id:
         title: Alert ID
@@ -2104,7 +2313,14 @@ actions:
         example: 345
   edit_alert_status:
     title: Edit Alert Status
-    description: Updates the status of a workbench alert
+    description: |-
+      Updates the status of a workbench alert
+
+      **API key role permissions required:**
+
+      **Workbench**
+
+      - Modify alert details
     input:
       id:
         title: ID
@@ -2138,7 +2354,14 @@ actions:
         example: 202
   get_alert_list:
     title: Get Alert List
-    description: Displays information about workbench alerts that match the specified criteria in a paginated list
+    description: |-
+      Displays information about workbench alerts that match the specified criteria in a paginated list
+      
+      **API key role permissions required:**
+
+      **Workbench**
+
+      - View, filter, and search
     input:
       start_date_time:
         title: Start Date Time
@@ -2167,7 +2390,14 @@ actions:
         example: '["<<referenced:bigdata>>"]'
   get_exception_list:
     title: Get Exception List
-    description: Retrieves information about domains, file SHA-1, file SHA-256, IP addresses, sender addresses, or URLs in the Exception List and displays it in a paginated list
+    description: |-
+      Retrieves information about domains, file SHA-1, file SHA-256, IP addresses, sender addresses, or URLs in the Exception List and displays it in a paginated list
+      
+      **API key role permissions required:**
+
+      **Suspicious Object Management**
+
+      - View, filter, and search
     output:
       exception_objects:
         title: Exception Objects
@@ -2177,7 +2407,14 @@ actions:
         example: '[{"description":"ip exception","last_modified_date_time":"2023-04-14T06:53:59Z","type":"ip","value":"1.6.6.3"}]'
   get_suspicious_list:
     title: Get Suspicious List
-    description: Retrieves information about domains, file SHA-1, file SHA-256, IP addresses, email addresses, or URLs in the Suspicious Object List and displays the information in a paginated list
+    description: |-
+      Retrieves information about domains, file SHA-1, file SHA-256, IP addresses, email addresses, or URLs in the Suspicious Object List and displays the information in a paginated list
+      
+      **API key role permissions required:**
+
+      **Suspicious Object Management**
+
+      - View, filter, and search
     output:
       suspicious_objects:
         title: Suspicious Objects
@@ -2187,7 +2424,20 @@ actions:
         example: '[{"description":"","expired_date_time":"2023-05-14T06:55:29Z","in_exception_list":false,"last_modified_date_time":"2023-04-14T06:55:29Z","risk_level":"high","scan_action":"log","type":"ip","value":"6.6.6.3"}]'
   add_to_block_list:
     title: Add to Block List
-    description: Adds an email address, file SHA-1, domain, IP address, or URL to the Suspicious Object List, which blocks the objects on subsequent detections
+    description: |-
+      Adds an email address, file SHA-1, domain, IP address, or URL to the Suspicious Object List, which blocks the objects on subsequent detections
+      
+      **API key role permissions required:**
+
+      **Response Management**
+
+      - View, filter, and search (Task List tab)
+      - Add to block list
+
+      **Suspicious Object Management**
+
+      - View, filter, and search
+      - Manage lists and configure settings
     input:
       block_objects:
         title: Block Objects
@@ -2204,7 +2454,15 @@ actions:
         example: '[{"status":202,"task_id":"00002134"},{"status":202,"task_id":"00002135"}]'
   submit_urls_to_sandbox:
     title: Submit URLs to Sandbox
-    description: Submits URLs to the sandbox for analysis. You can submit a maximum of 10 URLs per request
+    description: |-
+      Submits URLs to the sandbox for analysis. You can submit a maximum of 10 URLs per request
+      
+      **API key role permissions required:**
+
+      **Sandbox Analysis**
+
+      - View, filter, and search
+      - Submit objects
     input:
       urls:
         title: URLs
@@ -2221,7 +2479,14 @@ actions:
         example: '[{"digest":{"md5":"f3a2e1227de8d5ae7296665c1f34b28d","sha1":"d79bff55069994b1c11f7856f9f029de36adfd8f","sha256":"619a273ee4d25fb4aeb97e89c554fcfbdbc82e22d840cfdb364a8f1932f48160"},"id":"d28e22cb-c6af-4291-bf25-22f33ce7aa15","status":202,"task_id":"d28e22cb-c6af-4291-bf25-22f33ce7aa15","url":"https://example.com"}]'
   get_alert_details:
     title: Get Alert Details
-    description: Displays information about workbench alerts that match the specified criteria in a paginated list
+    description: |-
+      Displays information about workbench alerts that match the specified criteria in a paginated list
+      
+      **API key role permissions required:**
+
+      **Workbench**
+
+      - View, filter, and search
     input:
       alert_id:
         title: Alert ID
@@ -2244,7 +2509,15 @@ actions:
         example: '{"alert":"<<referenced:bigdata>>"}'
   get_custom_script_list:
     title: Get Custom Script List
-    description: Retrieves information about the available custom scripts and displays the information in a paginated list
+    description: |-
+      Retrieves information about the available custom scripts and displays the information in a paginated list
+      
+      **API key role permissions required:**
+
+      **Response Management**
+
+      - View, filter, and search (Task List tab)
+      - View, filter and search (Custom Scripts tab)
     input:
       query_op:
         title: Query Operator
@@ -2271,7 +2544,16 @@ actions:
         example: '[{"description":"Terminates processes in user devices","file_name":"trendmicro-security-playbook-terminate-proc.ps1","file_type":"powershell","id":"71c7ae1f-bf14-4e6f-b3eb-30a45d13e6f2"}]'
   add_custom_script:
     title: Add Custom Script
-    description: Uploads a custom script. Supported file extensions are .ps1, .sh; Custom scripts must use UTF-8 encoding
+    description: |-
+      Uploads a custom script. Supported file extensions are .ps1, .sh; Custom scripts must use UTF-8 encoding
+      
+      **API key role permissions required:**
+
+      **Response Management**
+
+      - View, filter, and search (Task List tab)
+      - View, filter and search (Custom Scripts tab)
+      - Manage custom scripts
     input:
       file_type:
         title: File Type
@@ -2304,7 +2586,16 @@ actions:
         example: 44c99cb0-8c5f-4182-af55-62135dbe32f1
   update_custom_script:
     title: Update Custom Script
-    description: Updates a custom script. Supported file extensions are .ps1, .sh; Custom scripts must use UTF-8 encoding
+    description: |-
+      Updates a custom script. Supported file extensions are .ps1, .sh; Custom scripts must use UTF-8 encoding
+      
+      **API key role permissions required:**
+
+      **Response Management**
+
+      - View, filter, and search (Task List tab)
+      - View, filter and search (Custom Scripts tab)
+      - Manage custom scripts
     input:
       script_id:
         title: Script ID
@@ -2343,7 +2634,16 @@ actions:
         example: SUCCESS
   download_custom_script:
     title: Download Custom Script
-    description: Downloads custom script
+    description: |-
+      Downloads custom script
+      
+      **API key role permissions required:**
+
+      **Response Management**
+
+      - View, filter, and search (Task List tab)
+      - View, filter and search (Custom Scripts tab)
+      - Download custom scripts
     input:
       script_id:
         title: Script ID
@@ -2360,7 +2660,16 @@ actions:
         example: '{"content":"IyEvYmluL2Jhc2gKbHM=","filename":"r7-test11.sh"}'
   delete_custom_script:
     title: Delete Custom Script
-    description: Deletes custom script
+    description: |-
+      Deletes custom script
+      
+      **API key role permissions required:**
+
+      **Response Management**
+
+      - View, filter, and search (Task List tab)
+      - View, filter and search (Custom Scripts tab)
+      - Manage custom scripts
     input:
       script_id:
         title: Script ID
@@ -2377,7 +2686,16 @@ actions:
         example: SUCCESS
   run_custom_script:
     title: Run Custom Script
-    description: Run custom script
+    description: |-
+      Run custom script
+      
+      **API key role permissions required:**
+
+      **Response Management**
+
+      - View, filter, and search (Task List tab)
+      - View, filter and search (Custom Scripts tab)
+      - Run custom scripts
     input:
       description:
         title: Description
@@ -2419,7 +2737,14 @@ actions:
         example: '[{"status":202,"task_id":"00002133"}]'
   get_email_activity_data:
     title: Get Email Activity Data
-    description: Displays search results from the Email Activity Data source in a paginated list
+    description: |-
+      Displays search results from the Email Activity Data source in a paginated list
+      
+      **API key role permissions required:**
+
+      **Search**
+
+      - View, filter, and search
     input:
       top:
         title: Top
@@ -2476,7 +2801,14 @@ actions:
         example: '[{"mail_msg_subject":"test sample","mail_msg_id":"<user@example.com>","msg_uuid":"ihbjkhabkjHBJKHBKJHbkjHBKJhbjkhbJKHBJKHBKJhbjHBJhbj","mailbox":"user@example.com","mail_sender_ip":"xx.yy.zz.ww","mail_from_addresses":["user@example.com"],"mail_whole_header":["user@example.com>"],"mail_to_addresses":["user@example.com"],"mail_source_domain":"example.com","search_d_l":"CAS","scan_type":"exchange","event_time":1601249307000,"org_id":"8d23a000-9a4c-11ea-80f5-1de879102030","mail_urls_visible_link":["http://xxxxxx.com"],"mail_urls_real_link":["http://xxxxxx.com"]}]'
   get_email_activity_data_count:
     title: Get Email Activity Data Count
-    description: Displays count of search results from the Email Activity Data source in a paginated list
+    description: |-
+      Displays count of search results from the Email Activity Data source in a paginated list
+      
+      **API key role permissions required:**
+
+      **Search**
+
+      - View, filter, and search
     input:
       top:
         title: Top
@@ -2533,7 +2865,14 @@ actions:
         example: 5
   get_endpoint_activity_data:
     title: Get Endpoint Activity Data
-    description: Displays results from the Endpoint Activity Data source in a paginated list
+    description: |-
+      Displays results from the Endpoint Activity Data source in a paginated list
+      
+      **API key role permissions required:**
+
+      **Search**
+
+      - View, filter, and search
     input:
       top:
         title: Top
@@ -2598,7 +2937,14 @@ actions:
           Files (x86)\\\\temp\\\\Application\\\\test.exe","request":"https://www.example.com","search_d_l":"SDL","spt":8080,"src":"192.169.1.1","src_file_hash_sha1":"string","src_file_path":"string","tags":["MITRE.T1210"],"uuid":"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"}]'
   get_endpoint_activity_data_count:
     title: Get Endpoint Activity Data Count
-    description: Displays count of search results from the Endpoint Activity Data source in a paginated list
+    description: |-
+      Displays count of search results from the Endpoint Activity Data source in a paginated list
+      
+      **API key role permissions required:**
+
+      **Search**
+
+      - View, filter, and search
     input:
       top:
         title: Top
@@ -2655,7 +3001,15 @@ actions:
         example: 5
   create_api_keys:
     title: Create API Keys
-    description: Generates API keys that allow third-party applications to access the Trend Vision One APIs
+    description: |-
+      Generates API keys that allow third-party applications to access the Trend Vision One APIs
+      
+      **API key role permissions required:**
+
+      **API Keys**
+
+      - View
+      - Configure Settings
     input:
       api_keys_objects:
         title: API Keys Objects
@@ -2673,7 +3027,14 @@ actions:
         example: '[{"status":200,"id":"d367abdd-7739-4129-a36a-862c4ec018b4","value":"API-KEY","expiredDateTime":"2025-02-06T10:00:00Z"}]'
   get_api_key:
     title: Get API Key
-    description: Displays information of the specified API key
+    description: |-
+      Displays information of the specified API key
+      
+      **API key role permissions required:**
+
+      **API Keys**
+
+      - View
     input:
       id:
         title: ID
@@ -2735,7 +3096,15 @@ actions:
         example: 2025-02-06T10:00:00Z
   update_api_key:
     title: Update API Key
-    description: Updates the specified API key
+    description: |-
+      Updates the specified API key
+      
+      **API key role permissions required:**
+
+      **API Keys**
+
+      - View
+      - Configure Settings
     input:
       id:
         title: ID
@@ -2785,7 +3154,15 @@ actions:
         example: 204
   delete_api_keys:
     title: Delete API Keys
-    description: Deletes the specified API keys
+    description: |-
+      Deletes the specified API keys
+      
+      **API key role permissions required:**
+
+      **API Keys**
+
+      - View
+      - Configure Settings
     input:
       id:
         title: ID
@@ -2802,7 +3179,14 @@ actions:
         example: 207
   list_api_keys:
     title: List API Keys
-    description: Displays a list of all your API keys in a list
+    description: |-
+      Displays a list of all your API keys in a list
+      
+      **API key role permissions required:**
+
+      **API Keys**
+
+      - View
     input:
       top:
         title: Top
@@ -2846,7 +3230,14 @@ actions:
           Administrator","description":"this is a test","expiredDateTime":"2025-02-06T10:00:00Z","lastUsedDateTime":"2023-02-06T10:00:00Z"}]'
   get_oat_list:
     title: Get OAT List
-    description: Gets information about Observed Attack Techniques (OATs) events that match the specified criteria in a list
+    description: |-
+      Gets information about Observed Attack Techniques (OATs) events that match the specified criteria in a list
+      
+      **API key role permissions required:**
+
+      **Observed Attack Techniques**
+
+      - View, filter, and search
     input:
       detected_start_date_time:
         title: Detected Start Date Time

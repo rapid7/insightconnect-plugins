@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Allows the user to sign in to new application and browser sessions. Supported IAM systems - Azure AD and Active Directory (on-premises)"
+    DESCRIPTION = "Allows the user to sign in to new application and browser sessions. Supported IAM systems - Azure AD and Active Directory (on-premises)**API key role permissions required:****Response Management**- View, filter, and search (Task List tab)- Enable/Disable user account, force sign out, force password reset"
 
 
 class Input:

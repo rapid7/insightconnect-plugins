@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Generates API keys that allow third-party applications to access the Trend Vision One APIs"
+    DESCRIPTION = "Generates API keys that allow third-party applications to access the Trend Vision One APIs**API key role permissions required:****API Keys**- View- Configure Settings"
 
 
 class Input:

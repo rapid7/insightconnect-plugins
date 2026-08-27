@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Submits URLs to the sandbox for analysis. You can submit a maximum of 10 URLs per request"
+    DESCRIPTION = "Submits URLs to the sandbox for analysis. You can submit a maximum of 10 URLs per request**API key role permissions required:****Sandbox Analysis**- View, filter, and search- Submit objects"
 
 
 class Input:

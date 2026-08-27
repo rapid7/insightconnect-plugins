@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Retrieves an object containing the results of a response task in JSON format"
+    DESCRIPTION = "Retrieves an object containing the results of a response task in JSON format**API key role permissions required:****Response Management**- View, filter, and search (Task List tab)- Download task result"
 
 
 class Input:

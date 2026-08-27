@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Downloads the investigation package based on submission ID"
+    DESCRIPTION = "Downloads the investigation package based on submission ID**API key role permissions required:****Sandbox Analysis**- View, filter, and search- Submit objects"
 
 
 class Input:

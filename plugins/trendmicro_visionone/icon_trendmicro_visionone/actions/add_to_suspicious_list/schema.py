@@ -4,9 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = (
-        "Adds domains, file SHA-1/SHA-256 values, IP addresses, senderMailAddress, or URLs to the Block Object List"
-    )
+    DESCRIPTION = "Adds domains, file SHA-1/SHA-256 values, IP addresses, senderMailAddress, or URLs to the Block Object List**API key role permissions required:****Suspicious Object Management**- View, filter, and search- Manage lists and configure settings"
 
 
 class Input:

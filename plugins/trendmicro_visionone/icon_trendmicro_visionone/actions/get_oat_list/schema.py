@@ -4,9 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = (
-        "Gets information about Observed Attack Techniques (OATs) events that match the specified criteria in a list"
-    )
+    DESCRIPTION = "Gets information about Observed Attack Techniques (OATs) events that match the specified criteria in a list**API key role permissions required:****Observed Attack Techniques**- View, filter, and search"
 
 
 class Input:

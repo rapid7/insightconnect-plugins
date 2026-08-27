@@ -4,7 +4,9 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Deletes the specified API keys"
+    DESCRIPTION = (
+        "Deletes the specified API keys**API key role permissions required:****API Keys**- View- Configure Settings"
+    )
 
 
 class Input:

@@ -4,7 +4,9 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Displays a list of all your API keys in a list"
+    DESCRIPTION = (
+        "Displays a list of all your API keys in a list**API key role permissions required:****API Keys**- View"
+    )
 
 
 class Input:

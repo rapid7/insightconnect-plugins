@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Adds an email address, file SHA-1, domain, IP address, or URL to the Suspicious Object List, which blocks the objects on subsequent detections"
+    DESCRIPTION = "Adds an email address, file SHA-1, domain, IP address, or URL to the Suspicious Object List, which blocks the objects on subsequent detections**API key role permissions required:****Response Management**- View, filter, and search (Task List tab)- Add to block list**Suspicious Object Management**- View, filter, and search- Manage lists and configure settings"
 
 
 class Input:

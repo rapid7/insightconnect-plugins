@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Retrieves the status of a sandbox analysis submission"
+    DESCRIPTION = "Retrieves the status of a sandbox analysis submission**API key role permissions required:****Sandbox Analysis**- View, filter, and search- Submit objects"
 
 
 class Input:

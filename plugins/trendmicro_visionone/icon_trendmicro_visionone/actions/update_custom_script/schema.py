@@ -4,9 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = (
-        "Updates a custom script. Supported file extensions are .ps1, .sh; Custom scripts must use UTF-8 encoding"
-    )
+    DESCRIPTION = "Updates a custom script. Supported file extensions are .ps1, .sh; Custom scripts must use UTF-8 encoding**API key role permissions required:****Response Management**- View, filter, and search (Task List tab)- View, filter and search (Custom Scripts tab)- Manage custom scripts"
 
 
 class Input:

@@ -4,7 +4,9 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Attaches a note to a workbench alert"
+    DESCRIPTION = (
+        "Attaches a note to a workbench alert**API key role permissions required:****Workbench**- Modify alert details"
+    )
 
 
 class Input:

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Collects a file from one or more endpoints and then sends the files to Trend Vision One in a password-protected archive Note- You can specify either the computer name- endpointName or the GUID of the installed agent program- agentGuid"
+    DESCRIPTION = "Collects a file from one or more endpoints and then sends the files to Trend Vision One in a password-protected archive Note- You can specify either the computer name- endpointName or the GUID of the installed agent program- agentGuid**API key role permissions required:****Response Management**- View, filter, and search (Task List tab)- Collect file"
 
 
 class Input:

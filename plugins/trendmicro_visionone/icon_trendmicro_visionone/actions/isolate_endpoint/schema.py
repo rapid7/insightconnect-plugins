@@ -4,9 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = (
-        "Disconnects an endpoint from the network (but allows communication with the managing Trend Micro product)"
-    )
+    DESCRIPTION = "Disconnects an endpoint from the network (but allows communication with the managing Trend Micro product)**API key role permissions required:****Response Management**- View, filter, and search (Task List tab)- Isolate endpoint"
 
 
 class Input:

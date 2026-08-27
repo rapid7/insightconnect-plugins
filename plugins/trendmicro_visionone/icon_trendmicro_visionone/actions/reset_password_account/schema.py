@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Signs the user out of all active application and browser sessions, and forces the user to create a new password during the next sign-in attempt. Supported IAM systems - Azure AD and Active Directory (on-premises)"
+    DESCRIPTION = "Signs the user out of all active application and browser sessions, and forces the user to create a new password during the next sign-in attempt. Supported IAM systems - Azure AD and Active Directory (on-premises)**API key role permissions required:****Response Management**- View, filter, and search (Task List tab)- Enable/Disable user account, force sign out, force password reset"
 
 
 class Input:

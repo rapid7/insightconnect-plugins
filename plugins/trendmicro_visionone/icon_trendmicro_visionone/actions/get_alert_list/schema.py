@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Displays information about workbench alerts that match the specified criteria in a paginated list"
+    DESCRIPTION = "Displays information about workbench alerts that match the specified criteria in a paginated list**API key role permissions required:****Workbench**- View, filter, and search"
 
 
 class Input:

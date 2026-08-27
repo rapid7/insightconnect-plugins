@@ -100,7 +100,8 @@ This action is used to attaches a note to a workbench alert
 
 **Workbench**
 
-- Modify alert details
+- 
+Modify alert details
 
 ##### Input
 
@@ -144,7 +145,8 @@ encoding
 **Response Management**
 
 - View, filter, and search (Task List tab)
-- View, filter and search (Custom Scripts tab)
+- 
+View, filter and search (Custom Scripts tab)
 - Manage custom scripts
 
 ##### Input
@@ -191,12 +193,14 @@ which blocks the objects on subsequent detections
 
 **Response Management**
 
-- View, filter, and search (Task List tab)
+- 
+View, filter, and search (Task List tab)
 - Add to block list
 
 **Suspicious Object Management**
 
-- View, filter, and search
+- View, filter, and 
+search
 - Manage lists and configure settings
 
 ##### Input
@@ -249,7 +253,8 @@ objects from being added to the Suspicious Object List
 
 **API key role permissions required:**
 
-**Suspicious Object Management**
+**Suspicious Object 
+Management**
 
 - View, filter, and search
 - Manage lists and configure settings
@@ -306,7 +311,8 @@ Object List
 **Suspicious Object Management**
 
 - View, filter, and search
-- Manage lists and configure settings
+- 
+Manage lists and configure settings
 
 ##### Input
 
@@ -363,7 +369,8 @@ agent program- agentGuid
 
 **Response Management**
 
-- View, filter, and search (Task List tab)
+- View, filter, and search 
+(Task List tab)
 - Collect file
 
 ##### Input
@@ -409,6 +416,7 @@ Example output:
 #### Create API Keys
 
 This action is used to generates API keys that allow third-party applications to access the Trend Vision One APIs
+
 
 **API key role permissions required:**
 
@@ -469,7 +477,8 @@ This action is used to deletes the specified API keys
 **API Keys**
 
 - View
-- Configure Settings
+- 
+Configure Settings
 
 ##### Input
 
@@ -510,7 +519,8 @@ This action is used to deletes custom script
 
 **Response Management**
 
-- View, filter, and search (Task List tab)
+- View, 
+filter, and search (Task List tab)
 - View, filter and search (Custom Scripts tab)
 - Manage custom scripts
 
@@ -548,7 +558,8 @@ This action is used to deletes a message from a mailbox
 
 **API key role permissions required:**
 
-**Response Management**
+**Response 
+Management**
 
 - View, filter, and search (Task List tab)
 - Delete messages
@@ -597,13 +608,15 @@ Example output:
 This action is used to signs the user out of all active application and browser sessions, and prevents the user from 
 signing in any new session. Supported IAM systems - Azure AD and Active Directory (on-premises)
 
-**API key role permissions required:**
+**API key role 
+permissions required:**
 
 **Response Management**
 
 - View, filter, and search (Task List tab)
-- Enable/Disable user account, force sign out, force password reset
- 
+- Enable/Disable user 
+account, force sign out, force password reset
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
@@ -650,7 +663,8 @@ This action is used to downloads custom script
 
 **Response Management**
 
-- View, filter, and search (Task List tab)
+- 
+View, filter, and search (Task List tab)
 - View, filter and search (Custom Scripts tab)
 - Download custom scripts
 
@@ -736,7 +750,8 @@ Example output:
 
 This action is used to downloads the investigation package based on submission ID
 
-**API key role permissions required:**
+**API key role permissions 
+required:**
 
 **Sandbox Analysis**
 
@@ -786,6 +801,7 @@ This action is used to updates the status of a workbench alert
 
 **Workbench**
 
+
 - Modify alert details
 
 ##### Input
@@ -821,15 +837,16 @@ Example output:
 ```
 
 #### Enable Account
-  
-This action is used to allows the user to sign in to new application and browser sessions. Supported IAM systems - Azure
- AD and Active Directory (on-premises)
+
+This action is used to allows the user to sign in to new application and browser sessions. Supported IAM systems - 
+Azure AD and Active Directory (on-premises)
 
 **API key role permissions required:**
 
 **Response Management**
 
-- View, filter, and search (Task List tab)
+- View, 
+filter, and search (Task List tab)
 - Enable/Disable user account, force sign out, force password reset
 
 ##### Input
@@ -871,8 +888,9 @@ Example output:
 ```
 
 #### Get Alert Details
-  
-This action is used to displays information about workbench alerts that match the specified criteria in a paginated list
+
+This action is used to displays information about workbench alerts that match the specified criteria in a paginated 
+list
 
 **API key role permissions required:**
 
@@ -913,8 +931,9 @@ Example output:
 ```
 
 #### Get Alert List
-  
-This action is used to displays information about workbench alerts that match the specified criteria in a paginated list
+
+This action is used to displays information about workbench alerts that match the specified criteria in a paginated 
+list
 
 **API key role permissions required:**
 
@@ -962,7 +981,8 @@ This action is used to displays information of the specified API key
 
 **API key role permissions required:**
 
-**API Keys**
+**API 
+Keys**
 
 - View
 
@@ -1017,7 +1037,8 @@ paginated list
 
 **Response Management**
 
-- View, filter, and search (Task List tab)
+- View, filter, and search (Task List 
+tab)
 - View, filter and search (Custom Scripts tab)
 
 ##### Input
@@ -1064,7 +1085,8 @@ Example output:
 
 This action is used to displays search results from the Email Activity Data source in a paginated list
 
-**API key role permissions required:**
+**API key role 
+permissions required:**
 
 **Search**
 
@@ -1145,7 +1167,8 @@ Example output:
 
 This action is used to displays count of search results from the Email Activity Data source in a paginated list
 
-**API key role permissions required:**
+**API 
+key role permissions required:**
 
 **Search**
 
@@ -1198,7 +1221,8 @@ Example output:
 
 This action is used to displays results from the Endpoint Activity Data source in a paginated list
 
-**API key role permissions required:**
+**API key role 
+permissions required:**
 
 **Search**
 
@@ -1309,6 +1333,7 @@ Example output:
 
 This action is used to displays count of search results from the Endpoint Activity Data source in a paginated list
 
+
 **API key role permissions required:**
 
 **Search**
@@ -1363,6 +1388,7 @@ Example output:
 This action is used to retrieves information about a specific endpoint
 
 **API key role permissions required:**
+
 
 **Endpoint Inventory**
 
@@ -1435,13 +1461,14 @@ Example output:
 ```
 
 #### Get Exception List
-  
-This action is used to retrieves information about domains, file SHA-1, file SHA-256, IP addresses, sender addresses, or
- URLs in the Exception List and displays it in a paginated list
+
+This action is used to retrieves information about domains, file SHA-1, file SHA-256, IP addresses, sender addresses, 
+or URLs in the Exception List and displays it in a paginated list
 
 **API key role permissions required:**
 
-**Suspicious Object Management**
+**Suspicious 
+Object Management**
 
 - View, filter, and search
 
@@ -1592,6 +1619,7 @@ This action is used to retrieves the status of a sandbox analysis submission
 
 **API key role permissions required:**
 
+
 **Sandbox Analysis**
 
 - View, filter, and search
@@ -1653,13 +1681,14 @@ Example output:
 ```
 
 #### Get Sandbox Suspicious List
-  
-This action is used to downloads the suspicious object list associated to the specified object. Note ~ Suspicious Object
- Lists are only available for objects with a high risk level
+
+This action is used to downloads the suspicious object list associated to the specified object. Note ~ Suspicious 
+Object Lists are only available for objects with a high risk level
 
 **API key role permissions required:**
 
-**Sandbox Analysis**
+**Sandbox 
+Analysis**
 
 - View, filter, and search
 - Submit objects
@@ -1710,7 +1739,8 @@ Example output:
 This action is used to retrieves information about domains, file SHA-1, file SHA-256, IP addresses, email addresses, or
  URLs in the Suspicious Object List and displays the information in a paginated list
 
-**API key role permissions required:**
+**API key role permissions 
+required:**
 
 **Suspicious Object Management**
 
@@ -1749,7 +1779,8 @@ Example output:
 
 This action is used to retrieves an object containing the results of a response task in JSON format
 
-**API key role permissions required:**
+**API key role 
+permissions required:**
 
 **Response Management**
 
@@ -1852,7 +1883,8 @@ This action is used to disconnects an endpoint from the network (but allows comm
 **Response Management**
 
 - View, filter, and search (Task List tab)
-- Isolate endpoint
+-
+ Isolate endpoint
 
 ##### Input
 
@@ -1899,7 +1931,8 @@ This action is used to displays a list of all your API keys in a list
 
 **API key role permissions required:**
 
-**API Keys**
+**API 
+Keys**
 
 - View
 
@@ -1955,6 +1988,7 @@ This action is used to moves a message from a mailbox to the quarantine folder
 
 **API key role permissions required:**
 
+
 **Response Management**
 
 - View, filter, and search (Task List tab)
@@ -2000,20 +2034,22 @@ Example output:
 ```
 
 #### Remove from Block List
-  
-This action is used to removes an email address, file SHA-1, domain, IP address, or URL that was added to the Suspicious
- Object List using the Add to block list action
+
+This action is used to removes an email address, file SHA-1, domain, IP address, or URL that was added to the 
+Suspicious Object List using the Add to block list action
 
 **API key role permissions required:**
 
-**Response Management**
+**Response 
+Management**
 
 - View, filter, and search (Task List tab)
 - Add to block list
 
 **Suspicious Object Management**
 
-- View, filter, and search
+- View, 
+filter, and search
 - Manage lists and configure settings
 
 ##### Input
@@ -2063,12 +2099,14 @@ Example output:
 
 This action is used to removes domains, file SHA-1 values, IP addresses, or URLs from the Exception List
 
-**API key role permissions required:**
+**API key 
+role permissions required:**
 
 **Suspicious Object Management**
 
 - View, filter, and search
-- Manage lists and configure settings
+- Manage lists and configure 
+settings
 
 ##### Input
 
@@ -2112,12 +2150,14 @@ Example output:
 
 This action is used to removes domains, file SHA-1 values, IP addresses, or URLs from the Suspicious Object List
 
-**API key role permissions required:**
+**API
+ key role permissions required:**
 
 **Suspicious Object Management**
 
 - View, filter, and search
-- Manage lists and configure settings
+- Manage lists and 
+configure settings
 
 ##### Input
 
@@ -2162,12 +2202,14 @@ Example output:
 This action is used to signs the user out of all active application and browser sessions, and forces the user to create
  a new password during the next sign-in attempt. Supported IAM systems - Azure AD and Active Directory (on-premises)
 
+
 **API key role permissions required:**
 
 **Response Management**
 
 - View, filter, and search (Task List tab)
-- Enable/Disable user account, force sign out, force password reset
+- 
+Enable/Disable user account, force sign out, force password reset
 
 ##### Input
 
@@ -2213,7 +2255,8 @@ This action is used to restores a quarantined email message
 
 **API key role permissions required:**
 
-**Response Management**
+**Response 
+Management**
 
 - View, filter, and search (Task List tab)
 - Quarantine/Restore messages
@@ -2261,7 +2304,8 @@ Example output:
 
 This action is used to restores network connectivity to an endpoint that applied the isolate endpoint action
 
-**API key role permissions required:**
+**API key
+ role permissions required:**
 
 **Response Management**
 
@@ -2315,7 +2359,8 @@ This action is used to run custom script
 
 **Response Management**
 
-- View, filter, and search (Task List tab)
+- View, 
+filter, and search (Task List tab)
 - View, filter and search (Custom Scripts tab)
 - Run custom scripts
 
@@ -2370,7 +2415,8 @@ This action is used to signs the user out of all active application and browser 
 **Response Management**
 
 - View, filter, and search (Task List tab)
-- Enable/Disable user account, force sign out, force password reset
+- 
+Enable/Disable user account, force sign out, force password reset
 
 ##### Input
 
@@ -2413,14 +2459,15 @@ Example output:
 #### Submit File to Sandbox
 
 This action is used to submits a file to the sandbox for analysis (Note. For more information about the supported file 
-types, see the Trend Micro Vision One Online Help. Submissions require credits. Does not require credits in regions 
-where Sandbox Analysis has not been officially released.)
+types, see the Trend Vision One Online Help. Submissions require credits. Does not require credits in regions where 
+Sandbox Analysis has not been officially released.)
 
 **API key role permissions required:**
 
 **Sandbox Analysis**
 
-- View, filter, and search
+- 
+View, filter, and search
 - Submit objects
 
 ##### Input
@@ -2472,7 +2519,8 @@ Example output:
 
 This action is used to submits URLs to the sandbox for analysis. You can submit a maximum of 10 URLs per request
 
-**API key role permissions required:**
+**API
+ key role permissions required:**
 
 **Sandbox Analysis**
 
@@ -2528,6 +2576,7 @@ This action is used to terminates a process that is running on an endpoint
 
 **API key role permissions required:**
 
+
 **Response Management**
 
 - View, filter, and search (Task List tab)
@@ -2581,7 +2630,8 @@ This action is used to updates the specified API key
 **API Keys**
 
 - View
-- Configure Settings
+- 
+Configure Settings
 
 ##### Input
 
@@ -2631,7 +2681,8 @@ encoding
 **Response Management**
 
 - View, filter, and search (Task List tab)
-- View, filter and search (Custom Scripts tab)
+- 
+View, filter and search (Custom Scripts tab)
 - Manage custom scripts
 
 ##### Input
@@ -2676,6 +2727,7 @@ Example output:
 #### Poll Alert List
 
 This trigger is used to polls information about workbench alerts that match the specified criteria in a paginated list
+
 
 **API key role permissions required:**
 

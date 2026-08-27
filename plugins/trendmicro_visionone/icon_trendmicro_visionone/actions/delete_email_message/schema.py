@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Deletes a message from a mailbox"
+    DESCRIPTION = "Deletes a message from a mailbox**API key role permissions required:****Response Management**- View, filter, and search (Task List tab)- Delete messages"
 
 
 class Input:
