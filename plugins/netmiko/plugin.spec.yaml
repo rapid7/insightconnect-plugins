@@ -34,6 +34,8 @@ sdk:
     - ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
     - ENV SSL_CERT_DIR=/etc/ssl/certs
     - ENV REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+    # netmiko 4.7.0 uses no paramiko API removed in 5.0.0, so install it here and force the upgrade
+    - RUN pip install netmiko==4.7.0 && pip install paramiko==5.0.0
 links: 
 - "[Paramiko](http://www.paramiko.org/)"
 enable_cache: true

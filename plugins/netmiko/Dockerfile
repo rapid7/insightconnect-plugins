@@ -24,6 +24,7 @@ COPY --from=builder /plugin.spec.yaml /plugin.spec.yaml
 ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 ENV SSL_CERT_DIR=/etc/ssl/certs
 ENV REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+RUN pip install netmiko==4.7.0 && pip install paramiko==5.0.0
 
 
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
