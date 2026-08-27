@@ -1,6 +1,16 @@
 from typing import Union
 
 
+def matches_entity(entity: str, item: dict) -> bool:
+    return (
+        item.get("hostname") == entity
+        or item.get("id") == entity
+        or entity in item.get("ipv4Addresses", [])
+        or entity in item.get("macAddresses", [])
+        or entity in item.get("ipv6Addresses", [])
+    )
+
+
 def clean(item_to_clean: Union[dict, list]) -> Union[dict, list]:
     if isinstance(item_to_clean, list):
         return [clean(item.copy()) for item in item_to_clean]

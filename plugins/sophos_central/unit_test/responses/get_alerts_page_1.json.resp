@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "id": "111fd666-9666-4e66-a066-d66fd966ad11",
+      "severity": "high",
+      "description": "Malware detected on page one endpoint",
+      "type": "Event::Endpoint::Threat::Detected",
+      "when": "2020-08-02T21:30:55.487Z"
+    }
+  ],
+  "pages": {
+    "nextKey": "alertsKey",
+    "size": 1,
+    "total": 2,
+    "maxSize": 1000
+  }
+}

@@ -24,7 +24,7 @@ class GetEndpointsInput(insightconnect_plugin_runtime.Input):
     "since": {
       "type": "string",
       "title": "Since",
-      "description": "Last seen after date and time (UTC) or duration inclusive, eg. 2019-09-23T12:02:01.700Z, -P1D, PT20M, PT4H500S",
+      "description": "Last seen after date and time (UTC) or duration inclusive, eg. 2019-09-23T12:02:01+00:00, -P1D, PT20M, PT4H500S",
       "order": 1
     }
   },
