@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Removes domains, file SHA-1 values, IP addresses, or URLs from the Exception List**API key role permissions required:****Suspicious Object Management**- View, filter, and search- Manage lists and configure settings"
+    DESCRIPTION = "Removes domains, file SHA-1 values, IP addresses, or URLs from the Exception List"
 
 
 class Input:

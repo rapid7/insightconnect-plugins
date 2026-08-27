@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Downloads custom script**API key role permissions required:****Response Management**- View, filter, and search (Task List tab)- View, filter and search (Custom Scripts tab)- Download custom scripts"
+    DESCRIPTION = "Downloads custom script"
 
 
 class Input:

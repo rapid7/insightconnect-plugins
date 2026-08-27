@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Downloads the suspicious object list associated to the specified object. Note ~ Suspicious Object Lists are only available for objects with a high risk level**API key role permissions required:****Sandbox Analysis**- View, filter, and search- Submit objects"
+    DESCRIPTION = "Downloads the suspicious object list associated to the specified object. Note ~ Suspicious Object Lists are only available for objects with a high risk level"
 
 
 class Input:

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Retrieves information about a specific endpoint**API key role permissions required:****Endpoint Inventory**- View"
+    DESCRIPTION = "Retrieves information about a specific endpoint"
 
 
 class Input:

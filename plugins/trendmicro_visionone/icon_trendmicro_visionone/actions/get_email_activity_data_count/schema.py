@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Displays count of search results from the Email Activity Data source in a paginated list**API key role permissions required:****Search**- View, filter, and search"
+    DESCRIPTION = "Displays count of search results from the Email Activity Data source in a paginated list"
 
 
 class Input:

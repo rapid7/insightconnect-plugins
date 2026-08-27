@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Retrieves information about domains, file SHA-1, file SHA-256, IP addresses, email addresses, or URLs in the Suspicious Object List and displays the information in a paginated list**API key role permissions required:****Suspicious Object Management**- View, filter, and search"
+    DESCRIPTION = "Retrieves information about domains, file SHA-1, file SHA-256, IP addresses, email addresses, or URLs in the Suspicious Object List and displays the information in a paginated list"
 
 
 class Input:

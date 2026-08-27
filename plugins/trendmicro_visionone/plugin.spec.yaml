@@ -75,6 +75,29 @@ key_features:
 requirements:
 - Requires a Trend Vision One API Key
 - API must be enabled on the Settings page in the product's user interface
+- "Each action below requires the listed API key role permissions to be granted to the connection's API key"
+- "Add Alert Note, Edit Alert Status: Workbench (Modify alert details)"
+- "Get Alert List, Get Alert Details, Poll Alert List: Workbench (View, filter, and search)"
+- "Enable Account, Disable Account, Sign out Account, Reset Password Account: Response Management (View, filter, and search (Task List tab); Enable/Disable user account, force sign out, force password reset)"
+- "Quarantine Email Message: Response Management (View, filter, and search (Task List tab); Quarantine/Restore messages)"
+- "Restore Email Message: Response Management (View, filter, and search (Task List tab); Quarantine/Restore messages)"
+- "Delete Email Message: Response Management (View, filter, and search (Task List tab); Delete messages)"
+- "Isolate Endpoint, Restore Endpoint: Response Management (View, filter, and search (Task List tab); Isolate endpoint)"
+- "Terminate Process: Response Management (View, filter, and search (Task List tab); Terminate process)"
+- "Collect File: Response Management (View, filter, and search (Task List tab); Collect file)"
+- "Get Task Result: Response Management (View, filter, and search (Task List tab); Download task result)"
+- "Get Custom Script List: Response Management (View, filter, and search (Task List tab); View, filter and search (Custom Scripts tab))"
+- "Add Custom Script, Update Custom Script, Delete Custom Script: Response Management (View, filter, and search (Task List tab); View, filter and search (Custom Scripts tab); Manage custom scripts)"
+- "Download Custom Script: Response Management (View, filter, and search (Task List tab); View, filter and search (Custom Scripts tab); Download custom scripts)"
+- "Run Custom Script: Response Management (View, filter, and search (Task List tab); View, filter and search (Custom Scripts tab); Run custom scripts)"
+- "Add to Exception List, Remove from Exception List, Add to Suspicious List, Remove from Suspicious List, Get Exception List, Get Suspicious List: Suspicious Object Management (View, filter, and search; Manage lists and configure settings)"
+- "Add to Block List, Remove from Block List: Response Management (View, filter, and search (Task List tab); Add to block list) and Suspicious Object Management (View, filter, and search; Manage lists and configure settings)"
+- "Get Endpoint Data: Endpoint Inventory (View)"
+- "Get Sandbox Submission Status, Download Sandbox Investigation Package, Get Sandbox Suspicious List, Download Sandbox Analysis Result, Submit File to Sandbox, Submit URLs to Sandbox: Sandbox Analysis (View, filter, and search; Submit objects)"
+- "Get Email Activity Data, Get Email Activity Data Count, Get Endpoint Activity Data, Get Endpoint Activity Data Count: Search (View, filter, and search)"
+- "Create API Keys, Update API Key, Delete API Keys: API Keys (View; Configure Settings)"
+- "Get API Key, List API Keys: API Keys (View)"
+- "Get OAT List, Poll OAT List: Observed Attack Techniques (View, filter, and search)"
 troubleshooting:
 - "For additional info about actions see https://automation.trendmicro.com/xdr/api-v3#"
 links:
@@ -1199,12 +1222,6 @@ triggers:
     title: Poll Alert List
     description: |-
       Polls information about workbench alerts that match the specified criteria in a paginated list
-      
-      **API key role permissions required:**
-
-      **Workbench**
-
-      - View, filter, and search
     input:
       start_date_time:
         title: Start Date Time
@@ -1236,12 +1253,6 @@ triggers:
     title: Poll OAT List
     description: |-
       Polls information about Observed Attack Techniques (OATs) events that match the specified criteria in a list
-      
-      **API key role permissions required:**
-
-      **Observed Attack Techniques**
-
-      - View, filter, and search
     input:
       detected_start_date_time:
         title: Detected Start Date Time
@@ -1297,13 +1308,6 @@ actions:
     title: Enable Account
     description: |-
       Allows the user to sign in to new application and browser sessions. Supported IAM systems - Azure AD and Active Directory (on-premises)
-      
-      **API key role permissions required:**
-
-      **Response Management**
-
-      - View, filter, and search (Task List tab)
-      - Enable/Disable user account, force sign out, force password reset
     input:
       account_identifiers:
         title: Account Identifiers
@@ -1323,13 +1327,6 @@ actions:
     title: Disable Account
     description: |-
       Signs the user out of all active application and browser sessions, and prevents the user from signing in any new session. Supported IAM systems - Azure AD and Active Directory (on-premises)
-      
-      **API key role permissions required:**
-
-      **Response Management**
-
-      - View, filter, and search (Task List tab)
-      - Enable/Disable user account, force sign out, force password reset
     input:
       account_identifiers:
         title: Account Identifiers
@@ -1349,13 +1346,6 @@ actions:
     title: Sign out Account
     description: |-
       Signs the user out of all active application and browser sessions. Supported IAM systems - Azure AD
-      
-      **API key role permissions required:**
-
-      **Response Management**
-
-      - View, filter, and search (Task List tab)
-      - Enable/Disable user account, force sign out, force password reset
     input:
       account_identifiers:
         title: Account Identifiers
@@ -1375,13 +1365,6 @@ actions:
     title: Reset Password Account
     description: |-
       Signs the user out of all active application and browser sessions, and forces the user to create a new password during the next sign-in attempt. Supported IAM systems - Azure AD and Active Directory (on-premises)
-      
-      **API key role permissions required:**
-
-      **Response Management**
-
-      - View, filter, and search (Task List tab)
-      - Enable/Disable user account, force sign out, force password reset
     input:
       account_identifiers:
         title: Account Identifiers
@@ -1401,13 +1384,6 @@ actions:
     title: Quarantine Email Message
     description: |-
       Moves a message from a mailbox to the quarantine folder
-      
-      **API key role permissions required:**
-
-      **Response Management**
-
-      - View, filter, and search (Task List tab)
-      - Quarantine/Restore messages
     input:
       email_identifiers:
         title: Email Identifiers
@@ -1426,13 +1402,6 @@ actions:
     title: Delete Email Message
     description: |-
       Deletes a message from a mailbox
-      
-      **API key role permissions required:**
-
-      **Response Management**
-
-      - View, filter, and search (Task List tab)
-      - Delete messages
     input:
       email_identifiers:
         title: Email Identifiers
@@ -1451,13 +1420,6 @@ actions:
     title: Restore Email Message
     description: |-
       Restores a quarantined email message
-      
-      **API key role permissions required:**
-
-      **Response Management**
-
-      - View, filter, and search (Task List tab)
-      - Quarantine/Restore messages
     input:
       email_identifiers:
         title: Email Identifiers
@@ -1476,13 +1438,6 @@ actions:
     title: Isolate Endpoint
     description: |-
       Disconnects an endpoint from the network (but allows communication with the managing Trend Micro product)
-      
-      **API key role permissions required:**
-
-      **Response Management**
-
-      - View, filter, and search (Task List tab)
-      - Isolate endpoint
     input:
       endpoint_identifiers:
         title: Endpoint Identifiers
@@ -1501,13 +1456,6 @@ actions:
     title: Restore Endpoint
     description: |-
       Restores network connectivity to an endpoint that applied the isolate endpoint action
-      
-      **API key role permissions required:**
-
-      **Response Management**
-
-      - View, filter, and search (Task List tab)
-      - Isolate endpoint
     input:
       endpoint_identifiers:
         title: Endpoint Identifiers
@@ -1526,13 +1474,6 @@ actions:
     title: Add to Exception List
     description: |-
       Adds domains, file SHA-1 values, IP addresses, or URLs to the Exception List and prevents these objects from being added to the Suspicious Object List
-      
-      **API key role permissions required:**
-
-      **Suspicious Object Management**
-
-      - View, filter, and search
-      - Manage lists and configure settings
     input:
       block_objects:
         title: Block Objects
@@ -1551,13 +1492,6 @@ actions:
     title: Remove from Exception List
     description: |-
       Removes domains, file SHA-1 values, IP addresses, or URLs from the Exception List
-      
-      **API key role permissions required:**
-
-      **Suspicious Object Management**
-
-      - View, filter, and search
-      - Manage lists and configure settings
     input:
       block_objects:
         title: Block Objects
@@ -1576,18 +1510,6 @@ actions:
     title: Remove from Block List
     description: |-
       Removes an email address, file SHA-1, domain, IP address, or URL that was added to the Suspicious Object List using the Add to block list action
-      
-      **API key role permissions required:**
-
-      **Response Management**
-
-      - View, filter, and search (Task List tab)
-      - Add to block list
-
-      **Suspicious Object Management**
-
-      - View, filter, and search
-      - Manage lists and configure settings
     input:
       block_objects:
         title: Block Objects
@@ -1606,13 +1528,6 @@ actions:
     title: Add to Suspicious List
     description: |-
       Adds domains, file SHA-1/SHA-256 values, IP addresses, senderMailAddress, or URLs to the Block Object List
-      
-      **API key role permissions required:**
-
-      **Suspicious Object Management**
-
-      - View, filter, and search
-      - Manage lists and configure settings
     input:
       suspicious_block_objects:
         title: Suspicious Block Objects
@@ -1631,13 +1546,6 @@ actions:
     title: Remove from Suspicious List
     description: |-
       Removes domains, file SHA-1 values, IP addresses, or URLs from the Suspicious Object List
-      
-      **API key role permissions required:**
-
-      **Suspicious Object Management**
-
-      - View, filter, and search
-      - Manage lists and configure settings
     input:
       block_objects:
         title: Block Objects
@@ -1656,12 +1564,6 @@ actions:
     title: Get Endpoint Data
     description: |-
       Retrieves information about a specific endpoint
-      
-      **API key role permissions required:**
-
-      **Endpoint Inventory**
-
-      - View
     input:
       fields:
         title: Fields
@@ -1691,13 +1593,6 @@ actions:
     title: Terminate Process
     description: |-
       Terminates a process that is running on an endpoint
-      
-      **API key role permissions required:**
-
-      **Response Management**
-
-      - View, filter, and search (Task List tab)
-      - Terminate process
     input:
       process_identifiers:
         title: Process Identifiers
@@ -1716,13 +1611,6 @@ actions:
     title: Get Sandbox Submission Status
     description: |-
       Retrieves the status of a sandbox analysis submission
-      
-      **API key role permissions required:**
-
-      **Sandbox Analysis**
-
-      - View, filter, and search
-      - Submit objects
     input:
       task_id:
         title: Task ID
@@ -1889,13 +1777,6 @@ actions:
     title: Collect File
     description: |-
       Collects a file from one or more endpoints and then sends the files to Trend Vision One in a password-protected archive Note- You can specify either the computer name- endpointName or the GUID of the installed agent program- agentGuid
-      
-      **API key role permissions required:**
-
-      **Response Management**
-
-      - View, filter, and search (Task List tab)
-      - Collect file
     input:
       collect_files:
         title: Collect Files
@@ -1915,13 +1796,6 @@ actions:
     title: Get Task Result
     description: |-
       Retrieves an object containing the results of a response task in JSON format
-      
-      **API key role permissions required:**
-
-      **Response Management**
-
-      - View, filter, and search (Task List tab)
-      - Download task result
     input:
       task_id:
         title: Task ID
@@ -2107,13 +1981,6 @@ actions:
     title: Download Sandbox Investigation Package
     description: |-
       Downloads the investigation package based on submission ID
-      
-      **API key role permissions required:**
-
-      **Sandbox Analysis**
-
-      - View, filter, and search
-      - Submit objects
     input:
       id:
         title: ID
@@ -2146,13 +2013,6 @@ actions:
     title: Get Sandbox Suspicious List
     description: |-
       Downloads the suspicious object list associated to the specified object. Note ~ Suspicious Object Lists are only available for objects with a high risk level
-      
-      **API key role permissions required:**
-
-      **Sandbox Analysis**
-
-      - View, filter, and search
-      - Submit objects
     input:
       id:
         title: ID
@@ -2185,13 +2045,6 @@ actions:
     title: Download Sandbox Analysis Result
     description: |-
       Downloads the analysis result for an object submitted to sandbox for analysis based on the submission ID
-      
-      **API key role permissions required:**
-
-      **Sandbox Analysis**
-
-      - View, filter, and search
-      - Submit objects
     input:
       id:
         title: ID
@@ -2224,13 +2077,6 @@ actions:
     title: Submit File to Sandbox
     description: |-
       Submits a file to the sandbox for analysis (Note. For more information about the supported file types, see the Trend Vision One Online Help. Submissions require credits. Does not require credits in regions where Sandbox Analysis has not been officially released.)
-      
-      **API key role permissions required:**
-
-      **Sandbox Analysis**
-
-      - View, filter, and search
-      - Submit objects
     input:
       file:
         title: File
@@ -2279,12 +2125,6 @@ actions:
     title: Add Alert Note
     description: |-
       Attaches a note to a workbench alert
-      
-      **API key role permissions required:**
-
-      **Workbench**
-
-      - Modify alert details
     input:
       alert_id:
         title: Alert ID
@@ -2315,12 +2155,6 @@ actions:
     title: Edit Alert Status
     description: |-
       Updates the status of a workbench alert
-
-      **API key role permissions required:**
-
-      **Workbench**
-
-      - Modify alert details
     input:
       id:
         title: ID
@@ -2356,12 +2190,6 @@ actions:
     title: Get Alert List
     description: |-
       Displays information about workbench alerts that match the specified criteria in a paginated list
-      
-      **API key role permissions required:**
-
-      **Workbench**
-
-      - View, filter, and search
     input:
       start_date_time:
         title: Start Date Time
@@ -2392,12 +2220,6 @@ actions:
     title: Get Exception List
     description: |-
       Retrieves information about domains, file SHA-1, file SHA-256, IP addresses, sender addresses, or URLs in the Exception List and displays it in a paginated list
-      
-      **API key role permissions required:**
-
-      **Suspicious Object Management**
-
-      - View, filter, and search
     output:
       exception_objects:
         title: Exception Objects
@@ -2409,12 +2231,6 @@ actions:
     title: Get Suspicious List
     description: |-
       Retrieves information about domains, file SHA-1, file SHA-256, IP addresses, email addresses, or URLs in the Suspicious Object List and displays the information in a paginated list
-      
-      **API key role permissions required:**
-
-      **Suspicious Object Management**
-
-      - View, filter, and search
     output:
       suspicious_objects:
         title: Suspicious Objects
@@ -2426,18 +2242,6 @@ actions:
     title: Add to Block List
     description: |-
       Adds an email address, file SHA-1, domain, IP address, or URL to the Suspicious Object List, which blocks the objects on subsequent detections
-      
-      **API key role permissions required:**
-
-      **Response Management**
-
-      - View, filter, and search (Task List tab)
-      - Add to block list
-
-      **Suspicious Object Management**
-
-      - View, filter, and search
-      - Manage lists and configure settings
     input:
       block_objects:
         title: Block Objects
@@ -2456,13 +2260,6 @@ actions:
     title: Submit URLs to Sandbox
     description: |-
       Submits URLs to the sandbox for analysis. You can submit a maximum of 10 URLs per request
-      
-      **API key role permissions required:**
-
-      **Sandbox Analysis**
-
-      - View, filter, and search
-      - Submit objects
     input:
       urls:
         title: URLs
@@ -2481,12 +2278,6 @@ actions:
     title: Get Alert Details
     description: |-
       Displays information about workbench alerts that match the specified criteria in a paginated list
-      
-      **API key role permissions required:**
-
-      **Workbench**
-
-      - View, filter, and search
     input:
       alert_id:
         title: Alert ID
@@ -2511,13 +2302,6 @@ actions:
     title: Get Custom Script List
     description: |-
       Retrieves information about the available custom scripts and displays the information in a paginated list
-      
-      **API key role permissions required:**
-
-      **Response Management**
-
-      - View, filter, and search (Task List tab)
-      - View, filter and search (Custom Scripts tab)
     input:
       query_op:
         title: Query Operator
@@ -2546,14 +2330,6 @@ actions:
     title: Add Custom Script
     description: |-
       Uploads a custom script. Supported file extensions are .ps1, .sh; Custom scripts must use UTF-8 encoding
-      
-      **API key role permissions required:**
-
-      **Response Management**
-
-      - View, filter, and search (Task List tab)
-      - View, filter and search (Custom Scripts tab)
-      - Manage custom scripts
     input:
       file_type:
         title: File Type
@@ -2588,14 +2364,6 @@ actions:
     title: Update Custom Script
     description: |-
       Updates a custom script. Supported file extensions are .ps1, .sh; Custom scripts must use UTF-8 encoding
-      
-      **API key role permissions required:**
-
-      **Response Management**
-
-      - View, filter, and search (Task List tab)
-      - View, filter and search (Custom Scripts tab)
-      - Manage custom scripts
     input:
       script_id:
         title: Script ID
@@ -2636,14 +2404,6 @@ actions:
     title: Download Custom Script
     description: |-
       Downloads custom script
-      
-      **API key role permissions required:**
-
-      **Response Management**
-
-      - View, filter, and search (Task List tab)
-      - View, filter and search (Custom Scripts tab)
-      - Download custom scripts
     input:
       script_id:
         title: Script ID
@@ -2662,14 +2422,6 @@ actions:
     title: Delete Custom Script
     description: |-
       Deletes custom script
-      
-      **API key role permissions required:**
-
-      **Response Management**
-
-      - View, filter, and search (Task List tab)
-      - View, filter and search (Custom Scripts tab)
-      - Manage custom scripts
     input:
       script_id:
         title: Script ID
@@ -2688,14 +2440,6 @@ actions:
     title: Run Custom Script
     description: |-
       Run custom script
-      
-      **API key role permissions required:**
-
-      **Response Management**
-
-      - View, filter, and search (Task List tab)
-      - View, filter and search (Custom Scripts tab)
-      - Run custom scripts
     input:
       description:
         title: Description
@@ -2739,12 +2483,6 @@ actions:
     title: Get Email Activity Data
     description: |-
       Displays search results from the Email Activity Data source in a paginated list
-      
-      **API key role permissions required:**
-
-      **Search**
-
-      - View, filter, and search
     input:
       top:
         title: Top
@@ -2803,12 +2541,6 @@ actions:
     title: Get Email Activity Data Count
     description: |-
       Displays count of search results from the Email Activity Data source in a paginated list
-      
-      **API key role permissions required:**
-
-      **Search**
-
-      - View, filter, and search
     input:
       top:
         title: Top
@@ -2867,12 +2599,6 @@ actions:
     title: Get Endpoint Activity Data
     description: |-
       Displays results from the Endpoint Activity Data source in a paginated list
-      
-      **API key role permissions required:**
-
-      **Search**
-
-      - View, filter, and search
     input:
       top:
         title: Top
@@ -2939,12 +2665,6 @@ actions:
     title: Get Endpoint Activity Data Count
     description: |-
       Displays count of search results from the Endpoint Activity Data source in a paginated list
-      
-      **API key role permissions required:**
-
-      **Search**
-
-      - View, filter, and search
     input:
       top:
         title: Top
@@ -3003,13 +2723,6 @@ actions:
     title: Create API Keys
     description: |-
       Generates API keys that allow third-party applications to access the Trend Vision One APIs
-      
-      **API key role permissions required:**
-
-      **API Keys**
-
-      - View
-      - Configure Settings
     input:
       api_keys_objects:
         title: API Keys Objects
@@ -3029,12 +2742,6 @@ actions:
     title: Get API Key
     description: |-
       Displays information of the specified API key
-      
-      **API key role permissions required:**
-
-      **API Keys**
-
-      - View
     input:
       id:
         title: ID
@@ -3098,13 +2805,6 @@ actions:
     title: Update API Key
     description: |-
       Updates the specified API key
-      
-      **API key role permissions required:**
-
-      **API Keys**
-
-      - View
-      - Configure Settings
     input:
       id:
         title: ID
@@ -3156,13 +2856,6 @@ actions:
     title: Delete API Keys
     description: |-
       Deletes the specified API keys
-      
-      **API key role permissions required:**
-
-      **API Keys**
-
-      - View
-      - Configure Settings
     input:
       id:
         title: ID
@@ -3181,12 +2874,6 @@ actions:
     title: List API Keys
     description: |-
       Displays a list of all your API keys in a list
-      
-      **API key role permissions required:**
-
-      **API Keys**
-
-      - View
     input:
       top:
         title: Top
@@ -3232,12 +2919,6 @@ actions:
     title: Get OAT List
     description: |-
       Gets information about Observed Attack Techniques (OATs) events that match the specified criteria in a list
-      
-      **API key role permissions required:**
-
-      **Observed Attack Techniques**
-
-      - View, filter, and search
     input:
       detected_start_date_time:
         title: Detected Start Date Time

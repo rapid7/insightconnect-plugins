@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Submits a file to the sandbox for analysis (Note. For more information about the supported file types, see the Trend Vision One Online Help. Submissions require credits. Does not require credits in regions where Sandbox Analysis has not been officially released.)**API key role permissions required:****Sandbox Analysis**- View, filter, and search- Submit objects"
+    DESCRIPTION = "Submits a file to the sandbox for analysis (Note. For more information about the supported file types, see the Trend Vision One Online Help. Submissions require credits. Does not require credits in regions where Sandbox Analysis has not been officially released.)"
 
 
 class Input:

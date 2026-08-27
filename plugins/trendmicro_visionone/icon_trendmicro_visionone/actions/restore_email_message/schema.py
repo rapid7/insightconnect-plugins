@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Restores a quarantined email message**API key role permissions required:****Response Management**- View, filter, and search (Task List tab)- Quarantine/Restore messages"
+    DESCRIPTION = "Restores a quarantined email message"
 
 
 class Input:

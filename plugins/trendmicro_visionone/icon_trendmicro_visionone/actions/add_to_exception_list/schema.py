@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Adds domains, file SHA-1 values, IP addresses, or URLs to the Exception List and prevents these objects from being added to the Suspicious Object List**API key role permissions required:****Suspicious Object Management**- View, filter, and search- Manage lists and configure settings"
+    DESCRIPTION = "Adds domains, file SHA-1 values, IP addresses, or URLs to the Exception List and prevents these objects from being added to the Suspicious Object List"
 
 
 class Input:

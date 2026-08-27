@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Signs the user out of all active application and browser sessions, and prevents the user from signing in any new session. Supported IAM systems - Azure AD and Active Directory (on-premises)**API key role permissions required:****Response Management**- View, filter, and search (Task List tab)- Enable/Disable user account, force sign out, force password reset"
+    DESCRIPTION = "Signs the user out of all active application and browser sessions, and prevents the user from signing in any new session. Supported IAM systems - Azure AD and Active Directory (on-premises)"
 
 
 class Input:

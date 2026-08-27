@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Moves a message from a mailbox to the quarantine folder**API key role permissions required:****Response Management**- View, filter, and search (Task List tab)- Quarantine/Restore messages"
+    DESCRIPTION = "Moves a message from a mailbox to the quarantine folder"
 
 
 class Input:

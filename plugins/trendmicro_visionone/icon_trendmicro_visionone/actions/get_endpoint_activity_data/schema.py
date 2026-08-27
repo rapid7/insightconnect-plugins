@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Displays results from the Endpoint Activity Data source in a paginated list**API key role permissions required:****Search**- View, filter, and search"
+    DESCRIPTION = "Displays results from the Endpoint Activity Data source in a paginated list"
 
 
 class Input:

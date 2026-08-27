@@ -4,7 +4,9 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Downloads the analysis result for an object submitted to sandbox for analysis based on the submission ID**API key role permissions required:****Sandbox Analysis**- View, filter, and search- Submit objects"
+    DESCRIPTION = (
+        "Downloads the analysis result for an object submitted to sandbox for analysis based on the submission ID"
+    )
 
 
 class Input:

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Deletes custom script**API key role permissions required:****Response Management**- View, filter, and search (Task List tab)- View, filter and search (Custom Scripts tab)- Manage custom scripts"
+    DESCRIPTION = "Deletes custom script"
 
 
 class Input:

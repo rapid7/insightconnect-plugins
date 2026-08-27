@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Restores network connectivity to an endpoint that applied the isolate endpoint action**API key role permissions required:****Response Management**- View, filter, and search (Task List tab)- Isolate endpoint"
+    DESCRIPTION = "Restores network connectivity to an endpoint that applied the isolate endpoint action"
 
 
 class Input:
