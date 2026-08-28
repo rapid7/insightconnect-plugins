@@ -1,0 +1,21 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#directoryObjects",
+  "@odata.count": 3,
+  "@odata.nextLink": "https://graph.microsoft.com/v1.0/azure_tenant/groups/test-group-id/members?$skiptoken=page2",
+  "value": [
+    {
+      "id": "00000000-0000-0000-0000-000000000001",
+      "displayName": "Alice Example",
+      "userPrincipalName": "alice@example.com",
+      "mail": "alice@example.com",
+      "accountEnabled": true
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000002",
+      "displayName": "Bob Example",
+      "userPrincipalName": "bob@example.com",
+      "mail": "bob@example.com",
+      "accountEnabled": true
+    }
+  ]
+}

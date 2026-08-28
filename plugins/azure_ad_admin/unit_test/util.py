@@ -95,6 +95,13 @@ class Util:
             return MockResponse(200, "search_device_pagination_multipage2.json.resp")
         if url == "https://graph.microsoft.com/v1.0/azure_tenant/devices?$skiptoken=multipage3":
             return MockResponse(200, "search_device_pagination_multipage3.json.resp")
+        # Group members endpoints (list_group_members pagination)
+        if url == "https://graph.microsoft.com/v1.0/azure_tenant/groups/test-group-id/members?$count=true":
+            return MockResponse(200, "list_group_members_page1.json.resp")
+        if url == "https://graph.microsoft.com/v1.0/azure_tenant/groups/test-group-id/members?$skiptoken=page2":
+            return MockResponse(200, "list_group_members_page2.json.resp")
+        if url == "https://graph.microsoft.com/v1.0/azure_tenant/groups/single-page-group/members?$count=true":
+            return MockResponse(200, "list_group_members_single_page.json.resp")
         # User memberOf endpoints
         if url == "https://graph.microsoft.com/v1.0/azure_tenant/users/user@example.com/memberOf?$count=true":
             return MockResponse(200, "get_user_memberships.json.resp")
