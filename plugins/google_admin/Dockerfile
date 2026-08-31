@@ -1,25 +1,34 @@
-FROM komand/python-3-plugin:2
-# The three supported python parent images are:
-# - komand/python-2-plugin
-# - komand/python-3-plugin
-# - komand/python-pypy3-plugin
-#
-# Update the tag to a full semver version
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.6.0 AS builder
 
-# Add any custom package dependencies here
-# NOTE: Add pip packages to requirements.txt
+WORKDIR /workspace
 
-# End package dependencies
-
-# Add source code
-WORKDIR /python/src
 ADD ./plugin.spec.yaml /plugin.spec.yaml
-ADD . /python/src
+ADD ./requirements.txt /workspace/requirements.txt
+ADD . /workspace
 
-# Install pip dependencies
+
+
+RUN pip install .
+RUN pip uninstall -y setuptools
+
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.6.0
+
+LABEL organization=rapid7
+LABEL sdk=python
+
+WORKDIR /workspace
+
+COPY --from=builder /workspace /workspace
+COPY --from=builder /plugin.spec.yaml /plugin.spec.yaml
+
+
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-# Install plugin
-RUN python setup.py build && python setup.py install
+ENV PYTHONPATH="/workspace:${PYTHONPATH}"
 
-ENTRYPOINT ["/usr/local/bin/komand_google_admin"]
+RUN rm -rf /root/.cache;
+
+# User to run plugin code. The two supported users are: root, nobody
+USER nobody
+
+ENTRYPOINT ["python", "/workspace/bin/komand_google_admin"]

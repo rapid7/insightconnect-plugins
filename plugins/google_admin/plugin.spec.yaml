@@ -1,26 +1,55 @@
 plugin_spec_version: v2
 extension: plugin
-products: [ insightconnect ]
+products: [insightconnect]
 name: google_admin
 title: Google Apps Admin
-description: Get and suspend users with the Google admin plugin
-version: 1.0.4
-supported_versions: [12/07/2021]
+description: '[Gsuite](https://gsuite.google.com/) administrative functions allow you to manage users. The InsightConnect plugin can retrieve existing user details and suspend users as part of containment or deprovisioning workflows'
+version: 1.0.5
+connection_version: 1
+supported_versions: ['2021-12-07']
 vendor: rapid7
 support: community
-status: [ ]
+status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/google_admin
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.google.com
+sdk:
+  type: slim
+  version: 6.6.0
+  user: nobody
+key_features:
+- Retrieve Gsuite user information
+- Disable Gsuite users
+requirements:
+- A JWT with administrative permissions
+- API access to Gsuite administrative functions enabled
+version_history:
+- 1.0.5 - Updated dependencies
+- 1.0.4 - Updated `httplib2` to version `0.22.0` | Added examples to help.md
+- 1.0.3 - New spec and help.md format for the Extension Library
+- 1.0.2 - Fix typo in plugin spec
+- 1.0.1 - Update to connection and troubleshooting documentation
+- 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update
+  to new credential types
+- 0.1.1 - SSL bug fix in SDK
+- 0.1.0 - Initial plugin
+troubleshooting:
+- To authenticate to Google admin, you will need to create a service account on your Google apps domain that is capable of delegation. See [https://developers.google.com/admin-sdk/directory/v1/guides/delegation](https://developers.google.com/admin-sdk/directory/v1/guides/delegation)
+- 'You will also need to modify Google apps security settings to allow for the following scopes on your service credentials: `https://www.googleapis.com/auth/admin.directory.user`, `https://www.googleapis.com/auth/admin.directory.group`'
+- To add these settings, from the Admin Home page navigate to Security > Advanced Settings > Manage API client access. You'll need to provide the client ID and the above URLs, comma separated
+links:
+- '[Google Admin API](https://developers.google.com/admin-sdk)'
+references:
+- '[Google Admin API](https://developers.google.com/admin-sdk)'
 tags:
-  - google
-  - admin
-  - user provisioning
+- google
+- admin
+- user provisioning
 hub_tags:
-  use_cases: [ user_management ]
-  keywords: [ google, admin, user provisioning ]
-  features: [ ]
+  use_cases: [user_management]
+  keywords: [google, admin, user provisioning]
+  features: []
 types:
   email:
     address:
@@ -187,7 +216,7 @@ connection:
 actions:
   get_user:
     title: Get User
-    description: Get a User
+    description: Retrieve information about a user by their primary email address, unique ID, or alias email
     input:
       user:
         title: User
@@ -210,7 +239,7 @@ actions:
         example: { "user": { "id": "C03x4xfakeU4", "customerId": "C03x4xfakeU4", "name": { "givenName": "Example", "familyName": "User", "fullName": "Example User" }, "isAdmin": true, "isDelegatedAdmin": true, "suspended": true, "suspensionReason": "", "emails": [ { "address": "user1@example.com", "primary": true }, { "address": "user2@example.com", "primary": true } ], "alias": [ "alias" ], "changePasswordAtNextLogin": false, "ipWhitelisted": true, "agreedToTerms": true, "lastLoginTime": "03/10/2023", "creationTime": "03/10/2020" } }
   suspend_user:
     title: Suspend User
-    description: Suspend a User
+    description: Suspend a user by their primary email address, unique ID, or alias email
     input:
       user:
         title: User

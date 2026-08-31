@@ -13,9 +13,11 @@ class AntivirusScan(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        antivirus_scan = self.connection.client.antivirus_scan(
-            self.connection.client.get_endpoint_id(params.get(Input.AGENT))
-        )
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        agent = params.get(Input.AGENT)
+        # END INPUT BINDING - DO NOT REMOVE
+
+        antivirus_scan = self.connection.client.antivirus_scan(self.connection.client.get_endpoint_id(agent))
 
         return {
             Output.ID: antivirus_scan.get("id"),

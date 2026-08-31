@@ -37,4 +37,3 @@ from .add_endpoint_to_group.action import AddEndpointToGroup
 from .remove_endpoint_from_group.action import RemoveEndpointFromGroup
 
 from .get_endpoints_in_group.action import GetEndpointsInGroup
-

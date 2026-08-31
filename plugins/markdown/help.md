@@ -186,6 +186,7 @@ Example output:
 
 # Version History
 
+* 4.0.3 - Updated dependencies
 * 4.0.2 - Resolved a server-side request forgery issue in the markdown_to_pdf action by sanitizing HTML with an allowlist of tags, attributes, and URL schemes, and fixed rendering of task lists and table column alignment (CVE-2026-8661)
 * 4.0.1 - Update SDK to version 6.6.0
 * 4.0.0 - Restricted script execution in the markdown_to_pdf PDF rendering engine to address a server-side scripting vector (partial fix for CVE-2026-8661) | Update SDK to version 6.4.3
