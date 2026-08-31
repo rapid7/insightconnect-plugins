@@ -1,0 +1,12 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#directoryObjects",
+  "value": [
+    {
+      "id": "00000000-0000-0000-0000-000000000003",
+      "displayName": "Carol Example",
+      "userPrincipalName": "carol@example.com",
+      "mail": "carol@example.com",
+      "accountEnabled": true
+    }
+  ]
+}

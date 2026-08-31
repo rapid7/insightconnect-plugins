@@ -1167,6 +1167,7 @@ Example output:
 
 # Version History
 
+* 6.0.1 - `List Group Members`: Added pagination to return all group members | Updated SDK to the latest version (6.6.0)
 * 6.0.0 - `Get User Info`: Fixed output validation error when manager has `employeeOrgData` populated with `costCenter` or `division`
 * 5.1.0 - Renamed plugin to Microsoft Entra ID Admin | New action Get User Memberships. | Updated SDK to the latest version (6.5.1)
 * 5.0.1 - `Search Devices`: Fixed issue where devices output was limited | Updated SDK to the latest version (6.4.1)
