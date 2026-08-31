@@ -10,20 +10,21 @@ from komand_rapid7_insightidr.triggers.get_new_investigations.trigger import (
     GetNewInvestigations,
     API_LATENCY_OVERLAP_MINUTES,
     INITIAL_LOOKBACK_MINUTES,
+    TIME_STATE_KEY,
 )
 from komand_rapid7_insightidr.triggers.get_new_investigations.schema import Output
 from parameterized import parameterized
 
 
 class StopLoop(Exception):
-    """Exception raised from mocked time.sleep to break trigger's while loop"""
+    """Exception raised from mocked _save_state to break trigger's while loop"""
 
 
 @patch(
     "komand_rapid7_insightidr.triggers.get_new_investigations.trigger.GetNewInvestigations.get_current_time",
     return_value=datetime(2026, 8, 26, 12, 0, 0, tzinfo=UTC),
 )
-@patch("time.sleep", side_effect=StopLoop)
+@patch("komand_rapid7_insightidr.triggers.get_new_investigations.trigger.time.sleep")
 @patch("komand_rapid7_insightidr.triggers.get_new_investigations.trigger.GetNewInvestigations._call_search_api")
 class TestGetNewInvestigationsTrigger(TestCase):
     def setUp(self) -> None:
@@ -31,7 +32,7 @@ class TestGetNewInvestigationsTrigger(TestCase):
         self.trigger.connection = MagicMock()
         self.trigger.logger = MagicMock()
         self.trigger.send = MagicMock()
-        self.trigger._save_state = MagicMock()
+        self.trigger._save_state = MagicMock(side_effect=StopLoop)
         self.trigger.state = {}
         self.params = {"frequency": 15, "search": []}
 
@@ -81,7 +82,7 @@ class TestGetNewInvestigationsTrigger(TestCase):
                 [
                     {"title": "Investigation without RRN", "status": "OPEN"},
                     {"rrn": None, "title": "Investigation with None RRN"},
-                    {"rrn": "", "title": "Investigation with empty RRN"}
+                    {"rrn": "", "title": "Investigation with empty RRN"},
                 ],
                 3,
                 set(),  # nothing to track for these
@@ -114,7 +115,9 @@ class TestGetNewInvestigationsTrigger(TestCase):
 
         # Compute expected RRNs: api_response - initial_state
         existing_rrns = set(initial_state.get("RRNs", []))
-        expected_rrns = [inv.get("rrn") for inv in api_response if inv.get("rrn") and inv.get("rrn") not in existing_rrns]
+        expected_rrns = [
+            inv.get("rrn") for inv in api_response if inv.get("rrn") and inv.get("rrn") not in existing_rrns
+        ]
 
         with self.assertRaises(StopLoop):
             self.trigger.run(self.params)
@@ -134,9 +137,9 @@ class TestGetNewInvestigationsTrigger(TestCase):
         self.trigger._save_state.assert_called_once()
 
     def test_multiple_poll_overlapping_window_deduplication(
-        self, mock_call_search_api, mock_sleep, mock_get_current_time
+        self, mock_call_search_api, _mock_sleep, mock_get_current_time
     ):
-        mock_sleep.side_effect = [None, None, StopLoop()]
+        self.trigger._save_state.side_effect = [None, None, StopLoop()]
         # get_current_time() called once initially + once per loop iteration
         mock_get_current_time.side_effect = [
             datetime(2026, 8, 26, 12, 0, 0, tzinfo=UTC),  # Initial last_poll_time
@@ -187,7 +190,7 @@ class TestGetNewInvestigationsTrigger(TestCase):
         final_state = set(self.trigger.state.get("RRNs", []))
         self.assertEqual(final_state, {"rrn:investigation:C", "rrn:investigation:D"})
 
-    def test_state_loaded_from_persistence_on_restart(self, mock_call_search_api, mock_sleep, mock_get_current_time):
+    def test_state_loaded_from_persistence_on_restart(self, mock_call_search_api, _mock_sleep, mock_get_current_time):
         # Simulate persisted state from previous run
         self.trigger.state = {"RRNs": ["rrn:investigation:1", "rrn:investigation:2"]}
 
@@ -229,14 +232,14 @@ class TestGetNewInvestigationsTrigger(TestCase):
         self.assertEqual(payload["start_time"], expected_start)
         self.assertEqual(payload["end_time"], expected_end)
 
-    def test_subsequent_poll_applies_5_minute_overlap(self, mock_call_search_api, mock_sleep, mock_get_current_time):
+    def test_subsequent_poll_applies_5_minute_overlap(self, mock_call_search_api, _mock_sleep, mock_get_current_time):
         """More in depth unit test of the dedupe logic that is being tested within the following unit test
         `test_multiple_poll_overlapping_window_deduplication` as this inspects the time params being sent"""
         # Define mock time progression
         initial_time = datetime(2026, 8, 26, 12, 0, 0, tzinfo=UTC)
         poll2_time = datetime(2026, 8, 26, 12, 0, 15, tzinfo=UTC)
 
-        mock_sleep.side_effect = [None, StopLoop()]  # 2 calls before we end the trigger loop
+        self.trigger._save_state.side_effect = [None, StopLoop()]  # 2 iterations before loop ends
         mock_get_current_time.side_effect = [
             initial_time,  # Initial last_poll_time - we set the baseline for the first poll
             initial_time,  # Poll 1 current_time - this is still the same time here
@@ -298,6 +301,27 @@ class TestGetNewInvestigationsTrigger(TestCase):
             "window expansion beyond initial lookback",
         )
 
+    def test_state_and_api_use_iso_strings_not_datetime_objects(
+        self, mock_call_search_api, _mock_sleep, _mock_get_current_time
+    ):
+        """Prevent a regression: state file can't serialize datetime objects - must use ISO strings throughout"""
+        mock_call_search_api.return_value = {"data": [], "metadata": {"total_pages": 1}}
+
+        with self.assertRaises(StopLoop):
+            self.trigger.run(self.params)
+
+        # Verify get_investigations called with string ISO times, not datetime objects
+        call_args = mock_call_search_api.call_args[0]
+        payload = call_args[3]
+        self.assertIsInstance(payload["start_time"], str, "start_time must be ISO string, not datetime")
+        self.assertIsInstance(payload["end_time"], str, "end_time must be ISO string, not datetime")
+
+        # Verify state saved with ISO string, not datetime
+        saved_time = self.trigger.state.get(TIME_STATE_KEY)
+        self.assertIsInstance(saved_time, str, "TIME_STATE_KEY must be ISO string for JSON serialization")
+        # Verify it's valid ISO format
+        datetime.fromisoformat(saved_time)
+
     def test_pagination_fetches_all_pages(self, mock_call_search_api, _mock_sleep, _mock_get_current_time):
         test_page_count = 3
         mock_call_search_api.side_effect = [
@@ -327,9 +351,9 @@ class TestGetNewInvestigationsTrigger(TestCase):
     def test_restart_resumes_from_saved_poll_time(self, mock_call_search_api, _mock_sleep, mock_get_current_time):
         """On restart, trigger should resume from saved TIME_STATE_KEY instead of initial lookback"""
         saved_poll_time = datetime(2026, 8, 26, 11, 50, 0, tzinfo=UTC)
-        current_time =  datetime(2026, 8, 26, 13, 0, 0, tzinfo=UTC)
+        current_time = datetime(2026, 8, 26, 13, 0, 0, tzinfo=UTC)
         self.trigger.state = {
-            "last_poll_time": saved_poll_time,
+            "last_poll_time": saved_poll_time.isoformat(),
             "RRNs": ["rrn:investigation:old"],
         }
 
@@ -353,10 +377,10 @@ class TestGetNewInvestigationsTrigger(TestCase):
         self.assertEqual(payload["start_time"], saved_poll_time.isoformat())
 
         # we haven't lost the last poll and pulling the trigger forward losing investigations
-        self.assertNotEquals(payload["start_time"], current_time.isoformat())
+        self.assertNotEqual(payload["start_time"], current_time.isoformat())
 
         # but our end time should be based on this - 5 seconds for API latency buffer
-        self.assertEquals(payload["end_time"], (current_time - timedelta(seconds=5)).isoformat())
+        self.assertEqual(payload["end_time"], (current_time - timedelta(seconds=5)).isoformat())
 
         # New investigation sent
         self.trigger.send.assert_called_once()

@@ -48,25 +48,21 @@ class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
         self.logger.info("Get Investigations: trigger started")
         self.logger.info(f"Investigations search criteria: {search}")
 
-        if last_poll_time := self.state.get(TIME_STATE_KEY):
-            self.logger.info(
-                f"Detected a container restart, resumming from last poll time: {last_poll_time.isoformat()}"
-            )
+        if last_poll_iso := self.state.get(TIME_STATE_KEY):
+            self.logger.info(f"Detected a container restart, resumming from last poll time: {last_poll_iso}")
         else:
-            last_poll_time = self.get_current_time() - timedelta(minutes=INITIAL_LOOKBACK_MINUTES)
-            self.logger.info(f"Initial poll time set to: '{last_poll_time.isoformat()}'")
+            last_poll_iso = (self.get_current_time() - timedelta(minutes=INITIAL_LOOKBACK_MINUTES)).isoformat()
+            self.logger.info(f"Initial poll time set to: '{last_poll_iso}")
 
         while True:
             # Calculate current time for this iteration (delay 5s to ensure time is safely in past before API indexes)
             current_time = self.get_current_time() - timedelta(seconds=5)
-            self.logger.info(
-                f"Searching for new investigations from '{last_poll_time.isoformat()}' to '{current_time.isoformat()}'"
-            )
+            self.logger.info(f"Searching for new investigations from '{last_poll_iso}' to '{current_time.isoformat()}'")
 
             # Get all investigations since last poll time
             # In case of any errors, log the error, wait for the defined frequency, and retry
             try:
-                investigations = self.get_investigations(search, last_poll_time, current_time)
+                investigations = self.get_investigations(search, last_poll_iso, current_time.isoformat())
             except Exception as error:
                 # If max retries reached, raise the error
                 if retry_attempts_counter >= MAX_NUMBER_OF_RETRIES:
@@ -92,12 +88,12 @@ class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
 
             # Update last poll time and reset retry counter for next iteration
             # Overlap window by 5 min to catch late-indexed investigations (IDR indexing is often slow)
-            last_poll_time = current_time - timedelta(minutes=API_LATENCY_OVERLAP_MINUTES)
-            self.logger.info(f"Checkpoint for next iteration {last_poll_time.isoformat()} to allow for API latency")
+            last_poll_iso = (current_time - timedelta(minutes=API_LATENCY_OVERLAP_MINUTES)).isoformat()
+            self.logger.info(f"Checkpoint for next iteration {last_poll_iso} to allow for API latency")
             retry_attempts_counter = 0
 
             # save the state for fallback in case of plugin restart
-            self.state[TIME_STATE_KEY] = last_poll_time
+            self.state[TIME_STATE_KEY] = last_poll_iso  # we need to save this as a string
             self.state[STATE_KEY] = list(prev_investigations)
             self._save_state()
 
@@ -106,7 +102,7 @@ class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
             time.sleep(frequency)
 
     def get_investigations(
-        self, search_query: List[Dict[str, Any]], start_time: datetime, end_time: datetime
+        self, search_query: List[Dict[str, Any]], start_time: str, end_time: str
     ) -> List[Dict[str, Any]]:
         # Set connection headers for investigations preview and initialize request helper
         self.connection.headers["Accept-version"] = "investigations-preview"
@@ -116,8 +112,8 @@ class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
         payload = clean(
             {
                 "search": search_query,
-                "start_time": start_time.isoformat(),
-                "end_time": end_time.isoformat(),
+                "start_time": start_time,
+                "end_time": end_time,
             }
         )
 
@@ -147,7 +143,9 @@ class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
                 # Track all RRNs from current poll for state management (enables deduplication across restarts)
                 latest_investigations.add(rrn)
             else:
-                self.logger.warn(f"Investigation {i}: does not have an RRN, skipping deduplication for this investigation.")
+                self.logger.warn(
+                    f"Investigation {i}: does not have an RRN, skipping deduplication for this investigation."
+                )
 
             if rrn not in previous_investigations:
                 self.send_investigation(investigation, rrn, i)
