@@ -18,6 +18,7 @@ API_LATENCY_OVERLAP_MINUTES = 5
 MAX_NUMBER_OF_RETRIES = 20
 
 STATE_KEY = "RRNs"
+TIME_STATE_KEY = "last_poll_time"
 
 
 class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
@@ -43,10 +44,17 @@ class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
 
         # Initialize the trigger starting point & set to dedupe investigations RRNs
         retry_attempts_counter, prev_investigations = 0, set(self.state.get(STATE_KEY, []))
-        last_poll_time = self.get_current_time() - timedelta(minutes=INITIAL_LOOKBACK_MINUTES)
+
         self.logger.info("Get Investigations: trigger started")
         self.logger.info(f"Investigations search criteria: {search}")
-        self.logger.info(f"Initial poll time set to: '{last_poll_time.isoformat()}'")
+
+        if last_poll_time := self.state.get(TIME_STATE_KEY):
+            self.logger.info(
+                f"Detected a container restart, resumming from last poll time: {last_poll_time.isoformat()}"
+            )
+        else:
+            last_poll_time = self.get_current_time() - timedelta(minutes=INITIAL_LOOKBACK_MINUTES)
+            self.logger.info(f"Initial poll time set to: '{last_poll_time.isoformat()}'")
 
         while True:
             # Calculate current time for this iteration (delay 5s to ensure time is safely in past before API indexes)
@@ -89,6 +97,7 @@ class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
             retry_attempts_counter = 0
 
             # save the state for fallback in case of plugin restart
+            self.state[TIME_STATE_KEY] = last_poll_time
             self.state[STATE_KEY] = list(prev_investigations)
             self._save_state()
 
@@ -133,24 +142,22 @@ class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
 
     def dedupe_and_send_investigations(self, investigations: List[Dict[str, Any]], previous_investigations: set) -> set:
         latest_investigations = set()
-        for investigation in investigations:
-            rrn = investigation.get("rrn", "N/A")
-            # Track all RRNs from current poll for state management (enables deduplication across restarts)
-            latest_investigations.add(rrn)
-            if rrn not in previous_investigations:
-                self.send_investigation(investigation, rrn)
+        for i, investigation in enumerate(investigations):
+            if rrn := investigation.get("rrn"):
+                # Track all RRNs from current poll for state management (enables deduplication across restarts)
+                latest_investigations.add(rrn)
             else:
-                self.logger.info(f"Duplicate investigation found and skipped: {rrn}")
-        # make sure we don't return an empty set if no new investigations were found, so we don't lose the previous state
-        if latest_investigations:
-            self.logger.info("Saving investigations RRNs retrieved during this execution.")
-            previous_investigations = latest_investigations
-        else:
-            self.logger.info("No new investigations were sent. Retaining existing state for next iteration.")
-        return previous_investigations
+                self.logger.warn(f"Investigation {i}: does not have an RRN, skipping deduplication for this investigation.")
 
-    def send_investigation(self, investigation: Dict[str, Any], rrn: str) -> None:
-        self.logger.info(f"Investigation found: {rrn}")
+            if rrn not in previous_investigations:
+                self.send_investigation(investigation, rrn, i)
+            else:
+                self.logger.info(f"Investigation {i}: Duplicate found and skipped: {rrn}")
+
+        return latest_investigations
+
+    def send_investigation(self, investigation: Dict[str, Any], rrn: str, index: int) -> None:
+        self.logger.info(f"Investigation {index}: Found {rrn}")
         self.send({Output.INVESTIGATION: clean(investigation)})
 
     @staticmethod

@@ -75,6 +75,27 @@ class TestGetNewInvestigationsTrigger(TestCase):
                 0,
                 {"rrn:investigation:1", "rrn:investigation:2"},
             ],
+            [
+                "investigation without rrn key missing are still sent",
+                {},
+                [
+                    {"title": "Investigation without RRN", "status": "OPEN"},
+                    {"rrn": None, "title": "Investigation with None RRN"},
+                    {"rrn": "", "title": "Investigation with empty RRN"}
+                ],
+                3,
+                set(),  # nothing to track for these
+            ],
+            [
+                "duplicate rrn in same poll sends both - strange API quirk and we can't differentiate",
+                {},
+                [
+                    {"rrn": "rrn:investigation:A", "title": "Investigation A first"},
+                    {"rrn": "rrn:investigation:A", "title": "Investigation A second"},
+                ],
+                2,
+                {"rrn:investigation:A"},  # state is a set so we only have the RRN once
+            ],
         ]
     )
     def test_single_poll_deduplication(
@@ -93,7 +114,7 @@ class TestGetNewInvestigationsTrigger(TestCase):
 
         # Compute expected RRNs: api_response - initial_state
         existing_rrns = set(initial_state.get("RRNs", []))
-        expected_rrns = [inv["rrn"] for inv in api_response if inv["rrn"] not in existing_rrns]
+        expected_rrns = [inv.get("rrn") for inv in api_response if inv.get("rrn") and inv.get("rrn") not in existing_rrns]
 
         with self.assertRaises(StopLoop):
             self.trigger.run(self.params)
@@ -101,7 +122,11 @@ class TestGetNewInvestigationsTrigger(TestCase):
         self.assertEqual(self.trigger.send.call_count, expected_sends)
 
         # Verify correct RRNs were sent
-        sent_rrns = [call_args[0][0][Output.INVESTIGATION]["rrn"] for call_args in self.trigger.send.call_args_list]
+        sent_rrns = []
+        for call_args in self.trigger.send.call_args_list:
+            if sent_rrn := call_args[0][0][Output.INVESTIGATION].get("rrn"):  # test data does not always hold an RRN
+                sent_rrns.append(sent_rrn)
+
         self.assertEqual(sent_rrns, expected_rrns)
 
         actual_state = set(self.trigger.state.get("RRNs", []))
@@ -197,7 +222,7 @@ class TestGetNewInvestigationsTrigger(TestCase):
         payload = call_args[0][3]  # Fourth positional arg is payload (resource_helper, endpoint, method, payload)
 
         # First poll: start_time should be current_time - 10 minutes (INITIAL_LOOKBACK_MINUTES)
-        expected_start = (mock_now - timedelta(minutes=10)).isoformat()
+        expected_start = (mock_now - timedelta(minutes=INITIAL_LOOKBACK_MINUTES)).isoformat()
         # end_time should be current_time - 5 seconds
         expected_end = (mock_now - timedelta(seconds=5)).isoformat()
 
@@ -260,3 +285,80 @@ class TestGetNewInvestigationsTrigger(TestCase):
         # Verify overlap is exactly 5 minutes
         actual_overlap = queried_end1 - queried_start2
         self.assertEqual(actual_overlap, timedelta(minutes=API_LATENCY_OVERLAP_MINUTES))
+
+    def test_api_latency_overlap_does_not_exceed_initial_lookback(
+        self, _mock_call_search_api, _mock_sleep, _mock_get_current_time
+    ):
+        """Constraint check: API_LATENCY_OVERLAP_MINUTES must not exceed INITIAL_LOOKBACK_MINUTES
+        to prevent expanding the window beyond the initial lookback on subsequent polls"""
+        self.assertLessEqual(
+            API_LATENCY_OVERLAP_MINUTES,
+            INITIAL_LOOKBACK_MINUTES,
+            "API_LATENCY_OVERLAP_MINUTES must not exceed INITIAL_LOOKBACK_MINUTES to prevent "
+            "window expansion beyond initial lookback",
+        )
+
+    def test_pagination_fetches_all_pages(self, mock_call_search_api, _mock_sleep, _mock_get_current_time):
+        test_page_count = 3
+        mock_call_search_api.side_effect = [
+            {"data": [{"rrn": "rrn:investigation:A", "title": "A"}], "metadata": {"total_pages": test_page_count}},
+            {"data": [{"rrn": "rrn:investigation:B", "title": "B"}], "metadata": {"total_pages": test_page_count}},
+            {"data": [{"rrn": "rrn:investigation:C", "title": "C"}], "metadata": {"total_pages": test_page_count}},
+        ]
+
+        with self.assertRaises(StopLoop):
+            self.trigger.run(self.params)
+
+        # API called 3 times
+        self.assertEqual(mock_call_search_api.call_count, 3)
+
+        # Verify index params: first call no index, subsequent calls have index
+        # _call_search_api(request, endpoint, method, payload, params) - params is 5th arg (index 4)
+        call_params = [call[0][4] for call in mock_call_search_api.call_args_list]
+        self.assertNotIn("index", call_params[0])  # First call has no index
+        self.assertEqual(call_params[1].get("index"), 1)
+        self.assertEqual(call_params[2].get("index"), 2)
+
+        # All 3 investigations sent
+        self.assertEqual(self.trigger.send.call_count, test_page_count)
+        sent_rrns = [call[0][0]["investigation"]["rrn"] for call in self.trigger.send.call_args_list]
+        self.assertEqual(sent_rrns, ["rrn:investigation:A", "rrn:investigation:B", "rrn:investigation:C"])
+
+    def test_restart_resumes_from_saved_poll_time(self, mock_call_search_api, _mock_sleep, mock_get_current_time):
+        """On restart, trigger should resume from saved TIME_STATE_KEY instead of initial lookback"""
+        saved_poll_time = datetime(2026, 8, 26, 11, 50, 0, tzinfo=UTC)
+        current_time =  datetime(2026, 8, 26, 13, 0, 0, tzinfo=UTC)
+        self.trigger.state = {
+            "last_poll_time": saved_poll_time,
+            "RRNs": ["rrn:investigation:old"],
+        }
+
+        mock_get_current_time.side_effect = [current_time]  # container restarted 1hr 10 mins since last poll
+
+        mock_call_search_api.return_value = {
+            "data": [{"rrn": "rrn:investigation:new", "title": "New Investigation"}],
+            "metadata": {"total_pages": 1},
+        }
+
+        with self.assertRaises(StopLoop):
+            self.trigger.run(self.params)
+
+        # Verify restart log message
+        log_calls = [call[0][0] for call in self.trigger.logger.info.call_args_list]
+        self.assertTrue(any("Detected a container restart" in log for log in log_calls))
+        self.assertFalse(any("Initial poll time set to" in log for log in log_calls))
+
+        # Verify API call used saved time, not initial lookback
+        payload = mock_call_search_api.call_args[0][3]
+        self.assertEqual(payload["start_time"], saved_poll_time.isoformat())
+
+        # we haven't lost the last poll and pulling the trigger forward losing investigations
+        self.assertNotEquals(payload["start_time"], current_time.isoformat())
+
+        # but our end time should be based on this - 5 seconds for API latency buffer
+        self.assertEquals(payload["end_time"], (current_time - timedelta(seconds=5)).isoformat())
+
+        # New investigation sent
+        self.trigger.send.assert_called_once()
+        sent_investigation = self.trigger.send.call_args[0][0]["investigation"]
+        self.assertEqual(sent_investigation["rrn"], "rrn:investigation:new")
