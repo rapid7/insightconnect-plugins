@@ -1,0 +1,302 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: relayshield
+title: RelayShield
+description: RelayShield detects identity and crypto-asset attack signals while an attack is still forming -- credential breaches, SIM-swap fraud, lookalike/typosquat domains, and wallet/token risk -- rather than after an account has already been taken over
+version: 1.0.0
+connection_version: 1
+cloud_ready: true
+sdk:
+  type: slim
+  version: 6.6.0
+  user: nobody
+supported_versions: ["RelayShield API v1"]
+vendor: relayshield
+status: []
+tags: [relayshield, identity protection, threat intelligence, crypto, sim swap, breach, phishing]
+support: community
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/relayshield
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://relayshield.net
+hub_tags:
+  use_cases: [threat_detection_and_response, data_enrichment, vulnerability_management]
+  keywords: [breach_prevention, crypto, domains, email, phishing, threat_intelligence]
+  features: []
+requirements:
+  - "A RelayShield API key from api.relayshield.net/developers"
+key_features:
+  - "Check an email address against known credential breaches"
+  - "Check a phone number for active/recent SIM-swap fraud"
+  - "Check a domain for lookalike/typosquat registrations"
+  - "Check a crypto wallet address (and optional token contract) for composite risk"
+troubleshooting: "Ensure the RelayShield API key used has an active subscription with call credit for the metered endpoints being used. Keys are issued at api.relayshield.net/developers."
+version_history:
+  - "1.0.0 - Initial plugin."
+links:
+ - "[RelayShield](https://relayshield.net)"
+references:
+ - "[RelayShield Developer Docs](https://api.relayshield.net/developers)"
+enable_cache: false
+types:
+  breach_record:
+    name:
+      title: Breach Name
+      type: string
+      description: Name of the breach source
+      required: false
+      example: "Adobe"
+    domain:
+      title: Breach Domain
+      type: string
+      description: Domain associated with the breach
+      required: false
+      example: "adobe.com"
+    breach_date:
+      title: Breach Date
+      type: string
+      description: Date the breach occurred
+      required: false
+      example: "2013-10-04"
+    data_classes:
+      title: Data Classes
+      type: "[]string"
+      description: Categories of data exposed in the breach
+      required: false
+      example: ["Email addresses", "Passwords"]
+    is_verified:
+      title: Verified
+      type: boolean
+      description: Whether the breach has been verified
+      required: false
+      example: true
+  lookalike_domain:
+    domain:
+      title: Lookalike Domain
+      type: string
+      description: The lookalike/typosquat domain found
+      required: false
+      example: "relayshie1d.net"
+    gsb_flagged:
+      title: Google Safe Browsing Flagged
+      type: boolean
+      description: Whether Google Safe Browsing has flagged this domain
+      required: false
+      example: false
+    registration_age_days:
+      title: Registration Age (Days)
+      type: integer
+      description: Days since the lookalike domain was registered
+      required: false
+      example: 4
+    cert_count:
+      title: Certificate Count
+      type: integer
+      description: Number of TLS certificates issued for the domain
+      required: false
+      example: 1
+    cert_recent:
+      title: Recent Certificate
+      type: boolean
+      description: Whether a TLS certificate was issued recently
+      required: false
+      example: true
+    latest_cert_issued:
+      title: Latest Certificate Issued
+      type: string
+      description: Timestamp of the most recent TLS certificate
+      required: false
+      example: "2026-07-20T00:00:00Z"
+  token_risk:
+    contract_address:
+      title: Contract Address
+      type: string
+      description: The token contract address checked
+      required: false
+      example: "0x1234567890123456789012345678901234567890"
+    token_name:
+      title: Token Name
+      type: string
+      description: Name of the token
+      required: false
+      example: "Example Token"
+    token_symbol:
+      title: Token Symbol
+      type: string
+      description: Symbol of the token
+      required: false
+      example: "EXT"
+    critical_flags:
+      title: Critical Flags
+      type: "[]string"
+      description: Critical risk indicators found on the token contract
+      required: false
+      example: ["honeypot"]
+    warning_flags:
+      title: Warning Flags
+      type: "[]string"
+      description: Warning-level risk indicators found on the token contract
+      required: false
+      example: ["mintable supply"]
+connection:
+  credentials:
+    title: RelayShield API Key
+    description: API key from api.relayshield.net/developers
+    type: credential_secret_key
+    required: true
+    example: rs_live_abcdefghijklmnopqrstuvwxyz0123
+actions:
+  check_breach:
+    title: Check Email Breach
+    description: Check an email address against known credential breach databases
+    input:
+      email:
+        title: Email Address
+        description: Email address to check
+        type: string
+        required: true
+        example: "user@example.com"
+    output:
+      email:
+        title: Email Queried
+        type: string
+        description: The email address that was checked
+        required: false
+        example: "user@example.com"
+      breach_count:
+        title: Breach Count
+        type: integer
+        description: Number of breaches this email was found in
+        required: false
+        example: 2
+      breaches:
+        title: Breaches
+        type: "[]breach_record"
+        description: List of breaches this email was found in
+        required: false
+        example: [{"name": "Adobe", "domain": "adobe.com", "breach_date": "2013-10-04", "data_classes": ["Email addresses", "Passwords"], "is_verified": true}]
+  check_sim_swap:
+    title: Check SIM Swap
+    description: Check a phone number for active or recent SIM-swap fraud at the carrier level
+    input:
+      phone:
+        title: Phone Number
+        description: Phone number in E.164 format (e.g. +14155551234)
+        type: string
+        required: true
+        example: "+14155551234"
+    output:
+      phone:
+        title: Phone Queried
+        type: string
+        description: The phone number that was checked
+        required: false
+        example: "+14155551234"
+      swapped:
+        title: Swapped
+        type: boolean
+        description: Whether a SIM swap occurred within the lookback window
+        required: false
+        example: false
+      swap_timestamp:
+        title: Swap Timestamp
+        type: string
+        description: Timestamp of the most recent SIM swap, if any
+        required: false
+        example: "2026-07-20T00:00:00Z"
+      carrier:
+        title: Carrier
+        type: string
+        description: Carrier name associated with the phone number
+        required: false
+        example: "Verizon"
+  check_domain:
+    title: Check Domain Lookalikes
+    description: Check a domain for lookalike/typosquat registrations that may be used for phishing
+    input:
+      domain:
+        title: Domain
+        description: Domain to check for lookalikes (e.g. example.com)
+        type: string
+        required: true
+        example: "example.com"
+    output:
+      domain:
+        title: Domain Queried
+        type: string
+        description: The domain that was checked
+        required: false
+        example: "example.com"
+      lookalikes_found:
+        title: Lookalikes Found
+        type: integer
+        description: Number of lookalike domains found
+        required: false
+        example: 1
+      lookalikes:
+        title: Lookalikes
+        type: "[]lookalike_domain"
+        description: List of lookalike domains found
+        required: false
+        example: [{"domain": "exarnple.com", "gsb_flagged": false, "registration_age_days": 4, "cert_count": 1, "cert_recent": true, "latest_cert_issued": "2026-07-20T00:00:00Z"}]
+  check_crypto_intel:
+    title: Check Crypto Wallet Intel
+    description: Check a crypto wallet address (and optional token contract) for composite risk, combining address reputation and token-contract risk into a single score
+    input:
+      address:
+        title: Wallet Address
+        description: EVM wallet address to check (0x + 40 hex characters)
+        type: string
+        required: true
+        example: "0x1234567890123456789012345678901234567890"
+      token_address:
+        title: Token Contract Address
+        description: Optional EVM token contract address to also check
+        type: string
+        required: false
+        example: "0x0987654321098765432109876543210987654321"
+      chain_id:
+        title: Chain ID
+        description: EVM chain ID to check against (default is Ethereum mainnet)
+        type: string
+        required: false
+        default: "1"
+        example: "1"
+    output:
+      address:
+        title: Address Queried
+        type: string
+        description: The wallet address that was checked
+        required: false
+        example: "0x1234567890123456789012345678901234567890"
+      chain_id:
+        title: Chain ID
+        type: string
+        description: The chain ID that was checked against
+        required: false
+        example: "1"
+      composite_risk:
+        title: Composite Risk
+        type: string
+        description: Overall risk level -- LOW, MEDIUM, HIGH, or CRITICAL
+        required: false
+        example: "LOW"
+      address_flags:
+        title: Address Flags
+        type: "[]string"
+        description: Risk flags found on the wallet address
+        required: false
+        example: []
+      token_risk:
+        title: Token Risk
+        type: token_risk
+        description: Risk details for the token contract, if one was supplied
+        required: false
+        example: {}
+      correlation_advisories:
+        title: Correlation Advisories
+        type: "[]string"
+        description: Recommended follow-up checks based on the risk signals found
+        required: false
+        example: ["No risk signals detected on this address. For complete protection, monitor the associated email via check_breach and phone via check_sim_swap."]
