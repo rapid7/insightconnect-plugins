@@ -143,7 +143,6 @@ Example output:
 
 # Version History
 
-* 2.0.3 - Updated dependencies | SDK bump to latest version (6.6.0)
 * 2.0.2 - Addressed Snyk Vulnerability | SDK bump to latest version (6.3.4)
 * 2.0.1 - Update SDK | Patch critical Snyk vulnerability
 * 2.0.0 - Update `netmiko` and `paramiko` version in requirements | Update to use the `insightconnect-python-3-38-slim-plugin:4` Docker image | Use input and output constants | Code refactor | Add example input and output | Change output title in Execute Configuration Commands and Execute Show Commands actions | Fix bug where error occurs when SSH Key is empty

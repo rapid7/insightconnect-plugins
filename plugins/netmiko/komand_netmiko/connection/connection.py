@@ -1,7 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
 from netmiko import ConnectHandler
-from paramiko.ssh_exception import SSHException
+from netmiko.ssh_exception import SSHException
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 from os import path
 import os
