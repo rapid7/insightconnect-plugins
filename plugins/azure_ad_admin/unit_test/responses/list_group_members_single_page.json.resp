@@ -1,0 +1,13 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#directoryObjects",
+  "@odata.count": 1,
+  "value": [
+    {
+      "id": "00000000-0000-0000-0000-000000000009",
+      "displayName": "Solo Example",
+      "userPrincipalName": "solo@example.com",
+      "mail": "solo@example.com",
+      "accountEnabled": true
+    }
+  ]
+}
