@@ -22,10 +22,7 @@ COPY --from=builder /workspace /workspace
 COPY --from=builder /plugin.spec.yaml /plugin.spec.yaml
 
 
-RUN if [ -f requirements.txt ]; then pip install -r requirements.txt --ignore-installed; fi
-
-# Force requests to a specific version with security fixes, overriding pytmv1's pin (requests~=2.32.3)
-RUN pip install requests==2.34.2
+RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
 ENV PYTHONPATH="/workspace:${PYTHONPATH}"
 
