@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 12.0.9
+version: 12.0.10
 connection_version: 5
 supported_versions: ["Latest release successfully tested on 2025-07-22."]
 vendor: rapid7
@@ -36,6 +36,7 @@ sdk:
   version: 6.6.0
   user: nobody
 version_history:
+  - "12.0.10 - Trigger `Get New Investigations` updated for IDR API latency issues and dedupe logic added | Updated dependencies"
   - "12.0.9 - Retry requests with backoff on transient InsightIDR 5xx responses to resolve intermittent 500 errors"
   - "12.0.8 - Enabled cache to configure the appropriate permissions in the Dockerfile"
   - "12.0.7 - Updated dependencies | SDK bump to 6.6.0"
