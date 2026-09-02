@@ -1,0 +1,367 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: rapid7_intelhub
+title: Rapid7 IntelHub
+description: Access Rapid7 Intelligence Hub for threat intelligence data including CVE information, vulnerabilities, and security insights
+version: 1.0.0
+connection_version: 1
+supported_versions: ["v1"]
+vendor: rapid7-labs
+support: rapid7
+cloud_ready: true
+fedramp_ready: true
+sdk:
+  type: slim
+  version: 6.3.10
+  user: nobody
+key_features:
+  - Search CVE database for vulnerability information
+  - Retrieve detailed CVE information by ID
+  - Access threat intelligence data from Rapid7 Intelligence Hub
+requirements:
+  - Rapid7 Insight Platform API Key
+troubleshooting:
+  - Ensure your API key has access to Intelligence Hub
+  - Verify the correct region is selected for your account
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_intelhub
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.rapid7.com
+tags:
+  - threat_intelligence
+  - cve
+  - vulnerability
+  - rapid7
+  - intelhub
+references:
+  - "[Rapid7 Intelligence Hub](https://www.rapid7.com/products/threat-command/)"
+links:
+  - "[Rapid7 Insight Platform](https://insight.rapid7.com)"
+version_history:
+  - "1.0.0 - Initial plugin"
+hub_tags:
+  use_cases: [threat_detection_and_response, vulnerability_management]
+  keywords: [threat_intelligence, cve, vulnerability, rapid7, cloud_enabled]
+  features: []
+enable_cache: false
+language: python
+types:
+  cve_summary:
+    cve_id:
+      title: CVE ID
+      description: The CVE identifier
+      type: string
+      required: true
+    title:
+      title: Title
+      description: Title or name of the CVE
+      type: string
+      required: false
+    severity:
+      title: Severity
+      description: Severity level of the CVE
+      type: string
+      required: false
+    cvss_score:
+      title: CVSS Score
+      description: CVSS score of the vulnerability
+      type: number
+      required: false
+    published_date:
+      title: Published Date
+      description: Date the CVE was published
+      type: string
+      required: false
+    description:
+      title: Description
+      description: Description of the vulnerability
+      type: string
+      required: false
+  cve_detail:
+    cve_id:
+      title: CVE ID
+      description: The CVE identifier
+      type: string
+      required: true
+    title:
+      title: Title
+      description: Title or name of the CVE
+      type: string
+      required: false
+    description:
+      title: Description
+      description: Detailed description of the vulnerability
+      type: string
+      required: false
+    severity:
+      title: Severity
+      description: Severity level of the CVE
+      type: string
+      required: false
+    cvss_score:
+      title: CVSS Score
+      description: CVSS score of the vulnerability
+      type: number
+      required: false
+    cvss_vector:
+      title: CVSS Vector
+      description: CVSS vector string
+      type: string
+      required: false
+    published_date:
+      title: Published Date
+      description: Date the CVE was published
+      type: string
+      required: false
+    modified_date:
+      title: Modified Date
+      description: Date the CVE was last modified
+      type: string
+      required: false
+    references:
+      title: References
+      description: List of reference URLs
+      type: "[]string"
+      required: false
+    affected_products:
+      title: Affected Products
+      description: List of affected products
+      type: "[]string"
+      required: false
+  pagination:
+    page:
+      title: Page
+      description: Current page number
+      type: integer
+      required: false
+    page_size:
+      title: Page Size
+      description: Number of results per page
+      type: integer
+      required: false
+    total_count:
+      title: Total Count
+      description: Total number of results available
+      type: integer
+      required: false
+    total_pages:
+      title: Total Pages
+      description: Total number of pages available
+      type: integer
+      required: false
+connection:
+  api_key:
+    title: API Key
+    description: Rapid7 Insight Platform API Key
+    type: credential_secret_key
+    required: true
+    example: '{"secretKey": "abc123-def456-ghi789"}'
+  region:
+    title: Region
+    description: The region for your Rapid7 Insight Platform account
+    type: string
+    required: true
+    enum:
+      - United States
+      - Europe
+      - Canada
+      - Australia
+      - Japan
+    default: United States
+    example: United States
+actions:
+  search_cves:
+    title: Search CVEs
+    description: Search the Intelligence Hub CVE database
+    input:
+      search:
+        title: Search
+        description: Search query to filter CVEs (e.g., CVE ID, keyword)
+        type: string
+        required: false
+        example: "CVE-2024"
+      page:
+        title: Page
+        description: Page number for pagination (starts at 1)
+        type: integer
+        required: false
+        default: 1
+        example: 1
+      page_size:
+        title: Page Size
+        description: Number of results per page (max 100)
+        type: integer
+        required: false
+        default: 10
+        example: 10
+      cvss_score:
+        title: CVSS Score
+        description: Filter by CVSS severity level
+        type: string
+        required: false
+        enum:
+          - ""
+          - critical
+          - high
+          - medium
+          - low
+        example: "high"
+      exploitable:
+        title: Exploitable
+        description: Filter by whether the CVE is exploitable
+        type: boolean
+        required: false
+        example: true
+      epss_score:
+        title: EPSS Score Range
+        description: Filter by EPSS score range (e.g., 0-0.5, 0.5-1)
+        type: string
+        required: false
+        example: "0-0.5"
+      cisa_kev:
+        title: CISA KEV
+        description: Filter by CISA Known Exploited Vulnerabilities catalog
+        type: boolean
+        required: false
+        example: true
+      last_updated:
+        title: Last Updated
+        description: Filter by last updated time range (e.g., 'last 24 hours', 'last 72 hours', 'last 7 days')
+        type: string
+        required: false
+        example: "last 24 hours"
+    output:
+      cves:
+        title: CVEs
+        description: List of CVEs matching the search criteria
+        type: "[]cve_summary"
+        required: true
+        example: '[{"cve_id": "CVE-2025-12345", "title": "Example Vulnerability", "severity": "High", "cvss_score": 8.5}]'
+      pagination:
+        title: Pagination
+        description: Pagination information for the results
+        type: pagination
+        required: false
+        example: '{"page": 1, "page_size": 10, "total_count": 100, "total_pages": 10}'
+  get_cve:
+    title: Get CVE
+    description: Get detailed information about a specific CVE by ID
+    input:
+      cve_id:
+        title: CVE ID
+        description: The CVE identifier to look up (e.g., CVE-2025-12345)
+        type: string
+        required: true
+        example: "CVE-2025-12345"
+    output:
+      cve:
+        title: CVE
+        description: Detailed CVE information
+        type: cve_detail
+        required: true
+        example: '{"cve_id": "CVE-2025-12345", "title": "Example Vulnerability", "description": "A vulnerability in...", "severity": "High", "cvss_score": 8.5}'
+      found:
+        title: Found
+        description: Whether the CVE was found
+        type: boolean
+        required: true
+        example: true
+  search_threat_actors:
+    title: Search Threat Actors
+    description: Search the Intelligence Hub threat actor database
+    input:
+      search:
+        title: Search
+        description: Search query to filter threat actors by name or alias
+        type: string
+        required: false
+        example: "APT28"
+      page:
+        title: Page
+        description: Page number for pagination (starts at 1)
+        type: integer
+        required: false
+        default: 1
+        example: 1
+      page_size:
+        title: Page Size
+        description: Number of results per page (max 100)
+        type: integer
+        required: false
+        default: 10
+        example: 10
+    output:
+      threat_actors:
+        title: Threat Actors
+        description: List of threat actors matching the search criteria
+        type: "[]object"
+        required: true
+        example: '[{"name": "APT28", "aliases": ["Fancy Bear"], "nationalities": ["RU"]}]'
+      pagination:
+        title: Pagination
+        description: Pagination information for the results
+        type: pagination
+        required: false
+        example: '{"page": 1, "page_size": 10, "total_count": 135, "total_pages": 14}'
+  get_threat_actor:
+    title: Get Threat Actor
+    description: Get detailed information about a specific threat actor by UUID
+    input:
+      uuid:
+        title: UUID
+        description: The threat actor UUID to look up
+        type: string
+        required: true
+        example: "db2101df-e979-433c-b598-17b45d5aeca7"
+    output:
+      threat_actor:
+        title: Threat Actor
+        description: Detailed threat actor information
+        type: object
+        required: true
+        example: '{"name": "MuddyWater", "description": "Iranian APT group...", "aliases": ["TA450"]}'
+      found:
+        title: Found
+        description: Whether the threat actor was found
+        type: boolean
+        required: true
+        example: true
+  get_threat_actor_cves:
+    title: Get Threat Actor CVEs
+    description: Get CVEs associated with a specific threat actor
+    input:
+      uuid:
+        title: UUID
+        description: The threat actor UUID to look up CVEs for
+        type: string
+        required: true
+        example: "db2101df-e979-433c-b598-17b45d5aeca7"
+      page:
+        title: Page
+        description: Page number for pagination (starts at 1)
+        type: integer
+        required: false
+        default: 1
+        example: 1
+      page_size:
+        title: Page Size
+        description: Number of results per page (max 100)
+        type: integer
+        required: false
+        default: 10
+        example: 10
+    output:
+      cves:
+        title: CVEs
+        description: List of CVEs associated with the threat actor
+        type: "[]object"
+        required: true
+        example: '[{"id": "CVE-2023-27350", "last_updated": "2025-11-04T10:27:38Z"}]'
+      pagination:
+        title: Pagination
+        description: Pagination information for the results
+        type: pagination
+        required: false
+        example: '{"page": 1, "page_size": 10, "total_count": 3, "total_pages": 1}'
