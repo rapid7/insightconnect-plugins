@@ -24,7 +24,7 @@ class Meta:
 
 
 class MockResponse:
-    def __init__(self, status_code: int, body=None, text: str = None):
+    def __init__(self, status_code: int, body=None, text: str = None, headers: dict = None):
         self.status_code = status_code
         self.ok = 200 <= status_code < 400
         if text is not None:
@@ -34,6 +34,9 @@ class MockResponse:
         else:
             self.text = ""
         self.content = self.text.encode("utf-8")
+        # The client inspects Content-Type to tell an API response from a web page, and
+        # Retry-After to tell the user how long to wait after a rate limit.
+        self.headers = headers or {"Content-Type": "application/json" if body is not None else "text/plain"}
 
     def json(self):
         return json.loads(self.text)
@@ -102,7 +105,10 @@ class Util:
         if entity == "Broken":
             return MockResponse(500, {"error": "server error"})
         if entity == "Garbled":
-            return MockResponse(200, text="<html>not json</html>")
+            # How the web interface answers an API path: its sign-in page, with a 200.
+            return MockResponse(200, text="<!DOCTYPE html><html><head><title>Rapid7</title></head></html>")
+        if entity == "Truncated":
+            return MockResponse(200, text='{"value": [')
 
         if len(segments) == 2 and segments[1] == "$count":
             if params.get("$filter") == "invalid":

@@ -26,6 +26,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             ssl_verify=self.ssl_verify,
             logger=self.logger,
         )
+        self.logger.info(f"Connect: Using Cyber GRC API host {self.client.url}")
 
     def test(self):
         # Statuses is a small read-only lookup collection, so this confirms the URL and

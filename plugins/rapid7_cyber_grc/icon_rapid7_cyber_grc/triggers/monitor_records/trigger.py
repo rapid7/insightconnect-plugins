@@ -4,6 +4,7 @@ from .schema import MonitorRecordsInput, MonitorRecordsOutput, Input, Output, Co
 
 # Custom imports below
 import json
+from insightconnect_plugin_runtime.exceptions import PluginException
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from tempfile import gettempdir
@@ -42,12 +43,27 @@ class MonitorRecords(insightconnect_plugin_runtime.Trigger):
 
         while True:
             time_filter = f"{timestamp_field} gt {self._to_odata(watermark)}"
-            records = self.connection.client.list_records(
-                record_type,
-                filter_=f"{time_filter} and {filter}" if filter else time_filter,
-                expand=expand,
-                order_by=f"{timestamp_field} asc",
-            )
+            # Both halves are parenthesised because an unparenthesised or in the user's
+            # filter would bind looser than the and, letting records older than the
+            # watermark back into every poll and re-emitting them forever.
+            combined = f"({time_filter}) and ({filter})" if filter else time_filter
+            try:
+                records = self.connection.client.list_records(
+                    record_type,
+                    filter_=combined,
+                    expand=expand,
+                    order_by=f"{timestamp_field} asc",
+                )
+            except PluginException as error:
+                # A trigger that raises stops polling for good, and a rate limit or a
+                # restart of the API should not take the workflow down with it. The
+                # stored position means nothing is missed once the API recovers.
+                self.logger.error(
+                    f"Polling {record_type} failed, retrying in {abs(interval)} seconds. "
+                    f"{error.cause} {error.assistance}"
+                )
+                time.sleep(abs(interval))
+                continue
 
             if records:
                 newest = self._newest_timestamp(records, timestamp_field)
@@ -81,9 +97,15 @@ class MonitorRecords(insightconnect_plugin_runtime.Trigger):
         if not isinstance(value, str):
             return None
         try:
-            return datetime.fromisoformat(value.replace("Z", "+00:00"))
+            parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
         except ValueError:
             return None
+        # The API sends UTC, but not every field carries the offset. Attaching it here
+        # keeps the batch comparable: mixing naive and aware datetimes raises a
+        # TypeError, and treating a naive value as local time would move the watermark.
+        if parsed.tzinfo is None:
+            return parsed.replace(tzinfo=timezone.utc)
+        return parsed
 
     @staticmethod
     def _to_odata(moment):
@@ -93,7 +115,9 @@ class MonitorRecords(insightconnect_plugin_runtime.Trigger):
     def _load_watermark(self, cache_key):
         try:
             stored = json.loads(self.cache_path.read_text()).get(cache_key)
-        except (OSError, ValueError):
+        except (OSError, ValueError, AttributeError):
+            # An unreadable or corrupt cache costs a replay of the lookback window, which
+            # is far better than the trigger refusing to start.
             return None
         return self._parse(stored)
 
@@ -101,6 +125,8 @@ class MonitorRecords(insightconnect_plugin_runtime.Trigger):
         try:
             cache = json.loads(self.cache_path.read_text())
         except (OSError, ValueError):
+            cache = {}
+        if not isinstance(cache, dict):
             cache = {}
         cache[cache_key] = self._to_odata(moment)
         try:

@@ -9,6 +9,8 @@ from pathlib import Path
 from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
+from parameterized import parameterized
+
 from icon_rapid7_cyber_grc.triggers import MonitorRecords
 from util import MockResponse, Util, collection, record
 
@@ -83,7 +85,49 @@ class TestMonitorRecords(TestCase):
     def test_a_user_filter_is_combined_with_the_timestamp_filter(self, mock_sleep, mock_request):
         self.run_trigger(filter="statusID eq 3")
 
-        self.assertTrue(Util.calls[0]["params"]["$filter"].endswith(" and statusID eq 3"))
+        self.assertTrue(Util.calls[0]["params"]["$filter"].endswith(") and (statusID eq 3)"))
+
+    def test_a_user_filter_containing_or_cannot_escape_the_timestamp_filter(self, mock_sleep, mock_request):
+        # Unparenthesised, "ts gt W and a eq 1 or b eq 2" binds as "(ts gt W and a eq 1)
+        # or b eq 2", so records older than the position return on every single poll.
+        self.run_trigger(filter="statusID eq 3 or statusID eq 4")
+
+        sent_filter = Util.calls[0]["params"]["$filter"]
+        self.assertTrue(sent_filter.startswith("(modifiedDate gt "))
+        self.assertTrue(sent_filter.endswith(") and (statusID eq 3 or statusID eq 4)"))
+
+    def test_polling_continues_after_the_api_fails(self, mock_sleep, mock_request):
+        # A trigger that lets an exception out stops polling for good, so a rate limit or
+        # a brief API outage would silently take the workflow down.
+        mock_request.side_effect = [
+            MockResponse(429, {"error": "slow down"}),
+            MockResponse(200, collection([record(1)])),
+        ]
+        mock_sleep.side_effect = stop_after(2)
+
+        self.run_trigger()
+
+        self.trigger.send.assert_called_once()
+
+    def test_a_failed_poll_is_logged_with_the_reason(self, mock_sleep, mock_request):
+        mock_request.side_effect = lambda *args, **kwargs: MockResponse(403, {"error": "denied"})
+        self.trigger.logger = MagicMock()
+
+        self.run_trigger()
+
+        logged = self.trigger.logger.error.call_args[0][0]
+        self.assertIn("Polling Incidents failed", logged)
+        self.assertIn("Forbidden.", logged)
+
+    def test_a_timestamp_without_an_offset_is_treated_as_utc(self, mock_sleep, mock_request):
+        # Comparing a naive datetime with an aware one raises a TypeError, and reading a
+        # naive value as local time would move the position by the orchestrator's offset.
+        naive = dict(record(1), modifiedDate="2026-01-21T20:30:44.407")
+        mock_request.side_effect = lambda *args, **kwargs: MockResponse(200, collection([naive, record(2)]))
+
+        self.run_trigger()
+
+        self.assertIn("2026-01-21T20:30:44.408Z", self.trigger.cache_path.read_text())
 
     def test_the_position_advances_past_the_newest_record(self, mock_sleep, mock_request):
         self.run_trigger()
@@ -106,12 +150,40 @@ class TestMonitorRecords(TestCase):
 
         self.assertNotIn("2026-05-01", Util.calls[0]["params"]["$filter"])
 
-    def test_a_corrupt_cache_falls_back_to_the_lookback_window(self, mock_sleep, mock_request):
-        self.trigger.cache_path.write_text("not json")
+    @parameterized.expand([["not_json", "not json"], ["not_an_object", "[]"], ["empty", ""]])
+    def test_a_corrupt_cache_falls_back_to_the_lookback_window(self, mock_sleep, mock_request, _name, contents):
+        self.trigger.cache_path.write_text(contents)
 
         self.run_trigger()
 
         self.trigger.send.assert_called_once()
+        self.assertIn("modifiedDate gt ", Util.calls[0]["params"]["$filter"])
+
+    def test_a_cache_that_is_not_an_object_is_replaced_rather_than_failing_the_poll(self, mock_sleep, mock_request):
+        self.trigger.cache_path.write_text("[]")
+
+        self.run_trigger()
+
+        self.assertIn("Incidents:modifiedDate", self.trigger.cache_path.read_text())
+
+    def test_the_position_holds_when_a_timestamp_cannot_be_parsed(self, mock_sleep, mock_request):
+        unparseable = dict(record(1), modifiedDate="last Tuesday")
+        mock_request.side_effect = lambda *args, **kwargs: MockResponse(200, collection([unparseable]))
+
+        self.run_trigger()
+
+        self.trigger.send.assert_called_once()
+        self.assertFalse(self.trigger.cache_path.exists())
+
+    def test_polling_continues_when_the_position_cannot_be_written(self, mock_sleep, mock_request):
+        # A lost position only costs duplicate records after a restart.
+        self.trigger.cache_path = Path(self.cache_dir.name) / "no-such-directory" / "cache.json"
+        self.trigger.logger = MagicMock()
+
+        self.run_trigger()
+
+        self.trigger.send.assert_called_once()
+        self.assertIn("Could not persist", self.trigger.logger.warning.call_args[0][0])
 
     def test_nothing_is_emitted_when_no_records_changed(self, mock_sleep, mock_request):
         mock_request.side_effect = lambda *args, **kwargs: MockResponse(200, collection([]))
