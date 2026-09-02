@@ -70,15 +70,26 @@ class Util:
                     return MockResponse(200, "get_blocked_items.json.resp")
                 if params == {"pageTotal": False}:
                     return MockResponse(200, "get_blocked_items_no_params.json.resp")
+                if params == {"page": 1, "pageSize": 100, "pageTotal": True}:
+                    return MockResponse(200, "get_blacklists_page_1.json.resp")
+                if params == {"page": 2, "pageSize": 100, "pageTotal": True}:
+                    return MockResponse(200, "get_blacklists_page_2.json.resp")
 
             if method == "DELETE":
                 if url.endswith("0da7bc3d-valid_id"):
                     return MockResponse(200, "remove_blocked_item.json.resp")
                 if url.endswith("invalidId"):
                     return MockResponse(400, "")
+                if url.endswith("222fd666-9666-4e66-a066-d66fd966ad22"):
+                    return MockResponse(200, "unblacklist.json.resp")
 
             if method == "POST":
                 if json_data.get("properties").get("sha256") == "050c194cbbb":
+                    return MockResponse(201, "add_blocked_item.json.resp")
+                if (
+                    json_data.get("properties").get("sha256")
+                    == "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+                ):
                     return MockResponse(201, "add_blocked_item.json.resp")
                 if json_data.get("properties").get("sha256") == "duplicatedSha":
                     return MockResponse(409, "")
@@ -212,7 +223,16 @@ class Util:
         ):
             return MockResponse(200, "get_endpoints_in_group.json.resp")
 
+        if url == "https://api-us03.central.sophos.com/common/v1/alerts":
+            if params.get("pageFromKey") == "alertsKey":
+                return MockResponse(200, "get_alerts_page_2.json.resp")
+            return MockResponse(200, "get_alerts_page_1.json.resp")
+
         if url == "https://api-us03.central.sophos.com/endpoint/v1/endpoints":
+            if params.get("pageFromKey") == "exampleKey":
+                return MockResponse(200, "get_agent_details_page_2.json.resp")
+            if params == {"pageTotal": True}:
+                return MockResponse(200, "get_agent_details_page_1.json.resp")
             return MockResponse(200, "get_endpoint_id.json.resp")
         if (
             url

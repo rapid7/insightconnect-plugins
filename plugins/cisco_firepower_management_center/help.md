@@ -709,6 +709,7 @@ Example output:
 
 # Version History
 
+* 2.1.7 - Updated dependencies
 * 2.1.6 - Bumped `cryptography` to the latest version | Updated SDK to the latest version (6.6.0)
 * 2.1.5 - SDK Bump to 6.4.3 | Bumped 'cryptography' package to latest version
 * 2.1.4 - Bumped 'cryptography' package to latest version | SDK Bump to 6.2.4

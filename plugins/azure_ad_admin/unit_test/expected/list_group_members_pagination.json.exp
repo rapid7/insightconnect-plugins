@@ -1,0 +1,26 @@
+{
+  "members": [
+    {
+      "id": "00000000-0000-0000-0000-000000000001",
+      "displayName": "Alice Example",
+      "userPrincipalName": "alice@example.com",
+      "mail": "alice@example.com",
+      "accountEnabled": true
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000002",
+      "displayName": "Bob Example",
+      "userPrincipalName": "bob@example.com",
+      "mail": "bob@example.com",
+      "accountEnabled": true
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000003",
+      "displayName": "Carol Example",
+      "userPrincipalName": "carol@example.com",
+      "mail": "carol@example.com",
+      "accountEnabled": true
+    }
+  ],
+  "count": 3
+}

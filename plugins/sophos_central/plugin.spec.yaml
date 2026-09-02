@@ -3,8 +3,8 @@ extension: plugin
 products: [insightconnect]
 name: sophos_central
 title: Sophos Central
-description: Sophos Central is a unified console for managing Sophos products. Using the Sophos Central plugin for Rapid7 InsightConnect, users can get alerts, endpoints, and SIEM events
-version: 4.4.1
+description: "[Sophos Central](https://www.sophos.com) is a unified console for managing Sophos products. Using the Sophos Central plugin for Rapid7 InsightConnect, users can get alerts, endpoints, and SIEM events"
+version: 4.4.2
 connection_version: 4
 supported_versions: ["Sophos Central API 2023-03-10"]
 vendor: rapid7
@@ -12,7 +12,7 @@ support: rapid7
 status: []
 sdk:
   type: slim
-  version: 6.2.0
+  version: 6.6.0
   user: nobody
 key_features:
   - "Get endpoints"
@@ -50,6 +50,7 @@ hub_tags:
   keywords: [sophos, firewall]
   features: []
 version_history:
+  - "4.4.2 - Fix issue where `Get Agent Details` could fail to find agents beyond the first page of results | Fix issue where `Get Endpoints` and `Get Alerts` returned only the first page of results | Fix issue where `Blacklist` could fail to unblacklist a hash found beyond the first page of blocked items | SDK bump to 6.6.0"
   - "4.4.1 - Bumping requirements.txt | SDK bump to 6.2.0"
   - "4.4.0 - Add new actions: `Isolate Endpoint`, `Get Endpoint Groups`, `Add Endpoint Group`, `Get Endpoint Group`, `Add Endpoint to Group`, `Remove Endpoint from Group`, `Get Allowed Items`, `Add Allowed Item`, `Remove Allowed Item`, `Get Blocked Items`, `Add Blocked Item`, `Remove Blocked Item`, `Get Endpoints in Group` | `Check Tamper Protection Status`, `Antivirus Scan`: fix issue with handling pagination in retrieving endpoint id"
   - "4.3.1 - Add custom User-Agent string to API calls to identify API request"
@@ -1211,10 +1212,10 @@ actions:
     input:
       since:
         title: Since
-        description: Last seen after date and time (UTC) or duration inclusive, eg. 2019-09-23T12:02:01.700Z, -P1D, PT20M, PT4H500S
+        description: Last seen after date and time (UTC) or duration inclusive, eg. 2019-09-23T12:02:01+00:00, -P1D, PT20M, PT4H500S
         required: false
         type: string
-        example: 2019-09-23T12:02:01.700Z
+        example: "2019-09-23T12:02:01+00:00"
     output:
       items:
         title: Items
@@ -1231,7 +1232,7 @@ actions:
         description: The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Must be within last 24 hours
         required: false
         type: string
-        example: 2019-09-23T12:02:01.700Z
+        example: "2019-09-23T12:02:01+00:00"
     output:
       alerts:
         title: Alerts
@@ -1331,7 +1332,7 @@ actions:
         description: Tamper status for provided agent
         type: check_tamper_protection_status
         required: true
-        example: {}
+        example: {"enabled": true}
   get_blocked_items:
     title: Get Blocked Items
     description: Get a list of blocked items

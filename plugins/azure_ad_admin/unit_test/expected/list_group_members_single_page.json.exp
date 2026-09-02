@@ -1,0 +1,12 @@
+{
+  "members": [
+    {
+      "id": "00000000-0000-0000-0000-000000000009",
+      "displayName": "Solo Example",
+      "userPrincipalName": "solo@example.com",
+      "mail": "solo@example.com",
+      "accountEnabled": true
+    }
+  ],
+  "count": 1
+}

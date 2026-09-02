@@ -14,16 +14,13 @@ class GetAlerts(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        alerts_response = self.connection.client.get_alerts(since=params.get(Input.FROM_DATE))
-        alerts = alerts_response.get("items", [])
-        for i in range(999):
-            if not alerts_response.get("has_more"):
-                break
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        from_date = params.get(Input.FROM_DATE)
+        # END INPUT BINDING - DO NOT REMOVE
 
-            alerts_response = self.connection.client.get_alerts(key=alerts_response.get("pages", {}).get("nextKey"))
-            alerts.extend(alerts_response.get("items"))
+        alerts = self.connection.client.get_all_alerts(since=from_date)
 
         for alert in alerts:
-            alert["severity"] = alert["severity"].upper()
+            alert["severity"] = alert.get("severity", "").upper()
 
         return {Output.ALERTS: alerts}
