@@ -345,7 +345,12 @@ class ApiClient:
         self, org_id: int, file_content: bytes, filename: str, report_source: str
     ) -> Dict:
         with io.BytesIO(file_content) as file:
-            files = [("file", (filename, file, "text/csv"))]
+            # Automox needs the report schema both as the `source` query param and as a
+            # `format` multipart field.
+            files = [
+                ("file", (filename, file, "text/csv")),
+                ("format", (None, report_source)),
+            ]
 
             headers = {"Authorization": f"Bearer {self.api_key}"}
             params = self._org_param(org_id)
@@ -361,8 +366,8 @@ class ApiClient:
                     headers=headers,
                 )  # nosec B113
                 self.logger.info(
-                    f"Request URL: {url}, Method: POST, Source: {report_source}, Filename: {filename}, "
-                    f"Response code: {response.status_code}"
+                    f"Request URL: {url}, Method: POST, Source/Format: {report_source}, "
+                    f"Filename: {filename}, Response code: {response.status_code}"
                 )
 
                 if response.status_code == 201:
