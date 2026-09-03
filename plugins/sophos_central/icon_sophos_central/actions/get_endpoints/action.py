@@ -14,4 +14,8 @@ class GetEndpoints(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {Output.ITEMS: self.connection.client.get_endpoints(params.get(Input.SINCE)).get("items", [])}
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        since = params.get(Input.SINCE)
+        # END INPUT BINDING - DO NOT REMOVE
+
+        return {Output.ITEMS: self.connection.client.get_all_endpoints(since)}

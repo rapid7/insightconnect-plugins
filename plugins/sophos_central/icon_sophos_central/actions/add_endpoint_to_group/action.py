@@ -14,8 +14,13 @@ class AddEndpointToGroup(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        group_id = params.get(Input.GROUPID)
+        ids = params.get(Input.IDS)
+        # END INPUT BINDING - DO NOT REMOVE
+
         return {
-            Output.ADDEDENDPOINTS: self.connection.client.add_endpoint_to_group(
-                params.get(Input.GROUPID), {"ids": params.get(Input.IDS)}
-            ).get("addedEndpoints", [])
+            Output.ADDEDENDPOINTS: self.connection.client.add_endpoint_to_group(group_id, {"ids": ids}).get(
+                "addedEndpoints", []
+            )
         }

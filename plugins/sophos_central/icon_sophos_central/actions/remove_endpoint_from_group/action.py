@@ -14,9 +14,12 @@ class RemoveEndpointFromGroup(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        response = self.connection.client.remove_endpoint_from_group(
-            params.get(Input.GROUPID), {"ids": params.get(Input.IDS)}
-        )
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        group_id = params.get(Input.GROUPID)
+        ids = params.get(Input.IDS)
+        # END INPUT BINDING - DO NOT REMOVE
+
+        response = self.connection.client.remove_endpoint_from_group(group_id, {"ids": ids})
         return {
             Output.REMOVEDENDPOINTS: response.get("removedEndpoints", []),
             Output.ERRORS: response.get("errors", {}),

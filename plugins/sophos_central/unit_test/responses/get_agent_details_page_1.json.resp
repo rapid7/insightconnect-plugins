@@ -1,0 +1,17 @@
+{
+    "items": [
+        {
+            "id": "111fd666-9666-4e66-a066-d66fd966ad11",
+            "type": "computer",
+            "hostname": "DESKTOP-PAGE1",
+            "ipv4Addresses": ["192.0.0.11"],
+            "macAddresses": ["00:00:00:00:00:11"]
+        }
+    ],
+    "pages": {
+        "nextKey": "exampleKey",
+        "size": 1,
+        "total": 2,
+        "maxSize": 500
+    }
+}

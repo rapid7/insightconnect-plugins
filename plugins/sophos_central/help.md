@@ -101,19 +101,7 @@ Example output:
 
 ```
 {
-  "allowedItem": {
-    "id": "714083d8-18eb-4f7d-b552-8ccd93e4e560",
-    "createdAt": "2023-01-01T11:11:11.111Z",
-    "updatedAt": "2023-01-01T11:11:11.111Z",
-    "properties": {
-      "sha256": "050c194cbbb"
-    },
-    "comment": "Test comment",
-    "type": "sha256",
-    "originEndpointId": {
-      "id": "fde30644-050f-486d-a54e-06210b892dff"
-    }
-  }
+  "allowedItem": {}
 }
 ```
 
@@ -155,30 +143,7 @@ Example output:
 
 ```
 {
-  "blockedItem": {
-    "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
-    "createdAt": "2023-03-02T13:00:19.494Z",
-    "updatedAt": "2023-03-02T13:00:19.494Z",
-    "properties": {
-      "fileName": "sample.txt",
-      "path": "$path/sample.txt",
-      "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
-      "certificateSigner": "Example signer"
-    },
-    "comment": "Example comment",
-    "type": "sha256",
-    "createdBy": {
-      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
-      "name": "Example name"
-    },
-    "originPerson": {
-      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
-      "name": "Example name"
-    },
-    "originEndpoint": {
-      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c"
-    }
-  }
+  "blockedItem": {}
 }
 ```
 
@@ -218,26 +183,7 @@ Example output:
 
 ```
 {
-  "endpointGroup": {
-    "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
-    "name": "Example Group",
-    "description": "Example description",
-    "type": "computer",
-    "endpoints": {
-      "total": 1,
-      "itemsCount": 1,
-      "items": [
-        {
-          "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
-          "hostname": "Test"
-        }
-      ]
-    },
-    "tenant": {
-      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
-    },
-    "createdAt": "2023-03-24T07:45:29.813Z"
-  }
+  "endpointGroup": {}
 }
 ```
 
@@ -273,12 +219,7 @@ Example output:
 
 ```
 {
-  "addedEndpoints": [
-    {
-      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
-      "hostname": "test"
-    }
-  ]
+  "addedEndpoints": []
 }
 ```
 
@@ -376,7 +317,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|tamper_status|check_tamper_protection_status|True|Tamper status for provided agent|{}|
+|tamper_status|check_tamper_protection_status|True|Tamper status for provided agent|{'enabled': True}|
   
 Example output:
 
@@ -416,105 +357,7 @@ Example output:
 
 ```
 {
-  "agent": {
-    "associatedPerson": {
-      "id": "999fd666-9666-4e66-a066-d66fd966ad66",
-      "name": "Name\\crest",
-      "viaLogin": "Name-log\\crest"
-    },
-    "capabilities": [],
-    "encryption": {
-      "volumes": [
-        {
-          "status": "notEncrypted",
-          "volumeId": "999fd666-9666-4e66-a066-d66fd966ad66"
-        }
-      ]
-    },
-    "health": {
-      "overall": "good",
-      "services": {
-        "serviceDetails": [
-          {
-            "name": "SophosMcsAgentD",
-            "status": "running"
-          },
-          {
-            "name": "SophosCleanD",
-            "status": "running"
-          },
-          {
-            "name": "SophosAntiVirus",
-            "status": "running"
-          },
-          {
-            "name": "SophosEncryptionCentralAdapter",
-            "status": "running"
-          },
-          {
-            "name": "SophosWebIntelligence",
-            "status": "running"
-          },
-          {
-            "name": "SophosEncryptionD",
-            "status": "running"
-          },
-          {
-            "name": "SophosHealthD",
-            "status": "running"
-          },
-          {
-            "name": "SophosScanD",
-            "status": "running"
-          },
-          {
-            "name": "SophosAutoUpdate",
-            "status": "running"
-          },
-          {
-            "name": "SophosSXLD",
-            "status": "running"
-          },
-          {
-            "name": "SophosConfigD",
-            "status": "running"
-          },
-          {
-            "name": "SophosEventMonitor",
-            "status": "running"
-          }
-        ],
-        "status": "good"
-      },
-      "threats": {
-        "status": "good"
-      }
-    },
-    "hostname": "Example_hostname",
-    "id": "999fd666-9666-4e66-a066-d66fd966ad66",
-    "ipv4Addresses": [
-      "198.51.100.100"
-    ],
-    "ipv6Addresses": [
-      "2001:db8:8:4::2"
-    ],
-    "lastSeenAt": "2020-07-31T07:19:37.306Z",
-    "macAddresses": [
-      "30:00:00:ba:00:00"
-    ],
-    "os": {
-      "build": 6,
-      "isServer": false,
-      "majorVersion": 10,
-      "minorVersion": 14,
-      "platform": "macOS"
-    },
-    "tamperProtectionEnabled": false,
-    "tenant": {
-      "id": "999fd666-9666-4e66-a066-d66fd966ad66"
-    },
-    "type": "computer"
-  }
+  "agent": {}
 }
 ```
 
@@ -526,13 +369,13 @@ This action is used to get alerts for a customer based on the parameters provide
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|from_date|string|None|False|The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Must be within last 24 hours|None|2019-09-23 12:02:01.700000+00:00|None|None|
+|from_date|string|None|False|The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Must be within last 24 hours|None|2019-09-23T12:02:01+00:00|None|None|
   
 Example input:
 
 ```
 {
-  "from_date": "2019-09-23T12:02:01.700Z"
+  "from_date": "2019-09-23T12:02:01+00:00"
 }
 ```
 
@@ -546,26 +389,7 @@ Example output:
 
 ```
 {
-  "alerts": [
-    {
-      "managedAgent": {},
-      "severity": "LOW",
-      "type": "Event::Mobile::ApnsCertificateRenewed",
-      "allowedActions": [
-        "acknowledge"
-      ],
-      "description": "Your APNs certificate was renewed",
-      "id": "1ffcae82-97d2-46e8-83e8-469525c28513",
-      "raisedAt": "2020-07-19T07:22:07.019Z",
-      "tenant": {
-        "id": "11f446c2-a094-427f-868e-bd13e2f5b27e",
-        "name": "NinjaRMM LLC"
-      },
-      "category": "mobiles",
-      "groupKey": "MyxFdmVudDo6TW9iaWxlOjpBcG5zQ2VydGlmaWNhdGVSZW5ld2...",
-      "product": "mobile"
-    }
-  ]
+  "alerts": []
 }
 ```
 
@@ -585,8 +409,8 @@ Example input:
 
 ```
 {
-  "page": 3,
-  "pageSize": 5,
+  "page": 1,
+  "pageSize": 50,
   "pageTotal": false
 }
 ```
@@ -602,43 +426,8 @@ Example output:
 
 ```
 {
-  "items": [
-    {
-      "id": "f8d03561-90d1-4c18-b576-34509e843ee1",
-      "createdAt": "2023-01-01T11:11:11.111Z",
-      "updatedAt": "2023-01-01T11:11:11.111Z",
-      "properties": {
-        "path": "$path/sample.txt"
-      },
-      "comment": "Test comment",
-      "type": "path"
-    },
-    {
-      "id": "f8d03561-90d1-4c18-b576-34509e843ee2",
-      "createdAt": "2023-01-01T11:11:11.111Z",
-      "updatedAt": "2023-01-01T11:11:11.111Z",
-      "properties": {
-        "sha256": "ba7816bf8f01cfea414140de5dae2223b10361a396177a9cb410ff61f20015af"
-      },
-      "comment": "Test comment",
-      "type": "sha256"
-    },
-    {
-      "id": "f8d03561-90d1-4c18-b576-34509e843ee3",
-      "createdAt": "2023-01-01T11:11:11.111Z",
-      "updatedAt": "2023-01-01T11:11:11.111Z",
-      "properties": {
-        "certificateSigner": "Example signer"
-      },
-      "comment": "Test comment",
-      "type": "certificateSigner"
-    }
-  ],
-  "pages": {
-    "current": 1,
-    "size": 3,
-    "maxSize": 100
-  }
+  "items": [],
+  "pages": {}
 }
 ```
 
@@ -675,39 +464,8 @@ Example output:
 
 ```
 {
-  "items": [
-    {
-      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
-      "createdAt": "2023-03-02T13:00:19.494Z",
-      "updatedAt": "2023-03-02T13:00:19.494Z",
-      "properties": {
-        "fileName": "sample.txt",
-        "path": "$path/sample.txt",
-        "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
-        "certificateSigner": "Example signer"
-      },
-      "comment": "Example comment",
-      "type": "sha256",
-      "createdBy": {
-        "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
-        "name": "Example name"
-      },
-      "originPerson": {
-        "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
-        "name": "Example name"
-      },
-      "originEndpoint": {
-        "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c"
-      }
-    }
-  ],
-  "pages": {
-    "current": 1,
-    "size": 50,
-    "total": 1,
-    "items": 2,
-    "maxSize": 100
-  }
+  "items": [],
+  "pages": {}
 }
 ```
 
@@ -739,26 +497,7 @@ Example output:
 
 ```
 {
-  "endpointGroup": {
-    "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
-    "name": "Example Group",
-    "description": "Example description",
-    "type": "computer",
-    "endpoints": {
-      "total": 1,
-      "itemsCount": 1,
-      "items": [
-        {
-          "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
-          "hostname": "Test"
-        }
-      ]
-    },
-    "tenant": {
-      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
-    },
-    "createdAt": "2023-03-24T07:45:29.813Z"
-  }
+  "endpointGroup": {}
 }
 ```
 
@@ -792,12 +531,12 @@ Example input:
     "name",
     "createdAt"
   ],
-  "groupType": "computer",
+  "groupType": "all",
   "ids": [
     "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
   ],
-  "page": 5,
-  "pageSize": 10,
+  "page": 1,
+  "pageSize": 50,
   "pageTotal": false,
   "search": "Example",
   "searchFields": [
@@ -822,49 +561,8 @@ Example output:
 
 ```
 {
-  "endpointGroups": [
-    {
-      "id": "f8d03561-90d1-4c18-b576-34509e843ee1",
-      "name": "Example Group",
-      "description": "Example description",
-      "type": "computer",
-      "endpoints": {
-        "total": 1,
-        "itemsCount": 1,
-        "items": [
-          {
-            "id": "f8d03561-90d1-4c18-b576-34509e843ee8",
-            "hostname": "EXAMPLE-HOSTNAME"
-          }
-        ]
-      },
-      "tenant": {
-        "id": "f8d03561-90d1-4c18-b576-34509e843ee8"
-      },
-      "createdAt": "2023-01-01T11:11:11.111Z",
-      "updatedAt": "2023-01-01T11:11:11.111Z"
-    },
-    {
-      "id": "f8d03561-90d1-4c18-b576-34509e843ee3",
-      "name": "Test Group 3",
-      "description": "Example description",
-      "type": "computer",
-      "endpoints": {
-        "total": 0,
-        "itemsCount": 0,
-        "items": []
-      },
-      "tenant": {
-        "id": "f8d03561-90d1-4c18-b576-34509e843ee8"
-      },
-      "createdAt": "2023-01-01T11:11:11.111Z"
-    }
-  ],
-  "pages": {
-    "current": 1,
-    "size": 50,
-    "maxSize": 1000
-  }
+  "endpointGroups": [],
+  "pages": {}
 }
 ```
 
@@ -876,13 +574,13 @@ This action is used to get endpoints for a customer based on the last seen after
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|since|string|None|False|Last seen after date and time (UTC) or duration inclusive, eg. 2019-09-23T12:02:01.700Z, -P1D, PT20M, PT4H500S|None|2019-09-23 12:02:01.700000+00:00|None|None|
+|since|string|None|False|Last seen after date and time (UTC) or duration inclusive, eg. 2019-09-23T12:02:01+00:00, -P1D, PT20M, PT4H500S|None|2019-09-23T12:02:01+00:00|None|None|
   
 Example input:
 
 ```
 {
-  "since": "2019-09-23T12:02:01.700Z"
+  "since": "2019-09-23T12:02:01+00:00"
 }
 ```
 
@@ -896,66 +594,7 @@ Example output:
 
 ```
 {
-  "items": [
-    {
-      "id": "1d65be44-e663-437c-949c-2057b73c5630",
-      "type": "computer",
-      "tenant": {
-        "id": "11f446c2-a094-427f-868e-bd13e2f5b27e"
-      },
-      "hostname": "WIN-JJS9RP995G8",
-      "health": {
-        "overall": "suspicious",
-        "threats": {
-          "status": "good"
-        },
-        "services": {
-          "status": "good",
-          "serviceDetails": [
-            {
-              "name": "File Detection",
-              "status": "running"
-            }
-          ]
-        }
-      },
-      "os": {
-        "isServer": false,
-        "platform": "windows",
-        "name": "Windows 8.1",
-        "majorVersion": 6,
-        "minorVersion": 3,
-        "build": 9600
-      },
-      "ipv4Addresses": [
-        "198.51.100.1"
-      ],
-      "ipv6Addresses": [
-        "2001:db8:8:4::2"
-      ],
-      "macAddresses": [
-        "00:0C:29:9B:2F:DF"
-      ],
-      "associatedPerson": {
-        "name": "WIN-JJS9RP995G8\\User",
-        "viaLogin": "WIN-JJS9RP995G8\\User",
-        "id": "ceddc646-43b2-4b9f-835a-d1ecb9af8253"
-      },
-      "tamperProtectionEnabled": true,
-      "assignedProducts": [
-        {
-          "code": "endpointProtection",
-          "version": "10.8.6",
-          "status": "installed"
-        }
-      ],
-      "capabilities": [],
-      "lastSeenAt": "2020-04-08T17:27:32.059Z",
-      "encryption": {
-        "volumes": []
-      }
-    }
-  ]
+  "items": []
 }
 ```
 
@@ -982,16 +621,19 @@ Example input:
 {
   "fields": [
     "id",
-    "os",
     "type"
   ],
   "groupId": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
-  "pageFromKey": "",
-  "pageSize": 1,
-  "pageTotal": true,
-  "search": "DESKTOP-1234568",
+  "pageFromKey": "exampleKey",
+  "pageSize": 50,
+  "pageTotal": false,
+  "search": "example",
   "searchFields": [
-    "hostname"
+    "hostname",
+    "groupName",
+    "associatedPersonName",
+    "ipAddresses",
+    "osName"
   ],
   "sort": [
     "id:asc"
@@ -1010,27 +652,8 @@ Example output:
 
 ```
 {
-  "items": [
-    {
-      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
-      "type": "computer",
-      "hostname": "DESKTOP-1234568",
-      "os": {
-        "isServer": false,
-        "platform": "windows",
-        "name": "Windows 10 Home N",
-        "majorVersion": 10,
-        "minorVersion": 0,
-        "build": 19042
-      }
-    }
-  ],
-  "pages": {
-    "size": 1,
-    "total": 1,
-    "items": 1,
-    "maxSize": 500
-  }
+  "items": [],
+  "pages": {}
 }
 ```
 
@@ -1068,18 +691,7 @@ Example output:
 
 ```
 {
-  "endpoints": [
-    {
-      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
-      "isolation": {
-        "enabled": true,
-        "lastEnabledBy": {
-          "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
-        },
-        "comment": "Example comment"
-      }
-    }
-  ]
+  "endpoints": []
 }
 ```
 
@@ -1180,13 +792,8 @@ Example output:
 
 ```
 {
-  "removedEndpoints": [
-    {
-      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
-      "hostname": "test"
-    }
-  ],
-  "errors": {}
+  "errors": {},
+  "removedEndpoints": []
 }
 ```
 ### Triggers
@@ -1695,6 +1302,7 @@ Example output:
 
 # Version History
 
+* 4.4.2 - Fix issue where `Get Agent Details` could fail to find agents beyond the first page of results | Fix issue where `Get Endpoints` and `Get Alerts` returned only the first page of results | Fix issue where `Blacklist` could fail to unblacklist a hash found beyond the first page of blocked items | SDK bump to 6.6.0
 * 4.4.1 - Bumping requirements.txt | SDK bump to 6.2.0
 * 4.4.0 - Add new actions: `Isolate Endpoint`, `Get Endpoint Groups`, `Add Endpoint Group`, `Get Endpoint Group`, `Add Endpoint to Group`, `Remove Endpoint from Group`, `Get Allowed Items`, `Add Allowed Item`, `Remove Allowed Item`, `Get Blocked Items`, `Add Blocked Item`, `Remove Blocked Item`, `Get Endpoints in Group` | `Check Tamper Protection Status`, `Antivirus Scan`: fix issue with handling pagination in retrieving endpoint id
 * 4.3.1 - Add custom User-Agent string to API calls to identify API request
