@@ -24,6 +24,31 @@ Rapid7 Cyber GRC (powered by Compyl) is a governance, risk, and compliance platf
 
 ## Setup
 
+### Generating an API key
+
+1. Sign in to the [Rapid7 Platform](https://insight.rapid7.com) and select **GRC** in the top right of the navigation bar to open Cyber GRC.
+2. In Cyber GRC, select the gear icon in the top right of the navigation bar and choose **Settings**.
+
+![Opening Settings from the gear menu](https://raw.githubusercontent.com/rapid7/insightconnect-plugins/master/plugins/rapid7_cyber_grc/doc/01-gear-menu-settings.png)
+
+3. Select the **Security** tab, expand **API Keys**, and select **Create New Key**.
+
+![The API Keys section of the Security tab](https://raw.githubusercontent.com/rapid7/insightconnect-plugins/master/plugins/rapid7_cyber_grc/doc/02-settings-security-api-keys.png)
+
+4. Complete the dialog and select **Create**:
+
+* **Key Name** is a descriptive label for the key, for example `InsightConnect`.
+* **Expiration Date** is optional. A key stops working on its expiration date, and the connection then fails with a 401, so either leave it blank for an unattended workflow or plan to rotate the key before that date.
+* **User** is the user the key authenticates as. The key inherits that user's UAM permissions, so choose a user who can see and change every record type the workflow uses. Requests outside those permissions are answered with a 403.
+
+![The Create New API Key dialog](https://raw.githubusercontent.com/rapid7/insightconnect-plugins/master/plugins/rapid7_cyber_grc/doc/03-create-new-api-key.png)
+
+5. Copy the generated key, which begins with `cpyl_`, and store it in the connection's API Key field.
+
+### Finding the API host
+
+The URL for this connection is the Cyber GRC **API** host, which is not the host used to sign in to the web interface. It follows the pattern `https://app-<tenant>-<brand>-<region>-api-01.azurewebsites.net`. The web interface answers every path with its sign-in page, including API paths, so a connection pointed at it receives HTML rather than JSON. Contact Rapid7 support if the API host for your tenant is not known.
+
 The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
