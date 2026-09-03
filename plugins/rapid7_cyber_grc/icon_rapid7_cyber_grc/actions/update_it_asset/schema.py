@@ -38,7 +38,7 @@ class UpdateItAssetInput(insightconnect_plugin_runtime.Input):
     "record": {
       "type": "object",
       "title": "IT Asset",
-      "description": "The fields to write, as a JSON object matching the UpdateITAssetDto schema in the Compyl API reference",
+      "description": "The fields to write, as a JSON object matching the UpdateITAssetDto schema in the Rapid7 Cyber GRC API reference",
       "order": 2
     }
   },

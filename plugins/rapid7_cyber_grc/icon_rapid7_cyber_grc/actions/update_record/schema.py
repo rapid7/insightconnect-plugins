@@ -39,7 +39,7 @@ class UpdateRecordInput(insightconnect_plugin_runtime.Input):
     "record": {
       "type": "object",
       "title": "Record",
-      "description": "The fields to write, as a JSON object matching the corresponding Update DTO in the Compyl API reference",
+      "description": "The fields to write, as a JSON object matching the corresponding Update DTO in the Rapid7 Cyber GRC API reference",
       "order": 3
     },
     "record_type": {

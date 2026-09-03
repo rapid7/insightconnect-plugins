@@ -31,7 +31,7 @@ class CreateItAssetInput(insightconnect_plugin_runtime.Input):
     "record": {
       "type": "object",
       "title": "IT Asset",
-      "description": "The it asset to create, as a JSON object matching the CreateITAssetDto schema in the Compyl API reference",
+      "description": "The it asset to create, as a JSON object matching the CreateITAssetDto schema in the Rapid7 Cyber GRC API reference",
       "order": 1
     }
   },

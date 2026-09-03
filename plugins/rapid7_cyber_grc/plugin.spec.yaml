@@ -3,12 +3,12 @@ extension: plugin
 products: [insightconnect]
 name: rapid7_cyber_grc
 title: Rapid7 Cyber GRC
-description: Rapid7 Cyber GRC (powered by Compyl) is a governance, risk, and compliance platform. This plugin manages risks, incidents, tasks, audits, control sets, assessments, vendors, certifications, IT assets, and users, and uploads evidence through the Flat File API
+description: Rapid7 Cyber GRC is a governance, risk, and compliance solution. This plugin manages risks, incidents, tasks, audits, control sets, assessments, vendors, certifications, IT assets, and users, and uploads evidence through the Flat File API
 version: 1.0.0
 connection_version: 1
 cloud_ready: true
 enable_cache: true
-supported_versions: ["Compyl Web API v2", "Compyl API v1"]
+supported_versions: ["Rapid7 Cyber GRC Web API v2", "Rapid7 Cyber GRC API v1"]
 vendor: rapid7
 support: rapid7
 status: []
@@ -32,11 +32,11 @@ requirements:
 links:
 - "[Rapid7 Cyber GRC](https://www.rapid7.com)"
 references:
-- "[Compyl API reference](https://compyl.readme.io/reference/)"
+- "[Rapid7 Cyber GRC API reference](https://compyl.readme.io/reference/)"
 - "[Managing your API keys](https://compyl.readme.io/reference/getting-started)"
 troubleshooting:
 - "The URL is the Cyber GRC API host, which is a different host from the one used to sign in to the web interface. If requests answer with the sign-in page instead of JSON, the URL is pointing at the web interface rather than the API"
-- "Every read action accepts OData query options. When an action returns no records, check the Filter expression against the Compyl API reference first, because the API rejects an invalid $filter with a 400 response rather than returning an empty result"
+- "Every read action accepts OData query options. When an action returns no records, check the Filter expression against the API reference first, because the API rejects an invalid $filter with a 400 response rather than returning an empty result"
 - "An API key carries the permissions of the user it is assigned to, so a 403 response means that user cannot see or change the record in question"
 - "A 401 response does not always mean the API key is wrong. Any path the API does not recognise, such as a misspelled record type or a URL that already ends in /api/v2, falls through to the interactive sign-in scheme and is answered with a 401 whose scheme is not ApiKey. The plugin reports that case separately, so read the error text before regenerating the key"
 - "The typed actions, such as Get Risks, declare the type of every field they return, and a step fails validation if the API answers with a different type than the record schema documents. Generic List Records returns the same records as untyped objects and can be used as a workaround while the mismatch is reported to Rapid7 support"
@@ -46,7 +46,7 @@ tags:
 - compliance
 - risk
 - audit
-- compyl
+- rapid7
 hub_tags:
   use_cases: [remediation_management, reporting_and_analytics, asset_inventory]
   keywords: [incidents, incident_response, reporting, ticketing]
@@ -682,8 +682,8 @@ types:
       type: integer
       order: 38
     compylKey:
-      title: "Compyl Key"
-      description: "Compyl Key"
+      title: "Rapid7 Key"
+      description: "Rapid7 Key"
       type: string
       order: 39
     isAuditorRequest:
@@ -697,8 +697,8 @@ types:
       type: boolean
       order: 41
     compylAIEventGuid:
-      title: "Compyl AI Event GUID"
-      description: "Compyl AI Event GUID"
+      title: "Rapid7 AI Event GUID"
+      description: "Rapid7 AI Event GUID"
       type: string
       order: 42
     createdDate:
@@ -1194,8 +1194,8 @@ types:
       type: integer
       order: 11
     compylKey:
-      title: "Compyl Key"
-      description: "Compyl Key"
+      title: "Rapid7 Key"
+      description: "Rapid7 Key"
       type: string
       order: 12
     securityPolicyInfoID:
@@ -1574,8 +1574,8 @@ types:
       type: boolean
       order: 24
     compylKey:
-      title: "Compyl Key"
-      description: "Compyl Key"
+      title: "Rapid7 Key"
+      description: "Rapid7 Key"
       type: string
       order: 25
     accessToOurSystem:
@@ -2317,7 +2317,7 @@ actions:
     input:
       record:
         title: "Risk"
-        description: "The risk to create, as a JSON object matching the CreateRiskDto schema in the Compyl API reference"
+        description: "The risk to create, as a JSON object matching the CreateRiskDto schema in the Rapid7 Cyber GRC API reference"
         type: object
         required: true
         example: {"name": "Example risk"}
@@ -2349,7 +2349,7 @@ actions:
         order: 1
       record:
         title: "Risk"
-        description: "The fields to write, as a JSON object matching the UpdateRiskDto schema in the Compyl API reference"
+        description: "The fields to write, as a JSON object matching the UpdateRiskDto schema in the Rapid7 Cyber GRC API reference"
         type: object
         required: true
         example: {"name": "Renamed risk"}
@@ -2485,7 +2485,7 @@ actions:
     input:
       record:
         title: "Incident"
-        description: "The incident to create, as a JSON object matching the CreateIncidentDto schema in the Compyl API reference"
+        description: "The incident to create, as a JSON object matching the CreateIncidentDto schema in the Rapid7 Cyber GRC API reference"
         type: object
         required: true
         example: {"name": "Example incident"}
@@ -2517,7 +2517,7 @@ actions:
         order: 1
       record:
         title: "Incident"
-        description: "The fields to write, as a JSON object matching the UpdateIncidentDto schema in the Compyl API reference"
+        description: "The fields to write, as a JSON object matching the UpdateIncidentDto schema in the Rapid7 Cyber GRC API reference"
         type: object
         required: true
         example: {"name": "Renamed incident"}
@@ -2653,7 +2653,7 @@ actions:
     input:
       record:
         title: "Task"
-        description: "The task to create, as a JSON object matching the CreateTaskDto schema in the Compyl API reference"
+        description: "The task to create, as a JSON object matching the CreateTaskDto schema in the Rapid7 Cyber GRC API reference"
         type: object
         required: true
         example: {"name": "Example task"}
@@ -2685,7 +2685,7 @@ actions:
         order: 1
       record:
         title: "Task"
-        description: "The fields to write, as a JSON object matching the UpdateTaskDto schema in the Compyl API reference"
+        description: "The fields to write, as a JSON object matching the UpdateTaskDto schema in the Rapid7 Cyber GRC API reference"
         type: object
         required: true
         example: {"name": "Renamed task"}
@@ -2821,7 +2821,7 @@ actions:
     input:
       record:
         title: "Audit"
-        description: "The audit to create, as a JSON object matching the CreateAuditDto schema in the Compyl API reference"
+        description: "The audit to create, as a JSON object matching the CreateAuditDto schema in the Rapid7 Cyber GRC API reference"
         type: object
         required: true
         example: {"name": "Example audit"}
@@ -2853,7 +2853,7 @@ actions:
         order: 1
       record:
         title: "Audit"
-        description: "The fields to write, as a JSON object matching the UpdateAuditDto schema in the Compyl API reference"
+        description: "The fields to write, as a JSON object matching the UpdateAuditDto schema in the Rapid7 Cyber GRC API reference"
         type: object
         required: true
         example: {"name": "Renamed audit"}
@@ -2989,7 +2989,7 @@ actions:
     input:
       record:
         title: "Control Set"
-        description: "The control set to create, as a JSON object matching the CreateControlSetDto schema in the Compyl API reference"
+        description: "The control set to create, as a JSON object matching the CreateControlSetDto schema in the Rapid7 Cyber GRC API reference"
         type: object
         required: true
         example: {"name": "Example control set"}
@@ -3021,7 +3021,7 @@ actions:
         order: 1
       record:
         title: "Control Set"
-        description: "The fields to write, as a JSON object matching the UpdateControlSetDto schema in the Compyl API reference"
+        description: "The fields to write, as a JSON object matching the UpdateControlSetDto schema in the Rapid7 Cyber GRC API reference"
         type: object
         required: true
         example: {"name": "Renamed control set"}
@@ -3157,7 +3157,7 @@ actions:
     input:
       record:
         title: "Assessment"
-        description: "The assessment to create, as a JSON object matching the CreateAssessmentDto schema in the Compyl API reference"
+        description: "The assessment to create, as a JSON object matching the CreateAssessmentDto schema in the Rapid7 Cyber GRC API reference"
         type: object
         required: true
         example: {"name": "Example assessment"}
@@ -3189,7 +3189,7 @@ actions:
         order: 1
       record:
         title: "Assessment"
-        description: "The fields to write, as a JSON object matching the UpdateAssessmentDto schema in the Compyl API reference"
+        description: "The fields to write, as a JSON object matching the UpdateAssessmentDto schema in the Rapid7 Cyber GRC API reference"
         type: object
         required: true
         example: {"name": "Renamed assessment"}
@@ -3325,7 +3325,7 @@ actions:
     input:
       record:
         title: "Vendor"
-        description: "The vendor to create, as a JSON object matching the CreateVendorDto schema in the Compyl API reference"
+        description: "The vendor to create, as a JSON object matching the CreateVendorDto schema in the Rapid7 Cyber GRC API reference"
         type: object
         required: true
         example: {"name": "Example vendor"}
@@ -3357,7 +3357,7 @@ actions:
         order: 1
       record:
         title: "Vendor"
-        description: "The fields to write, as a JSON object matching the UpdateVendorDto schema in the Compyl API reference"
+        description: "The fields to write, as a JSON object matching the UpdateVendorDto schema in the Rapid7 Cyber GRC API reference"
         type: object
         required: true
         example: {"name": "Renamed vendor"}
@@ -3493,7 +3493,7 @@ actions:
     input:
       record:
         title: "Certification"
-        description: "The certification to create, as a JSON object matching the CreateCertificationDto schema in the Compyl API reference"
+        description: "The certification to create, as a JSON object matching the CreateCertificationDto schema in the Rapid7 Cyber GRC API reference"
         type: object
         required: true
         example: {"name": "Example certification"}
@@ -3525,7 +3525,7 @@ actions:
         order: 1
       record:
         title: "Certification"
-        description: "The fields to write, as a JSON object matching the UpdateCertificationDto schema in the Compyl API reference"
+        description: "The fields to write, as a JSON object matching the UpdateCertificationDto schema in the Rapid7 Cyber GRC API reference"
         type: object
         required: true
         example: {"name": "Renamed certification"}
@@ -3661,7 +3661,7 @@ actions:
     input:
       record:
         title: "IT Asset"
-        description: "The it asset to create, as a JSON object matching the CreateITAssetDto schema in the Compyl API reference"
+        description: "The it asset to create, as a JSON object matching the CreateITAssetDto schema in the Rapid7 Cyber GRC API reference"
         type: object
         required: true
         example: {"name": "Example it asset"}
@@ -3693,7 +3693,7 @@ actions:
         order: 1
       record:
         title: "IT Asset"
-        description: "The fields to write, as a JSON object matching the UpdateITAssetDto schema in the Compyl API reference"
+        description: "The fields to write, as a JSON object matching the UpdateITAssetDto schema in the Rapid7 Cyber GRC API reference"
         type: object
         required: true
         example: {"name": "Renamed it asset"}
@@ -3829,7 +3829,7 @@ actions:
     input:
       record:
         title: "User"
-        description: "The user to create, as a JSON object matching the CreateUserDto schema in the Compyl API reference"
+        description: "The user to create, as a JSON object matching the CreateUserDto schema in the Rapid7 Cyber GRC API reference"
         type: object
         required: true
         example: {"name": "Example user"}
@@ -3861,7 +3861,7 @@ actions:
         order: 1
       record:
         title: "User"
-        description: "The fields to write, as a JSON object matching the UpdateUserDto schema in the Compyl API reference"
+        description: "The fields to write, as a JSON object matching the UpdateUserDto schema in the Rapid7 Cyber GRC API reference"
         type: object
         required: true
         example: {"name": "Renamed user"}
@@ -4126,7 +4126,7 @@ actions:
         order: 1
       record:
         title: "Record"
-        description: "The record to create, as a JSON object matching the corresponding Create DTO in the Compyl API reference"
+        description: "The record to create, as a JSON object matching the corresponding Create DTO in the Rapid7 Cyber GRC API reference"
         type: object
         required: true
         example: {"name": "Example record"}
@@ -4201,7 +4201,7 @@ actions:
         order: 2
       record:
         title: "Record"
-        description: "The fields to write, as a JSON object matching the corresponding Update DTO in the Compyl API reference"
+        description: "The fields to write, as a JSON object matching the corresponding Update DTO in the Rapid7 Cyber GRC API reference"
         type: object
         required: true
         example: {"name": "Renamed record"}

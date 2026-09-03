@@ -352,8 +352,8 @@ class GetTaskOutput(insightconnect_plugin_runtime.Output):
         },
         "compylKey": {
           "type": "string",
-          "title": "Compyl Key",
-          "description": "Compyl Key",
+          "title": "Rapid7 Key",
+          "description": "Rapid7 Key",
           "order": 39
         },
         "isAuditorRequest": {
@@ -370,8 +370,8 @@ class GetTaskOutput(insightconnect_plugin_runtime.Output):
         },
         "compylAIEventGuid": {
           "type": "string",
-          "title": "Compyl AI Event GUID",
-          "description": "Compyl AI Event GUID",
+          "title": "Rapid7 AI Event GUID",
+          "description": "Rapid7 AI Event GUID",
           "order": 42
         },
         "createdDate": {

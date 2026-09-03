@@ -31,7 +31,7 @@ class CreateIncidentInput(insightconnect_plugin_runtime.Input):
     "record": {
       "type": "object",
       "title": "Incident",
-      "description": "The incident to create, as a JSON object matching the CreateIncidentDto schema in the Compyl API reference",
+      "description": "The incident to create, as a JSON object matching the CreateIncidentDto schema in the Rapid7 Cyber GRC API reference",
       "order": 1
     }
   },

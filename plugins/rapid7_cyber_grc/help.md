@@ -1,6 +1,6 @@
 # Description
 
-Rapid7 Cyber GRC (powered by Compyl) is a governance, risk, and compliance platform. This plugin manages risks, incidents, tasks, audits, control sets, assessments, vendors, certifications, IT assets, and users, and uploads evidence through the Flat File API
+Rapid7 Cyber GRC is a governance, risk, and compliance solution. This plugin manages risks, incidents, tasks, audits, control sets, assessments, vendors, certifications, IT assets, and users, and uploads evidence through the Flat File API
 
 # Key Features
 
@@ -17,8 +17,8 @@ Rapid7 Cyber GRC (powered by Compyl) is a governance, risk, and compliance platf
 
 # Supported Product Versions
 
-* Compyl Web API v2
-* Compyl API v1
+* Rapid7 Cyber GRC Web API v2
+* Rapid7 Cyber GRC API v1
 
 # Documentation
 
@@ -115,7 +115,7 @@ This action is used to create a new assessment in Cyber GRC
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |expand|string|None|False|Comma separated list of related collections to embed in the created record|None|tasks|None|None|
-|record|object|None|True|The assessment to create, as a JSON object matching the CreateAssessmentDto schema in the Compyl API reference|None|{'name': 'Example assessment'}|None|None|
+|record|object|None|True|The assessment to create, as a JSON object matching the CreateAssessmentDto schema in the Rapid7 Cyber GRC API reference|None|{'name': 'Example assessment'}|None|None|
   
 Example input:
 
@@ -199,7 +199,7 @@ This action is used to create a new audit in Cyber GRC
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |expand|string|None|False|Comma separated list of related collections to embed in the created record|None|tasks|None|None|
-|record|object|None|True|The audit to create, as a JSON object matching the CreateAuditDto schema in the Compyl API reference|None|{'name': 'Example audit'}|None|None|
+|record|object|None|True|The audit to create, as a JSON object matching the CreateAuditDto schema in the Rapid7 Cyber GRC API reference|None|{'name': 'Example audit'}|None|None|
   
 Example input:
 
@@ -300,7 +300,7 @@ This action is used to create a new certification in Cyber GRC
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |expand|string|None|False|Comma separated list of related collections to embed in the created record|None|tasks|None|None|
-|record|object|None|True|The certification to create, as a JSON object matching the CreateCertificationDto schema in the Compyl API reference|None|{'name': 'Example certification'}|None|None|
+|record|object|None|True|The certification to create, as a JSON object matching the CreateCertificationDto schema in the Rapid7 Cyber GRC API reference|None|{'name': 'Example certification'}|None|None|
   
 Example input:
 
@@ -350,7 +350,7 @@ This action is used to create a new control set in Cyber GRC
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |expand|string|None|False|Comma separated list of related collections to embed in the created record|None|tasks|None|None|
-|record|object|None|True|The control set to create, as a JSON object matching the CreateControlSetDto schema in the Compyl API reference|None|{'name': 'Example control set'}|None|None|
+|record|object|None|True|The control set to create, as a JSON object matching the CreateControlSetDto schema in the Rapid7 Cyber GRC API reference|None|{'name': 'Example control set'}|None|None|
   
 Example input:
 
@@ -387,7 +387,6 @@ Example output:
       }
     ],
     "Compliance": {},
-    "Compyl Key": {},
     "Controls": [
       {
         "ID": 0,
@@ -410,6 +409,7 @@ Example output:
     "Modified By": {},
     "Modified Date": {},
     "Name": {},
+    "Rapid7 Key": {},
     "Security Policy Info ID": {},
     "Type": {}
   }
@@ -425,7 +425,7 @@ This action is used to create a new incident in Cyber GRC
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |expand|string|None|False|Comma separated list of related collections to embed in the created record|None|tasks|None|None|
-|record|object|None|True|The incident to create, as a JSON object matching the CreateIncidentDto schema in the Compyl API reference|None|{'name': 'Example incident'}|None|None|
+|record|object|None|True|The incident to create, as a JSON object matching the CreateIncidentDto schema in the Rapid7 Cyber GRC API reference|None|{'name': 'Example incident'}|None|None|
   
 Example input:
 
@@ -510,7 +510,7 @@ This action is used to create a new it asset in Cyber GRC
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |expand|string|None|False|Comma separated list of related collections to embed in the created record|None|tasks|None|None|
-|record|object|None|True|The it asset to create, as a JSON object matching the CreateITAssetDto schema in the Compyl API reference|None|{'name': 'Example it asset'}|None|None|
+|record|object|None|True|The it asset to create, as a JSON object matching the CreateITAssetDto schema in the Rapid7 Cyber GRC API reference|None|{'name': 'Example it asset'}|None|None|
   
 Example input:
 
@@ -666,7 +666,7 @@ This action is used to create a record of any Cyber GRC record type
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |expand|string|None|False|Comma separated list of related collections to embed in the created record|None|tasks|None|None|
-|record|object|None|True|The record to create, as a JSON object matching the corresponding Create DTO in the Compyl API reference|None|{'name': 'Example record'}|None|None|
+|record|object|None|True|The record to create, as a JSON object matching the corresponding Create DTO in the Rapid7 Cyber GRC API reference|None|{'name': 'Example record'}|None|None|
 |record_type|string|Risks|True|The Cyber GRC record type to operate on|["AnswerSets", "AssessmentQuestions", "Assessments", "Audits", "BusinessObjectives", "Certifications", "Clients", "ContractDocuments", "Contracts", "ControlSetMetrics", "ControlSets", "Departments", "Discussions", "DocumentTypes", "Groups", "ITAssets", "ImpactViews", "Impacts", "Incidents", "LikelihoodViews", "Likelihoods", "Locations", "QuestionSets", "Risks", "SecurityPolicyInfos", "SecurityPolicySettings", "Statuses", "SystemInfos", "TaskTypes", "Tasks", "UserFileEvents", "Users", "VendorTypes", "Vendors"]|Risks|None|None|
   
 Example input:
@@ -704,7 +704,7 @@ This action is used to create a new risk in Cyber GRC
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |expand|string|None|False|Comma separated list of related collections to embed in the created record|None|tasks|None|None|
-|record|object|None|True|The risk to create, as a JSON object matching the CreateRiskDto schema in the Compyl API reference|None|{'name': 'Example risk'}|None|None|
+|record|object|None|True|The risk to create, as a JSON object matching the CreateRiskDto schema in the Rapid7 Cyber GRC API reference|None|{'name': 'Example risk'}|None|None|
   
 Example input:
 
@@ -807,7 +807,7 @@ This action is used to create a new task in Cyber GRC
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |expand|string|None|False|Comma separated list of related collections to embed in the created record|None|tasks|None|None|
-|record|object|None|True|The task to create, as a JSON object matching the CreateTaskDto schema in the Compyl API reference|None|{'name': 'Example task'}|None|None|
+|record|object|None|True|The task to create, as a JSON object matching the CreateTaskDto schema in the Rapid7 Cyber GRC API reference|None|{'name': 'Example task'}|None|None|
   
 Example input:
 
@@ -861,8 +861,6 @@ Example output:
       }
     ],
     "Compliance": {},
-    "Compyl AI Event GUID": {},
-    "Compyl Key": {},
     "Contracts": [
       {
         "ID": {},
@@ -932,6 +930,8 @@ Example output:
       }
     ],
     "Raise Service Request": {},
+    "Rapid7 AI Event GUID": {},
+    "Rapid7 Key": {},
     "Require Acknowledgement": {},
     "Risks": [
       {
@@ -971,7 +971,7 @@ This action is used to create a new user in Cyber GRC
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |expand|string|None|False|Comma separated list of related collections to embed in the created record|None|tasks|None|None|
-|record|object|None|True|The user to create, as a JSON object matching the CreateUserDto schema in the Compyl API reference|None|{'name': 'Example user'}|None|None|
+|record|object|None|True|The user to create, as a JSON object matching the CreateUserDto schema in the Rapid7 Cyber GRC API reference|None|{'name': 'Example user'}|None|None|
   
 Example input:
 
@@ -1023,7 +1023,7 @@ This action is used to create a new vendor in Cyber GRC
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |expand|string|None|False|Comma separated list of related collections to embed in the created record|None|tasks|None|None|
-|record|object|None|True|The vendor to create, as a JSON object matching the CreateVendorDto schema in the Compyl API reference|None|{'name': 'Example vendor'}|None|None|
+|record|object|None|True|The vendor to create, as a JSON object matching the CreateVendorDto schema in the Rapid7 Cyber GRC API reference|None|{'name': 'Example vendor'}|None|None|
   
 Example input:
 
@@ -1068,7 +1068,6 @@ Example output:
       "Users ID": {}
     },
     "Compliance": {},
-    "Compyl Key": {},
     "Contact Email": {},
     "Contact Name": {},
     "Contracts": [
@@ -1116,6 +1115,7 @@ Example output:
     "Name": "",
     "Negative Impact When Service Down More Than24hr": {},
     "Public Description": {},
+    "Rapid7 Key": {},
     "Risks": [
       {
         "ID": {},
@@ -2121,7 +2121,6 @@ Example output:
       }
     ],
     "Compliance": {},
-    "Compyl Key": {},
     "Controls": [
       {
         "ID": 0,
@@ -2144,6 +2143,7 @@ Example output:
     "Modified By": {},
     "Modified Date": {},
     "Name": {},
+    "Rapid7 Key": {},
     "Security Policy Info ID": {},
     "Type": {}
   }
@@ -2204,7 +2204,6 @@ Example output:
         }
       ],
       "Compliance": {},
-      "Compyl Key": {},
       "Controls": [
         {
           "ID": 0,
@@ -2227,6 +2226,7 @@ Example output:
       "Modified By": {},
       "Modified Date": {},
       "Name": {},
+      "Rapid7 Key": {},
       "Security Policy Info ID": {},
       "Type": {}
     }
@@ -3092,8 +3092,6 @@ Example output:
       }
     ],
     "Compliance": {},
-    "Compyl AI Event GUID": {},
-    "Compyl Key": {},
     "Contracts": [
       {
         "ID": {},
@@ -3163,6 +3161,8 @@ Example output:
       }
     ],
     "Raise Service Request": {},
+    "Rapid7 AI Event GUID": {},
+    "Rapid7 Key": {},
     "Require Acknowledgement": {},
     "Risks": [
       {
@@ -3265,8 +3265,6 @@ Example output:
         }
       ],
       "Compliance": {},
-      "Compyl AI Event GUID": {},
-      "Compyl Key": {},
       "Contracts": [
         {
           "ID": {},
@@ -3336,6 +3334,8 @@ Example output:
         }
       ],
       "Raise Service Request": {},
+      "Rapid7 AI Event GUID": {},
+      "Rapid7 Key": {},
       "Require Acknowledgement": {},
       "Risks": [
         {
@@ -3535,7 +3535,6 @@ Example output:
       "Users ID": {}
     },
     "Compliance": {},
-    "Compyl Key": {},
     "Contact Email": {},
     "Contact Name": {},
     "Contracts": [
@@ -3583,6 +3582,7 @@ Example output:
     "Name": "",
     "Negative Impact When Service Down More Than24hr": {},
     "Public Description": {},
+    "Rapid7 Key": {},
     "Risks": [
       {
         "ID": {},
@@ -3674,7 +3674,6 @@ Example output:
         "Users ID": {}
       },
       "Compliance": {},
-      "Compyl Key": {},
       "Contact Email": {},
       "Contact Name": {},
       "Contracts": [
@@ -3722,6 +3721,7 @@ Example output:
       "Name": "",
       "Negative Impact When Service Down More Than24hr": {},
       "Public Description": {},
+      "Rapid7 Key": {},
       "Risks": [
         {
           "ID": {},
@@ -3809,7 +3809,7 @@ This action is used to update an existing assessment in Cyber GRC
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |expand|string|None|False|Comma separated list of related collections to embed in the updated record|None|tasks|None|None|
 |id|integer|None|True|ID of the assessment to update|None|1|None|None|
-|record|object|None|True|The fields to write, as a JSON object matching the UpdateAssessmentDto schema in the Compyl API reference|None|{'name': 'Renamed assessment'}|None|None|
+|record|object|None|True|The fields to write, as a JSON object matching the UpdateAssessmentDto schema in the Rapid7 Cyber GRC API reference|None|{'name': 'Renamed assessment'}|None|None|
   
 Example input:
 
@@ -3895,7 +3895,7 @@ This action is used to update an existing audit in Cyber GRC
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |expand|string|None|False|Comma separated list of related collections to embed in the updated record|None|tasks|None|None|
 |id|integer|None|True|ID of the audit to update|None|1|None|None|
-|record|object|None|True|The fields to write, as a JSON object matching the UpdateAuditDto schema in the Compyl API reference|None|{'name': 'Renamed audit'}|None|None|
+|record|object|None|True|The fields to write, as a JSON object matching the UpdateAuditDto schema in the Rapid7 Cyber GRC API reference|None|{'name': 'Renamed audit'}|None|None|
   
 Example input:
 
@@ -3998,7 +3998,7 @@ This action is used to update an existing certification in Cyber GRC
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |expand|string|None|False|Comma separated list of related collections to embed in the updated record|None|tasks|None|None|
 |id|integer|None|True|ID of the certification to update|None|1|None|None|
-|record|object|None|True|The fields to write, as a JSON object matching the UpdateCertificationDto schema in the Compyl API reference|None|{'name': 'Renamed certification'}|None|None|
+|record|object|None|True|The fields to write, as a JSON object matching the UpdateCertificationDto schema in the Rapid7 Cyber GRC API reference|None|{'name': 'Renamed certification'}|None|None|
   
 Example input:
 
@@ -4050,7 +4050,7 @@ This action is used to update an existing control set in Cyber GRC
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |expand|string|None|False|Comma separated list of related collections to embed in the updated record|None|tasks|None|None|
 |id|integer|None|True|ID of the control set to update|None|1|None|None|
-|record|object|None|True|The fields to write, as a JSON object matching the UpdateControlSetDto schema in the Compyl API reference|None|{'name': 'Renamed control set'}|None|None|
+|record|object|None|True|The fields to write, as a JSON object matching the UpdateControlSetDto schema in the Rapid7 Cyber GRC API reference|None|{'name': 'Renamed control set'}|None|None|
   
 Example input:
 
@@ -4088,7 +4088,6 @@ Example output:
       }
     ],
     "Compliance": {},
-    "Compyl Key": {},
     "Controls": [
       {
         "ID": 0,
@@ -4111,6 +4110,7 @@ Example output:
     "Modified By": {},
     "Modified Date": {},
     "Name": {},
+    "Rapid7 Key": {},
     "Security Policy Info ID": {},
     "Type": {}
   }
@@ -4127,7 +4127,7 @@ This action is used to update an existing incident in Cyber GRC
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |expand|string|None|False|Comma separated list of related collections to embed in the updated record|None|tasks|None|None|
 |id|integer|None|True|ID of the incident to update|None|1|None|None|
-|record|object|None|True|The fields to write, as a JSON object matching the UpdateIncidentDto schema in the Compyl API reference|None|{'name': 'Renamed incident'}|None|None|
+|record|object|None|True|The fields to write, as a JSON object matching the UpdateIncidentDto schema in the Rapid7 Cyber GRC API reference|None|{'name': 'Renamed incident'}|None|None|
   
 Example input:
 
@@ -4214,7 +4214,7 @@ This action is used to update an existing it asset in Cyber GRC
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |expand|string|None|False|Comma separated list of related collections to embed in the updated record|None|tasks|None|None|
 |id|integer|None|True|ID of the it asset to update|None|1|None|None|
-|record|object|None|True|The fields to write, as a JSON object matching the UpdateITAssetDto schema in the Compyl API reference|None|{'name': 'Renamed it asset'}|None|None|
+|record|object|None|True|The fields to write, as a JSON object matching the UpdateITAssetDto schema in the Rapid7 Cyber GRC API reference|None|{'name': 'Renamed it asset'}|None|None|
   
 Example input:
 
@@ -4372,7 +4372,7 @@ This action is used to update a record of any Cyber GRC record type
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |expand|string|None|False|Comma separated list of related collections to embed in the updated record|None|tasks|None|None|
 |id|integer|None|True|ID of the record to update|None|1|None|None|
-|record|object|None|True|The fields to write, as a JSON object matching the corresponding Update DTO in the Compyl API reference|None|{'name': 'Renamed record'}|None|None|
+|record|object|None|True|The fields to write, as a JSON object matching the corresponding Update DTO in the Rapid7 Cyber GRC API reference|None|{'name': 'Renamed record'}|None|None|
 |record_type|string|Risks|True|The Cyber GRC record type to operate on|["AnswerSets", "AssessmentQuestions", "Assessments", "Audits", "BusinessObjectives", "Certifications", "Clients", "ContractDocuments", "Contracts", "ControlSetMetrics", "ControlSets", "Departments", "Discussions", "DocumentTypes", "Groups", "ITAssets", "ImpactViews", "Impacts", "Incidents", "LikelihoodViews", "Likelihoods", "Locations", "QuestionSets", "Risks", "SecurityPolicyInfos", "SecurityPolicySettings", "Statuses", "SystemInfos", "TaskTypes", "Tasks", "UserFileEvents", "Users", "VendorTypes", "Vendors"]|Risks|None|None|
   
 Example input:
@@ -4412,7 +4412,7 @@ This action is used to update an existing risk in Cyber GRC
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |expand|string|None|False|Comma separated list of related collections to embed in the updated record|None|tasks|None|None|
 |id|integer|None|True|ID of the risk to update|None|1|None|None|
-|record|object|None|True|The fields to write, as a JSON object matching the UpdateRiskDto schema in the Compyl API reference|None|{'name': 'Renamed risk'}|None|None|
+|record|object|None|True|The fields to write, as a JSON object matching the UpdateRiskDto schema in the Rapid7 Cyber GRC API reference|None|{'name': 'Renamed risk'}|None|None|
   
 Example input:
 
@@ -4517,7 +4517,7 @@ This action is used to update an existing task in Cyber GRC
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |expand|string|None|False|Comma separated list of related collections to embed in the updated record|None|tasks|None|None|
 |id|integer|None|True|ID of the task to update|None|1|None|None|
-|record|object|None|True|The fields to write, as a JSON object matching the UpdateTaskDto schema in the Compyl API reference|None|{'name': 'Renamed task'}|None|None|
+|record|object|None|True|The fields to write, as a JSON object matching the UpdateTaskDto schema in the Rapid7 Cyber GRC API reference|None|{'name': 'Renamed task'}|None|None|
   
 Example input:
 
@@ -4572,8 +4572,6 @@ Example output:
       }
     ],
     "Compliance": {},
-    "Compyl AI Event GUID": {},
-    "Compyl Key": {},
     "Contracts": [
       {
         "ID": {},
@@ -4643,6 +4641,8 @@ Example output:
       }
     ],
     "Raise Service Request": {},
+    "Rapid7 AI Event GUID": {},
+    "Rapid7 Key": {},
     "Require Acknowledgement": {},
     "Risks": [
       {
@@ -4683,7 +4683,7 @@ This action is used to update an existing user in Cyber GRC
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |expand|string|None|False|Comma separated list of related collections to embed in the updated record|None|tasks|None|None|
 |id|integer|None|True|ID of the user to update|None|1|None|None|
-|record|object|None|True|The fields to write, as a JSON object matching the UpdateUserDto schema in the Compyl API reference|None|{'name': 'Renamed user'}|None|None|
+|record|object|None|True|The fields to write, as a JSON object matching the UpdateUserDto schema in the Rapid7 Cyber GRC API reference|None|{'name': 'Renamed user'}|None|None|
   
 Example input:
 
@@ -4737,7 +4737,7 @@ This action is used to update an existing vendor in Cyber GRC
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |expand|string|None|False|Comma separated list of related collections to embed in the updated record|None|tasks|None|None|
 |id|integer|None|True|ID of the vendor to update|None|1|None|None|
-|record|object|None|True|The fields to write, as a JSON object matching the UpdateVendorDto schema in the Compyl API reference|None|{'name': 'Renamed vendor'}|None|None|
+|record|object|None|True|The fields to write, as a JSON object matching the UpdateVendorDto schema in the Rapid7 Cyber GRC API reference|None|{'name': 'Renamed vendor'}|None|None|
   
 Example input:
 
@@ -4783,7 +4783,6 @@ Example output:
       "Users ID": {}
     },
     "Compliance": {},
-    "Compyl Key": {},
     "Contact Email": {},
     "Contact Name": {},
     "Contracts": [
@@ -4831,6 +4830,7 @@ Example output:
     "Name": "",
     "Negative Impact When Service Down More Than24hr": {},
     "Public Description": {},
+    "Rapid7 Key": {},
     "Risks": [
       {
         "ID": {},
@@ -5084,8 +5084,8 @@ Example output:
 |Audits|[]task_audit_lookup|None|None|Audits|None|
 |Clients|[]task_client_lookup|None|None|Clients|None|
 |Compliance|integer|None|None|Compliance|None|
-|Compyl AI Event GUID|string|None|None|Compyl AI Event GUID|None|
-|Compyl Key|string|None|None|Compyl Key|None|
+|Rapid7 AI Event GUID|string|None|None|Rapid7 AI Event GUID|None|
+|Rapid7 Key|string|None|None|Rapid7 Key|None|
 |Contracts|[]task_contract_lookup|None|None|Contracts|None|
 |Controls|[]task_control_lookup|None|None|Controls|None|
 |Created By|string|None|None|Created By|None|
@@ -5316,7 +5316,7 @@ Example output:
 |Assessments|[]control_set_control_set_assessment_lookup|None|None|Assessments|None|
 |Audits|[]control_set_audit_lookup|None|None|Audits|None|
 |Compliance|integer|None|None|Compliance|None|
-|Compyl Key|string|None|None|Compyl Key|None|
+|Rapid7 Key|string|None|None|Rapid7 Key|None|
 |Controls|[]control_set_control_lookup|None|None|Controls|None|
 |Created By|string|None|None|Created By|None|
 |Created Date|date|None|None|Created Date|None|
@@ -5431,7 +5431,7 @@ Example output:
 |Assessments|[]assessment_lookup|None|None|Assessments|None|
 |Assigned To|entity_user|None|None|Assigned To|None|
 |Compliance|integer|None|None|Compliance|None|
-|Compyl Key|string|None|None|Compyl Key|None|
+|Rapid7 Key|string|None|None|Rapid7 Key|None|
 |Contact Email|string|None|None|Contact Email|None|
 |Contact Name|string|None|None|Contact Name|None|
 |Contracts|[]contract_lookup|None|None|Contracts|None|
@@ -5625,7 +5625,7 @@ Example output:
 ## Troubleshooting
 
 * The URL is the Cyber GRC API host, which is a different host from the one used to sign in to the web interface. If requests answer with the sign-in page instead of JSON, the URL is pointing at the web interface rather than the API
-* Every read action accepts OData query options. When an action returns no records, check the Filter expression against the Compyl API reference first, because the API rejects an invalid $filter with a 400 response rather than returning an empty result
+* Every read action accepts OData query options. When an action returns no records, check the Filter expression against the API reference first, because the API rejects an invalid $filter with a 400 response rather than returning an empty result
 * An API key carries the permissions of the user it is assigned to, so a 403 response means that user cannot see or change the record in question
 * A 401 response does not always mean the API key is wrong. Any path the API does not recognise, such as a misspelled record type or a URL that already ends in /api/v2, falls through to the interactive sign-in scheme and is answered with a 401 whose scheme is not ApiKey. The plugin reports that case separately, so read the error text before regenerating the key
 * The typed actions, such as Get Risks, declare the type of every field they return, and a step fails validation if the API answers with a different type than the record schema documents. Generic List Records returns the same records as untyped objects and can be used as a workaround while the mismatch is reported to Rapid7 support
@@ -5641,5 +5641,5 @@ Example output:
 
 ## References
 
-* [Compyl API reference](https://compyl.readme.io/reference/)
+* [Rapid7 Cyber GRC API reference](https://compyl.readme.io/reference/)
 * [Managing your API keys](https://compyl.readme.io/reference/getting-started)

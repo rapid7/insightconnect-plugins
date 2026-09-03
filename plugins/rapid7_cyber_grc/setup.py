@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 setup(
     name="rapid7_cyber_grc-rapid7-plugin",
     version="1.0.0",
-    description="Rapid7 Cyber GRC (powered by Compyl) is a governance, risk, and compliance platform. This plugin manages risks, incidents, tasks, audits, control sets, assessments, vendors, certifications, IT assets, and users, and uploads evidence through the Flat File API",
+    description="Rapid7 Cyber GRC is a governance, risk, and compliance solution. This plugin manages risks, incidents, tasks, audits, control sets, assessments, vendors, certifications, IT assets, and users, and uploads evidence through the Flat File API",
     author="rapid7",
     author_email="",
     url="",

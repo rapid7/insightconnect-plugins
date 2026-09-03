@@ -7,7 +7,7 @@ from sys import argv
 Name = "Rapid7 Cyber GRC"
 Vendor = "rapid7"
 Version = "1.0.0"
-Description = "Rapid7 Cyber GRC (powered by Compyl) is a governance, risk, and compliance platform. This plugin manages risks, incidents, tasks, audits, control sets, assessments, vendors, certifications, IT assets, and users, and uploads evidence through the Flat File API"
+Description = "Rapid7 Cyber GRC is a governance, risk, and compliance solution. This plugin manages risks, incidents, tasks, audits, control sets, assessments, vendors, certifications, IT assets, and users, and uploads evidence through the Flat File API"
 
 
 def main():

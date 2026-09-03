@@ -38,7 +38,7 @@ class UpdateRiskInput(insightconnect_plugin_runtime.Input):
     "record": {
       "type": "object",
       "title": "Risk",
-      "description": "The fields to write, as a JSON object matching the UpdateRiskDto schema in the Compyl API reference",
+      "description": "The fields to write, as a JSON object matching the UpdateRiskDto schema in the Rapid7 Cyber GRC API reference",
       "order": 2
     }
   },

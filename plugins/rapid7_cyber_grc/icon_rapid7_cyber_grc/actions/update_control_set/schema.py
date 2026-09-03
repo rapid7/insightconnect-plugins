@@ -38,7 +38,7 @@ class UpdateControlSetInput(insightconnect_plugin_runtime.Input):
     "record": {
       "type": "object",
       "title": "Control Set",
-      "description": "The fields to write, as a JSON object matching the UpdateControlSetDto schema in the Compyl API reference",
+      "description": "The fields to write, as a JSON object matching the UpdateControlSetDto schema in the Rapid7 Cyber GRC API reference",
       "order": 2
     }
   },
@@ -155,8 +155,8 @@ class UpdateControlSetOutput(insightconnect_plugin_runtime.Output):
         },
         "compylKey": {
           "type": "string",
-          "title": "Compyl Key",
-          "description": "Compyl Key",
+          "title": "Rapid7 Key",
+          "description": "Rapid7 Key",
           "order": 12
         },
         "securityPolicyInfoID": {

@@ -32,7 +32,7 @@ class CreateRecordInput(insightconnect_plugin_runtime.Input):
     "record": {
       "type": "object",
       "title": "Record",
-      "description": "The record to create, as a JSON object matching the corresponding Create DTO in the Compyl API reference",
+      "description": "The record to create, as a JSON object matching the corresponding Create DTO in the Rapid7 Cyber GRC API reference",
       "order": 2
     },
     "record_type": {

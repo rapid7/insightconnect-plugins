@@ -31,7 +31,7 @@ class CreateAssessmentInput(insightconnect_plugin_runtime.Input):
     "record": {
       "type": "object",
       "title": "Assessment",
-      "description": "The assessment to create, as a JSON object matching the CreateAssessmentDto schema in the Compyl API reference",
+      "description": "The assessment to create, as a JSON object matching the CreateAssessmentDto schema in the Rapid7 Cyber GRC API reference",
       "order": 1
     }
   },

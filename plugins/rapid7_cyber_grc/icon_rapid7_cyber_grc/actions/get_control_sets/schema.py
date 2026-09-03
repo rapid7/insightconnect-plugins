@@ -184,8 +184,8 @@ class GetControlSetsOutput(insightconnect_plugin_runtime.Output):
         },
         "compylKey": {
           "type": "string",
-          "title": "Compyl Key",
-          "description": "Compyl Key",
+          "title": "Rapid7 Key",
+          "description": "Rapid7 Key",
           "order": 12
         },
         "securityPolicyInfoID": {

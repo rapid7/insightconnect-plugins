@@ -355,7 +355,7 @@ class CyberGrcAPI:
             raise PluginException(
                 cause=f"Cyber GRC rejected {operation} as a bad request.",
                 assistance=f"{self._api_message(response)} Check any OData query options on this step, such as "
-                "Filter, Select, Expand and Order By, against the field names in the Compyl API reference. Field "
+                "Filter, Select, Expand and Order By, against the field names in the Rapid7 Cyber GRC API reference. Field "
                 "names are the JSON names of the record type, for example statusID rather than Status.",
                 data=self._scrub(response.text[:BODY_EXCERPT]),
             )
@@ -398,7 +398,7 @@ class CyberGrcAPI:
                 cause=f"Cyber GRC does not expose {operation} to API keys.",
                 assistance="The API key itself was not the problem: this path fell through to the interactive "
                 f"'{scheme}' sign-in scheme, which happens when the path does not exist. Check that the record type "
-                "is spelled exactly as it appears in the Compyl API reference, including capitalisation, and that "
+                "is spelled exactly as it appears in the Rapid7 Cyber GRC API reference, including capitalisation, and that "
                 "the connection URL is the API host on its own with no /api/v2 suffix. A few endpoints genuinely "
                 "accept only interactive sessions, including the v1 flat file upload; Cyber GRC support has to "
                 "enable API key access to those.",

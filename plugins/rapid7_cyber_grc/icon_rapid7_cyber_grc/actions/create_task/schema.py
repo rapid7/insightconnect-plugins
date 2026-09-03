@@ -31,7 +31,7 @@ class CreateTaskInput(insightconnect_plugin_runtime.Input):
     "record": {
       "type": "object",
       "title": "Task",
-      "description": "The task to create, as a JSON object matching the CreateTaskDto schema in the Compyl API reference",
+      "description": "The task to create, as a JSON object matching the CreateTaskDto schema in the Rapid7 Cyber GRC API reference",
       "order": 1
     }
   },
@@ -345,8 +345,8 @@ class CreateTaskOutput(insightconnect_plugin_runtime.Output):
         },
         "compylKey": {
           "type": "string",
-          "title": "Compyl Key",
-          "description": "Compyl Key",
+          "title": "Rapid7 Key",
+          "description": "Rapid7 Key",
           "order": 39
         },
         "isAuditorRequest": {
@@ -363,8 +363,8 @@ class CreateTaskOutput(insightconnect_plugin_runtime.Output):
         },
         "compylAIEventGuid": {
           "type": "string",
-          "title": "Compyl AI Event GUID",
-          "description": "Compyl AI Event GUID",
+          "title": "Rapid7 AI Event GUID",
+          "description": "Rapid7 AI Event GUID",
           "order": 42
         },
         "createdDate": {

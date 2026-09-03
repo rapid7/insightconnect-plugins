@@ -31,7 +31,7 @@ class CreateAuditInput(insightconnect_plugin_runtime.Input):
     "record": {
       "type": "object",
       "title": "Audit",
-      "description": "The audit to create, as a JSON object matching the CreateAuditDto schema in the Compyl API reference",
+      "description": "The audit to create, as a JSON object matching the CreateAuditDto schema in the Rapid7 Cyber GRC API reference",
       "order": 1
     }
   },

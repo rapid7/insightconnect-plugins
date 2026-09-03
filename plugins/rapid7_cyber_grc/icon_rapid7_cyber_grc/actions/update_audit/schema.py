@@ -38,7 +38,7 @@ class UpdateAuditInput(insightconnect_plugin_runtime.Input):
     "record": {
       "type": "object",
       "title": "Audit",
-      "description": "The fields to write, as a JSON object matching the UpdateAuditDto schema in the Compyl API reference",
+      "description": "The fields to write, as a JSON object matching the UpdateAuditDto schema in the Rapid7 Cyber GRC API reference",
       "order": 2
     }
   },
