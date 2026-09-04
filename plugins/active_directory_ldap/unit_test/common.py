@@ -127,6 +127,8 @@ class DefaultConnection:
                 Input.PORT: 345,
                 Input.USE_SSL: True,
                 Input.USERNAME_PASSWORD: {"username": "bob", "password": "foobar"},
+                Input.AUTH_TYPE: "NTLM",
+                Input.CHASE_REFERRALS: True,
             }
         )
 
