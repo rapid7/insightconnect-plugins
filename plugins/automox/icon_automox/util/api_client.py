@@ -345,19 +345,30 @@ class ApiClient:
         self, org_id: int, file_content: bytes, filename: str, report_source: str
     ) -> Dict:
         with io.BytesIO(file_content) as file:
-            files = [("file", (filename, file, "text/csv"))]
+            # Automox needs the report schema both as the `source` query param and as a
+            # `format` multipart field.
+            files = [
+                ("file", (filename, file, "text/csv")),
+                ("format", (None, report_source)),
+            ]
 
             headers = {"Authorization": f"Bearer {self.api_key}"}
             params = self._org_param(org_id)
             params["source"] = report_source
 
+            url = f"{self.endpoint}/orgs/{org_id}/remediations/action-sets/upload"
+            response = None
             try:
                 response = requests.post(
-                    f"{self.endpoint}/orgs/{org_id}/remediations/action-sets/upload",
+                    url,
                     params=params,
                     files=files,
                     headers=headers,
                 )  # nosec B113
+                self.logger.info(
+                    f"Request URL: {url}, Method: POST, Source/Format: {report_source}, "
+                    f"Filename: {filename}, Response code: {response.status_code}"
+                )
 
                 if response.status_code == 201:
                     return {
@@ -369,24 +380,32 @@ class ApiClient:
                 elif response.status_code == 404:
                     raise PluginException(preset=PluginException.Preset.NOT_FOUND)
                 else:
+                    # Report the code and body verbatim. Passing a preset alongside a custom
+                    # assistance would discard the assistance, hiding why Automox refused.
                     raise PluginException(
-                        preset=PluginException.Preset.SERVER_ERROR,
-                        assistance=f"Failed to upload file to Vulnerability Sync - Response code: {response.status_code}, "
-                        f"Content: {response.text}",
+                        cause="Failed to upload file to Vulnerability Sync.",
+                        assistance=f"Automox returned response code {response.status_code}.",
+                        data=response.text,
                     )
             except PluginException:
                 raise
             except json.decoder.JSONDecodeError as error:
                 raise PluginException(
-                    preset=PluginException.Preset.INVALID_JSON,
-                    assistance=f"Failed to upload file to Vulnerability Sync - Response code: {response.status_code}, "
-                    f"Content: {response.text}, Error: {str(error)}",
+                    cause="Failed to upload file to Vulnerability Sync - response was not valid JSON.",
+                    assistance=f"Automox returned response code {response.status_code}. Error: {str(error)}.",
+                    data=response.text,
                 )
             except Exception as error:
+                # response is None when requests.post itself failed, e.g. a connection error.
+                detail = (
+                    f"Automox returned response code {response.status_code}."
+                    if response
+                    else "No response was received from Automox."
+                )
                 raise PluginException(
-                    preset=PluginException.Preset.UNKNOWN,
-                    assistance=f"Failed to upload file to Vulnerability Sync - Response code: {response.status_code}, "
-                    f"Content: {response.text}, Error: {str(error)}",
+                    cause="Failed to upload file to Vulnerability Sync.",
+                    assistance=f"{detail} Error: {str(error)}.",
+                    data=response.text if response else "",
                 )
 
     def list_vulnerability_sync_action_sets(self, org_id: int, params: Optional[Dict] = None) -> List[Dict]:
