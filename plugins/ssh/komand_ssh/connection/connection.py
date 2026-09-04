@@ -36,9 +36,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(CustomMissingKeyPolicy())
 
-        # Update host only if entered and different from host in connection
-        if host and host != self.host:
-            self.host = host
+        # Don't mutate self.host - this connection may run more actions after this one
+        effective_host = host.strip() if host and host.strip() else self.host
 
         # Select connection strategy
         connection_strategy = ConnectUsingRSAKeyStrategy if self.use_key else ConnectUsingPasswordStrategy
@@ -46,7 +45,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         # Return SSH client
         try:
             return connection_strategy(ssh_client, self.logger).connect(
-                self.host, self.port, self.username, self.password, self.key
+                effective_host, self.port, self.username, self.password, self.key
             )
         except Exception as error:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)

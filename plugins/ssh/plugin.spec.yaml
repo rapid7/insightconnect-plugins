@@ -8,7 +8,7 @@ description: '[Secure Shell](https://en.wikipedia.org/wiki/Secure_Shell) (SSH) i
   unsecured network. This plugin uses the [paramiko](http://www.paramiko.org/) to
   connect to a remote host via the library. The SSH plugin allows you to run commands
   on a remote host'
-version: 4.0.5
+version: 4.0.6
 connection_version: 4
 supported_versions: [SSH 2025-01-15]
 vendor: rapid7
@@ -44,6 +44,8 @@ troubleshooting:
   .ssh/id_rsa | pbcopy`.\nThis can then be pasted into the Connection's `key` input
   field"
 version_history:
+- "4.0.6 - Action: `Run Remote Command` - Fix issue where action was failing on long commands
+  | Fix duplicate blank lines in output"
 - "4.0.5 - Updated dependencies | Updated SDK to the latest version (6.6.0)"
 - 4.0.4 - Updated SDK to the latest version (6.2.5)
 - 4.0.3 - Updated dependencies | Updated SDK to the latest version

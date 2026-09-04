@@ -3,6 +3,7 @@ import insightconnect_plugin_runtime
 from .schema import Input, Output, RunInput, RunOutput
 
 # Custom imports below
+from komand_ssh.util.constants import DEFAULT_ENCODING, MAX_COMMAND_ARG_BYTES
 
 
 class Run(insightconnect_plugin_runtime.Action):
@@ -19,9 +20,26 @@ class Run(insightconnect_plugin_runtime.Action):
 
         results = {}
         client = self.connection.client(host)
-        _, stdout, stderr = client.exec_command(command)
-        results["stdout"] = "\n".join(stdout.readlines())
-        results["stderr"] = "\n".join(stderr.readlines())
-        results["all_output"] = results["stdout"] + results["stderr"]
-        client.close()
+        encoded_command = command.encode(DEFAULT_ENCODING)
+        try:
+            if len(encoded_command) >= MAX_COMMAND_ARG_BYTES:
+                # Above MAX_ARG_STRLEN, exec_command(command) fails with "Argument list too long"
+                self.logger.info("Command exceeds argument-length threshold, sending it via stdin instead")
+                stdin, stdout, stderr = client.exec_command("/bin/sh -s")
+                stdin.write(encoded_command)
+                stdin.flush()
+                stdin.channel.shutdown_write()
+            else:
+                _, stdout, stderr = client.exec_command(command)
+
+            results["stdout"] = stdout.read().decode(DEFAULT_ENCODING)
+            results["stderr"] = stderr.read().decode(DEFAULT_ENCODING)
+            results["all_output"] = results["stdout"] + results["stderr"]
+
+            exit_code = stdout.channel.recv_exit_status()
+            if exit_code != 0:
+                self.logger.warning(f"Remote command exited with a non-zero status: {exit_code}")
+        finally:
+            client.close()
+
         return {Output.RESULTS: results}
