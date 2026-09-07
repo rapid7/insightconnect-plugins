@@ -9,6 +9,7 @@ from .schema import (
 )
 
 # Custom imports below
+from icon_servicenow.util.journal_helper import read_journal_from_incident
 
 
 class GetIncidentCommentsWorknotes(insightconnect_plugin_runtime.Action):
@@ -42,5 +43,11 @@ class GetIncidentCommentsWorknotes(insightconnect_plugin_runtime.Action):
             result = response.get("resource", {}).get("result")
         except AttributeError:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
+
+        # The sys_journal_field table enforces its own read ACLs and returns an empty result rather
+        # than an error when they filter the caller out, so fall back to reading the journal from the
+        # incident record, which is gated by the ACLs of the incident itself.
+        if not result:
+            result = read_journal_from_incident(self.connection, self.logger, system_id, type_)
 
         return {Output.INCIDENT_COMMENTS_WORKNOTES: result}

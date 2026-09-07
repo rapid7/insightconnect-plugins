@@ -24,6 +24,8 @@ Note: This plugin affects only the underlying tables in a ServiceNow instance, n
   - Create/Read/Update/Delete Security Incident (table `sn_si_incident` with permissions create/read/write/delete)
   - Create/Read/Update/Delete Vulnerability (table `sn_vul_vulnerable_item` with permissions create/read/write/delete)
   - Create Change Request (table `sn_chg_rest` with create permissions)
+  - Get Incident Comments and Work Notes (table `sys_journal_field` with read permissions)
+    The `incident` table is normally read via the `itil` role. `sys_journal_field` has Access Controls of its own: a `security_admin` must add a role the account holds, such as `itil`, under Requires role on that table's `read` Access Control, creating it if the table has none. Granting `admin` is not required.
 
 # Supported Product Versions
 
@@ -1683,10 +1685,11 @@ Example output:
 
 ## Troubleshooting
 
-* This plugin does not contain a troubleshooting.
+* When the `sys_journal_field` table returns no entries, Get Incident Comments and Work Notes reads the comments and work notes from the incident record instead. Entries read that way have an empty `sys_id` and `sys_tags`, and their `sys_created_by` is the display name of the author rather than their user name. If the connected account can read neither the journal table nor the incident, the action returns no entries and reports the reason in the log.
 
 # Version History
 
+* 8.1.6 - `Get Incident Comments and Work Notes`: Read comments and work notes from the incident record when the `sys_journal_field` table is not readable by the connected account | Updated SDK to the latest version (6.6.0)
 * 8.1.5 - Updated SDK to the latest version (6.5.1)
 * 8.1.4 - Fix error handling in create_security_incident action | Updated SDK to the latest version (6.4.3)
 * 8.1.3 - Updated dependency

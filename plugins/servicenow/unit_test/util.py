@@ -5,6 +5,10 @@ import os
 from icon_servicenow.connection.connection import Connection
 from icon_servicenow.connection.schema import Input
 
+INCIDENT_URL = "https://rapid7.service-now.com/api/now/table/incident"
+JOURNAL_URL = "https://rapid7.service-now.com/api/now/table/sys_journal_field"
+JOURNAL_FIELDS = "sys_id,sys_created_on,name,element_id,sys_tags,value,sys_created_by,element"
+
 
 class Util:
     @staticmethod
@@ -123,5 +127,42 @@ class Util:
                 return MockResponse("create_security_incident.json", 200)
             elif kwargs.get("json", {}).get("short_description") == "new incident":
                 return MockResponse("create_security_incident.json", 200)
+
+        elif kwargs.get("url") == f"{JOURNAL_URL}?sysparm_query=element_id=j1&sysparm_fields={JOURNAL_FIELDS}":
+            return MockResponse("get_incident_comments_worknotes_journal.json", 200)
+        elif kwargs.get("url") in (
+            f"{JOURNAL_URL}?sysparm_query=element_id=j2&sysparm_fields={JOURNAL_FIELDS}",
+            f"{JOURNAL_URL}?sysparm_query=element_id=j2^element=comments&sysparm_fields={JOURNAL_FIELDS}",
+            f"{JOURNAL_URL}?sysparm_query=element_id=j2^element=work_notes&sysparm_fields={JOURNAL_FIELDS}",
+            f"{JOURNAL_URL}?sysparm_query=element_id=j3&sysparm_fields={JOURNAL_FIELDS}",
+            f"{JOURNAL_URL}?sysparm_query=element_id=j4&sysparm_fields={JOURNAL_FIELDS}",
+            f"{JOURNAL_URL}?sysparm_query=element_id=j5&sysparm_fields={JOURNAL_FIELDS}",
+            f"{JOURNAL_URL}?sysparm_query=element_id=j7&sysparm_fields={JOURNAL_FIELDS}",
+            f"{JOURNAL_URL}?sysparm_query=element_id=not-a-sys-id&sysparm_fields={JOURNAL_FIELDS}",
+        ):
+            return MockResponse("get_incident_comments_worknotes_journal_empty.json", 200)
+        elif kwargs.get("url") == f"{JOURNAL_URL}?sysparm_query=element_id=j6&sysparm_fields={JOURNAL_FIELDS}":
+            return MockResponse("get_incident_comments_worknotes_journal_forbidden.json", 403)
+
+        elif kwargs.get("url") == f"{INCIDENT_URL}/j2":
+            if kwargs.get("params") == {
+                "sysparm_fields": "comments,work_notes",
+                "sysparm_display_value": "true",
+            }:
+                return MockResponse("get_incident_comments_worknotes_incident_record.json", 200)
+            elif kwargs.get("params") == {"sysparm_fields": "comments", "sysparm_display_value": "true"}:
+                return MockResponse("get_incident_comments_worknotes_incident_record_comments.json", 200)
+            elif kwargs.get("params") == {"sysparm_fields": "work_notes", "sysparm_display_value": "true"}:
+                return MockResponse("get_incident_comments_worknotes_incident_record_work_notes.json", 200)
+        elif kwargs.get("url") == f"{INCIDENT_URL}/j3":
+            return MockResponse("get_incident_comments_worknotes_incident_record_empty.json", 200)
+        elif kwargs.get("url") == f"{INCIDENT_URL}/j4":
+            return MockResponse("get_incident_comments_worknotes_incident_not_found.json", 404)
+        elif kwargs.get("url") == f"{INCIDENT_URL}/j5":
+            return MockResponse("get_incident_comments_worknotes_login_page.html", 200, {})
+        elif kwargs.get("url") == f"{INCIDENT_URL}/j7":
+            # A field the caller cannot read is left out of the record, so a record asked for both
+            # journal fields comes back holding only the one the caller is allowed to see.
+            return MockResponse("get_incident_comments_worknotes_incident_record_comments.json", 200)
 
         raise Exception("Not implemented")
