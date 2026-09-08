@@ -21,9 +21,6 @@ class DeleteIncident(insightconnect_plugin_runtime.Action):
 
         response = self.connection.request.make_request(url, method)
 
-        if response.get("status", 0) in range(200, 299):
-            success = True
-        else:
-            success = False
+        success = response.get("status", 0) in range(200, 299)
 
         return {Output.SUCCESS: success}
