@@ -4,6 +4,8 @@ from .schema import ReadIncidentInput, ReadIncidentOutput, Input, Output, Compon
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
 
+from icon_servicenow.util.validators import validate_record_identifier
+
 
 class ReadIncident(insightconnect_plugin_runtime.Action):
     def __init__(self):
@@ -15,7 +17,8 @@ class ReadIncident(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        url = f"{self.connection.incident_url}/{params.get(Input.SYSTEM_ID)}"
+        system_id = validate_record_identifier(params.get(Input.SYSTEM_ID), "system ID")
+        url = f"{self.connection.incident_url}/{system_id}"
         method = "get"
 
         response = self.connection.request.make_request(url, method)

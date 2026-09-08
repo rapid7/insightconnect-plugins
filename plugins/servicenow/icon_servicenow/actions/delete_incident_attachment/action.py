@@ -8,6 +8,7 @@ from .schema import (
 )
 
 # Custom imports below
+from icon_servicenow.util.validators import validate_record_identifier
 
 
 class DeleteIncidentAttachment(insightconnect_plugin_runtime.Action):
@@ -20,7 +21,8 @@ class DeleteIncidentAttachment(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        url = f"{self.connection.attachment_url}/{params.get(Input.ATTACHMENT_ID)}"
+        attachment_id = validate_record_identifier(params.get(Input.ATTACHMENT_ID), "attachment ID")
+        url = f"{self.connection.attachment_url}/{attachment_id}"
         method = "delete"
 
         response = self.connection.request.make_request(url, method)

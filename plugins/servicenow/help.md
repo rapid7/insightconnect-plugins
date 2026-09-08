@@ -1689,7 +1689,7 @@ Example output:
 
 # Version History
 
-* 8.1.6 - `Get Incident Comments and Work Notes`: Read comments and work notes from the incident record when the `sys_journal_field` table is not readable by the connected account | Updated SDK to the latest version (6.6.0)
+* 8.1.6 - `Get Incident Comments and Work Notes`: Read comments and work notes from the incident record when the `sys_journal_field` table is not readable by the connected account | Added validation of the record identifiers and table names used to build request URLs | Updated SDK to the latest version (6.6.0)
 * 8.1.5 - Updated SDK to the latest version (6.5.1)
 * 8.1.4 - Fix error handling in create_security_incident action | Updated SDK to the latest version (6.4.3)
 * 8.1.3 - Updated dependency

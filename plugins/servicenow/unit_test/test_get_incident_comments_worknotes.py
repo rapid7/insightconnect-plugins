@@ -67,11 +67,6 @@ class TestGetIncidentCommentsWorknotes(TestCase):
                 Util.read_file_to_dict("inputs/get_incident_comments_worknotes_unexpected_format.json.inp"),
                 Util.read_file_to_dict("expected/get_incident_comments_worknotes_empty.json.exp"),
             ],
-            [
-                "invalid_system_id",
-                Util.read_file_to_dict("inputs/get_incident_comments_worknotes_invalid_id.json.inp"),
-                Util.read_file_to_dict("expected/get_incident_comments_worknotes_empty.json.exp"),
-            ],
         ]
     )
     def test_get_incident_comments_worknotes(
@@ -120,6 +115,14 @@ class TestGetIncidentCommentsWorknotes(TestCase):
                 Util.read_file_to_dict("inputs/get_incident_comments_worknotes_journal_not_json.json.inp"),
                 "Received an unexpected response from the server.",
                 "(non-JSON or no response was received).",
+            ],
+            [
+                "invalid_system_id",
+                Util.read_file_to_dict("inputs/get_incident_comments_worknotes_invalid_id.json.inp"),
+                "The system ID provided is not a valid ServiceNow record identifier.",
+                "A record is addressed by its system ID or number, which hold letters, digits, hyphens and "
+                "underscores only. Verify that '../../../table/sys_user' is the system ID of the record "
+                "and try again.",
             ],
         ]
     )

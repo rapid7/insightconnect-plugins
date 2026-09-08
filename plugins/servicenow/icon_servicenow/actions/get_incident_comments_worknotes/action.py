@@ -10,6 +10,7 @@ from .schema import (
 
 # Custom imports below
 from icon_servicenow.util.journal_helper import read_journal_from_incident
+from icon_servicenow.util.validators import validate_record_identifier
 
 
 class GetIncidentCommentsWorknotes(insightconnect_plugin_runtime.Action):
@@ -24,7 +25,7 @@ class GetIncidentCommentsWorknotes(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         table = "sys_journal_field"
         url = f"{self.connection.table_url}{table}"
-        system_id = params.get(Input.SYSTEM_ID)
+        system_id = validate_record_identifier(params.get(Input.SYSTEM_ID), "system ID")
         type_ = "work_notes" if params.get(Input.TYPE) == "work notes" else params.get(Input.TYPE)
         fields = "sys_id,sys_created_on,name,element_id,sys_tags,value,sys_created_by,element"
 

@@ -37,10 +37,6 @@ def read_journal_from_incident(connection, logger: Logger, system_id: str, entry
     :return: List of comment and work note objects
     :rtype: list
     """
-    if not (system_id or "").isalnum():
-        logger.info(f"'{system_id}' is not a system ID, the incident record will not be read")
-        return []
-
     elements = ["comments", "work_notes"] if entry_type == "all" else [entry_type]
     logger.info(
         f"No journal entries were returned for incident {system_id}, reading the comments and "

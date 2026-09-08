@@ -2,6 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import DeleteIncidentInput, DeleteIncidentOutput, Input, Output, Component
 
 # Custom imports below
+from icon_servicenow.util.validators import validate_record_identifier
 
 
 class DeleteIncident(insightconnect_plugin_runtime.Action):
@@ -14,7 +15,8 @@ class DeleteIncident(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        url = f"{self.connection.incident_url}/{params.get(Input.SYSTEM_ID)}"
+        system_id = validate_record_identifier(params.get(Input.SYSTEM_ID), "system ID")
+        url = f"{self.connection.incident_url}/{system_id}"
         method = "delete"
 
         response = self.connection.request.make_request(url, method)

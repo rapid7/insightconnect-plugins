@@ -68,6 +68,8 @@ class Util:
             return MockResponse("get_attachment_file", 200, {})
         elif kwargs["url"] == "https://rapid7.service-now.com/oauth_token.do":
             return MockResponse("get_oauth_token.json", 200)
+        elif kwargs["url"].startswith("https://rapid7.service-now.com/api/now/attachment/file?"):
+            return MockResponse("put_incident_attachment.json", 200)
         elif (
             kwargs["url"]
             == "https://rapid7.service-now.com/api/now/attachment?sysparm_query=table_sys_id=3072d01d07a552f6d0ea83ef29c936be"
@@ -138,7 +140,6 @@ class Util:
             f"{JOURNAL_URL}?sysparm_query=element_id=j4&sysparm_fields={JOURNAL_FIELDS}",
             f"{JOURNAL_URL}?sysparm_query=element_id=j5&sysparm_fields={JOURNAL_FIELDS}",
             f"{JOURNAL_URL}?sysparm_query=element_id=j7&sysparm_fields={JOURNAL_FIELDS}",
-            f"{JOURNAL_URL}?sysparm_query=element_id=not-a-sys-id&sysparm_fields={JOURNAL_FIELDS}",
         ):
             return MockResponse("get_incident_comments_worknotes_journal_empty.json", 200)
         elif kwargs.get("url") == f"{JOURNAL_URL}?sysparm_query=element_id=j6&sysparm_fields={JOURNAL_FIELDS}":
