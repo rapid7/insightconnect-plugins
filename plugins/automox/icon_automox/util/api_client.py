@@ -365,10 +365,7 @@ class ApiClient:
                     files=files,
                     headers=headers,
                 )  # nosec B113
-                self.logger.info(
-                    f"Request URL: {url}, Method: POST, Source/Format: {report_source}, "
-                    f"Filename: {filename}, Response code: {response.status_code}"
-                )
+                self.logger.info(f"Method: POST, Source/Format: {report_source}, Response code: {response.status_code}")
 
                 if response.status_code == 201:
                     return {
