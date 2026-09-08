@@ -8,7 +8,6 @@ class Component:
 
 
 class Input:
-    EXPAND = "expand"
     FILTER = "filter"
     ORDER_BY = "order_by"
     SELECT = "select"
@@ -27,12 +26,6 @@ class GetControlSetsInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "expand": {
-      "type": "string",
-      "title": "Expand",
-      "description": "Comma separated list of related collections to embed in the results",
-      "order": 3
-    },
     "filter": {
       "type": "string",
       "title": "Filter",
@@ -43,7 +36,7 @@ class GetControlSetsInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Order By",
       "description": "OData $orderby expression, e.g. modifiedDate desc",
-      "order": 4
+      "order": 3
     },
     "select": {
       "type": "string",
@@ -55,14 +48,14 @@ class GetControlSetsInput(insightconnect_plugin_runtime.Input):
       "type": "integer",
       "title": "Skip",
       "description": "Number of records to skip before returning results",
-      "order": 6
+      "order": 5
     },
     "top": {
       "type": "integer",
       "title": "Top",
       "description": "Maximum number of records to return. Leave empty or set to 0 to return every record, paging through the API automatically",
       "default": 0,
-      "order": 5
+      "order": 4
     }
   },
   "definitions": {}

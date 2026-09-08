@@ -8,7 +8,6 @@ class Component:
 
 
 class Input:
-    EXPAND = "expand"
     RECORD = "record"
 
 
@@ -22,12 +21,6 @@ class CreateCertificationInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "expand": {
-      "type": "string",
-      "title": "Expand",
-      "description": "Comma separated list of related collections to embed in the created record",
-      "order": 2
-    },
     "record": {
       "type": "object",
       "title": "Certification",

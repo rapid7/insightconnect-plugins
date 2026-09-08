@@ -8,7 +8,6 @@ class Component:
 
 
 class Input:
-    EXPAND = "expand"
     RECORD = "record"
     RECORD_TYPE = "record_type"
 
@@ -23,12 +22,6 @@ class CreateRecordInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "expand": {
-      "type": "string",
-      "title": "Expand",
-      "description": "Comma separated list of related collections to embed in the created record",
-      "order": 3
-    },
     "record": {
       "type": "object",
       "title": "Record",

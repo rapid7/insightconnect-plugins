@@ -20,8 +20,7 @@ class CreateRecord(insightconnect_plugin_runtime.Action):
     @auto_instrument
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
-        expand = params.get(Input.EXPAND)
         record = params.get(Input.RECORD)
         record_type = params.get(Input.RECORD_TYPE)
         # END INPUT BINDING - DO NOT REMOVE
-        return {Output.RECORD: self.connection.client.create_record(record_type, record, expand=expand)}
+        return {Output.RECORD: self.connection.client.create_record(record_type, record)}

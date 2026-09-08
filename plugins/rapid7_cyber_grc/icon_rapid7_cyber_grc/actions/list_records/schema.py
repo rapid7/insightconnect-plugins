@@ -8,7 +8,6 @@ class Component:
 
 
 class Input:
-    EXPAND = "expand"
     FILTER = "filter"
     ORDER_BY = "order_by"
     RECORD_TYPE = "record_type"
@@ -28,12 +27,6 @@ class ListRecordsInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "expand": {
-      "type": "string",
-      "title": "Expand",
-      "description": "Comma separated list of related collections to embed in the results",
-      "order": 4
-    },
     "filter": {
       "type": "string",
       "title": "Filter",
@@ -44,7 +37,7 @@ class ListRecordsInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Order By",
       "description": "OData $orderby expression, e.g. modifiedDate desc",
-      "order": 5
+      "order": 4
     },
     "record_type": {
       "type": "string",
@@ -99,14 +92,14 @@ class ListRecordsInput(insightconnect_plugin_runtime.Input):
       "type": "integer",
       "title": "Skip",
       "description": "Number of records to skip before returning results",
-      "order": 7
+      "order": 6
     },
     "top": {
       "type": "integer",
       "title": "Top",
       "description": "Maximum number of records to return. Leave empty or set to 0 to return every record, paging through the API automatically",
       "default": 0,
-      "order": 6
+      "order": 5
     }
   },
   "required": [

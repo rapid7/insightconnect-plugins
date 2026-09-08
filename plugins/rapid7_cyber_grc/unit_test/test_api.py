@@ -4,7 +4,7 @@ import sys
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -440,6 +440,112 @@ class TestCyberGrcAPI(TestCase):
 
         self.assertIn("request to Cyber GRC failed", context.exception.cause)
         self.assertIn("transport level failure", context.exception.assistance)
+
+
+@patch("requests.Session.request", side_effect=Util.mock_request)
+class TestComplexPropertyFilter(TestCase):
+    """A Filter aimed at a nested object rather than a field.
+
+    The API answers 200 with an empty body, which is not a collection and not an error,
+    so the failure has to name the real cause rather than report a shape change.
+    """
+
+    def setUp(self):
+        self.client = Util.default_connector(Connection()).connection.client
+
+    def test_an_empty_body_explains_that_nested_values_cannot_be_filtered(self, mock_request):
+        mock_request.side_effect = lambda *args, **kwargs: MockResponse(200, {})
+
+        with self.assertRaises(PluginException) as raised:
+            self.client.list_records("Tasks", filter_="assignedTo ne null")
+
+        self.assertIn("empty response", raised.exception.cause)
+        self.assertIn("nested object", raised.exception.assistance)
+        self.assertIn("Owner", raised.exception.assistance)
+
+    def test_a_genuinely_unexpected_shape_still_reports_a_shape_change(self, mock_request):
+        mock_request.side_effect = lambda *args, **kwargs: MockResponse(200, {"value": "not a list"})
+
+        with self.assertRaises(PluginException) as raised:
+            self.client.list_records("Tasks")
+
+        self.assertIn("unexpected response", raised.exception.cause)
+
+
+@patch("requests.Session.request", side_effect=Util.mock_request)
+class TestServerClock(TestCase):
+    """Reading the API host's own clock.
+
+    Anything comparing against timestamps Cyber GRC writes has to measure time on Cyber
+    GRC's clock, because a container clock running ahead would place a starting point in
+    the server's future and pass over everything created in between.
+    """
+
+    def setUp(self):
+        self.client = Util.default_connector(Connection()).connection.client
+        Util.calls = []
+
+    def test_the_clock_is_read_from_the_date_header(self, mock_request):
+        mock_request.side_effect = lambda *args, **kwargs: MockResponse(
+            200, text="7", headers={"Content-Type": "text/plain", "Date": "Wed, 01 Jul 2026 12:00:00 GMT"}
+        )
+
+        self.assertEqual(self.client.server_time().isoformat(), "2026-07-01T12:00:00+00:00")
+
+    def test_a_missing_date_header_reports_no_clock_rather_than_guessing(self, mock_request):
+        mock_request.side_effect = lambda *args, **kwargs: MockResponse(200, text="7", headers={})
+
+        self.assertIsNone(self.client.server_time())
+
+    def test_an_unreadable_date_header_reports_no_clock(self, mock_request):
+        mock_request.side_effect = lambda *args, **kwargs: MockResponse(
+            200, text="7", headers={"Date": "the first of July"}
+        )
+
+        self.assertIsNone(self.client.server_time())
+
+    def test_a_failed_request_reports_no_clock_rather_than_raising(self, mock_request):
+        # The caller has a usable fallback, so a clock read must never fail a step.
+        mock_request.side_effect = lambda *args, **kwargs: MockResponse(500, {"error": "server error"})
+
+        self.assertIsNone(self.client.server_time())
+
+
+class TestIgnoredUpdateFields(TestCase):
+    """Cyber GRC accepts an assignee in an update body and then ignores it.
+
+    There is no assignment endpoint, and every shape of assignment field is answered with
+    204 and no change, so an update that names one has to say so rather than let a
+    workflow believe it reassigned the record.
+    """
+
+    def setUp(self):
+        patcher = patch("requests.Session.request", side_effect=Util.mock_request)
+        patcher.start()
+        self.addCleanup(patcher.stop)
+        self.client = Util.default_connector(Connection()).connection.client
+        self.client.logger = MagicMock()
+        Util.calls = []
+        Util.updated = {}
+
+    @parameterized.expand([["nested_object", {"assignedTo": {"usersID": 5}}], ["scalar", {"assignedToID": 5}]])
+    def test_an_update_naming_an_assignee_warns_that_it_is_ignored(self, _name, assignee):
+        self.client.update_record("Tasks", 4, {"name": "Example", **assignee})
+
+        warned = self.client.logger.warning.call_args[0][0]
+        self.assertIn("then ignores it", warned)
+        self.assertIn("web interface", warned)
+
+    def test_an_ordinary_update_does_not_warn(self):
+        self.client.update_record("Tasks", 4, {"name": "Example", "statusID": 3})
+
+        self.client.logger.warning.assert_not_called()
+
+    def test_the_rest_of_the_update_is_still_sent(self):
+        self.client.update_record("Tasks", 4, {"name": "Renamed", "assignedToID": 5})
+
+        sent = next(call["json"] for call in Util.calls if call["method"] == "PUT")
+        self.assertEqual(sent["name"], "Renamed")
 
 
 class TestCleanRecord(TestCase):

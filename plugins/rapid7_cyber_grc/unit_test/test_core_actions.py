@@ -1,8 +1,8 @@
-"""Covers the ten typed entity action families.
+"""Covers the eleven typed entity action families.
 
 Each family is generated from the same shape, so the interesting behaviour is that
 every action targets the right /api/v2 collection and returns it under the right
-output key. These cases assert exactly that, across all fifty typed actions.
+output key. These cases assert exactly that, across all fifty-five typed actions.
 """
 
 import os
@@ -30,6 +30,7 @@ FAMILIES = [
     ("Certifications", "certification", "certifications", "Certification"),
     ("ITAssets", "it_asset", "it_assets", "ItAsset"),
     ("Users", "user", "users", "User"),
+    ("Contracts", "contract", "contracts", "Contract"),
 ]
 
 LIST_CASES = [[entity, plural, f"Get{stem}s"] for entity, _, plural, stem in FAMILIES]
@@ -93,7 +94,8 @@ class TestCoreActions(TestCase):
 
     def test_every_typed_action_is_covered(self, mock_request):
         covered = {case[-1] for case in LIST_CASES + GET_CASES + CREATE_CASES + UPDATE_CASES + DELETE_CASES}
-        generic = {
+        # Actions that are not one of the ten entity families and have their own cases.
+        elsewhere = {
             "ListRecords",
             "GetRecord",
             "CreateRecord",
@@ -102,7 +104,9 @@ class TestCoreActions(TestCase):
             "CountRecords",
             "GetRecordHistory",
             "UploadFlatFile",
+            "GetComplianceScore",
+            "AddComment",
         }
-        typed = {name for name in dir(actions) if isinstance(getattr(actions, name), type) and name not in generic}
+        typed = {name for name in dir(actions) if isinstance(getattr(actions, name), type) and name not in elsewhere}
 
         self.assertEqual(typed, covered)

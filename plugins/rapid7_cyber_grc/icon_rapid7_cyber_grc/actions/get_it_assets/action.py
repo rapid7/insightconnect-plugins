@@ -20,7 +20,6 @@ class GetItAssets(insightconnect_plugin_runtime.Action):
     @auto_instrument
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
-        expand = params.get(Input.EXPAND)
         filter = params.get(Input.FILTER)
         order_by = params.get(Input.ORDER_BY)
         select = params.get(Input.SELECT)
@@ -28,7 +27,7 @@ class GetItAssets(insightconnect_plugin_runtime.Action):
         top = params.get(Input.TOP)
         # END INPUT BINDING - DO NOT REMOVE
         records = self.connection.client.list_records(
-            "ITAssets", filter_=filter, select=select, expand=expand, order_by=order_by, top=top, skip=skip
+            "ITAssets", filter_=filter, select=select, order_by=order_by, top=top, skip=skip
         )
 
         return {Output.IT_ASSETS: records, Output.COUNT: len(records)}

@@ -17,7 +17,6 @@ class CreateUser(insightconnect_plugin_runtime.Action):
     @auto_instrument
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
-        expand = params.get(Input.EXPAND)
         record = params.get(Input.RECORD)
         # END INPUT BINDING - DO NOT REMOVE
-        return {Output.USER: self.connection.client.create_record("Users", record, expand=expand)}
+        return {Output.USER: self.connection.client.create_record("Users", record)}

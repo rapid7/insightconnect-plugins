@@ -37,10 +37,10 @@ class TestGenericActions(TestCase):
         self.assertEqual(actual["count"], 2)
 
     def test_get_record_targets_the_chosen_record_type(self, mock_request):
-        actual = Util.default_connector(GetRecord()).run({"record_type": "Locations", "id": 3, "expand": "tasks"})
+        actual = Util.default_connector(GetRecord()).run({"record_type": "Locations", "id": 3})
 
         self.assertEqual(Util.calls[0]["url"], f"{BASE_URL}/api/v2/Locations/3")
-        self.assertEqual(Util.calls[0]["params"], {"$expand": "tasks"})
+        self.assertEqual(Util.calls[0]["params"], {})
         self.assertEqual(actual["record"]["id"], 3)
 
     def test_create_record_targets_the_chosen_record_type(self, mock_request):

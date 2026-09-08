@@ -8,11 +8,14 @@ class Component:
 
 
 class Input:
-    EXPAND = "expand"
+    DUE_WITHIN_DAYS = "due_within_days"
     FILTER = "filter"
     ORDER_BY = "order_by"
+    OVERDUE_ONLY = "overdue_only"
+    OWNER = "owner"
     SELECT = "select"
     SKIP = "skip"
+    STATUS_ID = "status_id"
     TOP = "top"
 
 
@@ -27,11 +30,12 @@ class GetTasksInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "expand": {
-      "type": "string",
-      "title": "Expand",
-      "description": "Comma separated list of related collections to embed in the results",
-      "order": 3
+    "due_within_days": {
+      "type": "integer",
+      "title": "Due Within Days",
+      "description": "Return only tasks due this many days from now or sooner, so a reminder workflow does not have to write the date arithmetic itself. Tasks with no Due Date are left out. Leave empty or set to 0 for every task",
+      "default": 0,
+      "order": 8
     },
     "filter": {
       "type": "string",
@@ -43,7 +47,20 @@ class GetTasksInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Order By",
       "description": "OData $orderby expression, e.g. modifiedDate desc",
-      "order": 4
+      "order": 3
+    },
+    "overdue_only": {
+      "type": "boolean",
+      "title": "Overdue Only",
+      "description": "Return only tasks whose Due Date has already passed. Applied in addition to Due Within Days, so setting both returns only the overdue tasks",
+      "default": false,
+      "order": 9
+    },
+    "owner": {
+      "type": "string",
+      "title": "Owner",
+      "description": "Return only tasks assigned to this user, given as an email address or a numeric Cyber GRC user ID. The API exposes the assignee as a nested object with no filterable ID field, so this match is applied by the plugin after the records are read, which means Top and Skip apply to the matching tasks rather than to every task",
+      "order": 6
     },
     "select": {
       "type": "string",
@@ -55,14 +72,21 @@ class GetTasksInput(insightconnect_plugin_runtime.Input):
       "type": "integer",
       "title": "Skip",
       "description": "Number of records to skip before returning results",
-      "order": 6
+      "order": 5
+    },
+    "status_id": {
+      "type": "integer",
+      "title": "Status ID",
+      "description": "Return only tasks in this status. Leave empty or set to 0 for every status",
+      "default": 0,
+      "order": 7
     },
     "top": {
       "type": "integer",
       "title": "Top",
       "description": "Maximum number of records to return. Leave empty or set to 0 to return every record, paging through the API automatically",
       "default": 0,
-      "order": 5
+      "order": 4
     }
   },
   "definitions": {}

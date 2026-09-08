@@ -1,4 +1,6 @@
 import json
+from datetime import datetime
+from email.utils import parsedate_to_datetime
 from typing import Any, Dict, List, Optional, Tuple, Union
 
 import requests
@@ -13,6 +15,15 @@ MAX_PAGES = 1000
 PAGE_LIMIT = 100
 
 ODATA_PREFIX = "@odata."
+
+# A small read-only lookup collection, counted purely to read the server's clock off the
+# response. Counting it is cheap and needs no particular GRC data to be present.
+CLOCK_COLLECTION = "Statuses"
+
+# Fields an update body may carry that Cyber GRC accepts and then ignores. A record's
+# assignee is read only: there is no assignment endpoint, and every shape of assignment
+# field is answered with 204 and no change.
+IGNORED_ON_UPDATE = ("assignedTo", "assignedToID")
 
 # The URL of the API host, which is not the URL of the web interface users log in to.
 API_HOST_PATTERN = "https://app-<tenant>-<brand>-<region>-api-01.azurewebsites.net"
@@ -62,6 +73,8 @@ def clean_record(record: Any) -> Any:
 
 
 class CyberGrcAPI:
+    _server_time: Optional[datetime] = None
+
     def __init__(self, url: str, api_key: str, ssl_verify: bool, logger):
         self.url = (url or "").strip().rstrip("/")
         # A key pasted from a password manager often carries a newline or a stray space,
@@ -81,7 +94,6 @@ class CyberGrcAPI:
         record_type: str,
         filter_: str = None,
         select: str = None,
-        expand: str = None,
         order_by: str = None,
         top: int = None,
         skip: int = None,
@@ -93,7 +105,6 @@ class CyberGrcAPI:
             {
                 "$filter": filter_,
                 "$select": select,
-                "$expand": expand,
                 "$orderby": order_by,
                 "$top": paged_top,
                 "$skip": skip,
@@ -132,32 +143,37 @@ class CyberGrcAPI:
                 data=response[:BODY_EXCERPT],
             )
 
-    def get_record(self, record_type: str, record_id: int, select: str = None, expand: str = None) -> dict:
-        params = self._odata_params({"$select": select, "$expand": expand})
+    def get_record(self, record_type: str, record_id: int, select: str = None) -> dict:
+        params = self._odata_params({"$select": select})
         response = self._request("GET", f"/api/v2/{record_type}/{record_id}", params=params)
         return clean_record(self._expect_record(response, f"{record_type} {record_id}"))
 
-    def create_record(self, record_type: str, record: dict, expand: str = None) -> dict:
-        params = self._odata_params({"$expand": expand})
-        response = self._request("POST", f"/api/v2/{record_type}", params=params, json_body=record)
+    def create_record(self, record_type: str, record: dict) -> dict:
+        response = self._request("POST", f"/api/v2/{record_type}", json_body=record)
         return clean_record(self._expect_record(response, f"the created {record_type} record"))
 
-    def update_record(self, record_type: str, record_id: int, record: dict, expand: str = None) -> dict:
+    def update_record(self, record_type: str, record_id: int, record: dict) -> dict:
         # Some record types reject a body whose id does not match the route key, so
         # supply the key the caller already gave us rather than making them repeat it.
         body = dict(record)
         body.setdefault("id", record_id)
 
-        response = self._request(
-            "PUT", f"/api/v2/{record_type}/{record_id}", params=self._odata_params({"$expand": expand}), json_body=body
-        )
+        ignored = [field for field in IGNORED_ON_UPDATE if field in body]
+        if ignored:
+            self.logger.warning(
+                f"Cyber GRC accepts {' and '.join(ignored)} in an update and then ignores it, answering 204 "
+                f"without changing the assignee. A {record_type} record can only be reassigned in the Cyber GRC "
+                "web interface. The rest of this update will be applied normally."
+            )
+
+        response = self._request("PUT", f"/api/v2/{record_type}/{record_id}", json_body=body)
         if response:
             return clean_record(self._expect_record(response, f"the updated {record_type} record"))
 
         # A successful update answers 204 with no body, but the action promises to
         # return the updated record, so read it back.
         try:
-            return self.get_record(record_type, record_id, expand=expand)
+            return self.get_record(record_type, record_id)
         except PluginException as error:
             raise PluginException(
                 cause=f"The {record_type} record was updated, but it could not be read back afterwards.",
@@ -190,6 +206,22 @@ class CyberGrcAPI:
             )
         return result
 
+    def server_time(self) -> Optional[datetime]:
+        """Now, according to the API host's clock, or None if it did not say.
+
+        Anything comparing against timestamps Cyber GRC stamps has to measure time on
+        Cyber GRC's clock. A caller whose own clock runs ahead of the server would place
+        a starting point in the server's future and never see what happened in between.
+        The Date header carries whole seconds only, which rounds the answer down, so a
+        caller errs towards repeating an item rather than losing one.
+        """
+        try:
+            self.count_records(CLOCK_COLLECTION)
+        except PluginException as error:
+            self.logger.info(f"Could not read the Cyber GRC server clock: {error.cause}")
+            return None
+        return self._server_time
+
     def get_record_history(self, record_type: str, record_id: int) -> List[dict]:
         # The spec writes this as History(), but the OData function-call form is routed to
         # an interactive-only authentication scheme that rejects API keys.
@@ -214,6 +246,16 @@ class CyberGrcAPI:
     # ------------------------------------------------------------------ helpers
 
     @staticmethod
+    def _parse_http_date(value: Optional[str]) -> Optional[datetime]:
+        """An RFC 7231 Date header as an aware datetime, or None if it cannot be read."""
+        if not value:
+            return None
+        try:
+            return parsedate_to_datetime(value)
+        except (TypeError, ValueError):
+            return None
+
+    @staticmethod
     def _odata_params(candidates: Dict[str, Any]) -> Dict[str, Any]:
         """Keep only the query options the caller actually set. Top of 0 means no ceiling."""
         return {key: value for key, value in candidates.items() if value not in (None, "", 0)}
@@ -222,6 +264,17 @@ class CyberGrcAPI:
         """Collections arrive as {"@odata.context": ..., "value": [...]}."""
         values = response.get("value") if isinstance(response, dict) else response
         if not isinstance(values, list):
+            if response == {}:
+                # A 200 with an empty body, which is how the API answers a $filter aimed
+                # at a nested object rather than a field, such as "assignedTo ne null".
+                raise PluginException(
+                    cause=f"Cyber GRC returned an empty response for {subject} instead of a collection.",
+                    assistance="This is what the API does when a Filter tests a nested object rather than a field "
+                    "of the record, for example assignedTo. Nested values cannot be filtered on: narrow the query "
+                    "with a top level field such as statusID or dueDate, and match the nested value in a later "
+                    "step. Get Tasks has an Owner input that does this for a task's assignee.",
+                    data=self._excerpt(response),
+                )
             # Returning an empty list here would be indistinguishable from a collection
             # that really is empty, which hides an API change behind a successful step.
             raise PluginException(
@@ -320,6 +373,10 @@ class CyberGrcAPI:
                 "the orchestrator to the Cyber GRC API host, then retry.",
                 data=self._scrub(str(error)),
             )
+
+        # Kept from the most recent response so a caller can compare against timestamps
+        # the server stamps using the server's own clock rather than this container's.
+        self._server_time = self._parse_http_date(response.headers.get("Date"))
 
         self._raise_for_status(response, operation)
 

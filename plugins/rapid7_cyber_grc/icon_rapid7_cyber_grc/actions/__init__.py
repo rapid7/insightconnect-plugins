@@ -30,6 +30,8 @@ from .update_task.action import UpdateTask
 
 from .delete_task.action import DeleteTask
 
+from .add_comment.action import AddComment
+
 from .get_audits.action import GetAudits
 
 from .get_audit.action import GetAudit
@@ -50,6 +52,8 @@ from .update_control_set.action import UpdateControlSet
 
 from .delete_control_set.action import DeleteControlSet
 
+from .get_compliance_score.action import GetComplianceScore
+
 from .get_assessments.action import GetAssessments
 
 from .get_assessment.action import GetAssessment
@@ -69,6 +73,16 @@ from .create_vendor.action import CreateVendor
 from .update_vendor.action import UpdateVendor
 
 from .delete_vendor.action import DeleteVendor
+
+from .get_contracts.action import GetContracts
+
+from .get_contract.action import GetContract
+
+from .create_contract.action import CreateContract
+
+from .update_contract.action import UpdateContract
+
+from .delete_contract.action import DeleteContract
 
 from .get_certifications.action import GetCertifications
 

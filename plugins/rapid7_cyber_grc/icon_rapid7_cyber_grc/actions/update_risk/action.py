@@ -17,8 +17,7 @@ class UpdateRisk(insightconnect_plugin_runtime.Action):
     @auto_instrument
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
-        expand = params.get(Input.EXPAND)
         id = params.get(Input.ID)
         record = params.get(Input.RECORD)
         # END INPUT BINDING - DO NOT REMOVE
-        return {Output.RISK: self.connection.client.update_record("Risks", id, record, expand=expand)}
+        return {Output.RISK: self.connection.client.update_record("Risks", id, record)}

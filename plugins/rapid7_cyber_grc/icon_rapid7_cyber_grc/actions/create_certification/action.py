@@ -20,7 +20,6 @@ class CreateCertification(insightconnect_plugin_runtime.Action):
     @auto_instrument
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
-        expand = params.get(Input.EXPAND)
         record = params.get(Input.RECORD)
         # END INPUT BINDING - DO NOT REMOVE
-        return {Output.CERTIFICATION: self.connection.client.create_record("Certifications", record, expand=expand)}
+        return {Output.CERTIFICATION: self.connection.client.create_record("Certifications", record)}

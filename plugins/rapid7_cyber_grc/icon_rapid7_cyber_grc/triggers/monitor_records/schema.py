@@ -8,12 +8,10 @@ class Component:
 
 
 class Input:
-    EXPAND = "expand"
+    EVENT_TYPE = "event_type"
     FILTER = "filter"
-    FIRST_RUN_LOOKBACK_MINUTES = "first_run_lookback_minutes"
     INTERVAL = "interval"
     RECORD_TYPE = "record_type"
-    TIMESTAMP_FIELD = "timestamp_field"
 
 
 class Output:
@@ -27,23 +25,22 @@ class MonitorRecordsInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "expand": {
+    "event_type": {
       "type": "string",
-      "title": "Expand",
-      "description": "Comma separated list of related collections to embed in each emitted record",
-      "order": 6
+      "title": "Event Type",
+      "description": "Which events to emit. Created emits each record once, when it first appears. Updated emits a record every time it changes, but not when it is created. Any emits both",
+      "default": "Any",
+      "enum": [
+        "Any",
+        "Created",
+        "Updated"
+      ],
+      "order": 2
     },
     "filter": {
       "type": "string",
       "title": "Filter",
-      "description": "Additional OData $filter expression, combined with the timestamp filter using and",
-      "order": 5
-    },
-    "first_run_lookback_minutes": {
-      "type": "integer",
-      "title": "First Run Lookback Minutes",
-      "description": "How many minutes of history to emit on the first poll",
-      "default": 1440,
+      "description": "Additional OData $filter expression narrowing which records are emitted, combined with the timestamp filter using and. Field names are the camelCase names in the API reference, text values are single quoted, and dates are unquoted, for example statusID eq 3, or name eq 'Access Review', or dueDate ne null and dueDate lt 2026-12-31T00:00:00.000Z",
       "order": 4
     },
     "interval": {
@@ -57,7 +54,7 @@ class MonitorRecordsInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Record Type",
       "description": "The Cyber GRC record type to poll",
-      "default": "Incidents",
+      "default": "Tasks",
       "enum": [
         "AnswerSets",
         "AssessmentQuestions",
@@ -91,24 +88,12 @@ class MonitorRecordsInput(insightconnect_plugin_runtime.Input):
         "Vendors"
       ],
       "order": 1
-    },
-    "timestamp_field": {
-      "type": "string",
-      "title": "Timestamp Field",
-      "description": "Which timestamp to watch. Created Date emits each record once when it first appears, Modified Date also re-emits a record every time it changes",
-      "default": "modifiedDate",
-      "enum": [
-        "modifiedDate",
-        "createdDate"
-      ],
-      "order": 2
     }
   },
   "required": [
-    "first_run_lookback_minutes",
+    "event_type",
     "interval",
-    "record_type",
-    "timestamp_field"
+    "record_type"
   ],
   "definitions": {}
 }
