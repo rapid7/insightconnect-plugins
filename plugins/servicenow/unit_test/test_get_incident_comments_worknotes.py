@@ -115,6 +115,12 @@ class TestGetIncidentCommentsWorknotes(TestCase):
                 "Status code: 403, Error: {'error': {'message': 'Insufficient rights', 'detail': "
                 "'Insufficient rights to query records'}, 'status': 'failure'}",
             ],
+            [
+                "journal_query_answered_without_json",
+                Util.read_file_to_dict("inputs/get_incident_comments_worknotes_journal_not_json.json.inp"),
+                "Received an unexpected response from the server.",
+                "(non-JSON or no response was received).",
+            ],
         ]
     )
     def test_get_incident_comments_worknotes_raise_exception(
@@ -183,7 +189,20 @@ class TestParseJournalDisplayValue(TestCase):
             [
                 "renamed_label_containing_parentheses",
                 "2019-09-26 21:19:11 - Joe Employee (Comments (public))\nCalled the user\n\n",
-                [("2019-09-26 21:19:11", "Joe Employee (Comments", "Called the user")],
+                [("2019-09-26 21:19:11", "Joe Employee", "Called the user")],
+            ],
+            [
+                "author_and_renamed_label_both_containing_parentheses",
+                "2019-09-26 21:19:11 - Administrator (itil_user) (Comments (public))\nCalled the user\n\n",
+                [("2019-09-26 21:19:11", "Administrator (itil_user)", "Called the user")],
+            ],
+            [
+                "renamed_label_containing_two_parentheses",
+                # A label holding more than one parenthesised part is not read as a label, so the
+                # header keeps its text and is returned without an author or a creation date rather
+                # than with the label read into the author.
+                "2019-09-26 21:19:11 - Joe Employee (Comments (public) (internal))\nCalled the user\n\n",
+                [("", "", "2019-09-26 21:19:11 - Joe Employee (Comments (public) (internal))\nCalled the user")],
             ],
             [
                 "entry_ending_in_a_blank_line",

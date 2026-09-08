@@ -143,6 +143,10 @@ class Util:
             return MockResponse("get_incident_comments_worknotes_journal_empty.json", 200)
         elif kwargs.get("url") == f"{JOURNAL_URL}?sysparm_query=element_id=j6&sysparm_fields={JOURNAL_FIELDS}":
             return MockResponse("get_incident_comments_worknotes_journal_forbidden.json", 403)
+        elif kwargs.get("url") == f"{JOURNAL_URL}?sysparm_query=element_id=j8&sysparm_fields={JOURNAL_FIELDS}":
+            # An instance answering with a login page rather than the journal returns it as a 200
+            # holding no JSON, so the result cannot be read out of the response at all.
+            return MockResponse("get_incident_comments_worknotes_login_page.html", 200, {})
 
         elif kwargs.get("url") == f"{INCIDENT_URL}/j2":
             if kwargs.get("params") == {

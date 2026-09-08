@@ -1,5 +1,6 @@
 import re
 from logging import Logger
+from xml.parsers.expat import ExpatError
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 from requests import RequestException
@@ -9,8 +10,12 @@ from requests import RequestException
 # which may itself contain blank lines. The timestamp honours the caller's date format and time zone and
 # the label is the field's own label, so headers are matched by shape rather than against a fixed format,
 # with every repetition bounded to keep matching linear on the pasted logs that end up in comments.
+# The label is read as a parenthesised group holding at most one nested group, so that an author who
+# is displayed with their own parentheses and a label that was renamed to hold parentheses are both
+# read correctly rather than one at the cost of the other.
 journal_entry_header = re.compile(
-    r"^(?P<sys_created_on>\d.{1,39}?\d{1,2}:\d{2}.{0,15}?) - (?P<sys_created_by>.{1,200}) \(.{1,120}\)[ \t]*$"
+    r"^(?P<sys_created_on>\d.{1,39}?\d{1,2}:\d{2}.{0,15}?) - (?P<sys_created_by>.{1,200}) "
+    r"\([^()]{0,120}(?:\([^()]{0,120}\))?[^()]{0,120}\)[ \t]*$"
 )
 
 
@@ -48,7 +53,7 @@ def read_journal_from_incident(connection, logger: Logger, system_id: str, entry
             "get",
             params={"sysparm_fields": ",".join(elements), "sysparm_display_value": "true"},
         )
-    except (PluginException, RequestException) as error:
+    except (PluginException, RequestException, ExpatError) as error:
         logger.warning(
             f"Unable to read incident {system_id}, returning no comments or work notes. The connected "
             "account needs read access either to the incident and its journal fields or to the "

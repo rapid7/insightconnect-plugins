@@ -1685,7 +1685,7 @@ Example output:
 
 ## Troubleshooting
 
-* When the `sys_journal_field` table returns no entries, Get Incident Comments and Work Notes reads the comments and work notes from the incident record instead. Entries read that way have an empty `sys_id` and `sys_tags`, and their `sys_created_by` is the display name of the author rather than their user name. If the connected account can read neither the journal table nor the incident, the action returns no entries and reports the reason in the log.
+* When the `sys_journal_field` table returns no entries, Get Incident Comments and Work Notes reads the comments and work notes from the incident record instead. Entries read that way have an empty `sys_id` and `sys_tags`, their `sys_created_by` is the display name of the author rather than their user name, and their `sys_created_on` is written in the date format and time zone of the connected account rather than being the UTC value held in the journal. Entries are told apart by their headers, so text repeating a header line, such as a quoted earlier entry, can be returned as an entry of its own. If the connected account can read neither the journal table nor the incident, the action returns no entries and reports the reason in the log.
 
 # Version History
 

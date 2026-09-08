@@ -42,7 +42,9 @@ class GetIncidentCommentsWorknotes(insightconnect_plugin_runtime.Action):
         try:
             result = response.get("resource", {}).get("result")
         except AttributeError:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
+            # make_request returns a dictionary rather than a response object, so the body is read
+            # off it as a whole - response.text would raise an AttributeError of its own here.
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response)
 
         # The sys_journal_field table enforces its own read ACLs and returns an empty result rather
         # than an error when they filter the caller out, so fall back to reading the journal from the
