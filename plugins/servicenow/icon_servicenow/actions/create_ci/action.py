@@ -4,6 +4,8 @@ from .schema import CreateCiInput, CreateCiOutput, Input, Output, Component
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
 
+from icon_servicenow.util.validators import validate_table_name
+
 
 class CreateCi(insightconnect_plugin_runtime.Action):
     def __init__(self):
@@ -15,7 +17,7 @@ class CreateCi(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        url = f"{self.connection.table_url}{params.get(Input.TABLE)}"
+        url = f"{self.connection.table_url}{validate_table_name(params.get(Input.TABLE))}"
         payload = params.get(Input.CREATE_DATA)
         method = "post"
 
