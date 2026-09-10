@@ -3,6 +3,7 @@ from .schema import GetAddressesFromGroupInput, GetAddressesFromGroupOutput, Inp
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_palo_alto_pan_os.util.util import extract_static_members, get_response_entry
 import validators
 
 
@@ -24,9 +25,8 @@ class GetAddressesFromGroup(insightconnect_plugin_runtime.Action):
             device_name=device_name, virtual_system=virtual_system, group_name=group_name
         )
 
-        try:
-            address_objects = response.get("response").get("result").get("entry").get("static").get("member")
-        except AttributeError:
+        entry = get_response_entry(response)
+        if entry is None:
             raise PluginException(
                 cause="PAN OS returned an unexpected response.",
                 assistance=f"Could not find group '{group_name}', or group was empty. Check the name, virtual system "
@@ -34,23 +34,23 @@ class GetAddressesFromGroup(insightconnect_plugin_runtime.Action):
                 data=response,
             )
 
+        address_objects = extract_static_members(entry, group_name)
+
         fqdn_addresses = []
         ipv4_addresses = []
         ipv6_addresses = []
         all_addresses = []
 
-        for name in address_objects:
-            object_name = self.get_name(name)
+        for object_name in address_objects:
             response = self.connection.request.get_address_object(
                 device_name=device_name, virtual_system=virtual_system, object_name=object_name
             )
-            try:
-                address_object = response.get("response").get("result").get("entry")
-            except AttributeError:
+            address_object = get_response_entry(response)
+            if address_object is None:
                 raise PluginException(
                     cause="PAN OS returned an unexpected response.",
-                    assistance=f"Could not find address object '{name}'. Check the name, virtual system name, and "
-                    f"device name.\nDevice name: {device_name}\nVirtual system: {virtual_system}\n",
+                    assistance=f"Could not find address object '{object_name}'. Check the name, virtual system name, "
+                    f"and device name.\nDevice name: {device_name}\nVirtual system: {virtual_system}\n",
                     data=response,
                 )
             address = ""

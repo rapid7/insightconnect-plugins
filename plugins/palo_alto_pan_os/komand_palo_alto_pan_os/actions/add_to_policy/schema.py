@@ -29,8 +29,7 @@ class Output:
 
 
 class AddToPolicyInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        r"""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -62,7 +61,7 @@ class AddToPolicyInput(insightconnect_plugin_runtime.Input):
     "hip_profiles": {
       "type": "string",
       "title": "HIP Profiles",
-      "description": "Host information profile",
+      "description": "Host information profile. PAN-OS 10.0 removed HIP profiles from the security policy rule, so this input is ignored for a rule that does not have one",
       "order": 11
     },
     "rule_name": {
@@ -118,16 +117,14 @@ class AddToPolicyInput(insightconnect_plugin_runtime.Input):
   ],
   "definitions": {}
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class AddToPolicyOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(
-        r"""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -153,8 +150,7 @@ class AddToPolicyOutput(insightconnect_plugin_runtime.Output):
   },
   "definitions": {}
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
