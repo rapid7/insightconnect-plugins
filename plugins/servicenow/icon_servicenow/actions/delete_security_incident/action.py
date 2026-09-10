@@ -3,6 +3,7 @@ from .schema import DeleteSecurityIncidentInput, DeleteSecurityIncidentOutput, I
 
 # Custom imports below
 from icon_servicenow.util.request_helper import RequestHelper
+from icon_servicenow.util.validators import validate_record_identifier
 
 
 class DeleteSecurityIncident(insightconnect_plugin_runtime.Action):
@@ -15,7 +16,8 @@ class DeleteSecurityIncident(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        sys_id = validate_record_identifier(params.get(Input.SYS_ID), "system ID")
         self.connection.request.make_request(
-            endpoint=f"{self.connection.security_incident_url}/{params.get(Input.SYS_ID)}", method="DELETE"
+            endpoint=f"{self.connection.security_incident_url}/{sys_id}", method="DELETE"
         )
         return {Output.SUCCESS: True}

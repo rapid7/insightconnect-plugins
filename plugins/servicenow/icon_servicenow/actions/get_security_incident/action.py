@@ -5,6 +5,7 @@ from .schema import GetSecurityIncidentInput, GetSecurityIncidentOutput, Input, 
 
 # Custom imports below
 from icon_servicenow.util.security_incident_helper import convert_security_incident_fields
+from icon_servicenow.util.validators import validate_record_identifier
 from insightconnect_plugin_runtime.helper import return_non_empty
 
 
@@ -18,9 +19,10 @@ class GetSecurityIncident(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        sys_id = validate_record_identifier(params.get(Input.SYS_ID), "system ID")
 
         response = self.connection.request.make_request(
-            endpoint=f"{self.connection.security_incident_url}/{params.get(Input.SYS_ID)}", method="GET"
+            endpoint=f"{self.connection.security_incident_url}/{sys_id}", method="GET"
         )
         try:
             result = response.get("resource", {}).get("result", {})

@@ -9,13 +9,14 @@ description: "[ServiceNow](https://www.servicenow.com/) is a tool for managing i
   \ can be monitored and processed for use in a Rapid7 InsightConnect workflow.\n\n\
   Note: This plugin affects only the underlying tables in a ServiceNow instance, not\
   \ its UI. Hence, this plugin will work seamlessly with Virtual Task Boards"
-version: 8.1.5
+version: 8.1.6
 connection_version: 8
 supported_versions: [2023-10-28 Tokyo]
 vendor: rapid7
 support: rapid7
 status: []
 cloud_ready: true
+enable_cache: true
 fedramp_ready: true
 resources:
   vendor_url: https://www.servicenow.com/
@@ -31,7 +32,7 @@ hub_tags:
   features: []
 sdk:
   type: slim
-  version: 6.5.1
+  version: 6.6.0
   user: nobody
 key_features:
 - Search, Read, Create, Delete, and Update incidents to accelerate ticketing operations
@@ -53,7 +54,12 @@ requirements:
   \ Security Incident (table `sn_si_incident` with permissions create/read/write/delete)\n\
   \  - Create/Read/Update/Delete Vulnerability (table `sn_vul_vulnerable_item` with\
   \ permissions create/read/write/delete)\n  - Create Change Request (table `sn_chg_rest`\
-  \ with create permissions)"
+  \ with create permissions)\n  - Get Incident Comments and Work Notes (table `sys_journal_field`\
+  \ with read permissions)\n    The `incident` table is normally read via the `itil`\
+  \ role. `sys_journal_field` has Access Controls of its own: a `security_admin` must\
+  \ add a role the account holds, such as `itil`, under Requires role on that table's\
+  \ `read` Access Control, creating it if the table has none. Granting `admin` is not\
+  \ required."
 links:
 - '[ServiceNow](https://www.servicenow.com/)'
 references:
@@ -63,8 +69,20 @@ references:
 - '[ServiceNow Operators](https://docs.servicenow.com/bundle/quebec-platform-user-interface/page/use/common-ui-elements/reference/r_OpAvailableFiltersQueries.html)'
 - '[ServiceNow Plugin Setup Guide](https://docs.rapid7.com/insightconnect/servicenow)'
 troubleshooting:
-- This plugin does not contain a troubleshooting.
+- "When the `sys_journal_field` table returns no entries, Get Incident Comments and Work
+  Notes reads the comments and work notes from the incident record instead. Entries read
+  that way have an empty `sys_id` and `sys_tags`, their `sys_created_by` is the display
+  name of the author rather than their user name, and their `sys_created_on` is written in
+  the date format and time zone of the connected account rather than being the UTC value
+  held in the journal. Entries are told apart by their headers, so text repeating a header
+  line, such as a quoted earlier entry, can be returned as an entry of its own. If the
+  connected account can read neither the journal table nor the incident, the action returns
+  no entries and reports the reason in the log."
 version_history:
+- '8.1.6 - `Get Incident Comments and Work Notes`: Read comments and work notes from
+  the incident record when the `sys_journal_field` table is not readable by the connected
+  account | Added validation of the record identifiers and table names used to build
+  request URLs | Updated SDK to the latest version (6.6.0)'
 - 8.1.5 - Updated SDK to the latest version (6.5.1)
 - 8.1.4 - Fix error handling in create_security_incident action | Updated SDK to the latest version (6.4.3)
 - 8.1.3 - Updated dependency
