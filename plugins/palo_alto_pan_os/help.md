@@ -19,7 +19,9 @@
 
 # Supported Product Versions
 
-* 9.0.3
+* 10.2
+* 11.1
+* 11.2
 
 # Documentation
 
@@ -162,7 +164,7 @@ This action is used to add a rule to a firewall security policy. This action use
 |application|string|None|False|Application for which this rule will be applied e.g. adobe-cloud, dropbox, or  any|None|any|None|None|
 |destination|string|None|False|A destination for which this rule will be applied e.g. 10.0.0.1, computername, or any|None|any|None|None|
 |dst_zone|string|None|False|Zone which the traffic is going to e.g. server zone, or any|None|any|None|None|
-|hip_profiles|string|None|False|Host information profile|None|any|None|None|
+|hip_profiles|string|None|False|Host information profile. PAN-OS 10.0 removed HIP profiles from the security policy rule, so this input is ignored for a rule that does not have one|None|any|None|None|
 |rule_name|string|None|True|Name of the rule|None|InsightConnect Block Rule|None|None|
 |service|string|None|False|Service type for which this rule will be applied e.g. HTTP, HTTPS, or any|None|any|None|None|
 |source|string|None|False|A source for which this rule will be applied e.g. 10.0.0.1, computername, or any|None|any|None|None|
@@ -255,20 +257,21 @@ Example output:
 
 #### Commit
 
-This action is used to commits the candidate configuration. This action uses a direct connection to the firewall
+This action is used to commits the candidate configuration. This action uses a direct connection to the firewall, or to
+ Panorama when the command given is a commit-all
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|action|string|all|False|Commit action (Default: 'all')|None|all|None|None|
-|cmd|string|None|True|XML specifying any commit arguments|None|<commit></commit>|None|None|
+|action|string|None|False|Commit action. Leave this blank to commit the candidate configuration. Use 'partial' to commit only part of it, and 'all' only with a Panorama commit-all command, which pushes shared policy out to managed firewalls|["", "partial", "all"]||None|None|
+|cmd|string|<commit></commit>|False|XML specifying any commit arguments|None|<commit></commit>|None|None|
   
 Example input:
 
 ```
 {
-  "action": "all",
+  "action": "",
   "cmd": "<commit></commit>"
 }
 ```
@@ -708,11 +711,11 @@ firewall
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|action|string|None|False|The action that will occur if an event meets the rule definitions|None|drop|None|None|
+|action|string|None|False|Ignored. A security rule always has exactly one action, so the action cannot be removed and the rule keeps the one it has. Use the Set Security Policy Rule action to change it|None|drop|None|None|
 |application|string|None|False|Application for which this rule will be applied e.g. adobe-cloud, dropbox, or any|None|any|None|None|
 |destination|string|None|False|A Destination for which this rule will be applied e.g. 10.0.0.1, computername, or any|None|any|None|None|
 |dst_zone|string|None|False|Zone which the traffic is going to e.g. server zone, or any|None|any|None|None|
-|hip_profiles|string|None|False|Host information profile|None|any|None|None|
+|hip_profiles|string|None|False|Host information profile. PAN-OS 10.0 removed HIP profiles from the security policy rule, so this input is ignored for a rule that does not have one|None|any|None|None|
 |rule_name|string|None|True|Name of the rule|None|InsightConnect Block Rule|None|None|
 |service|string|None|False|Service type for which this rule will be applied e.g. HTTP, HTTPS, any|None|any|None|None|
 |source|string|None|False|A source for which this rule will be applied e.g. 10.0.0.1, computername, or any|None|any|None|None|
@@ -1096,7 +1099,7 @@ Example output:
  | Add External Dynamic List        | Direct firewall       |
  | Add to Policy                    | Direct firewall       |
  | Check if Address in Group        | Direct firewall       |
- | Commit                           | Direct firewall       |
+ | Commit                           | Firewall or Panorama  |
  | Create Address Object            | Direct firewall       |
  | Delete                           | Panorama              |
  | Edit                             | Panorama              |
@@ -1114,6 +1117,7 @@ Example output:
 
 # Version History
 
+* 6.2.0 - Fix issue where the address group actions corrupted or misread a group holding fewer than two members | Fix issue where Add Address Object to Group and Remove Address Object from Group discarded concurrent changes to a group | Fix issue where Commit always sent the Panorama-only `all` action | Fix issue where Remove from Policy removed no values | Fix issue where Add to Policy and Remove from Policy misread uncommitted rule values | Fix issue where Add to Policy skipped a value matching part of an existing one | Fix issue where Add to Policy and Remove from Policy sent the `hip-profiles` field that PAN-OS 10.0 removed | Remove from Policy now reports an error instead of widening a rule to `any` | Commit CMD input is now optional | Update `supported_versions` to the supported PAN-OS releases | Updated SDK to latest version (6.6.0)
 * 6.1.10 - Addressed Snyk Vulnerability | Updated SDK to latest version (6.3.10)
 * 6.1.9 - Addressed Snyk Vulnerability | Updated SDK to latest version (6.3.4)
 * 6.1.8 - Updated SDK to the latest version (6.2.6)

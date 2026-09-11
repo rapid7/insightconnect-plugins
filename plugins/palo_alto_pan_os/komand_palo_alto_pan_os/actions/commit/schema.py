@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Commits the candidate configuration. This action uses a direct connection to the firewall"
+    DESCRIPTION = "Commits the candidate configuration. This action uses a direct connection to the firewall, or to Panorama when the command given is a commit-all"
 
 
 class Input:
@@ -17,8 +17,7 @@ class Output:
 
 
 class CommitInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        r"""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -26,32 +25,32 @@ class CommitInput(insightconnect_plugin_runtime.Input):
     "action": {
       "type": "string",
       "title": "Action",
-      "description": "Commit action (Default: 'all')",
-      "default": "all",
+      "description": "Commit action. Leave this blank to commit the candidate configuration. Use 'partial' to commit only part of it, and 'all' only with a Panorama commit-all command, which pushes shared policy out to managed firewalls",
+      "enum": [
+        "",
+        "partial",
+        "all"
+      ],
       "order": 2
     },
     "cmd": {
       "type": "string",
       "title": "CMD",
       "description": "XML specifying any commit arguments",
+      "default": "<commit></commit>",
       "order": 1
     }
   },
-  "required": [
-    "cmd"
-  ],
   "definitions": {}
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class CommitOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(
-        r"""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -65,8 +64,7 @@ class CommitOutput(insightconnect_plugin_runtime.Output):
   },
   "definitions": {}
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

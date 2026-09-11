@@ -9,6 +9,7 @@ from .schema import (
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_palo_alto_pan_os.util.util import extract_static_members, get_response_entry
 
 
 class AddAddressObjectToGroup(insightconnect_plugin_runtime.Action):
@@ -31,9 +32,8 @@ class AddAddressObjectToGroup(insightconnect_plugin_runtime.Action):
             device_name=device_name, virtual_system=virtual_system, group_name=group_name
         )
 
-        try:
-            address_objects = response.get("response").get("result").get("entry").get("static").get("member")
-        except AttributeError:
+        entry = get_response_entry(response)
+        if entry is None:
             raise PluginException(
                 cause="PAN OS returned an unexpected response.",
                 assistance=f"Could not find group '{group_name}', or group was empty. Check the name, virtual system "
@@ -42,43 +42,25 @@ class AddAddressObjectToGroup(insightconnect_plugin_runtime.Action):
             )
 
         # We got the group, now pull out all the address object names
-        names = []
-        for name in address_objects:
-            if isinstance(name, str):
-                names.append(name)
-            else:
-                try:
-                    names.append(name.get("#text"))
-                except AttributeError:
-                    raise PluginException(
-                        cause="PAN OS returned an unexpected response.",
-                        assistance=f"Could not get the address object name. Check the group name, virtual system "
-                        f"name, and device name and try again.\nDevice name: {device_name}\nVirtual "
-                        f"system: {virtual_system}\n",
-                        data=name,
-                    )
+        names = extract_static_members(entry, group_name)
 
-        # Append the address_objects
+        # Only the address objects that are not in the group yet are sent, so that adding one object
+        # cannot disturb the ones that are already there
+        members_to_add = []
         for name in new_address_objects:
-            if name not in names:
-                names.append(name)
-            else:
+            if name in names or name in members_to_add:
                 self.logger.info(f"Address Object '{name}' was already in group '{group_name}'. Skipping append.")
+            else:
+                members_to_add.append(name)
 
-        # Rebuild the object in the way the API wants and send it back to the API
-        self.connection.request.edit_address_group(
-            device_name=device_name,
-            virtual_system=virtual_system,
-            group_name=group_name,
-            xml_str=self.make_xml(names, group_name),
-        )
+        if members_to_add:
+            self.connection.request.add_address_group_members(
+                device_name=device_name,
+                virtual_system=virtual_system,
+                group_name=group_name,
+                members=members_to_add,
+            )
+        else:
+            self.logger.info(f"Group '{group_name}' already held every address object given. Nothing was changed.")
 
-        return {Output.SUCCESS: True, Output.ADDRESS_OBJECTS: names}
-
-    @staticmethod
-    def make_xml(names, group_name):
-        members = ""
-        for name in names:
-            members += f"<member>{name}</member>"
-        xml_template = f"<entry name='{group_name}'><static>{members}</static></entry>"
-        return xml_template
+        return {Output.SUCCESS: True, Output.ADDRESS_OBJECTS: names + members_to_add}

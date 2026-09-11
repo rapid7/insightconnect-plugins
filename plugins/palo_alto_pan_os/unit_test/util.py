@@ -1,6 +1,7 @@
 import logging
 import os
 import sys
+from xml.etree import ElementTree
 
 from komand_palo_alto_pan_os.connection.connection import Connection
 from komand_palo_alto_pan_os.connection.schema import Input
@@ -9,6 +10,10 @@ sys.path.append(os.path.abspath("../"))
 
 
 class Util:
+    # Every querystring the plugin sent, in order. Cleared by default_connector so that a test reads
+    # only the calls its own action made, whatever order the suite runs in.
+    calls = []
+
     @staticmethod
     def default_connector(action):
         default_connection = Connection()
@@ -21,6 +26,9 @@ class Util:
         default_connection.connect(params)
         action.connection = default_connection
         action.logger = logging.getLogger("action logger")
+        # Cleared after connecting so that the keygen call this made is not counted as a call the
+        # action under test sent.
+        Util.calls.clear()
         return action
 
     @staticmethod
@@ -49,6 +57,15 @@ class Util:
         xpath = params.get("xpath")
         cmd = params.get("cmd")
 
+        Util.calls.append(params)
+        if element is not None:
+            # PAN-OS rejects an element that is not well formed. Elements are fragments rather than
+            # whole documents, so they are wrapped before parsing.
+            try:
+                ElementTree.fromstring(f"<root>{element}</root>")
+            except ElementTree.ParseError as error:
+                raise AssertionError(f"The plugin sent an element that is not valid XML: {error}\n{element}")
+
         if params == {"type": "keygen", "user": "user", "password": "password"}:
             return MockResponse("key", 200)
         if log_type == "config":
@@ -71,6 +88,11 @@ class Util:
             return MockResponse("commit", 200)
         if cmd == "<commit><partial><admin><member>admin-name</member></admin></partial></commit>":
             return MockResponse("commit2", 200)
+        if cmd in (
+            "<commit-all><shared-policy><device-group><entry name='dg1'/></device-group></shared-policy></commit-all>",
+            " <commit-all><shared-policy><device-group><entry name='dg1'/></device-group></shared-policy></commit-all>",
+        ):
+            return MockResponse("commit_all", 200)
         if cmd == "<show><jobs><id>1</id></jobs></show>":
             return MockResponse("op", 200)
         if cmd == "<show><commit-locks/></show>":
@@ -106,6 +128,36 @@ class Util:
         ):
             return MockResponse("get_objects_from_group_bad", 200)
         if (
+            action == "get"
+            and xpath
+            == "/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/address-group/entry[@name='Single Dirty Group']"
+        ):
+            return MockResponse("get_group_single_dirty", 200)
+        if (
+            action == "get"
+            and xpath
+            == "/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/address-group/entry[@name='Single Bare Group']"
+        ):
+            return MockResponse("get_group_single_bare", 200)
+        if (
+            action == "get"
+            and xpath
+            == "/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/address-group/entry[@name='Multi Bare Group']"
+        ):
+            return MockResponse("get_group_multi_bare", 200)
+        if (
+            action == "get"
+            and xpath
+            == "/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/address-group/entry[@name='Empty Group']"
+        ):
+            return MockResponse("get_group_empty_static", 200)
+        if (
+            action == "get"
+            and xpath
+            == "/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/address-group/entry[@name='Dynamic Group']"
+        ):
+            return MockResponse("get_group_dynamic", 200)
+        if (
             action == "show"
             and xpath
             == "/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/address-group/entry[@name='Test Group']"
@@ -126,6 +178,12 @@ class Util:
         if (
             action == "get"
             and xpath
+            == '/config/devices/entry[@name="localhost.localdomain"]/vsys/entry[@name="vsys1"]/rulebase/security/rules/entry[@name="Dirty Policy"]'
+        ):
+            return MockResponse("get_policy_dirty", 200)
+        if (
+            action == "get"
+            and xpath
             == '/config/devices/entry[@name="localhost.localdomain"]/vsys/entry[@name="vsys1"]/rulebase/security/rules/entry[@name="Invalid Policy"]'
         ):
             return MockResponse("get_policy_bad", 200)
@@ -139,6 +197,13 @@ class Util:
             and xpath == "/config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='Invalid Rule Name']"
         ):
             return MockResponse("invalid_rule_name", 200)
+        # A rule as PAN-OS 10.0 and later returns it: no <hip-profiles>, replaced by <source-hip> and
+        # <destination-hip>
+        if (
+            action in ["get", "show"]
+            and xpath == "/config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='PAN-OS 10 Policy']"
+        ):
+            return MockResponse("get_policy_no_hip", 200)
         if (
             action == "edit"
             and element

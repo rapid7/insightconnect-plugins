@@ -94,6 +94,60 @@ class TestCheckIfAddressObjectInGroup(TestCase):
                 "vsys1",
                 {"found": False, "address_objects": []},
             ],
+            [
+                "single_member_group_with_attributes",
+                "test.com",
+                "Single Dirty Group",
+                False,
+                "localhost.localdomain",
+                "vsys1",
+                {"found": True, "address_objects": ["test.com"]},
+            ],
+            [
+                "single_member_group",
+                "test.com",
+                "Single Bare Group",
+                False,
+                "localhost.localdomain",
+                "vsys1",
+                {"found": True, "address_objects": ["test.com"]},
+            ],
+            [
+                "enable_search_single_member_group",
+                "test.com",
+                "Single Bare Group",
+                True,
+                "localhost.localdomain",
+                "vsys1",
+                {"found": True, "address_objects": ["test.com"]},
+            ],
+            [
+                "several_member_group_without_attributes",
+                "IPv6",
+                "Multi Bare Group",
+                False,
+                "localhost.localdomain",
+                "vsys1",
+                {"found": True, "address_objects": ["IPv6"]},
+            ],
+            [
+                "group_with_no_members",
+                "test.com",
+                "Empty Group",
+                False,
+                "localhost.localdomain",
+                "vsys1",
+                {"found": False, "address_objects": []},
+            ],
+            [
+                "enable_search_group_with_no_members",
+                "1.1.1.1",
+                "Empty Group",
+                True,
+                "localhost.localdomain",
+                "vsys1",
+                {"found": False, "address_objects": []},
+            ],
         ]
     )
     def test_check_if_address_object_in_group(
@@ -131,7 +185,18 @@ class TestCheckIfAddressObjectInGroup(TestCase):
                 "vsys1",
                 "PAN OS returned an unexpected response.",
                 "Could not find group 'Invalid Group', or group was empty. Check the name, virtual system name, and device name.\ndevice name: localhost.localdomain\nvirtual system: vsys1",
-            ]
+            ],
+            [
+                "dynamic_group",
+                "test.com",
+                "Dynamic Group",
+                False,
+                "localhost.localdomain",
+                "vsys1",
+                "The address group 'Dynamic Group' is not a static address group.",
+                "This action can only read and change the members of a static address group. The members of a "
+                "dynamic address group are selected by its tag filter and cannot be changed directly.",
+            ],
         ]
     )
     def test_check_if_address_object_in_group_bad(

@@ -1,0 +1,7 @@
+<response status="success" code="19"><result total-count="1" count="1">
+ <entry name="Single Bare Group">
+  <static>
+   <member>test.com</member>
+  </static>
+ </entry>
+</result></response>

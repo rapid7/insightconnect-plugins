@@ -1,0 +1,7 @@
+<response status="success" code="19"><result total-count="1" count="1">
+ <entry name="Dynamic Group">
+  <dynamic>
+   <filter>'tag1' or 'tag2'</filter>
+  </dynamic>
+ </entry>
+</result></response>

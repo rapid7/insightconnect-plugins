@@ -1,0 +1,9 @@
+<response status="success" code="19"><result total-count="1" count="1">
+ <entry name="Multi Bare Group">
+  <static>
+   <member>1.1.1.1</member>
+   <member>test.com</member>
+   <member>IPv6</member>
+  </static>
+ </entry>
+</result></response>

@@ -63,9 +63,14 @@ class AddToPolicy(insightconnect_plugin_runtime.Action):
         ]
         new_policy = {}
         for key in key_list:
-            value = self._CONVERSION_KEY[key]
-            if params.get(value):
-                new_policy[key] = update.add_to_key(current_config[key], params.get(value))
+            value = params.get(self._CONVERSION_KEY[key])
+            if value and current_config[key] is None:
+                # A rule that does not carry the key cannot have a value added to it. PAN-OS 10.0 removed
+                # <hip-profiles>, so a rule on 10.0 and later never carries that one.
+                self.logger.info(f"This security rule has no '{key}' key, so the value given for it is ignored.")
+                value = None
+            if value:
+                new_policy[key] = update.add_to_key(current_config[key], value)
             else:
                 new_policy[key] = current_config[key]
 
