@@ -3,6 +3,7 @@ from .schema import GetPolicyInput, GetPolicyOutput, Input, Output, Component
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_palo_alto_pan_os.util.util import extract_member_names
 
 
 class GetPolicy(insightconnect_plugin_runtime.Action):
@@ -50,19 +51,5 @@ class GetPolicy(insightconnect_plugin_runtime.Action):
         }
 
     def get_entries(self, entry, key):
-        out = []
-
-        member = entry.get(key, {}).get("member")
-
-        if isinstance(member, str):
-            out.append(member)
-        elif isinstance(member, list):
-            for mem in member:
-                if isinstance(mem, dict):
-                    out.append(mem.get("#text", ""))
-                if isinstance(mem, str):
-                    out.append(mem)
-        elif isinstance(member, dict):
-            out.append(member.get("#text", ""))
-
-        return out
+        # A key that is present but empty parses to None, which the default of get() does not cover
+        return extract_member_names((entry.get(key) or {}).get("member"))

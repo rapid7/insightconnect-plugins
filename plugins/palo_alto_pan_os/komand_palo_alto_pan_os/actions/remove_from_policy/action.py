@@ -33,7 +33,7 @@ class RemoveFromPolicy(insightconnect_plugin_runtime.Action):
         update = util.SecurityPolicy()
         rule_name = params.get(Input.RULE_NAME)
         policy_type = False
-        if params.get("update_active_or_candidate_configuration") == "active":
+        if params.get(Input.UPDATE_ACTIVE_OR_CANDIDATE_CONFIGURATION) == "active":
             policy_type = True
 
         # Set xpath to security polices
@@ -48,7 +48,8 @@ class RemoveFromPolicy(insightconnect_plugin_runtime.Action):
         # Verify and extract needed keys
         current_config = update.extract_from_security_policy(policy=config_output)
 
-        # Update keys
+        # Update keys. The action is left out: a security rule always has exactly one action, so there
+        # is nothing to remove from it, and the rule keeps the action it already has.
         key_list = [
             "source",
             "destination",
@@ -59,13 +60,23 @@ class RemoveFromPolicy(insightconnect_plugin_runtime.Action):
             "from",
             "category",
             "hip-profiles",
-            "action",
         ]
-        new_policy = {}
+        if params.get(Input.ACTION):
+            self.logger.info(
+                "A security rule always has exactly one action, so the action given cannot be removed."
+                " The rule keeps its current action."
+            )
+
+        new_policy = {"action": current_config["action"]}
         for key in key_list:
-            value = self._CONVERSION_KEY.get("key")
-            if params.get(value):
-                new_policy[key] = update.remove_from_key(current_config[key], params.get(value))
+            value = params.get(self._CONVERSION_KEY[key])
+            if value and current_config[key] is None:
+                # A rule that does not carry the key has nothing to remove from it. PAN-OS 10.0 removed
+                # <hip-profiles>, so a rule on 10.0 and later never carries that one.
+                self.logger.info(f"This security rule has no '{key}' key, so the value given for it is ignored.")
+                value = None
+            if value:
+                new_policy[key] = update.remove_from_key(current_config[key], value, key)
             else:
                 new_policy[key] = current_config[key]
 

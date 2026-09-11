@@ -25,9 +25,35 @@ class TestRemoveAddressObjectFromGroup(TestCase):
         [
             ["success", "test.com", "Test Group", "localhost.localdomain", "vsys1", {"success": True}],
             ["not_found", "example.com", "Test Group", "localhost.localdomain", "vsys1", {"success": False}],
+            [
+                "several_member_group_without_attributes",
+                "test.com",
+                "Multi Bare Group",
+                "localhost.localdomain",
+                "vsys1",
+                {"success": True},
+            ],
+            [
+                "not_in_single_member_group",
+                "example.com",
+                "Single Bare Group",
+                "localhost.localdomain",
+                "vsys1",
+                {"success": False},
+            ],
+            [
+                "group_with_no_members",
+                "example.com",
+                "Empty Group",
+                "localhost.localdomain",
+                "vsys1",
+                {"success": False},
+            ],
+            # A member name that is only a prefix of a real member is not a member
+            ["partial_name", "test", "Multi Bare Group", "localhost.localdomain", "vsys1", {"success": False}],
         ]
     )
-    def test_add_address_object_to_group(
+    def test_remove_address_object_from_group(
         self,
         mock_get: MagicMock,
         mock_post: MagicMock,
@@ -61,9 +87,19 @@ class TestRemoveAddressObjectFromGroup(TestCase):
                 "PAN OS returned an unexpected response.",
                 "Could not find group 'Invalid Group', or group was empty. Check the name, virtual system name, and device name.\ndevice name: localhost.localdomain\nvirtual system: vsys1",
             ],
+            [
+                "dynamic_group",
+                "test.com",
+                "Dynamic Group",
+                "localhost.localdomain",
+                "vsys1",
+                "The address group 'Dynamic Group' is not a static address group.",
+                "This action can only read and change the members of a static address group. The members of a "
+                "dynamic address group are selected by its tag filter and cannot be changed directly.",
+            ],
         ]
     )
-    def test_add_address_object_to_group_bad(
+    def test_remove_address_object_from_group_bad(
         self,
         mock_get: MagicMock,
         mock_post: MagicMock,
@@ -87,3 +123,73 @@ class TestRemoveAddressObjectFromGroup(TestCase):
             action.run(input_data)
         self.assertEqual(e.exception.cause, cause)
         self.assertEqual(e.exception.assistance, assistance)
+        # Nothing is written when the removal cannot be carried out
+        self.assertEqual([call for call in Util.calls if call.get("action") != "get"], [])
+
+    @parameterized.expand(
+        [
+            ["several_member_group_with_attributes", "test.com", "Test Group"],
+            ["several_member_group_without_attributes", "IPv6", "Multi Bare Group"],
+            # Removing the only member of a group leaves the group with no members, which PAN-OS is
+            # likely to reject. That is pre-existing behaviour and deciding what the plugin should do
+            # instead is a product question, so these rows pin it rather than change it.
+            ["last_member", "test.com", "Single Bare Group"],
+            ["last_member_with_attributes", "test.com", "Single Dirty Group"],
+        ]
+    )
+    def test_remove_address_object_from_group_deletes_only_that_member(
+        self,
+        mock_get: MagicMock,
+        mock_post: MagicMock,
+        name: str,
+        address_object: str,
+        group: str,
+    ) -> None:
+        action = Util.default_connector(RemoveAddressObjectFromGroup())
+        input_data = {
+            Input.ADDRESS_OBJECT: address_object,
+            Input.GROUP: group,
+            Input.DEVICE_NAME: "localhost.localdomain",
+            Input.VIRTUAL_SYSTEM: "vsys1",
+        }
+        validate(input_data, RemoveAddressObjectFromGroupInput.schema)
+        action.run(input_data)
+
+        # The one member is deleted where it sits, so the rest of the group is never rewritten and a
+        # concurrent change to it cannot be lost
+        writes = [call for call in Util.calls if call.get("action") != "get"]
+        self.assertEqual(len(writes), 1)
+        self.assertEqual(writes[0].get("action"), "delete")
+        self.assertEqual(
+            writes[0].get("xpath"),
+            f"/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']"
+            f"/address-group/entry[@name='{group}']/static/member[text()='{address_object}']",
+        )
+        self.assertIsNone(writes[0].get("element"))
+
+    @parameterized.expand(
+        [
+            ["not_found", "example.com", "Test Group"],
+            ["group_with_no_members", "example.com", "Empty Group"],
+            ["partial_name", "test", "Multi Bare Group"],
+        ]
+    )
+    def test_remove_address_object_from_group_writes_nothing(
+        self,
+        mock_get: MagicMock,
+        mock_post: MagicMock,
+        name: str,
+        address_object: str,
+        group: str,
+    ) -> None:
+        action = Util.default_connector(RemoveAddressObjectFromGroup())
+        input_data = {
+            Input.ADDRESS_OBJECT: address_object,
+            Input.GROUP: group,
+            Input.DEVICE_NAME: "localhost.localdomain",
+            Input.VIRTUAL_SYSTEM: "vsys1",
+        }
+        validate(input_data, RemoveAddressObjectFromGroupInput.schema)
+        action.run(input_data)
+
+        self.assertEqual([call for call in Util.calls if call.get("action") != "get"], [])

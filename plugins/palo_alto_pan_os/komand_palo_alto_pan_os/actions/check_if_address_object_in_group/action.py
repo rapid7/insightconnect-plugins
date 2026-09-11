@@ -4,6 +4,7 @@ from .schema import CheckIfAddressObjectInGroupInput, CheckIfAddressObjectInGrou
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_palo_alto_pan_os.util.ip_check import IpCheck
+from komand_palo_alto_pan_os.util.util import extract_static_members, get_response_entry
 
 
 class CheckIfAddressObjectInGroup(insightconnect_plugin_runtime.Action):
@@ -22,15 +23,14 @@ class CheckIfAddressObjectInGroup(insightconnect_plugin_runtime.Action):
         virtual_system = params.get(Input.VIRTUAL_SYSTEM)
         enable_search = params.get(Input.ENABLE_SEARCH)
 
-        xpath = f"/config/devices/entry[@name='{device_name}']/vsys/entry[@name='{virtual_system}']/address-group/entry[@name='{group_name}']"
-        response = self.connection.request.get_(xpath)
+        response = self.connection.request.get_address_group(
+            device_name=device_name, virtual_system=virtual_system, group_name=group_name
+        )
 
         # Get the contents of the address group to check and extract all the address object names
         # Make the call and get the address group
-        try:
-            ip_objects = response.get("response").get("result").get("entry").get("static")
-
-        except AttributeError:
+        entry = get_response_entry(response)
+        if entry is None:
             raise PluginException(
                 cause="PAN OS returned an unexpected response.",
                 assistance=f"Could not find group '{group_name}', or group was empty. Check the name, virtual system name, and device name.\ndevice name: {device_name}\nvirtual system: {virtual_system}",
@@ -38,15 +38,8 @@ class CheckIfAddressObjectInGroup(insightconnect_plugin_runtime.Action):
             )
 
         # Extract all the address objects from the address group
-        self.logger.info(f"Searching through {len(ip_objects)} address objects.")
-        ip_object_names = []
-        for member in ip_objects.get("member", {}):
-            if isinstance(member, str):
-                ip_object_names.append(member)
-            else:
-                object_name = member.get("#text", "")
-                if object_name:
-                    ip_object_names.append(object_name)
+        ip_object_names = extract_static_members(entry, group_name)
+        self.logger.info(f"Searching through {len(ip_object_names)} address objects.")
 
         # If enable search is false, we just want to see if the address to check matches an address object
         # If enable search is true, we have to look in each address object for address to check
@@ -67,13 +60,12 @@ class CheckIfAddressObjectInGroup(insightconnect_plugin_runtime.Action):
             found = False
             for name in ip_object_names:
                 # For each name, go and grab the Address Object
-                object_xpath = f"/config/devices/entry[@name='{device_name}']/vsys/entry[@name='{virtual_system}']/address/entry[@name='{name}']"
-                object_result = self.connection.request.get_(object_xpath)
+                object_result = self.connection.request.get_address_object(
+                    device_name=device_name, virtual_system=virtual_system, object_name=name
+                )
 
-                try:
-                    get_entry = object_result.get("response").get("result").get("entry")
-
-                except AttributeError:
+                get_entry = get_response_entry(object_result)
+                if get_entry is None:
                     raise PluginException(
                         cause="PAN OS returned an unexpected response.",
                         assistance=f"Address object '{name}' was not found. Check the name and try again.",

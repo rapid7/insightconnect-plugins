@@ -29,8 +29,7 @@ class Output:
 
 
 class RemoveFromPolicyInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        r"""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -38,7 +37,7 @@ class RemoveFromPolicyInput(insightconnect_plugin_runtime.Input):
     "action": {
       "type": "string",
       "title": "Action",
-      "description": "The action that will occur if an event meets the rule definitions",
+      "description": "Ignored. A security rule always has exactly one action, so the action cannot be removed and the rule keeps the one it has. Use the Set Security Policy Rule action to change it",
       "order": 12
     },
     "application": {
@@ -62,7 +61,7 @@ class RemoveFromPolicyInput(insightconnect_plugin_runtime.Input):
     "hip_profiles": {
       "type": "string",
       "title": "HIP Profiles",
-      "description": "Host information profile",
+      "description": "Host information profile. PAN-OS 10.0 removed HIP profiles from the security policy rule, so this input is ignored for a rule that does not have one",
       "order": 11
     },
     "rule_name": {
@@ -118,16 +117,14 @@ class RemoveFromPolicyInput(insightconnect_plugin_runtime.Input):
   ],
   "definitions": {}
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class RemoveFromPolicyOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(
-        r"""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -153,8 +150,7 @@ class RemoveFromPolicyOutput(insightconnect_plugin_runtime.Output):
   },
   "definitions": {}
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

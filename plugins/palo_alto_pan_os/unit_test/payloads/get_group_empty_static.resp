@@ -1,0 +1,5 @@
+<response status="success" code="19"><result total-count="1" count="1">
+ <entry name="Empty Group">
+  <static/>
+ </entry>
+</result></response>

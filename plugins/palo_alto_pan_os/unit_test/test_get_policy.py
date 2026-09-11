@@ -35,7 +35,25 @@ class TestGetPolicy(TestCase):
                     "hip_profiles": ["any"],
                     "action": "drop",
                 },
-            ]
+            ],
+            [
+                "uncommitted_policy",
+                "Dirty Policy",
+                "localhost.localdomain",
+                "vsys1",
+                {
+                    "to": ["any"],
+                    "from": [],
+                    "source": ["1.1.1.1"],
+                    "destination": ["1.1.1.1", "test.com"],
+                    "source_user": [],
+                    "category": [],
+                    "application": [],
+                    "service": ["application-default"],
+                    "hip_profiles": [],
+                    "action": "drop",
+                },
+            ],
         ]
     )
     def test_get_policy(
