@@ -2,7 +2,6 @@ import insightconnect_plugin_runtime
 from .schema import SendMessageByGuidInput, SendMessageByGuidOutput, Input, Output, Component
 
 # Custom imports below
-from icon_microsoft_teams.util.teams_utils import send_html_message, send_message
 from icon_microsoft_teams.util.komand_clean_with_nulls import remove_null_and_clean
 from icon_microsoft_teams.util.words_utils import add_words_values_to_message
 
@@ -22,12 +21,20 @@ class SendMessageByGuid(insightconnect_plugin_runtime.Action):
         is_html = params.get(Input.IS_HTML)
         message_content = params.get(Input.MESSAGE)
 
-        if is_html:
-            message = send_html_message(self.logger, self.connection, message_content, team_guid, channel_guid)
-        else:
-            message = send_message(self.logger, self.connection, message_content, team_guid, channel_guid)
+        content_type = "html" if is_html else "text"
 
-        clean_message = remove_null_and_clean(message)
-        clean_message = add_words_values_to_message(clean_message)
+        result = self.connection.bot.send_channel_message(
+            team_id=team_guid,
+            channel_id=channel_guid,
+            message=message_content,
+            content_type=content_type,
+        )
 
-        return {Output.MESSAGE: clean_message}
+        output_message = {
+            "body": {"contentType": content_type, "content": message_content},
+            "id": result.get("id", ""),
+        }
+        output_message = remove_null_and_clean(output_message)
+        output_message = add_words_values_to_message(output_message)
+
+        return {Output.MESSAGE: output_message}

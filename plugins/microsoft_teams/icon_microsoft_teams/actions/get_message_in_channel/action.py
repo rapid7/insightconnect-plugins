@@ -1,6 +1,4 @@
 import insightconnect_plugin_runtime
-
-from icon_microsoft_teams.util.teams_utils import get_message_from_channel
 from .schema import GetMessageInChannelInput, GetMessageInChannelOutput, Input, Output, Component
 
 
@@ -19,5 +17,6 @@ class GetMessageInChannel(insightconnect_plugin_runtime.Action):
         message_id = params.get(Input.MESSAGE_ID, "")
         reply_id = params.get(Input.REPLY_ID, "")
 
-        message = get_message_from_channel(self.connection, team_id, channel_id, message_id, reply_id)
+        message = self.connection.client.get_channel_message(team_id, channel_id, message_id, reply_id)
+
         return {Output.MESSAGE: message}

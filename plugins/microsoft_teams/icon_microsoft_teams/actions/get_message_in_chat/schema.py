@@ -10,7 +10,6 @@ class Component:
 class Input:
     CHAT_ID = "chat_id"
     MESSAGE_ID = "message_id"
-    USERNAME = "username"
 
 
 class Output:
@@ -27,25 +26,18 @@ class GetMessageInChatInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Chat ID",
       "description": "The ID of chat",
-      "order": 2
+      "order": 1
     },
     "message_id": {
       "type": "string",
       "title": "Message ID",
       "description": "The ID of message",
-      "order": 3
-    },
-    "username": {
-      "type": "string",
-      "title": "Username",
-      "description": "The ID of user or his email",
-      "order": 1
+      "order": 2
     }
   },
   "required": [
     "chat_id",
-    "message_id",
-    "username"
+    "message_id"
   ],
   "definitions": {}
 }
