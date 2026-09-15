@@ -17,6 +17,8 @@ class TestHostFormatter(TestCase):
             Input.PORT: 345,
             Input.USE_SSL: False,
             Input.USERNAME_PASSWORD: {"username": "bob", "password": "foobar"},
+            Input.AUTH_TYPE: "NTLM",
+            Input.CHASE_REFERRALS: True,
         }
         conn = connection.Connection()
         conn.logger = logging.getLogger("test_connection")
