@@ -1,0 +1,110 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: zero_networks
+title: Zero Networks
+description: Search for and quarantine assets managed by the Zero Networks Segment platform
+version: 1.0.0
+connection_version: 1
+cloud_ready: true
+sdk:
+  type: slim
+  version: 6.6.0
+  user: nobody
+supported_versions: ["Zero Networks API v1 (1.26.8)"]
+vendor: zero_networks
+support: community
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/zero_networks
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://zeronetworks.com
+tags:
+  - zero networks
+  - segmentation
+  - microsegmentation
+  - asset
+  - quarantine
+hub_tags:
+  use_cases: [threat_detection_and_response, remediation_management]
+  keywords: [network, network_access, containment, endpoint, hostname, block]
+  features: []
+requirements:
+  - "A Zero Networks API key"
+  - "The URL of your Zero Networks API instance"
+key_features:
+  - "Look up a Zero Networks asset ID from a fully qualified domain name"
+  - "Quarantine or release an asset to contain a compromised host"
+troubleshooting:
+  - "`Search Asset` returns `Found: false` rather than failing when no asset matches. Zero Networks matches the fully qualified domain name exactly, so supply the full name (for example `server.domain.local`) rather than the short hostname."
+  - "`Quarantine Asset` needs an asset ID in the `a:<type>:<id>` format returned by `Search Asset`, not a hostname or an IP address. A not found error means the asset ID does not exist in this Zero Networks environment."
+  - "The URL in the connection must include the API version path, for example `https://portal.zeronetworks.com/api/v1`. A connection test that fails with an authentication error means the API key is invalid or has been revoked; generate a new key from the API section of the Zero Networks portal settings."
+version_history:
+  - "1.0.0 - Initial plugin"
+links:
+  - "[Zero Networks](https://zeronetworks.com)"
+references:
+  - "This plugin was developed against version 1.26.8 of the Zero Networks API v1."
+  - "API keys are created from Settings > Integrations > API in the [Zero Networks portal](https://portal.zeronetworks.com). The key must have permission to read assets and to perform asset actions."
+connection:
+  url:
+    title: URL
+    description: The URL of the Zero Networks API instance, including the API version path
+    type: string
+    required: true
+    default: https://portal.zeronetworks.com/api/v1
+    example: https://portal.zeronetworks.com/api/v1
+  api_key:
+    title: API Key
+    description: The Zero Networks API key, created from the API section of the Zero Networks portal settings
+    type: credential_secret_key
+    required: true
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
+actions:
+  search_asset:
+    title: Search Asset
+    description: Search for an asset by its fully qualified domain name and return its asset ID
+    input:
+      fqdn:
+        title: FQDN
+        description: The fully qualified domain name of the asset to search for
+        type: string
+        required: true
+        example: server.domain.local
+    output:
+      found:
+        title: Found
+        description: Whether an asset matching the given fully qualified domain name was found
+        type: boolean
+        required: true
+        example: true
+      asset_id:
+        title: Asset ID
+        description: The ID of the matching asset, empty when no asset was found
+        type: string
+        required: false
+        example: 'a:a:JF2xro6g'
+  quarantine_asset:
+    title: Quarantine Asset
+    description: Quarantine an asset to block its network traffic, or release an asset from quarantine
+    input:
+      asset_id:
+        title: Asset ID
+        description: The ID of the asset to quarantine or release, as returned by the Search Asset action
+        type: string
+        required: true
+        example: 'a:a:JF2xro6g'
+      quarantine:
+        title: Quarantine
+        description: Whether to quarantine the asset, set to false to release the asset from quarantine
+        type: boolean
+        required: true
+        default: true
+        example: true
+    output:
+      success:
+        title: Success
+        description: Whether the quarantine state was applied successfully
+        type: boolean
+        required: true
+        example: true
