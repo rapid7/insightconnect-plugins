@@ -1,0 +1,14 @@
+{
+  "incident_comments_worknotes": [
+    {
+      "sys_id": "",
+      "sys_created_on": "2026-09-04 09:11:02",
+      "name": "incident",
+      "element_id": "j2",
+      "sys_tags": "",
+      "value": "Confirmed with the requester that this was expected activity",
+      "sys_created_by": "System Administrator",
+      "element": "work_notes"
+    }
+  ]
+}

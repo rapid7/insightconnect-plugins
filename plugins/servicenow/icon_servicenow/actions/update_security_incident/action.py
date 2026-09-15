@@ -6,6 +6,7 @@ from .schema import UpdateSecurityIncidentInput, UpdateSecurityIncidentOutput, I
 # Custom imports below
 from insightconnect_plugin_runtime.helper import return_non_empty
 from icon_servicenow.util.security_incident_helper import remove_integer_fields_with_zero
+from icon_servicenow.util.validators import validate_record_identifier
 
 
 class UpdateSecurityIncident(insightconnect_plugin_runtime.Action):
@@ -19,7 +20,7 @@ class UpdateSecurityIncident(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         json_data = remove_integer_fields_with_zero(params.copy())
-        incident_sys_id = json_data.pop(Input.SYS_ID)
+        incident_sys_id = validate_record_identifier(json_data.pop(Input.SYS_ID), "system ID")
         json_data.update(json_data.pop(Input.ADDITIONAL_FIELDS, {}))
         response = self.connection.request.make_request(
             endpoint=f"{self.connection.security_incident_url}/{incident_sys_id}",

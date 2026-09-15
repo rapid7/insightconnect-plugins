@@ -1,0 +1,24 @@
+{
+  "incident_comments_worknotes": [
+    {
+      "sys_id": "",
+      "sys_created_on": "2026-09-04 09:12:33",
+      "name": "incident",
+      "element_id": "j2",
+      "sys_tags": "",
+      "value": "RRN:rrn:investigation:us:11111111-1111-1111-1111-111111111111:investigation:ABCDEF543210",
+      "sys_created_by": "System Administrator",
+      "element": "comments"
+    },
+    {
+      "sys_id": "",
+      "sys_created_on": "2026-09-03 08:00:00",
+      "name": "incident",
+      "element_id": "j2",
+      "sys_tags": "",
+      "value": "First line\n\nSecond paragraph",
+      "sys_created_by": "Joe Employee",
+      "element": "comments"
+    }
+  ]
+}

@@ -3,6 +3,7 @@ import insightconnect_plugin_runtime
 from .schema import UpdateIncidentInput, UpdateIncidentOutput, Input, Output, Component
 
 # Custom imports below
+from icon_servicenow.util.validators import validate_record_identifier
 
 
 class UpdateIncident(insightconnect_plugin_runtime.Action):
@@ -15,6 +16,7 @@ class UpdateIncident(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        system_id = validate_record_identifier(params.get(Input.SYSTEM_ID), "system ID")
         data = {}
         data_fields = {
             "caller_id": Input.CALLER,
@@ -42,7 +44,7 @@ class UpdateIncident(insightconnect_plugin_runtime.Action):
         # Additional fields are an optional dictionary of key/value pairs and may include fields not specified above
         data.update(params.get(Input.ADDITIONAL_FIELDS))
         response = self.connection.request.make_request(
-            endpoint=f"{self.connection.incident_url}/{params.get(Input.SYSTEM_ID)}", method="put", payload=data
+            endpoint=f"{self.connection.incident_url}/{system_id}", method="put", payload=data
         )
         success = response.get("status", 0) in range(200, 299)
         return {Output.SUCCESS: success}

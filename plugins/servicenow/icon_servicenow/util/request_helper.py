@@ -2,7 +2,7 @@ import base64
 from enum import Enum
 import json
 from logging import Logger
-from typing import Optional
+from typing import Any, Optional
 import xmltodict
 import requests
 from requests.auth import HTTPBasicAuth, AuthBase
@@ -10,6 +10,7 @@ from requests.auth import HTTPBasicAuth, AuthBase
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_servicenow.util.error_messages import MISSING_CREDENTIALS
+from icon_servicenow.util.validators import validate_record_identifier
 
 
 class BearerAuth(AuthBase):
@@ -60,9 +61,29 @@ class RequestHelper(object):
         self.base_url = base_url
         self.logger = logger
 
-    def make_request(  # noqa: C901
-        self, endpoint, method, payload=None, params=None, data=None, content_type="application/json"
-    ):
+    @staticmethod
+    def _read_resource(response: requests.Response, content_type: str) -> Any:
+        """
+        Reads the body of a successful response according to the content type it came back in
+
+        :param response: Response received from ServiceNow
+        :param content_type: Content type the response reports
+        :return: Parsed body, or None for a response that carries none
+        """
+        if response.status_code == 204:
+            return None
+
+        if "application/json" in content_type:
+            try:
+                return response.json()
+            except json.decoder.JSONDecodeError:
+                raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
+        if "xml" in content_type:
+            return xmltodict.parse(response.content).get("response", {})
+
+        return response.content
+
+    def make_request(self, endpoint, method, payload=None, params=None, data=None, content_type="application/json"):
         try:
             request_method = getattr(requests, method.lower())
 
@@ -88,20 +109,11 @@ class RequestHelper(object):
             content_type = response.headers.get("Content-Type", "")
             self.logger.info(f"Response received in content-type {content_type}")
 
-            if response.status_code == 204:
-                resource = None
-            else:
-                if "application/json" in content_type:
-                    try:
-                        resource = response.json()
-                    except json.decoder.JSONDecodeError:
-                        raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
-                elif "xml" in content_type:
-                    resource = xmltodict.parse(response.content).get("response", {})
-                else:
-                    resource = response.content
-
-            return {"resource": resource, "status": response.status_code, "content-type": content_type}
+            return {
+                "resource": self._read_resource(response, content_type),
+                "status": response.status_code,
+                "content-type": content_type,
+            }
 
         try:
             error = response.json()
@@ -115,7 +127,8 @@ class RequestHelper(object):
 
     @staticmethod
     def get_attachment(connection, sys_id):
-        response = connection.request.make_request(f"{connection.attachment_url}/{sys_id}/file", "get")
+        attachment_id = validate_record_identifier(sys_id, "attachment ID")
+        response = connection.request.make_request(f"{connection.attachment_url}/{attachment_id}/file", "get")
         resource = response.get("resource")
 
         if not resource:

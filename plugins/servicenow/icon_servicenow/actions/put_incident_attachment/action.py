@@ -1,4 +1,5 @@
 import base64
+from urllib.parse import quote
 
 import insightconnect_plugin_runtime
 from .schema import (
@@ -12,6 +13,8 @@ from .schema import (
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
 
+from icon_servicenow.util.validators import validate_record_identifier
+
 
 class PutIncidentAttachment(insightconnect_plugin_runtime.Action):
     def __init__(self):
@@ -23,9 +26,14 @@ class PutIncidentAttachment(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        system_id = validate_record_identifier(params.get(Input.SYSTEM_ID), "system ID")
+        # The file name is chosen freely by the user, so it is escaped rather than validated: left as
+        # it is, a name holding a hash truncates the URL and a name holding an ampersand adds a
+        # parameter of its own to it.
+        file_name = quote(params.get(Input.ATTACHMENT_NAME, ""), safe="")
         url = (
-            f"{self.connection.attachment_url}/file?table_name=incident&table_sys_id={params.get(Input.SYSTEM_ID)}"
-            f"&file_name={params.get(Input.ATTACHMENT_NAME)}"
+            f"{self.connection.attachment_url}/file?table_name=incident&table_sys_id={system_id}"
+            f"&file_name={file_name}"
         )
 
         content_type = (
