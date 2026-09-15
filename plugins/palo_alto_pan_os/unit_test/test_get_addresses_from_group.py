@@ -34,7 +34,59 @@ class TestGetAddressesFromGroup(TestCase):
                     "ipv6_addresses": ["abcd:123::1"],
                     "all_addresses": ["1.1.1.1", "test.com", "abcd:123::1"],
                 },
-            ]
+            ],
+            [
+                "single_member_group_with_attributes",
+                "Single Dirty Group",
+                "localhost.localdomain",
+                "vsys1",
+                {
+                    "success": True,
+                    "fqdn_addresses": ["test.com"],
+                    "ipv4_addresses": [],
+                    "ipv6_addresses": [],
+                    "all_addresses": ["test.com"],
+                },
+            ],
+            [
+                "single_member_group",
+                "Single Bare Group",
+                "localhost.localdomain",
+                "vsys1",
+                {
+                    "success": True,
+                    "fqdn_addresses": ["test.com"],
+                    "ipv4_addresses": [],
+                    "ipv6_addresses": [],
+                    "all_addresses": ["test.com"],
+                },
+            ],
+            [
+                "several_member_group_without_attributes",
+                "Multi Bare Group",
+                "localhost.localdomain",
+                "vsys1",
+                {
+                    "success": True,
+                    "fqdn_addresses": ["test.com"],
+                    "ipv4_addresses": ["1.1.1.1"],
+                    "ipv6_addresses": ["abcd:123::1"],
+                    "all_addresses": ["1.1.1.1", "test.com", "abcd:123::1"],
+                },
+            ],
+            [
+                "group_with_no_members",
+                "Empty Group",
+                "localhost.localdomain",
+                "vsys1",
+                {
+                    "success": True,
+                    "fqdn_addresses": [],
+                    "ipv4_addresses": [],
+                    "ipv6_addresses": [],
+                    "all_addresses": [],
+                },
+            ],
         ]
     )
     def test_get_addresses_from_group(
@@ -62,7 +114,16 @@ class TestGetAddressesFromGroup(TestCase):
                 "vsys1",
                 "PAN OS returned an unexpected response.",
                 "Could not find group 'Invalid Group', or group was empty. Check the name, virtual system name, and device name.\nDevice name: localhost.localdomain\nVirtual system: vsys1\n",
-            ]
+            ],
+            [
+                "dynamic_group",
+                "Dynamic Group",
+                "localhost.localdomain",
+                "vsys1",
+                "The address group 'Dynamic Group' is not a static address group.",
+                "This action can only read and change the members of a static address group. The members of a "
+                "dynamic address group are selected by its tag filter and cannot be changed directly.",
+            ],
         ]
     )
     def test_get_addresses_from_group_bad(
