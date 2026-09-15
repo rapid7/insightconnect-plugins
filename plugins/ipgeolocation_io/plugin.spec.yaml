@@ -1,0 +1,1140 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: ipgeolocation_io
+title: IPGeolocation.io
+description: "Enrich and assess IPv4/IPv6 addresses and domains using the IPGeolocation.io v3 APIs: geolocation, country metadata, currency, network, company, time zone, user-agent parsing, security risk signals (VPN/proxy/Tor/threat score), ASN routing intelligence, and network abuse contacts"
+version: 1.0.0
+connection_version: 1
+supported_versions: ["IPGeolocation.io v3 API 2026-08-10"]
+vendor: community
+support: community
+status: []
+cloud_ready: true
+sdk:
+  type: slim
+  version: 6.6.0
+  user: nobody
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/ipgeolocation_io
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://ipgeolocation.io
+tags:
+- ip
+- geolocation
+- enrichment
+- threat intelligence
+- asn
+- abuse
+- vpn
+- proxy
+hub_tags:
+  use_cases: [data_enrichment, threat_detection_and_response]
+  keywords: [geoip, ip_address, network, enrichment, threat_intelligence]
+  features: []
+key_features:
+- "Enrich an IP or domain with location, country metadata, currency, network, company, ASN, and time zone data"
+- "Add optional modules to an enrichment: security, abuse, hostname, geo accuracy, DMA code, and parsed user-agent"
+- "Score an IP for risk with VPN, proxy, residential-proxy, Tor, relay, bot, spam, and known-attacker signals"
+- "Resolve ASN routing intelligence (peers, upstreams, downstreams, routes, WHOIS) for network investigations"
+- "Look up the responsible abuse contact for an IP to report confirmed malicious activity"
+- "Process large IP sets efficiently with bulk geolocation and bulk security lookups (up to 50,000 entries)"
+- "Trim responses with the Fields and Excludes parameters to reduce payload size and processing time"
+requirements:
+- "An IPGeolocation.io API key (free or paid). Security, abuse, domain, bulk, user-agent, hostname, geo accuracy, DMA code, and non-English lookups require a paid subscription"
+troubleshooting:
+- "A 401 error usually means the requested data (security, abuse, hostname, geo_accuracy, dma_code, user_agent, bulk, domain lookup, or a non-English language) is not available on a free plan, or the API key is invalid"
+- "A 423 (Locked) error means the IP is a private or bogon address and cannot be looked up"
+- "A 400 error on a bulk action usually means the IP list is empty or contains more than 50,000 entries"
+- "If a field you requested is missing, confirm it was added with the Include input first. Fields such as security, abuse, hostname, geo accuracy, DMA code, and user agent are not returned by default"
+- "When a field appears in both Include and Excludes, Include takes priority and the field is still returned"
+version_history:
+- "1.0.0 - Initial plugin"
+links:
+- "[IPGeolocation.io](https://ipgeolocation.io)"
+references:
+- "[IP Location API](https://ipgeolocation.io/documentation/ip-location-api.html)"
+- "[IP Security API](https://ipgeolocation.io/documentation/ip-security-api.html)"
+- "[ASN API](https://ipgeolocation.io/documentation/asn-api.html)"
+- "[IP Abuse Contact API](https://ipgeolocation.io/documentation/ip-abuse-contact-api.html)"
+- "[Credits Usage](https://ipgeolocation.io/documentation/credits-usage.html)"
+
+connection:
+  api_key:
+    title: API Key
+    type: credential_secret_key
+    description: IPGeolocation.io API key used to authenticate every request
+    required: true
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
+
+actions:
+  ip_geolocation:
+    title: IP Geolocation
+    description: "Enrich a single IPv4/IPv6 address or domain with location, country metadata, currency, network, company, ASN, and time zone data via /v3/ipgeo (1 credit; +2 if security is included, +1 if abuse is included)"
+    input:
+      ip:
+        title: IP or Domain
+        type: string
+        description: IPv4 address, IPv6 address, or domain name to enrich. Leave blank to enrich the orchestrator's public IP. Domain lookups require a paid plan
+        required: false
+        example: 8.8.8.8
+        order: 1
+      include:
+        title: Include
+        type: '[]string'
+        description: "Optional paid modules to add to the response. Allowed values: security, abuse, hostname, liveHostname, hostnameFallbackLive, geo_accuracy, dma_code, user_agent, or * for every module. When more than one hostname option is given the API applies liveHostname first, then hostname, then hostnameFallbackLive"
+        required: false
+        example: ["security", "abuse"]
+        order: 2
+      fields:
+        title: Fields
+        type: '[]string'
+        description: "Return only these objects or fields. Use object_key.field_key for nested fields (e.g. location.city, security.threat_score) or the object key alone for a whole object. The IP is always returned. Fields from non-default objects must also be listed in Include"
+        required: false
+        example: ["location.city", "security.threat_score"]
+        order: 3
+      excludes:
+        title: Excludes
+        type: '[]string'
+        description: "Remove these objects or fields from the response. Use object_key.field_key for nested fields (e.g. location.continent_code) or the object key alone for a whole object. The IP cannot be excluded, and Include takes priority over Excludes"
+        required: false
+        example: ["currency", "location.continent_code"]
+        order: 4
+      lang:
+        title: Language
+        type: string
+        description: Language for the geolocation response. Any value other than English requires a paid plan
+        required: false
+        default: en
+        enum:
+        - en
+        - de
+        - ru
+        - ja
+        - fr
+        - cn
+        - es
+        - cs
+        - it
+        - ko
+        - fa
+        - pt
+        - ar
+        example: en
+        order: 5
+      user_agent:
+        title: User Agent String
+        type: string
+        description: User-Agent string to parse and return in the user_agent object. Sent as the User-Agent request header and only used when user_agent is listed in Include. Leave blank to parse the orchestrator's own user agent
+        required: false
+        example: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+        order: 6
+    output:
+      result:
+        title: Result
+        description: Enrichment data for the IP or domain
+        type: geolocation_result
+        required: true
+
+  ip_geolocation_bulk:
+    title: IP Geolocation Bulk
+    description: "Enrich up to 50,000 IPv4/IPv6 addresses or domains in one request via /v3/ipgeo-bulk. Paid plans only. Billed per valid entry using the same credit rules as a single lookup"
+    input:
+      ips:
+        title: IPs or Domains
+        type: '[]string'
+        description: IPv4 addresses, IPv6 addresses, or domain names to enrich (max 50,000)
+        required: true
+        example: ["8.8.8.8", "1.1.1.1"]
+        order: 1
+      include:
+        title: Include
+        type: '[]string'
+        description: "Optional paid modules to add to each result. Allowed values: security, abuse, hostname, liveHostname, hostnameFallbackLive, geo_accuracy, dma_code, user_agent, or * for every module. When more than one hostname option is given the API applies liveHostname first, then hostname, then hostnameFallbackLive"
+        required: false
+        example: ["security"]
+        order: 2
+      fields:
+        title: Fields
+        type: '[]string'
+        description: "Return only these objects or fields in each result. Use object_key.field_key for nested fields (e.g. location.city). The IP is always returned. Fields from non-default objects must also be listed in Include"
+        required: false
+        example: ["location.city", "currency", "security"]
+        order: 3
+      excludes:
+        title: Excludes
+        type: '[]string'
+        description: "Remove these objects or fields from each result. Use object_key.field_key for nested fields (e.g. security.threat_score). The IP cannot be excluded, and Include takes priority over Excludes"
+        required: false
+        example: ["security.threat_score"]
+        order: 4
+      lang:
+        title: Language
+        type: string
+        description: Language for the geolocation response
+        required: false
+        default: en
+        enum:
+        - en
+        - de
+        - ru
+        - ja
+        - fr
+        - cn
+        - es
+        - cs
+        - it
+        - ko
+        - fa
+        - pt
+        - ar
+        example: en
+        order: 5
+    output:
+      results:
+        title: Results
+        description: One result per submitted entry, in the order sent. Invalid or bogon entries contain only a message field
+        type: '[]geolocation_result'
+        required: true
+
+  ip_security:
+    title: IP Security
+    description: "Assess a single IPv4/IPv6 address for risk (threat score, VPN, proxy, Tor, relay, bot, spam, attacker) via /v3/security. Paid plans only. 2 credits. Domains are not supported"
+    input:
+      ip:
+        title: IP
+        type: string
+        description: IPv4 or IPv6 address to assess. Leave blank to assess the orchestrator's public IP
+        required: false
+        example: 2.56.188.34
+        order: 1
+      fields:
+        title: Fields
+        type: '[]string'
+        description: "Return only these fields from the security object, in security.field_key form (e.g. security.threat_score). The IP is always returned"
+        required: false
+        example: ["security.threat_score", "security.is_vpn"]
+        order: 2
+      excludes:
+        title: Excludes
+        type: '[]string'
+        description: "Remove these fields from the security object, in security.field_key form (e.g. security.is_tor). The IP cannot be excluded"
+        required: false
+        example: ["security.is_tor", "security.is_cloud_provider"]
+        order: 3
+    output:
+      ip:
+        title: IP
+        description: The IP address that was assessed
+        type: string
+        required: true
+        example: 2.56.188.34
+      security:
+        title: Security
+        description: Risk and anonymization signals for the IP
+        type: security
+        required: true
+
+  ip_security_bulk:
+    title: IP Security Bulk
+    description: "Assess up to 50,000 IPv4/IPv6 addresses for risk in one request via /v3/security-bulk. Paid plans only. Billed 2 credits per valid IP"
+    input:
+      ips:
+        title: IPs
+        type: '[]string'
+        description: IPv4 or IPv6 addresses to assess (max 50,000). Domains are not supported
+        required: true
+        example: ["2.56.188.34", "8.8.8.8"]
+        order: 1
+      fields:
+        title: Fields
+        type: '[]string'
+        description: "Return only these fields from each security object, in security.field_key form (e.g. security.is_vpn). The IP is always returned"
+        required: false
+        example: ["security.is_vpn", "security.vpn_confidence_score", "security.is_proxy"]
+        order: 2
+      excludes:
+        title: Excludes
+        type: '[]string'
+        description: "Remove these fields from each security object, in security.field_key form (e.g. security.vpn_last_seen). The IP cannot be excluded"
+        required: false
+        example: ["security.threat_score", "security.proxy_last_seen", "security.vpn_last_seen"]
+        order: 3
+    output:
+      results:
+        title: Results
+        description: One result per submitted IP, in the order sent. Invalid or bogon entries contain only a message field
+        type: '[]security_result'
+        required: true
+
+  asn_lookup:
+    title: ASN Lookup
+    description: "Resolve ASN routing intelligence by AS number or IP via /v3/asn (1 credit). Provide either an ASN or an IP"
+    input:
+      asn:
+        title: ASN
+        type: string
+        description: Autonomous System Number to look up, with or without the AS prefix (e.g. 24940 or AS24940). Ignored if an IP is provided
+        required: false
+        example: "24940"
+        order: 1
+      ip:
+        title: IP
+        type: string
+        description: IPv4 or IPv6 address whose ASN should be resolved. Leave both ASN and IP blank to use the orchestrator's public IP
+        required: false
+        example: 49.12.0.0
+        order: 2
+      include:
+        title: Include
+        type: '[]string'
+        description: "Optional heavier ASN objects to add to the response. Allowed values: peers, upstreams, downstreams, routes, whois_response. If both Include and Fields are used, only Include is applied"
+        required: false
+        example: ["peers", "routes"]
+        order: 3
+      fields:
+        title: Fields
+        type: '[]string'
+        description: "Return only these fields from the ASN object, in asn.field_key form (e.g. asn.organization). Heavier objects such as asn.peers must also be listed in Include"
+        required: false
+        example: ["asn.organization", "asn.country", "asn.downstreams"]
+        order: 4
+      excludes:
+        title: Excludes
+        type: '[]string'
+        description: "Remove these fields from the ASN object, in asn.field_key form (e.g. asn.date_allocated). The IP cannot be excluded"
+        required: false
+        example: ["asn.date_allocated", "asn.allocation_status"]
+        order: 5
+    output:
+      ip:
+        title: IP
+        description: The queried IP. Returned only when the lookup was performed by IP
+        type: string
+        required: false
+        example: 49.12.0.0
+      asn:
+        title: ASN
+        description: ASN details and routing intelligence
+        type: asn_detail
+        required: true
+
+  abuse_contact:
+    title: Abuse Contact
+    description: "Look up the network abuse contact for a single IPv4/IPv6 address via /v3/abuse. Paid plans only. 1 credit"
+    input:
+      ip:
+        title: IP
+        type: string
+        description: IPv4 or IPv6 address to find the responsible abuse contact for
+        required: true
+        example: 91.128.103.196
+        order: 1
+      fields:
+        title: Fields
+        type: '[]string'
+        description: "Return only these fields from the abuse object, in abuse.field_key form (e.g. abuse.emails). The IP is always returned"
+        required: false
+        example: ["abuse.emails"]
+        order: 2
+      excludes:
+        title: Excludes
+        type: '[]string'
+        description: "Remove these fields from the abuse object, in abuse.field_key form (e.g. abuse.address). The IP cannot be excluded"
+        required: false
+        example: ["abuse.emails"]
+        order: 3
+    output:
+      ip:
+        title: IP
+        description: The IP address that was queried
+        type: string
+        required: true
+        example: 91.128.103.196
+      abuse:
+        title: Abuse Contact
+        description: Abuse contact details for the network that owns the IP
+        type: abuse
+        required: true
+
+types:
+  # Composite result for the unified /v3/ipgeo and /v3/ipgeo-bulk endpoints.
+  # Objects marked "included" only appear when requested via the include input.
+  # In bulk responses, an invalid/bogon entry returns only the message field.
+  geolocation_result:
+    ip:
+      title: IP
+      description: The IP looked up, or for a domain lookup the resolved A or AAAA record
+      type: string
+      required: false
+    domain:
+      title: Domain
+      description: The domain submitted, exactly as sent (returned only for domain lookups)
+      type: string
+      required: false
+    hostname:
+      title: Hostname
+      description: Reverse DNS (PTR) hostname. Returned only when a hostname module is included, and falls back to the queried IP when no hostname resolves
+      type: string
+      required: false
+    location:
+      title: Location
+      description: Geographic location of the IP
+      type: location
+      required: false
+    country_metadata:
+      title: Country Metadata
+      description: Calling code, top-level domain, and languages for the country
+      type: country_metadata
+      required: false
+    currency:
+      title: Currency
+      description: Currency used in the country of the IP location
+      type: currency
+      required: false
+    network:
+      title: Network
+      description: Network and connection details
+      type: network
+      required: false
+    asn:
+      title: ASN
+      description: ASN that owns the IP's network
+      type: asn
+      required: false
+    company:
+      title: Company
+      description: Company or ISP mapped to the IP
+      type: company
+      required: false
+    time_zone:
+      title: Time Zone
+      description: Time zone and daylight saving details for the IP location
+      type: time_zone
+      required: false
+    user_agent:
+      title: User Agent
+      description: Parsed user-agent details (returned only when user_agent is included)
+      type: user_agent
+      required: false
+    security:
+      title: Security
+      description: Risk and anonymization signals (returned only when security is included)
+      type: security
+      required: false
+    abuse:
+      title: Abuse Contact
+      description: Network abuse contact (returned only when abuse is included)
+      type: abuse
+      required: false
+    message:
+      title: Message
+      description: Error message for this entry in a bulk response (e.g. bogon or invalid IP)
+      type: string
+      required: false
+
+  # Result item for /v3/security-bulk. An invalid/bogon entry returns only message.
+  security_result:
+    ip:
+      title: IP
+      description: The IP address that was assessed
+      type: string
+      required: false
+    security:
+      title: Security
+      description: Risk and anonymization signals for the IP
+      type: security
+      required: false
+    message:
+      title: Message
+      description: Error message for this entry (e.g. bogon or invalid IP)
+      type: string
+      required: false
+
+  location:
+    continent_code:
+      title: Continent Code
+      description: "Two-letter continent code: AF, AN, AS, EU, NA, OC, or SA"
+      type: string
+      required: false
+    continent_name:
+      title: Continent Name
+      description: Continent name
+      type: string
+      required: false
+    country_code2:
+      title: Country Code 2
+      description: ISO 3166-1 alpha-2 country code
+      type: string
+      required: false
+    country_code3:
+      title: Country Code 3
+      description: ISO 3166-1 alpha-3 country code
+      type: string
+      required: false
+    country_name:
+      title: Country Name
+      description: Common country name
+      type: string
+      required: false
+    country_name_official:
+      title: Official Country Name
+      description: Official ISO-style country name, when it differs from the common name
+      type: string
+      required: false
+    country_capital:
+      title: Country Capital
+      description: Capital city of the country
+      type: string
+      required: false
+    state_prov:
+      title: State / Province
+      description: State, province, or region name
+      type: string
+      required: false
+    state_code:
+      title: State Code
+      description: State, province, or region code, usually ISO 3166-2 or a local short code
+      type: string
+      required: false
+    district:
+      title: District
+      description: District or county name, when available
+      type: string
+      required: false
+    city:
+      title: City
+      description: City name
+      type: string
+      required: false
+    locality:
+      title: Locality
+      description: Neighborhood or suburb within the city, which may match the city (returned only when geo_accuracy is included)
+      type: string
+      required: false
+    accuracy_radius:
+      title: Accuracy Radius
+      description: Estimated accuracy radius in km around the latitude and longitude (returned only when geo_accuracy is included)
+      type: string
+      required: false
+    confidence:
+      title: Confidence
+      description: "Confidence level for the accuracy radius: low, medium, or high (returned only when geo_accuracy is included)"
+      type: string
+      required: false
+    dma_code:
+      title: DMA Code
+      description: US Designated Market Area code, non-empty only for US IPs (returned only when dma_code is included)
+      type: string
+      required: false
+    zipcode:
+      title: ZIP Code
+      description: Postal or ZIP code
+      type: string
+      required: false
+    latitude:
+      title: Latitude
+      description: Latitude in decimal degrees, from -90 to 90
+      type: string
+      required: false
+    longitude:
+      title: Longitude
+      description: Longitude in decimal degrees, from -180 to 180
+      type: string
+      required: false
+    is_eu:
+      title: Is EU
+      description: Whether the country is in the European Union
+      type: boolean
+      required: false
+    country_flag:
+      title: Country Flag
+      description: URL of the country flag image
+      type: string
+      required: false
+    geoname_id:
+      title: GeoName ID
+      description: GeoNames place identifier, when available
+      type: string
+      required: false
+    country_emoji:
+      title: Country Emoji
+      description: Unicode flag emoji for the country
+      type: string
+      required: false
+
+  country_metadata:
+    calling_code:
+      title: Calling Code
+      description: International dialing prefix for the country
+      type: string
+      required: false
+    tld:
+      title: TLD
+      description: Country-code top-level domain
+      type: string
+      required: false
+    languages:
+      title: Languages
+      description: ISO 639-1 language codes commonly spoken in the country
+      type: '[]string'
+      required: false
+
+  currency:
+    code:
+      title: Code
+      description: ISO 4217 currency code
+      type: string
+      required: false
+    name:
+      title: Name
+      description: Currency name
+      type: string
+      required: false
+    symbol:
+      title: Symbol
+      description: Currency symbol
+      type: string
+      required: false
+
+  network:
+    connection_type:
+      title: Connection Type
+      description: Connection type (e.g. DSL, Cable, Mobile, Wireless, 5G) when available
+      type: string
+      required: false
+    route:
+      title: Route
+      description: CIDR network prefix that contains the IP
+      type: string
+      required: false
+    is_anycast:
+      title: Is Anycast
+      description: Whether the IP is announced as anycast from multiple locations
+      type: boolean
+      required: false
+
+  asn:
+    as_number:
+      title: AS Number
+      description: ASN identifier in AS<number> format
+      type: string
+      required: false
+    organization:
+      title: Organization
+      description: Organization that operates the ASN
+      type: string
+      required: false
+    country:
+      title: Country
+      description: ISO 3166-1 alpha-2 country of ASN registration
+      type: string
+      required: false
+    type:
+      title: Type
+      description: "ASN category: ISP, HOSTING, BUSINESS, EDUCATION, or GOVERNMENT (paid plans only)"
+      type: string
+      required: false
+    domain:
+      title: Domain
+      description: Domain associated with the ASN operator (paid plans only)
+      type: string
+      required: false
+    date_allocated:
+      title: Date Allocated
+      description: Date the ASN was allocated in YYYY-MM-DD format (paid plans only)
+      type: string
+      required: false
+    rir:
+      title: RIR
+      description: "Regional Internet Registry: RIPE, ARIN, APNIC, LACNIC, or AFRINIC (paid plans only)"
+      type: string
+      required: false
+
+  company:
+    name:
+      title: Name
+      description: Company or ISP name
+      type: string
+      required: false
+    type:
+      title: Type
+      description: "Company category: ISP, HOSTING, BUSINESS, EDUCATION, or GOVERNMENT"
+      type: string
+      required: false
+    domain:
+      title: Domain
+      description: Company domain
+      type: string
+      required: false
+
+  # Daylight saving transition, used for both dst_start and dst_end.
+  # Empty when the time zone does not observe DST.
+  dst_transition:
+    utc_time:
+      title: UTC Time
+      description: Moment of the transition in UTC
+      type: string
+      required: false
+    duration:
+      title: Duration
+      description: Clock change at the transition, positive when clocks move forward (e.g. +1.00H)
+      type: string
+      required: false
+    gap:
+      title: Gap
+      description: Whether local time jumps forward so that some local times do not exist
+      type: boolean
+      required: false
+    date_time_after:
+      title: Date Time After
+      description: Local date and time immediately after the transition
+      type: string
+      required: false
+    date_time_before:
+      title: Date Time Before
+      description: Local date and time immediately before the transition
+      type: string
+      required: false
+    overlap:
+      title: Overlap
+      description: Whether local times repeat so that the same local time occurs twice
+      type: boolean
+      required: false
+
+  time_zone:
+    name:
+      title: Name
+      description: IANA time zone name (e.g. Europe/Stockholm)
+      type: string
+      required: false
+    offset:
+      title: Offset
+      description: Standard UTC offset in hours
+      type: number
+      required: false
+    offset_with_dst:
+      title: Offset With DST
+      description: Current effective UTC offset in hours, including DST when active
+      type: number
+      required: false
+    current_time:
+      title: Current Time
+      description: Current local date and time at the IP location
+      type: string
+      required: false
+    current_time_unix:
+      title: Current Time Unix
+      description: Current local time as Unix epoch seconds
+      type: number
+      required: false
+    current_tz_abbreviation:
+      title: Current Time Zone Abbreviation
+      description: Abbreviation currently in effect (e.g. CET)
+      type: string
+      required: false
+    current_tz_full_name:
+      title: Current Time Zone Full Name
+      description: Full name of the time zone currently in effect
+      type: string
+      required: false
+    standard_tz_abbreviation:
+      title: Standard Time Zone Abbreviation
+      description: Non-DST abbreviation for the time zone
+      type: string
+      required: false
+    standard_tz_full_name:
+      title: Standard Time Zone Full Name
+      description: Non-DST full name of the time zone
+      type: string
+      required: false
+    is_dst:
+      title: Is DST
+      description: Whether daylight saving time is active at the returned local time
+      type: boolean
+      required: false
+    dst_savings:
+      title: DST Savings
+      description: Daylight saving shift in hours, or 0 when DST is not active
+      type: number
+      required: false
+    dst_exists:
+      title: DST Exists
+      description: Whether the time zone observes DST at any point in the year
+      type: boolean
+      required: false
+    dst_tz_abbreviation:
+      title: DST Time Zone Abbreviation
+      description: Abbreviation used while DST is active (e.g. CEST)
+      type: string
+      required: false
+    dst_tz_full_name:
+      title: DST Time Zone Full Name
+      description: Full time zone name used while DST is active
+      type: string
+      required: false
+    dst_start:
+      title: DST Start
+      description: Details of the transition into daylight saving time
+      type: dst_transition
+      required: false
+    dst_end:
+      title: DST End
+      description: Details of the transition out of daylight saving time
+      type: dst_transition
+      required: false
+
+  user_agent_device:
+    name:
+      title: Name
+      description: Detected device label (e.g. Linux Desktop)
+      type: string
+      required: false
+    type:
+      title: Type
+      description: "Device category, such as Desktop, Mobile, Tablet, or Bot"
+      type: string
+      required: false
+    brand:
+      title: Brand
+      description: Device vendor or brand, when identified
+      type: string
+      required: false
+    cpu:
+      title: CPU
+      description: CPU or architecture string, when detected
+      type: string
+      required: false
+
+  user_agent_engine:
+    name:
+      title: Name
+      description: Rendering engine name (e.g. Blink, WebKit, Gecko)
+      type: string
+      required: false
+    type:
+      title: Type
+      description: Engine category, typically Browser
+      type: string
+      required: false
+    version:
+      title: Version
+      description: Full engine version string
+      type: string
+      required: false
+    version_major:
+      title: Major Version
+      description: Major engine version
+      type: string
+      required: false
+
+  user_agent_operating_system:
+    name:
+      title: Name
+      description: Operating system name (e.g. Linux, Windows, Android)
+      type: string
+      required: false
+    type:
+      title: Type
+      description: "OS category, such as Desktop, Mobile, or Server"
+      type: string
+      required: false
+    version:
+      title: Version
+      description: Operating system version string
+      type: string
+      required: false
+    version_major:
+      title: Major Version
+      description: Major operating system version
+      type: string
+      required: false
+    build:
+      title: Build
+      description: Operating system build identifier, when available
+      type: string
+      required: false
+
+  # Parsed user-agent details, returned only when user_agent is included.
+  user_agent:
+    user_agent_string:
+      title: User Agent String
+      description: Raw User-Agent string that was parsed
+      type: string
+      required: false
+    name:
+      title: Name
+      description: Detected user agent product name (e.g. Chrome)
+      type: string
+      required: false
+    type:
+      title: Type
+      description: "User agent category, such as Browser, Mobile App, Robot, or Bot"
+      type: string
+      required: false
+    version:
+      title: Version
+      description: Full product version string
+      type: string
+      required: false
+    version_major:
+      title: Major Version
+      description: Major product version
+      type: string
+      required: false
+    device:
+      title: Device
+      description: Device details parsed from the user agent
+      type: user_agent_device
+      required: false
+    engine:
+      title: Engine
+      description: Rendering engine details parsed from the user agent
+      type: user_agent_engine
+      required: false
+    operating_system:
+      title: Operating System
+      description: Operating system details parsed from the user agent
+      type: user_agent_operating_system
+      required: false
+
+  security:
+    threat_score:
+      title: Threat Score
+      description: Aggregate risk score from 0 (clean) to 100 (high risk)
+      type: number
+      required: false
+    is_tor:
+      title: Is Tor
+      description: Whether the IP is a known Tor exit node
+      type: boolean
+      required: false
+    is_proxy:
+      title: Is Proxy
+      description: Whether the IP belongs to a known proxy service
+      type: boolean
+      required: false
+    proxy_provider_names:
+      title: Proxy Provider Names
+      description: Names of proxy providers associated with the IP
+      type: '[]string'
+      required: false
+    proxy_confidence_score:
+      title: Proxy Confidence Score
+      description: Confidence from 0 to 100 that the IP is a proxy, defaulting to 0 when not detected
+      type: number
+      required: false
+    proxy_last_seen:
+      title: Proxy Last Seen
+      description: Date the IP was last observed as a proxy (YYYY-MM-DD)
+      type: string
+      required: false
+    is_residential_proxy:
+      title: Is Residential Proxy
+      description: Whether the IP is a known residential proxy
+      type: boolean
+      required: false
+    is_vpn:
+      title: Is VPN
+      description: Whether the IP belongs to a known VPN provider
+      type: boolean
+      required: false
+    vpn_provider_names:
+      title: VPN Provider Names
+      description: Names of VPN providers associated with the IP
+      type: '[]string'
+      required: false
+    vpn_confidence_score:
+      title: VPN Confidence Score
+      description: Confidence from 0 to 100 that the IP is a VPN endpoint, defaulting to 0 when not detected
+      type: number
+      required: false
+    vpn_last_seen:
+      title: VPN Last Seen
+      description: Date the IP was last observed as a VPN endpoint (YYYY-MM-DD)
+      type: string
+      required: false
+    is_relay:
+      title: Is Relay
+      description: Whether the IP is part of a relay network (e.g. iCloud Private Relay)
+      type: boolean
+      required: false
+    relay_provider_name:
+      title: Relay Provider Name
+      description: Relay provider name, when identified
+      type: string
+      required: false
+    is_anonymous:
+      title: Is Anonymous
+      description: Whether any anonymization signal is present (VPN, proxy, Tor, or relay)
+      type: boolean
+      required: false
+    is_known_attacker:
+      title: Is Known Attacker
+      description: Whether the IP is flagged in known attacker or threat feeds
+      type: boolean
+      required: false
+    is_bot:
+      title: Is Bot
+      description: Whether the IP is associated with suspicious or abusive automation. Well-known search engine crawlers are not flagged
+      type: boolean
+      required: false
+    is_spam:
+      title: Is Spam
+      description: Whether the IP is listed in spam databases
+      type: boolean
+      required: false
+    is_cloud_provider:
+      title: Is Cloud Provider
+      description: Whether the IP belongs to a cloud or hosting provider
+      type: boolean
+      required: false
+    cloud_provider_name:
+      title: Cloud Provider Name
+      description: Cloud or hosting provider name, when identified
+      type: string
+      required: false
+
+  abuse:
+    route:
+      title: Route
+      description: CIDR network the abuse contact is responsible for
+      type: string
+      required: false
+    country:
+      title: Country
+      description: ISO 3166-1 alpha-2 country where the abuse contact is registered
+      type: string
+      required: false
+    name:
+      title: Name
+      description: Display name of the abuse contact role, team, or person
+      type: string
+      required: false
+    organization:
+      title: Organization
+      description: Organization responsible for the network
+      type: string
+      required: false
+    kind:
+      title: Kind
+      description: "Contact type: group or individual"
+      type: string
+      required: false
+    address:
+      title: Address
+      description: Registered postal address of the network owner
+      type: string
+      required: false
+    emails:
+      title: Emails
+      description: Abuse contact email addresses
+      type: '[]string'
+      required: false
+    phone_numbers:
+      title: Phone Numbers
+      description: Abuse contact phone numbers
+      type: '[]string'
+      required: false
+
+  # ASN relation used for peers, upstreams, and downstreams in the /v3/asn response.
+  asn_relation:
+    as_number:
+      title: AS Number
+      description: ASN of the related autonomous system
+      type: string
+      required: false
+    description:
+      title: Description
+      description: Name or description of the related autonomous system
+      type: string
+      required: false
+    country:
+      title: Country
+      description: ISO 3166-1 alpha-2 country of the related autonomous system
+      type: string
+      required: false
+
+  # Detailed ASN record returned by the dedicated /v3/asn endpoint.
+  # peers, upstreams, downstreams, routes, and whois_response appear only when included.
+  asn_detail:
+    as_number:
+      title: AS Number
+      description: ASN identifier in AS<number> format
+      type: string
+      required: false
+    organization:
+      title: Organization
+      description: Organization the ASN is assigned to
+      type: string
+      required: false
+    country:
+      title: Country
+      description: ISO 3166-1 alpha-2 country of ASN registration
+      type: string
+      required: false
+    asn_name:
+      title: ASN Name
+      description: Official ASN handle
+      type: string
+      required: false
+    type:
+      title: Type
+      description: "ASN category: ISP, HOSTING, BUSINESS, EDUCATION, or GOVERNMENT"
+      type: string
+      required: false
+    domain:
+      title: Domain
+      description: Domain associated with the ASN operator
+      type: string
+      required: false
+    date_allocated:
+      title: Date Allocated
+      description: Date the ASN was allocated (YYYY-MM-DD)
+      type: string
+      required: false
+    rir:
+      title: RIR
+      description: "Regional Internet Registry: RIPE, ARIN, APNIC, LACNIC, or AFRINIC"
+      type: string
+      required: false
+    allocation_status:
+      title: Allocation Status
+      description: Current allocation status of the ASN (e.g. ASSIGNED, ALLOCATED)
+      type: string
+      required: false
+    num_of_ipv4_routes:
+      title: Number of IPv4 Routes
+      description: Count of distinct IPv4 prefixes announced by the ASN
+      type: string
+      required: false
+    num_of_ipv6_routes:
+      title: Number of IPv6 Routes
+      description: Count of distinct IPv6 prefixes announced by the ASN
+      type: string
+      required: false
+    peers:
+      title: Peers
+      description: Directly connected peer autonomous systems
+      type: '[]asn_relation'
+      required: false
+    upstreams:
+      title: Upstreams
+      description: Upstream (provider) autonomous systems
+      type: '[]asn_relation'
+      required: false
+    downstreams:
+      title: Downstreams
+      description: Downstream (customer) autonomous systems
+      type: '[]asn_relation'
+      required: false
+    routes:
+      title: Routes
+      description: IPv4 and IPv6 prefixes announced by the ASN
+      type: '[]string'
+      required: false
+    whois_response:
+      title: WHOIS Response
+      description: Raw ASN WHOIS record text
+      type: string
+      required: false
