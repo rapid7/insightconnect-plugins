@@ -9,6 +9,8 @@ from .schema import (
 )
 
 # Custom imports below
+from icon_servicenow.util.journal_helper import read_journal_from_incident
+from icon_servicenow.util.validators import validate_record_identifier
 
 
 class GetIncidentCommentsWorknotes(insightconnect_plugin_runtime.Action):
@@ -23,7 +25,7 @@ class GetIncidentCommentsWorknotes(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         table = "sys_journal_field"
         url = f"{self.connection.table_url}{table}"
-        system_id = params.get(Input.SYSTEM_ID)
+        system_id = validate_record_identifier(params.get(Input.SYSTEM_ID), "system ID")
         type_ = "work_notes" if params.get(Input.TYPE) == "work notes" else params.get(Input.TYPE)
         fields = "sys_id,sys_created_on,name,element_id,sys_tags,value,sys_created_by,element"
 
@@ -41,6 +43,14 @@ class GetIncidentCommentsWorknotes(insightconnect_plugin_runtime.Action):
         try:
             result = response.get("resource", {}).get("result")
         except AttributeError:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
+            # make_request returns a dictionary rather than a response object, so the body is read
+            # off it as a whole - response.text would raise an AttributeError of its own here.
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response)
+
+        # The sys_journal_field table enforces its own read ACLs and returns an empty result rather
+        # than an error when they filter the caller out, so fall back to reading the journal from the
+        # incident record, which is gated by the ACLs of the incident itself.
+        if not result:
+            result = read_journal_from_incident(self.connection, self.logger, system_id, type_)
 
         return {Output.INCIDENT_COMMENTS_WORKNOTES: result}

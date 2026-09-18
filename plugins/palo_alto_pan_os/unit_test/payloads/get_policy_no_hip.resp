@@ -1,0 +1,35 @@
+<response status="success"><result>
+ <entry name="PAN-OS 10 Policy" uuid="290ba776-4bd0-49b2-8c20-a35467b22c12">
+  <to>
+   <member>any</member>
+  </to>
+  <from>
+   <member>any</member>
+  </from>
+  <source>
+   <member>1.1.1.1</member>
+  </source>
+  <destination>
+   <member>any</member>
+  </destination>
+  <service>
+   <member>application-default</member>
+  </service>
+  <application>
+   <member>any</member>
+  </application>
+  <category>
+   <member>any</member>
+  </category>
+  <source-hip>
+   <member>any</member>
+  </source-hip>
+  <destination-hip>
+   <member>any</member>
+  </destination-hip>
+  <source-user>
+   <member>any</member>
+  </source-user>
+  <action>allow</action>
+ </entry>
+</result></response>

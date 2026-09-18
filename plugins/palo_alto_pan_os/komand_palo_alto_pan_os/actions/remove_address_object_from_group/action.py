@@ -9,6 +9,7 @@ from .schema import (
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_palo_alto_pan_os.util.util import extract_static_members, get_response_entry
 
 
 class RemoveAddressObjectFromGroup(insightconnect_plugin_runtime.Action):
@@ -26,40 +27,29 @@ class RemoveAddressObjectFromGroup(insightconnect_plugin_runtime.Action):
         device_name = params.get(Input.DEVICE_NAME)
         virtual_system = params.get(Input.VIRTUAL_SYSTEM)
 
-        xpath = f"/config/devices/entry[@name='{device_name}']/vsys/entry[@name='{virtual_system}']/address-group/entry[@name='{group_name}']"
-        response = self.connection.request.get_(xpath)
+        response = self.connection.request.get_address_group(
+            device_name=device_name, virtual_system=virtual_system, group_name=group_name
+        )
 
-        try:
-            address_objects = response.get("response").get("result").get("entry").get("static").get("member")
-
-        except AttributeError:
+        entry = get_response_entry(response)
+        if entry is None:
             raise PluginException(
                 cause="PAN OS returned an unexpected response.",
                 assistance=f"Could not find group '{group_name}', or group was empty. Check the name, virtual system name, and device name.\ndevice name: {device_name}\nvirtual system: {virtual_system}",
                 data=response,
             )
 
-        found = False
-        names = []
-        for name in address_objects:
-            if isinstance(name, str):
-                names.append(name)
-            else:
-                names.append(name.get("#text"))
+        names = extract_static_members(entry, group_name)
 
-        if address_object_name in names:
-            found = True
-            names.remove(address_object_name)
-            xml_str = self.make_xml(names, group_name)
-            self.connection.request.edit_(xpath, xml_str)
+        if address_object_name not in names:
+            self.logger.info(f"Address object '{address_object_name}' was not in group '{group_name}'.")
+            return {Output.SUCCESS: False}
 
-        return {Output.SUCCESS: found}
+        self.connection.request.remove_address_group_member(
+            device_name=device_name,
+            virtual_system=virtual_system,
+            group_name=group_name,
+            member=address_object_name,
+        )
 
-    def make_xml(self, names, group_name):
-        members = ""
-        for name in names:
-            members = members.join(f"<member>{name}</member>")
-
-        xml_template = f'<entry name="{group_name}"><static>{members}</static></entry>'
-
-        return xml_template
+        return {Output.SUCCESS: True}

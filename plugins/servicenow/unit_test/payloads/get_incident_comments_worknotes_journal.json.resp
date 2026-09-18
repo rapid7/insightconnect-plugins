@@ -1,0 +1,24 @@
+{
+  "result": [
+    {
+      "sys_id": "2c6420c31b0000506a4a85507e4bcb82",
+      "sys_created_on": "2019-09-26 21:19:11",
+      "name": "incident",
+      "element_id": "j1",
+      "sys_tags": "",
+      "value": "Team is actively looking into it.",
+      "sys_created_by": "admin",
+      "element": "work_notes"
+    },
+    {
+      "sys_id": "4db0e8cb1bcccc106a4a85507e4bcba2",
+      "sys_created_on": "2019-09-26 21:03:07",
+      "name": "incident",
+      "element_id": "j1",
+      "sys_tags": "",
+      "value": "This is Sev1 incident.",
+      "sys_created_by": "admin",
+      "element": "comments"
+    }
+  ]
+}

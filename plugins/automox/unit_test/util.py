@@ -165,6 +165,10 @@ def mock_request_post_201_invalid_json(*args, **kwargs) -> MockResponse:
     return mock_conditions("POST", args[0], 201, **kwargs)
 
 
+def mock_request_post_400(*args, **kwargs) -> MockResponse:
+    return mock_conditions("POST", args[0], 400, **kwargs)
+
+
 def mock_request_403(*args, **kwargs) -> MockResponse:
     return mock_conditions(args[0], args[1], 403, **kwargs)
 

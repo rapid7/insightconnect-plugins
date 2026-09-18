@@ -5,6 +5,7 @@ from .schema import GetAttachmentsForAnIncidentInput, GetAttachmentsForAnInciden
 
 # Custom imports below
 from icon_servicenow.util.request_helper import RequestHelper
+from icon_servicenow.util.validators import validate_record_identifier
 
 
 class GetAttachmentsForAnIncident(insightconnect_plugin_runtime.Action):
@@ -17,8 +18,9 @@ class GetAttachmentsForAnIncident(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        incident_id = validate_record_identifier(params.get(Input.INCIDENT_ID), "incident ID")
         response = self.connection.request.make_request(
-            f"{self.connection.attachment_url}?sysparm_query=table_sys_id={params.get(Input.INCIDENT_ID)}", "get"
+            f"{self.connection.attachment_url}?sysparm_query=table_sys_id={incident_id}", "get"
         )
         try:
             attachment = response.get("resource", {}).get("result")

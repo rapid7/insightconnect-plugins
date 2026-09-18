@@ -124,6 +124,7 @@ This can then be pasted into the Connection's `key` input field
 
 # Version History
 
+* 4.0.6 - Action: `Run Remote Command` - Fix issue where action was failing on long commands | Fix duplicate blank lines in output
 * 4.0.5 - Updated dependencies | Updated SDK to the latest version (6.6.0)
 * 4.0.4 - Updated SDK to the latest version (6.2.5)
 * 4.0.3 - Updated dependencies | Updated SDK to the latest version

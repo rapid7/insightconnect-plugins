@@ -99,6 +99,121 @@ class TestRemoveFromPolicy(TestCase):
     @parameterized.expand(
         [
             [
+                "removes_a_value_from_every_key_that_holds_it",
+                {
+                    Input.SERVICE: "any",
+                    Input.URL_CATEGORY: "adult",
+                    Input.SOURCE_USER: "Example User",
+                    Input.ACTION: "allow",
+                },
+                '<entry name="Test Policy">'
+                "<to><member>any</member></to>"
+                "<from><member>any</member></from>"
+                "<source><member>any</member></source>"
+                "<destination><member>any</member></destination>"
+                "<service><member>application-default</member></service>"
+                "<application><member>any</member></application>"
+                "<category><member>abused-drugs</member></category>"
+                "<hip-profiles><member>any</member></hip-profiles>"
+                "<source-user><member>Joe Smith</member></source-user>"
+                "<action>drop</action>"
+                "</entry>",
+            ],
+            [
+                "leaves_every_key_alone_when_nothing_is_given",
+                {},
+                '<entry name="Test Policy">'
+                "<to><member>any</member></to>"
+                "<from><member>any</member></from>"
+                "<source><member>any</member></source>"
+                "<destination><member>any</member></destination>"
+                "<service><member>application-default</member><member>any</member></service>"
+                "<application><member>any</member></application>"
+                "<category><member>adult</member><member>abused-drugs</member></category>"
+                "<hip-profiles><member>any</member></hip-profiles>"
+                "<source-user><member>Joe Smith</member></source-user>"
+                "<action>drop</action>"
+                "</entry>",
+            ],
+            # Removing the 'any' keyword from a key that already holds it narrows nothing, so the rule
+            # is left as it is rather than the removal being refused
+            [
+                "leaves_a_wildcard_key_alone",
+                {Input.SOURCE: "any", Input.SRC_ZONE: "any"},
+                '<entry name="Test Policy">'
+                "<to><member>any</member></to>"
+                "<from><member>any</member></from>"
+                "<source><member>any</member></source>"
+                "<destination><member>any</member></destination>"
+                "<service><member>application-default</member><member>any</member></service>"
+                "<application><member>any</member></application>"
+                "<category><member>adult</member><member>abused-drugs</member></category>"
+                "<hip-profiles><member>any</member></hip-profiles>"
+                "<source-user><member>Joe Smith</member></source-user>"
+                "<action>drop</action>"
+                "</entry>",
+            ],
+        ]
+    )
+    def test_remove_from_policy_element(
+        self,
+        mock_get: MagicMock,
+        mock_post: MagicMock,
+        name: str,
+        removals: dict,
+        expected_element: str,
+    ) -> None:
+        action = Util.default_connector(RemoveFromPolicy())
+        input_data = {
+            Input.RULE_NAME: "Test Policy",
+            Input.UPDATE_ACTIVE_OR_CANDIDATE_CONFIGURATION: "candidate",
+            **removals,
+        }
+        validate(input_data, RemoveFromPolicyInput.schema)
+        action.run(input_data)
+
+        writes = [call for call in Util.calls if call.get("action") == "edit"]
+        self.assertEqual(len(writes), 1)
+        # The action is never removed: a security rule always has exactly one, so the rule keeps it
+        self.assertEqual(writes[0].get("element"), expected_element)
+
+    def test_remove_from_policy_omits_hip_profiles_when_the_rule_has_none(
+        self, mock_get: MagicMock, mock_post: MagicMock
+    ) -> None:
+        # PAN-OS 10.0 removed <hip-profiles> from the security rule, so writing one back to a rule that
+        # does not carry it is rejected. The HIP Profiles input is ignored for such a rule.
+        action = Util.default_connector(RemoveFromPolicy())
+        input_data = {
+            Input.RULE_NAME: "PAN-OS 10 Policy",
+            Input.UPDATE_ACTIVE_OR_CANDIDATE_CONFIGURATION: "candidate",
+            Input.DESTINATION: "any",
+            Input.HIP_PROFILES: "Corporate Laptops",
+        }
+        validate(input_data, RemoveFromPolicyInput.schema)
+        action.run(input_data)
+
+        writes = [call for call in Util.calls if call.get("action") == "edit"]
+        self.assertEqual(len(writes), 1)
+        # <source-hip> and <destination-hip> are dropped too, because the write replaces the whole
+        # <entry>. That is tracked separately and is not what this test covers.
+        self.assertEqual(
+            writes[0].get("element"),
+            '<entry name="PAN-OS 10 Policy">'
+            "<to><member>any</member></to>"
+            "<from><member>any</member></from>"
+            "<source><member>1.1.1.1</member></source>"
+            "<destination><member>any</member></destination>"
+            "<service><member>application-default</member></service>"
+            "<application><member>any</member></application>"
+            "<category><member>any</member></category>"
+            "<source-user><member>any</member></source-user>"
+            "<action>allow</action>"
+            "</entry>",
+        )
+
+    @parameterized.expand(
+        [
+            [
                 "invalid_rule_name",
                 "Invalid Rule Name",
                 "active",

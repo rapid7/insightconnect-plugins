@@ -1,0 +1,7 @@
+{
+  "error": {
+    "message": "Insufficient rights",
+    "detail": "Insufficient rights to query records"
+  },
+  "status": "failure"
+}
