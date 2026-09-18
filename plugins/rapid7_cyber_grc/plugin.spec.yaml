@@ -1,0 +1,4976 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: rapid7_cyber_grc
+title: Rapid7 Cyber GRC
+description: Rapid7 Cyber GRC is a governance, risk, and compliance solution. This plugin manages risks, incidents, tasks, audits, control sets, assessments, vendors, certifications, IT assets, and users, and uploads evidence through the Flat File API
+version: 1.0.0
+connection_version: 1
+cloud_ready: true
+enable_cache: true
+supported_versions: ["Rapid7 Cyber GRC Web API v2", "Rapid7 Cyber GRC API v1"]
+vendor: rapid7
+support: rapid7
+status: []
+sdk:
+  type: slim
+  version: 6.6.0
+  user: nobody
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_cyber_grc
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.rapid7.com
+key_features:
+- Read, create, update, and delete risks, incidents, tasks, audits, control sets, assessments, vendors, certifications, IT assets, and users
+- Query any Cyber GRC record type using OData filters, with automatic paging
+- Retrieve the change history of a record
+- Upload evidence to Cyber GRC with the Flat File API
+- Read the compliance score and automated controls score of each framework
+- Read, create, update, and delete contracts, and find the ones renewing soon
+- Comment on a record so a workflow can mirror a comment made in a chat or ticketing system
+- Trigger workflows when records are created or updated, or when a framework's compliance score falls
+requirements:
+- A Cyber GRC API key
+- The base URL of your Cyber GRC API host
+links:
+- "[Rapid7 Cyber GRC](https://www.rapid7.com)"
+references:
+- "[Rapid7 Cyber GRC API reference](https://compyl.readme.io/reference/)"
+- "[Managing your API keys](https://compyl.readme.io/reference/getting-started)"
+troubleshooting:
+- "The URL is the Cyber GRC API host, which is a different host from the one used to sign in to the web interface. If requests answer with the sign-in page instead of JSON, the URL is pointing at the web interface rather than the API"
+- "Every read action accepts OData query options. When an action returns no records, check the Filter expression against the API reference first, because the API rejects an invalid $filter with a 400 response rather than returning an empty result"
+- "An API key carries the permissions of the user it is assigned to, so a 403 response means that user cannot see or change the record in question"
+- "A 401 response does not always mean the API key is wrong. Any path the API does not recognise, such as a misspelled record type or a URL that already ends in /api/v2, falls through to the interactive sign-in scheme and is answered with a 401 whose scheme is not ApiKey. The plugin reports that case separately, so read the error text before regenerating the key"
+- "The typed actions, such as Get Risks, declare the type of every field they return, and a step fails validation if the API answers with a different type than the record schema documents. Generic List Records returns the same records as untyped objects and can be used as a workaround while the mismatch is reported to Rapid7 support"
+- "Upload Flat File calls the v1 Flat File API. On some deployments that endpoint authenticates interactive sessions rather than API keys, and answers 401 with a scheme of compyl-microsoft. If that happens, ask Rapid7 support to enable API key access to the Flat File API for the tenant"
+tags:
+- grc
+- compliance
+- risk
+- audit
+- rapid7
+hub_tags:
+  use_cases: [remediation_management, reporting_and_analytics, asset_inventory]
+  keywords: [incidents, incident_response, reporting, ticketing]
+  features: []
+version_history:
+- "1.0.0 - Initial plugin"
+connection:
+  url:
+    title: "URL"
+    description: "Base URL of the Cyber GRC API host, without a trailing path"
+    type: string
+    required: true
+    example: "https://app-example-std-use2-api-01.azurewebsites.net"
+    order: 1
+  api_key:
+    title: "API Key"
+    description: "A Cyber GRC API key, generated under Settings then API Keys. The key inherits the permissions of the user it is assigned to"
+    type: credential_secret_key
+    required: true
+    example: "cpyl_0000000000000000000000000000000000000000000000"
+    order: 2
+  ssl_verify:
+    title: "SSL Verify"
+    description: "Verify the TLS certificate presented by the Cyber GRC API host"
+    type: boolean
+    required: true
+    default: true
+    example: true
+    order: 3
+types:
+  risk:
+    vendors:
+      title: "Vendors"
+      description: "Vendors"
+      type: "[]risk_vendor_risk_lookup"
+      order: 1
+    controls:
+      title: "Controls"
+      description: "Controls"
+      type: "[]risk_control_lookup"
+      order: 2
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 3
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 4
+    description:
+      title: "Description"
+      description: "Description"
+      type: string
+      order: 5
+    businessImpact:
+      title: "Business Impact"
+      description: "Business Impact"
+      type: string
+      order: 6
+    possibleOutcome:
+      title: "Possible Outcome"
+      description: "Possible Outcome"
+      type: string
+      order: 7
+    complexity:
+      title: "Complexity"
+      description: "Complexity"
+      type: string
+      order: 8
+    effort:
+      title: "Effort"
+      description: "Effort"
+      type: string
+      order: 9
+    effortInDays:
+      title: "Effort In Days"
+      description: "Effort In Days"
+      type: integer
+      order: 10
+    riskDecision:
+      title: "Risk Decision"
+      description: "Risk Decision"
+      type: string
+      order: 11
+    estimatedRemainingRisk:
+      title: "Estimated Remaining Risk"
+      description: "Estimated Remaining Risk"
+      type: integer
+      order: 12
+    dueDate:
+      title: "Due Date"
+      description: "Due Date"
+      type: date
+      order: 13
+    completedDate:
+      title: "Completed Date"
+      description: "Completed Date"
+      type: date
+      order: 14
+    inherentRiskScore:
+      title: "Inherent Risk Score"
+      description: "Inherent Risk Score"
+      type: float
+      order: 15
+    residualRisk:
+      title: "Residual Risk"
+      description: "Residual Risk"
+      type: float
+      order: 16
+    effortScore:
+      title: "Effort Score"
+      description: "Effort Score"
+      type: integer
+      order: 17
+    inherentCost:
+      title: "Inherent Cost"
+      description: "Inherent Cost"
+      type: float
+      order: 18
+    daysUntilDueDate:
+      title: "Days Until Due Date"
+      description: "Days Until Due Date"
+      type: integer
+      order: 19
+    residualCost:
+      title: "Residual Cost"
+      description: "Residual Cost"
+      type: float
+      order: 20
+    priorityBasedOnRisk:
+      title: "Priority Based On Risk"
+      description: "Priority Based On Risk"
+      type: float
+      order: 21
+    likelihoodID:
+      title: "Likelihood ID"
+      description: "Likelihood ID"
+      type: integer
+      order: 22
+    impactID:
+      title: "Impact ID"
+      description: "Impact ID"
+      type: integer
+      order: 23
+    riskCategoryID:
+      title: "Risk Category ID"
+      description: "Risk Category ID"
+      type: integer
+      order: 24
+    statusID:
+      title: "Status ID"
+      description: "Status ID"
+      type: integer
+      order: 25
+    assessmentID:
+      title: "Assessment ID"
+      description: "Assessment ID"
+      type: integer
+      order: 26
+    discussionFieldID:
+      title: "Discussion Field ID"
+      description: "Discussion Field ID"
+      type: integer
+      order: 27
+    createdDate:
+      title: "Created Date"
+      description: "Created Date"
+      type: date
+      order: 28
+    modifiedDate:
+      title: "Modified Date"
+      description: "Modified Date"
+      type: date
+      order: 29
+    createdBy:
+      title: "Created By"
+      description: "Created By"
+      type: string
+      order: 30
+    modifiedBy:
+      title: "Modified By"
+      description: "Modified By"
+      type: string
+      order: 31
+    tasks:
+      title: "Tasks"
+      description: "Tasks"
+      type: "[]task_lookup"
+      order: 32
+    itAssets:
+      title: "IT Assets"
+      description: "IT Assets"
+      type: "[]it_asset_lookup"
+      order: 33
+    departments:
+      title: "Departments"
+      description: "Departments"
+      type: "[]department_lookup"
+      order: 34
+    tags:
+      title: "Tags"
+      description: "Tags"
+      type: "[]tag_lookup"
+      order: 35
+    extendedFields:
+      title: "Extended Fields"
+      description: "Extended Fields"
+      type: object
+      order: 36
+  risk_vendor_risk_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  risk_control_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  task_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  it_asset_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  department_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  tag_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  incident:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+    description:
+      title: "Description"
+      description: "Description"
+      type: string
+      order: 3
+    howIdentified:
+      title: "How Identified"
+      description: "How Identified"
+      type: string
+      order: 4
+    identifiedDate:
+      title: "Identified Date"
+      description: "Identified Date"
+      type: date
+      order: 5
+    howOccurred:
+      title: "How Occurred"
+      description: "How Occurred"
+      type: string
+      order: 6
+    occuredDate:
+      title: "Occured Date"
+      description: "Occured Date"
+      type: date
+      order: 7
+    impactType:
+      title: "Impact Type"
+      description: "Impact Type"
+      type: string
+      order: 8
+    monetaryImpact:
+      title: "Monetary Impact"
+      description: "Monetary Impact"
+      type: integer
+      order: 9
+    rootCause:
+      title: "Root Cause"
+      description: "Root Cause"
+      type: string
+      order: 10
+    lessonsLearned:
+      title: "Lessons Learned"
+      description: "Lessons Learned"
+      type: string
+      order: 11
+    immediateAction:
+      title: "Immediate Action"
+      description: "Immediate Action"
+      type: string
+      order: 12
+    sendReminders:
+      title: "Send Reminders"
+      description: "Send Reminders"
+      type: boolean
+      order: 13
+    customerDataImpacted:
+      title: "Customer Data Impacted"
+      description: "Customer Data Impacted"
+      type: boolean
+      order: 14
+    confidentialDataImpacted:
+      title: "Confidential Data Impacted"
+      description: "Confidential Data Impacted"
+      type: boolean
+      order: 15
+    nonConfidentialDataImpacted:
+      title: "Non Confidential Data Impacted"
+      description: "Non Confidential Data Impacted"
+      type: boolean
+      order: 16
+    personalIdentifiableInfoImpacted:
+      title: "Personal Identifiable Info Impacted"
+      description: "Personal Identifiable Info Impacted"
+      type: boolean
+      order: 17
+    reputationalDamage:
+      title: "Reputational Damage"
+      description: "Reputational Damage"
+      type: boolean
+      order: 18
+    investigationsFines:
+      title: "Investigations Fines"
+      description: "Investigations Fines"
+      type: boolean
+      order: 19
+    materialImpact:
+      title: "Material Impact"
+      description: "Material Impact"
+      type: boolean
+      order: 20
+    realizedFinancialLoss:
+      title: "Realized Financial Loss"
+      description: "Realized Financial Loss"
+      type: boolean
+      order: 21
+    clientSecurityAssessmentsIssued:
+      title: "Client Security Assessments Issued"
+      description: "Client Security Assessments Issued"
+      type: boolean
+      order: 22
+    statusID:
+      title: "Status ID"
+      description: "Status ID"
+      type: integer
+      order: 23
+    locationID:
+      title: "Location ID"
+      description: "Location ID"
+      type: integer
+      order: 24
+    discussionFieldID:
+      title: "Discussion Field ID"
+      description: "Discussion Field ID"
+      type: integer
+      order: 25
+    createdDate:
+      title: "Created Date"
+      description: "Created Date"
+      type: date
+      order: 26
+    modifiedDate:
+      title: "Modified Date"
+      description: "Modified Date"
+      type: date
+      order: 27
+    createdBy:
+      title: "Created By"
+      description: "Created By"
+      type: string
+      order: 28
+    modifiedBy:
+      title: "Modified By"
+      description: "Modified By"
+      type: string
+      order: 29
+    tasks:
+      title: "Tasks"
+      description: "Tasks"
+      type: "[]task_lookup"
+      order: 30
+    tags:
+      title: "Tags"
+      description: "Tags"
+      type: "[]tag_lookup"
+      order: 31
+    departments:
+      title: "Departments"
+      description: "Departments"
+      type: "[]department_lookup"
+      order: 32
+    extendedFields:
+      title: "Extended Fields"
+      description: "Extended Fields"
+      type: object
+      order: 33
+  task:
+    vendors:
+      title: "Vendors"
+      description: "Vendors"
+      type: "[]task_vendor_lookup"
+      order: 1
+    risks:
+      title: "Risks"
+      description: "Risks"
+      type: "[]task_risk_lookup"
+      order: 2
+    controls:
+      title: "Controls"
+      description: "Controls"
+      type: "[]task_control_lookup"
+      order: 3
+    itAssets:
+      title: "IT Assets"
+      description: "IT Assets"
+      type: "[]task_it_asset_lookup"
+      order: 4
+    clients:
+      title: "Clients"
+      description: "Clients"
+      type: "[]task_client_lookup"
+      order: 5
+    assessments:
+      title: "Assessments"
+      description: "Assessments"
+      type: "[]task_assessment_lookup"
+      order: 6
+    contracts:
+      title: "Contracts"
+      description: "Contracts"
+      type: "[]task_contract_lookup"
+      order: 7
+    audits:
+      title: "Audits"
+      description: "Audits"
+      type: "[]task_audit_lookup"
+      order: 8
+    incidents:
+      title: "Incidents"
+      description: "Incidents"
+      type: "[]task_incident_lookup"
+      order: 9
+    departments:
+      title: "Departments"
+      description: "Departments"
+      type: "[]task_department_lookup"
+      order: 10
+    locations:
+      title: "Locations"
+      description: "Locations"
+      type: "[]task_location_lookup"
+      order: 11
+    securityPolicies:
+      title: "Security Policies"
+      description: "Security Policies"
+      type: "[]task_security_policy_lookup"
+      order: 12
+    queries:
+      title: "Queries"
+      description: "Queries"
+      type: "[]task_query_lookup"
+      order: 13
+    integrations:
+      title: "Integrations"
+      description: "Integrations"
+      type: "[]task_integration_lookup"
+      order: 14
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 15
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 16
+    description:
+      title: "Description"
+      description: "Description"
+      type: string
+      order: 17
+    taskTypeID:
+      title: "Task Type ID"
+      description: "Task Type ID"
+      type: integer
+      order: 18
+    isArchived:
+      title: "Is Archived"
+      description: "Is Archived"
+      type: boolean
+      order: 19
+    trend:
+      title: "Trend"
+      description: "Trend"
+      type: string
+      order: 20
+    compliance:
+      title: "Compliance"
+      description: "Compliance"
+      type: integer
+      order: 21
+    instructions:
+      title: "Instructions"
+      description: "Instructions"
+      type: string
+      order: 22
+    requireAcknowledgement:
+      title: "Require Acknowledgement"
+      description: "Require Acknowledgement"
+      type: boolean
+      order: 23
+    approvalStatus:
+      title: "Approval Status"
+      description: "Approval Status"
+      type: boolean
+      order: 24
+    raiseServiceRequest:
+      title: "Raise Service Request"
+      description: "Raise Service Request"
+      type: boolean
+      order: 25
+    startDate:
+      title: "Start Date"
+      description: "Start Date"
+      type: date
+      order: 26
+    endDate:
+      title: "End Date"
+      description: "End Date"
+      type: date
+      order: 27
+    dueDate:
+      title: "Due Date"
+      description: "Due Date"
+      type: date
+      order: 28
+    isEnabled:
+      title: "Is Enabled"
+      description: "Is Enabled"
+      type: boolean
+      order: 29
+    shouldReset:
+      title: "Should Reset"
+      description: "Should Reset"
+      type: boolean
+      order: 30
+    shouldRepeat:
+      title: "Should Repeat"
+      description: "Should Repeat"
+      type: boolean
+      order: 31
+    isDynamicOwnership:
+      title: "Is Dynamic Ownership"
+      description: "Is Dynamic Ownership"
+      type: boolean
+      order: 32
+    frequency:
+      title: "Frequency"
+      description: "Frequency"
+      type: integer
+      order: 33
+    sendReminders:
+      title: "Send Reminders"
+      description: "Send Reminders"
+      type: boolean
+      order: 34
+    isQueryDriven:
+      title: "Is Query Driven"
+      description: "Is Query Driven"
+      type: boolean
+      order: 35
+    primaryDriver:
+      title: "Primary Driver"
+      description: "Primary Driver"
+      type: integer
+      order: 36
+    statusID:
+      title: "Status ID"
+      description: "Status ID"
+      type: integer
+      order: 37
+    discussionFieldID:
+      title: "Discussion Field ID"
+      description: "Discussion Field ID"
+      type: integer
+      order: 38
+    compylKey:
+      title: "Rapid7 Key"
+      description: "Rapid7 Key"
+      type: string
+      order: 39
+    isAuditorRequest:
+      title: "Is Auditor Request"
+      description: "Is Auditor Request"
+      type: boolean
+      order: 40
+    isGeneratedByAI:
+      title: "Is Generated By AI"
+      description: "Is Generated By AI"
+      type: boolean
+      order: 41
+    compylAIEventGuid:
+      title: "Rapid7 AI Event GUID"
+      description: "Rapid7 AI Event GUID"
+      type: string
+      order: 42
+    createdDate:
+      title: "Created Date"
+      description: "Created Date"
+      type: date
+      order: 43
+    modifiedDate:
+      title: "Modified Date"
+      description: "Modified Date"
+      type: date
+      order: 44
+    createdBy:
+      title: "Created By"
+      description: "Created By"
+      type: string
+      order: 45
+    modifiedBy:
+      title: "Modified By"
+      description: "Modified By"
+      type: string
+      order: 46
+    assignedTo:
+      title: "Assigned To"
+      description: "Assigned To"
+      type: entity_user
+      order: 47
+    extendedFields:
+      title: "Extended Fields"
+      description: "Extended Fields"
+      type: object
+      order: 48
+  task_vendor_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  task_risk_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  task_control_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  task_it_asset_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  task_client_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  task_assessment_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  task_contract_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  task_audit_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  task_incident_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  task_department_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  task_location_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  task_security_policy_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  task_query_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  task_integration_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  entity_user:
+    title:
+      title: "Title"
+      description: "Title"
+      type: string
+      order: 1
+    userEmail:
+      title: "User Email"
+      description: "User Email"
+      type: string
+      order: 2
+    userFirstName:
+      title: "User First Name"
+      description: "User First Name"
+      type: string
+      order: 3
+    userLastName:
+      title: "User Last Name"
+      description: "User Last Name"
+      type: string
+      order: 4
+    usersID:
+      title: "Users ID"
+      description: "Users ID"
+      type: integer
+      order: 5
+    associatedUserID:
+      title: "Associated User ID"
+      description: "Associated User ID"
+      type: integer
+      order: 6
+    active:
+      title: "Active"
+      description: "Active"
+      type: boolean
+      order: 7
+    raciOption:
+      title: "RACI Option"
+      description: "RACI Option"
+      type: integer
+      order: 8
+  audit:
+    frequencyName:
+      title: "Frequency Name"
+      description: "Frequency Name"
+      type: string
+      order: 1
+    controlSet:
+      title: "Control Set"
+      description: "Control Set"
+      type: audit_control_set_lookup
+      order: 2
+    auditUsers:
+      title: "Audit Users"
+      description: "Audit Users"
+      type: "[]audit_audit_user_lookup"
+      order: 3
+    documents:
+      title: "Documents"
+      description: "Documents"
+      type: "[]audit_document_lookup"
+      order: 4
+    auditorFindings:
+      title: "Auditor Findings"
+      description: "Auditor Findings"
+      type: "[]audit_auditor_finding_lookup"
+      order: 5
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 6
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 7
+    description:
+      title: "Description"
+      description: "Description"
+      type: string
+      order: 8
+    status:
+      title: "Status"
+      description: "Status"
+      type: string
+      order: 9
+    observationPeriodStart:
+      title: "Observation Period Start"
+      description: "Observation Period Start"
+      type: date
+      order: 10
+    observationPeriodEnd:
+      title: "Observation Period End"
+      description: "Observation Period End"
+      type: date
+      order: 11
+    startDate:
+      title: "Start Date"
+      description: "Start Date"
+      type: date
+      order: 12
+    endDate:
+      title: "End Date"
+      description: "End Date"
+      type: date
+      order: 13
+    frequency:
+      title: "Frequency"
+      description: "Frequency"
+      type: integer
+      order: 14
+    controlSetID:
+      title: "Control Set ID"
+      description: "Control Set ID"
+      type: integer
+      order: 15
+    discussionFieldID:
+      title: "Discussion Field ID"
+      description: "Discussion Field ID"
+      type: integer
+      order: 16
+    isArchived:
+      title: "Is Archived"
+      description: "Is Archived"
+      type: boolean
+      order: 17
+    createdDate:
+      title: "Created Date"
+      description: "Created Date"
+      type: date
+      order: 18
+    modifiedDate:
+      title: "Modified Date"
+      description: "Modified Date"
+      type: date
+      order: 19
+    createdBy:
+      title: "Created By"
+      description: "Created By"
+      type: string
+      order: 20
+    modifiedBy:
+      title: "Modified By"
+      description: "Modified By"
+      type: string
+      order: 21
+    assessments:
+      title: "Assessments"
+      description: "Assessments"
+      type: "[]assessment_lookup"
+      order: 22
+    tasks:
+      title: "Tasks"
+      description: "Tasks"
+      type: "[]task_lookup"
+      order: 23
+    tags:
+      title: "Tags"
+      description: "Tags"
+      type: "[]tag_lookup"
+      order: 24
+    extendedFields:
+      title: "Extended Fields"
+      description: "Extended Fields"
+      type: object
+      order: 25
+  audit_control_set_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  audit_audit_user_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+    usersID:
+      title: "Users ID"
+      description: "Users ID"
+      type: integer
+      order: 3
+    userEmail:
+      title: "User Email"
+      description: "User Email"
+      type: string
+      order: 4
+    userFirstName:
+      title: "User First Name"
+      description: "User First Name"
+      type: string
+      order: 5
+    userLastName:
+      title: "User Last Name"
+      description: "User Last Name"
+      type: string
+      order: 6
+    title:
+      title: "Title"
+      description: "Title"
+      type: string
+      order: 7
+    active:
+      title: "Active"
+      description: "Active"
+      type: boolean
+      order: 8
+  audit_document_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  audit_auditor_finding_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  assessment_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  control_set:
+    controls:
+      title: "Controls"
+      description: "Controls"
+      type: "[]control_set_control_lookup"
+      order: 1
+    assessments:
+      title: "Assessments"
+      description: "Assessments"
+      type: "[]control_set_control_set_assessment_lookup"
+      order: 2
+    itAssets:
+      title: "IT Assets"
+      description: "IT Assets"
+      type: "[]control_set_control_set_it_asset_lookup"
+      order: 3
+    audits:
+      title: "Audits"
+      description: "Audits"
+      type: "[]control_set_audit_lookup"
+      order: 4
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 5
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 6
+    description:
+      title: "Description"
+      description: "Description"
+      type: string
+      order: 7
+    type:
+      title: "Type"
+      description: "Type"
+      type: integer
+      order: 8
+    enabled:
+      title: "Enabled"
+      description: "Enabled"
+      type: boolean
+      order: 9
+    isArchived:
+      title: "Is Archived"
+      description: "Is Archived"
+      type: boolean
+      order: 10
+    compliance:
+      title: "Compliance"
+      description: "Compliance"
+      type: integer
+      order: 11
+    compylKey:
+      title: "Rapid7 Key"
+      description: "Rapid7 Key"
+      type: string
+      order: 12
+    securityPolicyInfoID:
+      title: "Security Policy Info ID"
+      description: "Security Policy Info ID"
+      type: integer
+      order: 13
+    discussionFieldID:
+      title: "Discussion Field ID"
+      description: "Discussion Field ID"
+      type: integer
+      order: 14
+    createdDate:
+      title: "Created Date"
+      description: "Created Date"
+      type: date
+      order: 15
+    modifiedDate:
+      title: "Modified Date"
+      description: "Modified Date"
+      type: date
+      order: 16
+    createdBy:
+      title: "Created By"
+      description: "Created By"
+      type: string
+      order: 17
+    modifiedBy:
+      title: "Modified By"
+      description: "Modified By"
+      type: string
+      order: 18
+  control_set_control_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  control_set_control_set_assessment_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  control_set_control_set_it_asset_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  control_set_audit_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  assessment:
+    users:
+      title: "Users"
+      description: "Users"
+      type: "[]assessment_user_lookup"
+      order: 1
+    risks:
+      title: "Risks"
+      description: "Risks"
+      type: "[]assessment_risk_lookup"
+      order: 2
+    tasks:
+      title: "Tasks"
+      description: "Tasks"
+      type: "[]assessment_task_lookup"
+      order: 3
+    audits:
+      title: "Audits"
+      description: "Audits"
+      type: "[]assessment_audit_lookup"
+      order: 4
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 5
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 6
+    startDate:
+      title: "Start Date"
+      description: "Start Date"
+      type: date
+      order: 7
+    dueDate:
+      title: "Due Date"
+      description: "Due Date"
+      type: date
+      order: 8
+    description:
+      title: "Description"
+      description: "Description"
+      type: string
+      order: 9
+    compliance:
+      title: "Compliance"
+      description: "Compliance"
+      type: integer
+      order: 10
+    trend:
+      title: "Trend"
+      description: "Trend"
+      type: string
+      order: 11
+    wasSubmitted:
+      title: "Was Submitted"
+      description: "Was Submitted"
+      type: boolean
+      order: 12
+    isAccepted:
+      title: "Is Accepted"
+      description: "Is Accepted"
+      type: boolean
+      order: 13
+    submittedDate:
+      title: "Submitted Date"
+      description: "Submitted Date"
+      type: date
+      order: 14
+    summary:
+      title: "Summary"
+      description: "Summary"
+      type: string
+      order: 15
+    formEntryName:
+      title: "Form Entry Name"
+      description: "Form Entry Name"
+      type: string
+      order: 16
+    enabled:
+      title: "Enabled"
+      description: "Enabled"
+      type: boolean
+      order: 17
+    shouldRepeat:
+      title: "Should Repeat"
+      description: "Should Repeat"
+      type: boolean
+      order: 18
+    shouldPopulateAnswers:
+      title: "Should Populate Answers"
+      description: "Should Populate Answers"
+      type: boolean
+      order: 19
+    timesDuplicated:
+      title: "Times Duplicated"
+      description: "Times Duplicated"
+      type: integer
+      order: 20
+    frequency:
+      title: "Frequency"
+      description: "Frequency"
+      type: integer
+      order: 21
+    discussionFieldID:
+      title: "Discussion Field ID"
+      description: "Discussion Field ID"
+      type: integer
+      order: 22
+    createdDate:
+      title: "Created Date"
+      description: "Created Date"
+      type: date
+      order: 23
+    modifiedDate:
+      title: "Modified Date"
+      description: "Modified Date"
+      type: date
+      order: 24
+    createdBy:
+      title: "Created By"
+      description: "Created By"
+      type: string
+      order: 25
+    modifiedBy:
+      title: "Modified By"
+      description: "Modified By"
+      type: string
+      order: 26
+  assessment_user_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+    email:
+      title: "Email"
+      description: "Email"
+      type: string
+      order: 3
+  assessment_risk_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  assessment_task_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  assessment_audit_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  vendor:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+    description:
+      title: "Description"
+      description: "Description"
+      type: string
+      order: 3
+    type:
+      title: "Type"
+      description: "Type"
+      type: string
+      order: 4
+    isNDASigned:
+      title: "Is NDA Signed"
+      description: "Is NDA Signed"
+      type: boolean
+      order: 5
+    isHoldingClientData:
+      title: "Is Holding Client Data"
+      description: "Is Holding Client Data"
+      type: boolean
+      order: 6
+    isHoldingPersonalData:
+      title: "Is Holding Personal Data"
+      description: "Is Holding Personal Data"
+      type: boolean
+      order: 7
+    discussionFieldID:
+      title: "Discussion Field ID"
+      description: "Discussion Field ID"
+      type: integer
+      order: 8
+    accessStartDate:
+      title: "Access Start Date"
+      description: "Access Start Date"
+      type: date
+      order: 9
+    accessEndDate:
+      title: "Access End Date"
+      description: "Access End Date"
+      type: date
+      order: 10
+    dateFounded:
+      title: "Date Founded"
+      description: "Date Founded"
+      type: date
+      order: 11
+    publicDescription:
+      title: "Public Description"
+      description: "Public Description"
+      type: string
+      order: 12
+    typeOfAsset:
+      title: "Type Of Asset"
+      description: "Type Of Asset"
+      type: string
+      order: 13
+    contactName:
+      title: "Contact Name"
+      description: "Contact Name"
+      type: string
+      order: 14
+    contactEmail:
+      title: "Contact Email"
+      description: "Contact Email"
+      type: string
+      order: 15
+    industry:
+      title: "Industry"
+      description: "Industry"
+      type: string
+      order: 16
+    headQuartered:
+      title: "Head Quartered"
+      description: "Head Quartered"
+      type: string
+      order: 17
+    website:
+      title: "Website"
+      description: "Website"
+      type: string
+      order: 18
+    trend:
+      title: "Trend"
+      description: "Trend"
+      type: string
+      order: 19
+    gdprCompliant:
+      title: "Gdpr Compliant"
+      description: "Gdpr Compliant"
+      type: string
+      order: 20
+    controllerOrProcessor:
+      title: "Controller Or Processor"
+      description: "Controller Or Processor"
+      type: string
+      order: 21
+    compliance:
+      title: "Compliance"
+      description: "Compliance"
+      type: integer
+      order: 22
+    isEnabled:
+      title: "Is Enabled"
+      description: "Is Enabled"
+      type: boolean
+      order: 23
+    isInsured:
+      title: "Is Insured"
+      description: "Is Insured"
+      type: boolean
+      order: 24
+    compylKey:
+      title: "Rapid7 Key"
+      description: "Rapid7 Key"
+      type: string
+      order: 25
+    accessToOurSystem:
+      title: "Access To Our System"
+      description: "Access To Our System"
+      type: boolean
+      order: 26
+    holdsOurData:
+      title: "Holds Our Data"
+      description: "Holds Our Data"
+      type: boolean
+      order: 27
+    accessToClientData:
+      title: "Access To Client Data"
+      description: "Access To Client Data"
+      type: boolean
+      order: 28
+    holdsClientData:
+      title: "Holds Client Data"
+      description: "Holds Client Data"
+      type: boolean
+      order: 29
+    lossOfVendorWouldCauseSignificantDisruption:
+      title: "Loss Of Vendor Would Cause Significant Disruption"
+      description: "Loss Of Vendor Would Cause Significant Disruption"
+      type: boolean
+      order: 30
+    lossOfVendorWouldImpactCustomers:
+      title: "Loss Of Vendor Would Impact Customers"
+      description: "Loss Of Vendor Would Impact Customers"
+      type: boolean
+      order: 31
+    negativeImpactWhenServiceDownMoreThan24hr:
+      title: "Negative Impact When Service Down More Than24hr"
+      description: "Negative Impact When Service Down More Than24hr"
+      type: boolean
+      order: 32
+    lossOfVendorWouldHaveMaterialImpact:
+      title: "Loss Of Vendor Would Have Material Impact"
+      description: "Loss Of Vendor Would Have Material Impact"
+      type: boolean
+      order: 33
+    couldVendorFailureResultInFines:
+      title: "Could Vendor Failure Result In Fines"
+      description: "Could Vendor Failure Result In Fines"
+      type: boolean
+      order: 34
+    vendorCouldImpactReputation:
+      title: "Vendor Could Impact Reputation"
+      description: "Vendor Could Impact Reputation"
+      type: boolean
+      order: 35
+    vendorCriticality:
+      title: "Vendor Criticality"
+      description: "Vendor Criticality"
+      type: string
+      order: 36
+    createdDate:
+      title: "Created Date"
+      description: "Created Date"
+      type: date
+      order: 37
+    modifiedDate:
+      title: "Modified Date"
+      description: "Modified Date"
+      type: date
+      order: 38
+    createdBy:
+      title: "Created By"
+      description: "Created By"
+      type: string
+      order: 39
+    modifiedBy:
+      title: "Modified By"
+      description: "Modified By"
+      type: string
+      order: 40
+    assignedTo:
+      title: "Assigned To"
+      description: "Assigned To"
+      type: entity_user
+      order: 41
+    tags:
+      title: "Tags"
+      description: "Tags"
+      type: "[]tag_lookup"
+      order: 42
+    tasks:
+      title: "Tasks"
+      description: "Tasks"
+      type: "[]task_lookup"
+      order: 43
+    risks:
+      title: "Risks"
+      description: "Risks"
+      type: "[]risk_lookup"
+      order: 44
+    assessments:
+      title: "Assessments"
+      description: "Assessments"
+      type: "[]assessment_lookup"
+      order: 45
+    contracts:
+      title: "Contracts"
+      description: "Contracts"
+      type: "[]contract_lookup"
+      order: 46
+    itAssets:
+      title: "IT Assets"
+      description: "IT Assets"
+      type: "[]it_asset_lookup"
+      order: 47
+    departments:
+      title: "Departments"
+      description: "Departments"
+      type: "[]department_lookup"
+      order: 48
+    extendedFields:
+      title: "Extended Fields"
+      description: "Extended Fields"
+      type: object
+      order: 49
+  risk_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  contract_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  certification:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+    isActive:
+      title: "Is Active"
+      description: "Is Active"
+      type: boolean
+      order: 3
+    createdDate:
+      title: "Created Date"
+      description: "Created Date"
+      type: date
+      order: 4
+    modifiedDate:
+      title: "Modified Date"
+      description: "Modified Date"
+      type: date
+      order: 5
+    createdBy:
+      title: "Created By"
+      description: "Created By"
+      type: string
+      order: 6
+    modifiedBy:
+      title: "Modified By"
+      description: "Modified By"
+      type: string
+      order: 7
+    itAssets:
+      title: "IT Assets"
+      description: "IT Assets"
+      type: "[]it_asset_lookup"
+      order: 8
+  it_asset:
+    certifications:
+      title: "Certifications"
+      description: "Certifications"
+      type: "[]certification_lookup"
+      order: 1
+    locations:
+      title: "Locations"
+      description: "Locations"
+      type: "[]location_lookup"
+      order: 2
+    controlSets:
+      title: "Control Sets"
+      description: "Control Sets"
+      type: "[]control_set_lookup"
+      order: 3
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 4
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 5
+    lifeCycle:
+      title: "Life Cycle"
+      description: "Life Cycle"
+      type: integer
+      order: 6
+    systemType:
+      title: "System Type"
+      description: "System Type"
+      type: integer
+      order: 7
+    description:
+      title: "Description"
+      description: "Description"
+      type: string
+      order: 8
+    numberOfUsers:
+      title: "Number Of Users"
+      description: "Number Of Users"
+      type: integer
+      order: 9
+    hasPersonalData:
+      title: "Has Personal Data"
+      description: "Has Personal Data"
+      type: boolean
+      order: 10
+    compliance:
+      title: "Compliance"
+      description: "Compliance"
+      type: integer
+      order: 11
+    trend:
+      title: "Trend"
+      description: "Trend"
+      type: string
+      order: 12
+    calculatedCIA:
+      title: "Calculated CIA"
+      description: "Calculated CIA"
+      type: string
+      order: 13
+    discussionFieldID:
+      title: "Discussion Field ID"
+      description: "Discussion Field ID"
+      type: integer
+      order: 14
+    isSSOAuthenticated:
+      title: "Is SSO Authenticated"
+      description: "Is SSO Authenticated"
+      type: boolean
+      order: 15
+    isSSOAuthorised:
+      title: "Is SSO Authorised"
+      description: "Is SSO Authorised"
+      type: boolean
+      order: 16
+    isSSO:
+      title: "Is SSO"
+      description: "Is SSO"
+      type: boolean
+      order: 17
+    isClientFacing:
+      title: "Is Client Facing"
+      description: "Is Client Facing"
+      type: boolean
+      order: 18
+    isDesktopApp:
+      title: "Is Desktop App"
+      description: "Is Desktop App"
+      type: boolean
+      order: 19
+    isWebBasedApp:
+      title: "Is Web Based App"
+      description: "Is Web Based App"
+      type: boolean
+      order: 20
+    isDevInHouse:
+      title: "Is Dev In House"
+      description: "Is Dev In House"
+      type: boolean
+      order: 21
+    isHostedInCloud:
+      title: "Is Hosted In Cloud"
+      description: "Is Hosted In Cloud"
+      type: boolean
+      order: 22
+    isPublicInternetFacing:
+      title: "Is Public Internet Facing"
+      description: "Is Public Internet Facing"
+      type: boolean
+      order: 23
+    isSecurityTestingRequired:
+      title: "Is Security Testing Required"
+      description: "Is Security Testing Required"
+      type: boolean
+      order: 24
+    isRoleBasedAccess:
+      title: "Is Role Based Access"
+      description: "Is Role Based Access"
+      type: boolean
+      order: 25
+    isSIEMMonitored:
+      title: "Is SIEM Monitored"
+      description: "Is SIEM Monitored"
+      type: boolean
+      order: 26
+    isIndividualPerms:
+      title: "Is Individual Perms"
+      description: "Is Individual Perms"
+      type: boolean
+      order: 27
+    isRoleBased:
+      title: "Is Role Based"
+      description: "Is Role Based"
+      type: boolean
+      order: 28
+    isServiceAccounts:
+      title: "Is Service Accounts"
+      description: "Is Service Accounts"
+      type: boolean
+      order: 29
+    isDFA:
+      title: "Is DFA"
+      description: "Is DFA"
+      type: boolean
+      order: 30
+    isTested:
+      title: "Is Tested"
+      description: "Is Tested"
+      type: boolean
+      order: 31
+    isProductionEnv:
+      title: "Is Production Env"
+      description: "Is Production Env"
+      type: boolean
+      order: 32
+    isPreProdEnv:
+      title: "Is Pre Prod Env"
+      description: "Is Pre Prod Env"
+      type: boolean
+      order: 33
+    isUATEnv:
+      title: "Is UAT Env"
+      description: "Is UAT Env"
+      type: boolean
+      order: 34
+    isTestEnv:
+      title: "Is Test Env"
+      description: "Is Test Env"
+      type: boolean
+      order: 35
+    isProdDataUsedInNonProdEnv:
+      title: "Is Prod Data Used In Non Prod Env"
+      description: "Is Prod Data Used In Non Prod Env"
+      type: boolean
+      order: 36
+    isBCP:
+      title: "Is BCP"
+      description: "Is BCP"
+      type: boolean
+      order: 37
+    isDR:
+      title: "Is DR"
+      description: "Is DR"
+      type: boolean
+      order: 38
+    isClientDataHost:
+      title: "Is Client Data Host"
+      description: "Is Client Data Host"
+      type: boolean
+      order: 39
+    isOurDataHost:
+      title: "Is Our Data Host"
+      description: "Is Our Data Host"
+      type: boolean
+      order: 40
+    isDataAtRest:
+      title: "Is Data At-Rest"
+      description: "Is Data At-Rest"
+      type: boolean
+      order: 41
+    isDataInTransit:
+      title: "Is Data In Transit"
+      description: "Is Data In Transit"
+      type: boolean
+      order: 42
+    isTestDataPersonal:
+      title: "Is Test Data Personal"
+      description: "Is Test Data Personal"
+      type: boolean
+      order: 43
+    isDataAnonymous:
+      title: "Is Data Anonymous"
+      description: "Is Data Anonymous"
+      type: boolean
+      order: 44
+    c1:
+      title: "C1"
+      description: "C1"
+      type: integer
+      order: 45
+    c2:
+      title: "C2"
+      description: "C2"
+      type: integer
+      order: 46
+    c3:
+      title: "C3"
+      description: "C3"
+      type: integer
+      order: 47
+    i1:
+      title: "I1"
+      description: "I1"
+      type: integer
+      order: 48
+    i2:
+      title: "I2"
+      description: "I2"
+      type: integer
+      order: 49
+    i3:
+      title: "I3"
+      description: "I3"
+      type: integer
+      order: 50
+    a1:
+      title: "A1"
+      description: "A1"
+      type: integer
+      order: 51
+    a2:
+      title: "A2"
+      description: "A2"
+      type: integer
+      order: 52
+    a3:
+      title: "A3"
+      description: "A3"
+      type: integer
+      order: 53
+    createdDate:
+      title: "Created Date"
+      description: "Created Date"
+      type: date
+      order: 54
+    modifiedDate:
+      title: "Modified Date"
+      description: "Modified Date"
+      type: date
+      order: 55
+    createdBy:
+      title: "Created By"
+      description: "Created By"
+      type: string
+      order: 56
+    modifiedBy:
+      title: "Modified By"
+      description: "Modified By"
+      type: string
+      order: 57
+    assignedTo:
+      title: "Assigned To"
+      description: "Assigned To"
+      type: entity_user
+      order: 58
+    contracts:
+      title: "Contracts"
+      description: "Contracts"
+      type: "[]contract_lookup"
+      order: 59
+    assessments:
+      title: "Assessments"
+      description: "Assessments"
+      type: "[]assessment_lookup"
+      order: 60
+    risks:
+      title: "Risks"
+      description: "Risks"
+      type: "[]risk_lookup"
+      order: 61
+    departments:
+      title: "Departments"
+      description: "Departments"
+      type: "[]department_lookup"
+      order: 62
+    tasks:
+      title: "Tasks"
+      description: "Tasks"
+      type: "[]task_lookup"
+      order: 63
+    tags:
+      title: "Tags"
+      description: "Tags"
+      type: "[]tag_lookup"
+      order: 64
+    extendedFields:
+      title: "Extended Fields"
+      description: "Extended Fields"
+      type: object
+      order: 65
+  certification_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  location_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  control_set_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  user:
+    createdDate:
+      title: "Created Date"
+      description: "Created Date"
+      type: date
+      order: 1
+    modifiedDate:
+      title: "Modified Date"
+      description: "Modified Date"
+      type: date
+      order: 2
+    createdBy:
+      title: "Created By"
+      description: "Created By"
+      type: string
+      order: 3
+    modifiedBy:
+      title: "Modified By"
+      description: "Modified By"
+      type: string
+      order: 4
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 5
+    email:
+      title: "Email"
+      description: "Email"
+      type: string
+      order: 6
+    firstName:
+      title: "First Name"
+      description: "First Name"
+      type: string
+      order: 7
+    lastName:
+      title: "Last Name"
+      description: "Last Name"
+      type: string
+      order: 8
+    active:
+      title: "Active"
+      description: "Active"
+      type: boolean
+      order: 9
+    preferredUnitOfMeasure:
+      title: "Preferred Unit Of Measure"
+      description: "Preferred Unit Of Measure"
+      type: string
+      order: 10
+    preferredDictionary:
+      title: "Preferred Dictionary"
+      description: "Preferred Dictionary"
+      type: string
+      order: 11
+    themePreference:
+      title: "Theme Preference"
+      description: "Theme Preference"
+      type: string
+      order: 12
+    lastLoginDate:
+      title: "Last Login Date"
+      description: "Last Login Date"
+      type: date
+      order: 13
+    profileBackgroundColor:
+      title: "Profile Background Color"
+      description: "Profile Background Color"
+      type: string
+      order: 14
+    antiTamperingEnabled:
+      title: "Anti Tampering Enabled"
+      description: "Anti Tampering Enabled"
+      type: boolean
+      order: 15
+  framework_compliance:
+    control_set_id:
+      title: "Control Set ID"
+      description: "ID of the control set these scores belong to"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name of the control set, omitted when the control set itself could not be read"
+      type: string
+      order: 2
+    compliance:
+      title: "Compliance"
+      description: "Compliance score of this framework"
+      type: float
+      order: 3
+    linked_controls_percentage:
+      title: "Linked Controls Percentage"
+      description: "Percentage of this framework's controls that are linked to evidence"
+      type: float
+      order: 4
+    automated_controls_percentage:
+      title: "Automated Controls Percentage"
+      description: "Percentage of this framework's controls that are evidenced automatically"
+      type: float
+      order: 5
+    date_calculated:
+      title: "Date Calculated"
+      description: "When Cyber GRC last calculated these scores"
+      type: string
+      order: 6
+  overall_compliance:
+    compliance:
+      title: "Compliance"
+      description: "Mean compliance score of every framework returned"
+      type: float
+      order: 1
+    automated_controls_percentage:
+      title: "Automated Controls Percentage"
+      description: "Mean automated controls percentage of every framework returned"
+      type: float
+      order: 2
+    framework_count:
+      title: "Framework Count"
+      description: "Number of frameworks the overall scores were averaged over"
+      type: integer
+      order: 3
+  contract:
+    createdDate:
+      title: "Created Date"
+      description: "Created Date"
+      type: date
+      order: 1
+    modifiedDate:
+      title: "Modified Date"
+      description: "Modified Date"
+      type: date
+      order: 2
+    createdBy:
+      title: "Created By"
+      description: "Created By"
+      type: string
+      order: 3
+    modifiedBy:
+      title: "Modified By"
+      description: "Modified By"
+      type: string
+      order: 4
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 5
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 6
+    description:
+      title: "Description"
+      description: "Description"
+      type: string
+      order: 7
+    costType:
+      title: "Cost Type"
+      description: "Cost Type"
+      type: string
+      order: 8
+    invoiceFrequency:
+      title: "Invoice Frequency"
+      description: "Invoice Frequency"
+      type: integer
+      order: 9
+    generatedDate:
+      title: "Generated Date"
+      description: "Generated Date"
+      type: date
+      order: 10
+    currency:
+      title: "Currency"
+      description: "Currency"
+      type: string
+      order: 11
+    statusID:
+      title: "Status ID"
+      description: "Status ID"
+      type: integer
+      order: 12
+    daysUntilRenewal:
+      title: "Days Until Renewal"
+      description: "Days Until Renewal"
+      type: integer
+      order: 13
+    terminationNoticePeriod:
+      title: "Termination Notice Period"
+      description: "Termination Notice Period"
+      type: integer
+      order: 14
+    annualCost:
+      title: "Annual Cost"
+      description: "Annual Cost"
+      type: integer
+      order: 15
+    noticeDate:
+      title: "Notice Date"
+      description: "Notice Date"
+      type: date
+      order: 16
+    approvalStatus:
+      title: "Approval Status"
+      description: "Approval Status"
+      type: boolean
+      order: 17
+    startDate:
+      title: "Start Date"
+      description: "Start Date"
+      type: date
+      order: 18
+    endDate:
+      title: "End Date"
+      description: "End Date"
+      type: date
+      order: 19
+    sequenceNumber:
+      title: "Sequence Number"
+      description: "Sequence Number"
+      type: integer
+      order: 20
+    variationNumber:
+      title: "Variation Number"
+      description: "Variation Number"
+      type: integer
+      order: 21
+    isKeyContract:
+      title: "Is Key Contract"
+      description: "Is Key Contract"
+      type: boolean
+      order: 22
+    contractCategoryID:
+      title: "Contract Category ID"
+      description: "Contract Category ID"
+      type: integer
+      order: 23
+    contractSubcategoryID:
+      title: "Contract Subcategory ID"
+      description: "Contract Subcategory ID"
+      type: integer
+      order: 24
+    hasEnabledAdobeSync:
+      title: "Has Enabled Adobe Sync"
+      description: "Has Enabled Adobe Sync"
+      type: boolean
+      order: 25
+    contactEmail:
+      title: "Contact Email"
+      description: "Contact Email"
+      type: string
+      order: 26
+    contactName:
+      title: "Contact Name"
+      description: "Contact Name"
+      type: string
+      order: 27
+    maxExtension:
+      title: "Max Extension"
+      description: "Max Extension"
+      type: date
+      order: 28
+    contractType:
+      title: "Contract Type"
+      description: "Contract Type"
+      type: integer
+      order: 29
+    parentContractID:
+      title: "Parent Contract ID"
+      description: "Parent Contract ID"
+      type: integer
+      order: 30
+    discussionFieldID:
+      title: "Discussion Field ID"
+      description: "Discussion Field ID"
+      type: integer
+      order: 31
+    status:
+      title: "Status"
+      description: "Status"
+      type: contract_status_lookup
+      order: 32
+    category:
+      title: "Category"
+      description: "Category"
+      type: contract_category_lookup
+      order: 33
+    subcategory:
+      title: "Subcategory"
+      description: "Subcategory"
+      type: contract_category_lookup
+      order: 34
+    parentContract:
+      title: "Parent Contract"
+      description: "Parent Contract"
+      type: contract_lookup
+      order: 35
+    vendors:
+      title: "Vendors"
+      description: "Vendors"
+      type: "[]contract_vendor_lookup"
+      order: 36
+    departments:
+      title: "Departments"
+      description: "Departments"
+      type: "[]department_lookup"
+      order: 37
+    clients:
+      title: "Clients"
+      description: "Clients"
+      type: "[]contract_client_lookup"
+      order: 38
+    itAssets:
+      title: "IT Assets"
+      description: "IT Assets"
+      type: "[]it_asset_lookup"
+      order: 39
+    tasks:
+      title: "Tasks"
+      description: "Tasks"
+      type: "[]task_lookup"
+      order: 40
+    tags:
+      title: "Tags"
+      description: "Tags"
+      type: "[]tag_lookup"
+      order: 41
+    contractDocuments:
+      title: "Contract Documents"
+      description: "Contract Documents"
+      type: "[]contract_document_lookup"
+      order: 42
+    extendedFields:
+      title: "Extended Fields"
+      description: "Extended Fields"
+      type: object
+      order: 43
+  contract_status_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  contract_category_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  contract_vendor_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  contract_client_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name"
+      type: string
+      order: 2
+  contract_document_lookup:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    contractID:
+      title: "Contract ID"
+      description: "Contract ID"
+      type: integer
+      order: 2
+    title:
+      title: "Title"
+      description: "Title"
+      type: string
+      order: 3
+    blobName:
+      title: "Blob Name"
+      description: "Blob Name"
+      type: string
+      order: 4
+    version:
+      title: "Version"
+      description: "Version"
+      type: string
+      order: 5
+    isWorkingVersion:
+      title: "Is Working Version"
+      description: "Is Working Version"
+      type: boolean
+      order: 6
+    isCurrentVersion:
+      title: "Is Current Version"
+      description: "Is Current Version"
+      type: boolean
+      order: 7
+  discussion:
+    id:
+      title: "ID"
+      description: "ID"
+      type: integer
+      order: 1
+    comment:
+      title: "Comment"
+      description: "Comment"
+      type: string
+      order: 2
+    userID:
+      title: "User ID"
+      description: "User ID"
+      type: integer
+      order: 3
+    formDiscussionID:
+      title: "Form Discussion ID"
+      description: "Form Discussion ID"
+      type: integer
+      order: 4
+    discussionFieldID:
+      title: "Discussion Field ID"
+      description: "Discussion Field ID"
+      type: integer
+      order: 5
+    createdDate:
+      title: "Created Date"
+      description: "Created Date"
+      type: date
+      order: 6
+    modifiedDate:
+      title: "Modified Date"
+      description: "Modified Date"
+      type: date
+      order: 7
+    createdBy:
+      title: "Created By"
+      description: "Created By"
+      type: string
+      order: 8
+    modifiedBy:
+      title: "Modified By"
+      description: "Modified By"
+      type: string
+      order: 9
+  compliance_drift:
+    control_set_id:
+      title: "Control Set ID"
+      description: "ID of the control set whose score moved"
+      type: integer
+      order: 1
+    name:
+      title: "Name"
+      description: "Name of the control set"
+      type: string
+      order: 2
+    reason:
+      title: "Reason"
+      description: "Why the drift was reported. Drop means the score fell by at least the Drop Threshold; Below Minimum means it crossed under the Minimum Compliance floor. A fall that does both is reported as Drop"
+      type: string
+      order: 3
+    previous_compliance:
+      title: "Previous Compliance"
+      description: "Compliance score recorded on the previous poll"
+      type: float
+      order: 4
+    current_compliance:
+      title: "Current Compliance"
+      description: "Compliance score Cyber GRC most recently calculated"
+      type: float
+      order: 5
+    compliance_change:
+      title: "Compliance Change"
+      description: "Current compliance minus previous compliance, so a fall is negative"
+      type: float
+      order: 6
+    previous_automated_controls_percentage:
+      title: "Previous Automated Controls Percentage"
+      description: "Automated controls percentage recorded on the previous poll"
+      type: float
+      order: 7
+    current_automated_controls_percentage:
+      title: "Current Automated Controls Percentage"
+      description: "Automated controls percentage Cyber GRC most recently calculated"
+      type: float
+      order: 8
+    date_calculated:
+      title: "Date Calculated"
+      description: "When Cyber GRC calculated the current score"
+      type: string
+      order: 9
+  delete_operation_response:
+    success:
+      title: "Success"
+      description: "Success"
+      type: boolean
+      order: 1
+    fkViolation:
+      title: "FK Violation"
+      description: "FK Violation"
+      type: boolean
+      order: 2
+    fkViolationTable:
+      title: "FK Violation Table"
+      description: "FK Violation Table"
+      type: "[]string"
+      order: 3
+    message:
+      title: "Message"
+      description: "Message"
+      type: string
+      order: 4
+actions:
+  get_risks:
+    title: "Get Risks"
+    description: "Retrieve risks from Cyber GRC, optionally narrowed with an OData filter"
+    input:
+      filter:
+        title: "Filter"
+        description: "OData $filter expression used to narrow the results, e.g. contains(name, 'phishing') and statusID eq 3"
+        type: string
+        required: false
+        example: "statusID eq 3"
+        order: 1
+      select:
+        title: "Select"
+        description: "Comma separated list of fields to return. Leave empty to return every field"
+        type: string
+        required: false
+        example: "id,name,statusID"
+        order: 2
+      order_by:
+        title: "Order By"
+        description: "OData $orderby expression, e.g. modifiedDate desc"
+        type: string
+        required: false
+        example: "modifiedDate desc"
+        order: 3
+      top:
+        title: "Top"
+        description: "Maximum number of records to return. Leave empty or set to 0 to return every record, paging through the API automatically"
+        type: integer
+        required: false
+        default: 0
+        example: 100
+        order: 4
+      skip:
+        title: "Skip"
+        description: "Number of records to skip before returning results"
+        type: integer
+        required: false
+        example: 0
+        order: 5
+    output:
+      risks:
+        title: "Risks"
+        description: "The matching risks"
+        type: "[]risk"
+        required: true
+        order: 1
+      count:
+        title: "Count"
+        description: "Number of risks returned"
+        type: integer
+        required: true
+        example: 1
+        order: 2
+  get_risk:
+    title: "Get Risk"
+    description: "Retrieve a single risk by ID"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the risk to retrieve"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+      select:
+        title: "Select"
+        description: "Comma separated list of fields to return. Leave empty to return every field"
+        type: string
+        required: false
+        example: "id,name"
+        order: 2
+    output:
+      risk:
+        title: "Risk"
+        description: "The requested risk"
+        type: risk
+        required: true
+        order: 1
+  create_risk:
+    title: "Create Risk"
+    description: "Create a new risk in Cyber GRC"
+    input:
+      record:
+        title: "Risk"
+        description: "The risk to create, as a JSON object matching the CreateRiskDto schema in the Rapid7 Cyber GRC API reference"
+        type: object
+        required: true
+        example: {"name": "Example risk"}
+        order: 1
+    output:
+      risk:
+        title: "Risk"
+        description: "The created risk"
+        type: risk
+        required: true
+        order: 1
+  update_risk:
+    title: "Update Risk"
+    description: "Update an existing risk in Cyber GRC"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the risk to update"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+      record:
+        title: "Risk"
+        description: "The fields to write, as a JSON object matching the UpdateRiskDto schema in the Rapid7 Cyber GRC API reference"
+        type: object
+        required: true
+        example: {"name": "Renamed risk"}
+        order: 2
+    output:
+      risk:
+        title: "Risk"
+        description: "The updated risk"
+        type: risk
+        required: true
+        order: 1
+  delete_risk:
+    title: "Delete Risk"
+    description: "Delete a risk by ID"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the risk to delete"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+    output:
+      result:
+        title: "Result"
+        description: "Outcome of the delete operation"
+        type: delete_operation_response
+        required: true
+        order: 1
+  get_incidents:
+    title: "Get Incidents"
+    description: "Retrieve incidents from Cyber GRC, optionally narrowed with an OData filter"
+    input:
+      filter:
+        title: "Filter"
+        description: "OData $filter expression used to narrow the results, e.g. contains(name, 'phishing') and statusID eq 3"
+        type: string
+        required: false
+        example: "statusID eq 3"
+        order: 1
+      select:
+        title: "Select"
+        description: "Comma separated list of fields to return. Leave empty to return every field"
+        type: string
+        required: false
+        example: "id,name,statusID"
+        order: 2
+      order_by:
+        title: "Order By"
+        description: "OData $orderby expression, e.g. modifiedDate desc"
+        type: string
+        required: false
+        example: "modifiedDate desc"
+        order: 3
+      top:
+        title: "Top"
+        description: "Maximum number of records to return. Leave empty or set to 0 to return every record, paging through the API automatically"
+        type: integer
+        required: false
+        default: 0
+        example: 100
+        order: 4
+      skip:
+        title: "Skip"
+        description: "Number of records to skip before returning results"
+        type: integer
+        required: false
+        example: 0
+        order: 5
+    output:
+      incidents:
+        title: "Incidents"
+        description: "The matching incidents"
+        type: "[]incident"
+        required: true
+        order: 1
+      count:
+        title: "Count"
+        description: "Number of incidents returned"
+        type: integer
+        required: true
+        example: 1
+        order: 2
+  get_incident:
+    title: "Get Incident"
+    description: "Retrieve a single incident by ID"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the incident to retrieve"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+      select:
+        title: "Select"
+        description: "Comma separated list of fields to return. Leave empty to return every field"
+        type: string
+        required: false
+        example: "id,name"
+        order: 2
+    output:
+      incident:
+        title: "Incident"
+        description: "The requested incident"
+        type: incident
+        required: true
+        order: 1
+  create_incident:
+    title: "Create Incident"
+    description: "Create a new incident in Cyber GRC"
+    input:
+      record:
+        title: "Incident"
+        description: "The incident to create, as a JSON object matching the CreateIncidentDto schema in the Rapid7 Cyber GRC API reference"
+        type: object
+        required: true
+        example: {"name": "Example incident"}
+        order: 1
+    output:
+      incident:
+        title: "Incident"
+        description: "The created incident"
+        type: incident
+        required: true
+        order: 1
+  update_incident:
+    title: "Update Incident"
+    description: "Update an existing incident in Cyber GRC"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the incident to update"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+      record:
+        title: "Incident"
+        description: "The fields to write, as a JSON object matching the UpdateIncidentDto schema in the Rapid7 Cyber GRC API reference"
+        type: object
+        required: true
+        example: {"name": "Renamed incident"}
+        order: 2
+    output:
+      incident:
+        title: "Incident"
+        description: "The updated incident"
+        type: incident
+        required: true
+        order: 1
+  delete_incident:
+    title: "Delete Incident"
+    description: "Delete a incident by ID"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the incident to delete"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+    output:
+      result:
+        title: "Result"
+        description: "Outcome of the delete operation"
+        type: delete_operation_response
+        required: true
+        order: 1
+  get_tasks:
+    title: "Get Tasks"
+    description: "Retrieve tasks from Cyber GRC, optionally narrowed with an OData filter"
+    input:
+      filter:
+        title: "Filter"
+        description: "OData $filter expression used to narrow the results, e.g. contains(name, 'phishing') and statusID eq 3"
+        type: string
+        required: false
+        example: "statusID eq 3"
+        order: 1
+      select:
+        title: "Select"
+        description: "Comma separated list of fields to return. Leave empty to return every field"
+        type: string
+        required: false
+        example: "id,name,statusID"
+        order: 2
+      order_by:
+        title: "Order By"
+        description: "OData $orderby expression, e.g. modifiedDate desc"
+        type: string
+        required: false
+        example: "modifiedDate desc"
+        order: 3
+      top:
+        title: "Top"
+        description: "Maximum number of records to return. Leave empty or set to 0 to return every record, paging through the API automatically"
+        type: integer
+        required: false
+        default: 0
+        example: 100
+        order: 4
+      skip:
+        title: "Skip"
+        description: "Number of records to skip before returning results"
+        type: integer
+        required: false
+        example: 0
+        order: 5
+      owner:
+        title: "Owner"
+        description: "Return only tasks assigned to this user, given as an email address or a numeric Cyber GRC user ID. The API exposes the assignee as a nested object with no filterable ID field, so this match is applied by the plugin after the records are read, which means Top and Skip apply to the matching tasks rather than to every task"
+        type: string
+        required: false
+        example: "user@example.com"
+        order: 6
+      status_id:
+        title: "Status ID"
+        description: "Return only tasks in this status. Leave empty or set to 0 for every status"
+        type: integer
+        required: false
+        default: 0
+        example: 3
+        order: 7
+      due_within_days:
+        title: "Due Within Days"
+        description: "Return only tasks due this many days from now or sooner, so a reminder workflow does not have to write the date arithmetic itself. Tasks with no Due Date are left out. Leave empty or set to 0 for every task"
+        type: integer
+        required: false
+        default: 0
+        example: 7
+        order: 8
+      overdue_only:
+        title: "Overdue Only"
+        description: "Return only tasks whose Due Date has already passed. Applied in addition to Due Within Days, so setting both returns only the overdue tasks"
+        type: boolean
+        required: false
+        default: false
+        example: false
+        order: 9
+    output:
+      tasks:
+        title: "Tasks"
+        description: "The matching tasks"
+        type: "[]task"
+        required: true
+        order: 1
+      count:
+        title: "Count"
+        description: "Number of tasks returned"
+        type: integer
+        required: true
+        example: 1
+        order: 2
+  get_task:
+    title: "Get Task"
+    description: "Retrieve a single task by ID"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the task to retrieve"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+      select:
+        title: "Select"
+        description: "Comma separated list of fields to return. Leave empty to return every field"
+        type: string
+        required: false
+        example: "id,name"
+        order: 2
+    output:
+      task:
+        title: "Task"
+        description: "The requested task"
+        type: task
+        required: true
+        order: 1
+  create_task:
+    title: "Create Task"
+    description: "Create a new task in Cyber GRC"
+    input:
+      record:
+        title: "Task"
+        description: "The task to create, as a JSON object matching the CreateTaskDto schema in the Rapid7 Cyber GRC API reference"
+        type: object
+        required: true
+        example: {"name": "Example task"}
+        order: 1
+    output:
+      task:
+        title: "Task"
+        description: "The created task"
+        type: task
+        required: true
+        order: 1
+  update_task:
+    title: "Update Task"
+    description: "Update an existing task in Cyber GRC"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the task to update"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+      record:
+        title: "Task"
+        description: "The fields to write, as a JSON object matching the UpdateTaskDto schema in the Rapid7 Cyber GRC API reference"
+        type: object
+        required: true
+        example: {"name": "Renamed task"}
+        order: 2
+    output:
+      task:
+        title: "Task"
+        description: "The updated task"
+        type: task
+        required: true
+        order: 1
+  delete_task:
+    title: "Delete Task"
+    description: "Delete a task by ID"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the task to delete"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+    output:
+      result:
+        title: "Result"
+        description: "Outcome of the delete operation"
+        type: delete_operation_response
+        required: true
+        order: 1
+  add_comment:
+    title: "Add Comment"
+    description: "Add a comment to a Cyber GRC record, mirroring a comment made in a chat or ticketing system"
+    input:
+      record_type:
+        title: "Record Type"
+        description: "The type of record to comment on"
+        type: string
+        required: true
+        default: "Tasks"
+        enum:
+        - "Audits"
+        - "Clients"
+        - "Contracts"
+        - "ControlSets"
+        - "Departments"
+        - "ITAssets"
+        - "Incidents"
+        - "Locations"
+        - "Risks"
+        - "Tasks"
+        - "Vendors"
+        example: "Tasks"
+        order: 1
+      id:
+        title: "ID"
+        description: "ID of the record to comment on"
+        type: integer
+        required: true
+        example: 1
+        order: 2
+      comment:
+        title: "Comment"
+        description: "Text of the comment"
+        type: string
+        required: true
+        example: "Closed in the ticketing system by the asset owner"
+        order: 3
+      user_id:
+        title: "User ID"
+        description: "Cyber GRC user ID to record as the author. Cyber GRC rejects a comment that does not name an author, so this is required. Get Users lists the IDs to choose from"
+        type: integer
+        required: true
+        example: 5
+        order: 4
+      discussion_field_id:
+        title: "Discussion Field ID"
+        description: "Overrides the Discussion Field ID the action would otherwise read from the record itself. Only needed if the record does not carry one"
+        type: integer
+        required: false
+        example: 12
+        order: 5
+      form_discussion_id:
+        title: "Form Discussion ID"
+        description: "Overrides the Form Discussion ID, which the action defaults to the record ID. Cyber GRC does not document how this field resolves, so set it explicitly if comments do not appear against the record"
+        type: integer
+        required: false
+        example: 1
+        order: 6
+    output:
+      comment:
+        title: "Comment"
+        description: "The created comment"
+        type: discussion
+        required: true
+        order: 1
+  get_audits:
+    title: "Get Audits"
+    description: "Retrieve audits from Cyber GRC, optionally narrowed with an OData filter"
+    input:
+      filter:
+        title: "Filter"
+        description: "OData $filter expression used to narrow the results, e.g. contains(name, 'phishing') and statusID eq 3"
+        type: string
+        required: false
+        example: "statusID eq 3"
+        order: 1
+      select:
+        title: "Select"
+        description: "Comma separated list of fields to return. Leave empty to return every field"
+        type: string
+        required: false
+        example: "id,name,statusID"
+        order: 2
+      order_by:
+        title: "Order By"
+        description: "OData $orderby expression, e.g. modifiedDate desc"
+        type: string
+        required: false
+        example: "modifiedDate desc"
+        order: 3
+      top:
+        title: "Top"
+        description: "Maximum number of records to return. Leave empty or set to 0 to return every record, paging through the API automatically"
+        type: integer
+        required: false
+        default: 0
+        example: 100
+        order: 4
+      skip:
+        title: "Skip"
+        description: "Number of records to skip before returning results"
+        type: integer
+        required: false
+        example: 0
+        order: 5
+    output:
+      audits:
+        title: "Audits"
+        description: "The matching audits"
+        type: "[]audit"
+        required: true
+        order: 1
+      count:
+        title: "Count"
+        description: "Number of audits returned"
+        type: integer
+        required: true
+        example: 1
+        order: 2
+  get_audit:
+    title: "Get Audit"
+    description: "Retrieve a single audit by ID"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the audit to retrieve"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+      select:
+        title: "Select"
+        description: "Comma separated list of fields to return. Leave empty to return every field"
+        type: string
+        required: false
+        example: "id,name"
+        order: 2
+    output:
+      audit:
+        title: "Audit"
+        description: "The requested audit"
+        type: audit
+        required: true
+        order: 1
+  create_audit:
+    title: "Create Audit"
+    description: "Create a new audit in Cyber GRC"
+    input:
+      record:
+        title: "Audit"
+        description: "The audit to create, as a JSON object matching the CreateAuditDto schema in the Rapid7 Cyber GRC API reference"
+        type: object
+        required: true
+        example: {"name": "Example audit"}
+        order: 1
+    output:
+      audit:
+        title: "Audit"
+        description: "The created audit"
+        type: audit
+        required: true
+        order: 1
+  update_audit:
+    title: "Update Audit"
+    description: "Update an existing audit in Cyber GRC"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the audit to update"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+      record:
+        title: "Audit"
+        description: "The fields to write, as a JSON object matching the UpdateAuditDto schema in the Rapid7 Cyber GRC API reference"
+        type: object
+        required: true
+        example: {"name": "Renamed audit"}
+        order: 2
+    output:
+      audit:
+        title: "Audit"
+        description: "The updated audit"
+        type: audit
+        required: true
+        order: 1
+  delete_audit:
+    title: "Delete Audit"
+    description: "Delete a audit by ID"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the audit to delete"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+    output:
+      result:
+        title: "Result"
+        description: "Outcome of the delete operation"
+        type: delete_operation_response
+        required: true
+        order: 1
+  get_control_sets:
+    title: "Get Control Sets"
+    description: "Retrieve control sets from Cyber GRC, optionally narrowed with an OData filter"
+    input:
+      filter:
+        title: "Filter"
+        description: "OData $filter expression used to narrow the results, e.g. contains(name, 'phishing') and statusID eq 3"
+        type: string
+        required: false
+        example: "statusID eq 3"
+        order: 1
+      select:
+        title: "Select"
+        description: "Comma separated list of fields to return. Leave empty to return every field"
+        type: string
+        required: false
+        example: "id,name,statusID"
+        order: 2
+      order_by:
+        title: "Order By"
+        description: "OData $orderby expression, e.g. modifiedDate desc"
+        type: string
+        required: false
+        example: "modifiedDate desc"
+        order: 3
+      top:
+        title: "Top"
+        description: "Maximum number of records to return. Leave empty or set to 0 to return every record, paging through the API automatically"
+        type: integer
+        required: false
+        default: 0
+        example: 100
+        order: 4
+      skip:
+        title: "Skip"
+        description: "Number of records to skip before returning results"
+        type: integer
+        required: false
+        example: 0
+        order: 5
+    output:
+      control_sets:
+        title: "Control Sets"
+        description: "The matching control sets"
+        type: "[]control_set"
+        required: true
+        order: 1
+      count:
+        title: "Count"
+        description: "Number of control sets returned"
+        type: integer
+        required: true
+        example: 1
+        order: 2
+  get_control_set:
+    title: "Get Control Set"
+    description: "Retrieve a single control set by ID"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the control set to retrieve"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+      select:
+        title: "Select"
+        description: "Comma separated list of fields to return. Leave empty to return every field"
+        type: string
+        required: false
+        example: "id,name"
+        order: 2
+    output:
+      control_set:
+        title: "Control Set"
+        description: "The requested control set"
+        type: control_set
+        required: true
+        order: 1
+  create_control_set:
+    title: "Create Control Set"
+    description: "Create a new control set in Cyber GRC"
+    input:
+      record:
+        title: "Control Set"
+        description: "The control set to create, as a JSON object matching the CreateControlSetDto schema in the Rapid7 Cyber GRC API reference"
+        type: object
+        required: true
+        example: {"name": "Example control set"}
+        order: 1
+    output:
+      control_set:
+        title: "Control Set"
+        description: "The created control set"
+        type: control_set
+        required: true
+        order: 1
+  update_control_set:
+    title: "Update Control Set"
+    description: "Update an existing control set in Cyber GRC"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the control set to update"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+      record:
+        title: "Control Set"
+        description: "The fields to write, as a JSON object matching the UpdateControlSetDto schema in the Rapid7 Cyber GRC API reference"
+        type: object
+        required: true
+        example: {"name": "Renamed control set"}
+        order: 2
+    output:
+      control_set:
+        title: "Control Set"
+        description: "The updated control set"
+        type: control_set
+        required: true
+        order: 1
+  delete_control_set:
+    title: "Delete Control Set"
+    description: "Delete a control set by ID"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the control set to delete"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+    output:
+      result:
+        title: "Result"
+        description: "Outcome of the delete operation"
+        type: delete_operation_response
+        required: true
+        order: 1
+  get_compliance_score:
+    title: "Get Compliance Score"
+    description: "Retrieve the most recent compliance score and automated controls score of each framework, along with an overall score averaged across them. Control sets that are archived or disabled are left out unless one is named with Control Set ID"
+    input:
+      control_set_id:
+        title: "Control Set ID"
+        description: "ID of a single control set to score. Leave empty or set to 0 to score every control set"
+        type: integer
+        required: false
+        default: 0
+        example: 1
+        order: 1
+    output:
+      frameworks:
+        title: "Frameworks"
+        description: "Most recent scores for each control set, most recently calculated first"
+        type: "[]framework_compliance"
+        required: true
+        order: 1
+      overall:
+        title: "Overall"
+        description: "Scores averaged across the frameworks returned. Cyber GRC does not publish a tenant wide score, so the plugin calculates this one"
+        type: overall_compliance
+        required: true
+        order: 2
+  get_assessments:
+    title: "Get Assessments"
+    description: "Retrieve assessments from Cyber GRC, optionally narrowed with an OData filter"
+    input:
+      filter:
+        title: "Filter"
+        description: "OData $filter expression used to narrow the results, e.g. contains(name, 'phishing') and statusID eq 3"
+        type: string
+        required: false
+        example: "statusID eq 3"
+        order: 1
+      select:
+        title: "Select"
+        description: "Comma separated list of fields to return. Leave empty to return every field"
+        type: string
+        required: false
+        example: "id,name,statusID"
+        order: 2
+      order_by:
+        title: "Order By"
+        description: "OData $orderby expression, e.g. modifiedDate desc"
+        type: string
+        required: false
+        example: "modifiedDate desc"
+        order: 3
+      top:
+        title: "Top"
+        description: "Maximum number of records to return. Leave empty or set to 0 to return every record, paging through the API automatically"
+        type: integer
+        required: false
+        default: 0
+        example: 100
+        order: 4
+      skip:
+        title: "Skip"
+        description: "Number of records to skip before returning results"
+        type: integer
+        required: false
+        example: 0
+        order: 5
+    output:
+      assessments:
+        title: "Assessments"
+        description: "The matching assessments"
+        type: "[]assessment"
+        required: true
+        order: 1
+      count:
+        title: "Count"
+        description: "Number of assessments returned"
+        type: integer
+        required: true
+        example: 1
+        order: 2
+  get_assessment:
+    title: "Get Assessment"
+    description: "Retrieve a single assessment by ID"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the assessment to retrieve"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+      select:
+        title: "Select"
+        description: "Comma separated list of fields to return. Leave empty to return every field"
+        type: string
+        required: false
+        example: "id,name"
+        order: 2
+    output:
+      assessment:
+        title: "Assessment"
+        description: "The requested assessment"
+        type: assessment
+        required: true
+        order: 1
+  create_assessment:
+    title: "Create Assessment"
+    description: "Create a new assessment in Cyber GRC"
+    input:
+      record:
+        title: "Assessment"
+        description: "The assessment to create, as a JSON object matching the CreateAssessmentDto schema in the Rapid7 Cyber GRC API reference"
+        type: object
+        required: true
+        example: {"name": "Example assessment"}
+        order: 1
+    output:
+      assessment:
+        title: "Assessment"
+        description: "The created assessment"
+        type: assessment
+        required: true
+        order: 1
+  update_assessment:
+    title: "Update Assessment"
+    description: "Update an existing assessment in Cyber GRC"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the assessment to update"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+      record:
+        title: "Assessment"
+        description: "The fields to write, as a JSON object matching the UpdateAssessmentDto schema in the Rapid7 Cyber GRC API reference"
+        type: object
+        required: true
+        example: {"name": "Renamed assessment"}
+        order: 2
+    output:
+      assessment:
+        title: "Assessment"
+        description: "The updated assessment"
+        type: assessment
+        required: true
+        order: 1
+  delete_assessment:
+    title: "Delete Assessment"
+    description: "Delete a assessment by ID"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the assessment to delete"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+    output:
+      result:
+        title: "Result"
+        description: "Outcome of the delete operation"
+        type: delete_operation_response
+        required: true
+        order: 1
+  get_vendors:
+    title: "Get Vendors"
+    description: "Retrieve vendors from Cyber GRC, optionally narrowed with an OData filter"
+    input:
+      filter:
+        title: "Filter"
+        description: "OData $filter expression used to narrow the results, e.g. contains(name, 'phishing') and statusID eq 3"
+        type: string
+        required: false
+        example: "statusID eq 3"
+        order: 1
+      select:
+        title: "Select"
+        description: "Comma separated list of fields to return. Leave empty to return every field"
+        type: string
+        required: false
+        example: "id,name,statusID"
+        order: 2
+      order_by:
+        title: "Order By"
+        description: "OData $orderby expression, e.g. modifiedDate desc"
+        type: string
+        required: false
+        example: "modifiedDate desc"
+        order: 3
+      top:
+        title: "Top"
+        description: "Maximum number of records to return. Leave empty or set to 0 to return every record, paging through the API automatically"
+        type: integer
+        required: false
+        default: 0
+        example: 100
+        order: 4
+      skip:
+        title: "Skip"
+        description: "Number of records to skip before returning results"
+        type: integer
+        required: false
+        example: 0
+        order: 5
+    output:
+      vendors:
+        title: "Vendors"
+        description: "The matching vendors"
+        type: "[]vendor"
+        required: true
+        order: 1
+      count:
+        title: "Count"
+        description: "Number of vendors returned"
+        type: integer
+        required: true
+        example: 1
+        order: 2
+  get_vendor:
+    title: "Get Vendor"
+    description: "Retrieve a single vendor by ID"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the vendor to retrieve"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+      select:
+        title: "Select"
+        description: "Comma separated list of fields to return. Leave empty to return every field"
+        type: string
+        required: false
+        example: "id,name"
+        order: 2
+    output:
+      vendor:
+        title: "Vendor"
+        description: "The requested vendor"
+        type: vendor
+        required: true
+        order: 1
+  create_vendor:
+    title: "Create Vendor"
+    description: "Create a new vendor in Cyber GRC"
+    input:
+      record:
+        title: "Vendor"
+        description: "The vendor to create, as a JSON object matching the CreateVendorDto schema in the Rapid7 Cyber GRC API reference"
+        type: object
+        required: true
+        example: {"name": "Example vendor"}
+        order: 1
+    output:
+      vendor:
+        title: "Vendor"
+        description: "The created vendor"
+        type: vendor
+        required: true
+        order: 1
+  update_vendor:
+    title: "Update Vendor"
+    description: "Update an existing vendor in Cyber GRC"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the vendor to update"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+      record:
+        title: "Vendor"
+        description: "The fields to write, as a JSON object matching the UpdateVendorDto schema in the Rapid7 Cyber GRC API reference"
+        type: object
+        required: true
+        example: {"name": "Renamed vendor"}
+        order: 2
+    output:
+      vendor:
+        title: "Vendor"
+        description: "The updated vendor"
+        type: vendor
+        required: true
+        order: 1
+  delete_vendor:
+    title: "Delete Vendor"
+    description: "Delete a vendor by ID"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the vendor to delete"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+    output:
+      result:
+        title: "Result"
+        description: "Outcome of the delete operation"
+        type: delete_operation_response
+        required: true
+        order: 1
+  get_contracts:
+    title: "Get Contracts"
+    description: "Retrieve contracts from Cyber GRC, optionally narrowed with an OData filter or a renewal window"
+    input:
+      filter:
+        title: "Filter"
+        description: "OData $filter expression used to narrow the results, e.g. contains(name, 'phishing') and statusID eq 3"
+        type: string
+        required: false
+        example: "statusID eq 3"
+        order: 1
+      select:
+        title: "Select"
+        description: "Comma separated list of fields to return. Leave empty to return every field"
+        type: string
+        required: false
+        example: "id,name,statusID"
+        order: 2
+      order_by:
+        title: "Order By"
+        description: "OData $orderby expression, e.g. modifiedDate desc"
+        type: string
+        required: false
+        example: "modifiedDate desc"
+        order: 3
+      top:
+        title: "Top"
+        description: "Maximum number of records to return. Leave empty or set to 0 to return every record, paging through the API automatically"
+        type: integer
+        required: false
+        default: 0
+        example: 100
+        order: 4
+      skip:
+        title: "Skip"
+        description: "Number of records to skip before returning results"
+        type: integer
+        required: false
+        example: 0
+        order: 5
+      renewing_within_days:
+        title: "Renewing Within Days"
+        description: "Return only contracts ending this many days from now or sooner, so a renewal workflow does not have to write the date arithmetic itself. Contracts with no End Date are left out. Leave empty or set to 0 for every contract"
+        type: integer
+        required: false
+        default: 0
+        example: 90
+        order: 6
+      include_expired:
+        title: "Include Expired"
+        description: "Whether Renewing Within Days also returns contracts that have already ended. Ignored when Renewing Within Days is not set"
+        type: boolean
+        required: false
+        default: false
+        example: false
+        order: 7
+    output:
+      contracts:
+        title: "Contracts"
+        description: "The matching contracts"
+        type: "[]contract"
+        required: true
+        order: 1
+      count:
+        title: "Count"
+        description: "Number of contracts returned"
+        type: integer
+        required: true
+        example: 1
+        order: 2
+  get_contract:
+    title: "Get Contract"
+    description: "Retrieve a single contract by ID"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the contract to retrieve"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+      select:
+        title: "Select"
+        description: "Comma separated list of fields to return. Leave empty to return every field"
+        type: string
+        required: false
+        example: "id,name"
+        order: 2
+    output:
+      contract:
+        title: "Contract"
+        description: "The requested contract"
+        type: contract
+        required: true
+        order: 1
+  create_contract:
+    title: "Create Contract"
+    description: "Create a new contract in Cyber GRC"
+    input:
+      record:
+        title: "Contract"
+        description: "The contract to create, as a JSON object matching the CreateContractDto schema in the Rapid7 Cyber GRC API reference"
+        type: object
+        required: true
+        example: {"name": "Example contract"}
+        order: 1
+    output:
+      contract:
+        title: "Contract"
+        description: "The created contract"
+        type: contract
+        required: true
+        order: 1
+  update_contract:
+    title: "Update Contract"
+    description: "Update an existing contract in Cyber GRC"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the contract to update"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+      record:
+        title: "Contract"
+        description: "The fields to write, as a JSON object matching the UpdateContractDto schema in the Rapid7 Cyber GRC API reference"
+        type: object
+        required: true
+        example: {"name": "Renamed contract"}
+        order: 2
+    output:
+      contract:
+        title: "Contract"
+        description: "The updated contract"
+        type: contract
+        required: true
+        order: 1
+  delete_contract:
+    title: "Delete Contract"
+    description: "Delete a contract by ID"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the contract to delete"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+    output:
+      result:
+        title: "Result"
+        description: "Outcome of the delete operation"
+        type: delete_operation_response
+        required: true
+        order: 1
+  get_certifications:
+    title: "Get Certifications"
+    description: "Retrieve certifications from Cyber GRC, optionally narrowed with an OData filter"
+    input:
+      filter:
+        title: "Filter"
+        description: "OData $filter expression used to narrow the results, e.g. contains(name, 'phishing') and statusID eq 3"
+        type: string
+        required: false
+        example: "statusID eq 3"
+        order: 1
+      select:
+        title: "Select"
+        description: "Comma separated list of fields to return. Leave empty to return every field"
+        type: string
+        required: false
+        example: "id,name,statusID"
+        order: 2
+      order_by:
+        title: "Order By"
+        description: "OData $orderby expression, e.g. modifiedDate desc"
+        type: string
+        required: false
+        example: "modifiedDate desc"
+        order: 3
+      top:
+        title: "Top"
+        description: "Maximum number of records to return. Leave empty or set to 0 to return every record, paging through the API automatically"
+        type: integer
+        required: false
+        default: 0
+        example: 100
+        order: 4
+      skip:
+        title: "Skip"
+        description: "Number of records to skip before returning results"
+        type: integer
+        required: false
+        example: 0
+        order: 5
+    output:
+      certifications:
+        title: "Certifications"
+        description: "The matching certifications"
+        type: "[]certification"
+        required: true
+        order: 1
+      count:
+        title: "Count"
+        description: "Number of certifications returned"
+        type: integer
+        required: true
+        example: 1
+        order: 2
+  get_certification:
+    title: "Get Certification"
+    description: "Retrieve a single certification by ID"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the certification to retrieve"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+      select:
+        title: "Select"
+        description: "Comma separated list of fields to return. Leave empty to return every field"
+        type: string
+        required: false
+        example: "id,name"
+        order: 2
+    output:
+      certification:
+        title: "Certification"
+        description: "The requested certification"
+        type: certification
+        required: true
+        order: 1
+  create_certification:
+    title: "Create Certification"
+    description: "Create a new certification in Cyber GRC"
+    input:
+      record:
+        title: "Certification"
+        description: "The certification to create, as a JSON object matching the CreateCertificationDto schema in the Rapid7 Cyber GRC API reference"
+        type: object
+        required: true
+        example: {"name": "Example certification"}
+        order: 1
+    output:
+      certification:
+        title: "Certification"
+        description: "The created certification"
+        type: certification
+        required: true
+        order: 1
+  update_certification:
+    title: "Update Certification"
+    description: "Update an existing certification in Cyber GRC"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the certification to update"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+      record:
+        title: "Certification"
+        description: "The fields to write, as a JSON object matching the UpdateCertificationDto schema in the Rapid7 Cyber GRC API reference"
+        type: object
+        required: true
+        example: {"name": "Renamed certification"}
+        order: 2
+    output:
+      certification:
+        title: "Certification"
+        description: "The updated certification"
+        type: certification
+        required: true
+        order: 1
+  delete_certification:
+    title: "Delete Certification"
+    description: "Delete a certification by ID"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the certification to delete"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+    output:
+      result:
+        title: "Result"
+        description: "Outcome of the delete operation"
+        type: delete_operation_response
+        required: true
+        order: 1
+  get_it_assets:
+    title: "Get IT Assets"
+    description: "Retrieve it assets from Cyber GRC, optionally narrowed with an OData filter"
+    input:
+      filter:
+        title: "Filter"
+        description: "OData $filter expression used to narrow the results, e.g. contains(name, 'phishing') and statusID eq 3"
+        type: string
+        required: false
+        example: "statusID eq 3"
+        order: 1
+      select:
+        title: "Select"
+        description: "Comma separated list of fields to return. Leave empty to return every field"
+        type: string
+        required: false
+        example: "id,name,statusID"
+        order: 2
+      order_by:
+        title: "Order By"
+        description: "OData $orderby expression, e.g. modifiedDate desc"
+        type: string
+        required: false
+        example: "modifiedDate desc"
+        order: 3
+      top:
+        title: "Top"
+        description: "Maximum number of records to return. Leave empty or set to 0 to return every record, paging through the API automatically"
+        type: integer
+        required: false
+        default: 0
+        example: 100
+        order: 4
+      skip:
+        title: "Skip"
+        description: "Number of records to skip before returning results"
+        type: integer
+        required: false
+        example: 0
+        order: 5
+    output:
+      it_assets:
+        title: "IT Assets"
+        description: "The matching it assets"
+        type: "[]it_asset"
+        required: true
+        order: 1
+      count:
+        title: "Count"
+        description: "Number of it assets returned"
+        type: integer
+        required: true
+        example: 1
+        order: 2
+  get_it_asset:
+    title: "Get IT Asset"
+    description: "Retrieve a single it asset by ID"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the it asset to retrieve"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+      select:
+        title: "Select"
+        description: "Comma separated list of fields to return. Leave empty to return every field"
+        type: string
+        required: false
+        example: "id,name"
+        order: 2
+    output:
+      it_asset:
+        title: "IT Asset"
+        description: "The requested it asset"
+        type: it_asset
+        required: true
+        order: 1
+  create_it_asset:
+    title: "Create IT Asset"
+    description: "Create a new it asset in Cyber GRC"
+    input:
+      record:
+        title: "IT Asset"
+        description: "The it asset to create, as a JSON object matching the CreateITAssetDto schema in the Rapid7 Cyber GRC API reference"
+        type: object
+        required: true
+        example: {"name": "Example it asset"}
+        order: 1
+    output:
+      it_asset:
+        title: "IT Asset"
+        description: "The created it asset"
+        type: it_asset
+        required: true
+        order: 1
+  update_it_asset:
+    title: "Update IT Asset"
+    description: "Update an existing it asset in Cyber GRC"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the it asset to update"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+      record:
+        title: "IT Asset"
+        description: "The fields to write, as a JSON object matching the UpdateITAssetDto schema in the Rapid7 Cyber GRC API reference"
+        type: object
+        required: true
+        example: {"name": "Renamed it asset"}
+        order: 2
+    output:
+      it_asset:
+        title: "IT Asset"
+        description: "The updated it asset"
+        type: it_asset
+        required: true
+        order: 1
+  delete_it_asset:
+    title: "Delete IT Asset"
+    description: "Delete a it asset by ID"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the it asset to delete"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+    output:
+      result:
+        title: "Result"
+        description: "Outcome of the delete operation"
+        type: delete_operation_response
+        required: true
+        order: 1
+  get_users:
+    title: "Get Users"
+    description: "Retrieve users from Cyber GRC, optionally narrowed with an OData filter"
+    input:
+      filter:
+        title: "Filter"
+        description: "OData $filter expression used to narrow the results, e.g. contains(name, 'phishing') and statusID eq 3"
+        type: string
+        required: false
+        example: "statusID eq 3"
+        order: 1
+      select:
+        title: "Select"
+        description: "Comma separated list of fields to return. Leave empty to return every field"
+        type: string
+        required: false
+        example: "id,name,statusID"
+        order: 2
+      order_by:
+        title: "Order By"
+        description: "OData $orderby expression, e.g. modifiedDate desc"
+        type: string
+        required: false
+        example: "modifiedDate desc"
+        order: 3
+      top:
+        title: "Top"
+        description: "Maximum number of records to return. Leave empty or set to 0 to return every record, paging through the API automatically"
+        type: integer
+        required: false
+        default: 0
+        example: 100
+        order: 4
+      skip:
+        title: "Skip"
+        description: "Number of records to skip before returning results"
+        type: integer
+        required: false
+        example: 0
+        order: 5
+    output:
+      users:
+        title: "Users"
+        description: "The matching users"
+        type: "[]user"
+        required: true
+        order: 1
+      count:
+        title: "Count"
+        description: "Number of users returned"
+        type: integer
+        required: true
+        example: 1
+        order: 2
+  get_user:
+    title: "Get User"
+    description: "Retrieve a single user by ID"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the user to retrieve"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+      select:
+        title: "Select"
+        description: "Comma separated list of fields to return. Leave empty to return every field"
+        type: string
+        required: false
+        example: "id,name"
+        order: 2
+    output:
+      user:
+        title: "User"
+        description: "The requested user"
+        type: user
+        required: true
+        order: 1
+  create_user:
+    title: "Create User"
+    description: "Create a new user in Cyber GRC"
+    input:
+      record:
+        title: "User"
+        description: "The user to create, as a JSON object matching the CreateUserDto schema in the Rapid7 Cyber GRC API reference"
+        type: object
+        required: true
+        example: {"name": "Example user"}
+        order: 1
+    output:
+      user:
+        title: "User"
+        description: "The created user"
+        type: user
+        required: true
+        order: 1
+  update_user:
+    title: "Update User"
+    description: "Update an existing user in Cyber GRC"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the user to update"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+      record:
+        title: "User"
+        description: "The fields to write, as a JSON object matching the UpdateUserDto schema in the Rapid7 Cyber GRC API reference"
+        type: object
+        required: true
+        example: {"name": "Renamed user"}
+        order: 2
+    output:
+      user:
+        title: "User"
+        description: "The updated user"
+        type: user
+        required: true
+        order: 1
+  delete_user:
+    title: "Delete User"
+    description: "Delete a user by ID"
+    input:
+      id:
+        title: "ID"
+        description: "ID of the user to delete"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+    output:
+      result:
+        title: "Result"
+        description: "Outcome of the delete operation"
+        type: delete_operation_response
+        required: true
+        order: 1
+  list_records:
+    title: "List Records"
+    description: "Retrieve records of any Cyber GRC record type, optionally narrowed with an OData filter"
+    input:
+      record_type:
+        title: "Record Type"
+        description: "The Cyber GRC record type to operate on"
+        type: string
+        required: true
+        default: "Risks"
+        enum:
+        - "AnswerSets"
+        - "AssessmentQuestions"
+        - "Assessments"
+        - "Audits"
+        - "BusinessObjectives"
+        - "Certifications"
+        - "Clients"
+        - "ContractDocuments"
+        - "Contracts"
+        - "ControlSetMetrics"
+        - "ControlSets"
+        - "Departments"
+        - "Discussions"
+        - "DocumentTypes"
+        - "Groups"
+        - "ITAssets"
+        - "ImpactViews"
+        - "Impacts"
+        - "Incidents"
+        - "LikelihoodViews"
+        - "Likelihoods"
+        - "Locations"
+        - "QuestionSets"
+        - "Risks"
+        - "SecurityPolicyInfos"
+        - "SecurityPolicySettings"
+        - "Statuses"
+        - "SystemInfos"
+        - "TaskTypes"
+        - "Tasks"
+        - "UserFileEvents"
+        - "Users"
+        - "VendorTypes"
+        - "Vendors"
+        example: "Risks"
+        order: 1
+      filter:
+        title: "Filter"
+        description: "OData $filter expression used to narrow the results, e.g. contains(name, 'phishing') and statusID eq 3"
+        type: string
+        required: false
+        example: "statusID eq 3"
+        order: 2
+      select:
+        title: "Select"
+        description: "Comma separated list of fields to return. Leave empty to return every field"
+        type: string
+        required: false
+        example: "id,name,statusID"
+        order: 3
+      order_by:
+        title: "Order By"
+        description: "OData $orderby expression, e.g. modifiedDate desc"
+        type: string
+        required: false
+        example: "modifiedDate desc"
+        order: 4
+      top:
+        title: "Top"
+        description: "Maximum number of records to return. Leave empty or set to 0 to return every record, paging through the API automatically"
+        type: integer
+        required: false
+        default: 0
+        example: 100
+        order: 5
+      skip:
+        title: "Skip"
+        description: "Number of records to skip before returning results"
+        type: integer
+        required: false
+        example: 0
+        order: 6
+    output:
+      records:
+        title: "Records"
+        description: "The matching records"
+        type: "[]object"
+        required: true
+        order: 1
+      count:
+        title: "Count"
+        description: "Number of records returned"
+        type: integer
+        required: true
+        example: 1
+        order: 2
+  get_record:
+    title: "Get Record"
+    description: "Retrieve a single record of any Cyber GRC record type by ID"
+    input:
+      record_type:
+        title: "Record Type"
+        description: "The Cyber GRC record type to operate on"
+        type: string
+        required: true
+        default: "Risks"
+        enum:
+        - "AnswerSets"
+        - "AssessmentQuestions"
+        - "Assessments"
+        - "Audits"
+        - "BusinessObjectives"
+        - "Certifications"
+        - "Clients"
+        - "ContractDocuments"
+        - "Contracts"
+        - "ControlSetMetrics"
+        - "ControlSets"
+        - "Departments"
+        - "Discussions"
+        - "DocumentTypes"
+        - "Groups"
+        - "ITAssets"
+        - "ImpactViews"
+        - "Impacts"
+        - "Incidents"
+        - "LikelihoodViews"
+        - "Likelihoods"
+        - "Locations"
+        - "QuestionSets"
+        - "Risks"
+        - "SecurityPolicyInfos"
+        - "SecurityPolicySettings"
+        - "Statuses"
+        - "SystemInfos"
+        - "TaskTypes"
+        - "Tasks"
+        - "UserFileEvents"
+        - "Users"
+        - "VendorTypes"
+        - "Vendors"
+        example: "Risks"
+        order: 1
+      id:
+        title: "ID"
+        description: "ID of the record to retrieve"
+        type: integer
+        required: true
+        example: 1
+        order: 2
+      select:
+        title: "Select"
+        description: "Comma separated list of fields to return. Leave empty to return every field"
+        type: string
+        required: false
+        example: "id,name"
+        order: 3
+    output:
+      record:
+        title: "Record"
+        description: "The requested record"
+        type: object
+        required: true
+        order: 1
+  create_record:
+    title: "Create Record"
+    description: "Create a record of any Cyber GRC record type"
+    input:
+      record_type:
+        title: "Record Type"
+        description: "The Cyber GRC record type to operate on"
+        type: string
+        required: true
+        default: "Risks"
+        enum:
+        - "AnswerSets"
+        - "AssessmentQuestions"
+        - "Assessments"
+        - "Audits"
+        - "BusinessObjectives"
+        - "Certifications"
+        - "Clients"
+        - "ContractDocuments"
+        - "Contracts"
+        - "ControlSetMetrics"
+        - "ControlSets"
+        - "Departments"
+        - "Discussions"
+        - "DocumentTypes"
+        - "Groups"
+        - "ITAssets"
+        - "ImpactViews"
+        - "Impacts"
+        - "Incidents"
+        - "LikelihoodViews"
+        - "Likelihoods"
+        - "Locations"
+        - "QuestionSets"
+        - "Risks"
+        - "SecurityPolicyInfos"
+        - "SecurityPolicySettings"
+        - "Statuses"
+        - "SystemInfos"
+        - "TaskTypes"
+        - "Tasks"
+        - "UserFileEvents"
+        - "Users"
+        - "VendorTypes"
+        - "Vendors"
+        example: "Risks"
+        order: 1
+      record:
+        title: "Record"
+        description: "The record to create, as a JSON object matching the corresponding Create DTO in the Rapid7 Cyber GRC API reference"
+        type: object
+        required: true
+        example: {"name": "Example record"}
+        order: 2
+    output:
+      record:
+        title: "Record"
+        description: "The created record"
+        type: object
+        required: true
+        order: 1
+  update_record:
+    title: "Update Record"
+    description: "Update a record of any Cyber GRC record type"
+    input:
+      record_type:
+        title: "Record Type"
+        description: "The Cyber GRC record type to operate on"
+        type: string
+        required: true
+        default: "Risks"
+        enum:
+        - "AnswerSets"
+        - "AssessmentQuestions"
+        - "Assessments"
+        - "Audits"
+        - "BusinessObjectives"
+        - "Certifications"
+        - "Clients"
+        - "ContractDocuments"
+        - "Contracts"
+        - "ControlSetMetrics"
+        - "ControlSets"
+        - "Departments"
+        - "Discussions"
+        - "DocumentTypes"
+        - "Groups"
+        - "ITAssets"
+        - "ImpactViews"
+        - "Impacts"
+        - "Incidents"
+        - "LikelihoodViews"
+        - "Likelihoods"
+        - "Locations"
+        - "QuestionSets"
+        - "Risks"
+        - "SecurityPolicyInfos"
+        - "SecurityPolicySettings"
+        - "Statuses"
+        - "SystemInfos"
+        - "TaskTypes"
+        - "Tasks"
+        - "UserFileEvents"
+        - "Users"
+        - "VendorTypes"
+        - "Vendors"
+        example: "Risks"
+        order: 1
+      id:
+        title: "ID"
+        description: "ID of the record to update"
+        type: integer
+        required: true
+        example: 1
+        order: 2
+      record:
+        title: "Record"
+        description: "The fields to write, as a JSON object matching the corresponding Update DTO in the Rapid7 Cyber GRC API reference"
+        type: object
+        required: true
+        example: {"name": "Renamed record"}
+        order: 3
+    output:
+      record:
+        title: "Record"
+        description: "The updated record"
+        type: object
+        required: true
+        order: 1
+  delete_record:
+    title: "Delete Record"
+    description: "Delete a record of any Cyber GRC record type that supports deletion"
+    input:
+      record_type:
+        title: "Record Type"
+        description: "The Cyber GRC record type to delete from"
+        type: string
+        required: true
+        default: "Risks"
+        enum:
+        - "Assessments"
+        - "Audits"
+        - "BusinessObjectives"
+        - "Certifications"
+        - "Clients"
+        - "ContractDocuments"
+        - "Contracts"
+        - "ControlSetMetrics"
+        - "ControlSets"
+        - "Departments"
+        - "Discussions"
+        - "DocumentTypes"
+        - "Groups"
+        - "ITAssets"
+        - "ImpactViews"
+        - "Incidents"
+        - "LikelihoodViews"
+        - "Locations"
+        - "Risks"
+        - "SecurityPolicyInfos"
+        - "SecurityPolicySettings"
+        - "SystemInfos"
+        - "Tasks"
+        - "UserFileEvents"
+        - "Users"
+        - "VendorTypes"
+        - "Vendors"
+        example: "Risks"
+        order: 1
+      id:
+        title: "ID"
+        description: "ID of the record to delete"
+        type: integer
+        required: true
+        example: 1
+        order: 2
+    output:
+      result:
+        title: "Result"
+        description: "Outcome of the delete operation"
+        type: delete_operation_response
+        required: true
+        order: 1
+  count_records:
+    title: "Count Records"
+    description: "Count the records of any Cyber GRC record type that match an OData filter"
+    input:
+      record_type:
+        title: "Record Type"
+        description: "The Cyber GRC record type to operate on"
+        type: string
+        required: true
+        default: "Risks"
+        enum:
+        - "AnswerSets"
+        - "AssessmentQuestions"
+        - "Assessments"
+        - "Audits"
+        - "BusinessObjectives"
+        - "Certifications"
+        - "Clients"
+        - "ContractDocuments"
+        - "Contracts"
+        - "ControlSetMetrics"
+        - "ControlSets"
+        - "Departments"
+        - "Discussions"
+        - "DocumentTypes"
+        - "Groups"
+        - "ITAssets"
+        - "ImpactViews"
+        - "Impacts"
+        - "Incidents"
+        - "LikelihoodViews"
+        - "Likelihoods"
+        - "Locations"
+        - "QuestionSets"
+        - "Risks"
+        - "SecurityPolicyInfos"
+        - "SecurityPolicySettings"
+        - "Statuses"
+        - "SystemInfos"
+        - "TaskTypes"
+        - "Tasks"
+        - "UserFileEvents"
+        - "Users"
+        - "VendorTypes"
+        - "Vendors"
+        example: "Risks"
+        order: 1
+      filter:
+        title: "Filter"
+        description: "OData $filter expression used to narrow the count. Leave empty to count every record"
+        type: string
+        required: false
+        example: "statusID eq 3"
+        order: 2
+    output:
+      count:
+        title: "Count"
+        description: "Number of matching records"
+        type: integer
+        required: true
+        example: 1
+        order: 1
+  get_record_history:
+    title: "Get Record History"
+    description: "Retrieve the change history of a record for the record types that track history"
+    input:
+      record_type:
+        title: "Record Type"
+        description: "The Cyber GRC record type to read history from"
+        type: string
+        required: true
+        default: "Risks"
+        enum:
+        - "Assessments"
+        - "Audits"
+        - "Certifications"
+        - "Contracts"
+        - "ControlSets"
+        - "ITAssets"
+        - "Incidents"
+        - "Risks"
+        - "Tasks"
+        - "Users"
+        example: "Risks"
+        order: 1
+      id:
+        title: "ID"
+        description: "ID of the record whose history should be retrieved"
+        type: integer
+        required: true
+        example: 1
+        order: 2
+    output:
+      history:
+        title: "History"
+        description: "Change history entries for the record, most recent first as returned by the API"
+        type: "[]object"
+        required: true
+        order: 1
+      count:
+        title: "Count"
+        description: "Number of history entries returned"
+        type: integer
+        required: true
+        example: 1
+        order: 2
+  upload_flat_file:
+    title: "Upload Flat File"
+    description: "Upload an XLSX or CSV file to Cyber GRC through the v1 Flat File API. Uploading a file whose name already exists updates the existing flat file"
+    input:
+      file_name:
+        title: "File Name"
+        description: "Name of the file including its extension. Cyber GRC tracks flat files by name, so reusing a name updates the existing file"
+        type: string
+        required: true
+        example: "vulnerabilities.csv"
+        order: 1
+      file:
+        title: "File"
+        description: "Base64 encoded contents of the XLSX or CSV file to upload"
+        type: bytes
+        required: true
+        example: "aWQsbmFtZQoxLGV4YW1wbGUK"
+        order: 2
+      operation_type:
+        title: "Operation Type"
+        description: "Whether to add the rows to the existing values or replace them"
+        type: string
+        required: true
+        default: "Append"
+        enum:
+        - "Append"
+        - "Replace"
+        example: "Append"
+        order: 3
+      description:
+        title: "Description"
+        description: "Optional description to store alongside the flat file"
+        type: string
+        required: false
+        example: "Weekly vulnerability export"
+        order: 4
+      id:
+        title: "ID"
+        description: "ID of an existing flat file integration. Leave at 0 to let Cyber GRC match on file name"
+        type: integer
+        required: false
+        default: 0
+        example: 0
+        order: 5
+    output:
+      result:
+        title: "Result"
+        description: "Response returned by the Flat File API"
+        type: object
+        required: true
+        order: 1
+triggers:
+  monitor_records:
+    title: "Monitor Records"
+    description: "Poll a Cyber GRC record type and emit records as they are created or updated"
+    input:
+      record_type:
+        title: "Record Type"
+        description: "The Cyber GRC record type to poll"
+        type: string
+        required: true
+        default: "Tasks"
+        enum:
+        - "AnswerSets"
+        - "AssessmentQuestions"
+        - "Assessments"
+        - "Audits"
+        - "BusinessObjectives"
+        - "Certifications"
+        - "Clients"
+        - "Contracts"
+        - "ControlSetMetrics"
+        - "ControlSets"
+        - "Departments"
+        - "Discussions"
+        - "Groups"
+        - "ITAssets"
+        - "ImpactViews"
+        - "Impacts"
+        - "Incidents"
+        - "LikelihoodViews"
+        - "Likelihoods"
+        - "Locations"
+        - "QuestionSets"
+        - "Risks"
+        - "SecurityPolicyInfos"
+        - "SecurityPolicySettings"
+        - "SystemInfos"
+        - "TaskTypes"
+        - "Tasks"
+        - "Users"
+        - "VendorTypes"
+        - "Vendors"
+        example: "Tasks"
+        order: 1
+      event_type:
+        title: "Event Type"
+        description: "Which events to emit. Created emits each record once, when it first appears. Updated emits a record every time it changes, but not when it is created. Any emits both"
+        type: string
+        required: true
+        default: "Any"
+        enum:
+        - "Any"
+        - "Created"
+        - "Updated"
+        example: "Created"
+        order: 2
+      interval:
+        title: "Interval"
+        description: "Number of seconds to wait between polls"
+        type: integer
+        required: true
+        default: 300
+        example: 300
+        order: 3
+      filter:
+        title: "Filter"
+        description: "Additional OData $filter expression narrowing which records are emitted, combined with the timestamp filter using and. Field names are the camelCase names in the API reference, text values are single quoted, and dates are unquoted, for example statusID eq 3, or name eq 'Access Review', or dueDate ne null and dueDate lt 2026-12-31T00:00:00.000Z"
+        type: string
+        required: false
+        example: "statusID eq 3"
+        order: 4
+    output:
+      records:
+        title: "Records"
+        description: "Records created or updated since the previous poll"
+        type: "[]object"
+        required: true
+        order: 1
+      count:
+        title: "Count"
+        description: "Number of records emitted"
+        type: integer
+        required: true
+        example: 1
+        order: 2
+  monitor_compliance_drift:
+    title: "Monitor Compliance Drift"
+    description: "Poll the framework compliance scores and emit the frameworks whose score has fallen"
+    input:
+      control_set_id:
+        title: "Control Set ID"
+        description: "ID of a single control set to watch. Leave empty or set to 0 to watch every control set that is enabled and not archived"
+        type: integer
+        required: false
+        default: 0
+        example: 0
+        order: 1
+      drop_threshold:
+        title: "Drop Threshold"
+        description: "How far a compliance score has to fall between polls before it is reported, in percentage points. Set to 0 to report every fall"
+        type: float
+        required: true
+        default: 5
+        example: 5
+        order: 2
+      minimum_compliance:
+        title: "Minimum Compliance"
+        description: "Report any framework scoring below this as it crosses the floor, so a framework that is already failing is reported on the first poll rather than only after a further fall. Set to 0 to disable the floor"
+        type: float
+        required: true
+        default: 0
+        example: 80
+        order: 3
+      interval:
+        title: "Interval"
+        description: "Number of seconds to wait between polls. Cyber GRC recalculates scores periodically rather than continuously, so polling faster than it recalculates adds load without adding detail"
+        type: integer
+        required: true
+        default: 3600
+        example: 3600
+        order: 4
+    output:
+      drifts:
+        title: "Drifts"
+        description: "Frameworks whose compliance score fell by at least the Drop Threshold or sits below the Minimum Compliance floor, worst fall first"
+        type: "[]compliance_drift"
+        required: true
+        order: 1
+      count:
+        title: "Count"
+        description: "Number of frameworks reported"
+        type: integer
+        required: true
+        example: 1
+        order: 2
