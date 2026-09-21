@@ -2694,6 +2694,7 @@ actions:
         description: "Number of records to skip before returning results"
         type: integer
         required: false
+        default: 0
         example: 0
         order: 5
     output:
@@ -2834,6 +2835,7 @@ actions:
         description: "Number of records to skip before returning results"
         type: integer
         required: false
+        default: 0
         example: 0
         order: 5
     output:
@@ -2974,6 +2976,7 @@ actions:
         description: "Number of records to skip before returning results"
         type: integer
         required: false
+        default: 0
         example: 0
         order: 5
       owner:
@@ -3211,6 +3214,7 @@ actions:
         description: "Number of records to skip before returning results"
         type: integer
         required: false
+        default: 0
         example: 0
         order: 5
     output:
@@ -3351,6 +3355,7 @@ actions:
         description: "Number of records to skip before returning results"
         type: integer
         required: false
+        default: 0
         example: 0
         order: 5
     output:
@@ -3516,6 +3521,7 @@ actions:
         description: "Number of records to skip before returning results"
         type: integer
         required: false
+        default: 0
         example: 0
         order: 5
     output:
@@ -3656,6 +3662,7 @@ actions:
         description: "Number of records to skip before returning results"
         type: integer
         required: false
+        default: 0
         example: 0
         order: 5
     output:
@@ -3796,6 +3803,7 @@ actions:
         description: "Number of records to skip before returning results"
         type: integer
         required: false
+        default: 0
         example: 0
         order: 5
       renewing_within_days:
@@ -3952,6 +3960,7 @@ actions:
         description: "Number of records to skip before returning results"
         type: integer
         required: false
+        default: 0
         example: 0
         order: 5
     output:
@@ -4092,6 +4101,7 @@ actions:
         description: "Number of records to skip before returning results"
         type: integer
         required: false
+        default: 0
         example: 0
         order: 5
     output:
@@ -4232,6 +4242,7 @@ actions:
         description: "Number of records to skip before returning results"
         type: integer
         required: false
+        default: 0
         example: 0
         order: 5
     output:
@@ -4415,6 +4426,7 @@ actions:
         description: "Number of records to skip before returning results"
         type: integer
         required: false
+        default: 0
         example: 0
         order: 6
     output:

@@ -48,6 +48,7 @@ class GetIncidentsInput(insightconnect_plugin_runtime.Input):
       "type": "integer",
       "title": "Skip",
       "description": "Number of records to skip before returning results",
+      "default": 0,
       "order": 5
     },
     "top": {
