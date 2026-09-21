@@ -123,7 +123,7 @@ The connection configuration accepts the following parameters:
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |api_key|credential_secret_key|None|True|A Cyber GRC API key, generated under Settings then API Keys. The key inherits the permissions of the user it is assigned to|None|cpyl_0000000000000000000000000000000000000000000000|None|None|
 |ssl_verify|boolean|True|True|Verify the TLS certificate presented by the Cyber GRC API host|None|True|None|None|
-|url|string|None|True|Base URL of the Cyber GRC API host, without a trailing path|None|https://cyber-grc-api.example.com|None|None|
+|url|string|None|True|Base URL of the Cyber GRC API host, without a trailing path|None|https://example.com|None|None|
 
 Example input:
 
@@ -131,7 +131,7 @@ Example input:
 {
   "api_key": "cpyl_0000000000000000000000000000000000000000000000",
   "ssl_verify": true,
-  "url": "https://cyber-grc-api.example.com"
+  "url": "https://example.com"
 }
 ```
 
@@ -166,7 +166,7 @@ The connection configuration accepts the following parameters:
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |api_key|credential_secret_key|None|True|A Cyber GRC API key, generated under Settings then API Keys. The key inherits the permissions of the user it is assigned to|None|cpyl_0000000000000000000000000000000000000000000000|None|None|
 |ssl_verify|boolean|True|True|Verify the TLS certificate presented by the Cyber GRC API host|None|True|None|None|
-|url|string|None|True|Base URL of the Cyber GRC API host, without a trailing path|None|https://cyber-grc-api.example.com|None|None|
+|url|string|None|True|Base URL of the Cyber GRC API host, without a trailing path|None|https://example.com|None|None|
 
 Example input:
 
@@ -174,7 +174,7 @@ Example input:
 {
   "api_key": "cpyl_0000000000000000000000000000000000000000000000",
   "ssl_verify": true,
-  "url": "https://cyber-grc-api.example.com"
+  "url": "https://example.com"
 }
 ```
 
