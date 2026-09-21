@@ -62,7 +62,7 @@ connection:
     description: "Base URL of the Cyber GRC API host, without a trailing path"
     type: string
     required: true
-    example: "https://example.com"
+    example: "https://insight.rapid7.com/"
     order: 1
   api_key:
     title: "API Key"
