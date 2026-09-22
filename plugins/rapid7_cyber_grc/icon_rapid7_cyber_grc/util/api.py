@@ -26,14 +26,36 @@ CLOCK_COLLECTION = "Statuses"
 IGNORED_ON_UPDATE = ("assignedTo", "assignedToID")
 
 # Documented Cyber GRC field character limits, keyed by record type then field name.
-# A value longer than its limit is truncated (with a warning) before the request is
-# sent, so a step logs the trim and continues rather than failing when the API rejects
-# an over-length field. Add new entries here as further limits are confirmed; the
-# truncation is applied centrally by every create and update path.
+# A value longer than its limit is truncated (with a warning that also records the full
+# original value) before the request is sent, so a step logs the trim and continues
+# rather than failing when the API rejects an over-length field. Add or override entries
+# here as further limits are confirmed; the truncation is applied centrally by every
+# create and update path.
+#
+# A comment is confirmed at 5000 characters and a risk description at 2000. The other
+# free-text description and body fields are not individually documented, so they default
+# to the same 2000 the risk description uses, which is the safe assumption for a narrative
+# field. Any field later confirmed to allow more can be raised here on its own.
+BODY_FIELD_LIMIT = 2000
 FIELD_CHAR_LIMITS = {
     # A comment posted through Add Comment is a row in the Discussions collection.
     "Discussions": {"comment": 5000},
-    "Risks": {"description": 2000},
+    "Risks": {"description": 2000, "businessImpact": BODY_FIELD_LIMIT, "possibleOutcome": BODY_FIELD_LIMIT},
+    "Incidents": {
+        "description": BODY_FIELD_LIMIT,
+        "howIdentified": BODY_FIELD_LIMIT,
+        "howOccurred": BODY_FIELD_LIMIT,
+        "rootCause": BODY_FIELD_LIMIT,
+        "lessonsLearned": BODY_FIELD_LIMIT,
+        "immediateAction": BODY_FIELD_LIMIT,
+    },
+    "Tasks": {"description": BODY_FIELD_LIMIT, "instructions": BODY_FIELD_LIMIT},
+    "Audits": {"description": BODY_FIELD_LIMIT},
+    "ControlSets": {"description": BODY_FIELD_LIMIT},
+    "Assessments": {"description": BODY_FIELD_LIMIT, "summary": BODY_FIELD_LIMIT},
+    "Vendors": {"description": BODY_FIELD_LIMIT, "publicDescription": BODY_FIELD_LIMIT},
+    "ITAssets": {"description": BODY_FIELD_LIMIT},
+    "Contracts": {"description": BODY_FIELD_LIMIT},
 }
 
 # Truncated values are cut this many characters short of the documented limit, so a
@@ -189,8 +211,12 @@ class CyberGrcAPI:
             self.logger.warning(
                 f"The {record_type} field '{field}' was {len(value)} characters, over the {limit} character limit "
                 f"Cyber GRC enforces, so it was truncated to {safe_length} characters. The step continued rather "
-                "than failing; shorten the value upstream to keep the full text."
+                "than failing; shorten the value upstream to keep the full text. The full original value is logged "
+                "below so it is not lost."
             )
+            # Logged in full and separately so the untruncated text is recoverable from
+            # the job log even though the record stored only the truncated value.
+            self.logger.info(f"Full original value of {record_type} '{field}' before truncation:\n{value}")
 
         return trimmed if trimmed is not None else record
 

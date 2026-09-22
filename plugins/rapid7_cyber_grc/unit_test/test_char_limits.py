@@ -16,7 +16,7 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import patch
 
-from icon_rapid7_cyber_grc.actions import AddComment, CreateRisk, UpdateRisk
+from icon_rapid7_cyber_grc.actions import AddComment, CreateIncident, CreateRisk, UpdateRisk
 from icon_rapid7_cyber_grc.util.api import CHAR_LIMIT_MARGIN, FIELD_CHAR_LIMITS
 from util import BASE_URL, MockResponse, Util
 
@@ -77,6 +77,42 @@ class TestRecordCharLimits(TestCase):
             action.run({"record": {"description": "x" * (RISK_DESC_LIMIT + 10)}})
 
         self.assertTrue(any("truncated" in line.lower() for line in logged.output))
+
+    def test_the_full_original_value_is_logged_so_it_is_not_lost(self, mock_request):
+        original = "x" * (RISK_DESC_LIMIT + 250)
+        action = Util.default_connector(CreateRisk())
+        with self.assertLogs(action.connection.logger, level="INFO") as logged:
+            action.run({"record": {"description": original}})
+
+        # The full untruncated value must appear in the log even though the record
+        # stored only the truncated form.
+        self.assertTrue(any(original in line for line in logged.output))
+
+    def test_secondary_risk_body_fields_are_also_truncated(self, mock_request):
+        # businessImpact and possibleOutcome are guarded alongside description.
+        action = Util.default_connector(CreateRisk())
+        action.run(
+            {
+                "record": {
+                    "businessImpact": "b" * (RISK_DESC_LIMIT + 300),
+                    "possibleOutcome": "p" * (RISK_DESC_LIMIT + 300),
+                }
+            }
+        )
+
+        posted = self.sent("POST")
+        self.assertEqual(len(posted["businessImpact"]), RISK_DESC_LIMIT - CHAR_LIMIT_MARGIN)
+        self.assertEqual(len(posted["possibleOutcome"]), RISK_DESC_LIMIT - CHAR_LIMIT_MARGIN)
+
+    def test_body_fields_on_another_record_type_are_truncated(self, mock_request):
+        # An incident carries several narrative fields; each is guarded.
+        limit = FIELD_CHAR_LIMITS["Incidents"]["rootCause"]
+        action = Util.default_connector(CreateIncident())
+        action.run({"record": {"rootCause": "r" * (limit + 500), "lessonsLearned": "l" * (limit + 500)}})
+
+        posted = self.sent("POST")
+        self.assertEqual(len(posted["rootCause"]), limit - CHAR_LIMIT_MARGIN)
+        self.assertEqual(len(posted["lessonsLearned"]), limit - CHAR_LIMIT_MARGIN)
 
 
 class TestCommentCharLimit(TestCase):
