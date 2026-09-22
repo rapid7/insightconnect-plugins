@@ -299,7 +299,7 @@ This action is used to add a comment to a Cyber GRC record, mirroring a comment 
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|comment|string|None|True|Text of the comment|None|Closed in the ticketing system by the asset owner|None|None|
+|comment|string|None|True|Text of the comment. A comment over 5000 characters is truncated to fit the Cyber GRC limit, with a warning in the job log, rather than failing the step|None|Closed in the ticketing system by the asset owner|None|None|
 |discussion_field_id|integer|None|False|Overrides the Discussion Field ID the action would otherwise read from the record itself. Only needed if the record does not carry one|None|12|None|None|
 |form_discussion_id|integer|None|False|Overrides the Form Discussion ID, which the action defaults to the record ID. Cyber GRC does not document how this field resolves, so set it explicitly if comments do not appear against the record|None|1|None|None|
 |id|integer|None|True|ID of the record to comment on|None|1|None|None|
@@ -1087,7 +1087,7 @@ This action is used to create a new risk in Cyber GRC
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|record|object|None|True|The risk to create, as a JSON object matching the CreateRiskDto schema in the Rapid7 Cyber GRC API reference|None|{'name': 'Example risk'}|None|None|
+|record|object|None|True|The risk to create, as a JSON object matching the CreateRiskDto schema in the Rapid7 Cyber GRC API reference. A description over 2000 characters is truncated to fit the Cyber GRC limit, with a warning in the job log, rather than failing the step|None|{'name': 'Example risk'}|None|None|
   
 Example input:
 
@@ -5222,7 +5222,7 @@ This action is used to update an existing risk in Cyber GRC
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|integer|None|True|ID of the risk to update|None|1|None|None|
-|record|object|None|True|The fields to write, as a JSON object matching the UpdateRiskDto schema in the Rapid7 Cyber GRC API reference|None|{'name': 'Renamed risk'}|None|None|
+|record|object|None|True|The fields to write, as a JSON object matching the UpdateRiskDto schema in the Rapid7 Cyber GRC API reference. A description over 2000 characters is truncated to fit the Cyber GRC limit, with a warning in the job log, rather than failing the step|None|{'name': 'Renamed risk'}|None|None|
   
 Example input:
 
@@ -6616,6 +6616,7 @@ Example output:
 * A 401 response does not always mean the API key is wrong. Any path the API does not recognise, such as a misspelled record type or a URL that already ends in /api/v2, falls through to the interactive sign-in scheme and is answered with a 401 whose scheme is not ApiKey. The plugin reports that case separately, so read the error text before regenerating the key
 * The typed actions, such as Get Risks, declare the type of every field they return, and a step fails validation if the API answers with a different type than the record schema documents. Generic List Records returns the same records as untyped objects and can be used as a workaround while the mismatch is reported to Rapid7 support
 * Upload Flat File calls the v1 Flat File API. On some deployments that endpoint authenticates interactive sessions rather than API keys, and answers 401 with a scheme of compyl-microsoft. If that happens, ask Rapid7 support to enable API key access to the Flat File API for the tenant
+* Cyber GRC enforces a character limit on some text fields, such as 5000 characters for a comment and 2000 characters for a risk description. Rather than fail the step, the plugin truncates a value that is over its limit and records a warning in the job log naming the field and the lengths involved. To keep the full text, shorten the value in the workflow before this step
 
 # Version History
 

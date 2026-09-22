@@ -25,6 +25,22 @@ CLOCK_COLLECTION = "Statuses"
 # field is answered with 204 and no change.
 IGNORED_ON_UPDATE = ("assignedTo", "assignedToID")
 
+# Documented Cyber GRC field character limits, keyed by record type then field name.
+# A value longer than its limit is truncated (with a warning) before the request is
+# sent, so a step logs the trim and continues rather than failing when the API rejects
+# an over-length field. Add new entries here as further limits are confirmed; the
+# truncation is applied centrally by every create and update path.
+FIELD_CHAR_LIMITS = {
+    # A comment posted through Add Comment is a row in the Discussions collection.
+    "Discussions": {"comment": 5000},
+    "Risks": {"description": 2000},
+}
+
+# Truncated values are cut this many characters short of the documented limit, so a
+# boundary that the API measures slightly differently (for example counting a CRLF as
+# two characters) cannot tip a trimmed value back over the edge.
+CHAR_LIMIT_MARGIN = 100
+
 # The URL of the API host, which is not the URL of the web interface users log in to.
 API_HOST_PATTERN = "https://app-<tenant>-<brand>-<region>-api-01.azurewebsites.net"
 
@@ -148,14 +164,45 @@ class CyberGrcAPI:
         response = self._request("GET", f"/api/v2/{record_type}/{record_id}", params=params)
         return clean_record(self._expect_record(response, f"{record_type} {record_id}"))
 
+    def _apply_char_limits(self, record_type: str, record: dict) -> dict:
+        """Truncate any known over-length text field, warning rather than failing.
+
+        Cyber GRC rejects the whole request when a text field exceeds its limit, which
+        would fail the step. Trimming the value to a safe length instead lets the step
+        succeed with a warning in the log, so a workflow that mirrors long text from
+        another system is not blocked by a limit it cannot see. Only the fields in
+        FIELD_CHAR_LIMITS are touched, and only when they are strings that are too long.
+        """
+        limits = FIELD_CHAR_LIMITS.get(record_type)
+        if not limits or not isinstance(record, dict):
+            return record
+
+        trimmed = None
+        for field, limit in limits.items():
+            value = record.get(field)
+            if not isinstance(value, str) or len(value) <= limit:
+                continue
+            safe_length = max(limit - CHAR_LIMIT_MARGIN, 0)
+            if trimmed is None:
+                trimmed = dict(record)
+            trimmed[field] = value[:safe_length]
+            self.logger.warning(
+                f"The {record_type} field '{field}' was {len(value)} characters, over the {limit} character limit "
+                f"Cyber GRC enforces, so it was truncated to {safe_length} characters. The step continued rather "
+                "than failing; shorten the value upstream to keep the full text."
+            )
+
+        return trimmed if trimmed is not None else record
+
     def create_record(self, record_type: str, record: dict) -> dict:
+        record = self._apply_char_limits(record_type, record)
         response = self._request("POST", f"/api/v2/{record_type}", json_body=record)
         return clean_record(self._expect_record(response, f"the created {record_type} record"))
 
     def update_record(self, record_type: str, record_id: int, record: dict) -> dict:
         # Some record types reject a body whose id does not match the route key, so
         # supply the key the caller already gave us rather than making them repeat it.
-        body = dict(record)
+        body = dict(self._apply_char_limits(record_type, record))
         body.setdefault("id", record_id)
 
         ignored = [field for field in IGNORED_ON_UPDATE if field in body]
