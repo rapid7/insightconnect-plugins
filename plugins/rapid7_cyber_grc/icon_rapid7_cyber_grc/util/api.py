@@ -31,31 +31,37 @@ IGNORED_ON_UPDATE = ("assignedTo", "assignedToID")
 # rather than failing when the API rejects an over-length field. Add or override entries
 # here as further limits are confirmed; the truncation is applied centrally by every
 # create and update path.
+# Documented Cyber GRC field character limits, keyed by record type then field name.
+# A value longer than its limit is truncated (with a warning that also records the full
+# original value) before the request is sent, so a step logs the trim and continues
+# rather than failing when the API rejects an over-length field. Add or override entries
+# here as further limits are confirmed; the truncation is applied centrally by every
+# create and update path.
 #
-# A comment is confirmed at 5000 characters and a risk description at 2000. The other
-# free-text description and body fields are not individually documented, so they default
-# to the same 2000 the risk description uses, which is the safe assumption for a narrative
-# field. Any field later confirmed to allow more can be raised here on its own.
-BODY_FIELD_LIMIT = 2000
+# These limits were read from the Cyber GRC API's own validation errors (the API answers
+# an over-length field with "The length of 'x' must be N characters or fewer"). Fields
+# not listed here are left untouched: either they have no limit the API enforces (Vendors
+# publicDescription accepted 20000 characters), or the limit could not be confirmed on the
+# test tenant (Tasks instructions, Contracts description, and ControlSets, which was
+# feature-disabled). A field is only truncated once its real limit is known, so an
+# unverified field is never clipped at a guessed length.
 FIELD_CHAR_LIMITS = {
     # A comment posted through Add Comment is a row in the Discussions collection.
     "Discussions": {"comment": 5000},
-    "Risks": {"description": 2000, "businessImpact": BODY_FIELD_LIMIT, "possibleOutcome": BODY_FIELD_LIMIT},
+    "Risks": {"description": 2000, "businessImpact": 2000, "possibleOutcome": 2000},
     "Incidents": {
-        "description": BODY_FIELD_LIMIT,
-        "howIdentified": BODY_FIELD_LIMIT,
-        "howOccurred": BODY_FIELD_LIMIT,
-        "rootCause": BODY_FIELD_LIMIT,
-        "lessonsLearned": BODY_FIELD_LIMIT,
-        "immediateAction": BODY_FIELD_LIMIT,
+        "description": 500,
+        "howIdentified": 500,
+        "howOccurred": 500,
+        "rootCause": 500,
+        "lessonsLearned": 1000,
+        "immediateAction": 500,
     },
-    "Tasks": {"description": BODY_FIELD_LIMIT, "instructions": BODY_FIELD_LIMIT},
-    "Audits": {"description": BODY_FIELD_LIMIT},
-    "ControlSets": {"description": BODY_FIELD_LIMIT},
-    "Assessments": {"description": BODY_FIELD_LIMIT, "summary": BODY_FIELD_LIMIT},
-    "Vendors": {"description": BODY_FIELD_LIMIT, "publicDescription": BODY_FIELD_LIMIT},
-    "ITAssets": {"description": BODY_FIELD_LIMIT},
-    "Contracts": {"description": BODY_FIELD_LIMIT},
+    "Tasks": {"description": 1000},
+    "Audits": {"description": 2000},
+    "Assessments": {"description": 500, "summary": 2000},
+    "Vendors": {"description": 500},
+    "ITAssets": {"description": 4000},
 }
 
 # Truncated values are cut this many characters short of the documented limit, so a

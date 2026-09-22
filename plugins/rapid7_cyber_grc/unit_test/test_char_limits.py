@@ -105,14 +105,17 @@ class TestRecordCharLimits(TestCase):
         self.assertEqual(len(posted["possibleOutcome"]), RISK_DESC_LIMIT - CHAR_LIMIT_MARGIN)
 
     def test_body_fields_on_another_record_type_are_truncated(self, mock_request):
-        # An incident carries several narrative fields; each is guarded.
-        limit = FIELD_CHAR_LIMITS["Incidents"]["rootCause"]
+        # An incident carries several narrative fields, each with its own limit.
+        root_cause_limit = FIELD_CHAR_LIMITS["Incidents"]["rootCause"]
+        lessons_limit = FIELD_CHAR_LIMITS["Incidents"]["lessonsLearned"]
         action = Util.default_connector(CreateIncident())
-        action.run({"record": {"rootCause": "r" * (limit + 500), "lessonsLearned": "l" * (limit + 500)}})
+        action.run(
+            {"record": {"rootCause": "r" * (root_cause_limit + 500), "lessonsLearned": "l" * (lessons_limit + 500)}}
+        )
 
         posted = self.sent("POST")
-        self.assertEqual(len(posted["rootCause"]), limit - CHAR_LIMIT_MARGIN)
-        self.assertEqual(len(posted["lessonsLearned"]), limit - CHAR_LIMIT_MARGIN)
+        self.assertEqual(len(posted["rootCause"]), root_cause_limit - CHAR_LIMIT_MARGIN)
+        self.assertEqual(len(posted["lessonsLearned"]), lessons_limit - CHAR_LIMIT_MARGIN)
 
 
 class TestCommentCharLimit(TestCase):
