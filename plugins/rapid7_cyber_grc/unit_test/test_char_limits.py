@@ -16,7 +16,7 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import patch
 
-from icon_rapid7_cyber_grc.actions import AddComment, CreateIncident, CreateRisk, UpdateRisk
+from icon_rapid7_cyber_grc.actions import AddComment, CreateContract, CreateIncident, CreateRisk, UpdateRisk
 from icon_rapid7_cyber_grc.util.api import CHAR_LIMIT_MARGIN, FIELD_CHAR_LIMITS
 from util import BASE_URL, MockResponse, Util
 
@@ -116,6 +116,13 @@ class TestRecordCharLimits(TestCase):
         posted = self.sent("POST")
         self.assertEqual(len(posted["rootCause"]), root_cause_limit - CHAR_LIMIT_MARGIN)
         self.assertEqual(len(posted["lessonsLearned"]), lessons_limit - CHAR_LIMIT_MARGIN)
+
+    def test_contract_description_is_truncated(self, mock_request):
+        limit = FIELD_CHAR_LIMITS["Contracts"]["description"]
+        action = Util.default_connector(CreateContract())
+        action.run({"record": {"description": "d" * (limit + 500)}})
+
+        self.assertEqual(len(self.sent("POST")["description"]), limit - CHAR_LIMIT_MARGIN)
 
 
 class TestCommentCharLimit(TestCase):

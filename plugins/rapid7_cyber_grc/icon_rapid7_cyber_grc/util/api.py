@@ -40,11 +40,11 @@ IGNORED_ON_UPDATE = ("assignedTo", "assignedToID")
 #
 # These limits were read from the Cyber GRC API's own validation errors (the API answers
 # an over-length field with "The length of 'x' must be N characters or fewer"). Fields
-# not listed here are left untouched: either they have no limit the API enforces (Vendors
-# publicDescription accepted 20000 characters), or the limit could not be confirmed on the
-# test tenant (Tasks instructions, Contracts description, and ControlSets, which was
-# feature-disabled). A field is only truncated once its real limit is known, so an
-# unverified field is never clipped at a guessed length.
+# not listed here are left untouched: either the API enforces no limit on them (Vendors
+# publicDescription and Tasks instructions both accepted 20000 characters), or the limit
+# could not be confirmed on the test tenant (ControlSets, whose feature was disabled, and
+# whose OData $metadata was not readable with the API key). A field is only truncated once
+# its real limit is known, so an unverified field is never clipped at a guessed length.
 FIELD_CHAR_LIMITS = {
     # A comment posted through Add Comment is a row in the Discussions collection.
     "Discussions": {"comment": 5000},
@@ -62,6 +62,7 @@ FIELD_CHAR_LIMITS = {
     "Assessments": {"description": 500, "summary": 2000},
     "Vendors": {"description": 500},
     "ITAssets": {"description": 4000},
+    "Contracts": {"description": 2000},
 }
 
 # Truncated values are cut this many characters short of the documented limit, so a
