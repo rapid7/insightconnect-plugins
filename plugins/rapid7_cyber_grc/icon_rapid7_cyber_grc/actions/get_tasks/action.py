@@ -25,7 +25,7 @@ class GetTasks(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         due_within_days = params.get(Input.DUE_WITHIN_DAYS)
-        filter = params.get(Input.FILTER)
+        filter_ = params.get(Input.FILTER)
         order_by = params.get(Input.ORDER_BY)
         overdue_only = params.get(Input.OVERDUE_ONLY)
         owner = params.get(Input.OWNER)
@@ -42,7 +42,7 @@ class GetTasks(insightconnect_plugin_runtime.Action):
         # result instead. A filter on its own is passed through untouched.
         clauses = [
             clause
-            for clause in [filter, f"statusID eq {status_id}" if status_id else None]
+            for clause in [filter_, f"statusID eq {status_id}" if status_id else None]
             + date_window_clauses("dueDate", due_within_days, overdue_only)
             if clause
         ]

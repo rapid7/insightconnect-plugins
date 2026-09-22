@@ -20,7 +20,7 @@ class CountRecords(insightconnect_plugin_runtime.Action):
     @auto_instrument
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
-        filter = params.get(Input.FILTER)
+        filter_ = params.get(Input.FILTER)
         record_type = params.get(Input.RECORD_TYPE)
         # END INPUT BINDING - DO NOT REMOVE
-        return {Output.COUNT: self.connection.client.count_records(record_type, filter_=filter)}
+        return {Output.COUNT: self.connection.client.count_records(record_type, filter_=filter_)}

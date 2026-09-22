@@ -20,7 +20,7 @@ class GetAssessment(insightconnect_plugin_runtime.Action):
     @auto_instrument
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
-        id = params.get(Input.ID)
+        record_id = params.get(Input.ID)
         select = params.get(Input.SELECT)
         # END INPUT BINDING - DO NOT REMOVE
-        return {Output.ASSESSMENT: self.connection.client.get_record("Assessments", id, select=select)}
+        return {Output.ASSESSMENT: self.connection.client.get_record("Assessments", record_id, select=select)}

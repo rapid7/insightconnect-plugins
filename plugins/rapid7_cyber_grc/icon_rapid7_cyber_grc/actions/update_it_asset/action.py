@@ -20,7 +20,7 @@ class UpdateItAsset(insightconnect_plugin_runtime.Action):
     @auto_instrument
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
-        id = params.get(Input.ID)
+        record_id = params.get(Input.ID)
         record = params.get(Input.RECORD)
         # END INPUT BINDING - DO NOT REMOVE
-        return {Output.IT_ASSET: self.connection.client.update_record("ITAssets", id, record)}
+        return {Output.IT_ASSET: self.connection.client.update_record("ITAssets", record_id, record)}

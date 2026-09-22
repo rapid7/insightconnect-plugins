@@ -17,7 +17,7 @@ class UpdateTask(insightconnect_plugin_runtime.Action):
     @auto_instrument
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
-        id = params.get(Input.ID)
+        record_id = params.get(Input.ID)
         record = params.get(Input.RECORD)
         # END INPUT BINDING - DO NOT REMOVE
-        return {Output.TASK: self.connection.client.update_record("Tasks", id, record)}
+        return {Output.TASK: self.connection.client.update_record("Tasks", record_id, record)}

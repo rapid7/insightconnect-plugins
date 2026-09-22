@@ -23,7 +23,7 @@ class UploadFlatFile(insightconnect_plugin_runtime.Action):
         description = params.get(Input.DESCRIPTION)
         file = params.get(Input.FILE)
         file_name = params.get(Input.FILE_NAME)
-        id = params.get(Input.ID)
+        record_id = params.get(Input.ID)
         operation_type = params.get(Input.OPERATION_TYPE)
         # END INPUT BINDING - DO NOT REMOVE
         return {
@@ -32,6 +32,6 @@ class UploadFlatFile(insightconnect_plugin_runtime.Action):
                 contents=file,
                 operation_type=operation_type,
                 description=description,
-                record_id=id,
+                record_id=record_id,
             )
         }

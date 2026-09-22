@@ -325,8 +325,39 @@ class CyberGrcAPI:
         # @odata.nextLink is absolute, every other caller passes a path.
         url = path if path.startswith("http") else f"{self.url}{path}"
         operation = f"{method} {url}"
+        response = self._send(method, url, operation, params=params, json_body=json_body)
+
+        # Kept from the most recent response so a caller can compare against timestamps
+        # the server stamps using the server's own clock rather than this container's.
+        self._server_time = self._parse_http_date(response.headers.get("Date"))
+
+        self._raise_for_status(response, operation)
+
+        if as_text:
+            return response.text
+        if not response.content:
+            return {}
         try:
-            response = self.session.request(
+            return response.json()
+        except ValueError:
+            raise PluginException(
+                cause=f"Cyber GRC returned a response that is not JSON for {operation}.",
+                assistance="The API answered successfully but the body could not be parsed as JSON. The start of "
+                "the response is attached below.",
+                data=self._scrub(response.text[:BODY_EXCERPT]),
+            )
+
+    def _send(
+        self,
+        method: str,
+        url: str,
+        operation: str,
+        params: dict = None,
+        json_body: dict = None,
+    ) -> requests.Response:
+        """Send the HTTP request, translating transport-level errors into PluginExceptions."""
+        try:
+            return self.session.request(
                 method, url, params=params, json=json_body, verify=self.ssl_verify, timeout=120
             )
         except requests.exceptions.Timeout as error:
@@ -372,26 +403,6 @@ class CyberGrcAPI:
                 assistance="This is a transport level failure rather than an API error. Verify network access from "
                 "the orchestrator to the Cyber GRC API host, then retry.",
                 data=self._scrub(str(error)),
-            )
-
-        # Kept from the most recent response so a caller can compare against timestamps
-        # the server stamps using the server's own clock rather than this container's.
-        self._server_time = self._parse_http_date(response.headers.get("Date"))
-
-        self._raise_for_status(response, operation)
-
-        if as_text:
-            return response.text
-        if not response.content:
-            return {}
-        try:
-            return response.json()
-        except ValueError:
-            raise PluginException(
-                cause=f"Cyber GRC returned a response that is not JSON for {operation}.",
-                assistance="The API answered successfully but the body could not be parsed as JSON. The start of "
-                "the response is attached below.",
-                data=self._scrub(response.text[:BODY_EXCERPT]),
             )
 
     def _raise_for_status(self, response: requests.Response, operation: str) -> None:

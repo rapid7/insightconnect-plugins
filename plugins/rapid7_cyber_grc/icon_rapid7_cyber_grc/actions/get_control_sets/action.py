@@ -20,14 +20,14 @@ class GetControlSets(insightconnect_plugin_runtime.Action):
     @auto_instrument
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
-        filter = params.get(Input.FILTER)
+        filter_ = params.get(Input.FILTER)
         order_by = params.get(Input.ORDER_BY)
         select = params.get(Input.SELECT)
         skip = params.get(Input.SKIP)
         top = params.get(Input.TOP)
         # END INPUT BINDING - DO NOT REMOVE
         records = self.connection.client.list_records(
-            "ControlSets", filter_=filter, select=select, order_by=order_by, top=top, skip=skip
+            "ControlSets", filter_=filter_, select=select, order_by=order_by, top=top, skip=skip
         )
 
         return {Output.CONTROL_SETS: records, Output.COUNT: len(records)}

@@ -20,7 +20,7 @@ class UpdateControlSet(insightconnect_plugin_runtime.Action):
     @auto_instrument
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
-        id = params.get(Input.ID)
+        record_id = params.get(Input.ID)
         record = params.get(Input.RECORD)
         # END INPUT BINDING - DO NOT REMOVE
-        return {Output.CONTROL_SET: self.connection.client.update_record("ControlSets", id, record)}
+        return {Output.CONTROL_SET: self.connection.client.update_record("ControlSets", record_id, record)}

@@ -46,7 +46,7 @@ class MonitorRecords(insightconnect_plugin_runtime.Trigger):
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         event_type = params.get(Input.EVENT_TYPE)
-        filter = params.get(Input.FILTER)
+        filter_ = params.get(Input.FILTER)
         interval = params.get(Input.INTERVAL)
         record_type = params.get(Input.RECORD_TYPE)
         # END INPUT BINDING - DO NOT REMOVE
@@ -72,7 +72,7 @@ class MonitorRecords(insightconnect_plugin_runtime.Trigger):
             # Both halves are parenthesised because an unparenthesised or in either half
             # would bind looser than the and, letting records older than the watermark
             # back into every poll and re-emitting them forever.
-            combined = f"({time_filter}) and ({filter})" if filter else time_filter
+            combined = f"({time_filter}) and ({filter_})" if filter_ else time_filter
             try:
                 records = self.connection.client.list_records(
                     record_type,

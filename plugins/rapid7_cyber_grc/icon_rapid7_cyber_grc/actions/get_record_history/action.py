@@ -20,9 +20,9 @@ class GetRecordHistory(insightconnect_plugin_runtime.Action):
     @auto_instrument
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
-        id = params.get(Input.ID)
+        record_id = params.get(Input.ID)
         record_type = params.get(Input.RECORD_TYPE)
         # END INPUT BINDING - DO NOT REMOVE
-        history = self.connection.client.get_record_history(record_type, id)
+        history = self.connection.client.get_record_history(record_type, record_id)
 
         return {Output.HISTORY: history, Output.COUNT: len(history)}

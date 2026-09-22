@@ -27,17 +27,17 @@ class AddComment(insightconnect_plugin_runtime.Action):
         comment = params.get(Input.COMMENT)
         discussion_field_id = params.get(Input.DISCUSSION_FIELD_ID)
         form_discussion_id = params.get(Input.FORM_DISCUSSION_ID)
-        id = params.get(Input.ID)
+        record_id = params.get(Input.ID)
         record_type = params.get(Input.RECORD_TYPE)
         user_id = params.get(Input.USER_ID)
         # END INPUT BINDING - DO NOT REMOVE
 
         body = {
             "comment": comment,
-            FIELD_ID: discussion_field_id or self._field_id(record_type, id),
+            FIELD_ID: discussion_field_id or self._field_id(record_type, record_id),
             # Cyber GRC does not document how this resolves. The record's own ID is what
             # matches its observed behaviour, and the input exists to override it.
-            "formDiscussionID": form_discussion_id or id,
+            "formDiscussionID": form_discussion_id or record_id,
             # Cyber GRC rejects a comment whose author is not named, so this is required
             # rather than left to the API to infer from the key.
             "userID": user_id,
