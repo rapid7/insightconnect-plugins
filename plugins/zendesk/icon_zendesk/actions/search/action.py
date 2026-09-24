@@ -3,7 +3,6 @@ from .schema import SearchInput, SearchOutput, Output, Input
 
 # Custom imports below
 from typing import Optional, List, Any
-from insightconnect_plugin_runtime.exceptions import PluginException
 from icon_zendesk.util.objects import Objects
 from icon_zendesk.util.exceptions import detect_type_exception
 
@@ -25,9 +24,6 @@ class Search(insightconnect_plugin_runtime.Action):
         except Exception as error:
             self.logger.debug(error)
             detect_type_exception(error)
-
-        if not results:
-            raise PluginException(preset=PluginException.Preset.NOT_FOUND)
 
         for item in results:
             if search_type == "Organization":

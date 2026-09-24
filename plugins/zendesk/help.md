@@ -274,6 +274,57 @@ Example output:
 
 ```
 {
+  "organizations": [
+    {
+      "Created At": "",
+      "Details": "",
+      "External ID": {},
+      "Group ID": 0,
+      "ID": {},
+      "Name": {},
+      "Notes": {},
+      "Shared Comments": "true",
+      "Shared Tickets": {},
+      "Tags": [
+        {}
+      ],
+      "URL": {},
+      "Updated At": {}
+    }
+  ],
+  "tickets": [
+    {
+      "Assignee ID": 0,
+      "Attachment": {
+        "content": "bytes",
+        "filename": "string"
+      },
+      "Collaborator IDs": [
+        {}
+      ],
+      "Comment": {
+        "Author ID": {},
+        "Body": "",
+        "HTML Body": {},
+        "Public": "true"
+      },
+      "Description": {},
+      "Due At": "",
+      "External ID": {},
+      "Group ID": {},
+      "ID": {},
+      "Priority": {},
+      "Problem ID": {},
+      "Recipient ID": {},
+      "Requester ID": {},
+      "Status": {},
+      "Subject": {},
+      "Tags": [
+        {}
+      ],
+      "Type": {}
+    }
+  ],
   "users": [
     {
       "active": true,
@@ -696,6 +747,7 @@ Example output:
 
 # Version History
 
+* 5.0.1 - `Search`: Fixed issue where a search returning no results failed the step with a misleading endpoint error | Fixed issue where unrecognized Zendesk API errors were reported as an invalid endpoint instead of the actual error | Updated SDK to the latest version (6.6.0)
 * 5.0.0 - Deprecating username:password authentication method | Updated SDK to the latest version (6.4.1)
 * 4.0.3 - Update dependency version | Updated SDK to the latest version
 * 4.0.2 - Updated SDK to the latest version | `Search`: Fixed issue where only one search result was returned

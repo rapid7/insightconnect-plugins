@@ -86,6 +86,9 @@ class Util:
                 # show memberships happy path
                 return MockResponse("show_memberships_response").read()
         if "type" in kwargs:
+            if len(args) > 0 and args[0] == "No Results Item":
+                # search matched nothing - Zendesk returns an empty results array
+                return []
             if kwargs["type"] == "organization":
                 return MockResponse("search_response_organization").read()
             elif kwargs["type"] == "ticket":
@@ -96,8 +99,10 @@ class Util:
                 raise zenpy.lib.exception.TooManyValuesException
             elif kwargs["type"] == "error 2":
                 raise zenpy.lib.exception.SearchResponseLimitExceeded
-            elif kwargs["type"] == "empty":
-                return []
+            elif kwargs["type"] == "api error":
+                raise zenpy.lib.exception.APIException('{"error": "Couldn\'t authenticate you"}')
+            elif kwargs["type"] == "zenpy error":
+                raise zenpy.lib.exception.ZenpyException("subdomain is required when accessing the Zendesk API!")
         if "user" in kwargs:
             if kwargs["user"] == 1:
                 return MockResponse("show_memberships_response").read()
