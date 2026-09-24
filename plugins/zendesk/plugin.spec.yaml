@@ -6,7 +6,7 @@ title: Zendesk
 description: The [Zendesk](https://www.zendesk.com) plugin helps manage communication with customers. 
   This plugin allows you to manage tickets and users in Zendesk. Customer Resource Management tool to manage tickets of user complaints and support issues. 
   This plugin utilizes the [Zendesk Python SDK](https://github.com/facetoe/zenpy)
-version: 5.0.0
+version: 5.0.1
 connection_version: 5
 supported_versions: ["2024-07-11"]
 vendor: rapid7
@@ -14,7 +14,7 @@ support: community
 status: []
 sdk:
   type: slim
-  version: 6.4.1
+  version: 6.6.0
   user: nobody
 key_features:
   - "Create, manage, and delete issues and epics"
@@ -23,6 +23,7 @@ requirements:
   - "A Zendesk API key"
   - "Information about your Zendesk instance"
 version_history:
+  - "5.0.1 - `Search`: Fixed issue where a search returning no results failed the step with a misleading endpoint error | Fixed issue where unrecognized Zendesk API errors were reported as an invalid endpoint instead of the actual error | Updated SDK to the latest version (6.6.0)"
   - "5.0.0 - Deprecating username:password authentication method | Updated SDK to the latest version (6.4.1)"
   - "4.0.3 - Update dependency version | Updated SDK to the latest version"
   - "4.0.2 - Updated SDK to the latest version | `Search`: Fixed issue where only one search result was returned"
