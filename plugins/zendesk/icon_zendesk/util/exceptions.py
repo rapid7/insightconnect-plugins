@@ -24,9 +24,9 @@ def detect_type_exception(error: Union[ZenpyException, APIException]) -> None:
 
 
 def detect_zenpy_exception(error: ZenpyException) -> None:
-    if type(error) is ZenpyCacheException:
+    if isinstance(error, ZenpyCacheException):
         raise PluginException(cause=Messages.EXCEPTION_ZENPY_CACHE_CAUSE)
-    elif type(error) is RatelimitBudgetExceeded:
+    elif isinstance(error, RatelimitBudgetExceeded):
         raise PluginException(cause=Messages.EXCEPTION_RATE_LIMIT_BUDGED_EXCEEDED_CAUSE)
     raise PluginException(
         cause=Messages.EXCEPTION_ZENPY_CAUSE,
@@ -36,19 +36,19 @@ def detect_zenpy_exception(error: ZenpyException) -> None:
 
 
 def detect_api_exception(error: APIException) -> None:
-    if type(error) is RecordNotFoundException:
+    if isinstance(error, RecordNotFoundException):
         raise PluginException(
             cause=Messages.EXCEPTION_RECORD_NOT_FOUND_CAUSE,
             assistance=Messages.EXCEPTION_RECORD_NOT_FOUND_ASSISTANCE,
             data=error,
         )
-    elif type(error) is TooManyValuesException:
+    elif isinstance(error, TooManyValuesException):
         raise PluginException(
             cause=Messages.EXCEPTION_TOO_MANY_VALUES_CAUSE,
             assistance=Messages.EXCEPTION_TOO_MANY_VALUES_ASSISTANCE,
             data=error,
         )
-    elif type(error) is SearchResponseLimitExceeded:
+    elif isinstance(error, SearchResponseLimitExceeded):
         raise PluginException(
             cause=Messages.EXCEPTION_SEARCH_RESPONSE_LIMIT_EXCEEDED_CAUSE,
             assistance=Messages.EXCEPTION_SEARCH_RESPONSE_LIMIT_EXCEEDED_ASSISTANCE,
