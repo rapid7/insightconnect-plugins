@@ -114,13 +114,19 @@ class TestSearch(TestCase):
 
     @parameterized.expand(
         [
-            (
-                "Empty",
-                (
-                    PluginException.causes[PluginException.Preset.NOT_FOUND],
-                    PluginException.assistances[PluginException.Preset.NOT_FOUND],
-                ),
-            ),
+            ("Organization", {"organizations": []}),
+            ("Ticket", {"tickets": []}),
+            ("User", {"users": []}),
+        ]
+    )
+    @patch("zenpy.SearchApi.__call__", side_effect=Util.mocked_requests)
+    def test_search_no_results(self, input_type: str, expected: Dict[str, Any], mock_request: Mock) -> None:
+        # a search that matches nothing is a valid result, not an error
+        response = self.action.run({Input.TYPE: input_type, Input.ITEM: "No Results Item"})
+        self.assertEqual(response, expected)
+
+    @parameterized.expand(
+        [
             ("Error", (Messages.EXCEPTION_TOO_MANY_VALUES_CAUSE, Messages.EXCEPTION_TOO_MANY_VALUES_ASSISTANCE)),
             (
                 "Error 2",
@@ -129,6 +135,8 @@ class TestSearch(TestCase):
                     Messages.EXCEPTION_SEARCH_RESPONSE_LIMIT_EXCEEDED_ASSISTANCE,
                 ),
             ),
+            ("API Error", (Messages.EXCEPTION_API_CAUSE, Messages.EXCEPTION_API_ASSISTANCE)),
+            ("Zenpy Error", (Messages.EXCEPTION_ZENPY_CAUSE, Messages.EXCEPTION_ZENPY_ASSISTANCE)),
         ]
     )
     @patch("zenpy.SearchApi.__call__", side_effect=Util.mocked_requests)
@@ -137,3 +145,10 @@ class TestSearch(TestCase):
             self.action.run({Input.TYPE: input_type, Input.ITEM: "Example Item"})
         self.assertEqual(context.exception.cause, expected_error[0])
         self.assertEqual(context.exception.assistance, expected_error[1])
+
+    @patch("zenpy.SearchApi.__call__", side_effect=Util.mocked_requests)
+    def test_api_exception_keeps_zendesk_error_detail(self, mock_request: Mock) -> None:
+        # an unrecognised API error must surface the Zendesk response, not a generic message
+        with self.assertRaises(PluginException) as context:
+            self.action.run({Input.TYPE: "API Error", Input.ITEM: "Example Item"})
+        self.assertIn("Couldn't authenticate you", str(context.exception.data))

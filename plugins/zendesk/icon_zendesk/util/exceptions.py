@@ -28,6 +28,11 @@ def detect_zenpy_exception(error: ZenpyException) -> None:
         raise PluginException(cause=Messages.EXCEPTION_ZENPY_CACHE_CAUSE)
     elif type(error) is RatelimitBudgetExceeded:
         raise PluginException(cause=Messages.EXCEPTION_RATE_LIMIT_BUDGED_EXCEEDED_CAUSE)
+    raise PluginException(
+        cause=Messages.EXCEPTION_ZENPY_CAUSE,
+        assistance=Messages.EXCEPTION_ZENPY_ASSISTANCE,
+        data=error,
+    )
 
 
 def detect_api_exception(error: APIException) -> None:
@@ -49,3 +54,9 @@ def detect_api_exception(error: APIException) -> None:
             assistance=Messages.EXCEPTION_SEARCH_RESPONSE_LIMIT_EXCEEDED_ASSISTANCE,
             data=error,
         )
+    status_code = getattr(getattr(error, "response", None), "status_code", None)
+    raise PluginException(
+        cause=Messages.EXCEPTION_API_CAUSE,
+        assistance=Messages.EXCEPTION_API_ASSISTANCE,
+        data=f"HTTP {status_code}: {error}" if status_code else error,
+    )
