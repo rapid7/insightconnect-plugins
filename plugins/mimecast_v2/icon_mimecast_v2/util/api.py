@@ -17,7 +17,7 @@ from collections import OrderedDict
 from requests import Response, Request
 from io import BytesIO
 from icon_mimecast_v2.util.constants import Endpoints
-from typing import Any, Dict, List, Tuple, Iterator, Union, Optional, Literal
+from typing import Any, Dict, List, Tuple, Iterator, NoReturn, Union, Optional, Literal
 from multiprocessing.dummy import Manager, Pool
 import gzip
 import json
@@ -294,6 +294,40 @@ class API:
         parsed_url = urlparse(url)
         return str(urlunparse(parsed_url._replace(query="")))
 
+    def reraise_with_upstream_detail(self, exception: PluginException, method: str) -> NoReturn:
+        """
+        Re-raise a request failure with the upstream response body attached.
+        The SDK puts the `Response` object in `exception.data`, whose string form carries none of the
+        upstream detail, so `Error data:` in the task log ends up empty. Attach a bounded slice of the
+        body instead, and log the status, endpoint and Mimecast request ID.
+        :param exception: The exception raised by the SDK request helper
+        :param method: HTTP method of the failed request
+        """
+        error_response = exception.data
+        if getattr(error_response, "status_code", None) is None:
+            raise exception
+        error_body = error_response.content[:MAX_ERROR_BODY_BYTES].decode(errors="replace")
+        self.logger.error(
+            f"API: Upstream request failed. Status code: {error_response.status_code} returned for "
+            f"{method} {self.strip_query_params(error_response.url)}. "
+            f"Mimecast API request ID: {error_response.headers.get('x-request-id')}. "
+            f"Response body: {error_body}"
+        )
+        assistance = exception.assistance
+        if error_response.status_code >= HTTPStatusCodes.INTERNAL_SERVER_ERROR:
+            # The SDK preset for 5xx points at the connection inputs, which is misleading when the
+            # failure is on the Mimecast side.
+            assistance = (
+                "This is a server-side error from the Mimecast API, not a problem with the "
+                "connection inputs. Retry later and contact Mimecast support if it persists."
+            )
+        raise APIException(
+            cause=exception.cause,
+            assistance=assistance,
+            data=error_body,
+            status_code=error_response.status_code,
+        )
+
     @rate_limiting(5)
     def make_api_request(
         self,
@@ -316,33 +350,7 @@ class API:
                 exception_data_location=ResponseExceptionData.RESPONSE,
             )
         except PluginException as exception:
-            error_response = exception.data
-            if getattr(error_response, "status_code", None) is not None:
-                # `exception.data` holds the `Response` object, whose string form carries none of the
-                # upstream detail. Attach a bounded slice of the body instead so the failure is
-                # diagnosable from the task log.
-                error_body = error_response.content[:MAX_ERROR_BODY_BYTES].decode(errors="replace")
-                self.logger.error(
-                    f"API: Upstream request failed. Status code: {error_response.status_code} returned for "
-                    f"{method} {self.strip_query_params(error_response.url)}. "
-                    f"Mimecast API request ID: {error_response.headers.get('x-request-id')}. "
-                    f"Response body: {error_body}"
-                )
-                assistance = exception.assistance
-                if error_response.status_code >= HTTPStatusCodes.INTERNAL_SERVER_ERROR:
-                    # The SDK preset for 5xx points at the connection inputs, which is misleading when
-                    # the failure is on the Mimecast side.
-                    assistance = (
-                        "This is a server-side error from the Mimecast API, not a problem with the "
-                        "connection inputs. Retry later and contact Mimecast support if it persists."
-                    )
-                raise APIException(
-                    cause=exception.cause,
-                    assistance=assistance,
-                    data=error_body,
-                    status_code=error_response.status_code,
-                )
-            raise exception
+            self.reraise_with_upstream_detail(exception, method)
 
         status_code = response.status_code
         if status_code != 200:
