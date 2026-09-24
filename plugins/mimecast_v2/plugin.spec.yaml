@@ -15,7 +15,7 @@ links:
  - "[Mimecast](http://mimecast.com)"
 references:
  - "[Mimecast API](https://www.mimecast.com/developer/documentation)"
-version: 1.1.1
+version: 1.1.2
 connection_version: 1
 supported_versions: ["Mimecast 2.0 API 2025-01-23"]
 vendor: rapid7
@@ -38,6 +38,7 @@ hub_tags:
   keywords: [mimecast, email, cloud_enabled]
   features: []
 version_history:
+  - "1.1.2 - Surfaced the Mimecast response body and status code when a request to the Mimecast API fails, and corrected the guidance returned for Mimecast server-side errors"
   - "1.1.1 - Task `Monitor SIEM Logs`: Updated the task logic so that it no longer removes the TTP log set from the state when permissions are not set | Updated SDK to the latest version (6.4.3)"
   - "1.1.0 - Task `Monitor SIEM Logs`: Added new log endpoints for impersonation, attachment, and URL protection logs | Updated SDK to the latest version (6.3.10)"
   - "1.0.6 - `Monitor SIEM Logs` Updated SDK to the latest version (6.3.6) | Added support for high volume lookback (up to 7 days)"

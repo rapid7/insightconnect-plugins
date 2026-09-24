@@ -28,6 +28,9 @@ from datetime import datetime, timezone
 GET = "GET"
 POST = "POST"
 
+# Cap on how much of an upstream error body is logged/attached to an exception
+MAX_ERROR_BODY_BYTES = 512
+
 # Define TTP log type mapping
 TTP_LOG_MAP = {
     "ttp_impersonation": {
@@ -313,12 +316,31 @@ class API:
                 exception_data_location=ResponseExceptionData.RESPONSE,
             )
         except PluginException as exception:
-            if isinstance(exception.data, Response):
+            error_response = exception.data
+            if getattr(error_response, "status_code", None) is not None:
+                # `exception.data` holds the `Response` object, whose string form carries none of the
+                # upstream detail. Attach a bounded slice of the body instead so the failure is
+                # diagnosable from the task log.
+                error_body = error_response.content[:MAX_ERROR_BODY_BYTES].decode(errors="replace")
+                self.logger.error(
+                    f"API: Upstream request failed. Status code: {error_response.status_code} returned for "
+                    f"{method} {self.strip_query_params(error_response.url)}. "
+                    f"Mimecast API request ID: {error_response.headers.get('x-request-id')}. "
+                    f"Response body: {error_body}"
+                )
+                assistance = exception.assistance
+                if error_response.status_code >= HTTPStatusCodes.INTERNAL_SERVER_ERROR:
+                    # The SDK preset for 5xx points at the connection inputs, which is misleading when
+                    # the failure is on the Mimecast side.
+                    assistance = (
+                        "This is a server-side error from the Mimecast API, not a problem with the "
+                        "connection inputs. Retry later and contact Mimecast support if it persists."
+                    )
                 raise APIException(
                     cause=exception.cause,
-                    assistance=exception.assistance,
-                    data=exception.data,
-                    status_code=exception.data.status_code,
+                    assistance=assistance,
+                    data=error_body,
+                    status_code=error_response.status_code,
                 )
             raise exception
 

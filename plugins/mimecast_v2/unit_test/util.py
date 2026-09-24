@@ -56,15 +56,17 @@ class Util:
                 filename: str = None,
                 url: str = None,
                 gzip=False,
+                headers: dict = None,
             ) -> None:
                 self.filename = filename
                 self.status_code = status_code
                 self.text = "This is some error text"
-                self.headers = {}
-                self.url = url
+                self.headers = headers if headers else {}
+                self.url = url if url else f"{BASE_URL}"
                 self.gzip = gzip
                 if filename:
                     self.text = Util.read_file_to_string(f"responses/{filename}.json.resp")
+                self.content = self.text.encode("utf-8")
                 if gzip:
                     self.content = self._gzip_compress(self.text)
 
@@ -89,6 +91,13 @@ class Util:
 
         # Connection endpoints
         if args[0].url == f"{BASE_URL}oauth/token":
+            if kwargs.get("type") in ("AUTH_SERVICE_UNAVAILABLE",):
+                return MockResponse(
+                    503,
+                    "monitor_siem_logs_server_error",
+                    url=args[0].url,
+                    headers={"x-request-id": "test-request-id"},
+                )
             return MockResponse(200, "authenticate")
 
         if (
@@ -146,6 +155,16 @@ class Util:
             == f"{BASE_URL}siem/v1/batch/events/cg?type=receipt&dateRangeStartsAt=2000-01-04&dateRangeEndsAt=2000-01-04&pageSize=100"
         ):
             return MockResponse(401, "monitor_siem_logs_json_error")
+        if (
+            args[0].url
+            == f"{BASE_URL}siem/v1/batch/events/cg?type=receipt&dateRangeStartsAt=2000-01-01&dateRangeEndsAt=2000-01-01&pageSize=100"
+        ):
+            return MockResponse(
+                500 if kwargs.get("type") == "UPSTREAM_SERVER_ERROR" else 429,
+                "monitor_siem_logs_server_error",
+                url=args[0].url,
+                headers={"x-request-id": "test-request-id"},
+            )
         if (
             args[0].url
             == f"{BASE_URL}siem/v1/batch/events/cg?type=receipt&dateRangeStartsAt=2000-01-05&dateRangeEndsAt=2000-01-05&pageSize=100"

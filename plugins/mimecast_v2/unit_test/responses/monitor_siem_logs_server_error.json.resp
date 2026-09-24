@@ -1,0 +1,8 @@
+{
+    "fail": [
+        {
+            "code": "internal-error",
+            "message": "An unexpected error occurred while processing the batch request"
+        }
+    ]
+}

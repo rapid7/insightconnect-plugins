@@ -850,6 +850,33 @@ class TestMonitorLogs(TestCase):
         self.assertEqual(expected_assistance, error.assistance)
         validate(output, MonitorSiemLogsOutput.schema)
 
+    @parameterized.expand(
+        [
+            ["upstream_server_error", "UPSTREAM_SERVER_ERROR", 500, True],
+            ["upstream_rate_limited", "UPSTREAM_RATE_LIMITED", 429, False],
+        ]
+    )
+    @patch("requests.Session.send", side_effect=Util.mocked_request)
+    def test_monitor_logs_surfaces_upstream_error_detail(
+        self,
+        test_name: str,
+        request_type: str,
+        expected_status_code: int,
+        expected_server_side_assistance: bool,
+        mock_request: MagicMock,
+    ) -> None:
+        mock_request.side_effect = lambda request, **kwargs: Util.mocked_request(request, type=request_type, **kwargs)
+        state = {"query_config": {"receipt": {"caught_up": True, "next_page": None, "query_date": "1999-12-31"}}}
+        _output, _state, _has_more, status_code, error = self.task.run(params={}, state=state)
+        self.assertEqual(expected_status_code, status_code)
+        # The upstream response body must reach the error, not the `Response` object, otherwise
+        # `Error data:` in the task log is empty and the failure cannot be diagnosed.
+        self.assertIn("internal-error", error.data)
+        if expected_server_side_assistance:
+            self.assertIn("server-side error from the Mimecast API", error.assistance)
+        else:
+            self.assertNotIn("server-side error from the Mimecast API", error.assistance)
+
 
 @freeze_time("2000-01-07T00:00:00.000000Z")
 class TestMonitorLogsSerializationDeserialization(TestCase):
