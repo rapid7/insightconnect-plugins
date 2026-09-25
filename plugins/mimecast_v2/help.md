@@ -103,7 +103,7 @@ Example output:
 
 # Version History
 
-* 1.1.2 - Surfaced the Mimecast response body and status code when a request to the Mimecast API fails, and corrected the guidance returned for Mimecast server-side errors
+* 1.1.2 - Surfaced the Mimecast response body and status code when a request to the Mimecast API fails, and corrected the guidance returned for Mimecast server-side errors | Updated SDK to the latest version (6.6.0)
 * 1.1.1 - Task `Monitor SIEM Logs`: Updated the task logic so that it no longer removes the TTP log set from the state when permissions are not set | Updated SDK to the latest version (6.4.3)
 * 1.1.0 - Task `Monitor SIEM Logs`: Added new log endpoints for impersonation, attachment, and URL protection logs | Updated SDK to the latest version (6.3.10)
 * 1.0.6 - `Monitor SIEM Logs` Updated SDK to the latest version (6.3.6) | Added support for high volume lookback (up to 7 days)
