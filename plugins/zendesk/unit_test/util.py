@@ -101,6 +101,12 @@ class Util:
                 raise zenpy.lib.exception.SearchResponseLimitExceeded
             elif kwargs["type"] == "api error":
                 raise zenpy.lib.exception.APIException('{"error": "Couldn\'t authenticate you"}')
+            elif kwargs["type"] == "api error with status":
+                # zenpy attaches the HTTP response to every APIException it raises
+                raise zenpy.lib.exception.APIException(
+                    '{"error": "Couldn\'t authenticate you"}',
+                    response=SimpleNamespace(status_code=401),
+                )
             elif kwargs["type"] == "zenpy error":
                 raise zenpy.lib.exception.ZenpyException("subdomain is required when accessing the Zendesk API!")
         if "user" in kwargs:

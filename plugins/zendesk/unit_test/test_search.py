@@ -152,3 +152,12 @@ class TestSearch(TestCase):
         with self.assertRaises(PluginException) as context:
             self.action.run({Input.TYPE: "API Error", Input.ITEM: "Example Item"})
         self.assertIn("Couldn't authenticate you", str(context.exception.data))
+
+    @patch("zenpy.SearchApi.__call__", side_effect=Util.mocked_requests)
+    def test_api_exception_includes_http_status(self, mock_request: Mock) -> None:
+        # zenpy attaches the response, so the HTTP status must reach the user alongside the body
+        with self.assertRaises(PluginException) as context:
+            self.action.run({Input.TYPE: "API Error With Status", Input.ITEM: "Example Item"})
+        self.assertEqual(context.exception.cause, Messages.EXCEPTION_API_CAUSE)
+        self.assertEqual(context.exception.assistance, Messages.EXCEPTION_API_ASSISTANCE)
+        self.assertEqual(context.exception.data, 'HTTP 401: {"error": "Couldn\'t authenticate you"}')
