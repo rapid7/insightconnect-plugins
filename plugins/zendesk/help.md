@@ -266,8 +266,8 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|organizations|[]organization|False|Get Zendesk query results for organizations|None|
-|tickets|[]ticket|False|Get Zendesk query results for tickets|None|
+|organizations|[]organization|False|Get Zendesk query results for organizations|[{"created_at":"2009-07-20T22:55:29Z","details":"Example Organization","external_id":"1234","group_id":1,"id":1234,"name":"Example Organization","shared_comments":true,"shared_tickets":true,"tags":["enterprise"],"updated_at":"2011-05-05T10:38:52Z","url":"https://company.zendesk.com/api/v2/organizations/1234.json"}]|
+|tickets|[]ticket|False|Get Zendesk query results for tickets|[{"assignee_id":1902872923580,"brand_id":4414536111640,"collaborator_ids":[],"created_at":"2022-01-12T18:08:44Z","description":"A ticket description","group_id":4414536112530,"has_incidents":false,"id":5,"organization_id":1260928947860,"priority":"urgent","raw_subject":"Breach","requester_id":1902872923580,"sharing_agreement_ids":[],"status":"open","subject":"Breach","submitter_id":1902872923580,"tags":[],"type":"problem","updated_at":"2022-01-12T18:08:44Z","url":"https://organization.zendesk.com/api/v2/tickets/5.json"}]|
 |users|[]user|False|Get Zendesk query results for users|[{"active":true,"alias":null,"chat_only":false,"created_at":"2018-01-26T14:24:58Z","custom_role_id":null,"details":null,"email":"user@example.com","external_id":null,"id":360385011372,"last_login_at":"2018-05-25T12:27:14Z","locale":"en-US","locale_id":1,"moderator":true,"name":"Example User","notes":null,"only_private_comments":false,"organization_id":360002530352,"phone":null,"photo":{"url":"https://organization.zendesk.com/api/v2/attachments/360004125291.json","id":360004125291,"file_name":"profile_image_360385011372_2206139.png","content_url":"https://organization.zendesk.com/system/photos/3600/0412/5291/profile_image_360385011372_2206139.png","mapped_content_url":"https://organization.zendesk.com/system/photos/3600/0412/5291/profile_image_360385011372_2206139.png","content_type":"image/png","size":1141,"width":80,"height":80,"inline":false,"thumbnails":[{"url":"https://organization.zendesk.com/api/v2/attachments/360004125311.json","id":360004125311,"file_name":"profile_image_360385011372_2206139_thumb.png","content_url":"https://organization.zendesk.com/system/photos/3600/0412/5291/profile_image_360385011372_2206139_thumb.png","mapped_content_url":"https://organization.zendesk.com/system/photos/3600/0412/5291/profile_image_360385011372_2206139_thumb.png","content_type":"image/png","size":601,"width":32,"height":32,"inline":false}]},"restricted_agent":false,"role":"admin","shared":false,"shared_agent":false,"signature":null,"suspended":false,"tags":[],"ticket_restriction":null,"time_zone":"Bogota","two_factor_auth_enabled":null,"updated_at":"2018-05-25T12:27:20Z","url":"https://organization.zendesk.com/api/v2/users/360385011372.json","verified":true}]|
   
 Example output:
@@ -276,53 +276,43 @@ Example output:
 {
   "organizations": [
     {
-      "Created At": "",
-      "Details": "",
-      "External ID": {},
-      "Group ID": 0,
-      "ID": {},
-      "Name": {},
-      "Notes": {},
-      "Shared Comments": "true",
-      "Shared Tickets": {},
-      "Tags": [
-        {}
+      "created_at": "2009-07-20T22:55:29Z",
+      "details": "Example Organization",
+      "external_id": "1234",
+      "group_id": 1,
+      "id": 1234,
+      "name": "Example Organization",
+      "shared_comments": true,
+      "shared_tickets": true,
+      "tags": [
+        "enterprise"
       ],
-      "URL": {},
-      "Updated At": {}
+      "updated_at": "2011-05-05T10:38:52Z",
+      "url": "https://company.zendesk.com/api/v2/organizations/1234.json"
     }
   ],
   "tickets": [
     {
-      "Assignee ID": 0,
-      "Attachment": {
-        "content": "bytes",
-        "filename": "string"
-      },
-      "Collaborator IDs": [
-        {}
-      ],
-      "Comment": {
-        "Author ID": {},
-        "Body": "",
-        "HTML Body": {},
-        "Public": "true"
-      },
-      "Description": {},
-      "Due At": "",
-      "External ID": {},
-      "Group ID": {},
-      "ID": {},
-      "Priority": {},
-      "Problem ID": {},
-      "Recipient ID": {},
-      "Requester ID": {},
-      "Status": {},
-      "Subject": {},
-      "Tags": [
-        {}
-      ],
-      "Type": {}
+      "assignee_id": 1902872923580,
+      "brand_id": 4414536111640,
+      "collaborator_ids": [],
+      "created_at": "2022-01-12T18:08:44Z",
+      "description": "A ticket description",
+      "group_id": 4414536112530,
+      "has_incidents": false,
+      "id": 5,
+      "organization_id": 1260928947860,
+      "priority": "urgent",
+      "raw_subject": "Breach",
+      "requester_id": 1902872923580,
+      "sharing_agreement_ids": [],
+      "status": "open",
+      "subject": "Breach",
+      "submitter_id": 1902872923580,
+      "tags": [],
+      "type": "problem",
+      "updated_at": "2022-01-12T18:08:44Z",
+      "url": "https://organization.zendesk.com/api/v2/tickets/5.json"
     }
   ],
   "users": [
