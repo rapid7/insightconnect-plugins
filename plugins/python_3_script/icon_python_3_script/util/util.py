@@ -1,11 +1,13 @@
 import hashlib
 import re
 from pathlib import Path
-from typing import Any, Union
+from typing import Any, Dict, Union
 
 import yaml
 
 from icon_python_3_script.util.constants import DEFAULT_ENCODING, ENVIRONMENT_BASE_DIRECTORY
+
+DEFAULT_MAX_SCRIPT_OUTPUT_LENGTH = 100_000
 
 # Package name: letters, digits, and the separators -_. (PEP 508 name grammar)
 _NAME_SPEC_RE = re.compile(r"^([A-Za-z0-9][A-Za-z0-9._-]*)(.*)$", re.DOTALL)
@@ -134,3 +136,53 @@ def extract_output_from_stdout(input_stdout: str, output_prefix: str) -> Union[d
             return None
         return function_output
     return None
+
+
+def extract_script_print_output(
+    stdout: str,
+    output_prefix: str,
+    credentials: Dict[str, Any],
+    max_length: int = DEFAULT_MAX_SCRIPT_OUTPUT_LENGTH,
+) -> str:
+    """
+    Extract the customer script's own print/logging output from stdout, i.e. everything
+    written before the `output_prefix` marker line, with any known credential value redacted
+    and the result capped to `max_length` characters.
+
+    :param stdout: The raw decoded stdout captured from the script subprocess.
+    :type: str
+
+    :param output_prefix: The execution ID marker prefixing the script's returned output.
+    :type: str
+
+    :param credentials: The credentials passed to the script, whose values are redacted.
+    :type: Dict[str, Any]
+
+    :param max_length: Maximum length of the returned string before truncation.
+    :type: int
+
+    :return: The redacted, truncated print output, or "" if there was none.
+    :rtype: str
+    """
+
+    # Redact whole stdout first, longest value first, skipping whitespace-only values
+    if values := sorted(
+        {str(value) for value in (credentials or {}).values() if value and str(value).strip()},
+        key=lambda value: (-len(value), value),
+    ):
+        stdout = re.sub("|".join(re.escape(value) for value in values), "********", stdout)
+
+    # Extract anything printed before the output marker
+    print_output, marker_found, _ = stdout.partition(output_prefix)
+
+    # If the marker wasn't found, the script likely crashed or timed out
+    if not marker_found:
+        print_output = print_output.rpartition("\n")[0]
+
+    # Strip trailing whitespace
+    print_output = print_output.strip()
+
+    # Truncate output if necessary
+    if len(print_output) > max_length:
+        print_output = f"{print_output[:max_length]}... (truncated)"
+    return print_output

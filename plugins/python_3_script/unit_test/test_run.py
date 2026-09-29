@@ -205,6 +205,39 @@ class TestRun(TestCase):
         self.assertEqual(context.exception.cause, "Function timed out after 30 minutes.")
 
     @patch("icon_python_3_script.actions.run.action.subprocess.check_output")
+    def test_subprocess_success_logs_script_print_output(self, mock_check_output: MagicMock) -> None:
+        # Verify print() output preceding the marker is logged and credentials are redacted
+        mock_check_output.return_value = (
+            f"login as {STUB_CREDENTIALS['username']} using {STUB_CREDENTIALS['password']}\n".encode()
+            + SUCCESS_OUTPUT_BYTES
+        )
+        action = Util.default_connector(Run())
+
+        with self.assertLogs(action.logger, level="INFO") as logs:
+            action._execute_function_as_process(STUB_FUNCTION, STUB_PARAMETERS, STUB_CREDENTIALS, timeout=30)
+
+        logged_output = "\n".join(logs.output)
+        self.assertIn("login as", logged_output)
+        self.assertNotIn(STUB_CREDENTIALS["username"], logged_output)
+        self.assertNotIn(STUB_CREDENTIALS["password"], logged_output)
+
+    @patch("icon_python_3_script.actions.run.action.subprocess.check_output")
+    def test_subprocess_error_logs_script_print_output(self, mock_check_output: MagicMock) -> None:
+        # Verify stdout captured before a CalledProcessError is still logged and redacted
+        stdout = f"secret is {STUB_CREDENTIALS['secret_key']}\n".encode()
+        stderr = f"{EXECUTION_ID}\nError: Script execution failed".encode()
+        mock_check_output.side_effect = subprocess.CalledProcessError(1, "cmd", output=stdout, stderr=stderr)
+        action = Util.default_connector(Run())
+
+        with self.assertLogs(action.logger, level="INFO") as logs:
+            with self.assertRaises(PluginException):
+                action._execute_function_as_process(STUB_FUNCTION, STUB_PARAMETERS, STUB_CREDENTIALS, timeout=30)
+
+        logged_output = "\n".join(logs.output)
+        self.assertIn("secret is", logged_output)
+        self.assertNotIn(STUB_CREDENTIALS["secret_key"], logged_output)
+
+    @patch("icon_python_3_script.actions.run.action.subprocess.check_output")
     def test_subprocess_generic_exception_raises_plugin_exception(self, mock_check_output: MagicMock) -> None:
         # Verify generic OS errors are caught and wrapped in PluginException
         mock_check_output.side_effect = OSError("File not found")
