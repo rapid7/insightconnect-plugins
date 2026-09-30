@@ -1,7 +1,7 @@
 {
-	"spec": "086d6b478078425575e002de370873b0",
-	"manifest": "0072cad232dd4dc7b618aac38006d314",
-	"setup": "cd9989897d790b0d4e6eefe2ef8ae079",
+	"spec": "61a4a8cb4d5d2640328511ec3e6087f2",
+	"manifest": "4ee3e4b47092723b416a8bc0a48b1fcb",
+	"setup": "2a9aeaccab4b569473e4d17fe54a6693",
 	"schemas": [
 		{
 			"identifier": "brand_monitor/schema.py",
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "hosting_history/schema.py",
-			"hash": "498310529334de58be284758f38769b8"
+			"hash": "1bba583dc63b90383d5014a34fc06f1f"
 		},
 		{
 			"identifier": "ip_monitor/schema.py",
