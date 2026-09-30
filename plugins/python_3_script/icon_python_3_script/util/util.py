@@ -7,7 +7,7 @@ import yaml
 
 from icon_python_3_script.util.constants import DEFAULT_ENCODING, ENVIRONMENT_BASE_DIRECTORY
 
-DEFAULT_MAX_SCRIPT_OUTPUT_LENGTH = 100_000
+DEFAULT_MAX_SCRIPT_OUTPUT_LENGTH = 10_000
 
 # Package name: letters, digits, and the separators -_. (PEP 508 name grammar)
 _NAME_SPEC_RE = re.compile(r"^([A-Za-z0-9][A-Za-z0-9._-]*)(.*)$", re.DOTALL)
@@ -138,6 +138,29 @@ def extract_output_from_stdout(input_stdout: str, output_prefix: str) -> Union[d
     return None
 
 
+def sanitize_output(text: str, credentials: Dict[str, Any]) -> str:
+    """
+    Replace every known credential value in `text` with a redaction mask.
+
+    :param text: The text to redact.
+    :type: str
+
+    :param credentials: The credentials passed to the script, whose values are redacted.
+    :type: Dict[str, Any]
+
+    :return: The text with all credential values replaced by "********".
+    :rtype: str
+    """
+
+    # Redact longest value first, skipping whitespace-only values
+    if values := sorted(
+        {str(value) for value in (credentials or {}).values() if value and str(value).strip()},
+        key=lambda value: (-len(value), value),
+    ):
+        text = re.sub("|".join(re.escape(value) for value in values), "********", text)
+    return text
+
+
 def extract_script_print_output(
     stdout: str,
     output_prefix: str,
@@ -165,12 +188,8 @@ def extract_script_print_output(
     :rtype: str
     """
 
-    # Redact whole stdout first, longest value first, skipping whitespace-only values
-    if values := sorted(
-        {str(value) for value in (credentials or {}).values() if value and str(value).strip()},
-        key=lambda value: (-len(value), value),
-    ):
-        stdout = re.sub("|".join(re.escape(value) for value in values), "********", stdout)
+    # Redact whole stdout first, before any partitioning/truncation can split a value
+    stdout = sanitize_output(stdout, credentials)
 
     # Extract anything printed before the output marker
     print_output, marker_found, _ = stdout.partition(output_prefix)

@@ -32,9 +32,10 @@ troubleshooting:
   with the same modules share one environment automatically. Conflicting packages
   across connections are fully supported
 - Output from `print()` statements in the supplied function is captured and included
-  in the action's log. Known credential values are redacted before logging, but avoid
-  printing other sensitive data since it will be visible in both the action log and
-  container logs
+  in the action's log. Known credential values are redacted before logging (including
+  from any script error output), but avoid printing other sensitive data since it will
+  be visible in both the action log and container logs
+- Captured `print()` output is truncated to 10,000 characters per execution
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/python_3_script
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE

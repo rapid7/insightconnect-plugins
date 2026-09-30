@@ -13,7 +13,11 @@ from icon_python_3_script.util.constants import (
     DEFAULT_PROCESS_TIMEOUT,
     RUN_FUNCTION_TEMPLATE,
 )
-from icon_python_3_script.util.util import extract_output_from_stdout, extract_script_print_output
+from icon_python_3_script.util.util import (
+    extract_output_from_stdout,
+    extract_script_print_output,
+    sanitize_output,
+)
 
 from .schema import Component, Input, RunInput, RunOutput
 
@@ -120,7 +124,8 @@ class Run(insightconnect_plugin_runtime.Action):
                 self._log_script_print_output(
                     error.stdout.decode(DEFAULT_ENCODING, errors="ignore"), execution_id, credentials
                 )
-            raise PluginException(error.stderr.decode(DEFAULT_ENCODING).replace(execution_id, "")) from None
+            stderr = sanitize_output(error.stderr.decode(DEFAULT_ENCODING, errors="ignore"), credentials)
+            raise PluginException(stderr.replace(execution_id, "")) from None
         except subprocess.TimeoutExpired as error:
             if error.output:
                 self._log_script_print_output(
