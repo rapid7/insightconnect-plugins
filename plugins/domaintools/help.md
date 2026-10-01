@@ -14,7 +14,7 @@ DomainTools (https://www.domaintools.com) data and products work in harmony to e
 
 # Supported Product Versions
 
-* DomainTools_api 2.0.0
+* DomainTools_api 2.10.0
 
 # Documentation
 
