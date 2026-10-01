@@ -1,0 +1,70 @@
+{
+  "cves": [
+    {
+      "cve_id": "CVE-2024-34045",
+      "title": "CVE-2024-34045: Uncontrolled Resource Consumption",
+      "published_date": "2024-04-29T00:00:00",
+      "modified_date": "2026-08-25T00:00:00",
+      "cvss_v3_base_score": 7.5,
+      "cvss_v3_severity": "High",
+      "cvss_v3_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "epss_score": 0.00515,
+      "epss_percentile": 0.41475,
+      "active_risk_score": 502,
+      "exploitable": false,
+      "exploited_in_the_wild": false,
+      "cisa_kev": false,
+      "campaign_count": 0,
+      "threat_actor_count": 0,
+      "references": [],
+      "description": "The O-RAN E2T I-Release Prometheus metric Increment function can crash in sctpThread.cpp for message.peerInfo-&gt;counters[IN_INITI][MSG_COUNTER][ProcedureCode_id_E2setup]-&gt;Increment().",
+      "tags": []
+    },
+    {
+      "cve_id": "CVE-2024-34046",
+      "title": "CVE-2024-34046: Allocation of Resources Without Limits or Throttling",
+      "published_date": "2024-04-29T00:00:00",
+      "modified_date": "2026-08-25T00:00:00",
+      "cvss_v3_base_score": 7.5,
+      "cvss_v3_severity": "High",
+      "cvss_v3_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "epss_score": 0.00515,
+      "epss_percentile": 0.41473,
+      "active_risk_score": 502,
+      "exploitable": false,
+      "exploited_in_the_wild": false,
+      "cisa_kev": false,
+      "campaign_count": 0,
+      "threat_actor_count": 0,
+      "references": [],
+      "description": "The O-RAN E2T I-Release Prometheus metric Increment function can crash in sctpThread.cpp for message.peerInfo-&gt;sctpParams-&gt;e2tCounters[IN_SUCC][MSG_COUNTER][ProcedureCode_id_RICsubscription]-&gt;Increment().",
+      "tags": []
+    },
+    {
+      "cve_id": "CVE-2024-34027",
+      "title": "CVE-2024-34027: Allocation of Resources Without Limits or Throttling",
+      "published_date": "2024-06-24T00:00:00",
+      "modified_date": "2026-08-05T00:00:00",
+      "cvss_v3_base_score": 7.8,
+      "cvss_v3_severity": "High",
+      "cvss_v3_vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+      "epss_score": 0.0023,
+      "epss_percentile": 0.13921,
+      "active_risk_score": 522,
+      "exploitable": false,
+      "exploited_in_the_wild": false,
+      "cisa_kev": false,
+      "campaign_count": 0,
+      "threat_actor_count": 0,
+      "references": [],
+      "description": "In the Linux kernel, the following vulnerability has been resolved:\n\nf2fs: compress: fix to cover {reserve,release}_compress_blocks() w/ cp_rwsem lock\n\nIt needs to cover {reserve,release}_compress_blocks() w/ cp_rwsem lock\nto avoid racing with checkpoint, otherwise, filesystem metadata including\nblkaddr in dnode, inode fields and .total_valid_block_count may be\ncorrupted after SPO case.",
+      "tags": []
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "page_size": 3,
+    "total_count": 806,
+    "total_pages": 269
+  }
+}

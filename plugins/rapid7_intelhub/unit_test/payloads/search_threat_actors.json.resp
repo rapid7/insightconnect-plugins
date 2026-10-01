@@ -1,0 +1,36 @@
+{
+  "total_count": 1,
+  "page": 1,
+  "page_size": 2,
+  "data": [
+    {
+      "uuid": "b841ca1d-05d8-488f-ae2f-5bb804720189",
+      "name": "APT28",
+      "description": "Example threat actor description",
+      "aliases": [
+        "Fancy Bear",
+        "Sofacy",
+        "STRONTIUM"
+      ],
+      "nationalities": [
+        "RU"
+      ],
+      "created": "2025-01-01T00:00:00Z",
+      "last_activity": "2026-09-07T11:50:27Z",
+      "last_published": "2026-05-15T20:38:45Z",
+      "severity": 1,
+      "campaigns": [],
+      "malwares": [],
+      "countries": [],
+      "regions": [],
+      "sectors": [],
+      "ttps": [],
+      "mitre_attack_vector": {},
+      "group_types": [
+        "APT"
+      ],
+      "is_followed": false,
+      "match_details": []
+    }
+  ]
+}

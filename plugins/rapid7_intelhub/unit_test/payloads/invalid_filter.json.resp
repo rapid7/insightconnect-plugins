@@ -1,0 +1,1 @@
+{"detail":[{"type":"enum","loc":["query","last-updated"],"msg":"Input should be 'last 20 minutes', 'last 1 hour', 'last 6 hours', 'last 12 hours', 'last 24 hours', 'last 48 hours' or 'last 72 hours'","input":"last 7 days","ctx":{"expected":"'last 20 minutes', 'last 1 hour', 'last 6 hours', 'last 12 hours', 'last 24 hours', 'last 48 hours' or 'last 72 hours'"}}]}

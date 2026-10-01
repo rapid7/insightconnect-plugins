@@ -1,0 +1,22 @@
+{
+  "cves": [
+    {
+      "id": "CVE-2023-23397",
+      "last_updated": "2025-07-16T14:04:10Z"
+    },
+    {
+      "id": "CVE-2022-38028",
+      "last_updated": "2024-12-16T08:32:50Z"
+    },
+    {
+      "id": "CVE-2021-44026",
+      "last_updated": "2025-05-22T06:46:39Z"
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "page_size": 3,
+    "total_count": 31,
+    "total_pages": 11
+  }
+}
