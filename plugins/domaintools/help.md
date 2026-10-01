@@ -1126,10 +1126,10 @@ Example output:
 
 ## Troubleshooting
 
-There is no troubleshooting for this Plugin
 
 # Version History
 
+* 2.0.4 - Updated dependencies | Updated SDK to the latest version (6.6.0)
 * 2.0.3 - Bumping 'anyio' and 'zipp' | SDK Bump to 6.1.2
 * 2.0.2 - Updated SDK and packages to the latest version
 * 2.0.1 - 'SDK' Bump | adding 'anyio' into requirements and bumping 'DomainTools' to '2.0.0'
