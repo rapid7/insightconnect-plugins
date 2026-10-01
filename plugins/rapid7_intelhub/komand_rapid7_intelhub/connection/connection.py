@@ -1,10 +1,10 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 
 # Custom imports below
-import requests
 from typing import Dict, Any
+from komand_rapid7_intelhub.util.api import IntelHubAPI
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -36,28 +36,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
         }
 
     def test(self) -> Dict[str, Any]:
+        # Searching CVEs checks both the API key and the license, which the health endpoint does not
         try:
-            response = requests.get(
-                f"{self.base_url}/cve",
-                headers=self.get_headers(),
-                params={"page": 1, "page-size": 1},
-                timeout=30,
-            )
-            if response.status_code == 200:
-                return {"success": True}
-            elif response.status_code == 401:
-                raise ConnectionTestException(preset=ConnectionTestException.Preset.UNAUTHORIZED)
-            elif response.status_code == 403:
-                raise ConnectionTestException(preset=ConnectionTestException.Preset.UNAUTHORIZED)
-            elif response.status_code in range(500, 599):
-                raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
-            else:
-                raise ConnectionTestException(
-                    cause=f"Unknown error occurred. Response code: {response.status_code}",
-                    assistance="Please verify your API key and region settings.",
-                )
-        except requests.exceptions.RequestException as e:
-            raise ConnectionTestException(
-                cause=f"Connection error: {str(e)}",
-                assistance="Please check your network connection and try again.",
-            )
+            IntelHubAPI(self, self.logger).search_cves(page=1, page_size=1)
+        except PluginException as error:
+            raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=error.data) from error
+        return {"success": True}

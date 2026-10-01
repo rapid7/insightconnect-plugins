@@ -44,7 +44,8 @@ class SearchCvesInput(insightconnect_plugin_runtime.Input):
         "critical",
         "high",
         "medium",
-        "low"
+        "low",
+        "informational"
       ],
       "order": 4
     },
@@ -63,7 +64,17 @@ class SearchCvesInput(insightconnect_plugin_runtime.Input):
     "last_updated": {
       "type": "string",
       "title": "Last Updated",
-      "description": "Filter by last updated time range (e.g., 'last 24 hours', 'last 72 hours', 'last 7 days')",
+      "description": "Filter by the time range in which the CVE was last updated",
+      "enum": [
+        "",
+        "last 20 minutes",
+        "last 1 hour",
+        "last 6 hours",
+        "last 12 hours",
+        "last 24 hours",
+        "last 48 hours",
+        "last 72 hours"
+      ],
       "order": 8
     },
     "page": {
@@ -83,7 +94,7 @@ class SearchCvesInput(insightconnect_plugin_runtime.Input):
     "search": {
       "type": "string",
       "title": "Search",
-      "description": "Search query to filter CVEs (e.g., CVE ID, keyword)",
+      "description": "Part of the CVE ID to search for, such as CVE-2024 or 3400",
       "order": 1
     }
   },
@@ -106,7 +117,7 @@ class SearchCvesOutput(insightconnect_plugin_runtime.Output):
       "title": "CVEs",
       "description": "List of CVEs matching the search criteria",
       "items": {
-        "$ref": "#/definitions/cve_summary"
+        "$ref": "#/definitions/cve"
       },
       "order": 1
     },
@@ -121,9 +132,9 @@ class SearchCvesOutput(insightconnect_plugin_runtime.Output):
     "cves"
   ],
   "definitions": {
-    "cve_summary": {
+    "cve": {
       "type": "object",
-      "title": "cve_summary",
+      "title": "cve",
       "properties": {
         "cve_id": {
           "type": "string",
@@ -134,19 +145,22 @@ class SearchCvesOutput(insightconnect_plugin_runtime.Output):
         "title": {
           "type": "string",
           "title": "Title",
-          "description": "Title or name of the CVE",
+          "description": "Title of the CVE. For CVEs without a description, it can hold the full CVE description",
           "order": 2
         },
-        "severity": {
+        "description": {
           "type": "string",
-          "title": "Severity",
-          "description": "Severity level of the CVE",
+          "title": "Description",
+          "description": "Description of the vulnerability",
           "order": 3
         },
-        "cvss_score": {
-          "type": "number",
-          "title": "CVSS Score",
-          "description": "CVSS score of the vulnerability",
+        "tags": {
+          "type": "array",
+          "title": "Tags",
+          "description": "Tags describing the vulnerability",
+          "items": {
+            "type": "string"
+          },
           "order": 4
         },
         "published_date": {
@@ -155,16 +169,106 @@ class SearchCvesOutput(insightconnect_plugin_runtime.Output):
           "description": "Date the CVE was published",
           "order": 5
         },
-        "description": {
+        "modified_date": {
           "type": "string",
-          "title": "Description",
-          "description": "Description of the vulnerability",
+          "title": "Modified Date",
+          "description": "Date the CVE was last modified",
           "order": 6
+        },
+        "cvss_v3_base_score": {
+          "type": "number",
+          "title": "CVSS v3 Base Score",
+          "description": "CVSS v3 base score of the vulnerability",
+          "order": 7
+        },
+        "cvss_v3_severity": {
+          "type": "string",
+          "title": "CVSS v3 Severity",
+          "description": "CVSS v3 severity of the vulnerability",
+          "order": 8
+        },
+        "cvss_v3_vector": {
+          "type": "string",
+          "title": "CVSS v3 Vector",
+          "description": "CVSS v3 vector string",
+          "order": 9
+        },
+        "cvss_v4_base_score": {
+          "type": "number",
+          "title": "CVSS v4 Base Score",
+          "description": "CVSS v4 base score of the vulnerability",
+          "order": 10
+        },
+        "cvss_v4_severity": {
+          "type": "string",
+          "title": "CVSS v4 Severity",
+          "description": "CVSS v4 severity of the vulnerability",
+          "order": 11
+        },
+        "cvss_v4_vector": {
+          "type": "string",
+          "title": "CVSS v4 Vector",
+          "description": "CVSS v4 vector string",
+          "order": 12
+        },
+        "epss_score": {
+          "type": "number",
+          "title": "EPSS Score",
+          "description": "Exploit Prediction Scoring System (EPSS) probability, from 0 to 1, that the vulnerability will be exploited",
+          "order": 13
+        },
+        "epss_percentile": {
+          "type": "number",
+          "title": "EPSS Percentile",
+          "description": "Percentile of the EPSS score among all scored CVEs, from 0 to 1",
+          "order": 14
+        },
+        "active_risk_score": {
+          "type": "integer",
+          "title": "Active Risk Score",
+          "description": "Rapid7 Active Risk score of the vulnerability, from 0 to 1000",
+          "order": 15
+        },
+        "exploitable": {
+          "type": "boolean",
+          "title": "Exploitable",
+          "description": "Whether the CVE is exploitable",
+          "order": 16
+        },
+        "exploited_in_the_wild": {
+          "type": "boolean",
+          "title": "Exploited in the Wild",
+          "description": "Whether the CVE has been exploited in the wild",
+          "order": 17
+        },
+        "cisa_kev": {
+          "type": "boolean",
+          "title": "CISA KEV",
+          "description": "Whether the CVE is in the CISA Known Exploited Vulnerabilities catalog",
+          "order": 18
+        },
+        "campaign_count": {
+          "type": "integer",
+          "title": "Campaign Count",
+          "description": "Number of campaigns associated with the CVE",
+          "order": 19
+        },
+        "threat_actor_count": {
+          "type": "integer",
+          "title": "Threat Actor Count",
+          "description": "Number of threat actors associated with the CVE",
+          "order": 20
+        },
+        "references": {
+          "type": "array",
+          "title": "References",
+          "description": "List of reference URLs",
+          "items": {
+            "type": "string"
+          },
+          "order": 21
         }
-      },
-      "required": [
-        "cve_id"
-      ]
+      }
     },
     "pagination": {
       "type": "object",

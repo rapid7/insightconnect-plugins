@@ -21,9 +21,13 @@ key_features:
   - Access threat intelligence data from Rapid7 Intelligence Hub
 requirements:
   - Rapid7 Insight Platform API Key
+  - An InsightIDR or Intelligence Hub license for the organization that owns the API key
 troubleshooting:
   - Ensure your API key has access to Intelligence Hub
   - Verify the correct region is selected for your account
+  - If the connection test fails with `Product license not found`, the API key is valid but its organization has neither an InsightIDR nor an Intelligence Hub license
+  - The Search input of the Search CVEs action matches part of the CVE ID, such as `CVE-2024` or `3400`, not keywords in the CVE title or description
+  - Intelligence Hub does not provide Metasploit modules or vulnerability solutions
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_intelhub
@@ -48,30 +52,15 @@ hub_tags:
 enable_cache: false
 language: python
 types:
-  cve_summary:
+  cve:
     cve_id:
       title: CVE ID
       description: The CVE identifier
       type: string
-      required: true
+      required: false
     title:
       title: Title
-      description: Title or name of the CVE
-      type: string
-      required: false
-    severity:
-      title: Severity
-      description: Severity level of the CVE
-      type: string
-      required: false
-    cvss_score:
-      title: CVSS Score
-      description: CVSS score of the vulnerability
-      type: number
-      required: false
-    published_date:
-      title: Published Date
-      description: Date the CVE was published
+      description: Title of the CVE. For CVEs without a description, it can hold the full CVE description
       type: string
       required: false
     description:
@@ -79,36 +68,10 @@ types:
       description: Description of the vulnerability
       type: string
       required: false
-  cve_detail:
-    cve_id:
-      title: CVE ID
-      description: The CVE identifier
-      type: string
-      required: true
-    title:
-      title: Title
-      description: Title or name of the CVE
-      type: string
-      required: false
-    description:
-      title: Description
-      description: Detailed description of the vulnerability
-      type: string
-      required: false
-    severity:
-      title: Severity
-      description: Severity level of the CVE
-      type: string
-      required: false
-    cvss_score:
-      title: CVSS Score
-      description: CVSS score of the vulnerability
-      type: number
-      required: false
-    cvss_vector:
-      title: CVSS Vector
-      description: CVSS vector string
-      type: string
+    tags:
+      title: Tags
+      description: Tags describing the vulnerability
+      type: "[]string"
       required: false
     published_date:
       title: Published Date
@@ -120,14 +83,79 @@ types:
       description: Date the CVE was last modified
       type: string
       required: false
+    cvss_v3_base_score:
+      title: CVSS v3 Base Score
+      description: CVSS v3 base score of the vulnerability
+      type: number
+      required: false
+    cvss_v3_severity:
+      title: CVSS v3 Severity
+      description: CVSS v3 severity of the vulnerability
+      type: string
+      required: false
+    cvss_v3_vector:
+      title: CVSS v3 Vector
+      description: CVSS v3 vector string
+      type: string
+      required: false
+    cvss_v4_base_score:
+      title: CVSS v4 Base Score
+      description: CVSS v4 base score of the vulnerability
+      type: number
+      required: false
+    cvss_v4_severity:
+      title: CVSS v4 Severity
+      description: CVSS v4 severity of the vulnerability
+      type: string
+      required: false
+    cvss_v4_vector:
+      title: CVSS v4 Vector
+      description: CVSS v4 vector string
+      type: string
+      required: false
+    epss_score:
+      title: EPSS Score
+      description: Exploit Prediction Scoring System (EPSS) probability, from 0 to 1, that the vulnerability will be exploited
+      type: number
+      required: false
+    epss_percentile:
+      title: EPSS Percentile
+      description: Percentile of the EPSS score among all scored CVEs, from 0 to 1
+      type: number
+      required: false
+    active_risk_score:
+      title: Active Risk Score
+      description: Rapid7 Active Risk score of the vulnerability, from 0 to 1000
+      type: integer
+      required: false
+    exploitable:
+      title: Exploitable
+      description: Whether the CVE is exploitable
+      type: boolean
+      required: false
+    exploited_in_the_wild:
+      title: Exploited in the Wild
+      description: Whether the CVE has been exploited in the wild
+      type: boolean
+      required: false
+    cisa_kev:
+      title: CISA KEV
+      description: Whether the CVE is in the CISA Known Exploited Vulnerabilities catalog
+      type: boolean
+      required: false
+    campaign_count:
+      title: Campaign Count
+      description: Number of campaigns associated with the CVE
+      type: integer
+      required: false
+    threat_actor_count:
+      title: Threat Actor Count
+      description: Number of threat actors associated with the CVE
+      type: integer
+      required: false
     references:
       title: References
       description: List of reference URLs
-      type: "[]string"
-      required: false
-    affected_products:
-      title: Affected Products
-      description: List of affected products
       type: "[]string"
       required: false
   pagination:
@@ -178,7 +206,7 @@ actions:
     input:
       search:
         title: Search
-        description: Search query to filter CVEs (e.g., CVE ID, keyword)
+        description: Part of the CVE ID to search for, such as CVE-2024 or 3400
         type: string
         required: false
         example: "CVE-2024"
@@ -207,6 +235,7 @@ actions:
           - high
           - medium
           - low
+          - informational
         example: "high"
       exploitable:
         title: Exploitable
@@ -228,17 +257,26 @@ actions:
         example: true
       last_updated:
         title: Last Updated
-        description: Filter by last updated time range (e.g., 'last 24 hours', 'last 72 hours', 'last 7 days')
+        description: Filter by the time range in which the CVE was last updated
         type: string
         required: false
+        enum:
+          - ""
+          - last 20 minutes
+          - last 1 hour
+          - last 6 hours
+          - last 12 hours
+          - last 24 hours
+          - last 48 hours
+          - last 72 hours
         example: "last 24 hours"
     output:
       cves:
         title: CVEs
         description: List of CVEs matching the search criteria
-        type: "[]cve_summary"
+        type: "[]cve"
         required: true
-        example: '[{"cve_id": "CVE-2025-12345", "title": "Example Vulnerability", "severity": "High", "cvss_score": 8.5}]'
+        example: '[{"cve_id": "CVE-2024-3400", "title": "CVE-2024-3400: Improper Neutralization of Special Elements used in a Command", "published_date": "2024-04-12T00:00:00", "modified_date": "2025-11-21T00:00:00", "cvss_v3_base_score": 10.0, "cvss_v3_severity": "Critical", "cvss_v3_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H", "epss_score": 0.94297, "epss_percentile": 0.9994, "active_risk_score": 1000, "exploitable": true, "exploited_in_the_wild": true, "cisa_kev": true, "campaign_count": 9, "threat_actor_count": 3, "references": [], "description": "A command injection as a result of arbitrary file creation vulnerability in the GlobalProtect feature of Palo Alto Networks PAN-OS software for specific PAN-OS versions and distinct feature configurations may enable an unauthenticated attacker to execute arbitrary code with root privileges on the firewall.\n\nCloud NGFW, Panorama appliances, and Prisma Access are not impacted by this vulnerability.", "tags": ["Remote Execution", "CISA KEV", "Exploited in the Wild", "Rapid7 Critical"]}]'
       pagination:
         title: Pagination
         description: Pagination information for the results
@@ -251,17 +289,17 @@ actions:
     input:
       cve_id:
         title: CVE ID
-        description: The CVE identifier to look up (e.g., CVE-2025-12345)
+        description: The CVE identifier to look up (e.g., CVE-2024-3400)
         type: string
         required: true
-        example: "CVE-2025-12345"
+        example: "CVE-2024-3400"
     output:
       cve:
         title: CVE
         description: Detailed CVE information
-        type: cve_detail
+        type: cve
         required: true
-        example: '{"cve_id": "CVE-2025-12345", "title": "Example Vulnerability", "description": "A vulnerability in...", "severity": "High", "cvss_score": 8.5}'
+        example: '{"cve_id": "CVE-2024-3400", "title": "CVE-2024-3400: Improper Neutralization of Special Elements used in a Command", "published_date": "2024-04-12T00:00:00", "modified_date": "2025-11-21T00:00:00", "cvss_v3_base_score": 10.0, "cvss_v3_severity": "Critical", "cvss_v3_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H", "epss_score": 0.94297, "epss_percentile": 0.9994, "active_risk_score": 1000, "exploitable": true, "exploited_in_the_wild": true, "cisa_kev": true, "campaign_count": 9, "threat_actor_count": 3, "references": [], "description": "A command injection as a result of arbitrary file creation vulnerability in the GlobalProtect feature of Palo Alto Networks PAN-OS software for specific PAN-OS versions and distinct feature configurations may enable an unauthenticated attacker to execute arbitrary code with root privileges on the firewall.\n\nCloud NGFW, Panorama appliances, and Prisma Access are not impacted by this vulnerability.", "tags": ["Remote Execution", "CISA KEV", "Exploited in the Wild", "Rapid7 Critical"]}'
       found:
         title: Found
         description: Whether the CVE was found

@@ -1,10 +1,10 @@
 import insightconnect_plugin_runtime
 from .schema import SearchCvesInput, SearchCvesOutput, Input, Output, Component
-from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import clean
 
 # Custom imports below
 from komand_rapid7_intelhub.util.api import IntelHubAPI
+from komand_rapid7_intelhub.util.helpers import map_cve
 
 
 class SearchCves(insightconnect_plugin_runtime.Action):
@@ -30,41 +30,25 @@ class SearchCves(insightconnect_plugin_runtime.Action):
 
         api = IntelHubAPI(self.connection, self.logger)
 
-        try:
-            response = api.search_cves(
-                search=search,
-                page=page,
-                page_size=page_size,
-                cvss_score=cvss_score,
-                exploitable=exploitable,
-                epss_score=epss_score,
-                cisa_kev=cisa_kev,
-                last_updated=last_updated,
-            )
-        except Exception as e:
-            raise PluginException(
-                cause="Failed to search CVEs",
-                assistance=f"Error: {str(e)}",
-            )
+        response = api.search_cves(
+            search=search,
+            page=page,
+            page_size=page_size,
+            cvss_score=cvss_score,
+            exploitable=exploitable,
+            epss_score=epss_score,
+            cisa_kev=cisa_kev,
+            last_updated=last_updated,
+        )
 
-        cves = []
-        raw_data = response.get("data", [])
-        for item in raw_data:
-            cve = {
-                "cve_id": item.get("cve_id", ""),
-                "title": item.get("title", ""),
-                "description": item.get("description", ""),
-                "severity": item.get("severity", ""),
-                "cvss_score": item.get("cvss_score") or item.get("cvss", {}).get("score"),
-                "published_date": item.get("published_date", ""),
-            }
-            cves.append(clean(cve))
+        cves = [map_cve(item) for item in response.get("data", [])]
 
+        total_count = response.get("total_count", len(cves))
         pagination = {
             "page": response.get("page", page),
             "page_size": response.get("page_size", page_size),
-            "total_count": response.get("total_count", len(cves)),
-            "total_pages": response.get("total_pages", 1),
+            "total_count": total_count,
+            "total_pages": (total_count + page_size - 1) // page_size if page_size > 0 else 0,
         }
 
         return {

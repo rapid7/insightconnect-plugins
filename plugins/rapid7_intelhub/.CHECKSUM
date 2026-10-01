@@ -1,11 +1,11 @@
 {
-	"spec": "d5d7227d8dde31acc2d3bfc4e97546bd",
+	"spec": "8e1dec0b5f653732064b261d689553ca",
 	"manifest": "580d8d3d374aeb02e1e1219f08006dec",
 	"setup": "3518154bb85052e412c78306dd8acd47",
 	"schemas": [
 		{
 			"identifier": "get_cve/schema.py",
-			"hash": "58339a5d8bf7a9ee4559f2e94a1dad77"
+			"hash": "9f33fcc9e2a0a0f83ea8999ba10d6e88"
 		},
 		{
 			"identifier": "get_threat_actor/schema.py",
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "search_cves/schema.py",
-			"hash": "9ff2fc07a2e02b6e9d243d0352c8c9c5"
+			"hash": "a493fd83894e3ed74be7a602f2b15b8a"
 		},
 		{
 			"identifier": "search_threat_actors/schema.py",

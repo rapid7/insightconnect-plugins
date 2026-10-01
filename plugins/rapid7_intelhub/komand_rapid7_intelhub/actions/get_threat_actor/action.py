@@ -1,6 +1,5 @@
 import insightconnect_plugin_runtime
 from .schema import GetThreatActorInput, GetThreatActorOutput, Input, Output, Component
-from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 from komand_rapid7_intelhub.util.api import IntelHubAPI
@@ -21,30 +20,15 @@ class GetThreatActor(insightconnect_plugin_runtime.Action):
         # END INPUT BINDING - DO NOT REMOVE
 
         api = IntelHubAPI(self.connection, self.logger)
+        response = api.get_threat_actor(uuid)
 
-        try:
-            response = api.get_threat_actor(uuid)
-            
-            if response:
-                return {
-                    Output.THREAT_ACTOR: response,
-                    Output.FOUND: True,
-                }
-            else:
-                return {
-                    Output.THREAT_ACTOR: {},
-                    Output.FOUND: False,
-                }
+        if not response:
+            return {
+                Output.THREAT_ACTOR: {},
+                Output.FOUND: False,
+            }
 
-        except PluginException as e:
-            if "404" in str(e) or "not found" in str(e).lower():
-                return {
-                    Output.THREAT_ACTOR: {},
-                    Output.FOUND: False,
-                }
-            raise
-        except Exception as e:
-            raise PluginException(
-                cause="Failed to get threat actor.",
-                assistance=f"Error: {str(e)}",
-            )
+        return {
+            Output.THREAT_ACTOR: response,
+            Output.FOUND: True,
+        }
