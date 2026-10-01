@@ -150,6 +150,7 @@ Example output:
 
 # Version History
 
+* 2.1.11 - Deprecate and delist plugin - the Rapid7 VulnDB backend host has been retired and all actions fail (SOAR-22169, SOAR-21875)
 * 2.1.10 - Updated SDK to the latest version (6.5.1)
 * 2.1.9 - Updated SDK to the latest version (6.4.3)
 * 2.1.8 - Updated SDK to the latest version (6.3.10)
