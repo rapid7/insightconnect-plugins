@@ -194,6 +194,24 @@ class TestRun(TestCase):
         self.assertIn("Script execution failed", context.exception.cause)
 
     @patch("icon_python_3_script.actions.run.action.subprocess.check_output")
+    def test_subprocess_script_error_sanitizes_stderr(self, mock_check_output: MagicMock) -> None:
+        # Verify known values embedded in stderr are redacted from the PluginException message
+        stderr = (
+            f"{EXECUTION_ID}\nleaked {STUB_CREDENTIALS['password']}\n"
+            f"Exception: key={STUB_CREDENTIALS['secret_key']}\n"
+        ).encode()
+        mock_check_output.side_effect = subprocess.CalledProcessError(1, "cmd", stderr=stderr)
+        action = Util.default_connector(Run())
+
+        with self.assertRaises(PluginException) as context:
+            action._execute_function_as_process(STUB_FUNCTION, STUB_PARAMETERS, STUB_CREDENTIALS, timeout=30)
+
+        self.assertNotIn(STUB_CREDENTIALS["password"], context.exception.cause)
+        self.assertNotIn(STUB_CREDENTIALS["secret_key"], context.exception.cause)
+        self.assertIn("Exception: key=********", context.exception.cause)
+        self.assertNotIn("Python3Script-ActionRun", context.exception.cause)
+
+    @patch("icon_python_3_script.actions.run.action.subprocess.check_output")
     def test_subprocess_timeout_raises_plugin_exception(self, mock_check_output: MagicMock) -> None:
         # Verify subprocess timeout is caught and wrapped in PluginException
         mock_check_output.side_effect = subprocess.TimeoutExpired("cmd", 1800)

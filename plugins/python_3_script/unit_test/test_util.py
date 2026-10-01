@@ -17,6 +17,7 @@ from icon_python_3_script.util.util import (
     environment_ready,
     extract_output_from_stdout,
     extract_script_print_output,
+    sanitize_output,
 )
 from parameterized import parameterized
 
@@ -129,6 +130,19 @@ class TestExtractOutputFromStdout(TestCase):
         # Verify extract_output returns None for None values and missing prefixes
         result = extract_output_from_stdout(stdout, execution_id)
         self.assertIsNone(result)
+
+
+class TestSanitizeOutput(TestCase):
+    def test_known_values_are_redacted(self) -> None:
+        # Verify known values, including a substring one, are redacted from arbitrary text
+        values = {"username": "admin", "password": "admin123"}
+        result = sanitize_output("login admin with admin123", values)
+        self.assertEqual(result, "login ******** with ********")
+
+    def test_empty_and_none_values_do_not_raise(self) -> None:
+        # Verify empty/whitespace values and values=None are tolerated, not over-redacted
+        self.assertEqual(sanitize_output("hello world", {"password": "", "secret_key": "  "}), "hello world")
+        self.assertEqual(sanitize_output("hello", None), "hello")
 
 
 class TestExtractScriptPrintOutput(TestCase):

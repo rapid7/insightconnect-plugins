@@ -127,7 +127,8 @@ Example output:
 
 * Some third-party modules defined in the Modules connection input (such as pandas) can take a long time to install. If installation fails, try increasing the Timeout connection input to 900 (15 minutes)
 * Each unique set of modules runs in its own isolated virtual environment. Connections with the same modules share one environment automatically. Conflicting packages across connections are fully supported
-* Output from `print()` statements in the supplied function is captured and included in the action's log. Known credential values are redacted before logging, but avoid printing other sensitive data since it will be visible in both the action log and container logs
+* Output from `print()` statements in the supplied function is captured and included in the action's log. Known credential values are redacted before logging (including from any script error output), but avoid printing other sensitive data since it will be visible in both the action log and container logs
+* Captured `print()` output is truncated to 10,000 characters per execution
 
 # Version History
 
