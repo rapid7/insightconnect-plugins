@@ -8,7 +8,7 @@ description: Make searching the Rapid7 vulnerability and exploit data fast, easy
   computer software exploits and exploitable vulnerabilities to ensure your security
   operations are always aware of the latest threats that could be used against your
   environment vulnerabilities
-version: 2.1.10
+version: 2.1.11
 connection_version: 2
 supported_versions: [v1]
 vendor: rapid7
@@ -17,7 +17,7 @@ cloud_ready: true
 fedramp_ready: true
 sdk:
   type: slim
-  version: 6.5.1
+  version: 6.6.0
   user: nobody
 key_features:
 - Search Database for vulnerabilities
@@ -25,7 +25,7 @@ key_features:
 requirements: _This plugin does not contain any requirements._
 troubleshooting:
 - This plugin does not contain any troubleshooting information.
-status: []
+status: ["hidden"]
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_vulndb
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -41,6 +41,7 @@ references:
 links:
 - '[Rapid7 Vulnerability & Exploit Database API Specification](https://vdb.rapid7.com/swagger_doc)'
 version_history:
+- 2.1.11 - Deprecated the plugin due to the retirement of the Rapid7 VulnDB API | Updated SDK to the latest version (6.6.0)
 - 2.1.10 - Updated SDK to the latest version (6.5.1)
 - 2.1.9 - Updated SDK to the latest version (6.4.3)
 - 2.1.8 - Updated SDK to the latest version (6.3.10)
