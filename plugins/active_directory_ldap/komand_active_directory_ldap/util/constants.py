@@ -1,0 +1,21 @@
+ENCODING = "utf-8"
+
+KRB5_CONFIG_TEMPLATE = (
+    "[libdefaults]\n"
+    "default_realm = {realm}\n"
+    "forwardable = true\n"
+    "proxiable = true\n"
+    "dns_lookup_realm = false\n"
+    "dns_lookup_kdc = false\n"
+    "\n"
+    "[realms]\n"
+    "{realm} = {{\n"
+    "kdc = {kdc}\n"
+    "admin_server = {kdc}\n"
+    "default_domain = {realm}\n"
+    "}}\n"
+    "\n"
+    "[domain_realm]\n"
+    ".{domain} = {realm}\n"
+    "{domain} = {realm}\n"
+)
