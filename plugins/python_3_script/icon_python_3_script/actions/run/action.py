@@ -13,7 +13,11 @@ from icon_python_3_script.util.constants import (
     DEFAULT_PROCESS_TIMEOUT,
     RUN_FUNCTION_TEMPLATE,
 )
-from icon_python_3_script.util.util import extract_output_from_stdout
+from icon_python_3_script.util.util import (
+    extract_output_from_stdout,
+    extract_script_print_output,
+    sanitize_output,
+)
 
 from .schema import Component, Input, RunInput, RunOutput
 
@@ -112,14 +116,43 @@ class Run(insightconnect_plugin_runtime.Action):
                 timeout=timeout * 60,
                 env=execution_environment,
             )
-            return extract_output_from_stdout(output.decode(DEFAULT_ENCODING), execution_id)
+            output_decoded = output.decode(DEFAULT_ENCODING, errors="ignore")
+            self._log_script_print_output(output_decoded, execution_id, credentials)
+            return extract_output_from_stdout(output_decoded, execution_id)
         except subprocess.CalledProcessError as error:
-            raise PluginException(error.stderr.decode(DEFAULT_ENCODING).replace(execution_id, "")) from None
-        except subprocess.TimeoutExpired:
+            if error.stdout:
+                self._log_script_print_output(
+                    error.stdout.decode(DEFAULT_ENCODING, errors="ignore"), execution_id, credentials
+                )
+            stderr = sanitize_output(error.stderr.decode(DEFAULT_ENCODING, errors="ignore"), credentials)
+            raise PluginException(stderr.replace(execution_id, "")) from None
+        except subprocess.TimeoutExpired as error:
+            if error.output:
+                self._log_script_print_output(
+                    error.output.decode(DEFAULT_ENCODING, errors="ignore"), execution_id, credentials
+                )
             raise PluginException(f"Function timed out after {timeout} minutes.") from None
         finally:
             if execution_file.is_file():
                 execution_file.unlink()
+
+    def _log_script_print_output(self, stdout: str, execution_id: str, credentials: Dict[str, Any]) -> None:
+        """
+        Log the customer script's own print/logging output, redacted of known credential
+        values, so it is visible in both container logs and the action's response log field.
+
+        :param stdout: The raw decoded stdout captured from the script subprocess.
+        :type: str
+
+        :param execution_id: The execution ID marker prefixing the script's returned output.
+        :type: str
+
+        :param credentials: The credentials passed to the script, whose values are redacted.
+        :type: Dict[str, Any]
+        """
+
+        if print_output := extract_script_print_output(stdout, execution_id, credentials):
+            self.logger.info(f"Script output: (below)\n\n{print_output}\n")
 
     @staticmethod
     def _create_execution_file(execution_id: str, function_: str, parameters: Dict[str, Any]) -> Path:

@@ -16,6 +16,8 @@ from icon_python_3_script.util.util import (
     environment_key,
     environment_ready,
     extract_output_from_stdout,
+    extract_script_print_output,
+    sanitize_output,
 )
 from parameterized import parameterized
 
@@ -128,3 +130,155 @@ class TestExtractOutputFromStdout(TestCase):
         # Verify extract_output returns None for None values and missing prefixes
         result = extract_output_from_stdout(stdout, execution_id)
         self.assertIsNone(result)
+
+
+class TestSanitizeOutput(TestCase):
+    def test_known_values_are_redacted(self) -> None:
+        # Verify known values, including a substring one, are redacted from arbitrary text
+        values = {"username": "admin", "password": "admin123"}
+        result = sanitize_output("login admin with admin123", values)
+        self.assertEqual(result, "login ******** with ********")
+
+    def test_empty_and_none_values_do_not_raise(self) -> None:
+        # Verify empty/whitespace values and values=None are tolerated, not over-redacted
+        self.assertEqual(sanitize_output("hello world", {"password": "", "secret_key": "  "}), "hello world")
+        self.assertEqual(sanitize_output("hello", None), "hello")
+
+
+class TestExtractScriptPrintOutput(TestCase):
+    EXECUTION_ID = "Python3Script-ActionRun-test"
+
+    @parameterized.expand(
+        [
+            (
+                "marker_present",
+                "hello from script\n",
+                "Python3Script-ActionRun-test" + '{"result": "ok"}',
+                {},
+                "hello from script",
+            ),
+            ("marker_absent", "just some stdout\n", "", {}, "just some stdout"),
+            ("marker_absent_incomplete_line_dropped", "just some stdout", "", {}, ""),
+            ("empty_stdout", "", "", {}, ""),
+            (
+                "whitespace_only_before_marker",
+                "   \n\t  ",
+                "Python3Script-ActionRun-test" + '{"result": "ok"}',
+                {},
+                "",
+            ),
+        ]
+    )
+    def test_extract_print_output(
+        self, test_name: str, prefix_text: str, suffix_text: str, credentials: dict, expected: str
+    ) -> None:
+        # Verify print output is correctly split from the execution_id marker line
+        result = extract_script_print_output(prefix_text + suffix_text, self.EXECUTION_ID, credentials)
+        self.assertEqual(result, expected)
+
+    def test_credential_values_are_redacted(self) -> None:
+        # Verify every credential value (including username) is redacted from the print output
+        credentials = {
+            "username": "test_user",
+            "password": "test_pass",
+            "secret_key": "secret123",
+            "secret_credential_1": "cred1",
+            "secret_credential_2": "cred2",
+            "secret_credential_3": "cred3",
+        }
+        stdout = "login as test_user with test_pass, key=secret123, extra=cred1 cred2 cred3\n"
+        result = extract_script_print_output(stdout, self.EXECUTION_ID, credentials)
+        for value in credentials.values():
+            self.assertNotIn(value, result)
+        self.assertIn("********", result)
+
+    def test_empty_credential_values_are_ignored(self) -> None:
+        # Verify empty/missing credential values don't crash or over-redact
+        result = extract_script_print_output("hello world\n", self.EXECUTION_ID, {"password": ""})
+        self.assertEqual(result, "hello world")
+
+    def test_substring_credential_value_fully_redacted(self) -> None:
+        # Verify a credential value that is a substring of another (e.g. username "admin"
+        # inside password "admin123") is redacted whole, with no partial residue left behind
+        credentials = {"username": "admin", "password": "admin123"}
+        stdout = "login admin with admin123\n"
+        result = extract_script_print_output(stdout, self.EXECUTION_ID, credentials)
+        self.assertNotIn("admin123", result)
+        self.assertNotIn("********123", result)
+        self.assertEqual(result, "login ******** with ********")
+
+    def test_star_credential_value_does_not_blow_up_other_redactions(self) -> None:
+        # Verify a credential value containing "*" doesn't re-match and inflate an
+        # already-inserted "********" placeholder from a different credential
+        credentials = {"password": "*", "secret_key": "longsecret"}
+        stdout = "pw=* and s=longsecret\n"
+        result = extract_script_print_output(stdout, self.EXECUTION_ID, credentials)
+        self.assertEqual(result, "pw=******** and s=********")
+
+    def test_whitespace_only_credential_value_is_ignored(self) -> None:
+        # Verify a credential value that is truthy but pure whitespace (e.g. a space, tab, or
+        # newline) is skipped rather than mass-redacting every occurrence of that whitespace
+        credentials = {"password": " ", "secret_key": "\t"}
+        stdout = "hello world foo bar\n"
+        result = extract_script_print_output(stdout, self.EXECUTION_ID, credentials)
+        self.assertEqual(result, "hello world foo bar")
+
+    def test_none_credentials_does_not_raise(self) -> None:
+        # Verify credentials=None (e.g. before Connection.connect() has populated it) is
+        # tolerated instead of raising and masking the script's real error
+        result = extract_script_print_output("hello\n", self.EXECUTION_ID, None)
+        self.assertEqual(result, "hello")
+
+    def test_multiline_credential_split_by_marker_absent_line_drop_does_not_leak(self) -> None:
+        # Verify a multi-line credential value (e.g. a PEM key) is redacted before the
+        # marker-absent incomplete-line drop runs, so no partial line of the secret survives
+        credentials = {"secret_key": "-----BEGIN RSA KEY-----\nMIIBSUPERSECRET\n-----END RSA KEY-----"}
+        stdout = "about to use key\n" + credentials["secret_key"]  # no marker, no trailing newline
+        result = extract_script_print_output(stdout, self.EXECUTION_ID, credentials)
+        self.assertNotIn("MIIBSUPERSECRET", result)
+        self.assertNotIn("BEGIN RSA KEY", result)
+
+    def test_incomplete_credential_fragment_dropped_on_marker_absent(self) -> None:
+        # Verify a mid-write cut (e.g. process killed on timeout) that splits a credential
+        # value never leaks a partial fragment past redaction: the incomplete trailing line
+        # is dropped entirely rather than passed through unredacted.
+        credentials = {"password": "secret1234"}
+        stdout = "connecting...\npassword=secret1"  # killed mid-write, no trailing newline
+        result = extract_script_print_output(stdout, self.EXECUTION_ID, credentials)
+        self.assertEqual(result, "connecting...")
+        self.assertNotIn("secret1", result)
+
+    @parameterized.expand(
+        [
+            ("pipe", "a|b", "pw=a|b and also a and b", "pw=******** and also a and b"),
+            ("dot", "a.b", "pw=a.b and axb", "pw=******** and axb"),
+            ("parens", "(test)", "pw=(test) and test", "pw=******** and test"),
+            ("star_quantifier", "ab*", "pw=ab* and abbb", "pw=******** and abbb"),
+            ("brackets", "[abc]", "pw=[abc] and abc", "pw=******** and abc"),
+            ("backreference", r"\1", "pw=\\1 and 1", "pw=******** and 1"),
+        ]
+    )
+    def test_regex_metacharacter_credentials_redacted_literally(
+        self, test_name: str, credential_value: str, stdout: str, expected: str
+    ) -> None:
+        # Verify credential values containing regex metacharacters are treated as literal
+        # text (via re.escape), not as regex syntax, and don't match unrelated substrings
+        result = extract_script_print_output(stdout + "\n", self.EXECUTION_ID, {"password": credential_value})
+        self.assertEqual(result, expected)
+
+    def test_overlapping_non_nested_credential_values_documented_limitation(self) -> None:
+        # Two credential values that overlap without either containing the other (as opposed
+        # to a substring/nested relationship, which IS fully handled) can leave a fragment of
+        # the second value behind: a single left-to-right regex pass can't backtrack onto an
+        # earlier, already-consumed match. This is an accepted, inherent limitation, not a fix
+        # target - real credentials are long random strings, making this scenario contrived.
+        credentials = {"a": "abcd", "b": "cdef"}
+        result = extract_script_print_output("val=abcdef\n", self.EXECUTION_ID, credentials)
+        self.assertEqual(result, "val=********ef")
+
+    def test_long_output_is_truncated(self) -> None:
+        # Verify output longer than max_length is truncated with a marker
+        stdout = "x" * 5000 + "\n"
+        result = extract_script_print_output(stdout, self.EXECUTION_ID, {}, max_length=100)
+        self.assertTrue(result.endswith("... (truncated)"))
+        self.assertEqual(len(result), 100 + len("... (truncated)"))
