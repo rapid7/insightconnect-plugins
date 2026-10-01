@@ -46,17 +46,17 @@ class GetThreatActorOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "threat_actor": {
-      "type": "object",
-      "title": "Threat Actor",
-      "description": "Detailed threat actor information",
-      "order": 1
-    },
     "found": {
       "type": "boolean",
       "title": "Found",
       "description": "Whether the threat actor was found",
       "order": 2
+    },
+    "threat_actor": {
+      "type": "object",
+      "title": "Threat Actor",
+      "description": "Detailed threat actor information",
+      "order": 1
     }
   },
   "required": [

@@ -24,12 +24,6 @@ class GetThreatActorCvesInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "uuid": {
-      "type": "string",
-      "title": "UUID",
-      "description": "The threat actor UUID to look up CVEs for",
-      "order": 1
-    },
     "page": {
       "type": "integer",
       "title": "Page",
@@ -43,6 +37,12 @@ class GetThreatActorCvesInput(insightconnect_plugin_runtime.Input):
       "description": "Number of results per page (max 100)",
       "default": 10,
       "order": 3
+    },
+    "uuid": {
+      "type": "string",
+      "title": "UUID",
+      "description": "The threat actor UUID to look up CVEs for",
+      "order": 1
     }
   },
   "required": [
@@ -72,7 +72,7 @@ class GetThreatActorCvesOutput(insightconnect_plugin_runtime.Output):
       "order": 1
     },
     "pagination": {
-      "type": "object",
+      "$ref": "#/definitions/pagination",
       "title": "Pagination",
       "description": "Pagination information for the results",
       "order": 2
@@ -81,7 +81,38 @@ class GetThreatActorCvesOutput(insightconnect_plugin_runtime.Output):
   "required": [
     "cves"
   ],
-  "definitions": {}
+  "definitions": {
+    "pagination": {
+      "type": "object",
+      "title": "pagination",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "title": "Page",
+          "description": "Current page number",
+          "order": 1
+        },
+        "page_size": {
+          "type": "integer",
+          "title": "Page Size",
+          "description": "Number of results per page",
+          "order": 2
+        },
+        "total_count": {
+          "type": "integer",
+          "title": "Total Count",
+          "description": "Total number of results available",
+          "order": 3
+        },
+        "total_pages": {
+          "type": "integer",
+          "title": "Total Pages",
+          "description": "Total number of pages available",
+          "order": 4
+        }
+      }
+    }
+  }
 }
     """)
 

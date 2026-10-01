@@ -24,12 +24,6 @@ class SearchThreatActorsInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "search": {
-      "type": "string",
-      "title": "Search",
-      "description": "Search query to filter threat actors by name or alias",
-      "order": 1
-    },
     "page": {
       "type": "integer",
       "title": "Page",
@@ -43,6 +37,12 @@ class SearchThreatActorsInput(insightconnect_plugin_runtime.Input):
       "description": "Number of results per page (max 100)",
       "default": 10,
       "order": 3
+    },
+    "search": {
+      "type": "string",
+      "title": "Search",
+      "description": "Search query to filter threat actors by name or alias",
+      "order": 1
     }
   },
   "definitions": {}
@@ -59,6 +59,12 @@ class SearchThreatActorsOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "pagination": {
+      "$ref": "#/definitions/pagination",
+      "title": "Pagination",
+      "description": "Pagination information for the results",
+      "order": 2
+    },
     "threat_actors": {
       "type": "array",
       "title": "Threat Actors",
@@ -67,18 +73,43 @@ class SearchThreatActorsOutput(insightconnect_plugin_runtime.Output):
         "type": "object"
       },
       "order": 1
-    },
-    "pagination": {
-      "type": "object",
-      "title": "Pagination",
-      "description": "Pagination information for the results",
-      "order": 2
     }
   },
   "required": [
     "threat_actors"
   ],
-  "definitions": {}
+  "definitions": {
+    "pagination": {
+      "type": "object",
+      "title": "pagination",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "title": "Page",
+          "description": "Current page number",
+          "order": 1
+        },
+        "page_size": {
+          "type": "integer",
+          "title": "Page Size",
+          "description": "Number of results per page",
+          "order": 2
+        },
+        "total_count": {
+          "type": "integer",
+          "title": "Total Count",
+          "description": "Total number of results available",
+          "order": 3
+        },
+        "total_pages": {
+          "type": "integer",
+          "title": "Total Pages",
+          "description": "Total number of pages available",
+          "order": 4
+        }
+      }
+    }
+  }
 }
     """)
 

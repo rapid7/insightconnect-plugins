@@ -24,17 +24,47 @@ class Output:
 
 
 class SearchCvesInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        r"""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "search": {
+    "cisa_kev": {
+      "type": "boolean",
+      "title": "CISA KEV",
+      "description": "Filter by CISA Known Exploited Vulnerabilities catalog",
+      "order": 7
+    },
+    "cvss_score": {
       "type": "string",
-      "title": "Search",
-      "description": "Search query to filter CVEs (e.g., CVE ID, keyword)",
-      "order": 1
+      "title": "CVSS Score",
+      "description": "Filter by CVSS severity level",
+      "enum": [
+        "",
+        "critical",
+        "high",
+        "medium",
+        "low"
+      ],
+      "order": 4
+    },
+    "epss_score": {
+      "type": "string",
+      "title": "EPSS Score Range",
+      "description": "Filter by EPSS score range (e.g., 0-0.5, 0.5-1)",
+      "order": 6
+    },
+    "exploitable": {
+      "type": "boolean",
+      "title": "Exploitable",
+      "description": "Filter by whether the CVE is exploitable",
+      "order": 5
+    },
+    "last_updated": {
+      "type": "string",
+      "title": "Last Updated",
+      "description": "Filter by last updated time range (e.g., 'last 24 hours', 'last 72 hours', 'last 7 days')",
+      "order": 8
     },
     "page": {
       "type": "integer",
@@ -50,50 +80,23 @@ class SearchCvesInput(insightconnect_plugin_runtime.Input):
       "default": 10,
       "order": 3
     },
-    "cvss_score": {
+    "search": {
       "type": "string",
-      "title": "CVSS Score",
-      "description": "Filter by CVSS severity level",
-      "enum": ["", "critical", "high", "medium", "low"],
-      "order": 4
-    },
-    "exploitable": {
-      "type": "boolean",
-      "title": "Exploitable",
-      "description": "Filter by whether the CVE is exploitable",
-      "order": 5
-    },
-    "epss_score": {
-      "type": "string",
-      "title": "EPSS Score Range",
-      "description": "Filter by EPSS score range (e.g., 0-0.5, 0.5-1)",
-      "order": 6
-    },
-    "cisa_kev": {
-      "type": "boolean",
-      "title": "CISA KEV",
-      "description": "Filter by CISA Known Exploited Vulnerabilities catalog",
-      "order": 7
-    },
-    "last_updated": {
-      "type": "string",
-      "title": "Last Updated",
-      "description": "Filter by last updated time range (e.g., 'last 24 hours', 'last 72 hours', 'last 7 days')",
-      "order": 8
+      "title": "Search",
+      "description": "Search query to filter CVEs (e.g., CVE ID, keyword)",
+      "order": 1
     }
   },
   "definitions": {}
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class SearchCvesOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(
-        r"""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -158,7 +161,10 @@ class SearchCvesOutput(insightconnect_plugin_runtime.Output):
           "description": "Description of the vulnerability",
           "order": 6
         }
-      }
+      },
+      "required": [
+        "cve_id"
+      ]
     },
     "pagination": {
       "type": "object",
@@ -192,8 +198,7 @@ class SearchCvesOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

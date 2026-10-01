@@ -5,7 +5,7 @@ import json
 from sys import argv
 
 Name = "Rapid7 IntelHub"
-Vendor = "rapid7-labs"
+Vendor = "rapid7"
 Version = "1.0.0"
 Description = "Access Rapid7 Intelligence Hub for threat intelligence data including CVE information, vulnerabilities, and security insights"
 
@@ -35,9 +35,15 @@ def main():
                 connection=connection.Connection()
             )
             self.add_action(actions.SearchCves())
-
+        
             self.add_action(actions.GetCve())
-
+        
+            self.add_action(actions.SearchThreatActors())
+        
+            self.add_action(actions.GetThreatActor())
+        
+            self.add_action(actions.GetThreatActorCves())
+        
 
     """Run plugin"""
     cli = insightconnect_plugin_runtime.CLI(ICONRapid7Intelhub())

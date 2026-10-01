@@ -1,0 +1,31 @@
+{
+	"spec": "d5d7227d8dde31acc2d3bfc4e97546bd",
+	"manifest": "580d8d3d374aeb02e1e1219f08006dec",
+	"setup": "3518154bb85052e412c78306dd8acd47",
+	"schemas": [
+		{
+			"identifier": "get_cve/schema.py",
+			"hash": "58339a5d8bf7a9ee4559f2e94a1dad77"
+		},
+		{
+			"identifier": "get_threat_actor/schema.py",
+			"hash": "7909173fb0faa014b5a6eb6d0ee088fa"
+		},
+		{
+			"identifier": "get_threat_actor_cves/schema.py",
+			"hash": "1433868ebd8566773bfb5ecd813d0181"
+		},
+		{
+			"identifier": "search_cves/schema.py",
+			"hash": "9ff2fc07a2e02b6e9d243d0352c8c9c5"
+		},
+		{
+			"identifier": "search_threat_actors/schema.py",
+			"hash": "4d17715f2dfbb5dc318aaa42be412222"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "f7de4ce32fb909df458c2ac36d65888c"
+		}
+	]
+}
