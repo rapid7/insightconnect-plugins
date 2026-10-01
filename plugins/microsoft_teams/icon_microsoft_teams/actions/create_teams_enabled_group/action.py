@@ -8,7 +8,6 @@ from .schema import (
 )
 
 # Custom imports below
-from icon_microsoft_teams.util.azure_ad_utils import create_group, enable_teams_for_group
 from icon_microsoft_teams.util.komand_clean_with_nulls import remove_null_and_clean
 
 
@@ -29,19 +28,16 @@ class CreateTeamsEnabledGroup(insightconnect_plugin_runtime.Action):
         owners = params.get(Input.OWNERS)
         members = params.get(Input.MEMBERS)
 
-        group_result = create_group(
-            self.logger,
-            self.connection,
-            group_name,
-            group_description,
-            mail_nickname,
-            mail_enabled,
-            owners,
-            members,
+        group_result = self.connection.client.create_group(
+            group_name=group_name,
+            group_description=group_description,
+            group_nickname=mail_nickname,
+            mail_enabled=mail_enabled,
+            owners=owners,
+            members=members,
         )
 
         group_id = group_result.get("id")
-
-        enable_teams_for_group(self.logger, self.connection, group_id)
+        self.connection.client.enable_teams_for_group(group_id)
 
         return {Output.GROUP: remove_null_and_clean(group_result)}
