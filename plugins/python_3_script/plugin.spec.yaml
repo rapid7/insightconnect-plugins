@@ -7,7 +7,7 @@ vendor: rapid7
 support: rapid7
 status: []
 description: "[Python](https://www.python.org/) is a language for fast development and integration. The plugin runs Python 3.12.8 with standard library and libraries like:\n\n* [requests](https://requests.readthedocs.io/en/latest/)\n* [arrow](https://pypi.org/project/arrow/)\n* [beautifulsoup](https://www.crummy.com/software/BeautifulSoup/)\n\nIt supports loading custom modules and passing credentials (`username`, `password`, `secret_key`, `secret_credential_1`, `secret_credential_2`, `secret_credential_3`)"
-version: 5.2.4
+version: 5.2.5
 connection_version: 4
 supported_versions: [Python 3.13.13]
 fedramp_ready: true
@@ -31,6 +31,11 @@ troubleshooting:
 - Each unique set of modules runs in its own isolated virtual environment. Connections
   with the same modules share one environment automatically. Conflicting packages
   across connections are fully supported
+- Output from `print()` statements in the supplied function is captured and included
+  in the action's log. Known credential values are redacted before logging (including
+  from any script error output), but avoid printing other sensitive data since it will
+  be visible in both the action log and container logs
+- Captured `print()` output is truncated to 10,000 characters per execution
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/python_3_script
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -51,6 +56,7 @@ references: ['[Python 3 Language Reference](https://docs.python.org/3/reference/
 links:
 - '[Python](https://www.python.org/)'
 version_history:
+- "5.2.5 - Action `Run`: Capture script `print()` output and include it in the action log"
 - "5.2.4 - Action `Run`: Added per connection dependency isolation | Fixed issue related to `ModuleNotFound` when plugin was updated | Updated SDK to the latest version (6.6.0)"
 - "5.2.3 - Action: `Run`: Updated default function value | Updated SDK to the latest version (6.5.1)"
 - 5.2.2 - Updated dependencies | Updated SDK to the latest version (6.5.0)
