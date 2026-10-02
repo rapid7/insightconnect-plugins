@@ -27,6 +27,7 @@ class TestGetUsers(TestCase):
             ],
         ]
     )
-    def test_get_users(self, mock_request, mock_request_instance, test_name, expected) -> None:
+    def test_get_users(self, mock_isinstance, mock_request, test_name, expected) -> None:
         actual = self.action.run()
         self.assertEqual(actual, expected)
+        self.assertEqual([call.kwargs["params"]["offset"] for call in mock_request.call_args_list], ["0", "300"])

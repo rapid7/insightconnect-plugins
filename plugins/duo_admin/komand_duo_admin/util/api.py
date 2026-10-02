@@ -8,7 +8,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from logging import Logger
 from urllib.parse import quote
 from datetime import datetime, timezone
-from komand_duo_admin.util.constants import Cause, Assistance
+from komand_duo_admin.util.constants import Cause, Assistance, USERS_PAGE_LIMIT
 from komand_duo_admin.util.exceptions import ApiException
 from komand_duo_admin.util.endpoints import (
     ADMINISTRATOR_LOGS_ENDPOINT,
@@ -72,10 +72,16 @@ class DuoAdminAPI:
         return self.make_json_request(method="POST", path=ENROLL_USER_ENDPOINT, params=params)
 
     def get_users(self) -> dict:
-        return self.make_json_request(
-            method="GET",
-            path=USERS_ENDPOINT,
-        )
+        users, offset = [], 0
+        while offset is not None:
+            response = self.make_json_request(
+                method="GET",
+                path=USERS_ENDPOINT,
+                params={"limit": str(USERS_PAGE_LIMIT), "offset": str(offset)},
+            )
+            users.extend(response.get("response", []))
+            offset = response.get("metadata", {}).get("next_offset")
+        return {"response": users}
 
     def get_user_by_id(self, user_id: str) -> dict:
         return self.make_json_request(

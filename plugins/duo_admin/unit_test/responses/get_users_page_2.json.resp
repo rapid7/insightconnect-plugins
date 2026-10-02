@@ -1,0 +1,24 @@
+{
+  "response": [
+    {
+      "aliases": {},
+      "created": 1684151234,
+      "desktoptokens": [],
+      "email": "",
+      "groups": [],
+      "is_enrolled": true,
+      "notes": "",
+      "phones": [],
+      "realname": "Example",
+      "status": "active",
+      "tokens": [],
+      "user_id": "DEFDEF",
+      "username": "Example 3",
+      "webauthncredentials": []
+    }
+  ],
+  "metadata": {
+    "prev_offset": 0,
+    "total_objects": 3
+  }
+}
