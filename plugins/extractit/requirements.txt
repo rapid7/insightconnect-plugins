@@ -1,10 +1,10 @@
 # List third-party dependencies here, separated by newlines. 
 # All dependencies must be version-pinned, eg. requests==1.2.0
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
-tldextract==5.3.1
-regex==2026.2.28
+tldextract==5.3.2
+regex==2026.9.29
 validators==0.35.0
-pdfplumber==0.11.9
+pdfplumber==0.11.10
 openpyxl==3.1.5
 parameterized==0.9.0
 publicsuffix2==2.20191221
