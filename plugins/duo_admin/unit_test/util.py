@@ -123,8 +123,10 @@ class Util:
         if url == "https://example.com/admin/v1/users" and params == {"username": "not-exist-username"}:
             return MockResponse(404, "get_user_by_username_bad.json.resp")
 
-        if url == "https://example.com/admin/v1/users" and params == {}:
+        if url == "https://example.com/admin/v1/users" and params == {"limit": "300", "offset": "0"}:
             return MockResponse(200, "get_users.json.resp")
+        if url == "https://example.com/admin/v1/users" and params == {"limit": "300", "offset": "300"}:
+            return MockResponse(200, "get_users_page_2.json.resp")
 
         if method == "POST" and url == "https://example.com/admin/v1/users/modify-non-existing":
             return MockResponse(404, "")

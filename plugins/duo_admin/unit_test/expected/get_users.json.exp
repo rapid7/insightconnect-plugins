@@ -16,6 +16,14 @@
       "status": "active",
       "userId": "ABCABC",
       "username": "Example 2"
+    },
+    {
+      "created": 1684151234,
+      "isEnrolled": true,
+      "realname": "Example",
+      "status": "active",
+      "userId": "DEFDEF",
+      "username": "Example 3"
     }
   ]
 }
