@@ -7,3 +7,11 @@ class Messages:
     EXCEPTION_TOO_MANY_VALUES_ASSISTANCE = "Please reduce the number of inputs provided."
     EXCEPTION_SEARCH_RESPONSE_LIMIT_EXCEEDED_CAUSE = "Search returns too many results."
     EXCEPTION_SEARCH_RESPONSE_LIMIT_EXCEEDED_ASSISTANCE = "Please try narrowing down your search criteria."
+    EXCEPTION_API_CAUSE = "The Zendesk API returned an error."
+    EXCEPTION_API_ASSISTANCE = (
+        "Please verify the connection details and action inputs, then review the error returned by Zendesk."
+    )
+    EXCEPTION_ZENPY_CAUSE = "An error occurred in the Zendesk client library."
+    EXCEPTION_ZENPY_ASSISTANCE = (
+        "Please verify the action inputs, then review the error returned by the client library."
+    )

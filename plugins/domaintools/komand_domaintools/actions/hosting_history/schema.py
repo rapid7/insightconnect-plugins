@@ -4,7 +4,9 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Provides a list of changes that have occurred in a Domain Name\'s registrar, IP address, and name servers"
+    DESCRIPTION = (
+        "Provides a list of changes that have occurred in a Domain Name's registrar, IP address, and name servers"
+    )
 
 
 class Input:
