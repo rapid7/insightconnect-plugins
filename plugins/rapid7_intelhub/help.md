@@ -52,7 +52,7 @@ This action is used to get detailed information about a specific CVE by ID
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|cve_id|string|None|True|The CVE identifier to look up (e.g., CVE-2024-3400)|None|CVE-2024-3400|None|None|
+|cve_id|string|None|True|The CVE ID to look up, or a Rapid7 vulnerability ID that contains one (e.g., CVE-2024-3400 or apple-itunes-cve-2019-8835)|None|CVE-2024-3400|None|None|
   
 Example input:
 
@@ -371,6 +371,7 @@ Example output:
 * Ensure your API key has access to Intelligence Hub
 * Verify the correct region is selected for your account
 * If the connection test fails with `Product license not found`, the API key is valid but its organization has neither an InsightIDR nor an Intelligence Hub license
+* The CVE ID input of the Get CVE action also accepts a Rapid7 vulnerability ID that contains a CVE ID, such as `apple-itunes-cve-2019-8835`, so a workflow that used the Get Content action of the Rapid7 Vulnerability & Exploit Database plugin can pass the same identifier. Rapid7 vulnerability IDs without a CVE ID, and Metasploit module IDs, cannot be looked up
 * The Search input of the Search CVEs action matches part of the CVE ID, such as `CVE-2024` or `3400`, not keywords in the CVE title or description
 * Intelligence Hub does not provide Metasploit modules or vulnerability solutions
 

@@ -35,6 +35,13 @@ class TestGetCve(TestCase):
                 Util.read_file_to_dict("expected/get_cve_without_rapid7_content.json.exp"),
             ],
             ["not_found", STUB_UNKNOWN_CVE_ID, {Output.CVE: {}, Output.FOUND: False}],
+            ["lower_case", "cve-2024-3400", Util.read_file_to_dict("expected/get_cve.json.exp")],
+            ["surrounding_whitespace", " CVE-2024-3400 ", Util.read_file_to_dict("expected/get_cve.json.exp")],
+            [
+                "rapid7_vulnerability_id",
+                "palo-alto-networks-pan-os-cve-2024-3400",
+                Util.read_file_to_dict("expected/get_cve.json.exp"),
+            ],
         ]
     )
     @patch("requests.request", side_effect=Util.mock_request)
@@ -60,3 +67,17 @@ class TestGetCve(TestCase):
             action.run({Input.CVE_ID: STUB_CVE_ID})
         self.assertEqual(cause, context.exception.cause)
         self.assertEqual(Util.read_file_to_string(f"payloads/{payload}.json.resp"), context.exception.data)
+
+    @parameterized.expand(
+        [
+            ["rapid7_vulnerability_id_without_cve", "3395856ce81f2b7382dee72602f798b642f14140-cve"],
+            ["metasploit_module_id", "exploit/linux/http/panos_telemetry_cmd_exec"],
+            ["truncated_cve_id", "CVE-2024-34"],
+        ]
+    )
+    @patch("requests.request", side_effect=Util.mock_request)
+    def test_get_cve_without_cve_id(self, _name: str, identifier: str, mock_request: MagicMock) -> None:
+        with self.assertRaises(PluginException) as context:
+            self.action.run({Input.CVE_ID: identifier})
+        self.assertEqual(f"'{identifier}' does not contain a CVE ID.", context.exception.cause)
+        mock_request.assert_not_called()

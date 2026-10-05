@@ -25,7 +25,7 @@ class GetCveInput(insightconnect_plugin_runtime.Input):
     "cve_id": {
       "type": "string",
       "title": "CVE ID",
-      "description": "The CVE identifier to look up (e.g., CVE-2024-3400)",
+      "description": "The CVE ID to look up, or a Rapid7 vulnerability ID that contains one (e.g., CVE-2024-3400 or apple-itunes-cve-2019-8835)",
       "order": 1
     }
   },

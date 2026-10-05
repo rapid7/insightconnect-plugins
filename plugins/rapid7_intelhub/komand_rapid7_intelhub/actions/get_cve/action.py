@@ -3,7 +3,7 @@ from .schema import GetCveInput, GetCveOutput, Input, Output, Component
 
 # Custom imports below
 from komand_rapid7_intelhub.util.api import IntelHubAPI
-from komand_rapid7_intelhub.util.helpers import map_cve
+from komand_rapid7_intelhub.util.helpers import extract_cve_id, map_cve
 
 
 class GetCve(insightconnect_plugin_runtime.Action):
@@ -21,7 +21,7 @@ class GetCve(insightconnect_plugin_runtime.Action):
         # END INPUT BINDING - DO NOT REMOVE
 
         api = IntelHubAPI(self.connection, self.logger)
-        response = api.get_cve(cve_id=cve_id)
+        response = api.get_cve(cve_id=extract_cve_id(cve_id))
 
         if not response:
             return {
