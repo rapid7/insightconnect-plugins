@@ -24,17 +24,20 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     },
     "host": {
       "type": "string",
+      "title": "Host",
       "description": "Host of SMTP server to connect to",
       "order": 1
     },
     "port": {
       "type": "integer",
+      "title": "Port",
       "description": "Port of SMTP server",
       "default": 25,
       "order": 2
     },
     "use_ssl": {
       "type": "boolean",
+      "title": "Use SSL",
       "description": "Use SSL",
       "default": true,
       "order": 4

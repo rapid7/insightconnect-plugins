@@ -32,8 +32,8 @@ class Send(insightconnect_plugin_runtime.Action):
         attachments = params.get(Input.ATTACHMENTS, [])
         bcc = params.get(Input.BCC, [])
         cc = params.get(Input.CC, [])
-        email_from = params.get(Input.EMAIL_FROM, "")
-        email_to = params.get(Input.EMAIL_TO, "")
+        email_from = params.get(Input.EMAIL_FROM, "").strip()
+        email_to = params.get(Input.EMAIL_TO, "").strip()
         html = params.get(Input.HTML, False)
         message = params.get(Input.MESSAGE, "")
         subject = params.get(Input.SUBJECT, "")
@@ -77,7 +77,7 @@ class Send(insightconnect_plugin_runtime.Action):
                 cause="Failed to build the email.",
                 assistance="Verify that the subject and addresses do not contain invalid characters such as line breaks.",
                 data=str(error),
-            ) from error
+            )
 
         # Connection errors are raised by `get()` as PluginException
         client = self.connection.get()
