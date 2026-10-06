@@ -3,16 +3,52 @@ extension: plugin
 products: [insightconnect]
 name: smtp
 title: SMTP
-description: "Simple Mail Transfer Protocol (SMTP) is an Internet standard for electronic
-  mail (email) transmission. Users of this plugin will be able to automatically send email through their
-Rapid7 InsightConnect workflows"
-version: 2.0.5
+description: "[Simple Mail Transfer Protocol](https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol) (SMTP) is an Internet standard for electronic mail (email) transmission. This plugin provides users with the ability to craft and automatically send emails through their Rapid7 InsightConnect workflows. This plugin can aid in automated notifications, alerting, employee onboarding/offboarding, and more"
+version: 3.0.0
+connection_version: 3
 vendor: rapid7
 support: community
+supported_versions: ['2026-10-02']
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/smtp
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+sdk:
+  type: slim
+  version: 6.6.0
+  user: nobody
+key_features:
+- Send an email with customizable FROM address, TO address, Subject line, and Message
+- Send an HTML-enabled email for enhanced viewing quality
+- Attach multiple files to a single email with the Attachments input
+requirements:
+- SMTP server credentials (optional depending on SMTP server configuration)
+- SMTP server hostname
+- SMTP server port
+troubleshooting:
+- If username and password are left blank, the plugin will not try to authenticate.
+- Attachment content must be Base64 encoded. The error message shows which input contains the invalid attachment.
+- Attachments with empty content are skipped.
+- Attachment filenames longer than 255 characters are shortened and keep their extension.
+- If the SMTP server refuses only some of the recipients, the action fails but the email is still delivered to the others.
+version_history:
+- 3.0.0 - Added support for multiple attachments in `Send Email` action | Replaced `Attachment` input with `Attachments` | Updated SDK to the latest version (6.6.0)
+- 2.0.5 - Fix issue sending emails without attachment
+- 2.0.4 - New spec and help.md format for the Extension Library
+- 2.0.3 - Fix issue with reliability in regards to previous Send action empty attachment fix
+- 2.0.2 - Fix issue where Send action doesn't handle empty attachments correctly
+- 2.0.1 - Fix issue where credentials were required
+- 2.0.0 - Update to new credential types | Rename "SMTP" plugin title to "SMTP Mailer" | Rename "Send an email" action to "Send Email"
+- 1.0.1 - Support web server mode | Support for SMTP relays
+- 1.0.0 - Add support for carbon copy field in email
+- 0.3.0 - Added HTML body support | Updated to v2 architecture
+- 0.2.1 - SSL bug fix in SDK
+- 0.2.0 - Add attachment support
+- 0.1.0 - Initial plugin
+links:
+- '[Simple Mail Transfer Protocol](https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol)'
+references:
+- '[SMTP](https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol)'
 tags:
 - smtp
 - email
@@ -22,71 +58,96 @@ hub_tags:
   features: []
 connection:
   host:
+    title: Host
     description: Host of SMTP server to connect to
     type: string
     required: true
+    example: smtp.example.com
   port:
+    title: Port
     type: integer
     description: Port of SMTP server
     default: 25
     required: true
+    example: 25
   credentials:
     title: Username and Password
     type: credential_username_password
     description: Username and password
     required: false
+    example: '{"username":"user@example.com","password":"mypassword"}'
   use_ssl:
+    title: Use SSL
     type: boolean
     description: Use SSL
     default: true
     required: true
+    example: true
 actions:
   send:
     title: Send Email
     description: Send an email
     input:
       email_from:
+        title: Email From
         type: string
         description: Email to use as FROM
         required: true
         order: 1
+        example: user@example.com
       email_to:
+        title: Email To
         type: string
         description: Email to send TO
         required: true
         order: 2
+        example: user@example.com
       subject:
+        title: Subject
         type: string
         description: Subject of the email
         required: true
         order: 3
+        example: Weekly report
       message:
+        title: Message
         type: string
         description: Message to send on the email
         required: true
         order: 4
+        example: Please find the reports attached
       html:
+        title: HTML
         type: boolean
         description: Message contains HTML
         required: true
         order: 5
+        example: false
       bcc:
+        title: BCC
         type: '[]string'
         description: BCC email
         order: 6
         required: false
+        example: '["user@example.com"]'
       cc:
+        title: CC
         type: '[]string'
         description: CC emails
         order: 7
         required: false
-      attachment:
-        type: file
-        description: Attachment
+        example: '["user@example.com"]'
+      attachments:
+        title: Attachments
+        type: '[]file'
+        description: List of files to attach to the email
         order: 8
         required: false
+        example: '[{"filename":"report.txt","content":"UmFwaWQ3IEluc2lnaHRDb25uZWN0"},{"filename":"second report.txt","content":"UmFwaWQ3IEluc2lnaHRDb25uZWN0"}]'
     output:
       result:
+        title: Result
         type: string
         description: Result
         required: false
+        example: ok
