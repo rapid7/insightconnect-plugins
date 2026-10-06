@@ -58,11 +58,13 @@ hub_tags:
   features: []
 connection:
   host:
+    title: Host
     description: Host of SMTP server to connect to
     type: string
     required: true
     example: smtp.example.com
   port:
+    title: Port
     type: integer
     description: Port of SMTP server
     default: 25
@@ -75,6 +77,7 @@ connection:
     required: false
     example: '{"username":"user@example.com","password":"mypassword"}'
   use_ssl:
+    title: Use SSL
     type: boolean
     description: Use SSL
     default: true

@@ -19,7 +19,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def get(self) -> SMTP:
         host = self.params.get(Input.HOST, "").strip()
         port = self.params.get(Input.PORT, 25)
-        use_ssl = self.params.get(Input.USE_SSL, False)
+        use_ssl = self.params.get(Input.USE_SSL, True)
         credentials = self.params.get(Input.CREDENTIALS) or {}
         username = credentials.get("username", "").strip()
         password = credentials.get("password", "")
@@ -45,7 +45,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 cause="Authentication to the SMTP server failed.",
                 assistance="Verify that the username and password in the connection are correct.",
                 data=error,
-            ) from error
+            )
         except (SMTPException, OSError, UnicodeError) as error:
             if client:
                 close_client(client)
@@ -53,7 +53,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 cause=f"Unable to connect to the SMTP server at {host}:{port}.",
                 assistance="Verify the host, port and SSL settings of the connection and that the server is reachable.",
                 data=error,
-            ) from error
+            )
 
         self.client = client
         return client
@@ -66,4 +66,4 @@ class Connection(insightconnect_plugin_runtime.Connection):
             close_client(self.get())
             return {"success": True}
         except PluginException as error:
-            raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=error.data) from error
+            raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=error.data)

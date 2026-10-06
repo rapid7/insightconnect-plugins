@@ -84,7 +84,7 @@ def create_attachment_part(attachment: dict[str, str], label: str) -> MIMEBase:
             cause=f"Content of {label} is not valid Base64.",
             assistance="Ensure the content of every attachment is Base64-encoded.",
             data=str(error),
-        ) from error
+        )
 
     part = MIMEBase("application", "octet-stream")
     # Re-encode so the payload is wrapped at 76 characters, as required for email line lengths
