@@ -1,0 +1,441 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: endoflife_ai
+title: endoflife.ai
+description: "[endoflife.ai](https://endoflife.ai) provides end-of-life dates, support\
+  \ status and EOL Risk Scores for 500+ software products. This plugin uses the\
+  \ [endoflife.ai API](https://endoflife.ai/api) to enrich assets, findings and tickets\
+  \ with lifecycle data for triage"
+version: 1.0.0
+connection_version: 1
+vendor: endoflife_ai
+support: community
+supported_versions: ["endoflife.ai API v1"]
+status: []
+cloud_ready: true
+sdk:
+  type: slim
+  version: 6.6.0
+  user: nobody
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/endoflife_ai
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://endoflife.ai
+key_features:
+- Look up the support status, end-of-life date and EOL Risk Score of one product version
+- List every tracked version of a product with its dates and status
+- Check a whole list of product and version pairs in one action for stack-wide triage
+requirements:
+- No account is required. An optional API key from [endoflife.ai](https://endoflife.ai/api)
+  raises the daily request limit
+troubleshooting:
+  - "Anonymous requests share a daily limit per source IP address. A `429` response means the limit was hit; set an API key in the connection to raise it"
+  - "A `found` output of `false` means the product or version is not tracked by endoflife.ai. Product slugs are lowercase, for example `nodejs`, `windows-server`, `postgresql`. The `message` output carries the API's own explanation and, for unknown products, suggested slugs"
+  - "Versions are matched by release cycle, for example `20` for Node.js 20.x, `2019` for Windows Server 2019, `8.0` for .NET 8"
+  - "Only the product slug and version are sent to api.endoflife.ai. No asset names, hostnames or other data leave InsightConnect"
+links:
+  - "[endoflife.ai](https://endoflife.ai)"
+references:
+  - "[endoflife.ai API documentation](https://endoflife.ai/api)"
+  - "[EOL Risk Score methodology](https://endoflife.ai/risk-score)"
+  - "[OpenAPI specification](https://api.endoflife.ai/openapi.json)"
+tags:
+- end-of-life
+- eol
+- lifecycle
+- vulnerability management
+- sbom
+hub_tags:
+  use_cases: [data_enrichment, vulnerability_management, asset_inventory]
+  keywords: [end-of-life, eol, lifecycle, vulnerability management, sbom, cloud_enabled]
+  features: []
+version_history:
+- 1.0.0 - Initial plugin
+enable_cache: false
+types:
+  version:
+    version:
+      title: Version
+      description: Release cycle of the product, for example 20 or 2019
+      type: string
+      required: true
+    status:
+      title: Status
+      description: Support status, one of active, warn (end of life within 90 days) or eol
+      type: string
+      required: true
+    eol_date:
+      title: EOL Date
+      description: End-of-life date in YYYY-MM-DD format, empty when no date is published
+      type: string
+      required: false
+    release_date:
+      title: Release Date
+      description: Release date of the cycle in YYYY-MM-DD format
+      type: string
+      required: false
+    latest_release:
+      title: Latest Release
+      description: Latest patch release of the cycle known to endoflife.ai
+      type: string
+      required: false
+    days_until_eol:
+      title: Days Until EOL
+      description: Days until the end-of-life date, empty once it has passed
+      type: integer
+      required: false
+    days_past_eol:
+      title: Days Past EOL
+      description: Days since the end-of-life date, empty until it has passed
+      type: integer
+      required: false
+    score:
+      title: Score
+      description: EOL Risk Score from 0 (lowest risk) to 100 (highest risk)
+      type: integer
+      required: true
+    band:
+      title: Band
+      description: Risk band of the score, one of Low, Moderate, High or Critical
+      type: string
+      required: true
+    grade:
+      title: Grade
+      description: Letter grade of the score from A to F
+      type: string
+      required: true
+    cisa_kev_exposure:
+      title: CISA KEV Exposure
+      description: Score factor for the product's presence in the CISA Known Exploited Vulnerabilities catalog
+      type: integer
+      required: false
+    extended_support_available:
+      title: Extended Support Available
+      description: Whether a commercial extended-support option is known for this product
+      type: boolean
+      required: false
+    extended_support_date:
+      title: Extended Support Date
+      description: End of the vendor's own extended or paid support phase where one is published
+      type: string
+      required: false
+    eol_date_source:
+      title: EOL Date Source
+      description: Provenance of the end-of-life date, for example vendor-fetched, vendor-verified or upstream
+      type: string
+      required: false
+    eol_date_confidence:
+      title: EOL Date Confidence
+      description: Confidence in the end-of-life date, one of high, medium or low
+      type: string
+      required: false
+    score_card_url:
+      title: Score Card URL
+      description: Link to the score card for this version on endoflife.ai
+      type: string
+      required: false
+  batch_result:
+    product:
+      title: Product
+      description: Product slug as submitted
+      type: string
+      required: true
+    version:
+      title: Version
+      description: Version as submitted
+      type: string
+      required: false
+    found:
+      title: Found
+      description: Whether the product and version were found
+      type: boolean
+      required: true
+    message:
+      title: Message
+      description: The API's explanation when the product or version was not found
+      type: string
+      required: false
+    status:
+      title: Status
+      description: Support status, one of active, warn or eol
+      type: string
+      required: false
+    eol_date:
+      title: EOL Date
+      description: End-of-life date in YYYY-MM-DD format
+      type: string
+      required: false
+    days_until_eol:
+      title: Days Until EOL
+      description: Days until the end-of-life date
+      type: integer
+      required: false
+    days_past_eol:
+      title: Days Past EOL
+      description: Days since the end-of-life date
+      type: integer
+      required: false
+    score:
+      title: Score
+      description: EOL Risk Score from 0 to 100
+      type: integer
+      required: false
+    band:
+      title: Band
+      description: Risk band of the score
+      type: string
+      required: false
+    grade:
+      title: Grade
+      description: Letter grade of the score
+      type: string
+      required: false
+    cisa_kev_exposure:
+      title: CISA KEV Exposure
+      description: Score factor for the product's presence in the CISA KEV catalog
+      type: integer
+      required: false
+    extended_support_available:
+      title: Extended Support Available
+      description: Whether a commercial extended-support option is known
+      type: boolean
+      required: false
+    eol_date_source:
+      title: EOL Date Source
+      description: Provenance of the end-of-life date
+      type: string
+      required: false
+    eol_date_confidence:
+      title: EOL Date Confidence
+      description: Confidence in the end-of-life date
+      type: string
+      required: false
+    product_url:
+      title: Product URL
+      description: Link to the product page on endoflife.ai
+      type: string
+      required: false
+  batch_item:
+    product:
+      title: Product
+      description: Product slug, for example nodejs
+      type: string
+      required: true
+    version:
+      title: Version
+      description: Release cycle, for example 20. When omitted the highest-risk version of the product is returned
+      type: string
+      required: false
+
+connection:
+  api_key:
+    title: API Key
+    description: Optional API key from endoflife.ai. Sent as the X-API-Key header and raises the daily request limit
+    type: credential_secret_key
+    required: false
+    example: 8e4f2a1c9b7d3e6f0a5c2b8d1e7f4a9c
+  url:
+    title: URL
+    description: Base URL of the endoflife.ai API
+    type: string
+    required: true
+    default: https://api.endoflife.ai
+    example: https://api.endoflife.ai
+
+actions:
+  get_version_status:
+    title: Get Version Status
+    description: Get the support status, end-of-life date and EOL Risk Score of one product version
+    input:
+      product:
+        title: Product
+        description: Product slug as used on endoflife.ai, for example nodejs, windows-server or postgresql
+        type: string
+        required: true
+        example: nodejs
+      version:
+        title: Version
+        description: Release cycle of the product, for example 20 for Node.js 20.x or 2019 for Windows Server 2019
+        type: string
+        required: true
+        example: "20"
+    output:
+      found:
+        title: Found
+        description: Whether the product and version are tracked by endoflife.ai
+        type: boolean
+        required: true
+        example: true
+      message:
+        title: Message
+        description: The API's explanation when the product or version was not found
+        type: string
+        required: false
+        example: Version "99" not found for "nodejs"
+      product:
+        title: Product
+        description: Product slug
+        type: string
+        required: false
+        example: nodejs
+      version:
+        title: Version
+        description: Release cycle matched by the API
+        type: string
+        required: false
+        example: "20"
+      status:
+        title: Status
+        description: Support status, one of active, warn (end of life within 90 days) or eol
+        type: string
+        required: false
+        example: eol
+      eol_date:
+        title: EOL Date
+        description: End-of-life date in YYYY-MM-DD format, empty when no date is published
+        type: string
+        required: false
+        example: 2026-04-30
+      days_until_eol:
+        title: Days Until EOL
+        description: Days until the end-of-life date, empty once it has passed
+        type: integer
+        required: false
+        example: 120
+      days_past_eol:
+        title: Days Past EOL
+        description: Days since the end-of-life date, empty until it has passed
+        type: integer
+        required: false
+        example: 145
+      score:
+        title: Score
+        description: EOL Risk Score from 0 (lowest risk) to 100 (highest risk)
+        type: integer
+        required: false
+        example: 60
+      band:
+        title: Band
+        description: Risk band of the score, one of Low, Moderate, High or Critical
+        type: string
+        required: false
+        example: High
+      grade:
+        title: Grade
+        description: Letter grade of the score from A to F
+        type: string
+        required: false
+        example: C
+      cisa_kev_exposure:
+        title: CISA KEV Exposure
+        description: Score factor for the product's presence in the CISA Known Exploited Vulnerabilities catalog
+        type: integer
+        required: false
+        example: 0
+      extended_support_available:
+        title: Extended Support Available
+        description: Whether a commercial extended-support option is known for this product
+        type: boolean
+        required: false
+        example: true
+      eol_date_source:
+        title: EOL Date Source
+        description: Provenance of the end-of-life date, for example vendor-fetched, vendor-verified or upstream
+        type: string
+        required: false
+        example: vendor-fetched
+      eol_date_confidence:
+        title: EOL Date Confidence
+        description: Confidence in the end-of-life date, one of high, medium or low
+        type: string
+        required: false
+        example: high
+      product_url:
+        title: Product URL
+        description: Link to the product page on endoflife.ai
+        type: string
+        required: false
+        example: https://endoflife.ai/nodejs
+  get_product:
+    title: Get Product
+    description: List every tracked version of a product with its dates, status and EOL Risk Score
+    input:
+      product:
+        title: Product
+        description: Product slug as used on endoflife.ai, for example nodejs, windows-server or postgresql
+        type: string
+        required: true
+        example: nodejs
+    output:
+      found:
+        title: Found
+        description: Whether the product is tracked by endoflife.ai
+        type: boolean
+        required: true
+        example: true
+      message:
+        title: Message
+        description: The API's explanation when the product was not found
+        type: string
+        required: false
+        example: Product "not-a-product" not found
+      product:
+        title: Product
+        description: Product slug
+        type: string
+        required: false
+        example: nodejs
+      version_count:
+        title: Version Count
+        description: Number of tracked versions
+        type: integer
+        required: false
+        example: 20
+      versions:
+        title: Versions
+        description: Tracked versions with their dates, status and score
+        type: "[]version"
+        required: false
+        example: [{"version": "20", "status": "eol", "eol_date": "2026-04-30", "release_date": "2023-04-18", "latest_release": "20.20.2", "days_past_eol": 145, "score": 60, "band": "High", "grade": "C", "cisa_kev_exposure": 0, "extended_support_available": true, "eol_date_source": "vendor-fetched", "eol_date_confidence": "high", "score_card_url": "https://endoflife.ai/score/nodejs/20"}]
+      product_url:
+        title: Product URL
+        description: Link to the product page on endoflife.ai
+        type: string
+        required: false
+        example: https://endoflife.ai/nodejs
+  check_batch:
+    title: Check Batch
+    description: Check a list of product and version pairs and return one result per pair
+    input:
+      items:
+        title: Items
+        description: Product and version pairs to check
+        type: "[]batch_item"
+        required: true
+        example: [{"product": "nodejs", "version": "20"}, {"product": "postgresql", "version": "13"}]
+    output:
+      results:
+        title: Results
+        description: One result per input pair, in input order
+        type: "[]batch_result"
+        required: true
+        example: [{"product": "nodejs", "version": "20", "found": true, "status": "eol", "eol_date": "2026-04-30", "days_past_eol": 145, "score": 60, "band": "High", "grade": "C", "cisa_kev_exposure": 0, "extended_support_available": true, "eol_date_source": "vendor-fetched", "eol_date_confidence": "high", "product_url": "https://endoflife.ai/nodejs"}]
+      count:
+        title: Count
+        description: Number of results
+        type: integer
+        required: true
+        example: 2
+      found_count:
+        title: Found Count
+        description: Number of pairs that were found
+        type: integer
+        required: true
+        example: 2
+      eol_count:
+        title: EOL Count
+        description: Number of found pairs whose status is eol
+        type: integer
+        required: true
+        example: 2
