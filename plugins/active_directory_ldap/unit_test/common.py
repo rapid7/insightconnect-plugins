@@ -1,6 +1,7 @@
 import functools
 import json
 import logging
+from typing import List, Optional
 
 import ldap3
 from komand_active_directory_ldap import connection
@@ -105,6 +106,36 @@ class MockConnection:
                     return
 
                 MockConnection.SEARCH_RESULT = RESULT_SUCCESS
+
+
+class MockSubtreeSearchConnection(MockConnection):
+    """
+    MockConnection finds a DN whatever the search base is. A real SUBTREE search only finds a DN
+    when the search base is the DN itself or one of its ancestors
+    """
+
+    DN_FILTER_PREFIX = "(distinguishedName="
+    # Sent by ldap3's ad_add_members_to_groups / ad_remove_members_from_groups to read the group
+    GROUP_LOOKUP_FILTER = "(objectclass=*)"
+
+    def search(
+        self,
+        search_base: str,
+        search_filter: str,
+        search_scope: str = ldap3.SUBTREE,
+        dereference_aliases: str = ldap3.DEREF_ALWAYS,
+        attributes: Optional[List[str]] = None,
+    ) -> None:
+        if search_filter == self.GROUP_LOOKUP_FILTER:
+            return super().search(search_base, search_filter, search_scope, dereference_aliases, attributes)
+        if not search_filter.startswith(self.DN_FILTER_PREFIX) or search_scope != ldap3.SUBTREE:
+            raise AssertionError(f"Unexpected {search_scope} search with filter {search_filter}")
+
+        dn = search_filter[len(self.DN_FILTER_PREFIX) : -1]
+        self.result[self.RESULT] = RESULT_SUCCESS
+        self.response = []
+        if dn == search_base or dn.endswith(f",{search_base}"):
+            self.response = [{"dn": dn, "attributes": {"userAccountControl": 512}}]
 
 
 class MockServer:

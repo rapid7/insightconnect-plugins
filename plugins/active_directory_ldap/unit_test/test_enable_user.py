@@ -4,7 +4,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_active_directory_ldap.actions.enable_user import EnableUser
 from komand_active_directory_ldap.actions.enable_user.schema import Input, Output
 
-from common import MockConnection, MockServer, default_connector
+from common import MockConnection, MockServer, MockSubtreeSearchConnection, default_connector
 
 
 class TestActionEnableUser(TestCase):
@@ -16,6 +16,13 @@ class TestActionEnableUser(TestCase):
         expected = {Output.SUCCESS: True}
 
         self.assertEqual(actual, expected)
+
+    @mock.patch("ldap3.Server", mock.MagicMock(return_value=MockServer))
+    @mock.patch("ldap3.Connection", mock.MagicMock(return_value=MockSubtreeSearchConnection()))
+    @default_connector(action=EnableUser())
+    def test_enable_user_dc_in_ou_name(self, action: EnableUser) -> None:
+        actual = action.run({Input.DISTINGUISHED_NAME: "CN=Jane Doe,OU=Users,OU=NYDC,OU=Company,DC=example,DC=com"})
+        self.assertEqual({Output.SUCCESS: True}, actual)
 
     @mock.patch("ldap3.Server", mock.MagicMock(return_value=MockServer))
     @mock.patch("ldap3.Connection", mock.MagicMock(return_value=MockConnection()))
