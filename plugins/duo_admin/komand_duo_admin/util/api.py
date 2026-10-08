@@ -6,9 +6,10 @@ import json
 import time
 from insightconnect_plugin_runtime.exceptions import PluginException
 from logging import Logger
+from typing import Any
 from urllib.parse import quote
 from datetime import datetime, timezone
-from komand_duo_admin.util.constants import Cause, Assistance
+from komand_duo_admin.util.constants import Cause, Assistance, USERS_PAGE_LIMIT
 from komand_duo_admin.util.exceptions import ApiException
 from komand_duo_admin.util.endpoints import (
     ADMINISTRATOR_LOGS_ENDPOINT,
@@ -71,11 +72,38 @@ class DuoAdminAPI:
     def enroll_user(self, params: dict) -> dict:
         return self.make_json_request(method="POST", path=ENROLL_USER_ENDPOINT, params=params)
 
-    def get_users(self) -> dict:
+    def get_users(self, params: dict[str, str] = {}) -> dict[str, Any]:
         return self.make_json_request(
             method="GET",
             path=USERS_ENDPOINT,
+            params=params,
         )
+
+    def get_all_users(self) -> dict[str, list[dict[str, Any]]]:
+        # Initialize variables
+        users: list[dict[str, Any]] = []
+        offset: int | None = 0
+
+        # Loop through pagination until all users are received
+        while offset is not None:
+            # Get next page of users
+            response = self.get_users({"limit": str(USERS_PAGE_LIMIT), "offset": str(offset)})
+
+            # Add users from response to our users list and get next offset
+            users.extend(response.get("response", []))
+            next_offset: int | None = response.get("metadata", {}).get("next_offset")
+
+            # If next_offset is the same or less than current offset, stop to prevent infinite loop
+            if next_offset is not None and next_offset <= offset:
+                self.logger.info(
+                    f"Duo returned a non-advancing pagination offset (offset={offset}, next_offset={next_offset}). "
+                    f"Returning {len(users)} users collected so far."
+                )
+                break
+
+            # If next_offset is None, we have reached the end of the users list
+            offset = next_offset
+        return {"response": users}
 
     def get_user_by_id(self, user_id: str) -> dict:
         return self.make_json_request(
