@@ -3,7 +3,6 @@ from .schema import GetTeamsInput, GetTeamsOutput, Input, Output, Component
 
 # Custom imports below
 from icon_microsoft_teams.util.komand_clean_with_nulls import remove_null_and_clean
-from icon_microsoft_teams.util.teams_utils import get_teams_from_microsoft
 
 
 class GetTeams(insightconnect_plugin_runtime.Action):
@@ -18,8 +17,7 @@ class GetTeams(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         team_name = params.get(Input.TEAM_NAME, "")
 
-        # The end of this filters for only MS Team enabled Teams
-        teams = get_teams_from_microsoft(self.logger, self.connection, team_name, False)
+        teams = self.connection.client.get_teams(team_name, explicit=False)
 
         clean_teams = []
         for team in teams:
