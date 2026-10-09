@@ -32,5 +32,10 @@
       "username": "Example 2",
       "webauthncredentials": []
     }
-  ]
+  ],
+  "metadata": {
+    "next_offset": 300,
+    "prev_offset": 0,
+    "total_objects": 3
+  }
 }
