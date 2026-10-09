@@ -15,6 +15,7 @@ from insightconnect_plugin_runtime.helper import clean
 from komand_rapid7_insightidr.connection import Connection
 from komand_rapid7_insightidr.util.constants import (
     DEFAULT_ERROR_MESSAGE,
+    REQUEST_TIMEOUT_SECONDS,
     RETRY_BACKOFF_SECONDS,
     RETRY_JITTER_SECONDS,
     RETRY_MAX_ATTEMPTS,
@@ -147,7 +148,7 @@ class ResourceHelper(object):
         retryable = self._is_retryable_request(request.method, request.url)
         with requests.Session() as session:
             prepared_request = session.prepare_request(request)
-            response = session.send(prepared_request)
+            response = session.send(prepared_request, timeout=REQUEST_TIMEOUT_SECONDS)
             if not retryable:
                 return response
             for attempt in range(1, RETRY_MAX_ATTEMPTS):
@@ -161,7 +162,7 @@ class ResourceHelper(object):
                     f"(attempt {attempt + 1} of {RETRY_MAX_ATTEMPTS})."
                 )
                 time.sleep(backoff)
-                response = session.send(prepared_request)
+                response = session.send(prepared_request, timeout=REQUEST_TIMEOUT_SECONDS)
         return response
 
     def resource_request(self, endpoint: str, method: str = "get", params: dict = None, payload: dict = None) -> dict:
