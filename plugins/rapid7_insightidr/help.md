@@ -3428,7 +3428,7 @@ Example output:
 
 # Version History
 
-* 12.0.11 - Trigger `Get New Alerts` updated for transient network errors and dedupe state persisted across restarts
+* 12.0.11 - Trigger `Get New Alerts`: Updated for transient network errors and dedupe state persisted across restarts | Fixed pagination | Added requests timeout
 * 12.0.10 - Trigger `Get New Investigations` updated for IDR API latency issues and dedupe logic added | Updated dependencies
 * 12.0.9 - Retry requests with backoff on transient InsightIDR 5xx responses to resolve intermittent 500 errors
 * 12.0.8 - Enabled cache to configure the appropriate permissions in the Dockerfile
