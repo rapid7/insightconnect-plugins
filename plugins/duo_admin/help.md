@@ -950,6 +950,7 @@ Example output:
 
 # Version History
 
+* 5.0.13 - Action `Get Users`: Fixed an issue where only the first 100 users were returned | Updated SDK to the latest version (6.6.0)
 * 5.0.12 - Updated SDK to the latest version (6.5.1)
 * 5.0.11 - Task `Monitor Logs`: Updated admin logs handling for more than 1k results | Update SDK to the latest version (6.4.3)
 * 5.0.10 - Updated SDK to the latest version (6.4.2)
