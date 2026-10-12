@@ -67,7 +67,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|dlCollection|True|Successful returned value|{'access': 'allow', 'bundleTypeId': 1, 'createdAt': '2021-12-06T16:03:49+0000', 'id': 12345678, 'isGlobal': False, 'isMspDefault': False, 'markedForDeletion': False, 'meta': {'destinationCount': 6}, 'modifiedAt': '2022-01-14T15:09:21+0000', 'name': 'ABCList', 'organizationId': 1234567, 'thirdpartyCategoryId': None}|
+|success|dlCollection|True|Successful returned value|{"access":"allow","bundleTypeId":1,"createdAt":"2021-12-06T16:03:49+0000","id":12345678,"isGlobal":false,"isMspDefault":false,"markedForDeletion":false,"meta":{"destinationCount":6},"modifiedAt":"2022-01-14T15:09:21+0000","name":"ABCList","organizationId":1234567,"thirdpartyCategoryId":1}|
   
 Example output:
 
@@ -87,7 +87,7 @@ Example output:
     "modifiedAt": "2022-01-14T15:09:21+0000",
     "name": "ABCList",
     "organizationId": 1234567,
-    "thirdpartyCategoryId": null
+    "thirdpartyCategoryId": 1
   }
 }
 ```
@@ -116,7 +116,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|dlCollection|True|Updated destination list|{'id': 12345678, 'organizationId': 1234567, 'access': 'allow', 'isGlobal': False, 'name': 'AAAA', 'thirdpartyCategoryId': None, 'createdAt': '2021-12-06T16:03:49+0000', 'modifiedAt': '2022-01-27T16:48:52+0000', 'isMspDefault': False, 'markedForDeletion': False, 'bundleTypeId': 1, 'meta': {'destinationCount': 2}}|
+|success|dlCollection|True|Updated destination list|{"id":12345678,"organizationId":1234567,"access":"allow","isGlobal":false,"name":"AAAA","thirdpartyCategoryId":1,"createdAt":"2021-12-06T16:03:49+0000","modifiedAt":"2022-01-27T16:48:52+0000","isMspDefault":false,"markedForDeletion":false,"bundleTypeId":1,"meta":{"destinationCount":2}}|
   
 Example output:
 
@@ -136,7 +136,7 @@ Example output:
     "modifiedAt": "2022-01-27T16:48:52+0000",
     "name": "AAAA",
     "organizationId": 1234567,
-    "thirdpartyCategoryId": null
+    "thirdpartyCategoryId": 1
   }
 }
 ```
@@ -163,7 +163,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|[]destinationsEntity|True|Successful returned value|{'Access': 'allow', 'Created At': '2018-07-23 19:36:45', 'ID': 12345, 'Is Global': True, 'Is MSP Default': True, 'Marked For Deletion': True, 'Modified At': '2018-07-23 19:36:45', 'Name': 'new list', 'Organization ID': 12345, 'Third Party Category ID': 12345}|
+|success|[]destinationsEntity|True|Successful returned value|{"Access":"allow","Created At":"2018-07-23 19:36:45","ID":12345,"Is Global":true,"Is MSP Default":true,"Marked For Deletion":true,"Modified At":"2018-07-23 19:36:45","Name":"new list","Organization ID":12345,"Third Party Category ID":12345}|
   
 Example output:
 
@@ -208,7 +208,7 @@ Example input:
   "destination": "www.example.com",
   "isGlobal": true,
   "name": "New list",
-  "type": "URL"
+  "type": ""
 }
 ```
 
@@ -216,7 +216,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|dlCollection|True|Successful returned value|{'access': 'allow', 'bundleTypeId': 1, 'createdAt': '2022-01-14T15:09:30+0000', 'id': 12345678, 'isGlobal': False, 'isMspDefault': False, 'markedForDeletion': False, 'meta': {'destinationCount': 2}, 'modifiedAt': '2022-01-14T15:09:30+0000', 'name': 'TESTLIST123'}|
+|success|dlCollection|True|Successful returned value|{"access":"allow","bundleTypeId":1,"createdAt":"2022-01-14T15:09:30+0000","id":12345678,"isGlobal":false,"isMspDefault":false,"markedForDeletion":false,"meta":{"destinationCount":2},"modifiedAt":"2022-01-14T15:09:30+0000","name":"TESTLIST123"}|
   
 Example output:
 
@@ -299,8 +299,8 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|data|[]dlCollection|False|List of all destination lists|[{"access": "allow", "bundleTypeId": 1, "createdAt": "2022-01-14T15:09:30+0000", "id": 12345678, "isGlobal": False, "isMspDefault": False, "markedForDeletion": False, "meta": {"destinationCount": 2}, "modifiedAt": "2022-01-14T15:09:30+0000", "name": "TESTLIST123"}]|
-
+|data|[]dlCollection|False|List of all destination lists|[{"access":"allow","bundleTypeId":1,"createdAt":"2022-01-14T15:09:30+0000","id":12345678,"isGlobal":false,"isMspDefault":false,"markedForDeletion":false,"meta":{"destinationCount":2},"modifiedAt":"2022-01-14T15:09:30+0000","name":"TESTLIST123"}]|
+  
 Example output:
 
 ```
@@ -346,7 +346,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|destinationList|True|Successful returned value|{'access': 'allow', 'bundleTypeId': 1, 'createdAt': '2021-12-06T16:03:49+0000', 'id': 12345678, 'isGlobal': False, 'isMspDefault': False, 'markedForDeletion': False, 'meta': {'destinationCount': 4}, 'modifiedAt': '2022-01-14T15:09:24+0000', 'name': 'ABCList', 'organizationId': 1234567, 'thirdpartyCategoryId': None}|
+|success|destinationList|True|Successful returned value|{"access":"allow","bundleTypeId":1,"createdAt":"2021-12-06T16:03:49+0000","id":12345678,"isGlobal":false,"isMspDefault":false,"markedForDeletion":false,"meta":{"destinationCount":4},"modifiedAt":"2022-01-14T15:09:24+0000","name":"ABCList","organizationId":1234567,"thirdpartyCategoryId":1}|
   
 Example output:
 
@@ -366,7 +366,7 @@ Example output:
     "modifiedAt": "2022-01-14T15:09:24+0000",
     "name": "ABCList",
     "organizationId": 1234567,
-    "thirdpartyCategoryId": null
+    "thirdpartyCategoryId": 1
   }
 }
 ```
@@ -383,8 +383,8 @@ This action is used to retrieve all destination lists of organization
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|data|[]dlCollection|False|List of all destination lists|[{"access": "allow", "bundleTypeId": 1, "createdAt": "2022-01-14T15:09:30+0000", "id": 12345678, "isGlobal": False, "isMspDefault": False, "markedForDeletion": False, "meta": {"destinationCount": 2}, "modifiedAt": "2022-01-14T15:09:30+0000", "name": "TESTLIST123"}]|
-
+|data|[]dlCollection|False|List of all destination lists|[{"access":"allow","bundleTypeId":1,"createdAt":"2022-01-14T15:09:30+0000","id":12345678,"isGlobal":false,"isMspDefault":false,"markedForDeletion":false,"meta":{"destinationCount":2},"modifiedAt":"2022-01-14T15:09:30+0000","name":"TESTLIST123"}]|
+  
 Example output:
 
 ```
@@ -430,8 +430,8 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|[]destinationList|True|Successful returned value|[{"access": "allow", "bundleTypeId": 1, "createdAt": "2021-12-06T16:03:49+0000", "id": 12345678, "isGlobal": False, "isMspDefault": False, "markedForDeletion": False, "meta": {"destinationCount": 4}, "modifiedAt": "2022-01-14T15:09:24+0000", "name": "ABCList", "organizationId": 1234567, "thirdpartyCategoryId": None}]|
-
+|success|[]destinationList|True|Successful returned value|[{"access":"allow","bundleTypeId":1,"createdAt":"2021-12-06T16:03:49+0000","id":12345678,"isGlobal":false,"isMspDefault":false,"markedForDeletion":false,"meta":{"destinationCount":4},"modifiedAt":"2022-01-14T15:09:24+0000","name":"ABCList","organizationId":1234567,"thirdpartyCategoryId":1}]|
+  
 Example output:
 
 ```
@@ -451,7 +451,7 @@ Example output:
       "modifiedAt": "2022-01-14T15:09:24+0000",
       "name": "ABCList",
       "organizationId": 1234567,
-      "thirdpartyCategoryId": null
+      "thirdpartyCategoryId": 1
     }
   ]
 }
@@ -481,7 +481,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|dlCollection|True|Successful returned value|{'access': 'allow', 'bundleTypeId': 1, 'createdAt': '2021-12-06T16:03:49+0000', 'id': 12345678, 'isGlobal': False, 'isMspDefault': False, 'markedForDeletion': False, 'meta': {'destinationCount': 6}, 'modifiedAt': '2022-01-14T15:09:21+0000', 'name': 'ABCList', 'organizationId': 1234567, 'thirdpartyCategoryId': None}|
+|success|dlCollection|True|Successful returned value|{"access":"allow","bundleTypeId":1,"createdAt":"2021-12-06T16:03:49+0000","id":12345678,"isGlobal":false,"isMspDefault":false,"markedForDeletion":false,"meta":{"destinationCount":6},"modifiedAt":"2022-01-14T15:09:21+0000","name":"ABCList","organizationId":1234567,"thirdpartyCategoryId":1}|
   
 Example output:
 
@@ -501,7 +501,7 @@ Example output:
     "modifiedAt": "2022-01-14T15:09:21+0000",
     "name": "ABCList",
     "organizationId": 1234567,
-    "thirdpartyCategoryId": null
+    "thirdpartyCategoryId": 1
   }
 }
 ```
@@ -572,10 +572,11 @@ Example output:
 
 ## Troubleshooting
 
-Version 3.2.0 uses v2 of the Cisco Umbrella API. The API endpoint for the destinations functionality is via api.umbrella.com/policies/v2/. To interact with this version of the API, use the reference in the Links session, to ensure an appropriate key and permissions is used for connecting (not a legacy key as this will not work with v2 of the API).
+* Version 3.2.0 uses v2 of the Cisco Umbrella API. The API endpoint for the destinations functionality is via api.umbrella.com/policies/v2/. To interact with this version of the API, use the reference in the Links session, to ensure an appropriate key and permissions is used for connecting (not a legacy key as this will not work with v2 of the API).
 
 # Version History
 
+* 5.0.2 - Updated SDK to the latest version (6.6.0) | Updated dependencies
 * 5.0.1 - `dlCreate` - Added new values for `type` input and added error handling when adding destinations along with list
 * 5.0.0 - `dlCreate` - Changed some inputs to required
 * 4.0.0 - Updated to use V2 of the Cisco Umbrella API api.umbrella.com/policies/v2 | Updated to use OAuth2 client credentials flow

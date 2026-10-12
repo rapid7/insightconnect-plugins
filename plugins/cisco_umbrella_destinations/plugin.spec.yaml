@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: cisco_umbrella_destinations
 title: Cisco Umbrella Destinations
-version: 5.0.1
+version: 5.0.2
 supported_versions: ["2024-05-14"]
 description: Cisco Umbrella Destinations allows users to manage, block, and allow network destinations based on policies within their organization
 vendor: rapid7
@@ -20,7 +20,7 @@ tags:
   - destinations
 sdk:
   type: slim
-  version: 5.4.9
+  version: 6.6.0
   user: nobody
 hub_tags:
   use_cases: [threat_detection_and_response]
@@ -39,6 +39,7 @@ references:
   - "[Cisco Umbrella Destinations Docs](https://developer.cisco.com/docs/cloud-security/#!api-reference-policies-overview)"
   - "[Creating/Refreshing/Deleting Umbrella API Keys](https://developer.cisco.com/docs/cloud-security/#!authentication)"
 version_history:
+  - "5.0.2 - Updated SDK to the latest version (6.6.0) | Updated dependencies"
   - "5.0.1 - `dlCreate` - Added new values for `type` input and added error handling when adding destinations along with list"
   - "5.0.0 - `dlCreate` - Changed some inputs to required"
   - "4.0.0 - Updated to use V2 of the Cisco Umbrella API api.umbrella.com/policies/v2 | Updated to use OAuth2 client credentials flow"
@@ -46,7 +47,8 @@ version_history:
   - "3.0.0 - Updated output for 'typeOf' to reflect update to Cisco API"
   - "2.0.0 - Updated output for dAdd & dDelete - Removed data element in the response"
   - "1.0.0 - Initial plugin includes create and modify destination lists"
-troubleshooting: "Version 3.2.0 uses v2 of the Cisco Umbrella API. The API endpoint for the destinations functionality is via api.umbrella.com/policies/v2/. To interact with this version of the API, use the reference in the Links session, to ensure an appropriate key and permissions is used for connecting (not a legacy key as this will not work with v2 of the API)."
+troubleshooting:
+  - "Version 3.2.0 uses v2 of the Cisco Umbrella API. The API endpoint for the destinations functionality is via api.umbrella.com/policies/v2/. To interact with this version of the API, use the reference in the Links session, to ensure an appropriate key and permissions is used for connecting (not a legacy key as this will not work with v2 of the API)."
 connection:
   api_key:
     title: API Key
@@ -243,7 +245,7 @@ actions:
         title: Data
         description: List of all destination lists
         type: "[]dlCollection"
-        example: [{"access": "allow","bundleTypeId": 1,"createdAt": "2022-01-14T15:09:30+0000","id": 12345678,"isGlobal": false,"isMspDefault": false,"markedForDeletion": false,"meta": {"destinationCount": 2},"modifiedAt": "2022-01-14T15:09:30+0000","name": "TESTLIST123"}]
+        example: '[{"access":"allow","bundleTypeId":1,"createdAt":"2022-01-14T15:09:30+0000","id":12345678,"isGlobal":false,"isMspDefault":false,"markedForDeletion":false,"meta":{"destinationCount":2},"modifiedAt":"2022-01-14T15:09:30+0000","name":"TESTLIST123"}]'
         required: false
   dlFilterAll:
     title: Filter Through All Destination Lists
@@ -281,7 +283,7 @@ actions:
         title: Data
         description: List of all destination lists
         type: "[]dlCollection"
-        example: [{"access": "allow","bundleTypeId": 1,"createdAt": "2022-01-14T15:09:30+0000","id": 12345678,"isGlobal": false,"isMspDefault": false,"markedForDeletion": false,"meta": {"destinationCount": 2},"modifiedAt": "2022-01-14T15:09:30+0000","name": "TESTLIST123"}]
+        example: '[{"access":"allow","bundleTypeId":1,"createdAt":"2022-01-14T15:09:30+0000","id":12345678,"isGlobal":false,"isMspDefault":false,"markedForDeletion":false,"meta":{"destinationCount":2},"modifiedAt":"2022-01-14T15:09:30+0000","name":"TESTLIST123"}]'
         required: false
   dlCreate:
     title: Create Destination List
@@ -339,7 +341,7 @@ actions:
         title: Success
         description: Successful returned value
         type: dlCollection
-        example: {"access": "allow","bundleTypeId": 1,"createdAt": "2022-01-14T15:09:30+0000","id": 12345678,"isGlobal": false,"isMspDefault": false,"markedForDeletion": false,"meta": {"destinationCount": 2},"modifiedAt": "2022-01-14T15:09:30+0000","name": "TESTLIST123"}
+        example: '{"access":"allow","bundleTypeId":1,"createdAt":"2022-01-14T15:09:30+0000","id":12345678,"isGlobal":false,"isMspDefault":false,"markedForDeletion":false,"meta":{"destinationCount":2},"modifiedAt":"2022-01-14T15:09:30+0000","name":"TESTLIST123"}'
         required: true
   dlPatch:
     title: Rename Destination List
@@ -362,7 +364,7 @@ actions:
         title: Success
         description: Successful returned value
         type: dlCollection
-        example: { "access": "allow","bundleTypeId": 1,"createdAt": "2021-12-06T16:03:49+0000","id": 12345678,"isGlobal": false,"isMspDefault": false,"markedForDeletion": false,"meta": { "destinationCount": 6 },"modifiedAt": "2022-01-14T15:09:21+0000","name": "ABCList","organizationId": 1234567,"thirdpartyCategoryId": null }
+        example: '{"access":"allow","bundleTypeId":1,"createdAt":"2021-12-06T16:03:49+0000","id":12345678,"isGlobal":false,"isMspDefault":false,"markedForDeletion":false,"meta":{"destinationCount":6},"modifiedAt":"2022-01-14T15:09:21+0000","name":"ABCList","organizationId":1234567,"thirdpartyCategoryId":1}'
         required: true
   dlDelete:
     title: Delete Destination List
@@ -396,7 +398,7 @@ actions:
         title: Success
         description: Successful returned value
         type: destinationList
-        example: {"access": "allow","bundleTypeId": 1,"createdAt": "2021-12-06T16:03:49+0000","id": 12345678,"isGlobal": false,"isMspDefault": false,"markedForDeletion": false,"meta": {"destinationCount": 4},"modifiedAt": "2022-01-14T15:09:24+0000","name": "ABCList","organizationId": 1234567,"thirdpartyCategoryId": null}
+        example: '{"access":"allow","bundleTypeId":1,"createdAt":"2021-12-06T16:03:49+0000","id":12345678,"isGlobal":false,"isMspDefault":false,"markedForDeletion":false,"meta":{"destinationCount":4},"modifiedAt":"2022-01-14T15:09:24+0000","name":"ABCList","organizationId":1234567,"thirdpartyCategoryId":1}'
         required: true
   dlGetByName:
     title: Get Destination List by Name
@@ -413,7 +415,7 @@ actions:
         title: Success
         description: Successful returned value
         type: "[]destinationList"
-        example: [{ "access": "allow","bundleTypeId": 1,"createdAt": "2021-12-06T16:03:49+0000","id": 12345678,"isGlobal": false,"isMspDefault": false,"markedForDeletion": false,"meta": { "destinationCount": 4 },"modifiedAt": "2022-01-14T15:09:24+0000","name": "ABCList","organizationId": 1234567,"thirdpartyCategoryId": null }]
+        example: '[{"access":"allow","bundleTypeId":1,"createdAt":"2021-12-06T16:03:49+0000","id":12345678,"isGlobal":false,"isMspDefault":false,"markedForDeletion":false,"meta":{"destinationCount":4},"modifiedAt":"2022-01-14T15:09:24+0000","name":"ABCList","organizationId":1234567,"thirdpartyCategoryId":1}]'
         required: true
   dGet:
     title: Get Destinations
@@ -430,7 +432,7 @@ actions:
         title: Success
         description: Successful returned value
         type: '[]destinationsEntity'
-        example: {"Access": "allow","Created At": "2018-07-23 19:36:45","ID": 12345,"Is Global": true,"Is MSP Default": true,"Marked For Deletion": true,"Modified At": "2018-07-23 19:36:45","Name": "new list","Organization ID": 12345,"Third Party Category ID": 12345}
+        example: '{"Access":"allow","Created At":"2018-07-23 19:36:45","ID":12345,"Is Global":true,"Is MSP Default":true,"Marked For Deletion":true,"Modified At":"2018-07-23 19:36:45","Name":"new list","Organization ID":12345,"Third Party Category ID":12345}'
         required: true
   dAdd:
     title: Add Destination to Destination List
@@ -459,7 +461,7 @@ actions:
         title: Success
         description: Successful returned value
         type: dlCollection
-        example: {"access": "allow","bundleTypeId": 1,"createdAt": "2021-12-06T16:03:49+0000","id": 12345678,"isGlobal": false,"isMspDefault": false,"markedForDeletion": false,"meta": {"destinationCount": 6},"modifiedAt": "2022-01-14T15:09:21+0000","name": "ABCList","organizationId": 1234567,"thirdpartyCategoryId": null}
+        example: '{"access":"allow","bundleTypeId":1,"createdAt":"2021-12-06T16:03:49+0000","id":12345678,"isGlobal":false,"isMspDefault":false,"markedForDeletion":false,"meta":{"destinationCount":6},"modifiedAt":"2022-01-14T15:09:21+0000","name":"ABCList","organizationId":1234567,"thirdpartyCategoryId":1}'
         required: true
   dDelete:
     title: Delete Destinations
@@ -482,5 +484,5 @@ actions:
         title: Success
         description: Updated destination list
         type: dlCollection
-        example: {"id": 12345678,"organizationId": 1234567,"access": "allow","isGlobal": false,"name": "AAAA","thirdpartyCategoryId": null,"createdAt": "2021-12-06T16:03:49+0000","modifiedAt": "2022-01-27T16:48:52+0000","isMspDefault": false,"markedForDeletion": false,"bundleTypeId": 1,"meta": {"destinationCount": 2}}
+        example: '{"id":12345678,"organizationId":1234567,"access":"allow","isGlobal":false,"name":"AAAA","thirdpartyCategoryId":1,"createdAt":"2021-12-06T16:03:49+0000","modifiedAt":"2022-01-27T16:48:52+0000","isMspDefault":false,"markedForDeletion":false,"bundleTypeId":1,"meta":{"destinationCount":2}}'
         required: true
