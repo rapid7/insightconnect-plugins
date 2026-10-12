@@ -12,7 +12,7 @@ from icon_cisco_umbrella_reporting.actions.get_domain_visits.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
 from parameterized import parameterized
 
-from unit_test.mock import (
+from mock import (
     Util,
     mock_request_200,
     mock_request_204,
