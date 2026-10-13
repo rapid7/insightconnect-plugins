@@ -1,26 +1,34 @@
-FROM rapid7/insightconnect-python-3-38-slim-plugin:4
-# Refer to the following documentation for available SDK parent images: https://docs.rapid7.com/insightconnect/sdk-guide/#sdk-guide
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.6.0 AS builder
+
+WORKDIR /workspace
+
+ADD ./plugin.spec.yaml /plugin.spec.yaml
+ADD ./requirements.txt /workspace/requirements.txt
+ADD . /workspace
+
+
+
+RUN pip install .
+RUN pip uninstall -y setuptools
+
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.6.0
 
 LABEL organization=rapid7
 LABEL sdk=python
 
-# Add any custom package dependencies here
-# NOTE: Add pip packages to requirements.txt
+WORKDIR /workspace
 
-# End package dependencies
+COPY --from=builder /workspace /workspace
+COPY --from=builder /plugin.spec.yaml /plugin.spec.yaml
 
-# Add source code
-WORKDIR /python/src
-ADD ./plugin.spec.yaml /plugin.spec.yaml
-ADD . /python/src
 
-# Install pip dependencies
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-# Install plugin
-RUN python setup.py build && python setup.py install
+ENV PYTHONPATH="/workspace:${PYTHONPATH}"
+
+RUN rm -rf /root/.cache;
 
 # User to run plugin code. The two supported users are: root, nobody
 USER nobody
 
-ENTRYPOINT ["/usr/local/bin/icon_cisco_umbrella_reporting"]
+ENTRYPOINT ["python", "/workspace/bin/icon_cisco_umbrella_reporting"]
