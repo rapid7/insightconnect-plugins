@@ -9,7 +9,7 @@ from unittest.mock import patch
 
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
-from komand_rapid7_insightidr.util.constants import RETRY_MAX_ATTEMPTS
+from komand_rapid7_insightidr.util.constants import REQUEST_TIMEOUT_SECONDS, RETRY_MAX_ATTEMPTS
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
 
 
@@ -46,6 +46,25 @@ class TestResourceHelperRetry(TestCase):
 
         self.assertEqual(self.mock_send.call_count, RETRY_MAX_ATTEMPTS)
         self.assertEqual(self.mock_sleep.call_count, RETRY_MAX_ATTEMPTS - 1)
+
+    def test_resource_request_sends_with_timeout(self) -> None:
+        # Both the initial attempt and the retry must carry the timeout
+        self.mock_send.side_effect = [_make_response(500), _make_response(200, '{"data": "ok"}')]
+        self.helper.resource_request(self.endpoint, method="post")
+
+        # Initial attempt and the retry must both have a timeout, otherwise a stalled server hangs the caller
+        self.assertEqual(self.mock_send.call_count, 2)
+        for call in self.mock_send.call_args_list:
+            self.assertEqual(call.kwargs["timeout"], REQUEST_TIMEOUT_SECONDS)
+
+    def test_resource_request_timeout_propagates(self) -> None:
+        # A timeout should not be retried, but should propagate immediately
+        self.mock_send.side_effect = requests.Timeout("Read timed out")
+
+        # The timeout exception should propagate without any retries
+        with self.assertRaises(requests.Timeout):
+            self.helper.resource_request(self.endpoint, method="post")
+        self.assertEqual(self.mock_send.call_count, 1)
 
     def test_resource_request_4xx_not_retried(self) -> None:
         self.mock_send.return_value = _make_response(404, '{"message": "nope"}')

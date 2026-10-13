@@ -3,7 +3,8 @@ extension: plugin
 products: [insightconnect]
 name: cisco_umbrella_reporting
 title: Cisco Umbrella Reporting
-version: 2.0.0
+version: 2.0.1
+connection_version: 2
 description: This plugin utilizes Cisco Umbrella to get the most complete view of the relationships
   and evolution of Internet domains, IP addresses, and autonomous systems to pinpoint
   attackers infrastructures and predict future threats
@@ -19,10 +20,34 @@ tags:
 - cisco
 - umbrella
 - reporting
+sdk:
+  type: slim
+  version: 6.6.0
+  user: nobody
 hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [cisco, umbrella, reporting]
   features: []
+key_features:
+  - "Most Recent Requests"
+  - "Security Activity Report"
+requirements:
+  - "Requires an API Key and Secret from Cisco Umbrella (API Key) - refer to the links section for information on how to create/refresh/delete the API key"
+troubleshooting:
+  - "The Cisco Umbrella Legacy API Keys are no longer used. Please use the Cisco Umbrella API Keys. Refer to the links section for information on how to create/refresh/delete the API key."
+  - "The Get Domain Visits action accepts domains, IPs, and URLs as the address. URLs will automatically be stripped down to the domain since the Umbrella API does not accept URLs."
+  - "If no address is provided to the Get Domain Visits action, it will return activities for all domains in the organization."
+version_history:
+  - "2.0.1 - Updated SDK to the latest version (6.6.0) | Updated dependencies"
+  - "2.0.0 - Updated plugin to use API v2 | OAuth20 authentication method is now used | Removed organization ID from the connection inputs"
+  - "1.0.1 - Docs - Update help.md to include information about legacy keys"
+  - "1.0.0 - Initial plugin"
+links:
+  - "[Cisco Umbrella](https://umbrella.cisco.com/)"
+references:
+  - "[Cisco Umbrella Docs](https://docs.umbrella.com/)"
+  - "[Cisco Umbrella Reporting](https://docs.umbrella.com/deployment-umbrella/docs/getting-started-learning-to-use-reports-and-exporting-reports)"
+  - "[Creating/Refreshing/Deleting Umbrella API Keys](https://developer.cisco.com/docs/cloud-security/#!authentication/manage-api-keys)"
 connection:
   api_key:
     title: API Key
