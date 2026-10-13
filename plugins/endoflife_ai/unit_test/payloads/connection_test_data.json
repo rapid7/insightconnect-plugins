@@ -1,0 +1,21 @@
+{
+  "name": "endoflife.ai API",
+  "version": "1.0.0",
+  "description": "EOL dates and EOL Risk Scores\u00e2\u201e\u00a2 for 500+ software products.",
+  "endpoints": {
+    "products": "GET /v1/products",
+    "product": "GET /v1/product/:slug",
+    "score": "GET /v1/score/:slug",
+    "scoreVersion": "GET /v1/score/:slug/:version",
+    "status": "GET /v1/status/:slug/:version",
+    "batch": "POST /v1/batch",
+    "metrics": "GET /v1/metrics?stack=slug:version,slug:version",
+    "badge": "GET /v1/badge/:slug/:version  (shields.io endpoint badge)",
+    "freeKey": "POST /v1/keys/free  (body: {\"email\": \"you@example.com\"} \u00e2\u20ac\u201d free API key, emailed)",
+    "openapi": "GET /openapi.json"
+  },
+  "docs": "https://endoflife.ai/api",
+  "methodology": "https://endoflife.ai/risk-score",
+  "tier": "anon",
+  "rate_limit": "100 requests/day"
+}
