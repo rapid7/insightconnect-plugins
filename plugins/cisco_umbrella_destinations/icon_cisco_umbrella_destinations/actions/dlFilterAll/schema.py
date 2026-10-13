@@ -28,7 +28,9 @@ class DlFilterAllInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Access",
       "description": "Allow or block access to domain",
+      "default": "",
       "enum": [
+        "",
         "allow",
         "block"
       ],
