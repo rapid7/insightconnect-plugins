@@ -68,10 +68,10 @@ class DlCreateInput(insightconnect_plugin_runtime.Input):
       "description": "Type of the destination to be added to the newly created destination list, unavailable if destination is not specified",
       "default": "",
       "enum": [
+        "",
         "DOMAIN",
         "URL",
-        "IPV4",
-        ""
+        "IPV4"
       ],
       "order": 5
     }

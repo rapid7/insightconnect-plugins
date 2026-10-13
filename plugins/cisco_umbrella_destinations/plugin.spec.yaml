@@ -257,8 +257,10 @@ actions:
         example: allow
         type: string
         enum:
+          - ""
           - allow
           - block
+        default: ""
         required: false
       isGlobal:
         title: Is Global
@@ -324,10 +326,10 @@ actions:
         example: URL
         type: string
         enum:
+          - ""
           - DOMAIN
           - URL
           - IPV4
-          - ""
         default: ""
         required: false
       comment:

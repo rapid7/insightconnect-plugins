@@ -197,7 +197,7 @@ This action is used to create a destination list
 |destination|string|None|False|Destination to be added to the newly created destination list|None|www.example.com|None|None|
 |isGlobal|boolean|True|True|Boolean value indicating global state|None|True|None|None|
 |name|string|None|True|Label for the destination list|None|New list|None|None|
-|type|string||False|Type of the destination to be added to the newly created destination list, unavailable if destination is not specified|["DOMAIN", "URL", "IPV4", ""]|URL|None|None|
+|type|string||False|Type of the destination to be added to the newly created destination list, unavailable if destination is not specified|["", "DOMAIN", "URL", "IPV4"]|URL|None|None|
   
 Example input:
 
@@ -279,7 +279,7 @@ This action is used to filter and Retrieve all destination lists of organization
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|access|string|None|False|Allow or block access to domain|["allow", "block"]|allow|None|None|
+|access|string||False|Allow or block access to domain|["", "allow", "block"]|allow|None|None|
 |isGlobal|boolean|None|False|Boolean value indicating global state|None|True|None|None|
 |isMSPDefault|boolean|None|False|Boolean value indicating if MSP Default|None|True|None|None|
 |markedForDeletion|boolean|None|False|Boolean value indicating if marked for deletion|None|True|None|None|
@@ -288,7 +288,7 @@ Example input:
 
 ```
 {
-  "access": "allow",
+  "access": "",
   "isGlobal": true,
   "isMSPDefault": true,
   "markedForDeletion": true
