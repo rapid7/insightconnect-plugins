@@ -18,9 +18,9 @@ class GetAgentDetails(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         agent_input = params.get(Input.AGENT)
         next_cursor = params.get(Input.NEXT_CURSOR)
-        agent, next_cursor = self.connection.api.get_agent(agent_input, next_cursor)
+        agent, next_cursor, message = self.connection.api.get_agent(agent_input, next_cursor)
         # Need to rename agent due to bug in yaml typing
         if agent:
             agent["agent_info"] = agent.pop("agent")
 
-        return clean({Output.AGENT: agent, Output.NEXT_CURSOR: next_cursor})
+        return clean({Output.AGENT: agent, Output.NEXT_CURSOR: next_cursor, Output.MESSAGE: message})

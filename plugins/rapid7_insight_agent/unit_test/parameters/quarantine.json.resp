@@ -6,7 +6,8 @@
          604800,
          true,
          {
-            "success":true
+            "success":true,
+            "is_asset_online":true
          }
       ],
       [
@@ -15,7 +16,8 @@
          604800,
          true,
          {
-            "success":false
+            "success":false,
+            "is_asset_online":false
          }
       ]
    ]

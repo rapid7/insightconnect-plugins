@@ -2,7 +2,7 @@ import logging
 from typing import Optional, List, Tuple, Dict, Any
 
 import requests
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from icon_rapid7_insight_agent.util.graphql_api import agent_typer
 from icon_rapid7_insight_agent.util.graphql_api.region_map import region_map
@@ -10,6 +10,8 @@ from insightconnect_plugin_runtime.exceptions import PluginException, Connection
 from insightconnect_plugin_runtime.helper import clean
 
 TIMEOUT_MINUTES = 3
+ONLINE = "ONLINE"
+STALE = "STALE"
 
 
 class ApiConnection:
@@ -27,16 +29,24 @@ class ApiConnection:
         self.logger = logger
         self._setup(region_string)
 
-    def get_agent(self, agent_input: str, next_cursor: str) -> dict:
+    def get_agent(self, agent_input: str, next_cursor: str) -> Tuple[Optional[dict], Optional[str], Optional[str]]:
         """
-        Find an agent based on a MAC address, IP address, or hostname
+        Find an agent based on a MAC address, IP address, hostname, or agent ID
 
-        :param agent_input: MAC address, IP address, or hostname
-        :return:
+        :param agent_input: MAC address, IP address, hostname, or agent ID
+        :return: tuple (agent, next cursor, message explaining the result for hostname searches)
         """
 
         agent_type = agent_typer.get_agent_type(agent_input)
-        return self._get_agent(agent_input, agent_type, next_cursor)
+        if agent_type != agent_typer.HOSTNAME:
+            agent, next_cursor = self._get_agent(agent_input, agent_type, next_cursor)
+            return agent, next_cursor, None
+
+        if not next_cursor and agent_typer.looks_like_agent_id(agent_input):
+            agent = self._get_agent_by_id(agent_input)
+            if agent:
+                return agent, None, None
+        return self._get_agent_by_hostname(agent_input, next_cursor)
 
     def quarantine(self, advertisement_period: int, agent_id: str) -> bool:
         """
@@ -111,6 +121,11 @@ class ApiConnection:
         # For each agent ID in the list, perform quarantine
         for hostname, agent in found_agents:
             agent_id = agent.get("id")
+            if (agent.get("agent") or {}).get("agentStatus") == STALE:
+                unsuccessful_operations.append(
+                    {"hostname": hostname, "error": f"Agent ID {agent_id} is stale and will not receive the request"}
+                )
+                continue
             result = self.quarantine(advertisement_period, agent_id) if quarantine else self.unquarantine(agent_id)
             if result:
                 successful_operations.append(hostname)
@@ -163,6 +178,21 @@ class ApiConnection:
             "is_quarantine_requested": is_quarantine_requested,
             "is_unquarantine_requested": is_unquarantine_requested,
         }
+
+    def get_agent_state(self, agent_id: str) -> Optional[dict]:
+        """
+        Get the agent status and quarantine state of an agent
+
+        :param agent_id: Agent ID to look up
+        :return: dict with agentStatus and quarantineState, or None if no agent has this ID
+        """
+        payload = {
+            "query": "query( $orgID: String! $agentID: String! ) { assets( orgId: $orgID ids: [$agentID] ){ agent { id quarantineState{ currentState } agentStatus } } }",
+            "variables": {"orgID": self.org_key, "agentID": agent_id},
+        }
+        results_object = self._post_payload(payload)
+        assets = results_object.get("data", {}).get("assets") or []
+        return (assets[0] or {}).get("agent") if assets else None
 
     def connection_test(self) -> bool:
         # Return the first org to verify the connection works
@@ -277,7 +307,7 @@ class ApiConnection:
         has_next_page = True
         if not next_cursor:
             payload = {
-                "query": "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress location { city region countryName countryCode continent } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }",
+                "query": "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress location { city region countryName countryCode continent } agent { agentSemanticVersion agentStatus quarantineState { currentState } timestamp } } } } } }",
                 "variables": {"orgId": self.org_key},
             }
 
@@ -349,7 +379,7 @@ class ApiConnection:
         has_next_page = True
         if not next_cursor:
             payload = {
-                "query": "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress location { city region countryName countryCode continent } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }",
+                "query": "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress location { city region countryName countryCode continent } agent { agentSemanticVersion agentStatus quarantineState { currentState } timestamp } } } } } }",
                 "variables": {"orgId": self.org_key},
             }
             self.logger.info("Getting first page of agents...")
@@ -392,54 +422,186 @@ class ApiConnection:
             self.logger.info("No assets were found")
             return {}, None
 
+    def _get_agent_by_id(self, agent_id: str) -> Optional[dict]:
+        """
+        Get an agent directly by its ID, without searching all pages of agents
+
+        :param agent_id: Agent ID, with or without dashes
+        :return: dict (agent object), or None if no agent has this ID
+        """
+        payload = {
+            "query": "query( $orgID: String! $agentID: String! ) { assets( orgId: $orgID ids: [$agentID] ){ id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress location { city region countryName countryCode continent } agent { agentSemanticVersion agentStatus quarantineState { currentState } timestamp } } }",
+            "variables": {"orgID": self.org_key, "agentID": agent_id.replace("-", "")},
+        }
+        self.logger.info(f"Looking up agent ID: {agent_id}")
+        try:
+            results_object = self._post_payload(payload)
+        except PluginException as error:
+            # The input may be a hostname that only looks like an ID; a real API problem also fails the search below
+            self.logger.info(f"Agent ID lookup failed, searching by hostname instead: {error.cause}")
+            return None
+        assets = results_object.get("data", {}).get("assets") or []
+        agent = assets[0] if assets else None
+        return agent if agent and agent.get("host") else None
+
+    def _get_agent_by_hostname(
+        self, hostname: str, next_cursor: str = None
+    ) -> Tuple[Optional[dict], Optional[str], Optional[str]]:
+        """
+        Find the agent for a hostname. Pages are read until an online agent with the hostname is found, or there
+        are no pages left. Of the agents found, an online one is used, otherwise the one that checked in most
+        recently (see _choose_agent).
+
+        :param hostname: Hostname
+        :param next_cursor: Cursor to continue a previous search
+        :return: tuple (agent object or empty dict, next cursor if the time limit was reached, message explaining
+            the result when more than one agent matched or the time limit was reached)
+        """
+        start_time = datetime.now()
+        self.logger.info(f"Searching for: {hostname}")
+        self.logger.info(f"Search type: {agent_typer.HOSTNAME}")
+        matches = []
+        has_next_page = True
+        if not next_cursor:
+            self.logger.info("Getting first page of agents...")
+            has_next_page, next_cursor, agents = self._get_first_page_of_agents()
+            self.logger.info("Initial agents received.")
+            matches.extend(self._find_hostname_matches(agents, hostname))
+        while not self._has_online_agent(matches) and has_next_page:
+            current_time = datetime.now()
+            if (current_time - start_time) > timedelta(minutes=TIMEOUT_MINUTES):
+                self.logger.info("List of agents is too long, action will time out.")
+                stopped = f"Stopped searching for '{hostname}' at the {TIMEOUT_MINUTES}-minute limit before all pages were read."
+                if matches:
+                    agent, next_cursor = matches[0], None
+                    message = (
+                        f"{stopped} Returned the first agent found with this hostname; other agents with the same "
+                        "hostname may exist on the pages that were not searched."
+                    )
+                else:
+                    agent = None
+                    message = f"{stopped} Run the action again with the next cursor to search the remaining pages."
+                self.logger.info(message)
+                return agent, next_cursor, message
+
+            self.logger.info(f"Extra pages of agents: {has_next_page}")
+            has_next_page, next_cursor, next_agents = self._get_next_page_of_agents(next_cursor)
+            matches.extend(self._find_hostname_matches(next_agents, hostname))
+
+        if not matches:
+            self.logger.info("No assets were found")
+            return {}, None, None
+        agent, message = self._choose_agent(matches, hostname, all_pages_read=not has_next_page)
+        if message:
+            self.logger.info(message)
+        return agent, None, message
+
     def _get_agents(self, agents_input: List[str]) -> [Tuple[str, dict]]:
         """
-        Get multiple agents by MAC address, IP address, or hostname.
-        :param agents_input: MAC address, IP address or hostnames
-        :return: List of found hostname and agent details, list of agent hostnames now found
+        Get multiple agents by hostname, choosing between agents that share a hostname as Get Agent Details does
+        :param agents_input: Hostnames
+        :return: List of found hostname and agent details
         """
-        agents = []
-        payload = {
-            "query": "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress location { city region countryName countryCode continent } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }",
-            "variables": {"orgId": self.org_key},
-        }
+        matches = {hostname: [] for hostname in agents_input}
 
         self.logger.info("Getting all agents...")
-        results_object = self._post_payload(payload)
-
-        has_next_page = (
-            results_object.get("data", {})
-            .get("organization", {})
-            .get("assets", {})
-            .get("pageInfo", {})
-            .get("hasNextPage")
-        )
-        next_cursor = (
-            results_object.get("data", {})
-            .get("organization", {})
-            .get("assets", {})
-            .get("pageInfo", {})
-            .get("endCursor")
-        )
-        agents.extend(self._get_agents_from_result_object(results_object))
-        found_agents = []
+        has_next_page, next_cursor, agents = self._get_first_page_of_agents()
         self.logger.info("Initial agents received.")
-        for agent_input in agents_input:
-            agent = self._find_agent_in_agents(agents, agent_input, "Host Name")
-            if agent:
-                found_agents.append((agent_input, agent))
-                agents_input.remove(agent_input)
+        self._match_hostnames(agents, matches)
         # See if we have more pages of data, if so get next page and append until we reach the end
         self.logger.info(f"Extra pages of agents: {has_next_page}")
-        if agents_input:
-            while has_next_page:
-                has_next_page, next_cursor, next_agents = self._get_next_page_of_agents(next_cursor)
-                for agent_input in agents_input:
-                    agent = self._find_agent_in_agents(next_agents, agent_input, "Host Name")
-                    if agent:
-                        found_agents.append(Tuple[agent_input, agent])
-                        agents_input.remove(agent_input)
+        while has_next_page and not all(self._has_online_agent(found) for found in matches.values()):
+            has_next_page, next_cursor, next_agents = self._get_next_page_of_agents(next_cursor)
+            self._match_hostnames(next_agents, matches)
+
+        found_agents = []
+        for hostname, found in matches.items():
+            if found:
+                agent, message = self._choose_agent(found, hostname, all_pages_read=not has_next_page)
+                if message:
+                    self.logger.info(message)
+                found_agents.append((hostname, agent))
         return found_agents
+
+    def _match_hostnames(self, agents: List[dict], matches: Dict[str, List[dict]]) -> None:
+        """
+        Add the agents on one page to the matches of each hostname that has no online agent yet
+
+        :param agents: Agents from one page of results
+        :param matches: Matching agents per hostname, updated in place
+        :return: None
+        """
+        for hostname, found in matches.items():
+            if not self._has_online_agent(found):
+                found.extend(self._find_hostname_matches(agents, hostname))
+
+    def _find_hostname_matches(self, agents: List[dict], hostname: str) -> List[dict]:
+        """
+        Find the agents on one page that match a hostname
+
+        :param agents: Agents from one page of results
+        :param hostname: Hostname to match
+        :return: The matching agents, in page order
+        """
+        return [agent for agent in agents if agent and agent.get("host") and self._is_hostname_match(agent, hostname)]
+
+    def _choose_agent(self, matches: List[dict], hostname: str, all_pages_read: bool) -> Tuple[dict, Optional[str]]:
+        """
+        Choose one agent from those that match a hostname: an online one if there is one, otherwise the one that
+        checked in most recently. Agents without a check-in time count as the oldest, and ties keep the order in
+        which the agents were found.
+
+        :param matches: Agents that match the hostname, in the order they were found
+        :param hostname: The hostname that was searched for, used in the message
+        :param all_pages_read: Whether every page of agents was searched
+        :return: tuple (chosen agent, message explaining the choice, or None if only one agent matched)
+        """
+        chosen = max(matches, key=lambda agent: (self._is_online(agent), self._last_check_in(agent) or 0))
+        if len(matches) == 1:
+            return chosen, None
+
+        count = str(len(matches)) if all_pages_read else f"At least {len(matches)}"
+        if self._is_online(chosen):
+            reason = "it is online"
+        elif self._last_check_in(chosen):
+            checked_in = datetime.fromtimestamp(self._last_check_in(chosen) / 1000, tz=timezone.utc)
+            reason = f"none is online and it checked in most recently, at {checked_in.isoformat(timespec='seconds')}"
+        else:
+            reason = "none is online or has a check-in time, so it is the first one found"
+        return (
+            chosen,
+            f"{count} agents share the hostname '{hostname}'. Returned agent {chosen.get('id')} because {reason}.",
+        )
+
+    def _has_online_agent(self, agents: List[dict]) -> bool:
+        return any(self._is_online(agent) for agent in agents)
+
+    @staticmethod
+    def _is_online(agent: dict) -> bool:
+        return (agent.get("agent") or {}).get("agentStatus") == ONLINE
+
+    @staticmethod
+    def _last_check_in(agent: dict) -> Optional[float]:
+        # Time of the last check-in to the platform, in Unix milliseconds
+        return (agent.get("agent") or {}).get("timestamp")
+
+    def _get_first_page_of_agents(self) -> (bool, str, list):
+        """
+        Get the first page of agents
+
+        :return: tuple (boolean, str, list (agents))
+        """
+        payload = {
+            "query": "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress location { city region countryName countryCode continent } agent { agentSemanticVersion agentStatus quarantineState { currentState } timestamp } } } } } }",
+            "variables": {"orgId": self.org_key},
+        }
+        results_object = self._post_payload(payload)
+        page_info = results_object.get("data", {}).get("organization", {}).get("assets", {}).get("pageInfo", {})
+        return (
+            page_info.get("hasNextPage"),
+            page_info.get("endCursor"),
+            self._get_agents_from_result_object(results_object),
+        )
 
     def _get_next_page_of_agents(self, next_cursor: str) -> (bool, dict, list):
         """
@@ -451,7 +613,7 @@ class ApiConnection:
         """
         self.logger.info(f"Getting next page of agents using cursor {next_cursor}")
         payload = {
-            "query": "query( $orgId:String! $nextCursor:String! ) { organization(id: $orgId) { assets( first: 10000, after: $nextCursor ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress location { city region countryName countryCode continent } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }",
+            "query": "query( $orgId:String! $nextCursor:String! ) { organization(id: $orgId) { assets( first: 10000, after: $nextCursor ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress location { city region countryName countryCode continent } agent { agentSemanticVersion agentStatus quarantineState { currentState } timestamp } } } } } }",
             "variables": {"orgId": self.org_key, "nextCursor": next_cursor},
         }
         results_object = self._post_payload(payload)
@@ -516,13 +678,14 @@ class ApiConnection:
 
     def _find_agent_in_agents(self, agents: [dict], agent_input: str, agent_type: str) -> Optional[dict]:  # noqa: C901
         """
-        Given a list of agent objects, find the agent that matches our input.
+        Given a list of agent objects, find the agent that matches our input. Hostnames are matched by
+        _find_hostname_matches instead.
 
         If no agent is found this will return None
 
         :param agents: list (agents)
-        :param agent_input: MAC address, IP address, or hostname
-        :param agent_type: What type of input to look for (MAC, IP_ADDRESS, or HOSTNAME)
+        :param agent_input: MAC address or IP address
+        :param agent_type: What type of input to look for (MAC or IP_ADDRESS)
 
         :return: dict (agent object), None
         """
@@ -533,10 +696,6 @@ class ApiConnection:
             if agent and len(agent) and agent.get("host"):  # Some hosts come back None...need to check for that
                 if agent_type == agent_typer.IP_ADDRESS:
                     if self._is_ip_match(agent, agent_input):
-                        return agent
-                elif agent_type == agent_typer.HOSTNAME:
-                    # In this case, we have an alpha/numeric value. This could be the ID or the Hostname. Need to check both
-                    if self._is_hostname_match(agent, agent_input):
                         return agent
                 elif agent_type == agent_typer.MAC_ADDRESS:
                     # MAC addresses can come in with : or - as a separator, remove all of it and compare

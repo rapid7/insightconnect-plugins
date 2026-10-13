@@ -80,14 +80,15 @@ Example output:
 
 #### Get Agent Details
 
-This action is used to find and display detailed information about a device. If additional pages of agents are 
-available, the action should be run again with the returned next cursor
+This action is used to find and display detailed information about a device. If several agents share the hostname, an 
+online one is returned, otherwise the one that checked in most recently, and the message output explains the choice. If 
+additional pages of agents are available, the action should be run again with the returned next cursor
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|agent|string|None|True|IP address, MAC address, or hostname of the device to get information from|None|Example-Hostname|None|None|
+|agent|string|None|True|IP address, MAC address, hostname, or agent ID of the device to get information from|None|Example-Hostname|None|None|
 |next_cursor|string|None|False|The next page cursor to continue an existing query and search additional pages of agents|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
   
 Example input:
@@ -104,6 +105,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |agent|agent|False|Agent information|{"id":"ExampleID","platform":"windows","publicIpAddress":"192.168.0.1","host":{"vendor":"Microsoft","version":"10","description":"ExampleDescription","hostNames":[{"name":"ExampleHostname"}],"primaryAddress":{"ip":"12.43.13.43","mac":""},"uniqueIdentity":[],"attributes":[]},"agent_info":{"agentSemanticVersion":"ExampleVersion","agentStatus":"STALE","quarantineState":{"currentState":"QUARANTINED"}}}|
+|message|string|False|Explains the result when more than one agent shares the hostname, or when the search stopped at the time limit|2 agents share the hostname 'Example-Hostname'. Returned agent ExampleID because it is online.|
 |next_cursor|string|False|The next page cursor, if available, to continue the query and search additional pages of agents|9de5069c5afe602b2ea0a04b66beb2c0|
   
 Example output:
@@ -138,6 +140,7 @@ Example output:
     "platform": "windows",
     "publicIpAddress": "192.168.0.1"
   },
+  "message": "2 agents share the hostname 'Example-Hostname'. Returned agent ExampleID because it is online.",
   "next_cursor": "9de5069c5afe602b2ea0a04b66beb2c0"
 }
 ```
@@ -283,7 +286,8 @@ Example output:
 
 #### Quarantine
 
-This action is used to quarantine or unquarantine on a device
+This action is used to quarantine or unquarantine on a device. Fails for agents that are stale, because they will not 
+receive the request
 
 ##### Input
 
@@ -307,12 +311,14 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
+|is_asset_online|boolean|True|Whether the agent was connected to the Insight platform when the request was sent. If false, the request waits until the agent reconnects, within the interval|True|
 |success|boolean|True|Was operation successful|True|
   
 Example output:
 
 ```
 {
+  "is_asset_online": true,
   "success": true
 }
 ```
@@ -393,6 +399,7 @@ Example output:
 |Agent Semantic Version|string|None|False|Agent semantic version|None|
 |Agent Status|string|None|False|Agent status|None|
 |Quarantine State|quarantineState_object|None|False|Quarantine state|None|
+|Last Check-In|float|None|False|Time the agent last checked in to the platform, in Unix time in milliseconds|None|
   
 **hostName**
 
@@ -461,6 +468,7 @@ Example output:
 
 # Version History
 
+* 3.1.0 - `Get Agent Details`: when several agents share a hostname, return an online one, or else the one that checked in most recently, instead of the first one found; explain the choice in a new `message` output, which also reports when the search stopped at the time limit; add the agent's last check-in time; and accept an agent ID | `Quarantine`: fail for stale agents and return whether the agent is online | `Quarantine Multiple`: choose between agents that share a hostname in the same way, report stale agents as failed, and fix skipped hosts and a failure when a host was on a later page of results | Updated SDK to the latest version (6.6.0)
 * 3.0.9 - Updated SDK to the latest version (6.5.1)
 * 3.0.8 - Updated SDK to the latest version (6.4.3)
 * 3.0.7 - Added response checks to actions to improve error handling | Updated SDK to latest version (6.4.1)

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Find and display detailed information about a device. If additional pages of agents are available, the action should be run again with the returned next cursor"
+    DESCRIPTION = "Find and display detailed information about a device. If several agents share the hostname, an online one is returned, otherwise the one that checked in most recently, and the message output explains the choice. If additional pages of agents are available, the action should be run again with the returned next cursor"
 
 
 class Input:
@@ -14,6 +14,7 @@ class Input:
 
 class Output:
     AGENT = "agent"
+    MESSAGE = "message"
     NEXT_CURSOR = "next_cursor"
 
 
@@ -26,7 +27,7 @@ class GetAgentDetailsInput(insightconnect_plugin_runtime.Input):
     "agent": {
       "type": "string",
       "title": "Agent",
-      "description": "IP address, MAC address, or hostname of the device to get information from",
+      "description": "IP address, MAC address, hostname, or agent ID of the device to get information from",
       "order": 1
     },
     "next_cursor": {
@@ -58,6 +59,12 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
       "title": "Agent",
       "description": "Agent information",
       "order": 1
+    },
+    "message": {
+      "type": "string",
+      "title": "Message",
+      "description": "Explains the result when more than one agent shares the hostname, or when the search stopped at the time limit",
+      "order": 3
     },
     "next_cursor": {
       "type": "string",
@@ -130,6 +137,12 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
           "title": "Quarantine State",
           "description": "Quarantine state",
           "order": 3
+        },
+        "timestamp": {
+          "type": "number",
+          "title": "Last Check-In",
+          "description": "Time the agent last checked in to the platform, in Unix time in milliseconds",
+          "order": 4
         }
       }
     },

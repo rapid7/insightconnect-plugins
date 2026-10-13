@@ -61,9 +61,17 @@ class Util:
             return MockResponse("get_agent_details.resp")
         elif (
             query
-            == "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress location { city region countryName countryCode continent } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }"
+            == "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress location { city region countryName countryCode continent } agent { agentSemanticVersion agentStatus quarantineState { currentState } timestamp } } } } } }"
         ):
             return MockResponse("get_all_agents_by_ip.resp")
+        elif (
+            variables.get("agentID") == "goodIDQuarantine"
+            and query
+            == "query( $orgID: String! $agentID: String! ) { assets( orgId: $orgID ids: [$agentID] ){ agent { id quarantineState{ currentState } agentStatus } } }"
+        ):
+            return MockResponse("check_agent_status.resp")
+        elif variables.get("agentID") == "ac88c0ac243d35da0943wqewqe21312e12qxa35d4d65dee24":
+            return MockResponse("quarantine.resp")
         elif variables.get("agentID") == "goodID":
             return MockResponse("check_agent_status.resp")
         elif variables.get("agentID") == "badID":

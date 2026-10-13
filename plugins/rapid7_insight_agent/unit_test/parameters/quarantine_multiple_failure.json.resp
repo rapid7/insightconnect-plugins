@@ -2,12 +2,15 @@
    "parameters":[
       [
          "good_and_bad_agent_ids",
-         ["ivm-agent-win", "badIDQuarantine"],
+         ["ivm-agent-ub18", "ivm-agent-win", "badIDQuarantine"],
          604800,
          true,
          {
-            "completed": ["ivm-agent-win"],
-            "failed": [{"hostname": "badIDQuarantine", "error": "Hostname could not be found"}]
+            "completed": ["ivm-agent-ub18"],
+            "failed": [
+               {"hostname": "badIDQuarantine", "error": "Hostname could not be found"},
+               {"hostname": "ivm-agent-win", "error": "Agent ID a1cfb273EQWE12312EDSAXZc8e7d46a9e2a0e2dae01a0ce is stale and will not receive the request"}
+            ]
          }
       ],
       [
