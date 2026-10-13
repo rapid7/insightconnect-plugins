@@ -16,7 +16,7 @@ cloud_ready: true
 fedramp_ready: true
 sdk:
   type: slim
-  version: 6.5.1
+  version: 6.6.0
   user: nobody
 key_features:
 - The agent is used by [Rapid7 InsightIDR](https://www.rapid7.com/products/insightidr/)
