@@ -29,23 +29,21 @@ class ApiConnection:
         self.logger = logger
         self._setup(region_string)
 
-    def get_agent(self, agent_input: str, next_cursor: str) -> Tuple[Optional[dict], Optional[str], Optional[str]]:
+    def get_agent(self, agent_input: str, next_cursor: str) -> dict:
         """
         Find an agent based on a MAC address, IP address, hostname, or agent ID
 
         :param agent_input: MAC address, IP address, hostname, or agent ID
-        :return: tuple (agent, next cursor, message explaining the result for hostname searches)
+        :return:
         """
 
         agent_type = agent_typer.get_agent_type(agent_input)
         if agent_type != agent_typer.HOSTNAME:
-            agent, next_cursor = self._get_agent(agent_input, agent_type, next_cursor)
-            return agent, next_cursor, None
+            return self._get_agent(agent_input, agent_type, next_cursor)
 
         if not next_cursor and agent_typer.looks_like_agent_id(agent_input):
-            agent = self._get_agent_by_id(agent_input)
-            if agent:
-                return agent, None, None
+            if agent := self._get_agent_by_id(agent_input):
+                return agent, None
         return self._get_agent_by_hostname(agent_input, next_cursor)
 
     def quarantine(self, advertisement_period: int, agent_id: str) -> bool:
@@ -121,7 +119,7 @@ class ApiConnection:
         # For each agent ID in the list, perform quarantine
         for hostname, agent in found_agents:
             agent_id = agent.get("id")
-            if (agent.get("agent") or {}).get("agentStatus") == STALE:
+            if self._agent_status(agent) == STALE:
                 unsuccessful_operations.append(
                     {"hostname": hostname, "error": f"Agent ID {agent_id} is stale and will not receive the request"}
                 )
@@ -444,9 +442,7 @@ class ApiConnection:
         agent = assets[0] if assets else None
         return agent if agent and agent.get("host") else None
 
-    def _get_agent_by_hostname(
-        self, hostname: str, next_cursor: str = None
-    ) -> Tuple[Optional[dict], Optional[str], Optional[str]]:
+    def _get_agent_by_hostname(self, hostname: str, next_cursor: str = None) -> Tuple[Optional[dict], Optional[str]]:
         """
         Find the agent for a hostname. Pages are read until an online agent with the hostname is found, or there
         are no pages left. Of the agents found, an online one is used, otherwise the one that checked in most
@@ -454,8 +450,7 @@ class ApiConnection:
 
         :param hostname: Hostname
         :param next_cursor: Cursor to continue a previous search
-        :return: tuple (agent object or empty dict, next cursor if the time limit was reached, message explaining
-            the result when more than one agent matched or the time limit was reached)
+        :return: tuple (agent object or empty dict, next cursor if the time limit was reached)
         """
         start_time = datetime.now()
         self.logger.info(f"Searching for: {hostname}")
@@ -471,18 +466,18 @@ class ApiConnection:
             current_time = datetime.now()
             if (current_time - start_time) > timedelta(minutes=TIMEOUT_MINUTES):
                 self.logger.info("List of agents is too long, action will time out.")
-                stopped = f"Stopped searching for '{hostname}' at the {TIMEOUT_MINUTES}-minute limit before all pages were read."
+                stopped = (
+                    f"Stopped searching for '{hostname}' at the {TIMEOUT_MINUTES}-minute limit before all pages "
+                    "were read."
+                )
                 if matches:
-                    agent, next_cursor = matches[0], None
-                    message = (
-                        f"{stopped} Returned the first agent found with this hostname; other agents with the same "
+                    self.logger.warning(
+                        f"{stopped} Returning the first agent found with this hostname; other agents with the same "
                         "hostname may exist on the pages that were not searched."
                     )
-                else:
-                    agent = None
-                    message = f"{stopped} Run the action again with the next cursor to search the remaining pages."
-                self.logger.info(message)
-                return agent, next_cursor, message
+                    return matches[0], None
+                self.logger.info(f"{stopped} Run the action again with the next cursor to search the remaining pages.")
+                return None, next_cursor
 
             self.logger.info(f"Extra pages of agents: {has_next_page}")
             has_next_page, next_cursor, next_agents = self._get_next_page_of_agents(next_cursor)
@@ -490,11 +485,8 @@ class ApiConnection:
 
         if not matches:
             self.logger.info("No assets were found")
-            return {}, None, None
-        agent, message = self._choose_agent(matches, hostname, all_pages_read=not has_next_page)
-        if message:
-            self.logger.info(message)
-        return agent, None, message
+            return {}, None
+        return self._choose_agent(matches, hostname, all_pages_read=not has_next_page), None
 
     def _get_agents(self, agents_input: List[str]) -> [Tuple[str, dict]]:
         """
@@ -517,10 +509,7 @@ class ApiConnection:
         found_agents = []
         for hostname, found in matches.items():
             if found:
-                agent, message = self._choose_agent(found, hostname, all_pages_read=not has_next_page)
-                if message:
-                    self.logger.info(message)
-                found_agents.append((hostname, agent))
+                found_agents.append((hostname, self._choose_agent(found, hostname, all_pages_read=not has_next_page)))
         return found_agents
 
     def _match_hostnames(self, agents: List[dict], matches: Dict[str, List[dict]]) -> None:
@@ -545,40 +534,44 @@ class ApiConnection:
         """
         return [agent for agent in agents if agent and agent.get("host") and self._is_hostname_match(agent, hostname)]
 
-    def _choose_agent(self, matches: List[dict], hostname: str, all_pages_read: bool) -> Tuple[dict, Optional[str]]:
+    def _choose_agent(self, matches: List[dict], hostname: str, all_pages_read: bool) -> dict:
         """
         Choose one agent from those that match a hostname: an online one if there is one, otherwise the one that
         checked in most recently. Agents without a check-in time count as the oldest, and ties keep the order in
-        which the agents were found.
+        which the agents were found. When more than one agent matches, the choice is logged.
 
         :param matches: Agents that match the hostname, in the order they were found
-        :param hostname: The hostname that was searched for, used in the message
+        :param hostname: The hostname that was searched for, used in the log message
         :param all_pages_read: Whether every page of agents was searched
-        :return: tuple (chosen agent, message explaining the choice, or None if only one agent matched)
+        :return: The chosen agent
         """
         chosen = max(matches, key=lambda agent: (self._is_online(agent), self._last_check_in(agent) or 0))
-        if len(matches) == 1:
-            return chosen, None
-
-        count = str(len(matches)) if all_pages_read else f"At least {len(matches)}"
-        if self._is_online(chosen):
-            reason = "it is online"
-        elif self._last_check_in(chosen):
-            checked_in = datetime.fromtimestamp(self._last_check_in(chosen) / 1000, tz=timezone.utc)
-            reason = f"none is online and it checked in most recently, at {checked_in.isoformat(timespec='seconds')}"
-        else:
-            reason = "none is online or has a check-in time, so it is the first one found"
-        return (
-            chosen,
-            f"{count} agents share the hostname '{hostname}'. Returned agent {chosen.get('id')} because {reason}.",
-        )
+        if len(matches) > 1:
+            count = str(len(matches)) if all_pages_read else f"At least {len(matches)}"
+            if self._is_online(chosen):
+                reason = "it is online"
+            elif self._last_check_in(chosen):
+                checked_in = datetime.fromtimestamp(self._last_check_in(chosen) / 1000, tz=timezone.utc)
+                reason = (
+                    f"none is online and it checked in most recently, at {checked_in.isoformat(timespec='seconds')}"
+                )
+            else:
+                reason = "none is online or has a check-in time, so it is the first one found"
+            self.logger.warning(
+                f"{count} agents share the hostname '{hostname}'. Using agent {chosen.get('id')} because {reason}."
+            )
+        return chosen
 
     def _has_online_agent(self, agents: List[dict]) -> bool:
         return any(self._is_online(agent) for agent in agents)
 
     @staticmethod
-    def _is_online(agent: dict) -> bool:
-        return (agent.get("agent") or {}).get("agentStatus") == ONLINE
+    def _agent_status(agent: dict) -> Optional[str]:
+        # Some assets come back without an agent
+        return (agent.get("agent") or {}).get("agentStatus")
+
+    def _is_online(self, agent: dict) -> bool:
+        return self._agent_status(agent) == ONLINE
 
     @staticmethod
     def _last_check_in(agent: dict) -> Optional[float]:

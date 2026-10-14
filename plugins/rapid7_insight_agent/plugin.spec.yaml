@@ -36,9 +36,8 @@ references:
 - '[Manage Platform API Keys](https://docs.rapid7.com/insight/managing-platform-api-keys/)'
 version_history:
 - "3.1.0 - `Get Agent Details`: when several agents share a hostname, return an online
-  one, or else the one that checked in most recently, instead of the first one found;
-  explain the choice in a new `message` output, which also reports when the search stopped
-  at the time limit; add the agent's last check-in time; and accept an agent ID | `Quarantine`:
+  one, or else the one that checked in most recently, instead of the first one found, and
+  log the choice; add the agent's last check-in time; and accept an agent ID | `Quarantine`:
   fail for stale agents and return whether the agent is online | `Quarantine Multiple`:
   choose between agents that share a hostname in the same way, report stale agents as
   failed, and fix skipped hosts and a failure when a host was on a later page of results
@@ -335,7 +334,7 @@ actions:
     title: Get Agent Details
     description: Find and display detailed information about a device. If several agents
       share the hostname, an online one is returned, otherwise the one that checked in most
-      recently, and the message output explains the choice. If additional pages of agents
+      recently, and the choice is written to the action log. If additional pages of agents
       are available, the action should be run again with the returned next cursor
     input:
       agent:
@@ -366,14 +365,6 @@ actions:
         type: string
         required: false
         example: 9de5069c5afe602b2ea0a04b66beb2c0
-      message:
-        title: Message
-        description: Explains the result when more than one agent shares the hostname, or
-          when the search stopped at the time limit
-        type: string
-        required: false
-        example: 2 agents share the hostname 'Example-Hostname'. Returned agent ExampleID
-          because it is online.
   get_all_agents_by_ip:
     title: Get All Agents by IP Address
     description: This action is used to find all agents that share the same public

@@ -81,8 +81,8 @@ Example output:
 #### Get Agent Details
 
 This action is used to find and display detailed information about a device. If several agents share the hostname, an 
-online one is returned, otherwise the one that checked in most recently, and the message output explains the choice. If 
-additional pages of agents are available, the action should be run again with the returned next cursor
+online one is returned, otherwise the one that checked in most recently, and the choice is written to the action log. If
+ additional pages of agents are available, the action should be run again with the returned next cursor
 
 ##### Input
 
@@ -105,7 +105,6 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |agent|agent|False|Agent information|{"id":"ExampleID","platform":"windows","publicIpAddress":"192.168.0.1","host":{"vendor":"Microsoft","version":"10","description":"ExampleDescription","hostNames":[{"name":"ExampleHostname"}],"primaryAddress":{"ip":"12.43.13.43","mac":""},"uniqueIdentity":[],"attributes":[]},"agent_info":{"agentSemanticVersion":"ExampleVersion","agentStatus":"STALE","quarantineState":{"currentState":"QUARANTINED"}}}|
-|message|string|False|Explains the result when more than one agent shares the hostname, or when the search stopped at the time limit|2 agents share the hostname 'Example-Hostname'. Returned agent ExampleID because it is online.|
 |next_cursor|string|False|The next page cursor, if available, to continue the query and search additional pages of agents|9de5069c5afe602b2ea0a04b66beb2c0|
   
 Example output:
@@ -140,7 +139,6 @@ Example output:
     "platform": "windows",
     "publicIpAddress": "192.168.0.1"
   },
-  "message": "2 agents share the hostname 'Example-Hostname'. Returned agent ExampleID because it is online.",
   "next_cursor": "9de5069c5afe602b2ea0a04b66beb2c0"
 }
 ```
@@ -468,7 +466,7 @@ Example output:
 
 # Version History
 
-* 3.1.0 - `Get Agent Details`: when several agents share a hostname, return an online one, or else the one that checked in most recently, instead of the first one found; explain the choice in a new `message` output, which also reports when the search stopped at the time limit; add the agent's last check-in time; and accept an agent ID | `Quarantine`: fail for stale agents and return whether the agent is online | `Quarantine Multiple`: choose between agents that share a hostname in the same way, report stale agents as failed, and fix skipped hosts and a failure when a host was on a later page of results | Updated SDK to the latest version (6.6.0)
+* 3.1.0 - `Get Agent Details`: when several agents share a hostname, return an online one, or else the one that checked in most recently, instead of the first one found, and log the choice; add the agent's last check-in time; and accept an agent ID | `Quarantine`: fail for stale agents and return whether the agent is online | `Quarantine Multiple`: choose between agents that share a hostname in the same way, report stale agents as failed, and fix skipped hosts and a failure when a host was on a later page of results | Updated SDK to the latest version (6.6.0)
 * 3.0.9 - Updated SDK to the latest version (6.5.1)
 * 3.0.8 - Updated SDK to the latest version (6.4.3)
 * 3.0.7 - Added response checks to actions to improve error handling | Updated SDK to latest version (6.4.1)

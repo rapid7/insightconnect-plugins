@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Find and display detailed information about a device. If several agents share the hostname, an online one is returned, otherwise the one that checked in most recently, and the message output explains the choice. If additional pages of agents are available, the action should be run again with the returned next cursor"
+    DESCRIPTION = "Find and display detailed information about a device. If several agents share the hostname, an online one is returned, otherwise the one that checked in most recently, and the choice is written to the action log. If additional pages of agents are available, the action should be run again with the returned next cursor"
 
 
 class Input:
@@ -14,7 +14,6 @@ class Input:
 
 class Output:
     AGENT = "agent"
-    MESSAGE = "message"
     NEXT_CURSOR = "next_cursor"
 
 
@@ -59,12 +58,6 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
       "title": "Agent",
       "description": "Agent information",
       "order": 1
-    },
-    "message": {
-      "type": "string",
-      "title": "Message",
-      "description": "Explains the result when more than one agent shares the hostname, or when the search stopped at the time limit",
-      "order": 3
     },
     "next_cursor": {
       "type": "string",
