@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Find and display detailed information about a device. If additional pages of agents are available, the action should be run again with the returned next cursor"
+    DESCRIPTION = "Find and display detailed information about a device. If several agents share the hostname, an online one is returned, otherwise the one that checked in most recently, and the choice is written to the action log. If additional pages of agents are available, the action should be run again with the returned next cursor"
 
 
 class Input:
@@ -26,7 +26,7 @@ class GetAgentDetailsInput(insightconnect_plugin_runtime.Input):
     "agent": {
       "type": "string",
       "title": "Agent",
-      "description": "IP address, MAC address, or hostname of the device to get information from",
+      "description": "IP address, MAC address, hostname, or agent ID of the device to get information from",
       "order": 1
     },
     "next_cursor": {

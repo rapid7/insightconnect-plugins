@@ -1,11 +1,11 @@
 {
    "parameters":[
       [
-         ["ivm-agent-win"],
+         ["ivm-agent-ub18"],
          604800,
          true,
          {
-            "completed": ["ivm-agent-win"],
+            "completed": ["ivm-agent-ub18"],
             "failed": []
          }
       ]

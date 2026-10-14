@@ -9,6 +9,17 @@ REGEX_STRING = (
     "^(?:[0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2})$"
 )
 MAC_REGEX = re.compile(REGEX_STRING)
+AGENT_ID_REGEX = re.compile("^[0-9a-fA-F]{32}$")
+
+
+def looks_like_agent_id(search_string: str) -> bool:
+    """
+    Check whether the string has the shape of an agent ID (32 hex characters, dashes ignored)
+
+    :param search_string: string
+    :return: bool
+    """
+    return bool(AGENT_ID_REGEX.match(search_string.replace("-", "")))
 
 
 def get_agent_type(search_string: str) -> str:

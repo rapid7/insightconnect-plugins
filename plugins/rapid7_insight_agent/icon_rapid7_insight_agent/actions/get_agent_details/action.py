@@ -21,6 +21,8 @@ class GetAgentDetails(insightconnect_plugin_runtime.Action):
         agent, next_cursor = self.connection.api.get_agent(agent_input, next_cursor)
         # Need to rename agent due to bug in yaml typing
         if agent:
+            # Only fetched to choose between agents that share a hostname, so it is not part of the output
+            (agent.get("agent") or {}).pop("timestamp", None)
             agent["agent_info"] = agent.pop("agent")
 
         return clean({Output.AGENT: agent, Output.NEXT_CURSOR: next_cursor})
