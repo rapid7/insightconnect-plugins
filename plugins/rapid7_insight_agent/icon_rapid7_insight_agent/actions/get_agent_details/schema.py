@@ -130,12 +130,6 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
           "title": "Quarantine State",
           "description": "Quarantine state",
           "order": 3
-        },
-        "timestamp": {
-          "type": "number",
-          "title": "Last Check-In",
-          "description": "Time the agent last checked in to the platform, in Unix time in milliseconds",
-          "order": 4
         }
       }
     },

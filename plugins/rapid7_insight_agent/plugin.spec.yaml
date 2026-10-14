@@ -36,9 +36,9 @@ references:
 - '[Manage Platform API Keys](https://docs.rapid7.com/insight/managing-platform-api-keys/)'
 version_history:
 - "3.1.0 - `Get Agent Details`: when several agents share a hostname, return an online
-  one, or else the one that checked in most recently, instead of the first one found, and
-  log the choice; add the agent's last check-in time; and accept an agent ID | `Quarantine`:
-  fail for stale agents and return whether the agent is online | `Quarantine Multiple`:
+  one, or else the one that checked in most recently, instead of the first one found, log
+  the choice, and accept an agent ID | `Quarantine`: fail for stale agents and return
+  whether the agent is online | `Quarantine Multiple`:
   choose between agents that share a hostname in the same way, report stale agents as
   failed, and fix skipped hosts and a failure when a host was on a later page of results
   | Updated SDK to the latest version (6.6.0)"
@@ -131,11 +131,6 @@ types:
       title: Quarantine State
       type: quarantineState_object
       description: Quarantine state
-      required: false
-    timestamp:
-      title: Last Check-In
-      type: float
-      description: Time the agent last checked in to the platform, in Unix time in milliseconds
       required: false
   hostName:
     name:

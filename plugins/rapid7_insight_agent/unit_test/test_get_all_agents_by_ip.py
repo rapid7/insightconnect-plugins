@@ -10,7 +10,7 @@ from unittest.mock import MagicMock, patch
 from insightconnect_plugin_runtime.exceptions import PluginException
 from jsonschema import validate
 from parameterized import parameterized
-from util import Util
+from util import POST_PAYLOAD, FakeAgentApi, Util, asset
 
 from icon_rapid7_insight_agent.actions.get_all_agents_by_ip import GetAllAgentsByIp
 from icon_rapid7_insight_agent.actions.get_all_agents_by_ip.schema import Input, Output
@@ -39,3 +39,12 @@ class TestGetAllAgentsByIp(TestCase):
             context.exception.assistance,
             "Please ensure that the input is a valid IPv4 or IPv6 address.",
         )
+
+    def test_check_in_time_is_not_returned(self) -> None:
+        pages = [[asset("a1", ["WEB01"], "ONLINE", "2026-03-15")], [asset("a2", ["WEB02"], "OFFLINE", "2026-03-10")]]
+        with patch(POST_PAYLOAD, side_effect=FakeAgentApi(pages)):
+            action = Util.default_connector(GetAllAgentsByIp())
+            actual = action.run({Input.IP_ADDRESS: "10.0.0.1"})
+        self.assertEqual(["a1", "a2"], [agent["id"] for agent in actual[Output.AGENTS]])
+        for agent in actual[Output.AGENTS]:
+            self.assertNotIn("timestamp", agent["agent_info"])

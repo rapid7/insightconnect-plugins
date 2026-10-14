@@ -79,6 +79,7 @@ class TestGetAgentDetailsHostnameMatching(TestCase):
                 "time, so it is the first one found.",
             ),
             ("single_stale_record_is_returned", [[asset("gone", ["WEB01"], "STALE")]], "web01", "gone", None),
+            ("ip_lookup", [[asset("ip-1", ["WEB01"], "ONLINE", "2026-03-15")]], "10.0.0.1", "ip-1", None),
         ]
     )
     def test_chosen_agent(
@@ -94,6 +95,7 @@ class TestGetAgentDetailsHostnameMatching(TestCase):
                 with self.assertNoLogs(CONNECTION_LOGGER, level="WARNING"):
                     actual = action.run({Input.AGENT: agent_input})
         self.assertEqual(expected_id, actual["agent"]["id"])
+        self.assertNotIn("timestamp", actual["agent"]["agent_info"])
 
     @patch(TIMEOUT_MINUTES, -1)
     def test_time_limit_returns_first_match(self) -> None:
@@ -127,11 +129,12 @@ class TestGetAgentDetailsHostnameMatching(TestCase):
 
     def test_agent_id_is_looked_up_directly(self) -> None:
         agent_id = "0123456789abcdef0123456789abcdef"
-        fake_api = FakeAgentApi([[asset(agent_id, ["LAPTOP-01"], "ONLINE")]])
+        fake_api = FakeAgentApi([[asset(agent_id, ["LAPTOP-01"], "ONLINE", "2026-03-15")]])
         with patch(POST_PAYLOAD, side_effect=fake_api):
             action = Util.default_connector(GetAgentDetails())
             actual = action.run({Input.AGENT: agent_id})
         self.assertEqual(agent_id, actual["agent"]["id"])
+        self.assertNotIn("timestamp", actual["agent"]["agent_info"])
         self.assertEqual([], fake_api.pages_read)
 
     @parameterized.expand(

@@ -305,7 +305,7 @@ class ApiConnection:
         has_next_page = True
         if not next_cursor:
             payload = {
-                "query": "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress location { city region countryName countryCode continent } agent { agentSemanticVersion agentStatus quarantineState { currentState } timestamp } } } } } }",
+                "query": "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress location { city region countryName countryCode continent } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }",
                 "variables": {"orgId": self.org_key},
             }
 
@@ -360,6 +360,8 @@ class ApiConnection:
         # Rename 'agent' field name to 'agent_info'
         for agent in filtered_agents:
             agent["agent_info"] = agent.pop("agent")
+            # Only fetched to choose between agents that share a hostname, so it is not part of the output
+            agent["agent_info"].pop("timestamp", None)
         return filtered_agents
 
     def _get_agent(self, agent_input: str, agent_type: str, next_cursor: str = None) -> dict:
@@ -377,7 +379,7 @@ class ApiConnection:
         has_next_page = True
         if not next_cursor:
             payload = {
-                "query": "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress location { city region countryName countryCode continent } agent { agentSemanticVersion agentStatus quarantineState { currentState } timestamp } } } } } }",
+                "query": "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress location { city region countryName countryCode continent } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }",
                 "variables": {"orgId": self.org_key},
             }
             self.logger.info("Getting first page of agents...")
@@ -428,7 +430,7 @@ class ApiConnection:
         :return: dict (agent object), or None if no agent has this ID
         """
         payload = {
-            "query": "query( $orgID: String! $agentID: String! ) { assets( orgId: $orgID ids: [$agentID] ){ id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress location { city region countryName countryCode continent } agent { agentSemanticVersion agentStatus quarantineState { currentState } timestamp } } }",
+            "query": "query( $orgID: String! $agentID: String! ) { assets( orgId: $orgID ids: [$agentID] ){ id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress location { city region countryName countryCode continent } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } }",
             "variables": {"orgID": self.org_key, "agentID": agent_id.replace("-", "")},
         }
         self.logger.info(f"Looking up agent ID: {agent_id}")

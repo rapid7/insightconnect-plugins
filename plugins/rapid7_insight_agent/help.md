@@ -397,7 +397,6 @@ Example output:
 |Agent Semantic Version|string|None|False|Agent semantic version|None|
 |Agent Status|string|None|False|Agent status|None|
 |Quarantine State|quarantineState_object|None|False|Quarantine state|None|
-|Last Check-In|float|None|False|Time the agent last checked in to the platform, in Unix time in milliseconds|None|
   
 **hostName**
 
@@ -466,7 +465,7 @@ Example output:
 
 # Version History
 
-* 3.1.0 - `Get Agent Details`: when several agents share a hostname, return an online one, or else the one that checked in most recently, instead of the first one found, and log the choice; add the agent's last check-in time; and accept an agent ID | `Quarantine`: fail for stale agents and return whether the agent is online | `Quarantine Multiple`: choose between agents that share a hostname in the same way, report stale agents as failed, and fix skipped hosts and a failure when a host was on a later page of results | Updated SDK to the latest version (6.6.0)
+* 3.1.0 - `Get Agent Details`: when several agents share a hostname, return an online one, or else the one that checked in most recently, instead of the first one found, log the choice, and accept an agent ID | `Quarantine`: fail for stale agents and return whether the agent is online | `Quarantine Multiple`: choose between agents that share a hostname in the same way, report stale agents as failed, and fix skipped hosts and a failure when a host was on a later page of results | Updated SDK to the latest version (6.6.0)
 * 3.0.9 - Updated SDK to the latest version (6.5.1)
 * 3.0.8 - Updated SDK to the latest version (6.4.3)
 * 3.0.7 - Added response checks to actions to improve error handling | Updated SDK to latest version (6.4.1)
