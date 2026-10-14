@@ -23,13 +23,14 @@ class Quarantine(insightconnect_plugin_runtime.Action):
 
         agent_id_stripped = agent_id.replace("-", "")
 
-        # The platform accepts requests for stale agents and reports success, but they never pick the job up
         agent_status = (self.connection.api.get_agent_state(agent_id_stripped) or {}).get("agentStatus")
-        if agent_status == STALE:
+        # The platform accepts a quarantine request for a stale agent and reports success, but nothing is isolated.
+        # Unquarantine is not blocked: the platform keeps the request until the agent comes back online.
+        if quarantine_state and agent_status == STALE:
             raise PluginException(
                 cause=f"Agent {agent_id} is stale.",
-                assistance="The agent has not checked in for a long time and will not receive this request. If the "
-                "device was reinstalled, use the ID of its current agent.",
+                assistance="The agent has not checked in for a long time and will not receive a quarantine request. "
+                "If the device was reinstalled, use the ID of its current agent.",
             )
 
         if quarantine_state:

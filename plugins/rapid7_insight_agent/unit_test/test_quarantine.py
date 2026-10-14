@@ -10,7 +10,7 @@ from typing import Any, Dict, Optional
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 from jsonschema import validate
-from util import POST_PAYLOAD, FakeAgentApi, Util, asset
+from util import CONNECTION_LOGGER, POST_PAYLOAD, FakeAgentApi, Util, asset
 
 from icon_rapid7_insight_agent.actions.quarantine.action import Quarantine
 from icon_rapid7_insight_agent.actions.quarantine.schema import Input
@@ -56,12 +56,32 @@ class TestQuarantineAgentState(TestCase):
         self.assertEqual(expected, actual)
         self.assertEqual(["a1"], fake_api.quarantined)
 
-    @parameterized.expand([("quarantine", True), ("unquarantine", False)])
-    def test_stale_agent_raises(self, name: str, quarantine_state: bool) -> None:
+    def test_quarantining_a_stale_agent_raises(self) -> None:
         fake_api = FakeAgentApi([[asset("a1", ["WEB01"], "STALE")]])
         with patch(POST_PAYLOAD, side_effect=fake_api):
             action = Util.default_connector(Quarantine())
             with self.assertRaises(PluginException) as context:
-                action.run({Input.AGENT_ID: "a1", Input.INTERVAL: 300, Input.QUARANTINE_STATE: quarantine_state})
+                action.run({Input.AGENT_ID: "a1", Input.INTERVAL: 300, Input.QUARANTINE_STATE: True})
         self.assertEqual("Agent a1 is stale.", context.exception.cause)
         self.assertEqual([], fake_api.quarantined)
+
+    @parameterized.expand([("stale", "STALE", True), ("offline", "OFFLINE", True), ("online", "ONLINE", False)])
+    def test_unquarantine_is_sent_and_warns_when_the_agent_is_not_online(
+        self, name: str, status: str, expect_warning: bool
+    ) -> None:
+        fake_api = FakeAgentApi([[asset("a1", ["WEB01"], status)]])
+        params = {Input.AGENT_ID: "a1", Input.INTERVAL: 300, Input.QUARANTINE_STATE: False}
+        with patch(POST_PAYLOAD, side_effect=fake_api):
+            action = Util.default_connector(Quarantine())
+            if expect_warning:
+                with self.assertLogs(CONNECTION_LOGGER, level="WARNING") as logs:
+                    actual = action.run(params)
+                self.assertIn(
+                    f"Agent a1 is {status}. The unquarantine request will take effect when it comes back online.",
+                    "\n".join(logs.output),
+                )
+            else:
+                with self.assertNoLogs(CONNECTION_LOGGER, level="WARNING"):
+                    actual = action.run(params)
+        self.assertEqual({"success": True, "is_asset_online": status == "ONLINE"}, actual)
+        self.assertEqual(["a1"], fake_api.quarantined)

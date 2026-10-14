@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Quarantine or unquarantine on a device. Fails for agents that are stale, because they will not receive the request"
+    DESCRIPTION = "Quarantine or unquarantine on a device. Quarantining an agent that is stale fails, because a stale agent will not receive the request"
 
 
 class Input:
@@ -67,7 +67,7 @@ class QuarantineOutput(insightconnect_plugin_runtime.Output):
     "is_asset_online": {
       "type": "boolean",
       "title": "Is Asset Online",
-      "description": "Whether the agent was connected to the Insight platform when the request was sent. If false, the request waits until the agent reconnects, within the interval",
+      "description": "Whether the agent was connected to the Insight platform when the request was sent. If false, the request waits until the agent reconnects; a quarantine request expires after the interval",
       "order": 2
     },
     "success": {

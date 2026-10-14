@@ -284,8 +284,8 @@ Example output:
 
 #### Quarantine
 
-This action is used to quarantine or unquarantine on a device. Fails for agents that are stale, because they will not 
-receive the request
+This action is used to quarantine or unquarantine on a device. Quarantining an agent that is stale fails, because a 
+stale agent will not receive the request
 
 ##### Input
 
@@ -309,7 +309,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|is_asset_online|boolean|True|Whether the agent was connected to the Insight platform when the request was sent. If false, the request waits until the agent reconnects, within the interval|True|
+|is_asset_online|boolean|True|Whether the agent was connected to the Insight platform when the request was sent. If false, the request waits until the agent reconnects; a quarantine request expires after the interval|True|
 |success|boolean|True|Was operation successful|True|
   
 Example output:
@@ -465,7 +465,7 @@ Example output:
 
 # Version History
 
-* 3.1.0 - `Get Agent Details`: when several agents share a hostname, return an online one, or else the one that checked in most recently, instead of the first one found, log the choice, and accept an agent ID | `Quarantine`: fail for stale agents and return whether the agent is online | `Quarantine Multiple`: choose between agents that share a hostname in the same way, report stale agents as failed, and fix skipped hosts and a failure when a host was on a later page of results | Updated SDK to the latest version (6.6.0)
+* 3.1.0 - `Get Agent Details`: when several agents share a hostname, return an online one, or else the one that checked in most recently, instead of the first one found, log the choice, and accept an agent ID | `Quarantine`: fail when quarantining a stale agent and return whether the agent is online | `Quarantine Multiple`: choose between agents that share a hostname in the same way, report stale agents as failed when quarantining, and fix skipped hosts and a failure when a host was on a later page of results | Updated SDK to the latest version (6.6.0)
 * 3.0.9 - Updated SDK to the latest version (6.5.1)
 * 3.0.8 - Updated SDK to the latest version (6.4.3)
 * 3.0.7 - Added response checks to actions to improve error handling | Updated SDK to latest version (6.4.1)

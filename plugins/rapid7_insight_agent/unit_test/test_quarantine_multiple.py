@@ -104,3 +104,13 @@ class TestQuarantineMultipleAgentChoice(TestCase):
         log_output = "\n".join(logs.output)
         self.assertIn("Using agent new because it is online", log_output)
         self.assertIn("Using agent w-new because none is online and it checked in most recently", log_output)
+
+    def test_stale_host_is_unquarantined(self) -> None:
+        fake_api = FakeAgentApi([[asset("s1", ["OLDBOX"], "STALE")]])
+        with patch(POST_PAYLOAD, side_effect=fake_api):
+            action = Util.default_connector(QuarantineMultiple())
+            with self.assertLogs(CONNECTION_LOGGER, level="WARNING") as logs:
+                actual = action.run({Input.AGENT_ARRAY: ["oldbox"], Input.INTERVAL: 300, Input.QUARANTINE_STATE: False})
+        self.assertEqual({"completed": ["oldbox"], "failed": []}, actual)
+        self.assertEqual(["s1"], fake_api.quarantined)
+        self.assertIn("Agent s1 is STALE", "\n".join(logs.output))

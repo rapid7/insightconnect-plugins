@@ -11,6 +11,7 @@ from insightconnect_plugin_runtime.helper import clean
 
 TIMEOUT_MINUTES = 3
 ONLINE = "ONLINE"
+OFFLINE = "OFFLINE"
 STALE = "STALE"
 
 
@@ -85,6 +86,12 @@ class ApiConnection:
         agent = results_object.get("data", {}).get("assets", [])[0].get("agent")
         if not agent:
             return False
+        agent_status = agent.get("agentStatus")
+        if agent_status in (OFFLINE, STALE):
+            self.logger.warning(
+                f"Agent {agent_id} is {agent_status}. The unquarantine request will take effect when it comes back "
+                "online."
+            )
 
         # if exists then unquarantine it
         unquarantine_payload = {
@@ -119,7 +126,7 @@ class ApiConnection:
         # For each agent ID in the list, perform quarantine
         for hostname, agent in found_agents:
             agent_id = agent.get("id")
-            if self._agent_status(agent) == STALE:
+            if quarantine and self._agent_status(agent) == STALE:
                 unsuccessful_operations.append(
                     {"hostname": hostname, "error": f"Agent ID {agent_id} is stale and will not receive the request"}
                 )
