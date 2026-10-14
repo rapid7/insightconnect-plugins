@@ -3,7 +3,6 @@ from .schema import CreateTeamsChatInput, CreateTeamsChatOutput, Input, Output, 
 
 # Custom imports below
 from icon_microsoft_teams.util.komand_clean_with_nulls import remove_null_and_clean
-from icon_microsoft_teams.util.teams_utils import create_chat
 
 
 class CreateTeamsChat(insightconnect_plugin_runtime.Action):
@@ -19,6 +18,6 @@ class CreateTeamsChat(insightconnect_plugin_runtime.Action):
         members = params.get(Input.MEMBERS)
         topic = params.get(Input.TOPIC)
 
-        group_result = create_chat(self.connection, members, topic)
+        group_result = self.connection.client.create_chat(members, topic)
 
         return {Output.CHAT: remove_null_and_clean(group_result)}

@@ -3,8 +3,7 @@ import sys
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest import TestCase, mock
-from unittest.mock import Mock
+from unittest import TestCase
 
 from icon_microsoft_teams.actions.add_channel_to_team.action import AddChannelToTeam
 from icon_microsoft_teams.actions.add_channel_to_team.schema import AddChannelToTeamInput, AddChannelToTeamOutput, Input
@@ -13,29 +12,25 @@ from parameterized import parameterized
 
 from util import Util
 
-STUB_TEAM_NAME = "Example Team"
-STUB_CHANNEL_NAME = "ExampleName"
-STUB_CHANNEL_DESCRIPTION = "Example Channel Description"
-
-STUB_EXAMPLE_ACTION_RESPONSE = {"success": True}
-
 
 class TestAddChannelToTeam(TestCase):
     def setUp(self) -> None:
         self.action = Util.default_connector(AddChannelToTeam())
-        self.payload = {
-            Input.TEAM_NAME: STUB_TEAM_NAME,
-            Input.CHANNEL_NAME: STUB_CHANNEL_NAME,
-            Input.CHANNEL_DESCRIPTION: STUB_CHANNEL_DESCRIPTION,
-        }
+        self.action.connection.client.get_teams.return_value = [{"id": "12345", "displayName": "Example Team"}]
+        self.action.connection.client.create_channel.return_value = True
 
     @parameterized.expand([("Standard",), ("Private",)])
-    @mock.patch("requests.get", side_effect=Util.mocked_requests)
-    @mock.patch("requests.post", side_effect=Util.mocked_requests)
-    def test_add_group_owner(self, channel_type: str, mock_requests_post: Mock, mock_requests_get: Mock) -> None:
-        test_input = {**self.payload, "channel_type": channel_type}
+    def test_add_channel_to_team(self, channel_type: str) -> None:
+        test_input = {
+            Input.TEAM_NAME: "Example Team",
+            Input.CHANNEL_NAME: "ExampleName",
+            Input.CHANNEL_DESCRIPTION: "Example Channel Description",
+            Input.CHANNEL_TYPE: channel_type,
+        }
         validate(test_input, AddChannelToTeamInput.schema)
         response = self.action.run(test_input)
-        expected_response = STUB_EXAMPLE_ACTION_RESPONSE
-        self.assertEqual(response, expected_response)
+        self.assertEqual(response, {"success": True})
         validate(response, AddChannelToTeamOutput.schema)
+        self.action.connection.client.create_channel.assert_called_with(
+            "12345", "ExampleName", "Example Channel Description", channel_type
+        )
