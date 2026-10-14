@@ -548,10 +548,11 @@ class ApiConnection:
         chosen = max(matches, key=lambda agent: (self._is_online(agent), self._last_check_in(agent) or 0))
         if len(matches) > 1:
             count = str(len(matches)) if all_pages_read else f"At least {len(matches)}"
+            last_check_in = self._last_check_in(chosen)
             if self._is_online(chosen):
                 reason = "it is online"
-            elif self._last_check_in(chosen):
-                checked_in = datetime.fromtimestamp(self._last_check_in(chosen) / 1000, tz=timezone.utc)
+            elif last_check_in:
+                checked_in = datetime.fromtimestamp(last_check_in / 1000, tz=timezone.utc)
                 reason = (
                     f"none is online and it checked in most recently, at {checked_in.isoformat(timespec='seconds')}"
                 )

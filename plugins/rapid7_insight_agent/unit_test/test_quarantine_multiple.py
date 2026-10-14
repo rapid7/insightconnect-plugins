@@ -101,7 +101,6 @@ class TestQuarantineMultipleAgentChoice(TestCase):
         self.assertEqual(
             [{"hostname": "oldbox", "error": "Agent ID s1 is stale and will not receive the request"}], actual["failed"]
         )
-        self.assertIn("Using agent new because it is online", "\n".join(logs.output))
-        self.assertIn(
-            "Using agent w-new because none is online and it checked in most recently", "\n".join(logs.output)
-        )
+        log_output = "\n".join(logs.output)
+        self.assertIn("Using agent new because it is online", log_output)
+        self.assertIn("Using agent w-new because none is online and it checked in most recently", log_output)

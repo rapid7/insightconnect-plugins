@@ -103,8 +103,9 @@ class TestGetAgentDetailsHostnameMatching(TestCase):
                 actual = action.run({Input.AGENT: "laptop-01"})
         self.assertEqual("old", actual["agent"]["id"])
         self.assertNotIn("next_cursor", actual)
-        self.assertIn("Stopped searching for 'laptop-01'", "\n".join(logs.output))
-        self.assertIn("Returning the first agent found with this hostname", "\n".join(logs.output))
+        log_output = "\n".join(logs.output)
+        self.assertIn("Stopped searching for 'laptop-01'", log_output)
+        self.assertIn("Returning the first agent found with this hostname", log_output)
 
     @patch(TIMEOUT_MINUTES, -1)
     def test_time_limit_without_match_returns_next_cursor(self) -> None:
