@@ -32,3 +32,6 @@ RETRYABLE_POST_ENDPOINT_SUFFIXES = ("_search", "/search")
 
 # Constants for Get New Alerts trigger.py
 TOTAL_SIZE = 100
+
+# Minimum trigger polling interval
+MIN_FREQUENCY_SECONDS = 10

@@ -6,7 +6,7 @@ from .schema import GetNewInvestigationsInput, GetNewInvestigationsOutput, Input
 from insightconnect_plugin_runtime.helper import clean
 from komand_rapid7_insightidr.util.endpoints import Investigations
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
-from komand_rapid7_insightidr.util.constants import TOTAL_SIZE
+from komand_rapid7_insightidr.util.constants import MIN_FREQUENCY_SECONDS, TOTAL_SIZE
 import json
 from datetime import datetime, UTC, timedelta
 from typing import Dict, Any, List
@@ -16,6 +16,7 @@ INITIAL_LOOKBACK_MINUTES = 10
 # set this to be half of the INITIAL_LOOKBACK_MINUTES so the second run doesn't expand the window beyond lookback
 API_LATENCY_OVERLAP_MINUTES = 5
 MAX_NUMBER_OF_RETRIES = 20
+RETRY_DELAY_SECONDS = 30
 
 STATE_KEY = "RRNs"
 TIME_STATE_KEY = "last_poll_time"
@@ -42,6 +43,11 @@ class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
         frequency = params.get(Input.FREQUENCY, DEFAULT_FREQUENCY_SECONDS)
         # END INPUT BINDING - DO NOT REMOVE
 
+        # Ensure frequency is not below minimum allowed
+        if frequency < MIN_FREQUENCY_SECONDS:
+            self.logger.info(f"Frequency {frequency}s is below the minimum, using {MIN_FREQUENCY_SECONDS}s")
+            frequency = MIN_FREQUENCY_SECONDS
+
         # Initialize the trigger starting point & set to dedupe investigations RRNs
         retry_attempts_counter, prev_investigations = 0, set(self.state.get(STATE_KEY, []))
 
@@ -60,7 +66,7 @@ class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
             self.logger.info(f"Searching for new investigations from '{last_poll_iso}' to '{current_time.isoformat()}'")
 
             # Get all investigations since last poll time
-            # In case of any errors, log the error, wait for the defined frequency, and retry
+            # In case of any errors, log the error, wait for the retry delay, and retry
             try:
                 investigations = self.get_investigations(search, last_poll_iso, current_time.isoformat())
             except Exception as error:
@@ -73,9 +79,9 @@ class GetNewInvestigations(insightconnect_plugin_runtime.Trigger):
                 self.logger.error("Get Investigations: An error occurred while fetching investigations")
                 self.logger.error(error)
                 self.logger.info(
-                    f"The request will be retried after {frequency} seconds... ({retry_attempts_counter}/{MAX_NUMBER_OF_RETRIES})"
+                    f"The request will be retried after {RETRY_DELAY_SECONDS} seconds... ({retry_attempts_counter}/{MAX_NUMBER_OF_RETRIES})"
                 )
-                time.sleep(frequency)
+                time.sleep(RETRY_DELAY_SECONDS)
                 continue
 
             # If investigations were found, log total and send them one by one
