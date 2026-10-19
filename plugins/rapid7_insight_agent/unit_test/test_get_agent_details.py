@@ -98,16 +98,20 @@ class TestGetAgentDetailsHostnameMatching(TestCase):
         self.assertNotIn("timestamp", actual["agent"]["agent_info"])
 
     @patch(TIMEOUT_MINUTES, -1)
-    def test_time_limit_returns_first_match(self) -> None:
-        with patch(POST_PAYLOAD, side_effect=FakeAgentApi([[REINSTALLED_OLD], [REINSTALLED_NEW]])):
+    def test_time_limit_chooses_among_found_agents(self) -> None:
+        first_page = [
+            asset("older", ["LAPTOP-01"], "OFFLINE", "2026-03-10"),
+            asset("newer", ["LAPTOP-01"], "OFFLINE", "2026-03-15"),
+        ]
+        with patch(POST_PAYLOAD, side_effect=FakeAgentApi([first_page, [REINSTALLED_NEW]])):
             action = Util.default_connector(GetAgentDetails())
-            with self.assertLogs(CONNECTION_LOGGER, level="WARNING") as logs:
+            with self.assertLogs(CONNECTION_LOGGER, level="INFO") as logs:
                 actual = action.run({Input.AGENT: "laptop-01"})
-        self.assertEqual("old", actual["agent"]["id"])
+        self.assertEqual("newer", actual["agent"]["id"])
         self.assertNotIn("next_cursor", actual)
         log_output = "\n".join(logs.output)
         self.assertIn("Stopped searching for 'laptop-01'", log_output)
-        self.assertIn("Returning the first agent found with this hostname", log_output)
+        self.assertIn("At least 2 agents share the hostname 'laptop-01'. Using agent newer", log_output)
 
     @patch(TIMEOUT_MINUTES, -1)
     def test_time_limit_without_match_returns_next_cursor(self) -> None:

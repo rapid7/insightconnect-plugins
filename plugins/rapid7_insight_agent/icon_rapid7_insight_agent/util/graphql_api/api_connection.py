@@ -480,11 +480,8 @@ class ApiConnection:
                     "were read."
                 )
                 if matches:
-                    self.logger.warning(
-                        f"{stopped} Returning the first agent found with this hostname; other agents with the same "
-                        "hostname may exist on the pages that were not searched."
-                    )
-                    return matches[0], None
+                    self.logger.info(f"{stopped} Choosing from the agents found so far.")
+                    return self._choose_agent(matches, hostname, all_pages_read=False), None
                 self.logger.info(f"{stopped} Run the action again with the next cursor to search the remaining pages.")
                 return None, next_cursor
 
