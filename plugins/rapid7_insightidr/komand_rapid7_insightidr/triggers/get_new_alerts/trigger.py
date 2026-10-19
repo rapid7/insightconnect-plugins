@@ -10,7 +10,7 @@ from insightconnect_plugin_runtime.helper import clean
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_rapid7_insightidr.util.endpoints import Alerts
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
-from komand_rapid7_insightidr.util.constants import TOTAL_SIZE
+from komand_rapid7_insightidr.util.constants import MIN_FREQUENCY_SECONDS, TOTAL_SIZE
 
 LOOKBACK_MINUTES = 20
 MAX_LOOKBACK_HOURS = 24
@@ -39,6 +39,11 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
         input_aggregates = params.get(Input.AGGREGATES)
         # END INPUT BINDING - DO NOT REMOVE
         self.logger.info("Get Alerts: trigger started")
+
+        # Verify frequency is above minimum allowed
+        if input_frequency < MIN_FREQUENCY_SECONDS:
+            self.logger.info(f"Frequency {input_frequency}s is below the minimum, using {MIN_FREQUENCY_SECONDS}s")
+            input_frequency = MIN_FREQUENCY_SECONDS
 
         # Restore alert_rrn values from state
         retry_attempts_counter, initial_alerts = 0, set(self.state.get(STATE_KEY, []))

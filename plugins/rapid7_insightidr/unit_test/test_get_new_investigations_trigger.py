@@ -10,9 +10,11 @@ from komand_rapid7_insightidr.triggers.get_new_investigations.trigger import (
     GetNewInvestigations,
     API_LATENCY_OVERLAP_MINUTES,
     INITIAL_LOOKBACK_MINUTES,
+    RETRY_DELAY_SECONDS,
     TIME_STATE_KEY,
 )
 from komand_rapid7_insightidr.triggers.get_new_investigations.schema import Output
+from komand_rapid7_insightidr.util.constants import MIN_FREQUENCY_SECONDS
 from parameterized import parameterized
 
 
@@ -386,3 +388,33 @@ class TestGetNewInvestigationsTrigger(TestCase):
         self.trigger.send.assert_called_once()
         sent_investigation = self.trigger.send.call_args[0][0]["investigation"]
         self.assertEqual(sent_investigation["rrn"], "rrn:investigation:new")
+
+    @parameterized.expand(
+        [["below minimum", 1, MIN_FREQUENCY_SECONDS], ["at minimum", 10, 10], ["above minimum", 30, 30]]
+    )
+    def test_frequency_minimum(
+        self, mock_call_search_api, mock_sleep, _mock_get_current_time, _name, frequency, expected_sleep
+    ):
+        # Set up trigger with custom frequency
+        mock_call_search_api.return_value = {"data": [], "metadata": {"total_pages": 1}}
+        self.trigger._save_state = MagicMock()
+        mock_sleep.side_effect = StopLoop
+
+        # Set frequency below minimum, should be adjusted to minimum
+        with self.assertRaises(StopLoop):
+            self.trigger.run({"frequency": frequency, "search": []})
+
+        # Verify sleep duration matches expected (minimum or specified)
+        mock_sleep.assert_called_once_with(expected_sleep)
+
+    def test_error_retry_uses_fixed_delay(self, mock_call_search_api, mock_sleep, _mock_get_current_time):
+        # Mock 429 error followed by successful stop
+        mock_call_search_api.side_effect = Exception("429")
+        mock_sleep.side_effect = StopLoop
+
+        # Verify retry delay is fixed value, not exponential backoff
+        with self.assertRaises(StopLoop):
+            self.trigger.run({"frequency": 1, "search": []})
+
+        # Should have slept once
+        mock_sleep.assert_called_once_with(RETRY_DELAY_SECONDS)

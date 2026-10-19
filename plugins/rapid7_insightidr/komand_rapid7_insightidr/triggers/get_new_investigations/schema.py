@@ -25,7 +25,7 @@ class GetNewInvestigationsInput(insightconnect_plugin_runtime.Input):
     "frequency": {
       "type": "integer",
       "title": "Frequency",
-      "description": "Poll frequency in seconds",
+      "description": "Poll frequency in seconds. Values below 10 are raised to 10",
       "default": 15,
       "order": 1
     },
