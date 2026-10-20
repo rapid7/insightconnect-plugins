@@ -19,6 +19,7 @@ sdk:
   user: root
   custom_cmd:
     - RUN apk add --no-cache --virtual .build-deps make gcc libc-dev libffi-dev openssl-dev libxml2-dev libxslt-dev
+enable_cache: true
 key_features:
 - Get top remediations
 - Start scans
