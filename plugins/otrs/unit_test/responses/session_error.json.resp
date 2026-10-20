@@ -1,0 +1,6 @@
+{
+  "Error": {
+    "ErrorCode": "SessionCreate.AuthFail",
+    "ErrorMessage": "SessionCreate: Authorization failing!"
+  }
+}
