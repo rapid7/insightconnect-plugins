@@ -18,7 +18,7 @@ from komand_rapid7_insightidr.triggers.get_new_alerts.trigger import (
     TIME_STATE_KEY,
     GetNewAlerts,
 )
-from komand_rapid7_insightidr.util.constants import TOTAL_SIZE
+from komand_rapid7_insightidr.util.constants import MIN_FREQUENCY_SECONDS, TOTAL_SIZE
 from parameterized import parameterized
 
 CURRENT_TIME = datetime(2026, 10, 1, 2, 7, 0, tzinfo=UTC)
@@ -350,6 +350,24 @@ class TestGetNewAlertsTrigger(TestCase):
         # Verify that the poll succeeded (frequency sleep, not the retry sleep) and state was not saved
         mock_sleep.assert_called_once_with(self.params.get("frequency"))
         self.trigger._save_state.assert_not_called()
+
+    @parameterized.expand(
+        [["below minimum", 1, MIN_FREQUENCY_SECONDS], ["at minimum", 10, 10], ["above minimum", 30, 30]]
+    )
+    def test_frequency_minimum(
+        self, mock_request: MagicMock, mock_sleep: MagicMock, _name: str, frequency: int, expected_sleep: int
+    ) -> None:
+        # Set up a trigger with a frequency below the minimum, then run it
+        self.trigger.state_file = ""
+        mock_request.return_value = _response(["rrn:1"])
+        mock_sleep.side_effect = StopLoop
+
+        # Stop the trigger after one run to inspect behavior
+        with self.assertRaises(StopLoop):
+            self.trigger.run({"frequency": frequency})
+
+        # Verify the trigger slept for the minimum allowed frequency
+        mock_sleep.assert_called_once_with(expected_sleep)
 
     def test_walk_stops_when_full_page_has_no_created_at(self, mock_request: MagicMock, _mock_sleep: MagicMock) -> None:
         # Without a created_at on the last alert of a full page the walk can't move start_time, so it stops and logs
