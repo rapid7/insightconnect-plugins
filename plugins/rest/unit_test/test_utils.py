@@ -141,6 +141,26 @@ class TestUtil(TestCase):
         result = result.data
         self.assertEqual(result, mock_expected)
 
+    @parameterized.expand(
+        [
+            ("no headers", {}, None, {"Content-Type": "application/json"}),
+            ("action headers", {}, {"Accept": "*/*"}, {"Accept": "*/*", "Content-Type": "application/json"}),
+            ("action content type", {}, {"content-type": "text/plain"}, {"content-type": "text/plain"}),
+            ("connection content type", {"Content-Type": "text/plain"}, None, {"Content-Type": "text/plain"}),
+        ]
+    )
+    @mock.patch("requests.request", side_effect=mocked_requests_get)
+    def test_body_object_content_type(self, _name, default_headers, headers, expected_headers, mock_request):
+        api = RestAPI("www.httpbin.org", None, True, default_headers, False)
+        api.call_api("post", "/", {"key": "value"}, None, headers)
+        self.assertEqual(mock_request.call_args.kwargs["headers"], expected_headers)
+
+    @mock.patch("requests.request", side_effect=mocked_requests_get)
+    def test_body_string_no_content_type(self, mock_request):
+        api = RestAPI("www.httpbin.org", None, True, {}, False)
+        api.call_api("post", "/", '{"key": "value"}', None, None)
+        self.assertEqual(mock_request.call_args.kwargs["headers"], {})
+
     """
     Tests the with_credentials function
     """

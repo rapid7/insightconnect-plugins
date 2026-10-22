@@ -337,10 +337,12 @@ Example output:
 ## Troubleshooting
 
 * Any headers set in the action will overwrite the default ones in the connection.
+* `Body (Object)` is sent as JSON with `Content-Type: application/json` unless the action or the connection sets a `Content-Type` header.
 * Any issues connecting to the remote service should be present in the log of the job that ran. If you find any issues that represent bugs in the plugin itself, please contact someone at Komand directly.
 
 # Version History
 
+* 6.0.10 - Send `Body (Object)` with `Content-Type: application/json` when no `Content-Type` header is set | Updated SDK to the latest version (6.6.1)
 * 6.0.9 - Updated SDK to the latest version (6.2.5)
 * 6.0.8 - Initial updates for fedramp compliance | Updated SDK to the latest version
 * 6.0.7 - Connection: fix hard overriding custom header from `CUSTOM_SECRET_INPUT`
