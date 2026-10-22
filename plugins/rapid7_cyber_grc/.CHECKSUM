@@ -1,0 +1,279 @@
+{
+	"spec": "6ce75c7c4ea3a01292f6aeba81dfa36d",
+	"manifest": "23c7165c978900a85f96394e0bd06677",
+	"setup": "c23b172fb8cb44c629460a060173c29e",
+	"schemas": [
+		{
+			"identifier": "add_comment/schema.py",
+			"hash": "405777ef6c3e0c798883262b4b6449af"
+		},
+		{
+			"identifier": "count_records/schema.py",
+			"hash": "bfa812ea7c30166ee0eecc44f5720218"
+		},
+		{
+			"identifier": "create_assessment/schema.py",
+			"hash": "5b9c65bfc8022c0fd00f8460df17ebed"
+		},
+		{
+			"identifier": "create_audit/schema.py",
+			"hash": "b13978d928876f5ceafdd897cfb91361"
+		},
+		{
+			"identifier": "create_certification/schema.py",
+			"hash": "33c12e59ec758dace65dc5f8fd22ce80"
+		},
+		{
+			"identifier": "create_contract/schema.py",
+			"hash": "f4d46bf9bddc35db1a9849c21f0e5fe7"
+		},
+		{
+			"identifier": "create_control_set/schema.py",
+			"hash": "4b352137aa9eb4e34110cb6364be062d"
+		},
+		{
+			"identifier": "create_incident/schema.py",
+			"hash": "40bc7607f1b2fde732715b4577495658"
+		},
+		{
+			"identifier": "create_it_asset/schema.py",
+			"hash": "d1036fdc9bdd2f9777c282a3e8e249ea"
+		},
+		{
+			"identifier": "create_record/schema.py",
+			"hash": "9a6adc0f86728c438474c1e48a1cfc1a"
+		},
+		{
+			"identifier": "create_risk/schema.py",
+			"hash": "7dc4115cc71c1be4256763aecc0e2178"
+		},
+		{
+			"identifier": "create_task/schema.py",
+			"hash": "97abd34f532ccf2c1bbcd29b945f5e48"
+		},
+		{
+			"identifier": "create_user/schema.py",
+			"hash": "7bdbb65ac972cc1bfcf0b23a29190a6e"
+		},
+		{
+			"identifier": "create_vendor/schema.py",
+			"hash": "7a14f9192cceb2e8e78dafb2551b7ee8"
+		},
+		{
+			"identifier": "delete_assessment/schema.py",
+			"hash": "e7d63d77db7aa9e54ec892d063f66674"
+		},
+		{
+			"identifier": "delete_audit/schema.py",
+			"hash": "9ab455891f9f28bc328c5f9f805d9a37"
+		},
+		{
+			"identifier": "delete_certification/schema.py",
+			"hash": "a63819203e761562facb3f36a8d26b43"
+		},
+		{
+			"identifier": "delete_contract/schema.py",
+			"hash": "f19767409ccabdb019de00d9c0131659"
+		},
+		{
+			"identifier": "delete_control_set/schema.py",
+			"hash": "24c6f9dd628554a7422d9558bae54958"
+		},
+		{
+			"identifier": "delete_incident/schema.py",
+			"hash": "ef3ce790546053b672cfc65431644f83"
+		},
+		{
+			"identifier": "delete_it_asset/schema.py",
+			"hash": "946ee1abbf34bdd51132e208a74a0ef0"
+		},
+		{
+			"identifier": "delete_record/schema.py",
+			"hash": "9a04c0279794ffc6403b5e068afdcf4c"
+		},
+		{
+			"identifier": "delete_risk/schema.py",
+			"hash": "721cdf5da1d5a3b227fcb6c3d2f34eca"
+		},
+		{
+			"identifier": "delete_task/schema.py",
+			"hash": "d06b1a474b927b0ba95618d4509d9fc4"
+		},
+		{
+			"identifier": "delete_user/schema.py",
+			"hash": "db8773d141f13cc301fe5126f15ac738"
+		},
+		{
+			"identifier": "delete_vendor/schema.py",
+			"hash": "39f1a7f183d3311284dd5408cf16e48f"
+		},
+		{
+			"identifier": "get_assessment/schema.py",
+			"hash": "685d21f34fba93eae12da9b992b27a9d"
+		},
+		{
+			"identifier": "get_assessments/schema.py",
+			"hash": "bdfa0c25aa3ccf8ac8b5c75be40407c4"
+		},
+		{
+			"identifier": "get_audit/schema.py",
+			"hash": "2974c01ba402b64a2f11c30e6b4fe538"
+		},
+		{
+			"identifier": "get_audits/schema.py",
+			"hash": "c6ed28844f9d8fb9bde03c942e324f73"
+		},
+		{
+			"identifier": "get_certification/schema.py",
+			"hash": "1ecd489561d6c1cd9e91431600aeefde"
+		},
+		{
+			"identifier": "get_certifications/schema.py",
+			"hash": "83d71adb332fc6a65a139a8a080bd2b9"
+		},
+		{
+			"identifier": "get_compliance_score/schema.py",
+			"hash": "8308c3e5289de1b3e2c302efdfb9122d"
+		},
+		{
+			"identifier": "get_contract/schema.py",
+			"hash": "78df7b92e937d5818eab605d8881e34a"
+		},
+		{
+			"identifier": "get_contracts/schema.py",
+			"hash": "e73900c2a712a0e8e6400c54f6da9bf0"
+		},
+		{
+			"identifier": "get_control_set/schema.py",
+			"hash": "e9b5a701a49212ca41a24df337732fd1"
+		},
+		{
+			"identifier": "get_control_sets/schema.py",
+			"hash": "8c5f4893577d71b9c7193170c30dc543"
+		},
+		{
+			"identifier": "get_incident/schema.py",
+			"hash": "fca0218f74889e0c6e1849ac36f3d7b5"
+		},
+		{
+			"identifier": "get_incidents/schema.py",
+			"hash": "011882afe5ab641ddbf176c8b9f57aaa"
+		},
+		{
+			"identifier": "get_it_asset/schema.py",
+			"hash": "05fa2b50d282cf7b0e695a6e550f5f32"
+		},
+		{
+			"identifier": "get_it_assets/schema.py",
+			"hash": "ed15f3fef7bb6f065890c601d750cf7c"
+		},
+		{
+			"identifier": "get_record/schema.py",
+			"hash": "73d5450e0250aa55182715a6b8ac20a6"
+		},
+		{
+			"identifier": "get_record_history/schema.py",
+			"hash": "c9e59b597bf9e0ba2061c071030c3aaa"
+		},
+		{
+			"identifier": "get_risk/schema.py",
+			"hash": "d674908e8572cebe127bc3a27b181d8f"
+		},
+		{
+			"identifier": "get_risks/schema.py",
+			"hash": "ca426d53265906bcfe7ec9a3064be5ee"
+		},
+		{
+			"identifier": "get_task/schema.py",
+			"hash": "1f30d2cfe0359ae70a53e05322df86ba"
+		},
+		{
+			"identifier": "get_tasks/schema.py",
+			"hash": "202bb8e3bcd6f3170b97abe066751cb8"
+		},
+		{
+			"identifier": "get_user/schema.py",
+			"hash": "ac2cd56b0ab7bcc08806095427e5d962"
+		},
+		{
+			"identifier": "get_users/schema.py",
+			"hash": "109e901beb10cd2bb5a9a3efb1bf2110"
+		},
+		{
+			"identifier": "get_vendor/schema.py",
+			"hash": "a2cd2adb1495a075dbf3cd2e2eaa18f0"
+		},
+		{
+			"identifier": "get_vendors/schema.py",
+			"hash": "033d73533f58058ccd2ca98bf0aa39e6"
+		},
+		{
+			"identifier": "list_records/schema.py",
+			"hash": "05c93d94b48799f9a44abc80bb449c3a"
+		},
+		{
+			"identifier": "update_assessment/schema.py",
+			"hash": "6afecea97ca750ee5ab2131c0f98162c"
+		},
+		{
+			"identifier": "update_audit/schema.py",
+			"hash": "74a1d1205cdd06902737785edaeaed17"
+		},
+		{
+			"identifier": "update_certification/schema.py",
+			"hash": "32b388ce9c1d70d88f0b68247bec9232"
+		},
+		{
+			"identifier": "update_contract/schema.py",
+			"hash": "1d5a95cc2ba7a7c83731145436b0f0b4"
+		},
+		{
+			"identifier": "update_control_set/schema.py",
+			"hash": "4a80e2fc032799e6e3655cc926f8dab3"
+		},
+		{
+			"identifier": "update_incident/schema.py",
+			"hash": "a4103e75b9fa88825269d85f2b064415"
+		},
+		{
+			"identifier": "update_it_asset/schema.py",
+			"hash": "9e8208a93d6c5cc9a65a0d00f2a84fbd"
+		},
+		{
+			"identifier": "update_record/schema.py",
+			"hash": "a34c90b38e3e93780d1d049c275424fd"
+		},
+		{
+			"identifier": "update_risk/schema.py",
+			"hash": "9ab0b62b63e5d9d583967d02a1bc50ea"
+		},
+		{
+			"identifier": "update_task/schema.py",
+			"hash": "fb5a94670572db9ba8fb994dab80e046"
+		},
+		{
+			"identifier": "update_user/schema.py",
+			"hash": "6da56dd8e9db06b17f520e489f8ad57e"
+		},
+		{
+			"identifier": "update_vendor/schema.py",
+			"hash": "d1b8572583f5b9acfa1435b20a98f94d"
+		},
+		{
+			"identifier": "upload_flat_file/schema.py",
+			"hash": "5df9baf08dcb959f31fa7ecd7377d60b"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "a7f1768f1fa14209acba5726efab4cf6"
+		},
+		{
+			"identifier": "monitor_compliance_drift/schema.py",
+			"hash": "321d431dd187fafcadaf208ed8eb4d06"
+		},
+		{
+			"identifier": "monitor_records/schema.py",
+			"hash": "00b970fa7335f0d2fd2db31eef57786b"
+		}
+	]
+}
