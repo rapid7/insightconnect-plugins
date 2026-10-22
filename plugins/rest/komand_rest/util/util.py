@@ -78,6 +78,20 @@ def check_header(headers: Union[Dict[str, str], None], header_key: str, header_v
     )
 
 
+def with_json_content_type(
+    default_headers: Union[Dict[str, str], None], headers: Union[Dict[str, str], None]
+) -> Union[Dict[str, str], None]:
+    """
+    This method will add 'Content-Type: application/json' to the headers unless the default or request headers set one
+    :param default_headers: Connection headers dict to read
+    :param headers: Request headers dict to extend
+    :return: Request headers with a Content-Type
+    """
+    if any(key.lower() == "content-type" for key in {**(default_headers or {}), **(headers or {})}):
+        return headers
+    return {**(headers or {}), "Content-Type": "application/json"}
+
+
 def write_to_file(file: dict, file_path: str) -> str:
     """
     This method will write an input file as bytes and return the file path
@@ -223,10 +237,7 @@ class RestAPI(object):
                 data = urlencode(data)
             elif isinstance(data, dict):
                 data = json.dumps(data)
-                if not any(
-                    key.lower() == "content-type" for key in {**(self.default_headers or {}), **(headers or {})}
-                ):
-                    headers = {**(headers or {}), "Content-Type": "application/json"}
+                headers = with_json_content_type(self.default_headers, headers)
             elif isinstance(data, str) and check_header(headers, "content-type", "application/json"):
                 data = data.replace("\n", "\\n")
             data = data.encode("utf-8") if data else None
