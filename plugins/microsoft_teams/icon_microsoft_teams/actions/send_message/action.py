@@ -2,11 +2,6 @@ import insightconnect_plugin_runtime
 from .schema import SendMessageInput, SendMessageOutput, Input, Output, Component
 
 # Custom imports below
-from icon_microsoft_teams.util.teams_utils import (
-    get_teams_from_microsoft,
-    get_channels_from_microsoft,
-    send_message,
-)
 from icon_microsoft_teams.util.komand_clean_with_nulls import remove_null_and_clean
 from icon_microsoft_teams.util.words_utils import add_words_values_to_message
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -22,40 +17,65 @@ class SendMessage(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        message = params.get(Input.MESSAGE)
-        team = params.get(Input.TEAM_NAME)
-        channel = params.get(Input.CHANNEL_NAME)
+        message_content = params.get(Input.MESSAGE)
+        team_name = params.get(Input.TEAM_NAME)
+        channel_name = params.get(Input.CHANNEL_NAME)
         chat_id = params.get(Input.CHAT_ID)
+        thread_id = params.get(Input.THREAD_ID)
 
         team_id = ""
         channel_id = ""
 
-        if team and channel:
-            teams = get_teams_from_microsoft(self.logger, self.connection, team)
+        if team_name and channel_name:
+            teams = self.connection.client.get_teams(team_name)
             if teams and isinstance(teams, list):
                 team_id = teams[0].get("id")
-                channels = get_channels_from_microsoft(self.logger, self.connection, team_id, channel)
+                channels = self.connection.client.get_channels(team_id, channel_name)
                 if channels and isinstance(channels, list):
                     channel_id = channels[0].get("id")
 
         if not chat_id and not team_id and not channel_id:
             raise PluginException(
                 cause="No chat ID or team ID with channel ID was provided.",
-                assistance="Please provide the chat ID to send the chat message or the team and channel details(name or"
-                " GUID) to send the message to a specific channel.",
+                assistance="Please provide the chat ID to send the chat message or the team and channel details "
+                "(name or GUID) to send the message to a specific channel.",
             )
 
-        message = send_message(
-            self.logger,
-            self.connection,
-            message,
-            team_id,
-            channel_id,
-            thread_id=params.get(Input.THREAD_ID, None),
-            chat_id=chat_id,
-        )
+        if chat_id:
+            result = self._send_chat_message_with_auto_install(chat_id, message_content)
+        else:
+            result = self.connection.bot.send_channel_message(
+                team_id=team_id,
+                channel_id=channel_id,
+                message=message_content,
+                content_type="text",
+                thread_id=thread_id,
+            )
 
-        message = remove_null_and_clean(message)
-        message = add_words_values_to_message(message)
+        # Build a message-like output from the bot response
+        output_message = {
+            "body": {"contentType": "text", "content": message_content},
+            "id": result.get("id", ""),
+        }
+        output_message = remove_null_and_clean(output_message)
+        output_message = add_words_values_to_message(output_message)
 
-        return {Output.MESSAGE: message}
+        return {Output.MESSAGE: output_message}
+
+    def _send_chat_message_with_auto_install(self, chat_id: str, message: str) -> dict:
+        """
+        Send a chat message, auto-installing the bot if it gets a 403 and
+        app_catalog_id is configured on the graph client.
+        """
+        try:
+            return self.connection.bot.send_chat_message(chat_id, message)
+        except PluginException as error:
+            if "not authorized" not in error.cause:
+                raise
+
+            if not self.connection.client.app_catalog_id:
+                raise
+
+            self.logger.info("Bot not in chat — installing app and retrying...")
+            self.connection.client.install_app_in_chat(chat_id)
+            return self.connection.bot.send_chat_message(chat_id, message)
