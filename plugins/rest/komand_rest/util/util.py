@@ -216,12 +216,17 @@ class RestAPI(object):
         try:
             # Check for urlencoded in headers to urlencode the data dict
             # Else run json.dumps(data)
+            # and send it as application/json unless the connection or action already set a Content-Type
             # Check for application/json in headers to replace new line characters for valid JSON
             # Else utf-8 encode to ensure valid characters
             if isinstance(data, dict) and check_header(headers, "content-type", "application/x-www-form-urlencoded"):
                 data = urlencode(data)
             elif isinstance(data, dict):
                 data = json.dumps(data)
+                if not any(
+                    key.lower() == "content-type" for key in {**(self.default_headers or {}), **(headers or {})}
+                ):
+                    headers = {**(headers or {}), "Content-Type": "application/json"}
             elif isinstance(data, str) and check_header(headers, "content-type", "application/json"):
                 data = data.replace("\n", "\\n")
             data = data.encode("utf-8") if data else None
