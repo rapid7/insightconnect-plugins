@@ -1,0 +1,112 @@
+{
+  "count": 4,
+  "results": [
+    {
+      "product": "nodejs",
+      "version": "20",
+      "latest_release": "20.20.2",
+      "release_date": "2023-04-18",
+      "eol_date": "2026-04-30",
+      "eol_boolean": null,
+      "status": "eol",
+      "days_until_eol": null,
+      "days_past_eol": 145,
+      "score": 60,
+      "grade": "C",
+      "grade_label": "Elevated risk",
+      "band": "High",
+      "factors": {
+        "eol_recency": 30,
+        "attack_surface": 30,
+        "cisa_kev_exposure": 0,
+        "extended_support": 0
+      },
+      "extended_support_available": true,
+      "extended_support_vendor": null,
+      "extended_support_date": null,
+      "score_card_url": "https://endoflife.ai/score/nodejs/20",
+      "product_url": "https://endoflife.ai/nodejs",
+      "cpe": [
+        "cpe:2.3:a:nodejs:node.js"
+      ],
+      "purl": [
+        "pkg:generic/node",
+        "pkg:docker/circleci/node",
+        "pkg:docker/library/node",
+        "pkg:docker/cimg/node",
+        "pkg:docker/bitnami/node",
+        "pkg:rpm/redhat/nodejs",
+        "pkg:rpm/redhat/nodejs24"
+      ],
+      "eol_date_source": "vendor-fetched",
+      "eol_date_source_url": "https://github.com/nodejs/Release/blob/main/schedule.json",
+      "eol_date_verified_at": "2026-09-17",
+      "eol_date_status": "ok",
+      "eol_date_agreement": 3,
+      "eol_date_confidence": "high",
+      "methodology_url": "https://endoflife.ai/risk-score",
+      "data_source": "https://github.com/nodejs/Release/blob/main/schedule.json",
+      "generated_at": "2026-09-22T02:05:20.025Z"
+    },
+    {
+      "product": "postgresql",
+      "version": "13",
+      "latest_release": "13.23",
+      "release_date": "2020-09-24",
+      "eol_date": "2025-11-13",
+      "eol_boolean": null,
+      "status": "eol",
+      "days_until_eol": null,
+      "days_past_eol": 313,
+      "score": 60,
+      "grade": "C",
+      "grade_label": "Elevated risk",
+      "band": "High",
+      "factors": {
+        "eol_recency": 30,
+        "attack_surface": 30,
+        "cisa_kev_exposure": 0,
+        "extended_support": 0
+      },
+      "extended_support_available": true,
+      "extended_support_vendor": null,
+      "extended_support_date": null,
+      "score_card_url": "https://endoflife.ai/score/postgresql/13",
+      "product_url": "https://endoflife.ai/postgresql",
+      "cpe": [
+        "cpe:2.3:a:postgresql:postgresql"
+      ],
+      "purl": [
+        "pkg:generic/postgresql",
+        "pkg:docker/library/postgres",
+        "pkg:deb/ubuntu/postgresql"
+      ],
+      "eol_date_source": "vendor-fetched",
+      "eol_date_source_url": "https://www.postgresql.org/support/versioning/",
+      "eol_date_verified_at": "2026-09-17",
+      "eol_date_status": "ok",
+      "eol_date_agreement": 3,
+      "eol_date_confidence": "high",
+      "methodology_url": "https://endoflife.ai/risk-score",
+      "data_source": "https://www.postgresql.org/support/versioning/",
+      "generated_at": "2026-09-22T02:05:20.116Z"
+    },
+    {
+      "slug": "nodejs",
+      "version": "99",
+      "error": "Version not found"
+    },
+    {
+      "slug": "not-a-product",
+      "error": "Product not found"
+    }
+  ],
+  "tier": "anon",
+  "kev_catalog": {
+    "generated": "2026-09-22",
+    "named": 126,
+    "ecosystem": 3,
+    "fingerprint": "393f0347"
+  },
+  "docs": "https://endoflife.ai/api"
+}
