@@ -80,8 +80,9 @@ Example output:
 
 #### Get Agent Details
 
-This action is used to find and display detailed information about a device. If additional pages of agents are 
-available, the action should be run again with the returned next cursor
+This action is used to find and display detailed information about a device. If several agents share the hostname, an 
+online one is returned, otherwise the first one found, and the choice is written to the action log. If additional pages 
+of agents are available, the action should be run again with the returned next cursor
 
 ##### Input
 
@@ -307,12 +308,14 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
+|is_asset_online|boolean|True|Whether the agent was online when the request was sent. If false, the request waits until the agent reconnects|True|
 |success|boolean|True|Was operation successful|True|
   
 Example output:
 
 ```
 {
+  "is_asset_online": true,
   "success": true
 }
 ```
@@ -461,6 +464,7 @@ Example output:
 
 # Version History
 
+* 3.1.0 - Updated `Get Agent Details` and `Quarantine Multiple` to choose an online agent when several share a hostname | Added `Is Asset Online` output to `Quarantine` | Fixed `Quarantine Multiple` skipping hosts on later result pages | Updated SDK to the latest version (6.6.1)
 * 3.0.9 - Updated SDK to the latest version (6.5.1)
 * 3.0.8 - Updated SDK to the latest version (6.4.3)
 * 3.0.7 - Added response checks to actions to improve error handling | Updated SDK to latest version (6.4.1)
