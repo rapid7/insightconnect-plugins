@@ -54,7 +54,7 @@ troubleshooting:
   - instead it's a unique identifier e.g. DU9I6T0F7R2S1J4XZHHA. A User ID can be obtained
   by passing a username to the Get User Status action.
 version_history:
-- 5.0.14 - Updated dependencies | Updated SDK to the latest version (6.6.1)
+- 5.0.14 - Updated SDK to the latest version (6.6.1)
 - "5.0.13 - Action `Get Users`: Fixed an issue where only the first 100 users were returned | Updated SDK to the latest version (6.6.0)"
 - 5.0.12 - Updated SDK to the latest version (6.5.1)
 - "5.0.11 - Task `Monitor Logs`: Updated admin logs handling for more than 1k results | Update SDK to the latest version (6.4.3)"
