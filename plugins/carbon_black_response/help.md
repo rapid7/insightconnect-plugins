@@ -1097,6 +1097,7 @@ Example output:
 
 # Version History
 
+* 3.3.3 - Updated dependencies | Updated SDK to the latest version (6.6.1)
 * 3.3.2 - Resolving Snyk Vulnerabilities | SDK Bump to latest version (6.3.7)
 * 3.3.1 - SDK Bump to latest version (6.3.6)
 * 3.3.0 - Adding 'validators', 'urllib3', 'requests', 'certifi' and bumping 'cbapi' to '1.7.10' to address snyk vulnerabilities | 'SDK' bump and Plugin refresh
