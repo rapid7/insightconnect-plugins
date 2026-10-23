@@ -521,7 +521,7 @@ Example output:
 
 # Version History
 
-* 5.0.3 - Fixed connection to OTRS 8 and later | Updated SDK to the latest version (6.6.0)
+* 5.0.3 - Fixed connection to OTRS 8 and later | Updated SDK to the latest version (6.6.1)
 * 5.0.2 - Correct spelling in help.md
 * 5.0.1 - Update dependency to PyOTRS 0.9 for authorization bug [PyOTRS issue 27](https://gitlab.com/rhab/PyOTRS/-/issues/27)
 * 5.0.0 - New spec and help.md format for the Extension Library | Fix spelling of variable titled Disposition and Service in Create Ticket log message

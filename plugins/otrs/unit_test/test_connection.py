@@ -49,6 +49,12 @@ class TestConnection(TestCase):
             self.assertIn(payload_key, json.loads(request_call.kwargs.get("data")))
         self.assertEqual(session_key, self.connection.client.client._session_key)
 
+        # Session is cleared after every call so a stale token is never reused
+        client = self.connection.client.client
+        self.assertIsNone(client.session_id_store.value)
+        self.assertIsNone(client.result_json)
+        self.assertEqual([], client.result)
+
     @parameterized.expand(
         [
             # Wrong credentials, reported by OTRS in the body

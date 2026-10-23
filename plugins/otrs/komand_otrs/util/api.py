@@ -220,17 +220,16 @@ class OTRSAPI:
                 data=error,
             ) from error
 
-        # Pending time needs to be in the future and have timezone info
+        # Treat a time without timezone info as UTC, OTRS expects the pending time in UTC
         if pending.tzinfo is None:
             pending = pending.replace(tzinfo=timezone.utc)
 
-        # Calculate the time difference between now and the pending time
-        time_difference = pending - datetime.now(timezone.utc)
-
-        # Update the ticket with the pending time
+        # Send the exact time, PyOTRS ticket_update_set_pending drops the minutes and rounds the hour down
         try:
-            self.client.ticket_update_set_pending(
-                ticket_id=ticket_id, pending_days=time_difference.days, pending_hours=time_difference.seconds // 3600
+            self.client.ticket_update(
+                ticket_id,
+                State="pending reminder",
+                PendingTime=Ticket.datetime_to_pending_time_text(pending.astimezone(timezone.utc)),
             )
         except (PyOTRSError, ValueError) as error:
             if NO_ACCESS_MESSAGE in str(error):

@@ -4,7 +4,6 @@ import sys
 sys.path.append(os.path.abspath("../"))
 
 import json
-from datetime import datetime, timedelta, timezone
 from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
@@ -66,6 +65,12 @@ class TestCreate(TestCase):
         self.assertEqual(PluginException.causes[PluginException.Preset.BAD_REQUEST], context.exception.cause)
         self.assertIn("Title is required", str(context.exception.data))
 
+        # Session is cleared after every call so a stale token is never reused
+        client = self.action.connection.client.client
+        self.assertIsNone(client.session_id_store.value)
+        self.assertIsNone(client.result_json)
+        self.assertEqual([], client.result)
+
     def test_create_session_failure(self, request_mock: MagicMock) -> None:
         # Setup mock to return the same response for each call
         request_mock.return_value = Util.response("session_error")
@@ -82,7 +87,6 @@ class TestCreate(TestCase):
         ticket["Ticket"][0]["SLAID"] = "3"
         ticket_get = Util.response("ticket_get")
         ticket_get._content = json.dumps(ticket).encode()
-        pending = (datetime.now(timezone.utc) + timedelta(days=2, hours=3)).isoformat()
 
         # Replies come back in call order, login first then create, pending time, SLA and get
         request_mock.side_effect = [
@@ -92,7 +96,9 @@ class TestCreate(TestCase):
             Util.response("ticket_update"),  # SLA
             ticket_get,
         ]
-        result = self.action.run({**PARAMETERS, Input.PENDINGTIME: pending, Input.SLA: "Gold", Input.SERVICE: "Email"})
+        result = self.action.run(
+            {**PARAMETERS, Input.PENDINGTIME: "2099-11-01T12:30:00+02:00", Input.SLA: "Gold", Input.SERVICE: "Email"}
+        )
         validate(result, self.action.output.schema)
         self.assertEqual({"ticket_id": 7, "ticket_number": 2018032601000027}, result)
         sessions = [call for call in request_mock.call_args_list if call.args[1].endswith("/Session")]
@@ -103,7 +109,8 @@ class TestCreate(TestCase):
         self.assertNotIn("PendingTime", create_payload.get("Ticket", {}))
         update_payload = json.loads(request_mock.call_args_list[2].kwargs.get("data"))
         self.assertEqual(
-            {"Year", "Month", "Day", "Hour", "Minute"}, set(update_payload.get("Ticket", {}).get("PendingTime"))
+            {"Year": 2099, "Month": 11, "Day": 1, "Hour": 10, "Minute": 30},
+            update_payload.get("Ticket", {}).get("PendingTime"),
         )
 
     def test_create_sla_not_set(self, request_mock: MagicMock) -> None:

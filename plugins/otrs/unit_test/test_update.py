@@ -4,7 +4,6 @@ import sys
 sys.path.append(os.path.abspath("../"))
 
 import json
-from datetime import datetime, timedelta, timezone
 from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
@@ -66,17 +65,22 @@ class TestUpdate(TestCase):
 
     @patch("requests.request")
     def test_update_with_pending_time(self, request_mock: MagicMock) -> None:
-        pending = (datetime.now(timezone.utc) + timedelta(days=1, hours=2)).isoformat()
-
         # Pending time goes in its own update first, then the main update. Both reuse one login
         request_mock.side_effect = [
             Util.response("access_token"),
             Util.response("ticket_update"),  # pending time
             Util.response("ticket_update"),
         ]
-        result = self.action.run({**PARAMETERS, Input.PENDINGTIME: pending, Input.NOARTICLE: False})
+        result = self.action.run({**PARAMETERS, Input.PENDINGTIME: "2099-11-01T12:30:00+02:00", Input.NOARTICLE: False})
         validate(result, self.action.output.schema)
         self.assertEqual(3, request_mock.call_count)
 
         # Only one login, so the session is reused between the two updates
         self.assertEqual(1, len([call for call in request_mock.call_args_list if call.args[1].endswith("/Session")]))
+
+        # The offset is converted to UTC and the minutes are kept
+        pending_payload = json.loads(request_mock.call_args_list[1].kwargs.get("data"))
+        self.assertEqual(
+            {"Year": 2099, "Month": 11, "Day": 1, "Hour": 10, "Minute": 30},
+            pending_payload.get("Ticket", {}).get("PendingTime"),
+        )
