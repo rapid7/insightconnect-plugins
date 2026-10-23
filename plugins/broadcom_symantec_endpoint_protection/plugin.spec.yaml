@@ -9,7 +9,7 @@ connection_version: 2
 vendor: rapid7
 sdk:
   type: slim
-  version: 6.6.0
+  version: 6.6.1
 support: rapid7
 supported_versions: ["v1 2025/08/21"]
 status: []
