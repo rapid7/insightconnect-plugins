@@ -6,7 +6,7 @@ title: Rapid7 Insight Agent
 description: Using the Insight Agent plugin from InsightConnect, you can quarantine,
   unquarantine and monitor potentially malicious IPs, addresses, hostnames, and devices
   across your organization
-version: 3.0.9
+version: 3.1.0
 connection_version: 2
 supported_versions: [Rapid7 Insight Agent 2024-08-23]
 vendor: rapid7
@@ -16,7 +16,7 @@ cloud_ready: true
 fedramp_ready: true
 sdk:
   type: slim
-  version: 6.5.1
+  version: 6.6.1
   user: nobody
 key_features:
 - The agent is used by [Rapid7 InsightIDR](https://www.rapid7.com/products/insightidr/)
@@ -35,6 +35,7 @@ links:
 references:
 - '[Manage Platform API Keys](https://docs.rapid7.com/insight/managing-platform-api-keys/)'
 version_history:
+- 3.1.0 - Updated `Get Agent Details` and `Quarantine Multiple` to choose an online agent when several share a hostname | Added `Is Asset Online` output to `Quarantine` | Fixed `Quarantine Multiple` skipping hosts on later result pages | Updated SDK to the latest version (6.6.1)
 - 3.0.9 - Updated SDK to the latest version (6.5.1)
 - 3.0.8 - Updated SDK to the latest version (6.4.3)
 - 3.0.7 - Added response checks to actions to improve error handling | Updated SDK
@@ -320,9 +321,10 @@ actions:
         required: false
   get_agent_details:
     title: Get Agent Details
-    description: Find and display detailed information about a device. If additional
-      pages of agents are available, the action should be run again with the returned
-      next cursor
+    description: Find and display detailed information about a device. If several agents
+      share the hostname, an online one is returned, otherwise the first one found, and the
+      choice is written to the action log. If additional pages of agents are available,
+      the action should be run again with the returned next cursor
     input:
       agent:
         title: Agent
@@ -418,6 +420,13 @@ actions:
       success:
         title: Success
         description: Was operation successful
+        type: boolean
+        example: true
+        required: true
+      is_asset_online:
+        title: Is Asset Online
+        description: Whether the agent was online when the request was sent. If false,
+          the request waits until the agent reconnects
         type: boolean
         example: true
         required: true

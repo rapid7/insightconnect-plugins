@@ -10,7 +10,7 @@ from typing import Any, Dict, List
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 from jsonschema import validate
-from util import Util
+from util import PAGES_CREDS, Util
 
 from icon_rapid7_insight_agent.actions.quarantine_multiple.action import QuarantineMultiple
 from icon_rapid7_insight_agent.actions.quarantine_multiple.schema import Input
@@ -56,3 +56,27 @@ class TestQuarantineMultiple(TestCase):
             action = Util.default_connector(QuarantineMultiple())
             action.run({Input.AGENT_ARRAY: [], Input.INTERVAL: 1000, Input.QUARANTINE_STATE: True})
         self.assertEqual(context.exception.cause, "Empty list provided.")
+
+    @parameterized.expand(
+        [
+            # Quarantine
+            ("quarantine", True),
+            # Unquarantine uses the agent from the listing, so it must work without another lookup
+            ("unquarantine", False),
+        ]
+    )
+    def test_quarantine_multiple_shared_hostnames(
+        self, mock_post: MagicMock, name: str, quarantine_state: bool
+    ) -> None:
+        action = Util.default_connector(QuarantineMultiple(), api_key=PAGES_CREDS)
+        hostnames = ["web01", "laptop-01", "web03"]
+        actual = action.run(
+            {Input.AGENT_ARRAY: hostnames, Input.INTERVAL: 300, Input.QUARANTINE_STATE: quarantine_state}
+        )
+
+        # WEB03 is on the second page and used to crash, and hosts after a match used to be skipped
+        self.assertEqual({"completed": hostnames, "failed": []}, actual)
+
+        # LAPTOP-01 has an offline record on the first page, the online one on the second must be used
+        sent = [call.args[0].body.decode() for call in mock_post.call_args_list]
+        self.assertTrue(any('"agentID": "new"' in body for body in sent))
