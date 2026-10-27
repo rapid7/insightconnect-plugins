@@ -6,7 +6,7 @@ from komand_active_directory_ldap.actions.enable_user.schema import Input, Outpu
 from komand_active_directory_ldap.actions.unlock_user import UnlockUser
 from komand_active_directory_ldap.connection import Connection
 
-from common import MockConnection, MockServer, default_connector
+from common import MockConnection, MockServer, MockSubtreeSearchConnection, default_connector
 
 
 class TestActionUnlockUser(TestCase):
@@ -18,6 +18,13 @@ class TestActionUnlockUser(TestCase):
         expected = {Output.SUCCESS: True}
 
         self.assertEqual(actual, expected)
+
+    @mock.patch("ldap3.Server", mock.MagicMock(return_value=MockServer))
+    @mock.patch("ldap3.Connection", mock.MagicMock(return_value=MockSubtreeSearchConnection()))
+    @default_connector(action=UnlockUser())
+    def test_unlock_user_dc_in_ou_name(self, action: UnlockUser) -> None:
+        actual = action.run({Input.DISTINGUISHED_NAME: "CN=Jane Doe,OU=Users,OU=NYDC,OU=Company,DC=example,DC=com"})
+        self.assertEqual({Output.SUCCESS: True}, actual)
 
     @mock.patch("ldap3.Server", mock.MagicMock(return_value=MockServer))
     @mock.patch("ldap3.Connection", mock.MagicMock(return_value=MockConnection()))

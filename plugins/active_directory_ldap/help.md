@@ -762,6 +762,7 @@ the query results, and then using the variable step $item.dn
 
 # Version History
 
+* 10.0.3 - Fixed an issue in the `Disable User`, `Enable User`, `Disable Users`, `Enable Users`, `Unlock User`, and `Add or Remove an Object from Group` actions where a valid DN could be reported as not found when an OU or CN in it contained `DC`
 * 10.0.2 - Updated SDK to the latest version (6.6.0)
 * 10.0.1 - Fixed issues with channel binding support | Updated SDK to the latest version (6.3.6)
 * 10.0.0 - Support for channel binding | Updated SDK to the latest version (6.3.3)

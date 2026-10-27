@@ -1,4 +1,5 @@
 MAX_ALIASES_NUMBER: int = 4
+USERS_PAGE_LIMIT: int = 300
 
 
 class Cause:

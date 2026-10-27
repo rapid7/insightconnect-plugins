@@ -12,7 +12,7 @@ from insightconnect_plugin_runtime.clients.oauth import OAuth20ClientMessages
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 from parameterized import parameterized
 
-from unit_test.mock import STUB_CONNECTION, mock_request_200, mock_request_400, mocked_request
+from mock import STUB_CONNECTION, mock_request_200, mock_request_400, mocked_request
 
 
 class TestConnection(TestCase):

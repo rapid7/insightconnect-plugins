@@ -95,7 +95,7 @@ class ADUtils:
         :param dn_list:
         :return: Will return a properly formatted search base
         """
-        dc_list = [s for s in dn_list if "DC" in s]
+        dc_list = [s for s in dn_list if s.upper().startswith("DC=")]
         search_base = ",".join(dc_list)
         return search_base
 

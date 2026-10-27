@@ -2799,7 +2799,7 @@ This trigger is used to get New Alerts
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |aggregates|[]aggregate_object|None|False|Aggregations to apply for all matching results|None|[{}]|None|None|
 |field_ids|[]string|None|False|Additional fields to include for each alert. No additional fields are included if field_ids is empty|None|[]|None|None|
-|frequency|integer|15|False|Poll frequency in seconds|None|15|None|None|
+|frequency|integer|15|False|Poll frequency in seconds. Values below 10 are raised to 10|None|15|None|None|
 |leql|string|None|False|The LEQL 'WHERE' clause to match against|None||None|None|
 |terms|[]terms_object|None|False|The search terms to match against|None||None|None|
   
@@ -2917,7 +2917,7 @@ This trigger is used to get New Investigations
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|frequency|integer|15|False|Poll frequency in seconds|None|15|None|None|
+|frequency|integer|15|False|Poll frequency in seconds. Values below 10 are raised to 10|None|15|None|None|
 |search|[]object|None|False|The criteria for which entities to return|None|[{"field": "Example Field", "operator": "EQUALS", "value": "Test"}]|None|None|
   
 Example input:
@@ -3428,6 +3428,8 @@ Example output:
 
 # Version History
 
+* 12.0.12 - Triggers: `Get New Alerts` and `Get New Investigations` - Enforced a minimum `frequency` | Improved error retry handling | Updated dependencies
+* 12.0.11 - Trigger `Get New Alerts`: Updated for transient network errors and dedupe state persisted across restarts | Fixed pagination | Added requests timeout
 * 12.0.10 - Trigger `Get New Investigations` updated for IDR API latency issues and dedupe logic added | Updated dependencies
 * 12.0.9 - Retry requests with backoff on transient InsightIDR 5xx responses to resolve intermittent 500 errors
 * 12.0.8 - Enabled cache to configure the appropriate permissions in the Dockerfile
