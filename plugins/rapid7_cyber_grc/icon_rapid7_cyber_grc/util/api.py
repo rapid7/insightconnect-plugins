@@ -437,9 +437,7 @@ class CyberGrcAPI:
     ) -> requests.Response:
         """Send the HTTP request, translating transport-level errors into PluginExceptions."""
         try:
-            return self.session.request(
-                method, url, params=params, json=json_body, verify=self.ssl_verify, timeout=120
-            )
+            return self.session.request(method, url, params=params, json=json_body, verify=self.ssl_verify, timeout=120)
         except requests.exceptions.Timeout as error:
             raise PluginException(
                 cause=f"Cyber GRC did not respond within 120 seconds to {operation}.",
