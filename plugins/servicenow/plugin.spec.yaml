@@ -9,7 +9,7 @@ description: "[ServiceNow](https://www.servicenow.com/) is a tool for managing i
   \ can be monitored and processed for use in a Rapid7 InsightConnect workflow.\n\n\
   Note: This plugin affects only the underlying tables in a ServiceNow instance, not\
   \ its UI. Hence, this plugin will work seamlessly with Virtual Task Boards"
-version: 8.1.6
+version: 8.1.7
 connection_version: 8
 supported_versions: [2023-10-28 Tokyo]
 vendor: rapid7
@@ -32,7 +32,7 @@ hub_tags:
   features: []
 sdk:
   type: slim
-  version: 6.6.0
+  version: 6.6.1
   user: nobody
 key_features:
 - Search, Read, Create, Delete, and Update incidents to accelerate ticketing operations
@@ -79,6 +79,7 @@ troubleshooting:
   connected account can read neither the journal table nor the incident, the action returns
   no entries and reports the reason in the log."
 version_history:
+- 8.1.7 - Updated SDK to the latest version (6.6.1)
 - '8.1.6 - `Get Incident Comments and Work Notes`: Read comments and work notes from
   the incident record when the `sys_journal_field` table is not readable by the connected
   account | Added validation of the record identifiers and table names used to build
