@@ -14,6 +14,7 @@ class Input:
 
 
 class Output:
+    IS_ASSET_ONLINE = "is_asset_online"
     SUCCESS = "success"
 
 
@@ -63,6 +64,12 @@ class QuarantineOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "is_asset_online": {
+      "type": "boolean",
+      "title": "Is Asset Online",
+      "description": "Whether the agent was online when the request was sent. If false, the request waits until the agent reconnects",
+      "order": 2
+    },
     "success": {
       "type": "boolean",
       "title": "Success",
@@ -71,6 +78,7 @@ class QuarantineOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
+    "is_asset_online",
     "success"
   ],
   "definitions": {}

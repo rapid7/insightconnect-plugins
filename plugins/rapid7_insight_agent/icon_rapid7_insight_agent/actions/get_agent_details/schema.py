@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Find and display detailed information about a device. If additional pages of agents are available, the action should be run again with the returned next cursor"
+    DESCRIPTION = "Find and display detailed information about a device. If several agents share the hostname, an online one is returned, otherwise the first one found, and the choice is written to the action log. If additional pages of agents are available, the action should be run again with the returned next cursor"
 
 
 class Input:
