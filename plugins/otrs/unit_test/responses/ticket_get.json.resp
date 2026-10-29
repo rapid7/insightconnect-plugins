@@ -1,0 +1,88 @@
+{
+  "Ticket": [
+    {
+      "Age": 9455,
+      "PriorityID": "4",
+      "Type": "Unclassified",
+      "Responsible": "root@localhost",
+      "StateID": "6",
+      "ResponsibleID": "1",
+      "ChangeBy": "1",
+      "EscalationTime": "0",
+      "OwnerID": "1",
+      "Changed": "2018-08-29 20:20:00",
+      "RealTillTimeNotUsed": "1538241540",
+      "GroupID": "1",
+      "Owner": "root@localhost",
+      "TypeID": "1",
+      "Created": "2018-08-29 18:12:38",
+      "Priority": "4 high",
+      "UntilTime": 2665727,
+      "EscalationUpdateTime": "0",
+      "Queue": "Junk",
+      "QueueID": "3",
+      "State": "pending reminder",
+      "Title": "Test",
+      "CreateBy": "1",
+      "TicketID": "52",
+      "StateType": "pending reminder",
+      "UnlockTimeout": "1535574000",
+      "EscalationResponseTime": "0",
+      "EscalationSolutionTime": "0",
+      "LockID": "1",
+      "TicketNumber": "2018082901000049",
+      "ArchiveFlag": "n",
+      "Lock": "unlock",
+      "SLAID": "",
+      "ServiceID": "",
+      "CustomerID": null,
+      "DynamicField": [
+        {
+          "Name": "ITSMImpact",
+          "Value": "3 normal"
+        },
+        {
+          "Name": "ITSMReviewRequired",
+          "Value": [
+            "No",
+            "Yes"
+          ]
+        }
+      ],
+      "Article": [
+        {
+          "Attachment": [
+            {
+              "Filename": "dump.txt",
+              "ContentType": "text/plain",
+              "Disposition": "attachment",
+              "FilesizeRaw": "15",
+              "Content": "VGhpcyBpcyBhIHRlc3QK\n",
+              "FileID": "1"
+            }
+          ],
+          "ContentType": "text/plain; charset=iso-8859-15",
+          "SenderTypeID": "1",
+          "ContentCharset": "iso-8859-15",
+          "SenderType": "agent",
+          "CreateBy": "1",
+          "TicketID": "52",
+          "Body": "blah",
+          "ChangeBy": "1",
+          "ChangeTime": "2018-08-29 18:12:38",
+          "MimeType": "text/plain",
+          "Subject": "UnitTest",
+          "IsVisibleForCustomer": "0",
+          "CreateTime": "2018-08-29 18:12:38",
+          "IncomingTime": "1535566358",
+          "Charset": "iso-8859-15",
+          "CommunicationChannelID": "1",
+          "ArticleNumber": 1,
+          "ArticleID": "92",
+          "To": "Junk",
+          "From": "root@localhost"
+        }
+      ]
+    }
+  ]
+}

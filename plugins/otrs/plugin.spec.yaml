@@ -4,14 +4,54 @@ products: [insightconnect]
 name: otrs
 title: OTRS
 description: Create and manage OTRS tickets
-version: 5.0.2
+version: 5.0.3
+connection_version: 5
 vendor: rapid7
 support: community
+supported_versions: ["OTRS 6", "OTRS 8", "OTRS 2026.1.2"]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/otrs
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://otrs.com/
+sdk:
+  type: slim
+  version: 6.6.1
+  user: nobody
+key_features:
+- Create tickets with articles, attachments, dynamic fields, pending time and SLA
+- Update tickets, optionally without adding an article
+- Search for tickets by queue, customer ID, dynamic fields and other ticket fields
+- Retrieve a ticket with its articles, attachments and dynamic fields
+requirements:
+- OTRS server URL and the username and password of an agent account
+- The `GenericTicketConnectorREST` web service configured and enabled on the OTRS server
+troubleshooting:
+- The plugin uses the OTRS `GenericTicketConnectorREST` web service. Make sure it is imported and enabled in the OTRS admin interface under Web Services, and that the `Session`, `Ticket` and `TicketSearch` routes are configured
+- OTRS 8 and later issue access tokens instead of session IDs. The plugin requests an access token first and falls back to a session ID on older OTRS versions automatically, so no extra configuration is needed
+version_history:
+- 5.0.3 - Fixed connection to OTRS 8 and later | Updated SDK to the latest version (6.6.1)
+- 5.0.2 - Correct spelling in help.md
+- 5.0.1 - Update dependency to PyOTRS 0.9 for authorization bug [PyOTRS issue 27](https://gitlab.com/rhab/PyOTRS/-/issues/27)
+- 5.0.0 - New spec and help.md format for the Extension Library | Fix spelling of variable titled Disposition and Service in Create Ticket log message
+- 4.0.1 - Fix issue in Retrieve action to handle Escalation parameters being returned as strings | Adds new parameter No Article to update, this will submit updates to a ticket without adding a generated article
+- 4.0.0 - Updated the Web Service configuration file | Update dependency on PyOTRS | Fixed issue where Article and Attachment was required to update a ticket in action `update` | Added an External Parameters field to action `search` | Fixed issue with action `search` where dynamic fields were not used correctly for searching | Fixed issue where Escalation parameters where not set to the right type
+- 3.0.5 - Update dependency to PyOTRS v2.1 for security bug [CWE-601](https://cwe.mitre.org/data/definitions/601.html)
+- 3.0.4 - Fixed issue where SLA and Service would be set if passed as a parameter for the action Create
+- 3.0.3 - Fixed issue where FilesizeRaw schema is returning a string when it needs to return an integer for Retrieve action
+- 3.0.2 - Fixed retrieve action to process dynamic fields containing multiselect values
+- 3.0.1 - Bug fix for dynamic fields missing values | Update web service to KomandConnectorREST
+- 3.0.0 - Update all actions | Moved OTRS web service to REST | Added support for pending time to actions Create and Update
+- 2.0.0 - Support web server mode | Update to new credential types | Bug fix for creating article and ticket fields
+- 1.0.0 - Bug fix for creating and updating article fields
+- 0.1.2 - Update to v2 Python plugin architecture | Fix bug with schema, spec, and retrieve action
+- 0.1.1 - SSL bug fix in SDK
+- 0.1.0 - Initial plugin
+links:
+- '[OTRS](https://github.com/OTRS/otrs)'
+references:
+- '[OTRS](https://github.com/OTRS/otrs)'
+- '[PyOTRS library](https://pyotrs.readthedocs.io/en/latest/)'
 tags:
 - ticket
 - itsm
@@ -21,14 +61,17 @@ hub_tags:
   features: []
 connection:
   server:
+    title: Server
     type: string
-    description: OTRS Server
+    description: OTRS server URL
     required: true
+    example: https://otrs.example.com
   credentials:
     title: Credentials
     description: OTRS username and password
     type: credential_username_password
     required: true
+    example: '{"username": "agent", "password": "mypassword"}'
 types:
   new_article:
     CommunicationChannelID:
@@ -684,89 +727,106 @@ actions:
         description: Ticket title
         type: string
         required: false
+        example: Suspicious login detected
       Queue:
         title: Queue
         description: Queue the ticket is to be inserted in
         type: string
         required: false
+        example: Raw
       Lock:
         title: Lock
         description: Lock name
         type: string
         required: false
+        example: unlock
       Type:
         title: Type
         description: Ticket type e.g. Incident
         type: string
         required: false
+        example: Incident
       Service:
         title: Service
         description: Service name
         type: string
         required: false
+        example: IT Security
       SLA:
         title: SLA
         description: SLA name
         type: string
         required: false
+        example: Gold
       State:
         title: State
         description: Ticket state
         type: string
         required: false
         default: new
+        example: new
       Priority:
         title: Priority
         description: Ticket priority. 1=very low, 2=low, 3=normal, 4=high, 5=very
           high, etc
         type: string
         required: false
+        example: 3 normal
       PendingTime:
         title: Pending Time
         description: Pending time field
         type: date
         required: false
+        example: 2026-11-01T12:00:00Z
       Owner:
         title: Owner
         description: Ticket owner
         type: string
         required: false
+        example: agent
       Responsible:
         title: Responsible
         description: User responsible for the ticket
         type: string
         required: false
+        example: agent
       CustomerUser:
         title: Customer User
         description: Customer user associated with the ticket e.g test_customer
         type: string
         required: false
+        example: test_customer
       article:
         title: Article
         description: Ticket article
         type: new_article
         required: false
+        example: '{"Subject": "Suspicious login", "Body": "Suspicious login detected for user jdoe", "MimeType": "text/plain", "Charset": "UTF-8", "CommunicationChannel": "Internal", "SenderType": "agent"}'
       dynamic_fields:
         title: Dynamic Fields
         description: Fields as array of objects e.g. [{"name":"TestName1","pattern":"TestValue1"},{"name":"TestName2","pattern":"TestValue2"}]
         type: '[]dynamic_field'
         required: false
+        example: [{"name": "TestName1", "value": "TestValue1"}]
       attachments:
         title: Attachments
         description: Attachments as array of objects e.g. [{"filename":"notes.txt","content":"VGhpcyBpcyBhIHRlc3QK"}]
         type: '[]attachment'
         required: false
+        example: [{"filename": "notes.txt", "content": "VGhpcyBpcyBhIHRlc3QK"}]
     output:
       ticket_id:
         title: Ticket ID
-        description: Ticket ID
+        description: ID of the created ticket
         type: integer
         required: false
+        example: 1
       ticket_number:
         title: Ticket Number
-        description: Ticket number
+        description: Number of the created ticket
         type: integer
         required: false
+        example: 2026101910000011
   update:
     title: Update Ticket
     description: Update OTRS ticket
@@ -776,88 +836,105 @@ actions:
         description: Ticket ID
         type: integer
         required: false
+        example: 7
       Priority:
         title: Priority
         description: Updated ticket priority e.g. 1 very low, 2 low, 3 normal, 4 high,
           5 very high and so on
         type: string
         required: false
+        example: 4 high
       PendingTime:
         title: Pending Time
         description: Pending time
         type: date
         required: false
+        example: 2026-11-01T12:00:00Z
       Lock:
         title: Lock
         description: Lock
         type: string
         required: false
+        example: lock
       Service:
         title: Service
         description: Service
         type: string
         required: false
+        example: IT Security
       SLA:
         title: SLA
         description: SLA
         type: string
         required: false
+        example: Gold
       Queue:
         title: Queue
         description: Updated queue
         type: string
         required: false
+        example: Junk
       Responsible:
         title: Responsible
         description: Responsible
         type: string
         required: false
+        example: agent
       Title:
         title: Title
         description: Updated title
         type: string
         required: false
+        example: Suspicious login confirmed
       CustomerUser:
         title: Customer User
         description: Updated customer user
         type: string
         required: false
+        example: test_customer
       Type:
         title: Type
         description: Updated type e.g. Incident
         type: string
         required: false
+        example: Incident
       NoArticle:
         title: No Article
         description: Will not add article to ticket
         type: boolean
         required: true
+        example: false
       Article:
         title: Article
         description: New article (gets appended)
         type: new_article
         required: false
+        example: '{"Subject": "Suspicious login", "Body": "Suspicious login detected for user jdoe", "MimeType": "text/plain", "Charset": "UTF-8", "CommunicationChannel": "Internal", "SenderType": "agent"}'
       DynamicFields:
         title: Dynamic Fields
         description: Updated dynamic fields e.g. [{"name":"TestName1","value":"TestValue1"},{"name":"TestName2","value":"TestValue2"}]
         type: '[]dynamic_field'
         required: false
+        example: [{"name": "TestName1", "value": "TestValue1"}]
       Attachments:
         title: Attachments
         description: New attachments as array of objects e.g. [{"filename":"notes.txt","content":"VGhpcyBpcyBhIHRlc3QK"}]
         type: '[]attachment'
         required: false
+        example: [{"filename": "notes.txt", "content": "VGhpcyBpcyBhIHRlc3QK"}]
     output:
       ticket_id:
         title: Ticket ID
-        description: Ticket ID
+        description: ID of the updated ticket
         type: integer
         required: false
+        example: 1
       ticket_number:
         title: Ticket Number
-        description: Ticket number
+        description: Number of the updated ticket
         type: integer
         required: false
+        example: 2026101910000011
   search:
     title: Ticket Search
     description: Search for OTRS tickets
@@ -867,26 +944,32 @@ actions:
         description: Customer ID
         type: string
         required: false
+        example: example-customer
       external_params:
         title: External Parameters
-        description: A key value object thats not a Dynamic Field e.g [{"Title":"Test Ticket"}]
+        description: A key value object that is not a Dynamic Field e.g [{"Title":"Test Ticket"}]
         type: '[]external_param'
         required: false
+        example: [{"Title": "Test Ticket"}]
       queue:
+        title: Queue
         description: Queue to search in
         type: string
         required: false
+        example: Raw
       dynamic_fields:
         title: Dynamic Fields
         description: Fields as array of objects e.g. [{"name":"TestName1","value":"TestValue1", "operation":"Equals"},{"name":"TestName2","value":"TestValue2"}]. The value field is what will be searched for
         type: '[]search_dynamic_field'
         required: false
+        example: [{"name": "TestName1", "value": "TestValue1", "operator": "Equals"}]
     output:
       ticket_ids:
         title: Ticket IDs
         description: IDs of tickets matching search criteria
         type: '[]string'
         required: false
+        example: ["1", "2"]
   retrieve:
     title: Retrieve Ticket
     description: Retrieve OTRS ticket
@@ -896,9 +979,11 @@ actions:
         description: Ticket ID
         type: integer
         required: false
+        example: 7
     output:
       Ticket:
         title: Ticket
-        description: Ticket returned
+        description: Ticket details with articles, attachments and dynamic fields
         type: Ticket
         required: false
+        example: '{"TicketID": 1, "TicketNumber": "2026101910000011", "Title": "Suspicious login", "Queue": "Raw", "State": "new", "Priority": "3 normal", "Article": [{"ArticleID": "1", "TicketID": 1, "Subject": "Suspicious login", "Body": "Investigate login from new location", "IsVisibleForCustomer": 1}], "DynamicField": [{"Name": "Severity", "Value": ["High"]}]}'

@@ -1,14 +1,12 @@
-import komand
-from .schema import UpdateInput, UpdateOutput, Component
+import insightconnect_plugin_runtime
+from .schema import UpdateInput, UpdateOutput, Input, Output, Component
 
 # Custom imports below
-from pyotrs import Article, Attachment, DynamicField
-from komand_otrs.util.utils import PyOTRSUtils
-import mimetypes
+from typing import Any
 
 
-class Update(komand.Action):
-    def __init__(self):
+class Update(insightconnect_plugin_runtime.Action):
+    def __init__(self) -> None:
         super(self.__class__, self).__init__(
             name="update",
             description=Component.DESCRIPTION,
@@ -16,88 +14,40 @@ class Update(komand.Action):
             output=UpdateOutput(),
         )
 
-    def run(self, params={}):  # noqa: MC0001
-        no_article = params.pop("NoArticle")
-        client = self.connection.client
-        attachments = []
-        try:
-            client.session_create()
-        except Exception as e:
-            raise Exception(
-                "Unable to connect to OTRS Web Service! Please check your connection information and \
-            that you have properly configured OTRS web service. Information on configuring the webservice can be found \
-            in the Connection help"
-            )
+    def run(self, params: dict[str, Any] = {}) -> dict[str, Any]:
+        # START INPUT BINDING - DO NOT REMOVE
+        ticket_id = params.get(Input.TICKETID, 0)
+        priority = params.get(Input.PRIORITY, "")
+        pending_time = params.get(Input.PENDINGTIME, "")
+        lock = params.get(Input.LOCK, "")
+        service = params.get(Input.SERVICE, "")
+        sla = params.get(Input.SLA, "")
+        queue = params.get(Input.QUEUE, "")
+        responsible = params.get(Input.RESPONSIBLE, "")
+        title = params.get(Input.TITLE, "")
+        customer_user = params.get(Input.CUSTOMERUSER, "")
+        ticket_type = params.get(Input.TYPE, "")
+        no_article = params.get(Input.NOARTICLE, False)
+        article = params.get(Input.ARTICLE, {})
+        dynamic_fields = params.get(Input.DYNAMICFIELDS, [])
+        attachments = params.get(Input.ATTACHMENTS, [])
+        # END INPUT BINDING - DO NOT REMOVE
 
-        # dynamic fields
-        new_dynamic_fields = params.get("DynamicFields")
-        del params["DynamicFields"]
-
-        params = komand.helper.clean(params)
-
-        # cleaning up params
-        new_article = params.get("Article", None)
-        if params.get("Article"):
-            del params["Article"]
-            # helper.clean will not remove empty list. If these are left empty and not removed the plugin will fail
-            if "ExcludeMuteNotificationToUserID" in new_article:
-                if not new_article["ExcludeMuteNotificationToUserID"]:
-                    del new_article["ExcludeMuteNotificationToUserID"]
-            if "ExcludeNotificationToUserID" in new_article:
-                if not new_article["ExcludeNotificationToUserID"]:
-                    del new_article["ExcludeNotificationToUserID"]
-
-            if "ForceNotificationToUserID" in new_article:
-                if not new_article["ForceNotificationToUserID"]:
-                    del new_article["ForceNotificationToUserID"]
-
-            new_article = Article(new_article)
-
-        # Set attachments
-        if params.get("Attachments"):
-            new_attachments = params.pop("Attachments")
-
-            for attachment in new_attachments:
-                filename = attachment["filename"]
-                content = attachment["content"]
-                mimetype = mimetypes.guess_type(filename)
-                attachments.append(Attachment.create_basic(Content=content, ContentType=mimetype[0], Filename=filename))
-
-        ticket_id = params.get("TicketID")
-        del params["TicketID"]
-
-        dynamic_fields = []
-        for fields in new_dynamic_fields:
-            dynamic_fields.append(DynamicField(**fields))
-
-        #  Pending time
-        if params.get("PendingTime").startswith("0001-01-01"):
-            del params["PendingTime"]
-        else:
-            # Format date
-            PyOTRSUtils.add_pendingtime(self, client, params.get("PendingTime"), ticket_id)
-            del params["PendingTime"]
-
-        other_options = params
-
-        if no_article:
-            # If attachment exists it will add default Article
-            if other_options.get("Attachments"):
-                del other_options["Attachments"]
-
-            ticket_update_results = client.ticket_update(
-                ticket_id=ticket_id, dynamic_fields=dynamic_fields, **other_options
-            )
-        else:
-            ticket_update_results = client.ticket_update(
-                ticket_id=ticket_id,
-                article=new_article,
-                attachments=attachments,
-                dynamic_fields=dynamic_fields,
-                **other_options,
-            )
-
-        return {
-            "ticket_id": int(ticket_update_results["TicketID"]),
-            "ticket_number": int(ticket_update_results["TicketNumber"]),
-        }
+        result = self.connection.client.update_ticket(
+            ticket_id=ticket_id,
+            priority=priority,
+            pending_time=pending_time,
+            lock=lock,
+            service=service,
+            sla=sla,
+            queue=queue,
+            responsible=responsible,
+            title=title,
+            customer_user=customer_user,
+            ticket_type=ticket_type,
+            no_article=no_article,
+            article=article,
+            attachments=attachments,
+            dynamic_fields=dynamic_fields,
+        )
+        return {Output.TICKET_ID: result.get("TicketID"), Output.TICKET_NUMBER: result.get("TicketNumber")}
