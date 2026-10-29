@@ -1,0 +1,121 @@
+[
+  {
+    "type": "relationship",
+    "spec_version": "2.1",
+    "id": "relationship--02861c62-0bf9-5eba-92aa-03ce90deb1ee",
+    "created": "2025-09-20T13:03:14.219Z",
+    "modified": "2025-09-20T19:02:34.504Z",
+    "extensions": {
+      "extension-definition--ddd2bf71-3c91-5f4d-8251-10cd685737c3": {
+        "extension_type": "property-extension",
+        "luminar_tenant_id":"XXXXX"
+      }
+    },
+    "relationship_type": "related-to",
+    "source_ref": "malware--fe203b39-f99a-53a5-9786-90bfddf1b6c7",
+    "target_ref": "incident--2fea2f99-cb64-5863-9aec-8607d0c69c14"
+  },
+  {
+    "type": "relationship",
+    "spec_version": "2.1",
+    "id": "relationship--a38e01eb-55af-5b28-85f3-8fe97c4249a6",
+    "created": "2025-09-20T13:03:14.219Z",
+    "modified": "2025-09-20T19:02:34.504Z",
+    "extensions": {
+      "extension-definition--ddd2bf71-3c91-5f4d-8251-10cd685737c3": {
+        "extension_type": "property-extension",
+        "luminar_tenant_id":"XXXXX"
+      }
+    },
+    "relationship_type": "related-to",
+    "source_ref": "user-account--88974857-b720-5174-a5e2-cc92bbf6cd38",
+    "target_ref": "incident--2fea2f99-cb64-5863-9aec-8607d0c69c14"
+  },
+  {
+    "type": "relationship",
+    "spec_version": "2.1",
+    "id": "relationship--7643742a-f87f-5ce2-aa86-d58596bde521",
+    "created": "2025-09-20T13:03:14.219Z",
+    "modified": "2025-09-20T19:02:34.504Z",
+    "extensions": {
+      "extension-definition--ddd2bf71-3c91-5f4d-8251-10cd685737c3": {
+        "extension_type": "property-extension",
+        "luminar_tenant_id":"XXXXX"
+      }
+    },
+    "relationship_type": "related-to",
+    "source_ref": "ipv4-addr--ae1e92c2-b017-50c1-be50-69497511d434",
+    "target_ref": "incident--2fea2f99-cb64-5863-9aec-8607d0c69c14"
+  },
+  {
+    "type": "incident",
+    "spec_version": "2.1",
+    "id": "incident--2fea2f99-cb64-5863-9aec-8607d0c69c14",
+    "created": "2025-09-20T13:03:14.219Z",
+    "modified": "2025-09-20T19:02:34.504Z",
+    "extensions": {
+      "extension-definition--ddd2bf71-3c91-5f4d-8251-10cd685737c3": {
+        "extension_type": "property-extension",
+        "luminar_tenant_id":"XXXXX",
+        "luminar_threat_score": 71,
+        "collection_date": "2025-09-20T19:00:04.687Z",
+        "computer_name": "KARENBUENDIA (Smart FS_Karen)"
+      }
+    },
+    "name": "Generic Stealer - KARENBUENDIA (Smart FS_Karen) - 112.201.109.103 - 20/09/2025",
+    "created_by_ref": "identity--5bf1ac35-8d08-509e-b31a-044cb09b4199"
+  },
+  {
+    "type": "malware",
+    "spec_version": "2.1",
+    "id": "malware--fe203b39-f99a-53a5-9786-90bfddf1b6c7",
+    "created": "2025-09-20T13:03:14.219Z",
+    "modified": "2025-09-20T19:02:34.504Z",
+    "extensions": {
+      "extension-definition--ddd2bf71-3c91-5f4d-8251-10cd685737c3": {
+        "extension_type": "property-extension",
+        "luminar_tenant_id":"XXXXX"
+      }
+    },
+    "name": "Generic Stealer",
+    "capabilities": [
+      "steals-authentication-credentials"
+    ],
+    "malware_types": [
+      "spyware"
+    ],
+    "is_family": true
+  },
+  {
+    "type": "user-account",
+    "spec_version": "2.1",
+    "id": "user-account--88974857-b720-5174-a5e2-cc92bbf6cd38",
+    "extensions": {
+      "extension-definition--ddd2bf71-3c91-5f4d-8251-10cd685737c3": {
+        "url": "https://fam.7-eleven.com/idp/SSO.saml2",
+        "source": "ATO feed",
+        "extension_type": "property-extension",
+        "luminar_tenant_id":"XXXXX",
+        "monitoring_plan_terms": [
+          "7-eleven.com"
+        ],
+        "credential_is_fresh": true
+      }
+    },
+    "credential": "leaked-****",
+    "account_login": "trista.baker",
+    "display_name": "trista.baker"
+  },
+  {
+    "type": "ipv4-addr",
+    "spec_version": "2.1",
+    "id": "ipv4-addr--ae1e92c2-b017-50c1-be50-69497511d434",
+    "extensions": {
+      "extension-definition--ddd2bf71-3c91-5f4d-8251-10cd685737c3": {
+        "extension_type": "property-extension",
+        "luminar_tenant_id":"XXXXX"
+      }
+    },
+    "value": "112.201.109.103"
+  }
+]
