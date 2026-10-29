@@ -34,7 +34,7 @@ key_features:
 - Upper case, lower case, and trim a string
 - Replace parts of a string
 version_history:
-- 1.4.9 - Updated SDK to the latest version (6.6.1) | Shortened the `Split String to Object` action description
+- 1.4.9 - Updated SDK to the latest version (6.6.1) | Shortened the `Split String to Object` action description and moved its output object note to Troubleshooting
 - 1.4.8 - Updated SDK to the latest version (6.5.1)
 - 1.4.7 - Updated SDK to the latest version (6.4.3)
 - 1.4.6 - Updated SDK to the latest version (6.4.2)
@@ -61,6 +61,10 @@ troubleshooting:
   dgdemo RGWin64\" Computer_Type=\"Windows\",\"string_delimiter\": \"=\"}`\n  + Example\
   \ output: `{ \"object\": { \"Computer_ID\": \"bef41e8b-47b8-e188-8e43-3a2b662dd55d\"\
   , \"Computer_Name\": \"dgdemo RGWin64\", \"Computer_Type\": \"Windows\" } }`\n\n"
+- "`Split String to Object`: the output object on the action's page can be modified\
+  \ to pre-populate the workflow with the names of the keys. It allows users the ability\
+  \ to use the green selector and choose a specific variable later in the workflow\
+  \ by name. Input templating would need to be used to obtain variables by name otherwise."
 - There may be complex string manipulation needs that are likely outside the scope
   of this plugin. If this is the case, consider using the Python 3 Script plugin instead.
 links:
