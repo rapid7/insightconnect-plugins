@@ -6,6 +6,7 @@ import json
 class Input:
     API_KEY = "api_key"
     REGION = "region"
+    TIMEOUT = "timeout"
 
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -35,6 +36,13 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
         "ap"
       ],
       "order": 2
+    },
+    "timeout": {
+      "type": "integer",
+      "title": "Timeout",
+      "description": "Number of seconds to wait for a response from Surface Command before the request times out",
+      "default": 300,
+      "order": 3
     }
   },
   "required": [

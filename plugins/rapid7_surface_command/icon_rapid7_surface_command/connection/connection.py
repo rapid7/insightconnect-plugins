@@ -5,6 +5,7 @@ from .schema import ConnectionSchema, Input
 
 from icon_rapid7_surface_command.util.api_connection import (
     ApiConnection,
+    DEFAULT_TIMEOUT,
 )
 from insightconnect_plugin_runtime.exceptions import (
     ConnectionTestException,
@@ -22,9 +23,13 @@ class Connection(insightconnect_plugin_runtime.Connection):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         self.api_key = params.get(Input.API_KEY)
         self.region = params.get(Input.REGION)
+        self.timeout = params.get(Input.TIMEOUT, DEFAULT_TIMEOUT)
         # END INPUT BINDING - DO NOT REMOVE
 
-        self.api = ApiConnection(self.api_key.get("secretKey"), self.region, self.logger)
+        # Connections saved before the timeout input existed, or left empty, fall back to the default
+        self.api = ApiConnection(
+            self.api_key.get("secretKey"), self.region, self.logger, timeout=self.timeout or DEFAULT_TIMEOUT
+        )
         self.logger.info("Setup Complete")
         return self
 

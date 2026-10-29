@@ -26,13 +26,15 @@ The connection configuration accepts the following parameters:
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |api_key|credential_secret_key|None|True|User or Organization Key from the Insight Platform|None|a5zy0a6g-504e-46bz-84xx-1b3f5ci36l99|None|None|
 |region|string|us|True|Region|["us", "us2", "us3", "eu", "ca", "au", "ap"]|us|None|None|
+|timeout|integer|300|False|Number of seconds to wait for a response from Surface Command before the request times out|None|300|None|None|
 
 Example input:
 
 ```
 {
   "api_key": "a5zy0a6g-504e-46bz-84xx-1b3f5ci36l99",
-  "region": "us"
+  "region": "us",
+  "timeout": 300
 }
 ```
 
@@ -166,6 +168,7 @@ Example output:
 
 # Version History
 
+* 1.3.0 - Add optional connection input | Timeout | Increase default request timeout from 90 to 300 seconds | Updated SDK to the latest version (6.6.1)
 * 1.2.0 - Add new action | Tag Assets in Bulk
 * 1.1.0 - Update action title | Add new action | Run Adhoc Query
 * 1.0.0 - Initial plugin
