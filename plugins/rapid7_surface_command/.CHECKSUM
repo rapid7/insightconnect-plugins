@@ -1,7 +1,7 @@
 {
-	"spec": "d7d476dd515fe3a2e7237fa0e84df97c",
-	"manifest": "0363fb657f564cdacb107ec986c3fc54",
-	"setup": "c090202d467841c6922e783900bb61f2",
+	"spec": "9d10d5a795648bae0fe1bdbab4620d87",
+	"manifest": "c3b15c8807c924cbcaa758ddc942e442",
+	"setup": "b4799924fa0cc45bef93957b2abbc903",
 	"schemas": [
 		{
 			"identifier": "run_adhoc_query/schema.py",
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "1abf3190d494884739b830d01290a736"
+			"hash": "48adc66886d962accadd560d77e8e77e"
 		}
 	]
 }
