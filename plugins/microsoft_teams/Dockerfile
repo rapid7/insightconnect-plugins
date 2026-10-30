@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.5.1 AS builder
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.6.0 AS builder
 
 WORKDIR /workspace
 
@@ -11,7 +11,7 @@ ADD . /workspace
 RUN pip install .
 RUN pip uninstall -y setuptools
 
-FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.5.1
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:6.6.0
 
 LABEL organization=rapid7
 LABEL sdk=python
@@ -27,6 +27,7 @@ RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 ENV PYTHONPATH="/workspace:${PYTHONPATH}"
 
 RUN rm -rf /root/.cache;
+RUN mkdir -p /workspace/cache && chown -R nobody /workspace/cache
 RUN mkdir -p /workspace/tmp && chown -R nobody /workspace/tmp
 
 # User to run plugin code. The two supported users are: root, nobody
