@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="math-rapid7-plugin",
-    version="1.2.9",
+    version="1.2.10",
     description="This plugin allows basic arithmetic functions to be performed",
     author="rapid7",
     author_email="",
