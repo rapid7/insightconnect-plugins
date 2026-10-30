@@ -3428,6 +3428,7 @@ Example output:
 
 # Version History
 
+* 12.0.13 - Actions: `Advanced Query on Log` and `Advanced Query on Log Set` - Resubmit a query that stops making progress, within the step timeout | SDK bump to 6.6.1
 * 12.0.12 - Triggers: `Get New Alerts` and `Get New Investigations` - Enforced a minimum `frequency` | Improved error retry handling | Updated dependencies
 * 12.0.11 - Trigger `Get New Alerts`: Updated for transient network errors and dedupe state persisted across restarts | Fixed pagination | Added requests timeout
 * 12.0.10 - Trigger `Get New Investigations` updated for IDR API latency issues and dedupe logic added | Updated dependencies

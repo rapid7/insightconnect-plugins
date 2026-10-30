@@ -30,6 +30,12 @@ RETRYABLE_STATUS_CODES = {500, 502, 503, 504}
 # record). All other methods the plugin issues (GET, DELETE) are idempotent.
 RETRYABLE_POST_ENDPOINT_SUFFIXES = ("_search", "/search")
 
+# Constants for Advanced Query on Log / Log Set action.py
+# A Log Search query can stop making progress while a fresh copy of it returns in seconds, so a query whose
+# progress has not changed for this many polls (one per second) is resubmitted while the step timeout allows.
+STALLED_QUERY_SECONDS = 30
+MAX_QUERY_RESUBMITS = 2
+
 # Constants for Get New Alerts trigger.py
 TOTAL_SIZE = 100
 
