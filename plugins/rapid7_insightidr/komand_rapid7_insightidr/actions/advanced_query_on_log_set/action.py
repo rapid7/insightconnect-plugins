@@ -104,9 +104,9 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
             if entry in query:
                 return True
 
-    def get_results_from_callback(
+    def get_results_from_callback(  # noqa: MC0001
         self, callback_url: str, timeout: int, statistical: bool, request_id: str, stall_seconds: Optional[int] = None
-    ) -> [object]:  # noqa: MC0001
+    ) -> [object]:
         """
         Get log entries from a callback URL.
 
