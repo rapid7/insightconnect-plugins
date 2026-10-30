@@ -6,10 +6,11 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 import time
 from komand_rapid7_insightidr.util.parse_dates import parse_dates
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
-from komand_rapid7_insightidr.util.util import send_session_request, get_logging_context
+from komand_rapid7_insightidr.util.util import send_session_request, get_logging_context, QueryStalledError
+from komand_rapid7_insightidr.util.constants import STALLED_QUERY_SECONDS, MAX_QUERY_RESUBMITS
 from uuid import uuid4
 from requests import HTTPError
-from typing import Tuple
+from typing import Optional, Tuple
 
 
 class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
@@ -65,8 +66,26 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
             log_id, query, time_from, time_to, statistical, request_id
         )
 
-        if callback_url and not log_entries:
-            log_entries = self.get_results_from_callback(callback_url, timeout, statistical, request_id)
+        resubmits = 0
+        while callback_url and not log_entries:
+            # A query can stop making progress on the Log Search side while a fresh copy of it returns in seconds,
+            # so resubmit a stalled query while the timeout allows. The last attempt polls until the timeout runs out.
+            stall_seconds = STALLED_QUERY_SECONDS if resubmits < MAX_QUERY_RESUBMITS else None
+            try:
+                log_entries = self.get_results_from_callback(
+                    callback_url, timeout, statistical, request_id, stall_seconds
+                )
+                break
+            except QueryStalledError as stalled:
+                resubmits += 1
+                timeout = stalled.time_left
+                self.logger.warning(
+                    f"Query progress stuck at {stalled.progress} for {STALLED_QUERY_SECONDS} seconds. "
+                    f"Resubmitting it ({resubmits} of {MAX_QUERY_RESUBMITS}) with {timeout} seconds left."
+                )
+                callback_url, log_entries = self.maybe_get_log_entries(
+                    log_id, query, time_from, time_to, statistical, request_id
+                )
 
         if log_entries and not statistical:
             log_entries = ResourceHelper.get_log_entries_with_new_labels(
@@ -98,7 +117,7 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
                 return True
 
     def get_results_from_callback(
-        self, callback_url: str, timeout: int, statistical: bool, request_id: str
+        self, callback_url: str, timeout: int, statistical: bool, request_id: str, stall_seconds: Optional[int] = None
     ) -> [object]:  # noqa: MC0001
         """
         Get log entries from a callback URL.
@@ -107,6 +126,8 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
         :param timeout: int - How long to wait for results before timing out.
         :param statistical: bool - Whether to fetch statistical results or event logs.
         :param request_id: str - The request ID for logging context.
+        :param stall_seconds: Optional[int] - Raise QueryStalledError once the query's progress has not changed for
+            this many seconds and time is left. None polls until the timeout runs out.
         :return: list of log entries or statistical data.
         """
         self.logger.info(f"Trying to get results from callback URL: {callback_url}")
@@ -132,7 +153,9 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
             results_object = response.json()
 
             if "progress" in results_object:
-                self.logger.info(f"Progress: {results_object.get('progress')}")
+                progress = results_object.get("progress")
+                self.logger.info(f"Progress: {progress}")
+                polls_without_progress = 0
                 while "progress" in results_object and counter > 0:
                     time.sleep(1)
                     counter -= 1
@@ -155,6 +178,16 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
                             assistance=f"Could not get logs from: {callback_url}",
                             data=response.text,
                         )
+
+                    # Outside the try block above, which would turn this into a PluginException
+                    if "progress" in results_object:
+                        if results_object.get("progress") == progress:
+                            polls_without_progress += 1
+                        else:
+                            progress = results_object.get("progress")
+                            polls_without_progress = 0
+                        if stall_seconds and polls_without_progress >= stall_seconds and counter > 0:
+                            raise QueryStalledError(progress=progress, time_left=counter)
 
             if statistical:
                 log_entries = results_object
