@@ -1,6 +1,6 @@
 # Description
 
-[endoflife.ai](https://endoflife.ai) provides end-of-life dates, support status and EOL Risk Scores for 500+ software products. This plugin uses the [endoflife.ai API](https://endoflife.ai/api) to enrich assets, findings and tickets with lifecycle data for triage
+[endoflife.ai](https://endoflife.ai) provides end-of-life dates, support status and EOL Risk Scores for 700+ software products. This plugin uses the [endoflife.ai API](https://endoflife.ai/api) to enrich assets, findings and tickets with lifecycle data for triage
 
 # Key Features
 
@@ -10,7 +10,7 @@
 
 # Requirements
 
-* No account is required. An optional API key from [endoflife.ai](https://endoflife.ai/api) raises the daily request limit
+* An API key from [endoflife.ai](https://endoflife.ai/api#free-key) is required from November 16, 2026 at 00:00 UTC, when the API stops answering requests without one (until then the plugin also works without a key). A free key is emailed at once; a paid key raises the daily request limit
 
 # Supported Product Versions
 
@@ -24,7 +24,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|api_key|credential_secret_key|None|False|Optional API key from endoflife.ai. Sent as the X-API-Key header and raises the daily request limit|None|8e4f2a1c9b7d3e6f0a5c2b8d1e7f4a9c|None|None|
+|api_key|credential_secret_key|None|False|API key from endoflife.ai, sent as the X-API-Key header. Required from November 16, 2026, when the API stops answering requests without one; a free key does not expire|None|8e4f2a1c9b7d3e6f0a5c2b8d1e7f4a9c|None|None|
 |url|string|https://api.endoflife.ai|True|Base URL of the endoflife.ai API|None|https://api.endoflife.ai|None|None|
 
 Example input:
@@ -320,7 +320,7 @@ Example output when the version is not tracked:
 
 ## Troubleshooting
 
-* Anonymous requests share a daily limit per source IP address. A `429` response means the limit was hit; set an API key in the connection to raise it
+* Until November 16, 2026, anonymous requests share a daily limit per source IP address; from then they get a 401 and the connection needs an API key. A `429` response means the limit was hit; set an API key in the connection to raise it
 * A `found` output of `false` means the product or version is not tracked by endoflife.ai. Product slugs are lowercase, for example `nodejs`, `windows-server`, `postgresql`. The `message` output carries the API's own explanation and, for unknown products, suggested slugs
 * Versions are matched by release cycle, for example `20` for Node.js 20.x, `2019` for Windows Server 2019, `8.0` for .NET 8
 * Only the product slug and version are sent to api.endoflife.ai. No asset names, hostnames or other data leave InsightConnect

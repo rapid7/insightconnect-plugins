@@ -17,7 +17,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "api_key": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "API Key",
-      "description": "Optional API key from endoflife.ai. Sent as the X-API-Key header and raises the daily request limit",
+      "description": "API key from endoflife.ai, sent as the X-API-Key header. Required from November 16, 2026, when the API stops answering requests without one; a free key does not expire",
       "order": 1
     },
     "url": {

@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 setup(
     name="endoflife_ai-endoflife_ai-plugin",
     version="1.0.0",
-    description="[endoflife.ai](https://endoflife.ai) provides end-of-life dates, support status and EOL Risk Scores for 500+ software products. This plugin uses the [endoflife.ai API](https://endoflife.ai/api) to enrich assets, findings and tickets with lifecycle data for triage",
+    description="[endoflife.ai](https://endoflife.ai) provides end-of-life dates, support status and EOL Risk Scores for 700+ software products. This plugin uses the [endoflife.ai API](https://endoflife.ai/api) to enrich assets, findings and tickets with lifecycle data for triage",
     author="endoflife_ai",
     author_email="",
     url="",

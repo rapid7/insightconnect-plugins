@@ -7,7 +7,7 @@ from sys import argv
 Name = "endoflife.ai"
 Vendor = "endoflife_ai"
 Version = "1.0.0"
-Description = "[endoflife.ai](https://endoflife.ai) provides end-of-life dates, support status and EOL Risk Scores for 500+ software products. This plugin uses the [endoflife.ai API](https://endoflife.ai/api) to enrich assets, findings and tickets with lifecycle data for triage"
+Description = "[endoflife.ai](https://endoflife.ai) provides end-of-life dates, support status and EOL Risk Scores for 700+ software products. This plugin uses the [endoflife.ai API](https://endoflife.ai/api) to enrich assets, findings and tickets with lifecycle data for triage"
 
 
 def main():

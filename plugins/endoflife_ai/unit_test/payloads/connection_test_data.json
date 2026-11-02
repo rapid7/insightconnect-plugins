@@ -1,7 +1,7 @@
 {
   "name": "endoflife.ai API",
   "version": "1.0.0",
-  "description": "EOL dates and EOL Risk Scores\u00e2\u201e\u00a2 for 500+ software products.",
+  "description": "EOL dates and EOL Risk Scores\u00e2\u201e\u00a2 for 700+ software products.",
   "endpoints": {
     "products": "GET /v1/products",
     "product": "GET /v1/product/:slug",
