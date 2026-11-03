@@ -1385,6 +1385,7 @@ Example output:
 
 # Version History
 
+* 6.1.1 - Updated SDK to the latest version (6.6.1)
 * 6.1.0 - Add new action Search Machines | Updated SDK to the latest version (6.5.1)
 * 6.0.6 - Updated SDK to the latest version (6.5.1)
 * 6.0.5 - Updated dependencies | Updated SDK to the latest version (6.4.3)
