@@ -1,0 +1,24 @@
+{
+  "ip": "198.51.100.42",
+  "source_workspaces": ["GreyNoise", "UserWorkspace"],
+  "is_stage_1": true,
+  "is_stage_2": false,
+  "first_seen": "2025-03-01T00:00:00Z",
+  "last_seen": "2025-03-15T12:30:00Z",
+  "scanner_ips": ["203.0.113.7"],
+  "scanner_count": 5,
+  "file_count": 1,
+  "active_files": [
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "md5": "795bc7ce13f60d61e9ac03611dd36d90",
+      "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+      "threat_name": "Trojan.GenericKD.46542",
+      "vt_detection_count": 42,
+      "vt_engine_count": 71,
+      "file_name": "payload.bin",
+      "size": 24576,
+      "type": "application/x-executable"
+    }
+  ]
+}
