@@ -31,7 +31,7 @@ links:
 references:
   - "[Broadcom Symantec Endpoint Protection](https://www.broadcom.com/products/cyber-security/endpoint/end-user)"
 version_history:
-  - "2.0.9 - Updated dependencies"
+  - "2.0.9 - Updated dependencies | Updated SDK to the latest version (6.6.1)"
   - "2.0.8 - Updated dependencies"
   - "2.0.7 - Updated dependencies | Updated SDK to the latest version (6.6.0)"
   - "2.0.6 - Updated dependencies"
