@@ -271,6 +271,7 @@ Example output:
 
 # Version History
 
+* 2.0.5 - Updated dependencies | Updated SDK to the latest version (6.6.1)
 * 2.0.4 - Updated SDK to the latest version (6.5.1)
 * 2.0.3 - Updated dependencies | Updated SDK to the latest version (6.4.3)
 * 2.0.2 - Updated SDK to the latest version (6.3.10)
