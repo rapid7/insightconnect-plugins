@@ -727,6 +727,11 @@ types:
       description: "Extended Fields"
       type: object
       order: 48
+    users:
+      title: "Users"
+      description: "The users the task is assigned to, by Cyber GRC user ID. Get Users returns each user's email address"
+      type: "[]entity_user"
+      order: 49
   task_vendor_lookup:
     id:
       title: "ID"
@@ -2974,7 +2979,7 @@ actions:
         order: 5
       owner:
         title: "Owner"
-        description: "Return only tasks assigned to this user, given as an email address or a numeric Cyber GRC user ID. The API exposes the assignee as a nested object with no filterable ID field, so this match is applied by the plugin after the records are read, which means Top and Skip apply to the matching tasks rather than to every task"
+        description: "Return only tasks assigned to this user, given as an email address or a numeric Cyber GRC user ID. An email address is looked up in Users to find the user ID. The API cannot filter on a task's assignees, so this match is applied by the plugin after the records are read, which means Top and Skip apply to the matching tasks rather than to every task"
         type: string
         required: false
         example: "user@example.com"

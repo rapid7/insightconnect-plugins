@@ -201,7 +201,7 @@ The literal rules are worth knowing, because getting one wrong is the usual caus
 * Dates and times are unquoted ISO 8601 in UTC, for example `2026-12-31T00:00:00.000Z`. Quoting one is rejected.
 * An empty field is tested with `eq null` or `ne null`, and a date comparison is worth pairing with `ne null` so records that have never had a date set are excluded deliberately rather than by accident.
 * OData also defines functions such as `contains(name, 'Access')` and `startswith(name, 'Q1')`. They are not supported uniformly across every collection, so try one before relying on it.
-* A field that holds a nested object, such as a task's `assignedTo`, has no filterable value beside it. Get Tasks has an **Owner** input for that case, which matches the assignee's email address or user ID after the records are read.
+* A field that holds a nested object or a list, such as a task's `users` (its assignees), has no filterable value beside it. Get Tasks has an **Owner** input for that case, which matches the assignee's user ID, or looks up the user ID for an email address, after the records are read.
 
 An expression the API cannot parse is answered with a **400 and the reason**, not with an empty result, and the plugin surfaces that reason on the failed step. So a step that returns nothing means the filter was valid and matched nothing.
 
@@ -1328,6 +1328,9 @@ Example output:
     "Status ID": {},
     "Task Type ID": {},
     "Trend": {},
+    "Users": [
+      {}
+    ],
     "Vendors": [
       {
         "ID": 0,
@@ -3879,6 +3882,9 @@ Example output:
     "Status ID": {},
     "Task Type ID": {},
     "Trend": {},
+    "Users": [
+      {}
+    ],
     "Vendors": [
       {
         "ID": 0,
@@ -3901,7 +3907,7 @@ This action is used to retrieve tasks from Cyber GRC, optionally narrowed with a
 |filter|string|None|False|OData $filter expression used to narrow the results, e.g. contains(name, 'phishing') and statusID eq 3|None|statusID eq 3|None|None|
 |order_by|string|None|False|OData $orderby expression, e.g. modifiedDate desc|None|modifiedDate desc|None|None|
 |overdue_only|boolean|False|False|Return only tasks whose Due Date has already passed. Applied in addition to Due Within Days, so setting both returns only the overdue tasks|None|False|None|None|
-|owner|string|None|False|Return only tasks assigned to this user, given as an email address or a numeric Cyber GRC user ID. The API exposes the assignee as a nested object with no filterable ID field, so this match is applied by the plugin after the records are read, which means Top and Skip apply to the matching tasks rather than to every task|None|user@example.com|None|None|
+|owner|string|None|False|Return only tasks assigned to this user, given as an email address or a numeric Cyber GRC user ID. An email address is looked up in Users to find the user ID. The API cannot filter on a task's assignees, so this match is applied by the plugin after the records are read, which means Top and Skip apply to the matching tasks rather than to every task|None|user@example.com|None|None|
 |select|string|None|False|Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field|None|id,name,statusID|None|None|
 |skip|integer|0|False|Number of matching records to skip before returning results. To read a large result set in batches, set Top to the batch size and raise Skip by Top on each run until Count is less than Top|None|0|None|None|
 |status_id|integer|0|False|Return only tasks in this status. Leave empty or set to 0 for every status|None|3|None|None|
@@ -4058,6 +4064,9 @@ Example output:
       "Status ID": {},
       "Task Type ID": {},
       "Trend": {},
+      "Users": [
+        {}
+      ],
       "Vendors": [
         {
           "ID": 0,
@@ -5466,6 +5475,9 @@ Example output:
     "Status ID": {},
     "Task Type ID": {},
     "Trend": {},
+    "Users": [
+      {}
+    ],
     "Vendors": [
       {
         "ID": 0,
@@ -5972,6 +5984,7 @@ Example output:
 |Status ID|integer|None|None|Status ID|None|
 |Task Type ID|integer|None|None|Task Type ID|None|
 |Trend|string|None|None|Trend|None|
+|Users|[]entity_user|None|None|The users the task is assigned to, by Cyber GRC user ID. Get Users returns each user's email address|None|
 |Vendors|[]task_vendor_lookup|None|None|Vendors|None|
   
 **task_vendor_lookup**

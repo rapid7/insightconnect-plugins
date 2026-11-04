@@ -31,7 +31,7 @@ class UpdateRiskInput(insightconnect_plugin_runtime.Input):
     "record": {
       "type": "object",
       "title": "Risk",
-      "description": "The fields to write, as a JSON object matching the UpdateRiskDto schema in the Rapid7 Cyber GRC API reference",
+      "description": "The fields to write, as a JSON object matching the UpdateRiskDto schema in the Rapid7 Cyber GRC API reference. A description over 2000 characters is truncated to fit the Cyber GRC limit, with a warning in the job log, rather than failing the step",
       "order": 2
     }
   },

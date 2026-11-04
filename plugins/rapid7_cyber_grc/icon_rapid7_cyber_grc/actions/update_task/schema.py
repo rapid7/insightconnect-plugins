@@ -407,6 +407,15 @@ class UpdateTaskOutput(insightconnect_plugin_runtime.Output):
           "title": "Extended Fields",
           "description": "Extended Fields",
           "order": 48
+        },
+        "users": {
+          "type": "array",
+          "title": "Users",
+          "description": "The users the task is assigned to, by Cyber GRC user ID. Get Users returns each user's email address",
+          "items": {
+            "$ref": "#/definitions/entity_user"
+          },
+          "order": 49
         }
       }
     },

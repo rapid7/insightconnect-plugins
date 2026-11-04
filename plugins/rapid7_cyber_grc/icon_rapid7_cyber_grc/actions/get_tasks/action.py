@@ -7,10 +7,9 @@ from .schema import GetTasksInput, GetTasksOutput, Input, Output, Component
 # Custom imports below
 from ...util.dates import date_window_clauses
 
-# The field holding the assignee on a task, and the two fields inside it a caller is
-# likely to know the owner by.
-ASSIGNEE_FIELD = "assignedTo"
-ASSIGNEE_EMAIL = "userEmail"
+# The live API returns a task's assignee only in its users list, as user IDs with no email
+# address; the documented assignedTo object comes back null and is dropped from $select.
+ASSIGNEE_FIELD = "users"
 ASSIGNEE_ID = "usersID"
 
 
@@ -53,10 +52,14 @@ class GetTasks(insightconnect_plugin_runtime.Action):
 
         owner = (owner or "").strip()
         if owner:
-            # The assignee is a nested object with no filterable scalar ID beside it, so an
-            # owner cannot be given to $filter and is applied here after the read. Top and
-            # Skip are held back from the API for the same reason: they have to count the
+            # The assignee is a list of user IDs that cannot be filtered on, so an owner
+            # cannot be given to $filter and is applied here after the read. Top and Skip
+            # are held back from the API for the same reason: they have to count the
             # owner's tasks, not every task the rest of the query matched.
+            owner_ids = self._owner_ids(owner)
+            if not owner_ids:
+                self.logger.info(f"No Cyber GRC user has the email address {owner}, so no task is assigned to it")
+                return {Output.TASKS: [], Output.COUNT: 0}
             select = self._with_assignee(select)
 
         records = self.connection.client.list_records(
@@ -69,7 +72,7 @@ class GetTasks(insightconnect_plugin_runtime.Action):
         )
 
         if owner:
-            matching = [record for record in records if self._assigned_to(record, owner)]
+            matching = [record for record in records if self._assigned_to(record, owner_ids)]
             self.logger.info(f"{len(matching)} of {len(records)} task(s) are assigned to {owner}")
             records = matching[skip:] if skip else matching
             if top:
@@ -87,10 +90,16 @@ class GetTasks(insightconnect_plugin_runtime.Action):
             fields.append(ASSIGNEE_FIELD)
         return ",".join(fields)
 
+    def _owner_ids(self, owner):
+        """The user IDs an owner names: the ID itself, or the users holding that email address."""
+        if owner.isdigit():
+            return {owner}
+        wanted = owner.casefold()
+        users = self.connection.client.list_records("Users", select="id,email")
+        return {str(user.get("id")) for user in users if str(user.get("email") or "").strip().casefold() == wanted}
+
     @staticmethod
-    def _assigned_to(record, owner):
-        """Match the owner against the assignee's email address or numeric user ID."""
-        assignee = record.get(ASSIGNEE_FIELD) or {}
-        wanted = owner.strip().casefold()
-        email = str(assignee.get(ASSIGNEE_EMAIL) or "").strip().casefold()
-        return wanted in (email, str(assignee.get(ASSIGNEE_ID) or ""))
+    def _assigned_to(record, owner_ids):
+        """True when any user the task is assigned to is one of the owner's user IDs."""
+        assignees = record.get(ASSIGNEE_FIELD) or []
+        return any(str(user.get(ASSIGNEE_ID)) in owner_ids for user in assignees if isinstance(user, dict))

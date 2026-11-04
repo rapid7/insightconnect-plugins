@@ -59,7 +59,7 @@ class GetTasksInput(insightconnect_plugin_runtime.Input):
     "owner": {
       "type": "string",
       "title": "Owner",
-      "description": "Return only tasks assigned to this user, given as an email address or a numeric Cyber GRC user ID. The API exposes the assignee as a nested object with no filterable ID field, so this match is applied by the plugin after the records are read, which means Top and Skip apply to the matching tasks rather than to every task",
+      "description": "Return only tasks assigned to this user, given as an email address or a numeric Cyber GRC user ID. An email address is looked up in Users to find the user ID. The API cannot filter on a task's assignees, so this match is applied by the plugin after the records are read, which means Top and Skip apply to the matching tasks rather than to every task",
       "order": 6
     },
     "select": {
@@ -468,6 +468,15 @@ class GetTasksOutput(insightconnect_plugin_runtime.Output):
           "title": "Extended Fields",
           "description": "Extended Fields",
           "order": 48
+        },
+        "users": {
+          "type": "array",
+          "title": "Users",
+          "description": "The users the task is assigned to, by Cyber GRC user ID. Get Users returns each user's email address",
+          "items": {
+            "$ref": "#/definitions/entity_user"
+          },
+          "order": 49
         }
       }
     },

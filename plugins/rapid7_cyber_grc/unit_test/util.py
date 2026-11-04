@@ -19,8 +19,12 @@ ODATA_CONTEXT = f"{BASE_URL}/api/v2/$metadata#Risks"
 # returned in a single response, which is how the live API behaves today.
 PAGED_ENTITY = "Tasks"
 
-# The assignee of each paged task, which is the field the Get Tasks owner match reads.
-TASK_ASSIGNEES = {1: ("Alice@Example.com", 11), 2: ("bob@example.com", 22)}
+# The assignee of each paged task, by Cyber GRC user ID, and the users those IDs belong
+# to. The live API gives a task's assignee only as a users list of IDs with no email
+# (its documented assignedTo object comes back null), so an owner given as an email
+# address has to be looked up in Users first.
+TASK_ASSIGNEES = {1: 11, 2: 22}
+USERS = [{"id": 11, "email": "Alice@Example.com"}, {"id": 22, "email": "bob@example.com"}, {"id": 33, "email": None}]
 
 
 class Meta:
@@ -86,10 +90,10 @@ def collection(records: list, next_link: str = None) -> dict:
 
 
 def task(record_id: int) -> dict:
-    """A task carrying the nested assignee the Get Tasks owner match reads."""
+    """A task shaped as the live API returns it: assignedTo null, the assignee in users."""
     body = record(record_id)
-    email, users_id = TASK_ASSIGNEES[record_id]
-    body["assignedTo"] = {"userEmail": email, "usersID": users_id}
+    body["assignedTo"] = None
+    body["users"] = [{"usersID": TASK_ASSIGNEES[record_id], "associatedUserID": 100 + record_id}]
     return body
 
 
@@ -203,6 +207,8 @@ class Util:
             if params.get("$top"):
                 rows = rows[: int(params["$top"])]
             return MockResponse(200, collection(rows))
+        if entity == "Users" and params.get("$select") == "id,email":
+            return MockResponse(200, collection(USERS))
         if entity == PAGED_ENTITY and "page2" not in url:
             return MockResponse(200, collection([task(1)], next_link=f"{BASE_URL}/api/v2/{entity}?page2=true"))
         if "page2" in url:

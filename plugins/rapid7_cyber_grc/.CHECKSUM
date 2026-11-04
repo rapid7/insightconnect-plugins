@@ -1,11 +1,11 @@
 {
-	"spec": "2a8210d95db3fbb262f438053f103ae4",
+	"spec": "baced416edb8538e9516a3e723c0d880",
 	"manifest": "23c7165c978900a85f96394e0bd06677",
 	"setup": "c23b172fb8cb44c629460a060173c29e",
 	"schemas": [
 		{
 			"identifier": "add_comment/schema.py",
-			"hash": "405777ef6c3e0c798883262b4b6449af"
+			"hash": "1b742e494bf072c6f3c21ea94f81224f"
 		},
 		{
 			"identifier": "count_records/schema.py",
@@ -45,11 +45,11 @@
 		},
 		{
 			"identifier": "create_risk/schema.py",
-			"hash": "7dc4115cc71c1be4256763aecc0e2178"
+			"hash": "0c5bc0f4a37b90e674c69f5094249f0f"
 		},
 		{
 			"identifier": "create_task/schema.py",
-			"hash": "97abd34f532ccf2c1bbcd29b945f5e48"
+			"hash": "1e9102f95cca832759c02e03c8169c05"
 		},
 		{
 			"identifier": "create_user/schema.py",
@@ -185,11 +185,11 @@
 		},
 		{
 			"identifier": "get_task/schema.py",
-			"hash": "577bc0c7a915f561f77e4da3e98166ac"
+			"hash": "cb97d4da4ec431e5aaf5b3384514a240"
 		},
 		{
 			"identifier": "get_tasks/schema.py",
-			"hash": "b7dcf8df791f708c488943297859d52b"
+			"hash": "50713e5cca9439a2da0582465a3da1fb"
 		},
 		{
 			"identifier": "get_user/schema.py",
@@ -245,11 +245,11 @@
 		},
 		{
 			"identifier": "update_risk/schema.py",
-			"hash": "9ab0b62b63e5d9d583967d02a1bc50ea"
+			"hash": "57fec620793682e7af9c6552b809a036"
 		},
 		{
 			"identifier": "update_task/schema.py",
-			"hash": "fb5a94670572db9ba8fb994dab80e046"
+			"hash": "6c1033a6479746f76d0322432c33a70e"
 		},
 		{
 			"identifier": "update_user/schema.py",

@@ -29,7 +29,7 @@ class AddCommentInput(insightconnect_plugin_runtime.Input):
     "comment": {
       "type": "string",
       "title": "Comment",
-      "description": "Text of the comment",
+      "description": "Text of the comment. A comment over 5000 characters is truncated to fit the Cyber GRC limit, with a warning in the job log, rather than failing the step",
       "order": 3
     },
     "discussion_field_id": {
