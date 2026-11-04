@@ -1,37 +1,30 @@
-import komand
-from .schema import ConnectionSchema
+import insightconnect_plugin_runtime
+from .schema import ConnectionSchema, Input
+from typing import Any
 
 # Custom imports below
-from pyotrs import Client
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
+from komand_otrs.util.api import OTRSAPI
 
 
-class Connection(komand.Connection):
-    def __init__(self):
+class Connection(insightconnect_plugin_runtime.Connection):
+    def __init__(self) -> None:
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.client = None
-        self.server = None
-        self.user_login = None
-        self.password = None
 
-    def connect(self, params):
+    def connect(self, params: dict[str, Any] = {}) -> None:
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        server = params.get(Input.SERVER, "").strip()
+        username = params.get(Input.CREDENTIALS, {}).get("username", "").strip()
+        password = params.get(Input.CREDENTIALS, {}).get("password", "")
+        # END INPUT BINDING - DO NOT REMOVE
+
         self.logger.info("Connect: Connecting...")
-        server = params.get("server", "")
-        user_login = params.get("credentials").get("username", "")
-        password = params.get("credentials").get("password", "")
+        self.client = OTRSAPI(server, username, password, self.logger)
 
-        self.server = server
-        self.user_login = user_login
-        self.password = password
-
-        self.client = Client(server, user_login, password)
-
-    def test(self):
+    def test(self) -> dict[str, bool]:
         try:
-            self.client.session_create()
-        except Exception as e:
-            raise Exception(
-                "Unable to connect to OTRS webservice! Please check your connection information and \
-            that you have properly configured OTRS webservice. Information on configuring the webservice can be found \
-            in the Connection help"
-            )
-        return {}
+            self.client.test_connection()
+            return {"success": True}
+        except PluginException as error:
+            raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=error.data)

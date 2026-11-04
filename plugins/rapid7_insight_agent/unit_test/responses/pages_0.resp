@@ -1,0 +1,159 @@
+{
+   "data": {
+      "organization": {
+         "assets": {
+            "pageInfo": {
+               "hasNextPage": true,
+               "endCursor": "1"
+            },
+            "edges": [
+               {
+                  "node": {
+                     "id": "old",
+                     "platform": "windows",
+                     "host": {
+                        "vendor": null,
+                        "version": null,
+                        "description": "Windows 10",
+                        "hostNames": [
+                           {
+                              "name": "LAPTOP-01"
+                           }
+                        ],
+                        "primaryAddress": {
+                           "ip": "10.0.0.1",
+                           "mac": ""
+                        },
+                        "uniqueIdentity": null,
+                        "attributes": null
+                     },
+                     "agent": {
+                        "agentSemanticVersion": "3.2.1",
+                        "agentStatus": "OFFLINE",
+                        "quarantineState": {
+                           "currentState": "UNQUARANTINED"
+                        }
+                     }
+                  }
+               },
+               {
+                  "node": {
+                     "id": "older",
+                     "platform": "windows",
+                     "host": {
+                        "vendor": null,
+                        "version": null,
+                        "description": "Windows 10",
+                        "hostNames": [
+                           {
+                              "name": "RECENT-01"
+                           }
+                        ],
+                        "primaryAddress": {
+                           "ip": "10.0.0.1",
+                           "mac": ""
+                        },
+                        "uniqueIdentity": null,
+                        "attributes": null
+                     },
+                     "agent": {
+                        "agentSemanticVersion": "3.2.1",
+                        "agentStatus": "OFFLINE",
+                        "quarantineState": {
+                           "currentState": "UNQUARANTINED"
+                        }
+                     }
+                  }
+               },
+               {
+                  "node": {
+                     "id": "away",
+                     "platform": "windows",
+                     "host": {
+                        "vendor": null,
+                        "version": null,
+                        "description": "Windows 10",
+                        "hostNames": [
+                           {
+                              "name": "WEB01"
+                           }
+                        ],
+                        "primaryAddress": {
+                           "ip": "10.0.0.1",
+                           "mac": ""
+                        },
+                        "uniqueIdentity": null,
+                        "attributes": null
+                     },
+                     "agent": {
+                        "agentSemanticVersion": "3.2.1",
+                        "agentStatus": "OFFLINE",
+                        "quarantineState": {
+                           "currentState": "UNQUARANTINED"
+                        }
+                     }
+                  }
+               },
+               {
+                  "node": {
+                     "id": "same-page-stale",
+                     "platform": "windows",
+                     "host": {
+                        "vendor": null,
+                        "version": null,
+                        "description": "Windows 10",
+                        "hostNames": [
+                           {
+                              "name": "SAMEPAGE-01"
+                           }
+                        ],
+                        "primaryAddress": {
+                           "ip": "10.0.0.1",
+                           "mac": ""
+                        },
+                        "uniqueIdentity": null,
+                        "attributes": null
+                     },
+                     "agent": {
+                        "agentSemanticVersion": "3.2.1",
+                        "agentStatus": "OFFLINE",
+                        "quarantineState": {
+                           "currentState": "UNQUARANTINED"
+                        }
+                     }
+                  }
+               },
+               {
+                  "node": {
+                     "id": "same-page-live",
+                     "platform": "windows",
+                     "host": {
+                        "vendor": null,
+                        "version": null,
+                        "description": "Windows 10",
+                        "hostNames": [
+                           {
+                              "name": "SAMEPAGE-01"
+                           }
+                        ],
+                        "primaryAddress": {
+                           "ip": "10.0.0.1",
+                           "mac": ""
+                        },
+                        "uniqueIdentity": null,
+                        "attributes": null
+                     },
+                     "agent": {
+                        "agentSemanticVersion": "3.2.1",
+                        "agentStatus": "ONLINE",
+                        "quarantineState": {
+                           "currentState": "UNQUARANTINED"
+                        }
+                     }
+                  }
+               }
+            ]
+         }
+      }
+   }
+}

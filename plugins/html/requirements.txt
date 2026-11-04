@@ -3,3 +3,4 @@
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 beautifulsoup4==4.14.3
 pypandoc-binary==1.16.2
+soupsieve==3.0.4

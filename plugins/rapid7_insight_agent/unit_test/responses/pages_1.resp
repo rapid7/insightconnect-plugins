@@ -1,0 +1,101 @@
+{
+   "data": {
+      "organization": {
+         "assets": {
+            "pageInfo": {
+               "hasNextPage": false,
+               "endCursor": "2"
+            },
+            "edges": [
+               {
+                  "node": {
+                     "id": "new",
+                     "platform": "windows",
+                     "host": {
+                        "vendor": null,
+                        "version": null,
+                        "description": "Windows 10",
+                        "hostNames": [
+                           {
+                              "name": "LAPTOP-01"
+                           }
+                        ],
+                        "primaryAddress": {
+                           "ip": "10.0.0.1",
+                           "mac": ""
+                        },
+                        "uniqueIdentity": null,
+                        "attributes": null
+                     },
+                     "agent": {
+                        "agentSemanticVersion": "3.2.1",
+                        "agentStatus": "ONLINE",
+                        "quarantineState": {
+                           "currentState": "UNQUARANTINED"
+                        }
+                     }
+                  }
+               },
+               {
+                  "node": {
+                     "id": "newer",
+                     "platform": "windows",
+                     "host": {
+                        "vendor": null,
+                        "version": null,
+                        "description": "Windows 10",
+                        "hostNames": [
+                           {
+                              "name": "RECENT-01"
+                           }
+                        ],
+                        "primaryAddress": {
+                           "ip": "10.0.0.1",
+                           "mac": ""
+                        },
+                        "uniqueIdentity": null,
+                        "attributes": null
+                     },
+                     "agent": {
+                        "agentSemanticVersion": "3.2.1",
+                        "agentStatus": "OFFLINE",
+                        "quarantineState": {
+                           "currentState": "UNQUARANTINED"
+                        }
+                     }
+                  }
+               },
+               {
+                  "node": {
+                     "id": "web3",
+                     "platform": "windows",
+                     "host": {
+                        "vendor": null,
+                        "version": null,
+                        "description": "Windows 10",
+                        "hostNames": [
+                           {
+                              "name": "WEB03"
+                           }
+                        ],
+                        "primaryAddress": {
+                           "ip": "10.0.0.1",
+                           "mac": ""
+                        },
+                        "uniqueIdentity": null,
+                        "attributes": null
+                     },
+                     "agent": {
+                        "agentSemanticVersion": "3.2.1",
+                        "agentStatus": "ONLINE",
+                        "quarantineState": {
+                           "currentState": "UNQUARANTINED"
+                        }
+                     }
+                  }
+               }
+            ]
+         }
+      }
+   }
+}

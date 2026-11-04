@@ -10,6 +10,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException, Connection
 from insightconnect_plugin_runtime.helper import clean
 
 TIMEOUT_MINUTES = 3
+ONLINE = "ONLINE"
 
 
 class ApiConnection:
@@ -60,22 +61,38 @@ class ApiConnection:
         failed = results_object.get("data", {}).get("quarantineAssets", {}).get("results", [])[0].get("failed")
         return not failed
 
-    def unquarantine(self, agent_id: str) -> bool:
+    def get_agent_info(self, agent_id: str) -> dict:
         """
-        Unquarantine an agent given an agent ID
-        :param agent_id: Agent ID to unquarantine
+        Get the status and quarantine state of an agent given an agent ID
 
-        :return: boolean
+        :param agent_id: Agent ID to look up
+
+        :return: The agent, or an empty dict if there is no such agent
         """
 
-        # Check if agent with ID exists
         payload = {
             "query": "query( $orgID: String! $agentID: String! ) { assets( orgId: $orgID ids: [$agentID] ){ agent { id quarantineState{ currentState } agentStatus } } }",
             "variables": {"orgID": self.org_key, "agentID": agent_id},
         }
         results_object = self._post_payload(payload)
-        agent = results_object.get("data", {}).get("assets", [])[0].get("agent")
-        if not agent:
+
+        # An unknown ID comes back as an empty list or a null asset
+        if (assets := results_object.get("data", {}).get("assets", [])) and (asset := assets[0]):
+            # The API sends null for an asset without an agent, so a default value is not enough
+            return asset.get("agent") or {}
+        return {}
+
+    def unquarantine(self, agent_id: str, agent_info: dict) -> bool:
+        """
+        Unquarantine an agent given an agent ID
+        :param agent_id: Agent ID to unquarantine
+        :param agent_info: The agent from get_agent_info, empty if there is no such agent
+
+        :return: boolean
+        """
+
+        # Only unquarantine an agent that exists
+        if not agent_info:
             return False
 
         # if exists then unquarantine it
@@ -111,7 +128,11 @@ class ApiConnection:
         # For each agent ID in the list, perform quarantine
         for hostname, agent in found_agents:
             agent_id = agent.get("id")
-            result = self.quarantine(advertisement_period, agent_id) if quarantine else self.unquarantine(agent_id)
+            if quarantine:
+                result = self.quarantine(advertisement_period, agent_id)
+            else:
+                # The API sends null for an asset without an agent
+                result = self.unquarantine(agent_id, agent.get("agent") or {})
             if result:
                 successful_operations.append(hostname)
             else:
@@ -374,7 +395,10 @@ class ApiConnection:
                 .get("pageInfo", {})
                 .get("endCursor")
             )
-        while agent is None and has_next_page:
+        # For a hostname keep reading pages until an online agent is found
+        while has_next_page and (
+            agent is None or (agent_type == agent_typer.HOSTNAME and not self._is_agent_online(agent))
+        ):
             current_time = datetime.now()
             if (current_time - start_time) > timedelta(minutes=TIMEOUT_MINUTES):
                 self.logger.info("List of agents is too long, action will time out.")
@@ -385,7 +409,8 @@ class ApiConnection:
             self.logger.info(f"Extra pages of agents: {has_next_page}")
             self.logger.info("Getting next page of agents.")
             has_next_page, next_cursor, next_agents = self._get_next_page_of_agents(next_cursor)
-            agent = self._find_agent_in_agents(next_agents, agent_input, agent_type)
+            # The agent found so far goes first, so a tie between two offline agents keeps the earlier one
+            agent = self._find_agent_in_agents([agent, *next_agents], agent_input, agent_type)
         if agent:
             return agent, None
         else:
@@ -422,23 +447,19 @@ class ApiConnection:
             .get("endCursor")
         )
         agents.extend(self._get_agents_from_result_object(results_object))
-        found_agents = []
         self.logger.info("Initial agents received.")
-        for agent_input in agents_input:
-            agent = self._find_agent_in_agents(agents, agent_input, "Host Name")
-            if agent:
-                found_agents.append((agent_input, agent))
-                agents_input.remove(agent_input)
+
         # See if we have more pages of data, if so get next page and append until we reach the end
         self.logger.info(f"Extra pages of agents: {has_next_page}")
-        if agents_input:
-            while has_next_page:
-                has_next_page, next_cursor, next_agents = self._get_next_page_of_agents(next_cursor)
-                for agent_input in agents_input:
-                    agent = self._find_agent_in_agents(next_agents, agent_input, "Host Name")
-                    if agent:
-                        found_agents.append(Tuple[agent_input, agent])
-                        agents_input.remove(agent_input)
+        while has_next_page:
+            has_next_page, next_cursor, next_agents = self._get_next_page_of_agents(next_cursor)
+            agents.extend(next_agents)
+
+        # Duplicate hostnames are looked up once
+        found_agents = []
+        for agent_input in dict.fromkeys(agents_input):
+            if agent := self._find_agent_in_agents(agents, agent_input, agent_typer.HOSTNAME):
+                found_agents.append((agent_input, agent))
         return found_agents
 
     def _get_next_page_of_agents(self, next_cursor: str) -> (bool, dict, list):
@@ -529,6 +550,9 @@ class ApiConnection:
         self.logger.info(f"Searching for: {agent_input}")
         self.logger.info(f"Search type: {agent_type}")
         self.logger.info("Skipping all agents where host information is not available")
+
+        # Several agents can share a hostname, so collect them all and choose below
+        hostname_matches = []
         for agent in agents:
             if agent and len(agent) and agent.get("host"):  # Some hosts come back None...need to check for that
                 if agent_type == agent_typer.IP_ADDRESS:
@@ -537,7 +561,7 @@ class ApiConnection:
                 elif agent_type == agent_typer.HOSTNAME:
                     # In this case, we have an alpha/numeric value. This could be the ID or the Hostname. Need to check both
                     if self._is_hostname_match(agent, agent_input):
-                        return agent
+                        hostname_matches.append(agent)
                 elif agent_type == agent_typer.MAC_ADDRESS:
                     # MAC addresses can come in with : or - as a separator, remove all of it and compare
                     if self._is_mac_match(agent, agent_input):
@@ -547,7 +571,17 @@ class ApiConnection:
                         cause="Could not determine agent type.",
                         assistance=f"Agent {agent_input} was not a MAC address, IP address, or hostname.",
                     )
-        return None  # No agent found
+        # A reinstalled device keeps its old offline record, so prefer an online agent, ties keep the first found
+        # None if no agent is found
+        agent = max(hostname_matches, key=self._is_agent_online, default=None)
+        if len(hostname_matches) > 1:
+            self.logger.info(f"Several agents share the hostname '{agent_input}', using agent {agent.get('id')}.")
+        return agent
+
+    @staticmethod
+    def _is_agent_online(agent: dict) -> bool:
+        # The API sends null for an asset without an agent, so a default value is not enough
+        return (agent.get("agent") or {}).get("agentStatus") == ONLINE
 
     def _get_agents_from_result_object(self, results_object: dict) -> [dict]:
         """

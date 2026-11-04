@@ -6,7 +6,8 @@
          604800,
          true,
          {
-            "success":true
+            "success":true,
+            "is_asset_online":true
          }
       ],
       [
@@ -15,7 +16,28 @@
          604800,
          true,
          {
-            "success":false
+            "success":false,
+            "is_asset_online":false
+         }
+      ],
+      [
+         "unquarantine_existing_agent",
+         "a1cfb273EQWE12312EDSAXZc8e7d46a9e2a0e2dae01a0ce",
+         604800,
+         false,
+         {
+            "success":true,
+            "is_asset_online":false
+         }
+      ],
+      [
+         "unquarantine_missing_agent",
+         "badIDQuarantine",
+         604800,
+         false,
+         {
+            "success":false,
+            "is_asset_online":false
          }
       ]
    ]

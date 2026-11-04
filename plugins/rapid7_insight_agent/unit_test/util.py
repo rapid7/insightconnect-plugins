@@ -9,16 +9,18 @@ from icon_rapid7_insight_agent.connection.schema import Input
 sys.path.append(os.path.abspath("../"))
 
 DEFAULT_ENCODING = "utf-8"
+STUB_CREDS = "0709b1ba-07da-41a1-bf84-79e67d6f0c54"
+PAGES_CREDS = "dummy-pages"
 
 
 class Util:
     @staticmethod
-    def default_connector(action):
+    def default_connector(action, api_key: str = STUB_CREDS):
         default_connection = Connection()
         default_connection.logger = logging.getLogger("connection logger")
         params = {
             Input.REGION: "United States",
-            Input.API_KEY: {"secretKey": "0709b1ba-07da-41a1-bf84-79e67d6f0c54"},
+            Input.API_KEY: {"secretKey": api_key},
         }
         default_connection.connect(params)
         action.connection = default_connection
@@ -57,6 +59,13 @@ class Util:
 
         if query == "{ organizations(first: 1) { edges { node { id name } } } }":
             return MockResponse("org_key.json.resp")
+        elif args[0].headers.get("X-Api-key") == PAGES_CREDS:
+            # Two pages of agents picked by the cursor, several hostnames have more than one agent
+            if "unquarantineAssets" in query:
+                return MockResponse("unquarantine.resp")
+            return MockResponse(
+                f"pages_{variables.get('nextCursor') or 0}.resp" if "orgId" in variables else "quarantine.resp"
+            )
         elif variables.get("orgId") == "9de5069c5afe602b2ea0a04b66beb2c0":
             return MockResponse("get_agent_details.resp")
         elif (
@@ -68,6 +77,10 @@ class Util:
             return MockResponse("check_agent_status.resp")
         elif variables.get("agentID") == "badID":
             return MockResponse("check_agent_status_bad.resp")
+        elif variables.get("agentID") == "goodIDQuarantine" and "ids: [$agentID]" in query:
+            return MockResponse("check_agent_status.resp")
+        elif variables.get("agentID") == "badIDQuarantine" and "ids: [$agentID]" in query:
+            return MockResponse("agent_null.resp")
         elif variables.get("agentID", {}) == "goodIDQuarantine":
             return MockResponse("quarantine.resp")
         elif (

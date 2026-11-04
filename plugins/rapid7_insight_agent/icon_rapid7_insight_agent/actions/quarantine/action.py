@@ -2,6 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import QuarantineInput, QuarantineOutput, Input, Output, Component
 
 # Custom imports below
+from icon_rapid7_insight_agent.util.graphql_api.api_connection import ONLINE
 
 
 class Quarantine(insightconnect_plugin_runtime.Action):
@@ -19,10 +20,11 @@ class Quarantine(insightconnect_plugin_runtime.Action):
         quarantine_state = params.get(Input.QUARANTINE_STATE)
 
         agent_id_stripped = agent_id.replace("-", "")
+        agent_info = self.connection.api.get_agent_info(agent_id_stripped)
 
         if quarantine_state:
             success = self.connection.api.quarantine(advertisement_period, agent_id_stripped)
         else:
-            success = self.connection.api.unquarantine(agent_id_stripped)
+            success = self.connection.api.unquarantine(agent_id_stripped, agent_info)
 
-        return {Output.SUCCESS: success}
+        return {Output.SUCCESS: success, Output.IS_ASSET_ONLINE: agent_info.get("agentStatus") == ONLINE}
