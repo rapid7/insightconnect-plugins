@@ -212,16 +212,10 @@ This action is used to convert a string to an object containing key:value string
 Any input requiring more than a 
 single key:value pair, e.g. `USER=Bob` needs to use the `block_delimiter` option. In this case, the input string is 
 split by the `block_delimiter` character first, and the resulting items are then split by the `string_delimiter` option.
- Stripping of double-quotes is automatically applied in this situation for each item before the plugin returns it.
+ Double-quotes are automatically stripped from each item in this situation.
 
-The 
-[output object](https://docs.komand.com/v0.42.1/docs/python-script-plugins#section-configure-the-plugin-output-schema) 
-on the action's page can be modified to pre-populate the workflow with the names of the keys. It allows users the 
-ability to use the green selector and choose a specific variable later in the workflow by name. [Input 
-templating](https://docs.komand.com/docs/input-templating) would need to be used to obtain variables by name otherwise.
-
-
-Please refer to troubleshooting section for a more complex example
+Please refer to troubleshooting section for
+ a more complex example
 
 ##### Input
 
@@ -341,10 +335,12 @@ Example output:
   + Example output: `{ "object": { "Computer_ID": "bef41e8b-47b8-e188-8e43-3a2b662dd55d", "Computer_Name": "dgdemo RGWin64", "Computer_Type": "Windows" } }`
 
 
+* `Split String to Object`: the output object on the action's page can be modified to pre-populate the workflow with the names of the keys. It allows users the ability to use the green selector and choose a specific variable later in the workflow by name. Input templating would need to be used to obtain variables by name otherwise.
 * There may be complex string manipulation needs that are likely outside the scope of this plugin. If this is the case, consider using the Python 3 Script plugin instead.
 
 # Version History
 
+* 1.4.9 - Updated SDK to the latest version (6.6.1) | Shortened the `Split String to Object` action description and moved its output object note to Troubleshooting
 * 1.4.8 - Updated SDK to the latest version (6.5.1)
 * 1.4.7 - Updated SDK to the latest version (6.4.3)
 * 1.4.6 - Updated SDK to the latest version (6.4.2)

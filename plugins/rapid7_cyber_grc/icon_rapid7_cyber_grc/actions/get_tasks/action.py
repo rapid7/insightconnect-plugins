@@ -1,0 +1,105 @@
+import insightconnect_plugin_runtime
+
+from insightconnect_plugin_runtime.telemetry import auto_instrument
+
+from .schema import GetTasksInput, GetTasksOutput, Input, Output, Component
+
+# Custom imports below
+from ...util.dates import date_window_clauses
+
+# The live API returns a task's assignee only in its users list, as user IDs with no email
+# address; the documented assignedTo object comes back null and is dropped from $select.
+ASSIGNEE_FIELD = "users"
+ASSIGNEE_ID = "usersID"
+
+
+class GetTasks(insightconnect_plugin_runtime.Action):
+
+    def __init__(self):
+        super(self.__class__, self).__init__(
+            name="get_tasks", description=Component.DESCRIPTION, input=GetTasksInput(), output=GetTasksOutput()
+        )
+
+    @auto_instrument
+    def run(self, params={}):
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        due_within_days = params.get(Input.DUE_WITHIN_DAYS)
+        filter_ = params.get(Input.FILTER)
+        order_by = params.get(Input.ORDER_BY)
+        overdue_only = params.get(Input.OVERDUE_ONLY)
+        owner = params.get(Input.OWNER)
+        select = params.get(Input.SELECT)
+        skip = params.get(Input.SKIP)
+        status_id = params.get(Input.STATUS_ID)
+        top = params.get(Input.TOP)
+        # END INPUT BINDING - DO NOT REMOVE
+
+        # statusID and dueDate are plain scalar fields on a task, so a status and a due
+        # date window both narrow the query at the API rather than here. When they join a
+        # filter the caller wrote, every clause is parenthesised, because an
+        # unparenthesised or in that filter would bind looser than the and and widen the
+        # result instead. A filter on its own is passed through untouched.
+        clauses = [
+            clause
+            for clause in [filter_, f"statusID eq {status_id}" if status_id else None]
+            + date_window_clauses("dueDate", due_within_days, overdue_only)
+            if clause
+        ]
+        if len(clauses) > 1:
+            combined = " and ".join(f"({clause})" for clause in clauses)
+        else:
+            combined = clauses[0] if clauses else None
+
+        owner = (owner or "").strip()
+        if owner:
+            # The assignee is a list of user IDs that cannot be filtered on, so an owner
+            # cannot be given to $filter and is applied here after the read. Top and Skip
+            # are held back from the API for the same reason: they have to count the
+            # owner's tasks, not every task the rest of the query matched.
+            owner_ids = self._owner_ids(owner)
+            if not owner_ids:
+                self.logger.info(f"No Cyber GRC user has the email address {owner}, so no task is assigned to it")
+                return {Output.TASKS: [], Output.COUNT: 0}
+            select = self._with_assignee(select)
+
+        records = self.connection.client.list_records(
+            "Tasks",
+            filter_=combined,
+            select=select,
+            order_by=order_by,
+            top=None if owner else top,
+            skip=None if owner else skip,
+        )
+
+        if owner:
+            matching = [record for record in records if self._assigned_to(record, owner_ids)]
+            self.logger.info(f"{len(matching)} of {len(records)} task(s) are assigned to {owner}")
+            records = matching[skip:] if skip else matching
+            if top:
+                records = records[:top]
+
+        return {Output.TASKS: records, Output.COUNT: len(records)}
+
+    @staticmethod
+    def _with_assignee(select):
+        """A Select that leaves the assignee out would filter every task away."""
+        if not select:
+            return select
+        fields = [field.strip() for field in select.split(",") if field.strip()]
+        if ASSIGNEE_FIELD not in fields:
+            fields.append(ASSIGNEE_FIELD)
+        return ",".join(fields)
+
+    def _owner_ids(self, owner):
+        """The user IDs an owner names: the ID itself, or the users holding that email address."""
+        if owner.isdigit():
+            return {owner}
+        wanted = owner.casefold()
+        users = self.connection.client.list_records("Users", select="id,email")
+        return {str(user.get("id")) for user in users if str(user.get("email") or "").strip().casefold() == wanted}
+
+    @staticmethod
+    def _assigned_to(record, owner_ids):
+        """True when any user the task is assigned to is one of the owner's user IDs."""
+        assignees = record.get(ASSIGNEE_FIELD) or []
+        return any(str(user.get(ASSIGNEE_ID)) in owner_ids for user in assignees if isinstance(user, dict))
