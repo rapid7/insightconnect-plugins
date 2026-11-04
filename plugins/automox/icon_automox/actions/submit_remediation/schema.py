@@ -71,7 +71,7 @@ class SubmitRemediationOutput(insightconnect_plugin_runtime.Output):
     "batch_uuid": {
       "type": "string",
       "title": "Batch UUID",
-      "description": "The UUID assigned to this batch of requests",
+      "description": "The UUID assigned to the first batch of requests",
       "order": 1
     },
     "chunks_sent": {

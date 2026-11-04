@@ -524,7 +524,7 @@ class ApiClient:
         :param org_id: Organization ID
         :param action_type: 'remediate' or 'match'
         :param devices_input: JSON string containing an array of device objects
-        :return: Dict with batch_uuid, total_devices, chunks_sent, and collected responses
+        :return: Dict with the first chunk's batch_uuid, total_devices, chunks_sent, and collected responses
         """
         devices, original_device_count = self._parse_and_expand_devices(devices_input)
 
@@ -537,25 +537,24 @@ class ApiClient:
                 assistance=f"GET /api/orgs/{org_id} did not return a 'uuid' field.",
             )
 
-        batch_uuid = str(uuid.uuid4())
         chunk_size = self.REMEDIATION_CHUNK_SIZE
         chunks = [devices[i : i + chunk_size] for i in range(0, len(devices), chunk_size)]
 
+        # Automox accepts each batch_uuid once only, so every chunk needs its own
+        payloads = [{"action_type": action_type, "batch_uuid": str(uuid.uuid4()), "devices": chunk} for chunk in chunks]
         responses = []
-        for idx, chunk in enumerate(chunks):
-            payload = {
-                "action_type": action_type,
-                "batch_uuid": batch_uuid,
-                "devices": chunk,
-            }
-            self.logger.info(f"Submitting remediation chunk {idx + 1}/{len(chunks)} ({len(chunk)} devices)")
-            resp = self._call_api(
+        for index, payload in enumerate(payloads):
+            self.logger.info(
+                f"Submitting remediation chunk {index + 1}/{len(payloads)} ({len(payload.get('devices'))} devices), "
+                f"batch UUID {payload.get('batch_uuid')}"
+            )
+            response = self._call_api(
                 "POST", f"{self.endpoint}/organizations/{org_uuid}/vuln-sync/remediate", json_data=payload
             )
-            responses.append(resp)
+            responses.append(response)
 
         return {
-            "batch_uuid": batch_uuid,
+            "batch_uuid": payloads[0].get("batch_uuid"),
             "total_devices": original_device_count,
             "chunks_sent": len(chunks),
             "responses": responses,
