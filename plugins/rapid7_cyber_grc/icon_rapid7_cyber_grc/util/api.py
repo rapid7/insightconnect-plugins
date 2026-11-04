@@ -120,17 +120,17 @@ def clean_record(record: Any) -> Any:
 class CyberGrcAPI:
     _server_time: Optional[datetime] = None
 
-    def __init__(self, url: str, api_key: str, ssl_verify: bool, logger):
+    def __init__(self, url: str, api_key: str, logger):
         self.url = (url or "").strip().rstrip("/")
         # A key pasted from a password manager often carries a newline or a stray space,
         # which requests refuses to put in a header, so normalise it here.
         self.api_key = (api_key or "").strip()
-        self.ssl_verify = ssl_verify
         self.logger = logger
-        self.session = requests.Session()
         # The documented Authorization: Bearer alternative rejects cpyl_ keys on the
-        # live API, so authenticate with the X-API-Key header only.
-        self.session.headers.update({"X-API-Key": self.api_key, "Accept": "application/json"})
+        # live API, so authenticate with the X-API-Key header only. Each request is sent
+        # on its own rather than through a long-lived requests.Session, so a connection the
+        # host has dropped is never reused by a trigger polling for days.
+        self.headers = {"X-API-Key": self.api_key, "Accept": "application/json"}
 
     # ------------------------------------------------------------------ v2 API
 
@@ -437,7 +437,9 @@ class CyberGrcAPI:
     ) -> requests.Response:
         """Send the HTTP request, translating transport-level errors into PluginExceptions."""
         try:
-            return self.session.request(method, url, params=params, json=json_body, verify=self.ssl_verify, timeout=120)
+            return requests.request(
+                method, url, headers=self.headers, params=params, json=json_body, verify=True, timeout=120
+            )
         except requests.exceptions.Timeout as error:
             raise PluginException(
                 cause=f"Cyber GRC did not respond within 120 seconds to {operation}.",
@@ -448,8 +450,8 @@ class CyberGrcAPI:
         except requests.exceptions.SSLError as error:
             raise PluginException(
                 cause="Could not verify the TLS certificate presented by the Cyber GRC API host.",
-                assistance="Verify the URL is correct, or disable SSL Verify on the connection if the host presents "
-                "a private certificate.",
+                assistance=f"Verify the URL is the Cyber GRC API host, which normally looks like {API_HOST_PATTERN} "
+                "and presents a publicly trusted certificate.",
                 data=self._scrub(str(error)),
             )
         except (requests.exceptions.MissingSchema, requests.exceptions.InvalidURL) as error:

@@ -122,7 +122,6 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |api_key|credential_secret_key|None|True|A Cyber GRC API key, generated under Settings then API Keys. The key inherits the permissions of the user it is assigned to|None|cpyl_0000000000000000000000000000000000000000000000|None|None|
-|ssl_verify|boolean|True|True|Verify the TLS certificate presented by the Cyber GRC API host|None|True|None|None|
 |url|string|None|True|Base URL of the Cyber GRC API host, without a trailing path|None|https://insight.rapid7.com/|None|None|
 
 Example input:
@@ -130,7 +129,6 @@ Example input:
 ```
 {
   "api_key": "cpyl_0000000000000000000000000000000000000000000000",
-  "ssl_verify": true,
   "url": "https://insight.rapid7.com/"
 }
 ```
@@ -165,7 +163,6 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |api_key|credential_secret_key|None|True|A Cyber GRC API key, generated under Settings then API Keys. The key inherits the permissions of the user it is assigned to|None|cpyl_0000000000000000000000000000000000000000000000|None|None|
-|ssl_verify|boolean|True|True|Verify the TLS certificate presented by the Cyber GRC API host|None|True|None|None|
 |url|string|None|True|Base URL of the Cyber GRC API host, without a trailing path|None|https://insight.rapid7.com/|None|None|
 
 Example input:
@@ -173,14 +170,13 @@ Example input:
 ```
 {
   "api_key": "cpyl_0000000000000000000000000000000000000000000000",
-  "ssl_verify": true,
   "url": "https://insight.rapid7.com/"
 }
 ```
 
 ### Query options
 
-The Cyber GRC Web API v2 is an OData v4 API, so every read action and the Monitor Records trigger accept the same query options: **Filter**, **Select**, **Order By**, **Top**, and **Skip**. All of them are optional, and leaving them empty returns whole records with no narrowing.
+The Cyber GRC Web API v2 is an OData v4 API, so every read action and the Monitor Records trigger accept the same query options: **Filter**, **Fields** (`$select`), **Order By**, **Top**, and **Skip**. All of them are optional, and leaving them empty returns whole records with no narrowing.
 
 Two of them repay a closer look, because they are the ones that make a workflow read only what it needs.
 
@@ -236,15 +232,15 @@ property in the API is `auditorAssignments` on Audits. An Expand input would the
 have been a field whose every plausible value broke the step, so it was removed.
 
 The practical consequence is that records are large: 48 properties on a task, one of which
-held 65 nested controls in testing. **Select** is the way to cut that down, and it works as
-expected, for example `id,name,dueDate,statusID`. Narrowing a polling trigger with Select
+held 65 nested controls in testing. **Fields** is the way to cut that down, and it works as
+expected, for example `id,name,dueDate,statusID`. Narrowing a polling trigger with Fields
 is worth doing.
 
 ### Monitor Records
 
 The trigger reports what happens from the moment it starts. On its first poll it records where it is and emits nothing; from then on it emits each record the chosen **Event Type** matches. It does not open with a batch of history, so a workflow attached to it never acts on records that were already dealt with before it was switched on.
 
-The position is stored in the plugin's cache, which InsightConnect backs with a volume, so a restart resumes where the trigger left off rather than skipping whatever changed while it was down.
+The position is kept in the trigger's state, which InsightConnect persists for each trigger, so a restart resumes where the trigger left off rather than skipping whatever changed while it was down.
 
 **Event Type** decides which events reach the workflow:
 
@@ -1999,7 +1995,7 @@ This action is used to retrieve a single assessment by ID
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|integer|None|True|ID of the assessment to retrieve|None|1|None|None|
-|select|string|None|False|Comma separated list of fields to return. Leave empty to return every field|None|id,name|None|None|
+|select|string|None|False|Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field|None|id,name|None|None|
   
 Example input:
 
@@ -2082,8 +2078,8 @@ This action is used to retrieve assessments from Cyber GRC, optionally narrowed 
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |filter|string|None|False|OData $filter expression used to narrow the results, e.g. contains(name, 'phishing') and statusID eq 3|None|statusID eq 3|None|None|
 |order_by|string|None|False|OData $orderby expression, e.g. modifiedDate desc|None|modifiedDate desc|None|None|
-|select|string|None|False|Comma separated list of fields to return. Leave empty to return every field|None|id,name,statusID|None|None|
-|skip|integer|0|False|Number of records to skip before returning results|None|0|None|None|
+|select|string|None|False|Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field|None|id,name,statusID|None|None|
+|skip|integer|0|False|Number of matching records to skip before returning results. To read a large result set in batches, set Top to the batch size and raise Skip by Top on each run until Count is less than Top|None|0|None|None|
 |top|integer|0|False|Maximum number of records to return. Leave empty or set to 0 to return every record, paging through the API automatically|None|100|None|None|
   
 Example input:
@@ -2173,7 +2169,7 @@ This action is used to retrieve a single audit by ID
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|integer|None|True|ID of the audit to retrieve|None|1|None|None|
-|select|string|None|False|Comma separated list of fields to return. Leave empty to return every field|None|id,name|None|None|
+|select|string|None|False|Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field|None|id,name|None|None|
   
 Example input:
 
@@ -2273,8 +2269,8 @@ This action is used to retrieve audits from Cyber GRC, optionally narrowed with 
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |filter|string|None|False|OData $filter expression used to narrow the results, e.g. contains(name, 'phishing') and statusID eq 3|None|statusID eq 3|None|None|
 |order_by|string|None|False|OData $orderby expression, e.g. modifiedDate desc|None|modifiedDate desc|None|None|
-|select|string|None|False|Comma separated list of fields to return. Leave empty to return every field|None|id,name,statusID|None|None|
-|skip|integer|0|False|Number of records to skip before returning results|None|0|None|None|
+|select|string|None|False|Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field|None|id,name,statusID|None|None|
+|skip|integer|0|False|Number of matching records to skip before returning results. To read a large result set in batches, set Top to the batch size and raise Skip by Top on each run until Count is less than Top|None|0|None|None|
 |top|integer|0|False|Maximum number of records to return. Leave empty or set to 0 to return every record, paging through the API automatically|None|100|None|None|
   
 Example input:
@@ -2381,7 +2377,7 @@ This action is used to retrieve a single certification by ID
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|integer|None|True|ID of the certification to retrieve|None|1|None|None|
-|select|string|None|False|Comma separated list of fields to return. Leave empty to return every field|None|id,name|None|None|
+|select|string|None|False|Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field|None|id,name|None|None|
   
 Example input:
 
@@ -2430,8 +2426,8 @@ This action is used to retrieve certifications from Cyber GRC, optionally narrow
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |filter|string|None|False|OData $filter expression used to narrow the results, e.g. contains(name, 'phishing') and statusID eq 3|None|statusID eq 3|None|None|
 |order_by|string|None|False|OData $orderby expression, e.g. modifiedDate desc|None|modifiedDate desc|None|None|
-|select|string|None|False|Comma separated list of fields to return. Leave empty to return every field|None|id,name,statusID|None|None|
-|skip|integer|0|False|Number of records to skip before returning results|None|0|None|None|
+|select|string|None|False|Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field|None|id,name,statusID|None|None|
+|skip|integer|0|False|Number of matching records to skip before returning results. To read a large result set in batches, set Top to the batch size and raise Skip by Top on each run until Count is less than Top|None|0|None|None|
 |top|integer|0|False|Maximum number of records to return. Leave empty or set to 0 to return every record, paging through the API automatically|None|100|None|None|
   
 Example input:
@@ -2536,7 +2532,7 @@ This action is used to retrieve a single contract by ID
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|integer|None|True|ID of the contract to retrieve|None|1|None|None|
-|select|string|None|False|Comma separated list of fields to return. Leave empty to return every field|None|id,name|None|None|
+|select|string|None|False|Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field|None|id,name|None|None|
   
 Example input:
 
@@ -2666,8 +2662,8 @@ This action is used to retrieve contracts from Cyber GRC, optionally narrowed wi
 |include_expired|boolean|False|False|Whether Renewing Within Days also returns contracts that have already ended. Ignored when Renewing Within Days is not set|None|False|None|None|
 |order_by|string|None|False|OData $orderby expression, e.g. modifiedDate desc|None|modifiedDate desc|None|None|
 |renewing_within_days|integer|0|False|Return only contracts ending this many days from now or sooner, so a renewal workflow does not have to write the date arithmetic itself. Contracts with no End Date are left out. Leave empty or set to 0 for every contract|None|90|None|None|
-|select|string|None|False|Comma separated list of fields to return. Leave empty to return every field|None|id,name,statusID|None|None|
-|skip|integer|0|False|Number of records to skip before returning results|None|0|None|None|
+|select|string|None|False|Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field|None|id,name,statusID|None|None|
+|skip|integer|0|False|Number of matching records to skip before returning results. To read a large result set in batches, set Top to the batch size and raise Skip by Top on each run until Count is less than Top|None|0|None|None|
 |top|integer|0|False|Maximum number of records to return. Leave empty or set to 0 to return every record, paging through the API automatically|None|100|None|None|
   
 Example input:
@@ -2804,7 +2800,7 @@ This action is used to retrieve a single control set by ID
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|integer|None|True|ID of the control set to retrieve|None|1|None|None|
-|select|string|None|False|Comma separated list of fields to return. Leave empty to return every field|None|id,name|None|None|
+|select|string|None|False|Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field|None|id,name|None|None|
   
 Example input:
 
@@ -2878,8 +2874,8 @@ This action is used to retrieve control sets from Cyber GRC, optionally narrowed
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |filter|string|None|False|OData $filter expression used to narrow the results, e.g. contains(name, 'phishing') and statusID eq 3|None|statusID eq 3|None|None|
 |order_by|string|None|False|OData $orderby expression, e.g. modifiedDate desc|None|modifiedDate desc|None|None|
-|select|string|None|False|Comma separated list of fields to return. Leave empty to return every field|None|id,name,statusID|None|None|
-|skip|integer|0|False|Number of records to skip before returning results|None|0|None|None|
+|select|string|None|False|Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field|None|id,name,statusID|None|None|
+|skip|integer|0|False|Number of matching records to skip before returning results. To read a large result set in batches, set Top to the batch size and raise Skip by Top on each run until Count is less than Top|None|0|None|None|
 |top|integer|0|False|Maximum number of records to return. Leave empty or set to 0 to return every record, paging through the API automatically|None|100|None|None|
   
 Example input:
@@ -2960,7 +2956,7 @@ This action is used to retrieve a single incident by ID
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|integer|None|True|ID of the incident to retrieve|None|1|None|None|
-|select|string|None|False|Comma separated list of fields to return. Leave empty to return every field|None|id,name|None|None|
+|select|string|None|False|Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field|None|id,name|None|None|
   
 Example input:
 
@@ -3044,8 +3040,8 @@ This action is used to retrieve incidents from Cyber GRC, optionally narrowed wi
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |filter|string|None|False|OData $filter expression used to narrow the results, e.g. contains(name, 'phishing') and statusID eq 3|None|statusID eq 3|None|None|
 |order_by|string|None|False|OData $orderby expression, e.g. modifiedDate desc|None|modifiedDate desc|None|None|
-|select|string|None|False|Comma separated list of fields to return. Leave empty to return every field|None|id,name,statusID|None|None|
-|skip|integer|0|False|Number of records to skip before returning results|None|0|None|None|
+|select|string|None|False|Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field|None|id,name,statusID|None|None|
+|skip|integer|0|False|Number of matching records to skip before returning results. To read a large result set in batches, set Top to the batch size and raise Skip by Top on each run until Count is less than Top|None|0|None|None|
 |top|integer|0|False|Maximum number of records to return. Leave empty or set to 0 to return every record, paging through the API automatically|None|100|None|None|
   
 Example input:
@@ -3136,7 +3132,7 @@ This action is used to retrieve a single it asset by ID
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|integer|None|True|ID of the it asset to retrieve|None|1|None|None|
-|select|string|None|False|Comma separated list of fields to return. Leave empty to return every field|None|id,name|None|None|
+|select|string|None|False|Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field|None|id,name|None|None|
   
 Example input:
 
@@ -3291,8 +3287,8 @@ This action is used to retrieve it assets from Cyber GRC, optionally narrowed wi
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |filter|string|None|False|OData $filter expression used to narrow the results, e.g. contains(name, 'phishing') and statusID eq 3|None|statusID eq 3|None|None|
 |order_by|string|None|False|OData $orderby expression, e.g. modifiedDate desc|None|modifiedDate desc|None|None|
-|select|string|None|False|Comma separated list of fields to return. Leave empty to return every field|None|id,name,statusID|None|None|
-|skip|integer|0|False|Number of records to skip before returning results|None|0|None|None|
+|select|string|None|False|Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field|None|id,name,statusID|None|None|
+|skip|integer|0|False|Number of matching records to skip before returning results. To read a large result set in batches, set Top to the batch size and raise Skip by Top on each run until Count is less than Top|None|0|None|None|
 |top|integer|0|False|Maximum number of records to return. Leave empty or set to 0 to return every record, paging through the API automatically|None|100|None|None|
   
 Example input:
@@ -3455,7 +3451,7 @@ This action is used to retrieve a single record of any Cyber GRC record type by 
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|integer|None|True|ID of the record to retrieve|None|1|None|None|
 |record_type|string|Risks|True|The Cyber GRC record type to operate on|["AnswerSets", "AssessmentQuestions", "Assessments", "Audits", "BusinessObjectives", "Certifications", "Clients", "ContractDocuments", "Contracts", "ControlSetMetrics", "ControlSets", "Departments", "Discussions", "DocumentTypes", "Groups", "ITAssets", "ImpactViews", "Impacts", "Incidents", "LikelihoodViews", "Likelihoods", "Locations", "QuestionSets", "Risks", "SecurityPolicyInfos", "SecurityPolicySettings", "Statuses", "SystemInfos", "TaskTypes", "Tasks", "UserFileEvents", "Users", "VendorTypes", "Vendors"]|Risks|None|None|
-|select|string|None|False|Comma separated list of fields to return. Leave empty to return every field|None|id,name|None|None|
+|select|string|None|False|Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field|None|id,name|None|None|
   
 Example input:
 
@@ -3528,7 +3524,7 @@ This action is used to retrieve a single risk by ID
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|integer|None|True|ID of the risk to retrieve|None|1|None|None|
-|select|string|None|False|Comma separated list of fields to return. Leave empty to return every field|None|id,name|None|None|
+|select|string|None|False|Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field|None|id,name|None|None|
   
 Example input:
 
@@ -3630,8 +3626,8 @@ This action is used to retrieve risks from Cyber GRC, optionally narrowed with a
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |filter|string|None|False|OData $filter expression used to narrow the results, e.g. contains(name, 'phishing') and statusID eq 3|None|statusID eq 3|None|None|
 |order_by|string|None|False|OData $orderby expression, e.g. modifiedDate desc|None|modifiedDate desc|None|None|
-|select|string|None|False|Comma separated list of fields to return. Leave empty to return every field|None|id,name,statusID|None|None|
-|skip|integer|0|False|Number of records to skip before returning results|None|0|None|None|
+|select|string|None|False|Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field|None|id,name,statusID|None|None|
+|skip|integer|0|False|Number of matching records to skip before returning results. To read a large result set in batches, set Top to the batch size and raise Skip by Top on each run until Count is less than Top|None|0|None|None|
 |top|integer|0|False|Maximum number of records to return. Leave empty or set to 0 to return every record, paging through the API automatically|None|100|None|None|
   
 Example input:
@@ -3740,7 +3736,7 @@ This action is used to retrieve a single task by ID
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|integer|None|True|ID of the task to retrieve|None|1|None|None|
-|select|string|None|False|Comma separated list of fields to return. Leave empty to return every field|None|id,name|None|None|
+|select|string|None|False|Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field|None|id,name|None|None|
   
 Example input:
 
@@ -3906,8 +3902,8 @@ This action is used to retrieve tasks from Cyber GRC, optionally narrowed with a
 |order_by|string|None|False|OData $orderby expression, e.g. modifiedDate desc|None|modifiedDate desc|None|None|
 |overdue_only|boolean|False|False|Return only tasks whose Due Date has already passed. Applied in addition to Due Within Days, so setting both returns only the overdue tasks|None|False|None|None|
 |owner|string|None|False|Return only tasks assigned to this user, given as an email address or a numeric Cyber GRC user ID. The API exposes the assignee as a nested object with no filterable ID field, so this match is applied by the plugin after the records are read, which means Top and Skip apply to the matching tasks rather than to every task|None|user@example.com|None|None|
-|select|string|None|False|Comma separated list of fields to return. Leave empty to return every field|None|id,name,statusID|None|None|
-|skip|integer|0|False|Number of records to skip before returning results|None|0|None|None|
+|select|string|None|False|Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field|None|id,name,statusID|None|None|
+|skip|integer|0|False|Number of matching records to skip before returning results. To read a large result set in batches, set Top to the batch size and raise Skip by Top on each run until Count is less than Top|None|0|None|None|
 |status_id|integer|0|False|Return only tasks in this status. Leave empty or set to 0 for every status|None|3|None|None|
 |top|integer|0|False|Maximum number of records to return. Leave empty or set to 0 to return every record, paging through the API automatically|None|100|None|None|
   
@@ -4082,7 +4078,7 @@ This action is used to retrieve a single user by ID
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|integer|None|True|ID of the user to retrieve|None|1|None|None|
-|select|string|None|False|Comma separated list of fields to return. Leave empty to return every field|None|id,name|None|None|
+|select|string|None|False|Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field|None|id,name|None|None|
   
 Example input:
 
@@ -4133,8 +4129,8 @@ This action is used to retrieve users from Cyber GRC, optionally narrowed with a
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |filter|string|None|False|OData $filter expression used to narrow the results, e.g. contains(name, 'phishing') and statusID eq 3|None|statusID eq 3|None|None|
 |order_by|string|None|False|OData $orderby expression, e.g. modifiedDate desc|None|modifiedDate desc|None|None|
-|select|string|None|False|Comma separated list of fields to return. Leave empty to return every field|None|id,name,statusID|None|None|
-|skip|integer|0|False|Number of records to skip before returning results|None|0|None|None|
+|select|string|None|False|Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field|None|id,name,statusID|None|None|
+|skip|integer|0|False|Number of matching records to skip before returning results. To read a large result set in batches, set Top to the batch size and raise Skip by Top on each run until Count is less than Top|None|0|None|None|
 |top|integer|0|False|Maximum number of records to return. Leave empty or set to 0 to return every record, paging through the API automatically|None|100|None|None|
   
 Example input:
@@ -4192,7 +4188,7 @@ This action is used to retrieve a single vendor by ID
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|integer|None|True|ID of the vendor to retrieve|None|1|None|None|
-|select|string|None|False|Comma separated list of fields to return. Leave empty to return every field|None|id,name|None|None|
+|select|string|None|False|Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field|None|id,name|None|None|
   
 Example input:
 
@@ -4321,8 +4317,8 @@ This action is used to retrieve vendors from Cyber GRC, optionally narrowed with
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |filter|string|None|False|OData $filter expression used to narrow the results, e.g. contains(name, 'phishing') and statusID eq 3|None|statusID eq 3|None|None|
 |order_by|string|None|False|OData $orderby expression, e.g. modifiedDate desc|None|modifiedDate desc|None|None|
-|select|string|None|False|Comma separated list of fields to return. Leave empty to return every field|None|id,name,statusID|None|None|
-|skip|integer|0|False|Number of records to skip before returning results|None|0|None|None|
+|select|string|None|False|Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field|None|id,name,statusID|None|None|
+|skip|integer|0|False|Number of matching records to skip before returning results. To read a large result set in batches, set Top to the batch size and raise Skip by Top on each run until Count is less than Top|None|0|None|None|
 |top|integer|0|False|Maximum number of records to return. Leave empty or set to 0 to return every record, paging through the API automatically|None|100|None|None|
   
 Example input:
@@ -4460,8 +4456,8 @@ This action is used to retrieve records of any Cyber GRC record type, optionally
 |filter|string|None|False|OData $filter expression used to narrow the results, e.g. contains(name, 'phishing') and statusID eq 3|None|statusID eq 3|None|None|
 |order_by|string|None|False|OData $orderby expression, e.g. modifiedDate desc|None|modifiedDate desc|None|None|
 |record_type|string|Risks|True|The Cyber GRC record type to operate on|["AnswerSets", "AssessmentQuestions", "Assessments", "Audits", "BusinessObjectives", "Certifications", "Clients", "ContractDocuments", "Contracts", "ControlSetMetrics", "ControlSets", "Departments", "Discussions", "DocumentTypes", "Groups", "ITAssets", "ImpactViews", "Impacts", "Incidents", "LikelihoodViews", "Likelihoods", "Locations", "QuestionSets", "Risks", "SecurityPolicyInfos", "SecurityPolicySettings", "Statuses", "SystemInfos", "TaskTypes", "Tasks", "UserFileEvents", "Users", "VendorTypes", "Vendors"]|Risks|None|None|
-|select|string|None|False|Comma separated list of fields to return. Leave empty to return every field|None|id,name,statusID|None|None|
-|skip|integer|0|False|Number of records to skip before returning results|None|0|None|None|
+|select|string|None|False|Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field|None|id,name,statusID|None|None|
+|skip|integer|0|False|Number of matching records to skip before returning results. To read a large result set in batches, set Top to the batch size and raise Skip by Top on each run until Count is less than Top|None|0|None|None|
 |top|integer|0|False|Maximum number of records to return. Leave empty or set to 0 to return every record, paging through the API automatically|None|100|None|None|
   
 Example input:

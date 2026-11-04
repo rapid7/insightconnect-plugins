@@ -3,20 +3,13 @@ import time
 from .schema import MonitorRecordsInput, MonitorRecordsOutput, Input, Output, Component
 
 # Custom imports below
-import json
-import os
 from insightconnect_plugin_runtime.exceptions import PluginException
 from datetime import datetime, timedelta, timezone
-from pathlib import Path
-from tempfile import gettempdir
 
-CACHE_FILE = "monitor_records_cache.json"
-# The directory the Dockerfile creates for the plugin cache, which InsightConnect backs
-# with a volume that outlives the container because the plugin sets enable_cache. The
-# temporary directory does not survive the container being rescheduled, so a position
-# stored there is lost every time that happens, and the trigger then resumes from the
-# moment it restarted, silently skipping whatever changed while it was away.
-CACHE_DIR = Path("/workspace/cache")
+# The position is kept in the SDK's trigger state (self.state), which the runtime loads
+# from the plugin cache before run() starts and which survives the container restarting.
+# Without it the trigger would resume from the moment it restarted, silently skipping
+# whatever changed while it was away.
 # The API stores timestamps to the millisecond, so resume from just after the newest
 # record already emitted rather than re-sending it every poll.
 RESUME_OFFSET = timedelta(milliseconds=1)
@@ -41,7 +34,6 @@ class MonitorRecords(insightconnect_plugin_runtime.Trigger):
             input=MonitorRecordsInput(),
             output=MonitorRecordsOutput(),
         )
-        self.cache_path = self._cache_dir() / CACHE_FILE
 
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
@@ -57,7 +49,6 @@ class MonitorRecords(insightconnect_plugin_runtime.Trigger):
         # different fields.
         watched = WATCHED_FIELDS.get(event_type, BOTH_FIELDS)
         cache_key = f"{record_type}:{','.join(watched)}"
-        self.logger.info(f"Storing the trigger position in {self.cache_path}")
         watermark = self._load_watermark(cache_key)
         if watermark is None:
             # Nothing has been emitted for this record type yet, so start from now: the
@@ -66,7 +57,7 @@ class MonitorRecords(insightconnect_plugin_runtime.Trigger):
             watermark = self._server_now()
             self.logger.info(f"No stored position for {cache_key}, starting from {self._to_odata(watermark)}")
 
-        while True:
+        while self.run_trigger:
             since = self._to_odata(watermark)
             time_filter = " or ".join(f"{field} gt {since}" for field in watched)
             # Both halves are parenthesised because an unparenthesised or in either half
@@ -184,36 +175,18 @@ class MonitorRecords(insightconnect_plugin_runtime.Trigger):
         """OData v4 wants an unquoted datetimeoffset literal, e.g. 2026-01-21T20:30:44.407Z."""
         return moment.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z"
 
-    @staticmethod
-    def _cache_dir():
-        """The persistent cache directory, falling back to a temporary one.
-
-        The fallback matters when the trigger runs outside the plugin container, such as
-        under the unit tests, where /workspace/cache does not exist.
-        """
-        if CACHE_DIR.is_dir() and os.access(CACHE_DIR, os.W_OK):
-            return CACHE_DIR
-        return Path(gettempdir())  # nosec
-
     def _load_watermark(self, cache_key):
-        try:
-            stored = json.loads(self.cache_path.read_text()).get(cache_key)
-        except (OSError, ValueError, AttributeError):
-            # An unreadable or corrupt cache means the trigger starts from now again,
-            # which is far better than it refusing to start at all.
-            return None
-        return self._parse(stored)
+        # An unparseable stored value means the trigger starts from now again, which is
+        # far better than it refusing to start at all.
+        return self._parse(self.state.get(cache_key))
 
     def _save_watermark(self, cache_key, moment):
+        self.state[cache_key] = self._to_odata(moment)
+        if not self.state_file:
+            # The runtime only gives a trigger a state file when it knows the trigger ID.
+            self.logger.warning("Could not persist the trigger position: this trigger has no state file")
+            return
         try:
-            cache = json.loads(self.cache_path.read_text())
-        except (OSError, ValueError):
-            cache = {}
-        if not isinstance(cache, dict):
-            cache = {}
-        cache[cache_key] = self._to_odata(moment)
-        try:
-            self.cache_path.write_text(json.dumps(cache))
-        except OSError as error:
-            # A lost cache only costs duplicate records after a restart, so keep polling.
+            self._save_state()
+        except Exception as error:  # A lost position only costs duplicate records after a restart.
             self.logger.warning(f"Could not persist the trigger position: {error}")

@@ -19,8 +19,6 @@ from unittest.mock import MagicMock, patch
 from icon_rapid7_cyber_grc.triggers import MonitorComplianceDrift
 from util import CONTROL_SETS, MockResponse, Util, collection, metrics_record
 
-CACHE_FILE = "monitor_compliance_drift_cache.json"
-
 # The two live, scored frameworks from the shared control sets: 1 is SOC 2, 2 is
 # ISO 27001. Control set 3 is archived and 4 has never been scored.
 SOC2, ISO = 1, 2
@@ -60,7 +58,9 @@ class TestMonitorComplianceDrift(TestCase):
     def setUp(self):
         self.cache_dir = tempfile.TemporaryDirectory()
         self.trigger = Util.default_connector(MonitorComplianceDrift())
-        self.trigger.cache_path = Path(self.cache_dir.name) / CACHE_FILE
+        # What the runtime's load_state() hands a trigger that has a trigger ID.
+        self.state_path = Path(self.cache_dir.name) / "trigger-id.json"
+        self.trigger.state_file = str(self.state_path)
         self.trigger.send = MagicMock()
 
     def tearDown(self):
@@ -70,7 +70,7 @@ class TestMonitorComplianceDrift(TestCase):
         """Run one poll against the given scores and return what was emitted."""
         params = {"control_set_id": 0, "drop_threshold": 5, "minimum_compliance": 0, "interval": 3600}
         params.update(overrides)
-        with patch("requests.Session.request", side_effect=serve(scores, status)):
+        with patch("requests.request", side_effect=serve(scores, status)):
             with self.assertRaises(StopPolling):
                 self.trigger.run(params)
         if not self.trigger.send.called:
@@ -86,7 +86,7 @@ class TestMonitorComplianceDrift(TestCase):
         self.poll({SOC2: 80.0, ISO: 60.0})
 
         self.assertEqual(
-            json.loads(self.trigger.cache_path.read_text()),
+            json.loads(self.state_path.read_text())["scores"],
             {
                 "1": {"compliance": 80.0, "automated_controls_percentage": 40.0},
                 "2": {"compliance": 60.0, "automated_controls_percentage": 30.0},
@@ -180,28 +180,39 @@ class TestMonitorComplianceDrift(TestCase):
 
     def test_a_failed_poll_is_retried_rather_than_raised(self, _sleep):
         self.assertEqual(self.poll({SOC2: 90.0}, status=500), [])
-        self.assertFalse(self.trigger.cache_path.exists())
+        self.assertFalse(self.state_path.exists())
 
 
-class TestCacheLocation(TestCase):
-    """Where the trigger keeps the previous scores.
+class TestStateSurvivesARestart(TestCase):
+    """The previous scores live in the SDK's trigger state.
 
-    Scores in a temporary directory are lost when the container is rescheduled, and the
-    first poll after that has no baseline to measure a fall against, so the persistent
-    cache directory the Dockerfile creates is preferred whenever it is writable.
+    The runtime loads that state from the plugin cache before run() starts, so a trigger
+    whose container restarts between two polls still has its baseline and still reports
+    the fall.
     """
 
-    CACHE_DIR = "icon_rapid7_cyber_grc.triggers.monitor_compliance_drift.trigger.CACHE_DIR"
+    def new_trigger(self, cache_dir):
+        trigger = Util.default_connector(MonitorComplianceDrift())
+        trigger.connection.meta = MagicMock()
+        trigger.connection.meta.workflow.triggerId = "drift-trigger"
+        with patch("insightconnect_plugin_runtime.trigger.CACHE_DIR", cache_dir):
+            trigger.load_state()
+        trigger.send = MagicMock()
+        return trigger
 
-    def test_the_plugin_cache_directory_is_used_when_it_exists(self):
-        with tempfile.TemporaryDirectory() as persistent:
-            with patch(self.CACHE_DIR, Path(persistent)):
-                trigger = MonitorComplianceDrift()
+    @patch("time.sleep", side_effect=one_poll)
+    def test_a_fall_across_a_restart_is_reported(self, _sleep):
+        params = {"control_set_id": 0, "drop_threshold": 5, "minimum_compliance": 0, "interval": 3600}
+        with tempfile.TemporaryDirectory() as cache_dir:
+            before = self.new_trigger(cache_dir)
+            with patch("requests.request", side_effect=serve({SOC2: 80.0})):
+                with self.assertRaises(StopPolling):
+                    before.run(params)
 
-            self.assertEqual(trigger.cache_path, Path(persistent) / CACHE_FILE)
+            after = self.new_trigger(cache_dir)
+            with patch("requests.request", side_effect=serve({SOC2: 60.0})):
+                with self.assertRaises(StopPolling):
+                    after.run(params)
 
-    def test_a_temporary_directory_is_used_when_the_cache_directory_is_absent(self):
-        with patch(self.CACHE_DIR, Path("/no-such-plugin-cache-directory")):
-            trigger = MonitorComplianceDrift()
-
-        self.assertEqual(trigger.cache_path, Path(tempfile.gettempdir()) / CACHE_FILE)
+        drifts = after.send.call_args[0][0]["drifts"]
+        self.assertEqual([(drift["control_set_id"], drift["reason"]) for drift in drifts], [(SOC2, "Drop")])

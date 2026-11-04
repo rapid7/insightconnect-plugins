@@ -43,10 +43,12 @@ class GetComplianceScore(insightconnect_plugin_runtime.Action):
         """
         if not frameworks:
             return {"compliance": 0.0, "automated_controls_percentage": 0.0, "framework_count": 0}
+
+        def mean(key):
+            return round(sum(framework[key] for framework in frameworks) / len(frameworks), 2)
+
         return {
-            "compliance": round(sum(f["compliance"] for f in frameworks) / len(frameworks), 2),
-            "automated_controls_percentage": round(
-                sum(f["automated_controls_percentage"] for f in frameworks) / len(frameworks), 2
-            ),
+            "compliance": mean("compliance"),
+            "automated_controls_percentage": mean("automated_controls_percentage"),
             "framework_count": len(frameworks),
         }

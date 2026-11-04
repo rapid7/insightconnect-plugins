@@ -27,7 +27,7 @@ def days_from_now(literal: str) -> float:
     return (parsed - datetime.now(timezone.utc)) / timedelta(days=1)
 
 
-@patch("requests.Session.request", side_effect=Util.mock_request)
+@patch("requests.request", side_effect=Util.mock_request)
 class TestDateWindows(TestCase):
     def setUp(self):
         Util.calls = []

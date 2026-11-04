@@ -13,20 +13,28 @@ from icon_rapid7_cyber_grc.connection.schema import Input
 from util import API_KEY, BASE_URL, MockResponse, Util
 
 
-@patch("requests.Session.request", side_effect=Util.mock_request)
+@patch("requests.request", side_effect=Util.mock_request)
 class TestConnection(TestCase):
     def test_connect_builds_a_client_with_the_api_key_header(self, mock_request):
         connection = Util.default_connector(Connection()).connection
 
         self.assertEqual(connection.client.url, BASE_URL)
-        self.assertEqual(connection.client.session.headers.get("X-API-Key"), API_KEY)
+        self.assertEqual(connection.client.headers.get("X-API-Key"), API_KEY)
 
     def test_connect_trims_a_trailing_slash_from_the_url(self, mock_request):
         connection = Connection()
         connection.logger = Util.default_connector(Connection()).logger
-        connection.connect({Input.URL: f"{BASE_URL}/", Input.API_KEY: {"secretKey": API_KEY}, Input.SSL_VERIFY: True})
+        connection.connect({Input.URL: f"{BASE_URL}/", Input.API_KEY: {"secretKey": API_KEY}})
 
         self.assertEqual(connection.client.url, BASE_URL)
+
+    def test_connect_has_no_ssl_verify_option(self, mock_request):
+        self.assertFalse(hasattr(Input, "SSL_VERIFY"))
+
+    def test_connect_stores_the_secret_key_itself(self, mock_request):
+        connection = Util.default_connector(Connection()).connection
+
+        self.assertEqual(connection.api_key, API_KEY)
 
     def test_test_succeeds_when_the_api_answers(self, mock_request):
         connection = Util.default_connector(Connection()).connection

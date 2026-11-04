@@ -14,7 +14,7 @@ support: rapid7
 status: []
 sdk:
   type: slim
-  version: 6.6.0
+  version: 6.6.1
   user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_cyber_grc
@@ -72,14 +72,6 @@ connection:
     required: true
     example: "cpyl_0000000000000000000000000000000000000000000000"
     order: 2
-  ssl_verify:
-    title: "SSL Verify"
-    description: "Verify the TLS certificate presented by the Cyber GRC API host"
-    type: boolean
-    required: true
-    default: true
-    example: true
-    order: 3
 types:
   risk:
     vendors:
@@ -2669,8 +2661,8 @@ actions:
         example: "statusID eq 3"
         order: 1
       select:
-        title: "Select"
-        description: "Comma separated list of fields to return. Leave empty to return every field"
+        title: "Fields"
+        description: "Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field"
         type: string
         required: false
         example: "id,name,statusID"
@@ -2692,7 +2684,7 @@ actions:
         order: 4
       skip:
         title: "Skip"
-        description: "Number of records to skip before returning results"
+        description: "Number of matching records to skip before returning results. To read a large result set in batches, set Top to the batch size and raise Skip by Top on each run until Count is less than Top"
         type: integer
         required: false
         default: 0
@@ -2724,8 +2716,8 @@ actions:
         example: 1
         order: 1
       select:
-        title: "Select"
-        description: "Comma separated list of fields to return. Leave empty to return every field"
+        title: "Fields"
+        description: "Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field"
         type: string
         required: false
         example: "id,name"
@@ -2810,8 +2802,8 @@ actions:
         example: "statusID eq 3"
         order: 1
       select:
-        title: "Select"
-        description: "Comma separated list of fields to return. Leave empty to return every field"
+        title: "Fields"
+        description: "Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field"
         type: string
         required: false
         example: "id,name,statusID"
@@ -2833,7 +2825,7 @@ actions:
         order: 4
       skip:
         title: "Skip"
-        description: "Number of records to skip before returning results"
+        description: "Number of matching records to skip before returning results. To read a large result set in batches, set Top to the batch size and raise Skip by Top on each run until Count is less than Top"
         type: integer
         required: false
         default: 0
@@ -2865,8 +2857,8 @@ actions:
         example: 1
         order: 1
       select:
-        title: "Select"
-        description: "Comma separated list of fields to return. Leave empty to return every field"
+        title: "Fields"
+        description: "Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field"
         type: string
         required: false
         example: "id,name"
@@ -2951,8 +2943,8 @@ actions:
         example: "statusID eq 3"
         order: 1
       select:
-        title: "Select"
-        description: "Comma separated list of fields to return. Leave empty to return every field"
+        title: "Fields"
+        description: "Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field"
         type: string
         required: false
         example: "id,name,statusID"
@@ -2974,7 +2966,7 @@ actions:
         order: 4
       skip:
         title: "Skip"
-        description: "Number of records to skip before returning results"
+        description: "Number of matching records to skip before returning results. To read a large result set in batches, set Top to the batch size and raise Skip by Top on each run until Count is less than Top"
         type: integer
         required: false
         default: 0
@@ -3037,8 +3029,8 @@ actions:
         example: 1
         order: 1
       select:
-        title: "Select"
-        description: "Comma separated list of fields to return. Leave empty to return every field"
+        title: "Fields"
+        description: "Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field"
         type: string
         required: false
         example: "id,name"
@@ -3189,8 +3181,8 @@ actions:
         example: "statusID eq 3"
         order: 1
       select:
-        title: "Select"
-        description: "Comma separated list of fields to return. Leave empty to return every field"
+        title: "Fields"
+        description: "Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field"
         type: string
         required: false
         example: "id,name,statusID"
@@ -3212,7 +3204,7 @@ actions:
         order: 4
       skip:
         title: "Skip"
-        description: "Number of records to skip before returning results"
+        description: "Number of matching records to skip before returning results. To read a large result set in batches, set Top to the batch size and raise Skip by Top on each run until Count is less than Top"
         type: integer
         required: false
         default: 0
@@ -3244,8 +3236,8 @@ actions:
         example: 1
         order: 1
       select:
-        title: "Select"
-        description: "Comma separated list of fields to return. Leave empty to return every field"
+        title: "Fields"
+        description: "Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field"
         type: string
         required: false
         example: "id,name"
@@ -3330,8 +3322,8 @@ actions:
         example: "statusID eq 3"
         order: 1
       select:
-        title: "Select"
-        description: "Comma separated list of fields to return. Leave empty to return every field"
+        title: "Fields"
+        description: "Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field"
         type: string
         required: false
         example: "id,name,statusID"
@@ -3353,7 +3345,7 @@ actions:
         order: 4
       skip:
         title: "Skip"
-        description: "Number of records to skip before returning results"
+        description: "Number of matching records to skip before returning results. To read a large result set in batches, set Top to the batch size and raise Skip by Top on each run until Count is less than Top"
         type: integer
         required: false
         default: 0
@@ -3385,8 +3377,8 @@ actions:
         example: 1
         order: 1
       select:
-        title: "Select"
-        description: "Comma separated list of fields to return. Leave empty to return every field"
+        title: "Fields"
+        description: "Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field"
         type: string
         required: false
         example: "id,name"
@@ -3496,8 +3488,8 @@ actions:
         example: "statusID eq 3"
         order: 1
       select:
-        title: "Select"
-        description: "Comma separated list of fields to return. Leave empty to return every field"
+        title: "Fields"
+        description: "Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field"
         type: string
         required: false
         example: "id,name,statusID"
@@ -3519,7 +3511,7 @@ actions:
         order: 4
       skip:
         title: "Skip"
-        description: "Number of records to skip before returning results"
+        description: "Number of matching records to skip before returning results. To read a large result set in batches, set Top to the batch size and raise Skip by Top on each run until Count is less than Top"
         type: integer
         required: false
         default: 0
@@ -3551,8 +3543,8 @@ actions:
         example: 1
         order: 1
       select:
-        title: "Select"
-        description: "Comma separated list of fields to return. Leave empty to return every field"
+        title: "Fields"
+        description: "Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field"
         type: string
         required: false
         example: "id,name"
@@ -3637,8 +3629,8 @@ actions:
         example: "statusID eq 3"
         order: 1
       select:
-        title: "Select"
-        description: "Comma separated list of fields to return. Leave empty to return every field"
+        title: "Fields"
+        description: "Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field"
         type: string
         required: false
         example: "id,name,statusID"
@@ -3660,7 +3652,7 @@ actions:
         order: 4
       skip:
         title: "Skip"
-        description: "Number of records to skip before returning results"
+        description: "Number of matching records to skip before returning results. To read a large result set in batches, set Top to the batch size and raise Skip by Top on each run until Count is less than Top"
         type: integer
         required: false
         default: 0
@@ -3692,8 +3684,8 @@ actions:
         example: 1
         order: 1
       select:
-        title: "Select"
-        description: "Comma separated list of fields to return. Leave empty to return every field"
+        title: "Fields"
+        description: "Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field"
         type: string
         required: false
         example: "id,name"
@@ -3778,8 +3770,8 @@ actions:
         example: "statusID eq 3"
         order: 1
       select:
-        title: "Select"
-        description: "Comma separated list of fields to return. Leave empty to return every field"
+        title: "Fields"
+        description: "Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field"
         type: string
         required: false
         example: "id,name,statusID"
@@ -3801,7 +3793,7 @@ actions:
         order: 4
       skip:
         title: "Skip"
-        description: "Number of records to skip before returning results"
+        description: "Number of matching records to skip before returning results. To read a large result set in batches, set Top to the batch size and raise Skip by Top on each run until Count is less than Top"
         type: integer
         required: false
         default: 0
@@ -3849,8 +3841,8 @@ actions:
         example: 1
         order: 1
       select:
-        title: "Select"
-        description: "Comma separated list of fields to return. Leave empty to return every field"
+        title: "Fields"
+        description: "Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field"
         type: string
         required: false
         example: "id,name"
@@ -3935,8 +3927,8 @@ actions:
         example: "statusID eq 3"
         order: 1
       select:
-        title: "Select"
-        description: "Comma separated list of fields to return. Leave empty to return every field"
+        title: "Fields"
+        description: "Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field"
         type: string
         required: false
         example: "id,name,statusID"
@@ -3958,7 +3950,7 @@ actions:
         order: 4
       skip:
         title: "Skip"
-        description: "Number of records to skip before returning results"
+        description: "Number of matching records to skip before returning results. To read a large result set in batches, set Top to the batch size and raise Skip by Top on each run until Count is less than Top"
         type: integer
         required: false
         default: 0
@@ -3990,8 +3982,8 @@ actions:
         example: 1
         order: 1
       select:
-        title: "Select"
-        description: "Comma separated list of fields to return. Leave empty to return every field"
+        title: "Fields"
+        description: "Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field"
         type: string
         required: false
         example: "id,name"
@@ -4076,8 +4068,8 @@ actions:
         example: "statusID eq 3"
         order: 1
       select:
-        title: "Select"
-        description: "Comma separated list of fields to return. Leave empty to return every field"
+        title: "Fields"
+        description: "Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field"
         type: string
         required: false
         example: "id,name,statusID"
@@ -4099,7 +4091,7 @@ actions:
         order: 4
       skip:
         title: "Skip"
-        description: "Number of records to skip before returning results"
+        description: "Number of matching records to skip before returning results. To read a large result set in batches, set Top to the batch size and raise Skip by Top on each run until Count is less than Top"
         type: integer
         required: false
         default: 0
@@ -4131,8 +4123,8 @@ actions:
         example: 1
         order: 1
       select:
-        title: "Select"
-        description: "Comma separated list of fields to return. Leave empty to return every field"
+        title: "Fields"
+        description: "Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field"
         type: string
         required: false
         example: "id,name"
@@ -4217,8 +4209,8 @@ actions:
         example: "statusID eq 3"
         order: 1
       select:
-        title: "Select"
-        description: "Comma separated list of fields to return. Leave empty to return every field"
+        title: "Fields"
+        description: "Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field"
         type: string
         required: false
         example: "id,name,statusID"
@@ -4240,7 +4232,7 @@ actions:
         order: 4
       skip:
         title: "Skip"
-        description: "Number of records to skip before returning results"
+        description: "Number of matching records to skip before returning results. To read a large result set in batches, set Top to the batch size and raise Skip by Top on each run until Count is less than Top"
         type: integer
         required: false
         default: 0
@@ -4272,8 +4264,8 @@ actions:
         example: 1
         order: 1
       select:
-        title: "Select"
-        description: "Comma separated list of fields to return. Leave empty to return every field"
+        title: "Fields"
+        description: "Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field"
         type: string
         required: false
         example: "id,name"
@@ -4401,8 +4393,8 @@ actions:
         example: "statusID eq 3"
         order: 2
       select:
-        title: "Select"
-        description: "Comma separated list of fields to return. Leave empty to return every field"
+        title: "Fields"
+        description: "Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field"
         type: string
         required: false
         example: "id,name,statusID"
@@ -4424,7 +4416,7 @@ actions:
         order: 5
       skip:
         title: "Skip"
-        description: "Number of records to skip before returning results"
+        description: "Number of matching records to skip before returning results. To read a large result set in batches, set Top to the batch size and raise Skip by Top on each run until Count is less than Top"
         type: integer
         required: false
         default: 0
@@ -4499,8 +4491,8 @@ actions:
         example: 1
         order: 2
       select:
-        title: "Select"
-        description: "Comma separated list of fields to return. Leave empty to return every field"
+        title: "Fields"
+        description: "Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field"
         type: string
         required: false
         example: "id,name"

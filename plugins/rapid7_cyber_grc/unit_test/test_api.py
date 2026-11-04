@@ -15,7 +15,7 @@ from icon_rapid7_cyber_grc.util.api import CyberGrcAPI, clean_record
 from util import API_KEY, BASE_URL, PAGED_ENTITY, MockResponse, Util
 
 
-@patch("requests.Session.request", side_effect=Util.mock_request)
+@patch("requests.request", side_effect=Util.mock_request)
 class TestCyberGrcAPI(TestCase):
     def setUp(self):
         self.client = Util.default_connector(Connection()).connection.client
@@ -386,12 +386,10 @@ class TestCyberGrcAPI(TestCase):
         self.assertIn("[REDACTED]", context.exception.data)
 
     def test_surrounding_whitespace_is_trimmed_from_the_url_and_api_key(self, mock_request):
-        client = CyberGrcAPI(
-            url=f"  {BASE_URL}/  ", api_key=f" {API_KEY}\n", ssl_verify=True, logger=self.client.logger
-        )
+        client = CyberGrcAPI(url=f"  {BASE_URL}/  ", api_key=f" {API_KEY}\n", logger=self.client.logger)
 
         self.assertEqual(client.url, BASE_URL)
-        self.assertEqual(client.session.headers["X-API-Key"], API_KEY)
+        self.assertEqual(client.headers["X-API-Key"], API_KEY)
 
     def test_request_raises_a_server_error_for_a_5xx_response(self, mock_request):
         with self.assertRaises(PluginException) as context:
@@ -422,6 +420,18 @@ class TestCyberGrcAPI(TestCase):
             self.client.list_records("Risks")
 
         self.assertIn("TLS certificate", context.exception.cause)
+        self.assertNotIn("SSL Verify", context.exception.assistance)
+
+    def test_every_request_verifies_tls_and_carries_the_api_key(self, mock_request):
+        self.client.list_records("Risks")
+
+        sent = mock_request.call_args.kwargs
+        self.assertIs(sent["verify"], True)
+        self.assertEqual(sent["headers"]["X-API-Key"], API_KEY)
+        self.assertEqual(sent["headers"]["Accept"], "application/json")
+
+    def test_the_client_holds_no_persistent_session(self, mock_request):
+        self.assertFalse(hasattr(self.client, "session"))
 
     def test_request_reports_a_timeout(self, mock_request):
         mock_request.side_effect = requests.exceptions.Timeout("timed out")
@@ -442,7 +452,7 @@ class TestCyberGrcAPI(TestCase):
         self.assertIn("transport level failure", context.exception.assistance)
 
 
-@patch("requests.Session.request", side_effect=Util.mock_request)
+@patch("requests.request", side_effect=Util.mock_request)
 class TestComplexPropertyFilter(TestCase):
     """A Filter aimed at a nested object rather than a field.
 
@@ -472,7 +482,7 @@ class TestComplexPropertyFilter(TestCase):
         self.assertIn("unexpected response", raised.exception.cause)
 
 
-@patch("requests.Session.request", side_effect=Util.mock_request)
+@patch("requests.request", side_effect=Util.mock_request)
 class TestServerClock(TestCase):
     """Reading the API host's own clock.
 
@@ -520,7 +530,7 @@ class TestIgnoredUpdateFields(TestCase):
     """
 
     def setUp(self):
-        patcher = patch("requests.Session.request", side_effect=Util.mock_request)
+        patcher = patch("requests.request", side_effect=Util.mock_request)
         patcher.start()
         self.addCleanup(patcher.stop)
         self.client = Util.default_connector(Connection()).connection.client

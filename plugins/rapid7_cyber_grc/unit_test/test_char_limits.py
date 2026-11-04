@@ -32,7 +32,7 @@ def comment_server(method, url, **kwargs):
     return MockResponse(200, {"id": 4, "discussionFieldID": 77})
 
 
-@patch("requests.Session.request", side_effect=Util.mock_request)
+@patch("requests.request", side_effect=Util.mock_request)
 class TestRecordCharLimits(TestCase):
     def setUp(self):
         Util.calls = []
@@ -131,7 +131,7 @@ class TestCommentCharLimit(TestCase):
 
     def run_comment(self, comment):
         action = Util.default_connector(AddComment())
-        with patch("requests.Session.request", side_effect=comment_server):
+        with patch("requests.request", side_effect=comment_server):
             return action.run({"record_type": "Tasks", "id": 4, "comment": comment, "user_id": 5})
 
     @staticmethod

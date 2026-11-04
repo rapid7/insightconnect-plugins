@@ -42,7 +42,7 @@ class TestAddComment(TestCase):
 
     def run_action(self, field_id=FIELD_ID, **params):
         action = Util.default_connector(AddComment())
-        with patch("requests.Session.request", side_effect=serve(field_id)):
+        with patch("requests.request", side_effect=serve(field_id)):
             return action.run({"record_type": "Tasks", "id": 4, "comment": "Closed upstream", "user_id": 5, **params})
 
     @staticmethod

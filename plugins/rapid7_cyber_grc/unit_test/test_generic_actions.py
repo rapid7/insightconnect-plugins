@@ -21,7 +21,7 @@ from icon_rapid7_cyber_grc.actions import (
 from util import BASE_URL, Util
 
 
-@patch("requests.Session.request", side_effect=Util.mock_request)
+@patch("requests.request", side_effect=Util.mock_request)
 class TestGenericActions(TestCase):
     def setUp(self):
         Util.calls = []

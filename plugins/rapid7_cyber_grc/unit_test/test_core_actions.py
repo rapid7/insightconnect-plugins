@@ -40,7 +40,7 @@ UPDATE_CASES = [[entity, singular, f"Update{stem}"] for entity, singular, _, ste
 DELETE_CASES = [[entity, f"Delete{stem}"] for entity, _, _, stem in FAMILIES]
 
 
-@patch("requests.Session.request", side_effect=Util.mock_request)
+@patch("requests.request", side_effect=Util.mock_request)
 class TestCoreActions(TestCase):
     def setUp(self):
         Util.calls = []

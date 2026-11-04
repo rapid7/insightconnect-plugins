@@ -5,7 +5,6 @@ import json
 
 class Input:
     API_KEY = "api_key"
-    SSL_VERIFY = "ssl_verify"
     URL = "url"
 
 
@@ -21,13 +20,6 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "A Cyber GRC API key, generated under Settings then API Keys. The key inherits the permissions of the user it is assigned to",
       "order": 2
     },
-    "ssl_verify": {
-      "type": "boolean",
-      "title": "SSL Verify",
-      "description": "Verify the TLS certificate presented by the Cyber GRC API host",
-      "default": true,
-      "order": 3
-    },
     "url": {
       "type": "string",
       "title": "URL",
@@ -37,7 +29,6 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   },
   "required": [
     "api_key",
-    "ssl_verify",
     "url"
   ],
   "definitions": {

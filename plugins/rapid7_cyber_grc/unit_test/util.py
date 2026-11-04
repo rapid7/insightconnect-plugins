@@ -127,7 +127,6 @@ class Util:
             {
                 Input.URL: BASE_URL,
                 Input.API_KEY: {"secretKey": API_KEY},
-                Input.SSL_VERIFY: True,
             }
         )
         component.connection = connection

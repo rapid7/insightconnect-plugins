@@ -3,6 +3,7 @@ import sys
 
 sys.path.append(os.path.abspath("../"))
 
+import json
 import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
@@ -30,14 +31,16 @@ def stop_after(polls: int):
     return sleeper
 
 
-@patch("requests.Session.request", side_effect=Util.mock_request)
+@patch("requests.request", side_effect=Util.mock_request)
 @patch("time.sleep", side_effect=stop_after(1))
 class TestMonitorRecords(TestCase):
     def setUp(self):
         Util.calls = []
         self.cache_dir = tempfile.TemporaryDirectory()
         self.trigger = Util.default_connector(MonitorRecords())
-        self.trigger.cache_path = Path(self.cache_dir.name) / "monitor_records_cache.json"
+        # What the runtime's load_state() hands a trigger that has a trigger ID.
+        self.state_path = Path(self.cache_dir.name) / "trigger-id.json"
+        self.trigger.state_file = str(self.state_path)
         self.trigger.send = MagicMock()
 
     def tearDown(self):
@@ -116,7 +119,7 @@ class TestMonitorRecords(TestCase):
 
     def test_the_clock_is_not_read_when_a_position_is_already_stored(self, mock_sleep, mock_request):
         # Resuming needs no clock: the stored position already says where to carry on.
-        self.trigger.cache_path.write_text('{"Incidents:createdDate,modifiedDate": "2026-05-01T00:00:00.000Z"}')
+        self.trigger.state = json.loads('{"Incidents:createdDate,modifiedDate": "2026-05-01T00:00:00.000Z"}')
 
         self.run_trigger()
 
@@ -209,7 +212,7 @@ class TestMonitorRecords(TestCase):
 
         self.run_trigger(event_type="Updated")
 
-        self.assertIn("2026-01-21T20:30:44.408Z", self.trigger.cache_path.read_text())
+        self.assertIn("2026-01-21T20:30:44.408Z", self.state_path.read_text())
 
     def test_a_record_missing_a_timestamp_is_emitted_rather_than_discarded(self, mock_sleep, mock_request):
         # Neither timestamp is guaranteed by the API, and losing a real change is worse
@@ -226,7 +229,7 @@ class TestMonitorRecords(TestCase):
         # would either replay records or skip them.
         self.run_trigger(event_type="Created")
 
-        stored = self.trigger.cache_path.read_text()
+        stored = self.state_path.read_text()
         self.assertIn("Incidents:createdDate", stored)
         self.assertNotIn("createdDate,modifiedDate", stored)
 
@@ -277,17 +280,17 @@ class TestMonitorRecords(TestCase):
 
         self.run_trigger()
 
-        self.assertIn("2026-01-21T20:30:44.408Z", self.trigger.cache_path.read_text())
+        self.assertIn("2026-01-21T20:30:44.408Z", self.state_path.read_text())
 
     def test_the_position_advances_past_the_newest_record(self, mock_sleep, mock_request):
         self.run_trigger()
 
         # The newest record in the fixture carries modifiedDate 2026-01-21T20:30:44.407Z,
         # so the next poll must resume from one millisecond later.
-        self.assertIn("2026-01-21T20:30:44.408Z", self.trigger.cache_path.read_text())
+        self.assertIn("2026-01-21T20:30:44.408Z", self.state_path.read_text())
 
     def test_a_stored_position_is_used_instead_of_starting_from_now(self, mock_sleep, mock_request):
-        self.trigger.cache_path.write_text('{"Incidents:createdDate,modifiedDate": "2026-05-01T00:00:00.000Z"}')
+        self.trigger.state = json.loads('{"Incidents:createdDate,modifiedDate": "2026-05-01T00:00:00.000Z"}')
 
         self.run_trigger()
 
@@ -297,27 +300,23 @@ class TestMonitorRecords(TestCase):
         )
 
     def test_a_stored_position_for_another_record_type_is_ignored(self, mock_sleep, mock_request):
-        self.trigger.cache_path.write_text('{"Risks:modifiedDate": "2026-05-01T00:00:00.000Z"}')
+        self.trigger.state = json.loads('{"Risks:modifiedDate": "2026-05-01T00:00:00.000Z"}')
 
         self.run_trigger()
 
         self.assertNotIn("2026-05-01", self.poll_params()["$filter"])
 
-    @parameterized.expand([["not_json", "not json"], ["not_an_object", "[]"], ["empty", ""]])
-    def test_a_corrupt_cache_falls_back_to_starting_from_now(self, mock_sleep, mock_request, _name, contents):
-        self.trigger.cache_path.write_text(contents)
+    @parameterized.expand([["not_a_date", "not a date"], ["not_a_string", 42], ["empty", ""]])
+    def test_an_unreadable_stored_position_falls_back_to_starting_from_now(
+        self, mock_sleep, mock_request, _name, stored
+    ):
+        self.trigger.state = {"Incidents:createdDate,modifiedDate": stored}
 
         self.run_trigger()
 
         self.trigger.send.assert_called_once()
         self.assertIn("modifiedDate gt ", self.poll_params()["$filter"])
-
-    def test_a_cache_that_is_not_an_object_is_replaced_rather_than_failing_the_poll(self, mock_sleep, mock_request):
-        self.trigger.cache_path.write_text("[]")
-
-        self.run_trigger()
-
-        self.assertIn("Incidents:createdDate,modifiedDate", self.trigger.cache_path.read_text())
+        self.assertNotIn(str(stored) or "never", self.poll_params()["$filter"].replace("modifiedDate gt", ""))
 
     def test_the_position_holds_when_a_timestamp_cannot_be_parsed(self, mock_sleep, mock_request):
         unparseable = dict(record(1), createdDate="last Monday", modifiedDate="last Tuesday")
@@ -326,17 +325,26 @@ class TestMonitorRecords(TestCase):
         self.run_trigger()
 
         self.trigger.send.assert_called_once()
-        self.assertFalse(self.trigger.cache_path.exists())
+        self.assertFalse(self.state_path.exists())
 
     def test_polling_continues_when_the_position_cannot_be_written(self, mock_sleep, mock_request):
         # A lost position only costs duplicate records after a restart.
-        self.trigger.cache_path = Path(self.cache_dir.name) / "no-such-directory" / "cache.json"
+        self.trigger.state_file = str(Path(self.cache_dir.name) / "no-such-directory" / "trigger-id.json")
         self.trigger.logger = MagicMock()
 
         self.run_trigger()
 
         self.trigger.send.assert_called_once()
         self.assertIn("Could not persist", self.trigger.logger.warning.call_args[0][0])
+
+    def test_polling_continues_when_the_trigger_has_no_state_file(self, mock_sleep, mock_request):
+        self.trigger.state_file = ""
+        self.trigger.logger = MagicMock()
+
+        self.run_trigger()
+
+        self.trigger.send.assert_called_once()
+        self.assertIn("no state file", self.trigger.logger.warning.call_args[0][0])
 
     def test_nothing_is_emitted_when_no_records_changed(self, mock_sleep, mock_request):
         mock_request.side_effect = lambda *args, **kwargs: MockResponse(200, collection([]))
@@ -352,29 +360,38 @@ class TestMonitorRecords(TestCase):
         self.run_trigger()
 
         self.trigger.send.assert_called_once()
-        self.assertFalse(self.trigger.cache_path.exists())
+        self.assertFalse(self.state_path.exists())
 
 
-class TestCacheLocation(TestCase):
-    """Where the trigger keeps its position.
+@patch("requests.request", side_effect=Util.mock_request)
+@patch("time.sleep", side_effect=stop_after(1))
+class TestStateSurvivesARestart(TestCase):
+    """The position lives in the SDK's trigger state.
 
-    A position in a temporary directory is lost when the container is rescheduled, which
-    means the trigger silently skips whatever changed while it was away, so the
-    persistent cache directory the Dockerfile creates is preferred whenever it is there
-    to be written to.
+    The runtime loads that state from the plugin cache before run() starts, so a trigger
+    whose container restarts resumes from where it stopped instead of from the restart,
+    which would silently skip whatever changed while it was away.
     """
 
-    CACHE_DIR = "icon_rapid7_cyber_grc.triggers.monitor_records.trigger.CACHE_DIR"
+    def new_trigger(self, cache_dir):
+        trigger = Util.default_connector(MonitorRecords())
+        trigger.connection.meta = MagicMock()
+        trigger.connection.meta.workflow.triggerId = "records-trigger"
+        with patch("insightconnect_plugin_runtime.trigger.CACHE_DIR", cache_dir):
+            trigger.load_state()
+        trigger.send = MagicMock()
+        return trigger
 
-    def test_the_plugin_cache_directory_is_used_when_it_exists(self):
-        with tempfile.TemporaryDirectory() as persistent:
-            with patch(self.CACHE_DIR, Path(persistent)):
-                trigger = MonitorRecords()
+    def test_the_position_is_resumed_after_a_restart(self, mock_sleep, mock_request):
+        params = {"record_type": "Incidents", "event_type": "Any", "interval": 300, "filter": None}
+        with tempfile.TemporaryDirectory() as cache_dir:
+            with self.assertRaises(StopPolling):
+                self.new_trigger(cache_dir).run(params)
 
-            self.assertEqual(trigger.cache_path, Path(persistent) / "monitor_records_cache.json")
+            Util.calls = []
+            mock_sleep.side_effect = stop_after(1)
+            with self.assertRaises(StopPolling):
+                self.new_trigger(cache_dir).run(params)
 
-    def test_a_temporary_directory_is_used_when_the_cache_directory_is_absent(self):
-        with patch(self.CACHE_DIR, Path("/no-such-plugin-cache-directory")):
-            trigger = MonitorRecords()
-
-        self.assertEqual(trigger.cache_path, Path(tempfile.gettempdir()) / "monitor_records_cache.json")
+        polls = [call for call in Util.calls if "$count" not in call["url"]]
+        self.assertIn("gt 2026-01-21T20:30:44.408Z", polls[0]["params"]["$filter"])

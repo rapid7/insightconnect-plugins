@@ -51,26 +51,31 @@ class GetTasks(insightconnect_plugin_runtime.Action):
         else:
             combined = clauses[0] if clauses else None
 
-        if not (owner or "").strip():
-            records = self.connection.client.list_records(
-                "Tasks", filter_=combined, select=select, order_by=order_by, top=top, skip=skip
-            )
-            return {Output.TASKS: records, Output.COUNT: len(records)}
+        owner = (owner or "").strip()
+        if owner:
+            # The assignee is a nested object with no filterable scalar ID beside it, so an
+            # owner cannot be given to $filter and is applied here after the read. Top and
+            # Skip are held back from the API for the same reason: they have to count the
+            # owner's tasks, not every task the rest of the query matched.
+            select = self._with_assignee(select)
 
-        # The assignee is a nested object with no filterable scalar ID beside it, so an
-        # owner cannot be given to $filter. Read the tasks the rest of the query matches
-        # and apply the owner here, then window the result so Top and Skip count the
-        # owner's tasks rather than every task the API returned.
         records = self.connection.client.list_records(
-            "Tasks", filter_=combined, select=self._with_assignee(select), order_by=order_by
+            "Tasks",
+            filter_=combined,
+            select=select,
+            order_by=order_by,
+            top=None if owner else top,
+            skip=None if owner else skip,
         )
-        matching = [record for record in records if self._assigned_to(record, owner)]
-        self.logger.info(f"{len(matching)} of {len(records)} task(s) are assigned to {owner}")
 
-        windowed = matching[skip:] if skip else matching
-        if top:
-            windowed = windowed[:top]
-        return {Output.TASKS: windowed, Output.COUNT: len(windowed)}
+        if owner:
+            matching = [record for record in records if self._assigned_to(record, owner)]
+            self.logger.info(f"{len(matching)} of {len(records)} task(s) are assigned to {owner}")
+            records = matching[skip:] if skip else matching
+            if top:
+                records = records[:top]
+
+        return {Output.TASKS: records, Output.COUNT: len(records)}
 
     @staticmethod
     def _with_assignee(select):

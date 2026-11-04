@@ -3,20 +3,15 @@ import time
 from .schema import MonitorComplianceDriftInput, MonitorComplianceDriftOutput, Input, Output, Component
 
 # Custom imports below
-import json
-import os
 from insightconnect_plugin_runtime.exceptions import PluginException
-from pathlib import Path
-from tempfile import gettempdir
 
 from ...util.compliance import framework_scores, number
 
-CACHE_FILE = "monitor_compliance_drift_cache.json"
-# The directory the Dockerfile creates for the plugin cache, which InsightConnect backs
-# with a volume that outlives the container because the plugin sets enable_cache. A score
-# stored in the temporary directory instead would be lost whenever the container is
-# rescheduled, and the first poll after that cannot report a fall it has no baseline for.
-CACHE_DIR = Path("/workspace/cache")
+# The previous scores are kept in the SDK's trigger state (self.state), which the runtime
+# loads from the plugin cache before run() starts and which survives the container
+# restarting. Without it the first poll after a restart has no baseline to measure a
+# fall against.
+STATE_KEY = "scores"
 
 DROP = "Drop"
 BELOW_MINIMUM = "Below Minimum"
@@ -30,7 +25,6 @@ class MonitorComplianceDrift(insightconnect_plugin_runtime.Trigger):
             input=MonitorComplianceDriftInput(),
             output=MonitorComplianceDriftOutput(),
         )
-        self.cache_path = self._cache_dir() / CACHE_FILE
 
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
@@ -40,9 +34,7 @@ class MonitorComplianceDrift(insightconnect_plugin_runtime.Trigger):
         minimum_compliance = params.get(Input.MINIMUM_COMPLIANCE)
         # END INPUT BINDING - DO NOT REMOVE
 
-        self.logger.info(f"Storing the previous compliance scores in {self.cache_path}")
-
-        while True:
+        while self.run_trigger:
             try:
                 frameworks, unscored = framework_scores(self.connection.client, control_set_id)
             except PluginException as error:
@@ -119,36 +111,25 @@ class MonitorComplianceDrift(insightconnect_plugin_runtime.Trigger):
 
         return sorted(drifts, key=lambda drift: drift["compliance_change"])
 
-    @staticmethod
-    def _cache_dir():
-        """The persistent cache directory, falling back to a temporary one.
-
-        The fallback matters when the trigger runs outside the plugin container, such as
-        under the unit tests, where /workspace/cache does not exist.
-        """
-        if CACHE_DIR.is_dir() and os.access(CACHE_DIR, os.W_OK):
-            return CACHE_DIR
-        return Path(gettempdir())  # nosec
-
     def _load(self):
-        try:
-            stored = json.loads(self.cache_path.read_text())
-        except (OSError, ValueError):
-            # An unreadable or corrupt cache costs one poll with no baseline, which is
-            # far better than the trigger refusing to start.
-            return {}
+        stored = self.state.get(STATE_KEY)
+        # A missing or malformed baseline costs one poll with no baseline, which is far
+        # better than the trigger refusing to start.
         return stored if isinstance(stored, dict) else {}
 
     def _save(self, frameworks):
-        cache = {
+        self.state[STATE_KEY] = {
             str(framework["control_set_id"]): {
                 "compliance": framework["compliance"],
                 "automated_controls_percentage": framework["automated_controls_percentage"],
             }
             for framework in frameworks
         }
+        if not self.state_file:
+            # The runtime only gives a trigger a state file when it knows the trigger ID.
+            self.logger.warning("Could not persist the compliance scores: this trigger has no state file")
+            return
         try:
-            self.cache_path.write_text(json.dumps(cache))
-        except OSError as error:
-            # A lost cache only costs the next poll its baseline, so keep polling.
+            self._save_state()
+        except Exception as error:  # A lost baseline only costs the next poll, so keep polling.
             self.logger.warning(f"Could not persist the compliance scores: {error}")

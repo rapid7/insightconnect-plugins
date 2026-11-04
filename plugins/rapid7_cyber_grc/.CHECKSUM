@@ -1,5 +1,5 @@
 {
-	"spec": "6ce75c7c4ea3a01292f6aeba81dfa36d",
+	"spec": "2a8210d95db3fbb262f438053f103ae4",
 	"manifest": "23c7165c978900a85f96394e0bd06677",
 	"setup": "c23b172fb8cb44c629460a060173c29e",
 	"schemas": [
@@ -109,27 +109,27 @@
 		},
 		{
 			"identifier": "get_assessment/schema.py",
-			"hash": "685d21f34fba93eae12da9b992b27a9d"
+			"hash": "7a66a57a5cc4f4c7196a0942fc453b48"
 		},
 		{
 			"identifier": "get_assessments/schema.py",
-			"hash": "bdfa0c25aa3ccf8ac8b5c75be40407c4"
+			"hash": "ccc834d6e66701e65c341729044ad67c"
 		},
 		{
 			"identifier": "get_audit/schema.py",
-			"hash": "2974c01ba402b64a2f11c30e6b4fe538"
+			"hash": "244c10cfe646fad7fd8f533ff831525d"
 		},
 		{
 			"identifier": "get_audits/schema.py",
-			"hash": "c6ed28844f9d8fb9bde03c942e324f73"
+			"hash": "81a1475a109c94ac7c64ea054ac3f288"
 		},
 		{
 			"identifier": "get_certification/schema.py",
-			"hash": "1ecd489561d6c1cd9e91431600aeefde"
+			"hash": "fb193088a3377372e3a6b9da436e10e0"
 		},
 		{
 			"identifier": "get_certifications/schema.py",
-			"hash": "83d71adb332fc6a65a139a8a080bd2b9"
+			"hash": "01feac3746da1098d7f0734a3e187a56"
 		},
 		{
 			"identifier": "get_compliance_score/schema.py",
@@ -137,39 +137,39 @@
 		},
 		{
 			"identifier": "get_contract/schema.py",
-			"hash": "78df7b92e937d5818eab605d8881e34a"
+			"hash": "026eee8a2654746261339e29a6f2dda6"
 		},
 		{
 			"identifier": "get_contracts/schema.py",
-			"hash": "e73900c2a712a0e8e6400c54f6da9bf0"
+			"hash": "3c165b7523387d9ce1df6e73d3f6201f"
 		},
 		{
 			"identifier": "get_control_set/schema.py",
-			"hash": "e9b5a701a49212ca41a24df337732fd1"
+			"hash": "9a97c1b9a2f5c31f20311caad491dad2"
 		},
 		{
 			"identifier": "get_control_sets/schema.py",
-			"hash": "8c5f4893577d71b9c7193170c30dc543"
+			"hash": "8ffdc1a5d19ff85fc44fb7ba09372aee"
 		},
 		{
 			"identifier": "get_incident/schema.py",
-			"hash": "fca0218f74889e0c6e1849ac36f3d7b5"
+			"hash": "4e2a2a08fb07910f43032f64eae4a77a"
 		},
 		{
 			"identifier": "get_incidents/schema.py",
-			"hash": "011882afe5ab641ddbf176c8b9f57aaa"
+			"hash": "7aefde66a02f59bfe8b28c327c8716bb"
 		},
 		{
 			"identifier": "get_it_asset/schema.py",
-			"hash": "05fa2b50d282cf7b0e695a6e550f5f32"
+			"hash": "0e8a6d41ffc4da0e46a17295c0e9e8c3"
 		},
 		{
 			"identifier": "get_it_assets/schema.py",
-			"hash": "ed15f3fef7bb6f065890c601d750cf7c"
+			"hash": "355f19896fae78a07712751864e2b689"
 		},
 		{
 			"identifier": "get_record/schema.py",
-			"hash": "73d5450e0250aa55182715a6b8ac20a6"
+			"hash": "b2d42f1dd49857b7367389b0a1cc5192"
 		},
 		{
 			"identifier": "get_record_history/schema.py",
@@ -177,39 +177,39 @@
 		},
 		{
 			"identifier": "get_risk/schema.py",
-			"hash": "d674908e8572cebe127bc3a27b181d8f"
+			"hash": "4d9cd0781a1bfc694aa4be4c375be1fc"
 		},
 		{
 			"identifier": "get_risks/schema.py",
-			"hash": "ca426d53265906bcfe7ec9a3064be5ee"
+			"hash": "e5dc3e0df5d168af02ef36bbf0e12140"
 		},
 		{
 			"identifier": "get_task/schema.py",
-			"hash": "1f30d2cfe0359ae70a53e05322df86ba"
+			"hash": "577bc0c7a915f561f77e4da3e98166ac"
 		},
 		{
 			"identifier": "get_tasks/schema.py",
-			"hash": "202bb8e3bcd6f3170b97abe066751cb8"
+			"hash": "b7dcf8df791f708c488943297859d52b"
 		},
 		{
 			"identifier": "get_user/schema.py",
-			"hash": "ac2cd56b0ab7bcc08806095427e5d962"
+			"hash": "db00eae4ba62c0e70850308bd0ebde1c"
 		},
 		{
 			"identifier": "get_users/schema.py",
-			"hash": "109e901beb10cd2bb5a9a3efb1bf2110"
+			"hash": "b5b819a2f3b4c095b6ff56efd89da505"
 		},
 		{
 			"identifier": "get_vendor/schema.py",
-			"hash": "a2cd2adb1495a075dbf3cd2e2eaa18f0"
+			"hash": "03fe560b881521b77a46942fcccae379"
 		},
 		{
 			"identifier": "get_vendors/schema.py",
-			"hash": "033d73533f58058ccd2ca98bf0aa39e6"
+			"hash": "4b65448d2909a6d489a8cf59ec1c92c4"
 		},
 		{
 			"identifier": "list_records/schema.py",
-			"hash": "05c93d94b48799f9a44abc80bb449c3a"
+			"hash": "df54ba0d92741831694be8b033febfe5"
 		},
 		{
 			"identifier": "update_assessment/schema.py",
@@ -265,7 +265,7 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "a7f1768f1fa14209acba5726efab4cf6"
+			"hash": "ddcd604a75af7c9c432433bdb800302b"
 		},
 		{
 			"identifier": "monitor_compliance_drift/schema.py",

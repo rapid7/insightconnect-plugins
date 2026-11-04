@@ -30,8 +30,8 @@ class GetRiskInput(insightconnect_plugin_runtime.Input):
     },
     "select": {
       "type": "string",
-      "title": "Select",
-      "description": "Comma separated list of fields to return. Leave empty to return every field",
+      "title": "Fields",
+      "description": "Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field",
       "order": 2
     }
   },

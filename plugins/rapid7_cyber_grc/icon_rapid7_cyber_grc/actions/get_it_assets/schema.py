@@ -40,14 +40,14 @@ class GetItAssetsInput(insightconnect_plugin_runtime.Input):
     },
     "select": {
       "type": "string",
-      "title": "Select",
-      "description": "Comma separated list of fields to return. Leave empty to return every field",
+      "title": "Fields",
+      "description": "Comma separated list of fields to return, passed to the API as $select. Leave empty to return every field",
       "order": 2
     },
     "skip": {
       "type": "integer",
       "title": "Skip",
-      "description": "Number of records to skip before returning results",
+      "description": "Number of matching records to skip before returning results. To read a large result set in batches, set Top to the batch size and raise Skip by Top on each run until Count is less than Top",
       "default": 0,
       "order": 5
     },
