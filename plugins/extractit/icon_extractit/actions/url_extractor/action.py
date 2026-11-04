@@ -3,6 +3,7 @@ from .schema import UrlExtractorInput, UrlExtractorOutput, Input, Output, Compon
 
 # Custom imports below
 import base64
+import html
 import urllib.parse
 from icon_extractit.util.util import Regex
 from icon_extractit.util.extractor import (
@@ -25,19 +26,21 @@ class UrlExtractor(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        keep_original_urls = params.get(Input.KEEP_ORIGINAL_URLS)
         urls = clear_urls(
             remove_extracted_urls_from_links(
-                extract(Regex.URL, params.get(Input.STR), params.get(Input.FILE), params.get(Input.KEEP_ORIGINAL_URLS))
-            )
+                extract(Regex.URL, params.get(Input.STR), params.get(Input.FILE), keep_original_urls)
+            ),
+            keep_original_urls,
         )
 
-        input_str = self.get_input_string(
-            params.get(Input.STR), params.get(Input.FILE), params.get(Input.KEEP_ORIGINAL_URLS)
-        )
+        input_str = self.get_input_string(params.get(Input.STR), params.get(Input.FILE), keep_original_urls)
 
         for i, url in enumerate(urls):
             if url[len(url) - 1] == ")":
-                if input_str[(input_str.find(url) - 1)] == "(":
+                # URLs are unescaped unless kept original, so search the input in the same form
+                searched_input = input_str if keep_original_urls else html.unescape(input_str)
+                if searched_input[(searched_input.find(url) - 1)] == "(":
                     urls[i] = url[: len(url) - 1]
 
         return {Output.URLS: urls}

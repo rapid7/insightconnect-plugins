@@ -301,6 +301,42 @@
         "http://example2.com/test_2/",
         "http://example2.com/test_3/"
       ]
+    ],
+    [
+      "html_encoded_ampersand_decoded",
+      "<a href=\"https://example.com/page?builder_mode=1&amp;environment=abc&amp;id=2\">link</a>",
+      null,
+      false,
+      [
+        "https://example.com/page?builder_mode=1&environment=abc&id=2"
+      ]
+    ],
+    [
+      "html_encoded_ampersand_kept_with_keep_original_urls",
+      "<a href=\"https://example.com/page?builder_mode=1&amp;environment=abc&amp;id=2\">link</a>",
+      null,
+      true,
+      [
+        "https://example.com/page?builder_mode=1&amp;environment=abc&amp;id=2"
+      ]
+    ],
+    [
+      "html_encoded_ampersand_in_parentheses",
+      "see (https://example.com/page?builder_mode=1&amp;id=2) for details",
+      null,
+      false,
+      [
+        "https://example.com/page?builder_mode=1&id=2"
+      ]
+    ],
+    [
+      "plain_and_html_encoded_ampersand_deduplicated",
+      "https://example.com/page?a=1&b=2 and https://example.com/page?a=1&amp;b=2",
+      null,
+      false,
+      [
+        "https://example.com/page?a=1&b=2"
+      ]
     ]
   ]
 }
