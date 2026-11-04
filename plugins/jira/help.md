@@ -734,6 +734,7 @@ Example output:
 
 # Version History
 
+* 6.7.2 - Updated dependencies | Updated SDK to the latest version (6.6.1)
 * 6.7.1 - Updated SDK to the latest version (6.5.1)
 * 6.7.0 - Added OAuth 2.0 (client credentials) authentication | Actions `Edit Issue`, `Label Issue`, `Find Issues`: Fixed issues related to the custom field option, attachments | Updated SDK to the latest version (6.4.3)
 * 6.6.1 - Updated SDK to the latest version (6.4.2)
