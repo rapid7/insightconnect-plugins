@@ -1403,7 +1403,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|batch_uuid|string|True|The UUID assigned to this batch of requests|00000000-0000-0000-0000-000000000000|
+|batch_uuid|string|True|The UUID assigned to the first batch of requests|00000000-0000-0000-0000-000000000000|
 |chunks_sent|integer|True|Number of API requests made|2|
 |responses|[]object|True|Collected response bodies from each chunked POST|[{"status":"accepted"}]|
 |total_devices|integer|True|Total number of devices submitted|150|
@@ -1921,6 +1921,7 @@ Example output:
 
 # Version History
 
+* 3.1.2 - Action: Updated - Submit Remediation no longer fails when a request is split into multiple chunks | Updated SDK to the latest version (6.6.1)
 * 3.1.1 - Action: Fixed - Upload Vulnerability Sync File | Updated SDK to the latest version (6.6.0) | Enabled cache
 * 3.1.0 - Action: Adds action for Automox Remediate API | Cloud Enabled | Updated SDK to the latest version (6.5.1)
 * 3.0.0 - Action: Fixed - Get Vulnerability Sync Action Set | Action: Fixed - List Vulnerability Sync Action Sets | Action: Updated - List Organization Users
