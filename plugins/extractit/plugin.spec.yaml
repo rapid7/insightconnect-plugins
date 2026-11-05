@@ -46,7 +46,7 @@ key_features:
 - Extract CVEs from a string or file for use in subsequent workflow actions
 - Extract all indicators from a string or file for use in subsequent workflow actions
 version_history:
-- 3.0.19 - Fixed extracted URLs keeping HTML encoded ampersands
+- 3.0.19 - Fixed extracted URLs keeping HTML encoded ampersands in `URL Extractor`
 - 3.0.18 - Updated dependencies | Updated SDK to the latest version (6.6.1)
 - 3.0.17 - Updated dependency | Updated SDK to the latest version (6.6.0)
 - 3.0.16 - Updated SDK to the latest version (6.5.1)

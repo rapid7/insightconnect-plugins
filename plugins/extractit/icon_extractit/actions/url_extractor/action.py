@@ -3,12 +3,12 @@ from .schema import UrlExtractorInput, UrlExtractorOutput, Input, Output, Compon
 
 # Custom imports below
 import base64
-import html
 import urllib.parse
 from icon_extractit.util.util import Regex
 from icon_extractit.util.extractor import (
     extract,
     clear_urls,
+    decode_ampersands,
     remove_extracted_urls_from_links,
     extract_content_from_file,
 )
@@ -30,16 +30,19 @@ class UrlExtractor(insightconnect_plugin_runtime.Action):
         urls = clear_urls(
             remove_extracted_urls_from_links(
                 extract(Regex.URL, params.get(Input.STR), params.get(Input.FILE), keep_original_urls)
-            ),
-            keep_original_urls,
+            )
         )
+        if not keep_original_urls:
+            # Decoding can turn "a&amp;b" and "a&b" into one URL, keep it once
+            urls = list(dict.fromkeys(decode_ampersands(url) for url in urls))
 
         input_str = self.get_input_string(params.get(Input.STR), params.get(Input.FILE), keep_original_urls)
 
+        # URLs are unescaped unless kept original, so search the input in the same form
+        searched_input = input_str if keep_original_urls or not input_str else decode_ampersands(input_str)
+
         for i, url in enumerate(urls):
             if url[len(url) - 1] == ")":
-                # URLs are unescaped unless kept original, so search the input in the same form
-                searched_input = input_str if keep_original_urls else html.unescape(input_str)
                 if searched_input[(searched_input.find(url) - 1)] == "(":
                     urls[i] = url[: len(url) - 1]
 
