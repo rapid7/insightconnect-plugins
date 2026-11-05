@@ -48,6 +48,31 @@ class TestConnection(TestCase):
         # Optional assertion on message content
         self.assertIn("API Authentication Failed", str(ctx.exception))
 
+    @patch("icon_rapid7_surface_command.connection.connection.ApiConnection")
+    def test_connect_passes_configured_timeout(self, MockApiConnection):
+        conn = Connection()
+        conn.logger = logging.getLogger("test-connection")
+
+        conn.connect({"api_key": {"secretKey": "fake"}, "region": "us", "timeout": 600})
+
+        MockApiConnection.assert_called_once_with("fake", "us", conn.logger, timeout=600)
+
+    @patch("icon_rapid7_surface_command.connection.connection.ApiConnection")
+    def test_connect_defaults_timeout_when_not_set(self, MockApiConnection):
+        # Connections saved before the timeout input existed have no key; an empty input arrives as None
+        for params in (
+            {"api_key": {"secretKey": "fake"}, "region": "us"},
+            {"api_key": {"secretKey": "fake"}, "region": "us", "timeout": None},
+        ):
+            with self.subTest(params=params):
+                MockApiConnection.reset_mock()
+                conn = Connection()
+                conn.logger = logging.getLogger("test-connection")
+
+                conn.connect(params)
+
+                MockApiConnection.assert_called_once_with("fake", "us", conn.logger, timeout=300)
+
 
 class TestRunQuery(TestCase):
     def setUp(self):
@@ -75,6 +100,21 @@ class TestRunQuery(TestCase):
         self.assertEqual(result[0]["IP Address(es)"], "10.1.1.1, 10.1.1.2")
 
         mock_request.assert_called_once()
+
+    @patch("icon_rapid7_surface_command.util.api_connection.make_request")
+    def test_run_query_uses_timeout(self, mock_request):
+        mock_request.return_value = Mock(text="Name\n")
+
+        for connection, expected in (
+            (self.connection, 300),
+            (ApiConnection(self.api_key, self.region, self.logger, timeout=600), 600),
+        ):
+            with self.subTest(expected=expected):
+                mock_request.reset_mock()
+
+                connection.run_query(self.query_id)
+
+                self.assertEqual(mock_request.call_args.kwargs["timeout"], expected)
 
     @patch("icon_rapid7_surface_command.util.api_connection.make_request")
     def test_run_query_api_exception(self, mock_request):

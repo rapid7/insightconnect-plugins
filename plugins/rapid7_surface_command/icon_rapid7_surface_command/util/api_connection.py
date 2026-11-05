@@ -20,6 +20,8 @@ from icon_rapid7_surface_command.util.util import _csv_text_to_json_rows
 RETRYABLE_STATUS_CODES = {429, 500, 502, 503, 504}
 # HTTP status codes that indicate a permanent failure — no point retrying
 NON_RETRYABLE_STATUS_CODES = {400, 401, 403, 404, 422}
+# Seconds to wait for a Surface Command response; large saved queries can take minutes to run
+DEFAULT_TIMEOUT = 300
 
 
 class ApiConnection:
@@ -35,7 +37,7 @@ class ApiConnection:
         api_key: str,
         region_string: str,
         logger: logging.Logger,
-        timeout: int = 90,
+        timeout: int = DEFAULT_TIMEOUT,
     ) -> None:
         """
         Init the connection and set the region
