@@ -1,5 +1,4 @@
 import base64
-import html
 import io
 import logging
 import urllib.parse
@@ -302,13 +301,17 @@ def remove_extracted_urls_from_links(input_list: list) -> list:
     return output_list
 
 
-def clear_urls(matches: list, keep_original_urls: bool = False) -> list:
+def decode_ampersands(text: str) -> str:
+    # HTML escapes only "&" inside a URL, the rest is percent-encoded
+    return regex.sub(Regex.Ampersand, "&", text)
+
+
+def clear_urls(matches: list) -> list:
     new_matches = []
     for match in enumerate(matches):
         if not validators.ip_address.ipv4(match[1]) and not validators.email(match[1]):
-            # HTML sources (email bodies, office files) carry "&amp;" and similar entities, return the real URL
-            new_matches.append(match[1] if keep_original_urls else html.unescape(match[1]))
-    return list(dict.fromkeys(new_matches))
+            new_matches.append(match[1])
+    return new_matches
 
 
 def clear_emails(matches: list) -> list:
