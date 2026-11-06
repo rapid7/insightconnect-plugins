@@ -3,7 +3,8 @@ from .schema import TimelineLookupInput, TimelineLookupOutput, Input, Output, Co
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
-from greynoise.exceptions import RequestFailure
+from greynoise.exceptions import RateLimitError, RequestFailure
+from greynoise.util import validate_ip
 
 
 class TimelineLookup(insightconnect_plugin_runtime.Action):
@@ -18,10 +19,19 @@ class TimelineLookup(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         ip_address = params.get(Input.IP_ADDRESS)
+        days = params.get(Input.DAYS)
         # END INPUT BINDING - DO NOT REMOVE
 
         try:
-            resp = self.connection.gn_client.timelinedaily(ip_address)
+            validate_ip(ip_address)
+            resp = self.connection.gn_client.timelinedaily(ip_address, days=days or 7)
+
+        except RateLimitError as error:
+            raise PluginException(
+                cause="GreyNoise API rate limit exceeded.",
+                assistance="Wait and try again.",
+                data=str(error),
+            )
 
         except RequestFailure as error:
             raise PluginException(
@@ -35,4 +45,11 @@ class TimelineLookup(insightconnect_plugin_runtime.Action):
                 assistance="Please provide a valid IPv4 Address.",
             )
 
-        return {Output.IP: resp.get("ip"), Output.ACTIVITY: resp.get("activity"), Output.METADATA: resp.get("metadata")}
+        metadata = resp.get("metadata") if isinstance(resp, dict) else None
+        data = resp.get("data") if isinstance(resp, dict) and isinstance(resp.get("data"), list) else []
+        output = {Output.IP: ip_address, Output.DATA: data}
+        if isinstance(metadata, dict):
+            output[Output.METADATA] = metadata
+            if metadata.get("ip"):
+                output[Output.IP] = metadata.get("ip")
+        return output

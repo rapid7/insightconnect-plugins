@@ -4,15 +4,16 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Query a routable IPv4 address in the GreyNoise for Scanner Daily Timeline details"
+    DESCRIPTION = "Query a routable IPv4 address for GreyNoise daily timeline details"
 
 
 class Input:
+    DAYS = "days"
     IP_ADDRESS = "ip_address"
 
 
 class Output:
-    ACTIVITY = "activity"
+    DATA = "data"
     IP = "ip"
     METADATA = "metadata"
 
@@ -23,6 +24,13 @@ class TimelineLookupInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "days": {
+      "type": "integer",
+      "title": "Days",
+      "description": "Number of days of daily timeline data to return",
+      "default": 7,
+      "order": 2
+    },
     "ip_address": {
       "type": "string",
       "title": "IP Address",
@@ -47,12 +55,12 @@ class TimelineLookupOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "activity": {
+    "data": {
       "type": "array",
-      "title": "IP Timeline Activity",
-      "description": "IP Timeline Activity Events",
+      "title": "Daily Timeline",
+      "description": "Daily timeline records consolidated by the GreyNoise SDK",
       "items": {
-        "$ref": "#/definitions/timeline_activity"
+        "$ref": "#/definitions/timeline_day"
       },
       "order": 3
     },
@@ -65,7 +73,7 @@ class TimelineLookupOutput(insightconnect_plugin_runtime.Output):
     "metadata": {
       "$ref": "#/definitions/timeline_metadata",
       "title": "IP Timeline Metadata",
-      "description": "IP Timeline Metadata",
+      "description": "Metadata returned by the GreyNoise daily timeline",
       "order": 2
     }
   },
@@ -74,266 +82,115 @@ class TimelineLookupOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "timeline_metadata",
       "properties": {
-        "end_time": {
-          "type": "string",
-          "format": "date-time",
-          "displayType": "date",
-          "title": "Timeline Period End Time",
-          "description": "Timeline Period End Time",
-          "order": 1
-        },
         "ip": {
           "type": "string",
           "title": "IP Address",
-          "description": "IP Queried",
+          "description": "IP queried",
+          "order": 1
+        },
+        "days": {
+          "type": "integer",
+          "title": "Days",
+          "description": "Number of days requested",
           "order": 2
         },
-        "limit": {
-          "type": "integer",
-          "title": "Event Limit",
-          "description": "Max number of events to return",
+        "granularity": {
+          "type": "string",
+          "title": "Granularity",
+          "description": "Time bucket size used for the timeline",
           "order": 3
         },
-        "next_cursor": {
+        "field": {
           "type": "string",
-          "title": "Cursor Value",
-          "description": "Cursor value for additional pages of details",
+          "title": "Field",
+          "description": "Timeline field included in the SDK metadata",
           "order": 4
-        },
-        "start_time": {
-          "type": "string",
-          "format": "date-time",
-          "displayType": "date",
-          "title": "Timeline Period Start Time",
-          "description": "Timeline Period Start Time",
-          "order": 5
         }
       }
     },
-    "timeline_activity": {
+    "timeline_day": {
       "type": "object",
-      "title": "timeline_activity",
+      "title": "timeline_day",
       "properties": {
-        "asn": {
+        "date": {
           "type": "string",
-          "title": "ASN",
-          "description": "ASN",
+          "format": "date-time",
+          "displayType": "date",
+          "title": "Date",
+          "description": "Start of the daily timeline bucket",
           "order": 1
         },
-        "category": {
-          "type": "string",
-          "title": "Category",
-          "description": "Category",
+        "classification": {
+          "type": "array",
+          "title": "Classification",
+          "description": "Classifications observed on this day",
+          "items": {
+            "type": "string"
+          },
           "order": 2
         },
-        "city": {
-          "type": "string",
-          "title": "City",
-          "description": "City",
+        "tags": {
+          "type": "array",
+          "title": "Tags",
+          "description": "GreyNoise tags observed on this day",
+          "items": {
+            "type": "string"
+          },
           "order": 3
         },
-        "classification": {
-          "type": "string",
-          "title": "GreyNoise Classification",
-          "description": "GreyNoise Classification",
+        "rdns": {
+          "type": "array",
+          "title": "rDNS",
+          "description": "Reverse DNS values observed on this day",
+          "items": {
+            "type": "string"
+          },
           "order": 4
         },
-        "country": {
-          "type": "string",
-          "title": "Country",
-          "description": "Country",
+        "organizations": {
+          "type": "array",
+          "title": "Organizations",
+          "description": "Organizations observed on this day",
+          "items": {
+            "type": "string"
+          },
           "order": 5
         },
-        "country_code": {
-          "type": "string",
-          "title": "Country Code",
-          "description": "Country Code",
+        "asns": {
+          "type": "array",
+          "title": "ASNs",
+          "description": "ASNs observed on this day",
+          "items": {
+            "type": "string"
+          },
           "order": 6
         },
-        "destinations": {
+        "ports": {
           "type": "array",
-          "title": "Destinations",
-          "description": "Destinations",
+          "title": "Ports",
+          "description": "Destination ports observed on this day",
           "items": {
-            "$ref": "#/definitions/destinations"
+            "type": "string"
           },
           "order": 7
         },
-        "hassh_fingerprints": {
+        "web_paths": {
           "type": "array",
-          "title": "HASSH Fingerprints",
-          "description": "HASSH Fingerprints",
+          "title": "Web Paths",
+          "description": "HTTP paths observed on this day",
           "items": {
             "type": "string"
           },
           "order": 8
         },
-        "http_paths": {
+        "user_agents": {
           "type": "array",
-          "title": "HTTP Web Paths",
-          "description": "HTTP Web Paths",
+          "title": "User Agents",
+          "description": "HTTP user agents observed on this day",
           "items": {
             "type": "string"
           },
           "order": 9
-        },
-        "http_user_agents": {
-          "type": "array",
-          "title": "HTTP User Agents",
-          "description": "HTTP User Agents",
-          "items": {
-            "type": "string"
-          },
-          "order": 10
-        },
-        "ja3_fingerprints": {
-          "type": "array",
-          "title": "JA3 Fingerprints",
-          "description": "JA3 Fingerprints",
-          "items": {
-            "type": "string"
-          },
-          "order": 11
-        },
-        "organization": {
-          "type": "string",
-          "title": "Organization",
-          "description": "Organization",
-          "order": 12
-        },
-        "protocols": {
-          "type": "array",
-          "title": "Protocols",
-          "description": "Destinations",
-          "items": {
-            "$ref": "#/definitions/protocols"
-          },
-          "order": 13
-        },
-        "rdns": {
-          "type": "string",
-          "title": "rDNS",
-          "description": "rDNS",
-          "order": 14
-        },
-        "region": {
-          "type": "string",
-          "title": "Region",
-          "description": "Region",
-          "order": 15
-        },
-        "spoofable": {
-          "type": "boolean",
-          "title": "Spoofable",
-          "description": "Spoofable",
-          "order": 16
-        },
-        "tags": {
-          "type": "array",
-          "title": "Tags",
-          "description": "Tags",
-          "items": {
-            "$ref": "#/definitions/tags"
-          },
-          "order": 17
-        },
-        "timestamp": {
-          "type": "string",
-          "format": "date-time",
-          "displayType": "date",
-          "title": "Event Timestamp",
-          "description": "Event Timestamp",
-          "order": 18
-        },
-        "tor": {
-          "type": "boolean",
-          "title": "Tor Exit Node",
-          "description": "Tor Exit Node",
-          "order": 19
-        },
-        "vpn": {
-          "type": "boolean",
-          "title": "VPN",
-          "description": "VPN",
-          "order": 20
-        },
-        "vpn_service": {
-          "type": "string",
-          "title": "VPN Service",
-          "description": "VPN Service",
-          "order": 21
-        }
-      }
-    },
-    "destinations": {
-      "type": "object",
-      "title": "destinations",
-      "properties": {
-        "country": {
-          "type": "string",
-          "title": "Country",
-          "description": "Country",
-          "order": 1
-        },
-        "country_code": {
-          "type": "string",
-          "title": "Country Code",
-          "description": "Country Code",
-          "order": 2
-        }
-      }
-    },
-    "protocols": {
-      "type": "object",
-      "title": "protocols",
-      "properties": {
-        "port": {
-          "type": "integer",
-          "title": "Port",
-          "description": "Port",
-          "order": 1
-        },
-        "transport_protocol": {
-          "type": "string",
-          "title": "Transport Protocol",
-          "description": "Transport Protocol",
-          "order": 2
-        },
-        "app_protocol": {
-          "type": "string",
-          "title": "App Protocol",
-          "description": "App Protocol",
-          "order": 3
-        }
-      }
-    },
-    "tags": {
-      "type": "object",
-      "title": "tags",
-      "properties": {
-        "category": {
-          "type": "string",
-          "title": "Tag Category",
-          "description": "Tag Category",
-          "order": 1
-        },
-        "description": {
-          "type": "string",
-          "title": "Tag Description",
-          "description": "Tag Description",
-          "order": 2
-        },
-        "intention": {
-          "type": "string",
-          "title": "Tag Intention",
-          "description": "Tag Intention",
-          "order": 3
-        },
-        "name": {
-          "type": "string",
-          "title": "Tag Name",
-          "description": "Tag Name",
-          "order": 4
         }
       }
     }
