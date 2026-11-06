@@ -62,12 +62,14 @@ Example input:
 #### Add Request
   
 This action is used to add a new request. Subject and requester parameters are required, others are optional. In every 
-parameter containing `ID` and `Name` fields please provide at least one of them
+parameter containing `ID` and `Name` fields please provide at least one of them. Use Additional Fields for anything an 
+instance requires, such as a request template or custom fields
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|additional_fields|object|None|False|Any other request attributes supported by ServiceDesk Plus, such as `template`, `udf_fields` or `sla`, sent as given. A value set in another input takes precedence over the same key here|None|{'template': {'name': 'Default Request'}, 'udf_fields': {'udf_char1': 'value'}}|None|None|
 |assets|[]asset|None|False|Array of asset objects associated with this request|None|[{"name": "Software", "barcode": "test-barcode"}]|None|None|
 |category|category|None|False|Category to which this request belongs|None|{"name": "Operating System"}|None|None|
 |description|string|None|False|Description of this request|None|Example description|None|None|
@@ -93,6 +95,14 @@ Example input:
 
 ```
 {
+  "additional_fields": {
+    "template": {
+      "name": "Default Request"
+    },
+    "udf_fields": {
+      "udf_char1": "value"
+    }
+  },
   "assets": [
     {
       "barcode": "test-barcode",
@@ -425,12 +435,14 @@ Example output:
 #### Edit Request
 
 This action is used to update the given request. At least one parameter other than Request ID is required. In every 
-parameter containing `ID` and `Name` fields please provide only one or the other
+parameter containing `ID` and `Name` fields please provide only one or the other. Use Additional Fields for anything an 
+instance requires, such as a request template or custom fields
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|additional_fields|object|None|False|Any other request attributes supported by ServiceDesk Plus, such as `template`, `udf_fields` or `sla`, sent as given. A value set in another input takes precedence over the same key here|None|{'template': {'name': 'Default Request'}, 'udf_fields': {'udf_char1': 'value'}}|None|None|
 |assets|[]asset|None|False|Array of asset objects associated with this request|None|[{"name": "Software", "barcode": "test-barcode"}]|None|None|
 |category|category|None|False|Category to which this request belongs|None|{"name": "Operating System"}|None|None|
 |description|string|None|False|Description of this request|None|Example description|None|None|
@@ -457,6 +469,14 @@ Example input:
 
 ```
 {
+  "additional_fields": {
+    "template": {
+      "name": "Default Request"
+    },
+    "udf_fields": {
+      "udf_char1": "value"
+    }
+  },
   "assets": [
     {
       "barcode": "test-barcode",
@@ -997,6 +1017,7 @@ Example output:
 
 # Version History
 
+* 2.1.0 - Add `Additional Fields` input to `Add Request` and `Edit Request` for instances that require extra request attributes | Updated SDK to the latest version (6.6.1)
 * 2.0.0 - Add cloud connection support using Zoho OAuth 2.0 | All ID fields changed from integer to string to prevent precision loss with large Cloud IDs | Connection now requires connection_type field (On-Prem or Cloud) | Cloud connections require client_id, client_secret, refresh_token, portal_name, and data_center fields | On-Prem connection fields sdp_base_url and api_key are now optional (required only when connection_type is On-Prem)
 * 1.0.2 - Bumping requirements.txt | SDK bump to 6.1.4
 * 1.0.1 - Fix `int` conversion issue in `Get List Request` and `Get Request` actions
