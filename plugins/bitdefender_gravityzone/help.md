@@ -52,7 +52,7 @@ When no endpoint or more than one endpoint matches, it returns found false inste
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|hostname|string|None|True|The short hostname or the FQDN of the endpoint. An FQDN is matched against the endpoint FQDN first, then its first label against the endpoint name|None|workstation-01.example.com|None|None|
+|hostname|string|None|True|The short hostname or the FQDN of the endpoint. An FQDN is matched against the endpoint FQDN first. If none matches, its first label is matched against the endpoint name, and a single endpoint with a different FQDN is not a match|None|workstation-01.example.com|None|None|
   
 Example input:
 
@@ -314,6 +314,7 @@ Example output:
 * Use the Control Center URL, for example https://cloud.gravityzone.bitdefender.com. A trailing /api is accepted and removed
 * Find Endpoint searches managed endpoints only. The part of the hostname before the first dot must be at least 3 characters long, because the GravityZone name filter needs 3 characters
 * Find Endpoint returns `found` false with `match_count` 0 when no managed endpoint has that exact name or FQDN, and `found` false with a `match_count` above 1 when the hostname is ambiguous. Pass the FQDN to tell apart endpoints that share a short name
+* When an FQDN matches no endpoint FQDN, Find Endpoint compares its first label with the endpoint names. A single endpoint with that name counts only if GravityZone has no FQDN for it: an endpoint whose FQDN is in another domain is not a match
 * Isolate Endpoint and Restore Endpoint fail unless GravityZone confirms that the task was created. The task then runs on the endpoint asynchronously
 * GravityZone limits the number of requests per API key. When it returns HTTP 429, the plugin waits for the Retry-After period and retries up to 3 times, as long as Retry-After is 60 seconds or less
 

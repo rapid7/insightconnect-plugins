@@ -26,7 +26,7 @@ class FindEndpointInput(insightconnect_plugin_runtime.Input):
     "hostname": {
       "type": "string",
       "title": "Hostname",
-      "description": "The short hostname or the FQDN of the endpoint. An FQDN is matched against the endpoint FQDN first, then its first label against the endpoint name",
+      "description": "The short hostname or the FQDN of the endpoint. An FQDN is matched against the endpoint FQDN first. If none matches, its first label is matched against the endpoint name, and a single endpoint with a different FQDN is not a match",
       "order": 1
     }
   },

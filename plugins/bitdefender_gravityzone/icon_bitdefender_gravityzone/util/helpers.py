@@ -19,17 +19,27 @@ def get_short_label(hostname: str) -> str:
 def find_exact_matches(endpoints: List[Dict[str, Any]], hostname: str) -> List[Dict[str, Any]]:
     """
     Return the endpoints that match the hostname exactly, ignoring case.
-    When the hostname contains a dot it is compared with the endpoint FQDN first. If no FQDN matches, or the
-    hostname is a short name, its short label is compared with the endpoint name.
+    A short name is compared with the endpoint name. An FQDN is compared with the endpoint FQDN first. If no FQDN
+    matches, its short label is compared with the endpoint name: several such endpoints are ambiguous, and a single
+    one counts only when GravityZone has no FQDN for it, so an endpoint in another domain is never returned.
     """
     target = normalize_hostname(hostname)
     unique_endpoints = _deduplicate(endpoints)
-    if "." in target:
-        fqdn_matches = [endpoint for endpoint in unique_endpoints if normalize_hostname(endpoint.get("fqdn")) == target]
-        if fqdn_matches:
-            return fqdn_matches
     short_label = get_short_label(target)
-    return [endpoint for endpoint in unique_endpoints if normalize_hostname(endpoint.get("name")) == short_label]
+    name_matches = [
+        endpoint for endpoint in unique_endpoints if normalize_hostname(endpoint.get("name")) == short_label
+    ]
+    if "." not in target:
+        return name_matches
+
+    fqdn_matches = [endpoint for endpoint in unique_endpoints if normalize_hostname(endpoint.get("fqdn")) == target]
+    if fqdn_matches:
+        return fqdn_matches
+    if len(name_matches) == 1:
+        candidate_fqdn = normalize_hostname(name_matches[0].get("fqdn"))
+        if candidate_fqdn and candidate_fqdn != target:
+            return []
+    return name_matches
 
 
 def clean_endpoint_id(endpoint_id: Any) -> str:
