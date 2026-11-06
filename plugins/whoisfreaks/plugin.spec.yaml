@@ -1,0 +1,1627 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: whoisfreaks
+title: WhoisFreaks
+vendor: rapid7
+support: community
+supported_versions:
+  [
+    "WhoisFreaks API (lookups v1.0 to v3.0, feeds v3.3 and v3.4) tested on 2026-11-04",
+  ]
+status: []
+description: Enrich domains, IP addresses and ASNs with WhoisFreaks WHOIS, DNS, SSL, geolocation and reputation intelligence, and ingest the WhoisFreaks newly registered domain and threat feeds
+version: 1.0.0
+version_history:
+  - "1.0.0 - Initial plugin"
+connection_version: 2
+sdk:
+  type: slim
+  version: 6.6.1
+  user: nobody
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/whoisfreaks
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://whoisfreaks.com
+  docs_url: https://whoisfreaks.com/documentation
+key_features:
+  - "Live, historical, reverse and bulk WHOIS lookups"
+  - "Live, historical, reverse and bulk DNS lookups"
+  - "Domain availability, typosquatting, subdomain and SSL certificate lookups"
+  - "Domain reputation and IP security (threat, proxy, VPN, TOR and bot) assessment"
+  - "IP geolocation, IP WHOIS and ASN WHOIS lookups"
+  - "Account credit and subscription usage reporting"
+  - "Stateful ingestion of the newly registered domain feeds and the phishing, malware and spam threat feeds"
+requirements:
+  - "A WhoisFreaks API key"
+  - "Lookup actions require WhoisFreaks API credits. The newly registered domain feeds and the threat feeds each require their own WhoisFreaks subscription"
+  - "Outbound HTTPS (TCP 443) access from the orchestrator to api.whoisfreaks.com and files.whoisfreaks.com"
+troubleshooting:
+  - "Connection tests and actions fail with `WhoisFreaks rejected the API key` when the key is wrong, inactive or rotated. Update the API key in the connection"
+  - "An error mentioning credits, surcharge or plan limits means the account has no remaining credits or the plan limit was reached. Run the `Get Account Usage` action to check the balance"
+  - "Newly registered domain feeds, threat feeds and lookup credits are sold separately. An enabled feed that is not in the WhoisFreaks subscription is skipped with a warning in the trigger log and checked again every 24 hours, while the other enabled feeds continue. The trigger stops with an error only when none of its enabled feeds can be downloaded"
+  - "WhoisFreaks enforces a per-minute rate limit per endpoint. The plugin waits for the rate limit window to reset and retries automatically. Persistent `rate limit` errors mean too many workflows share one API key"
+  - "Feed files are published once per day. A `Poll Interval` between 360 and 1440 minutes is recommended. The minimum is 60 minutes"
+  - "Triggers save their position after every batch and resume after a restart, so at most one batch can be delivered twice after an unexpected shutdown. Deduplicate on the domain and the feed date if exactly-once processing is required"
+  - "Private, reserved, loopback and other special-use IP addresses are never sent to WhoisFreaks. Single lookups return `found` set to false, and bulk lookups list them in `skipped`"
+  - "Lookups that find no record return `found` set to false instead of failing, so workflows can branch on the result"
+  - "The plugin honours the orchestrator HTTPS proxy settings. TLS certificate errors usually mean a TLS-inspecting proxy whose CA is not trusted by the orchestrator"
+links:
+  - "[WhoisFreaks](https://whoisfreaks.com)"
+references:
+  - "[WhoisFreaks API Documentation](https://whoisfreaks.com/documentation)"
+  - "[WhoisFreaks Newly Registered Domains](https://whoisfreaks.com/products/newly-registered-domains)"
+  - "[WhoisFreaks Threat Intelligence Feed](https://whoisfreaks.com/products/threat-intelligence-feed)"
+tags:
+  - whoisfreaks
+  - whois
+  - dns
+  - domain
+  - ip
+  - threat intelligence
+hub_tags:
+  use_cases: [threat_detection_and_response, data_enrichment, data_utility]
+  keywords: [dns, intel]
+  features: []
+enable_cache: true
+language: python
+
+connection:
+  api_key:
+    title: API Key
+    description: WhoisFreaks API key. It is sent only in the X-API-KEY request header
+    type: credential_secret_key
+    required: true
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
+
+actions:
+  live_whois:
+    title: Live WHOIS
+    description: Retrieve the current WHOIS record of a domain
+    input:
+      domain:
+        title: Domain
+        description: Domain name to look up
+        type: string
+        required: true
+        example: example.com
+    output:
+      found:
+        title: Found
+        description: Whether WhoisFreaks returned a record
+        type: boolean
+        required: true
+        example: true
+      status_code:
+        title: Status Code
+        description: HTTP status code returned by WhoisFreaks (200 complete, 206 partial, 210 cached, 404 not found)
+        type: integer
+        required: false
+        example: 200
+      message:
+        title: Message
+        description: Explanation when the record is missing, partial or cached
+        type: string
+        required: false
+        example: Record not found
+      registered:
+        title: Registered
+        description: Whether the domain is registered
+        type: boolean
+        required: false
+        example: true
+      create_date:
+        title: Create Date
+        description: Registration date
+        type: string
+        required: false
+        example: "1995-08-14"
+      update_date:
+        title: Update Date
+        description: Last update date
+        type: string
+        required: false
+        example: "2026-08-14"
+      expiry_date:
+        title: Expiry Date
+        description: Expiry date
+        type: string
+        required: false
+        example: "2027-08-13"
+      registrar_name:
+        title: Registrar Name
+        description: Name of the registrar
+        type: string
+        required: false
+        example: RESERVED-Internet Assigned Numbers Authority
+      name_servers:
+        title: Name Servers
+        description: Name servers of the domain
+        type: "[]string"
+        required: false
+        example: ["a.iana-servers.net", "b.iana-servers.net"]
+      domain_status:
+        title: Domain Status
+        description: EPP status codes of the domain
+        type: "[]string"
+        required: false
+        example: ["clientDeleteProhibited", "clientTransferProhibited"]
+      response:
+        title: Response
+        description: Complete WHOIS record returned by WhoisFreaks
+        type: object
+        required: false
+        example:
+          {
+            "domain_name": "example.com",
+            "domain_registered": "yes",
+            "create_date": "1995-08-14",
+          }
+
+  historical_whois:
+    title: Historical WHOIS
+    description: Retrieve every historical WHOIS record of a domain
+    input:
+      domain:
+        title: Domain
+        description: Domain name to look up
+        type: string
+        required: true
+        example: example.com
+    output:
+      found:
+        title: Found
+        description: Whether WhoisFreaks returned any record
+        type: boolean
+        required: true
+        example: true
+      status_code:
+        title: Status Code
+        description: HTTP status code returned by WhoisFreaks
+        type: integer
+        required: false
+        example: 200
+      message:
+        title: Message
+        description: Explanation when no record was found
+        type: string
+        required: false
+        example: Record not found
+      total_records:
+        title: Total Records
+        description: Number of historical records
+        type: integer
+        required: false
+        example: 12
+      records:
+        title: Records
+        description: Historical WHOIS records, newest first
+        type: "[]object"
+        required: false
+        example:
+          [
+            {
+              "domain_name": "example.com",
+              "query_time": "2026-01-01 10:00:00",
+              "create_date": "1995-08-14",
+            },
+          ]
+
+  reverse_whois:
+    title: Reverse WHOIS
+    description: Find domains whose WHOIS records contain a keyword, email address, owner name or company name
+    input:
+      keyword:
+        title: Keyword
+        description: Keyword that appears in the domain name
+        type: string
+        required: false
+        example: example
+      email:
+        title: Email
+        description: Registrant email address
+        type: string
+        required: false
+        example: user@example.com
+      owner:
+        title: Owner
+        description: Registrant name
+        type: string
+        required: false
+        example: John Doe
+      company:
+        title: Company
+        description: Registrant company name
+        type: string
+        required: false
+        example: Example Inc
+      mode:
+        title: Mode
+        description: Level of detail of each record. Mini returns up to 100 records per page, default returns up to 50
+        type: string
+        required: true
+        enum: [default, mini]
+        default: default
+        example: default
+      exact:
+        title: Exact Match
+        description: Match the search value exactly instead of partially
+        type: boolean
+        required: true
+        default: false
+        example: false
+      page:
+        title: Page
+        description: Page number to retrieve, starting at 1. Each page costs WhoisFreaks credits
+        type: integer
+        required: true
+        default: 1
+        example: 1
+    output:
+      found:
+        title: Found
+        description: Whether any matching domain was found
+        type: boolean
+        required: true
+        example: true
+      status_code:
+        title: Status Code
+        description: HTTP status code returned by WhoisFreaks
+        type: integer
+        required: false
+        example: 200
+      message:
+        title: Message
+        description: Explanation when no domain was found
+        type: string
+        required: false
+        example: Record not found
+      total_records:
+        title: Total Records
+        description: Number of matching domains across all pages
+        type: integer
+        required: false
+        example: 120
+      total_pages:
+        title: Total Pages
+        description: Number of result pages
+        type: integer
+        required: false
+        example: 3
+      current_page:
+        title: Current Page
+        description: Page number of these results
+        type: integer
+        required: false
+        example: 1
+      records:
+        title: Records
+        description: Matching WHOIS records on this page
+        type: "[]object"
+        required: false
+        example: [{ "domain_name": "example.net", "email": "user@example.com" }]
+
+  bulk_whois:
+    title: Bulk WHOIS
+    description: Retrieve the current WHOIS records of up to 100 domains in one request
+    input:
+      domains:
+        title: Domains
+        description: Domain names to look up (1 to 100). Duplicates are removed and invalid values are reported in skipped
+        type: "[]string"
+        required: true
+        example: ["example.com", "example.org"]
+    output:
+      status_code:
+        title: Status Code
+        description: HTTP status code returned by WhoisFreaks (206 when some records are partial)
+        type: integer
+        required: false
+        example: 200
+      results:
+        title: Results
+        description: One WHOIS record per domain, in request order
+        type: "[]object"
+        required: true
+        example: [{ "domain_name": "example.com", "domain_registered": "yes" }]
+      skipped:
+        title: Skipped
+        description: Input values that were not sent to WhoisFreaks, with the reason
+        type: "[]object"
+        required: true
+        example:
+          [{ "value": "not a domain", "reason": "Not a valid domain name" }]
+
+  dns_lookup:
+    title: DNS Lookup
+    description: Retrieve the live DNS records of a domain, or the PTR record of an IP address
+    input:
+      domain:
+        title: Domain
+        description: Domain name to resolve. Either Domain or IP Address is required
+        type: string
+        required: false
+        example: example.com
+      ip_address:
+        title: IP Address
+        description: IP address to resolve (PTR lookup). Either Domain or IP Address is required
+        type: string
+        required: false
+        example: 8.8.8.8
+      record_types:
+        title: Record Types
+        description: Record types to return, either all or a comma-separated list of A, AAAA, MX, NS, TXT, SOA, SPF, CNAME and PTR
+        type: string
+        required: true
+        default: all
+        example: A,MX
+      cname_depth:
+        title: CNAME Depth
+        description: Number of CNAME hops to follow (0 to 4)
+        type: integer
+        required: false
+        example: 1
+      relative_records:
+        title: Relative Records
+        description: Also return records of related names, such as the targets of MX and CNAME records
+        type: boolean
+        required: true
+        default: true
+        example: true
+    output:
+      found:
+        title: Found
+        description: Whether WhoisFreaks returned DNS records
+        type: boolean
+        required: true
+        example: true
+      status_code:
+        title: Status Code
+        description: HTTP status code returned by WhoisFreaks
+        type: integer
+        required: false
+        example: 200
+      message:
+        title: Message
+        description: Explanation when no record was found or the IP address was not looked up
+        type: string
+        required: false
+        example: Record not found
+      records:
+        title: Records
+        description: DNS records
+        type: "[]object"
+        required: false
+        example:
+          [
+            {
+              "name": "example.com",
+              "type": 1,
+              "dnsType": "A",
+              "ttl": 300,
+              "address": "93.184.215.14",
+            },
+          ]
+      response:
+        title: Response
+        description: Complete DNS response returned by WhoisFreaks
+        type: object
+        required: false
+        example: { "domainName": "example.com", "domainRegistered": true }
+
+  historical_dns:
+    title: Historical DNS
+    description: Retrieve historical DNS snapshots of a domain
+    input:
+      domain:
+        title: Domain
+        description: Domain name to look up
+        type: string
+        required: true
+        example: example.com
+      record_types:
+        title: Record Types
+        description: Record types to return, either all or a comma-separated list of A, AAAA, MX, NS, TXT, SOA, SPF and CNAME
+        type: string
+        required: true
+        default: all
+        example: A,MX
+      page:
+        title: Page
+        description: Page number to retrieve, starting at 1. Each page costs WhoisFreaks credits
+        type: integer
+        required: true
+        default: 1
+        example: 1
+    output:
+      found:
+        title: Found
+        description: Whether any snapshot was found
+        type: boolean
+        required: true
+        example: true
+      status_code:
+        title: Status Code
+        description: HTTP status code returned by WhoisFreaks
+        type: integer
+        required: false
+        example: 200
+      message:
+        title: Message
+        description: Explanation when no snapshot was found
+        type: string
+        required: false
+        example: Record not found
+      total_records:
+        title: Total Records
+        description: Number of snapshots across all pages
+        type: integer
+        required: false
+        example: 42
+      total_pages:
+        title: Total Pages
+        description: Number of result pages
+        type: integer
+        required: false
+        example: 1
+      current_page:
+        title: Current Page
+        description: Page number of these results
+        type: integer
+        required: false
+        example: 1
+      records:
+        title: Records
+        description: DNS snapshots on this page
+        type: "[]object"
+        required: false
+        example:
+          [
+            {
+              "domainName": "example.com",
+              "queryTime": "2026-01-01 10:00:00",
+              "dnsRecords": [],
+            },
+          ]
+
+  reverse_dns:
+    title: Reverse DNS
+    description: Find domains that have a DNS record with the given value, such as an IP address, mail server or name server
+    input:
+      value:
+        title: Value
+        description: Record value to search for, for example an IP address for A records or a host name for MX and NS records
+        type: string
+        required: true
+        example: 8.8.8.8
+      record_type:
+        title: Record Type
+        description: DNS record type to search
+        type: string
+        required: true
+        enum: [a, aaaa, cname, mx, ns, soa, txt]
+        default: a
+        example: a
+      exact:
+        title: Exact Match
+        description: Match the value exactly instead of partially
+        type: boolean
+        required: true
+        default: true
+        example: true
+      sort:
+        title: Sort
+        description: Sort order of the results
+        type: string
+        required: false
+        enum: [asc, desc]
+        example: asc
+      page:
+        title: Page
+        description: Page number to retrieve, starting at 1. Each page costs WhoisFreaks credits
+        type: integer
+        required: true
+        default: 1
+        example: 1
+    output:
+      found:
+        title: Found
+        description: Whether any matching domain was found
+        type: boolean
+        required: true
+        example: true
+      status_code:
+        title: Status Code
+        description: HTTP status code returned by WhoisFreaks
+        type: integer
+        required: false
+        example: 200
+      message:
+        title: Message
+        description: Explanation when no domain was found
+        type: string
+        required: false
+        example: Record not found
+      total_records:
+        title: Total Records
+        description: Number of matching domains across all pages
+        type: integer
+        required: false
+        example: 1500
+      total_pages:
+        title: Total Pages
+        description: Number of result pages
+        type: integer
+        required: false
+        example: 15
+      current_page:
+        title: Current Page
+        description: Page number of these results
+        type: integer
+        required: false
+        example: 1
+      records:
+        title: Records
+        description: Matching domains with their DNS records on this page
+        type: "[]object"
+        required: false
+        example: [{ "domainName": "example.com", "dnsRecords": [] }]
+
+  bulk_dns:
+    title: Bulk DNS
+    description: Retrieve the live DNS records of up to 100 domains and up to 100 IP addresses in one request
+    input:
+      domains:
+        title: Domains
+        description: Domain names to resolve (up to 100). Domains or IP Addresses is required
+        type: "[]string"
+        required: false
+        example: ["example.com", "example.org"]
+      ip_addresses:
+        title: IP Addresses
+        description: IP addresses to resolve (up to 100). Domains or IP Addresses is required
+        type: "[]string"
+        required: false
+        example: ["8.8.8.8", "1.1.1.1"]
+      record_types:
+        title: Record Types
+        description: Record types to return, either all or a comma-separated list of A, AAAA, MX, NS, TXT, SOA, SPF, CNAME and PTR
+        type: string
+        required: true
+        default: all
+        example: A,MX
+      cname_depth:
+        title: CNAME Depth
+        description: Number of CNAME hops to follow (0 to 4)
+        type: integer
+        required: false
+        example: 1
+    output:
+      status_code:
+        title: Status Code
+        description: HTTP status code returned by WhoisFreaks
+        type: integer
+        required: false
+        example: 200
+      results:
+        title: Results
+        description: One live DNS result per domain or IP address
+        type: "[]object"
+        required: true
+        example: [{ "domainName": "example.com", "dnsRecords": [] }]
+      skipped:
+        title: Skipped
+        description: Input values that were not sent to WhoisFreaks, with the reason
+        type: "[]object"
+        required: true
+        example:
+          [
+            {
+              "value": "10.0.0.1",
+              "reason": "Private, reserved or special-use IP address",
+            },
+          ]
+
+  domain_availability:
+    title: Domain Availability
+    description: Check whether a domain is available for registration, optionally with available alternatives
+    input:
+      domain:
+        title: Domain
+        description: Domain name to check
+        type: string
+        required: true
+        example: example.com
+      suggestions:
+        title: Suggestions
+        description: Also return available alternative domains. Each suggestion block costs extra WhoisFreaks credits
+        type: boolean
+        required: true
+        default: false
+        example: false
+      suggestion_count:
+        title: Suggestion Count
+        description: Number of alternatives to return when Suggestions is enabled (1 to 100)
+        type: integer
+        required: true
+        default: 5
+        example: 5
+    output:
+      found:
+        title: Found
+        description: Whether WhoisFreaks returned an availability result
+        type: boolean
+        required: true
+        example: true
+      status_code:
+        title: Status Code
+        description: HTTP status code returned by WhoisFreaks
+        type: integer
+        required: false
+        example: 200
+      message:
+        title: Message
+        description: Message returned by WhoisFreaks
+        type: string
+        required: false
+        example: Domain is not available
+      availability:
+        title: Availability
+        description: AVAILABLE, UNAVAILABLE or UNKNOWN
+        type: string
+        required: false
+        example: UNAVAILABLE
+      available:
+        title: Available
+        description: True when the domain is available. Not set when the availability is unknown
+        type: boolean
+        required: false
+        example: false
+      suggestions:
+        title: Suggestions
+        description: Alternative domains and their availability
+        type: "[]object"
+        required: false
+        example: [{ "domain": "example.net", "availability": "AVAILABLE" }]
+
+  bulk_domain_availability:
+    title: Bulk Domain Availability
+    description: Check the availability of up to 100 domains, or of one name across up to 100 TLDs
+    input:
+      domains:
+        title: Domains
+        description: Domain names to check (up to 100). Use either Domains, or Domain together with TLDs
+        type: "[]string"
+        required: false
+        example: ["example.com", "example.org"]
+      domain:
+        title: Domain
+        description: Domain whose name is checked under every TLD in TLDs
+        type: string
+        required: false
+        example: example.com
+      tlds:
+        title: TLDs
+        description: TLDs to check the name of Domain under (up to 100)
+        type: "[]string"
+        required: false
+        example: ["net", "org"]
+    output:
+      status_code:
+        title: Status Code
+        description: HTTP status code returned by WhoisFreaks (206 when some domains could not be checked)
+        type: integer
+        required: false
+        example: 200
+      results:
+        title: Results
+        description: Availability of each domain
+        type: "[]object"
+        required: true
+        example:
+          [
+            {
+              "domain": "example.com",
+              "availability": "UNAVAILABLE",
+              "status": true,
+            },
+          ]
+      skipped:
+        title: Skipped
+        description: Input values that were not sent to WhoisFreaks, with the reason
+        type: "[]object"
+        required: true
+        example:
+          [{ "value": "not a domain", "reason": "Not a valid domain name" }]
+
+  typosquatting:
+    title: Typosquatting
+    description: Find registered look-alike domains of a brand keyword or a domain pattern
+    input:
+      keyword:
+        title: Keyword
+        description: Brand keyword to find look-alike domains of. Use either Keyword or Pattern
+        type: string
+        required: false
+        example: example
+      pattern:
+        title: Pattern
+        description: Domain pattern to find look-alike domains of. Use either Keyword or Pattern
+        type: string
+        required: false
+        example: example.com
+      page_token:
+        title: Page Token
+        description: Next Page Token from a previous run, to retrieve the next page
+        type: string
+        required: false
+        example: eyJsYXN0SWQiOjEwMH0=
+      fetch_size:
+        title: Fetch Size
+        description: Number of domains per page (1 to 100)
+        type: integer
+        required: true
+        default: 100
+        example: 100
+    output:
+      found:
+        title: Found
+        description: Whether any look-alike domain was found
+        type: boolean
+        required: true
+        example: true
+      status_code:
+        title: Status Code
+        description: HTTP status code returned by WhoisFreaks
+        type: integer
+        required: false
+        example: 200
+      message:
+        title: Message
+        description: Explanation when no domain was found
+        type: string
+        required: false
+        example: Record not found
+      total_records:
+        title: Total Records
+        description: Number of look-alike domains across all pages
+        type: integer
+        required: false
+        example: 250
+      total_pages:
+        title: Total Pages
+        description: Number of result pages
+        type: integer
+        required: false
+        example: 3
+      current_page:
+        title: Current Page
+        description: Page number of these results
+        type: integer
+        required: false
+        example: 1
+      has_next_page:
+        title: Has Next Page
+        description: Whether another page is available
+        type: boolean
+        required: false
+        example: true
+      next_page_token:
+        title: Next Page Token
+        description: Token to pass as Page Token to retrieve the next page
+        type: string
+        required: false
+        example: eyJsYXN0SWQiOjIwMH0=
+      records:
+        title: Records
+        description: Look-alike domains on this page
+        type: "[]object"
+        required: false
+        example:
+          [
+            {
+              "domainName": "examp1e.com",
+              "createDate": "2026-10-01",
+              "isDropped": false,
+            },
+          ]
+
+  subdomains:
+    title: Subdomains
+    description: Retrieve the known subdomains of a domain
+    input:
+      domain:
+        title: Domain
+        description: Domain whose subdomains are retrieved
+        type: string
+        required: true
+        example: example.com
+      after:
+        title: After
+        description: Only return subdomains seen on or after this date (YYYY-MM-DD)
+        type: string
+        required: false
+        example: "2026-01-01"
+      before:
+        title: Before
+        description: Only return subdomains seen on or before this date (YYYY-MM-DD). It cannot be later than today
+        type: string
+        required: false
+        example: "2026-10-31"
+      status:
+        title: Status
+        description: Only return active or inactive subdomains
+        type: string
+        required: false
+        enum: [active, inactive]
+        example: active
+      page:
+        title: Page
+        description: Page number to retrieve, starting at 1. Each page costs WhoisFreaks credits
+        type: integer
+        required: true
+        default: 1
+        example: 1
+    output:
+      found:
+        title: Found
+        description: Whether any subdomain was found
+        type: boolean
+        required: true
+        example: true
+      status_code:
+        title: Status Code
+        description: HTTP status code returned by WhoisFreaks
+        type: integer
+        required: false
+        example: 200
+      message:
+        title: Message
+        description: Explanation when no subdomain was found
+        type: string
+        required: false
+        example: Record not found
+      total_records:
+        title: Total Records
+        description: Number of subdomains across all pages
+        type: integer
+        required: false
+        example: 80
+      total_pages:
+        title: Total Pages
+        description: Number of result pages
+        type: integer
+        required: false
+        example: 1
+      current_page:
+        title: Current Page
+        description: Page number of these results
+        type: integer
+        required: false
+        example: 1
+      records:
+        title: Records
+        description: Subdomains on this page with their first and last seen dates
+        type: "[]object"
+        required: false
+        example:
+          [
+            {
+              "subdomain": "www.example.com",
+              "first_seen": "2024-01-01",
+              "last_seen": "2026-11-01",
+            },
+          ]
+
+  ssl_lookup:
+    title: SSL Lookup
+    description: Retrieve the live SSL/TLS certificate of a domain, optionally with the full chain
+    input:
+      domain:
+        title: Domain
+        description: Domain name whose certificate is retrieved
+        type: string
+        required: true
+        example: example.com
+      include_chain:
+        title: Include Chain
+        description: Also return the intermediate and root certificates. This costs extra WhoisFreaks credits
+        type: boolean
+        required: true
+        default: false
+        example: false
+      include_raw:
+        title: Include Raw
+        description: Also return the raw PEM certificates
+        type: boolean
+        required: true
+        default: false
+        example: false
+    output:
+      found:
+        title: Found
+        description: Whether a certificate was returned
+        type: boolean
+        required: true
+        example: true
+      status_code:
+        title: Status Code
+        description: HTTP status code returned by WhoisFreaks
+        type: integer
+        required: false
+        example: 200
+      message:
+        title: Message
+        description: Explanation when no certificate was found
+        type: string
+        required: false
+        example: No SSL certificate exists for this domain
+      valid_from:
+        title: Valid From
+        description: Start of the validity period of the domain certificate
+        type: string
+        required: false
+        example: "2026-01-15 00:00:00 UTC"
+      valid_to:
+        title: Valid To
+        description: End of the validity period of the domain certificate
+        type: string
+        required: false
+        example: "2027-01-15 23:59:59 UTC"
+      certificates:
+        title: Certificates
+        description: Certificates, with the domain certificate first
+        type: "[]object"
+        required: false
+        example:
+          [
+            {
+              "chainOrder": "end-user",
+              "serialNumber": "0a1b2c",
+              "signatureAlgorithm": "SHA256withRSA",
+            },
+          ]
+      response:
+        title: Response
+        description: Complete SSL response returned by WhoisFreaks
+        type: object
+        required: false
+        example:
+          { "domainName": "example.com", "queryTime": "2026-11-04 10:00:00" }
+
+  ip_whois:
+    title: IP WHOIS
+    description: Retrieve the regional internet registry registration of an IP address
+    input:
+      ip_address:
+        title: IP Address
+        description: Public IPv4 or IPv6 address to look up
+        type: string
+        required: true
+        example: 8.8.8.8
+    output:
+      found:
+        title: Found
+        description: Whether a registration record was returned
+        type: boolean
+        required: true
+        example: true
+      status_code:
+        title: Status Code
+        description: HTTP status code returned by WhoisFreaks
+        type: integer
+        required: false
+        example: 200
+      message:
+        title: Message
+        description: Explanation when no record was returned or the IP address was not looked up
+        type: string
+        required: false
+        example: Private, reserved or special-use IP address
+      organization_name:
+        title: Organization Name
+        description: Name of the organization that holds the address block
+        type: string
+        required: false
+        example: Google LLC
+      response:
+        title: Response
+        description: Complete IP WHOIS record returned by WhoisFreaks
+        type: object
+        required: false
+        example: { "ip_address": "8.8.8.8", "whois_server": "whois.arin.net" }
+
+  asn_whois:
+    title: ASN WHOIS
+    description: Retrieve the registration and routing data of an autonomous system number
+    input:
+      asn:
+        title: ASN
+        description: Autonomous system number, with or without the AS prefix
+        type: string
+        required: true
+        example: AS15169
+    output:
+      found:
+        title: Found
+        description: Whether a record was returned
+        type: boolean
+        required: true
+        example: true
+      status_code:
+        title: Status Code
+        description: HTTP status code returned by WhoisFreaks
+        type: integer
+        required: false
+        example: 200
+      message:
+        title: Message
+        description: Explanation when no record was returned
+        type: string
+        required: false
+        example: Record not found
+      as_name:
+        title: AS Name
+        description: Name of the autonomous system
+        type: string
+        required: false
+        example: GOOGLE
+      organization_name:
+        title: Organization Name
+        description: Name of the organization that holds the autonomous system
+        type: string
+        required: false
+        example: Google LLC
+      country:
+        title: Country
+        description: Country of the organization
+        type: string
+        required: false
+        example: US
+      response:
+        title: Response
+        description: Complete ASN record returned by WhoisFreaks
+        type: object
+        required: false
+        example: { "asNumber": "15169", "asName": "GOOGLE" }
+
+  domain_reputation:
+    title: Domain Reputation
+    description: Retrieve the risk verdict, trust score and supporting evidence for a domain
+    input:
+      domain:
+        title: Domain
+        description: Domain name to assess
+        type: string
+        required: true
+        example: example.com
+    output:
+      found:
+        title: Found
+        description: Whether an assessment was returned
+        type: boolean
+        required: true
+        example: true
+      status_code:
+        title: Status Code
+        description: HTTP status code returned by WhoisFreaks
+        type: integer
+        required: false
+        example: 200
+      message:
+        title: Message
+        description: Explanation when no assessment was returned
+        type: string
+        required: false
+        example: Record not found
+      verdict:
+        title: Verdict
+        description: Risk verdict assigned by WhoisFreaks. It is an assessment, not proof of malicious activity
+        type: string
+        required: false
+        example: clean
+      severity:
+        title: Severity
+        description: Severity of the risk verdict
+        type: string
+        required: false
+        example: low
+      confidence:
+        title: Confidence
+        description: Confidence of the risk verdict, from 0 to 1
+        type: number
+        required: false
+        example: 0.92
+      trust_score:
+        title: Trust Score
+        description: Trust score of the domain, higher is more trustworthy
+        type: integer
+        required: false
+        example: 85
+      is_dga:
+        title: Is DGA
+        description: Whether the domain name looks algorithmically generated
+        type: boolean
+        required: false
+        example: false
+      response:
+        title: Response
+        description: Complete reputation assessment returned by WhoisFreaks
+        type: object
+        required: false
+        example:
+          {
+            "risk_category": { "verdict": "clean" },
+            "trust_signals": { "trust_score": 85 },
+          }
+
+  ip_geolocation:
+    title: IP Geolocation
+    description: Retrieve the approximate location, network and currency of an IP address
+    input:
+      ip_address:
+        title: IP Address
+        description: Public IPv4 or IPv6 address to look up
+        type: string
+        required: true
+        example: 8.8.8.8
+    output:
+      found:
+        title: Found
+        description: Whether a location was returned
+        type: boolean
+        required: true
+        example: true
+      status_code:
+        title: Status Code
+        description: HTTP status code returned by WhoisFreaks
+        type: integer
+        required: false
+        example: 200
+      message:
+        title: Message
+        description: Explanation when no location was returned or the IP address was not looked up
+        type: string
+        required: false
+        example: Private, reserved or special-use IP address
+      country_code:
+        title: Country Code
+        description: ISO 3166-1 alpha-2 country code. Geolocation is an estimate, not a verified physical location
+        type: string
+        required: false
+        example: US
+      country_name:
+        title: Country Name
+        description: Country name
+        type: string
+        required: false
+        example: United States
+      city:
+        title: City
+        description: City name
+        type: string
+        required: false
+        example: Mountain View
+      response:
+        title: Response
+        description: Complete geolocation record returned by WhoisFreaks
+        type: object
+        required: false
+        example: { "ip": "8.8.8.8", "location": { "country_code2": "US" } }
+
+  bulk_ip_geolocation:
+    title: Bulk IP Geolocation
+    description: Retrieve the approximate location of up to 100 IP addresses in one request
+    input:
+      ip_addresses:
+        title: IP Addresses
+        description: Public IPv4 or IPv6 addresses to look up (1 to 100). Special-use and invalid values are reported in skipped
+        type: "[]string"
+        required: true
+        example: ["8.8.8.8", "1.1.1.1"]
+    output:
+      status_code:
+        title: Status Code
+        description: HTTP status code returned by WhoisFreaks
+        type: integer
+        required: false
+        example: 200
+      results:
+        title: Results
+        description: One geolocation record per IP address
+        type: "[]object"
+        required: true
+        example: [{ "ip": "8.8.8.8", "location": { "country_code2": "US" } }]
+      skipped:
+        title: Skipped
+        description: Input values that were not sent to WhoisFreaks, with the reason
+        type: "[]object"
+        required: true
+        example:
+          [
+            {
+              "value": "10.0.0.1",
+              "reason": "Private, reserved or special-use IP address",
+            },
+          ]
+
+  ip_security:
+    title: IP Security
+    description: Retrieve the threat score and the TOR, proxy, VPN, relay, bot, spam and cloud-provider signals of an IP address
+    input:
+      ip_address:
+        title: IP Address
+        description: Public IPv4 or IPv6 address to check
+        type: string
+        required: true
+        example: 8.8.8.8
+    output:
+      found:
+        title: Found
+        description: Whether an assessment was returned
+        type: boolean
+        required: true
+        example: true
+      status_code:
+        title: Status Code
+        description: HTTP status code returned by WhoisFreaks
+        type: integer
+        required: false
+        example: 200
+      message:
+        title: Message
+        description: Explanation when no assessment was returned or the IP address was not looked up
+        type: string
+        required: false
+        example: Private, reserved or special-use IP address
+      threat_score:
+        title: Threat Score
+        description: WhoisFreaks threat score. A high score indicates risk, not proof of an attack
+        type: integer
+        required: false
+        example: 5
+      is_tor:
+        title: Is TOR
+        description: Whether the address is a TOR node
+        type: boolean
+        required: false
+        example: false
+      is_proxy:
+        title: Is Proxy
+        description: Whether the address is a known proxy
+        type: boolean
+        required: false
+        example: false
+      is_vpn:
+        title: Is VPN
+        description: Whether the address belongs to a VPN provider
+        type: boolean
+        required: false
+        example: false
+      is_known_attacker:
+        title: Is Known Attacker
+        description: Whether the address has been reported for attacks
+        type: boolean
+        required: false
+        example: false
+      is_bot:
+        title: Is Bot
+        description: Whether the address is associated with bot traffic
+        type: boolean
+        required: false
+        example: false
+      is_spam:
+        title: Is Spam
+        description: Whether the address is associated with spam
+        type: boolean
+        required: false
+        example: false
+      is_cloud_provider:
+        title: Is Cloud Provider
+        description: Whether the address belongs to a cloud or hosting provider
+        type: boolean
+        required: false
+        example: true
+      response:
+        title: Response
+        description: Complete security assessment returned by WhoisFreaks
+        type: object
+        required: false
+        example:
+          {
+            "ip": "8.8.8.8",
+            "security": { "threat_score": 5, "is_tor": false },
+          }
+
+  bulk_ip_security:
+    title: Bulk IP Security
+    description: Retrieve the security assessment of up to 100 IP addresses in one request
+    input:
+      ip_addresses:
+        title: IP Addresses
+        description: Public IPv4 or IPv6 addresses to check (1 to 100). Special-use and invalid values are reported in skipped
+        type: "[]string"
+        required: true
+        example: ["8.8.8.8", "1.1.1.1"]
+    output:
+      status_code:
+        title: Status Code
+        description: HTTP status code returned by WhoisFreaks
+        type: integer
+        required: false
+        example: 200
+      results:
+        title: Results
+        description: One security assessment per IP address
+        type: "[]object"
+        required: true
+        example: [{ "ip": "8.8.8.8", "security": { "threat_score": 5 } }]
+      skipped:
+        title: Skipped
+        description: Input values that were not sent to WhoisFreaks, with the reason
+        type: "[]object"
+        required: true
+        example:
+          [
+            {
+              "value": "10.0.0.1",
+              "reason": "Private, reserved or special-use IP address",
+            },
+          ]
+
+  get_account_usage:
+    title: Get Account Usage
+    description: Retrieve the remaining API credits and the subscription usage of the account
+    input: {}
+    output:
+      total_credits:
+        title: Total Credits
+        description: Total API credits of the account
+        type: integer
+        required: false
+        example: 10000
+      used_credits:
+        title: Used Credits
+        description: API credits consumed
+        type: integer
+        required: false
+        example: 250
+      subscription_status:
+        title: Subscription Status
+        description: Status of the subscription plan
+        type: string
+        required: false
+        example: active
+      subscription_request_limit:
+        title: Subscription Request Limit
+        description: Requests included in the subscription period
+        type: integer
+        required: false
+        example: 100000
+      subscription_requests_used:
+        title: Subscription Requests Used
+        description: Requests consumed in the subscription period
+        type: integer
+        required: false
+        example: 5000
+      response:
+        title: Response
+        description: Complete usage record returned by WhoisFreaks, without the API key
+        type: object
+        required: true
+        example:
+          { "apiCredits": { "totalCredits": 10000, "servedRequest": 250 } }
+
+triggers:
+  newly_registered_domains:
+    title: Newly Registered Domains
+    description: Ingest the daily WhoisFreaks newly registered domain feeds for generic and country-code TLDs, in batches. Enable one or both feeds; each keeps its own progress
+    input:
+      include_generic_tlds:
+        title: Include Generic TLDs
+        description: Ingest the newly registered domains feed for generic TLDs such as com, net and org (gtld)
+        type: boolean
+        required: true
+        default: true
+        example: true
+      include_country_code_tlds:
+        title: Include Country-Code TLDs
+        description: Ingest the newly registered domains feed for country-code TLDs such as uk, de and in (cctld)
+        type: boolean
+        required: true
+        default: false
+        example: false
+      include_whois:
+        title: Include WHOIS
+        description: Include the full WHOIS record of every domain. When disabled, only domain names are returned
+        type: boolean
+        required: true
+        default: false
+        example: false
+      start_date:
+        title: Start Date
+        description: Feed date (YYYY-MM-DD) to ingest first. When it is empty or outside the feed availability window, the latest date is used. Ignored when the trigger resumes from saved progress
+        type: string
+        required: false
+        example: "2026-11-01"
+      catch_up_missed_dates:
+        title: Catch Up Missed Dates
+        description: Ingest every date after the last completed date, in order, instead of jumping to the latest date
+        type: boolean
+        required: true
+        default: false
+        example: false
+      batch_size:
+        title: Batch Size
+        description: Rows requested per page and the maximum rows per event (1 to 1000)
+        type: integer
+        required: true
+        default: 500
+        example: 500
+      poll_interval_minutes:
+        title: Poll Interval Minutes
+        description: Minutes to wait for a new feed date after the latest date was ingested (60 to 10080). Feeds are published once per day
+        type: integer
+        required: true
+        default: 360
+        example: 360
+      domain_keywords:
+        title: Domain Keywords
+        description: Only emit domains that contain at least one of these keywords (case-insensitive)
+        type: "[]string"
+        required: false
+        example: ["example", "brand"]
+      tld_filter:
+        title: TLD Filter
+        description: Only emit domains under these TLDs, for example com or co.uk
+        type: "[]string"
+        required: false
+        example: ["com", "net"]
+    output:
+      events:
+        title: Events
+        description: Rows of this batch. Each row has domain_name, and the WHOIS columns when Include WHOIS is enabled
+        type: "[]object"
+        required: true
+        example: [{ "domain_name": "example-new.com" }]
+      feed:
+        title: Feed
+        description: Feed that produced the batch, newly.gtld or newly.cctld
+        type: string
+        required: true
+        example: newly.gtld
+      feed_date:
+        title: Feed Date
+        description: Feed date of the batch
+        type: string
+        required: true
+        example: "2026-11-03"
+      offset:
+        title: Offset
+        description: Row offset of the first row of the batch within the feed date
+        type: integer
+        required: true
+        example: 0
+      next_offset:
+        title: Next Offset
+        description: Row offset where the next batch starts within the feed date
+        type: integer
+        required: true
+        example: 500
+      count:
+        title: Count
+        description: Number of rows in Events
+        type: integer
+        required: true
+        example: 500
+
+  threat_feed:
+    title: Threat Feed
+    description: Ingest the daily WhoisFreaks phishing, malware and spam threat feeds, in batches. Enable one or more feeds; each keeps its own progress
+    input:
+      include_phishing:
+        title: Include Phishing
+        description: Ingest the phishing threat feed
+        type: boolean
+        required: true
+        default: true
+        example: true
+      include_malware:
+        title: Include Malware
+        description: Ingest the malware threat feed
+        type: boolean
+        required: true
+        default: false
+        example: false
+      include_spam:
+        title: Include Spam
+        description: Ingest the spam threat feed
+        type: boolean
+        required: true
+        default: false
+        example: false
+      start_date:
+        title: Start Date
+        description: Feed date (YYYY-MM-DD) to ingest first. When it is empty or outside the feed availability window, the latest date is used. Ignored when the trigger resumes from saved progress
+        type: string
+        required: false
+        example: "2026-11-01"
+      catch_up_missed_dates:
+        title: Catch Up Missed Dates
+        description: Ingest every date after the last completed date, in order, instead of jumping to the latest date
+        type: boolean
+        required: true
+        default: false
+        example: false
+      batch_size:
+        title: Batch Size
+        description: Rows requested per page and the maximum rows per event (1 to 1000)
+        type: integer
+        required: true
+        default: 500
+        example: 500
+      poll_interval_minutes:
+        title: Poll Interval Minutes
+        description: Minutes to wait for a new feed date after the latest date was ingested (60 to 10080). Feeds are published once per day
+        type: integer
+        required: true
+        default: 360
+        example: 360
+      min_confidence:
+        title: Minimum Confidence
+        description: Only emit rows whose confidence is at least this value (0 to 1)
+        type: number
+        required: false
+        example: 0.8
+      domain_keywords:
+        title: Domain Keywords
+        description: Only emit domains that contain at least one of these keywords (case-insensitive)
+        type: "[]string"
+        required: false
+        example: ["example", "brand"]
+    output:
+      events:
+        title: Events
+        description: Threat feed rows of this batch
+        type: "[]object"
+        required: true
+        example:
+          [
+            {
+              "domain": "examp1e-login.com",
+              "threat_type": "phishing",
+              "confidence": 1.0,
+              "first_seen": "2026-11-02T00:16:16.035483+00:00",
+              "is_seed": true,
+            },
+          ]
+      feed:
+        title: Feed
+        description: Feed that produced the batch, threat_feed.phishing, threat_feed.malware or threat_feed.spam
+        type: string
+        required: true
+        example: threat_feed.phishing
+      feed_date:
+        title: Feed Date
+        description: Feed date of the batch
+        type: string
+        required: true
+        example: "2026-11-03"
+      offset:
+        title: Offset
+        description: Row offset of the first row of the batch within the feed date
+        type: integer
+        required: true
+        example: 0
+      next_offset:
+        title: Next Offset
+        description: Row offset where the next batch starts within the feed date
+        type: integer
+        required: true
+        example: 500
+      count:
+        title: Count
+        description: Number of rows in Events
+        type: integer
+        required: true
+        example: 500
