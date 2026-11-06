@@ -316,6 +316,7 @@ Example output:
 * GravityZone does not document whether its name filter is case-sensitive, so Find Endpoint searches the name as given, in lower case and in upper case, and merges the results. A lookup can therefore send up to three times as many requests
 * Find Endpoint returns `found` false with `match_count` 0 when no managed endpoint has that exact name or FQDN, and `found` false with a `match_count` above 1 when the hostname is ambiguous. Pass the FQDN to tell apart endpoints that share a short name
 * When an FQDN matches no endpoint FQDN, Find Endpoint compares its first label with the endpoint names. A single endpoint with that name counts only if GravityZone has no FQDN for it: an endpoint whose FQDN is in another domain is not a match
+* Find Endpoint searches the endpoints under Computers and Groups, including subgroups, which is what the GravityZone getEndpointsList method returns. Endpoints that GravityZone shows only under the Active Directory container are not returned by that method, so Find Endpoint reports them as not found
 * Isolate Endpoint and Restore Endpoint fail unless GravityZone confirms that the task was created. The task then runs on the endpoint asynchronously
 * GravityZone limits the number of requests per API key. When it returns HTTP 429, the plugin waits for the Retry-After period and retries up to 3 times, as long as Retry-After is 60 seconds or less
 
