@@ -9,7 +9,7 @@ sys.path.append(os.path.abspath("../"))
 from komand_mimecast.actions import FindGroups
 from komand_mimecast.actions.find_groups.schema import FindGroupsOutput, FindGroupsInput
 
-from util import Util
+from util import EXPIRED_ACCESS_TOKEN, Util
 
 
 @patch("requests.request", side_effect=Util.mocked_request)
@@ -30,3 +30,11 @@ class TestFindGroups(TestCase):
         actual = self.action.run(Util.load_json("inputs/find_groups_with_filter.json.exp"))
         expect = Util.load_json("expected/find_groups_empty_groups.json.exp")
         self.assertEqual(expect, actual)
+
+    def test_find_groups_token_expired(self, mocked_request):
+        # The stored token is expired so the action re-authenticates and retries the call
+        self.action.connection.client.access_token = EXPIRED_ACCESS_TOKEN
+        actual = self.action.run(Util.load_json("inputs/find_groups.json.exp"))
+        self.assertEqual(Util.load_json("expected/find_groups.json.exp"), actual)
+        self.assertEqual(mocked_request.call_count, 3)
+        validate(actual, FindGroupsOutput.schema)
