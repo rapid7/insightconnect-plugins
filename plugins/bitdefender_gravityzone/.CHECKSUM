@@ -1,0 +1,31 @@
+{
+	"spec": "2eb296abbf9ccab26ce3643018ed96f1",
+	"manifest": "be17bf720a25f657b68c37d2362ad3b8",
+	"setup": "ce4b48bae31e05061ff54dbc1023b2a9",
+	"schemas": [
+		{
+			"identifier": "find_endpoint/schema.py",
+			"hash": "b312ef0365c0f37af0c3eab5e0dc730c"
+		},
+		{
+			"identifier": "get_endpoints_list/schema.py",
+			"hash": "ac08526ef0a821a31498d446bbf4df94"
+		},
+		{
+			"identifier": "get_managed_endpoint_details/schema.py",
+			"hash": "3634f7511a27d525ec473fc0cd9a59ae"
+		},
+		{
+			"identifier": "isolate_endpoint/schema.py",
+			"hash": "1b3cbf34e0a5fe9e3a06784c1f68baf7"
+		},
+		{
+			"identifier": "restore_endpoint/schema.py",
+			"hash": "f29d0f6a3ce5e72d9f844b82199dc4f0"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "2656ebd0326049a2177a084def6691d4"
+		}
+	]
+}
