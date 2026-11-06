@@ -1,7 +1,7 @@
 import json
 import logging
 import os
-from typing import Any, Dict, List, Optional
+from typing import Any, Callable, Dict, List, Optional, Tuple
 
 import requests
 
@@ -64,6 +64,30 @@ class Util:
         if pages_count is not None:
             result["pagesCount"] = pages_count
         return Util.rpc_result(result)
+
+    @staticmethod
+    def endpoints_by_name_filter(
+        pages_by_name_filter: Dict[str, List[List[Dict[str, Any]]]], with_pages_count: bool = True
+    ) -> Callable[..., requests.Response]:
+        """
+        Return a Session.send side effect that answers getEndpointsList with the pages listed for the exact
+        details.name value of each request, the way a case-sensitive server would. Other names get an empty page.
+        """
+
+        def send(request: requests.PreparedRequest, **kwargs: Any) -> requests.Response:
+            params = json.loads(request.body)["params"]
+            pages = pages_by_name_filter.get(params["filters"]["details"]["name"], [[]])
+            page = params["page"]
+            items = pages[page - 1] if page <= len(pages) else []
+            return Util.endpoints_page(items, page=page, pages_count=len(pages) if with_pages_count else None)
+
+        return send
+
+    @staticmethod
+    def sent_name_filters(mock_send: Any) -> List[Tuple[str, int]]:
+        """Return the (details.name, page) pair of every getEndpointsList request, in order"""
+        payloads = [Util.sent_payload(mock_send, index) for index in range(mock_send.call_count)]
+        return [(payload["params"]["filters"]["details"]["name"], payload["params"]["page"]) for payload in payloads]
 
     @staticmethod
     def endpoint(endpoint_id: str, name: str, fqdn: Optional[str] = None, is_isolated: bool = False) -> Dict[str, Any]:

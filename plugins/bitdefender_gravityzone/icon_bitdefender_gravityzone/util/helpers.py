@@ -16,6 +16,15 @@ def get_short_label(hostname: str) -> str:
     return hostname.split(".", 1)[0]
 
 
+def get_name_filter_variants(hostname: Any) -> List[str]:
+    """
+    Return the short label of the hostname as given, in lower case and in upper case, without repeats.
+    GravityZone does not document whether its name filter is case-sensitive, so every form is searched.
+    """
+    label = str(hostname or "").strip().rstrip(".").split(".", 1)[0]
+    return list(dict.fromkeys((label, label.lower(), label.upper())))
+
+
 def find_exact_matches(endpoints: List[Dict[str, Any]], hostname: str) -> List[Dict[str, Any]]:
     """
     Return the endpoints that match the hostname exactly, ignoring case.
@@ -24,7 +33,7 @@ def find_exact_matches(endpoints: List[Dict[str, Any]], hostname: str) -> List[D
     one counts only when GravityZone has no FQDN for it, so an endpoint in another domain is never returned.
     """
     target = normalize_hostname(hostname)
-    unique_endpoints = _deduplicate(endpoints)
+    unique_endpoints = deduplicate_endpoints(endpoints)
     short_label = get_short_label(target)
     name_matches = [
         endpoint for endpoint in unique_endpoints if normalize_hostname(endpoint.get("name")) == short_label
@@ -76,8 +85,11 @@ def to_endpoint_summary(endpoint: Dict[str, Any]) -> Dict[str, Any]:
     return {field: endpoint_item[field] for field in ENDPOINT_SUMMARY_FIELDS}
 
 
-def _deduplicate(endpoints: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    """Drop repeated endpoint IDs, which can appear when the inventory changes while pages are read."""
+def deduplicate_endpoints(endpoints: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """
+    Drop repeated endpoint IDs. They appear when several name filter variants return the same endpoint, or when
+    the inventory changes while pages are read.
+    """
     seen_ids = set()
     unique_endpoints = []
     for endpoint in endpoints:

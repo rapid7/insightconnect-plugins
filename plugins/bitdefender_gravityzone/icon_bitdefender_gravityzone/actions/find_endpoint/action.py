@@ -9,7 +9,9 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_bitdefender_gravityzone.util.helpers import (
     MIN_NAME_FILTER_LENGTH,
+    deduplicate_endpoints,
     find_exact_matches,
+    get_name_filter_variants,
     get_short_label,
     normalize_hostname,
     to_endpoint_summary,
@@ -41,11 +43,17 @@ class FindEndpoint(insightconnect_plugin_runtime.Action):
                 f"{MIN_NAME_FILTER_LENGTH} characters. The GravityZone name filter needs {MIN_NAME_FILTER_LENGTH}.",
             )
 
-        # The name filter is a prefix match, so the candidates are narrowed down to exact matches here
-        candidates = self.connection.api.get_managed_endpoints_by_name(short_label)
+        # The name filter may be case-sensitive, so each case form is searched and the results are merged by ID.
+        # The filter is also a prefix match, so the candidates are then narrowed down to exact matches.
+        name_filters = get_name_filter_variants(hostname)
+        candidates = []
+        for name_filter in name_filters:
+            candidates.extend(self.connection.api.get_managed_endpoints_by_name(name_filter))
+        candidates = deduplicate_endpoints(candidates)
         matches = find_exact_matches(candidates, target)
+        searched_names = ", ".join(f"'{name_filter}'" for name_filter in name_filters)
         self.logger.info(
-            f"{len(candidates)} managed endpoints have a name starting with '{short_label}', "
+            f"{len(candidates)} managed endpoints have a name starting with {searched_names}, "
             f"{len(matches)} of them match '{target}' exactly"
         )
 

@@ -313,6 +313,7 @@ Example output:
 * The connection test uses the Network API only. Isolate Endpoint and Restore Endpoint also need the Incidents API: without it they fail with GravityZone error -32001, API Key is not allowed to access the selected API
 * Use the Control Center URL, for example https://cloud.gravityzone.bitdefender.com. A trailing /api is accepted and removed
 * Find Endpoint searches managed endpoints only. The part of the hostname before the first dot must be at least 3 characters long, because the GravityZone name filter needs 3 characters
+* GravityZone does not document whether its name filter is case-sensitive, so Find Endpoint searches the name as given, in lower case and in upper case, and merges the results. A lookup can therefore send up to three times as many requests
 * Find Endpoint returns `found` false with `match_count` 0 when no managed endpoint has that exact name or FQDN, and `found` false with a `match_count` above 1 when the hostname is ambiguous. Pass the FQDN to tell apart endpoints that share a short name
 * When an FQDN matches no endpoint FQDN, Find Endpoint compares its first label with the endpoint names. A single endpoint with that name counts only if GravityZone has no FQDN for it: an endpoint whose FQDN is in another domain is not a match
 * Isolate Endpoint and Restore Endpoint fail unless GravityZone confirms that the task was created. The task then runs on the endpoint asynchronously

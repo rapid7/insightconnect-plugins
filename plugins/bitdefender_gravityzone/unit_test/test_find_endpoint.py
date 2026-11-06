@@ -181,36 +181,112 @@ class TestFindEndpoint(TestCase):
 
         self.action.run({Input.HOSTNAME: "Workstation-01.Example.com"})
 
-        payload = Util.sent_payload(mock_send)
-        self.assertEqual(NETWORK_URL, Util.sent_request(mock_send).url)
-        self.assertEqual("getEndpointsList", payload["method"])
-        self.assertEqual(
-            {
-                "page": 1,
-                "perPage": 100,
-                "isManaged": True,
-                "filters": {"details": {"name": "workstation-01"}, "depth": {"allItemsRecursively": True}},
-            },
-            payload["params"],
+        self.assertEqual(3, mock_send.call_count)
+        for index, name_filter in enumerate(["Workstation-01", "workstation-01", "WORKSTATION-01"]):
+            with self.subTest(name_filter):
+                payload = Util.sent_payload(mock_send, index)
+                self.assertEqual(NETWORK_URL, Util.sent_request(mock_send, index).url)
+                self.assertEqual("getEndpointsList", payload["method"])
+                self.assertEqual(
+                    {
+                        "page": 1,
+                        "perPage": 100,
+                        "isManaged": True,
+                        "filters": {"details": {"name": name_filter}, "depth": {"allItemsRecursively": True}},
+                    },
+                    payload["params"],
+                )
+
+    def test_name_filter_variants(self, mock_send):
+        cases = [
+            ("mixed case FQDN", "Workstation-01.Example.com", ["Workstation-01", "workstation-01", "WORKSTATION-01"]),
+            ("lower case", "workstation-01", ["workstation-01", "WORKSTATION-01"]),
+            ("upper case", "WORKSTATION-01", ["WORKSTATION-01", "workstation-01"]),
+            ("no letters", "123456", ["123456"]),
+            ("spaces and a trailing dot", "  Ws-001.example.com.  ", ["Ws-001", "ws-001", "WS-001"]),
+        ]
+        for name, hostname, expected_name_filters in cases:
+            with self.subTest(name):
+                mock_send.reset_mock()
+                mock_send.return_value = Util.endpoints_page([])
+
+                self.action.run({Input.HOSTNAME: hostname})
+
+                self.assertEqual(
+                    [(name_filter, 1) for name_filter in expected_name_filters], Util.sent_name_filters(mock_send)
+                )
+
+    def test_upper_case_name_is_found_when_the_filter_is_case_sensitive(self, mock_send):
+        # Only the upper-case search returns the endpoint, as a case-sensitive name filter would
+        mock_send.side_effect = Util.endpoints_by_name_filter(
+            {"WORKSTATION-01": [[Util.endpoint("id-1", "WORKSTATION-01", FQDN)]]}
         )
 
-    def test_reads_every_page(self, mock_send):
-        mock_send.side_effect = [
-            Util.endpoints_page([Util.endpoint("id-2", "WORKSTATION-010")], page=1, pages_count=2),
-            Util.endpoints_page([Util.endpoint("id-1", "WORKSTATION-01", FQDN)], page=2, pages_count=2),
+        result = self.action.run({Input.HOSTNAME: "workstation-01.example.com"})
+
+        self.assertTrue(result[Output.FOUND])
+        self.assertEqual("id-1", result[Output.ENDPOINT]["id"])
+
+    def test_results_of_the_variants_are_merged_by_id(self, mock_send):
+        same_endpoint = Util.endpoint("id-1", "WORKSTATION-01", FQDN)
+        cases = [
+            {
+                "name": "the same endpoint returned by every variant is one match",
+                "pages": {
+                    "Workstation-01": [[same_endpoint]],
+                    "workstation-01": [[same_endpoint]],
+                    "WORKSTATION-01": [[same_endpoint]],
+                },
+                "found": True,
+                "match_count": 1,
+            },
+            {
+                "name": "different endpoints returned by different variants are all counted",
+                "pages": {
+                    "workstation-01": [[Util.endpoint("id-1", "workstation-01")]],
+                    "WORKSTATION-01": [[Util.endpoint("id-9", "WORKSTATION-01")]],
+                },
+                "found": False,
+                "match_count": 2,
+            },
         ]
+        for case in cases:
+            with self.subTest(case["name"]):
+                mock_send.reset_mock(side_effect=True)
+                mock_send.side_effect = Util.endpoints_by_name_filter(case["pages"])
+
+                result = self.action.run({Input.HOSTNAME: "Workstation-01"})
+
+                self.assertEqual(case["found"], result[Output.FOUND])
+                self.assertEqual(case["match_count"], result[Output.MATCH_COUNT])
+
+    def test_reads_every_page(self, mock_send):
+        mock_send.side_effect = Util.endpoints_by_name_filter(
+            {
+                "workstation-01": [
+                    [Util.endpoint("id-2", "WORKSTATION-010")],
+                    [Util.endpoint("id-1", "WORKSTATION-01", FQDN)],
+                ]
+            }
+        )
 
         result = self.action.run({Input.HOSTNAME: "workstation-01"})
 
         self.assertTrue(result[Output.FOUND])
         self.assertEqual("id-1", result[Output.ENDPOINT]["id"])
-        self.assertEqual([1, 2], [Util.sent_payload(mock_send, index)["params"]["page"] for index in range(2)])
+        self.assertEqual(
+            [("workstation-01", 1), ("workstation-01", 2), ("WORKSTATION-01", 1)], Util.sent_name_filters(mock_send)
+        )
 
     def test_duplicate_on_a_later_page_makes_the_hostname_ambiguous(self, mock_send):
-        mock_send.side_effect = [
-            Util.endpoints_page([Util.endpoint("id-1", "WORKSTATION-01", FQDN)], page=1, pages_count=2),
-            Util.endpoints_page([Util.endpoint("id-4", "workstation-01")], page=2, pages_count=2),
-        ]
+        mock_send.side_effect = Util.endpoints_by_name_filter(
+            {
+                "workstation-01": [
+                    [Util.endpoint("id-1", "WORKSTATION-01", FQDN)],
+                    [Util.endpoint("id-4", "workstation-01")],
+                ]
+            }
+        )
 
         result = self.action.run({Input.HOSTNAME: "workstation-01"})
 
@@ -218,15 +294,16 @@ class TestFindEndpoint(TestCase):
 
     def test_pages_without_pages_count_stop_at_a_short_page(self, mock_send):
         full_page = [Util.endpoint(f"prefix-only-{index}", f"WORKSTATION-01{index}") for index in range(100)]
-        mock_send.side_effect = [
-            Util.endpoints_page(full_page, page=1, pages_count=None),
-            Util.endpoints_page([Util.endpoint("id-1", "WORKSTATION-01", FQDN)], page=2, pages_count=None),
-        ]
+        mock_send.side_effect = Util.endpoints_by_name_filter(
+            {"workstation-01": [full_page, [Util.endpoint("id-1", "WORKSTATION-01", FQDN)]]}, with_pages_count=False
+        )
 
         result = self.action.run({Input.HOSTNAME: "workstation-01"})
 
-        self.assertEqual(2, mock_send.call_count)
         self.assertTrue(result[Output.FOUND])
+        self.assertEqual(
+            [("workstation-01", 1), ("workstation-01", 2), ("WORKSTATION-01", 1)], Util.sent_name_filters(mock_send)
+        )
 
     def test_hostname_that_cannot_be_searched(self, mock_send):
         for hostname in ["", "   ", "ws", "ab.example.com", ".example.com"]:
