@@ -251,6 +251,8 @@ class Util:
 
         if kwargs.get("url") == "https://example.com/api/3/assets/9/vulnerabilities/ssl-cve-2011-3389-beast/solution":
             return MockAsyncResponse("asset_vulnerability_solution", 200)
+        if kwargs.get("url") == "https://example.com/api/3/assets/9/vulnerabilities/ssl-cve-2016-2183-sweet32/solution":
+            return MockAsyncResponse("asset_vulnerability_solution_sweet32", 200)
         if kwargs.get("url") == "https://example.com/api/3/assets/10/vulnerabilities/sl-ve-211-339-beast/solution":
             return MockAsyncResponse("asset_vulnerability_solution_invalid_vulnerability_id", 404)
         if kwargs.get("url") == "https://example.com/api/3/assets/11/vulnerabilities/ssl-cve-2011-3389-beast/solution":
