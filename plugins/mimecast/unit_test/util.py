@@ -10,11 +10,11 @@ from komand_mimecast.connection import Connection
 from komand_mimecast.connection.schema import Input
 from komand_mimecast.util.constants import API, DATA_FIELD
 
-
 FILE_ZIP_CONTENT_1 = {"acc": "ABC123", "datetime": "2022-01-01T12:00:00"}
 FILE_ZIP_CONTENT_2 = {"acc": "ABC1234", "datetime": "2022-01-01T12:00:00"}
 FILE_ZIP_CONTENT_3 = {"acc": "ABC12345"}
 SIEM_LOGS_HEADERS_RESPONSE = {"mc-siem-token": "token123"}
+EXPIRED_ACCESS_TOKEN = "expired-token"
 
 
 class Util:
@@ -90,7 +90,9 @@ class Util:
                 return json.loads(self.json_value)
 
         if kwargs.get("url") == f"{API}/oauth/token":
-            return MockResponse(200, "authenticate.json.resp")
+            return MockResponse("authenticate.json.resp")
+        if kwargs.get("headers", {}).get("Authorization") == f"Bearer {EXPIRED_ACCESS_TOKEN}":
+            return MockResponse("token_expired.json.resp")
         if kwargs.get("url") == f"{API}/api/directory/add-group-member":
             if "test4@rapid7.com" in json.dumps(kwargs.get("json")):
                 return MockResponse("add_group_member.json.resp")
