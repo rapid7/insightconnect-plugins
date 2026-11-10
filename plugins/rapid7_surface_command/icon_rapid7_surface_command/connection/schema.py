@@ -40,8 +40,8 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "timeout": {
       "type": "integer",
       "title": "Timeout",
-      "description": "Number of seconds to wait for a response from Surface Command before the request times out",
-      "default": 300,
+      "description": "Number of seconds to wait for a response from Surface Command before the request times out. Actions running in the cloud are stopped after 180 seconds, so higher values only take effect on an orchestrator",
+      "default": 170,
       "order": 3
     }
   },

@@ -65,7 +65,7 @@ class TestConnection(TestCase):
 
         conn.connect({"api_key": {"secretKey": "fake"}, "region": "us"})
 
-        MockApiConnection.assert_called_once_with("fake", "us", conn.logger, timeout=300)
+        MockApiConnection.assert_called_once_with("fake", "us", conn.logger, timeout=170)
 
 
 class TestRunQuery(TestCase):
@@ -100,7 +100,7 @@ class TestRunQuery(TestCase):
         mock_request.return_value = Mock(text="Name\n")
 
         for connection, expected in (
-            (self.connection, 300),
+            (self.connection, 170),
             (ApiConnection(self.api_key, self.region, self.logger, timeout=600), 600),
         ):
             with self.subTest(expected=expected):
