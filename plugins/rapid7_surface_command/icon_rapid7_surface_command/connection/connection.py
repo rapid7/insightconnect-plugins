@@ -26,10 +26,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.timeout = params.get(Input.TIMEOUT, DEFAULT_TIMEOUT)
         # END INPUT BINDING - DO NOT REMOVE
 
-        # Connections saved before the timeout input existed, or left empty, fall back to the default
-        self.api = ApiConnection(
-            self.api_key.get("secretKey"), self.region, self.logger, timeout=self.timeout or DEFAULT_TIMEOUT
-        )
+        self.api = ApiConnection(self.api_key.get("secretKey"), self.region, self.logger, timeout=self.timeout)
         self.logger.info("Setup Complete")
         return self
 

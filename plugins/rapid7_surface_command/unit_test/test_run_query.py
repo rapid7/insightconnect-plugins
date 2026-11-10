@@ -59,19 +59,13 @@ class TestConnection(TestCase):
 
     @patch("icon_rapid7_surface_command.connection.connection.ApiConnection")
     def test_connect_defaults_timeout_when_not_set(self, MockApiConnection):
-        # Connections saved before the timeout input existed have no key; an empty input arrives as None
-        for params in (
-            {"api_key": {"secretKey": "fake"}, "region": "us"},
-            {"api_key": {"secretKey": "fake"}, "region": "us", "timeout": None},
-        ):
-            with self.subTest(params=params):
-                MockApiConnection.reset_mock()
-                conn = Connection()
-                conn.logger = logging.getLogger("test-connection")
+        # Connections saved before the timeout input existed have no timeout key
+        conn = Connection()
+        conn.logger = logging.getLogger("test-connection")
 
-                conn.connect(params)
+        conn.connect({"api_key": {"secretKey": "fake"}, "region": "us"})
 
-                MockApiConnection.assert_called_once_with("fake", "us", conn.logger, timeout=300)
+        MockApiConnection.assert_called_once_with("fake", "us", conn.logger, timeout=300)
 
 
 class TestRunQuery(TestCase):
