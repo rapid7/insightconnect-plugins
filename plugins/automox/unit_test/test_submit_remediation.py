@@ -1,9 +1,11 @@
 import sys
 import os
 import json
+from typing import Any
 
 sys.path.append(os.path.abspath("../"))
 
+from jsonschema import validate
 from parameterized import parameterized
 from unittest.mock import patch, Mock
 from unittest import TestCase
@@ -44,16 +46,40 @@ class TestSubmitRemediation(TestCase):
         self.assertIsInstance(response[Output.BATCH_UUID], str)
         self.assertEqual(len(response[Output.RESPONSES]), 1)
 
+    @parameterized.expand(
+        [
+            # 250 devices with one CVE each
+            ("many_devices", [{"id": f"ext-{number}", "cves": ["CVE-2019-9894"]} for number in range(250)], 250, 3),
+            # 100 devices, two of them split into 4 and 3 entries for having more than 500 CVEs, so 105 entries
+            # The first big device sits at entries 97 to 100, so its entries straddle both chunks
+            (
+                "devices_split_by_cves",
+                [{"id": f"ext-{number}", "cves": ["CVE-2019-9894"]} for number in range(97)]
+                + [{"id": "ext-big-1", "cves": [f"CVE-2026-{cve}" for cve in range(1786)]}]
+                + [{"id": "ext-big-2", "cves": [f"CVE-2026-{cve}" for cve in range(1188)]}]
+                + [{"id": "ext-97", "cves": ["CVE-2019-9894"]}],
+                100,
+                2,
+            ),
+        ],
+    )
     @patch("requests.Session.request", side_effect=mock_request_200)
-    def test_multi_chunk(self, mock: Mock) -> None:
-        devices = [{"id": f"ext-{i}", "cves": ["CVE-2019-9894"]} for i in range(250)]
+    def test_multi_chunk(
+        self, _name: str, devices: list[dict[str, Any]], total_devices: int, chunks: int, mock: Mock
+    ) -> None:
         self.params[Input.DEVICES_JSON] = json.dumps(devices)
         response = self.action.run(self.params)
-        self.assertEqual(response[Output.TOTAL_DEVICES], 250)
-        self.assertEqual(response[Output.CHUNKS_SENT], 3)
-        self.assertEqual(len(response[Output.RESPONSES]), 3)
-        # Verify 1 GET org + 3 POST calls were made
-        self.assertEqual(mock.call_count, 4)
+        validate(response, self.action.output.schema)
+        self.assertEqual(response[Output.TOTAL_DEVICES], total_devices)
+        self.assertEqual(response[Output.CHUNKS_SENT], chunks)
+        self.assertEqual(len(response[Output.RESPONSES]), chunks)
+        # Verify 1 GET org + one POST per chunk were made
+        self.assertEqual(mock.call_count, chunks + 1)
+
+        # Automox refuses a batch_uuid it has already seen, so each chunk must carry its own
+        batch_uuids = [call.kwargs.get("json", {}).get("batch_uuid") for call in mock.call_args_list[1:]]
+        self.assertEqual(len(set(batch_uuids)), chunks)
+        self.assertEqual(response[Output.BATCH_UUID], batch_uuids[0])
 
     @patch("requests.Session.request", side_effect=mock_request_200)
     def test_exactly_100_devices(self, mock: Mock) -> None:
