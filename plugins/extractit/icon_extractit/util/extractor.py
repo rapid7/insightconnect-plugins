@@ -301,6 +301,11 @@ def remove_extracted_urls_from_links(input_list: list) -> list:
     return output_list
 
 
+def decode_ampersands(text: str) -> str:
+    # HTML escapes only "&" inside a URL, the rest is percent-encoded
+    return regex.sub(Regex.Ampersand, "&", text)
+
+
 def clear_urls(matches: list) -> list:
     new_matches = []
     for match in enumerate(matches):

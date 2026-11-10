@@ -301,6 +301,96 @@
         "http://example2.com/test_2/",
         "http://example2.com/test_3/"
       ]
+    ],
+    [
+      "html_encoded_ampersand_decoded",
+      "<a href=\"https://example.com/page?builder_mode=1&amp;environment=abc&amp;id=2\">link</a>",
+      null,
+      false,
+      [
+        "https://example.com/page?builder_mode=1&environment=abc&id=2"
+      ]
+    ],
+    [
+      "html_encoded_ampersand_kept_with_keep_original_urls",
+      "<a href=\"https://example.com/page?builder_mode=1&amp;environment=abc&amp;id=2\">link</a>",
+      null,
+      true,
+      [
+        "https://example.com/page?builder_mode=1&amp;environment=abc&amp;id=2"
+      ]
+    ],
+    [
+      "html_encoded_ampersand_in_parentheses",
+      "see (https://example.com/page?builder_mode=1&amp;id=2) for details",
+      null,
+      false,
+      [
+        "https://example.com/page?builder_mode=1&id=2"
+      ]
+    ],
+    [
+      "plain_and_html_encoded_ampersand_deduplicated",
+      "https://example.com/page?a=1&b=2 and https://example.com/page?a=1&amp;b=2",
+      null,
+      false,
+      [
+        "https://example.com/page?a=1&b=2"
+      ]
+    ],
+    [
+      "legacy_entity_like_parameters_unchanged",
+      "https://example.com/page?a=1&region=us&copy=2&lt=3",
+      null,
+      false,
+      [
+        "https://example.com/page?a=1&region=us&copy=2&lt=3"
+      ]
+    ],
+    [
+      "only_html_encoded_ampersand_decoded",
+      "https://example.com/page?a=1&amp;b=&lt;2",
+      null,
+      false,
+      [
+        "https://example.com/page?a=1&b=&lt;2"
+      ]
+    ],
+    [
+      "every_html_ampersand_form_decoded",
+      "https://example.com/page?a=1&AMP;b=2&#38;c=3&#x26;d=4&#038;e=5",
+      null,
+      false,
+      [
+        "https://example.com/page?a=1&b=2&c=3&d=4&e=5"
+      ]
+    ],
+    [
+      "double_encoded_ampersand_decoded_once",
+      "https://example.com/page?a=1&amp;amp;b=2",
+      null,
+      false,
+      [
+        "https://example.com/page?a=1&amp;b=2"
+      ]
+    ],
+    [
+      "numeric_ampersand_in_parentheses_trimmed",
+      "(https://example.com/p?a=1&#38;b=2)",
+      null,
+      false,
+      [
+        "https://example.com/p?a=1&b=2"
+      ]
+    ],
+    [
+      "keep_original_urls_keeps_numeric_ampersand",
+      "https://example.com/page?a=1&#x26;b=2",
+      null,
+      true,
+      [
+        "https://example.com/page?a=1&#x26;b=2"
+      ]
     ]
   ]
 }
