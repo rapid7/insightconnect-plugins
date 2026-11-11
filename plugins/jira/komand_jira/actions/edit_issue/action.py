@@ -4,7 +4,7 @@ from .schema import EditIssueInput, EditIssueOutput, Input, Output, Component
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from ...util.util import load_text_as_adf
+from ...util.util import contains_adf, load_rich_text
 
 
 class EditIssue(insightconnect_plugin_runtime.Action):
@@ -34,9 +34,12 @@ class EditIssue(insightconnect_plugin_runtime.Action):
                 issue = self.connection.client.issue(id=issue_id)
                 issue.update(notify=notify, **clean_params)
             else:
-                # If description provided as plain text, convert to ADF format
+                # The description goes as an ADF document when it is one or when the fields or update hold one
                 if Input.DESCRIPTION in clean_params:
-                    clean_params[Input.DESCRIPTION] = load_text_as_adf(clean_params[Input.DESCRIPTION])
+                    clean_params[Input.DESCRIPTION] = load_rich_text(
+                        clean_params[Input.DESCRIPTION],
+                        as_adf=contains_adf([clean_params.get(Input.FIELDS), clean_params.get(Input.UPDATE)]),
+                    )
 
                 # If additional fields are provided, ęxtract from 'fields' input and merge with clean_params
                 if Input.FIELDS in clean_params:

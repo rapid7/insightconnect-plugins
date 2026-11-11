@@ -11,7 +11,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_jira.actions.label_issue import LabelIssue
 from komand_jira.connection import Connection
 
-from jira_mocks import mock_request_200, mock_request_404
+from jira_mocks import get_request, get_urls, mock_request_200, mock_request_404
 
 ######################
 # MOCKS
@@ -259,3 +259,15 @@ class TestLabelIssueCloud(TestCase):
 
         self.assertIsNotNone(result)
         self.assertTrue(result["success"])
+
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
+    def test_label_issue_cloud_api_version(self, mock_request: mock.Mock) -> None:
+        self.test_action.connection = MockConnection(is_cloud=True)
+        self.test_action.run({"id": "10002", "label": "bug,urgent"})
+
+        # The edit holds no ADF document, so it goes to Jira REST API v2; reading the issue stays on v3
+        url, payload = get_request(mock_request, "PUT")
+        self.assertIn("/rest/api/2/", url)
+        self.assertEqual({"labels": [{"add": "bug"}, {"add": "urgent"}]}, payload["update"])
+        for get_url in get_urls(mock_request, "GET"):
+            self.assertIn("/rest/api/3/", get_url)
