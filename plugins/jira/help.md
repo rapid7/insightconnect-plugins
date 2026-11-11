@@ -731,9 +731,11 @@ Example output:
 ## Troubleshooting
 
 * Please note only Jira cloud is supported with InsightConnect cloud. For JIRA OnPrem, please use an orchestrator for connecting.
+* On Jira Cloud, a description or comment sent as text is rendered as Jira wiki markup. To keep the text exactly as typed, wrap it in {noformat}...{noformat}, or send an Atlassian Document Format (ADF) document instead
 
 # Version History
 
+* 6.7.3 - Actions `Create Issue`, `Edit Issue`, `Comment Issue`, `Transition Issue`: On Jira Cloud, a description or comment sent as text is rendered as Jira wiki markup again, as up to 6.5.3
 * 6.7.2 - Updated dependencies | Updated SDK to the latest version (6.6.1)
 * 6.7.1 - Updated SDK to the latest version (6.5.1)
 * 6.7.0 - Added OAuth 2.0 (client credentials) authentication | Actions `Edit Issue`, `Label Issue`, `Find Issues`: Fixed issues related to the custom field option, attachments | Updated SDK to the latest version (6.4.3)
