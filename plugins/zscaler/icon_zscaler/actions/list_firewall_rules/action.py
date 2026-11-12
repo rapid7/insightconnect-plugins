@@ -25,8 +25,8 @@ class ListFirewallRules(insightconnect_plugin_runtime.Action):
         search = params.get(Input.SEARCH)
         # END INPUT BINDING - DO NOT REMOVE
 
-        result = self.connection.zia_client.list_firewall_rules(next_link or None)
-        rules = result.get("rules", [])
+        # ZIA returns a bare JSON array of rules with no pagination token, so next_link is always empty
+        rules = self.connection.zia_client.list_firewall_rules(next_link or None)
 
         # Client-side filtering by name (ZIA API doesn't support server-side search)
         if search:
@@ -35,6 +35,6 @@ class ListFirewallRules(insightconnect_plugin_runtime.Action):
         return clean_dict(
             {
                 Output.RULES: rules,
-                Output.NEXT_LINK: result.get("next_link", ""),
+                Output.NEXT_LINK: "",
             }
         )

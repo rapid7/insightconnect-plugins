@@ -214,7 +214,7 @@ class TestRouting(TestCase):
 
         call_kwargs = mock_request.call_args[1]
         self.assertTrue(call_kwargs["url"].startswith("https://api.zsapi.net/"))
-        self.assertIn("/zia/api/v1/firewallRules", call_kwargs["url"])
+        self.assertIn("/zia/api/v1/firewallFilteringRules", call_kwargs["url"])
         self.assertEqual(call_kwargs["headers"]["Authorization"], "Bearer pre-seeded-token")
 
     @patch("requests.request")
@@ -239,7 +239,7 @@ class TestRouting(TestCase):
     def test_next_link_uses_direct_url(self, mock_request):
         mock_request.return_value = _mock_response(200, {"rules": []})
         client = _make_zia_client()
-        direct_url = "https://api.zsapi.net/zia/api/v1/firewallRules?page=2"
+        direct_url = "https://api.zsapi.net/zia/api/v1/firewallFilteringRules?page=2"
         client.list_firewall_rules(next_link=direct_url)
 
         call_kwargs = mock_request.call_args[1]
