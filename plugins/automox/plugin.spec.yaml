@@ -6,7 +6,7 @@ name: automox
 title: Automox
 description: Automox is modernizing IT operations with continuous visibility, insight,
   and agility for your entire IT environment
-version: 3.1.1
+version: 3.1.2
 connection_version: 3
 supported_versions: [All as of 12/29/2023]
 support: partner
@@ -15,9 +15,10 @@ cloud_ready: true
 requirements: []
 sdk:
   type: slim
-  version: 6.6.0
+  version: 6.6.1
   user: nobody
 version_history:
+  - '3.1.2 - Action: Updated - Submit Remediation no longer fails when a request is split into multiple chunks | Updated SDK to the latest version (6.6.1)'
   - '3.1.1 - Action: Fixed - Upload Vulnerability Sync File | Updated SDK to the latest version (6.6.0) | Enabled cache'
   - '3.1.0 - Action: Adds action for Automox Remediate API | Cloud Enabled | Updated SDK to the latest version (6.5.1)'
   - '3.0.0 - Action: Fixed - Get Vulnerability Sync Action Set | Action: Fixed - List Vulnerability Sync Action Sets | Action: Updated - List Organization Users'
@@ -1673,7 +1674,7 @@ actions:
     output:
       batch_uuid:
         title: Batch UUID
-        description: The UUID assigned to this batch of requests
+        description: The UUID assigned to the first batch of requests
         type: string
         required: true
         example: 00000000-0000-0000-0000-000000000000
