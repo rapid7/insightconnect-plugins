@@ -17,10 +17,13 @@ class TestListFirewallRules(TestCase):
         cls.action = Util.default_connector(ListFirewallRules())
 
     def test_list_firewall_rules(self, _mock_request):
-        mock_response = {
-            "rules": [{"id": 101, "name": "Block SSH"}],
-            "next_link": "",
-        }
+        mock_response = [{"id": 101, "name": "Block SSH"}, {"id": 102, "name": "Allow DNS"}]
         self.action.connection.zia_client.list_firewall_rules = MagicMock(return_value=mock_response)
         result = self.action.run({})
+        self.assertEqual(result["rules"], mock_response)
+
+    def test_list_firewall_rules_search(self, _mock_request):
+        mock_response = [{"id": 101, "name": "Block SSH"}, {"id": 102, "name": "Allow DNS"}]
+        self.action.connection.zia_client.list_firewall_rules = MagicMock(return_value=mock_response)
+        result = self.action.run({"search": "ssh"})
         self.assertEqual(result["rules"], [{"id": 101, "name": "Block SSH"}])

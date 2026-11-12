@@ -152,26 +152,26 @@ class ZIAClient(BaseClient):
         params = {"startTime": start_time, "endTime": end_time}
         return self._make_request("GET", "dlp/incidents", params=params).json()
 
-    def list_firewall_rules(self, next_link: str = None) -> dict:
+    def list_firewall_rules(self, next_link: str = None) -> list:
         """List firewall filtering rules.
 
         Args:
             next_link: Full URL for pagination continuation.
 
-        Returns: dict with rules and next_link
+        Returns: list of rule dicts (ZIA responds with a bare JSON array)
         """
         if next_link:
             response = self._call_api("GET", next_link, headers={"Authorization": f"Bearer {self._get_token()}"})
             return response.json()
 
-        return self._make_request("GET", "firewallRules").json()
+        return self._make_request("GET", "firewallFilteringRules").json()
 
     def get_firewall_rule(self, rule_id: int) -> dict:
         """Get a specific firewall rule by ID.
 
         Returns: dict (response JSON)
         """
-        return self._make_request("GET", f"firewallRules/{rule_id}").json()
+        return self._make_request("GET", f"firewallFilteringRules/{rule_id}").json()
 
     def create_firewall_rule(self, rule_data: dict) -> dict:
         """Create a new firewall filtering rule.
@@ -179,7 +179,7 @@ class ZIAClient(BaseClient):
         Returns: dict (response JSON)
         """
         return self._make_request(
-            "POST", "firewallRules", data=json.dumps(rule_data), headers=JSON_HEADERS.copy()
+            "POST", "firewallFilteringRules", data=json.dumps(rule_data), headers=JSON_HEADERS.copy()
         ).json()
 
     def update_firewall_rule(self, rule_id: int, rule_data: dict) -> dict:
@@ -188,7 +188,7 @@ class ZIAClient(BaseClient):
         Returns: dict (response JSON)
         """
         return self._make_request(
-            "PUT", f"firewallRules/{rule_id}", data=json.dumps(rule_data), headers=JSON_HEADERS.copy()
+            "PUT", f"firewallFilteringRules/{rule_id}", data=json.dumps(rule_data), headers=JSON_HEADERS.copy()
         ).json()
 
     def get_web_logs(self, start_time: str, end_time: str, next_link: str = None) -> dict:
