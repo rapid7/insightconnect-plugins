@@ -448,6 +448,7 @@ Example output:
 
 # Version History
 
+* 2.0.12 - Bumped `dnspython` to 2.9.0
 * 2.0.11 - Updated SDK to the latest version (6.6.1)
 * 2.0.10 - Updated SDK to the latest version (6.5.1)
 * 2.0.9 - Updated SDK to the latest version (6.4.3)
