@@ -1,0 +1,35 @@
+{
+	"spec": "e7c99773810ae81c42a54356b964f6f6",
+	"manifest": "b57c81332a29eadd281802457ddfc216",
+	"setup": "9f77898d84f556266a197fb0cfea2a10",
+	"schemas": [
+		{
+			"identifier": "abuse_contact/schema.py",
+			"hash": "f37fb035bfc2b8ba8f716c08857b1450"
+		},
+		{
+			"identifier": "asn_lookup/schema.py",
+			"hash": "a0547ac995e14591ef5c73e491b7ae90"
+		},
+		{
+			"identifier": "ip_geolocation/schema.py",
+			"hash": "b6e64eba6f8eff446e739edfa31ce264"
+		},
+		{
+			"identifier": "ip_geolocation_bulk/schema.py",
+			"hash": "f0832eea4fecfdaaebf24c385f7d9629"
+		},
+		{
+			"identifier": "ip_security/schema.py",
+			"hash": "2fefe087c54e16f3a2848cae3f5471fa"
+		},
+		{
+			"identifier": "ip_security_bulk/schema.py",
+			"hash": "529fdb51295ffad6597edcaea45f4ea0"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "e56bb13618b270121752ea5798f6ab78"
+		}
+	]
+}
