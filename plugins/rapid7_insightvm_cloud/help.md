@@ -54,6 +54,9 @@ This action is used to search for assets using filtered asset search
 |asset_criteria|string|None|False|Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames. Use '||' for OR and '&&' for AND|None|asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'|None|None|
 |comparison_time|date|None|False|The date and time to compare the asset current state against to detect changes|None|2021-04-15T17:56:47Z|None|None|
 |current_time|date|None|False|The current date and time to compare against the asset state to detect changes|None|2021-04-15T17:56:47Z|None|None|
+|include_inter_snapshot_remediations|boolean|False|False|Whether the response should include vulnerabilities remediated between the comparison time and the current time that are not present in the snapshots|None|True|None|None|
+|include_same|boolean|False|False|Whether the response should include the vulnerabilities that are the same between the current time and the comparison time. Only populated when Comparison Time is supplied|None|True|None|None|
+|include_unique_identifiers|boolean|True|False|Whether the response should include unique identifiers found on the asset, such as hardware or operating system identifiers|None|True|None|None|
 |size|integer|200|False|The number of assets to retrieve. If blank then will default to 200 assets returned|None|100|None|None|
 |sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{"risk-score": "asc", "criticality-tag": "desc"}|None|None|
 |vuln_criteria|string|None|False|Vulnerability criteria to filter by|None|vulnerability.categories IN ['example']|None|None|
@@ -65,6 +68,9 @@ Example input:
   "asset_criteria": "asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'",
   "comparison_time": "2021-04-15T17:56:47Z",
   "current_time": "2021-04-15T17:56:47Z",
+  "include_inter_snapshot_remediations": false,
+  "include_same": false,
+  "include_unique_identifiers": true,
   "size": 200,
   "sort_criteria": {
     "criticality-tag": "desc",
@@ -841,6 +847,7 @@ Example output:
 |OS Version|string|None|False|The version of the operating system|None|
 |Remediated Vulnerabilities|[]object|None|False|Vulnerabilities that were remediated in the latest version at current time for the asset|None|
 |Risk Score|float|None|False|Risk score (with criticality adjustments) of the asset|None|
+|Same|[]object|None|False|If comparison time is supplied and Include Same is enabled, the vulnerabilities that are the same between current and comparison time|None|
 |Severe Vulnerabilities|integer|None|False|The count of severe vulnerability findings|None|
 |Source|string|None|False|Source of the asset|None|
 |Tags|[]asset_tag|None|False|The tags applied to the asset|None|
@@ -890,6 +897,7 @@ Example output:
 
 # Version History
 
+* 9.1.0 - Action `Asset Search`: Added optional inputs `Include Same`, `Include Unique Identifiers` and `Include Inter Snapshot Remediations` | Added `same` field to the asset output | Updated SDK to the latest version (6.6.1)
 * 9.0.2 - Action `Vulnerability Search`: Fixed an issue where actions could fail due to JSON schema validation errors | Updated SDK to the latest version (6.5.0)
 * 9.0.1 - Added user-agent and correlation ID headers to all requests | Updated SDK to the latest version (6.3.10)
 * 9.0.0 - Refined pagination for `Asset Search` action | SDK Bump to 6.3.6 | Resolved issue in 'Asset Search' where 'Vulnerability Criteria' is appended onto 'Asset Criteria'

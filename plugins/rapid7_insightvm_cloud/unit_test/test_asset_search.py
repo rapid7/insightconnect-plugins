@@ -57,6 +57,32 @@ class TestAssetSearch(TestCase):
         self.assertEqual(expected, actual)
         validate(actual, AssetSearchOutput.schema)
 
+    @patch("requests.request", side_effect=mock_request)
+    def test_asset_search_default_include_parameters(self, mock_req: MagicMock) -> None:
+        self.action.run()
+        params = mock_req.call_args.kwargs.get("params")
+        self.assertEqual(False, params.get("includeSame"))
+        self.assertEqual(True, params.get("includeUniqueIdentifiers"))
+        self.assertEqual(False, params.get("includeInterSnapshotRemediations"))
+
+    @patch("requests.request", side_effect=mock_request)
+    def test_asset_search_include_parameters(self, mock_req: MagicMock) -> None:
+        actual = self.action.run(
+            {
+                Input.COMPARISON_TIME: self.params.get("comparison_time"),
+                Input.INCLUDE_SAME: True,
+                Input.INCLUDE_UNIQUE_IDENTIFIERS: False,
+                Input.INCLUDE_INTER_SNAPSHOT_REMEDIATIONS: True,
+            }
+        )
+        params = mock_req.call_args.kwargs.get("params")
+        self.assertEqual(True, params.get("includeSame"))
+        self.assertEqual(False, params.get("includeUniqueIdentifiers"))
+        self.assertEqual(True, params.get("includeInterSnapshotRemediations"))
+        expected = Utils.read_file_to_dict("expected_responses/asset_search_include_same.json.resp")
+        self.assertEqual(expected, actual)
+        validate(actual, AssetSearchOutput.schema)
+
     # test finding event via all inputs
     @patch("requests.request", side_effect=mock_request)
     def test_asset_invalid_asset_criteria(self, _mock_req: MagicMock) -> None:
