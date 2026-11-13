@@ -9,7 +9,7 @@ sys.path.append(os.path.abspath("../"))
 from komand_mimecast.actions import GetManagedUrl
 from komand_mimecast.actions.get_managed_url.schema import GetManagedUrlOutput, GetManagedUrlInput
 
-from util import Util
+from util import EXPIRED_ACCESS_TOKEN, Util
 
 
 @patch("requests.request", side_effect=Util.mocked_request)
@@ -72,4 +72,12 @@ class TestGetManagedUrl(TestCase):
         actual = self.action.run(input_data)
         expect = Util.load_json("expected/get_managed_url_empty_response.json.exp")
         self.assertEqual(expect, actual)
+        validate(actual, GetManagedUrlOutput.schema)
+
+    def test_get_managed_url_token_expired(self, mocked_request):
+        # The stored token is expired so the action re-authenticates and retries the call
+        self.action.connection.client.access_token = EXPIRED_ACCESS_TOKEN
+        actual = self.action.run(Util.load_json("inputs/get_managed_url.json.exp"))
+        self.assertEqual(Util.load_json("expected/get_managed_url.json.exp"), actual)
+        self.assertEqual(mocked_request.call_count, 3)
         validate(actual, GetManagedUrlOutput.schema)

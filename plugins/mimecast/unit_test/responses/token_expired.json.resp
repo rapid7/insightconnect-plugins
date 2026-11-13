@@ -1,0 +1,13 @@
+{
+    "meta": {
+        "status": 401
+    },
+    "data": [],
+    "fail": [
+        {
+            "code": "token_expired",
+            "message": "Access Token Expired",
+            "retryable": false
+        }
+    ]
+}
