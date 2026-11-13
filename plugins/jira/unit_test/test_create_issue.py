@@ -3,6 +3,7 @@ import sys
 
 sys.path.append(os.path.abspath("../"))
 
+import json
 import logging
 from collections import namedtuple
 from typing import Any
@@ -11,8 +12,9 @@ from unittest import TestCase, mock
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_jira.actions.create_issue import CreateIssue
 from komand_jira.connection import Connection
+from parameterized import param, parameterized
 
-from jira_mocks import mock_request_200
+from jira_mocks import ADF_DOCUMENT, WIKI_MARKUP, get_request, get_urls, mock_request_200, text_as_adf
 
 ######################
 # MOCKS
@@ -494,3 +496,46 @@ class TestCreateIssueCloud(TestCase):
         self.test_action.connection = MockConnection(is_cloud=True)
         with self.assertRaises(PluginException):
             self.test_action.run(action_params)
+
+    @parameterized.expand(
+        [
+            param("wiki_markup", WIKI_MARKUP, {}, "/rest/api/2/", WIKI_MARKUP),
+            param("json_not_adf", "42", {}, "/rest/api/2/", "42"),
+            param("adf_document", json.dumps(ADF_DOCUMENT), {}, "/rest/api/3/", ADF_DOCUMENT),
+            param(
+                "adf_in_fields",
+                WIKI_MARKUP,
+                {"customfield_10010": ADF_DOCUMENT},
+                "/rest/api/3/",
+                text_as_adf(WIKI_MARKUP),
+            ),
+        ]
+    )
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
+    def test_create_issue_cloud_api_version(
+        self,
+        name: str,
+        description: str,
+        fields: dict[str, Any],
+        api_path: str,
+        expected_description: Any,
+        mock_request: mock.Mock,
+    ) -> None:
+        action_params = {
+            "attachment_bytes": "",
+            "attachment_filename": "",
+            "description": description,
+            "fields": dict(fields),
+            "project": "projectName",
+            "summary": "test Summary",
+            "type": "Task",
+        }
+
+        self.test_action.connection = MockConnection(is_cloud=True)
+        self.test_action.run(action_params)
+
+        url, payload = get_request(mock_request, "POST")
+        self.assertIn(api_path, url)
+        self.assertEqual(expected_description, payload["fields"]["description"])
+        for get_url in get_urls(mock_request, "GET"):
+            self.assertIn("/rest/api/3/", get_url)

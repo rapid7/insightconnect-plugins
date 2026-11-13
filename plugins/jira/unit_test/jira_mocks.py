@@ -213,3 +213,31 @@ def mock_request_404(*args, **kwargs) -> MockResponse:
 
 def mock_request_500(*args, **kwargs) -> MockResponse:
     return mock_conditions(args[0], args[1], 500)
+
+
+# Rich text in descriptions and comments: Jira wiki markup and an Atlassian Document Format (ADF) document
+WIKI_MARKUP = "*bold* [Rapid7|https://www.rapid7.com]"
+ADF_DOCUMENT = {
+    "type": "doc",
+    "version": 1,
+    "content": [{"type": "paragraph", "content": [{"type": "text", "text": "bold", "marks": [{"type": "strong"}]}]}],
+}
+
+
+def text_as_adf(text: str) -> dict[str, Any]:
+    return {
+        "type": "doc",
+        "version": 1,
+        "content": [{"type": "paragraph", "content": [{"type": "text", "text": text}]}],
+    }
+
+
+def get_request(mock_request: mock.Mock, method: str) -> tuple[str, Any]:
+    # Returns the URL and the JSON body of the last request sent with the given method
+    calls = [call for call in mock_request.call_args_list if call.args[0] == method]
+    return calls[-1].args[1], calls[-1].kwargs.get("json")
+
+
+def get_urls(mock_request: mock.Mock, method: str) -> list[str]:
+    # Returns the URLs of all requests sent with the given method
+    return [call.args[1] for call in mock_request.call_args_list if call.args[0] == method]
