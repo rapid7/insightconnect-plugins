@@ -1,5 +1,19 @@
 {
-  "metadata": [
+  "tags": [
+    {
+      "id": "9999",
+      "label": "other",
+      "slug": "test-tag-name-extra",
+      "name": "Test Tag Name Extra",
+      "category": "activity",
+      "intention": "unknown",
+      "description": "partial name match",
+      "references": [],
+      "recommend_block": false,
+      "cves": [],
+      "created_at": "2024-01-01",
+      "related_tags": []
+    },
     {
       "id": "1234",
       "label": "label",
@@ -16,7 +30,15 @@
         "CVE-2024-38289"
       ],
       "created_at": "2024-09-12",
-      "related_tags": []
+      "related_tags": [
+        {
+          "id": "da78f2eb-fe6b-4e84-913c-cdab4ff067c2",
+          "name": "Oracle WebLogic RCE CVE-2020-14882",
+          "intention": "malicious",
+          "category": "activity",
+          "slug": "oracle-weblogic-rce-cve-2020-14882"
+        }
+      ]
     }
   ]
 }

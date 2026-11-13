@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get Details of a GreyNoise Tag"
+    DESCRIPTION = "Get details of a GreyNoise tag from the Tags API"
 
 
 class Input:
@@ -127,7 +127,7 @@ class GetTagDetailsOutput(insightconnect_plugin_runtime.Output):
       "title": "Tag Related Tags",
       "description": "Tags that are related to this tag",
       "items": {
-        "type": "string"
+        "$ref": "#/definitions/related_tag"
       },
       "order": 12
     },
@@ -138,7 +138,44 @@ class GetTagDetailsOutput(insightconnect_plugin_runtime.Output):
       "order": 11
     }
   },
-  "definitions": {}
+  "definitions": {
+    "related_tag": {
+      "type": "object",
+      "title": "related_tag",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Tag ID",
+          "description": "Unique identifier for the related tag",
+          "order": 1
+        },
+        "name": {
+          "type": "string",
+          "title": "Tag Name",
+          "description": "Name of the related tag",
+          "order": 2
+        },
+        "intention": {
+          "type": "string",
+          "title": "Tag Intention",
+          "description": "Intention of the related tag",
+          "order": 3
+        },
+        "category": {
+          "type": "string",
+          "title": "Tag Category",
+          "description": "Category of the related tag",
+          "order": 4
+        },
+        "slug": {
+          "type": "string",
+          "title": "Tag Slug",
+          "description": "URL-safe slug for the related tag",
+          "order": 5
+        }
+      }
+    }
+  }
 }
     """)
 

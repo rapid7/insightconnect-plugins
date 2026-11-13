@@ -16,6 +16,28 @@ class MonitorIpsInGreynoise(insightconnect_plugin_runtime.Trigger):
             output=MonitorIpsInGreynoiseOutput(),
         )
 
+    def _matching_ips(self, query):
+        alert_ips = []
+        scroll = None
+        seen_scrolls = set()
+        while True:
+            response = self.connection.gn_client.query(query, size=10000, scroll=scroll)
+            if not isinstance(response, dict):
+                break
+            data = response.get("data")
+            if isinstance(data, list):
+                for item in data:
+                    if isinstance(item, dict) and item.get("ip"):
+                        alert_ips.append(item["ip"])
+            metadata = response.get("request_metadata")
+            if not isinstance(metadata, dict) or metadata.get("complete", True):
+                break
+            scroll = metadata.get("scroll")
+            if not scroll or scroll in seen_scrolls:
+                break
+            seen_scrolls.add(scroll)
+        return alert_ips
+
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         interval = params.get(Input.INTERVAL)
@@ -29,11 +51,9 @@ class MonitorIpsInGreynoise(insightconnect_plugin_runtime.Trigger):
                 query = f"({' OR '.join(ip_list)}) last_seen:{lookback_days}d"
 
                 self.logger.info("Checking GreyNoise for IP list")
-                response = self.connection.gn_client.query(query)
-
-                if response.get("count", 0) != 0:
+                alert_ip_list = self._matching_ips(query)
+                if alert_ip_list:
                     self.logger.info("IPs found in GreyNoise")
-                    alert_ip_list = [item["ip"] for item in response["data"]]
                     self.send(
                         {
                             Output.ALERT_IP_LIST: alert_ip_list,

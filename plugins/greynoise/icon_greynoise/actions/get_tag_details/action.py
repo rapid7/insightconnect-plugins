@@ -3,7 +3,7 @@ from .schema import GetTagDetailsInput, GetTagDetailsOutput, Input, Output, Comp
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
-from greynoise.exceptions import RequestFailure
+from greynoise.exceptions import RateLimitError, RequestFailure
 
 
 class GetTagDetails(insightconnect_plugin_runtime.Action):
@@ -16,13 +16,23 @@ class GetTagDetails(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        tag_name = params.get(Input.TAG_NAME).lower()
+        tag_name = params.get(Input.TAG_NAME)
         output = {}
         try:
-            resp = self.connection.gn_client.metadata()
-            for tag in resp["metadata"]:
-                if tag["name"].lower() == tag_name:
+            resp = self.connection.gn_client.tags(name=tag_name)
+            tags = resp.get("tags") if isinstance(resp, dict) else None
+            wanted = (tag_name or "").lower()
+            for tag in tags or []:
+                if isinstance(tag, dict) and str(tag.get("name", "")).lower() == wanted:
                     output = tag
+                    break
+        except RateLimitError as error:
+            raise PluginException(
+                cause="GreyNoise API rate limit exceeded.",
+                assistance="Wait and try again.",
+                data=str(error),
+            )
+
         except RequestFailure as error:
             raise PluginException(
                 cause=f"API responded with ERROR: {error.args[0]} - {error.args[1]}.",
@@ -30,7 +40,7 @@ class GetTagDetails(insightconnect_plugin_runtime.Action):
             )
 
         if not output:
-            output = {"name": params.get(Input.TAG_NAME), "description": "Tag Not Found"}
+            output = {"name": tag_name, "description": "Tag Not Found"}
 
         return {
             Output.CATEGORY: output.get("category"),

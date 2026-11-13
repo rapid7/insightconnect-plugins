@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "GreyNoise"
 Vendor = "greynoise"
-Version = "2.0.0"
+Version = "3.0.0"
 Description = "GreyNoise helps analysts recognize events not worth their attention. Indicators in GreyNoise are likely associated with opportunistic internet scanning or common business services, not targeted threats. This context helps analysts focus on what matters most"
 
 
@@ -36,6 +36,8 @@ def main():
             )
             self.add_trigger(triggers.MonitorIpsInGreynoise())
         
+            self.add_action(actions.IpLookup())
+        
             self.add_action(actions.ContextLookup())
         
             self.add_action(actions.RiotLookup())
@@ -52,7 +54,7 @@ def main():
         
             self.add_action(actions.TimelineLookup())
         
-            self.add_action(actions.SimilarLookup())
+            self.add_action(actions.CallbackIpLookup())
         
 
     """Run plugin"""
