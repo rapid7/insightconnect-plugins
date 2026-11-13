@@ -61,7 +61,7 @@ class AssetSearchInput(insightconnect_plugin_runtime.Input):
     "include_same": {
       "type": "boolean",
       "title": "Include Same",
-      "description": "Whether the response should include the vulnerabilities that are the same between the current time and the comparison time. Only populated when Comparison Time is supplied",
+      "description": "Whether to also return the vulnerabilities that were already on the asset at the comparison time and are still present (the Same output). Requires Comparison Time",
       "default": false,
       "order": 7
     },
@@ -223,7 +223,7 @@ class AssetSearchOutput(insightconnect_plugin_runtime.Output):
         "same": {
           "type": "array",
           "title": "Same",
-          "description": "If comparison time is supplied and Include Same is enabled, the vulnerabilities that are the same between current and comparison time",
+          "description": "Vulnerabilities found on the asset at both the comparison time and the current time, meaning neither new nor remediated. Only returned when Include Same is enabled and a Comparison Time is supplied",
           "items": {
             "type": "object"
           },

@@ -810,7 +810,7 @@ types:
       required: false
     same:
       title: Same
-      description: If comparison time is supplied and Include Same is enabled, the vulnerabilities that are the same between current and comparison time
+      description: Vulnerabilities found on the asset at both the comparison time and the current time, meaning neither new nor remediated. Only returned when Include Same is enabled and a Comparison Time is supplied
       type: '[]object'
       required: false
     os_architecture:
@@ -1179,7 +1179,7 @@ actions:
         example: "2021-04-15T17:56:47Z"
       include_same:
         title: Include Same
-        description: Whether the response should include the vulnerabilities that are the same between the current time and the comparison time. Only populated when Comparison Time is supplied
+        description: Whether to also return the vulnerabilities that were already on the asset at the comparison time and are still present (the Same output). Requires Comparison Time
         type: boolean
         required: false
         default: false

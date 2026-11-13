@@ -55,7 +55,7 @@ This action is used to search for assets using filtered asset search
 |comparison_time|date|None|False|The date and time to compare the asset current state against to detect changes|None|2021-04-15T17:56:47Z|None|None|
 |current_time|date|None|False|The current date and time to compare against the asset state to detect changes|None|2021-04-15T17:56:47Z|None|None|
 |include_inter_snapshot_remediations|boolean|False|False|Whether the response should include vulnerabilities remediated between the comparison time and the current time that are not present in the snapshots|None|True|None|None|
-|include_same|boolean|False|False|Whether the response should include the vulnerabilities that are the same between the current time and the comparison time. Only populated when Comparison Time is supplied|None|True|None|None|
+|include_same|boolean|False|False|Whether to also return the vulnerabilities that were already on the asset at the comparison time and are still present (the Same output). Requires Comparison Time|None|True|None|None|
 |include_unique_identifiers|boolean|True|False|Whether the response should include unique identifiers found on the asset, such as hardware or operating system identifiers|None|True|None|None|
 |size|integer|200|False|The number of assets to retrieve. If blank then will default to 200 assets returned|None|100|None|None|
 |sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{"risk-score": "asc", "criticality-tag": "desc"}|None|None|
@@ -847,7 +847,7 @@ Example output:
 |OS Version|string|None|False|The version of the operating system|None|
 |Remediated Vulnerabilities|[]object|None|False|Vulnerabilities that were remediated in the latest version at current time for the asset|None|
 |Risk Score|float|None|False|Risk score (with criticality adjustments) of the asset|None|
-|Same|[]object|None|False|If comparison time is supplied and Include Same is enabled, the vulnerabilities that are the same between current and comparison time|None|
+|Same|[]object|None|False|Vulnerabilities found on the asset at both the comparison time and the current time, meaning neither new nor remediated. Only returned when Include Same is enabled and a Comparison Time is supplied|None|
 |Severe Vulnerabilities|integer|None|False|The count of severe vulnerability findings|None|
 |Source|string|None|False|Source of the asset|None|
 |Tags|[]asset_tag|None|False|The tags applied to the asset|None|
