@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightvm_cloud
 title: Rapid7 InsightVM Cloud
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses the InsightVM Cloud Integrations API to view assets and start scans
-version: 9.0.2
+version: 9.1.0
 connection_version: 6
 key_features:
   - "Perform scan management functionality including starting and checking the status of scans"
@@ -14,6 +14,7 @@ requirements:
   - "Requires an InsightVM API Key"
   - "InsightVM Scan Engine(s) paired to the Insight Platform"
 version_history:
+  - "9.1.0 - Action `Asset Search`: Added optional inputs `Include Same`, `Include Unique Identifiers` and `Include Inter Snapshot Remediations` | Added `same` field to the asset output | Updated SDK to the latest version (6.6.1)"
   - "9.0.2 - Action `Vulnerability Search`: Fixed an issue where actions could fail due to JSON schema validation errors | Updated SDK to the latest version (6.5.0)"
   - "9.0.1 - Added user-agent and correlation ID headers to all requests | Updated SDK to the latest version (6.3.10)"
   - "9.0.0 - Refined pagination for `Asset Search` action | SDK Bump to 6.3.6 | Resolved issue in 'Asset Search' where 'Vulnerability Criteria' is appended onto 'Asset Criteria'"
@@ -46,7 +47,7 @@ status: []
 cloud_ready: true
 sdk:
   type: slim
-  version: 6.5.0
+  version: 6.6.1
   user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_insightvm_cloud
@@ -807,6 +808,11 @@ types:
       description: If comparison time is supplied, the vulnerabilities that are new in the latest version at current time
       type: '[]object'
       required: false
+    same:
+      title: Same
+      description: Vulnerabilities found on the asset at both the comparison time and the current time, meaning neither new nor remediated. Only returned when Include Same is enabled and a Comparison Time is supplied
+      type: '[]object'
+      required: false
     os_architecture:
       description: The architecture of the os
       title:  OS Architecture
@@ -1171,6 +1177,27 @@ actions:
         type: date
         required: false
         example: "2021-04-15T17:56:47Z"
+      include_same:
+        title: Include Same
+        description: Whether to also return the vulnerabilities that were already on the asset at the comparison time and are still present (the Same output). Requires Comparison Time
+        type: boolean
+        required: false
+        default: false
+        example: true
+      include_unique_identifiers:
+        title: Include Unique Identifiers
+        description: Whether the response should include unique identifiers found on the asset, such as hardware or operating system identifiers
+        type: boolean
+        required: false
+        default: true
+        example: true
+      include_inter_snapshot_remediations:
+        title: Include Inter Snapshot Remediations
+        description: Whether the response should include vulnerabilities remediated between the comparison time and the current time that are not present in the snapshots
+        type: boolean
+        required: false
+        default: false
+        example: true
     output:
       assets:
         title: Assets

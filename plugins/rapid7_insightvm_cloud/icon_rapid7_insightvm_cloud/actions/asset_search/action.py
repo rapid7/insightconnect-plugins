@@ -19,6 +19,9 @@ class AssetSearch(insightconnect_plugin_runtime.Action):
         comparison_time = params.get(Input.COMPARISON_TIME, "")
         sort_criteria = params.get(Input.SORT_CRITERIA, {})
         size = params.get(Input.SIZE, 200)
+        include_same = params.get(Input.INCLUDE_SAME, False)
+        include_unique_identifiers = params.get(Input.INCLUDE_UNIQUE_IDENTIFIERS, True)
+        include_inter_snapshot_remediations = params.get(Input.INCLUDE_INTER_SNAPSHOT_REMEDIATIONS, False)
         # END INPUT BINDING - DO NOT REMOVE
 
         # Setting up the JSON body for request
@@ -27,6 +30,9 @@ class AssetSearch(insightconnect_plugin_runtime.Action):
         query_parameters = {
             "currentTime": current_time,
             "comparisonTime": comparison_time,
+            "includeSame": include_same,
+            "includeUniqueIdentifiers": include_unique_identifiers,
+            "includeInterSnapshotRemediations": include_inter_snapshot_remediations,
         }
 
         # Capped Max Page Size, maximum API supports is 500 (causes timeouts)
