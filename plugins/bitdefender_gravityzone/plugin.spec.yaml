@@ -1,0 +1,353 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: bitdefender_gravityzone
+title: Bitdefender GravityZone
+description: Find, isolate and restore endpoints managed by Bitdefender GravityZone
+version: 1.0.0
+connection_version: 1
+supported_versions: ["GravityZone Public API v1.0"]
+vendor: rapid7
+support: rapid7
+status: []
+sdk:
+  type: slim
+  version: 6.6.1
+  user: nobody
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/bitdefender_gravityzone
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.bitdefender.com/en-us/business
+tags:
+  - bitdefender
+  - gravityzone
+  - endpoint
+  - isolation
+hub_tags:
+  use_cases: [threat_detection_and_response]
+  keywords: [endpoint, endpoint_protection, containment]
+  features: []
+key_features:
+  - "Find exactly one managed endpoint by hostname or FQDN, refusing ambiguous matches"
+  - "List endpoints using GravityZone filters"
+  - "Get the details of a managed endpoint"
+  - "Isolate an endpoint from the network and restore it from isolation"
+requirements:
+  - "A GravityZone API key with the Network API and the Incidents API enabled"
+  - "The GravityZone Control Center URL, for example https://cloud.gravityzone.bitdefender.com"
+troubleshooting:
+  - "The connection test uses the Network API only. Isolate Endpoint and Restore Endpoint also need the Incidents API: without it they fail with GravityZone error -32001, API Key is not allowed to access the selected API"
+  - "Use the Control Center URL, for example https://cloud.gravityzone.bitdefender.com. A trailing /api is accepted and removed"
+  - "Find Endpoint searches managed endpoints only. The part of the hostname before the first dot must be at least 3 characters long, because the GravityZone name filter needs 3 characters"
+  - "GravityZone does not document whether its name filter is case-sensitive, so Find Endpoint searches the name as given, in lower case and in upper case, and merges the results. A lookup can therefore send up to three times as many requests"
+  - "Find Endpoint returns `found` false with `match_count` 0 when no managed endpoint has that exact name or FQDN, and `found` false with a `match_count` above 1 when the hostname is ambiguous. Pass the FQDN to tell apart endpoints that share a short name"
+  - "When an FQDN matches no endpoint FQDN, Find Endpoint compares its first label with the endpoint names. A single endpoint with that name counts only if GravityZone has no FQDN for it: an endpoint whose FQDN is in another domain is not a match"
+  - "Find Endpoint searches the endpoints under Computers and Groups, including subgroups, which is what the GravityZone getEndpointsList method returns. Endpoints that GravityZone shows only under the Active Directory container are not returned by that method, so Find Endpoint reports them as not found"
+  - "Isolate Endpoint and Restore Endpoint fail unless GravityZone confirms that the task was created. The task then runs on the endpoint asynchronously"
+  - "GravityZone limits the number of requests per API key. When it returns HTTP 429, the plugin waits for the Retry-After period and retries up to 3 times, as long as Retry-After is 60 seconds or less"
+version_history:
+  - "1.0.0 - Initial plugin"
+links:
+  - "[Bitdefender GravityZone](https://www.bitdefender.com/en-us/business)"
+references:
+  - "[GravityZone Public API](https://www.bitdefender.com/business/support/en/77212-125277-public-api.html)"
+enable_cache: false
+
+types:
+  endpoint_item:
+    id:
+      title: Endpoint ID
+      description: The ID of the endpoint
+      type: string
+      required: true
+      example: 5a4f2c3b6e9d1a0012345678
+    name:
+      title: Name
+      description: The name of the endpoint
+      type: string
+      required: true
+      example: WORKSTATION-01
+    label:
+      title: Label
+      description: The label set on the endpoint
+      type: string
+      required: false
+      example: Finance laptop
+    fqdn:
+      title: FQDN
+      description: The fully qualified domain name of the endpoint
+      type: string
+      required: false
+      example: workstation-01.example.com
+    group_id:
+      title: Group ID
+      description: The ID of the group the endpoint belongs to
+      type: string
+      required: false
+      example: 5a4f2c3b6e9d1a0012345679
+    is_managed:
+      title: Is Managed
+      description: Whether the endpoint is managed by GravityZone
+      type: boolean
+      required: false
+      example: true
+    machine_type:
+      title: Machine Type
+      description: "The type of machine: 1 for a computer, 2 for a virtual machine, 3 for an EC2 instance, 0 for other"
+      type: integer
+      required: false
+      example: 1
+    operating_system_version:
+      title: Operating System Version
+      description: The operating system version of the endpoint
+      type: string
+      required: false
+      example: Windows 11 Pro
+    ip:
+      title: IP Address
+      description: The local IP address of the endpoint
+      type: string
+      required: false
+      example: 10.0.0.15
+    macs:
+      title: MAC Addresses
+      description: The MAC addresses of the endpoint
+      type: "[]string"
+      required: false
+      example: ["00:1a:2b:3c:4d:5e"]
+    managed_with_best:
+      title: Managed with BEST
+      description: Whether the Bitdefender Endpoint Security Tools agent is installed on the endpoint
+      type: boolean
+      required: false
+      example: true
+    is_isolated:
+      title: Is Isolated
+      description: Whether the endpoint is currently isolated from the network
+      type: boolean
+      required: false
+      example: false
+  endpoint_summary:
+    id:
+      title: Endpoint ID
+      description: The ID of the endpoint
+      type: string
+      required: false
+      example: 5a4f2c3b6e9d1a0012345678
+    name:
+      title: Name
+      description: The name of the endpoint
+      type: string
+      required: false
+      example: WORKSTATION-01
+    fqdn:
+      title: FQDN
+      description: The fully qualified domain name of the endpoint
+      type: string
+      required: false
+      example: workstation-01.example.com
+    ip:
+      title: IP Address
+      description: The local IP address of the endpoint
+      type: string
+      required: false
+      example: 10.0.0.15
+    macs:
+      title: MAC Addresses
+      description: The MAC addresses of the endpoint
+      type: "[]string"
+      required: false
+      example: ["00:1a:2b:3c:4d:5e"]
+    is_managed:
+      title: Is Managed
+      description: Whether the endpoint is managed by GravityZone
+      type: boolean
+      required: false
+      example: true
+    is_isolated:
+      title: Is Isolated
+      description: Whether the endpoint is currently isolated from the network
+      type: boolean
+      required: false
+      example: false
+
+connection:
+  url:
+    title: Access URL
+    description: The GravityZone Control Center URL. A trailing /api is accepted and removed
+    type: string
+    required: true
+    example: https://cloud.gravityzone.bitdefender.com
+  api_key:
+    title: API Key
+    description: A GravityZone API key with the Network API and the Incidents API enabled
+    type: credential_secret_key
+    required: true
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
+
+actions:
+  get_endpoints_list:
+    title: Get Endpoints List
+    description: Get a page of endpoints from GravityZone, optionally narrowed with GravityZone filters
+    input:
+      parent_id:
+        title: Parent ID
+        description: The ID of the target company or group. If omitted, the endpoints under Computers and Groups are returned
+        type: string
+        required: false
+        example: 5a4f2c3b6e9d1a0012345678
+      is_managed:
+        title: Is Managed
+        description: Set to true to return only managed endpoints, or to false to return only unmanaged endpoints. Leave empty to return both
+        type: boolean
+        required: false
+        example: true
+      page:
+        title: Page
+        description: The page number to return, starting at 1
+        type: integer
+        required: false
+        default: 1
+        example: 1
+      per_page:
+        title: Per Page
+        description: The number of endpoints per page, from 1 to 100
+        type: integer
+        required: false
+        default: 30
+        example: 30
+      filters:
+        title: Filters
+        description: A GravityZone filters object, passed to the API unchanged. For example details.name matches names that start with the value, and depth.allItemsRecursively includes endpoints in subgroups
+        type: object
+        required: false
+        example: {"details": {"name": "WORKSTATION"}, "depth": {"allItemsRecursively": true}}
+    output:
+      endpoints:
+        title: Endpoints
+        description: The endpoints on the requested page
+        type: "[]endpoint_item"
+        required: true
+        example: [{"id": "5a4f2c3b6e9d1a0012345678", "name": "WORKSTATION-01", "label": "", "fqdn": "workstation-01.example.com", "group_id": "5a4f2c3b6e9d1a0012345679", "is_managed": true, "machine_type": 1, "operating_system_version": "Windows 11 Pro", "ip": "10.0.0.15", "macs": ["00:1a:2b:3c:4d:5e"], "managed_with_best": true, "is_isolated": false}]
+      total:
+        title: Total
+        description: The total number of endpoints that match the request
+        type: integer
+        required: true
+        example: 1
+      pages_count:
+        title: Pages Count
+        description: The total number of pages
+        type: integer
+        required: false
+        example: 1
+      page:
+        title: Page
+        description: The page number returned
+        type: integer
+        required: true
+        example: 1
+      per_page:
+        title: Per Page
+        description: The number of endpoints per page
+        type: integer
+        required: true
+        example: 30
+
+  find_endpoint:
+    title: Find Endpoint
+    description: Find exactly one managed endpoint by hostname or FQDN, using an exact, case-insensitive match. When no endpoint or more than one endpoint matches, it returns found false instead of guessing
+    input:
+      hostname:
+        title: Hostname
+        description: The short hostname or the FQDN of the endpoint. An FQDN is matched against the endpoint FQDN first. If none matches, its first label is matched against the endpoint name, and a single endpoint with a different FQDN is not a match
+        type: string
+        required: true
+        example: workstation-01.example.com
+    output:
+      found:
+        title: Found
+        description: True only when exactly one managed endpoint matches the hostname
+        type: boolean
+        required: true
+        example: true
+      match_count:
+        title: Match Count
+        description: The number of managed endpoints that match the hostname exactly
+        type: integer
+        required: true
+        example: 1
+      endpoint:
+        title: Endpoint
+        description: The matching endpoint when exactly one endpoint matches, otherwise an empty object
+        type: endpoint_summary
+        required: true
+        example: {"id": "5a4f2c3b6e9d1a0012345678", "name": "WORKSTATION-01", "fqdn": "workstation-01.example.com", "ip": "10.0.0.15", "macs": ["00:1a:2b:3c:4d:5e"], "is_managed": true, "is_isolated": false}
+
+  get_managed_endpoint_details:
+    title: Get Managed Endpoint Details
+    description: Get the details of a managed endpoint, including its isolation state, agent, policy, modules and risk score
+    input:
+      endpoint_id:
+        title: Endpoint ID
+        description: The ID of the managed endpoint
+        type: string
+        required: true
+        example: 5a4f2c3b6e9d1a0012345678
+      include_scan_logs:
+        title: Include Scan Logs
+        description: Whether to include the last successful scan in the response
+        type: boolean
+        required: false
+        default: false
+        example: false
+      include_last_logged_users:
+        title: Include Last Logged Users
+        description: Whether to include the users logged in on the endpoint at the time of the request
+        type: boolean
+        required: false
+        default: false
+        example: false
+    output:
+      endpoint_details:
+        title: Endpoint Details
+        description: The endpoint details as returned by GravityZone
+        type: object
+        required: true
+        example: {"id": "5a4f2c3b6e9d1a0012345678", "name": "WORKSTATION-01", "isIsolated": false, "state": 1}
+
+  isolate_endpoint:
+    title: Isolate Endpoint
+    description: Create a GravityZone task that isolates a managed endpoint from the network. The step fails unless GravityZone confirms that the task was created
+    input:
+      endpoint_id:
+        title: Endpoint ID
+        description: The ID of the managed endpoint to isolate
+        type: string
+        required: true
+        example: 5a4f2c3b6e9d1a0012345678
+    output:
+      success:
+        title: Success
+        description: True when GravityZone created the isolation task
+        type: boolean
+        required: true
+        example: true
+
+  restore_endpoint:
+    title: Restore Endpoint
+    description: Create a GravityZone task that restores a managed endpoint from network isolation. The step fails unless GravityZone confirms that the task was created
+    input:
+      endpoint_id:
+        title: Endpoint ID
+        description: The ID of the managed endpoint to restore from isolation
+        type: string
+        required: true
+        example: 5a4f2c3b6e9d1a0012345678
+    output:
+      success:
+        title: Success
+        description: True when GravityZone created the restore task
+        type: boolean
+        required: true
+        example: true

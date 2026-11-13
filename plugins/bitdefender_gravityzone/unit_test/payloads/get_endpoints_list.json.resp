@@ -1,0 +1,42 @@
+{
+  "id": "0df7568c-59c1-48e0-a31b-18d83e6d9810",
+  "jsonrpc": "2.0",
+  "result": {
+    "page": 1,
+    "pagesCount": 1,
+    "perPage": 30,
+    "total": 2,
+    "items": [
+      {
+        "id": "5a4f2c3b6e9d1a0012345678",
+        "name": "WORKSTATION-01",
+        "label": "Finance laptop",
+        "fqdn": "workstation-01.example.com",
+        "groupId": "5a4f2c3b6e9d1a0012345679",
+        "isManaged": true,
+        "machineType": 1,
+        "operatingSystemVersion": "Windows 11 Pro",
+        "ip": "10.0.0.15",
+        "macs": ["00:1a:2b:3c:4d:5e"],
+        "ssid": "",
+        "managedWithBest": true,
+        "isIsolated": false,
+        "policy": {"id": "5a4f2c3b6e9d1a00123456aa", "name": "Default policy", "applied": true}
+      },
+      {
+        "id": "5a4f2c3b6e9d1a0012345680",
+        "name": "WORKSTATION-02",
+        "label": null,
+        "fqdn": null,
+        "groupId": "5a4f2c3b6e9d1a0012345679",
+        "isManaged": true,
+        "machineType": 2,
+        "operatingSystemVersion": "Ubuntu 24.04",
+        "ip": null,
+        "macs": null,
+        "managedWithBest": true,
+        "isIsolated": true
+      }
+    ]
+  }
+}
