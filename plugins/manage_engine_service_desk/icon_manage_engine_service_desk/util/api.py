@@ -175,7 +175,7 @@ class ManageEngineServiceDeskAPI:
 
     def add_request(self, request_parameters: dict) -> dict:
         self._logger.info("Adding a request...")
-        cleaned_request_parameters = helpers.clean_dict(request_parameters)
+        cleaned_request_parameters = helpers.build_request_payload(request_parameters)
         if not cleaned_request_parameters.get(Request.REQUESTER):
             raise PluginException(
                 cause="Requester parameter not provided.",
@@ -190,7 +190,7 @@ class ManageEngineServiceDeskAPI:
 
     def edit_request(self, request_id: int, request_parameters: dict) -> dict:
         self._logger.info(f"Editing a request with {request_id} id...")
-        cleaned_request_parameters = helpers.clean_dict(request_parameters)
+        cleaned_request_parameters = helpers.build_request_payload(request_parameters)
         if not cleaned_request_parameters:
             raise PluginException(
                 cause="Not enough input parameters were provided.",

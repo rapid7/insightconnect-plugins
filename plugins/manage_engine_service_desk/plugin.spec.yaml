@@ -4,7 +4,7 @@ products: [insightconnect]
 name: manage_engine_service_desk
 title: Manage Engine Service Desk
 description: ManageEngine's Service Desk has the ability to centralize and capture reported issues, allowing security and IT administrators to track and manage all incidents in an easy manner. The numerous help desk tickets raised are organized and tracked in the Requests module. The Requests module enables you to handle tickets promptly, assign tickets to technicians, merge similar requests, and so on
-version: 2.0.0
+version: 2.1.0
 connection_version: 2
 supported_versions: ["ServiceDesk Plus 13008 (On-Prem)", "ServiceDesk Plus Cloud"]
 vendor: rapid7
@@ -23,7 +23,7 @@ key_features:
   - "Manage request notes - add, edit, delete, get list of notes"
 sdk:
   type: full
-  version: 6.5.0
+  version: 6.6.1
   user: nobody
 links:
   - "[Manage Engine Service Desk](https://manageengine.com/products/service-desk)"
@@ -40,6 +40,7 @@ hub_tags:
   keywords: [management]
   features: []
 version_history:
+  - "2.1.0 - Add `Additional Fields` input to `Add Request` and `Edit Request` for instances that require extra request attributes | Updated SDK to the latest version (6.6.1)"
   - "2.0.0 - Add cloud connection support using Zoho OAuth 2.0 | All ID fields changed from integer to string to prevent precision loss with large Cloud IDs | Connection now requires connection_type field (On-Prem or Cloud) | Cloud connections require client_id, client_secret, refresh_token, portal_name, and data_center fields | On-Prem connection fields sdp_base_url and api_key are now optional (required only when connection_type is On-Prem)"
   - "1.0.2 - Bumping requirements.txt | SDK bump to 6.1.4"
   - "1.0.1 - Fix `int` conversion issue in `Get List Request` and `Get Request` actions"
@@ -680,7 +681,7 @@ actions:
         example: 2000
   add_request:
     title: Add Request
-    description: This action is used to add a new request. Subject and requester parameters are required, others are optional. In every parameter containing `ID` and `Name` fields please provide at least one of them
+    description: This action is used to add a new request. Subject and requester parameters are required, others are optional. In every parameter containing `ID` and `Name` fields please provide at least one of them. Use Additional Fields for anything an instance requires, such as a request template or custom fields
     input:
       subject:
         title: Subject
@@ -808,6 +809,12 @@ actions:
         type: item
         required: false
         example: '{"name": "Install"}'
+      additional_fields:
+        title: Additional Fields
+        description: Any other request attributes supported by ServiceDesk Plus, such as `template`, `udf_fields` or `sla`, sent as given. A value set in another input takes precedence over the same key here
+        type: object
+        required: false
+        example: {"template": {"name": "Default Request"}, "udf_fields": {"udf_char1": "value"}}
     output:
       request_id:
         title: Request ID
@@ -829,7 +836,7 @@ actions:
         example: 2000
   edit_request:
     title: Edit Request
-    description: Update the given request. At least one parameter other than Request ID is required. In every parameter containing `ID` and `Name` fields please provide only one or the other
+    description: Update the given request. At least one parameter other than Request ID is required. In every parameter containing `ID` and `Name` fields please provide only one or the other. Use Additional Fields for anything an instance requires, such as a request template or custom fields
     input:
       request_id:
         title: Request ID
@@ -964,6 +971,12 @@ actions:
         type: item
         required: false
         example: '{"name": "Install"}'
+      additional_fields:
+        title: Additional Fields
+        description: Any other request attributes supported by ServiceDesk Plus, such as `template`, `udf_fields` or `sla`, sent as given. A value set in another input takes precedence over the same key here
+        type: object
+        required: false
+        example: {"template": {"name": "Default Request"}, "udf_fields": {"udf_char1": "value"}}
     output:
       request_id:
         title: Request ID

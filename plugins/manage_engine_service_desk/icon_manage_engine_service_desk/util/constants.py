@@ -90,6 +90,9 @@ class Request(Item):
     IS_OVERDUE = "is_overdue"
 
 
+ADDITIONAL_FIELDS = "additional_fields"
+
+
 class Time:
     DISPLAY_VALUE = "display_value"
 
