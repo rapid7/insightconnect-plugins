@@ -16,6 +16,6 @@
   },
   "docs": "https://endoflife.ai/api",
   "methodology": "https://endoflife.ai/risk-score",
-  "tier": "anon",
-  "rate_limit": "100 requests/day"
+  "tier": "free",
+  "rate_limit": "150 requests/day"
 }

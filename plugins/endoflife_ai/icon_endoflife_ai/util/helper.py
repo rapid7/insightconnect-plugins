@@ -5,7 +5,7 @@ import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Every tier of the endoflife.ai API accepts a batch of at least this many items,
-# so chunking at this size works with or without an API key.
+# so chunking at this size works with a free key.
 BATCH_CHUNK_SIZE = 5
 
 # Fields copied from an API score object into a flat action output, in output order.

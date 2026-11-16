@@ -51,4 +51,13 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 assistance="Verify the URL points at the endoflife.ai API root, for example https://api.endoflife.ai.",
                 data=response.text,
             )
+        # The index route answers without a key, and reports the caller's tier. Every action
+        # needs a key (the API answers 401 without one), so a connection whose key is missing
+        # or not recognised must fail here, not at the first action.
+        if not self.api_key or json_.get("tier") in (None, "anon"):
+            raise ConnectionTestException(
+                cause="endoflife.ai did not recognise an API key on this connection.",
+                assistance="Every action needs an API key. Add a key from https://endoflife.ai/api#free-key to the connection, or check the stored key for typing errors.",
+                data=response.text,
+            )
         return {"success": True, "tier": json_.get("tier"), "rate_limit": json_.get("rate_limit")}

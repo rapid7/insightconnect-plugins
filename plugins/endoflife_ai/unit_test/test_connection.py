@@ -27,9 +27,21 @@ class TestConnection(TestCase):
 
     @mock.patch("requests.get", side_effect=mocked_requests_get)
     def test_connection_test(self, mock_get):
-        result = connection(STUB_CONNECTION_ANONYMOUS).test()
-        self.assertEqual({"success": True, "tier": "anon", "rate_limit": "100 requests/day"}, result)
+        result = connection(STUB_CONNECTION_WITH_KEY).test()
+        self.assertEqual({"success": True, "tier": "free", "rate_limit": "150 requests/day"}, result)
         self.assertEqual("https://api.endoflife.ai/v1", mock_get.call_args[0][0])
+
+    @mock.patch("requests.get", side_effect=mocked_requests_get)
+    def test_connection_test_without_key(self, mock_get):
+        with self.assertRaises(ConnectionTestException):
+            connection(STUB_CONNECTION_ANONYMOUS).test()
+
+    @mock.patch("requests.get", side_effect=mocked_requests_get)
+    def test_connection_test_unrecognised_key(self, mock_get):
+        params = dict(STUB_CONNECTION_WITH_KEY)
+        params[Input.API_KEY] = {"secretKey": "mistyped-key"}
+        with self.assertRaises(ConnectionTestException):
+            connection(params).test()
 
     @mock.patch("requests.get", side_effect=mocked_requests_get)
     def test_connection_test_wrong_url(self, mock_get):

@@ -79,7 +79,13 @@ def mocked_requests_request(method, url, **kwargs):
 # This method will be used by the mock to replace requests.get in the connection test
 def mocked_requests_get(url, **kwargs):
     if url == f"{BASE_URL}/v1":
-        return MockResponse(payload("connection_test_data"), 200)
+        # The index answers 200 either way and reports the caller's tier: the key's tier
+        # with a recognised key, "anon" without one.
+        index = json.loads(payload("connection_test_data"))
+        if (kwargs.get("headers") or {}).get("X-API-Key") != "test-key":
+            index["tier"] = "anon"
+            index["rate_limit"] = "no data requests without a key"
+        return MockResponse(json.dumps(index), 200)
     if url == "https://example.invalid/v1":
         return MockResponse('{"hello": "world"}', 200)
     print(f"mocked_requests_get failed looking for: {url}")
