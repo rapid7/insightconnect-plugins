@@ -4,10 +4,11 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Update the given request. At least one parameter other than Request ID is required. In every parameter containing `ID` and `Name` fields please provide only one or the other"
+    DESCRIPTION = "Update the given request. At least one parameter other than Request ID is required. In every parameter containing `ID` and `Name` fields please provide only one or the other. Use Additional Fields for anything an instance requires, such as a request template or custom fields"
 
 
 class Input:
+    ADDITIONAL_FIELDS = "additional_fields"
     ASSETS = "assets"
     CATEGORY = "category"
     DESCRIPTION = "description"
@@ -43,6 +44,12 @@ class EditRequestInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "additional_fields": {
+      "type": "object",
+      "title": "Additional Fields",
+      "description": "Any other request attributes supported by ServiceDesk Plus, such as `template`, `udf_fields` or `sla`, sent as given. A value set in another input takes precedence over the same key here",
+      "order": 22
+    },
     "assets": {
       "type": "array",
       "title": "Assets",
