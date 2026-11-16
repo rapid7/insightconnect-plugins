@@ -1,8 +1,10 @@
 import json
+from typing import Any
 
 from insightconnect_plugin_runtime.helper import clean
 
 from icon_manage_engine_service_desk.util.constants import (
+    ADDITIONAL_FIELDS,
     Priority,
     Request,
     Response,
@@ -40,6 +42,12 @@ def clean_dict(dictionary: dict) -> dict:
         elif value in [None, "", 0, [], {}]:
             del cleaned_dict[key]
     return cleaned_dict
+
+
+def build_request_payload(request_parameters: dict[str, Any]) -> dict[str, Any]:
+    additional_fields = request_parameters.get(ADDITIONAL_FIELDS, {})
+    explicit_parameters = {key: value for key, value in request_parameters.items() if key != ADDITIONAL_FIELDS}
+    return {**additional_fields, **clean_dict(explicit_parameters)}
 
 
 def remove_other_keys(input_dict: dict, keys_to_keep: list) -> dict:

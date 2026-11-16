@@ -1,0 +1,20 @@
+{
+  "subject": "Add valid request",
+  "requester": {
+    "name": "John"
+  },
+  "additional_fields": {
+    "template": {
+      "name": "Default Template"
+    },
+    "subject": "Overridden subject",
+    "impact_details": "Details of the impact",
+    "sla": {
+      "name": "High"
+    },
+    "udf_fields": {
+      "udf_char1": "test",
+      "udf_boolean1": false
+    }
+  }
+}

@@ -12,7 +12,7 @@ from komand_mimecast.actions import CreateManagedUrl
 from komand_mimecast.actions.create_managed_url.schema import CreateManagedUrlOutput, CreateManagedUrlInput
 from komand_mimecast.util.constants import BASIC_ASSISTANCE_MESSAGE, ERROR_CASES, MANAGED_URL_EXISTS_ERROR
 
-from util import Util
+from util import EXPIRED_ACCESS_TOKEN, Util
 
 
 @patch("requests.request", side_effect=Util.mocked_request)
@@ -34,3 +34,11 @@ class TestCreateManagedURl(TestCase):
             self.action.run(Util.load_json("inputs/create_managed_url_bad.json.exp"))
         self.assertEqual(exception.exception.cause, ERROR_CASES.get(MANAGED_URL_EXISTS_ERROR))
         self.assertEqual(exception.exception.assistance, BASIC_ASSISTANCE_MESSAGE)
+
+    def test_create_managed_url_token_expired(self, mocked_request):
+        # The stored token is expired so the action re-authenticates and retries the call
+        self.action.connection.client.access_token = EXPIRED_ACCESS_TOKEN
+        actual = self.action.run(Util.load_json("inputs/create_managed_url.json.exp"))
+        self.assertEqual(Util.load_json("expected/create_managed_url.json.exp"), actual)
+        self.assertEqual(mocked_request.call_count, 3)
+        validate(actual, CreateManagedUrlOutput.schema)
