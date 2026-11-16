@@ -15,7 +15,7 @@ from komand_mimecast.util.constants import (
 )
 from parameterized import parameterized
 
-from util import Util
+from util import EXPIRED_ACCESS_TOKEN, Util
 
 
 @patch("requests.request", side_effect=Util.mocked_request)
@@ -53,3 +53,11 @@ class TestTrackMessages(TestCase):
             self.action.run(Util.load_json(action_payload))
         self.assertEqual(exception.exception.cause, exception_cause)
         self.assertEqual(exception.exception.assistance, exception_assistance)
+
+    def test_track_messages_token_expired(self, mocked_request):
+        # The stored token is expired so the action re-authenticates and retries the call
+        self.action.connection.client.access_token = EXPIRED_ACCESS_TOKEN
+        actual = self.action.run(Util.load_json("inputs/search_message_tracking.json.exp"))
+        self.assertEqual(Util.load_json("expected/search_message_tracking.json.exp"), actual)
+        self.assertEqual(mocked_request.call_count, 3)
+        validate(actual, TrackMessagesOutput.schema)
