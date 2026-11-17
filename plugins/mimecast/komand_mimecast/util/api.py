@@ -215,6 +215,7 @@ class MimecastAPI:
         meta_data: dict = None,
         header_fields: dict = {},
         auth_request: bool = False,
+        retry_on_expired: bool = True,
     ) -> dict:
         payload = data or {}
         if meta_data is not None:
@@ -247,17 +248,12 @@ class MimecastAPI:
             )
 
         if response.get(FAIL_FIELD):
-            if response[FAIL_FIELD][0].get("code") == "token_expired":
+            if retry_on_expired and not auth_request and response[FAIL_FIELD][0].get("code") == "token_expired":
                 self.logger.info("Token has expired, attempting re-authentication...")
                 self.access_token = None
                 self.authenticate()
-                request = response.request
                 return self._handle_rest_call(
-                    method=request.method,
-                    uri=request.url,
-                    header_fields=self._prepare_header(request.headers, self.access_token),
-                    data=request.body,
-                    params=request.params,
+                    method, uri, data, params, meta_data, header_fields, auth_request, retry_on_expired=False
                 )
             self._handle_error_response(response)
 

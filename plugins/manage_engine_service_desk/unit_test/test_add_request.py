@@ -1,7 +1,9 @@
+import json
 from unittest import TestCase
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema.validators import validate
 
 from util import Util
 from parameterized import parameterized
@@ -31,6 +33,25 @@ class TestAddRequest(TestCase):
     def test_add_request(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
         self.assertEqual(actual, expected)
+
+    def test_add_request_extra_fields(self, mock_request: MagicMock) -> None:
+        result = self.action.run(Util.read_file_to_dict("inputs/add_request_extra_fields.json.inp"))
+        validate(result, self.action.output.schema)
+
+        # Additional fields are sent at the top level of the request, the typed inputs win on a clash
+        # and a false custom field value is not stripped
+        sent_request = json.loads(mock_request.call_args.kwargs["data"]["input_data"])["request"]
+        self.assertEqual(
+            sent_request,
+            {
+                "subject": "Add valid request",
+                "requester": {"name": "John"},
+                "template": {"name": "Default Template"},
+                "impact_details": "Details of the impact",
+                "sla": {"name": "High"},
+                "udf_fields": {"udf_char1": "test", "udf_boolean1": False},
+            },
+        )
 
     @parameterized.expand(
         [
