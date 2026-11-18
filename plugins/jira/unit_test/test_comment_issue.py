@@ -3,16 +3,18 @@ import sys
 
 sys.path.append(os.path.abspath("../"))
 
+import json
 import logging
 from collections import namedtuple
-from typing import Optional
+from typing import Any, Optional
 from unittest import TestCase, mock
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_jira.actions.comment_issue import CommentIssue
 from komand_jira.connection import Connection
+from parameterized import param, parameterized
 
-from jira_mocks import mock_request_200, mock_request_404
+from jira_mocks import ADF_DOCUMENT, WIKI_MARKUP, get_request, get_urls, mock_request_200, mock_request_404
 
 ######################
 # MOCKS
@@ -332,3 +334,23 @@ class TestCommentIssueCloud(TestCase):
 
         self.assertIsNotNone(result)
         self.assertIn("comment_id", result)
+
+    @parameterized.expand(
+        [
+            param("wiki_markup", WIKI_MARKUP, "/rest/api/2/", WIKI_MARKUP),
+            param("json_not_adf", "42", "/rest/api/2/", "42"),
+            param("adf_document", json.dumps(ADF_DOCUMENT), "/rest/api/3/", ADF_DOCUMENT),
+        ]
+    )
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
+    def test_comment_issue_cloud_api_version(
+        self, name: str, comment: str, api_path: str, expected_body: Any, mock_request: mock.Mock
+    ) -> None:
+        self.test_action.connection = MockConnection(is_cloud=True)
+        self.test_action.run({"id": "10002", "comment": comment})
+
+        url, payload = get_request(mock_request, "POST")
+        self.assertIn(api_path, url)
+        self.assertEqual(expected_body, payload["body"])
+        for get_url in get_urls(mock_request, "GET"):
+            self.assertIn("/rest/api/3/", get_url)

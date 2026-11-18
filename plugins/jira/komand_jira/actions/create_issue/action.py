@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import CreateIssueInput, CreateIssueOutput, Input, Output, Component
 
 # Custom imports below
-from komand_jira.util.util import look_up_project, normalize_issue, load_text_as_adf
+from komand_jira.util.util import look_up_project, normalize_issue, contains_adf, load_rich_text
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
@@ -67,7 +67,10 @@ class CreateIssue(insightconnect_plugin_runtime.Action):
         # Append required fields for issue creation
         fields["project"] = project if not self.connection.is_cloud else {"key": project}
         fields["summary"] = summary
-        fields["description"] = description if not self.connection.is_cloud else load_text_as_adf(description)
+        # On Cloud, the description goes as an ADF document when it is one or when the other fields hold one
+        fields["description"] = (
+            description if not self.connection.is_cloud else load_rich_text(description, as_adf=contains_adf(fields))
+        )
         fields["issuetype"] = {"name": issue_type}
 
         # Map field names to IDs

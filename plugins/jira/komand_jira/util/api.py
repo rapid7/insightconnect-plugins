@@ -10,11 +10,13 @@ from typing import Any, Union
 from komand_jira.util.constants import (
     REQUESTS_TIMEOUT,
     DEFAULT_JIRA_API_VERSION,
+    WIKI_MARKUP_JIRA_API_VERSION,
+    ADF_JIRA_API_VERSION,
     OAUTH2_TOKEN_URL,
     OAUTH2_ACCESSIBLE_RESOURCES_URL,
     ATLASSIAN_API_DOMAIN,
 )
-from komand_jira.util.util import load_text_as_adf
+from komand_jira.util.util import contains_adf, load_rich_text
 
 
 class JiraApi:
@@ -81,10 +83,10 @@ class JiraApi:
         return self._call_api("GET", f"attachment/content/{attachment_id}", return_json=False)
 
     def add_comment_to_issue(self, issue_id: int, comment: str) -> dict[str, Any]:
-        return self._call_api(
+        return self._call_rich_text_api(
             "POST",
             f"issue/{issue_id}/comment",
-            payload={"body": load_text_as_adf(comment)},
+            payload={"body": load_rich_text(comment)},
         )
 
     def get_all_issue_types(self) -> dict[str, Any]:
@@ -94,12 +96,12 @@ class JiraApi:
         return self._call_api("GET", "project/search", params={"query": project_name})
 
     def create_issue(self, issue_fields: dict[str, Any]) -> dict[str, Any]:
-        return self._call_api("POST", "issue", payload={"fields": issue_fields})
+        return self._call_rich_text_api("POST", "issue", payload={"fields": issue_fields})
 
     def edit_issue(
         self, issue_id: str, issue_fields: dict[str, Any], issue_update: dict[str, Any], notify: bool
     ) -> None:
-        self._call_api(
+        self._call_rich_text_api(
             "PUT",
             f"issue/{issue_id}",
             params={"notifyUsers": notify},
@@ -135,14 +137,14 @@ class JiraApi:
         # Initialize request payload data
         payload = {"transition": {"id": transition_id or transition_name}}
 
-        # If a comment is provided, add it to the payload
+        # If a comment is provided, add it to the payload, as an ADF document when the fields hold one
         if comment:
-            payload["update"] = {"comment": [{"add": {"body": load_text_as_adf(comment)}}]}
+            payload["update"] = {"comment": [{"add": {"body": load_rich_text(comment, as_adf=contains_adf(fields))}}]}
 
         # If fields are provided, add them to the payload
         if fields:
             payload["fields"] = fields
-        return self._call_api("POST", f"issue/{issue_id}/transitions", payload=payload, return_json=False)
+        return self._call_rich_text_api("POST", f"issue/{issue_id}/transitions", payload=payload, return_json=False)
 
     def add_user(self, username: str, email: str, password: str, products: list[str], notify: bool) -> bool:
         try:
@@ -256,6 +258,15 @@ class JiraApi:
         headers.update(self.authorization)
         return None, headers
 
+    def _call_rich_text_api(
+        self, method: str, path: str, payload: dict[str, Any], **kwargs: Any
+    ) -> Union[list[dict[str, Any]], dict[str, Any], str]:
+        # Jira REST API v2 takes a description or comment as text and renders its wiki markup, while v3 takes only
+        # ADF documents. So a request that holds an ADF document goes to v3, and any other request to v2. A caller
+        # whose request holds ADF elsewhere sends its text description or comment as ADF too (load_rich_text as_adf).
+        api_version = ADF_JIRA_API_VERSION if contains_adf(payload) else WIKI_MARKUP_JIRA_API_VERSION
+        return self._call_api(method, path, payload=payload, api_version=api_version, **kwargs)
+
     def _call_api(  # noqa: MC0001
         self,
         method: str,
@@ -267,10 +278,11 @@ class JiraApi:
         timeout: int = REQUESTS_TIMEOUT,
         return_json: bool = True,
         is_api_path: bool = True,
+        api_version: str = None,
     ) -> Union[list[dict[str, Any]], dict[str, Any], str]:
         try:
             # Prepare URL
-            url = f"{self.base_url}/rest/api/{self.api_version}/{path}" if is_api_path else path
+            url = f"{self.base_url}/rest/api/{api_version or self.api_version}/{path}" if is_api_path else path
 
             # Get authorization and headers
             authorization, auth_headers = self._get_authorization()

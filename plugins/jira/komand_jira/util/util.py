@@ -2,7 +2,7 @@ import logging
 import base64
 from jira import User
 from jira.client import JIRA
-from typing import Dict, Any, TYPE_CHECKING
+from typing import Dict, Any, Optional, TYPE_CHECKING, Union
 import json
 
 if TYPE_CHECKING:
@@ -198,28 +198,67 @@ def look_up_project(
     return False
 
 
+def is_adf_document(value: Any) -> bool:
+    return isinstance(value, dict) and value.get("type") == "doc"
+
+
+def contains_adf(value: Any) -> bool:
+    """
+    Checks whether the value is an Atlassian Document Format (ADF) document or holds one at any depth.
+    """
+
+    if isinstance(value, dict):
+        return is_adf_document(value) or any(contains_adf(item) for item in value.values())
+    if isinstance(value, list):
+        return any(contains_adf(item) for item in value)
+    return False
+
+
+def load_adf_document(input_text: str) -> Optional[Dict[str, Any]]:
+    """
+    Returns the ADF document that the input text holds as JSON, or None for any other text, JSON such as 42 included.
+    """
+
+    try:
+        document = json.loads(input_text)
+    except json.JSONDecodeError:
+        return None
+    return document if is_adf_document(document) else None
+
+
+def load_rich_text(input_text: str, as_adf: bool = False) -> Union[str, Dict[str, Any]]:
+    """
+    Prepares a description or comment for Jira Cloud: an ADF document when the text holds one or when as_adf is set,
+    and the text itself otherwise, which Jira REST API v2 renders as wiki markup.
+    """
+
+    if as_adf:
+        return load_text_as_adf(input_text)
+    return load_adf_document(input_text) or input_text
+
+
 def load_text_as_adf(input_text: str) -> Dict[str, Any]:
     """
     Converts plain text input into a simple Atlassian Document Format (ADF) structure.
     This is a basic implementation and may need to be expanded for more complex formatting.
     """
 
-    try:
-        return json.loads(input_text)
-    except json.JSONDecodeError:
-        # If not, we treat it as plain text and convert to ADF
-        return {
-            "type": "doc",
-            "version": 1,
-            "content": [
-                {
-                    "type": "paragraph",
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": input_text,
-                        }
-                    ],
-                }
-            ],
-        }
+    if document := load_adf_document(input_text):
+        return document
+
+    # If not, we treat it as plain text and convert to ADF
+    return {
+        "type": "doc",
+        "version": 1,
+        "content": [
+            {
+                "type": "paragraph",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": input_text,
+                    }
+                ],
+            }
+        ],
+    }
