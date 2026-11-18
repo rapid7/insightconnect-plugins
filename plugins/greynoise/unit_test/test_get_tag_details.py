@@ -1,13 +1,19 @@
+import json
 import logging
+import os
 from unittest import TestCase, mock
 
 from icon_greynoise.actions.get_tag_details import GetTagDetails
 
-from util import MockConnection, mocked_requests_get
+from util import MockConnection, read_file_to_string
+
+
+def tags_response(*_args, **_kwargs):
+    return json.loads(read_file_to_string(os.path.join(os.path.dirname(__file__), "payloads/tag_details.json")))
 
 
 class TestGetTagDetails(TestCase):
-    @mock.patch("greynoise.GreyNoise.metadata", side_effect=mocked_requests_get)
+    @mock.patch("greynoise.GreyNoise.tags", side_effect=tags_response)
     def test_get_tag_details(self, mock_get):
         log = logging.getLogger("Test")
         test_tag_details = GetTagDetails()
@@ -28,8 +34,17 @@ class TestGetTagDetails(TestCase):
             "recommend_block": True,
             "cves": ["CVE-2024-38289"],
             "created_at": "2024-09-12",
-            "related_tags": [],
+            "related_tags": [
+                {
+                    "id": "da78f2eb-fe6b-4e84-913c-cdab4ff067c2",
+                    "name": "Oracle WebLogic RCE CVE-2020-14882",
+                    "intention": "malicious",
+                    "category": "activity",
+                    "slug": "oracle-weblogic-rce-cve-2020-14882",
+                }
+            ],
         }
 
         self.assertNotEqual({}, results, "returns non - empty results")
         self.assertEqual(expected, results)
+        self.assertEqual(mock_get.call_args.kwargs["name"], "Test Tag Name")

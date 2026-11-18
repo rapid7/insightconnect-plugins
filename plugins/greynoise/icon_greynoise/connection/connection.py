@@ -3,8 +3,8 @@ from .schema import ConnectionSchema
 
 # Custom imports below
 
-from greynoise import GreyNoise
-from greynoise.exceptions import RequestFailure
+from greynoise.api import APIConfig, GreyNoise
+from greynoise.exceptions import RateLimitError, RequestFailure
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
 
@@ -20,18 +20,24 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.api_key = params.get("credentials").get("secretKey", "")
         self.server = "https://api.greynoise.io"
         self.user_agent = f"rapid7-insightconnect-v{self.meta.version}"
-        self.gn_client = GreyNoise(api_server=self.server, api_key=self.api_key, integration_name=self.user_agent)
+        api_config = APIConfig(
+            api_key=self.api_key,
+            api_server=self.server,
+            integration_name=self.user_agent,
+        )
+        self.gn_client = GreyNoise(api_config)
         self.logger.info("Connect: Connecting...")
 
     def test(self):
         try:
             resp = self.gn_client.test_connection()
 
+        except RateLimitError as error:
+            raise ConnectionTestException(preset=ConnectionTestException.Preset.RATE_LIMIT, data=str(error))
+
         except RequestFailure as error:
             if error.args[0] == 401:
                 raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY, data=error.args[1])
-            elif error.args[0] == 429:
-                raise ConnectionTestException(preset=ConnectionTestException.Preset.RATE_LIMIT, data=error.args[1])
             elif error.args[0] == 500:
                 raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVER_ERROR, data=error.args[1])
 

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Query a routable IPv4 address in the GreyNoise Context API endpoint"
+    DESCRIPTION = "Look up a routable IPv4 address with the GreyNoise IP Lookup API. Kept for existing workflows that call Context IP Lookup"
 
 
 class Input:
@@ -12,21 +12,10 @@ class Input:
 
 
 class Output:
-    ACTOR = "actor"
-    BOT = "bot"
-    CLASSIFICATION = "classification"
-    CVE = "cve"
-    FIRST_SEEN = "first_seen"
+    BUSINESS_SERVICE_INTELLIGENCE = "business_service_intelligence"
+    INTERNET_SCANNER_INTELLIGENCE = "internet_scanner_intelligence"
     IP = "ip"
-    LAST_SEEN = "last_seen"
-    METADATA = "metadata"
-    RAW_DATA = "raw_data"
-    SEEN = "seen"
-    SPOOFABLE = "spoofable"
-    TAGS = "tags"
     VIZ_URL = "viz_url"
-    VPN = "vpn"
-    VPN_SERVICE = "vpn_service"
 
 
 class ContextLookupInput(insightconnect_plugin_runtime.Input):
@@ -59,40 +48,17 @@ class ContextLookupOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "actor": {
-      "type": "string",
-      "title": "GreyNoise Actor",
-      "description": "GreyNoise Actor Associated with IP",
-      "order": 6
+    "business_service_intelligence": {
+      "$ref": "#/definitions/business_service_intelligence",
+      "title": "Business Service Intelligence",
+      "description": "Business Service Intelligence for the IP",
+      "order": 4
     },
-    "bot": {
-      "type": "boolean",
-      "title": "GreyNoise Bot",
-      "description": "GreyNoise has identified this as a Bot",
-      "order": 10
-    },
-    "classification": {
-      "type": "string",
-      "title": "GreyNoise Classification",
-      "description": "GreyNoise Classification",
-      "order": 8
-    },
-    "cve": {
-      "type": "array",
-      "title": "GreyNoise CVEs",
-      "description": "CVEs associated with GreyNoise Tags",
-      "items": {
-        "type": "string"
-      },
-      "order": 9
-    },
-    "first_seen": {
-      "type": "string",
-      "format": "date-time",
-      "displayType": "date",
-      "title": "GreyNoise First Seen",
-      "description": "First Seen By GreyNoise",
-      "order": 2
+    "internet_scanner_intelligence": {
+      "$ref": "#/definitions/internet_scanner_intelligence",
+      "title": "Internet Scanner Intelligence",
+      "description": "Internet Scanner Intelligence for the IP",
+      "order": 3
     },
     "ip": {
       "type": "string",
@@ -100,245 +66,476 @@ class ContextLookupOutput(insightconnect_plugin_runtime.Output):
       "description": "Value that was Queried",
       "order": 1
     },
-    "last_seen": {
-      "type": "string",
-      "title": "GreyNoise Last Seen",
-      "description": "Last Seen By GreyNoise",
-      "order": 3
-    },
-    "metadata": {
-      "$ref": "#/definitions/metadata",
-      "title": "GreyNoise Metadata",
-      "description": "GreyNoise IP Metadata",
-      "order": 13
-    },
-    "raw_data": {
-      "$ref": "#/definitions/raw_data",
-      "title": "GreyNoise Raw Data",
-      "description": "GreyNoise IP Raw Data",
-      "order": 14
-    },
-    "seen": {
-      "type": "boolean",
-      "title": "GreyNoise Seen",
-      "description": "Has this IP been Seen by GreyNoise",
-      "order": 4
-    },
-    "spoofable": {
-      "type": "boolean",
-      "title": "GreyNoise Spoofable",
-      "description": "IP address may be spoofed",
-      "order": 7
-    },
-    "tags": {
-      "type": "array",
-      "title": "GreyNoise Tags",
-      "description": "GreyNoise Tags Associated with IP",
-      "items": {
-        "type": "string"
-      },
-      "order": 5
-    },
     "viz_url": {
       "type": "string",
       "title": "GreyNoise Visualizer Link",
       "description": "Link to GreyNoise Visualizer for IP Details",
-      "order": 15
-    },
-    "vpn": {
-      "type": "boolean",
-      "title": "GreyNoise VPN",
-      "description": "GreyNoise has identified this as a VPN",
-      "order": 11
-    },
-    "vpn_service": {
-      "type": "string",
-      "title": "GreyNoise VPN Service",
-      "description": "Name of VPN Service",
-      "order": 12
+      "order": 2
     }
   },
   "definitions": {
-    "metadata": {
+    "internet_scanner_intelligence": {
       "type": "object",
-      "title": "metadata",
+      "title": "internet_scanner_intelligence",
       "properties": {
-        "asn": {
-          "type": "string",
-          "title": "ASN",
-          "description": "ASN",
+        "found": {
+          "type": "boolean",
+          "title": "IP Found",
+          "description": "Whether the IP was found in GreyNoise",
           "order": 1
         },
-        "category": {
+        "actor": {
           "type": "string",
-          "title": "Category",
-          "description": "Category",
+          "title": "Actor",
+          "description": "Actor associated with the IP",
           "order": 2
         },
-        "city": {
+        "classification": {
           "type": "string",
-          "title": "City",
-          "description": "City",
+          "title": "IP Classification",
+          "description": "Whether the IP is malicious, benign, or unknown",
           "order": 3
         },
-        "country": {
+        "first_seen": {
           "type": "string",
-          "title": "Country",
-          "description": "Country",
+          "title": "First Seen",
+          "description": "Date the IP was first observed by GreyNoise",
           "order": 4
         },
-        "country_code": {
+        "last_seen": {
           "type": "string",
-          "title": "Country Code",
-          "description": "Country Code",
+          "title": "Last Seen",
+          "description": "Date the IP was last observed by GreyNoise",
           "order": 5
         },
-        "organization": {
+        "last_seen_timestamp": {
           "type": "string",
-          "title": "Organization",
-          "description": "Organization",
+          "title": "Last Seen Timestamp",
+          "description": "Timestamp the IP was last observed by GreyNoise",
           "order": 6
         },
-        "os": {
+        "last_seen_malicious": {
           "type": "string",
-          "title": "OS",
-          "description": "OS",
+          "title": "Last Seen Malicious",
+          "description": "When the IP was last seen classified as malicious",
           "order": 7
         },
-        "rdns": {
+        "last_seen_suspicious": {
           "type": "string",
-          "title": "rDNS",
-          "description": "rDNS",
+          "title": "Last Seen Suspicious",
+          "description": "When the IP was last seen classified as suspicious",
           "order": 8
         },
-        "region": {
+        "last_seen_benign": {
           "type": "string",
-          "title": "Region",
-          "description": "Region",
+          "title": "Last Seen Benign",
+          "description": "When the IP was last seen classified as benign",
           "order": 9
+        },
+        "spoofable": {
+          "type": "boolean",
+          "title": "Spoofable",
+          "description": "Whether the traffic from the IP can be spoofed",
+          "order": 10
+        },
+        "bot": {
+          "type": "boolean",
+          "title": "BOT",
+          "description": "Whether the IP is associated with known BOT activity",
+          "order": 11
+        },
+        "vpn": {
+          "type": "boolean",
+          "title": "VPN",
+          "description": "Whether the IP is associated with a known VPN service",
+          "order": 12
+        },
+        "vpn_service": {
+          "type": "string",
+          "title": "VPN Service",
+          "description": "VPN service associated with the IP, when known",
+          "order": 13
         },
         "tor": {
           "type": "boolean",
           "title": "TOR",
-          "description": "TOR",
+          "description": "Whether the IP is a known TOR exit node",
+          "order": 14
+        },
+        "tags": {
+          "type": "array",
+          "title": "Tags",
+          "description": "GreyNoise tags associated with the IP",
+          "items": {
+            "$ref": "#/definitions/tags"
+          },
+          "order": 15
+        },
+        "tag_volumes": {
+          "type": "array",
+          "title": "Tag Volumes",
+          "description": "Session counts for tags associated with the IP",
+          "items": {
+            "$ref": "#/definitions/tag_volume"
+          },
+          "order": 16
+        },
+        "cves": {
+          "type": "array",
+          "title": "CVEs",
+          "description": "CVEs associated with the IP",
+          "items": {
+            "type": "string"
+          },
+          "order": 17
+        },
+        "callback_ips": {
+          "type": "array",
+          "title": "Callback IPs",
+          "description": "Callback IP addresses associated with the IP",
+          "items": {
+            "type": "string"
+          },
+          "order": 18
+        },
+        "metadata": {
+          "$ref": "#/definitions/scanner_metadata",
+          "title": "Metadata",
+          "description": "Metadata for the IP address",
+          "order": 19
+        },
+        "raw_data": {
+          "$ref": "#/definitions/scanner_raw_data",
+          "title": "Raw Data",
+          "description": "Raw scanning data observed for the IP",
+          "order": 20
+        }
+      }
+    },
+    "tags": {
+      "type": "object",
+      "title": "tags",
+      "properties": {
+        "category": {
+          "type": "string",
+          "title": "Tag Category",
+          "description": "Category for given tag",
+          "order": 1
+        },
+        "description": {
+          "type": "string",
+          "title": "Tag Description",
+          "description": "Description for given tag",
+          "order": 2
+        },
+        "intention": {
+          "type": "string",
+          "title": "Tag Intention",
+          "description": "Intention for given tag",
+          "order": 3
+        },
+        "name": {
+          "type": "string",
+          "title": "Tag Name",
+          "description": "Name for given tag",
+          "order": 4
+        },
+        "id": {
+          "type": "string",
+          "title": "Tag ID",
+          "description": "Unique identifier for the tag",
+          "order": 5
+        },
+        "slug": {
+          "type": "string",
+          "title": "Tag Slug",
+          "description": "URL-safe slug for the tag",
+          "order": 6
+        },
+        "references": {
+          "type": "array",
+          "title": "Tag References",
+          "description": "Reference links associated with the tag",
+          "items": {
+            "type": "string"
+          },
+          "order": 7
+        },
+        "cves": {
+          "type": "array",
+          "title": "Tag CVEs",
+          "description": "CVEs associated with the tag",
+          "items": {
+            "type": "string"
+          },
+          "order": 8
+        },
+        "recommend_block": {
+          "type": "boolean",
+          "title": "Recommend Block",
+          "description": "Whether GreyNoise recommends blocking IPs with this tag",
+          "order": 9
+        },
+        "created": {
+          "type": "string",
+          "title": "Tag Created",
+          "description": "When the tag was created",
           "order": 10
         },
-        "sensor_count": {
-          "type": "integer",
-          "title": "Sensor Count",
-          "description": "Count of Sensors that observed traffic from this IP",
+        "updated_at": {
+          "type": "string",
+          "title": "Tag Updated At",
+          "description": "When the tag was last updated",
           "order": 11
+        }
+      }
+    },
+    "tag_volume": {
+      "type": "object",
+      "title": "tag_volume",
+      "properties": {
+        "tag_id": {
+          "type": "string",
+          "title": "Tag ID",
+          "description": "Identifier of the tag this volume refers to",
+          "order": 1
         },
-        "sensor_hits": {
+        "session_count": {
           "type": "integer",
-          "title": "Sensor Hits",
-          "description": "Count of Sensor events observed from this IP",
-          "order": 12
+          "title": "Session Count",
+          "description": "Number of sessions observed for the tag",
+          "order": 2
+        }
+      }
+    },
+    "scanner_metadata": {
+      "type": "object",
+      "title": "scanner_metadata",
+      "properties": {
+        "asn": {
+          "type": "string",
+          "title": "ASN",
+          "description": "ASN for given IP",
+          "order": 1
+        },
+        "asn_subnet": {
+          "type": "string",
+          "title": "ASN Subnet",
+          "description": "Subnet associated with the ASN",
+          "order": 2
+        },
+        "category": {
+          "type": "string",
+          "title": "Category",
+          "description": "Category for IP",
+          "order": 3
+        },
+        "source_city": {
+          "type": "string",
+          "title": "City",
+          "description": "City for given IP",
+          "order": 4
+        },
+        "source_country": {
+          "type": "string",
+          "title": "Country",
+          "description": "Country for given IP",
+          "order": 5
+        },
+        "source_country_code": {
+          "type": "string",
+          "title": "Country Code",
+          "description": "Country Code for given IP",
+          "order": 6
         },
         "destination_countries": {
           "type": "array",
           "title": "Destination Countries",
-          "description": "List of countries with GreyNoise sensors that observed this IP",
+          "description": "Destination Countries for given IP",
           "items": {
             "type": "string"
           },
-          "order": 13
+          "order": 7
         },
         "destination_country_codes": {
           "type": "array",
           "title": "Destination Country Codes",
-          "description": "List of countries (by code) with GreyNoise sensors that observed this IP",
+          "description": "Country codes of destinations scanned by the IP",
           "items": {
             "type": "string"
           },
+          "order": 8
+        },
+        "destination_asns": {
+          "type": "array",
+          "title": "Destination ASNs",
+          "description": "ASNs of destinations scanned by the IP",
+          "items": {
+            "type": "string"
+          },
+          "order": 9
+        },
+        "destination_cities": {
+          "type": "array",
+          "title": "Destination Cities",
+          "description": "Cities of destinations scanned by the IP",
+          "items": {
+            "type": "string"
+          },
+          "order": 10
+        },
+        "region": {
+          "type": "string",
+          "title": "Region",
+          "description": "Region for given IP",
+          "order": 11
+        },
+        "organization": {
+          "type": "string",
+          "title": "Organization",
+          "description": "Organization for given IP",
+          "order": 12
+        },
+        "domain": {
+          "type": "string",
+          "title": "Domain",
+          "description": "Domain associated with the IP",
+          "order": 13
+        },
+        "os": {
+          "type": "string",
+          "title": "OS",
+          "description": "OS for given IP",
           "order": 14
         },
-        "source_country": {
+        "rdns": {
           "type": "string",
-          "title": "Source Country",
-          "description": "Source country where this IP is located",
+          "title": "rDNS",
+          "description": "rDNS for given IP",
           "order": 15
         },
-        "source_country_code": {
+        "rdns_parent": {
           "type": "string",
-          "title": "Source Country Code",
-          "description": "Source country (by code) where this IP is located",
+          "title": "rDNS Parent",
+          "description": "Parent domain of the reverse DNS record",
           "order": 16
+        },
+        "rdns_validated": {
+          "type": "boolean",
+          "title": "rDNS Validated",
+          "description": "Whether the reverse DNS record has been validated",
+          "order": 17
+        },
+        "sensor_count": {
+          "type": "integer",
+          "title": "Sensor Count",
+          "description": "Number of sensors that observed the IP",
+          "order": 18
+        },
+        "sensor_hits": {
+          "type": "integer",
+          "title": "Sensor Hits",
+          "description": "Number of sensor hits for the IP",
+          "order": 19
+        },
+        "mobile": {
+          "type": "boolean",
+          "title": "Mobile",
+          "description": "Whether the IP is associated with a mobile network",
+          "order": 20
+        },
+        "single_destination": {
+          "type": "boolean",
+          "title": "Single Destination",
+          "description": "Whether the IP was observed targeting a single destination",
+          "order": 21
+        },
+        "carrier": {
+          "type": "string",
+          "title": "Carrier",
+          "description": "Carrier associated with the IP",
+          "order": 22
+        },
+        "datacenter": {
+          "type": "string",
+          "title": "Datacenter",
+          "description": "Datacenter associated with the IP",
+          "order": 23
+        },
+        "longitude": {
+          "type": "number",
+          "title": "Longitude",
+          "description": "Longitude of the IP",
+          "order": 24
+        },
+        "latitude": {
+          "type": "number",
+          "title": "Latitude",
+          "description": "Latitude of the IP",
+          "order": 25
         }
       }
     },
-    "raw_data": {
+    "scanner_raw_data": {
       "type": "object",
-      "title": "raw_data",
+      "title": "scanner_raw_data",
       "properties": {
-        "hassh": {
+        "scan": {
           "type": "array",
-          "title": "HASSH",
-          "description": "HASSH",
+          "title": "Scan Data",
+          "description": "Ports and protocols scanned by the IP",
           "items": {
-            "$ref": "#/definitions/hassh"
+            "$ref": "#/definitions/scan"
           },
           "order": 1
+        },
+        "http": {
+          "$ref": "#/definitions/scanner_http",
+          "title": "HTTP",
+          "description": "HTTP metadata observed for the IP",
+          "order": 2
         },
         "ja3": {
           "type": "array",
           "title": "JA3",
-          "description": "Ja3",
+          "description": "JA3 fingerprints observed for the IP",
           "items": {
             "$ref": "#/definitions/ja3"
           },
-          "order": 2
-        },
-        "scan": {
-          "type": "array",
-          "title": "Scan",
-          "description": "Scan",
-          "items": {
-            "$ref": "#/definitions/scan"
-          },
           "order": 3
         },
-        "web": {
-          "$ref": "#/definitions/web",
-          "title": "Web",
-          "description": "Web",
+        "hassh": {
+          "type": "array",
+          "title": "HASSH",
+          "description": "HASSH fingerprints observed for the IP",
+          "items": {
+            "$ref": "#/definitions/hassh"
+          },
           "order": 4
-        }
-      }
-    },
-    "hassh": {
-      "type": "object",
-      "title": "hassh",
-      "properties": {
-        "port": {
-          "type": "integer",
-          "title": "Port",
-          "description": "Port",
-          "order": 1
         },
-        "fingerprint": {
-          "type": "string",
-          "title": "Fingerprint",
-          "description": "Fingerprint",
-          "order": 2
-        }
-      }
-    },
-    "ja3": {
-      "type": "object",
-      "title": "ja3",
-      "properties": {
-        "port": {
-          "type": "integer",
-          "title": "Port",
-          "description": "Port",
-          "order": 1
+        "tls": {
+          "$ref": "#/definitions/scanner_tls",
+          "title": "TLS",
+          "description": "TLS metadata observed for the IP",
+          "order": 5
         },
-        "fingerprint": {
-          "type": "string",
-          "title": "Fingerprint",
-          "description": "Fingerprint",
-          "order": 2
+        "source": {
+          "$ref": "#/definitions/scanner_source",
+          "title": "Source",
+          "description": "Source traffic volume observed for the IP",
+          "order": 6
+        },
+        "ssh": {
+          "$ref": "#/definitions/scanner_ssh",
+          "title": "SSH",
+          "description": "SSH metadata observed for the IP",
+          "order": 7
+        },
+        "tcp": {
+          "$ref": "#/definitions/scanner_tcp",
+          "title": "TCP",
+          "description": "TCP fingerprint metadata observed for the IP",
+          "order": 8
         }
       }
     },
@@ -360,27 +557,279 @@ class ContextLookupOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "web": {
+    "scanner_http": {
       "type": "object",
-      "title": "web",
+      "title": "scanner_http",
       "properties": {
-        "useragents": {
+        "path": {
           "type": "array",
-          "title": "User Agents",
-          "description": "User Agents",
+          "title": "HTTP Paths",
+          "description": "HTTP paths observed for the IP",
           "items": {
             "type": "string"
           },
           "order": 1
         },
-        "paths": {
+        "useragent": {
           "type": "array",
-          "title": "Web Paths",
-          "description": "User Agents",
+          "title": "HTTP User Agents",
+          "description": "HTTP user agents observed for the IP",
           "items": {
             "type": "string"
           },
           "order": 2
+        },
+        "method": {
+          "type": "array",
+          "title": "HTTP Methods",
+          "description": "HTTP methods observed for the IP",
+          "items": {
+            "type": "string"
+          },
+          "order": 3
+        },
+        "md5": {
+          "type": "array",
+          "title": "HTTP MD5",
+          "description": "MD5 hashes of observed HTTP payloads",
+          "items": {
+            "type": "string"
+          },
+          "order": 4
+        },
+        "cookie_keys": {
+          "type": "array",
+          "title": "HTTP Cookie Keys",
+          "description": "Cookie keys observed in HTTP requests",
+          "items": {
+            "type": "string"
+          },
+          "order": 5
+        },
+        "ja4h": {
+          "type": "array",
+          "title": "JA4H",
+          "description": "JA4H fingerprints observed for the IP",
+          "items": {
+            "type": "string"
+          },
+          "order": 6
+        },
+        "request_authorization": {
+          "type": "array",
+          "title": "HTTP Authorization",
+          "description": "Authorization header values observed in HTTP requests",
+          "items": {
+            "type": "string"
+          },
+          "order": 7
+        },
+        "request_cookies": {
+          "type": "array",
+          "title": "HTTP Cookies",
+          "description": "Cookie values observed in HTTP requests",
+          "items": {
+            "type": "string"
+          },
+          "order": 8
+        },
+        "request_header": {
+          "type": "array",
+          "title": "HTTP Headers",
+          "description": "HTTP request headers observed for the IP",
+          "items": {
+            "type": "string"
+          },
+          "order": 9
+        },
+        "request_origin": {
+          "type": "array",
+          "title": "HTTP Origin",
+          "description": "Origin header values observed in HTTP requests",
+          "items": {
+            "type": "string"
+          },
+          "order": 10
+        }
+      }
+    },
+    "ja3": {
+      "type": "object",
+      "title": "ja3",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "title": "Port",
+          "description": "Port",
+          "order": 1
+        },
+        "fingerprint": {
+          "type": "string",
+          "title": "Fingerprint",
+          "description": "Fingerprint",
+          "order": 2
+        }
+      }
+    },
+    "hassh": {
+      "type": "object",
+      "title": "hassh",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "title": "Port",
+          "description": "Port",
+          "order": 1
+        },
+        "fingerprint": {
+          "type": "string",
+          "title": "Fingerprint",
+          "description": "Fingerprint",
+          "order": 2
+        }
+      }
+    },
+    "scanner_tls": {
+      "type": "object",
+      "title": "scanner_tls",
+      "properties": {
+        "ja4": {
+          "type": "array",
+          "title": "JA4",
+          "description": "JA4 fingerprints observed for the IP",
+          "items": {
+            "type": "string"
+          },
+          "order": 1
+        },
+        "cipher": {
+          "type": "array",
+          "title": "TLS Ciphers",
+          "description": "TLS ciphers observed for the IP",
+          "items": {
+            "type": "string"
+          },
+          "order": 2
+        }
+      }
+    },
+    "scanner_source": {
+      "type": "object",
+      "title": "scanner_source",
+      "properties": {
+        "bytes": {
+          "type": "integer",
+          "title": "Bytes",
+          "description": "Bytes observed from the source IP",
+          "order": 1
+        },
+        "sessions": {
+          "type": "integer",
+          "title": "Sessions",
+          "description": "Sessions observed from the source IP",
+          "order": 2
+        }
+      }
+    },
+    "scanner_ssh": {
+      "type": "object",
+      "title": "scanner_ssh",
+      "properties": {
+        "key": {
+          "type": "array",
+          "title": "SSH Keys",
+          "description": "SSH keys observed for the IP",
+          "items": {
+            "type": "string"
+          },
+          "order": 1
+        },
+        "ja4ssh": {
+          "type": "array",
+          "title": "JA4SSH",
+          "description": "JA4SSH fingerprints observed for the IP",
+          "items": {
+            "type": "string"
+          },
+          "order": 2
+        }
+      }
+    },
+    "scanner_tcp": {
+      "type": "object",
+      "title": "scanner_tcp",
+      "properties": {
+        "ja4t": {
+          "type": "array",
+          "title": "JA4T",
+          "description": "JA4T fingerprints observed for the IP",
+          "items": {
+            "type": "string"
+          },
+          "order": 1
+        },
+        "ja4l": {
+          "type": "array",
+          "title": "JA4L",
+          "description": "JA4L fingerprints observed for the IP",
+          "items": {
+            "type": "string"
+          },
+          "order": 2
+        }
+      }
+    },
+    "business_service_intelligence": {
+      "type": "object",
+      "title": "business_service_intelligence",
+      "properties": {
+        "found": {
+          "type": "boolean",
+          "title": "Found",
+          "description": "IP was found in Business Service Intelligence",
+          "order": 1
+        },
+        "category": {
+          "type": "string",
+          "title": "Category",
+          "description": "Business service category",
+          "order": 2
+        },
+        "trust_level": {
+          "type": "string",
+          "title": "Trust Level",
+          "description": "Business service trust level",
+          "order": 3
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Business service name",
+          "order": 4
+        },
+        "description": {
+          "type": "string",
+          "title": "Description",
+          "description": "Business service description",
+          "order": 5
+        },
+        "explanation": {
+          "type": "string",
+          "title": "Explanation",
+          "description": "Explanation for why this is a common business service",
+          "order": 6
+        },
+        "last_updated": {
+          "type": "string",
+          "title": "Last Updated",
+          "description": "Last time this IP was updated in Business Service Intelligence",
+          "order": 7
+        },
+        "reference": {
+          "type": "string",
+          "title": "Reference",
+          "description": "Reference for the business service",
+          "order": 8
         }
       }
     }

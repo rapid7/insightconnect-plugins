@@ -1,15 +1,13 @@
 import json
 import os
 
-from greynoise import GreyNoise
+from greynoise.api import APIConfig, GreyNoise
 
 PAYLOAD_MAPPING = {
     "community_lookup": "payloads/community_ip.json",
-    "context_lookup": "payloads/context_ip.json",
     "gnql_query": "payloads/gnql_query.json",
+    "ip_lookup": "payloads/ip_lookup.json",
     "quick_lookup": "payloads/quick_ip.json",
-    "riot_lookup": "payloads/riot_ip.json",
-    "similar_lookup": "payloads/similar_ip.json",
     "timeline_lookup": "payloads/timeline_ip.json",
     "vulnerability_lookup": "payloads/cve_details.json",
 }
@@ -36,4 +34,6 @@ class MockConnection:
         self.server = "test_server"
         self.api_key = "test_api_key"
         self.user_agent = "test_user_agent"
-        self.gn_client = GreyNoise(api_key=self.api_key, api_server=self.server, integration_name=self.user_agent)
+        self.gn_client = GreyNoise(
+            APIConfig(api_key=self.api_key, api_server=self.server, integration_name=self.user_agent)
+        )

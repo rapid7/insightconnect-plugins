@@ -17,11 +17,9 @@ class TestQuickLookup(TestCase):
         working_params = {"ip_address": "quick_lookup"}
         results = test_quick.run(working_params)
         expected = {
-            "code": "0x01",
             "ip": "1.2.3.4",
-            "code_message": "IP has been observed by the GreyNoise sensor network",
-            "noise": True,
-            "riot": False,
+            "internet_scanner_intelligence": {"found": True, "classification": "malicious"},
+            "business_service_intelligence": {"found": False, "trust_level": "1"},
         }
 
         self.assertNotEqual({}, results, "returns non - empty results")

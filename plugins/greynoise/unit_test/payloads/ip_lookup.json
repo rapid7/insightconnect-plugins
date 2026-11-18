@@ -1,0 +1,55 @@
+{
+  "ip": "1.2.3.4",
+  "internet_scanner_intelligence": {
+    "found": true,
+    "actor": "Acme Inc",
+    "classification": "benign",
+    "first_seen": "2019-07-29",
+    "last_seen_timestamp": "2024-11-04T00:00:00Z",
+    "spoofable": false,
+    "bot": false,
+    "vpn": false,
+    "tor": false,
+    "tags": [
+      {
+        "name": "Acme Inc",
+        "category": "actor",
+        "intention": "benign",
+        "description": "Example tag"
+      }
+    ],
+    "cves": ["CVE-2021-38645"],
+    "metadata": {
+      "asn": "AS12345",
+      "category": "hosting",
+      "source_city": "Berlin",
+      "source_country": "Germany",
+      "source_country_code": "DE",
+      "destination_countries": ["Australia"],
+      "region": "Berlin",
+      "organization": "Acme Inc",
+      "os": "Linux",
+      "rdns": "scanner.example.io"
+    },
+    "raw_data": {
+      "scan": [{"port": 22, "protocol": "TCP"}],
+      "http": {
+        "path": ["/favicon.ico"],
+        "useragent": ["Microsoft WinRM Client"]
+      },
+      "ja3": [{"fingerprint": "abcdefg1234567", "port": 22}],
+      "hassh": [{"fingerprint": "abcdefg1234567", "port": 22}],
+      "tls": {"ja4": ["t13d1516h2_8daaf6152771_b0da82dd1658"]}
+    }
+  },
+  "business_service_intelligence": {
+    "found": true,
+    "category": "public_dns",
+    "trust_level": "1",
+    "name": "Acme Inc",
+    "description": "Acme Inc is an example service.",
+    "explanation": "This IP provides a common business service.",
+    "last_updated": "2024-01-01",
+    "reference": "https://example.com"
+  }
+}

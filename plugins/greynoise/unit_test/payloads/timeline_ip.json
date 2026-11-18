@@ -1,58 +1,25 @@
 {
-    "activity": [
-        {
-            "asn": "AS12345",
-            "category": "hosting",
-            "city": "Berlin",
-            "classification": "benign",
-            "country": "Germany",
-            "country_code": "DE",
-            "destinations": [
-                {
-                    "country": "South Africa",
-                    "country_code": "ZA"
-                }
-            ],
-            "hassh_fingerprints": [],
-            "http_paths": [
-                "/favicon.ico"
-            ],
-            "http_user_agents": [
-                "Mozilla/5.0"
-            ],
-            "ja3_fingerprints": [
-                "04b3f524166caafd433b6864250945be"
-            ],
-            "organization": "Alpha Strike Labs GmbH",
-            "protocols": [
-                {
-                    "port": 80,
-                    "transport_protocol": "TCP"
-                }
-            ],
-            "rdns": "",
-            "region": "Berlin",
-            "spoofable": true,
-            "tags": [
-                {
-                    "category": "actor",
-                    "description": "description.",
-                    "intention": "benign",
-                    "name": "Acme, Inc."
-                }
-            ],
-            "timestamp": "2024-11-03T00:00:00Z",
-            "tor": false,
-            "vpn": false,
-            "vpn_service": ""
-        }
-    ],
-    "ip": "1.2.3.4",
-    "metadata": {
-        "end_time": "2024-11-04T19:13:35.892189739Z",
-        "ip": "1.2.3.4",
-        "limit": 50,
-        "next_cursor": "",
-        "start_time": "2024-11-03T00:00:00Z"
+  "metadata": {
+    "ip": "100.29.192.92",
+    "days": 1,
+    "granularity": "1d",
+    "field": "classification"
+  },
+  "data": [
+    {
+      "date": "2026-10-29T00:00:00Z",
+      "tags": ["Kerberos Protocol", "DNS Protocol"],
+      "classification": ["unknown"],
+      "ports": ["80", "443"]
+    },
+    {
+      "date": "2026-10-30T00:00:00Z",
+      "asns": ["AS14618"],
+      "organizations": ["Amazon.com, Inc."],
+      "tags": ["SNMP Protocol", "DNS Protocol"],
+      "classification": ["unknown"],
+      "rdns": ["ec2-100-29-192-92.compute-1.amazonaws.com"],
+      "ports": ["80", "443"]
     }
+  ]
 }

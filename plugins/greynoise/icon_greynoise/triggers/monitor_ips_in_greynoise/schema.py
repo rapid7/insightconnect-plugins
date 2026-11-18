@@ -26,7 +26,7 @@ class MonitorIpsInGreynoiseInput(insightconnect_plugin_runtime.Input):
     "interval": {
       "type": "integer",
       "title": "Interval",
-      "description": "How frequently (in seconds) to trigger a greeting",
+      "description": "How frequently, in seconds, to check the IP list",
       "default": 3600,
       "order": 1
     },
