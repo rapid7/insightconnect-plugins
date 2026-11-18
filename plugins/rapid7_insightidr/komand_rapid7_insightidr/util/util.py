@@ -5,6 +5,15 @@ from insightconnect_plugin_runtime.helper import clean_dict
 from typing import Any
 
 
+class QueryStalledError(Exception):
+    """Raised while polling a Log Search query whose progress has stopped changing, so it can be resubmitted."""
+
+    def __init__(self, progress: Any, time_left: int) -> None:
+        super().__init__(f"Query progress stuck at {progress} with {time_left} seconds left")
+        self.progress = progress
+        self.time_left = time_left
+
+
 def get_logging_context():
     log_values = {}
     # For cloud get our request ID from upstream services
