@@ -174,65 +174,74 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
           },
           "order": 15
         },
+        "same": {
+          "type": "array",
+          "title": "Same",
+          "description": "Vulnerabilities found on the asset at both the comparison time and the current time, meaning neither new nor remediated. Only returned when Include Same is enabled and a Comparison Time is supplied",
+          "items": {
+            "type": "object"
+          },
+          "order": 16
+        },
         "os_architecture": {
           "type": "string",
           "title": "OS Architecture",
           "description": "The architecture of the os",
-          "order": 16
+          "order": 17
         },
         "os_description": {
           "type": "string",
           "title": "OS Description",
           "description": "Description of the os",
-          "order": 17
+          "order": 18
         },
         "os_family": {
           "type": "string",
           "title": "OS Family",
           "description": "Family of the os",
-          "order": 18
+          "order": 19
         },
         "os_name": {
           "type": "string",
           "title": "OS Name",
           "description": "Name of the os",
-          "order": 19
+          "order": 20
         },
         "os_system_name": {
           "type": "string",
           "title": "OS System Name",
           "description": "Name of the system os",
-          "order": 20
+          "order": 21
         },
         "os_type": {
           "type": "string",
           "title": "OS Type",
           "description": "Type of os",
-          "order": 21
+          "order": 22
         },
         "os_vendor": {
           "type": "string",
           "title": "OS Vendor",
           "description": "Vendor of the os",
-          "order": 22
+          "order": 23
         },
         "os_version": {
           "type": "string",
           "title": "OS Version",
           "description": "The version of the operating system",
-          "order": 23
+          "order": 24
         },
         "risk_score": {
           "type": "number",
           "title": "Risk Score",
           "description": "Risk score (with criticality adjustments) of the asset",
-          "order": 24
+          "order": 25
         },
         "severe_vulnerabilities": {
           "type": "integer",
           "title": "Severe Vulnerabilities",
           "description": "The count of severe vulnerability findings",
-          "order": 25
+          "order": 26
         },
         "tags": {
           "type": "array",
@@ -241,25 +250,25 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "$ref": "#/definitions/asset_tag"
           },
-          "order": 26
+          "order": 27
         },
         "total_vulnerabilities": {
           "type": "integer",
           "title": "Total Vulnerabilities",
           "description": "The total count of vulnerability findings",
-          "order": 27
+          "order": 28
         },
         "type": {
           "type": "string",
           "title": "Type",
           "description": "The type of asset",
-          "order": 28
+          "order": 29
         },
         "source": {
           "type": "string",
           "title": "Source",
           "description": "Source of the asset",
-          "order": 29
+          "order": 30
         },
         "unique_identifiers": {
           "type": "array",
@@ -268,7 +277,7 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "$ref": "#/definitions/identifiers"
           },
-          "order": 30
+          "order": 31
         },
         "remediated": {
           "type": "array",
@@ -277,7 +286,7 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "type": "object"
           },
-          "order": 31
+          "order": 32
         }
       }
     },

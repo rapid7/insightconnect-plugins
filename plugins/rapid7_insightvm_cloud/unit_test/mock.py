@@ -57,6 +57,8 @@ def mock_request_post(url, params, headers, data):  # noqa: MC0001
             return MockResponse("asset_search_invalid_asset_criteria", 400)
         if data.get("vulnerability") == STUB_BAD_VULN_CRITERIA or STUB_BAD_VULN_CRITERIA in data.get("asset", ""):
             return MockResponse("asset_search_invalid_vuln_criteria", 400)
+        if params.get("includeSame"):
+            return MockResponse("asset_search_include_same", 200)
         return MockResponse("asset_search", 200)
     if url == f"https://{STUB_REGION}.api.insight.rapid7.com/vm/v4/integration/vulnerabilities":
         if data.get("asset") == STUB_BAD_ASSET_CRITERIA:
