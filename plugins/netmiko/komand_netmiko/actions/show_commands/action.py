@@ -20,8 +20,9 @@ class ShowCommands(insightconnect_plugin_runtime.Action):
 
         try:
             return {Output.RESULTS: self.device.send_command(params.get(Input.COMMAND))}
-        except netmiko.NetMikoTimeoutException:
+        except (netmiko.NetMikoTimeoutException, netmiko.ReadTimeout) as error:
             raise PluginException(
                 cause="Cannot connect/configure this device.",
                 assistance="Please check provided connection data and try again.",
-            )
+                data=error,
+            ) from error

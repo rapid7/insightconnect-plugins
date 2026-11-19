@@ -62,7 +62,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         if self.parameters.get(Input.KEY, {}).get("privateKey"):
             self.logger.info("Using key...")
-            self.logger.info(self.parameters)
             return self.connect_key(self.parameters)
         else:
             self.logger.info("Using password...")
