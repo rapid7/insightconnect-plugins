@@ -1,11 +1,12 @@
 import sys
 import os
+import tempfile
 
 sys.path.append(os.path.abspath("../"))
 from parameterized import parameterized
 from unittest import TestCase
 from icon_markdown.actions.markdown_to_pdf import MarkdownToPdf
-from icon_markdown.actions.markdown_to_pdf.action import PDF_OPTIONS
+from icon_markdown.actions.markdown_to_pdf.action import PDF_OPTIONS, build_wkhtmltopdf_command, make_pdf_bytes
 from icon_markdown.actions.markdown_to_pdf.schema import Input, Output
 from icon_markdown.util import utils
 from icon_markdown.util.sanitizer import sanitize_html
@@ -68,6 +69,46 @@ class TestMarkdownToPdf(TestCase):
         self.assertIn("disable-local-file-access", PDF_OPTIONS)
         self.assertEqual(PDF_OPTIONS.get("load-error-handling"), "ignore")
         self.assertEqual(PDF_OPTIONS.get("load-media-error-handling"), "ignore")
+
+    def test_wkhtmltopdf_command(self):
+        command = build_wkhtmltopdf_command("in.html", "out.pdf")
+        self.assertEqual(
+            command,
+            [
+                "wkhtmltopdf",
+                "--quiet",
+                "--disable-javascript",
+                "--disable-local-file-access",
+                "--load-error-handling",
+                "ignore",
+                "--load-media-error-handling",
+                "ignore",
+                "in.html",
+                "out.pdf",
+            ],
+        )
+
+    @mock.patch("icon_markdown.actions.markdown_to_pdf.action.subprocess.run")
+    def test_make_pdf_bytes_failure(self, mocked_run):
+        mocked_run.return_value = mock.Mock(returncode=1, stderr="boom")
+        with self.assertRaises(PluginException) as context:
+            make_pdf_bytes("<p>Rapid7</p>", tempfile.mkdtemp() + "/")
+        self.assertEqual(context.exception.cause, "PDF rendering failed.")
+        self.assertIn("exit code 1: boom", context.exception.data)
+
+    @mock.patch("icon_markdown.actions.markdown_to_pdf.action.subprocess.run")
+    def test_make_pdf_bytes_success(self, mocked_run):
+        path = tempfile.mkdtemp() + "/"
+
+        def write_pdf(command, **kwargs):
+            with open(command[-1], "wb") as file:
+                file.write(b"%PDF-1.4")
+            return mock.Mock(returncode=0, stderr="")
+
+        mocked_run.side_effect = write_pdf
+        result = make_pdf_bytes("<p>Rapid7</p>", path)
+        self.assertEqual(result["pdf_string"], str(b"%PDF-1.4"))
+        self.assertEqual(mocked_run.call_args.args[0][0], "wkhtmltopdf")
 
     @parameterized.expand(
         [
