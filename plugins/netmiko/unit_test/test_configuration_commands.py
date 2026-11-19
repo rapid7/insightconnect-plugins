@@ -7,6 +7,8 @@ from unittest import TestCase
 from unittest.mock import MagicMock, patch
 from komand_netmiko.actions.configuration_commands import ConfigurationCommands
 from komand_netmiko.actions.configuration_commands.schema import Input, Output
+from insightconnect_plugin_runtime.exceptions import PluginException
+import netmiko
 
 
 class TestConfigurationCommands(TestCase):
@@ -33,3 +35,16 @@ class TestConfigurationCommands(TestCase):
         }
 
         self.assertEqual(result, expected_response)
+
+    def test_configuration_commands_error_detail(self):
+        errors = (
+            netmiko.NetMikoTimeoutException("Incompatible ssh peer (no acceptable kex algorithm)"),
+            netmiko.ReadTimeout("Pattern not detected in output"),
+        )
+        for error in errors:
+            with self.subTest(error=type(error).__name__):
+                self.mock_client().send_config_set.side_effect = error
+                with self.assertRaises(PluginException) as context:
+                    self.action.run(self.params)
+                self.assertEqual(context.exception.cause, "Cannot connect/configure this device.")
+                self.assertEqual(context.exception.data, str(error))
