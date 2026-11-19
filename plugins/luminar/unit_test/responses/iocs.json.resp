@@ -1,0 +1,54 @@
+[
+  {
+    "type": "relationship",
+    "spec_version": "2.1",
+    "id": "relationship--d75d5d75-3de8-5842-a09e-6e77297d753e",
+    "created": "2025-09-15T00:00:00.000Z",
+    "modified": "2025-09-15T06:00:30.558Z",
+    "extensions": {
+      "extension-definition--ddd2bf71-3c91-5f4d-8251-10cd685737c3": {
+        "extension_type": "property-extension",
+        "luminar_tenant_id":"XXXXX"
+      }
+    },
+    "relationship_type": "indicates",
+    "source_ref": "indicator--9bacc2e4-4126-52cc-83c3-9344794ff396",
+    "target_ref": "software--b1fb732c-1acb-5ab2-8446-4c499acab785"
+  },
+  {
+    "type": "software",
+    "spec_version": "2.1",
+    "id": "software--b1fb732c-1acb-5ab2-8446-4c499acab785",
+    "extensions": {
+      "extension-definition--ddd2bf71-3c91-5f4d-8251-10cd685737c3": {
+        "extension_type": "property-extension",
+        "luminar_tenant_id":"XXXXX"
+      }
+    },
+    "name": "Win11",
+    "version": "10.0.26100"
+  },
+  {
+    "type": "indicator",
+    "spec_version": "2.1",
+    "id": "indicator--9bacc2e4-4126-52cc-83c3-9344794ff396",
+    "created": "2025-09-15T00:00:00.000Z",
+    "modified": "2025-09-15T06:00:30.558Z",
+    "extensions": {
+      "extension-definition--ddd2bf71-3c91-5f4d-8251-10cd685737c3": {
+        "score": 85,
+        "extension_type": "property-extension",
+        "luminar_tenant_id":"XXXXX"
+      }
+    },
+    "confidence": 85,
+    "pattern": "[ipv4-addr:value = '89.169.13.147']",
+    "created_by_ref": "identity--5bf1ac35-8d08-509e-b31a-044cb09b4199",
+    "pattern_type": "stix",
+    "indicator_types": [
+      "malicious-activity"
+    ],
+    "valid_from": "2025-09-15T00:00:00.000Z",
+    "valid_until": "2025-09-22T00:00:00.000Z"
+  }
+]
