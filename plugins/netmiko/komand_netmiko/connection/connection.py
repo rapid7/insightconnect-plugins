@@ -1,7 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
 from netmiko import ConnectHandler
-from netmiko.ssh_exception import SSHException
+from netmiko.exceptions import SSHException
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 from os import path
 import os
@@ -36,6 +36,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             "secret": params.get(Input.SECRET).get("secretKey"),
             "allow_agent": True,
             "global_delay_factor": 4,
+            "delay_factor_compat": True,
         }
         self.device_connect = ConnectHandler(**device)
         return self.device_connect
@@ -50,6 +51,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             "port": params.get(Input.PORT),
             "secret": params.get(Input.SECRET).get("secretKey"),
             "global_delay_factor": 4,
+            "delay_factor_compat": True,
         }
         self.device_connect = ConnectHandler(**device)
         return self.device_connect
