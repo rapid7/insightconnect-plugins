@@ -4,8 +4,9 @@ products: [insightconnect]
 name: rapid7_surface_command
 title: Rapid7 Surface Command
 description: Surface Command gives you full visibility over your assets and identities across multiple technology platforms
-version: 1.3.0
+version: 1.4.0
 version_history:
+- 1.4.0 - Add new actions | Start a Query | Get Query Result
 - 1.3.0 - Add optional connection input | Timeout | Increase default request timeout from 90 to 170 seconds | Updated SDK to the latest version (6.6.1)
 - 1.2.0 - Add new action | Tag Assets in Bulk
 - 1.1.0 - Update action title | Add new action | Run Adhoc Query
@@ -28,13 +29,18 @@ resources:
 
 key_features:
   - Query Surface Command Data
+  - Run long queries asynchronously with Start a Query and Get Query Result
 
 requirements:
   - User or Organization Key from the Insight Platform. To create one follow [Generate User API Key guide](https://docs.rapid7.com/insight/managing-platform-api-keys/#generating-a-user-key)
   - The Region where your Rapid7 Surface Command instance is hosted. To identify your region, see [Identify Data Region](https://docs.rapid7.com/insight/navigate-the-insight-platform/#check-your-data-region)
   - A valid Query ID (UUID) from Rapid7 Surface Command. To obtain a Query ID, edit a Saved Query in the Surface Command UI and retrieve its ID from the URL
 
-troubleshooting: _This plugin does not contain any troubleshooting information._
+troubleshooting:
+  - "Actions running in the cloud are stopped after 240 seconds. For queries that take longer, use Start a Query, then call Get Query Result in a loop while its Status is `running`, for example: Start a Query, then a Loop with the condition Status equals `running` (maximum 6 iterations) containing Get Query Result with Max Wait 180, then use Items"
+  - "Start a Query needs async table queries to be enabled for the organization in Surface Command. If it fails with `Surface Command did not return a query job before the request timed out`, contact support to enable them, or use Run a Saved Query or Run an Adhoc Query"
+  - "Query results are kept for 1 hour after the query starts. If Get Query Result reports that the job was not found or has expired, start the query again"
+  - "Large results (over about 8 MB) can only be collected once: after Get Query Result has returned them, run Start a Query again to fetch them again"
 
 cloud_ready: true
 enable_cache: false
@@ -160,6 +166,77 @@ actions:
       failures:
         title: Failures
         description: Details of any tagging failures, including the object ID and error message
+        type: "[]object"
+        example: "[]"
+        required: false
+  start_query:
+    title: Start a Query
+    description: Start a saved or adhoc query as an asynchronous job and return without waiting for it to finish. Use Get Query Result to collect the rows
+    input:
+      query_id:
+        title: Query ID
+        description: ID (UUID) of a saved query to run. Provide either Query ID or Cypher Query, not both
+        type: string
+        required: false
+        example: 12345678-1234-1234-1234-123456789012
+      cypher:
+        title: Cypher Query
+        description: Cypher query to run. Provide either Query ID or Cypher Query, not both
+        type: string
+        required: false
+        example: "MATCH (m:Machine) RETURN m"
+    output:
+      status:
+        title: Status
+        description: Status of the query job, either running or complete. When complete, the rows are already in Items; when running, Items is empty and the rows must be collected with Get Query Result
+        type: string
+        example: running
+        required: true
+      job_id:
+        title: Job ID
+        description: ID of the query job to pass to Get Query Result. Empty when the rows were returned immediately
+        type: string
+        example: 0b1c2d3e-4f50-6172-8394-a5b6c7d8e9f0
+        required: false
+      items:
+        title: Items
+        description: Rows returned by the query when the status is complete
+        type: "[]object"
+        example: "[]"
+        required: false
+  get_query_result:
+    title: Get Query Result
+    description: Get the rows of a query started with Start a Query, waiting up to Max Wait seconds for the job to finish
+    input:
+      job_id:
+        title: Job ID
+        description: ID of the query job returned by Start a Query
+        type: string
+        required: true
+        example: 0b1c2d3e-4f50-6172-8394-a5b6c7d8e9f0
+      max_wait:
+        title: Max Wait
+        description: Seconds to wait for the job to finish before returning with status running (at most 200). Actions running in the cloud are stopped after 240 seconds
+        type: integer
+        default: 180
+        required: false
+        example: 180
+    output:
+      status:
+        title: Status
+        description: Status of the query job, either running or complete. Items is empty while the status is running, so check the status before using Items
+        type: string
+        example: complete
+        required: true
+      job_id:
+        title: Job ID
+        description: ID of the query job
+        type: string
+        example: 0b1c2d3e-4f50-6172-8394-a5b6c7d8e9f0
+        required: false
+      items:
+        title: Items
+        description: Rows returned by the query when the status is complete
         type: "[]object"
         example: "[]"
         required: false
