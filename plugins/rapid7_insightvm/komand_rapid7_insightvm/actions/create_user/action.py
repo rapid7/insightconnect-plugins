@@ -34,7 +34,7 @@ class CreateUser(insightconnect_plugin_runtime.Action):
             "allAssetGroups": payload.get("access_all_asset_groups"),
             "allSites": payload.get("access_all_sites"),
             "id": payload.get("role_id"),
-            "superuser": payload.get("superuser"),
+            "superuser": False,
         }
         delete_keys = [
             "authentication_id",
