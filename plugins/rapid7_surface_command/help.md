@@ -5,6 +5,7 @@ Surface Command gives you full visibility over your assets and identities across
 # Key Features
 
 * Query Surface Command Data
+* Run long queries asynchronously with Start a Query and Get Query Result
 
 # Requirements
 
@@ -42,6 +43,45 @@ Example input:
 
 ### Actions
 
+
+#### Get Query Result
+
+This action is used to get the rows of a query started with Start a Query, waiting up to Max Wait seconds for the job 
+to finish
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|job_id|string|None|True|ID of the query job returned by Start a Query|None|0b1c2d3e-4f50-6172-8394-a5b6c7d8e9f0|None|None|
+|max_wait|integer|180|False|Seconds to wait for the job to finish before returning with status running (at most 200). Actions running in the cloud are stopped after 240 seconds|None|180|None|None|
+  
+Example input:
+
+```
+{
+  "job_id": "0b1c2d3e-4f50-6172-8394-a5b6c7d8e9f0",
+  "max_wait": 180
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|items|[]object|False|Rows returned by the query when the status is complete|[]|
+|job_id|string|False|ID of the query job|0b1c2d3e-4f50-6172-8394-a5b6c7d8e9f0|
+|status|string|True|Status of the query job, either running or complete. Items is empty while the status is running, so check the status before using Items|complete|
+  
+Example output:
+
+```
+{
+  "items": [],
+  "job_id": "0b1c2d3e-4f50-6172-8394-a5b6c7d8e9f0",
+  "status": "complete"
+}
+```
 
 #### Run an Adhoc Query
 
@@ -107,6 +147,45 @@ Example output:
 }
 ```
 
+#### Start a Query
+
+This action is used to start a saved or adhoc query as an asynchronous job and return without waiting for it to finish.
+ Use Get Query Result to collect the rows
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|cypher|string|None|False|Cypher query to run. Provide either Query ID or Cypher Query, not both|None|MATCH (m:Machine) RETURN m|None|None|
+|query_id|string|None|False|ID (UUID) of a saved query to run. Provide either Query ID or Cypher Query, not both|None|12345678-1234-1234-1234-123456789012|None|None|
+  
+Example input:
+
+```
+{
+  "cypher": "MATCH (m:Machine) RETURN m",
+  "query_id": "12345678-1234-1234-1234-123456789012"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|items|[]object|False|Rows returned by the query when the status is complete|[]|
+|job_id|string|False|ID of the query job to pass to Get Query Result. Empty when the rows were returned immediately|0b1c2d3e-4f50-6172-8394-a5b6c7d8e9f0|
+|status|string|True|Status of the query job, either running or complete. When complete, the rows are already in Items; when running, Items is empty and the rows must be collected with Get Query Result|running|
+  
+Example output:
+
+```
+{
+  "items": [],
+  "job_id": "0b1c2d3e-4f50-6172-8394-a5b6c7d8e9f0",
+  "status": "running"
+}
+```
+
 #### Tag Assets in Bulk
 
 This action is used to add, set, or remove tags on multiple assets in bulk
@@ -165,9 +244,14 @@ Example output:
 
 ## Troubleshooting
 
+* Actions running in the cloud are stopped after 240 seconds. For queries that take longer, use Start a Query, then call Get Query Result in a loop while its Status is `running`, for example: Start a Query, then a Loop with the condition Status equals `running` (maximum 6 iterations) containing Get Query Result with Max Wait 180, then use Items
+* Start a Query needs async table queries to be enabled for the organization in Surface Command. If it fails with `Surface Command did not return a query job before the request timed out`, contact support to enable them, or use Run a Saved Query or Run an Adhoc Query
+* Query results are kept for 1 hour after the query starts. If Get Query Result reports that the job was not found or has expired, start the query again
+* Large results (over about 8 MB) can only be collected once: after Get Query Result has returned them, run Start a Query again to fetch them again
 
 # Version History
 
+* 1.4.0 - Add new actions | Start a Query | Get Query Result
 * 1.3.0 - Add optional connection input | Timeout | Increase default request timeout from 90 to 170 seconds | Updated SDK to the latest version (6.6.1)
 * 1.2.0 - Add new action | Tag Assets in Bulk
 * 1.1.0 - Update action title | Add new action | Run Adhoc Query

@@ -5,3 +5,7 @@ from .run_query.action import RunQuery
 from .run_adhoc_query.action import RunAdhocQuery
 
 from .tag_assets.action import TagAssets
+
+from .start_query.action import StartQuery
+
+from .get_query_result.action import GetQueryResult
