@@ -1,7 +1,7 @@
 {
-	"spec": "2208dac074c4cf0ebc83235a21736b7a",
-	"manifest": "c3b15c8807c924cbcaa758ddc942e442",
-	"setup": "b4799924fa0cc45bef93957b2abbc903",
+	"spec": "4c1e78113ec263ed7e832880443d5df1",
+	"manifest": "22a0427c795e5429171ce7c60fc53c60",
+	"setup": "74c3082333c1c46ac97f4ae33b821f4f",
 	"schemas": [
 		{
 			"identifier": "run_adhoc_query/schema.py",
