@@ -1,0 +1,69 @@
+{
+  "ip": "188.42.45.201",
+  "is_bogon": false,
+  "is_vpn": true,
+  "is_relay": false,
+  "is_tor": false,
+  "is_anycast": false,
+  "is_hosting": true,
+  "is_cdn": false,
+  "is_resproxy": false,
+  "is_dcproxy": false,
+  "is_mobproxy": false,
+  "is_pubproxy": false,
+  "is_carrier": false,
+  "is_satellite": false,
+  "is_ssh": false,
+  "is_smtp": false,
+  "is_web": false,
+  "is_dns_resolver": false,
+  "is_bittorrent": false,
+  "partial": false,
+  "vpn": {
+    "provider": "1clickvpn",
+    "provider_name": "1Click VPN",
+    "confidence": "high",
+    "last_seen": "2026-11-20"
+  },
+  "hosting": {
+    "provider": "servers_com",
+    "provider_name": "Servers.com",
+    "confidence": "high",
+    "last_seen": "2026-11-19"
+  },
+  "location": {
+    "continent": "EU",
+    "continent_name": "Europe",
+    "country": "LU",
+    "country_name": "Luxembourg",
+    "region": "Luxembourg",
+    "region_code": "LU-LU",
+    "city": "Luxembourg",
+    "postal_code": "L-1114",
+    "latitude": 49.60982,
+    "longitude": 6.13268,
+    "accuracy_radius": 10,
+    "timezone": "Europe/Luxembourg"
+  },
+  "company": {
+    "name": "SERVERS COM LUX2",
+    "type": "hosting",
+    "country": "LU"
+  },
+  "abuse": {
+    "email": "abuse@as5577.net",
+    "name": "root S.A.",
+    "address": "3, op der Poukewiss, 7795, Roost - Bissen, LUXEMBOURG",
+    "country": "LU",
+    "network": "188.42.0.0-188.42.255.255"
+  },
+  "asn": {
+    "asn": 7979,
+    "name": "Servers.com, Inc.",
+    "domain": "servers.com",
+    "type": "hosting",
+    "prefix": "188.42.45.0/24",
+    "country": "US",
+    "rpki_status": "not_found"
+  }
+}

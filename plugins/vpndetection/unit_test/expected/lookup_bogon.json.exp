@@ -1,0 +1,9 @@
+{
+  "ip": "10.0.0.1",
+  "is_bogon": true,
+  "is_vpn": false,
+  "is_relay": false,
+  "is_tor": false,
+  "is_anycast": false,
+  "partial": false
+}
