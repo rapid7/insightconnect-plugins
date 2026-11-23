@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 12.0.12
+version: 12.0.13
 connection_version: 5
 supported_versions: ["Latest release successfully tested on 2025-07-22."]
 vendor: rapid7
@@ -33,9 +33,10 @@ key_features:
   - "Incident Response and Investigations"
 sdk:
   type: full
-  version: 6.6.0
+  version: 6.6.1
   user: nobody
 version_history:
+  - "12.0.13 - Actions: `Advanced Query on Log` and `Advanced Query on Log Set` - Resubmit a query that stops making progress, within the step timeout | SDK bump to 6.6.1"
   - "12.0.12 - Triggers: `Get New Alerts` and `Get New Investigations` - Enforced a minimum `frequency` | Improved error retry handling | Updated dependencies"
   - "12.0.11 - Trigger `Get New Alerts`: Updated for transient network errors and dedupe state persisted across restarts | Fixed pagination | Added requests timeout"
   - "12.0.10 - Trigger `Get New Investigations` updated for IDR API latency issues and dedupe logic added | Updated dependencies"
