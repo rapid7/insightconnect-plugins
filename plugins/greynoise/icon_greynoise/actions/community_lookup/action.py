@@ -3,8 +3,8 @@ from .schema import CommunityLookupInput, CommunityLookupOutput, Input, Output, 
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
-from greynoise.exceptions import RequestFailure
-from greynoise import GreyNoise
+from greynoise.exceptions import RateLimitError, RequestFailure
+from greynoise.util import validate_ip
 import pendulum
 
 
@@ -18,16 +18,24 @@ class CommunityLookup(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        gn_client = GreyNoise(
-            api_server=self.connection.server,
-            api_key=self.connection.api_key,
-            integration_name=self.connection.user_agent,
-            offering="community",
-        )
+        ip_address = params.get(Input.IP_ADDRESS)
         try:
-            resp = gn_client.ip(params.get(Input.IP_ADDRESS))
-            if resp["noise"] or resp["riot"]:
+            validate_ip(ip_address)
+            resp = self.connection.gn_client.request(f"v3/community/{ip_address}")
+            if not isinstance(resp, dict):
+                raise PluginException(
+                    cause="GreyNoise Community API returned an unexpected response.",
+                    assistance="Please check the IP address and try again.",
+                )
+            if (resp.get("noise") or resp.get("riot")) and resp.get("last_seen"):
                 resp["last_seen"] = pendulum.parse(resp["last_seen"]).to_rfc3339_string()
+
+        except RateLimitError as error:
+            raise PluginException(
+                cause="GreyNoise API rate limit exceeded.",
+                assistance="Wait and try again.",
+                data=str(error),
+            )
 
         except RequestFailure as error:
             raise PluginException(
@@ -37,7 +45,7 @@ class CommunityLookup(insightconnect_plugin_runtime.Action):
 
         except ValueError as error:
             raise PluginException(
-                cause=f"Input does not appear to be valid: {Input.IP_ADDRESS}. Error Message: {error.args[0]}",
+                cause=f"Input does not appear to be valid: {ip_address}. Error Message: {error.args[0]}",
                 assistance="Please provide a valid public IPv4 address.",
             )
 

@@ -1,33 +1,26 @@
 import logging
 from unittest import TestCase, mock
 
+from icon_greynoise.actions.ip_lookup import IpLookup
 from icon_greynoise.actions.riot_lookup import RiotLookup
 
-from util import MockConnection, mocked_requests_get
+from test_ip_lookup import ip_response
+from util import MockConnection
 
 
 class TestRiotLookup(TestCase):
-    @mock.patch("greynoise.GreyNoise.riot", side_effect=mocked_requests_get)
-    def test_riot_lookup(self, mock_get):
+    @mock.patch("greynoise.GreyNoise.ip", side_effect=ip_response)
+    def test_riot_lookup_calls_ip_lookup(self, _mock_get):
         log = logging.getLogger("Test")
-        test_riot = RiotLookup()
-        test_riot.connection = MockConnection()
-        test_riot.logger = log
+        connection = MockConnection()
+        params = {"ip_address": "1.2.3.4"}
 
-        working_params = {"ip_address": "riot_lookup"}
-        results = test_riot.run(working_params)
-        expected = {
-            "ip": "1.2.3.4",
-            "riot": True,
-            "category": "public_dns",
-            "name": "Acme Inc",
-            "description": "description",
-            "explanation": "explanation",
-            "last_updated": "2024-11-04T17:10:58Z",
-            "reference": "reference",
-            "trust_level": "1",
-            "viz_url": "https://viz.greynoise.io/ip/1.2.3.4",
-        }
+        alias = RiotLookup()
+        alias.connection = connection
+        alias.logger = log
 
-        self.assertNotEqual({}, results, "returns non - empty results")
-        self.assertEqual(expected, results)
+        lookup = IpLookup()
+        lookup.connection = connection
+        lookup.logger = log
+
+        self.assertEqual(lookup.run(params), alias.run(params))
