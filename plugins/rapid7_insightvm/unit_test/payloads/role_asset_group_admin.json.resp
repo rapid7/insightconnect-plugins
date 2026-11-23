@@ -1,0 +1,5 @@
+{
+  "id": "asset-group-admin",
+  "name": "Asset Group Administrator",
+  "privileges": ["manage-dynamic-asset-groups"]
+}
