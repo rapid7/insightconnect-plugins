@@ -4012,6 +4012,7 @@ Example output:
 
 # Version History
 
+* 8.0.21 - `Create User`: Fixed an issue where user creation could fail
 * 8.0.20 - `Get Asset Vulnerability Solutions`: Fixed an issue where only the first vulnerability ID was processed | Updated SDK to latest version (6.6.1)
 * 8.0.19 - Updated dependencies
 * 8.0.18 - Updated dependencies

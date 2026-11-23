@@ -1,0 +1,5 @@
+{
+  "id": "site-admin",
+  "name": "Site Administrator",
+  "privileges": ["manage-sites"]
+}
