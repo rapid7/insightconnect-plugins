@@ -1,0 +1,9 @@
+{
+  "id": 807,
+  "links": [
+    {
+      "href": "https://example.com/api/3/users/807",
+      "rel": "self"
+    }
+  ]
+}

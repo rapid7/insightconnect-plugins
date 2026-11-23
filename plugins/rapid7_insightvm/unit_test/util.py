@@ -181,6 +181,20 @@ class Util:
             return MockResponse("scan_completion_report_output", 200)
         if kwargs.get("url") == "https://example.com/api/3/reports/100":
             return MockResponse("delete_adhoc_sql_report", 200)
+        if kwargs.get("url") == "https://example.com/api/3/users":
+            return MockResponse("create_user", 200)
+        if kwargs.get("url") == "https://example.com/api/3/roles/Regular":
+            return MockResponse("role_regular", 200)
+        if kwargs.get("url") == "https://example.com/api/3/roles/global-admin":
+            return MockResponse("role_global_admin", 200)
+        if kwargs.get("url") == "https://example.com/api/3/roles/site-admin":
+            return MockResponse("role_site_admin", 200)
+        if kwargs.get("url") == "https://example.com/api/3/roles/tag-admin":
+            return MockResponse("role_tag_admin", 200)
+        if kwargs.get("url") == "https://example.com/api/3/roles/asset-group-admin":
+            return MockResponse("role_asset_group_admin", 200)
+        if kwargs.get("url") == "https://example.com/api/3/roles/missing-role":
+            return MockResponse("role_not_found", 404)
 
         url = kwargs.get("url", "")
 
