@@ -1,0 +1,23 @@
+{
+	"spec": "8d973786ab3ee66e8462926989deb709",
+	"manifest": "ab9d46bba1953ada8cc14aede4478291",
+	"setup": "e3cf1c862f5e8ab5b8056ec137462234",
+	"schemas": [
+		{
+			"identifier": "get_attacker_ips/schema.py",
+			"hash": "fcd68278736319785e4955d6b34f359c"
+		},
+		{
+			"identifier": "get_edl_feed/schema.py",
+			"hash": "a41199c628260a0fdefe3ebc0e2f31cd"
+		},
+		{
+			"identifier": "query_telemetry/schema.py",
+			"hash": "43c6f7f9d39dbe21c11f5f05a61eb166"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "abdc70cd119fc636ab52c00aabcbd7b7"
+		}
+	]
+}
