@@ -1,0 +1,19 @@
+{
+  "id": "5399c9b5-0b46-45e4-81aa-889952433d86",
+  "jsonrpc": "2.0",
+  "result": {
+    "id": "5a4f2c3b6e9d1a0012345678",
+    "name": "WORKSTATION-01",
+    "companyId": "5a4f2c3b6e9d1a00123456bb",
+    "operatingSystem": "Windows 11 Pro",
+    "state": 1,
+    "ip": "10.0.0.15",
+    "lastSeen": "2026-11-06T10:15:00",
+    "isIsolated": false,
+    "machineType": 1,
+    "group": {"id": "5a4f2c3b6e9d1a0012345679", "name": "Workstations"},
+    "policy": {"id": "5a4f2c3b6e9d1a00123456aa", "name": "Default policy", "applied": true},
+    "malwareStatus": {"detection": false, "infected": false},
+    "managedWithBest": true
+  }
+}
