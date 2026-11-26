@@ -97,7 +97,7 @@ This action is used to creates an alert for Jira Service Management
 |source|string|Rapid7 Automation|False|Source field of the alert. Default value is Rapid7 Automation|None|Rapid7 Automation|None|None|
 |tags|[]string|None|False|Tags of the alert|None|["OverwriteQuietHours","Critical"]|None|None|
 |user|string|None|False|Display name of the request owner|None|ExampleName|None|None|
-|visibleTo|[]object|None|False|Teams and users that the alert will become visible to without sending any notification. Type field is mandatory for each item, where possible values are team and user. In addition to the type field, either ID or name should be given for teams and either ID or username should be given for users. Please note that alert will be visible to the teams that are specified within responders field by default, so there is no need to re-specify them within visibleTo field. "id/name": Either id or name of each responder should be provided. "type": team, user, escalation, schedule. Format: [{"id/name":"value", "type":"team/user/escalation/schedule"}]|None|[{"id":"4513b7ea-3b91-438f-b7e4-e3e54af9147c","type":"team"},{"name":"example_name","type":"team"}]|None|None|
+|visibleTo|[]object|None|False|Teams and users that the alert will become visible to without sending a notification. Each item requires a `type` (`team` or `user`) and either an `id` or a `name` (`username` for users)|None|[{"id":"4513b7ea-3b91-438f-b7e4-e3e54af9147c","type":"team"},{"name":"example_name","type":"team"}]|None|None|
   
 Example input:
 
@@ -312,11 +312,13 @@ Example output:
 *This plugin does not contain any custom output types.*
 
 ## Troubleshooting
-  
-*This plugin does not contain a troubleshooting.*
+
+* The `Create Alert` action retries for a short time while Jira Service Management processes the alert request, and for longer if Jira Service Management is slow to respond. If the request is still not processed after that, the action fails with the request ID, but the alert may still appear in Jira Service Management, so check the alerts list before running the step again
+* Teams specified in the `Responders` input can already see the alert, so they do not need to be repeated in `VisibleTo`
 
 # Version History
 
+* 1.0.1 - Action `Create Alert`: Fixed not found error after creating an alert | Updated SDK to the latest version (6.6.1)
 * 1.0.0 - Initial plugin
 
 # Links
