@@ -168,6 +168,7 @@ Example output:
 
 # Version History
 
+* 1.3.1 - Fixed the Extension Source link (`source_url`) pointing to a page that does not exist
 * 1.3.0 - Add optional connection input | Timeout | Increase default request timeout from 90 to 170 seconds | Updated SDK to the latest version (6.6.1)
 * 1.2.0 - Add new action | Tag Assets in Bulk
 * 1.1.0 - Update action title | Add new action | Run Adhoc Query

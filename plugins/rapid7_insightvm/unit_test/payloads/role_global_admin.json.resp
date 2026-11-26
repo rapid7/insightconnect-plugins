@@ -1,0 +1,5 @@
+{
+  "id": "global-admin",
+  "name": "Global Administrator",
+  "privileges": ["all-permissions"]
+}

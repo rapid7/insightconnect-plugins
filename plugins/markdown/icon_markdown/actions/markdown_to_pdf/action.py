@@ -1,12 +1,12 @@
 import insightconnect_plugin_runtime
-import pdfkit
+import subprocess  # nosec B404
 import tempfile
 import shutil
 from icon_markdown.util import utils
 from icon_markdown.util.sanitizer import sanitize_html
 from .schema import MarkdownToPdfInput, MarkdownToPdfOutput, Output, Input, Component
 from insightconnect_plugin_runtime.exceptions import PluginException
-from typing import Dict
+from typing import Dict, List
 
 # Defense-in-depth flags for wkhtmltopdf: --disable-javascript blocks script execution,
 # --disable-local-file-access blocks file:// SSRF, load-error-handling ignores fetches
@@ -19,12 +19,43 @@ PDF_OPTIONS = {
 }
 
 
+WKHTMLTOPDF_TIMEOUT = 120
+
+
+def build_wkhtmltopdf_command(infile: str, outfile: str) -> List[str]:
+    command = ["wkhtmltopdf", "--quiet"]
+    for option, value in PDF_OPTIONS.items():
+        command.append(f"--{option}")
+        if value is not None:
+            command.append(value)
+    command.extend([infile, outfile])
+    return command
+
+
 def make_pdf_bytes(html: str, path: str) -> Dict[str, str]:
     infile = path + "str.html"
     outfile = path + "tmp.pdf"
     with open(infile, "w", encoding="utf-8") as file:
         file.write(html)
-    pdfkit.from_file(infile, outfile, options=PDF_OPTIONS)
+    try:
+        result = subprocess.run(  # nosec B603
+            build_wkhtmltopdf_command(infile, outfile),
+            capture_output=True,
+            text=True,
+            timeout=WKHTMLTOPDF_TIMEOUT,
+            check=False,
+        )
+    except subprocess.TimeoutExpired as error:
+        raise PluginException(
+            cause="PDF rendering timed out.",
+            assistance=f"wkhtmltopdf did not finish within {WKHTMLTOPDF_TIMEOUT} seconds.",
+        ) from error
+    if result.returncode != 0:
+        raise PluginException(
+            cause="PDF rendering failed.",
+            assistance="Check that the Markdown converts to valid HTML.",
+            data=f"wkhtmltopdf exit code {result.returncode}: {result.stderr}",
+        )
     with open(outfile, "rb") as file:
         pdf_string = file.read()
 

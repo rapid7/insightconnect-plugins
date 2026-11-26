@@ -1,5 +1,8 @@
 REQUESTS_TIMEOUT = 20
 DEFAULT_JIRA_API_VERSION = "3"
+# Jira REST API v2 takes a description or comment as text and renders its wiki markup, v3 takes only ADF documents
+WIKI_MARKUP_JIRA_API_VERSION = "2"
+ADF_JIRA_API_VERSION = "3"
 
 # OAuth2 endpoints for Atlassian Cloud
 OAUTH2_TOKEN_URL = "https://auth.atlassian.com/oauth/token"  # noqa: B105
