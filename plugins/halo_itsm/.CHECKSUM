@@ -1,0 +1,39 @@
+{
+	"spec": "2c33b389d9e3cbec12fc6735ca071f38",
+	"manifest": "cb98dfd3e205e5c37ede48b0bfa02294",
+	"setup": "b4f8e7803f8b2d1411b74aff986dc460",
+	"schemas": [
+		{
+			"identifier": "add_action_to_ticket/schema.py",
+			"hash": "45c4606a157142ddb3333820fc260bcc"
+		},
+		{
+			"identifier": "attach_file_to_ticket/schema.py",
+			"hash": "4a5b2eda5b561a0ad33e7ca3926d79bd"
+		},
+		{
+			"identifier": "create_ticket/schema.py",
+			"hash": "f273aa2528fb70a7dcf35d8928c0e669"
+		},
+		{
+			"identifier": "delete_ticket/schema.py",
+			"hash": "280f695cd976efc9ba1b89c85c4c7a2e"
+		},
+		{
+			"identifier": "get_ticket/schema.py",
+			"hash": "c7e4caf355b78e0ed79d1bac9697bac8"
+		},
+		{
+			"identifier": "list_tickets/schema.py",
+			"hash": "bac69e70f7734a88ef99be97e57180d4"
+		},
+		{
+			"identifier": "update_ticket/schema.py",
+			"hash": "fba7422588e5baa92973a55d140ecd3a"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "89bcd81a816255fdd1571d73a049e981"
+		}
+	]
+}

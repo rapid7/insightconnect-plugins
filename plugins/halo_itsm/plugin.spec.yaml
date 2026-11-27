@@ -1,0 +1,593 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: halo_itsm
+title: Halo ITSM
+description: Halo ITSM is a cloud-based IT Service Management platform that provides
+  ticket management, asset tracking, and service desk capabilities
+version: 1.0.6
+connection_version: 1
+supported_versions: ["2025-07-10"]
+vendor: rapid7
+support: rapid7
+cloud_ready: true
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/halo_itsm
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://haloitsm.com
+tags:
+  - halo_itsm
+  - ticketing
+  - itsm
+hub_tags:
+  use_cases: [remediation_management]
+  keywords: [ticketing]
+  features: []
+links:
+  - '[Halo ITSM](https://haloitsm.com)'
+references:
+  - '[Halo ITSM API Guide](https://haloitsm.com/guides/article/?kbid=929)'
+key_features:
+  - Create, update, delete, and get tickets
+  - List tickets with filtering support
+  - Add actions (notes/comments) to tickets
+  - Manage ticket assignments and status changes
+requirements:
+  - Halo ITSM API Client ID and Client Secret
+  - Base URL of your Halo ITSM instance
+  - API application configured with Client Credentials grant type in Halo ITSM
+  - 'To configure API access, go to Configuration > Integrations > HaloITSM API > View Applications in your Halo instance and create a new application with the Client ID and Secret (Services) authentication type'
+troubleshooting:
+  - 'If Halo rejects a new ticket with "Please select a valid Client/Site/User", set Client ID, User ID and Site ID on Create Ticket: some Halo instances require them together.'
+  - 'If Halo rejects a ticket with "Invalid Closure Code value", check Category 2 and Status: on some instances Category 2 is the Closure Code, and a closed status requires one.'
+  - 'If authentication fails, check that the API application uses the Client ID and Secret (Services) authentication type with the Client Credentials grant type, and fill in Tenant only for a multi-tenant instance.'
+version_history:
+  - "1.0.6 - Add the plugin to the Extension Library | Add unit tests | Authentication errors include the HTTP status code | Ticket summaries and search terms are no longer written to the log | Updated SDK to the latest version (6.6.1)"
+  - "1.0.5 - Attach File to Ticket: strip line breaks from base64 content before sending (the CSV plugin's csv_bytes wraps base64 every 76 characters, which failed with 'Only base64 data is allowed')"
+  - "1.0.4 - Add Action to Ticket and Attach File to Ticket use Halo's top-level /api/Actions and /api/Attachment (the nested /api/tickets/{id}/actions route returned 404) | Attachments sent as a data URI in data_base64 (raw base64 returned HTTP 500) | Add Action: new optional Note HTML input; Note no longer required (one of the two) | Action output fills actiondate from Halo's datetime | Impact and Urgency inputs are integers | Clearer input descriptions for Category (use 'Category>Subcategory'), Category 2, Client, Site, User and Status"
+  - "1.0.3 - Omit ticket fields Halo does not return instead of emitting null (null failed string output validation, e.g. lastupdate). Supersedes 1.0.2."
+  - "1.0.2 - Fix ticket output validation: impact and urgency are returned by Halo as integers, not strings; changed their type in the ticket output schema (list_tickets/get_ticket/create_ticket/update_ticket). Fix launcher Version constant so logs report the real plugin version"
+  - "1.0.1 - Fix container crash at startup: make icon_halo_itsm/util/__init__.py world-readable (was 0600) so the 'nobody' runtime user can import it; add chmod safeguard in Dockerfile"
+  - "1.0.0 - Initial plugin release with Create, Get, Update, Delete, List Tickets, Add Action, and Attach File actions"
+sdk:
+  type: slim
+  version: 6.6.1
+  user: nobody
+types:
+  ticket:
+    id:
+      title: ID
+      description: Unique ID of the ticket
+      type: integer
+      required: false
+      example: 1234
+    summary:
+      title: Summary
+      description: Summary of the ticket
+      type: string
+      required: false
+      example: Server is unresponsive
+    details:
+      title: Details
+      description: Details of the ticket
+      type: string
+      required: false
+      example: The production server has been unresponsive since 10:00 AM
+    status_id:
+      title: Status ID
+      description: ID of the ticket status
+      type: integer
+      required: false
+      example: 1
+    priority_id:
+      title: Priority ID
+      description: ID of the ticket priority
+      type: integer
+      required: false
+      example: 3
+    tickettype_id:
+      title: Ticket Type ID
+      description: ID of the ticket type
+      type: integer
+      required: false
+      example: 1
+    category_1:
+      title: Category
+      description: Primary category of the ticket
+      type: string
+      required: false
+      example: Hardware
+    category_2:
+      title: Subcategory
+      description: Subcategory of the ticket
+      type: string
+      required: false
+      example: Server
+    impact:
+      title: Impact
+      description: Impact level of the ticket
+      type: integer
+      required: false
+      example: 2
+    urgency:
+      title: Urgency
+      description: Urgency level of the ticket
+      type: integer
+      required: false
+      example: 3
+    user_id:
+      title: User ID
+      description: ID of the user who raised the ticket
+      type: integer
+      required: false
+      example: 10
+    user_name:
+      title: User Name
+      description: Name of the user who raised the ticket
+      type: string
+      required: false
+      example: Jane Doe
+    agent_id:
+      title: Agent ID
+      description: ID of the agent assigned to the ticket
+      type: integer
+      required: false
+      example: 15
+    agent_name:
+      title: Agent Name
+      description: Name of the agent assigned to the ticket
+      type: string
+      required: false
+      example: John Smith
+    team:
+      title: Team
+      description: Team assigned to the ticket
+      type: string
+      required: false
+      example: IT Support
+    dateoccurred:
+      title: Date Occurred
+      description: Date when the ticket was raised
+      type: string
+      required: false
+      example: 2025-07-10T10:00:00Z
+    datecreated:
+      title: Date Created
+      description: Timestamp when the ticket was created
+      type: string
+      required: false
+      example: 2025-07-10T10:05:00Z
+    lastupdate:
+      title: Last Update
+      description: Timestamp of the last update on the ticket
+      type: string
+      required: false
+      example: 2025-07-10T11:30:00Z
+    closeddate:
+      title: Closed Date
+      description: Timestamp when the ticket was closed
+      type: string
+      required: false
+      example: 2025-07-11T09:00:00Z
+    client_id:
+      title: Client ID
+      description: ID of the client associated with the ticket
+      type: integer
+      required: false
+      example: 5
+    client_name:
+      title: Client Name
+      description: Name of the client associated with the ticket
+      type: string
+      required: false
+      example: ACME Corp
+    site_id:
+      title: Site ID
+      description: ID of the site associated with the ticket
+      type: integer
+      required: false
+      example: 2
+    sla_id:
+      title: SLA ID
+      description: ID of the SLA applied to the ticket
+      type: integer
+      required: false
+      example: 1
+  ticket_action:
+    id:
+      title: ID
+      description: Unique ID of the action
+      type: integer
+      required: false
+      example: 501
+    ticket_id:
+      title: Ticket ID
+      description: ID of the ticket this action belongs to
+      type: integer
+      required: false
+      example: 1234
+    who:
+      title: Who
+      description: Name of the person who performed the action
+      type: string
+      required: false
+      example: John Smith
+    note:
+      title: Note
+      description: Content of the action note
+      type: string
+      required: false
+      example: Investigated the issue and found root cause
+    hiddenfromuser:
+      title: Hidden from User
+      description: Whether the action is hidden from the end user
+      type: boolean
+      required: false
+      example: false
+    outcome:
+      title: Outcome
+      description: Outcome of the action
+      type: string
+      required: false
+      example: Ongoing
+    actiondate:
+      title: Action Date
+      description: Timestamp of the action
+      type: string
+      required: false
+      example: 2025-07-10T10:30:00Z
+connection:
+  base_url:
+    title: Base URL
+    description: Base URL of your Halo ITSM instance (e.g. https://your-instance.haloitsm.com)
+    type: string
+    required: true
+    example: https://example.haloitsm.com
+  client_id:
+    title: Client ID
+    description: OAuth Client ID for the Halo ITSM API application
+    type: string
+    required: true
+    example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+  client_secret:
+    title: Client Secret
+    description: OAuth Client Secret for the Halo ITSM API application
+    type: credential_secret_key
+    required: true
+    example: '{"secretKey": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"}'
+  tenant:
+    title: Tenant
+    description: Tenant name for multi-tenant Halo ITSM instances (optional, leave
+      blank if not applicable)
+    type: string
+    required: false
+    example: my-tenant
+actions:
+  create_ticket:
+    title: Create Ticket
+    description: Create a new ticket in Halo ITSM
+    input:
+      summary:
+        title: Summary
+        description: Summary of the ticket
+        type: string
+        required: true
+        example: Server is unresponsive
+      details:
+        title: Details
+        description: Full details of the ticket in plain text or HTML
+        type: string
+        required: false
+        example: The production server has been unresponsive since 10:00 AM
+      tickettype_id:
+        title: Ticket Type ID
+        description: ID of the ticket type (e.g. 1 for Incident, 2 for Service Request)
+        type: integer
+        required: true
+        example: 1
+      user_id:
+        title: User ID
+        description: 'ID of the Halo user raising the ticket. Some Halo instances require it along with the client'
+        type: integer
+        required: false
+        example: 10
+      client_id:
+        title: Client ID
+        description: 'ID of the Halo client the ticket belongs to. Halo normally rejects a ticket without one ("Please select a valid Client/Site/User")'
+        type: integer
+        required: false
+        example: 5
+      priority_id:
+        title: Priority ID
+        description: ID of the ticket priority
+        type: integer
+        required: false
+        example: 3
+      status_id:
+        title: Status ID
+        description: 'Halo status ID. Blank or 0 = not sent (Halo applies the ticket type default). Do not use a closed status; Halo then requires a closure code'
+        type: integer
+        required: false
+        example: 1
+      category_1:
+        title: Category
+        description: 'Category value exactly as stored in Halo. For a category with a subcategory, use the full path joined with ''>'' (e.g. Infrastructure>Server), as list_tickets returns it'
+        type: string
+        required: false
+        example: Hardware
+      category_2:
+        title: Category 2
+        description: 'Halo category field 2. Its meaning is configured per Halo instance (on some it is the Closure Code, which rejects other values with "Invalid Closure Code value"). Do not put a subcategory here; use the full path joined with the greater-than sign in Category instead'
+        type: string
+        required: false
+        example: Laptop
+      agent_id:
+        title: Agent ID
+        description: ID of the agent to assign the ticket to
+        type: integer
+        required: false
+        example: 15
+      impact:
+        title: Impact
+        description: 'Impact level ID as configured in Halo (integer). Blank or 0 = not sent'
+        type: integer
+        required: false
+        example: 2
+      urgency:
+        title: Urgency
+        description: 'Urgency level ID as configured in Halo (integer). Blank or 0 = not sent'
+        type: integer
+        required: false
+        example: 3
+      site_id:
+        title: Site ID
+        description: 'ID of the Halo site for the ticket. Some Halo instances require it along with the client'
+        type: integer
+        required: false
+        example: 2
+    output:
+      ticket:
+        title: Ticket
+        description: The newly created ticket
+        type: ticket
+        required: true
+        example: '{"id":101,"summary":"Server is unresponsive","details":"The production server has been unresponsive since 10:00 AM","status_id":1,"priority_id":3,"tickettype_id":1,"category_1":"Hardware","category_2":"Server","impact":"Medium","urgency":"High","user_id":10,"user_name":"Jane Doe","agent_id":15,"agent_name":"John Smith","team":"IT Support","dateoccurred":"2025-07-10T10:00:00Z","datecreated":"2025-07-10T10:05:00Z","lastupdate":"2025-07-10T10:05:00Z","closeddate":null,"client_id":5,"client_name":"ACME Corp","site_id":2,"sla_id":1}'
+  get_ticket:
+    title: Get Ticket
+    description: Get details of a specific ticket by ID
+    input:
+      ticket_id:
+        title: Ticket ID
+        description: ID of the ticket to retrieve
+        type: integer
+        required: true
+        example: 1234
+    output:
+      ticket:
+        title: Ticket
+        description: The ticket details
+        type: ticket
+        required: true
+        example: '{"id":1234,"summary":"Email not working","details":"User reports email client is not connecting to server","status_id":2,"priority_id":2,"tickettype_id":1,"category_1":"Software","category_2":"Email","impact":"High","urgency":"High","user_id":20,"user_name":"Jane Doe","agent_id":15,"agent_name":"John Smith","team":"IT Support","dateoccurred":"2025-07-09T14:00:00Z","datecreated":"2025-07-09T14:05:00Z","lastupdate":"2025-07-10T08:30:00Z","closeddate":null,"client_id":5,"client_name":"ACME Corp","site_id":1,"sla_id":2}'
+  update_ticket:
+    title: Update Ticket
+    description: Update an existing ticket in Halo ITSM
+    input:
+      ticket_id:
+        title: Ticket ID
+        description: ID of the ticket to update
+        type: integer
+        required: true
+        example: 1234
+      summary:
+        title: Summary
+        description: Updated summary of the ticket
+        type: string
+        required: false
+        example: Updated summary
+      details:
+        title: Details
+        description: Updated details of the ticket
+        type: string
+        required: false
+        example: Updated details text
+      status_id:
+        title: Status ID
+        description: 'Halo status ID. Blank or 0 = not sent (Halo applies the ticket type default). Do not use a closed status; Halo then requires a closure code'
+        type: integer
+        required: false
+        example: 2
+      priority_id:
+        title: Priority ID
+        description: Updated priority ID for the ticket
+        type: integer
+        required: false
+        example: 1
+      agent_id:
+        title: Agent ID
+        description: Updated agent ID to assign the ticket to
+        type: integer
+        required: false
+        example: 15
+      category_1:
+        title: Category
+        description: 'Category value exactly as stored in Halo. For a category with a subcategory, use the full path joined with ''>'' (e.g. Infrastructure>Server), as list_tickets returns it'
+        type: string
+        required: false
+        example: Software
+      category_2:
+        title: Category 2
+        description: 'Halo category field 2. Its meaning is configured per Halo instance (on some it is the Closure Code, which rejects other values with "Invalid Closure Code value"). Do not put a subcategory here; use the full path joined with the greater-than sign in Category instead'
+        type: string
+        required: false
+        example: Operating System
+      impact:
+        title: Impact
+        description: 'Impact level ID as configured in Halo (integer). Blank or 0 = not sent'
+        type: integer
+        required: false
+        example: 2
+      urgency:
+        title: Urgency
+        description: 'Urgency level ID as configured in Halo (integer). Blank or 0 = not sent'
+        type: integer
+        required: false
+        example: 3
+    output:
+      ticket:
+        title: Ticket
+        description: The updated ticket
+        type: ticket
+        required: true
+        example: '{"id":1234,"summary":"Email not working - UPDATED","details":"User reports email client is not connecting to server. Investigating.","status_id":3,"priority_id":1,"tickettype_id":1,"category_1":"Software","category_2":"Email","impact":"High","urgency":"Critical","user_id":20,"user_name":"Jane Doe","agent_id":15,"agent_name":"John Smith","team":"IT Support","dateoccurred":"2025-07-09T14:00:00Z","datecreated":"2025-07-09T14:05:00Z","lastupdate":"2025-07-10T09:00:00Z","closeddate":null,"client_id":5,"client_name":"ACME Corp","site_id":1,"sla_id":2}'
+  delete_ticket:
+    title: Delete Ticket
+    description: Delete a ticket from Halo ITSM
+    input:
+      ticket_id:
+        title: Ticket ID
+        description: ID of the ticket to delete
+        type: integer
+        required: true
+        example: 1234
+    output:
+      success:
+        title: Success
+        description: Whether the ticket was successfully deleted
+        type: boolean
+        required: true
+        example: true
+  list_tickets:
+    title: List Tickets
+    description: List tickets from Halo ITSM with optional filtering
+    input:
+      status_id:
+        title: Status ID
+        description: Filter tickets by status ID
+        type: integer
+        required: false
+        example: 1
+      tickettype_id:
+        title: Ticket Type ID
+        description: Filter tickets by ticket type ID
+        type: integer
+        required: false
+        example: 1
+      agent_id:
+        title: Agent ID
+        description: Filter tickets by assigned agent ID
+        type: integer
+        required: false
+        example: 15
+      client_id:
+        title: Client ID
+        description: Filter tickets by client ID
+        type: integer
+        required: false
+        example: 5
+      count:
+        title: Count
+        description: Maximum number of tickets to return
+        type: integer
+        required: false
+        default: 50
+        example: 50
+      search:
+        title: Search
+        description: Search string to filter tickets
+        type: string
+        required: false
+        example: server down
+        placeholder: Enter search term
+    output:
+      tickets:
+        title: Tickets
+        description: List of tickets matching the filter criteria
+        type: '[]ticket'
+        required: true
+        example: '[{"id":1234,"summary":"Email not working","status_id":2,"priority_id":2,"tickettype_id":1,"category_1":"Software","agent_id":15,"agent_name":"John Smith","client_name":"ACME Corp"},{"id":1235,"summary":"Printer jam on 3rd floor","status_id":1,"priority_id":4,"tickettype_id":1,"category_1":"Hardware","agent_id":null,"agent_name":null,"client_name":"ACME Corp"}]'
+  add_action_to_ticket:
+    title: Add Action to Ticket
+    description: Add an action (note, comment, or update) to an existing ticket
+    input:
+      ticket_id:
+        title: Ticket ID
+        description: ID of the ticket to add the action to
+        type: integer
+        required: true
+        example: 1234
+      note:
+        title: Note
+        description: 'Plain-text note. Provide Note or Note HTML (at least one)'
+        type: string
+        required: false
+        example: Investigated the issue and found root cause
+      note_html:
+        title: Note HTML
+        description: 'Rich-text (HTML) note, sent as note_html. Provide Note or Note HTML (at least one)'
+        type: string
+        required: false
+        example: '<p>Checked firewall logs.</p>'
+      outcome:
+        title: Outcome
+        description: 'Action outcome label as configured in Halo (e.g. Ongoing, Private Note)'
+        type: string
+        required: false
+        example: Ongoing
+      hiddenfromuser:
+        title: Hidden from User
+        description: 'Set to true for a private internal note, or to false to make the note visible to the end user'
+        type: boolean
+        required: false
+        default: false
+        example: false
+    output:
+      action:
+        title: Action
+        description: The newly created action
+        type: ticket_action
+        required: true
+        example: '{"id":501,"ticket_id":1234,"who":"John Smith","note":"Investigated the issue and found root cause","hiddenfromuser":false,"outcome":"Ongoing","actiondate":"2025-07-10T10:30:00Z"}'
+  attach_file_to_ticket:
+    title: Attach File to Ticket
+    description: 'Attach a file to an existing ticket (uploaded to Halo /api/Attachment as base64). The Halo API account needs permission to update the ticket'
+    input:
+      ticket_id:
+        title: Ticket ID
+        description: ID of the ticket to attach the file to
+        type: integer
+        required: true
+        example: 1234
+      filename:
+        title: Filename
+        description: Name of the file to attach (e.g. screenshot.png)
+        type: string
+        required: true
+        example: error_log.txt
+      content:
+        title: Content
+        description: Base64-encoded content of the file to attach
+        type: bytes
+        required: true
+        example: VGhpcyBpcyBhIHRlc3QgZmlsZQ==
+      note:
+        title: Note
+        description: 'Not sent to Halo (attachment records have no note). Kept so existing workflows still import; use Add Action to Ticket to add a note'
+        type: string
+        required: false
+        example: Attaching error log for reference
+      hiddenfromuser:
+        title: Hidden from User
+        description: 'Not sent to Halo (attachment records have no hidden flag). Kept so existing workflows still import; use Add Action to Ticket to add a hidden note'
+        type: boolean
+        required: false
+        default: false
+        example: false
+    output:
+      action:
+        title: Action
+        description: The action created with the attachment
+        type: ticket_action
+        required: true
+        example: '{"id":502,"ticket_id":1234,"who":"John Smith","note":"Attaching error log for reference","hiddenfromuser":false,"outcome":null,"actiondate":"2025-07-10T11:00:00Z"}'
