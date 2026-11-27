@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Jira Service Management"
 Vendor = "rapid7"
-Version = "1.0.0"
+Version = "1.0.1"
 Description = "Notify the right people, reduce response time, and avoid alert fatigue with Jira Service Management"
 
 

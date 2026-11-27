@@ -3,6 +3,8 @@ import logging
 import os
 from typing import Any, Dict
 
+import requests
+
 from icon_jira_service_management.connection.connection import Connection
 from icon_jira_service_management.connection.schema import Input
 from insightconnect_plugin_runtime import Action
@@ -47,6 +49,7 @@ class Util:
 
             self.status_code = status_code
             self.headers = headers
+            self.url = "https://api.atlassian.com/mock"
 
             if filename:
                 self.content = Util.read_file_to_bytes(
@@ -62,4 +65,4 @@ class Util:
 
         def raise_for_status(self) -> None:
             if self.status_code >= 400:
-                raise Exception(f"HTTP {self.status_code}")
+                raise requests.exceptions.HTTPError(f"HTTP {self.status_code}", response=self)

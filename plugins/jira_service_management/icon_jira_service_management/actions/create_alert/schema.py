@@ -31,8 +31,7 @@ class Output:
 
 
 class CreateAlertInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        r"""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -131,7 +130,7 @@ class CreateAlertInput(insightconnect_plugin_runtime.Input):
     "visibleTo": {
       "type": "array",
       "title": "VisibleTo",
-      "description": "Teams and users that the alert will become visible to without sending any notification. Type field is mandatory for each item, where possible values are team and user. In addition to the type field, either ID or name should be given for teams and either ID or username should be given for users. Please note that alert will be visible to the teams that are specified within responders field by default, so there is no need to re-specify them within visibleTo field. \"id/name\": Either id or name of each responder should be provided. \"type\": team, user, escalation, schedule. Format: [{\"id/name\":\"value\", \"type\":\"team/user/escalation/schedule\"}]",
+      "description": "Teams and users that the alert will become visible to without sending a notification. Each item requires a `type` (`team` or `user`) and either an `id` or a `name` (`username` for users)",
       "items": {
         "type": "object"
       },
@@ -143,16 +142,14 @@ class CreateAlertInput(insightconnect_plugin_runtime.Input):
   ],
   "definitions": {}
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class CreateAlertOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(
-        r"""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -190,8 +187,7 @@ class CreateAlertOutput(insightconnect_plugin_runtime.Output):
   ],
   "definitions": {}
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
