@@ -35,4 +35,8 @@ class VulnSearch(insightconnect_plugin_runtime.Action):
             resources = self.connection.ivm_cloud_api.call_api("vulnerabilities", "POST", parameters, body)
         else:
             resources = self.connection.ivm_cloud_api.call_api("vulnerabilities", "POST", parameters)
-        return {Output.VULNERABILITIES: insightconnect_plugin_runtime.helper.clean(resources.get("data", []))}
+        vulnerabilities = insightconnect_plugin_runtime.helper.clean(resources.get("data", []))
+        # The API leaves `categories` out when a vulnerability has none, but the output schema requires it
+        for vulnerability in vulnerabilities:
+            vulnerability.setdefault("categories", "")
+        return {Output.VULNERABILITIES: vulnerabilities}
