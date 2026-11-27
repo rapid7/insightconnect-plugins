@@ -1,4 +1,5 @@
 import base64
+import time
 from logging import Logger
 
 import requests
@@ -9,6 +10,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import make_request, clean
 
 MAX_REQUEST_TRIES = 10
+MAX_STATUS_TRIES = 8
 
 
 class JiraServiceManagementApi:
@@ -44,7 +46,7 @@ class JiraServiceManagementApi:
             request_id = create_alert_response.get("requestId")
             self.logger.info(f"Alert creation request sent. Request ID: {request_id}")
 
-            alert_id = self._get_request_status(identifier=create_alert_response.get("requestId")).get("alertId")
+            alert_id = self._get_alert_id(request_id)
             self.logger.info(f"Alert created successfully. Alert ID: {alert_id}")
 
             return {**create_alert_response, "alertId": alert_id}
@@ -114,6 +116,39 @@ class JiraServiceManagementApi:
             ),
             timeout=REQUESTS_TIMEOUT,
         ).json()
+
+    def _get_alert_id(self, request_id: str) -> str:
+        # JSM processes alert requests asynchronously and answers 404 until it is done.
+        # Timeouts, rate limiting, server errors and network errors are retried too. 4xx codes the SDK labels
+        # with a status code (400, 401, 403, ...) fail at once; unlabelled ones (e.g. 422) are retried.
+        last_error = None
+        for delay in range(MAX_STATUS_TRIES):
+            time.sleep(delay)
+            try:
+                request_status = self._get_request_status(identifier=request_id)
+            except PluginException as error:
+                last_error = error
+                status_code = getattr(error, "status_code", None)
+                if status_code and status_code < 500 and status_code not in (404, 408, 429):
+                    raise
+                self.logger.info(
+                    f"Alert request not available yet, status code {status_code} ({delay + 1}/{MAX_STATUS_TRIES})"
+                )
+                continue
+
+            if request_status.get("isSuccess") is False:
+                raise PluginException(
+                    cause="Jira Service Management failed to process the alert request.",
+                    assistance=f"Request ID: {request_id}.",
+                    data=request_status.get("status"),
+                )
+            return request_status.get("alertId")
+
+        raise PluginException(
+            cause=f"Jira Service Management accepted alert request {request_id} but has not processed it yet.",
+            assistance="Check the alerts list in Jira Service Management before running the step again.",
+            data=f"Last error: {last_error}",
+        )
 
     def _get_request_status(self, identifier: str) -> dict:
         url = f"https://api.atlassian.com/jsm/ops/api/{self.cloud_id}/v1/alerts/requests/{identifier}"
