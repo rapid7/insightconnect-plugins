@@ -897,7 +897,7 @@ Example output:
 
 # Version History
 
-* 9.1.0 - Action `Asset Search`: Added optional inputs `Include Same`, `Include Unique Identifiers` and `Include Inter Snapshot Remediations` | Added `same` field to the asset output | Updated SDK to the latest version (6.6.1)
+* 9.1.0 - Action `Asset Search`: Added optional inputs `Include Same`, `Include Unique Identifiers` and `Include Inter Snapshot Remediations` | Added `same` field to the asset output | Action `Vulnerability Search`: Fixed an issue where the action failed when a vulnerability had no category | Updated SDK to the latest version (6.6.1)
 * 9.0.2 - Action `Vulnerability Search`: Fixed an issue where actions could fail due to JSON schema validation errors | Updated SDK to the latest version (6.5.0)
 * 9.0.1 - Added user-agent and correlation ID headers to all requests | Updated SDK to the latest version (6.3.10)
 * 9.0.0 - Refined pagination for `Asset Search` action | SDK Bump to 6.3.6 | Resolved issue in 'Asset Search' where 'Vulnerability Criteria' is appended onto 'Asset Criteria'
