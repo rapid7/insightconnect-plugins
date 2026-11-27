@@ -8,6 +8,7 @@ STUB_BAD_ASSET_ID = "5058b0b4-701a-414e-9630-430d2cddbf4e"
 STUB_SEARCH_ID = "86a8abc0-95f3-4353-adf5-abb631c1f824"
 STUB_BAD_ASSET_CRITERIA = "invalid asset criteria"
 STUB_BAD_VULN_CRITERIA = "invalid vuln criteria"
+STUB_NO_CATEGORY_VULN_CRITERIA = "vulnerability.vulnKey = 'example-no-category'"
 STUB_SCAN_ID = "5058b0b4-701a-414e-9630-430d2cddbf4d"
 STUB_BAD_SCAN_ID = "invalid scan id"
 STUB_BAD_SECRET_KEY = "secret_key_invalid"  # nosec B105
@@ -57,12 +58,16 @@ def mock_request_post(url, params, headers, data):  # noqa: MC0001
             return MockResponse("asset_search_invalid_asset_criteria", 400)
         if data.get("vulnerability") == STUB_BAD_VULN_CRITERIA or STUB_BAD_VULN_CRITERIA in data.get("asset", ""):
             return MockResponse("asset_search_invalid_vuln_criteria", 400)
+        if params.get("includeSame"):
+            return MockResponse("asset_search_include_same", 200)
         return MockResponse("asset_search", 200)
     if url == f"https://{STUB_REGION}.api.insight.rapid7.com/vm/v4/integration/vulnerabilities":
         if data.get("asset") == STUB_BAD_ASSET_CRITERIA:
             return MockResponse("asset_search_invalid_asset_criteria", 400)
         if data.get("vulnerability") == STUB_BAD_VULN_CRITERIA:
             return MockResponse("asset_search_invalid_vuln_criteria", 400)
+        if data.get("vulnerability") == STUB_NO_CATEGORY_VULN_CRITERIA:
+            return MockResponse("vuln_search_no_category", 200)
         return MockResponse("vuln_search", 200)
     if url == f"https://{STUB_REGION}.api.insight.rapid7.com/vm/v4/integration/scan/{STUB_SCAN_ID}/stop":
         return MockResponse("stop_scan", 202)

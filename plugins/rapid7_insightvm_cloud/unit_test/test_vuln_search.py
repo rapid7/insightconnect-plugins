@@ -13,7 +13,7 @@ from icon_rapid7_insightvm_cloud.actions.vuln_search.schema import Input, VulnSe
 from icon_rapid7_insightvm_cloud.connection.schema import Input as ConnectionInput
 from jsonschema import validate
 
-from mock import mock_request
+from mock import STUB_NO_CATEGORY_VULN_CRITERIA, mock_request
 from utils import Utils
 
 
@@ -52,6 +52,16 @@ class TestVulnSearch(TestCase):
         actual = self.action.run()
         expected = Utils.read_file_to_dict("expected_responses/vuln_search.json.resp")
         self.assertEqual(expected, actual)
+        validate(actual, VulnSearchOutput.schema)
+
+    # the API leaves out `categories` when a vulnerability has none
+    @patch("requests.request", side_effect=mock_request)
+    def test_vuln_search_no_category(self, _mock_req: MagicMock) -> None:
+        actual = self.action.run({Input.VULN_CRITERIA: STUB_NO_CATEGORY_VULN_CRITERIA})
+        vulnerabilities = actual.get("vulnerabilities", [])
+        self.assertEqual(["example-no-category"], [vuln.get("id") for vuln in vulnerabilities])
+        self.assertEqual("", vulnerabilities[0].get("categories"))
+        self.assertEqual(898.76, vulnerabilities[0].get("risk_score"))
         validate(actual, VulnSearchOutput.schema)
 
     # test finding event with bad vuln criteria
